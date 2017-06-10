@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="BasePropertyIndexer" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:BasePropertyIndexer" id="BasePropertyIndexer">
+      <query-specification fqn="mustInstanceOfclass_Function"/>
+      <query-specification fqn="mayInstanceOfclass_Function"/>
+      <query-specification fqn="mustInstanceOfclass_FunctionalElement"/>
+      <query-specification fqn="mayInstanceOfclass_FunctionalElement"/>
+      <query-specification fqn="mustInstanceOfclass_InformationLink"/>
+      <query-specification fqn="mayInstanceOfclass_InformationLink"/>
+      <query-specification fqn="mustInstanceOfclass_FunctionalArchitectureModel"/>
+      <query-specification fqn="mayInstanceOfclass_FunctionalArchitectureModel"/>
+      <query-specification fqn="mustInstanceOfclass_FAMTerminator"/>
+      <query-specification fqn="mayInstanceOfclass_FAMTerminator"/>
+      <query-specification fqn="mustInstanceOfclass_FunctionalInterface"/>
+      <query-specification fqn="mayInstanceOfclass_FunctionalInterface"/>
+      <query-specification fqn="mustInstanceOfclass_FunctionalInput"/>
+      <query-specification fqn="mayInstanceOfclass_FunctionalInput"/>
+      <query-specification fqn="mustInstanceOfclass_FunctionalOutput"/>
+      <query-specification fqn="mayInstanceOfclass_FunctionalOutput"/>
+      <query-specification fqn="mustInstanceOfclass_FunctionalData"/>
+      <query-specification fqn="mayInstanceOfclass_FunctionalData"/>
+      <query-specification fqn="mustInstanceOfenum_FunctionType"/>
+      <query-specification fqn="mayInstanceOfenum_FunctionType"/>
+      <query-specification fqn="mustInRelationinreference_subElements_Function"/>
+      <query-specification fqn="mayInRelationinreference_subElements_Function"/>
+      <query-specification fqn="mustInRelationinreference_model_FunctionalElement"/>
+      <query-specification fqn="mayInRelationinreference_model_FunctionalElement"/>
+      <query-specification fqn="mustInRelationinreference_parent_FunctionalElement"/>
+      <query-specification fqn="mayInRelationinreference_parent_FunctionalElement"/>
+      <query-specification fqn="mustInRelationinreference_interface_FunctionalElement"/>
+      <query-specification fqn="mayInRelationinreference_interface_FunctionalElement"/>
+      <query-specification fqn="mustInRelationinreference_outgoingLinks_FunctionalElement"/>
+      <query-specification fqn="mayInRelationinreference_outgoingLinks_FunctionalElement"/>
+      <query-specification fqn="mustInRelationinreference_incomingLinks_FunctionalElement"/>
+      <query-specification fqn="mayInRelationinreference_incomingLinks_FunctionalElement"/>
+      <query-specification fqn="mustInRelationinreference_from_InformationLink"/>
+      <query-specification fqn="mayInRelationinreference_from_InformationLink"/>
+      <query-specification fqn="mustInRelationinreference_to_InformationLink"/>
+      <query-specification fqn="mayInRelationinreference_to_InformationLink"/>
+      <query-specification fqn="mustInRelationinreference_rootElements_FunctionalArchitectureModel"/>
+      <query-specification fqn="mayInRelationinreference_rootElements_FunctionalArchitectureModel"/>
+      <query-specification fqn="mustInRelationinreference_data_FAMTerminator"/>
+      <query-specification fqn="mayInRelationinreference_data_FAMTerminator"/>
+      <query-specification fqn="mustInRelationinreference_data_FunctionalInterface"/>
+      <query-specification fqn="mayInRelationinreference_data_FunctionalInterface"/>
+      <query-specification fqn="mustInRelationinreference_element_FunctionalInterface"/>
+      <query-specification fqn="mayInRelationinreference_element_FunctionalInterface"/>
+      <query-specification fqn="mustInRelationinreference_incomingLinks_FunctionalInput"/>
+      <query-specification fqn="mayInRelationinreference_incomingLinks_FunctionalInput"/>
+      <query-specification fqn="mustInRelationinreference_outgoingLinks_FunctionalOutput"/>
+      <query-specification fqn="mayInRelationinreference_outgoingLinks_FunctionalOutput"/>
+      <query-specification fqn="mustInRelationinreference_interface_FunctionalData"/>
+      <query-specification fqn="mayInRelationinreference_interface_FunctionalData"/>
+      <query-specification fqn="mustInRelationinreference_terminator_FunctionalData"/>
+      <query-specification fqn="mayInRelationinreference_terminator_FunctionalData"/>
+      <query-specification fqn="mustInRelationinAttribute_type_Function"/>
+      <query-specification fqn="mayInRelationinAttribute_type_Function"/>
+      <query-specification fqn="mustInRelationinAttribute_minimumFrequency_Function"/>
+      <query-specification fqn="mayInRelationinAttribute_minimumFrequency_Function"/>
+      <query-specification fqn="mustInRelation_pattern_hu_bme_mit_transima_models_fam_derived_rootElements"/>
+      <query-specification fqn="mayInRelation_pattern_hu_bme_mit_transima_models_fam_derived_rootElements"/>
+      <query-specification fqn="mustInRelation_pattern_hu_bme_mit_transima_models_fam_derived_type"/>
+      <query-specification fqn="mayInRelation_pattern_hu_bme_mit_transima_models_fam_derived_type"/>
+      <query-specification fqn="mustInRelation_pattern_hu_bme_mit_transima_models_fam_derived_parent"/>
+      <query-specification fqn="mayInRelation_pattern_hu_bme_mit_transima_models_fam_derived_parent"/>
+    </group>
+  </extension>
+  <extension id="GeneratedQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:GeneratedQueries" id="GeneratedQueries">
+      <query-specification fqn="mayEquivalent"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionsAreNotSiblings"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_incomingToEntry"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noEntryInRegion"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_hasNoIncomingOrOutgoing"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_notSynchronizingStates"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_outgoingTrainsitionToDifferentRegion"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedVerticesInSameRegion"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleEntryInRegion"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleTransitionFromEntry"/>
+      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noOutgoingTransitionFromEntry"/>
+      <query-specification fqn="unfinishedLowerMultiplicity_inreference_target_Transition"/>
+      <query-specification fqn="unfinishedLowerMultiplicity_inreference_source_Transition"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionsAreNotSiblings"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_incomingToEntry"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noEntryInRegion"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_hasNoIncomingOrOutgoing"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_notSynchronizingStates"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_outgoingTrainsitionToDifferentRegion"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedVerticesInSameRegion"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleEntryInRegion"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleTransitionFromEntry"/>
+      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noOutgoingTransitionFromEntry"/>
+      <query-specification fqn="createObject_class_Entry_by_inreference_vertices_Region"/>
+      <query-specification fqn="createObject_class_State_by_inreference_vertices_Region"/>
+      <query-specification fqn="createObject_class_Transition_by_inreference_outgoingTransitions_Vertex_with_inreference_source_Transition"/>
+      <query-specification fqn="createObject_class_Region_by_inreference_regions_CompositeElement"/>
+      <query-specification fqn="createObject_class_Synchronization_by_inreference_vertices_Region"/>
+      <query-specification fqn="refineTypeTo_class_Entry"/>
+      <query-specification fqn="refineTypeTo_class_State"/>
+      <query-specification fqn="refineTypeTo_class_Transition"/>
+      <query-specification fqn="refineTypeTo_class_Region"/>
+      <query-specification fqn="refineTypeTo_class_Synchronization"/>
+      <query-specification fqn="refineTypeTo_class_Statechart"/>
+      <query-specification fqn="refineRelation_inreference_incomingTransitions_Vertex_and_inreference_target_Transition"/>
+    </group>
+  </extension>
+</plugin>
