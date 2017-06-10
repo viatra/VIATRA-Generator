@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ViatraModelAnnotations -->
+      <package
+            uri="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/viatra2logicannotation"
+            class="hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage"
+            genModel="model/ViatraModelAnnotations.genmodel"/>
+   </extension>
+
+</plugin>

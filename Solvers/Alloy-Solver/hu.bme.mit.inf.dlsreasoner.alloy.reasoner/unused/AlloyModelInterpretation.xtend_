@@ -1,0 +1,212 @@
+package hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder
+
+import edu.mit.csail.sdg.alloy4compiler.ast.ExprVar
+import edu.mit.csail.sdg.alloy4compiler.ast.Sig.Field
+import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import java.util.Arrays
+import java.util.HashMap
+import java.util.LinkedList
+import java.util.List
+import java.util.Map
+import java.util.Set
+
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+
+class AlloyModelInterpretation implements LogicModelInterpretation{
+	
+	protected val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
+	//protected val extension LogicProblemBuilder builder = new LogicProblemBuilder
+	
+	protected val Logic2AlloyLanguageMapper forwardMapper
+	protected val Logic2AlloyLanguageMapperTrace forwardTrace;
+	
+	private var ExprVar logicLanguage;
+	private var String logicBooleanTrue;
+	private var String logicBooleanFalse;
+		
+	val Map<String,DefinedElement> alloyAtom2LogicElement = new HashMap
+	private val Map<TypeDeclaration, List<DefinedElement>> interpretationOfUndefinedType = new HashMap
+	
+	private val Map<ConstantDeclaration, Object> constant2Value
+	private val Map<FunctionDeclaration, ? extends Map<ParameterSubstitution, Object>> function2Value
+	private val Map<RelationDeclaration, ? extends Set<ParameterSubstitution>> relation2Value
+	
+	private val int minInt
+	private val int maxInt
+	
+	public new (A4Solution solution, Logic2AlloyLanguageMapper forwardMapper, Logic2AlloyLanguageMapperTrace trace) {
+		
+		this.forwardMapper = forwardMapper
+		this.forwardTrace = trace
+		
+		//TMP sig maps to identify alloy signatures by their names
+		val Map<String,Type> sigName2LogicType =
+			forwardTrace.type2ALSType.keySet.toMap[x|forwardTrace.type2ALSType.get(x).name]
+		val Map<String,DefinedElement> elementNameNamel2DefinedElement = 
+			forwardTrace.definedElement2Declaration.keySet.toMap[x|forwardTrace.definedElement2Declaration.get(x).name]
+			
+		// Fill the interpretation map with empty lists
+		forwardTrace.type2ALSType.keySet.filter(TypeDeclaration).forEach[x|interpretationOfUndefinedType.put(x,new LinkedList)]
+		
+		// exporing individuals
+		for(atom: solution.allAtoms) {
+			val typeName = getName(atom.type)
+			val atomName = atom.name
+			//println(atom.toString + "  < -  " + typeName)
+			if(typeName == forwardTrace.logicLanguage.name) {
+				this.logicLanguage = atom
+			} else if(typeName == "Int" || typeName == "seq/Int") {
+				// do nothing
+			} else if(sigName2LogicType.containsKey(typeName) && typeName.lookup(sigName2LogicType) instanceof TypeDefinition) {
+				val element = elementNameNamel2DefinedElement.get(atomName.head)
+				alloyAtom2LogicElement.put(atom.label,element)
+			} else if(sigName2LogicType.containsKey(typeName)) {
+				val type = sigName2LogicType.get(typeName)
+				val elementsOfType = interpretationOfUndefinedType.get(type)
+				val element = createDefinedElement => [
+					it.name += type.name
+					it.name += (elementsOfType.size+1).toString
+				]
+				alloyAtom2LogicElement.put(atom.label,element)
+				elementsOfType+=element
+			} else if(forwardTrace.boolType != null && typeName == forwardTrace.boolType.name) {
+				if(atomName.head == forwardTrace.boolTrue.name) { this.logicBooleanTrue = atom.label }
+				else if(atomName.head == forwardTrace.boolFalse.name) { this.logicBooleanFalse = atom.label}
+				else throw new UnsupportedOperationException('''Unknown boolean value: «atom»''')
+			}
+			else throw new UnsupportedOperationException('''Unknown atom: «atom»''')
+		}
+		
+		//TMP field maps
+		val Map<String, Field> name2AlloyField = new HashMap
+		// exploring signatures
+		for(sig:solution.allReachableSigs) {
+			for(field : sig.fields) {
+				name2AlloyField.put(field.label,field)
+			}
+		}
+		
+		// eval consants
+		constant2Value = forwardTrace.constantDeclaration2LanguageField.mapValues[
+			solution.eval(it.name.lookup(name2AlloyField)).head.atom(1).atomLabel2Term
+		]
+		// eval functions
+		val hostedfunction2Value = forwardTrace.functionDeclaration2HostedField.mapValues[ function |
+			newHashMap(
+				solution.eval(function.name.lookup(name2AlloyField))
+					.map[t | new ParameterSubstitution(#[t.atom(0).atomLabel2Term]) -> t.atom(1).atomLabel2Term])]
+		
+		val globalfunction2Value = forwardTrace.functionDeclaration2LanguageField.keySet.toInvertedMap[ function |
+			val alsFunction = function.lookup(forwardTrace.functionDeclaration2LanguageField)
+			val paramIndexes = 1..(function.parameters.size)
+			return newHashMap(
+				solution.eval(alsFunction.name.lookup(name2AlloyField)).map[t |
+					new ParameterSubstitution(paramIndexes.map[t.atom(it).atomLabel2Term])
+						->
+					t.atom(function.parameters.size + 1).atomLabel2Term
+				])]
+		this.function2Value = Union(hostedfunction2Value,globalfunction2Value)
+		// eval relations
+		val hostedRelation2Value = forwardTrace.relationDeclaration2Field.mapValues[ relation |
+			solution.eval(relation.name.lookup(name2AlloyField)).map[ t |
+				new ParameterSubstitution(#[t.atom(0).atomLabel2Term,t.atom(1).atomLabel2Term])].toSet]
+		val globalRelation2Value = forwardTrace.relationDeclaration2Global.mapValues[ relation |
+			solution.eval(relation.name.lookup(name2AlloyField)).map[ t |
+				new ParameterSubstitution((1..<t.arity).map[int a|t.atom(a).atomLabel2Term])].toSet]
+		this.relation2Value = Union(hostedRelation2Value,globalRelation2Value)
+		
+		//Int limits
+		this.minInt = solution.min
+		this.maxInt = solution.max
+		
+		//print
+	}
+	
+	def print() {
+		println('''Elements-----''')
+		interpretationOfUndefinedType.forEach[k,v|println('''«k.name» -> «v»''')]
+		
+		println('''Constants-----''')
+		constant2Value.forEach[k, v|println('''«k.name» : «v»''')]
+		println('''Functions-----''')
+		function2Value.forEach[f,m|m.forEach[k,v| println('''«f.name» : «k» |-> «v»''')]]
+		println('''Relations-----''')
+		relation2Value.forEach[r,s|s.forEach[t | println('''«r.name»: («t»)''')]]
+	}
+	
+	def private getName(edu.mit.csail.sdg.alloy4compiler.ast.Type type) {
+		val name = type.toString
+		if(name.startsWith("{this/") && name.endsWith("}")) {
+			return type.toString.replaceFirst("\\{this\\/","").replace("}","")
+		}
+		else throw new IllegalArgumentException('''Unknown type format: "«name»"!''')
+	}
+	def private getName(ExprVar atom) { atom.toString.split("\\$") }
+
+	override getElements(Type type) { getElementsDispatch(type) }
+	def private dispatch getElementsDispatch(TypeDeclaration declaration) { return declaration.lookup(this.interpretationOfUndefinedType) }
+	def private dispatch getElementsDispatch(TypeDefinition declaration) { return declaration.elements }
+	
+	override getInterpretation(FunctionDeclaration function, Object[] parameterSubstitution) {
+		val transformedParams = new ParameterSubstitution(parameterSubstitution)
+		return transformedParams.lookup(
+			function.lookup(this.function2Value)
+		)
+	}
+	
+	override getInterpretation(RelationDeclaration relation, Object[] parameterSubstitution) {
+		relation.lookup(this.relation2Value).contains(new ParameterSubstitution(parameterSubstitution))
+	}
+	
+	override getInterpretation(ConstantDeclaration constant) {
+		constant.lookup(this.constant2Value)
+	}
+	
+	override getMinimalInteger() { this.minInt }
+	override getMaximalInteger() { this.maxInt }
+	
+	// Alloy term -> logic term
+	def private atomLabel2Term(String label) {
+		if(label.number) return Integer.parseInt(label)
+		else if(label == this.logicBooleanTrue) return true
+		else if(label == this.logicBooleanFalse) return false
+		else if(this.alloyAtom2LogicElement.containsKey(label)) return label.lookup(alloyAtom2LogicElement)
+		else throw new IllegalArgumentException('''Unknown atom label: "«label»"!''')
+	}
+	def isNumber(String s) {
+		try{
+			Integer.parseInt(s)
+			return true
+		}catch(NumberFormatException e) {
+			return false
+		}
+	}
+}
+
+class ParameterSubstitution{
+	val Object[] data;
+	
+	new(Object[] data) { this.data = data }
+	
+	override equals(Object obj) {
+		if(obj === this) return true
+		else if(obj == null) return false
+		if(obj instanceof ParameterSubstitution) {
+			return Arrays.equals(this.data,obj.data)
+		}
+		return false
+	}
+	
+	override hashCode() {
+		Arrays.hashCode(data)
+	}
+}

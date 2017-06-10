@@ -1,0 +1,167 @@
+package hu.bme.mit.inf.dslreasoner.logic.model.patterns
+
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+
+/// Basic util patterns ///
+
+/**
+ * Direct supertypes of a type.
+ */
+private pattern supertypeDirect(subtype : Type, supertype : Type) {
+	Type.supertypes(subtype, supertype);
+}
+
+/**
+ * All supertypes of a type.
+ */
+pattern supertypeStar(subtype: Type, supertype: Type) {
+	subtype == supertype;
+} or {
+	find supertypeDirect+(subtype,supertype);
+}
+
+/**
+ * Direct element of a type
+ */
+pattern typeDirectElements(type: TypeDefinition, element: DefinedElement) {
+	TypeDefinition.elements(type,element);
+}
+
+/// Complex type reasoning patterns ///
+//
+// In a valid type system, for each element e there is exactly one type T where
+// 1: T(e) - but we dont know this for type declaration
+// 2: For the dynamic type D and another type T, where D(e) && D-->T, T(e) is true.
+// 2e: A type hierarchy is invalid, if there is a supertype T for a dynamic type D which does no contains e:
+//     D(e) && D-->T && !T(e)
+// 3: There is no T' that T'->T and T'(e)
+// 3e: A type hierarcy is invalid, if there is a type T for a dynamic type D, which contains e, but not subtype of T:
+//    D(e) && ![T--->D] && T(e)
+// 4: T is not abstract
+// Such type T is called Dynamic type of e, while other types are called static types.
+// 
+// The following patterns checks the possible dynamic types for an element
+
+pattern possibleDynamicType(problem: LogicProblem, dynamic:Type, element:DefinedElement)
+// case 1: element is defined in at least once
+{
+	LogicProblem.types(problem,dynamic);
+	// select a random definition
+	find typeDirectElements(definition,element);
+	// 2e is not true: D(e) && D-->T && !T(e)
+	find supertypeStar(dynamic,definition);
+	neg find dynamicTypeNotSubtypeOfADefinition(problem,element,dynamic);
+	// 3e is not true: D(e) && ![T--->D] && T(e)
+	neg find dynamicTypeIsSubtypeOfANonDefinition(problem,element,dynamic);
+	// 4: T is not abstract
+	Type.isAbstract(dynamic,false);
+}	or
+// case 2: element is defined is not defined
+{
+	LogicProblem.types(problem,dynamic);
+	// there is no definition
+	neg find typeDirectElements(_,element);
+	// 2e is not true: D(e) && D-->T && !T(e)
+	// because non of the definition contains element, the type cannot have defined supertype
+	neg find typesWithDefinedSupertype(problem,dynamic);
+	// 3e is not true: D(e) && ![T--->D] && T(e)
+	// because there is no definition, dynamic covers all definition
+}
+
+/**
+ * supertype -------> element <------- otherSupertype
+ *     A                                     A
+ *     |                                     |
+ * wrongDynamic -----------------------------X
+ */
+private pattern dynamicTypeNotSubtypeOfADefinition(problem:LogicProblem, element:DefinedElement, wrongDynamic : Type) {
+	LogicProblem.types(problem,wrongDynamic);
+	find typeDirectElements(supertype,element);
+	find supertypeStar(wrongDynamic,supertype);
+	find typeDirectElements(otherSupertype,element);
+	neg find supertypeStar(wrongDynamic,otherSupertype);
+	//otherSupertype != wrongDynamic;
+}
+
+
+/**
+ * supertype -------> element <---X--- otherSupertype
+ *     A                                     A
+ *     |                                     |
+ * wrongDynamic -----------------------------+
+ */
+private pattern dynamicTypeIsSubtypeOfANonDefinition(problem: LogicProblem, element:DefinedElement, wrongDynamic:Type) {
+	LogicProblem.types(problem,wrongDynamic);
+	find typeDirectElements(supertype, element);
+	find supertypeStar(wrongDynamic, supertype);
+	find supertypeStar(wrongDynamic, otherSupertype);
+	TypeDefinition(otherSupertype);
+	neg find typeDirectElements(otherSupertype, element);
+}
+
+private pattern typesWithDefinedSupertype(problem: LogicProblem, type:TypeDeclaration) {
+	LogicProblem.types(problem,type);
+	find supertypeStar(type,definedSupertype);
+	TypeDefinition(definedSupertype);
+}
+
+/**
+ * Types that 
+ */
+pattern mustTypeElement(problem: LogicProblem, type:Type, element:DefinedElement) {
+	LogicProblem.types(problem,type);
+	TypeDefinition.elements(type,element);
+} or {
+	TypeDeclaration(type);
+	LogicProblem.types(problem,type);
+	LogicProblem.types(problem,subtype);
+	TypeDefinition.elements(subtype,element);
+	find supertypeStar(subtype,type);
+}
+
+
+/// Validation patterns ///
+
+@Constraint(severity = "warning",key = {problem},
+	message="Type system is inconsistent."
+)
+pattern typeSystemIsInconsistent(problem:LogicProblem) {
+	find elementWithNoPossibleDynamicType(problem,_);
+} or {
+	find elementNotDefinedInSupertype(problem,_,_,_);
+}
+
+/**
+ * An element is defined in a type, but not defined in a supertype
+ */
+@Constraint(severity = "warning",key = {element},
+	message="An element is defined in a type, but not defined in a supertype."
+)
+pattern elementNotDefinedInSupertype(problem: LogicProblem,
+	element: DefinedElement,
+	directType:TypeDefinition,
+	notDefinedIn: TypeDefinition)
+{
+	LogicProblem.elements(problem,element);
+	find typeDirectElements(directType,element);
+	find supertypeStar(directType,notDefinedIn);
+	neg find typeDirectElements(notDefinedIn,element);
+}
+
+@Constraint(severity = "warning",key = {element},
+	message="There is no possible dynamic type for an element."
+)
+pattern elementWithNoPossibleDynamicType(problem:LogicProblem, element:DefinedElement) {
+	LogicProblem.elements(problem,element);
+	neg find possibleDynamicType(problem,_,element);
+}
+
+
+
+@Constraint(severity = "error",key = {t},
+	message="Circle in the type hierarchy"
+)
+pattern cyclicTypeHierarchy(t: Type) {
+	find supertypeDirect+(t,t);
+}

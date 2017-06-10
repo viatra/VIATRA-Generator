@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smtLanguage" nsURI="http://www.bme.hu/mit/inf/dslreasoner/SmtLanguage"
+    nsPrefix="smtLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="SMTDocument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="#//SMTInput"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" eType="#//SMTOutput"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTInput">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="options" upperBound="-1"
+        eType="#//SMTOption" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeDeclarations" upperBound="-1"
+        eType="#//SMTType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionDeclarations" upperBound="-1"
+        eType="#//SMTFunctionDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionDefinition" upperBound="-1"
+        eType="#//SMTFunctionDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
+        eType="#//SMTAssertion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="satCommand" eType="#//SMTSatCommand"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="getModelCommand" eType="#//SMTGetModelCommand"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTOutput">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="satResult" eType="#//SMTResult"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="getModelResult" eType="#//SMTResult"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statistics" eType="#//SMTStatisticsSection"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTOption">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//SMTAtomicTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTEnumLiteral" eSuperTypes="#//SMTSymbolicDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTEnumeratedTypeDeclaration" eSuperTypes="#//SMTType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//SMTEnumLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSetTypeDeclaration" eSuperTypes="#//SMTType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTComplexTypeReference" eSuperTypes="#//SMTTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//SMTType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTPrimitiveTypeReference" eSuperTypes="#//SMTTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTIntTypeReference" eSuperTypes="#//SMTPrimitiveTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTBoolTypeReference" eSuperTypes="#//SMTPrimitiveTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTRealTypeReference" eSuperTypes="#//SMTPrimitiveTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTFunctionDeclaration" eSuperTypes="#//SMTSymbolicDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//SMTTypeReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="#//SMTTypeReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTFunctionDefinition" eSuperTypes="#//SMTSymbolicDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//SMTSortedVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="#//SMTTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSymbolicDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSymbolicValue" eSuperTypes="#//SMTTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbolicReference" eType="#//SMTSymbolicDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterSubstitutions"
+        upperBound="-1" eType="#//SMTTerm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTAtomicTerm" eSuperTypes="#//SMTTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTIntLiteral" eSuperTypes="#//SMTAtomicTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTBoolLiteral" eSuperTypes="#//SMTAtomicTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTRealLiteral" eSuperTypes="#//SMTAtomicTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSortedVariable" eSuperTypes="#//SMTSymbolicDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="#//SMTTypeReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTQuantifiedExpression" eSuperTypes="#//SMTTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="quantifiedVariables" upperBound="-1"
+        eType="#//SMTSortedVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTExists" eSuperTypes="#//SMTQuantifiedExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTForall" eSuperTypes="#//SMTQuantifiedExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTBoolOperation" eSuperTypes="#//SMTTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTAnd" eSuperTypes="#//SMTBoolOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
+        eType="#//SMTTerm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTOr" eSuperTypes="#//SMTBoolOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
+        eType="#//SMTTerm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTImpl" eSuperTypes="#//SMTBoolOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTNot" eSuperTypes="#//SMTBoolOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTIff" eSuperTypes="#//SMTBoolOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTITE" eSuperTypes="#//SMTTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="if" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTLet" eSuperTypes="#//SMTTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineConstantDefinitions"
+        upperBound="-1" eType="#//SMTInlineConstantDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTInlineConstantDefinition" eSuperTypes="#//SMTSymbolicDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTRelation" eSuperTypes="#//SMTTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTEquals" eSuperTypes="#//SMTRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTDistinct" eSuperTypes="#//SMTRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
+        eType="#//SMTTerm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTLT" eSuperTypes="#//SMTRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTMT" eSuperTypes="#//SMTRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTLEQ" eSuperTypes="#//SMTRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTMEQ" eSuperTypes="#//SMTRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTIntOperation" eSuperTypes="#//SMTTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//SMTTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTPlus" eSuperTypes="#//SMTIntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTMinus" eSuperTypes="#//SMTIntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTMultiply" eSuperTypes="#//SMTIntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTDivison" eSuperTypes="#//SMTIntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTDiv" eSuperTypes="#//SMTIntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTMod" eSuperTypes="#//SMTIntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTAssertion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//SMTTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTCardinalityConstraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//SMTTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//SMTSymbolicValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSatCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSimpleSatCommand" eSuperTypes="#//SMTSatCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTComplexSatCommand" eSuperTypes="#//SMTSatCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="#//SMTReasoningTactic"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTGetModelCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTReasoningTactic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTBuiltinTactic" eSuperTypes="#//SMTReasoningTactic">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTReasoningCombinator" eSuperTypes="#//SMTReasoningTactic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTAndThenCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tactics" upperBound="-1"
+        eType="#//SMTReasoningTactic" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTOrElseCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tactics" upperBound="-1"
+        eType="#//SMTReasoningTactic" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTParOrCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tactics" upperBound="-1"
+        eType="#//SMTReasoningTactic" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTParThenCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preProcessingTactic" eType="#//SMTReasoningTactic"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paralellyPostpricessingTactic"
+        eType="#//SMTReasoningTactic" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTTryForCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tactic" eType="#//SMTReasoningTactic"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTIfCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="probe" eType="#//ReasoningProbe"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifTactic" eType="#//SMTReasoningTactic"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseTactic" eType="#//SMTReasoningTactic"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTWhenCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="probe" eType="#//ReasoningProbe"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tactic" eType="#//SMTReasoningTactic"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTFailIfCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="probe" eType="#//ReasoningProbe"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTUsingParamCombinator" eSuperTypes="#//SMTReasoningCombinator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tactic" eType="#//SMTReasoningTactic"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ReasoningTacticParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReasoningProbe">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReasoningTacticParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//SMTAtomicTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTResult"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTErrorResult" eSuperTypes="#//SMTResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTUnsupportedResult" eSuperTypes="#//SMTResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="command" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTSatResult" eSuperTypes="#//SMTResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unknown" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTModelResult" eSuperTypes="#//SMTResult">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newFunctionDeclarations"
+        upperBound="-1" eType="#//SMTFunctionDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinitions" upperBound="-1"
+        eType="#//SMTCardinalityConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newFunctionDefinitions"
+        upperBound="-1" eType="#//SMTFunctionDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTStatisticValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTStatisticIntValue" eSuperTypes="#//SMTStatisticValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTStatisticDoubleValue" eSuperTypes="#//SMTStatisticValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SMTStatisticsSection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//SMTStatisticValue" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

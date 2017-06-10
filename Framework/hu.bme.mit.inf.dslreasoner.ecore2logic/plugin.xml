@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ecore2logicannotations -->
+      <package
+            uri="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation"
+            class="hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage"
+            genModel="model/ecore2logicannotations.genmodel"/>
+   </extension>
+
+</plugin>

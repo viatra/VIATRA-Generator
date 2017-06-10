@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="alloyLanguage" nsURI="http://www.bme.hu/mit/inf/dslreasoner/AlloyLanguage"
+    nsPrefix="alloyLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="ALSDocument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumDeclarations" upperBound="-1"
+        eType="#//ALSEnumDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signatureBodies" upperBound="-1"
+        eType="#//ALSSignatureBody" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionDefinitions" upperBound="-1"
+        eType="#//ALSFunctionDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationDefinitions" upperBound="-1"
+        eType="#//ALSRelationDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="factDeclarations" upperBound="-1"
+        eType="#//ALSFactDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runCommand" eType="#//ALSRunCommand"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ALSMultiplicity">
+    <eLiterals name="all" literal="all"/>
+    <eLiterals name="no" value="1" literal="no"/>
+    <eLiterals name="some" value="2" literal="some"/>
+    <eLiterals name="lone" value="3" literal="lone"/>
+    <eLiterals name="one" value="4" literal="one"/>
+    <eLiterals name="set" value="5" literal="set"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSRelationDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSTypeDeclaration" eSuperTypes="#//ALSRelationDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSEnumDeclaration" eSuperTypes="#//ALSTypeDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" upperBound="-1"
+        eType="#//ALSEnumLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSEnumLiteral" eSuperTypes="#//ALSRelationDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSSignatureDeclaration" eSuperTypes="#//ALSTypeDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSSignatureBody">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="#//ALSMultiplicity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
+        eType="#//ALSSignatureDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//ALSSignatureDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superset" unique="false"
+        upperBound="-1" eType="#//ALSSignatureDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+        eType="#//ALSFieldDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSFieldDeclaration" eSuperTypes="#//ALSRelationDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="#//ALSMultiplicity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//ALSVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSFunctionDefinition" eSuperTypes="#//ALSDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSRelationDefinition" eSuperTypes="#//ALSDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSFactDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSTerm"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ALSNumericOperator">
+    <eLiterals name="plus" literal="plus"/>
+    <eLiterals name="sub" value="1" literal="sub"/>
+    <eLiterals name="mul" value="2" literal="mul"/>
+    <eLiterals name="rem" value="3" literal="rem"/>
+    <eLiterals name="div" value="4" literal="div"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSVariableDeclaration" eSuperTypes="#//ALSRelationDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSRunCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeScopes" upperBound="-1"
+        eType="#//ALSTypeScope" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSTypeScope">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSSigScope" eSuperTypes="#//ALSTypeScope">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exactly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ALSSignatureDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSIntScope" eSuperTypes="#//ALSTypeScope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSQuantifiedEx" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ALSMultiplicity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disj" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//ALSVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSOr" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSIff" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSImpl" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSAnd" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSEquals" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSNotEquals" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSSubset" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSLess" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSLeq" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSMore" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSMeq" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSOverride" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSRangeRestrictionRight" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSRangeRestrictionLeft" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSJoin" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSMinus" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSPlus" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSIntersection" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSDirectProduct" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//ALSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftMultiplicit" eType="#//ALSMultiplicity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightMultiplicit" eType="#//ALSMultiplicity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSNot" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSInverseRelation" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlSTransitiveClosure" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSReflectiveTransitiveClosure" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSCardinality" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSUnaryMinus" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSSum" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//ALSVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ALSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSFunctionCall" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredDefinition" eType="#//ALSDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredNumericOperator"
+        eType="#//ALSNumericOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//ALSTerm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSNone" eSuperTypes="#//ALSTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSIden" eSuperTypes="#//ALSTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSUniv" eSuperTypes="#//ALSTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSInt" eSuperTypes="#//ALSTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSReference" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//ALSRelationDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSNumberLiteral" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

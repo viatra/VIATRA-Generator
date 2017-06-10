@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.ecore2logic;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0";visibility:=reexport,
+ org.eclipse.emf;bundle-version="2.6.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: hu.bme.mit.inf.dslreasoner.ecore2logic,
+ hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations,
+ hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.impl,
+ hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.util
+

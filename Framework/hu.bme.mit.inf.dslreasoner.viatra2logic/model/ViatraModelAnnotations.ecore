@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viatra2logicannotations" nsURI="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/viatra2logicannotation"
+    nsPrefix="viatra2logicannotations">
+  <eClassifiers xsi:type="ecore:EClass" name="TransfomedViatraQuery" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//RelationAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="patternFullyQualifiedName"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransformedViatraWellformednessConstraint"
+      eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//AssertionAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" lowerBound="1" eType="#//TransfomedViatraQuery"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefinedByDerivedFeature" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//RelationAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="query" lowerBound="1" eType="#//TransfomedViatraQuery"/>
+  </eClassifiers>
+</ecore:EPackage>

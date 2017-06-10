@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.alloy.language/src-gen"
+    editDirectory="/hu.bme.mit.inf.dslreasoner.alloy.language.edit/src" editorDirectory="/hu.bme.mit.inf.dslreasoner.alloy.language.editor/src"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.alloy.language" forceOverwrite="true"
+    modelName="AlloyLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="hu.bme.mit.inf.dslreasoner.alloy.language.edit"
+    editorPluginID="hu.bme.mit.inf.dslreasoner.alloy.language.editor" runtimeVersion="2.11">
+  <genPackages prefix="AlloyLanguage" basePackage="hu.bme.mit.inf.dslreasoner" disposableProviderFactory="true"
+      fileExtensions="als" ecorePackage="AlloyLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="AlloyLanguage.ecore#//ALSMultiplicity">
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSMultiplicity/all"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSMultiplicity/no"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSMultiplicity/some"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSMultiplicity/lone"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSMultiplicity/one"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSMultiplicity/set"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="AlloyLanguage.ecore#//ALSNumericOperator">
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSNumericOperator/plus"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSNumericOperator/sub"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSNumericOperator/mul"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSNumericOperator/rem"/>
+      <genEnumLiterals ecoreEnumLiteral="AlloyLanguage.ecore#//ALSNumericOperator/div"/>
+    </genEnums>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSDocument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDocument/enumDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDocument/signatureBodies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDocument/functionDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDocument/relationDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDocument/factDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDocument/runCommand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSRelationDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSRelationDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSTypeDeclaration"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSEnumDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSEnumDeclaration/literal"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSEnumLiteral"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSSignatureDeclaration"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSSignatureBody">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSSignatureBody/multiplicity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSSignatureBody/abstract"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSignatureBody/declarations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSignatureBody/supertype"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSignatureBody/superset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSignatureBody/fields"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSFieldDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSFieldDeclaration/multiplicity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSFieldDeclaration/type"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDefinition/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSFunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSFunctionDefinition/type"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSRelationDefinition"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSFactDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSFactDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSFactDeclaration/term"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSTerm"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSVariableDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSVariableDeclaration/range"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSRunCommand">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSRunCommand/typeScopes"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSTypeScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSTypeScope/number"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSSigScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSSigScope/exactly"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSigScope/type"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSIntScope"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSQuantifiedEx">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSQuantifiedEx/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSQuantifiedEx/disj"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSQuantifiedEx/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSQuantifiedEx/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSOr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSOr/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSOr/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSIff">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSIff/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSIff/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSImpl/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSImpl/rightOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSImpl/elseOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSAnd">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSAnd/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSAnd/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSEquals">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSEquals/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSEquals/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSNotEquals">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSNotEquals/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSNotEquals/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSSubset">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSubset/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSubset/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSLess">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSLess/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSLess/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSLeq">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSLeq/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSLeq/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSMore">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSMore/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSMore/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSMeq">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSMeq/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSMeq/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSOverride">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSOverride/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSOverride/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSRangeRestrictionRight">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSRangeRestrictionRight/relation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSRangeRestrictionRight/filter"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSRangeRestrictionLeft">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSRangeRestrictionLeft/filter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSRangeRestrictionLeft/relation"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSJoin">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSJoin/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSJoin/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSMinus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSMinus/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSMinus/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSPlus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSPlus/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSPlus/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSIntersection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSIntersection/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSIntersection/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSDirectProduct">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDirectProduct/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSDirectProduct/leftMultiplicit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSDirectProduct/rightMultiplicit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSDirectProduct/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSNot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSNot/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSInverseRelation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSInverseRelation/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//AlSTransitiveClosure">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//AlSTransitiveClosure/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSReflectiveTransitiveClosure">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSReflectiveTransitiveClosure/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSCardinality">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSCardinality/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSUnaryMinus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSUnaryMinus/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSSum">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSum/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSSum/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSFunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSFunctionCall/referredDefinition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSFunctionCall/referredNumericOperator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSFunctionCall/params"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSNone"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSIden"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSUniv"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSInt"/>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference AlloyLanguage.ecore#//ALSReference/referred"/>
+    </genClasses>
+    <genClasses ecoreClass="AlloyLanguage.ecore#//ALSNumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AlloyLanguage.ecore#//ALSNumberLiteral/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

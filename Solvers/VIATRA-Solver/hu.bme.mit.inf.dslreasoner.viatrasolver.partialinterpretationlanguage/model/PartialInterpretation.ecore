@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partialinterpretation" nsURI="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
+    nsPrefix="partialinterpretation">
+  <eClassifiers xsi:type="ecore:EClass" name="PartialInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//LogicProblem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partialconstantinterpretation"
+        upperBound="-1" eType="#//PartialConstantInterpretation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partialrelationinterpretation"
+        upperBound="-1" eType="#//PartialRelationInterpretation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partialfunctioninterpretation"
+        upperBound="-1" eType="#//PartialFunctionInterpretation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newElements" upperBound="-1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partialtypeinterpratation"
+        upperBound="-1" eType="#//PartialTypeInterpratation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNewElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="openWorldElementPrototype"
+        lowerBound="1" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problemConainer" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//LogicProblem"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pregeneratedRelationLinks"
+        upperBound="-1" eType="#//BinaryElementRelationLink"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preGeneratedElements" upperBound="-1"
+        eType="#//PartialTypeInterpratation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialConstantInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//ConstantDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialRelationInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//RelationDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationlinks" upperBound="-1"
+        eType="#//RelationLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param1" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//TypeReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param2" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//TypeReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialFunctionInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//FunctionDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialTypeInterpratation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//TypeDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypeInterpretation"
+        upperBound="-1" eType="#//PartialTypeInterpratation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationLink" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryElementRelationLink" eSuperTypes="#//RelationLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param1" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryElementRelationLink" eSuperTypes="#//RelationLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param1" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param2" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NaryRelationLink" eSuperTypes="#//RelationLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//NaryRelationLinkElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NaryRelationLinkElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

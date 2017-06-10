@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.ecore2logic/ecore-gen"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.ecore2logic" modelName="Ecore2logicannotations"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" usedGenPackages="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.genmodel#//logiclanguage ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.genmodel#//logicproblem"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ecore2logicannotations.ecore</foreignModel>
+  <genPackages prefix="Ecore2logicannotations" basePackage="hu.bme.mit.inf.dslreasoner.ecore2logic"
+      disposableProviderFactory="true" ecorePackage="ecore2logicannotations.ecore#/">
+    <genClasses ecoreClass="ecore2logicannotations.ecore#//MultiplicityAssertion"/>
+    <genClasses ecoreClass="ecore2logicannotations.ecore#//InverseRelationAssertion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ecore2logicannotations.ecore#//InverseRelationAssertion/inverses"/>
+    </genClasses>
+    <genClasses ecoreClass="ecore2logicannotations.ecore#//LowerMultiplicityAssertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore2logicannotations.ecore#//LowerMultiplicityAssertion/lower"/>
+    </genClasses>
+    <genClasses ecoreClass="ecore2logicannotations.ecore#//UpperMultiplicityAssertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecore2logicannotations.ecore#//UpperMultiplicityAssertion/upper"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.TypeAnalysis" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.TypeAnalysis" id="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.TypeAnalysis">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.hasDefinedSupertype"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.dontHaveDefinedSupertype"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.newElementTypeConstructor"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.newElementTypeRefinementTarget"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.incompatibleSuperType"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.incompatibleTopType"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.newElementTypeRefinementNegativeConstraint"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.newElementMayTypeNegativeConstraint"/>
+    </group>
+  </extension>
+</plugin>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="logicresult" nsURI="http://www.bme.hu/mit/inf/dslreasoner/logic/model/result"
+    nsPrefix="language">
+  <eClassifiers xsi:type="ecore:EClass" name="LogicResult" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" eType="ecore:EClass logicproblem.ecore#//LogicProblem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statistics" eType="#//Statistics"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelResult" eSuperTypes="#//LogicResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxInteger" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minInteger" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InconsistencyResult" eSuperTypes="#//LogicResult"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnknownResult" abstract="true" eSuperTypes="#//LogicResult"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InsuficientResourcesResult" eSuperTypes="#//UnknownResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorResult" eSuperTypes="#//UnknownResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statistics">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//StatisticEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transformationTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="solverTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="solverMemory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="-1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatisticEntry" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UndecidableResult" eSuperTypes="#//UnknownResult"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntStatisticEntry" eSuperTypes="#//StatisticEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealStatisticEntry" eSuperTypes="#//StatisticEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringStatisticEntry" eSuperTypes="#//StatisticEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Unfilled"/>
+  </eClassifiers>
+</ecore:EPackage>

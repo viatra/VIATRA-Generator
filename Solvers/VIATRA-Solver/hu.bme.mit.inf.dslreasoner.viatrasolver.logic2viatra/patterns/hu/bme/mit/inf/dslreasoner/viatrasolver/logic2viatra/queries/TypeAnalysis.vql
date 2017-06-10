@@ -1,0 +1,223 @@
+package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries
+
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
+
+/**
+ * Direct supertypes of a type.
+ */
+private pattern supertypeDirect(subtype : Type, supertype : Type) {
+	Type.supertypes(subtype, supertype);
+}
+
+/**
+ * All supertypes of a type.
+ */
+ 
+private pattern supertypePlus(subtype: Type, supertype: Type) {
+	find supertypeDirect+(subtype,supertype);
+}
+
+private pattern supertypeStar(subtype: Type, supertype: Type) {
+	subtype == supertype;
+} or {
+	find supertypePlus(subtype,supertype);
+}
+
+pattern hasDefinedSupertype(type:Type) {
+	find supertypeStar(type,superType);
+	TypeDefinition(superType);
+}
+
+pattern dontHaveDefinedSupertype(type:TypeDeclaration) {
+	neg find hasDefinedSupertype(type);
+}
+
+///////////////////////
+// New element types
+///////////////////////
+
+/**
+ * A new element can has 'type' as a dynamic type iff
+ * (1) 'type' is concrete and
+ * (2) 'type' does not have defined supertype
+ * (including the case when 'type' itself is defined).
+ */
+private pattern possibleNewElementDynamicType(type:TypeDeclaration) {
+	Type.isAbstract(type,false);
+	find dontHaveDefinedSupertype(type);
+}
+///**
+// * The type of a new element can be refined from 'previous' to 'refined'.
+// */
+//private pattern newElementTypeRefinementPath(previous:TypeDeclaration, refined:TypeDeclaration) {
+//	find possibleNewElementDynamicType(previous);
+//	find possibleNewElementDynamicType(refined);
+//	find supertypePlus(refined,previous);
+//}
+
+/**
+ * New element can be created with type 'type' iff it can has 'type' as a dynamic type.
+ */
+pattern newElementTypeConstructor(type:TypeDeclaration) {
+	find possibleNewElementDynamicType(type);
+}
+
+/**
+ * New element can be refined to type 'refined' iff
+ * (1) type is concrete
+ * (2) the new type cover each existing type of the previous state, i.e.
+ * (2') it does not have type that:
+ */
+ 
+pattern newElementTypeRefinementTarget(refined: TypeDeclaration) {
+	find possibleNewElementDynamicType(refined);
+}
+
+private pattern incompatibleType(type:TypeDeclaration, incompatible:TypeDeclaration) {
+	LogicProblem.types(problem,type);
+	LogicProblem.types(problem,incompatible);
+	neg find supertypeStar(type, incompatible);
+}
+
+pattern incompatibleSuperType(type:TypeDeclaration, incompatibleType1:TypeDeclaration, incompatibleType2:TypeDeclaration) {
+	find incompatibleType(type, incompatibleType1);
+	find incompatibleType(type, incompatibleType2);
+	find supertypePlus(incompatibleType1, incompatibleType2);
+}
+
+pattern incompatibleTopType(type:TypeDeclaration, incompatible:TypeDeclaration) {
+	find incompatibleType(type, incompatible);
+	neg find incompatibleSuperType(type, incompatible, _);
+}
+
+pattern newElementTypeRefinementNegativeConstraint(refined:TypeDeclaration, inhibitor:TypeDeclaration) {
+	find incompatibleTopType(refined, inhibitor);
+} or {
+	find possibleNewElementDynamicType(refined);
+	refined == inhibitor;
+}
+
+pattern newElementMayTypeNegativeConstraint(mayType: TypeDeclaration, inhibitor: TypeDeclaration) {
+	find incompatibleTopType(mayType, inhibitor);
+}
+
+///////////////////////
+// Old element types
+///////////////////////
+
+//TODO old element types
+
+//private pattern typeInterpretation(problem:LogicProblem, interpetation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialTypeInterpratation) {
+//	find interpretation(problem,interpetation);
+//	LogicProblem.types(problem,type);
+//	PartialInterpretation.partialtypeinterpratation(interpetation,typeInterpretation);
+//	PartialTypeInterpratation.interpretationOf(typeInterpretation,type);
+//}
+//
+//pattern directInstanceOf(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement, type:Type) {
+//	find interpretation(problem,interpetation);
+//	find mustExist(problem,interpetation,element);
+//	LogicProblem.types(problem,type);
+//	TypeDefinition.elements(type,element);
+//} or {
+//	find mustExist(problem,interpetation,element);
+//	find typeInterpretation(problem,interpetation,type,typeInterpretation);
+//	PartialTypeInterpratation.elements(typeInterpretation,element);
+//}
+//
+//
+//
+///// Complex type reasoning patterns ///
+////
+//// In a valid type system, for each element e there is exactly one type T where
+//// 1: T(e) - but we dont know this for type declaration
+//// 2: For the dynamic type D and another type T, where D(e) && D-->T, T(e) is true.
+//// 2e: A type hierarchy is invalid, if there is a supertype T for a dynamic type D which does no contains e:
+////     D(e) && D-->T && !T(e)
+//// 3: There is no T' that T'->T and T'(e)
+//// 3e: A type hierarcy is invalid, if there is a type T for a dynamic type D, which contains e, but not subtype of T:
+////    D(e) && ![T--->D] && T(e)
+//// 4: T is not abstract
+//// Such type T is called Dynamic type of e, while other types are called static types.
+//// 
+//// The following patterns checks the possible dynamic types for an element
+//
+//pattern wellformedType(problem: LogicProblem, interpretation:PartialInterpretation, dynamic:Type, element:DefinedElement) {
+//	// 1: T(e)
+//	find directInstanceOf(problem,interpretation,element,dynamic);
+//	// 2e is not true: D(e) && D-->T && !T(e)
+//	neg find dynamicTypeNotSubtypeOfADefinition(problem,interpretation,element,dynamic);
+//	// 3e is not true: D(e) && ![T--->D] && T(e)
+//	neg find dynamicTypeIsSubtypeOfANonDefinition(problem,interpretation,element,dynamic);
+//	// 4: T is not abstract
+//	Type.isAbstract(dynamic,false);
+//}
+//
+//pattern possibleDynamicType(problem: LogicProblem, interpretation:PartialInterpretation, dynamic:Type, element:DefinedElement)
+//// case 1: element is defined at least once
+//{
+//	LogicProblem.types(problem,dynamic);
+//	// select a random definition 'randomType'
+//	find directInstanceOf(problem,interpretation,element,randomType);
+//	// dynamic is a subtype of 'randomType'
+//	find supertypeStar(dynamic,randomType);
+//	// 2e is not true: D(e) && D-->T && !T(e)
+//	neg find dynamicTypeNotSubtypeOfADefinition(problem,interpretation,element,dynamic);
+//	// 3e is not true: D(e) && ![T--->D] && T(e)
+//	neg find dynamicTypeIsSubtypeOfANonDefinition(problem,interpretation,element,dynamic);
+//	// 4: T is not abstract
+//	Type.isAbstract(dynamic,false);
+//} or
+//// case 2: element is not defined anywhere
+//{
+//	find mayExist(problem,interpretation,element);
+//	// there is no definition
+//	neg find directInstanceOf(problem,interpretation,element,_);
+//	// 2e is not true: D(e) && D-->T && !T(e)
+//	// because non of the definition contains element, the type cannot have defined supertype
+//	LogicProblem.types(problem,dynamic);
+//	PartialInterpretation.problem(interpretation,problem);
+//	neg find typeWithDefinedSupertype(dynamic);
+//	// 3e is not true: D(e) && ![T--->D] && T(e)
+//	// because there is no definition, dynamic covers all definition
+//	// 4: T is not abstract
+//	Type.isAbstract(dynamic,false);
+//}
+//
+///**
+// * supertype -------> element <------- otherSupertype
+// *     A                                     A
+// *     |                                     |
+// * wrongDynamic -----------------------------X
+// */
+//private pattern dynamicTypeNotSubtypeOfADefinition(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement, wrongDynamic : Type) {
+//	find directInstanceOf(problem,interpretation,element,supertype);
+//	find directInstanceOf(problem,interpretation,element,otherSupertype);
+//	find supertypeStar(wrongDynamic,supertype);
+//	neg find supertypeStar(wrongDynamic,otherSupertype);
+//}
+//
+//
+///**
+// * supertype -------> element <---X--- otherSupertype
+// *     A                                     A
+// *     |                                     |
+// * wrongDynamic -----------------------------+
+// */
+//private pattern dynamicTypeIsSubtypeOfANonDefinition(problem: LogicProblem, interpretation:PartialInterpretation, element:DefinedElement, wrongDynamic:Type) {
+//	find directInstanceOf(problem,interpretation,element,supertype);
+//	neg find elementInTypeDefinition(element,otherSupertype);
+//	find supertypeStar(wrongDynamic, supertype);
+//	find supertypeStar(wrongDynamic, otherSupertype);
+//}
+//
+//private pattern elementInTypeDefinition(element:DefinedElement, definition:TypeDefinition) {
+//	TypeDefinition.elements(definition,element);
+//}
+//
+//private pattern typeWithDefinedSupertype(type:TypeDeclaration) {
+//	find supertypeStar(type,definedSupertype);
+//	TypeDefinition(definedSupertype);
+//}

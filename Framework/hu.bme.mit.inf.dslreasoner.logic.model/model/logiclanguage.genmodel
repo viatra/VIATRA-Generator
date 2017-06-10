@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.logic.model/ecore-gen"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.logic.model" modelName="Logiclanguage"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>logiclanguage.ecore</foreignModel>
+  <foreignModel>logicproblem.ecore</foreignModel>
+  <foreignModel>logicresult.ecore</foreignModel>
+  <genPackages prefix="Logiclanguage" basePackage="hu.bme.mit.inf.dslreasoner.logic.model"
+      disposableProviderFactory="true" ecorePackage="logiclanguage.ecore#/">
+    <genClasses ecoreClass="logiclanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//Type/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Type/subtypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Type/supertypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//Type/isAbstract"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//DefinedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//DefinedElement/definedInType"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//TypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//TypeDefinition/elements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//TypeDefinition/defines"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//TypeReference"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//ComplexTypeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//ComplexTypeReference/referred"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//PrimitiveTypeReference"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//IntTypeReference"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//BoolTypeReference"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//RealTypeReference"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Function">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Function/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Function/parameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Function/annotations"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//Term"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//SymbolicDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//SymbolicDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//SymbolicValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//SymbolicValue/symbolicReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//SymbolicValue/parameterSubstitutions"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//AtomicTerm"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//BoolLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//BoolLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Variable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Variable/range"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//QuantifiedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//QuantifiedExpression/quantifiedVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//QuantifiedExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Exists"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Forall"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//BoolOperation"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//And">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//And/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Or">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Or/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Impl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Impl/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Impl/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Not">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Not/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Iff">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Iff/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Iff/rightOperand"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//PrimitiveRelation"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Equals">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Equals/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Equals/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Distinct">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Distinct/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//LessThan">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//LessThan/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//LessThan/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//MoreThan">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//MoreThan/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//MoreThan/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//LessOrEqualThan">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//LessOrEqualThan/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//LessOrEqualThan/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//MoreOrEqualThan">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//MoreOrEqualThan/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//MoreOrEqualThan/rightOperand"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//IntOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IntOperation/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IntOperation/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Plus"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Minus"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Multiply"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Divison"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Mod"/>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//TypeDescriptor"/>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//TermDescription"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Assertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Assertion/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//Assertion/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Assertion/annotations"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Relation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Relation/parameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Relation/annotations"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Constant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Constant/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//Constant/annotations"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//ConstantDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//ConstantDefinition/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//ConstantDefinition/defines"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//RelationDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//RelationDefinition/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//RelationDefinition/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//RelationDefinition/defines"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//FunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//FunctionDefinition/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//FunctionDefinition/defines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//FunctionDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//IfThenElse">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IfThenElse/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IfThenElse/ifTrue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IfThenElse/ifFalse"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//ConstantDeclaration"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//RelationDeclaration"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//FunctionDeclaration"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//TypeDeclaration"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//UnknownBecauseUninterpreted"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//InstanceOf">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//InstanceOf/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//InstanceOf/range"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Logicproblem" basePackage="hu.bme.mit.inf.dslreasoner.logic.model"
+      disposableProviderFactory="true" ecorePackage="logicproblem.ecore#/">
+    <genClasses ecoreClass="logicproblem.ecore#//LogicProblem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/assertions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/relations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/constants"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/containmentHierarchies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicproblem.ecore#//LogicProblem/annotations"/>
+    </genClasses>
+    <genClasses ecoreClass="logicproblem.ecore#//ContainmentHierarchy">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/typesOrderedInHierarchy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/parentFunctions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/parentRelations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/rootConstant"/>
+    </genClasses>
+    <genClasses ecoreClass="logicproblem.ecore#//RelationAnnotation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//RelationAnnotation/target"/>
+    </genClasses>
+    <genClasses ecoreClass="logicproblem.ecore#//ConstantAnnotation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ConstantAnnotation/target"/>
+    </genClasses>
+    <genClasses ecoreClass="logicproblem.ecore#//FunctionAnnotation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//FunctionAnnotation/target"/>
+    </genClasses>
+    <genClasses ecoreClass="logicproblem.ecore#//AssertionAnnotation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//AssertionAnnotation/target"/>
+    </genClasses>
+    <genClasses ecoreClass="logicproblem.ecore#//Annotation"/>
+  </genPackages>
+  <genPackages prefix="Logicresult" basePackage="hu.bme.mit.inf.dslreasoner.logic.model"
+      disposableProviderFactory="true" ecorePackage="logicresult.ecore#/">
+    <genClasses image="false" ecoreClass="logicresult.ecore#//LogicResult">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicresult.ecore#//LogicResult/problem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicresult.ecore#//LogicResult/statistics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//LogicResult/trace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//LogicResult/representation"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//ModelResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//ModelResult/maxInteger"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//ModelResult/minInteger"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//InconsistencyResult"/>
+    <genClasses image="false" ecoreClass="logicresult.ecore#//UnknownResult"/>
+    <genClasses ecoreClass="logicresult.ecore#//InsuficientResourcesResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//InsuficientResourcesResult/resourceName"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//ErrorResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//ErrorResult/message"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//Statistics">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logicresult.ecore#//Statistics/entries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//Statistics/transformationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//Statistics/solverTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//Statistics/solverMemory"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//StatisticEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//StatisticEntry/name"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//UndecidableResult"/>
+    <genClasses ecoreClass="logicresult.ecore#//IntStatisticEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//IntStatisticEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//RealStatisticEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//RealStatisticEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logicresult.ecore#//StringStatisticEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logicresult.ecore#//StringStatisticEntry/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

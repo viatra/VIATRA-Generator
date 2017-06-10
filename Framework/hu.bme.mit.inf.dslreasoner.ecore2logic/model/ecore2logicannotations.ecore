@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecore2logicannotations" nsURI="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation"
+    nsPrefix="ecore2logicannotations">
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityAssertion" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//AssertionAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//Relation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InverseRelationAssertion" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//AssertionAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inverseA" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inverseB" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//Relation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LowerMultiplicityAssertion" eSuperTypes="#//MultiplicityAssertion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UpperMultiplicityAssertion" eSuperTypes="#//MultiplicityAssertion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

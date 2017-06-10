@@ -1,0 +1,50 @@
+/**
+ */
+package hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations;
+
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.RelationAnnotation;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Transfomed Viatra Query</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternFullyQualifiedName <em>Pattern Fully Qualified Name</em>}</li>
+ * </ul>
+ *
+ * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage#getTransfomedViatraQuery()
+ * @model
+ * @generated
+ */
+public interface TransfomedViatraQuery extends RelationAnnotation {
+
+	/**
+	 * Returns the value of the '<em><b>Pattern Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pattern Fully Qualified Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pattern Fully Qualified Name</em>' attribute.
+	 * @see #setPatternFullyQualifiedName(String)
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage#getTransfomedViatraQuery_PatternFullyQualifiedName()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getPatternFullyQualifiedName();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternFullyQualifiedName <em>Pattern Fully Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pattern Fully Qualified Name</em>' attribute.
+	 * @see #getPatternFullyQualifiedName()
+	 * @generated
+	 */
+	void setPatternFullyQualifiedName(String value);
+} // TransfomedViatraQuery

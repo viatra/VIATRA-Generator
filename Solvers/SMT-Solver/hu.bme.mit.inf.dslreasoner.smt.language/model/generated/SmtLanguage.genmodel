@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.smt.language/src-gen"
+    editDirectory="/hu.bme.mit.inf.dslreasoner.smt.language.edit/src" editorDirectory="/hu.bme.mit.inf.dslreasoner.smt.language.editor/src"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.smt.language" forceOverwrite="true"
+    modelName="SmtLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="hu.bme.mit.inf.dslreasoner.smt.language.edit"
+    editorPluginID="hu.bme.mit.inf.dslreasoner.smt.language.editor" runtimeVersion="2.10">
+  <genPackages prefix="SmtLanguage" basePackage="hu.bme.mit.inf.dslreasoner" disposableProviderFactory="true"
+      fileExtensions="smt2" ecorePackage="SmtLanguage.ecore#/">
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTDocument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTDocument/input"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTDocument/output"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTInput">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/options"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/typeDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/functionDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/functionDefinition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/assertions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/satCommand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInput/getModelCommand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTOutput">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTOutput/satResult"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTOutput/getModelResult"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTOutput/statistics"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTOption">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTOption/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTOption/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTEnumLiteral"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTEnumeratedTypeDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTEnumeratedTypeDeclaration/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSetTypeDeclaration"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTTypeReference"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTComplexTypeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTComplexTypeReference/referred"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTPrimitiveTypeReference"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTIntTypeReference"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTBoolTypeReference"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTRealTypeReference"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTFunctionDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTFunctionDeclaration/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTFunctionDeclaration/range"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTFunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTFunctionDefinition/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTFunctionDefinition/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTFunctionDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTTerm"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSymbolicDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTSymbolicDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSymbolicValue">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTSymbolicValue/symbolicReference"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTSymbolicValue/parameterSubstitutions"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTAtomicTerm"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTIntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTIntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTBoolLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTBoolLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTRealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTRealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSortedVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTSortedVariable/range"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTQuantifiedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTQuantifiedExpression/quantifiedVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTQuantifiedExpression/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTQuantifiedExpression/pattern"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTExists"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTForall"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTBoolOperation"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTAnd">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTAnd/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTOr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTOr/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTImpl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTImpl/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTImpl/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTNot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTNot/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTIff">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIff/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIff/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTITE">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTITE/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTITE/if"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTITE/else"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTLet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTLet/inlineConstantDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTLet/term"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTInlineConstantDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTInlineConstantDefinition/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTRelation"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTEquals">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTEquals/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTEquals/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTDistinct">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTDistinct/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTLT">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTLT/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTLT/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTMT">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTMT/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTMT/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTLEQ">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTLEQ/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTLEQ/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTMEQ">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTMEQ/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTMEQ/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTIntOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIntOperation/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIntOperation/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTPlus"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTMinus"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTMultiply"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTDivison"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTDiv"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTMod"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTAssertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTAssertion/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTCardinalityConstraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTCardinalityConstraint/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTCardinalityConstraint/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSatCommand"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSimpleSatCommand"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTComplexSatCommand">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTComplexSatCommand/method"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTGetModelCommand"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTReasoningTactic"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTBuiltinTactic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTBuiltinTactic/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTReasoningCombinator"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTAndThenCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTAndThenCombinator/tactics"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTOrElseCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTOrElseCombinator/tactics"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTParOrCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTParOrCombinator/tactics"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTParThenCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTParThenCombinator/preProcessingTactic"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTParThenCombinator/paralellyPostpricessingTactic"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTTryForCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTTryForCombinator/tactic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTTryForCombinator/time"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTIfCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIfCombinator/probe"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIfCombinator/ifTactic"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTIfCombinator/elseTactic"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTWhenCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTWhenCombinator/probe"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTWhenCombinator/tactic"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTFailIfCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTFailIfCombinator/probe"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTUsingParamCombinator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTUsingParamCombinator/tactic"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTUsingParamCombinator/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//ReasoningProbe">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//ReasoningProbe/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//ReasoningTacticParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//ReasoningTacticParameter/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//ReasoningTacticParameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTResult"/>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTErrorResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTErrorResult/message"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTUnsupportedResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTUnsupportedResult/command"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTSatResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTSatResult/sat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTSatResult/unsat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTSatResult/unknown"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTModelResult">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTModelResult/newFunctionDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTModelResult/typeDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTModelResult/newFunctionDefinitions"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTStatisticValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTStatisticValue/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTStatisticIntValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTStatisticIntValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTStatisticDoubleValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SmtLanguage.ecore#//SMTStatisticDoubleValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SmtLanguage.ecore#//SMTStatisticsSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SmtLanguage.ecore#//SMTStatisticsSection/values"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

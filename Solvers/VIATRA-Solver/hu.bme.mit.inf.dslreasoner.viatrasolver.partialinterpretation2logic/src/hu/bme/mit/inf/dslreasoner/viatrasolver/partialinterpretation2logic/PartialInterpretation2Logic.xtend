@@ -1,0 +1,146 @@
+package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
+
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink
+import java.util.ArrayList
+import java.util.HashMap
+import java.util.HashSet
+import java.util.Map
+import java.util.Set
+import org.eclipse.xtend.lib.annotations.Data
+
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+
+@Data class PartialInterpretation2Logic_Trace {
+	Map<TypeDeclaration, TypeDefinition> definedPart = new HashMap
+	Map<TypeDeclaration, TypeDeclaration> undefinedPart = new HashMap
+	Set<Type> originalTypes = new HashSet
+	Set<TypeDeclaration> splittedTypes = new HashSet
+}
+
+class PartialInterpretation2Logic {
+	val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
+	val extension LogicProblemBuilder builder = new LogicProblemBuilder
+	
+	def transformPartialIntepretation2Logic(LogicProblem p, PartialInterpretation i) {
+		val trace = new PartialInterpretation2Logic_Trace()
+		trace.originalTypes.addAll(p.types)
+		if(! i.newElements.empty) {
+			
+			// Elements adding
+			addExistingElementToProblem(p,i)
+			
+			// Types
+			for(partialTypeDeclaration : i.partialtypeinterpratation) {
+				splitTypeIntoTwo(p,partialTypeDeclaration,trace)
+			}
+			connectSplittings(p,trace)
+			
+			// Relations
+			for(partialRelationInterpretation : i.partialrelationinterpretation) {
+				relationLinksToAssertion(p,partialRelationInterpretation,trace)
+			}
+		}
+	}
+	
+	private def addExistingElementToProblem(LogicProblem p, PartialInterpretation i) {
+		val newElements = new ArrayList(i.newElements)
+		var newElementIndex = 1
+		for(newElement : newElements) {
+			newElement.name = '''DefinedElement «newElementIndex++»'''
+			p.elements += newElement
+		}
+	}
+	
+	private def splitTypeIntoTwo(LogicProblem p, PartialTypeInterpratation partialTypeDeclaration,PartialInterpretation2Logic_Trace trace) {
+		if(!partialTypeDeclaration.elements.empty) {
+			val declaration = partialTypeDeclaration.interpretationOf
+			
+			val definedPart = createTypeDefinition => [
+				it.name = '''DefinedPartOf «declaration.name»'''
+				it.elements += partialTypeDeclaration.elements
+				it.isAbstract = declaration.isIsAbstract
+			]
+			val undefinedPart = createTypeDeclaration => [
+				it.name = '''UndefinedPartOf «declaration.name»'''
+				it.isAbstract = declaration.isIsAbstract
+			]
+			declaration.isAbstract = true
+			
+			trace.definedPart.put(declaration,definedPart)
+			trace.undefinedPart.put(declaration,undefinedPart)
+			trace.splittedTypes.add(declaration)
+			p.add(definedPart)
+			p.add(undefinedPart)
+			Supertype(definedPart,declaration)
+			Supertype(undefinedPart,declaration)
+		}
+	}
+	
+	private def connectSplittings(LogicProblem p,PartialInterpretation2Logic_Trace trace)  {
+		val originalTypes = p.types.filter[originalType(trace)].toList
+		for(type : originalTypes) {
+			val superTypes = new ArrayList(type.supertypes.filter[originalType(trace)].toList)
+			for(supertype : superTypes) {
+				if(type.isSplitted(trace)) {
+					if(supertype.isSplitted(trace)) {
+						Supertype((type as TypeDeclaration).lookup(trace.definedPart), (supertype as TypeDeclaration).lookup(trace.definedPart))
+						Supertype((type as TypeDeclaration).lookup(trace.undefinedPart), (supertype as TypeDeclaration).lookup(trace.undefinedPart))
+					} else {
+						// Do nothing
+					}
+				} else {
+					if(supertype.isSplitted(trace)) {
+						Supertype(type, (supertype as TypeDeclaration).lookup(trace.undefinedPart))
+					} else if(supertype instanceof TypeDefinition) {
+						// Do nothing
+					}
+				}
+			}
+		}
+	}
+	
+	private def originalType(Type type,PartialInterpretation2Logic_Trace trace) {
+		return trace.originalTypes.contains(type)
+	}
+	private def isSplitted(Type t, PartialInterpretation2Logic_Trace trace) {
+		trace.splittedTypes.contains(t)
+	}
+	
+	private def relationLinksToAssertion(LogicProblem p, PartialRelationInterpretation r,PartialInterpretation2Logic_Trace trace) {
+		val relation = r.interpretationOf
+		val links = r.relationlinks
+		if(links.size == 0) {
+			return
+		} else {
+			val term = if(links.size == 1) {
+				createLink(links.head,relation)
+			} else {
+				links.map[link|createLink(link,relation)].And
+			}
+			val assertion = Assertion('''PartialInterpretation «r.interpretationOf.name»''',term)
+			p.add(assertion)
+		}
+		
+	}
+	
+	def private createLink(RelationLink link, SymbolicDeclaration relationDeclaration) {
+		if(link instanceof BinaryElementRelationLink) {
+			return createSymbolicValue=>[
+				it.symbolicReference=relationDeclaration
+				it.parameterSubstitutions += createSymbolicValue => [link.param1]
+				it.parameterSubstitutions += createSymbolicValue => [link.param2]
+			]
+		} else throw new UnsupportedOperationException
+	}
+}

@@ -1,0 +1,222 @@
+grammar hu.bme.mit.inf.dslreasoner.SmtLanguage with org.eclipse.xtext.common.Terminals
+
+generate smtLanguage "http://www.bme.hu/mit/inf/dslreasoner/SmtLanguage"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+SMTDocument:
+	input=SMTInput
+	(
+		'--------------'
+		output=SMTOutput
+	)?;
+
+SMTInput:
+	(options += SMTOption)*
+	(
+		typeDeclarations+=SMTType |
+		functionDeclarations+=SMTFunctionDeclaration |
+		functionDefinition+=SMTFunctionDefinition |
+		assertions += SMTAssertion
+	)*
+	satCommand = SMTSatCommand
+	getModelCommand = SMTGetModelCommand;
+	
+SMTOutput:(
+	(satResult = SMTResult
+	getModelResult = SMTResult) | 'timeout' {SMTOutput})
+	statistics=SMTStatisticsSection?;
+
+//////////////////////////////////
+// SMT terminals
+//////////////////////////////////
+
+terminal SL_COMMENT 	: ';' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal ID  			: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'-'|'!'|'0'..'9')*;
+//	('a'..'z'|'A'..'Z'|'_'/*|'+'|'-'|'/'|'*'|'='|'%'|'?'|'!'|'.'|'$'|'~'|'&'/*|'^'*/|'<'|'>'/*|'@'*/)
+//	('a'..'z'|'A'..'Z'|'_'/*|'+'|'-'|'/'|'*'|'='|'%'|'?'|'!'|'.'|'$'|'~'|'&'/*|'^'|*/'<'|'>'/*|'@'*/|'0'..'9')*
+SMTID: ID;
+
+terminal PROPERTYNAME : ':' + ID;
+terminal REAL returns ecore::EBigDecimal: INT '.' INT;
+
+//////////////////////////////////
+// Options
+//////////////////////////////////
+SMTOption: '(' 'set-option' name = PROPERTYNAME value = SMTAtomicTerm ')';
+
+//////////////////////////////////
+// Type declarations
+//////////////////////////////////
+SMTType: SMTEnumeratedTypeDeclaration | SMTSetTypeDeclaration;
+
+SMTEnumLiteral: name = SMTID;
+SMTEnumeratedTypeDeclaration:	'(' 'declare-datatypes' '(' ')' '(' '(' name = SMTID elements+=SMTEnumLiteral+ ')' ')' ')';
+SMTSetTypeDeclaration:	'(' 'declare-sort' name = SMTID ')';
+
+SMTTypeReference: SMTComplexTypeReference | SMTPrimitiveTypeReference;
+SMTComplexTypeReference: referred = [SMTType];
+SMTPrimitiveTypeReference: SMTIntTypeReference | SMTBoolTypeReference | SMTRealTypeReference;
+
+SMTIntTypeReference: {SMTIntTypeReference} "Int";
+SMTBoolTypeReference: {SMTBoolTypeReference} "Bool";
+SMTRealTypeReference: {SMTRealTypeReference} "Real";
+
+//////////////////////////////////
+// Functions and constants
+//////////////////////////////////
+
+SMTFunctionDeclaration: '(' 'declare-fun' name = SMTID '(' parameters+=SMTTypeReference* ')' range = SMTTypeReference ')';
+
+/*DeclaredFunctionDefinition:
+	'(' 'define-fun' declaration=[Function] '(' parameters+=SortedVariable* ')' range = TypeReference value = Term ')';*/
+	
+SMTFunctionDefinition: 
+	'(' 'define-fun' name=SMTID '(' parameters+=SMTSortedVariable* ')' range = SMTTypeReference value = SMTTerm ')';
+
+
+//////////////////////////////////
+// Expressions
+//////////////////////////////////
+SMTTerm:
+	SMTSymbolicValue|
+	SMTAtomicTerm | 
+	SMTBoolOperation | 
+	SMTIntOperation |
+	SMTITE |
+	SMTLet |
+	SMTRelation | 
+	SMTQuantifiedExpression;
+
+SMTSymbolicDeclaration: SMTFunctionDeclaration | SMTFunctionDefinition | SMTSortedVariable | SMTEnumLiteral | SMTInlineConstantDefinition;
+
+SMTSymbolicValue:
+	'(' symbolicReference = [SMTSymbolicDeclaration] ( parameterSubstitutions += SMTTerm )+ ')' |
+	symbolicReference = [SMTSymbolicDeclaration];
+
+SMTAtomicTerm: SMTIntLiteral | SMTBoolLiteral | SMTRealLiteral;
+SMTIntLiteral: value=INT;
+BOOLEANTERMINAL returns ecore::EBoolean: 'true' | 'false';
+SMTBoolLiteral: value=BOOLEANTERMINAL;
+SMTRealLiteral: value=REAL;
+
+// Quantified operations
+SMTSortedVariable:			'(' name = SMTID range = SMTTypeReference ')';
+//QuantifiedVariableValue:	variable = [QuantifiedVariable];
+
+SMTQuantifiedExpression: SMTExists | SMTForall;
+SMTExists:	'(' 'exists' '(' (quantifiedVariables += SMTSortedVariable)+ ')' 
+	(expression=SMTTerm | ('(' '!'  expression = SMTTerm ':pattern' '(' pattern = SMTTerm ')' ')')) ')'
+;
+SMTForall: '(' 'forall' '(' (quantifiedVariables += SMTSortedVariable)+ ')' 
+	(expression=SMTTerm | ('(' '!'  expression = SMTTerm ':pattern' '(' pattern = SMTTerm ')' ')')) ')'
+;
+
+// Boolean operations
+SMTBoolOperation:	SMTAnd | SMTOr | SMTImpl | SMTNot | SMTIff;
+SMTAnd:	'(' 'and' operands+=SMTTerm+ ')';
+SMTOr:		'(' 'or' operands+=SMTTerm+ ')';
+SMTImpl:	'(' '=>' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTNot:	'(' 'not' operand=SMTTerm ')';
+SMTIff:	'(' 'iff' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+
+// If-then-else
+SMTITE: '(' 'ite' condition = SMTTerm if=SMTTerm else = SMTTerm ')';
+
+//Let
+SMTLet: '(' 'let' '(' (inlineConstantDefinitions+=SMTInlineConstantDefinition)+ ')' term=SMTTerm ')';
+SMTInlineConstantDefinition:
+	'(' name=SMTID  definition=SMTTerm ')'
+;
+
+// Relations
+SMTRelation: SMTEquals | SMTDistinct | SMTLT | SMTMT | SMTLEQ | SMTMEQ;
+SMTEquals: '(' '=' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTDistinct: '(' 'distinct' operands+=SMTTerm+ ')';
+SMTLT:		'(' '<' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTMT:		'(' '>' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTLEQ:	'(' '<=' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTMEQ:	'(' '>=' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+
+// Int operations
+SMTIntOperation: SMTPlus | SMTMinus | SMTMultiply | SMTDivison | SMTDiv | SMTMod;
+SMTPlus: 		'(' '+' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTMinus:		'(' '-' leftOperand=SMTTerm (rightOperand=SMTTerm)? ')';
+SMTMultiply:	'(' '*' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTDivison:	'(' '/' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTDiv:		'(' 'div' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+SMTMod:		'(' 'mod' leftOperand=SMTTerm rightOperand=SMTTerm ')';
+
+//////////////////////////////////
+// Assertion
+//////////////////////////////////
+SMTAssertion: '(' 'assert' value=SMTTerm ')';
+SMTCardinalityConstraint:
+	'(' 'forall' '(' '(' ID type=SMTTypeReference ')' ')'
+		(('(' 'or'('(' '=' ID elements+=SMTSymbolicValue ')')* ')') | // With multiple element
+		('(' '=' ID elements+=SMTSymbolicValue ')')) //With single element
+	')'
+;
+
+//////////////////////////////////
+// Goals
+//////////////////////////////////
+SMTSatCommand: SMTSimpleSatCommand | SMTComplexSatCommand;
+SMTSimpleSatCommand : '(' 'check-sat' {SMTSimpleSatCommand} ')';
+SMTComplexSatCommand: '(' 'check-sat-using' method = SMTReasoningTactic ')';
+SMTGetModelCommand: '(' 'get-model' {SMTGetModelCommand} ')';
+
+SMTReasoningTactic: SMTBuiltinTactic | SMTReasoningCombinator;
+SMTBuiltinTactic: name = ID;
+SMTReasoningCombinator:
+	SMTAndThenCombinator | SMTOrElseCombinator | SMTParOrCombinator | SMTParThenCombinator | SMTTryForCombinator |
+	SMTIfCombinator | SMTWhenCombinator | SMTFailIfCombinator | SMTUsingParamCombinator
+;
+// executes the given tactics sequencially.
+SMTAndThenCombinator: '(' 'and-then' (tactics+=SMTReasoningTactic)+ ')';
+// tries the given tactics in sequence until one of them succeeds.
+SMTOrElseCombinator: '(' 'or-else' (tactics+=SMTReasoningTactic)+ ')';
+// executes the given tactics in parallel until one of them succeeds.
+SMTParOrCombinator: '(' 'par-or' (tactics+=SMTReasoningTactic)+ ')';
+// executes tactic1 and then tactic2 to every subgoal produced by tactic1. All subgoals are processed in parallel.
+SMTParThenCombinator: '(' 'par-then' preProcessingTactic=SMTReasoningTactic paralellyPostpricessingTactic = SMTReasoningTactic ')';
+// excutes the given tactic for at most <num> milliseconds, it fails if the execution takes more than <num> milliseconds.
+SMTTryForCombinator: '(' 'try-for' tactic=SMTReasoningTactic time=INT ')';
+// if <probe> evaluates to true, then execute the first tactic. Otherwise execute the second.
+SMTIfCombinator: '(' 'if' probe=ReasoningProbe ifTactic=SMTReasoningTactic elseTactic=SMTReasoningTactic ')';
+// shorthand for (if <probe> <tactic> skip).
+SMTWhenCombinator: '(' 'when' probe=ReasoningProbe tactic=SMTReasoningTactic ')';
+// fail if <probe> evaluates to true.
+SMTFailIfCombinator: '(' 'fail-if' probe=ReasoningProbe ')';
+//executes the given tactic using the given attributes, where <attribute> ::= <keyword> <value>. ! is a syntax sugar for using-params.
+SMTUsingParamCombinator: '(' ('using-params' | '!') tactic=SMTReasoningTactic (parameters+=ReasoningTacticParameter)* ')';
+
+ReasoningProbe: name=ID;
+ReasoningTacticParameter: name=PROPERTYNAME value=SMTAtomicTerm;
+
+//////////////////////////////////
+// Result
+//////////////////////////////////
+
+SMTResult: SMTUnsupportedResult | SMTSatResult | SMTModelResult | SMTErrorResult;
+SMTErrorResult: '(' 'error' message = STRING ')';
+SMTUnsupportedResult: 'unsupported' ';' command=ID;
+SMTSatResult: sat?='sat' | unsat?='unsat' | unknown?='unknown';
+SMTModelResult: {SMTModelResult} '(' 'model'
+	(
+		newFunctionDeclarations+=SMTFunctionDeclaration |
+		typeDefinitions+=SMTCardinalityConstraint |
+		newFunctionDefinitions+=SMTFunctionDefinition
+	)*
+	')';
+
+//////////////////////////////////
+// Statistics
+//////////////////////////////////
+//IntOrReal returns ecore::EDouble: INT | REAL;
+
+SMTStatisticValue: SMTStatisticIntValue | SMTStatisticDoubleValue;
+SMTStatisticIntValue: name = PROPERTYNAME value=INT;
+SMTStatisticDoubleValue: name = PROPERTYNAME  value = REAL;
+SMTStatisticsSection: '(' {SMTStatisticsSection} values += SMTStatisticValue* ')';

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated logiclanguage -->
+    <package class="hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage" genModel="model/logiclanguage.genmodel" uri="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"/>
+  </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated logiclanguage -->
+    <package class="hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage" genModel="model/logiclanguage.genmodel" uri="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"/>
+  </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated logiclanguage -->
+    <package class="hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultPackage" genModel="model/logiclanguage.genmodel" uri="http://www.bme.hu/mit/inf/dslreasoner/logic/model/result"/>
+  </extension>
+  <extension id="hu.bme.mit.inf.dslreasoner.logic.model.patterns.TypeUtil" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.logic.model.patterns.TypeUtil" id="hu.bme.mit.inf.dslreasoner.logic.model.patterns.TypeUtil">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.supertypeStar"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.typeDirectElements"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.possibleDynamicType"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.mustTypeElement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.typeSystemIsInconsistent"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.elementNotDefinedInSupertype"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.elementWithNoPossibleDynamicType"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.logic.model.patterns.cyclicTypeHierarchy"/>
+    </group>
+  </extension>
+</plugin>

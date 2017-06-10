@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="logicproblem" nsURI="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+    nsPrefix="language">
+  <eClassifiers xsi:type="ecore:EClass" name="LogicProblem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Function" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Assertion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Relation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Constant" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//DefinedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentHierarchies"
+        upperBound="-1" eType="#//ContainmentHierarchy" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentHierarchy">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typesOrderedInHierarchy"
+        upperBound="-1" eType="ecore:EClass logiclanguage.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentFunctions" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containmentRelations" upperBound="-1"
+        eType="ecore:EClass logiclanguage.ecore#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootConstant" eType="ecore:EClass logiclanguage.ecore#//Constant"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationAnnotation" eSuperTypes="#//Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass logiclanguage.ecore#//Relation" eOpposite="logiclanguage.ecore#//Relation/annotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantAnnotation" eSuperTypes="#//Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass logiclanguage.ecore#//Constant" eOpposite="logiclanguage.ecore#//Constant/annotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionAnnotation" eSuperTypes="#//Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass logiclanguage.ecore#//Function" eOpposite="logiclanguage.ecore#//Function/annotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionAnnotation" eSuperTypes="#//Annotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass logiclanguage.ecore#//Assertion" eOpposite="logiclanguage.ecore#//Assertion/annotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation"/>
+</ecore:EPackage>

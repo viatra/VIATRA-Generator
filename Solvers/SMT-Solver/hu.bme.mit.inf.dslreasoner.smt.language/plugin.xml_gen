@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.bme.hu/mit/inf/dslreasoner/SmtLanguage" 
+       class = "hu.bme.mit.inf.dslreasoner.smtLanguage.SmtLanguagePackage"
+       genModel = "model/generated/SmtLanguage.genmodel" /> 
+	
+  </extension>
+
+
+
+</plugin>
