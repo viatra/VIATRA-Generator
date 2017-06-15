@@ -189,10 +189,10 @@ class RunMeasurements {
 	static val clean = false
 	static val domain = Domain::Yakindu
 	static val solver = UseSolver::Viatra
-	static val diverse = false
-	static val wf = true
+	static val diverse = true
+	static val wf = false
 	public static var sizes =  #[50]
-	static var int number = 10
+	static var int number = 3
 	
 	def static void waitForEnter() {
 		if(monitoring) {

@@ -128,6 +128,12 @@ class ViatraReasoner extends LogicReasoner{
 			//it.solverTime = viatraConfig.runtimeLimit
 			it.solverTime = (solverTime/1000000) as int
 			it.transformationTime = (transformationTime/1000000) as int
+			for(x : 0..<strategy.solutionStoreWithCopy.allRuntimes.size) {
+				it.entries += createIntStatisticEntry => [
+					it.name = '''_Sulution«x»FoundAt'''
+					it.value = strategy.solutionStoreWithCopy.allRuntimes.get(x).intValue
+				]
+			}
 			it.entries += createIntStatisticEntry => [
 				it.name = "TransformationExecutionTime" it.value = (method.statistics.transformationExecutionTime/1000000) as int
 			]

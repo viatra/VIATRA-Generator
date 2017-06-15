@@ -40,6 +40,7 @@ pattern multipleTransitionFromEntry(e : Entry, t1 : Transition, t2: Transition) 
 	t1!=t2;
 }
 
+
 @Constraint(severity="error", message="error", key = {s})
 pattern hasNoOutgoing(s : Synchronization) {
 	neg find transition(_, s, _);

@@ -30,7 +30,7 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 }
 
 class PatternProvider {
-	val ParseUtil parseUtil = new ParseUtil
+	
 	val TypeAnalysis typeAnalysis = new TypeAnalysis
 	
 	public def generateQueries(
@@ -54,6 +54,7 @@ class PatternProvider {
 		}
 		val baseIndexerFile = patternGenerator.transformBaseProperties(problem,emptySolution,fqn2Query,typeAnalysisResult)
 		writeQueries(baseIndexerFile,"GeneratedQueries",workspace)
+		val ParseUtil parseUtil = new ParseUtil
 		val generatedQueries = parseUtil.parse(baseIndexerFile)
 		val runtimeQueries = calclulateRuntimeQueries(patternGenerator,problem,emptySolution,typeAnalysisResult,generatedQueries);
 		return runtimeQueries

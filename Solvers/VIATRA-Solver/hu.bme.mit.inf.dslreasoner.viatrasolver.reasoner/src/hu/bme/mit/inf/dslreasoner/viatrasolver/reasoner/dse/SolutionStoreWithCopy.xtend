@@ -9,11 +9,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.dse.base.ThreadContext
 
 class SolutionStoreWithCopy {
+	
 	long runtime = 0
 	List<PartialInterpretation> solutions = new LinkedList
 	List<Map<EObject,EObject>> copyTraces = new LinkedList
 	
-	long initTime = System.nanoTime
+	long sartTime = System.nanoTime
+	List<Long> solutionTimes = new LinkedList
 	
 	def newSolution(ThreadContext context) {
 		//print(System.nanoTime-initTime + ";")
@@ -25,9 +27,13 @@ class SolutionStoreWithCopy {
 		solutions.add(solutionCopy)
 		copyTraces.add(copier)
 		runtime += System.nanoTime - copyStart
+		solutionTimes.add(System.nanoTime-sartTime)
 	}
 	def getSumRuntime() {
 		return runtime
+	}
+	def getAllRuntimes() {
+		return solutionTimes
 	}
 	def getSolutions() {
 		solutions
