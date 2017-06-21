@@ -2,6 +2,10 @@ package hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu
 
 import epackage "hu.bme.mit.inf.yakindumm"
 
+/////////
+// Entry
+/////////
+
 pattern entryInRegion(r1 : Region, e1 : Entry) {
 	Region.vertices(r1, e1);
 }
@@ -40,19 +44,62 @@ pattern multipleTransitionFromEntry(e : Entry, t1 : Transition, t2: Transition) 
 	t1!=t2;
 }
 
+/////////
+// Exit
+/////////
+
+@Constraint(severity="error", message="error", key = {e})
+pattern outgoingFromExit(t : Transition, e : Exit) {
+	find transition(t, e, _);
+}
+
+/////////
+// Final
+/////////
+
+@Constraint(severity="error", message="error", key = {f})
+pattern outgoingFromFinal(t : Transition, f : FinalState) {
+	find transition(t, f, _);
+}
+
+/////////
+// State vs Region
+/////////
+
+@Constraint(severity="error", message="error", key = {region})
+pattern noStateInRegion(region: Region) {
+	neg find StateInRegion(region,_);
+}
+pattern StateInRegion(region: Region, state: State) {
+	Region.vertices(region,state);
+}
+
+/////////
+// Choice
+/////////
+
+@Constraint(severity="error", message="error", key = {c})
+pattern choiceHasNoOutgoing(c : Choice) {
+	neg find transition(_, c, _);
+}
+
+@Constraint(severity="error", message="error", key = {c})
+pattern choiceHasNoIncoming(c: Choice) {
+	neg find transition(_, _, c);
+}
+
+/////////
+// Synchronization
+/////////
 
 @Constraint(severity="error", message="error", key = {s})
-pattern hasNoOutgoing(s : Synchronization) {
+pattern synchHasNoOutgoing(s : Synchronization) {
 	neg find transition(_, s, _);
 }
 
 @Constraint(severity="error", message="error", key = {s})
-pattern hasNoIncoming(s : Synchronization) {
+pattern synchHasNoIncoming(s : Synchronization) {
 	neg find transition(_, _, s);
-}
-
-pattern StateInRegion(region: Region, state: State) {
-	Region.vertices(region,state);
 }
 
 @Constraint(severity="error", message="error", key = {s})
@@ -68,11 +115,6 @@ pattern SynchronizedIncomingInSameRegion(s : Synchronization, v1 : Vertex, v2 : 
 	t1!=t2;
 	Region.vertices(r, v1);
 	Region.vertices(r, v2);
-}
-
-@Constraint(severity="error", message="error", key = {region})
-pattern noStateInRegion(region: Region) {
-	neg find StateInRegion(region,_);
 }
 
 @Constraint(severity="error", message="error", key = {s})
@@ -142,7 +184,9 @@ pattern hasMultipleRegions(composite: CompositeElement) {
 	region1 != region2;
 }
 
-// multiplicity constraints
+/**
+ * Simplifying model generation
+ */
 @Constraint(severity="error", message="error", key = {s})
 pattern synchThree(s: Synchronization) {
 	Transition.target(t1,s);
@@ -160,6 +204,9 @@ pattern synchThree(s: Synchronization) {
 	t1!=t3;
 }
 
+/**
+ * Simplifying model generation
+ */
 @Constraint(severity="error", message="error", key = {s1,s2})
 pattern twoSynch(s1 : Synchronization, s2 : Synchronization) {
 	Synchronization(s1);
@@ -167,31 +214,14 @@ pattern twoSynch(s1 : Synchronization, s2 : Synchronization) {
 	s1 != s2;
 }
 
-pattern synch(s:Synchronization) {
-	Synchronization(s);
-}
-@Constraint(severity="error", message="error", key = {s})
-pattern noSynch(s:Statechart) {
-	Statechart(s);
-	neg find synch(_);
-}
-@Constraint(severity="error", message="error", key = {s})
-pattern noSynch1(s:Statechart) {
-	Statechart(s);
-	neg find synch(_);
-}
-@Constraint(severity="error", message="error", key = {s})
-pattern noSynch2(s:Statechart) {
-	Statechart(s);
-	neg find synch(_);
-}
-@Constraint(severity="error", message="error", key = {s})
-pattern noSynch3(s:Statechart) {
-	Statechart(s);
-	neg find synch(_);
-}
-@Constraint(severity="error", message="error", key = {s})
-pattern noSynch4(s:Statechart) {
-	Statechart(s);
-	neg find synch(_);
-}
+/**
+ * Model generation task: at least one synch
+ */
+//@Constraint(severity="error", message="error", key = {s})
+//pattern noSynch(s:Statechart) {
+//	Statechart(s);
+//	neg find synch(_);
+//}
+//pattern synch(s:Synchronization) {
+//	Synchronization(s);
+//}

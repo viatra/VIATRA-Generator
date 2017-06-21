@@ -108,6 +108,18 @@ public class YakindummAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeElementAdapter();
 			}
 			@Override
+			public Adapter caseChoice(Choice object) {
+				return createChoiceAdapter();
+			}
+			@Override
+			public Adapter caseExit(Exit object) {
+				return createExitAdapter();
+			}
+			@Override
+			public Adapter caseFinalState(FinalState object) {
+				return createFinalStateAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -264,6 +276,48 @@ public class YakindummAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompositeElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Choice <em>Choice</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Choice
+	 * @generated
+	 */
+	public Adapter createChoiceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Exit <em>Exit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Exit
+	 * @generated
+	 */
+	public Adapter createExitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.FinalState <em>Final State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.FinalState
+	 * @generated
+	 */
+	public Adapter createFinalStateAdapter() {
 		return null;
 	}
 

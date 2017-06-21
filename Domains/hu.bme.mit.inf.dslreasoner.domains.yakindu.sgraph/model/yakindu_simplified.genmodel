@@ -27,5 +27,7 @@
     <genClasses image="false" ecoreClass="yakindu_simplified.ecore#//CompositeElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference yakindu_simplified.ecore#//CompositeElement/regions"/>
     </genClasses>
+    <genClasses ecoreClass="yakindu_simplified.ecore#//Choice"/>
+    <genClasses ecoreClass="yakindu_simplified.ecore#//Exit"/>
   </genPackages>
 </genmodel:GenModel>

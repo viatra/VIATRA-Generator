@@ -499,6 +499,146 @@ public interface YakindummPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ChoiceImpl <em>Choice</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ChoiceImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getChoice()
+	 * @generated
+	 */
+	int CHOICE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE__OUTGOING_TRANSITIONS = PSEUDOSTATE__OUTGOING_TRANSITIONS;
+
+	/**
+	 * The number of structural features of the '<em>Choice</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Choice</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHOICE_OPERATION_COUNT = PSEUDOSTATE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ExitImpl <em>Exit</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ExitImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getExit()
+	 * @generated
+	 */
+	int EXIT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT__OUTGOING_TRANSITIONS = PSEUDOSTATE__OUTGOING_TRANSITIONS;
+
+	/**
+	 * The number of structural features of the '<em>Exit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Exit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_OPERATION_COUNT = PSEUDOSTATE_OPERATION_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.FinalStateImpl <em>Final State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.FinalStateImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getFinalState()
+	 * @generated
+	 */
+	int FINAL_STATE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__INCOMING_TRANSITIONS = REGULAR_STATE__INCOMING_TRANSITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__OUTGOING_TRANSITIONS = REGULAR_STATE__OUTGOING_TRANSITIONS;
+
+	/**
+	 * The number of structural features of the '<em>Final State</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE_FEATURE_COUNT = REGULAR_STATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Final State</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE_OPERATION_COUNT = REGULAR_STATE_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Pseudostate <em>Pseudostate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -663,6 +803,36 @@ public interface YakindummPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeElement_Regions();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Choice <em>Choice</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Choice</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Choice
+	 * @generated
+	 */
+	EClass getChoice();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Exit <em>Exit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Exit</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Exit
+	 * @generated
+	 */
+	EClass getExit();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.FinalState <em>Final State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Final State</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.FinalState
+	 * @generated
+	 */
+	EClass getFinalState();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -834,6 +1004,36 @@ public interface YakindummPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_ELEMENT__REGIONS = eINSTANCE.getCompositeElement_Regions();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ChoiceImpl <em>Choice</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ChoiceImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getChoice()
+		 * @generated
+		 */
+		EClass CHOICE = eINSTANCE.getChoice();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ExitImpl <em>Exit</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.ExitImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getExit()
+		 * @generated
+		 */
+		EClass EXIT = eINSTANCE.getExit();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.FinalStateImpl <em>Final State</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.FinalStateImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getFinalState()
+		 * @generated
+		 */
+		EClass FINAL_STATE = eINSTANCE.getFinalState();
 
 	}
 

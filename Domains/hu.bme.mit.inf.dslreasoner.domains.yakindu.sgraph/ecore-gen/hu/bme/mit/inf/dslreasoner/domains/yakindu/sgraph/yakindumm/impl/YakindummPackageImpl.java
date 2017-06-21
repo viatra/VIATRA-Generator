@@ -2,8 +2,11 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl;
 
+import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Choice;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.CompositeElement;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Entry;
+import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Exit;
+import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.FinalState;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Pseudostate;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Region;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.RegularState;
@@ -97,6 +100,27 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * @generated
 	 */
 	private EClass compositeElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass choiceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exitEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass finalStateEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -308,6 +332,33 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getChoice() {
+		return choiceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExit() {
+		return exitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFinalState() {
+		return finalStateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public YakindummFactory getYakindummFactory() {
 		return (YakindummFactory)getEFactoryInstance();
 	}
@@ -356,6 +407,12 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 
 		compositeElementEClass = createEClass(COMPOSITE_ELEMENT);
 		createEReference(compositeElementEClass, COMPOSITE_ELEMENT__REGIONS);
+
+		choiceEClass = createEClass(CHOICE);
+
+		exitEClass = createEClass(EXIT);
+
+		finalStateEClass = createEClass(FINAL_STATE);
 	}
 
 	/**
@@ -393,6 +450,9 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		stateEClass.getESuperTypes().add(this.getRegularState());
 		stateEClass.getESuperTypes().add(this.getCompositeElement());
 		regularStateEClass.getESuperTypes().add(this.getVertex());
+		choiceEClass.getESuperTypes().add(this.getPseudostate());
+		exitEClass.getESuperTypes().add(this.getPseudostate());
+		finalStateEClass.getESuperTypes().add(this.getRegularState());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -406,7 +466,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Target(), this.getVertex(), this.getVertex_IncomingTransitions(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_OutgoingTransitions(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_OutgoingTransitions(), "source", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -420,6 +480,12 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 
 		initEClass(compositeElementEClass, CompositeElement.class, "CompositeElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeElement_Regions(), this.getRegion(), null, "regions", null, 0, -1, CompositeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(choiceEClass, Choice.class, "Choice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

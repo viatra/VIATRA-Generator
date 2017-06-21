@@ -63,7 +63,7 @@ public interface Transition extends EObject {
 	 * @see #setSource(Vertex)
 	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage#getTransition_Source()
 	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Vertex#getOutgoingTransitions
-	 * @model opposite="outgoingTransitions" required="true" transient="false" ordered="false"
+	 * @model opposite="outgoingTransitions" transient="false" ordered="false"
 	 * @generated
 	 */
 	Vertex getSource();

@@ -136,6 +136,30 @@ public class YakindummSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case YakindummPackage.CHOICE: {
+				Choice choice = (Choice)theEObject;
+				T result = caseChoice(choice);
+				if (result == null) result = casePseudostate(choice);
+				if (result == null) result = caseVertex(choice);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case YakindummPackage.EXIT: {
+				Exit exit = (Exit)theEObject;
+				T result = caseExit(exit);
+				if (result == null) result = casePseudostate(exit);
+				if (result == null) result = caseVertex(exit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case YakindummPackage.FINAL_STATE: {
+				FinalState finalState = (FinalState)theEObject;
+				T result = caseFinalState(finalState);
+				if (result == null) result = caseRegularState(finalState);
+				if (result == null) result = caseVertex(finalState);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -287,6 +311,51 @@ public class YakindummSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCompositeElement(CompositeElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Choice</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Choice</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseChoice(Choice object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Exit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Exit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExit(Exit object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Final State</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Final State</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFinalState(FinalState object) {
 		return null;
 	}
 

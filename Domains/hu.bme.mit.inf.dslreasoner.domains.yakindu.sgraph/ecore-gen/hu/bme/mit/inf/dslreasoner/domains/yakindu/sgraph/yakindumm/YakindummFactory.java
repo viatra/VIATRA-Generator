@@ -76,6 +76,33 @@ public interface YakindummFactory extends EFactory {
 	State createState();
 
 	/**
+	 * Returns a new object of class '<em>Choice</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Choice</em>'.
+	 * @generated
+	 */
+	Choice createChoice();
+
+	/**
+	 * Returns a new object of class '<em>Exit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Exit</em>'.
+	 * @generated
+	 */
+	Exit createExit();
+
+	/**
+	 * Returns a new object of class '<em>Final State</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Final State</em>'.
+	 * @generated
+	 */
+	FinalState createFinalState();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -62,6 +62,9 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 			case YakindummPackage.ENTRY: return createEntry();
 			case YakindummPackage.SYNCHRONIZATION: return createSynchronization();
 			case YakindummPackage.STATE: return createState();
+			case YakindummPackage.CHOICE: return createChoice();
+			case YakindummPackage.EXIT: return createExit();
+			case YakindummPackage.FINAL_STATE: return createFinalState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -125,6 +128,36 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Choice createChoice() {
+		ChoiceImpl choice = new ChoiceImpl();
+		return choice;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Exit createExit() {
+		ExitImpl exit = new ExitImpl();
+		return exit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FinalState createFinalState() {
+		FinalStateImpl finalState = new FinalStateImpl();
+		return finalState;
 	}
 
 	/**
