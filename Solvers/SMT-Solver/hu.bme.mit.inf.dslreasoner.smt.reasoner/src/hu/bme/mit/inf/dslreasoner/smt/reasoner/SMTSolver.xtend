@@ -41,9 +41,9 @@ class SMTSolver extends LogicReasoner{
 		} else throw new IllegalArgumentException('''The configuration have to be an «SmtSolverConfiguration.simpleName»!''')
 	}
 	
-	override getInterpretation(ModelResult modelResult) {
-		val representation = modelResult.representation as SMTDocument
+	override getInterpretations(ModelResult modelResult) {
+		val representation = modelResult.representation.head as SMTDocument
 		val trace = modelResult.trace as Logic2SmtMapperTrace
-		return new SmtModelInterpretation(trace.problem,representation,trace.forwardMapper,trace)
+		return #[new SmtModelInterpretation(trace.problem,representation,trace.forwardMapper,trace)]
 	}
 }
