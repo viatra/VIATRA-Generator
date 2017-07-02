@@ -69,7 +69,7 @@ class TypeConsistencyChecker extends LogicReasoner{
 		}
 	}
 	
-	override getInterpretation(ModelResult modelResult) {
+	override getInterpretations(ModelResult modelResult) {
 		throw new UnsupportedOperationException('''This solver is unable to create interpretations!''')
 	}
 }
