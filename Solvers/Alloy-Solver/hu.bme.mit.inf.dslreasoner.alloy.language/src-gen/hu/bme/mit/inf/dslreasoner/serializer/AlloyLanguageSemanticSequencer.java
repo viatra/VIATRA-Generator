@@ -522,7 +522,7 @@ public class AlloyLanguageSemanticSequencer extends AbstractDelegatingSemanticSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AlloyLanguagePackage.Literals.ALS_REFERENCE__REFERRED));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationIDTerminalRuleCall_4_1_0_1(), semanticObject.eGet(AlloyLanguagePackage.Literals.ALS_REFERENCE__REFERRED, false));
+		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationIDTerminalRuleCall_4_1_0_1(), semanticObject.getReferred());
 		feeder.finish();
 	}
 	

@@ -73,7 +73,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 
 	/**
 	 * Ambiguous syntax:
-	 *     'and' | '&&'
+	 *     '&&' | 'and'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     {ALSAnd.leftOperand=} (ambiguity) rightOperand=ALSComparison
@@ -168,7 +168,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Ambiguous syntax:
-	 *     'iff' | '<=>'
+	 *     '<=>' | 'iff'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     {ALSIff.leftOperand=} (ambiguity) rightOperand=ALSImpl

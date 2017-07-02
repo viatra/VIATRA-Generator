@@ -21,6 +21,11 @@ import org.eclipse.emf.common.CommonPlugin
 import java.util.ArrayList
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDocument
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
+import com.google.common.util.concurrent.SimpleTimeLimiter
+import java.util.concurrent.Callable
+import java.util.concurrent.TimeUnit
+import com.google.common.util.concurrent.UncheckedTimeoutException
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 
 class AlloySolverException extends Exception{
 	new(String s) { super(s) }
@@ -34,9 +39,8 @@ class AlloySolverException extends Exception{
 	List<String> warnings
 	List<String> debugs
 	long kodkodTime
-	long runtimeTime
-	
-	A4Solution solution
+	val List<Pair<A4Solution, Long>> aswers
+	val boolean finishedBeforeTimeout
 }
 
 class AlloyHandler {
@@ -63,6 +67,7 @@ class AlloyHandler {
 			if(configuration.solver.externalSolver) {
 				it.solverDirectory = configuration.solverPath
 			}
+			//it.inferPartialInstance
 			it.tempDirectory = CommonPlugin.resolve(workspace.workspaceURI).toFileString
 		]
 		
@@ -70,8 +75,8 @@ class AlloyHandler {
 		var Command command = null;
 		var CompModule compModule = null
 		
+		// Start: Alloy -> Kodkod
 		val kodkodTransformStart = System.currentTimeMillis();
-		
 		try {
 			if(configuration.writeToFile) {
 				compModule = CompUtil.parseEverything_fromFile(reporter,null,path)
@@ -85,23 +90,26 @@ class AlloyHandler {
 			throw new AlloySolverException(e.message,warnings,e)
 		}
 		val kodkodTransformFinish = System.currentTimeMillis - kodkodTransformStart
+		// Finish: Alloy -> Kodkod
 		
-		//Execute
-		var A4Solution answer = null;
-		try {
-			answer = TranslateAlloyToKodkod.execute_command(reporter,compModule.allSigs,command,options)
-		}catch(Exception e) {
-			warnings +=e.message
-		}
-		
-		var long runtimeFromAnswer;
-		if(runtime.empty) {
-			runtimeFromAnswer = System.currentTimeMillis - (kodkodTransformStart + kodkodTransformFinish)
+		val limiter = new SimpleTimeLimiter
+		val callable = new AlloyCallerWithTimeout(warnings,debugs,reporter,options,command,compModule,configuration.solutionScope.numberOfRequiredSolution)
+		var List<Pair<A4Solution, Long>> answers
+		var boolean finished
+		if(configuration.runtimeLimit == LogicSolverConfiguration::Unlimited) {
+			answers = callable.call
+			finished = true
 		} else {
-			runtimeFromAnswer = runtime.head
+			try{
+				answers = limiter.callWithTimeout(callable,configuration.runtimeLimit,TimeUnit.SECONDS,true)
+				finished = true
+			} catch (UncheckedTimeoutException e) {
+				answers = callable.partialAnswers
+				finished = false
+			}
 		}
-		
-		return new MonitoredAlloySolution(warnings,debugs,kodkodTransformFinish,runtimeFromAnswer,answer)
+
+		new MonitoredAlloySolution(warnings,debugs,kodkodTransformFinish,answers,finished)
 	}
 	
 	val static Map<SolverConfiguration, SatSolver> previousSolverConfigurations = new HashMap
@@ -135,6 +143,73 @@ class AlloyHandler {
 	
 	def isExternalSolver(AlloyBackendSolver backedSolver) {
 		return !(backedSolver == AlloyBackendSolver.SAT4J)
+	}
+}
+
+class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
+	
+	val List<String> warnings
+	val List<String> debugs
+	val A4Reporter reporter
+	val A4Options options
+	
+	val Command command
+	val CompModule compModule
+	val int numberOfRequiredSolution
+	
+	val List<Pair<A4Solution,Long>> answers = new LinkedList()
+	
+	new(List<String> warnings,
+		List<String> debugs,
+		A4Reporter reporter,
+		A4Options options,
+		Command command,
+		CompModule compModule,
+		int numberOfRequiredSolution)
+	{
+		this.warnings = warnings
+		this.debugs = debugs
+		this.reporter = reporter
+		this.options = options
+		this.command = command
+		this.compModule = compModule
+		this.numberOfRequiredSolution = numberOfRequiredSolution
+	}
+	
+	override call() throws Exception {
+		val startTime = System.currentTimeMillis
+		
+		// Start: Execute
+		var A4Solution lastAnswer = null
+		try {
+			do{
+				if(lastAnswer == null) {
+					lastAnswer = TranslateAlloyToKodkod.execute_command(reporter,compModule.allSigs,command,options)
+				} else {
+					lastAnswer = lastAnswer.next
+				}
+				
+				val runtime = System.currentTimeMillis -startTime
+				synchronized(this) {
+					answers += lastAnswer->runtime
+				}
+				println( answers.size )
+			} while(lastAnswer.satisfiable != false && hasEnoughSolution(answers))
+			
+		}catch(Exception e) {
+			warnings +=e.message
+		}
+		// Finish: execute
+		return answers
+	}
+	
+	def hasEnoughSolution(List<?> answers) {
+		if(numberOfRequiredSolution < 0) return false
+		else return answers.size < numberOfRequiredSolution
+	}
+	
+	public def getPartialAnswers() {
+		return answers
 	}
 }
 

@@ -277,7 +277,7 @@ class Logic2AlloyLanguageMapper {
 			it.typeScopes+= createALSSigScope => [
 				it.type= typeMapper.getUndefinedSupertype(trace)
 				it.number = typeMapper.getUndefinedSupertypeScope(config.typeScopes.maxNewElements,trace) 
-				//it.exactly = (config.typeScopes.maxElements == config.typeScopes.minElements)
+				it.exactly = (config.typeScopes.maxNewElements == config.typeScopes.minNewElements)
 			]
 			if(config.typeScopes.maxIntScope == LogicSolverConfiguration::Unlimited) throw new UnsupportedOperationException(
 				'''An integer scope have to be specified for Alloy!''')

@@ -6,28 +6,30 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 class Alloy2LogicMapper {
 	val extension LogicresultFactory resultFactory = LogicresultFactory.eINSTANCE
 	
-	public def transformOutput(LogicProblem problem, MonitoredAlloySolution solution, Logic2AlloyLanguageMapperTrace trace, long transformationTime) {
-		if(solution == null) {
+	public def transformOutput(LogicProblem problem, int requiredNumberOfSolution, MonitoredAlloySolution monitoredAlloySolution, Logic2AlloyLanguageMapperTrace trace, long transformationTime) {
+		val models = monitoredAlloySolution.aswers.map[it.key].toList
+		
+		if(monitoredAlloySolution.finishedBeforeTimeout) {
 			return createInsuficientResourcesResult => [
 				it.problem = problem
-				it.statistics = transformStatistics(solution,transformationTime)
+				it.representation += models
+				it.trace = trace
+				it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
 			]
 		} else {
-			val logicResult = solution.solution
-			if(logicResult.satisfiable) {
+			if(models.last.satisfiable || requiredNumberOfSolution == -1) {
 				return createModelResult => [
 					it.problem = problem
-					it.representation += solution
-					it.maxInteger = logicResult.max
-					it.minInteger = logicResult.min
+					it.representation += models
 					it.trace = trace
-					it.statistics = transformStatistics(solution,transformationTime)
+					it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
 				]
 			} else {
 				return createInconsistencyResult => [
 					it.problem = problem
-					//trace?
-					it.statistics = transformStatistics(solution,transformationTime)
+					it.representation += models
+					it.trace = trace
+					it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
 				]
 			}
 		}
@@ -36,13 +38,29 @@ class Alloy2LogicMapper {
 	def transformStatistics(MonitoredAlloySolution solution, long transformationTime) {
 		createStatistics => [
 			it.transformationTime = transformationTime as int
-			if(solution != null) {
-				it.solverTime = solution.runtimeTime as int
-				it.entries += LogicresultFactory.eINSTANCE.createIntStatisticEntry => [
-					it.name = "KoodkodToCNFTransformationTime"
-					it.value = solution.getKodkodTime as int
+			for(solutionIndex : 0..<solution.aswers.size) {
+				val solutionTime = solution.aswers.get(solutionIndex).value
+				 it.entries+= createIntStatisticEntry => [
+					it.name = '''Answer«solutionIndex»Time'''
+					it.value = solutionTime.intValue
 				]
 			}
+			it.entries+= createIntStatisticEntry => [
+				it.name = "Alloy2KodKodTransformationTime"
+				it.value = solution.kodkodTime as int
+			]
+			it.entries+= createIntStatisticEntry => [
+				it.name = "Alloy2KodKodTransformationTime"
+				it.value = solution.kodkodTime as int
+			]
+			it.entries+= createStringStatisticEntry => [
+				it.name = "warnings"
+				it.value = '''[«FOR warning : solution.warnings SEPARATOR ","»«warning»«ENDFOR»]'''
+			]
 		]
+	}
+	
+	def sum(Iterable<Long> ints) {
+		ints.reduce[p1, p2|p1+p2]
 	}
 }
