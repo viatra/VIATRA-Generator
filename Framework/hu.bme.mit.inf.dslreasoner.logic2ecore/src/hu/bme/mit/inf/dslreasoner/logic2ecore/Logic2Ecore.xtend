@@ -14,6 +14,7 @@ import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import java.util.List
 import java.util.Collection
+import org.eclipse.emf.ecore.EStructuralFeature
 
 class Logic2Ecore {
 	private val extension LogicProblemBuilder problemBuilder = new LogicProblemBuilder
@@ -28,7 +29,6 @@ class Logic2Ecore {
 		val allClasses = ecore2Logic.allClassesInScope(forwardTrace)
 		val elements = new HashSet
 		val element2Classes = new HashMap
-		
 		
 		for(clazz: allClasses) {
 			val type = ecore2Logic.TypeofEClass(forwardTrace,clazz);
@@ -48,20 +48,22 @@ class Logic2Ecore {
 		
 		val allReferences = ecore2Logic.allReferencesInScope(forwardTrace)
 		for(referenceType : allReferences) {
-			for(sourceElement : elements) {
-				val sourceObject = sourceElement.lookup(element2Object)
-				if(sourceObject.eClass.isSuperTypeOf(referenceType.EContainingClass)) {
-					for(targetElement: elements) {
-						val targetObject = targetElement.lookup(element2Object)
-						if(targetObject.eClass.isSuperTypeOf(referenceType.EReferenceType)) {
-							val expression = ecore2Logic.IsInReference(forwardTrace,sourceElement,targetElement,referenceType)
-							val linkExist = interpretation.evalAsBool(expression)
-							if(linkExist) {
-								if(referenceType.isMany) {
-									val list = sourceObject.eGet(referenceType) as List<? super EObject>
-									list+= targetObject
-								} else {
-									sourceObject.eSet(referenceType,targetObject)
+			if(referenceType.canSetFeature) {
+				for(sourceElement : elements) {
+					val sourceObject = sourceElement.lookup(element2Object)
+					if(referenceType.EContainingClass.isSuperTypeOf(sourceObject.eClass)) {
+						for(targetElement: elements) {
+							val targetObject = targetElement.lookup(element2Object)
+							if(referenceType.EReferenceType.isSuperTypeOf(targetObject.eClass)) {
+								val expression = ecore2Logic.IsInReference(forwardTrace,sourceElement,targetElement,referenceType)
+								val linkExist = interpretation.evalAsBool(expression)
+								if(linkExist) {
+									if(referenceType.isMany) {
+										val list = sourceObject.eGet(referenceType) as List<? super EObject>
+										list+= targetObject
+									} else {
+										sourceObject.eSet(referenceType,targetObject)
+									}
 								}
 							}
 						}
@@ -70,9 +72,13 @@ class Logic2Ecore {
 			}
 		}
 		
-		/// Attributes
+		/// + Attributes
 		
 		return element2Object.values.root
+	}
+	
+	private def canSetFeature(EStructuralFeature feature) {
+		feature.changeable && !feature.derived
 	}
 	
 	def  mostConcreteType(Set<EClass> classes) {
@@ -86,6 +92,11 @@ class Logic2Ecore {
 	}
 	
 	def getRoot(Collection<EObject> objects) {
-		objects.filter[eContainer === null].head
+		val rootCandidates = objects.filter[eContainer === null]
+		if(rootCandidates.size == 1) {
+			return rootCandidates.head
+		} else {
+			throw new AssertionError("Multiple root objects")
+		}
 	}
 }

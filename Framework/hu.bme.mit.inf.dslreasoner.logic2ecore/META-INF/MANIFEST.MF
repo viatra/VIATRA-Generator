@@ -10,4 +10,5 @@ Require-Bundle: com.google.guava,
  org.eclipse.xtend.lib.macro,
  hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
  org.eclipse.ocl.ecore;bundle-version="3.6.0"
+Export-Package: hu.bme.mit.inf.dslreasoner.logic2ecore
 

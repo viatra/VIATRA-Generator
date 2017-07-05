@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference
 
 interface EReferenceMapper{
 	def void transformEReferences(Ecore2Logic_Trace trace, LogicProblem problem, Iterable<EReference> classes);
+	def Iterable<EReference> allReferencesInScope(Ecore2Logic_Trace trace) 
 	def Term IsInReference(Ecore2Logic_Trace trace, TermDescription source, TermDescription target, EReference type)
 	def RelationDeclaration relationOfReference(Ecore2Logic_Trace trace, EReference reference)
 }
@@ -151,4 +152,9 @@ class EReferenceMapper_RelationsOverTypes implements EReferenceMapper{
 	override relationOfReference(Ecore2Logic_Trace trace, EReference reference) {
 		trace.referenceMapperTrace.asTrace.indicators.get(reference)
 	}
+	
+	override allReferencesInScope(Ecore2Logic_Trace trace) {
+		trace.referenceMapperTrace.asTrace.indicators.keySet
+	}
+	
 }
