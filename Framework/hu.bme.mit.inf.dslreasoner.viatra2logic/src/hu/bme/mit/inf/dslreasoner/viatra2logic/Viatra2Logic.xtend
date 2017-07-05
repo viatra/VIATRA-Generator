@@ -27,7 +27,6 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.viatra.query.runtime.emf.EMFQueryMetaContext
 import org.eclipse.viatra.query.runtime.emf.types.BaseEMFTypeKey
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey
-import org.eclipse.viatra.query.runtime.emf.types.EClassUnscopedTransitiveInstancesKey
 import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable
@@ -73,7 +72,11 @@ class  Viatra2Logic {
 	{
 		val viatra2LogicTrace = new Viatra2LogicTrace
 		for(query: queries.patterns) {
-			this.transformQueryHeader(query,ecore2LogicTrace,viatra2LogicTrace,config)
+			try {
+				this.transformQueryHeader(query,ecore2LogicTrace,viatra2LogicTrace,config)
+			} catch(IllegalArgumentException e) {
+				throw new IllegalArgumentException('''Unable to translate query "«query.fullyQualifiedName»".''',e)
+			}
 		}
 		for(query: queries.patterns) {
 			this.transformQuerySpecification(query,ecore2LogicTrace,viatra2LogicTrace,config)
