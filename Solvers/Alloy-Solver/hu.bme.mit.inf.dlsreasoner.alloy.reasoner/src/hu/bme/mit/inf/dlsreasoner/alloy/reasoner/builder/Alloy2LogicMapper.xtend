@@ -9,7 +9,7 @@ class Alloy2LogicMapper {
 	public def transformOutput(LogicProblem problem, int requiredNumberOfSolution, MonitoredAlloySolution monitoredAlloySolution, Logic2AlloyLanguageMapperTrace trace, long transformationTime) {
 		val models = monitoredAlloySolution.aswers.map[it.key].toList
 		
-		if(monitoredAlloySolution.finishedBeforeTimeout) {
+		if(!monitoredAlloySolution.finishedBeforeTimeout) {
 			return createInsuficientResourcesResult => [
 				it.problem = problem
 				it.representation += models

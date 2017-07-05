@@ -191,10 +191,9 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 				
 				val runtime = System.currentTimeMillis -startTime
 				synchronized(this) {
-					answers += lastAnswer->runtime
+					answers += (lastAnswer->runtime)
 				}
-				println( answers.size )
-			} while(lastAnswer.satisfiable != false && hasEnoughSolution(answers))
+			} while(lastAnswer.satisfiable != false && !hasEnoughSolution(answers))
 			
 		}catch(Exception e) {
 			warnings +=e.message
@@ -205,7 +204,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 	
 	def hasEnoughSolution(List<?> answers) {
 		if(numberOfRequiredSolution < 0) return false
-		else return answers.size < numberOfRequiredSolution
+		else return answers.size() == numberOfRequiredSolution
 	}
 	
 	public def getPartialAnswers() {

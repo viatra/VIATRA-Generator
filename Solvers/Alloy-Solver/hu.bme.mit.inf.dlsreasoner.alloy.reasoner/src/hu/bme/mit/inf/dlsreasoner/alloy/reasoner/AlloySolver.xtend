@@ -16,6 +16,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution
+import java.util.List
 
 class AlloySolver extends LogicReasoner{
 	
@@ -72,16 +74,16 @@ class AlloySolver extends LogicReasoner{
 	}
 	
 	override getInterpretations(ModelResult modelResult) {
-		val answers = (modelResult.representation as MonitoredAlloySolution).aswers.map[key]
-		val res = answers.map [
+		//val answers = (modelResult.representation as MonitoredAlloySolution).aswers.map[key]
+		val sols = modelResult.representation// as List<A4Solution>
+		//val res = answers.map 
+		sols.map[
 			new AlloyModelInterpretation(
 				new AlloyModelInterpretation_TypeInterpretation_FilteredTypes,
-				it,
+				it as A4Solution,
 				forwardMapper,
 				modelResult.trace as Logic2AlloyLanguageMapperTrace
 			)
 		]
-			
-		return res
 	}	
 }
