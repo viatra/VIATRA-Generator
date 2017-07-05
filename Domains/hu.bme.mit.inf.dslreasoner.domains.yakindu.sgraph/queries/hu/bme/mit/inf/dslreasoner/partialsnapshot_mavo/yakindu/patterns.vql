@@ -50,7 +50,7 @@ pattern multipleTransitionFromEntry(e : Entry, t1 : Transition, t2: Transition) 
 
 @Constraint(severity="error", message="error", key = {e})
 pattern outgoingFromExit(t : Transition, e : Exit) {
-	find transition(t, e, _);
+	Exit.outgoingTransitions(e,t);
 }
 
 /////////
@@ -59,7 +59,7 @@ pattern outgoingFromExit(t : Transition, e : Exit) {
 
 @Constraint(severity="error", message="error", key = {f})
 pattern outgoingFromFinal(t : Transition, f : FinalState) {
-	find transition(t, f, _);
+	FinalState.outgoingTransitions(f,t);
 }
 
 /////////
