@@ -68,39 +68,18 @@
   <extension id="GeneratedQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:GeneratedQueries" id="GeneratedQueries">
       <query-specification fqn="mayEquivalent"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionsAreNotSiblings"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_incomingToEntry"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noEntryInRegion"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_hasNoIncomingOrOutgoing"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_notSynchronizingStates"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_outgoingTrainsitionToDifferentRegion"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedVerticesInSameRegion"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleEntryInRegion"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleTransitionFromEntry"/>
-      <query-specification fqn="invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noOutgoingTransitionFromEntry"/>
-      <query-specification fqn="unfinishedLowerMultiplicity_inreference_target_Transition"/>
-      <query-specification fqn="unfinishedLowerMultiplicity_inreference_source_Transition"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionsAreNotSiblings"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_incomingToEntry"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noEntryInRegion"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_hasNoIncomingOrOutgoing"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_notSynchronizingStates"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_outgoingTrainsitionToDifferentRegion"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedVerticesInSameRegion"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleEntryInRegion"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_multipleTransitionFromEntry"/>
-      <query-specification fqn="unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noOutgoingTransitionFromEntry"/>
       <query-specification fqn="createObject_class_Entry_by_inreference_vertices_Region"/>
       <query-specification fqn="createObject_class_State_by_inreference_vertices_Region"/>
-      <query-specification fqn="createObject_class_Transition_by_inreference_outgoingTransitions_Vertex_with_inreference_source_Transition"/>
       <query-specification fqn="createObject_class_Region_by_inreference_regions_CompositeElement"/>
+      <query-specification fqn="createObject_class_Transition_by_inreference_outgoingTransitions_Vertex_with_inreference_source_Transition"/>
+      <query-specification fqn="createObject_UndefinedPartOf_class_Statechart"/>
       <query-specification fqn="createObject_class_Synchronization_by_inreference_vertices_Region"/>
       <query-specification fqn="refineTypeTo_class_Entry"/>
       <query-specification fqn="refineTypeTo_class_State"/>
-      <query-specification fqn="refineTypeTo_class_Transition"/>
       <query-specification fqn="refineTypeTo_class_Region"/>
+      <query-specification fqn="refineTypeTo_class_Transition"/>
+      <query-specification fqn="refineTypeTo_UndefinedPartOf_class_Statechart"/>
       <query-specification fqn="refineTypeTo_class_Synchronization"/>
-      <query-specification fqn="refineTypeTo_class_Statechart"/>
       <query-specification fqn="refineRelation_inreference_incomingTransitions_Vertex_and_inreference_target_Transition"/>
     </group>
   </extension>

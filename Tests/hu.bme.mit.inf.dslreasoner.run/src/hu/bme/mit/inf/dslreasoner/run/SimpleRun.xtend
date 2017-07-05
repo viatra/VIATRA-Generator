@@ -30,6 +30,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
+import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
+import java.util.LinkedList
 
 class SimpleRun {
 	
@@ -47,6 +50,7 @@ class SimpleRun {
 		println("DSL loaded")
 		
 		val Ecore2Logic ecore2Logic = new Ecore2Logic
+		val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
 		val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
 		val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
 		
@@ -58,9 +62,9 @@ class SimpleRun {
 		
 		println("Problem created")
 		var LogicResult solution
-		
-		//*
-		val ViatraReasoner viatraSolver = new ViatraReasoner
+		var LogicReasoner reasoner
+		/*
+		reasoner = new ViatraReasoner
 		val viatraConfig = new ViatraReasonerConfiguration => [
 			it.typeScopes.maxNewElements = 10
 			it.typeScopes.minNewElements = 10
@@ -70,9 +74,9 @@ class SimpleRun {
 			it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
 			it.stateCoderStrategy = StateCoderStrategy::Neighbourhood
 		]
-		solution = viatraSolver.solve(logicProblem,viatraConfig,workspace)
+		solution = reasoner.solve(logicProblem,viatraConfig,workspace)
 		/*/
-		val AlloySolver alloyReasoner = new AlloySolver
+		reasoner = new AlloySolver
 		val alloyConfig = new AlloySolverConfiguration => [
 				it.typeScopes.maxNewElements = 5
 				it.typeScopes.minNewElements = 5
@@ -80,12 +84,19 @@ class SimpleRun {
 				it.typeScopes.maxIntScope = 0
 				it.writeToFile = true
 			]
-		solution = alloyReasoner.solve(logicProblem,alloyConfig,workspace)
+		solution = reasoner.solve(logicProblem,alloyConfig,workspace)
 		//*/
 		
 		println("Problem solved")
 		
-		solution.writeSolution(workspace)
+		val interpretations = reasoner.getInterpretations(solution as ModelResult)
+		val models = new LinkedList
+		for(interpretation : interpretations) {
+			val instanceModel = logic2Ecore.transformInterpretation(interpretation,modelGenerationProblem.trace)
+			models+=instanceModel
+		}
+		
+		solution.writeSolution(workspace, #[])
 	}
 	
 	def private static loadMetamodel() {
@@ -118,7 +129,7 @@ class SimpleRun {
 		inputs.readModel(EObject,"FAM.xmi").eResource.allContents.toList
 	}
 	
-	def static writeSolution(LogicResult solution, ReasonerWorkspace workspace) {
+	def static writeSolution(LogicResult solution, ReasonerWorkspace workspace, List<EObject> models) {
 		if(solution instanceof ModelResult) {
 			val representations = solution.representation
 			for(representationIndex : 0..<representations.size) {
@@ -134,6 +145,9 @@ class SimpleRun {
 				} else {
 					workspace.writeText('''solution«representationNumber».txt''',representation.toString)
 				}
+			}
+			for(model : models) {
+				workspace.writeModel(model,"model.xmi")
 			}
 			println("Solution saved and visualised")
 		} 

@@ -87,24 +87,40 @@ class FAMLoader extends MetamodelLoader{
 
 class YakinduLoader extends MetamodelLoader{
 	
+	private var useSynchronization = true;
+	public static val patternsWithSynchronization = #[
+		"synchHasNoOutgoing", "synchHasNoIncoming", "SynchronizedIncomingInSameRegion", "notSynchronizingStates",
+		"hasMultipleOutgoingTrainsition", "hasMultipleIncomingTrainsition", "SynchronizedRegionsAreNotSiblings",
+		"SynchronizedRegionDoesNotHaveMultipleRegions", "synchThree", "twoSynch"]
+	
 	new(ReasonerWorkspace workspace) {
 		super(workspace)
 	}
 	
+	public def setUseSynchronization(boolean useSynchronization) {
+		this.useSynchronization = useSynchronization
+	}
+	
 	override loadMetamodel() {
+		val useSynchInThisLoad = this.useSynchronization
+		
 		val package = YakindummPackage.eINSTANCE
-		val List<EClass> classes = package.EClassifiers.filter(EClass).toList
+		val List<EClass> classes = package.EClassifiers.filter(EClass).filter[(useSynchInThisLoad) || (it.name != "Synchronization")].toList
 		val List<EEnum> enums = package.EClassifiers.filter(EEnum).toList
 		val List<EEnumLiteral> literals = enums.map[ELiterals].flatten.toList
 		val List<EReference> references = classes.map[EReferences].flatten.toList
-
 		val List<EAttribute> attributes = classes.map[EAttributes].flatten.toList
 
 		return new EcoreMetamodelDescriptor(classes,#{},false,enums,literals,references,attributes)
 	}
 	override loadQueries(EcoreMetamodelDescriptor metamodel) {
+		val useSynchInThisLoad = this.useSynchronization
+		
 		val i = hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns.instance
-		val patterns = i.specifications.toList
+		val patterns = i.specifications.filter[spec |
+			useSynchInThisLoad ||
+			!patternsWithSynchronization.exists[spec.fullyQualifiedName.endsWith(it)]
+		].toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
 		val res = new ViatraQuerySetDescriptor(
@@ -126,7 +142,7 @@ class YakinduLoader extends MetamodelLoader{
 		this.workspace.readModel(EObject,"Yakindu.xmi").eResource.allContents.toList
 	}
 	
-	override additionalConstraints() {
+	override additionalConstraints() { //#[]
 		#[[method | new SGraphInconsistencyDetector(method)]]
 	}
 }
