@@ -51,9 +51,10 @@ import java.util.HashMap
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf
 
 @Data class InterpretationValidationResult {
 	val List<String> problems;
@@ -81,7 +82,7 @@ class LogicStructureBuilder{
 	 * @param term An expression which results in a logic element.
 	 * @return The logic element value of the expression. Returns the element directly, not a symbolic reference!
 	 */
-	def public DefinedElement evalAsElement(LogicModelInterpretation interpretation, TermDescription term) { term.resolve(interpretation,emptyMap) as DefinedElement}
+	def public DefinedElement evalAsElement(LogicModelInterpretation interpretation, TermDescription term) { term.toTerm.resolve(interpretation,emptyMap) as DefinedElement}
 	/**
 	 * Checks if the interpretation is a valid solution of the problem by checking the satisfactions of each assertion.
 	 * Returns the collection of failed assertions.
@@ -266,6 +267,19 @@ class LogicStructureBuilder{
 		else return left.asInteger % right.asInteger
 	}
 	
+	def protected dispatch Object resolve(InstanceOf instanceOf, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
+		val typeReference = instanceOf.range
+		if(typeReference instanceof ComplexTypeReference) {
+			val elements = this.getElements(interpretation,typeReference.referred)
+			val element = instanceOf.value.resolve(interpretation,variableBinding)
+			if(element instanceof DefinedElement) {
+				return elements.contains(element)
+			} else throw new AssertionError('''InstanceOf with «element.class.simpleName» object''') 
+		} else {
+			throw new AssertionError('''InstanceOf with «typeReference.class.simpleName» reference''')
+		}
+	}
+	
 	def protected dispatch Object resolve(Exists exists, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
 		executeExists(exists.expression,interpretation,variableBinding,exists.quantifiedVariables) }
 	def protected dispatch Object resolve(Forall forall, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
@@ -273,58 +287,90 @@ class LogicStructureBuilder{
 	
 	def protected dispatch Object resolve(SymbolicValue symbolicValue, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
 		val referenced = symbolicValue.symbolicReference
-		if(referenced instanceof DefinedElement) {
-			return referenced
-		} else if(referenced instanceof Variable)  {
-			return variableBinding.get(referenced)
-		} else if(referenced instanceof FunctionDeclaration) {
-			val parameterSubstitution = new ArrayList<Object>
-			if(! symbolicValue.parameterSubstitutions.empty) {
-				for(place : 0..symbolicValue.parameterSubstitutions.size-1) {
-					val variable = symbolicValue.parameterSubstitutions.get(place)
-					parameterSubstitution += variable.resolve(interpretation,variableBinding)
-				}
-			}
-			return interpretation.getInterpretation(referenced,parameterSubstitution)
-		} else if(referenced instanceof FunctionDefinition) {
-			val parameterSubstitution = new HashMap<Variable,Object>()
-			for(place: 0..<referenced.variable.size) {
-				parameterSubstitution.put(
-					referenced.variable.get(place),
-					symbolicValue.parameterSubstitutions.get(place).resolve(interpretation,variableBinding))
-			}
-			return referenced.value.resolve(interpretation,parameterSubstitution)
-		} else if(referenced instanceof RelationDeclaration) {
-			val parameterSubstitunion = new ArrayList<Object>
-			if(! symbolicValue.parameterSubstitutions.empty) {
-				for(place : 0..symbolicValue.parameterSubstitutions.size-1) {
-					val variable = symbolicValue.parameterSubstitutions.get(place)
-					parameterSubstitunion += variable.resolve(interpretation,variableBinding)
-				}
-			}
-			return (interpretation.getInterpretation(referenced,parameterSubstitunion) as Boolean)
-		} else if(referenced instanceof RelationDefinition) {
-			val parameterSubstitution = new HashMap<Variable,Object>()
-			for(place: 0..<referenced.variables.size) {
-				parameterSubstitution.put(
-					referenced.variables.get(place),
-					symbolicValue.parameterSubstitutions.get(place).resolve(interpretation,variableBinding))
-			}
-			return referenced.value.resolve(interpretation,parameterSubstitution)
-		} else if(referenced instanceof ConstantDeclaration) {
-			return interpretation.getInterpretation(referenced)
-		} else if(referenced instanceof ConstantDefinition) {
-			return referenced.value.resolve(interpretation,Collections.emptyMap);
-		} else throw new IllegalArgumentException('''Unknown referred symbol: «referenced»''')
+		return referenced.resolveSymbolicValue(interpretation,symbolicValue.parameterSubstitutions,variableBinding)
 	}
 	
-	// TermDescriptions are reduced to terms
-	def protected dispatch resolve(Variable variable, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
-		return variableBinding.get(variable)
+	protected dispatch def Object resolveSymbolicValue(DefinedElement element, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		return element
 	}
-
-	def protected dispatch resolve(DefinedElement definedElement, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
-		return definedElement
+	protected dispatch def Object resolveSymbolicValue(Variable variable, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		return variable.lookup(variableBinding)
+	}
+	protected dispatch def Object resolveSymbolicValue(FunctionDeclaration declaration, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		val internalDefinition = hasDefined(declaration)
+		if(internalDefinition === null) {
+			interpretation.getInterpretation(declaration,createBinding2(parameterSubstitution, interpretation, variableBinding))
+		} else {
+			internalDefinition.resolveSymbolicValue(interpretation,parameterSubstitution,variableBinding)
+		}
+	}
+	protected dispatch def Object resolveSymbolicValue(FunctionDefinition definition, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		return definition.value.resolve(interpretation,createBinding(interpretation,variableBinding,definition.variable,parameterSubstitution))
+	}
+	protected dispatch def Object resolveSymbolicValue(ConstantDeclaration declaration, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		val internalDefinition = hasDefined(declaration)
+		if(internalDefinition === null) {
+			return interpretation.getInterpretation(declaration)
+		} else {
+			return internalDefinition.resolveSymbolicValue(interpretation,parameterSubstitution,variableBinding)
+		}
+	}
+	protected dispatch def Object resolveSymbolicValue(ConstantDefinition definition, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		return definition.value.resolve(interpretation,emptyMap)
+	}
+	protected dispatch def Object resolveSymbolicValue(RelationDeclaration declaration, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		val internalDefinition = hasDefined(declaration)
+		if(internalDefinition === null) {
+			interpretation.getInterpretation(declaration,createBinding2(parameterSubstitution, interpretation, variableBinding))
+		} else {
+			internalDefinition.resolveSymbolicValue(interpretation,parameterSubstitution,variableBinding)
+		}
+	}
+	protected dispatch def Object resolveSymbolicValue(RelationDefinition definition, LogicModelInterpretation interpretation, List<? extends Term> parameterSubstitution, Map<Variable,Object> variableBinding) {
+		return definition.value.resolve(interpretation,createBinding(interpretation,variableBinding,definition.variables,parameterSubstitution))
+	}
+	
+	private def hasDefined(RelationDeclaration declaration) {
+		val container = declaration.eContainer
+		if(container instanceof LogicProblem) {
+			val internalDefinitions = container.relations.filter(RelationDefinition).filter[it.defines === declaration]
+			if(!internalDefinitions.empty) {
+				return internalDefinitions.head
+			}
+		}
+		return null
+	}
+	private def hasDefined(FunctionDeclaration declaration) {
+		val container = declaration.eContainer
+		if(container instanceof LogicProblem) {
+			val internalDefinitions = container.relations.filter(FunctionDefinition).filter[it.defines === declaration]
+			if(!internalDefinitions.empty) {
+				return internalDefinitions.head
+			}
+		}
+		return null
+	}
+	private def hasDefined(ConstantDeclaration declaration) {
+		val container = declaration.eContainer
+		if(container instanceof LogicProblem) {
+			val internalDefinitions = container.relations.filter(ConstantDefinition).filter[it.defines === declaration]
+			if(!internalDefinitions.empty) {
+				return internalDefinitions.head
+			}
+		}
+		return null
+	}
+	private def createBinding(LogicModelInterpretation interpretation, Map<Variable,Object> previousVariableBinding, List<Variable> definitionVariables, List<? extends Term> parameterSubstitution){
+		val binding = new HashMap<Variable,Object>(previousVariableBinding)
+		for(place: 0..<definitionVariables.size) {
+			binding.put(
+				definitionVariables.get(place),
+				parameterSubstitution.get(place).resolve(interpretation,previousVariableBinding))
+		}
+		return binding
+	}
+	private def List<Object> createBinding2(List<? extends Term> parameterSubstitution, LogicModelInterpretation interpretation, Map<Variable, Object> variableBinding) {
+		parameterSubstitution.map[it.resolve(interpretation,variableBinding)]
 	}
 	
 	def private compare(Object left, Object right) {
