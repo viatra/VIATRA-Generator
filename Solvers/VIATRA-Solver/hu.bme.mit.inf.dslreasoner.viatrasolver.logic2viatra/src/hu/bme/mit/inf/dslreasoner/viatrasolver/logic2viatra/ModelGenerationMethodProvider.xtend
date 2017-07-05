@@ -1,7 +1,5 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra
 
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules.GoalConstraintProvider
@@ -9,15 +7,13 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules.RefinementRule
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.Collection
-import java.util.LinkedHashMap
 import java.util.List
-import org.eclipse.viatra.query.runtime.api.GenericPatternMatch
+import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.viatra.query.runtime.api.IPatternMatch
 
 class ModelGenerationStatistics {
 	public var long transformationExecutionTime = 0
@@ -36,6 +32,8 @@ class ModelGenerationStatistics {
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWF
 	 
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWF
+	 
+	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allPatterns
 }
 enum TypeInferenceMethod {
 	Generic, PreliminaryAnalysis
@@ -72,7 +70,8 @@ class ModelGenerationMethodProvider {
 			relationRefinementRules.values,
 			unfinishedMultiplicities,
 			unfinishedWF,
-			invalidWF
+			invalidWF,
+			queries.allQueries
 		)
 	}
 }

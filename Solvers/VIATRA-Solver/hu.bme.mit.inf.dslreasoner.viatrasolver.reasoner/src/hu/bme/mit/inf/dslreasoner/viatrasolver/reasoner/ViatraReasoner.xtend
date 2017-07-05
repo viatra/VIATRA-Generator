@@ -25,6 +25,18 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import java.util.List
+import java.util.Map
+import org.eclipse.viatra.dse.base.ThreadContext
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
+import org.eclipse.viatra.query.runtime.api.IPatternMatch
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification
+import java.util.Collection
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import java.util.SortedMap
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.common.util.EList
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -41,6 +53,9 @@ class ViatraReasoner extends LogicReasoner{
 	public new(LogicReasoner inconsistencyDetector) {
 		this.inconsistencyDetector = inconsistencyDetector
 	}
+	
+	public static var Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  allPatterns = null
+	//public static var List<SortedMap<String, Integer>> additionalMatches = null
 	
 	override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
 		val viatraConfig = configuration.asConfig
@@ -71,6 +86,7 @@ class ViatraReasoner extends LogicReasoner{
 			viatraConfig.nameNewElements,
 			viatraConfig.typeInferenceMethod
 		)
+		allPatterns = method.allPatterns
 		
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
@@ -83,7 +99,7 @@ class ViatraReasoner extends LogicReasoner{
 			dse.addGlobalConstraint(additionalConstraint.apply(method))
 		}
 		
-		dse.setInitialModel(emptySolution)
+		dse.setInitialModel(emptySolution,false)
 		
 		var IStateCoderFactory statecoder = if(viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
 			new NeighbourhoodBasedStateCoderFactory
@@ -107,7 +123,8 @@ class ViatraReasoner extends LogicReasoner{
 		val strategy = new BestFirstStrategyForModelGeneration(
 			workspace,inconsistencyDetector,
 			viatraConfig.inconsistencDetectorConfiguration,
-			viatraConfig.diversityRequirement)
+			viatraConfig.diversityRequirement/*,
+			method.allPatterns*/)
 		
 		val transformationTime = System.nanoTime - transformationStartTime
 		val solverStartTime = System.nanoTime
@@ -124,14 +141,15 @@ class ViatraReasoner extends LogicReasoner{
 		val solverTime = System.nanoTime - solverStartTime
 		
 		val statecoderFinal = statecoder
+		//additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
 		val statistics = createStatistics => [
 			//it.solverTime = viatraConfig.runtimeLimit
 			it.solverTime = (solverTime/1000000) as int
 			it.transformationTime = (transformationTime/1000000) as int
 			for(x : 0..<strategy.solutionStoreWithCopy.allRuntimes.size) {
 				it.entries += createIntStatisticEntry => [
-					it.name = '''_Sulution«x»FoundAt'''
-					it.value = strategy.solutionStoreWithCopy.allRuntimes.get(x).intValue
+					it.name = '''_Solution«x»FoundAt'''
+					it.value = (strategy.solutionStoreWithCopy.allRuntimes.get(x)/1000000) as int
 				]
 			}
 			it.entries += createIntStatisticEntry => [
@@ -179,7 +197,7 @@ class ViatraReasoner extends LogicReasoner{
 				*/
 				return factory.createModelResult => [
 					it.problem = problem
-					it.trace = null
+					it.trace = strategy.solutionStoreWithCopy.copyTraces
 					it.representation += strategy.solutionStoreWithCopy.solutions
 					it.statistics = statistics
 				]
@@ -199,11 +217,14 @@ class ViatraReasoner extends LogicReasoner{
         sc.sumStatecoderRuntime
     }
 
-	override getInterpretation(ModelResult modelResult) {
-		return new PartialModelAsLogicInterpretation
+	override getInterpretations(ModelResult modelResult) {
+		val indexes = 0..<modelResult.representation.size
+		val traces = modelResult.trace as List<Map<EObject, EObject>>;
+		val res = indexes.map[i | new PartialModelAsLogicInterpretation(modelResult.representation.get(i) as PartialInterpretation,traces.get(i))].toList
+		return res
 	}
 	
-	def ViatraReasonerConfiguration asConfig(LogicSolverConfiguration configuration) {
+	private def ViatraReasonerConfiguration asConfig(LogicSolverConfiguration configuration) {
 		if(configuration instanceof ViatraReasonerConfiguration) {
 			return configuration
 		} else throw new IllegalArgumentException('''Wrong configuration. Expected: «ViatraReasonerConfiguration.name», but got: «configuration.class.name»"''')

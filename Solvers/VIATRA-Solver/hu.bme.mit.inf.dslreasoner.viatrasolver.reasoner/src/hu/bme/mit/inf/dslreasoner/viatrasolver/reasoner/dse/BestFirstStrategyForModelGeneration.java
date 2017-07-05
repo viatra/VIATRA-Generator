@@ -11,12 +11,17 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
@@ -24,6 +29,10 @@ import org.eclipse.viatra.dse.base.ThreadContext;
 import org.eclipse.viatra.dse.objectives.Fitness;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration;
@@ -57,11 +66,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
     private SolutionStoreWithCopy solutionStoreWithCopy;
     private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
     private int numberOfStatecoderFail=0;
+    //Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> additionalPatterns = null;
+    //List<ViatraQueryMatcher<? extends IPatternMatch>> additionalMatchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>(); 
 
     private int maxDepth = Integer.MAX_VALUE;
     private boolean isInterrupted = false;
     //private boolean backTrackIfSolution = true;
     private boolean onlyBetterFirst = false;
+
 
     private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
     private Logger logger = Logger.getLogger(IStrategy.class);
@@ -84,12 +96,15 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
     }
 
-    public BestFirstStrategyForModelGeneration(ReasonerWorkspace workspace, LogicReasoner reasoner, LogicSolverConfiguration configuration, DiversityDescriptor descriptor) {
-    			this.maxDepth = Integer.MAX_VALUE;
+    public BestFirstStrategyForModelGeneration(
+    		ReasonerWorkspace workspace, LogicReasoner reasoner, LogicSolverConfiguration configuration, DiversityDescriptor descriptor/*,
+    		Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> additionalPatterns*/) {
+    	this.maxDepth = Integer.MAX_VALUE;
         this.workspace = workspace;
         this.reasoner = reasoner;
         this.configuration = configuration;
         this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(descriptor);
+        //this.additionalPatterns = additionalPatterns;
     }
 
     @Override
@@ -108,6 +123,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
                 return objectiveComparatorHelper.compare(o2.fitness, o1.fitness);
             }
         };
+        
+        
 
         trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 
@@ -127,6 +144,18 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
     @Override
     public void explore() {
+    	
+    	/*if(this.additionalPatterns!=null) {
+        	for (IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> additionalPattern : additionalPatterns) {
+				try {
+					this.additionalMatchers.add(additionalPattern.getMatcher(context.getQueryEngine()));
+				} catch (ViatraQueryException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+        }*/
+    	
         final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 
         boolean globalConstraintsAreSatisfied = context.checkGlobalConstraints();
@@ -210,9 +239,15 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
                     final Fitness nextFitness = context.calculateFitness();
                     if (nextFitness.isSatisifiesHardObjectives()) {
                     	if(solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-                            solutionStoreWithCopy.newSolution(context);
+                    		/*SortedMap<String, Integer> x = new TreeMap<String, Integer>();
+                            for(ViatraQueryMatcher<? extends IPatternMatch> additioanMatcher : this.additionalMatchers) {
+                            	x.put(additioanMatcher.getPatternName(),additioanMatcher.countMatches());
+                            }*/
+                    		
+                            solutionStoreWithCopy.newSolution(context/*,x*/);
                             solutionStoreWithDiversityDescriptor.newSolution(context);
                             solutionStore.newSolution(context);
+                            
                             logger.debug("Found a solution.");
                     	}
                     }

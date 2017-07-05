@@ -19,6 +19,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.Collection
 
 @Data class GeneratedPatterns {
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
@@ -27,6 +28,7 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 	public Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
 	public Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
+	public Collection<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allQueries
 }
 
 class PatternProvider {
@@ -91,7 +93,8 @@ class PatternProvider {
 			unfinishedMultiplicityQueries,
 			refineObjectsQueries,
 			refineTypeQueries,
-			refineRelationQueries
+			refineRelationQueries,
+			queries.values
 		)
 	}
 }

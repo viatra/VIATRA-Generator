@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Partialinterpretation2logic
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
 Require-Bundle: com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
@@ -11,5 +11,4 @@ Require-Bundle: com.google.guava,
  hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0"
-Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
-
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
