@@ -189,6 +189,6 @@ class GenericTypeIndexer implements TypeIndexer {
 		'''find «patternName(type,modality)»(problem,interpretation,«variableName»);'''
 	}
 	public override referInstanceOf(EClass type, Modality modality, String variableName) {
-		'''find «modality.toString.toLowerCase»InstanceOf«base.canonizeName('''class «type.name»''')»(problem,interpretation,«variableName»);'''
+		'''find «modality.toString.toLowerCase»InstanceOf«base.canonizeName('''«type.name» class''')»(problem,interpretation,«variableName»);'''
 	}
 }

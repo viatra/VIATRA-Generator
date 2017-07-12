@@ -75,7 +75,7 @@ class PatternGenerator {
 		String targetVariable,
 		Modality modality)
 	{
-		'''find «modality.name.toLowerCase»InRelation«canonizeName('''inreference «reference.name» «reference.EContainingClass.name»''')
+		'''find «modality.name.toLowerCase»InRelation«canonizeName('''«reference.name» reference «reference.EContainingClass.name»''')
 		»(problem,interpretation,«sourceVariable»,«targetVariable»);'''
 	}
 	
