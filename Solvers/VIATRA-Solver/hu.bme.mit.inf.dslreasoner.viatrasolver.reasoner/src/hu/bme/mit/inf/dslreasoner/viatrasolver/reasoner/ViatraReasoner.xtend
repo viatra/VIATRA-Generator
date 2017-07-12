@@ -44,28 +44,17 @@ class ViatraReasoner extends LogicReasoner{
 	val extension LogicresultFactory factory = LogicresultFactory.eINSTANCE	
 	val WF2ObjectiveConverter wf2ObjectiveConverter = new WF2ObjectiveConverter
 	
-	val LogicReasoner inconsistencyDetector
-	
-	public new() {
-		this.inconsistencyDetector=null
-	}
-	
-	public new(LogicReasoner inconsistencyDetector) {
-		this.inconsistencyDetector = inconsistencyDetector
-	}
-	
-	public static var Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  allPatterns = null
-	//public static var List<SortedMap<String, Integer>> additionalMatches = null
 	
 	override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
 		val viatraConfig = configuration.asConfig
-		val DesignSpaceExplorer dse = new DesignSpaceExplorer();
 		
-		/*
-		DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.VERBOSE_FULL)
-		/*/
-		DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.WARN)
-		//*/
+		if(viatraConfig.debugCongiguration.logging) {
+			DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.VERBOSE_FULL)
+		} else {
+			DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.WARN)
+		}
+		
+		val DesignSpaceExplorer dse = new DesignSpaceExplorer();
 		
 		dse.addMetaModelPackage(LogiclanguagePackage.eINSTANCE)
 		dse.addMetaModelPackage(LogicproblemPackage.eINSTANCE)
@@ -86,7 +75,6 @@ class ViatraReasoner extends LogicReasoner{
 			viatraConfig.nameNewElements,
 			viatraConfig.typeInferenceMethod
 		)
-		allPatterns = method.allPatterns
 		
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
@@ -95,7 +83,7 @@ class ViatraReasoner extends LogicReasoner{
 		))
 
 		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationObjective(method.invalidWF))
-		for(additionalConstraint : configuration.asConfig.additionalGlobalConstraints) {
+		for(additionalConstraint : viatraConfig.searchSpaceConstraints.additionalGlobalConstraints) {
 			dse.addGlobalConstraint(additionalConstraint.apply(method))
 		}
 		
@@ -121,10 +109,7 @@ class ViatraReasoner extends LogicReasoner{
 		}
 		
 		val strategy = new BestFirstStrategyForModelGeneration(
-			workspace,inconsistencyDetector,
-			viatraConfig.inconsistencDetectorConfiguration,
-			viatraConfig.diversityRequirement/*,
-			method.allPatterns*/)
+			workspace,viatraConfig)
 		
 		val transformationTime = System.nanoTime - transformationStartTime
 		val solverStartTime = System.nanoTime
@@ -162,7 +147,7 @@ class ViatraReasoner extends LogicReasoner{
 				it.name = "StateCoderTime" it.value = (statecoderFinal.runtime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "StateCoderFailCount" it.value = strategy.numberOfStatecoderFaiL
+				it.name = "StateCoderFailCount" it.value = strategy.numberOfStatecoderFail
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "SolutionCopyTime" it.value = (strategy.solutionStoreWithCopy.sumRuntime/1000000) as int
@@ -204,10 +189,6 @@ class ViatraReasoner extends LogicReasoner{
 			}
 		}
 	}
-	
-	/*private def simpleWeithts(List<IObjective> objectives) {
-		objectives.map[1.0].toList
-	}*/
 
     private def dispatch long runtime(NeighbourhoodBasedStateCoderFactory sc) {
         sc.sumStatecoderRuntime
