@@ -33,6 +33,7 @@ import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import java.util.LinkedList
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
 
 class SimpleRun {
 	
@@ -63,16 +64,16 @@ class SimpleRun {
 		println("Problem created")
 		var LogicResult solution
 		var LogicReasoner reasoner
-		/*
+		//*
 		reasoner = new ViatraReasoner
 		val viatraConfig = new ViatraReasonerConfiguration => [
-			it.typeScopes.maxNewElements = 10
-			it.typeScopes.minNewElements = 10
+			it.typeScopes.maxNewElements = 40
+			it.typeScopes.minNewElements = 40
 			it.solutionScope.numberOfRequiredSolution = 1
 			it.existingQueries = queries.patterns.map[it.internalQueryRepresentation]
-			it.nameNewElements = true
-			it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
-			it.stateCoderStrategy = StateCoderStrategy::Neighbourhood
+			it.debugCongiguration.logging = true
+			it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
+			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
 		]
 		solution = reasoner.solve(logicProblem,viatraConfig,workspace)
 		/*/

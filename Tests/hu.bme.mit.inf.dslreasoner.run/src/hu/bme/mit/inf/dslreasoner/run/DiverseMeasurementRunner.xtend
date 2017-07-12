@@ -35,6 +35,8 @@ import org.eclipse.xtend.lib.annotations.Data
 import java.util.LinkedList
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvisVisualisation
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
 
 enum Metamodel {
 	FAM, YakinduWOSynch, Yakindu
@@ -190,7 +192,9 @@ class ScenarioRunner {
 				it.existingQueries = vq.patterns.map[it.internalQueryRepresentation]
 				it.nameNewElements = false
 				it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
-				it.additionalGlobalConstraints += loader.additionalConstraints
+				it.searchSpaceConstraints.additionalGlobalConstraints += loader.additionalConstraints
+				it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
+			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
 				it.stateCoderStrategy = if(scenario.statecoder == StateCoder::ID) {
 					StateCoderStrategy::IDBased
 				} else {
@@ -309,7 +313,7 @@ class ScenarioRunner {
 
 class DiverseMeasurementRunner {
 	def static void main(String[] args) {
-		val scenario = new Scenario(100,49,Metamodel::Yakindu,Constraints.All,StateCoder.Normal,1,Solver::Alloy)
+		val scenario = new Scenario(30,49,Metamodel::Yakindu,Constraints.All,StateCoder.Normal,1,Solver::ViatraSolver)
 		val scenarioRunner = new ScenarioRunner
 		scenarioRunner.runScenario(scenario)
 	}

@@ -63,7 +63,7 @@ class RunMeasurements {
 	// Solvers
 	val SMTSolver smtSolver = new SMTSolver
 	val ViatraReasoner viatraSolver = new ViatraReasoner
-	val ViatraReasoner viatraWithSmtSolver = new ViatraReasoner(smtSolver)
+	val ViatraReasoner viatraWithSmtSolver = new ViatraReasoner
 	val AlloySolver alloyReasoner = new AlloySolver
 	
 	def  dslLoader(Domain dsl) {
@@ -154,7 +154,7 @@ class RunMeasurements {
 				it.existingQueries = vq.patterns.map[it.internalQueryRepresentation]
 				it.nameNewElements = false
 				it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
-				it.additionalGlobalConstraints += loader.additionalConstraints
+				it.searchSpaceConstraints.additionalGlobalConstraints += loader.additionalConstraints
 				it.stateCoderStrategy = StateCoderStrategy::Neighbourhood
 			]
 			viatraConfig.diversityRequirement = diversityRequirement
@@ -172,7 +172,10 @@ class RunMeasurements {
 				]
 				val solution = this.viatraWithSmtSolver.solve(
 					problem,
-					viatraConfig =>[it.inconsistencDetectorConfiguration = inconsistency],
+					viatraConfig =>[
+						it.internalConsistencyCheckerConfiguration.internalIncosnsitencyDetector = smtSolver
+						it.internalConsistencyCheckerConfiguration.internalInconsistencDetectorConfiguration = inconsistency
+					],
 					this.workspace
 				)
 				return solution
