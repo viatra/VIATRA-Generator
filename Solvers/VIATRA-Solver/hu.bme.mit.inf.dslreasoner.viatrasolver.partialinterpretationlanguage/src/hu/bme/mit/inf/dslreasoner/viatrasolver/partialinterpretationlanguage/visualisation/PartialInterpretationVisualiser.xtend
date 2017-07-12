@@ -1,0 +1,8 @@
+package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation
+
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+
+interface PartialInterpretationVisualiser {
+	def PartialInterpretationVisualisation visualiseConcretization(PartialInterpretation partialInterpretation)
+	def PartialInterpretationVisualisation visualisePartialSolution(PartialInterpretation partialInterpretation)
+}
