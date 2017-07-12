@@ -50,7 +50,7 @@ class EReferenceMapper_RelationsOverTypes implements EReferenceMapper{
 		trace.referenceMapperTrace.asTrace.indicators = new HashMap
 		for(reference : references) {
 			val relation = problem.add(RelationDeclaration(
-				'''inreference «reference.name» «reference.EContainingClass.name»''',
+				'''«reference.name» reference «reference.EContainingClass.name»''',
 				TypeofEClass(trace,reference.EContainingClass),
 				TypeofEClass(trace,reference.EType as EClass)))
 			trace.referenceMapperTrace.asTrace.indicators.put(reference,relation as RelationDeclaration)

@@ -57,7 +57,7 @@ class PartialInterpretation2Logic {
 		val newElements = new ArrayList(i.newElements)
 		var newElementIndex = 1
 		for(newElement : newElements) {
-			newElement.name = '''DefinedElement «newElementIndex++»'''
+			newElement.name = '''o «newElementIndex++»'''
 			p.elements += newElement
 		}
 	}
@@ -67,12 +67,12 @@ class PartialInterpretation2Logic {
 			val declaration = partialTypeDeclaration.interpretationOf
 			
 			val definedPart = createTypeDefinition => [
-				it.name = '''DefinedPartOf «declaration.name»'''
+				it.name = '''«declaration.name» DefinedPart'''
 				it.elements += partialTypeDeclaration.elements
 				it.isAbstract = declaration.isIsAbstract
 			]
 			val undefinedPart = createTypeDeclaration => [
-				it.name = '''UndefinedPartOf «declaration.name»'''
+				it.name = '''«declaration.name» UndefinedPart'''
 				it.isAbstract = declaration.isIsAbstract
 			]
 			declaration.isAbstract = true

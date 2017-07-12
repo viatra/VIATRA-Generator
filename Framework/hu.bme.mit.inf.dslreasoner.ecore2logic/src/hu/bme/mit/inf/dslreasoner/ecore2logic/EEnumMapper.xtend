@@ -37,11 +37,11 @@ class EEnumMapper_PredefinedClasses implements EEnumMapper {
 		for(enum : enums) {
 			val l = new ArrayList<DefinedElement>(enum.ELiterals.size)
 			for(literal : enum.ELiterals.map[instance]) {
-				val element = Element('''«literal.name» «enum.name»''')
+				val element = Element('''«literal.name» literal «enum.name»''')
 				l+=element
 				enumTrace.literals.put(literal,element)
 			}
-			val type = TypeDefinition('''enum «enum.name»''',false,l)
+			val type = TypeDefinition('''«enum.name» enum''',false,l)
 			problem.add(type)
 			enumTrace.enums.put(enum,type)
 		}

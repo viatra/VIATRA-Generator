@@ -47,7 +47,7 @@ class EAttributeMapper_RelationsOverTypes implements EAttributeMapper {
 			val rangeType = trace.TypeOfRange(attribute)
 			
 			// relations
-			val indicator = '''inAttribute «attribute.name» «attribute.EContainingClass.name»'''.RelationDeclaration(sourceType,rangeType)
+			val indicator = '''«attribute.name» attribute «attribute.EContainingClass.name»'''.RelationDeclaration(sourceType,rangeType)
 
 			logicProblem.add(indicator)
 			attributeMapperTrace.indicators.put(attribute,indicator)

@@ -26,7 +26,7 @@ class EClassMapper_AllElementAsObject implements EClassMapper{
 		val classMapperTrace = new EClassMapper_AllElementAsObject_Trace
 		trace.classMapperTrace = classMapperTrace
 		for(c:classes) {
-			val logicType = problem.add(TypeDeclaration('''class «c.name»''',c.isAbstract || c.isInterface))
+			val logicType = problem.add(TypeDeclaration('''«c.name» class''',c.isAbstract || c.isInterface))
 			classMapperTrace.typeMap.put(c,logicType)
 		}
 		for(c:classes) {
