@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="ASCII"?>
+<partialinterpretation:PartialInterpretation
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+    xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
+    problem="//@problemConainer">
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.0"
+      param1="//@problemConainer/@relations.0/@parameters.0"
+      param2="//@problemConainer/@relations.0/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.0"
+        param2="//@newElements.1"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.2"
+        param2="//@newElements.4"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.1"
+      param1="//@problemConainer/@relations.1/@parameters.0"
+      param2="//@problemConainer/@relations.1/@parameters.1"/>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.2"
+      param1="//@problemConainer/@relations.2/@parameters.0"
+      param2="//@problemConainer/@relations.2/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.5"
+        param2="//@newElements.0"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.9"
+        param2="//@newElements.5"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.3"
+      param1="//@problemConainer/@relations.3/@parameters.0"
+      param2="//@problemConainer/@relations.3/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@problemConainer/@elements.3"
+        param2="//@newElements.0"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@problemConainer/@elements.3"
+        param2="//@newElements.2"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@problemConainer/@elements.3"
+        param2="//@newElements.3"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.4"
+      param1="//@problemConainer/@relations.4/@parameters.0"
+      param2="//@problemConainer/@relations.4/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.0"
+        param2="//@newElements.5"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.5"
+        param2="//@newElements.9"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.5"
+      param1="//@problemConainer/@relations.5/@parameters.0"
+      param2="//@problemConainer/@relations.5/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.7"
+        param2="//@newElements.6"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.6"
+      param1="//@problemConainer/@relations.6/@parameters.0"
+      param2="//@problemConainer/@relations.6/@parameters.1"/>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.7"
+      param1="//@problemConainer/@relations.7/@parameters.0"
+      param2="//@problemConainer/@relations.7/@parameters.1"/>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.8"
+      param1="//@problemConainer/@relations.8/@parameters.0"
+      param2="//@problemConainer/@relations.8/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.1"
+        param2="//@newElements.6"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.1"
+        param2="//@newElements.8"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.9"
+      param1="//@problemConainer/@relations.9/@parameters.0"
+      param2="//@problemConainer/@relations.9/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.1"
+        param2="//@newElements.0"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.4"
+        param2="//@newElements.2"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.10"
+      param1="//@problemConainer/@relations.10/@parameters.0"
+      param2="//@problemConainer/@relations.10/@parameters.1"/>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.11"
+      param1="//@problemConainer/@relations.11/@parameters.0"
+      param2="//@problemConainer/@relations.11/@parameters.1"/>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.12"
+      param1="//@problemConainer/@relations.12/@parameters.0"
+      param2="//@problemConainer/@relations.12/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.6"
+        param2="//@newElements.7"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.13"
+      param1="//@problemConainer/@relations.13/@parameters.0"
+      param2="//@problemConainer/@relations.13/@parameters.1">
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.6"
+        param2="//@newElements.1"/>
+    <relationlinks
+        xsi:type="partialinterpretation:BinaryElementRelationLink"
+        param1="//@newElements.8"
+        param2="//@newElements.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation
+      interpretationOf="//@problemConainer/@relations.14"
+      param1="//@problemConainer/@relations.14/@parameters.0"
+      param2="//@problemConainer/@relations.14/@parameters.1"/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <newElements/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.0"
+      elements="//@newElements.0 //@newElements.2 //@newElements.3 //@newElements.5 //@newElements.9"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.1"
+      elements="//@problemConainer/@elements.3"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.2"
+      elements="//@newElements.0 //@newElements.2 //@newElements.3 //@newElements.5 //@newElements.9"
+      supertypeInterpretation="//@partialtypeinterpratation.0"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.3"
+      elements="//@newElements.7"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.4"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.5"
+      elements="//@newElements.1 //@newElements.4"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.6"
+      elements="//@newElements.6"
+      supertypeInterpretation="//@partialtypeinterpratation.8"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.7"
+      elements="//@newElements.8"
+      supertypeInterpretation="//@partialtypeinterpratation.8"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.8"
+      elements="//@newElements.6 //@newElements.8"/>
+  <partialtypeinterpratation
+      interpretationOf="//@problemConainer/@types.11"
+      supertypeInterpretation="//@partialtypeinterpratation.1"/>
+  <openWorldElementPrototype
+      name="Symbolic New Element"/>
+  <problemConainer>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalElement class"
+        subtypes="//@problemConainer/@types.2"
+        isAbstract="true"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalArchitectureModel class"
+        subtypes="//@problemConainer/@types.10 //@problemConainer/@types.11"
+        isAbstract="true"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="Function class"
+        supertypes="//@problemConainer/@types.0"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FAMTerminator class"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="InformationLink class"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalInterface class"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalInput class"
+        supertypes="//@problemConainer/@types.8"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalOutput class"
+        supertypes="//@problemConainer/@types.8"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalData class"
+        subtypes="//@problemConainer/@types.6 //@problemConainer/@types.7"
+        isAbstract="true"/>
+    <types xsi:type="language:TypeDefinition"
+        name="FunctionType enum"
+        elements="//@problemConainer/@elements.0 //@problemConainer/@elements.1 //@problemConainer/@elements.2"/>
+    <types xsi:type="language:TypeDefinition"
+        name="FunctionalArchitectureModel class DefinedPart"
+        supertypes="//@problemConainer/@types.1"
+        elements="//@problemConainer/@elements.3"/>
+    <types xsi:type="language:TypeDeclaration"
+        name="FunctionalArchitectureModel class UndefinedPart"
+        supertypes="//@problemConainer/@types.1"/>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="interface reference FunctionalElement">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.0"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.5"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="model reference FunctionalElement">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.0"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.1"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="parent reference FunctionalElement">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.0"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.2"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="rootElements reference FunctionalArchitectureModel">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.1"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.0"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="subElements reference Function">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.2"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.0"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="data reference FAMTerminator">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.3"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.8"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="from reference InformationLink">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.4"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.7"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="to reference InformationLink">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.4"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.6"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="data reference FunctionalInterface">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.5"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.8"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="element reference FunctionalInterface">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.5"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.0"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="IncomingLinks reference FunctionalInput">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.6"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.4"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="outgoingLinks reference FunctionalOutput">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.7"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.4"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="terminator reference FunctionalData">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.8"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.3"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="interface reference FunctionalData">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.8"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.5"/>
+    </relations>
+    <relations
+        xsi:type="language:RelationDeclaration"
+        name="type attribute Function">
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.2"/>
+      <parameters
+          xsi:type="language:ComplexTypeReference"
+          referred="//@problemConainer/@types.9"/>
+    </relations>
+    <elements
+        name="Root literal FunctionType"
+        definedInType="//@problemConainer/@types.9"/>
+    <elements
+        name="Intermediate literal FunctionType"
+        definedInType="//@problemConainer/@types.9"/>
+    <elements
+        name="Leaf literal FunctionType"
+        definedInType="//@problemConainer/@types.9"/>
+    <elements
+        name="o 1"
+        definedInType="//@problemConainer/@types.10"/>
+    <containmentHierarchies
+        typesOrderedInHierarchy="//@problemConainer/@types.2 //@problemConainer/@types.5 //@problemConainer/@types.0 //@problemConainer/@types.3 //@problemConainer/@types.7 //@problemConainer/@types.1 //@problemConainer/@types.4 //@problemConainer/@types.8 //@problemConainer/@types.6"
+        containmentRelations="//@problemConainer/@relations.0 //@problemConainer/@relations.3 //@problemConainer/@relations.4 //@problemConainer/@relations.8 //@problemConainer/@relations.11 //@problemConainer/@relations.12"/>
+  </problemConainer>
+</partialinterpretation:PartialInterpretation>
