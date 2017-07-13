@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class Test {
 	def static void main(String[] args) {
+		println("xxx")
 		val workspace = new FileSystemWorkspace("input/","")
 		
 		PartialinterpretationPackage.eINSTANCE.eClass

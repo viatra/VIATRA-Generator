@@ -33,6 +33,8 @@ import guru.nidi.graphviz.engine.Engine
 import guru.nidi.graphviz.attribute.Records
 import guru.nidi.graphviz.attribute.Attributes
 import java.util.List
+import guru.nidi.graphviz.engine.GraphvizEngine
+import guru.nidi.graphviz.engine.GraphvizV8Engine
 
 class GraphvizVisualisation implements PartialInterpretationVisualiser {
 	
@@ -196,7 +198,7 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 	}
 	protected def typePredicateColor(Set<Type> types) { types.averageColor }
 	protected def typePredicateColor(String name) {
-		val Random random = new Random(name.hashCode+1)
+		val Random random = new Random(name.hashCode)
 		val rangePicker = [|random.nextInt(128)+128]
 		return #[rangePicker.apply(), rangePicker.apply(), rangePicker.apply()]
 	}
@@ -232,6 +234,7 @@ class GraphvisVisualisation implements PartialInterpretationVisualisation {
 	
 	override writeToFile(ReasonerWorkspace workspace, String name) {
 		val path = '''«workspace.workspaceURI.toFileString»/«name».png'''
+		Graphviz.useEngine(new GraphvizV8Engine());
 		Graphviz.fromGraph(graph)//.engine(Engine::NEATO)
 		.render(Format.PNG).toFile(new File(path));
 	}
