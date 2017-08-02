@@ -18,6 +18,7 @@ interface EAttributeMapper {
 	def Term IsAttributeValue(Ecore2Logic_Trace trace, TermDescription object, TermDescription value, EAttribute attribute)
 	def RelationDeclaration relationOfAttribute(Ecore2Logic_Trace trace, EAttribute attribute)
 	def TypeDescriptor TypeOfRange(Ecore2Logic_Trace trace, EAttribute attribute)
+	def Iterable<EAttribute> allAttributesInScope(Ecore2Logic_Trace trace) 
 }
 
 class EAttributeMapper_RelationsOverTypes_Trace implements Trace<EAttributeMapper_RelationsOverTypes>{
@@ -116,4 +117,9 @@ class EAttributeMapper_RelationsOverTypes implements EAttributeMapper {
 	override relationOfAttribute(Ecore2Logic_Trace trace, EAttribute attribute) {
 		trace.attributeMapperTrace.asTrace.indicators.get(attribute)
 	}
+	
+	override allAttributesInScope(Ecore2Logic_Trace trace) {
+		trace.attributeMapperTrace.asTrace.indicators.keySet
+	}
+	
 }

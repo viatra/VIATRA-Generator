@@ -17,11 +17,12 @@ interface EEnumMapper {
 	def void transformEEnums(Ecore2Logic_Trace trace, LogicProblem problem, Iterable<EEnum> enums,Ecore2LogicConfiguration config)
 	def Type TypeofEEnum(Ecore2Logic_Trace trace, EEnum type)
 	def TermDescription Literal(Ecore2Logic_Trace trace, Enumerator literal)
+	def Iterable<EEnum> allEnumsInScope(Ecore2Logic_Trace trace)
+	def Iterable<Enumerator> allLiteralsInScope(Ecore2Logic_Trace trace)
 }
 
 class EEnumMapper_PredefinedClasses_Trace implements Trace<EEnumMapper_PredefinedClasses>{
 	public var Map<EEnum, Type> enums
-
 	public var Map<Enumerator,DefinedElement> literals
 }
 
@@ -57,4 +58,13 @@ class EEnumMapper_PredefinedClasses implements EEnumMapper {
 	override Literal(Ecore2Logic_Trace trace, Enumerator literal) {
 		literal.lookup(trace.enumMapperTrace.asTrace.literals)
 	}
+	
+	override allEnumsInScope(Ecore2Logic_Trace trace) {
+		trace.enumMapperTrace.asTrace.enums.keySet
+	}
+	
+	override allLiteralsInScope(Ecore2Logic_Trace trace) {
+		trace.enumMapperTrace.asTrace.literals.keySet
+	}
+	
 }
