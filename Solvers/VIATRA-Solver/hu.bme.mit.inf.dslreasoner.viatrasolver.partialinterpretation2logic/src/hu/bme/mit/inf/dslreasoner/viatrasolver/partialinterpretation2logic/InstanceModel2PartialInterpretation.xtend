@@ -70,9 +70,11 @@ class InstanceModel2PartialInterpretation {
 			object2DefinedElement.put(object, element)
 		}
 		
+		val referencesUsed = ecore2Logic.allReferencesInScope(ecore2LogicTrace).toSet
+		val attributesUsed = ecore2Logic.allAttributesInScope(ecore2LogicTrace).toSet
 		for(source : objects) {
 			// Translating the references
-			for(reference : source.eClass.EAllReferences) {
+			for(reference : source.eClass.EAllReferences.filter[referencesUsed.contains(it)]) {
 				val type = ecore2Logic.relationOfReference(ecore2LogicTrace,reference)
 				val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
 				val sourceElement = source.lookup(object2DefinedElement)
@@ -90,8 +92,9 @@ class InstanceModel2PartialInterpretation {
 					}
 				}
 			}
-			// Transforming the relations
-			for(attribute : source.eClass.EAllAttributes) {
+			
+			// Transforming the attributes
+			for(attribute : source.eClass.EAllAttributes.filter[referencesUsed.contains(it)]) {
 				val type = ecore2Logic.relationOfAttribute(ecore2LogicTrace,attribute)
 				val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
 				val sourceElement = source.lookup(object2DefinedElement)
