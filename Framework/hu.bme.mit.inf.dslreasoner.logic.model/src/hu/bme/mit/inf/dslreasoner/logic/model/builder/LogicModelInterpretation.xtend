@@ -10,6 +10,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import java.util.List
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.SortedSet
+import java.math.BigDecimal
 
 interface LogicModelInterpretation{
 	
@@ -58,8 +60,19 @@ interface LogicModelInterpretation{
 	 * @return The value of the constant encoded as specified in the table.
 	 */
 	def Object getInterpretation(ConstantDeclaration constant)
-	def int getMinimalInteger()
-	def int getMaximalInteger()
+	
+	/**
+	 * Returns all integers relevant to the logic structure. Not all integer is necessarily used.
+	 */
+	def SortedSet<Integer> getAllIntegersInStructure()
+	/**
+	 * Returns all real numbers relevant to the logic structure. Not all integer is necessarily used.
+	 */
+	 def SortedSet<BigDecimal> getAllRealsInStructure()
+	 /**
+	 * Returns all string values relevant to the logic structure. Not all integer is necessarily used.
+	 */
+	 def SortedSet<String> getAllStringsInStructure()
 }
 
 class Uninterpreted implements LogicModelInterpretation {
@@ -92,11 +105,15 @@ class Uninterpreted implements LogicModelInterpretation {
 		throw new UnsupportedOperationException("The interpteration is unknown.")
 	}
 	
-	override getMinimalInteger() {
+	override getAllIntegersInStructure() {
 		throw new UnsupportedOperationException("The interpteration is unknown.")
 	}
 	
-	override getMaximalInteger() {
+	override getAllRealsInStructure() {
+		throw new UnsupportedOperationException("The interpteration is unknown.")
+	}
+	
+	override getAllStringsInStructure() {
 		throw new UnsupportedOperationException("The interpteration is unknown.")
 	}
 }

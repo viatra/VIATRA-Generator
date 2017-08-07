@@ -2563,6 +2563,35 @@ public interface LogiclanguagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringTypeReferenceImpl <em>String Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringTypeReferenceImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getStringTypeReference()
+	 * @generated
+	 */
+	int STRING_TYPE_REFERENCE = 55;
+
+	/**
+	 * The number of structural features of the '<em>String Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TYPE_REFERENCE_FEATURE_COUNT = PRIMITIVE_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>String Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TYPE_REFERENCE_OPERATION_COUNT = PRIMITIVE_TYPE_REFERENCE_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3773,6 +3802,16 @@ public interface LogiclanguagePackage extends EPackage {
 	EReference getInstanceOf_Range();
 
 	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference <em>String Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Type Reference</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
+	 * @generated
+	 */
+	EClass getStringTypeReference();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4824,6 +4863,16 @@ public interface LogiclanguagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference INSTANCE_OF__RANGE = eINSTANCE.getInstanceOf_Range();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringTypeReferenceImpl <em>String Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringTypeReferenceImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getStringTypeReference()
+		 * @generated
+		 */
+		EClass STRING_TYPE_REFERENCE = eINSTANCE.getStringTypeReference();
 
 	}
 

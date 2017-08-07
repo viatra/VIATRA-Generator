@@ -96,6 +96,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 			case LogiclanguagePackage.TYPE_DECLARATION: return createTypeDeclaration();
 			case LogiclanguagePackage.UNKNOWN_BECAUSE_UNINTERPRETED: return createUnknownBecauseUninterpreted();
 			case LogiclanguagePackage.INSTANCE_OF: return createInstanceOf();
+			case LogiclanguagePackage.STRING_TYPE_REFERENCE: return createStringTypeReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -499,6 +500,16 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	public InstanceOf createInstanceOf() {
 		InstanceOfImpl instanceOf = new InstanceOfImpl();
 		return instanceOf;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringTypeReference createStringTypeReference() {
+		StringTypeReferenceImpl stringTypeReference = new StringTypeReferenceImpl();
+		return stringTypeReference;
 	}
 
 	/**

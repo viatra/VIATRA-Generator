@@ -200,4 +200,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="range" lowerBound="1" eType="#//TypeReference"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringTypeReference" eSuperTypes="#//PrimitiveTypeReference"/>
 </ecore:EPackage>

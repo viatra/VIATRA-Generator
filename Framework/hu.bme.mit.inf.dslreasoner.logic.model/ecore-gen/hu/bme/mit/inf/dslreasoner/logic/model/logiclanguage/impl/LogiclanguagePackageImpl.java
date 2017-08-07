@@ -48,6 +48,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
@@ -466,6 +467,13 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * @generated
 	 */
 	private EClass instanceOfEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringTypeReferenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1576,6 +1584,15 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStringTypeReference() {
+		return stringTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LogiclanguageFactory getLogiclanguageFactory() {
 		return (LogiclanguageFactory)getEFactoryInstance();
 	}
@@ -1768,6 +1785,8 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		instanceOfEClass = createEClass(INSTANCE_OF);
 		createEReference(instanceOfEClass, INSTANCE_OF__VALUE);
 		createEReference(instanceOfEClass, INSTANCE_OF__RANGE);
+
+		stringTypeReferenceEClass = createEClass(STRING_TYPE_REFERENCE);
 	}
 
 	/**
@@ -1853,6 +1872,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		typeDeclarationEClass.getESuperTypes().add(this.getType());
 		unknownBecauseUninterpretedEClass.getESuperTypes().add(this.getTerm());
 		instanceOfEClass.getESuperTypes().add(this.getTerm());
+		stringTypeReferenceEClass.getESuperTypes().add(this.getPrimitiveTypeReference());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2024,6 +2044,8 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEClass(instanceOfEClass, InstanceOf.class, "InstanceOf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstanceOf_Value(), this.getTerm(), null, "value", null, 1, 1, InstanceOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstanceOf_Range(), this.getTypeReference(), null, "range", null, 1, 1, InstanceOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringTypeReferenceEClass, StringTypeReference.class, "StringTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
