@@ -227,15 +227,15 @@ class  Viatra2Logic {
 				ecore2LogicTrace,viatra2LogicTrace,variable2Variable,config)
 		].filterNull
 		val allConstraintIsSatisfied = And(translatedConstraints)
-		val allNetativeVariablesAreSatisfied = if(innerNegativeVariables.empty) {
+		val allNegativeVariablesAreSatisfied = if(innerNegativeVariables.empty) {
 			allConstraintIsSatisfied
 		} else {
 			Forall(innerNegativeVariables,allConstraintIsSatisfied);
 		}
 		val allVariablesAreExisting = if(innerPositiveVariables.empty) {
-			allNetativeVariablesAreSatisfied
+			allNegativeVariablesAreSatisfied
 		} else {
-			Exists(innerPositiveVariables,allNetativeVariablesAreSatisfied);
+			Exists(innerPositiveVariables,allNegativeVariablesAreSatisfied);
 		}
 		
 		return allVariablesAreExisting
