@@ -27,6 +27,7 @@ interface LogicModelInterpretation{
 	 * <tr><td>Boolean literal </td><td>Boolean </td></tr>
 	 * <tr><td>Integer literal </td><td>Integer </td></tr>
 	 * <tr><td>Real literal </td><td>BigDecimal </td></tr>
+	 * <tr><td>String literal </td><td>String </td></tr>
 	 * </table></p>
 	 * @param function The target function to be interpreted.
 	 * @param parameterSubstitution The array of the substituted parameters encoded as defined in the table.
@@ -41,6 +42,7 @@ interface LogicModelInterpretation{
 	 * <tr><td>Boolean literal </td><td>Boolean </td></tr>
 	 * <tr><td>Integer literal </td><td>Integer </td></tr>
 	 * <tr><td>Real literal </td><td>BigDecimal </td></tr>
+	 * <tr><td>String literal </td><td>String </td></tr>
 	 * </table></p>
 	 * @param relation The target relation to be interpreted.
 	 * @param parameterSubstitution The array of the substituted parameters encoded as defined in the table.
@@ -55,6 +57,7 @@ interface LogicModelInterpretation{
 	 * <tr><td>Boolean literal </td><td>Boolean </td></tr>
 	 * <tr><td>Integer literal </td><td>Integer </td></tr>
 	 * <tr><td>Real literal </td><td>BigDecimal </td></tr>
+	 * <tr><td>String literal </td><td>String </td></tr>
 	 * </table></p>
 	 * @param constant The target constant to be interpreted.
 	 * @return The value of the constant encoded as specified in the table.

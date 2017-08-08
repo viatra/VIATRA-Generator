@@ -55,6 +55,10 @@ import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
 
 @Data class InterpretationValidationResult {
 	val List<String> problems;
@@ -381,13 +385,27 @@ class LogicStructureBuilder{
 				return (left as Number).asInteger == (right as Number).asInteger
 			}
 		} else return left.equals(right)
-	}	
-
-	def allIntegers(LogicModelInterpretation interpretation) {
-		if(interpretation.minimalInteger <= interpretation.maximalInteger) {
-			(interpretation.minimalInteger .. interpretation.maximalInteger).map[asInteger]
-		} else return emptySet
 	}
+
+	private dispatch def allObjects(LogicModelInterpretation interpretation, ComplexTypeReference type) {
+		return interpretation.getElements(type.referred)
+	}
+	private dispatch def allObjects(LogicModelInterpretation interpretation, BoolTypeReference type) {
+		return #[true,false]
+	}
+	private dispatch def allObjects(LogicModelInterpretation interpretation, IntTypeReference type) {
+		return interpretation.allIntegersInStructure
+	}
+	private dispatch def allObjects(LogicModelInterpretation interpretation, RealTypeReference type) {
+		return interpretation.allRealsInStructure
+	}
+	private dispatch def allObjects(LogicModelInterpretation interpretation, StringTypeReference type) {
+		return interpretation.allStringsInStructure
+	}
+	private dispatch def allObjects(LogicModelInterpretation interpretation, TypeReference type) {
+		throw new UnsupportedOperationException('''Unknown type :«type.class.simpleName»!''')
+	}
+	
 	
 	def private boolean executeExists(
 		Term expression,
@@ -401,23 +419,13 @@ class LogicStructureBuilder{
 		}
 		else {
 			val unfoldedVariable = variablesToBind.head
-			val possibleValuesType = unfoldedVariable.range
-			if(possibleValuesType instanceof ComplexTypeReference) {
-				return this.getElements(interpretation,possibleValuesType.referred).exists[newBinding |
-					executeExists(
-					expression,
-					interpretation,
-					new HashMap(variableBinding) => [put(unfoldedVariable,newBinding)],
-					variablesToBind.subList(1,variablesToBind.size))]
-			} else if(possibleValuesType instanceof IntTypeReference) {
-				return interpretation.allIntegers.exists[newBinding |
-					executeExists(
-					expression,
-					interpretation,
-					new HashMap(variableBinding) => [put(unfoldedVariable,newBinding)],
-					variablesToBind.subList(1,variablesToBind.size))]
-			}
-			else throw new UnsupportedOperationException('''Quantifying over type "«possibleValuesType»" is unsupported.''')
+			val possibleValues = interpretation.allObjects(unfoldedVariable.range)
+			return possibleValues.exists[newBinding |
+				executeExists(
+				expression,
+				interpretation,
+				new HashMap(variableBinding) => [put(unfoldedVariable,newBinding)],
+				variablesToBind.subList(1,variablesToBind.size))]
 		}
 	}
 	
@@ -432,22 +440,13 @@ class LogicStructureBuilder{
 		}
 		else {
 			val unfoldedVariable = variablesToBind.head
-			val possibleValuesType = unfoldedVariable.range
-			if(possibleValuesType instanceof ComplexTypeReference) {
-				return this.getElements(interpretation,possibleValuesType.referred).forall[newBinding |
-					executeForall(
-					expression,
-					interpretation,
-					new HashMap(variableBinding) => [put(unfoldedVariable,newBinding)],
-					variablesToBind.subList(1,variablesToBind.size))]
-			} else if(possibleValuesType instanceof IntTypeReference) {
-				return interpretation.allIntegers.forall[newBinding |
-					executeForall(
-					expression,
-					interpretation,
-					new HashMap(variableBinding) => [put(unfoldedVariable,newBinding)],
-					variablesToBind.subList(1,variablesToBind.size))]
-			} else throw new UnsupportedOperationException('''Quantifying over type "«possibleValuesType»" is unsupported.''')
+			val possibleValues = interpretation.allObjects(unfoldedVariable.range)
+			return possibleValues.forall[newBinding |
+				executeForall(
+				expression,
+				interpretation,
+				new HashMap(variableBinding) => [put(unfoldedVariable,newBinding)],
+				variablesToBind.subList(1,variablesToBind.size))]
 		}
 	}
 }
