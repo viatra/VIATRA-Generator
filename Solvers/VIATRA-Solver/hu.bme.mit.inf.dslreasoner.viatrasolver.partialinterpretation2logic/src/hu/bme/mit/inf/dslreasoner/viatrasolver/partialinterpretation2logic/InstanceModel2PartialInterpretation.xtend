@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import org.eclipse.emf.ecore.resource.Resource
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 
 class InstanceModel2PartialInterpretation {
 	val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
@@ -29,20 +30,22 @@ class InstanceModel2PartialInterpretation {
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
 		Resource resource,
-		boolean withID) 
+		boolean withID,
+		TypeScopes typeScopes) 
 	{
 		val objects = resource.allContents.toList
-		return transform(metamodelTranslationResult,objects,withID)
+		return transform(metamodelTranslationResult,objects,withID,typeScopes)
 	}
 	
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
 		List<EObject> objects,
-		boolean withID) 
+		boolean withID,
+		TypeScopes typeScopes) 
 	{
 		val problem = metamodelTranslationResult.output
 		val ecore2LogicTrace = metamodelTranslationResult.trace
-		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, null)
+		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, typeScopes)
 		val partialInterpretation = tracedOutput.output
 		val partialInterpretationTrace = tracedOutput.trace
 		
