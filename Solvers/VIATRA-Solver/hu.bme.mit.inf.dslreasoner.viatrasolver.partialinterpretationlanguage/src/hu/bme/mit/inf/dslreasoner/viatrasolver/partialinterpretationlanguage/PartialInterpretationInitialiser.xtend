@@ -23,6 +23,7 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialTypeInterpratation> type2Interpretation = new HashMap
@@ -37,17 +38,32 @@ class PartialInterpretationInitialiser {
 	 * Initialises an empty partial interpretation from a logic problem
 	 */
 	def TracedOutput<PartialInterpretation,Problem2PartialInterpretationTrace> initialisePartialInterpretation(
-		LogicProblem problem,
-		int minNewElement, int maxNewElement) 
+		LogicProblem problem, TypeScopes typeScopes) 
 	{
 		val engine = ViatraQueryEngine.on(new EMFScope(problem))
 		val trace = new Problem2PartialInterpretationTrace
 		
 		val res = createPartialInterpretation => [
 			it.problem = problem
-			it.openWorldElementPrototype = createDefinedElement => [it.name = "Symbolic New Element"]
-			it.minNewElements = minNewElement
-			it.maxNewElements = maxNewElement
+			
+			it.minNewElements = typeScopes.maxNewElements
+			it.maxNewElements = typeScopes.minNewElements
+			if(maxNewElements>0) {
+				it.openWorldElementPrototypes += createDefinedElement => [it.name = "Symbolic New Element"]
+			}
+			
+			it.maxNewIntegers = typeScopes.numberOfUseableIntegers
+			if(maxNewIntegers>0) {
+				it.openWorldElementPrototypes += createIntegerElement => [it.name = "Symbolic New Integer" it.valueSet = false]
+			}
+			it.maxNewReals = typeScopes.numberOfUseableReals
+			if(maxNewReals>0) {
+				it.openWorldElementPrototypes += createRealElement => [it.name = "Symbolic New Real" it.valueSet = false]
+			}
+			it.maxNewStrings = typeScopes.numberOfUseableStrings
+			if(maxNewStrings>0) {
+				it.openWorldElementPrototypes += createStringElement => [it.name = "Symbolic New String" it.valueSet = false]
+			}
 			
 			for(typeDeclaration : problem.types.filter(TypeDeclaration)) {
 				it.partialtypeinterpratation += typeDeclaration.initialisePartialTypeInterpretation(engine,trace)
