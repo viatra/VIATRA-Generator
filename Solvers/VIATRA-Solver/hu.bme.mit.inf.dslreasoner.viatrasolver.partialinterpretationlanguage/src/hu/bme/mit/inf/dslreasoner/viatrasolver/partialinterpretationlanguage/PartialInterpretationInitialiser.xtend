@@ -63,8 +63,9 @@ class PartialInterpretationInitialiser {
 			it.booleanelements += createBooleanElement => [it.name = "false" it.value = false it.valueSet = true]
 			
 			// Integers
-			it.maxNewIntegers = typeScopes.numberOfUseableIntegers
-			for(integersInProblem : problem.eAllContents.toIterable.filter(IntLiteral).map[value].toSet) {
+			it.maxNewIntegers = typeScopes.maxNewIntegers
+			val knownIntegers = (typeScopes.knownIntegers + problem.eAllContents.toIterable.filter(IntLiteral).map[value]).toSet
+			for(integersInProblem : knownIntegers) {
 				it.integerelements += createIntegerElement => [it.name = '''«integersInProblem»''' it.value = integersInProblem it.valueSet = true]
 			}
 			if(maxNewIntegers>0) {
@@ -72,8 +73,9 @@ class PartialInterpretationInitialiser {
 			}
 			
 			// Reals
-			it.maxNewReals = typeScopes.numberOfUseableReals
-			for(realsInProblem : problem.eAllContents.toIterable.filter(RealLiteral).map[value].toSet) {
+			it.maxNewReals = typeScopes.maxNewReals
+			val knownReals = (typeScopes.knownReals + problem.eAllContents.toIterable.filter(RealLiteral).map[value]).toSet
+			for(realsInProblem : knownReals) {
 				it.realelements += createRealElement => [it.name = '''«realsInProblem»''' it.value = realsInProblem it.valueSet = true]
 			}
 			if(maxNewReals>0) {
@@ -81,8 +83,9 @@ class PartialInterpretationInitialiser {
 			}
 			
 			// Strings
-			it.maxNewStrings = typeScopes.numberOfUseableStrings
-			for(stringsInProblem : problem.eAllContents.toIterable.filter(StringLiteral).map[value].toSet) {
+			it.maxNewStrings = typeScopes.maxNewStrings
+			val knownStrings = (typeScopes.knownStrings + problem.eAllContents.toIterable.filter(StringLiteral).map[value]).toSet
+			for(stringsInProblem : knownStrings) {
 				it.stringelement += createStringElement => [it.name = '''"«stringsInProblem»"''' it.value=stringsInProblem it.valueSet = true]
 			}
 			if(maxNewStrings>0) {

@@ -5,6 +5,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.List
+import java.util.TreeSet
+import java.util.SortedSet
+import java.math.BigDecimal
 
 abstract class LogicReasoner {
 	def abstract LogicResult solve(LogicProblem problem, LogicSolverConfiguration configuration,
@@ -47,19 +50,25 @@ abstract class LogicSolverConfiguration {
  */
 public class TypeScopes {
 	public static val Unlimited = -1;
-	public var boolean ignoreIdDuringGeneration = true
+	
+	public var SortedSet<Integer> knownIntegers = new TreeSet
 	/**
 	 * Sets the number of Integers that has to be used to solve the problem.
 	 */
-	public var numberOfUseableIntegers = Unlimited
+	public var maxNewIntegers = Unlimited
+	
+	public var SortedSet<BigDecimal> knownReals = new TreeSet
 	/**
-	 * Sets the number of Integers that has to be used to solve the problem.
+	 * Sets the number of Reals that has to be used to solve the problem.
 	 */
-	public var numberOfUseableReals = Unlimited
+	public var maxNewReals = Unlimited
+	
+	public var SortedSet<String> knownStrings = new TreeSet
 	/**
 	 * Sets the number of Strings that has to be used to solve the problem.
 	 */
-	public var numberOfUseableStrings = Unlimited
+	public var maxNewStrings = Unlimited
+	
 	/**
 	 * Defines the minimal number of newly added elements. Default value is 0.
 	 */
