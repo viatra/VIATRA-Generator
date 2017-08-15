@@ -111,6 +111,7 @@ class EAttributeMapper_RelationsOverTypes implements EAttributeMapper {
 		else if(attribute.EType.name.equals("EBoolean")) return LogicBool
 		else if(attribute.EType.name.equals("EDouble") ||
 			    attribute.EType.name.equals("EFloat")) return LogicReal
+		else if(attribute.EType.name.equals("EDouble")) return LogicString
 		else throw new UnsupportedOperationException('''Unsupported attribute type: «attribute.EType.name»''')
 	}
 	

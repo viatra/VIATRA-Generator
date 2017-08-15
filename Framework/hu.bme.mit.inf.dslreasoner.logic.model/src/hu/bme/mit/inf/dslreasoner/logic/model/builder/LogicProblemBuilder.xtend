@@ -120,6 +120,7 @@ public class LogicProblemBuilder{
 	def public LogicBool() { createBoolTypeReference }
 	def public LogicInt() { createIntTypeReference }
 	def public LogicReal() { createRealTypeReference }
+	def public LogicString() { createStringTypeReference }
 	def toTypeReference(TypeDescriptor descriptor) {
 		if(descriptor instanceof TypeReference) { return EcoreUtil.copy(descriptor); }
 		else if(descriptor instanceof Type) { return createComplexTypeReference => [referred = descriptor]}
