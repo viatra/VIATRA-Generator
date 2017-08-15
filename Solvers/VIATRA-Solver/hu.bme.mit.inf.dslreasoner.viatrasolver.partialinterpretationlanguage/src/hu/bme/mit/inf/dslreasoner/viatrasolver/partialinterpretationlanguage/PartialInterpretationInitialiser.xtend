@@ -24,6 +24,9 @@ import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialTypeInterpratation> type2Interpretation = new HashMap
@@ -46,21 +49,41 @@ class PartialInterpretationInitialiser {
 		val res = createPartialInterpretation => [
 			it.problem = problem
 			
+			// Elements
 			it.minNewElements = typeScopes.maxNewElements
 			it.maxNewElements = typeScopes.minNewElements
+			// elements from problem are included
 			if(maxNewElements>0) {
 				it.openWorldElementPrototypes += createDefinedElement => [it.name = "Symbolic New Element"]
 			}
 			
+			// Booleans
+			it.booleanelements += createBooleanElement => [it.name = "true" it.value = true it.valueSet = true]
+			it.booleanelements += createBooleanElement => [it.name = "false" it.value = false it.valueSet = true]
+			
+			// Integers
 			it.maxNewIntegers = typeScopes.numberOfUseableIntegers
+			for(integersInProblem : problem.eAllContents.toIterable.filter(IntLiteral).map[value].toSet) {
+				it.integerelements += createIntegerElement => [it.name = '''«integersInProblem»''' it.value = integersInProblem it.valueSet = true]
+			}
 			if(maxNewIntegers>0) {
 				it.openWorldElementPrototypes += createIntegerElement => [it.name = "Symbolic New Integer" it.valueSet = false]
 			}
+			
+			// Reals
 			it.maxNewReals = typeScopes.numberOfUseableReals
+			for(realsInProblem : problem.eAllContents.toIterable.filter(RealLiteral).map[value].toSet) {
+				it.realelements += createRealElement => [it.name = '''«realsInProblem»''' it.value = realsInProblem it.valueSet = true]
+			}
 			if(maxNewReals>0) {
 				it.openWorldElementPrototypes += createRealElement => [it.name = "Symbolic New Real" it.valueSet = false]
 			}
+			
+			// Strings
 			it.maxNewStrings = typeScopes.numberOfUseableStrings
+			for(stringsInProblem : problem.eAllContents.toIterable.filter(StringLiteral).map[value].toSet) {
+				it.stringelement += createStringElement => [it.name = '''"«stringsInProblem»"''' it.value=stringsInProblem it.valueSet = true]
+			}
 			if(maxNewStrings>0) {
 				it.openWorldElementPrototypes += createStringElement => [it.name = "Symbolic New String" it.valueSet = false]
 			}
