@@ -2,6 +2,9 @@
  */
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.util;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -106,6 +109,38 @@ public class PartialinterpretationAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNaryRelationLinkElement(NaryRelationLinkElement object) {
 				return createNaryRelationLinkElementAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveElement(PrimitiveElement object) {
+				return createPrimitiveElementAdapter();
+			}
+			@Override
+			public Adapter caseBooleanElement(BooleanElement object) {
+				return createBooleanElementAdapter();
+			}
+			@Override
+			public Adapter caseIntegerElement(IntegerElement object) {
+				return createIntegerElementAdapter();
+			}
+			@Override
+			public Adapter caseRealElement(RealElement object) {
+				return createRealElementAdapter();
+			}
+			@Override
+			public Adapter caseStringElement(StringElement object) {
+				return createStringElementAdapter();
+			}
+			@Override
+			public Adapter caseTermDescription(TermDescription object) {
+				return createTermDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseSymbolicDeclaration(SymbolicDeclaration object) {
+				return createSymbolicDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseDefinedElement(DefinedElement object) {
+				return createDefinedElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -264,6 +299,118 @@ public class PartialinterpretationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNaryRelationLinkElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement <em>Primitive Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
+	 * @generated
+	 */
+	public Adapter createPrimitiveElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement <em>Boolean Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
+	 * @generated
+	 */
+	public Adapter createBooleanElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement <em>Integer Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+	 * @generated
+	 */
+	public Adapter createIntegerElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement <em>Real Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+	 * @generated
+	 */
+	public Adapter createRealElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement <em>String Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
+	 * @generated
+	 */
+	public Adapter createStringElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription <em>Term Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription
+	 * @generated
+	 */
+	public Adapter createTermDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration <em>Symbolic Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration
+	 * @generated
+	 */
+	public Adapter createSymbolicDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement <em>Defined Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+	 * @generated
+	 */
+	public Adapter createDefinedElementAdapter() {
 		return null;
 	}
 

@@ -27,8 +27,16 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getPartialtypeinterpratation <em>Partialtypeinterpratation</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMinNewElements <em>Min New Elements</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewElements <em>Max New Elements</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototype <em>Open World Element Prototype</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototypes <em>Open World Element Prototypes</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getProblemConainer <em>Problem Conainer</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getStringelement <em>Stringelement</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getStringelements <em>Stringelements</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getRealelements <em>Realelements</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getIntegerelements <em>Integerelements</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getBooleanelements <em>Booleanelements</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewIntegers <em>Max New Integers</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewReals <em>Max New Reals</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewStrings <em>Max New Strings</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation()
@@ -197,30 +205,20 @@ public interface PartialInterpretation extends EObject {
 	void setMaxNewElements(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Open World Element Prototype</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Open World Element Prototypes</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Open World Element Prototype</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Open World Element Prototypes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Open World Element Prototype</em>' containment reference.
-	 * @see #setOpenWorldElementPrototype(DefinedElement)
-	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_OpenWorldElementPrototype()
+	 * @return the value of the '<em>Open World Element Prototypes</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_OpenWorldElementPrototypes()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	DefinedElement getOpenWorldElementPrototype();
-
-	/**
-	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototype <em>Open World Element Prototype</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Open World Element Prototype</em>' containment reference.
-	 * @see #getOpenWorldElementPrototype()
-	 * @generated
-	 */
-	void setOpenWorldElementPrototype(DefinedElement value);
+	EList<DefinedElement> getOpenWorldElementPrototypes();
 
 	/**
 	 * Returns the value of the '<em><b>Problem Conainer</b></em>' containment reference.
@@ -247,5 +245,163 @@ public interface PartialInterpretation extends EObject {
 	 * @generated
 	 */
 	void setProblemConainer(LogicProblem value);
+
+	/**
+	 * Returns the value of the '<em><b>Stringelement</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Stringelement</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Stringelement</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_Stringelement()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StringElement> getStringelement();
+
+	/**
+	 * Returns the value of the '<em><b>Stringelements</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Stringelements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Stringelements</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_Stringelements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StringElement> getStringelements();
+
+	/**
+	 * Returns the value of the '<em><b>Realelements</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Realelements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Realelements</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_Realelements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<RealElement> getRealelements();
+
+	/**
+	 * Returns the value of the '<em><b>Integerelements</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Integerelements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Integerelements</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_Integerelements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<IntegerElement> getIntegerelements();
+
+	/**
+	 * Returns the value of the '<em><b>Booleanelements</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Booleanelements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Booleanelements</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_Booleanelements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BooleanElement> getBooleanelements();
+
+	/**
+	 * Returns the value of the '<em><b>Max New Integers</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Max New Integers</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max New Integers</em>' attribute.
+	 * @see #setMaxNewIntegers(int)
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_MaxNewIntegers()
+	 * @model required="true"
+	 * @generated
+	 */
+	int getMaxNewIntegers();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewIntegers <em>Max New Integers</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max New Integers</em>' attribute.
+	 * @see #getMaxNewIntegers()
+	 * @generated
+	 */
+	void setMaxNewIntegers(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Max New Reals</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Max New Reals</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max New Reals</em>' attribute.
+	 * @see #setMaxNewReals(int)
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_MaxNewReals()
+	 * @model required="true"
+	 * @generated
+	 */
+	int getMaxNewReals();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewReals <em>Max New Reals</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max New Reals</em>' attribute.
+	 * @see #getMaxNewReals()
+	 * @generated
+	 */
+	void setMaxNewReals(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Max New Strings</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Max New Strings</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max New Strings</em>' attribute.
+	 * @see #setMaxNewStrings(int)
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_MaxNewStrings()
+	 * @model required="true"
+	 * @generated
+	 */
+	int getMaxNewStrings();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewStrings <em>Max New Strings</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max New Strings</em>' attribute.
+	 * @see #getMaxNewStrings()
+	 * @generated
+	 */
+	void setMaxNewStrings(int value);
 
 } // PartialInterpretation

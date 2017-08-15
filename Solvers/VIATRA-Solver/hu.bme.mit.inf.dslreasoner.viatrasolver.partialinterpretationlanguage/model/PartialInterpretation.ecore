@@ -21,15 +21,27 @@
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="openWorldElementPrototype"
-        lowerBound="1" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="openWorldElementPrototypes"
+        lowerBound="1" upperBound="-1" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="problemConainer" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//LogicProblem"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pregeneratedRelationLinks"
-        upperBound="-1" eType="#//BinaryElementRelationLink"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="preGeneratedElements" upperBound="-1"
-        eType="#//PartialTypeInterpratation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stringelement" upperBound="-1"
+        eType="#//StringElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stringelements" upperBound="-1"
+        eType="#//StringElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realelements" upperBound="-1"
+        eType="#//RealElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="integerelements" upperBound="-1"
+        eType="#//IntegerElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booleanelements" upperBound="-1"
+        eType="#//BooleanElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewIntegers" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewReals" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewStrings" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PartialConstantInterpretation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
@@ -72,5 +84,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NaryRelationLinkElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveElement" abstract="true" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueSet" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanElement" eSuperTypes="#//PrimitiveElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerElement" eSuperTypes="#//PrimitiveElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealElement" eSuperTypes="#//PrimitiveElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringElement" eSuperTypes="#//PrimitiveElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

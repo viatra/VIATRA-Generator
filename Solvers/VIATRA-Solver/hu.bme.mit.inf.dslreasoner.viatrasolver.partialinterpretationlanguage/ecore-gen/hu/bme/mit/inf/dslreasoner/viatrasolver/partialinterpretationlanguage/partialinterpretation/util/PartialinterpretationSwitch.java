@@ -2,6 +2,9 @@
  */
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.util;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -126,6 +129,55 @@ public class PartialinterpretationSwitch<T> extends Switch<T> {
 			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT: {
 				NaryRelationLinkElement naryRelationLinkElement = (NaryRelationLinkElement)theEObject;
 				T result = caseNaryRelationLinkElement(naryRelationLinkElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PRIMITIVE_ELEMENT: {
+				PrimitiveElement primitiveElement = (PrimitiveElement)theEObject;
+				T result = casePrimitiveElement(primitiveElement);
+				if (result == null) result = caseDefinedElement(primitiveElement);
+				if (result == null) result = caseSymbolicDeclaration(primitiveElement);
+				if (result == null) result = caseTermDescription(primitiveElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.BOOLEAN_ELEMENT: {
+				BooleanElement booleanElement = (BooleanElement)theEObject;
+				T result = caseBooleanElement(booleanElement);
+				if (result == null) result = casePrimitiveElement(booleanElement);
+				if (result == null) result = caseDefinedElement(booleanElement);
+				if (result == null) result = caseSymbolicDeclaration(booleanElement);
+				if (result == null) result = caseTermDescription(booleanElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.INTEGER_ELEMENT: {
+				IntegerElement integerElement = (IntegerElement)theEObject;
+				T result = caseIntegerElement(integerElement);
+				if (result == null) result = casePrimitiveElement(integerElement);
+				if (result == null) result = caseDefinedElement(integerElement);
+				if (result == null) result = caseSymbolicDeclaration(integerElement);
+				if (result == null) result = caseTermDescription(integerElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.REAL_ELEMENT: {
+				RealElement realElement = (RealElement)theEObject;
+				T result = caseRealElement(realElement);
+				if (result == null) result = casePrimitiveElement(realElement);
+				if (result == null) result = caseDefinedElement(realElement);
+				if (result == null) result = caseSymbolicDeclaration(realElement);
+				if (result == null) result = caseTermDescription(realElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.STRING_ELEMENT: {
+				StringElement stringElement = (StringElement)theEObject;
+				T result = caseStringElement(stringElement);
+				if (result == null) result = casePrimitiveElement(stringElement);
+				if (result == null) result = caseDefinedElement(stringElement);
+				if (result == null) result = caseSymbolicDeclaration(stringElement);
+				if (result == null) result = caseTermDescription(stringElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -280,6 +332,126 @@ public class PartialinterpretationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNaryRelationLinkElement(NaryRelationLinkElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePrimitiveElement(PrimitiveElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanElement(BooleanElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Integer Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Integer Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntegerElement(IntegerElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Real Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Real Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealElement(RealElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringElement(StringElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Term Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Term Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTermDescription(TermDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Symbolic Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Symbolic Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSymbolicDeclaration(SymbolicDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Defined Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Defined Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDefinedElement(DefinedElement object) {
 		return null;
 	}
 

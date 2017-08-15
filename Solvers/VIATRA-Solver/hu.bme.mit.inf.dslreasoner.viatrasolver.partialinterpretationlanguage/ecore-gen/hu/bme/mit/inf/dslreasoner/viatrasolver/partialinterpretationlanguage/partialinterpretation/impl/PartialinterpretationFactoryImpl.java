@@ -65,6 +65,10 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 			case PartialinterpretationPackage.BINARY_ELEMENT_RELATION_LINK: return createBinaryElementRelationLink();
 			case PartialinterpretationPackage.NARY_RELATION_LINK: return createNaryRelationLink();
 			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT: return createNaryRelationLinkElement();
+			case PartialinterpretationPackage.BOOLEAN_ELEMENT: return createBooleanElement();
+			case PartialinterpretationPackage.INTEGER_ELEMENT: return createIntegerElement();
+			case PartialinterpretationPackage.REAL_ELEMENT: return createRealElement();
+			case PartialinterpretationPackage.STRING_ELEMENT: return createStringElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -158,6 +162,46 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	public NaryRelationLinkElement createNaryRelationLinkElement() {
 		NaryRelationLinkElementImpl naryRelationLinkElement = new NaryRelationLinkElementImpl();
 		return naryRelationLinkElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanElement createBooleanElement() {
+		BooleanElementImpl booleanElement = new BooleanElementImpl();
+		return booleanElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntegerElement createIntegerElement() {
+		IntegerElementImpl integerElement = new IntegerElementImpl();
+		return integerElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RealElement createRealElement() {
+		RealElementImpl realElement = new RealElementImpl();
+		return realElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringElement createStringElement() {
+		StringElementImpl stringElement = new StringElementImpl();
+		return stringElement;
 	}
 
 	/**

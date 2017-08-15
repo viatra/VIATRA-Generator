@@ -103,6 +103,42 @@ public interface PartialinterpretationFactory extends EFactory {
 	NaryRelationLinkElement createNaryRelationLinkElement();
 
 	/**
+	 * Returns a new object of class '<em>Boolean Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Element</em>'.
+	 * @generated
+	 */
+	BooleanElement createBooleanElement();
+
+	/**
+	 * Returns a new object of class '<em>Integer Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer Element</em>'.
+	 * @generated
+	 */
+	IntegerElement createIntegerElement();
+
+	/**
+	 * Returns a new object of class '<em>Real Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Real Element</em>'.
+	 * @generated
+	 */
+	RealElement createRealElement();
+
+	/**
+	 * Returns a new object of class '<em>String Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Element</em>'.
+	 * @generated
+	 */
+	StringElement createStringElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

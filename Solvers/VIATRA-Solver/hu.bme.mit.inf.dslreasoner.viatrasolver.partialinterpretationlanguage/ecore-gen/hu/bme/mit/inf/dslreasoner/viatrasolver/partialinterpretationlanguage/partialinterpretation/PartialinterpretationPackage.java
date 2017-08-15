@@ -2,6 +2,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -139,13 +140,13 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS = 7;
 
 	/**
-	 * The feature id for the '<em><b>Open World Element Prototype</b></em>' containment reference.
+	 * The feature id for the '<em><b>Open World Element Prototypes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENT_PROTOTYPE = 8;
+	int PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENT_PROTOTYPES = 8;
 
 	/**
 	 * The feature id for the '<em><b>Problem Conainer</b></em>' containment reference.
@@ -157,13 +158,85 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_INTERPRETATION__PROBLEM_CONAINER = 9;
 
 	/**
+	 * The feature id for the '<em><b>Stringelement</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__STRINGELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Stringelements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__STRINGELEMENTS = 11;
+
+	/**
+	 * The feature id for the '<em><b>Realelements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__REALELEMENTS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Integerelements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__INTEGERELEMENTS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Booleanelements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__BOOLEANELEMENTS = 14;
+
+	/**
+	 * The feature id for the '<em><b>Max New Integers</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__MAX_NEW_INTEGERS = 15;
+
+	/**
+	 * The feature id for the '<em><b>Max New Reals</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__MAX_NEW_REALS = 16;
+
+	/**
+	 * The feature id for the '<em><b>Max New Strings</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__MAX_NEW_STRINGS = 17;
+
+	/**
 	 * The number of structural features of the '<em>Partial Interpretation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_INTERPRETATION_FEATURE_COUNT = 10;
+	int PARTIAL_INTERPRETATION_FEATURE_COUNT = 18;
 
 	/**
 	 * The number of operations of the '<em>Partial Interpretation</em>' class.
@@ -554,6 +627,318 @@ public interface PartialinterpretationPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PrimitiveElementImpl <em>Primitive Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PrimitiveElementImpl
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getPrimitiveElement()
+	 * @generated
+	 */
+	int PRIMITIVE_ELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_ELEMENT__NAME = LogiclanguagePackage.DEFINED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Defined In Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_ELEMENT__DEFINED_IN_TYPE = LogiclanguagePackage.DEFINED_ELEMENT__DEFINED_IN_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_ELEMENT__VALUE_SET = LogiclanguagePackage.DEFINED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Primitive Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_ELEMENT_FEATURE_COUNT = LogiclanguagePackage.DEFINED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Primitive Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_ELEMENT_OPERATION_COUNT = LogiclanguagePackage.DEFINED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.BooleanElementImpl <em>Boolean Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.BooleanElementImpl
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getBooleanElement()
+	 * @generated
+	 */
+	int BOOLEAN_ELEMENT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_ELEMENT__NAME = PRIMITIVE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Defined In Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_ELEMENT__DEFINED_IN_TYPE = PRIMITIVE_ELEMENT__DEFINED_IN_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_ELEMENT__VALUE_SET = PRIMITIVE_ELEMENT__VALUE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_ELEMENT__VALUE = PRIMITIVE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Boolean Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_ELEMENT_FEATURE_COUNT = PRIMITIVE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Boolean Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_ELEMENT_OPERATION_COUNT = PRIMITIVE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.IntegerElementImpl <em>Integer Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.IntegerElementImpl
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getIntegerElement()
+	 * @generated
+	 */
+	int INTEGER_ELEMENT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_ELEMENT__NAME = PRIMITIVE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Defined In Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_ELEMENT__DEFINED_IN_TYPE = PRIMITIVE_ELEMENT__DEFINED_IN_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_ELEMENT__VALUE_SET = PRIMITIVE_ELEMENT__VALUE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_ELEMENT__VALUE = PRIMITIVE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Integer Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_ELEMENT_FEATURE_COUNT = PRIMITIVE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Integer Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_ELEMENT_OPERATION_COUNT = PRIMITIVE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.RealElementImpl <em>Real Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.RealElementImpl
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getRealElement()
+	 * @generated
+	 */
+	int REAL_ELEMENT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_ELEMENT__NAME = PRIMITIVE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Defined In Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_ELEMENT__DEFINED_IN_TYPE = PRIMITIVE_ELEMENT__DEFINED_IN_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_ELEMENT__VALUE_SET = PRIMITIVE_ELEMENT__VALUE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_ELEMENT__VALUE = PRIMITIVE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Real Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_ELEMENT_FEATURE_COUNT = PRIMITIVE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Real Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_ELEMENT_OPERATION_COUNT = PRIMITIVE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.StringElementImpl <em>String Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.StringElementImpl
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getStringElement()
+	 * @generated
+	 */
+	int STRING_ELEMENT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_ELEMENT__NAME = PRIMITIVE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Defined In Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_ELEMENT__DEFINED_IN_TYPE = PRIMITIVE_ELEMENT__DEFINED_IN_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Value Set</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_ELEMENT__VALUE_SET = PRIMITIVE_ELEMENT__VALUE_SET;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_ELEMENT__VALUE = PRIMITIVE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_ELEMENT_FEATURE_COUNT = PRIMITIVE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>String Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_ELEMENT_OPERATION_COUNT = PRIMITIVE_ELEMENT_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation <em>Partial Interpretation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -652,15 +1037,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	EAttribute getPartialInterpretation_MaxNewElements();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototype <em>Open World Element Prototype</em>}'.
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototypes <em>Open World Element Prototypes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Open World Element Prototype</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototype()
+	 * @return the meta object for the containment reference list '<em>Open World Element Prototypes</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getOpenWorldElementPrototypes()
 	 * @see #getPartialInterpretation()
 	 * @generated
 	 */
-	EReference getPartialInterpretation_OpenWorldElementPrototype();
+	EReference getPartialInterpretation_OpenWorldElementPrototypes();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getProblemConainer <em>Problem Conainer</em>}'.
@@ -672,6 +1057,94 @@ public interface PartialinterpretationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPartialInterpretation_ProblemConainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getStringelement <em>Stringelement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stringelement</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getStringelement()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_Stringelement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getStringelements <em>Stringelements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stringelements</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getStringelements()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_Stringelements();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getRealelements <em>Realelements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Realelements</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getRealelements()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_Realelements();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getIntegerelements <em>Integerelements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Integerelements</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getIntegerelements()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_Integerelements();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getBooleanelements <em>Booleanelements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Booleanelements</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getBooleanelements()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_Booleanelements();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewIntegers <em>Max New Integers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max New Integers</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewIntegers()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EAttribute getPartialInterpretation_MaxNewIntegers();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewReals <em>Max New Reals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max New Reals</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewReals()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EAttribute getPartialInterpretation_MaxNewReals();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewStrings <em>Max New Strings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max New Strings</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewStrings()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EAttribute getPartialInterpretation_MaxNewStrings();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialConstantInterpretation <em>Partial Constant Interpretation</em>}'.
@@ -918,6 +1391,111 @@ public interface PartialinterpretationPackage extends EPackage {
 	EAttribute getNaryRelationLinkElement_Index();
 
 	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement <em>Primitive Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Primitive Element</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
+	 * @generated
+	 */
+	EClass getPrimitiveElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement#isValueSet <em>Value Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value Set</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement#isValueSet()
+	 * @see #getPrimitiveElement()
+	 * @generated
+	 */
+	EAttribute getPrimitiveElement_ValueSet();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement <em>Boolean Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Boolean Element</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
+	 * @generated
+	 */
+	EClass getBooleanElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement#isValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement#isValue()
+	 * @see #getBooleanElement()
+	 * @generated
+	 */
+	EAttribute getBooleanElement_Value();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement <em>Integer Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Integer Element</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+	 * @generated
+	 */
+	EClass getIntegerElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement#getValue()
+	 * @see #getIntegerElement()
+	 * @generated
+	 */
+	EAttribute getIntegerElement_Value();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement <em>Real Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Real Element</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+	 * @generated
+	 */
+	EClass getRealElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement#getValue()
+	 * @see #getRealElement()
+	 * @generated
+	 */
+	EAttribute getRealElement_Value();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement <em>String Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Element</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
+	 * @generated
+	 */
+	EClass getStringElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement#getValue()
+	 * @see #getStringElement()
+	 * @generated
+	 */
+	EAttribute getStringElement_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1015,12 +1593,12 @@ public interface PartialinterpretationPackage extends EPackage {
 		EAttribute PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS = eINSTANCE.getPartialInterpretation_MaxNewElements();
 
 		/**
-		 * The meta object literal for the '<em><b>Open World Element Prototype</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Open World Element Prototypes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENT_PROTOTYPE = eINSTANCE.getPartialInterpretation_OpenWorldElementPrototype();
+		EReference PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENT_PROTOTYPES = eINSTANCE.getPartialInterpretation_OpenWorldElementPrototypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Problem Conainer</b></em>' containment reference feature.
@@ -1029,6 +1607,70 @@ public interface PartialinterpretationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARTIAL_INTERPRETATION__PROBLEM_CONAINER = eINSTANCE.getPartialInterpretation_ProblemConainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Stringelement</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__STRINGELEMENT = eINSTANCE.getPartialInterpretation_Stringelement();
+
+		/**
+		 * The meta object literal for the '<em><b>Stringelements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__STRINGELEMENTS = eINSTANCE.getPartialInterpretation_Stringelements();
+
+		/**
+		 * The meta object literal for the '<em><b>Realelements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__REALELEMENTS = eINSTANCE.getPartialInterpretation_Realelements();
+
+		/**
+		 * The meta object literal for the '<em><b>Integerelements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__INTEGERELEMENTS = eINSTANCE.getPartialInterpretation_Integerelements();
+
+		/**
+		 * The meta object literal for the '<em><b>Booleanelements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__BOOLEANELEMENTS = eINSTANCE.getPartialInterpretation_Booleanelements();
+
+		/**
+		 * The meta object literal for the '<em><b>Max New Integers</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARTIAL_INTERPRETATION__MAX_NEW_INTEGERS = eINSTANCE.getPartialInterpretation_MaxNewIntegers();
+
+		/**
+		 * The meta object literal for the '<em><b>Max New Reals</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARTIAL_INTERPRETATION__MAX_NEW_REALS = eINSTANCE.getPartialInterpretation_MaxNewReals();
+
+		/**
+		 * The meta object literal for the '<em><b>Max New Strings</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARTIAL_INTERPRETATION__MAX_NEW_STRINGS = eINSTANCE.getPartialInterpretation_MaxNewStrings();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialConstantInterpretationImpl <em>Partial Constant Interpretation</em>}' class.
@@ -1231,6 +1873,96 @@ public interface PartialinterpretationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NARY_RELATION_LINK_ELEMENT__INDEX = eINSTANCE.getNaryRelationLinkElement_Index();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PrimitiveElementImpl <em>Primitive Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PrimitiveElementImpl
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getPrimitiveElement()
+		 * @generated
+		 */
+		EClass PRIMITIVE_ELEMENT = eINSTANCE.getPrimitiveElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Set</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PRIMITIVE_ELEMENT__VALUE_SET = eINSTANCE.getPrimitiveElement_ValueSet();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.BooleanElementImpl <em>Boolean Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.BooleanElementImpl
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getBooleanElement()
+		 * @generated
+		 */
+		EClass BOOLEAN_ELEMENT = eINSTANCE.getBooleanElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_ELEMENT__VALUE = eINSTANCE.getBooleanElement_Value();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.IntegerElementImpl <em>Integer Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.IntegerElementImpl
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getIntegerElement()
+		 * @generated
+		 */
+		EClass INTEGER_ELEMENT = eINSTANCE.getIntegerElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTEGER_ELEMENT__VALUE = eINSTANCE.getIntegerElement_Value();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.RealElementImpl <em>Real Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.RealElementImpl
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getRealElement()
+		 * @generated
+		 */
+		EClass REAL_ELEMENT = eINSTANCE.getRealElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REAL_ELEMENT__VALUE = eINSTANCE.getRealElement_Value();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.StringElementImpl <em>String Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.StringElementImpl
+		 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialinterpretationPackageImpl#getStringElement()
+		 * @generated
+		 */
+		EClass STRING_ELEMENT = eINSTANCE.getStringElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_ELEMENT__VALUE = eINSTANCE.getStringElement_Value();
 
 	}
 
