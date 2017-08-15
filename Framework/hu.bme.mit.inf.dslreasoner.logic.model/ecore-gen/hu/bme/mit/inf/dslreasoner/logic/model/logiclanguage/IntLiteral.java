@@ -31,7 +31,7 @@ public interface IntLiteral extends AtomicTerm {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(int)
 	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage#getIntLiteral_Value()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	int getValue();

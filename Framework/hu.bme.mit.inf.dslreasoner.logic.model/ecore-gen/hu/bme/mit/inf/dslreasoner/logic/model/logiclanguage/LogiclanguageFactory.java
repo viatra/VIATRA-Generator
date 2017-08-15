@@ -391,6 +391,15 @@ public interface LogiclanguageFactory extends EFactory {
 	StringTypeReference createStringTypeReference();
 
 	/**
+	 * Returns a new object of class '<em>String Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Literal</em>'.
+	 * @generated
+	 */
+	StringLiteral createStringLiteral();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

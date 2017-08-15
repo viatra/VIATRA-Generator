@@ -2592,6 +2592,44 @@ public interface LogiclanguagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringLiteralImpl <em>String Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringLiteralImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getStringLiteral()
+	 * @generated
+	 */
+	int STRING_LITERAL = 56;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL__VALUE = ATOMIC_TERM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_FEATURE_COUNT = ATOMIC_TERM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>String Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_OPERATION_COUNT = ATOMIC_TERM_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3812,6 +3850,27 @@ public interface LogiclanguagePackage extends EPackage {
 	EClass getStringTypeReference();
 
 	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral <em>String Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Literal</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
+	 * @generated
+	 */
+	EClass getStringLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral#getValue()
+	 * @see #getStringLiteral()
+	 * @generated
+	 */
+	EAttribute getStringLiteral_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4873,6 +4932,24 @@ public interface LogiclanguagePackage extends EPackage {
 		 * @generated
 		 */
 		EClass STRING_TYPE_REFERENCE = eINSTANCE.getStringTypeReference();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringLiteralImpl <em>String Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.StringLiteralImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getStringLiteral()
+		 * @generated
+		 */
+		EClass STRING_LITERAL = eINSTANCE.getStringLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
 
 	}
 

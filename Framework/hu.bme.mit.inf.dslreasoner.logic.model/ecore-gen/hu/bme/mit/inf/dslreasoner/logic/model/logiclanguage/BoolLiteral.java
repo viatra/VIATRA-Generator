@@ -31,7 +31,7 @@ public interface BoolLiteral extends AtomicTerm {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(boolean)
 	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage#getBoolLiteral_Value()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	boolean isValue();

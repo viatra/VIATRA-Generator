@@ -32,7 +32,7 @@ public interface RealLiteral extends AtomicTerm {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(BigDecimal)
 	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage#getRealLiteral_Value()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	BigDecimal getValue();

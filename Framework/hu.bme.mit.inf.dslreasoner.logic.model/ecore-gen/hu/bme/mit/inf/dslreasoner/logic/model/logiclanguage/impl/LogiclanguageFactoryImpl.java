@@ -97,6 +97,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 			case LogiclanguagePackage.UNKNOWN_BECAUSE_UNINTERPRETED: return createUnknownBecauseUninterpreted();
 			case LogiclanguagePackage.INSTANCE_OF: return createInstanceOf();
 			case LogiclanguagePackage.STRING_TYPE_REFERENCE: return createStringTypeReference();
+			case LogiclanguagePackage.STRING_LITERAL: return createStringLiteral();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -510,6 +511,16 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	public StringTypeReference createStringTypeReference() {
 		StringTypeReferenceImpl stringTypeReference = new StringTypeReferenceImpl();
 		return stringTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringLiteral createStringLiteral() {
+		StringLiteralImpl stringLiteral = new StringLiteralImpl();
+		return stringLiteral;
 	}
 
 	/**

@@ -48,6 +48,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
@@ -474,6 +475,13 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * @generated
 	 */
 	private EClass stringTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringLiteralEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1593,6 +1601,24 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStringLiteral() {
+		return stringLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringLiteral_Value() {
+		return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LogiclanguageFactory getLogiclanguageFactory() {
 		return (LogiclanguageFactory)getEFactoryInstance();
 	}
@@ -1787,6 +1813,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		createEReference(instanceOfEClass, INSTANCE_OF__RANGE);
 
 		stringTypeReferenceEClass = createEClass(STRING_TYPE_REFERENCE);
+
+		stringLiteralEClass = createEClass(STRING_LITERAL);
+		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 	}
 
 	/**
@@ -1873,6 +1902,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		unknownBecauseUninterpretedEClass.getESuperTypes().add(this.getTerm());
 		instanceOfEClass.getESuperTypes().add(this.getTerm());
 		stringTypeReferenceEClass.getESuperTypes().add(this.getPrimitiveTypeReference());
+		stringLiteralEClass.getESuperTypes().add(this.getAtomicTerm());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1918,13 +1948,13 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEClass(atomicTermEClass, AtomicTerm.class, "AtomicTerm", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(intLiteralEClass, IntLiteral.class, "IntLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntLiteral_Value(), ecorePackage.getEInt(), "value", null, 1, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(boolLiteralEClass, BoolLiteral.class, "BoolLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBoolLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BoolLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBoolLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 1, 1, BoolLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRealLiteral_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRealLiteral_Value(), ecorePackage.getEBigDecimal(), "value", null, 1, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariable_Range(), this.getTypeReference(), null, "range", null, 1, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2046,6 +2076,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEReference(getInstanceOf_Range(), this.getTypeReference(), null, "range", null, 1, 1, InstanceOf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stringTypeReferenceEClass, StringTypeReference.class, "StringTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
