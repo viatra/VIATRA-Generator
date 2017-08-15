@@ -161,7 +161,7 @@ class PatternGenerator {
 			} or {
 			    find interpretation(problem,interpetation);
 			    neg find closeWorld(interpetation);
-			    PartialInterpretation.openWorldElementPrototype(interpetation,element);
+			    PartialInterpretation.openWorldElementPrototypes(interpetation,element);
 			}
 			
 			private pattern closeWorld(interpetation:PartialInterpretation) {

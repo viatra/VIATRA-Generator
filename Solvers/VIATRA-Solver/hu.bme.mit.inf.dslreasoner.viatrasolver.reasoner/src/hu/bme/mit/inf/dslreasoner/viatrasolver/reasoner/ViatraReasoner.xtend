@@ -10,6 +10,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethodProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.PartialInterpretationInitialiser
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.IdentifierBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
@@ -21,22 +22,13 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedMultiplici
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedWFObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.WF2ObjectiveConverter
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.util.List
+import java.util.Map
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import java.util.List
-import java.util.Map
-import org.eclipse.viatra.dse.base.ThreadContext
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
-import org.eclipse.viatra.query.runtime.api.IPatternMatch
-import org.eclipse.viatra.query.runtime.api.IQuerySpecification
-import java.util.Collection
-import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
-import java.util.SortedMap
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.common.util.EList
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -62,9 +54,7 @@ class ViatraReasoner extends LogicReasoner{
 		
 		val transformationStartTime = System.nanoTime
 		
-		val emptySolution = initialiser.initialisePartialInterpretation(problem,
-			viatraConfig.typeScopes.minNewElements,
-			viatraConfig.typeScopes.maxNewElements).output
+		val emptySolution = initialiser.initialisePartialInterpretation(problem,viatraConfig.typeScopes).output
 		emptySolution.problemConainer = problem
 		
 		val method = modelGenerationMethodProvider.createModelGenerationMethod(
