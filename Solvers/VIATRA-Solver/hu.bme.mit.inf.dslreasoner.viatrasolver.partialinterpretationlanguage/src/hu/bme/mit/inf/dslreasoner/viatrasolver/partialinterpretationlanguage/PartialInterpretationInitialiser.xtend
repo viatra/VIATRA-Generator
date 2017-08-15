@@ -41,7 +41,8 @@ class PartialInterpretationInitialiser {
 	 * Initialises an empty partial interpretation from a logic problem
 	 */
 	def TracedOutput<PartialInterpretation,Problem2PartialInterpretationTrace> initialisePartialInterpretation(
-		LogicProblem problem, TypeScopes typeScopes) 
+		LogicProblem problem,
+		TypeScopes typeScopes) 
 	{
 		val engine = ViatraQueryEngine.on(new EMFScope(problem))
 		val trace = new Problem2PartialInterpretationTrace

@@ -42,7 +42,7 @@ class InstanceModel2PartialInterpretation {
 	{
 		val problem = metamodelTranslationResult.output
 		val ecore2LogicTrace = metamodelTranslationResult.trace
-		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, -1, -1)
+		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, null)
 		val partialInterpretation = tracedOutput.output
 		val partialInterpretationTrace = tracedOutput.trace
 		
