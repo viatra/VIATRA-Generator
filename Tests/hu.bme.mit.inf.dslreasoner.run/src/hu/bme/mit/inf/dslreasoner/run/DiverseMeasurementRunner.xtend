@@ -225,7 +225,7 @@ class ScenarioRunner {
 				it.typeScopes.maxNewElements = scenario.size
 				it.typeScopes.minNewElements = scenario.size
 				it.solutionScope.numberOfRequiredSolution = scenario.number
-				it.typeScopes.maxIntScope = 0
+				it.typeScopes.maxNewIntegers = 0
 				it.writeToFile=true
 			]
 		}

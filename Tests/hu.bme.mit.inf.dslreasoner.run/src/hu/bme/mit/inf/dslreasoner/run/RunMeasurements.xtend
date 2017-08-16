@@ -136,7 +136,7 @@ class RunMeasurements {
 				it.typeScopes.maxNewElements = size
 				it.typeScopes.minNewElements = size
 				it.solutionScope.numberOfRequiredSolution = number
-				it.typeScopes.maxIntScope = 0
+				it.typeScopes.maxNewIntegers = 0
 				it.writeToFile = true
 			]
 			val solution = this.alloyReasoner.solve(

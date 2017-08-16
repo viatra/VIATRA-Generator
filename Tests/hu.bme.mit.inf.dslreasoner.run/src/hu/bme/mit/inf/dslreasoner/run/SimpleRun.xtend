@@ -64,7 +64,7 @@ class SimpleRun {
 		println("Problem created")
 		var LogicResult solution
 		var LogicReasoner reasoner
-		//*
+		/*
 		reasoner = new ViatraReasoner
 		val viatraConfig = new ViatraReasonerConfiguration => [
 			it.typeScopes.maxNewElements = 40
@@ -82,7 +82,7 @@ class SimpleRun {
 				it.typeScopes.maxNewElements = 5
 				it.typeScopes.minNewElements = 5
 				it.solutionScope.numberOfRequiredSolution = 1
-				it.typeScopes.maxIntScope = 0
+				it.typeScopes.maxNewIntegers = 0
 				it.writeToFile = true
 			]
 		solution = reasoner.solve(logicProblem,alloyConfig,workspace)
