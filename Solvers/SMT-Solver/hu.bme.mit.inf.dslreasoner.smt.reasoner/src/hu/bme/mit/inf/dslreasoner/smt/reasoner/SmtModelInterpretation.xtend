@@ -17,6 +17,9 @@ import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDeclaration
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTIntLiteral
+import java.util.TreeSet
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTRealLiteral
 
 @Data
 class ValueType {
@@ -29,6 +32,7 @@ class SmtModelInterpretation implements LogicModelInterpretation {
 	@Accessors(PUBLIC_GETTER) val SmtModelQueryEngine queryEngine;
 	
 	// Trace info
+	val SMTDocument document
 	val Logic2SmtMapperTrace newTrace;
 	val Logic2SMT_TypeMapperInterpretation typeInterpretation
 	
@@ -39,7 +43,7 @@ class SmtModelInterpretation implements LogicModelInterpretation {
 	 */
 	new(LogicProblem problem, SMTDocument document, Logic2SmtMapper forwardMapper, Logic2SmtMapperTrace forwardTrace) {
 		//document.input.typeDeclarations.forEach[typeNames.put(it.name,it)]
-		
+		this.document = document
 		this.queryEngine = new SmtModelQueryEngine(document)
 		this.newTrace = initialiseNewTrace(document,forwardTrace)
 		this.typeInterpretation = forwardMapper.typeMapper.getTypeInterpretation(problem,document,this,newTrace)
@@ -155,13 +159,26 @@ class SmtModelInterpretation implements LogicModelInterpretation {
 		throw new UnsupportedOperationException
 	}
 	
-	override getMaximalInteger() {
-		100
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override getAllIntegersInStructure() {
+		val res = new TreeSet
+		for(literal : document.eAllContents.filter(SMTIntLiteral).toIterable) {
+			res += literal.value
+			res += -literal.value
+		}
+		res
 	}
 	
-	override getMinimalInteger() {
-		-100
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override getAllRealsInStructure() {
+		val res = new TreeSet
+		for(literal : document.eAllContents.filter(SMTRealLiteral).toIterable) {
+			res += literal.value
+			res += -literal.value
+		}
+		res
 	}
+	
+	override getAllStringsInStructure() {
+		new TreeSet
+	}
+	
 }
