@@ -279,10 +279,14 @@ class Logic2AlloyLanguageMapper {
 				it.number = typeMapper.getUndefinedSupertypeScope(config.typeScopes.maxNewElements,trace) 
 				it.exactly = (config.typeScopes.maxNewElements == config.typeScopes.minNewElements)
 			]
-			if(config.typeScopes.maxIntScope == LogicSolverConfiguration::Unlimited) throw new UnsupportedOperationException(
+			if(config.typeScopes.maxNewIntegers == LogicSolverConfiguration::Unlimited) throw new UnsupportedOperationException(
 				'''An integer scope have to be specified for Alloy!''')
 			it.typeScopes += createALSIntScope => [
-				number = Integer.SIZE-Integer.numberOfLeadingZeros(config.typeScopes.maxIntScope)
+				val knownIntegerMax = config.typeScopes.knownIntegers.max
+				val knownIntegerMin = config.typeScopes.knownIntegers.min
+				val needNewPlaces =  Math.max(knownIntegerMax - knownIntegerMin - config.typeScopes.maxNewIntegers,0)
+				val maxAbsoluteValue = Math.max(Math.abs(knownIntegerMax)+needNewPlaces+1/2, Math.abs(knownIntegerMin)+needNewPlaces/2)
+				number = Integer.SIZE-Integer.numberOfLeadingZeros(maxAbsoluteValue)
 			]
 //			for(definedScope : config.typeScopes.allDefinedScope) {
 //				it.typeScopes += createALSSigScope => [

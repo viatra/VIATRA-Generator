@@ -286,10 +286,7 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 	override getInterpretation(ConstantDeclaration constant) {
 		constant.lookup(this.constant2Value)
 	}
-	
-	override getMinimalInteger() { this.minInt }
-	override getMaximalInteger() { this.maxInt }
-	
+
 	// Alloy term -> logic term
 	def private atomLabel2Term(String label) {
 		if(label.number) return Integer.parseInt(label)
@@ -306,6 +303,19 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 			return false
 		}
 	}
+	
+	override getAllIntegersInStructure() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getAllRealsInStructure() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getAllStringsInStructure() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }
 
 /**
