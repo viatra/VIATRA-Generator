@@ -13,10 +13,9 @@ class InstanceModel2Logic {
 	
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
-		List<EObject> objects,
-		TypeScopes typeScopes) 
+		List<EObject> objects) 
 	{
-		val res1 = this.instanceModel2PartialInterpretation.transform(metamodelTranslationResult,objects,true,typeScopes)
+		val res1 = instanceModel2PartialInterpretation.transform(metamodelTranslationResult,objects,true)
 		this.partialInterpretation2Logic.transformPartialIntepretation2Logic(metamodelTranslationResult.output,res1)
 		return metamodelTranslationResult//.output
 	}

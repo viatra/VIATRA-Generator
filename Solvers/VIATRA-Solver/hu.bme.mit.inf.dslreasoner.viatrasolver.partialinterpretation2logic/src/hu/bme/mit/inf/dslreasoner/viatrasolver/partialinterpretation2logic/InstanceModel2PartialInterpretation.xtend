@@ -30,22 +30,20 @@ class InstanceModel2PartialInterpretation {
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
 		Resource resource,
-		boolean withID,
-		TypeScopes typeScopes) 
+		boolean withID) 
 	{
 		val objects = resource.allContents.toList
-		return transform(metamodelTranslationResult,objects,withID,typeScopes)
+		return transform(metamodelTranslationResult,objects,withID)
 	}
 	
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
 		List<EObject> objects,
-		boolean withID,
-		TypeScopes typeScopes) 
+		boolean withID) 
 	{
 		val problem = metamodelTranslationResult.output
 		val ecore2LogicTrace = metamodelTranslationResult.trace
-		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, typeScopes)
+		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, new TypeScopes)
 		val partialInterpretation = tracedOutput.output
 		val partialInterpretationTrace = tracedOutput.trace
 		

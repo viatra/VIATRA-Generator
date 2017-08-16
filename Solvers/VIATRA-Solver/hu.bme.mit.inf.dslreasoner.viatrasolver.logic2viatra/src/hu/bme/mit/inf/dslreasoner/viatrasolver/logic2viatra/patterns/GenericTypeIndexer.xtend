@@ -7,7 +7,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
 
-class GenericTypeIndexer implements TypeIndexer {
+class GenericTypeIndexer extends TypeIndexer {
 	val PatternGenerator base;
 	
 	new(PatternGenerator base) {

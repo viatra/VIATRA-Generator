@@ -1,10 +1,8 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.UpperMultiplicityAssertion
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import java.util.HashMap
@@ -86,8 +84,8 @@ class RelationDeclarationIndexer {
 			find mayExist(problem, interpretation, source);
 			find mayExist(problem, interpretation, target);
 			// Type consistency
-			«transformTypeConsistency(relation.parameters.get(0),"source")»
-			«transformTypeConsistency(relation.parameters.get(1),"target")»
+			«base.typeIndexer.referInstanceOfByReference(relation.parameters.get(0),Modality.MAY,"source")»
+			«base.typeIndexer.referInstanceOfByReference(relation.parameters.get(1),Modality.MAY,"target")»
 			«IF upperMultiplicities.containsKey(relation)»
 				// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
 				// the upper bound of the multiplicity should be considered.
@@ -142,13 +140,4 @@ class RelationDeclarationIndexer {
 		 	«base.relationDefinitionIndexer.referPattern(definition,#["source","target"],Modality::MAY,true,false)»
 		 }
 	'''
-	
-	protected def CharSequence transformTypeConsistency(TypeReference reference, String name) {
-		if(reference instanceof ComplexTypeReference) {
-			this.base.typeIndexer.referInstanceOf(reference.referred,Modality.MAY,name)
-		} else {
-			return '''// Primitive type of «name» is already enforced'''
-		}
-		
-	}
 }

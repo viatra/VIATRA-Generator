@@ -30,8 +30,8 @@ class RelationRefinementGenerator {
 			«ENDIF»
 			find mustExist(problem, interpretation, from);
 			find mustExist(problem, interpretation, to);
-			«base.typeIndexer.referInstanceOf((relationRefinement.key.parameters.get(0) as ComplexTypeReference).referred, Modality::MUST,"from")»
-			«base.typeIndexer.referInstanceOf((relationRefinement.key.parameters.get(1) as ComplexTypeReference).referred, Modality::MUST,"to")»
+			«base.typeIndexer.referInstanceOfByReference(relationRefinement.key.parameters.get(0), Modality::MUST,"from")»
+			«base.typeIndexer.referInstanceOfByReference(relationRefinement.key.parameters.get(1), Modality::MUST,"to")»
 			«base.relationDeclarationIndexer.referRelation(relationRefinement.key,"from","to",Modality.MAY)»
 			neg «base.relationDeclarationIndexer.referRelation(relationRefinement.key,"from","to",Modality.MUST)»
 		}

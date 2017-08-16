@@ -21,6 +21,11 @@ import java.util.HashSet
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.DefinedByDerivedFeature
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
 
 class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer //= new TypeIndexer(this)
@@ -126,13 +131,28 @@ class PatternGenerator {
 		relation.annotations.filter(DefinedByDerivedFeature).head.query
 	}
 	
+	private def allTypeReferences(LogicProblem problem) {
+		problem.eAllContents.filter(TypeReference).toIterable
+	}
+	protected def hasBoolean(LogicProblem problem) {
+		problem.allTypeReferences.exists[it instanceof BoolTypeReference]
+	}
+	protected def hasInteger(LogicProblem problem) {
+		problem.allTypeReferences.exists[it instanceof IntTypeReference]
+	}
+	protected def hasReal(LogicProblem problem) {
+		problem.allTypeReferences.exists[it instanceof RealTypeReference]
+	}
+	protected def hasString(LogicProblem problem) {
+		problem.allTypeReferences.exists[it instanceof StringTypeReference]
+	}
+	
 	public def transformBaseProperties(
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		Map<String,PQuery> fqn2PQuery,
 		TypeAnalysisResult typeAnalysisResult
 	) {
-		
 		return '''
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
@@ -146,7 +166,7 @@ class PatternGenerator {
 			}
 				
 			/////////////////////////
-			// 0.1 Existance
+			// 0.1 Existence
 			/////////////////////////
 			private pattern mustExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
 				find interpretation(problem,interpetation);
@@ -154,18 +174,51 @@ class PatternGenerator {
 			} or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.newElements(interpetation,element);
-			} 
+			} or {
+				find interpretation(problem,interpetation);
+				PartialInterpretation.booleanelements(interpetation,element);
+			} or {
+				find interpretation(problem,interpetation);
+				PartialInterpretation.integerelements(interpetation,element);
+			} or {
+				find interpretation(problem,interpetation);
+				PartialInterpretation.realelements(interpetation,element);
+			}
+				find interpretation(problem,interpetation);
+				PartialInterpretation.stringelements(interpetation,element);
+			}
 			
 			private pattern mayExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
 			    find mustExist(problem,interpetation,element);
 			} or {
 			    find interpretation(problem,interpetation);
-			    neg find closeWorld(interpetation);
+			    neg find elementCloseWorld(interpetation);
 			    PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+			} or {
+				find interpretation(problem,interpetation);
+				neg find integerCloseWorld(interpetation);
+				PartialInterpretation.newIntegers(interpetation,element)
+			} or {
+				find interpretation(problem,interpetation);
+				neg find realCloseWorld(interpetation);
+				PartialInterpretation.newReals(interpetation,element)
+			} or {
+				find interpretation(problem,interpetation);
+				neg find stringCloseWorld(interpetation);
+				PartialInterpretation.newStrings(interpetation,element)
 			}
 			
-			private pattern closeWorld(interpetation:PartialInterpretation) {
+			private pattern elementCloseWorld(interpetation:PartialInterpretation) {
 			    PartialInterpretation.maxNewElements(interpetation,0);
+			}
+			private pattern integerCloseWorld(interpetation:PartialInterpretation) {
+			    PartialInterpretation.maxNewIntegers(interpetation,0);
+			}
+			private pattern realCloseWorld(interpetation:PartialInterpretation) {
+			    PartialInterpretation.maxNewReals(interpetation,0);
+			}
+			private pattern stringCloseWorld(interpetation:PartialInterpretation) {
+			    PartialInterpretation.maxNewStrings(interpetation,0);
 			}
 			
 			////////////////////////
@@ -186,6 +239,37 @@ class PatternGenerator {
 			// 1. Problem-Specific Base Indexers
 			//////////
 			// 1.1 Type Indexers
+			//////////
+			// 1.1.1 primitive Type Indexers
+			//////////
+			pattern instaneofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.booleanelements(interpretation,element);
+			}
+			pattern instaneofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.integerelements(interpretation,element);
+			} or {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.newIntegers(interpetation,element);
+			}
+			pattern instaneofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.realements(interpretation,element);
+			} or {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.newReals(interpetation,element);
+			}
+			pattern instaneofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.stringelements(interpretation,element);
+			} or {
+				find interpretation(problem,interpretation);
+				PartialInterpretation.newStrings(interpetation,element);
+			}
+			
+			//////////
+			// 1.1.2 domain-specific Type Indexers
 			//////////
 			«typeIndexer.generateInstanceOfQueries(problem,emptySolution,typeAnalysisResult)»
 			

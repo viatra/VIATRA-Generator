@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeRefinementPrecondition
 import java.util.Collections
 
-class TypeIndexerWithPreliminaryTypeAnalysis implements TypeIndexer{
+class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 	val PatternGenerator base;
 	
 	new(PatternGenerator base) {

@@ -103,7 +103,10 @@ class RelationDefinitionIndexer {
 					constraint.getVariableInTuple(1).canonizeName,
 					modality.toMustMay)
 			} else if (key instanceof EAttribute) {
-				return '''// attribute reference omitted'''//base.referRelationByName()
+				return base.referAttributeByName(key,
+					constraint.getVariableInTuple(0).canonizeName,
+					constraint.getVariableInTuple(1).canonizeName,
+					modality.toMustMay)
 			} else throw new UnsupportedOperationException('''unknown key: «key.class»''')
 		} else {
 			throw new UnsupportedOperationException()
