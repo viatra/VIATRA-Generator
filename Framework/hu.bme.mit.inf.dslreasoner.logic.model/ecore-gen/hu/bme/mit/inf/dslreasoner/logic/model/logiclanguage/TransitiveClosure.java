@@ -2,8 +2,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Transitive Closure</b></em>'.
@@ -22,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TransitiveClosure extends EObject {
+public interface TransitiveClosure extends Term {
 	/**
 	 * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

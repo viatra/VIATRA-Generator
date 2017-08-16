@@ -2646,7 +2646,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITIVE_CLOSURE__LEFT_OPERAND = 0;
+	int TRANSITIVE_CLOSURE__LEFT_OPERAND = TERM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -2655,7 +2655,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITIVE_CLOSURE__RIGHT_OPERAND = 1;
+	int TRANSITIVE_CLOSURE__RIGHT_OPERAND = TERM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -2664,7 +2664,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITIVE_CLOSURE__RELATION = 2;
+	int TRANSITIVE_CLOSURE__RELATION = TERM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Transitive Closure</em>' class.
@@ -2673,7 +2673,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITIVE_CLOSURE_FEATURE_COUNT = 3;
+	int TRANSITIVE_CLOSURE_FEATURE_COUNT = TERM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Transitive Closure</em>' class.
@@ -2682,7 +2682,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITIVE_CLOSURE_OPERATION_COUNT = 0;
+	int TRANSITIVE_CLOSURE_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
 
 
 	/**

@@ -485,6 +485,13 @@ public class LogicProblemBuilder{
 			it.range = type.toTypeReference
 		]
 	}
+	def public transitiveClosure(Relation relation, TermDescription source, TermDescription target) {
+		createTransitiveClosure => [
+			it.relation = relation
+			it.leftOperand = leftOperand
+			it.rightOperand = rightOperand
+		]
+	}
 	
 	// QuantifiedExpressions
 	

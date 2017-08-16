@@ -204,7 +204,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//AtomicTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransitiveClosure">
+  <eClassifiers xsi:type="ecore:EClass" name="TransitiveClosure" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Term"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Term"

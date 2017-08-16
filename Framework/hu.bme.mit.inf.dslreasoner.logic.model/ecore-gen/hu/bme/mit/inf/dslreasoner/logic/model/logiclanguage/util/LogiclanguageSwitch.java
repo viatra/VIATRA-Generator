@@ -547,6 +547,8 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 			case LogiclanguagePackage.TRANSITIVE_CLOSURE: {
 				TransitiveClosure transitiveClosure = (TransitiveClosure)theEObject;
 				T result = caseTransitiveClosure(transitiveClosure);
+				if (result == null) result = caseTerm(transitiveClosure);
+				if (result == null) result = caseTermDescription(transitiveClosure);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

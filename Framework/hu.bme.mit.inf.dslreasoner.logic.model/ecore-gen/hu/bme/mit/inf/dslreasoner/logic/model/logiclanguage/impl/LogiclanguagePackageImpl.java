@@ -1952,6 +1952,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		instanceOfEClass.getESuperTypes().add(this.getTerm());
 		stringTypeReferenceEClass.getESuperTypes().add(this.getPrimitiveTypeReference());
 		stringLiteralEClass.getESuperTypes().add(this.getAtomicTerm());
+		transitiveClosureEClass.getESuperTypes().add(this.getTerm());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
