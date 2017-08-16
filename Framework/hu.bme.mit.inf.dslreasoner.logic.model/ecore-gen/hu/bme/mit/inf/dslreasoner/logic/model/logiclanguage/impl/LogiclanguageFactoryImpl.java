@@ -98,6 +98,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 			case LogiclanguagePackage.INSTANCE_OF: return createInstanceOf();
 			case LogiclanguagePackage.STRING_TYPE_REFERENCE: return createStringTypeReference();
 			case LogiclanguagePackage.STRING_LITERAL: return createStringLiteral();
+			case LogiclanguagePackage.TRANSITIVE_CLOSURE: return createTransitiveClosure();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -521,6 +522,16 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	public StringLiteral createStringLiteral() {
 		StringLiteralImpl stringLiteral = new StringLiteralImpl();
 		return stringLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransitiveClosure createTransitiveClosure() {
+		TransitiveClosureImpl transitiveClosure = new TransitiveClosureImpl();
+		return transitiveClosure;
 	}
 
 	/**

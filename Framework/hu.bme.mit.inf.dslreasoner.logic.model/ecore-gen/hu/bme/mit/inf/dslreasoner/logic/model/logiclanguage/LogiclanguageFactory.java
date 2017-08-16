@@ -400,6 +400,15 @@ public interface LogiclanguageFactory extends EFactory {
 	StringLiteral createStringLiteral();
 
 	/**
+	 * Returns a new object of class '<em>Transitive Closure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Transitive Closure</em>'.
+	 * @generated
+	 */
+	TransitiveClosure createTransitiveClosure();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -2630,6 +2630,62 @@ public interface LogiclanguagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TransitiveClosureImpl <em>Transitive Closure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TransitiveClosureImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getTransitiveClosure()
+	 * @generated
+	 */
+	int TRANSITIVE_CLOSURE = 57;
+
+	/**
+	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITIVE_CLOSURE__LEFT_OPERAND = 0;
+
+	/**
+	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITIVE_CLOSURE__RIGHT_OPERAND = 1;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITIVE_CLOSURE__RELATION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Transitive Closure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITIVE_CLOSURE_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Transitive Closure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITIVE_CLOSURE_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3871,6 +3927,49 @@ public interface LogiclanguagePackage extends EPackage {
 	EAttribute getStringLiteral_Value();
 
 	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure <em>Transitive Closure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Transitive Closure</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure
+	 * @generated
+	 */
+	EClass getTransitiveClosure();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure#getLeftOperand <em>Left Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure#getLeftOperand()
+	 * @see #getTransitiveClosure()
+	 * @generated
+	 */
+	EReference getTransitiveClosure_LeftOperand();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure#getRightOperand <em>Right Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure#getRightOperand()
+	 * @see #getTransitiveClosure()
+	 * @generated
+	 */
+	EReference getTransitiveClosure_RightOperand();
+
+	/**
+	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure#getRelation <em>Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Relation</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure#getRelation()
+	 * @see #getTransitiveClosure()
+	 * @generated
+	 */
+	EReference getTransitiveClosure_Relation();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4950,6 +5049,40 @@ public interface LogiclanguagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TransitiveClosureImpl <em>Transitive Closure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TransitiveClosureImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getTransitiveClosure()
+		 * @generated
+		 */
+		EClass TRANSITIVE_CLOSURE = eINSTANCE.getTransitiveClosure();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITIVE_CLOSURE__LEFT_OPERAND = eINSTANCE.getTransitiveClosure_LeftOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITIVE_CLOSURE__RIGHT_OPERAND = eINSTANCE.getTransitiveClosure_RightOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Relation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITIVE_CLOSURE__RELATION = eINSTANCE.getTransitiveClosure_Relation();
 
 	}
 

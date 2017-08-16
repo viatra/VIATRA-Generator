@@ -282,11 +282,18 @@ class Logic2AlloyLanguageMapper {
 			if(config.typeScopes.maxNewIntegers == LogicSolverConfiguration::Unlimited) throw new UnsupportedOperationException(
 				'''An integer scope have to be specified for Alloy!''')
 			it.typeScopes += createALSIntScope => [
-				val knownIntegerMax = config.typeScopes.knownIntegers.max
-				val knownIntegerMin = config.typeScopes.knownIntegers.min
-				val needNewPlaces =  Math.max(knownIntegerMax - knownIntegerMin - config.typeScopes.maxNewIntegers,0)
-				val maxAbsoluteValue = Math.max(Math.abs(knownIntegerMax)+needNewPlaces+1/2, Math.abs(knownIntegerMin)+needNewPlaces/2)
-				number = Integer.SIZE-Integer.numberOfLeadingZeros(maxAbsoluteValue)
+				if(config.typeScopes.knownIntegers.empty) {
+					number = Integer.SIZE-Integer.numberOfLeadingZeros(config.typeScopes.maxNewIntegers+1/2)
+				} else {
+					var scope = Math.max(
+						Math.abs(config.typeScopes.knownIntegers.max),
+						Math.abs(config.typeScopes.knownIntegers.min))
+					if(scope*2+1 < config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) {
+						scope += ((config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) - (scope*2))/2
+					}
+					number = Integer.SIZE-Integer.numberOfLeadingZeros(scope)
+				}
+				
 			]
 //			for(definedScope : config.typeScopes.allDefinedScope) {
 //				it.typeScopes += createALSSigScope => [

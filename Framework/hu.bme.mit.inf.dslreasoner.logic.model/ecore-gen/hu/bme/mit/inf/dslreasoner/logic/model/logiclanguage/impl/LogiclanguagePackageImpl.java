@@ -54,6 +54,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition;
@@ -482,6 +483,13 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * @generated
 	 */
 	private EClass stringLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass transitiveClosureEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1619,6 +1627,42 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTransitiveClosure() {
+		return transitiveClosureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransitiveClosure_LeftOperand() {
+		return (EReference)transitiveClosureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransitiveClosure_RightOperand() {
+		return (EReference)transitiveClosureEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransitiveClosure_Relation() {
+		return (EReference)transitiveClosureEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LogiclanguageFactory getLogiclanguageFactory() {
 		return (LogiclanguageFactory)getEFactoryInstance();
 	}
@@ -1816,6 +1860,11 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 		stringLiteralEClass = createEClass(STRING_LITERAL);
 		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
+
+		transitiveClosureEClass = createEClass(TRANSITIVE_CLOSURE);
+		createEReference(transitiveClosureEClass, TRANSITIVE_CLOSURE__LEFT_OPERAND);
+		createEReference(transitiveClosureEClass, TRANSITIVE_CLOSURE__RIGHT_OPERAND);
+		createEReference(transitiveClosureEClass, TRANSITIVE_CLOSURE__RELATION);
 	}
 
 	/**
@@ -2079,6 +2128,11 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(transitiveClosureEClass, TransitiveClosure.class, "TransitiveClosure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTransitiveClosure_LeftOperand(), this.getTerm(), null, "leftOperand", null, 0, 1, TransitiveClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransitiveClosure_RightOperand(), this.getTerm(), null, "rightOperand", null, 0, 1, TransitiveClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransitiveClosure_Relation(), this.getRelation(), null, "relation", null, 0, 1, TransitiveClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

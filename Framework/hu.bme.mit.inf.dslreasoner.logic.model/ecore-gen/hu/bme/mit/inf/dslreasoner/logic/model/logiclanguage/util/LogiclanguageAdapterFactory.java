@@ -296,6 +296,10 @@ public class LogiclanguageAdapterFactory extends AdapterFactoryImpl {
 				return createStringLiteralAdapter();
 			}
 			@Override
+			public Adapter caseTransitiveClosure(TransitiveClosure object) {
+				return createTransitiveClosureAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1110,6 +1114,20 @@ public class LogiclanguageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStringLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure <em>Transitive Closure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure
+	 * @generated
+	 */
+	public Adapter createTransitiveClosureAdapter() {
 		return null;
 	}
 
