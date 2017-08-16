@@ -42,6 +42,12 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewStrings" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newStrings" upperBound="-1"
+        eType="#//StringElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newReals" upperBound="-1"
+        eType="#//RealElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newIntegers" upperBound="-1"
+        eType="#//IntegerElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PartialConstantInterpretation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"

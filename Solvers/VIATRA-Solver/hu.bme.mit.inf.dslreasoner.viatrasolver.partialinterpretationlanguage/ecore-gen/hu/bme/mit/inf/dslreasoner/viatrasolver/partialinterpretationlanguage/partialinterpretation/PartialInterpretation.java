@@ -37,6 +37,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewIntegers <em>Max New Integers</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewReals <em>Max New Reals</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewStrings <em>Max New Strings</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewStrings <em>New Strings</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewReals <em>New Reals</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewIntegers <em>New Integers</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation()
@@ -403,5 +406,53 @@ public interface PartialInterpretation extends EObject {
 	 * @generated
 	 */
 	void setMaxNewStrings(int value);
+
+	/**
+	 * Returns the value of the '<em><b>New Strings</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>New Strings</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>New Strings</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_NewStrings()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<StringElement> getNewStrings();
+
+	/**
+	 * Returns the value of the '<em><b>New Reals</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>New Reals</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>New Reals</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_NewReals()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<RealElement> getNewReals();
+
+	/**
+	 * Returns the value of the '<em><b>New Integers</b></em>' containment reference list.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>New Integers</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>New Integers</em>' containment reference list.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_NewIntegers()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<IntegerElement> getNewIntegers();
 
 } // PartialInterpretation

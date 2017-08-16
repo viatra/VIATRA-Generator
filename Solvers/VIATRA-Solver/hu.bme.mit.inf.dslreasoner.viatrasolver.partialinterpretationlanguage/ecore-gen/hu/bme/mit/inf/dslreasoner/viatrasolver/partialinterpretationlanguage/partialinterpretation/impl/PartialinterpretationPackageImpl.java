@@ -384,6 +384,33 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPartialInterpretation_NewStrings() {
+		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(18);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPartialInterpretation_NewReals() {
+		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(19);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPartialInterpretation_NewIntegers() {
+		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPartialConstantInterpretation() {
 		return partialConstantInterpretationEClass;
 	}
@@ -723,6 +750,9 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_INTEGERS);
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_REALS);
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_STRINGS);
+		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_STRINGS);
+		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_REALS);
+		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_INTEGERS);
 
 		partialConstantInterpretationEClass = createEClass(PARTIAL_CONSTANT_INTERPRETATION);
 		createEReference(partialConstantInterpretationEClass, PARTIAL_CONSTANT_INTERPRETATION__INTERPRETATION_OF);
@@ -833,6 +863,9 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		initEAttribute(getPartialInterpretation_MaxNewIntegers(), ecorePackage.getEInt(), "maxNewIntegers", null, 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPartialInterpretation_MaxNewReals(), ecorePackage.getEInt(), "maxNewReals", null, 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPartialInterpretation_MaxNewStrings(), ecorePackage.getEInt(), "maxNewStrings", null, 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialInterpretation_NewStrings(), this.getStringElement(), null, "newStrings", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialInterpretation_NewReals(), this.getRealElement(), null, "newReals", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialInterpretation_NewIntegers(), this.getIntegerElement(), null, "newIntegers", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialConstantInterpretationEClass, PartialConstantInterpretation.class, "PartialConstantInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPartialConstantInterpretation_InterpretationOf(), theLogiclanguagePackage.getConstantDeclaration(), null, "interpretationOf", null, 1, 1, PartialConstantInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

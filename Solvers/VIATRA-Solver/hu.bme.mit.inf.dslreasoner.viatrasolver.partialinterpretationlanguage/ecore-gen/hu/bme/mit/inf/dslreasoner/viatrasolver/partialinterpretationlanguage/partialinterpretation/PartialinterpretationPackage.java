@@ -230,13 +230,40 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_INTERPRETATION__MAX_NEW_STRINGS = 17;
 
 	/**
+	 * The feature id for the '<em><b>New Strings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__NEW_STRINGS = 18;
+
+	/**
+	 * The feature id for the '<em><b>New Reals</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__NEW_REALS = 19;
+
+	/**
+	 * The feature id for the '<em><b>New Integers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__NEW_INTEGERS = 20;
+
+	/**
 	 * The number of structural features of the '<em>Partial Interpretation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_INTERPRETATION_FEATURE_COUNT = 18;
+	int PARTIAL_INTERPRETATION_FEATURE_COUNT = 21;
 
 	/**
 	 * The number of operations of the '<em>Partial Interpretation</em>' class.
@@ -1147,6 +1174,39 @@ public interface PartialinterpretationPackage extends EPackage {
 	EAttribute getPartialInterpretation_MaxNewStrings();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewStrings <em>New Strings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>New Strings</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewStrings()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_NewStrings();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewReals <em>New Reals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>New Reals</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewReals()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_NewReals();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewIntegers <em>New Integers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>New Integers</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getNewIntegers()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EReference getPartialInterpretation_NewIntegers();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialConstantInterpretation <em>Partial Constant Interpretation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1671,6 +1731,30 @@ public interface PartialinterpretationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARTIAL_INTERPRETATION__MAX_NEW_STRINGS = eINSTANCE.getPartialInterpretation_MaxNewStrings();
+
+		/**
+		 * The meta object literal for the '<em><b>New Strings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__NEW_STRINGS = eINSTANCE.getPartialInterpretation_NewStrings();
+
+		/**
+		 * The meta object literal for the '<em><b>New Reals</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__NEW_REALS = eINSTANCE.getPartialInterpretation_NewReals();
+
+		/**
+		 * The meta object literal for the '<em><b>New Integers</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_INTERPRETATION__NEW_INTEGERS = eINSTANCE.getPartialInterpretation_NewIntegers();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialConstantInterpretationImpl <em>Partial Constant Interpretation</em>}' class.

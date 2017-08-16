@@ -59,6 +59,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getMaxNewIntegers <em>Max New Integers</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getMaxNewReals <em>Max New Reals</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getMaxNewStrings <em>Max New Strings</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getNewStrings <em>New Strings</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getNewReals <em>New Reals</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getNewIntegers <em>New Integers</em>}</li>
  * </ul>
  *
  * @generated
@@ -293,6 +296,36 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected int maxNewStrings = MAX_NEW_STRINGS_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getNewStrings() <em>New Strings</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewStrings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StringElement> newStrings;
+
+	/**
+	 * The cached value of the '{@link #getNewReals() <em>New Reals</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewReals()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RealElement> newReals;
+
+	/**
+	 * The cached value of the '{@link #getNewIntegers() <em>New Integers</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewIntegers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<IntegerElement> newIntegers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -636,6 +669,42 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<StringElement> getNewStrings() {
+		if (newStrings == null) {
+			newStrings = new EObjectContainmentEList<StringElement>(StringElement.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_STRINGS);
+		}
+		return newStrings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<RealElement> getNewReals() {
+		if (newReals == null) {
+			newReals = new EObjectContainmentEList<RealElement>(RealElement.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_REALS);
+		}
+		return newReals;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<IntegerElement> getNewIntegers() {
+		if (newIntegers == null) {
+			newIntegers = new EObjectContainmentEList<IntegerElement>(IntegerElement.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_INTEGERS);
+		}
+		return newIntegers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -663,6 +732,12 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 				return ((InternalEList<?>)getIntegerelements()).basicRemove(otherEnd, msgs);
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__BOOLEANELEMENTS:
 				return ((InternalEList<?>)getBooleanelements()).basicRemove(otherEnd, msgs);
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_STRINGS:
+				return ((InternalEList<?>)getNewStrings()).basicRemove(otherEnd, msgs);
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_REALS:
+				return ((InternalEList<?>)getNewReals()).basicRemove(otherEnd, msgs);
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_INTEGERS:
+				return ((InternalEList<?>)getNewIntegers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -712,6 +787,12 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 				return getMaxNewReals();
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_STRINGS:
 				return getMaxNewStrings();
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_STRINGS:
+				return getNewStrings();
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_REALS:
+				return getNewReals();
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_INTEGERS:
+				return getNewIntegers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -790,6 +871,18 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_STRINGS:
 				setMaxNewStrings((Integer)newValue);
 				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_STRINGS:
+				getNewStrings().clear();
+				getNewStrings().addAll((Collection<? extends StringElement>)newValue);
+				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_REALS:
+				getNewReals().clear();
+				getNewReals().addAll((Collection<? extends RealElement>)newValue);
+				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_INTEGERS:
+				getNewIntegers().clear();
+				getNewIntegers().addAll((Collection<? extends IntegerElement>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -856,6 +949,15 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_STRINGS:
 				setMaxNewStrings(MAX_NEW_STRINGS_EDEFAULT);
 				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_STRINGS:
+				getNewStrings().clear();
+				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_REALS:
+				getNewReals().clear();
+				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_INTEGERS:
+				getNewIntegers().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -904,6 +1006,12 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 				return maxNewReals != MAX_NEW_REALS_EDEFAULT;
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_STRINGS:
 				return maxNewStrings != MAX_NEW_STRINGS_EDEFAULT;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_STRINGS:
+				return newStrings != null && !newStrings.isEmpty();
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_REALS:
+				return newReals != null && !newReals.isEmpty();
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_INTEGERS:
+				return newIntegers != null && !newIntegers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
