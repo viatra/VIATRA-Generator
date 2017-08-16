@@ -46,7 +46,7 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 		
 		this.elementBackwardTrace = initElementBackwardTrace(trace)
 		this.booleanForwardTrace = initialisePrimitiveElementTrace(
-			null,null,null,partialInterpretation.booleanelements,[it.value])
+			null,null,[null],partialInterpretation.booleanelements,[it.value])
 		integerForwardTrace = initialisePrimitiveElementTrace(
 			0,[it+1],[it],partialInterpretation.integerelements,[it.value])
 		realForwardTrace = initialisePrimitiveElementTrace(

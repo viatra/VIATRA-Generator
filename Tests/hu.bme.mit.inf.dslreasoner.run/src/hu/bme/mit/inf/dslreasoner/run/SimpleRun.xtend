@@ -64,16 +64,16 @@ class SimpleRun {
 		println("Problem created")
 		var LogicResult solution
 		var LogicReasoner reasoner
-		/*
+		//*
 		reasoner = new ViatraReasoner
 		val viatraConfig = new ViatraReasonerConfiguration => [
 			it.typeScopes.maxNewElements = 40
 			it.typeScopes.minNewElements = 40
 			it.solutionScope.numberOfRequiredSolution = 1
 			it.existingQueries = queries.patterns.map[it.internalQueryRepresentation]
-			it.debugCongiguration.logging = true
+			it.debugCongiguration.logging = false
 			it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
-			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
+			it.debugCongiguration.partialInterpretatioVisualiser = null//new GraphvizVisualisation
 		]
 		solution = reasoner.solve(logicProblem,viatraConfig,workspace)
 		/*/

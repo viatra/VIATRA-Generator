@@ -81,7 +81,7 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 			«ENDFOR»
 		} or {
 			find interpretation(problem,interpretation);
-			PartialInterpretation.openWorldElementPrototype(interpetation,element);
+			PartialInterpretation.openWorldElementPrototypes(interpetation,element);
 		} or
 		«ENDIF»
 		{ «referInstanceOf(type,Modality.MUST,"element")» }

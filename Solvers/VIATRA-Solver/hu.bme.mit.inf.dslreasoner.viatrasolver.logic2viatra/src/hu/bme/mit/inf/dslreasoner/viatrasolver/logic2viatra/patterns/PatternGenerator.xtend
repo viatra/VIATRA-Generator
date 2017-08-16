@@ -1,31 +1,31 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
-import java.util.Map
-import org.eclipse.emf.ecore.EReference
-import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
-import org.eclipse.xtend.lib.annotations.Accessors
-import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
-import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
-import org.eclipse.emf.ecore.EAttribute
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
-import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransformedViatraWellformednessConstraint
-import java.util.HashMap
-import java.util.HashSet
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
-import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.DefinedByDerivedFeature
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.DefinedByDerivedFeature
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransformedViatraWellformednessConstraint
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import java.util.HashMap
+import java.util.Map
+import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
+import org.eclipse.xtend.lib.annotations.Accessors
+
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer //= new TypeIndexer(this)
@@ -183,7 +183,7 @@ class PatternGenerator {
 			} or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.realelements(interpetation,element);
-			}
+			} or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.stringelements(interpetation,element);
 			}
@@ -197,15 +197,15 @@ class PatternGenerator {
 			} or {
 				find interpretation(problem,interpetation);
 				neg find integerCloseWorld(interpetation);
-				PartialInterpretation.newIntegers(interpetation,element)
+				PartialInterpretation.newIntegers(interpetation,element);
 			} or {
 				find interpretation(problem,interpetation);
 				neg find realCloseWorld(interpetation);
-				PartialInterpretation.newReals(interpetation,element)
+				PartialInterpretation.newReals(interpetation,element);
 			} or {
 				find interpretation(problem,interpetation);
 				neg find stringCloseWorld(interpetation);
-				PartialInterpretation.newStrings(interpetation,element)
+				PartialInterpretation.newStrings(interpetation,element);
 			}
 			
 			private pattern elementCloseWorld(interpetation:PartialInterpretation) {
@@ -242,25 +242,25 @@ class PatternGenerator {
 			//////////
 			// 1.1.1 primitive Type Indexers
 			//////////
-			pattern instaneofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+			pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.booleanelements(interpretation,element);
 			}
-			pattern instaneofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+			pattern instanceofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.integerelements(interpretation,element);
 			} or {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.newIntegers(interpetation,element);
 			}
-			pattern instaneofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+			pattern instanceofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 				find interpretation(problem,interpretation);
-				PartialInterpretation.realements(interpretation,element);
+				PartialInterpretation.realelements(interpretation,element);
 			} or {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.newReals(interpetation,element);
 			}
-			pattern instaneofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+			pattern instanceofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.stringelements(interpretation,element);
 			} or {
