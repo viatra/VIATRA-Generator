@@ -91,7 +91,11 @@ class Constraint2Logic {
 		Map<PVariable, Variable> variable2Variable,
 		Viatra2LogicConfiguration config)
 	{
-		throw new UnsupportedOperationException
+		transitiveClosure(
+			constraint.referredQuery.lookup(viatra2LogicTrace.query2Relation),
+			(constraint.variablesTuple.get(0) as PVariable).lookup(variable2Variable).toTerm,
+			(constraint.variablesTuple.get(1) as PVariable).lookup(variable2Variable).toTerm
+		)
 	}
 	
 	def dispatch Term transformConstraint(ConstantValue constant,

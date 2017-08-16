@@ -45,8 +45,28 @@ class RelationDefinitionIndexer {
 			«relation.transformPattern(relation.lookup(relation2PQuery), Modality.MUST)»
 			«relation.transformPattern(relation.lookup(relation2PQuery), Modality.MAY)»
 			«relation.transformPattern(relation.lookup(relation2PQuery), Modality.CURRENT)»
+			«IF fqn2PQuery.values.relationDefinitionIsUsedInTransitiveClosure(relation.lookup(relation2PQuery))»
+				«relation.transformPatternWithTwoParameters(relation.lookup(relation2PQuery), Modality.MUST)»
+				«relation.transformPatternWithTwoParameters(relation.lookup(relation2PQuery), Modality.MAY)»
+				«relation.transformPatternWithTwoParameters(relation.lookup(relation2PQuery), Modality.CURRENT)»
+			«ENDIF»
 		«ENDFOR»
 		'''
+	}
+	
+	private def relationDefinitionIsUsedInTransitiveClosure(Iterable<PQuery> all, PQuery r) {
+		all.exists[
+			it.disjunctBodies.bodies.exists[
+				it.constraints.exists[
+					val constraint = it
+					if(constraint instanceof BinaryTransitiveClosure) {
+						return constraint.referredQuery === r
+					} else {
+						return false
+					}
+				]
+			]
+		]
 	}
 	
 	private def relationDefinitionName(RelationDefinition relation, Modality modality)
@@ -73,6 +93,13 @@ class RelationDefinitionIndexer {
 			throw new UnsupportedOperationException('''Can not transform pattern "«p.fullyQualifiedName»"!''',e)
 		}
 	}
+	private def transformPatternWithTwoParameters(RelationDefinition relation, PQuery p, Modality modality) {
+		return '''
+			private pattern twoParam_«relationDefinitionName(relation,modality)»(«FOR param : p.parameters SEPARATOR ', '»var_«param.name»«ENDFOR») {
+				find «relationDefinitionName(relation,modality)»(_,_,«FOR param : p.parameters SEPARATOR ', '»var_«param.name»«ENDFOR»);
+			}
+		'''
+	}
 	
 	private def toMustMay(Modality modality) {
 		if(modality == Modality::MAY) return Modality::MAY
@@ -80,7 +107,7 @@ class RelationDefinitionIndexer {
 	} 
 	
 	def public referPattern(PQuery p, String[] variables, Modality modality, boolean positive, boolean transitive) '''
-		«IF !positive»neg «ENDIF»find «modality.name.toLowerCase»InRelation_pattern_«p.fullyQualifiedName.replace('.','_')»«IF transitive»+«ENDIF»(problem,interpretation,«variables.join(',')»);
+		«IF !positive»neg «ENDIF»find «IF transitive»twoParam_«ENDIF»«modality.name.toLowerCase»InRelation_pattern_«p.fullyQualifiedName.replace('.','_')»«IF transitive»+«ENDIF»(«IF !transitive»problem,interpretation,«ENDIF»«variables.join(',')»);
 	'''
 	
 	private dispatch def transformConstraint(TypeConstraint constraint, Modality modality) {
