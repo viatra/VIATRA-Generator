@@ -2,6 +2,8 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
 
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
@@ -15,11 +17,9 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.Enumerator
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.emf.ecore.resource.Resource
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 
 class InstanceModel2PartialInterpretation {
 	val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
@@ -87,8 +87,8 @@ class InstanceModel2PartialInterpretation {
 					}
 				} else {
 					val target = source.eGet(reference) as EObject
-					val targetElement = target.lookup(object2DefinedElement)
 					if(target !== null) {
+						val targetElement = target.lookup(object2DefinedElement)
 						translateLink(interpretation,sourceElement,targetElement)
 					}
 				}
