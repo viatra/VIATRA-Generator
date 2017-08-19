@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.domains.alloyexamples/src"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.domains.alloyexamples" modelName="FileSytem"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>FileSytem.ecore</foreignModel>
+  <genPackages prefix="Filesystem" basePackage="hu.bme.mit.inf.dslreasoner.domains.alloyexamples"
+      disposableProviderFactory="true" ecorePackage="FileSytem.ecore#/">
+    <genClasses ecoreClass="FileSytem.ecore#//FileSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//FileSystem/root"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference FileSytem.ecore#//FileSystem/live"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="FileSytem.ecore#//FSObject"/>
+    <genClasses ecoreClass="FileSytem.ecore#//Dir">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//Dir/contents"/>
+    </genClasses>
+    <genClasses ecoreClass="FileSytem.ecore#//File">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FileSytem.ecore#//File/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="FileSytem.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//Model/filesystems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//Model/otherFSObjects"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,29 @@
+package hu.bme.mit.inf.dslreasoner.domains.alloyexamples
+
+import epackage "http://www.eclipse.org/emf/2002/Ecore"
+
+pattern directSupertype(a: EClass, b:EClass) {
+	EClass.eSuperTypes(a,b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern loopInInheritence(a: EClass) {
+	find directSupertype+(a,a);
+}
+
+pattern opposite(a:EReference, b: EReference) {
+	EReference.eOpposite(a,b);
+}
+@Constraint(key={a}, severity="error", message="error")
+pattern oppositeDifferentClass(a:EReference) {
+	EReference.eOpposite(a,b);
+	EReference.eContainingClass(a,aContaining);
+	EReference.eType(b,bTarget);
+	aContaining != bTarget;
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern nonSymmetricOpposite(a:EReference, b:EReference) {
+	find opposite(a,b);
+	neg find opposite(b,a);
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated FileSytem -->
+    <package class="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FilesystemPackage" genModel="model/FileSytem.genmodel" uri="FS"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="FileSystem" feature-name="live" package-nsUri="FS"/>
+  </extension>
+  <extension id="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore" id="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.directSupertype"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.opposite"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.oppositeDifferentClass"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.nonSymmetricOpposite"/>
+    </group>
+  </extension>
+  <extension id="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.FileSystem" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.alloyexamples.FileSystem" id="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.FileSystem">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.patternContent"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.contentInNotLive"/>
+    </group>
+  </extension>
+</plugin>
