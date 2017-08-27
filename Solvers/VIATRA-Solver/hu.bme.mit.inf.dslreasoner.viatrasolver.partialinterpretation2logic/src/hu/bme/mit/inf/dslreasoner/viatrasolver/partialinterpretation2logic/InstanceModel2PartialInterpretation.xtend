@@ -87,7 +87,7 @@ class InstanceModel2PartialInterpretation {
 					}
 				} else {
 					val target = source.eGet(reference) as EObject
-					if(target !== null) {
+					if(target !== null && object2DefinedElement.containsKey(target)) {
 						val targetElement = target.lookup(object2DefinedElement)
 						translateLink(interpretation,sourceElement,targetElement)
 					}
