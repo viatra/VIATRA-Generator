@@ -84,6 +84,13 @@ class PartialInterpretation2Logic {
 			p.add(undefinedPart)
 			Supertype(definedPart,declaration)
 			Supertype(undefinedPart,declaration)
+			
+			for(containment : p.containmentHierarchies) {
+				if(containment.typesOrderedInHierarchy.contains(declaration)) {
+					containment.typesOrderedInHierarchy += definedPart
+					containment.typesOrderedInHierarchy += undefinedPart
+				}
+			}
 		}
 	}
 	

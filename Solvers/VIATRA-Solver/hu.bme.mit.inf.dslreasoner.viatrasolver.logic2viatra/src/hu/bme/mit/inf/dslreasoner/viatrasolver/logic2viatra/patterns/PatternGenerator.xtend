@@ -153,6 +153,7 @@ class PatternGenerator {
 		Map<String,PQuery> fqn2PQuery,
 		TypeAnalysisResult typeAnalysisResult
 	) {
+		
 		return '''
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
@@ -174,19 +175,23 @@ class PatternGenerator {
 			} or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.newElements(interpetation,element);
-			} or {
+			}
+			«IF problem.hasBoolean»or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.booleanelements(interpetation,element);
-			} or {
+			}«ENDIF»
+			«IF problem.hasInteger»or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.integerelements(interpetation,element);
-			} or {
+			}«ENDIF»
+			«IF problem.hasReal»or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.realelements(interpetation,element);
-			} or {
+			}«ENDIF»
+			«IF problem.hasString»or {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.stringelements(interpetation,element);
-			}
+			}«ENDIF»
 			
 			private pattern mayExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
 			    find mustExist(problem,interpetation,element);
@@ -194,32 +199,35 @@ class PatternGenerator {
 			    find interpretation(problem,interpetation);
 			    neg find elementCloseWorld(interpetation);
 			    PartialInterpretation.openWorldElementPrototypes(interpetation,element);
-			} or {
+			}
+			«IF problem.hasInteger»or {
 				find interpretation(problem,interpetation);
 				neg find integerCloseWorld(interpetation);
 				PartialInterpretation.newIntegers(interpetation,element);
-			} or {
+			}«ENDIF»
+			«IF problem.hasReal»or {
 				find interpretation(problem,interpetation);
 				neg find realCloseWorld(interpetation);
 				PartialInterpretation.newReals(interpetation,element);
-			} or {
+			}«ENDIF»
+			«IF problem.hasString»or {
 				find interpretation(problem,interpetation);
 				neg find stringCloseWorld(interpetation);
 				PartialInterpretation.newStrings(interpetation,element);
-			}
+			}«ENDIF»
 			
 			private pattern elementCloseWorld(interpetation:PartialInterpretation) {
 			    PartialInterpretation.maxNewElements(interpetation,0);
 			}
-			private pattern integerCloseWorld(interpetation:PartialInterpretation) {
+			«IF problem.hasInteger»private pattern integerCloseWorld(interpetation:PartialInterpretation) {
 			    PartialInterpretation.maxNewIntegers(interpetation,0);
-			}
-			private pattern realCloseWorld(interpetation:PartialInterpretation) {
+			}«ENDIF»
+			«IF problem.hasReal»private pattern realCloseWorld(interpetation:PartialInterpretation) {
 			    PartialInterpretation.maxNewReals(interpetation,0);
-			}
-			private pattern stringCloseWorld(interpetation:PartialInterpretation) {
+			}«ENDIF»
+			«IF problem.hasString»private pattern stringCloseWorld(interpetation:PartialInterpretation) {
 			    PartialInterpretation.maxNewStrings(interpetation,0);
-			}
+			}«ENDIF»
 			
 			////////////////////////
 			// 0.2 Equivalence

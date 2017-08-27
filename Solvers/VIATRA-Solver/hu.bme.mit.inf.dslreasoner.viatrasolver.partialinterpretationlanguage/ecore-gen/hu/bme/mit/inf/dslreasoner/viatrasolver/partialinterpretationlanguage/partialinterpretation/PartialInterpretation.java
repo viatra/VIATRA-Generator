@@ -218,7 +218,7 @@ public interface PartialInterpretation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Open World Element Prototypes</em>' containment reference list.
 	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_OpenWorldElementPrototypes()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<DefinedElement> getOpenWorldElementPrototypes();
