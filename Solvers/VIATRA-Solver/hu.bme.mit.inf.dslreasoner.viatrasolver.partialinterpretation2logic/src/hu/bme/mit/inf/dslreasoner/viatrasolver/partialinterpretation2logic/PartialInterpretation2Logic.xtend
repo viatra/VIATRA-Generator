@@ -20,8 +20,12 @@ import java.util.Set
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 
 @Data class PartialInterpretation2Logic_Trace {
+	Map<DefinedElement,DefinedElement> new2Old = new HashMap
+	
 	Map<TypeDeclaration, TypeDefinition> definedPart = new HashMap
 	Map<TypeDeclaration, TypeDeclaration> undefinedPart = new HashMap
 	Set<Type> originalTypes = new HashSet
@@ -38,7 +42,7 @@ class PartialInterpretation2Logic {
 		if(! i.newElements.empty) {
 			
 			// Elements adding
-			addExistingElementToProblem(p,i)
+			addExistingElementToProblem(p,i,trace)
 			
 			// Types
 			for(partialTypeDeclaration : i.partialtypeinterpratation) {
@@ -48,12 +52,13 @@ class PartialInterpretation2Logic {
 			
 			// Relations
 			for(partialRelationInterpretation : i.partialrelationinterpretation) {
+				//println(partialRelationInterpretation.interpretationOf.name)
 				relationLinksToAssertion(p,partialRelationInterpretation,trace)
 			}
 		}
 	}
 	
-	private def addExistingElementToProblem(LogicProblem p, PartialInterpretation i) {
+	private def addExistingElementToProblem(LogicProblem p, PartialInterpretation i,PartialInterpretation2Logic_Trace trace) {
 		val newElements = new ArrayList(i.newElements)
 		var newElementIndex = 1
 		for(newElement : newElements) {
@@ -136,6 +141,8 @@ class PartialInterpretation2Logic {
 				links.map[link|createLink(link,relation)].And
 			}
 			val assertion = Assertion('''PartialInterpretation «r.interpretationOf.name»''',term)
+			//val error= assertion.eAllContents.toIterable.filter(SymbolicValue).filter[it.symbolicReference === null] 
+			//error.forEach[println("error")]
 			p.add(assertion)
 		}
 		
@@ -143,11 +150,15 @@ class PartialInterpretation2Logic {
 	
 	def private createLink(RelationLink link, SymbolicDeclaration relationDeclaration) {
 		if(link instanceof BinaryElementRelationLink) {
-			return createSymbolicValue=>[
-				it.symbolicReference=relationDeclaration
-				it.parameterSubstitutions += createSymbolicValue => [link.param1]
-				it.parameterSubstitutions += createSymbolicValue => [link.param2]
-			]
+			if((link.param1 !== null) && (link.param2 !== null)) {
+				return createSymbolicValue=>[
+					it.symbolicReference=relationDeclaration
+					it.parameterSubstitutions += createSymbolicValue => [it.symbolicReference = link.param1]
+					it.parameterSubstitutions += createSymbolicValue => [it.symbolicReference = link.param2]
+				]
+			} else {
+				throw new IllegalArgumentException
+			}
 		} else throw new UnsupportedOperationException
 	}
 }
