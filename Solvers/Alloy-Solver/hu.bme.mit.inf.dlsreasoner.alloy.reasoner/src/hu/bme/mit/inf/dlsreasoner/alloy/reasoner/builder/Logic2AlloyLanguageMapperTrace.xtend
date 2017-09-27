@@ -17,6 +17,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import java.util.HashMap
 import java.util.Map
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 
 interface Logic2AlloyLanguageMapper_TypeMapperTrace {}
 
@@ -39,11 +40,17 @@ class Logic2AlloyLanguageMapperTrace {
 	public val Map<FunctionDeclaration,ALSFieldDeclaration> functionDeclaration2LanguageField = new HashMap
 	public val Map<FunctionDefinition,ALSFunctionDefinition> functionDefinition2Function = new HashMap
 	
-	public val Map<RelationDeclaration,ALSFieldDeclaration> relationDeclaration2Global = new HashMap
+	public val Map<RelationDeclaration, ALSFieldDeclaration> relationDeclaration2Global = new HashMap
 	public val Map<RelationDeclaration, ALSFieldDeclaration> relationDeclaration2Field = new HashMap
 	public val Map<RelationDefinition,ALSRelationDefinition> relationDefinition2Predicate = new HashMap
+	
+	public val Map<RelationDeclaration, ALSFieldDeclaration> transitiveClosureTarget2Global = new HashMap
+	public val Map<RelationDeclaration, ALSFieldDeclaration> transitiveClosureTarget2Field = new HashMap
 	
 	public var Map<ConstantDeclaration, ConstantDefinition> constantDefinitions
 	public var Map<FunctionDeclaration, FunctionDefinition> functionDefinitions
 	public var Map<RelationDeclaration, RelationDefinition> relationDefinitions
+	
+	public var Map<Relation, ALSFieldDeclaration> relationInTransitiveToGlobalField = new HashMap
+	public var Map<Relation, ALSFieldDeclaration> relationInTransitiveToHosterField = new HashMap
 }

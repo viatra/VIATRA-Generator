@@ -64,6 +64,8 @@ import java.util.Collection
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.UpperMultiplicityAssertion
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDirectProduct
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 
 class Logic2AlloyLanguageMapper {
 	private val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
@@ -102,10 +104,12 @@ class Logic2AlloyLanguageMapper {
 		trace.constantDefinitions = problem.collectConstantDefinitions
 		trace.functionDefinitions = problem.collectFunctionDefinitions
 		trace.relationDefinitions = problem.collectRelationDefinitions
+		val calledInTransitiveClosure = problem.collectTransitiveRelationCalls
 		
-		problem.constants.forEach[this.constantMapper.transformConstant(it,trace)]
+		problem.constants.forEach[this.constantMapper.transformConstant(it, trace)]
 		problem.functions.forEach[this.functionMapper.transformFunction(it, trace)]
 		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
+		calledInTransitiveClosure.forEach[this.relationMapper.prepareTransitiveClosure(it, trace)]
 		
 		problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstantDefinitionSpecification(it,trace)]
 		problem.functions.filter(FunctionDefinition).forEach[this.functionMapper.transformFunctionDefinitionSpecification(it,trace)]
@@ -142,6 +146,8 @@ class Logic2AlloyLanguageMapper {
 		
 		return new TracedOutput(specification,trace)
 	}
+	
+
 	
 	def transformInverseAssertion(InverseRelationAssertion assertion, Logic2AlloyLanguageMapperTrace trace) {
 		val a = assertion.inverseA
@@ -213,14 +219,20 @@ class Logic2AlloyLanguageMapper {
 			return ALSMultiplicity::SOME
 		} else if(multiplicity === ALSMultiplicity::LONE) {
 			return ALSMultiplicity::ONE
+		} else if(multiplicity == ALSMultiplicity::ONE) {
+			return ALSMultiplicity::ONE
 		} else {
 			throw new IllegalArgumentException('''Lower multiplicity is already set!''')
 		}
 	}
 	private def addUpper(ALSMultiplicity multiplicity) {
-		if(multiplicity === ALSMultiplicity::SET || multiplicity === null) {
+		if(multiplicity === ALSMultiplicity::ALL) {
+			return ALSMultiplicity::LONE
+		} else if(multiplicity === ALSMultiplicity::SET || multiplicity === null) {
 			return ALSMultiplicity::LONE
 		} else if(multiplicity === ALSMultiplicity::SOME) {
+			return ALSMultiplicity::ONE
+		} else if(multiplicity == ALSMultiplicity::ONE) {
 			return ALSMultiplicity::ONE
 		} else {
 			throw new IllegalArgumentException('''Upper multiplicity is already set!''')
@@ -253,6 +265,9 @@ class Logic2AlloyLanguageMapper {
 			res.put(it.defines,it)
 		]
 		return res
+	}
+	private def collectTransitiveRelationCalls(LogicProblem problem) {
+		return problem.eAllContents.filter(TransitiveClosure).map[it.relation].toSet
 	}
 	
 	////////////////////
@@ -380,11 +395,21 @@ class Logic2AlloyLanguageMapper {
 		]
 	}
 	
+	def dispatch protected ALSTerm transformTerm(TransitiveClosure tc, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
+		return this.relationMapper.transformTransitiveRelationReference(
+			tc.relation,
+			tc.leftOperand.transformTerm(trace,variables),
+			tc.rightOperand.transformTerm(trace,variables),
+			trace
+		)
+	}
+	
 	def dispatch protected ALSTerm transformTerm(SymbolicValue symbolicValue, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
 		symbolicValue.symbolicReference.transformSymbolicReference(symbolicValue.parameterSubstitutions,trace,variables) }
 	
 	def dispatch protected ALSTerm transformSymbolicReference(DefinedElement referred, List<Term> parameterSubstitutions, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
-		typeMapper.transformReference(referred,trace)}
+		typeMapper.transformReference(referred,trace)
+	}
 	def dispatch protected ALSTerm transformSymbolicReference(ConstantDeclaration constant, List<Term> parameterSubstitutions, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
 		if(trace.constantDefinitions.containsKey(constant)) {
 			return this.transformSymbolicReference(constant.lookup(trace.constantDefinitions),parameterSubstitutions,trace,variables)

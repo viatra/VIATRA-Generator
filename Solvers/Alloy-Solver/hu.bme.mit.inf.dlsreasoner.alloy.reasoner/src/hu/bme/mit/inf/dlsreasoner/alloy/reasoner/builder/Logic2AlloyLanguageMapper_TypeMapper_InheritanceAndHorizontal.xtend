@@ -30,58 +30,62 @@ class Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal implements L
 	}
 	
 	override transformTypes(Collection<Type> types, Collection<DefinedElement> elements, Logic2AlloyLanguageMapper mapper, Logic2AlloyLanguageMapperTrace trace) {
-		if(types.exists[hasDefinedSupertype]) {
-			throw new UnsupportedOperationException('''Defined supertype is not supported by this type mapping!''')
-		} else {
+		val typeTrace = new Logic2AlloyLanguageMapper_TypeMapperTrace_InheritanceAndHorizontal
+		trace.typeMapperTrace = typeTrace
+		
+		// 1. A global type for Objects is created
+		val objectSig = createALSSignatureDeclaration => [it.name = support.toID(#["util","Object"])]
+		val objectBody = createALSSignatureBody => [
+			it.declarations += objectSig
+			it.abstract = true
+		]
+		typeTrace.objectSupperClass = objectSig
+		trace.specification.signatureBodies += objectBody
+		
+		// 2. Each type is mapped to a unique sig
+		for(type : types) {
+			val sig = createALSSignatureDeclaration => [it.name = support.toIDMultiple("type",type.name)]
+			val body = createALSSignatureBody => [it.declarations += sig]
+			body.abstract = type.isIsAbstract || (type instanceof TypeDefinition)
 			
-			val typeTrace = new Logic2AlloyLanguageMapper_TypeMapperTrace_InheritanceAndHorizontal
-			trace.typeMapperTrace = typeTrace
+			trace.specification.signatureBodies += body
+			typeTrace.type2ALSType.put(type,sig)
 			
-			// 1. A global type for Objects is created
-			val objectSig = createALSSignatureDeclaration => [it.name = support.toID(#["util","Object"])]
-			val objectBody = createALSSignatureBody => [
-				it.declarations += objectSig
-				it.abstract = true
-			]
-			typeTrace.objectSupperClass = objectSig
-			trace.specification.signatureBodies += objectBody
-			
-			// 2. Each type is mapped to a unique sig
-			for(type : types) {
-				val sig = createALSSignatureDeclaration => [it.name = support.toIDMultiple("type",type.name)]
-				val body = createALSSignatureBody => [it.declarations += sig]
-				body.abstract = type.isIsAbstract || (type instanceof TypeDefinition)
-				
-				trace.specification.signatureBodies += body
-				typeTrace.type2ALSType.put(type,sig)
-				
-				if(type instanceof TypeDefinition) {
-					val elementContainer = createALSSignatureBody => [it.multiplicity = ALSMultiplicity::ONE it.supertype = sig]
-					for(element : type.elements) {
-						val signature = createALSSignatureDeclaration => [it.name = support.toIDMultiple("element",element.name)]
-						elementContainer.declarations += signature
-						
-					}
-					trace.specification.signatureBodies += elementContainer
-				}
-				
-				typeTrace.typeSelection.put(type,new LinkedList()=>[add(sig)])
+			typeTrace.typeSelection.put(type,new LinkedList()=>[add(sig)])
+		}
+		
+		for(element : elements) {
+			val mostSpecificTypes = element.definedInType.filter[it.subtypes.empty]
+			if(mostSpecificTypes.size== 1) {
+				val mostSpecificSubtype = mostSpecificTypes.head
+				val elementContainer = createALSSignatureBody => [
+					it.multiplicity = ALSMultiplicity::ONE
+					it.supertype =typeTrace.type2ALSType.get(mostSpecificSubtype)
+				]
+				val signature = createALSSignatureDeclaration => [it.name = support.toIDMultiple("element",element.name)]
+				elementContainer.declarations += signature
+				typeTrace.definedElement2Declaration.put(element,signature)
+				trace.specification.signatureBodies += elementContainer
+			} else {
+				throw new UnsupportedOperationException
 			}
-			
-			// 6. Each inheritance is modeled by extend keyword
-			for(type : types) {
-				if(type.supertypes.size == 1) {
-					val alsType = typeTrace.type2ALSType.get(type.supertypes.head)
-					(type.eContainer as ALSSignatureBody).supertype = alsType
-				} else if(type.supertypes.size > 1){
-					val alsMainType = typeTrace.type2ALSType.get(type.supertypes.head)
-					(type.eContainer as ALSSignatureBody).supertype = alsMainType
-					for(otherType : type.supertypes.filter[it != alsMainType]) {
-						typeTrace.typeSelection.get(otherType).add(typeTrace.type2ALSType.get(otherType))
-					}
+		}
+		
+		// 6. Each inheritance is modeled by extend keyword
+		for(type : types) {
+			if(type.supertypes.size == 0) {
+				(typeTrace.type2ALSType.get(type).eContainer as ALSSignatureBody).supertype = typeTrace.objectSupperClass
+			}if(type.supertypes.size == 1) {
+				val alsType = typeTrace.type2ALSType.get(type.supertypes.head)
+				(typeTrace.type2ALSType.get(type).eContainer as ALSSignatureBody).supertype = alsType
+				
+			} else if(type.supertypes.size > 1){
+				val alsMainType = typeTrace.type2ALSType.get(type.supertypes.head)
+				(typeTrace.type2ALSType.get(type).eContainer as ALSSignatureBody).supertype = alsMainType
+				for(otherType : type.supertypes.filter[it != alsMainType]) {
+					typeTrace.typeSelection.get(otherType).add(typeTrace.type2ALSType.get(type))
 				}
 			}
-				
 		}
 	}
 	
@@ -114,7 +118,8 @@ class Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal implements L
 	}
 	
 	override transformReference(DefinedElement referred, Logic2AlloyLanguageMapperTrace trace) {
-		createALSReference => [it.referred = trace.typeTrace.definedElement2Declaration.get(referred)]
+		val r =  trace.typeTrace.definedElement2Declaration.get(referred)
+		return createALSReference => [it.referred =r]
 	}
 	
 	override getUndefinedSupertypeScope(int undefinedScope, Logic2AlloyLanguageMapperTrace trace) {

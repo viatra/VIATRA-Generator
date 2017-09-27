@@ -1,13 +1,13 @@
 package hu.bme.mit.inf.dlsreasoner.alloy.reasoner
 
+import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Alloy2LogicMapper
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyHandler
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyModelInterpretation
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyModelInterpretation_TypeInterpretation_FilteredTypes
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapperTrace
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.MonitoredAlloySolution
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal
 import hu.bme.mit.inf.dslreasoner.AlloyLanguageStandaloneSetupGenerated
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
@@ -16,8 +16,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution
-import java.util.List
 
 class AlloySolver extends LogicReasoner{
 	
@@ -27,7 +25,7 @@ class AlloySolver extends LogicReasoner{
 		x.createInjectorAndDoEMFRegistration
 	}
 	
-	val Logic2AlloyLanguageMapper forwardMapper = new Logic2AlloyLanguageMapper(new Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes)
+	val Logic2AlloyLanguageMapper forwardMapper = new Logic2AlloyLanguageMapper(new Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal)
 	val AlloyHandler handler = new AlloyHandler
 	val Alloy2LogicMapper backwardMapper = new Alloy2LogicMapper
 	
