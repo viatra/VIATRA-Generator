@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.resource.Resource
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.util.List
 
 abstract class ReasonerWorkspace{
 	
@@ -93,6 +94,8 @@ abstract class ReasonerWorkspace{
 	
 //	def void reactivate()
 //	def void deactivate()
+
+	def public List<String> allFiles();
 
 	def public URI writeText(String name, CharSequence content);
 	

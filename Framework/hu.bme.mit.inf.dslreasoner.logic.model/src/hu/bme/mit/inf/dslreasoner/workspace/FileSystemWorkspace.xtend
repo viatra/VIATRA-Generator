@@ -71,4 +71,14 @@ class FileSystemWorkspace extends ReasonerWorkspace{
 	override subWorkspace(String targetFolder, String prefix) {
 		return new FileSystemWorkspace(this.targetFolder + "/" + targetFolder, this.prefix + prefix)
 	}
+	
+	override allFiles() {
+		val folder = new File(folderURI.toFileString)
+		if(folder.isDirectory) {
+			return folder.list
+		} else {
+			throw new IllegalArgumentException('''"«folderURI.toFileString»" is not a folder!''')
+		}
+	}
+	
 }

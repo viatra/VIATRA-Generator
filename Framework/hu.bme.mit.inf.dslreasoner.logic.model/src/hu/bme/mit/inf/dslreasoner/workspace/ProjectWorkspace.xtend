@@ -102,4 +102,9 @@ class ProjectWorkspace extends ReasonerWorkspace{
 	override subWorkspace(String targetFolder, String prefix) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
+	
+	override allFiles() {
+		target.members.map[it.name]
+	}
+	
 }
