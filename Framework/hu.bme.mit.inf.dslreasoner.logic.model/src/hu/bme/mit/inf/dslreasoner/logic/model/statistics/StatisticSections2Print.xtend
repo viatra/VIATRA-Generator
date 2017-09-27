@@ -19,5 +19,5 @@ class StatisticSections2Print {
 	
 	private def dispatch String readValue(IntStatisticEntry e) { return e.value.toString }
 	private def dispatch String readValue(RealStatisticEntry e){ return e.value.toString }
-	private def dispatch String readValue(StringStatisticEntry e) { return "\n" + e.value }
+	private def dispatch String readValue(StringStatisticEntry e) { return e.value }
 }
