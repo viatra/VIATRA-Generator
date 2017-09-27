@@ -74,7 +74,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private SolutionStore solutionStore;
 	private SolutionStoreWithCopy solutionStoreWithCopy;
 	private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
-	private boolean isInterrupted = false;
+	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
 	
