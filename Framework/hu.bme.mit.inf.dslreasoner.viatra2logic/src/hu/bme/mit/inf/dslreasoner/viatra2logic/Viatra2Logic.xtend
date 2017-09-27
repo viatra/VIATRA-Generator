@@ -79,7 +79,11 @@ class  Viatra2Logic {
 			}
 		}
 		for(query: queries.patterns) {
-			this.transformQuerySpecification(query,ecore2LogicTrace,viatra2LogicTrace,config)
+			try {
+				this.transformQuerySpecification(query,ecore2LogicTrace,viatra2LogicTrace,config)
+			} catch (IllegalArgumentException e){
+				throw new IllegalArgumentException('''Unable to translate query: "«query.fullyQualifiedName»".''',e)
+			}
 		}
 		/*for(d : viatra2LogicTrace.query2Relation.values) {
 			checkDefinition(d)
