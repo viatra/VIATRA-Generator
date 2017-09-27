@@ -1,25 +1,30 @@
 package hu.bme.mit.inf.dslreasoner.run
 
 import hu.bme.mit.inf.dslreasomer.domains.transima.fam.FunctionalArchitecture.FunctionalArchitecturePackage
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.FileSystem
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FilesystemPackage
+import hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.Pattern
+import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
+import hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethodBasedGlobalConstraint
+import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.util.Collection
 import java.util.LinkedHashMap
 import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EEnumLiteral
-import org.eclipse.emf.ecore.EReference
-import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethodBasedGlobalConstraint
-import org.eclipse.xtext.xbase.lib.Functions.Function1
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import org.eclipse.emf.ecore.EObject
-import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
-import java.util.Collection
-import java.util.Set
-import java.util.Collections
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.xbase.lib.Functions.Function1
+import java.util.HashMap
+import org.eclipse.emf.ecore.EcorePackage
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore
 
 abstract class MetamodelLoader {
 	protected val ReasonerWorkspace workspace
@@ -65,7 +70,7 @@ class FAMLoader extends MetamodelLoader{
 	}
 	
 	override loadQueries(EcoreMetamodelDescriptor metamodel) {
-		val i = hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.Pattern.instance
+		val i = Pattern.instance
 		val patterns = i.specifications.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
@@ -88,11 +93,12 @@ class FAMLoader extends MetamodelLoader{
 class YakinduLoader extends MetamodelLoader{
 	
 	private var useSynchronization = true;
+	private var useComplexStates = false; 
 	public static val patternsWithSynchronization = #[
 		"synchHasNoOutgoing", "synchHasNoIncoming", "SynchronizedIncomingInSameRegion", "notSynchronizingStates",
 		"hasMultipleOutgoingTrainsition", "hasMultipleIncomingTrainsition", "SynchronizedRegionsAreNotSiblings",
-		"SynchronizedRegionDoesNotHaveMultipleRegions", "synchThree", "twoSynch"]
-	
+		"SynchronizedRegionDoesNotHaveMultipleRegions", "synchThree", "twoSynch","noSynch2","synch","noSynch4","noSynch3","noSynch"]
+	public static val patternsWithComplexStates =#["outgoingFromExit","outgoingFromFinal","choiceHasNoOutgoing","choiceHasNoIncoming"]
 	new(ReasonerWorkspace workspace) {
 		super(workspace)
 	}
@@ -100,12 +106,19 @@ class YakinduLoader extends MetamodelLoader{
 	public def setUseSynchronization(boolean useSynchronization) {
 		this.useSynchronization = useSynchronization
 	}
+	public def setUseComplexStates(boolean useComplexStates) {
+		this.useComplexStates = useComplexStates
+	}
 	
 	override loadMetamodel() {
 		val useSynchInThisLoad = this.useSynchronization
+		val useComplexStates = this.useComplexStates
 		
 		val package = YakindummPackage.eINSTANCE
-		val List<EClass> classes = package.EClassifiers.filter(EClass).filter[(useSynchInThisLoad) || (it.name != "Synchronization")].toList
+		val List<EClass> classes = package.EClassifiers.filter(EClass)
+			.filter[useSynchInThisLoad || (it.name != "Synchronization")]
+			.filter[useComplexStates   || (it.name != "Choice" && it.name != "Exit" && it.name != "FinalState")]
+			.toList
 		val List<EEnum> enums = package.EClassifiers.filter(EEnum).toList
 		val List<EEnumLiteral> literals = enums.map[ELiterals].flatten.toList
 		val List<EReference> references = classes.map[EReferences].flatten.toList
@@ -116,11 +129,17 @@ class YakinduLoader extends MetamodelLoader{
 	override loadQueries(EcoreMetamodelDescriptor metamodel) {
 		val useSynchInThisLoad = this.useSynchronization
 		
-		val i = hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns.instance
-		val patterns = i.specifications.filter[spec |
-			useSynchInThisLoad ||
-			!patternsWithSynchronization.exists[spec.fullyQualifiedName.endsWith(it)]
-		].toList
+		val i = Patterns.instance
+		val patterns = i.specifications
+			.filter[spec |
+				useSynchInThisLoad ||
+				!patternsWithSynchronization.exists[spec.fullyQualifiedName.endsWith(it)]
+			]
+			.filter[spec |
+				useComplexStates ||
+				!patternsWithComplexStates.exists[spec.fullyQualifiedName.endsWith(it)]
+			]
+			.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
 		val res = new ViatraQuerySetDescriptor(
@@ -145,4 +164,99 @@ class YakinduLoader extends MetamodelLoader{
 	override additionalConstraints() { //#[]
 		#[[method | new SGraphInconsistencyDetector(method)]]
 	}
+}
+
+class FileSystemLoader extends MetamodelLoader{
+	
+	new(ReasonerWorkspace workspace) {
+		super(workspace)
+	}
+	
+	override loadMetamodel() {
+		val package = FilesystemPackage.eINSTANCE
+		val List<EClass> classes = package.EClassifiers.filter(EClass).toList
+		val List<EEnum> enums = package.EClassifiers.filter(EEnum).toList
+		val List<EEnumLiteral> literals = enums.map[ELiterals].flatten.toList
+		val List<EReference> references = classes.map[EReferences].flatten.toList
+		val List<EAttribute> attributes = classes.map[EAttributes].flatten.toList
+		return new EcoreMetamodelDescriptor(classes,#{},false,enums,literals,references,attributes)
+	}
+	
+	override getRelevantTypes(EcoreMetamodelDescriptor descriptor) {
+		return null
+	}
+	
+	override getRelevantReferences(EcoreMetamodelDescriptor descriptor) {
+		null
+	}
+	
+	override loadQueries(EcoreMetamodelDescriptor metamodel) {
+		val patternGroup = FileSystem.instance
+		val patterns = patternGroup.specifications.toList
+		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
+		val derivedFeatures = new HashMap
+		derivedFeatures.put(patternGroup.live.internalQueryRepresentation,metamodel.references.filter[it.name == "live"].head)
+		return new ViatraQuerySetDescriptor(
+			patterns,
+			wfPatterns,
+			derivedFeatures
+		)
+
+	}
+	
+	override loadPartialModel() {
+		this.workspace.readModel(EObject,"fs.xmi").eResource.allContents.toList
+	}
+	
+	override additionalConstraints() {
+		#[[method | new FileSystemInconsistencyDetector(method)]]
+	}
+	
+}
+
+class EcoreLoader extends MetamodelLoader {
+	
+	new(ReasonerWorkspace workspace) {
+		super(workspace)
+	}
+	
+	override loadMetamodel() {
+		val package = EcorePackage.eINSTANCE
+		val List<EClass> classes = package.EClassifiers.filter(EClass).filter[it.name!="EFactory"].toList
+		val List<EEnum> enums = package.EClassifiers.filter(EEnum).toList
+		val List<EEnumLiteral> literals = enums.map[ELiterals].flatten.toList
+		val List<EReference> references = classes.map[EReferences].flatten.filter[it.name!="eFactoryInstance"].filter[!it.derived].toList
+		val List<EAttribute> attributes = #[] //classes.map[EAttributes].flatten.toList
+		return new EcoreMetamodelDescriptor(classes,#{},false,enums,literals,references,attributes)
+	}
+	
+	override getRelevantTypes(EcoreMetamodelDescriptor descriptor) {
+		return null
+	}
+	
+	override getRelevantReferences(EcoreMetamodelDescriptor descriptor) {
+		null
+	}
+	
+	override loadQueries(EcoreMetamodelDescriptor metamodel) {
+		val patternGroup = Ecore.instance
+		val patterns = patternGroup.specifications.toList
+		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
+		val derivedFeatures = new HashMap
+		return new ViatraQuerySetDescriptor(
+			patterns,
+			wfPatterns,
+			derivedFeatures
+		)
+
+	}
+	
+	override loadPartialModel() {
+		this.workspace.readModel(EObject,"ecore.xmi").eResource.allContents.toList
+	}
+	
+	override additionalConstraints() {
+		#[]
+	}
+	
 }

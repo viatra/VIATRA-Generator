@@ -73,7 +73,7 @@ class SimpleRun {
 			it.existingQueries = queries.patterns.map[it.internalQueryRepresentation]
 			it.debugCongiguration.logging = false
 			it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
-			it.debugCongiguration.partialInterpretatioVisualiser = null//new GraphvizVisualisation
+			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
 		]
 		solution = reasoner.solve(logicProblem,viatraConfig,workspace)
 		/*/

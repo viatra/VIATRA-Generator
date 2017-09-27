@@ -13,7 +13,7 @@ class SGraphInconsistencyDetector extends ModelGenerationMethodBasedGlobalConstr
 	var ViatraQueryMatcher<?> entryHasNoOutgoing
 	var ViatraQueryMatcher<?>  choiceHasNoOutgiong
 	var ViatraQueryMatcher<?>  choiceHasNoIncoming
-	//var ViatraQueryMatcher<?> noSynch
+	var ViatraQueryMatcher<?> noSynch
 	var ViatraQueryMatcher<?> synchronizationHasNoOutgoing
 	
 	var ViatraQueryMatcher<?> synchronizedSiblingRegions
@@ -47,15 +47,12 @@ class SGraphInconsistencyDetector extends ModelGenerationMethodBasedGlobalConstr
 				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_choiceHasNoOutgoing")
 			].head.getMatcher(context.queryEngine)
 			
-//			this.choiceHasNoIncoming = method.unfinishedWF.filter[
-//				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_choiceHasNoIncoming")
-//			].head.getMatcher(context.queryEngine)
 		} catch(Exception e) {	}
 		try{
-//			this.noSynch = method.unfinishedWF.filter[
-//				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noSynch")
-//			].head.getMatcher(context.queryEngine)
-//			
+			this.noSynch = method.unfinishedWF.filter[
+				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noSynch")
+			].head.getMatcher(context.queryEngine)
+			
 			this.synchronizedSiblingRegions = method.unfinishedWF.filter[
 				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionDoesNotHaveMultipleRegions")
 			].head.getMatcher(context.queryEngine)
@@ -68,15 +65,13 @@ class SGraphInconsistencyDetector extends ModelGenerationMethodBasedGlobalConstr
 	
 	override checkGlobalConstraint(ThreadContext context) {
 		if(noEntry !== null) {
-			var requiredNewObjects = 
-				noEntry.countMatches*2 +
-				entryHasNoOutgoing.countMatches + 
-				choiceHasNoOutgiong.countMatches+
-				//choiceHasNoIncoming.countMatches+
-				noStateInRegion.countMatches
+			var requiredNewObjects = noEntry.countMatches*2 +entryHasNoOutgoing.countMatches + noStateInRegion.countMatches
+			if(choiceHasNoOutgiong!=null) {
+				requiredNewObjects+=choiceHasNoOutgiong.countMatches
+			}	
 			if(synchronizationHasNoOutgoing!= null) {
 				requiredNewObjects += 
-					//noSynch.countMatches*2 + 
+					noSynch.countMatches*2 + 
 					synchronizationHasNoOutgoing.countMatches +
 					synchronizedSiblingRegions.countMatches*4 
 			}
