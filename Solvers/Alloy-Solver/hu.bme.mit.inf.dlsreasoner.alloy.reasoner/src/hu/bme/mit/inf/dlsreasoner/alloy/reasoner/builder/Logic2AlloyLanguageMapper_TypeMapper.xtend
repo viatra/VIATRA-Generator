@@ -13,4 +13,6 @@ interface Logic2AlloyLanguageMapper_TypeMapper {
 	def ALSSignatureDeclaration getUndefinedSupertype(Logic2AlloyLanguageMapperTrace trace)
 	def int getUndefinedSupertypeScope(int undefinedScope,Logic2AlloyLanguageMapperTrace trace)
 	def ALSTerm transformReference(DefinedElement referred,Logic2AlloyLanguageMapperTrace trace)
+	
+	def AlloyModelInterpretation_TypeInterpretation getTypeInterpreter()
 }

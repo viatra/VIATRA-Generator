@@ -18,13 +18,7 @@ import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class Logic2AlloyLanguageMapper_TypeMapperTrace_FilteredTypes
-	implements Logic2AlloyLanguageMapper_TypeMapperTrace
-{
-	public var ALSSignatureDeclaration objectSupperClass;
-	public val Map<Type, ALSSignatureDeclaration> type2ALSType = new HashMap;
-	public val Map<DefinedElement, ALSSignatureDeclaration> definedElement2Declaration = new HashMap
-}
+
 /**
  * Each object is an element of an Object set, and types are subsets of the objects.
  */
@@ -265,4 +259,7 @@ class Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes implements Logic2AlloyL
 		return undefinedScope + trace.typeTrace.definedElement2Declaration.size
 	}
 	
+	override getTypeInterpreter() {
+		return new AlloyModelInterpretation_TypeInterpretation_FilteredTypes
+	}
 }

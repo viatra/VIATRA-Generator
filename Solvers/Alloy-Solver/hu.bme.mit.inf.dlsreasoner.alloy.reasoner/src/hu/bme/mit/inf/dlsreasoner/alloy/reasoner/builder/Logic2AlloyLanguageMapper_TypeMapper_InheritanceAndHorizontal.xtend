@@ -2,24 +2,13 @@ package hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder
 
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSMultiplicity
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSignatureBody
-import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSignatureDeclaration
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import java.util.Collection
-import java.util.HashMap
 import java.util.LinkedList
-import java.util.List
-import java.util.Map
-
-class Logic2AlloyLanguageMapper_TypeMapperTrace_InheritanceAndHorizontal implements Logic2AlloyLanguageMapper_TypeMapperTrace {
-	public var ALSSignatureDeclaration objectSupperClass;
-	public val Map<Type, ALSSignatureDeclaration> type2ALSType = new HashMap;
-	public val Map<DefinedElement, ALSSignatureDeclaration> definedElement2Declaration = new HashMap
-	public val Map<Type, List<ALSSignatureDeclaration>> typeSelection = new HashMap 
-}
 
 class Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal implements Logic2AlloyLanguageMapper_TypeMapper{
 	private val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
@@ -125,4 +114,9 @@ class Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal implements L
 	override getUndefinedSupertypeScope(int undefinedScope, Logic2AlloyLanguageMapperTrace trace) {
 		return undefinedScope + trace.typeTrace.definedElement2Declaration.size
 	}
+	
+	override getTypeInterpreter() {
+		return new AlloyModelInterpretation_TypeInterpretation_InheritanceAndHorizontal
+	}
+	
 }
