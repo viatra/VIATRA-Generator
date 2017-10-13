@@ -14,10 +14,8 @@ import java.util.ArrayList
 import java.util.Collection
 import java.util.HashMap
 import java.util.List
-import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-
 
 /**
  * Each object is an element of an Object set, and types are subsets of the objects.

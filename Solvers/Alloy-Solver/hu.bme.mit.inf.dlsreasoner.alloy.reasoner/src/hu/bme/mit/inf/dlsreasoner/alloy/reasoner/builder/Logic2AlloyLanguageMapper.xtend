@@ -1,6 +1,7 @@
 package hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder
 
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDirectProduct
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDocument
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSEnumLiteral
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSMultiplicity
@@ -8,6 +9,9 @@ import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSNumericOperator
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSTerm
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSVariableDeclaration
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguageFactory
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.UpperMultiplicityAssertion
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
@@ -46,8 +50,12 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.Annotation
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.AssertionAnnotation
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import java.util.Collection
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
@@ -57,15 +65,6 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.Annotation
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.AssertionAnnotation
-import java.util.Collection
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.UpperMultiplicityAssertion
-import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDirectProduct
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 
 class Logic2AlloyLanguageMapper {
 	private val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
