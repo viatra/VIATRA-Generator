@@ -7,7 +7,7 @@ import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyModelInterpretatio
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyModelInterpretation_TypeInterpretation_FilteredTypes
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapperTrace
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes
 import hu.bme.mit.inf.dslreasoner.AlloyLanguageStandaloneSetupGenerated
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
@@ -25,7 +25,7 @@ class AlloySolver extends LogicReasoner{
 		x.createInjectorAndDoEMFRegistration
 	}
 	
-	val Logic2AlloyLanguageMapper forwardMapper = new Logic2AlloyLanguageMapper(new Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal)
+	val Logic2AlloyLanguageMapper forwardMapper = new Logic2AlloyLanguageMapper(new Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes)
 	val AlloyHandler handler = new AlloyHandler
 	val Alloy2LogicMapper backwardMapper = new Alloy2LogicMapper
 	
@@ -77,7 +77,7 @@ class AlloySolver extends LogicReasoner{
 		//val res = answers.map 
 		sols.map[
 			new AlloyModelInterpretation(
-				new AlloyModelInterpretation_TypeInterpretation_FilteredTypes,
+				forwardMapper.typeMapper.typeInterpreter,
 				it as A4Solution,
 				forwardMapper,
 				modelResult.trace as Logic2AlloyLanguageMapperTrace
