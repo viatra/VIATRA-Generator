@@ -27,38 +27,47 @@ class VisualiseAllModelInDirectory {
 //		for(subFolderName : folderName.listFiles) {
 //			subFolderName.absolutePath.visualiseModel
 //		}
+		visualise('''D:\FASE18Meas\OneMinus_Alloy''')
 	}
 	
-	def static visualiseModel(String folderName) {
-		val file = new File(folderName+"/"+"solution1.partialinterpretation")
-		val hasSource = file.exists
-
+	def static void visualise(String path) {
+		val file = new File(path)
+		if(file.isDirectory) {
+			for(subFileName : file.list) {
+				(path + "/" + subFileName).visualise
+			}
+		} else if(file.isFile) {
+			if(path.endsWith("partialinterpretation")) {
+				visualiseModel(file,path)
+			}
+		}	
+	}
+	
+	def static visualiseModel(File file, String fileName) {
+		val list = file.name.split("\\.")
+		val fileNameWithoutExtension = list.subList(0,list.length-1).join('.')
+		val parent = file.parent
 		
-		if(hasSource) {
-			val hasPng = new File(folderName+"/"+"solution1.png").exists
-			val hasGml = new File(folderName+"/"+"solution1.gml").exists
-			
-			val workspace = new FileSystemWorkspace(folderName,"")
-			val model = workspace.readModel(PartialInterpretation,"solution1.partialinterpretation")
-			
-			if(!hasGml) {
-				val partialInterpretation2GML = new PartialInterpretation2Gml
-				val gmlText = partialInterpretation2GML.transform(model)
-				workspace.writeText('''solution1.gml''',gmlText)
-				println('''solution1.gml''')
-			}
-
-			if(!hasPng && model.newElements.size <160) {
-				val visualiser = new GraphvizVisualisation
-				val visualisation = visualiser.visualiseConcretization(model)
-				visualisation.writeToFile(workspace,"solution1")
-				println("solution1.png")
-				println("Need png!")
-			}
-			
-			println('''«folderName» visualised''')
-		} else {
-			println('''«folderName» missing''')
+		val hasPng = new File(parent + "/" + fileNameWithoutExtension+".png").exists
+		val hasGml = new File(parent + "/" + fileNameWithoutExtension+".gml").exists
+		
+		val workspace = new FileSystemWorkspace(parent,"")
+		val model = workspace.readModel(PartialInterpretation,'''«fileNameWithoutExtension».partialinterpretation''')
+		
+		if(!hasGml) {
+			val partialInterpretation2GML = new PartialInterpretation2Gml
+			val gmlText = partialInterpretation2GML.transform(model)
+			workspace.writeText('''«fileNameWithoutExtension».gml''',gmlText)
+			println('''«fileNameWithoutExtension».gml''')
 		}
+
+		if(!hasPng && model.newElements.size <160) {
+			val visualiser = new GraphvizVisualisation
+			val visualisation = visualiser.visualiseConcretization(model)
+			visualisation.writeToFile(workspace,fileNameWithoutExtension)
+			println('''«fileNameWithoutExtension».png''')
+		}
+		
+		println('''«parent»/«fileNameWithoutExtension» visualised''')
 	}
 }

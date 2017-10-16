@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.run
 
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
@@ -18,25 +20,21 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.StateCoderStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
+import java.util.LinkedList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import org.eclipse.viatra.query.runtime.api.IPatternMatch
-import org.eclipse.viatra.query.runtime.api.IQuerySpecification
-import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.xtend.lib.annotations.Data
-import java.util.LinkedList
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvisVisualisation
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification
+import java.util.Set
+import java.util.Comparator
 
 enum Metamodel {
 	FAM, YakinduWOSynch, Yakindu
@@ -111,17 +109,18 @@ class ScenarioRunner {
 			
 		} else if(scenario.constraints == Constraints.MinusOne) {
 			var first = true
-			//for(remove : vq.validationPatterns) {
+			
+			for(remove : vq.validationPatterns) {
 				for(run : 1..scenario.runs) {
 					
-					//val removeName = remove.fullyQualifiedName
-					//val desc = new ViatraQuerySetDescriptor(vq.patterns,vq.validationPatterns.filter[it != remove].toSet,emptyMap)
-					runCase(first,"minusOne"+run,run,scenario,mm,vq,ps)
+					val removeName = remove.fullyQualifiedName
+					val vq_m = new ViatraQuerySetDescriptor(vq.patterns.filter[it != remove].toList,vq.validationPatterns.filter[it != remove].toSet,emptyMap)
+					runCase(first,"minusOne_"+removeName+"_"+run,run,scenario,mm,vq_m,ps)
 					first = false
 					System.gc System.gc System.gc
-					//Thread.sleep(3000)
+					Thread.sleep(3000)
 				}
-			//}
+			}
 		}
 	}
 	
@@ -170,7 +169,7 @@ class ScenarioRunner {
 		loader = if(metamodel == Metamodel::FAM) {
 			new FAMLoader(inputs)
 		} else if(metamodel == Metamodel::Yakindu || metamodel == Metamodel::YakinduWOSynch) {
-			new YakinduLoader(inputs) => [it.useSynchronization = false]
+			new YakinduLoader(inputs) => [it.useSynchronization = false it.useComplexStates = true]
 		} else throw new IllegalArgumentException('''Unknown domain: «metamodel»''')
 	}
 	
@@ -193,28 +192,28 @@ class ScenarioRunner {
 				it.nameNewElements = false
 				it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
 				it.searchSpaceConstraints.additionalGlobalConstraints += loader.additionalConstraints
-				it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
-			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
+				//it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
+				//it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
 				it.stateCoderStrategy = if(scenario.statecoder == StateCoder::ID) {
 					StateCoderStrategy::IDBased
 				} else {
 					StateCoderStrategy::Neighbourhood
 				}
 				if(scenario.statecoder != StateCoder::ID || scenario.statecoder != StateCoder::Normal) {
-					val range = if(scenario.statecoder != StateCoder::R1) {
+					val range = if(scenario.statecoder === StateCoder::R1) {
 						1
-					} else if(scenario.statecoder != StateCoder::R2) {
+					} else if(scenario.statecoder === StateCoder::R2) {
 						2
-					} else if(scenario.statecoder != StateCoder::R3) {
+					} else if(scenario.statecoder === StateCoder::R3) {
 						3
 					}
 					
 					it.diversityRequirement = new DiversityDescriptor => [
 						it.relevantTypes = null
 						it.relevantRelations = null
-						it.maxNumber = 1
+						it.maxNumber = 0
 						it.range = range
-						it.parallels = 1
+						it.parallels = 0
 					]
 				}
 			]
@@ -254,10 +253,15 @@ class ScenarioRunner {
 			val representationNumber = representationIndex + 1
 			if(representation instanceof PartialInterpretation) {
 				workspace.writeModel(representation, '''solution«representationNumber».partialinterpretation''')
-				val partialInterpretation2GML = new PartialInterpretation2Gml
-				val gml = partialInterpretation2GML.transform(representation)
-				//ecore2GML.transform(root)
-				workspace.writeText('''solutionVisualisation«representationNumber».gml''',gml)
+//				val partialInterpretation2GML = new PartialInterpretation2Gml
+//				val gml = partialInterpretation2GML.transform(representation)
+//				ecore2GML.transform(root)
+//				workspace.writeText('''solutionVisualisation«representationNumber».gml''',gml)
+				
+//				val visualiser = new GraphvizVisualisation
+//				val visualisation = visualiser.visualiseConcretization(representation)
+//				visualisation.writeToFile(workspace,'''solutionVisualisation«representationNumber»''')
+				
 			} else {
 				workspace.writeText('''solution«representationNumber».txt''',representation.toString)
 			}
@@ -313,7 +317,7 @@ class ScenarioRunner {
 
 class DiverseMeasurementRunner {
 	def static void main(String[] args) {
-		val scenario = new Scenario(30,49,Metamodel::Yakindu,Constraints.All,StateCoder.Normal,1,Solver::ViatraSolver)
+		val scenario = new Scenario(30,29,Metamodel::YakinduWOSynch,Constraints.Metamodel,StateCoder.R1,20,Solver::Alloy)
 		val scenarioRunner = new ScenarioRunner
 		scenarioRunner.runScenario(scenario)
 	}

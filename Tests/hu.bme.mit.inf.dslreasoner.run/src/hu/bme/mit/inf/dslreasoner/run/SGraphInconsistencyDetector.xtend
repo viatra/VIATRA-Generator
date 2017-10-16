@@ -12,7 +12,7 @@ class SGraphInconsistencyDetector extends ModelGenerationMethodBasedGlobalConstr
 	var ViatraQueryMatcher<?> noEntry
 	var ViatraQueryMatcher<?> entryHasNoOutgoing
 	var ViatraQueryMatcher<?>  choiceHasNoOutgiong
-	var ViatraQueryMatcher<?>  choiceHasNoIncoming
+	//var ViatraQueryMatcher<?>  choiceHasNoIncoming
 	var ViatraQueryMatcher<?> noSynch
 	var ViatraQueryMatcher<?> synchronizationHasNoOutgoing
 	
@@ -27,63 +27,48 @@ class SGraphInconsistencyDetector extends ModelGenerationMethodBasedGlobalConstr
 		return SGraphInconsistencyDetector.simpleName
 	}
 	
+	def private selectMatcher(ThreadContext context, String name) {
+		val x = method.unfinishedWF.filter[
+				it.fullyQualifiedName.equals(name)
+			].head
+		if(x!==null) {
+			x.getMatcher(context.queryEngine)
+		} else {
+			return null
+		}
+	}
+	
+	def private numberOfMatches(ViatraQueryMatcher<?> matcher) {
+		if(matcher!==null) {
+			matcher.countMatches
+		} else {
+			return 0
+		}
+	}
+	
 	override init(ThreadContext context) {
 		partialInterpretation = context.model as PartialInterpretation
-		
-		try{
-			this.noEntry = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noEntryInRegion")
-			].head.getMatcher(context.queryEngine)
-			
-			this.entryHasNoOutgoing = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noOutgoingTransitionFromEntry")
-			].head.getMatcher(context.queryEngine)
-			
-			this.noStateInRegion = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noStateInRegion")
-			].head.getMatcher(context.queryEngine)
-			
-			this.choiceHasNoOutgiong = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_choiceHasNoOutgoing")
-			].head.getMatcher(context.queryEngine)
-			
-		} catch(Exception e) {	}
-		try{
-			this.noSynch = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noSynch")
-			].head.getMatcher(context.queryEngine)
-			
-			this.synchronizedSiblingRegions = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionDoesNotHaveMultipleRegions")
-			].head.getMatcher(context.queryEngine)
-			
-			this.synchronizationHasNoOutgoing = method.unfinishedWF.filter[
-				it.fullyQualifiedName.equals("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_synchHasNoOutgoing")
-			].head.getMatcher(context.queryEngine)
-		} catch(Exception e) {	}
+		this.noEntry = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noEntryInRegion")
+		this.entryHasNoOutgoing = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noOutgoingTransitionFromEntry")
+		this.noStateInRegion = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noStateInRegion")
+		this.choiceHasNoOutgiong = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_choiceHasNoOutgoing")
+		this.noSynch = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_noSynch")
+		this.synchronizedSiblingRegions = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_SynchronizedRegionDoesNotHaveMultipleRegions")
+		this.synchronizationHasNoOutgoing = context.selectMatcher("unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_partialsnapshot_mavo_yakindu_synchHasNoOutgoing")
 	}
 	
 	override checkGlobalConstraint(ThreadContext context) {
-		if(noEntry !== null) {
-			var requiredNewObjects = noEntry.countMatches*2 +entryHasNoOutgoing.countMatches + noStateInRegion.countMatches
-			if(choiceHasNoOutgiong!=null) {
-				requiredNewObjects+=choiceHasNoOutgiong.countMatches
-			}	
-			if(synchronizationHasNoOutgoing!= null) {
-				requiredNewObjects += 
-					noSynch.countMatches*2 + 
-					synchronizationHasNoOutgoing.countMatches +
-					synchronizedSiblingRegions.countMatches*4 
-			}
-				
-			val availableNewObjects = partialInterpretation.maxNewElements
-			val res = availableNewObjects >= requiredNewObjects
-			//println('''[«availableNewObjects» >= «requiredNewObjects»] = «res»''')
-			return res
-		} else {
-			true
-		}
-		
+		var requiredNewObjects =
+			noEntry.numberOfMatches*2 +
+			entryHasNoOutgoing.numberOfMatches +
+			noStateInRegion.numberOfMatches +
+			choiceHasNoOutgiong.numberOfMatches +
+			noSynch.numberOfMatches*2 + 
+			synchronizationHasNoOutgoing.numberOfMatches +
+			synchronizedSiblingRegions.numberOfMatches*4 
+		val availableNewObjects = partialInterpretation.maxNewElements
+		val res = availableNewObjects >= requiredNewObjects
+		return res
 	}
 	override createNew() {
 		return new SGraphInconsistencyDetector(this.method)
