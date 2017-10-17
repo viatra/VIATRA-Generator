@@ -135,7 +135,7 @@ class ScenarioRunner {
 		
 		var FileSystemWorkspace workspace = new FileSystemWorkspace('''output_«id»/''',"")
 		workspace.initAndClear
-		val config = getSolverConfiguration(scenario,vq)
+		val config = getSolverConfiguration(scenario,vq,run)
 		
 		// Execute
 		val solution = getSolver(scenario).solve(problem,config,workspace)
@@ -181,7 +181,7 @@ class ScenarioRunner {
 		}
 	}
 	
-	def private getSolverConfiguration(Scenario scenario, ViatraQuerySetDescriptor vq) {
+	def private getSolverConfiguration(Scenario scenario, ViatraQuerySetDescriptor vq, int run) {
 		if(scenario.solver == Solver.ViatraSolver) {
 			val viatraConfig = new ViatraReasonerConfiguration => [
 				it.runtimeLimit = 300
@@ -226,6 +226,7 @@ class ScenarioRunner {
 				it.solutionScope.numberOfRequiredSolution = scenario.number
 				it.typeScopes.maxNewIntegers = 0
 				it.writeToFile=true
+				it.randomise = run-1
 			]
 		}
 		
@@ -317,7 +318,8 @@ class ScenarioRunner {
 
 class DiverseMeasurementRunner {
 	def static void main(String[] args) {
-		val scenario = new Scenario(30,29,Metamodel::YakinduWOSynch,Constraints.Metamodel,StateCoder.R1,20,Solver::Alloy)
+		val scenario = new Scenario(30,29,Metamodel::YakinduWOSynch,Constraints.Metamodel,StateCoder.R3,20,Solver::Alloy
+		)
 		val scenarioRunner = new ScenarioRunner
 		scenarioRunner.runScenario(scenario)
 	}
