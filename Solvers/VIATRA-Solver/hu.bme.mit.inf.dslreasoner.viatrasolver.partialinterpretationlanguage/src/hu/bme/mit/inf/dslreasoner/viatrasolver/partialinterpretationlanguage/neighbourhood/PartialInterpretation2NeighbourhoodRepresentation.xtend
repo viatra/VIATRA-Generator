@@ -24,6 +24,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	}
 	
 	public static val FixPointRage = -1
+	public static val GraphWidthRange = -2
 	public static val FullParallels = Integer.MAX_VALUE
 	public static val MaxNumbers = Integer.MAX_VALUE
 	
@@ -67,6 +68,41 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			return relevantRelations.contains(r)
 		}
 	}
+	/**
+	 * Gets the largest 
+	 */
+	def private getWidth(Map<DefinedElement, Set<String>> types,
+		Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
+		Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations)
+	{
+		val elements =  types.keySet
+		val Map<DefinedElement,Set<DefinedElement>> reachable = new HashMap
+		for(element : elements) {
+			val set = new HashSet
+			set.add(element)
+			reachable.put(element,set)
+		}
+		
+		var int width = 0
+		var boolean newAdded
+		do {
+			newAdded = false
+			for(element : elements) {
+				val elementNeigbours = element.lookup(reachable)
+				val size = elementNeigbours.size
+				for(incoming : element.lookup(IncomingRelations)) {
+					elementNeigbours.addAll(incoming.from.lookup(reachable))
+				}
+				for(outgoing : element.lookup(OutgoingRelations)) {
+					elementNeigbours.addAll(outgoing.to.lookup(reachable))
+				}
+				newAdded = newAdded || (elementNeigbours.size > size)
+			}
+			
+			width +=1
+		} while(newAdded)
+		return width
+	}
 	
 	/**
 	 * Creates a neighbourhood representation with traces
@@ -107,6 +143,10 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			} else return res
 		} else if (range == FixPointRage) {
 			return refineUntilFixpoint(model,types,IncomingRelations,OutgoingRelations,parallels,maxNumber)
+		} else if (range == GraphWidthRange) {
+			val width = this.getWidth(types,IncomingRelations,OutgoingRelations)
+			//println(width)
+			return doRecursiveNeighbourCalculation(model,types,IncomingRelations,OutgoingRelations,width,parallels,maxNumber)
 		}
 	}
 	
@@ -297,7 +337,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 					)
 					node2Representation.put(object,uniqueDescription.get(nodeDescriptor))
 				} else {
-					descriptor2Number.put(nodeDescriptor,1)
+					descriptor2Number.put(nodeDescriptor,if(1>maxNumber){Integer.MAX_VALUE}else{1})
 					uniqueDescription.put(nodeDescriptor,nodeDescriptor)
 					node2Representation.put(object,nodeDescriptor)
 				}
@@ -333,7 +373,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				} else {
 					uniqueRepresentation.put(newDescriptor,newDescriptor)
 					node2Representation.put(element,newDescriptor)
-					representation2Amount.put(newDescriptor, 1)
+					representation2Amount.put(newDescriptor, if(1>maxNumber){Integer.MAX_VALUE}else{1})
 				}
 			} else {
 				node2Representation.put(element,newDescriptor)
