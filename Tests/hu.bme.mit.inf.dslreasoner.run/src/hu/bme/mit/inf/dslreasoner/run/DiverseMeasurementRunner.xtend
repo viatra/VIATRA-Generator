@@ -258,10 +258,10 @@ class ScenarioRunner {
 //				val gml = partialInterpretation2GML.transform(representation)
 //				ecore2GML.transform(root)
 //				workspace.writeText('''solutionVisualisation«representationNumber».gml''',gml)
-				
-//				val visualiser = new GraphvizVisualisation
-//				val visualisation = visualiser.visualiseConcretization(representation)
-//				visualisation.writeToFile(workspace,'''solutionVisualisation«representationNumber»''')
+//				
+				val visualiser = new GraphvizVisualisation
+				val visualisation = visualiser.visualiseConcretization(representation)
+				visualisation.writeToFile(workspace,'''solutionVisualisation«representationNumber»''')
 				
 			} else {
 				workspace.writeText('''solution«representationNumber».txt''',representation.toString)
@@ -318,7 +318,7 @@ class ScenarioRunner {
 
 class DiverseMeasurementRunner {
 	def static void main(String[] args) {
-		val scenario = new Scenario(30,29,Metamodel::YakinduWOSynch,Constraints.Metamodel,StateCoder.R3,20,Solver::Alloy
+		val scenario = new Scenario(10,29,Metamodel::YakinduWOSynch,Constraints.None,StateCoder.R1,10,Solver::ViatraSolver
 		)
 		val scenarioRunner = new ScenarioRunner
 		scenarioRunner.runScenario(scenario)

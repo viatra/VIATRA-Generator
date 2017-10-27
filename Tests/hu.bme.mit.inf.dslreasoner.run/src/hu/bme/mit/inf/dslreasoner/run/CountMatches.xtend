@@ -58,7 +58,7 @@ class CountMatches {
 			FOR mutant : wfPatterns.filter[query2Reference.keySet.contains(it)] SEPARATOR ';'»diff(«
 				mutant.fullyQualifiedName.split("\\.").last»)«ENDFOR»'''
 		)
-		countMatches('''D:/FASE18Meas/MetamodelOnly_Alloy_Symmetry30''')
+		countMatches('''D:/FASE18Meas/RemoHF''')
 	}
 	
 	def private static simpleName(IQuerySpecification<?> wfPattern) {
@@ -82,15 +82,21 @@ class CountMatches {
 	}
 	
 	def static void countMatches(File file, String path) {
-		val parent = file.parent
+		
 		
 		val pathSegments = path.split("/")
 		val groupName = pathSegments.get(pathSegments.size-2).split("\\.").last.split("_").get(0)
 		print(groupName +";")
 		val nameExtension = pathSegments.get(pathSegments.size-1).split("\\.").get(0).split("_")
-		val runNumber = nameExtension.get(1)
-		val modelNumber = nameExtension.get(2)
-		print('''«runNumber»;«modelNumber»''')
+		try{
+			val runNumber = nameExtension.get(1)
+			val modelNumber = nameExtension.get(2)
+			print('''«runNumber»;«modelNumber»''')
+		} catch(Exception e) {
+			print('''«file.name»;0''')
+		}
+		
+		val parent = file.parent
 		val workspace = new FileSystemWorkspace(parent,"")
 		val model = workspace.readModel(EObject,file.name)
 		

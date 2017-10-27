@@ -101,6 +101,7 @@ class YakinduLoader extends MetamodelLoader{
 	public static val patternsWithComplexStates =#["outgoingFromExit","outgoingFromFinal","choiceHasNoOutgoing","choiceHasNoIncoming"]
 	new(ReasonerWorkspace workspace) {
 		super(workspace)
+		YakindummPackage.eINSTANCE.eClass
 	}
 	
 	public def setUseSynchronization(boolean useSynchronization) {
