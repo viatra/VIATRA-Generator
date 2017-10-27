@@ -1,19 +1,16 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 import java.util.LinkedList
 import java.util.List
-import java.util.Map
 import org.eclipse.viatra.dse.base.ThreadContext
 
 class SolutionStoreWithDiversityDescriptor {
 	val DiversityDescriptor descriptor
 	val PartialInterpretation2ImmutableTypeLattice solutionCoder = new PartialInterpretation2ImmutableTypeLattice
-	val List<NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor>> solutionCodeList = new LinkedList
+	val List<Integer> solutionCodeList = new LinkedList
 	
 	var long runtime
 	var int allCheck
@@ -43,7 +40,7 @@ class SolutionStoreWithDiversityDescriptor {
 				descriptor.parallels,
 				descriptor.maxNumber,
 				descriptor.relevantTypes,
-				descriptor.relevantRelations)
+				descriptor.relevantRelations).modelRepresentation.hashCode
 			val isDifferent = solutionCodeList.forall[previous | ! code.equals(previous)]
 			runtime += System.nanoTime - start
 			allCheck++
@@ -69,7 +66,7 @@ class SolutionStoreWithDiversityDescriptor {
 				descriptor.parallels,
 				descriptor.maxNumber,
 				descriptor.relevantTypes,
-				descriptor.relevantRelations)
+				descriptor.relevantRelations).modelRepresentation.hashCode
 			solutionCodeList += code
 			runtime += System.nanoTime - start
 		}
