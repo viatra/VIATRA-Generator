@@ -97,6 +97,7 @@ class Logic2AlloyLanguageMapper {
 			
 			it.incqueryEngine = ViatraQueryEngine.on(new EMFScope(problem))
 		]
+		specification.transformRandomisation(config.randomise)
 		
 		typeMapper.transformTypes(problem.types,problem.elements,this,trace)
 		
@@ -146,7 +147,24 @@ class Logic2AlloyLanguageMapper {
 		return new TracedOutput(specification,trace)
 	}
 	
-
+	def transformRandomisation(ALSDocument document, int randomisation) {
+		if(randomisation !== 0) {
+			document.signatureBodies += createALSSignatureBody => [
+				val declaration = createALSSignatureDeclaration => [
+					it.name = support.toID(#["language","util","randomseed"])
+				]
+				it.declarations += declaration
+				it.multiplicity = ALSMultiplicity::ONE
+				for(i : 1..randomisation) {
+					it.fields+=createALSFieldDeclaration => [
+						it.name = support.toID(#["language","util","randomseedField",i.toString])
+						it.multiplicity = ALSMultiplicity::ONE
+						it.type = createALSReference => [referred = declaration]
+					]
+				}
+			]
+		}
+	}
 	
 	def transformInverseAssertion(InverseRelationAssertion assertion, Logic2AlloyLanguageMapperTrace trace) {
 		val a = assertion.inverseA

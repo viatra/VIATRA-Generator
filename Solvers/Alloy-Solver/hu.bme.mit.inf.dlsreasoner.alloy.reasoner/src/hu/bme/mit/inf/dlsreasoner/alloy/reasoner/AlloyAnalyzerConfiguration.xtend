@@ -8,9 +8,10 @@ class AlloySolverConfiguration extends LogicSolverConfiguration {
 	public def setIntScopeFor(int max) {
 		intScope = 31 - Integer.numberOfLeadingZeros(max) + 1
 	}*/
-	public var int symmetry = 0 // by default
+	public var int symmetry = 20 // by default
 	public var AlloyBackendSolver solver = AlloyBackendSolver.SAT4J
 	public var boolean writeToFile = false
+	public var randomise = 0
 }
 
 enum AlloyBackendSolver {

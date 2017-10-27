@@ -4,7 +4,6 @@ import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Alloy2LogicMapper
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyHandler
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyModelInterpretation
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.AlloyModelInterpretation_TypeInterpretation_FilteredTypes
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapperTrace
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes
