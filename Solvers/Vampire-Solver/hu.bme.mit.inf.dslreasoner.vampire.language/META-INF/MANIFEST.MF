@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: hu.bme.mit.inf.dslreasoner.vampire.language
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.vampire.language; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib,
+ org.eclipse.emf.common
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: hu.bme.mit.inf.dslreasoner.parser.antlr,
+ hu.bme.mit.inf.dslreasoner,
+ hu.bme.mit.inf.dslreasoner.vampireLanguage.impl,
+ hu.bme.mit.inf.dslreasoner.generator,
+ hu.bme.mit.inf.dslreasoner.services,
+ hu.bme.mit.inf.dslreasoner.vampireLanguage,
+ hu.bme.mit.inf.dslreasoner.serializer,
+ hu.bme.mit.inf.dslreasoner.vampireLanguage.util,
+ hu.bme.mit.inf.dslreasoner.scoping,
+ hu.bme.mit.inf.dslreasoner.validation,
+ hu.bme.mit.inf.dslreasoner.parser.antlr.internal
+Import-Package: org.apache.log4j

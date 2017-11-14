@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="hu.bme.mit.inf.dslreasoner.vampire.queries.VampireQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.vampire.queries.VampireQueries" id="hu.bme.mit.inf.dslreasoner.vampire.queries.VampireQueries">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSComment"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSFofFormula"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSAnnotation"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSOr"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSAnd"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSEquivalent"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSFunction"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSExistentialQuantifier"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSUniversalQuantifier"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSUnaryNegation"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSInequality"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSFunctionFof"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.vampire.queries.VLSFofTerm"/>
+    </group>
+  </extension>
+</plugin>

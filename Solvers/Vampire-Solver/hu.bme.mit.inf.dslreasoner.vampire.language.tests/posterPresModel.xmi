@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<vampireLanguage:VampireModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vampireLanguage="http://www.bme.hu/mit/inf/dslreasoner/VampireLanguage">
+  <comments comment="% Welcome to the Poster Presentation Day Demo &#xD;"/>
+  <formulas name="formulaName">
+    <fofFormula xsi:type="vampireLanguage:VLSExistentialQuantifier">
+      <variables name="X"/>
+      <operand xsi:type="vampireLanguage:VLSAnd">
+        <left xsi:type="vampireLanguage:VLSFunction" constant="term1"/>
+        <right xsi:type="vampireLanguage:VLSFunction" constant="term2"/>
+      </operand>
+    </fofFormula>
+    <annotations>
+      <closure_rule name="formulaAnnotation"/>
+    </annotations>
+  </formulas>
+</vampireLanguage:VampireModel>

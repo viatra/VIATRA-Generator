@@ -1,0 +1,6 @@
+%thisIsAComment
+%123*()Comment
+fof(test, axiom, cst1|cst2|(cst3&cst4&(cst5<=>cst6))|cst7, annot(internal(bracket))).
+fof(-123, conjecture, ~ ?[A]: ![B,C]: $dolCst != $$doubleDolCst, ((annotation))).
+fof(0, hypothesis, ?[D]: (~ 'const1'| $$word)).
+fof('HE||0', assumption, 'cst_functor' ("One", 123, $$simple(-0.123, 2/3))).

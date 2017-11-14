@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: hu.bme.mit.inf.dslreasoner.vampire.language.ide
+Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.vampire.language.ide;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: My Company
+Export-Package: hu.bme.mit.inf.dslreasoner.ide.contentassist.antlr,
+ hu.bme.mit.inf.dslreasoner.ide.contentassist.antlr.internal
+Require-Bundle: hu.bme.mit.inf.dslreasoner.vampire.language,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+

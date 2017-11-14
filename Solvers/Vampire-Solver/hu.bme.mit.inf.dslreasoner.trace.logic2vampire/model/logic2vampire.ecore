@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="logic2vampire" nsURI="http://www.example.org/logic2vampire"
+    nsPrefix="logic2vampire">
+  <eClassifiers xsi:type="ecore:EClass" name="Logic2Vampire">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logic" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//LogicProblem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vampire" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.vampire.language/model/generated/VampireLanguage.ecore#//VampireModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traces" upperBound="-1"
+        eType="#//Logic2VampireTrace" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Logic2VampireTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="termDescription" upperBound="-1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//TermDescription"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vlsFormula" upperBound="-1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.vampire.language/model/generated/VampireLanguage.ecore#//VLSFofFormula"/>
+  </eClassifiers>
+</ecore:EPackage>

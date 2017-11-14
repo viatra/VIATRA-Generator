@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.trace.logic2vampire/src"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.trace.logic2vampire" redirection=""
+    modelName="Logic2Vampire" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    language="" usedGenPackages="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.genmodel#//logiclanguage ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.genmodel#//logicproblem ../../hu.bme.mit.inf.dslreasoner.vampire.language/model/generated/VampireLanguage.genmodel#//vampireLanguage"
+    classNamePattern="" operationReflection="true" importOrganizing="true">
+  <foreignModel>logic2vampire.ecore</foreignModel>
+  <genPackages prefix="Logic2vampire" disposableProviderFactory="true" fileExtensions="l2v"
+      ecorePackage="logic2vampire.ecore#/">
+    <genClasses ecoreClass="logic2vampire.ecore#//Logic2Vampire">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logic2vampire.ecore#//Logic2Vampire/logic"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logic2vampire.ecore#//Logic2Vampire/vampire"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logic2vampire.ecore#//Logic2Vampire/traces"/>
+    </genClasses>
+    <genClasses ecoreClass="logic2vampire.ecore#//Logic2VampireTrace">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logic2vampire.ecore#//Logic2VampireTrace/termDescription"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logic2vampire.ecore#//Logic2VampireTrace/vlsTerm"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

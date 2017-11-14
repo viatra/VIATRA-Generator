@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<logic2vampire:Logic2Vampire xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:logic2vampire="http://www.example.org/logic2vampire">
+  <logic href="LogicModels/Step1_Metamodel.xmi#/"/>
+  <vampire href="testCreateFile.tptp#/"/>
+  <traces>
+    <termDescription xsi:type="language:RelationDeclaration" href="LogicModels/Step1_Metamodel.xmi#//@relations.0"/>
+    <vlsFormula href="testCreateFile.tptp#//@formulas.0"/>
+  </traces>
+</logic2vampire:Logic2Vampire>
