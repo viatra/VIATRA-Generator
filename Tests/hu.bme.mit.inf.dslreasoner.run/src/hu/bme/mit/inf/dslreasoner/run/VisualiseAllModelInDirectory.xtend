@@ -27,7 +27,7 @@ class VisualiseAllModelInDirectory {
 //		for(subFolderName : folderName.listFiles) {
 //			subFolderName.absolutePath.visualiseModel
 //		}
-		visualise('''D:\FASE18Meas\OneMinus_Alloy''')
+		visualise('''C:\Users\Aren Babikian\Documents\git\VIATRA-Generator\Tests\hu.bme.mit.inf.dslreasoner.run\initialModels''')
 	}
 	
 	def static void visualise(String path) {

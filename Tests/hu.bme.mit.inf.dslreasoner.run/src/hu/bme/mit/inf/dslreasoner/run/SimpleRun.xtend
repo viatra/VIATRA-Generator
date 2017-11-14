@@ -35,6 +35,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import java.util.LinkedList
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
 
+
 class SimpleRun {
 	
 	def static void main(String[] args) {
@@ -60,15 +61,23 @@ class SimpleRun {
 		val validModelExtensionProblem = viatra2Logic.transformQueries(queries,modelGenerationProblem,new Viatra2LogicConfiguration)
 		
 		val logicProblem = validModelExtensionProblem.output
+		//*************xmi.save. advntageous cuz seperate and only contains things that are necessary
+		//Write  to file. This is importnat to understand
+		//furthermore, output solution1.partialInterpretation contains also  the logic probelm
+		//that needs to be solved 
+		
+		//Logic problem same for vm=amp,l alloy, viatra. but fr alloy, vamp, it is mapped into the specific ecore metamodel using the xtext. 
+		//initial simple example: take one thing (ex. iff) from the logic problem generated for one of the sample examples, try to make it into vampire 
+		//xtext (but only the instance model, not the lines of code) to see how mapping will work. Then ishteh use vampire on it to "solve" it. 
 		
 		println("Problem created")
 		var LogicResult solution
 		var LogicReasoner reasoner
-		//*
+		/*
 		reasoner = new ViatraReasoner
 		val viatraConfig = new ViatraReasonerConfiguration => [
-			it.typeScopes.maxNewElements = 40
-			it.typeScopes.minNewElements = 40
+			it.typeScopes.maxNewElements = 5
+			it.typeScopes.minNewElements = 5
 			it.solutionScope.numberOfRequiredSolution = 1
 			it.existingQueries = queries.patterns.map[it.internalQueryRepresentation]
 			it.debugCongiguration.logging = false
@@ -87,6 +96,15 @@ class SimpleRun {
 			]
 		solution = reasoner.solve(logicProblem,alloyConfig,workspace)
 		//*/
+		
+		//************
+		//since input logic model is also output, we can check out what is the input for alloy and then
+		//see what should be input for vampire, as it should be similar to alloy. once i can create the input,
+		//that is the first step.
+		
+		//look at allo2logic
+		//always keep looking at output
+		//try to figure out what rule is used
 		
 		println("Problem solved")
 		
