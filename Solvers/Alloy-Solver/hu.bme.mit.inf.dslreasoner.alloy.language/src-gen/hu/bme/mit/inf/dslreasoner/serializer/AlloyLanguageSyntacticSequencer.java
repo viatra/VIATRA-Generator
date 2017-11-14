@@ -97,7 +97,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) (ambiguity) 'sum' variables+=ALSVariableDeclaration
 	 *     (rule start) (ambiguity) 'univ' (rule start)
 	 *     (rule start) (ambiguity) '~' operand=ALSBasicRelationTerm
-	 *     (rule start) (ambiguity) ('!' | 'not') operand=ALSBasicRelationTerm
+	 *     (rule start) (ambiguity) ('not' | '!') operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) referred=[ALSRelationDeclaration|ID]
 	 *     (rule start) (ambiguity) referredDefinition=[ALSDefinition|ID]
 	 *     (rule start) (ambiguity) referredNumericOperator=ALSNumericOperator
@@ -138,7 +138,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) (ambiguity) '^' operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) 'sum' variables+=ALSVariableDeclaration
 	 *     (rule start) (ambiguity) '~' operand=ALSBasicRelationTerm
-	 *     (rule start) (ambiguity) ('!' | 'not') operand=ALSBasicRelationTerm
+	 *     (rule start) (ambiguity) ('not' | '!') operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) referredDefinition=[ALSDefinition|ID]
 	 *     (rule start) (ambiguity) referredNumericOperator=ALSNumericOperator
 	 *     (rule start) (ambiguity) type=ALSMultiplicity
@@ -179,7 +179,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Ambiguous syntax:
-	 *     '=>' | 'implies'
+	 *     'implies' | '=>'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     {ALSImpl.leftOperand=} (ambiguity) rightOperand=ALSAnd
@@ -190,7 +190,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Ambiguous syntax:
-	 *     '||' | 'or'
+	 *     'or' | '||'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     {ALSOr.leftOperand=} (ambiguity) rightOperand=ALSIff
@@ -201,7 +201,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Ambiguous syntax:
-	 *     '!' | 'not'
+	 *     'not' | '!'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '('* (ambiguity) operand=ALSBasicRelationTerm

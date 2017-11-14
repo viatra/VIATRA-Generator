@@ -28,18 +28,20 @@ terminal LOWER_WORD_ID: ('a'..'z') (ALPHA_NUMERIC)*;
 terminal DOUBLE_QUOTE: '"' ( '\\' ('"'|'\\') | !('\\'|'"') )* '"';//from terminal STRING rule, positive about this
 terminal SINGLE_QUOTE: "'" ( '\\' ("'"|'\\') | !('\\'|"'") )+ "'";//from terminal STRING rule, positive about this
 
+terminal SIGN: ('+' | '-');
+
 terminal DOLLAR_ID: ('$') (LOWER_WORD_ID);
 terminal DOUBLE_DOLLAR_ID: ('$$') (LOWER_WORD_ID);
 
-terminal UNSIGNED_INT_ID: '0' | ('1'..'9') (INT)?;
-terminal SIGNED_INT_ID: ('+' | '-')? (UNSIGNED_INT_ID);
+terminal LITERAL: '0' | ('1'..'9') (INT)?;
+terminal SIGNED_LITERAL: (SIGN)* (LITERAL);
 
-terminal UNSIGNED_REAL_FRAC_ID: (UNSIGNED_INT_ID) ('.') (INT);
-terminal UNSIGNED_REAL_EXP_ID: (UNSIGNED_INT_ID | UNSIGNED_REAL_FRAC_ID) ('Ee') ('+' |'-')? (INT) ;
-terminal SIGNED_REAL_ID: ('+' | '-')? (UNSIGNED_REAL_FRAC_ID | UNSIGNED_REAL_EXP_ID);
+terminal UNSIGNED_REAL_FRAC_ID: (LITERAL) ('.') (INT);
+terminal UNSIGNED_REAL_EXP_ID: (LITERAL | UNSIGNED_REAL_FRAC_ID) ('Ee') (SIGN)* (INT) ;
+terminal SIGNED_REAL_ID: (SIGN)* (UNSIGNED_REAL_FRAC_ID | UNSIGNED_REAL_EXP_ID);
 
-terminal UNSIGNED_RAT_ID:  (UNSIGNED_INT_ID) ('/') ('1'..'9') (INT)? ;
-terminal SIGNED_RAT_ID: ('+' | '-')? (UNSIGNED_RAT_ID);
+terminal UNSIGNED_RAT_ID:  (LITERAL) ('/') ('1'..'9') (INT)? ;
+terminal SIGNED_RAT_ID: (SIGN)* (UNSIGNED_RAT_ID);
 
 //Overwriting is necessary
 terminal ANY_OTHER: '%' (!('\n'|'\r'))* ('\r');
@@ -57,7 +59,7 @@ VLSComment:
 
 //Formulas
 VLSFofFormula:
-	'fof' '(' name = (LOWER_WORD_ID | SIGNED_INT_ID | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
+	'fof' '(' name = (LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
 ;
 /*
 //NAME
@@ -67,10 +69,70 @@ VLSName:
 ;
 */
 //<ROLE>
-enum VLSRole:
-	axiom | conjecture | hypothesis | definition |
-	assumption | lemma | theorem | corollary | negated_conjecture |
-	plain | type |fi_domain | fi_functors | fi_predicates | unknown
+VLSRole:
+	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
+	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
+	VLSPlain | VLSType |VLSFi_Domain | VLSFi_Functors | VLSFi_Predicates | VLSUnknown
+;
+
+VLSAxiom:
+	"axiom"
+;
+
+VLSConjecture:
+	"conjecture"
+;
+
+VLSHypothesis:
+	"hypothesis"
+;
+	
+VLSDefinition:
+	"definition"
+;
+
+VLSAssumption:
+	"assumption"
+;
+		
+VLSLemma:
+	"lemma"
+;
+			
+VLSTheorem:
+	"theorem"
+;
+				
+VLSCorollary:
+	"corollary"
+;
+			
+VLSNegated_Conjecture:
+	"negated_conjecture"	
+;
+
+VLSPlain:
+	"plain"
+;
+
+VLSType:
+	"type"
+;
+
+VLSFi_Domain:
+	"fi_domain"
+;
+
+VLSFi_Functors:
+	"fi_functors"
+;
+
+VLSFi_Predicates:
+	"fi_predicates"
+;
+
+VLSUnknown:
+	"unknown"
 ;
 
 // <ANNOTATION>
@@ -165,5 +227,5 @@ VLSFunctionFof:
 ;
 
 VLSDefinedTerm:
-	name = (DOUBLE_QUOTE | SIGNED_INT_ID | SIGNED_REAL_ID | SIGNED_RAT_ID)
+	name = (DOUBLE_QUOTE | SIGNED_LITERAL | SIGNED_REAL_ID | SIGNED_RAT_ID)
 ;
