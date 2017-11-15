@@ -66,6 +66,7 @@ class VampireSolver extends LogicReasoner{
 		//Creates a file containing the tptp code after transformation
 		val out = new PrintWriter("vampireCode.tptp")
 		out.println(vampireCode)
+		out.close()
 		
 		return null // for now
 	}

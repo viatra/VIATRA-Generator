@@ -92,7 +92,7 @@ class SimpleRun {
 				it.typeScopes.minNewElements = 5
 				it.solutionScope.numberOfRequiredSolution = 1
 				it.typeScopes.maxNewIntegers = 0
-				it.writeToFile = true
+				it.writeToFile = false
 			]
 		solution = reasoner.solve(logicProblem,alloyConfig,workspace)
 		//*/

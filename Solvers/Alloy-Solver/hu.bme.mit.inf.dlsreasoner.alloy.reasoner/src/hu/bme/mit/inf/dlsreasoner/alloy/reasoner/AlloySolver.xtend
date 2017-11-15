@@ -16,6 +16,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.io.PrintWriter
 
 class AlloySolver extends LogicReasoner{
 	
@@ -49,6 +50,13 @@ class AlloySolver extends LogicReasoner{
 		} 
 		val transformationTime = System.currentTimeMillis - transformationStart
 		// Finish: Logic -> Alloy mapping
+		
+		
+		//ADDED BY AREN
+		//Creates a file containing the tptp code after transformation
+		val out = new PrintWriter("vampireCode.tptp")
+		out.println(alloyCode)
+		out.close()
 		
 		
 		// Start: Solving Alloy problem
