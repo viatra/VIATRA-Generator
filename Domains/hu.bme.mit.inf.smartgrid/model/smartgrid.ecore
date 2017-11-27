@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="smartgrid" nsURI="http://hu.bme.mit.inf.smartgrid/smartgrid"
+    nsPrefix="smartgrid">
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationParent" eType="#//Entity"
+        eOpposite="#//Entity/communicationChild"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationChild" upperBound="-1"
+        eType="#//Entity" containment="true" eOpposite="#//Entity/communicationParent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Meter" abstract="true" eSuperTypes="#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Concentrator" eSuperTypes="#//Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmartMeter" eSuperTypes="#//Meter"/>
+</ecore:EPackage>

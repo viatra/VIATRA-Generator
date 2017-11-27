@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated smartgrid -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="hu.bme.mit.inf.smartgrid.presentation.SmartgridModelWizardID"
+            name="%_UI_SmartgridModelWizard_label"
+            class="hu.bme.mit.inf.smartgrid.presentation.SmartgridModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SmartgridModelFile.gif">
+         <description>%_UI_SmartgridModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated smartgrid -->
+      <editor
+            id="hu.bme.mit.inf.smartgrid.presentation.SmartgridEditorID"
+            name="%_UI_SmartgridEditor_label"
+            icon="icons/full/obj16/SmartgridModelFile.gif"
+            extensions="smartgrid"
+            class="hu.bme.mit.inf.smartgrid.presentation.SmartgridEditor"
+            contributorClass="hu.bme.mit.inf.smartgrid.presentation.SmartgridActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

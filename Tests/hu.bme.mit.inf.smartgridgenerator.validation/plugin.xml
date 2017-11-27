@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="validation.constraint.patterns.concentratorHasParent" point="org.eclipse.viatra.addon.validation.runtime.constraint">
+    <constraint class="patterns.ConcentratorHasParentConstraint0" name="patterns.concentratorHasParent"/>
+  </extension>
+  <extension id="validation.constraint.patterns.entityIsItsOwnParent" point="org.eclipse.viatra.addon.validation.runtime.constraint">
+    <constraint class="patterns.EntityIsItsOwnParentConstraint0" name="patterns.entityIsItsOwnParent"/>
+  </extension>
+</plugin>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="patterns.Pattern" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:patterns.Pattern" id="patterns.Pattern">
+      <query-specification fqn="patterns.hasParent"/>
+      <query-specification fqn="patterns.entityIsItsOwnParent"/>
+      <query-specification fqn="patterns.concentratorHasParent"/>
+    </group>
+  </extension>
+</plugin>

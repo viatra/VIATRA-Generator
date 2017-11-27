@@ -1,0 +1,28 @@
+package patterns
+
+import "http://hu.bme.mit.inf.smartgrid/smartgrid"
+
+pattern hasParent(entity : Entity){
+	Entity(parent);
+	Entity.communicationParent(entity, parent);
+}
+
+@Constraint(message="entityIsItsOwnParent", severity="error", key={entity})
+pattern entityIsItsOwnParent(entity: Entity){
+	Entity.communicationChild(entity, entity);
+}
+
+//pattern childIsSmartMeter(meter : SmartMeter){
+//	SmartMeter(child);
+//	SmartMeter.communicationChild(meter, child);
+//}
+//
+//@Constraint(message="childIsNotSmartMeter", severity="error", key={meter})
+//pattern childIsNotSmartMeter(meter : Meter){
+//	neg find childIsSmartMeter(meter);
+//}
+
+@Constraint(message="concentratorHasParent", severity="error", key={concentrator})
+pattern concentratorHasParent(concentrator : Concentrator){
+	Entity.communicationParent(concentrator, _);
+}

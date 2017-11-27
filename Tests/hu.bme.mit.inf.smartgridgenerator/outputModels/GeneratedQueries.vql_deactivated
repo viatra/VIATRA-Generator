@@ -1,0 +1,562 @@
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+
+//////////
+// 0. Util
+//////////
+private pattern interpretation(problem:LogicProblem, interpetation:PartialInterpretation) {
+	PartialInterpretation.problem(interpetation,problem);
+}
+	
+/////////////////////////
+// 0.1 Existence
+/////////////////////////
+private pattern mustExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpetation);
+	LogicProblem.elements(problem,element);
+} or {
+	find interpretation(problem,interpetation);
+	PartialInterpretation.newElements(interpetation,element);
+}
+
+private pattern mayExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
+    find mustExist(problem,interpetation,element);
+} or {
+    find interpretation(problem,interpetation);
+    neg find elementCloseWorld(interpetation);
+    PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+}
+
+private pattern elementCloseWorld(interpetation:PartialInterpretation) {
+    PartialInterpretation.maxNewElements(interpetation,0);
+}
+
+////////////////////////
+// 0.2 Equivalence
+////////////////////////
+pattern mayEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	a == b;
+}
+
+////////////////////////
+// 0.3 Required Patterns by TypeIndexer
+////////////////////////
+private pattern typeInterpretation(problem:LogicProblem, interpetation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialTypeInterpratation) {
+	find interpretation(problem,interpetation);
+	LogicProblem.types(problem,type);
+	PartialInterpretation.partialtypeinterpratation(interpetation,typeInterpretation);
+	PartialTypeInterpratation.interpretationOf(typeInterpretation,type);
+}
+
+private pattern directInstanceOf(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement, type:Type) {
+	find interpretation(problem,interpetation);
+	LogicProblem.types(problem,type);
+	TypeDefinition.elements(type,element);
+} or {
+	find interpretation(problem,interpetation);
+	find typeInterpretation(problem,interpetation,type,typeInterpretation);
+	PartialTypeInterpratation.elements(typeInterpretation,element);
+}
+
+//////////
+// 1. Problem-Specific Base Indexers
+//////////
+// 1.1 Type Indexers
+//////////
+// 1.1.1 primitive Type Indexers
+//////////
+pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.booleanelements(interpretation,element);
+}
+pattern instanceofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.integerelements(interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newIntegers(interpetation,element);
+}
+pattern instanceofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.realelements(interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newReals(interpetation,element);
+}
+pattern instanceofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.stringelements(interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newStrings(interpetation,element);
+}
+
+//////////
+// 1.1.2 domain-specific Type Indexers
+//////////
+/**
+ * An element must be an instance of type "Entity class".
+ */
+private pattern mustInstanceOfEntity_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Entity class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Entity class".
+ */
+private pattern mayInstanceOfEntity_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+	neg find mustInstanceOfEntity_class_UndefinedPart(problem,interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+} or
+{ find mustInstanceOfEntity_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Meter class".
+ */
+private pattern mustInstanceOfMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Meter class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Meter class".
+ */
+private pattern mayInstanceOfMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfSmartMeter_class(problem,interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+} or
+{ find mustInstanceOfMeter_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Concentrator class".
+ */
+private pattern mustInstanceOfConcentrator_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Concentrator class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Concentrator class".
+ */
+private pattern mayInstanceOfConcentrator_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfEntity_class_UndefinedPart(problem,interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+} or
+{ find mustInstanceOfConcentrator_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "SmartMeter class".
+ */
+private pattern mustInstanceOfSmartMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"SmartMeter class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "SmartMeter class".
+ */
+private pattern mayInstanceOfSmartMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+} or
+{ find mustInstanceOfSmartMeter_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Entity class DefinedPart".
+ */
+private pattern mustInstanceOfEntity_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Entity class DefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Entity class DefinedPart".
+ */
+private pattern mayInstanceOfEntity_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfEntity_class_DefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Entity class UndefinedPart".
+ */
+private pattern mustInstanceOfEntity_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Entity class UndefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Entity class UndefinedPart".
+ */
+private pattern mayInstanceOfEntity_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfMeter_class(problem,interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+} or
+{ find mustInstanceOfEntity_class_UndefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Concentrator class DefinedPart".
+ */
+private pattern mustInstanceOfConcentrator_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Concentrator class DefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Concentrator class DefinedPart".
+ */
+private pattern mayInstanceOfConcentrator_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfConcentrator_class_DefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Concentrator class UndefinedPart".
+ */
+private pattern mustInstanceOfConcentrator_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Concentrator class UndefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+/**
+ * An element may be an instance of type "Concentrator class UndefinedPart".
+ */
+private pattern mayInstanceOfConcentrator_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfMeter_class(problem,interpretation,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+} or
+{ find mustInstanceOfConcentrator_class_UndefinedPart(problem,interpretation,element); }
+
+//////////
+// 1.2 Relation Declaration Indexers
+//////////
+/**
+ * Matcher for detecting tuples t where []communicationParent reference Entity(source,target)
+ */
+private pattern mustInRelationcommunicationParent_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"communicationParent reference Entity");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>communicationParent reference Entity(source,target)
+ */
+private pattern mayInRelationcommunicationParent_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfEntity_class(problem,interpretation,source);
+	find mayInstanceOfEntity_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 1);
+	// The eOpposite of the reference is containment, then a referene cannot be created if
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,source,_);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []communicationChild reference Entity(source,target)
+ */
+private pattern mustInRelationcommunicationChild_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"communicationChild reference Entity");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>communicationChild reference Entity(source,target)
+ */
+private pattern mayInRelationcommunicationChild_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfEntity_class(problem,interpretation,source);
+	find mayInstanceOfEntity_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 1);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationcommunicationChild_reference_Entity(problem,interpretation,source,target);
+}
+
+//////////
+// 1.3 Relation Definition Indexers
+//////////
+// Must, May and Current queries for pattern patterns hasParent
+private pattern mustInRelation_pattern_patterns_hasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	// entity is exported
+	find mustInstanceOfEntity_class(problem,interpretation,var_parent);
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,var_entity,var_virtual0);
+	find mustInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	var_virtual0 == var_parent;
+}
+private pattern mayInRelation_pattern_patterns_hasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfEntity_class(problem,interpretation,var_entity);
+	// entity is exported
+	find mayInstanceOfEntity_class(problem,interpretation,var_parent);
+	find mayInstanceOfEntity_class(problem,interpretation,var_entity);
+	find mayInRelationcommunicationParent_reference_Entity(problem,interpretation,var_entity,var_virtual0);
+	find mayInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_parent);
+}
+private pattern currentInRelation_pattern_patterns_hasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	// entity is exported
+	find mustInstanceOfEntity_class(problem,interpretation,var_parent);
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,var_entity,var_virtual0);
+	find mustInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	var_virtual0 == var_parent;
+}
+// Must, May and Current queries for pattern patterns entityIsItsOwnParent
+private pattern mustInRelation_pattern_patterns_entityIsItsOwnParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	// entity is exported
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	find mustInRelationcommunicationChild_reference_Entity(problem,interpretation,var_entity,var_virtual0);
+	find mustInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	var_virtual0 == var_entity;
+}
+private pattern mayInRelation_pattern_patterns_entityIsItsOwnParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfEntity_class(problem,interpretation,var_entity);
+	// entity is exported
+	find mayInstanceOfEntity_class(problem,interpretation,var_entity);
+	find mayInRelationcommunicationChild_reference_Entity(problem,interpretation,var_entity,var_virtual0);
+	find mayInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_entity);
+}
+private pattern currentInRelation_pattern_patterns_entityIsItsOwnParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	// entity is exported
+	find mustInstanceOfEntity_class(problem,interpretation,var_entity);
+	find mustInRelationcommunicationChild_reference_Entity(problem,interpretation,var_entity,var_virtual0);
+	find mustInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	var_virtual0 == var_entity;
+}
+// Must, May and Current queries for pattern patterns concentratorHasParent
+private pattern mustInRelation_pattern_patterns_concentratorHasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_concentrator)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfConcentrator_class(problem,interpretation,var_concentrator);
+	// concentrator is exported
+	find mustInstanceOfEntity_class(problem,interpretation,var_concentrator);
+	find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,var_concentrator,var_virtual0);
+	find mustInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	var_virtual0 == _var__0;
+}
+private pattern mayInRelation_pattern_patterns_concentratorHasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_concentrator)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfConcentrator_class(problem,interpretation,var_concentrator);
+	// concentrator is exported
+	find mayInstanceOfEntity_class(problem,interpretation,var_concentrator);
+	find mayInRelationcommunicationParent_reference_Entity(problem,interpretation,var_concentrator,var_virtual0);
+	find mayInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, _var__0);
+}
+private pattern currentInRelation_pattern_patterns_concentratorHasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_concentrator)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfConcentrator_class(problem,interpretation,var_concentrator);
+	// concentrator is exported
+	find mustInstanceOfEntity_class(problem,interpretation,var_concentrator);
+	find mustInRelationcommunicationParent_reference_Entity(problem,interpretation,var_concentrator,var_virtual0);
+	find mustInstanceOfEntity_class(problem,interpretation,var_virtual0);
+	var_virtual0 == _var__0;
+}
+
+//////////
+// 1.4 Containment Indexer
+//////////
+private pattern mustContains2(source: DefinedElement, target: DefinedElement) {
+	find mustContains4(_,_,source,target);
+}
+	
+private pattern mustContains4(problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target: DefinedElement)
+	{ find mustInRelationcommunicationChild_reference_Entity(problem,interpretation,source,target); }
+
+private pattern mustTransitiveContains(source,target) {
+	find mustContains2+(source,target);
+}
+
+//////////
+// 2. Invalidation Indexers
+//////////
+// 2.1 Invalidated by WF Queries
+//////////
+pattern invalidatedBy_pattern_patterns_entityIsItsOwnParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find mustInRelation_pattern_patterns_entityIsItsOwnParent(problem,interpretation,var_entity);
+}
+pattern invalidatedBy_pattern_patterns_concentratorHasParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_concentrator)
+{
+	find mustInRelation_pattern_patterns_concentratorHasParent(problem,interpretation,var_concentrator);
+}
+
+//////////
+// 3. Unfinishedness Indexers
+//////////
+// 3.1 Unfinishedness Measured by Multiplicity
+//////////
+
+//////////
+// 3.2 Unfinishedness Measured by WF Queries
+//////////
+pattern unfinishedBy_pattern_patterns_entityIsItsOwnParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_entity)
+{
+	find currentInRelation_pattern_patterns_entityIsItsOwnParent(problem,interpretation,var_entity);
+}
+pattern unfinishedBy_pattern_patterns_concentratorHasParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_concentrator)
+{
+	find currentInRelation_pattern_patterns_concentratorHasParent(problem,interpretation,var_concentrator);
+}
+
+//////////
+// 4. Refinement Indexers
+//////////
+// 4.1 Object constructors
+//////////
+pattern createObject_SmartMeter_class_by_communicationChild_reference_Entity_with_communicationParent_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"SmartMeter class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"communicationChild reference Entity");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"communicationParent reference Entity");
+	find mustInstanceOfEntity_class(problem,interpretation,container);
+	find mayInstanceOfSmartMeter_class(problem,interpretation,newObject);
+	find mayInRelationcommunicationChild_reference_Entity(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Concentrator_class_UndefinedPart_by_communicationChild_reference_Entity_with_communicationParent_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"Concentrator class UndefinedPart");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"communicationChild reference Entity");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"communicationParent reference Entity");
+	find mustInstanceOfEntity_class(problem,interpretation,container);
+	find mayInstanceOfConcentrator_class_UndefinedPart(problem,interpretation,newObject);
+	find mayInRelationcommunicationChild_reference_Entity(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+
+//////////
+// 4.2 Type refinement
+//////////
+pattern refineTypeTo_SmartMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfSmartMeter_class(problem,interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Concentrator_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfMeter_class(problem,interpretation,element);
+	neg find mustInstanceOfConcentrator_class_UndefinedPart(problem,interpretation,element);
+}
+
+//////////
+// 4.3 Relation refinement
+//////////
+
