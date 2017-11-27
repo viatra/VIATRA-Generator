@@ -1,6 +1,5 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage
@@ -22,19 +21,19 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedMultiplici
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedWFObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.WF2ObjectiveConverter
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import java.util.List
 
-class ViatraReasoner extends LogicReasoner{
-	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
-	val ModelGenerationMethodProvider modelGenerationMethodProvider = new ModelGenerationMethodProvider
-	val extension LogicresultFactory factory = LogicresultFactory.eINSTANCE	
-	val WF2ObjectiveConverter wf2ObjectiveConverter = new WF2ObjectiveConverter
+class SmartGridViatraReasoner extends ViatraReasoner{
+		protected val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
+	protected val ModelGenerationMethodProvider modelGenerationMethodProvider = new ModelGenerationMethodProvider
+	protected val extension LogicresultFactory factory = LogicresultFactory.eINSTANCE	
+	protected val WF2ObjectiveConverter wf2ObjectiveConverter = new WF2ObjectiveConverter
 	
 	
 	override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
@@ -71,13 +70,7 @@ class ViatraReasoner extends LogicReasoner{
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
 			new UnfinishedWFObjective(method.unfinishedWF)
 		))
-		
-//		dse.addObjective(new ModelGenerationCompositeObjective(
-//			new ScopeObjective,
-//			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
-//			new UnfinishedWFObjective(method.unfinishedWF)
-//		))
-		
+
 		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationObjective(method.invalidWF))
 		for(additionalConstraint : viatraConfig.searchSpaceConstraints.additionalGlobalConstraints) {
 			dse.addGlobalConstraint(additionalConstraint.apply(method))
@@ -186,11 +179,11 @@ class ViatraReasoner extends LogicReasoner{
 		}
 	}
 
-    private def dispatch long runtime(NeighbourhoodBasedStateCoderFactory sc) {
+    protected def dispatch long runtime(NeighbourhoodBasedStateCoderFactory sc) {
         sc.sumStatecoderRuntime
     }
 
-    private def dispatch long runtime(IdentifierBasedStateCoderFactory sc) {
+    protected def dispatch long runtime(IdentifierBasedStateCoderFactory sc) {
         sc.sumStatecoderRuntime
     }
 
@@ -201,7 +194,7 @@ class ViatraReasoner extends LogicReasoner{
 		return res
 	}
 	
-	private def ViatraReasonerConfiguration asConfig(LogicSolverConfiguration configuration) {
+	protected def ViatraReasonerConfiguration asConfig(LogicSolverConfiguration configuration) {
 		if(configuration instanceof ViatraReasonerConfiguration) {
 			return configuration
 		} else throw new IllegalArgumentException('''Wrong configuration. Expected: «ViatraReasonerConfiguration.name», but got: «configuration.class.name»"''')

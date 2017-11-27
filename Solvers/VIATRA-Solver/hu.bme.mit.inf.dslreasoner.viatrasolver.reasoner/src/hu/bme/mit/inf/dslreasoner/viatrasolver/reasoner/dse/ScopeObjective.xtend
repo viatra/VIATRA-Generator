@@ -37,5 +37,6 @@ class ScopeObjective implements IObjective{
 	override setLevel(int level) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
+	
 	override getLevel() { 2 }
 }

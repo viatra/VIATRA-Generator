@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
 --><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated FAM -->
+    <package class="hu.bme.mit.inf.dslreasomer.domains.transima.fam.FunctionalArchitecture.FunctionalArchitecturePackage" genModel="model/FAM.genmodel" uri="FAM"/>
+  </extension>
   <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.model" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
     <wellbehaving-derived-feature classifier-name="FunctionalElement" feature-name="model" package-nsUri="FAM"/>
   </extension>
@@ -20,9 +24,5 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.noInt"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.noLeaf"/>
     </group>
-  </extension>
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <!-- @generated FAM -->
-    <package class="hu.bme.mit.inf.dslreasomer.domains.transima.fam.FunctionalArchitecture.FunctionalArchitecturePackage" genModel="model/FAM.genmodel" uri="FAM"/>
   </extension>
 </plugin>

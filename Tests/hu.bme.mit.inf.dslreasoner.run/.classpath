@@ -5,5 +5,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="lib" path="J:/Downloads/eclipse-collections-9.0.0.jar"/>
+	<classpathentry kind="lib" path="J:/Downloads/eclipse-collections-api-9.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -47,6 +47,9 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface PartialInterpretation extends EObject {
+	
+//	int getAverageRepeater();
+//	int getAverageNumberHops();
 	/**
 	 * Returns the value of the '<em><b>Problem</b></em>' reference.
 	 * <!-- begin-user-doc -->

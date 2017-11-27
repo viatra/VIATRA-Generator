@@ -10,9 +10,17 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import java.util.Set
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.ralismcalculator.RealismCalculator
 
 class PartialInterpretation2Gml {
 	def public transform(PartialInterpretation i) {
+		System.out.println("SumElements: " + RealismCalculator.getNumberOfElements(i))
+		System.out.println("Repeaters: " + RealismCalculator.getNumberOfRepeaters(i))
+		System.out.println("percentage: " +  RealismCalculator.calculatePercentageOfRepeatersInSmartGrid(i))
+		System.out.println("MinRepeaterDegree: " + RealismCalculator.calculateMinimumDegreeOfRepeaters(i));
+		System.out.println("MaxRepeaterDegree: " + RealismCalculator.calculateMaximumDegreeOfRepeaters(i));
+		System.out.println("MinConcentratorDegree: " + RealismCalculator.calculateMinimumDegreeOfConcentrators(i));
+		System.out.println("MaxConcentratorDegree: " + RealismCalculator.calculateMaximumDegreeOfConcentrators(i));
 		val p = i.problem
 		val Map<DefinedElement, Integer> objectToID = new HashMap
 		val containmentRelations = p.containmentHierarchies.map[it.containmentRelations].flatten.toSet
@@ -20,7 +28,7 @@ class PartialInterpretation2Gml {
 		graph
 		[
 			«FOR object:p.elements + i.newElements SEPARATOR '\n'»
-				«this.transformObject(object,object.typesOfElement(i),objectToID)»
+				«this.transformObject(object,object.typesOfElement(i),objectToID, i)»
 			«ENDFOR»
 			«FOR relation:i.partialrelationinterpretation»
 				«FOR link:relation.relationlinks.filter(BinaryElementRelationLink)»
@@ -41,9 +49,14 @@ class PartialInterpretation2Gml {
 	val protected attributeBorderDistance = 8
 	val protected ratio = 11.0/20.0
 	
-	def protected transformObject(DefinedElement object,Iterable<Type> types,Map<DefinedElement, Integer> objectToID){
+	def protected transformObject(DefinedElement object,Iterable<Type> types,Map<DefinedElement, Integer> objectToID, PartialInterpretation i){
 		val title = object.transormTitle
 		val attributes = types.map[it.name]
+		
+		//SmartGrid
+		val degree = RealismCalculator.calculateDegreeOfNode(object)
+		val isRepeater = RealismCalculator.elementIsRepeater(object, i)
+		val hops = RealismCalculator.calculateNumberOfHopsForSmartGridElement(object)
 		
 		var double width = title.length*titleSize + borderDistance*2;
 		for(x:attributes.map[length*attributeSize + borderDistance*2 + attributeBorderDistance*2])
@@ -52,7 +65,7 @@ class PartialInterpretation2Gml {
 		
 		val height = Math::max(
 			titleSize+4,
-			(attributes.size+1)*attributeSize + borderDistance*2)
+			(attributes.size+1)*attributeSize + borderDistance*2)+38
 		
 		val id = objectToID.size
 		objectToID.put(object,id)
@@ -86,7 +99,10 @@ class PartialInterpretation2Gml {
 					text	"
 		«FOR attribute : attributes»
 		«attribute»
-		«ENDFOR»"
+		«ENDFOR»
+		Degree: «degree»
+		Repeater: «isRepeater»
+		#Hops: «hops»"
 					fontSize	«attributeSize»
 					fontName	"Consolas"
 					alignment	"left"
