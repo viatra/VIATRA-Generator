@@ -1,208 +1,190 @@
 <?xml version="1.0" encoding="ASCII"?>
-<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" xmlns:viatra2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/viatra2logicannotation" problem="//@problemConainer" maxNewIntegers="-1" maxNewReals="-1" maxNewStrings="-1">
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" xmlns:viatra2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/viatra2logicannotation" problem="//@problemConainer" minNewElements="9" maxNewElements="9" maxNewIntegers="-1" maxNewReals="-1" maxNewStrings="-1">
   <partialrelationinterpretation interpretationOf="//@problemConainer/@relations.0" param1="//@problemConainer/@relations.0/@parameters.0" param2="//@problemConainer/@relations.0/@parameters.1">
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@problemConainer/@elements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@problemConainer/@elements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.1"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.1"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.4" param2="//@newElements.3"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.3"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.6" param2="//@newElements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.5"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.8" param2="//@newElements.4"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.9" param2="//@newElements.5"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@problemConainer/@elements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.11" param2="//@newElements.10"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.12" param2="//@newElements.4"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.13" param2="//@newElements.3"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.11"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.15" param2="//@problemConainer/@elements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@newElements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.5"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.18" param2="//@problemConainer/@elements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.5"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.20" param2="//@newElements.16"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.21" param2="//@newElements.5"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.22" param2="//@newElements.14"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.23" param2="//@newElements.17"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.24" param2="//@newElements.21"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.25" param2="//@newElements.8"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.17"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.27" param2="//@newElements.16"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.28" param2="//@newElements.25"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.29" param2="//@newElements.20"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.29"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.31" param2="//@newElements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.32" param2="//@newElements.1"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.33" param2="//@newElements.28"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.34" param2="//@newElements.22"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@problemConainer/@elements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.4" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.6" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.8" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.9" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@newElements.3"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.11" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.12" param2="//@newElements.3"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.13" param2="//@newElements.6"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.15" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@problemConainer/@elements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.12"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.18" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.20" param2="//@newElements.10"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.21" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.22" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.23" param2="//@newElements.7"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.24" param2="//@newElements.12"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.25" param2="//@newElements.12"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.3"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.27" param2="//@newElements.14"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.28" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.29" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.15"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.31" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.32" param2="//@newElements.15"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.33" param2="//@newElements.15"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.34" param2="//@newElements.5"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.35" param2="//@problemConainer/@elements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.36" param2="//@newElements.24"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.37" param2="//@newElements.17"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.38" param2="//@newElements.19"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.40" param2="//@newElements.3"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.41" param2="//@newElements.29"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.42" param2="//@newElements.22"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.43" param2="//@newElements.24"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.36" param2="//@newElements.3"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.37" param2="//@newElements.4"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.38" param2="//@newElements.14"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.7"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.40" param2="//@newElements.30"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.41" param2="//@newElements.7"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.42" param2="//@newElements.5"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.43" param2="//@newElements.10"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.44" param2="//@newElements.26"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.45" param2="//@newElements.39"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.46" param2="//@newElements.38"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.47" param2="//@newElements.16"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.48" param2="//@newElements.46"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.49" param2="//@newElements.36"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.50" param2="//@newElements.18"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.51" param2="//@newElements.37"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.52" param2="//@newElements.19"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.53" param2="//@newElements.10"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.54" param2="//@newElements.43"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.55" param2="//@newElements.22"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.56" param2="//@newElements.36"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.57" param2="//@newElements.39"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.58" param2="//@newElements.26"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.59" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.60" param2="//@newElements.32"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.61" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.62" param2="//@newElements.22"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.63" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.64" param2="//@newElements.19"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.65" param2="//@newElements.60"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.66" param2="//@newElements.17"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.67" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.68" param2="//@newElements.18"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.69" param2="//@newElements.52"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.70" param2="//@newElements.63"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.71" param2="//@newElements.52"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.72" param2="//@newElements.28"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.73" param2="//@newElements.49"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.74" param2="//@newElements.2"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.75" param2="//@newElements.74"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.76" param2="//@newElements.65"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.77" param2="//@newElements.55"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.78" param2="//@newElements.31"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.79" param2="//@newElements.44"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.80" param2="//@newElements.55"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.81" param2="//@newElements.62"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.82" param2="//@newElements.51"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.83" param2="//@newElements.44"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.84" param2="//@newElements.70"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.85" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.86" param2="//@newElements.17"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.87" param2="//@newElements.6"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.88" param2="//@newElements.21"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.89" param2="//@newElements.53"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.90" param2="//@newElements.1"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.91" param2="//@newElements.78"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.92" param2="//@newElements.90"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.93" param2="//@newElements.86"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.94" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.95" param2="//@newElements.94"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.96" param2="//@newElements.78"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.97" param2="//@newElements.67"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.98" param2="//@newElements.73"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.99" param2="//@newElements.13"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.45" param2="//@newElements.14"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.46" param2="//@newElements.19"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.47" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.48" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.49" param2="//@newElements.15"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.50" param2="//@newElements.16"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.51" param2="//@newElements.10"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.52" param2="//@newElements.3"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.53" param2="//@newElements.47"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.54" param2="//@newElements.7"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.55" param2="//@newElements.47"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.56" param2="//@newElements.26"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.57" param2="//@newElements.33"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.58" param2="//@newElements.19"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.59" param2="//@newElements.26"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.60" param2="//@newElements.39"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.61" param2="//@newElements.39"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.62" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.63" param2="//@newElements.29"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.64" param2="//@newElements.7"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.65" param2="//@newElements.14"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.66" param2="//@newElements.61"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.67" param2="//@newElements.5"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.68" param2="//@newElements.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.69" param2="//@newElements.26"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.70" param2="//@newElements.44"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.71" param2="//@newElements.19"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.72" param2="//@newElements.6"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.73" param2="//@newElements.34"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.74" param2="//@newElements.34"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.75" param2="//@newElements.47"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.76" param2="//@newElements.68"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.77" param2="//@newElements.39"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.78" param2="//@newElements.34"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.79" param2="//@newElements.68"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.80" param2="//@newElements.11"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.81" param2="//@newElements.19"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.82" param2="//@newElements.30"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.83" param2="//@newElements.43"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.84" param2="//@newElements.5"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.85" param2="//@newElements.12"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.86" param2="//@newElements.37"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.87" param2="//@newElements.33"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.88" param2="//@newElements.30"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.89" param2="//@newElements.16"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.90" param2="//@newElements.73"/>
   </partialrelationinterpretation>
   <partialrelationinterpretation interpretationOf="//@problemConainer/@relations.1" param1="//@problemConainer/@relations.1/@parameters.0" param2="//@problemConainer/@relations.1/@parameters.1">
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.0"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.1"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.2"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.3"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.4"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.5"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.6"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.7"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.4" param2="//@newElements.8"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.9"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.10"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@newElements.11"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.4" param2="//@newElements.12"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.13"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.11" param2="//@newElements.14"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.15"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.16"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.17"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.18"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.19"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@newElements.20"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.21"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.22"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.23"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.21" param2="//@newElements.24"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.8" param2="//@newElements.25"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.26"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@newElements.27"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.25" param2="//@newElements.28"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.20" param2="//@newElements.29"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.29" param2="//@newElements.30"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.31"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.32"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.28" param2="//@newElements.33"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.22" param2="//@newElements.34"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.1"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.3"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.4"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.5"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.6"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.7"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.8"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.9"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.10"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.11"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.12"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.6" param2="//@newElements.13"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.14"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.15"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.16"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.12" param2="//@newElements.17"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.18"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.19"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@newElements.20"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.21"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.22"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.23"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.12" param2="//@newElements.24"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.12" param2="//@newElements.25"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.26"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.27"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.28"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.29"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.15" param2="//@newElements.30"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.31"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.15" param2="//@newElements.32"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.15" param2="//@newElements.33"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.34"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@problemConainer/@elements.0" param2="//@newElements.35"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.24" param2="//@newElements.36"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.37"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.38"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.39"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.40"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.29" param2="//@newElements.41"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.22" param2="//@newElements.42"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.24" param2="//@newElements.43"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.36"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.4" param2="//@newElements.37"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.38"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.39"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.40"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.41"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.42"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@newElements.43"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.44"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.45"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.38" param2="//@newElements.46"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@newElements.47"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.46" param2="//@newElements.48"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.36" param2="//@newElements.49"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.18" param2="//@newElements.50"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.37" param2="//@newElements.51"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.52"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@newElements.53"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.43" param2="//@newElements.54"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.22" param2="//@newElements.55"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.36" param2="//@newElements.56"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.57"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.58"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.59"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.32" param2="//@newElements.60"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.61"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.22" param2="//@newElements.62"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.63"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.64"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.60" param2="//@newElements.65"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.66"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.67"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.18" param2="//@newElements.68"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.52" param2="//@newElements.69"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.63" param2="//@newElements.70"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.52" param2="//@newElements.71"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.28" param2="//@newElements.72"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.49" param2="//@newElements.73"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.74"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.74" param2="//@newElements.75"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.65" param2="//@newElements.76"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.55" param2="//@newElements.77"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.31" param2="//@newElements.78"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.44" param2="//@newElements.79"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.55" param2="//@newElements.80"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.62" param2="//@newElements.81"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.51" param2="//@newElements.82"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.44" param2="//@newElements.83"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.70" param2="//@newElements.84"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.85"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.17" param2="//@newElements.86"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.6" param2="//@newElements.87"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.21" param2="//@newElements.88"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.53" param2="//@newElements.89"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.1" param2="//@newElements.90"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.78" param2="//@newElements.91"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.90" param2="//@newElements.92"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.86" param2="//@newElements.93"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.94"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.94" param2="//@newElements.95"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.78" param2="//@newElements.96"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.67" param2="//@newElements.97"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.73" param2="//@newElements.98"/>
-    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.13" param2="//@newElements.99"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.45"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.46"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.2" param2="//@newElements.47"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.48"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.15" param2="//@newElements.49"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@newElements.50"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.10" param2="//@newElements.51"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.3" param2="//@newElements.52"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.47" param2="//@newElements.53"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.54"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.47" param2="//@newElements.55"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.56"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.33" param2="//@newElements.57"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.58"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.59"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.60"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.61"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.62"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.29" param2="//@newElements.63"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.7" param2="//@newElements.64"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.14" param2="//@newElements.65"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.61" param2="//@newElements.66"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.67"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.0" param2="//@newElements.68"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.26" param2="//@newElements.69"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.44" param2="//@newElements.70"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.71"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.6" param2="//@newElements.72"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.34" param2="//@newElements.73"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.34" param2="//@newElements.74"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.47" param2="//@newElements.75"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.68" param2="//@newElements.76"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.39" param2="//@newElements.77"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.34" param2="//@newElements.78"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.68" param2="//@newElements.79"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.11" param2="//@newElements.80"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.19" param2="//@newElements.81"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.82"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.43" param2="//@newElements.83"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.5" param2="//@newElements.84"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.12" param2="//@newElements.85"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.37" param2="//@newElements.86"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.33" param2="//@newElements.87"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.30" param2="//@newElements.88"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.16" param2="//@newElements.89"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink" param1="//@newElements.73" param2="//@newElements.90"/>
   </partialrelationinterpretation>
   <newElements/>
   <newElements/>
@@ -295,20 +277,11 @@
   <newElements/>
   <newElements/>
   <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <newElements/>
-  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.0" elements="//@problemConainer/@elements.0 //@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90 //@newElements.91 //@newElements.92 //@newElements.93 //@newElements.94 //@newElements.95 //@newElements.96 //@newElements.97 //@newElements.98 //@newElements.99"/>
-  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.1" elements="//@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90 //@newElements.91 //@newElements.92 //@newElements.93 //@newElements.94 //@newElements.95 //@newElements.96 //@newElements.97 //@newElements.98 //@newElements.99" supertypeInterpretation="//@partialtypeinterpratation.0 //@partialtypeinterpratation.4"/>
+  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.0" elements="//@problemConainer/@elements.0 //@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90"/>
+  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.1" elements="//@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90" supertypeInterpretation="//@partialtypeinterpratation.0 //@partialtypeinterpratation.4"/>
   <partialtypeinterpratation interpretationOf="//@problemConainer/@types.2" elements="//@problemConainer/@elements.0" supertypeInterpretation="//@partialtypeinterpratation.0"/>
-  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.3" elements="//@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90 //@newElements.91 //@newElements.92 //@newElements.93 //@newElements.94 //@newElements.95 //@newElements.96 //@newElements.97 //@newElements.98 //@newElements.99" supertypeInterpretation="//@partialtypeinterpratation.1 //@partialtypeinterpratation.0 //@partialtypeinterpratation.4"/>
-  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.5" elements="//@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90 //@newElements.91 //@newElements.92 //@newElements.93 //@newElements.94 //@newElements.95 //@newElements.96 //@newElements.97 //@newElements.98 //@newElements.99" supertypeInterpretation="//@partialtypeinterpratation.0"/>
+  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.3" elements="//@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90" supertypeInterpretation="//@partialtypeinterpratation.1 //@partialtypeinterpratation.0 //@partialtypeinterpratation.4"/>
+  <partialtypeinterpratation interpretationOf="//@problemConainer/@types.5" elements="//@newElements.0 //@newElements.1 //@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6 //@newElements.7 //@newElements.8 //@newElements.9 //@newElements.10 //@newElements.11 //@newElements.12 //@newElements.13 //@newElements.14 //@newElements.15 //@newElements.16 //@newElements.17 //@newElements.18 //@newElements.19 //@newElements.20 //@newElements.21 //@newElements.22 //@newElements.23 //@newElements.24 //@newElements.25 //@newElements.26 //@newElements.27 //@newElements.28 //@newElements.29 //@newElements.30 //@newElements.31 //@newElements.32 //@newElements.33 //@newElements.34 //@newElements.35 //@newElements.36 //@newElements.37 //@newElements.38 //@newElements.39 //@newElements.40 //@newElements.41 //@newElements.42 //@newElements.43 //@newElements.44 //@newElements.45 //@newElements.46 //@newElements.47 //@newElements.48 //@newElements.49 //@newElements.50 //@newElements.51 //@newElements.52 //@newElements.53 //@newElements.54 //@newElements.55 //@newElements.56 //@newElements.57 //@newElements.58 //@newElements.59 //@newElements.60 //@newElements.61 //@newElements.62 //@newElements.63 //@newElements.64 //@newElements.65 //@newElements.66 //@newElements.67 //@newElements.68 //@newElements.69 //@newElements.70 //@newElements.71 //@newElements.72 //@newElements.73 //@newElements.74 //@newElements.75 //@newElements.76 //@newElements.77 //@newElements.78 //@newElements.79 //@newElements.80 //@newElements.81 //@newElements.82 //@newElements.83 //@newElements.84 //@newElements.85 //@newElements.86 //@newElements.87 //@newElements.88 //@newElements.89 //@newElements.90" supertypeInterpretation="//@partialtypeinterpratation.0"/>
   <partialtypeinterpratation interpretationOf="//@problemConainer/@types.7" supertypeInterpretation="//@partialtypeinterpratation.2 //@partialtypeinterpratation.0 //@partialtypeinterpratation.4"/>
   <openWorldElementPrototypes name="Symbolic New Element"/>
   <problemConainer>
@@ -460,7 +433,7 @@
       </value>
     </relations>
     <elements name="o 1" definedInType="//@problemConainer/@types.4 //@problemConainer/@types.6"/>
-    <containmentHierarchies typesOrderedInHierarchy="//@problemConainer/@types.2 //@problemConainer/@types.0 //@problemConainer/@types.3 //@problemConainer/@types.1 //@problemConainer/@types.4 //@problemConainer/@types.5 //@problemConainer/@types.6 //@problemConainer/@types.7" containmentRelations="//@problemConainer/@relations.1"/>
+    <containmentHierarchies typesOrderedInHierarchy="//@problemConainer/@types.1 //@problemConainer/@types.2 //@problemConainer/@types.0 //@problemConainer/@types.3 //@problemConainer/@types.4 //@problemConainer/@types.5 //@problemConainer/@types.6 //@problemConainer/@types.7" containmentRelations="//@problemConainer/@relations.1"/>
     <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@problemConainer/@assertions.0" relation="//@problemConainer/@relations.0" upper="1"/>
     <annotations xsi:type="ecore2logicannotations:InverseRelationAssertion" target="//@problemConainer/@assertions.1" inverseA="//@problemConainer/@relations.0" inverseB="//@problemConainer/@relations.1"/>
     <annotations xsi:type="viatra2logicannotations:TransfomedViatraQuery" target="//@problemConainer/@relations.2" patternFullyQualifiedName="patterns.hasParent"/>

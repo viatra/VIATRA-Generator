@@ -29,6 +29,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SmartGridScopeObjective
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -69,8 +70,11 @@ class ViatraReasoner extends LogicReasoner{
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
-			new UnfinishedWFObjective(method.unfinishedWF)
+			new UnfinishedWFObjective(method.unfinishedWF),
+			new SmartGridScopeObjective()
 		))
+		
+//		dse.addObjective(new SmartGridScopeObjective)
 		
 //		dse.addObjective(new ModelGenerationCompositeObjective(
 //			new ScopeObjective,

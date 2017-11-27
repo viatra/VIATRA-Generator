@@ -24,14 +24,18 @@ import org.eclipse.viatra.dse.objectives.impl.BaseObjective
 
 class ModelGenerationCompositeObjective implements IObjective{
 	val ScopeObjective scopeObjective
+	val SmartGridScopeObjective smartgridObjective
 	val List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives
 	val UnfinishedWFObjective unfinishedWFObjective
 	
 	public new(
 		ScopeObjective scopeObjective,
 		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
-		UnfinishedWFObjective unfinishedWFObjective)
+		UnfinishedWFObjective unfinishedWFObjective,
+		SmartGridScopeObjective smartgridObjective
+		)
 	{
+		this.smartgridObjective = smartgridObjective
 		this.scopeObjective = scopeObjective
 		this.unfinishedMultiplicityObjectives = unfinishedMultiplicityObjectives
 		this.unfinishedWFObjective = unfinishedWFObjective
@@ -39,13 +43,14 @@ class ModelGenerationCompositeObjective implements IObjective{
 	
 	override init(ThreadContext context) {
 		this.scopeObjective.init(context)
+		this.smartgridObjective.init(context)
 		this.unfinishedMultiplicityObjectives.forEach[it.init(context)]
 		this.unfinishedWFObjective.init(context)
 	}
 	
 	override createNew() {
 		return new ModelGenerationCompositeObjective(
-			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective)
+			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective, this.smartgridObjective)
 	}
 	
 	override getComparator() { Comparators.LOWER_IS_BETTER }
@@ -54,7 +59,8 @@ class ModelGenerationCompositeObjective implements IObjective{
 		val scopeFitnes = scopeObjective.getFitness(context)
 		//val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
 		val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
-		
+		val realistic =  smartgridObjective.getFitness(context)
+		sum += realistic*4
 		sum+=scopeFitnes
 		var multiplicity = 0.0
 		for(multiplicityObjective : unfinishedMultiplicityObjectives) {
@@ -63,7 +69,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 		sum+=multiplicity
 		sum += unfinishedWFsFitness//*0.5
 		
-//		println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
+		println('''Sum;«sum»;Scope;«scopeFitnes»;Multiplicity;«multiplicity»;WFs;«unfinishedWFsFitness»;Realistic;«realistic»''')
 		
 		return sum
 	}
@@ -72,7 +78,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 	override getName() { "CompositeUnfinishednessObjective"}
 	
 	override isHardObjective() { true }
-	override satisifiesHardObjective(Double fitness) { fitness <= 0.001 }
+	override satisifiesHardObjective(Double fitness) { fitness <= 10 }
 	
 	
 	override setComparator(Comparator<Double> comparator) {

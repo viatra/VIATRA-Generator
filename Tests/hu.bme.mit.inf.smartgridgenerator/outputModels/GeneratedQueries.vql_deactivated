@@ -111,8 +111,8 @@ private pattern mayInstanceOfEntity_class(problem:LogicProblem, interpretation:P
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
 	neg find mustInstanceOfEntity_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
@@ -132,8 +132,8 @@ private pattern mayInstanceOfMeter_class(problem:LogicProblem, interpretation:Pa
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfSmartMeter_class(problem,interpretation,element);
 	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+	neg find mustInstanceOfSmartMeter_class(problem,interpretation,element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElementPrototypes(interpetation,element);
@@ -503,24 +503,6 @@ pattern unfinishedBy_pattern_patterns_concentratorHasParent(problem:LogicProblem
 //////////
 // 4.1 Object constructors
 //////////
-pattern createObject_SmartMeter_class_by_communicationChild_reference_Entity_with_communicationParent_reference_Entity(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"SmartMeter class");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"communicationChild reference Entity");
-	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"communicationParent reference Entity");
-	find mustInstanceOfEntity_class(problem,interpretation,container);
-	find mayInstanceOfSmartMeter_class(problem,interpretation,newObject);
-	find mayInRelationcommunicationChild_reference_Entity(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
 pattern createObject_Concentrator_class_UndefinedPart_by_communicationChild_reference_Entity_with_communicationParent_reference_Entity(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
@@ -539,21 +521,39 @@ pattern createObject_Concentrator_class_UndefinedPart_by_communicationChild_refe
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
+pattern createObject_SmartMeter_class_by_communicationChild_reference_Entity_with_communicationParent_reference_Entity(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"SmartMeter class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"communicationChild reference Entity");
+	PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(inverseInterpretation,"communicationParent reference Entity");
+	find mustInstanceOfEntity_class(problem,interpretation,container);
+	find mayInstanceOfSmartMeter_class(problem,interpretation,newObject);
+	find mayInRelationcommunicationChild_reference_Entity(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
 
 //////////
 // 4.2 Type refinement
 //////////
-pattern refineTypeTo_SmartMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfSmartMeter_class(problem,interpretation,element);
-	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
-}
 pattern refineTypeTo_Concentrator_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfMeter_class(problem,interpretation,element);
 	neg find mustInstanceOfConcentrator_class_UndefinedPart(problem,interpretation,element);
+}
+pattern refineTypeTo_SmartMeter_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfConcentrator_class(problem,interpretation,element);
+	neg find mustInstanceOfSmartMeter_class(problem,interpretation,element);
 }
 
 //////////

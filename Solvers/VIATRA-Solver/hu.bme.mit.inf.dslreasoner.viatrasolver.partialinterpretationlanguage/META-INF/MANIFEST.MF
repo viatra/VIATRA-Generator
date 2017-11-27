@@ -12,6 +12,7 @@ Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlan
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation,
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl,
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.util,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.ralismcalculator,
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder,
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation
 Require-Bundle: org.eclipse.core.runtime,

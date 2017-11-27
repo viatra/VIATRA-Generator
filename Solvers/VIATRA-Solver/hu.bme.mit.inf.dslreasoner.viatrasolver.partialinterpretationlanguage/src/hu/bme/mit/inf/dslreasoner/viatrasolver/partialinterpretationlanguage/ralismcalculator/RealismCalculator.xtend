@@ -13,9 +13,8 @@ import java.util.HashMap
 import org.eclipse.emf.common.util.BasicEList
 import java.util.Map
 
-class RealismCalculator {
-	
-	
+public class RealismCalculator {
+		
 	public static def calculateDegreeOfNode(DefinedElement definedElement){
 		var int degree = 0
 		for (reference : definedElement.referencesOfElement) {
