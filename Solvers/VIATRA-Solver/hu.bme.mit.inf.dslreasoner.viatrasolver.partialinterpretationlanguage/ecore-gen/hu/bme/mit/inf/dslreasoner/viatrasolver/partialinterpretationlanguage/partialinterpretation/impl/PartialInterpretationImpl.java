@@ -67,6 +67,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class PartialInterpretationImpl extends MinimalEObjectImpl.Container implements PartialInterpretation {
+	private static long elapsedTime = 0; 
+	
 	/**
 	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -1038,6 +1040,16 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 		result.append(maxNewStrings);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public long getElapsedTime() {		
+		return elapsedTime;
+	}
+
+	@Override
+	public void increaseElapsedTime(long nanoTime) {
+		elapsedTime += nanoTime;
 	}
 
 } //PartialInterpretationImpl

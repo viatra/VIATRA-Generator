@@ -11,16 +11,53 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import java.util.Set
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.ralismcalculator.RealismCalculator
+import java.io.PrintStream
+import java.io.FileOutputStream
+import java.io.FileDescriptor
 
 class PartialInterpretation2Gml {
 	def public transform(PartialInterpretation i) {
-		System.out.println("SumElements: " + RealismCalculator.getNumberOfElements(i))
-		System.out.println("Repeaters: " + RealismCalculator.getNumberOfRepeaters(i))
-		System.out.println("percentage: " +  RealismCalculator.calculatePercentageOfRepeatersInSmartGrid(i))
-		System.out.println("MinRepeaterDegree: " + RealismCalculator.calculateMinimumDegreeOfRepeaters(i));
-		System.out.println("MaxRepeaterDegree: " + RealismCalculator.calculateMaximumDegreeOfRepeaters(i));
-		System.out.println("MinConcentratorDegree: " + RealismCalculator.calculateMinimumDegreeOfConcentrators(i));
-		System.out.println("MaxConcentratorDegree: " + RealismCalculator.calculateMaximumDegreeOfConcentrators(i));
+		var postGenCalculationStartTime = System.nanoTime();
+//		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)))
+//		System.out.print("_____________")
+		var numberOfElements = RealismCalculator.getNumberOfElements(i)
+		var numberOfRepeaters = RealismCalculator.getNumberOfRepeaters(i)
+		var percentageOfRepeaters = RealismCalculator.calculatePercentageOfRepeatersInSmartGrid(i)
+		System.out.print("SumElements;" + numberOfElements + ";")
+		System.out.print("Repeaters;" + numberOfRepeaters + ";")
+		System.out.print("RepPercentage;" + percentageOfRepeaters + ";")
+//		System.out.print("_____________")
+		var minimumRepeaterDegree = RealismCalculator.calculateMinimumDegreeOfRepeaters(i)
+		var maximumRepeaterDegree = RealismCalculator.calculateMaximumDegreeOfRepeaters(i)
+		var averageRepeaterDegree = RealismCalculator.calculateAverageRepeaterDegree(i)
+		System.out.print("MinRepeaterDegree;" + minimumRepeaterDegree + ";");
+		System.out.print("MaxRepeaterDegree;" + maximumRepeaterDegree + ";");
+		System.out.print("AvgRepeaterDegree;" + averageRepeaterDegree + ";");		
+//		System.out.print("_____________")
+		var minimumConcentratorDegree = RealismCalculator.calculateMinimumDegreeOfConcentrators(i)
+		var maximumConcentratorDegree = RealismCalculator.calculateMaximumDegreeOfConcentrators(i)
+		var avgConcentratorDegree = RealismCalculator.calculateAverageConcentratorDegree(i)
+		System.out.print("MinConcentratorDegree;" + minimumConcentratorDegree + ";");
+		System.out.print("MaxConcentratorDegree;" + maximumConcentratorDegree + ";");
+		System.out.print("AvgConcentratorDegree;" + avgConcentratorDegree + ";");
+//		System.out.print("_____________")
+		var maxHops = RealismCalculator.calculateMaximumNumberOfHops(i)
+		var minHops= RealismCalculator.calculateMinimumNumberOfHops(i)
+		var avgHops= RealismCalculator.calculateAverageNumberOfHops(i)
+		System.out.print("MaxHops;" + maxHops + ";");
+		System.out.print("MinHops;" + minHops + ";");
+		System.out.print("AvgHops;" + avgHops + ";");
+//		System.out.print("_____________")
+		var postGenElapsedTime = (System.nanoTime()-postGenCalculationStartTime)		
+		System.out.print("Post Generation Realism Calculation Time;" + postGenElapsedTime + ";")
+		System.out.print("Post Generation Realism Calculation Time In Seconds;" + postGenElapsedTime *0.000000001 + ";")
+		var generationCalculationTime = i.elapsedTime
+		System.out.print("Realism Calculation Time During Generation;" + generationCalculationTime + ";")
+		System.out.print("Realism Calculation Time During Generation In Seconds;" + generationCalculationTime *0.000000001 + ";")
+		var totalCalculationTime = postGenElapsedTime + generationCalculationTime
+		System.out.print("Total Realism Calculation Time;" + totalCalculationTime + ";")
+		System.out.print("Total Realism Calculation Time In Seconds;" + totalCalculationTime*0.000000001 + ";")
+//		System.out.print("_____________")
 		val p = i.problem
 		val Map<DefinedElement, Integer> objectToID = new HashMap
 		val containmentRelations = p.containmentHierarchies.map[it.containmentRelations].flatten.toSet

@@ -6,6 +6,7 @@ import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.dse.objectives.Comparators
 import org.eclipse.viatra.dse.objectives.IObjective
 import org.eclipse.viatra.dse.objectives.impl.BaseObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 
 //class ViatraReasonerNumbers {
 //	public static val scopePriority = 2
@@ -57,11 +58,14 @@ class ModelGenerationCompositeObjective implements IObjective{
 	override getFitness(ThreadContext context) {
 		var sum = 0.0
 		val scopeFitnes = scopeObjective.getFitness(context)
-		//val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
+		val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
 		val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
+		var startTime = System.nanoTime();
 		val realistic =  smartgridObjective.getFitness(context)
-		sum += realistic*4
-		sum+=scopeFitnes
+		var elapsedTime = System.nanoTime() - startTime;
+		(context.model as PartialInterpretation).increaseElapsedTime(elapsedTime);
+		sum += realistic*5 //real2 -> *5, real1 -> *4
+		sum += scopeFitnes
 		var multiplicity = 0.0
 		for(multiplicityObjective : unfinishedMultiplicityObjectives) {
 			multiplicity+=multiplicityObjective.getFitness(context)//*0.5
@@ -78,7 +82,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 	override getName() { "CompositeUnfinishednessObjective"}
 	
 	override isHardObjective() { true }
-	override satisifiesHardObjective(Double fitness) { fitness <= 10 }
+	override satisifiesHardObjective(Double fitness) { fitness <= 10 } //TODO tweak
 	
 	
 	override setComparator(Comparator<Double> comparator) {
