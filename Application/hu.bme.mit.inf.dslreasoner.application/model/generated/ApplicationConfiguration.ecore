@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="applicationConfiguration" nsURI="http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
+    nsPrefix="applicationConfiguration">
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationScript">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
+        eType="#//Command" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Command"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" eSuperTypes="#//Command"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Import"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EPackageImport" eSuperTypes="#//Import">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackage" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViatraImport" eSuperTypes="#//Import">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedViatra" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//PatternModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelSpecification" eSuperTypes="#//Metamodel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//MetamodelEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AllPackageEntry" eSuperTypes="#//MetamodelEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exclusion" upperBound="-1"
+        eType="#//MetamodelElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelElement" eSuperTypes="#//MetamodelEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//MetamodelSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetamodelReference" eSuperTypes="#//Metamodel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//MetamodelDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metamodel"/>
+</ecore:EPackage>

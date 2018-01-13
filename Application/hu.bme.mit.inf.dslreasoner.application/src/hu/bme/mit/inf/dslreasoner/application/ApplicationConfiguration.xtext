@@ -1,0 +1,127 @@
+grammar hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as viatra
+generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
+
+ConfigurationScript:
+	(imports += Import)*
+	(commands += Command)*
+;
+
+Command :
+	Declaration
+	//| Task
+;
+Declaration :
+//	FileDeclaration | 
+	MetamodelDeclaration
+//	| PartialModelDeclaration
+//	| GraphPatternDeclaration
+//	| SolverConfig
+;
+
+///////////////////////////////////////////////////
+// Imports
+///////////////////////////////////////////////////
+
+Import: EPackageImport | ViatraImport;
+
+EPackageImport: "import" "epackage" importedPackage=[ecore::EPackage|STRING];
+ViatraImport: "import" "viatra" importedViatra=[viatra::PatternModel|STRING];
+
+///////////////////////////////////////////////////
+// Files and Folders
+///////////////////////////////////////////////////
+/*
+FileSpecification: path = STRING;
+FileDeclaration: 'file' name = ID '=' specification = FileSpecification;
+
+FileReference: referred = [FileDeclaration];
+File: FileSpecification | FileReference;
+*/
+///////////////////////////////////////////////////
+// Metamodel
+///////////////////////////////////////////////////
+
+MetamodelSpecification: '{' (entries += MetamodelEntry) (',' entries += MetamodelEntry)* '}';
+MetamodelEntry: MetamodelElement | AllPackageEntry;
+AllPackageEntry: "package" package=[ecore::EPackage] ("excluding" '{'exclusion +=MetamodelElement (',' exclusion +=MetamodelElement)*'}')?;
+MetamodelElement: (package=[ecore::EPackage] '::')? classifier = [ecore::EClassifier] ('.' feature= [ecore::ENamedElement])?;
+
+MetamodelDeclaration: 'metamodel' name = ID specification = MetamodelSpecification;
+MetamodelReference: referred = [MetamodelDeclaration];
+Metamodel: MetamodelReference | MetamodelSpecification;
+
+///////////////////////////////////////////////////
+// Partial Model
+///////////////////////////////////////////////////
+/*
+PartialModelEntry: path = File;
+PartialModelSpecification: entry += PartialModelEntry ('+' entry += PartialModelEntry)*;
+PartialModelDeclaration: 'partial-model' name = ID '=' specification = PartialModelSpecification;
+PartialModelReference : referred = [PartialModelDeclaration];
+PartialModel: PartialModelSpecification | PartialModelReference;
+*/
+///////////////////////////////////////////////////
+// Patterns
+///////////////////////////////////////////////////
+/*
+PatternSpecification: '{' entries += PatternEntry (',' entries += PatternEntry)* '}';
+PatternEntry: PatternElement | AllPatternEntry;
+AllPatternEntry: package = [viatra::PatternModel] ('excluding' '{' exclusuion += PatternElement (',' exclusuion += PatternElement)* '}')?;
+PatternElement: pattern = [viatra::Pattern];
+
+GraphPatternDeclaration: 'patterns' name = ID specification = PatternSpecification;
+GraphPatternReference: referred = [GraphPatternDeclaration];
+GraphPattern: GraphPatternReference|PatternSpecification;
+*/
+///////////////////////////////////////////////////
+// SolverConfig
+///////////////////////////////////////////////////
+/*
+SolverConfig : SMTSolverConfig | AlloySolverConfig | ViatraSolverConfig;
+
+SMTSolverConfig:
+	'smt-solver-config' name = ID '{'
+		'solver-path' '=' solverPath = File
+	'}'
+;
+
+AlloySolverConfig:
+	'alloy-solver-config' name = ID  '{'
+		('symmetry' '=' symmetry=INT)?
+	'}'
+;
+
+ViatraSolverConfig:
+	'viatra-solver-config' name = ID '{'
+		('statecoding' '=' statecoding = ViatraStatecoder)? &
+		('type-inferencing' '=' typeinferencing = ViatraTypeInferencing)? &
+		('backtrack-chance' '=' backtrackChance = INT)?
+	'}'
+;
+enum ViatraStatecoder: neighbourhood | identifier;
+enum ViatraTypeInferencing: preliminary | online;
+
+Solver: SMTSolver | AlloySolver | ViatraSolver;
+
+SMTSolver: 'smt-solver' '(' (config = [SMTSolverConfig]) ')';
+AlloySolver: 'alloy-solver' {AlloySolver} '(' (config = [AlloySolverConfig]|'default') ')';
+ViatraSolver: 'viatra-solver' {ViatraSolver} '(' (config= [ViatraSolverConfig]|'default')')';
+
+Task: GenerationTask;
+
+GenerationTask: 'generate' '{'
+		('metamodel' '=' metamodel = Metamodel) &
+		('partial-model'  '=' partialModel = PartialModel)? &
+		('patterns'  '=' patterns = GraphPattern)? &
+		('new-objects' '=' size = INT) &
+		('number' '=' number= INT)? &
+		('runs' '=' runs = INT)?
+		'target-folder' '=' tagetFolder = File
+		'debug-folder' '=' debugFolder = File
+		('log' '=' targetLogFile = File)?
+		('statistics' '=' targetStatisticsFile = File)?
+	'}'
+;*/
