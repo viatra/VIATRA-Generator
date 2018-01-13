@@ -49,13 +49,9 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 
 	protected def scopeForMetamodelElement(MetamodelElement context, EReference reference, ConfigurationScript document) {
 		if(reference === language.metamodelEntry_Package) {
-			if(context.classifier !== null) {
-				return Scopes.scopeFor(#[context.classifier.EPackage])
-			} else {
-				return Scopes.scopeFor(document.allEPackages)
-			}
+			return Scopes.scopeFor(document.allEPackages)
 		} if(reference === language.metamodelElement_Classifier) {
-			if(context.package != null) {
+			if(context.package !== null) {
 				return Scopes.scopeFor(context.package.EClassifiers)
 			} else {
 				return Scopes.scopeFor(document.allEClassifiers)
@@ -77,18 +73,22 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 			return Scopes.scopeFor(document.allEPackages)
 		} else if(reference ===language.metamodelElement_Classifier) {
 			return Scopes.scopeFor(document.allEClassifiers)
+		} else {
+			return super.getScope(context,reference)
 		}
 	}
 	
 	protected def scopeForAllPackageEntry(AllPackageEntry context, EReference reference, ConfigurationScript document) {
 		if(reference === language.metamodelEntry_Package) {
 			return Scopes.scopeFor(document.allEPackages)
-		} else if(reference === language.metamodelEntry_Package) {
+		} else if(reference === language.metamodelElement_Classifier) {
 			if(context.package === null) {
 				return Scopes.scopeFor(document.allEClassifiers)
 			} else {
 				return Scopes.scopeFor(context.package.EClassifiers)
 			}
+		} else {
+			return super.getScope(context,reference)
 		}
 	}
 }
