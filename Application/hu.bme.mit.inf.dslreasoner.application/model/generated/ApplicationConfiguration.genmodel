@@ -6,12 +6,16 @@
     complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.genmodel#//patternLanguage">
   <genPackages prefix="ApplicationConfiguration" basePackage="hu.bme.mit.inf.dslreasoner.application"
       disposableProviderFactory="true" fileExtensions="vsconfig" ecorePackage="ApplicationConfiguration.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ApplicationConfiguration.ecore#//Solver">
+      <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//Solver/SMTSolver"/>
+      <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//Solver/AlloySolver"/>
+      <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//Solver/ViatraSolver"/>
+    </genEnums>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//ConfigurationScript">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ConfigurationScript/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ConfigurationScript/commands"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//Command"/>
-    <genClasses ecoreClass="ApplicationConfiguration.ecore#//Declaration"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//Import"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//EPackageImport">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//EPackageImport/importedPackage"/>
@@ -19,6 +23,19 @@
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//ViatraImport">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ViatraImport/importedViatra"/>
     </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//Declaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//Declaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//FileSpecification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//FileSpecification/path"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//FileDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//FileDeclaration/specification"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//FileReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//FileReference/referred"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//File"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//MetamodelSpecification">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//MetamodelSpecification/entries"/>
     </genClasses>
@@ -33,12 +50,106 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//MetamodelElement/feature"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//MetamodelDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//MetamodelDeclaration/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//MetamodelDeclaration/specification"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//MetamodelReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//MetamodelReference/referred"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//Metamodel"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PartialModelSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PartialModelSpecification/entry"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PartialModelEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PartialModelEntry/path"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ModelEntry"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//FolderEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//FolderEntry/exclusion"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PartialModelDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PartialModelDeclaration/specification"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PartialModelReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PartialModelReference/referred"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PartialModel"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PatternSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PatternSpecification/entries"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PatternEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PatternEntry/package"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//AllPatternEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//AllPatternEntry/exclusuion"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//PatternElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//PatternElement/pattern"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//GraphPatternDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GraphPatternDeclaration/specification"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//GraphPatternReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GraphPatternReference/referred"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//GraphPattern"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ConfigSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ConfigSpecification/entries"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ConfigDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ConfigDeclaration/specification"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ConfigEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//ConfigEntry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//ConfigEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ConfigReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ConfigReference/config"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//Config"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ScopeSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ScopeSpecification/scopes"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//TypeScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/greather"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/greaterOrEqual"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//TypeScope/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/less"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/lessOrEqual"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/max"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//TypeReference"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ClassReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ClassReference/element"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ObjectReference"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntegerReference"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//RealReference"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//StringReference"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ScopeDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ScopeDeclaration/specification"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ScopeReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ScopeReference/referred"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//Scope"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//Task"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//GenerationTask">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/metamodel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/partialModel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/patterns"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/runs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/solver"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/config"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/tagetFolder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/debugFolder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/targetLogFile"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/targetStatisticsFile"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntegerScope"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//RealScope"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//StringScope"/>
   </genPackages>
 </genmodel:GenModel>

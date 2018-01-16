@@ -86,11 +86,6 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
         return createCommandAdapter();
       }
       @Override
-      public Adapter caseDeclaration(Declaration object)
-      {
-        return createDeclarationAdapter();
-      }
-      @Override
       public Adapter caseImport(Import object)
       {
         return createImportAdapter();
@@ -104,6 +99,31 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
       public Adapter caseViatraImport(ViatraImport object)
       {
         return createViatraImportAdapter();
+      }
+      @Override
+      public Adapter caseDeclaration(Declaration object)
+      {
+        return createDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseFileSpecification(FileSpecification object)
+      {
+        return createFileSpecificationAdapter();
+      }
+      @Override
+      public Adapter caseFileDeclaration(FileDeclaration object)
+      {
+        return createFileDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseFileReference(FileReference object)
+      {
+        return createFileReferenceAdapter();
+      }
+      @Override
+      public Adapter caseFile(File object)
+      {
+        return createFileAdapter();
       }
       @Override
       public Adapter caseMetamodelSpecification(MetamodelSpecification object)
@@ -139,6 +159,181 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMetamodel(Metamodel object)
       {
         return createMetamodelAdapter();
+      }
+      @Override
+      public Adapter casePartialModelSpecification(PartialModelSpecification object)
+      {
+        return createPartialModelSpecificationAdapter();
+      }
+      @Override
+      public Adapter casePartialModelEntry(PartialModelEntry object)
+      {
+        return createPartialModelEntryAdapter();
+      }
+      @Override
+      public Adapter caseModelEntry(ModelEntry object)
+      {
+        return createModelEntryAdapter();
+      }
+      @Override
+      public Adapter caseFolderEntry(FolderEntry object)
+      {
+        return createFolderEntryAdapter();
+      }
+      @Override
+      public Adapter casePartialModelDeclaration(PartialModelDeclaration object)
+      {
+        return createPartialModelDeclarationAdapter();
+      }
+      @Override
+      public Adapter casePartialModelReference(PartialModelReference object)
+      {
+        return createPartialModelReferenceAdapter();
+      }
+      @Override
+      public Adapter casePartialModel(PartialModel object)
+      {
+        return createPartialModelAdapter();
+      }
+      @Override
+      public Adapter casePatternSpecification(PatternSpecification object)
+      {
+        return createPatternSpecificationAdapter();
+      }
+      @Override
+      public Adapter casePatternEntry(PatternEntry object)
+      {
+        return createPatternEntryAdapter();
+      }
+      @Override
+      public Adapter caseAllPatternEntry(AllPatternEntry object)
+      {
+        return createAllPatternEntryAdapter();
+      }
+      @Override
+      public Adapter casePatternElement(PatternElement object)
+      {
+        return createPatternElementAdapter();
+      }
+      @Override
+      public Adapter caseGraphPatternDeclaration(GraphPatternDeclaration object)
+      {
+        return createGraphPatternDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseGraphPatternReference(GraphPatternReference object)
+      {
+        return createGraphPatternReferenceAdapter();
+      }
+      @Override
+      public Adapter caseGraphPattern(GraphPattern object)
+      {
+        return createGraphPatternAdapter();
+      }
+      @Override
+      public Adapter caseConfigSpecification(ConfigSpecification object)
+      {
+        return createConfigSpecificationAdapter();
+      }
+      @Override
+      public Adapter caseConfigDeclaration(ConfigDeclaration object)
+      {
+        return createConfigDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseConfigEntry(ConfigEntry object)
+      {
+        return createConfigEntryAdapter();
+      }
+      @Override
+      public Adapter caseConfigReference(ConfigReference object)
+      {
+        return createConfigReferenceAdapter();
+      }
+      @Override
+      public Adapter caseConfig(Config object)
+      {
+        return createConfigAdapter();
+      }
+      @Override
+      public Adapter caseScopeSpecification(ScopeSpecification object)
+      {
+        return createScopeSpecificationAdapter();
+      }
+      @Override
+      public Adapter caseTypeScope(TypeScope object)
+      {
+        return createTypeScopeAdapter();
+      }
+      @Override
+      public Adapter caseTypeReference(TypeReference object)
+      {
+        return createTypeReferenceAdapter();
+      }
+      @Override
+      public Adapter caseClassReference(ClassReference object)
+      {
+        return createClassReferenceAdapter();
+      }
+      @Override
+      public Adapter caseObjectReference(ObjectReference object)
+      {
+        return createObjectReferenceAdapter();
+      }
+      @Override
+      public Adapter caseIntegerReference(IntegerReference object)
+      {
+        return createIntegerReferenceAdapter();
+      }
+      @Override
+      public Adapter caseRealReference(RealReference object)
+      {
+        return createRealReferenceAdapter();
+      }
+      @Override
+      public Adapter caseStringReference(StringReference object)
+      {
+        return createStringReferenceAdapter();
+      }
+      @Override
+      public Adapter caseScopeDeclaration(ScopeDeclaration object)
+      {
+        return createScopeDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseScopeReference(ScopeReference object)
+      {
+        return createScopeReferenceAdapter();
+      }
+      @Override
+      public Adapter caseScope(Scope object)
+      {
+        return createScopeAdapter();
+      }
+      @Override
+      public Adapter caseTask(Task object)
+      {
+        return createTaskAdapter();
+      }
+      @Override
+      public Adapter caseGenerationTask(GenerationTask object)
+      {
+        return createGenerationTaskAdapter();
+      }
+      @Override
+      public Adapter caseIntegerScope(IntegerScope object)
+      {
+        return createIntegerScopeAdapter();
+      }
+      @Override
+      public Adapter caseRealScope(RealScope object)
+      {
+        return createRealScopeAdapter();
+      }
+      @Override
+      public Adapter caseStringScope(StringScope object)
+      {
+        return createStringScopeAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -193,21 +388,6 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration <em>Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration
-   * @generated
-   */
-  public Adapter createDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Import <em>Import</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -248,6 +428,81 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createViatraImportAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration <em>Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration
+   * @generated
+   */
+  public Adapter createDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification <em>File Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification
+   * @generated
+   */
+  public Adapter createFileSpecificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration <em>File Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration
+   * @generated
+   */
+  public Adapter createFileDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference <em>File Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference
+   * @generated
+   */
+  public Adapter createFileReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File <em>File</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File
+   * @generated
+   */
+  public Adapter createFileAdapter()
   {
     return null;
   }
@@ -353,6 +608,531 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMetamodelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification <em>Partial Model Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification
+   * @generated
+   */
+  public Adapter createPartialModelSpecificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry <em>Partial Model Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry
+   * @generated
+   */
+  public Adapter createPartialModelEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry <em>Model Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry
+   * @generated
+   */
+  public Adapter createModelEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry <em>Folder Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry
+   * @generated
+   */
+  public Adapter createFolderEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration <em>Partial Model Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration
+   * @generated
+   */
+  public Adapter createPartialModelDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference <em>Partial Model Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference
+   * @generated
+   */
+  public Adapter createPartialModelReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModel <em>Partial Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModel
+   * @generated
+   */
+  public Adapter createPartialModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification <em>Pattern Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
+   * @generated
+   */
+  public Adapter createPatternSpecificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry <em>Pattern Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
+   * @generated
+   */
+  public Adapter createPatternEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry <em>All Pattern Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
+   * @generated
+   */
+  public Adapter createAllPatternEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement <em>Pattern Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement
+   * @generated
+   */
+  public Adapter createPatternElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration <em>Graph Pattern Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration
+   * @generated
+   */
+  public Adapter createGraphPatternDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference <em>Graph Pattern Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference
+   * @generated
+   */
+  public Adapter createGraphPatternReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPattern <em>Graph Pattern</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPattern
+   * @generated
+   */
+  public Adapter createGraphPatternAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification <em>Config Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification
+   * @generated
+   */
+  public Adapter createConfigSpecificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration <em>Config Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration
+   * @generated
+   */
+  public Adapter createConfigDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry <em>Config Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry
+   * @generated
+   */
+  public Adapter createConfigEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference <em>Config Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference
+   * @generated
+   */
+  public Adapter createConfigReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config <em>Config</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config
+   * @generated
+   */
+  public Adapter createConfigAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification <em>Scope Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification
+   * @generated
+   */
+  public Adapter createScopeSpecificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope <em>Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope
+   * @generated
+   */
+  public Adapter createTypeScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference <em>Type Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference
+   * @generated
+   */
+  public Adapter createTypeReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference <em>Class Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference
+   * @generated
+   */
+  public Adapter createClassReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference <em>Object Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference
+   * @generated
+   */
+  public Adapter createObjectReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerReference <em>Integer Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerReference
+   * @generated
+   */
+  public Adapter createIntegerReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference <em>Real Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference
+   * @generated
+   */
+  public Adapter createRealReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringReference <em>String Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringReference
+   * @generated
+   */
+  public Adapter createStringReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration <em>Scope Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration
+   * @generated
+   */
+  public Adapter createScopeDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference <em>Scope Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference
+   * @generated
+   */
+  public Adapter createScopeReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope <em>Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope
+   * @generated
+   */
+  public Adapter createScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Task <em>Task</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Task
+   * @generated
+   */
+  public Adapter createTaskAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask <em>Generation Task</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask
+   * @generated
+   */
+  public Adapter createGenerationTaskAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope <em>Integer Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope
+   * @generated
+   */
+  public Adapter createIntegerScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope <em>Real Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope
+   * @generated
+   */
+  public Adapter createRealScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope <em>String Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope
+   * @generated
+   */
+  public Adapter createStringScopeAdapter()
   {
     return null;
   }

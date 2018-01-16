@@ -15,6 +15,10 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
 
 /**
  * This class contains custom scoping description.
@@ -34,6 +38,12 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 			context.scopeForMetamodelSpecification(reference,document)
 		} else if(context instanceof AllPackageEntry){
 			context.scopeForAllPackageEntry(reference,document)
+		} else if(context instanceof PatternElement) {
+			context.scopeForPatternElement(reference,document)
+		} else if(context instanceof PatternSpecification) {
+			context.scopeForPatternSpecification(reference,document)
+		} else if(context instanceof AllPatternEntry) {
+			context.scopeForAllPatternEntry(reference,document)
 		} else {
 			return super.getScope(context,reference)
 		}
@@ -42,15 +52,24 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 	private def allEPackages(ConfigurationScript document) {
 		return document.imports.filter(EPackageImport).map[it.importedPackage].filterNull
 	}
-	
+	private def allViatraPackages(ConfigurationScript document) {
+		val res = document.imports.filter(ViatraImport).map[it.importedViatra].filterNull
+		//println('''All packages: «res.map[packageName].toList»''')
+		return  res
+	}
 	private def allEClassifiers(ConfigurationScript document) {
 		document.allEPackages.map[EClassifiers].flatten
+	}
+	private def allPatterns(ConfigurationScript document) {
+		val res = document.allViatraPackages.map[patterns].flatten
+		//println('''All patterns: «res.map[name].toList»''')
+		return res
 	}
 
 	protected def scopeForMetamodelElement(MetamodelElement context, EReference reference, ConfigurationScript document) {
 		if(reference === language.metamodelEntry_Package) {
 			return Scopes.scopeFor(document.allEPackages)
-		} if(reference === language.metamodelElement_Classifier) {
+		} else if(reference === language.metamodelElement_Classifier) {
 			if(context.package !== null) {
 				return Scopes.scopeFor(context.package.EClassifiers)
 			} else {
@@ -86,6 +105,46 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 				return Scopes.scopeFor(document.allEClassifiers)
 			} else {
 				return Scopes.scopeFor(context.package.EClassifiers)
+			}
+		} else {
+			return super.getScope(context,reference)
+		}
+	}
+	
+	//////////
+	
+	protected def scopeForPatternElement(PatternElement context, EReference reference, ConfigurationScript document) {
+		if(reference === language.patternEntry_Package) {
+			return Scopes.scopeFor(document.allViatraPackages)
+		} else if(reference === language.patternElement_Pattern) {
+			if(context.package !== null) {
+				return Scopes.scopeFor(context.package.patterns)
+			} else {
+				return Scopes.scopeFor(document.allPatterns)
+			}
+		} else {
+			super.getScope(context,reference)
+		}
+	}
+	
+	protected def scopeForPatternSpecification(PatternSpecification context, EReference reference, ConfigurationScript document) {
+		if(reference === language.patternEntry_Package) {
+			return Scopes.scopeFor(document.allViatraPackages)
+		} else if(reference ===language.patternElement_Pattern) {
+			return Scopes.scopeFor(document.allPatterns)
+		} else {
+			return super.getScope(context,reference)
+		}
+	}
+	
+	protected def scopeForAllPatternEntry(AllPatternEntry context, EReference reference, ConfigurationScript document) {
+		if(reference === language.patternEntry_Package) {
+			return Scopes.scopeFor(document.allViatraPackages)
+		} else if(reference === language.patternElement_Pattern) {
+			if(context.package === null) {
+				return Scopes.scopeFor(document.allPatterns)
+			} else {
+				return Scopes.scopeFor(context.package.patterns)
 			}
 		} else {
 			return super.getScope(context,reference)

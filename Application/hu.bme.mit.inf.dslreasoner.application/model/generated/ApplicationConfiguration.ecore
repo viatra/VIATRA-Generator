@@ -9,7 +9,6 @@
         eType="#//Command" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Command"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" eSuperTypes="#//Command"/>
   <eClassifiers xsi:type="ecore:EClass" name="Import"/>
   <eClassifiers xsi:type="ecore:EClass" name="EPackageImport" eSuperTypes="#//Import">
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackage" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
@@ -17,6 +16,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="ViatraImport" eSuperTypes="#//Import">
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedViatra" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//PatternModel"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" eSuperTypes="#//Command">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FileSpecification" eSuperTypes="#//File">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FileDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//FileSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FileReference" eSuperTypes="#//File">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//FileDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="File"/>
   <eClassifiers xsi:type="ecore:EClass" name="MetamodelSpecification" eSuperTypes="#//Metamodel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
         eType="#//MetamodelEntry" containment="true"/>
@@ -33,7 +46,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetamodelDeclaration" eSuperTypes="#//Declaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//MetamodelSpecification"
         containment="true"/>
   </eClassifiers>
@@ -41,4 +53,125 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//MetamodelDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Metamodel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialModelSpecification" eSuperTypes="#//PartialModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entry" upperBound="-1"
+        eType="#//PartialModelEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialModelEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" eType="#//File" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelEntry" eSuperTypes="#//PartialModelEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FolderEntry" eSuperTypes="#//PartialModelEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exclusion" upperBound="-1"
+        eType="#//ModelEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialModelDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//PartialModelSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialModelReference" eSuperTypes="#//PartialModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//PartialModelDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternSpecification" eSuperTypes="#//GraphPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//PatternEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//PatternModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AllPatternEntry" eSuperTypes="#//PatternEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exclusuion" upperBound="-1"
+        eType="#//PatternElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternElement" eSuperTypes="#//PatternEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Pattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphPatternDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//PatternSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphPatternReference" eSuperTypes="#//GraphPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//GraphPatternDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphPattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigSpecification" eSuperTypes="#//Config">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//ConfigEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ConfigSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigReference" eSuperTypes="#//Config">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//ConfigDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Config"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Solver">
+    <eLiterals name="SMTSolver" literal="SMTSolver"/>
+    <eLiterals name="AlloySolver" value="1" literal="AlloySolver"/>
+    <eLiterals name="ViatraSolver" value="2" literal="ViatraSolver"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeSpecification" eSuperTypes="#//Scope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//TypeScope" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeScope">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="greather" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="greaterOrEqual" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="less" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lessOrEqual" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassReference" eSuperTypes="#//TypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//MetamodelElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectReference" eSuperTypes="#//TypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerReference" eSuperTypes="#//TypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealReference" eSuperTypes="#//TypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringReference" eSuperTypes="#//TypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ScopeSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeReference" eSuperTypes="#//Scope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//ScopeDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//Command"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GenerationTask" eSuperTypes="#//Task">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" eType="#//Metamodel"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partialModel" eType="#//PartialModel"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" eType="#//GraphPattern"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//Scope"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runs" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="solver" eType="#//Solver"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//Config"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tagetFolder" eType="#//File"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="debugFolder" eType="#//File"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetLogFile" eType="#//File"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetStatisticsFile" eType="#//File"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerScope" eSuperTypes="#//IntegerReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealScope" eSuperTypes="#//RealReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringScope" eSuperTypes="#//StringReference"/>
 </ecore:EPackage>

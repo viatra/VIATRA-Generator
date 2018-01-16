@@ -4,22 +4,18 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as viatra
 generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 
+
 ConfigurationScript:
 	(imports += Import)*
 	(commands += Command)*
 ;
 
 Command :
-	Declaration
-	//| Task
+	Declaration | Task
 ;
-Declaration :
-//	FileDeclaration | 
-	MetamodelDeclaration
-//	| PartialModelDeclaration
-//	| GraphPatternDeclaration
-//	| SolverConfig
-;
+
+QualifiedName returns ecore::EString:
+  ID (=>'.' ID)*;
 
 ///////////////////////////////////////////////////
 // Imports
@@ -31,23 +27,35 @@ EPackageImport: "import" "epackage" importedPackage=[ecore::EPackage|STRING];
 ViatraImport: "import" "viatra" importedViatra=[viatra::PatternModel|STRING];
 
 ///////////////////////////////////////////////////
+// Declaration
+///////////////////////////////////////////////////
+
+Declaration :
+	FileDeclaration
+	| MetamodelDeclaration
+	| PartialModelDeclaration
+	| GraphPatternDeclaration
+	| ConfigDeclaration
+	| ScopeDeclaration
+;
+
+///////////////////////////////////////////////////
 // Files and Folders
 ///////////////////////////////////////////////////
-/*
+
 FileSpecification: path = STRING;
 FileDeclaration: 'file' name = ID '=' specification = FileSpecification;
-
 FileReference: referred = [FileDeclaration];
 File: FileSpecification | FileReference;
-*/
+
 ///////////////////////////////////////////////////
 // Metamodel
 ///////////////////////////////////////////////////
 
 MetamodelSpecification: '{' (entries += MetamodelEntry) (',' entries += MetamodelEntry)* '}';
 MetamodelEntry: MetamodelElement | AllPackageEntry;
-AllPackageEntry: "package" package=[ecore::EPackage] ("excluding" '{'exclusion +=MetamodelElement (',' exclusion +=MetamodelElement)*'}')?;
-MetamodelElement: (package=[ecore::EPackage] '::')? classifier = [ecore::EClassifier] ('.' feature= [ecore::ENamedElement])?;
+AllPackageEntry: "package" package=[ecore::EPackage|QualifiedName] ("excluding" '{'exclusion +=MetamodelElement (',' exclusion +=MetamodelElement)*'}')?;
+MetamodelElement: (package=[ecore::EPackage|QualifiedName] '::')? classifier = [ecore::EClassifier] ('.' feature= [ecore::ENamedElement])?;
 
 MetamodelDeclaration: 'metamodel' name = ID specification = MetamodelSpecification;
 MetamodelReference: referred = [MetamodelDeclaration];
@@ -56,72 +64,74 @@ Metamodel: MetamodelReference | MetamodelSpecification;
 ///////////////////////////////////////////////////
 // Partial Model
 ///////////////////////////////////////////////////
-/*
-PartialModelEntry: path = File;
-PartialModelSpecification: entry += PartialModelEntry ('+' entry += PartialModelEntry)*;
-PartialModelDeclaration: 'partial-model' name = ID '=' specification = PartialModelSpecification;
+
+PartialModelSpecification: '{' entry += PartialModelEntry (',' entry += PartialModelEntry)? '}';
+PartialModelEntry: ModelEntry | FolderEntry;
+ModelEntry: path = File;
+FolderEntry: "folder" path = File ("excluding" "{" exclusion += ModelEntry ("," exclusion += ModelEntry)* "}")?;
+
+PartialModelDeclaration: 'models' name = ID specification = PartialModelSpecification;
 PartialModelReference : referred = [PartialModelDeclaration];
 PartialModel: PartialModelSpecification | PartialModelReference;
-*/
+
 ///////////////////////////////////////////////////
 // Patterns
 ///////////////////////////////////////////////////
-/*
+
 PatternSpecification: '{' entries += PatternEntry (',' entries += PatternEntry)* '}';
 PatternEntry: PatternElement | AllPatternEntry;
-AllPatternEntry: package = [viatra::PatternModel] ('excluding' '{' exclusuion += PatternElement (',' exclusuion += PatternElement)* '}')?;
-PatternElement: pattern = [viatra::Pattern];
+AllPatternEntry: 'package' package = [viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion += PatternElement (',' exclusuion += PatternElement)* '}')?;
+PatternElement: (package =[viatra::PatternModel|QualifiedName] '::')? pattern = [viatra::Pattern];
 
 GraphPatternDeclaration: 'patterns' name = ID specification = PatternSpecification;
 GraphPatternReference: referred = [GraphPatternDeclaration];
 GraphPattern: GraphPatternReference|PatternSpecification;
-*/
+
 ///////////////////////////////////////////////////
 // SolverConfig
 ///////////////////////////////////////////////////
-/*
-SolverConfig : SMTSolverConfig | AlloySolverConfig | ViatraSolverConfig;
 
-SMTSolverConfig:
-	'smt-solver-config' name = ID '{'
-		'solver-path' '=' solverPath = File
-	'}'
+ConfigSpecification: {ConfigSpecification}'{'
+		(entries += ConfigEntry ("," entries += ConfigEntry)*)?
+	'}';
+ConfigDeclaration : 
+	'config' name = ID specification = ConfigSpecification
 ;
+ConfigEntry: key = STRING "=" value = STRING;
+ConfigReference: config = [ConfigDeclaration];
+Config: ConfigSpecification | ConfigReference;
 
-AlloySolverConfig:
-	'alloy-solver-config' name = ID  '{'
-		('symmetry' '=' symmetry=INT)?
-	'}'
-;
+enum Solver: SMTSolver | AlloySolver | ViatraSolver;
 
-ViatraSolverConfig:
-	'viatra-solver-config' name = ID '{'
-		('statecoding' '=' statecoding = ViatraStatecoder)? &
-		('type-inferencing' '=' typeinferencing = ViatraTypeInferencing)? &
-		('backtrack-chance' '=' backtrackChance = INT)?
-	'}'
-;
-enum ViatraStatecoder: neighbourhood | identifier;
-enum ViatraTypeInferencing: preliminary | online;
+ScopeSpecification: {ScopeSpecification} '{' 
+		(scopes += TypeScope (',' scopes += TypeScope)*)?
+'}';
+TypeScope: ( min = INT ( greather?='<' | greaterOrEqual?= '<='))? '#' type = TypeReference (( less?='<' | lessOrEqual?= '<=') max = INT)?;
+TypeReference: ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
+ClassReference: '[' element = MetamodelElement ']';
+ObjectReference: {ObjectReference} 'Object';
+IntegerReference: {IntegerScope} 'int';
+RealReference: {RealScope} 'real';
+StringReference: {StringScope} 'string';
 
-Solver: SMTSolver | AlloySolver | ViatraSolver;
+ScopeDeclaration: 'scope' name = ID specification = ScopeSpecification;
+ScopeReference: referred = [ScopeDeclaration];
+Scope: ScopeSpecification | ScopeReference;
 
-SMTSolver: 'smt-solver' '(' (config = [SMTSolverConfig]) ')';
-AlloySolver: 'alloy-solver' {AlloySolver} '(' (config = [AlloySolverConfig]|'default') ')';
-ViatraSolver: 'viatra-solver' {ViatraSolver} '(' (config= [ViatraSolverConfig]|'default')')';
+Task: GenerationTask /*| MeasurementTask | ValidationTask*/;
 
-Task: GenerationTask;
-
-GenerationTask: 'generate' '{'
-		('metamodel' '=' metamodel = Metamodel) &
+GenerationTask:  'generate' {GenerationTask} '{'
+		(('metamodel' '=' metamodel = Metamodel)? &
 		('partial-model'  '=' partialModel = PartialModel)? &
 		('patterns'  '=' patterns = GraphPattern)? &
-		('new-objects' '=' size = INT) &
+		('scope' '=' scope = Scope)? &
 		('number' '=' number= INT)? &
-		('runs' '=' runs = INT)?
-		'target-folder' '=' tagetFolder = File
-		'debug-folder' '=' debugFolder = File
-		('log' '=' targetLogFile = File)?
-		('statistics' '=' targetStatisticsFile = File)?
+		('runs' '=' runs = INT)? &
+		('solver' '=' solver = Solver)? &
+		('config' '=' config = Config)? &
+		('output' '=' tagetFolder = File)? &
+		('debug' '=' debugFolder = File)? &
+		('log' '=' targetLogFile = File)? &
+		('statistics' '=' targetStatisticsFile = File)?)
 	'}'
-;*/
+;

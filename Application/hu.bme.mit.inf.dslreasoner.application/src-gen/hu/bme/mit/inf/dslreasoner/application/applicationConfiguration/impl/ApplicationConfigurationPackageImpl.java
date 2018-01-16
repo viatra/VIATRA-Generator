@@ -4,23 +4,64 @@
 package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl;
 
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationFactory;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Command;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPattern;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Import;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Metamodel;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModel;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Task;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -56,13 +97,6 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass declarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass importEClass = null;
 
   /**
@@ -78,6 +112,41 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   private EClass viatraImportEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass declarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fileSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fileDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fileReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass fileEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -127,6 +196,258 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   private EClass metamodelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass partialModelSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass partialModelEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass modelEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass folderEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass partialModelDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass partialModelReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass partialModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass patternSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass patternEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass allPatternEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass patternElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass graphPatternDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass graphPatternReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass graphPatternEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass scopeSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass classReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass objectReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass integerReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass scopeDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass scopeReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass scopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass taskEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass generationTaskEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass integerScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum solverEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -240,16 +561,6 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDeclaration()
-  {
-    return declarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getImport()
   {
     return importEClass;
@@ -293,6 +604,96 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
   public EReference getViatraImport_ImportedViatra()
   {
     return (EReference)viatraImportEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDeclaration()
+  {
+    return declarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDeclaration_Name()
+  {
+    return (EAttribute)declarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFileSpecification()
+  {
+    return fileSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFileSpecification_Path()
+  {
+    return (EAttribute)fileSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFileDeclaration()
+  {
+    return fileDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFileDeclaration_Specification()
+  {
+    return (EReference)fileDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFileReference()
+  {
+    return fileReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFileReference_Referred()
+  {
+    return (EReference)fileReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFile()
+  {
+    return fileEClass;
   }
 
   /**
@@ -400,19 +801,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMetamodelDeclaration_Name()
-  {
-    return (EAttribute)metamodelDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getMetamodelDeclaration_Specification()
   {
-    return (EReference)metamodelDeclarationEClass.getEStructuralFeatures().get(1);
+    return (EReference)metamodelDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -443,6 +834,756 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
   public EClass getMetamodel()
   {
     return metamodelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPartialModelSpecification()
+  {
+    return partialModelSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPartialModelSpecification_Entry()
+  {
+    return (EReference)partialModelSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPartialModelEntry()
+  {
+    return partialModelEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPartialModelEntry_Path()
+  {
+    return (EReference)partialModelEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getModelEntry()
+  {
+    return modelEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFolderEntry()
+  {
+    return folderEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFolderEntry_Exclusion()
+  {
+    return (EReference)folderEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPartialModelDeclaration()
+  {
+    return partialModelDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPartialModelDeclaration_Specification()
+  {
+    return (EReference)partialModelDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPartialModelReference()
+  {
+    return partialModelReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPartialModelReference_Referred()
+  {
+    return (EReference)partialModelReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPartialModel()
+  {
+    return partialModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPatternSpecification()
+  {
+    return patternSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPatternSpecification_Entries()
+  {
+    return (EReference)patternSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPatternEntry()
+  {
+    return patternEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPatternEntry_Package()
+  {
+    return (EReference)patternEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAllPatternEntry()
+  {
+    return allPatternEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAllPatternEntry_Exclusuion()
+  {
+    return (EReference)allPatternEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPatternElement()
+  {
+    return patternElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPatternElement_Pattern()
+  {
+    return (EReference)patternElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGraphPatternDeclaration()
+  {
+    return graphPatternDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGraphPatternDeclaration_Specification()
+  {
+    return (EReference)graphPatternDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGraphPatternReference()
+  {
+    return graphPatternReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGraphPatternReference_Referred()
+  {
+    return (EReference)graphPatternReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGraphPattern()
+  {
+    return graphPatternEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConfigSpecification()
+  {
+    return configSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConfigSpecification_Entries()
+  {
+    return (EReference)configSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConfigDeclaration()
+  {
+    return configDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConfigDeclaration_Specification()
+  {
+    return (EReference)configDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConfigEntry()
+  {
+    return configEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConfigEntry_Key()
+  {
+    return (EAttribute)configEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConfigEntry_Value()
+  {
+    return (EAttribute)configEntryEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConfigReference()
+  {
+    return configReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConfigReference_Config()
+  {
+    return (EReference)configReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConfig()
+  {
+    return configEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getScopeSpecification()
+  {
+    return scopeSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getScopeSpecification_Scopes()
+  {
+    return (EReference)scopeSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeScope()
+  {
+    return typeScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeScope_Min()
+  {
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeScope_Greather()
+  {
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeScope_GreaterOrEqual()
+  {
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTypeScope_Type()
+  {
+    return (EReference)typeScopeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeScope_Less()
+  {
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeScope_LessOrEqual()
+  {
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeScope_Max()
+  {
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeReference()
+  {
+    return typeReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getClassReference()
+  {
+    return classReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getClassReference_Element()
+  {
+    return (EReference)classReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getObjectReference()
+  {
+    return objectReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntegerReference()
+  {
+    return integerReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRealReference()
+  {
+    return realReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringReference()
+  {
+    return stringReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getScopeDeclaration()
+  {
+    return scopeDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getScopeDeclaration_Specification()
+  {
+    return (EReference)scopeDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getScopeReference()
+  {
+    return scopeReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getScopeReference_Referred()
+  {
+    return (EReference)scopeReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getScope()
+  {
+    return scopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTask()
+  {
+    return taskEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGenerationTask()
+  {
+    return generationTaskEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_Metamodel()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_PartialModel()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_Patterns()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_Scope()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGenerationTask_Number()
+  {
+    return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGenerationTask_Runs()
+  {
+    return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGenerationTask_Solver()
+  {
+    return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_Config()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_TagetFolder()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_DebugFolder()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_TargetLogFile()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_TargetStatisticsFile()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntegerScope()
+  {
+    return integerScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRealScope()
+  {
+    return realScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringScope()
+  {
+    return stringScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getSolver()
+  {
+    return solverEEnum;
   }
 
   /**
@@ -481,8 +1622,6 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     commandEClass = createEClass(COMMAND);
 
-    declarationEClass = createEClass(DECLARATION);
-
     importEClass = createEClass(IMPORT);
 
     ePackageImportEClass = createEClass(EPACKAGE_IMPORT);
@@ -490,6 +1629,20 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     viatraImportEClass = createEClass(VIATRA_IMPORT);
     createEReference(viatraImportEClass, VIATRA_IMPORT__IMPORTED_VIATRA);
+
+    declarationEClass = createEClass(DECLARATION);
+    createEAttribute(declarationEClass, DECLARATION__NAME);
+
+    fileSpecificationEClass = createEClass(FILE_SPECIFICATION);
+    createEAttribute(fileSpecificationEClass, FILE_SPECIFICATION__PATH);
+
+    fileDeclarationEClass = createEClass(FILE_DECLARATION);
+    createEReference(fileDeclarationEClass, FILE_DECLARATION__SPECIFICATION);
+
+    fileReferenceEClass = createEClass(FILE_REFERENCE);
+    createEReference(fileReferenceEClass, FILE_REFERENCE__REFERRED);
+
+    fileEClass = createEClass(FILE);
 
     metamodelSpecificationEClass = createEClass(METAMODEL_SPECIFICATION);
     createEReference(metamodelSpecificationEClass, METAMODEL_SPECIFICATION__ENTRIES);
@@ -505,13 +1658,124 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     createEReference(metamodelElementEClass, METAMODEL_ELEMENT__FEATURE);
 
     metamodelDeclarationEClass = createEClass(METAMODEL_DECLARATION);
-    createEAttribute(metamodelDeclarationEClass, METAMODEL_DECLARATION__NAME);
     createEReference(metamodelDeclarationEClass, METAMODEL_DECLARATION__SPECIFICATION);
 
     metamodelReferenceEClass = createEClass(METAMODEL_REFERENCE);
     createEReference(metamodelReferenceEClass, METAMODEL_REFERENCE__REFERRED);
 
     metamodelEClass = createEClass(METAMODEL);
+
+    partialModelSpecificationEClass = createEClass(PARTIAL_MODEL_SPECIFICATION);
+    createEReference(partialModelSpecificationEClass, PARTIAL_MODEL_SPECIFICATION__ENTRY);
+
+    partialModelEntryEClass = createEClass(PARTIAL_MODEL_ENTRY);
+    createEReference(partialModelEntryEClass, PARTIAL_MODEL_ENTRY__PATH);
+
+    modelEntryEClass = createEClass(MODEL_ENTRY);
+
+    folderEntryEClass = createEClass(FOLDER_ENTRY);
+    createEReference(folderEntryEClass, FOLDER_ENTRY__EXCLUSION);
+
+    partialModelDeclarationEClass = createEClass(PARTIAL_MODEL_DECLARATION);
+    createEReference(partialModelDeclarationEClass, PARTIAL_MODEL_DECLARATION__SPECIFICATION);
+
+    partialModelReferenceEClass = createEClass(PARTIAL_MODEL_REFERENCE);
+    createEReference(partialModelReferenceEClass, PARTIAL_MODEL_REFERENCE__REFERRED);
+
+    partialModelEClass = createEClass(PARTIAL_MODEL);
+
+    patternSpecificationEClass = createEClass(PATTERN_SPECIFICATION);
+    createEReference(patternSpecificationEClass, PATTERN_SPECIFICATION__ENTRIES);
+
+    patternEntryEClass = createEClass(PATTERN_ENTRY);
+    createEReference(patternEntryEClass, PATTERN_ENTRY__PACKAGE);
+
+    allPatternEntryEClass = createEClass(ALL_PATTERN_ENTRY);
+    createEReference(allPatternEntryEClass, ALL_PATTERN_ENTRY__EXCLUSUION);
+
+    patternElementEClass = createEClass(PATTERN_ELEMENT);
+    createEReference(patternElementEClass, PATTERN_ELEMENT__PATTERN);
+
+    graphPatternDeclarationEClass = createEClass(GRAPH_PATTERN_DECLARATION);
+    createEReference(graphPatternDeclarationEClass, GRAPH_PATTERN_DECLARATION__SPECIFICATION);
+
+    graphPatternReferenceEClass = createEClass(GRAPH_PATTERN_REFERENCE);
+    createEReference(graphPatternReferenceEClass, GRAPH_PATTERN_REFERENCE__REFERRED);
+
+    graphPatternEClass = createEClass(GRAPH_PATTERN);
+
+    configSpecificationEClass = createEClass(CONFIG_SPECIFICATION);
+    createEReference(configSpecificationEClass, CONFIG_SPECIFICATION__ENTRIES);
+
+    configDeclarationEClass = createEClass(CONFIG_DECLARATION);
+    createEReference(configDeclarationEClass, CONFIG_DECLARATION__SPECIFICATION);
+
+    configEntryEClass = createEClass(CONFIG_ENTRY);
+    createEAttribute(configEntryEClass, CONFIG_ENTRY__KEY);
+    createEAttribute(configEntryEClass, CONFIG_ENTRY__VALUE);
+
+    configReferenceEClass = createEClass(CONFIG_REFERENCE);
+    createEReference(configReferenceEClass, CONFIG_REFERENCE__CONFIG);
+
+    configEClass = createEClass(CONFIG);
+
+    scopeSpecificationEClass = createEClass(SCOPE_SPECIFICATION);
+    createEReference(scopeSpecificationEClass, SCOPE_SPECIFICATION__SCOPES);
+
+    typeScopeEClass = createEClass(TYPE_SCOPE);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__MIN);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__GREATHER);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__GREATER_OR_EQUAL);
+    createEReference(typeScopeEClass, TYPE_SCOPE__TYPE);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__LESS);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__LESS_OR_EQUAL);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__MAX);
+
+    typeReferenceEClass = createEClass(TYPE_REFERENCE);
+
+    classReferenceEClass = createEClass(CLASS_REFERENCE);
+    createEReference(classReferenceEClass, CLASS_REFERENCE__ELEMENT);
+
+    objectReferenceEClass = createEClass(OBJECT_REFERENCE);
+
+    integerReferenceEClass = createEClass(INTEGER_REFERENCE);
+
+    realReferenceEClass = createEClass(REAL_REFERENCE);
+
+    stringReferenceEClass = createEClass(STRING_REFERENCE);
+
+    scopeDeclarationEClass = createEClass(SCOPE_DECLARATION);
+    createEReference(scopeDeclarationEClass, SCOPE_DECLARATION__SPECIFICATION);
+
+    scopeReferenceEClass = createEClass(SCOPE_REFERENCE);
+    createEReference(scopeReferenceEClass, SCOPE_REFERENCE__REFERRED);
+
+    scopeEClass = createEClass(SCOPE);
+
+    taskEClass = createEClass(TASK);
+
+    generationTaskEClass = createEClass(GENERATION_TASK);
+    createEReference(generationTaskEClass, GENERATION_TASK__METAMODEL);
+    createEReference(generationTaskEClass, GENERATION_TASK__PARTIAL_MODEL);
+    createEReference(generationTaskEClass, GENERATION_TASK__PATTERNS);
+    createEReference(generationTaskEClass, GENERATION_TASK__SCOPE);
+    createEAttribute(generationTaskEClass, GENERATION_TASK__NUMBER);
+    createEAttribute(generationTaskEClass, GENERATION_TASK__RUNS);
+    createEAttribute(generationTaskEClass, GENERATION_TASK__SOLVER);
+    createEReference(generationTaskEClass, GENERATION_TASK__CONFIG);
+    createEReference(generationTaskEClass, GENERATION_TASK__TAGET_FOLDER);
+    createEReference(generationTaskEClass, GENERATION_TASK__DEBUG_FOLDER);
+    createEReference(generationTaskEClass, GENERATION_TASK__TARGET_LOG_FILE);
+    createEReference(generationTaskEClass, GENERATION_TASK__TARGET_STATISTICS_FILE);
+
+    integerScopeEClass = createEClass(INTEGER_SCOPE);
+
+    realScopeEClass = createEClass(REAL_SCOPE);
+
+    stringScopeEClass = createEClass(STRING_SCOPE);
+
+    // Create enums
+    solverEEnum = createEEnum(SOLVER);
   }
 
   /**
@@ -547,14 +1811,43 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    declarationEClass.getESuperTypes().add(this.getCommand());
     ePackageImportEClass.getESuperTypes().add(this.getImport());
     viatraImportEClass.getESuperTypes().add(this.getImport());
+    declarationEClass.getESuperTypes().add(this.getCommand());
+    fileSpecificationEClass.getESuperTypes().add(this.getFile());
+    fileDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+    fileReferenceEClass.getESuperTypes().add(this.getFile());
     metamodelSpecificationEClass.getESuperTypes().add(this.getMetamodel());
     allPackageEntryEClass.getESuperTypes().add(this.getMetamodelEntry());
     metamodelElementEClass.getESuperTypes().add(this.getMetamodelEntry());
     metamodelDeclarationEClass.getESuperTypes().add(this.getDeclaration());
     metamodelReferenceEClass.getESuperTypes().add(this.getMetamodel());
+    partialModelSpecificationEClass.getESuperTypes().add(this.getPartialModel());
+    modelEntryEClass.getESuperTypes().add(this.getPartialModelEntry());
+    folderEntryEClass.getESuperTypes().add(this.getPartialModelEntry());
+    partialModelDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+    partialModelReferenceEClass.getESuperTypes().add(this.getPartialModel());
+    patternSpecificationEClass.getESuperTypes().add(this.getGraphPattern());
+    allPatternEntryEClass.getESuperTypes().add(this.getPatternEntry());
+    patternElementEClass.getESuperTypes().add(this.getPatternEntry());
+    graphPatternDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+    graphPatternReferenceEClass.getESuperTypes().add(this.getGraphPattern());
+    configSpecificationEClass.getESuperTypes().add(this.getConfig());
+    configDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+    configReferenceEClass.getESuperTypes().add(this.getConfig());
+    scopeSpecificationEClass.getESuperTypes().add(this.getScope());
+    classReferenceEClass.getESuperTypes().add(this.getTypeReference());
+    objectReferenceEClass.getESuperTypes().add(this.getTypeReference());
+    integerReferenceEClass.getESuperTypes().add(this.getTypeReference());
+    realReferenceEClass.getESuperTypes().add(this.getTypeReference());
+    stringReferenceEClass.getESuperTypes().add(this.getTypeReference());
+    scopeDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+    scopeReferenceEClass.getESuperTypes().add(this.getScope());
+    taskEClass.getESuperTypes().add(this.getCommand());
+    generationTaskEClass.getESuperTypes().add(this.getTask());
+    integerScopeEClass.getESuperTypes().add(this.getIntegerReference());
+    realScopeEClass.getESuperTypes().add(this.getRealReference());
+    stringScopeEClass.getESuperTypes().add(this.getStringReference());
 
     // Initialize classes and features; add operations and parameters
     initEClass(configurationScriptEClass, ConfigurationScript.class, "ConfigurationScript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -563,8 +1856,6 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     initEClass(commandEClass, Command.class, "Command", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(ePackageImportEClass, EPackageImport.class, "EPackageImport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -572,6 +1863,20 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     initEClass(viatraImportEClass, ViatraImport.class, "ViatraImport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getViatraImport_ImportedViatra(), thePatternLanguagePackage.getPatternModel(), null, "importedViatra", null, 0, 1, ViatraImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDeclaration_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fileSpecificationEClass, FileSpecification.class, "FileSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFileSpecification_Path(), theEcorePackage.getEString(), "path", null, 0, 1, FileSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fileDeclarationEClass, FileDeclaration.class, "FileDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFileDeclaration_Specification(), this.getFileSpecification(), null, "specification", null, 0, 1, FileDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fileReferenceEClass, FileReference.class, "FileReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFileReference_Referred(), this.getFileDeclaration(), null, "referred", null, 0, 1, FileReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(metamodelSpecificationEClass, MetamodelSpecification.class, "MetamodelSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMetamodelSpecification_Entries(), this.getMetamodelEntry(), null, "entries", null, 0, -1, MetamodelSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -587,13 +1892,127 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEReference(getMetamodelElement_Feature(), theEcorePackage.getENamedElement(), null, "feature", null, 0, 1, MetamodelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(metamodelDeclarationEClass, MetamodelDeclaration.class, "MetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getMetamodelDeclaration_Name(), theEcorePackage.getEString(), "name", null, 0, 1, MetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMetamodelDeclaration_Specification(), this.getMetamodelSpecification(), null, "specification", null, 0, 1, MetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(metamodelReferenceEClass, MetamodelReference.class, "MetamodelReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMetamodelReference_Referred(), this.getMetamodelDeclaration(), null, "referred", null, 0, 1, MetamodelReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(metamodelEClass, Metamodel.class, "Metamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(partialModelSpecificationEClass, PartialModelSpecification.class, "PartialModelSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPartialModelSpecification_Entry(), this.getPartialModelEntry(), null, "entry", null, 0, -1, PartialModelSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(partialModelEntryEClass, PartialModelEntry.class, "PartialModelEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPartialModelEntry_Path(), this.getFile(), null, "path", null, 0, 1, PartialModelEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(modelEntryEClass, ModelEntry.class, "ModelEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(folderEntryEClass, FolderEntry.class, "FolderEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFolderEntry_Exclusion(), this.getModelEntry(), null, "exclusion", null, 0, -1, FolderEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(partialModelDeclarationEClass, PartialModelDeclaration.class, "PartialModelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPartialModelDeclaration_Specification(), this.getPartialModelSpecification(), null, "specification", null, 0, 1, PartialModelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(partialModelReferenceEClass, PartialModelReference.class, "PartialModelReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPartialModelReference_Referred(), this.getPartialModelDeclaration(), null, "referred", null, 0, 1, PartialModelReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(partialModelEClass, PartialModel.class, "PartialModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(patternSpecificationEClass, PatternSpecification.class, "PatternSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPatternSpecification_Entries(), this.getPatternEntry(), null, "entries", null, 0, -1, PatternSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(patternEntryEClass, PatternEntry.class, "PatternEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPatternEntry_Package(), thePatternLanguagePackage.getPatternModel(), null, "package", null, 0, 1, PatternEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(allPatternEntryEClass, AllPatternEntry.class, "AllPatternEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAllPatternEntry_Exclusuion(), this.getPatternElement(), null, "exclusuion", null, 0, -1, AllPatternEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(patternElementEClass, PatternElement.class, "PatternElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPatternElement_Pattern(), thePatternLanguagePackage.getPattern(), null, "pattern", null, 0, 1, PatternElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(graphPatternDeclarationEClass, GraphPatternDeclaration.class, "GraphPatternDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGraphPatternDeclaration_Specification(), this.getPatternSpecification(), null, "specification", null, 0, 1, GraphPatternDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(graphPatternReferenceEClass, GraphPatternReference.class, "GraphPatternReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGraphPatternReference_Referred(), this.getGraphPatternDeclaration(), null, "referred", null, 0, 1, GraphPatternReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(graphPatternEClass, GraphPattern.class, "GraphPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(configSpecificationEClass, ConfigSpecification.class, "ConfigSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConfigSpecification_Entries(), this.getConfigEntry(), null, "entries", null, 0, -1, ConfigSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configDeclarationEClass, ConfigDeclaration.class, "ConfigDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConfigDeclaration_Specification(), this.getConfigSpecification(), null, "specification", null, 0, 1, ConfigDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configEntryEClass, ConfigEntry.class, "ConfigEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConfigEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, ConfigEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConfigEntry_Value(), theEcorePackage.getEString(), "value", null, 0, 1, ConfigEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configReferenceEClass, ConfigReference.class, "ConfigReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConfigReference_Config(), this.getConfigDeclaration(), null, "config", null, 0, 1, ConfigReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configEClass, Config.class, "Config", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(scopeSpecificationEClass, ScopeSpecification.class, "ScopeSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getScopeSpecification_Scopes(), this.getTypeScope(), null, "scopes", null, 0, -1, ScopeSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(typeScopeEClass, TypeScope.class, "TypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTypeScope_Min(), theEcorePackage.getEInt(), "min", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_Greather(), theEcorePackage.getEBoolean(), "greather", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_GreaterOrEqual(), theEcorePackage.getEBoolean(), "greaterOrEqual", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeScope_Type(), this.getTypeReference(), null, "type", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_Less(), theEcorePackage.getEBoolean(), "less", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_LessOrEqual(), theEcorePackage.getEBoolean(), "lessOrEqual", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_Max(), theEcorePackage.getEInt(), "max", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(typeReferenceEClass, TypeReference.class, "TypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(classReferenceEClass, ClassReference.class, "ClassReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getClassReference_Element(), this.getMetamodelElement(), null, "element", null, 0, 1, ClassReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(objectReferenceEClass, ObjectReference.class, "ObjectReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(integerReferenceEClass, IntegerReference.class, "IntegerReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(realReferenceEClass, RealReference.class, "RealReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(stringReferenceEClass, StringReference.class, "StringReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(scopeDeclarationEClass, ScopeDeclaration.class, "ScopeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getScopeDeclaration_Specification(), this.getScopeSpecification(), null, "specification", null, 0, 1, ScopeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(scopeReferenceEClass, ScopeReference.class, "ScopeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getScopeReference_Referred(), this.getScopeDeclaration(), null, "referred", null, 0, 1, ScopeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(taskEClass, Task.class, "Task", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(generationTaskEClass, GenerationTask.class, "GenerationTask", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGenerationTask_Metamodel(), this.getMetamodel(), null, "metamodel", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_PartialModel(), this.getPartialModel(), null, "partialModel", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_Patterns(), this.getGraphPattern(), null, "patterns", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_Scope(), this.getScope(), null, "scope", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGenerationTask_Number(), theEcorePackage.getEInt(), "number", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGenerationTask_Runs(), theEcorePackage.getEInt(), "runs", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGenerationTask_Solver(), this.getSolver(), "solver", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_Config(), this.getConfig(), null, "config", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_TagetFolder(), this.getFile(), null, "tagetFolder", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_DebugFolder(), this.getFile(), null, "debugFolder", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_TargetLogFile(), this.getFile(), null, "targetLogFile", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_TargetStatisticsFile(), this.getFile(), null, "targetStatisticsFile", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(integerScopeEClass, IntegerScope.class, "IntegerScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(realScopeEClass, RealScope.class, "RealScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(stringScopeEClass, StringScope.class, "StringScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    // Initialize enums and add enum literals
+    initEEnum(solverEEnum, Solver.class, "Solver");
+    addEEnumLiteral(solverEEnum, Solver.SMT_SOLVER);
+    addEEnumLiteral(solverEEnum, Solver.ALLOY_SOLVER);
+    addEEnumLiteral(solverEEnum, Solver.VIATRA_SOLVER);
 
     // Create resource
     createResource(eNS_URI);

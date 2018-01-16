@@ -6,9 +6,12 @@ package hu.bme.mit.inf.dslreasoner.application.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -16,7 +19,9 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
@@ -53,32 +58,49 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	public class CommandElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Command");
-		private final RuleCall cDeclarationParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTaskParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Command:
-		//	Declaration
-		//	//| Task
-		//;
+		//	Declaration | Task;
 		@Override public ParserRule getRule() { return rule; }
+		
+		//Declaration | Task
+		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Declaration
-		public RuleCall getDeclarationParserRuleCall() { return cDeclarationParserRuleCall; }
-	}
-	public class DeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Declaration");
-		private final RuleCall cMetamodelDeclarationParserRuleCall = (RuleCall)rule.eContents().get(1);
+		public RuleCall getDeclarationParserRuleCall_0() { return cDeclarationParserRuleCall_0; }
 		
-		//Declaration:
-		//	MetamodelDeclaration
-		//	//	| PartialModelDeclaration
-		//	//	| GraphPatternDeclaration
-		//	//	| SolverConfig
-		//;
+		//Task
+		public RuleCall getTaskParserRuleCall_1() { return cTaskParserRuleCall_1; }
+	}
+	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.QualifiedName");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		
+		//QualifiedName:
+		//	ID (=> '.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		////	FileDeclaration | 
-		//MetamodelDeclaration
-		public RuleCall getMetamodelDeclarationParserRuleCall() { return cMetamodelDeclarationParserRuleCall; }
+		//ID (=> '.' ID)*
+		public Group getGroup() { return cGroup; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+		
+		//(=> '.' ID)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//=> '.'
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Import");
@@ -164,6 +186,141 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//STRING
 		public RuleCall getImportedViatraPatternModelSTRINGTerminalRuleCall_2_0_1() { return cImportedViatraPatternModelSTRINGTerminalRuleCall_2_0_1; }
 	}
+	public class DeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Declaration");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cFileDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMetamodelDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cPartialModelDeclarationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cGraphPatternDeclarationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cConfigDeclarationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cScopeDeclarationParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		
+		/////////////////////////////////////////////////////
+		//// Declaration
+		/////////////////////////////////////////////////////
+		//Declaration:
+		//	FileDeclaration
+		//	| MetamodelDeclaration
+		//	| PartialModelDeclaration
+		//	| GraphPatternDeclaration
+		//	| ConfigDeclaration
+		//	| ScopeDeclaration;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//FileDeclaration | MetamodelDeclaration | PartialModelDeclaration | GraphPatternDeclaration | ConfigDeclaration |
+		//ScopeDeclaration
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//FileDeclaration
+		public RuleCall getFileDeclarationParserRuleCall_0() { return cFileDeclarationParserRuleCall_0; }
+		
+		//MetamodelDeclaration
+		public RuleCall getMetamodelDeclarationParserRuleCall_1() { return cMetamodelDeclarationParserRuleCall_1; }
+		
+		//PartialModelDeclaration
+		public RuleCall getPartialModelDeclarationParserRuleCall_2() { return cPartialModelDeclarationParserRuleCall_2; }
+		
+		//GraphPatternDeclaration
+		public RuleCall getGraphPatternDeclarationParserRuleCall_3() { return cGraphPatternDeclarationParserRuleCall_3; }
+		
+		//ConfigDeclaration
+		public RuleCall getConfigDeclarationParserRuleCall_4() { return cConfigDeclarationParserRuleCall_4; }
+		
+		//ScopeDeclaration
+		public RuleCall getScopeDeclarationParserRuleCall_5() { return cScopeDeclarationParserRuleCall_5; }
+	}
+	public class FileSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.FileSpecification");
+		private final Assignment cPathAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cPathSTRINGTerminalRuleCall_0 = (RuleCall)cPathAssignment.eContents().get(0);
+		
+		/////////////////////////////////////////////////////
+		//// Files and Folders
+		/////////////////////////////////////////////////////
+		//FileSpecification:
+		//	path=STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//path=STRING
+		public Assignment getPathAssignment() { return cPathAssignment; }
+		
+		//STRING
+		public RuleCall getPathSTRINGTerminalRuleCall_0() { return cPathSTRINGTerminalRuleCall_0; }
+	}
+	public class FileDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.FileDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cFileKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSpecificationAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSpecificationFileSpecificationParserRuleCall_3_0 = (RuleCall)cSpecificationAssignment_3.eContents().get(0);
+		
+		//FileDeclaration:
+		//	'file' name=ID '=' specification=FileSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'file' name=ID '=' specification=FileSpecification
+		public Group getGroup() { return cGroup; }
+		
+		//'file'
+		public Keyword getFileKeyword_0() { return cFileKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
+		
+		//specification=FileSpecification
+		public Assignment getSpecificationAssignment_3() { return cSpecificationAssignment_3; }
+		
+		//FileSpecification
+		public RuleCall getSpecificationFileSpecificationParserRuleCall_3_0() { return cSpecificationFileSpecificationParserRuleCall_3_0; }
+	}
+	public class FileReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.FileReference");
+		private final Assignment cReferredAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cReferredFileDeclarationCrossReference_0 = (CrossReference)cReferredAssignment.eContents().get(0);
+		private final RuleCall cReferredFileDeclarationIDTerminalRuleCall_0_1 = (RuleCall)cReferredFileDeclarationCrossReference_0.eContents().get(1);
+		
+		//FileReference:
+		//	referred=[FileDeclaration];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//referred=[FileDeclaration]
+		public Assignment getReferredAssignment() { return cReferredAssignment; }
+		
+		//[FileDeclaration]
+		public CrossReference getReferredFileDeclarationCrossReference_0() { return cReferredFileDeclarationCrossReference_0; }
+		
+		//ID
+		public RuleCall getReferredFileDeclarationIDTerminalRuleCall_0_1() { return cReferredFileDeclarationIDTerminalRuleCall_0_1; }
+	}
+	public class FileElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.File");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cFileSpecificationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFileReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//File:
+		//	FileSpecification | FileReference;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//FileSpecification | FileReference
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//FileSpecification
+		public RuleCall getFileSpecificationParserRuleCall_0() { return cFileSpecificationParserRuleCall_0; }
+		
+		//FileReference
+		public RuleCall getFileReferenceParserRuleCall_1() { return cFileReferenceParserRuleCall_1; }
+	}
 	public class MetamodelSpecificationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.MetamodelSpecification");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -177,15 +334,6 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		/////////////////////////////////////////////////////
-		//// Files and Folders
-		/////////////////////////////////////////////////////
-		/// *
-		//FileSpecification: path = STRING;
-		//FileDeclaration: 'file' name = ID '=' specification = FileSpecification;
-		//
-		//FileReference: referred = [FileDeclaration];
-		//File: FileSpecification | FileReference;
-		// * / ///////////////////////////////////////////////////
 		//// Metamodel
 		/////////////////////////////////////////////////////
 		//MetamodelSpecification:
@@ -244,7 +392,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cPackageAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cPackageEPackageCrossReference_1_0 = (CrossReference)cPackageAssignment_1.eContents().get(0);
-		private final RuleCall cPackageEPackageIDTerminalRuleCall_1_0_1 = (RuleCall)cPackageEPackageCrossReference_1_0.eContents().get(1);
+		private final RuleCall cPackageEPackageQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cPackageEPackageCrossReference_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cExcludingKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
@@ -257,25 +405,25 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightCurlyBracketKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
 		
 		//AllPackageEntry:
-		//	"package" package=[ecore::EPackage] ("excluding" '{' exclusion+=MetamodelElement (',' exclusion+=MetamodelElement)*
-		//	'}')?;
+		//	"package" package=[ecore::EPackage|QualifiedName] ("excluding" '{' exclusion+=MetamodelElement (','
+		//	exclusion+=MetamodelElement)* '}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"package" package=[ecore::EPackage] ("excluding" '{' exclusion+=MetamodelElement (',' exclusion+=MetamodelElement)*
-		//'}')?
+		//"package" package=[ecore::EPackage|QualifiedName] ("excluding" '{' exclusion+=MetamodelElement (','
+		//exclusion+=MetamodelElement)* '}')?
 		public Group getGroup() { return cGroup; }
 		
 		//"package"
 		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
 		
-		//package=[ecore::EPackage]
+		//package=[ecore::EPackage|QualifiedName]
 		public Assignment getPackageAssignment_1() { return cPackageAssignment_1; }
 		
-		//[ecore::EPackage]
+		//[ecore::EPackage|QualifiedName]
 		public CrossReference getPackageEPackageCrossReference_1_0() { return cPackageEPackageCrossReference_1_0; }
 		
-		//ID
-		public RuleCall getPackageEPackageIDTerminalRuleCall_1_0_1() { return cPackageEPackageIDTerminalRuleCall_1_0_1; }
+		//QualifiedName
+		public RuleCall getPackageEPackageQualifiedNameParserRuleCall_1_0_1() { return cPackageEPackageQualifiedNameParserRuleCall_1_0_1; }
 		
 		//("excluding" '{' exclusion+=MetamodelElement (',' exclusion+=MetamodelElement)* '}')?
 		public Group getGroup_2() { return cGroup_2; }
@@ -313,7 +461,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
 		private final Assignment cPackageAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
 		private final CrossReference cPackageEPackageCrossReference_0_0_0 = (CrossReference)cPackageAssignment_0_0.eContents().get(0);
-		private final RuleCall cPackageEPackageIDTerminalRuleCall_0_0_0_1 = (RuleCall)cPackageEPackageCrossReference_0_0_0.eContents().get(1);
+		private final RuleCall cPackageEPackageQualifiedNameParserRuleCall_0_0_0_1 = (RuleCall)cPackageEPackageCrossReference_0_0_0.eContents().get(1);
 		private final Keyword cColonColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
 		private final Assignment cClassifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cClassifierEClassifierCrossReference_1_0 = (CrossReference)cClassifierAssignment_1.eContents().get(0);
@@ -325,23 +473,24 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cFeatureENamedElementIDTerminalRuleCall_2_1_0_1 = (RuleCall)cFeatureENamedElementCrossReference_2_1_0.eContents().get(1);
 		
 		//MetamodelElement:
-		//	(package=[ecore::EPackage] '::')? classifier=[ecore::EClassifier] ('.' feature=[ecore::ENamedElement])?;
+		//	(package=[ecore::EPackage|QualifiedName] '::')? classifier=[ecore::EClassifier] ('.'
+		//	feature=[ecore::ENamedElement])?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(package=[ecore::EPackage] '::')? classifier=[ecore::EClassifier] ('.' feature=[ecore::ENamedElement])?
+		//(package=[ecore::EPackage|QualifiedName] '::')? classifier=[ecore::EClassifier] ('.' feature=[ecore::ENamedElement])?
 		public Group getGroup() { return cGroup; }
 		
-		//(package=[ecore::EPackage] '::')?
+		//(package=[ecore::EPackage|QualifiedName] '::')?
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//package=[ecore::EPackage]
+		//package=[ecore::EPackage|QualifiedName]
 		public Assignment getPackageAssignment_0_0() { return cPackageAssignment_0_0; }
 		
-		//[ecore::EPackage]
+		//[ecore::EPackage|QualifiedName]
 		public CrossReference getPackageEPackageCrossReference_0_0_0() { return cPackageEPackageCrossReference_0_0_0; }
 		
-		//ID
-		public RuleCall getPackageEPackageIDTerminalRuleCall_0_0_0_1() { return cPackageEPackageIDTerminalRuleCall_0_0_0_1; }
+		//QualifiedName
+		public RuleCall getPackageEPackageQualifiedNameParserRuleCall_0_0_0_1() { return cPackageEPackageQualifiedNameParserRuleCall_0_0_0_1; }
 		
 		//'::'
 		public Keyword getColonColonKeyword_0_1() { return cColonColonKeyword_0_1; }
@@ -439,14 +588,1303 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//MetamodelSpecification
 		public RuleCall getMetamodelSpecificationParserRuleCall_1() { return cMetamodelSpecificationParserRuleCall_1; }
 	}
+	public class PartialModelSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PartialModelSpecification");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cEntryAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEntryPartialModelEntryParserRuleCall_1_0 = (RuleCall)cEntryAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cEntryAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cEntryPartialModelEntryParserRuleCall_2_1_0 = (RuleCall)cEntryAssignment_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		/////////////////////////////////////////////////////
+		//// Partial Model
+		/////////////////////////////////////////////////////
+		//PartialModelSpecification:
+		//	'{' entry+=PartialModelEntry (',' entry+=PartialModelEntry)? '}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'{' entry+=PartialModelEntry (',' entry+=PartialModelEntry)? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+		
+		//entry+=PartialModelEntry
+		public Assignment getEntryAssignment_1() { return cEntryAssignment_1; }
+		
+		//PartialModelEntry
+		public RuleCall getEntryPartialModelEntryParserRuleCall_1_0() { return cEntryPartialModelEntryParserRuleCall_1_0; }
+		
+		//(',' entry+=PartialModelEntry)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//','
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		
+		//entry+=PartialModelEntry
+		public Assignment getEntryAssignment_2_1() { return cEntryAssignment_2_1; }
+		
+		//PartialModelEntry
+		public RuleCall getEntryPartialModelEntryParserRuleCall_2_1_0() { return cEntryPartialModelEntryParserRuleCall_2_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+	public class PartialModelEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PartialModelEntry");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cModelEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFolderEntryParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//PartialModelEntry:
+		//	ModelEntry | FolderEntry;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ModelEntry | FolderEntry
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ModelEntry
+		public RuleCall getModelEntryParserRuleCall_0() { return cModelEntryParserRuleCall_0; }
+		
+		//FolderEntry
+		public RuleCall getFolderEntryParserRuleCall_1() { return cFolderEntryParserRuleCall_1; }
+	}
+	public class ModelEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ModelEntry");
+		private final Assignment cPathAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cPathFileParserRuleCall_0 = (RuleCall)cPathAssignment.eContents().get(0);
+		
+		//ModelEntry:
+		//	path=File;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//path=File
+		public Assignment getPathAssignment() { return cPathAssignment; }
+		
+		//File
+		public RuleCall getPathFileParserRuleCall_0() { return cPathFileParserRuleCall_0; }
+	}
+	public class FolderEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.FolderEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cFolderKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cPathAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPathFileParserRuleCall_1_0 = (RuleCall)cPathAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cExcludingKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cExclusionAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cExclusionModelEntryParserRuleCall_2_2_0 = (RuleCall)cExclusionAssignment_2_2.eContents().get(0);
+		private final Group cGroup_2_3 = (Group)cGroup_2.eContents().get(3);
+		private final Keyword cCommaKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
+		private final Assignment cExclusionAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
+		private final RuleCall cExclusionModelEntryParserRuleCall_2_3_1_0 = (RuleCall)cExclusionAssignment_2_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
+		
+		//FolderEntry:
+		//	"folder" path=File ("excluding" "{" exclusion+=ModelEntry ("," exclusion+=ModelEntry)* "}")?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"folder" path=File ("excluding" "{" exclusion+=ModelEntry ("," exclusion+=ModelEntry)* "}")?
+		public Group getGroup() { return cGroup; }
+		
+		//"folder"
+		public Keyword getFolderKeyword_0() { return cFolderKeyword_0; }
+		
+		//path=File
+		public Assignment getPathAssignment_1() { return cPathAssignment_1; }
+		
+		//File
+		public RuleCall getPathFileParserRuleCall_1_0() { return cPathFileParserRuleCall_1_0; }
+		
+		//("excluding" "{" exclusion+=ModelEntry ("," exclusion+=ModelEntry)* "}")?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//"excluding"
+		public Keyword getExcludingKeyword_2_0() { return cExcludingKeyword_2_0; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2_1() { return cLeftCurlyBracketKeyword_2_1; }
+		
+		//exclusion+=ModelEntry
+		public Assignment getExclusionAssignment_2_2() { return cExclusionAssignment_2_2; }
+		
+		//ModelEntry
+		public RuleCall getExclusionModelEntryParserRuleCall_2_2_0() { return cExclusionModelEntryParserRuleCall_2_2_0; }
+		
+		//("," exclusion+=ModelEntry)*
+		public Group getGroup_2_3() { return cGroup_2_3; }
+		
+		//","
+		public Keyword getCommaKeyword_2_3_0() { return cCommaKeyword_2_3_0; }
+		
+		//exclusion+=ModelEntry
+		public Assignment getExclusionAssignment_2_3_1() { return cExclusionAssignment_2_3_1; }
+		
+		//ModelEntry
+		public RuleCall getExclusionModelEntryParserRuleCall_2_3_1_0() { return cExclusionModelEntryParserRuleCall_2_3_1_0; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2_4() { return cRightCurlyBracketKeyword_2_4; }
+	}
+	public class PartialModelDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PartialModelDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPartialModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSpecificationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSpecificationPartialModelSpecificationParserRuleCall_2_0 = (RuleCall)cSpecificationAssignment_2.eContents().get(0);
+		
+		//PartialModelDeclaration:
+		//	'partial-model' name=ID specification=PartialModelSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'partial-model' name=ID specification=PartialModelSpecification
+		public Group getGroup() { return cGroup; }
+		
+		//'partial-model'
+		public Keyword getPartialModelKeyword_0() { return cPartialModelKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//specification=PartialModelSpecification
+		public Assignment getSpecificationAssignment_2() { return cSpecificationAssignment_2; }
+		
+		//PartialModelSpecification
+		public RuleCall getSpecificationPartialModelSpecificationParserRuleCall_2_0() { return cSpecificationPartialModelSpecificationParserRuleCall_2_0; }
+	}
+	public class PartialModelReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PartialModelReference");
+		private final Assignment cReferredAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cReferredPartialModelDeclarationCrossReference_0 = (CrossReference)cReferredAssignment.eContents().get(0);
+		private final RuleCall cReferredPartialModelDeclarationIDTerminalRuleCall_0_1 = (RuleCall)cReferredPartialModelDeclarationCrossReference_0.eContents().get(1);
+		
+		//PartialModelReference:
+		//	referred=[PartialModelDeclaration];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//referred=[PartialModelDeclaration]
+		public Assignment getReferredAssignment() { return cReferredAssignment; }
+		
+		//[PartialModelDeclaration]
+		public CrossReference getReferredPartialModelDeclarationCrossReference_0() { return cReferredPartialModelDeclarationCrossReference_0; }
+		
+		//ID
+		public RuleCall getReferredPartialModelDeclarationIDTerminalRuleCall_0_1() { return cReferredPartialModelDeclarationIDTerminalRuleCall_0_1; }
+	}
+	public class PartialModelElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PartialModel");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPartialModelSpecificationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cPartialModelReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//PartialModel:
+		//	PartialModelSpecification | PartialModelReference;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//PartialModelSpecification | PartialModelReference
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//PartialModelSpecification
+		public RuleCall getPartialModelSpecificationParserRuleCall_0() { return cPartialModelSpecificationParserRuleCall_0; }
+		
+		//PartialModelReference
+		public RuleCall getPartialModelReferenceParserRuleCall_1() { return cPartialModelReferenceParserRuleCall_1; }
+	}
+	public class PatternSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PatternSpecification");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cEntriesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEntriesPatternEntryParserRuleCall_1_0 = (RuleCall)cEntriesAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cEntriesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cEntriesPatternEntryParserRuleCall_2_1_0 = (RuleCall)cEntriesAssignment_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		/////////////////////////////////////////////////////
+		//// Patterns
+		/////////////////////////////////////////////////////
+		//PatternSpecification:
+		//	'{' entries+=PatternEntry (',' entries+=PatternEntry)* '}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'{' entries+=PatternEntry (',' entries+=PatternEntry)* '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+		
+		//entries+=PatternEntry
+		public Assignment getEntriesAssignment_1() { return cEntriesAssignment_1; }
+		
+		//PatternEntry
+		public RuleCall getEntriesPatternEntryParserRuleCall_1_0() { return cEntriesPatternEntryParserRuleCall_1_0; }
+		
+		//(',' entries+=PatternEntry)*
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//','
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		
+		//entries+=PatternEntry
+		public Assignment getEntriesAssignment_2_1() { return cEntriesAssignment_2_1; }
+		
+		//PatternEntry
+		public RuleCall getEntriesPatternEntryParserRuleCall_2_1_0() { return cEntriesPatternEntryParserRuleCall_2_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+	public class PatternEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PatternEntry");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPatternElementParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cAllPatternEntryParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//PatternEntry:
+		//	PatternElement | AllPatternEntry;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//PatternElement | AllPatternEntry
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//PatternElement
+		public RuleCall getPatternElementParserRuleCall_0() { return cPatternElementParserRuleCall_0; }
+		
+		//AllPatternEntry
+		public RuleCall getAllPatternEntryParserRuleCall_1() { return cAllPatternEntryParserRuleCall_1; }
+	}
+	public class AllPatternEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.AllPatternEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cPackageAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cPackagePatternModelCrossReference_1_0 = (CrossReference)cPackageAssignment_1.eContents().get(0);
+		private final RuleCall cPackagePatternModelQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cPackagePatternModelCrossReference_1_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cExcludingKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cExclusuionAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cExclusuionPatternElementParserRuleCall_2_2_0 = (RuleCall)cExclusuionAssignment_2_2.eContents().get(0);
+		private final Group cGroup_2_3 = (Group)cGroup_2.eContents().get(3);
+		private final Keyword cCommaKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
+		private final Assignment cExclusuionAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
+		private final RuleCall cExclusuionPatternElementParserRuleCall_2_3_1_0 = (RuleCall)cExclusuionAssignment_2_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
+		
+		//AllPatternEntry:
+		//	'package' package=[viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion+=PatternElement (','
+		//	exclusuion+=PatternElement)* '}')?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'package' package=[viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion+=PatternElement (','
+		//exclusuion+=PatternElement)* '}')?
+		public Group getGroup() { return cGroup; }
+		
+		//'package'
+		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
+		
+		//package=[viatra::PatternModel|QualifiedName]
+		public Assignment getPackageAssignment_1() { return cPackageAssignment_1; }
+		
+		//[viatra::PatternModel|QualifiedName]
+		public CrossReference getPackagePatternModelCrossReference_1_0() { return cPackagePatternModelCrossReference_1_0; }
+		
+		//QualifiedName
+		public RuleCall getPackagePatternModelQualifiedNameParserRuleCall_1_0_1() { return cPackagePatternModelQualifiedNameParserRuleCall_1_0_1; }
+		
+		//('excluding' '{' exclusuion+=PatternElement (',' exclusuion+=PatternElement)* '}')?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'excluding'
+		public Keyword getExcludingKeyword_2_0() { return cExcludingKeyword_2_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2_1() { return cLeftCurlyBracketKeyword_2_1; }
+		
+		//exclusuion+=PatternElement
+		public Assignment getExclusuionAssignment_2_2() { return cExclusuionAssignment_2_2; }
+		
+		//PatternElement
+		public RuleCall getExclusuionPatternElementParserRuleCall_2_2_0() { return cExclusuionPatternElementParserRuleCall_2_2_0; }
+		
+		//(',' exclusuion+=PatternElement)*
+		public Group getGroup_2_3() { return cGroup_2_3; }
+		
+		//','
+		public Keyword getCommaKeyword_2_3_0() { return cCommaKeyword_2_3_0; }
+		
+		//exclusuion+=PatternElement
+		public Assignment getExclusuionAssignment_2_3_1() { return cExclusuionAssignment_2_3_1; }
+		
+		//PatternElement
+		public RuleCall getExclusuionPatternElementParserRuleCall_2_3_1_0() { return cExclusuionPatternElementParserRuleCall_2_3_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_2_4() { return cRightCurlyBracketKeyword_2_4; }
+	}
+	public class PatternElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PatternElement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cPackageAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final CrossReference cPackagePatternModelCrossReference_0_0_0 = (CrossReference)cPackageAssignment_0_0.eContents().get(0);
+		private final RuleCall cPackagePatternModelQualifiedNameParserRuleCall_0_0_0_1 = (RuleCall)cPackagePatternModelCrossReference_0_0_0.eContents().get(1);
+		private final Keyword cColonColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Assignment cPatternAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cPatternPatternCrossReference_1_0 = (CrossReference)cPatternAssignment_1.eContents().get(0);
+		private final RuleCall cPatternPatternIDTerminalRuleCall_1_0_1 = (RuleCall)cPatternPatternCrossReference_1_0.eContents().get(1);
+		
+		//PatternElement:
+		//	(package=[viatra::PatternModel|QualifiedName] '::')? pattern=[viatra::Pattern];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(package=[viatra::PatternModel|QualifiedName] '::')? pattern=[viatra::Pattern]
+		public Group getGroup() { return cGroup; }
+		
+		//(package=[viatra::PatternModel|QualifiedName] '::')?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//package=[viatra::PatternModel|QualifiedName]
+		public Assignment getPackageAssignment_0_0() { return cPackageAssignment_0_0; }
+		
+		//[viatra::PatternModel|QualifiedName]
+		public CrossReference getPackagePatternModelCrossReference_0_0_0() { return cPackagePatternModelCrossReference_0_0_0; }
+		
+		//QualifiedName
+		public RuleCall getPackagePatternModelQualifiedNameParserRuleCall_0_0_0_1() { return cPackagePatternModelQualifiedNameParserRuleCall_0_0_0_1; }
+		
+		//'::'
+		public Keyword getColonColonKeyword_0_1() { return cColonColonKeyword_0_1; }
+		
+		//pattern=[viatra::Pattern]
+		public Assignment getPatternAssignment_1() { return cPatternAssignment_1; }
+		
+		//[viatra::Pattern]
+		public CrossReference getPatternPatternCrossReference_1_0() { return cPatternPatternCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getPatternPatternIDTerminalRuleCall_1_0_1() { return cPatternPatternIDTerminalRuleCall_1_0_1; }
+	}
+	public class GraphPatternDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.GraphPatternDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPatternsKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSpecificationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSpecificationPatternSpecificationParserRuleCall_2_0 = (RuleCall)cSpecificationAssignment_2.eContents().get(0);
+		
+		//GraphPatternDeclaration:
+		//	'patterns' name=ID specification=PatternSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'patterns' name=ID specification=PatternSpecification
+		public Group getGroup() { return cGroup; }
+		
+		//'patterns'
+		public Keyword getPatternsKeyword_0() { return cPatternsKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//specification=PatternSpecification
+		public Assignment getSpecificationAssignment_2() { return cSpecificationAssignment_2; }
+		
+		//PatternSpecification
+		public RuleCall getSpecificationPatternSpecificationParserRuleCall_2_0() { return cSpecificationPatternSpecificationParserRuleCall_2_0; }
+	}
+	public class GraphPatternReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.GraphPatternReference");
+		private final Assignment cReferredAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cReferredGraphPatternDeclarationCrossReference_0 = (CrossReference)cReferredAssignment.eContents().get(0);
+		private final RuleCall cReferredGraphPatternDeclarationIDTerminalRuleCall_0_1 = (RuleCall)cReferredGraphPatternDeclarationCrossReference_0.eContents().get(1);
+		
+		//GraphPatternReference:
+		//	referred=[GraphPatternDeclaration];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//referred=[GraphPatternDeclaration]
+		public Assignment getReferredAssignment() { return cReferredAssignment; }
+		
+		//[GraphPatternDeclaration]
+		public CrossReference getReferredGraphPatternDeclarationCrossReference_0() { return cReferredGraphPatternDeclarationCrossReference_0; }
+		
+		//ID
+		public RuleCall getReferredGraphPatternDeclarationIDTerminalRuleCall_0_1() { return cReferredGraphPatternDeclarationIDTerminalRuleCall_0_1; }
+	}
+	public class GraphPatternElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.GraphPattern");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cGraphPatternReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cPatternSpecificationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//GraphPattern:
+		//	GraphPatternReference | PatternSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//GraphPatternReference | PatternSpecification
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//GraphPatternReference
+		public RuleCall getGraphPatternReferenceParserRuleCall_0() { return cGraphPatternReferenceParserRuleCall_0; }
+		
+		//PatternSpecification
+		public RuleCall getPatternSpecificationParserRuleCall_1() { return cPatternSpecificationParserRuleCall_1; }
+	}
+	public class ConfigSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ConfigSpecification");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cConfigSpecificationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cEntriesAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cEntriesConfigEntryParserRuleCall_2_0_0 = (RuleCall)cEntriesAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cEntriesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cEntriesConfigEntryParserRuleCall_2_1_1_0 = (RuleCall)cEntriesAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		/////////////////////////////////////////////////////
+		//// SolverConfig
+		/////////////////////////////////////////////////////
+		//ConfigSpecification:
+		//	{ConfigSpecification} '{' (entries+=ConfigEntry ("," entries+=ConfigEntry)*)?
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ConfigSpecification} '{' (entries+=ConfigEntry ("," entries+=ConfigEntry)*)? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{ConfigSpecification}
+		public Action getConfigSpecificationAction_0() { return cConfigSpecificationAction_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//(entries+=ConfigEntry ("," entries+=ConfigEntry)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//entries+=ConfigEntry
+		public Assignment getEntriesAssignment_2_0() { return cEntriesAssignment_2_0; }
+		
+		//ConfigEntry
+		public RuleCall getEntriesConfigEntryParserRuleCall_2_0_0() { return cEntriesConfigEntryParserRuleCall_2_0_0; }
+		
+		//("," entries+=ConfigEntry)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//","
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//entries+=ConfigEntry
+		public Assignment getEntriesAssignment_2_1_1() { return cEntriesAssignment_2_1_1; }
+		
+		//ConfigEntry
+		public RuleCall getEntriesConfigEntryParserRuleCall_2_1_1_0() { return cEntriesConfigEntryParserRuleCall_2_1_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+	public class ConfigDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ConfigDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cConfigKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSpecificationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSpecificationConfigSpecificationParserRuleCall_2_0 = (RuleCall)cSpecificationAssignment_2.eContents().get(0);
+		
+		//ConfigDeclaration:
+		//	'config' name=ID specification=ConfigSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'config' name=ID specification=ConfigSpecification
+		public Group getGroup() { return cGroup; }
+		
+		//'config'
+		public Keyword getConfigKeyword_0() { return cConfigKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//specification=ConfigSpecification
+		public Assignment getSpecificationAssignment_2() { return cSpecificationAssignment_2; }
+		
+		//ConfigSpecification
+		public RuleCall getSpecificationConfigSpecificationParserRuleCall_2_0() { return cSpecificationConfigSpecificationParserRuleCall_2_0; }
+	}
+	public class ConfigEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ConfigEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cKeySTRINGTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		
+		//ConfigEntry:
+		//	key=STRING "=" value=STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//key=STRING "=" value=STRING
+		public Group getGroup() { return cGroup; }
+		
+		//key=STRING
+		public Assignment getKeyAssignment_0() { return cKeyAssignment_0; }
+		
+		//STRING
+		public RuleCall getKeySTRINGTerminalRuleCall_0_0() { return cKeySTRINGTerminalRuleCall_0_0; }
+		
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//value=STRING
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_2_0() { return cValueSTRINGTerminalRuleCall_2_0; }
+	}
+	public class ConfigReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ConfigReference");
+		private final Assignment cConfigAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cConfigConfigDeclarationCrossReference_0 = (CrossReference)cConfigAssignment.eContents().get(0);
+		private final RuleCall cConfigConfigDeclarationIDTerminalRuleCall_0_1 = (RuleCall)cConfigConfigDeclarationCrossReference_0.eContents().get(1);
+		
+		//ConfigReference:
+		//	config=[ConfigDeclaration];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//config=[ConfigDeclaration]
+		public Assignment getConfigAssignment() { return cConfigAssignment; }
+		
+		//[ConfigDeclaration]
+		public CrossReference getConfigConfigDeclarationCrossReference_0() { return cConfigConfigDeclarationCrossReference_0; }
+		
+		//ID
+		public RuleCall getConfigConfigDeclarationIDTerminalRuleCall_0_1() { return cConfigConfigDeclarationIDTerminalRuleCall_0_1; }
+	}
+	public class ConfigElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Config");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConfigSpecificationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cConfigReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Config:
+		//	ConfigSpecification | ConfigReference;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ConfigSpecification | ConfigReference
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ConfigSpecification
+		public RuleCall getConfigSpecificationParserRuleCall_0() { return cConfigSpecificationParserRuleCall_0; }
+		
+		//ConfigReference
+		public RuleCall getConfigReferenceParserRuleCall_1() { return cConfigReferenceParserRuleCall_1; }
+	}
+	public class ScopeSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ScopeSpecification");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cScopeSpecificationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cScopesAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cScopesTypeScopeParserRuleCall_2_0_0 = (RuleCall)cScopesAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cScopesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cScopesTypeScopeParserRuleCall_2_1_1_0 = (RuleCall)cScopesAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//ScopeSpecification:
+		//	{ScopeSpecification} '{' (scopes+=TypeScope (',' scopes+=TypeScope)*)?
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ScopeSpecification} '{' (scopes+=TypeScope (',' scopes+=TypeScope)*)? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{ScopeSpecification}
+		public Action getScopeSpecificationAction_0() { return cScopeSpecificationAction_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//(scopes+=TypeScope (',' scopes+=TypeScope)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//scopes+=TypeScope
+		public Assignment getScopesAssignment_2_0() { return cScopesAssignment_2_0; }
+		
+		//TypeScope
+		public RuleCall getScopesTypeScopeParserRuleCall_2_0_0() { return cScopesTypeScopeParserRuleCall_2_0_0; }
+		
+		//(',' scopes+=TypeScope)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//scopes+=TypeScope
+		public Assignment getScopesAssignment_2_1_1() { return cScopesAssignment_2_1_1; }
+		
+		//TypeScope
+		public RuleCall getScopesTypeScopeParserRuleCall_2_1_1_0() { return cScopesTypeScopeParserRuleCall_2_1_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+	public class TypeScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeScope");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cMinAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cMinINTTerminalRuleCall_0_0_0 = (RuleCall)cMinAssignment_0_0.eContents().get(0);
+		private final Alternatives cAlternatives_0_1 = (Alternatives)cGroup_0.eContents().get(1);
+		private final Assignment cGreatherAssignment_0_1_0 = (Assignment)cAlternatives_0_1.eContents().get(0);
+		private final Keyword cGreatherLessThanSignKeyword_0_1_0_0 = (Keyword)cGreatherAssignment_0_1_0.eContents().get(0);
+		private final Assignment cGreaterOrEqualAssignment_0_1_1 = (Assignment)cAlternatives_0_1.eContents().get(1);
+		private final Keyword cGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0 = (Keyword)cGreaterOrEqualAssignment_0_1_1.eContents().get(0);
+		private final Keyword cNumberSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypeTypeReferenceParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Alternatives cAlternatives_3_0 = (Alternatives)cGroup_3.eContents().get(0);
+		private final Assignment cLessAssignment_3_0_0 = (Assignment)cAlternatives_3_0.eContents().get(0);
+		private final Keyword cLessLessThanSignKeyword_3_0_0_0 = (Keyword)cLessAssignment_3_0_0.eContents().get(0);
+		private final Assignment cLessOrEqualAssignment_3_0_1 = (Assignment)cAlternatives_3_0.eContents().get(1);
+		private final Keyword cLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0 = (Keyword)cLessOrEqualAssignment_3_0_1.eContents().get(0);
+		private final Assignment cMaxAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cMaxINTTerminalRuleCall_3_1_0 = (RuleCall)cMaxAssignment_3_1.eContents().get(0);
+		
+		//TypeScope:
+		//	(min=INT (greather?='<' | greaterOrEqual?='<='))? '#' type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(min=INT (greather?='<' | greaterOrEqual?='<='))? '#' type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?
+		public Group getGroup() { return cGroup; }
+		
+		//(min=INT (greather?='<' | greaterOrEqual?='<='))?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//min=INT
+		public Assignment getMinAssignment_0_0() { return cMinAssignment_0_0; }
+		
+		//INT
+		public RuleCall getMinINTTerminalRuleCall_0_0_0() { return cMinINTTerminalRuleCall_0_0_0; }
+		
+		//(greather?='<' | greaterOrEqual?='<=')
+		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
+		
+		//greather?='<'
+		public Assignment getGreatherAssignment_0_1_0() { return cGreatherAssignment_0_1_0; }
+		
+		//'<'
+		public Keyword getGreatherLessThanSignKeyword_0_1_0_0() { return cGreatherLessThanSignKeyword_0_1_0_0; }
+		
+		//greaterOrEqual?='<='
+		public Assignment getGreaterOrEqualAssignment_0_1_1() { return cGreaterOrEqualAssignment_0_1_1; }
+		
+		//'<='
+		public Keyword getGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0() { return cGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0; }
+		
+		//'#'
+		public Keyword getNumberSignKeyword_1() { return cNumberSignKeyword_1; }
+		
+		//type=TypeReference
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		
+		//TypeReference
+		public RuleCall getTypeTypeReferenceParserRuleCall_2_0() { return cTypeTypeReferenceParserRuleCall_2_0; }
+		
+		//((less?='<' | lessOrEqual?='<=') max=INT)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//(less?='<' | lessOrEqual?='<=')
+		public Alternatives getAlternatives_3_0() { return cAlternatives_3_0; }
+		
+		//less?='<'
+		public Assignment getLessAssignment_3_0_0() { return cLessAssignment_3_0_0; }
+		
+		//'<'
+		public Keyword getLessLessThanSignKeyword_3_0_0_0() { return cLessLessThanSignKeyword_3_0_0_0; }
+		
+		//lessOrEqual?='<='
+		public Assignment getLessOrEqualAssignment_3_0_1() { return cLessOrEqualAssignment_3_0_1; }
+		
+		//'<='
+		public Keyword getLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0() { return cLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0; }
+		
+		//max=INT
+		public Assignment getMaxAssignment_3_1() { return cMaxAssignment_3_1; }
+		
+		//INT
+		public RuleCall getMaxINTTerminalRuleCall_3_1_0() { return cMaxINTTerminalRuleCall_3_1_0; }
+	}
+	public class TypeReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeReference");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cClassReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cObjectReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIntegerReferenceParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRealReferenceParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cStringReferenceParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		
+		//TypeReference:
+		//	ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ClassReference | ObjectReference | IntegerReference | RealReference | StringReference
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ClassReference
+		public RuleCall getClassReferenceParserRuleCall_0() { return cClassReferenceParserRuleCall_0; }
+		
+		//ObjectReference
+		public RuleCall getObjectReferenceParserRuleCall_1() { return cObjectReferenceParserRuleCall_1; }
+		
+		//IntegerReference
+		public RuleCall getIntegerReferenceParserRuleCall_2() { return cIntegerReferenceParserRuleCall_2; }
+		
+		//RealReference
+		public RuleCall getRealReferenceParserRuleCall_3() { return cRealReferenceParserRuleCall_3; }
+		
+		//StringReference
+		public RuleCall getStringReferenceParserRuleCall_4() { return cStringReferenceParserRuleCall_4; }
+	}
+	public class ClassReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ClassReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cElementAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cElementMetamodelElementParserRuleCall_1_0 = (RuleCall)cElementAssignment_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//ClassReference:
+		//	'[' element=MetamodelElement ']';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'[' element=MetamodelElement ']'
+		public Group getGroup() { return cGroup; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		
+		//element=MetamodelElement
+		public Assignment getElementAssignment_1() { return cElementAssignment_1; }
+		
+		//MetamodelElement
+		public RuleCall getElementMetamodelElementParserRuleCall_1_0() { return cElementMetamodelElementParserRuleCall_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+	}
+	public class ObjectReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cObjectReferenceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cObjectKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//ObjectReference:
+		//	{ObjectReference} 'Object';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ObjectReference} 'Object'
+		public Group getGroup() { return cGroup; }
+		
+		//{ObjectReference}
+		public Action getObjectReferenceAction_0() { return cObjectReferenceAction_0; }
+		
+		//'Object'
+		public Keyword getObjectKeyword_1() { return cObjectKeyword_1; }
+	}
+	public class IntegerReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntegerReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cIntegerScopeAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cIntKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//IntegerReference:
+		//	{IntegerScope} 'int';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{IntegerScope} 'int'
+		public Group getGroup() { return cGroup; }
+		
+		//{IntegerScope}
+		public Action getIntegerScopeAction_0() { return cIntegerScopeAction_0; }
+		
+		//'int'
+		public Keyword getIntKeyword_1() { return cIntKeyword_1; }
+	}
+	public class RealReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.RealReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cRealScopeAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cRealKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//RealReference:
+		//	{RealScope} 'real';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{RealScope} 'real'
+		public Group getGroup() { return cGroup; }
+		
+		//{RealScope}
+		public Action getRealScopeAction_0() { return cRealScopeAction_0; }
+		
+		//'real'
+		public Keyword getRealKeyword_1() { return cRealKeyword_1; }
+	}
+	public class StringReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.StringReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStringScopeAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cStringKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//StringReference:
+		//	{StringScope} 'string';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{StringScope} 'string'
+		public Group getGroup() { return cGroup; }
+		
+		//{StringScope}
+		public Action getStringScopeAction_0() { return cStringScopeAction_0; }
+		
+		//'string'
+		public Keyword getStringKeyword_1() { return cStringKeyword_1; }
+	}
+	public class ScopeDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ScopeDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cScopeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSpecificationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSpecificationScopeSpecificationParserRuleCall_2_0 = (RuleCall)cSpecificationAssignment_2.eContents().get(0);
+		
+		//ScopeDeclaration:
+		//	'scope' name=ID specification=ScopeSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'scope' name=ID specification=ScopeSpecification
+		public Group getGroup() { return cGroup; }
+		
+		//'scope'
+		public Keyword getScopeKeyword_0() { return cScopeKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//specification=ScopeSpecification
+		public Assignment getSpecificationAssignment_2() { return cSpecificationAssignment_2; }
+		
+		//ScopeSpecification
+		public RuleCall getSpecificationScopeSpecificationParserRuleCall_2_0() { return cSpecificationScopeSpecificationParserRuleCall_2_0; }
+	}
+	public class ScopeReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ScopeReference");
+		private final Assignment cReferredAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cReferredScopeDeclarationCrossReference_0 = (CrossReference)cReferredAssignment.eContents().get(0);
+		private final RuleCall cReferredScopeDeclarationIDTerminalRuleCall_0_1 = (RuleCall)cReferredScopeDeclarationCrossReference_0.eContents().get(1);
+		
+		//ScopeReference:
+		//	referred=[ScopeDeclaration];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//referred=[ScopeDeclaration]
+		public Assignment getReferredAssignment() { return cReferredAssignment; }
+		
+		//[ScopeDeclaration]
+		public CrossReference getReferredScopeDeclarationCrossReference_0() { return cReferredScopeDeclarationCrossReference_0; }
+		
+		//ID
+		public RuleCall getReferredScopeDeclarationIDTerminalRuleCall_0_1() { return cReferredScopeDeclarationIDTerminalRuleCall_0_1; }
+	}
+	public class ScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Scope");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cScopeSpecificationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cScopeReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Scope:
+		//	ScopeSpecification | ScopeReference;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ScopeSpecification | ScopeReference
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ScopeSpecification
+		public RuleCall getScopeSpecificationParserRuleCall_0() { return cScopeSpecificationParserRuleCall_0; }
+		
+		//ScopeReference
+		public RuleCall getScopeReferenceParserRuleCall_1() { return cScopeReferenceParserRuleCall_1; }
+	}
+	public class TaskElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Task");
+		private final RuleCall cGenerationTaskParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Task:
+		//	GenerationTask / *| MeasurementTask | ValidationTask* /;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//GenerationTask
+		public RuleCall getGenerationTaskParserRuleCall() { return cGenerationTaskParserRuleCall; }
+	}
+	public class GenerationTaskElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.GenerationTask");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cGenerateKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cGenerationTaskAction_1 = (Action)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final UnorderedGroup cUnorderedGroup_3 = (UnorderedGroup)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cUnorderedGroup_3.eContents().get(0);
+		private final Keyword cMetamodelKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_0_1 = (Keyword)cGroup_3_0.eContents().get(1);
+		private final Assignment cMetamodelAssignment_3_0_2 = (Assignment)cGroup_3_0.eContents().get(2);
+		private final RuleCall cMetamodelMetamodelParserRuleCall_3_0_2_0 = (RuleCall)cMetamodelAssignment_3_0_2.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cUnorderedGroup_3.eContents().get(1);
+		private final Keyword cPartialModelKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
+		private final Assignment cPartialModelAssignment_3_1_2 = (Assignment)cGroup_3_1.eContents().get(2);
+		private final RuleCall cPartialModelPartialModelParserRuleCall_3_1_2_0 = (RuleCall)cPartialModelAssignment_3_1_2.eContents().get(0);
+		private final Group cGroup_3_2 = (Group)cUnorderedGroup_3.eContents().get(2);
+		private final Keyword cPatternsKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_2_1 = (Keyword)cGroup_3_2.eContents().get(1);
+		private final Assignment cPatternsAssignment_3_2_2 = (Assignment)cGroup_3_2.eContents().get(2);
+		private final RuleCall cPatternsGraphPatternParserRuleCall_3_2_2_0 = (RuleCall)cPatternsAssignment_3_2_2.eContents().get(0);
+		private final Group cGroup_3_3 = (Group)cUnorderedGroup_3.eContents().get(3);
+		private final Keyword cScopeKeyword_3_3_0 = (Keyword)cGroup_3_3.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_3_1 = (Keyword)cGroup_3_3.eContents().get(1);
+		private final Assignment cScopeAssignment_3_3_2 = (Assignment)cGroup_3_3.eContents().get(2);
+		private final RuleCall cScopeScopeParserRuleCall_3_3_2_0 = (RuleCall)cScopeAssignment_3_3_2.eContents().get(0);
+		private final Group cGroup_3_4 = (Group)cUnorderedGroup_3.eContents().get(4);
+		private final Keyword cNumberKeyword_3_4_0 = (Keyword)cGroup_3_4.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_4_1 = (Keyword)cGroup_3_4.eContents().get(1);
+		private final Assignment cNumberAssignment_3_4_2 = (Assignment)cGroup_3_4.eContents().get(2);
+		private final RuleCall cNumberINTTerminalRuleCall_3_4_2_0 = (RuleCall)cNumberAssignment_3_4_2.eContents().get(0);
+		private final Group cGroup_3_5 = (Group)cUnorderedGroup_3.eContents().get(5);
+		private final Keyword cRunsKeyword_3_5_0 = (Keyword)cGroup_3_5.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_5_1 = (Keyword)cGroup_3_5.eContents().get(1);
+		private final Assignment cRunsAssignment_3_5_2 = (Assignment)cGroup_3_5.eContents().get(2);
+		private final RuleCall cRunsINTTerminalRuleCall_3_5_2_0 = (RuleCall)cRunsAssignment_3_5_2.eContents().get(0);
+		private final Group cGroup_3_6 = (Group)cUnorderedGroup_3.eContents().get(6);
+		private final Keyword cSolverKeyword_3_6_0 = (Keyword)cGroup_3_6.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_6_1 = (Keyword)cGroup_3_6.eContents().get(1);
+		private final Assignment cSolverAssignment_3_6_2 = (Assignment)cGroup_3_6.eContents().get(2);
+		private final RuleCall cSolverSolverEnumRuleCall_3_6_2_0 = (RuleCall)cSolverAssignment_3_6_2.eContents().get(0);
+		private final Group cGroup_3_7 = (Group)cUnorderedGroup_3.eContents().get(7);
+		private final Keyword cConfigKeyword_3_7_0 = (Keyword)cGroup_3_7.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_7_1 = (Keyword)cGroup_3_7.eContents().get(1);
+		private final Assignment cConfigAssignment_3_7_2 = (Assignment)cGroup_3_7.eContents().get(2);
+		private final RuleCall cConfigConfigParserRuleCall_3_7_2_0 = (RuleCall)cConfigAssignment_3_7_2.eContents().get(0);
+		private final Group cGroup_3_8 = (Group)cUnorderedGroup_3.eContents().get(8);
+		private final Keyword cOutputKeyword_3_8_0 = (Keyword)cGroup_3_8.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_8_1 = (Keyword)cGroup_3_8.eContents().get(1);
+		private final Assignment cTagetFolderAssignment_3_8_2 = (Assignment)cGroup_3_8.eContents().get(2);
+		private final RuleCall cTagetFolderFileParserRuleCall_3_8_2_0 = (RuleCall)cTagetFolderAssignment_3_8_2.eContents().get(0);
+		private final Group cGroup_3_9 = (Group)cUnorderedGroup_3.eContents().get(9);
+		private final Keyword cDebugKeyword_3_9_0 = (Keyword)cGroup_3_9.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_9_1 = (Keyword)cGroup_3_9.eContents().get(1);
+		private final Assignment cDebugFolderAssignment_3_9_2 = (Assignment)cGroup_3_9.eContents().get(2);
+		private final RuleCall cDebugFolderFileParserRuleCall_3_9_2_0 = (RuleCall)cDebugFolderAssignment_3_9_2.eContents().get(0);
+		private final Group cGroup_3_10 = (Group)cUnorderedGroup_3.eContents().get(10);
+		private final Keyword cLogKeyword_3_10_0 = (Keyword)cGroup_3_10.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_10_1 = (Keyword)cGroup_3_10.eContents().get(1);
+		private final Assignment cTargetLogFileAssignment_3_10_2 = (Assignment)cGroup_3_10.eContents().get(2);
+		private final RuleCall cTargetLogFileFileParserRuleCall_3_10_2_0 = (RuleCall)cTargetLogFileAssignment_3_10_2.eContents().get(0);
+		private final Group cGroup_3_11 = (Group)cUnorderedGroup_3.eContents().get(11);
+		private final Keyword cStatisticsKeyword_3_11_0 = (Keyword)cGroup_3_11.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_11_1 = (Keyword)cGroup_3_11.eContents().get(1);
+		private final Assignment cTargetStatisticsFileAssignment_3_11_2 = (Assignment)cGroup_3_11.eContents().get(2);
+		private final RuleCall cTargetStatisticsFileFileParserRuleCall_3_11_2_0 = (RuleCall)cTargetStatisticsFileAssignment_3_11_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//GenerationTask:
+		//	'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
+		//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
+		//	number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
+		//	tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
+		//	targetStatisticsFile=File)?)
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
+		//partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
+		//number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
+		//tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
+		//targetStatisticsFile=File)?) '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'generate'
+		public Keyword getGenerateKeyword_0() { return cGenerateKeyword_0; }
+		
+		//{GenerationTask}
+		public Action getGenerationTaskAction_1() { return cGenerationTaskAction_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//(('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '=' partialModel=PartialModel)? & ('patterns' '='
+		//patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '=' number=INT)? & ('runs' '=' runs=INT)? & ('solver'
+		//'=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '=' tagetFolder=File)? & ('debug' '='
+		//debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '=' targetStatisticsFile=File)?)
+		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
+		
+		//('metamodel' '=' metamodel=Metamodel)?
+		public Group getGroup_3_0() { return cGroup_3_0; }
+		
+		//'metamodel'
+		public Keyword getMetamodelKeyword_3_0_0() { return cMetamodelKeyword_3_0_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_0_1() { return cEqualsSignKeyword_3_0_1; }
+		
+		//metamodel=Metamodel
+		public Assignment getMetamodelAssignment_3_0_2() { return cMetamodelAssignment_3_0_2; }
+		
+		//Metamodel
+		public RuleCall getMetamodelMetamodelParserRuleCall_3_0_2_0() { return cMetamodelMetamodelParserRuleCall_3_0_2_0; }
+		
+		//('partial-model' '=' partialModel=PartialModel)?
+		public Group getGroup_3_1() { return cGroup_3_1; }
+		
+		//'partial-model'
+		public Keyword getPartialModelKeyword_3_1_0() { return cPartialModelKeyword_3_1_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_1_1() { return cEqualsSignKeyword_3_1_1; }
+		
+		//partialModel=PartialModel
+		public Assignment getPartialModelAssignment_3_1_2() { return cPartialModelAssignment_3_1_2; }
+		
+		//PartialModel
+		public RuleCall getPartialModelPartialModelParserRuleCall_3_1_2_0() { return cPartialModelPartialModelParserRuleCall_3_1_2_0; }
+		
+		//('patterns' '=' patterns=GraphPattern)?
+		public Group getGroup_3_2() { return cGroup_3_2; }
+		
+		//'patterns'
+		public Keyword getPatternsKeyword_3_2_0() { return cPatternsKeyword_3_2_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_2_1() { return cEqualsSignKeyword_3_2_1; }
+		
+		//patterns=GraphPattern
+		public Assignment getPatternsAssignment_3_2_2() { return cPatternsAssignment_3_2_2; }
+		
+		//GraphPattern
+		public RuleCall getPatternsGraphPatternParserRuleCall_3_2_2_0() { return cPatternsGraphPatternParserRuleCall_3_2_2_0; }
+		
+		//('scope' '=' scope=Scope)?
+		public Group getGroup_3_3() { return cGroup_3_3; }
+		
+		//'scope'
+		public Keyword getScopeKeyword_3_3_0() { return cScopeKeyword_3_3_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_3_1() { return cEqualsSignKeyword_3_3_1; }
+		
+		//scope=Scope
+		public Assignment getScopeAssignment_3_3_2() { return cScopeAssignment_3_3_2; }
+		
+		//Scope
+		public RuleCall getScopeScopeParserRuleCall_3_3_2_0() { return cScopeScopeParserRuleCall_3_3_2_0; }
+		
+		//('number' '=' number=INT)?
+		public Group getGroup_3_4() { return cGroup_3_4; }
+		
+		//'number'
+		public Keyword getNumberKeyword_3_4_0() { return cNumberKeyword_3_4_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_4_1() { return cEqualsSignKeyword_3_4_1; }
+		
+		//number=INT
+		public Assignment getNumberAssignment_3_4_2() { return cNumberAssignment_3_4_2; }
+		
+		//INT
+		public RuleCall getNumberINTTerminalRuleCall_3_4_2_0() { return cNumberINTTerminalRuleCall_3_4_2_0; }
+		
+		//('runs' '=' runs=INT)?
+		public Group getGroup_3_5() { return cGroup_3_5; }
+		
+		//'runs'
+		public Keyword getRunsKeyword_3_5_0() { return cRunsKeyword_3_5_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_5_1() { return cEqualsSignKeyword_3_5_1; }
+		
+		//runs=INT
+		public Assignment getRunsAssignment_3_5_2() { return cRunsAssignment_3_5_2; }
+		
+		//INT
+		public RuleCall getRunsINTTerminalRuleCall_3_5_2_0() { return cRunsINTTerminalRuleCall_3_5_2_0; }
+		
+		//('solver' '=' solver=Solver)?
+		public Group getGroup_3_6() { return cGroup_3_6; }
+		
+		//'solver'
+		public Keyword getSolverKeyword_3_6_0() { return cSolverKeyword_3_6_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_6_1() { return cEqualsSignKeyword_3_6_1; }
+		
+		//solver=Solver
+		public Assignment getSolverAssignment_3_6_2() { return cSolverAssignment_3_6_2; }
+		
+		//Solver
+		public RuleCall getSolverSolverEnumRuleCall_3_6_2_0() { return cSolverSolverEnumRuleCall_3_6_2_0; }
+		
+		//('config' '=' config=Config)?
+		public Group getGroup_3_7() { return cGroup_3_7; }
+		
+		//'config'
+		public Keyword getConfigKeyword_3_7_0() { return cConfigKeyword_3_7_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_7_1() { return cEqualsSignKeyword_3_7_1; }
+		
+		//config=Config
+		public Assignment getConfigAssignment_3_7_2() { return cConfigAssignment_3_7_2; }
+		
+		//Config
+		public RuleCall getConfigConfigParserRuleCall_3_7_2_0() { return cConfigConfigParserRuleCall_3_7_2_0; }
+		
+		//('output' '=' tagetFolder=File)?
+		public Group getGroup_3_8() { return cGroup_3_8; }
+		
+		//'output'
+		public Keyword getOutputKeyword_3_8_0() { return cOutputKeyword_3_8_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_8_1() { return cEqualsSignKeyword_3_8_1; }
+		
+		//tagetFolder=File
+		public Assignment getTagetFolderAssignment_3_8_2() { return cTagetFolderAssignment_3_8_2; }
+		
+		//File
+		public RuleCall getTagetFolderFileParserRuleCall_3_8_2_0() { return cTagetFolderFileParserRuleCall_3_8_2_0; }
+		
+		//('debug' '=' debugFolder=File)?
+		public Group getGroup_3_9() { return cGroup_3_9; }
+		
+		//'debug'
+		public Keyword getDebugKeyword_3_9_0() { return cDebugKeyword_3_9_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_9_1() { return cEqualsSignKeyword_3_9_1; }
+		
+		//debugFolder=File
+		public Assignment getDebugFolderAssignment_3_9_2() { return cDebugFolderAssignment_3_9_2; }
+		
+		//File
+		public RuleCall getDebugFolderFileParserRuleCall_3_9_2_0() { return cDebugFolderFileParserRuleCall_3_9_2_0; }
+		
+		//('log' '=' targetLogFile=File)?
+		public Group getGroup_3_10() { return cGroup_3_10; }
+		
+		//'log'
+		public Keyword getLogKeyword_3_10_0() { return cLogKeyword_3_10_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_10_1() { return cEqualsSignKeyword_3_10_1; }
+		
+		//targetLogFile=File
+		public Assignment getTargetLogFileAssignment_3_10_2() { return cTargetLogFileAssignment_3_10_2; }
+		
+		//File
+		public RuleCall getTargetLogFileFileParserRuleCall_3_10_2_0() { return cTargetLogFileFileParserRuleCall_3_10_2_0; }
+		
+		//('statistics' '=' targetStatisticsFile=File)?
+		public Group getGroup_3_11() { return cGroup_3_11; }
+		
+		//'statistics'
+		public Keyword getStatisticsKeyword_3_11_0() { return cStatisticsKeyword_3_11_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_3_11_1() { return cEqualsSignKeyword_3_11_1; }
+		
+		//targetStatisticsFile=File
+		public Assignment getTargetStatisticsFileAssignment_3_11_2() { return cTargetStatisticsFileAssignment_3_11_2; }
+		
+		//File
+		public RuleCall getTargetStatisticsFileFileParserRuleCall_3_11_2_0() { return cTargetStatisticsFileFileParserRuleCall_3_11_2_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
 	
+	public class SolverElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Solver");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cSMTSolverEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cSMTSolverSMTSolverKeyword_0_0 = (Keyword)cSMTSolverEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cAlloySolverEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cAlloySolverAlloySolverKeyword_1_0 = (Keyword)cAlloySolverEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cViatraSolverEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cViatraSolverViatraSolverKeyword_2_0 = (Keyword)cViatraSolverEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum Solver:
+		//	SMTSolver | AlloySolver | ViatraSolver;
+		public EnumRule getRule() { return rule; }
+		
+		//SMTSolver | AlloySolver | ViatraSolver
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//SMTSolver
+		public EnumLiteralDeclaration getSMTSolverEnumLiteralDeclaration_0() { return cSMTSolverEnumLiteralDeclaration_0; }
+		
+		//"SMTSolver"
+		public Keyword getSMTSolverSMTSolverKeyword_0_0() { return cSMTSolverSMTSolverKeyword_0_0; }
+		
+		//AlloySolver
+		public EnumLiteralDeclaration getAlloySolverEnumLiteralDeclaration_1() { return cAlloySolverEnumLiteralDeclaration_1; }
+		
+		//"AlloySolver"
+		public Keyword getAlloySolverAlloySolverKeyword_1_0() { return cAlloySolverAlloySolverKeyword_1_0; }
+		
+		//ViatraSolver
+		public EnumLiteralDeclaration getViatraSolverEnumLiteralDeclaration_2() { return cViatraSolverEnumLiteralDeclaration_2; }
+		
+		//"ViatraSolver"
+		public Keyword getViatraSolverViatraSolverKeyword_2_0() { return cViatraSolverViatraSolverKeyword_2_0; }
+	}
 	
 	private final ConfigurationScriptElements pConfigurationScript;
 	private final CommandElements pCommand;
-	private final DeclarationElements pDeclaration;
+	private final QualifiedNameElements pQualifiedName;
 	private final ImportElements pImport;
 	private final EPackageImportElements pEPackageImport;
 	private final ViatraImportElements pViatraImport;
+	private final DeclarationElements pDeclaration;
+	private final FileSpecificationElements pFileSpecification;
+	private final FileDeclarationElements pFileDeclaration;
+	private final FileReferenceElements pFileReference;
+	private final FileElements pFile;
 	private final MetamodelSpecificationElements pMetamodelSpecification;
 	private final MetamodelEntryElements pMetamodelEntry;
 	private final AllPackageEntryElements pAllPackageEntry;
@@ -454,6 +1892,39 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	private final MetamodelDeclarationElements pMetamodelDeclaration;
 	private final MetamodelReferenceElements pMetamodelReference;
 	private final MetamodelElements pMetamodel;
+	private final PartialModelSpecificationElements pPartialModelSpecification;
+	private final PartialModelEntryElements pPartialModelEntry;
+	private final ModelEntryElements pModelEntry;
+	private final FolderEntryElements pFolderEntry;
+	private final PartialModelDeclarationElements pPartialModelDeclaration;
+	private final PartialModelReferenceElements pPartialModelReference;
+	private final PartialModelElements pPartialModel;
+	private final PatternSpecificationElements pPatternSpecification;
+	private final PatternEntryElements pPatternEntry;
+	private final AllPatternEntryElements pAllPatternEntry;
+	private final PatternElementElements pPatternElement;
+	private final GraphPatternDeclarationElements pGraphPatternDeclaration;
+	private final GraphPatternReferenceElements pGraphPatternReference;
+	private final GraphPatternElements pGraphPattern;
+	private final ConfigSpecificationElements pConfigSpecification;
+	private final ConfigDeclarationElements pConfigDeclaration;
+	private final ConfigEntryElements pConfigEntry;
+	private final ConfigReferenceElements pConfigReference;
+	private final ConfigElements pConfig;
+	private final SolverElements eSolver;
+	private final ScopeSpecificationElements pScopeSpecification;
+	private final TypeScopeElements pTypeScope;
+	private final TypeReferenceElements pTypeReference;
+	private final ClassReferenceElements pClassReference;
+	private final ObjectReferenceElements pObjectReference;
+	private final IntegerReferenceElements pIntegerReference;
+	private final RealReferenceElements pRealReference;
+	private final StringReferenceElements pStringReference;
+	private final ScopeDeclarationElements pScopeDeclaration;
+	private final ScopeReferenceElements pScopeReference;
+	private final ScopeElements pScope;
+	private final TaskElements pTask;
+	private final GenerationTaskElements pGenerationTask;
 	
 	private final Grammar grammar;
 	
@@ -466,10 +1937,15 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.gaTerminals = gaTerminals;
 		this.pConfigurationScript = new ConfigurationScriptElements();
 		this.pCommand = new CommandElements();
-		this.pDeclaration = new DeclarationElements();
+		this.pQualifiedName = new QualifiedNameElements();
 		this.pImport = new ImportElements();
 		this.pEPackageImport = new EPackageImportElements();
 		this.pViatraImport = new ViatraImportElements();
+		this.pDeclaration = new DeclarationElements();
+		this.pFileSpecification = new FileSpecificationElements();
+		this.pFileDeclaration = new FileDeclarationElements();
+		this.pFileReference = new FileReferenceElements();
+		this.pFile = new FileElements();
 		this.pMetamodelSpecification = new MetamodelSpecificationElements();
 		this.pMetamodelEntry = new MetamodelEntryElements();
 		this.pAllPackageEntry = new AllPackageEntryElements();
@@ -477,6 +1953,39 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.pMetamodelDeclaration = new MetamodelDeclarationElements();
 		this.pMetamodelReference = new MetamodelReferenceElements();
 		this.pMetamodel = new MetamodelElements();
+		this.pPartialModelSpecification = new PartialModelSpecificationElements();
+		this.pPartialModelEntry = new PartialModelEntryElements();
+		this.pModelEntry = new ModelEntryElements();
+		this.pFolderEntry = new FolderEntryElements();
+		this.pPartialModelDeclaration = new PartialModelDeclarationElements();
+		this.pPartialModelReference = new PartialModelReferenceElements();
+		this.pPartialModel = new PartialModelElements();
+		this.pPatternSpecification = new PatternSpecificationElements();
+		this.pPatternEntry = new PatternEntryElements();
+		this.pAllPatternEntry = new AllPatternEntryElements();
+		this.pPatternElement = new PatternElementElements();
+		this.pGraphPatternDeclaration = new GraphPatternDeclarationElements();
+		this.pGraphPatternReference = new GraphPatternReferenceElements();
+		this.pGraphPattern = new GraphPatternElements();
+		this.pConfigSpecification = new ConfigSpecificationElements();
+		this.pConfigDeclaration = new ConfigDeclarationElements();
+		this.pConfigEntry = new ConfigEntryElements();
+		this.pConfigReference = new ConfigReferenceElements();
+		this.pConfig = new ConfigElements();
+		this.eSolver = new SolverElements();
+		this.pScopeSpecification = new ScopeSpecificationElements();
+		this.pTypeScope = new TypeScopeElements();
+		this.pTypeReference = new TypeReferenceElements();
+		this.pClassReference = new ClassReferenceElements();
+		this.pObjectReference = new ObjectReferenceElements();
+		this.pIntegerReference = new IntegerReferenceElements();
+		this.pRealReference = new RealReferenceElements();
+		this.pStringReference = new StringReferenceElements();
+		this.pScopeDeclaration = new ScopeDeclarationElements();
+		this.pScopeReference = new ScopeReferenceElements();
+		this.pScope = new ScopeElements();
+		this.pTask = new TaskElements();
+		this.pGenerationTask = new GenerationTaskElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -518,9 +2027,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Command:
-	//	Declaration
-	//	//| Task
-	//;
+	//	Declaration | Task;
 	public CommandElements getCommandAccess() {
 		return pCommand;
 	}
@@ -529,18 +2036,14 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		return getCommandAccess().getRule();
 	}
 	
-	//Declaration:
-	//	MetamodelDeclaration
-	//	//	| PartialModelDeclaration
-	//	//	| GraphPatternDeclaration
-	//	//	| SolverConfig
-	//;
-	public DeclarationElements getDeclarationAccess() {
-		return pDeclaration;
+	//QualifiedName:
+	//	ID (=> '.' ID)*;
+	public QualifiedNameElements getQualifiedNameAccess() {
+		return pQualifiedName;
 	}
 	
-	public ParserRule getDeclarationRule() {
-		return getDeclarationAccess().getRule();
+	public ParserRule getQualifiedNameRule() {
+		return getQualifiedNameAccess().getRule();
 	}
 	
 	/////////////////////////////////////////////////////
@@ -577,15 +2080,67 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	/////////////////////////////////////////////////////
+	//// Declaration
+	/////////////////////////////////////////////////////
+	//Declaration:
+	//	FileDeclaration
+	//	| MetamodelDeclaration
+	//	| PartialModelDeclaration
+	//	| GraphPatternDeclaration
+	//	| ConfigDeclaration
+	//	| ScopeDeclaration;
+	public DeclarationElements getDeclarationAccess() {
+		return pDeclaration;
+	}
+	
+	public ParserRule getDeclarationRule() {
+		return getDeclarationAccess().getRule();
+	}
+	
+	/////////////////////////////////////////////////////
 	//// Files and Folders
 	/////////////////////////////////////////////////////
-	/// *
-	//FileSpecification: path = STRING;
-	//FileDeclaration: 'file' name = ID '=' specification = FileSpecification;
-	//
-	//FileReference: referred = [FileDeclaration];
-	//File: FileSpecification | FileReference;
-	// * / ///////////////////////////////////////////////////
+	//FileSpecification:
+	//	path=STRING;
+	public FileSpecificationElements getFileSpecificationAccess() {
+		return pFileSpecification;
+	}
+	
+	public ParserRule getFileSpecificationRule() {
+		return getFileSpecificationAccess().getRule();
+	}
+	
+	//FileDeclaration:
+	//	'file' name=ID '=' specification=FileSpecification;
+	public FileDeclarationElements getFileDeclarationAccess() {
+		return pFileDeclaration;
+	}
+	
+	public ParserRule getFileDeclarationRule() {
+		return getFileDeclarationAccess().getRule();
+	}
+	
+	//FileReference:
+	//	referred=[FileDeclaration];
+	public FileReferenceElements getFileReferenceAccess() {
+		return pFileReference;
+	}
+	
+	public ParserRule getFileReferenceRule() {
+		return getFileReferenceAccess().getRule();
+	}
+	
+	//File:
+	//	FileSpecification | FileReference;
+	public FileElements getFileAccess() {
+		return pFile;
+	}
+	
+	public ParserRule getFileRule() {
+		return getFileAccess().getRule();
+	}
+	
+	/////////////////////////////////////////////////////
 	//// Metamodel
 	/////////////////////////////////////////////////////
 	//MetamodelSpecification:
@@ -609,8 +2164,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//AllPackageEntry:
-	//	"package" package=[ecore::EPackage] ("excluding" '{' exclusion+=MetamodelElement (',' exclusion+=MetamodelElement)*
-	//	'}')?;
+	//	"package" package=[ecore::EPackage|QualifiedName] ("excluding" '{' exclusion+=MetamodelElement (','
+	//	exclusion+=MetamodelElement)* '}')?;
 	public AllPackageEntryElements getAllPackageEntryAccess() {
 		return pAllPackageEntry;
 	}
@@ -620,7 +2175,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//MetamodelElement:
-	//	(package=[ecore::EPackage] '::')? classifier=[ecore::EClassifier] ('.' feature=[ecore::ENamedElement])?;
+	//	(package=[ecore::EPackage|QualifiedName] '::')? classifier=[ecore::EClassifier] ('.'
+	//	feature=[ecore::ENamedElement])?;
 	public MetamodelElementElements getMetamodelElementAccess() {
 		return pMetamodelElement;
 	}
@@ -657,6 +2213,353 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	
 	public ParserRule getMetamodelRule() {
 		return getMetamodelAccess().getRule();
+	}
+	
+	/////////////////////////////////////////////////////
+	//// Partial Model
+	/////////////////////////////////////////////////////
+	//PartialModelSpecification:
+	//	'{' entry+=PartialModelEntry (',' entry+=PartialModelEntry)? '}';
+	public PartialModelSpecificationElements getPartialModelSpecificationAccess() {
+		return pPartialModelSpecification;
+	}
+	
+	public ParserRule getPartialModelSpecificationRule() {
+		return getPartialModelSpecificationAccess().getRule();
+	}
+	
+	//PartialModelEntry:
+	//	ModelEntry | FolderEntry;
+	public PartialModelEntryElements getPartialModelEntryAccess() {
+		return pPartialModelEntry;
+	}
+	
+	public ParserRule getPartialModelEntryRule() {
+		return getPartialModelEntryAccess().getRule();
+	}
+	
+	//ModelEntry:
+	//	path=File;
+	public ModelEntryElements getModelEntryAccess() {
+		return pModelEntry;
+	}
+	
+	public ParserRule getModelEntryRule() {
+		return getModelEntryAccess().getRule();
+	}
+	
+	//FolderEntry:
+	//	"folder" path=File ("excluding" "{" exclusion+=ModelEntry ("," exclusion+=ModelEntry)* "}")?;
+	public FolderEntryElements getFolderEntryAccess() {
+		return pFolderEntry;
+	}
+	
+	public ParserRule getFolderEntryRule() {
+		return getFolderEntryAccess().getRule();
+	}
+	
+	//PartialModelDeclaration:
+	//	'partial-model' name=ID specification=PartialModelSpecification;
+	public PartialModelDeclarationElements getPartialModelDeclarationAccess() {
+		return pPartialModelDeclaration;
+	}
+	
+	public ParserRule getPartialModelDeclarationRule() {
+		return getPartialModelDeclarationAccess().getRule();
+	}
+	
+	//PartialModelReference:
+	//	referred=[PartialModelDeclaration];
+	public PartialModelReferenceElements getPartialModelReferenceAccess() {
+		return pPartialModelReference;
+	}
+	
+	public ParserRule getPartialModelReferenceRule() {
+		return getPartialModelReferenceAccess().getRule();
+	}
+	
+	//PartialModel:
+	//	PartialModelSpecification | PartialModelReference;
+	public PartialModelElements getPartialModelAccess() {
+		return pPartialModel;
+	}
+	
+	public ParserRule getPartialModelRule() {
+		return getPartialModelAccess().getRule();
+	}
+	
+	/////////////////////////////////////////////////////
+	//// Patterns
+	/////////////////////////////////////////////////////
+	//PatternSpecification:
+	//	'{' entries+=PatternEntry (',' entries+=PatternEntry)* '}';
+	public PatternSpecificationElements getPatternSpecificationAccess() {
+		return pPatternSpecification;
+	}
+	
+	public ParserRule getPatternSpecificationRule() {
+		return getPatternSpecificationAccess().getRule();
+	}
+	
+	//PatternEntry:
+	//	PatternElement | AllPatternEntry;
+	public PatternEntryElements getPatternEntryAccess() {
+		return pPatternEntry;
+	}
+	
+	public ParserRule getPatternEntryRule() {
+		return getPatternEntryAccess().getRule();
+	}
+	
+	//AllPatternEntry:
+	//	'package' package=[viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion+=PatternElement (','
+	//	exclusuion+=PatternElement)* '}')?;
+	public AllPatternEntryElements getAllPatternEntryAccess() {
+		return pAllPatternEntry;
+	}
+	
+	public ParserRule getAllPatternEntryRule() {
+		return getAllPatternEntryAccess().getRule();
+	}
+	
+	//PatternElement:
+	//	(package=[viatra::PatternModel|QualifiedName] '::')? pattern=[viatra::Pattern];
+	public PatternElementElements getPatternElementAccess() {
+		return pPatternElement;
+	}
+	
+	public ParserRule getPatternElementRule() {
+		return getPatternElementAccess().getRule();
+	}
+	
+	//GraphPatternDeclaration:
+	//	'patterns' name=ID specification=PatternSpecification;
+	public GraphPatternDeclarationElements getGraphPatternDeclarationAccess() {
+		return pGraphPatternDeclaration;
+	}
+	
+	public ParserRule getGraphPatternDeclarationRule() {
+		return getGraphPatternDeclarationAccess().getRule();
+	}
+	
+	//GraphPatternReference:
+	//	referred=[GraphPatternDeclaration];
+	public GraphPatternReferenceElements getGraphPatternReferenceAccess() {
+		return pGraphPatternReference;
+	}
+	
+	public ParserRule getGraphPatternReferenceRule() {
+		return getGraphPatternReferenceAccess().getRule();
+	}
+	
+	//GraphPattern:
+	//	GraphPatternReference | PatternSpecification;
+	public GraphPatternElements getGraphPatternAccess() {
+		return pGraphPattern;
+	}
+	
+	public ParserRule getGraphPatternRule() {
+		return getGraphPatternAccess().getRule();
+	}
+	
+	/////////////////////////////////////////////////////
+	//// SolverConfig
+	/////////////////////////////////////////////////////
+	//ConfigSpecification:
+	//	{ConfigSpecification} '{' (entries+=ConfigEntry ("," entries+=ConfigEntry)*)?
+	//	'}';
+	public ConfigSpecificationElements getConfigSpecificationAccess() {
+		return pConfigSpecification;
+	}
+	
+	public ParserRule getConfigSpecificationRule() {
+		return getConfigSpecificationAccess().getRule();
+	}
+	
+	//ConfigDeclaration:
+	//	'config' name=ID specification=ConfigSpecification;
+	public ConfigDeclarationElements getConfigDeclarationAccess() {
+		return pConfigDeclaration;
+	}
+	
+	public ParserRule getConfigDeclarationRule() {
+		return getConfigDeclarationAccess().getRule();
+	}
+	
+	//ConfigEntry:
+	//	key=STRING "=" value=STRING;
+	public ConfigEntryElements getConfigEntryAccess() {
+		return pConfigEntry;
+	}
+	
+	public ParserRule getConfigEntryRule() {
+		return getConfigEntryAccess().getRule();
+	}
+	
+	//ConfigReference:
+	//	config=[ConfigDeclaration];
+	public ConfigReferenceElements getConfigReferenceAccess() {
+		return pConfigReference;
+	}
+	
+	public ParserRule getConfigReferenceRule() {
+		return getConfigReferenceAccess().getRule();
+	}
+	
+	//Config:
+	//	ConfigSpecification | ConfigReference;
+	public ConfigElements getConfigAccess() {
+		return pConfig;
+	}
+	
+	public ParserRule getConfigRule() {
+		return getConfigAccess().getRule();
+	}
+	
+	//enum Solver:
+	//	SMTSolver | AlloySolver | ViatraSolver;
+	public SolverElements getSolverAccess() {
+		return eSolver;
+	}
+	
+	public EnumRule getSolverRule() {
+		return getSolverAccess().getRule();
+	}
+	
+	//ScopeSpecification:
+	//	{ScopeSpecification} '{' (scopes+=TypeScope (',' scopes+=TypeScope)*)?
+	//	'}';
+	public ScopeSpecificationElements getScopeSpecificationAccess() {
+		return pScopeSpecification;
+	}
+	
+	public ParserRule getScopeSpecificationRule() {
+		return getScopeSpecificationAccess().getRule();
+	}
+	
+	//TypeScope:
+	//	(min=INT (greather?='<' | greaterOrEqual?='<='))? '#' type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?;
+	public TypeScopeElements getTypeScopeAccess() {
+		return pTypeScope;
+	}
+	
+	public ParserRule getTypeScopeRule() {
+		return getTypeScopeAccess().getRule();
+	}
+	
+	//TypeReference:
+	//	ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
+	public TypeReferenceElements getTypeReferenceAccess() {
+		return pTypeReference;
+	}
+	
+	public ParserRule getTypeReferenceRule() {
+		return getTypeReferenceAccess().getRule();
+	}
+	
+	//ClassReference:
+	//	'[' element=MetamodelElement ']';
+	public ClassReferenceElements getClassReferenceAccess() {
+		return pClassReference;
+	}
+	
+	public ParserRule getClassReferenceRule() {
+		return getClassReferenceAccess().getRule();
+	}
+	
+	//ObjectReference:
+	//	{ObjectReference} 'Object';
+	public ObjectReferenceElements getObjectReferenceAccess() {
+		return pObjectReference;
+	}
+	
+	public ParserRule getObjectReferenceRule() {
+		return getObjectReferenceAccess().getRule();
+	}
+	
+	//IntegerReference:
+	//	{IntegerScope} 'int';
+	public IntegerReferenceElements getIntegerReferenceAccess() {
+		return pIntegerReference;
+	}
+	
+	public ParserRule getIntegerReferenceRule() {
+		return getIntegerReferenceAccess().getRule();
+	}
+	
+	//RealReference:
+	//	{RealScope} 'real';
+	public RealReferenceElements getRealReferenceAccess() {
+		return pRealReference;
+	}
+	
+	public ParserRule getRealReferenceRule() {
+		return getRealReferenceAccess().getRule();
+	}
+	
+	//StringReference:
+	//	{StringScope} 'string';
+	public StringReferenceElements getStringReferenceAccess() {
+		return pStringReference;
+	}
+	
+	public ParserRule getStringReferenceRule() {
+		return getStringReferenceAccess().getRule();
+	}
+	
+	//ScopeDeclaration:
+	//	'scope' name=ID specification=ScopeSpecification;
+	public ScopeDeclarationElements getScopeDeclarationAccess() {
+		return pScopeDeclaration;
+	}
+	
+	public ParserRule getScopeDeclarationRule() {
+		return getScopeDeclarationAccess().getRule();
+	}
+	
+	//ScopeReference:
+	//	referred=[ScopeDeclaration];
+	public ScopeReferenceElements getScopeReferenceAccess() {
+		return pScopeReference;
+	}
+	
+	public ParserRule getScopeReferenceRule() {
+		return getScopeReferenceAccess().getRule();
+	}
+	
+	//Scope:
+	//	ScopeSpecification | ScopeReference;
+	public ScopeElements getScopeAccess() {
+		return pScope;
+	}
+	
+	public ParserRule getScopeRule() {
+		return getScopeAccess().getRule();
+	}
+	
+	//Task:
+	//	GenerationTask / *| MeasurementTask | ValidationTask* /;
+	public TaskElements getTaskAccess() {
+		return pTask;
+	}
+	
+	public ParserRule getTaskRule() {
+		return getTaskAccess().getRule();
+	}
+	
+	//GenerationTask:
+	//	'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
+	//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
+	//	number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
+	//	tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
+	//	targetStatisticsFile=File)?)
+	//	'}';
+	public GenerationTaskElements getGenerationTaskAccess() {
+		return pGenerationTask;
+	}
+	
+	public ParserRule getGenerationTaskRule() {
+		return getGenerationTaskAccess().getRule();
 	}
 	
 	//terminal ID:

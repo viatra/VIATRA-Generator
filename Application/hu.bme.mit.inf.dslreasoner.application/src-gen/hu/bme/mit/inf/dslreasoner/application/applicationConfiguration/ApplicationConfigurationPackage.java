@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -114,25 +115,6 @@ public interface ApplicationConfigurationPackage extends EPackage
   int COMMAND_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl <em>Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getDeclaration()
-   * @generated
-   */
-  int DECLARATION = 2;
-
-  /**
-   * The number of structural features of the '<em>Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DECLARATION_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ImportImpl <em>Import</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -140,7 +122,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getImport()
    * @generated
    */
-  int IMPORT = 3;
+  int IMPORT = 2;
 
   /**
    * The number of structural features of the '<em>Import</em>' class.
@@ -159,7 +141,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getEPackageImport()
    * @generated
    */
-  int EPACKAGE_IMPORT = 4;
+  int EPACKAGE_IMPORT = 3;
 
   /**
    * The feature id for the '<em><b>Imported Package</b></em>' reference.
@@ -187,7 +169,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getViatraImport()
    * @generated
    */
-  int VIATRA_IMPORT = 5;
+  int VIATRA_IMPORT = 4;
 
   /**
    * The feature id for the '<em><b>Imported Viatra</b></em>' reference.
@@ -208,6 +190,146 @@ public interface ApplicationConfigurationPackage extends EPackage
   int VIATRA_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl <em>Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getDeclaration()
+   * @generated
+   */
+  int DECLARATION = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATION__NAME = COMMAND_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATION_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileImpl <em>File</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFile()
+   * @generated
+   */
+  int FILE = 9;
+
+  /**
+   * The number of structural features of the '<em>File</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileSpecificationImpl <em>File Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileSpecificationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFileSpecification()
+   * @generated
+   */
+  int FILE_SPECIFICATION = 6;
+
+  /**
+   * The feature id for the '<em><b>Path</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_SPECIFICATION__PATH = FILE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>File Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_SPECIFICATION_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileDeclarationImpl <em>File Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileDeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFileDeclaration()
+   * @generated
+   */
+  int FILE_DECLARATION = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_DECLARATION__NAME = DECLARATION__NAME;
+
+  /**
+   * The feature id for the '<em><b>Specification</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>File Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileReferenceImpl <em>File Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFileReference()
+   * @generated
+   */
+  int FILE_REFERENCE = 8;
+
+  /**
+   * The feature id for the '<em><b>Referred</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_REFERENCE__REFERRED = FILE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>File Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FILE_REFERENCE_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.MetamodelImpl <em>Metamodel</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -215,7 +337,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMetamodel()
    * @generated
    */
-  int METAMODEL = 12;
+  int METAMODEL = 16;
 
   /**
    * The number of structural features of the '<em>Metamodel</em>' class.
@@ -234,7 +356,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMetamodelSpecification()
    * @generated
    */
-  int METAMODEL_SPECIFICATION = 6;
+  int METAMODEL_SPECIFICATION = 10;
 
   /**
    * The feature id for the '<em><b>Entries</b></em>' containment reference list.
@@ -262,7 +384,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMetamodelEntry()
    * @generated
    */
-  int METAMODEL_ENTRY = 7;
+  int METAMODEL_ENTRY = 11;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' reference.
@@ -290,7 +412,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getAllPackageEntry()
    * @generated
    */
-  int ALL_PACKAGE_ENTRY = 8;
+  int ALL_PACKAGE_ENTRY = 12;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' reference.
@@ -327,7 +449,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMetamodelElement()
    * @generated
    */
-  int METAMODEL_ELEMENT = 9;
+  int METAMODEL_ELEMENT = 13;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' reference.
@@ -373,7 +495,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMetamodelDeclaration()
    * @generated
    */
-  int METAMODEL_DECLARATION = 10;
+  int METAMODEL_DECLARATION = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -382,7 +504,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METAMODEL_DECLARATION__NAME = DECLARATION_FEATURE_COUNT + 0;
+  int METAMODEL_DECLARATION__NAME = DECLARATION__NAME;
 
   /**
    * The feature id for the '<em><b>Specification</b></em>' containment reference.
@@ -391,7 +513,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METAMODEL_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 1;
+  int METAMODEL_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Metamodel Declaration</em>' class.
@@ -400,7 +522,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int METAMODEL_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
+  int METAMODEL_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.MetamodelReferenceImpl <em>Metamodel Reference</em>}' class.
@@ -410,7 +532,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMetamodelReference()
    * @generated
    */
-  int METAMODEL_REFERENCE = 11;
+  int METAMODEL_REFERENCE = 15;
 
   /**
    * The feature id for the '<em><b>Referred</b></em>' reference.
@@ -429,6 +551,1104 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @ordered
    */
   int METAMODEL_REFERENCE_FEATURE_COUNT = METAMODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelImpl <em>Partial Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModel()
+   * @generated
+   */
+  int PARTIAL_MODEL = 23;
+
+  /**
+   * The number of structural features of the '<em>Partial Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelSpecificationImpl <em>Partial Model Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelSpecificationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelSpecification()
+   * @generated
+   */
+  int PARTIAL_MODEL_SPECIFICATION = 17;
+
+  /**
+   * The feature id for the '<em><b>Entry</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_SPECIFICATION__ENTRY = PARTIAL_MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Partial Model Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_SPECIFICATION_FEATURE_COUNT = PARTIAL_MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelEntryImpl <em>Partial Model Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelEntry()
+   * @generated
+   */
+  int PARTIAL_MODEL_ENTRY = 18;
+
+  /**
+   * The feature id for the '<em><b>Path</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_ENTRY__PATH = 0;
+
+  /**
+   * The number of structural features of the '<em>Partial Model Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_ENTRY_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ModelEntryImpl <em>Model Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ModelEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getModelEntry()
+   * @generated
+   */
+  int MODEL_ENTRY = 19;
+
+  /**
+   * The feature id for the '<em><b>Path</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL_ENTRY__PATH = PARTIAL_MODEL_ENTRY__PATH;
+
+  /**
+   * The number of structural features of the '<em>Model Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL_ENTRY_FEATURE_COUNT = PARTIAL_MODEL_ENTRY_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FolderEntryImpl <em>Folder Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FolderEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFolderEntry()
+   * @generated
+   */
+  int FOLDER_ENTRY = 20;
+
+  /**
+   * The feature id for the '<em><b>Path</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FOLDER_ENTRY__PATH = PARTIAL_MODEL_ENTRY__PATH;
+
+  /**
+   * The feature id for the '<em><b>Exclusion</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FOLDER_ENTRY__EXCLUSION = PARTIAL_MODEL_ENTRY_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Folder Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FOLDER_ENTRY_FEATURE_COUNT = PARTIAL_MODEL_ENTRY_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelDeclarationImpl <em>Partial Model Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelDeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelDeclaration()
+   * @generated
+   */
+  int PARTIAL_MODEL_DECLARATION = 21;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_DECLARATION__NAME = DECLARATION__NAME;
+
+  /**
+   * The feature id for the '<em><b>Specification</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Partial Model Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelReferenceImpl <em>Partial Model Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelReference()
+   * @generated
+   */
+  int PARTIAL_MODEL_REFERENCE = 22;
+
+  /**
+   * The feature id for the '<em><b>Referred</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_REFERENCE__REFERRED = PARTIAL_MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Partial Model Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARTIAL_MODEL_REFERENCE_FEATURE_COUNT = PARTIAL_MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternImpl <em>Graph Pattern</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGraphPattern()
+   * @generated
+   */
+  int GRAPH_PATTERN = 30;
+
+  /**
+   * The number of structural features of the '<em>Graph Pattern</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH_PATTERN_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternSpecificationImpl <em>Pattern Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternSpecificationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPatternSpecification()
+   * @generated
+   */
+  int PATTERN_SPECIFICATION = 24;
+
+  /**
+   * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_SPECIFICATION__ENTRIES = GRAPH_PATTERN_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Pattern Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_SPECIFICATION_FEATURE_COUNT = GRAPH_PATTERN_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternEntryImpl <em>Pattern Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPatternEntry()
+   * @generated
+   */
+  int PATTERN_ENTRY = 25;
+
+  /**
+   * The feature id for the '<em><b>Package</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_ENTRY__PACKAGE = 0;
+
+  /**
+   * The number of structural features of the '<em>Pattern Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_ENTRY_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.AllPatternEntryImpl <em>All Pattern Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.AllPatternEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getAllPatternEntry()
+   * @generated
+   */
+  int ALL_PATTERN_ENTRY = 26;
+
+  /**
+   * The feature id for the '<em><b>Package</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALL_PATTERN_ENTRY__PACKAGE = PATTERN_ENTRY__PACKAGE;
+
+  /**
+   * The feature id for the '<em><b>Exclusuion</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALL_PATTERN_ENTRY__EXCLUSUION = PATTERN_ENTRY_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>All Pattern Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALL_PATTERN_ENTRY_FEATURE_COUNT = PATTERN_ENTRY_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternElementImpl <em>Pattern Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternElementImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPatternElement()
+   * @generated
+   */
+  int PATTERN_ELEMENT = 27;
+
+  /**
+   * The feature id for the '<em><b>Package</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_ELEMENT__PACKAGE = PATTERN_ENTRY__PACKAGE;
+
+  /**
+   * The feature id for the '<em><b>Pattern</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_ELEMENT__PATTERN = PATTERN_ENTRY_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Pattern Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PATTERN_ELEMENT_FEATURE_COUNT = PATTERN_ENTRY_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternDeclarationImpl <em>Graph Pattern Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternDeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGraphPatternDeclaration()
+   * @generated
+   */
+  int GRAPH_PATTERN_DECLARATION = 28;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH_PATTERN_DECLARATION__NAME = DECLARATION__NAME;
+
+  /**
+   * The feature id for the '<em><b>Specification</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH_PATTERN_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Graph Pattern Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH_PATTERN_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternReferenceImpl <em>Graph Pattern Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGraphPatternReference()
+   * @generated
+   */
+  int GRAPH_PATTERN_REFERENCE = 29;
+
+  /**
+   * The feature id for the '<em><b>Referred</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH_PATTERN_REFERENCE__REFERRED = GRAPH_PATTERN_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Graph Pattern Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRAPH_PATTERN_REFERENCE_FEATURE_COUNT = GRAPH_PATTERN_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigImpl <em>Config</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfig()
+   * @generated
+   */
+  int CONFIG = 35;
+
+  /**
+   * The number of structural features of the '<em>Config</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigSpecificationImpl <em>Config Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigSpecificationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigSpecification()
+   * @generated
+   */
+  int CONFIG_SPECIFICATION = 31;
+
+  /**
+   * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_SPECIFICATION__ENTRIES = CONFIG_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Config Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_SPECIFICATION_FEATURE_COUNT = CONFIG_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigDeclarationImpl <em>Config Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigDeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigDeclaration()
+   * @generated
+   */
+  int CONFIG_DECLARATION = 32;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_DECLARATION__NAME = DECLARATION__NAME;
+
+  /**
+   * The feature id for the '<em><b>Specification</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Config Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigEntryImpl <em>Config Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigEntry()
+   * @generated
+   */
+  int CONFIG_ENTRY = 33;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ENTRY__KEY = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ENTRY__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Config Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ENTRY_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigReferenceImpl <em>Config Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigReference()
+   * @generated
+   */
+  int CONFIG_REFERENCE = 34;
+
+  /**
+   * The feature id for the '<em><b>Config</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_REFERENCE__CONFIG = CONFIG_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Config Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_REFERENCE_FEATURE_COUNT = CONFIG_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeImpl <em>Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScope()
+   * @generated
+   */
+  int SCOPE = 46;
+
+  /**
+   * The number of structural features of the '<em>Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeSpecificationImpl <em>Scope Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeSpecificationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeSpecification()
+   * @generated
+   */
+  int SCOPE_SPECIFICATION = 36;
+
+  /**
+   * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_SPECIFICATION__SCOPES = SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Scope Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_SPECIFICATION_FEATURE_COUNT = SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl <em>Type Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeScope()
+   * @generated
+   */
+  int TYPE_SCOPE = 37;
+
+  /**
+   * The feature id for the '<em><b>Min</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__MIN = 0;
+
+  /**
+   * The feature id for the '<em><b>Greather</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__GREATHER = 1;
+
+  /**
+   * The feature id for the '<em><b>Greater Or Equal</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__GREATER_OR_EQUAL = 2;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__TYPE = 3;
+
+  /**
+   * The feature id for the '<em><b>Less</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__LESS = 4;
+
+  /**
+   * The feature id for the '<em><b>Less Or Equal</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__LESS_OR_EQUAL = 5;
+
+  /**
+   * The feature id for the '<em><b>Max</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__MAX = 6;
+
+  /**
+   * The number of structural features of the '<em>Type Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE_FEATURE_COUNT = 7;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeReference()
+   * @generated
+   */
+  int TYPE_REFERENCE = 38;
+
+  /**
+   * The number of structural features of the '<em>Type Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_REFERENCE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassReferenceImpl <em>Class Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassReference()
+   * @generated
+   */
+  int CLASS_REFERENCE = 39;
+
+  /**
+   * The feature id for the '<em><b>Element</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_REFERENCE__ELEMENT = TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Class Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectReferenceImpl <em>Object Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectReference()
+   * @generated
+   */
+  int OBJECT_REFERENCE = 40;
+
+  /**
+   * The number of structural features of the '<em>Object Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBJECT_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerReferenceImpl <em>Integer Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerReference()
+   * @generated
+   */
+  int INTEGER_REFERENCE = 41;
+
+  /**
+   * The number of structural features of the '<em>Integer Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealReferenceImpl <em>Real Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealReference()
+   * @generated
+   */
+  int REAL_REFERENCE = 42;
+
+  /**
+   * The number of structural features of the '<em>Real Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringReferenceImpl <em>String Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringReference()
+   * @generated
+   */
+  int STRING_REFERENCE = 43;
+
+  /**
+   * The number of structural features of the '<em>String Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeDeclarationImpl <em>Scope Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeDeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeDeclaration()
+   * @generated
+   */
+  int SCOPE_DECLARATION = 44;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_DECLARATION__NAME = DECLARATION__NAME;
+
+  /**
+   * The feature id for the '<em><b>Specification</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_DECLARATION__SPECIFICATION = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Scope Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeReferenceImpl <em>Scope Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeReferenceImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeReference()
+   * @generated
+   */
+  int SCOPE_REFERENCE = 45;
+
+  /**
+   * The feature id for the '<em><b>Referred</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_REFERENCE__REFERRED = SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Scope Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCOPE_REFERENCE_FEATURE_COUNT = SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TaskImpl <em>Task</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TaskImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTask()
+   * @generated
+   */
+  int TASK = 47;
+
+  /**
+   * The number of structural features of the '<em>Task</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TASK_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl <em>Generation Task</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGenerationTask()
+   * @generated
+   */
+  int GENERATION_TASK = 48;
+
+  /**
+   * The feature id for the '<em><b>Metamodel</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__METAMODEL = TASK_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Partial Model</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__PARTIAL_MODEL = TASK_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Patterns</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__PATTERNS = TASK_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Scope</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__SCOPE = TASK_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__NUMBER = TASK_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Runs</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__RUNS = TASK_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Solver</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__SOLVER = TASK_FEATURE_COUNT + 6;
+
+  /**
+   * The feature id for the '<em><b>Config</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__CONFIG = TASK_FEATURE_COUNT + 7;
+
+  /**
+   * The feature id for the '<em><b>Taget Folder</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__TAGET_FOLDER = TASK_FEATURE_COUNT + 8;
+
+  /**
+   * The feature id for the '<em><b>Debug Folder</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__DEBUG_FOLDER = TASK_FEATURE_COUNT + 9;
+
+  /**
+   * The feature id for the '<em><b>Target Log File</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__TARGET_LOG_FILE = TASK_FEATURE_COUNT + 10;
+
+  /**
+   * The feature id for the '<em><b>Target Statistics File</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__TARGET_STATISTICS_FILE = TASK_FEATURE_COUNT + 11;
+
+  /**
+   * The number of structural features of the '<em>Generation Task</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK_FEATURE_COUNT = TASK_FEATURE_COUNT + 12;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerScopeImpl <em>Integer Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerScope()
+   * @generated
+   */
+  int INTEGER_SCOPE = 49;
+
+  /**
+   * The number of structural features of the '<em>Integer Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_SCOPE_FEATURE_COUNT = INTEGER_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealScopeImpl <em>Real Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealScope()
+   * @generated
+   */
+  int REAL_SCOPE = 50;
+
+  /**
+   * The number of structural features of the '<em>Real Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_SCOPE_FEATURE_COUNT = REAL_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringScopeImpl <em>String Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringScope()
+   * @generated
+   */
+  int STRING_SCOPE = 51;
+
+  /**
+   * The number of structural features of the '<em>String Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_SCOPE_FEATURE_COUNT = STRING_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver <em>Solver</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getSolver()
+   * @generated
+   */
+  int SOLVER = 52;
 
 
   /**
@@ -472,16 +1692,6 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EClass getCommand();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration <em>Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Declaration</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration
-   * @generated
-   */
-  EClass getDeclaration();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Import <em>Import</em>}'.
@@ -534,6 +1744,100 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EReference getViatraImport_ImportedViatra();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration <em>Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration
+   * @generated
+   */
+  EClass getDeclaration();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration#getName()
+   * @see #getDeclaration()
+   * @generated
+   */
+  EAttribute getDeclaration_Name();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification <em>File Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>File Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification
+   * @generated
+   */
+  EClass getFileSpecification();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification#getPath <em>Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Path</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification#getPath()
+   * @see #getFileSpecification()
+   * @generated
+   */
+  EAttribute getFileSpecification_Path();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration <em>File Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>File Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration
+   * @generated
+   */
+  EClass getFileDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration#getSpecification <em>Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration#getSpecification()
+   * @see #getFileDeclaration()
+   * @generated
+   */
+  EReference getFileDeclaration_Specification();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference <em>File Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>File Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference
+   * @generated
+   */
+  EClass getFileReference();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference#getReferred <em>Referred</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Referred</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference#getReferred()
+   * @see #getFileReference()
+   * @generated
+   */
+  EReference getFileReference_Referred();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File <em>File</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>File</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File
+   * @generated
+   */
+  EClass getFile();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification <em>Metamodel Specification</em>}'.
@@ -641,17 +1945,6 @@ public interface ApplicationConfigurationPackage extends EPackage
   EClass getMetamodelDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration#getName()
-   * @see #getMetamodelDeclaration()
-   * @generated
-   */
-  EAttribute getMetamodelDeclaration_Name();
-
-  /**
    * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration#getSpecification <em>Specification</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -692,6 +1985,795 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EClass getMetamodel();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification <em>Partial Model Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Partial Model Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification
+   * @generated
+   */
+  EClass getPartialModelSpecification();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification#getEntry <em>Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification#getEntry()
+   * @see #getPartialModelSpecification()
+   * @generated
+   */
+  EReference getPartialModelSpecification_Entry();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry <em>Partial Model Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Partial Model Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry
+   * @generated
+   */
+  EClass getPartialModelEntry();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry#getPath <em>Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Path</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry#getPath()
+   * @see #getPartialModelEntry()
+   * @generated
+   */
+  EReference getPartialModelEntry_Path();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry <em>Model Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Model Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry
+   * @generated
+   */
+  EClass getModelEntry();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry <em>Folder Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Folder Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry
+   * @generated
+   */
+  EClass getFolderEntry();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry#getExclusion <em>Exclusion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Exclusion</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry#getExclusion()
+   * @see #getFolderEntry()
+   * @generated
+   */
+  EReference getFolderEntry_Exclusion();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration <em>Partial Model Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Partial Model Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration
+   * @generated
+   */
+  EClass getPartialModelDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration#getSpecification <em>Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration#getSpecification()
+   * @see #getPartialModelDeclaration()
+   * @generated
+   */
+  EReference getPartialModelDeclaration_Specification();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference <em>Partial Model Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Partial Model Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference
+   * @generated
+   */
+  EClass getPartialModelReference();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference#getReferred <em>Referred</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Referred</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference#getReferred()
+   * @see #getPartialModelReference()
+   * @generated
+   */
+  EReference getPartialModelReference_Referred();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModel <em>Partial Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Partial Model</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModel
+   * @generated
+   */
+  EClass getPartialModel();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification <em>Pattern Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Pattern Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
+   * @generated
+   */
+  EClass getPatternSpecification();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification#getEntries <em>Entries</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entries</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification#getEntries()
+   * @see #getPatternSpecification()
+   * @generated
+   */
+  EReference getPatternSpecification_Entries();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry <em>Pattern Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Pattern Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
+   * @generated
+   */
+  EClass getPatternEntry();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry#getPackage <em>Package</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Package</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry#getPackage()
+   * @see #getPatternEntry()
+   * @generated
+   */
+  EReference getPatternEntry_Package();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry <em>All Pattern Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>All Pattern Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
+   * @generated
+   */
+  EClass getAllPatternEntry();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry#getExclusuion <em>Exclusuion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Exclusuion</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry#getExclusuion()
+   * @see #getAllPatternEntry()
+   * @generated
+   */
+  EReference getAllPatternEntry_Exclusuion();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement <em>Pattern Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Pattern Element</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement
+   * @generated
+   */
+  EClass getPatternElement();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement#getPattern <em>Pattern</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Pattern</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement#getPattern()
+   * @see #getPatternElement()
+   * @generated
+   */
+  EReference getPatternElement_Pattern();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration <em>Graph Pattern Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Graph Pattern Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration
+   * @generated
+   */
+  EClass getGraphPatternDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration#getSpecification <em>Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration#getSpecification()
+   * @see #getGraphPatternDeclaration()
+   * @generated
+   */
+  EReference getGraphPatternDeclaration_Specification();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference <em>Graph Pattern Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Graph Pattern Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference
+   * @generated
+   */
+  EClass getGraphPatternReference();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference#getReferred <em>Referred</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Referred</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference#getReferred()
+   * @see #getGraphPatternReference()
+   * @generated
+   */
+  EReference getGraphPatternReference_Referred();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPattern <em>Graph Pattern</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Graph Pattern</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPattern
+   * @generated
+   */
+  EClass getGraphPattern();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification <em>Config Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification
+   * @generated
+   */
+  EClass getConfigSpecification();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification#getEntries <em>Entries</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entries</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification#getEntries()
+   * @see #getConfigSpecification()
+   * @generated
+   */
+  EReference getConfigSpecification_Entries();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration <em>Config Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration
+   * @generated
+   */
+  EClass getConfigDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration#getSpecification <em>Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration#getSpecification()
+   * @see #getConfigDeclaration()
+   * @generated
+   */
+  EReference getConfigDeclaration_Specification();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry <em>Config Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry
+   * @generated
+   */
+  EClass getConfigEntry();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry#getKey <em>Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Key</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry#getKey()
+   * @see #getConfigEntry()
+   * @generated
+   */
+  EAttribute getConfigEntry_Key();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry#getValue()
+   * @see #getConfigEntry()
+   * @generated
+   */
+  EAttribute getConfigEntry_Value();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference <em>Config Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference
+   * @generated
+   */
+  EClass getConfigReference();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference#getConfig <em>Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Config</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference#getConfig()
+   * @see #getConfigReference()
+   * @generated
+   */
+  EReference getConfigReference_Config();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config <em>Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config
+   * @generated
+   */
+  EClass getConfig();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification <em>Scope Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Scope Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification
+   * @generated
+   */
+  EClass getScopeSpecification();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification#getScopes <em>Scopes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Scopes</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification#getScopes()
+   * @see #getScopeSpecification()
+   * @generated
+   */
+  EReference getScopeSpecification_Scopes();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope <em>Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope
+   * @generated
+   */
+  EClass getTypeScope();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin <em>Min</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Min</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_Min();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreather <em>Greather</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Greather</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreather()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_Greather();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreaterOrEqual <em>Greater Or Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Greater Or Equal</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreaterOrEqual()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_GreaterOrEqual();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EReference getTypeScope_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLess <em>Less</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Less</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLess()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_Less();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLessOrEqual <em>Less Or Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Less Or Equal</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLessOrEqual()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_LessOrEqual();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax <em>Max</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Max</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_Max();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference <em>Type Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference
+   * @generated
+   */
+  EClass getTypeReference();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference <em>Class Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Class Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference
+   * @generated
+   */
+  EClass getClassReference();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference#getElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Element</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference#getElement()
+   * @see #getClassReference()
+   * @generated
+   */
+  EReference getClassReference_Element();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference <em>Object Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Object Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference
+   * @generated
+   */
+  EClass getObjectReference();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerReference <em>Integer Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Integer Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerReference
+   * @generated
+   */
+  EClass getIntegerReference();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference <em>Real Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Real Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference
+   * @generated
+   */
+  EClass getRealReference();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringReference <em>String Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringReference
+   * @generated
+   */
+  EClass getStringReference();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration <em>Scope Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Scope Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration
+   * @generated
+   */
+  EClass getScopeDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration#getSpecification <em>Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration#getSpecification()
+   * @see #getScopeDeclaration()
+   * @generated
+   */
+  EReference getScopeDeclaration_Specification();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference <em>Scope Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Scope Reference</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference
+   * @generated
+   */
+  EClass getScopeReference();
+
+  /**
+   * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference#getReferred <em>Referred</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Referred</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference#getReferred()
+   * @see #getScopeReference()
+   * @generated
+   */
+  EReference getScopeReference_Referred();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope <em>Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope
+   * @generated
+   */
+  EClass getScope();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Task <em>Task</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Task</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Task
+   * @generated
+   */
+  EClass getTask();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask <em>Generation Task</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Generation Task</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask
+   * @generated
+   */
+  EClass getGenerationTask();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getMetamodel <em>Metamodel</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Metamodel</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getMetamodel()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_Metamodel();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getPartialModel <em>Partial Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Partial Model</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getPartialModel()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_PartialModel();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getPatterns <em>Patterns</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Patterns</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getPatterns()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_Patterns();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getScope <em>Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getScope()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_Scope();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getNumber <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Number</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getNumber()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EAttribute getGenerationTask_Number();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getRuns <em>Runs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Runs</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getRuns()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EAttribute getGenerationTask_Runs();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getSolver <em>Solver</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Solver</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getSolver()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EAttribute getGenerationTask_Solver();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getConfig <em>Config</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Config</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getConfig()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_Config();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Taget Folder</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_TagetFolder();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getDebugFolder <em>Debug Folder</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Debug Folder</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getDebugFolder()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_DebugFolder();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTargetLogFile <em>Target Log File</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Target Log File</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTargetLogFile()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_TargetLogFile();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTargetStatisticsFile <em>Target Statistics File</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Target Statistics File</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTargetStatisticsFile()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_TargetStatisticsFile();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope <em>Integer Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Integer Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope
+   * @generated
+   */
+  EClass getIntegerScope();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope <em>Real Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Real Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope
+   * @generated
+   */
+  EClass getRealScope();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope <em>String Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope
+   * @generated
+   */
+  EClass getStringScope();
+
+  /**
+   * Returns the meta object for enum '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver <em>Solver</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Solver</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver
+   * @generated
+   */
+  EEnum getSolver();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -753,16 +2835,6 @@ public interface ApplicationConfigurationPackage extends EPackage
     EClass COMMAND = eINSTANCE.getCommand();
 
     /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl <em>Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl
-     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getDeclaration()
-     * @generated
-     */
-    EClass DECLARATION = eINSTANCE.getDeclaration();
-
-    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ImportImpl <em>Import</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -807,6 +2879,88 @@ public interface ApplicationConfigurationPackage extends EPackage
      * @generated
      */
     EReference VIATRA_IMPORT__IMPORTED_VIATRA = eINSTANCE.getViatraImport_ImportedViatra();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl <em>Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.DeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getDeclaration()
+     * @generated
+     */
+    EClass DECLARATION = eINSTANCE.getDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATION__NAME = eINSTANCE.getDeclaration_Name();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileSpecificationImpl <em>File Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileSpecificationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFileSpecification()
+     * @generated
+     */
+    EClass FILE_SPECIFICATION = eINSTANCE.getFileSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FILE_SPECIFICATION__PATH = eINSTANCE.getFileSpecification_Path();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileDeclarationImpl <em>File Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileDeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFileDeclaration()
+     * @generated
+     */
+    EClass FILE_DECLARATION = eINSTANCE.getFileDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FILE_DECLARATION__SPECIFICATION = eINSTANCE.getFileDeclaration_Specification();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileReferenceImpl <em>File Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFileReference()
+     * @generated
+     */
+    EClass FILE_REFERENCE = eINSTANCE.getFileReference();
+
+    /**
+     * The meta object literal for the '<em><b>Referred</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FILE_REFERENCE__REFERRED = eINSTANCE.getFileReference_Referred();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileImpl <em>File</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FileImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFile()
+     * @generated
+     */
+    EClass FILE = eINSTANCE.getFile();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.MetamodelSpecificationImpl <em>Metamodel Specification</em>}' class.
@@ -899,14 +3053,6 @@ public interface ApplicationConfigurationPackage extends EPackage
     EClass METAMODEL_DECLARATION = eINSTANCE.getMetamodelDeclaration();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute METAMODEL_DECLARATION__NAME = eINSTANCE.getMetamodelDeclaration_Name();
-
-    /**
      * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -941,6 +3087,678 @@ public interface ApplicationConfigurationPackage extends EPackage
      * @generated
      */
     EClass METAMODEL = eINSTANCE.getMetamodel();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelSpecificationImpl <em>Partial Model Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelSpecificationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelSpecification()
+     * @generated
+     */
+    EClass PARTIAL_MODEL_SPECIFICATION = eINSTANCE.getPartialModelSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Entry</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARTIAL_MODEL_SPECIFICATION__ENTRY = eINSTANCE.getPartialModelSpecification_Entry();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelEntryImpl <em>Partial Model Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelEntry()
+     * @generated
+     */
+    EClass PARTIAL_MODEL_ENTRY = eINSTANCE.getPartialModelEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Path</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARTIAL_MODEL_ENTRY__PATH = eINSTANCE.getPartialModelEntry_Path();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ModelEntryImpl <em>Model Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ModelEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getModelEntry()
+     * @generated
+     */
+    EClass MODEL_ENTRY = eINSTANCE.getModelEntry();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FolderEntryImpl <em>Folder Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.FolderEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getFolderEntry()
+     * @generated
+     */
+    EClass FOLDER_ENTRY = eINSTANCE.getFolderEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Exclusion</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FOLDER_ENTRY__EXCLUSION = eINSTANCE.getFolderEntry_Exclusion();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelDeclarationImpl <em>Partial Model Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelDeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelDeclaration()
+     * @generated
+     */
+    EClass PARTIAL_MODEL_DECLARATION = eINSTANCE.getPartialModelDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARTIAL_MODEL_DECLARATION__SPECIFICATION = eINSTANCE.getPartialModelDeclaration_Specification();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelReferenceImpl <em>Partial Model Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModelReference()
+     * @generated
+     */
+    EClass PARTIAL_MODEL_REFERENCE = eINSTANCE.getPartialModelReference();
+
+    /**
+     * The meta object literal for the '<em><b>Referred</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARTIAL_MODEL_REFERENCE__REFERRED = eINSTANCE.getPartialModelReference_Referred();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelImpl <em>Partial Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PartialModelImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPartialModel()
+     * @generated
+     */
+    EClass PARTIAL_MODEL = eINSTANCE.getPartialModel();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternSpecificationImpl <em>Pattern Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternSpecificationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPatternSpecification()
+     * @generated
+     */
+    EClass PATTERN_SPECIFICATION = eINSTANCE.getPatternSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PATTERN_SPECIFICATION__ENTRIES = eINSTANCE.getPatternSpecification_Entries();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternEntryImpl <em>Pattern Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPatternEntry()
+     * @generated
+     */
+    EClass PATTERN_ENTRY = eINSTANCE.getPatternEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Package</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PATTERN_ENTRY__PACKAGE = eINSTANCE.getPatternEntry_Package();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.AllPatternEntryImpl <em>All Pattern Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.AllPatternEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getAllPatternEntry()
+     * @generated
+     */
+    EClass ALL_PATTERN_ENTRY = eINSTANCE.getAllPatternEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Exclusuion</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ALL_PATTERN_ENTRY__EXCLUSUION = eINSTANCE.getAllPatternEntry_Exclusuion();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternElementImpl <em>Pattern Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.PatternElementImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getPatternElement()
+     * @generated
+     */
+    EClass PATTERN_ELEMENT = eINSTANCE.getPatternElement();
+
+    /**
+     * The meta object literal for the '<em><b>Pattern</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PATTERN_ELEMENT__PATTERN = eINSTANCE.getPatternElement_Pattern();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternDeclarationImpl <em>Graph Pattern Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternDeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGraphPatternDeclaration()
+     * @generated
+     */
+    EClass GRAPH_PATTERN_DECLARATION = eINSTANCE.getGraphPatternDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GRAPH_PATTERN_DECLARATION__SPECIFICATION = eINSTANCE.getGraphPatternDeclaration_Specification();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternReferenceImpl <em>Graph Pattern Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGraphPatternReference()
+     * @generated
+     */
+    EClass GRAPH_PATTERN_REFERENCE = eINSTANCE.getGraphPatternReference();
+
+    /**
+     * The meta object literal for the '<em><b>Referred</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GRAPH_PATTERN_REFERENCE__REFERRED = eINSTANCE.getGraphPatternReference_Referred();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternImpl <em>Graph Pattern</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GraphPatternImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGraphPattern()
+     * @generated
+     */
+    EClass GRAPH_PATTERN = eINSTANCE.getGraphPattern();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigSpecificationImpl <em>Config Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigSpecificationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigSpecification()
+     * @generated
+     */
+    EClass CONFIG_SPECIFICATION = eINSTANCE.getConfigSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONFIG_SPECIFICATION__ENTRIES = eINSTANCE.getConfigSpecification_Entries();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigDeclarationImpl <em>Config Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigDeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigDeclaration()
+     * @generated
+     */
+    EClass CONFIG_DECLARATION = eINSTANCE.getConfigDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONFIG_DECLARATION__SPECIFICATION = eINSTANCE.getConfigDeclaration_Specification();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigEntryImpl <em>Config Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigEntry()
+     * @generated
+     */
+    EClass CONFIG_ENTRY = eINSTANCE.getConfigEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONFIG_ENTRY__KEY = eINSTANCE.getConfigEntry_Key();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONFIG_ENTRY__VALUE = eINSTANCE.getConfigEntry_Value();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigReferenceImpl <em>Config Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigReference()
+     * @generated
+     */
+    EClass CONFIG_REFERENCE = eINSTANCE.getConfigReference();
+
+    /**
+     * The meta object literal for the '<em><b>Config</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONFIG_REFERENCE__CONFIG = eINSTANCE.getConfigReference_Config();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigImpl <em>Config</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfig()
+     * @generated
+     */
+    EClass CONFIG = eINSTANCE.getConfig();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeSpecificationImpl <em>Scope Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeSpecificationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeSpecification()
+     * @generated
+     */
+    EClass SCOPE_SPECIFICATION = eINSTANCE.getScopeSpecification();
+
+    /**
+     * The meta object literal for the '<em><b>Scopes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCOPE_SPECIFICATION__SCOPES = eINSTANCE.getScopeSpecification_Scopes();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl <em>Type Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeScope()
+     * @generated
+     */
+    EClass TYPE_SCOPE = eINSTANCE.getTypeScope();
+
+    /**
+     * The meta object literal for the '<em><b>Min</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__MIN = eINSTANCE.getTypeScope_Min();
+
+    /**
+     * The meta object literal for the '<em><b>Greather</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__GREATHER = eINSTANCE.getTypeScope_Greather();
+
+    /**
+     * The meta object literal for the '<em><b>Greater Or Equal</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__GREATER_OR_EQUAL = eINSTANCE.getTypeScope_GreaterOrEqual();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TYPE_SCOPE__TYPE = eINSTANCE.getTypeScope_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Less</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__LESS = eINSTANCE.getTypeScope_Less();
+
+    /**
+     * The meta object literal for the '<em><b>Less Or Equal</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__LESS_OR_EQUAL = eINSTANCE.getTypeScope_LessOrEqual();
+
+    /**
+     * The meta object literal for the '<em><b>Max</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__MAX = eINSTANCE.getTypeScope_Max();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeReference()
+     * @generated
+     */
+    EClass TYPE_REFERENCE = eINSTANCE.getTypeReference();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassReferenceImpl <em>Class Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassReference()
+     * @generated
+     */
+    EClass CLASS_REFERENCE = eINSTANCE.getClassReference();
+
+    /**
+     * The meta object literal for the '<em><b>Element</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLASS_REFERENCE__ELEMENT = eINSTANCE.getClassReference_Element();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectReferenceImpl <em>Object Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectReference()
+     * @generated
+     */
+    EClass OBJECT_REFERENCE = eINSTANCE.getObjectReference();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerReferenceImpl <em>Integer Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerReference()
+     * @generated
+     */
+    EClass INTEGER_REFERENCE = eINSTANCE.getIntegerReference();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealReferenceImpl <em>Real Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealReference()
+     * @generated
+     */
+    EClass REAL_REFERENCE = eINSTANCE.getRealReference();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringReferenceImpl <em>String Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringReference()
+     * @generated
+     */
+    EClass STRING_REFERENCE = eINSTANCE.getStringReference();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeDeclarationImpl <em>Scope Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeDeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeDeclaration()
+     * @generated
+     */
+    EClass SCOPE_DECLARATION = eINSTANCE.getScopeDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Specification</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCOPE_DECLARATION__SPECIFICATION = eINSTANCE.getScopeDeclaration_Specification();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeReferenceImpl <em>Scope Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeReferenceImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeReference()
+     * @generated
+     */
+    EClass SCOPE_REFERENCE = eINSTANCE.getScopeReference();
+
+    /**
+     * The meta object literal for the '<em><b>Referred</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCOPE_REFERENCE__REFERRED = eINSTANCE.getScopeReference_Referred();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeImpl <em>Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScope()
+     * @generated
+     */
+    EClass SCOPE = eINSTANCE.getScope();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TaskImpl <em>Task</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TaskImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTask()
+     * @generated
+     */
+    EClass TASK = eINSTANCE.getTask();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl <em>Generation Task</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGenerationTask()
+     * @generated
+     */
+    EClass GENERATION_TASK = eINSTANCE.getGenerationTask();
+
+    /**
+     * The meta object literal for the '<em><b>Metamodel</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__METAMODEL = eINSTANCE.getGenerationTask_Metamodel();
+
+    /**
+     * The meta object literal for the '<em><b>Partial Model</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__PARTIAL_MODEL = eINSTANCE.getGenerationTask_PartialModel();
+
+    /**
+     * The meta object literal for the '<em><b>Patterns</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__PATTERNS = eINSTANCE.getGenerationTask_Patterns();
+
+    /**
+     * The meta object literal for the '<em><b>Scope</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__SCOPE = eINSTANCE.getGenerationTask_Scope();
+
+    /**
+     * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GENERATION_TASK__NUMBER = eINSTANCE.getGenerationTask_Number();
+
+    /**
+     * The meta object literal for the '<em><b>Runs</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GENERATION_TASK__RUNS = eINSTANCE.getGenerationTask_Runs();
+
+    /**
+     * The meta object literal for the '<em><b>Solver</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GENERATION_TASK__SOLVER = eINSTANCE.getGenerationTask_Solver();
+
+    /**
+     * The meta object literal for the '<em><b>Config</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__CONFIG = eINSTANCE.getGenerationTask_Config();
+
+    /**
+     * The meta object literal for the '<em><b>Taget Folder</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__TAGET_FOLDER = eINSTANCE.getGenerationTask_TagetFolder();
+
+    /**
+     * The meta object literal for the '<em><b>Debug Folder</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__DEBUG_FOLDER = eINSTANCE.getGenerationTask_DebugFolder();
+
+    /**
+     * The meta object literal for the '<em><b>Target Log File</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__TARGET_LOG_FILE = eINSTANCE.getGenerationTask_TargetLogFile();
+
+    /**
+     * The meta object literal for the '<em><b>Target Statistics File</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__TARGET_STATISTICS_FILE = eINSTANCE.getGenerationTask_TargetStatisticsFile();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerScopeImpl <em>Integer Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerScope()
+     * @generated
+     */
+    EClass INTEGER_SCOPE = eINSTANCE.getIntegerScope();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealScopeImpl <em>Real Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealScope()
+     * @generated
+     */
+    EClass REAL_SCOPE = eINSTANCE.getRealScope();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringScopeImpl <em>String Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringScope()
+     * @generated
+     */
+    EClass STRING_SCOPE = eINSTANCE.getStringScope();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver <em>Solver</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getSolver()
+     * @generated
+     */
+    EEnum SOLVER = eINSTANCE.getSolver();
 
   }
 

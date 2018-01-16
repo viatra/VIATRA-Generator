@@ -5,13 +5,40 @@ package hu.bme.mit.inf.dslreasoner.application.serializer;
 
 import com.google.inject.Inject;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport;
 import hu.bme.mit.inf.dslreasoner.application.services.ApplicationConfigurationGrammarAccess;
 import java.util.Set;
@@ -42,11 +69,53 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.ALL_PACKAGE_ENTRY:
 				sequence_AllPackageEntry(context, (AllPackageEntry) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.ALL_PATTERN_ENTRY:
+				sequence_AllPatternEntry(context, (AllPatternEntry) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.CLASS_REFERENCE:
+				sequence_ClassReference(context, (ClassReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.CONFIG_DECLARATION:
+				sequence_ConfigDeclaration(context, (ConfigDeclaration) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.CONFIG_ENTRY:
+				sequence_ConfigEntry(context, (ConfigEntry) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.CONFIG_REFERENCE:
+				sequence_ConfigReference(context, (ConfigReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.CONFIG_SPECIFICATION:
+				sequence_ConfigSpecification(context, (ConfigSpecification) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.CONFIGURATION_SCRIPT:
 				sequence_ConfigurationScript(context, (ConfigurationScript) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.EPACKAGE_IMPORT:
 				sequence_EPackageImport(context, (EPackageImport) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.FILE_DECLARATION:
+				sequence_FileDeclaration(context, (FileDeclaration) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.FILE_REFERENCE:
+				sequence_FileReference(context, (FileReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.FILE_SPECIFICATION:
+				sequence_FileSpecification(context, (FileSpecification) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.FOLDER_ENTRY:
+				sequence_FolderEntry(context, (FolderEntry) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.GENERATION_TASK:
+				sequence_GenerationTask(context, (GenerationTask) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.GRAPH_PATTERN_DECLARATION:
+				sequence_GraphPatternDeclaration(context, (GraphPatternDeclaration) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.GRAPH_PATTERN_REFERENCE:
+				sequence_GraphPatternReference(context, (GraphPatternReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.INTEGER_SCOPE:
+				sequence_IntegerReference(context, (IntegerScope) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.METAMODEL_DECLARATION:
 				sequence_MetamodelDeclaration(context, (MetamodelDeclaration) semanticObject); 
@@ -59,6 +128,45 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 				return; 
 			case ApplicationConfigurationPackage.METAMODEL_SPECIFICATION:
 				sequence_MetamodelSpecification(context, (MetamodelSpecification) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.MODEL_ENTRY:
+				sequence_ModelEntry(context, (ModelEntry) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.OBJECT_REFERENCE:
+				sequence_ObjectReference(context, (ObjectReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.PARTIAL_MODEL_DECLARATION:
+				sequence_PartialModelDeclaration(context, (PartialModelDeclaration) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.PARTIAL_MODEL_REFERENCE:
+				sequence_PartialModelReference(context, (PartialModelReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.PARTIAL_MODEL_SPECIFICATION:
+				sequence_PartialModelSpecification(context, (PartialModelSpecification) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.PATTERN_ELEMENT:
+				sequence_PatternElement(context, (PatternElement) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.PATTERN_SPECIFICATION:
+				sequence_PatternSpecification(context, (PatternSpecification) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.REAL_SCOPE:
+				sequence_RealReference(context, (RealScope) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.SCOPE_DECLARATION:
+				sequence_ScopeDeclaration(context, (ScopeDeclaration) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.SCOPE_REFERENCE:
+				sequence_ScopeReference(context, (ScopeReference) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.SCOPE_SPECIFICATION:
+				sequence_ScopeSpecification(context, (ScopeSpecification) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.STRING_SCOPE:
+				sequence_StringReference(context, (StringScope) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.TYPE_SCOPE:
+				sequence_TypeScope(context, (TypeScope) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.VIATRA_IMPORT:
 				sequence_ViatraImport(context, (ViatraImport) semanticObject); 
@@ -74,9 +182,117 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     AllPackageEntry returns AllPackageEntry
 	 *
 	 * Constraint:
-	 *     (package=[EPackage|ID] (exclusion+=MetamodelElement exclusion+=MetamodelElement*)?)
+	 *     (package=[EPackage|QualifiedName] (exclusion+=MetamodelElement exclusion+=MetamodelElement*)?)
 	 */
 	protected void sequence_AllPackageEntry(ISerializationContext context, AllPackageEntry semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PatternEntry returns AllPatternEntry
+	 *     AllPatternEntry returns AllPatternEntry
+	 *
+	 * Constraint:
+	 *     (package=[PatternModel|QualifiedName] (exclusuion+=PatternElement exclusuion+=PatternElement*)?)
+	 */
+	protected void sequence_AllPatternEntry(ISerializationContext context, AllPatternEntry semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeReference returns ClassReference
+	 *     ClassReference returns ClassReference
+	 *
+	 * Constraint:
+	 *     element=MetamodelElement
+	 */
+	protected void sequence_ClassReference(ISerializationContext context, ClassReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CLASS_REFERENCE__ELEMENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CLASS_REFERENCE__ELEMENT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getClassReferenceAccess().getElementMetamodelElementParserRuleCall_1_0(), semanticObject.getElement());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns ConfigDeclaration
+	 *     Declaration returns ConfigDeclaration
+	 *     ConfigDeclaration returns ConfigDeclaration
+	 *
+	 * Constraint:
+	 *     (name=ID specification=ConfigSpecification)
+	 */
+	protected void sequence_ConfigDeclaration(ISerializationContext context, ConfigDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_DECLARATION__SPECIFICATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_DECLARATION__SPECIFICATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConfigDeclarationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getConfigDeclarationAccess().getSpecificationConfigSpecificationParserRuleCall_2_0(), semanticObject.getSpecification());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConfigEntry returns ConfigEntry
+	 *
+	 * Constraint:
+	 *     (key=STRING value=STRING)
+	 */
+	protected void sequence_ConfigEntry(ISerializationContext context, ConfigEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__KEY));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConfigEntryAccess().getKeySTRINGTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getConfigEntryAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConfigReference returns ConfigReference
+	 *     Config returns ConfigReference
+	 *
+	 * Constraint:
+	 *     config=[ConfigDeclaration|ID]
+	 */
+	protected void sequence_ConfigReference(ISerializationContext context, ConfigReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_REFERENCE__CONFIG) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_REFERENCE__CONFIG));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConfigReferenceAccess().getConfigConfigDeclarationIDTerminalRuleCall_0_1(), semanticObject.getConfig());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConfigSpecification returns ConfigSpecification
+	 *     Config returns ConfigSpecification
+	 *
+	 * Constraint:
+	 *     (entries+=ConfigEntry entries+=ConfigEntry*)?
+	 */
+	protected void sequence_ConfigSpecification(ISerializationContext context, ConfigSpecification semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -114,6 +330,162 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     Command returns FileDeclaration
+	 *     Declaration returns FileDeclaration
+	 *     FileDeclaration returns FileDeclaration
+	 *
+	 * Constraint:
+	 *     (name=ID specification=FileSpecification)
+	 */
+	protected void sequence_FileDeclaration(ISerializationContext context, FileDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.FILE_DECLARATION__SPECIFICATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.FILE_DECLARATION__SPECIFICATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFileDeclarationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getFileDeclarationAccess().getSpecificationFileSpecificationParserRuleCall_3_0(), semanticObject.getSpecification());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     FileReference returns FileReference
+	 *     File returns FileReference
+	 *
+	 * Constraint:
+	 *     referred=[FileDeclaration|ID]
+	 */
+	protected void sequence_FileReference(ISerializationContext context, FileReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.FILE_REFERENCE__REFERRED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.FILE_REFERENCE__REFERRED));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFileReferenceAccess().getReferredFileDeclarationIDTerminalRuleCall_0_1(), semanticObject.getReferred());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     FileSpecification returns FileSpecification
+	 *     File returns FileSpecification
+	 *
+	 * Constraint:
+	 *     path=STRING
+	 */
+	protected void sequence_FileSpecification(ISerializationContext context, FileSpecification semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.FILE_SPECIFICATION__PATH) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.FILE_SPECIFICATION__PATH));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFileSpecificationAccess().getPathSTRINGTerminalRuleCall_0(), semanticObject.getPath());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PartialModelEntry returns FolderEntry
+	 *     FolderEntry returns FolderEntry
+	 *
+	 * Constraint:
+	 *     (path=File (exclusion+=ModelEntry exclusion+=ModelEntry*)?)
+	 */
+	protected void sequence_FolderEntry(ISerializationContext context, FolderEntry semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns GenerationTask
+	 *     Task returns GenerationTask
+	 *     GenerationTask returns GenerationTask
+	 *
+	 * Constraint:
+	 *     (
+	 *         metamodel=Metamodel | 
+	 *         partialModel=PartialModel | 
+	 *         patterns=GraphPattern | 
+	 *         scope=Scope | 
+	 *         number=INT | 
+	 *         runs=INT | 
+	 *         solver=Solver | 
+	 *         config=Config | 
+	 *         tagetFolder=File | 
+	 *         debugFolder=File | 
+	 *         targetLogFile=File | 
+	 *         targetStatisticsFile=File
+	 *     )*
+	 */
+	protected void sequence_GenerationTask(ISerializationContext context, GenerationTask semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns GraphPatternDeclaration
+	 *     Declaration returns GraphPatternDeclaration
+	 *     GraphPatternDeclaration returns GraphPatternDeclaration
+	 *
+	 * Constraint:
+	 *     (name=ID specification=PatternSpecification)
+	 */
+	protected void sequence_GraphPatternDeclaration(ISerializationContext context, GraphPatternDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.GRAPH_PATTERN_DECLARATION__SPECIFICATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.GRAPH_PATTERN_DECLARATION__SPECIFICATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGraphPatternDeclarationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getGraphPatternDeclarationAccess().getSpecificationPatternSpecificationParserRuleCall_2_0(), semanticObject.getSpecification());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GraphPatternReference returns GraphPatternReference
+	 *     GraphPattern returns GraphPatternReference
+	 *
+	 * Constraint:
+	 *     referred=[GraphPatternDeclaration|ID]
+	 */
+	protected void sequence_GraphPatternReference(ISerializationContext context, GraphPatternReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.GRAPH_PATTERN_REFERENCE__REFERRED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.GRAPH_PATTERN_REFERENCE__REFERRED));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGraphPatternReferenceAccess().getReferredGraphPatternDeclarationIDTerminalRuleCall_0_1(), semanticObject.getReferred());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeReference returns IntegerScope
+	 *     IntegerReference returns IntegerScope
+	 *
+	 * Constraint:
+	 *     {IntegerScope}
+	 */
+	protected void sequence_IntegerReference(ISerializationContext context, IntegerScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Command returns MetamodelDeclaration
 	 *     Declaration returns MetamodelDeclaration
 	 *     MetamodelDeclaration returns MetamodelDeclaration
@@ -123,8 +495,8 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 */
 	protected void sequence_MetamodelDeclaration(ISerializationContext context, MetamodelDeclaration semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.METAMODEL_DECLARATION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.METAMODEL_DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME));
 			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.METAMODEL_DECLARATION__SPECIFICATION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.METAMODEL_DECLARATION__SPECIFICATION));
 		}
@@ -141,7 +513,7 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     MetamodelElement returns MetamodelElement
 	 *
 	 * Constraint:
-	 *     (package=[EPackage|ID]? classifier=[EClassifier|ID] feature=[ENamedElement|ID]?)
+	 *     (package=[EPackage|QualifiedName]? classifier=[EClassifier|ID] feature=[ENamedElement|ID]?)
 	 */
 	protected void sequence_MetamodelElement(ISerializationContext context, MetamodelElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -176,6 +548,212 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     (entries+=MetamodelEntry entries+=MetamodelEntry*)
 	 */
 	protected void sequence_MetamodelSpecification(ISerializationContext context, MetamodelSpecification semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PartialModelEntry returns ModelEntry
+	 *     ModelEntry returns ModelEntry
+	 *
+	 * Constraint:
+	 *     path=File
+	 */
+	protected void sequence_ModelEntry(ISerializationContext context, ModelEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.PARTIAL_MODEL_ENTRY__PATH) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.PARTIAL_MODEL_ENTRY__PATH));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getModelEntryAccess().getPathFileParserRuleCall_0(), semanticObject.getPath());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeReference returns ObjectReference
+	 *     ObjectReference returns ObjectReference
+	 *
+	 * Constraint:
+	 *     {ObjectReference}
+	 */
+	protected void sequence_ObjectReference(ISerializationContext context, ObjectReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns PartialModelDeclaration
+	 *     Declaration returns PartialModelDeclaration
+	 *     PartialModelDeclaration returns PartialModelDeclaration
+	 *
+	 * Constraint:
+	 *     (name=ID specification=PartialModelSpecification)
+	 */
+	protected void sequence_PartialModelDeclaration(ISerializationContext context, PartialModelDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.PARTIAL_MODEL_DECLARATION__SPECIFICATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.PARTIAL_MODEL_DECLARATION__SPECIFICATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPartialModelDeclarationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getPartialModelDeclarationAccess().getSpecificationPartialModelSpecificationParserRuleCall_2_0(), semanticObject.getSpecification());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PartialModelReference returns PartialModelReference
+	 *     PartialModel returns PartialModelReference
+	 *
+	 * Constraint:
+	 *     referred=[PartialModelDeclaration|ID]
+	 */
+	protected void sequence_PartialModelReference(ISerializationContext context, PartialModelReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.PARTIAL_MODEL_REFERENCE__REFERRED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.PARTIAL_MODEL_REFERENCE__REFERRED));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPartialModelReferenceAccess().getReferredPartialModelDeclarationIDTerminalRuleCall_0_1(), semanticObject.getReferred());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PartialModelSpecification returns PartialModelSpecification
+	 *     PartialModel returns PartialModelSpecification
+	 *
+	 * Constraint:
+	 *     (entry+=PartialModelEntry entry+=PartialModelEntry?)
+	 */
+	protected void sequence_PartialModelSpecification(ISerializationContext context, PartialModelSpecification semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PatternEntry returns PatternElement
+	 *     PatternElement returns PatternElement
+	 *
+	 * Constraint:
+	 *     (package=[PatternModel|QualifiedName]? pattern=[Pattern|ID])
+	 */
+	protected void sequence_PatternElement(ISerializationContext context, PatternElement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PatternSpecification returns PatternSpecification
+	 *     GraphPattern returns PatternSpecification
+	 *
+	 * Constraint:
+	 *     (entries+=PatternEntry entries+=PatternEntry*)
+	 */
+	protected void sequence_PatternSpecification(ISerializationContext context, PatternSpecification semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeReference returns RealScope
+	 *     RealReference returns RealScope
+	 *
+	 * Constraint:
+	 *     {RealScope}
+	 */
+	protected void sequence_RealReference(ISerializationContext context, RealScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns ScopeDeclaration
+	 *     Declaration returns ScopeDeclaration
+	 *     ScopeDeclaration returns ScopeDeclaration
+	 *
+	 * Constraint:
+	 *     (name=ID specification=ScopeSpecification)
+	 */
+	protected void sequence_ScopeDeclaration(ISerializationContext context, ScopeDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.SCOPE_DECLARATION__SPECIFICATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.SCOPE_DECLARATION__SPECIFICATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScopeDeclarationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getScopeDeclarationAccess().getSpecificationScopeSpecificationParserRuleCall_2_0(), semanticObject.getSpecification());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ScopeReference returns ScopeReference
+	 *     Scope returns ScopeReference
+	 *
+	 * Constraint:
+	 *     referred=[ScopeDeclaration|ID]
+	 */
+	protected void sequence_ScopeReference(ISerializationContext context, ScopeReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.SCOPE_REFERENCE__REFERRED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.SCOPE_REFERENCE__REFERRED));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScopeReferenceAccess().getReferredScopeDeclarationIDTerminalRuleCall_0_1(), semanticObject.getReferred());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ScopeSpecification returns ScopeSpecification
+	 *     Scope returns ScopeSpecification
+	 *
+	 * Constraint:
+	 *     (scopes+=TypeScope scopes+=TypeScope*)?
+	 */
+	protected void sequence_ScopeSpecification(ISerializationContext context, ScopeSpecification semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeReference returns StringScope
+	 *     StringReference returns StringScope
+	 *
+	 * Constraint:
+	 *     {StringScope}
+	 */
+	protected void sequence_StringReference(ISerializationContext context, StringScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeScope returns TypeScope
+	 *
+	 * Constraint:
+	 *     ((min=INT (greather?='<' | greaterOrEqual?='<='))? type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?)
+	 */
+	protected void sequence_TypeScope(ISerializationContext context, TypeScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

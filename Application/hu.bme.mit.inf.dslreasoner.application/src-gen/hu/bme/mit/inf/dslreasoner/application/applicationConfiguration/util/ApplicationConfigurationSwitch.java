@@ -87,14 +87,6 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ApplicationConfigurationPackage.DECLARATION:
-      {
-        Declaration declaration = (Declaration)theEObject;
-        T result = caseDeclaration(declaration);
-        if (result == null) result = caseCommand(declaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case ApplicationConfigurationPackage.IMPORT:
       {
         Import import_ = (Import)theEObject;
@@ -115,6 +107,46 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         ViatraImport viatraImport = (ViatraImport)theEObject;
         T result = caseViatraImport(viatraImport);
         if (result == null) result = caseImport(viatraImport);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.DECLARATION:
+      {
+        Declaration declaration = (Declaration)theEObject;
+        T result = caseDeclaration(declaration);
+        if (result == null) result = caseCommand(declaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.FILE_SPECIFICATION:
+      {
+        FileSpecification fileSpecification = (FileSpecification)theEObject;
+        T result = caseFileSpecification(fileSpecification);
+        if (result == null) result = caseFile(fileSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.FILE_DECLARATION:
+      {
+        FileDeclaration fileDeclaration = (FileDeclaration)theEObject;
+        T result = caseFileDeclaration(fileDeclaration);
+        if (result == null) result = caseDeclaration(fileDeclaration);
+        if (result == null) result = caseCommand(fileDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.FILE_REFERENCE:
+      {
+        FileReference fileReference = (FileReference)theEObject;
+        T result = caseFileReference(fileReference);
+        if (result == null) result = caseFile(fileReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.FILE:
+      {
+        File file = (File)theEObject;
+        T result = caseFile(file);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -173,6 +205,285 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ApplicationConfigurationPackage.PARTIAL_MODEL_SPECIFICATION:
+      {
+        PartialModelSpecification partialModelSpecification = (PartialModelSpecification)theEObject;
+        T result = casePartialModelSpecification(partialModelSpecification);
+        if (result == null) result = casePartialModel(partialModelSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PARTIAL_MODEL_ENTRY:
+      {
+        PartialModelEntry partialModelEntry = (PartialModelEntry)theEObject;
+        T result = casePartialModelEntry(partialModelEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.MODEL_ENTRY:
+      {
+        ModelEntry modelEntry = (ModelEntry)theEObject;
+        T result = caseModelEntry(modelEntry);
+        if (result == null) result = casePartialModelEntry(modelEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.FOLDER_ENTRY:
+      {
+        FolderEntry folderEntry = (FolderEntry)theEObject;
+        T result = caseFolderEntry(folderEntry);
+        if (result == null) result = casePartialModelEntry(folderEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PARTIAL_MODEL_DECLARATION:
+      {
+        PartialModelDeclaration partialModelDeclaration = (PartialModelDeclaration)theEObject;
+        T result = casePartialModelDeclaration(partialModelDeclaration);
+        if (result == null) result = caseDeclaration(partialModelDeclaration);
+        if (result == null) result = caseCommand(partialModelDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PARTIAL_MODEL_REFERENCE:
+      {
+        PartialModelReference partialModelReference = (PartialModelReference)theEObject;
+        T result = casePartialModelReference(partialModelReference);
+        if (result == null) result = casePartialModel(partialModelReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PARTIAL_MODEL:
+      {
+        PartialModel partialModel = (PartialModel)theEObject;
+        T result = casePartialModel(partialModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PATTERN_SPECIFICATION:
+      {
+        PatternSpecification patternSpecification = (PatternSpecification)theEObject;
+        T result = casePatternSpecification(patternSpecification);
+        if (result == null) result = caseGraphPattern(patternSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PATTERN_ENTRY:
+      {
+        PatternEntry patternEntry = (PatternEntry)theEObject;
+        T result = casePatternEntry(patternEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.ALL_PATTERN_ENTRY:
+      {
+        AllPatternEntry allPatternEntry = (AllPatternEntry)theEObject;
+        T result = caseAllPatternEntry(allPatternEntry);
+        if (result == null) result = casePatternEntry(allPatternEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.PATTERN_ELEMENT:
+      {
+        PatternElement patternElement = (PatternElement)theEObject;
+        T result = casePatternElement(patternElement);
+        if (result == null) result = casePatternEntry(patternElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.GRAPH_PATTERN_DECLARATION:
+      {
+        GraphPatternDeclaration graphPatternDeclaration = (GraphPatternDeclaration)theEObject;
+        T result = caseGraphPatternDeclaration(graphPatternDeclaration);
+        if (result == null) result = caseDeclaration(graphPatternDeclaration);
+        if (result == null) result = caseCommand(graphPatternDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.GRAPH_PATTERN_REFERENCE:
+      {
+        GraphPatternReference graphPatternReference = (GraphPatternReference)theEObject;
+        T result = caseGraphPatternReference(graphPatternReference);
+        if (result == null) result = caseGraphPattern(graphPatternReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.GRAPH_PATTERN:
+      {
+        GraphPattern graphPattern = (GraphPattern)theEObject;
+        T result = caseGraphPattern(graphPattern);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CONFIG_SPECIFICATION:
+      {
+        ConfigSpecification configSpecification = (ConfigSpecification)theEObject;
+        T result = caseConfigSpecification(configSpecification);
+        if (result == null) result = caseConfig(configSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CONFIG_DECLARATION:
+      {
+        ConfigDeclaration configDeclaration = (ConfigDeclaration)theEObject;
+        T result = caseConfigDeclaration(configDeclaration);
+        if (result == null) result = caseDeclaration(configDeclaration);
+        if (result == null) result = caseCommand(configDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CONFIG_ENTRY:
+      {
+        ConfigEntry configEntry = (ConfigEntry)theEObject;
+        T result = caseConfigEntry(configEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CONFIG_REFERENCE:
+      {
+        ConfigReference configReference = (ConfigReference)theEObject;
+        T result = caseConfigReference(configReference);
+        if (result == null) result = caseConfig(configReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CONFIG:
+      {
+        Config config = (Config)theEObject;
+        T result = caseConfig(config);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.SCOPE_SPECIFICATION:
+      {
+        ScopeSpecification scopeSpecification = (ScopeSpecification)theEObject;
+        T result = caseScopeSpecification(scopeSpecification);
+        if (result == null) result = caseScope(scopeSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.TYPE_SCOPE:
+      {
+        TypeScope typeScope = (TypeScope)theEObject;
+        T result = caseTypeScope(typeScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.TYPE_REFERENCE:
+      {
+        TypeReference typeReference = (TypeReference)theEObject;
+        T result = caseTypeReference(typeReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CLASS_REFERENCE:
+      {
+        ClassReference classReference = (ClassReference)theEObject;
+        T result = caseClassReference(classReference);
+        if (result == null) result = caseTypeReference(classReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.OBJECT_REFERENCE:
+      {
+        ObjectReference objectReference = (ObjectReference)theEObject;
+        T result = caseObjectReference(objectReference);
+        if (result == null) result = caseTypeReference(objectReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.INTEGER_REFERENCE:
+      {
+        IntegerReference integerReference = (IntegerReference)theEObject;
+        T result = caseIntegerReference(integerReference);
+        if (result == null) result = caseTypeReference(integerReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.REAL_REFERENCE:
+      {
+        RealReference realReference = (RealReference)theEObject;
+        T result = caseRealReference(realReference);
+        if (result == null) result = caseTypeReference(realReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.STRING_REFERENCE:
+      {
+        StringReference stringReference = (StringReference)theEObject;
+        T result = caseStringReference(stringReference);
+        if (result == null) result = caseTypeReference(stringReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.SCOPE_DECLARATION:
+      {
+        ScopeDeclaration scopeDeclaration = (ScopeDeclaration)theEObject;
+        T result = caseScopeDeclaration(scopeDeclaration);
+        if (result == null) result = caseDeclaration(scopeDeclaration);
+        if (result == null) result = caseCommand(scopeDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.SCOPE_REFERENCE:
+      {
+        ScopeReference scopeReference = (ScopeReference)theEObject;
+        T result = caseScopeReference(scopeReference);
+        if (result == null) result = caseScope(scopeReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.SCOPE:
+      {
+        Scope scope = (Scope)theEObject;
+        T result = caseScope(scope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.TASK:
+      {
+        Task task = (Task)theEObject;
+        T result = caseTask(task);
+        if (result == null) result = caseCommand(task);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.GENERATION_TASK:
+      {
+        GenerationTask generationTask = (GenerationTask)theEObject;
+        T result = caseGenerationTask(generationTask);
+        if (result == null) result = caseTask(generationTask);
+        if (result == null) result = caseCommand(generationTask);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.INTEGER_SCOPE:
+      {
+        IntegerScope integerScope = (IntegerScope)theEObject;
+        T result = caseIntegerScope(integerScope);
+        if (result == null) result = caseIntegerReference(integerScope);
+        if (result == null) result = caseTypeReference(integerScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.REAL_SCOPE:
+      {
+        RealScope realScope = (RealScope)theEObject;
+        T result = caseRealScope(realScope);
+        if (result == null) result = caseRealReference(realScope);
+        if (result == null) result = caseTypeReference(realScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.STRING_SCOPE:
+      {
+        StringScope stringScope = (StringScope)theEObject;
+        T result = caseStringScope(stringScope);
+        if (result == null) result = caseStringReference(stringScope);
+        if (result == null) result = caseTypeReference(stringScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -205,22 +516,6 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseCommand(Command object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDeclaration(Declaration object)
   {
     return null;
   }
@@ -269,6 +564,86 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseViatraImport(ViatraImport object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDeclaration(Declaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>File Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>File Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFileSpecification(FileSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>File Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>File Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFileDeclaration(FileDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>File Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>File Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFileReference(FileReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>File</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>File</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFile(File object)
   {
     return null;
   }
@@ -381,6 +756,566 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMetamodel(Metamodel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Partial Model Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Partial Model Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePartialModelSpecification(PartialModelSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Partial Model Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Partial Model Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePartialModelEntry(PartialModelEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Model Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Model Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseModelEntry(ModelEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Folder Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Folder Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFolderEntry(FolderEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Partial Model Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Partial Model Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePartialModelDeclaration(PartialModelDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Partial Model Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Partial Model Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePartialModelReference(PartialModelReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Partial Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Partial Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePartialModel(PartialModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Pattern Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Pattern Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePatternSpecification(PatternSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Pattern Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Pattern Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePatternEntry(PatternEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>All Pattern Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>All Pattern Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAllPatternEntry(AllPatternEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Pattern Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Pattern Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePatternElement(PatternElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Graph Pattern Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Graph Pattern Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGraphPatternDeclaration(GraphPatternDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Graph Pattern Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Graph Pattern Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGraphPatternReference(GraphPatternReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Graph Pattern</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Graph Pattern</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGraphPattern(GraphPattern object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigSpecification(ConfigSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigDeclaration(ConfigDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigEntry(ConfigEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigReference(ConfigReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfig(Config object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Scope Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scope Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScopeSpecification(ScopeSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeScope(TypeScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeReference(TypeReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Class Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Class Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClassReference(ClassReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Object Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Object Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseObjectReference(ObjectReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Integer Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Integer Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntegerReference(IntegerReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Real Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Real Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRealReference(RealReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringReference(StringReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Scope Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scope Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScopeDeclaration(ScopeDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Scope Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scope Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScopeReference(ScopeReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScope(Scope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Task</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Task</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTask(Task object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Generation Task</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Generation Task</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGenerationTask(GenerationTask object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Integer Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Integer Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntegerScope(IntegerScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Real Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Real Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRealScope(RealScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringScope(StringScope object)
   {
     return null;
   }
