@@ -55,7 +55,7 @@ class ParseUtil {
     }
 	
 //	@Inject
-//   	var ParseHelper<PatternModel> parseHelper;
+//  var ParseHelper<PatternModel> parseHelper;
     val builder = new SpecificationBuilder
 	
 	public def parse(CharSequence vqlFileContent) {

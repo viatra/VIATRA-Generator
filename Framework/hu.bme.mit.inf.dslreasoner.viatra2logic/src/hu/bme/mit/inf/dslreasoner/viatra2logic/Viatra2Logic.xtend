@@ -41,7 +41,7 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 @Data class ViatraQuerySetDescriptor {
 	val List<? extends IQuerySpecification<?>> patterns
 	val Set<? extends IQuerySpecification<?>> validationPatterns
-	val Map<PQuery,EStructuralFeature> derivedFeatures
+	val Map<IQuerySpecification<?>,EStructuralFeature> derivedFeatures
 }
 class Viatra2LogicTrace {
 	public val Map<PQuery, RelationDefinition> query2Relation = new HashMap
@@ -155,7 +155,7 @@ class  Viatra2Logic {
 	
 	def transformQueryConstraints(
 		Set<? extends IQuerySpecification<?>> validationPatterns,
-		Map<PQuery,EStructuralFeature> derivedFeatures,
+		Map<IQuerySpecification<?>,EStructuralFeature> derivedFeatures,
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
 		Viatra2LogicTrace viatra2LogicTrace)
 	{
@@ -179,7 +179,7 @@ class  Viatra2Logic {
 			ecore2LogicTrace.output.annotations.add(annotation)
 		}
 		for(derivedFeature : derivedFeatures.entrySet) {
-			val relationDefinition = derivedFeature.key.lookup(viatra2LogicTrace.query2Relation)
+			val relationDefinition = derivedFeature.key.internalQueryRepresentation.lookup(viatra2LogicTrace.query2Relation)
 			val feature = derivedFeature.value
 			if(feature instanceof EAttribute) {
 				val declaration = ecore2Logic.relationOfAttribute(ecore2LogicTrace.trace,feature)
@@ -190,7 +190,7 @@ class  Viatra2Logic {
 			} else throw new IllegalArgumentException('''Unknown feature: «feature»''')
 			val annotation = createDefinedByDerivedFeature => [
 				it.target = relationDefinition.defines
-				it.query = derivedFeature.key.lookup(viatra2LogicTrace.query2Annotation)
+				it.query = derivedFeature.key.internalQueryRepresentation.lookup(viatra2LogicTrace.query2Annotation)
 			]
 			ecore2LogicTrace.output.annotations+=annotation
 		}

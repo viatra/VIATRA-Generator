@@ -74,8 +74,8 @@ class FAMLoader extends MetamodelLoader{
 		val patterns = i.specifications.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
-		derivedFeatures.put(i.type.internalQueryRepresentation,metamodel.attributes.filter[it.name == "type"].head)
-		derivedFeatures.put(i.model.internalQueryRepresentation,metamodel.references.filter[it.name == "model"].head)
+		derivedFeatures.put(i.type,metamodel.attributes.filter[it.name == "type"].head)
+		derivedFeatures.put(i.model,metamodel.references.filter[it.name == "model"].head)
 		val res = new ViatraQuerySetDescriptor(
 			patterns,
 			wfPatterns,
@@ -196,7 +196,7 @@ class FileSystemLoader extends MetamodelLoader{
 		val patterns = patternGroup.specifications.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
 		val derivedFeatures = new HashMap
-		derivedFeatures.put(patternGroup.live.internalQueryRepresentation,metamodel.references.filter[it.name == "live"].head)
+		derivedFeatures.put(patternGroup.live,metamodel.references.filter[it.name == "live"].head)
 		return new ViatraQuerySetDescriptor(
 			patterns,
 			wfPatterns,

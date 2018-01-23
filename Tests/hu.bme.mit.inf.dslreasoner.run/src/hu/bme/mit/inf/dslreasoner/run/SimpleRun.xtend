@@ -34,6 +34,8 @@ import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import java.util.LinkedList
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicStructureBuilder
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 
 class SimpleRun {
 	
@@ -93,6 +95,11 @@ class SimpleRun {
 		val interpretations = reasoner.getInterpretations(solution as ModelResult)
 		val models = new LinkedList
 		for(interpretation : interpretations) {
+			val extension b = new LogicStructureBuilder
+			val extension a = new LogicProblemBuilder
+			
+			
+			
 			val instanceModel = logic2Ecore.transformInterpretation(interpretation,modelGenerationProblem.trace)
 			models+=instanceModel
 		}
@@ -115,8 +122,8 @@ class SimpleRun {
 		val patterns = i.specifications.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
-		derivedFeatures.put(i.type.internalQueryRepresentation,metamodel.attributes.filter[it.name == "type"].head)
-		derivedFeatures.put(i.model.internalQueryRepresentation,metamodel.references.filter[it.name == "model"].head)
+		derivedFeatures.put(i.type,metamodel.attributes.filter[it.name == "type"].head)
+		derivedFeatures.put(i.model,metamodel.references.filter[it.name == "model"].head)
 		val res = new ViatraQuerySetDescriptor(
 			patterns,
 			wfPatterns,
