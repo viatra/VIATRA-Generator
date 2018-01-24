@@ -1221,9 +1221,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_Min()
+  public EReference getTypeScope_Type()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(0);
+    return (EReference)typeScopeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1231,7 +1231,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_Greather()
+  public EAttribute getTypeScope_SetsNew()
   {
     return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(1);
   }
@@ -1241,7 +1241,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_GreaterOrEqual()
+  public EAttribute getTypeScope_SetsSum()
   {
     return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(2);
   }
@@ -1251,9 +1251,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeScope_Type()
+  public EAttribute getTypeScope_Min()
   {
-    return (EReference)typeScopeEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1261,7 +1261,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_Less()
+  public EAttribute getTypeScope_MaxUnlimited()
   {
     return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(4);
   }
@@ -1271,19 +1271,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_LessOrEqual()
-  {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(5);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getTypeScope_Max()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -1723,12 +1713,11 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     createEReference(scopeSpecificationEClass, SCOPE_SPECIFICATION__SCOPES);
 
     typeScopeEClass = createEClass(TYPE_SCOPE);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__MIN);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__GREATHER);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__GREATER_OR_EQUAL);
     createEReference(typeScopeEClass, TYPE_SCOPE__TYPE);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__LESS);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__LESS_OR_EQUAL);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__SETS_NEW);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__SETS_SUM);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__MIN);
+    createEAttribute(typeScopeEClass, TYPE_SCOPE__MAX_UNLIMITED);
     createEAttribute(typeScopeEClass, TYPE_SCOPE__MAX);
 
     typeReferenceEClass = createEClass(TYPE_REFERENCE);
@@ -1957,12 +1946,11 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEReference(getScopeSpecification_Scopes(), this.getTypeScope(), null, "scopes", null, 0, -1, ScopeSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeScopeEClass, TypeScope.class, "TypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeScope_Min(), theEcorePackage.getEInt(), "min", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_Greather(), theEcorePackage.getEBoolean(), "greather", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_GreaterOrEqual(), theEcorePackage.getEBoolean(), "greaterOrEqual", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTypeScope_Type(), this.getTypeReference(), null, "type", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_Less(), theEcorePackage.getEBoolean(), "less", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_LessOrEqual(), theEcorePackage.getEBoolean(), "lessOrEqual", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_SetsNew(), theEcorePackage.getEBoolean(), "setsNew", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_SetsSum(), theEcorePackage.getEBoolean(), "setsSum", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_Min(), theEcorePackage.getEInt(), "min", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeScope_MaxUnlimited(), theEcorePackage.getEBoolean(), "maxUnlimited", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTypeScope_Max(), theEcorePackage.getEInt(), "max", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeReferenceEClass, TypeReference.class, "TypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

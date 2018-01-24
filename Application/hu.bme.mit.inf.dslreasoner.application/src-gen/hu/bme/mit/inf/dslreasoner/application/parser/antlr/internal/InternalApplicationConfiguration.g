@@ -1212,9 +1212,9 @@ rulePartialModelDeclaration returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='partial-model'
+		otherlv_0='models'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getPartialModelDeclarationAccess().getPartialModelKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getPartialModelDeclarationAccess().getModelsKeyword_0());
 		}
 		(
 			(
@@ -2067,67 +2067,16 @@ ruleTypeScope returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				(
-					lv_min_0_0=RULE_INT
-					{
-						newLeafNode(lv_min_0_0, grammarAccess.getTypeScopeAccess().getMinINTTerminalRuleCall_0_0_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getTypeScopeRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"min",
-							lv_min_0_0,
-							"org.eclipse.xtext.common.Terminals.INT");
-					}
-				)
-			)
-			(
-				(
-					(
-						lv_greather_1_0='<'
-						{
-							newLeafNode(lv_greather_1_0, grammarAccess.getTypeScopeAccess().getGreatherLessThanSignKeyword_0_1_0_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getTypeScopeRule());
-							}
-							setWithLastConsumed($current, "greather", true, "<");
-						}
-					)
-				)
-				    |
-				(
-					(
-						lv_greaterOrEqual_2_0='<='
-						{
-							newLeafNode(lv_greaterOrEqual_2_0, grammarAccess.getTypeScopeAccess().getGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getTypeScopeRule());
-							}
-							setWithLastConsumed($current, "greaterOrEqual", true, "<=");
-						}
-					)
-				)
-			)
-		)?
-		otherlv_3='#'
+		otherlv_0='#'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getTypeScopeAccess().getNumberSignKeyword_1());
+			newLeafNode(otherlv_0, grammarAccess.getTypeScopeAccess().getNumberSignKeyword_0());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTypeScopeAccess().getTypeTypeReferenceParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTypeScopeAccess().getTypeTypeReferenceParserRuleCall_1_0());
 				}
-				lv_type_4_0=ruleTypeReference
+				lv_type_1_0=ruleTypeReference
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTypeScopeRule());
@@ -2135,7 +2084,7 @@ ruleTypeScope returns [EObject current=null]
 					set(
 						$current,
 						"type",
-						lv_type_4_0,
+						lv_type_1_0,
 						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeReference");
 					afterParserOrEnumRuleCall();
 				}
@@ -2144,51 +2093,90 @@ ruleTypeScope returns [EObject current=null]
 		(
 			(
 				(
+					lv_setsNew_2_0='+='
+					{
+						newLeafNode(lv_setsNew_2_0, grammarAccess.getTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsNew", true, "+=");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_setsSum_3_0='='
+					{
+						newLeafNode(lv_setsSum_3_0, grammarAccess.getTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsSum", true, "=");
+					}
+				)
+			)
+		)
+		(
+			(
+				lv_min_4_0=RULE_INT
+				{
+					newLeafNode(lv_min_4_0, grammarAccess.getTypeScopeAccess().getMinINTTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTypeScopeRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"min",
+						lv_min_4_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		(
+			otherlv_5='..'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getTypeScopeAccess().getFullStopFullStopKeyword_4_0());
+			}
+			(
+				(
 					(
-						lv_less_5_0='<'
+						lv_maxUnlimited_6_0='*'
 						{
-							newLeafNode(lv_less_5_0, grammarAccess.getTypeScopeAccess().getLessLessThanSignKeyword_3_0_0_0());
+							newLeafNode(lv_maxUnlimited_6_0, grammarAccess.getTypeScopeAccess().getMaxUnlimitedAsteriskKeyword_4_1_0_0());
 						}
 						{
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getTypeScopeRule());
 							}
-							setWithLastConsumed($current, "less", true, "<");
+							setWithLastConsumed($current, "maxUnlimited", true, "*");
 						}
 					)
 				)
 				    |
 				(
 					(
-						lv_lessOrEqual_6_0='<='
+						lv_max_7_0=RULE_INT
 						{
-							newLeafNode(lv_lessOrEqual_6_0, grammarAccess.getTypeScopeAccess().getLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0());
+							newLeafNode(lv_max_7_0, grammarAccess.getTypeScopeAccess().getMaxINTTerminalRuleCall_4_1_1_0());
 						}
 						{
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getTypeScopeRule());
 							}
-							setWithLastConsumed($current, "lessOrEqual", true, "<=");
+							setWithLastConsumed(
+								$current,
+								"max",
+								lv_max_7_0,
+								"org.eclipse.xtext.common.Terminals.INT");
 						}
 					)
-				)
-			)
-			(
-				(
-					lv_max_7_0=RULE_INT
-					{
-						newLeafNode(lv_max_7_0, grammarAccess.getTypeScopeAccess().getMaxINTTerminalRuleCall_3_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getTypeScopeRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"max",
-							lv_max_7_0,
-							"org.eclipse.xtext.common.Terminals.INT");
-					}
 				)
 			)
 		)?

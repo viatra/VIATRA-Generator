@@ -19,3 +19,5 @@
 /MetamodelLoader.java
 /ModelLoader.java
 /QueryLoader.java
+/.MetamodelValidator.java._trace
+/.QueryAndMetamodelValidator.java._trace

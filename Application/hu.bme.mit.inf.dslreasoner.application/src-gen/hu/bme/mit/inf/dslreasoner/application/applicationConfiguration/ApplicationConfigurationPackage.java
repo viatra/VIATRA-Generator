@@ -1178,58 +1178,49 @@ public interface ApplicationConfigurationPackage extends EPackage
   int TYPE_SCOPE = 37;
 
   /**
-   * The feature id for the '<em><b>Min</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_SCOPE__MIN = 0;
-
-  /**
-   * The feature id for the '<em><b>Greather</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_SCOPE__GREATHER = 1;
-
-  /**
-   * The feature id for the '<em><b>Greater Or Equal</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_SCOPE__GREATER_OR_EQUAL = 2;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__TYPE = 3;
+  int TYPE_SCOPE__TYPE = 0;
 
   /**
-   * The feature id for the '<em><b>Less</b></em>' attribute.
+   * The feature id for the '<em><b>Sets New</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__LESS = 4;
+  int TYPE_SCOPE__SETS_NEW = 1;
 
   /**
-   * The feature id for the '<em><b>Less Or Equal</b></em>' attribute.
+   * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__LESS_OR_EQUAL = 5;
+  int TYPE_SCOPE__SETS_SUM = 2;
+
+  /**
+   * The feature id for the '<em><b>Min</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__MIN = 3;
+
+  /**
+   * The feature id for the '<em><b>Max Unlimited</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_SCOPE__MAX_UNLIMITED = 4;
 
   /**
    * The feature id for the '<em><b>Max</b></em>' attribute.
@@ -1238,7 +1229,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__MAX = 6;
+  int TYPE_SCOPE__MAX = 5;
 
   /**
    * The number of structural features of the '<em>Type Scope</em>' class.
@@ -1247,7 +1238,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE_FEATURE_COUNT = 7;
+  int TYPE_SCOPE_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
@@ -2384,39 +2375,6 @@ public interface ApplicationConfigurationPackage extends EPackage
   EClass getTypeScope();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin <em>Min</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Min</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin()
-   * @see #getTypeScope()
-   * @generated
-   */
-  EAttribute getTypeScope_Min();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreather <em>Greather</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Greather</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreather()
-   * @see #getTypeScope()
-   * @generated
-   */
-  EAttribute getTypeScope_Greather();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreaterOrEqual <em>Greater Or Equal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Greater Or Equal</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isGreaterOrEqual()
-   * @see #getTypeScope()
-   * @generated
-   */
-  EAttribute getTypeScope_GreaterOrEqual();
-
-  /**
    * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2428,26 +2386,48 @@ public interface ApplicationConfigurationPackage extends EPackage
   EReference getTypeScope_Type();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLess <em>Less</em>}'.
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsNew <em>Sets New</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Less</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLess()
+   * @return the meta object for the attribute '<em>Sets New</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsNew()
    * @see #getTypeScope()
    * @generated
    */
-  EAttribute getTypeScope_Less();
+  EAttribute getTypeScope_SetsNew();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLessOrEqual <em>Less Or Equal</em>}'.
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsSum <em>Sets Sum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Less Or Equal</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isLessOrEqual()
+   * @return the meta object for the attribute '<em>Sets Sum</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsSum()
    * @see #getTypeScope()
    * @generated
    */
-  EAttribute getTypeScope_LessOrEqual();
+  EAttribute getTypeScope_SetsSum();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin <em>Min</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Min</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_Min();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isMaxUnlimited <em>Max Unlimited</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Max Unlimited</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isMaxUnlimited()
+   * @see #getTypeScope()
+   * @generated
+   */
+  EAttribute getTypeScope_MaxUnlimited();
 
   /**
    * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax <em>Max</em>}'.
@@ -3435,30 +3415,6 @@ public interface ApplicationConfigurationPackage extends EPackage
     EClass TYPE_SCOPE = eINSTANCE.getTypeScope();
 
     /**
-     * The meta object literal for the '<em><b>Min</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE_SCOPE__MIN = eINSTANCE.getTypeScope_Min();
-
-    /**
-     * The meta object literal for the '<em><b>Greather</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE_SCOPE__GREATHER = eINSTANCE.getTypeScope_Greather();
-
-    /**
-     * The meta object literal for the '<em><b>Greater Or Equal</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE_SCOPE__GREATER_OR_EQUAL = eINSTANCE.getTypeScope_GreaterOrEqual();
-
-    /**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3467,20 +3423,36 @@ public interface ApplicationConfigurationPackage extends EPackage
     EReference TYPE_SCOPE__TYPE = eINSTANCE.getTypeScope_Type();
 
     /**
-     * The meta object literal for the '<em><b>Less</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Sets New</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE_SCOPE__LESS = eINSTANCE.getTypeScope_Less();
+    EAttribute TYPE_SCOPE__SETS_NEW = eINSTANCE.getTypeScope_SetsNew();
 
     /**
-     * The meta object literal for the '<em><b>Less Or Equal</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Sets Sum</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE_SCOPE__LESS_OR_EQUAL = eINSTANCE.getTypeScope_LessOrEqual();
+    EAttribute TYPE_SCOPE__SETS_SUM = eINSTANCE.getTypeScope_SetsSum();
+
+    /**
+     * The meta object literal for the '<em><b>Min</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__MIN = eINSTANCE.getTypeScope_Min();
+
+    /**
+     * The meta object literal for the '<em><b>Max Unlimited</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE_SCOPE__MAX_UNLIMITED = eINSTANCE.getTypeScope_MaxUnlimited();
 
     /**
      * The meta object literal for the '<em><b>Max</b></em>' attribute feature.

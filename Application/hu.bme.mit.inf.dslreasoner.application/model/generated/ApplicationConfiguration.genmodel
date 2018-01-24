@@ -110,12 +110,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ScopeSpecification/scopes"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//TypeScope">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/min"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/greather"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/greaterOrEqual"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//TypeScope/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/less"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/lessOrEqual"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/setsNew"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/setsSum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/maxUnlimited"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/max"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//TypeReference"/>

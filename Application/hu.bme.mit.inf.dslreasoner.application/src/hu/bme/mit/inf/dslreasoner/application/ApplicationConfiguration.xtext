@@ -118,10 +118,10 @@ ScopeDeclaration: 'scope' name = ID specification = ScopeSpecification;
 ScopeReference: referred = [ScopeDeclaration];
 Scope: ScopeSpecification | ScopeReference;
 
-Task: GenerationTask /*| MeasurementTask | ValidationTask*/;
+Task: GenerationTask /*| CoverageCalculation | ValidationTask*/;
 
-GenerationTask:  'generate' {GenerationTask} '{'
-		(('metamodel' '=' metamodel = Metamodel)? &
+GenerationTask:  'generate' {GenerationTask} '{'(
+		('metamodel' '=' metamodel = Metamodel)? &
 		('partial-model'  '=' partialModel = PartialModel)? &
 		('patterns'  '=' patterns = GraphPattern)? &
 		('scope' '=' scope = Scope)? &
@@ -132,6 +132,6 @@ GenerationTask:  'generate' {GenerationTask} '{'
 		('output' '=' tagetFolder = File)? &
 		('debug' '=' debugFolder = File)? &
 		('log' '=' targetLogFile = File)? &
-		('statistics' '=' targetStatisticsFile = File)?)
-	'}'
+		('statistics' '=' targetStatisticsFile = File)?
+	)'}'
 ;

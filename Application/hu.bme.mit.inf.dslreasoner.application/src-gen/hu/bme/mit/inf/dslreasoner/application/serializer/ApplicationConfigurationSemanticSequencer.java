@@ -751,7 +751,7 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     TypeScope returns TypeScope
 	 *
 	 * Constraint:
-	 *     ((min=INT (greather?='<' | greaterOrEqual?='<='))? type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?)
+	 *     (type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT (maxUnlimited?='*' | max=INT)?)
 	 */
 	protected void sequence_TypeScope(ISerializationContext context, TypeScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

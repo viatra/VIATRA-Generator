@@ -734,21 +734,21 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	public class PartialModelDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PartialModelDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPartialModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cModelsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Assignment cSpecificationAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cSpecificationPartialModelSpecificationParserRuleCall_2_0 = (RuleCall)cSpecificationAssignment_2.eContents().get(0);
 		
 		//PartialModelDeclaration:
-		//	'partial-model' name=ID specification=PartialModelSpecification;
+		//	'models' name=ID specification=PartialModelSpecification;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'partial-model' name=ID specification=PartialModelSpecification
+		//'models' name=ID specification=PartialModelSpecification
 		public Group getGroup() { return cGroup; }
 		
-		//'partial-model'
-		public Keyword getPartialModelKeyword_0() { return cPartialModelKeyword_0; }
+		//'models'
+		public Keyword getModelsKeyword_0() { return cModelsKeyword_0; }
 		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -1256,89 +1256,81 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	public class TypeScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
-		private final Assignment cMinAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
-		private final RuleCall cMinINTTerminalRuleCall_0_0_0 = (RuleCall)cMinAssignment_0_0.eContents().get(0);
-		private final Alternatives cAlternatives_0_1 = (Alternatives)cGroup_0.eContents().get(1);
-		private final Assignment cGreatherAssignment_0_1_0 = (Assignment)cAlternatives_0_1.eContents().get(0);
-		private final Keyword cGreatherLessThanSignKeyword_0_1_0_0 = (Keyword)cGreatherAssignment_0_1_0.eContents().get(0);
-		private final Assignment cGreaterOrEqualAssignment_0_1_1 = (Assignment)cAlternatives_0_1.eContents().get(1);
-		private final Keyword cGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0 = (Keyword)cGreaterOrEqualAssignment_0_1_1.eContents().get(0);
-		private final Keyword cNumberSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTypeTypeReferenceParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Alternatives cAlternatives_3_0 = (Alternatives)cGroup_3.eContents().get(0);
-		private final Assignment cLessAssignment_3_0_0 = (Assignment)cAlternatives_3_0.eContents().get(0);
-		private final Keyword cLessLessThanSignKeyword_3_0_0_0 = (Keyword)cLessAssignment_3_0_0.eContents().get(0);
-		private final Assignment cLessOrEqualAssignment_3_0_1 = (Assignment)cAlternatives_3_0.eContents().get(1);
-		private final Keyword cLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0 = (Keyword)cLessOrEqualAssignment_3_0_1.eContents().get(0);
-		private final Assignment cMaxAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cMaxINTTerminalRuleCall_3_1_0 = (RuleCall)cMaxAssignment_3_1.eContents().get(0);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cSetsNewAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cSetsNewPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cSetsNewAssignment_2_0.eContents().get(0);
+		private final Assignment cSetsSumAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final Keyword cSetsSumEqualsSignKeyword_2_1_0 = (Keyword)cSetsSumAssignment_2_1.eContents().get(0);
+		private final Assignment cMinAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMinINTTerminalRuleCall_3_0 = (RuleCall)cMinAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cFullStopFullStopKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
+		private final Assignment cMaxUnlimitedAssignment_4_1_0 = (Assignment)cAlternatives_4_1.eContents().get(0);
+		private final Keyword cMaxUnlimitedAsteriskKeyword_4_1_0_0 = (Keyword)cMaxUnlimitedAssignment_4_1_0.eContents().get(0);
+		private final Assignment cMaxAssignment_4_1_1 = (Assignment)cAlternatives_4_1.eContents().get(1);
+		private final RuleCall cMaxINTTerminalRuleCall_4_1_1_0 = (RuleCall)cMaxAssignment_4_1_1.eContents().get(0);
 		
 		//TypeScope:
-		//	(min=INT (greather?='<' | greaterOrEqual?='<='))? '#' type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?;
+		//	'#' type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT ('..' (maxUnlimited?='*' | max=INT))?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(min=INT (greather?='<' | greaterOrEqual?='<='))? '#' type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?
+		//'#' type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT ('..' (maxUnlimited?='*' | max=INT))?
 		public Group getGroup() { return cGroup; }
 		
-		//(min=INT (greather?='<' | greaterOrEqual?='<='))?
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//min=INT
-		public Assignment getMinAssignment_0_0() { return cMinAssignment_0_0; }
-		
-		//INT
-		public RuleCall getMinINTTerminalRuleCall_0_0_0() { return cMinINTTerminalRuleCall_0_0_0; }
-		
-		//(greather?='<' | greaterOrEqual?='<=')
-		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
-		
-		//greather?='<'
-		public Assignment getGreatherAssignment_0_1_0() { return cGreatherAssignment_0_1_0; }
-		
-		//'<'
-		public Keyword getGreatherLessThanSignKeyword_0_1_0_0() { return cGreatherLessThanSignKeyword_0_1_0_0; }
-		
-		//greaterOrEqual?='<='
-		public Assignment getGreaterOrEqualAssignment_0_1_1() { return cGreaterOrEqualAssignment_0_1_1; }
-		
-		//'<='
-		public Keyword getGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0() { return cGreaterOrEqualLessThanSignEqualsSignKeyword_0_1_1_0; }
-		
 		//'#'
-		public Keyword getNumberSignKeyword_1() { return cNumberSignKeyword_1; }
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 		
 		//type=TypeReference
-		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 		
 		//TypeReference
-		public RuleCall getTypeTypeReferenceParserRuleCall_2_0() { return cTypeTypeReferenceParserRuleCall_2_0; }
+		public RuleCall getTypeTypeReferenceParserRuleCall_1_0() { return cTypeTypeReferenceParserRuleCall_1_0; }
 		
-		//((less?='<' | lessOrEqual?='<=') max=INT)?
-		public Group getGroup_3() { return cGroup_3; }
+		//(setsNew?='+=' | setsSum?='=')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
-		//(less?='<' | lessOrEqual?='<=')
-		public Alternatives getAlternatives_3_0() { return cAlternatives_3_0; }
+		//setsNew?='+='
+		public Assignment getSetsNewAssignment_2_0() { return cSetsNewAssignment_2_0; }
 		
-		//less?='<'
-		public Assignment getLessAssignment_3_0_0() { return cLessAssignment_3_0_0; }
+		//'+='
+		public Keyword getSetsNewPlusSignEqualsSignKeyword_2_0_0() { return cSetsNewPlusSignEqualsSignKeyword_2_0_0; }
 		
-		//'<'
-		public Keyword getLessLessThanSignKeyword_3_0_0_0() { return cLessLessThanSignKeyword_3_0_0_0; }
+		//setsSum?='='
+		public Assignment getSetsSumAssignment_2_1() { return cSetsSumAssignment_2_1; }
 		
-		//lessOrEqual?='<='
-		public Assignment getLessOrEqualAssignment_3_0_1() { return cLessOrEqualAssignment_3_0_1; }
+		//'='
+		public Keyword getSetsSumEqualsSignKeyword_2_1_0() { return cSetsSumEqualsSignKeyword_2_1_0; }
 		
-		//'<='
-		public Keyword getLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0() { return cLessOrEqualLessThanSignEqualsSignKeyword_3_0_1_0; }
-		
-		//max=INT
-		public Assignment getMaxAssignment_3_1() { return cMaxAssignment_3_1; }
+		//min=INT
+		public Assignment getMinAssignment_3() { return cMinAssignment_3; }
 		
 		//INT
-		public RuleCall getMaxINTTerminalRuleCall_3_1_0() { return cMaxINTTerminalRuleCall_3_1_0; }
+		public RuleCall getMinINTTerminalRuleCall_3_0() { return cMinINTTerminalRuleCall_3_0; }
+		
+		//('..' (maxUnlimited?='*' | max=INT))?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'..'
+		public Keyword getFullStopFullStopKeyword_4_0() { return cFullStopFullStopKeyword_4_0; }
+		
+		//(maxUnlimited?='*' | max=INT)
+		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
+		
+		//maxUnlimited?='*'
+		public Assignment getMaxUnlimitedAssignment_4_1_0() { return cMaxUnlimitedAssignment_4_1_0; }
+		
+		//'*'
+		public Keyword getMaxUnlimitedAsteriskKeyword_4_1_0_0() { return cMaxUnlimitedAsteriskKeyword_4_1_0_0; }
+		
+		//max=INT
+		public Assignment getMaxAssignment_4_1_1() { return cMaxAssignment_4_1_1; }
+		
+		//INT
+		public RuleCall getMaxINTTerminalRuleCall_4_1_1_0() { return cMaxINTTerminalRuleCall_4_1_1_0; }
 	}
 	public class TypeReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeReference");
@@ -1548,7 +1540,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cGenerationTaskParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Task:
-		//	GenerationTask / *| MeasurementTask | ValidationTask* /;
+		//	GenerationTask / *| CoverageCalculation | ValidationTask* /;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//GenerationTask
@@ -1628,8 +1620,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
 		//	number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
 		//	tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
-		//	targetStatisticsFile=File)?)
-		//	'}';
+		//	targetStatisticsFile=File)?) '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
@@ -2259,7 +2250,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//PartialModelDeclaration:
-	//	'partial-model' name=ID specification=PartialModelSpecification;
+	//	'models' name=ID specification=PartialModelSpecification;
 	public PartialModelDeclarationElements getPartialModelDeclarationAccess() {
 		return pPartialModelDeclaration;
 	}
@@ -2438,7 +2429,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//TypeScope:
-	//	(min=INT (greather?='<' | greaterOrEqual?='<='))? '#' type=TypeReference ((less?='<' | lessOrEqual?='<=') max=INT)?;
+	//	'#' type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT ('..' (maxUnlimited?='*' | max=INT))?;
 	public TypeScopeElements getTypeScopeAccess() {
 		return pTypeScope;
 	}
@@ -2538,7 +2529,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Task:
-	//	GenerationTask / *| MeasurementTask | ValidationTask* /;
+	//	GenerationTask / *| CoverageCalculation | ValidationTask* /;
 	public TaskElements getTaskAccess() {
 		return pTask;
 	}
@@ -2552,8 +2543,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
 	//	number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
 	//	tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
-	//	targetStatisticsFile=File)?)
-	//	'}';
+	//	targetStatisticsFile=File)?) '}';
 	public GenerationTaskElements getGenerationTaskAccess() {
 		return pGenerationTask;
 	}
