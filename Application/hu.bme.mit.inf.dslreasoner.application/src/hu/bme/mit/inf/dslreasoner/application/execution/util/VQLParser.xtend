@@ -3,7 +3,9 @@ package hu.bme.mit.inf.dslreasoner.application.execution.util
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
+import hu.bme.mit.inf.dslreasoner.application.execution.Context
 import java.util.LinkedHashMap
+import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -17,11 +19,8 @@ import org.eclipse.viatra.query.patternlanguage.emf.GenmodelExtensionLoader
 import org.eclipse.viatra.query.patternlanguage.emf.IGenmodelMappingLoader
 import org.eclipse.viatra.query.patternlanguage.emf.eMFPatternLanguage.PatternModel
 import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder
-import org.eclipse.xtext.resource.XtextResourceSet
-import hu.bme.mit.inf.dslreasoner.application.execution.Context
-import java.util.List
-import java.util.HashMap
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
+import org.eclipse.xtext.resource.XtextResourceSet
 
 class MyModule extends EMFPatternLanguageRuntimeModule implements Module {
     def public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {

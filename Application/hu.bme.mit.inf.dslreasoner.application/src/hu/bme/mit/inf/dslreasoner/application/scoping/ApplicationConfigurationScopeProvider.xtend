@@ -19,6 +19,9 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEl
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
+import com.google.common.base.Function
+import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternModel
+import org.eclipse.xtext.naming.QualifiedName
 
 /**
  * This class contains custom scoping description.
@@ -29,21 +32,29 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImp
 class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigurationScopeProvider {
 	
 	private val language = ApplicationConfigurationPackage.eINSTANCE
+	protected val nameConverter = new Function<PatternModel,QualifiedName>() {
+		override apply(PatternModel input) {
+			println(input)
+			val res = QualifiedName.create(input.packageName.split("\\."))
+			println(res.toString)
+			return res
+		}
+	}
 	
 	override getScope(EObject context, EReference reference) {
 		val document = EcoreUtil2.getContainerOfType(context,ConfigurationScript)
 		if(context instanceof MetamodelElement) {
-			context.scopeForMetamodelElement(reference,document)
+			return context.scopeForMetamodelElement(reference,document)
 		} else if(context instanceof MetamodelSpecification) {
-			context.scopeForMetamodelSpecification(reference,document)
+			return context.scopeForMetamodelSpecification(reference,document)
 		} else if(context instanceof AllPackageEntry){
-			context.scopeForAllPackageEntry(reference,document)
+			return context.scopeForAllPackageEntry(reference,document)
 		} else if(context instanceof PatternElement) {
-			context.scopeForPatternElement(reference,document)
+			return context.scopeForPatternElement(reference,document)
 		} else if(context instanceof PatternSpecification) {
-			context.scopeForPatternSpecification(reference,document)
+			return context.scopeForPatternSpecification(reference,document)
 		} else if(context instanceof AllPatternEntry) {
-			context.scopeForAllPatternEntry(reference,document)
+			return context.scopeForAllPatternEntry(reference,document)
 		} else {
 			return super.getScope(context,reference)
 		}
@@ -111,11 +122,13 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 		}
 	}
 	
+	// Todo [] scope
+	
 	//////////
 	
 	protected def scopeForPatternElement(PatternElement context, EReference reference, ConfigurationScript document) {
 		if(reference === language.patternEntry_Package) {
-			return Scopes.scopeFor(document.allViatraPackages)
+			return Scopes.scopeFor(document.allViatraPackages,nameConverter,super.getScope(context,reference))
 		} else if(reference === language.patternElement_Pattern) {
 			if(context.package !== null) {
 				return Scopes.scopeFor(context.package.patterns)
@@ -129,7 +142,7 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 	
 	protected def scopeForPatternSpecification(PatternSpecification context, EReference reference, ConfigurationScript document) {
 		if(reference === language.patternEntry_Package) {
-			return Scopes.scopeFor(document.allViatraPackages)
+			return Scopes.scopeFor(document.allViatraPackages,nameConverter,super.getScope(context,reference))
 		} else if(reference ===language.patternElement_Pattern) {
 			return Scopes.scopeFor(document.allPatterns)
 		} else {
@@ -139,7 +152,8 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 	
 	protected def scopeForAllPatternEntry(AllPatternEntry context, EReference reference, ConfigurationScript document) {
 		if(reference === language.patternEntry_Package) {
-			return Scopes.scopeFor(document.allViatraPackages)
+			val res =  Scopes.scopeFor(document.allViatraPackages,nameConverter,super.getScope(context,reference))
+			return res
 		} else if(reference === language.patternElement_Pattern) {
 			if(context.package === null) {
 				return Scopes.scopeFor(document.allPatterns)

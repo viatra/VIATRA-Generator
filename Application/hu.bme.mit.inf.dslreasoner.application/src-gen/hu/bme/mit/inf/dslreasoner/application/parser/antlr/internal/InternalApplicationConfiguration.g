@@ -178,14 +178,11 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 			newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0());
 		}
 		(
-			(
-				('.')=>
-				kw='.'
-				{
-					$current.merge(kw);
-					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
-				}
-			)
+			kw='.'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
+			}
 			this_ID_2=RULE_ID
 			{
 				$current.merge(this_ID_2);
@@ -2315,9 +2312,9 @@ ruleObjectReference returns [EObject current=null]
 					$current);
 			}
 		)
-		otherlv_1='Object'
+		otherlv_1='node'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getObjectReferenceAccess().getObjectKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getObjectReferenceAccess().getNodeKeyword_1());
 		}
 	)
 ;

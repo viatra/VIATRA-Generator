@@ -1,11 +1,24 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.common.util.URI
+
 class ModelLoader {
-	//def loadMetamodels()7
-//	val List<EClass> classes = new LinkedList
-//		val List<EReference> references = new LinkedList
-//		val List<EAttribute> attributes = new LinkedList
-//		val List<EEnum> enums = new LinkedList
-//		val List<EEnumLiteral> literals = new LinkedList
-//		
+	def loadModel(String path, Context context) {
+		var URI uri 
+		try {
+			uri = URI::createURI(path)
+		} catch(IllegalArgumentException e) {
+			context.writeError('''Malformed uri: "«uri»"!''')
+			return null
+		}
+		
+		val resourceSet = new ResourceSetImpl
+		val resource = resourceSet.getResource(uri,true)
+		if(resource === null) {
+			
+		} else {
+			return resource
+		}
+	}	
 }

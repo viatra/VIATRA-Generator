@@ -84,19 +84,19 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID (=> '.' ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID (=> '.' ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 		
-		//(=> '.' ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//=> '.'
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 		
 		//ID
@@ -1394,20 +1394,20 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cObjectReferenceAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cObjectKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cNodeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//ObjectReference:
-		//	{ObjectReference} 'Object';
+		//	{ObjectReference} 'node';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ObjectReference} 'Object'
+		//{ObjectReference} 'node'
 		public Group getGroup() { return cGroup; }
 		
 		//{ObjectReference}
 		public Action getObjectReferenceAction_0() { return cObjectReferenceAction_0; }
 		
-		//'Object'
-		public Keyword getObjectKeyword_1() { return cObjectKeyword_1; }
+		//'node'
+		public Keyword getNodeKeyword_1() { return cNodeKeyword_1; }
 	}
 	public class IntegerReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntegerReference");
@@ -2028,7 +2028,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//QualifiedName:
-	//	ID (=> '.' ID)*;
+	//	ID ('.' ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -2459,7 +2459,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ObjectReference:
-	//	{ObjectReference} 'Object';
+	//	{ObjectReference} 'node';
 	public ObjectReferenceElements getObjectReferenceAccess() {
 		return pObjectReference;
 	}

@@ -2,33 +2,30 @@ package hu.bme.mit.inf.dslreasoner.application.linking
 
 import com.google.inject.Inject
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
 import java.util.Collections
+import java.util.List
 import java.util.Optional
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.conversion.ValueConverterException
 import org.eclipse.xtext.linking.impl.DefaultLinkingService
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.emf.ecore.resource.Resource
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
-import org.eclipse.emf.ecore.util.EcoreUtil
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
-import org.eclipse.xtext.EcoreUtil2
-import java.util.List
-import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter
 
 class ApplicationConfigurationLinkingService extends DefaultLinkingService{
 
     //@Inject Logger logger
 
     @Inject IValueConverterService valueConverterService
-
     @Inject IMetamodelProvider metamodelProvider
     
     public static extension ApplicationConfigurationPackage pac = ApplicationConfigurationPackage.eINSTANCE
@@ -39,8 +36,8 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService{
     			return getEPackage(context as EPackageImport, node as ILeafNode)
     		}
     	} else if(context instanceof ViatraImport) {
-    		if(ref == viatraImport_ImportedViatra && node instanceof ILeafNode) {
-    			return getViatra(context as ViatraImport, node as ILeafNode)
+    		if(ref == viatraImport_ImportedViatra) {
+    			return getViatra(context as ViatraImport, node)
     		}
         } else if(context instanceof PatternEntry) {
         	if(ref === patternEntry_Package) {
@@ -67,7 +64,7 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService{
         ].orElse(emptyList)
     }
     
-    private def getViatra(ViatraImport viatraImport, ILeafNode node) {
+    private def getViatra(ViatraImport viatraImport, INode node) {
     	val uri = getNSUri(node)
     	if(uri.present) {
     		var URI createdURI
@@ -92,7 +89,7 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService{
     	}
     }
 
-    private def getNSUri(ILeafNode node) {
+    private def getNSUri(INode node) {
         try {
             val convertedValue = valueConverterService.toValue(node.text,
                 linkingHelper.getRuleNameFrom(node.grammarElement), node)

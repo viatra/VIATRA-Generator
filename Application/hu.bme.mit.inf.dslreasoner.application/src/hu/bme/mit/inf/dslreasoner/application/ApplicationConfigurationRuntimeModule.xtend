@@ -3,17 +3,18 @@
  */
 package hu.bme.mit.inf.dslreasoner.application
 
-import hu.bme.mit.inf.dslreasoner.application.linking.ApplicationConfigurationLinkingService
 import com.google.inject.Binder
 import com.google.inject.multibindings.Multibinder
-import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProviderInstance
+import hu.bme.mit.inf.dslreasoner.application.linking.ApplicationConfigurationLinkingService
+import hu.bme.mit.inf.dslreasoner.application.valueconverter.ApplicationConfigurationValueConverterService
 import org.apache.log4j.Logger
-import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
+import org.eclipse.viatra.query.patternlanguage.emf.GenmodelExtensionLoader
+import org.eclipse.viatra.query.patternlanguage.emf.IGenmodelMappingLoader
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.CompoundMetamodelProviderService
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProviderInstance
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.MetamodelProviderService
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.ResourceSetMetamodelProviderService
-import org.eclipse.viatra.query.patternlanguage.emf.IGenmodelMappingLoader
-import org.eclipse.viatra.query.patternlanguage.emf.GenmodelExtensionLoader
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -40,4 +41,12 @@ class ApplicationConfigurationRuntimeModule extends AbstractApplicationConfigura
     def Class<? extends IGenmodelMappingLoader> bindIGenmodelMappingLoader() {
         GenmodelExtensionLoader
     }
+    
+    override bindIValueConverterService() {
+		ApplicationConfigurationValueConverterService
+	}
+	
+//	override bindIQualifiedNameProvider() {
+//		ApplicationConfigurationQualifiedNameProvider
+//	}
 }

@@ -15,7 +15,7 @@ Command :
 ;
 
 QualifiedName returns ecore::EString:
-  ID (=>'.' ID)*;
+  ID ('.' ID)*;
 
 ///////////////////////////////////////////////////
 // Imports
@@ -106,10 +106,14 @@ enum Solver: SMTSolver | AlloySolver | ViatraSolver;
 ScopeSpecification: {ScopeSpecification} '{' 
 		(scopes += TypeScope (',' scopes += TypeScope)*)?
 '}';
-TypeScope: ( min = INT ( greather?='<' | greaterOrEqual?= '<='))? '#' type = TypeReference (( less?='<' | lessOrEqual?= '<=') max = INT)?;
+TypeScope: '#' type = TypeReference
+	(setsNew ?='+=' | setsSum ?= '=')
+	( min = INT )
+	('..' (maxUnlimited?='*' | max=INT))?
+;
 TypeReference: ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
 ClassReference: '[' element = MetamodelElement ']';
-ObjectReference: {ObjectReference} 'Object';
+ObjectReference: {ObjectReference} 'node';
 IntegerReference: {IntegerScope} 'int';
 RealReference: {RealScope} 'real';
 StringReference: {StringScope} 'string';
