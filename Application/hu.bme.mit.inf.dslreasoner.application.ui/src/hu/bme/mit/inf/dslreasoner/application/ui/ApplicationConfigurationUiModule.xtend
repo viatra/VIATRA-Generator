@@ -3,11 +3,27 @@
  */
 package hu.bme.mit.inf.dslreasoner.application.ui
 
+import hu.bme.mit.inf.dslreasoner.application.ui.highlight.ApplicationConfigurationSemanticHighlightingCalculator
+import hu.bme.mit.inf.dslreasoner.application.ui.highlight.MetamodelElementColoringTextAttributeProvider
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ITextAttributeProvider
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class ApplicationConfigurationUiModule extends AbstractApplicationConfigurationUiModule {
+	
+//	def public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+//		ApplicationConfigurationHighlightConfiguration
+//	}
+
+	def public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		ApplicationConfigurationSemanticHighlightingCalculator
+	}
+	
+	def public Class<? extends ITextAttributeProvider> bindITextAttributeProvider() {
+		MetamodelElementColoringTextAttributeProvider
+	}
 }
