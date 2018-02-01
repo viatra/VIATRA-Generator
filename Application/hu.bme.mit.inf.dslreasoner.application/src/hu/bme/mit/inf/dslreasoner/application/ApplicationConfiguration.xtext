@@ -112,7 +112,7 @@ TypeScope: '#' type = TypeReference
 	('..' (maxUnlimited?='*' | max=INT))?
 ;
 TypeReference: ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
-ClassReference: '[' element = MetamodelElement ']';
+ClassReference: '<' element = MetamodelElement '>';
 ObjectReference: {ObjectReference} 'node';
 IntegerReference: {IntegerScope} 'int';
 RealReference: {RealScope} 'real';

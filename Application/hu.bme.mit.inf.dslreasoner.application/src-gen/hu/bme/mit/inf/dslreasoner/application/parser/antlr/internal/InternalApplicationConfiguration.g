@@ -2259,9 +2259,9 @@ ruleClassReference returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='['
+		otherlv_0='<'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getClassReferenceAccess().getLeftSquareBracketKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getClassReferenceAccess().getLessThanSignKeyword_0());
 		}
 		(
 			(
@@ -2282,9 +2282,9 @@ ruleClassReference returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_2=']'
+		otherlv_2='>'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getClassReferenceAccess().getRightSquareBracketKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getClassReferenceAccess().getGreaterThanSignKeyword_2());
 		}
 	)
 ;

@@ -3,25 +3,27 @@
  */
 package hu.bme.mit.inf.dslreasoner.application.scoping
 
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EReference
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
+import com.google.common.base.Function
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage
-import org.eclipse.xtext.EcoreUtil2
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
-import org.eclipse.xtext.scoping.Scopes
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EEnum
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
-import com.google.common.base.Function
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EEnum
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
 import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternModel
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.scoping.IScope
+import org.eclipse.xtext.scoping.Scopes
 
 /**
  * This class contains custom scoping description.
@@ -55,7 +57,9 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 			return context.scopeForPatternSpecification(reference,document)
 		} else if(context instanceof AllPatternEntry) {
 			return context.scopeForAllPatternEntry(reference,document)
-		} else {
+		} else if(context instanceof ClassReference) {
+			return context.scopeForClassReference(reference,document)
+		}else {
 			return super.getScope(context,reference)
 		}
 	}
@@ -122,7 +126,17 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 		}
 	}
 	
-	// Todo [] scope
+	//////////
+	
+	def IScope scopeForClassReference(ClassReference classReference, EReference eReference, ConfigurationScript document) {
+		if(eReference === language.metamodelEntry_Package) {
+			return Scopes.scopeFor(document.allEPackages)
+		} else if(eReference === language.metamodelElement_Classifier) {
+			Scopes.scopeFor(document.allEClassifiers)
+		} else {
+			return super.getScope(classReference,eReference)
+		}
+	}
 	
 	//////////
 	

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalApplicationConfigurationParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "','", "'}'", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'patterns'", "'config'", "'#'", "'+='", "'..'", "'*'", "'['", "']'", "'node'", "'int'", "'real'", "'string'", "'scope'", "'generate'", "'partial-model'", "'number'", "'runs'", "'solver'", "'output'", "'debug'", "'log'", "'statistics'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "','", "'}'", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'patterns'", "'config'", "'#'", "'+='", "'..'", "'*'", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'scope'", "'generate'", "'partial-model'", "'number'", "'runs'", "'solver'", "'output'", "'debug'", "'log'", "'statistics'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -6192,7 +6192,7 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleClassReference"
-    // InternalApplicationConfiguration.g:2254:1: ruleClassReference returns [EObject current=null] : (otherlv_0= '[' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= ']' ) ;
+    // InternalApplicationConfiguration.g:2254:1: ruleClassReference returns [EObject current=null] : (otherlv_0= '<' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= '>' ) ;
     public final EObject ruleClassReference() throws RecognitionException {
         EObject current = null;
 
@@ -6205,15 +6205,15 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalApplicationConfiguration.g:2260:2: ( (otherlv_0= '[' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= ']' ) )
-            // InternalApplicationConfiguration.g:2261:2: (otherlv_0= '[' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= ']' )
+            // InternalApplicationConfiguration.g:2260:2: ( (otherlv_0= '<' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= '>' ) )
+            // InternalApplicationConfiguration.g:2261:2: (otherlv_0= '<' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= '>' )
             {
-            // InternalApplicationConfiguration.g:2261:2: (otherlv_0= '[' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= ']' )
-            // InternalApplicationConfiguration.g:2262:3: otherlv_0= '[' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= ']'
+            // InternalApplicationConfiguration.g:2261:2: (otherlv_0= '<' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= '>' )
+            // InternalApplicationConfiguration.g:2262:3: otherlv_0= '<' ( (lv_element_1_0= ruleMetamodelElement ) ) otherlv_2= '>'
             {
             otherlv_0=(Token)match(input,32,FOLLOW_6); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getClassReferenceAccess().getLeftSquareBracketKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getClassReferenceAccess().getLessThanSignKeyword_0());
             		
             // InternalApplicationConfiguration.g:2266:3: ( (lv_element_1_0= ruleMetamodelElement ) )
             // InternalApplicationConfiguration.g:2267:4: (lv_element_1_0= ruleMetamodelElement )
@@ -6248,7 +6248,7 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
 
             otherlv_2=(Token)match(input,33,FOLLOW_2); 
 
-            			newLeafNode(otherlv_2, grammarAccess.getClassReferenceAccess().getRightSquareBracketKeyword_2());
+            			newLeafNode(otherlv_2, grammarAccess.getClassReferenceAccess().getGreaterThanSignKeyword_2());
             		
 
             }

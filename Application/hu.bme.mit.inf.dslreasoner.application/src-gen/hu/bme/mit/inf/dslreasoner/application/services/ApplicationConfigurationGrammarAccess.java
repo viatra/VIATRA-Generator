@@ -1366,20 +1366,20 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	public class ClassReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ClassReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLessThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cElementAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cElementMetamodelElementParserRuleCall_1_0 = (RuleCall)cElementAssignment_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ClassReference:
-		//	'[' element=MetamodelElement ']';
+		//	'<' element=MetamodelElement '>';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' element=MetamodelElement ']'
+		//'<' element=MetamodelElement '>'
 		public Group getGroup() { return cGroup; }
 		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		//'<'
+		public Keyword getLessThanSignKeyword_0() { return cLessThanSignKeyword_0; }
 		
 		//element=MetamodelElement
 		public Assignment getElementAssignment_1() { return cElementAssignment_1; }
@@ -1387,8 +1387,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//MetamodelElement
 		public RuleCall getElementMetamodelElementParserRuleCall_1_0() { return cElementMetamodelElementParserRuleCall_1_0; }
 		
-		//']'
-		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
+		//'>'
+		public Keyword getGreaterThanSignKeyword_2() { return cGreaterThanSignKeyword_2; }
 	}
 	public class ObjectReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectReference");
@@ -2449,7 +2449,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ClassReference:
-	//	'[' element=MetamodelElement ']';
+	//	'<' element=MetamodelElement '>';
 	public ClassReferenceElements getClassReferenceAccess() {
 		return pClassReference;
 	}

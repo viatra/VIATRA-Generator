@@ -5,12 +5,12 @@
 '.'=11
 '..'=30
 '::'=22
+'<'=32
 '='=16
+'>'=33
 'AlloySolver'=49
 'SMTSolver'=48
 'ViatraSolver'=50
-'['=32
-']'=33
 'config'=27
 'debug'=45
 'epackage'=13

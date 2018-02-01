@@ -513,10 +513,10 @@ public class InternalApplicationConfigurationLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalApplicationConfiguration.g:32:7: ( '[' )
-            // InternalApplicationConfiguration.g:32:9: '['
+            // InternalApplicationConfiguration.g:32:7: ( '<' )
+            // InternalApplicationConfiguration.g:32:9: '<'
             {
-            match('['); 
+            match('<'); 
 
             }
 
@@ -533,10 +533,10 @@ public class InternalApplicationConfigurationLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalApplicationConfiguration.g:33:7: ( ']' )
-            // InternalApplicationConfiguration.g:33:9: ']'
+            // InternalApplicationConfiguration.g:33:7: ( '>' )
+            // InternalApplicationConfiguration.g:33:9: '>'
             {
-            match(']'); 
+            match('>'); 
 
             }
 
@@ -1757,7 +1757,7 @@ public class InternalApplicationConfigurationLexer extends Lexer {
     static final String DFA12_specialS =
         "\1\1\37\uffff\1\0\1\2\u00ca\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\44\2\43\2\44\1\43\22\44\1\43\1\44\1\40\1\16\3\44\1\41\2\44\1\20\1\17\1\10\1\44\1\1\1\42\12\37\1\13\2\44\1\6\3\44\1\33\21\36\1\32\2\36\1\34\4\36\1\21\1\44\1\22\1\35\1\36\1\44\2\36\1\15\1\30\1\3\1\5\1\26\1\36\1\2\2\36\1\31\1\14\1\23\1\27\1\12\1\36\1\24\1\25\2\36\1\4\4\36\1\7\1\44\1\11\uff82\44",
+            "\11\44\2\43\2\44\1\43\22\44\1\43\1\44\1\40\1\16\3\44\1\41\2\44\1\20\1\17\1\10\1\44\1\1\1\42\12\37\1\13\1\44\1\21\1\6\1\22\2\44\1\33\21\36\1\32\2\36\1\34\4\36\3\44\1\35\1\36\1\44\2\36\1\15\1\30\1\3\1\5\1\26\1\36\1\2\2\36\1\31\1\14\1\23\1\27\1\12\1\36\1\24\1\25\2\36\1\4\4\36\1\7\1\44\1\11\uff82\44",
             "\1\45",
             "\1\47\1\50",
             "\1\52\7\uffff\1\53",
@@ -2077,9 +2077,9 @@ public class InternalApplicationConfigurationLexer extends Lexer {
 
                         else if ( (LA12_0=='*') ) {s = 16;}
 
-                        else if ( (LA12_0=='[') ) {s = 17;}
+                        else if ( (LA12_0=='<') ) {s = 17;}
 
-                        else if ( (LA12_0==']') ) {s = 18;}
+                        else if ( (LA12_0=='>') ) {s = 18;}
 
                         else if ( (LA12_0=='n') ) {s = 19;}
 
@@ -2115,7 +2115,7 @@ public class InternalApplicationConfigurationLexer extends Lexer {
 
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 35;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<=')')||LA12_0=='-'||(LA12_0>=';' && LA12_0<='<')||(LA12_0>='>' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 36;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<=')')||LA12_0=='-'||LA12_0==';'||(LA12_0>='?' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 36;}
 
                         if ( s>=0 ) return s;
                         break;
