@@ -1,29 +1,22 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
-import java.util.ArrayList
-import java.util.LinkedList
+import java.util.LinkedHashSet
 import java.util.List
 import java.util.Set
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EDataType
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EEnumLiteral
-import org.eclipse.emf.ecore.ENamedElement
-import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
 import org.eclipse.xtext.xbase.lib.Functions.Function1
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry
-import java.util.LinkedHashSet
 
 class MetamodelLoader {
 	
@@ -34,7 +27,7 @@ class MetamodelLoader {
 	
 	public new() { init }
 	
-	def loadMetamodel(MetamodelSpecification specification, ResourceSet rs) throws IllegalArgumentException {
+	def loadMetamodel(MetamodelSpecification specification) throws IllegalArgumentException {
 
 		val Set<EClass> classes = new LinkedHashSet
 		val Set<EEnum> enums = new LinkedHashSet

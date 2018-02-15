@@ -3,7 +3,6 @@ package hu.bme.mit.inf.dslreasoner.application.execution.util
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
-import hu.bme.mit.inf.dslreasoner.application.execution.Context
 import java.util.LinkedHashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
@@ -21,6 +20,7 @@ import org.eclipse.viatra.query.patternlanguage.emf.eMFPatternLanguage.PatternMo
 import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.xtext.resource.XtextResourceSet
+import hu.bme.mit.inf.dslreasoner.application.execution.ScriptConsole
 
 class MyModule extends EMFPatternLanguageRuntimeModule implements Module {
     def public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {
@@ -58,7 +58,7 @@ class VQLParser {
 	 * the linked patterns are loaded validated and translated to a {@link IQuerySpecification} object.
 	 * @returns uri -> (name -> pattern)
 	 */
-	public def parse(List<String> uris, ResourceSet resourceSet, Context context) {
+	public def parse(List<String> uris, ResourceSet resourceSet, ScriptConsole context) {
 		val res = new LinkedHashMap
 		val uri2resource = new LinkedHashMap
 		
@@ -91,7 +91,7 @@ class VQLParser {
 		return res
 	}
 	
-	def private validate(Resource resource, String URI, Context context) {
+	def private validate(Resource resource, String URI, ScriptConsole context) {
 		val errors = resource.errors
 		errors.forEach[context.writeError('''Error in loading pattern "«URI»": «it»''')]
 	}
