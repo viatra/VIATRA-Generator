@@ -1,16 +1,68 @@
 package hu.bme.mit.inf.dslreasoner.application.ui.execute;
 
+import java.util.Iterator;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.handlers.HandlerUtil;
+
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
+import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor;
 
 public class ExecuteScriptHandler extends AbstractHandler implements IHandler {
 
+	ScriptExecutor scriptExecutor = new ScriptExecutor();
+	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		System.out.println("Called");
+		ISelection selection = HandlerUtil.getCurrentSelection(event);
+		if(selection instanceof StructuredSelection) {
+			StructuredSelection structuredSelection = (StructuredSelection) selection;
+			Iterator<?> iterator = structuredSelection.iterator();
+			while(iterator.hasNext()) {
+				Object selectedElement = iterator.next();
+				if (selectedElement instanceof IFile) {
+					IFile selectedFile = (IFile) selectedElement;
+					executeFile(selectedFile);
+                }
+			}
+		}
 		return null;
 	}
 
+	private void executeFile(IFile selectedFile) {
+		URI uri = URI.createPlatformResourceURI(selectedFile.getFullPath().toString(), true);
+		
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource;
+		try {
+			resource = rs.getResource(uri, true);
+		} catch(RuntimeException e) {
+			return;
+		}
+		
+		if(resource.getContents().size() == 1) {
+			EObject content = resource.getContents().get(0);
+			if(content instanceof ConfigurationScript) {
+				ConfigurationScript script = (ConfigurationScript) content;
+				scriptExecutor.executeScript(script);
+			} else {
+				return;
+			}
+		} else {
+			return;
+		}
+	}
 }
