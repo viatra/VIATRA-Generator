@@ -9,7 +9,7 @@ class ColorCalculator {
 	
 	public def dispatch getColor(EClass c) {
 		val supertypes = (c.getEAllSuperTypes + #[c])
-		val typeHashcodes = supertypes.map[(c.getEPackage.nsURI->c.name).hashCode]
+		val typeHashcodes = supertypes.map[(c.getEPackage.nsURI->c.name).hashCode+2]
 		return randomColor(typeHashcodes)
 	}
 	public def dispatch getColor(EEnum e) {

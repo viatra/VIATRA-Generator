@@ -8,9 +8,8 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration
 import org.eclipse.xtext.ui.editor.syntaxcoloring.PreferenceStoreAccessor
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider
-import org.eclipse.xtext.ui.editor.utils.TextStyle
 import org.eclipse.xtext.ui.editor.utils.EditorUtils
-import org.eclipse.swt.SWT
+import org.eclipse.xtext.ui.editor.utils.TextStyle
 
 class MetamodelElementColoringTextAttributeProvider extends TextAttributeProvider{
 	
@@ -50,7 +49,7 @@ class MetamodelElementColoringTextAttributeProvider extends TextAttributeProvide
 		return new TextAttribute(
 			EditorUtils.colorFromRGB(defaultTextStyle.color),
 			EditorUtils.colorFromRGB(backgroundColor),
-			defaultTextStyle.style.bitwiseAnd(SWT.BORDER),
+			defaultTextStyle.style,
 			EditorUtils.fontFromFontData(defaultTextStyle.getFontData()));
 	}
 }
