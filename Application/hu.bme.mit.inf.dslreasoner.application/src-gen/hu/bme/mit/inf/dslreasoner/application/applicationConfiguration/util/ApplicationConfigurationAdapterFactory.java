@@ -266,6 +266,31 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
         return createTypeScopeAdapter();
       }
       @Override
+      public Adapter caseClassTypeScope(ClassTypeScope object)
+      {
+        return createClassTypeScopeAdapter();
+      }
+      @Override
+      public Adapter caseObjectTypeScope(ObjectTypeScope object)
+      {
+        return createObjectTypeScopeAdapter();
+      }
+      @Override
+      public Adapter caseIntegerTypeScope(IntegerTypeScope object)
+      {
+        return createIntegerTypeScopeAdapter();
+      }
+      @Override
+      public Adapter caseRealTypeScope(RealTypeScope object)
+      {
+        return createRealTypeScopeAdapter();
+      }
+      @Override
+      public Adapter caseStringTypeScope(StringTypeScope object)
+      {
+        return createStringTypeScopeAdapter();
+      }
+      @Override
       public Adapter caseTypeReference(TypeReference object)
       {
         return createTypeReferenceAdapter();
@@ -294,6 +319,36 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
       public Adapter caseStringReference(StringReference object)
       {
         return createStringReferenceAdapter();
+      }
+      @Override
+      public Adapter caseNumberSpecification(NumberSpecification object)
+      {
+        return createNumberSpecificationAdapter();
+      }
+      @Override
+      public Adapter caseExactNumber(ExactNumber object)
+      {
+        return createExactNumberAdapter();
+      }
+      @Override
+      public Adapter caseIntervallNumber(IntervallNumber object)
+      {
+        return createIntervallNumberAdapter();
+      }
+      @Override
+      public Adapter caseIntEnumberation(IntEnumberation object)
+      {
+        return createIntEnumberationAdapter();
+      }
+      @Override
+      public Adapter caseRealEnumeration(RealEnumeration object)
+      {
+        return createRealEnumerationAdapter();
+      }
+      @Override
+      public Adapter caseStringEnumeration(StringEnumeration object)
+      {
+        return createStringEnumerationAdapter();
       }
       @Override
       public Adapter caseScopeDeclaration(ScopeDeclaration object)
@@ -928,6 +983,81 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope <em>Class Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope
+   * @generated
+   */
+  public Adapter createClassTypeScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope <em>Object Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope
+   * @generated
+   */
+  public Adapter createObjectTypeScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope <em>Integer Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope
+   * @generated
+   */
+  public Adapter createIntegerTypeScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope <em>Real Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope
+   * @generated
+   */
+  public Adapter createRealTypeScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope <em>String Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope
+   * @generated
+   */
+  public Adapter createStringTypeScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference <em>Type Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1013,6 +1143,96 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStringReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification <em>Number Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification
+   * @generated
+   */
+  public Adapter createNumberSpecificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber <em>Exact Number</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber
+   * @generated
+   */
+  public Adapter createExactNumberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber <em>Intervall Number</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber
+   * @generated
+   */
+  public Adapter createIntervallNumberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation <em>Int Enumberation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation
+   * @generated
+   */
+  public Adapter createIntEnumberationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration <em>Real Enumeration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration
+   * @generated
+   */
+  public Adapter createRealEnumerationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration <em>String Enumeration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration
+   * @generated
+   */
+  public Adapter createStringEnumerationAdapter()
   {
     return null;
   }

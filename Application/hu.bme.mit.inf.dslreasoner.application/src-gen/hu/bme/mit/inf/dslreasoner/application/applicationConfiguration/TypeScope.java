@@ -14,12 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType <em>Type</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsNew <em>Sets New</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsSum <em>Sets Sum</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin <em>Min</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isMaxUnlimited <em>Max Unlimited</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax <em>Max</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getNumber <em>Number</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getTypeScope()
@@ -28,32 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TypeScope extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(TypeReference)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getTypeScope_Type()
-   * @model containment="true"
-   * @generated
-   */
-  TypeReference getType();
-
-  /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' containment reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(TypeReference value);
-
   /**
    * Returns the value of the '<em><b>Sets New</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -107,81 +78,29 @@ public interface TypeScope extends EObject
   void setSetsSum(boolean value);
 
   /**
-   * Returns the value of the '<em><b>Min</b></em>' attribute.
+   * Returns the value of the '<em><b>Number</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Min</em>' attribute isn't clear,
+   * If the meaning of the '<em>Number</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Min</em>' attribute.
-   * @see #setMin(int)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getTypeScope_Min()
-   * @model
+   * @return the value of the '<em>Number</em>' containment reference.
+   * @see #setNumber(NumberSpecification)
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getTypeScope_Number()
+   * @model containment="true"
    * @generated
    */
-  int getMin();
+  NumberSpecification getNumber();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin <em>Min</em>}' attribute.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getNumber <em>Number</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Min</em>' attribute.
-   * @see #getMin()
+   * @param value the new value of the '<em>Number</em>' containment reference.
+   * @see #getNumber()
    * @generated
    */
-  void setMin(int value);
-
-  /**
-   * Returns the value of the '<em><b>Max Unlimited</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Max Unlimited</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Max Unlimited</em>' attribute.
-   * @see #setMaxUnlimited(boolean)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getTypeScope_MaxUnlimited()
-   * @model
-   * @generated
-   */
-  boolean isMaxUnlimited();
-
-  /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isMaxUnlimited <em>Max Unlimited</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Max Unlimited</em>' attribute.
-   * @see #isMaxUnlimited()
-   * @generated
-   */
-  void setMaxUnlimited(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Max</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Max</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Max</em>' attribute.
-   * @see #setMax(int)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getTypeScope_Max()
-   * @model
-   * @generated
-   */
-  int getMax();
-
-  /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax <em>Max</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Max</em>' attribute.
-   * @see #getMax()
-   * @generated
-   */
-  void setMax(int value);
+  void setNumber(NumberSpecification value);
 
 } // TypeScope

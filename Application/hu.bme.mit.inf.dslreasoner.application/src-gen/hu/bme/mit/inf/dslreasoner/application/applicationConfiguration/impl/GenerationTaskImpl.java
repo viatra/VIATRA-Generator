@@ -33,14 +33,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getPartialModel <em>Partial Model</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getPatterns <em>Patterns</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getScope <em>Scope</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#isNumberSpecified <em>Number Specified</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getNumber <em>Number</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#isRunSpecified <em>Run Specified</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getRuns <em>Runs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getSolver <em>Solver</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getConfig <em>Config</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getTagetFolder <em>Taget Folder</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getDebugFolder <em>Debug Folder</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getTargetLogFile <em>Target Log File</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getTargetStatisticsFile <em>Target Statistics File</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.GenerationTaskImpl#getTagetFolder <em>Taget Folder</em>}</li>
  * </ul>
  *
  * @generated
@@ -88,6 +90,26 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
   protected Scope scope;
 
   /**
+   * The default value of the '{@link #isNumberSpecified() <em>Number Specified</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isNumberSpecified()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean NUMBER_SPECIFIED_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isNumberSpecified() <em>Number Specified</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isNumberSpecified()
+   * @generated
+   * @ordered
+   */
+  protected boolean numberSpecified = NUMBER_SPECIFIED_EDEFAULT;
+
+  /**
    * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -106,6 +128,26 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
    * @ordered
    */
   protected int number = NUMBER_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isRunSpecified() <em>Run Specified</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isRunSpecified()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean RUN_SPECIFIED_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isRunSpecified() <em>Run Specified</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isRunSpecified()
+   * @generated
+   * @ordered
+   */
+  protected boolean runSpecified = RUN_SPECIFIED_EDEFAULT;
 
   /**
    * The default value of the '{@link #getRuns() <em>Runs</em>}' attribute.
@@ -158,16 +200,6 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
   protected Config config;
 
   /**
-   * The cached value of the '{@link #getTagetFolder() <em>Taget Folder</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTagetFolder()
-   * @generated
-   * @ordered
-   */
-  protected File tagetFolder;
-
-  /**
    * The cached value of the '{@link #getDebugFolder() <em>Debug Folder</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -196,6 +228,16 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
    * @ordered
    */
   protected File targetStatisticsFile;
+
+  /**
+   * The cached value of the '{@link #getTagetFolder() <em>Taget Folder</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTagetFolder()
+   * @generated
+   * @ordered
+   */
+  protected File tagetFolder;
 
   /**
    * <!-- begin-user-doc -->
@@ -415,6 +457,29 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isNumberSpecified()
+  {
+    return numberSpecified;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setNumberSpecified(boolean newNumberSpecified)
+  {
+    boolean oldNumberSpecified = numberSpecified;
+    numberSpecified = newNumberSpecified;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__NUMBER_SPECIFIED, oldNumberSpecified, numberSpecified));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public int getNumber()
   {
     return number;
@@ -431,6 +496,29 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
     number = newNumber;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__NUMBER, oldNumber, number));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isRunSpecified()
+  {
+    return runSpecified;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setRunSpecified(boolean newRunSpecified)
+  {
+    boolean oldRunSpecified = runSpecified;
+    runSpecified = newRunSpecified;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__RUN_SPECIFIED, oldRunSpecified, runSpecified));
   }
 
   /**
@@ -525,54 +613,6 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__CONFIG, newConfig, newConfig));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public File getTagetFolder()
-  {
-    return tagetFolder;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTagetFolder(File newTagetFolder, NotificationChain msgs)
-  {
-    File oldTagetFolder = tagetFolder;
-    tagetFolder = newTagetFolder;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, oldTagetFolder, newTagetFolder);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTagetFolder(File newTagetFolder)
-  {
-    if (newTagetFolder != tagetFolder)
-    {
-      NotificationChain msgs = null;
-      if (tagetFolder != null)
-        msgs = ((InternalEObject)tagetFolder).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, null, msgs);
-      if (newTagetFolder != null)
-        msgs = ((InternalEObject)newTagetFolder).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, null, msgs);
-      msgs = basicSetTagetFolder(newTagetFolder, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, newTagetFolder, newTagetFolder));
   }
 
   /**
@@ -724,6 +764,54 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
    * <!-- end-user-doc -->
    * @generated
    */
+  public File getTagetFolder()
+  {
+    return tagetFolder;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTagetFolder(File newTagetFolder, NotificationChain msgs)
+  {
+    File oldTagetFolder = tagetFolder;
+    tagetFolder = newTagetFolder;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, oldTagetFolder, newTagetFolder);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTagetFolder(File newTagetFolder)
+  {
+    if (newTagetFolder != tagetFolder)
+    {
+      NotificationChain msgs = null;
+      if (tagetFolder != null)
+        msgs = ((InternalEObject)tagetFolder).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, null, msgs);
+      if (newTagetFolder != null)
+        msgs = ((InternalEObject)newTagetFolder).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, null, msgs);
+      msgs = basicSetTagetFolder(newTagetFolder, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER, newTagetFolder, newTagetFolder));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -739,14 +827,14 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
         return basicSetScope(null, msgs);
       case ApplicationConfigurationPackage.GENERATION_TASK__CONFIG:
         return basicSetConfig(null, msgs);
-      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
-        return basicSetTagetFolder(null, msgs);
       case ApplicationConfigurationPackage.GENERATION_TASK__DEBUG_FOLDER:
         return basicSetDebugFolder(null, msgs);
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_LOG_FILE:
         return basicSetTargetLogFile(null, msgs);
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_STATISTICS_FILE:
         return basicSetTargetStatisticsFile(null, msgs);
+      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
+        return basicSetTagetFolder(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -769,22 +857,26 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
         return getPatterns();
       case ApplicationConfigurationPackage.GENERATION_TASK__SCOPE:
         return getScope();
+      case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER_SPECIFIED:
+        return isNumberSpecified();
       case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER:
         return getNumber();
+      case ApplicationConfigurationPackage.GENERATION_TASK__RUN_SPECIFIED:
+        return isRunSpecified();
       case ApplicationConfigurationPackage.GENERATION_TASK__RUNS:
         return getRuns();
       case ApplicationConfigurationPackage.GENERATION_TASK__SOLVER:
         return getSolver();
       case ApplicationConfigurationPackage.GENERATION_TASK__CONFIG:
         return getConfig();
-      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
-        return getTagetFolder();
       case ApplicationConfigurationPackage.GENERATION_TASK__DEBUG_FOLDER:
         return getDebugFolder();
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_LOG_FILE:
         return getTargetLogFile();
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_STATISTICS_FILE:
         return getTargetStatisticsFile();
+      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
+        return getTagetFolder();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -811,8 +903,14 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
       case ApplicationConfigurationPackage.GENERATION_TASK__SCOPE:
         setScope((Scope)newValue);
         return;
+      case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER_SPECIFIED:
+        setNumberSpecified((Boolean)newValue);
+        return;
       case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER:
         setNumber((Integer)newValue);
+        return;
+      case ApplicationConfigurationPackage.GENERATION_TASK__RUN_SPECIFIED:
+        setRunSpecified((Boolean)newValue);
         return;
       case ApplicationConfigurationPackage.GENERATION_TASK__RUNS:
         setRuns((Integer)newValue);
@@ -823,9 +921,6 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
       case ApplicationConfigurationPackage.GENERATION_TASK__CONFIG:
         setConfig((Config)newValue);
         return;
-      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
-        setTagetFolder((File)newValue);
-        return;
       case ApplicationConfigurationPackage.GENERATION_TASK__DEBUG_FOLDER:
         setDebugFolder((File)newValue);
         return;
@@ -834,6 +929,9 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
         return;
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_STATISTICS_FILE:
         setTargetStatisticsFile((File)newValue);
+        return;
+      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
+        setTagetFolder((File)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -861,8 +959,14 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
       case ApplicationConfigurationPackage.GENERATION_TASK__SCOPE:
         setScope((Scope)null);
         return;
+      case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER_SPECIFIED:
+        setNumberSpecified(NUMBER_SPECIFIED_EDEFAULT);
+        return;
       case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER:
         setNumber(NUMBER_EDEFAULT);
+        return;
+      case ApplicationConfigurationPackage.GENERATION_TASK__RUN_SPECIFIED:
+        setRunSpecified(RUN_SPECIFIED_EDEFAULT);
         return;
       case ApplicationConfigurationPackage.GENERATION_TASK__RUNS:
         setRuns(RUNS_EDEFAULT);
@@ -873,9 +977,6 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
       case ApplicationConfigurationPackage.GENERATION_TASK__CONFIG:
         setConfig((Config)null);
         return;
-      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
-        setTagetFolder((File)null);
-        return;
       case ApplicationConfigurationPackage.GENERATION_TASK__DEBUG_FOLDER:
         setDebugFolder((File)null);
         return;
@@ -884,6 +985,9 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
         return;
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_STATISTICS_FILE:
         setTargetStatisticsFile((File)null);
+        return;
+      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
+        setTagetFolder((File)null);
         return;
     }
     super.eUnset(featureID);
@@ -907,22 +1011,26 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
         return patterns != null;
       case ApplicationConfigurationPackage.GENERATION_TASK__SCOPE:
         return scope != null;
+      case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER_SPECIFIED:
+        return numberSpecified != NUMBER_SPECIFIED_EDEFAULT;
       case ApplicationConfigurationPackage.GENERATION_TASK__NUMBER:
         return number != NUMBER_EDEFAULT;
+      case ApplicationConfigurationPackage.GENERATION_TASK__RUN_SPECIFIED:
+        return runSpecified != RUN_SPECIFIED_EDEFAULT;
       case ApplicationConfigurationPackage.GENERATION_TASK__RUNS:
         return runs != RUNS_EDEFAULT;
       case ApplicationConfigurationPackage.GENERATION_TASK__SOLVER:
         return solver != SOLVER_EDEFAULT;
       case ApplicationConfigurationPackage.GENERATION_TASK__CONFIG:
         return config != null;
-      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
-        return tagetFolder != null;
       case ApplicationConfigurationPackage.GENERATION_TASK__DEBUG_FOLDER:
         return debugFolder != null;
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_LOG_FILE:
         return targetLogFile != null;
       case ApplicationConfigurationPackage.GENERATION_TASK__TARGET_STATISTICS_FILE:
         return targetStatisticsFile != null;
+      case ApplicationConfigurationPackage.GENERATION_TASK__TAGET_FOLDER:
+        return tagetFolder != null;
     }
     return super.eIsSet(featureID);
   }
@@ -938,8 +1046,12 @@ public class GenerationTaskImpl extends TaskImpl implements GenerationTask
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (number: ");
+    result.append(" (numberSpecified: ");
+    result.append(numberSpecified);
+    result.append(", number: ");
     result.append(number);
+    result.append(", runSpecified: ");
+    result.append(runSpecified);
     result.append(", runs: ");
     result.append(runs);
     result.append(", solver: ");

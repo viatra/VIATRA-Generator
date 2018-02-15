@@ -121,13 +121,30 @@
         eType="#//TypeScope" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeScope">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeReference"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="setsNew" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="setsSum" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxUnlimited" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="number" eType="#//NumberSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassTypeScope" eSuperTypes="#//TypeScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ClassReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeScope" eSuperTypes="#//TypeScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ObjectReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeScope" eSuperTypes="#//TypeScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//IntegerReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealTypeScope" eSuperTypes="#//TypeScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//RealReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringTypeScope" eSuperTypes="#//TypeScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//StringReference"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassReference" eSuperTypes="#//TypeReference">
@@ -138,6 +155,28 @@
   <eClassifiers xsi:type="ecore:EClass" name="IntegerReference" eSuperTypes="#//TypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="RealReference" eSuperTypes="#//TypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringReference" eSuperTypes="#//TypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberSpecification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExactNumber" eSuperTypes="#//NumberSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exactNumber" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exactUnlimited" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntervallNumber" eSuperTypes="#//NumberSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNumber" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxUnlimited" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntEnumberation" eSuperTypes="#//NumberSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealEnumeration" eSuperTypes="#//NumberSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringEnumeration" eSuperTypes="#//NumberSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopeDeclaration" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ScopeSpecification"
         containment="true"/>
@@ -156,18 +195,20 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//Scope"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberSpecified" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runSpecified" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runs" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="solver" eType="#//Solver"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//Config"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tagetFolder" eType="#//File"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="debugFolder" eType="#//File"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetLogFile" eType="#//File"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetStatisticsFile" eType="#//File"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tagetFolder" eType="#//File"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerScope" eSuperTypes="#//IntegerReference"/>

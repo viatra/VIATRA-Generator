@@ -110,12 +110,24 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ScopeSpecification/scopes"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//TypeScope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//TypeScope/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/setsNew"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/setsSum"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/min"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/maxUnlimited"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//TypeScope/max"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//TypeScope/number"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ClassTypeScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ClassTypeScope/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ObjectTypeScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ObjectTypeScope/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntegerTypeScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//IntegerTypeScope/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//RealTypeScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//RealTypeScope/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//StringTypeScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//StringTypeScope/type"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//TypeReference"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//ClassReference">
@@ -125,6 +137,25 @@
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntegerReference"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//RealReference"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//StringReference"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//NumberSpecification"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//ExactNumber">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//ExactNumber/exactNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//ExactNumber/exactUnlimited"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntervallNumber">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//IntervallNumber/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//IntervallNumber/maxNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//IntervallNumber/maxUnlimited"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntEnumberation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//IntEnumberation/entry"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//RealEnumeration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//RealEnumeration/entry"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//StringEnumeration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//StringEnumeration/entry"/>
+    </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//ScopeDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ScopeDeclaration/specification"/>
     </genClasses>
@@ -138,14 +169,16 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/partialModel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/patterns"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/numberSpecified"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/runSpecified"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/runs"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//GenerationTask/solver"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/config"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/tagetFolder"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/debugFolder"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/targetLogFile"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/targetStatisticsFile"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//GenerationTask/tagetFolder"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//IntegerScope"/>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//RealScope"/>

@@ -8,12 +8,14 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackag
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification;
@@ -21,24 +23,31 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FolderEnt
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope;
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport;
 import hu.bme.mit.inf.dslreasoner.application.services.ApplicationConfigurationGrammarAccess;
 import java.util.Set;
@@ -75,6 +84,9 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.CLASS_REFERENCE:
 				sequence_ClassReference(context, (ClassReference) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.CLASS_TYPE_SCOPE:
+				sequence_ClassTypeScope(context, (ClassTypeScope) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.CONFIG_DECLARATION:
 				sequence_ConfigDeclaration(context, (ConfigDeclaration) semanticObject); 
 				return; 
@@ -92,6 +104,9 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 				return; 
 			case ApplicationConfigurationPackage.EPACKAGE_IMPORT:
 				sequence_EPackageImport(context, (EPackageImport) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.EXACT_NUMBER:
+				sequence_ExactNumber(context, (ExactNumber) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.FILE_DECLARATION:
 				sequence_FileDeclaration(context, (FileDeclaration) semanticObject); 
@@ -114,8 +129,17 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.GRAPH_PATTERN_REFERENCE:
 				sequence_GraphPatternReference(context, (GraphPatternReference) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.INT_ENUMBERATION:
+				sequence_IntEnumberation(context, (IntEnumberation) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.INTEGER_SCOPE:
 				sequence_IntegerReference(context, (IntegerScope) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.INTEGER_TYPE_SCOPE:
+				sequence_IntegerTypeScope(context, (IntegerTypeScope) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.INTERVALL_NUMBER:
+				sequence_IntervallNumber(context, (IntervallNumber) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.METAMODEL_DECLARATION:
 				sequence_MetamodelDeclaration(context, (MetamodelDeclaration) semanticObject); 
@@ -135,6 +159,9 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.OBJECT_REFERENCE:
 				sequence_ObjectReference(context, (ObjectReference) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.OBJECT_TYPE_SCOPE:
+				sequence_ObjectTypeScope(context, (ObjectTypeScope) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.PARTIAL_MODEL_DECLARATION:
 				sequence_PartialModelDeclaration(context, (PartialModelDeclaration) semanticObject); 
 				return; 
@@ -150,8 +177,14 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.PATTERN_SPECIFICATION:
 				sequence_PatternSpecification(context, (PatternSpecification) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.REAL_ENUMERATION:
+				sequence_RealEnumeration(context, (RealEnumeration) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.REAL_SCOPE:
 				sequence_RealReference(context, (RealScope) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.REAL_TYPE_SCOPE:
+				sequence_RealTypeScope(context, (RealTypeScope) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.SCOPE_DECLARATION:
 				sequence_ScopeDeclaration(context, (ScopeDeclaration) semanticObject); 
@@ -162,11 +195,14 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.SCOPE_SPECIFICATION:
 				sequence_ScopeSpecification(context, (ScopeSpecification) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.STRING_ENUMERATION:
+				sequence_StringEnumeration(context, (StringEnumeration) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.STRING_SCOPE:
 				sequence_StringReference(context, (StringScope) semanticObject); 
 				return; 
-			case ApplicationConfigurationPackage.TYPE_SCOPE:
-				sequence_TypeScope(context, (TypeScope) semanticObject); 
+			case ApplicationConfigurationPackage.STRING_TYPE_SCOPE:
+				sequence_StringTypeScope(context, (StringTypeScope) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.VIATRA_IMPORT:
 				sequence_ViatraImport(context, (ViatraImport) semanticObject); 
@@ -218,6 +254,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getClassReferenceAccess().getElementMetamodelElementParserRuleCall_1_0(), semanticObject.getElement());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeScope returns ClassTypeScope
+	 *     ClassTypeScope returns ClassTypeScope
+	 *
+	 * Constraint:
+	 *     (type=ClassReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber))
+	 */
+	protected void sequence_ClassTypeScope(ISerializationContext context, ClassTypeScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -330,6 +379,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     NumberSpecification returns ExactNumber
+	 *     ExactNumber returns ExactNumber
+	 *
+	 * Constraint:
+	 *     (exactNumber=INT | exactUnlimited?='*')
+	 */
+	protected void sequence_ExactNumber(ISerializationContext context, ExactNumber semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Command returns FileDeclaration
 	 *     Declaration returns FileDeclaration
 	 *     FileDeclaration returns FileDeclaration
@@ -410,19 +472,21 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *
 	 * Constraint:
 	 *     (
-	 *         metamodel=Metamodel | 
-	 *         partialModel=PartialModel | 
-	 *         patterns=GraphPattern | 
-	 *         scope=Scope | 
-	 *         number=INT | 
-	 *         runs=INT | 
-	 *         solver=Solver | 
-	 *         config=Config | 
-	 *         tagetFolder=File | 
-	 *         debugFolder=File | 
-	 *         targetLogFile=File | 
-	 *         targetStatisticsFile=File
-	 *     )*
+	 *         (
+	 *             metamodel=Metamodel | 
+	 *             partialModel=PartialModel | 
+	 *             patterns=GraphPattern | 
+	 *             scope=Scope | 
+	 *             solver=Solver | 
+	 *             config=Config | 
+	 *             debugFolder=File | 
+	 *             targetLogFile=File | 
+	 *             targetStatisticsFile=File | 
+	 *             tagetFolder=File
+	 *         )? 
+	 *         (numberSpecified?='number' number=INT)? 
+	 *         (runSpecified?='runs' runs=INT)?
+	 *     )+
 	 */
 	protected void sequence_GenerationTask(ISerializationContext context, GenerationTask semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -473,6 +537,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     NumberSpecification returns IntEnumberation
+	 *     IntEnumberation returns IntEnumberation
+	 *
+	 * Constraint:
+	 *     (entry+=INT entry+=INT*)?
+	 */
+	protected void sequence_IntEnumberation(ISerializationContext context, IntEnumberation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     TypeReference returns IntegerScope
 	 *     IntegerReference returns IntegerScope
 	 *
@@ -480,6 +557,32 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     {IntegerScope}
 	 */
 	protected void sequence_IntegerReference(ISerializationContext context, IntegerScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeScope returns IntegerTypeScope
+	 *     IntegerTypeScope returns IntegerTypeScope
+	 *
+	 * Constraint:
+	 *     (type=IntegerReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber | number=IntEnumberation))
+	 */
+	protected void sequence_IntegerTypeScope(ISerializationContext context, IntegerTypeScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     NumberSpecification returns IntervallNumber
+	 *     IntervallNumber returns IntervallNumber
+	 *
+	 * Constraint:
+	 *     (min=INT (maxNumber=INT | maxUnlimited?='*'))
+	 */
+	protected void sequence_IntervallNumber(ISerializationContext context, IntervallNumber semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -586,6 +689,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     TypeScope returns ObjectTypeScope
+	 *     ObjectTypeScope returns ObjectTypeScope
+	 *
+	 * Constraint:
+	 *     (type=ObjectReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber))
+	 */
+	protected void sequence_ObjectTypeScope(ISerializationContext context, ObjectTypeScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Command returns PartialModelDeclaration
 	 *     Declaration returns PartialModelDeclaration
 	 *     PartialModelDeclaration returns PartialModelDeclaration
@@ -667,6 +783,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     NumberSpecification returns RealEnumeration
+	 *     RealEnumeration returns RealEnumeration
+	 *
+	 * Constraint:
+	 *     (entry+=INT entry+=INT*)?
+	 */
+	protected void sequence_RealEnumeration(ISerializationContext context, RealEnumeration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     TypeReference returns RealScope
 	 *     RealReference returns RealScope
 	 *
@@ -674,6 +803,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     {RealScope}
 	 */
 	protected void sequence_RealReference(ISerializationContext context, RealScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TypeScope returns RealTypeScope
+	 *     RealTypeScope returns RealTypeScope
+	 *
+	 * Constraint:
+	 *     (type=RealReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber | number=RealEnumeration))
+	 */
+	protected void sequence_RealTypeScope(ISerializationContext context, RealTypeScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -735,6 +877,19 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     NumberSpecification returns StringEnumeration
+	 *     StringEnumeration returns StringEnumeration
+	 *
+	 * Constraint:
+	 *     (entry+=STRING entry+=STRING*)?
+	 */
+	protected void sequence_StringEnumeration(ISerializationContext context, StringEnumeration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     TypeReference returns StringScope
 	 *     StringReference returns StringScope
 	 *
@@ -748,12 +903,13 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
-	 *     TypeScope returns TypeScope
+	 *     TypeScope returns StringTypeScope
+	 *     StringTypeScope returns StringTypeScope
 	 *
 	 * Constraint:
-	 *     (type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT (maxUnlimited?='*' | max=INT)?)
+	 *     (type=StringReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber | number=StringEnumeration))
 	 */
-	protected void sequence_TypeScope(ISerializationContext context, TypeScope semanticObject) {
+	protected void sequence_StringTypeScope(ISerializationContext context, StringTypeScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

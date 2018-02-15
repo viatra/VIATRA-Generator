@@ -108,6 +108,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cEPackageImportParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cViatraImportParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
+		////terminal REAL returns ecore::EBigDecimal: '-'? INT '.' INT;
+		////terminal INTEGER returns ecore::EInt: '-'? INT;
 		/////////////////////////////////////////////////////
 		//// Imports
 		/////////////////////////////////////////////////////
@@ -1255,40 +1257,67 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	public class TypeScopeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeScope");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cClassTypeScopeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cObjectTypeScopeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIntegerTypeScopeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRealTypeScopeParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cStringTypeScopeParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		
+		//TypeScope:
+		//	ClassTypeScope | ObjectTypeScope | IntegerTypeScope | RealTypeScope | StringTypeScope;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ClassTypeScope | ObjectTypeScope | IntegerTypeScope | RealTypeScope | StringTypeScope
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ClassTypeScope
+		public RuleCall getClassTypeScopeParserRuleCall_0() { return cClassTypeScopeParserRuleCall_0; }
+		
+		//ObjectTypeScope
+		public RuleCall getObjectTypeScopeParserRuleCall_1() { return cObjectTypeScopeParserRuleCall_1; }
+		
+		//IntegerTypeScope
+		public RuleCall getIntegerTypeScopeParserRuleCall_2() { return cIntegerTypeScopeParserRuleCall_2; }
+		
+		//RealTypeScope
+		public RuleCall getRealTypeScopeParserRuleCall_3() { return cRealTypeScopeParserRuleCall_3; }
+		
+		//StringTypeScope
+		public RuleCall getStringTypeScopeParserRuleCall_4() { return cStringTypeScopeParserRuleCall_4; }
+	}
+	public class ClassTypeScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ClassTypeScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypeTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final RuleCall cTypeClassReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final Assignment cSetsNewAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
 		private final Keyword cSetsNewPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cSetsNewAssignment_2_0.eContents().get(0);
 		private final Assignment cSetsSumAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
 		private final Keyword cSetsSumEqualsSignKeyword_2_1_0 = (Keyword)cSetsSumAssignment_2_1.eContents().get(0);
-		private final Assignment cMinAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cMinINTTerminalRuleCall_3_0 = (RuleCall)cMinAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cFullStopFullStopKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
-		private final Assignment cMaxUnlimitedAssignment_4_1_0 = (Assignment)cAlternatives_4_1.eContents().get(0);
-		private final Keyword cMaxUnlimitedAsteriskKeyword_4_1_0_0 = (Keyword)cMaxUnlimitedAssignment_4_1_0.eContents().get(0);
-		private final Assignment cMaxAssignment_4_1_1 = (Assignment)cAlternatives_4_1.eContents().get(1);
-		private final RuleCall cMaxINTTerminalRuleCall_4_1_1_0 = (RuleCall)cMaxAssignment_4_1_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cNumberAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNumberExactNumberParserRuleCall_3_0_0 = (RuleCall)cNumberAssignment_3_0.eContents().get(0);
+		private final Assignment cNumberAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNumberIntervallNumberParserRuleCall_3_1_0 = (RuleCall)cNumberAssignment_3_1.eContents().get(0);
 		
-		//TypeScope:
-		//	'#' type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT ('..' (maxUnlimited?='*' | max=INT))?;
+		//ClassTypeScope:
+		//	'#' type=ClassReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'#' type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT ('..' (maxUnlimited?='*' | max=INT))?
+		//'#' type=ClassReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber)
 		public Group getGroup() { return cGroup; }
 		
 		//'#'
 		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 		
-		//type=TypeReference
+		//type=ClassReference
 		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 		
-		//TypeReference
-		public RuleCall getTypeTypeReferenceParserRuleCall_1_0() { return cTypeTypeReferenceParserRuleCall_1_0; }
+		//ClassReference
+		public RuleCall getTypeClassReferenceParserRuleCall_1_0() { return cTypeClassReferenceParserRuleCall_1_0; }
 		
 		//(setsNew?='+=' | setsSum?='=')
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
@@ -1305,32 +1334,302 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//'='
 		public Keyword getSetsSumEqualsSignKeyword_2_1_0() { return cSetsSumEqualsSignKeyword_2_1_0; }
 		
-		//min=INT
-		public Assignment getMinAssignment_3() { return cMinAssignment_3; }
+		//(number=ExactNumber | number=IntervallNumber)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
-		//INT
-		public RuleCall getMinINTTerminalRuleCall_3_0() { return cMinINTTerminalRuleCall_3_0; }
+		//number=ExactNumber
+		public Assignment getNumberAssignment_3_0() { return cNumberAssignment_3_0; }
 		
-		//('..' (maxUnlimited?='*' | max=INT))?
-		public Group getGroup_4() { return cGroup_4; }
+		//ExactNumber
+		public RuleCall getNumberExactNumberParserRuleCall_3_0_0() { return cNumberExactNumberParserRuleCall_3_0_0; }
 		
-		//'..'
-		public Keyword getFullStopFullStopKeyword_4_0() { return cFullStopFullStopKeyword_4_0; }
+		//number=IntervallNumber
+		public Assignment getNumberAssignment_3_1() { return cNumberAssignment_3_1; }
 		
-		//(maxUnlimited?='*' | max=INT)
-		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
+		//IntervallNumber
+		public RuleCall getNumberIntervallNumberParserRuleCall_3_1_0() { return cNumberIntervallNumberParserRuleCall_3_1_0; }
+	}
+	public class ObjectTypeScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectTypeScope");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeObjectReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cSetsNewAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cSetsNewPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cSetsNewAssignment_2_0.eContents().get(0);
+		private final Assignment cSetsSumAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final Keyword cSetsSumEqualsSignKeyword_2_1_0 = (Keyword)cSetsSumAssignment_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cNumberAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNumberExactNumberParserRuleCall_3_0_0 = (RuleCall)cNumberAssignment_3_0.eContents().get(0);
+		private final Assignment cNumberAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNumberIntervallNumberParserRuleCall_3_1_0 = (RuleCall)cNumberAssignment_3_1.eContents().get(0);
 		
-		//maxUnlimited?='*'
-		public Assignment getMaxUnlimitedAssignment_4_1_0() { return cMaxUnlimitedAssignment_4_1_0; }
+		//ObjectTypeScope:
+		//	'#' type=ObjectReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber);
+		@Override public ParserRule getRule() { return rule; }
 		
-		//'*'
-		public Keyword getMaxUnlimitedAsteriskKeyword_4_1_0_0() { return cMaxUnlimitedAsteriskKeyword_4_1_0_0; }
+		//'#' type=ObjectReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber)
+		public Group getGroup() { return cGroup; }
 		
-		//max=INT
-		public Assignment getMaxAssignment_4_1_1() { return cMaxAssignment_4_1_1; }
+		//'#'
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 		
-		//INT
-		public RuleCall getMaxINTTerminalRuleCall_4_1_1_0() { return cMaxINTTerminalRuleCall_4_1_1_0; }
+		//type=ObjectReference
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		
+		//ObjectReference
+		public RuleCall getTypeObjectReferenceParserRuleCall_1_0() { return cTypeObjectReferenceParserRuleCall_1_0; }
+		
+		//(setsNew?='+=' | setsSum?='=')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//setsNew?='+='
+		public Assignment getSetsNewAssignment_2_0() { return cSetsNewAssignment_2_0; }
+		
+		//'+='
+		public Keyword getSetsNewPlusSignEqualsSignKeyword_2_0_0() { return cSetsNewPlusSignEqualsSignKeyword_2_0_0; }
+		
+		//setsSum?='='
+		public Assignment getSetsSumAssignment_2_1() { return cSetsSumAssignment_2_1; }
+		
+		//'='
+		public Keyword getSetsSumEqualsSignKeyword_2_1_0() { return cSetsSumEqualsSignKeyword_2_1_0; }
+		
+		//(number=ExactNumber | number=IntervallNumber)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//number=ExactNumber
+		public Assignment getNumberAssignment_3_0() { return cNumberAssignment_3_0; }
+		
+		//ExactNumber
+		public RuleCall getNumberExactNumberParserRuleCall_3_0_0() { return cNumberExactNumberParserRuleCall_3_0_0; }
+		
+		//number=IntervallNumber
+		public Assignment getNumberAssignment_3_1() { return cNumberAssignment_3_1; }
+		
+		//IntervallNumber
+		public RuleCall getNumberIntervallNumberParserRuleCall_3_1_0() { return cNumberIntervallNumberParserRuleCall_3_1_0; }
+	}
+	public class IntegerTypeScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntegerTypeScope");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeIntegerReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cSetsNewAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cSetsNewPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cSetsNewAssignment_2_0.eContents().get(0);
+		private final Assignment cSetsSumAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final Keyword cSetsSumEqualsSignKeyword_2_1_0 = (Keyword)cSetsSumAssignment_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cNumberAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNumberExactNumberParserRuleCall_3_0_0 = (RuleCall)cNumberAssignment_3_0.eContents().get(0);
+		private final Assignment cNumberAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNumberIntervallNumberParserRuleCall_3_1_0 = (RuleCall)cNumberAssignment_3_1.eContents().get(0);
+		private final Assignment cNumberAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
+		private final RuleCall cNumberIntEnumberationParserRuleCall_3_2_0 = (RuleCall)cNumberAssignment_3_2.eContents().get(0);
+		
+		//IntegerTypeScope:
+		//	'#' type=IntegerReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+		//	number=IntEnumberation);
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'#' type=IntegerReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+		//number=IntEnumberation)
+		public Group getGroup() { return cGroup; }
+		
+		//'#'
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
+		
+		//type=IntegerReference
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		
+		//IntegerReference
+		public RuleCall getTypeIntegerReferenceParserRuleCall_1_0() { return cTypeIntegerReferenceParserRuleCall_1_0; }
+		
+		//(setsNew?='+=' | setsSum?='=')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//setsNew?='+='
+		public Assignment getSetsNewAssignment_2_0() { return cSetsNewAssignment_2_0; }
+		
+		//'+='
+		public Keyword getSetsNewPlusSignEqualsSignKeyword_2_0_0() { return cSetsNewPlusSignEqualsSignKeyword_2_0_0; }
+		
+		//setsSum?='='
+		public Assignment getSetsSumAssignment_2_1() { return cSetsSumAssignment_2_1; }
+		
+		//'='
+		public Keyword getSetsSumEqualsSignKeyword_2_1_0() { return cSetsSumEqualsSignKeyword_2_1_0; }
+		
+		//(number=ExactNumber | number=IntervallNumber | number=IntEnumberation)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//number=ExactNumber
+		public Assignment getNumberAssignment_3_0() { return cNumberAssignment_3_0; }
+		
+		//ExactNumber
+		public RuleCall getNumberExactNumberParserRuleCall_3_0_0() { return cNumberExactNumberParserRuleCall_3_0_0; }
+		
+		//number=IntervallNumber
+		public Assignment getNumberAssignment_3_1() { return cNumberAssignment_3_1; }
+		
+		//IntervallNumber
+		public RuleCall getNumberIntervallNumberParserRuleCall_3_1_0() { return cNumberIntervallNumberParserRuleCall_3_1_0; }
+		
+		//number=IntEnumberation
+		public Assignment getNumberAssignment_3_2() { return cNumberAssignment_3_2; }
+		
+		//IntEnumberation
+		public RuleCall getNumberIntEnumberationParserRuleCall_3_2_0() { return cNumberIntEnumberationParserRuleCall_3_2_0; }
+	}
+	public class RealTypeScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.RealTypeScope");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeRealReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cSetsNewAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cSetsNewPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cSetsNewAssignment_2_0.eContents().get(0);
+		private final Assignment cSetsSumAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final Keyword cSetsSumEqualsSignKeyword_2_1_0 = (Keyword)cSetsSumAssignment_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cNumberAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNumberExactNumberParserRuleCall_3_0_0 = (RuleCall)cNumberAssignment_3_0.eContents().get(0);
+		private final Assignment cNumberAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNumberIntervallNumberParserRuleCall_3_1_0 = (RuleCall)cNumberAssignment_3_1.eContents().get(0);
+		private final Assignment cNumberAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
+		private final RuleCall cNumberRealEnumerationParserRuleCall_3_2_0 = (RuleCall)cNumberAssignment_3_2.eContents().get(0);
+		
+		//RealTypeScope:
+		//	'#' type=RealReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+		//	number=RealEnumeration);
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'#' type=RealReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+		//number=RealEnumeration)
+		public Group getGroup() { return cGroup; }
+		
+		//'#'
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
+		
+		//type=RealReference
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		
+		//RealReference
+		public RuleCall getTypeRealReferenceParserRuleCall_1_0() { return cTypeRealReferenceParserRuleCall_1_0; }
+		
+		//(setsNew?='+=' | setsSum?='=')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//setsNew?='+='
+		public Assignment getSetsNewAssignment_2_0() { return cSetsNewAssignment_2_0; }
+		
+		//'+='
+		public Keyword getSetsNewPlusSignEqualsSignKeyword_2_0_0() { return cSetsNewPlusSignEqualsSignKeyword_2_0_0; }
+		
+		//setsSum?='='
+		public Assignment getSetsSumAssignment_2_1() { return cSetsSumAssignment_2_1; }
+		
+		//'='
+		public Keyword getSetsSumEqualsSignKeyword_2_1_0() { return cSetsSumEqualsSignKeyword_2_1_0; }
+		
+		//(number=ExactNumber | number=IntervallNumber | number=RealEnumeration)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//number=ExactNumber
+		public Assignment getNumberAssignment_3_0() { return cNumberAssignment_3_0; }
+		
+		//ExactNumber
+		public RuleCall getNumberExactNumberParserRuleCall_3_0_0() { return cNumberExactNumberParserRuleCall_3_0_0; }
+		
+		//number=IntervallNumber
+		public Assignment getNumberAssignment_3_1() { return cNumberAssignment_3_1; }
+		
+		//IntervallNumber
+		public RuleCall getNumberIntervallNumberParserRuleCall_3_1_0() { return cNumberIntervallNumberParserRuleCall_3_1_0; }
+		
+		//number=RealEnumeration
+		public Assignment getNumberAssignment_3_2() { return cNumberAssignment_3_2; }
+		
+		//RealEnumeration
+		public RuleCall getNumberRealEnumerationParserRuleCall_3_2_0() { return cNumberRealEnumerationParserRuleCall_3_2_0; }
+	}
+	public class StringTypeScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.StringTypeScope");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeStringReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cSetsNewAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cSetsNewPlusSignEqualsSignKeyword_2_0_0 = (Keyword)cSetsNewAssignment_2_0.eContents().get(0);
+		private final Assignment cSetsSumAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final Keyword cSetsSumEqualsSignKeyword_2_1_0 = (Keyword)cSetsSumAssignment_2_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cNumberAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNumberExactNumberParserRuleCall_3_0_0 = (RuleCall)cNumberAssignment_3_0.eContents().get(0);
+		private final Assignment cNumberAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNumberIntervallNumberParserRuleCall_3_1_0 = (RuleCall)cNumberAssignment_3_1.eContents().get(0);
+		private final Assignment cNumberAssignment_3_2 = (Assignment)cAlternatives_3.eContents().get(2);
+		private final RuleCall cNumberStringEnumerationParserRuleCall_3_2_0 = (RuleCall)cNumberAssignment_3_2.eContents().get(0);
+		
+		//StringTypeScope:
+		//	'#' type=StringReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+		//	number=StringEnumeration);
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'#' type=StringReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+		//number=StringEnumeration)
+		public Group getGroup() { return cGroup; }
+		
+		//'#'
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
+		
+		//type=StringReference
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		
+		//StringReference
+		public RuleCall getTypeStringReferenceParserRuleCall_1_0() { return cTypeStringReferenceParserRuleCall_1_0; }
+		
+		//(setsNew?='+=' | setsSum?='=')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//setsNew?='+='
+		public Assignment getSetsNewAssignment_2_0() { return cSetsNewAssignment_2_0; }
+		
+		//'+='
+		public Keyword getSetsNewPlusSignEqualsSignKeyword_2_0_0() { return cSetsNewPlusSignEqualsSignKeyword_2_0_0; }
+		
+		//setsSum?='='
+		public Assignment getSetsSumAssignment_2_1() { return cSetsSumAssignment_2_1; }
+		
+		//'='
+		public Keyword getSetsSumEqualsSignKeyword_2_1_0() { return cSetsSumEqualsSignKeyword_2_1_0; }
+		
+		//(number=ExactNumber | number=IntervallNumber | number=StringEnumeration)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//number=ExactNumber
+		public Assignment getNumberAssignment_3_0() { return cNumberAssignment_3_0; }
+		
+		//ExactNumber
+		public RuleCall getNumberExactNumberParserRuleCall_3_0_0() { return cNumberExactNumberParserRuleCall_3_0_0; }
+		
+		//number=IntervallNumber
+		public Assignment getNumberAssignment_3_1() { return cNumberAssignment_3_1; }
+		
+		//IntervallNumber
+		public RuleCall getNumberIntervallNumberParserRuleCall_3_1_0() { return cNumberIntervallNumberParserRuleCall_3_1_0; }
+		
+		//number=StringEnumeration
+		public Assignment getNumberAssignment_3_2() { return cNumberAssignment_3_2; }
+		
+		//StringEnumeration
+		public RuleCall getNumberStringEnumerationParserRuleCall_3_2_0() { return cNumberStringEnumerationParserRuleCall_3_2_0; }
 	}
 	public class TypeReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeReference");
@@ -1466,6 +1765,260 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//'string'
 		public Keyword getStringKeyword_1() { return cStringKeyword_1; }
 	}
+	public class NumberSpecificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.NumberSpecification");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cExactNumberParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIntervallNumberParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIntEnumberationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRealEnumerationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cStringEnumerationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		
+		//NumberSpecification:
+		//	ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ExactNumber
+		public RuleCall getExactNumberParserRuleCall_0() { return cExactNumberParserRuleCall_0; }
+		
+		//IntervallNumber
+		public RuleCall getIntervallNumberParserRuleCall_1() { return cIntervallNumberParserRuleCall_1; }
+		
+		//IntEnumberation
+		public RuleCall getIntEnumberationParserRuleCall_2() { return cIntEnumberationParserRuleCall_2; }
+		
+		//RealEnumeration
+		public RuleCall getRealEnumerationParserRuleCall_3() { return cRealEnumerationParserRuleCall_3; }
+		
+		//StringEnumeration
+		public RuleCall getStringEnumerationParserRuleCall_4() { return cStringEnumerationParserRuleCall_4; }
+	}
+	public class ExactNumberElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ExactNumber");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cExactNumberAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cExactNumberINTTerminalRuleCall_0_0 = (RuleCall)cExactNumberAssignment_0.eContents().get(0);
+		private final Assignment cExactUnlimitedAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final Keyword cExactUnlimitedAsteriskKeyword_1_0 = (Keyword)cExactUnlimitedAssignment_1.eContents().get(0);
+		
+		//ExactNumber:
+		//	exactNumber=INT | exactUnlimited?='*';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//exactNumber=INT | exactUnlimited?='*'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//exactNumber=INT
+		public Assignment getExactNumberAssignment_0() { return cExactNumberAssignment_0; }
+		
+		//INT
+		public RuleCall getExactNumberINTTerminalRuleCall_0_0() { return cExactNumberINTTerminalRuleCall_0_0; }
+		
+		//exactUnlimited?='*'
+		public Assignment getExactUnlimitedAssignment_1() { return cExactUnlimitedAssignment_1; }
+		
+		//'*'
+		public Keyword getExactUnlimitedAsteriskKeyword_1_0() { return cExactUnlimitedAsteriskKeyword_1_0; }
+	}
+	public class IntervallNumberElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntervallNumber");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cMinAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cMinINTTerminalRuleCall_0_0 = (RuleCall)cMinAssignment_0.eContents().get(0);
+		private final Keyword cFullStopFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cMaxNumberAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cMaxNumberINTTerminalRuleCall_2_0_0 = (RuleCall)cMaxNumberAssignment_2_0.eContents().get(0);
+		private final Assignment cMaxUnlimitedAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final Keyword cMaxUnlimitedAsteriskKeyword_2_1_0 = (Keyword)cMaxUnlimitedAssignment_2_1.eContents().get(0);
+		
+		//IntervallNumber:
+		//	min=INT '..' (maxNumber=INT | maxUnlimited?='*');
+		@Override public ParserRule getRule() { return rule; }
+		
+		//min=INT '..' (maxNumber=INT | maxUnlimited?='*')
+		public Group getGroup() { return cGroup; }
+		
+		//min=INT
+		public Assignment getMinAssignment_0() { return cMinAssignment_0; }
+		
+		//INT
+		public RuleCall getMinINTTerminalRuleCall_0_0() { return cMinINTTerminalRuleCall_0_0; }
+		
+		//'..'
+		public Keyword getFullStopFullStopKeyword_1() { return cFullStopFullStopKeyword_1; }
+		
+		//(maxNumber=INT | maxUnlimited?='*')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//maxNumber=INT
+		public Assignment getMaxNumberAssignment_2_0() { return cMaxNumberAssignment_2_0; }
+		
+		//INT
+		public RuleCall getMaxNumberINTTerminalRuleCall_2_0_0() { return cMaxNumberINTTerminalRuleCall_2_0_0; }
+		
+		//maxUnlimited?='*'
+		public Assignment getMaxUnlimitedAssignment_2_1() { return cMaxUnlimitedAssignment_2_1; }
+		
+		//'*'
+		public Keyword getMaxUnlimitedAsteriskKeyword_2_1_0() { return cMaxUnlimitedAsteriskKeyword_2_1_0; }
+	}
+	public class IntEnumberationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntEnumberation");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cIntEnumberationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cEntryAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cEntryINTTerminalRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cEntryAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cEntryINTTerminalRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//IntEnumberation:
+		//	{IntEnumberation} '{' (entry+=INT (',' entry+=INT)*)? '}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{IntEnumberation} '{' (entry+=INT (',' entry+=INT)*)? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{IntEnumberation}
+		public Action getIntEnumberationAction_0() { return cIntEnumberationAction_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//(entry+=INT (',' entry+=INT)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//entry+=INT
+		public Assignment getEntryAssignment_2_0() { return cEntryAssignment_2_0; }
+		
+		//INT
+		public RuleCall getEntryINTTerminalRuleCall_2_0_0() { return cEntryINTTerminalRuleCall_2_0_0; }
+		
+		//(',' entry+=INT)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//entry+=INT
+		public Assignment getEntryAssignment_2_1_1() { return cEntryAssignment_2_1_1; }
+		
+		//INT
+		public RuleCall getEntryINTTerminalRuleCall_2_1_1_0() { return cEntryINTTerminalRuleCall_2_1_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+	public class RealEnumerationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.RealEnumeration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cRealEnumerationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cEntryAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cEntryINTTerminalRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cEntryAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cEntryINTTerminalRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//RealEnumeration:
+		//	{RealEnumeration} '{' (entry+=INT (',' entry+=INT)*)? '}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{RealEnumeration} '{' (entry+=INT (',' entry+=INT)*)? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{RealEnumeration}
+		public Action getRealEnumerationAction_0() { return cRealEnumerationAction_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//(entry+=INT (',' entry+=INT)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//entry+=INT
+		public Assignment getEntryAssignment_2_0() { return cEntryAssignment_2_0; }
+		
+		//INT
+		public RuleCall getEntryINTTerminalRuleCall_2_0_0() { return cEntryINTTerminalRuleCall_2_0_0; }
+		
+		//(',' entry+=INT)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//entry+=INT
+		public Assignment getEntryAssignment_2_1_1() { return cEntryAssignment_2_1_1; }
+		
+		//INT
+		public RuleCall getEntryINTTerminalRuleCall_2_1_1_0() { return cEntryINTTerminalRuleCall_2_1_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+	public class StringEnumerationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.StringEnumeration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStringEnumerationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cEntryAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cEntrySTRINGTerminalRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cEntryAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cEntrySTRINGTerminalRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//StringEnumeration:
+		//	{StringEnumeration} '{' (entry+=STRING (',' entry+=STRING)*)? '}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{StringEnumeration} '{' (entry+=STRING (',' entry+=STRING)*)? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{StringEnumeration}
+		public Action getStringEnumerationAction_0() { return cStringEnumerationAction_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//(entry+=STRING (',' entry+=STRING)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//entry+=STRING
+		public Assignment getEntryAssignment_2_0() { return cEntryAssignment_2_0; }
+		
+		//STRING
+		public RuleCall getEntrySTRINGTerminalRuleCall_2_0_0() { return cEntrySTRINGTerminalRuleCall_2_0_0; }
+		
+		//(',' entry+=STRING)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//entry+=STRING
+		public Assignment getEntryAssignment_2_1_1() { return cEntryAssignment_2_1_1; }
+		
+		//STRING
+		public RuleCall getEntrySTRINGTerminalRuleCall_2_1_1_0() { return cEntrySTRINGTerminalRuleCall_2_1_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
 	public class ScopeDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ScopeDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1574,12 +2127,14 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Assignment cScopeAssignment_3_3_2 = (Assignment)cGroup_3_3.eContents().get(2);
 		private final RuleCall cScopeScopeParserRuleCall_3_3_2_0 = (RuleCall)cScopeAssignment_3_3_2.eContents().get(0);
 		private final Group cGroup_3_4 = (Group)cUnorderedGroup_3.eContents().get(4);
-		private final Keyword cNumberKeyword_3_4_0 = (Keyword)cGroup_3_4.eContents().get(0);
+		private final Assignment cNumberSpecifiedAssignment_3_4_0 = (Assignment)cGroup_3_4.eContents().get(0);
+		private final Keyword cNumberSpecifiedNumberKeyword_3_4_0_0 = (Keyword)cNumberSpecifiedAssignment_3_4_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_4_1 = (Keyword)cGroup_3_4.eContents().get(1);
 		private final Assignment cNumberAssignment_3_4_2 = (Assignment)cGroup_3_4.eContents().get(2);
 		private final RuleCall cNumberINTTerminalRuleCall_3_4_2_0 = (RuleCall)cNumberAssignment_3_4_2.eContents().get(0);
 		private final Group cGroup_3_5 = (Group)cUnorderedGroup_3.eContents().get(5);
-		private final Keyword cRunsKeyword_3_5_0 = (Keyword)cGroup_3_5.eContents().get(0);
+		private final Assignment cRunSpecifiedAssignment_3_5_0 = (Assignment)cGroup_3_5.eContents().get(0);
+		private final Keyword cRunSpecifiedRunsKeyword_3_5_0_0 = (Keyword)cRunSpecifiedAssignment_3_5_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_5_1 = (Keyword)cGroup_3_5.eContents().get(1);
 		private final Assignment cRunsAssignment_3_5_2 = (Assignment)cGroup_3_5.eContents().get(2);
 		private final RuleCall cRunsINTTerminalRuleCall_3_5_2_0 = (RuleCall)cRunsAssignment_3_5_2.eContents().get(0);
@@ -1594,40 +2149,40 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Assignment cConfigAssignment_3_7_2 = (Assignment)cGroup_3_7.eContents().get(2);
 		private final RuleCall cConfigConfigParserRuleCall_3_7_2_0 = (RuleCall)cConfigAssignment_3_7_2.eContents().get(0);
 		private final Group cGroup_3_8 = (Group)cUnorderedGroup_3.eContents().get(8);
-		private final Keyword cOutputKeyword_3_8_0 = (Keyword)cGroup_3_8.eContents().get(0);
+		private final Keyword cDebugKeyword_3_8_0 = (Keyword)cGroup_3_8.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_8_1 = (Keyword)cGroup_3_8.eContents().get(1);
-		private final Assignment cTagetFolderAssignment_3_8_2 = (Assignment)cGroup_3_8.eContents().get(2);
-		private final RuleCall cTagetFolderFileParserRuleCall_3_8_2_0 = (RuleCall)cTagetFolderAssignment_3_8_2.eContents().get(0);
+		private final Assignment cDebugFolderAssignment_3_8_2 = (Assignment)cGroup_3_8.eContents().get(2);
+		private final RuleCall cDebugFolderFileParserRuleCall_3_8_2_0 = (RuleCall)cDebugFolderAssignment_3_8_2.eContents().get(0);
 		private final Group cGroup_3_9 = (Group)cUnorderedGroup_3.eContents().get(9);
-		private final Keyword cDebugKeyword_3_9_0 = (Keyword)cGroup_3_9.eContents().get(0);
+		private final Keyword cLogKeyword_3_9_0 = (Keyword)cGroup_3_9.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_9_1 = (Keyword)cGroup_3_9.eContents().get(1);
-		private final Assignment cDebugFolderAssignment_3_9_2 = (Assignment)cGroup_3_9.eContents().get(2);
-		private final RuleCall cDebugFolderFileParserRuleCall_3_9_2_0 = (RuleCall)cDebugFolderAssignment_3_9_2.eContents().get(0);
+		private final Assignment cTargetLogFileAssignment_3_9_2 = (Assignment)cGroup_3_9.eContents().get(2);
+		private final RuleCall cTargetLogFileFileParserRuleCall_3_9_2_0 = (RuleCall)cTargetLogFileAssignment_3_9_2.eContents().get(0);
 		private final Group cGroup_3_10 = (Group)cUnorderedGroup_3.eContents().get(10);
-		private final Keyword cLogKeyword_3_10_0 = (Keyword)cGroup_3_10.eContents().get(0);
+		private final Keyword cStatisticsKeyword_3_10_0 = (Keyword)cGroup_3_10.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_10_1 = (Keyword)cGroup_3_10.eContents().get(1);
-		private final Assignment cTargetLogFileAssignment_3_10_2 = (Assignment)cGroup_3_10.eContents().get(2);
-		private final RuleCall cTargetLogFileFileParserRuleCall_3_10_2_0 = (RuleCall)cTargetLogFileAssignment_3_10_2.eContents().get(0);
+		private final Assignment cTargetStatisticsFileAssignment_3_10_2 = (Assignment)cGroup_3_10.eContents().get(2);
+		private final RuleCall cTargetStatisticsFileFileParserRuleCall_3_10_2_0 = (RuleCall)cTargetStatisticsFileAssignment_3_10_2.eContents().get(0);
 		private final Group cGroup_3_11 = (Group)cUnorderedGroup_3.eContents().get(11);
-		private final Keyword cStatisticsKeyword_3_11_0 = (Keyword)cGroup_3_11.eContents().get(0);
+		private final Keyword cOutputKeyword_3_11_0 = (Keyword)cGroup_3_11.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_11_1 = (Keyword)cGroup_3_11.eContents().get(1);
-		private final Assignment cTargetStatisticsFileAssignment_3_11_2 = (Assignment)cGroup_3_11.eContents().get(2);
-		private final RuleCall cTargetStatisticsFileFileParserRuleCall_3_11_2_0 = (RuleCall)cTargetStatisticsFileAssignment_3_11_2.eContents().get(0);
+		private final Assignment cTagetFolderAssignment_3_11_2 = (Assignment)cGroup_3_11.eContents().get(2);
+		private final RuleCall cTagetFolderFileParserRuleCall_3_11_2_0 = (RuleCall)cTagetFolderAssignment_3_11_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//GenerationTask:
 		//	'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
-		//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
-		//	number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
-		//	tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
-		//	targetStatisticsFile=File)?) '}';
+		//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? &
+		//	(numberSpecified?='number' '=' number=INT)? & (runSpecified?='runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? &
+		//	('config' '=' config=Config)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
+		//	targetStatisticsFile=File)? & ('output' '=' tagetFolder=File)?) '}';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
-		//partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
-		//number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
-		//tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
-		//targetStatisticsFile=File)?) '}'
+		//partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? &
+		//(numberSpecified?='number' '=' number=INT)? & (runSpecified?='runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? &
+		//('config' '=' config=Config)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
+		//targetStatisticsFile=File)? & ('output' '=' tagetFolder=File)?) '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'generate'
@@ -1640,9 +2195,10 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
 		//(('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '=' partialModel=PartialModel)? & ('patterns' '='
-		//patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '=' number=INT)? & ('runs' '=' runs=INT)? & ('solver'
-		//'=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '=' tagetFolder=File)? & ('debug' '='
-		//debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '=' targetStatisticsFile=File)?)
+		//patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & (numberSpecified?='number' '=' number=INT)? &
+		//(runSpecified?='runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('debug' '='
+		//debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '=' targetStatisticsFile=File)? & ('output' '='
+		//tagetFolder=File)?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//('metamodel' '=' metamodel=Metamodel)?
@@ -1705,11 +2261,14 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//Scope
 		public RuleCall getScopeScopeParserRuleCall_3_3_2_0() { return cScopeScopeParserRuleCall_3_3_2_0; }
 		
-		//('number' '=' number=INT)?
+		//(numberSpecified?='number' '=' number=INT)?
 		public Group getGroup_3_4() { return cGroup_3_4; }
 		
+		//numberSpecified?='number'
+		public Assignment getNumberSpecifiedAssignment_3_4_0() { return cNumberSpecifiedAssignment_3_4_0; }
+		
 		//'number'
-		public Keyword getNumberKeyword_3_4_0() { return cNumberKeyword_3_4_0; }
+		public Keyword getNumberSpecifiedNumberKeyword_3_4_0_0() { return cNumberSpecifiedNumberKeyword_3_4_0_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3_4_1() { return cEqualsSignKeyword_3_4_1; }
@@ -1720,11 +2279,14 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//INT
 		public RuleCall getNumberINTTerminalRuleCall_3_4_2_0() { return cNumberINTTerminalRuleCall_3_4_2_0; }
 		
-		//('runs' '=' runs=INT)?
+		//(runSpecified?='runs' '=' runs=INT)?
 		public Group getGroup_3_5() { return cGroup_3_5; }
 		
+		//runSpecified?='runs'
+		public Assignment getRunSpecifiedAssignment_3_5_0() { return cRunSpecifiedAssignment_3_5_0; }
+		
 		//'runs'
-		public Keyword getRunsKeyword_3_5_0() { return cRunsKeyword_3_5_0; }
+		public Keyword getRunSpecifiedRunsKeyword_3_5_0_0() { return cRunSpecifiedRunsKeyword_3_5_0_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3_5_1() { return cEqualsSignKeyword_3_5_1; }
@@ -1765,65 +2327,65 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//Config
 		public RuleCall getConfigConfigParserRuleCall_3_7_2_0() { return cConfigConfigParserRuleCall_3_7_2_0; }
 		
-		//('output' '=' tagetFolder=File)?
+		//('debug' '=' debugFolder=File)?
 		public Group getGroup_3_8() { return cGroup_3_8; }
 		
-		//'output'
-		public Keyword getOutputKeyword_3_8_0() { return cOutputKeyword_3_8_0; }
+		//'debug'
+		public Keyword getDebugKeyword_3_8_0() { return cDebugKeyword_3_8_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3_8_1() { return cEqualsSignKeyword_3_8_1; }
 		
-		//tagetFolder=File
-		public Assignment getTagetFolderAssignment_3_8_2() { return cTagetFolderAssignment_3_8_2; }
+		//debugFolder=File
+		public Assignment getDebugFolderAssignment_3_8_2() { return cDebugFolderAssignment_3_8_2; }
 		
 		//File
-		public RuleCall getTagetFolderFileParserRuleCall_3_8_2_0() { return cTagetFolderFileParserRuleCall_3_8_2_0; }
+		public RuleCall getDebugFolderFileParserRuleCall_3_8_2_0() { return cDebugFolderFileParserRuleCall_3_8_2_0; }
 		
-		//('debug' '=' debugFolder=File)?
+		//('log' '=' targetLogFile=File)?
 		public Group getGroup_3_9() { return cGroup_3_9; }
 		
-		//'debug'
-		public Keyword getDebugKeyword_3_9_0() { return cDebugKeyword_3_9_0; }
+		//'log'
+		public Keyword getLogKeyword_3_9_0() { return cLogKeyword_3_9_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3_9_1() { return cEqualsSignKeyword_3_9_1; }
 		
-		//debugFolder=File
-		public Assignment getDebugFolderAssignment_3_9_2() { return cDebugFolderAssignment_3_9_2; }
+		//targetLogFile=File
+		public Assignment getTargetLogFileAssignment_3_9_2() { return cTargetLogFileAssignment_3_9_2; }
 		
 		//File
-		public RuleCall getDebugFolderFileParserRuleCall_3_9_2_0() { return cDebugFolderFileParserRuleCall_3_9_2_0; }
+		public RuleCall getTargetLogFileFileParserRuleCall_3_9_2_0() { return cTargetLogFileFileParserRuleCall_3_9_2_0; }
 		
-		//('log' '=' targetLogFile=File)?
+		//('statistics' '=' targetStatisticsFile=File)?
 		public Group getGroup_3_10() { return cGroup_3_10; }
 		
-		//'log'
-		public Keyword getLogKeyword_3_10_0() { return cLogKeyword_3_10_0; }
+		//'statistics'
+		public Keyword getStatisticsKeyword_3_10_0() { return cStatisticsKeyword_3_10_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3_10_1() { return cEqualsSignKeyword_3_10_1; }
 		
-		//targetLogFile=File
-		public Assignment getTargetLogFileAssignment_3_10_2() { return cTargetLogFileAssignment_3_10_2; }
+		//targetStatisticsFile=File
+		public Assignment getTargetStatisticsFileAssignment_3_10_2() { return cTargetStatisticsFileAssignment_3_10_2; }
 		
 		//File
-		public RuleCall getTargetLogFileFileParserRuleCall_3_10_2_0() { return cTargetLogFileFileParserRuleCall_3_10_2_0; }
+		public RuleCall getTargetStatisticsFileFileParserRuleCall_3_10_2_0() { return cTargetStatisticsFileFileParserRuleCall_3_10_2_0; }
 		
-		//('statistics' '=' targetStatisticsFile=File)?
+		//('output' '=' tagetFolder=File)?
 		public Group getGroup_3_11() { return cGroup_3_11; }
 		
-		//'statistics'
-		public Keyword getStatisticsKeyword_3_11_0() { return cStatisticsKeyword_3_11_0; }
+		//'output'
+		public Keyword getOutputKeyword_3_11_0() { return cOutputKeyword_3_11_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_3_11_1() { return cEqualsSignKeyword_3_11_1; }
 		
-		//targetStatisticsFile=File
-		public Assignment getTargetStatisticsFileAssignment_3_11_2() { return cTargetStatisticsFileAssignment_3_11_2; }
+		//tagetFolder=File
+		public Assignment getTagetFolderAssignment_3_11_2() { return cTagetFolderAssignment_3_11_2; }
 		
 		//File
-		public RuleCall getTargetStatisticsFileFileParserRuleCall_3_11_2_0() { return cTargetStatisticsFileFileParserRuleCall_3_11_2_0; }
+		public RuleCall getTagetFolderFileParserRuleCall_3_11_2_0() { return cTagetFolderFileParserRuleCall_3_11_2_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -1905,12 +2467,23 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	private final SolverElements eSolver;
 	private final ScopeSpecificationElements pScopeSpecification;
 	private final TypeScopeElements pTypeScope;
+	private final ClassTypeScopeElements pClassTypeScope;
+	private final ObjectTypeScopeElements pObjectTypeScope;
+	private final IntegerTypeScopeElements pIntegerTypeScope;
+	private final RealTypeScopeElements pRealTypeScope;
+	private final StringTypeScopeElements pStringTypeScope;
 	private final TypeReferenceElements pTypeReference;
 	private final ClassReferenceElements pClassReference;
 	private final ObjectReferenceElements pObjectReference;
 	private final IntegerReferenceElements pIntegerReference;
 	private final RealReferenceElements pRealReference;
 	private final StringReferenceElements pStringReference;
+	private final NumberSpecificationElements pNumberSpecification;
+	private final ExactNumberElements pExactNumber;
+	private final IntervallNumberElements pIntervallNumber;
+	private final IntEnumberationElements pIntEnumberation;
+	private final RealEnumerationElements pRealEnumeration;
+	private final StringEnumerationElements pStringEnumeration;
 	private final ScopeDeclarationElements pScopeDeclaration;
 	private final ScopeReferenceElements pScopeReference;
 	private final ScopeElements pScope;
@@ -1966,12 +2539,23 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.eSolver = new SolverElements();
 		this.pScopeSpecification = new ScopeSpecificationElements();
 		this.pTypeScope = new TypeScopeElements();
+		this.pClassTypeScope = new ClassTypeScopeElements();
+		this.pObjectTypeScope = new ObjectTypeScopeElements();
+		this.pIntegerTypeScope = new IntegerTypeScopeElements();
+		this.pRealTypeScope = new RealTypeScopeElements();
+		this.pStringTypeScope = new StringTypeScopeElements();
 		this.pTypeReference = new TypeReferenceElements();
 		this.pClassReference = new ClassReferenceElements();
 		this.pObjectReference = new ObjectReferenceElements();
 		this.pIntegerReference = new IntegerReferenceElements();
 		this.pRealReference = new RealReferenceElements();
 		this.pStringReference = new StringReferenceElements();
+		this.pNumberSpecification = new NumberSpecificationElements();
+		this.pExactNumber = new ExactNumberElements();
+		this.pIntervallNumber = new IntervallNumberElements();
+		this.pIntEnumberation = new IntEnumberationElements();
+		this.pRealEnumeration = new RealEnumerationElements();
+		this.pStringEnumeration = new StringEnumerationElements();
 		this.pScopeDeclaration = new ScopeDeclarationElements();
 		this.pScopeReference = new ScopeReferenceElements();
 		this.pScope = new ScopeElements();
@@ -2037,6 +2621,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		return getQualifiedNameAccess().getRule();
 	}
 	
+	////terminal REAL returns ecore::EBigDecimal: '-'? INT '.' INT;
+	////terminal INTEGER returns ecore::EInt: '-'? INT;
 	/////////////////////////////////////////////////////
 	//// Imports
 	/////////////////////////////////////////////////////
@@ -2429,13 +3015,66 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//TypeScope:
-	//	'#' type=TypeReference (setsNew?='+=' | setsSum?='=') min=INT ('..' (maxUnlimited?='*' | max=INT))?;
+	//	ClassTypeScope | ObjectTypeScope | IntegerTypeScope | RealTypeScope | StringTypeScope;
 	public TypeScopeElements getTypeScopeAccess() {
 		return pTypeScope;
 	}
 	
 	public ParserRule getTypeScopeRule() {
 		return getTypeScopeAccess().getRule();
+	}
+	
+	//ClassTypeScope:
+	//	'#' type=ClassReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber);
+	public ClassTypeScopeElements getClassTypeScopeAccess() {
+		return pClassTypeScope;
+	}
+	
+	public ParserRule getClassTypeScopeRule() {
+		return getClassTypeScopeAccess().getRule();
+	}
+	
+	//ObjectTypeScope:
+	//	'#' type=ObjectReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber);
+	public ObjectTypeScopeElements getObjectTypeScopeAccess() {
+		return pObjectTypeScope;
+	}
+	
+	public ParserRule getObjectTypeScopeRule() {
+		return getObjectTypeScopeAccess().getRule();
+	}
+	
+	//IntegerTypeScope:
+	//	'#' type=IntegerReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+	//	number=IntEnumberation);
+	public IntegerTypeScopeElements getIntegerTypeScopeAccess() {
+		return pIntegerTypeScope;
+	}
+	
+	public ParserRule getIntegerTypeScopeRule() {
+		return getIntegerTypeScopeAccess().getRule();
+	}
+	
+	//RealTypeScope:
+	//	'#' type=RealReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+	//	number=RealEnumeration);
+	public RealTypeScopeElements getRealTypeScopeAccess() {
+		return pRealTypeScope;
+	}
+	
+	public ParserRule getRealTypeScopeRule() {
+		return getRealTypeScopeAccess().getRule();
+	}
+	
+	//StringTypeScope:
+	//	'#' type=StringReference (setsNew?='+=' | setsSum?='=') (number=ExactNumber | number=IntervallNumber |
+	//	number=StringEnumeration);
+	public StringTypeScopeElements getStringTypeScopeAccess() {
+		return pStringTypeScope;
+	}
+	
+	public ParserRule getStringTypeScopeRule() {
+		return getStringTypeScopeAccess().getRule();
 	}
 	
 	//TypeReference:
@@ -2498,6 +3137,66 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		return getStringReferenceAccess().getRule();
 	}
 	
+	//NumberSpecification:
+	//	ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration;
+	public NumberSpecificationElements getNumberSpecificationAccess() {
+		return pNumberSpecification;
+	}
+	
+	public ParserRule getNumberSpecificationRule() {
+		return getNumberSpecificationAccess().getRule();
+	}
+	
+	//ExactNumber:
+	//	exactNumber=INT | exactUnlimited?='*';
+	public ExactNumberElements getExactNumberAccess() {
+		return pExactNumber;
+	}
+	
+	public ParserRule getExactNumberRule() {
+		return getExactNumberAccess().getRule();
+	}
+	
+	//IntervallNumber:
+	//	min=INT '..' (maxNumber=INT | maxUnlimited?='*');
+	public IntervallNumberElements getIntervallNumberAccess() {
+		return pIntervallNumber;
+	}
+	
+	public ParserRule getIntervallNumberRule() {
+		return getIntervallNumberAccess().getRule();
+	}
+	
+	//IntEnumberation:
+	//	{IntEnumberation} '{' (entry+=INT (',' entry+=INT)*)? '}';
+	public IntEnumberationElements getIntEnumberationAccess() {
+		return pIntEnumberation;
+	}
+	
+	public ParserRule getIntEnumberationRule() {
+		return getIntEnumberationAccess().getRule();
+	}
+	
+	//RealEnumeration:
+	//	{RealEnumeration} '{' (entry+=INT (',' entry+=INT)*)? '}';
+	public RealEnumerationElements getRealEnumerationAccess() {
+		return pRealEnumeration;
+	}
+	
+	public ParserRule getRealEnumerationRule() {
+		return getRealEnumerationAccess().getRule();
+	}
+	
+	//StringEnumeration:
+	//	{StringEnumeration} '{' (entry+=STRING (',' entry+=STRING)*)? '}';
+	public StringEnumerationElements getStringEnumerationAccess() {
+		return pStringEnumeration;
+	}
+	
+	public ParserRule getStringEnumerationRule() {
+		return getStringEnumerationAccess().getRule();
+	}
+	
 	//ScopeDeclaration:
 	//	'scope' name=ID specification=ScopeSpecification;
 	public ScopeDeclarationElements getScopeDeclarationAccess() {
@@ -2540,10 +3239,10 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	
 	//GenerationTask:
 	//	'generate' {GenerationTask} '{' (('metamodel' '=' metamodel=Metamodel)? & ('partial-model' '='
-	//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? & ('number' '='
-	//	number=INT)? & ('runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? & ('config' '=' config=Config)? & ('output' '='
-	//	tagetFolder=File)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
-	//	targetStatisticsFile=File)?) '}';
+	//	partialModel=PartialModel)? & ('patterns' '=' patterns=GraphPattern)? & ('scope' '=' scope=Scope)? &
+	//	(numberSpecified?='number' '=' number=INT)? & (runSpecified?='runs' '=' runs=INT)? & ('solver' '=' solver=Solver)? &
+	//	('config' '=' config=Config)? & ('debug' '=' debugFolder=File)? & ('log' '=' targetLogFile=File)? & ('statistics' '='
+	//	targetStatisticsFile=File)? & ('output' '=' tagetFolder=File)?) '}';
 	public GenerationTaskElements getGenerationTaskAccess() {
 		return pGenerationTask;
 	}

@@ -8,6 +8,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatter
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationFactory;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Command;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration;
@@ -17,6 +18,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpe
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference;
@@ -27,8 +29,11 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatt
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatternReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Import;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Metamodel;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement;
@@ -36,7 +41,9 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Metamodel
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModel;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelEntry;
@@ -45,15 +52,19 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialMo
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Task;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope;
@@ -349,6 +360,41 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass classTypeScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass objectTypeScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass integerTypeScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realTypeScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringTypeScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass typeReferenceEClass = null;
 
   /**
@@ -385,6 +431,48 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   private EClass stringReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass numberSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass exactNumberEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass intervallNumberEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass intEnumberationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realEnumerationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringEnumerationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1221,19 +1309,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeScope_Type()
-  {
-    return (EReference)typeScopeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getTypeScope_SetsNew()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1243,7 +1321,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    */
   public EAttribute getTypeScope_SetsSum()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1251,9 +1329,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_Min()
+  public EReference getTypeScope_Number()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(3);
+    return (EReference)typeScopeEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1261,9 +1339,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_MaxUnlimited()
+  public EClass getClassTypeScope()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(4);
+    return classTypeScopeEClass;
   }
 
   /**
@@ -1271,9 +1349,89 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeScope_Max()
+  public EReference getClassTypeScope_Type()
   {
-    return (EAttribute)typeScopeEClass.getEStructuralFeatures().get(5);
+    return (EReference)classTypeScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getObjectTypeScope()
+  {
+    return objectTypeScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getObjectTypeScope_Type()
+  {
+    return (EReference)objectTypeScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntegerTypeScope()
+  {
+    return integerTypeScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIntegerTypeScope_Type()
+  {
+    return (EReference)integerTypeScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRealTypeScope()
+  {
+    return realTypeScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRealTypeScope_Type()
+  {
+    return (EReference)realTypeScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringTypeScope()
+  {
+    return stringTypeScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getStringTypeScope_Type()
+  {
+    return (EReference)stringTypeScopeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1344,6 +1502,146 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
   public EClass getStringReference()
   {
     return stringReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNumberSpecification()
+  {
+    return numberSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExactNumber()
+  {
+    return exactNumberEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getExactNumber_ExactNumber()
+  {
+    return (EAttribute)exactNumberEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getExactNumber_ExactUnlimited()
+  {
+    return (EAttribute)exactNumberEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntervallNumber()
+  {
+    return intervallNumberEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIntervallNumber_Min()
+  {
+    return (EAttribute)intervallNumberEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIntervallNumber_MaxNumber()
+  {
+    return (EAttribute)intervallNumberEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIntervallNumber_MaxUnlimited()
+  {
+    return (EAttribute)intervallNumberEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntEnumberation()
+  {
+    return intEnumberationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIntEnumberation_Entry()
+  {
+    return (EAttribute)intEnumberationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRealEnumeration()
+  {
+    return realEnumerationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRealEnumeration_Entry()
+  {
+    return (EAttribute)realEnumerationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringEnumeration()
+  {
+    return stringEnumerationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStringEnumeration_Entry()
+  {
+    return (EAttribute)stringEnumerationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1461,7 +1759,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGenerationTask_Number()
+  public EAttribute getGenerationTask_NumberSpecified()
   {
     return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(4);
   }
@@ -1471,7 +1769,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGenerationTask_Runs()
+  public EAttribute getGenerationTask_Number()
   {
     return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(5);
   }
@@ -1481,7 +1779,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGenerationTask_Solver()
+  public EAttribute getGenerationTask_RunSpecified()
   {
     return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(6);
   }
@@ -1491,27 +1789,27 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getGenerationTask_Runs()
+  {
+    return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGenerationTask_Solver()
+  {
+    return (EAttribute)generationTaskEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getGenerationTask_Config()
-  {
-    return (EReference)generationTaskEClass.getEStructuralFeatures().get(7);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getGenerationTask_TagetFolder()
-  {
-    return (EReference)generationTaskEClass.getEStructuralFeatures().get(8);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getGenerationTask_DebugFolder()
   {
     return (EReference)generationTaskEClass.getEStructuralFeatures().get(9);
   }
@@ -1521,7 +1819,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGenerationTask_TargetLogFile()
+  public EReference getGenerationTask_DebugFolder()
   {
     return (EReference)generationTaskEClass.getEStructuralFeatures().get(10);
   }
@@ -1531,9 +1829,29 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGenerationTask_TargetStatisticsFile()
+  public EReference getGenerationTask_TargetLogFile()
   {
     return (EReference)generationTaskEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_TargetStatisticsFile()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(12);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGenerationTask_TagetFolder()
+  {
+    return (EReference)generationTaskEClass.getEStructuralFeatures().get(13);
   }
 
   /**
@@ -1713,12 +2031,24 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     createEReference(scopeSpecificationEClass, SCOPE_SPECIFICATION__SCOPES);
 
     typeScopeEClass = createEClass(TYPE_SCOPE);
-    createEReference(typeScopeEClass, TYPE_SCOPE__TYPE);
     createEAttribute(typeScopeEClass, TYPE_SCOPE__SETS_NEW);
     createEAttribute(typeScopeEClass, TYPE_SCOPE__SETS_SUM);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__MIN);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__MAX_UNLIMITED);
-    createEAttribute(typeScopeEClass, TYPE_SCOPE__MAX);
+    createEReference(typeScopeEClass, TYPE_SCOPE__NUMBER);
+
+    classTypeScopeEClass = createEClass(CLASS_TYPE_SCOPE);
+    createEReference(classTypeScopeEClass, CLASS_TYPE_SCOPE__TYPE);
+
+    objectTypeScopeEClass = createEClass(OBJECT_TYPE_SCOPE);
+    createEReference(objectTypeScopeEClass, OBJECT_TYPE_SCOPE__TYPE);
+
+    integerTypeScopeEClass = createEClass(INTEGER_TYPE_SCOPE);
+    createEReference(integerTypeScopeEClass, INTEGER_TYPE_SCOPE__TYPE);
+
+    realTypeScopeEClass = createEClass(REAL_TYPE_SCOPE);
+    createEReference(realTypeScopeEClass, REAL_TYPE_SCOPE__TYPE);
+
+    stringTypeScopeEClass = createEClass(STRING_TYPE_SCOPE);
+    createEReference(stringTypeScopeEClass, STRING_TYPE_SCOPE__TYPE);
 
     typeReferenceEClass = createEClass(TYPE_REFERENCE);
 
@@ -1732,6 +2062,26 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     realReferenceEClass = createEClass(REAL_REFERENCE);
 
     stringReferenceEClass = createEClass(STRING_REFERENCE);
+
+    numberSpecificationEClass = createEClass(NUMBER_SPECIFICATION);
+
+    exactNumberEClass = createEClass(EXACT_NUMBER);
+    createEAttribute(exactNumberEClass, EXACT_NUMBER__EXACT_NUMBER);
+    createEAttribute(exactNumberEClass, EXACT_NUMBER__EXACT_UNLIMITED);
+
+    intervallNumberEClass = createEClass(INTERVALL_NUMBER);
+    createEAttribute(intervallNumberEClass, INTERVALL_NUMBER__MIN);
+    createEAttribute(intervallNumberEClass, INTERVALL_NUMBER__MAX_NUMBER);
+    createEAttribute(intervallNumberEClass, INTERVALL_NUMBER__MAX_UNLIMITED);
+
+    intEnumberationEClass = createEClass(INT_ENUMBERATION);
+    createEAttribute(intEnumberationEClass, INT_ENUMBERATION__ENTRY);
+
+    realEnumerationEClass = createEClass(REAL_ENUMERATION);
+    createEAttribute(realEnumerationEClass, REAL_ENUMERATION__ENTRY);
+
+    stringEnumerationEClass = createEClass(STRING_ENUMERATION);
+    createEAttribute(stringEnumerationEClass, STRING_ENUMERATION__ENTRY);
 
     scopeDeclarationEClass = createEClass(SCOPE_DECLARATION);
     createEReference(scopeDeclarationEClass, SCOPE_DECLARATION__SPECIFICATION);
@@ -1748,14 +2098,16 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     createEReference(generationTaskEClass, GENERATION_TASK__PARTIAL_MODEL);
     createEReference(generationTaskEClass, GENERATION_TASK__PATTERNS);
     createEReference(generationTaskEClass, GENERATION_TASK__SCOPE);
+    createEAttribute(generationTaskEClass, GENERATION_TASK__NUMBER_SPECIFIED);
     createEAttribute(generationTaskEClass, GENERATION_TASK__NUMBER);
+    createEAttribute(generationTaskEClass, GENERATION_TASK__RUN_SPECIFIED);
     createEAttribute(generationTaskEClass, GENERATION_TASK__RUNS);
     createEAttribute(generationTaskEClass, GENERATION_TASK__SOLVER);
     createEReference(generationTaskEClass, GENERATION_TASK__CONFIG);
-    createEReference(generationTaskEClass, GENERATION_TASK__TAGET_FOLDER);
     createEReference(generationTaskEClass, GENERATION_TASK__DEBUG_FOLDER);
     createEReference(generationTaskEClass, GENERATION_TASK__TARGET_LOG_FILE);
     createEReference(generationTaskEClass, GENERATION_TASK__TARGET_STATISTICS_FILE);
+    createEReference(generationTaskEClass, GENERATION_TASK__TAGET_FOLDER);
 
     integerScopeEClass = createEClass(INTEGER_SCOPE);
 
@@ -1825,11 +2177,21 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     configDeclarationEClass.getESuperTypes().add(this.getDeclaration());
     configReferenceEClass.getESuperTypes().add(this.getConfig());
     scopeSpecificationEClass.getESuperTypes().add(this.getScope());
+    classTypeScopeEClass.getESuperTypes().add(this.getTypeScope());
+    objectTypeScopeEClass.getESuperTypes().add(this.getTypeScope());
+    integerTypeScopeEClass.getESuperTypes().add(this.getTypeScope());
+    realTypeScopeEClass.getESuperTypes().add(this.getTypeScope());
+    stringTypeScopeEClass.getESuperTypes().add(this.getTypeScope());
     classReferenceEClass.getESuperTypes().add(this.getTypeReference());
     objectReferenceEClass.getESuperTypes().add(this.getTypeReference());
     integerReferenceEClass.getESuperTypes().add(this.getTypeReference());
     realReferenceEClass.getESuperTypes().add(this.getTypeReference());
     stringReferenceEClass.getESuperTypes().add(this.getTypeReference());
+    exactNumberEClass.getESuperTypes().add(this.getNumberSpecification());
+    intervallNumberEClass.getESuperTypes().add(this.getNumberSpecification());
+    intEnumberationEClass.getESuperTypes().add(this.getNumberSpecification());
+    realEnumerationEClass.getESuperTypes().add(this.getNumberSpecification());
+    stringEnumerationEClass.getESuperTypes().add(this.getNumberSpecification());
     scopeDeclarationEClass.getESuperTypes().add(this.getDeclaration());
     scopeReferenceEClass.getESuperTypes().add(this.getScope());
     taskEClass.getESuperTypes().add(this.getCommand());
@@ -1946,12 +2308,24 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEReference(getScopeSpecification_Scopes(), this.getTypeScope(), null, "scopes", null, 0, -1, ScopeSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeScopeEClass, TypeScope.class, "TypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypeScope_Type(), this.getTypeReference(), null, "type", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTypeScope_SetsNew(), theEcorePackage.getEBoolean(), "setsNew", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTypeScope_SetsSum(), theEcorePackage.getEBoolean(), "setsSum", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_Min(), theEcorePackage.getEInt(), "min", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_MaxUnlimited(), theEcorePackage.getEBoolean(), "maxUnlimited", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeScope_Max(), theEcorePackage.getEInt(), "max", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeScope_Number(), this.getNumberSpecification(), null, "number", null, 0, 1, TypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(classTypeScopeEClass, ClassTypeScope.class, "ClassTypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getClassTypeScope_Type(), this.getClassReference(), null, "type", null, 0, 1, ClassTypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(objectTypeScopeEClass, ObjectTypeScope.class, "ObjectTypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getObjectTypeScope_Type(), this.getObjectReference(), null, "type", null, 0, 1, ObjectTypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(integerTypeScopeEClass, IntegerTypeScope.class, "IntegerTypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getIntegerTypeScope_Type(), this.getIntegerReference(), null, "type", null, 0, 1, IntegerTypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(realTypeScopeEClass, RealTypeScope.class, "RealTypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRealTypeScope_Type(), this.getRealReference(), null, "type", null, 0, 1, RealTypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stringTypeScopeEClass, StringTypeScope.class, "StringTypeScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getStringTypeScope_Type(), this.getStringReference(), null, "type", null, 0, 1, StringTypeScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeReferenceEClass, TypeReference.class, "TypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1965,6 +2339,26 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEClass(realReferenceEClass, RealReference.class, "RealReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(stringReferenceEClass, StringReference.class, "StringReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(numberSpecificationEClass, NumberSpecification.class, "NumberSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(exactNumberEClass, ExactNumber.class, "ExactNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getExactNumber_ExactNumber(), theEcorePackage.getEInt(), "exactNumber", null, 0, 1, ExactNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getExactNumber_ExactUnlimited(), theEcorePackage.getEBoolean(), "exactUnlimited", null, 0, 1, ExactNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(intervallNumberEClass, IntervallNumber.class, "IntervallNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIntervallNumber_Min(), theEcorePackage.getEInt(), "min", null, 0, 1, IntervallNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIntervallNumber_MaxNumber(), theEcorePackage.getEInt(), "maxNumber", null, 0, 1, IntervallNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIntervallNumber_MaxUnlimited(), theEcorePackage.getEBoolean(), "maxUnlimited", null, 0, 1, IntervallNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(intEnumberationEClass, IntEnumberation.class, "IntEnumberation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIntEnumberation_Entry(), theEcorePackage.getEInt(), "entry", null, 0, -1, IntEnumberation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(realEnumerationEClass, RealEnumeration.class, "RealEnumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRealEnumeration_Entry(), theEcorePackage.getEInt(), "entry", null, 0, -1, RealEnumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stringEnumerationEClass, StringEnumeration.class, "StringEnumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStringEnumeration_Entry(), theEcorePackage.getEString(), "entry", null, 0, -1, StringEnumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scopeDeclarationEClass, ScopeDeclaration.class, "ScopeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getScopeDeclaration_Specification(), this.getScopeSpecification(), null, "specification", null, 0, 1, ScopeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1981,14 +2375,16 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEReference(getGenerationTask_PartialModel(), this.getPartialModel(), null, "partialModel", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGenerationTask_Patterns(), this.getGraphPattern(), null, "patterns", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGenerationTask_Scope(), this.getScope(), null, "scope", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGenerationTask_NumberSpecified(), theEcorePackage.getEBoolean(), "numberSpecified", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGenerationTask_Number(), theEcorePackage.getEInt(), "number", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGenerationTask_RunSpecified(), theEcorePackage.getEBoolean(), "runSpecified", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGenerationTask_Runs(), theEcorePackage.getEInt(), "runs", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGenerationTask_Solver(), this.getSolver(), "solver", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGenerationTask_Config(), this.getConfig(), null, "config", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGenerationTask_TagetFolder(), this.getFile(), null, "tagetFolder", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGenerationTask_DebugFolder(), this.getFile(), null, "debugFolder", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGenerationTask_TargetLogFile(), this.getFile(), null, "targetLogFile", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGenerationTask_TargetStatisticsFile(), this.getFile(), null, "targetStatisticsFile", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGenerationTask_TagetFolder(), this.getFile(), null, "tagetFolder", null, 0, 1, GenerationTask.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(integerScopeEClass, IntegerScope.class, "IntegerScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

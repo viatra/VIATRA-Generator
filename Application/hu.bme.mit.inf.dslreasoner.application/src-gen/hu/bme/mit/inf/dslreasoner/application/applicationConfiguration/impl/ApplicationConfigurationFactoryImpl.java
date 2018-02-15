@@ -104,12 +104,23 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
       case ApplicationConfigurationPackage.CONFIG: return createConfig();
       case ApplicationConfigurationPackage.SCOPE_SPECIFICATION: return createScopeSpecification();
       case ApplicationConfigurationPackage.TYPE_SCOPE: return createTypeScope();
+      case ApplicationConfigurationPackage.CLASS_TYPE_SCOPE: return createClassTypeScope();
+      case ApplicationConfigurationPackage.OBJECT_TYPE_SCOPE: return createObjectTypeScope();
+      case ApplicationConfigurationPackage.INTEGER_TYPE_SCOPE: return createIntegerTypeScope();
+      case ApplicationConfigurationPackage.REAL_TYPE_SCOPE: return createRealTypeScope();
+      case ApplicationConfigurationPackage.STRING_TYPE_SCOPE: return createStringTypeScope();
       case ApplicationConfigurationPackage.TYPE_REFERENCE: return createTypeReference();
       case ApplicationConfigurationPackage.CLASS_REFERENCE: return createClassReference();
       case ApplicationConfigurationPackage.OBJECT_REFERENCE: return createObjectReference();
       case ApplicationConfigurationPackage.INTEGER_REFERENCE: return createIntegerReference();
       case ApplicationConfigurationPackage.REAL_REFERENCE: return createRealReference();
       case ApplicationConfigurationPackage.STRING_REFERENCE: return createStringReference();
+      case ApplicationConfigurationPackage.NUMBER_SPECIFICATION: return createNumberSpecification();
+      case ApplicationConfigurationPackage.EXACT_NUMBER: return createExactNumber();
+      case ApplicationConfigurationPackage.INTERVALL_NUMBER: return createIntervallNumber();
+      case ApplicationConfigurationPackage.INT_ENUMBERATION: return createIntEnumberation();
+      case ApplicationConfigurationPackage.REAL_ENUMERATION: return createRealEnumeration();
+      case ApplicationConfigurationPackage.STRING_ENUMERATION: return createStringEnumeration();
       case ApplicationConfigurationPackage.SCOPE_DECLARATION: return createScopeDeclaration();
       case ApplicationConfigurationPackage.SCOPE_REFERENCE: return createScopeReference();
       case ApplicationConfigurationPackage.SCOPE: return createScope();
@@ -580,6 +591,61 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public ClassTypeScope createClassTypeScope()
+  {
+    ClassTypeScopeImpl classTypeScope = new ClassTypeScopeImpl();
+    return classTypeScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ObjectTypeScope createObjectTypeScope()
+  {
+    ObjectTypeScopeImpl objectTypeScope = new ObjectTypeScopeImpl();
+    return objectTypeScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntegerTypeScope createIntegerTypeScope()
+  {
+    IntegerTypeScopeImpl integerTypeScope = new IntegerTypeScopeImpl();
+    return integerTypeScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RealTypeScope createRealTypeScope()
+  {
+    RealTypeScopeImpl realTypeScope = new RealTypeScopeImpl();
+    return realTypeScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StringTypeScope createStringTypeScope()
+  {
+    StringTypeScopeImpl stringTypeScope = new StringTypeScopeImpl();
+    return stringTypeScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public TypeReference createTypeReference()
   {
     TypeReferenceImpl typeReference = new TypeReferenceImpl();
@@ -639,6 +705,72 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
   {
     StringReferenceImpl stringReference = new StringReferenceImpl();
     return stringReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NumberSpecification createNumberSpecification()
+  {
+    NumberSpecificationImpl numberSpecification = new NumberSpecificationImpl();
+    return numberSpecification;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExactNumber createExactNumber()
+  {
+    ExactNumberImpl exactNumber = new ExactNumberImpl();
+    return exactNumber;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntervallNumber createIntervallNumber()
+  {
+    IntervallNumberImpl intervallNumber = new IntervallNumberImpl();
+    return intervallNumber;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntEnumberation createIntEnumberation()
+  {
+    IntEnumberationImpl intEnumberation = new IntEnumberationImpl();
+    return intEnumberation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RealEnumeration createRealEnumeration()
+  {
+    RealEnumerationImpl realEnumeration = new RealEnumerationImpl();
+    return realEnumeration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StringEnumeration createStringEnumeration()
+  {
+    StringEnumerationImpl stringEnumeration = new StringEnumerationImpl();
+    return stringEnumeration;
   }
 
   /**

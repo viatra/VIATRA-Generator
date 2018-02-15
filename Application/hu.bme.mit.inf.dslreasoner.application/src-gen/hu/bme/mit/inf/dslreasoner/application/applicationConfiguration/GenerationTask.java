@@ -17,14 +17,16 @@ package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getPartialModel <em>Partial Model</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getPatterns <em>Patterns</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getScope <em>Scope</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isNumberSpecified <em>Number Specified</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getNumber <em>Number</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isRunSpecified <em>Run Specified</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getRuns <em>Runs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getSolver <em>Solver</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getConfig <em>Config</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getDebugFolder <em>Debug Folder</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTargetLogFile <em>Target Log File</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTargetStatisticsFile <em>Target Statistics File</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getGenerationTask()
@@ -138,6 +140,32 @@ public interface GenerationTask extends Task
   void setScope(Scope value);
 
   /**
+   * Returns the value of the '<em><b>Number Specified</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Number Specified</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Number Specified</em>' attribute.
+   * @see #setNumberSpecified(boolean)
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getGenerationTask_NumberSpecified()
+   * @model
+   * @generated
+   */
+  boolean isNumberSpecified();
+
+  /**
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isNumberSpecified <em>Number Specified</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Number Specified</em>' attribute.
+   * @see #isNumberSpecified()
+   * @generated
+   */
+  void setNumberSpecified(boolean value);
+
+  /**
    * Returns the value of the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
@@ -162,6 +190,32 @@ public interface GenerationTask extends Task
    * @generated
    */
   void setNumber(int value);
+
+  /**
+   * Returns the value of the '<em><b>Run Specified</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Run Specified</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Run Specified</em>' attribute.
+   * @see #setRunSpecified(boolean)
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getGenerationTask_RunSpecified()
+   * @model
+   * @generated
+   */
+  boolean isRunSpecified();
+
+  /**
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isRunSpecified <em>Run Specified</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Run Specified</em>' attribute.
+   * @see #isRunSpecified()
+   * @generated
+   */
+  void setRunSpecified(boolean value);
 
   /**
    * Returns the value of the '<em><b>Runs</b></em>' attribute.
@@ -245,32 +299,6 @@ public interface GenerationTask extends Task
   void setConfig(Config value);
 
   /**
-   * Returns the value of the '<em><b>Taget Folder</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Taget Folder</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Taget Folder</em>' containment reference.
-   * @see #setTagetFolder(File)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getGenerationTask_TagetFolder()
-   * @model containment="true"
-   * @generated
-   */
-  File getTagetFolder();
-
-  /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Taget Folder</em>' containment reference.
-   * @see #getTagetFolder()
-   * @generated
-   */
-  void setTagetFolder(File value);
-
-  /**
    * Returns the value of the '<em><b>Debug Folder</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -347,5 +375,31 @@ public interface GenerationTask extends Task
    * @generated
    */
   void setTargetStatisticsFile(File value);
+
+  /**
+   * Returns the value of the '<em><b>Taget Folder</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Taget Folder</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Taget Folder</em>' containment reference.
+   * @see #setTagetFolder(File)
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getGenerationTask_TagetFolder()
+   * @model containment="true"
+   * @generated
+   */
+  File getTagetFolder();
+
+  /**
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Taget Folder</em>' containment reference.
+   * @see #getTagetFolder()
+   * @generated
+   */
+  void setTagetFolder(File value);
 
 } // GenerationTask

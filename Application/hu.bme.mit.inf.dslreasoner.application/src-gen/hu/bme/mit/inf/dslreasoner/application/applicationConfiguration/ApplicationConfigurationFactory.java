@@ -366,6 +366,51 @@ public interface ApplicationConfigurationFactory extends EFactory
   TypeScope createTypeScope();
 
   /**
+   * Returns a new object of class '<em>Class Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Class Type Scope</em>'.
+   * @generated
+   */
+  ClassTypeScope createClassTypeScope();
+
+  /**
+   * Returns a new object of class '<em>Object Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Object Type Scope</em>'.
+   * @generated
+   */
+  ObjectTypeScope createObjectTypeScope();
+
+  /**
+   * Returns a new object of class '<em>Integer Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Integer Type Scope</em>'.
+   * @generated
+   */
+  IntegerTypeScope createIntegerTypeScope();
+
+  /**
+   * Returns a new object of class '<em>Real Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Real Type Scope</em>'.
+   * @generated
+   */
+  RealTypeScope createRealTypeScope();
+
+  /**
+   * Returns a new object of class '<em>String Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>String Type Scope</em>'.
+   * @generated
+   */
+  StringTypeScope createStringTypeScope();
+
+  /**
    * Returns a new object of class '<em>Type Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -418,6 +463,60 @@ public interface ApplicationConfigurationFactory extends EFactory
    * @generated
    */
   StringReference createStringReference();
+
+  /**
+   * Returns a new object of class '<em>Number Specification</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Number Specification</em>'.
+   * @generated
+   */
+  NumberSpecification createNumberSpecification();
+
+  /**
+   * Returns a new object of class '<em>Exact Number</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exact Number</em>'.
+   * @generated
+   */
+  ExactNumber createExactNumber();
+
+  /**
+   * Returns a new object of class '<em>Intervall Number</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Intervall Number</em>'.
+   * @generated
+   */
+  IntervallNumber createIntervallNumber();
+
+  /**
+   * Returns a new object of class '<em>Int Enumberation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Int Enumberation</em>'.
+   * @generated
+   */
+  IntEnumberation createIntEnumberation();
+
+  /**
+   * Returns a new object of class '<em>Real Enumeration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Real Enumeration</em>'.
+   * @generated
+   */
+  RealEnumeration createRealEnumeration();
+
+  /**
+   * Returns a new object of class '<em>String Enumeration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>String Enumeration</em>'.
+   * @generated
+   */
+  StringEnumeration createStringEnumeration();
 
   /**
    * Returns a new object of class '<em>Scope Declaration</em>'.

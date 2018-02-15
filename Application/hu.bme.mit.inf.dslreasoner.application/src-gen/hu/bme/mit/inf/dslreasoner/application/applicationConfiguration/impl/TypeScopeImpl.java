@@ -4,7 +4,7 @@
 package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl;
 
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -24,28 +24,15 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#getType <em>Type</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#isSetsNew <em>Sets New</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#isSetsSum <em>Sets Sum</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#getMin <em>Min</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#isMaxUnlimited <em>Max Unlimited</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#getMax <em>Max</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeScopeImpl#getNumber <em>Number</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeScope
 {
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected TypeReference type;
-
   /**
    * The default value of the '{@link #isSetsNew() <em>Sets New</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -87,64 +74,14 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   protected boolean setsSum = SETS_SUM_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getMin() <em>Min</em>}' attribute.
+   * The cached value of the '{@link #getNumber() <em>Number</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMin()
+   * @see #getNumber()
    * @generated
    * @ordered
    */
-  protected static final int MIN_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getMin() <em>Min</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMin()
-   * @generated
-   * @ordered
-   */
-  protected int min = MIN_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isMaxUnlimited() <em>Max Unlimited</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isMaxUnlimited()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean MAX_UNLIMITED_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isMaxUnlimited() <em>Max Unlimited</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isMaxUnlimited()
-   * @generated
-   * @ordered
-   */
-  protected boolean maxUnlimited = MAX_UNLIMITED_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getMax() <em>Max</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMax()
-   * @generated
-   * @ordered
-   */
-  protected static final int MAX_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getMax() <em>Max</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getMax()
-   * @generated
-   * @ordered
-   */
-  protected int max = MAX_EDEFAULT;
+  protected NumberSpecification number;
 
   /**
    * <!-- begin-user-doc -->
@@ -165,54 +102,6 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   protected EClass eStaticClass()
   {
     return ApplicationConfigurationPackage.Literals.TYPE_SCOPE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeReference getType()
-  {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetType(TypeReference newType, NotificationChain msgs)
-  {
-    TypeReference oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(TypeReference newType)
-  {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.TYPE_SCOPE__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.TYPE_SCOPE__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__TYPE, newType, newType));
   }
 
   /**
@@ -266,9 +155,9 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getMin()
+  public NumberSpecification getNumber()
   {
-    return min;
+    return number;
   }
 
   /**
@@ -276,12 +165,16 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMin(int newMin)
+  public NotificationChain basicSetNumber(NumberSpecification newNumber, NotificationChain msgs)
   {
-    int oldMin = min;
-    min = newMin;
+    NumberSpecification oldNumber = number;
+    number = newNumber;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__MIN, oldMin, min));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER, oldNumber, newNumber);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -289,45 +182,20 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isMaxUnlimited()
+  public void setNumber(NumberSpecification newNumber)
   {
-    return maxUnlimited;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setMaxUnlimited(boolean newMaxUnlimited)
-  {
-    boolean oldMaxUnlimited = maxUnlimited;
-    maxUnlimited = newMaxUnlimited;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__MAX_UNLIMITED, oldMaxUnlimited, maxUnlimited));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public int getMax()
-  {
-    return max;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setMax(int newMax)
-  {
-    int oldMax = max;
-    max = newMax;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__MAX, oldMax, max));
+    if (newNumber != number)
+    {
+      NotificationChain msgs = null;
+      if (number != null)
+        msgs = ((InternalEObject)number).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER, null, msgs);
+      if (newNumber != null)
+        msgs = ((InternalEObject)newNumber).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER, null, msgs);
+      msgs = basicSetNumber(newNumber, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER, newNumber, newNumber));
   }
 
   /**
@@ -340,8 +208,8 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.TYPE_SCOPE__TYPE:
-        return basicSetType(null, msgs);
+      case ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER:
+        return basicSetNumber(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -356,18 +224,12 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.TYPE_SCOPE__TYPE:
-        return getType();
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_NEW:
         return isSetsNew();
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_SUM:
         return isSetsSum();
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MIN:
-        return getMin();
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX_UNLIMITED:
-        return isMaxUnlimited();
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX:
-        return getMax();
+      case ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER:
+        return getNumber();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -382,23 +244,14 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.TYPE_SCOPE__TYPE:
-        setType((TypeReference)newValue);
-        return;
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_NEW:
         setSetsNew((Boolean)newValue);
         return;
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_SUM:
         setSetsSum((Boolean)newValue);
         return;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MIN:
-        setMin((Integer)newValue);
-        return;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX_UNLIMITED:
-        setMaxUnlimited((Boolean)newValue);
-        return;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX:
-        setMax((Integer)newValue);
+      case ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER:
+        setNumber((NumberSpecification)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -414,23 +267,14 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.TYPE_SCOPE__TYPE:
-        setType((TypeReference)null);
-        return;
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_NEW:
         setSetsNew(SETS_NEW_EDEFAULT);
         return;
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_SUM:
         setSetsSum(SETS_SUM_EDEFAULT);
         return;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MIN:
-        setMin(MIN_EDEFAULT);
-        return;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX_UNLIMITED:
-        setMaxUnlimited(MAX_UNLIMITED_EDEFAULT);
-        return;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX:
-        setMax(MAX_EDEFAULT);
+      case ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER:
+        setNumber((NumberSpecification)null);
         return;
     }
     super.eUnset(featureID);
@@ -446,18 +290,12 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.TYPE_SCOPE__TYPE:
-        return type != null;
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_NEW:
         return setsNew != SETS_NEW_EDEFAULT;
       case ApplicationConfigurationPackage.TYPE_SCOPE__SETS_SUM:
         return setsSum != SETS_SUM_EDEFAULT;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MIN:
-        return min != MIN_EDEFAULT;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX_UNLIMITED:
-        return maxUnlimited != MAX_UNLIMITED_EDEFAULT;
-      case ApplicationConfigurationPackage.TYPE_SCOPE__MAX:
-        return max != MAX_EDEFAULT;
+      case ApplicationConfigurationPackage.TYPE_SCOPE__NUMBER:
+        return number != null;
     }
     return super.eIsSet(featureID);
   }
@@ -477,12 +315,6 @@ public class TypeScopeImpl extends MinimalEObjectImpl.Container implements TypeS
     result.append(setsNew);
     result.append(", setsSum: ");
     result.append(setsSum);
-    result.append(", min: ");
-    result.append(min);
-    result.append(", maxUnlimited: ");
-    result.append(maxUnlimited);
-    result.append(", max: ");
-    result.append(max);
     result.append(')');
     return result.toString();
   }

@@ -4,7 +4,6 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as viatra
 generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 
-
 ConfigurationScript:
 	(imports += Import)*
 	(commands += Command)*
@@ -16,6 +15,8 @@ Command :
 
 QualifiedName returns ecore::EString:
   ID ('.' ID)*;
+//terminal REAL returns ecore::EBigDecimal: '-'? INT '.' INT;
+//terminal INTEGER returns ecore::EInt: '-'? INT;
 
 ///////////////////////////////////////////////////
 // Imports
@@ -106,17 +107,41 @@ enum Solver: SMTSolver | AlloySolver | ViatraSolver;
 ScopeSpecification: {ScopeSpecification} '{' 
 		(scopes += TypeScope (',' scopes += TypeScope)*)?
 '}';
-TypeScope: '#' type = TypeReference
+TypeScope: ClassTypeScope | ObjectTypeScope | IntegerTypeScope | RealTypeScope | StringTypeScope;
+ClassTypeScope: '#' type = ClassReference
 	(setsNew ?='+=' | setsSum ?= '=')
-	( min = INT )
-	('..' (maxUnlimited?='*' | max=INT))?
+	(number = ExactNumber | number = IntervallNumber)
 ;
+ObjectTypeScope: '#' type = ObjectReference
+	(setsNew ?='+=' | setsSum ?= '=')
+	(number = ExactNumber | number = IntervallNumber)
+;
+IntegerTypeScope: '#' type = IntegerReference
+	(setsNew ?='+=' | setsSum ?= '=')
+	(number = ExactNumber | number = IntervallNumber | number = IntEnumberation)
+;
+RealTypeScope: '#' type = RealReference
+	(setsNew ?='+=' | setsSum ?= '=')
+	(number = ExactNumber | number = IntervallNumber | number = RealEnumeration)
+;
+StringTypeScope: '#' type = StringReference
+	(setsNew ?='+=' | setsSum ?= '=')
+	(number = ExactNumber | number = IntervallNumber | number = StringEnumeration)
+;
+
 TypeReference: ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
 ClassReference: '<' element = MetamodelElement '>';
 ObjectReference: {ObjectReference} 'node';
 IntegerReference: {IntegerScope} 'int';
 RealReference: {RealScope} 'real';
 StringReference: {StringScope} 'string';
+
+NumberSpecification: ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration;
+ExactNumber: exactNumber = INT | exactUnlimited ?= '*';
+IntervallNumber: min = INT '..' (maxNumber = INT | maxUnlimited ?= '*');
+IntEnumberation: {IntEnumberation} '{' (entry += INT (',' entry += INT)*)?'}';
+RealEnumeration: {RealEnumeration} '{' (entry += INT (',' entry += INT)*)?'}';
+StringEnumeration: {StringEnumeration} '{' (entry += STRING (',' entry += STRING)*)?'}';
 
 ScopeDeclaration: 'scope' name = ID specification = ScopeSpecification;
 ScopeReference: referred = [ScopeDeclaration];
@@ -125,17 +150,27 @@ Scope: ScopeSpecification | ScopeReference;
 Task: GenerationTask /*| CoverageCalculation | ValidationTask*/;
 
 GenerationTask:  'generate' {GenerationTask} '{'(
+	
+		// domain
 		('metamodel' '=' metamodel = Metamodel)? &
 		('partial-model'  '=' partialModel = PartialModel)? &
 		('patterns'  '=' patterns = GraphPattern)? &
+		
+		// model set
 		('scope' '=' scope = Scope)? &
-		('number' '=' number= INT)? &
-		('runs' '=' runs = INT)? &
+		(numberSpecified ?= 'number' '=' number= INT)? &
+		(runSpecified ?= 'runs' '=' runs = INT)? &
+		// Solver
 		('solver' '=' solver = Solver)? &
 		('config' '=' config = Config)? &
-		('output' '=' tagetFolder = File)? &
+		
+		// output texts
 		('debug' '=' debugFolder = File)? &
 		('log' '=' targetLogFile = File)? &
-		('statistics' '=' targetStatisticsFile = File)?
+		('statistics' '=' targetStatisticsFile = File)? &
+		
+		// output models
+		('output' '=' tagetFolder = File)?
+		
 	)'}'
 ;

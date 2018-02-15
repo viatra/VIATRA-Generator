@@ -1128,7 +1128,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScope()
    * @generated
    */
-  int SCOPE = 46;
+  int SCOPE = 57;
 
   /**
    * The number of structural features of the '<em>Scope</em>' class.
@@ -1178,22 +1178,13 @@ public interface ApplicationConfigurationPackage extends EPackage
   int TYPE_SCOPE = 37;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_SCOPE__TYPE = 0;
-
-  /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__SETS_NEW = 1;
+  int TYPE_SCOPE__SETS_NEW = 0;
 
   /**
    * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
@@ -1202,34 +1193,16 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__SETS_SUM = 2;
+  int TYPE_SCOPE__SETS_SUM = 1;
 
   /**
-   * The feature id for the '<em><b>Min</b></em>' attribute.
+   * The feature id for the '<em><b>Number</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE__MIN = 3;
-
-  /**
-   * The feature id for the '<em><b>Max Unlimited</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_SCOPE__MAX_UNLIMITED = 4;
-
-  /**
-   * The feature id for the '<em><b>Max</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_SCOPE__MAX = 5;
+  int TYPE_SCOPE__NUMBER = 2;
 
   /**
    * The number of structural features of the '<em>Type Scope</em>' class.
@@ -1238,7 +1211,282 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SCOPE_FEATURE_COUNT = 6;
+  int TYPE_SCOPE_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassTypeScopeImpl <em>Class Type Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassTypeScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassTypeScope()
+   * @generated
+   */
+  int CLASS_TYPE_SCOPE = 38;
+
+  /**
+   * The feature id for the '<em><b>Sets New</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_TYPE_SCOPE__SETS_NEW = TYPE_SCOPE__SETS_NEW;
+
+  /**
+   * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_TYPE_SCOPE__SETS_SUM = TYPE_SCOPE__SETS_SUM;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_TYPE_SCOPE__NUMBER = TYPE_SCOPE__NUMBER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_TYPE_SCOPE__TYPE = TYPE_SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Class Type Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_TYPE_SCOPE_FEATURE_COUNT = TYPE_SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectTypeScopeImpl <em>Object Type Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectTypeScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectTypeScope()
+   * @generated
+   */
+  int OBJECT_TYPE_SCOPE = 39;
+
+  /**
+   * The feature id for the '<em><b>Sets New</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBJECT_TYPE_SCOPE__SETS_NEW = TYPE_SCOPE__SETS_NEW;
+
+  /**
+   * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBJECT_TYPE_SCOPE__SETS_SUM = TYPE_SCOPE__SETS_SUM;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBJECT_TYPE_SCOPE__NUMBER = TYPE_SCOPE__NUMBER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBJECT_TYPE_SCOPE__TYPE = TYPE_SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Object Type Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBJECT_TYPE_SCOPE_FEATURE_COUNT = TYPE_SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerTypeScopeImpl <em>Integer Type Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerTypeScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerTypeScope()
+   * @generated
+   */
+  int INTEGER_TYPE_SCOPE = 40;
+
+  /**
+   * The feature id for the '<em><b>Sets New</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_TYPE_SCOPE__SETS_NEW = TYPE_SCOPE__SETS_NEW;
+
+  /**
+   * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_TYPE_SCOPE__SETS_SUM = TYPE_SCOPE__SETS_SUM;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_TYPE_SCOPE__NUMBER = TYPE_SCOPE__NUMBER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_TYPE_SCOPE__TYPE = TYPE_SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Integer Type Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTEGER_TYPE_SCOPE_FEATURE_COUNT = TYPE_SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealTypeScopeImpl <em>Real Type Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealTypeScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealTypeScope()
+   * @generated
+   */
+  int REAL_TYPE_SCOPE = 41;
+
+  /**
+   * The feature id for the '<em><b>Sets New</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_TYPE_SCOPE__SETS_NEW = TYPE_SCOPE__SETS_NEW;
+
+  /**
+   * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_TYPE_SCOPE__SETS_SUM = TYPE_SCOPE__SETS_SUM;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_TYPE_SCOPE__NUMBER = TYPE_SCOPE__NUMBER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_TYPE_SCOPE__TYPE = TYPE_SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Real Type Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_TYPE_SCOPE_FEATURE_COUNT = TYPE_SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringTypeScopeImpl <em>String Type Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringTypeScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringTypeScope()
+   * @generated
+   */
+  int STRING_TYPE_SCOPE = 42;
+
+  /**
+   * The feature id for the '<em><b>Sets New</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_TYPE_SCOPE__SETS_NEW = TYPE_SCOPE__SETS_NEW;
+
+  /**
+   * The feature id for the '<em><b>Sets Sum</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_TYPE_SCOPE__SETS_SUM = TYPE_SCOPE__SETS_SUM;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_TYPE_SCOPE__NUMBER = TYPE_SCOPE__NUMBER;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_TYPE_SCOPE__TYPE = TYPE_SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>String Type Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_TYPE_SCOPE_FEATURE_COUNT = TYPE_SCOPE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
@@ -1248,7 +1496,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeReference()
    * @generated
    */
-  int TYPE_REFERENCE = 38;
+  int TYPE_REFERENCE = 43;
 
   /**
    * The number of structural features of the '<em>Type Reference</em>' class.
@@ -1267,7 +1515,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassReference()
    * @generated
    */
-  int CLASS_REFERENCE = 39;
+  int CLASS_REFERENCE = 44;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -1295,7 +1543,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectReference()
    * @generated
    */
-  int OBJECT_REFERENCE = 40;
+  int OBJECT_REFERENCE = 45;
 
   /**
    * The number of structural features of the '<em>Object Reference</em>' class.
@@ -1314,7 +1562,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerReference()
    * @generated
    */
-  int INTEGER_REFERENCE = 41;
+  int INTEGER_REFERENCE = 46;
 
   /**
    * The number of structural features of the '<em>Integer Reference</em>' class.
@@ -1333,7 +1581,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealReference()
    * @generated
    */
-  int REAL_REFERENCE = 42;
+  int REAL_REFERENCE = 47;
 
   /**
    * The number of structural features of the '<em>Real Reference</em>' class.
@@ -1352,7 +1600,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringReference()
    * @generated
    */
-  int STRING_REFERENCE = 43;
+  int STRING_REFERENCE = 48;
 
   /**
    * The number of structural features of the '<em>String Reference</em>' class.
@@ -1364,6 +1612,192 @@ public interface ApplicationConfigurationPackage extends EPackage
   int STRING_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.NumberSpecificationImpl <em>Number Specification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.NumberSpecificationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getNumberSpecification()
+   * @generated
+   */
+  int NUMBER_SPECIFICATION = 49;
+
+  /**
+   * The number of structural features of the '<em>Number Specification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_SPECIFICATION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ExactNumberImpl <em>Exact Number</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ExactNumberImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getExactNumber()
+   * @generated
+   */
+  int EXACT_NUMBER = 50;
+
+  /**
+   * The feature id for the '<em><b>Exact Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXACT_NUMBER__EXACT_NUMBER = NUMBER_SPECIFICATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Exact Unlimited</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXACT_NUMBER__EXACT_UNLIMITED = NUMBER_SPECIFICATION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Exact Number</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXACT_NUMBER_FEATURE_COUNT = NUMBER_SPECIFICATION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntervallNumberImpl <em>Intervall Number</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntervallNumberImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntervallNumber()
+   * @generated
+   */
+  int INTERVALL_NUMBER = 51;
+
+  /**
+   * The feature id for the '<em><b>Min</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERVALL_NUMBER__MIN = NUMBER_SPECIFICATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Max Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERVALL_NUMBER__MAX_NUMBER = NUMBER_SPECIFICATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Max Unlimited</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERVALL_NUMBER__MAX_UNLIMITED = NUMBER_SPECIFICATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Intervall Number</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERVALL_NUMBER_FEATURE_COUNT = NUMBER_SPECIFICATION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntEnumberationImpl <em>Int Enumberation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntEnumberationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntEnumberation()
+   * @generated
+   */
+  int INT_ENUMBERATION = 52;
+
+  /**
+   * The feature id for the '<em><b>Entry</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INT_ENUMBERATION__ENTRY = NUMBER_SPECIFICATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Int Enumberation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INT_ENUMBERATION_FEATURE_COUNT = NUMBER_SPECIFICATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealEnumerationImpl <em>Real Enumeration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealEnumerationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealEnumeration()
+   * @generated
+   */
+  int REAL_ENUMERATION = 53;
+
+  /**
+   * The feature id for the '<em><b>Entry</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_ENUMERATION__ENTRY = NUMBER_SPECIFICATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Real Enumeration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_ENUMERATION_FEATURE_COUNT = NUMBER_SPECIFICATION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringEnumerationImpl <em>String Enumeration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringEnumerationImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringEnumeration()
+   * @generated
+   */
+  int STRING_ENUMERATION = 54;
+
+  /**
+   * The feature id for the '<em><b>Entry</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_ENUMERATION__ENTRY = NUMBER_SPECIFICATION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>String Enumeration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_ENUMERATION_FEATURE_COUNT = NUMBER_SPECIFICATION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeDeclarationImpl <em>Scope Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1371,7 +1805,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeDeclaration()
    * @generated
    */
-  int SCOPE_DECLARATION = 44;
+  int SCOPE_DECLARATION = 55;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1408,7 +1842,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeReference()
    * @generated
    */
-  int SCOPE_REFERENCE = 45;
+  int SCOPE_REFERENCE = 56;
 
   /**
    * The feature id for the '<em><b>Referred</b></em>' reference.
@@ -1436,7 +1870,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTask()
    * @generated
    */
-  int TASK = 47;
+  int TASK = 58;
 
   /**
    * The number of structural features of the '<em>Task</em>' class.
@@ -1455,7 +1889,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGenerationTask()
    * @generated
    */
-  int GENERATION_TASK = 48;
+  int GENERATION_TASK = 59;
 
   /**
    * The feature id for the '<em><b>Metamodel</b></em>' containment reference.
@@ -1494,13 +1928,31 @@ public interface ApplicationConfigurationPackage extends EPackage
   int GENERATION_TASK__SCOPE = TASK_FEATURE_COUNT + 3;
 
   /**
+   * The feature id for the '<em><b>Number Specified</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__NUMBER_SPECIFIED = TASK_FEATURE_COUNT + 4;
+
+  /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__NUMBER = TASK_FEATURE_COUNT + 4;
+  int GENERATION_TASK__NUMBER = TASK_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Run Specified</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__RUN_SPECIFIED = TASK_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Runs</b></em>' attribute.
@@ -1509,7 +1961,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__RUNS = TASK_FEATURE_COUNT + 5;
+  int GENERATION_TASK__RUNS = TASK_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Solver</b></em>' attribute.
@@ -1518,7 +1970,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__SOLVER = TASK_FEATURE_COUNT + 6;
+  int GENERATION_TASK__SOLVER = TASK_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Config</b></em>' containment reference.
@@ -1527,16 +1979,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__CONFIG = TASK_FEATURE_COUNT + 7;
-
-  /**
-   * The feature id for the '<em><b>Taget Folder</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GENERATION_TASK__TAGET_FOLDER = TASK_FEATURE_COUNT + 8;
+  int GENERATION_TASK__CONFIG = TASK_FEATURE_COUNT + 9;
 
   /**
    * The feature id for the '<em><b>Debug Folder</b></em>' containment reference.
@@ -1545,7 +1988,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__DEBUG_FOLDER = TASK_FEATURE_COUNT + 9;
+  int GENERATION_TASK__DEBUG_FOLDER = TASK_FEATURE_COUNT + 10;
 
   /**
    * The feature id for the '<em><b>Target Log File</b></em>' containment reference.
@@ -1554,7 +1997,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__TARGET_LOG_FILE = TASK_FEATURE_COUNT + 10;
+  int GENERATION_TASK__TARGET_LOG_FILE = TASK_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>Target Statistics File</b></em>' containment reference.
@@ -1563,7 +2006,16 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK__TARGET_STATISTICS_FILE = TASK_FEATURE_COUNT + 11;
+  int GENERATION_TASK__TARGET_STATISTICS_FILE = TASK_FEATURE_COUNT + 12;
+
+  /**
+   * The feature id for the '<em><b>Taget Folder</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GENERATION_TASK__TAGET_FOLDER = TASK_FEATURE_COUNT + 13;
 
   /**
    * The number of structural features of the '<em>Generation Task</em>' class.
@@ -1572,7 +2024,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GENERATION_TASK_FEATURE_COUNT = TASK_FEATURE_COUNT + 12;
+  int GENERATION_TASK_FEATURE_COUNT = TASK_FEATURE_COUNT + 14;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerScopeImpl <em>Integer Scope</em>}' class.
@@ -1582,7 +2034,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerScope()
    * @generated
    */
-  int INTEGER_SCOPE = 49;
+  int INTEGER_SCOPE = 60;
 
   /**
    * The number of structural features of the '<em>Integer Scope</em>' class.
@@ -1601,7 +2053,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealScope()
    * @generated
    */
-  int REAL_SCOPE = 50;
+  int REAL_SCOPE = 61;
 
   /**
    * The number of structural features of the '<em>Real Scope</em>' class.
@@ -1620,7 +2072,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringScope()
    * @generated
    */
-  int STRING_SCOPE = 51;
+  int STRING_SCOPE = 62;
 
   /**
    * The number of structural features of the '<em>String Scope</em>' class.
@@ -1639,7 +2091,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getSolver()
    * @generated
    */
-  int SOLVER = 52;
+  int SOLVER = 63;
 
 
   /**
@@ -2375,17 +2827,6 @@ public interface ApplicationConfigurationPackage extends EPackage
   EClass getTypeScope();
 
   /**
-   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getType()
-   * @see #getTypeScope()
-   * @generated
-   */
-  EReference getTypeScope_Type();
-
-  /**
    * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isSetsNew <em>Sets New</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2408,37 +2849,120 @@ public interface ApplicationConfigurationPackage extends EPackage
   EAttribute getTypeScope_SetsSum();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin <em>Min</em>}'.
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Min</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMin()
+   * @return the meta object for the containment reference '<em>Number</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getNumber()
    * @see #getTypeScope()
    * @generated
    */
-  EAttribute getTypeScope_Min();
+  EReference getTypeScope_Number();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isMaxUnlimited <em>Max Unlimited</em>}'.
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope <em>Class Type Scope</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Max Unlimited</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#isMaxUnlimited()
-   * @see #getTypeScope()
+   * @return the meta object for class '<em>Class Type Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope
    * @generated
    */
-  EAttribute getTypeScope_MaxUnlimited();
+  EClass getClassTypeScope();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax <em>Max</em>}'.
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Max</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope#getMax()
-   * @see #getTypeScope()
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope#getType()
+   * @see #getClassTypeScope()
    * @generated
    */
-  EAttribute getTypeScope_Max();
+  EReference getClassTypeScope_Type();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope <em>Object Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Object Type Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope
+   * @generated
+   */
+  EClass getObjectTypeScope();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope#getType()
+   * @see #getObjectTypeScope()
+   * @generated
+   */
+  EReference getObjectTypeScope_Type();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope <em>Integer Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Integer Type Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope
+   * @generated
+   */
+  EClass getIntegerTypeScope();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope#getType()
+   * @see #getIntegerTypeScope()
+   * @generated
+   */
+  EReference getIntegerTypeScope_Type();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope <em>Real Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Real Type Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope
+   * @generated
+   */
+  EClass getRealTypeScope();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope#getType()
+   * @see #getRealTypeScope()
+   * @generated
+   */
+  EReference getRealTypeScope_Type();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope <em>String Type Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Type Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope
+   * @generated
+   */
+  EClass getStringTypeScope();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringTypeScope#getType()
+   * @see #getStringTypeScope()
+   * @generated
+   */
+  EReference getStringTypeScope_Type();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeReference <em>Type Reference</em>}'.
@@ -2510,6 +3034,154 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EClass getStringReference();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification <em>Number Specification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Number Specification</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification
+   * @generated
+   */
+  EClass getNumberSpecification();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber <em>Exact Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Exact Number</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber
+   * @generated
+   */
+  EClass getExactNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber#getExactNumber <em>Exact Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Exact Number</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber#getExactNumber()
+   * @see #getExactNumber()
+   * @generated
+   */
+  EAttribute getExactNumber_ExactNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber#isExactUnlimited <em>Exact Unlimited</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Exact Unlimited</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber#isExactUnlimited()
+   * @see #getExactNumber()
+   * @generated
+   */
+  EAttribute getExactNumber_ExactUnlimited();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber <em>Intervall Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Intervall Number</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber
+   * @generated
+   */
+  EClass getIntervallNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber#getMin <em>Min</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Min</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber#getMin()
+   * @see #getIntervallNumber()
+   * @generated
+   */
+  EAttribute getIntervallNumber_Min();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber#getMaxNumber <em>Max Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Max Number</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber#getMaxNumber()
+   * @see #getIntervallNumber()
+   * @generated
+   */
+  EAttribute getIntervallNumber_MaxNumber();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber#isMaxUnlimited <em>Max Unlimited</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Max Unlimited</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber#isMaxUnlimited()
+   * @see #getIntervallNumber()
+   * @generated
+   */
+  EAttribute getIntervallNumber_MaxUnlimited();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation <em>Int Enumberation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Int Enumberation</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation
+   * @generated
+   */
+  EClass getIntEnumberation();
+
+  /**
+   * Returns the meta object for the attribute list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation#getEntry <em>Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumberation#getEntry()
+   * @see #getIntEnumberation()
+   * @generated
+   */
+  EAttribute getIntEnumberation_Entry();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration <em>Real Enumeration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Real Enumeration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration
+   * @generated
+   */
+  EClass getRealEnumeration();
+
+  /**
+   * Returns the meta object for the attribute list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration#getEntry <em>Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration#getEntry()
+   * @see #getRealEnumeration()
+   * @generated
+   */
+  EAttribute getRealEnumeration_Entry();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration <em>String Enumeration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Enumeration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration
+   * @generated
+   */
+  EClass getStringEnumeration();
+
+  /**
+   * Returns the meta object for the attribute list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration#getEntry <em>Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.StringEnumeration#getEntry()
+   * @see #getStringEnumeration()
+   * @generated
+   */
+  EAttribute getStringEnumeration_Entry();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration <em>Scope Declaration</em>}'.
@@ -2628,6 +3300,17 @@ public interface ApplicationConfigurationPackage extends EPackage
   EReference getGenerationTask_Scope();
 
   /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isNumberSpecified <em>Number Specified</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Number Specified</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isNumberSpecified()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EAttribute getGenerationTask_NumberSpecified();
+
+  /**
    * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2637,6 +3320,17 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EAttribute getGenerationTask_Number();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isRunSpecified <em>Run Specified</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Run Specified</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#isRunSpecified()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EAttribute getGenerationTask_RunSpecified();
 
   /**
    * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getRuns <em>Runs</em>}'.
@@ -2672,17 +3366,6 @@ public interface ApplicationConfigurationPackage extends EPackage
   EReference getGenerationTask_Config();
 
   /**
-   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Taget Folder</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder()
-   * @see #getGenerationTask()
-   * @generated
-   */
-  EReference getGenerationTask_TagetFolder();
-
-  /**
    * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getDebugFolder <em>Debug Folder</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2714,6 +3397,17 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EReference getGenerationTask_TargetStatisticsFile();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder <em>Taget Folder</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Taget Folder</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask#getTagetFolder()
+   * @see #getGenerationTask()
+   * @generated
+   */
+  EReference getGenerationTask_TagetFolder();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope <em>Integer Scope</em>}'.
@@ -3415,14 +4109,6 @@ public interface ApplicationConfigurationPackage extends EPackage
     EClass TYPE_SCOPE = eINSTANCE.getTypeScope();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TYPE_SCOPE__TYPE = eINSTANCE.getTypeScope_Type();
-
-    /**
      * The meta object literal for the '<em><b>Sets New</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3439,28 +4125,102 @@ public interface ApplicationConfigurationPackage extends EPackage
     EAttribute TYPE_SCOPE__SETS_SUM = eINSTANCE.getTypeScope_SetsSum();
 
     /**
-     * The meta object literal for the '<em><b>Min</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Number</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE_SCOPE__MIN = eINSTANCE.getTypeScope_Min();
+    EReference TYPE_SCOPE__NUMBER = eINSTANCE.getTypeScope_Number();
 
     /**
-     * The meta object literal for the '<em><b>Max Unlimited</b></em>' attribute feature.
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassTypeScopeImpl <em>Class Type Scope</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ClassTypeScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassTypeScope()
      * @generated
      */
-    EAttribute TYPE_SCOPE__MAX_UNLIMITED = eINSTANCE.getTypeScope_MaxUnlimited();
+    EClass CLASS_TYPE_SCOPE = eINSTANCE.getClassTypeScope();
 
     /**
-     * The meta object literal for the '<em><b>Max</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE_SCOPE__MAX = eINSTANCE.getTypeScope_Max();
+    EReference CLASS_TYPE_SCOPE__TYPE = eINSTANCE.getClassTypeScope_Type();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectTypeScopeImpl <em>Object Type Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ObjectTypeScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectTypeScope()
+     * @generated
+     */
+    EClass OBJECT_TYPE_SCOPE = eINSTANCE.getObjectTypeScope();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OBJECT_TYPE_SCOPE__TYPE = eINSTANCE.getObjectTypeScope_Type();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerTypeScopeImpl <em>Integer Type Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerTypeScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerTypeScope()
+     * @generated
+     */
+    EClass INTEGER_TYPE_SCOPE = eINSTANCE.getIntegerTypeScope();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INTEGER_TYPE_SCOPE__TYPE = eINSTANCE.getIntegerTypeScope_Type();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealTypeScopeImpl <em>Real Type Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealTypeScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealTypeScope()
+     * @generated
+     */
+    EClass REAL_TYPE_SCOPE = eINSTANCE.getRealTypeScope();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REAL_TYPE_SCOPE__TYPE = eINSTANCE.getRealTypeScope_Type();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringTypeScopeImpl <em>String Type Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringTypeScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringTypeScope()
+     * @generated
+     */
+    EClass STRING_TYPE_SCOPE = eINSTANCE.getStringTypeScope();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STRING_TYPE_SCOPE__TYPE = eINSTANCE.getStringTypeScope_Type();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
@@ -3529,6 +4289,130 @@ public interface ApplicationConfigurationPackage extends EPackage
      * @generated
      */
     EClass STRING_REFERENCE = eINSTANCE.getStringReference();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.NumberSpecificationImpl <em>Number Specification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.NumberSpecificationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getNumberSpecification()
+     * @generated
+     */
+    EClass NUMBER_SPECIFICATION = eINSTANCE.getNumberSpecification();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ExactNumberImpl <em>Exact Number</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ExactNumberImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getExactNumber()
+     * @generated
+     */
+    EClass EXACT_NUMBER = eINSTANCE.getExactNumber();
+
+    /**
+     * The meta object literal for the '<em><b>Exact Number</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXACT_NUMBER__EXACT_NUMBER = eINSTANCE.getExactNumber_ExactNumber();
+
+    /**
+     * The meta object literal for the '<em><b>Exact Unlimited</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXACT_NUMBER__EXACT_UNLIMITED = eINSTANCE.getExactNumber_ExactUnlimited();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntervallNumberImpl <em>Intervall Number</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntervallNumberImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntervallNumber()
+     * @generated
+     */
+    EClass INTERVALL_NUMBER = eINSTANCE.getIntervallNumber();
+
+    /**
+     * The meta object literal for the '<em><b>Min</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INTERVALL_NUMBER__MIN = eINSTANCE.getIntervallNumber_Min();
+
+    /**
+     * The meta object literal for the '<em><b>Max Number</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INTERVALL_NUMBER__MAX_NUMBER = eINSTANCE.getIntervallNumber_MaxNumber();
+
+    /**
+     * The meta object literal for the '<em><b>Max Unlimited</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INTERVALL_NUMBER__MAX_UNLIMITED = eINSTANCE.getIntervallNumber_MaxUnlimited();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntEnumberationImpl <em>Int Enumberation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntEnumberationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntEnumberation()
+     * @generated
+     */
+    EClass INT_ENUMBERATION = eINSTANCE.getIntEnumberation();
+
+    /**
+     * The meta object literal for the '<em><b>Entry</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INT_ENUMBERATION__ENTRY = eINSTANCE.getIntEnumberation_Entry();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealEnumerationImpl <em>Real Enumeration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.RealEnumerationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealEnumeration()
+     * @generated
+     */
+    EClass REAL_ENUMERATION = eINSTANCE.getRealEnumeration();
+
+    /**
+     * The meta object literal for the '<em><b>Entry</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REAL_ENUMERATION__ENTRY = eINSTANCE.getRealEnumeration_Entry();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringEnumerationImpl <em>String Enumeration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.StringEnumerationImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringEnumeration()
+     * @generated
+     */
+    EClass STRING_ENUMERATION = eINSTANCE.getStringEnumeration();
+
+    /**
+     * The meta object literal for the '<em><b>Entry</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STRING_ENUMERATION__ENTRY = eINSTANCE.getStringEnumeration_Entry();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ScopeDeclarationImpl <em>Scope Declaration</em>}' class.
@@ -3629,12 +4513,28 @@ public interface ApplicationConfigurationPackage extends EPackage
     EReference GENERATION_TASK__SCOPE = eINSTANCE.getGenerationTask_Scope();
 
     /**
+     * The meta object literal for the '<em><b>Number Specified</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GENERATION_TASK__NUMBER_SPECIFIED = eINSTANCE.getGenerationTask_NumberSpecified();
+
+    /**
      * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute GENERATION_TASK__NUMBER = eINSTANCE.getGenerationTask_Number();
+
+    /**
+     * The meta object literal for the '<em><b>Run Specified</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GENERATION_TASK__RUN_SPECIFIED = eINSTANCE.getGenerationTask_RunSpecified();
 
     /**
      * The meta object literal for the '<em><b>Runs</b></em>' attribute feature.
@@ -3661,14 +4561,6 @@ public interface ApplicationConfigurationPackage extends EPackage
     EReference GENERATION_TASK__CONFIG = eINSTANCE.getGenerationTask_Config();
 
     /**
-     * The meta object literal for the '<em><b>Taget Folder</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference GENERATION_TASK__TAGET_FOLDER = eINSTANCE.getGenerationTask_TagetFolder();
-
-    /**
      * The meta object literal for the '<em><b>Debug Folder</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3691,6 +4583,14 @@ public interface ApplicationConfigurationPackage extends EPackage
      * @generated
      */
     EReference GENERATION_TASK__TARGET_STATISTICS_FILE = eINSTANCE.getGenerationTask_TargetStatisticsFile();
+
+    /**
+     * The meta object literal for the '<em><b>Taget Folder</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GENERATION_TASK__TAGET_FOLDER = eINSTANCE.getGenerationTask_TagetFolder();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.IntegerScopeImpl <em>Integer Scope</em>}' class.

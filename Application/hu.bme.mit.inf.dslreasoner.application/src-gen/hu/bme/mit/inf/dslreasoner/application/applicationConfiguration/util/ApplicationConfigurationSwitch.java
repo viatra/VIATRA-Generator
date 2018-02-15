@@ -369,6 +369,46 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ApplicationConfigurationPackage.CLASS_TYPE_SCOPE:
+      {
+        ClassTypeScope classTypeScope = (ClassTypeScope)theEObject;
+        T result = caseClassTypeScope(classTypeScope);
+        if (result == null) result = caseTypeScope(classTypeScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.OBJECT_TYPE_SCOPE:
+      {
+        ObjectTypeScope objectTypeScope = (ObjectTypeScope)theEObject;
+        T result = caseObjectTypeScope(objectTypeScope);
+        if (result == null) result = caseTypeScope(objectTypeScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.INTEGER_TYPE_SCOPE:
+      {
+        IntegerTypeScope integerTypeScope = (IntegerTypeScope)theEObject;
+        T result = caseIntegerTypeScope(integerTypeScope);
+        if (result == null) result = caseTypeScope(integerTypeScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.REAL_TYPE_SCOPE:
+      {
+        RealTypeScope realTypeScope = (RealTypeScope)theEObject;
+        T result = caseRealTypeScope(realTypeScope);
+        if (result == null) result = caseTypeScope(realTypeScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.STRING_TYPE_SCOPE:
+      {
+        StringTypeScope stringTypeScope = (StringTypeScope)theEObject;
+        T result = caseStringTypeScope(stringTypeScope);
+        if (result == null) result = caseTypeScope(stringTypeScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ApplicationConfigurationPackage.TYPE_REFERENCE:
       {
         TypeReference typeReference = (TypeReference)theEObject;
@@ -413,6 +453,53 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         StringReference stringReference = (StringReference)theEObject;
         T result = caseStringReference(stringReference);
         if (result == null) result = caseTypeReference(stringReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.NUMBER_SPECIFICATION:
+      {
+        NumberSpecification numberSpecification = (NumberSpecification)theEObject;
+        T result = caseNumberSpecification(numberSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.EXACT_NUMBER:
+      {
+        ExactNumber exactNumber = (ExactNumber)theEObject;
+        T result = caseExactNumber(exactNumber);
+        if (result == null) result = caseNumberSpecification(exactNumber);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.INTERVALL_NUMBER:
+      {
+        IntervallNumber intervallNumber = (IntervallNumber)theEObject;
+        T result = caseIntervallNumber(intervallNumber);
+        if (result == null) result = caseNumberSpecification(intervallNumber);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.INT_ENUMBERATION:
+      {
+        IntEnumberation intEnumberation = (IntEnumberation)theEObject;
+        T result = caseIntEnumberation(intEnumberation);
+        if (result == null) result = caseNumberSpecification(intEnumberation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.REAL_ENUMERATION:
+      {
+        RealEnumeration realEnumeration = (RealEnumeration)theEObject;
+        T result = caseRealEnumeration(realEnumeration);
+        if (result == null) result = caseNumberSpecification(realEnumeration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.STRING_ENUMERATION:
+      {
+        StringEnumeration stringEnumeration = (StringEnumeration)theEObject;
+        T result = caseStringEnumeration(stringEnumeration);
+        if (result == null) result = caseNumberSpecification(stringEnumeration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1097,6 +1184,86 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Class Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Class Type Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClassTypeScope(ClassTypeScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Object Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Object Type Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseObjectTypeScope(ObjectTypeScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Integer Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Integer Type Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntegerTypeScope(IntegerTypeScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Real Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Real Type Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRealTypeScope(RealTypeScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Type Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Type Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringTypeScope(StringTypeScope object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Type Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1188,6 +1355,102 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStringReference(StringReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Number Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Number Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNumberSpecification(NumberSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Exact Number</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Exact Number</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExactNumber(ExactNumber object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Intervall Number</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Intervall Number</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntervallNumber(IntervallNumber object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Int Enumberation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Int Enumberation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntEnumberation(IntEnumberation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Real Enumeration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Real Enumeration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRealEnumeration(RealEnumeration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Enumeration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Enumeration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringEnumeration(StringEnumeration object)
   {
     return null;
   }

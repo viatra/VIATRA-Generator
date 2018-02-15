@@ -2064,25 +2064,88 @@ ruleTypeScope returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		{
+			newCompositeNode(grammarAccess.getTypeScopeAccess().getClassTypeScopeParserRuleCall_0());
+		}
+		this_ClassTypeScope_0=ruleClassTypeScope
+		{
+			$current = $this_ClassTypeScope_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getTypeScopeAccess().getObjectTypeScopeParserRuleCall_1());
+		}
+		this_ObjectTypeScope_1=ruleObjectTypeScope
+		{
+			$current = $this_ObjectTypeScope_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getTypeScopeAccess().getIntegerTypeScopeParserRuleCall_2());
+		}
+		this_IntegerTypeScope_2=ruleIntegerTypeScope
+		{
+			$current = $this_IntegerTypeScope_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getTypeScopeAccess().getRealTypeScopeParserRuleCall_3());
+		}
+		this_RealTypeScope_3=ruleRealTypeScope
+		{
+			$current = $this_RealTypeScope_3.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getTypeScopeAccess().getStringTypeScopeParserRuleCall_4());
+		}
+		this_StringTypeScope_4=ruleStringTypeScope
+		{
+			$current = $this_StringTypeScope_4.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleClassTypeScope
+entryRuleClassTypeScope returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getClassTypeScopeRule()); }
+	iv_ruleClassTypeScope=ruleClassTypeScope
+	{ $current=$iv_ruleClassTypeScope.current; }
+	EOF;
+
+// Rule ClassTypeScope
+ruleClassTypeScope returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
 		otherlv_0='#'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getTypeScopeAccess().getNumberSignKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getClassTypeScopeAccess().getNumberSignKeyword_0());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTypeScopeAccess().getTypeTypeReferenceParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getClassTypeScopeAccess().getTypeClassReferenceParserRuleCall_1_0());
 				}
-				lv_type_1_0=ruleTypeReference
+				lv_type_1_0=ruleClassReference
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getTypeScopeRule());
+						$current = createModelElementForParent(grammarAccess.getClassTypeScopeRule());
 					}
 					set(
 						$current,
 						"type",
 						lv_type_1_0,
-						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.TypeReference");
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ClassReference");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -2092,11 +2155,11 @@ ruleTypeScope returns [EObject current=null]
 				(
 					lv_setsNew_2_0='+='
 					{
-						newLeafNode(lv_setsNew_2_0, grammarAccess.getTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
+						newLeafNode(lv_setsNew_2_0, grammarAccess.getClassTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getTypeScopeRule());
+							$current = createModelElement(grammarAccess.getClassTypeScopeRule());
 						}
 						setWithLastConsumed($current, "setsNew", true, "+=");
 					}
@@ -2107,11 +2170,11 @@ ruleTypeScope returns [EObject current=null]
 				(
 					lv_setsSum_3_0='='
 					{
-						newLeafNode(lv_setsSum_3_0, grammarAccess.getTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
+						newLeafNode(lv_setsSum_3_0, grammarAccess.getClassTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getTypeScopeRule());
+							$current = createModelElement(grammarAccess.getClassTypeScopeRule());
 						}
 						setWithLastConsumed($current, "setsSum", true, "=");
 					}
@@ -2120,75 +2183,57 @@ ruleTypeScope returns [EObject current=null]
 		)
 		(
 			(
-				lv_min_4_0=RULE_INT
-				{
-					newLeafNode(lv_min_4_0, grammarAccess.getTypeScopeAccess().getMinINTTerminalRuleCall_3_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getTypeScopeRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getClassTypeScopeAccess().getNumberExactNumberParserRuleCall_3_0_0());
 					}
-					setWithLastConsumed(
-						$current,
-						"min",
-						lv_min_4_0,
-						"org.eclipse.xtext.common.Terminals.INT");
-				}
+					lv_number_4_0=ruleExactNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getClassTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_4_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ExactNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
-		(
-			otherlv_5='..'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getTypeScopeAccess().getFullStopFullStopKeyword_4_0());
-			}
+			    |
 			(
 				(
-					(
-						lv_maxUnlimited_6_0='*'
-						{
-							newLeafNode(lv_maxUnlimited_6_0, grammarAccess.getTypeScopeAccess().getMaxUnlimitedAsteriskKeyword_4_1_0_0());
+					{
+						newCompositeNode(grammarAccess.getClassTypeScopeAccess().getNumberIntervallNumberParserRuleCall_3_1_0());
+					}
+					lv_number_5_0=ruleIntervallNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getClassTypeScopeRule());
 						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getTypeScopeRule());
-							}
-							setWithLastConsumed($current, "maxUnlimited", true, "*");
-						}
-					)
-				)
-				    |
-				(
-					(
-						lv_max_7_0=RULE_INT
-						{
-							newLeafNode(lv_max_7_0, grammarAccess.getTypeScopeAccess().getMaxINTTerminalRuleCall_4_1_1_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getTypeScopeRule());
-							}
-							setWithLastConsumed(
-								$current,
-								"max",
-								lv_max_7_0,
-								"org.eclipse.xtext.common.Terminals.INT");
-						}
-					)
+						set(
+							$current,
+							"number",
+							lv_number_5_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntervallNumber");
+						afterParserOrEnumRuleCall();
+					}
 				)
 			)
-		)?
+		)
 	)
 ;
 
-// Entry rule entryRuleTypeReference
-entryRuleTypeReference returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getTypeReferenceRule()); }
-	iv_ruleTypeReference=ruleTypeReference
-	{ $current=$iv_ruleTypeReference.current; }
+// Entry rule entryRuleObjectTypeScope
+entryRuleObjectTypeScope returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getObjectTypeScopeRule()); }
+	iv_ruleObjectTypeScope=ruleObjectTypeScope
+	{ $current=$iv_ruleObjectTypeScope.current; }
 	EOF;
 
-// Rule TypeReference
-ruleTypeReference returns [EObject current=null]
+// Rule ObjectTypeScope
+ruleObjectTypeScope returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -2196,50 +2241,503 @@ ruleTypeReference returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='#'
 		{
-			newCompositeNode(grammarAccess.getTypeReferenceAccess().getClassReferenceParserRuleCall_0());
+			newLeafNode(otherlv_0, grammarAccess.getObjectTypeScopeAccess().getNumberSignKeyword_0());
 		}
-		this_ClassReference_0=ruleClassReference
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getObjectTypeScopeAccess().getTypeObjectReferenceParserRuleCall_1_0());
+				}
+				lv_type_1_0=ruleObjectReference
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getObjectTypeScopeRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_1_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectReference");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				(
+					lv_setsNew_2_0='+='
+					{
+						newLeafNode(lv_setsNew_2_0, grammarAccess.getObjectTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getObjectTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsNew", true, "+=");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_setsSum_3_0='='
+					{
+						newLeafNode(lv_setsSum_3_0, grammarAccess.getObjectTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getObjectTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsSum", true, "=");
+					}
+				)
+			)
+		)
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getObjectTypeScopeAccess().getNumberExactNumberParserRuleCall_3_0_0());
+					}
+					lv_number_4_0=ruleExactNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getObjectTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_4_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ExactNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getObjectTypeScopeAccess().getNumberIntervallNumberParserRuleCall_3_1_0());
+					}
+					lv_number_5_0=ruleIntervallNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getObjectTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_5_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntervallNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleIntegerTypeScope
+entryRuleIntegerTypeScope returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getIntegerTypeScopeRule()); }
+	iv_ruleIntegerTypeScope=ruleIntegerTypeScope
+	{ $current=$iv_ruleIntegerTypeScope.current; }
+	EOF;
+
+// Rule IntegerTypeScope
+ruleIntegerTypeScope returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='#'
 		{
-			$current = $this_ClassReference_0.current;
-			afterParserOrEnumRuleCall();
+			newLeafNode(otherlv_0, grammarAccess.getIntegerTypeScopeAccess().getNumberSignKeyword_0());
 		}
-		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getIntegerTypeScopeAccess().getTypeIntegerReferenceParserRuleCall_1_0());
+				}
+				lv_type_1_0=ruleIntegerReference
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getIntegerTypeScopeRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_1_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntegerReference");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				(
+					lv_setsNew_2_0='+='
+					{
+						newLeafNode(lv_setsNew_2_0, grammarAccess.getIntegerTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getIntegerTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsNew", true, "+=");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_setsSum_3_0='='
+					{
+						newLeafNode(lv_setsSum_3_0, grammarAccess.getIntegerTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getIntegerTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsSum", true, "=");
+					}
+				)
+			)
+		)
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getIntegerTypeScopeAccess().getNumberExactNumberParserRuleCall_3_0_0());
+					}
+					lv_number_4_0=ruleExactNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getIntegerTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_4_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ExactNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getIntegerTypeScopeAccess().getNumberIntervallNumberParserRuleCall_3_1_0());
+					}
+					lv_number_5_0=ruleIntervallNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getIntegerTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_5_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntervallNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getIntegerTypeScopeAccess().getNumberIntEnumberationParserRuleCall_3_2_0());
+					}
+					lv_number_6_0=ruleIntEnumberation
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getIntegerTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_6_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntEnumberation");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleRealTypeScope
+entryRuleRealTypeScope returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRealTypeScopeRule()); }
+	iv_ruleRealTypeScope=ruleRealTypeScope
+	{ $current=$iv_ruleRealTypeScope.current; }
+	EOF;
+
+// Rule RealTypeScope
+ruleRealTypeScope returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='#'
 		{
-			newCompositeNode(grammarAccess.getTypeReferenceAccess().getObjectReferenceParserRuleCall_1());
+			newLeafNode(otherlv_0, grammarAccess.getRealTypeScopeAccess().getNumberSignKeyword_0());
 		}
-		this_ObjectReference_1=ruleObjectReference
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getRealTypeScopeAccess().getTypeRealReferenceParserRuleCall_1_0());
+				}
+				lv_type_1_0=ruleRealReference
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getRealTypeScopeRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_1_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.RealReference");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				(
+					lv_setsNew_2_0='+='
+					{
+						newLeafNode(lv_setsNew_2_0, grammarAccess.getRealTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getRealTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsNew", true, "+=");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_setsSum_3_0='='
+					{
+						newLeafNode(lv_setsSum_3_0, grammarAccess.getRealTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getRealTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsSum", true, "=");
+					}
+				)
+			)
+		)
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getRealTypeScopeAccess().getNumberExactNumberParserRuleCall_3_0_0());
+					}
+					lv_number_4_0=ruleExactNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getRealTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_4_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ExactNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getRealTypeScopeAccess().getNumberIntervallNumberParserRuleCall_3_1_0());
+					}
+					lv_number_5_0=ruleIntervallNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getRealTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_5_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntervallNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getRealTypeScopeAccess().getNumberRealEnumerationParserRuleCall_3_2_0());
+					}
+					lv_number_6_0=ruleRealEnumeration
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getRealTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_6_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.RealEnumeration");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleStringTypeScope
+entryRuleStringTypeScope returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStringTypeScopeRule()); }
+	iv_ruleStringTypeScope=ruleStringTypeScope
+	{ $current=$iv_ruleStringTypeScope.current; }
+	EOF;
+
+// Rule StringTypeScope
+ruleStringTypeScope returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='#'
 		{
-			$current = $this_ObjectReference_1.current;
-			afterParserOrEnumRuleCall();
+			newLeafNode(otherlv_0, grammarAccess.getStringTypeScopeAccess().getNumberSignKeyword_0());
 		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getTypeReferenceAccess().getIntegerReferenceParserRuleCall_2());
-		}
-		this_IntegerReference_2=ruleIntegerReference
-		{
-			$current = $this_IntegerReference_2.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getTypeReferenceAccess().getRealReferenceParserRuleCall_3());
-		}
-		this_RealReference_3=ruleRealReference
-		{
-			$current = $this_RealReference_3.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getTypeReferenceAccess().getStringReferenceParserRuleCall_4());
-		}
-		this_StringReference_4=ruleStringReference
-		{
-			$current = $this_StringReference_4.current;
-			afterParserOrEnumRuleCall();
-		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getStringTypeScopeAccess().getTypeStringReferenceParserRuleCall_1_0());
+				}
+				lv_type_1_0=ruleStringReference
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getStringTypeScopeRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_1_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.StringReference");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				(
+					lv_setsNew_2_0='+='
+					{
+						newLeafNode(lv_setsNew_2_0, grammarAccess.getStringTypeScopeAccess().getSetsNewPlusSignEqualsSignKeyword_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getStringTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsNew", true, "+=");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_setsSum_3_0='='
+					{
+						newLeafNode(lv_setsSum_3_0, grammarAccess.getStringTypeScopeAccess().getSetsSumEqualsSignKeyword_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getStringTypeScopeRule());
+						}
+						setWithLastConsumed($current, "setsSum", true, "=");
+					}
+				)
+			)
+		)
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getStringTypeScopeAccess().getNumberExactNumberParserRuleCall_3_0_0());
+					}
+					lv_number_4_0=ruleExactNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getStringTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_4_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ExactNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getStringTypeScopeAccess().getNumberIntervallNumberParserRuleCall_3_1_0());
+					}
+					lv_number_5_0=ruleIntervallNumber
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getStringTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_5_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.IntervallNumber");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getStringTypeScopeAccess().getNumberStringEnumerationParserRuleCall_3_2_0());
+					}
+					lv_number_6_0=ruleStringEnumeration
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getStringTypeScopeRule());
+						}
+						set(
+							$current,
+							"number",
+							lv_number_6_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.StringEnumeration");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)
 	)
 ;
 
@@ -2405,6 +2903,368 @@ ruleStringReference returns [EObject current=null]
 		otherlv_1='string'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getStringReferenceAccess().getStringKeyword_1());
+		}
+	)
+;
+
+// Entry rule entryRuleExactNumber
+entryRuleExactNumber returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getExactNumberRule()); }
+	iv_ruleExactNumber=ruleExactNumber
+	{ $current=$iv_ruleExactNumber.current; }
+	EOF;
+
+// Rule ExactNumber
+ruleExactNumber returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_exactNumber_0_0=RULE_INT
+				{
+					newLeafNode(lv_exactNumber_0_0, grammarAccess.getExactNumberAccess().getExactNumberINTTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getExactNumberRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"exactNumber",
+						lv_exactNumber_0_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		    |
+		(
+			(
+				lv_exactUnlimited_1_0='*'
+				{
+					newLeafNode(lv_exactUnlimited_1_0, grammarAccess.getExactNumberAccess().getExactUnlimitedAsteriskKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getExactNumberRule());
+					}
+					setWithLastConsumed($current, "exactUnlimited", true, "*");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleIntervallNumber
+entryRuleIntervallNumber returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getIntervallNumberRule()); }
+	iv_ruleIntervallNumber=ruleIntervallNumber
+	{ $current=$iv_ruleIntervallNumber.current; }
+	EOF;
+
+// Rule IntervallNumber
+ruleIntervallNumber returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_min_0_0=RULE_INT
+				{
+					newLeafNode(lv_min_0_0, grammarAccess.getIntervallNumberAccess().getMinINTTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getIntervallNumberRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"min",
+						lv_min_0_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_1='..'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getIntervallNumberAccess().getFullStopFullStopKeyword_1());
+		}
+		(
+			(
+				(
+					lv_maxNumber_2_0=RULE_INT
+					{
+						newLeafNode(lv_maxNumber_2_0, grammarAccess.getIntervallNumberAccess().getMaxNumberINTTerminalRuleCall_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getIntervallNumberRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"maxNumber",
+							lv_maxNumber_2_0,
+							"org.eclipse.xtext.common.Terminals.INT");
+					}
+				)
+			)
+			    |
+			(
+				(
+					lv_maxUnlimited_3_0='*'
+					{
+						newLeafNode(lv_maxUnlimited_3_0, grammarAccess.getIntervallNumberAccess().getMaxUnlimitedAsteriskKeyword_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getIntervallNumberRule());
+						}
+						setWithLastConsumed($current, "maxUnlimited", true, "*");
+					}
+				)
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleIntEnumberation
+entryRuleIntEnumberation returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getIntEnumberationRule()); }
+	iv_ruleIntEnumberation=ruleIntEnumberation
+	{ $current=$iv_ruleIntEnumberation.current; }
+	EOF;
+
+// Rule IntEnumberation
+ruleIntEnumberation returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getIntEnumberationAccess().getIntEnumberationAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getIntEnumberationAccess().getLeftCurlyBracketKeyword_1());
+		}
+		(
+			(
+				(
+					lv_entry_2_0=RULE_INT
+					{
+						newLeafNode(lv_entry_2_0, grammarAccess.getIntEnumberationAccess().getEntryINTTerminalRuleCall_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getIntEnumberationRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"entry",
+							lv_entry_2_0,
+							"org.eclipse.xtext.common.Terminals.INT");
+					}
+				)
+			)
+			(
+				otherlv_3=','
+				{
+					newLeafNode(otherlv_3, grammarAccess.getIntEnumberationAccess().getCommaKeyword_2_1_0());
+				}
+				(
+					(
+						lv_entry_4_0=RULE_INT
+						{
+							newLeafNode(lv_entry_4_0, grammarAccess.getIntEnumberationAccess().getEntryINTTerminalRuleCall_2_1_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getIntEnumberationRule());
+							}
+							addWithLastConsumed(
+								$current,
+								"entry",
+								lv_entry_4_0,
+								"org.eclipse.xtext.common.Terminals.INT");
+						}
+					)
+				)
+			)*
+		)?
+		otherlv_5='}'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getIntEnumberationAccess().getRightCurlyBracketKeyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleRealEnumeration
+entryRuleRealEnumeration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRealEnumerationRule()); }
+	iv_ruleRealEnumeration=ruleRealEnumeration
+	{ $current=$iv_ruleRealEnumeration.current; }
+	EOF;
+
+// Rule RealEnumeration
+ruleRealEnumeration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getRealEnumerationAccess().getRealEnumerationAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getRealEnumerationAccess().getLeftCurlyBracketKeyword_1());
+		}
+		(
+			(
+				(
+					lv_entry_2_0=RULE_INT
+					{
+						newLeafNode(lv_entry_2_0, grammarAccess.getRealEnumerationAccess().getEntryINTTerminalRuleCall_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getRealEnumerationRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"entry",
+							lv_entry_2_0,
+							"org.eclipse.xtext.common.Terminals.INT");
+					}
+				)
+			)
+			(
+				otherlv_3=','
+				{
+					newLeafNode(otherlv_3, grammarAccess.getRealEnumerationAccess().getCommaKeyword_2_1_0());
+				}
+				(
+					(
+						lv_entry_4_0=RULE_INT
+						{
+							newLeafNode(lv_entry_4_0, grammarAccess.getRealEnumerationAccess().getEntryINTTerminalRuleCall_2_1_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getRealEnumerationRule());
+							}
+							addWithLastConsumed(
+								$current,
+								"entry",
+								lv_entry_4_0,
+								"org.eclipse.xtext.common.Terminals.INT");
+						}
+					)
+				)
+			)*
+		)?
+		otherlv_5='}'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getRealEnumerationAccess().getRightCurlyBracketKeyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleStringEnumeration
+entryRuleStringEnumeration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStringEnumerationRule()); }
+	iv_ruleStringEnumeration=ruleStringEnumeration
+	{ $current=$iv_ruleStringEnumeration.current; }
+	EOF;
+
+// Rule StringEnumeration
+ruleStringEnumeration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getStringEnumerationAccess().getStringEnumerationAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getStringEnumerationAccess().getLeftCurlyBracketKeyword_1());
+		}
+		(
+			(
+				(
+					lv_entry_2_0=RULE_STRING
+					{
+						newLeafNode(lv_entry_2_0, grammarAccess.getStringEnumerationAccess().getEntrySTRINGTerminalRuleCall_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getStringEnumerationRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"entry",
+							lv_entry_2_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+			(
+				otherlv_3=','
+				{
+					newLeafNode(otherlv_3, grammarAccess.getStringEnumerationAccess().getCommaKeyword_2_1_0());
+				}
+				(
+					(
+						lv_entry_4_0=RULE_STRING
+						{
+							newLeafNode(lv_entry_4_0, grammarAccess.getStringEnumerationAccess().getEntrySTRINGTerminalRuleCall_2_1_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getStringEnumerationRule());
+							}
+							addWithLastConsumed(
+								$current,
+								"entry",
+								lv_entry_4_0,
+								"org.eclipse.xtext.common.Terminals.STRING");
+						}
+					)
+				)
+			)*
+		)?
+		otherlv_5='}'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getStringEnumerationAccess().getRightCurlyBracketKeyword_3());
 		}
 	)
 ;
@@ -2755,10 +3615,20 @@ ruleGenerationTask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getGenerationTaskAccess().getUnorderedGroup_3(), 4);
 					}
-								({true}?=>(otherlv_16='number'
-								{
-									newLeafNode(otherlv_16, grammarAccess.getGenerationTaskAccess().getNumberKeyword_3_4_0());
-								}
+								({true}?=>((
+									(
+										lv_numberSpecified_16_0='number'
+										{
+											newLeafNode(lv_numberSpecified_16_0, grammarAccess.getGenerationTaskAccess().getNumberSpecifiedNumberKeyword_3_4_0_0());
+										}
+										{
+											if ($current==null) {
+												$current = createModelElement(grammarAccess.getGenerationTaskRule());
+											}
+											setWithLastConsumed($current, "numberSpecified", true, "number");
+										}
+									)
+								)
 								otherlv_17='='
 								{
 									newLeafNode(otherlv_17, grammarAccess.getGenerationTaskAccess().getEqualsSignKeyword_3_4_1());
@@ -2792,10 +3662,20 @@ ruleGenerationTask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getGenerationTaskAccess().getUnorderedGroup_3(), 5);
 					}
-								({true}?=>(otherlv_19='runs'
-								{
-									newLeafNode(otherlv_19, grammarAccess.getGenerationTaskAccess().getRunsKeyword_3_5_0());
-								}
+								({true}?=>((
+									(
+										lv_runSpecified_19_0='runs'
+										{
+											newLeafNode(lv_runSpecified_19_0, grammarAccess.getGenerationTaskAccess().getRunSpecifiedRunsKeyword_3_5_0_0());
+										}
+										{
+											if ($current==null) {
+												$current = createModelElement(grammarAccess.getGenerationTaskRule());
+											}
+											setWithLastConsumed($current, "runSpecified", true, "runs");
+										}
+									)
+								)
 								otherlv_20='='
 								{
 									newLeafNode(otherlv_20, grammarAccess.getGenerationTaskAccess().getEqualsSignKeyword_3_5_1());
@@ -2905,9 +3785,9 @@ ruleGenerationTask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getGenerationTaskAccess().getUnorderedGroup_3(), 8);
 					}
-								({true}?=>(otherlv_28='output'
+								({true}?=>(otherlv_28='debug'
 								{
-									newLeafNode(otherlv_28, grammarAccess.getGenerationTaskAccess().getOutputKeyword_3_8_0());
+									newLeafNode(otherlv_28, grammarAccess.getGenerationTaskAccess().getDebugKeyword_3_8_0());
 								}
 								otherlv_29='='
 								{
@@ -2916,17 +3796,17 @@ ruleGenerationTask returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getGenerationTaskAccess().getTagetFolderFileParserRuleCall_3_8_2_0());
+											newCompositeNode(grammarAccess.getGenerationTaskAccess().getDebugFolderFileParserRuleCall_3_8_2_0());
 										}
-										lv_tagetFolder_30_0=ruleFile
+										lv_debugFolder_30_0=ruleFile
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getGenerationTaskRule());
 											}
 											set(
 												$current,
-												"tagetFolder",
-												lv_tagetFolder_30_0,
+												"debugFolder",
+												lv_debugFolder_30_0,
 												"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.File");
 											afterParserOrEnumRuleCall();
 										}
@@ -2943,9 +3823,9 @@ ruleGenerationTask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getGenerationTaskAccess().getUnorderedGroup_3(), 9);
 					}
-								({true}?=>(otherlv_31='debug'
+								({true}?=>(otherlv_31='log'
 								{
-									newLeafNode(otherlv_31, grammarAccess.getGenerationTaskAccess().getDebugKeyword_3_9_0());
+									newLeafNode(otherlv_31, grammarAccess.getGenerationTaskAccess().getLogKeyword_3_9_0());
 								}
 								otherlv_32='='
 								{
@@ -2954,17 +3834,17 @@ ruleGenerationTask returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getGenerationTaskAccess().getDebugFolderFileParserRuleCall_3_9_2_0());
+											newCompositeNode(grammarAccess.getGenerationTaskAccess().getTargetLogFileFileParserRuleCall_3_9_2_0());
 										}
-										lv_debugFolder_33_0=ruleFile
+										lv_targetLogFile_33_0=ruleFile
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getGenerationTaskRule());
 											}
 											set(
 												$current,
-												"debugFolder",
-												lv_debugFolder_33_0,
+												"targetLogFile",
+												lv_targetLogFile_33_0,
 												"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.File");
 											afterParserOrEnumRuleCall();
 										}
@@ -2981,9 +3861,9 @@ ruleGenerationTask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getGenerationTaskAccess().getUnorderedGroup_3(), 10);
 					}
-								({true}?=>(otherlv_34='log'
+								({true}?=>(otherlv_34='statistics'
 								{
-									newLeafNode(otherlv_34, grammarAccess.getGenerationTaskAccess().getLogKeyword_3_10_0());
+									newLeafNode(otherlv_34, grammarAccess.getGenerationTaskAccess().getStatisticsKeyword_3_10_0());
 								}
 								otherlv_35='='
 								{
@@ -2992,17 +3872,17 @@ ruleGenerationTask returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getGenerationTaskAccess().getTargetLogFileFileParserRuleCall_3_10_2_0());
+											newCompositeNode(grammarAccess.getGenerationTaskAccess().getTargetStatisticsFileFileParserRuleCall_3_10_2_0());
 										}
-										lv_targetLogFile_36_0=ruleFile
+										lv_targetStatisticsFile_36_0=ruleFile
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getGenerationTaskRule());
 											}
 											set(
 												$current,
-												"targetLogFile",
-												lv_targetLogFile_36_0,
+												"targetStatisticsFile",
+												lv_targetStatisticsFile_36_0,
 												"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.File");
 											afterParserOrEnumRuleCall();
 										}
@@ -3019,9 +3899,9 @@ ruleGenerationTask returns [EObject current=null]
 					{
 						getUnorderedGroupHelper().select(grammarAccess.getGenerationTaskAccess().getUnorderedGroup_3(), 11);
 					}
-								({true}?=>(otherlv_37='statistics'
+								({true}?=>(otherlv_37='output'
 								{
-									newLeafNode(otherlv_37, grammarAccess.getGenerationTaskAccess().getStatisticsKeyword_3_11_0());
+									newLeafNode(otherlv_37, grammarAccess.getGenerationTaskAccess().getOutputKeyword_3_11_0());
 								}
 								otherlv_38='='
 								{
@@ -3030,17 +3910,17 @@ ruleGenerationTask returns [EObject current=null]
 								(
 									(
 										{
-											newCompositeNode(grammarAccess.getGenerationTaskAccess().getTargetStatisticsFileFileParserRuleCall_3_11_2_0());
+											newCompositeNode(grammarAccess.getGenerationTaskAccess().getTagetFolderFileParserRuleCall_3_11_2_0());
 										}
-										lv_targetStatisticsFile_39_0=ruleFile
+										lv_tagetFolder_39_0=ruleFile
 										{
 											if ($current==null) {
 												$current = createModelElementForParent(grammarAccess.getGenerationTaskRule());
 											}
 											set(
 												$current,
-												"targetStatisticsFile",
-												lv_targetStatisticsFile_39_0,
+												"tagetFolder",
+												lv_tagetFolder_39_0,
 												"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.File");
 											afterParserOrEnumRuleCall();
 										}
