@@ -21,3 +21,9 @@
 /QueryLoader.java
 /.MetamodelValidator.java._trace
 /.QueryAndMetamodelValidator.java._trace
+/.ScriptExecutor.java._trace
+/.GenerationTaskExecutor.java._trace
+/.ScriptConsole.java._trace
+/.SolverLoader.java._trace
+/.NullWorkspace.java._trace
+/.ScopeLoader.java._trace
