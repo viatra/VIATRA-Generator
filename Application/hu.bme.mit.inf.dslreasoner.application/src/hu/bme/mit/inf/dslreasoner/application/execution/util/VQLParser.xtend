@@ -21,6 +21,9 @@ import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationB
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.xtext.resource.XtextResourceSet
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptConsole
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
+import hu.bme.mit.inf.dslreasoner.application.linking.PreloadedMetamodelProvider
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.CompoundMetamodelProviderService
 
 class MyModule extends EMFPatternLanguageRuntimeModule implements Module {
     def public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {
@@ -28,6 +31,10 @@ class MyModule extends EMFPatternLanguageRuntimeModule implements Module {
     }
     def public Class<? extends IGenmodelMappingLoader> bindGenmodelMappingLoader() {
         return typeof(GenmodelExtensionLoader);
+    }
+    override Class<? extends IMetamodelProvider> bindIMetamodelProvider() {
+       CompoundMetamodelProviderService
+       // PreloadedMetamodelProvider
     }
 }
 

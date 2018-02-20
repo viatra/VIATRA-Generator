@@ -90,12 +90,16 @@ class ScriptConsole implements Closeable {
 	}
 	
 	private def prepareFile(URI uri) {
-		val fileString = uri.toFileString
-		val file = new File(fileString)
-		if(this.cleanFiles && file.exists) {
-			file.delete
+		if (uri === null) {
+			return null
+		} else {
+			val fileString = uri.toFileString
+			val file = new File(fileString)
+			if (this.cleanFiles && file.exists) {
+				file.delete
+			}
+			return file
 		}
-		return file
 	}
 	
 	override close() throws IOException {
