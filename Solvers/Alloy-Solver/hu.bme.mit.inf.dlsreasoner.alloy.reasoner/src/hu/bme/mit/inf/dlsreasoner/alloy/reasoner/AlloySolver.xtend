@@ -9,6 +9,7 @@ import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapp
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes
 import hu.bme.mit.inf.dslreasoner.AlloyLanguageStandaloneSetupGenerated
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguagePackage
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
@@ -32,6 +33,9 @@ class AlloySolver extends LogicReasoner{
 	
 	override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
 		val alloyConfig = configuration.asConfig
+		val writeToFile = (
+			configuration.documentationLevel===DocumentationLevel::NORMAL ||
+			configuration.documentationLevel===DocumentationLevel::FULL)
 		
 		// Start: Logic -> Alloy mapping
 		val transformationStart = System.currentTimeMillis
@@ -41,7 +45,7 @@ class AlloySolver extends LogicReasoner{
 		
 		var String fileURI = null;
 		var String alloyCode = null;
-		if(alloyConfig.writeToFile) {
+		if(writeToFile) {
 			fileURI = workspace.writeModel(alloyProblem,fileName).toFileString
 		} else {
 			alloyCode = workspace.writeModelToString(alloyProblem,fileName)
@@ -57,7 +61,7 @@ class AlloySolver extends LogicReasoner{
 		val solverFinish = System.currentTimeMillis-solverStart
 		// Finish: Solving Alloy problem
 		
-		if(alloyConfig.writeToFile) workspace.deactivateModel(fileName)
+		if(writeToFile) workspace.deactivateModel(fileName)
 		
 		return logicResult
 	}
@@ -66,7 +70,7 @@ class AlloySolver extends LogicReasoner{
 		if(configuration instanceof AlloySolverConfiguration) {
 			return configuration
 		} else {
-			throw new IllegalArgumentException('''The configuration have to be an «AlloySolverConfiguration.simpleName»!''')	
+			throw new IllegalArgumentException('''The configuration has to be an «AlloySolverConfiguration.simpleName»!''')	
 		}
 	}
 	

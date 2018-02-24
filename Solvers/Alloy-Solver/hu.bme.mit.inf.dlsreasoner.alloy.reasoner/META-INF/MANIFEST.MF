@@ -18,9 +18,9 @@ Require-Bundle: com.google.guava,
  org.eclipse.emf.ecore;visibility:=reexport,
  hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0";visibility:=reexport,
  hu.bme.mit.inf.dslreasoner.alloy.language;bundle-version="1.0.0",
- org.eclipse.viatra.query.runtime;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.viatra.query.runtime.base.itc;bundle-version="1.3.0",
- hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0"
+ hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
+ org.eclipse.viatra.query.runtime;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"

@@ -65,6 +65,7 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSInt
 
 class Logic2AlloyLanguageMapper {
 	private val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
@@ -311,22 +312,34 @@ class Logic2AlloyLanguageMapper {
 				it.number = typeMapper.getUndefinedSupertypeScope(config.typeScopes.maxNewElements,trace) 
 				it.exactly = (config.typeScopes.maxNewElements == config.typeScopes.minNewElements)
 			]
-			if(config.typeScopes.maxNewIntegers == LogicSolverConfiguration::Unlimited) throw new UnsupportedOperationException(
-				'''An integer scope have to be specified for Alloy!''')
-			it.typeScopes += createALSIntScope => [
-				if(config.typeScopes.knownIntegers.empty) {
-					number = Integer.SIZE-Integer.numberOfLeadingZeros(config.typeScopes.maxNewIntegers+1/2)
+			if(config.typeScopes.maxNewIntegers == LogicSolverConfiguration::Unlimited) {
+				val integersUsed = specification.eAllContents.filter(ALSInt)
+				if(integersUsed.empty) {
+					// If no integer scope is defined, but the problem has no integers
+					// => scope can be empty
+					it.typeScopes+= createALSIntScope => [
+						it.number = 0
+					]
 				} else {
-					var scope = Math.max(
-						Math.abs(config.typeScopes.knownIntegers.max),
-						Math.abs(config.typeScopes.knownIntegers.min))
-					if(scope*2+1 < config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) {
-						scope += ((config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) - (scope*2))/2
-					}
-					number = Integer.SIZE-Integer.numberOfLeadingZeros(scope)
+					// If no integer scope is defined, and the problem has integers
+					// => error
+					throw new UnsupportedOperationException('''An integer scope have to be specified for Alloy!''')
 				}
-				
-			]
+			} else {
+				it.typeScopes += createALSIntScope => [
+					if(config.typeScopes.knownIntegers.empty) {
+						number = Integer.SIZE-Integer.numberOfLeadingZeros(config.typeScopes.maxNewIntegers+1/2)
+					} else {
+						var scope = Math.max(
+							Math.abs(config.typeScopes.knownIntegers.max),
+							Math.abs(config.typeScopes.knownIntegers.min))
+						if(scope*2+1 < config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) {
+							scope += ((config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) - (scope*2))/2
+						}
+						number = Integer.SIZE-Integer.numberOfLeadingZeros(scope)
+					}
+				]
+			}
 //			for(definedScope : config.typeScopes.allDefinedScope) {
 //				it.typeScopes += createALSSigScope => [
 //					it.type = definedScope.type.lookup(trace.type2ALSType)

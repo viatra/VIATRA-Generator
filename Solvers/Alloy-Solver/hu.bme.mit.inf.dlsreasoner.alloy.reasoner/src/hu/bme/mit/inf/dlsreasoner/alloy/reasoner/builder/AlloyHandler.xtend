@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder
 
+import com.google.common.util.concurrent.SimpleTimeLimiter
+import com.google.common.util.concurrent.UncheckedTimeoutException
 import edu.mit.csail.sdg.alloy4.A4Reporter
 import edu.mit.csail.sdg.alloy4.Err
 import edu.mit.csail.sdg.alloy4.ErrorWarning
@@ -7,25 +9,24 @@ import edu.mit.csail.sdg.alloy4compiler.ast.Command
 import edu.mit.csail.sdg.alloy4compiler.parser.CompModule
 import edu.mit.csail.sdg.alloy4compiler.parser.CompUtil
 import edu.mit.csail.sdg.alloy4compiler.translator.A4Options
+import edu.mit.csail.sdg.alloy4compiler.translator.A4Options.SatSolver
 import edu.mit.csail.sdg.alloy4compiler.translator.A4Solution
 import edu.mit.csail.sdg.alloy4compiler.translator.TranslateAlloyToKodkod
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDocument
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.util.ArrayList
+import java.util.HashMap
 import java.util.LinkedList
 import java.util.List
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
-import org.eclipse.xtend.lib.annotations.Data
 import java.util.Map
-import java.util.HashMap
-import edu.mit.csail.sdg.alloy4compiler.translator.A4Options.SatSolver
-import org.eclipse.emf.common.CommonPlugin
-import java.util.ArrayList
-import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDocument
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
-import com.google.common.util.concurrent.SimpleTimeLimiter
 import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
-import com.google.common.util.concurrent.UncheckedTimeoutException
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
+import org.eclipse.emf.common.CommonPlugin
+import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 
 class AlloySolverException extends Exception{
 	new(String s) { super(s) }
@@ -48,6 +49,10 @@ class AlloyHandler {
 	//val fileName = "problem.als"
 	
 	public def callSolver(ALSDocument problem, ReasonerWorkspace workspace, AlloySolverConfiguration configuration, String path, String alloyCode) {
+		val writeToFile = (
+			configuration.documentationLevel===DocumentationLevel::NORMAL ||
+			configuration.documentationLevel===DocumentationLevel::FULL)
+		
 		//Prepare
 		
 		val warnings = new LinkedList<String>
@@ -78,7 +83,7 @@ class AlloyHandler {
 		// Start: Alloy -> Kodkod
 		val kodkodTransformStart = System.currentTimeMillis();
 		try {
-			if(configuration.writeToFile) {
+			if(writeToFile) {
 				compModule = CompUtil.parseEverything_fromFile(reporter,null,path)
 			} else {
 				compModule = CompUtil.parseEverything_fromString(reporter,alloyCode)
