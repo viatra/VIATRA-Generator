@@ -8,6 +8,9 @@ import java.util.List
 import java.util.TreeSet
 import java.util.SortedSet
 import java.math.BigDecimal
+import java.util.HashMap
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import java.util.Map
 
 abstract class LogicReasoner {
 	def abstract LogicResult solve(LogicProblem problem, LogicSolverConfiguration configuration,
@@ -40,9 +43,32 @@ abstract class LogicSolverConfiguration {
 	public int runtimeLimit = Unlimited
 	/** Max runtime limit in seconds. */
 	public int memoryLimit = Unlimited
+	/** Documentation level of the solver. */
+	public DocumentationLevel documentationLevel = DocumentationLevel::NONE
 
 	public var TypeScopes typeScopes = new TypeScopes;
 	public var SolutionScope solutionScope = new SolutionScope
+}
+
+/**
+ * Describes the amount of debug information required to write to the workspace.
+ * 
+ */
+public enum DocumentationLevel {
+	/**
+	 * The solver writes only temporary files.
+	 */
+	NONE,
+	/**
+	 * The solver is requested to write important artifacts and documents that are constructed during the generation.
+	 * This option should not affect the performance of the solver seriously. 
+	 */
+	NORMAL,
+	/**
+	 * The solver is requested create additional documents to aid troubleshooting.
+	 * The documents can constructed at the cost of performance.
+	 */
+	FULL
 }
 
 /**
@@ -51,22 +77,28 @@ abstract class LogicSolverConfiguration {
 public class TypeScopes {
 	public static val Unlimited = -1;
 	
+	/**
+	 * Sets the Integers that are already in the scope of the problem.
+	 */
 	public var SortedSet<Integer> knownIntegers = new TreeSet
 	/**
 	 * Sets the number of Integers that has to be used to solve the problem.
 	 */
+	public var minNewIntegers = 0
 	public var maxNewIntegers = Unlimited
 	
 	public var SortedSet<BigDecimal> knownReals = new TreeSet
 	/**
 	 * Sets the number of Reals that has to be used to solve the problem.
 	 */
+	public var minNewReals = 0
 	public var maxNewReals = Unlimited
 	
 	public var SortedSet<String> knownStrings = new TreeSet
 	/**
 	 * Sets the number of Strings that has to be used to solve the problem.
 	 */
+	public var minNewStrings = 0
 	public var maxNewStrings = Unlimited
 	
 	/**
@@ -77,6 +109,14 @@ public class TypeScopes {
 	 * Defines the maximal number of newly added elements. Default value is <code>TypeScopes.Unlimited</code>.
 	 */
 	public var maxNewElements = Unlimited
+	/**
+	 * 
+	 */
+	public var Map<Type,Integer> minNewElementsByType = new HashMap	
+	/**
+	 * 
+	 */
+	public var Map<Type,Integer> maxNewElementsByType = new HashMap
 }
 
 /**
