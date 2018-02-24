@@ -22,11 +22,11 @@ class ProjectWorkspace extends ReasonerWorkspace{
 	}
 	
 	override protected getURI(String name) {
-		URI.createPlatformResourceURI(targetFolder + "/" + prefix + name,true);
+		URI.createURI(targetFolder + "/" + prefix + name,true);
 	}
 	
 	def protected getDirUri() {
-		URI.createPlatformResourceURI(targetFolder,true)
+		URI.createURI(targetFolder,true)
 	}
 	
 	override getWorkspaceURI() {
@@ -35,7 +35,13 @@ class ProjectWorkspace extends ReasonerWorkspace{
 	
 	override initAndClear() {
 		target = ResourcesPlugin.workspace.root
-		for(nameSegment : dirUri.segments) {
+		
+		val segments = if(dirUri.platformResource) {
+			dirUri.segments.subList(1,dirUri.segments.size)
+		} else {
+			throw new UnsupportedOperationException('''Only platform resources are supported, but recieved: "«dirUri»"!''')
+		}
+		for(nameSegment : segments) {
 			target = createContainer(target,nameSegment)
 		}
 		target.members.forEach[delete(false,monitor)]
@@ -55,16 +61,16 @@ class ProjectWorkspace extends ReasonerWorkspace{
 	
 	def protected dispatch createContainer(IProject root, String name) {
 		val folder = root.getFolder(name);
-		if(folder.exists) {
-			folder.create(false,true,monitor)
+		if(!folder.exists) {
+			folder.create(true,true,monitor)
 		}
 		return folder
 	}
 	
 	def protected dispatch createContainer(IFolder root, String name) {
 		val folder = root.getFolder(name);
-		if(folder.exists) {
-			folder.create(false,true,monitor)
+		if(!folder.exists) {
+			folder.create(true,true,monitor)
 		}
 		return folder
 	}
@@ -100,7 +106,7 @@ class ProjectWorkspace extends ReasonerWorkspace{
 	}
 	
 	override subWorkspace(String targetFolder, String prefix) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return new ProjectWorkspace(this.targetFolder+"/"+targetFolder,this.prefix + prefix);
 	}
 	
 	override allFiles() {
