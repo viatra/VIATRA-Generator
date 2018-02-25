@@ -103,7 +103,22 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ConfigSpecification"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConfigEntry">
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigEntry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentationEntry" eSuperTypes="#//ConfigEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="#//DocumentLevelSpecification"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DocumentLevelSpecification">
+    <eLiterals name="none" literal="none"/>
+    <eLiterals name="normal" value="1" literal="normal"/>
+    <eLiterals name="full" value="2" literal="full"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuntimeEntry" eSuperTypes="#//ConfigEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="millisecLimit" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MemoryEntry" eSuperTypes="#//ConfigEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="megabyteLimit" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomEntry" eSuperTypes="#//ConfigEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
