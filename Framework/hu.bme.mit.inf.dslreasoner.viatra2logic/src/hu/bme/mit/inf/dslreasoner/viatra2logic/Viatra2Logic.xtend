@@ -125,6 +125,7 @@ class  Viatra2Logic {
 		val annotation = createTransfomedViatraQuery => [
 			it.target = lRelation
 			it.patternFullyQualifiedName = pquery.fullyQualifiedName
+			it.patternPQuery = pquery
 		]
 		viatra2LogicTrace.query2Annotation.put(pquery,annotation)
 		ecore2LogicTrace.output.annotations += annotation

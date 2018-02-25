@@ -135,6 +135,15 @@ public class Viatra2LogicAnnotationsPackageImpl extends EPackageImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTransfomedViatraQuery_PatternPQuery() {
+		return (EAttribute)transfomedViatraQueryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransformedViatraWellformednessConstraint() {
 		return transformedViatraWellformednessConstraintEClass;
 	}
@@ -196,6 +205,7 @@ public class Viatra2LogicAnnotationsPackageImpl extends EPackageImpl implements 
 		// Create classes and their features
 		transfomedViatraQueryEClass = createEClass(TRANSFOMED_VIATRA_QUERY);
 		createEAttribute(transfomedViatraQueryEClass, TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME);
+		createEAttribute(transfomedViatraQueryEClass, TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY);
 
 		transformedViatraWellformednessConstraintEClass = createEClass(TRANSFORMED_VIATRA_WELLFORMEDNESS_CONSTRAINT);
 		createEReference(transformedViatraWellformednessConstraintEClass, TRANSFORMED_VIATRA_WELLFORMEDNESS_CONSTRAINT__QUERY);
@@ -242,6 +252,7 @@ public class Viatra2LogicAnnotationsPackageImpl extends EPackageImpl implements 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(transfomedViatraQueryEClass, TransfomedViatraQuery.class, "TransfomedViatraQuery", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransfomedViatraQuery_PatternFullyQualifiedName(), ecorePackage.getEString(), "patternFullyQualifiedName", null, 1, 1, TransfomedViatraQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransfomedViatraQuery_PatternPQuery(), ecorePackage.getEJavaObject(), "patternPQuery", null, 1, 1, TransfomedViatraQuery.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformedViatraWellformednessConstraintEClass, TransformedViatraWellformednessConstraint.class, "TransformedViatraWellformednessConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformedViatraWellformednessConstraint_Query(), this.getTransfomedViatraQuery(), null, "query", null, 1, 1, TransformedViatraWellformednessConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

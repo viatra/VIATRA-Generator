@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra
 
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules.GoalConstraintProvider
@@ -14,6 +15,8 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
+import java.util.Set
 
 class ModelGenerationStatistics {
 	public var long transformationExecutionTime = 0
@@ -47,13 +50,23 @@ class ModelGenerationMethodProvider {
 	public def ModelGenerationMethod createModelGenerationMethod(
 		LogicProblem logicProblem,
 		PartialInterpretation emptySolution,
-		Iterable<PQuery> existingQueries,
 		ReasonerWorkspace workspace,
 		boolean nameNewElements,
-		TypeInferenceMethod typeInferenceMethod
+		TypeInferenceMethod typeInferenceMethod,
+		DocumentationLevel debugLevel
 	) {
 		val statistics = new ModelGenerationStatistics
-		val queries = patternProvider.generateQueries(logicProblem,emptySolution,statistics,existingQueries,workspace,typeInferenceMethod)
+		val writeFiles = (debugLevel === DocumentationLevel.NORMAL || debugLevel === DocumentationLevel.FULL)
+		
+		val Set<PQuery> existingQueries = logicProblem
+			.relations
+			.map[annotations]
+			.flatten
+			.filter(TransfomedViatraQuery)
+			.map[it.patternPQuery as PQuery]
+			.toSet
+		
+		val queries = patternProvider.generateQueries(logicProblem,emptySolution,statistics,existingQueries,workspace,typeInferenceMethod,writeFiles)
 		
 		val //LinkedHashMap<Pair<Relation, ? extends Type>, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>>
 			objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(queries,nameNewElements,statistics)

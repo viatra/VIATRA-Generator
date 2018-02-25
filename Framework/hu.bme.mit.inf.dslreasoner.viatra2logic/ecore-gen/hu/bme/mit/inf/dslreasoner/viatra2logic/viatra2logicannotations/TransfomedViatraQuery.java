@@ -14,6 +14,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.RelationAnnotation;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternFullyQualifiedName <em>Pattern Fully Qualified Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternPQuery <em>Pattern PQuery</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage#getTransfomedViatraQuery()
@@ -47,4 +48,30 @@ public interface TransfomedViatraQuery extends RelationAnnotation {
 	 * @generated
 	 */
 	void setPatternFullyQualifiedName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Pattern PQuery</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pattern PQuery</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pattern PQuery</em>' attribute.
+	 * @see #setPatternPQuery(Object)
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage#getTransfomedViatraQuery_PatternPQuery()
+	 * @model required="true" transient="true"
+	 * @generated
+	 */
+	Object getPatternPQuery();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternPQuery <em>Pattern PQuery</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pattern PQuery</em>' attribute.
+	 * @see #getPatternPQuery()
+	 * @generated
+	 */
+	void setPatternPQuery(Object value);
 } // TransfomedViatraQuery

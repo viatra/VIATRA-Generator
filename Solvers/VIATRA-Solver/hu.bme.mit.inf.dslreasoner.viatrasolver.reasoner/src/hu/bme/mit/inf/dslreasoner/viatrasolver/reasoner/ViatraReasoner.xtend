@@ -60,10 +60,10 @@ class ViatraReasoner extends LogicReasoner{
 		val method = modelGenerationMethodProvider.createModelGenerationMethod(
 			problem,
 			emptySolution,
-			viatraConfig.existingQueries,
 			workspace,
 			viatraConfig.nameNewElements,
-			viatraConfig.typeInferenceMethod
+			viatraConfig.typeInferenceMethod,
+			viatraConfig.documentationLevel
 		)
 		
 		dse.addObjective(new ModelGenerationCompositeObjective(

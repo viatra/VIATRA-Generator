@@ -4,21 +4,20 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
-import java.util.Set
-import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import java.util.LinkedList
 import java.util.List
+import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 
 public enum StateCoderStrategy {
 	Neighbourhood, NeighbourhoodWithEquivalence, IDBased, DefinedByDiversity
 }
 
 class ViatraReasonerConfiguration extends LogicSolverConfiguration{
-	public var Iterable<PQuery> existingQueries
+	//public var Iterable<PQuery> existingQueries
 	
 	public var nameNewElements = false
 	public var StateCoderStrategy stateCoderStrategy = StateCoderStrategy.Neighbourhood

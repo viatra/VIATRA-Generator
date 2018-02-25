@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import java.util.Collection
+import java.util.Set
 
 @Data class GeneratedPatterns {
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
@@ -39,10 +40,11 @@ class PatternProvider {
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		ModelGenerationStatistics statistics,
-		Iterable<PQuery> existingQueries,
+		Set<PQuery> existingQueries,
 		ReasonerWorkspace workspace,
-		TypeInferenceMethod typeInferenceMethod
-	) {
+		TypeInferenceMethod typeInferenceMethod,
+		boolean writeToFile)
+	{
 		val fqn2Query = existingQueries.toMap[it.fullyQualifiedName]
 		val PatternGenerator patternGenerator = new PatternGenerator(typeInferenceMethod)
 		val typeAnalysisResult = if(patternGenerator.requiresTypeAnalysis) {
@@ -55,17 +57,13 @@ class PatternProvider {
 			null
 		}
 		val baseIndexerFile = patternGenerator.transformBaseProperties(problem,emptySolution,fqn2Query,typeAnalysisResult)
-		writeQueries(baseIndexerFile,"GeneratedQueries",workspace)
+		if(writeToFile) {
+			workspace.writeText('''generated3valued.vql_deactivated''',baseIndexerFile)
+		}
 		val ParseUtil parseUtil = new ParseUtil
 		val generatedQueries = parseUtil.parse(baseIndexerFile)
 		val runtimeQueries = calclulateRuntimeQueries(patternGenerator,problem,emptySolution,typeAnalysisResult,generatedQueries);
 		return runtimeQueries
-	}
-	
-	private def writeQueries(CharSequence content, String name,ReasonerWorkspace workspace) {
-		if(workspace!=null) {
-			workspace.writeText('''«name».vql_deactivated''',content)
-		}
 	}
 	
 	private def GeneratedPatterns calclulateRuntimeQueries(

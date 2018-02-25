@@ -87,13 +87,22 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	int TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Pattern PQuery</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Transfomed Viatra Query</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFOMED_VIATRA_QUERY_FEATURE_COUNT = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 1;
+	int TRANSFOMED_VIATRA_QUERY_FEATURE_COUNT = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Transfomed Viatra Query</em>' class.
@@ -220,6 +229,17 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	EAttribute getTransfomedViatraQuery_PatternFullyQualifiedName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternPQuery <em>Pattern PQuery</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pattern PQuery</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternPQuery()
+	 * @see #getTransfomedViatraQuery()
+	 * @generated
+	 */
+	EAttribute getTransfomedViatraQuery_PatternPQuery();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransformedViatraWellformednessConstraint <em>Transformed Viatra Wellformedness Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,6 +321,14 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME = eINSTANCE.getTransfomedViatraQuery_PatternFullyQualifiedName();
+
+		/**
+		 * The meta object literal for the '<em><b>Pattern PQuery</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY = eINSTANCE.getTransfomedViatraQuery_PatternPQuery();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransformedViatraWellformednessConstraintImpl <em>Transformed Viatra Wellformedness Constraint</em>}' class.

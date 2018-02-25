@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransfomedViatraQueryImpl#getPatternFullyQualifiedName <em>Pattern Fully Qualified Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransfomedViatraQueryImpl#getPatternPQuery <em>Pattern PQuery</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,6 +45,24 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 */
 	protected String patternFullyQualifiedName = PATTERN_FULLY_QUALIFIED_NAME_EDEFAULT;
 
+	/**
+	 * The default value of the '{@link #getPatternPQuery() <em>Pattern PQuery</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPatternPQuery()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object PATTERN_PQUERY_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getPatternPQuery() <em>Pattern PQuery</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPatternPQuery()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object patternPQuery = PATTERN_PQUERY_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,11 +108,34 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Object getPatternPQuery() {
+		return patternPQuery;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPatternPQuery(Object newPatternPQuery) {
+		Object oldPatternPQuery = patternPQuery;
+		patternPQuery = newPatternPQuery;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY, oldPatternPQuery, patternPQuery));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME:
 				return getPatternFullyQualifiedName();
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
+				return getPatternPQuery();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -108,6 +150,9 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 		switch (featureID) {
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME:
 				setPatternFullyQualifiedName((String)newValue);
+				return;
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
+				setPatternPQuery(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,6 +169,9 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME:
 				setPatternFullyQualifiedName(PATTERN_FULLY_QUALIFIED_NAME_EDEFAULT);
 				return;
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
+				setPatternPQuery(PATTERN_PQUERY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -138,6 +186,8 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 		switch (featureID) {
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME:
 				return PATTERN_FULLY_QUALIFIED_NAME_EDEFAULT == null ? patternFullyQualifiedName != null : !PATTERN_FULLY_QUALIFIED_NAME_EDEFAULT.equals(patternFullyQualifiedName);
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
+				return PATTERN_PQUERY_EDEFAULT == null ? patternPQuery != null : !PATTERN_PQUERY_EDEFAULT.equals(patternPQuery);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -154,6 +204,8 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (patternFullyQualifiedName: ");
 		result.append(patternFullyQualifiedName);
+		result.append(", patternPQuery: ");
+		result.append(patternPQuery);
 		result.append(')');
 		return result.toString();
 	}

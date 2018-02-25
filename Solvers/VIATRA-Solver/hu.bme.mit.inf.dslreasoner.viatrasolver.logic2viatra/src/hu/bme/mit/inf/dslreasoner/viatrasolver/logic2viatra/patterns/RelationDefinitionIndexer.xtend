@@ -3,10 +3,13 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import java.util.Map
 import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.ecore.EEnumLiteral
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey
+import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable
@@ -21,8 +24,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeCo
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 
 class RelationDefinitionIndexer {
 	val PatternGenerator base;
@@ -193,13 +194,15 @@ class RelationDefinitionIndexer {
 		
 		var String targetString;
 		var String additionalDefinition;
-		if(target instanceof Enum<?>) {
-			targetString = '''const_«target.name»_«target.declaringClass.simpleName»'''
-			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.declaringClass.simpleName»");  LogicProblem.elements(problem,«targetString»);'''
+		if(target instanceof EEnumLiteral) {
+			targetString = '''const_«target.name»_«target.EEnum.name»'''
+			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Integer) {
 			targetString = target.toString
 			additionalDefinition = ''''''
-		} else throw new UnsupportedOperationException('''Unknown constant type: «target.class»''')
+		} else {
+			throw new UnsupportedOperationException('''Unknown constant type: «target.class»''')
+		}
 		
 		val source = c.variablesTuple
 		var String sourceName
