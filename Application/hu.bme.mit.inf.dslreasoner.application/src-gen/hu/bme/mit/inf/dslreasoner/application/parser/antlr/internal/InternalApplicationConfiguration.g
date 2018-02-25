@@ -1859,15 +1859,205 @@ ruleConfigEntry returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		{
+			newCompositeNode(grammarAccess.getConfigEntryAccess().getDocumentationEntryParserRuleCall_0());
+		}
+		this_DocumentationEntry_0=ruleDocumentationEntry
+		{
+			$current = $this_DocumentationEntry_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getConfigEntryAccess().getRuntimeEntryParserRuleCall_1());
+		}
+		this_RuntimeEntry_1=ruleRuntimeEntry
+		{
+			$current = $this_RuntimeEntry_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getConfigEntryAccess().getMemoryEntryParserRuleCall_2());
+		}
+		this_MemoryEntry_2=ruleMemoryEntry
+		{
+			$current = $this_MemoryEntry_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getConfigEntryAccess().getCustomEntryParserRuleCall_3());
+		}
+		this_CustomEntry_3=ruleCustomEntry
+		{
+			$current = $this_CustomEntry_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleDocumentationEntry
+entryRuleDocumentationEntry returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDocumentationEntryRule()); }
+	iv_ruleDocumentationEntry=ruleDocumentationEntry
+	{ $current=$iv_ruleDocumentationEntry.current; }
+	EOF;
+
+// Rule DocumentationEntry
+ruleDocumentationEntry returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='documents'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getDocumentationEntryAccess().getDocumentsKeyword_0());
+		}
+		otherlv_1='='
+		{
+			newLeafNode(otherlv_1, grammarAccess.getDocumentationEntryAccess().getEqualsSignKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDocumentationEntryAccess().getLevelDocumentLevelSpecificationEnumRuleCall_2_0());
+				}
+				lv_level_2_0=ruleDocumentLevelSpecification
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDocumentationEntryRule());
+					}
+					set(
+						$current,
+						"level",
+						lv_level_2_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.DocumentLevelSpecification");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleRuntimeEntry
+entryRuleRuntimeEntry returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRuntimeEntryRule()); }
+	iv_ruleRuntimeEntry=ruleRuntimeEntry
+	{ $current=$iv_ruleRuntimeEntry.current; }
+	EOF;
+
+// Rule RuntimeEntry
+ruleRuntimeEntry returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='runtime'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getRuntimeEntryAccess().getRuntimeKeyword_0());
+		}
+		otherlv_1='='
+		{
+			newLeafNode(otherlv_1, grammarAccess.getRuntimeEntryAccess().getEqualsSignKeyword_1());
+		}
+		(
+			(
+				lv_millisecLimit_2_0=RULE_INT
+				{
+					newLeafNode(lv_millisecLimit_2_0, grammarAccess.getRuntimeEntryAccess().getMillisecLimitINTTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRuntimeEntryRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"millisecLimit",
+						lv_millisecLimit_2_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleMemoryEntry
+entryRuleMemoryEntry returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMemoryEntryRule()); }
+	iv_ruleMemoryEntry=ruleMemoryEntry
+	{ $current=$iv_ruleMemoryEntry.current; }
+	EOF;
+
+// Rule MemoryEntry
+ruleMemoryEntry returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='memory'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getMemoryEntryAccess().getMemoryKeyword_0());
+		}
+		otherlv_1='='
+		{
+			newLeafNode(otherlv_1, grammarAccess.getMemoryEntryAccess().getEqualsSignKeyword_1());
+		}
+		(
+			(
+				lv_megabyteLimit_2_0=RULE_INT
+				{
+					newLeafNode(lv_megabyteLimit_2_0, grammarAccess.getMemoryEntryAccess().getMegabyteLimitINTTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMemoryEntryRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"megabyteLimit",
+						lv_megabyteLimit_2_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleCustomEntry
+entryRuleCustomEntry returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCustomEntryRule()); }
+	iv_ruleCustomEntry=ruleCustomEntry
+	{ $current=$iv_ruleCustomEntry.current; }
+	EOF;
+
+// Rule CustomEntry
+ruleCustomEntry returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
 		(
 			(
 				lv_key_0_0=RULE_STRING
 				{
-					newLeafNode(lv_key_0_0, grammarAccess.getConfigEntryAccess().getKeySTRINGTerminalRuleCall_0_0());
+					newLeafNode(lv_key_0_0, grammarAccess.getCustomEntryAccess().getKeySTRINGTerminalRuleCall_0_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getConfigEntryRule());
+						$current = createModelElement(grammarAccess.getCustomEntryRule());
 					}
 					setWithLastConsumed(
 						$current,
@@ -1879,17 +2069,17 @@ ruleConfigEntry returns [EObject current=null]
 		)
 		otherlv_1='='
 		{
-			newLeafNode(otherlv_1, grammarAccess.getConfigEntryAccess().getEqualsSignKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getCustomEntryAccess().getEqualsSignKeyword_1());
 		}
 		(
 			(
 				lv_value_2_0=RULE_STRING
 				{
-					newLeafNode(lv_value_2_0, grammarAccess.getConfigEntryAccess().getValueSTRINGTerminalRuleCall_2_0());
+					newLeafNode(lv_value_2_0, grammarAccess.getCustomEntryAccess().getValueSTRINGTerminalRuleCall_2_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getConfigEntryRule());
+						$current = createModelElement(grammarAccess.getCustomEntryRule());
 					}
 					setWithLastConsumed(
 						$current,
@@ -3943,6 +4133,41 @@ ruleGenerationTask returns [EObject current=null]
 		{
 			newLeafNode(otherlv_40, grammarAccess.getGenerationTaskAccess().getRightCurlyBracketKeyword_4());
 		}
+	)
+;
+
+// Rule DocumentLevelSpecification
+ruleDocumentLevelSpecification returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='none'
+			{
+				$current = grammarAccess.getDocumentLevelSpecificationAccess().getNoneEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getDocumentLevelSpecificationAccess().getNoneEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='normal'
+			{
+				$current = grammarAccess.getDocumentLevelSpecificationAccess().getNormalEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getDocumentLevelSpecificationAccess().getNormalEnumLiteralDeclaration_1());
+			}
+		)
+		    |
+		(
+			enumLiteral_2='full'
+			{
+				$current = grammarAccess.getDocumentLevelSpecificationAccess().getFullEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getDocumentLevelSpecificationAccess().getFullEnumLiteralDeclaration_2());
+			}
+		)
 	)
 ;
 

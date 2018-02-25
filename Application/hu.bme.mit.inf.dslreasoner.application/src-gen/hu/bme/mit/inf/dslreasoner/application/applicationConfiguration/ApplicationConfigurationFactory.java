@@ -330,6 +330,42 @@ public interface ApplicationConfigurationFactory extends EFactory
   ConfigEntry createConfigEntry();
 
   /**
+   * Returns a new object of class '<em>Documentation Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Documentation Entry</em>'.
+   * @generated
+   */
+  DocumentationEntry createDocumentationEntry();
+
+  /**
+   * Returns a new object of class '<em>Runtime Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Runtime Entry</em>'.
+   * @generated
+   */
+  RuntimeEntry createRuntimeEntry();
+
+  /**
+   * Returns a new object of class '<em>Memory Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Memory Entry</em>'.
+   * @generated
+   */
+  MemoryEntry createMemoryEntry();
+
+  /**
+   * Returns a new object of class '<em>Custom Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Custom Entry</em>'.
+   * @generated
+   */
+  CustomEntry createCustomEntry();
+
+  /**
    * Returns a new object of class '<em>Config Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -339,6 +339,38 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ApplicationConfigurationPackage.DOCUMENTATION_ENTRY:
+      {
+        DocumentationEntry documentationEntry = (DocumentationEntry)theEObject;
+        T result = caseDocumentationEntry(documentationEntry);
+        if (result == null) result = caseConfigEntry(documentationEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.RUNTIME_ENTRY:
+      {
+        RuntimeEntry runtimeEntry = (RuntimeEntry)theEObject;
+        T result = caseRuntimeEntry(runtimeEntry);
+        if (result == null) result = caseConfigEntry(runtimeEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.MEMORY_ENTRY:
+      {
+        MemoryEntry memoryEntry = (MemoryEntry)theEObject;
+        T result = caseMemoryEntry(memoryEntry);
+        if (result == null) result = caseConfigEntry(memoryEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.CUSTOM_ENTRY:
+      {
+        CustomEntry customEntry = (CustomEntry)theEObject;
+        T result = caseCustomEntry(customEntry);
+        if (result == null) result = caseConfigEntry(customEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ApplicationConfigurationPackage.CONFIG_REFERENCE:
       {
         ConfigReference configReference = (ConfigReference)theEObject;
@@ -1115,6 +1147,70 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseConfigEntry(ConfigEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Documentation Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Documentation Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDocumentationEntry(DocumentationEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Runtime Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Runtime Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRuntimeEntry(RuntimeEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Memory Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Memory Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMemoryEntry(MemoryEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Custom Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Custom Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCustomEntry(CustomEntry object)
   {
     return null;
   }

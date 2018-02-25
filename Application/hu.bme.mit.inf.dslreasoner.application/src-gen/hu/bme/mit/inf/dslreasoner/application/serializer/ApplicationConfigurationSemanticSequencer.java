@@ -10,10 +10,11 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Applicati
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDeclaration;
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileDeclaration;
@@ -27,6 +28,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntEnumbe
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MemoryEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
@@ -42,6 +44,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSp
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification;
@@ -90,9 +93,6 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.CONFIG_DECLARATION:
 				sequence_ConfigDeclaration(context, (ConfigDeclaration) semanticObject); 
 				return; 
-			case ApplicationConfigurationPackage.CONFIG_ENTRY:
-				sequence_ConfigEntry(context, (ConfigEntry) semanticObject); 
-				return; 
 			case ApplicationConfigurationPackage.CONFIG_REFERENCE:
 				sequence_ConfigReference(context, (ConfigReference) semanticObject); 
 				return; 
@@ -101,6 +101,12 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 				return; 
 			case ApplicationConfigurationPackage.CONFIGURATION_SCRIPT:
 				sequence_ConfigurationScript(context, (ConfigurationScript) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.CUSTOM_ENTRY:
+				sequence_CustomEntry(context, (CustomEntry) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.DOCUMENTATION_ENTRY:
+				sequence_DocumentationEntry(context, (DocumentationEntry) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.EPACKAGE_IMPORT:
 				sequence_EPackageImport(context, (EPackageImport) semanticObject); 
@@ -140,6 +146,9 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 				return; 
 			case ApplicationConfigurationPackage.INTERVALL_NUMBER:
 				sequence_IntervallNumber(context, (IntervallNumber) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.MEMORY_ENTRY:
+				sequence_MemoryEntry(context, (MemoryEntry) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.METAMODEL_DECLARATION:
 				sequence_MetamodelDeclaration(context, (MetamodelDeclaration) semanticObject); 
@@ -185,6 +194,9 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 				return; 
 			case ApplicationConfigurationPackage.REAL_TYPE_SCOPE:
 				sequence_RealTypeScope(context, (RealTypeScope) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.RUNTIME_ENTRY:
+				sequence_RuntimeEntry(context, (RuntimeEntry) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.SCOPE_DECLARATION:
 				sequence_ScopeDeclaration(context, (ScopeDeclaration) semanticObject); 
@@ -295,27 +307,6 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
-	 *     ConfigEntry returns ConfigEntry
-	 *
-	 * Constraint:
-	 *     (key=STRING value=STRING)
-	 */
-	protected void sequence_ConfigEntry(ISerializationContext context, ConfigEntry semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__KEY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__KEY));
-			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CONFIG_ENTRY__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getConfigEntryAccess().getKeySTRINGTerminalRuleCall_0_0(), semanticObject.getKey());
-		feeder.accept(grammarAccess.getConfigEntryAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     ConfigReference returns ConfigReference
 	 *     Config returns ConfigReference
 	 *
@@ -355,6 +346,47 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 */
 	protected void sequence_ConfigurationScript(ISerializationContext context, ConfigurationScript semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConfigEntry returns CustomEntry
+	 *     CustomEntry returns CustomEntry
+	 *
+	 * Constraint:
+	 *     (key=STRING value=STRING)
+	 */
+	protected void sequence_CustomEntry(ISerializationContext context, CustomEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CUSTOM_ENTRY__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CUSTOM_ENTRY__KEY));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.CUSTOM_ENTRY__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.CUSTOM_ENTRY__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCustomEntryAccess().getKeySTRINGTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getCustomEntryAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConfigEntry returns DocumentationEntry
+	 *     DocumentationEntry returns DocumentationEntry
+	 *
+	 * Constraint:
+	 *     level=DocumentLevelSpecification
+	 */
+	protected void sequence_DocumentationEntry(ISerializationContext context, DocumentationEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.DOCUMENTATION_ENTRY__LEVEL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.DOCUMENTATION_ENTRY__LEVEL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDocumentationEntryAccess().getLevelDocumentLevelSpecificationEnumRuleCall_2_0(), semanticObject.getLevel());
+		feeder.finish();
 	}
 	
 	
@@ -589,6 +621,25 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     ConfigEntry returns MemoryEntry
+	 *     MemoryEntry returns MemoryEntry
+	 *
+	 * Constraint:
+	 *     megabyteLimit=INT
+	 */
+	protected void sequence_MemoryEntry(ISerializationContext context, MemoryEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.MEMORY_ENTRY__MEGABYTE_LIMIT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.MEMORY_ENTRY__MEGABYTE_LIMIT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMemoryEntryAccess().getMegabyteLimitINTTerminalRuleCall_2_0(), semanticObject.getMegabyteLimit());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Command returns MetamodelDeclaration
 	 *     Declaration returns MetamodelDeclaration
 	 *     MetamodelDeclaration returns MetamodelDeclaration
@@ -817,6 +868,25 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 */
 	protected void sequence_RealTypeScope(ISerializationContext context, RealTypeScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConfigEntry returns RuntimeEntry
+	 *     RuntimeEntry returns RuntimeEntry
+	 *
+	 * Constraint:
+	 *     millisecLimit=INT
+	 */
+	protected void sequence_RuntimeEntry(ISerializationContext context, RuntimeEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.RUNTIME_ENTRY__MILLISEC_LIMIT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.RUNTIME_ENTRY__MILLISEC_LIMIT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRuntimeEntryAccess().getMillisecLimitINTTerminalRuleCall_2_0(), semanticObject.getMillisecLimit());
+		feeder.finish();
 	}
 	
 	

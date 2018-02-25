@@ -246,6 +246,26 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
         return createConfigEntryAdapter();
       }
       @Override
+      public Adapter caseDocumentationEntry(DocumentationEntry object)
+      {
+        return createDocumentationEntryAdapter();
+      }
+      @Override
+      public Adapter caseRuntimeEntry(RuntimeEntry object)
+      {
+        return createRuntimeEntryAdapter();
+      }
+      @Override
+      public Adapter caseMemoryEntry(MemoryEntry object)
+      {
+        return createMemoryEntryAdapter();
+      }
+      @Override
+      public Adapter caseCustomEntry(CustomEntry object)
+      {
+        return createCustomEntryAdapter();
+      }
+      @Override
       public Adapter caseConfigReference(ConfigReference object)
       {
         return createConfigReferenceAdapter();
@@ -918,6 +938,66 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConfigEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry <em>Documentation Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry
+   * @generated
+   */
+  public Adapter createDocumentationEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry <em>Runtime Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry
+   * @generated
+   */
+  public Adapter createRuntimeEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MemoryEntry <em>Memory Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MemoryEntry
+   * @generated
+   */
+  public Adapter createMemoryEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry <em>Custom Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry
+   * @generated
+   */
+  public Adapter createCustomEntryAdapter()
   {
     return null;
   }

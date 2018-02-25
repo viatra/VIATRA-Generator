@@ -100,6 +100,10 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
       case ApplicationConfigurationPackage.CONFIG_SPECIFICATION: return createConfigSpecification();
       case ApplicationConfigurationPackage.CONFIG_DECLARATION: return createConfigDeclaration();
       case ApplicationConfigurationPackage.CONFIG_ENTRY: return createConfigEntry();
+      case ApplicationConfigurationPackage.DOCUMENTATION_ENTRY: return createDocumentationEntry();
+      case ApplicationConfigurationPackage.RUNTIME_ENTRY: return createRuntimeEntry();
+      case ApplicationConfigurationPackage.MEMORY_ENTRY: return createMemoryEntry();
+      case ApplicationConfigurationPackage.CUSTOM_ENTRY: return createCustomEntry();
       case ApplicationConfigurationPackage.CONFIG_REFERENCE: return createConfigReference();
       case ApplicationConfigurationPackage.CONFIG: return createConfig();
       case ApplicationConfigurationPackage.SCOPE_SPECIFICATION: return createScopeSpecification();
@@ -144,6 +148,8 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
   {
     switch (eDataType.getClassifierID())
     {
+      case ApplicationConfigurationPackage.DOCUMENT_LEVEL_SPECIFICATION:
+        return createDocumentLevelSpecificationFromString(eDataType, initialValue);
       case ApplicationConfigurationPackage.SOLVER:
         return createSolverFromString(eDataType, initialValue);
       default:
@@ -161,6 +167,8 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
   {
     switch (eDataType.getClassifierID())
     {
+      case ApplicationConfigurationPackage.DOCUMENT_LEVEL_SPECIFICATION:
+        return convertDocumentLevelSpecificationToString(eDataType, instanceValue);
       case ApplicationConfigurationPackage.SOLVER:
         return convertSolverToString(eDataType, instanceValue);
       default:
@@ -547,6 +555,50 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public DocumentationEntry createDocumentationEntry()
+  {
+    DocumentationEntryImpl documentationEntry = new DocumentationEntryImpl();
+    return documentationEntry;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuntimeEntry createRuntimeEntry()
+  {
+    RuntimeEntryImpl runtimeEntry = new RuntimeEntryImpl();
+    return runtimeEntry;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MemoryEntry createMemoryEntry()
+  {
+    MemoryEntryImpl memoryEntry = new MemoryEntryImpl();
+    return memoryEntry;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CustomEntry createCustomEntry()
+  {
+    CustomEntryImpl customEntry = new CustomEntryImpl();
+    return customEntry;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ConfigReference createConfigReference()
   {
     ConfigReferenceImpl configReference = new ConfigReferenceImpl();
@@ -859,6 +911,28 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
   {
     StringScopeImpl stringScope = new StringScopeImpl();
     return stringScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DocumentLevelSpecification createDocumentLevelSpecificationFromString(EDataType eDataType, String initialValue)
+  {
+    DocumentLevelSpecification result = DocumentLevelSpecification.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertDocumentLevelSpecificationToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

@@ -95,10 +95,15 @@ GraphPattern: GraphPatternReference|PatternSpecification;
 ConfigSpecification: {ConfigSpecification}'{'
 		(entries += ConfigEntry ("," entries += ConfigEntry)*)?
 	'}';
-ConfigDeclaration : 
+ConfigDeclaration :
 	'config' name = ID specification = ConfigSpecification
 ;
-ConfigEntry: key = STRING "=" value = STRING;
+ConfigEntry: DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
+DocumentationEntry: "documents" '=' level = DocumentLevelSpecification; enum DocumentLevelSpecification: none | normal | full;
+RuntimeEntry: "runtime" "=" millisecLimit = INT;
+MemoryEntry: "memory" "=" megabyteLimit = INT;
+CustomEntry: key = STRING "=" value = STRING;
+
 ConfigReference: config = [ConfigDeclaration];
 Config: ConfigSpecification | ConfigReference;
 

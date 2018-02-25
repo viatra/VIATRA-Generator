@@ -16,7 +16,10 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEnt
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.File;
@@ -34,6 +37,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerRe
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntegerTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MemoryEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Metamodel;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement;
@@ -56,6 +60,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnume
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
@@ -332,6 +337,34 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass documentationEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass runtimeEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass memoryEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass customEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass configReferenceEClass = null;
 
   /**
@@ -529,6 +562,13 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   private EClass stringScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum documentLevelSpecificationEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1229,9 +1269,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getConfigEntry_Key()
+  public EClass getDocumentationEntry()
   {
-    return (EAttribute)configEntryEClass.getEStructuralFeatures().get(0);
+    return documentationEntryEClass;
   }
 
   /**
@@ -1239,9 +1279,79 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getConfigEntry_Value()
+  public EAttribute getDocumentationEntry_Level()
   {
-    return (EAttribute)configEntryEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)documentationEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRuntimeEntry()
+  {
+    return runtimeEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRuntimeEntry_MillisecLimit()
+  {
+    return (EAttribute)runtimeEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMemoryEntry()
+  {
+    return memoryEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMemoryEntry_MegabyteLimit()
+  {
+    return (EAttribute)memoryEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCustomEntry()
+  {
+    return customEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getCustomEntry_Key()
+  {
+    return (EAttribute)customEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getCustomEntry_Value()
+  {
+    return (EAttribute)customEntryEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1889,6 +1999,16 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getDocumentLevelSpecification()
+  {
+    return documentLevelSpecificationEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getSolver()
   {
     return solverEEnum;
@@ -2019,8 +2139,19 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     createEReference(configDeclarationEClass, CONFIG_DECLARATION__SPECIFICATION);
 
     configEntryEClass = createEClass(CONFIG_ENTRY);
-    createEAttribute(configEntryEClass, CONFIG_ENTRY__KEY);
-    createEAttribute(configEntryEClass, CONFIG_ENTRY__VALUE);
+
+    documentationEntryEClass = createEClass(DOCUMENTATION_ENTRY);
+    createEAttribute(documentationEntryEClass, DOCUMENTATION_ENTRY__LEVEL);
+
+    runtimeEntryEClass = createEClass(RUNTIME_ENTRY);
+    createEAttribute(runtimeEntryEClass, RUNTIME_ENTRY__MILLISEC_LIMIT);
+
+    memoryEntryEClass = createEClass(MEMORY_ENTRY);
+    createEAttribute(memoryEntryEClass, MEMORY_ENTRY__MEGABYTE_LIMIT);
+
+    customEntryEClass = createEClass(CUSTOM_ENTRY);
+    createEAttribute(customEntryEClass, CUSTOM_ENTRY__KEY);
+    createEAttribute(customEntryEClass, CUSTOM_ENTRY__VALUE);
 
     configReferenceEClass = createEClass(CONFIG_REFERENCE);
     createEReference(configReferenceEClass, CONFIG_REFERENCE__CONFIG);
@@ -2116,6 +2247,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     stringScopeEClass = createEClass(STRING_SCOPE);
 
     // Create enums
+    documentLevelSpecificationEEnum = createEEnum(DOCUMENT_LEVEL_SPECIFICATION);
     solverEEnum = createEEnum(SOLVER);
   }
 
@@ -2175,6 +2307,10 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     graphPatternReferenceEClass.getESuperTypes().add(this.getGraphPattern());
     configSpecificationEClass.getESuperTypes().add(this.getConfig());
     configDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+    documentationEntryEClass.getESuperTypes().add(this.getConfigEntry());
+    runtimeEntryEClass.getESuperTypes().add(this.getConfigEntry());
+    memoryEntryEClass.getESuperTypes().add(this.getConfigEntry());
+    customEntryEClass.getESuperTypes().add(this.getConfigEntry());
     configReferenceEClass.getESuperTypes().add(this.getConfig());
     scopeSpecificationEClass.getESuperTypes().add(this.getScope());
     classTypeScopeEClass.getESuperTypes().add(this.getTypeScope());
@@ -2296,8 +2432,19 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEReference(getConfigDeclaration_Specification(), this.getConfigSpecification(), null, "specification", null, 0, 1, ConfigDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(configEntryEClass, ConfigEntry.class, "ConfigEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getConfigEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, ConfigEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getConfigEntry_Value(), theEcorePackage.getEString(), "value", null, 0, 1, ConfigEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(documentationEntryEClass, DocumentationEntry.class, "DocumentationEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDocumentationEntry_Level(), this.getDocumentLevelSpecification(), "level", null, 0, 1, DocumentationEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(runtimeEntryEClass, RuntimeEntry.class, "RuntimeEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRuntimeEntry_MillisecLimit(), theEcorePackage.getEInt(), "millisecLimit", null, 0, 1, RuntimeEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(memoryEntryEClass, MemoryEntry.class, "MemoryEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMemoryEntry_MegabyteLimit(), theEcorePackage.getEInt(), "megabyteLimit", null, 0, 1, MemoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(customEntryEClass, CustomEntry.class, "CustomEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getCustomEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, CustomEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCustomEntry_Value(), theEcorePackage.getEString(), "value", null, 0, 1, CustomEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(configReferenceEClass, ConfigReference.class, "ConfigReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getConfigReference_Config(), this.getConfigDeclaration(), null, "config", null, 0, 1, ConfigReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2393,6 +2540,11 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEClass(stringScopeEClass, StringScope.class, "StringScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
+    initEEnum(documentLevelSpecificationEEnum, DocumentLevelSpecification.class, "DocumentLevelSpecification");
+    addEEnumLiteral(documentLevelSpecificationEEnum, DocumentLevelSpecification.NONE);
+    addEEnumLiteral(documentLevelSpecificationEEnum, DocumentLevelSpecification.NORMAL);
+    addEEnumLiteral(documentLevelSpecificationEEnum, DocumentLevelSpecification.FULL);
+
     initEEnum(solverEEnum, Solver.class, "Solver");
     addEEnumLiteral(solverEEnum, Solver.SMT_SOLVER);
     addEEnumLiteral(solverEEnum, Solver.ALLOY_SOLVER);

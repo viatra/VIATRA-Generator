@@ -1136,6 +1136,114 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	public class ConfigEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ConfigEntry");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDocumentationEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRuntimeEntryParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cMemoryEntryParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cCustomEntryParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//ConfigEntry:
+		//	DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//DocumentationEntry
+		public RuleCall getDocumentationEntryParserRuleCall_0() { return cDocumentationEntryParserRuleCall_0; }
+		
+		//RuntimeEntry
+		public RuleCall getRuntimeEntryParserRuleCall_1() { return cRuntimeEntryParserRuleCall_1; }
+		
+		//MemoryEntry
+		public RuleCall getMemoryEntryParserRuleCall_2() { return cMemoryEntryParserRuleCall_2; }
+		
+		//CustomEntry
+		public RuleCall getCustomEntryParserRuleCall_3() { return cCustomEntryParserRuleCall_3; }
+	}
+	public class DocumentationEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.DocumentationEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDocumentsKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cLevelAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cLevelDocumentLevelSpecificationEnumRuleCall_2_0 = (RuleCall)cLevelAssignment_2.eContents().get(0);
+		
+		//DocumentationEntry:
+		//	"documents" '=' level=DocumentLevelSpecification;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"documents" '=' level=DocumentLevelSpecification
+		public Group getGroup() { return cGroup; }
+		
+		//"documents"
+		public Keyword getDocumentsKeyword_0() { return cDocumentsKeyword_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//level=DocumentLevelSpecification
+		public Assignment getLevelAssignment_2() { return cLevelAssignment_2; }
+		
+		//DocumentLevelSpecification
+		public RuleCall getLevelDocumentLevelSpecificationEnumRuleCall_2_0() { return cLevelDocumentLevelSpecificationEnumRuleCall_2_0; }
+	}
+	public class RuntimeEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.RuntimeEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRuntimeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMillisecLimitAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cMillisecLimitINTTerminalRuleCall_2_0 = (RuleCall)cMillisecLimitAssignment_2.eContents().get(0);
+		
+		//RuntimeEntry:
+		//	"runtime" "=" millisecLimit=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"runtime" "=" millisecLimit=INT
+		public Group getGroup() { return cGroup; }
+		
+		//"runtime"
+		public Keyword getRuntimeKeyword_0() { return cRuntimeKeyword_0; }
+		
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//millisecLimit=INT
+		public Assignment getMillisecLimitAssignment_2() { return cMillisecLimitAssignment_2; }
+		
+		//INT
+		public RuleCall getMillisecLimitINTTerminalRuleCall_2_0() { return cMillisecLimitINTTerminalRuleCall_2_0; }
+	}
+	public class MemoryEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.MemoryEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMemoryKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMegabyteLimitAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cMegabyteLimitINTTerminalRuleCall_2_0 = (RuleCall)cMegabyteLimitAssignment_2.eContents().get(0);
+		
+		//MemoryEntry:
+		//	"memory" "=" megabyteLimit=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"memory" "=" megabyteLimit=INT
+		public Group getGroup() { return cGroup; }
+		
+		//"memory"
+		public Keyword getMemoryKeyword_0() { return cMemoryKeyword_0; }
+		
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//megabyteLimit=INT
+		public Assignment getMegabyteLimitAssignment_2() { return cMegabyteLimitAssignment_2; }
+		
+		//INT
+		public RuleCall getMegabyteLimitINTTerminalRuleCall_2_0() { return cMegabyteLimitINTTerminalRuleCall_2_0; }
+	}
+	public class CustomEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.CustomEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cKeySTRINGTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
@@ -1143,7 +1251,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
-		//ConfigEntry:
+		//CustomEntry:
 		//	key=STRING "=" value=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -2391,6 +2499,41 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	
+	public class DocumentLevelSpecificationElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.DocumentLevelSpecification");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cNoneEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cNoneNoneKeyword_0_0 = (Keyword)cNoneEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cNormalEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cNormalNormalKeyword_1_0 = (Keyword)cNormalEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cFullEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cFullFullKeyword_2_0 = (Keyword)cFullEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum DocumentLevelSpecification:
+		//	none | normal | full;
+		public EnumRule getRule() { return rule; }
+		
+		//none | normal | full
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//none
+		public EnumLiteralDeclaration getNoneEnumLiteralDeclaration_0() { return cNoneEnumLiteralDeclaration_0; }
+		
+		//"none"
+		public Keyword getNoneNoneKeyword_0_0() { return cNoneNoneKeyword_0_0; }
+		
+		//normal
+		public EnumLiteralDeclaration getNormalEnumLiteralDeclaration_1() { return cNormalEnumLiteralDeclaration_1; }
+		
+		//"normal"
+		public Keyword getNormalNormalKeyword_1_0() { return cNormalNormalKeyword_1_0; }
+		
+		//full
+		public EnumLiteralDeclaration getFullEnumLiteralDeclaration_2() { return cFullEnumLiteralDeclaration_2; }
+		
+		//"full"
+		public Keyword getFullFullKeyword_2_0() { return cFullFullKeyword_2_0; }
+	}
 	public class SolverElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Solver");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -2462,6 +2605,11 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	private final ConfigSpecificationElements pConfigSpecification;
 	private final ConfigDeclarationElements pConfigDeclaration;
 	private final ConfigEntryElements pConfigEntry;
+	private final DocumentationEntryElements pDocumentationEntry;
+	private final DocumentLevelSpecificationElements eDocumentLevelSpecification;
+	private final RuntimeEntryElements pRuntimeEntry;
+	private final MemoryEntryElements pMemoryEntry;
+	private final CustomEntryElements pCustomEntry;
 	private final ConfigReferenceElements pConfigReference;
 	private final ConfigElements pConfig;
 	private final SolverElements eSolver;
@@ -2534,6 +2682,11 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.pConfigSpecification = new ConfigSpecificationElements();
 		this.pConfigDeclaration = new ConfigDeclarationElements();
 		this.pConfigEntry = new ConfigEntryElements();
+		this.pDocumentationEntry = new DocumentationEntryElements();
+		this.eDocumentLevelSpecification = new DocumentLevelSpecificationElements();
+		this.pRuntimeEntry = new RuntimeEntryElements();
+		this.pMemoryEntry = new MemoryEntryElements();
+		this.pCustomEntry = new CustomEntryElements();
 		this.pConfigReference = new ConfigReferenceElements();
 		this.pConfig = new ConfigElements();
 		this.eSolver = new SolverElements();
@@ -2964,13 +3117,63 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ConfigEntry:
-	//	key=STRING "=" value=STRING;
+	//	DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
 	public ConfigEntryElements getConfigEntryAccess() {
 		return pConfigEntry;
 	}
 	
 	public ParserRule getConfigEntryRule() {
 		return getConfigEntryAccess().getRule();
+	}
+	
+	//DocumentationEntry:
+	//	"documents" '=' level=DocumentLevelSpecification;
+	public DocumentationEntryElements getDocumentationEntryAccess() {
+		return pDocumentationEntry;
+	}
+	
+	public ParserRule getDocumentationEntryRule() {
+		return getDocumentationEntryAccess().getRule();
+	}
+	
+	//enum DocumentLevelSpecification:
+	//	none | normal | full;
+	public DocumentLevelSpecificationElements getDocumentLevelSpecificationAccess() {
+		return eDocumentLevelSpecification;
+	}
+	
+	public EnumRule getDocumentLevelSpecificationRule() {
+		return getDocumentLevelSpecificationAccess().getRule();
+	}
+	
+	//RuntimeEntry:
+	//	"runtime" "=" millisecLimit=INT;
+	public RuntimeEntryElements getRuntimeEntryAccess() {
+		return pRuntimeEntry;
+	}
+	
+	public ParserRule getRuntimeEntryRule() {
+		return getRuntimeEntryAccess().getRule();
+	}
+	
+	//MemoryEntry:
+	//	"memory" "=" megabyteLimit=INT;
+	public MemoryEntryElements getMemoryEntryAccess() {
+		return pMemoryEntry;
+	}
+	
+	public ParserRule getMemoryEntryRule() {
+		return getMemoryEntryAccess().getRule();
+	}
+	
+	//CustomEntry:
+	//	key=STRING "=" value=STRING;
+	public CustomEntryElements getCustomEntryAccess() {
+		return pCustomEntry;
+	}
+	
+	public ParserRule getCustomEntryRule() {
+		return getCustomEntryAccess().getRule();
 	}
 	
 	//ConfigReference:
