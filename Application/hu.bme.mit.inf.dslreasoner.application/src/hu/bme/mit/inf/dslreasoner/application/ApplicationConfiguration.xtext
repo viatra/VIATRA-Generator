@@ -99,7 +99,7 @@ ConfigDeclaration :
 	'config' name = ID specification = ConfigSpecification
 ;
 ConfigEntry: DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
-DocumentationEntry: "documents" '=' level = DocumentLevelSpecification; enum DocumentLevelSpecification: none | normal | full;
+DocumentationEntry: "log-level" '=' level = DocumentLevelSpecification; enum DocumentLevelSpecification: none | normal | full;
 RuntimeEntry: "runtime" "=" millisecLimit = INT;
 MemoryEntry: "memory" "=" megabyteLimit = INT;
 CustomEntry: key = STRING "=" value = STRING;

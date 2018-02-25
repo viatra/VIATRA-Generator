@@ -3,10 +3,12 @@ package hu.bme.mit.inf.dslreasoner.application.execution
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.common.util.URI
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification
+import org.eclipse.emf.ecore.EObject
+import java.util.List
 
 class ModelLoader {
 	
-	def loadModel(PartialModelSpecification specification, ScriptExecutor scriptExecutor) {
+	def List<EObject> loadModel(PartialModelSpecification specification, ScriptExecutor scriptExecutor) {
 		val entries = specification.entry
 		if (entries.size == 1) {
 			var URI uri

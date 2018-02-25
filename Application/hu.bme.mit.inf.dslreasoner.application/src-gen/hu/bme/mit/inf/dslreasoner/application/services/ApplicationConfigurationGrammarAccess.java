@@ -1164,20 +1164,20 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	public class DocumentationEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.DocumentationEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDocumentsKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLogLevelKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cLevelAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cLevelDocumentLevelSpecificationEnumRuleCall_2_0 = (RuleCall)cLevelAssignment_2.eContents().get(0);
 		
 		//DocumentationEntry:
-		//	"documents" '=' level=DocumentLevelSpecification;
+		//	"log-level" '=' level=DocumentLevelSpecification;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"documents" '=' level=DocumentLevelSpecification
+		//"log-level" '=' level=DocumentLevelSpecification
 		public Group getGroup() { return cGroup; }
 		
-		//"documents"
-		public Keyword getDocumentsKeyword_0() { return cDocumentsKeyword_0; }
+		//"log-level"
+		public Keyword getLogLevelKeyword_0() { return cLogLevelKeyword_0; }
 		
 		//'='
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
@@ -3127,7 +3127,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//DocumentationEntry:
-	//	"documents" '=' level=DocumentLevelSpecification;
+	//	"log-level" '=' level=DocumentLevelSpecification;
 	public DocumentationEntryElements getDocumentationEntryAccess() {
 		return pDocumentationEntry;
 	}

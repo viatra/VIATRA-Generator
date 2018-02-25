@@ -1913,9 +1913,9 @@ ruleDocumentationEntry returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='documents'
+		otherlv_0='log-level'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getDocumentationEntryAccess().getDocumentsKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getDocumentationEntryAccess().getLogLevelKeyword_0());
 		}
 		otherlv_1='='
 		{

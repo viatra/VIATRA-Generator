@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalApplicationConfigurationParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "','", "'}'", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'patterns'", "'config'", "'documents'", "'runtime'", "'memory'", "'#'", "'+='", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'*'", "'..'", "'scope'", "'generate'", "'partial-model'", "'number'", "'runs'", "'solver'", "'debug'", "'log'", "'statistics'", "'output'", "'none'", "'normal'", "'full'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "','", "'}'", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'patterns'", "'config'", "'log-level'", "'runtime'", "'memory'", "'#'", "'+='", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'*'", "'..'", "'scope'", "'generate'", "'partial-model'", "'number'", "'runs'", "'solver'", "'debug'", "'log'", "'statistics'", "'output'", "'none'", "'normal'", "'full'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -5294,7 +5294,7 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleDocumentationEntry"
-    // InternalApplicationConfiguration.g:1908:1: ruleDocumentationEntry returns [EObject current=null] : (otherlv_0= 'documents' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) ) ;
+    // InternalApplicationConfiguration.g:1908:1: ruleDocumentationEntry returns [EObject current=null] : (otherlv_0= 'log-level' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) ) ;
     public final EObject ruleDocumentationEntry() throws RecognitionException {
         EObject current = null;
 
@@ -5307,15 +5307,15 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
         	enterRule();
 
         try {
-            // InternalApplicationConfiguration.g:1914:2: ( (otherlv_0= 'documents' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) ) )
-            // InternalApplicationConfiguration.g:1915:2: (otherlv_0= 'documents' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) )
+            // InternalApplicationConfiguration.g:1914:2: ( (otherlv_0= 'log-level' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) ) )
+            // InternalApplicationConfiguration.g:1915:2: (otherlv_0= 'log-level' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) )
             {
-            // InternalApplicationConfiguration.g:1915:2: (otherlv_0= 'documents' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) )
-            // InternalApplicationConfiguration.g:1916:3: otherlv_0= 'documents' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) )
+            // InternalApplicationConfiguration.g:1915:2: (otherlv_0= 'log-level' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) ) )
+            // InternalApplicationConfiguration.g:1916:3: otherlv_0= 'log-level' otherlv_1= '=' ( (lv_level_2_0= ruleDocumentLevelSpecification ) )
             {
             otherlv_0=(Token)match(input,28,FOLLOW_10); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getDocumentationEntryAccess().getDocumentsKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getDocumentationEntryAccess().getLogLevelKeyword_0());
             		
             otherlv_1=(Token)match(input,16,FOLLOW_21); 
 
