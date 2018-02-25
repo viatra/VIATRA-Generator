@@ -31,7 +31,9 @@ class NullWorkspace extends ReasonerWorkspace{
 	protected override Resource getResource(String name) {
 		throw new UnsupportedOperationException(message)
 	}
-	override public URI writeModel(EObject modelRoot, String name) { }	
+	override public URI writeModel(EObject modelRoot, String name) { }
+	override writeModelToString(EObject modelRoot, String name) { }
+	
 	override public <RootType extends EObject> RootType reloadModel(Class<RootType> type, String name) {
 		throw new UnsupportedOperationException(message)
 	} 

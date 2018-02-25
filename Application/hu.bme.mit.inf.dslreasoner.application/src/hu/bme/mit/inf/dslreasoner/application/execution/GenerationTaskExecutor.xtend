@@ -5,6 +5,7 @@ import hu.bme.mit.inf.dslreasoner.application.validation.MetamodelValidator
 import hu.bme.mit.inf.dslreasoner.application.validation.QueryAndMetamodelValidator
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.SolutionScope
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
@@ -14,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
+import java.util.Optional
 import org.eclipse.emf.common.util.URI
 
 class GenerationTaskExecutor {
@@ -36,13 +38,17 @@ class GenerationTaskExecutor {
 		val patternSpecification = scriptExecutor.getPatternSpecification(task.patterns)
 		val partialmodelSpecification = scriptExecutor.getPartialModelSpecification(task.partialModel)
 		val scopeSpecification = scriptExecutor.getScopeSpecification(task.scope)
-		val configurationMap = scriptExecutor.transformToMap( 
-			scriptExecutor.getConfiguration(task.config))
+		
 		val messageFile = scriptExecutor.getFileSpecification(task.targetLogFile)
 		val debugFolder = scriptExecutor.getFileSpecification(task.debugFolder)
 		val outputFolder = scriptExecutor.getFileSpecification(task.getTagetFolder)
 		val statisticsFile = scriptExecutor.getFileSpecification(task.targetStatisticsFile)
 		
+		val configSpecification = scriptExecutor.getConfiguration(task.config)
+		val configurationMap = scriptExecutor.transformToMap(configSpecification)
+		val documentationLevel = scriptExecutor.getDocumentation(configSpecification)
+		val runtieLimit = scriptExecutor.getRuntimeLimit(configSpecification)
+		val memoryLimit = scriptExecutor.getMemoryLimit(configSpecification)
 		// 2. create console
 		
 		val console = new ScriptConsole(true,true,
@@ -94,11 +100,15 @@ class GenerationTaskExecutor {
 		// 5. create a solver and a configuration
 		// 5.1 initialize
 		val solver = solverLoader.loadSolver(task.solver,configurationMap)
-		val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap)
+		val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,console)
 		val reasonerWorkspace = if(debugFolder!== null) {
 			new ProjectWorkspace(debugFolder.path,"")
 		} else {
 			new NullWorkspace
+		}
+		reasonerWorkspace.initAndClear
+		if(documentationLevel.atLeastNormal) {
+			reasonerWorkspace.writeModel(problem,"generation.logicproblem")
 		}
 		
 		// 5.2 set values that defined directly 
@@ -116,33 +126,55 @@ class GenerationTaskExecutor {
 			modelGeneration.trace
 		)
 		
+		// 5.3 set resource limits
+		documentationLevel.ifPresent[solverConfig.documentationLevel = it]
+		runtieLimit.ifPresent[solverConfig.runtimeLimit = it]
+		memoryLimit.ifPresent[solverConfig.memoryLimit = it]
+		
 		// 6. execute the solver on the problem with the configuration
-		val runs = if(task.runSpecified) {
-			task.runs
-		} else {
-			1
-		}
-		console.writeMessage("Start model generation")
+		// 6.1 calculating the runs
+		val runs = if(task.runSpecified) { task.runs } else { 1	}
+		console.writeMessage("Model generation started")
 		
 		for(run : 1..runs) {
-			val solution = solver.solve(problem,solverConfig,reasonerWorkspace)
+			
+			// 6.2 For each run, the configuration and the workspace is adjusted
+			solverLoader.setRunIndex(solverConfig,configurationMap,run,console)
+			val reasonerWorkspaceForRun = if(runs > 1) {
+				reasonerWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
+			} else {
+				reasonerWorkspace
+			}
+			
+			// 7. Solver call
+			
+			val solution = solver.solve(problem,solverConfig,reasonerWorkspaceForRun)
+			
 			console.writeMessage(solution.soutionDescription.toString)
+			
+			//  8. Solution processing
+			if(solution instanceof ModelResult) {
+				// 
+				val interpretations = solver.getInterpretations(solution)
+			}
+			
 		}
+		console.writeMessage("Model generation finished")
 	}
 	
 	private def dispatch soutionDescription(InconsistencyResult s) {
-		if(s.representation.size == 1) {
-			'''Problem is inconsistent!'''
+		if(s.representation.size == 0) {
+			'''Problem is inconsistent, no model is created!'''
 		} else {
-			'''Problem is inconsistent, only «s.representation.size» model can be created!'''
+			'''Problem is inconsistent, only «s.representation.size» model«IF s.representation.size>1»s«ENDIF» can be created!'''
 		}
 	}
 	
 	private def dispatch soutionDescription(ModelResult s) {
 		if(s.representation.size == 1) {
-			'''Problem is consistent!'''
+			'''Problem is consistent, a model is generated'''
 		} else {
-			'''Problem is consistent, «s.representation.size» model generated!'''
+			'''Problem is consistent, «s.representation.size» models are generated!'''
 		}
 	}
 	
@@ -151,6 +183,14 @@ class GenerationTaskExecutor {
 			'''Unable to solve problem!'''
 		} else {
 			'''Unable to solve problem, but «s.representation.size» model generated!'''
+		}
+	}
+	
+	private def atLeastNormal(Optional<DocumentationLevel> level) {
+		if(level.isPresent) {
+			return (level.get !== DocumentationLevel.NONE)
+		} else {
+			return false
 		}
 	}
 }

@@ -3,6 +3,7 @@ package hu.bme.mit.inf.dslreasoner.application.execution.util
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
+import hu.bme.mit.inf.dslreasoner.application.execution.ScriptConsole
 import java.util.LinkedHashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
@@ -17,13 +18,11 @@ import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandalone
 import org.eclipse.viatra.query.patternlanguage.emf.GenmodelExtensionLoader
 import org.eclipse.viatra.query.patternlanguage.emf.IGenmodelMappingLoader
 import org.eclipse.viatra.query.patternlanguage.emf.eMFPatternLanguage.PatternModel
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.CompoundMetamodelProviderService
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
 import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.xtext.resource.XtextResourceSet
-import hu.bme.mit.inf.dslreasoner.application.execution.ScriptConsole
-import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
-import hu.bme.mit.inf.dslreasoner.application.linking.PreloadedMetamodelProvider
-import org.eclipse.viatra.query.patternlanguage.emf.scoping.CompoundMetamodelProviderService
 
 class MyModule extends EMFPatternLanguageRuntimeModule implements Module {
     def public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {

@@ -79,7 +79,7 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService{
     		} catch(RuntimeException  e){
     			return super.getLinkedObjects(viatraImport, viatraImport_ImportedViatra, node)
     		}
-    		if(res!==null && !res.contents.empty) {
+    		if(res!==null && !res.contents.nullOrEmpty) {
     			return #[res.contents.head]
     		} else {
     			return super.getLinkedObjects(viatraImport, viatraImport_ImportedViatra, node)
@@ -88,7 +88,7 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService{
     		return super.getLinkedObjects(viatraImport, viatraImport_ImportedViatra, node)
     	}
     }
-
+    
     private def getNSUri(INode node) {
         try {
             val convertedValue = valueConverterService.toValue(node.text,

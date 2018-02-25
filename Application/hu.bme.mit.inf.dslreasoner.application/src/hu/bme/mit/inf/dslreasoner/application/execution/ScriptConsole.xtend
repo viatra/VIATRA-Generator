@@ -93,12 +93,23 @@ class ScriptConsole implements Closeable {
 		if (uri === null) {
 			return null
 		} else {
-			val fileString = uri.toFileString
-			val file = new File(fileString)
-			if (this.cleanFiles && file.exists) {
-				file.delete
+			if(uri.isFile) {
+				val fileString = uri.toFileString
+				val file = new File(fileString)
+				if (this.cleanFiles && file.exists) {
+					file.delete
+				}
+				return file
+			} else if(uri.isPlatformResource) {
+				val platformString = uri.toPlatformString(true)
+				val file = new File(platformString)
+				if (this.cleanFiles && file.exists) {
+					file.delete
+				}
+				return file
+			} else {
+				throw new UnsupportedOperationException('''Unksupported file usi: "«uri»"!''')
 			}
-			return file
 		}
 	}
 	
