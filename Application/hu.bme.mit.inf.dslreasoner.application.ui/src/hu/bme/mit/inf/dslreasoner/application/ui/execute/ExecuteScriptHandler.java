@@ -26,7 +26,6 @@ public class ExecuteScriptHandler extends AbstractHandler implements IHandler {
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		System.out.println("Called");
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if(selection instanceof StructuredSelection) {
 			StructuredSelection structuredSelection = (StructuredSelection) selection;
@@ -35,34 +34,12 @@ public class ExecuteScriptHandler extends AbstractHandler implements IHandler {
 				Object selectedElement = iterator.next();
 				if (selectedElement instanceof IFile) {
 					IFile selectedFile = (IFile) selectedElement;
-					executeFile(selectedFile);
+					URI uri = URI.createPlatformResourceURI(selectedFile.getFullPath().toString(), true);
+					scriptExecutor.executeScript(uri);
                 }
 			}
 		}
 		return null;
 	}
 
-	private void executeFile(IFile selectedFile) {
-		URI uri = URI.createPlatformResourceURI(selectedFile.getFullPath().toString(), true);
-		
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource;
-		try {
-			resource = rs.getResource(uri, true);
-		} catch(RuntimeException e) {
-			return;
-		}
-		
-		if(resource.getContents().size() == 1) {
-			EObject content = resource.getContents().get(0);
-			if(content instanceof ConfigurationScript) {
-				ConfigurationScript script = (ConfigurationScript) content;
-				scriptExecutor.executeScript(script);
-			} else {
-				return;
-			}
-		} else {
-			return;
-		}
-	}
 }
