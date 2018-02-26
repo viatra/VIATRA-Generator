@@ -53,7 +53,7 @@ class ScriptExecutor {
 		val ecoreImports = script.imports.filter(EPackageImport).toMap[it.importedPackage.nsURI]
 		val packageRegistry = script.eResource.resourceSet.packageRegistry
 		for(entry : ecoreImports.entrySet) {
-			println('''«entry.key» -> «entry.value.importedPackage.name»''')
+			//println('''«entry.key» -> «entry.value.importedPackage.name»''')
 			packageRegistry.put(entry.key,entry.value.importedPackage)
 		}
 		
