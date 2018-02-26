@@ -43,25 +43,22 @@ class AlloySolver extends LogicReasoner{
 		val alloyProblem = result.output
 		val forwardTrace = result.trace
 		
-		var String fileURI = null;
-		var String alloyCode = null;
+		//var String fileURI = null;
+		var String alloyCode = workspace.writeModelToString(alloyProblem,fileName)
 		if(writeToFile) {
-			fileURI = workspace.writeModel(alloyProblem,fileName).toFileString
-		} else {
-			alloyCode = workspace.writeModelToString(alloyProblem,fileName)
-		} 
+			workspace.writeModel(alloyProblem,fileName)
+		}
 		val transformationTime = System.currentTimeMillis - transformationStart
 		// Finish: Logic -> Alloy mapping
 		
-		
 		// Start: Solving Alloy problem
-		val solverStart = System.currentTimeMillis
-		val result2 = handler.callSolver(alloyProblem,workspace,alloyConfig,fileURI,alloyCode)
+		//val solverStart = System.currentTimeMillis
+		val result2 = handler.callSolver(alloyProblem,workspace,alloyConfig,alloyCode)
 		val logicResult = backwardMapper.transformOutput(problem,configuration.solutionScope.numberOfRequiredSolution,result2,forwardTrace,transformationTime)
-		val solverFinish = System.currentTimeMillis-solverStart
+		//val solverFinish = System.currentTimeMillis-solverStart
 		// Finish: Solving Alloy problem
 		
-		if(writeToFile) workspace.deactivateModel(fileName)
+		//logicResult.statistics = 
 		
 		return logicResult
 	}

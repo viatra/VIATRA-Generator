@@ -48,7 +48,7 @@ class AlloyHandler {
 	
 	//val fileName = "problem.als"
 	
-	public def callSolver(ALSDocument problem, ReasonerWorkspace workspace, AlloySolverConfiguration configuration, String path, String alloyCode) {
+	public def callSolver(ALSDocument problem, ReasonerWorkspace workspace, AlloySolverConfiguration configuration,String alloyCode) {
 		val writeToFile = (
 			configuration.documentationLevel===DocumentationLevel::NORMAL ||
 			configuration.documentationLevel===DocumentationLevel::FULL)
@@ -83,11 +83,7 @@ class AlloyHandler {
 		// Start: Alloy -> Kodkod
 		val kodkodTransformStart = System.currentTimeMillis();
 		try {
-			if(writeToFile) {
-				compModule = CompUtil.parseEverything_fromFile(reporter,null,path)
-			} else {
-				compModule = CompUtil.parseEverything_fromString(reporter,alloyCode)
-			}
+			compModule = CompUtil.parseEverything_fromString(reporter,alloyCode)
 			if(compModule.allCommands.size != 1)
 				throw new UnsupportedOperationException('''Alloy files with multiple commands are not supported!''')
 			command = compModule.allCommands.head
