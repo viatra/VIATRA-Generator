@@ -1,11 +1,10 @@
 package hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz
 
-import guru.nidi.graphviz.attribute.Arrow
-import guru.nidi.graphviz.attribute.Color
 import guru.nidi.graphviz.attribute.Shape
 import guru.nidi.graphviz.attribute.Style
 import guru.nidi.graphviz.engine.Format
 import guru.nidi.graphviz.engine.Graphviz
+import guru.nidi.graphviz.engine.GraphvizV8Engine
 import guru.nidi.graphviz.model.Graph
 import guru.nidi.graphviz.model.Label
 import guru.nidi.graphviz.model.Node
@@ -22,19 +21,14 @@ import java.io.File
 import java.util.HashMap
 import java.util.HashSet
 import java.util.LinkedList
+import java.util.List
 import java.util.Random
 import java.util.Set
 
 import static guru.nidi.graphviz.model.Factory.*
-import static guru.nidi.graphviz.attribute.Records.*;
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import guru.nidi.graphviz.engine.Engine
-import guru.nidi.graphviz.attribute.Records
-import guru.nidi.graphviz.attribute.Attributes
-import java.util.List
-import guru.nidi.graphviz.engine.GraphvizEngine
-import guru.nidi.graphviz.engine.GraphvizV8Engine
+import java.awt.image.BufferedImage
 
 class GraphvizVisualisation implements PartialInterpretationVisualiser {
 	
@@ -142,8 +136,10 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 			'''</TABLE>''')
 			
 		val node = node(ID).with(label).with(
-			Shape.NONE,
-			Attributes.attr("margin","0")
+			Shape.NONE
+			//,
+			//Attributes::attr("margin","0")
+			//new MapAttributes() => [add("margin", "0")]
 		)
 		return node
 	}
@@ -233,10 +229,11 @@ class GraphvisVisualisation implements PartialInterpretationVisualisation {
 	}
 	
 	override writeToFile(ReasonerWorkspace workspace, String name) {
-		val path = '''«workspace.workspaceURI.toFileString»/«name».png'''
+		val file = workspace.getFile('''«name».png''')
+		//val bufferedImage = new BufferedImage 
 		Graphviz.useEngine(new GraphvizV8Engine());
 		Graphviz.fromGraph(graph)//.engine(Engine::NEATO)
-		.render(Format.PNG).toFile(new File(path));
+		.render(Format.PNG).toFile(file)
+		workspace.refreshFile('''«name».png''')
 	}
-	
 }

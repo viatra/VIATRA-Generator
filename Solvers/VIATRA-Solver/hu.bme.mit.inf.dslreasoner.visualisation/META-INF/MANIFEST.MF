@@ -11,7 +11,8 @@ Require-Bundle: com.google.guava,
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.viatra2logic;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.logic.model.validation;bundle-version="0.0.1",
- org.eclipse.emf.ecore.xmi;bundle-version="2.12.0"
+ org.eclipse.emf.ecore.xmi;bundle-version="2.12.0",
+ guru.nidi.graphviz-java;bundle-version="0.2.1"
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz
 
