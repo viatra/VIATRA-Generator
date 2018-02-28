@@ -25,6 +25,12 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 			inverseRelations.put(it.inverseB,it.inverseA)
 		]
 		return '''
+		private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
+		«FOR type :containment.typesOrderedInHierarchy SEPARATOR "or"»{
+			find interpretation(problem,interpretation);
+			«base.typeIndexer.referInstanceOf(type,Modality.MAY,"root")»
+			find mustExist(problem, interpretation, root);
+		}«ENDFOR»
 		«FOR type:newObjectTypes»
 			«IF(containment.typesOrderedInHierarchy.contains(type))»
 				«FOR containmentRelation : containment.containmentRelations.filter[canBeContainedByRelation(it,type)]»
@@ -66,6 +72,18 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 						}
 					«ENDIF»
 				«ENDFOR»
+				pattern «patternName(null,null,type)»(
+					problem:LogicProblem, interpretation:PartialInterpretation,
+					typeInterpretation:PartialTypeInterpratation)
+				{
+					find interpretation(problem,interpretation);
+					neg find hasElementInContainment(problem,interpretation);
+					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+					PartialTypeInterpratation.interpretationOf.name(type,"«type.name»");
+					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»
+					find mayExist(problem, interpretation, newObject);
+					neg find mustExist(problem, interpretation, newObject);
+				}
 			«ELSE»
 				pattern createObject_«this.patternName(null,null,type)»(
 					problem:LogicProblem, interpretation:PartialInterpretation,

@@ -1,19 +1,20 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import java.util.HashMap
+import java.util.LinkedHashMap
 import java.util.Map
 import org.eclipse.xtend.lib.annotations.Data
-import java.util.HashMap
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
-import java.util.LinkedHashMap
+
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy
 
 @Data
 class ObjectCreationPrecondition {
@@ -54,6 +55,9 @@ abstract class TypeRefinementGenerator {
 							patternName(containmentRelation,null,type))
 					}
 				}
+				objectCreationQueries.put(
+					new ObjectCreationPrecondition(null,null,type),
+					patternName(null,null,type))
 			} else {
 				objectCreationQueries.put(
 					new ObjectCreationPrecondition(null,null,type),

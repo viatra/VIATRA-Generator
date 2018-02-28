@@ -15,7 +15,6 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 	}
 	override requiresTypeAnalysis() { true }
 
-	
 	override generateRefineObjectQueries(LogicProblem p, PartialInterpretation emptySolution, TypeAnalysisResult typeAnalysisResult) {
 		val possibleNewDynamicType = typeAnalysisResult.possibleNewDynamicTypes
 		val containment = p.containmentHierarchies.head
@@ -25,6 +24,12 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 			inverseRelations.put(it.inverseB,it.inverseA)
 		]
 		return '''
+		private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
+		«FOR type :containment.typesOrderedInHierarchy SEPARATOR "or"»{
+			find interpretation(problem,interpretation);
+			«base.typeIndexer.referInstanceOf(type,Modality.MAY,"root")»
+			find mustExist(problem, interpretation, root);
+		}«ENDFOR»
 		«FOR type:possibleNewDynamicType»
 			«IF(containment.typesOrderedInHierarchy.contains(type))»
 				«FOR containmentRelation : containment.containmentRelations.filter[canBeContainedByRelation(it,type)]»
@@ -66,8 +71,20 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 						}
 					«ENDIF»
 				«ENDFOR»
+				pattern «patternName(null,null,type)»(
+					problem:LogicProblem, interpretation:PartialInterpretation,
+					typeInterpretation:PartialTypeInterpratation)
+				{
+					find interpretation(problem,interpretation);
+					neg find hasElementInContainment(problem,interpretation);
+					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+					PartialTypeInterpratation.interpretationOf.name(type,"«type.name»");
+					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»
+					find mayExist(problem, interpretation, newObject);
+					neg find mustExist(problem, interpretation, newObject);
+				}
 			«ELSE»
-				pattern createObject_«base.canonizeName(type.name)»(
+				pattern «this.patternName(null,null,type)»(
 					problem:LogicProblem, interpretation:PartialInterpretation,
 					typeInterpretation:PartialTypeInterpratation)
 				{
