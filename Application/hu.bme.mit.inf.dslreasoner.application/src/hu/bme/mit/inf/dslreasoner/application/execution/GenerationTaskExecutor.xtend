@@ -14,6 +14,9 @@ import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation;
 import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
 import java.util.Optional
 import org.eclipse.emf.common.util.URI
@@ -50,6 +53,19 @@ class GenerationTaskExecutor {
 		val runtieLimit = scriptExecutor.getRuntimeLimit(configSpecification)
 		val memoryLimit = scriptExecutor.getMemoryLimit(configSpecification)
 		// 2. create console
+		
+		val reasonerWorkspace = if(debugFolder!== null) {
+			new ProjectWorkspace(debugFolder.path,"")
+		} else {
+			new NullWorkspace
+		}
+		reasonerWorkspace.initAndClear
+		val outputWorkspace = if(outputFolder !== null) {
+			new ProjectWorkspace(outputFolder.path,"")
+		} else {
+			new NullWorkspace
+		}
+		outputWorkspace.initAndClear
 		
 		val console = new ScriptConsole(true,true,
 			if(messageFile!==null) URI.createURI(messageFile.path) else null,
@@ -96,27 +112,22 @@ class GenerationTaskExecutor {
 				new Viatra2LogicConfiguration
 			).output
 		}
+		if(documentationLevel.atLeastNormal) {
+			reasonerWorkspace.writeModel(problem,"generation.logicproblem")
+		}
 		
 		// 5. create a solver and a configuration
 		// 5.1 initialize
 		val solver = solverLoader.loadSolver(task.solver,configurationMap)
 		val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,console)
-		val reasonerWorkspace = if(debugFolder!== null) {
-			new ProjectWorkspace(debugFolder.path,"")
-		} else {
-			new NullWorkspace
-		}
-		reasonerWorkspace.initAndClear
-		if(documentationLevel.atLeastNormal) {
-			reasonerWorkspace.writeModel(problem,"generation.logicproblem")
-		}
+		
 		
 		// 5.2 set values that defined directly 
 		solverConfig.solutionScope = new SolutionScope => [
 			it.numberOfRequiredSolution = if(task.numberSpecified) {
-				1
-			} else {
 				task.number
+			} else {
+				1
 			}
 		]
 		solverConfig.typeScopes = scopeLoader.loadScope(
@@ -146,6 +157,7 @@ class GenerationTaskExecutor {
 				reasonerWorkspace
 			}
 			
+			
 			// 7. Solver call
 			
 			val solution = solver.solve(problem,solverConfig,reasonerWorkspaceForRun)
@@ -156,6 +168,33 @@ class GenerationTaskExecutor {
 			if(solution instanceof ModelResult) {
 				// 
 				val interpretations = solver.getInterpretations(solution)
+				val outputWorkspaceForRun = if(runs > 1) {
+					outputWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
+				} else {
+					outputWorkspace
+				}
+				
+				for(interpretationIndex : 0..<interpretations.size) {
+					val interpretation = interpretations.get(interpretationIndex)
+					val model = logic2Ecore.transformInterpretation(interpretation,modelGeneration.trace)
+					outputWorkspaceForRun.writeModel(model,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex».xmi''')
+					
+					val representation = solution.representation.get(interpretationIndex)
+					if(representation instanceof PartialInterpretation) {
+						val vis1 = new PartialInterpretation2Gml
+						val gml = vis1.transform(representation)
+						outputWorkspaceForRun.writeText('''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex».gml''',gml)
+						if(representation.newElements.size + representation.problem.elements.size < 150) {
+							val vis2 = new GraphvizVisualisation
+							val dot = vis2.visualiseConcretization(representation)
+							dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex»''')
+						}
+					}
+				}
+				
+				for(representation : solution.representation) {
+					
+				}
 			}
 			
 		}

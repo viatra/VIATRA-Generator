@@ -1,10 +1,9 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.common.util.URI
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification
-import org.eclipse.emf.ecore.EObject
 import java.util.List
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 
 class ModelLoader {
 	
@@ -20,7 +19,7 @@ class ModelLoader {
 				return null
 			}
 
-			val resourceSet = new ResourceSetImpl
+			val resourceSet = specification.eResource.resourceSet
 			val resource = resourceSet.getResource(uri, true)
 			if (resource === null) {
 			} else {
