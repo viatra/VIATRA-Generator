@@ -51,4 +51,9 @@ class NullWorkspace extends ReasonerWorkspace{
 	override public String readText(String name) {
 		throw new UnsupportedOperationException(message)
 	}
+	
+	override public getFile(String name) {
+		throw new UnsupportedOperationException(message)
+	}
+	override refreshFile(String name) { }
 }

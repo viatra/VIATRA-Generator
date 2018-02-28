@@ -81,4 +81,9 @@ class FileSystemWorkspace extends ReasonerWorkspace{
 		}
 	}
 	
+	override public getFile(String name) {
+		val uri = getURI(name)
+		return new File(uri.toFileString)
+	}
+	override refreshFile(String name) { }
 }

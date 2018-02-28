@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.List
+import java.io.File
 
 abstract class ReasonerWorkspace{
 	
@@ -39,7 +40,8 @@ abstract class ReasonerWorkspace{
 		val URI resourceURI = getURI(name)
 		return resSet.createResource(resourceURI);
 	}
-	
+	public def File getFile(String name)
+	public def void refreshFile(String name)
 	
 	/**
 	 * Writes a model 

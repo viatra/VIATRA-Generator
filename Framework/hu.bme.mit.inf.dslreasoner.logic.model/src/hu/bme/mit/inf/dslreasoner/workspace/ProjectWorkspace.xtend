@@ -113,4 +113,18 @@ class ProjectWorkspace extends ReasonerWorkspace{
 		target.members.map[it.name]
 	}
 	
+	override public getFile(String name) {
+		val file = target.getTargetFile(name);
+		val uri = if(file.isLinked()){
+		   file.getRawLocation();
+		} else {
+			file.getLocation();
+		}
+		return uri.toFile
+	}
+	
+	override refreshFile(String name) {
+		val file = target.getTargetFile(name)
+		file.refreshLocal(1,monitor)
+	}
 }
