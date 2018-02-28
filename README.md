@@ -11,6 +11,8 @@ This guide gives a step-by-step instruction to setup a developement environment.
 * Install those plugins:
   * VIATRA Query and Transformation SDK
   * VIATRA-DSE framework (Incubation) Developer Resources
+* Currently the DOT visualisation is added by a precompiled plugin. (Thanks to https://github.com/kris7t !) Install the following plugin:
+  * Install *graphviz-java Feature* and *graphviz-java Feature (Sources)* from repository https://kris7t.github.io/graphviz-java-p2/repository/
 * Clone the Git repository.
 * Currently the Alloy Analyser tool need to be added manually.  Download alloy4.2_2015-02-22.jar from http://alloy.mit.edu/alloy/downloads/alloy4.2_2015-02-22.jar and place it to the ```hu.bme.mit.inf.dlsreasoner.alloy.reasoner/lib/``` folder.
 
