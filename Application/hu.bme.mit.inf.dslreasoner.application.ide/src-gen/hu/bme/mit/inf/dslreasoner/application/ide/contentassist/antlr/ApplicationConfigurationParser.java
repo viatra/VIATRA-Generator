@@ -45,6 +45,7 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 					put(grammarAccess.getPartialModelAccess().getAlternatives(), "rule__PartialModel__Alternatives");
 					put(grammarAccess.getPatternEntryAccess().getAlternatives(), "rule__PatternEntry__Alternatives");
 					put(grammarAccess.getGraphPatternAccess().getAlternatives(), "rule__GraphPattern__Alternatives");
+					put(grammarAccess.getConfigEntryAccess().getAlternatives(), "rule__ConfigEntry__Alternatives");
 					put(grammarAccess.getConfigAccess().getAlternatives(), "rule__Config__Alternatives");
 					put(grammarAccess.getTypeScopeAccess().getAlternatives(), "rule__TypeScope__Alternatives");
 					put(grammarAccess.getClassTypeScopeAccess().getAlternatives_2(), "rule__ClassTypeScope__Alternatives_2");
@@ -62,6 +63,7 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 					put(grammarAccess.getExactNumberAccess().getAlternatives(), "rule__ExactNumber__Alternatives");
 					put(grammarAccess.getIntervallNumberAccess().getAlternatives_2(), "rule__IntervallNumber__Alternatives_2");
 					put(grammarAccess.getScopeAccess().getAlternatives(), "rule__Scope__Alternatives");
+					put(grammarAccess.getDocumentLevelSpecificationAccess().getAlternatives(), "rule__DocumentLevelSpecification__Alternatives");
 					put(grammarAccess.getSolverAccess().getAlternatives(), "rule__Solver__Alternatives");
 					put(grammarAccess.getConfigurationScriptAccess().getGroup(), "rule__ConfigurationScript__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
@@ -96,7 +98,10 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 					put(grammarAccess.getConfigSpecificationAccess().getGroup_2(), "rule__ConfigSpecification__Group_2__0");
 					put(grammarAccess.getConfigSpecificationAccess().getGroup_2_1(), "rule__ConfigSpecification__Group_2_1__0");
 					put(grammarAccess.getConfigDeclarationAccess().getGroup(), "rule__ConfigDeclaration__Group__0");
-					put(grammarAccess.getConfigEntryAccess().getGroup(), "rule__ConfigEntry__Group__0");
+					put(grammarAccess.getDocumentationEntryAccess().getGroup(), "rule__DocumentationEntry__Group__0");
+					put(grammarAccess.getRuntimeEntryAccess().getGroup(), "rule__RuntimeEntry__Group__0");
+					put(grammarAccess.getMemoryEntryAccess().getGroup(), "rule__MemoryEntry__Group__0");
+					put(grammarAccess.getCustomEntryAccess().getGroup(), "rule__CustomEntry__Group__0");
 					put(grammarAccess.getScopeSpecificationAccess().getGroup(), "rule__ScopeSpecification__Group__0");
 					put(grammarAccess.getScopeSpecificationAccess().getGroup_2(), "rule__ScopeSpecification__Group_2__0");
 					put(grammarAccess.getScopeSpecificationAccess().getGroup_2_1(), "rule__ScopeSpecification__Group_2_1__0");
@@ -176,8 +181,11 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 					put(grammarAccess.getConfigSpecificationAccess().getEntriesAssignment_2_1_1(), "rule__ConfigSpecification__EntriesAssignment_2_1_1");
 					put(grammarAccess.getConfigDeclarationAccess().getNameAssignment_1(), "rule__ConfigDeclaration__NameAssignment_1");
 					put(grammarAccess.getConfigDeclarationAccess().getSpecificationAssignment_2(), "rule__ConfigDeclaration__SpecificationAssignment_2");
-					put(grammarAccess.getConfigEntryAccess().getKeyAssignment_0(), "rule__ConfigEntry__KeyAssignment_0");
-					put(grammarAccess.getConfigEntryAccess().getValueAssignment_2(), "rule__ConfigEntry__ValueAssignment_2");
+					put(grammarAccess.getDocumentationEntryAccess().getLevelAssignment_2(), "rule__DocumentationEntry__LevelAssignment_2");
+					put(grammarAccess.getRuntimeEntryAccess().getMillisecLimitAssignment_2(), "rule__RuntimeEntry__MillisecLimitAssignment_2");
+					put(grammarAccess.getMemoryEntryAccess().getMegabyteLimitAssignment_2(), "rule__MemoryEntry__MegabyteLimitAssignment_2");
+					put(grammarAccess.getCustomEntryAccess().getKeyAssignment_0(), "rule__CustomEntry__KeyAssignment_0");
+					put(grammarAccess.getCustomEntryAccess().getValueAssignment_2(), "rule__CustomEntry__ValueAssignment_2");
 					put(grammarAccess.getConfigReferenceAccess().getConfigAssignment(), "rule__ConfigReference__ConfigAssignment");
 					put(grammarAccess.getScopeSpecificationAccess().getScopesAssignment_2_0(), "rule__ScopeSpecification__ScopesAssignment_2_0");
 					put(grammarAccess.getScopeSpecificationAccess().getScopesAssignment_2_1_1(), "rule__ScopeSpecification__ScopesAssignment_2_1_1");
