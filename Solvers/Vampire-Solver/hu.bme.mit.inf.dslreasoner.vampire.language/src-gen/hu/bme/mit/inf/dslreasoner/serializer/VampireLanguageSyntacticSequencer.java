@@ -20,12 +20,16 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected VampireLanguageGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_VLSAnnotation_LeftSquareBracketKeyword_0_q;
+	protected AbstractElementAlias match_VLSAnnotation_RightSquareBracketKeyword_3_q;
 	protected AbstractElementAlias match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a;
 	protected AbstractElementAlias match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (VampireLanguageGrammarAccess) access;
+		match_VLSAnnotation_LeftSquareBracketKeyword_0_q = new TokenAlias(false, true, grammarAccess.getVLSAnnotationAccess().getLeftSquareBracketKeyword_0());
+		match_VLSAnnotation_RightSquareBracketKeyword_3_q = new TokenAlias(false, true, grammarAccess.getVLSAnnotationAccess().getRightSquareBracketKeyword_3());
 		match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a = new TokenAlias(true, true, grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0());
 		match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p = new TokenAlias(true, false, grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0());
 	}
@@ -42,7 +46,11 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a.equals(syntax))
+			if (match_VLSAnnotation_LeftSquareBracketKeyword_0_q.equals(syntax))
+				emit_VLSAnnotation_LeftSquareBracketKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_VLSAnnotation_RightSquareBracketKeyword_3_q.equals(syntax))
+				emit_VLSAnnotation_RightSquareBracketKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a.equals(syntax))
 				emit_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p.equals(syntax))
 				emit_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -52,16 +60,43 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 
 	/**
 	 * Ambiguous syntax:
+	 *     '['?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '(' followup=VLSAnnotationTerms
+	 *     (rule start) (ambiguity) ']'? (rule start)
+	 *     (rule start) (ambiguity) name=LOWER_WORD_ID
+	 *     (rule start) (ambiguity) name=SINGLE_QUOTE
+	 *     (rule start) (ambiguity) name=VLSRole
+	 */
+	protected void emit_VLSAnnotation_LeftSquareBracketKeyword_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ']'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '['? (ambiguity) (rule start)
+	 *     followup=VLSAnnotationTerms ')' (ambiguity) (rule end)
+	 *     name=LOWER_WORD_ID (ambiguity) (rule end)
+	 *     name=SINGLE_QUOTE (ambiguity) (rule end)
+	 *     name=VLSRole (ambiguity) (rule end)
+	 */
+	protected void emit_VLSAnnotation_RightSquareBracketKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '!' '[' variables+=VLSVariable
 	 *     (rule start) (ambiguity) '?' '[' variables+=VLSVariable
 	 *     (rule start) (ambiguity) '~' operand=VLSUnitaryFormula
-	 *     (rule start) (ambiguity) constant=DOLLAR_ID
-	 *     (rule start) (ambiguity) constant=DOUBLE_DOLLAR_ID
-	 *     (rule start) (ambiguity) constant=LOWER_WORD_ID
-	 *     (rule start) (ambiguity) constant=SINGLE_QUOTE
+	 *     (rule start) (ambiguity) constant=VLSFunctionDeclaration
 	 *     (rule start) (ambiguity) {VLSAnd.left=}
 	 *     (rule start) (ambiguity) {VLSAssignment.left=}
 	 *     (rule start) (ambiguity) {VLSEquality.left=}

@@ -47,15 +47,22 @@ terminal SIGNED_RAT_ID: (SIGN)* (UNSIGNED_RAT_ID);
 terminal ANY_OTHER: '%' (!('\n'|'\r'))* ('\r');
 terminal SINGLE_COMMENT: ANY_OTHER;
 //terminal ID:  ( !('('|')'|'\r'|'\n') )+ ;
-//ANNOTATION_ID: ID;
-//terminal ANNOTATION_ID: LOWER_WORD_ID;
+
+
+
 //////////////////////////////////
 // VLS types
 //////////////////////////////////
 // <COMMENT>
 VLSComment:
 	comment = SINGLE_COMMENT
+	//need to add a new line at the end of the file for the case where the last line is a comment
 ;
+
+VLSFunctionDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
+
+
+
 
 //Formulas
 VLSFofFormula:
@@ -136,14 +143,13 @@ VLSUnknown:
 ;
 
 // <ANNOTATION>
-//TODO POTENTIAL MAKE THE ANNOTATION STRUCTURE BETTER, Includes modifying terminal rule
 // Not at all based on the website. based on what we think the output will be like 
 VLSAnnotation:
-	(name = LOWER_WORD_ID)? closure_rule = Closure_Rule
+	('[')? (name = (LOWER_WORD_ID  | SINGLE_QUOTE | VLSRole))? ( '('  followup = VLSAnnotationTerms ')' )? (']')?
 ;
 
-Closure_Rule returns VLSAnnotation:
-	(name = LOWER_WORD_ID) | '('  VLSAnnotation ')' 
+VLSAnnotationTerms returns VLSAnnotation:
+	terms += VLSAnnotation (',' terms += VLSAnnotation )*
 ;
 
 //////////////////////////////////
@@ -208,7 +214,8 @@ enum VLSDefinedFunctor:
 VLSFunction returns VLSTerm:
 	//? on next line causes warning
 	//TODO might need replace DOLLAR_ID with enum rule 
-	{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
+	//{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
+	{VLSFunction} constant = VLSFunctionDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?	
 ;
 
 VLSFofTerm:
@@ -223,7 +230,7 @@ VLSVariable:
 VLSFunctionFof:
 	//? on next line causes warning
 	//TODO might need replace DOLLAR_ID with enum rule 
-	name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
+	functor = VLSFunctionDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
 ;
 
 VLSDefinedTerm:

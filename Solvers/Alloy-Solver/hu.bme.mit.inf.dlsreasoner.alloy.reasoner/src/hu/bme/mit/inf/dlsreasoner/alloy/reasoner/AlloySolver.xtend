@@ -54,6 +54,9 @@ class AlloySolver extends LogicReasoner{
 		
 		//ADDED BY AREN
 		//Creates a file containing the tptp code after transformation
+		workspace.writeModel(problem, "logicModel.xmi").toFileString
+		
+		
 		val out = new PrintWriter("vampireCode.tptp")
 		out.println(alloyCode)
 		out.close()

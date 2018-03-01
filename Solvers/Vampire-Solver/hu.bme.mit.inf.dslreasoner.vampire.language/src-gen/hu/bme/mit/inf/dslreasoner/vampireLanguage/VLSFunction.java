@@ -25,30 +25,30 @@ import org.eclipse.emf.common.util.EList;
 public interface VLSFunction extends VLSTerm
 {
   /**
-   * Returns the value of the '<em><b>Constant</b></em>' attribute.
+   * Returns the value of the '<em><b>Constant</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Constant</em>' attribute isn't clear,
+   * If the meaning of the '<em>Constant</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Constant</em>' attribute.
-   * @see #setConstant(String)
+   * @return the value of the '<em>Constant</em>' containment reference.
+   * @see #setConstant(VLSFunctionDeclaration)
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFunction_Constant()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getConstant();
+  VLSFunctionDeclaration getConstant();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant <em>Constant</em>}' attribute.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant <em>Constant</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constant</em>' attribute.
+   * @param value the new value of the '<em>Constant</em>' containment reference.
    * @see #getConstant()
    * @generated
    */
-  void setConstant(String value);
+  void setConstant(VLSFunctionDeclaration value);
 
   /**
    * Returns the value of the '<em><b>Terms</b></em>' containment reference list.

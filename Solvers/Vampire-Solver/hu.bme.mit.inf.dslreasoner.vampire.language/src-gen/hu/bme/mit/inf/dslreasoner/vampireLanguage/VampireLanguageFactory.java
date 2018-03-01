@@ -42,6 +42,15 @@ public interface VampireLanguageFactory extends EFactory
   VLSComment createVLSComment();
 
   /**
+   * Returns a new object of class '<em>VLS Function Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Function Declaration</em>'.
+   * @generated
+   */
+  VLSFunctionDeclaration createVLSFunctionDeclaration();
+
+  /**
    * Returns a new object of class '<em>VLS Fof Formula</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -5,7 +5,6 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
@@ -64,7 +63,7 @@ public class VLSFofFormulaImpl extends MinimalEObjectImpl.Container implements V
    * @generated
    * @ordered
    */
-  protected static final VLSRole FOF_ROLE_EDEFAULT = VLSRole.AXIOM;
+  protected static final String FOF_ROLE_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getFofRole() <em>Fof Role</em>}' attribute.
@@ -74,7 +73,7 @@ public class VLSFofFormulaImpl extends MinimalEObjectImpl.Container implements V
    * @generated
    * @ordered
    */
-  protected VLSRole fofRole = FOF_ROLE_EDEFAULT;
+  protected String fofRole = FOF_ROLE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getFofFormula() <em>Fof Formula</em>}' containment reference.
@@ -145,7 +144,7 @@ public class VLSFofFormulaImpl extends MinimalEObjectImpl.Container implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public VLSRole getFofRole()
+  public String getFofRole()
   {
     return fofRole;
   }
@@ -155,10 +154,10 @@ public class VLSFofFormulaImpl extends MinimalEObjectImpl.Container implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFofRole(VLSRole newFofRole)
+  public void setFofRole(String newFofRole)
   {
-    VLSRole oldFofRole = fofRole;
-    fofRole = newFofRole == null ? FOF_ROLE_EDEFAULT : newFofRole;
+    String oldFofRole = fofRole;
+    fofRole = newFofRole;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FOF_FORMULA__FOF_ROLE, oldFofRole, fofRole));
   }
@@ -313,7 +312,7 @@ public class VLSFofFormulaImpl extends MinimalEObjectImpl.Container implements V
         setName((String)newValue);
         return;
       case VampireLanguagePackage.VLS_FOF_FORMULA__FOF_ROLE:
-        setFofRole((VLSRole)newValue);
+        setFofRole((String)newValue);
         return;
       case VampireLanguagePackage.VLS_FOF_FORMULA__FOF_FORMULA:
         setFofFormula((VLSTerm)newValue);
@@ -364,7 +363,7 @@ public class VLSFofFormulaImpl extends MinimalEObjectImpl.Container implements V
       case VampireLanguagePackage.VLS_FOF_FORMULA__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case VampireLanguagePackage.VLS_FOF_FORMULA__FOF_ROLE:
-        return fofRole != FOF_ROLE_EDEFAULT;
+        return FOF_ROLE_EDEFAULT == null ? fofRole != null : !FOF_ROLE_EDEFAULT.equals(fofRole);
       case VampireLanguagePackage.VLS_FOF_FORMULA__FOF_FORMULA:
         return fofFormula != null;
       case VampireLanguagePackage.VLS_FOF_FORMULA__ANNOTATIONS:

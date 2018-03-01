@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import java.util.Collection;
@@ -39,24 +40,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
 {
   /**
-   * The default value of the '{@link #getConstant() <em>Constant</em>}' attribute.
+   * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getConstant()
    * @generated
    * @ordered
    */
-  protected static final String CONSTANT_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getConstant() <em>Constant</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstant()
-   * @generated
-   * @ordered
-   */
-  protected String constant = CONSTANT_EDEFAULT;
+  protected VLSFunctionDeclaration constant;
 
   /**
    * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
@@ -94,7 +85,7 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getConstant()
+  public VLSFunctionDeclaration getConstant()
   {
     return constant;
   }
@@ -104,12 +95,37 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstant(String newConstant)
+  public NotificationChain basicSetConstant(VLSFunctionDeclaration newConstant, NotificationChain msgs)
   {
-    String oldConstant = constant;
+    VLSFunctionDeclaration oldConstant = constant;
     constant = newConstant;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION__CONSTANT, oldConstant, constant));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION__CONSTANT, oldConstant, newConstant);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConstant(VLSFunctionDeclaration newConstant)
+  {
+    if (newConstant != constant)
+    {
+      NotificationChain msgs = null;
+      if (constant != null)
+        msgs = ((InternalEObject)constant).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION__CONSTANT, null, msgs);
+      if (newConstant != null)
+        msgs = ((InternalEObject)newConstant).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION__CONSTANT, null, msgs);
+      msgs = basicSetConstant(newConstant, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION__CONSTANT, newConstant, newConstant));
   }
 
   /**
@@ -136,6 +152,8 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
+        return basicSetConstant(null, msgs);
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
     }
@@ -172,7 +190,7 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        setConstant((String)newValue);
+        setConstant((VLSFunctionDeclaration)newValue);
         return;
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         getTerms().clear();
@@ -193,7 +211,7 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        setConstant(CONSTANT_EDEFAULT);
+        setConstant((VLSFunctionDeclaration)null);
         return;
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         getTerms().clear();
@@ -213,28 +231,11 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        return CONSTANT_EDEFAULT == null ? constant != null : !CONSTANT_EDEFAULT.equals(constant);
+        return constant != null;
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         return terms != null && !terms.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (constant: ");
-    result.append(constant);
-    result.append(')');
-    return result.toString();
   }
 
 } //VLSFunctionImpl

@@ -4,6 +4,9 @@
     <!-- @generated FileSytem -->
     <package class="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FilesystemPackage" genModel="model/FileSytem.genmodel" uri="FS"/>
   </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="FileSystem" feature-name="live" package-nsUri="FS"/>
+  </extension>
   <extension id="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore" id="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore">
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.directSupertype"/>

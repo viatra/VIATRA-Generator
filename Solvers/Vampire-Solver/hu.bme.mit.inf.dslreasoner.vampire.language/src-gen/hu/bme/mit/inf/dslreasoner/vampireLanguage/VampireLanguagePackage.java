@@ -5,7 +5,6 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -124,6 +123,34 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_COMMENT_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionDeclarationImpl <em>VLS Function Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionDeclarationImpl
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunctionDeclaration()
+   * @generated
+   */
+  int VLS_FUNCTION_DECLARATION = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FUNCTION_DECLARATION__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>VLS Function Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FUNCTION_DECLARATION_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFofFormulaImpl <em>VLS Fof Formula</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -131,7 +158,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFofFormula()
    * @generated
    */
-  int VLS_FOF_FORMULA = 2;
+  int VLS_FOF_FORMULA = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -186,7 +213,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAnnotation()
    * @generated
    */
-  int VLS_ANNOTATION = 3;
+  int VLS_ANNOTATION = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -198,13 +225,22 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_ANNOTATION__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Closure rule</b></em>' containment reference.
+   * The feature id for the '<em><b>Followup</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_ANNOTATION__CLOSURE_RULE = 1;
+  int VLS_ANNOTATION__FOLLOWUP = 1;
+
+  /**
+   * The feature id for the '<em><b>Terms</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_ANNOTATION__TERMS = 2;
 
   /**
    * The number of structural features of the '<em>VLS Annotation</em>' class.
@@ -213,7 +249,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_ANNOTATION_FEATURE_COUNT = 2;
+  int VLS_ANNOTATION_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTermImpl <em>VLS Term</em>}' class.
@@ -223,7 +259,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTerm()
    * @generated
    */
-  int VLS_TERM = 4;
+  int VLS_TERM = 5;
 
   /**
    * The number of structural features of the '<em>VLS Term</em>' class.
@@ -242,16 +278,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFofTerm()
    * @generated
    */
-  int VLS_FOF_TERM = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_FOF_TERM__NAME = 0;
+  int VLS_FOF_TERM = 6;
 
   /**
    * The number of structural features of the '<em>VLS Fof Term</em>' class.
@@ -260,7 +287,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_FOF_TERM_FEATURE_COUNT = 1;
+  int VLS_FOF_TERM_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.
@@ -270,7 +297,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSVariable()
    * @generated
    */
-  int VLS_VARIABLE = 6;
+  int VLS_VARIABLE = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -279,7 +306,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE__NAME = VLS_FOF_TERM__NAME;
+  int VLS_VARIABLE__NAME = VLS_FOF_TERM_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>VLS Variable</em>' class.
@@ -288,7 +315,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE_FEATURE_COUNT = VLS_FOF_TERM_FEATURE_COUNT + 0;
+  int VLS_VARIABLE_FEATURE_COUNT = VLS_FOF_TERM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionFofImpl <em>VLS Function Fof</em>}' class.
@@ -298,16 +325,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunctionFof()
    * @generated
    */
-  int VLS_FUNCTION_FOF = 7;
+  int VLS_FUNCTION_FOF = 8;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Functor</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_FUNCTION_FOF__NAME = VLS_FOF_TERM__NAME;
+  int VLS_FUNCTION_FOF__FUNCTOR = VLS_FOF_TERM_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Terms</b></em>' containment reference list.
@@ -316,7 +343,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_FUNCTION_FOF__TERMS = VLS_FOF_TERM_FEATURE_COUNT + 0;
+  int VLS_FUNCTION_FOF__TERMS = VLS_FOF_TERM_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>VLS Function Fof</em>' class.
@@ -325,7 +352,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_FUNCTION_FOF_FEATURE_COUNT = VLS_FOF_TERM_FEATURE_COUNT + 1;
+  int VLS_FUNCTION_FOF_FEATURE_COUNT = VLS_FOF_TERM_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSDefinedTermImpl <em>VLS Defined Term</em>}' class.
@@ -335,7 +362,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSDefinedTerm()
    * @generated
    */
-  int VLS_DEFINED_TERM = 8;
+  int VLS_DEFINED_TERM = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -344,7 +371,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_DEFINED_TERM__NAME = VLS_FOF_TERM__NAME;
+  int VLS_DEFINED_TERM__NAME = VLS_FOF_TERM_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>VLS Defined Term</em>' class.
@@ -353,7 +380,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_DEFINED_TERM_FEATURE_COUNT = VLS_FOF_TERM_FEATURE_COUNT + 0;
+  int VLS_DEFINED_TERM_FEATURE_COUNT = VLS_FOF_TERM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSEquivalentImpl <em>VLS Equivalent</em>}' class.
@@ -363,7 +390,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSEquivalent()
    * @generated
    */
-  int VLS_EQUIVALENT = 9;
+  int VLS_EQUIVALENT = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -400,7 +427,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSImplies()
    * @generated
    */
-  int VLS_IMPLIES = 10;
+  int VLS_IMPLIES = 11;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -437,7 +464,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRevImplies()
    * @generated
    */
-  int VLS_REV_IMPLIES = 11;
+  int VLS_REV_IMPLIES = 12;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -474,7 +501,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSXnor()
    * @generated
    */
-  int VLS_XNOR = 12;
+  int VLS_XNOR = 13;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -511,7 +538,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSNor()
    * @generated
    */
-  int VLS_NOR = 13;
+  int VLS_NOR = 14;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -548,7 +575,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSNand()
    * @generated
    */
-  int VLS_NAND = 14;
+  int VLS_NAND = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -585,7 +612,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAnd()
    * @generated
    */
-  int VLS_AND = 15;
+  int VLS_AND = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -622,7 +649,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSOr()
    * @generated
    */
-  int VLS_OR = 16;
+  int VLS_OR = 17;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -659,7 +686,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSUniversalQuantifier()
    * @generated
    */
-  int VLS_UNIVERSAL_QUANTIFIER = 17;
+  int VLS_UNIVERSAL_QUANTIFIER = 18;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -696,7 +723,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSExistentialQuantifier()
    * @generated
    */
-  int VLS_EXISTENTIAL_QUANTIFIER = 18;
+  int VLS_EXISTENTIAL_QUANTIFIER = 19;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -733,7 +760,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSUnaryNegation()
    * @generated
    */
-  int VLS_UNARY_NEGATION = 19;
+  int VLS_UNARY_NEGATION = 20;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -761,7 +788,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSInequality()
    * @generated
    */
-  int VLS_INEQUALITY = 20;
+  int VLS_INEQUALITY = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -798,7 +825,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSEquality()
    * @generated
    */
-  int VLS_EQUALITY = 21;
+  int VLS_EQUALITY = 22;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -835,7 +862,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAssignment()
    * @generated
    */
-  int VLS_ASSIGNMENT = 22;
+  int VLS_ASSIGNMENT = 23;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -872,10 +899,10 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunction()
    * @generated
    */
-  int VLS_FUNCTION = 23;
+  int VLS_FUNCTION = 24;
 
   /**
-   * The feature id for the '<em><b>Constant</b></em>' attribute.
+   * The feature id for the '<em><b>Constant</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -900,16 +927,6 @@ public interface VampireLanguagePackage extends EPackage
    * @ordered
    */
   int VLS_FUNCTION_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole <em>VLS Role</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRole()
-   * @generated
-   */
-  int VLS_ROLE = 24;
 
 
   /**
@@ -964,6 +981,27 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getVLSComment_Comment();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration <em>VLS Function Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Function Declaration</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration
+   * @generated
+   */
+  EClass getVLSFunctionDeclaration();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration#getName()
+   * @see #getVLSFunctionDeclaration()
+   * @generated
+   */
+  EAttribute getVLSFunctionDeclaration_Name();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula <em>VLS Fof Formula</em>}'.
@@ -1041,15 +1079,26 @@ public interface VampireLanguagePackage extends EPackage
   EAttribute getVLSAnnotation_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getClosure_rule <em>Closure rule</em>}'.
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getFollowup <em>Followup</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Closure rule</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getClosure_rule()
+   * @return the meta object for the containment reference '<em>Followup</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getFollowup()
    * @see #getVLSAnnotation()
    * @generated
    */
-  EReference getVLSAnnotation_Closure_rule();
+  EReference getVLSAnnotation_Followup();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getTerms <em>Terms</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Terms</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getTerms()
+   * @see #getVLSAnnotation()
+   * @generated
+   */
+  EReference getVLSAnnotation_Terms();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm <em>VLS Term</em>}'.
@@ -1072,17 +1121,6 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSFofTerm();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm#getName()
-   * @see #getVLSFofTerm()
-   * @generated
-   */
-  EAttribute getVLSFofTerm_Name();
-
-  /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable <em>VLS Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1093,6 +1131,17 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSVariable();
 
   /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable#getName()
+   * @see #getVLSVariable()
+   * @generated
+   */
+  EAttribute getVLSVariable_Name();
+
+  /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof <em>VLS Function Fof</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1101,6 +1150,17 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EClass getVLSFunctionFof();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof#getFunctor <em>Functor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Functor</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof#getFunctor()
+   * @see #getVLSFunctionFof()
+   * @generated
+   */
+  EReference getVLSFunctionFof_Functor();
 
   /**
    * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof#getTerms <em>Terms</em>}'.
@@ -1122,6 +1182,17 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EClass getVLSDefinedTerm();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDefinedTerm#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDefinedTerm#getName()
+   * @see #getVLSDefinedTerm()
+   * @generated
+   */
+  EAttribute getVLSDefinedTerm_Name();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent <em>VLS Equivalent</em>}'.
@@ -1571,15 +1642,15 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSFunction();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant <em>Constant</em>}'.
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant <em>Constant</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Constant</em>'.
+   * @return the meta object for the containment reference '<em>Constant</em>'.
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant()
    * @see #getVLSFunction()
    * @generated
    */
-  EAttribute getVLSFunction_Constant();
+  EReference getVLSFunction_Constant();
 
   /**
    * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getTerms <em>Terms</em>}'.
@@ -1591,16 +1662,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EReference getVLSFunction_Terms();
-
-  /**
-   * Returns the meta object for enum '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole <em>VLS Role</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>VLS Role</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole
-   * @generated
-   */
-  EEnum getVLSRole();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1670,6 +1731,24 @@ public interface VampireLanguagePackage extends EPackage
     EAttribute VLS_COMMENT__COMMENT = eINSTANCE.getVLSComment_Comment();
 
     /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionDeclarationImpl <em>VLS Function Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionDeclarationImpl
+     * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunctionDeclaration()
+     * @generated
+     */
+    EClass VLS_FUNCTION_DECLARATION = eINSTANCE.getVLSFunctionDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_FUNCTION_DECLARATION__NAME = eINSTANCE.getVLSFunctionDeclaration_Name();
+
+    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFofFormulaImpl <em>VLS Fof Formula</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1730,12 +1809,20 @@ public interface VampireLanguagePackage extends EPackage
     EAttribute VLS_ANNOTATION__NAME = eINSTANCE.getVLSAnnotation_Name();
 
     /**
-     * The meta object literal for the '<em><b>Closure rule</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Followup</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VLS_ANNOTATION__CLOSURE_RULE = eINSTANCE.getVLSAnnotation_Closure_rule();
+    EReference VLS_ANNOTATION__FOLLOWUP = eINSTANCE.getVLSAnnotation_Followup();
+
+    /**
+     * The meta object literal for the '<em><b>Terms</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_ANNOTATION__TERMS = eINSTANCE.getVLSAnnotation_Terms();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTermImpl <em>VLS Term</em>}' class.
@@ -1758,14 +1845,6 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_FOF_TERM = eINSTANCE.getVLSFofTerm();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute VLS_FOF_TERM__NAME = eINSTANCE.getVLSFofTerm_Name();
-
-    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1776,6 +1855,14 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_VARIABLE = eINSTANCE.getVLSVariable();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_VARIABLE__NAME = eINSTANCE.getVLSVariable_Name();
+
+    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionFofImpl <em>VLS Function Fof</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1784,6 +1871,14 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EClass VLS_FUNCTION_FOF = eINSTANCE.getVLSFunctionFof();
+
+    /**
+     * The meta object literal for the '<em><b>Functor</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_FUNCTION_FOF__FUNCTOR = eINSTANCE.getVLSFunctionFof_Functor();
 
     /**
      * The meta object literal for the '<em><b>Terms</b></em>' containment reference list feature.
@@ -1802,6 +1897,14 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EClass VLS_DEFINED_TERM = eINSTANCE.getVLSDefinedTerm();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_DEFINED_TERM__NAME = eINSTANCE.getVLSDefinedTerm_Name();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSEquivalentImpl <em>VLS Equivalent</em>}' class.
@@ -2170,12 +2273,12 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_FUNCTION = eINSTANCE.getVLSFunction();
 
     /**
-     * The meta object literal for the '<em><b>Constant</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Constant</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VLS_FUNCTION__CONSTANT = eINSTANCE.getVLSFunction_Constant();
+    EReference VLS_FUNCTION__CONSTANT = eINSTANCE.getVLSFunction_Constant();
 
     /**
      * The meta object literal for the '<em><b>Terms</b></em>' containment reference list feature.
@@ -2184,16 +2287,6 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EReference VLS_FUNCTION__TERMS = eINSTANCE.getVLSFunction_Terms();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole <em>VLS Role</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole
-     * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRole()
-     * @generated
-     */
-    EEnum VLS_ROLE = eINSTANCE.getVLSRole();
 
   }
 

@@ -15,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSImplies;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInequality;
@@ -57,8 +58,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				sequence_VLSBinary(context, (VLSAnd) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_ANNOTATION:
-				if (rule == grammarAccess.getClosure_RuleRule()) {
-					sequence_Closure_Rule_VLSAnnotation(context, (VLSAnnotation) semanticObject); 
+				if (rule == grammarAccess.getVLSAnnotationTermsRule()) {
+					sequence_VLSAnnotationTerms(context, (VLSAnnotation) semanticObject); 
 					return; 
 				}
 				else if (rule == grammarAccess.getVLSAnnotationRule()) {
@@ -89,6 +90,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				return; 
 			case VampireLanguagePackage.VLS_FUNCTION:
 				sequence_VLSFunction(context, (VLSFunction) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_FUNCTION_DECLARATION:
+				sequence_VLSFunctionDeclaration(context, (VLSFunctionDeclaration) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_FUNCTION_FOF:
 				sequence_VLSFunctionFof(context, (VLSFunctionFof) semanticObject); 
@@ -133,12 +137,12 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
-	 *     Closure_Rule returns VLSAnnotation
+	 *     VLSAnnotationTerms returns VLSAnnotation
 	 *
 	 * Constraint:
-	 *     ((name=LOWER_WORD_ID? closure_rule=Closure_Rule) | name=LOWER_WORD_ID)
+	 *     (terms+=VLSAnnotation terms+=VLSAnnotation*)
 	 */
-	protected void sequence_Closure_Rule_VLSAnnotation(ISerializationContext context, VLSAnnotation semanticObject) {
+	protected void sequence_VLSAnnotationTerms(ISerializationContext context, VLSAnnotation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -148,7 +152,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSAnnotation returns VLSAnnotation
 	 *
 	 * Constraint:
-	 *     (name=LOWER_WORD_ID? closure_rule=Closure_Rule)
+	 *     (((name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=VLSRole) followup=VLSAnnotationTerms) | followup=VLSAnnotationTerms)?
 	 */
 	protected void sequence_VLSAnnotation(ISerializationContext context, VLSAnnotation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -427,7 +431,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSDefinedTerm returns VLSDefinedTerm
 	 *
 	 * Constraint:
-	 *     (name=DOUBLE_QUOTE | name=SIGNED_INT_ID | name=SIGNED_REAL_ID | name=SIGNED_RAT_ID)
+	 *     (name=DOUBLE_QUOTE | name=SIGNED_LITERAL | name=SIGNED_REAL_ID | name=SIGNED_RAT_ID)
 	 */
 	protected void sequence_VLSDefinedTerm(ISerializationContext context, VLSDefinedTerm semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -462,9 +466,21 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSFofFormula returns VLSFofFormula
 	 *
 	 * Constraint:
-	 *     ((name=LOWER_WORD_ID | name=SIGNED_INT_ID | name=SINGLE_QUOTE) fofRole=VLSRole fofFormula=VLSTerm annotations=VLSAnnotation?)
+	 *     ((name=LOWER_WORD_ID | name=SIGNED_LITERAL | name=SINGLE_QUOTE) fofRole=VLSRole fofFormula=VLSTerm annotations=VLSAnnotation?)
 	 */
 	protected void sequence_VLSFofFormula(ISerializationContext context, VLSFofFormula semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSFunctionDeclaration returns VLSFunctionDeclaration
+	 *
+	 * Constraint:
+	 *     (name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=DOLLAR_ID | name=DOUBLE_DOLLAR_ID)
+	 */
+	protected void sequence_VLSFunctionDeclaration(ISerializationContext context, VLSFunctionDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -475,7 +491,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSFunctionFof returns VLSFunctionFof
 	 *
 	 * Constraint:
-	 *     ((name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=DOLLAR_ID | name=DOUBLE_DOLLAR_ID) (terms+=VLSFofTerm terms+=VLSFofTerm*)?)
+	 *     (functor=VLSFunctionDeclaration (terms+=VLSFofTerm terms+=VLSFofTerm*)?)
 	 */
 	protected void sequence_VLSFunctionFof(ISerializationContext context, VLSFunctionFof semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -502,7 +518,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSFunction returns VLSFunction
 	 *
 	 * Constraint:
-	 *     ((constant=LOWER_WORD_ID | constant=SINGLE_QUOTE | constant=DOLLAR_ID | constant=DOUBLE_DOLLAR_ID) (terms+=VLSFofTerm terms+=VLSFofTerm*)?)
+	 *     (constant=VLSFunctionDeclaration (terms+=VLSFofTerm terms+=VLSFofTerm*)?)
 	 */
 	protected void sequence_VLSFunction(ISerializationContext context, VLSFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -667,8 +683,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSVariable(ISerializationContext context, VLSVariable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_FOF_TERM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_FOF_TERM__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSVariableAccess().getNameUPPER_WORD_IDTerminalRuleCall_0(), semanticObject.getName());

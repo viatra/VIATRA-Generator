@@ -4,17 +4,21 @@
 package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -27,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionFofImpl#getFunctor <em>Functor</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionFofImpl#getTerms <em>Terms</em>}</li>
  * </ul>
  *
@@ -34,6 +39,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
 {
+  /**
+   * The cached value of the '{@link #getFunctor() <em>Functor</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFunctor()
+   * @generated
+   * @ordered
+   */
+  protected VLSFunctionDeclaration functor;
+
   /**
    * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -70,6 +85,54 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
    * <!-- end-user-doc -->
    * @generated
    */
+  public VLSFunctionDeclaration getFunctor()
+  {
+    return functor;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetFunctor(VLSFunctionDeclaration newFunctor, NotificationChain msgs)
+  {
+    VLSFunctionDeclaration oldFunctor = functor;
+    functor = newFunctor;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, oldFunctor, newFunctor);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFunctor(VLSFunctionDeclaration newFunctor)
+  {
+    if (newFunctor != functor)
+    {
+      NotificationChain msgs = null;
+      if (functor != null)
+        msgs = ((InternalEObject)functor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, null, msgs);
+      if (newFunctor != null)
+        msgs = ((InternalEObject)newFunctor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, null, msgs);
+      msgs = basicSetFunctor(newFunctor, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, newFunctor, newFunctor));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<VLSFofTerm> getTerms()
   {
     if (terms == null)
@@ -89,6 +152,8 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
+        return basicSetFunctor(null, msgs);
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
     }
@@ -105,6 +170,8 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
+        return getFunctor();
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         return getTerms();
     }
@@ -122,6 +189,9 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
+        setFunctor((VLSFunctionDeclaration)newValue);
+        return;
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         getTerms().clear();
         getTerms().addAll((Collection<? extends VLSFofTerm>)newValue);
@@ -140,6 +210,9 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
+        setFunctor((VLSFunctionDeclaration)null);
+        return;
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         getTerms().clear();
         return;
@@ -157,6 +230,8 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
+        return functor != null;
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         return terms != null && !terms.isEmpty();
     }

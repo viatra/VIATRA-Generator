@@ -6,7 +6,6 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.*;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -68,6 +67,7 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
     {
       case VampireLanguagePackage.VAMPIRE_MODEL: return createVampireModel();
       case VampireLanguagePackage.VLS_COMMENT: return createVLSComment();
+      case VampireLanguagePackage.VLS_FUNCTION_DECLARATION: return createVLSFunctionDeclaration();
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
       case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
@@ -100,40 +100,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public Object createFromString(EDataType eDataType, String initialValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case VampireLanguagePackage.VLS_ROLE:
-        return createVLSRoleFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String convertToString(EDataType eDataType, Object instanceValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case VampireLanguagePackage.VLS_ROLE:
-        return convertVLSRoleToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public VampireModel createVampireModel()
   {
     VampireModelImpl vampireModel = new VampireModelImpl();
@@ -149,6 +115,17 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSCommentImpl vlsComment = new VLSCommentImpl();
     return vlsComment;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSFunctionDeclaration createVLSFunctionDeclaration()
+  {
+    VLSFunctionDeclarationImpl vlsFunctionDeclaration = new VLSFunctionDeclarationImpl();
+    return vlsFunctionDeclaration;
   }
 
   /**
@@ -391,28 +368,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSFunctionImpl vlsFunction = new VLSFunctionImpl();
     return vlsFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSRole createVLSRoleFromString(EDataType eDataType, String initialValue)
-  {
-    VLSRole result = VLSRole.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertVLSRoleToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

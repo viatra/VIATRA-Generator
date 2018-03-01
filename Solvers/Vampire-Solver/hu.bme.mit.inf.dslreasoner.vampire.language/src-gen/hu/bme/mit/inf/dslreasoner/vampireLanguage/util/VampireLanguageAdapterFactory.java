@@ -86,6 +86,11 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSCommentAdapter();
       }
       @Override
+      public Adapter caseVLSFunctionDeclaration(VLSFunctionDeclaration object)
+      {
+        return createVLSFunctionDeclarationAdapter();
+      }
+      @Override
       public Adapter caseVLSFofFormula(VLSFofFormula object)
       {
         return createVLSFofFormulaAdapter();
@@ -243,6 +248,21 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSCommentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration <em>VLS Function Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration
+   * @generated
+   */
+  public Adapter createVLSFunctionDeclarationAdapter()
   {
     return null;
   }

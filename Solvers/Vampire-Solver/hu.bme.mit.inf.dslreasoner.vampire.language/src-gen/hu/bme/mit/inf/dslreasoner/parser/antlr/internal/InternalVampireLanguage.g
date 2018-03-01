@@ -23,7 +23,6 @@ import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -154,6 +153,88 @@ ruleVLSComment returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleVLSFunctionDeclaration
+entryRuleVLSFunctionDeclaration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSFunctionDeclarationRule()); }
+	iv_ruleVLSFunctionDeclaration=ruleVLSFunctionDeclaration
+	{ $current=$iv_ruleVLSFunctionDeclaration.current; }
+	EOF;
+
+// Rule VLSFunctionDeclaration
+ruleVLSFunctionDeclaration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_1=RULE_LOWER_WORD_ID
+				{
+					newLeafNode(lv_name_0_1, grammarAccess.getVLSFunctionDeclarationAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getVLSFunctionDeclarationRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_1,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
+				}
+				    |
+				lv_name_0_2=RULE_SINGLE_QUOTE
+				{
+					newLeafNode(lv_name_0_2, grammarAccess.getVLSFunctionDeclarationAccess().getNameSINGLE_QUOTETerminalRuleCall_0_1());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getVLSFunctionDeclarationRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_2,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.SINGLE_QUOTE");
+				}
+				    |
+				lv_name_0_3=RULE_DOLLAR_ID
+				{
+					newLeafNode(lv_name_0_3, grammarAccess.getVLSFunctionDeclarationAccess().getNameDOLLAR_IDTerminalRuleCall_0_2());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getVLSFunctionDeclarationRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_3,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOLLAR_ID");
+				}
+				    |
+				lv_name_0_4=RULE_DOUBLE_DOLLAR_ID
+				{
+					newLeafNode(lv_name_0_4, grammarAccess.getVLSFunctionDeclarationAccess().getNameDOUBLE_DOLLAR_IDTerminalRuleCall_0_3());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getVLSFunctionDeclarationRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_4,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOUBLE_DOLLAR_ID");
+				}
+			)
+		)
+	)
+;
+
 // Entry rule entryRuleVLSFofFormula
 entryRuleVLSFofFormula returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getVLSFofFormulaRule()); }
@@ -196,9 +277,9 @@ ruleVLSFofFormula returns [EObject current=null]
 							"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
 					}
 					    |
-					lv_name_2_2=RULE_SIGNED_INT_ID
+					lv_name_2_2=RULE_SIGNED_LITERAL
 					{
-						newLeafNode(lv_name_2_2, grammarAccess.getVLSFofFormulaAccess().getNameSIGNED_INT_IDTerminalRuleCall_2_0_1());
+						newLeafNode(lv_name_2_2, grammarAccess.getVLSFofFormulaAccess().getNameSIGNED_LITERALTerminalRuleCall_2_0_1());
 					}
 					{
 						if ($current==null) {
@@ -208,7 +289,7 @@ ruleVLSFofFormula returns [EObject current=null]
 							$current,
 							"name",
 							lv_name_2_2,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.SIGNED_INT_ID");
+							"hu.bme.mit.inf.dslreasoner.VampireLanguage.SIGNED_LITERAL");
 					}
 					    |
 					lv_name_2_3=RULE_SINGLE_QUOTE
@@ -235,7 +316,7 @@ ruleVLSFofFormula returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVLSFofFormulaAccess().getFofRoleVLSRoleEnumRuleCall_4_0());
+					newCompositeNode(grammarAccess.getVLSFofFormulaAccess().getFofRoleVLSRoleParserRuleCall_4_0());
 				}
 				lv_fofRole_4_0=ruleVLSRole
 				{
@@ -310,6 +391,519 @@ ruleVLSFofFormula returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleVLSRole
+entryRuleVLSRole returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSRoleRule()); }
+	iv_ruleVLSRole=ruleVLSRole
+	{ $current=$iv_ruleVLSRole.current.getText(); }
+	EOF;
+
+// Rule VLSRole
+ruleVLSRole returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSAxiomParserRuleCall_0());
+		}
+		this_VLSAxiom_0=ruleVLSAxiom
+		{
+			$current.merge(this_VLSAxiom_0);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSConjectureParserRuleCall_1());
+		}
+		this_VLSConjecture_1=ruleVLSConjecture
+		{
+			$current.merge(this_VLSConjecture_1);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSHypothesisParserRuleCall_2());
+		}
+		this_VLSHypothesis_2=ruleVLSHypothesis
+		{
+			$current.merge(this_VLSHypothesis_2);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSDefinitionParserRuleCall_3());
+		}
+		this_VLSDefinition_3=ruleVLSDefinition
+		{
+			$current.merge(this_VLSDefinition_3);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSAssumptionParserRuleCall_4());
+		}
+		this_VLSAssumption_4=ruleVLSAssumption
+		{
+			$current.merge(this_VLSAssumption_4);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSLemmaParserRuleCall_5());
+		}
+		this_VLSLemma_5=ruleVLSLemma
+		{
+			$current.merge(this_VLSLemma_5);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSTheoremParserRuleCall_6());
+		}
+		this_VLSTheorem_6=ruleVLSTheorem
+		{
+			$current.merge(this_VLSTheorem_6);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSCorollaryParserRuleCall_7());
+		}
+		this_VLSCorollary_7=ruleVLSCorollary
+		{
+			$current.merge(this_VLSCorollary_7);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSNegated_ConjectureParserRuleCall_8());
+		}
+		this_VLSNegated_Conjecture_8=ruleVLSNegated_Conjecture
+		{
+			$current.merge(this_VLSNegated_Conjecture_8);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSPlainParserRuleCall_9());
+		}
+		this_VLSPlain_9=ruleVLSPlain
+		{
+			$current.merge(this_VLSPlain_9);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSTypeParserRuleCall_10());
+		}
+		this_VLSType_10=ruleVLSType
+		{
+			$current.merge(this_VLSType_10);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSFi_DomainParserRuleCall_11());
+		}
+		this_VLSFi_Domain_11=ruleVLSFi_Domain
+		{
+			$current.merge(this_VLSFi_Domain_11);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSFi_FunctorsParserRuleCall_12());
+		}
+		this_VLSFi_Functors_12=ruleVLSFi_Functors
+		{
+			$current.merge(this_VLSFi_Functors_12);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSFi_PredicatesParserRuleCall_13());
+		}
+		this_VLSFi_Predicates_13=ruleVLSFi_Predicates
+		{
+			$current.merge(this_VLSFi_Predicates_13);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSUnknownParserRuleCall_14());
+		}
+		this_VLSUnknown_14=ruleVLSUnknown
+		{
+			$current.merge(this_VLSUnknown_14);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleVLSAxiom
+entryRuleVLSAxiom returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSAxiomRule()); }
+	iv_ruleVLSAxiom=ruleVLSAxiom
+	{ $current=$iv_ruleVLSAxiom.current.getText(); }
+	EOF;
+
+// Rule VLSAxiom
+ruleVLSAxiom returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='axiom'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSAxiomAccess().getAxiomKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSConjecture
+entryRuleVLSConjecture returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSConjectureRule()); }
+	iv_ruleVLSConjecture=ruleVLSConjecture
+	{ $current=$iv_ruleVLSConjecture.current.getText(); }
+	EOF;
+
+// Rule VLSConjecture
+ruleVLSConjecture returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='conjecture'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSConjectureAccess().getConjectureKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSHypothesis
+entryRuleVLSHypothesis returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSHypothesisRule()); }
+	iv_ruleVLSHypothesis=ruleVLSHypothesis
+	{ $current=$iv_ruleVLSHypothesis.current.getText(); }
+	EOF;
+
+// Rule VLSHypothesis
+ruleVLSHypothesis returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='hypothesis'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSHypothesisAccess().getHypothesisKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSDefinition
+entryRuleVLSDefinition returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSDefinitionRule()); }
+	iv_ruleVLSDefinition=ruleVLSDefinition
+	{ $current=$iv_ruleVLSDefinition.current.getText(); }
+	EOF;
+
+// Rule VLSDefinition
+ruleVLSDefinition returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='definition'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSDefinitionAccess().getDefinitionKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSAssumption
+entryRuleVLSAssumption returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSAssumptionRule()); }
+	iv_ruleVLSAssumption=ruleVLSAssumption
+	{ $current=$iv_ruleVLSAssumption.current.getText(); }
+	EOF;
+
+// Rule VLSAssumption
+ruleVLSAssumption returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='assumption'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSAssumptionAccess().getAssumptionKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSLemma
+entryRuleVLSLemma returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSLemmaRule()); }
+	iv_ruleVLSLemma=ruleVLSLemma
+	{ $current=$iv_ruleVLSLemma.current.getText(); }
+	EOF;
+
+// Rule VLSLemma
+ruleVLSLemma returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='lemma'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSLemmaAccess().getLemmaKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSTheorem
+entryRuleVLSTheorem returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTheoremRule()); }
+	iv_ruleVLSTheorem=ruleVLSTheorem
+	{ $current=$iv_ruleVLSTheorem.current.getText(); }
+	EOF;
+
+// Rule VLSTheorem
+ruleVLSTheorem returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='theorem'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSTheoremAccess().getTheoremKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSCorollary
+entryRuleVLSCorollary returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSCorollaryRule()); }
+	iv_ruleVLSCorollary=ruleVLSCorollary
+	{ $current=$iv_ruleVLSCorollary.current.getText(); }
+	EOF;
+
+// Rule VLSCorollary
+ruleVLSCorollary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='corollary'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSCorollaryAccess().getCorollaryKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSNegated_Conjecture
+entryRuleVLSNegated_Conjecture returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSNegated_ConjectureRule()); }
+	iv_ruleVLSNegated_Conjecture=ruleVLSNegated_Conjecture
+	{ $current=$iv_ruleVLSNegated_Conjecture.current.getText(); }
+	EOF;
+
+// Rule VLSNegated_Conjecture
+ruleVLSNegated_Conjecture returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='negated_conjecture'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSNegated_ConjectureAccess().getNegated_conjectureKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSPlain
+entryRuleVLSPlain returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSPlainRule()); }
+	iv_ruleVLSPlain=ruleVLSPlain
+	{ $current=$iv_ruleVLSPlain.current.getText(); }
+	EOF;
+
+// Rule VLSPlain
+ruleVLSPlain returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='plain'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSPlainAccess().getPlainKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSType
+entryRuleVLSType returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTypeRule()); }
+	iv_ruleVLSType=ruleVLSType
+	{ $current=$iv_ruleVLSType.current.getText(); }
+	EOF;
+
+// Rule VLSType
+ruleVLSType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='type'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSTypeAccess().getTypeKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSFi_Domain
+entryRuleVLSFi_Domain returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSFi_DomainRule()); }
+	iv_ruleVLSFi_Domain=ruleVLSFi_Domain
+	{ $current=$iv_ruleVLSFi_Domain.current.getText(); }
+	EOF;
+
+// Rule VLSFi_Domain
+ruleVLSFi_Domain returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='fi_domain'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSFi_DomainAccess().getFi_domainKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSFi_Functors
+entryRuleVLSFi_Functors returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSFi_FunctorsRule()); }
+	iv_ruleVLSFi_Functors=ruleVLSFi_Functors
+	{ $current=$iv_ruleVLSFi_Functors.current.getText(); }
+	EOF;
+
+// Rule VLSFi_Functors
+ruleVLSFi_Functors returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='fi_functors'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSFi_FunctorsAccess().getFi_functorsKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSFi_Predicates
+entryRuleVLSFi_Predicates returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSFi_PredicatesRule()); }
+	iv_ruleVLSFi_Predicates=ruleVLSFi_Predicates
+	{ $current=$iv_ruleVLSFi_Predicates.current.getText(); }
+	EOF;
+
+// Rule VLSFi_Predicates
+ruleVLSFi_Predicates returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='fi_predicates'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSFi_PredicatesAccess().getFi_predicatesKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSUnknown
+entryRuleVLSUnknown returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSUnknownRule()); }
+	iv_ruleVLSUnknown=ruleVLSUnknown
+	{ $current=$iv_ruleVLSUnknown.current.getText(); }
+	EOF;
+
+// Rule VLSUnknown
+ruleVLSUnknown returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='unknown'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSUnknownAccess().getUnknownKeyword());
+	}
+;
+
 // Entry rule entryRuleVLSAnnotation
 entryRuleVLSAnnotation returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getVLSAnnotationRule()); }
@@ -327,54 +921,109 @@ ruleVLSAnnotation returns [EObject current=null]
 }:
 	(
 		(
-			(
-				lv_name_0_0=RULE_LOWER_WORD_ID
-				{
-					newLeafNode(lv_name_0_0, grammarAccess.getVLSAnnotationAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSAnnotationRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_0_0,
-						"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
-				}
-			)
+			otherlv_0='['
+			{
+				newLeafNode(otherlv_0, grammarAccess.getVLSAnnotationAccess().getLeftSquareBracketKeyword_0());
+			}
 		)?
 		(
 			(
-				{
-					newCompositeNode(grammarAccess.getVLSAnnotationAccess().getClosure_ruleClosure_RuleParserRuleCall_1_0());
-				}
-				lv_closure_rule_1_0=ruleClosure_Rule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getVLSAnnotationRule());
+				(
+					lv_name_1_1=RULE_LOWER_WORD_ID
+					{
+						newLeafNode(lv_name_1_1, grammarAccess.getVLSAnnotationAccess().getNameLOWER_WORD_IDTerminalRuleCall_1_0_0());
 					}
-					set(
-						$current,
-						"closure_rule",
-						lv_closure_rule_1_0,
-						"hu.bme.mit.inf.dslreasoner.VampireLanguage.Closure_Rule");
-					afterParserOrEnumRuleCall();
-				}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getVLSAnnotationRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_1_1,
+							"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
+					}
+					    |
+					lv_name_1_2=RULE_SINGLE_QUOTE
+					{
+						newLeafNode(lv_name_1_2, grammarAccess.getVLSAnnotationAccess().getNameSINGLE_QUOTETerminalRuleCall_1_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getVLSAnnotationRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_1_2,
+							"hu.bme.mit.inf.dslreasoner.VampireLanguage.SINGLE_QUOTE");
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getVLSAnnotationAccess().getNameVLSRoleParserRuleCall_1_0_2());
+					}
+					lv_name_1_3=ruleVLSRole
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getVLSAnnotationRule());
+						}
+						set(
+							$current,
+							"name",
+							lv_name_1_3,
+							"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSRole");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
+		)?
+		(
+			otherlv_2='('
+			{
+				newLeafNode(otherlv_2, grammarAccess.getVLSAnnotationAccess().getLeftParenthesisKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getVLSAnnotationAccess().getFollowupVLSAnnotationTermsParserRuleCall_2_1_0());
+					}
+					lv_followup_3_0=ruleVLSAnnotationTerms
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getVLSAnnotationRule());
+						}
+						set(
+							$current,
+							"followup",
+							lv_followup_3_0,
+							"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSAnnotationTerms");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_4=')'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getVLSAnnotationAccess().getRightParenthesisKeyword_2_2());
+			}
+		)?
+		(
+			otherlv_5=']'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getVLSAnnotationAccess().getRightSquareBracketKeyword_3());
+			}
+		)?
 	)
 ;
 
-// Entry rule entryRuleClosure_Rule
-entryRuleClosure_Rule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getClosure_RuleRule()); }
-	iv_ruleClosure_Rule=ruleClosure_Rule
-	{ $current=$iv_ruleClosure_Rule.current; }
+// Entry rule entryRuleVLSAnnotationTerms
+entryRuleVLSAnnotationTerms returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSAnnotationTermsRule()); }
+	iv_ruleVLSAnnotationTerms=ruleVLSAnnotationTerms
+	{ $current=$iv_ruleVLSAnnotationTerms.current; }
 	EOF;
 
-// Rule Closure_Rule
-ruleClosure_Rule returns [EObject current=null]
+// Rule VLSAnnotationTerms
+ruleVLSAnnotationTerms returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -384,41 +1033,48 @@ ruleClosure_Rule returns [EObject current=null]
 	(
 		(
 			(
-				lv_name_0_0=RULE_LOWER_WORD_ID
 				{
-					newLeafNode(lv_name_0_0, grammarAccess.getClosure_RuleAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0());
+					newCompositeNode(grammarAccess.getVLSAnnotationTermsAccess().getTermsVLSAnnotationParserRuleCall_0_0());
 				}
+				lv_terms_0_0=ruleVLSAnnotation
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getClosure_RuleRule());
+						$current = createModelElementForParent(grammarAccess.getVLSAnnotationTermsRule());
 					}
-					setWithLastConsumed(
+					add(
 						$current,
-						"name",
-						lv_name_0_0,
-						"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
+						"terms",
+						lv_terms_0_0,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSAnnotation");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		    |
 		(
-			otherlv_1='('
+			otherlv_1=','
 			{
-				newLeafNode(otherlv_1, grammarAccess.getClosure_RuleAccess().getLeftParenthesisKeyword_1_0());
+				newLeafNode(otherlv_1, grammarAccess.getVLSAnnotationTermsAccess().getCommaKeyword_1_0());
 			}
-			{
-				newCompositeNode(grammarAccess.getClosure_RuleAccess().getVLSAnnotationParserRuleCall_1_1());
-			}
-			this_VLSAnnotation_2=ruleVLSAnnotation
-			{
-				$current = $this_VLSAnnotation_2.current;
-				afterParserOrEnumRuleCall();
-			}
-			otherlv_3=')'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getClosure_RuleAccess().getRightParenthesisKeyword_1_2());
-			}
-		)
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getVLSAnnotationTermsAccess().getTermsVLSAnnotationParserRuleCall_1_1_0());
+					}
+					lv_terms_2_0=ruleVLSAnnotation
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getVLSAnnotationTermsRule());
+						}
+						add(
+							$current,
+							"terms",
+							lv_terms_2_0,
+							"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSAnnotation");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
 	)
 ;
 
@@ -1100,67 +1756,21 @@ ruleVLSFunction returns [EObject current=null]
 		)
 		(
 			(
-				(
-					lv_constant_1_1=RULE_LOWER_WORD_ID
-					{
-						newLeafNode(lv_constant_1_1, grammarAccess.getVLSFunctionAccess().getConstantLOWER_WORD_IDTerminalRuleCall_1_0_0());
+				{
+					newCompositeNode(grammarAccess.getVLSFunctionAccess().getConstantVLSFunctionDeclarationParserRuleCall_1_0());
+				}
+				lv_constant_1_0=ruleVLSFunctionDeclaration
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSFunctionRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"constant",
-							lv_constant_1_1,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
-					}
-					    |
-					lv_constant_1_2=RULE_SINGLE_QUOTE
-					{
-						newLeafNode(lv_constant_1_2, grammarAccess.getVLSFunctionAccess().getConstantSINGLE_QUOTETerminalRuleCall_1_0_1());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"constant",
-							lv_constant_1_2,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.SINGLE_QUOTE");
-					}
-					    |
-					lv_constant_1_3=RULE_DOLLAR_ID
-					{
-						newLeafNode(lv_constant_1_3, grammarAccess.getVLSFunctionAccess().getConstantDOLLAR_IDTerminalRuleCall_1_0_2());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"constant",
-							lv_constant_1_3,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOLLAR_ID");
-					}
-					    |
-					lv_constant_1_4=RULE_DOUBLE_DOLLAR_ID
-					{
-						newLeafNode(lv_constant_1_4, grammarAccess.getVLSFunctionAccess().getConstantDOUBLE_DOLLAR_IDTerminalRuleCall_1_0_3());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"constant",
-							lv_constant_1_4,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOUBLE_DOLLAR_ID");
-					}
-				)
+					set(
+						$current,
+						"constant",
+						lv_constant_1_0,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSFunctionDeclaration");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)
 		(
@@ -1318,67 +1928,21 @@ ruleVLSFunctionFof returns [EObject current=null]
 	(
 		(
 			(
-				(
-					lv_name_0_1=RULE_LOWER_WORD_ID
-					{
-						newLeafNode(lv_name_0_1, grammarAccess.getVLSFunctionFofAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0_0());
+				{
+					newCompositeNode(grammarAccess.getVLSFunctionFofAccess().getFunctorVLSFunctionDeclarationParserRuleCall_0_0());
+				}
+				lv_functor_0_0=ruleVLSFunctionDeclaration
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSFunctionFofRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionFofRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_0_1,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.LOWER_WORD_ID");
-					}
-					    |
-					lv_name_0_2=RULE_SINGLE_QUOTE
-					{
-						newLeafNode(lv_name_0_2, grammarAccess.getVLSFunctionFofAccess().getNameSINGLE_QUOTETerminalRuleCall_0_0_1());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionFofRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_0_2,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.SINGLE_QUOTE");
-					}
-					    |
-					lv_name_0_3=RULE_DOLLAR_ID
-					{
-						newLeafNode(lv_name_0_3, grammarAccess.getVLSFunctionFofAccess().getNameDOLLAR_IDTerminalRuleCall_0_0_2());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionFofRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_0_3,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOLLAR_ID");
-					}
-					    |
-					lv_name_0_4=RULE_DOUBLE_DOLLAR_ID
-					{
-						newLeafNode(lv_name_0_4, grammarAccess.getVLSFunctionFofAccess().getNameDOUBLE_DOLLAR_IDTerminalRuleCall_0_0_3());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSFunctionFofRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_0_4,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOUBLE_DOLLAR_ID");
-					}
-				)
+					set(
+						$current,
+						"functor",
+						lv_functor_0_0,
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSFunctionDeclaration");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)
 		(
@@ -1471,9 +2035,9 @@ ruleVLSDefinedTerm returns [EObject current=null]
 						"hu.bme.mit.inf.dslreasoner.VampireLanguage.DOUBLE_QUOTE");
 				}
 				    |
-				lv_name_0_2=RULE_SIGNED_INT_ID
+				lv_name_0_2=RULE_SIGNED_LITERAL
 				{
-					newLeafNode(lv_name_0_2, grammarAccess.getVLSDefinedTermAccess().getNameSIGNED_INT_IDTerminalRuleCall_0_1());
+					newLeafNode(lv_name_0_2, grammarAccess.getVLSDefinedTermAccess().getNameSIGNED_LITERALTerminalRuleCall_0_1());
 				}
 				{
 					if ($current==null) {
@@ -1483,7 +2047,7 @@ ruleVLSDefinedTerm returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_0_2,
-						"hu.bme.mit.inf.dslreasoner.VampireLanguage.SIGNED_INT_ID");
+						"hu.bme.mit.inf.dslreasoner.VampireLanguage.SIGNED_LITERAL");
 				}
 				    |
 				lv_name_0_3=RULE_SIGNED_REAL_ID
@@ -1520,137 +2084,6 @@ ruleVLSDefinedTerm returns [EObject current=null]
 	)
 ;
 
-// Rule VLSRole
-ruleVLSRole returns [Enumerator current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			enumLiteral_0='axiom'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getAxiomEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_0, grammarAccess.getVLSRoleAccess().getAxiomEnumLiteralDeclaration_0());
-			}
-		)
-		    |
-		(
-			enumLiteral_1='conjecture'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getConjectureEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_1, grammarAccess.getVLSRoleAccess().getConjectureEnumLiteralDeclaration_1());
-			}
-		)
-		    |
-		(
-			enumLiteral_2='hypothesis'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getHypothesisEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_2, grammarAccess.getVLSRoleAccess().getHypothesisEnumLiteralDeclaration_2());
-			}
-		)
-		    |
-		(
-			enumLiteral_3='definition'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getDefinitionEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_3, grammarAccess.getVLSRoleAccess().getDefinitionEnumLiteralDeclaration_3());
-			}
-		)
-		    |
-		(
-			enumLiteral_4='assumption'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getAssumptionEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_4, grammarAccess.getVLSRoleAccess().getAssumptionEnumLiteralDeclaration_4());
-			}
-		)
-		    |
-		(
-			enumLiteral_5='lemma'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getLemmaEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_5, grammarAccess.getVLSRoleAccess().getLemmaEnumLiteralDeclaration_5());
-			}
-		)
-		    |
-		(
-			enumLiteral_6='theorem'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getTheoremEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_6, grammarAccess.getVLSRoleAccess().getTheoremEnumLiteralDeclaration_6());
-			}
-		)
-		    |
-		(
-			enumLiteral_7='corollary'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getCorollaryEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_7, grammarAccess.getVLSRoleAccess().getCorollaryEnumLiteralDeclaration_7());
-			}
-		)
-		    |
-		(
-			enumLiteral_8='negated_conjecture'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getNegated_conjectureEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_8, grammarAccess.getVLSRoleAccess().getNegated_conjectureEnumLiteralDeclaration_8());
-			}
-		)
-		    |
-		(
-			enumLiteral_9='plain'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getPlainEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_9, grammarAccess.getVLSRoleAccess().getPlainEnumLiteralDeclaration_9());
-			}
-		)
-		    |
-		(
-			enumLiteral_10='type'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getTypeEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_10, grammarAccess.getVLSRoleAccess().getTypeEnumLiteralDeclaration_10());
-			}
-		)
-		    |
-		(
-			enumLiteral_11='fi_domain'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getFi_domainEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_11, grammarAccess.getVLSRoleAccess().getFi_domainEnumLiteralDeclaration_11());
-			}
-		)
-		    |
-		(
-			enumLiteral_12='fi_functors'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getFi_functorsEnumLiteralDeclaration_12().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_12, grammarAccess.getVLSRoleAccess().getFi_functorsEnumLiteralDeclaration_12());
-			}
-		)
-		    |
-		(
-			enumLiteral_13='fi_predicates'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getFi_predicatesEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_13, grammarAccess.getVLSRoleAccess().getFi_predicatesEnumLiteralDeclaration_13());
-			}
-		)
-		    |
-		(
-			enumLiteral_14='unknown'
-			{
-				$current = grammarAccess.getVLSRoleAccess().getUnknownEnumLiteralDeclaration_14().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_14, grammarAccess.getVLSRoleAccess().getUnknownEnumLiteralDeclaration_14());
-			}
-		)
-	)
-;
-
 fragment RULE_ALPHA_NUMERIC : ('a'..'z'|'A'..'Z'|'0'..'9'|'_');
 
 RULE_UPPER_WORD_ID : 'A'..'Z' RULE_ALPHA_NUMERIC*;
@@ -1661,23 +2094,25 @@ RULE_DOUBLE_QUOTE : '"' ('\\' ('"'|'\\')|~(('\\'|'"')))* '"';
 
 RULE_SINGLE_QUOTE : '\'' ('\\' ('\''|'\\')|~(('\\'|'\'')))+ '\'';
 
+fragment RULE_SIGN : ('+'|'-');
+
 RULE_DOLLAR_ID : '$' RULE_LOWER_WORD_ID;
 
 RULE_DOUBLE_DOLLAR_ID : '$$' RULE_LOWER_WORD_ID;
 
-fragment RULE_UNSIGNED_INT_ID : ('0'|'1'..'9' RULE_INT?);
+fragment RULE_LITERAL : ('0'|'1'..'9' RULE_INT?);
 
-RULE_SIGNED_INT_ID : ('+'|'-')? RULE_UNSIGNED_INT_ID;
+RULE_SIGNED_LITERAL : RULE_SIGN* RULE_LITERAL;
 
-fragment RULE_UNSIGNED_REAL_FRAC_ID : RULE_UNSIGNED_INT_ID '.' RULE_INT;
+fragment RULE_UNSIGNED_REAL_FRAC_ID : RULE_LITERAL '.' RULE_INT;
 
-fragment RULE_UNSIGNED_REAL_EXP_ID : (RULE_UNSIGNED_INT_ID|RULE_UNSIGNED_REAL_FRAC_ID) 'Ee' ('+'|'-')? RULE_INT;
+fragment RULE_UNSIGNED_REAL_EXP_ID : (RULE_LITERAL|RULE_UNSIGNED_REAL_FRAC_ID) 'Ee' RULE_SIGN* RULE_INT;
 
-RULE_SIGNED_REAL_ID : ('+'|'-')? (RULE_UNSIGNED_REAL_FRAC_ID|RULE_UNSIGNED_REAL_EXP_ID);
+RULE_SIGNED_REAL_ID : RULE_SIGN* (RULE_UNSIGNED_REAL_FRAC_ID|RULE_UNSIGNED_REAL_EXP_ID);
 
-fragment RULE_UNSIGNED_RAT_ID : RULE_UNSIGNED_INT_ID '/' '1'..'9' RULE_INT?;
+fragment RULE_UNSIGNED_RAT_ID : RULE_LITERAL '/' '1'..'9' RULE_INT?;
 
-RULE_SIGNED_RAT_ID : ('+'|'-')? RULE_UNSIGNED_RAT_ID;
+RULE_SIGNED_RAT_ID : RULE_SIGN* RULE_UNSIGNED_RAT_ID;
 
 fragment RULE_ANY_OTHER : '%' ~(('\n'|'\r'))* '\r';
 

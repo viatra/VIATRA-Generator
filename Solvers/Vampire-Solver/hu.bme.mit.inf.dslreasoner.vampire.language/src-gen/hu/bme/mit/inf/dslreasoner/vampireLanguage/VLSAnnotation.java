@@ -3,6 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.vampireLanguage;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -15,7 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getName <em>Name</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getClosure_rule <em>Closure rule</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getFollowup <em>Followup</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getTerms <em>Terms</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSAnnotation()
@@ -51,29 +54,45 @@ public interface VLSAnnotation extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Closure rule</b></em>' containment reference.
+   * Returns the value of the '<em><b>Followup</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Closure rule</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Followup</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Closure rule</em>' containment reference.
-   * @see #setClosure_rule(VLSAnnotation)
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSAnnotation_Closure_rule()
+   * @return the value of the '<em>Followup</em>' containment reference.
+   * @see #setFollowup(VLSAnnotation)
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSAnnotation_Followup()
    * @model containment="true"
    * @generated
    */
-  VLSAnnotation getClosure_rule();
+  VLSAnnotation getFollowup();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getClosure_rule <em>Closure rule</em>}' containment reference.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation#getFollowup <em>Followup</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Closure rule</em>' containment reference.
-   * @see #getClosure_rule()
+   * @param value the new value of the '<em>Followup</em>' containment reference.
+   * @see #getFollowup()
    * @generated
    */
-  void setClosure_rule(VLSAnnotation value);
+  void setFollowup(VLSAnnotation value);
+
+  /**
+   * Returns the value of the '<em><b>Terms</b></em>' containment reference list.
+   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Terms</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Terms</em>' containment reference list.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSAnnotation_Terms()
+   * @model containment="true"
+   * @generated
+   */
+  EList<VLSAnnotation> getTerms();
 
 } // VLSAnnotation

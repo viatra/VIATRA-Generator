@@ -6,14 +6,21 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSAnnotation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +31,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSAnnotationImpl#getName <em>Name</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSAnnotationImpl#getClosure_rule <em>Closure rule</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSAnnotationImpl#getFollowup <em>Followup</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSAnnotationImpl#getTerms <em>Terms</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,14 +60,24 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getClosure_rule() <em>Closure rule</em>}' containment reference.
+   * The cached value of the '{@link #getFollowup() <em>Followup</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getClosure_rule()
+   * @see #getFollowup()
    * @generated
    * @ordered
    */
-  protected VLSAnnotation closure_rule;
+  protected VLSAnnotation followup;
+
+  /**
+   * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTerms()
+   * @generated
+   * @ordered
+   */
+  protected EList<VLSAnnotation> terms;
 
   /**
    * <!-- begin-user-doc -->
@@ -110,9 +128,9 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public VLSAnnotation getClosure_rule()
+  public VLSAnnotation getFollowup()
   {
-    return closure_rule;
+    return followup;
   }
 
   /**
@@ -120,13 +138,13 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetClosure_rule(VLSAnnotation newClosure_rule, NotificationChain msgs)
+  public NotificationChain basicSetFollowup(VLSAnnotation newFollowup, NotificationChain msgs)
   {
-    VLSAnnotation oldClosure_rule = closure_rule;
-    closure_rule = newClosure_rule;
+    VLSAnnotation oldFollowup = followup;
+    followup = newFollowup;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE, oldClosure_rule, newClosure_rule);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP, oldFollowup, newFollowup);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -137,20 +155,34 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setClosure_rule(VLSAnnotation newClosure_rule)
+  public void setFollowup(VLSAnnotation newFollowup)
   {
-    if (newClosure_rule != closure_rule)
+    if (newFollowup != followup)
     {
       NotificationChain msgs = null;
-      if (closure_rule != null)
-        msgs = ((InternalEObject)closure_rule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE, null, msgs);
-      if (newClosure_rule != null)
-        msgs = ((InternalEObject)newClosure_rule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE, null, msgs);
-      msgs = basicSetClosure_rule(newClosure_rule, msgs);
+      if (followup != null)
+        msgs = ((InternalEObject)followup).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP, null, msgs);
+      if (newFollowup != null)
+        msgs = ((InternalEObject)newFollowup).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP, null, msgs);
+      msgs = basicSetFollowup(newFollowup, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE, newClosure_rule, newClosure_rule));
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP, newFollowup, newFollowup));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<VLSAnnotation> getTerms()
+  {
+    if (terms == null)
+    {
+      terms = new EObjectContainmentEList<VLSAnnotation>(VLSAnnotation.class, this, VampireLanguagePackage.VLS_ANNOTATION__TERMS);
+    }
+    return terms;
   }
 
   /**
@@ -163,8 +195,10 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE:
-        return basicSetClosure_rule(null, msgs);
+      case VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP:
+        return basicSetFollowup(null, msgs);
+      case VampireLanguagePackage.VLS_ANNOTATION__TERMS:
+        return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -181,8 +215,10 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
     {
       case VampireLanguagePackage.VLS_ANNOTATION__NAME:
         return getName();
-      case VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE:
-        return getClosure_rule();
+      case VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP:
+        return getFollowup();
+      case VampireLanguagePackage.VLS_ANNOTATION__TERMS:
+        return getTerms();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -192,6 +228,7 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -200,8 +237,12 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
       case VampireLanguagePackage.VLS_ANNOTATION__NAME:
         setName((String)newValue);
         return;
-      case VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE:
-        setClosure_rule((VLSAnnotation)newValue);
+      case VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP:
+        setFollowup((VLSAnnotation)newValue);
+        return;
+      case VampireLanguagePackage.VLS_ANNOTATION__TERMS:
+        getTerms().clear();
+        getTerms().addAll((Collection<? extends VLSAnnotation>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -220,8 +261,11 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
       case VampireLanguagePackage.VLS_ANNOTATION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE:
-        setClosure_rule((VLSAnnotation)null);
+      case VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP:
+        setFollowup((VLSAnnotation)null);
+        return;
+      case VampireLanguagePackage.VLS_ANNOTATION__TERMS:
+        getTerms().clear();
         return;
     }
     super.eUnset(featureID);
@@ -239,8 +283,10 @@ public class VLSAnnotationImpl extends MinimalEObjectImpl.Container implements V
     {
       case VampireLanguagePackage.VLS_ANNOTATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case VampireLanguagePackage.VLS_ANNOTATION__CLOSURE_RULE:
-        return closure_rule != null;
+      case VampireLanguagePackage.VLS_ANNOTATION__FOLLOWUP:
+        return followup != null;
+      case VampireLanguagePackage.VLS_ANNOTATION__TERMS:
+        return terms != null && !terms.isEmpty();
     }
     return super.eIsSet(featureID);
   }

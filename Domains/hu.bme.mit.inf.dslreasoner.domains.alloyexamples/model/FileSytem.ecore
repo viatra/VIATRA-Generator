@@ -8,7 +8,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Dir"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="live" upperBound="-1" eType="#//FSObject"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FSObject" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Dir"

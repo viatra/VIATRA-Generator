@@ -54,7 +54,6 @@ public interface VLSFofFormula extends EObject
 
   /**
    * Returns the value of the '<em><b>Fof Role</b></em>' attribute.
-   * The literals are from the enumeration {@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Fof Role</em>' attribute isn't clear,
@@ -62,24 +61,22 @@ public interface VLSFofFormula extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Fof Role</em>' attribute.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole
-   * @see #setFofRole(VLSRole)
+   * @see #setFofRole(String)
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFofFormula_FofRole()
    * @model
    * @generated
    */
-  VLSRole getFofRole();
+  String getFofRole();
 
   /**
    * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula#getFofRole <em>Fof Role</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Fof Role</em>' attribute.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole
    * @see #getFofRole()
    * @generated
    */
-  void setFofRole(VLSRole value);
+  void setFofRole(String value);
 
   /**
    * Returns the value of the '<em><b>Fof Formula</b></em>' containment reference.
