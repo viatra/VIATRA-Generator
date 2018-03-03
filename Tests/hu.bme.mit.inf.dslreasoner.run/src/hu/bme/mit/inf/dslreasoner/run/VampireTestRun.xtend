@@ -28,7 +28,7 @@ class VampireTestRun {
 		
 		//assertion is negated manually because logic problem can only handle axioms (assertions)
 		//so ya
-		problem1.add(Assertion( ! ( !(X && Y) <=> ( !X || !Y)) ))
+		problem1.add(Assertion( !(X && Y) <=> ( !X || !Y)) )
 		//do this for next meeting
 		
 		println("Problem Created");

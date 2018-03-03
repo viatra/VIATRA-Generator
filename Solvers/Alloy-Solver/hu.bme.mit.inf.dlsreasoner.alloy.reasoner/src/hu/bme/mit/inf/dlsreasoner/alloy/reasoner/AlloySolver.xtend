@@ -57,7 +57,7 @@ class AlloySolver extends LogicReasoner{
 		workspace.writeModel(problem, "logicModel.xmi").toFileString
 		
 		
-		val out = new PrintWriter("vampireCode.tptp")
+		val out = new PrintWriter("vampireCode.als")
 		out.println(alloyCode)
 		out.close()
 		

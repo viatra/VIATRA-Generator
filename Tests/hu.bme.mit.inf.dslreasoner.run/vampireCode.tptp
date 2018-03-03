@@ -1,16 +1,1 @@
-enum util'boolean {
-	util'boolean'true, util'boolean'false
-}
-one sig util'language {
-	constant1 : one util'boolean,
-	constant2 : one util'boolean
-}
-abstract sig util'Object {
-}
-fact ObjectTypeDefinition {
-	util'Object = none
-}
-fact assertion1 {
-	not (not (util'language.constant1 = util'boolean'true && util'language.constant2 = util'boolean'true) <=> (not (util'language.constant1 = util'boolean'true) or not (util'language.constant2 = util'boolean'true)))
-}
-run { } for exactly 5 util'Object , 0 Int
+%This is an initial Test Comment  fof ( assertion1 , conjecture , ~ ( constant1 & constant2 ) <=> ( ~ constant1 | ~ constant2 ) ) .

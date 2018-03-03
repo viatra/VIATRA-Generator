@@ -34,6 +34,8 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSImplies;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInt;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
@@ -72,7 +74,7 @@ public class Logic2VampireLanguageMapper {
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration configuration) {
     VLSComment _createVLSComment = this.factory.createVLSComment();
     final Procedure1<VLSComment> _function = (VLSComment it) -> {
-      it.setComment("%This is an initial Test Comment");
+      it.setComment("%This is an initial Test Comment \r");
     };
     final VLSComment initialComment = ObjectExtensions.<VLSComment>operator_doubleArrow(_createVLSComment, _function);
     VampireModel _createVampireModel = this.factory.createVampireModel();
@@ -148,13 +150,19 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected VLSTerm _transformTerm(final IntLiteral literal, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from int to String");
+    VLSInt _createVLSInt = this.factory.createVLSInt();
+    final Procedure1<VLSInt> _function = (VLSInt it) -> {
+      it.setValue(Integer.valueOf(literal.getValue()).toString());
+    };
+    return ObjectExtensions.<VLSInt>operator_doubleArrow(_createVLSInt, _function);
   }
   
   protected VLSTerm _transformTerm(final RealLiteral literal, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from BigDecimal to String");
+    VLSReal _createVLSReal = this.factory.createVLSReal();
+    final Procedure1<VLSReal> _function = (VLSReal it) -> {
+      it.setValue(literal.getValue().toString());
+    };
+    return ObjectExtensions.<VLSReal>operator_doubleArrow(_createVLSReal, _function);
   }
   
   protected VLSTerm _transformTerm(final Not not, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {

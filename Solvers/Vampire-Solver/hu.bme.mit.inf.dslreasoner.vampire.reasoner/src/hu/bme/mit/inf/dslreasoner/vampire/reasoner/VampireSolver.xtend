@@ -10,6 +10,7 @@ import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.io.PrintWriter
+import hu.bme.mit.inf.dslreasoner.VampireLanguageStandaloneSetup
 
 class VampireSolver extends LogicReasoner{
 	
@@ -17,7 +18,7 @@ class VampireSolver extends LogicReasoner{
 		VampireLanguagePackage.eINSTANCE.eClass
 		val x = new VampireLanguageStandaloneSetupGenerated
 		//ASK OSZKAR: error
-		x.createInjectorAndDoEMFRegistration
+		VampireLanguageStandaloneSetup::doSetup()
 	}
 	
 	 val Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper()
