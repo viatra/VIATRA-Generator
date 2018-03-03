@@ -13,9 +13,6 @@
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSComment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSComment/comment"/>
     </genClasses>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSFunctionDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFunctionDeclaration/name"/>
-    </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSFofFormula">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFofFormula/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFofFormula/fofRole"/>
@@ -28,16 +25,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSAnnotation/terms"/>
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSTerm"/>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSFofTerm"/>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSVariable/name"/>
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSFunctionFof">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSFunctionFof/functor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFunctionFof/functor"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSFunctionFof/terms"/>
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSDefinedTerm">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSDefinedTerm/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSDefinedTerm/value"/>
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSEquivalent">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSEquivalent/left"/>
@@ -94,9 +90,26 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSAssignment/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSAssignment/right"/>
     </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSConstant/name"/>
+    </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSTrue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSTrue/name"/>
+    </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSFalse">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFalse/name"/>
+    </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSFunction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSFunction/constant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFunction/constant"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSFunction/terms"/>
     </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSLess">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSLess/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSLess/terms"/>
+    </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSInt"/>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSReal"/>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSRational"/>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSDoubleQuote"/>
   </genPackages>
 </genmodel:GenModel>

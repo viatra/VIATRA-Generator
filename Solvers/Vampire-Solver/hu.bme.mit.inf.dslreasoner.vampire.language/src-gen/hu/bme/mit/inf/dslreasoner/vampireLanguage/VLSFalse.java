@@ -3,25 +3,24 @@
  */
 package hu.bme.mit.inf.dslreasoner.vampireLanguage;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>VLS Function Declaration</b></em>'.
+ * A representation of the model object '<em><b>VLS False</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFunctionDeclaration()
+ * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFalse()
  * @model
  * @generated
  */
-public interface VLSFunctionDeclaration extends EObject
+public interface VLSFalse extends VLSTerm
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -33,14 +32,14 @@ public interface VLSFunctionDeclaration extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFunctionDeclaration_Name()
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFalse_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -49,4 +48,4 @@ public interface VLSFunctionDeclaration extends EObject
    */
   void setName(String value);
 
-} // VLSFunctionDeclaration
+} // VLSFalse

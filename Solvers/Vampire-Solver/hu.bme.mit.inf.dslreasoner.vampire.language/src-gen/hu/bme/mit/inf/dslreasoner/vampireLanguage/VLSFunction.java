@@ -25,34 +25,34 @@ import org.eclipse.emf.common.util.EList;
 public interface VLSFunction extends VLSTerm
 {
   /**
-   * Returns the value of the '<em><b>Constant</b></em>' containment reference.
+   * Returns the value of the '<em><b>Constant</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Constant</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Constant</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Constant</em>' containment reference.
-   * @see #setConstant(VLSFunctionDeclaration)
+   * @return the value of the '<em>Constant</em>' attribute.
+   * @see #setConstant(String)
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSFunction_Constant()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  VLSFunctionDeclaration getConstant();
+  String getConstant();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant <em>Constant</em>}' containment reference.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction#getConstant <em>Constant</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constant</em>' containment reference.
+   * @param value the new value of the '<em>Constant</em>' attribute.
    * @see #getConstant()
    * @generated
    */
-  void setConstant(VLSFunctionDeclaration value);
+  void setConstant(String value);
 
   /**
    * Returns the value of the '<em><b>Terms</b></em>' containment reference list.
-   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm}.
+   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Terms</em>' containment reference list isn't clear,
@@ -64,6 +64,6 @@ public interface VLSFunction extends VLSTerm
    * @model containment="true"
    * @generated
    */
-  EList<VLSFofTerm> getTerms();
+  EList<VLSTerm> getTerms();
 
 } // VLSFunction

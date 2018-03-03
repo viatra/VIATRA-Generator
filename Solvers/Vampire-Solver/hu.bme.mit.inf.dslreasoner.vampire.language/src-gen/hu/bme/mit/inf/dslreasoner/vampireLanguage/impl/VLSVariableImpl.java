@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VLSVariableImpl extends VLSFofTermImpl implements VLSVariable
+public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

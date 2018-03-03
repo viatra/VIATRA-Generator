@@ -42,15 +42,6 @@ public interface VampireLanguageFactory extends EFactory
   VLSComment createVLSComment();
 
   /**
-   * Returns a new object of class '<em>VLS Function Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Function Declaration</em>'.
-   * @generated
-   */
-  VLSFunctionDeclaration createVLSFunctionDeclaration();
-
-  /**
    * Returns a new object of class '<em>VLS Fof Formula</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -76,15 +67,6 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSTerm createVLSTerm();
-
-  /**
-   * Returns a new object of class '<em>VLS Fof Term</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Fof Term</em>'.
-   * @generated
-   */
-  VLSFofTerm createVLSFofTerm();
 
   /**
    * Returns a new object of class '<em>VLS Variable</em>'.
@@ -240,6 +222,33 @@ public interface VampireLanguageFactory extends EFactory
   VLSAssignment createVLSAssignment();
 
   /**
+   * Returns a new object of class '<em>VLS Constant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Constant</em>'.
+   * @generated
+   */
+  VLSConstant createVLSConstant();
+
+  /**
+   * Returns a new object of class '<em>VLS True</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS True</em>'.
+   * @generated
+   */
+  VLSTrue createVLSTrue();
+
+  /**
+   * Returns a new object of class '<em>VLS False</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS False</em>'.
+   * @generated
+   */
+  VLSFalse createVLSFalse();
+
+  /**
    * Returns a new object of class '<em>VLS Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -247,6 +256,51 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSFunction createVLSFunction();
+
+  /**
+   * Returns a new object of class '<em>VLS Less</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Less</em>'.
+   * @generated
+   */
+  VLSLess createVLSLess();
+
+  /**
+   * Returns a new object of class '<em>VLS Int</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Int</em>'.
+   * @generated
+   */
+  VLSInt createVLSInt();
+
+  /**
+   * Returns a new object of class '<em>VLS Real</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Real</em>'.
+   * @generated
+   */
+  VLSReal createVLSReal();
+
+  /**
+   * Returns a new object of class '<em>VLS Rational</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Rational</em>'.
+   * @generated
+   */
+  VLSRational createVLSRational();
+
+  /**
+   * Returns a new object of class '<em>VLS Double Quote</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Double Quote</em>'.
+   * @generated
+   */
+  VLSDoubleQuote createVLSDoubleQuote();
 
   /**
    * Returns the package supported by this factory.

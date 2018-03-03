@@ -59,7 +59,7 @@ VLSComment:
 	//need to add a new line at the end of the file for the case where the last line is a comment
 ;
 
-VLSFunctionDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
+//VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
 
 
 
@@ -196,10 +196,10 @@ VLSUnaryNegation   returns VLSTerm:
 ;
 
 VLSUnaryInfix returns VLSTerm:
-	VLSFunction (({VLSInequality.left = current} "!=" |	
+	VLSAtomic (({VLSInequality.left = current} "!=" |	
 		{VLSEquality.left = current} "=" |
 		{VLSAssignment.left = current} ":=")
-		right = VLSFunction)? 
+		right = VLSAtomic)? 
 ;
 
 /*
@@ -211,14 +211,26 @@ enum VLSDefinedFunctor:
     ;
 */
 
-VLSFunction returns VLSTerm:
-	//? on next line causes warning
-	//TODO might need replace DOLLAR_ID with enum rule 
-	//{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
-	{VLSFunction} constant = VLSFunctionDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?	
+VLSAtomic returns VLSTerm:
+	VLSAtomicConstant | VLSAtomicFunction
 ;
 
-VLSFofTerm:
+VLSAtomicConstant returns VLSTerm:
+	//{VLSConstant} name = VLSConstantDeclaration |
+	{VLSConstant} name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) |
+	{VLSTrue} name = '$true' |
+	{VLSFalse} name = '$false'
+;
+
+VLSAtomicFunction returns VLSTerm:
+	//? on next line causes warning
+	//TODO might need replace DOLLAR_ID with enum rule 
+	//{VLSFunction} name = VLSConstantDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')' ) |
+	{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')') |
+	{VLSLess} name = '$less' '(' terms += VLSFofTerm ',' terms += VLSFofTerm ')' 
+;
+
+VLSFofTerm returns VLSTerm:
 	//(VLSVariable | VLSFunction | VLSTffConditional | VLSTffLet | VLSTffTuple)
 	(VLSVariable | VLSFunctionFof | VLSDefinedTerm )
 ;
@@ -230,9 +242,12 @@ VLSVariable:
 VLSFunctionFof:
 	//? on next line causes warning
 	//TODO might need replace DOLLAR_ID with enum rule 
-	functor = VLSFunctionDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
+	functor = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
 ;
 
 VLSDefinedTerm:
-	name = (DOUBLE_QUOTE | SIGNED_LITERAL | SIGNED_REAL_ID | SIGNED_RAT_ID)
+	{VLSInt} value = SIGNED_LITERAL |
+	{VLSReal} value = SIGNED_REAL_ID |
+	{VLSRational} value = SIGNED_RAT_ID |
+	{VLSDoubleQuote} value = DOUBLE_QUOTE
 ;

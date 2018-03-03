@@ -3,10 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Reasoner
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.vampire.reasoner;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: hu.bme.mit.inf.dslreasoner.vampire.language;bundle-version="1.0.0",
+Export-Package: hu.bme.mit.inf.dslreasoner.vampire.reasoner,
+  hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder
+Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.12.0",
   hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
-  hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
-  org.eclipse.xtend.lib;bundle-version="2.12.0",
+  hu.bme.mit.inf.dslreasoner.vampire.language;bundle-version="1.0.0",
   org.eclipse.viatra.query.runtime;bundle-version="1.7.0",
-  org.eclipse.viatra.query.runtime.base.itc;bundle-version="1.7.0"
+  org.eclipse.viatra.query.runtime.base.itc;bundle-version="1.7.0",
+  hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

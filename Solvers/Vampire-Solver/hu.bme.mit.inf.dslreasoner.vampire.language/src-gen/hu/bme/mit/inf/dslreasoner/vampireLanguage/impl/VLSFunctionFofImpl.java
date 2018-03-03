@@ -3,9 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import java.util.Collection;
@@ -37,17 +36,27 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
+public class VLSFunctionFofImpl extends VLSTermImpl implements VLSFunctionFof
 {
   /**
-   * The cached value of the '{@link #getFunctor() <em>Functor</em>}' containment reference.
+   * The default value of the '{@link #getFunctor() <em>Functor</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getFunctor()
    * @generated
    * @ordered
    */
-  protected VLSFunctionDeclaration functor;
+  protected static final String FUNCTOR_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getFunctor() <em>Functor</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFunctor()
+   * @generated
+   * @ordered
+   */
+  protected String functor = FUNCTOR_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
@@ -57,7 +66,7 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
    * @generated
    * @ordered
    */
-  protected EList<VLSFofTerm> terms;
+  protected EList<VLSTerm> terms;
 
   /**
    * <!-- begin-user-doc -->
@@ -85,7 +94,7 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
    * <!-- end-user-doc -->
    * @generated
    */
-  public VLSFunctionDeclaration getFunctor()
+  public String getFunctor()
   {
     return functor;
   }
@@ -95,16 +104,12 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFunctor(VLSFunctionDeclaration newFunctor, NotificationChain msgs)
+  public void setFunctor(String newFunctor)
   {
-    VLSFunctionDeclaration oldFunctor = functor;
+    String oldFunctor = functor;
     functor = newFunctor;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, oldFunctor, newFunctor);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, oldFunctor, functor));
   }
 
   /**
@@ -112,32 +117,11 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFunctor(VLSFunctionDeclaration newFunctor)
-  {
-    if (newFunctor != functor)
-    {
-      NotificationChain msgs = null;
-      if (functor != null)
-        msgs = ((InternalEObject)functor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, null, msgs);
-      if (newFunctor != null)
-        msgs = ((InternalEObject)newFunctor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, null, msgs);
-      msgs = basicSetFunctor(newFunctor, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR, newFunctor, newFunctor));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<VLSFofTerm> getTerms()
+  public EList<VLSTerm> getTerms()
   {
     if (terms == null)
     {
-      terms = new EObjectContainmentEList<VLSFofTerm>(VLSFofTerm.class, this, VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS);
+      terms = new EObjectContainmentEList<VLSTerm>(VLSTerm.class, this, VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS);
     }
     return terms;
   }
@@ -152,8 +136,6 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
-        return basicSetFunctor(null, msgs);
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
     }
@@ -190,11 +172,11 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
-        setFunctor((VLSFunctionDeclaration)newValue);
+        setFunctor((String)newValue);
         return;
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         getTerms().clear();
-        getTerms().addAll((Collection<? extends VLSFofTerm>)newValue);
+        getTerms().addAll((Collection<? extends VLSTerm>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -211,7 +193,7 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
-        setFunctor((VLSFunctionDeclaration)null);
+        setFunctor(FUNCTOR_EDEFAULT);
         return;
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         getTerms().clear();
@@ -231,11 +213,28 @@ public class VLSFunctionFofImpl extends VLSFofTermImpl implements VLSFunctionFof
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION_FOF__FUNCTOR:
-        return functor != null;
+        return FUNCTOR_EDEFAULT == null ? functor != null : !FUNCTOR_EDEFAULT.equals(functor);
       case VampireLanguagePackage.VLS_FUNCTION_FOF__TERMS:
         return terms != null && !terms.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (functor: ");
+    result.append(functor);
+    result.append(')');
+    return result.toString();
   }
 
 } //VLSFunctionFofImpl

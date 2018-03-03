@@ -7,11 +7,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper
-import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper_FilteredTypes
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.io.PrintWriter
-
 
 class VampireSolver extends LogicReasoner{
 	

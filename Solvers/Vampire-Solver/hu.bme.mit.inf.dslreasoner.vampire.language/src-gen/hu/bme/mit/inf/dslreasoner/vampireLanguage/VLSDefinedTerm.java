@@ -13,39 +13,39 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDefinedTerm#getName <em>Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDefinedTerm#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSDefinedTerm()
  * @model
  * @generated
  */
-public interface VLSDefinedTerm extends VLSFofTerm
+public interface VLSDefinedTerm extends VLSTerm
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * If the meaning of the '<em>Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSDefinedTerm_Name()
+   * @return the value of the '<em>Value</em>' attribute.
+   * @see #setValue(String)
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSDefinedTerm_Value()
    * @model
    * @generated
    */
-  String getName();
+  String getValue();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDefinedTerm#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDefinedTerm#getValue <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
+   * @param value the new value of the '<em>Value</em>' attribute.
+   * @see #getValue()
    * @generated
    */
-  void setName(String value);
+  void setValue(String value);
 
 } // VLSDefinedTerm

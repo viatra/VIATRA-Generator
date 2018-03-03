@@ -87,13 +87,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VampireLanguagePackage.VLS_FUNCTION_DECLARATION:
-      {
-        VLSFunctionDeclaration vlsFunctionDeclaration = (VLSFunctionDeclaration)theEObject;
-        T result = caseVLSFunctionDeclaration(vlsFunctionDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case VampireLanguagePackage.VLS_FOF_FORMULA:
       {
         VLSFofFormula vlsFofFormula = (VLSFofFormula)theEObject;
@@ -115,18 +108,11 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VampireLanguagePackage.VLS_FOF_TERM:
-      {
-        VLSFofTerm vlsFofTerm = (VLSFofTerm)theEObject;
-        T result = caseVLSFofTerm(vlsFofTerm);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case VampireLanguagePackage.VLS_VARIABLE:
       {
         VLSVariable vlsVariable = (VLSVariable)theEObject;
         T result = caseVLSVariable(vlsVariable);
-        if (result == null) result = caseVLSFofTerm(vlsVariable);
+        if (result == null) result = caseVLSTerm(vlsVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -134,7 +120,7 @@ public class VampireLanguageSwitch<T> extends Switch<T>
       {
         VLSFunctionFof vlsFunctionFof = (VLSFunctionFof)theEObject;
         T result = caseVLSFunctionFof(vlsFunctionFof);
-        if (result == null) result = caseVLSFofTerm(vlsFunctionFof);
+        if (result == null) result = caseVLSTerm(vlsFunctionFof);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -142,7 +128,7 @@ public class VampireLanguageSwitch<T> extends Switch<T>
       {
         VLSDefinedTerm vlsDefinedTerm = (VLSDefinedTerm)theEObject;
         T result = caseVLSDefinedTerm(vlsDefinedTerm);
-        if (result == null) result = caseVLSFofTerm(vlsDefinedTerm);
+        if (result == null) result = caseVLSTerm(vlsDefinedTerm);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -258,11 +244,79 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case VampireLanguagePackage.VLS_CONSTANT:
+      {
+        VLSConstant vlsConstant = (VLSConstant)theEObject;
+        T result = caseVLSConstant(vlsConstant);
+        if (result == null) result = caseVLSTerm(vlsConstant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_TRUE:
+      {
+        VLSTrue vlsTrue = (VLSTrue)theEObject;
+        T result = caseVLSTrue(vlsTrue);
+        if (result == null) result = caseVLSTerm(vlsTrue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_FALSE:
+      {
+        VLSFalse vlsFalse = (VLSFalse)theEObject;
+        T result = caseVLSFalse(vlsFalse);
+        if (result == null) result = caseVLSTerm(vlsFalse);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case VampireLanguagePackage.VLS_FUNCTION:
       {
         VLSFunction vlsFunction = (VLSFunction)theEObject;
         T result = caseVLSFunction(vlsFunction);
         if (result == null) result = caseVLSTerm(vlsFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_LESS:
+      {
+        VLSLess vlsLess = (VLSLess)theEObject;
+        T result = caseVLSLess(vlsLess);
+        if (result == null) result = caseVLSTerm(vlsLess);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_INT:
+      {
+        VLSInt vlsInt = (VLSInt)theEObject;
+        T result = caseVLSInt(vlsInt);
+        if (result == null) result = caseVLSDefinedTerm(vlsInt);
+        if (result == null) result = caseVLSTerm(vlsInt);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_REAL:
+      {
+        VLSReal vlsReal = (VLSReal)theEObject;
+        T result = caseVLSReal(vlsReal);
+        if (result == null) result = caseVLSDefinedTerm(vlsReal);
+        if (result == null) result = caseVLSTerm(vlsReal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_RATIONAL:
+      {
+        VLSRational vlsRational = (VLSRational)theEObject;
+        T result = caseVLSRational(vlsRational);
+        if (result == null) result = caseVLSDefinedTerm(vlsRational);
+        if (result == null) result = caseVLSTerm(vlsRational);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VampireLanguagePackage.VLS_DOUBLE_QUOTE:
+      {
+        VLSDoubleQuote vlsDoubleQuote = (VLSDoubleQuote)theEObject;
+        T result = caseVLSDoubleQuote(vlsDoubleQuote);
+        if (result == null) result = caseVLSDefinedTerm(vlsDoubleQuote);
+        if (result == null) result = caseVLSTerm(vlsDoubleQuote);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -298,22 +352,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVLSComment(VLSComment object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>VLS Function Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>VLS Function Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVLSFunctionDeclaration(VLSFunctionDeclaration object)
   {
     return null;
   }
@@ -362,22 +400,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVLSTerm(VLSTerm object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>VLS Fof Term</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>VLS Fof Term</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVLSFofTerm(VLSFofTerm object)
   {
     return null;
   }
@@ -655,6 +677,54 @@ public class VampireLanguageSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Constant</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Constant</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSConstant(VLSConstant object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS True</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS True</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSTrue(VLSTrue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS False</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS False</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSFalse(VLSFalse object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>VLS Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -666,6 +736,86 @@ public class VampireLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVLSFunction(VLSFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Less</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Less</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSLess(VLSLess object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Int</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Int</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSInt(VLSInt object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Real</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Real</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSReal(VLSReal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Rational</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Rational</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSRational(VLSRational object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Double Quote</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Double Quote</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSDoubleQuote(VLSDoubleQuote object)
   {
     return null;
   }

@@ -67,11 +67,9 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
     {
       case VampireLanguagePackage.VAMPIRE_MODEL: return createVampireModel();
       case VampireLanguagePackage.VLS_COMMENT: return createVLSComment();
-      case VampireLanguagePackage.VLS_FUNCTION_DECLARATION: return createVLSFunctionDeclaration();
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
       case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
-      case VampireLanguagePackage.VLS_FOF_TERM: return createVLSFofTerm();
       case VampireLanguagePackage.VLS_VARIABLE: return createVLSVariable();
       case VampireLanguagePackage.VLS_FUNCTION_FOF: return createVLSFunctionFof();
       case VampireLanguagePackage.VLS_DEFINED_TERM: return createVLSDefinedTerm();
@@ -89,7 +87,15 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
       case VampireLanguagePackage.VLS_INEQUALITY: return createVLSInequality();
       case VampireLanguagePackage.VLS_EQUALITY: return createVLSEquality();
       case VampireLanguagePackage.VLS_ASSIGNMENT: return createVLSAssignment();
+      case VampireLanguagePackage.VLS_CONSTANT: return createVLSConstant();
+      case VampireLanguagePackage.VLS_TRUE: return createVLSTrue();
+      case VampireLanguagePackage.VLS_FALSE: return createVLSFalse();
       case VampireLanguagePackage.VLS_FUNCTION: return createVLSFunction();
+      case VampireLanguagePackage.VLS_LESS: return createVLSLess();
+      case VampireLanguagePackage.VLS_INT: return createVLSInt();
+      case VampireLanguagePackage.VLS_REAL: return createVLSReal();
+      case VampireLanguagePackage.VLS_RATIONAL: return createVLSRational();
+      case VampireLanguagePackage.VLS_DOUBLE_QUOTE: return createVLSDoubleQuote();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -115,17 +121,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSCommentImpl vlsComment = new VLSCommentImpl();
     return vlsComment;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSFunctionDeclaration createVLSFunctionDeclaration()
-  {
-    VLSFunctionDeclarationImpl vlsFunctionDeclaration = new VLSFunctionDeclarationImpl();
-    return vlsFunctionDeclaration;
   }
 
   /**
@@ -159,17 +154,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSTermImpl vlsTerm = new VLSTermImpl();
     return vlsTerm;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSFofTerm createVLSFofTerm()
-  {
-    VLSFofTermImpl vlsFofTerm = new VLSFofTermImpl();
-    return vlsFofTerm;
   }
 
   /**
@@ -364,10 +348,98 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
+  public VLSConstant createVLSConstant()
+  {
+    VLSConstantImpl vlsConstant = new VLSConstantImpl();
+    return vlsConstant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSTrue createVLSTrue()
+  {
+    VLSTrueImpl vlsTrue = new VLSTrueImpl();
+    return vlsTrue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSFalse createVLSFalse()
+  {
+    VLSFalseImpl vlsFalse = new VLSFalseImpl();
+    return vlsFalse;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VLSFunction createVLSFunction()
   {
     VLSFunctionImpl vlsFunction = new VLSFunctionImpl();
     return vlsFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSLess createVLSLess()
+  {
+    VLSLessImpl vlsLess = new VLSLessImpl();
+    return vlsLess;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSInt createVLSInt()
+  {
+    VLSIntImpl vlsInt = new VLSIntImpl();
+    return vlsInt;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSReal createVLSReal()
+  {
+    VLSRealImpl vlsReal = new VLSRealImpl();
+    return vlsReal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSRational createVLSRational()
+  {
+    VLSRationalImpl vlsRational = new VLSRationalImpl();
+    return vlsRational;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSDoubleQuote createVLSDoubleQuote()
+  {
+    VLSDoubleQuoteImpl vlsDoubleQuote = new VLSDoubleQuoteImpl();
+    return vlsDoubleQuote;
   }
 
   /**

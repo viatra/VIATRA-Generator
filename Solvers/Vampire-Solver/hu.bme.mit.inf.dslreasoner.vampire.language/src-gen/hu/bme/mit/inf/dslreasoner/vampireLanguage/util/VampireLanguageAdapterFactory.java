@@ -86,11 +86,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSCommentAdapter();
       }
       @Override
-      public Adapter caseVLSFunctionDeclaration(VLSFunctionDeclaration object)
-      {
-        return createVLSFunctionDeclarationAdapter();
-      }
-      @Override
       public Adapter caseVLSFofFormula(VLSFofFormula object)
       {
         return createVLSFofFormulaAdapter();
@@ -104,11 +99,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVLSTerm(VLSTerm object)
       {
         return createVLSTermAdapter();
-      }
-      @Override
-      public Adapter caseVLSFofTerm(VLSFofTerm object)
-      {
-        return createVLSFofTermAdapter();
       }
       @Override
       public Adapter caseVLSVariable(VLSVariable object)
@@ -196,9 +186,49 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSAssignmentAdapter();
       }
       @Override
+      public Adapter caseVLSConstant(VLSConstant object)
+      {
+        return createVLSConstantAdapter();
+      }
+      @Override
+      public Adapter caseVLSTrue(VLSTrue object)
+      {
+        return createVLSTrueAdapter();
+      }
+      @Override
+      public Adapter caseVLSFalse(VLSFalse object)
+      {
+        return createVLSFalseAdapter();
+      }
+      @Override
       public Adapter caseVLSFunction(VLSFunction object)
       {
         return createVLSFunctionAdapter();
+      }
+      @Override
+      public Adapter caseVLSLess(VLSLess object)
+      {
+        return createVLSLessAdapter();
+      }
+      @Override
+      public Adapter caseVLSInt(VLSInt object)
+      {
+        return createVLSIntAdapter();
+      }
+      @Override
+      public Adapter caseVLSReal(VLSReal object)
+      {
+        return createVLSRealAdapter();
+      }
+      @Override
+      public Adapter caseVLSRational(VLSRational object)
+      {
+        return createVLSRationalAdapter();
+      }
+      @Override
+      public Adapter caseVLSDoubleQuote(VLSDoubleQuote object)
+      {
+        return createVLSDoubleQuoteAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -253,21 +283,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration <em>VLS Function Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration
-   * @generated
-   */
-  public Adapter createVLSFunctionDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula <em>VLS Fof Formula</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -308,21 +323,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSTermAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm <em>VLS Fof Term</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm
-   * @generated
-   */
-  public Adapter createVLSFofTermAdapter()
   {
     return null;
   }
@@ -583,6 +583,51 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant <em>VLS Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant
+   * @generated
+   */
+  public Adapter createVLSConstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue <em>VLS True</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue
+   * @generated
+   */
+  public Adapter createVLSTrueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse <em>VLS False</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse
+   * @generated
+   */
+  public Adapter createVLSFalseAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction <em>VLS Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -593,6 +638,81 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSLess <em>VLS Less</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSLess
+   * @generated
+   */
+  public Adapter createVLSLessAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInt <em>VLS Int</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInt
+   * @generated
+   */
+  public Adapter createVLSIntAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal <em>VLS Real</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal
+   * @generated
+   */
+  public Adapter createVLSRealAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRational <em>VLS Rational</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRational
+   * @generated
+   */
+  public Adapter createVLSRationalAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDoubleQuote <em>VLS Double Quote</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSDoubleQuote
+   * @generated
+   */
+  public Adapter createVLSDoubleQuoteAdapter()
   {
     return null;
   }

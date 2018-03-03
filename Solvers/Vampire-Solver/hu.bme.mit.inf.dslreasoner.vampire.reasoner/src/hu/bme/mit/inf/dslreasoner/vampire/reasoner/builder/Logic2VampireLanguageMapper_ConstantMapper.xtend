@@ -13,7 +13,7 @@ class Logic2VampireLanguageMapper_ConstantMapper {
 		this.base = base
 	}
 	
-	//NOT NEEDED
+//NOT NEEDED
 //	def protected dispatch transformConstant(ConstantDeclaration constant, Logic2VampireLanguageMapperTrace trace) {
 //		val c = createVLSFunctionDeclaration=> [
 //			it.name = support.toID(constant.name)
@@ -23,17 +23,14 @@ class Logic2VampireLanguageMapper_ConstantMapper {
 //		
 //	}
 	
+//NOT Used In Sample	
 	def protected dispatch transformConstant(ConstantDefinition constant, Logic2VampireLanguageMapperTrace trace) {
+		//TODO
 //		val c = createVLSFofFormula=> [
 //			name = support.toID(constant.name)
-//			fofRole = 
-//			fofFormula = 
+//			fofRole = "axiom"
+//			fofFormula = base.transformTypeReference()
 //		]
-		//TODO
-		val c = createVLSTerm => [
-			
-		]
-
 	}
 	
 	def protected transformConstantDefinitionSpecification(ConstantDefinition constant, Logic2VampireLanguageMapperTrace trace) {

@@ -23,7 +23,7 @@ class Logic2VampireLanguageMapperTrace {
 //NOT NEEDED	//public var VLSFunction constantDec
 	
 	
-//NT NEEDED  	//public val Map<ConstantDeclaration, VLSFunctionDeclaration> constantDeclaration2LanguageField = new HashMap
+//NOT NEEDED  	//public val Map<ConstantDeclaration, VLSFunctionDeclaration> constantDeclaration2LanguageField = new HashMap
 	//public val Map<ConstantDefinition, ALSFunctionDefinition> constantDefinition2Function = new HashMap
 	
 	public var Map<ConstantDeclaration, ConstantDefinition> constantDefinitions

@@ -4,6 +4,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
+import hu.bme.mit.inf.dslreasoner.vampire.reasoner.VampireSolver
+import hu.bme.mit.inf.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 
 class VampireTestRun {
@@ -36,7 +38,7 @@ class VampireTestRun {
 		
 		//ASK OSZKAR: errors?
 		reasoner = new VampireSolver
-		val vampireConfig = new VapireSolverConfiguration => [
+		val vampireConfig = new VampireSolverConfiguration => [
 			//add configuration things, in config file first
 		]
 		

@@ -3,28 +3,26 @@
  */
 package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>VLS Fof Term</b></em>'.
+ * An implementation of the model object '<em><b>VLS Real</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class VLSFofTermImpl extends MinimalEObjectImpl.Container implements VLSFofTerm
+public class VLSRealImpl extends VLSDefinedTermImpl implements VLSReal
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VLSFofTermImpl()
+  protected VLSRealImpl()
   {
     super();
   }
@@ -37,7 +35,7 @@ public class VLSFofTermImpl extends MinimalEObjectImpl.Container implements VLSF
   @Override
   protected EClass eStaticClass()
   {
-    return VampireLanguagePackage.Literals.VLS_FOF_TERM;
+    return VampireLanguagePackage.Literals.VLS_REAL;
   }
 
-} //VLSFofTermImpl
+} //VLSRealImpl

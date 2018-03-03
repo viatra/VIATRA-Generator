@@ -6,21 +6,21 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>VLS Variable</b></em>'.
+ * A representation of the model object '<em><b>VLS Constant</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable#getName <em>Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSVariable()
+ * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSConstant()
  * @model
  * @generated
  */
-public interface VLSVariable extends VLSTerm
+public interface VLSConstant extends VLSTerm
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -32,14 +32,14 @@ public interface VLSVariable extends VLSTerm
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSVariable_Name()
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSConstant_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -48,4 +48,4 @@ public interface VLSVariable extends VLSTerm
    */
   void setName(String value);
 
-} // VLSVariable
+} // VLSConstant

@@ -11,6 +11,6 @@ fact ObjectTypeDefinition {
 	util'Object = none
 }
 fact assertion1 {
-	! (! (util'language.constant1 = util'boolean'true and util'language.constant2 = util'boolean'true) <=> (! (util'language.constant1 = util'boolean'true) or ! (util'language.constant2 = util'boolean'true)))
+	not (not (util'language.constant1 = util'boolean'true && util'language.constant2 = util'boolean'true) <=> (not (util'language.constant1 = util'boolean'true) or not (util'language.constant2 = util'boolean'true)))
 }
 run { } for exactly 5 util'Object , 0 Int

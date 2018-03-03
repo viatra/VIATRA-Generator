@@ -3,9 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionDeclaration;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import java.util.Collection;
@@ -40,14 +39,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
 {
   /**
-   * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
+   * The default value of the '{@link #getConstant() <em>Constant</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getConstant()
    * @generated
    * @ordered
    */
-  protected VLSFunctionDeclaration constant;
+  protected static final String CONSTANT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getConstant() <em>Constant</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getConstant()
+   * @generated
+   * @ordered
+   */
+  protected String constant = CONSTANT_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
@@ -57,7 +66,7 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
    * @generated
    * @ordered
    */
-  protected EList<VLSFofTerm> terms;
+  protected EList<VLSTerm> terms;
 
   /**
    * <!-- begin-user-doc -->
@@ -85,7 +94,7 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public VLSFunctionDeclaration getConstant()
+  public String getConstant()
   {
     return constant;
   }
@@ -95,16 +104,12 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConstant(VLSFunctionDeclaration newConstant, NotificationChain msgs)
+  public void setConstant(String newConstant)
   {
-    VLSFunctionDeclaration oldConstant = constant;
+    String oldConstant = constant;
     constant = newConstant;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION__CONSTANT, oldConstant, newConstant);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION__CONSTANT, oldConstant, constant));
   }
 
   /**
@@ -112,32 +117,11 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstant(VLSFunctionDeclaration newConstant)
-  {
-    if (newConstant != constant)
-    {
-      NotificationChain msgs = null;
-      if (constant != null)
-        msgs = ((InternalEObject)constant).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION__CONSTANT, null, msgs);
-      if (newConstant != null)
-        msgs = ((InternalEObject)newConstant).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_FUNCTION__CONSTANT, null, msgs);
-      msgs = basicSetConstant(newConstant, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_FUNCTION__CONSTANT, newConstant, newConstant));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<VLSFofTerm> getTerms()
+  public EList<VLSTerm> getTerms()
   {
     if (terms == null)
     {
-      terms = new EObjectContainmentEList<VLSFofTerm>(VLSFofTerm.class, this, VampireLanguagePackage.VLS_FUNCTION__TERMS);
+      terms = new EObjectContainmentEList<VLSTerm>(VLSTerm.class, this, VampireLanguagePackage.VLS_FUNCTION__TERMS);
     }
     return terms;
   }
@@ -152,8 +136,6 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        return basicSetConstant(null, msgs);
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
     }
@@ -190,11 +172,11 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        setConstant((VLSFunctionDeclaration)newValue);
+        setConstant((String)newValue);
         return;
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         getTerms().clear();
-        getTerms().addAll((Collection<? extends VLSFofTerm>)newValue);
+        getTerms().addAll((Collection<? extends VLSTerm>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -211,7 +193,7 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        setConstant((VLSFunctionDeclaration)null);
+        setConstant(CONSTANT_EDEFAULT);
         return;
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         getTerms().clear();
@@ -231,11 +213,28 @@ public class VLSFunctionImpl extends VLSTermImpl implements VLSFunction
     switch (featureID)
     {
       case VampireLanguagePackage.VLS_FUNCTION__CONSTANT:
-        return constant != null;
+        return CONSTANT_EDEFAULT == null ? constant != null : !CONSTANT_EDEFAULT.equals(constant);
       case VampireLanguagePackage.VLS_FUNCTION__TERMS:
         return terms != null && !terms.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (constant: ");
+    result.append(constant);
+    result.append(')');
+    return result.toString();
   }
 
 } //VLSFunctionImpl

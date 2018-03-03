@@ -6,6 +6,10 @@
   <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.type" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
     <wellbehaving-derived-feature classifier-name="Function" feature-name="type" package-nsUri="FAM"/>
   </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated FAM -->
+    <package class="hu.bme.mit.inf.dslreasomer.domains.transima.fam.FunctionalArchitecture.FunctionalArchitecturePackage" genModel="model/FAM.genmodel" uri="FAM"/>
+  </extension>
   <extension id="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.Pattern" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.Pattern" id="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.Pattern">
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.terminatorAndInformation"/>
@@ -20,9 +24,5 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.noInt"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.noLeaf"/>
     </group>
-  </extension>
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <!-- @generated FAM -->
-    <package class="hu.bme.mit.inf.dslreasomer.domains.transima.fam.FunctionalArchitecture.FunctionalArchitecturePackage" genModel="model/FAM.genmodel" uri="FAM"/>
   </extension>
 </plugin>
