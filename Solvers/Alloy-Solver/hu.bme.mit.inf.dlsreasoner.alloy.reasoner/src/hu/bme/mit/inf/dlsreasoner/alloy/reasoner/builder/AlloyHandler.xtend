@@ -24,9 +24,7 @@ import java.util.List
 import java.util.Map
 import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit
-import org.eclipse.emf.common.CommonPlugin
 import org.eclipse.xtend.lib.annotations.Data
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 
 class AlloySolverException extends Exception{
 	new(String s) { super(s) }
@@ -49,12 +47,8 @@ class AlloyHandler {
 	//val fileName = "problem.als"
 	
 	public def callSolver(ALSDocument problem, ReasonerWorkspace workspace, AlloySolverConfiguration configuration,String alloyCode) {
-		val writeToFile = (
-			configuration.documentationLevel===DocumentationLevel::NORMAL ||
-			configuration.documentationLevel===DocumentationLevel::FULL)
 		
 		//Prepare
-		
 		val warnings = new LinkedList<String>
 		val debugs = new LinkedList<String>
 		val runtime = new ArrayList<Long>
@@ -73,7 +67,7 @@ class AlloyHandler {
 				it.solverDirectory = configuration.solverPath
 			}
 			//it.inferPartialInstance
-			it.tempDirectory = CommonPlugin.resolve(workspace.workspaceURI).toFileString
+			//it.tempDirectory = CommonPlugin.resolve(workspace.workspaceURI).toFileString
 		]
 		
 		// Transform
@@ -94,7 +88,7 @@ class AlloyHandler {
 		// Finish: Alloy -> Kodkod
 		
 		val limiter = new SimpleTimeLimiter
-		val callable = new AlloyCallerWithTimeout(warnings,debugs,reporter,options,command,compModule,configuration.solutionScope.numberOfRequiredSolution)
+		val callable = new AlloyCallerWithTimeout(warnings,debugs,reporter,options,command,compModule,configuration)
 		var List<Pair<A4Solution, Long>> answers
 		var boolean finished
 		if(configuration.runtimeLimit == LogicSolverConfiguration::Unlimited) {
@@ -156,7 +150,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 	
 	val Command command
 	val CompModule compModule
-	val int numberOfRequiredSolution
+	val AlloySolverConfiguration configuration
 	
 	val List<Pair<A4Solution,Long>> answers = new LinkedList()
 	
@@ -166,7 +160,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 		A4Options options,
 		Command command,
 		CompModule compModule,
-		int numberOfRequiredSolution)
+		AlloySolverConfiguration configuration)
 	{
 		this.warnings = warnings
 		this.debugs = debugs
@@ -174,7 +168,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 		this.options = options
 		this.command = command
 		this.compModule = compModule
-		this.numberOfRequiredSolution = numberOfRequiredSolution
+		this.configuration = configuration
 	}
 	
 	override call() throws Exception {
@@ -183,19 +177,22 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 		// Start: Execute
 		var A4Solution lastAnswer = null
 		try {
-			do{
-				if(lastAnswer == null) {
-					lastAnswer = TranslateAlloyToKodkod.execute_command(reporter,compModule.allSigs,command,options)
-				} else {
-					lastAnswer = lastAnswer.next
-				}
+			if(!configuration.progressMonitor.isCancelled) {
+				do{
+					if(lastAnswer == null) {
+						lastAnswer = TranslateAlloyToKodkod.execute_command(reporter,compModule.allSigs,command,options)
+					} else {
+						lastAnswer = lastAnswer.next
+					}
+					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolution)
+					
+					val runtime = System.currentTimeMillis -startTime
+					synchronized(this) {
+						answers += (lastAnswer->runtime)
+					}
+				} while(lastAnswer.satisfiable != false && !hasEnoughSolution(answers) && !configuration.progressMonitor.isCancelled)
 				
-				val runtime = System.currentTimeMillis -startTime
-				synchronized(this) {
-					answers += (lastAnswer->runtime)
-				}
-			} while(lastAnswer.satisfiable != false && !hasEnoughSolution(answers))
-			
+			}
 		}catch(Exception e) {
 			warnings +=e.message
 		}
@@ -204,8 +201,8 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 	}
 	
 	def hasEnoughSolution(List<?> answers) {
-		if(numberOfRequiredSolution < 0) return false
-		else return answers.size() == numberOfRequiredSolution
+		if(configuration.solutionScope.numberOfRequiredSolution < 0) return false
+		else return answers.size() == configuration.solutionScope.numberOfRequiredSolution
 	}
 	
 	public def getPartialAnswers() {
