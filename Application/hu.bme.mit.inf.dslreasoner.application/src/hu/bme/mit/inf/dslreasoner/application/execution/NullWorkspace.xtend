@@ -24,6 +24,9 @@ class NullWorkspace extends ReasonerWorkspace{
 	override URI getWorkspaceURI() {
 		throw new UnsupportedOperationException(message)
 	}
+	
+	override init() { }
+	override clear() { }
 	override public void initAndClear() {}
 	override protected URI getURI(String name) {
 		throw new UnsupportedOperationException(message)

@@ -26,6 +26,9 @@ import java.util.LinkedHashMap
 import java.util.Optional
 import org.eclipse.emf.common.util.URI
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification
+import org.eclipse.core.runtime.jobs.Job
+import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.Status
 
 class ScriptExecutor {
 	val parser = new ApplicationConfigurationParser
@@ -37,15 +40,30 @@ class ScriptExecutor {
 	 * Executes a script
 	 */
 	public def executeScript(URI uri) {
-		val script = parser.parse(uri)
-		script.executeScript
+		val job = new Job('''Model Generation: «uri.lastSegment»''') {
+			override protected run(IProgressMonitor monitor) {
+				try{
+					monitor.subTask('''Loading script''')
+					val script = parser.parse(uri)
+					script.executeScript(monitor)
+					return Status.OK_STATUS;
+				} catch(Exception e) {
+					return Status.OK_STATUS
+				}
+			}
+		}
+		job.setUser(true);
+		job.schedule();
 	}
 	
-	public def executeScript(ConfigurationScript script) {
+	public def executeScript(ConfigurationScript script, IProgressMonitor monitor) {
 		script.activateAllEPackageReferences
 		val tasks = script.commands.filter(Task)
-		for(task : tasks.filterNull) {
-			task.execute
+		
+		for(taskIndex : 0..<tasks.size) {
+			val task = tasks.get(taskIndex)
+			monitor.beginTask('''Executing task«IF tasks.size>1» «taskIndex+1»«ENDIF»: «task.name»''',task.totalWork)
+			task.execute(monitor)
 		}
 	}
 	
@@ -75,12 +93,33 @@ class ScriptExecutor {
 //		}
 	}
 	
-	def public dispatch execute(GenerationTask task) {
+	def public dispatch execute(GenerationTask task, IProgressMonitor monitor) {
 		val generationTaskExecutor = new GenerationTaskExecutor
-		generationTaskExecutor.executeGenerationTask(task,this)
+		generationTaskExecutor.executeGenerationTask(task,this,monitor)
 	}
 	
-	def public dispatch execute(Task task) {
+	def public dispatch execute(Task task, IProgressMonitor monitor) {
+		throw new IllegalArgumentException('''Unsupported task type: «task.class.simpleName»!''')
+	}
+	
+	/**
+	 * Mapping time = 100
+	 * Solving = 1000 * runs
+	 * Visualisation = runs * number * 100
+	 */
+	def protected dispatch getTotalWork(GenerationTask task) {
+		val runs = if(task.runSpecified) { task.runs } else { 1	}
+		val number = if(task.numberSpecified) { task.number } else { 1 }
+		return 100 + runs*1000 +runs*number*100
+	}
+	def protected dispatch getTotalWork(Task task) {
+		throw new IllegalArgumentException('''Unsupported task type: «task.class.simpleName»!''')
+	}
+	
+	def protected dispatch getName(GenerationTask task) {
+		'''Model Generation'''
+	}
+	def protected dispatch getName(Task task) {
 		throw new IllegalArgumentException('''Unsupported task type: «task.class.simpleName»!''')
 	}
 	
