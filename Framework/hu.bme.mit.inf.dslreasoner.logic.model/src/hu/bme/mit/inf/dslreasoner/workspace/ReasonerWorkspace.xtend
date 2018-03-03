@@ -27,10 +27,15 @@ abstract class ReasonerWorkspace{
 	
 	def URI getWorkspaceURI();
 	
+	def public void init()
+	def public void clear()
 	/**
 	 * Creates the target folder and clears the workspace for the reasoning
 	 */
-	def public void initAndClear()
+	def public void initAndClear() {
+		init()
+		clear()
+	}
 	
 	def protected URI getURI(String name);
 	protected def Resource getResource(String name) {

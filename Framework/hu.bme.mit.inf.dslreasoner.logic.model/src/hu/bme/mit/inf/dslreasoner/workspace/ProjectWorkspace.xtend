@@ -32,8 +32,7 @@ class ProjectWorkspace extends ReasonerWorkspace{
 	override getWorkspaceURI() {
 		getDirUri
 	}
-	
-	override initAndClear() {
+	override init() {
 		target = ResourcesPlugin.workspace.root
 		
 		val segments = if(dirUri.platformResource) {
@@ -44,6 +43,8 @@ class ProjectWorkspace extends ReasonerWorkspace{
 		for(nameSegment : segments) {
 			target = createContainer(target,nameSegment)
 		}
+	}
+	override clear() {
 		target.members.forEach[delete(false,monitor)]
 	}
 	

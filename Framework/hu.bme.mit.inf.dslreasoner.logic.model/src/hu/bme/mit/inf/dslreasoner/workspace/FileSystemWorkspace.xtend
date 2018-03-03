@@ -24,9 +24,13 @@ class FileSystemWorkspace extends ReasonerWorkspace{
 		getFolderURI
 	}
 	
-	override initAndClear() {
+	override init() {
 		val folder = new File(folderURI.toFileString)
 		folder.mkdirs
+	}
+	
+	override clear() {
+		val folder = new File(folderURI.toFileString)
 		for(file : folder.listFiles) {
 			file.deleteFile
 		}
