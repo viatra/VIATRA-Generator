@@ -1,16 +1,17 @@
 package hu.bme.mit.inf.dslreasoner.logic.model.builder
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import java.util.List
-import java.util.TreeSet
-import java.util.SortedSet
 import java.math.BigDecimal
 import java.util.HashMap
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import java.util.List
 import java.util.Map
+import java.util.SortedSet
+import java.util.TreeSet
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0
 
 abstract class LogicReasoner {
 	def abstract LogicResult solve(LogicProblem problem, LogicSolverConfiguration configuration,
@@ -45,6 +46,12 @@ abstract class LogicSolverConfiguration {
 	public int memoryLimit = Unlimited
 	/** Documentation level of the solver. */
 	public DocumentationLevel documentationLevel = DocumentationLevel::NONE
+	/** Progress monitor for the solver to
+	 * <li>(optionally) report progress via {@link progressMonitor.worked}</li>
+ 	 * <li>(optionally) inform about cancellation request via {@link progressMonitor.isCancelled}
+ 	 *     or via a listener registered by {@link progressMonitor.addCancelListener}</li>
+	 */
+	public SolverProgressMonitor progressMonitor = new NullSolverProgressMonitor
 
 	public var TypeScopes typeScopes = new TypeScopes;
 	public var SolutionScope solutionScope = new SolutionScope
@@ -126,4 +133,50 @@ public class TypeScopes {
 public class SolutionScope {
 	public static val All = -1;
 	public var numberOfRequiredSolution = 1
+}
+/** Progress monitor class for a solver to
+ * <li>(optionally) report progress via {@link worked}</li>
+ * <li>(optionally) inform about cancellation request via {@link isCancelled}
+ *     or via a listener registered by {@link addCancelListener}</li>
+ */
+public abstract class SolverProgressMonitor {
+	protected var volatile cancelled = false
+	protected var progress = 0.0
+	
+	/**
+	 * Method to report progress, e.g. finishing translation or founding one of the model.
+	 * The sum of all {@link amount} should be 1.0, which is reached when all model is generated.
+	 * By default,
+	 * forward transformation should take 0.1 work unit (implemented in {@link#workedForwardTransformation}),
+	 * founding all solution 0.8 (implemented in {@link#workedModelFound})
+	 * and backward transformation 0.1 again (implemented in {@link#workedBackwardTransformation}).
+	 */
+	def public void worked(double amount) {
+		progress+=amount
+		processWorked(amount)
+	}
+	def public void workedForwardTransformation() {worked(0.1)}
+	def public void workedModelFound(int numberOfRequestedModels) {
+		if(numberOfRequestedModels > 0) {
+			worked(0.8/numberOfRequestedModels)
+		}
+	}
+	def public void workedSearchFinished() { worked(0.1+0.8-progress) }
+	def public void workedBackwardTransformation(int numberOfFoundModels) {worked(0.1/numberOfFoundModels)}
+	def public void workedBackwardTransformationFinished() { worked(1.0-progress) }
+	protected def void processWorked(double amount)
+	
+	/**
+	 * Requesting the solver to stop with the solutions already found.
+	 * It is not guaranteed however that the solver finishes.
+	 */
+	def public void cancel() {
+		cancelled = true
+	}
+	def public boolean isCancelled() {
+		cancelled
+	}
+}
+public class NullSolverProgressMonitor extends SolverProgressMonitor {
+	override protected processWorked(double amount) { throw new UnsupportedOperationException("TODO: auto-generated method stub") }
 }
