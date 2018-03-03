@@ -29,6 +29,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import javax.security.auth.login.Configuration.Parameters
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -79,7 +80,7 @@ class ViatraReasoner extends LogicReasoner{
 		
 		dse.setInitialModel(emptySolution,false)
 		
-		var IStateCoderFactory statecoder = if(viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
+		val IStateCoderFactory statecoder = if(viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
 			new NeighbourhoodBasedStateCoderFactory
 		} else {
 			new IdentifierBasedStateCoderFactory
@@ -98,11 +99,12 @@ class ViatraReasoner extends LogicReasoner{
 			dse.addTransformationRule(rule)
 		}
 		
-		val strategy = new BestFirstStrategyForModelGeneration(
-			workspace,viatraConfig)
+		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig)
+		viatraConfig.progressMonitor.workedForwardTransformation
 		
 		val transformationTime = System.nanoTime - transformationStartTime
 		val solverStartTime = System.nanoTime
+		
 		var boolean stoppedByTimeout
 		var boolean stoppedByException
 		try{
@@ -112,10 +114,9 @@ class ViatraReasoner extends LogicReasoner{
 			stoppedByTimeout = false
 			stoppedByException = true
 		}
-		
 		val solverTime = System.nanoTime - solverStartTime
+		viatraConfig.progressMonitor.workedSearchFinished
 		
-		val statecoderFinal = statecoder
 		//additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
 		val statistics = createStatistics => [
 			//it.solverTime = viatraConfig.runtimeLimit
@@ -134,7 +135,7 @@ class ViatraReasoner extends LogicReasoner{
 				it.name = "TypeAnalysisTime" it.value = (method.statistics.PreliminaryTypeAnalisisTime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "StateCoderTime" it.value = (statecoderFinal.runtime/1000000) as int
+				it.name = "StateCoderTime" it.value = (statecoder.runtime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "StateCoderFailCount" it.value = strategy.numberOfStatecoderFail
@@ -152,6 +153,8 @@ class ViatraReasoner extends LogicReasoner{
 			}
 		]
 		
+		viatraConfig.progressMonitor.workedBackwardTransformationFinished
+		
 		if(stoppedByTimeout) {
 			return createInsuficientResourcesResult=>[
 				it.problem = problem
@@ -165,12 +168,7 @@ class ViatraReasoner extends LogicReasoner{
 					it.statistics = statistics
 				]
 			} else {
-				
-				/*solutionStore.solutions.head.trajectories.head
-				solutionTrajectory.doTransformation(emptySolution)
-				* 
-				*/
-				return factory.createModelResult => [
+				return createModelResult => [
 					it.problem = problem
 					it.trace = strategy.solutionStoreWithCopy.copyTraces
 					it.representation += strategy.solutionStoreWithCopy.solutions

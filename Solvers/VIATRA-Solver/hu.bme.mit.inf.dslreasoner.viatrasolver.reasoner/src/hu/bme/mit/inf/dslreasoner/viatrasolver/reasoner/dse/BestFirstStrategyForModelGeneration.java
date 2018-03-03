@@ -25,22 +25,16 @@ import org.eclipse.viatra.dse.base.ThreadContext;
 import org.eclipse.viatra.dse.objectives.Fitness;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
-import org.eclipse.xtend.lib.annotations.AccessorType;
-import org.eclipse.xtend.lib.annotations.Accessors;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DebugConfiguration;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 
@@ -138,7 +132,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		TrajectoryWithFitness currentTrajectoryWithFittness = new TrajectoryWithFitness(firstTrajectory, firstFittness);
 		trajectoiresToExplore.add(currentTrajectoryWithFittness);
 
-		mainLoop: while (!isInterrupted) {
+		mainLoop: while (!isInterrupted && !configuration.progressMonitor.isCancelled()) {
 
 			if (currentTrajectoryWithFittness == null) {
 				if (trajectoiresToExplore.isEmpty()) {
@@ -163,7 +157,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			List<Object> activationIds = selectActivation();
 			Iterator<Object> iterator = activationIds.iterator();
 
-			while (!isInterrupted && iterator.hasNext()) {
+			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
 				final Object nextActivation = iterator.next();
 //				if (!iterator.hasNext()) {
 //					logger.debug("Last untraversed activation of the state.");
@@ -239,6 +233,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				solutionStoreWithCopy.newSolution(context);
 				solutionStoreWithDiversityDescriptor.newSolution(context);
 				solutionStore.newSolution(context);
+				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
 
 				logger.debug("Found a solution.");
 			}
