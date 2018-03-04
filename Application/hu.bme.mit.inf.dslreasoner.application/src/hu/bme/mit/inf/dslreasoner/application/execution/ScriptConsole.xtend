@@ -1,24 +1,38 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
-import java.io.File
-import java.io.PrintWriter
+import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
+import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
+import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import java.util.LinkedList
 import java.util.Map
 import org.eclipse.emf.common.util.URI
-import java.io.Closeable
-import java.io.IOException
-import java.util.LinkedHashMap
-import java.util.HashMap
+import org.eclipse.ui.IWorkbench
+import org.eclipse.ui.IWorkbenchPage
+import org.eclipse.ui.IWorkbenchWindow
+import org.eclipse.ui.PlatformUI
+import org.eclipse.ui.console.ConsolePlugin
+import org.eclipse.ui.console.IConsoleConstants
+import org.eclipse.ui.console.IConsoleView
+import org.eclipse.ui.console.MessageConsole
+import java.util.List
 
-class ScriptConsole implements Closeable {
+//import org.eclipse.ui.console.MessageConsole
+
+class ScriptConsole {
+	/**
+	 * Console is identified with the name of this class.
+	 */
+	val final consoleID = ScriptConsole.name
 	val boolean printToConsole
-	val boolean cleanFiles
-	
-	val File messageConsoleFile
-	val File errorConsoleFile
-	val File statisticsConsoleFile
-	val Map<File,PrintWriter> file2Writer = new HashMap
+	val MessageConsole runtimeConsole;
+	val ReasonerWorkspace messageWorkspace;
+	val String messageFileName;
+	val ReasonerWorkspace errorWorkspace;
+	val String errorFileName;
+	val ReasonerWorkspace statisticsWorkspace;
+	val String statisticsFileName;
 	
 	val statisticsHeaderBuffer = new LinkedHashSet<String>
 	val statisticsDataBuffer = new LinkedList<Map<String,? extends Object>>
@@ -28,29 +42,58 @@ class ScriptConsole implements Closeable {
 	
 	public new(
 		boolean printToConsole,
+		boolean printToRuntimeConsole,
 		boolean cleanFiles,
 		URI messageConsoleURI,
 		URI errorConsoleURI,
 		URI statisticsConsoleURI)
 	{
+		val List<String> errorMessagesDuringInitialisation = new LinkedList
+		
+		this.messageWorkspace = prepareWorkspace(messageConsoleURI,errorMessagesDuringInitialisation)
+		this.messageFileName = prepareFileName(messageConsoleURI)
+		this.errorWorkspace = prepareWorkspace(errorConsoleURI,errorMessagesDuringInitialisation)
+		this.errorFileName = prepareFileName(errorConsoleURI)
+		this.statisticsWorkspace = prepareWorkspace(statisticsConsoleURI,errorMessagesDuringInitialisation)
+		this.statisticsFileName = prepareFileName(statisticsConsoleURI)
+		
 		this.printToConsole = printToConsole
-		this.cleanFiles = cleanFiles
-		this.messageConsoleFile = messageConsoleURI.prepareFile
-		this.errorConsoleFile = errorConsoleURI.prepareFile
-		this.statisticsConsoleFile = statisticsConsoleURI.prepareFile
+		this.runtimeConsole = if(printToRuntimeConsole) { prepareRuntimeConsole } else { null }
+		
+		errorMessagesDuringInitialisation.forEach[
+			this.writeError('''Error during console initialisation: "«it»"''')
+		]
 	}
 	
 	public def writeMessage(String message) {
-		messageConsoleFile.writeToFile(message)
+		if(messageWorkspace!=null) {
+			messageWorkspace.writeText(messageFileName,message);
+		}
+		if(printToConsole) {
+			println(message)
+		}
+		if(runtimeConsole!==null) {
+			this.writeToRuntimeConsole(message)
+		}
 	}
 	public def writeError(String message) {
-		errorConsoleFile.writeToFile(message)
+		if(errorWorkspace!=null) {
+			errorWorkspace.writeText(errorFileName,message);
+		}
+		if(printToConsole) {
+			println(message)
+		}
+		if(runtimeConsole!==null) {
+			this.writeToRuntimeConsole(message)
+		}
 	}
 	public def writeStatistics(LinkedHashMap<String,? extends Object> statistics) {
-		val message = '''
+		if(statisticsWorkspace!==null) {
+			val message = '''
 			«FOR key : statistics.keySet SEPARATOR delimier»«key»«ENDFOR»
 			«FOR value : statistics.values SEPARATOR delimier»«value»«ENDFOR»'''
-		statisticsConsoleFile.writeToFile(message)
+			statisticsWorkspace.writeText(statisticsFileName,message);
+		}
 	}
 	public def addStatistics(LinkedHashMap<String,? extends Object> statistics) {
 		for(key : statistics.keySet) {
@@ -59,61 +102,72 @@ class ScriptConsole implements Closeable {
 		this.statisticsDataBuffer.add(statistics)
 	}
 	public def flushStatistics() {
-		val message = '''
+		if(statisticsWorkspace!==null) {
+			val message = '''
 			«FOR key : statisticsHeaderBuffer SEPARATOR delimier»«key»«ENDFOR»
 			«FOR line : statisticsDataBuffer »
 				«FOR key : statisticsHeaderBuffer»«IF line.containsKey(key)»«empty»«ELSE»«line.get(key)»«ENDIF»«ENDFOR»
 			«ENDFOR»
 			'''
-		statisticsConsoleFile.writeToFile(message)
-	}
-	/**
-	 * Writes a line of text to a file and the console. Initializes a writer to the file for at the first message.
-	 */
-	private def writeToFile(File file, String text) {
-		if(file != null) {
-			val writer = if(this.file2Writer.containsKey(file)) {
-				this.file2Writer.get(file)
-			} else {
-				if(!file.exists) {
-					file.createNewFile
-				}
-				val writer = new PrintWriter(file, "UTF-8");
-				this.file2Writer.put(file,writer)
-				writer
-			}
-			writer.println(text)
-		}
-		if(printToConsole) {
-			println(text)
+			statisticsWorkspace.writeText(statisticsFileName,message);
 		}
 	}
-	
-	private def prepareFile(URI uri) {
+
+	private def prepareWorkspace(URI uri, List<String> errors) {
 		if (uri === null) {
 			return null
 		} else {
-			if(uri.isFile) {
-				val fileString = uri.toFileString
-				val file = new File(fileString)
-				if (this.cleanFiles && file.exists) {
-					file.delete
+			try{
+				val folderURI = uri.trimSegments(1)
+				if(folderURI.isFile) {
+					return new FileSystemWorkspace(folderURI.toString,"")=>[init]
+				} else if(folderURI.isPlatformResource) {
+					return new ProjectWorkspace(folderURI.toString,"")=>[init]
+				} else {
+					throw new UnsupportedOperationException('''Unsupported file usi: "«uri»"!''')
 				}
-				return file
-			} else if(uri.isPlatformResource) {
-				val platformString = uri.toPlatformString(true)
-				val file = new File(platformString)
-				if (this.cleanFiles && file.exists) {
-					file.delete
-				}
-				return file
-			} else {
-				throw new UnsupportedOperationException('''Unksupported file usi: "«uri»"!''')
+			} catch(Exception e) {
+				errors += e.message
+				return null
 			}
 		}
 	}
+	private def prepareFileName(URI uri) {
+		if(uri!==null) {
+			return uri.lastSegment
+		} else {
+			null
+		}
+	}
 	
-	override close() throws IOException {
-		this.file2Writer.values.forEach[close]
+	private def MessageConsole prepareRuntimeConsole() {
+		val plugin = ConsolePlugin.getDefault();
+		val conMan = plugin.getConsoleManager();
+		val existingConsoles = conMan.getConsoles();
+		val existingConsolesWithID = existingConsoles.filter[it.name.equals(consoleID)]
+		if(existingConsolesWithID.empty) {
+			val MessageConsole res = new MessageConsole(consoleID,null)
+			conMan.addConsoles(#[res]);
+			return res
+		} else {
+			return existingConsolesWithID.head as MessageConsole
+		}
+	}
+	
+	private def writeToRuntimeConsole(CharSequence message) {
+		// 1. reveal the console view
+//		val IWorkbench wb = PlatformUI.getWorkbench();
+//		val IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+//		val IWorkbenchPage page = win.getActivePage();
+//		val id = IConsoleConstants.ID_CONSOLE_VIEW;
+//		val view = page.showView(id) as IConsoleView;
+//		view.display(this.runtimeConsole);	
+		
+		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(this.runtimeConsole);
+		
+		// 2. write to the console
+		val stream = this.runtimeConsole.newMessageStream
+		stream.println(message.toString)
+		stream.close
 	}
 }

@@ -16,12 +16,14 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation;
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
 import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
 import java.util.Optional
-import org.eclipse.emf.common.util.URI
 import org.eclipse.core.runtime.IProgressMonitor
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.SolverProgressMonitor
+import org.eclipse.emf.common.util.URI
+import java.util.LinkedHashMap
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
+import hu.bme.mit.inf.dslreasoner.logic.model.statistics.StatisticSections2CSV
 
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
@@ -29,6 +31,7 @@ class GenerationTaskExecutor {
 	val queryLoader = new QueryLoader
 	val solverLoader = new SolverLoader
 	val scopeLoader = new ScopeLoader
+	val statisticsUtil = new StatisticSections2CSV
 	
 	val metamodelValidator = new MetamodelValidator
 	val queryAndMetamodelValidator = new QueryAndMetamodelValidator
@@ -57,7 +60,7 @@ class GenerationTaskExecutor {
 		val memoryLimit = scriptExecutor.getMemoryLimit(configSpecification)
 		
 		// 2. create console
-		val console = new ScriptConsole(true,true,
+		val console = new ScriptConsole(false,true,false,
 			if(messageFile!==null) URI.createURI(messageFile.path) else null,
 			if(debugFolder!==null) URI.createURI('''«debugFolder.path»/errors.txt''') else null,
 			if(statisticsFile!==null) URI.createURI(statisticsFile.path) else null
@@ -98,6 +101,7 @@ class GenerationTaskExecutor {
 			
 			// 4. translate all description to a logic problem
 			monitor.subTask('''Translating all resources to logic''')
+			var domain2LogicTransformationTime = System.nanoTime
 			val Ecore2Logic ecore2Logic = new Ecore2Logic
 			val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
 			val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
@@ -118,6 +122,7 @@ class GenerationTaskExecutor {
 					new Viatra2LogicConfiguration
 				).output
 			}
+			domain2LogicTransformationTime = System.nanoTime-domain2LogicTransformationTime
 			if(documentationLevel.atLeastNormal) {
 				reasonerWorkspace.writeModel(problem,"generation.logicproblem")
 			}
@@ -161,7 +166,7 @@ class GenerationTaskExecutor {
 				solverLoader.setRunIndex(solverConfig,configurationMap,run,console)
 				solverConfig.progressMonitor = new EclipseProgressMonitor(monitor)
 				val reasonerWorkspaceForRun = if(runs > 1) {
-					reasonerWorkspace.subWorkspace('''run«run»''',"") => [init]
+					reasonerWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
 				} else {
 					reasonerWorkspace
 				}
@@ -171,6 +176,8 @@ class GenerationTaskExecutor {
 				console.writeMessage(solution.soutionDescription.toString)
 				
 				//  8. Solution processing
+				
+				// 8.1 Visualisation
 				if(solution instanceof ModelResult) {
 					val interpretations = solver.getInterpretations(solution)
 					val outputWorkspaceForRun = if(runs > 1) {
@@ -180,7 +187,7 @@ class GenerationTaskExecutor {
 					}
 					
 					for(interpretationIndex : 0..<interpretations.size) {
-						monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»: Visualising solution «interpretationIndex»/«interpretations.size»''')
+						monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»: Visualising solution «interpretationIndex+1»/«interpretations.size»''')
 						val interpretation = interpretations.get(interpretationIndex)
 						val model = logic2Ecore.transformInterpretation(interpretation,modelGeneration.trace)
 						outputWorkspaceForRun.writeModel(model,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».xmi''')
@@ -202,7 +209,20 @@ class GenerationTaskExecutor {
 					monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
 				}
 				
+				// 8.2 Statistics
+				val statistics = new LinkedHashMap
+				statistics.put("Task",(task.eContainer as ConfigurationScript).commands.indexOf(task)+1)
+				statistics.put("Run",run)
+				statistics.put("Result",solution.class.simpleName)
+				statistics.put("Domain to logic transformation time",domain2LogicTransformationTime/1000000)
+				statistics.put("Logic to solver transformation time",solution.statistics.transformationTime)
+				statistics.put("Solver time",solution.statistics.solverTime)
+				for(entry: solution.statistics.entries) {
+					statistics.put(entry.name,statisticsUtil.readValue(entry))
+				}
+				console.addStatistics(statistics)
 			}
+			console.flushStatistics
 			console.writeMessage("Model generation finished")
 		} catch(Exception e) {
 			console.writeError('''Error occured: «e.message»''')

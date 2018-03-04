@@ -84,6 +84,6 @@ class StatisticSections2CSV {
 			values+=map
 		}
 	}
-	private def dispatch String readValue(IntStatisticEntry e) { return e.value.toString }
-	private def dispatch String readValue(RealStatisticEntry e){ return e.value.toString }
+	public def dispatch String readValue(IntStatisticEntry e) { return e.value.toString }
+	public def dispatch String readValue(RealStatisticEntry e){ return e.value.toString }
 }
