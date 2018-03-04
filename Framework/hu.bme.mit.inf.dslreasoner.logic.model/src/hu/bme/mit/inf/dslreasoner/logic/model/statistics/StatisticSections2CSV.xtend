@@ -8,6 +8,7 @@ import java.util.HashMap
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.StringStatisticEntry
 
 class StatisticsData {
 	public var List<Pair<String,String>> inputConfiguration
@@ -86,4 +87,5 @@ class StatisticSections2CSV {
 	}
 	public def dispatch String readValue(IntStatisticEntry e) { return e.value.toString }
 	public def dispatch String readValue(RealStatisticEntry e){ return e.value.toString }
+	public def dispatch String readValue(StringStatisticEntry e) { return e.value }
 }

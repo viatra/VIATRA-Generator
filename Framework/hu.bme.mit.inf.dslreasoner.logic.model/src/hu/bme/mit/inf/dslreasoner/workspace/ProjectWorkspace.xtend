@@ -85,7 +85,8 @@ class ProjectWorkspace extends ReasonerWorkspace{
 			file.create(new ByteArrayInputStream(content.toString().getBytes()),true, new NullProgressMonitor());
 			return URI.createPlatformResourceURI(file.projectRelativePath.toString,true)
 		}
-		else throw new IOException("The file is already existing.")
+		file.appendContents(new ByteArrayInputStream(content.toString().getBytes()),true,false,new NullProgressMonitor())
+		return URI.createPlatformResourceURI(file.projectRelativePath.toString,true)
 	}
 	
 	override readText(String name) {		

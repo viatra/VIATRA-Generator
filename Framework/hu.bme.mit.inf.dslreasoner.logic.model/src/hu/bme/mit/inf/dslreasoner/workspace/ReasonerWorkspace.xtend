@@ -1,16 +1,15 @@
 package hu.bme.mit.inf.dslreasoner.workspace
 
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.FileNotFoundException
 import java.util.Collections
+import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.resource.Resource
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.util.List
-import java.io.File
 
 abstract class ReasonerWorkspace{
 	
@@ -98,9 +97,6 @@ abstract class ReasonerWorkspace{
 	}
 	val static protected deactivationPostfix = ".deactivated"
 	def protected void renameFile(String name)
-	
-//	def void reactivate()
-//	def void deactivate()
 
 	def public List<String> allFiles();
 
