@@ -212,7 +212,7 @@ enum VLSDefinedFunctor:
 */
 
 VLSAtomic returns VLSTerm:
-	VLSAtomicConstant | VLSAtomicFunction
+	VLSAtomicConstant | VLSAtomicFunction | VLSVariable
 ;
 
 VLSAtomicConstant returns VLSTerm:
@@ -235,7 +235,7 @@ VLSFofTerm returns VLSTerm:
 	(VLSVariable | VLSFunctionFof | VLSDefinedTerm )
 ;
 
-VLSVariable:
+VLSVariable returns VLSTerm:
 	name = UPPER_WORD_ID
 ;
 

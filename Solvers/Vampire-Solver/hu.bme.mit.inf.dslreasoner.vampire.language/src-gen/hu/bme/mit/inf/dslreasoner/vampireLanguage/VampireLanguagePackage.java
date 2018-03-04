@@ -234,41 +234,22 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_TERM = 4;
 
   /**
-   * The number of structural features of the '<em>VLS Term</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_TERM_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSVariableImpl
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSVariable()
-   * @generated
-   */
-  int VLS_VARIABLE = 5;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE__NAME = VLS_TERM_FEATURE_COUNT + 0;
+  int VLS_TERM__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>VLS Variable</em>' class.
+   * The number of structural features of the '<em>VLS Term</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 1;
+  int VLS_TERM_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionFofImpl <em>VLS Function Fof</em>}' class.
@@ -278,7 +259,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunctionFof()
    * @generated
    */
-  int VLS_FUNCTION_FOF = 6;
+  int VLS_FUNCTION_FOF = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FUNCTION_FOF__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Functor</b></em>' attribute.
@@ -315,7 +305,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSDefinedTerm()
    * @generated
    */
-  int VLS_DEFINED_TERM = 7;
+  int VLS_DEFINED_TERM = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_DEFINED_TERM__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -343,7 +342,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSEquivalent()
    * @generated
    */
-  int VLS_EQUIVALENT = 8;
+  int VLS_EQUIVALENT = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_EQUIVALENT__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -380,7 +388,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSImplies()
    * @generated
    */
-  int VLS_IMPLIES = 9;
+  int VLS_IMPLIES = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_IMPLIES__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -417,7 +434,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRevImplies()
    * @generated
    */
-  int VLS_REV_IMPLIES = 10;
+  int VLS_REV_IMPLIES = 9;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_REV_IMPLIES__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -454,7 +480,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSXnor()
    * @generated
    */
-  int VLS_XNOR = 11;
+  int VLS_XNOR = 10;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_XNOR__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -491,7 +526,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSNor()
    * @generated
    */
-  int VLS_NOR = 12;
+  int VLS_NOR = 11;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_NOR__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -528,7 +572,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSNand()
    * @generated
    */
-  int VLS_NAND = 13;
+  int VLS_NAND = 12;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_NAND__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -565,7 +618,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAnd()
    * @generated
    */
-  int VLS_AND = 14;
+  int VLS_AND = 13;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_AND__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -602,7 +664,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSOr()
    * @generated
    */
-  int VLS_OR = 15;
+  int VLS_OR = 14;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_OR__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -639,7 +710,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSUniversalQuantifier()
    * @generated
    */
-  int VLS_UNIVERSAL_QUANTIFIER = 16;
+  int VLS_UNIVERSAL_QUANTIFIER = 15;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_UNIVERSAL_QUANTIFIER__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -676,7 +756,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSExistentialQuantifier()
    * @generated
    */
-  int VLS_EXISTENTIAL_QUANTIFIER = 17;
+  int VLS_EXISTENTIAL_QUANTIFIER = 16;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_EXISTENTIAL_QUANTIFIER__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -713,7 +802,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSUnaryNegation()
    * @generated
    */
-  int VLS_UNARY_NEGATION = 18;
+  int VLS_UNARY_NEGATION = 17;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_UNARY_NEGATION__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -741,7 +839,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSInequality()
    * @generated
    */
-  int VLS_INEQUALITY = 19;
+  int VLS_INEQUALITY = 18;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_INEQUALITY__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -778,7 +885,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSEquality()
    * @generated
    */
-  int VLS_EQUALITY = 20;
+  int VLS_EQUALITY = 19;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_EQUALITY__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -815,7 +931,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAssignment()
    * @generated
    */
-  int VLS_ASSIGNMENT = 21;
+  int VLS_ASSIGNMENT = 20;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_ASSIGNMENT__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -852,7 +977,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSConstant()
    * @generated
    */
-  int VLS_CONSTANT = 22;
+  int VLS_CONSTANT = 21;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -861,7 +986,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_CONSTANT__NAME = VLS_TERM_FEATURE_COUNT + 0;
+  int VLS_CONSTANT__NAME = VLS_TERM__NAME;
 
   /**
    * The number of structural features of the '<em>VLS Constant</em>' class.
@@ -870,7 +995,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_CONSTANT_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 1;
+  int VLS_CONSTANT_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTrueImpl <em>VLS True</em>}' class.
@@ -880,7 +1005,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTrue()
    * @generated
    */
-  int VLS_TRUE = 23;
+  int VLS_TRUE = 22;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -889,7 +1014,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_TRUE__NAME = VLS_TERM_FEATURE_COUNT + 0;
+  int VLS_TRUE__NAME = VLS_TERM__NAME;
 
   /**
    * The number of structural features of the '<em>VLS True</em>' class.
@@ -898,7 +1023,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_TRUE_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 1;
+  int VLS_TRUE_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFalseImpl <em>VLS False</em>}' class.
@@ -908,7 +1033,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFalse()
    * @generated
    */
-  int VLS_FALSE = 24;
+  int VLS_FALSE = 23;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -917,7 +1042,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_FALSE__NAME = VLS_TERM_FEATURE_COUNT + 0;
+  int VLS_FALSE__NAME = VLS_TERM__NAME;
 
   /**
    * The number of structural features of the '<em>VLS False</em>' class.
@@ -926,7 +1051,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_FALSE_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 1;
+  int VLS_FALSE_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionImpl <em>VLS Function</em>}' class.
@@ -936,7 +1061,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunction()
    * @generated
    */
-  int VLS_FUNCTION = 25;
+  int VLS_FUNCTION = 24;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FUNCTION__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -973,7 +1107,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSLess()
    * @generated
    */
-  int VLS_LESS = 26;
+  int VLS_LESS = 25;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -982,7 +1116,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_LESS__NAME = VLS_TERM_FEATURE_COUNT + 0;
+  int VLS_LESS__NAME = VLS_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Terms</b></em>' containment reference list.
@@ -991,7 +1125,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_LESS__TERMS = VLS_TERM_FEATURE_COUNT + 1;
+  int VLS_LESS__TERMS = VLS_TERM_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>VLS Less</em>' class.
@@ -1000,7 +1134,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_LESS_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 2;
+  int VLS_LESS_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSIntImpl <em>VLS Int</em>}' class.
@@ -1010,7 +1144,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSInt()
    * @generated
    */
-  int VLS_INT = 27;
+  int VLS_INT = 26;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_INT__NAME = VLS_DEFINED_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1038,7 +1181,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSReal()
    * @generated
    */
-  int VLS_REAL = 28;
+  int VLS_REAL = 27;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_REAL__NAME = VLS_DEFINED_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1066,7 +1218,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRational()
    * @generated
    */
-  int VLS_RATIONAL = 29;
+  int VLS_RATIONAL = 28;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_RATIONAL__NAME = VLS_DEFINED_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1094,7 +1255,16 @@ public interface VampireLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSDoubleQuote()
    * @generated
    */
-  int VLS_DOUBLE_QUOTE = 30;
+  int VLS_DOUBLE_QUOTE = 29;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_DOUBLE_QUOTE__NAME = VLS_DEFINED_TERM__NAME;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1276,25 +1446,15 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSTerm();
 
   /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable <em>VLS Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>VLS Variable</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable
-   * @generated
-   */
-  EClass getVLSVariable();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable#getName()
-   * @see #getVLSVariable()
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm#getName()
+   * @see #getVLSTerm()
    * @generated
    */
-  EAttribute getVLSVariable_Name();
+  EAttribute getVLSTerm_Name();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof <em>VLS Function Fof</em>}'.
@@ -1797,17 +1957,6 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSConstant();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant#getName()
-   * @see #getVLSConstant()
-   * @generated
-   */
-  EAttribute getVLSConstant_Name();
-
-  /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue <em>VLS True</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1818,17 +1967,6 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSTrue();
 
   /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue#getName()
-   * @see #getVLSTrue()
-   * @generated
-   */
-  EAttribute getVLSTrue_Name();
-
-  /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse <em>VLS False</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1837,17 +1975,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EClass getVLSFalse();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFalse#getName()
-   * @see #getVLSFalse()
-   * @generated
-   */
-  EAttribute getVLSFalse_Name();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction <em>VLS Function</em>}'.
@@ -1890,17 +2017,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EClass getVLSLess();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSLess#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSLess#getName()
-   * @see #getVLSLess()
-   * @generated
-   */
-  EAttribute getVLSLess_Name();
 
   /**
    * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSLess#getTerms <em>Terms</em>}'.
@@ -2107,22 +2223,12 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_TERM = eINSTANCE.getVLSTerm();
 
     /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSVariableImpl
-     * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSVariable()
-     * @generated
-     */
-    EClass VLS_VARIABLE = eINSTANCE.getVLSVariable();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VLS_VARIABLE__NAME = eINSTANCE.getVLSVariable_Name();
+    EAttribute VLS_TERM__NAME = eINSTANCE.getVLSTerm_Name();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionFofImpl <em>VLS Function Fof</em>}' class.
@@ -2535,14 +2641,6 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_CONSTANT = eINSTANCE.getVLSConstant();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute VLS_CONSTANT__NAME = eINSTANCE.getVLSConstant_Name();
-
-    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTrueImpl <em>VLS True</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2553,14 +2651,6 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_TRUE = eINSTANCE.getVLSTrue();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute VLS_TRUE__NAME = eINSTANCE.getVLSTrue_Name();
-
-    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFalseImpl <em>VLS False</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2569,14 +2659,6 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EClass VLS_FALSE = eINSTANCE.getVLSFalse();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute VLS_FALSE__NAME = eINSTANCE.getVLSFalse_Name();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSFunctionImpl <em>VLS Function</em>}' class.
@@ -2613,14 +2695,6 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EClass VLS_LESS = eINSTANCE.getVLSLess();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute VLS_LESS__NAME = eINSTANCE.getVLSLess_Name();
 
     /**
      * The meta object literal for the '<em><b>Terms</b></em>' containment reference list feature.

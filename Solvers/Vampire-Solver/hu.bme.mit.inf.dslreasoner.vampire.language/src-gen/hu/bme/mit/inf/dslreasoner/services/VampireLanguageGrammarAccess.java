@@ -967,6 +967,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVLSAtomicConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVLSAtomicFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVLSVariableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		///*
 		//enum VLSDefinedFunctor:
@@ -976,10 +977,10 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//		 TRUNCATE='$truncate' | ROUND='$round' | TO_INT='$to_int' | TO_RAT='$to_rat' | TO_REAL='$to_real'
 		//    ;
 		//*/ VLSAtomic VLSTerm:
-		//	VLSAtomicConstant | VLSAtomicFunction;
+		//	VLSAtomicConstant | VLSAtomicFunction | VLSVariable;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//VLSAtomicConstant | VLSAtomicFunction
+		//VLSAtomicConstant | VLSAtomicFunction | VLSVariable
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//VLSAtomicConstant
@@ -987,6 +988,9 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//VLSAtomicFunction
 		public RuleCall getVLSAtomicFunctionParserRuleCall_1() { return cVLSAtomicFunctionParserRuleCall_1; }
+		
+		//VLSVariable
+		public RuleCall getVLSVariableParserRuleCall_2() { return cVLSVariableParserRuleCall_2; }
 	}
 	public class VLSAtomicConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSAtomicConstant");
@@ -1220,7 +1224,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameUPPER_WORD_IDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//VLSVariable:
+		//VLSVariable VLSTerm:
 		//	name=UPPER_WORD_ID;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1956,7 +1960,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//		 TRUNCATE='$truncate' | ROUND='$round' | TO_INT='$to_int' | TO_RAT='$to_rat' | TO_REAL='$to_real'
 	//    ;
 	//*/ VLSAtomic VLSTerm:
-	//	VLSAtomicConstant | VLSAtomicFunction;
+	//	VLSAtomicConstant | VLSAtomicFunction | VLSVariable;
 	public VLSAtomicElements getVLSAtomicAccess() {
 		return pVLSAtomic;
 	}
@@ -1997,7 +2001,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getVLSFofTermAccess().getRule();
 	}
 	
-	//VLSVariable:
+	//VLSVariable VLSTerm:
 	//	name=UPPER_WORD_ID;
 	public VLSVariableElements getVLSVariableAccess() {
 		return pVLSVariable;

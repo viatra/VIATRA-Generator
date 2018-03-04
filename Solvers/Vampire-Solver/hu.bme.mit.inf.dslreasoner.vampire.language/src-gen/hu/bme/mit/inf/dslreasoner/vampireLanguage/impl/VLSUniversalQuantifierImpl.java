@@ -5,7 +5,6 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import java.util.Collection;
@@ -47,7 +46,7 @@ public class VLSUniversalQuantifierImpl extends VLSTermImpl implements VLSUniver
    * @generated
    * @ordered
    */
-  protected EList<VLSVariable> variables;
+  protected EList<VLSTerm> variables;
 
   /**
    * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
@@ -85,11 +84,11 @@ public class VLSUniversalQuantifierImpl extends VLSTermImpl implements VLSUniver
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VLSVariable> getVariables()
+  public EList<VLSTerm> getVariables()
   {
     if (variables == null)
     {
-      variables = new EObjectContainmentEList<VLSVariable>(VLSVariable.class, this, VampireLanguagePackage.VLS_UNIVERSAL_QUANTIFIER__VARIABLES);
+      variables = new EObjectContainmentEList<VLSTerm>(VLSTerm.class, this, VampireLanguagePackage.VLS_UNIVERSAL_QUANTIFIER__VARIABLES);
     }
     return variables;
   }
@@ -191,7 +190,7 @@ public class VLSUniversalQuantifierImpl extends VLSTermImpl implements VLSUniver
     {
       case VampireLanguagePackage.VLS_UNIVERSAL_QUANTIFIER__VARIABLES:
         getVariables().clear();
-        getVariables().addAll((Collection<? extends VLSVariable>)newValue);
+        getVariables().addAll((Collection<? extends VLSTerm>)newValue);
         return;
       case VampireLanguagePackage.VLS_UNIVERSAL_QUANTIFIER__OPERAND:
         setOperand((VLSTerm)newValue);

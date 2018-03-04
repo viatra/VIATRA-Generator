@@ -70,7 +70,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
       case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
-      case VampireLanguagePackage.VLS_VARIABLE: return createVLSVariable();
       case VampireLanguagePackage.VLS_FUNCTION_FOF: return createVLSFunctionFof();
       case VampireLanguagePackage.VLS_DEFINED_TERM: return createVLSDefinedTerm();
       case VampireLanguagePackage.VLS_EQUIVALENT: return createVLSEquivalent();
@@ -154,17 +153,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSTermImpl vlsTerm = new VLSTermImpl();
     return vlsTerm;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSVariable createVLSVariable()
-  {
-    VLSVariableImpl vlsVariable = new VLSVariableImpl();
-    return vlsVariable;
   }
 
   /**

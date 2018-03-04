@@ -31,7 +31,6 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSXnor;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
@@ -86,13 +85,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
    * @generated
    */
   private EClass vlsTermEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass vlsVariableEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -487,19 +479,9 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getVLSVariable()
+  public EAttribute getVLSTerm_Name()
   {
-    return vlsVariableEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getVLSVariable_Name()
-  {
-    return (EAttribute)vlsVariableEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)vlsTermEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -977,16 +959,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVLSConstant_Name()
-  {
-    return (EAttribute)vlsConstantEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getVLSTrue()
   {
     return vlsTrueEClass;
@@ -997,29 +969,9 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVLSTrue_Name()
-  {
-    return (EAttribute)vlsTrueEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getVLSFalse()
   {
     return vlsFalseEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getVLSFalse_Name()
-  {
-    return (EAttribute)vlsFalseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1067,19 +1019,9 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVLSLess_Name()
-  {
-    return (EAttribute)vlsLessEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getVLSLess_Terms()
   {
-    return (EReference)vlsLessEClass.getEStructuralFeatures().get(1);
+    return (EReference)vlsLessEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1171,9 +1113,7 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     createEReference(vlsAnnotationEClass, VLS_ANNOTATION__TERMS);
 
     vlsTermEClass = createEClass(VLS_TERM);
-
-    vlsVariableEClass = createEClass(VLS_VARIABLE);
-    createEAttribute(vlsVariableEClass, VLS_VARIABLE__NAME);
+    createEAttribute(vlsTermEClass, VLS_TERM__NAME);
 
     vlsFunctionFofEClass = createEClass(VLS_FUNCTION_FOF);
     createEAttribute(vlsFunctionFofEClass, VLS_FUNCTION_FOF__FUNCTOR);
@@ -1238,20 +1178,16 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     createEReference(vlsAssignmentEClass, VLS_ASSIGNMENT__RIGHT);
 
     vlsConstantEClass = createEClass(VLS_CONSTANT);
-    createEAttribute(vlsConstantEClass, VLS_CONSTANT__NAME);
 
     vlsTrueEClass = createEClass(VLS_TRUE);
-    createEAttribute(vlsTrueEClass, VLS_TRUE__NAME);
 
     vlsFalseEClass = createEClass(VLS_FALSE);
-    createEAttribute(vlsFalseEClass, VLS_FALSE__NAME);
 
     vlsFunctionEClass = createEClass(VLS_FUNCTION);
     createEAttribute(vlsFunctionEClass, VLS_FUNCTION__CONSTANT);
     createEReference(vlsFunctionEClass, VLS_FUNCTION__TERMS);
 
     vlsLessEClass = createEClass(VLS_LESS);
-    createEAttribute(vlsLessEClass, VLS_LESS__NAME);
     createEReference(vlsLessEClass, VLS_LESS__TERMS);
 
     vlsIntEClass = createEClass(VLS_INT);
@@ -1292,7 +1228,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    vlsVariableEClass.getESuperTypes().add(this.getVLSTerm());
     vlsFunctionFofEClass.getESuperTypes().add(this.getVLSTerm());
     vlsDefinedTermEClass.getESuperTypes().add(this.getVLSTerm());
     vlsEquivalentEClass.getESuperTypes().add(this.getVLSTerm());
@@ -1339,9 +1274,7 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     initEReference(getVLSAnnotation_Terms(), this.getVLSAnnotation(), null, "terms", null, 0, -1, VLSAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsTermEClass, VLSTerm.class, "VLSTerm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(vlsVariableEClass, VLSVariable.class, "VLSVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVLSVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVLSTerm_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsFunctionFofEClass, VLSFunctionFof.class, "VLSFunctionFof", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVLSFunctionFof_Functor(), ecorePackage.getEString(), "functor", null, 0, 1, VLSFunctionFof.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1383,11 +1316,11 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     initEReference(getVLSOr_Right(), this.getVLSTerm(), null, "right", null, 0, 1, VLSOr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsUniversalQuantifierEClass, VLSUniversalQuantifier.class, "VLSUniversalQuantifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getVLSUniversalQuantifier_Variables(), this.getVLSVariable(), null, "variables", null, 0, -1, VLSUniversalQuantifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVLSUniversalQuantifier_Variables(), this.getVLSTerm(), null, "variables", null, 0, -1, VLSUniversalQuantifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVLSUniversalQuantifier_Operand(), this.getVLSTerm(), null, "operand", null, 0, 1, VLSUniversalQuantifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsExistentialQuantifierEClass, VLSExistentialQuantifier.class, "VLSExistentialQuantifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getVLSExistentialQuantifier_Variables(), this.getVLSVariable(), null, "variables", null, 0, -1, VLSExistentialQuantifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVLSExistentialQuantifier_Variables(), this.getVLSTerm(), null, "variables", null, 0, -1, VLSExistentialQuantifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVLSExistentialQuantifier_Operand(), this.getVLSTerm(), null, "operand", null, 0, 1, VLSExistentialQuantifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsUnaryNegationEClass, VLSUnaryNegation.class, "VLSUnaryNegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1406,20 +1339,16 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     initEReference(getVLSAssignment_Right(), this.getVLSTerm(), null, "right", null, 0, 1, VLSAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsConstantEClass, VLSConstant.class, "VLSConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVLSConstant_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsTrueEClass, VLSTrue.class, "VLSTrue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVLSTrue_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSTrue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsFalseEClass, VLSFalse.class, "VLSFalse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVLSFalse_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSFalse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsFunctionEClass, VLSFunction.class, "VLSFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVLSFunction_Constant(), ecorePackage.getEString(), "constant", null, 0, 1, VLSFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVLSFunction_Terms(), this.getVLSTerm(), null, "terms", null, 0, -1, VLSFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsLessEClass, VLSLess.class, "VLSLess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVLSLess_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSLess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVLSLess_Terms(), this.getVLSTerm(), null, "terms", null, 0, -1, VLSLess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vlsIntEClass, VLSInt.class, "VLSInt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

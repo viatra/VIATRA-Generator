@@ -1682,6 +1682,15 @@ ruleVLSAtomic returns [EObject current=null]
 			$current = $this_VLSAtomicFunction_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSAtomicAccess().getVLSVariableParserRuleCall_2());
+		}
+		this_VLSVariable_2=ruleVLSVariable
+		{
+			$current = $this_VLSVariable_2.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 

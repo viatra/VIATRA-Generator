@@ -1266,6 +1266,12 @@ rule__VLSAtomic__Alternatives
 		ruleVLSAtomicFunction
 		{ after(grammarAccess.getVLSAtomicAccess().getVLSAtomicFunctionParserRuleCall_1()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getVLSAtomicAccess().getVLSVariableParserRuleCall_2()); }
+		ruleVLSVariable
+		{ after(grammarAccess.getVLSAtomicAccess().getVLSVariableParserRuleCall_2()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);

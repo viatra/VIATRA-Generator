@@ -101,11 +101,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSTermAdapter();
       }
       @Override
-      public Adapter caseVLSVariable(VLSVariable object)
-      {
-        return createVLSVariableAdapter();
-      }
-      @Override
       public Adapter caseVLSFunctionFof(VLSFunctionFof object)
       {
         return createVLSFunctionFofAdapter();
@@ -323,21 +318,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSTermAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable <em>VLS Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable
-   * @generated
-   */
-  public Adapter createVLSVariableAdapter()
   {
     return null;
   }

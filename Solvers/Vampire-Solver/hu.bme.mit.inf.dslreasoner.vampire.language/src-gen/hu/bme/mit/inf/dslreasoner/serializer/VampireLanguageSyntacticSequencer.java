@@ -107,6 +107,7 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 	 *     (rule start) (ambiguity) name=DOUBLE_DOLLAR_ID
 	 *     (rule start) (ambiguity) name=LOWER_WORD_ID
 	 *     (rule start) (ambiguity) name=SINGLE_QUOTE
+	 *     (rule start) (ambiguity) name=UPPER_WORD_ID
 	 *     (rule start) (ambiguity) {VLSAnd.left=}
 	 *     (rule start) (ambiguity) {VLSAssignment.left=}
 	 *     (rule start) (ambiguity) {VLSEquality.left=}

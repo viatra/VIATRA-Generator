@@ -28,10 +28,10 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSOr;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRational;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRevImplies;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSXnor;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel;
@@ -136,6 +136,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 			case VampireLanguagePackage.VLS_REV_IMPLIES:
 				sequence_VLSBinary(context, (VLSRevImplies) semanticObject); 
 				return; 
+			case VampireLanguagePackage.VLS_TERM:
+				sequence_VLSVariable(context, (VLSTerm) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_TRUE:
 				sequence_VLSAtomicConstant(context, (VLSTrue) semanticObject); 
 				return; 
@@ -144,9 +147,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				return; 
 			case VampireLanguagePackage.VLS_UNIVERSAL_QUANTIFIER:
 				sequence_VLSUniversalQuantifier(context, (VLSUniversalQuantifier) semanticObject); 
-				return; 
-			case VampireLanguagePackage.VLS_VARIABLE:
-				sequence_VLSVariable(context, (VLSVariable) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_XNOR:
 				sequence_VLSBinary(context, (VLSXnor) semanticObject); 
@@ -236,8 +236,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSAtomicConstant(ISerializationContext context, VLSFalse semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_FALSE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_FALSE__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSAtomicConstantAccess().getNameFalseKeyword_2_1_0(), semanticObject.getName());
@@ -270,8 +270,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSAtomicConstant(ISerializationContext context, VLSTrue semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TRUE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TRUE__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSAtomicConstantAccess().getNameTrueKeyword_1_1_0(), semanticObject.getName());
@@ -875,16 +875,32 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
-	 *     VLSFofTerm returns VLSVariable
-	 *     VLSVariable returns VLSVariable
+	 *     VLSTerm returns VLSTerm
+	 *     VLSBinary returns VLSTerm
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSTerm
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSTerm
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSTerm
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSTerm
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSTerm
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSTerm
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSTerm
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSTerm
+	 *     VLSUnitaryFormula returns VLSTerm
+	 *     VLSUnaryInfix returns VLSTerm
+	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSTerm
+	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSTerm
+	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSTerm
+	 *     VLSAtomic returns VLSTerm
+	 *     VLSFofTerm returns VLSTerm
+	 *     VLSVariable returns VLSTerm
 	 *
 	 * Constraint:
 	 *     name=UPPER_WORD_ID
 	 */
-	protected void sequence_VLSVariable(ISerializationContext context, VLSVariable semanticObject) {
+	protected void sequence_VLSVariable(ISerializationContext context, VLSTerm semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSVariableAccess().getNameUPPER_WORD_IDTerminalRuleCall_0(), semanticObject.getName());
