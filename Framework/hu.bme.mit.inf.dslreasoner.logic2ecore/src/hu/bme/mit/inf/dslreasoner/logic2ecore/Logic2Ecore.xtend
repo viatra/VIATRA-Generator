@@ -88,7 +88,7 @@ class Logic2Ecore {
 				return candidate
 			}
 		}
-		throw new AssertionError("Object has no unique concrete type!")
+		throw new AssertionError('''Object has no unique concrete type! Types: [«FOR c:classes SEPARATOR ","»«c.name»«ENDFOR»]''')
 	}
 	
 	def getRoot(Collection<EObject> objects) {
