@@ -178,6 +178,7 @@ class GenerationTaskExecutor {
 				//  8. Solution processing
 				
 				// 8.1 Visualisation
+				var solutionVisualisationTime = System.nanoTime
 				if(solution instanceof ModelResult) {
 					val interpretations = solver.getInterpretations(solution)
 					val outputWorkspaceForRun = if(runs > 1) {
@@ -208,6 +209,7 @@ class GenerationTaskExecutor {
 				} else {
 					monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
 				}
+				solutionVisualisationTime = System.nanoTime - solutionVisualisationTime
 				
 				// 8.2 Statistics
 				val statistics = new LinkedHashMap
@@ -217,6 +219,7 @@ class GenerationTaskExecutor {
 				statistics.put("Domain to logic transformation time",domain2LogicTransformationTime/1000000)
 				statistics.put("Logic to solver transformation time",solution.statistics.transformationTime)
 				statistics.put("Solver time",solution.statistics.solverTime)
+				statistics.put("Postprocessing time",solutionVisualisationTime)
 				for(entry: solution.statistics.entries) {
 					statistics.put(entry.name,statisticsUtil.readValue(entry))
 				}
@@ -225,7 +228,9 @@ class GenerationTaskExecutor {
 			console.flushStatistics
 			console.writeMessage("Model generation finished")
 		} catch(Exception e) {
-			console.writeError('''Error occured: «e.message»''')
+			console.writeError('''
+			Error occured:«e.message»
+			«FOR s : e.stackTrace SEPARATOR "\n"»    «s»«ENDFOR»''')
 		}
 	}
 	

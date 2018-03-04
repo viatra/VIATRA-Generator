@@ -105,11 +105,13 @@ class ScriptConsole {
 		if(statisticsWorkspace!==null) {
 			val message = '''
 			«FOR key : statisticsHeaderBuffer SEPARATOR delimier»«key»«ENDFOR»
-			«FOR line : statisticsDataBuffer »
-				«FOR key : statisticsHeaderBuffer»«IF line.containsKey(key)»«empty»«ELSE»«line.get(key)»«ENDIF»«ENDFOR»
+			«FOR line : statisticsDataBuffer»
+				«FOR key : statisticsHeaderBuffer SEPARATOR delimier»«IF line.containsKey(key)»«line.get(key)»«ELSE»«empty»«ENDIF»«ENDFOR»
 			«ENDFOR»
 			'''
 			statisticsWorkspace.writeText(statisticsFileName,message);
+			statisticsHeaderBuffer.clear
+			statisticsDataBuffer.clear
 		}
 	}
 
