@@ -229,11 +229,11 @@ class GraphvisVisualisation implements PartialInterpretationVisualisation {
 	}
 	
 	override writeToFile(ReasonerWorkspace workspace, String name) {
-		val file = workspace.getFile('''«name».png''')
+		val file = workspace.getFile('''«name».svg''')
 		//val bufferedImage = new BufferedImage 
 		Graphviz.useEngine(new GraphvizV8Engine());
 		Graphviz.fromGraph(graph)//.engine(Engine::NEATO)
-		.render(Format.PNG).toFile(file)
-		workspace.refreshFile('''«name».png''')
+		.render(Format.SVG_STANDALONE).toFile(file)
+		workspace.refreshFile('''«name».svg''')
 	}
 }
