@@ -117,7 +117,10 @@ class QueryLoader {
 			val QBFAnnotation = feature.EAnnotations.filter[it.source.equals("org.eclipse.viatra.query.querybasedfeature")].head
 			if(QBFAnnotation !== null) {
 				val targetFQN =	QBFAnnotation.details.get("patternFQN")
-				val referredPattern = patterns.filter[it.fullyQualifiedName.equals(targetFQN)].head
+				val referredPattern = patterns.filter[
+					val fqn = it.fullyQualifiedName
+					fqn.equals(targetFQN)
+				].head
 				if(referredPattern!== null) {
 					res.put(referredPattern, feature)
 				}
