@@ -91,7 +91,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 				{
 					find interpretation(problem,interpretation);
 					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-					PartialTypeInterpratation.interpretationOf.name(type,"«type.name»");
+					PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"«type.name»");
 					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»
 					find mayExist(problem, interpretation, newObject);
 					neg find mustExist(problem, interpretation, newObject);

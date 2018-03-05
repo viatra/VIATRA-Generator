@@ -16,8 +16,8 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 	override requiresTypeAnalysis() { true }
 
 	override generateRefineObjectQueries(LogicProblem p, PartialInterpretation emptySolution, TypeAnalysisResult typeAnalysisResult) {
-		val possibleNewDynamicType = typeAnalysisResult.possibleNewDynamicTypes
 		val containment = p.containmentHierarchies.head
+		val possibleNewDynamicType = typeAnalysisResult.possibleNewDynamicTypes
 		val inverseRelations = new HashMap
 		p.annotations.filter(InverseRelationAssertion).forEach[
 			inverseRelations.put(it.inverseA,it.inverseB)
@@ -78,7 +78,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 					find interpretation(problem,interpretation);
 					neg find hasElementInContainment(problem,interpretation);
 					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-					PartialTypeInterpratation.interpretationOf.name(type,"«type.name»");
+					PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"«type.name»");
 					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»
 					find mayExist(problem, interpretation, newObject);
 					neg find mustExist(problem, interpretation, newObject);

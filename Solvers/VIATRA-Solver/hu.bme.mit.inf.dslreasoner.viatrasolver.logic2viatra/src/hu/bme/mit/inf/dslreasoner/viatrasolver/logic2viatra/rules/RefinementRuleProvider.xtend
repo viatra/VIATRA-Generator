@@ -58,6 +58,7 @@ class RefinementRuleProvider {
 	{
 		val name = '''addObject_«type.name.canonizeName»«
 					IF containmentRelation!=null»_by_«containmentRelation.name.canonizeName»«ENDIF»'''
+		//println("Rule created: " + name + "> " + lhs.fullyQualifiedName)
 		val ruleBuilder = factory.createRule
 				.name(name)
 				.precondition(lhs)
@@ -129,25 +130,30 @@ class RefinementRuleProvider {
 			}
 		} else {
 			ruleBuilder.action[match |
-				//println(name)
+				println(name)
+				
 				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation
 				val typeInterpretation = match.get(2) as PartialTypeInterpratation
+				println("->"+typeInterpretation.interpretationOf.name)
 				
-				val newElement = createDefinedElement //=> [it.name = null]
+				val newElement = createDefinedElement
 				if(nameNewElement) {
 					newElement.name = '''new «interpretation.newElements.size»'''
 				}
+				
 				// Existence
 				interpretation.newElements+=newElement
 				interpretation.maxNewElements=interpretation.maxNewElements-1
 				if(interpretation.minNewElements > 0) {
 					interpretation.minNewElements=interpretation.minNewElements-1
 				}
+				
 				// Types
 				typeInterpretation.elements += newElement
 				typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
+				
 				statistics.addExecutionTime(System.nanoTime-startTime)
 			]
 		}
