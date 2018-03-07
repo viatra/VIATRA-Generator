@@ -23,7 +23,7 @@ class Logic2SMT_TypeMapperInterpretation {
 	}
 	
 	public def getElements(Type type) {
-		return type2Elements.get(type)
+		return type.lookup(this.type2Elements)
 	}
 	
 	public def ValueType logicElement2Smt(DefinedElement element) {

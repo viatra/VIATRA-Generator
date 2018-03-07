@@ -1,24 +1,38 @@
 package hu.bme.mit.inf.dslreasoner.smt.reasoner
 
-import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTType
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
-import java.util.HashMap
-import java.util.Map
-import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTInput
-import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.PossibleDynamicTypeMatcher
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStarMatcher
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTComplexTypeReference
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTDocument
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTEnumLiteral
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTEnumeratedTypeDeclaration
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
-import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
-import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTDocument
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDeclaration
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDefinition
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTInput
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTModelResult
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTSetTypeDeclaration
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTSymbolicDeclaration
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTTerm
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTType
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SmtLanguageFactory
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
+import java.util.ArrayList
+import java.util.HashMap
+import java.util.LinkedList
 import java.util.List
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import java.util.Map
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
+import org.eclipse.xtext.xbase.lib.Functions.Function0
+import org.eclipse.xtext.xbase.lib.Functions.Function1
+
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class Logic2Smt_TypeMapperTrace_FilteredTypesSimple implements Logic2Smt_TypeMapperTrace{
 	public var Map<Type, SMTType> independentClasses = new HashMap
@@ -58,8 +72,8 @@ class Logic2Smt_TypeMapper_FilteredTypesSimple  implements Logic2Smt_TypeMapper{
 	val extension SmtLanguageFactory factory = SmtLanguageFactory.eINSTANCE
 	val LogiclanguageFactory factory2 = LogiclanguageFactory.eINSTANCE
 	
-	private def toID(List<String> names) {names.join("!") }
-	private def toID(String name) {name.split("\\s+").toID}
+	private def String toID(List<String> names) { names.map[split("\\s+").join("!")].join("!") }
+	private def String toID(String name) { name.split("\\s+").join("!")}
 	
 	override transformTypes(SMTInput document, LogicProblem problem, Logic2SmtMapperTrace trace, TypeScopes scopes) {
 		val typeTrace = new Logic2Smt_TypeMapperTrace_FilteredTypes
@@ -80,7 +94,7 @@ class Logic2Smt_TypeMapper_FilteredTypesSimple  implements Logic2Smt_TypeMapper{
 		this.transformUndefinedElements(scopes,trace,document)
 		
 
-		this.transforTypes(connectedTypes, connectedElements, trace, document, engine)
+		this.transformType(connectedTypes, connectedElements, trace, document, engine)
 		// 3.2: Type definition to new elements
 		if(hasNewElements) {
 			this.transformNewTypes(connectedTypesWithoutDefintypesWithoutDefinedSupertype,trace,document,engine);

@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.smt.reasoner
 
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
@@ -42,13 +43,17 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTAnd
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTAssertion
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTBoolTypeReference
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTDocument
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDeclaration
+import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDefinition
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTInput
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTIntTypeReference
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTOr
@@ -60,6 +65,7 @@ import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTSymbolicValue
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTTerm
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTType
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SmtLanguageFactory
+import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.LinkedHashMap
@@ -72,17 +78,13 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xbase.lib.Functions.Function0
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 import org.eclipse.xtext.xbase.lib.Functions.Function2
+
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDefinition
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 
 class Logic2SmtMapper{
 	val extension SmtLanguageFactory factory = SmtLanguageFactory.eINSTANCE
 	val Logic2SmtMapper_UnfoldingSupport unfolder = new Logic2SmtMapper_UnfoldingSupport
 	@Accessors val Logic2Smt_TypeMapper typeMapper;
-	
-	LogicProblemBuilder b
 	
 	new(Logic2Smt_TypeMapper typeMapper) {
 		this.typeMapper = typeMapper
@@ -109,11 +111,16 @@ class Logic2SmtMapper{
 		
 		problem.relations.filter(RelationDefinition).forEach[it.transformRelationDefinition_definition(documentInput,trace)]
 		documentInput.assertions += problem.assertions.map[transformAssertion(trace)]
+		
+		if(!problem.containmentHierarchies.empty) {
+			transformContainmentV1(documentInput,problem.containmentHierarchies.head,trace)
+		}
 		// End trafo
 		
 		document.input.assertions.forEach[it.value.nameAllUnnamedVariable]
 		document.input.functionDefinition.forEach[it.value.nameAllUnnamedVariable]
 		document.cleanDocument
+		document.orderDefinitions
 		return new TracedOutput(document,trace)
 	}
 	
@@ -1000,15 +1007,269 @@ class Logic2SmtMapper{
 	
 	///////////
 	
-	/*def transformContainment(SMTDocument document, ContainmentHierarchy h, Logic2SmtMapperTrace trace) {
-		val containmentRelation_oo = createSMTFunctionDefinition=>[
-			it.name="containment!oo"
-			it.range=createSMTBoolTypeReference
-			val child = createSMTSortedVariable => [
-				it.name = 
+	def transformContainmentV1(SMTInput document, ContainmentHierarchy h, Logic2SmtMapperTrace trace) {
+		val extension builder = new LogicProblemBuilder
+		val types = h.typesOrderedInHierarchy
+		
+		val rootRelations = new HashMap<Type,Relation>
+		for(type: types) {
+			val rootRelation = RelationDeclaration('''Root «type.name»''',type)
+			rootRelations.put(type,rootRelation)
+			this.transformRelationDeclaration(rootRelation,document,trace)
+		}
+		val possibleParentRelations = types.toInvertedMap[type|
+			h.containmentRelations.filter[it.parameters.get(1) === type]
+			//TODO inheritance
+		]
+		
+		// root is true only for at most one element in every root type
+		for(root: rootRelations.entrySet) {
+			val a1 = Assertion(Forall[
+				val r1 = addVar(root.key)
+				val r2 = addVar(root.key)
+				(root.value.call(r1) && root.value.call(r2)) => (r1 == r2)
+			])
+			document.assertions+=this.transformAssertion(a1,trace)
+		}
+		// only one of the root entries is true
+//		val a2 = Assertion(
+//			rootRelations.entrySet.map[selected|
+//				rootRelations.entrySet.map[other|
+//					if(selected == other) {
+//						Exists[
+//							val r = addVar(other.key)
+//							other.value.call(r)
+//						]
+//					} else {
+//						Forall[
+//							val r = addVar(other.key)
+//							!other.value.call(r)
+//						]
+//					}
+//				].And
+//			].Or
+//		)
+//		document.assertions+=this.transformAssertion(a2,trace)
+//		// the root has no parent
+//		for(root : rootRelations.entrySet) {
+//			val parentRelations = root.key.lookup(possibleParentRelations)
+//			val a3 = Assertion(Forall[
+//				val r = addVar(root.key)
+//				root.value.call(r) => parentRelations.map[containment |
+//					Forall[
+//						val container = addVar(containment.parameters.get(0))
+//						!containment.call(container,r)
+//					]
+//				].And
+//			])
+//			document.assertions+=this.transformAssertion(a3,trace)
+//		}
+//		// no element has two parents
+//		for(root : rootRelations.entrySet) {
+//			val parentRelations = root.key.lookup(possibleParentRelations)
+//			val a4 = Assertion(Forall[
+//				val element = addVar(root.key)
+//				parentRelations.map[selected |
+//					Forall[
+//						val container = addVar(selected.parameters.get(0))
+//						selected.call(container,element) => (
+//							Forall[
+//								val other = addVar(selected.parameters.get(0))
+//								(!selected.call(other,element)) || (other == element)
+//							] &&
+//							parentRelations.filter[it !==selected].map[otherContainment |
+//									Forall[
+//									val other = addVar(otherContainment.parameters.get(0))
+//									otherContainment.call(other,element)
+//								]
+//							].And)
+//						
+//						]
+//				].And
+//			])
+//			document.assertions+=this.transformAssertion(a4,trace)
+//		}
+	
+		// an element is not root, then it has a container
+		for(root : rootRelations.entrySet) {
+			val parentRelations = root.key.lookup(possibleParentRelations)
+			val a5 = Assertion(Forall[
+				val element = addVar(root.key)
+				!root.value.call(element) =>
+				parentRelations.map[selected |
+					Exists[
+						val container = addVar(selected.parameters.get(0))
+						selected.call(container,element)
+					]
+				].Or
+			])
+			document.assertions+=this.transformAssertion(a5,trace)
+		}
+//		
+//		// no circle in containment
+//		for(length : 1..5) {
+//			val paths = h.containmentRelations.paths(length)
+//			val loopPaths = paths.filter[path|
+//				val first = (path.head.parameters.get(0) as ComplexTypeReference).referred
+//				val last = (path.last.parameters.get(1) as ComplexTypeReference).referred
+//				hasCommonElement(first,last)
+//			]
+//			for(loopPath : loopPaths) {
+//				val variableIndexes = 0..<length
+//				val a6 = Assertion(!Exists[e|
+//					val variables = new ArrayList
+//					for(variableIndex : variableIndexes) {
+//						variables += e.addVar('''c«variableIndex»''',(loopPath.get(variableIndex).parameters.get(0) as ComplexTypeReference).referred)
+//					}
+//					val pathElements = new ArrayList
+//					for(variableIndex : variableIndexes) {
+//						val from = variableIndex
+//						val to = variableIndex+1
+//						if(variableIndexes.contains(to)) {
+//							pathElements += loopPath.get(variableIndex).call(variables.get(from),variables.get(to))
+//						}
+//					}
+//					pathElements += loopPath.last.call(variables.last,variables.head)
+//					
+//					pathElements.And
+//				])
+//				document.assertions+=this.transformAssertion(a6,trace)
+//			}
+//		}
+//	}
+//	
+//	def private Iterable<List<Relation>> paths(Iterable<Relation> relations, int length) {
+//		if(length == 0) {
+//			return #[]
+//		} else if(length == 1) {
+//			return relations.map[#[it]]
+//		} else {
+//			val previous = paths(relations,length-1)
+//			val List<List<Relation>> res = new ArrayList(previous.size*relations.size)
+//			for(p:previous) {
+//				for(r:relations) {
+//					val lastType = (p.last.parameters.get(1) as ComplexTypeReference).referred
+//					val firstType = (r.parameters.get(0) as ComplexTypeReference).referred
+//					val hasCommonElement = hasCommonElement(lastType, firstType)
+//					if(hasCommonElement) {
+//						res.add(new ArrayList(p) => [add(r)])
+//					}
+//				}
+//			}
+//			return res
+//		}
+	}
+	
+	protected def boolean hasCommonElement(Type lastType, Type firstType) {
+		val a = lastType.transitiveClosureStar[subtypes]
+		val b = firstType.transitiveClosureStar[subtypes]
+		return a.exists[b.contains(it)]
+	}
+	
+	def transformContainmentV2(SMTDocument document, ContainmentHierarchy h, Logic2SmtMapperTrace trace) {
+		val typeConstraintsOfTypesInContainment = h.typesOrderedInHierarchy
+			.map[typeMapper.transformTypeReference(it,trace)].flatten
+		val relationsOfTypeConstraints = h.containmentRelations.map[it]
+		val typesOfTypeConstraints = typeConstraintsOfTypesInContainment
+			.map[(it.type as SMTComplexTypeReference).referred]
+			.toSet
+		
+		// Root declaration
+		val rootRelations = new HashMap<SMTType,SMTFunctionDeclaration>
+		for(t : typesOfTypeConstraints) {
+			val rootRelation = createSMTFunctionDeclaration => [
+				it.name = toID('''root «t.name»''')
+				it.range = createSMTBoolTypeReference
+				it.parameters += createSMTComplexTypeReference => [
+					it.referred = t
+				]
+			]
+			document.input.functionDeclarations += rootRelation
+			rootRelations.put(t,rootRelation)
+		}
+		// root is true only for one element in every root type
+		for(entry : rootRelations.entrySet) {
+			document.input.assertions += createSMTAssertion => [
+				it.value = createSMTForall => [
+					val r1 = createSMTSortedVariable => [
+						it.name = "r1"
+						it.range = createSMTComplexTypeReference => [it.referred = entry.key]
+					]
+					val r2 = createSMTSortedVariable => [
+						it.name = "r2"
+						it.range = createSMTComplexTypeReference => [it.referred = entry.key]
+					]
+					
+					it.quantifiedVariables += r1
+					it.quantifiedVariables += r2
+					
+					it.expression = createSMTImpl => [
+						it.leftOperand = createSMTAnd => [
+							it.operands += createSMTSymbolicValue => [
+								it.symbolicReference = entry.value
+								it.parameterSubstitutions += createSMTSymbolicValue => [it.symbolicReference = r1]
+							]
+							it.operands += createSMTSymbolicValue => [
+								it.symbolicReference = entry.value
+								it.parameterSubstitutions += createSMTSymbolicValue => [it.symbolicReference = r2]
+							]
+						]
+						it.rightOperand = createSMTEquals => [
+							it.leftOperand = createSMTSymbolicValue => [it.symbolicReference = r1]
+							it.rightOperand = createSMTSymbolicValue => [it.symbolicReference = r2]
+						]
+					]
+				]
+			]
+		}
+		// only one of the root entries is true
+		document.input.assertions += createSMTAssertion => [
+			it.value = createSMTOr =>[or |
+				for(selectedCombination : rootRelations.entrySet) {
+					or.operands += createSMTAnd => [and |
+						for(otherCombination : rootRelations.entrySet) {
+							if(selectedCombination == otherCombination) {
+								and.operands += createSMTExists => [
+									val r = createSMTSortedVariable => [
+										it.name = "r"
+										it.range = createSMTComplexTypeReference => [it.referred = otherCombination.key]
+									]
+									it.quantifiedVariables += r
+									it.expression = createSMTSymbolicValue => [
+										it.symbolicReference = otherCombination.value
+										it.parameterSubstitutions += createSMTSymbolicValue => [it.symbolicReference = r]
+									]
+								]
+							} else {
+								and.operands += createSMTForall => [
+									val r = createSMTSortedVariable => [
+										it.name = "r"
+										it.range = createSMTComplexTypeReference => [it.referred = otherCombination.key]
+									]
+									it.quantifiedVariables += r
+									it.expression = createSMTNot=> [
+										it.operand = createSMTSymbolicValue => [
+											it.symbolicReference = otherCombination.value
+											it.parameterSubstitutions += createSMTSymbolicValue => [it.symbolicReference = r]
+										]
+									]
+								]
+							}
+						}
+					]
+				}
 			]
 		]
-	}*/
+		
+		// the root has no parent
+		throw new UnsupportedOperationException('''Unfinished version''')
+		
+		// no element has two parents
+	
+		// an element is either root or has parent
+		
+		// no circle in containment
+	}
 	
 	///////////
 	
@@ -1051,5 +1312,35 @@ class Logic2SmtMapper{
 	}
 	def private dispatch replaceWith(EObject object)  {
 		null
+	}
+	
+	def orderDefinitions(SMTDocument document) {
+		val definitionsInDocument = document.input.functionDefinition
+		val List<SMTFunctionDefinition> definitionsInOrder = new ArrayList(definitionsInDocument.size)
+		while(!definitionsInDocument.empty) {
+			val selection = definitionsInDocument.selectOneUnreferenced
+			definitionsInOrder.add(selection)
+			definitionsInDocument.remove(selection)
+		}
+		document.input.functionDefinition.addAll(definitionsInOrder)
+	}
+	
+	def referencedDefinitions(SMTFunctionDefinition definition) {
+		definition
+			.eAllContents
+			.filter(SMTSymbolicValue)
+			.map[it.symbolicReference]
+			.filter(SMTFunctionDefinition)
+			.toList
+	}
+	
+	def selectOneUnreferenced(List<SMTFunctionDefinition> definitions) {
+		for(definition : definitions) {
+			val references = definition.referencedDefinitions
+			if(references.forall[!definitions.contains(it)]) {
+				return definition
+			}
+		}
+		throw new AssertionError('''Recursion in function definitions! definitions: «definitions.map[name].toList»''')
 	}
 }

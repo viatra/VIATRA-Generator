@@ -35,8 +35,7 @@ class SMTSolver extends LogicReasoner{
 			handler.callSolver(input,configuration)
 			val solverTime = System.currentTimeMillis - solverTimeStart
 			val outputModel = workspace.reloadModel(typeof(SMTDocument), "problem.smt2")
-			EcoreUtil.resolveAll(outputModel)
-			workspace.deactivateModel("problem.smt2")
+			EcoreUtil.resolveAll(outputModel.eResource)
 			return backMapper.transformOutput(problem,outputModel.output,trace, transformationTime, solverTime)
 		} else throw new IllegalArgumentException('''The configuration have to be an «SmtSolverConfiguration.simpleName»!''')
 	}

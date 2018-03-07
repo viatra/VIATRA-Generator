@@ -17,9 +17,12 @@ class SmtSolverException extends Exception{
 
 class SmtSolverHandler {
 	public def callSolver(URI resourceURI, SmtSolverConfiguration configuration) {
+		
 		val URI smtUri = CommonPlugin.resolve(resourceURI) 
 		val File smtFile = new File(smtUri.toFileString()) 
 		
+		val path = configuration.solverPath
+		if(path===null) {throw new IllegalArgumentException('''Path to solver is not specified!''')}
 		val params =
 			'''/smt2 /st«
 			IF configuration.runtimeLimit != SmtSolverConfiguration::Unlimited» /T:«configuration.runtimeLimit»«ENDIF»«
@@ -28,9 +31,9 @@ class SmtSolverHandler {
 			» «smtFile.path»'''
 			
 		val Runtime runTime = Runtime.getRuntime()
-				
+			
 		try {
-			val process = runTime.exec(configuration.solverPath + " " + params)
+			val process = runTime.exec(path + " " + params)
 			
 			val FileWriter writer = new FileWriter(smtFile,true)
 			writer.append("\n--------------\n")
@@ -44,7 +47,6 @@ class SmtSolverHandler {
 		
 		return resourceURI
 	}
-	
 	def private void printStream(InputStream inputStream) throws IOException {
 		val BufferedReader input = new BufferedReader(new InputStreamReader(inputStream))
 		var int line = -1

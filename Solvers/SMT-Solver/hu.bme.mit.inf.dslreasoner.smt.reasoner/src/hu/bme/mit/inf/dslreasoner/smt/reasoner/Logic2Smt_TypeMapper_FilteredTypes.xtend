@@ -27,8 +27,10 @@ import java.util.HashMap
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.xbase.lib.Functions.Function0
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 
@@ -63,23 +65,68 @@ class Logic2Smt_TypeMapperTrace_FilteredTypes implements Logic2Smt_TypeMapperTra
 		val a = this
 		val b = new Logic2Smt_TypeMapperTrace_FilteredTypes
 		
-		b.independentClasses = a.independentClasses.copyMap(newModel.typeDeclarations,[name])
+		b.independentClasses = copyMap(a.independentClasses,newModel.typeDeclarations,[name])
+		b.independentClasses.values.validate(newModel)
+		b.newObjects = newModel.typeDeclarations.copyValue(a.newObjects,[name])
+		b.newObjects.validate(newModel)
+		b.oldObjects = newModel.typeDeclarations.copyValue(a.oldObjects,[name]) as SMTEnumeratedTypeDeclaration
+		b.oldObjects.validate(newModel)
+		b.elementMap = a.elementMap.copyMap(
+			newModel.typeDeclarations
+				.filter(SMTEnumeratedTypeDeclaration)
+				.map[it.elements]
+				.flatten,
+			[name]
+		)
+		b.elementMap.values.validate(newModel)
 		
-		b.newObjects = newModel.typeDeclarations.filter[it.name == a.newObjects.name].head
-		b.oldObjects = newModel.typeDeclarations.filter[it.name == a.oldObjects.name].head as SMTEnumeratedTypeDeclaration
-		b.elementMap = a.elementMap.copyMap(b.oldObjects.elements,[name])
-		
-		b.oldObjectTypes = newModel.typeDeclarations.filter[it.name == a.newObjects.name].head as SMTEnumeratedTypeDeclaration
+		b.oldObjectTypes = newModel.typeDeclarations.copyValue(a.newObjects,[name]) as SMTEnumeratedTypeDeclaration
+		b.oldObjectTypes.validate(newModel)
 		b.oldObjectTypeMap = a.oldObjectTypeMap.copyMap(b.oldObjectTypes.elements,[name])
-		b.oldObjectTypeFunction = newModel.functionDefinition.filter[it.name == a.oldObjectTypeFunction.name].head
+		b.oldObjectTypeMap.values.validate(newModel)
+		b.oldObjectTypeFunction = newModel.functionDefinition.copyValue(a.oldObjectTypeFunction,[name])
+		b.oldObjectTypeFunction.validate(newModel)
 		b.oldObjectTypePredicates = a.oldObjectTypePredicates.copyMap(newModel.functionDefinition,[name])
+		b.oldObjectTypePredicates.values.validate(newModel)
 		
-		b.newObjectTypes = newModel.typeDeclarations.filter[it.name == a.newObjectTypes.name].head as SMTEnumeratedTypeDeclaration
+		b.newObjectTypes = newModel.typeDeclarations.copyValue(a.newObjectTypes,[name])	as SMTEnumeratedTypeDeclaration
+		b.newObjectTypes.validate(newModel)
 		b.newObjectTypeMap = a.newObjectTypeMap.copyMap(b.newObjectTypes.elements,[name])
-		b.newObjectTypeFunction = newModel.functionDeclarations.filter[it.name == a.newObjectTypeFunction.name].head
+		b.newObjectTypeMap.values.validate(newModel)
+		b.newObjectTypeFunction = newModel.functionDeclarations.copyValue(a.newObjectTypeFunction,[name])
+		b.newObjectTypeFunction.validate(newModel)
 		b.newObjectTypePredicates = a.newObjectTypePredicates.copyMap(newModel.functionDefinition,[name])
-		
+		b.newObjectTypePredicates.values.validate(newModel)
 		return b
+	}
+	
+	def public static <Type, ValueType> copyValue(Iterable<? extends Type> collection, Type target, Function1<Type,ValueType> extractor) {
+		if(target===null) {
+			return null
+		} else {
+			val targetValue = extractor.apply(target)
+			val res = collection.filter[extractor.apply(it)==targetValue].head
+			return res
+		}
+	}
+	
+	def validate(EObject element, EObject other) {
+		if(element != null) {
+			val headOfElement = EcoreUtil2.getContainerOfType(element,SMTDocument)
+			val expectedHeadOfElement = EcoreUtil2.getContainerOfType(other,SMTDocument)
+			if(headOfElement !== expectedHeadOfElement) {
+				throw new AssertionError('''
+				Element in different resource: «element»
+				Expected root: «expectedHeadOfElement»
+				Found root: «headOfElement»''')
+			}
+		}
+	}
+	def validate(Iterable<? extends EObject> iterable, EObject root) {
+		if(iterable !== null)
+			for(element : iterable) {
+				element.validate(root)
+			}
 	}
 }
 
@@ -87,8 +134,8 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 	val extension SmtLanguageFactory factory = SmtLanguageFactory.eINSTANCE
 	val LogiclanguageFactory factory2 = LogiclanguageFactory.eINSTANCE
 	
-	private def toID(List<String> names) {names.join("!") }
-	private def toID(String name) {name.split("\\s+").toID}
+	private def String toID(List<String> names) { names.map[split("\\s+").join("!")].join("!") }
+	private def String toID(String name) { name.split("\\s+").join("!")}
 	
 	override transformTypes(SMTInput document, LogicProblem problem, Logic2SmtMapperTrace trace, TypeScopes scopes) {
 		val typeTrace = new Logic2Smt_TypeMapperTrace_FilteredTypes
@@ -105,7 +152,7 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 		val hasNewElements = !connectedTypesWithoutDefintypesWithoutDefinedSupertype.empty
 		
 		// 0. map the simple types
-		this.transformIndependentTypes(independentTypes,trace)
+		this.transformIndependentTypes(independentTypes,trace,document)
 		
 		// 1. Has old elements => create supertype for it
 		if(hasOldElements) {
@@ -135,7 +182,7 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 		return types.size == 1 && types.head.isIndependentType
 	}
 	
-	protected def transformIndependentTypes(Iterable<TypeDefinition> types,Logic2SmtMapperTrace trace) {
+	protected def transformIndependentTypes(Iterable<TypeDefinition> types,Logic2SmtMapperTrace trace, SMTInput document) {
 		for(type: types) {
 			val independentSMTType = createSMTEnumeratedTypeDeclaration => [
 				name = toID(#["oldType",type.name])
@@ -146,6 +193,7 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 				independentSMTType.elements += enumLiteral
 				trace.typeTrace.elementMap.put(element,enumLiteral)
 			}
+			document.typeDeclarations += independentSMTType
 		}
 	}
 	
@@ -474,26 +522,45 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 		val engine = ViatraQueryEngine.on(new EMFScope(problem))
 		val supertypeStarMatcher = SupertypeStarMatcher.on(engine)
 		
-		val type2Elements = (trace.typeTrace.oldObjectTypeMap.keySet +
-							trace.typeTrace.newObjectTypeMap.keySet)
-							.toInvertedMap[new LinkedList<DefinedElement>]
-		
-		val inverseOldTypeMap = trace.typeTrace.oldObjectTypeMap.bijectiveInverse
-		for(oldElement: trace.typeTrace.elementMap.values) {
-			val type = interpretation.queryEngine.resolveFunctionDefinition(
-				trace.typeTrace.oldObjectTypeFunction,#[oldElement]) as SMTEnumLiteral
-			val dynamicType = type.lookup(inverseOldTypeMap)
-			val supertypes = supertypeStarMatcher.getAllValuesOfsupertype(dynamicType)
-			supertypes.forEach[type2Elements.get(it) += oldElement.lookup(smt2logic)]
+		val Map<Type,List<DefinedElement>> type2Elements = new HashMap
+		for(key : problem.types) {
+			type2Elements.put(key,new LinkedList<DefinedElement>)
 		}
 		
-		val inverseNewTypeMap = trace.typeTrace.newObjectTypeMap.bijectiveInverse
-		for(newElement: newElements.map[value as SMTSymbolicDeclaration]) {
-			val type = interpretation.queryEngine.resolveFunctionDeclaration(
-				trace.typeTrace.newObjectTypeFunction,#[newElement]) as SMTEnumLiteral
-			val dynamicType = type.lookup(inverseNewTypeMap)
-			val supertypes = supertypeStarMatcher.getAllValuesOfsupertype(dynamicType)
-			supertypes.forEach[type2Elements.get(it) += newElement.lookup(smt2logic)]
+		if(trace.typeTrace.independentClasses != null) {
+			for(type : trace.typeTrace.independentClasses.keySet) {
+				if(type instanceof TypeDefinition) {
+					type.lookup(type2Elements).addAll(type.elements)
+				} else {
+					throw new AssertionError('''Independent classes are type definitions, but got: "«type»"''')
+				}
+			}
+		}
+		
+		if(trace.typeTrace.oldObjectTypeFunction != null) {
+			val inverseOldTypeMap = trace.typeTrace.oldObjectTypeMap.bijectiveInverse
+			for(oldElement: trace.typeTrace.elementMap.values) {
+				val type = interpretation.queryEngine.resolveFunctionDefinition(
+					trace.typeTrace.oldObjectTypeFunction,#[oldElement]) as SMTEnumLiteral
+				val dynamicType = type.lookup(inverseOldTypeMap)
+				val supertypes = supertypeStarMatcher.getAllValuesOfsupertype(dynamicType)
+				for(superType : supertypes) {
+					superType.lookup(type2Elements) += oldElement.lookup(smt2logic)
+				}
+			}
+		}
+		
+		if(trace.typeTrace.newObjectTypeFunction !== null) {
+			val inverseNewTypeMap = trace.typeTrace.newObjectTypeMap.bijectiveInverse
+			for(newElement: newElements.map[value as SMTSymbolicDeclaration]) {
+				val type = interpretation.queryEngine.resolveFunctionDeclaration(
+					trace.typeTrace.newObjectTypeFunction,#[newElement]) as SMTEnumLiteral
+				val dynamicType = type.lookup(inverseNewTypeMap)
+				val supertypes = supertypeStarMatcher.getAllValuesOfsupertype(dynamicType)
+				for(superType : supertypes) {
+					superType.lookup(type2Elements) += newElement.lookup(smt2logic)
+				}
+			}
 		}
 		
 		return new Logic2SMT_TypeMapperInterpretation(type2Elements,logic2smt,smt2logic)
