@@ -229,7 +229,7 @@ class GenerationTaskExecutor {
 			console.writeMessage("Model generation finished")
 		} catch(Exception e) {
 			console.writeError('''
-			Error occured:«e.message»
+			Error occured («e.class.simpleName»): «e.message»
 			«FOR s : e.stackTrace SEPARATOR "\n"»    «s»«ENDFOR»''')
 		}
 	}
