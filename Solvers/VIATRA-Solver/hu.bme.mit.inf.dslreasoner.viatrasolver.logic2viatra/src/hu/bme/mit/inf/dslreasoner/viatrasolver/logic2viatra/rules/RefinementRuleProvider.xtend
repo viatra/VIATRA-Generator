@@ -136,7 +136,6 @@ class RefinementRuleProvider {
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation
 				val typeInterpretation = match.get(2) as PartialTypeInterpratation
-				println("->"+typeInterpretation.interpretationOf.name)
 				
 				val newElement = createDefinedElement
 				if(nameNewElement) {
