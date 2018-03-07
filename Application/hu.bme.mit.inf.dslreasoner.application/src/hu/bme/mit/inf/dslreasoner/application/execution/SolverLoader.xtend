@@ -69,6 +69,7 @@ class SolverLoader {
 		} else if(solver === Solver::SMT_SOLVER) {
 			return new SmtSolverConfiguration => [c|
 				config.getAsBoolean("fixRandomSeed",console).ifPresent[c.fixRandomSeed = it]
+				config.getAsType("path",console,[it],String).ifPresent[c.solverPath = it]
 			]
 		} else if(solver === Solver::VIATRA_SOLVER) {
 			return new ViatraReasonerConfiguration => [c|
