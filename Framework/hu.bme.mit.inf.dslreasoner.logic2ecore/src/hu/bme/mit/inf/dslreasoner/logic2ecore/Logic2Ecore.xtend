@@ -1,23 +1,21 @@
 package hu.bme.mit.inf.dslreasoner.logic2ecore
 
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicStructureBuilder
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
+import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation
-import java.util.HashSet
-import java.util.HashMap
-import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.emf.ecore.EClass
-import java.util.Set
-import org.eclipse.emf.ecore.EObject
-import java.util.List
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicStructureBuilder
 import java.util.Collection
+import java.util.HashMap
+import java.util.HashSet
+import java.util.List
+import java.util.Set
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+
 class Logic2Ecore {
-	private val extension LogicProblemBuilder problemBuilder = new LogicProblemBuilder
 	private val extension LogicStructureBuilder structureBuilder = new LogicStructureBuilder
 	val Ecore2Logic ecore2Logic;
 	
@@ -85,7 +83,11 @@ class Logic2Ecore {
 		for(candidate : classes) {
 			val subtypeOfAll = classes.forall[it.isSuperTypeOf(candidate)]
 			if(subtypeOfAll) {
-				return candidate
+				if(candidate.abstract || candidate.isInterface) {
+					throw new AssertionError('''Object has abstract concrete type! Types: [«FOR c:classes SEPARATOR ","»«c.name»«ENDFOR»]''')
+				} else {
+					return candidate
+				}
 			}
 		}
 		throw new AssertionError('''Object has no unique concrete type! Types: [«FOR c:classes SEPARATOR ","»«c.name»«ENDFOR»]''')
