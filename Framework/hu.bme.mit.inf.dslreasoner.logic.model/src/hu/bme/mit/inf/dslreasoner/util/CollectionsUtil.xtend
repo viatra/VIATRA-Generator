@@ -8,16 +8,27 @@ import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 import java.util.HashMap
 import java.util.LinkedHashMap
+import org.eclipse.emf.ecore.EObject
 
 class CollectionsUtil {
 	public def static <FROM,TO> TO lookup(FROM from, Map<? super FROM,TO> map) {
 		if(map.containsKey(from)) {
 			return map.get(from)
-		} else throw new IllegalArgumentException('''
-		The map does not contains the key "«from.toString»"!
-		--- Elements: ---
-		«FOR entry : map.entrySet SEPARATOR '\n'»«entry.key» -> «entry.value»«ENDFOR»
-		-----------------''');
+		} else {
+			val proxys = map.values.filter(EObject).filter[it.eIsProxy]
+			var message = '''
+			The map does not contains the key "«from.toString»"!
+			--- Elements: ---
+			«FOR entry : map.entrySet SEPARATOR '\n'»«entry.key» -> «entry.value»«ENDFOR»
+			-----------------'''
+			if(!proxys.empty) {
+				message = '''
+				The map contains Proxy objects: «proxys.toList»
+				«message»
+				'''
+			}
+			throw new IllegalArgumentException(message);
+		}
 	}
 	public def <FROM,TO> TO ifThenElse(FROM source, Function1<FROM,Boolean> condition, Function1<FROM,TO> ifTrue, Function1<FROM,TO> ifFalse) {
 		if(condition.apply(source)) {
@@ -50,10 +61,17 @@ class CollectionsUtil {
 		}
 	}
 	def public static <From,To,Property> Map<From,To> copyMap(Map<From,To> oldMap, Iterable<To> newValues, Function1<To,Property> indexExtractor) {
-		val Map<Property,To> valueIndexes = oldMap.values.toMap[to|indexExtractor.apply(to)];
+		val Map<Property,To> valueIndexes = newValues.toMap[to|indexExtractor.apply(to)];
 		val res = oldMap.mapValues[value | indexExtractor.apply(value).lookup(valueIndexes)]
+//		println('''from:''')
+//		newValues.forEach[println(it)]
+//		println('''old:''')
+//		oldMap.values.forEach[println(it)]
+//		println('''new:''')
+//		res.values.forEach[println(it)]
 		return res
 	}
+	
 	def public static <From,To> Map<To,From> bijectiveInverse(Map<From,To> m) { m.keySet.toMap[x|x.lookup(m)] }
 	def public static <From,To> Map<To,List<From>> inverse(Map<From,To> m) {
 		val res = new LinkedHashMap<To,List<From>>
