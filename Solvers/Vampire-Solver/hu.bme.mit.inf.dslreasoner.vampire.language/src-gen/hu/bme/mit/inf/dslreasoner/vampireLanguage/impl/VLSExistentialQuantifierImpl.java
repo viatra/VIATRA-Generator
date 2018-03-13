@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import java.util.Collection;
@@ -46,7 +47,7 @@ public class VLSExistentialQuantifierImpl extends VLSTermImpl implements VLSExis
    * @generated
    * @ordered
    */
-  protected EList<VLSTerm> variables;
+  protected EList<VLSVariable> variables;
 
   /**
    * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
@@ -84,11 +85,11 @@ public class VLSExistentialQuantifierImpl extends VLSTermImpl implements VLSExis
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VLSTerm> getVariables()
+  public EList<VLSVariable> getVariables()
   {
     if (variables == null)
     {
-      variables = new EObjectContainmentEList<VLSTerm>(VLSTerm.class, this, VampireLanguagePackage.VLS_EXISTENTIAL_QUANTIFIER__VARIABLES);
+      variables = new EObjectContainmentEList<VLSVariable>(VLSVariable.class, this, VampireLanguagePackage.VLS_EXISTENTIAL_QUANTIFIER__VARIABLES);
     }
     return variables;
   }
@@ -190,7 +191,7 @@ public class VLSExistentialQuantifierImpl extends VLSTermImpl implements VLSExis
     {
       case VampireLanguagePackage.VLS_EXISTENTIAL_QUANTIFIER__VARIABLES:
         getVariables().clear();
-        getVariables().addAll((Collection<? extends VLSTerm>)newValue);
+        getVariables().addAll((Collection<? extends VLSVariable>)newValue);
         return;
       case VampireLanguagePackage.VLS_EXISTENTIAL_QUANTIFIER__OPERAND:
         setOperand((VLSTerm)newValue);

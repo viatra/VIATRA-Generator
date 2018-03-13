@@ -74,6 +74,56 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleVLSInclude
+entryRuleVLSInclude
+:
+{ before(grammarAccess.getVLSIncludeRule()); }
+	 ruleVLSInclude
+{ after(grammarAccess.getVLSIncludeRule()); } 
+	 EOF 
+;
+
+// Rule VLSInclude
+ruleVLSInclude 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getVLSIncludeAccess().getGroup()); }
+		(rule__VLSInclude__Group__0)
+		{ after(grammarAccess.getVLSIncludeAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleVLSName
+entryRuleVLSName
+:
+{ before(grammarAccess.getVLSNameRule()); }
+	 ruleVLSName
+{ after(grammarAccess.getVLSNameRule()); } 
+	 EOF 
+;
+
+// Rule VLSName
+ruleVLSName 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getVLSNameAccess().getNameAssignment()); }
+		(rule__VLSName__NameAssignment)
+		{ after(grammarAccess.getVLSNameAccess().getNameAssignment()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleVLSComment
 entryRuleVLSComment
 :
@@ -824,31 +874,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleVLSFofTerm
-entryRuleVLSFofTerm
-:
-{ before(grammarAccess.getVLSFofTermRule()); }
-	 ruleVLSFofTerm
-{ after(grammarAccess.getVLSFofTermRule()); } 
-	 EOF 
-;
-
-// Rule VLSFofTerm
-ruleVLSFofTerm 
-	@init {
-		int stackSize = keepStackSize();
-	}
-	:
-	(
-		{ before(grammarAccess.getVLSFofTermAccess().getAlternatives()); }
-		(rule__VLSFofTerm__Alternatives)
-		{ after(grammarAccess.getVLSFofTermAccess().getAlternatives()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 // Entry rule entryRuleVLSVariable
 entryRuleVLSVariable
 :
@@ -868,6 +893,31 @@ ruleVLSVariable
 		{ before(grammarAccess.getVLSVariableAccess().getNameAssignment()); }
 		(rule__VLSVariable__NameAssignment)
 		{ after(grammarAccess.getVLSVariableAccess().getNameAssignment()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleVLSFofTerm
+entryRuleVLSFofTerm
+:
+{ before(grammarAccess.getVLSFofTermRule()); }
+	 ruleVLSFofTerm
+{ after(grammarAccess.getVLSFofTermRule()); } 
+	 EOF 
+;
+
+// Rule VLSFofTerm
+ruleVLSFofTerm 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getVLSFofTermAccess().getAlternatives()); }
+		(rule__VLSFofTerm__Alternatives)
+		{ after(grammarAccess.getVLSFofTermAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -930,15 +980,54 @@ rule__VampireModel__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getVampireModelAccess().getCommentsAssignment_0()); }
-		(rule__VampireModel__CommentsAssignment_0)
-		{ after(grammarAccess.getVampireModelAccess().getCommentsAssignment_0()); }
+		{ before(grammarAccess.getVampireModelAccess().getIncludesAssignment_0()); }
+		(rule__VampireModel__IncludesAssignment_0)
+		{ after(grammarAccess.getVampireModelAccess().getIncludesAssignment_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getVampireModelAccess().getFormulasAssignment_1()); }
-		(rule__VampireModel__FormulasAssignment_1)
-		{ after(grammarAccess.getVampireModelAccess().getFormulasAssignment_1()); }
+		{ before(grammarAccess.getVampireModelAccess().getCommentsAssignment_1()); }
+		(rule__VampireModel__CommentsAssignment_1)
+		{ after(grammarAccess.getVampireModelAccess().getCommentsAssignment_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getVampireModelAccess().getFormulasAssignment_2()); }
+		(rule__VampireModel__FormulasAssignment_2)
+		{ after(grammarAccess.getVampireModelAccess().getFormulasAssignment_2()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSName__NameAlternatives_0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSNameAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0()); }
+		RULE_LOWER_WORD_ID
+		{ after(grammarAccess.getVLSNameAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getVLSNameAccess().getNameSINGLE_QUOTETerminalRuleCall_0_1()); }
+		RULE_SINGLE_QUOTE
+		{ after(grammarAccess.getVLSNameAccess().getNameSINGLE_QUOTETerminalRuleCall_0_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getVLSNameAccess().getNameLITERALTerminalRuleCall_0_2()); }
+		RULE_LITERAL
+		{ after(grammarAccess.getVLSNameAccess().getNameLITERALTerminalRuleCall_0_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getVLSNameAccess().getNameSIGNED_LITERALTerminalRuleCall_0_3()); }
+		RULE_SIGNED_LITERAL
+		{ after(grammarAccess.getVLSNameAccess().getNameSIGNED_LITERALTerminalRuleCall_0_3()); }
 	)
 ;
 finally {
@@ -1272,6 +1361,12 @@ rule__VLSAtomic__Alternatives
 		ruleVLSVariable
 		{ after(grammarAccess.getVLSAtomicAccess().getVLSVariableParserRuleCall_2()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getVLSAtomicAccess().getVLSDefinedTermParserRuleCall_3()); }
+		ruleVLSDefinedTerm
+		{ after(grammarAccess.getVLSAtomicAccess().getVLSDefinedTermParserRuleCall_3()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1332,6 +1427,12 @@ rule__VLSAtomicConstant__NameAlternatives_0_1_0
 		RULE_DOUBLE_DOLLAR_ID
 		{ after(grammarAccess.getVLSAtomicConstantAccess().getNameDOUBLE_DOLLAR_IDTerminalRuleCall_0_1_0_3()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getVLSAtomicConstantAccess().getNameVLSRoleParserRuleCall_0_1_0_4()); }
+		ruleVLSRole
+		{ after(grammarAccess.getVLSAtomicConstantAccess().getNameVLSRoleParserRuleCall_0_1_0_4()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1385,6 +1486,12 @@ rule__VLSAtomicFunction__ConstantAlternatives_0_1_0
 		{ before(grammarAccess.getVLSAtomicFunctionAccess().getConstantDOUBLE_DOLLAR_IDTerminalRuleCall_0_1_0_3()); }
 		RULE_DOUBLE_DOLLAR_ID
 		{ after(grammarAccess.getVLSAtomicFunctionAccess().getConstantDOUBLE_DOLLAR_IDTerminalRuleCall_0_1_0_3()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getVLSAtomicFunctionAccess().getConstantVLSRoleParserRuleCall_0_1_0_4()); }
+		ruleVLSRole
+		{ after(grammarAccess.getVLSAtomicFunctionAccess().getConstantVLSRoleParserRuleCall_0_1_0_4()); }
 	)
 ;
 finally {
@@ -1483,6 +1590,249 @@ rule__VLSDefinedTerm__Alternatives
 finally {
 	restoreStackSize(stackSize);
 }
+
+rule__VLSInclude__Group__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group__0__Impl
+	rule__VLSInclude__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getIncludeKeyword_0()); }
+	'include('
+	{ after(grammarAccess.getVLSIncludeAccess().getIncludeKeyword_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group__1__Impl
+	rule__VLSInclude__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getFileNameAssignment_1()); }
+	(rule__VLSInclude__FileNameAssignment_1)
+	{ after(grammarAccess.getVLSIncludeAccess().getFileNameAssignment_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getGroup_2()); }
+	(rule__VLSInclude__Group_2__0)?
+	{ after(grammarAccess.getVLSIncludeAccess().getGroup_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__VLSInclude__Group_2__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group_2__0__Impl
+	rule__VLSInclude__Group_2__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getCommaLeftSquareBracketKeyword_2_0()); }
+	',['
+	{ after(grammarAccess.getVLSIncludeAccess().getCommaLeftSquareBracketKeyword_2_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group_2__1__Impl
+	rule__VLSInclude__Group_2__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_1()); }
+	(rule__VLSInclude__NamesAssignment_2_1)
+	{ after(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group_2__2__Impl
+	rule__VLSInclude__Group_2__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getGroup_2_2()); }
+	(rule__VLSInclude__Group_2_2__0)*
+	{ after(grammarAccess.getVLSIncludeAccess().getGroup_2_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group_2__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getRightSquareBracketKeyword_2_3()); }
+	']'
+	{ after(grammarAccess.getVLSIncludeAccess().getRightSquareBracketKeyword_2_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__VLSInclude__Group_2_2__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group_2_2__0__Impl
+	rule__VLSInclude__Group_2_2__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2_2__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getCommaKeyword_2_2_0()); }
+	','
+	{ after(grammarAccess.getVLSIncludeAccess().getCommaKeyword_2_2_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2_2__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSInclude__Group_2_2__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__Group_2_2__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_2_1()); }
+	(rule__VLSInclude__NamesAssignment_2_2_1)
+	{ after(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_2_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 
 rule__VLSFofFormula__Group__0
 	@init {
@@ -2744,9 +3094,9 @@ rule__VLSUnitaryFormula__Group_4__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getVLSUnitaryFormulaAccess().getVLSTermParserRuleCall_4_1()); }
-	ruleVLSTerm
-	{ after(grammarAccess.getVLSUnitaryFormulaAccess().getVLSTermParserRuleCall_4_1()); }
+	{ before(grammarAccess.getVLSUnitaryFormulaAccess().getTermAssignment_4_1()); }
+	(rule__VLSUnitaryFormula__TermAssignment_4_1)
+	{ after(grammarAccess.getVLSUnitaryFormulaAccess().getTermAssignment_4_1()); }
 )
 ;
 finally {
@@ -4751,30 +5101,105 @@ finally {
 }
 
 
-rule__VampireModel__CommentsAssignment_0
+rule__VampireModel__IncludesAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_0_0()); }
-		ruleVLSComment
-		{ after(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_0_0()); }
+		{ before(grammarAccess.getVampireModelAccess().getIncludesVLSIncludeParserRuleCall_0_0()); }
+		ruleVLSInclude
+		{ after(grammarAccess.getVampireModelAccess().getIncludesVLSIncludeParserRuleCall_0_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__VampireModel__FormulasAssignment_1
+rule__VampireModel__CommentsAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_1_0()); }
+		{ before(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_1_0()); }
+		ruleVLSComment
+		{ after(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VampireModel__FormulasAssignment_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_2_0()); }
 		ruleVLSFofFormula
-		{ after(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_1_0()); }
+		{ after(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__FileNameAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSIncludeAccess().getFileNameSINGLE_QUOTETerminalRuleCall_1_0()); }
+		RULE_SINGLE_QUOTE
+		{ after(grammarAccess.getVLSIncludeAccess().getFileNameSINGLE_QUOTETerminalRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__NamesAssignment_2_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_1_0()); }
+		ruleVLSName
+		{ after(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSInclude__NamesAssignment_2_2_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_2_1_0()); }
+		ruleVLSName
+		{ after(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_2_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSName__NameAssignment
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSNameAccess().getNameAlternatives_0()); }
+		(rule__VLSName__NameAlternatives_0)
+		{ after(grammarAccess.getVLSNameAccess().getNameAlternatives_0()); }
 	)
 ;
 finally {
@@ -4955,6 +5380,21 @@ rule__VLSBinary__RightAssignment_1_2_2
 		{ before(grammarAccess.getVLSBinaryAccess().getRightVLSUnitaryFormulaParserRuleCall_1_2_2_0()); }
 		ruleVLSUnitaryFormula
 		{ after(grammarAccess.getVLSBinaryAccess().getRightVLSUnitaryFormulaParserRuleCall_1_2_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSUnitaryFormula__TermAssignment_4_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSUnitaryFormulaAccess().getTermVLSTermParserRuleCall_4_1_0()); }
+		ruleVLSTerm
+		{ after(grammarAccess.getVLSUnitaryFormulaAccess().getTermVLSTermParserRuleCall_4_1_0()); }
 	)
 ;
 finally {
@@ -5364,7 +5804,7 @@ RULE_DOLLAR_ID : '$' RULE_LOWER_WORD_ID;
 
 RULE_DOUBLE_DOLLAR_ID : '$$' RULE_LOWER_WORD_ID;
 
-fragment RULE_LITERAL : ('0'|'1'..'9' RULE_INT?);
+RULE_LITERAL : ('0'|'1'..'9' RULE_INT?);
 
 RULE_SIGNED_LITERAL : RULE_SIGN* RULE_LITERAL;
 

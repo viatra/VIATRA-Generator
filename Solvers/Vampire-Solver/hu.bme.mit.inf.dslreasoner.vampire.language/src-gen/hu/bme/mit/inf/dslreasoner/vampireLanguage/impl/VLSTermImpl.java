@@ -7,8 +7,10 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -21,7 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTermImpl#getName <em>Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTermImpl#getTerm <em>Term</em>}</li>
  * </ul>
  *
  * @generated
@@ -29,24 +31,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getTerm() <em>Term</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getTerm()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected VLSTerm term;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,9 +66,9 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public VLSTerm getTerm()
   {
-    return name;
+    return term;
   }
 
   /**
@@ -84,12 +76,53 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public NotificationChain basicSetTerm(VLSTerm newTerm, NotificationChain msgs)
   {
-    String oldName = name;
-    name = newName;
+    VLSTerm oldTerm = term;
+    term = newTerm;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_TERM__NAME, oldName, name));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_TERM__TERM, oldTerm, newTerm);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTerm(VLSTerm newTerm)
+  {
+    if (newTerm != term)
+    {
+      NotificationChain msgs = null;
+      if (term != null)
+        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_TERM__TERM, null, msgs);
+      if (newTerm != null)
+        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_TERM__TERM, null, msgs);
+      msgs = basicSetTerm(newTerm, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_TERM__TERM, newTerm, newTerm));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case VampireLanguagePackage.VLS_TERM__TERM:
+        return basicSetTerm(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -102,8 +135,8 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_TERM__NAME:
-        return getName();
+      case VampireLanguagePackage.VLS_TERM__TERM:
+        return getTerm();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -118,8 +151,8 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_TERM__NAME:
-        setName((String)newValue);
+      case VampireLanguagePackage.VLS_TERM__TERM:
+        setTerm((VLSTerm)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -135,8 +168,8 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_TERM__NAME:
-        setName(NAME_EDEFAULT);
+      case VampireLanguagePackage.VLS_TERM__TERM:
+        setTerm((VLSTerm)null);
         return;
     }
     super.eUnset(featureID);
@@ -152,27 +185,10 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
   {
     switch (featureID)
     {
-      case VampireLanguagePackage.VLS_TERM__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case VampireLanguagePackage.VLS_TERM__TERM:
+        return term != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //VLSTermImpl

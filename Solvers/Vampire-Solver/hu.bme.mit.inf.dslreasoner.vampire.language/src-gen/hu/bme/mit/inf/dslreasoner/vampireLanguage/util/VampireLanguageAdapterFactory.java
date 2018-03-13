@@ -81,6 +81,16 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVampireModelAdapter();
       }
       @Override
+      public Adapter caseVLSInclude(VLSInclude object)
+      {
+        return createVLSIncludeAdapter();
+      }
+      @Override
+      public Adapter caseVLSName(VLSName object)
+      {
+        return createVLSNameAdapter();
+      }
+      @Override
       public Adapter caseVLSComment(VLSComment object)
       {
         return createVLSCommentAdapter();
@@ -99,6 +109,11 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVLSTerm(VLSTerm object)
       {
         return createVLSTermAdapter();
+      }
+      @Override
+      public Adapter caseVLSVariable(VLSVariable object)
+      {
+        return createVLSVariableAdapter();
       }
       @Override
       public Adapter caseVLSFunctionFof(VLSFunctionFof object)
@@ -263,6 +278,36 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInclude <em>VLS Include</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInclude
+   * @generated
+   */
+  public Adapter createVLSIncludeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSName <em>VLS Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSName
+   * @generated
+   */
+  public Adapter createVLSNameAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSComment <em>VLS Comment</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -318,6 +363,21 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSTermAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable <em>VLS Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable
+   * @generated
+   */
+  public Adapter createVLSVariableAdapter()
   {
     return null;
   }

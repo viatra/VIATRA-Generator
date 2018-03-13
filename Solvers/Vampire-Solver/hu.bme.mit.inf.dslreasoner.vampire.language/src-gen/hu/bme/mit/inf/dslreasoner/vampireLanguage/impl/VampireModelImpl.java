@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSComment;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInclude;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel;
 
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireModelImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireModelImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VampireModelImpl#getFormulas <em>Formulas</em>}</li>
  * </ul>
@@ -38,6 +40,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class VampireModelImpl extends MinimalEObjectImpl.Container implements VampireModel
 {
+  /**
+   * The cached value of the '{@link #getIncludes() <em>Includes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIncludes()
+   * @generated
+   * @ordered
+   */
+  protected EList<VLSInclude> includes;
+
   /**
    * The cached value of the '{@link #getComments() <em>Comments</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -84,6 +96,20 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<VLSInclude> getIncludes()
+  {
+    if (includes == null)
+    {
+      includes = new EObjectContainmentEList<VLSInclude>(VLSInclude.class, this, VampireLanguagePackage.VAMPIRE_MODEL__INCLUDES);
+    }
+    return includes;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<VLSComment> getComments()
   {
     if (comments == null)
@@ -117,6 +143,8 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VAMPIRE_MODEL__INCLUDES:
+        return ((InternalEList<?>)getIncludes()).basicRemove(otherEnd, msgs);
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
@@ -135,6 +163,8 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VAMPIRE_MODEL__INCLUDES:
+        return getIncludes();
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         return getComments();
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
@@ -154,6 +184,10 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VAMPIRE_MODEL__INCLUDES:
+        getIncludes().clear();
+        getIncludes().addAll((Collection<? extends VLSInclude>)newValue);
+        return;
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         getComments().clear();
         getComments().addAll((Collection<? extends VLSComment>)newValue);
@@ -176,6 +210,9 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VAMPIRE_MODEL__INCLUDES:
+        getIncludes().clear();
+        return;
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         getComments().clear();
         return;
@@ -196,6 +233,8 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VAMPIRE_MODEL__INCLUDES:
+        return includes != null && !includes.isEmpty();
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         return comments != null && !comments.isEmpty();
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:

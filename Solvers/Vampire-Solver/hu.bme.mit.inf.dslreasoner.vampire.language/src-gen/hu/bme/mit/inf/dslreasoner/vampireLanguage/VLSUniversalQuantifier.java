@@ -26,7 +26,7 @@ public interface VLSUniversalQuantifier extends VLSTerm
 {
   /**
    * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm}.
+   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
@@ -38,7 +38,7 @@ public interface VLSUniversalQuantifier extends VLSTerm
    * @model containment="true"
    * @generated
    */
-  EList<VLSTerm> getVariables();
+  EList<VLSVariable> getVariables();
 
   /**
    * Returns the value of the '<em><b>Operand</b></em>' containment reference.

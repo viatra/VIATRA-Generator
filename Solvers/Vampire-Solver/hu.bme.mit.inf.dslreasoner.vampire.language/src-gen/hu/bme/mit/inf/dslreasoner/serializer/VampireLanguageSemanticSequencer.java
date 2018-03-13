@@ -19,9 +19,11 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunctionFof;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSImplies;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInclude;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInequality;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInt;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSLess;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSName;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSNand;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSNor;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSOr;
@@ -32,6 +34,7 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTrue;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSXnor;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel;
@@ -109,6 +112,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 			case VampireLanguagePackage.VLS_IMPLIES:
 				sequence_VLSBinary(context, (VLSImplies) semanticObject); 
 				return; 
+			case VampireLanguagePackage.VLS_INCLUDE:
+				sequence_VLSInclude(context, (VLSInclude) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_INEQUALITY:
 				sequence_VLSUnaryInfix(context, (VLSInequality) semanticObject); 
 				return; 
@@ -117,6 +123,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				return; 
 			case VampireLanguagePackage.VLS_LESS:
 				sequence_VLSAtomicFunction(context, (VLSLess) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_NAME:
+				sequence_VLSName(context, (VLSName) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_NAND:
 				sequence_VLSBinary(context, (VLSNand) semanticObject); 
@@ -137,7 +146,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				sequence_VLSBinary(context, (VLSRevImplies) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_TERM:
-				sequence_VLSVariable(context, (VLSTerm) semanticObject); 
+				sequence_VLSUnitaryFormula(context, (VLSTerm) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_TRUE:
 				sequence_VLSAtomicConstant(context, (VLSTrue) semanticObject); 
@@ -147,6 +156,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				return; 
 			case VampireLanguagePackage.VLS_UNIVERSAL_QUANTIFIER:
 				sequence_VLSUniversalQuantifier(context, (VLSUniversalQuantifier) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_VARIABLE:
+				sequence_VLSVariable(context, (VLSVariable) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_XNOR:
 				sequence_VLSBinary(context, (VLSXnor) semanticObject); 
@@ -204,7 +216,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSAtomicConstant returns VLSConstant
 	 *
 	 * Constraint:
-	 *     (name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=DOLLAR_ID | name=DOUBLE_DOLLAR_ID)
+	 *     (name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=DOLLAR_ID | name=DOUBLE_DOLLAR_ID | name=VLSRole)
 	 */
 	protected void sequence_VLSAtomicConstant(ISerializationContext context, VLSConstant semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -236,8 +248,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSAtomicConstant(ISerializationContext context, VLSFalse semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_FALSE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_FALSE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSAtomicConstantAccess().getNameFalseKeyword_2_1_0(), semanticObject.getName());
@@ -270,8 +282,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSAtomicConstant(ISerializationContext context, VLSTrue semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TRUE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TRUE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSAtomicConstantAccess().getNameTrueKeyword_1_1_0(), semanticObject.getName());
@@ -300,7 +312,11 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VLSAtomicFunction returns VLSFunction
 	 *
 	 * Constraint:
-	 *     ((constant=LOWER_WORD_ID | constant=SINGLE_QUOTE | constant=DOLLAR_ID | constant=DOUBLE_DOLLAR_ID) terms+=VLSFofTerm terms+=VLSFofTerm*)
+	 *     (
+	 *         (constant=LOWER_WORD_ID | constant=SINGLE_QUOTE | constant=DOLLAR_ID | constant=DOUBLE_DOLLAR_ID | constant=VLSRole) 
+	 *         terms+=VLSFofTerm 
+	 *         terms+=VLSFofTerm*
+	 *     )
 	 */
 	protected void sequence_VLSAtomicFunction(ISerializationContext context, VLSFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -339,15 +355,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSAnd
 	 *     VLSBinary returns VLSAnd
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSAnd
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSAnd
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSAnd
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSAnd
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSAnd
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSAnd
 	 *     VLSBinary.VLSAnd_1_1_0 returns VLSAnd
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSAnd
-	 *     VLSUnitaryFormula returns VLSAnd
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSAnd_1_1_0 right=VLSUnitaryFormula)
@@ -370,15 +378,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSEquivalent
 	 *     VLSBinary returns VLSEquivalent
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSEquivalent
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSEquivalent
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSEquivalent
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSEquivalent
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSEquivalent
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSEquivalent
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSEquivalent
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSEquivalent
-	 *     VLSUnitaryFormula returns VLSEquivalent
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSEquivalent_1_0_0_0_0 right=VLSUnitaryFormula)
@@ -401,15 +400,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSImplies
 	 *     VLSBinary returns VLSImplies
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSImplies
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSImplies
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSImplies
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSImplies
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSImplies
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSImplies
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSImplies
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSImplies
-	 *     VLSUnitaryFormula returns VLSImplies
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSImplies_1_0_0_1_0 right=VLSUnitaryFormula)
@@ -432,15 +422,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSNand
 	 *     VLSBinary returns VLSNand
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSNand
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSNand
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSNand
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSNand
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSNand
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSNand
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSNand
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSNand
-	 *     VLSUnitaryFormula returns VLSNand
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSNand_1_0_0_5_0 right=VLSUnitaryFormula)
@@ -463,15 +444,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSNor
 	 *     VLSBinary returns VLSNor
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSNor
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSNor
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSNor
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSNor
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSNor
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSNor
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSNor
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSNor
-	 *     VLSUnitaryFormula returns VLSNor
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSNor_1_0_0_4_0 right=VLSUnitaryFormula)
@@ -494,15 +466,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSOr
 	 *     VLSBinary returns VLSOr
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSOr
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSOr
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSOr
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSOr
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSOr
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSOr
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSOr
 	 *     VLSBinary.VLSOr_1_2_0 returns VLSOr
-	 *     VLSUnitaryFormula returns VLSOr
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSOr_1_2_0 right=VLSUnitaryFormula)
@@ -525,15 +489,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSRevImplies
 	 *     VLSBinary returns VLSRevImplies
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSRevImplies
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSRevImplies
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSRevImplies
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSRevImplies
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSRevImplies
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSRevImplies
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSRevImplies
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSRevImplies
-	 *     VLSUnitaryFormula returns VLSRevImplies
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSRevImplies_1_0_0_2_0 right=VLSUnitaryFormula)
@@ -556,15 +511,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Contexts:
 	 *     VLSTerm returns VLSXnor
 	 *     VLSBinary returns VLSXnor
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSXnor
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSXnor
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSXnor
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSXnor
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSXnor
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSXnor
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSXnor
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSXnor
-	 *     VLSUnitaryFormula returns VLSXnor
 	 *
 	 * Constraint:
 	 *     (left=VLSBinary_VLSXnor_1_0_0_3_0 right=VLSUnitaryFormula)
@@ -603,6 +549,22 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTerm returns VLSDoubleQuote
+	 *     VLSBinary returns VLSDoubleQuote
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSDoubleQuote
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSDoubleQuote
+	 *     VLSUnitaryFormula returns VLSDoubleQuote
+	 *     VLSUnaryInfix returns VLSDoubleQuote
+	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSDoubleQuote
+	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSDoubleQuote
+	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSDoubleQuote
+	 *     VLSAtomic returns VLSDoubleQuote
 	 *     VLSFofTerm returns VLSDoubleQuote
 	 *     VLSDefinedTerm returns VLSDoubleQuote
 	 *
@@ -622,6 +584,22 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTerm returns VLSInt
+	 *     VLSBinary returns VLSInt
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSInt
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSInt
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSInt
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSInt
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSInt
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSInt
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSInt
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSInt
+	 *     VLSUnitaryFormula returns VLSInt
+	 *     VLSUnaryInfix returns VLSInt
+	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSInt
+	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSInt
+	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSInt
+	 *     VLSAtomic returns VLSInt
 	 *     VLSFofTerm returns VLSInt
 	 *     VLSDefinedTerm returns VLSInt
 	 *
@@ -641,6 +619,22 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTerm returns VLSRational
+	 *     VLSBinary returns VLSRational
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSRational
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSRational
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSRational
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSRational
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSRational
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSRational
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSRational
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSRational
+	 *     VLSUnitaryFormula returns VLSRational
+	 *     VLSUnaryInfix returns VLSRational
+	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSRational
+	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSRational
+	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSRational
+	 *     VLSAtomic returns VLSRational
 	 *     VLSFofTerm returns VLSRational
 	 *     VLSDefinedTerm returns VLSRational
 	 *
@@ -660,6 +654,22 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTerm returns VLSReal
+	 *     VLSBinary returns VLSReal
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSReal
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSReal
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSReal
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSReal
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSReal
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSReal
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSReal
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSReal
+	 *     VLSUnitaryFormula returns VLSReal
+	 *     VLSUnaryInfix returns VLSReal
+	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSReal
+	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSReal
+	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSReal
+	 *     VLSAtomic returns VLSReal
 	 *     VLSFofTerm returns VLSReal
 	 *     VLSDefinedTerm returns VLSReal
 	 *
@@ -721,6 +731,30 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     ((functor=LOWER_WORD_ID | functor=SINGLE_QUOTE | functor=DOLLAR_ID | functor=DOUBLE_DOLLAR_ID) (terms+=VLSFofTerm terms+=VLSFofTerm*)?)
 	 */
 	protected void sequence_VLSFunctionFof(ISerializationContext context, VLSFunctionFof semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSInclude returns VLSInclude
+	 *
+	 * Constraint:
+	 *     (fileName=SINGLE_QUOTE (names+=VLSName names+=VLSName*)?)
+	 */
+	protected void sequence_VLSInclude(ISerializationContext context, VLSInclude semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSName returns VLSName
+	 *
+	 * Constraint:
+	 *     (name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=LITERAL | name=SIGNED_LITERAL)
+	 */
+	protected void sequence_VLSName(ISerializationContext context, VLSName semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -852,6 +886,34 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTerm returns VLSTerm
+	 *     VLSBinary returns VLSTerm
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSTerm
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSTerm
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSTerm
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSTerm
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSTerm
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSTerm
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSTerm
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSTerm
+	 *     VLSUnitaryFormula returns VLSTerm
+	 *
+	 * Constraint:
+	 *     term=VLSTerm
+	 */
+	protected void sequence_VLSUnitaryFormula(ISerializationContext context, VLSTerm semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__TERM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__TERM));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVLSUnitaryFormulaAccess().getTermVLSTermParserRuleCall_4_1_0(), semanticObject.getTerm());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     VLSTerm returns VLSUniversalQuantifier
 	 *     VLSBinary returns VLSUniversalQuantifier
 	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSUniversalQuantifier
@@ -875,32 +937,32 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
-	 *     VLSTerm returns VLSTerm
-	 *     VLSBinary returns VLSTerm
-	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSTerm
-	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSTerm
-	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSTerm
-	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSTerm
-	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSTerm
-	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSTerm
-	 *     VLSBinary.VLSAnd_1_1_0 returns VLSTerm
-	 *     VLSBinary.VLSOr_1_2_0 returns VLSTerm
-	 *     VLSUnitaryFormula returns VLSTerm
-	 *     VLSUnaryInfix returns VLSTerm
-	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSTerm
-	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSTerm
-	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSTerm
-	 *     VLSAtomic returns VLSTerm
-	 *     VLSFofTerm returns VLSTerm
-	 *     VLSVariable returns VLSTerm
+	 *     VLSTerm returns VLSVariable
+	 *     VLSBinary returns VLSVariable
+	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSVariable
+	 *     VLSBinary.VLSImplies_1_0_0_1_0 returns VLSVariable
+	 *     VLSBinary.VLSRevImplies_1_0_0_2_0 returns VLSVariable
+	 *     VLSBinary.VLSXnor_1_0_0_3_0 returns VLSVariable
+	 *     VLSBinary.VLSNor_1_0_0_4_0 returns VLSVariable
+	 *     VLSBinary.VLSNand_1_0_0_5_0 returns VLSVariable
+	 *     VLSBinary.VLSAnd_1_1_0 returns VLSVariable
+	 *     VLSBinary.VLSOr_1_2_0 returns VLSVariable
+	 *     VLSUnitaryFormula returns VLSVariable
+	 *     VLSUnaryInfix returns VLSVariable
+	 *     VLSUnaryInfix.VLSInequality_1_0_0_0 returns VLSVariable
+	 *     VLSUnaryInfix.VLSEquality_1_0_1_0 returns VLSVariable
+	 *     VLSUnaryInfix.VLSAssignment_1_0_2_0 returns VLSVariable
+	 *     VLSAtomic returns VLSVariable
+	 *     VLSVariable returns VLSVariable
+	 *     VLSFofTerm returns VLSVariable
 	 *
 	 * Constraint:
 	 *     name=UPPER_WORD_ID
 	 */
-	protected void sequence_VLSVariable(ISerializationContext context, VLSTerm semanticObject) {
+	protected void sequence_VLSVariable(ISerializationContext context, VLSVariable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVLSVariableAccess().getNameUPPER_WORD_IDTerminalRuleCall_0(), semanticObject.getName());
@@ -913,7 +975,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VampireModel returns VampireModel
 	 *
 	 * Constraint:
-	 *     (comments+=VLSComment | formulas+=VLSFofFormula)+
+	 *     (includes+=VLSInclude | comments+=VLSComment | formulas+=VLSFofFormula)+
 	 */
 	protected void sequence_VampireModel(ISerializationContext context, VampireModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

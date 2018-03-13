@@ -33,6 +33,24 @@ public interface VampireLanguageFactory extends EFactory
   VampireModel createVampireModel();
 
   /**
+   * Returns a new object of class '<em>VLS Include</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Include</em>'.
+   * @generated
+   */
+  VLSInclude createVLSInclude();
+
+  /**
+   * Returns a new object of class '<em>VLS Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Name</em>'.
+   * @generated
+   */
+  VLSName createVLSName();
+
+  /**
    * Returns a new object of class '<em>VLS Comment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +85,15 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSTerm createVLSTerm();
+
+  /**
+   * Returns a new object of class '<em>VLS Variable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Variable</em>'.
+   * @generated
+   */
+  VLSVariable createVLSVariable();
 
   /**
    * Returns a new object of class '<em>VLS Function Fof</em>'.

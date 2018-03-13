@@ -66,10 +66,13 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
     switch (eClass.getClassifierID())
     {
       case VampireLanguagePackage.VAMPIRE_MODEL: return createVampireModel();
+      case VampireLanguagePackage.VLS_INCLUDE: return createVLSInclude();
+      case VampireLanguagePackage.VLS_NAME: return createVLSName();
       case VampireLanguagePackage.VLS_COMMENT: return createVLSComment();
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
       case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
+      case VampireLanguagePackage.VLS_VARIABLE: return createVLSVariable();
       case VampireLanguagePackage.VLS_FUNCTION_FOF: return createVLSFunctionFof();
       case VampireLanguagePackage.VLS_DEFINED_TERM: return createVLSDefinedTerm();
       case VampireLanguagePackage.VLS_EQUIVALENT: return createVLSEquivalent();
@@ -116,6 +119,28 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
+  public VLSInclude createVLSInclude()
+  {
+    VLSIncludeImpl vlsInclude = new VLSIncludeImpl();
+    return vlsInclude;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSName createVLSName()
+  {
+    VLSNameImpl vlsName = new VLSNameImpl();
+    return vlsName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VLSComment createVLSComment()
   {
     VLSCommentImpl vlsComment = new VLSCommentImpl();
@@ -153,6 +178,17 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSTermImpl vlsTerm = new VLSTermImpl();
     return vlsTerm;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSVariable createVLSVariable()
+  {
+    VLSVariableImpl vlsVariable = new VLSVariableImpl();
+    return vlsVariable;
   }
 
   /**

@@ -4,6 +4,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
+import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation_TypeInterpretation;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import java.util.Collection;
 import java.util.List;
@@ -20,5 +21,5 @@ public interface Logic2VampireLanguageMapper_TypeMapper {
   
   public abstract VLSTerm transformReference(final DefinedElement referred, final Logic2VampireLanguageMapperTrace trace);
   
-  public abstract /* VampireModelInterpretation_TypeInterpretation */Object getTypeInterpreter();
+  public abstract VampireModelInterpretation_TypeInterpretation getTypeInterpreter();
 }

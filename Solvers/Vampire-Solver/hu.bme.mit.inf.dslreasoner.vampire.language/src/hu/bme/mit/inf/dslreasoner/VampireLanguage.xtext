@@ -11,8 +11,14 @@ generate vampireLanguage "http://www.bme.hu/mit/inf/dslreasoner/VampireLanguage"
 
 VampireModel:	
 	// TODO ensures there is always exactly 1 conjecture
-	(comments += VLSComment | formulas += VLSFofFormula)*	
+	(
+		includes += VLSInclude |
+		comments += VLSComment | 
+		formulas += VLSFofFormula
+	)*	
 ;
+
+
 
 //////////////////////////////////
 // VLS terminals
@@ -53,7 +59,17 @@ terminal SINGLE_COMMENT: ANY_OTHER;
 //////////////////////////////////
 // VLS types
 //////////////////////////////////
-// <COMMENT>
+
+// <includes>
+VLSInclude:
+	'include(' fileName = SINGLE_QUOTE ( ',[' names += VLSName (','  names += VLSName)* ']' )?
+;
+
+VLSName:
+	name = (LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
+;
+
+// <comments>
 VLSComment:
 	comment = SINGLE_COMMENT
 	//need to add a new line at the end of the file for the case where the last line is a comment
@@ -61,10 +77,7 @@ VLSComment:
 
 //VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
 
-
-
-
-//Formulas
+// <FOF formulas>
 VLSFofFormula:
 	'fof' '(' name = (LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
 ;
@@ -180,7 +193,9 @@ VLSBinary returns VLSTerm:
 
 //VLSUnitaryFormula
 VLSUnitaryFormula returns VLSTerm:
-	VLSUniversalQuantifier  | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix | '(' VLSTerm ')'
+	VLSUniversalQuantifier  | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix 
+	//| VLSEquality 
+	|  '(' term = VLSTerm ')'
 ;
 
 VLSUniversalQuantifier  returns VLSTerm:
@@ -196,11 +211,17 @@ VLSUnaryNegation   returns VLSTerm:
 ;
 
 VLSUnaryInfix returns VLSTerm:
-	VLSAtomic (({VLSInequality.left = current} "!=" |	
-		{VLSEquality.left = current} "=" |
+	VLSAtomic (({VLSInequality.left = current} "!=" |
+		{VLSEquality.left = current} "=" |	
 		{VLSAssignment.left = current} ":=")
 		right = VLSAtomic)? 
 ;
+
+//NOT SUREEEE
+//VLSEquality returns VLSTerm:
+//	VLSFofTerm ({VLSEquality.left = current} "=" right = VLSFofTerm)?
+//	
+//;
 
 /*
 enum VLSDefinedFunctor:
@@ -212,12 +233,14 @@ enum VLSDefinedFunctor:
 */
 
 VLSAtomic returns VLSTerm:
-	VLSAtomicConstant | VLSAtomicFunction | VLSVariable
+	VLSAtomicConstant | VLSAtomicFunction | VLSVariable 
+	| VLSDefinedTerm //temporary solution. this is only valid for equality, not for != or :=
+	//| VLSEquality
 ;
 
 VLSAtomicConstant returns VLSTerm:
 	//{VLSConstant} name = VLSConstantDeclaration |
-	{VLSConstant} name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) |
+	{VLSConstant} name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) |
 	{VLSTrue} name = '$true' |
 	{VLSFalse} name = '$false'
 ;
@@ -226,17 +249,18 @@ VLSAtomicFunction returns VLSTerm:
 	//? on next line causes warning
 	//TODO might need replace DOLLAR_ID with enum rule 
 	//{VLSFunction} name = VLSConstantDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')' ) |
-	{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')') |
+	{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')') |
 	{VLSLess} name = '$less' '(' terms += VLSFofTerm ',' terms += VLSFofTerm ')' 
+;
+
+VLSVariable :
+	
+	name = UPPER_WORD_ID
 ;
 
 VLSFofTerm returns VLSTerm:
 	//(VLSVariable | VLSFunction | VLSTffConditional | VLSTffLet | VLSTffTuple)
 	(VLSVariable | VLSFunctionFof | VLSDefinedTerm )
-;
-
-VLSVariable returns VLSTerm:
-	name = UPPER_WORD_ID
 ;
 
 VLSFunctionFof:

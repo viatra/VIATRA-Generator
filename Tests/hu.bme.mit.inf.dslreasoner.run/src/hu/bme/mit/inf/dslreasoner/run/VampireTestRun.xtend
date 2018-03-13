@@ -18,31 +18,25 @@ class VampireTestRun {
 		workspace.initAndClear
 		
 		//create logic problem
-		var extension builder = new LogicProblemBuilder
-		var LogicProblem problem1 = builder.createProblem
+		var LogicProblem problem = builder.createProblem
 		
-		var X = ConstantDeclaration(LogicBool)
-		var Y = ConstantDeclaration(LogicBool)
-		problem1.add(X)
-		problem1.add(Y)
-		
-		//assertion is negated manually because logic problem can only handle axioms (assertions)
-		//so ya
-		problem1.add(Assertion( !(X && Y) <=> ( !X || !Y)) )
-		//do this for next meeting
+		//*
+		deMorgan(problem)
+		/*/
+		rockPaperScisors(problem)
+		//*/
 		
 		println("Problem Created");
 		
 		var LogicResult solution
 		var LogicReasoner reasoner
 		
-		//ASK OSZKAR: errors?
 		reasoner = new VampireSolver
 		val vampireConfig = new VampireSolverConfiguration => [
 			//add configuration things, in config file first
 		]
 		
-		solution = reasoner.solve(problem1, vampireConfig,	workspace)
+		solution = reasoner.solve(problem, vampireConfig,	workspace)
 		
 //		if(solution instanceof ModelResult) {
 //			reasoner.getInterpretations(solution)
@@ -56,5 +50,47 @@ class VampireTestRun {
 		
 		//output solution
 		
+	}
+	
+	static def deMorgan(LogicProblem problem) {
+		
+		
+		var X = ConstantDeclaration(LogicBool)
+		var Y = ConstantDeclaration(LogicBool)
+		problem.add(X)
+		problem.add(Y)
+		
+		//assertion is negated manually because logic problem can only handle axioms (assertions)
+		//so ya
+		problem.add(Assertion( !(X && Y) <=> ( !X || !Y)) )
+	}
+	
+	static def rockPaperScisors(LogicProblem problem) {
+
+		val rock = Element("Rock")
+		val paper= Element("Paper")
+		val scissor = Element("Scissor")
+		
+		problem.elements += rock
+		problem.elements += paper
+		problem.elements += scissor 
+		
+		val RPS = problem.add(TypeDefinition("RPS", false, rock, paper, scissor))
+		
+		val beats = problem.add(RelationDefinition("beats",[
+			val x = addVar("x",RPS)
+			val y = addVar("y",RPS)
+			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
+		]))
+		
+		//below needs to be added as an axiom
+		val beats2 = problem.add(RelationDeclaration("beats2",RPS,RPS))
+		problem.add(Assertion(Forall[
+			val x = addVar("x",RPS)
+			Exists[
+				val y = addVar("y",RPS)
+				beats2.call(x,y)
+			]
+		]))
 	}
 }

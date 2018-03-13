@@ -14,32 +14,34 @@ import java.util.ArrayList;
 public class InternalVampireLanguageLexer extends Lexer {
     public static final int RULE_UNSIGNED_RAT_ID=20;
     public static final int T__50=50;
-    public static final int RULE_SIGN=15;
+    public static final int RULE_SIGN=16;
     public static final int T__59=59;
-    public static final int RULE_SIGNED_LITERAL=6;
+    public static final int RULE_SIGNED_LITERAL=7;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
     public static final int T__58=58;
     public static final int T__51=51;
-    public static final int RULE_DOUBLE_QUOTE=13;
+    public static final int RULE_DOUBLE_QUOTE=14;
     public static final int T__52=52;
-    public static final int RULE_LITERAL=17;
+    public static final int RULE_LITERAL=6;
     public static final int T__53=53;
     public static final int RULE_UNSIGNED_REAL_FRAC_ID=18;
     public static final int T__54=54;
     public static final int T__60=60;
     public static final int T__61=61;
     public static final int RULE_ID=22;
-    public static final int RULE_SINGLE_QUOTE=7;
-    public static final int RULE_SINGLE_COMMENT=4;
+    public static final int RULE_SINGLE_QUOTE=4;
+    public static final int RULE_SINGLE_COMMENT=8;
     public static final int T__27=27;
     public static final int T__28=28;
-    public static final int RULE_INT=16;
+    public static final int RULE_INT=17;
     public static final int T__29=29;
     public static final int T__66=66;
     public static final int RULE_ML_COMMENT=24;
-    public static final int RULE_SIGNED_RAT_ID=12;
+    public static final int T__67=67;
+    public static final int RULE_SIGNED_RAT_ID=13;
+    public static final int T__68=68;
     public static final int T__62=62;
     public static final int T__63=63;
     public static final int T__64=64;
@@ -59,17 +61,17 @@ public class InternalVampireLanguageLexer extends Lexer {
     public static final int RULE_UNSIGNED_REAL_EXP_ID=19;
     public static final int T__31=31;
     public static final int T__32=32;
-    public static final int RULE_UPPER_WORD_ID=10;
+    public static final int RULE_UPPER_WORD_ID=11;
     public static final int RULE_WS=26;
-    public static final int RULE_DOLLAR_ID=8;
-    public static final int RULE_ALPHA_NUMERIC=14;
+    public static final int RULE_DOLLAR_ID=9;
+    public static final int RULE_ALPHA_NUMERIC=15;
     public static final int RULE_ANY_OTHER=21;
-    public static final int RULE_DOUBLE_DOLLAR_ID=9;
+    public static final int RULE_DOUBLE_DOLLAR_ID=10;
     public static final int T__48=48;
     public static final int T__49=49;
     public static final int T__44=44;
     public static final int T__45=45;
-    public static final int RULE_SIGNED_REAL_ID=11;
+    public static final int RULE_SIGNED_REAL_ID=12;
     public static final int T__46=46;
     public static final int T__47=47;
     public static final int T__40=40;
@@ -95,10 +97,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:11:7: ( 'fof' )
-            // InternalVampireLanguage.g:11:9: 'fof'
+            // InternalVampireLanguage.g:11:7: ( 'include(' )
+            // InternalVampireLanguage.g:11:9: 'include('
             {
-            match("fof"); 
+            match("include("); 
 
 
             }
@@ -116,10 +118,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:12:7: ( '(' )
-            // InternalVampireLanguage.g:12:9: '('
+            // InternalVampireLanguage.g:12:7: ( ',[' )
+            // InternalVampireLanguage.g:12:9: ',['
             {
-            match('('); 
+            match(",["); 
+
 
             }
 
@@ -156,10 +159,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:14:7: ( ')' )
-            // InternalVampireLanguage.g:14:9: ')'
+            // InternalVampireLanguage.g:14:7: ( ']' )
+            // InternalVampireLanguage.g:14:9: ']'
             {
-            match(')'); 
+            match(']'); 
 
             }
 
@@ -176,10 +179,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:15:7: ( '.' )
-            // InternalVampireLanguage.g:15:9: '.'
+            // InternalVampireLanguage.g:15:7: ( 'fof' )
+            // InternalVampireLanguage.g:15:9: 'fof'
             {
-            match('.'); 
+            match("fof"); 
+
 
             }
 
@@ -196,11 +200,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:16:7: ( 'axiom' )
-            // InternalVampireLanguage.g:16:9: 'axiom'
+            // InternalVampireLanguage.g:16:7: ( '(' )
+            // InternalVampireLanguage.g:16:9: '('
             {
-            match("axiom"); 
-
+            match('('); 
 
             }
 
@@ -217,11 +220,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:17:7: ( 'conjecture' )
-            // InternalVampireLanguage.g:17:9: 'conjecture'
+            // InternalVampireLanguage.g:17:7: ( ')' )
+            // InternalVampireLanguage.g:17:9: ')'
             {
-            match("conjecture"); 
-
+            match(')'); 
 
             }
 
@@ -238,11 +240,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:18:7: ( 'hypothesis' )
-            // InternalVampireLanguage.g:18:9: 'hypothesis'
+            // InternalVampireLanguage.g:18:7: ( '.' )
+            // InternalVampireLanguage.g:18:9: '.'
             {
-            match("hypothesis"); 
-
+            match('.'); 
 
             }
 
@@ -259,10 +260,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:19:7: ( 'definition' )
-            // InternalVampireLanguage.g:19:9: 'definition'
+            // InternalVampireLanguage.g:19:7: ( 'axiom' )
+            // InternalVampireLanguage.g:19:9: 'axiom'
             {
-            match("definition"); 
+            match("axiom"); 
 
 
             }
@@ -280,10 +281,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:20:7: ( 'assumption' )
-            // InternalVampireLanguage.g:20:9: 'assumption'
+            // InternalVampireLanguage.g:20:7: ( 'conjecture' )
+            // InternalVampireLanguage.g:20:9: 'conjecture'
             {
-            match("assumption"); 
+            match("conjecture"); 
 
 
             }
@@ -301,10 +302,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:21:7: ( 'lemma' )
-            // InternalVampireLanguage.g:21:9: 'lemma'
+            // InternalVampireLanguage.g:21:7: ( 'hypothesis' )
+            // InternalVampireLanguage.g:21:9: 'hypothesis'
             {
-            match("lemma"); 
+            match("hypothesis"); 
 
 
             }
@@ -322,10 +323,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:22:7: ( 'theorem' )
-            // InternalVampireLanguage.g:22:9: 'theorem'
+            // InternalVampireLanguage.g:22:7: ( 'definition' )
+            // InternalVampireLanguage.g:22:9: 'definition'
             {
-            match("theorem"); 
+            match("definition"); 
 
 
             }
@@ -343,10 +344,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:23:7: ( 'corollary' )
-            // InternalVampireLanguage.g:23:9: 'corollary'
+            // InternalVampireLanguage.g:23:7: ( 'assumption' )
+            // InternalVampireLanguage.g:23:9: 'assumption'
             {
-            match("corollary"); 
+            match("assumption"); 
 
 
             }
@@ -364,10 +365,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:24:7: ( 'negated_conjecture' )
-            // InternalVampireLanguage.g:24:9: 'negated_conjecture'
+            // InternalVampireLanguage.g:24:7: ( 'lemma' )
+            // InternalVampireLanguage.g:24:9: 'lemma'
             {
-            match("negated_conjecture"); 
+            match("lemma"); 
 
 
             }
@@ -385,10 +386,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:25:7: ( 'plain' )
-            // InternalVampireLanguage.g:25:9: 'plain'
+            // InternalVampireLanguage.g:25:7: ( 'theorem' )
+            // InternalVampireLanguage.g:25:9: 'theorem'
             {
-            match("plain"); 
+            match("theorem"); 
 
 
             }
@@ -406,10 +407,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:26:7: ( 'type' )
-            // InternalVampireLanguage.g:26:9: 'type'
+            // InternalVampireLanguage.g:26:7: ( 'corollary' )
+            // InternalVampireLanguage.g:26:9: 'corollary'
             {
-            match("type"); 
+            match("corollary"); 
 
 
             }
@@ -427,10 +428,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:27:7: ( 'fi_domain' )
-            // InternalVampireLanguage.g:27:9: 'fi_domain'
+            // InternalVampireLanguage.g:27:7: ( 'negated_conjecture' )
+            // InternalVampireLanguage.g:27:9: 'negated_conjecture'
             {
-            match("fi_domain"); 
+            match("negated_conjecture"); 
 
 
             }
@@ -448,10 +449,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:28:7: ( 'fi_functors' )
-            // InternalVampireLanguage.g:28:9: 'fi_functors'
+            // InternalVampireLanguage.g:28:7: ( 'plain' )
+            // InternalVampireLanguage.g:28:9: 'plain'
             {
-            match("fi_functors"); 
+            match("plain"); 
 
 
             }
@@ -469,10 +470,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:29:7: ( 'fi_predicates' )
-            // InternalVampireLanguage.g:29:9: 'fi_predicates'
+            // InternalVampireLanguage.g:29:7: ( 'type' )
+            // InternalVampireLanguage.g:29:9: 'type'
             {
-            match("fi_predicates"); 
+            match("type"); 
 
 
             }
@@ -490,10 +491,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:30:7: ( 'unknown' )
-            // InternalVampireLanguage.g:30:9: 'unknown'
+            // InternalVampireLanguage.g:30:7: ( 'fi_domain' )
+            // InternalVampireLanguage.g:30:9: 'fi_domain'
             {
-            match("unknown"); 
+            match("fi_domain"); 
 
 
             }
@@ -511,10 +512,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:31:7: ( '[' )
-            // InternalVampireLanguage.g:31:9: '['
+            // InternalVampireLanguage.g:31:7: ( 'fi_functors' )
+            // InternalVampireLanguage.g:31:9: 'fi_functors'
             {
-            match('['); 
+            match("fi_functors"); 
+
 
             }
 
@@ -531,10 +533,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:32:7: ( ']' )
-            // InternalVampireLanguage.g:32:9: ']'
+            // InternalVampireLanguage.g:32:7: ( 'fi_predicates' )
+            // InternalVampireLanguage.g:32:9: 'fi_predicates'
             {
-            match(']'); 
+            match("fi_predicates"); 
+
 
             }
 
@@ -551,10 +554,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:33:7: ( '<=>' )
-            // InternalVampireLanguage.g:33:9: '<=>'
+            // InternalVampireLanguage.g:33:7: ( 'unknown' )
+            // InternalVampireLanguage.g:33:9: 'unknown'
             {
-            match("<=>"); 
+            match("unknown"); 
 
 
             }
@@ -572,11 +575,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:34:7: ( '=>' )
-            // InternalVampireLanguage.g:34:9: '=>'
+            // InternalVampireLanguage.g:34:7: ( '[' )
+            // InternalVampireLanguage.g:34:9: '['
             {
-            match("=>"); 
-
+            match('['); 
 
             }
 
@@ -593,10 +595,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:35:7: ( '<=' )
-            // InternalVampireLanguage.g:35:9: '<='
+            // InternalVampireLanguage.g:35:7: ( '<=>' )
+            // InternalVampireLanguage.g:35:9: '<=>'
             {
-            match("<="); 
+            match("<=>"); 
 
 
             }
@@ -614,10 +616,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:36:7: ( '<~>' )
-            // InternalVampireLanguage.g:36:9: '<~>'
+            // InternalVampireLanguage.g:36:7: ( '=>' )
+            // InternalVampireLanguage.g:36:9: '=>'
             {
-            match("<~>"); 
+            match("=>"); 
 
 
             }
@@ -635,10 +637,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:37:7: ( '~|' )
-            // InternalVampireLanguage.g:37:9: '~|'
+            // InternalVampireLanguage.g:37:7: ( '<=' )
+            // InternalVampireLanguage.g:37:9: '<='
             {
-            match("~|"); 
+            match("<="); 
 
 
             }
@@ -656,10 +658,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:38:7: ( '~&' )
-            // InternalVampireLanguage.g:38:9: '~&'
+            // InternalVampireLanguage.g:38:7: ( '<~>' )
+            // InternalVampireLanguage.g:38:9: '<~>'
             {
-            match("~&"); 
+            match("<~>"); 
 
 
             }
@@ -677,10 +679,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:39:7: ( '&' )
-            // InternalVampireLanguage.g:39:9: '&'
+            // InternalVampireLanguage.g:39:7: ( '~|' )
+            // InternalVampireLanguage.g:39:9: '~|'
             {
-            match('&'); 
+            match("~|"); 
+
 
             }
 
@@ -697,10 +700,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:40:7: ( '|' )
-            // InternalVampireLanguage.g:40:9: '|'
+            // InternalVampireLanguage.g:40:7: ( '~&' )
+            // InternalVampireLanguage.g:40:9: '~&'
             {
-            match('|'); 
+            match("~&"); 
+
 
             }
 
@@ -717,10 +721,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:41:7: ( '!' )
-            // InternalVampireLanguage.g:41:9: '!'
+            // InternalVampireLanguage.g:41:7: ( '&' )
+            // InternalVampireLanguage.g:41:9: '&'
             {
-            match('!'); 
+            match('&'); 
 
             }
 
@@ -737,10 +741,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:42:7: ( ':' )
-            // InternalVampireLanguage.g:42:9: ':'
+            // InternalVampireLanguage.g:42:7: ( '|' )
+            // InternalVampireLanguage.g:42:9: '|'
             {
-            match(':'); 
+            match('|'); 
 
             }
 
@@ -757,10 +761,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:43:7: ( '?' )
-            // InternalVampireLanguage.g:43:9: '?'
+            // InternalVampireLanguage.g:43:7: ( '!' )
+            // InternalVampireLanguage.g:43:9: '!'
             {
-            match('?'); 
+            match('!'); 
 
             }
 
@@ -777,10 +781,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:44:7: ( '~' )
-            // InternalVampireLanguage.g:44:9: '~'
+            // InternalVampireLanguage.g:44:7: ( ':' )
+            // InternalVampireLanguage.g:44:9: ':'
             {
-            match('~'); 
+            match(':'); 
 
             }
 
@@ -797,11 +801,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:45:7: ( '!=' )
-            // InternalVampireLanguage.g:45:9: '!='
+            // InternalVampireLanguage.g:45:7: ( '?' )
+            // InternalVampireLanguage.g:45:9: '?'
             {
-            match("!="); 
-
+            match('?'); 
 
             }
 
@@ -818,10 +821,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:46:7: ( '=' )
-            // InternalVampireLanguage.g:46:9: '='
+            // InternalVampireLanguage.g:46:7: ( '~' )
+            // InternalVampireLanguage.g:46:9: '~'
             {
-            match('='); 
+            match('~'); 
 
             }
 
@@ -838,10 +841,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:47:7: ( ':=' )
-            // InternalVampireLanguage.g:47:9: ':='
+            // InternalVampireLanguage.g:47:7: ( '!=' )
+            // InternalVampireLanguage.g:47:9: '!='
             {
-            match(":="); 
+            match("!="); 
 
 
             }
@@ -859,11 +862,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:48:7: ( '$true' )
-            // InternalVampireLanguage.g:48:9: '$true'
+            // InternalVampireLanguage.g:48:7: ( '=' )
+            // InternalVampireLanguage.g:48:9: '='
             {
-            match("$true"); 
-
+            match('='); 
 
             }
 
@@ -880,10 +882,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:49:7: ( '$false' )
-            // InternalVampireLanguage.g:49:9: '$false'
+            // InternalVampireLanguage.g:49:7: ( ':=' )
+            // InternalVampireLanguage.g:49:9: ':='
             {
-            match("$false"); 
+            match(":="); 
 
 
             }
@@ -901,10 +903,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:50:7: ( '$less' )
-            // InternalVampireLanguage.g:50:9: '$less'
+            // InternalVampireLanguage.g:50:7: ( '$true' )
+            // InternalVampireLanguage.g:50:9: '$true'
             {
-            match("$less"); 
+            match("$true"); 
 
 
             }
@@ -917,11 +919,53 @@ public class InternalVampireLanguageLexer extends Lexer {
     }
     // $ANTLR end "T__66"
 
+    // $ANTLR start "T__67"
+    public final void mT__67() throws RecognitionException {
+        try {
+            int _type = T__67;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalVampireLanguage.g:51:7: ( '$false' )
+            // InternalVampireLanguage.g:51:9: '$false'
+            {
+            match("$false"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__67"
+
+    // $ANTLR start "T__68"
+    public final void mT__68() throws RecognitionException {
+        try {
+            int _type = T__68;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalVampireLanguage.g:52:7: ( '$less' )
+            // InternalVampireLanguage.g:52:9: '$less'
+            {
+            match("$less"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__68"
+
     // $ANTLR start "RULE_ALPHA_NUMERIC"
     public final void mRULE_ALPHA_NUMERIC() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2407:29: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' ) )
-            // InternalVampireLanguage.g:2407:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )
+            // InternalVampireLanguage.g:2656:29: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' ) )
+            // InternalVampireLanguage.g:2656:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -946,11 +990,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_UPPER_WORD_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2409:20: ( 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )* )
-            // InternalVampireLanguage.g:2409:22: 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2658:20: ( 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )* )
+            // InternalVampireLanguage.g:2658:22: 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )*
             {
             matchRange('A','Z'); 
-            // InternalVampireLanguage.g:2409:31: ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2658:31: ( RULE_ALPHA_NUMERIC )*
             loop1:
             do {
                 int alt1=2;
@@ -963,7 +1007,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2409:31: RULE_ALPHA_NUMERIC
+            	    // InternalVampireLanguage.g:2658:31: RULE_ALPHA_NUMERIC
             	    {
             	    mRULE_ALPHA_NUMERIC(); 
 
@@ -991,11 +1035,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_LOWER_WORD_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2411:20: ( 'a' .. 'z' ( RULE_ALPHA_NUMERIC )* )
-            // InternalVampireLanguage.g:2411:22: 'a' .. 'z' ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2660:20: ( 'a' .. 'z' ( RULE_ALPHA_NUMERIC )* )
+            // InternalVampireLanguage.g:2660:22: 'a' .. 'z' ( RULE_ALPHA_NUMERIC )*
             {
             matchRange('a','z'); 
-            // InternalVampireLanguage.g:2411:31: ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2660:31: ( RULE_ALPHA_NUMERIC )*
             loop2:
             do {
                 int alt2=2;
@@ -1008,7 +1052,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2411:31: RULE_ALPHA_NUMERIC
+            	    // InternalVampireLanguage.g:2660:31: RULE_ALPHA_NUMERIC
             	    {
             	    mRULE_ALPHA_NUMERIC(); 
 
@@ -1036,11 +1080,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2413:19: ( '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalVampireLanguage.g:2413:21: '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalVampireLanguage.g:2662:19: ( '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalVampireLanguage.g:2662:21: '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalVampireLanguage.g:2413:25: ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalVampireLanguage.g:2662:25: ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
             loop3:
             do {
                 int alt3=3;
@@ -1056,7 +1100,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2413:26: '\\\\' ( '\"' | '\\\\' )
+            	    // InternalVampireLanguage.g:2662:26: '\\\\' ( '\"' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\\' ) {
@@ -1072,7 +1116,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalVampireLanguage.g:2413:42: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalVampireLanguage.g:2662:42: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1109,11 +1153,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2415:19: ( '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\'' )
-            // InternalVampireLanguage.g:2415:21: '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\''
+            // InternalVampireLanguage.g:2664:19: ( '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\'' )
+            // InternalVampireLanguage.g:2664:21: '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\''
             {
             match('\''); 
-            // InternalVampireLanguage.g:2415:26: ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+
+            // InternalVampireLanguage.g:2664:26: ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+
             int cnt4=0;
             loop4:
             do {
@@ -1130,7 +1174,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2415:27: '\\\\' ( '\\'' | '\\\\' )
+            	    // InternalVampireLanguage.g:2664:27: '\\\\' ( '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\''||input.LA(1)=='\\' ) {
@@ -1146,7 +1190,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalVampireLanguage.g:2415:44: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalVampireLanguage.g:2664:44: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1185,8 +1229,8 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_SIGN"
     public final void mRULE_SIGN() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2417:20: ( ( '+' | '-' ) )
-            // InternalVampireLanguage.g:2417:22: ( '+' | '-' )
+            // InternalVampireLanguage.g:2666:20: ( ( '+' | '-' ) )
+            // InternalVampireLanguage.g:2666:22: ( '+' | '-' )
             {
             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                 input.consume();
@@ -1211,8 +1255,8 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOLLAR_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2419:16: ( '$' RULE_LOWER_WORD_ID )
-            // InternalVampireLanguage.g:2419:18: '$' RULE_LOWER_WORD_ID
+            // InternalVampireLanguage.g:2668:16: ( '$' RULE_LOWER_WORD_ID )
+            // InternalVampireLanguage.g:2668:18: '$' RULE_LOWER_WORD_ID
             {
             match('$'); 
             mRULE_LOWER_WORD_ID(); 
@@ -1232,8 +1276,8 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_DOLLAR_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2421:23: ( '$$' RULE_LOWER_WORD_ID )
-            // InternalVampireLanguage.g:2421:25: '$$' RULE_LOWER_WORD_ID
+            // InternalVampireLanguage.g:2670:23: ( '$$' RULE_LOWER_WORD_ID )
+            // InternalVampireLanguage.g:2670:25: '$$' RULE_LOWER_WORD_ID
             {
             match("$$"); 
 
@@ -1252,10 +1296,12 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_LITERAL"
     public final void mRULE_LITERAL() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2423:23: ( ( '0' | '1' .. '9' ( RULE_INT )? ) )
-            // InternalVampireLanguage.g:2423:25: ( '0' | '1' .. '9' ( RULE_INT )? )
+            int _type = RULE_LITERAL;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalVampireLanguage.g:2672:14: ( ( '0' | '1' .. '9' ( RULE_INT )? ) )
+            // InternalVampireLanguage.g:2672:16: ( '0' | '1' .. '9' ( RULE_INT )? )
             {
-            // InternalVampireLanguage.g:2423:25: ( '0' | '1' .. '9' ( RULE_INT )? )
+            // InternalVampireLanguage.g:2672:16: ( '0' | '1' .. '9' ( RULE_INT )? )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1273,17 +1319,17 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalVampireLanguage.g:2423:26: '0'
+                    // InternalVampireLanguage.g:2672:17: '0'
                     {
                     match('0'); 
 
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2423:30: '1' .. '9' ( RULE_INT )?
+                    // InternalVampireLanguage.g:2672:21: '1' .. '9' ( RULE_INT )?
                     {
                     matchRange('1','9'); 
-                    // InternalVampireLanguage.g:2423:39: ( RULE_INT )?
+                    // InternalVampireLanguage.g:2672:30: ( RULE_INT )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -1292,7 +1338,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     }
                     switch (alt5) {
                         case 1 :
-                            // InternalVampireLanguage.g:2423:39: RULE_INT
+                            // InternalVampireLanguage.g:2672:30: RULE_INT
                             {
                             mRULE_INT(); 
 
@@ -1310,6 +1356,8 @@ public class InternalVampireLanguageLexer extends Lexer {
 
             }
 
+            state.type = _type;
+            state.channel = _channel;
         }
         finally {
         }
@@ -1321,10 +1369,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SIGNED_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2425:21: ( ( RULE_SIGN )* RULE_LITERAL )
-            // InternalVampireLanguage.g:2425:23: ( RULE_SIGN )* RULE_LITERAL
+            // InternalVampireLanguage.g:2674:21: ( ( RULE_SIGN )* RULE_LITERAL )
+            // InternalVampireLanguage.g:2674:23: ( RULE_SIGN )* RULE_LITERAL
             {
-            // InternalVampireLanguage.g:2425:23: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2674:23: ( RULE_SIGN )*
             loop7:
             do {
                 int alt7=2;
@@ -1337,7 +1385,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2425:23: RULE_SIGN
+            	    // InternalVampireLanguage.g:2674:23: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1364,8 +1412,8 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_UNSIGNED_REAL_FRAC_ID"
     public final void mRULE_UNSIGNED_REAL_FRAC_ID() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2427:37: ( RULE_LITERAL '.' RULE_INT )
-            // InternalVampireLanguage.g:2427:39: RULE_LITERAL '.' RULE_INT
+            // InternalVampireLanguage.g:2676:37: ( RULE_LITERAL '.' RULE_INT )
+            // InternalVampireLanguage.g:2676:39: RULE_LITERAL '.' RULE_INT
             {
             mRULE_LITERAL(); 
             match('.'); 
@@ -1382,22 +1430,22 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_UNSIGNED_REAL_EXP_ID"
     public final void mRULE_UNSIGNED_REAL_EXP_ID() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2429:36: ( ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT )
-            // InternalVampireLanguage.g:2429:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT
+            // InternalVampireLanguage.g:2678:36: ( ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT )
+            // InternalVampireLanguage.g:2678:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT
             {
-            // InternalVampireLanguage.g:2429:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )
+            // InternalVampireLanguage.g:2678:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )
             int alt8=2;
             alt8 = dfa8.predict(input);
             switch (alt8) {
                 case 1 :
-                    // InternalVampireLanguage.g:2429:39: RULE_LITERAL
+                    // InternalVampireLanguage.g:2678:39: RULE_LITERAL
                     {
                     mRULE_LITERAL(); 
 
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2429:52: RULE_UNSIGNED_REAL_FRAC_ID
+                    // InternalVampireLanguage.g:2678:52: RULE_UNSIGNED_REAL_FRAC_ID
                     {
                     mRULE_UNSIGNED_REAL_FRAC_ID(); 
 
@@ -1408,7 +1456,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
             match("Ee"); 
 
-            // InternalVampireLanguage.g:2429:85: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2678:85: ( RULE_SIGN )*
             loop9:
             do {
                 int alt9=2;
@@ -1421,7 +1469,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2429:85: RULE_SIGN
+            	    // InternalVampireLanguage.g:2678:85: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1448,10 +1496,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SIGNED_REAL_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2431:21: ( ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID ) )
-            // InternalVampireLanguage.g:2431:23: ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
+            // InternalVampireLanguage.g:2680:21: ( ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID ) )
+            // InternalVampireLanguage.g:2680:23: ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
             {
-            // InternalVampireLanguage.g:2431:23: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2680:23: ( RULE_SIGN )*
             loop10:
             do {
                 int alt10=2;
@@ -1464,7 +1512,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2431:23: RULE_SIGN
+            	    // InternalVampireLanguage.g:2680:23: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1476,19 +1524,19 @@ public class InternalVampireLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalVampireLanguage.g:2431:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
+            // InternalVampireLanguage.g:2680:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
             int alt11=2;
             alt11 = dfa11.predict(input);
             switch (alt11) {
                 case 1 :
-                    // InternalVampireLanguage.g:2431:35: RULE_UNSIGNED_REAL_FRAC_ID
+                    // InternalVampireLanguage.g:2680:35: RULE_UNSIGNED_REAL_FRAC_ID
                     {
                     mRULE_UNSIGNED_REAL_FRAC_ID(); 
 
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2431:62: RULE_UNSIGNED_REAL_EXP_ID
+                    // InternalVampireLanguage.g:2680:62: RULE_UNSIGNED_REAL_EXP_ID
                     {
                     mRULE_UNSIGNED_REAL_EXP_ID(); 
 
@@ -1511,13 +1559,13 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_UNSIGNED_RAT_ID"
     public final void mRULE_UNSIGNED_RAT_ID() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2433:31: ( RULE_LITERAL '/' '1' .. '9' ( RULE_INT )? )
-            // InternalVampireLanguage.g:2433:33: RULE_LITERAL '/' '1' .. '9' ( RULE_INT )?
+            // InternalVampireLanguage.g:2682:31: ( RULE_LITERAL '/' '1' .. '9' ( RULE_INT )? )
+            // InternalVampireLanguage.g:2682:33: RULE_LITERAL '/' '1' .. '9' ( RULE_INT )?
             {
             mRULE_LITERAL(); 
             match('/'); 
             matchRange('1','9'); 
-            // InternalVampireLanguage.g:2433:59: ( RULE_INT )?
+            // InternalVampireLanguage.g:2682:59: ( RULE_INT )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1526,7 +1574,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalVampireLanguage.g:2433:59: RULE_INT
+                    // InternalVampireLanguage.g:2682:59: RULE_INT
                     {
                     mRULE_INT(); 
 
@@ -1549,10 +1597,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SIGNED_RAT_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2435:20: ( ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID )
-            // InternalVampireLanguage.g:2435:22: ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID
+            // InternalVampireLanguage.g:2684:20: ( ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID )
+            // InternalVampireLanguage.g:2684:22: ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID
             {
-            // InternalVampireLanguage.g:2435:22: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2684:22: ( RULE_SIGN )*
             loop13:
             do {
                 int alt13=2;
@@ -1565,7 +1613,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2435:22: RULE_SIGN
+            	    // InternalVampireLanguage.g:2684:22: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1592,11 +1640,11 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_ANY_OTHER"
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2437:25: ( '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r' )
-            // InternalVampireLanguage.g:2437:27: '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r'
+            // InternalVampireLanguage.g:2686:25: ( '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r' )
+            // InternalVampireLanguage.g:2686:27: '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r'
             {
             match('%'); 
-            // InternalVampireLanguage.g:2437:31: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalVampireLanguage.g:2686:31: (~ ( ( '\\n' | '\\r' ) ) )*
             loop14:
             do {
                 int alt14=2;
@@ -1609,7 +1657,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2437:31: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalVampireLanguage.g:2686:31: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1644,8 +1692,8 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2439:21: ( RULE_ANY_OTHER )
-            // InternalVampireLanguage.g:2439:23: RULE_ANY_OTHER
+            // InternalVampireLanguage.g:2688:21: ( RULE_ANY_OTHER )
+            // InternalVampireLanguage.g:2688:23: RULE_ANY_OTHER
             {
             mRULE_ANY_OTHER(); 
 
@@ -1664,10 +1712,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2441:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalVampireLanguage.g:2441:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalVampireLanguage.g:2690:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalVampireLanguage.g:2690:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalVampireLanguage.g:2441:11: ( '^' )?
+            // InternalVampireLanguage.g:2690:11: ( '^' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1676,7 +1724,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalVampireLanguage.g:2441:11: '^'
+                    // InternalVampireLanguage.g:2690:11: '^'
                     {
                     match('^'); 
 
@@ -1694,7 +1742,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalVampireLanguage.g:2441:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalVampireLanguage.g:2690:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop16:
             do {
                 int alt16=2;
@@ -1741,10 +1789,10 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_INT"
     public final void mRULE_INT() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2443:19: ( ( '0' .. '9' )+ )
-            // InternalVampireLanguage.g:2443:21: ( '0' .. '9' )+
+            // InternalVampireLanguage.g:2692:19: ( ( '0' .. '9' )+ )
+            // InternalVampireLanguage.g:2692:21: ( '0' .. '9' )+
             {
-            // InternalVampireLanguage.g:2443:21: ( '0' .. '9' )+
+            // InternalVampireLanguage.g:2692:21: ( '0' .. '9' )+
             int cnt17=0;
             loop17:
             do {
@@ -1758,7 +1806,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2443:22: '0' .. '9'
+            	    // InternalVampireLanguage.g:2692:22: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1788,10 +1836,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2445:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalVampireLanguage.g:2445:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalVampireLanguage.g:2694:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalVampireLanguage.g:2694:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalVampireLanguage.g:2445:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalVampireLanguage.g:2694:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1809,10 +1857,10 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt20) {
                 case 1 :
-                    // InternalVampireLanguage.g:2445:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalVampireLanguage.g:2694:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalVampireLanguage.g:2445:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalVampireLanguage.g:2694:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop18:
                     do {
                         int alt18=3;
@@ -1828,7 +1876,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                         switch (alt18) {
                     	case 1 :
-                    	    // InternalVampireLanguage.g:2445:21: '\\\\' .
+                    	    // InternalVampireLanguage.g:2694:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1836,7 +1884,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalVampireLanguage.g:2445:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalVampireLanguage.g:2694:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1861,10 +1909,10 @@ public class InternalVampireLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2445:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalVampireLanguage.g:2694:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalVampireLanguage.g:2445:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalVampireLanguage.g:2694:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop19:
                     do {
                         int alt19=3;
@@ -1880,7 +1928,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                         switch (alt19) {
                     	case 1 :
-                    	    // InternalVampireLanguage.g:2445:54: '\\\\' .
+                    	    // InternalVampireLanguage.g:2694:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1888,7 +1936,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalVampireLanguage.g:2445:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalVampireLanguage.g:2694:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1931,12 +1979,12 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2447:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalVampireLanguage.g:2447:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalVampireLanguage.g:2696:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalVampireLanguage.g:2696:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalVampireLanguage.g:2447:24: ( options {greedy=false; } : . )*
+            // InternalVampireLanguage.g:2696:24: ( options {greedy=false; } : . )*
             loop21:
             do {
                 int alt21=2;
@@ -1961,7 +2009,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt21) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2447:52: .
+            	    // InternalVampireLanguage.g:2696:52: .
             	    {
             	    matchAny(); 
 
@@ -1991,12 +2039,12 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2449:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalVampireLanguage.g:2449:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalVampireLanguage.g:2698:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalVampireLanguage.g:2698:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalVampireLanguage.g:2449:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalVampireLanguage.g:2698:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop22:
             do {
                 int alt22=2;
@@ -2009,7 +2057,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt22) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2449:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalVampireLanguage.g:2698:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2029,7 +2077,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalVampireLanguage.g:2449:40: ( ( '\\r' )? '\\n' )?
+            // InternalVampireLanguage.g:2698:40: ( ( '\\r' )? '\\n' )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2038,9 +2086,9 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt24) {
                 case 1 :
-                    // InternalVampireLanguage.g:2449:41: ( '\\r' )? '\\n'
+                    // InternalVampireLanguage.g:2698:41: ( '\\r' )? '\\n'
                     {
-                    // InternalVampireLanguage.g:2449:41: ( '\\r' )?
+                    // InternalVampireLanguage.g:2698:41: ( '\\r' )?
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
@@ -2049,7 +2097,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     }
                     switch (alt23) {
                         case 1 :
-                            // InternalVampireLanguage.g:2449:41: '\\r'
+                            // InternalVampireLanguage.g:2698:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2081,10 +2129,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2451:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalVampireLanguage.g:2451:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalVampireLanguage.g:2700:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalVampireLanguage.g:2700:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalVampireLanguage.g:2451:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalVampireLanguage.g:2700:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt25=0;
             loop25:
             do {
@@ -2134,8 +2182,8 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR end "RULE_WS"
 
     public void mTokens() throws RecognitionException {
-        // InternalVampireLanguage.g:1:8: ( T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | RULE_UPPER_WORD_ID | RULE_LOWER_WORD_ID | RULE_DOUBLE_QUOTE | RULE_SINGLE_QUOTE | RULE_DOLLAR_ID | RULE_DOUBLE_DOLLAR_ID | RULE_SIGNED_LITERAL | RULE_SIGNED_REAL_ID | RULE_SIGNED_RAT_ID | RULE_SINGLE_COMMENT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS )
-        int alt26=55;
+        // InternalVampireLanguage.g:1:8: ( T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | RULE_UPPER_WORD_ID | RULE_LOWER_WORD_ID | RULE_DOUBLE_QUOTE | RULE_SINGLE_QUOTE | RULE_DOLLAR_ID | RULE_DOUBLE_DOLLAR_ID | RULE_LITERAL | RULE_SIGNED_LITERAL | RULE_SIGNED_REAL_ID | RULE_SIGNED_RAT_ID | RULE_SINGLE_COMMENT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS )
+        int alt26=58;
         alt26 = dfa26.predict(input);
         switch (alt26) {
             case 1 :
@@ -2419,105 +2467,126 @@ public class InternalVampireLanguageLexer extends Lexer {
                 }
                 break;
             case 41 :
-                // InternalVampireLanguage.g:1:250: RULE_UPPER_WORD_ID
+                // InternalVampireLanguage.g:1:250: T__67
+                {
+                mT__67(); 
+
+                }
+                break;
+            case 42 :
+                // InternalVampireLanguage.g:1:256: T__68
+                {
+                mT__68(); 
+
+                }
+                break;
+            case 43 :
+                // InternalVampireLanguage.g:1:262: RULE_UPPER_WORD_ID
                 {
                 mRULE_UPPER_WORD_ID(); 
 
                 }
                 break;
-            case 42 :
-                // InternalVampireLanguage.g:1:269: RULE_LOWER_WORD_ID
+            case 44 :
+                // InternalVampireLanguage.g:1:281: RULE_LOWER_WORD_ID
                 {
                 mRULE_LOWER_WORD_ID(); 
 
                 }
                 break;
-            case 43 :
-                // InternalVampireLanguage.g:1:288: RULE_DOUBLE_QUOTE
+            case 45 :
+                // InternalVampireLanguage.g:1:300: RULE_DOUBLE_QUOTE
                 {
                 mRULE_DOUBLE_QUOTE(); 
 
                 }
                 break;
-            case 44 :
-                // InternalVampireLanguage.g:1:306: RULE_SINGLE_QUOTE
+            case 46 :
+                // InternalVampireLanguage.g:1:318: RULE_SINGLE_QUOTE
                 {
                 mRULE_SINGLE_QUOTE(); 
 
                 }
                 break;
-            case 45 :
-                // InternalVampireLanguage.g:1:324: RULE_DOLLAR_ID
+            case 47 :
+                // InternalVampireLanguage.g:1:336: RULE_DOLLAR_ID
                 {
                 mRULE_DOLLAR_ID(); 
 
                 }
                 break;
-            case 46 :
-                // InternalVampireLanguage.g:1:339: RULE_DOUBLE_DOLLAR_ID
+            case 48 :
+                // InternalVampireLanguage.g:1:351: RULE_DOUBLE_DOLLAR_ID
                 {
                 mRULE_DOUBLE_DOLLAR_ID(); 
 
                 }
                 break;
-            case 47 :
-                // InternalVampireLanguage.g:1:361: RULE_SIGNED_LITERAL
+            case 49 :
+                // InternalVampireLanguage.g:1:373: RULE_LITERAL
+                {
+                mRULE_LITERAL(); 
+
+                }
+                break;
+            case 50 :
+                // InternalVampireLanguage.g:1:386: RULE_SIGNED_LITERAL
                 {
                 mRULE_SIGNED_LITERAL(); 
 
                 }
                 break;
-            case 48 :
-                // InternalVampireLanguage.g:1:381: RULE_SIGNED_REAL_ID
+            case 51 :
+                // InternalVampireLanguage.g:1:406: RULE_SIGNED_REAL_ID
                 {
                 mRULE_SIGNED_REAL_ID(); 
 
                 }
                 break;
-            case 49 :
-                // InternalVampireLanguage.g:1:401: RULE_SIGNED_RAT_ID
+            case 52 :
+                // InternalVampireLanguage.g:1:426: RULE_SIGNED_RAT_ID
                 {
                 mRULE_SIGNED_RAT_ID(); 
 
                 }
                 break;
-            case 50 :
-                // InternalVampireLanguage.g:1:420: RULE_SINGLE_COMMENT
+            case 53 :
+                // InternalVampireLanguage.g:1:445: RULE_SINGLE_COMMENT
                 {
                 mRULE_SINGLE_COMMENT(); 
 
                 }
                 break;
-            case 51 :
-                // InternalVampireLanguage.g:1:440: RULE_ID
+            case 54 :
+                // InternalVampireLanguage.g:1:465: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 52 :
-                // InternalVampireLanguage.g:1:448: RULE_STRING
+            case 55 :
+                // InternalVampireLanguage.g:1:473: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 53 :
-                // InternalVampireLanguage.g:1:460: RULE_ML_COMMENT
+            case 56 :
+                // InternalVampireLanguage.g:1:485: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 54 :
-                // InternalVampireLanguage.g:1:476: RULE_SL_COMMENT
+            case 57 :
+                // InternalVampireLanguage.g:1:501: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 55 :
-                // InternalVampireLanguage.g:1:492: RULE_WS
+            case 58 :
+                // InternalVampireLanguage.g:1:517: RULE_WS
                 {
                 mRULE_WS(); 
 
@@ -2583,7 +2652,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             this.transition = DFA8_transition;
         }
         public String getDescription() {
-            return "2429:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )";
+            return "2678:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )";
         }
     }
     static final String DFA11_eotS =
@@ -2591,21 +2660,21 @@ public class InternalVampireLanguageLexer extends Lexer {
     static final String DFA11_eofS =
         "\10\uffff";
     static final String DFA11_minS =
-        "\1\60\2\56\1\uffff\1\60\1\56\1\60\1\uffff";
+        "\1\60\2\56\1\60\1\uffff\1\56\1\60\1\uffff";
     static final String DFA11_maxS =
-        "\1\71\2\105\1\uffff\1\71\2\105\1\uffff";
+        "\1\71\2\105\1\71\1\uffff\2\105\1\uffff";
     static final String DFA11_acceptS =
-        "\3\uffff\1\2\3\uffff\1\1";
+        "\4\uffff\1\2\2\uffff\1\1";
     static final String DFA11_specialS =
         "\10\uffff}>";
     static final String[] DFA11_transitionS = {
             "\1\1\11\2",
-            "\1\4\26\uffff\1\3",
-            "\1\4\1\uffff\12\5\13\uffff\1\3",
-            "",
+            "\1\3\26\uffff\1\4",
+            "\1\3\1\uffff\12\5\13\uffff\1\4",
             "\12\6",
-            "\1\4\1\uffff\12\5\13\uffff\1\3",
-            "\12\6\13\uffff\1\3",
+            "",
+            "\1\3\1\uffff\12\5\13\uffff\1\4",
+            "\12\6\13\uffff\1\4",
             ""
     };
 
@@ -2639,75 +2708,79 @@ public class InternalVampireLanguageLexer extends Lexer {
             this.transition = DFA11_transition;
         }
         public String getDescription() {
-            return "2431:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )";
+            return "2680:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )";
         }
     }
     static final String DFA26_eotS =
-        "\1\uffff\1\50\4\uffff\11\50\3\uffff\1\67\1\72\2\uffff\1\74\1\76\2\uffff\1\105\1\50\3\uffff\2\114\4\uffff\3\50\1\uffff\13\50\1\141\12\uffff\3\103\2\uffff\1\105\12\uffff\1\114\2\uffff\1\151\15\50\2\uffff\3\103\5\uffff\13\50\1\u0088\3\50\3\103\1\uffff\3\50\1\u0092\5\50\1\u0098\1\50\1\uffff\1\50\1\u009b\1\50\1\u009d\1\103\1\u009f\3\50\1\uffff\5\50\1\uffff\2\50\1\uffff\1\50\1\uffff\1\u00ab\1\uffff\10\50\1\u00b4\1\50\1\u00b6\1\uffff\10\50\1\uffff\1\50\1\uffff\1\u00c0\4\50\1\u00c5\3\50\1\uffff\2\50\1\u00cb\1\u00cc\1\uffff\1\u00cd\1\u00ce\1\50\1\u00d0\1\50\4\uffff\1\50\1\uffff\2\50\1\u00d5\1\50\1\uffff\4\50\1\u00db\1\uffff";
+        "\1\uffff\1\50\1\52\1\uffff\1\50\3\uffff\11\50\2\uffff\1\73\1\76\2\uffff\1\100\1\102\2\uffff\1\111\1\50\2\uffff\2\120\5\uffff\2\50\3\uffff\15\50\1\150\12\uffff\3\107\2\uffff\1\111\12\uffff\1\120\2\160\2\uffff\1\50\1\163\15\50\2\uffff\3\107\5\uffff\1\160\1\50\1\uffff\13\50\1\u0093\3\50\3\107\1\uffff\4\50\1\u009e\5\50\1\u00a4\1\50\1\uffff\1\50\1\u00a7\1\50\1\u00a9\1\107\1\u00ab\4\50\1\uffff\5\50\1\uffff\2\50\1\uffff\1\50\1\uffff\1\u00b8\1\uffff\11\50\1\u00c2\1\50\1\u00c4\2\uffff\10\50\1\uffff\1\50\1\uffff\1\u00ce\4\50\1\u00d3\3\50\1\uffff\2\50\1\u00d9\1\u00da\1\uffff\1\u00db\1\u00dc\1\50\1\u00de\1\50\4\uffff\1\50\1\uffff\2\50\1\u00e3\1\50\1\uffff\4\50\1\u00e9\1\uffff";
     static final String DFA26_eofS =
-        "\u00dc\uffff";
+        "\u00ea\uffff";
     static final String DFA26_minS =
-        "\1\11\1\60\4\uffff\11\60\2\uffff\1\75\1\76\1\46\2\uffff\2\75\1\uffff\1\44\2\60\2\0\1\53\2\56\2\uffff\1\52\1\uffff\3\60\1\uffff\13\60\1\76\12\uffff\1\162\1\141\1\145\2\uffff\1\60\1\uffff\2\0\1\uffff\2\0\4\uffff\1\56\2\uffff\16\60\2\uffff\1\165\1\154\1\163\1\0\1\uffff\1\0\2\uffff\17\60\1\145\2\163\1\uffff\13\60\1\uffff\4\60\1\145\4\60\1\uffff\5\60\1\uffff\2\60\1\uffff\1\60\1\uffff\1\60\1\uffff\13\60\1\uffff\10\60\1\uffff\1\60\1\uffff\11\60\1\uffff\4\60\1\uffff\5\60\4\uffff\1\60\1\uffff\4\60\1\uffff\5\60\1\uffff";
+        "\1\11\1\60\1\133\1\uffff\1\60\3\uffff\11\60\1\uffff\1\75\1\76\1\46\2\uffff\2\75\1\uffff\1\44\2\60\2\0\2\56\1\53\2\uffff\1\52\1\uffff\2\60\3\uffff\15\60\1\76\12\uffff\1\162\1\141\1\145\2\uffff\1\60\1\uffff\2\0\1\uffff\2\0\4\uffff\3\56\2\uffff\17\60\2\uffff\1\165\1\154\1\163\1\0\1\uffff\1\0\2\uffff\1\56\1\60\1\uffff\17\60\1\145\2\163\1\uffff\14\60\1\uffff\4\60\1\145\5\60\1\uffff\5\60\1\uffff\2\60\1\uffff\1\60\1\uffff\1\60\1\uffff\1\50\13\60\2\uffff\10\60\1\uffff\1\60\1\uffff\11\60\1\uffff\4\60\1\uffff\5\60\4\uffff\1\60\1\uffff\4\60\1\uffff\5\60\1\uffff";
     static final String DFA26_maxS =
-        "\1\176\1\172\4\uffff\11\172\2\uffff\1\176\1\76\1\174\2\uffff\2\75\1\uffff\3\172\2\uffff\1\71\2\105\2\uffff\1\57\1\uffff\3\172\1\uffff\13\172\1\76\12\uffff\1\162\1\141\1\145\2\uffff\1\172\1\uffff\2\uffff\1\uffff\2\uffff\4\uffff\1\105\2\uffff\16\172\2\uffff\1\165\1\154\1\163\1\uffff\1\uffff\1\uffff\2\uffff\17\172\1\145\2\163\1\uffff\13\172\1\uffff\4\172\1\145\4\172\1\uffff\5\172\1\uffff\2\172\1\uffff\1\172\1\uffff\1\172\1\uffff\13\172\1\uffff\10\172\1\uffff\1\172\1\uffff\11\172\1\uffff\4\172\1\uffff\5\172\4\uffff\1\172\1\uffff\4\172\1\uffff\5\172\1\uffff";
+        "\1\176\1\172\1\133\1\uffff\1\172\3\uffff\11\172\1\uffff\1\176\1\76\1\174\2\uffff\2\75\1\uffff\3\172\2\uffff\2\105\1\71\2\uffff\1\57\1\uffff\2\172\3\uffff\15\172\1\76\12\uffff\1\162\1\141\1\145\2\uffff\1\172\1\uffff\2\uffff\1\uffff\2\uffff\4\uffff\3\105\2\uffff\17\172\2\uffff\1\165\1\154\1\163\1\uffff\1\uffff\1\uffff\2\uffff\1\105\1\172\1\uffff\17\172\1\145\2\163\1\uffff\14\172\1\uffff\4\172\1\145\5\172\1\uffff\5\172\1\uffff\2\172\1\uffff\1\172\1\uffff\1\172\1\uffff\14\172\2\uffff\10\172\1\uffff\1\172\1\uffff\11\172\1\uffff\4\172\1\uffff\5\172\4\uffff\1\172\1\uffff\4\172\1\uffff\5\172\1\uffff";
     static final String DFA26_acceptS =
-        "\2\uffff\1\2\1\3\1\4\1\5\11\uffff\1\25\1\26\3\uffff\1\35\1\36\2\uffff\1\41\10\uffff\1\62\1\63\1\uffff\1\67\3\uffff\1\52\14\uffff\1\32\1\30\1\44\1\33\1\34\1\42\1\43\1\37\1\45\1\40\3\uffff\1\56\1\55\1\uffff\1\51\2\uffff\1\53\2\uffff\1\64\1\57\1\60\1\61\1\uffff\1\65\1\66\16\uffff\1\27\1\31\4\uffff\1\53\1\uffff\1\54\1\1\22\uffff\1\54\13\uffff\1\20\11\uffff\1\6\5\uffff\1\13\2\uffff\1\17\1\uffff\1\46\1\uffff\1\50\13\uffff\1\47\10\uffff\1\14\1\uffff\1\24\11\uffff\1\21\4\uffff\1\15\5\uffff\1\12\1\7\1\10\1\11\1\uffff\1\22\4\uffff\1\23\5\uffff\1\16";
+        "\3\uffff\1\4\1\uffff\1\6\1\7\1\10\11\uffff\1\30\3\uffff\1\37\1\40\2\uffff\1\43\10\uffff\1\65\1\66\1\uffff\1\72\2\uffff\1\54\1\2\1\3\16\uffff\1\34\1\32\1\46\1\35\1\36\1\44\1\45\1\41\1\47\1\42\3\uffff\1\60\1\57\1\uffff\1\53\2\uffff\1\55\2\uffff\1\67\1\61\1\63\1\64\3\uffff\1\70\1\71\17\uffff\1\31\1\33\4\uffff\1\55\1\uffff\1\56\1\62\2\uffff\1\5\22\uffff\1\56\14\uffff\1\23\12\uffff\1\11\5\uffff\1\16\2\uffff\1\22\1\uffff\1\50\1\uffff\1\52\14\uffff\1\51\1\1\10\uffff\1\17\1\uffff\1\27\11\uffff\1\24\4\uffff\1\20\5\uffff\1\15\1\12\1\13\1\14\1\uffff\1\25\4\uffff\1\26\5\uffff\1\21";
     static final String DFA26_specialS =
-        "\34\uffff\1\5\1\1\50\uffff\1\0\1\4\1\uffff\1\2\1\7\32\uffff\1\3\1\uffff\1\6\164\uffff}>";
+        "\35\uffff\1\0\1\5\53\uffff\1\1\1\7\1\uffff\1\2\1\4\35\uffff\1\6\1\uffff\1\3\173\uffff}>";
     static final String[] DFA26_transitionS = {
-            "\2\44\2\uffff\1\44\22\uffff\1\44\1\26\1\34\1\uffff\1\31\1\41\1\24\1\35\1\2\1\4\1\uffff\1\36\1\3\1\36\1\5\1\43\1\37\11\40\1\27\1\uffff\1\21\1\22\1\uffff\1\30\1\uffff\32\32\1\17\1\uffff\1\20\2\42\1\uffff\1\6\1\33\1\7\1\11\1\33\1\1\1\33\1\10\3\33\1\12\1\33\1\14\1\33\1\15\3\33\1\13\1\16\5\33\1\uffff\1\25\1\uffff\1\23",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\46\5\47\1\45\13\47",
+            "\2\45\2\uffff\1\45\22\uffff\1\45\1\27\1\35\1\uffff\1\32\1\42\1\25\1\36\1\5\1\6\1\uffff\1\41\1\2\1\41\1\7\1\44\1\37\11\40\1\30\1\uffff\1\22\1\23\1\uffff\1\31\1\uffff\32\33\1\21\1\uffff\1\3\2\43\1\uffff\1\10\1\34\1\11\1\13\1\34\1\4\1\34\1\12\1\1\2\34\1\14\1\34\1\16\1\34\1\17\3\34\1\15\1\20\5\34\1\uffff\1\26\1\uffff\1\24",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\46\14\47",
+            "\1\51",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\54\5\47\1\53\13\47",
             "",
             "",
             "",
-            "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\52\4\47\1\51\2\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\53\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\30\47\1\54\1\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\55\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\56\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\7\47\1\57\20\47\1\60\1\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\56\4\47\1\55\2\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\57\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\30\47\1\60\1\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\61\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\62\16\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\63\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\62\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\7\47\1\63\20\47\1\64\1\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\65\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\66\16\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\67\14\47",
+            "",
+            "\1\70\100\uffff\1\71",
+            "\1\72",
+            "\1\75\125\uffff\1\74",
             "",
             "",
-            "\1\64\100\uffff\1\65",
-            "\1\66",
-            "\1\71\125\uffff\1\70",
+            "\1\77",
+            "\1\101",
             "",
-            "",
-            "\1\73",
-            "\1\75",
-            "",
-            "\1\102\74\uffff\5\103\1\100\5\103\1\101\7\103\1\77\6\103",
-            "\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff\32\104",
+            "\1\106\74\uffff\5\107\1\104\5\107\1\105\7\107\1\103\6\107",
+            "\12\110\7\uffff\32\110\4\uffff\1\110\1\uffff\32\110",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\42\107\1\110\71\107\1\106\uffa3\107",
-            "\47\112\1\113\64\112\1\111\uffa3\112",
-            "\1\36\1\uffff\1\36\2\uffff\1\37\11\40",
-            "\1\115\1\116\25\uffff\1\115",
-            "\1\115\1\116\12\117\13\uffff\1\115",
+            "\42\113\1\114\71\113\1\112\uffa3\113",
+            "\47\116\1\117\64\116\1\115\uffa3\116",
+            "\1\121\1\122\25\uffff\1\121",
+            "\1\121\1\122\12\123\13\uffff\1\121",
+            "\1\41\1\uffff\1\41\2\uffff\1\124\11\125",
             "",
             "",
-            "\1\120\4\uffff\1\121",
+            "\1\126\4\uffff\1\127",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\5\47\1\122\24\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\123\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\130\27\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\124\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\125\7\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\126\3\47\1\127\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\17\47\1\130\12\47",
+            "",
+            "",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\5\47\1\131\24\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\132\15\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\133\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\17\47\1\134\12\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\6\47\1\135\23\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\136\31\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\12\47\1\137\17\47",
-            "\1\140",
+            "\12\47\7\uffff\32\47\4\uffff\1\132\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\133\21\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\134\7\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\135\3\47\1\136\10\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\17\47\1\137\12\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\5\47\1\140\24\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\141\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\142\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\17\47\1\143\12\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\6\47\1\144\23\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\145\31\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\12\47\1\146\17\47",
+            "\1\147",
             "",
             "",
             "",
@@ -2718,161 +2791,171 @@ public class InternalVampireLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\1\142",
-            "\1\143",
-            "\1\144",
+            "\1\151",
+            "\1\152",
+            "\1\153",
             "",
             "",
-            "\12\104\7\uffff\32\104\4\uffff\1\104\1\uffff\32\104",
+            "\12\110\7\uffff\32\110\4\uffff\1\110\1\uffff\32\110",
             "",
-            "\42\113\1\145\71\113\1\145\uffa3\113",
-            "\42\107\1\110\71\107\1\106\uffa3\107",
+            "\42\117\1\154\71\117\1\154\uffa3\117",
+            "\42\113\1\114\71\113\1\112\uffa3\113",
             "",
-            "\47\113\1\147\64\113\1\147\uffa3\113",
-            "\47\112\1\150\64\112\1\111\uffa3\112",
-            "",
-            "",
+            "\47\117\1\156\64\117\1\156\uffa3\117",
+            "\47\116\1\157\64\116\1\115\uffa3\116",
             "",
             "",
-            "\1\115\1\116\12\117\13\uffff\1\115",
             "",
             "",
+            "\1\121\1\122\12\123\13\uffff\1\121",
+            "\1\121\1\122\25\uffff\1\121",
+            "\1\121\1\122\12\161\13\uffff\1\121",
+            "",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\162\16\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\152\1\47\1\153\11\47\1\154\12\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\155\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\156\5\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\11\47\1\157\20\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\160\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\161\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\162\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\163\15\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\164\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\165\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\166\31\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\167\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\170\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\164\1\47\1\165\11\47\1\166\12\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\167\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\170\5\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\11\47\1\171\20\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\172\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\173\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\174\21\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\175\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\176\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\177\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u0080\31\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u0081\21\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u0082\14\47",
             "",
             "",
-            "\1\171",
-            "\1\172",
-            "\1\173",
-            "\42\107\1\110\71\107\1\106\uffa3\107",
+            "\1\u0083",
+            "\1\u0084",
+            "\1\u0085",
+            "\42\113\1\114\71\113\1\112\uffa3\113",
             "",
-            "\47\112\1\150\64\112\1\111\uffa3\112",
+            "\47\116\1\157\64\116\1\115\uffa3\116",
             "",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\175\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\176\5\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\177\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u0080\15\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u0081\15\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u0082\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\u0083\16\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u0084\6\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u0085\14\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u0086\31\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u0087\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u0089\6\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u008a\14\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u008b\13\47",
-            "\1\u008c",
-            "\1\u008d",
-            "\1\u008e",
+            "\1\121\1\122\12\161\13\uffff\1\121",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\u0087\5\47",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u008f\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u0088\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\u0089\5\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u008a\10\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u008b\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u008c\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u008d\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\u008e\16\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u008f\6\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u0090\14\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u0091\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u0091\31\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u0092\10\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\17\47\1\u0093\12\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u0094\27\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\u0095\16\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\7\47\1\u0096\22\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u0097\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u0099\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u0094\6\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u0095\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u0096\13\47",
+            "\1\u0097",
+            "\1\u0098",
+            "\1\u0099",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u009a\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\u009a\26\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u009b\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u009c\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u009d\25\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\26\47\1\u009c\3\47",
-            "\12\103\7\uffff\32\103\4\uffff\1\103\1\uffff\32\103",
-            "\1\u009e",
-            "\12\103\7\uffff\32\103\4\uffff\1\103\1\uffff\32\103",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u00a0\31\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00a1\27\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\u00a2\26\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\17\47\1\u009f\12\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00a0\27\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\13\47\1\u00a1\16\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\7\47\1\u00a2\22\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00a3\21\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00a5\25\47",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00a3\6\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00a4\6\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u00a5\31\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00a6\25\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00a7\6\47",
-            "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u00a8\15\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\u00a9\26\47",
-            "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00aa\14\47",
-            "",
-            "\12\103\7\uffff\32\103\4\uffff\1\103\1\uffff\32\103",
-            "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00ac\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00ad\6\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00ae\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00af\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\u00b0\5\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00b1\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00b2\7\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00b3\21\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\u00b5\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\26\47\1\u00a8\3\47",
+            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\1\u00aa",
+            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00ac\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u00ad\31\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00ae\27\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\u00af\26\47",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00b0\6\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00b1\6\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u00b2\31\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00b3\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00b4\6\47",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\14\47\1\u00b5\15\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\3\47\1\u00b6\26\47",
             "",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00b7\14\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00b8\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00b9\27\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00ba\13\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00bb\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\30\47\1\u00bc\1\47",
+            "",
+            "\12\107\7\uffff\32\107\4\uffff\1\107\1\uffff\32\107",
+            "",
+            "\1\u00b9\7\uffff\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00ba\21\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00bb\6\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00bc\21\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00bd\21\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00be\13\47",
-            "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00bf\27\47",
-            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\u00be\5\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00bf\10\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00c0\7\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00c1\21\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00c1\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u00c2\31\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00c3\14\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00c4\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\u00c3\1\uffff\32\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00c6\7\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00c7\14\47",
+            "",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00c5\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00c6\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00c7\27\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00c8\13\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00c9\10\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\30\47\1\u00ca\1\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\10\47\1\u00cb\21\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00cc\13\47",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00c9\7\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00ca\6\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00cd\27\47",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00cf\10\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\1\u00d0\31\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00d1\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00d2\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00d4\7\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00d5\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\16\47\1\u00d6\13\47",
+            "",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00d7\7\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00d8\6\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00cf\14\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\15\47\1\u00dd\14\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00d1\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00df\25\47",
             "",
             "",
             "",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\11\47\1\u00d2\20\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\11\47\1\u00e0\20\47",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00d3\7\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00d4\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\22\47\1\u00e1\7\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00e2\25\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00d6\27\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\2\47\1\u00e4\27\47",
             "",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00d7\6\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\u00d8\5\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00d9\10\47",
-            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00da\25\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\23\47\1\u00e5\6\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\24\47\1\u00e6\5\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\21\47\1\u00e7\10\47",
+            "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\4\47\1\u00e8\25\47",
             "\12\47\7\uffff\32\47\4\uffff\1\47\1\uffff\32\47",
             ""
     };
@@ -2907,101 +2990,101 @@ public class InternalVampireLanguageLexer extends Lexer {
             this.transition = DFA26_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | RULE_UPPER_WORD_ID | RULE_LOWER_WORD_ID | RULE_DOUBLE_QUOTE | RULE_SINGLE_QUOTE | RULE_DOLLAR_ID | RULE_DOUBLE_DOLLAR_ID | RULE_SIGNED_LITERAL | RULE_SIGNED_REAL_ID | RULE_SIGNED_RAT_ID | RULE_SINGLE_COMMENT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS );";
+            return "1:1: Tokens : ( T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | RULE_UPPER_WORD_ID | RULE_LOWER_WORD_ID | RULE_DOUBLE_QUOTE | RULE_SINGLE_QUOTE | RULE_DOLLAR_ID | RULE_DOUBLE_DOLLAR_ID | RULE_LITERAL | RULE_SIGNED_LITERAL | RULE_SIGNED_REAL_ID | RULE_SIGNED_RAT_ID | RULE_SINGLE_COMMENT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA26_70 = input.LA(1);
+                        int LA26_29 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_70=='\"'||LA26_70=='\\') ) {s = 101;}
+                        if ( (LA26_29=='\\') ) {s = 74;}
 
-                        else if ( ((LA26_70>='\u0000' && LA26_70<='!')||(LA26_70>='#' && LA26_70<='[')||(LA26_70>=']' && LA26_70<='\uFFFF')) ) {s = 75;}
+                        else if ( ((LA26_29>='\u0000' && LA26_29<='!')||(LA26_29>='#' && LA26_29<='[')||(LA26_29>=']' && LA26_29<='\uFFFF')) ) {s = 75;}
+
+                        else if ( (LA26_29=='\"') ) {s = 76;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA26_29 = input.LA(1);
+                        int LA26_74 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_29=='\\') ) {s = 73;}
+                        if ( (LA26_74=='\"'||LA26_74=='\\') ) {s = 108;}
 
-                        else if ( ((LA26_29>='\u0000' && LA26_29<='&')||(LA26_29>='(' && LA26_29<='[')||(LA26_29>=']' && LA26_29<='\uFFFF')) ) {s = 74;}
-
-                        else if ( (LA26_29=='\'') ) {s = 75;}
+                        else if ( ((LA26_74>='\u0000' && LA26_74<='!')||(LA26_74>='#' && LA26_74<='[')||(LA26_74>=']' && LA26_74<='\uFFFF')) ) {s = 79;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA26_73 = input.LA(1);
+                        int LA26_77 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_73=='\''||LA26_73=='\\') ) {s = 103;}
+                        if ( (LA26_77=='\''||LA26_77=='\\') ) {s = 110;}
 
-                        else if ( ((LA26_73>='\u0000' && LA26_73<='&')||(LA26_73>='(' && LA26_73<='[')||(LA26_73>=']' && LA26_73<='\uFFFF')) ) {s = 75;}
+                        else if ( ((LA26_77>='\u0000' && LA26_77<='&')||(LA26_77>='(' && LA26_77<='[')||(LA26_77>=']' && LA26_77<='\uFFFF')) ) {s = 79;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA26_101 = input.LA(1);
+                        int LA26_110 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_101=='\"') ) {s = 72;}
+                        if ( (LA26_110=='\'') ) {s = 111;}
 
-                        else if ( (LA26_101=='\\') ) {s = 70;}
+                        else if ( (LA26_110=='\\') ) {s = 77;}
 
-                        else if ( ((LA26_101>='\u0000' && LA26_101<='!')||(LA26_101>='#' && LA26_101<='[')||(LA26_101>=']' && LA26_101<='\uFFFF')) ) {s = 71;}
+                        else if ( ((LA26_110>='\u0000' && LA26_110<='&')||(LA26_110>='(' && LA26_110<='[')||(LA26_110>=']' && LA26_110<='\uFFFF')) ) {s = 78;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA26_71 = input.LA(1);
+                        int LA26_78 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_71=='\"') ) {s = 72;}
+                        if ( (LA26_78=='\'') ) {s = 111;}
 
-                        else if ( (LA26_71=='\\') ) {s = 70;}
+                        else if ( (LA26_78=='\\') ) {s = 77;}
 
-                        else if ( ((LA26_71>='\u0000' && LA26_71<='!')||(LA26_71>='#' && LA26_71<='[')||(LA26_71>=']' && LA26_71<='\uFFFF')) ) {s = 71;}
+                        else if ( ((LA26_78>='\u0000' && LA26_78<='&')||(LA26_78>='(' && LA26_78<='[')||(LA26_78>=']' && LA26_78<='\uFFFF')) ) {s = 78;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA26_28 = input.LA(1);
+                        int LA26_30 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_28=='\\') ) {s = 70;}
+                        if ( (LA26_30=='\\') ) {s = 77;}
 
-                        else if ( ((LA26_28>='\u0000' && LA26_28<='!')||(LA26_28>='#' && LA26_28<='[')||(LA26_28>=']' && LA26_28<='\uFFFF')) ) {s = 71;}
+                        else if ( ((LA26_30>='\u0000' && LA26_30<='&')||(LA26_30>='(' && LA26_30<='[')||(LA26_30>=']' && LA26_30<='\uFFFF')) ) {s = 78;}
 
-                        else if ( (LA26_28=='\"') ) {s = 72;}
+                        else if ( (LA26_30=='\'') ) {s = 79;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA26_103 = input.LA(1);
+                        int LA26_108 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_103=='\'') ) {s = 104;}
+                        if ( (LA26_108=='\"') ) {s = 76;}
 
-                        else if ( (LA26_103=='\\') ) {s = 73;}
+                        else if ( (LA26_108=='\\') ) {s = 74;}
 
-                        else if ( ((LA26_103>='\u0000' && LA26_103<='&')||(LA26_103>='(' && LA26_103<='[')||(LA26_103>=']' && LA26_103<='\uFFFF')) ) {s = 74;}
+                        else if ( ((LA26_108>='\u0000' && LA26_108<='!')||(LA26_108>='#' && LA26_108<='[')||(LA26_108>=']' && LA26_108<='\uFFFF')) ) {s = 75;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA26_74 = input.LA(1);
+                        int LA26_75 = input.LA(1);
 
                         s = -1;
-                        if ( (LA26_74=='\'') ) {s = 104;}
+                        if ( (LA26_75=='\"') ) {s = 76;}
 
-                        else if ( (LA26_74=='\\') ) {s = 73;}
+                        else if ( (LA26_75=='\\') ) {s = 74;}
 
-                        else if ( ((LA26_74>='\u0000' && LA26_74<='&')||(LA26_74>='(' && LA26_74<='[')||(LA26_74>=']' && LA26_74<='\uFFFF')) ) {s = 74;}
+                        else if ( ((LA26_75>='\u0000' && LA26_75<='!')||(LA26_75>='#' && LA26_75<='[')||(LA26_75>=']' && LA26_75<='\uFFFF')) ) {s = 75;}
 
                         if ( s>=0 ) return s;
                         break;

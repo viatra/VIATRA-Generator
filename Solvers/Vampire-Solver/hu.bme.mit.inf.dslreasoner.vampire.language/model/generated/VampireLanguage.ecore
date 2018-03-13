@@ -3,10 +3,20 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="vampireLanguage" nsURI="http://www.bme.hu/mit/inf/dslreasoner/VampireLanguage"
     nsPrefix="vampireLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="VampireModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="includes" upperBound="-1"
+        eType="#//VLSInclude" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
         eType="#//VLSComment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="formulas" upperBound="-1"
         eType="#//VLSFofFormula" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSInclude">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="names" upperBound="-1"
+        eType="#//VLSName" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSName">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSComment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -27,6 +37,10 @@
         eType="#//VLSAnnotation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//VLSTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSVariable" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSFunctionFof" eSuperTypes="#//VLSTerm">
@@ -87,13 +101,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSUniversalQuantifier" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-        eType="#//VLSTerm" containment="true"/>
+        eType="#//VLSVariable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//VLSTerm"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSExistentialQuantifier" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-        eType="#//VLSTerm" containment="true"/>
+        eType="#//VLSVariable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//VLSTerm"
         containment="true"/>
   </eClassifiers>
@@ -119,15 +133,22 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//VLSTerm"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSConstant" eSuperTypes="#//VLSTerm"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSTrue" eSuperTypes="#//VLSTerm"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSFalse" eSuperTypes="#//VLSTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSConstant" eSuperTypes="#//VLSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSTrue" eSuperTypes="#//VLSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSFalse" eSuperTypes="#//VLSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSFunction" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
         eType="#//VLSTerm" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSLess" eSuperTypes="#//VLSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
         eType="#//VLSTerm" containment="true"/>
   </eClassifiers>

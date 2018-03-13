@@ -32,6 +32,7 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getVampireModelAccess().getAlternatives(), "rule__VampireModel__Alternatives");
+					put(grammarAccess.getVLSNameAccess().getNameAlternatives_0(), "rule__VLSName__NameAlternatives_0");
 					put(grammarAccess.getVLSFofFormulaAccess().getNameAlternatives_2_0(), "rule__VLSFofFormula__NameAlternatives_2_0");
 					put(grammarAccess.getVLSRoleAccess().getAlternatives(), "rule__VLSRole__Alternatives");
 					put(grammarAccess.getVLSAnnotationAccess().getNameAlternatives_1_0(), "rule__VLSAnnotation__NameAlternatives_1_0");
@@ -47,6 +48,9 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSFofTermAccess().getAlternatives(), "rule__VLSFofTerm__Alternatives");
 					put(grammarAccess.getVLSFunctionFofAccess().getFunctorAlternatives_0_0(), "rule__VLSFunctionFof__FunctorAlternatives_0_0");
 					put(grammarAccess.getVLSDefinedTermAccess().getAlternatives(), "rule__VLSDefinedTerm__Alternatives");
+					put(grammarAccess.getVLSIncludeAccess().getGroup(), "rule__VLSInclude__Group__0");
+					put(grammarAccess.getVLSIncludeAccess().getGroup_2(), "rule__VLSInclude__Group_2__0");
+					put(grammarAccess.getVLSIncludeAccess().getGroup_2_2(), "rule__VLSInclude__Group_2_2__0");
 					put(grammarAccess.getVLSFofFormulaAccess().getGroup(), "rule__VLSFofFormula__Group__0");
 					put(grammarAccess.getVLSFofFormulaAccess().getGroup_7(), "rule__VLSFofFormula__Group_7__0");
 					put(grammarAccess.getVLSAnnotationAccess().getGroup(), "rule__VLSAnnotation__Group__0");
@@ -90,8 +94,13 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSDefinedTermAccess().getGroup_1(), "rule__VLSDefinedTerm__Group_1__0");
 					put(grammarAccess.getVLSDefinedTermAccess().getGroup_2(), "rule__VLSDefinedTerm__Group_2__0");
 					put(grammarAccess.getVLSDefinedTermAccess().getGroup_3(), "rule__VLSDefinedTerm__Group_3__0");
-					put(grammarAccess.getVampireModelAccess().getCommentsAssignment_0(), "rule__VampireModel__CommentsAssignment_0");
-					put(grammarAccess.getVampireModelAccess().getFormulasAssignment_1(), "rule__VampireModel__FormulasAssignment_1");
+					put(grammarAccess.getVampireModelAccess().getIncludesAssignment_0(), "rule__VampireModel__IncludesAssignment_0");
+					put(grammarAccess.getVampireModelAccess().getCommentsAssignment_1(), "rule__VampireModel__CommentsAssignment_1");
+					put(grammarAccess.getVampireModelAccess().getFormulasAssignment_2(), "rule__VampireModel__FormulasAssignment_2");
+					put(grammarAccess.getVLSIncludeAccess().getFileNameAssignment_1(), "rule__VLSInclude__FileNameAssignment_1");
+					put(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_1(), "rule__VLSInclude__NamesAssignment_2_1");
+					put(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_2_1(), "rule__VLSInclude__NamesAssignment_2_2_1");
+					put(grammarAccess.getVLSNameAccess().getNameAssignment(), "rule__VLSName__NameAssignment");
 					put(grammarAccess.getVLSCommentAccess().getCommentAssignment(), "rule__VLSComment__CommentAssignment");
 					put(grammarAccess.getVLSFofFormulaAccess().getNameAssignment_2(), "rule__VLSFofFormula__NameAssignment_2");
 					put(grammarAccess.getVLSFofFormulaAccess().getFofRoleAssignment_4(), "rule__VLSFofFormula__FofRoleAssignment_4");
@@ -104,6 +113,7 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_0_1(), "rule__VLSBinary__RightAssignment_1_0_1");
 					put(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_1_2(), "rule__VLSBinary__RightAssignment_1_1_2");
 					put(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_2_2(), "rule__VLSBinary__RightAssignment_1_2_2");
+					put(grammarAccess.getVLSUnitaryFormulaAccess().getTermAssignment_4_1(), "rule__VLSUnitaryFormula__TermAssignment_4_1");
 					put(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesAssignment_1_2(), "rule__VLSUniversalQuantifier__VariablesAssignment_1_2");
 					put(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesAssignment_1_3_1(), "rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1");
 					put(grammarAccess.getVLSUniversalQuantifierAccess().getOperandAssignment_2(), "rule__VLSUniversalQuantifier__OperandAssignment_2");

@@ -40,9 +40,11 @@ class Logic2VampireLanguageMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
 	private val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support;
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ConstantMapper constantMapper = new Logic2VampireLanguageMapper_ConstantMapper(this)
+	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_TypeMapper typeMapper
 	
-	public new() {
-		//add typeMapper when implemented
+	
+	public new(Logic2VampireLanguageMapper_TypeMapper typeMapper) {
+		this.typeMapper = typeMapper		
 	}
 	
 	public def TracedOutput<VampireModel,Logic2VampireLanguageMapperTrace> transformProblem(LogicProblem problem, VampireSolverConfiguration configuration) {
@@ -64,13 +66,13 @@ class Logic2VampireLanguageMapper {
 		]
 		
 		 
-		//call mappers
-		
+		//call mappers		
+		typeMapper.transformTypes(problem.types,problem.elements,this,trace)
 		
 		trace.constantDefinitions = problem.collectConstantDefinitions
 		
 		//only transforms definitions
-		problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstant(it, trace)]
+		//problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstant(it, trace)]
 		
 		problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstantDefinitionSpecification(it,trace)]
 		
@@ -118,7 +120,7 @@ class Logic2VampireLanguageMapper {
 		val res = createVLSFofFormula => [
 			it.name = support.toID(assertion.name)
 			//below is temporary solution
-			it.fofRole = "conjecture"
+			it.fofRole = "axiom"
 			it.fofFormula = assertion.value.transformTerm(trace, Collections.EMPTY_MAP)
 			//it.annotation = nothing			
 		]

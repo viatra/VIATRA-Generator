@@ -2,6 +2,7 @@ package hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDefinition;
+import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapperTrace;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel;
@@ -14,6 +15,8 @@ public class Logic2VampireLanguageMapperTrace {
   public VLSFofFormula logicLanguageBody;
   
   public VLSTerm formula;
+  
+  public Logic2VampireLanguageMapper_TypeMapperTrace typeMapperTrace;
   
   public Map<ConstantDeclaration, ConstantDefinition> constantDefinitions;
 }

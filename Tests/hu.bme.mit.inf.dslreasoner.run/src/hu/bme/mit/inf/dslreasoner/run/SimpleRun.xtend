@@ -71,16 +71,33 @@ class SimpleRun {
 		
 		//create logic problem
 		var extension builder = new LogicProblemBuilder
-		var LogicProblem logicProblem = builder.createProblem
+		var LogicProblem problem = builder.createProblem
 		
-		var X = ConstantDeclaration(LogicBool)
-		var Y = ConstantDeclaration(LogicBool)
-		logicProblem.add(X)
-		logicProblem.add(Y)
+		val rock = Element("Rock")
+		val paper= Element("Paper")
+		val scissor = Element("Scissor")
 		
-		//assertion is negated manually because logic problem can only handle axioms (assertions)
-		//so ya
-		logicProblem.add(Assertion( ! ( !(X && Y) <=> ( !X || !Y)) ))
+		problem.elements += rock
+		problem.elements += paper
+		problem.elements += scissor 
+		
+		val RPS = problem.add(TypeDefinition("RPS", false, rock, paper, scissor))
+		
+//		val beats = problem.add(RelationDefinition("beats",[
+//			val x = addVar("x",RPS)
+//			val y = addVar("y",RPS)
+//			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
+//		]))
+//		
+//		//below needs to be added as an axiom
+//		val beats2 = problem.add(RelationDeclaration("beats2",RPS,RPS))
+//		problem.add(Assertion(Forall[
+//			val x = addVar("x",RPS)
+//			Exists[
+//				val y = addVar("y",RPS)
+//				beats2.call(x,y)
+//			]
+//		]))
 		
 		 
 		
@@ -108,7 +125,7 @@ class SimpleRun {
 				it.typeScopes.maxNewIntegers = 0
 				it.writeToFile = false
 			]
-		solution = reasoner.solve(logicProblem,alloyConfig,workspace)
+		solution = reasoner.solve(problem,alloyConfig,workspace)
 		//*/
 		
 		//************

@@ -29,14 +29,21 @@ import hu.bme.mit.inf.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ConstantMapper;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
+import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSComment;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSImplies;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInt;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSUnaryNegation;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +54,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -61,7 +69,11 @@ public class Logic2VampireLanguageMapper {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final Logic2VampireLanguageMapper_ConstantMapper constantMapper = new Logic2VampireLanguageMapper_ConstantMapper(this);
   
-  public Logic2VampireLanguageMapper() {
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final Logic2VampireLanguageMapper_TypeMapper typeMapper;
+  
+  public Logic2VampireLanguageMapper(final Logic2VampireLanguageMapper_TypeMapper typeMapper) {
+    this.typeMapper = typeMapper;
   }
   
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration configuration) {
@@ -81,15 +93,12 @@ public class Logic2VampireLanguageMapper {
       it.specification = specification;
     };
     final Logic2VampireLanguageMapperTrace trace = ObjectExtensions.<Logic2VampireLanguageMapperTrace>operator_doubleArrow(_logic2VampireLanguageMapperTrace, _function_2);
+    this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
     trace.constantDefinitions = this.collectConstantDefinitions(problem);
     final Consumer<ConstantDefinition> _function_3 = (ConstantDefinition it) -> {
-      this.constantMapper.transformConstant(it, trace);
-    };
-    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_3);
-    final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
       this.constantMapper.transformConstantDefinitionSpecification(it, trace);
     };
-    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_4);
+    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_3);
     EList<Assertion> _assertions = problem.getAssertions();
     for (final Assertion assertion : _assertions) {
       this.transformAssertion(assertion, trace);
@@ -115,11 +124,22 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected boolean transformAssertion(final Assertion assertion, final Logic2VampireLanguageMapperTrace trace) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+    boolean _xblockexpression = false;
+    {
+      VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
+      final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+        it.setName(this.support.toID(assertion.getName()));
+        it.setFofRole("axiom");
+        it.setFofFormula(this.transformTerm(assertion.getValue(), trace, Collections.EMPTY_MAP));
+      };
+      final VLSFofFormula res = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+      EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
+      _xblockexpression = _formulas.add(res);
+    }
+    return _xblockexpression;
   }
   
-  protected VLSTerm _transformTerm(final BoolLiteral literal, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformTerm(final BoolLiteral literal, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSTerm _xifexpression = null;
     boolean _isValue = literal.isValue();
     boolean _equals = (_isValue == true);
@@ -131,7 +151,7 @@ public class Logic2VampireLanguageMapper {
     return _xifexpression;
   }
   
-  protected VLSTerm _transformTerm(final IntLiteral literal, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformTerm(final IntLiteral literal, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSInt _createVLSInt = this.factory.createVLSInt();
     final Procedure1<VLSInt> _function = (VLSInt it) -> {
       it.setValue(Integer.valueOf(literal.getValue()).toString());
@@ -139,7 +159,7 @@ public class Logic2VampireLanguageMapper {
     return ObjectExtensions.<VLSInt>operator_doubleArrow(_createVLSInt, _function);
   }
   
-  protected VLSTerm _transformTerm(final RealLiteral literal, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformTerm(final RealLiteral literal, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSReal _createVLSReal = this.factory.createVLSReal();
     final Procedure1<VLSReal> _function = (VLSReal it) -> {
       it.setValue(literal.getValue().toString());
@@ -147,53 +167,63 @@ public class Logic2VampireLanguageMapper {
     return ObjectExtensions.<VLSReal>operator_doubleArrow(_createVLSReal, _function);
   }
   
-  protected VLSTerm _transformTerm(final Not not, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final Not not, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
+    final Procedure1<VLSUnaryNegation> _function = (VLSUnaryNegation it) -> {
+      it.setOperand(this.transformTerm(not.getOperand(), trace, variables));
+    };
+    return ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function);
   }
   
-  protected VLSTerm _transformTerm(final And and, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final And and, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    final Function1<Term, VLSTerm> _function = (Term it) -> {
+      return this.transformTerm(it, trace, variables);
+    };
+    return this.support.unfoldAnd(ListExtensions.<Term, VLSTerm>map(and.getOperands(), _function));
   }
   
-  protected VLSTerm _transformTerm(final Or or, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final Or or, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    final Function1<Term, VLSTerm> _function = (Term it) -> {
+      return this.transformTerm(it, trace, variables);
+    };
+    return this.support.unfoldOr(ListExtensions.<Term, VLSTerm>map(or.getOperands(), _function), trace);
   }
   
-  protected VLSTerm _transformTerm(final Impl impl, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final Impl impl, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSImplies _createVLSImplies = this.factory.createVLSImplies();
+    final Procedure1<VLSImplies> _function = (VLSImplies it) -> {
+      it.setLeft(this.transformTerm(impl.getLeftOperand(), trace, variables));
+      it.setRight(this.transformTerm(impl.getRightOperand(), trace, variables));
+    };
+    return ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function);
   }
   
-  protected VLSTerm _transformTerm(final Iff iff, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable"
-      + "\nThe method transformTerm(Term, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final Iff iff, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
+    final Procedure1<VLSEquivalent> _function = (VLSEquivalent it) -> {
+      it.setLeft(this.transformTerm(iff.getLeftOperand(), trace, variables));
+      it.setRight(this.transformTerm(iff.getRightOperand(), trace, variables));
+    };
+    return ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function);
   }
   
-  protected VLSTerm _transformTerm(final Forall forall, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method createUniversallQuantifiedExpression(Logic2VampireLanguageMapper, QuantifiedExpression, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper_Support refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final Forall forall, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    return this.support.createUniversallQuantifiedExpression(this, forall, trace, variables);
   }
   
-  protected VLSTerm _transformTerm(final Exists exists, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method createExistentiallyQuantifiedExpression(Logic2VampireLanguageMapper, QuantifiedExpression, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper_Support refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final Exists exists, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    return this.support.createExistentiallyQuantifiedExpression(this, exists, trace, variables);
   }
   
-  protected VLSTerm _transformTerm(final SymbolicValue symbolicValue, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method transformSymbolicReference(SymbolicDeclaration, List<Term>, Logic2VampireLanguageMapperTrace, Map<Variable, VLSVariable>) from the type Logic2VampireLanguageMapper refers to the missing type VLSVariable");
+  protected VLSTerm _transformTerm(final SymbolicValue symbolicValue, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    return this.transformSymbolicReference(symbolicValue.getSymbolicReference(), symbolicValue.getParameterSubstitutions(), trace, variables);
   }
   
-  protected VLSTerm _transformSymbolicReference(final DefinedElement referred, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformSymbolicReference(final DefinedElement referred, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return null;
   }
   
-  protected VLSTerm _transformSymbolicReference(final ConstantDeclaration constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformSymbolicReference(final ConstantDeclaration constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSConstant _createVLSConstant = this.factory.createVLSConstant();
     final Procedure1<VLSConstant> _function = (VLSConstant it) -> {
       it.setName(this.support.toID(constant.getName()));
@@ -202,20 +232,20 @@ public class Logic2VampireLanguageMapper {
     return res;
   }
   
-  protected VLSTerm _transformSymbolicReference(final ConstantDefinition constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformSymbolicReference(final ConstantDefinition constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return null;
   }
   
-  protected VLSTerm _transformSymbolicReference(final Variable variable, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformSymbolicReference(final Variable variable, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     final VLSVariable res = CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables);
     return res;
   }
   
-  protected VLSTerm _transformSymbolicReference(final FunctionDeclaration function, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformSymbolicReference(final FunctionDeclaration function, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return null;
   }
   
-  protected VLSTerm _transformSymbolicReference(final FunctionDefinition function, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
+  protected VLSTerm _transformSymbolicReference(final FunctionDefinition function, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return null;
   }
   
@@ -223,39 +253,28 @@ public class Logic2VampireLanguageMapper {
     return _transformTypeReference(boolTypeReference, trace);
   }
   
-  protected VLSTerm transformTerm(final Term and, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    if (and instanceof And
-         && variables != null) {
+  protected VLSTerm transformTerm(final Term and, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    if (and instanceof And) {
       return _transformTerm((And)and, trace, variables);
-    } else if (and instanceof BoolLiteral
-         && variables != null) {
+    } else if (and instanceof BoolLiteral) {
       return _transformTerm((BoolLiteral)and, trace, variables);
-    } else if (and instanceof Exists
-         && variables != null) {
+    } else if (and instanceof Exists) {
       return _transformTerm((Exists)and, trace, variables);
-    } else if (and instanceof Forall
-         && variables != null) {
+    } else if (and instanceof Forall) {
       return _transformTerm((Forall)and, trace, variables);
-    } else if (and instanceof Iff
-         && variables != null) {
+    } else if (and instanceof Iff) {
       return _transformTerm((Iff)and, trace, variables);
-    } else if (and instanceof Impl
-         && variables != null) {
+    } else if (and instanceof Impl) {
       return _transformTerm((Impl)and, trace, variables);
-    } else if (and instanceof IntLiteral
-         && variables != null) {
+    } else if (and instanceof IntLiteral) {
       return _transformTerm((IntLiteral)and, trace, variables);
-    } else if (and instanceof Not
-         && variables != null) {
+    } else if (and instanceof Not) {
       return _transformTerm((Not)and, trace, variables);
-    } else if (and instanceof Or
-         && variables != null) {
+    } else if (and instanceof Or) {
       return _transformTerm((Or)and, trace, variables);
-    } else if (and instanceof RealLiteral
-         && variables != null) {
+    } else if (and instanceof RealLiteral) {
       return _transformTerm((RealLiteral)and, trace, variables);
-    } else if (and instanceof SymbolicValue
-         && variables != null) {
+    } else if (and instanceof SymbolicValue) {
       return _transformTerm((SymbolicValue)and, trace, variables);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
@@ -263,24 +282,18 @@ public class Logic2VampireLanguageMapper {
     }
   }
   
-  protected VLSTerm transformSymbolicReference(final SymbolicDeclaration constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final /* Map<Variable, VLSVariable> */Object variables) {
-    if (constant instanceof ConstantDeclaration
-         && variables != null) {
+  protected VLSTerm transformSymbolicReference(final SymbolicDeclaration constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    if (constant instanceof ConstantDeclaration) {
       return _transformSymbolicReference((ConstantDeclaration)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof ConstantDefinition
-         && variables != null) {
+    } else if (constant instanceof ConstantDefinition) {
       return _transformSymbolicReference((ConstantDefinition)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof FunctionDeclaration
-         && variables != null) {
+    } else if (constant instanceof FunctionDeclaration) {
       return _transformSymbolicReference((FunctionDeclaration)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof FunctionDefinition
-         && variables != null) {
+    } else if (constant instanceof FunctionDefinition) {
       return _transformSymbolicReference((FunctionDefinition)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof DefinedElement
-         && variables != null) {
+    } else if (constant instanceof DefinedElement) {
       return _transformSymbolicReference((DefinedElement)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof Variable
-         && variables != null) {
+    } else if (constant instanceof Variable) {
       return _transformSymbolicReference((Variable)constant, parameterSubstitutions, trace, variables);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
@@ -291,5 +304,10 @@ public class Logic2VampireLanguageMapper {
   @Pure
   public Logic2VampireLanguageMapper_ConstantMapper getConstantMapper() {
     return this.constantMapper;
+  }
+  
+  @Pure
+  public Logic2VampireLanguageMapper_TypeMapper getTypeMapper() {
+    return this.typeMapper;
   }
 }
