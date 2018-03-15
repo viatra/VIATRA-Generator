@@ -791,19 +791,18 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cVLSUnaryInfixParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
 		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cTermAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cTermVLSTermParserRuleCall_4_1_0 = (RuleCall)cTermAssignment_4_1.eContents().get(0);
+		private final RuleCall cVLSTermParserRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		////VLSUnitaryFormula
 		//VLSUnitaryFormula VLSTerm:
 		//	VLSUniversalQuantifier | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix
 		//	//| VLSEquality 
-		//	| '(' term=VLSTerm ')';
+		//	| '(' VLSTerm ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//VLSUniversalQuantifier | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix //| VLSEquality 
-		//| '(' term=VLSTerm ')'
+		//| '(' VLSTerm ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//VLSUniversalQuantifier
@@ -818,17 +817,14 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//VLSUnaryInfix
 		public RuleCall getVLSUnaryInfixParserRuleCall_3() { return cVLSUnaryInfixParserRuleCall_3; }
 		
-		//'(' term=VLSTerm ')'
+		//'(' VLSTerm ')'
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//'('
 		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
 		
-		//term=VLSTerm
-		public Assignment getTermAssignment_4_1() { return cTermAssignment_4_1; }
-		
 		//VLSTerm
-		public RuleCall getTermVLSTermParserRuleCall_4_1_0() { return cTermVLSTermParserRuleCall_4_1_0; }
+		public RuleCall getVLSTermParserRuleCall_4_1() { return cVLSTermParserRuleCall_4_1; }
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
@@ -1124,20 +1120,18 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameVLSRoleParserRuleCall_0_1_0_4 = (RuleCall)cNameAlternatives_0_1_0.eContents().get(4);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Action cVLSTrueAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cNameAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final Keyword cNameTrueKeyword_1_1_0 = (Keyword)cNameAssignment_1_1.eContents().get(0);
+		private final Keyword cTrueKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
 		private final Action cVLSFalseAction_2_0 = (Action)cGroup_2.eContents().get(0);
-		private final Assignment cNameAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final Keyword cNameFalseKeyword_2_1_0 = (Keyword)cNameAssignment_2_1.eContents().get(0);
+		private final Keyword cFalseKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		
 		//VLSAtomicConstant VLSTerm:
-		//	{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) | {VLSTrue} name='$true' |
-		//	{VLSFalse} name='$false';
+		//	{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) | {VLSTrue} '$true' |
+		//	{VLSFalse} '$false';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) | {VLSTrue} name='$true' |
-		//{VLSFalse} name='$false'
+		//{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) | {VLSTrue} '$true' |
+		//{VLSFalse} '$false'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole)
@@ -1167,29 +1161,23 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//VLSRole
 		public RuleCall getNameVLSRoleParserRuleCall_0_1_0_4() { return cNameVLSRoleParserRuleCall_0_1_0_4; }
 		
-		//{VLSTrue} name='$true'
+		//{VLSTrue} '$true'
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//{VLSTrue}
 		public Action getVLSTrueAction_1_0() { return cVLSTrueAction_1_0; }
 		
-		//name='$true'
-		public Assignment getNameAssignment_1_1() { return cNameAssignment_1_1; }
-		
 		//'$true'
-		public Keyword getNameTrueKeyword_1_1_0() { return cNameTrueKeyword_1_1_0; }
+		public Keyword getTrueKeyword_1_1() { return cTrueKeyword_1_1; }
 		
-		//{VLSFalse} name='$false'
+		//{VLSFalse} '$false'
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//{VLSFalse}
 		public Action getVLSFalseAction_2_0() { return cVLSFalseAction_2_0; }
 		
-		//name='$false'
-		public Assignment getNameAssignment_2_1() { return cNameAssignment_2_1; }
-		
 		//'$false'
-		public Keyword getNameFalseKeyword_2_1_0() { return cNameFalseKeyword_2_1_0; }
+		public Keyword getFalseKeyword_2_1() { return cFalseKeyword_2_1; }
 	}
 	public class VLSAtomicFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSAtomicFunction");
@@ -2053,7 +2041,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//VLSUnitaryFormula VLSTerm:
 	//	VLSUniversalQuantifier | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix
 	//	//| VLSEquality 
-	//	| '(' term=VLSTerm ')';
+	//	| '(' VLSTerm ')';
 	public VLSUnitaryFormulaElements getVLSUnitaryFormulaAccess() {
 		return pVLSUnitaryFormula;
 	}
@@ -2131,8 +2119,8 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSAtomicConstant VLSTerm:
-	//	{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) | {VLSTrue} name='$true' |
-	//	{VLSFalse} name='$false';
+	//	{VLSConstant} name=(LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) | {VLSTrue} '$true' |
+	//	{VLSFalse} '$false';
 	public VLSAtomicConstantElements getVLSAtomicConstantAccess() {
 		return pVLSAtomicConstant;
 	}

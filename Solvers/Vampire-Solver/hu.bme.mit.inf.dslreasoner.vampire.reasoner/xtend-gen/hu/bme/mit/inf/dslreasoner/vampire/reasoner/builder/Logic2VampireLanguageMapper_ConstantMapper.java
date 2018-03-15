@@ -21,8 +21,7 @@ public class Logic2VampireLanguageMapper_ConstantMapper {
   }
   
   protected Object _transformConstant(final ConstantDefinition constant, final Logic2VampireLanguageMapperTrace trace) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field error is undefined");
+    return null;
   }
   
   protected Object transformConstantDefinitionSpecification(final ConstantDefinition constant, final Logic2VampireLanguageMapperTrace trace) {

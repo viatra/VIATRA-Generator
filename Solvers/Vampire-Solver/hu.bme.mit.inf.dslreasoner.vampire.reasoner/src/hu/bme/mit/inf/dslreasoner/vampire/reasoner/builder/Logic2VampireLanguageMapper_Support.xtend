@@ -14,7 +14,7 @@ class Logic2VampireLanguageMapper_Support {
 	
 	// ID Handler
 	def protected String toIDMultiple(String... ids) {
-		ids.map[it.split("\\s+").join("'")].join("'")
+		ids.map[it.split("\\s+").join("'")].join("_")
 	}
 	
 	def protected  String toID(String ids) {
@@ -45,13 +45,13 @@ class Logic2VampireLanguageMapper_Support {
 		else throw new UnsupportedOperationException('''Logic operator with 0 operands!''')		
 	}
 	
-	def protected VLSTerm unfoldOr(List<? extends VLSTerm> operands, Logic2VampireLanguageMapperTrace trace) {
+	def protected VLSTerm unfoldOr(List<? extends VLSTerm> operands) {
 		
 //		if(operands.size == 0) {basically return true}
 		/*else*/if(operands.size == 1) { return operands.head }
 		else if(operands.size > 1) { return createVLSOr=>[
 			left=operands.head
-			right=unfoldOr(operands.subList(1,operands.size),trace)
+			right=operands.subList(1,operands.size).unfoldOr
 		]}	
 		else throw new UnsupportedOperationException('''Logic operator with 0 operands!''')	//TEMP
 	}

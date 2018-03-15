@@ -13,9 +13,9 @@ import java.util.List;
 public interface Logic2VampireLanguageMapper_TypeMapper {
   public abstract void transformTypes(final Collection<Type> types, final Collection<DefinedElement> elements, final Logic2VampireLanguageMapper mapper, final Logic2VampireLanguageMapperTrace trace);
   
-  public abstract /* List<VLSSignatureDeclaration> */Object transformTypeReference(final Type referred, final Logic2VampireLanguageMapper mapper, final Logic2VampireLanguageMapperTrace trace);
+  public abstract List<VLSTerm> transformTypeReference(final Type referred, final Logic2VampireLanguageMapper mapper, final Logic2VampireLanguageMapperTrace trace);
   
-  public abstract /* VLSSignatureDeclaration */Object getUndefinedSupertype(final Logic2VampireLanguageMapperTrace trace);
+  public abstract VLSTerm getUndefinedSupertype(final Logic2VampireLanguageMapperTrace trace);
   
   public abstract int getUndefinedSupertypeScope(final int undefinedScope, final Logic2VampireLanguageMapperTrace trace);
   

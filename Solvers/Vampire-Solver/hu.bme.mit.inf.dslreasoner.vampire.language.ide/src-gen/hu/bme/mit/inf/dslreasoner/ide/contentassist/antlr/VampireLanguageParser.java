@@ -113,7 +113,6 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_0_1(), "rule__VLSBinary__RightAssignment_1_0_1");
 					put(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_1_2(), "rule__VLSBinary__RightAssignment_1_1_2");
 					put(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_2_2(), "rule__VLSBinary__RightAssignment_1_2_2");
-					put(grammarAccess.getVLSUnitaryFormulaAccess().getTermAssignment_4_1(), "rule__VLSUnitaryFormula__TermAssignment_4_1");
 					put(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesAssignment_1_2(), "rule__VLSUniversalQuantifier__VariablesAssignment_1_2");
 					put(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesAssignment_1_3_1(), "rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1");
 					put(grammarAccess.getVLSUniversalQuantifierAccess().getOperandAssignment_2(), "rule__VLSUniversalQuantifier__OperandAssignment_2");
@@ -123,8 +122,6 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSUnaryNegationAccess().getOperandAssignment_2(), "rule__VLSUnaryNegation__OperandAssignment_2");
 					put(grammarAccess.getVLSUnaryInfixAccess().getRightAssignment_1_1(), "rule__VLSUnaryInfix__RightAssignment_1_1");
 					put(grammarAccess.getVLSAtomicConstantAccess().getNameAssignment_0_1(), "rule__VLSAtomicConstant__NameAssignment_0_1");
-					put(grammarAccess.getVLSAtomicConstantAccess().getNameAssignment_1_1(), "rule__VLSAtomicConstant__NameAssignment_1_1");
-					put(grammarAccess.getVLSAtomicConstantAccess().getNameAssignment_2_1(), "rule__VLSAtomicConstant__NameAssignment_2_1");
 					put(grammarAccess.getVLSAtomicFunctionAccess().getConstantAssignment_0_1(), "rule__VLSAtomicFunction__ConstantAssignment_0_1");
 					put(grammarAccess.getVLSAtomicFunctionAccess().getTermsAssignment_0_2_1(), "rule__VLSAtomicFunction__TermsAssignment_0_2_1");
 					put(grammarAccess.getVLSAtomicFunctionAccess().getTermsAssignment_0_2_2_1(), "rule__VLSAtomicFunction__TermsAssignment_0_2_2_1");

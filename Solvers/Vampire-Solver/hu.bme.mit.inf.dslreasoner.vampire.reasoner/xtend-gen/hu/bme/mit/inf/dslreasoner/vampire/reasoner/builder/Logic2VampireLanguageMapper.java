@@ -186,7 +186,7 @@ public class Logic2VampireLanguageMapper {
     final Function1<Term, VLSTerm> _function = (Term it) -> {
       return this.transformTerm(it, trace, variables);
     };
-    return this.support.unfoldOr(ListExtensions.<Term, VLSTerm>map(or.getOperands(), _function), trace);
+    return this.support.unfoldOr(ListExtensions.<Term, VLSTerm>map(or.getOperands(), _function));
   }
   
   protected VLSTerm _transformTerm(final Impl impl, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {

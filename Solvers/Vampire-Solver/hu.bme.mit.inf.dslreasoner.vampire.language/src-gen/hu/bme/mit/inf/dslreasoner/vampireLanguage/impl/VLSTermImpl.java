@@ -6,40 +6,19 @@ package hu.bme.mit.inf.dslreasoner.vampireLanguage.impl;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>VLS Term</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.impl.VLSTermImpl#getTerm <em>Term</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
 {
-  /**
-   * The cached value of the '{@link #getTerm() <em>Term</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTerm()
-   * @generated
-   * @ordered
-   */
-  protected VLSTerm term;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -59,136 +38,6 @@ public class VLSTermImpl extends MinimalEObjectImpl.Container implements VLSTerm
   protected EClass eStaticClass()
   {
     return VampireLanguagePackage.Literals.VLS_TERM;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSTerm getTerm()
-  {
-    return term;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTerm(VLSTerm newTerm, NotificationChain msgs)
-  {
-    VLSTerm oldTerm = term;
-    term = newTerm;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_TERM__TERM, oldTerm, newTerm);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTerm(VLSTerm newTerm)
-  {
-    if (newTerm != term)
-    {
-      NotificationChain msgs = null;
-      if (term != null)
-        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_TERM__TERM, null, msgs);
-      if (newTerm != null)
-        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_TERM__TERM, null, msgs);
-      msgs = basicSetTerm(newTerm, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_TERM__TERM, newTerm, newTerm));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case VampireLanguagePackage.VLS_TERM__TERM:
-        return basicSetTerm(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case VampireLanguagePackage.VLS_TERM__TERM:
-        return getTerm();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case VampireLanguagePackage.VLS_TERM__TERM:
-        setTerm((VLSTerm)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case VampireLanguagePackage.VLS_TERM__TERM:
-        setTerm((VLSTerm)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case VampireLanguagePackage.VLS_TERM__TERM:
-        return term != null;
-    }
-    return super.eIsSet(featureID);
   }
 
 } //VLSTermImpl

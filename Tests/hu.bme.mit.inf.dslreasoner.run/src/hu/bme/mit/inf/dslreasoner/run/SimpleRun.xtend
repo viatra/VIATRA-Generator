@@ -81,7 +81,18 @@ class SimpleRun {
 		problem.elements += paper
 		problem.elements += scissor 
 		
-		val RPS = problem.add(TypeDefinition("RPS", false, rock, paper, scissor))
+		val red = Element("Red")
+		val green = Element("Green")
+		
+		problem.elements += red
+		problem.elements += green
+		
+		val allRPS = problem.add(TypeDeclaration("allRPS", true)) 
+		val oldRPS = problem.add(TypeDefinition("oldRPS", false, rock, paper, scissor)) //n+1 axioms, where n is the number of type definitions. 1. rocjk, paper, scissor are all rps. 2. every object is rps
+		val newRPS = problem.add(TypeDeclaration("newRPS", false))
+		val color = problem.add(TypeDefinition("color", false, red, green ))
+		Supertype(oldRPS,allRPS)
+		Supertype(newRPS,allRPS)
 		
 //		val beats = problem.add(RelationDefinition("beats",[
 //			val x = addVar("x",RPS)

@@ -964,8 +964,8 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_ALPHA_NUMERIC"
     public final void mRULE_ALPHA_NUMERIC() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2656:29: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' ) )
-            // InternalVampireLanguage.g:2656:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )
+            // InternalVampireLanguage.g:2625:29: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' ) )
+            // InternalVampireLanguage.g:2625:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -990,11 +990,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_UPPER_WORD_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2658:20: ( 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )* )
-            // InternalVampireLanguage.g:2658:22: 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2627:20: ( 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )* )
+            // InternalVampireLanguage.g:2627:22: 'A' .. 'Z' ( RULE_ALPHA_NUMERIC )*
             {
             matchRange('A','Z'); 
-            // InternalVampireLanguage.g:2658:31: ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2627:31: ( RULE_ALPHA_NUMERIC )*
             loop1:
             do {
                 int alt1=2;
@@ -1007,7 +1007,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2658:31: RULE_ALPHA_NUMERIC
+            	    // InternalVampireLanguage.g:2627:31: RULE_ALPHA_NUMERIC
             	    {
             	    mRULE_ALPHA_NUMERIC(); 
 
@@ -1035,11 +1035,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_LOWER_WORD_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2660:20: ( 'a' .. 'z' ( RULE_ALPHA_NUMERIC )* )
-            // InternalVampireLanguage.g:2660:22: 'a' .. 'z' ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2629:20: ( 'a' .. 'z' ( RULE_ALPHA_NUMERIC )* )
+            // InternalVampireLanguage.g:2629:22: 'a' .. 'z' ( RULE_ALPHA_NUMERIC )*
             {
             matchRange('a','z'); 
-            // InternalVampireLanguage.g:2660:31: ( RULE_ALPHA_NUMERIC )*
+            // InternalVampireLanguage.g:2629:31: ( RULE_ALPHA_NUMERIC )*
             loop2:
             do {
                 int alt2=2;
@@ -1052,7 +1052,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2660:31: RULE_ALPHA_NUMERIC
+            	    // InternalVampireLanguage.g:2629:31: RULE_ALPHA_NUMERIC
             	    {
             	    mRULE_ALPHA_NUMERIC(); 
 
@@ -1080,11 +1080,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2662:19: ( '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalVampireLanguage.g:2662:21: '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalVampireLanguage.g:2631:19: ( '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalVampireLanguage.g:2631:21: '\"' ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalVampireLanguage.g:2662:25: ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalVampireLanguage.g:2631:25: ( '\\\\' ( '\"' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
             loop3:
             do {
                 int alt3=3;
@@ -1100,7 +1100,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2662:26: '\\\\' ( '\"' | '\\\\' )
+            	    // InternalVampireLanguage.g:2631:26: '\\\\' ( '\"' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\\' ) {
@@ -1116,7 +1116,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalVampireLanguage.g:2662:42: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalVampireLanguage.g:2631:42: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1153,11 +1153,11 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_QUOTE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2664:19: ( '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\'' )
-            // InternalVampireLanguage.g:2664:21: '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\''
+            // InternalVampireLanguage.g:2633:19: ( '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\'' )
+            // InternalVampireLanguage.g:2633:21: '\\'' ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+ '\\''
             {
             match('\''); 
-            // InternalVampireLanguage.g:2664:26: ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+
+            // InternalVampireLanguage.g:2633:26: ( '\\\\' ( '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )+
             int cnt4=0;
             loop4:
             do {
@@ -1174,7 +1174,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2664:27: '\\\\' ( '\\'' | '\\\\' )
+            	    // InternalVampireLanguage.g:2633:27: '\\\\' ( '\\'' | '\\\\' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\''||input.LA(1)=='\\' ) {
@@ -1190,7 +1190,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalVampireLanguage.g:2664:44: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalVampireLanguage.g:2633:44: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1229,8 +1229,8 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_SIGN"
     public final void mRULE_SIGN() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2666:20: ( ( '+' | '-' ) )
-            // InternalVampireLanguage.g:2666:22: ( '+' | '-' )
+            // InternalVampireLanguage.g:2635:20: ( ( '+' | '-' ) )
+            // InternalVampireLanguage.g:2635:22: ( '+' | '-' )
             {
             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                 input.consume();
@@ -1255,8 +1255,8 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOLLAR_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2668:16: ( '$' RULE_LOWER_WORD_ID )
-            // InternalVampireLanguage.g:2668:18: '$' RULE_LOWER_WORD_ID
+            // InternalVampireLanguage.g:2637:16: ( '$' RULE_LOWER_WORD_ID )
+            // InternalVampireLanguage.g:2637:18: '$' RULE_LOWER_WORD_ID
             {
             match('$'); 
             mRULE_LOWER_WORD_ID(); 
@@ -1276,8 +1276,8 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_DOLLAR_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2670:23: ( '$$' RULE_LOWER_WORD_ID )
-            // InternalVampireLanguage.g:2670:25: '$$' RULE_LOWER_WORD_ID
+            // InternalVampireLanguage.g:2639:23: ( '$$' RULE_LOWER_WORD_ID )
+            // InternalVampireLanguage.g:2639:25: '$$' RULE_LOWER_WORD_ID
             {
             match("$$"); 
 
@@ -1298,10 +1298,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2672:14: ( ( '0' | '1' .. '9' ( RULE_INT )? ) )
-            // InternalVampireLanguage.g:2672:16: ( '0' | '1' .. '9' ( RULE_INT )? )
+            // InternalVampireLanguage.g:2641:14: ( ( '0' | '1' .. '9' ( RULE_INT )? ) )
+            // InternalVampireLanguage.g:2641:16: ( '0' | '1' .. '9' ( RULE_INT )? )
             {
-            // InternalVampireLanguage.g:2672:16: ( '0' | '1' .. '9' ( RULE_INT )? )
+            // InternalVampireLanguage.g:2641:16: ( '0' | '1' .. '9' ( RULE_INT )? )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1319,17 +1319,17 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalVampireLanguage.g:2672:17: '0'
+                    // InternalVampireLanguage.g:2641:17: '0'
                     {
                     match('0'); 
 
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2672:21: '1' .. '9' ( RULE_INT )?
+                    // InternalVampireLanguage.g:2641:21: '1' .. '9' ( RULE_INT )?
                     {
                     matchRange('1','9'); 
-                    // InternalVampireLanguage.g:2672:30: ( RULE_INT )?
+                    // InternalVampireLanguage.g:2641:30: ( RULE_INT )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -1338,7 +1338,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     }
                     switch (alt5) {
                         case 1 :
-                            // InternalVampireLanguage.g:2672:30: RULE_INT
+                            // InternalVampireLanguage.g:2641:30: RULE_INT
                             {
                             mRULE_INT(); 
 
@@ -1369,10 +1369,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SIGNED_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2674:21: ( ( RULE_SIGN )* RULE_LITERAL )
-            // InternalVampireLanguage.g:2674:23: ( RULE_SIGN )* RULE_LITERAL
+            // InternalVampireLanguage.g:2643:21: ( ( RULE_SIGN )* RULE_LITERAL )
+            // InternalVampireLanguage.g:2643:23: ( RULE_SIGN )* RULE_LITERAL
             {
-            // InternalVampireLanguage.g:2674:23: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2643:23: ( RULE_SIGN )*
             loop7:
             do {
                 int alt7=2;
@@ -1385,7 +1385,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2674:23: RULE_SIGN
+            	    // InternalVampireLanguage.g:2643:23: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1412,8 +1412,8 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_UNSIGNED_REAL_FRAC_ID"
     public final void mRULE_UNSIGNED_REAL_FRAC_ID() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2676:37: ( RULE_LITERAL '.' RULE_INT )
-            // InternalVampireLanguage.g:2676:39: RULE_LITERAL '.' RULE_INT
+            // InternalVampireLanguage.g:2645:37: ( RULE_LITERAL '.' RULE_INT )
+            // InternalVampireLanguage.g:2645:39: RULE_LITERAL '.' RULE_INT
             {
             mRULE_LITERAL(); 
             match('.'); 
@@ -1430,22 +1430,22 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_UNSIGNED_REAL_EXP_ID"
     public final void mRULE_UNSIGNED_REAL_EXP_ID() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2678:36: ( ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT )
-            // InternalVampireLanguage.g:2678:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT
+            // InternalVampireLanguage.g:2647:36: ( ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT )
+            // InternalVampireLanguage.g:2647:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID ) 'Ee' ( RULE_SIGN )* RULE_INT
             {
-            // InternalVampireLanguage.g:2678:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )
+            // InternalVampireLanguage.g:2647:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )
             int alt8=2;
             alt8 = dfa8.predict(input);
             switch (alt8) {
                 case 1 :
-                    // InternalVampireLanguage.g:2678:39: RULE_LITERAL
+                    // InternalVampireLanguage.g:2647:39: RULE_LITERAL
                     {
                     mRULE_LITERAL(); 
 
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2678:52: RULE_UNSIGNED_REAL_FRAC_ID
+                    // InternalVampireLanguage.g:2647:52: RULE_UNSIGNED_REAL_FRAC_ID
                     {
                     mRULE_UNSIGNED_REAL_FRAC_ID(); 
 
@@ -1456,7 +1456,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
             match("Ee"); 
 
-            // InternalVampireLanguage.g:2678:85: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2647:85: ( RULE_SIGN )*
             loop9:
             do {
                 int alt9=2;
@@ -1469,7 +1469,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2678:85: RULE_SIGN
+            	    // InternalVampireLanguage.g:2647:85: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1496,10 +1496,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SIGNED_REAL_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2680:21: ( ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID ) )
-            // InternalVampireLanguage.g:2680:23: ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
+            // InternalVampireLanguage.g:2649:21: ( ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID ) )
+            // InternalVampireLanguage.g:2649:23: ( RULE_SIGN )* ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
             {
-            // InternalVampireLanguage.g:2680:23: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2649:23: ( RULE_SIGN )*
             loop10:
             do {
                 int alt10=2;
@@ -1512,7 +1512,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2680:23: RULE_SIGN
+            	    // InternalVampireLanguage.g:2649:23: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1524,19 +1524,19 @@ public class InternalVampireLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalVampireLanguage.g:2680:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
+            // InternalVampireLanguage.g:2649:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )
             int alt11=2;
             alt11 = dfa11.predict(input);
             switch (alt11) {
                 case 1 :
-                    // InternalVampireLanguage.g:2680:35: RULE_UNSIGNED_REAL_FRAC_ID
+                    // InternalVampireLanguage.g:2649:35: RULE_UNSIGNED_REAL_FRAC_ID
                     {
                     mRULE_UNSIGNED_REAL_FRAC_ID(); 
 
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2680:62: RULE_UNSIGNED_REAL_EXP_ID
+                    // InternalVampireLanguage.g:2649:62: RULE_UNSIGNED_REAL_EXP_ID
                     {
                     mRULE_UNSIGNED_REAL_EXP_ID(); 
 
@@ -1559,13 +1559,13 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_UNSIGNED_RAT_ID"
     public final void mRULE_UNSIGNED_RAT_ID() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2682:31: ( RULE_LITERAL '/' '1' .. '9' ( RULE_INT )? )
-            // InternalVampireLanguage.g:2682:33: RULE_LITERAL '/' '1' .. '9' ( RULE_INT )?
+            // InternalVampireLanguage.g:2651:31: ( RULE_LITERAL '/' '1' .. '9' ( RULE_INT )? )
+            // InternalVampireLanguage.g:2651:33: RULE_LITERAL '/' '1' .. '9' ( RULE_INT )?
             {
             mRULE_LITERAL(); 
             match('/'); 
             matchRange('1','9'); 
-            // InternalVampireLanguage.g:2682:59: ( RULE_INT )?
+            // InternalVampireLanguage.g:2651:59: ( RULE_INT )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1574,7 +1574,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalVampireLanguage.g:2682:59: RULE_INT
+                    // InternalVampireLanguage.g:2651:59: RULE_INT
                     {
                     mRULE_INT(); 
 
@@ -1597,10 +1597,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SIGNED_RAT_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2684:20: ( ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID )
-            // InternalVampireLanguage.g:2684:22: ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID
+            // InternalVampireLanguage.g:2653:20: ( ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID )
+            // InternalVampireLanguage.g:2653:22: ( RULE_SIGN )* RULE_UNSIGNED_RAT_ID
             {
-            // InternalVampireLanguage.g:2684:22: ( RULE_SIGN )*
+            // InternalVampireLanguage.g:2653:22: ( RULE_SIGN )*
             loop13:
             do {
                 int alt13=2;
@@ -1613,7 +1613,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2684:22: RULE_SIGN
+            	    // InternalVampireLanguage.g:2653:22: RULE_SIGN
             	    {
             	    mRULE_SIGN(); 
 
@@ -1640,11 +1640,11 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_ANY_OTHER"
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2686:25: ( '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r' )
-            // InternalVampireLanguage.g:2686:27: '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r'
+            // InternalVampireLanguage.g:2655:25: ( '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r' )
+            // InternalVampireLanguage.g:2655:27: '%' (~ ( ( '\\n' | '\\r' ) ) )* '\\r'
             {
             match('%'); 
-            // InternalVampireLanguage.g:2686:31: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalVampireLanguage.g:2655:31: (~ ( ( '\\n' | '\\r' ) ) )*
             loop14:
             do {
                 int alt14=2;
@@ -1657,7 +1657,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2686:31: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalVampireLanguage.g:2655:31: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1692,8 +1692,8 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2688:21: ( RULE_ANY_OTHER )
-            // InternalVampireLanguage.g:2688:23: RULE_ANY_OTHER
+            // InternalVampireLanguage.g:2657:21: ( RULE_ANY_OTHER )
+            // InternalVampireLanguage.g:2657:23: RULE_ANY_OTHER
             {
             mRULE_ANY_OTHER(); 
 
@@ -1712,10 +1712,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2690:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalVampireLanguage.g:2690:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalVampireLanguage.g:2659:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalVampireLanguage.g:2659:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalVampireLanguage.g:2690:11: ( '^' )?
+            // InternalVampireLanguage.g:2659:11: ( '^' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1724,7 +1724,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalVampireLanguage.g:2690:11: '^'
+                    // InternalVampireLanguage.g:2659:11: '^'
                     {
                     match('^'); 
 
@@ -1742,7 +1742,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalVampireLanguage.g:2690:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalVampireLanguage.g:2659:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop16:
             do {
                 int alt16=2;
@@ -1789,10 +1789,10 @@ public class InternalVampireLanguageLexer extends Lexer {
     // $ANTLR start "RULE_INT"
     public final void mRULE_INT() throws RecognitionException {
         try {
-            // InternalVampireLanguage.g:2692:19: ( ( '0' .. '9' )+ )
-            // InternalVampireLanguage.g:2692:21: ( '0' .. '9' )+
+            // InternalVampireLanguage.g:2661:19: ( ( '0' .. '9' )+ )
+            // InternalVampireLanguage.g:2661:21: ( '0' .. '9' )+
             {
-            // InternalVampireLanguage.g:2692:21: ( '0' .. '9' )+
+            // InternalVampireLanguage.g:2661:21: ( '0' .. '9' )+
             int cnt17=0;
             loop17:
             do {
@@ -1806,7 +1806,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2692:22: '0' .. '9'
+            	    // InternalVampireLanguage.g:2661:22: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1836,10 +1836,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2694:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalVampireLanguage.g:2694:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalVampireLanguage.g:2663:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalVampireLanguage.g:2663:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalVampireLanguage.g:2694:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalVampireLanguage.g:2663:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1857,10 +1857,10 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt20) {
                 case 1 :
-                    // InternalVampireLanguage.g:2694:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalVampireLanguage.g:2663:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalVampireLanguage.g:2694:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalVampireLanguage.g:2663:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop18:
                     do {
                         int alt18=3;
@@ -1876,7 +1876,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                         switch (alt18) {
                     	case 1 :
-                    	    // InternalVampireLanguage.g:2694:21: '\\\\' .
+                    	    // InternalVampireLanguage.g:2663:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1884,7 +1884,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalVampireLanguage.g:2694:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalVampireLanguage.g:2663:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1909,10 +1909,10 @@ public class InternalVampireLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2694:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalVampireLanguage.g:2663:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalVampireLanguage.g:2694:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalVampireLanguage.g:2663:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop19:
                     do {
                         int alt19=3;
@@ -1928,7 +1928,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                         switch (alt19) {
                     	case 1 :
-                    	    // InternalVampireLanguage.g:2694:54: '\\\\' .
+                    	    // InternalVampireLanguage.g:2663:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1936,7 +1936,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalVampireLanguage.g:2694:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalVampireLanguage.g:2663:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1979,12 +1979,12 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2696:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalVampireLanguage.g:2696:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalVampireLanguage.g:2665:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalVampireLanguage.g:2665:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalVampireLanguage.g:2696:24: ( options {greedy=false; } : . )*
+            // InternalVampireLanguage.g:2665:24: ( options {greedy=false; } : . )*
             loop21:
             do {
                 int alt21=2;
@@ -2009,7 +2009,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt21) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2696:52: .
+            	    // InternalVampireLanguage.g:2665:52: .
             	    {
             	    matchAny(); 
 
@@ -2039,12 +2039,12 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2698:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalVampireLanguage.g:2698:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalVampireLanguage.g:2667:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalVampireLanguage.g:2667:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalVampireLanguage.g:2698:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalVampireLanguage.g:2667:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop22:
             do {
                 int alt22=2;
@@ -2057,7 +2057,7 @@ public class InternalVampireLanguageLexer extends Lexer {
 
                 switch (alt22) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2698:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalVampireLanguage.g:2667:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2077,7 +2077,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalVampireLanguage.g:2698:40: ( ( '\\r' )? '\\n' )?
+            // InternalVampireLanguage.g:2667:40: ( ( '\\r' )? '\\n' )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2086,9 +2086,9 @@ public class InternalVampireLanguageLexer extends Lexer {
             }
             switch (alt24) {
                 case 1 :
-                    // InternalVampireLanguage.g:2698:41: ( '\\r' )? '\\n'
+                    // InternalVampireLanguage.g:2667:41: ( '\\r' )? '\\n'
                     {
-                    // InternalVampireLanguage.g:2698:41: ( '\\r' )?
+                    // InternalVampireLanguage.g:2667:41: ( '\\r' )?
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
@@ -2097,7 +2097,7 @@ public class InternalVampireLanguageLexer extends Lexer {
                     }
                     switch (alt23) {
                         case 1 :
-                            // InternalVampireLanguage.g:2698:41: '\\r'
+                            // InternalVampireLanguage.g:2667:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2129,10 +2129,10 @@ public class InternalVampireLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalVampireLanguage.g:2700:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalVampireLanguage.g:2700:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalVampireLanguage.g:2669:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalVampireLanguage.g:2669:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalVampireLanguage.g:2700:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalVampireLanguage.g:2669:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt25=0;
             loop25:
             do {
@@ -2652,7 +2652,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             this.transition = DFA8_transition;
         }
         public String getDescription() {
-            return "2678:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )";
+            return "2647:38: ( RULE_LITERAL | RULE_UNSIGNED_REAL_FRAC_ID )";
         }
     }
     static final String DFA11_eotS =
@@ -2708,7 +2708,7 @@ public class InternalVampireLanguageLexer extends Lexer {
             this.transition = DFA11_transition;
         }
         public String getDescription() {
-            return "2680:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )";
+            return "2649:34: ( RULE_UNSIGNED_REAL_FRAC_ID | RULE_UNSIGNED_REAL_EXP_ID )";
         }
     }
     static final String DFA26_eotS =

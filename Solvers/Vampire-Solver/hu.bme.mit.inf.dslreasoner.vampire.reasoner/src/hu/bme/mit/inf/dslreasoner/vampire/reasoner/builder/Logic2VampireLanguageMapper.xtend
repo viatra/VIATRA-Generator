@@ -143,7 +143,7 @@ class Logic2VampireLanguageMapper {
 	def dispatch protected VLSTerm transformTerm(And and, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 		support.unfoldAnd(and.operands.map[transformTerm(trace,variables)]) }
 	def dispatch protected VLSTerm transformTerm(Or or, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-		support.unfoldOr(or.operands.map[transformTerm(trace,variables)],trace) }
+		support.unfoldOr(or.operands.map[transformTerm(trace,variables)]) }
 	def dispatch protected VLSTerm transformTerm(Impl impl, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 		createVLSImplies => [left = impl.leftOperand.transformTerm(trace,variables) right = impl.rightOperand.transformTerm(trace,variables)] }
 	def dispatch protected VLSTerm transformTerm(Iff iff, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {

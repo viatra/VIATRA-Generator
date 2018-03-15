@@ -35,7 +35,7 @@ public class Logic2VampireLanguageMapper_Support {
     final Function1<String, String> _function = (String it) -> {
       return IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(it.split("\\s+"))), "\'");
     };
-    return IterableExtensions.join(ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(ids)), _function), "\'");
+    return IterableExtensions.join(ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(ids)), _function), "_");
   }
   
   protected String toID(final String ids) {
@@ -65,7 +65,7 @@ public class Logic2VampireLanguageMapper_Support {
     }
   }
   
-  protected VLSTerm unfoldOr(final List<? extends VLSTerm> operands, final Logic2VampireLanguageMapperTrace trace) {
+  protected VLSTerm unfoldOr(final List<? extends VLSTerm> operands) {
     int _size = operands.size();
     boolean _equals = (_size == 1);
     if (_equals) {
@@ -77,7 +77,7 @@ public class Logic2VampireLanguageMapper_Support {
         VLSOr _createVLSOr = this.factory.createVLSOr();
         final Procedure1<VLSOr> _function = (VLSOr it) -> {
           it.setLeft(IterableExtensions.head(operands));
-          it.setRight(this.unfoldOr(operands.subList(1, operands.size()), trace));
+          it.setRight(this.unfoldOr(operands.subList(1, operands.size())));
         };
         return ObjectExtensions.<VLSOr>operator_doubleArrow(_createVLSOr, _function);
       } else {

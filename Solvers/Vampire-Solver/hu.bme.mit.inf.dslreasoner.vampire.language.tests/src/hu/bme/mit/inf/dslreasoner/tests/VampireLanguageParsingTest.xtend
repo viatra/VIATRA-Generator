@@ -21,7 +21,6 @@ import hu.bme.mit.inf.dslreasoner.vampire.queries.util.VLSInequalityQuerySpecifi
 import hu.bme.mit.inf.dslreasoner.vampire.queries.util.VLSOrQuerySpecification
 import hu.bme.mit.inf.dslreasoner.vampire.queries.util.VLSUnaryNegationQuerySpecification
 import hu.bme.mit.inf.dslreasoner.vampire.queries.util.VLSUniversalQuantifierQuerySpecification
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSRole
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguageFactory
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage
@@ -173,7 +172,7 @@ class VampireLanguageParsingTest{
 		vampireModel.formulas.add(formula)
 		
 		formula.setName("posterPres");
-		formula.setFofRole(VLSRole.AXIOM)
+		formula.setFofRole("axiom")
 		val and = VampireLanguageFactory.eINSTANCE.createVLSAnd();
 		val lf = VampireLanguageFactory.eINSTANCE.createVLSFunction();
 		lf.setConstant("vivek")
@@ -233,7 +232,7 @@ class VampireLanguageParsingTest{
 		vampireModel.formulas.add(formula)
 		
 		formula.setName("formulaName")
-		formula.setFofRole(VLSRole.AXIOM)
+		formula.setFofRole("axiom")
 		
 		val exisQuant = VampireLanguageFactory.eINSTANCE.createVLSExistentialQuantifier()
 		val vrbl = VampireLanguageFactory.eINSTANCE.createVLSVariable()
@@ -255,7 +254,7 @@ class VampireLanguageParsingTest{
 		val annot = VampireLanguageFactory.eINSTANCE.createVLSAnnotation()
 		val closRl = VampireLanguageFactory.eINSTANCE.createVLSAnnotation()
 		closRl.setName("formulaAnnotation")
-		annot.setClosure_rule(closRl)
+		annot.setFollowup(closRl)
 		formula.setAnnotations(annot)
 		
 		// saving the results

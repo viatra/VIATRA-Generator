@@ -22,12 +22,16 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 	protected VampireLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_VLSAnnotation_LeftSquareBracketKeyword_0_q;
 	protected AbstractElementAlias match_VLSAnnotation_RightSquareBracketKeyword_3_q;
+	protected AbstractElementAlias match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a;
+	protected AbstractElementAlias match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (VampireLanguageGrammarAccess) access;
 		match_VLSAnnotation_LeftSquareBracketKeyword_0_q = new TokenAlias(false, true, grammarAccess.getVLSAnnotationAccess().getLeftSquareBracketKeyword_0());
 		match_VLSAnnotation_RightSquareBracketKeyword_3_q = new TokenAlias(false, true, grammarAccess.getVLSAnnotationAccess().getRightSquareBracketKeyword_3());
+		match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a = new TokenAlias(true, true, grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0());
+		match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p = new TokenAlias(true, false, grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0());
 	}
 	
 	@Override
@@ -46,6 +50,10 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 				emit_VLSAnnotation_LeftSquareBracketKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_VLSAnnotation_RightSquareBracketKeyword_3_q.equals(syntax))
 				emit_VLSAnnotation_RightSquareBracketKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a.equals(syntax))
+				emit_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p.equals(syntax))
+				emit_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -77,6 +85,66 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 	 *     name=VLSRole (ambiguity) (rule end)
 	 */
 	protected void emit_VLSAnnotation_RightSquareBracketKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '!' '[' variables+=VLSVariable
+	 *     (rule start) (ambiguity) '$false' (rule start)
+	 *     (rule start) (ambiguity) '$true' (rule start)
+	 *     (rule start) (ambiguity) '?' '[' variables+=VLSVariable
+	 *     (rule start) (ambiguity) '~' operand=VLSUnitaryFormula
+	 *     (rule start) (ambiguity) constant=DOLLAR_ID
+	 *     (rule start) (ambiguity) constant=DOUBLE_DOLLAR_ID
+	 *     (rule start) (ambiguity) constant=LOWER_WORD_ID
+	 *     (rule start) (ambiguity) constant=SINGLE_QUOTE
+	 *     (rule start) (ambiguity) constant=VLSRole
+	 *     (rule start) (ambiguity) name='$less'
+	 *     (rule start) (ambiguity) name=DOLLAR_ID
+	 *     (rule start) (ambiguity) name=DOUBLE_DOLLAR_ID
+	 *     (rule start) (ambiguity) name=LOWER_WORD_ID
+	 *     (rule start) (ambiguity) name=SINGLE_QUOTE
+	 *     (rule start) (ambiguity) name=UPPER_WORD_ID
+	 *     (rule start) (ambiguity) name=VLSRole
+	 *     (rule start) (ambiguity) value=DOUBLE_QUOTE
+	 *     (rule start) (ambiguity) value=SIGNED_LITERAL
+	 *     (rule start) (ambiguity) value=SIGNED_RAT_ID
+	 *     (rule start) (ambiguity) value=SIGNED_REAL_ID
+	 *     (rule start) (ambiguity) {VLSAnd.left=}
+	 *     (rule start) (ambiguity) {VLSAssignment.left=}
+	 *     (rule start) (ambiguity) {VLSEquality.left=}
+	 *     (rule start) (ambiguity) {VLSEquivalent.left=}
+	 *     (rule start) (ambiguity) {VLSImplies.left=}
+	 *     (rule start) (ambiguity) {VLSInequality.left=}
+	 *     (rule start) (ambiguity) {VLSNand.left=}
+	 *     (rule start) (ambiguity) {VLSNor.left=}
+	 *     (rule start) (ambiguity) {VLSOr.left=}
+	 *     (rule start) (ambiguity) {VLSRevImplies.left=}
+	 *     (rule start) (ambiguity) {VLSXnor.left=}
+	 */
+	protected void emit_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) {VLSAnd.left=}
+	 *     (rule start) (ambiguity) {VLSEquivalent.left=}
+	 *     (rule start) (ambiguity) {VLSImplies.left=}
+	 *     (rule start) (ambiguity) {VLSNand.left=}
+	 *     (rule start) (ambiguity) {VLSNor.left=}
+	 *     (rule start) (ambiguity) {VLSOr.left=}
+	 *     (rule start) (ambiguity) {VLSRevImplies.left=}
+	 *     (rule start) (ambiguity) {VLSXnor.left=}
+	 */
+	protected void emit_VLSUnitaryFormula_LeftParenthesisKeyword_4_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

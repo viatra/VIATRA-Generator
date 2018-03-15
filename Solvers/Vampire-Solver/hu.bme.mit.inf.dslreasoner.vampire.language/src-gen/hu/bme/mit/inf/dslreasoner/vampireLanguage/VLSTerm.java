@@ -10,12 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>VLS Term</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm#getTerm <em>Term</em>}</li>
- * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSTerm()
  * @model
@@ -23,30 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VLSTerm extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Term</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Term</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Term</em>' containment reference.
-   * @see #setTerm(VLSTerm)
-   * @see hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSTerm_Term()
-   * @model containment="true"
-   * @generated
-   */
-  VLSTerm getTerm();
-
-  /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm#getTerm <em>Term</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Term</em>' containment reference.
-   * @see #getTerm()
-   * @generated
-   */
-  void setTerm(VLSTerm value);
-
 } // VLSTerm

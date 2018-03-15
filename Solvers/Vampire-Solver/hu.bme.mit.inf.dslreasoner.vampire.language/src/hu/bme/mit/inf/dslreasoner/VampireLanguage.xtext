@@ -195,7 +195,7 @@ VLSBinary returns VLSTerm:
 VLSUnitaryFormula returns VLSTerm:
 	VLSUniversalQuantifier  | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix 
 	//| VLSEquality 
-	|  '(' term = VLSTerm ')'
+	|  '(' VLSTerm ')'
 ;
 
 VLSUniversalQuantifier  returns VLSTerm:
@@ -241,8 +241,8 @@ VLSAtomic returns VLSTerm:
 VLSAtomicConstant returns VLSTerm:
 	//{VLSConstant} name = VLSConstantDeclaration |
 	{VLSConstant} name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) |
-	{VLSTrue} name = '$true' |
-	{VLSFalse} name = '$false'
+	{VLSTrue} '$true' |
+	{VLSFalse} '$false'
 ;
 
 VLSAtomicFunction returns VLSTerm:

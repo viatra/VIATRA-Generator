@@ -3934,7 +3934,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSUnitaryFormula"
-    // InternalVampireLanguage.g:1430:1: ruleVLSUnitaryFormula returns [EObject current=null] : (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')' ) ) ;
+    // InternalVampireLanguage.g:1430:1: ruleVLSUnitaryFormula returns [EObject current=null] : (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')' ) ) ;
     public final EObject ruleVLSUnitaryFormula() throws RecognitionException {
         EObject current = null;
 
@@ -3948,17 +3948,17 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
         EObject this_VLSUnaryInfix_3 = null;
 
-        EObject lv_term_5_0 = null;
+        EObject this_VLSTerm_5 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1436:2: ( (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')' ) ) )
-            // InternalVampireLanguage.g:1437:2: (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')' ) )
+            // InternalVampireLanguage.g:1436:2: ( (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')' ) ) )
+            // InternalVampireLanguage.g:1437:2: (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')' ) )
             {
-            // InternalVampireLanguage.g:1437:2: (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')' ) )
+            // InternalVampireLanguage.g:1437:2: (this_VLSUniversalQuantifier_0= ruleVLSUniversalQuantifier | this_VLSExistentialQuantifier_1= ruleVLSExistentialQuantifier | this_VLSUnaryNegation_2= ruleVLSUnaryNegation | this_VLSUnaryInfix_3= ruleVLSUnaryInfix | (otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')' ) )
             int alt18=5;
             switch ( input.LA(1) ) {
             case 59:
@@ -4093,46 +4093,27 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalVampireLanguage.g:1474:3: (otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')' )
+                    // InternalVampireLanguage.g:1474:3: (otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')' )
                     {
-                    // InternalVampireLanguage.g:1474:3: (otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')' )
-                    // InternalVampireLanguage.g:1475:4: otherlv_4= '(' ( (lv_term_5_0= ruleVLSTerm ) ) otherlv_6= ')'
+                    // InternalVampireLanguage.g:1474:3: (otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')' )
+                    // InternalVampireLanguage.g:1475:4: otherlv_4= '(' this_VLSTerm_5= ruleVLSTerm otherlv_6= ')'
                     {
                     otherlv_4=(Token)match(input,32,FOLLOW_12); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0());
                     			
-                    // InternalVampireLanguage.g:1479:4: ( (lv_term_5_0= ruleVLSTerm ) )
-                    // InternalVampireLanguage.g:1480:5: (lv_term_5_0= ruleVLSTerm )
-                    {
-                    // InternalVampireLanguage.g:1480:5: (lv_term_5_0= ruleVLSTerm )
-                    // InternalVampireLanguage.g:1481:6: lv_term_5_0= ruleVLSTerm
-                    {
 
-                    						newCompositeNode(grammarAccess.getVLSUnitaryFormulaAccess().getTermVLSTermParserRuleCall_4_1_0());
-                    					
+                    				newCompositeNode(grammarAccess.getVLSUnitaryFormulaAccess().getVLSTermParserRuleCall_4_1());
+                    			
                     pushFollow(FOLLOW_15);
-                    lv_term_5_0=ruleVLSTerm();
+                    this_VLSTerm_5=ruleVLSTerm();
 
                     state._fsp--;
 
 
-                    						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getVLSUnitaryFormulaRule());
-                    						}
-                    						set(
-                    							current,
-                    							"term",
-                    							lv_term_5_0,
-                    							"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSTerm");
-                    						afterParserOrEnumRuleCall();
-                    					
-
-                    }
-
-
-                    }
-
+                    				current = this_VLSTerm_5;
+                    				afterParserOrEnumRuleCall();
+                    			
                     otherlv_6=(Token)match(input,33,FOLLOW_2); 
 
                     				newLeafNode(otherlv_6, grammarAccess.getVLSUnitaryFormulaAccess().getRightParenthesisKeyword_4_2());
@@ -4166,7 +4147,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSUniversalQuantifier"
-    // InternalVampireLanguage.g:1507:1: entryRuleVLSUniversalQuantifier returns [EObject current=null] : iv_ruleVLSUniversalQuantifier= ruleVLSUniversalQuantifier EOF ;
+    // InternalVampireLanguage.g:1496:1: entryRuleVLSUniversalQuantifier returns [EObject current=null] : iv_ruleVLSUniversalQuantifier= ruleVLSUniversalQuantifier EOF ;
     public final EObject entryRuleVLSUniversalQuantifier() throws RecognitionException {
         EObject current = null;
 
@@ -4174,8 +4155,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:1507:63: (iv_ruleVLSUniversalQuantifier= ruleVLSUniversalQuantifier EOF )
-            // InternalVampireLanguage.g:1508:2: iv_ruleVLSUniversalQuantifier= ruleVLSUniversalQuantifier EOF
+            // InternalVampireLanguage.g:1496:63: (iv_ruleVLSUniversalQuantifier= ruleVLSUniversalQuantifier EOF )
+            // InternalVampireLanguage.g:1497:2: iv_ruleVLSUniversalQuantifier= ruleVLSUniversalQuantifier EOF
             {
              newCompositeNode(grammarAccess.getVLSUniversalQuantifierRule()); 
             pushFollow(FOLLOW_1);
@@ -4202,7 +4183,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSUniversalQuantifier"
-    // InternalVampireLanguage.g:1514:1: ruleVLSUniversalQuantifier returns [EObject current=null] : ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) ;
+    // InternalVampireLanguage.g:1503:1: ruleVLSUniversalQuantifier returns [EObject current=null] : ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) ;
     public final EObject ruleVLSUniversalQuantifier() throws RecognitionException {
         EObject current = null;
 
@@ -4222,14 +4203,14 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1520:2: ( ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) )
-            // InternalVampireLanguage.g:1521:2: ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
+            // InternalVampireLanguage.g:1509:2: ( ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) )
+            // InternalVampireLanguage.g:1510:2: ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
             {
-            // InternalVampireLanguage.g:1521:2: ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
-            // InternalVampireLanguage.g:1522:3: () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:1510:2: ( () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
+            // InternalVampireLanguage.g:1511:3: () (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
             {
-            // InternalVampireLanguage.g:1522:3: ()
-            // InternalVampireLanguage.g:1523:4: 
+            // InternalVampireLanguage.g:1511:3: ()
+            // InternalVampireLanguage.g:1512:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4239,8 +4220,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:1529:3: (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' )
-            // InternalVampireLanguage.g:1530:4: otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':'
+            // InternalVampireLanguage.g:1518:3: (otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' )
+            // InternalVampireLanguage.g:1519:4: otherlv_1= '!' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':'
             {
             otherlv_1=(Token)match(input,59,FOLLOW_25); 
 
@@ -4250,11 +4231,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             				newLeafNode(otherlv_2, grammarAccess.getVLSUniversalQuantifierAccess().getLeftSquareBracketKeyword_1_1());
             			
-            // InternalVampireLanguage.g:1538:4: ( (lv_variables_3_0= ruleVLSVariable ) )
-            // InternalVampireLanguage.g:1539:5: (lv_variables_3_0= ruleVLSVariable )
+            // InternalVampireLanguage.g:1527:4: ( (lv_variables_3_0= ruleVLSVariable ) )
+            // InternalVampireLanguage.g:1528:5: (lv_variables_3_0= ruleVLSVariable )
             {
-            // InternalVampireLanguage.g:1539:5: (lv_variables_3_0= ruleVLSVariable )
-            // InternalVampireLanguage.g:1540:6: lv_variables_3_0= ruleVLSVariable
+            // InternalVampireLanguage.g:1528:5: (lv_variables_3_0= ruleVLSVariable )
+            // InternalVampireLanguage.g:1529:6: lv_variables_3_0= ruleVLSVariable
             {
 
             						newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0());
@@ -4281,7 +4262,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:1557:4: (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )*
+            // InternalVampireLanguage.g:1546:4: (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )*
             loop19:
             do {
                 int alt19=2;
@@ -4294,17 +4275,17 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                 switch (alt19) {
             	case 1 :
-            	    // InternalVampireLanguage.g:1558:5: otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) )
+            	    // InternalVampireLanguage.g:1547:5: otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) )
             	    {
             	    otherlv_4=(Token)match(input,29,FOLLOW_26); 
 
             	    					newLeafNode(otherlv_4, grammarAccess.getVLSUniversalQuantifierAccess().getCommaKeyword_1_3_0());
             	    				
-            	    // InternalVampireLanguage.g:1562:5: ( (lv_variables_5_0= ruleVLSVariable ) )
-            	    // InternalVampireLanguage.g:1563:6: (lv_variables_5_0= ruleVLSVariable )
+            	    // InternalVampireLanguage.g:1551:5: ( (lv_variables_5_0= ruleVLSVariable ) )
+            	    // InternalVampireLanguage.g:1552:6: (lv_variables_5_0= ruleVLSVariable )
             	    {
-            	    // InternalVampireLanguage.g:1563:6: (lv_variables_5_0= ruleVLSVariable )
-            	    // InternalVampireLanguage.g:1564:7: lv_variables_5_0= ruleVLSVariable
+            	    // InternalVampireLanguage.g:1552:6: (lv_variables_5_0= ruleVLSVariable )
+            	    // InternalVampireLanguage.g:1553:7: lv_variables_5_0= ruleVLSVariable
             	    {
 
             	    							newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0());
@@ -4351,11 +4332,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:1591:3: ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:1592:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:1580:3: ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:1581:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:1592:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:1593:5: lv_operand_8_0= ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:1581:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:1582:5: lv_operand_8_0= ruleVLSUnitaryFormula
             {
 
             					newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getOperandVLSUnitaryFormulaParserRuleCall_2_0());
@@ -4405,7 +4386,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSExistentialQuantifier"
-    // InternalVampireLanguage.g:1614:1: entryRuleVLSExistentialQuantifier returns [EObject current=null] : iv_ruleVLSExistentialQuantifier= ruleVLSExistentialQuantifier EOF ;
+    // InternalVampireLanguage.g:1603:1: entryRuleVLSExistentialQuantifier returns [EObject current=null] : iv_ruleVLSExistentialQuantifier= ruleVLSExistentialQuantifier EOF ;
     public final EObject entryRuleVLSExistentialQuantifier() throws RecognitionException {
         EObject current = null;
 
@@ -4413,8 +4394,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:1614:65: (iv_ruleVLSExistentialQuantifier= ruleVLSExistentialQuantifier EOF )
-            // InternalVampireLanguage.g:1615:2: iv_ruleVLSExistentialQuantifier= ruleVLSExistentialQuantifier EOF
+            // InternalVampireLanguage.g:1603:65: (iv_ruleVLSExistentialQuantifier= ruleVLSExistentialQuantifier EOF )
+            // InternalVampireLanguage.g:1604:2: iv_ruleVLSExistentialQuantifier= ruleVLSExistentialQuantifier EOF
             {
              newCompositeNode(grammarAccess.getVLSExistentialQuantifierRule()); 
             pushFollow(FOLLOW_1);
@@ -4441,7 +4422,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSExistentialQuantifier"
-    // InternalVampireLanguage.g:1621:1: ruleVLSExistentialQuantifier returns [EObject current=null] : ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) ;
+    // InternalVampireLanguage.g:1610:1: ruleVLSExistentialQuantifier returns [EObject current=null] : ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) ;
     public final EObject ruleVLSExistentialQuantifier() throws RecognitionException {
         EObject current = null;
 
@@ -4461,14 +4442,14 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1627:2: ( ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) )
-            // InternalVampireLanguage.g:1628:2: ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
+            // InternalVampireLanguage.g:1616:2: ( ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) ) )
+            // InternalVampireLanguage.g:1617:2: ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
             {
-            // InternalVampireLanguage.g:1628:2: ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
-            // InternalVampireLanguage.g:1629:3: () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:1617:2: ( () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) ) )
+            // InternalVampireLanguage.g:1618:3: () (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' ) ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
             {
-            // InternalVampireLanguage.g:1629:3: ()
-            // InternalVampireLanguage.g:1630:4: 
+            // InternalVampireLanguage.g:1618:3: ()
+            // InternalVampireLanguage.g:1619:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4478,8 +4459,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:1636:3: (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' )
-            // InternalVampireLanguage.g:1637:4: otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':'
+            // InternalVampireLanguage.g:1625:3: (otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':' )
+            // InternalVampireLanguage.g:1626:4: otherlv_1= '?' otherlv_2= '[' ( (lv_variables_3_0= ruleVLSVariable ) ) (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )* otherlv_6= ']' otherlv_7= ':'
             {
             otherlv_1=(Token)match(input,61,FOLLOW_25); 
 
@@ -4489,11 +4470,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             				newLeafNode(otherlv_2, grammarAccess.getVLSExistentialQuantifierAccess().getLeftSquareBracketKeyword_1_1());
             			
-            // InternalVampireLanguage.g:1645:4: ( (lv_variables_3_0= ruleVLSVariable ) )
-            // InternalVampireLanguage.g:1646:5: (lv_variables_3_0= ruleVLSVariable )
+            // InternalVampireLanguage.g:1634:4: ( (lv_variables_3_0= ruleVLSVariable ) )
+            // InternalVampireLanguage.g:1635:5: (lv_variables_3_0= ruleVLSVariable )
             {
-            // InternalVampireLanguage.g:1646:5: (lv_variables_3_0= ruleVLSVariable )
-            // InternalVampireLanguage.g:1647:6: lv_variables_3_0= ruleVLSVariable
+            // InternalVampireLanguage.g:1635:5: (lv_variables_3_0= ruleVLSVariable )
+            // InternalVampireLanguage.g:1636:6: lv_variables_3_0= ruleVLSVariable
             {
 
             						newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0());
@@ -4520,7 +4501,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:1664:4: (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )*
+            // InternalVampireLanguage.g:1653:4: (otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) ) )*
             loop20:
             do {
                 int alt20=2;
@@ -4533,17 +4514,17 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalVampireLanguage.g:1665:5: otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) )
+            	    // InternalVampireLanguage.g:1654:5: otherlv_4= ',' ( (lv_variables_5_0= ruleVLSVariable ) )
             	    {
             	    otherlv_4=(Token)match(input,29,FOLLOW_26); 
 
             	    					newLeafNode(otherlv_4, grammarAccess.getVLSExistentialQuantifierAccess().getCommaKeyword_1_3_0());
             	    				
-            	    // InternalVampireLanguage.g:1669:5: ( (lv_variables_5_0= ruleVLSVariable ) )
-            	    // InternalVampireLanguage.g:1670:6: (lv_variables_5_0= ruleVLSVariable )
+            	    // InternalVampireLanguage.g:1658:5: ( (lv_variables_5_0= ruleVLSVariable ) )
+            	    // InternalVampireLanguage.g:1659:6: (lv_variables_5_0= ruleVLSVariable )
             	    {
-            	    // InternalVampireLanguage.g:1670:6: (lv_variables_5_0= ruleVLSVariable )
-            	    // InternalVampireLanguage.g:1671:7: lv_variables_5_0= ruleVLSVariable
+            	    // InternalVampireLanguage.g:1659:6: (lv_variables_5_0= ruleVLSVariable )
+            	    // InternalVampireLanguage.g:1660:7: lv_variables_5_0= ruleVLSVariable
             	    {
 
             	    							newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0());
@@ -4590,11 +4571,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:1698:3: ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:1699:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:1687:3: ( (lv_operand_8_0= ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:1688:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:1699:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:1700:5: lv_operand_8_0= ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:1688:4: (lv_operand_8_0= ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:1689:5: lv_operand_8_0= ruleVLSUnitaryFormula
             {
 
             					newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getOperandVLSUnitaryFormulaParserRuleCall_2_0());
@@ -4644,7 +4625,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSUnaryNegation"
-    // InternalVampireLanguage.g:1721:1: entryRuleVLSUnaryNegation returns [EObject current=null] : iv_ruleVLSUnaryNegation= ruleVLSUnaryNegation EOF ;
+    // InternalVampireLanguage.g:1710:1: entryRuleVLSUnaryNegation returns [EObject current=null] : iv_ruleVLSUnaryNegation= ruleVLSUnaryNegation EOF ;
     public final EObject entryRuleVLSUnaryNegation() throws RecognitionException {
         EObject current = null;
 
@@ -4652,8 +4633,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:1721:57: (iv_ruleVLSUnaryNegation= ruleVLSUnaryNegation EOF )
-            // InternalVampireLanguage.g:1722:2: iv_ruleVLSUnaryNegation= ruleVLSUnaryNegation EOF
+            // InternalVampireLanguage.g:1710:57: (iv_ruleVLSUnaryNegation= ruleVLSUnaryNegation EOF )
+            // InternalVampireLanguage.g:1711:2: iv_ruleVLSUnaryNegation= ruleVLSUnaryNegation EOF
             {
              newCompositeNode(grammarAccess.getVLSUnaryNegationRule()); 
             pushFollow(FOLLOW_1);
@@ -4680,7 +4661,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSUnaryNegation"
-    // InternalVampireLanguage.g:1728:1: ruleVLSUnaryNegation returns [EObject current=null] : ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) ) ;
+    // InternalVampireLanguage.g:1717:1: ruleVLSUnaryNegation returns [EObject current=null] : ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) ) ;
     public final EObject ruleVLSUnaryNegation() throws RecognitionException {
         EObject current = null;
 
@@ -4692,14 +4673,14 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1734:2: ( ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) ) )
-            // InternalVampireLanguage.g:1735:2: ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) )
+            // InternalVampireLanguage.g:1723:2: ( ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) ) )
+            // InternalVampireLanguage.g:1724:2: ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) )
             {
-            // InternalVampireLanguage.g:1735:2: ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) )
-            // InternalVampireLanguage.g:1736:3: () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:1724:2: ( () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) ) )
+            // InternalVampireLanguage.g:1725:3: () otherlv_1= '~' ( (lv_operand_2_0= ruleVLSUnitaryFormula ) )
             {
-            // InternalVampireLanguage.g:1736:3: ()
-            // InternalVampireLanguage.g:1737:4: 
+            // InternalVampireLanguage.g:1725:3: ()
+            // InternalVampireLanguage.g:1726:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4713,11 +4694,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getVLSUnaryNegationAccess().getTildeKeyword_1());
             		
-            // InternalVampireLanguage.g:1747:3: ( (lv_operand_2_0= ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:1748:4: (lv_operand_2_0= ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:1736:3: ( (lv_operand_2_0= ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:1737:4: (lv_operand_2_0= ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:1748:4: (lv_operand_2_0= ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:1749:5: lv_operand_2_0= ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:1737:4: (lv_operand_2_0= ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:1738:5: lv_operand_2_0= ruleVLSUnitaryFormula
             {
 
             					newCompositeNode(grammarAccess.getVLSUnaryNegationAccess().getOperandVLSUnitaryFormulaParserRuleCall_2_0());
@@ -4767,7 +4748,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSUnaryInfix"
-    // InternalVampireLanguage.g:1770:1: entryRuleVLSUnaryInfix returns [EObject current=null] : iv_ruleVLSUnaryInfix= ruleVLSUnaryInfix EOF ;
+    // InternalVampireLanguage.g:1759:1: entryRuleVLSUnaryInfix returns [EObject current=null] : iv_ruleVLSUnaryInfix= ruleVLSUnaryInfix EOF ;
     public final EObject entryRuleVLSUnaryInfix() throws RecognitionException {
         EObject current = null;
 
@@ -4775,8 +4756,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:1770:54: (iv_ruleVLSUnaryInfix= ruleVLSUnaryInfix EOF )
-            // InternalVampireLanguage.g:1771:2: iv_ruleVLSUnaryInfix= ruleVLSUnaryInfix EOF
+            // InternalVampireLanguage.g:1759:54: (iv_ruleVLSUnaryInfix= ruleVLSUnaryInfix EOF )
+            // InternalVampireLanguage.g:1760:2: iv_ruleVLSUnaryInfix= ruleVLSUnaryInfix EOF
             {
              newCompositeNode(grammarAccess.getVLSUnaryInfixRule()); 
             pushFollow(FOLLOW_1);
@@ -4803,7 +4784,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSUnaryInfix"
-    // InternalVampireLanguage.g:1777:1: ruleVLSUnaryInfix returns [EObject current=null] : (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? ) ;
+    // InternalVampireLanguage.g:1766:1: ruleVLSUnaryInfix returns [EObject current=null] : (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? ) ;
     public final EObject ruleVLSUnaryInfix() throws RecognitionException {
         EObject current = null;
 
@@ -4819,11 +4800,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1783:2: ( (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? ) )
-            // InternalVampireLanguage.g:1784:2: (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? )
+            // InternalVampireLanguage.g:1772:2: ( (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? ) )
+            // InternalVampireLanguage.g:1773:2: (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? )
             {
-            // InternalVampireLanguage.g:1784:2: (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? )
-            // InternalVampireLanguage.g:1785:3: this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )?
+            // InternalVampireLanguage.g:1773:2: (this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )? )
+            // InternalVampireLanguage.g:1774:3: this_VLSAtomic_0= ruleVLSAtomic ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )?
             {
 
             			newCompositeNode(grammarAccess.getVLSUnaryInfixAccess().getVLSAtomicParserRuleCall_0());
@@ -4837,7 +4818,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
             			current = this_VLSAtomic_0;
             			afterParserOrEnumRuleCall();
             		
-            // InternalVampireLanguage.g:1793:3: ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )?
+            // InternalVampireLanguage.g:1782:3: ( ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -4846,9 +4827,9 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt22) {
                 case 1 :
-                    // InternalVampireLanguage.g:1794:4: ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) )
+                    // InternalVampireLanguage.g:1783:4: ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) ) ( (lv_right_7_0= ruleVLSAtomic ) )
                     {
-                    // InternalVampireLanguage.g:1794:4: ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) )
+                    // InternalVampireLanguage.g:1783:4: ( ( () otherlv_2= '!=' ) | ( () otherlv_4= '=' ) | ( () otherlv_6= ':=' ) )
                     int alt21=3;
                     switch ( input.LA(1) ) {
                     case 63:
@@ -4875,13 +4856,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     switch (alt21) {
                         case 1 :
-                            // InternalVampireLanguage.g:1795:5: ( () otherlv_2= '!=' )
+                            // InternalVampireLanguage.g:1784:5: ( () otherlv_2= '!=' )
                             {
-                            // InternalVampireLanguage.g:1795:5: ( () otherlv_2= '!=' )
-                            // InternalVampireLanguage.g:1796:6: () otherlv_2= '!='
+                            // InternalVampireLanguage.g:1784:5: ( () otherlv_2= '!=' )
+                            // InternalVampireLanguage.g:1785:6: () otherlv_2= '!='
                             {
-                            // InternalVampireLanguage.g:1796:6: ()
-                            // InternalVampireLanguage.g:1797:7: 
+                            // InternalVampireLanguage.g:1785:6: ()
+                            // InternalVampireLanguage.g:1786:7: 
                             {
 
                             							current = forceCreateModelElementAndSet(
@@ -4902,13 +4883,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalVampireLanguage.g:1809:5: ( () otherlv_4= '=' )
+                            // InternalVampireLanguage.g:1798:5: ( () otherlv_4= '=' )
                             {
-                            // InternalVampireLanguage.g:1809:5: ( () otherlv_4= '=' )
-                            // InternalVampireLanguage.g:1810:6: () otherlv_4= '='
+                            // InternalVampireLanguage.g:1798:5: ( () otherlv_4= '=' )
+                            // InternalVampireLanguage.g:1799:6: () otherlv_4= '='
                             {
-                            // InternalVampireLanguage.g:1810:6: ()
-                            // InternalVampireLanguage.g:1811:7: 
+                            // InternalVampireLanguage.g:1799:6: ()
+                            // InternalVampireLanguage.g:1800:7: 
                             {
 
                             							current = forceCreateModelElementAndSet(
@@ -4929,13 +4910,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalVampireLanguage.g:1823:5: ( () otherlv_6= ':=' )
+                            // InternalVampireLanguage.g:1812:5: ( () otherlv_6= ':=' )
                             {
-                            // InternalVampireLanguage.g:1823:5: ( () otherlv_6= ':=' )
-                            // InternalVampireLanguage.g:1824:6: () otherlv_6= ':='
+                            // InternalVampireLanguage.g:1812:5: ( () otherlv_6= ':=' )
+                            // InternalVampireLanguage.g:1813:6: () otherlv_6= ':='
                             {
-                            // InternalVampireLanguage.g:1824:6: ()
-                            // InternalVampireLanguage.g:1825:7: 
+                            // InternalVampireLanguage.g:1813:6: ()
+                            // InternalVampireLanguage.g:1814:7: 
                             {
 
                             							current = forceCreateModelElementAndSet(
@@ -4958,11 +4939,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:1837:4: ( (lv_right_7_0= ruleVLSAtomic ) )
-                    // InternalVampireLanguage.g:1838:5: (lv_right_7_0= ruleVLSAtomic )
+                    // InternalVampireLanguage.g:1826:4: ( (lv_right_7_0= ruleVLSAtomic ) )
+                    // InternalVampireLanguage.g:1827:5: (lv_right_7_0= ruleVLSAtomic )
                     {
-                    // InternalVampireLanguage.g:1838:5: (lv_right_7_0= ruleVLSAtomic )
-                    // InternalVampireLanguage.g:1839:6: lv_right_7_0= ruleVLSAtomic
+                    // InternalVampireLanguage.g:1827:5: (lv_right_7_0= ruleVLSAtomic )
+                    // InternalVampireLanguage.g:1828:6: lv_right_7_0= ruleVLSAtomic
                     {
 
                     						newCompositeNode(grammarAccess.getVLSUnaryInfixAccess().getRightVLSAtomicParserRuleCall_1_1_0());
@@ -5018,7 +4999,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSAtomic"
-    // InternalVampireLanguage.g:1861:1: entryRuleVLSAtomic returns [EObject current=null] : iv_ruleVLSAtomic= ruleVLSAtomic EOF ;
+    // InternalVampireLanguage.g:1850:1: entryRuleVLSAtomic returns [EObject current=null] : iv_ruleVLSAtomic= ruleVLSAtomic EOF ;
     public final EObject entryRuleVLSAtomic() throws RecognitionException {
         EObject current = null;
 
@@ -5026,8 +5007,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:1861:50: (iv_ruleVLSAtomic= ruleVLSAtomic EOF )
-            // InternalVampireLanguage.g:1862:2: iv_ruleVLSAtomic= ruleVLSAtomic EOF
+            // InternalVampireLanguage.g:1850:50: (iv_ruleVLSAtomic= ruleVLSAtomic EOF )
+            // InternalVampireLanguage.g:1851:2: iv_ruleVLSAtomic= ruleVLSAtomic EOF
             {
              newCompositeNode(grammarAccess.getVLSAtomicRule()); 
             pushFollow(FOLLOW_1);
@@ -5054,7 +5035,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSAtomic"
-    // InternalVampireLanguage.g:1868:1: ruleVLSAtomic returns [EObject current=null] : (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm ) ;
+    // InternalVampireLanguage.g:1857:1: ruleVLSAtomic returns [EObject current=null] : (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm ) ;
     public final EObject ruleVLSAtomic() throws RecognitionException {
         EObject current = null;
 
@@ -5071,15 +5052,15 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1874:2: ( (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm ) )
-            // InternalVampireLanguage.g:1875:2: (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm )
+            // InternalVampireLanguage.g:1863:2: ( (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm ) )
+            // InternalVampireLanguage.g:1864:2: (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm )
             {
-            // InternalVampireLanguage.g:1875:2: (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm )
+            // InternalVampireLanguage.g:1864:2: (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm )
             int alt23=4;
             alt23 = dfa23.predict(input);
             switch (alt23) {
                 case 1 :
-                    // InternalVampireLanguage.g:1876:3: this_VLSAtomicConstant_0= ruleVLSAtomicConstant
+                    // InternalVampireLanguage.g:1865:3: this_VLSAtomicConstant_0= ruleVLSAtomicConstant
                     {
 
                     			newCompositeNode(grammarAccess.getVLSAtomicAccess().getVLSAtomicConstantParserRuleCall_0());
@@ -5097,7 +5078,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:1885:3: this_VLSAtomicFunction_1= ruleVLSAtomicFunction
+                    // InternalVampireLanguage.g:1874:3: this_VLSAtomicFunction_1= ruleVLSAtomicFunction
                     {
 
                     			newCompositeNode(grammarAccess.getVLSAtomicAccess().getVLSAtomicFunctionParserRuleCall_1());
@@ -5115,7 +5096,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalVampireLanguage.g:1894:3: this_VLSVariable_2= ruleVLSVariable
+                    // InternalVampireLanguage.g:1883:3: this_VLSVariable_2= ruleVLSVariable
                     {
 
                     			newCompositeNode(grammarAccess.getVLSAtomicAccess().getVLSVariableParserRuleCall_2());
@@ -5133,7 +5114,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalVampireLanguage.g:1903:3: this_VLSDefinedTerm_3= ruleVLSDefinedTerm
+                    // InternalVampireLanguage.g:1892:3: this_VLSDefinedTerm_3= ruleVLSDefinedTerm
                     {
 
                     			newCompositeNode(grammarAccess.getVLSAtomicAccess().getVLSDefinedTermParserRuleCall_3());
@@ -5173,7 +5154,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSAtomicConstant"
-    // InternalVampireLanguage.g:1915:1: entryRuleVLSAtomicConstant returns [EObject current=null] : iv_ruleVLSAtomicConstant= ruleVLSAtomicConstant EOF ;
+    // InternalVampireLanguage.g:1904:1: entryRuleVLSAtomicConstant returns [EObject current=null] : iv_ruleVLSAtomicConstant= ruleVLSAtomicConstant EOF ;
     public final EObject entryRuleVLSAtomicConstant() throws RecognitionException {
         EObject current = null;
 
@@ -5181,8 +5162,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:1915:58: (iv_ruleVLSAtomicConstant= ruleVLSAtomicConstant EOF )
-            // InternalVampireLanguage.g:1916:2: iv_ruleVLSAtomicConstant= ruleVLSAtomicConstant EOF
+            // InternalVampireLanguage.g:1904:58: (iv_ruleVLSAtomicConstant= ruleVLSAtomicConstant EOF )
+            // InternalVampireLanguage.g:1905:2: iv_ruleVLSAtomicConstant= ruleVLSAtomicConstant EOF
             {
              newCompositeNode(grammarAccess.getVLSAtomicConstantRule()); 
             pushFollow(FOLLOW_1);
@@ -5209,7 +5190,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSAtomicConstant"
-    // InternalVampireLanguage.g:1922:1: ruleVLSAtomicConstant returns [EObject current=null] : ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () ( (lv_name_3_0= '$true' ) ) ) | ( () ( (lv_name_5_0= '$false' ) ) ) ) ;
+    // InternalVampireLanguage.g:1911:1: ruleVLSAtomicConstant returns [EObject current=null] : ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () otherlv_3= '$true' ) | ( () otherlv_5= '$false' ) ) ;
     public final EObject ruleVLSAtomicConstant() throws RecognitionException {
         EObject current = null;
 
@@ -5217,8 +5198,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         Token lv_name_1_2=null;
         Token lv_name_1_3=null;
         Token lv_name_1_4=null;
-        Token lv_name_3_0=null;
-        Token lv_name_5_0=null;
+        Token otherlv_3=null;
+        Token otherlv_5=null;
         AntlrDatatypeRuleToken lv_name_1_5 = null;
 
 
@@ -5226,10 +5207,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:1928:2: ( ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () ( (lv_name_3_0= '$true' ) ) ) | ( () ( (lv_name_5_0= '$false' ) ) ) ) )
-            // InternalVampireLanguage.g:1929:2: ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () ( (lv_name_3_0= '$true' ) ) ) | ( () ( (lv_name_5_0= '$false' ) ) ) )
+            // InternalVampireLanguage.g:1917:2: ( ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () otherlv_3= '$true' ) | ( () otherlv_5= '$false' ) ) )
+            // InternalVampireLanguage.g:1918:2: ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () otherlv_3= '$true' ) | ( () otherlv_5= '$false' ) )
             {
-            // InternalVampireLanguage.g:1929:2: ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () ( (lv_name_3_0= '$true' ) ) ) | ( () ( (lv_name_5_0= '$false' ) ) ) )
+            // InternalVampireLanguage.g:1918:2: ( ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) ) | ( () otherlv_3= '$true' ) | ( () otherlv_5= '$false' ) )
             int alt25=3;
             switch ( input.LA(1) ) {
             case RULE_SINGLE_QUOTE:
@@ -5274,13 +5255,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt25) {
                 case 1 :
-                    // InternalVampireLanguage.g:1930:3: ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) )
+                    // InternalVampireLanguage.g:1919:3: ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) )
                     {
-                    // InternalVampireLanguage.g:1930:3: ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) )
-                    // InternalVampireLanguage.g:1931:4: () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) )
+                    // InternalVampireLanguage.g:1919:3: ( () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) ) )
+                    // InternalVampireLanguage.g:1920:4: () ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) )
                     {
-                    // InternalVampireLanguage.g:1931:4: ()
-                    // InternalVampireLanguage.g:1932:5: 
+                    // InternalVampireLanguage.g:1920:4: ()
+                    // InternalVampireLanguage.g:1921:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -5290,13 +5271,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:1938:4: ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) )
-                    // InternalVampireLanguage.g:1939:5: ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) )
+                    // InternalVampireLanguage.g:1927:4: ( ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) ) )
+                    // InternalVampireLanguage.g:1928:5: ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) )
                     {
-                    // InternalVampireLanguage.g:1939:5: ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) )
-                    // InternalVampireLanguage.g:1940:6: (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole )
+                    // InternalVampireLanguage.g:1928:5: ( (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole ) )
+                    // InternalVampireLanguage.g:1929:6: (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole )
                     {
-                    // InternalVampireLanguage.g:1940:6: (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole )
+                    // InternalVampireLanguage.g:1929:6: (lv_name_1_1= RULE_LOWER_WORD_ID | lv_name_1_2= RULE_SINGLE_QUOTE | lv_name_1_3= RULE_DOLLAR_ID | lv_name_1_4= RULE_DOUBLE_DOLLAR_ID | lv_name_1_5= ruleVLSRole )
                     int alt24=5;
                     switch ( input.LA(1) ) {
                     case RULE_LOWER_WORD_ID:
@@ -5347,7 +5328,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     switch (alt24) {
                         case 1 :
-                            // InternalVampireLanguage.g:1941:7: lv_name_1_1= RULE_LOWER_WORD_ID
+                            // InternalVampireLanguage.g:1930:7: lv_name_1_1= RULE_LOWER_WORD_ID
                             {
                             lv_name_1_1=(Token)match(input,RULE_LOWER_WORD_ID,FOLLOW_2); 
 
@@ -5367,7 +5348,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalVampireLanguage.g:1956:7: lv_name_1_2= RULE_SINGLE_QUOTE
+                            // InternalVampireLanguage.g:1945:7: lv_name_1_2= RULE_SINGLE_QUOTE
                             {
                             lv_name_1_2=(Token)match(input,RULE_SINGLE_QUOTE,FOLLOW_2); 
 
@@ -5387,7 +5368,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalVampireLanguage.g:1971:7: lv_name_1_3= RULE_DOLLAR_ID
+                            // InternalVampireLanguage.g:1960:7: lv_name_1_3= RULE_DOLLAR_ID
                             {
                             lv_name_1_3=(Token)match(input,RULE_DOLLAR_ID,FOLLOW_2); 
 
@@ -5407,7 +5388,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalVampireLanguage.g:1986:7: lv_name_1_4= RULE_DOUBLE_DOLLAR_ID
+                            // InternalVampireLanguage.g:1975:7: lv_name_1_4= RULE_DOUBLE_DOLLAR_ID
                             {
                             lv_name_1_4=(Token)match(input,RULE_DOUBLE_DOLLAR_ID,FOLLOW_2); 
 
@@ -5427,7 +5408,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalVampireLanguage.g:2001:7: lv_name_1_5= ruleVLSRole
+                            // InternalVampireLanguage.g:1990:7: lv_name_1_5= ruleVLSRole
                             {
 
                             							newCompositeNode(grammarAccess.getVLSAtomicConstantAccess().getNameVLSRoleParserRuleCall_0_1_0_4());
@@ -5467,13 +5448,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2021:3: ( () ( (lv_name_3_0= '$true' ) ) )
+                    // InternalVampireLanguage.g:2010:3: ( () otherlv_3= '$true' )
                     {
-                    // InternalVampireLanguage.g:2021:3: ( () ( (lv_name_3_0= '$true' ) ) )
-                    // InternalVampireLanguage.g:2022:4: () ( (lv_name_3_0= '$true' ) )
+                    // InternalVampireLanguage.g:2010:3: ( () otherlv_3= '$true' )
+                    // InternalVampireLanguage.g:2011:4: () otherlv_3= '$true'
                     {
-                    // InternalVampireLanguage.g:2022:4: ()
-                    // InternalVampireLanguage.g:2023:5: 
+                    // InternalVampireLanguage.g:2011:4: ()
+                    // InternalVampireLanguage.g:2012:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -5483,28 +5464,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2029:4: ( (lv_name_3_0= '$true' ) )
-                    // InternalVampireLanguage.g:2030:5: (lv_name_3_0= '$true' )
-                    {
-                    // InternalVampireLanguage.g:2030:5: (lv_name_3_0= '$true' )
-                    // InternalVampireLanguage.g:2031:6: lv_name_3_0= '$true'
-                    {
-                    lv_name_3_0=(Token)match(input,66,FOLLOW_2); 
+                    otherlv_3=(Token)match(input,66,FOLLOW_2); 
 
-                    						newLeafNode(lv_name_3_0, grammarAccess.getVLSAtomicConstantAccess().getNameTrueKeyword_1_1_0());
-                    					
-
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getVLSAtomicConstantRule());
-                    						}
-                    						setWithLastConsumed(current, "name", lv_name_3_0, "$true");
-                    					
-
-                    }
-
-
-                    }
-
+                    				newLeafNode(otherlv_3, grammarAccess.getVLSAtomicConstantAccess().getTrueKeyword_1_1());
+                    			
 
                     }
 
@@ -5512,13 +5475,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalVampireLanguage.g:2045:3: ( () ( (lv_name_5_0= '$false' ) ) )
+                    // InternalVampireLanguage.g:2024:3: ( () otherlv_5= '$false' )
                     {
-                    // InternalVampireLanguage.g:2045:3: ( () ( (lv_name_5_0= '$false' ) ) )
-                    // InternalVampireLanguage.g:2046:4: () ( (lv_name_5_0= '$false' ) )
+                    // InternalVampireLanguage.g:2024:3: ( () otherlv_5= '$false' )
+                    // InternalVampireLanguage.g:2025:4: () otherlv_5= '$false'
                     {
-                    // InternalVampireLanguage.g:2046:4: ()
-                    // InternalVampireLanguage.g:2047:5: 
+                    // InternalVampireLanguage.g:2025:4: ()
+                    // InternalVampireLanguage.g:2026:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -5528,28 +5491,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2053:4: ( (lv_name_5_0= '$false' ) )
-                    // InternalVampireLanguage.g:2054:5: (lv_name_5_0= '$false' )
-                    {
-                    // InternalVampireLanguage.g:2054:5: (lv_name_5_0= '$false' )
-                    // InternalVampireLanguage.g:2055:6: lv_name_5_0= '$false'
-                    {
-                    lv_name_5_0=(Token)match(input,67,FOLLOW_2); 
+                    otherlv_5=(Token)match(input,67,FOLLOW_2); 
 
-                    						newLeafNode(lv_name_5_0, grammarAccess.getVLSAtomicConstantAccess().getNameFalseKeyword_2_1_0());
-                    					
-
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getVLSAtomicConstantRule());
-                    						}
-                    						setWithLastConsumed(current, "name", lv_name_5_0, "$false");
-                    					
-
-                    }
-
-
-                    }
-
+                    				newLeafNode(otherlv_5, grammarAccess.getVLSAtomicConstantAccess().getFalseKeyword_2_1());
+                    			
 
                     }
 
@@ -5579,7 +5524,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSAtomicFunction"
-    // InternalVampireLanguage.g:2072:1: entryRuleVLSAtomicFunction returns [EObject current=null] : iv_ruleVLSAtomicFunction= ruleVLSAtomicFunction EOF ;
+    // InternalVampireLanguage.g:2041:1: entryRuleVLSAtomicFunction returns [EObject current=null] : iv_ruleVLSAtomicFunction= ruleVLSAtomicFunction EOF ;
     public final EObject entryRuleVLSAtomicFunction() throws RecognitionException {
         EObject current = null;
 
@@ -5587,8 +5532,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:2072:58: (iv_ruleVLSAtomicFunction= ruleVLSAtomicFunction EOF )
-            // InternalVampireLanguage.g:2073:2: iv_ruleVLSAtomicFunction= ruleVLSAtomicFunction EOF
+            // InternalVampireLanguage.g:2041:58: (iv_ruleVLSAtomicFunction= ruleVLSAtomicFunction EOF )
+            // InternalVampireLanguage.g:2042:2: iv_ruleVLSAtomicFunction= ruleVLSAtomicFunction EOF
             {
              newCompositeNode(grammarAccess.getVLSAtomicFunctionRule()); 
             pushFollow(FOLLOW_1);
@@ -5615,7 +5560,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSAtomicFunction"
-    // InternalVampireLanguage.g:2079:1: ruleVLSAtomicFunction returns [EObject current=null] : ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) ) ;
+    // InternalVampireLanguage.g:2048:1: ruleVLSAtomicFunction returns [EObject current=null] : ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) ) ;
     public final EObject ruleVLSAtomicFunction() throws RecognitionException {
         EObject current = null;
 
@@ -5645,10 +5590,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:2085:2: ( ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) ) )
-            // InternalVampireLanguage.g:2086:2: ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) )
+            // InternalVampireLanguage.g:2054:2: ( ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) ) )
+            // InternalVampireLanguage.g:2055:2: ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) )
             {
-            // InternalVampireLanguage.g:2086:2: ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) )
+            // InternalVampireLanguage.g:2055:2: ( ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) ) | ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' ) )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -5666,13 +5611,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt28) {
                 case 1 :
-                    // InternalVampireLanguage.g:2087:3: ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) )
+                    // InternalVampireLanguage.g:2056:3: ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) )
                     {
-                    // InternalVampireLanguage.g:2087:3: ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) )
-                    // InternalVampireLanguage.g:2088:4: () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' )
+                    // InternalVampireLanguage.g:2056:3: ( () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' ) )
+                    // InternalVampireLanguage.g:2057:4: () ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) ) (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' )
                     {
-                    // InternalVampireLanguage.g:2088:4: ()
-                    // InternalVampireLanguage.g:2089:5: 
+                    // InternalVampireLanguage.g:2057:4: ()
+                    // InternalVampireLanguage.g:2058:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -5682,13 +5627,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2095:4: ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) )
-                    // InternalVampireLanguage.g:2096:5: ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) )
+                    // InternalVampireLanguage.g:2064:4: ( ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) ) )
+                    // InternalVampireLanguage.g:2065:5: ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) )
                     {
-                    // InternalVampireLanguage.g:2096:5: ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) )
-                    // InternalVampireLanguage.g:2097:6: (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole )
+                    // InternalVampireLanguage.g:2065:5: ( (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole ) )
+                    // InternalVampireLanguage.g:2066:6: (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole )
                     {
-                    // InternalVampireLanguage.g:2097:6: (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole )
+                    // InternalVampireLanguage.g:2066:6: (lv_constant_1_1= RULE_LOWER_WORD_ID | lv_constant_1_2= RULE_SINGLE_QUOTE | lv_constant_1_3= RULE_DOLLAR_ID | lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID | lv_constant_1_5= ruleVLSRole )
                     int alt26=5;
                     switch ( input.LA(1) ) {
                     case RULE_LOWER_WORD_ID:
@@ -5739,7 +5684,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     switch (alt26) {
                         case 1 :
-                            // InternalVampireLanguage.g:2098:7: lv_constant_1_1= RULE_LOWER_WORD_ID
+                            // InternalVampireLanguage.g:2067:7: lv_constant_1_1= RULE_LOWER_WORD_ID
                             {
                             lv_constant_1_1=(Token)match(input,RULE_LOWER_WORD_ID,FOLLOW_8); 
 
@@ -5759,7 +5704,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalVampireLanguage.g:2113:7: lv_constant_1_2= RULE_SINGLE_QUOTE
+                            // InternalVampireLanguage.g:2082:7: lv_constant_1_2= RULE_SINGLE_QUOTE
                             {
                             lv_constant_1_2=(Token)match(input,RULE_SINGLE_QUOTE,FOLLOW_8); 
 
@@ -5779,7 +5724,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalVampireLanguage.g:2128:7: lv_constant_1_3= RULE_DOLLAR_ID
+                            // InternalVampireLanguage.g:2097:7: lv_constant_1_3= RULE_DOLLAR_ID
                             {
                             lv_constant_1_3=(Token)match(input,RULE_DOLLAR_ID,FOLLOW_8); 
 
@@ -5799,7 +5744,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalVampireLanguage.g:2143:7: lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID
+                            // InternalVampireLanguage.g:2112:7: lv_constant_1_4= RULE_DOUBLE_DOLLAR_ID
                             {
                             lv_constant_1_4=(Token)match(input,RULE_DOUBLE_DOLLAR_ID,FOLLOW_8); 
 
@@ -5819,7 +5764,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalVampireLanguage.g:2158:7: lv_constant_1_5= ruleVLSRole
+                            // InternalVampireLanguage.g:2127:7: lv_constant_1_5= ruleVLSRole
                             {
 
                             							newCompositeNode(grammarAccess.getVLSAtomicFunctionAccess().getConstantVLSRoleParserRuleCall_0_1_0_4());
@@ -5852,18 +5797,18 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2176:4: (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' )
-                    // InternalVampireLanguage.g:2177:5: otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')'
+                    // InternalVampireLanguage.g:2145:4: (otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')' )
+                    // InternalVampireLanguage.g:2146:5: otherlv_2= '(' ( (lv_terms_3_0= ruleVLSFofTerm ) ) (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )* otherlv_6= ')'
                     {
                     otherlv_2=(Token)match(input,32,FOLLOW_29); 
 
                     					newLeafNode(otherlv_2, grammarAccess.getVLSAtomicFunctionAccess().getLeftParenthesisKeyword_0_2_0());
                     				
-                    // InternalVampireLanguage.g:2181:5: ( (lv_terms_3_0= ruleVLSFofTerm ) )
-                    // InternalVampireLanguage.g:2182:6: (lv_terms_3_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2150:5: ( (lv_terms_3_0= ruleVLSFofTerm ) )
+                    // InternalVampireLanguage.g:2151:6: (lv_terms_3_0= ruleVLSFofTerm )
                     {
-                    // InternalVampireLanguage.g:2182:6: (lv_terms_3_0= ruleVLSFofTerm )
-                    // InternalVampireLanguage.g:2183:7: lv_terms_3_0= ruleVLSFofTerm
+                    // InternalVampireLanguage.g:2151:6: (lv_terms_3_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2152:7: lv_terms_3_0= ruleVLSFofTerm
                     {
 
                     							newCompositeNode(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_0_2_1_0());
@@ -5890,7 +5835,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2200:5: (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )*
+                    // InternalVampireLanguage.g:2169:5: (otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) ) )*
                     loop27:
                     do {
                         int alt27=2;
@@ -5903,17 +5848,17 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt27) {
                     	case 1 :
-                    	    // InternalVampireLanguage.g:2201:6: otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) )
+                    	    // InternalVampireLanguage.g:2170:6: otherlv_4= ',' ( (lv_terms_5_0= ruleVLSFofTerm ) )
                     	    {
                     	    otherlv_4=(Token)match(input,29,FOLLOW_29); 
 
                     	    						newLeafNode(otherlv_4, grammarAccess.getVLSAtomicFunctionAccess().getCommaKeyword_0_2_2_0());
                     	    					
-                    	    // InternalVampireLanguage.g:2205:6: ( (lv_terms_5_0= ruleVLSFofTerm ) )
-                    	    // InternalVampireLanguage.g:2206:7: (lv_terms_5_0= ruleVLSFofTerm )
+                    	    // InternalVampireLanguage.g:2174:6: ( (lv_terms_5_0= ruleVLSFofTerm ) )
+                    	    // InternalVampireLanguage.g:2175:7: (lv_terms_5_0= ruleVLSFofTerm )
                     	    {
-                    	    // InternalVampireLanguage.g:2206:7: (lv_terms_5_0= ruleVLSFofTerm )
-                    	    // InternalVampireLanguage.g:2207:8: lv_terms_5_0= ruleVLSFofTerm
+                    	    // InternalVampireLanguage.g:2175:7: (lv_terms_5_0= ruleVLSFofTerm )
+                    	    // InternalVampireLanguage.g:2176:8: lv_terms_5_0= ruleVLSFofTerm
                     	    {
 
                     	    								newCompositeNode(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_0_2_2_1_0());
@@ -5963,13 +5908,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2232:3: ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' )
+                    // InternalVampireLanguage.g:2201:3: ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' )
                     {
-                    // InternalVampireLanguage.g:2232:3: ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' )
-                    // InternalVampireLanguage.g:2233:4: () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')'
+                    // InternalVampireLanguage.g:2201:3: ( () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')' )
+                    // InternalVampireLanguage.g:2202:4: () ( (lv_name_8_0= '$less' ) ) otherlv_9= '(' ( (lv_terms_10_0= ruleVLSFofTerm ) ) otherlv_11= ',' ( (lv_terms_12_0= ruleVLSFofTerm ) ) otherlv_13= ')'
                     {
-                    // InternalVampireLanguage.g:2233:4: ()
-                    // InternalVampireLanguage.g:2234:5: 
+                    // InternalVampireLanguage.g:2202:4: ()
+                    // InternalVampireLanguage.g:2203:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -5979,11 +5924,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2240:4: ( (lv_name_8_0= '$less' ) )
-                    // InternalVampireLanguage.g:2241:5: (lv_name_8_0= '$less' )
+                    // InternalVampireLanguage.g:2209:4: ( (lv_name_8_0= '$less' ) )
+                    // InternalVampireLanguage.g:2210:5: (lv_name_8_0= '$less' )
                     {
-                    // InternalVampireLanguage.g:2241:5: (lv_name_8_0= '$less' )
-                    // InternalVampireLanguage.g:2242:6: lv_name_8_0= '$less'
+                    // InternalVampireLanguage.g:2210:5: (lv_name_8_0= '$less' )
+                    // InternalVampireLanguage.g:2211:6: lv_name_8_0= '$less'
                     {
                     lv_name_8_0=(Token)match(input,68,FOLLOW_8); 
 
@@ -6005,11 +5950,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_9, grammarAccess.getVLSAtomicFunctionAccess().getLeftParenthesisKeyword_1_2());
                     			
-                    // InternalVampireLanguage.g:2258:4: ( (lv_terms_10_0= ruleVLSFofTerm ) )
-                    // InternalVampireLanguage.g:2259:5: (lv_terms_10_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2227:4: ( (lv_terms_10_0= ruleVLSFofTerm ) )
+                    // InternalVampireLanguage.g:2228:5: (lv_terms_10_0= ruleVLSFofTerm )
                     {
-                    // InternalVampireLanguage.g:2259:5: (lv_terms_10_0= ruleVLSFofTerm )
-                    // InternalVampireLanguage.g:2260:6: lv_terms_10_0= ruleVLSFofTerm
+                    // InternalVampireLanguage.g:2228:5: (lv_terms_10_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2229:6: lv_terms_10_0= ruleVLSFofTerm
                     {
 
                     						newCompositeNode(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_1_3_0());
@@ -6040,11 +5985,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_11, grammarAccess.getVLSAtomicFunctionAccess().getCommaKeyword_1_4());
                     			
-                    // InternalVampireLanguage.g:2281:4: ( (lv_terms_12_0= ruleVLSFofTerm ) )
-                    // InternalVampireLanguage.g:2282:5: (lv_terms_12_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2250:4: ( (lv_terms_12_0= ruleVLSFofTerm ) )
+                    // InternalVampireLanguage.g:2251:5: (lv_terms_12_0= ruleVLSFofTerm )
                     {
-                    // InternalVampireLanguage.g:2282:5: (lv_terms_12_0= ruleVLSFofTerm )
-                    // InternalVampireLanguage.g:2283:6: lv_terms_12_0= ruleVLSFofTerm
+                    // InternalVampireLanguage.g:2251:5: (lv_terms_12_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2252:6: lv_terms_12_0= ruleVLSFofTerm
                     {
 
                     						newCompositeNode(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_1_5_0());
@@ -6104,7 +6049,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSVariable"
-    // InternalVampireLanguage.g:2309:1: entryRuleVLSVariable returns [EObject current=null] : iv_ruleVLSVariable= ruleVLSVariable EOF ;
+    // InternalVampireLanguage.g:2278:1: entryRuleVLSVariable returns [EObject current=null] : iv_ruleVLSVariable= ruleVLSVariable EOF ;
     public final EObject entryRuleVLSVariable() throws RecognitionException {
         EObject current = null;
 
@@ -6112,8 +6057,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:2309:52: (iv_ruleVLSVariable= ruleVLSVariable EOF )
-            // InternalVampireLanguage.g:2310:2: iv_ruleVLSVariable= ruleVLSVariable EOF
+            // InternalVampireLanguage.g:2278:52: (iv_ruleVLSVariable= ruleVLSVariable EOF )
+            // InternalVampireLanguage.g:2279:2: iv_ruleVLSVariable= ruleVLSVariable EOF
             {
              newCompositeNode(grammarAccess.getVLSVariableRule()); 
             pushFollow(FOLLOW_1);
@@ -6140,7 +6085,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSVariable"
-    // InternalVampireLanguage.g:2316:1: ruleVLSVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_UPPER_WORD_ID ) ) ;
+    // InternalVampireLanguage.g:2285:1: ruleVLSVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_UPPER_WORD_ID ) ) ;
     public final EObject ruleVLSVariable() throws RecognitionException {
         EObject current = null;
 
@@ -6150,14 +6095,14 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:2322:2: ( ( (lv_name_0_0= RULE_UPPER_WORD_ID ) ) )
-            // InternalVampireLanguage.g:2323:2: ( (lv_name_0_0= RULE_UPPER_WORD_ID ) )
+            // InternalVampireLanguage.g:2291:2: ( ( (lv_name_0_0= RULE_UPPER_WORD_ID ) ) )
+            // InternalVampireLanguage.g:2292:2: ( (lv_name_0_0= RULE_UPPER_WORD_ID ) )
             {
-            // InternalVampireLanguage.g:2323:2: ( (lv_name_0_0= RULE_UPPER_WORD_ID ) )
-            // InternalVampireLanguage.g:2324:3: (lv_name_0_0= RULE_UPPER_WORD_ID )
+            // InternalVampireLanguage.g:2292:2: ( (lv_name_0_0= RULE_UPPER_WORD_ID ) )
+            // InternalVampireLanguage.g:2293:3: (lv_name_0_0= RULE_UPPER_WORD_ID )
             {
-            // InternalVampireLanguage.g:2324:3: (lv_name_0_0= RULE_UPPER_WORD_ID )
-            // InternalVampireLanguage.g:2325:4: lv_name_0_0= RULE_UPPER_WORD_ID
+            // InternalVampireLanguage.g:2293:3: (lv_name_0_0= RULE_UPPER_WORD_ID )
+            // InternalVampireLanguage.g:2294:4: lv_name_0_0= RULE_UPPER_WORD_ID
             {
             lv_name_0_0=(Token)match(input,RULE_UPPER_WORD_ID,FOLLOW_2); 
 
@@ -6199,7 +6144,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSFofTerm"
-    // InternalVampireLanguage.g:2344:1: entryRuleVLSFofTerm returns [EObject current=null] : iv_ruleVLSFofTerm= ruleVLSFofTerm EOF ;
+    // InternalVampireLanguage.g:2313:1: entryRuleVLSFofTerm returns [EObject current=null] : iv_ruleVLSFofTerm= ruleVLSFofTerm EOF ;
     public final EObject entryRuleVLSFofTerm() throws RecognitionException {
         EObject current = null;
 
@@ -6207,8 +6152,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:2344:51: (iv_ruleVLSFofTerm= ruleVLSFofTerm EOF )
-            // InternalVampireLanguage.g:2345:2: iv_ruleVLSFofTerm= ruleVLSFofTerm EOF
+            // InternalVampireLanguage.g:2313:51: (iv_ruleVLSFofTerm= ruleVLSFofTerm EOF )
+            // InternalVampireLanguage.g:2314:2: iv_ruleVLSFofTerm= ruleVLSFofTerm EOF
             {
              newCompositeNode(grammarAccess.getVLSFofTermRule()); 
             pushFollow(FOLLOW_1);
@@ -6235,7 +6180,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSFofTerm"
-    // InternalVampireLanguage.g:2351:1: ruleVLSFofTerm returns [EObject current=null] : (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) ;
+    // InternalVampireLanguage.g:2320:1: ruleVLSFofTerm returns [EObject current=null] : (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) ;
     public final EObject ruleVLSFofTerm() throws RecognitionException {
         EObject current = null;
 
@@ -6250,10 +6195,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:2357:2: ( (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) )
-            // InternalVampireLanguage.g:2358:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
+            // InternalVampireLanguage.g:2326:2: ( (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) )
+            // InternalVampireLanguage.g:2327:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
             {
-            // InternalVampireLanguage.g:2358:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
+            // InternalVampireLanguage.g:2327:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
             int alt29=3;
             switch ( input.LA(1) ) {
             case RULE_UPPER_WORD_ID:
@@ -6286,7 +6231,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt29) {
                 case 1 :
-                    // InternalVampireLanguage.g:2359:3: this_VLSVariable_0= ruleVLSVariable
+                    // InternalVampireLanguage.g:2328:3: this_VLSVariable_0= ruleVLSVariable
                     {
 
                     			newCompositeNode(grammarAccess.getVLSFofTermAccess().getVLSVariableParserRuleCall_0());
@@ -6304,7 +6249,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2368:3: this_VLSFunctionFof_1= ruleVLSFunctionFof
+                    // InternalVampireLanguage.g:2337:3: this_VLSFunctionFof_1= ruleVLSFunctionFof
                     {
 
                     			newCompositeNode(grammarAccess.getVLSFofTermAccess().getVLSFunctionFofParserRuleCall_1());
@@ -6322,7 +6267,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalVampireLanguage.g:2377:3: this_VLSDefinedTerm_2= ruleVLSDefinedTerm
+                    // InternalVampireLanguage.g:2346:3: this_VLSDefinedTerm_2= ruleVLSDefinedTerm
                     {
 
                     			newCompositeNode(grammarAccess.getVLSFofTermAccess().getVLSDefinedTermParserRuleCall_2());
@@ -6362,7 +6307,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSFunctionFof"
-    // InternalVampireLanguage.g:2389:1: entryRuleVLSFunctionFof returns [EObject current=null] : iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF ;
+    // InternalVampireLanguage.g:2358:1: entryRuleVLSFunctionFof returns [EObject current=null] : iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF ;
     public final EObject entryRuleVLSFunctionFof() throws RecognitionException {
         EObject current = null;
 
@@ -6370,8 +6315,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:2389:55: (iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF )
-            // InternalVampireLanguage.g:2390:2: iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF
+            // InternalVampireLanguage.g:2358:55: (iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF )
+            // InternalVampireLanguage.g:2359:2: iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF
             {
              newCompositeNode(grammarAccess.getVLSFunctionFofRule()); 
             pushFollow(FOLLOW_1);
@@ -6398,7 +6343,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSFunctionFof"
-    // InternalVampireLanguage.g:2396:1: ruleVLSFunctionFof returns [EObject current=null] : ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? ) ;
+    // InternalVampireLanguage.g:2365:1: ruleVLSFunctionFof returns [EObject current=null] : ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? ) ;
     public final EObject ruleVLSFunctionFof() throws RecognitionException {
         EObject current = null;
 
@@ -6418,19 +6363,19 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:2402:2: ( ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? ) )
-            // InternalVampireLanguage.g:2403:2: ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? )
+            // InternalVampireLanguage.g:2371:2: ( ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? ) )
+            // InternalVampireLanguage.g:2372:2: ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? )
             {
-            // InternalVampireLanguage.g:2403:2: ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? )
-            // InternalVampireLanguage.g:2404:3: ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )?
+            // InternalVampireLanguage.g:2372:2: ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? )
+            // InternalVampireLanguage.g:2373:3: ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )?
             {
-            // InternalVampireLanguage.g:2404:3: ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) )
-            // InternalVampireLanguage.g:2405:4: ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) )
+            // InternalVampireLanguage.g:2373:3: ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) )
+            // InternalVampireLanguage.g:2374:4: ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) )
             {
-            // InternalVampireLanguage.g:2405:4: ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) )
-            // InternalVampireLanguage.g:2406:5: (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID )
+            // InternalVampireLanguage.g:2374:4: ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) )
+            // InternalVampireLanguage.g:2375:5: (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID )
             {
-            // InternalVampireLanguage.g:2406:5: (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID )
+            // InternalVampireLanguage.g:2375:5: (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID )
             int alt30=4;
             switch ( input.LA(1) ) {
             case RULE_LOWER_WORD_ID:
@@ -6462,7 +6407,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt30) {
                 case 1 :
-                    // InternalVampireLanguage.g:2407:6: lv_functor_0_1= RULE_LOWER_WORD_ID
+                    // InternalVampireLanguage.g:2376:6: lv_functor_0_1= RULE_LOWER_WORD_ID
                     {
                     lv_functor_0_1=(Token)match(input,RULE_LOWER_WORD_ID,FOLLOW_30); 
 
@@ -6482,7 +6427,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2422:6: lv_functor_0_2= RULE_SINGLE_QUOTE
+                    // InternalVampireLanguage.g:2391:6: lv_functor_0_2= RULE_SINGLE_QUOTE
                     {
                     lv_functor_0_2=(Token)match(input,RULE_SINGLE_QUOTE,FOLLOW_30); 
 
@@ -6502,7 +6447,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalVampireLanguage.g:2437:6: lv_functor_0_3= RULE_DOLLAR_ID
+                    // InternalVampireLanguage.g:2406:6: lv_functor_0_3= RULE_DOLLAR_ID
                     {
                     lv_functor_0_3=(Token)match(input,RULE_DOLLAR_ID,FOLLOW_30); 
 
@@ -6522,7 +6467,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalVampireLanguage.g:2452:6: lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID
+                    // InternalVampireLanguage.g:2421:6: lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID
                     {
                     lv_functor_0_4=(Token)match(input,RULE_DOUBLE_DOLLAR_ID,FOLLOW_30); 
 
@@ -6550,7 +6495,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalVampireLanguage.g:2469:3: (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )?
+            // InternalVampireLanguage.g:2438:3: (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -6559,17 +6504,17 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt32) {
                 case 1 :
-                    // InternalVampireLanguage.g:2470:4: otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')'
+                    // InternalVampireLanguage.g:2439:4: otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')'
                     {
                     otherlv_1=(Token)match(input,32,FOLLOW_29); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getVLSFunctionFofAccess().getLeftParenthesisKeyword_1_0());
                     			
-                    // InternalVampireLanguage.g:2474:4: ( (lv_terms_2_0= ruleVLSFofTerm ) )
-                    // InternalVampireLanguage.g:2475:5: (lv_terms_2_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2443:4: ( (lv_terms_2_0= ruleVLSFofTerm ) )
+                    // InternalVampireLanguage.g:2444:5: (lv_terms_2_0= ruleVLSFofTerm )
                     {
-                    // InternalVampireLanguage.g:2475:5: (lv_terms_2_0= ruleVLSFofTerm )
-                    // InternalVampireLanguage.g:2476:6: lv_terms_2_0= ruleVLSFofTerm
+                    // InternalVampireLanguage.g:2444:5: (lv_terms_2_0= ruleVLSFofTerm )
+                    // InternalVampireLanguage.g:2445:6: lv_terms_2_0= ruleVLSFofTerm
                     {
 
                     						newCompositeNode(grammarAccess.getVLSFunctionFofAccess().getTermsVLSFofTermParserRuleCall_1_1_0());
@@ -6596,7 +6541,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2493:4: (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )*
+                    // InternalVampireLanguage.g:2462:4: (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )*
                     loop31:
                     do {
                         int alt31=2;
@@ -6609,17 +6554,17 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt31) {
                     	case 1 :
-                    	    // InternalVampireLanguage.g:2494:5: otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) )
+                    	    // InternalVampireLanguage.g:2463:5: otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) )
                     	    {
                     	    otherlv_3=(Token)match(input,29,FOLLOW_29); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getVLSFunctionFofAccess().getCommaKeyword_1_2_0());
                     	    				
-                    	    // InternalVampireLanguage.g:2498:5: ( (lv_terms_4_0= ruleVLSFofTerm ) )
-                    	    // InternalVampireLanguage.g:2499:6: (lv_terms_4_0= ruleVLSFofTerm )
+                    	    // InternalVampireLanguage.g:2467:5: ( (lv_terms_4_0= ruleVLSFofTerm ) )
+                    	    // InternalVampireLanguage.g:2468:6: (lv_terms_4_0= ruleVLSFofTerm )
                     	    {
-                    	    // InternalVampireLanguage.g:2499:6: (lv_terms_4_0= ruleVLSFofTerm )
-                    	    // InternalVampireLanguage.g:2500:7: lv_terms_4_0= ruleVLSFofTerm
+                    	    // InternalVampireLanguage.g:2468:6: (lv_terms_4_0= ruleVLSFofTerm )
+                    	    // InternalVampireLanguage.g:2469:7: lv_terms_4_0= ruleVLSFofTerm
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getVLSFunctionFofAccess().getTermsVLSFofTermParserRuleCall_1_2_1_0());
@@ -6688,7 +6633,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVLSDefinedTerm"
-    // InternalVampireLanguage.g:2527:1: entryRuleVLSDefinedTerm returns [EObject current=null] : iv_ruleVLSDefinedTerm= ruleVLSDefinedTerm EOF ;
+    // InternalVampireLanguage.g:2496:1: entryRuleVLSDefinedTerm returns [EObject current=null] : iv_ruleVLSDefinedTerm= ruleVLSDefinedTerm EOF ;
     public final EObject entryRuleVLSDefinedTerm() throws RecognitionException {
         EObject current = null;
 
@@ -6696,8 +6641,8 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalVampireLanguage.g:2527:55: (iv_ruleVLSDefinedTerm= ruleVLSDefinedTerm EOF )
-            // InternalVampireLanguage.g:2528:2: iv_ruleVLSDefinedTerm= ruleVLSDefinedTerm EOF
+            // InternalVampireLanguage.g:2496:55: (iv_ruleVLSDefinedTerm= ruleVLSDefinedTerm EOF )
+            // InternalVampireLanguage.g:2497:2: iv_ruleVLSDefinedTerm= ruleVLSDefinedTerm EOF
             {
              newCompositeNode(grammarAccess.getVLSDefinedTermRule()); 
             pushFollow(FOLLOW_1);
@@ -6724,7 +6669,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSDefinedTerm"
-    // InternalVampireLanguage.g:2534:1: ruleVLSDefinedTerm returns [EObject current=null] : ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) ) ;
+    // InternalVampireLanguage.g:2503:1: ruleVLSDefinedTerm returns [EObject current=null] : ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) ) ;
     public final EObject ruleVLSDefinedTerm() throws RecognitionException {
         EObject current = null;
 
@@ -6737,10 +6682,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:2540:2: ( ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) ) )
-            // InternalVampireLanguage.g:2541:2: ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) )
+            // InternalVampireLanguage.g:2509:2: ( ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) ) )
+            // InternalVampireLanguage.g:2510:2: ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) )
             {
-            // InternalVampireLanguage.g:2541:2: ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) )
+            // InternalVampireLanguage.g:2510:2: ( ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) ) | ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) ) | ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) ) | ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) ) )
             int alt33=4;
             switch ( input.LA(1) ) {
             case RULE_SIGNED_LITERAL:
@@ -6772,13 +6717,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt33) {
                 case 1 :
-                    // InternalVampireLanguage.g:2542:3: ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) )
+                    // InternalVampireLanguage.g:2511:3: ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) )
                     {
-                    // InternalVampireLanguage.g:2542:3: ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) )
-                    // InternalVampireLanguage.g:2543:4: () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) )
+                    // InternalVampireLanguage.g:2511:3: ( () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) ) )
+                    // InternalVampireLanguage.g:2512:4: () ( (lv_value_1_0= RULE_SIGNED_LITERAL ) )
                     {
-                    // InternalVampireLanguage.g:2543:4: ()
-                    // InternalVampireLanguage.g:2544:5: 
+                    // InternalVampireLanguage.g:2512:4: ()
+                    // InternalVampireLanguage.g:2513:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -6788,11 +6733,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2550:4: ( (lv_value_1_0= RULE_SIGNED_LITERAL ) )
-                    // InternalVampireLanguage.g:2551:5: (lv_value_1_0= RULE_SIGNED_LITERAL )
+                    // InternalVampireLanguage.g:2519:4: ( (lv_value_1_0= RULE_SIGNED_LITERAL ) )
+                    // InternalVampireLanguage.g:2520:5: (lv_value_1_0= RULE_SIGNED_LITERAL )
                     {
-                    // InternalVampireLanguage.g:2551:5: (lv_value_1_0= RULE_SIGNED_LITERAL )
-                    // InternalVampireLanguage.g:2552:6: lv_value_1_0= RULE_SIGNED_LITERAL
+                    // InternalVampireLanguage.g:2520:5: (lv_value_1_0= RULE_SIGNED_LITERAL )
+                    // InternalVampireLanguage.g:2521:6: lv_value_1_0= RULE_SIGNED_LITERAL
                     {
                     lv_value_1_0=(Token)match(input,RULE_SIGNED_LITERAL,FOLLOW_2); 
 
@@ -6821,13 +6766,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2570:3: ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) )
+                    // InternalVampireLanguage.g:2539:3: ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) )
                     {
-                    // InternalVampireLanguage.g:2570:3: ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) )
-                    // InternalVampireLanguage.g:2571:4: () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) )
+                    // InternalVampireLanguage.g:2539:3: ( () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) ) )
+                    // InternalVampireLanguage.g:2540:4: () ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) )
                     {
-                    // InternalVampireLanguage.g:2571:4: ()
-                    // InternalVampireLanguage.g:2572:5: 
+                    // InternalVampireLanguage.g:2540:4: ()
+                    // InternalVampireLanguage.g:2541:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -6837,11 +6782,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2578:4: ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) )
-                    // InternalVampireLanguage.g:2579:5: (lv_value_3_0= RULE_SIGNED_REAL_ID )
+                    // InternalVampireLanguage.g:2547:4: ( (lv_value_3_0= RULE_SIGNED_REAL_ID ) )
+                    // InternalVampireLanguage.g:2548:5: (lv_value_3_0= RULE_SIGNED_REAL_ID )
                     {
-                    // InternalVampireLanguage.g:2579:5: (lv_value_3_0= RULE_SIGNED_REAL_ID )
-                    // InternalVampireLanguage.g:2580:6: lv_value_3_0= RULE_SIGNED_REAL_ID
+                    // InternalVampireLanguage.g:2548:5: (lv_value_3_0= RULE_SIGNED_REAL_ID )
+                    // InternalVampireLanguage.g:2549:6: lv_value_3_0= RULE_SIGNED_REAL_ID
                     {
                     lv_value_3_0=(Token)match(input,RULE_SIGNED_REAL_ID,FOLLOW_2); 
 
@@ -6870,13 +6815,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalVampireLanguage.g:2598:3: ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) )
+                    // InternalVampireLanguage.g:2567:3: ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) )
                     {
-                    // InternalVampireLanguage.g:2598:3: ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) )
-                    // InternalVampireLanguage.g:2599:4: () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) )
+                    // InternalVampireLanguage.g:2567:3: ( () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) ) )
+                    // InternalVampireLanguage.g:2568:4: () ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) )
                     {
-                    // InternalVampireLanguage.g:2599:4: ()
-                    // InternalVampireLanguage.g:2600:5: 
+                    // InternalVampireLanguage.g:2568:4: ()
+                    // InternalVampireLanguage.g:2569:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -6886,11 +6831,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2606:4: ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) )
-                    // InternalVampireLanguage.g:2607:5: (lv_value_5_0= RULE_SIGNED_RAT_ID )
+                    // InternalVampireLanguage.g:2575:4: ( (lv_value_5_0= RULE_SIGNED_RAT_ID ) )
+                    // InternalVampireLanguage.g:2576:5: (lv_value_5_0= RULE_SIGNED_RAT_ID )
                     {
-                    // InternalVampireLanguage.g:2607:5: (lv_value_5_0= RULE_SIGNED_RAT_ID )
-                    // InternalVampireLanguage.g:2608:6: lv_value_5_0= RULE_SIGNED_RAT_ID
+                    // InternalVampireLanguage.g:2576:5: (lv_value_5_0= RULE_SIGNED_RAT_ID )
+                    // InternalVampireLanguage.g:2577:6: lv_value_5_0= RULE_SIGNED_RAT_ID
                     {
                     lv_value_5_0=(Token)match(input,RULE_SIGNED_RAT_ID,FOLLOW_2); 
 
@@ -6919,13 +6864,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalVampireLanguage.g:2626:3: ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) )
+                    // InternalVampireLanguage.g:2595:3: ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) )
                     {
-                    // InternalVampireLanguage.g:2626:3: ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) )
-                    // InternalVampireLanguage.g:2627:4: () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) )
+                    // InternalVampireLanguage.g:2595:3: ( () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) ) )
+                    // InternalVampireLanguage.g:2596:4: () ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) )
                     {
-                    // InternalVampireLanguage.g:2627:4: ()
-                    // InternalVampireLanguage.g:2628:5: 
+                    // InternalVampireLanguage.g:2596:4: ()
+                    // InternalVampireLanguage.g:2597:5: 
                     {
 
                     					current = forceCreateModelElement(
@@ -6935,11 +6880,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalVampireLanguage.g:2634:4: ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) )
-                    // InternalVampireLanguage.g:2635:5: (lv_value_7_0= RULE_DOUBLE_QUOTE )
+                    // InternalVampireLanguage.g:2603:4: ( (lv_value_7_0= RULE_DOUBLE_QUOTE ) )
+                    // InternalVampireLanguage.g:2604:5: (lv_value_7_0= RULE_DOUBLE_QUOTE )
                     {
-                    // InternalVampireLanguage.g:2635:5: (lv_value_7_0= RULE_DOUBLE_QUOTE )
-                    // InternalVampireLanguage.g:2636:6: lv_value_7_0= RULE_DOUBLE_QUOTE
+                    // InternalVampireLanguage.g:2604:5: (lv_value_7_0= RULE_DOUBLE_QUOTE )
+                    // InternalVampireLanguage.g:2605:6: lv_value_7_0= RULE_DOUBLE_QUOTE
                     {
                     lv_value_7_0=(Token)match(input,RULE_DOUBLE_QUOTE,FOLLOW_2); 
 
@@ -7047,7 +6992,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
             this.transition = dfa_7;
         }
         public String getDescription() {
-            return "1875:2: (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm )";
+            return "1864:2: (this_VLSAtomicConstant_0= ruleVLSAtomicConstant | this_VLSAtomicFunction_1= ruleVLSAtomicFunction | this_VLSVariable_2= ruleVLSVariable | this_VLSDefinedTerm_3= ruleVLSDefinedTerm )";
         }
     }
  

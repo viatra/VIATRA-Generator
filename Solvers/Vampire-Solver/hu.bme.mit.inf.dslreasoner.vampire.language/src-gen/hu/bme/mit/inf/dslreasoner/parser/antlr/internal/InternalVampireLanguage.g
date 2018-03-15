@@ -1476,25 +1476,14 @@ ruleVLSUnitaryFormula returns [EObject current=null]
 			{
 				newLeafNode(otherlv_4, grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0());
 			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getVLSUnitaryFormulaAccess().getTermVLSTermParserRuleCall_4_1_0());
-					}
-					lv_term_5_0=ruleVLSTerm
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getVLSUnitaryFormulaRule());
-						}
-						set(
-							$current,
-							"term",
-							lv_term_5_0,
-							"hu.bme.mit.inf.dslreasoner.VampireLanguage.VLSTerm");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
+			{
+				newCompositeNode(grammarAccess.getVLSUnitaryFormulaAccess().getVLSTermParserRuleCall_4_1());
+			}
+			this_VLSTerm_5=ruleVLSTerm
+			{
+				$current = $this_VLSTerm_5.current;
+				afterParserOrEnumRuleCall();
+			}
 			otherlv_6=')'
 			{
 				newLeafNode(otherlv_6, grammarAccess.getVLSUnitaryFormulaAccess().getRightParenthesisKeyword_4_2());
@@ -2026,20 +2015,10 @@ ruleVLSAtomicConstant returns [EObject current=null]
 						$current);
 				}
 			)
-			(
-				(
-					lv_name_3_0='$true'
-					{
-						newLeafNode(lv_name_3_0, grammarAccess.getVLSAtomicConstantAccess().getNameTrueKeyword_1_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSAtomicConstantRule());
-						}
-						setWithLastConsumed($current, "name", lv_name_3_0, "\$true");
-					}
-				)
-			)
+			otherlv_3='$true'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getVLSAtomicConstantAccess().getTrueKeyword_1_1());
+			}
 		)
 		    |
 		(
@@ -2050,20 +2029,10 @@ ruleVLSAtomicConstant returns [EObject current=null]
 						$current);
 				}
 			)
-			(
-				(
-					lv_name_5_0='$false'
-					{
-						newLeafNode(lv_name_5_0, grammarAccess.getVLSAtomicConstantAccess().getNameFalseKeyword_2_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSAtomicConstantRule());
-						}
-						setWithLastConsumed($current, "name", lv_name_5_0, "\$false");
-					}
-				)
-			)
+			otherlv_5='$false'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getVLSAtomicConstantAccess().getFalseKeyword_2_1());
+			}
 		)
 	)
 ;

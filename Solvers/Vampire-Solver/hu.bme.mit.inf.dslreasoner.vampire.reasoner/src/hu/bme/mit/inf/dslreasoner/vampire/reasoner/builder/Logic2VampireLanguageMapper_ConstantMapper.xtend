@@ -25,7 +25,7 @@ class Logic2VampireLanguageMapper_ConstantMapper {
 	
 //NOT Used In Sample	
 	def protected dispatch transformConstant(ConstantDefinition constant, Logic2VampireLanguageMapperTrace trace) {
-		error
+		//error
 		//TODO
 //		val c = createVLSFofFormula=> [
 //			name = support.toID(constant.name)
