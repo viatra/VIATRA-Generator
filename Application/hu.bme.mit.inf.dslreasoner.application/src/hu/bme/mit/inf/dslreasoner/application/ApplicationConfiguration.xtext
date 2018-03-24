@@ -84,7 +84,7 @@ PatternEntry: PatternElement | AllPatternEntry;
 AllPatternEntry: 'package' package = [viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion += PatternElement (',' exclusuion += PatternElement)* '}')?;
 PatternElement: (package =[viatra::PatternModel|QualifiedName] '::')? pattern = [viatra::Pattern];
 
-GraphPatternDeclaration: 'patterns' name = ID specification = PatternSpecification;
+GraphPatternDeclaration: 'constraints' name = ID specification = PatternSpecification;
 GraphPatternReference: referred = [GraphPatternDeclaration];
 GraphPattern: GraphPatternReference|PatternSpecification;
 
@@ -159,7 +159,7 @@ GenerationTask:  'generate' {GenerationTask} '{'(
 		// domain
 		('metamodel' '=' metamodel = Metamodel)? &
 		('partial-model'  '=' partialModel = PartialModel)? &
-		('patterns'  '=' patterns = GraphPattern)? &
+		('constraints'  '=' patterns = GraphPattern)? &
 		
 		// model set
 		('scope' '=' scope = Scope)? &
