@@ -478,7 +478,7 @@ public class LogicProblemBuilder{
 	def public asTerm(boolean value) { createBoolLiteral => [x|x.value = value]  }
 	def public asTerm(int value) { createIntLiteral => [x|x.value = value] }
 	def public asTerm(double value) { createRealLiteral => [x|x.value = BigDecimal.valueOf(value)] }
-	
+	def public asTerm(String value) { createStringLiteral => [x|x.value = value]}
 	def public InstanceOf(TermDescription term, TypeDescriptor type) {
 		createInstanceOf => [
 			it.value = term.toTerm
