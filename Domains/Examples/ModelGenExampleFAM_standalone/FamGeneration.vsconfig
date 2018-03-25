@@ -1,0 +1,25 @@
+import epackage	"platform:/resource/ModelGenExampleFAM_standalone/inputs/FamMetamodel.ecore"
+import viatra	"platform:/resource/ModelGenExampleFAM_standalone/inputs/FamPatterns.vql"
+
+file LogFile = "platform:/resource/ModelGenExampleFAM/outputs/log.txt"
+generate {
+	metamodel = { package functionalarchitecture }
+	patterns = { package hu.bme.mit.inf.dslreasoner.domains.fam excluding { model } }
+	solver = ViatraSolver
+	scope = {
+		#node = 10
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	number = 5
+	runs = 1
+	
+	debug =			"platform:/resource/ModelGenExampleFAM_standalone/outputs/debug"
+	log =			"platform:/resource/ModelGenExampleFAM_standalone/outputs/log.txt"
+	output =		"platform:/resource/ModelGenExampleFAM_standalone/outputs/models"
+	statistics =	"platform:/resource/ModelGenExampleFAM_standalone/outputs/statistics.csv"
+}

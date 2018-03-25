@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="functionalarchitecture" nsURI="http://www.inf.mit.bme.hu/viatrasolver/example/fam" nsPrefix="functionalarchitecture">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="org.eclipse.viatra.query.querybasedfeature"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface" eType="//FunctionalInterface" containment="true" eOpposite="//FunctionalInterface/element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="//FunctionalArchitectureModel" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.fam.model"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="//Function" eOpposite="//Function/subElements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalArchitectureModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootElements" upperBound="-1" eType="//FunctionalElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="//FunctionalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subElements" upperBound="-1" eType="//FunctionalElement" containment="true" eOpposite="//FunctionalElement/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="//FunctionType" changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.fam.type"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FAMTerminator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="//FunctionalData" eOpposite="//FunctionalData/terminator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InformationLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="//FunctionalOutput" eOpposite="//FunctionalOutput/outgoingLinks"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="//FunctionalInput" eOpposite="//FunctionalInput/IncomingLinks"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalInterface">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" upperBound="-1" eType="//FunctionalData" containment="true" eOpposite="//FunctionalData/interface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="//FunctionalElement" eOpposite="//FunctionalElement/interface"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalInput" eSuperTypes="//FunctionalData">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="IncomingLinks" upperBound="-1" eType="//InformationLink" eOpposite="//InformationLink/to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalOutput" eSuperTypes="//FunctionalData">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingLinks" upperBound="-1" eType="//InformationLink" containment="true" eOpposite="//InformationLink/from"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalData" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminator" eType="//FAMTerminator" containment="true" eOpposite="//FAMTerminator/data"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface" eType="//FunctionalInterface" eOpposite="//FunctionalInterface/data"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FunctionType">
+    <eLiterals name="Root"/>
+    <eLiterals name="Intermediate" value="1"/>
+    <eLiterals name="Leaf" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

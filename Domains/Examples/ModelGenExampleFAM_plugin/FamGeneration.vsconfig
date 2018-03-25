@@ -1,0 +1,18 @@
+import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
+import viatra	"hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns"
+
+generate {
+	metamodel = { package functionalarchitecture }
+	patterns = { package hu.bme.mit.inf.dslreasoner.domains.transima.fam }
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 10
+	}
+	
+	number = 3
+	runs = 3
+	
+	output = "platform:/resource/ModelGenExampleFAM_plugin/output"
+}
