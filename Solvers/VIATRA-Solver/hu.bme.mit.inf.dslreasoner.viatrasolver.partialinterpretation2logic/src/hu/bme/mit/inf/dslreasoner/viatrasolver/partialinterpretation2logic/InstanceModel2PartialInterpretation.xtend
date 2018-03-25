@@ -104,12 +104,18 @@ class InstanceModel2PartialInterpretation {
 				if(attribute.isMany) {
 					val listOfTargets = source.eGet(attribute) as List<? extends EObject>
 					for(target : listOfTargets) {
-						translateLink(interpretation,sourceElement,translateValue(target,ecore2LogicTrace,partialInterpretationTrace))
+						val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
+						if(value != null) {
+							translateLink(interpretation,sourceElement,value)
+						}
 					}
 				} else {
 					val target = source.eGet(attribute)
 					if(target !== null) {
-						translateLink(interpretation,sourceElement,translateValue(target,ecore2LogicTrace,partialInterpretationTrace))
+						val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
+						if(value != null) {
+							translateLink(interpretation,sourceElement,value)
+						}
 					}
 				}
 			}
@@ -131,6 +137,6 @@ class InstanceModel2PartialInterpretation {
 	}
 	
 	dispatch protected def translateValue(Object value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
-		throw new UnsupportedOperationException('''Mapping of «value.class.simpleName» in partial models is currently not supported!''')
+		//throw new UnsupportedOperationException('''Mapping of «value.class.simpleName» in partial models is currently not supported!''')
 	}
 }

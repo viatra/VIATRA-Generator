@@ -91,7 +91,8 @@ class RelationDefinitionIndexer {
 			}«ENDFOR»
 		'''
 		} catch(UnsupportedOperationException e) {
-			throw new UnsupportedOperationException('''Can not transform pattern "«p.fullyQualifiedName»"!''',e)
+			e.printStackTrace
+			throw new UnsupportedOperationException('''Can not transform pattern "«p.fullyQualifiedName»"! Reason: «e.message»''',e)
 		}
 	}
 	private def transformPatternWithTwoParameters(RelationDefinition relation, PQuery p, Modality modality) {
@@ -137,7 +138,7 @@ class RelationDefinitionIndexer {
 					modality.toMustMay)
 			} else throw new UnsupportedOperationException('''unknown key: «key.class»''')
 		} else {
-			throw new UnsupportedOperationException()
+			throw new UnsupportedOperationException('''Unsupported touple size: «touple.size»''')
 		}
 	}
 	
@@ -196,10 +197,22 @@ class RelationDefinitionIndexer {
 		var String additionalDefinition;
 		if(target instanceof EEnumLiteral) {
 			targetString = '''const_«target.name»_«target.EEnum.name»'''
-			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  LogicProblem.elements(problem,«targetString»);'''
+			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Integer) {
-			targetString = target.toString
-			additionalDefinition = ''''''
+			targetString = '''const_«target»_Integer'''
+			additionalDefinition = '''IntegerElement.value(«targetString»,«target»);'''
+		} else if(target instanceof Boolean) {
+			targetString = '''const_«target»_Boolean'''
+			additionalDefinition = '''BooleanElement.value(«targetString»,«target»);'''
+		} else if(target instanceof String) {
+			targetString = '''const_«target»_String'''
+			additionalDefinition = '''StringElement.value(«targetString»,"«target»");'''
+		} else if(target instanceof Double) {
+			targetString = '''const_«target»_Number'''
+			additionalDefinition = '''RealElement.value(«targetString»,"«target»");'''
+		} else if(target instanceof Float) {
+			targetString = '''const_«target»_Number'''
+			additionalDefinition = '''RealElement.value(«targetString»,"«target»");'''
 		} else {
 			throw new UnsupportedOperationException('''Unknown constant type: «target.class»''')
 		}

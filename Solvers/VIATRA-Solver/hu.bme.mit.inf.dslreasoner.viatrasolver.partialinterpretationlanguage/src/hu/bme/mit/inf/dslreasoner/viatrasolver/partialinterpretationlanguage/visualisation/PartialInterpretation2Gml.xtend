@@ -12,6 +12,16 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import java.util.Set
 
 class PartialInterpretation2Gml {
+	def private getElements(PartialInterpretation model) {
+		return
+			model.problem.elements +
+			model.newElements +
+			model.booleanelements+
+			model.integerelements+
+			model.stringelement+
+			model.realelements
+	}
+	
 	def public transform(PartialInterpretation i) {
 		val p = i.problem
 		val Map<DefinedElement, Integer> objectToID = new HashMap
@@ -19,7 +29,7 @@ class PartialInterpretation2Gml {
 		'''
 		graph
 		[
-			«FOR object:p.elements + i.newElements SEPARATOR '\n'»
+			«FOR object:i.elements SEPARATOR '\n'»
 				«this.transformObject(object,object.typesOfElement(i),objectToID)»
 			«ENDFOR»
 			«FOR relation:i.partialrelationinterpretation»

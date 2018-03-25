@@ -105,13 +105,15 @@ class  Viatra2Logic {
 		val relationName = '''pattern «pquery.fullyQualifiedName.replace('.',' ')»'''
 		val parameters = new ArrayList<Variable>(pquery.parameters.size)
 		for(vParam: pquery.parameters) {
+			//println(">" + vParam.declaredUnaryType)
+			val type = vParam.declaredUnaryType as BaseEMFTypeKey<? extends EClassifier>
 			val parameterType = transformTypeReference(
-				vParam.declaredUnaryType as BaseEMFTypeKey<? extends EClassifier>,
+				type,
 				ecore2LogicTrace
 			)
-			if(parameterType == null) {
-				println(parameterType)
-			}
+//			if(parameterType == null) {
+//				println(parameterType)
+//			}
 			val parameterName = '''parameter «vParam.name»'''
 			val lParam = createVar(parameterName,parameterType)
 			viatra2LogicTrace.parameter2Variable.put(pquery->vParam,lParam)
@@ -252,13 +254,21 @@ class  Viatra2Logic {
 	
 	def TypeDescriptor getType(PVariable v, PBody body, TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
 		if(v.isPositiveVariable) {
-			val types = v.lookup(
+			val allTypes = v.lookup(
 				body.getAllUnaryTypeRestrictions(EMFQueryMetaContext.INSTANCE))
+			val types = allTypes.filter[it.inputKey instanceof BaseEMFTypeKey<?>].toSet
+			
 			if(types.size == 0) {
-				throw new AssertionError('''No type for «v.name»''')
+				throw new AssertionError('''
+				No EMF type for «v.name».
+				Non-EMF types: [«FOR t : allTypes.filter[!types.contains(it)].map[inputKey.prettyPrintableName] SEPARATOR ','»«t»«ENDFOR»]''')
 			} else if(types.size == 1){
 				return (types.head.inputKey as BaseEMFTypeKey<? extends EClassifier>).transformTypeReference(ecore2LogicTrace)
 			} else {
+//				println('''
+//					Type Judgements of «v.name»
+//					«types.map[inputKey.prettyPrintableName]»
+//				''')
 				return this.ecore2Logic.TypeofEClass(ecore2LogicTrace.trace,
 					calculateCommonSubtype(types.map[
 						(it.inputKey as BaseEMFTypeKey<EClass>).emfKey as EClass

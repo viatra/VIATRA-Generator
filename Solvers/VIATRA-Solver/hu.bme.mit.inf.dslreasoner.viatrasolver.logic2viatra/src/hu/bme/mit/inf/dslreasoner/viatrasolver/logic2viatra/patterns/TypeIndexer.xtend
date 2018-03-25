@@ -23,16 +23,16 @@ abstract class TypeIndexer {
 		reference.referred.referInstanceOf(modality,variableName)
 	}
 	public def dispatch CharSequence referInstanceOfByReference(BoolTypeReference reference, Modality modality, String variableName) {
-		'''find  instaneofBoolean(problem, interpretation, «variableName»);'''
+		'''BooleanElement(«variableName»);'''
 	}
 	public def dispatch CharSequence referInstanceOfByReference(IntTypeReference reference, Modality modality, String variableName) {
-		'''find pattern instaneofInteger(problem, interpretation, «variableName»);'''
+		'''IntegerElement(«variableName»);'''
 	}
 	public def dispatch CharSequence referInstanceOfByReference(RealTypeReference reference, Modality modality, String variableName) {
-		'''find pattern instaneofReal(problem, interpretation, «variableName»);'''
+		'''RealElement(«variableName»);'''
 	}
 	public def dispatch CharSequence referInstanceOfByReference(StringTypeReference reference, Modality modality, String variableName) {
-		'''find pattern instaneofString(problem, interpretation, «variableName»);'''
+		'''StringElement(«variableName»);'''
 	}
 
 }

@@ -89,7 +89,8 @@ class PatternGenerator {
 		String targetVariable,
 		Modality modality)
 	{
-		throw new UnsupportedOperationException
+		'''find «modality.name.toLowerCase»InRelation«canonizeName('''«attribute.name» attribute «attribute.EContainingClass.name»''')
+		»(problem,interpretation,«sourceVariable»,«targetVariable»);'''
 	}
 	
 	public def canonizeName(String name) {

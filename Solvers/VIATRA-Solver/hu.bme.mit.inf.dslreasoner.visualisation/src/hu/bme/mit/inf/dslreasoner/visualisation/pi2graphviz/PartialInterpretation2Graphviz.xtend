@@ -29,6 +29,8 @@ import static guru.nidi.graphviz.model.Factory.*
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import java.awt.image.BufferedImage
+import java.util.Collection
+import org.eclipse.xtext.xbase.lib.Functions.Function1
 
 class GraphvizVisualisation implements PartialInterpretationVisualiser {
 	
@@ -44,6 +46,16 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 		visualisePartialInterpretation(partialInterpretation,false)
 	}
 	
+	def private getElements(PartialInterpretation model) {
+		return
+			model.problem.elements +
+			model.newElements +
+			model.booleanelements+
+			model.integerelements+
+			model.stringelement+
+			model.realelements
+	}
+	
 	def private visualisePartialInterpretation(PartialInterpretation partialInterpretation, boolean concretizationOnly) {
 		val problem = partialInterpretation.problem
 		
@@ -51,7 +63,7 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 		val oldElements = problem.elements
 		val newElements = partialInterpretation.newElements
 		//val prototypeElements = #[partialInterpretation.openWorldElementPrototype]
-		val allElements = problem.elements + partialInterpretation.newElements
+		val allElements = getElements(partialInterpretation)
 		
 		// Indexing types
 		val mustTypes = new HashMap<DefinedElement,Set<Type>>
@@ -90,7 +102,18 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 			elements2ID.put(newElement,id)
 			elements2Node.put(newElement,image)
 		}
-		// Prototype elements
+//		for(booleanElementIndex: 0..<partialInterpretation.booleanelements.size) {
+//			val newElement = partialInterpretation.booleanelements.get(booleanElementIndex)
+//			val id = '''«newElement.value»'''
+//			val image = drawElement(newElement,id,false,emptySet,emptySet)
+//			elements2ID.put(newElement,id)
+//			elements2Node.put(newElement,image)
+//		}
+		
+		partialInterpretation.booleanelements.drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		partialInterpretation.integerelements.drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		partialInterpretation.stringelement.drawDataTypes(['''"«it.value.toString»"'''],elements2Node,elements2ID)
+		partialInterpretation.realelements.drawDataTypes([it.value.toString],elements2Node,elements2ID)
 		
 		// Drawing the edges
 		val edges = new HashMap
@@ -114,6 +137,16 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 		)
 		
 		return new GraphvisVisualisation(graph)
+	}
+	
+	def protected <T extends DefinedElement> void drawDataTypes(Collection<T> collection, Function1<T,String> namer, HashMap<DefinedElement, Node> elements2Node, HashMap<DefinedElement, String> elements2ID) {
+		for(booleanElementIndex: 0..<collection.size) {
+			val newElement = collection.get(booleanElementIndex)
+			val id = namer.apply(newElement)
+			val image = drawElement(newElement,id,false,emptySet,emptySet)
+			elements2ID.put(newElement,id)
+			elements2Node.put(newElement,image)
+		}
 	}
 	
 	def protected drawElement(DefinedElement element, String ID, boolean old, Set<Type> mustTypes, Set<Type> mayTypes) {

@@ -129,6 +129,38 @@ class Constraint2Logic {
 	{
 		return value.asTerm
 	}
+	private def dispatch transformConstantValue(
+		Boolean value,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,
+		Viatra2LogicConfiguration config)
+	{
+		return value.asTerm
+	}
+	private def dispatch transformConstantValue(
+		String value,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,
+		Viatra2LogicConfiguration config)
+	{
+		return value.asTerm
+	}
+	private def dispatch transformConstantValue(
+		Double value,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,
+		Viatra2LogicConfiguration config)
+	{
+		return value.asTerm
+	}
+	private def dispatch transformConstantValue(
+		Float value,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,
+		Viatra2LogicConfiguration config)
+	{
+		return value.asTerm
+	}
 	private def dispatch transformConstantValue(Object other,
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
 		Viatra2LogicTrace viatra2LogicTrace,

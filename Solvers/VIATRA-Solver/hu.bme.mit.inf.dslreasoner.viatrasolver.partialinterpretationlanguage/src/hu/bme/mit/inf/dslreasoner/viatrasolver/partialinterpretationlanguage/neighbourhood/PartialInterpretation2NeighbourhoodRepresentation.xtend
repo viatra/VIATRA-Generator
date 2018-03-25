@@ -184,7 +184,13 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	}
 	
 	def private getElements(PartialInterpretation model) {
-		return model.problem.elements + model.newElements
+		return
+			model.problem.elements +
+			model.newElements +
+			model.booleanelements+
+			model.integerelements+
+			model.stringelement+
+			model.realelements
 	}
 	
 	def private fillTypes(PartialInterpretation model, Map<DefinedElement, Set<String>> node2Type, Set<TypeDeclaration> relevantTypes) {
@@ -222,8 +228,8 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			if(type.isRelevant(relevantRelations)) {
 				for(link : relationInterpretation.relationlinks) {
 					if(link instanceof BinaryElementRelationLink) {
-						OutgoingRelations.get(link.param1) += new OutgoingRelation(link.param2,type.name)
-						IncomingRelations.get(link.param2) += new IncomingRelation(link.param1,type.name)
+							OutgoingRelations.get(link.param1) += new OutgoingRelation(link.param2,type.name)
+							IncomingRelations.get(link.param2) += new IncomingRelation(link.param1,type.name)
 					} else throw new UnsupportedOperationException
 				}
 			}
