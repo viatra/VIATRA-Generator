@@ -58,7 +58,7 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 //									it.value = "\"" + e.name + "\""
 //								]
 								it.right = createVLSDoubleQuote => [
-									it.value = "\"a"+e.name+"\""
+									it.value = "\"a" + e.name + "\""
 								]
 							]
 						])
@@ -138,7 +138,9 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 	}
 
 	override transformReference(DefinedElement referred, Logic2VampireLanguageMapperTrace trace) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		createVLSDoubleQuote => [
+			it.value = "\"a" + referred.name + "\""
+		]
 	}
 
 	override getTypeInterpreter() {

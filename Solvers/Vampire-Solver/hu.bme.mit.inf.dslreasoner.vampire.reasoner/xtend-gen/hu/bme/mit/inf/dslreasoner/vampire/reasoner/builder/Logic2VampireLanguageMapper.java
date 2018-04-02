@@ -9,6 +9,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Equals;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Exists;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Forall;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDeclaration;
@@ -33,7 +34,9 @@ import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_RelationMapper;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSComment;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquality;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSImplies;
@@ -82,8 +85,42 @@ public class Logic2VampireLanguageMapper {
   }
   
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration configuration) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from Relation to RelationDeclaration");
+    VLSComment _createVLSComment = this.factory.createVLSComment();
+    final Procedure1<VLSComment> _function = (VLSComment it) -> {
+      it.setComment("%This is an initial Test Comment \r");
+    };
+    final VLSComment initialComment = ObjectExtensions.<VLSComment>operator_doubleArrow(_createVLSComment, _function);
+    VampireModel _createVampireModel = this.factory.createVampireModel();
+    final Procedure1<VampireModel> _function_1 = (VampireModel it) -> {
+      EList<VLSComment> _comments = it.getComments();
+      _comments.add(initialComment);
+    };
+    final VampireModel specification = ObjectExtensions.<VampireModel>operator_doubleArrow(_createVampireModel, _function_1);
+    Logic2VampireLanguageMapperTrace _logic2VampireLanguageMapperTrace = new Logic2VampireLanguageMapperTrace();
+    final Procedure1<Logic2VampireLanguageMapperTrace> _function_2 = (Logic2VampireLanguageMapperTrace it) -> {
+      it.specification = specification;
+    };
+    final Logic2VampireLanguageMapperTrace trace = ObjectExtensions.<Logic2VampireLanguageMapperTrace>operator_doubleArrow(_logic2VampireLanguageMapperTrace, _function_2);
+    boolean _isEmpty = problem.getTypes().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
+    }
+    trace.constantDefinitions = this.collectConstantDefinitions(problem);
+    trace.relationDefinitions = this.collectRelationDefinitions(problem);
+    final Consumer<RelationDefinition> _function_3 = (RelationDefinition it) -> {
+      this.relationMapper.transformRelation(it, trace);
+    };
+    Iterables.<RelationDefinition>filter(problem.getRelations(), RelationDefinition.class).forEach(_function_3);
+    final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
+      this.constantMapper.transformConstantDefinitionSpecification(it, trace);
+    };
+    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_4);
+    EList<Assertion> _assertions = problem.getAssertions();
+    for (final Assertion assertion : _assertions) {
+      this.transformAssertion(assertion, trace);
+    }
+    return new TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace>(specification, trace);
   }
   
   protected VLSTerm _transformTypeReference(final BoolTypeReference boolTypeReference, final Logic2VampireLanguageMapperTrace trace) {
@@ -200,6 +237,15 @@ public class Logic2VampireLanguageMapper {
     return ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function);
   }
   
+  protected VLSTerm _transformTerm(final Equals equals, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSEquality _createVLSEquality = this.factory.createVLSEquality();
+    final Procedure1<VLSEquality> _function = (VLSEquality it) -> {
+      it.setLeft(this.transformTerm(equals.getLeftOperand(), trace, variables));
+      it.setRight(this.transformTerm(equals.getRightOperand(), trace, variables));
+    };
+    return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function);
+  }
+  
   protected VLSTerm _transformTerm(final Forall forall, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return this.support.createUniversallQuantifiedExpression(this, forall, trace, variables);
   }
@@ -213,7 +259,7 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected VLSTerm _transformSymbolicReference(final DefinedElement referred, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    return null;
+    return this.typeMapper.transformReference(referred, trace);
   }
   
   protected VLSTerm _transformSymbolicReference(final ConstantDeclaration constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
@@ -230,7 +276,11 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected VLSTerm _transformSymbolicReference(final Variable variable, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    final VLSVariable res = CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables);
+    VLSVariable _createVLSVariable = this.factory.createVLSVariable();
+    final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
+      it.setName(CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName());
+    };
+    final VLSVariable res = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
     return res;
   }
   
@@ -251,6 +301,8 @@ public class Logic2VampireLanguageMapper {
       return _transformTerm((And)and, trace, variables);
     } else if (and instanceof BoolLiteral) {
       return _transformTerm((BoolLiteral)and, trace, variables);
+    } else if (and instanceof Equals) {
+      return _transformTerm((Equals)and, trace, variables);
     } else if (and instanceof Exists) {
       return _transformTerm((Exists)and, trace, variables);
     } else if (and instanceof Forall) {

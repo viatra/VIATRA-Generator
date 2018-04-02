@@ -8,6 +8,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Equals
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Exists
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Forall
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDeclaration
@@ -67,13 +68,16 @@ class Logic2VampireLanguageMapper {
 		]
 		
 		 
-		//call mappers		
-		typeMapper.transformTypes(problem.types,problem.elements,this,trace)
+		//call mappers
+		if(!problem.types.isEmpty) {
+			typeMapper.transformTypes(problem.types,problem.elements,this,trace)
+		}
+		
 		
 		trace.constantDefinitions = problem.collectConstantDefinitions
 		trace.relationDefinitions = problem.collectRelationDefinitions
 		
-		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
+		problem.relations.filter(RelationDefinition).forEach[this.relationMapper.transformRelation(it, trace)]
 		
 		//only transforms definitions
 		//problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstant(it, trace)]
@@ -169,8 +173,8 @@ class Logic2VampireLanguageMapper {
 //		createALSMeq => [leftOperand = moreThan.leftOperand.transformTerm(trace,variables) rightOperand = moreThan.rightOperand.transformTerm(trace,variables)] }
 //	def dispatch protected VLSTerm transformTerm(LessOrEqualThan lessThan, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 //		createALSLeq => [leftOperand = lessThan.leftOperand.transformTerm(trace,variables) rightOperand = lessThan.rightOperand.transformTerm(trace,variables)] }
-//	def dispatch protected VLSTerm transformTerm(Equals equals, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-//		createALSEquals => [leftOperand = equals.leftOperand.transformTerm(trace,variables) rightOperand = equals.rightOperand.transformTerm(trace,variables)] }
+	def dispatch protected VLSTerm transformTerm(Equals equals, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
+		createVLSEquality => [left = equals.leftOperand.transformTerm(trace,variables) right = equals.rightOperand.transformTerm(trace,variables)] }
 //	def dispatch protected VLSTerm transformTerm(Distinct distinct, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 //		support.unfoldDistinctTerms(this,distinct.operands,trace,variables) }
 //	
@@ -213,7 +217,7 @@ class Logic2VampireLanguageMapper {
 	//Not Needed for now
 	//TODO
 	def dispatch protected VLSTerm transformSymbolicReference(DefinedElement referred, List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-		//typeMapper.transformReference(referred,trace)
+		typeMapper.transformReference(referred,trace)
 	}
 	
 	def dispatch protected VLSTerm transformSymbolicReference(ConstantDeclaration constant, List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
@@ -238,7 +242,9 @@ class Logic2VampireLanguageMapper {
 		
 		//cannot treat variable as function (constant) because of name ID not being the same
 		//below does not work
-		val res = variable.lookup(variables)	
+		val res = createVLSVariable => [
+						it.name = variable.lookup(variables).name
+					]
 		//no need for potprocessing cuz booleans are supported
 		return res
 	} 

@@ -252,7 +252,14 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
   
   @Override
   public VLSTerm transformReference(final DefinedElement referred, final Logic2VampireLanguageMapperTrace trace) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    VLSDoubleQuote _createVLSDoubleQuote = this.factory.createVLSDoubleQuote();
+    final Procedure1<VLSDoubleQuote> _function = (VLSDoubleQuote it) -> {
+      String _name = referred.getName();
+      String _plus = ("\"a" + _name);
+      String _plus_1 = (_plus + "\"");
+      it.setValue(_plus_1);
+    };
+    return ObjectExtensions.<VLSDoubleQuote>operator_doubleArrow(_createVLSDoubleQuote, _function);
   }
   
   @Override
