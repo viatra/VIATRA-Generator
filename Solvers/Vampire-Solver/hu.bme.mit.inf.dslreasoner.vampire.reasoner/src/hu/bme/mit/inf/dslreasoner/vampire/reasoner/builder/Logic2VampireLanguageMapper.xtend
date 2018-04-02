@@ -18,6 +18,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
@@ -27,7 +28,6 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguageFactory
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireModel
-import java.util.Collection
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
@@ -40,6 +40,7 @@ class Logic2VampireLanguageMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
 	private val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support;
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ConstantMapper constantMapper = new Logic2VampireLanguageMapper_ConstantMapper(this)
+	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_RelationMapper relationMapper = new Logic2VampireLanguageMapper_RelationMapper(this)
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_TypeMapper typeMapper
 	
 	
@@ -70,6 +71,9 @@ class Logic2VampireLanguageMapper {
 		typeMapper.transformTypes(problem.types,problem.elements,this,trace)
 		
 		trace.constantDefinitions = problem.collectConstantDefinitions
+		trace.relationDefinitions = problem.collectRelationDefinitions
+		
+		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
 		
 		//only transforms definitions
 		//problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstant(it, trace)]
@@ -99,13 +103,21 @@ class Logic2VampireLanguageMapper {
 
 	
 	//////////////
-	// Collector
+	// Collectors
 	//////////////
 	
 	//exact Same as for Alloy
 	private def collectConstantDefinitions(LogicProblem problem) {
 		val res = new HashMap
 		problem.constants.filter(ConstantDefinition).filter[it.defines!==null].forEach[
+			res.put(it.defines,it)
+		]
+		return res
+	}
+	
+	private def collectRelationDefinitions(LogicProblem problem) {
+		val res = new HashMap
+		problem.relations.filter(RelationDefinition).filter[it.defines!==null].forEach[
 			res.put(it.defines,it)
 		]
 		return res

@@ -1,1 +1,1 @@
-%This is an initial Test Comment  fof ( typeDef_oldRPS , axiom , ! [ A ] : ( type_oldRPS ( A ) <=> ( A = "Rock" | ( A = "Paper" | A = "Scissor" ) ) ) ) . fof ( hierarchyHandler , axiom , ! [ A ] : ( ( type_allRPS ( A ) & ( type_oldRPS ( A ) & ~ type_newRPS ( A ) ) ) | ( type_allRPS ( A ) & ( type_oldRPS ( A ) & type_newRPS ( A ) ) ) ) ) .
+%This is an initial Test Comment  fof ( typeDef_oldRPS , axiom , ! [ A ] : ( type_oldRPS ( A ) <=> ( A = "aRock" | ( A = "aPaper" | A = "aScissor" ) ) ) ) . fof ( hierarchyHandler , axiom , ! [ A ] : type_oldRPS ( A ) ) .

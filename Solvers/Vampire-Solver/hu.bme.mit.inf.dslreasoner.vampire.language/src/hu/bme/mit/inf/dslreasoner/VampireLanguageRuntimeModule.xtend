@@ -8,4 +8,9 @@ package hu.bme.mit.inf.dslreasoner
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class VampireLanguageRuntimeModule extends AbstractVampireLanguageRuntimeModule {
+	
+	override bindIFormatter() {
+		super.bindIFormatter()
+	}
+	
 }

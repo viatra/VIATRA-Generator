@@ -19,6 +19,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
@@ -28,9 +30,9 @@ import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ConstantMapper;
+import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_RelationMapper;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper;
-import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSComment;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
@@ -70,6 +72,9 @@ public class Logic2VampireLanguageMapper {
   private final Logic2VampireLanguageMapper_ConstantMapper constantMapper = new Logic2VampireLanguageMapper_ConstantMapper(this);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
+  private final Logic2VampireLanguageMapper_RelationMapper relationMapper = new Logic2VampireLanguageMapper_RelationMapper(this);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private final Logic2VampireLanguageMapper_TypeMapper typeMapper;
   
   public Logic2VampireLanguageMapper(final Logic2VampireLanguageMapper_TypeMapper typeMapper) {
@@ -77,33 +82,8 @@ public class Logic2VampireLanguageMapper {
   }
   
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration configuration) {
-    VLSComment _createVLSComment = this.factory.createVLSComment();
-    final Procedure1<VLSComment> _function = (VLSComment it) -> {
-      it.setComment("%This is an initial Test Comment \r");
-    };
-    final VLSComment initialComment = ObjectExtensions.<VLSComment>operator_doubleArrow(_createVLSComment, _function);
-    VampireModel _createVampireModel = this.factory.createVampireModel();
-    final Procedure1<VampireModel> _function_1 = (VampireModel it) -> {
-      EList<VLSComment> _comments = it.getComments();
-      _comments.add(initialComment);
-    };
-    final VampireModel specification = ObjectExtensions.<VampireModel>operator_doubleArrow(_createVampireModel, _function_1);
-    Logic2VampireLanguageMapperTrace _logic2VampireLanguageMapperTrace = new Logic2VampireLanguageMapperTrace();
-    final Procedure1<Logic2VampireLanguageMapperTrace> _function_2 = (Logic2VampireLanguageMapperTrace it) -> {
-      it.specification = specification;
-    };
-    final Logic2VampireLanguageMapperTrace trace = ObjectExtensions.<Logic2VampireLanguageMapperTrace>operator_doubleArrow(_logic2VampireLanguageMapperTrace, _function_2);
-    this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
-    trace.constantDefinitions = this.collectConstantDefinitions(problem);
-    final Consumer<ConstantDefinition> _function_3 = (ConstantDefinition it) -> {
-      this.constantMapper.transformConstantDefinitionSpecification(it, trace);
-    };
-    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_3);
-    EList<Assertion> _assertions = problem.getAssertions();
-    for (final Assertion assertion : _assertions) {
-      this.transformAssertion(assertion, trace);
-    }
-    return new TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace>(specification, trace);
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from Relation to RelationDeclaration");
   }
   
   protected VLSTerm _transformTypeReference(final BoolTypeReference boolTypeReference, final Logic2VampireLanguageMapperTrace trace) {
@@ -120,6 +100,19 @@ public class Logic2VampireLanguageMapper {
       res.put(it.getDefines(), it);
     };
     IterableExtensions.<ConstantDefinition>filter(Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class), _function).forEach(_function_1);
+    return res;
+  }
+  
+  private HashMap<RelationDeclaration, RelationDefinition> collectRelationDefinitions(final LogicProblem problem) {
+    final HashMap<RelationDeclaration, RelationDefinition> res = new HashMap<RelationDeclaration, RelationDefinition>();
+    final Function1<RelationDefinition, Boolean> _function = (RelationDefinition it) -> {
+      RelationDeclaration _defines = it.getDefines();
+      return Boolean.valueOf((_defines != null));
+    };
+    final Consumer<RelationDefinition> _function_1 = (RelationDefinition it) -> {
+      res.put(it.getDefines(), it);
+    };
+    IterableExtensions.<RelationDefinition>filter(Iterables.<RelationDefinition>filter(problem.getRelations(), RelationDefinition.class), _function).forEach(_function_1);
     return res;
   }
   
@@ -304,6 +297,11 @@ public class Logic2VampireLanguageMapper {
   @Pure
   public Logic2VampireLanguageMapper_ConstantMapper getConstantMapper() {
     return this.constantMapper;
+  }
+  
+  @Pure
+  public Logic2VampireLanguageMapper_RelationMapper getRelationMapper() {
+    return this.relationMapper;
   }
   
   @Pure

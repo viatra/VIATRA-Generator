@@ -115,7 +115,7 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
                   VLSDoubleQuote _createVLSDoubleQuote = this.factory.createVLSDoubleQuote();
                   final Procedure1<VLSDoubleQuote> _function_9 = (VLSDoubleQuote it_4) -> {
                     String _name = e.getName();
-                    String _plus = ("\"" + _name);
+                    String _plus = ("\"a" + _name);
                     String _plus_1 = (_plus + "\"");
                     it_4.setValue(_plus_1);
                   };

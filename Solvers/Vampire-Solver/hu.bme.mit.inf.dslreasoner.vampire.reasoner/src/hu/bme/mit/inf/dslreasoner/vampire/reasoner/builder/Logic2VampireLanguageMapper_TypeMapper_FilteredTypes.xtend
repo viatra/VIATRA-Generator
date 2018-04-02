@@ -54,8 +54,11 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 						it.right = support.unfoldOr(type.elements.map [ e |
 							createVLSEquality => [
 								it.left = createVLSVariable => [it.name = variable.name]
+//								it.right = createVLSDoubleQuote => [
+//									it.value = "\"" + e.name + "\""
+//								]
 								it.right = createVLSDoubleQuote => [
-									it.value = "\"" + e.name + "\""
+									it.value = "\"a"+e.name+"\""
 								]
 							]
 						])

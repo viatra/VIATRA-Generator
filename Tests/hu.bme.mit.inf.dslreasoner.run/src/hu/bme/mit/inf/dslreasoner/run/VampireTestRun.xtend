@@ -88,28 +88,35 @@ class VampireTestRun {
 //		problem.elements += green
 		
 		
-		val allRPS = problem.add(TypeDeclaration("allRPS", true))
-		val newRPS = problem.add(TypeDeclaration("newRPS", false))
+		//val allRPS = problem.add(TypeDeclaration("allRPS", true))
+		//val newRPS = problem.add(TypeDeclaration("newRPS", false))
 		val oldRPS = problem.add(TypeDefinition("oldRPS", false, rock, paper, scissor)) //n+1 axioms, where n is the number of type definitions. 1. rocjk, paper, scissor are all rps. 2. every object is rps
 		
 //		val color = problem.add(TypeDefinition("color", false, red, green ))
-		Supertype(oldRPS,allRPS)
-		Supertype(newRPS,oldRPS)
+		//Supertype(oldRPS,allRPS)
+		//Supertype(newRPS,oldRPS)
 		
-//		val beats = problem.add(RelationDefinition("beats",[
-//			val x = addVar("x",oldRPS)
-//			val y = addVar("y",oldRPS)
-//			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
-//		]))
+		
+		
+		
+		///Remains
+		val beats = problem.add(RelationDefinition("beats",[
+			val x = addVar("x",oldRPS)
+			val y = addVar("y",oldRPS)
+			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
+		]))
 //		
-//		//below needs to be added as an axiom
+		//*/
+		//below needs to be added as an axiom
 //		val beats2 = problem.add(RelationDeclaration("beats2",oldRPS,oldRPS))
 //		problem.add(Assertion(Forall[
-//			val x = addVar("x",oldRPS)
+//			val x = addVar("x",oldRPS) 
+//			//x.range
 //			Exists[
 //				val y = addVar("y",oldRPS)
 //				beats2.call(x,y)
 //			]
 //		]))
+		//*/
 	}
 }
