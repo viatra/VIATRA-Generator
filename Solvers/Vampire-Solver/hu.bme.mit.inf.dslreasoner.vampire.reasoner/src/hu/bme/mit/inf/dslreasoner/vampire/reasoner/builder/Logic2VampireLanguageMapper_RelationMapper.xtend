@@ -27,7 +27,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 			trace.relationVar2VLS.put(variable, v)
 
 			val varType = createVLSFunction => [
-				it.constant = support.toIDMultiple("yezou")
+				it.constant = support.toIDMultiple("type" /*, name of type*/)
 				it.terms += createVLSVariable => [
 					it.name = support.toIDMultiple("Var", variable.name)
 				]

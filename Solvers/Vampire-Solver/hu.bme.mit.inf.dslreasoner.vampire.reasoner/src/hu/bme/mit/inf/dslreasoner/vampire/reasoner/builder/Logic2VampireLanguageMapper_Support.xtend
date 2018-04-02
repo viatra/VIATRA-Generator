@@ -83,7 +83,7 @@ class Logic2VampireLanguageMapper_Support {
 	
 	def protected VLSTerm createUniversallQuantifiedExpression(Logic2VampireLanguageMapper mapper, QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 		val variableMap = expression.quantifiedVariables.toInvertedMap[v | createVLSVariable => [
-			it.name = toID(v.name) ]]
+			it.name = toIDMultiple("Var", v.name) ]]
 				
 		createVLSUniversalQuantifier => [
 			it.variables += variableMap.values
@@ -94,7 +94,7 @@ class Logic2VampireLanguageMapper_Support {
 	
 	def protected VLSTerm createExistentiallyQuantifiedExpression(Logic2VampireLanguageMapper mapper, QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 		val variableMap = expression.quantifiedVariables.toInvertedMap[v | createVLSVariable => [
-			it.name = toID(v.name) ]]
+			it.name = toIDMultiple("Var", v.name) ]]
 				
 		createVLSExistentialQuantifier => [
 			it.variables += variableMap.values

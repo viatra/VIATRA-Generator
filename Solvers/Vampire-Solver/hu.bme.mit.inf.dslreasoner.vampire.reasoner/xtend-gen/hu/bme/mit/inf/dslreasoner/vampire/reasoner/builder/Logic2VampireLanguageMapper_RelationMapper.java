@@ -46,7 +46,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         trace.relationVar2VLS.put(variable, v);
         VLSFunction _createVLSFunction = this.factory.createVLSFunction();
         final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-          it.setConstant(this.support.toIDMultiple("yezou"));
+          it.setConstant(this.support.toIDMultiple("type"));
           EList<VLSTerm> _terms = it.getTerms();
           VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
           final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {

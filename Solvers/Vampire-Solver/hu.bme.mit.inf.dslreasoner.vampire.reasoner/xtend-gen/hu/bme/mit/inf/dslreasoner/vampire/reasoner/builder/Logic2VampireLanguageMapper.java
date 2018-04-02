@@ -39,6 +39,7 @@ import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSConstant;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquality;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSEquivalent;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFofFormula;
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSImplies;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSInt;
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSReal;
@@ -278,7 +279,7 @@ public class Logic2VampireLanguageMapper {
   protected VLSTerm _transformSymbolicReference(final Variable variable, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSVariable _createVLSVariable = this.factory.createVLSVariable();
     final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
-      it.setName(CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName());
+      it.setName(this.support.toIDMultiple("Var", CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName()));
     };
     final VLSVariable res = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
     return res;
@@ -290,6 +291,37 @@ public class Logic2VampireLanguageMapper {
   
   protected VLSTerm _transformSymbolicReference(final FunctionDefinition function, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return null;
+  }
+  
+  protected VLSTerm _transformSymbolicReference(final RelationDeclaration relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSTerm _xifexpression = null;
+    boolean _containsKey = trace.relationDefinitions.containsKey(relation);
+    if (_containsKey) {
+      _xifexpression = this.transformSymbolicReference(CollectionsUtil.<RelationDeclaration, RelationDefinition>lookup(relation, trace.relationDefinitions), parameterSubstitutions, trace, variables);
+    } else {
+      _xifexpression = null;
+    }
+    return _xifexpression;
+  }
+  
+  protected VLSTerm _transformSymbolicReference(final RelationDefinition relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant(this.support.toIDMultiple("rel", relation.getName()));
+      EList<Variable> _variables = relation.getVariables();
+      for (final Variable variable : _variables) {
+        {
+          VLSVariable _createVLSVariable = this.factory.createVLSVariable();
+          final Procedure1<VLSVariable> _function_1 = (VLSVariable it_1) -> {
+            it_1.setName(this.support.toIDMultiple("Var", CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName()));
+          };
+          final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
+          EList<VLSTerm> _terms = it.getTerms();
+          _terms.add(v);
+        }
+      }
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
   protected VLSTerm transformTypeReference(final BoolTypeReference boolTypeReference, final Logic2VampireLanguageMapperTrace trace) {
@@ -336,6 +368,10 @@ public class Logic2VampireLanguageMapper {
       return _transformSymbolicReference((FunctionDeclaration)constant, parameterSubstitutions, trace, variables);
     } else if (constant instanceof FunctionDefinition) {
       return _transformSymbolicReference((FunctionDefinition)constant, parameterSubstitutions, trace, variables);
+    } else if (constant instanceof RelationDeclaration) {
+      return _transformSymbolicReference((RelationDeclaration)constant, parameterSubstitutions, trace, variables);
+    } else if (constant instanceof RelationDefinition) {
+      return _transformSymbolicReference((RelationDefinition)constant, parameterSubstitutions, trace, variables);
     } else if (constant instanceof DefinedElement) {
       return _transformSymbolicReference((DefinedElement)constant, parameterSubstitutions, trace, variables);
     } else if (constant instanceof Variable) {

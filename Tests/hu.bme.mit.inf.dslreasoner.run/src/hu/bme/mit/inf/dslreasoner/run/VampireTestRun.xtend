@@ -100,23 +100,23 @@ class VampireTestRun {
 		
 		
 		///Remains
-		val beats = problem.add(RelationDefinition("beats",[
-			val x = addVar("x",oldRPS)
-			val y = addVar("y",oldRPS)
-			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
-		]))
+//		val beats = problem.add(RelationDefinition("beats",[
+//			val x = addVar("x",oldRPS)
+//			val y = addVar("y",oldRPS)
+//			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
+//		]))
 //		
 		//*/
 		//below needs to be added as an axiom
-//		val beats2 = problem.add(RelationDeclaration("beats2",oldRPS,oldRPS))
-//		problem.add(Assertion(Forall[
-//			val x = addVar("x",oldRPS) 
-//			//x.range
-//			Exists[
-//				val y = addVar("y",oldRPS)
-//				beats2.call(x,y)
-//			]
-//		]))
+		val beats2 = problem.add(RelationDeclaration("beats2",oldRPS,oldRPS))
+		problem.add(Assertion(Forall[
+			val x = addVar("x",oldRPS) 
+			//x.range
+			Exists[
+				val y = addVar("y",oldRPS)
+				beats2.call(x,y)
+			]
+		]))
 		//*/
 	}
 }

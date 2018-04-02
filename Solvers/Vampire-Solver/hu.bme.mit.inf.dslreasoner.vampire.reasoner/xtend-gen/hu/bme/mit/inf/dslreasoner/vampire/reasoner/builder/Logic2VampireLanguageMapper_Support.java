@@ -99,7 +99,7 @@ public class Logic2VampireLanguageMapper_Support {
       final Function1<Variable, VLSVariable> _function = (Variable v) -> {
         VLSVariable _createVLSVariable = this.factory.createVLSVariable();
         final Procedure1<VLSVariable> _function_1 = (VLSVariable it) -> {
-          it.setName(this.toID(v.getName()));
+          it.setName(this.toIDMultiple("Var", v.getName()));
         };
         return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
       };
@@ -122,7 +122,7 @@ public class Logic2VampireLanguageMapper_Support {
       final Function1<Variable, VLSVariable> _function = (Variable v) -> {
         VLSVariable _createVLSVariable = this.factory.createVLSVariable();
         final Procedure1<VLSVariable> _function_1 = (VLSVariable it) -> {
-          it.setName(this.toID(v.getName()));
+          it.setName(this.toIDMultiple("Var", v.getName()));
         };
         return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
       };
