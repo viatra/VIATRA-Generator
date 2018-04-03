@@ -102,7 +102,15 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
 				it.variables += createVLSVariable => [it.name = "A"]
-				it.operand = support.unfoldOr(new ArrayList<VLSTerm>(typeTrace.type2And.values))
+				it.operand = createVLSEquivalent => [
+					it.left = createVLSFunction => [
+						it.constant = "Object"
+						it.terms += createVLSVariable => [
+							it.name = "A"
+						]
+					]
+					it.right = support.unfoldOr(new ArrayList<VLSTerm>(typeTrace.type2And.values))
+				]
 			]
 		]
 

@@ -199,9 +199,27 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
         };
         VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_4);
         _variables.add(_doubleArrow);
-        Collection<VLSTerm> _values = typeTrace.type2And.values();
-        ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
-        it_1.setOperand(this.support.unfoldOr(_arrayList));
+        VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
+        final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
+          VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+          final Procedure1<VLSFunction> _function_6 = (VLSFunction it_3) -> {
+            it_3.setConstant("Object");
+            EList<VLSTerm> _terms = it_3.getTerms();
+            VLSVariable _createVLSVariable_2 = this.factory.createVLSVariable();
+            final Procedure1<VLSVariable> _function_7 = (VLSVariable it_4) -> {
+              it_4.setName("A");
+            };
+            VLSVariable _doubleArrow_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_2, _function_7);
+            _terms.add(_doubleArrow_1);
+          };
+          VLSFunction _doubleArrow_1 = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_6);
+          it_2.setLeft(_doubleArrow_1);
+          Collection<VLSTerm> _values = typeTrace.type2And.values();
+          ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
+          it_2.setRight(this.support.unfoldOr(_arrayList));
+        };
+        VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_5);
+        it_1.setOperand(_doubleArrow_1);
       };
       VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_3);
       it.setFofFormula(_doubleArrow);
