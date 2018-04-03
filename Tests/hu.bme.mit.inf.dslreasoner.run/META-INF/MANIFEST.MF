@@ -31,6 +31,7 @@ Require-Bundle: hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlan
  hu.bme.mit.inf.dslreasoner.visualisation;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.domains.alloyexamples;bundle-version="1.0.0",
  org.eclipse.collections;bundle-version="7.1.1",
- hu.bme.mit.inf.dslreasoner.vampire.reasoner;bundle-version="1.0.0"
+ hu.bme.mit.inf.dslreasoner.vampire.reasoner;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.vampire.language;bundle-version="1.0.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

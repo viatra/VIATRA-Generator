@@ -1,9 +1,17 @@
 package hu.bme.mit.inf.dslreasoner.vampire.reasoner.builder
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSFunction
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSTerm
+import hu.bme.mit.inf.dslreasoner.vampireLanguage.VLSVariable
 import hu.bme.mit.inf.dslreasoner.vampireLanguage.VampireLanguageFactory
 import java.util.ArrayList
+import java.util.HashMap
+import java.util.List
+import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
@@ -20,20 +28,58 @@ class Logic2VampireLanguageMapper_RelationMapper {
 
 		// 1. store all variables in support wrt their name
 		// 1.1 if variable has type, creating list of type declarations
+		val Map<Variable, VLSVariable> relationVar2VLS = new HashMap
+		val Map<Variable, VLSFunction> relationVar2TypeDecComply = new HashMap
+		val Map<Variable, VLSFunction> relationVar2TypeDecRes = new HashMap
+		val typedefs = new ArrayList<VLSTerm>
 		for (variable : r.variables) {
 			val v = createVLSVariable => [
 				it.name = support.toIDMultiple("Var", variable.name)
 			]
-			trace.relationVar2VLS.put(variable, v)
+			relationVar2VLS.put(variable, v)
 
-			val varType = createVLSFunction => [
-				it.constant = support.toIDMultiple("type" /*, name of type*/)
+			val varTypeComply = createVLSFunction => [
+				it.constant = support.toIDMultiple("type", (variable.range as ComplexTypeReference).referred.name)
 				it.terms += createVLSVariable => [
 					it.name = support.toIDMultiple("Var", variable.name)
 				]
 			]
-			trace.relationVar2TypeDec.put(variable, varType)
+			relationVar2TypeDecComply.put(variable, varTypeComply)
+			
+			val varTypeRes = createVLSFunction => [
+				it.constant = support.toIDMultiple("type", (variable.range as ComplexTypeReference).referred.name)
+				it.terms += createVLSVariable => [
+					it.name = support.toIDMultiple("Var", variable.name)
+				]
+			]			
+			relationVar2TypeDecRes.put(variable, varTypeRes)
 		}
+
+		val comply = createVLSFofFormula => [
+			it.name = support.toIDMultiple("compliance", r.name)
+			it.fofRole = "axiom"
+			it.fofFormula = createVLSUniversalQuantifier => [
+				for (variable : r.variables) {
+					val v = createVLSVariable => [
+						it.name = variable.lookup(relationVar2VLS).name
+					]
+					it.variables += v
+
+				}
+				it.operand = createVLSImplies => [
+					it.left = createVLSFunction => [
+						it.constant = support.toIDMultiple("rel", r.name)
+						for (variable : r.variables) {
+							val v = createVLSVariable => [
+								it.name = variable.lookup(relationVar2VLS).name
+							]
+							it.terms += v
+						}
+					]
+					it.right = support.unfoldAnd(new ArrayList<VLSTerm>(relationVar2TypeDecComply.values))
+				]
+			]
+		]
 
 		val res = createVLSFofFormula => [
 			it.name = support.toIDMultiple("relation", r.name)
@@ -41,25 +87,25 @@ class Logic2VampireLanguageMapper_RelationMapper {
 			it.fofFormula = createVLSUniversalQuantifier => [
 				for (variable : r.variables) {
 					val v = createVLSVariable => [
-						it.name = variable.lookup(trace.relationVar2VLS).name
+						it.name = variable.lookup(relationVar2VLS).name
 					]
 					it.variables += v
 
 				}
 				it.operand = createVLSImplies => [
-					it.left = support.unfoldAnd(new ArrayList<VLSTerm>(trace.relationVar2TypeDec.values))
+					it.left = support.unfoldAnd(new ArrayList<VLSTerm>(relationVar2TypeDecRes.values))
 					it.right = createVLSEquivalent => [
 						it.left = createVLSFunction => [
 							it.constant = support.toIDMultiple("rel", r.name)
 							for (variable : r.variables) {
 								val v = createVLSVariable => [
-									it.name = variable.lookup(trace.relationVar2VLS).name
+									it.name = variable.lookup(relationVar2VLS).name
 								]
 								it.terms += v
 
 							}
 						]
-						it.right = base.transformTerm(r.value, trace, trace.relationVar2VLS)
+						it.right = base.transformTerm(r.value, trace, relationVar2VLS)
 					]
 
 				]
@@ -69,7 +115,69 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		]
 
 		// trace.relationDefinition2Predicate.put(r,res)
+		trace.specification.formulas += comply;
 		trace.specification.formulas += res;
+
+	}
+	
+	def dispatch public void transformRelation(RelationDeclaration r, Logic2VampireLanguageMapperTrace trace) {
+
+		// 1. store all variables in support wrt their name
+		// 1.1 if variable has type, creating list of type declarations
+		val List<VLSVariable> relationVar2VLS = new ArrayList
+		val List<VLSFunction> relationVar2TypeDecComply = new ArrayList
+		val typedefs = new ArrayList<VLSTerm>
+		
+		for (i : 0..<r.parameters.length) {
+			
+			val v = createVLSVariable => [
+				it.name = support.toIDMultiple("Var", i.toString)
+			]
+			relationVar2VLS.add(v)
+
+			val varTypeComply = createVLSFunction => [
+				it.constant = support.toIDMultiple("type", (r.parameters.get(i) as ComplexTypeReference).referred.name)
+				it.terms += createVLSVariable => [
+					it.name = support.toIDMultiple("Var", i.toString)
+				]
+			]
+			relationVar2TypeDecComply.add(varTypeComply)
+
+		}
+		
+
+		val comply = createVLSFofFormula => [
+			it.name = support.toIDMultiple("compliance", r.name)
+			it.fofRole = "axiom"
+			it.fofFormula = createVLSUniversalQuantifier => [
+				
+				for (i : 0..<r.parameters.length) {
+					val v = createVLSVariable => [
+						it.name = relationVar2VLS.get(i).name
+					]
+					it.variables += v
+
+				}
+				
+				it.operand = createVLSImplies => [
+					it.left = createVLSFunction => [
+						it.constant = support.toIDMultiple("rel", r.name)
+						
+						for (i : 0..<r.parameters.length) {
+							val v = createVLSVariable => [
+								it.name = relationVar2VLS.get(i).name
+							]
+							it.terms += v
+						}
+						
+					]
+					it.right = support.unfoldAnd(relationVar2TypeDecComply)
+				]
+			]
+		]
+
+		// trace.relationDefinition2Predicate.put(r,res)
+		trace.specification.formulas += comply
 	}
 
 }

@@ -33,7 +33,7 @@ class Logic2VampireLanguageMapperTrace {
 	public var Map<ConstantDeclaration, ConstantDefinition> constantDefinitions
 	
 	public var Map<RelationDeclaration, RelationDefinition> relationDefinitions
-	public var Map<Variable, VLSVariable> relationVar2VLS = new HashMap
-	public var Map<Variable, VLSFunction> relationVar2TypeDec = new HashMap
+	public val Map<Variable, VLSVariable> relationVar2VLS = new HashMap
+	public val Map<Variable, VLSFunction> relationVar2TypeDec = new HashMap
 		
 }

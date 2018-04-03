@@ -5,9 +5,11 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Distinct
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Equals
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Exists
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Forall
@@ -15,11 +17,12 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Iff
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Impl
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
@@ -77,7 +80,7 @@ class Logic2VampireLanguageMapper {
 		trace.constantDefinitions = problem.collectConstantDefinitions
 		trace.relationDefinitions = problem.collectRelationDefinitions
 
-		problem.relations.filter(RelationDefinition).forEach[this.relationMapper.transformRelation(it, trace)]
+		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
 
 		// only transforms definitions
 		// problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstant(it, trace)]
@@ -201,8 +204,8 @@ class Logic2VampireLanguageMapper {
 		]
 	}
 
-//	def dispatch protected VLSTerm transformTerm(Distinct distinct, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-//		support.unfoldDistinctTerms(this,distinct.operands,trace,variables) }
+	def dispatch protected VLSTerm transformTerm(Distinct distinct, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
+		support.unfoldDistinctTerms(this,distinct.operands,trace,variables) }
 //	
 //		def dispatch protected ALSTerm transformTerm(Plus plus, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
 //		createALSFunctionCall => [it.params += plus.leftOperand.transformTerm(trace,variables) it.params += plus.rightOperand.transformTerm(trace,variables) it.referredNumericOperator = ALSNumericOperator.PLUS] }
@@ -217,7 +220,7 @@ class Logic2VampireLanguageMapper {
 //	
 	def dispatch protected VLSTerm transformTerm(Forall forall, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
-		support.createUniversallQuantifiedExpression(this, forall, trace, variables)
+		support.createUniversallyQuantifiedExpression(this, forall, trace, variables)
 	}
 
 	def dispatch protected VLSTerm transformTerm(Exists exists, Logic2VampireLanguageMapperTrace trace,
@@ -225,12 +228,12 @@ class Logic2VampireLanguageMapper {
 		support.createExistentiallyQuantifiedExpression(this, exists, trace, variables)
 	}
 
-//	def dispatch protected ALSTerm transformTerm(InstanceOf instanceOf, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
-//		return createALSSubset => [
-//			it.leftOperand = instanceOf.value.transformTerm(trace,variables)
-//			it.rightOperand = instanceOf.range.transformTypeReference(trace)
-//		]
-//	}
+	def dispatch protected VLSTerm transformTerm(InstanceOf instanceOf, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
+		return createVLSFunction => [
+			it.constant = support.toIDMultiple("type", (instanceOf.range as ComplexTypeReference).referred.name )
+			it.terms += instanceOf.value.transformTerm(trace, variables)
+		]
+	}
 //	
 //	def dispatch protected ALSTerm transformTerm(TransitiveClosure tc, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
 //		return this.relationMapper.transformTransitiveRelationReference(
@@ -283,7 +286,8 @@ class Logic2VampireLanguageMapper {
 					// cannot treat variable as function (constant) because of name ID not being the same
 					// below does not work
 					val res = createVLSVariable => [
-						it.name = support.toIDMultiple("Var", variable.lookup(variables).name)
+//						it.name = support.toIDMultiple("Var", variable.lookup(variables).name)
+						it.name = support.toID(variable.lookup(variables).name)
 					]
 					// no need for potprocessing cuz booleans are supported
 					return res
@@ -326,7 +330,8 @@ class Logic2VampireLanguageMapper {
 				}
 
 				// TODO
-				def dispatch protected VLSTerm transformSymbolicReference(RelationDeclaration relation,
+				/*
+				def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
 					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
 					Map<Variable, VLSVariable> variables) {
 					if (trace.relationDefinitions.containsKey(relation)) {
@@ -334,12 +339,6 @@ class Logic2VampireLanguageMapper {
 							parameterSubstitutions, trace, variables)
 					}
 					else {
-						
-						
-						
-						
-						
-						
 //						if (relationMapper.transformToHostedField(relation, trace)) {
 //							val VLSRelation = relation.lookup(trace.relationDeclaration2Field)
 //							// R(a,b) =>
@@ -367,9 +366,10 @@ class Logic2VampireLanguageMapper {
 //						}
 					}
 				}
+				*/
 
 				// TODO
-				def dispatch protected VLSTerm transformSymbolicReference(RelationDefinition relation,
+				def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
 					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
 					Map<Variable, VLSVariable> variables) {
 //					 createVLSFunction => [
@@ -378,13 +378,7 @@ class Logic2VampireLanguageMapper {
 //					]
 					return createVLSFunction => [
 						it.constant = support.toIDMultiple("rel", relation.name)
-						for (variable : relation.variables) {
-							val v = createVLSVariable => [
-								it.name = support.toIDMultiple("Var", variable.lookup(variables).name)
-							]
-							it.terms += v
-
-						}
+						it.terms += parameterSubstitutions.map[p | p.transformTerm(trace,variables)]
 					]
 				}
 

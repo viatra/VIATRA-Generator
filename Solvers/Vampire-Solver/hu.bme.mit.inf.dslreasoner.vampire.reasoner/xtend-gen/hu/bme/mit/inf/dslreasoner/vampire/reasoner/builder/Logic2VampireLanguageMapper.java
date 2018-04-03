@@ -6,9 +6,11 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Distinct;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Equals;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Exists;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Forall;
@@ -16,15 +18,18 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Iff;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Impl;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
@@ -109,10 +114,10 @@ public class Logic2VampireLanguageMapper {
     }
     trace.constantDefinitions = this.collectConstantDefinitions(problem);
     trace.relationDefinitions = this.collectRelationDefinitions(problem);
-    final Consumer<RelationDefinition> _function_3 = (RelationDefinition it) -> {
+    final Consumer<Relation> _function_3 = (Relation it) -> {
       this.relationMapper.transformRelation(it, trace);
     };
-    Iterables.<RelationDefinition>filter(problem.getRelations(), RelationDefinition.class).forEach(_function_3);
+    problem.getRelations().forEach(_function_3);
     final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
       this.constantMapper.transformConstantDefinitionSpecification(it, trace);
     };
@@ -247,12 +252,28 @@ public class Logic2VampireLanguageMapper {
     return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function);
   }
   
+  protected VLSTerm _transformTerm(final Distinct distinct, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    return this.support.unfoldDistinctTerms(this, distinct.getOperands(), trace, variables);
+  }
+  
   protected VLSTerm _transformTerm(final Forall forall, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    return this.support.createUniversallQuantifiedExpression(this, forall, trace, variables);
+    return this.support.createUniversallyQuantifiedExpression(this, forall, trace, variables);
   }
   
   protected VLSTerm _transformTerm(final Exists exists, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     return this.support.createExistentiallyQuantifiedExpression(this, exists, trace, variables);
+  }
+  
+  protected VLSTerm _transformTerm(final InstanceOf instanceOf, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      TypeReference _range = instanceOf.getRange();
+      it.setConstant(this.support.toIDMultiple("type", ((ComplexTypeReference) _range).getReferred().getName()));
+      EList<VLSTerm> _terms = it.getTerms();
+      VLSTerm _transformTerm = this.transformTerm(instanceOf.getValue(), trace, variables);
+      _terms.add(_transformTerm);
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
   protected VLSTerm _transformTerm(final SymbolicValue symbolicValue, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
@@ -279,7 +300,7 @@ public class Logic2VampireLanguageMapper {
   protected VLSTerm _transformSymbolicReference(final Variable variable, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSVariable _createVLSVariable = this.factory.createVLSVariable();
     final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
-      it.setName(this.support.toIDMultiple("Var", CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName()));
+      it.setName(this.support.toID(CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName()));
     };
     final VLSVariable res = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
     return res;
@@ -293,33 +314,53 @@ public class Logic2VampireLanguageMapper {
     return null;
   }
   
-  protected VLSTerm _transformSymbolicReference(final RelationDeclaration relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    VLSTerm _xifexpression = null;
-    boolean _containsKey = trace.relationDefinitions.containsKey(relation);
-    if (_containsKey) {
-      _xifexpression = this.transformSymbolicReference(CollectionsUtil.<RelationDeclaration, RelationDefinition>lookup(relation, trace.relationDefinitions), parameterSubstitutions, trace, variables);
-    } else {
-      _xifexpression = null;
-    }
-    return _xifexpression;
-  }
-  
-  protected VLSTerm _transformSymbolicReference(final RelationDefinition relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
+  /**
+   * def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
+   * List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+   * Map<Variable, VLSVariable> variables) {
+   * if (trace.relationDefinitions.containsKey(relation)) {
+   * this.transformSymbolicReference(relation.lookup(trace.relationDefinitions),
+   * parameterSubstitutions, trace, variables)
+   * }
+   * else {
+   * //						if (relationMapper.transformToHostedField(relation, trace)) {
+   * //							val VLSRelation = relation.lookup(trace.relationDeclaration2Field)
+   * //							// R(a,b) =>
+   * //							// b in a.R
+   * //							return createVLSSubset => [
+   * //								it.leftOperand = parameterSubstitutions.get(1).transformTerm(trace, variables)
+   * //								it.rightOperand = createVLSJoin => [
+   * //									it.leftOperand = parameterSubstitutions.get(0).transformTerm(trace, variables)
+   * //									it.rightOperand = createVLSReference => [it.referred = VLSRelation]
+   * //								]
+   * //							]
+   * //						} else {
+   * //							val target = createVLSJoin => [
+   * //								leftOperand = createVLSReference => [referred = trace.logicLanguage]
+   * //								rightOperand = createVLSReference => [
+   * //									referred = relation.lookup(trace.relationDeclaration2Global)
+   * //								]
+   * //							]
+   * //							val source = support.unfoldTermDirectProduct(this, parameterSubstitutions, trace, variables)
+   * //
+   * //							return createVLSSubset => [
+   * //								leftOperand = source
+   * //								rightOperand = target
+   * //							]
+   * //						}
+   * }
+   * }
+   */
+  protected VLSTerm _transformSymbolicReference(final Relation relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
       it.setConstant(this.support.toIDMultiple("rel", relation.getName()));
-      EList<Variable> _variables = relation.getVariables();
-      for (final Variable variable : _variables) {
-        {
-          VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-          final Procedure1<VLSVariable> _function_1 = (VLSVariable it_1) -> {
-            it_1.setName(this.support.toIDMultiple("Var", CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName()));
-          };
-          final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
-          EList<VLSTerm> _terms = it.getTerms();
-          _terms.add(v);
-        }
-      }
+      EList<VLSTerm> _terms = it.getTerms();
+      final Function1<Term, VLSTerm> _function_1 = (Term p) -> {
+        return this.transformTerm(p, trace, variables);
+      };
+      List<VLSTerm> _map = ListExtensions.<Term, VLSTerm>map(parameterSubstitutions, _function_1);
+      Iterables.<VLSTerm>addAll(_terms, _map);
     };
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
@@ -333,6 +374,8 @@ public class Logic2VampireLanguageMapper {
       return _transformTerm((And)and, trace, variables);
     } else if (and instanceof BoolLiteral) {
       return _transformTerm((BoolLiteral)and, trace, variables);
+    } else if (and instanceof Distinct) {
+      return _transformTerm((Distinct)and, trace, variables);
     } else if (and instanceof Equals) {
       return _transformTerm((Equals)and, trace, variables);
     } else if (and instanceof Exists) {
@@ -351,6 +394,8 @@ public class Logic2VampireLanguageMapper {
       return _transformTerm((Or)and, trace, variables);
     } else if (and instanceof RealLiteral) {
       return _transformTerm((RealLiteral)and, trace, variables);
+    } else if (and instanceof InstanceOf) {
+      return _transformTerm((InstanceOf)and, trace, variables);
     } else if (and instanceof SymbolicValue) {
       return _transformTerm((SymbolicValue)and, trace, variables);
     } else {
@@ -368,12 +413,10 @@ public class Logic2VampireLanguageMapper {
       return _transformSymbolicReference((FunctionDeclaration)constant, parameterSubstitutions, trace, variables);
     } else if (constant instanceof FunctionDefinition) {
       return _transformSymbolicReference((FunctionDefinition)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof RelationDeclaration) {
-      return _transformSymbolicReference((RelationDeclaration)constant, parameterSubstitutions, trace, variables);
-    } else if (constant instanceof RelationDefinition) {
-      return _transformSymbolicReference((RelationDefinition)constant, parameterSubstitutions, trace, variables);
     } else if (constant instanceof DefinedElement) {
       return _transformSymbolicReference((DefinedElement)constant, parameterSubstitutions, trace, variables);
+    } else if (constant instanceof Relation) {
+      return _transformSymbolicReference((Relation)constant, parameterSubstitutions, trace, variables);
     } else if (constant instanceof Variable) {
       return _transformSymbolicReference((Variable)constant, parameterSubstitutions, trace, variables);
     } else {

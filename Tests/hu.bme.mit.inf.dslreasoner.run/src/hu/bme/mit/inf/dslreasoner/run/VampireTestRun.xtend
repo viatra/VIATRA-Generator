@@ -1,12 +1,21 @@
 package hu.bme.mit.inf.dslreasoner.run
 
+import hu.bme.mit.inf.dslreasoner.VampireLanguageStandaloneSetup
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.VampireSolver
 import hu.bme.mit.inf.dslreasoner.vampire.reasoner.VampireSolverConfiguration
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
+import java.util.Collections
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class VampireTestRun {
 	
@@ -14,13 +23,31 @@ class VampireTestRun {
 	
 	def static void main(String[] args) {
 //		val inputs = new FileSystemWorkspace('''initialModels/''',"")
+		
+		
+		//create logic problem
+		//var LogicProblem problem = builder.createProblem
+		
+
+		
+		LogicproblemPackage.eINSTANCE.eClass()
+		Ecore2logicannotationsPackage.eINSTANCE.eClass()
+		Viatra2LogicAnnotationsPackage.eINSTANCE.eClass()
+		val reg = Resource.Factory.Registry.INSTANCE
+		val map = reg.extensionToFactoryMap
+		map.put("logicproblem", new XMIResourceFactoryImpl)
+		VampireLanguageStandaloneSetup.doSetup
+		
 		val workspace = new FileSystemWorkspace('''outputModels/''',"")
 		workspace.initAndClear
 		
-		//create logic problem
+		// Load and create top level elements
+		// Load source model
+		val rs = new ResourceSetImpl
+		val logicURI = URI.createFileURI("logProb.logicproblem")
+		val logRes = rs.createResource(logicURI)
+		
 		var LogicProblem problem = builder.createProblem
-		
-		
 		
 		/*
 		deMorgan(problem)
@@ -28,6 +55,8 @@ class VampireTestRun {
 		rockPaperScisors(problem)
 		//*/
 		
+		logRes.contents.add(problem)
+		logRes.save(Collections.EMPTY_MAP)
 
 		//problem.add(Assertion( Y && X <=> X) )
 		
@@ -99,14 +128,14 @@ class VampireTestRun {
 		
 		
 		
-		///Remains
-//		val beats = problem.add(RelationDefinition("beats",[
-//			val x = addVar("x",oldRPS)
-//			val y = addVar("y",oldRPS)
-//			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
-//		]))
-//		
-		//*/
+		/* Remains
+		val beats = problem.add(RelationDefinition("beats",[
+			val x = addVar("x",oldRPS)
+			val y = addVar("y",oldRPS)
+			(x==rock && y==scissor)||(x==scissor && y==paper)||(x==paper && y==rock)
+		]))
+		
+		/*/
 		//below needs to be added as an axiom
 		val beats2 = problem.add(RelationDeclaration("beats2",oldRPS,oldRPS))
 		problem.add(Assertion(Forall[
@@ -118,5 +147,6 @@ class VampireTestRun {
 			]
 		]))
 		//*/
+		
 	}
 }
