@@ -33,7 +33,7 @@ class AlloySolver extends LogicReasoner{
 	
 	override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
 		val alloyConfig = configuration.asConfig
-		val writeToFile = (
+		val writeFile = (
 			configuration.documentationLevel===DocumentationLevel::NORMAL ||
 			configuration.documentationLevel===DocumentationLevel::FULL)
 		
@@ -45,7 +45,7 @@ class AlloySolver extends LogicReasoner{
 		
 		//var String fileURI = null;
 		var String alloyCode = workspace.writeModelToString(alloyProblem,fileName)
-		if(writeToFile) {
+		if(writeFile) {
 			workspace.writeModel(alloyProblem,fileName)
 		}
 		val transformationTime = System.currentTimeMillis - transformationStart
