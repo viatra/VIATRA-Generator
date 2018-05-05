@@ -133,6 +133,7 @@ class SmtLanguageScopeProvider extends org.eclipse.xtext.scoping.impl.AbstractDe
 	
 	// Any type defined in the input section can be referred.
 	def public IScope scope_SMTComplexTypeReference_referred(SMTComplexTypeReference reference, EReference ref){
-		return Scopes.scopeFor(getTop(typeof(SMTDocument),reference).input.typeDeclarations)
+		val types = getTop(typeof(SMTDocument),reference).input.typeDeclarations
+		return Scopes.scopeFor(types)
 	}
 }
