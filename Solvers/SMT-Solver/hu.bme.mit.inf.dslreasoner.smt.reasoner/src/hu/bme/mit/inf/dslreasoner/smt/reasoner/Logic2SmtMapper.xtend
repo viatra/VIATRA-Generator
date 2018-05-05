@@ -1027,68 +1027,75 @@ class Logic2SmtMapper{
 			val a1 = Assertion(Forall[
 				val r1 = addVar(root.key)
 				val r2 = addVar(root.key)
-				(root.value.call(r1) && root.value.call(r2)) => (r1 == r2)
+				return (root.value.call(r1) && root.value.call(r2)) => (r1 == r2)
 			])
 			document.assertions+=this.transformAssertion(a1,trace)
 		}
+		
 		// only one of the root entries is true
-//		val a2 = Assertion(
-//			rootRelations.entrySet.map[selected|
-//				rootRelations.entrySet.map[other|
-//					if(selected == other) {
-//						Exists[
-//							val r = addVar(other.key)
-//							other.value.call(r)
-//						]
-//					} else {
-//						Forall[
-//							val r = addVar(other.key)
-//							!other.value.call(r)
-//						]
-//					}
-//				].And
-//			].Or
-//		)
-//		document.assertions+=this.transformAssertion(a2,trace)
-//		// the root has no parent
-//		for(root : rootRelations.entrySet) {
-//			val parentRelations = root.key.lookup(possibleParentRelations)
-//			val a3 = Assertion(Forall[
-//				val r = addVar(root.key)
-//				root.value.call(r) => parentRelations.map[containment |
-//					Forall[
-//						val container = addVar(containment.parameters.get(0))
-//						!containment.call(container,r)
-//					]
-//				].And
-//			])
-//			document.assertions+=this.transformAssertion(a3,trace)
-//		}
-//		// no element has two parents
-//		for(root : rootRelations.entrySet) {
-//			val parentRelations = root.key.lookup(possibleParentRelations)
-//			val a4 = Assertion(Forall[
-//				val element = addVar(root.key)
-//				parentRelations.map[selected |
-//					Forall[
-//						val container = addVar(selected.parameters.get(0))
-//						selected.call(container,element) => (
-//							Forall[
-//								val other = addVar(selected.parameters.get(0))
-//								(!selected.call(other,element)) || (other == element)
-//							] &&
-//							parentRelations.filter[it !==selected].map[otherContainment |
-//									Forall[
-//									val other = addVar(otherContainment.parameters.get(0))
-//									otherContainment.call(other,element)
-//								]
-//							].And)
-//						
-//						]
-//				].And
-//			])
-//			document.assertions+=this.transformAssertion(a4,trace)
-//		}
+		val a2 = Assertion(
+			Or(rootRelations.entrySet.map[selected|
+				And(rootRelations.entrySet.map[other|
+					val isSupertype = selected.key.transitiveClosurePlus[return supertypes].contains(other)
+					val type = other.key
+					val relation = other.value
+					if(selected == other) {
+						return Exists[
+							val r = addVar(type)
+							val x = addVar(LogicInt)
+							return relation.call(r)
+						]
+					}else if(isSupertype) {
+						return true.asTerm
+					}else {
+						return Forall[
+							val r = addVar(other.key)
+							!other.value.call(r)
+						]
+					}
+				])
+			])
+		)
+		document.assertions+=this.transformAssertion(a2,trace)
+		// the root has no parent
+		for(root : rootRelations.entrySet) {
+			val parentRelations = root.key.lookup(possibleParentRelations)
+			val a3 = Assertion(Forall[
+				val r = addVar(root.key)
+				root.value.call(r) => parentRelations.map[containment |
+					Forall[
+						val container = addVar(containment.parameters.get(0))
+						!containment.call(container,r)
+					]
+				].And
+			])
+			document.assertions+=this.transformAssertion(a3,trace)
+		}
+		// no element has two parents
+		for(root : rootRelations.entrySet) {
+			val parentRelations = root.key.lookup(possibleParentRelations)
+			val a4 = Assertion(Forall[
+				val element = addVar(root.key)
+				parentRelations.map[selected |
+					Forall[
+						val container = addVar(selected.parameters.get(0))
+						selected.call(container,element) => (
+							Forall[
+								val other = addVar(selected.parameters.get(0))
+								(!selected.call(other,element)) || (other == element)
+							] &&
+							parentRelations.filter[it !==selected].map[otherContainment |
+									Forall[
+									val other = addVar(otherContainment.parameters.get(0))
+									otherContainment.call(other,element)
+								]
+							].And)
+						
+						]
+				].And
+			])
+			document.assertions+=this.transformAssertion(a4,trace)
+		}
 	
 		// an element is not root, then it has a container
 		for(root : rootRelations.entrySet) {
