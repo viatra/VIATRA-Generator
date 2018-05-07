@@ -22,4 +22,5 @@ Export-Package: hu.bme.mit.inf.dslreasoner.viatra2logic,
  hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations,
  hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl,
  hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.util
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.viatra2logic
 

@@ -11,4 +11,5 @@ Require-Bundle: hu.bme.mit.inf.dslreasoner.application,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: hu.bme.mit.inf.dslreasoner.application.ide.contentassist.antlr.internal,
  hu.bme.mit.inf.dslreasoner.application.ide.contentassist.antlr
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.application.ide
 

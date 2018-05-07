@@ -24,3 +24,4 @@ Export-Package: hu.bme.mit.inf.dslreasoner.application.ui.quickfix,
  hu.bme.mit.inf.dslreasoner.application.ui.contentassist,
  hu.bme.mit.inf.dslreasoner.application.ui.internal
 Bundle-Activator: hu.bme.mit.inf.dslreasoner.application.ui.internal.ApplicationActivator
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.application.ui

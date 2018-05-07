@@ -19,9 +19,10 @@ Require-Bundle: hu.bme.mit.inf.dslreasoner.smt.language;visibility:=reexport,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: hu.bme.mit.inf.dslreasoner.ui.quickfix,
  hu.bme.mit.inf.dslreasoner.ui.contentassist,
  hu.bme.mit.inf.dslreasoner.ui.contentassist.antlr,
  hu.bme.mit.inf.dslreasoner.ui.internal
 Bundle-Activator: hu.bme.mit.inf.dslreasoner.ui.internal.SmtLanguageActivator
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.smt.language.ui

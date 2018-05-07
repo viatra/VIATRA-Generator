@@ -15,4 +15,5 @@ Require-Bundle: com.google.guava,
  guru.nidi.graphviz-java;bundle-version="0.2.1"
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.visualisation
 

@@ -20,4 +20,5 @@ Export-Package: hu.bme.mit.inf.dslreasoner.ecore2logic,
  hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations,
  hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.impl,
  hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.util
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.ecore2logic
 
