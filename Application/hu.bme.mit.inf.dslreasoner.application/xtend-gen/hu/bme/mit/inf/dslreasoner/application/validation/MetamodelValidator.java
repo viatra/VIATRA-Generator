@@ -20,19 +20,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 public class MetamodelValidator {
   public LinkedList<String> validateMetamodel(final EcoreMetamodelDescriptor descriptor) {
     final LinkedList<String> errors = new LinkedList<String>();
-    List<EClass> _classes = descriptor.getClasses();
-    this.allSupertypesAreIncluded(_classes, errors);
-    List<EEnum> _enums = descriptor.getEnums();
-    List<EEnumLiteral> _literals = descriptor.getLiterals();
-    this.allEnumTypesareIncluded(_enums, _literals, errors);
-    List<EClass> _classes_1 = descriptor.getClasses();
-    List<EReference> _references = descriptor.getReferences();
-    this.referenceEndpointsAreIncluded(_classes_1, _references, errors);
-    List<EClass> _classes_2 = descriptor.getClasses();
-    List<EAttribute> _attributes = descriptor.getAttributes();
-    this.attributeSourcePontIsIncluded(_classes_2, _attributes, errors);
-    List<EAttribute> _attributes_1 = descriptor.getAttributes();
-    this.attributeTargetIsSupported(_attributes_1, errors);
+    this.allSupertypesAreIncluded(descriptor.getClasses(), errors);
+    this.allEnumTypesareIncluded(descriptor.getEnums(), descriptor.getLiterals(), errors);
+    this.referenceEndpointsAreIncluded(descriptor.getClasses(), descriptor.getReferences(), errors);
+    this.attributeSourcePontIsIncluded(descriptor.getClasses(), descriptor.getAttributes(), errors);
+    this.attributeTargetIsSupported(descriptor.getAttributes(), errors);
     return errors;
   }
   
@@ -57,10 +49,10 @@ public class MetamodelValidator {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Metamodel contains \"");
           String _name = c.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
           _builder.append("\" but not contains its supertype \"");
           String _name_1 = s.getName();
-          _builder.append(_name_1, "");
+          _builder.append(_name_1);
           _builder.append("\"!");
           errors.add(_builder.toString());
         }
@@ -70,18 +62,16 @@ public class MetamodelValidator {
   
   public void allEnumTypesareIncluded(final List<EEnum> enums, final List<EEnumLiteral> literals, final List<String> errors) {
     for (final EEnumLiteral l : literals) {
-      EEnum _eEnum = l.getEEnum();
-      boolean _contains = enums.contains(_eEnum);
+      boolean _contains = enums.contains(l.getEEnum());
       boolean _not = (!_contains);
       if (_not) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Metamodel contains literal \"");
         String _name = l.getName();
-        _builder.append(_name, "");
+        _builder.append(_name);
         _builder.append("\" but does not contains enum \"");
-        EEnum _eEnum_1 = l.getEEnum();
-        String _name_1 = _eEnum_1.getName();
-        _builder.append(_name_1, "");
+        String _name_1 = l.getEEnum().getName();
+        _builder.append(_name_1);
         _builder.append("\"!");
         errors.add(_builder.toString());
       }
@@ -98,10 +88,10 @@ public class MetamodelValidator {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Metamodel contains reference \"");
           String _name = reference.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
           _builder.append("\" but does not contains its source type \"");
           String _name_1 = src.getName();
-          _builder.append(_name_1, "");
+          _builder.append(_name_1);
           _builder.append("\"!");
           errors.add(_builder.toString());
         }
@@ -112,10 +102,10 @@ public class MetamodelValidator {
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("Metamodel contains reference \"");
           String _name_2 = reference.getName();
-          _builder_1.append(_name_2, "");
+          _builder_1.append(_name_2);
           _builder_1.append("\" but does not contains its target type \"");
           String _name_3 = trg.getName();
-          _builder_1.append(_name_3, "");
+          _builder_1.append(_name_3);
           _builder_1.append("\"!");
           errors.add(_builder_1.toString());
         }
@@ -133,10 +123,10 @@ public class MetamodelValidator {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Metamodel contains attribute \"");
           String _name = attribute.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
           _builder.append("\" but does not contains its source type \"");
           String _name_1 = src.getName();
-          _builder.append(_name_1, "");
+          _builder.append(_name_1);
           _builder.append("\"!");
           errors.add(_builder.toString());
         }
@@ -154,10 +144,10 @@ public class MetamodelValidator {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Metamodels contains attribute \"");
           String _name = attribute.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
           _builder.append("\" with unsupported type \"");
           String _name_1 = trg.getName();
-          _builder.append(_name_1, "");
+          _builder.append(_name_1);
           _builder.append("\"!");
           errors.add(_builder.toString());
         }

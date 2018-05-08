@@ -12,6 +12,7 @@
 'SMTSolver'=54
 'ViatraSolver'=56
 'config'=27
+'constraints'=26
 'debug'=47
 'epackage'=13
 'excluding'=21
@@ -33,7 +34,6 @@
 'output'=50
 'package'=20
 'partial-model'=43
-'patterns'=26
 'real'=37
 'runs'=45
 'runtime'=29

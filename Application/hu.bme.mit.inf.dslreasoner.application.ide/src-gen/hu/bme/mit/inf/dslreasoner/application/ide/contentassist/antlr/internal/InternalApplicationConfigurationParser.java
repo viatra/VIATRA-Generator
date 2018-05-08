@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalApplicationConfigurationParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'none'", "'normal'", "'full'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'", "'.'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "'}'", "','", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'patterns'", "'config'", "'log-level'", "'runtime'", "'memory'", "'#'", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'..'", "'scope'", "'generate'", "'partial-model'", "'solver'", "'debug'", "'log'", "'statistics'", "'output'", "'+='", "'*'", "'number'", "'runs'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'none'", "'normal'", "'full'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'", "'.'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "'}'", "','", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'constraints'", "'config'", "'log-level'", "'runtime'", "'memory'", "'#'", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'..'", "'scope'", "'generate'", "'partial-model'", "'solver'", "'debug'", "'log'", "'statistics'", "'output'", "'+='", "'*'", "'number'", "'runs'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -14536,21 +14536,21 @@ public class InternalApplicationConfigurationParser extends AbstractInternalCont
 
 
     // $ANTLR start "rule__GraphPatternDeclaration__Group__0__Impl"
-    // InternalApplicationConfiguration.g:4530:1: rule__GraphPatternDeclaration__Group__0__Impl : ( 'patterns' ) ;
+    // InternalApplicationConfiguration.g:4530:1: rule__GraphPatternDeclaration__Group__0__Impl : ( 'constraints' ) ;
     public final void rule__GraphPatternDeclaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalApplicationConfiguration.g:4534:1: ( ( 'patterns' ) )
-            // InternalApplicationConfiguration.g:4535:1: ( 'patterns' )
+            // InternalApplicationConfiguration.g:4534:1: ( ( 'constraints' ) )
+            // InternalApplicationConfiguration.g:4535:1: ( 'constraints' )
             {
-            // InternalApplicationConfiguration.g:4535:1: ( 'patterns' )
-            // InternalApplicationConfiguration.g:4536:2: 'patterns'
+            // InternalApplicationConfiguration.g:4535:1: ( 'constraints' )
+            // InternalApplicationConfiguration.g:4536:2: 'constraints'
             {
-             before(grammarAccess.getGraphPatternDeclarationAccess().getPatternsKeyword_0()); 
+             before(grammarAccess.getGraphPatternDeclarationAccess().getConstraintsKeyword_0()); 
             match(input,32,FOLLOW_2); 
-             after(grammarAccess.getGraphPatternDeclarationAccess().getPatternsKeyword_0()); 
+             after(grammarAccess.getGraphPatternDeclarationAccess().getConstraintsKeyword_0()); 
 
             }
 
@@ -22971,21 +22971,21 @@ public class InternalApplicationConfigurationParser extends AbstractInternalCont
 
 
     // $ANTLR start "rule__GenerationTask__Group_3_2__0__Impl"
-    // InternalApplicationConfiguration.g:7392:1: rule__GenerationTask__Group_3_2__0__Impl : ( 'patterns' ) ;
+    // InternalApplicationConfiguration.g:7392:1: rule__GenerationTask__Group_3_2__0__Impl : ( 'constraints' ) ;
     public final void rule__GenerationTask__Group_3_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalApplicationConfiguration.g:7396:1: ( ( 'patterns' ) )
-            // InternalApplicationConfiguration.g:7397:1: ( 'patterns' )
+            // InternalApplicationConfiguration.g:7396:1: ( ( 'constraints' ) )
+            // InternalApplicationConfiguration.g:7397:1: ( 'constraints' )
             {
-            // InternalApplicationConfiguration.g:7397:1: ( 'patterns' )
-            // InternalApplicationConfiguration.g:7398:2: 'patterns'
+            // InternalApplicationConfiguration.g:7397:1: ( 'constraints' )
+            // InternalApplicationConfiguration.g:7398:2: 'constraints'
             {
-             before(grammarAccess.getGenerationTaskAccess().getPatternsKeyword_3_2_0()); 
+             before(grammarAccess.getGenerationTaskAccess().getConstraintsKeyword_3_2_0()); 
             match(input,32,FOLLOW_2); 
-             after(grammarAccess.getGenerationTaskAccess().getPatternsKeyword_3_2_0()); 
+             after(grammarAccess.getGenerationTaskAccess().getConstraintsKeyword_3_2_0()); 
 
             }
 

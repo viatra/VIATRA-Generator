@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -17,7 +16,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern;
+import org.eclipse.viatra.query.patternlanguage.emf.vql.Pattern;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -38,8 +37,7 @@ public class QueryAndMetamodelValidator {
     List<EAttribute> _attributes = metamodel.getAttributes();
     Iterable<ENamedElement> _plus_2 = Iterables.<ENamedElement>concat(_plus_1, _attributes);
     List<EReference> _references = metamodel.getReferences();
-    Iterable<ENamedElement> _plus_3 = Iterables.<ENamedElement>concat(_plus_2, _references);
-    final Set<ENamedElement> elementsInMetamodel = IterableExtensions.<ENamedElement>toSet(_plus_3);
+    final Set<ENamedElement> elementsInMetamodel = IterableExtensions.<ENamedElement>toSet(Iterables.<ENamedElement>concat(_plus_2, _references));
     final LinkedList<String> errors = new LinkedList<String>();
     for (final Pattern pattern : patterns) {
       {
@@ -51,9 +49,9 @@ public class QueryAndMetamodelValidator {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Pattern \"");
             String _name = pattern.getName();
-            _builder.append(_name, "");
+            _builder.append(_name);
             _builder.append("\" refers to an element \"");
-            _builder.append(element, "");
+            _builder.append(element);
             _builder.append("\" that is not included to the selected metamodel!");
             errors.add(_builder.toString());
           }
@@ -64,11 +62,9 @@ public class QueryAndMetamodelValidator {
   }
   
   public Iterable<ENamedElement> getReferredNamedElements(final Pattern pattern) {
-    TreeIterator<EObject> _eAllContents = pattern.eAllContents();
-    final List<EObject> elements = IteratorExtensions.<EObject>toList(_eAllContents);
+    final List<EObject> elements = IteratorExtensions.<EObject>toList(pattern.eAllContents());
     final Function1<EObject, Iterable<ENamedElement>> _function = (EObject element) -> {
-      EClass _eClass = element.eClass();
-      final EList<EReference> references = _eClass.getEAllReferences();
+      final EList<EReference> references = element.eClass().getEAllReferences();
       final Function1<EReference, Iterable<ENamedElement>> _function_1 = (EReference r) -> {
         boolean _isMany = r.isMany();
         if (_isMany) {
@@ -83,11 +79,8 @@ public class QueryAndMetamodelValidator {
           }
         }
       };
-      List<Iterable<ENamedElement>> _map = ListExtensions.<EReference, Iterable<ENamedElement>>map(references, _function_1);
-      Iterable<ENamedElement> _flatten = Iterables.<ENamedElement>concat(_map);
-      return Iterables.<ENamedElement>filter(_flatten, ENamedElement.class);
+      return Iterables.<ENamedElement>filter(Iterables.<ENamedElement>concat(ListExtensions.<EReference, Iterable<ENamedElement>>map(references, _function_1)), ENamedElement.class);
     };
-    List<Iterable<ENamedElement>> _map = ListExtensions.<EObject, Iterable<ENamedElement>>map(elements, _function);
-    return Iterables.<ENamedElement>concat(_map);
+    return Iterables.<ENamedElement>concat(ListExtensions.<EObject, Iterable<ENamedElement>>map(elements, _function));
   }
 }

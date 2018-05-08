@@ -14,7 +14,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedPackage" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ViatraImport" eSuperTypes="#//Import">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importedViatra" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//PatternModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedViatra" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.ecore#//PatternModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration" eSuperTypes="#//Command">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -78,14 +78,14 @@
         eType="#//PatternEntry" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//PatternModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.ecore#//PatternModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AllPatternEntry" eSuperTypes="#//PatternEntry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exclusuion" upperBound="-1"
         eType="#//PatternElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternElement" eSuperTypes="#//PatternEntry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.ecore#//Pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.ecore#//Pattern"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GraphPatternDeclaration" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//PatternSpecification"
