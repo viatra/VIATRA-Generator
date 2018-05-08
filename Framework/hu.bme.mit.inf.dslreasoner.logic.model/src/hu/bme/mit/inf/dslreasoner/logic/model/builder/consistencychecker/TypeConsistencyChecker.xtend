@@ -1,19 +1,19 @@
 package hu.bme.mit.inf.dslreasoner.logic.model.builder.consistencychecker
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
-import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
-import org.eclipse.viatra.query.runtime.emf.EMFScope
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.TypeSystemIsInconsistentMatcher
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.ElementNotDefinedInSupertypeMatcher
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.ElementWithNoPossibleDynamicTypeMatcher
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.PossibleDynamicTypeMatcher
+import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.ElementNotDefinedInSupertype
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.ElementWithNoPossibleDynamicType
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.PossibleDynamicType
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.TypeSystemIsInconsistent
+import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import org.eclipse.viatra.query.runtime.emf.EMFScope
 
 class TypeConsistencyChecker extends LogicReasoner{
 	val extension LogicresultFactory factory = LogicresultFactory.eINSTANCE
@@ -32,10 +32,10 @@ class TypeConsistencyChecker extends LogicReasoner{
 		
 		val queryEngine = ViatraQueryEngine.on(new EMFScope(problem))
 		
-		val typeSystemInconsistencyMatcher = TypeSystemIsInconsistentMatcher.on(queryEngine)
-		val elementNotDefinedInSupertype = ElementNotDefinedInSupertypeMatcher.on(queryEngine)
-		val elementWithNoPossibleDynamicType = ElementWithNoPossibleDynamicTypeMatcher.on(queryEngine)
-		val possibleDynamicType = PossibleDynamicTypeMatcher.on(queryEngine)
+		val typeSystemInconsistencyMatcher = TypeSystemIsInconsistent.Matcher.on(queryEngine)
+		val elementNotDefinedInSupertype = ElementNotDefinedInSupertype.Matcher.on(queryEngine)
+		val elementWithNoPossibleDynamicType = ElementWithNoPossibleDynamicType.Matcher.on(queryEngine)
+		val possibleDynamicType = PossibleDynamicType.Matcher.on(queryEngine)
 		
 		val hasErrorPatternMatch = typeSystemInconsistencyMatcher.hasMatch(problem)
 		

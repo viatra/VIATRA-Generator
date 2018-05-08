@@ -198,7 +198,7 @@ class GenerationTaskExecutor {
 							val vis1 = new PartialInterpretation2Gml
 							val gml = vis1.transform(representation)
 							outputWorkspaceForRun.writeText('''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».gml''',gml)
-							if(false && representation.newElements.size + representation.problem.elements.size < 150) {
+							if(representation.newElements.size + representation.problem.elements.size < 150) {
 								val vis2 = new GraphvizVisualisation
 								val dot = vis2.visualiseConcretization(representation)
 								dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1»''')

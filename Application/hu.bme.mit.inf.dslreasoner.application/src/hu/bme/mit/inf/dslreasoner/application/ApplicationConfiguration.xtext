@@ -1,7 +1,7 @@
 grammar hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "http://www.eclipse.org/viatra/query/patternlanguage/PatternLanguage" as viatra
+import "http://www.eclipse.org/viatra/query/patternlanguage/emf/PatternLanguage" as viatra
 generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 
 ConfigurationScript:

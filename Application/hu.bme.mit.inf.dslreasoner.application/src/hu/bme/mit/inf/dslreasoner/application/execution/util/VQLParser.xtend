@@ -10,24 +10,21 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.viatra.query.patternlanguage.PatternLanguageStandaloneSetup
-import org.eclipse.viatra.query.patternlanguage.annotations.ExtensionBasedAnnotationValidatorLoader
-import org.eclipse.viatra.query.patternlanguage.annotations.IAnnotationValidatorLoader
 import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageRuntimeModule
 import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
 import org.eclipse.viatra.query.patternlanguage.emf.GenmodelExtensionLoader
 import org.eclipse.viatra.query.patternlanguage.emf.IGenmodelMappingLoader
-import org.eclipse.viatra.query.patternlanguage.emf.eMFPatternLanguage.PatternModel
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.CompoundMetamodelProviderService
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
 import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder
+import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.xtext.resource.XtextResourceSet
 
 class MyModule extends EMFPatternLanguageRuntimeModule implements Module {
-    def public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {
-        return typeof(ExtensionBasedAnnotationValidatorLoader);
-    }
+//    override public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {
+//        return typeof(ExtensionBasedAnnotationValidatorLoader);
+//    }
     def public Class<? extends IGenmodelMappingLoader> bindGenmodelMappingLoader() {
         return typeof(GenmodelExtensionLoader);
     }
@@ -42,7 +39,6 @@ class VQLParser {
 	val SpecificationBuilder builder = new SpecificationBuilder
 	
 	new() {
-		PatternLanguageStandaloneSetup.doSetup
 		EMFPatternLanguageStandaloneSetup.doSetup;
 		
 		injector = internalCreateInjector

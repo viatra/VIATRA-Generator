@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternModel
+import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.scoping.IScope

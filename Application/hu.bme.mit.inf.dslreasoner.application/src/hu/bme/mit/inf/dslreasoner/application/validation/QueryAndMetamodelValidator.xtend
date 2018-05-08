@@ -6,7 +6,7 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.ENamedElement
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern
+import org.eclipse.viatra.query.patternlanguage.emf.vql.Pattern
 
 class QueryAndMetamodelValidator {
 	

@@ -7,8 +7,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.PossibleDynamicTypeMatcher
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStarMatcher
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.PossibleDynamicType
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStar
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTDocument
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTEnumLiteral
@@ -111,7 +111,7 @@ class Logic2Smt_TypeMapperTrace_FilteredTypes implements Logic2Smt_TypeMapperTra
 	}
 	
 	def validate(EObject element, EObject other) {
-		if(element != null) {
+		if(element !== null) {
 			val headOfElement = EcoreUtil2.getContainerOfType(element,SMTDocument)
 			val expectedHeadOfElement = EcoreUtil2.getContainerOfType(other,SMTDocument)
 			if(headOfElement !== expectedHeadOfElement) {
@@ -234,8 +234,8 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 	}
 	
 	protected def transformOldTypes(Iterable<Type> oldTypes,Iterable<DefinedElement> oldElements, Logic2SmtMapperTrace trace, SMTInput document, ViatraQueryEngine engine) {
-		val possibleTypeMatcher = PossibleDynamicTypeMatcher.on(engine)
-		val supertypeStarMatcher = SupertypeStarMatcher.on(engine)
+		val possibleTypeMatcher = PossibleDynamicType.Matcher.on(engine)
+		val supertypeStarMatcher = SupertypeStar.Matcher.on(engine)
 //		val possibleTypes = new LinkedList
 //		if(hasDefinedElement) possibleTypes += typesWithDefinedSupertype
 //		if(hasUndefinedElement) possibleTypes += typesWithoutDefinedSupertype
@@ -351,7 +351,7 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 		Iterable<TypeDeclaration> typesWithoutDefinedSupertype,
 		Logic2SmtMapperTrace trace, SMTInput document, ViatraQueryEngine engine)
 	{
-		val supertypeStarMatcher = SupertypeStarMatcher.on(engine)
+		val supertypeStarMatcher = SupertypeStar.Matcher.on(engine)
 		val possibleTypes = typesWithoutDefinedSupertype
 		val possibleConcreteTypes = possibleTypes.filter[!it.isIsAbstract].toList
 		
@@ -483,7 +483,7 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 		}
 		
 		if(list.empty) throw new AssertionError('''Typereference to type is «type.name» empty''')
-		if(list.exists[it.type == null]){
+		if(list.exists[it.type === null]){
 			throw new AssertionError('''Typereference to null!''')
 		}
 		return list
@@ -520,14 +520,14 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 		}
 		
 		val engine = ViatraQueryEngine.on(new EMFScope(problem))
-		val supertypeStarMatcher = SupertypeStarMatcher.on(engine)
+		val supertypeStarMatcher = SupertypeStar.Matcher.on(engine)
 		
 		val Map<Type,List<DefinedElement>> type2Elements = new HashMap
 		for(key : problem.types) {
 			type2Elements.put(key,new LinkedList<DefinedElement>)
 		}
 		
-		if(trace.typeTrace.independentClasses != null) {
+		if(trace.typeTrace.independentClasses !== null) {
 			for(type : trace.typeTrace.independentClasses.keySet) {
 				if(type instanceof TypeDefinition) {
 					type.lookup(type2Elements).addAll(type.elements)
@@ -537,7 +537,7 @@ class Logic2Smt_TypeMapper_FilteredTypes implements Logic2Smt_TypeMapper {
 			}
 		}
 		
-		if(trace.typeTrace.oldObjectTypeFunction != null) {
+		if(trace.typeTrace.oldObjectTypeFunction !== null) {
 			val inverseOldTypeMap = trace.typeTrace.oldObjectTypeMap.bijectiveInverse
 			for(oldElement: trace.typeTrace.elementMap.values) {
 				val type = interpretation.queryEngine.resolveFunctionDefinition(

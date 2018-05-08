@@ -143,7 +143,7 @@ class  Viatra2Logic {
 	{
 		val pquery = squery.internalQueryRepresentation
 		val disjunction = if(config.normalize) {
-			val normalizer = new PBodyNormalizer(EMFQueryMetaContext.INSTANCE,true)
+			val normalizer = new PBodyNormalizer(EMFQueryMetaContext.DEFAULT)
 			normalizer.rewrite(pquery)
 		} else {
 			pquery.disjunctBodies
@@ -255,7 +255,7 @@ class  Viatra2Logic {
 	def TypeDescriptor getType(PVariable v, PBody body, TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
 		if(v.isPositiveVariable) {
 			val allTypes = v.lookup(
-				body.getAllUnaryTypeRestrictions(EMFQueryMetaContext.INSTANCE))
+				body.getAllUnaryTypeRestrictions(EMFQueryMetaContext.DEFAULT))
 			val types = allTypes.filter[it.inputKey instanceof BaseEMFTypeKey<?>].toSet
 			
 			if(types.size == 0) {
@@ -279,7 +279,7 @@ class  Viatra2Logic {
 			val indexOfVariable = v.lookup(onlyConstraint.actualParametersTuple.invertIndex)
 			val parameter = onlyConstraint.referredQuery.parameters.get(indexOfVariable)
 			val declaredUnaryType = parameter.declaredUnaryType as BaseEMFTypeKey<? extends EClassifier>
-			if(declaredUnaryType == null) {
+			if(declaredUnaryType === null) {
 				throw new UnsupportedOperationException(
 				'''parameter «parameter.name» in pattern «
 				onlyConstraint.referredQuery.fullyQualifiedName» does not have type!''')

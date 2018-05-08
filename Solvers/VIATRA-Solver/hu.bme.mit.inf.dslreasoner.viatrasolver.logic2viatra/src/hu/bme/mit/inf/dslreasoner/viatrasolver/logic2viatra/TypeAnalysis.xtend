@@ -1,21 +1,21 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra
 
-import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.DontHaveDefinedSupertype
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementMayTypeNegativeConstraint
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementTypeConstructor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementTypeRefinementNegativeConstraint
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementTypeRefinementTarget
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import java.util.ArrayList
 import java.util.List
 import java.util.Map
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementTypeConstructorMatcher
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementTypeRefinementTargetMatcher
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementTypeRefinementNegativeConstraintMatcher
-import java.util.ArrayList
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.DontHaveDefinedSupertypeMatcher
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries.NewElementMayTypeNegativeConstraintMatcher
+import org.eclipse.xtend.lib.annotations.Data
 
 @Data class TypeRefinementPrecondition {
 	Type targetType
@@ -60,11 +60,11 @@ class TypeAnalysis {
 	
 	def TypeAnalysisResult performTypeAnalysis(LogicProblem problem, PartialInterpretation interpretation) {
 		val viatraEngine = ViatraQueryEngine.on(new EMFScope(problem))
-		val negativeMatcher = NewElementTypeRefinementNegativeConstraintMatcher.on(viatraEngine)
+		val negativeMatcher = NewElementTypeRefinementNegativeConstraint.Matcher.on(viatraEngine)
 		
-		val possibleNewDynamicTypes =  NewElementTypeConstructorMatcher.on(viatraEngine).allValuesOftype
+		val possibleNewDynamicTypes =  NewElementTypeConstructor.Matcher.on(viatraEngine).allValuesOftype
 		
-		val possibleNewTypeRefinementTargets = NewElementTypeRefinementTargetMatcher.on(viatraEngine).allValuesOfrefined
+		val possibleNewTypeRefinementTargets = NewElementTypeRefinementTarget.Matcher.on(viatraEngine).allValuesOfrefined
 		val possibleNewTypeRefinements = new ArrayList
 		for(possibleNewTypeRefinementTarget : possibleNewTypeRefinementTargets) {
 			val inhibitorTypes = negativeMatcher.getAllValuesOfinhibitor(possibleNewTypeRefinementTarget)
@@ -73,8 +73,8 @@ class TypeAnalysis {
 				inhibitorTypes.toList)
 		}
 		
-		val possibleTypes = DontHaveDefinedSupertypeMatcher.on(viatraEngine).allValuesOftype
-		val newElementMayTypeMatcher = NewElementMayTypeNegativeConstraintMatcher.on(viatraEngine)
+		val possibleTypes = DontHaveDefinedSupertype.Matcher.on(viatraEngine).allValuesOftype
+		val newElementMayTypeMatcher = NewElementMayTypeNegativeConstraint.Matcher.on(viatraEngine)
 		
 		val mayNewTypePreconditions = possibleTypes.toInvertedMap[type | 
 			val inhibitorTypes = newElementMayTypeMatcher.getAllValuesOfinhibitor(type as TypeDeclaration)

@@ -30,7 +30,7 @@ Workflow {
 		language = StandardLanguage {
 			name = "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration"
 			referencedResource = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
-			referencedResource = "platform:/resource/org.eclipse.viatra.query.patternlanguage/model/generated/PatternLanguage.genmodel"
+			referencedResource = "platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.genmodel"
 			fileExtensions = "vsconfig"
 			serializer = {
 				generateStub = false

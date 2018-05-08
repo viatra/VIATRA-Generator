@@ -1,15 +1,19 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.FunctionDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
-import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStarMatcher
+import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStar
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialConstantInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialFunctionInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
@@ -23,10 +27,6 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialTypeInterpratation> type2Interpretation = new HashMap
@@ -112,7 +112,7 @@ class PartialInterpretationInitialiser {
 	 * Initialize type with existing elements
 	 */
 	def private initialisePartialTypeInterpretation(TypeDeclaration t, ViatraQueryEngine engine, Problem2PartialInterpretationTrace trace) {
-		val supertypeMatcher = SupertypeStarMatcher.on(engine)
+		val supertypeMatcher = SupertypeStar.Matcher.on(engine)
 		val res = createPartialTypeInterpratation => [
 			it.interpretationOf = t
 			it.elements += supertypeMatcher.getAllValuesOfsubtype(t)

@@ -13,10 +13,10 @@ import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.viatra.query.patternlanguage.emf.eMFPatternLanguage.PatternModel
 import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.Pattern
-import org.eclipse.viatra.query.patternlanguage.patternLanguage.PatternCompositionConstraint
+import org.eclipse.viatra.query.patternlanguage.emf.vql.Pattern
+import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternCompositionConstraint
+import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.xtext.EcoreUtil2
 
