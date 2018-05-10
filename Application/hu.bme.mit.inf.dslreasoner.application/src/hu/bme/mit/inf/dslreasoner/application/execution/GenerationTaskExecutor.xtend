@@ -164,7 +164,7 @@ class GenerationTaskExecutor {
 				
 				// 6.2 For each run, the configuration and the workspace is adjusted
 				solverLoader.setRunIndex(solverConfig,configurationMap,run,console)
-				solverConfig.progressMonitor = new EclipseProgressMonitor(monitor)
+				solverConfig.progressMonitor = new EclipseBasedProgressMonitor(monitor)
 				val reasonerWorkspaceForRun = if(runs > 1) {
 					reasonerWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
 				} else {
