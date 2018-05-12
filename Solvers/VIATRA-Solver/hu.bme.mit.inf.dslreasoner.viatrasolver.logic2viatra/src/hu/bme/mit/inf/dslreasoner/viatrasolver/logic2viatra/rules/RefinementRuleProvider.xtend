@@ -130,8 +130,6 @@ class RefinementRuleProvider {
 			}
 		} else {
 			ruleBuilder.action[match |
-				println(name)
-				
 				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation

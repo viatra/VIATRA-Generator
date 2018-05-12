@@ -75,7 +75,9 @@ class InstanceModel2PartialInterpretation {
 		val attributesUsed = ecore2Logic.allAttributesInScope(ecore2LogicTrace).toSet
 		for(source : objects) {
 			// Translating the references
-			for(reference : source.eClass.EAllReferences.filter[referencesUsed.contains(it)]) {
+			for(reference : source.eClass.EAllReferences.filter[
+				referencesUsed.contains(it) && !it.derived]) 
+			{
 				val type = ecore2Logic.relationOfReference(ecore2LogicTrace,reference)
 				val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
 				val sourceElement = source.lookup(object2DefinedElement)
@@ -97,7 +99,7 @@ class InstanceModel2PartialInterpretation {
 			}
 			
 			// Transforming the attributes
-			for(attribute : source.eClass.EAllAttributes.filter[attributesUsed.contains(it)]) {
+			for(attribute : source.eClass.EAllAttributes.filter[attributesUsed.contains(it) && !it.derived]) {
 				val type = ecore2Logic.relationOfAttribute(ecore2LogicTrace,attribute)
 				val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
 				val sourceElement = source.lookup(object2DefinedElement)
@@ -105,7 +107,7 @@ class InstanceModel2PartialInterpretation {
 					val listOfTargets = source.eGet(attribute) as List<? extends EObject>
 					for(target : listOfTargets) {
 						val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
-						if(value != null) {
+						if(value !== null) {
 							translateLink(interpretation,sourceElement,value)
 						}
 					}
@@ -113,7 +115,7 @@ class InstanceModel2PartialInterpretation {
 					val target = source.eGet(attribute)
 					if(target !== null) {
 						val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
-						if(value != null) {
+						if(value !== null) {
 							translateLink(interpretation,sourceElement,value)
 						}
 					}

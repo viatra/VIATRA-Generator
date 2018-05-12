@@ -98,7 +98,8 @@ class Logic2Ecore {
 		if(rootCandidates.size == 1) {
 			return rootCandidates.head
 		} else {
-			throw new AssertionError("Multiple root objects")
+			println('''No single root objects: «rootCandidates.size»''')
+			return rootCandidates.head
 		}
 	}
 }
