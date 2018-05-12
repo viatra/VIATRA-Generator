@@ -201,7 +201,7 @@ class GenerationTaskExecutor {
 							if(representation.newElements.size + representation.problem.elements.size < 150) {
 								val vis2 = new GraphvizVisualisation
 								val dot = vis2.visualiseConcretization(representation)
-								dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1»''')
+								dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».png''')
 							}
 						}
 						monitor.worked(100)
