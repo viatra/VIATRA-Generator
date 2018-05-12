@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
 --><plugin>
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <!-- @generated AlloyLanguage -->
-    <package class="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.alloylanguage.AlloylanguagePackage" genModel="model/AlloyLanguage.genmodel" uri="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.language"/>
-  </extension>
   <extension id="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.SignatureQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.SignatureQueries" id="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.SignatureQueries">
       <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.directSubset"/>
