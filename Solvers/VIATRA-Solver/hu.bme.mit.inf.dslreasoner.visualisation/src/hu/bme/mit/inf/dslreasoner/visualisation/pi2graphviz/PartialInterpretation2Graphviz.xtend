@@ -17,20 +17,18 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import java.io.File
+import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import java.util.LinkedList
 import java.util.List
 import java.util.Random
 import java.util.Set
+import org.eclipse.xtext.xbase.lib.Functions.Function1
 
 import static guru.nidi.graphviz.model.Factory.*
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.awt.image.BufferedImage
-import java.util.Collection
-import org.eclipse.xtext.xbase.lib.Functions.Function1
 
 class GraphvizVisualisation implements PartialInterpretationVisualiser {
 	
@@ -244,10 +242,6 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 		}
 	}
 	private def average(Iterable<Integer> doubles) { return doubles.reduce[p1, p2|p1+p2]/doubles.size }
-	
-	
-	
-	
 }
 
 enum TypeColoringStyle {
@@ -255,6 +249,8 @@ enum TypeColoringStyle {
 }
 
 class GraphvisVisualisation implements PartialInterpretationVisualisation {
+	private static VisualisationQueque queue = new VisualisationQueque
+	
 	val private Graph graph
 	
 	public new(Graph graph) {
@@ -262,11 +258,15 @@ class GraphvisVisualisation implements PartialInterpretationVisualisation {
 	}
 	
 	override writeToFile(ReasonerWorkspace workspace, String name) {
-		val file = workspace.getFile('''«name».svg''')
-		//val bufferedImage = new BufferedImage 
-		Graphviz.useEngine(new GraphvizV8Engine());
-		Graphviz.fromGraph(graph)//.engine(Engine::NEATO)
-		.render(Format.SVG_STANDALONE).toFile(file)
-		workspace.refreshFile('''«name».svg''')
+		
+		val file = workspace.getFile('''«name»''')
+		queue.start
+		val future = queue.addTask(graph,file)
+		val message = future.get
+		if(message===null) {
+			workspace.refreshFile('''«name»''')
+		} else {
+			// Do nothing
+		}		
 	}
 }
