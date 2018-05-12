@@ -3,7 +3,7 @@ import viatra	"hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns"
 
 generate {
 	metamodel = { package functionalarchitecture }
-	patterns = { package hu.bme.mit.inf.dslreasoner.domains.transima.fam }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.transima.fam }
 
 	solver = ViatraSolver
 	
@@ -11,8 +11,12 @@ generate {
 		#node = 10
 	}
 	
-	number = 3
-	runs = 3
+	number = 1
+	runs = 1
+	config = {
+		log-level = normal
+	}
 	
+	debug = "platform:/resource/ModelGenExampleFAM_plugin/debug"
 	output = "platform:/resource/ModelGenExampleFAM_plugin/output"
 }
