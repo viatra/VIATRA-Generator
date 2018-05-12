@@ -1,13 +1,13 @@
 import epackage	"platform:/resource/ModelGenExampleFAM_standalone/inputs/FamMetamodel.ecore"
 import viatra	"platform:/resource/ModelGenExampleFAM_standalone/inputs/FamPatterns.vql"
 
-file LogFile = "platform:/resource/ModelGenExampleFAM/outputs/log.txt"
 generate {
 	metamodel = { package functionalarchitecture }
-	patterns = { package hu.bme.mit.inf.dslreasoner.domains.fam excluding { model } }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.fam  }
+	partial-model = { "platform:/resource/ModelGenExampleFAM_standalone/inputs/FamInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 10
+		#node = 5
 	}
 	
 	config = {

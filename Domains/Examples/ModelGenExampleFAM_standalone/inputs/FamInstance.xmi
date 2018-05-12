@@ -5,8 +5,4 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:functionalarchitecture="http://www.inf.mit.bme.hu/viatrasolver/example/fam"
     xsi:schemaLocation="http://www.inf.mit.bme.hu/viatrasolver/example/fam FamMetamodel.ecore">
-  <rootElements
-      xsi:type="functionalarchitecture:Function"/>
-  <rootElements
-      xsi:type="functionalarchitecture:Function"/>
 </functionalarchitecture:FunctionalArchitectureModel>
