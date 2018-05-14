@@ -14,4 +14,12 @@
             genModel="model/PartialInterpretation.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated PartialModelAnnotations -->
+      <package
+            uri="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/partial2logicannotation"
+            class="hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.Partial2logicannotationsPackage"
+            genModel="model/PartialModelAnnotations.genmodel"/>
+   </extension>
+
 </plugin>

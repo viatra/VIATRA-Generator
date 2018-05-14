@@ -2,9 +2,6 @@ package hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz
 
 import guru.nidi.graphviz.attribute.Shape
 import guru.nidi.graphviz.attribute.Style
-import guru.nidi.graphviz.engine.Format
-import guru.nidi.graphviz.engine.Graphviz
-import guru.nidi.graphviz.engine.GraphvizV8Engine
 import guru.nidi.graphviz.model.Graph
 import guru.nidi.graphviz.model.Label
 import guru.nidi.graphviz.model.Node

@@ -1,12 +1,14 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.Partial2logicannotationsFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
@@ -17,11 +19,10 @@ import java.util.HashMap
 import java.util.HashSet
 import java.util.Map
 import java.util.Set
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 
 @Data class PartialInterpretation2Logic_Trace {
 	Map<DefinedElement,DefinedElement> new2Old = new HashMap
@@ -59,12 +60,13 @@ class PartialInterpretation2Logic {
 	}
 	
 	private def addExistingElementToProblem(LogicProblem p, PartialInterpretation i,PartialInterpretation2Logic_Trace trace) {
-		val newElements = new ArrayList(i.newElements)
-		var newElementIndex = 1
-		for(newElement : newElements) {
-			newElement.name = '''o «newElementIndex++»'''
-			p.elements += newElement
-		}
+//		val newElements = new ArrayList(i.newElements)
+//		var newElementIndex = 1
+//		for(newElement : newElements) {
+//			newElement.name = '''o «newElementIndex++»'''
+//			p.elements += newElement
+//		}
+		p.elements += i.newElements
 	}
 	
 	private def splitTypeIntoTwo(LogicProblem p, PartialTypeInterpratation partialTypeDeclaration,PartialInterpretation2Logic_Trace trace) {
@@ -133,6 +135,7 @@ class PartialInterpretation2Logic {
 		val relation = r.interpretationOf
 		val links = r.relationlinks
 		if(links.size == 0) {
+			// No assertion for empty relations
 			return
 		} else {
 			val term = if(links.size == 1) {
@@ -141,9 +144,14 @@ class PartialInterpretation2Logic {
 				links.map[link|createLink(link,relation)].And
 			}
 			val assertion = Assertion('''PartialInterpretation «r.interpretationOf.name»''',term)
+			val ^annotation= Partial2logicannotationsFactory.eINSTANCE.createPartialModelRelation2Assertion
+			^annotation.target = assertion
+			^annotation.targetRelation = relation
+			^annotation.links += links.map[EcoreUtil.copy(it)]
 			//val error= assertion.eAllContents.toIterable.filter(SymbolicValue).filter[it.symbolicReference === null] 
 			//error.forEach[println("error")]
 			p.add(assertion)
+			p.annotations+= ^annotation
 		}
 		
 	}

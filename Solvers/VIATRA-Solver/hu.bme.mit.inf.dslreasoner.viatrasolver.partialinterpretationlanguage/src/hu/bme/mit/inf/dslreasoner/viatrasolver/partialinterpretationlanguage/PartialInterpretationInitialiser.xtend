@@ -27,6 +27,8 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialTypeInterpratation> type2Interpretation = new HashMap
@@ -99,6 +101,11 @@ class PartialInterpretationInitialiser {
 						
 			it.partialrelationinterpretation += problem.relations.filter(RelationDeclaration)
 				.map[initialisePartialRelationInterpretation(trace)]
+			for(pMR2A : problem.annotations.filter(PartialModelRelation2Assertion)) {
+				val relation = pMR2A.targetRelation
+				val interpretation = relation.lookup(trace.relation2Interpretation)
+				interpretation.relationlinks+=pMR2A.links.map[EcoreUtil.copy(it)]
+			}
 			it.partialfunctioninterpretation += problem.functions.filter(FunctionDeclaration)
 				.map[initialisePartialFunctionInterpretation(trace)]
 			it.partialconstantinterpretation += problem.constants.filter(ConstantDeclaration)

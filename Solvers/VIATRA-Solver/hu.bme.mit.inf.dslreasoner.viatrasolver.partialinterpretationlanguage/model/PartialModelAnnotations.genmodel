@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage/ecore-gen"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage"
+    modelName="PartialModelAnnotations" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.genmodel#//logiclanguage ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.genmodel#//logicproblem PartialInterpretation.genmodel#//partialinterpretation"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>PartialModelAnnotations.ecore</foreignModel>
+  <genPackages prefix="Partial2logicannotations" basePackage="hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage"
+      disposableProviderFactory="true" ecorePackage="PartialModelAnnotations.ecore#/">
+    <genClasses ecoreClass="PartialModelAnnotations.ecore#//PartialModelRelation2Assertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialModelAnnotations.ecore#//PartialModelRelation2Assertion/links"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

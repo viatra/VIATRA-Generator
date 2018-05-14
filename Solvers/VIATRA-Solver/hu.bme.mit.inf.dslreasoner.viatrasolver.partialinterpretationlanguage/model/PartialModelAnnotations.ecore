@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partial2logicannotations" nsURI="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/partial2logicannotation"
+    nsPrefix="partial2logicannotations">
+  <eClassifiers xsi:type="ecore:EClass" name="PartialModelRelation2Assertion" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//AssertionAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+        eType="ecore:EClass PartialInterpretation.ecore#//RelationLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetRelation" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//RelationDeclaration"/>
+  </eClassifiers>
+</ecore:EPackage>
