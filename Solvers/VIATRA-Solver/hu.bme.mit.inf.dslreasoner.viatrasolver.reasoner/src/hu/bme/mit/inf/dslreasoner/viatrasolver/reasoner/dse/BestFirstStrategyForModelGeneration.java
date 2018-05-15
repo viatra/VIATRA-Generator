@@ -62,6 +62,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private PartialInterpretation2Logic partialInterpretation2Logic = new PartialInterpretation2Logic();
 	private Comparator<TrajectoryWithFitness> comparator;
 	private Logger logger = Logger.getLogger(IStrategy.class);
+	private CardinalityCalculator cardinalityCalculator = new CardinalityCalculator(); 
 	
 	// Running
 	private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
@@ -117,6 +118,10 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public void explore() {
 		if (!context.checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
+			return;
+		}
+		if(cardinalityCalculator.isViolated((PartialInterpretation) (context.getModel()), configuration.typeScopes)) {
+			logger.info("Cardinality constraint is violated in the first state. Terminate.");
 			return;
 		}
 		if (configuration.searchSpaceConstraints.maxDepth == 0) {
@@ -175,6 +180,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 					context.backtrack();
 				} else if (!context.checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
+					context.backtrack();
+				} else if (cardinalityCalculator.isViolated((PartialInterpretation) (context.getModel()), configuration.typeScopes)) {
+					logger.debug("Cardinality constraint is violated.");
 					context.backtrack();
 				} else {
 					final Fitness nextFitness = context.calculateFitness();
