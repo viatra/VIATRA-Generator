@@ -16,7 +16,7 @@ generate {
 	}
 	
 	number = 5
-	runs = 1
+	runs = 5
 	
 	debug =			"platform:/resource/ModelGenExampleFAM_standalone/outputs/debug"
 	log =			"platform:/resource/ModelGenExampleFAM_standalone/outputs/log.txt"

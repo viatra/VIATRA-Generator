@@ -21,6 +21,7 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.xtext.EcoreUtil2
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternCall
 
 class QueryLoader {
 	//val parser = new VQLParser
@@ -99,7 +100,7 @@ class QueryLoader {
 			.map[constraints]
 			.flatten
 			.filter(PatternCompositionConstraint)
-			.map[call.patternRef].toSet
+			.map[(call as PatternCall).patternRef].toSet
 	}
 	
 	def private referredEcoreModels(Set<Pattern> patterns) {
