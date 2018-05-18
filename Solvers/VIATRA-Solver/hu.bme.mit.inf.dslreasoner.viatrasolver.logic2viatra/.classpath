@@ -6,6 +6,5 @@
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="patterns"/>
 	<classpathentry kind="src" path="vql-gen"/>
-	<classpathentry kind="src" path="src-gen/"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
