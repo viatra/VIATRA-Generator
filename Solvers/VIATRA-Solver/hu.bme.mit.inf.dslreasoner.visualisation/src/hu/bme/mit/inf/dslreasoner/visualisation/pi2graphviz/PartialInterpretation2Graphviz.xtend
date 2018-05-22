@@ -27,7 +27,7 @@ import static guru.nidi.graphviz.model.Factory.*
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class GraphvizVisualisation implements PartialInterpretationVisualiser {
+class GraphvizVisualiser implements PartialInterpretationVisualiser {
 	
 	val TypeColoringStyle typeColoringStyle = TypeColoringStyle::AVERAGE;
 	val smallFontSize=9
@@ -131,7 +131,7 @@ class GraphvizVisualisation implements PartialInterpretationVisualiser {
 			edges.entrySet.map[entry | entry.key.link(entry.value)]
 		)
 		
-		return new GraphvisVisualisation(graph)
+		return new GraphvizVisualisation(graph)
 	}
 	
 	def protected <T extends DefinedElement> void drawDataTypes(Collection<T> collection, Function1<T,String> namer, HashMap<DefinedElement, Node> elements2Node, HashMap<DefinedElement, String> elements2ID) {
@@ -245,7 +245,7 @@ enum TypeColoringStyle {
 	FLAG, AVERAGE
 }
 
-class GraphvisVisualisation implements PartialInterpretationVisualisation {
+class GraphvizVisualisation implements PartialInterpretationVisualisation {
 	private static VisualisationQueque queue = new VisualisationQueque
 	
 	val private Graph graph

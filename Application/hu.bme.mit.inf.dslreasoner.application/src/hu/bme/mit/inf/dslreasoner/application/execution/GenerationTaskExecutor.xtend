@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask
 import hu.bme.mit.inf.dslreasoner.application.validation.MetamodelValidator
 import hu.bme.mit.inf.dslreasoner.application.validation.QueryAndMetamodelValidator
@@ -10,20 +11,20 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.SolutionScope
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.UnknownResult
+import hu.bme.mit.inf.dslreasoner.logic.model.statistics.StatisticSections2CSV
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
+import java.util.LinkedHashMap
 import java.util.Optional
+import java.util.Scanner
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
-import java.util.LinkedHashMap
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
-import hu.bme.mit.inf.dslreasoner.logic.model.statistics.StatisticSections2CSV
 
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
@@ -40,7 +41,7 @@ class GenerationTaskExecutor {
 		GenerationTask task,
 		ScriptExecutor scriptExecutor,
 		IProgressMonitor monitor)
-	{
+	{		
 		monitor.subTask('''Collecting all resources''')
 		// 1. Load all resources
 		val metamodelSpecification = scriptExecutor.getMetamodelSpecification(task.metamodel)
@@ -199,7 +200,7 @@ class GenerationTaskExecutor {
 							val gml = vis1.transform(representation)
 							outputWorkspaceForRun.writeText('''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».gml''',gml)
 							if(representation.newElements.size + representation.problem.elements.size < 150) {
-								val vis2 = new GraphvizVisualisation
+								val vis2 = new GraphvizVisualiser
 								val dot = vis2.visualiseConcretization(representation)
 								dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».png''')
 							}

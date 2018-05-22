@@ -16,7 +16,7 @@ class Test {
 		
 		val model = workspace.readModel(PartialInterpretation,"solution1.partialinterpretation")
 		println("loaded")
-		val translator = new GraphvizVisualisation
+		val translator = new GraphvizVisualiser
 		val visualisation = translator.visualiseConcretization(model)
 		println("visualised")
 		visualisation.writeToFile(workspace,"output")
