@@ -95,9 +95,7 @@ class ParseUtil {
 		val Resource resource = resourceSet.createResource(URI.createURI("dummy:/example."+SIMPLIFIED_PARSER_EXTENSION));
 		val InputStream in = new ByteArrayInputStream(vqlFileContent.toString.getBytes());
 		resource.load(in, resourceSet.getLoadOptions());
-		println("Loaded")
 		val patternModel = resource.getContents().get(0) as PatternModel;
-		println("PatternModel")
 		
 		EcoreUtil.resolveAll(resource)
 		//resource.validate
