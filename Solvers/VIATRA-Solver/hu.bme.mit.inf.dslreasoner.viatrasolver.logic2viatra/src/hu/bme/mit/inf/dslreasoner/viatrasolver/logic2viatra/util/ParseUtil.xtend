@@ -11,6 +11,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
 import java.io.ByteArrayInputStream
 import java.io.InputStream
+import java.util.Collections
 import java.util.LinkedHashMap
 import java.util.LinkedList
 import java.util.List
@@ -23,63 +24,61 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
 import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup.StandaloneParserWithSeparateModules
-import org.eclipse.viatra.query.patternlanguage.emf.scoping.BaseMetamodelProviderService
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.EMFPatternLanguageImportNamespaceProvider
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProviderInstance
 import org.eclipse.viatra.query.patternlanguage.emf.specification.SpecificationBuilder
+import org.eclipse.viatra.query.patternlanguage.emf.vql.Pattern
 import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
+import org.eclipse.viatra.query.runtime.api.IPatternMatch
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import org.eclipse.xtext.resource.EObjectDescription
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
+import org.eclipse.xtext.scoping.impl.SimpleScope
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.MetamodelProviderService
+import org.eclipse.viatra.query.patternlanguage.emf.scoping.ResourceSetMetamodelProviderService
 
 class MyModule extends StandaloneParserWithSeparateModules implements Module{
-//    def public Class<? extends IAnnotationValidatorLoader> bindAnnotationValidatorLoader() {
-//        return typeof(ExtensionBasedAnnotationValidatorLoader);
-//    }
-//    def public Class<? extends IGenmodelMappingLoader> bindGenmodelMappingLoader() {
-//        return typeof(GenmodelExtensionLoader);
-//    }
 
+	/**
+	 * Overrided binder
+	 * <code>Multibinder</code>IMetamodelProviderInstance.class);
+        metamodelProviderBinder.addBinding().to(MetamodelProviderService.class);
+        metamodelProviderBinder.addBinding().to(ResourceSetMetamodelProviderService.class);
+	 * </code>
+	 */
     override configureIScopeProviderDelegate(Binder binder) {
         binder.bind(IScopeProvider).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
                 .to(EMFPatternLanguageImportNamespaceProvider);
-        // .to(XImportSectionNamespaceScopeProvider.class);
-        //val Multibinder<IMetamodelProviderInstance> metamodelProviderBinder = 
         Multibinder::newSetBinder(binder, IMetamodelProviderInstance);
-//        metamodelProviderBinder.addBinding().to(MetamodelProviderService.class);
-//        metamodelProviderBinder.addBinding().to(ResourceSetMetamodelProviderService.class);
     }
 
 	override Class<? extends IMetamodelProvider> bindIMetamodelProvider() {
-        MetamodelProviderForModelGeneration
+        FixedMetamodelProvider
     }
-//    def configureFixedMetamodelProviderService(FixedMetamodelProviderService s) {
-//    	println('''Configured «s.class.simpleName» with «s.packages.toList»''')
-//    	s.packages += PartialinterpretationPackage.eINSTANCE
-//    	s.packages += LogicproblemPackage.eINSTANCE
-//    	s.packages += LogiclanguagePackage.eINSTANCE
-//    	println('''Configured «s.class.simpleName» with «s.packages.toList»''')
-//    }
 }
 
 class ParseUtil {
+	public static val SIMPLIFIED_PARSER_EXTENSION = "vql_deactivated"
+	
 	val Injector injector;
 	new() {
-		//EMFPatternLanguageStandaloneSetup.doSetup;
 		PartialinterpretationPackage.eINSTANCE.class;
 		LogicproblemPackage.eINSTANCE.class;
 		LogiclanguagePackage.eINSTANCE.class;
 		
-		injector = internalCreateInjector//(new EMFPatternLanguageStandaloneSetup()).createInjectorAndDoEMFRegistration();
+		injector = internalCreateInjector
 		
 		val IResourceFactory resourceFactory = injector.getInstance(IResourceFactory);
 		val IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider);
-		
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("vql_deactivated", resourceFactory);
-		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("vql_deactivated", serviceProvider);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(SIMPLIFIED_PARSER_EXTENSION, resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put(SIMPLIFIED_PARSER_EXTENSION, serviceProvider);
 	}
 	
 	def protected Injector internalCreateInjector() {
@@ -89,28 +88,35 @@ class ParseUtil {
 		return newInjector;
     }
 	
-//	@Inject
-//  var ParseHelper<PatternModel> parseHelper;
-    val builder = new SpecificationBuilder
+	val builder = new SpecificationBuilder
 	
 	public def parse(CharSequence vqlFileContent) {
-		//val patternModel = this.parseHelper.parse(vqlFileContent)
 		val XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet);
-		val Resource resource = resourceSet.createResource(URI.createURI("dummy:/example.vql_deactivated"));
+		val Resource resource = resourceSet.createResource(URI.createURI("dummy:/example."+SIMPLIFIED_PARSER_EXTENSION));
 		val InputStream in = new ByteArrayInputStream(vqlFileContent.toString.getBytes());
 		resource.load(in, resourceSet.getLoadOptions());
+		println("Loaded")
 		val patternModel = resource.getContents().get(0) as PatternModel;
+		println("PatternModel")
 		
 		EcoreUtil.resolveAll(resource)
-		resource.validate
-		val res = new LinkedHashMap
+		//resource.validate
+		val res = new LinkedHashMap<String,IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
+		val patterns = new LinkedList<IQuerySpecification<?>>
 		for(pattern : patternModel.patterns) {
-			val querySpecification = builder.getOrCreateSpecification(pattern)
+			val querySpecification = createSpecification(pattern,patterns)
 			res.put(querySpecification.fullyQualifiedName,querySpecification)
-			//println('''«querySpecification.fullyQualifiedName» -> «querySpecification»''')
+			patterns += querySpecification
 		}
-		resource.validate
+		//resource.validate
+		
 		return res
+	}
+	
+	def IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> createSpecification(
+		Pattern pattern,List<IQuerySpecification<?>> createdPatternList)
+	{
+		builder.getOrCreateSpecification(pattern,createdPatternList,true)
 	}
 	
 	def private validate(Resource resource) {
@@ -123,26 +129,33 @@ class ParseUtil {
 	}
 }
 
-abstract class FixedMetamodelProviderService extends BaseMetamodelProviderService {
+class FixedMetamodelProvider implements IMetamodelProvider {
 	
 	protected val List<EPackage> packages = new LinkedList
-	
-	override protected doGetQualifiedClassName(EClassifier classifier, EObject context) {
-		classifier.name
-	}
-	
-	override protected getProvidedMetamodels() {
-		return packages.map[it.nsURI]
-	}
-	
-	override loadEPackage(String uri, ResourceSet resourceSet) {
-		packages.filter[it.nsURI.equals(uri)].head
-	}
-}
-class MetamodelProviderForModelGeneration extends FixedMetamodelProviderService {
 	new() {
 		packages += PartialinterpretationPackage.eINSTANCE
     	packages += LogicproblemPackage.eINSTANCE
     	packages += LogiclanguagePackage.eINSTANCE
+	}
+	
+	override getAllMetamodelObjects(IScope delegateScope, EObject context) {
+        val  metamodels = packages.map[EObjectDescription.create(it.nsURI, it, Collections.singletonMap("nsURI", "true"))]
+        return new SimpleScope(delegateScope, metamodels);
+    }
+  
+    override boolean isGeneratedCodeAvailable(EPackage ePackage, ResourceSet set) {
+    	true
+    }
+    
+    override String getModelPluginId(EPackage ePackage, ResourceSet set) {
+        return "hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage"
+    }
+    
+    override String getQualifiedClassName(EClassifier classifier, EObject context) {
+        classifier.name
+    }
+				
+	override loadEPackage(String uri, ResourceSet resourceSet) {
+		return packages.filter[it.nsURI.equals(uri)].head
 	}
 }
