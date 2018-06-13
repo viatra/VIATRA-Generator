@@ -30,6 +30,8 @@ import java.util.Set
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2NeighbourhoodRepresentation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
 
 class NeighbourhoodBasedStateCoderFactory implements IStateCoderFactory {
 	val List<NeighbourhoodBasedPartialInterpretationStateCoder> statecoders = new LinkedList
@@ -142,7 +144,13 @@ class NeighbourhoodBasedPartialInterpretationStateCoder implements IStateCoder{
 		} else if(o instanceof PartialRelationInterpretation) {
 			return o.interpretationOf.name
 		} else if(o instanceof PartialTypeInterpratation) {
-			return o.interpretationOf.name
+			if(o instanceof PartialPrimitiveInterpretation) {
+				o.class.simpleName.hashCode
+			} else if (o instanceof PartialComplexTypeInterpretation){
+				return o.interpretationOf.name.hashCode
+			} else {
+				throw new UnsupportedOperationException('''Unsupported type: «o.class.simpleName»''')
+			}
 		} else {
 			throw new UnsupportedOperationException('''Unsupported type: «o.class.simpleName»''')
 		}

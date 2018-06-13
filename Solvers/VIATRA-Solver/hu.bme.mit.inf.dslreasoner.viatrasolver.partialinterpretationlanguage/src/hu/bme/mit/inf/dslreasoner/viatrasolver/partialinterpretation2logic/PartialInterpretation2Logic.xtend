@@ -10,9 +10,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.Partial2logicannotationsFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink
 import java.util.ArrayList
 import java.util.HashMap
@@ -46,7 +46,7 @@ class PartialInterpretation2Logic {
 			addExistingElementToProblem(p,i,trace)
 			
 			// Types
-			for(partialTypeDeclaration : i.partialtypeinterpratation) {
+			for(partialTypeDeclaration : i.partialtypeinterpratation.filter(PartialComplexTypeInterpretation)) {
 				splitTypeIntoTwo(p,partialTypeDeclaration,trace)
 			}
 			connectSplittings(p,trace)
@@ -69,7 +69,7 @@ class PartialInterpretation2Logic {
 		p.elements += i.newElements
 	}
 	
-	private def splitTypeIntoTwo(LogicProblem p, PartialTypeInterpratation partialTypeDeclaration,PartialInterpretation2Logic_Trace trace) {
+	private def splitTypeIntoTwo(LogicProblem p, PartialComplexTypeInterpretation partialTypeDeclaration,PartialInterpretation2Logic_Trace trace) {
 		if(!partialTypeDeclaration.elements.empty) {
 			val declaration = partialTypeDeclaration.interpretationOf
 			

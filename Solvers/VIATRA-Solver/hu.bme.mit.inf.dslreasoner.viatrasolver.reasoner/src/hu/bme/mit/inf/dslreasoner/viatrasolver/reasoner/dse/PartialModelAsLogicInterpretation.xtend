@@ -10,9 +10,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
@@ -20,16 +20,16 @@ import java.math.BigDecimal
 import java.util.HashMap
 import java.util.List
 import java.util.Map
+import java.util.TreeSet
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.util.TreeSet
 
 class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 	val PartialInterpretation partialInterpretation
 	val Map<EObject, EObject> trace;
-	val Map<TypeDeclaration,PartialTypeInterpratation> type2Interpretation
+	val Map<TypeDeclaration,PartialComplexTypeInterpretation> type2Interpretation
 	val Map<RelationDeclaration,PartialRelationInterpretation> relation2Interpretation
 	
 	val Map<DefinedElement,DefinedElement> elementBackwardTrace
@@ -41,18 +41,18 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 	new(PartialInterpretation partialInterpretation, Map<EObject, EObject> forwardMap) {
 		this.partialInterpretation = partialInterpretation
 		this.trace = forwardMap
-		this.type2Interpretation = initTypes(partialInterpretation.partialtypeinterpratation)
+		this.type2Interpretation = initComplexTypes(partialInterpretation.partialtypeinterpratation.filter(PartialComplexTypeInterpretation))
 		this.relation2Interpretation = initRelations(partialInterpretation.partialrelationinterpretation)
 		
 		this.elementBackwardTrace = initElementBackwardTrace(trace)
 		this.booleanForwardTrace = initialisePrimitiveElementTrace(
-			null,null,[null],partialInterpretation.booleanelements,[it.value])
+			null,null,[null],partialInterpretation.newElements.filter(BooleanElement),[it.value])
 		integerForwardTrace = initialisePrimitiveElementTrace(
-			0,[it+1],[it],partialInterpretation.integerelements,[it.value])
+			0,[it+1],[it],partialInterpretation.newElements.filter(IntegerElement),[it.value])
 		realForwardTrace = initialisePrimitiveElementTrace(
-			BigDecimal::ZERO,[it.add(BigDecimal.ONE)],[it],partialInterpretation.realelements,[it.value])
+			BigDecimal::ZERO,[it.add(BigDecimal.ONE)],[it],partialInterpretation.newElements.filter(RealElement),[it.value])
 		stringForwardTrace = initialisePrimitiveElementTrace(
-			0,[it+1],['''String«it»'''],partialInterpretation.stringelement,[it.value])
+			0,[it+1],['''String«it»'''],partialInterpretation.newElements.filter(StringElement),[it.value])
 	}
 	
 	private def <Seed,Type,ElementType extends PrimitiveElement> Map<Type,ElementType> initialisePrimitiveElementTrace(
@@ -83,7 +83,7 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 		return forwardMap
 	}
 	
-	def initTypes(List<PartialTypeInterpratation> types) {
+	def initComplexTypes(Iterable<PartialComplexTypeInterpretation> types) {
 		types.toMap[it.interpretationOf]
 	}
 	def initRelations(List<PartialRelationInterpretation> relations) {

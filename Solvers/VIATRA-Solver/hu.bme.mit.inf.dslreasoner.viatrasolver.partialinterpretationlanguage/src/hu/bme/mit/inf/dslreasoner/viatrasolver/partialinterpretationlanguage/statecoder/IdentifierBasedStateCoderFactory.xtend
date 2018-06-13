@@ -18,6 +18,8 @@ import org.eclipse.viatra.dse.statecode.IStateCoderFactory
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 
 class IdentifierBasedStateCoderFactory implements IStateCoderFactory{
 	
@@ -116,7 +118,13 @@ class IdentifierBasedStateCoder implements IStateCoder{
 		} else if(element instanceof PartialRelationInterpretation) {
 			return element.interpretationOf.name.hashCode
 		} else if(element instanceof PartialTypeInterpratation) {
-			return element.interpretationOf.name.hashCode
+			if(element instanceof PartialPrimitiveInterpretation) {
+				element.class.simpleName.hashCode
+			} else if (element instanceof PartialComplexTypeInterpretation){
+				return element.interpretationOf.name.hashCode
+			} else {
+				throw new UnsupportedOperationException('''Unsupported type: «element.class.simpleName»''')
+			}
 		} else {
 			println(element)
 			throw new UnsupportedOperationException('''Unsupported type: «element.class.simpleName»''')

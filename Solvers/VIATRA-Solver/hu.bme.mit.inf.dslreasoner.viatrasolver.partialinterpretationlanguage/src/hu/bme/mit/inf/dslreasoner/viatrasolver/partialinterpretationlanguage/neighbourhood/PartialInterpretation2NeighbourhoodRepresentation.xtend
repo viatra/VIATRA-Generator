@@ -13,6 +13,8 @@ import java.util.Map
 import java.util.Set
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 
 abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresentation,NodeRepresentation> {
 	private val boolean deepRepresentation
@@ -33,6 +35,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	 * @param model The model to be represented.
 	 * @param range The range of the neighbourhood.
 	 * @param parallels The maximal number of parallel references to be differentiated.
+	 * @param maxNumber The maximal number of elements in a equivalence class that chan be differentiated.
 	 */
 	def public createRepresentation(PartialInterpretation model, int range, int parallels, int maxNumber) {
 		return createRepresentation(model,range,parallels,maxNumber,null,null)
@@ -187,10 +190,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 		return
 			model.problem.elements +
 			model.newElements +
-			model.booleanelements+
-			model.integerelements+
-			model.stringelement+
-			model.realelements
+			model.openWorldElements
 	}
 	
 	def private fillTypes(PartialInterpretation model, Map<DefinedElement, Set<String>> node2Type, Set<TypeDeclaration> relevantTypes) {
@@ -202,10 +202,14 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 //			// Dont need
 //		}
 		for(typeInterpretation : model.partialtypeinterpratation) {
-			val type = typeInterpretation.interpretationOf
-			if(type.isRelevant(relevantTypes)) {
-				for(element : typeInterpretation.elements) {
-					element.lookup(node2Type).add(type.name)
+			if(typeInterpretation instanceof PartialPrimitiveInterpretation) {
+				
+			} else if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
+				val type = typeInterpretation.interpretationOf
+				if(type.isRelevant(relevantTypes)) {
+					for(element : typeInterpretation.elements) {
+						element.lookup(node2Type).add(type.name)
+					}
 				}
 			}
 		}

@@ -1,14 +1,15 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation
 
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
-import java.util.Map
-import java.util.HashMap
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
+import java.util.HashMap
+import java.util.Map
 import java.util.Set
 
 class PartialInterpretation2Gml {
@@ -16,10 +17,7 @@ class PartialInterpretation2Gml {
 		return
 			model.problem.elements +
 			model.newElements +
-			model.booleanelements+
-			model.integerelements+
-			model.stringelement+
-			model.realelements
+			model.openWorldElements
 	}
 	
 	def public transform(PartialInterpretation i) {
@@ -41,8 +39,9 @@ class PartialInterpretation2Gml {
 		'''.toString
 	}
 	def typesOfElement(DefinedElement e, PartialInterpretation i) {
-		i.problem.types.filter(TypeDefinition).filter[it.elements.contains(e)] +
-		i.partialtypeinterpratation.filter[it.elements.contains(e)].map[it.interpretationOf]
+		val typesElementDefinedIn= i.problem.types.filter(TypeDefinition).filter[it.elements.contains(e)]
+		val typesElementAddedDuringGeneration = i.partialtypeinterpratation.filter(PartialComplexTypeInterpretation).filter[it.elements.contains(e)].map[it.interpretationOf]
+		return typesElementDefinedIn+typesElementAddedDuringGeneration
 	}
 	
 	val protected titleSize = 16

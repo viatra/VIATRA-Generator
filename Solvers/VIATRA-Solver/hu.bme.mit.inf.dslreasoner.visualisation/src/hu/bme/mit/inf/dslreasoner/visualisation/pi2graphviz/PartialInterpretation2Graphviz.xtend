@@ -10,11 +10,15 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import java.util.LinkedList
@@ -45,10 +49,7 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 		return
 			model.problem.elements +
 			model.newElements +
-			model.booleanelements+
-			model.integerelements+
-			model.stringelement+
-			model.realelements
+			model.openWorldElements
 	}
 	
 	def private visualisePartialInterpretation(PartialInterpretation partialInterpretation, boolean concretizationOnly) {
@@ -72,7 +73,7 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 				mustTypes.get(element)+=typeDefinition
 			}
 		}
-		for(partialTypeInterpretations: partialInterpretation.partialtypeinterpratation) {
+		for(partialTypeInterpretations: partialInterpretation.partialtypeinterpratation.filter(PartialComplexTypeInterpretation)) {
 			for(element : partialTypeInterpretations.elements) {
 				mustTypes.get(element)+=partialTypeInterpretations.interpretationOf
 			}
@@ -105,10 +106,10 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 //			elements2Node.put(newElement,image)
 //		}
 		
-		partialInterpretation.booleanelements.drawDataTypes([it.value.toString],elements2Node,elements2ID)
-		partialInterpretation.integerelements.drawDataTypes([it.value.toString],elements2Node,elements2ID)
-		partialInterpretation.stringelement.drawDataTypes(['''"«it.value.toString»"'''],elements2Node,elements2ID)
-		partialInterpretation.realelements.drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		partialInterpretation.newElements.filter(BooleanElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		partialInterpretation.newElements.filter(IntegerElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		partialInterpretation.newElements.filter(StringElement).drawDataTypes(['''"«it.value.toString»"'''],elements2Node,elements2ID)
+		partialInterpretation.newElements.filter(RealElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
 		
 		// Drawing the edges
 		val edges = new HashMap
@@ -134,7 +135,7 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 		return new GraphvizVisualisation(graph)
 	}
 	
-	def protected <T extends DefinedElement> void drawDataTypes(Collection<T> collection, Function1<T,String> namer, HashMap<DefinedElement, Node> elements2Node, HashMap<DefinedElement, String> elements2ID) {
+	def protected <T extends DefinedElement> void drawDataTypes(Iterable<T> collection, Function1<T,String> namer, HashMap<DefinedElement, Node> elements2Node, HashMap<DefinedElement, String> elements2ID) {
 		for(booleanElementIndex: 0..<collection.size) {
 			val newElement = collection.get(booleanElementIndex)
 			val id = namer.apply(newElement)
