@@ -181,6 +181,58 @@ public class PartialinterpretationSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case PartialinterpretationPackage.SCOPE: {
+				Scope scope = (Scope)theEObject;
+				T result = caseScope(scope);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PARTIAL_PRIMITIVE_INTERPRETATION: {
+				PartialPrimitiveInterpretation partialPrimitiveInterpretation = (PartialPrimitiveInterpretation)theEObject;
+				T result = casePartialPrimitiveInterpretation(partialPrimitiveInterpretation);
+				if (result == null) result = casePartialTypeInterpratation(partialPrimitiveInterpretation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PARTIAL_BOOLEAN_INTERPRETATION: {
+				PartialBooleanInterpretation partialBooleanInterpretation = (PartialBooleanInterpretation)theEObject;
+				T result = casePartialBooleanInterpretation(partialBooleanInterpretation);
+				if (result == null) result = casePartialPrimitiveInterpretation(partialBooleanInterpretation);
+				if (result == null) result = casePartialTypeInterpratation(partialBooleanInterpretation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PARTIAL_INTEGER_INTERPRETATION: {
+				PartialIntegerInterpretation partialIntegerInterpretation = (PartialIntegerInterpretation)theEObject;
+				T result = casePartialIntegerInterpretation(partialIntegerInterpretation);
+				if (result == null) result = casePartialPrimitiveInterpretation(partialIntegerInterpretation);
+				if (result == null) result = casePartialTypeInterpratation(partialIntegerInterpretation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PARTIAL_REAL_INTERPRETATION: {
+				PartialRealInterpretation partialRealInterpretation = (PartialRealInterpretation)theEObject;
+				T result = casePartialRealInterpretation(partialRealInterpretation);
+				if (result == null) result = casePartialPrimitiveInterpretation(partialRealInterpretation);
+				if (result == null) result = casePartialTypeInterpratation(partialRealInterpretation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PARTIAL_STRING_INTERPRETATION: {
+				PartialStringInterpretation partialStringInterpretation = (PartialStringInterpretation)theEObject;
+				T result = casePartialStringInterpretation(partialStringInterpretation);
+				if (result == null) result = casePartialPrimitiveInterpretation(partialStringInterpretation);
+				if (result == null) result = casePartialTypeInterpratation(partialStringInterpretation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PartialinterpretationPackage.PARTIAL_COMPLEX_TYPE_INTERPRETATION: {
+				PartialComplexTypeInterpretation partialComplexTypeInterpretation = (PartialComplexTypeInterpretation)theEObject;
+				T result = casePartialComplexTypeInterpretation(partialComplexTypeInterpretation);
+				if (result == null) result = casePartialTypeInterpratation(partialComplexTypeInterpretation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -407,6 +459,111 @@ public class PartialinterpretationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStringElement(StringElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScope(Scope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partial Primitive Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partial Primitive Interpretation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartialPrimitiveInterpretation(PartialPrimitiveInterpretation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partial Boolean Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partial Boolean Interpretation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartialBooleanInterpretation(PartialBooleanInterpretation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partial Integer Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partial Integer Interpretation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartialIntegerInterpretation(PartialIntegerInterpretation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partial Real Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partial Real Interpretation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartialRealInterpretation(PartialRealInterpretation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partial String Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partial String Interpretation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartialStringInterpretation(PartialStringInterpretation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partial Complex Type Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partial Complex Type Interpretation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartialComplexTypeInterpretation(PartialComplexTypeInterpretation object) {
 		return null;
 	}
 

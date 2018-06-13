@@ -11,16 +11,23 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.NaryRelationLink;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.NaryRelationLinkElement;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialBooleanInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialConstantInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialFunctionInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialIntegerInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRealInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialStringInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.Scope;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.UnaryElementRelationLink;
 
@@ -142,6 +149,55 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * @generated
 	 */
 	private EClass stringElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialPrimitiveInterpretationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialBooleanInterpretationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialIntegerInterpretationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialRealInterpretationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialStringInterpretationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass partialComplexTypeInterpretationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -276,26 +332,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPartialInterpretation_MinNewElements() {
-		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPartialInterpretation_MaxNewElements() {
-		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialInterpretation_OpenWorldElementPrototypes() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(8);
+	public EReference getPartialInterpretation_OpenWorldElements() {
+		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -304,7 +342,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * @generated
 	 */
 	public EReference getPartialInterpretation_ProblemConainer() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(9);
+		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -312,8 +350,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPartialInterpretation_Stringelement() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(10);
+	public EReference getPartialInterpretation_Scopes() {
+		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -321,8 +359,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPartialInterpretation_Stringelements() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(11);
+	public EAttribute getPartialInterpretation_MinNewElements() {
+		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -330,80 +368,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPartialInterpretation_Realelements() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialInterpretation_Integerelements() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(13);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialInterpretation_Booleanelements() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(14);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPartialInterpretation_MaxNewIntegers() {
-		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPartialInterpretation_MaxNewReals() {
-		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPartialInterpretation_MaxNewStrings() {
-		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(17);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialInterpretation_NewStrings() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(18);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialInterpretation_NewReals() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(19);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialInterpretation_NewIntegers() {
-		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(20);
+	public EAttribute getPartialInterpretation_MaxNewElements() {
+		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -501,26 +467,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPartialTypeInterpratation_InterpretationOf() {
-		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPartialTypeInterpratation_Elements() {
-		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPartialTypeInterpratation_SupertypeInterpretation() {
-		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(2);
+		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -618,6 +566,15 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getNaryRelationLinkElement_Param() {
+		return (EReference)naryRelationLinkElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPrimitiveElement() {
 		return primitiveElementEClass;
 	}
@@ -708,6 +665,114 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getScope() {
+		return scopeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScope_MinNewElements() {
+		return (EAttribute)scopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScope_MaxNewElements() {
+		return (EAttribute)scopeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_TargetTypeInterpretation() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialPrimitiveInterpretation() {
+		return partialPrimitiveInterpretationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialBooleanInterpretation() {
+		return partialBooleanInterpretationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialIntegerInterpretation() {
+		return partialIntegerInterpretationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialRealInterpretation() {
+		return partialRealInterpretationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialStringInterpretation() {
+		return partialStringInterpretationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPartialComplexTypeInterpretation() {
+		return partialComplexTypeInterpretationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPartialComplexTypeInterpretation_SupertypeInterpretation() {
+		return (EReference)partialComplexTypeInterpretationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPartialComplexTypeInterpretation_InterpretationOf() {
+		return (EReference)partialComplexTypeInterpretationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PartialinterpretationFactory getPartialinterpretationFactory() {
 		return (PartialinterpretationFactory)getEFactoryInstance();
 	}
@@ -738,21 +803,11 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__PARTIALFUNCTIONINTERPRETATION);
 		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_ELEMENTS);
 		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__PARTIALTYPEINTERPRATATION);
+		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENTS);
+		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__PROBLEM_CONAINER);
+		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__SCOPES);
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS);
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENT_PROTOTYPES);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__PROBLEM_CONAINER);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__STRINGELEMENT);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__STRINGELEMENTS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__REALELEMENTS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__INTEGERELEMENTS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__BOOLEANELEMENTS);
-		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_INTEGERS);
-		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_REALS);
-		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_STRINGS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_STRINGS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_REALS);
-		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__NEW_INTEGERS);
 
 		partialConstantInterpretationEClass = createEClass(PARTIAL_CONSTANT_INTERPRETATION);
 		createEReference(partialConstantInterpretationEClass, PARTIAL_CONSTANT_INTERPRETATION__INTERPRETATION_OF);
@@ -767,9 +822,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		createEReference(partialFunctionInterpretationEClass, PARTIAL_FUNCTION_INTERPRETATION__INTERPRETATION_OF);
 
 		partialTypeInterpratationEClass = createEClass(PARTIAL_TYPE_INTERPRATATION);
-		createEReference(partialTypeInterpratationEClass, PARTIAL_TYPE_INTERPRATATION__INTERPRETATION_OF);
 		createEReference(partialTypeInterpratationEClass, PARTIAL_TYPE_INTERPRATATION__ELEMENTS);
-		createEReference(partialTypeInterpratationEClass, PARTIAL_TYPE_INTERPRATATION__SUPERTYPE_INTERPRETATION);
 
 		relationLinkEClass = createEClass(RELATION_LINK);
 
@@ -785,6 +838,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 		naryRelationLinkElementEClass = createEClass(NARY_RELATION_LINK_ELEMENT);
 		createEAttribute(naryRelationLinkElementEClass, NARY_RELATION_LINK_ELEMENT__INDEX);
+		createEReference(naryRelationLinkElementEClass, NARY_RELATION_LINK_ELEMENT__PARAM);
 
 		primitiveElementEClass = createEClass(PRIMITIVE_ELEMENT);
 		createEAttribute(primitiveElementEClass, PRIMITIVE_ELEMENT__VALUE_SET);
@@ -800,6 +854,25 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 		stringElementEClass = createEClass(STRING_ELEMENT);
 		createEAttribute(stringElementEClass, STRING_ELEMENT__VALUE);
+
+		scopeEClass = createEClass(SCOPE);
+		createEAttribute(scopeEClass, SCOPE__MIN_NEW_ELEMENTS);
+		createEAttribute(scopeEClass, SCOPE__MAX_NEW_ELEMENTS);
+		createEReference(scopeEClass, SCOPE__TARGET_TYPE_INTERPRETATION);
+
+		partialPrimitiveInterpretationEClass = createEClass(PARTIAL_PRIMITIVE_INTERPRETATION);
+
+		partialBooleanInterpretationEClass = createEClass(PARTIAL_BOOLEAN_INTERPRETATION);
+
+		partialIntegerInterpretationEClass = createEClass(PARTIAL_INTEGER_INTERPRETATION);
+
+		partialRealInterpretationEClass = createEClass(PARTIAL_REAL_INTERPRETATION);
+
+		partialStringInterpretationEClass = createEClass(PARTIAL_STRING_INTERPRETATION);
+
+		partialComplexTypeInterpretationEClass = createEClass(PARTIAL_COMPLEX_TYPE_INTERPRETATION);
+		createEReference(partialComplexTypeInterpretationEClass, PARTIAL_COMPLEX_TYPE_INTERPRETATION__SUPERTYPE_INTERPRETATION);
+		createEReference(partialComplexTypeInterpretationEClass, PARTIAL_COMPLEX_TYPE_INTERPRETATION__INTERPRETATION_OF);
 	}
 
 	/**
@@ -842,6 +915,12 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		integerElementEClass.getESuperTypes().add(this.getPrimitiveElement());
 		realElementEClass.getESuperTypes().add(this.getPrimitiveElement());
 		stringElementEClass.getESuperTypes().add(this.getPrimitiveElement());
+		partialPrimitiveInterpretationEClass.getESuperTypes().add(this.getPartialTypeInterpratation());
+		partialBooleanInterpretationEClass.getESuperTypes().add(this.getPartialPrimitiveInterpretation());
+		partialIntegerInterpretationEClass.getESuperTypes().add(this.getPartialPrimitiveInterpretation());
+		partialRealInterpretationEClass.getESuperTypes().add(this.getPartialPrimitiveInterpretation());
+		partialStringInterpretationEClass.getESuperTypes().add(this.getPartialPrimitiveInterpretation());
+		partialComplexTypeInterpretationEClass.getESuperTypes().add(this.getPartialTypeInterpratation());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(partialInterpretationEClass, PartialInterpretation.class, "PartialInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -851,21 +930,11 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		initEReference(getPartialInterpretation_Partialfunctioninterpretation(), this.getPartialFunctionInterpretation(), null, "partialfunctioninterpretation", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialInterpretation_NewElements(), theLogiclanguagePackage.getDefinedElement(), null, "newElements", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialInterpretation_Partialtypeinterpratation(), this.getPartialTypeInterpratation(), null, "partialtypeinterpratation", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPartialInterpretation_MinNewElements(), ecorePackage.getEInt(), "minNewElements", "0", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPartialInterpretation_MaxNewElements(), ecorePackage.getEInt(), "maxNewElements", "0", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_OpenWorldElementPrototypes(), theLogiclanguagePackage.getDefinedElement(), null, "openWorldElementPrototypes", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialInterpretation_OpenWorldElements(), theLogiclanguagePackage.getDefinedElement(), null, "openWorldElements", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialInterpretation_ProblemConainer(), theLogicproblemPackage.getLogicProblem(), null, "problemConainer", null, 0, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_Stringelement(), this.getStringElement(), null, "stringelement", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_Stringelements(), this.getStringElement(), null, "stringelements", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_Realelements(), this.getRealElement(), null, "realelements", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_Integerelements(), this.getIntegerElement(), null, "integerelements", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_Booleanelements(), this.getBooleanElement(), null, "booleanelements", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPartialInterpretation_MaxNewIntegers(), ecorePackage.getEInt(), "maxNewIntegers", null, 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPartialInterpretation_MaxNewReals(), ecorePackage.getEInt(), "maxNewReals", null, 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPartialInterpretation_MaxNewStrings(), ecorePackage.getEInt(), "maxNewStrings", null, 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_NewStrings(), this.getStringElement(), null, "newStrings", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_NewReals(), this.getRealElement(), null, "newReals", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialInterpretation_NewIntegers(), this.getIntegerElement(), null, "newIntegers", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialInterpretation_Scopes(), this.getScope(), null, "scopes", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPartialInterpretation_MinNewElements(), ecorePackage.getEInt(), "minNewElements", "0", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPartialInterpretation_MaxNewElements(), ecorePackage.getEInt(), "maxNewElements", "-1", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialConstantInterpretationEClass, PartialConstantInterpretation.class, "PartialConstantInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPartialConstantInterpretation_InterpretationOf(), theLogiclanguagePackage.getConstantDeclaration(), null, "interpretationOf", null, 1, 1, PartialConstantInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -879,10 +948,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		initEClass(partialFunctionInterpretationEClass, PartialFunctionInterpretation.class, "PartialFunctionInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPartialFunctionInterpretation_InterpretationOf(), theLogiclanguagePackage.getFunctionDeclaration(), null, "interpretationOf", null, 1, 1, PartialFunctionInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(partialTypeInterpratationEClass, PartialTypeInterpratation.class, "PartialTypeInterpratation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialTypeInterpratation_InterpretationOf(), theLogiclanguagePackage.getTypeDeclaration(), null, "interpretationOf", null, 1, 1, PartialTypeInterpratation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(partialTypeInterpratationEClass, PartialTypeInterpratation.class, "PartialTypeInterpratation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPartialTypeInterpratation_Elements(), theLogiclanguagePackage.getDefinedElement(), null, "elements", null, 0, -1, PartialTypeInterpratation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialTypeInterpratation_SupertypeInterpretation(), this.getPartialTypeInterpratation(), null, "supertypeInterpretation", null, 0, -1, PartialTypeInterpratation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationLinkEClass, RelationLink.class, "RelationLink", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -898,6 +965,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 		initEClass(naryRelationLinkElementEClass, NaryRelationLinkElement.class, "NaryRelationLinkElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNaryRelationLinkElement_Index(), ecorePackage.getEInt(), "index", null, 0, 1, NaryRelationLinkElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNaryRelationLinkElement_Param(), theLogiclanguagePackage.getDefinedElement(), null, "param", null, 1, 1, NaryRelationLinkElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveElementEClass, PrimitiveElement.class, "PrimitiveElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPrimitiveElement_ValueSet(), ecorePackage.getEBoolean(), "valueSet", null, 1, 1, PrimitiveElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -913,6 +981,25 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 		initEClass(stringElementEClass, StringElement.class, "StringElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringElement_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getScope_MinNewElements(), ecorePackage.getEInt(), "minNewElements", "0", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScope_MaxNewElements(), ecorePackage.getEInt(), "maxNewElements", "-1", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_TargetTypeInterpretation(), this.getPartialTypeInterpratation(), null, "targetTypeInterpretation", null, 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(partialPrimitiveInterpretationEClass, PartialPrimitiveInterpretation.class, "PartialPrimitiveInterpretation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialBooleanInterpretationEClass, PartialBooleanInterpretation.class, "PartialBooleanInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialIntegerInterpretationEClass, PartialIntegerInterpretation.class, "PartialIntegerInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialRealInterpretationEClass, PartialRealInterpretation.class, "PartialRealInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialStringInterpretationEClass, PartialStringInterpretation.class, "PartialStringInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(partialComplexTypeInterpretationEClass, PartialComplexTypeInterpretation.class, "PartialComplexTypeInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPartialComplexTypeInterpretation_SupertypeInterpretation(), this.getPartialComplexTypeInterpretation(), null, "supertypeInterpretation", null, 0, -1, PartialComplexTypeInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialComplexTypeInterpretation_InterpretationOf(), theLogiclanguagePackage.getTypeDeclaration(), null, "interpretationOf", null, 1, 1, PartialComplexTypeInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

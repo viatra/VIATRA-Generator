@@ -60,7 +60,6 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 			case PartialinterpretationPackage.PARTIAL_CONSTANT_INTERPRETATION: return createPartialConstantInterpretation();
 			case PartialinterpretationPackage.PARTIAL_RELATION_INTERPRETATION: return createPartialRelationInterpretation();
 			case PartialinterpretationPackage.PARTIAL_FUNCTION_INTERPRETATION: return createPartialFunctionInterpretation();
-			case PartialinterpretationPackage.PARTIAL_TYPE_INTERPRATATION: return createPartialTypeInterpratation();
 			case PartialinterpretationPackage.UNARY_ELEMENT_RELATION_LINK: return createUnaryElementRelationLink();
 			case PartialinterpretationPackage.BINARY_ELEMENT_RELATION_LINK: return createBinaryElementRelationLink();
 			case PartialinterpretationPackage.NARY_RELATION_LINK: return createNaryRelationLink();
@@ -69,6 +68,12 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 			case PartialinterpretationPackage.INTEGER_ELEMENT: return createIntegerElement();
 			case PartialinterpretationPackage.REAL_ELEMENT: return createRealElement();
 			case PartialinterpretationPackage.STRING_ELEMENT: return createStringElement();
+			case PartialinterpretationPackage.SCOPE: return createScope();
+			case PartialinterpretationPackage.PARTIAL_BOOLEAN_INTERPRETATION: return createPartialBooleanInterpretation();
+			case PartialinterpretationPackage.PARTIAL_INTEGER_INTERPRETATION: return createPartialIntegerInterpretation();
+			case PartialinterpretationPackage.PARTIAL_REAL_INTERPRETATION: return createPartialRealInterpretation();
+			case PartialinterpretationPackage.PARTIAL_STRING_INTERPRETATION: return createPartialStringInterpretation();
+			case PartialinterpretationPackage.PARTIAL_COMPLEX_TYPE_INTERPRETATION: return createPartialComplexTypeInterpretation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -112,16 +117,6 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	public PartialFunctionInterpretation createPartialFunctionInterpretation() {
 		PartialFunctionInterpretationImpl partialFunctionInterpretation = new PartialFunctionInterpretationImpl();
 		return partialFunctionInterpretation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PartialTypeInterpratation createPartialTypeInterpratation() {
-		PartialTypeInterpratationImpl partialTypeInterpratation = new PartialTypeInterpratationImpl();
-		return partialTypeInterpratation;
 	}
 
 	/**
@@ -202,6 +197,66 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	public StringElement createStringElement() {
 		StringElementImpl stringElement = new StringElementImpl();
 		return stringElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Scope createScope() {
+		ScopeImpl scope = new ScopeImpl();
+		return scope;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialBooleanInterpretation createPartialBooleanInterpretation() {
+		PartialBooleanInterpretationImpl partialBooleanInterpretation = new PartialBooleanInterpretationImpl();
+		return partialBooleanInterpretation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialIntegerInterpretation createPartialIntegerInterpretation() {
+		PartialIntegerInterpretationImpl partialIntegerInterpretation = new PartialIntegerInterpretationImpl();
+		return partialIntegerInterpretation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialRealInterpretation createPartialRealInterpretation() {
+		PartialRealInterpretationImpl partialRealInterpretation = new PartialRealInterpretationImpl();
+		return partialRealInterpretation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialStringInterpretation createPartialStringInterpretation() {
+		PartialStringInterpretationImpl partialStringInterpretation = new PartialStringInterpretationImpl();
+		return partialStringInterpretation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PartialComplexTypeInterpretation createPartialComplexTypeInterpretation() {
+		PartialComplexTypeInterpretationImpl partialComplexTypeInterpretation = new PartialComplexTypeInterpretationImpl();
+		return partialComplexTypeInterpretation;
 	}
 
 	/**

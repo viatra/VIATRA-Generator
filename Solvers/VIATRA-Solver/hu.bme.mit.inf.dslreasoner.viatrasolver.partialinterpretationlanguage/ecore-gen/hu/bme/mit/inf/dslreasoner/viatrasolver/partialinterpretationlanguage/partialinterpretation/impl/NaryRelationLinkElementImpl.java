@@ -2,6 +2,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.NaryRelationLinkElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage;
 
@@ -9,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -21,6 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.NaryRelationLinkElementImpl#getIndex <em>Index</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.NaryRelationLinkElementImpl#getParam <em>Param</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +48,16 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	 * @ordered
 	 */
 	protected int index = INDEX_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParam() <em>Param</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParam()
+	 * @generated
+	 * @ordered
+	 */
+	protected DefinedElement param;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,11 +104,52 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DefinedElement getParam() {
+		if (param != null && param.eIsProxy()) {
+			InternalEObject oldParam = (InternalEObject)param;
+			param = (DefinedElement)eResolveProxy(oldParam);
+			if (param != oldParam) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__PARAM, oldParam, param));
+			}
+		}
+		return param;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DefinedElement basicGetParam() {
+		return param;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParam(DefinedElement newParam) {
+		DefinedElement oldParam = param;
+		param = newParam;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__PARAM, oldParam, param));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__INDEX:
 				return getIndex();
+			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__PARAM:
+				if (resolve) return getParam();
+				return basicGetParam();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,6 +164,9 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 		switch (featureID) {
 			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__INDEX:
 				setIndex((Integer)newValue);
+				return;
+			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__PARAM:
+				setParam((DefinedElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,6 +183,9 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__INDEX:
 				setIndex(INDEX_EDEFAULT);
 				return;
+			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__PARAM:
+				setParam((DefinedElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -140,6 +200,8 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 		switch (featureID) {
 			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__INDEX:
 				return index != INDEX_EDEFAULT;
+			case PartialinterpretationPackage.NARY_RELATION_LINK_ELEMENT__PARAM:
+				return param != null;
 		}
 		return super.eIsSet(featureID);
 	}

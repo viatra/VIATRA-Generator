@@ -16,38 +16,17 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="partialtypeinterpratation"
         upperBound="-1" eType="#//PartialTypeInterpratation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNewElements" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="openWorldElementPrototypes"
-        upperBound="-1" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="openWorldElements" upperBound="-1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="problemConainer" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logicproblem.ecore#//LogicProblem"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stringelement" upperBound="-1"
-        eType="#//StringElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stringelements" upperBound="-1"
-        eType="#//StringElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="realelements" upperBound="-1"
-        eType="#//RealElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="integerelements" upperBound="-1"
-        eType="#//IntegerElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="booleanelements" upperBound="-1"
-        eType="#//BooleanElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewIntegers" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewReals" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewStrings" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="newStrings" upperBound="-1"
-        eType="#//StringElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="newReals" upperBound="-1"
-        eType="#//RealElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="newIntegers" upperBound="-1"
-        eType="#//IntegerElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//Scope" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNewElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PartialConstantInterpretation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
@@ -65,13 +44,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
         eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//FunctionDeclaration"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PartialTypeInterpratation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
-        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//TypeDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialTypeInterpratation" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypeInterpretation"
-        upperBound="-1" eType="#//PartialTypeInterpratation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationLink" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryElementRelationLink" eSuperTypes="#//RelationLink">
@@ -90,6 +65,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NaryRelationLinkElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param" lowerBound="1" eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveElement" abstract="true" eSuperTypes="../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueSet" lowerBound="1"
@@ -106,5 +82,25 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringElement" eSuperTypes="#//PrimitiveElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scope">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNewElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetTypeInterpretation"
+        lowerBound="1" eType="#//PartialTypeInterpratation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialPrimitiveInterpretation" abstract="true"
+      eSuperTypes="#//PartialTypeInterpratation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialBooleanInterpretation" eSuperTypes="#//PartialPrimitiveInterpretation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialIntegerInterpretation" eSuperTypes="#//PartialPrimitiveInterpretation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialRealInterpretation" eSuperTypes="#//PartialPrimitiveInterpretation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialStringInterpretation" eSuperTypes="#//PartialPrimitiveInterpretation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialComplexTypeInterpretation" eSuperTypes="#//PartialTypeInterpratation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypeInterpretation"
+        upperBound="-1" eType="#//PartialComplexTypeInterpretation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//TypeDeclaration"/>
   </eClassifiers>
 </ecore:EPackage>

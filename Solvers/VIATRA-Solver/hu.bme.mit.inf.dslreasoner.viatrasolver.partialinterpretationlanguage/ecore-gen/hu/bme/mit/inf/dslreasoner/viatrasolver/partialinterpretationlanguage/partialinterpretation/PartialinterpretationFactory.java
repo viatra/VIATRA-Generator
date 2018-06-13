@@ -58,15 +58,6 @@ public interface PartialinterpretationFactory extends EFactory {
 	PartialFunctionInterpretation createPartialFunctionInterpretation();
 
 	/**
-	 * Returns a new object of class '<em>Partial Type Interpratation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Partial Type Interpratation</em>'.
-	 * @generated
-	 */
-	PartialTypeInterpratation createPartialTypeInterpratation();
-
-	/**
 	 * Returns a new object of class '<em>Unary Element Relation Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,6 +128,60 @@ public interface PartialinterpretationFactory extends EFactory {
 	 * @generated
 	 */
 	StringElement createStringElement();
+
+	/**
+	 * Returns a new object of class '<em>Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scope</em>'.
+	 * @generated
+	 */
+	Scope createScope();
+
+	/**
+	 * Returns a new object of class '<em>Partial Boolean Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial Boolean Interpretation</em>'.
+	 * @generated
+	 */
+	PartialBooleanInterpretation createPartialBooleanInterpretation();
+
+	/**
+	 * Returns a new object of class '<em>Partial Integer Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial Integer Interpretation</em>'.
+	 * @generated
+	 */
+	PartialIntegerInterpretation createPartialIntegerInterpretation();
+
+	/**
+	 * Returns a new object of class '<em>Partial Real Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial Real Interpretation</em>'.
+	 * @generated
+	 */
+	PartialRealInterpretation createPartialRealInterpretation();
+
+	/**
+	 * Returns a new object of class '<em>Partial String Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial String Interpretation</em>'.
+	 * @generated
+	 */
+	PartialStringInterpretation createPartialStringInterpretation();
+
+	/**
+	 * Returns a new object of class '<em>Partial Complex Type Interpretation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Partial Complex Type Interpretation</em>'.
+	 * @generated
+	 */
+	PartialComplexTypeInterpretation createPartialComplexTypeInterpretation();
 
 	/**
 	 * Returns the package supported by this factory.
