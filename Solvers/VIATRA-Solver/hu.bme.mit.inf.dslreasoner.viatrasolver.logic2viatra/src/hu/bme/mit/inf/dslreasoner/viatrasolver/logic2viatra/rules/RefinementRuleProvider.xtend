@@ -5,13 +5,12 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationStatistics
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.ObjectCreationPrecondition
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
 import java.util.LinkedHashMap
 import org.eclipse.viatra.query.runtime.api.GenericPatternMatch
@@ -71,7 +70,7 @@ class RefinementRuleProvider {
 					val interpretation = match.get(1) as PartialInterpretation
 					val relationInterpretation = match.get(2) as PartialRelationInterpretation
 					val inverseRelationInterpretation = match.get(3) as PartialRelationInterpretation
-					val typeInterpretation = match.get(4) as PartialTypeInterpratation
+					val typeInterpretation = match.get(4) as PartialComplexTypeInterpretation
 					val container = match.get(5) as DefinedElement
 					
 					val newElement = createDefinedElement
@@ -104,7 +103,7 @@ class RefinementRuleProvider {
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
 					val relationInterpretation = match.get(2) as PartialRelationInterpretation
-					val typeInterpretation = match.get(3) as PartialTypeInterpratation
+					val typeInterpretation = match.get(3) as PartialComplexTypeInterpretation
 					val container = match.get(4) as DefinedElement
 					
 					val newElement = createDefinedElement
@@ -133,7 +132,7 @@ class RefinementRuleProvider {
 				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation
-				val typeInterpretation = match.get(2) as PartialTypeInterpratation
+				val typeInterpretation = match.get(2) as PartialComplexTypeInterpretation
 				
 				val newElement = createDefinedElement
 				if(nameNewElement) {

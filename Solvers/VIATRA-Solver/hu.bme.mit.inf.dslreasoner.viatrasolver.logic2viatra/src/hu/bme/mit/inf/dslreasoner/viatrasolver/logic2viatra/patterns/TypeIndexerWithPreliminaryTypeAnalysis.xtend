@@ -18,11 +18,11 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 	override requiresTypeAnalysis() { true }
 	
 	override getRequiredQueries() '''
-	private pattern typeInterpretation(problem:LogicProblem, interpetation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialTypeInterpratation) {
+	private pattern typeInterpretation(problem:LogicProblem, interpetation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialComplexTypeInterpretation) {
 		find interpretation(problem,interpetation);
 		LogicProblem.types(problem,type);
 		PartialInterpretation.partialtypeinterpratation(interpetation,typeInterpretation);
-		PartialTypeInterpratation.interpretationOf(typeInterpretation,type);
+		PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
 	}
 	
 	private pattern directInstanceOf(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement, type:Type) {
@@ -32,7 +32,7 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 	} or {
 		find interpretation(problem,interpetation);
 		find typeInterpretation(problem,interpetation,type,typeInterpretation);
-		PartialTypeInterpratation.elements(typeInterpretation,element);
+		PartialComplexTypeInterpretation.elements(typeInterpretation,element);
 	}
 	'''
 	
@@ -81,7 +81,7 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 			«ENDFOR»
 		} or {
 			find interpretation(problem,interpretation);
-			PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+			PartialInterpretation.openWorldElements(interpetation,element);
 		} or
 		«ENDIF»
 		{ «referInstanceOf(type,Modality.MUST,"element")» }

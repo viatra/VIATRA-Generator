@@ -177,58 +177,23 @@ class PatternGenerator {
 				find interpretation(problem,interpetation);
 				PartialInterpretation.newElements(interpetation,element);
 			}
-			«IF problem.hasBoolean»or {
-				find interpretation(problem,interpetation);
-				PartialInterpretation.booleanelements(interpetation,element);
-			}«ENDIF»
-			«IF problem.hasInteger»or {
-				find interpretation(problem,interpetation);
-				PartialInterpretation.integerelements(interpetation,element);
-			}«ENDIF»
-			«IF problem.hasReal»or {
-				find interpretation(problem,interpetation);
-				PartialInterpretation.realelements(interpetation,element);
-			}«ENDIF»
-			«IF problem.hasString»or {
-				find interpretation(problem,interpetation);
-				PartialInterpretation.stringelements(interpetation,element);
-			}«ENDIF»
 			
 			private pattern mayExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
 			    find mustExist(problem,interpetation,element);
 			} or {
 			    find interpretation(problem,interpetation);
 			    neg find elementCloseWorld(interpetation);
-			    PartialInterpretation.openWorldElementPrototypes(interpetation,element);
+			    PartialInterpretation.openWorldElements(interpetation,element);
 			}
-			«IF problem.hasInteger»or {
-				find interpretation(problem,interpetation);
-				neg find integerCloseWorld(interpetation);
-				PartialInterpretation.newIntegers(interpetation,element);
-			}«ENDIF»
-			«IF problem.hasReal»or {
-				find interpretation(problem,interpetation);
-				neg find realCloseWorld(interpetation);
-				PartialInterpretation.newReals(interpetation,element);
-			}«ENDIF»
-			«IF problem.hasString»or {
-				find interpretation(problem,interpetation);
-				neg find stringCloseWorld(interpetation);
-				PartialInterpretation.newStrings(interpetation,element);
-			}«ENDIF»
 			
-			private pattern elementCloseWorld(interpetation:PartialInterpretation) {
-			    PartialInterpretation.maxNewElements(interpetation,0);
+			private pattern elementCloseWorld(element:DefinedElement) {
+				PartialInterpretation.newElements(i,element);
+			    PartialInterpretation.maxNewElements(i,0);
+			} or {
+				Scope.targetTypeInterpretation(scope,interpetation);
+				PartialTypeInterpratation.elements(interpetation,element);
+				Scope.maxNewElements(scope,0);
 			}
-			«IF problem.hasInteger»private pattern integerCloseWorld(interpetation:PartialInterpretation) {
-			    PartialInterpretation.maxNewIntegers(interpetation,0);
-			}«ENDIF»
-			«IF problem.hasReal»private pattern realCloseWorld(interpetation:PartialInterpretation) {
-			    PartialInterpretation.maxNewReals(interpetation,0);
-			}«ENDIF»
-			«IF problem.hasString»private pattern stringCloseWorld(interpetation:PartialInterpretation) {
-			    PartialInterpretation.maxNewStrings(interpetation,0);
-			}«ENDIF»
 			
 			////////////////////////
 			// 0.2 Equivalence
@@ -251,31 +216,31 @@ class PatternGenerator {
 			//////////
 			// 1.1.1 primitive Type Indexers
 			//////////
-			pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.booleanelements(interpretation,element);
-			}
-			pattern instanceofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.integerelements(interpretation,element);
-			} or {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.newIntegers(interpetation,element);
-			}
-			pattern instanceofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.realelements(interpretation,element);
-			} or {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.newReals(interpetation,element);
-			}
-			pattern instanceofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.stringelements(interpretation,element);
-			} or {
-				find interpretation(problem,interpretation);
-				PartialInterpretation.newStrings(interpetation,element);
-			}
+«««			pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.booleanelements(interpretation,element);
+«««			}
+«««			pattern instanceofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.integerelements(interpretation,element);
+«««			} or {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.newIntegers(interpetation,element);
+«««			}
+«««			pattern instanceofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.realelements(interpretation,element);
+«««			} or {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.newReals(interpetation,element);
+«««			}
+«««			pattern instanceofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.stringelements(interpretation,element);
+«««			} or {
+«««				find interpretation(problem,interpretation);
+«««				PartialInterpretation.newStrings(interpetation,element);
+«««			}
 			
 			//////////
 			// 1.1.2 domain-specific Type Indexers

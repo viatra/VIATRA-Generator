@@ -98,7 +98,7 @@ class ParseUtil {
 		val patternModel = resource.getContents().get(0) as PatternModel;
 		
 		EcoreUtil.resolveAll(resource)
-		//resource.validate
+		resource.validate
 		val res = new LinkedHashMap<String,IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 		val patterns = new LinkedList<IQuerySpecification<?>>
 		for(pattern : patternModel.patterns) {
@@ -106,7 +106,7 @@ class ParseUtil {
 			res.put(querySpecification.fullyQualifiedName,querySpecification)
 			patterns += querySpecification
 		}
-		//resource.validate
+		resource.validate
 		
 		return res
 	}

@@ -42,7 +42,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 						{
 							find interpretation(problem,interpretation);
 							PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-							PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"«type.name»");
+							PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"«type.name»");
 							PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
 							PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"«containmentRelation.name»");
 							PartialInterpretation.partialrelationinterpretation(interpretation,inverseInterpretation);
@@ -61,7 +61,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 						{
 							find interpretation(problem,interpretation);
 							PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-							PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"«type.name»");
+							PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"«type.name»");
 							PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
 							PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"«containmentRelation.name»");
 							«base.typeIndexer.referInstanceOf((containmentRelation.parameters.get(0) as ComplexTypeReference).referred,Modality.MUST,"container")»
@@ -79,7 +79,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 					find interpretation(problem,interpretation);
 					neg find hasElementInContainment(problem,interpretation);
 					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-					PartialTypeInterpratation.interpretationOf.name(type,"«type.name»");
+					PartialComplexTypeInterpretation.interpretationOf.name(type,"«type.name»");
 					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»
 					find mayExist(problem, interpretation, newObject);
 					neg find mustExist(problem, interpretation, newObject);
@@ -91,7 +91,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 				{
 					find interpretation(problem,interpretation);
 					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-					PartialTypeInterpratation.interpretationOf.name(typeInterpretation,"«type.name»");
+					PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"«type.name»");
 					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»
 					find mayExist(problem, interpretation, newObject);
 					neg find mustExist(problem, interpretation, newObject);

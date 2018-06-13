@@ -20,11 +20,11 @@ class GenericTypeIndexer extends TypeIndexer {
 		PartialInterpretation.newElements(interpretation,element);
 	}
 	
-	private pattern typeInterpretation(problem:LogicProblem, interpetation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialTypeInterpratation) {
+	private pattern typeInterpretation(problem:LogicProblem, interpetation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialComplexTypeInterpretation) {
 		find interpretation(problem,interpetation);
 		LogicProblem.types(problem,type);
 		PartialInterpretation.partialtypeinterpratation(interpetation,typeInterpretation);
-		PartialTypeInterpratation.interpretationOf(typeInterpretation,type);
+		PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
 	}
 	
 	private pattern directInstanceOf(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement, type:Type) {
@@ -35,7 +35,7 @@ class GenericTypeIndexer extends TypeIndexer {
 	} or {
 		find mustExist(problem,interpetation,element);
 		find typeInterpretation(problem,interpetation,type,typeInterpretation);
-		PartialTypeInterpratation.elements(typeInterpretation,element);
+		PartialComplexTypeInterpretation.elements(typeInterpretation,element);
 	}
 	
 	/**
