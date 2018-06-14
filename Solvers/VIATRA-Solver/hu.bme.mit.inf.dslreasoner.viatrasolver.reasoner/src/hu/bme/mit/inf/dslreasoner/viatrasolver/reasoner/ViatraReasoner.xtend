@@ -99,7 +99,7 @@ class ViatraReasoner extends LogicReasoner{
 			dse.addTransformationRule(rule)
 		}
 		
-		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig)
+		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
 		viatraConfig.progressMonitor.workedForwardTransformation
 		
 		val transformationTime = System.nanoTime - transformationStartTime

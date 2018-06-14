@@ -25,12 +25,17 @@ import org.eclipse.viatra.dse.base.ThreadContext;
 import org.eclipse.viatra.dse.objectives.Fitness;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
@@ -59,6 +64,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private ThreadContext context;
 	private ReasonerWorkspace workspace;
 	private ViatraReasonerConfiguration configuration;
+	private ModelGenerationMethod method;
 	private PartialInterpretation2Logic partialInterpretation2Logic = new PartialInterpretation2Logic();
 	private Comparator<TrajectoryWithFitness> comparator;
 	private Logger logger = Logger.getLogger(IStrategy.class);
@@ -79,10 +85,12 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 	public BestFirstStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
-			ViatraReasonerConfiguration configuration)
+			ViatraReasonerConfiguration configuration,
+			ModelGenerationMethod method)
 	{
 		this.workspace = workspace;
 		this.configuration = configuration;
+		this.method = method;
 	}
 	
 	public SolutionStoreWithCopy getSolutionStoreWithCopy() {
@@ -99,6 +107,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public void initStrategy(ThreadContext context) {
 		this.context = context;
 		this.solutionStore = context.getGlobalContext().getSolutionStore();
+		
+		ViatraQueryEngine engine = context.getQueryEngine();
+		// TODO: visualisation
+//		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
+//			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
+//			matcher.getAllMatches();
+//		}
+		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
 
@@ -275,7 +291,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			int id = ++numberOfPrintedModel;
 			if (id % configuration.debugCongiguration.partalInterpretationVisualisationFrequency == 0) {
 				PartialInterpretationVisualisation visualisation = partialInterpretatioVisualiser.visualiseConcretization(p);
-				visualisation.writeToFile(workspace, String.format("state%09d", id));
+				visualisation.writeToFile(workspace, String.format("state%09d.png", id));
 			}
 		}
 	}
