@@ -11,9 +11,11 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -77,6 +79,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
+	private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	
 	// Statistics
 	private int numberOfStatecoderFail = 0;
@@ -110,10 +113,12 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		
 		ViatraQueryEngine engine = context.getQueryEngine();
 		// TODO: visualisation
-//		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
-//			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
-//			matcher.getAllMatches();
-//		}
+		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
+		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
+			System.out.println(p.getSimpleName());
+			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
+			matchers.add(matcher);
+		}
 		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
@@ -183,6 +188,10 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				context.executeAcitvationId(nextActivation);
 
 				visualiseCurrentState();
+				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
+					System.out.println(matcher.getPatternName() + " - " + matcher.countMatches());
+				}
+				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 
