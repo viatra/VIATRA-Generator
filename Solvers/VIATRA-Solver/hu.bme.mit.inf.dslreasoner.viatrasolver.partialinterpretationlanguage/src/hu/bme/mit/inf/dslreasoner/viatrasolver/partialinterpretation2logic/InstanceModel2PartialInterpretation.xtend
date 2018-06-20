@@ -54,7 +54,7 @@ class InstanceModel2PartialInterpretation {
 			val object = objects.get(objectIndex)
 			val element = createDefinedElement => [
 				it.name = if(withID) 
-					{ '''PartialObject«objectIndex»''' } else 
+					{ '''o «objectIndex»''' } else 
 					{ null }
 			]
 			

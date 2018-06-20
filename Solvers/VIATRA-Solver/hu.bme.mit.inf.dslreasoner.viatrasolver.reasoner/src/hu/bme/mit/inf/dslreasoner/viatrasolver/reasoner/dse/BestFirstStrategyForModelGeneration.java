@@ -112,6 +112,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.solutionStore = context.getGlobalContext().getSolutionStore();
 		
 		ViatraQueryEngine engine = context.getQueryEngine();
+//		// TODO: visualisation
+//		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
+//		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
+//			System.out.println(p.getSimpleName());
+//			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
+//			matchers.add(matcher);
+//		}
 		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
@@ -181,6 +188,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				context.executeAcitvationId(nextActivation);
 
 				visualiseCurrentState();
+//				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
+//					System.out.println(matcher.getPatternName() + " - " + matcher.getAllValues("element"));
+//				}
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }

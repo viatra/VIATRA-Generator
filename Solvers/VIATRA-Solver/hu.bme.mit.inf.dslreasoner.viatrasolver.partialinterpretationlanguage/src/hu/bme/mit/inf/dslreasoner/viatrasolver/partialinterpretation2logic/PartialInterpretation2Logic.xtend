@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
 
 @Data class PartialInterpretation2Logic_Trace {
 	Map<DefinedElement,DefinedElement> new2Old = new HashMap
@@ -66,7 +67,7 @@ class PartialInterpretation2Logic {
 //			newElement.name = '''o «newElementIndex++»'''
 //			p.elements += newElement
 //		}
-		p.elements += i.newElements
+		p.elements += i.newElements.filter[!it instanceof PrimitiveElement]
 	}
 	
 	private def splitTypeIntoTwo(LogicProblem p, PartialComplexTypeInterpretation partialTypeDeclaration,PartialInterpretation2Logic_Trace trace) {
