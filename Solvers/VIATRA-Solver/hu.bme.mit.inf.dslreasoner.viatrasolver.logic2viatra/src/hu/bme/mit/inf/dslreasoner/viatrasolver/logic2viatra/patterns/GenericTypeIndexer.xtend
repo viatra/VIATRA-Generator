@@ -80,6 +80,11 @@ class GenericTypeIndexer extends TypeIndexer {
 		Type.isAbstract(dynamic,false);
 	}
 	
+	
+	private pattern isPrimitive(element: PrimitiveElement) {
+		PrimitiveElement(element);
+	}
+	
 	private pattern possibleDynamicType(problem: LogicProblem, interpretation:PartialInterpretation, dynamic:Type, element:DefinedElement)
 	// case 1: element is defined at least once
 	{
@@ -94,6 +99,8 @@ class GenericTypeIndexer extends TypeIndexer {
 		neg find dynamicTypeIsSubtypeOfANonDefinition(problem,interpretation,element,dynamic);
 		// 4: T is not abstract
 		Type.isAbstract(dynamic,false);
+		// 5. element is not primitive datatype
+		neg find isPrimitive(element);
 	} or
 	// case 2: element is not defined anywhere
 	{

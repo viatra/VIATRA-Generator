@@ -8,6 +8,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -172,11 +173,63 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTargetTypeInterpretation(PartialTypeInterpratation newTargetTypeInterpretation) {
+	public NotificationChain basicSetTargetTypeInterpretation(PartialTypeInterpratation newTargetTypeInterpretation, NotificationChain msgs) {
 		PartialTypeInterpratation oldTargetTypeInterpretation = targetTypeInterpretation;
 		targetTypeInterpretation = newTargetTypeInterpretation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION, oldTargetTypeInterpretation, targetTypeInterpretation));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION, oldTargetTypeInterpretation, newTargetTypeInterpretation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetTypeInterpretation(PartialTypeInterpratation newTargetTypeInterpretation) {
+		if (newTargetTypeInterpretation != targetTypeInterpretation) {
+			NotificationChain msgs = null;
+			if (targetTypeInterpretation != null)
+				msgs = ((InternalEObject)targetTypeInterpretation).eInverseRemove(this, PartialinterpretationPackage.PARTIAL_TYPE_INTERPRATATION__SCOPES, PartialTypeInterpratation.class, msgs);
+			if (newTargetTypeInterpretation != null)
+				msgs = ((InternalEObject)newTargetTypeInterpretation).eInverseAdd(this, PartialinterpretationPackage.PARTIAL_TYPE_INTERPRATATION__SCOPES, PartialTypeInterpratation.class, msgs);
+			msgs = basicSetTargetTypeInterpretation(newTargetTypeInterpretation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION, newTargetTypeInterpretation, newTargetTypeInterpretation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION:
+				if (targetTypeInterpretation != null)
+					msgs = ((InternalEObject)targetTypeInterpretation).eInverseRemove(this, PartialinterpretationPackage.PARTIAL_TYPE_INTERPRATATION__SCOPES, PartialTypeInterpratation.class, msgs);
+				return basicSetTargetTypeInterpretation((PartialTypeInterpratation)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION:
+				return basicSetTargetTypeInterpretation(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

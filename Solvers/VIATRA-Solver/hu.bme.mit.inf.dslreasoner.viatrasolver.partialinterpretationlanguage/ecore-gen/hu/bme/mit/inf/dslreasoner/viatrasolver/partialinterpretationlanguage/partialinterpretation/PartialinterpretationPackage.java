@@ -342,13 +342,22 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_TYPE_INTERPRATATION__ELEMENTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_TYPE_INTERPRATATION__SCOPES = 1;
+
+	/**
 	 * The number of structural features of the '<em>Partial Type Interpratation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_TYPE_INTERPRATATION_FEATURE_COUNT = 1;
+	int PARTIAL_TYPE_INTERPRATATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Partial Type Interpratation</em>' class.
@@ -941,6 +950,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_PRIMITIVE_INTERPRETATION__ELEMENTS = PARTIAL_TYPE_INTERPRATATION__ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_PRIMITIVE_INTERPRETATION__SCOPES = PARTIAL_TYPE_INTERPRATATION__SCOPES;
+
+	/**
 	 * The number of structural features of the '<em>Partial Primitive Interpretation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -976,6 +994,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARTIAL_BOOLEAN_INTERPRETATION__ELEMENTS = PARTIAL_PRIMITIVE_INTERPRETATION__ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_BOOLEAN_INTERPRETATION__SCOPES = PARTIAL_PRIMITIVE_INTERPRETATION__SCOPES;
 
 	/**
 	 * The number of structural features of the '<em>Partial Boolean Interpretation</em>' class.
@@ -1015,6 +1042,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_INTEGER_INTERPRETATION__ELEMENTS = PARTIAL_PRIMITIVE_INTERPRETATION__ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTEGER_INTERPRETATION__SCOPES = PARTIAL_PRIMITIVE_INTERPRETATION__SCOPES;
+
+	/**
 	 * The number of structural features of the '<em>Partial Integer Interpretation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1050,6 +1086,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARTIAL_REAL_INTERPRETATION__ELEMENTS = PARTIAL_PRIMITIVE_INTERPRETATION__ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_REAL_INTERPRETATION__SCOPES = PARTIAL_PRIMITIVE_INTERPRETATION__SCOPES;
 
 	/**
 	 * The number of structural features of the '<em>Partial Real Interpretation</em>' class.
@@ -1089,6 +1134,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_STRING_INTERPRETATION__ELEMENTS = PARTIAL_PRIMITIVE_INTERPRETATION__ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_STRING_INTERPRETATION__SCOPES = PARTIAL_PRIMITIVE_INTERPRETATION__SCOPES;
+
+	/**
 	 * The number of structural features of the '<em>Partial String Interpretation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,6 +1179,15 @@ public interface PartialinterpretationPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARTIAL_COMPLEX_TYPE_INTERPRETATION__ELEMENTS = PARTIAL_TYPE_INTERPRATATION__ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_COMPLEX_TYPE_INTERPRETATION__SCOPES = PARTIAL_TYPE_INTERPRATATION__SCOPES;
 
 	/**
 	 * The feature id for the '<em><b>Supertype Interpretation</b></em>' reference list.
@@ -1410,6 +1473,17 @@ public interface PartialinterpretationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPartialTypeInterpratation_Elements();
+
+	/**
+	 * Returns the meta object for the reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation#getScopes <em>Scopes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Scopes</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation#getScopes()
+	 * @see #getPartialTypeInterpratation()
+	 * @generated
+	 */
+	EReference getPartialTypeInterpratation_Scopes();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink <em>Relation Link</em>}'.
@@ -1973,6 +2047,14 @@ public interface PartialinterpretationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARTIAL_TYPE_INTERPRATATION__ELEMENTS = eINSTANCE.getPartialTypeInterpratation_Elements();
+
+		/**
+		 * The meta object literal for the '<em><b>Scopes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTIAL_TYPE_INTERPRATATION__SCOPES = eINSTANCE.getPartialTypeInterpratation_Scopes();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.RelationLinkImpl <em>Relation Link</em>}' class.

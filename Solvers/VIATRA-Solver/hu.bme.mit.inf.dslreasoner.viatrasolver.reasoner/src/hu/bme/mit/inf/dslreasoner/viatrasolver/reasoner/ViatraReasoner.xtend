@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
@@ -29,7 +30,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import javax.security.auth.login.Configuration.Parameters
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -56,6 +56,9 @@ class ViatraReasoner extends LogicReasoner{
 		val transformationStartTime = System.nanoTime
 		
 		val emptySolution = initialiser.initialisePartialInterpretation(problem,viatraConfig.typeScopes).output
+		if(viatraConfig.documentationLevel == DocumentationLevel::FULL && workspace !== null) {
+			workspace.writeModel(emptySolution,"init.partialmodel")
+		} 
 		emptySolution.problemConainer = problem
 		
 		val method = modelGenerationMethodProvider.createModelGenerationMethod(

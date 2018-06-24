@@ -11,6 +11,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
+import java.math.BigDecimal
 
 abstract class TypeIndexer {
 	public def CharSequence getRequiredQueries()
@@ -33,6 +34,19 @@ abstract class TypeIndexer {
 	}
 	public def dispatch CharSequence referInstanceOfByReference(StringTypeReference reference, Modality modality, String variableName) {
 		'''StringElement(«variableName»);'''
+	}
+	public def dispatch CharSequence referPrimitiveValue(String variableName, Boolean value) {
+		'''BooleanElement.value(«variableName»,«value»);'''
+	}
+	public def dispatch CharSequence referPrimitiveValue(String variableName, Integer value) {
+		'''IntegerElement.value(«variableName»,«value»);'''
+	}
+	public def dispatch CharSequence referPrimitiveValue(String variableName, BigDecimal value) {
+		'''RealElement.value(«variableName»,«value»);'''
+	}
+	///TODO: de-escaping string literals
+	public def dispatch CharSequence referPrimitiveValue(String variableName, String value) {
+		'''StringElement.value(«variableName»,"«value»");'''
 	}
 
 }

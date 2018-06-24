@@ -27,7 +27,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 		private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
 		«FOR type :containment.typesOrderedInHierarchy SEPARATOR "or"»{
 			find interpretation(problem,interpretation);
-			«base.typeIndexer.referInstanceOf(type,Modality.MAY,"root")»
+			«base.typeIndexer.referInstanceOf(type,Modality.MUST,"root")»
 			find mustExist(problem, interpretation, root);
 		}«ENDFOR»
 		«FOR type:possibleNewDynamicType»
@@ -36,7 +36,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 					«IF inverseRelations.containsKey(containmentRelation)»
 						pattern «this.patternName(containmentRelation,inverseRelations.get(containmentRelation),type)»(
 							problem:LogicProblem, interpretation:PartialInterpretation,
-							relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
+							relationInterpretation:PartialRelationInterpretation, inverseInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 							container:DefinedElement)
 						{
 							find interpretation(problem,interpretation);
@@ -55,7 +55,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 					«ELSE»
 						pattern «this.patternName(containmentRelation,null,type)»(
 							problem:LogicProblem, interpretation:PartialInterpretation,
-							relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialTypeInterpratation,
+							relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 							container:DefinedElement)
 						{
 							find interpretation(problem,interpretation);
@@ -73,7 +73,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 				«ENDFOR»
 				pattern «patternName(null,null,type)»(
 					problem:LogicProblem, interpretation:PartialInterpretation,
-					typeInterpretation:PartialTypeInterpratation)
+					typeInterpretation:PartialComplexTypeInterpretation)
 				{
 					find interpretation(problem,interpretation);
 					neg find hasElementInContainment(problem,interpretation);
@@ -86,7 +86,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 			«ELSE»
 				pattern «this.patternName(null,null,type)»(
 					problem:LogicProblem, interpretation:PartialInterpretation,
-					typeInterpretation:PartialTypeInterpratation)
+					typeInterpretation:PartialComplexTypeInterpretation)
 				{
 					find interpretation(problem,interpretation);
 					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
@@ -107,6 +107,7 @@ class TypeRefinementWithPreliminaryTypeAnalysis extends TypeRefinementGenerator{
 			pattern refineTypeTo_«base.canonizeName(newTypeRefinement.targetType.name)»(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.newElements(interpretation,element);
+				«base.typeIndexer.referInstanceOf(newTypeRefinement.targetType,Modality.MAY,"element")»
 				«FOR inhibitorType : newTypeRefinement.inhibitorTypes»
 					neg «base.typeIndexer.referInstanceOf(inhibitorType,Modality.MUST,"element")»
 				«ENDFOR»

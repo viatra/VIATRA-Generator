@@ -163,35 +163,35 @@ class PatternGenerator {
 			//////////
 			// 0. Util
 			//////////
-			private pattern interpretation(problem:LogicProblem, interpetation:PartialInterpretation) {
-				PartialInterpretation.problem(interpetation,problem);
+			private pattern interpretation(problem:LogicProblem, interpretation:PartialInterpretation) {
+				PartialInterpretation.problem(interpretation,problem);
 			}
 				
 			/////////////////////////
 			// 0.1 Existence
 			/////////////////////////
-			private pattern mustExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
-				find interpretation(problem,interpetation);
+			private pattern mustExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+				find interpretation(problem,interpretation);
 				LogicProblem.elements(problem,element);
 			} or {
-				find interpretation(problem,interpetation);
-				PartialInterpretation.newElements(interpetation,element);
+				find interpretation(problem,interpretation);
+				PartialInterpretation.newElements(interpretation,element);
 			}
 			
-			private pattern mayExist(problem:LogicProblem, interpetation:PartialInterpretation, element:DefinedElement) {
-			    find mustExist(problem,interpetation,element);
+			private pattern mayExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+			    find mustExist(problem,interpretation,element);
 			} or {
-			    find interpretation(problem,interpetation);
-			    neg find elementCloseWorld(interpetation);
-			    PartialInterpretation.openWorldElements(interpetation,element);
+			    find interpretation(problem,interpretation);
+			    neg find elementCloseWorld(element);
+			    PartialInterpretation.openWorldElements(interpretation,element);
 			}
 			
 			private pattern elementCloseWorld(element:DefinedElement) {
 				PartialInterpretation.newElements(i,element);
 			    PartialInterpretation.maxNewElements(i,0);
 			} or {
-				Scope.targetTypeInterpretation(scope,interpetation);
-				PartialTypeInterpratation.elements(interpetation,element);
+				Scope.targetTypeInterpretation(scope,interpretation);
+				PartialTypeInterpratation.elements(interpretation,element);
 				Scope.maxNewElements(scope,0);
 			}
 			

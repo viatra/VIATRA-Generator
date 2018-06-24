@@ -32,6 +32,7 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult;
@@ -113,12 +114,12 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		
 		ViatraQueryEngine engine = context.getQueryEngine();
 //		// TODO: visualisation
-//		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
-//		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
-//			System.out.println(p.getSimpleName());
-//			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
-//			matchers.add(matcher);
-//		}
+		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
+		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
+			//System.out.println(p.getSimpleName());
+			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
+			matchers.add(matcher);
+		}
 		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
@@ -152,7 +153,18 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		final Object[] firstTrajectory = context.getTrajectory().toArray(new Object[0]);
 		TrajectoryWithFitness currentTrajectoryWithFittness = new TrajectoryWithFitness(firstTrajectory, firstFittness);
 		trajectoiresToExplore.add(currentTrajectoryWithFittness);
-
+		
+		//if(configuration)
+		visualiseCurrentState();
+//		for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
+//			System.out.println(matcher.getPatternName());
+//			System.out.println("---------");
+//			for(IPatternMatch m : matcher.getAllMatches()) {
+//				System.out.println(m);
+//			}
+//			System.out.println("---------");
+//		}
+		
 		mainLoop: while (!isInterrupted && !configuration.progressMonitor.isCancelled()) {
 
 			if (currentTrajectoryWithFittness == null) {
@@ -189,7 +201,12 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
-//					System.out.println(matcher.getPatternName() + " - " + matcher.getAllValues("element"));
+//					System.out.println(matcher.getPatternName());
+//					System.out.println("---------");
+//					for(IPatternMatch m : matcher.getAllMatches()) {
+//						System.out.println(m);
+//					}
+//					System.out.println("---------");
 //				}
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
@@ -295,7 +312,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 	public void visualiseCurrentState() {
 		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
-		if(partialInterpretatioVisualiser != null) {
+		if(partialInterpretatioVisualiser != null && this.configuration.documentationLevel == DocumentationLevel.FULL && workspace != null) {
 			PartialInterpretation p = (PartialInterpretation) (context.getModel());
 			int id = ++numberOfPrintedModel;
 			if (id % configuration.debugCongiguration.partalInterpretationVisualisationFrequency == 0) {

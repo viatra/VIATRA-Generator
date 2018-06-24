@@ -79,6 +79,7 @@ public interface Scope extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Target Type Interpretation</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation#getScopes <em>Scopes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target Type Interpretation</em>' reference isn't clear,
@@ -88,7 +89,8 @@ public interface Scope extends EObject {
 	 * @return the value of the '<em>Target Type Interpretation</em>' reference.
 	 * @see #setTargetTypeInterpretation(PartialTypeInterpratation)
 	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getScope_TargetTypeInterpretation()
-	 * @model required="true"
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation#getScopes
+	 * @model opposite="scopes" required="true"
 	 * @generated
 	 */
 	PartialTypeInterpratation getTargetTypeInterpretation();

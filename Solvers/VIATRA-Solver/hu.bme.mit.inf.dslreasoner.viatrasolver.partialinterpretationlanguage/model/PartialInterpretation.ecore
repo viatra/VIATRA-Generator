@@ -47,6 +47,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="PartialTypeInterpratation" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="ecore:EClass ../../hu.bme.mit.inf.dslreasoner.logic.model/model/logiclanguage.ecore#//DefinedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//Scope" eOpposite="#//Scope/targetTypeInterpretation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationLink" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryElementRelationLink" eSuperTypes="#//RelationLink">
@@ -89,7 +91,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetTypeInterpretation"
-        lowerBound="1" eType="#//PartialTypeInterpratation"/>
+        lowerBound="1" eType="#//PartialTypeInterpratation" eOpposite="#//PartialTypeInterpratation/scopes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PartialPrimitiveInterpretation" abstract="true"
       eSuperTypes="#//PartialTypeInterpratation"/>

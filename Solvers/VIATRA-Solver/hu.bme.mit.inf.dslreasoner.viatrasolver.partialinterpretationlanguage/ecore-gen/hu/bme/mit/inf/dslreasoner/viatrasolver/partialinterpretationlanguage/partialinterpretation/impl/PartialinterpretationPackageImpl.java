@@ -476,6 +476,15 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPartialTypeInterpratation_Scopes() {
+		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRelationLink() {
 		return relationLinkEClass;
 	}
@@ -823,6 +832,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 		partialTypeInterpratationEClass = createEClass(PARTIAL_TYPE_INTERPRATATION);
 		createEReference(partialTypeInterpratationEClass, PARTIAL_TYPE_INTERPRATATION__ELEMENTS);
+		createEReference(partialTypeInterpratationEClass, PARTIAL_TYPE_INTERPRATATION__SCOPES);
 
 		relationLinkEClass = createEClass(RELATION_LINK);
 
@@ -950,6 +960,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 		initEClass(partialTypeInterpratationEClass, PartialTypeInterpratation.class, "PartialTypeInterpratation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPartialTypeInterpratation_Elements(), theLogiclanguagePackage.getDefinedElement(), null, "elements", null, 0, -1, PartialTypeInterpratation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialTypeInterpratation_Scopes(), this.getScope(), this.getScope_TargetTypeInterpretation(), "scopes", null, 0, -1, PartialTypeInterpratation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationLinkEClass, RelationLink.class, "RelationLink", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -985,7 +996,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getScope_MinNewElements(), ecorePackage.getEInt(), "minNewElements", "0", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getScope_MaxNewElements(), ecorePackage.getEInt(), "maxNewElements", "-1", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_TargetTypeInterpretation(), this.getPartialTypeInterpratation(), null, "targetTypeInterpretation", null, 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_TargetTypeInterpretation(), this.getPartialTypeInterpratation(), this.getPartialTypeInterpratation_Scopes(), "targetTypeInterpretation", null, 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialPrimitiveInterpretationEClass, PartialPrimitiveInterpretation.class, "PartialPrimitiveInterpretation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
