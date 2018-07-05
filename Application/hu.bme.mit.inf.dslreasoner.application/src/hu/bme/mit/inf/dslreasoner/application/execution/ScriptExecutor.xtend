@@ -32,9 +32,6 @@ import org.eclipse.core.runtime.Status
 
 class ScriptExecutor {
 	val parser = new ApplicationConfigurationParser
-	def static void main(String[] args) {
-		println("generator")
-	}
 	
 	/**
 	 * Executes a script

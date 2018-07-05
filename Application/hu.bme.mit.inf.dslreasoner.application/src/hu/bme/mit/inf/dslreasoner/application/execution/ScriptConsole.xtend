@@ -144,15 +144,19 @@ class ScriptConsole {
 	
 	private def MessageConsole prepareRuntimeConsole() {
 		val plugin = ConsolePlugin.getDefault();
-		val conMan = plugin.getConsoleManager();
-		val existingConsoles = conMan.getConsoles();
-		val existingConsolesWithID = existingConsoles.filter[it.name.equals(consoleID)]
-		if(existingConsolesWithID.empty) {
-			val MessageConsole res = new MessageConsole(consoleID,null)
-			conMan.addConsoles(#[res]);
-			return res
+		if(plugin === null) {
+			return null
 		} else {
-			return existingConsolesWithID.head as MessageConsole
+			val conMan = plugin.getConsoleManager();
+			val existingConsoles = conMan.getConsoles();
+			val existingConsolesWithID = existingConsoles.filter[it.name.equals(consoleID)]
+			if(existingConsolesWithID.empty) {
+				val MessageConsole res = new MessageConsole(consoleID,null)
+				conMan.addConsoles(#[res]);
+				return res
+			} else {
+				return existingConsolesWithID.head as MessageConsole
+			}
 		}
 	}
 	

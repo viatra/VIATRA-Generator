@@ -25,6 +25,7 @@ import java.util.Optional
 import java.util.Scanner
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
+import hu.bme.mit.inf.dslreasoner.workspace.URIBasedWorkspace
 
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
@@ -69,13 +70,13 @@ class GenerationTaskExecutor {
 		
 		try {
 			val reasonerWorkspace = if(debugFolder!== null) {
-				new ProjectWorkspace(debugFolder.path,"")
+				new URIBasedWorkspace(debugFolder.path,"")
 			} else {
 				new NullWorkspace
 			}
 			reasonerWorkspace.init
 			val outputWorkspace = if(outputFolder !== null) {
-				new ProjectWorkspace(outputFolder.path,"")
+				new URIBasedWorkspace(outputFolder.path,"")
 			} else {
 				new NullWorkspace
 			}

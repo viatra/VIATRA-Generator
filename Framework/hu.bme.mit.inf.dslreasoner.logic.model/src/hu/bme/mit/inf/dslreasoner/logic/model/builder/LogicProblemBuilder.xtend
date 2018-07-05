@@ -61,7 +61,8 @@ public class LogicProblemBuilder{
 			val element = result.get(0);
 			if(element == "bool" ||
 			   element == "int" ||
-			   element == "real") throw new LogicProblemBuilderException('''Reserved keyword "«element»"!''')
+			   element == "real" ||
+			   element == "string") throw new LogicProblemBuilderException('''Reserved keyword "«element»"!''')
 			else return result.join(' ')
 		}
 		else return result.join(' ')

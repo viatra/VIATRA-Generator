@@ -11,6 +11,7 @@ import java.util.concurrent.BlockingQueue
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.LinkedBlockingQueue
 import org.eclipse.xtend.lib.annotations.Data
+import java.util.function.Consumer
 
 class VisualisationQueque {
 	val BlockingQueue<VisualisationQueueEntry> taskQueue = new LinkedBlockingQueue
@@ -43,9 +44,12 @@ class VisualisationQueque {
 			// do nothing
 		} else {
 			runnerThread = new Thread(new Runnable() {
-				val engine = new GraphvizV8Engine()
-				
 				override run() {
+					val engine = new GraphvizV8Engine()
+					val nullConsumer = new Consumer<GraphvizEngine>() {
+						override accept(GraphvizEngine t) {}
+					}
+					engine.init(nullConsumer,nullConsumer)
 					//println("Visualisation thread started")
 					while(true) {
 						val head = taskQueue.take

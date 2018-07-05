@@ -3,12 +3,17 @@
  */
 package hu.bme.mit.inf.dslreasoner.application
 
+import com.google.inject.Guice
+import com.google.inject.Injector
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
  */
 class ApplicationConfigurationStandaloneSetup extends ApplicationConfigurationStandaloneSetupGenerated {
 
+	override Injector createInjector() {
+		return Guice.createInjector(new ApplicationConfigurationStandaloneRuntimeModule());
+	}
 	def static void doSetup() {
 		new ApplicationConfigurationStandaloneSetup().createInjectorAndDoEMFRegistration()
 	}
