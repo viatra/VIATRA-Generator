@@ -7,12 +7,11 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.math.BigDecimal
 import java.util.HashMap
+import java.util.LinkedList
 import java.util.List
 import java.util.Map
 import java.util.SortedSet
 import java.util.TreeSet
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure0
-import java.util.LinkedList
 
 abstract class LogicReasoner {
 	def abstract LogicResult solve(LogicProblem problem, LogicSolverConfiguration configuration,
