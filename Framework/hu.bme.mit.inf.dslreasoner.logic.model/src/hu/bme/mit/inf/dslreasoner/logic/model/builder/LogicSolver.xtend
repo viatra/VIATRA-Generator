@@ -12,6 +12,7 @@ import java.util.Map
 import java.util.SortedSet
 import java.util.TreeSet
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0
+import java.util.LinkedList
 
 abstract class LogicReasoner {
 	def abstract LogicResult solve(LogicProblem problem, LogicSolverConfiguration configuration,
@@ -82,7 +83,7 @@ public enum DocumentationLevel {
  * Defines the the size of the generated models. Constant <code>Unlimited</code> defines no upper limit to the type.
  */
 public class TypeScopes {
-	public static val Unlimited = -1;
+	public static val Unlimited = Integer.MAX_VALUE;
 	
 	/**
 	 * Sets the Integers that are already in the scope of the problem.
@@ -124,6 +125,31 @@ public class TypeScopes {
 	 * 
 	 */
 	public var Map<Type,Integer> maxNewElementsByType = new HashMap
+	
+	/**
+	 * Checks if the scope contains negative elements
+	 */
+	def public validateTypeScopes(TypeScopes scopes) {
+		val res = new LinkedList<String>
+		if(scopes.maxNewElements < 0) {
+			res += '''Inconsistent scope: Maximal number of new elements is negative.'''
+		}
+		if(scopes.maxNewIntegers < 0) {
+			res += '''Inconsistent scope: Maximal number of new integer values is negative.'''
+		}
+		if(scopes.maxNewReals < 0) {
+			res += '''Inconsistent scope: Maximal number of new real values is negative.'''
+		}
+		if(scopes.maxNewStrings < 0) {
+			res += '''Inconsistent scope: Maximal number of new string values is negative.'''
+		}
+		for(x : scopes.minNewElementsByType.entrySet) {
+			if(x.value < 0) {
+				res += '''Inconsistent scope: Maximal number of new "«x.key.name»" elements is negative.'''
+			}
+		}
+		return res
+	}
 }
 
 /**
@@ -131,7 +157,7 @@ public class TypeScopes {
  * Constant <code>All</code> defines that all solution for the problem is requested.
  */
 public class SolutionScope {
-	public static val All = -1;
+	public static val All = Integer.MAX_VALUE;
 	public var numberOfRequiredSolution = 1
 }
 /** Progress monitor class for a solver to
