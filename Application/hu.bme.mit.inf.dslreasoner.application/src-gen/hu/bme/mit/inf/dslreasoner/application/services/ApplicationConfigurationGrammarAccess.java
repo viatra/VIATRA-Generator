@@ -102,14 +102,58 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
+	public class REALLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.REALLiteral");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final RuleCall cINTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		
+		//REALLiteral ecore::EBigDecimal:
+		//	'-'? INT '.' INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'-'? INT '.' INT
+		public Group getGroup() { return cGroup; }
+		
+		//'-'?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
+	}
+	public class INTLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.INTLiteral");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//INTLiteral ecore::EInt:
+		//	'-'? INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'-'? INT
+		public Group getGroup() { return cGroup; }
+		
+		//'-'?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+	}
 	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Import");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cEPackageImportParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cViatraImportParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		////terminal REAL returns ecore::EBigDecimal: '-'? INT '.' INT;
-		////terminal INTEGER returns ecore::EInt: '-'? INT;
 		/////////////////////////////////////////////////////
 		//// Imports
 		/////////////////////////////////////////////////////
@@ -1981,18 +2025,18 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cEntryAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cEntryINTTerminalRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
+		private final RuleCall cEntryINTLiteralParserRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
 		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cEntryAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cEntryINTTerminalRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cEntryINTLiteralParserRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//IntEnumberation:
-		//	{IntEnumberation} '{' (entry+=INT (',' entry+=INT)*)? '}';
+		//	{IntEnumberation} '{' (entry+=INTLiteral (',' entry+=INTLiteral)*)? '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{IntEnumberation} '{' (entry+=INT (',' entry+=INT)*)? '}'
+		//{IntEnumberation} '{' (entry+=INTLiteral (',' entry+=INTLiteral)*)? '}'
 		public Group getGroup() { return cGroup; }
 		
 		//{IntEnumberation}
@@ -2001,26 +2045,26 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
-		//(entry+=INT (',' entry+=INT)*)?
+		//(entry+=INTLiteral (',' entry+=INTLiteral)*)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//entry+=INT
+		//entry+=INTLiteral
 		public Assignment getEntryAssignment_2_0() { return cEntryAssignment_2_0; }
 		
-		//INT
-		public RuleCall getEntryINTTerminalRuleCall_2_0_0() { return cEntryINTTerminalRuleCall_2_0_0; }
+		//INTLiteral
+		public RuleCall getEntryINTLiteralParserRuleCall_2_0_0() { return cEntryINTLiteralParserRuleCall_2_0_0; }
 		
-		//(',' entry+=INT)*
+		//(',' entry+=INTLiteral)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//','
 		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
 		
-		//entry+=INT
+		//entry+=INTLiteral
 		public Assignment getEntryAssignment_2_1_1() { return cEntryAssignment_2_1_1; }
 		
-		//INT
-		public RuleCall getEntryINTTerminalRuleCall_2_1_1_0() { return cEntryINTTerminalRuleCall_2_1_1_0; }
+		//INTLiteral
+		public RuleCall getEntryINTLiteralParserRuleCall_2_1_1_0() { return cEntryINTLiteralParserRuleCall_2_1_1_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
@@ -2032,18 +2076,18 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cEntryAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cEntryINTTerminalRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
+		private final RuleCall cEntryREALLiteralParserRuleCall_2_0_0 = (RuleCall)cEntryAssignment_2_0.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
 		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cEntryAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cEntryINTTerminalRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cEntryREALLiteralParserRuleCall_2_1_1_0 = (RuleCall)cEntryAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//RealEnumeration:
-		//	{RealEnumeration} '{' (entry+=INT (',' entry+=INT)*)? '}';
+		//	{RealEnumeration} '{' (entry+=REALLiteral (',' entry+=REALLiteral)*)? '}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{RealEnumeration} '{' (entry+=INT (',' entry+=INT)*)? '}'
+		//{RealEnumeration} '{' (entry+=REALLiteral (',' entry+=REALLiteral)*)? '}'
 		public Group getGroup() { return cGroup; }
 		
 		//{RealEnumeration}
@@ -2052,26 +2096,26 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
-		//(entry+=INT (',' entry+=INT)*)?
+		//(entry+=REALLiteral (',' entry+=REALLiteral)*)?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//entry+=INT
+		//entry+=REALLiteral
 		public Assignment getEntryAssignment_2_0() { return cEntryAssignment_2_0; }
 		
-		//INT
-		public RuleCall getEntryINTTerminalRuleCall_2_0_0() { return cEntryINTTerminalRuleCall_2_0_0; }
+		//REALLiteral
+		public RuleCall getEntryREALLiteralParserRuleCall_2_0_0() { return cEntryREALLiteralParserRuleCall_2_0_0; }
 		
-		//(',' entry+=INT)*
+		//(',' entry+=REALLiteral)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//','
 		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
 		
-		//entry+=INT
+		//entry+=REALLiteral
 		public Assignment getEntryAssignment_2_1_1() { return cEntryAssignment_2_1_1; }
 		
-		//INT
-		public RuleCall getEntryINTTerminalRuleCall_2_1_1_0() { return cEntryINTTerminalRuleCall_2_1_1_0; }
+		//REALLiteral
+		public RuleCall getEntryREALLiteralParserRuleCall_2_1_1_0() { return cEntryREALLiteralParserRuleCall_2_1_1_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
@@ -2573,6 +2617,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	private final ConfigurationScriptElements pConfigurationScript;
 	private final CommandElements pCommand;
 	private final QualifiedNameElements pQualifiedName;
+	private final REALLiteralElements pREALLiteral;
+	private final INTLiteralElements pINTLiteral;
 	private final ImportElements pImport;
 	private final EPackageImportElements pEPackageImport;
 	private final ViatraImportElements pViatraImport;
@@ -2650,6 +2696,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.pConfigurationScript = new ConfigurationScriptElements();
 		this.pCommand = new CommandElements();
 		this.pQualifiedName = new QualifiedNameElements();
+		this.pREALLiteral = new REALLiteralElements();
+		this.pINTLiteral = new INTLiteralElements();
 		this.pImport = new ImportElements();
 		this.pEPackageImport = new EPackageImportElements();
 		this.pViatraImport = new ViatraImportElements();
@@ -2774,8 +2822,26 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	////terminal REAL returns ecore::EBigDecimal: '-'? INT '.' INT;
-	////terminal INTEGER returns ecore::EInt: '-'? INT;
+	//REALLiteral ecore::EBigDecimal:
+	//	'-'? INT '.' INT;
+	public REALLiteralElements getREALLiteralAccess() {
+		return pREALLiteral;
+	}
+	
+	public ParserRule getREALLiteralRule() {
+		return getREALLiteralAccess().getRule();
+	}
+	
+	//INTLiteral ecore::EInt:
+	//	'-'? INT;
+	public INTLiteralElements getINTLiteralAccess() {
+		return pINTLiteral;
+	}
+	
+	public ParserRule getINTLiteralRule() {
+		return getINTLiteralAccess().getRule();
+	}
+	
 	/////////////////////////////////////////////////////
 	//// Imports
 	/////////////////////////////////////////////////////
@@ -3371,7 +3437,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//IntEnumberation:
-	//	{IntEnumberation} '{' (entry+=INT (',' entry+=INT)*)? '}';
+	//	{IntEnumberation} '{' (entry+=INTLiteral (',' entry+=INTLiteral)*)? '}';
 	public IntEnumberationElements getIntEnumberationAccess() {
 		return pIntEnumberation;
 	}
@@ -3381,7 +3447,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//RealEnumeration:
-	//	{RealEnumeration} '{' (entry+=INT (',' entry+=INT)*)? '}';
+	//	{RealEnumeration} '{' (entry+=REALLiteral (',' entry+=REALLiteral)*)? '}';
 	public RealEnumerationElements getRealEnumerationAccess() {
 		return pRealEnumeration;
 	}

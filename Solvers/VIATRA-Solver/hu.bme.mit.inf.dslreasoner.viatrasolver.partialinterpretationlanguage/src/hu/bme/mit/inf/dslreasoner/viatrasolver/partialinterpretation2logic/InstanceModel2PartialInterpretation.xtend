@@ -20,6 +20,10 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.HashSet
+import java.util.Set
+import java.math.BigDecimal
+import org.eclipse.emf.ecore.EAttribute
 
 class InstanceModel2PartialInterpretation {
 	val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
@@ -43,7 +47,12 @@ class InstanceModel2PartialInterpretation {
 	{
 		val problem = metamodelTranslationResult.output
 		val ecore2LogicTrace = metamodelTranslationResult.trace
-		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, new TypeScopes)
+		
+		val referencesUsed = ecore2Logic.allReferencesInScope(ecore2LogicTrace).toSet
+		val attributesUsed = ecore2Logic.allAttributesInScope(ecore2LogicTrace).toSet
+		
+		val typeScope = createTypeScopesFromKnownAttributeValues(objects,attributesUsed)
+		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, typeScope)
 		val partialInterpretation = tracedOutput.output
 		val partialInterpretationTrace = tracedOutput.trace
 		
@@ -54,7 +63,7 @@ class InstanceModel2PartialInterpretation {
 			val object = objects.get(objectIndex)
 			val element = createDefinedElement => [
 				it.name = if(withID) 
-					{ '''o «objectIndex»''' } else 
+					{ '''o «objectIndex+1»''' } else 
 					{ null }
 			]
 			
@@ -71,8 +80,6 @@ class InstanceModel2PartialInterpretation {
 			object2DefinedElement.put(object, element)
 		}
 		
-		val referencesUsed = ecore2Logic.allReferencesInScope(ecore2LogicTrace).toSet
-		val attributesUsed = ecore2Logic.allAttributesInScope(ecore2LogicTrace).toSet
 		for(source : objects) {
 			// Translating the references
 			for(reference : source.eClass.EAllReferences.filter[
@@ -126,6 +133,52 @@ class InstanceModel2PartialInterpretation {
 		return partialInterpretation
 	}
 	
+	private def createTypeScopesFromKnownAttributeValues(List<EObject> objects, Set<EAttribute> attributesUsed) {
+		val Set<Integer> integers = new HashSet
+		val Set<BigDecimal> reals = new HashSet
+		val Set<String> strings = new HashSet
+		for(object: objects) {
+			for(attribute : object.eClass.EAllAttributes.filter[attributesUsed.contains(it)]) {
+				val value = object.eGet(attribute)
+				if(value !== null) {
+					if(value instanceof List<?>) {
+						for(v : value) {
+							shortValue(v,integers,reals,strings)
+						}
+					} else {
+						shortValue(value,integers,reals,strings)
+					}
+				}
+			}
+		}
+		return new TypeScopes => [
+			it.knownIntegers += integers
+			it.knownReals += reals
+			it.knownStrings += strings
+		]
+	}
+	private def dispatch shortValue(Boolean value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		// Do nothing
+	}
+	private def dispatch shortValue(Integer value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		integers += value
+	}
+	private def dispatch shortValue(Float value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		reals += BigDecimal.valueOf(value)
+	}
+	private def dispatch shortValue(Double value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		reals += BigDecimal.valueOf(value)
+	}
+	private def dispatch shortValue(String value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		strings += value
+	}
+	private def dispatch shortValue(Void value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		// Do nothing
+	}
+	private def dispatch shortValue(Object value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		// Do nothing
+	}
+	
 	protected def translateLink(PartialRelationInterpretation interpretation, DefinedElement source, DefinedElement target) {
 		interpretation.relationlinks += createBinaryElementRelationLink => [it.param1 = source it.param2 = target]
 	}
@@ -138,7 +191,23 @@ class InstanceModel2PartialInterpretation {
 		else throw new AssertionError('''term should be a defined element?''')
 	}
 	
-	dispatch protected def translateValue(Object value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
-		//throw new UnsupportedOperationException('''Mapping of «value.class.simpleName» in partial models is currently not supported!''')
+	dispatch protected def translateValue(Boolean value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
+		value.lookup(partialInterpretationTrace.primitiveValues.booleanMap)
+	}
+	
+	dispatch protected def translateValue(Integer value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
+		value.lookup(partialInterpretationTrace.primitiveValues.integerMap)
+	}
+	
+	dispatch protected def translateValue(Double value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
+		BigDecimal.valueOf(value).lookup(partialInterpretationTrace.primitiveValues.realMap)
+	}
+	
+	dispatch protected def translateValue(Float value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
+		BigDecimal.valueOf(value).lookup(partialInterpretationTrace.primitiveValues.realMap)
+	}
+	
+	dispatch protected def translateValue(String value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
+		value.lookup(partialInterpretationTrace.primitiveValues.stringMap)
 	}
 }

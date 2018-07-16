@@ -77,22 +77,13 @@ public interface Partial2logicannotationsPackage extends EPackage {
 	int PARTIAL_MODEL_RELATION2_ASSERTION__TARGET = LogicproblemPackage.ASSERTION_ANNOTATION__TARGET;
 
 	/**
-	 * The feature id for the '<em><b>Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARTIAL_MODEL_RELATION2_ASSERTION__LINKS = LogicproblemPackage.ASSERTION_ANNOTATION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Target Relation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION = LogicproblemPackage.ASSERTION_ANNOTATION_FEATURE_COUNT + 1;
+	int PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION = LogicproblemPackage.ASSERTION_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Partial Model Relation2 Assertion</em>' class.
@@ -101,7 +92,7 @@ public interface Partial2logicannotationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_MODEL_RELATION2_ASSERTION_FEATURE_COUNT = LogicproblemPackage.ASSERTION_ANNOTATION_FEATURE_COUNT + 2;
+	int PARTIAL_MODEL_RELATION2_ASSERTION_FEATURE_COUNT = LogicproblemPackage.ASSERTION_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Partial Model Relation2 Assertion</em>' class.
@@ -122,17 +113,6 @@ public interface Partial2logicannotationsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPartialModelRelation2Assertion();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion#getLinks <em>Links</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Links</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion#getLinks()
-	 * @see #getPartialModelRelation2Assertion()
-	 * @generated
-	 */
-	EReference getPartialModelRelation2Assertion_Links();
 
 	/**
 	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion#getTargetRelation <em>Target Relation</em>}'.
@@ -177,14 +157,6 @@ public interface Partial2logicannotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARTIAL_MODEL_RELATION2_ASSERTION = eINSTANCE.getPartialModelRelation2Assertion();
-
-		/**
-		 * The meta object literal for the '<em><b>Links</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARTIAL_MODEL_RELATION2_ASSERTION__LINKS = eINSTANCE.getPartialModelRelation2Assertion_Links();
 
 		/**
 		 * The meta object literal for the '<em><b>Target Relation</b></em>' reference feature.

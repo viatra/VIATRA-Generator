@@ -64,6 +64,8 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 					put(grammarAccess.getConfigurationScriptAccess().getGroup(), "rule__ConfigurationScript__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
+					put(grammarAccess.getREALLiteralAccess().getGroup(), "rule__REALLiteral__Group__0");
+					put(grammarAccess.getINTLiteralAccess().getGroup(), "rule__INTLiteral__Group__0");
 					put(grammarAccess.getEPackageImportAccess().getGroup(), "rule__EPackageImport__Group__0");
 					put(grammarAccess.getViatraImportAccess().getGroup(), "rule__ViatraImport__Group__0");
 					put(grammarAccess.getFileDeclarationAccess().getGroup(), "rule__FileDeclaration__Group__0");

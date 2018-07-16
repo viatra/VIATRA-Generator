@@ -112,17 +112,8 @@ public class Partial2logicannotationsPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPartialModelRelation2Assertion_Links() {
-		return (EReference)partialModelRelation2AssertionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPartialModelRelation2Assertion_TargetRelation() {
-		return (EReference)partialModelRelation2AssertionEClass.getEStructuralFeatures().get(1);
+		return (EReference)partialModelRelation2AssertionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -154,7 +145,6 @@ public class Partial2logicannotationsPackageImpl extends EPackageImpl implements
 
 		// Create classes and their features
 		partialModelRelation2AssertionEClass = createEClass(PARTIAL_MODEL_RELATION2_ASSERTION);
-		createEReference(partialModelRelation2AssertionEClass, PARTIAL_MODEL_RELATION2_ASSERTION__LINKS);
 		createEReference(partialModelRelation2AssertionEClass, PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION);
 	}
 
@@ -183,7 +173,6 @@ public class Partial2logicannotationsPackageImpl extends EPackageImpl implements
 
 		// Obtain other dependent packages
 		LogicproblemPackage theLogicproblemPackage = (LogicproblemPackage)EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI);
-		PartialinterpretationPackage thePartialinterpretationPackage = (PartialinterpretationPackage)EPackage.Registry.INSTANCE.getEPackage(PartialinterpretationPackage.eNS_URI);
 		LogiclanguagePackage theLogiclanguagePackage = (LogiclanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI);
 
 		// Create type parameters
@@ -195,7 +184,6 @@ public class Partial2logicannotationsPackageImpl extends EPackageImpl implements
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(partialModelRelation2AssertionEClass, PartialModelRelation2Assertion.class, "PartialModelRelation2Assertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialModelRelation2Assertion_Links(), thePartialinterpretationPackage.getRelationLink(), null, "links", null, 0, -1, PartialModelRelation2Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialModelRelation2Assertion_TargetRelation(), theLogiclanguagePackage.getRelationDeclaration(), null, "targetRelation", null, 1, 1, PartialModelRelation2Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

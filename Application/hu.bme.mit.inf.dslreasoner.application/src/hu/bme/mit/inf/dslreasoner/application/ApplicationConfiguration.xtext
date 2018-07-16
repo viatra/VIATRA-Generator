@@ -15,8 +15,8 @@ Command :
 
 QualifiedName returns ecore::EString:
   ID ('.' ID)*;
-//terminal REAL returns ecore::EBigDecimal: '-'? INT '.' INT;
-//terminal INTEGER returns ecore::EInt: '-'? INT;
+REALLiteral returns ecore::EBigDecimal: '-'? INT '.' INT;
+INTLiteral returns ecore::EInt: '-'? INT;
 
 ///////////////////////////////////////////////////
 // Imports
@@ -144,8 +144,8 @@ StringReference: {StringScope} 'string';
 NumberSpecification: ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration;
 ExactNumber: exactNumber = INT | exactUnlimited ?= '*';
 IntervallNumber: min = INT '..' (maxNumber = INT | maxUnlimited ?= '*');
-IntEnumberation: {IntEnumberation} '{' (entry += INT (',' entry += INT)*)?'}';
-RealEnumeration: {RealEnumeration} '{' (entry += INT (',' entry += INT)*)?'}';
+IntEnumberation: {IntEnumberation} '{' (entry += INTLiteral (',' entry += INTLiteral)*)?'}';
+RealEnumeration: {RealEnumeration} '{' (entry += REALLiteral (',' entry += REALLiteral)*)?'}';
 StringEnumeration: {StringEnumeration} '{' (entry += STRING (',' entry += STRING)*)?'}';
 
 ScopeDeclaration: 'scope' name = ID specification = ScopeSpecification;

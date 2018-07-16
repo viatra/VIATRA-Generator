@@ -37,6 +37,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.rewriters.PBodyNormaliz
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.viatra.query.runtime.matchers.psystem.TypeJudgement
 
 @Data class ViatraQuerySetDescriptor {
 	val List<? extends IQuerySpecification<?>> patterns
@@ -75,14 +76,18 @@ class  Viatra2Logic {
 			try {
 				this.transformQueryHeader(query,ecore2LogicTrace,viatra2LogicTrace,config)
 			} catch(IllegalArgumentException e) {
-				throw new IllegalArgumentException('''Unable to translate query "«query.fullyQualifiedName»".''',e)
+				throw new IllegalArgumentException('''
+					Unable to translate query "«query.fullyQualifiedName»".
+					Reason: «e.class.simpleName», «e.message»''',e)
 			}
 		}
 		for(query: queries.patterns) {
 			try {
 				this.transformQuerySpecification(query,ecore2LogicTrace,viatra2LogicTrace,config)
 			} catch (IllegalArgumentException e){
-				throw new IllegalArgumentException('''Unable to translate query: "«query.fullyQualifiedName»".''',e)
+				throw new IllegalArgumentException('''
+					Unable to translate query "«query.fullyQualifiedName»".
+					Reason: «e.class.simpleName», «e.message»''',e)
 			}
 		}
 		/*for(d : viatra2LogicTrace.query2Relation.values) {
@@ -252,39 +257,45 @@ class  Viatra2Logic {
 		return variableName.replaceAll("[\\W]|_", "")
 	}
 	
-	def TypeDescriptor getType(PVariable v, PBody body, TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
-		if(v.isPositiveVariable) {
-			val allTypes = v.lookup(
-				body.getAllUnaryTypeRestrictions(EMFQueryMetaContext.DEFAULT))
+	def TypeDescriptor getType(PVariable v, PBody body,	TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
+		var Map<PVariable, Set<TypeJudgement>> unaryTypeRestrictions = null;
+		if (v.isPositiveVariable) {
+			unaryTypeRestrictions = body.getAllUnaryTypeRestrictions(EMFQueryMetaContext.DEFAULT)
+			if (!unaryTypeRestrictions.containsKey(v)) {
+				throw new IllegalArgumentException('''No positive constraints on variable: «v.name»''')
+			}
+			val allTypes = v.lookup(unaryTypeRestrictions)
+
 			val types = allTypes.filter[it.inputKey instanceof BaseEMFTypeKey<?>].toSet
-			
-			if(types.size == 0) {
+
+			if (types.size == 0) {
 				throw new AssertionError('''
 				No EMF type for «v.name».
 				Non-EMF types: [«FOR t : allTypes.filter[!types.contains(it)].map[inputKey.prettyPrintableName] SEPARATOR ','»«t»«ENDFOR»]''')
-			} else if(types.size == 1){
-				return (types.head.inputKey as BaseEMFTypeKey<? extends EClassifier>).transformTypeReference(ecore2LogicTrace)
+			} else if (types.size == 1) {
+				return (types.head.inputKey as BaseEMFTypeKey<? extends EClassifier>).
+					transformTypeReference(ecore2LogicTrace)
 			} else {
 //				println('''
 //					Type Judgements of «v.name»
 //					«types.map[inputKey.prettyPrintableName]»
 //				''')
-				return this.ecore2Logic.TypeofEClass(ecore2LogicTrace.trace,
-					calculateCommonSubtype(types.map[
-						(it.inputKey as BaseEMFTypeKey<EClass>).emfKey as EClass
-					],ecore2LogicTrace))
+				return this.ecore2Logic.TypeofEClass(ecore2LogicTrace.trace, calculateCommonSubtype(types.map [
+					(it.inputKey as BaseEMFTypeKey<EClass>).emfKey as EClass
+				], ecore2LogicTrace))
 			}
 		} else {
 			val onlyConstraint = v.referringConstraints.head as NegativePatternCall
 			val indexOfVariable = v.lookup(onlyConstraint.actualParametersTuple.invertIndex)
 			val parameter = onlyConstraint.referredQuery.parameters.get(indexOfVariable)
 			val declaredUnaryType = parameter.declaredUnaryType as BaseEMFTypeKey<? extends EClassifier>
-			if(declaredUnaryType === null) {
+			if (declaredUnaryType === null) {
 				throw new UnsupportedOperationException(
-				'''parameter «parameter.name» in pattern «
-				onlyConstraint.referredQuery.fullyQualifiedName» does not have type!''')
-			} else return declaredUnaryType.transformTypeReference(ecore2LogicTrace)
+				'''parameter «parameter.name» in pattern «onlyConstraint.referredQuery.fullyQualifiedName» does not have type!''')
+			} else
+				return declaredUnaryType.transformTypeReference(ecore2LogicTrace)
 		}
+
 	}
 	
 	def calculateCommonSubtype(Iterable<EClass> allsuperClasses,TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {

@@ -516,8 +516,8 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *             targetStatisticsFile=File | 
 	 *             tagetFolder=File
 	 *         )? 
-	 *         (numberSpecified?='number' number=INT)? 
-	 *         (runSpecified?='runs' runs=INT)?
+	 *         (runSpecified?='runs' runs=INT)? 
+	 *         (numberSpecified?='number' number=INT)?
 	 *     )+
 	 */
 	protected void sequence_GenerationTask(ISerializationContext context, GenerationTask semanticObject) {
@@ -573,7 +573,7 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     IntEnumberation returns IntEnumberation
 	 *
 	 * Constraint:
-	 *     (entry+=INT entry+=INT*)?
+	 *     (entry+=INTLiteral entry+=INTLiteral*)?
 	 */
 	protected void sequence_IntEnumberation(ISerializationContext context, IntEnumberation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -838,7 +838,7 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     RealEnumeration returns RealEnumeration
 	 *
 	 * Constraint:
-	 *     (entry+=INT entry+=INT*)?
+	 *     (entry+=REALLiteral entry+=REALLiteral*)?
 	 */
 	protected void sequence_RealEnumeration(ISerializationContext context, RealEnumeration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -143,89 +143,114 @@ class GenerationTaskExecutor {
 					1
 				}
 			]
-			solverConfig.typeScopes = scopeLoader.loadScope(
+			
+			val typeScopes = scopeLoader.loadScope(
 				scopeSpecification,
 				problem,
 				ecore2Logic,
 				modelGeneration.trace
 			)
-			
-			// 5.3 set resource limits
-			documentationLevel.ifPresent[solverConfig.documentationLevel = it]
-			runtieLimit.ifPresent[solverConfig.runtimeLimit = it]
-			memoryLimit.ifPresent[solverConfig.memoryLimit = it]
-			
-			// 6. execute the solver on the problem with the configuration
-			// 6.1 calculating the runs
-			val runs = if(task.runSpecified) { task.runs } else { 1	}
-			monitor.worked(50)
-			
-			console.writeMessage("Model generation started")
-			for(run : 1..runs) {
-				monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»''')
+			// If the type scope contains errors, then the problem is inconsistent
+			if(!typeScopes.value.empty) {
+				monitor.worked(50)
+				console.writeMessage("Model generation started")
+				typeScopes.value.forEach[console.writeMessage(it)]
 				
-				// 6.2 For each run, the configuration and the workspace is adjusted
-				solverLoader.setRunIndex(solverConfig,configurationMap,run,console)
-				solverConfig.progressMonitor = new EclipseBasedProgressMonitor(monitor)
-				val reasonerWorkspaceForRun = if(runs > 1) {
-					reasonerWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
-				} else {
-					reasonerWorkspace
+				val runs = if(task.runSpecified) { task.runs } else { 1	}
+				for(run : 1..runs) {
+					console.writeMessage('''Problem is inconsistent, no model is created!''')
+					val statistics = new LinkedHashMap
+					statistics.put("Task",(task.eContainer as ConfigurationScript).commands.indexOf(task)+1)
+					statistics.put("Run",run)
+					statistics.put("Result","InconsistencyResult")
+					statistics.put("Domain to logic transformation time",domain2LogicTransformationTime/1000000)
+					statistics.put("Logic to solver transformation time",0)
+					statistics.put("Solver time",0)
+					statistics.put("Postprocessing time",0)
+					console.addStatistics(statistics)
 				}
 				
-				// 7. Solver call
-				val solution = solver.solve(problem,solverConfig,reasonerWorkspaceForRun)
-				console.writeMessage(solution.soutionDescription.toString)
+			} else {
+				solverConfig.typeScopes = typeScopes.key
+			
+				// 5.3 set resource limits
+				documentationLevel.ifPresent[solverConfig.documentationLevel = it]
+				runtieLimit.ifPresent[solverConfig.runtimeLimit = it]
+				memoryLimit.ifPresent[solverConfig.memoryLimit = it]
 				
-				//  8. Solution processing
+				// 6. execute the solver on the problem with the configuration
+				// 6.1 calculating the runs
+				val runs = if(task.runSpecified) { task.runs } else { 1	}
+				monitor.worked(50)
 				
-				// 8.1 Visualisation
-				var solutionVisualisationTime = System.nanoTime
-				if(solution instanceof ModelResult) {
-					val interpretations = solver.getInterpretations(solution)
-					val outputWorkspaceForRun = if(runs > 1) {
-						outputWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
+				console.writeMessage("Model generation started")
+				for(run : 1..runs) {
+					monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»''')
+					
+					// 6.2 For each run, the configuration and the workspace is adjusted
+					solverLoader.setRunIndex(solverConfig,configurationMap,run,console)
+					solverConfig.progressMonitor = new EclipseBasedProgressMonitor(monitor)
+					val reasonerWorkspaceForRun = if(runs > 1) {
+						reasonerWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
 					} else {
-						outputWorkspace
+						reasonerWorkspace
 					}
 					
-					for(interpretationIndex : 0..<interpretations.size) {
-						monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»: Visualising solution «interpretationIndex+1»/«interpretations.size»''')
-						val interpretation = interpretations.get(interpretationIndex)
-						val model = logic2Ecore.transformInterpretation(interpretation,modelGeneration.trace)
-						outputWorkspaceForRun.writeModel(model,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».xmi''')
-						
-						val representation = solution.representation.get(interpretationIndex)
-						if(representation instanceof PartialInterpretation) {
-							val vis1 = new PartialInterpretation2Gml
-							val gml = vis1.transform(representation)
-							outputWorkspaceForRun.writeText('''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».gml''',gml)
-							if(representation.newElements.size + representation.problem.elements.size < 150) {
-								val vis2 = new GraphvizVisualiser
-								val dot = vis2.visualiseConcretization(representation)
-								dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».png''')
-							}
+					// 7. Solver call
+					val solution = solver.solve(problem,solverConfig,reasonerWorkspaceForRun)
+					console.writeMessage(solution.soutionDescription.toString)
+					
+					//  8. Solution processing
+					
+					// 8.1 Visualisation
+					var solutionVisualisationTime = System.nanoTime
+					if(solution instanceof ModelResult) {
+						val interpretations = solver.getInterpretations(solution)
+						val outputWorkspaceForRun = if(runs > 1) {
+							outputWorkspace.subWorkspace('''run«run»''',"") => [initAndClear]
+						} else {
+							outputWorkspace
 						}
-						monitor.worked(100)
+						
+						for(interpretationIndex : 0..<interpretations.size) {
+							monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»: Visualising solution «interpretationIndex+1»/«interpretations.size»''')
+							val interpretation = interpretations.get(interpretationIndex)
+							val model = logic2Ecore.transformInterpretation(interpretation,modelGeneration.trace)
+							outputWorkspaceForRun.writeModel(model,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».xmi''')
+							
+							val representation = solution.representation.get(interpretationIndex)
+							if(representation instanceof PartialInterpretation) {
+								val vis1 = new PartialInterpretation2Gml
+								val gml = vis1.transform(representation)
+								outputWorkspaceForRun.writeText('''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».gml''',gml)
+								if(representation.newElements.size + representation.problem.elements.size < 150) {
+									val vis2 = new GraphvizVisualiser
+									val dot = vis2.visualiseConcretization(representation)
+									dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».png''')
+								}
+							}
+							monitor.worked(100)
+						}
+					} else {
+						monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
 					}
-				} else {
-					monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
+					solutionVisualisationTime = System.nanoTime - solutionVisualisationTime
+					
+					// 8.2 Statistics
+					val statistics = new LinkedHashMap
+					statistics.put("Task",(task.eContainer as ConfigurationScript).commands.indexOf(task)+1)
+					statistics.put("Run",run)
+					statistics.put("Result",solution.class.simpleName)
+					statistics.put("Domain to logic transformation time",domain2LogicTransformationTime/1000000)
+					statistics.put("Logic to solver transformation time",solution.statistics.transformationTime)
+					statistics.put("Solver time",solution.statistics.solverTime)
+					statistics.put("Postprocessing time",solutionVisualisationTime)
+					for(entry: solution.statistics.entries) {
+						statistics.put(entry.name,statisticsUtil.readValue(entry))
+					}
+					console.addStatistics(statistics)
 				}
-				solutionVisualisationTime = System.nanoTime - solutionVisualisationTime
 				
-				// 8.2 Statistics
-				val statistics = new LinkedHashMap
-				statistics.put("Task",(task.eContainer as ConfigurationScript).commands.indexOf(task)+1)
-				statistics.put("Run",run)
-				statistics.put("Result",solution.class.simpleName)
-				statistics.put("Domain to logic transformation time",domain2LogicTransformationTime/1000000)
-				statistics.put("Logic to solver transformation time",solution.statistics.transformationTime)
-				statistics.put("Solver time",solution.statistics.solverTime)
-				statistics.put("Postprocessing time",solutionVisualisationTime)
-				for(entry: solution.statistics.entries) {
-					statistics.put(entry.name,statisticsUtil.readValue(entry))
-				}
-				console.addStatistics(statistics)
 			}
 			console.flushStatistics
 			console.writeMessage("Model generation finished")

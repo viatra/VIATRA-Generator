@@ -7,22 +7,11 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.impl.AssertionAnnotat
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.Partial2logicannotationsPackage;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion;
-
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink;
-
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,23 +21,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.impl.PartialModelRelation2AssertionImpl#getLinks <em>Links</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.impl.PartialModelRelation2AssertionImpl#getTargetRelation <em>Target Relation</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PartialModelRelation2AssertionImpl extends AssertionAnnotationImpl implements PartialModelRelation2Assertion {
-	/**
-	 * The cached value of the '{@link #getLinks() <em>Links</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLinks()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RelationLink> links;
-
 	/**
 	 * The cached value of the '{@link #getTargetRelation() <em>Target Relation</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -76,18 +54,6 @@ public class PartialModelRelation2AssertionImpl extends AssertionAnnotationImpl 
 	@Override
 	protected EClass eStaticClass() {
 		return Partial2logicannotationsPackage.Literals.PARTIAL_MODEL_RELATION2_ASSERTION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<RelationLink> getLinks() {
-		if (links == null) {
-			links = new EObjectContainmentEList<RelationLink>(RelationLink.class, this, Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__LINKS);
-		}
-		return links;
 	}
 
 	/**
@@ -134,24 +100,8 @@ public class PartialModelRelation2AssertionImpl extends AssertionAnnotationImpl 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__LINKS:
-				return ((InternalEList<?>)getLinks()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__LINKS:
-				return getLinks();
 			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION:
 				if (resolve) return getTargetRelation();
 				return basicGetTargetRelation();
@@ -168,10 +118,6 @@ public class PartialModelRelation2AssertionImpl extends AssertionAnnotationImpl 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__LINKS:
-				getLinks().clear();
-				getLinks().addAll((Collection<? extends RelationLink>)newValue);
-				return;
 			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION:
 				setTargetRelation((RelationDeclaration)newValue);
 				return;
@@ -187,9 +133,6 @@ public class PartialModelRelation2AssertionImpl extends AssertionAnnotationImpl 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__LINKS:
-				getLinks().clear();
-				return;
 			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION:
 				setTargetRelation((RelationDeclaration)null);
 				return;
@@ -205,8 +148,6 @@ public class PartialModelRelation2AssertionImpl extends AssertionAnnotationImpl 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__LINKS:
-				return links != null && !links.isEmpty();
 			case Partial2logicannotationsPackage.PARTIAL_MODEL_RELATION2_ASSERTION__TARGET_RELATION:
 				return targetRelation != null;
 		}

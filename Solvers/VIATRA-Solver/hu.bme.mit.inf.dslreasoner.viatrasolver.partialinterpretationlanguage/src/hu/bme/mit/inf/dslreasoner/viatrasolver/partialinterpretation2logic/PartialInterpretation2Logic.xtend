@@ -24,6 +24,9 @@ import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 
 @Data class PartialInterpretation2Logic_Trace {
 	Map<DefinedElement,DefinedElement> new2Old = new HashMap
@@ -148,7 +151,7 @@ class PartialInterpretation2Logic {
 			val ^annotation= Partial2logicannotationsFactory.eINSTANCE.createPartialModelRelation2Assertion
 			^annotation.target = assertion
 			^annotation.targetRelation = relation
-			^annotation.links += links.map[EcoreUtil.copy(it)]
+			//^annotation.links += links.map[EcoreUtil.copy(it)]
 			//val error= assertion.eAllContents.toIterable.filter(SymbolicValue).filter[it.symbolicReference === null] 
 			//error.forEach[println("error")]
 			p.add(assertion)
@@ -162,12 +165,25 @@ class PartialInterpretation2Logic {
 			if((link.param1 !== null) && (link.param2 !== null)) {
 				return createSymbolicValue=>[
 					it.symbolicReference=relationDeclaration
-					it.parameterSubstitutions += createSymbolicValue => [it.symbolicReference = link.param1]
-					it.parameterSubstitutions += createSymbolicValue => [it.symbolicReference = link.param2]
+					it.parameterSubstitutions += createValueInLink(link.param1)
+					it.parameterSubstitutions += createValueInLink(link.param2)
 				]
 			} else {
 				throw new IllegalArgumentException
 			}
 		} else throw new UnsupportedOperationException
+	}
+	
+	def private dispatch createValueInLink(BooleanElement element) {
+		return element.value.asTerm
+	}
+	def private dispatch createValueInLink(IntegerElement element) {
+		return element.value.asTerm
+	}
+	def private dispatch createValueInLink(RealElement element) {
+		return element.value.asTerm
+	}
+	def private dispatch createValueInLink(DefinedElement element) {
+		return createSymbolicValue => [it.symbolicReference = element]
 	}
 }

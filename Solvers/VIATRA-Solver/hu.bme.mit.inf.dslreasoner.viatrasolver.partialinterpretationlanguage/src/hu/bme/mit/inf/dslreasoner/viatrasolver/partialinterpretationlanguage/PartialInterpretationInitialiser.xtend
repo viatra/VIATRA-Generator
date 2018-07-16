@@ -2,6 +2,7 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
@@ -10,8 +11,10 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStar
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.NaryRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialBooleanInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialIntegerInterpretation
@@ -22,16 +25,22 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.UnaryElementRelationLink
 import java.math.BigDecimal
 import java.util.HashMap
 import java.util.Map
 import java.util.SortedSet
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialComplexTypeInterpretation> type2Interpretation
@@ -81,7 +90,7 @@ class PartialInterpretationInitialiser {
 			typeScopes.maxNewElements)
 			
 		// Initialise relations
-		val relation2Interpretation = initRelations(res)
+		val relation2Interpretation = initRelations(res,primitiveTrace)
 		
 		val trace = new Problem2PartialInterpretationTrace(type2Interpretation,primitiveTrace,relation2Interpretation)
 		return new TracedOutput(res,trace)
@@ -95,13 +104,13 @@ class PartialInterpretationInitialiser {
 	{
 		return new PrimitiveValueTrace(
 			booleanType,
-			booleanType.elements.filter(BooleanElement).toMap[value],
+			booleanType.elements.filter(BooleanElement).filter[it.isValueSet].toMap[value],
 			integerType,
-			integerType.elements.filter(IntegerElement).toMap[value],
+			integerType.elements.filter(IntegerElement).filter[it.isValueSet].toMap[value],
 			realType,
-			realType.elements.filter(RealElement).toMap[value],
+			realType.elements.filter(RealElement).filter[it.isValueSet].toMap[value],
 			stringType,
-			stringType.elements.filter(StringElement).toMap[value]
+			stringType.elements.filter(StringElement).filter[it.isValueSet].toMap[value]
 		)
 	}
 	
@@ -130,7 +139,9 @@ class PartialInterpretationInitialiser {
 			partialInterpretation.newElements += integerElement
 		}
 		if(maxNewIntegers>0) {
-			throw new UnsupportedOperationException('''Unspecified Integers are currently not supported!''')
+			val newElements = createIntegerElement => [it.name = "New Integers" it.valueSet = false]
+			partialInterpretation.openWorldElements += newElements
+			integerInterpretation.elements += newElements
 		}
 		
 		return integerInterpretation
@@ -146,7 +157,9 @@ class PartialInterpretationInitialiser {
 			partialInterpretation.newElements += realElement
 		}
 		if(maxNewReals>0) {
-			throw new UnsupportedOperationException('''Unspecified Real values are currently not supported!''')
+			val newElements = createRealElement => [it.name = "New Reals" it.valueSet = false]
+			partialInterpretation.openWorldElements += newElements
+			realInterpretation.elements += newElements
 		}
 		return realInterpretation
 	}
@@ -161,7 +174,9 @@ class PartialInterpretationInitialiser {
 			partialInterpretation.newElements += stringElement
 		}
 		if(maxNewStrings>0) {
-			throw new UnsupportedOperationException('''Unspecified String values are currently not supported!''')
+			val newElements = createStringElement => [it.name = "New Strings" it.valueSet = false]
+			partialInterpretation.openWorldElements += newElements
+			stringInterpretation.elements += newElements
 		}
 		
 		return stringInterpretation
@@ -201,7 +216,7 @@ class PartialInterpretationInitialiser {
 		}
 	}
 	
-	def private initRelations(PartialInterpretation interpretation) {
+	def private Map<RelationDeclaration, PartialRelationInterpretation> initRelations(PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		val Map<RelationDeclaration, PartialRelationInterpretation> relation2Interpretation = new HashMap
 		for(relation : interpretation.problem.relations.filter(RelationDeclaration)) {
 			val partialInterpretation = relation.initialisePartialRelationInterpretation
@@ -211,14 +226,63 @@ class PartialInterpretationInitialiser {
 		for(pMR2A : interpretation.problem.annotations.filter(PartialModelRelation2Assertion)) {
 			val relation = pMR2A.targetRelation
 			val r = relation.lookup(relation2Interpretation)
-			r.relationlinks+=pMR2A.links.map[EcoreUtil.copy(it)]
+			val assertion = pMR2A.target.value
+			val links = if(assertion instanceof SymbolicValue) {
+				#[assertion]
+			} else if(assertion instanceof And){
+				val res = assertion.operands.filter(SymbolicValue)
+				if(res.size != assertion.operands) {
+					throw new UnsupportedOperationException('''Assertion describing partial model of "«r.interpretationOf.name»" contains unsupported constructs''')
+				} else {
+					res
+				}
+			} else {
+				throw new UnsupportedOperationException('''Assertion describing partial model of "«r.interpretationOf.name»" contains unsupported constructs''')
+			}
+			for(link:links) {
+				r.relationlinks += createLink(link,trace)
+			}
 		}
+		
 //		interpretation.partialfunctioninterpretation += interpretation.problem.functions.filter(FunctionDeclaration)
 //			.map[initialisePartialFunctionInterpretation(trace)]
 //		interpretation.partialconstantinterpretation += interpretation.problem.constants.filter(ConstantDeclaration)
 //			.map[initialisePartialConstantDeclaration(trace)]
 
 		return relation2Interpretation
+	}
+	def private createLink(SymbolicValue v, PrimitiveValueTrace trace) {
+		val translatedValues = v.parameterSubstitutions.map[getElement(trace)].toList
+		if(translatedValues.size == 1) {
+			return createUnaryElementRelationLink => [it.param1 = translatedValues.get(0)]
+		} else if(translatedValues.size == 2) {
+			return createBinaryElementRelationLink => [it.param1 = translatedValues.get(0) it.param2 = translatedValues.get(1)]
+		} else {
+			val res = createNaryRelationLink
+			for(i : 0..<translatedValues.size) {
+				res.elements += createNaryRelationLinkElement => [
+					it.index = i
+					it.param = translatedValues.get(i)
+				]
+			}
+			return res
+		}
+	}
+
+	def private dispatch getElement(SymbolicValue element, PrimitiveValueTrace trace) {
+		return element.symbolicReference as DefinedElement
+	}
+	def private dispatch getElement(BoolLiteral element, PrimitiveValueTrace trace) {
+		element.value.lookup(trace.booleanMap)
+	}
+	def private dispatch getElement(IntLiteral element, PrimitiveValueTrace trace) {
+		element.value.lookup(trace.integerMap)
+	}
+	def private dispatch getElement(RealLiteral element, PrimitiveValueTrace trace) {
+		element.value.lookup(trace.realMap)
+	}
+	def private dispatch getElement(StringLiteral element, PrimitiveValueTrace trace) {
+		element.value.lookup(trace.stringMap)
 	}
 	
 	def private initialisePartialTypeInterpretation(TypeDeclaration t, ViatraQueryEngine engine) {

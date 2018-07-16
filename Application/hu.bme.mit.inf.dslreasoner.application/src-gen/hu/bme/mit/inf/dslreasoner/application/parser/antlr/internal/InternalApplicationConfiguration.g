@@ -194,6 +194,84 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	)
 ;
 
+// Entry rule entryRuleREALLiteral
+entryRuleREALLiteral returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getREALLiteralRule()); }
+	iv_ruleREALLiteral=ruleREALLiteral
+	{ $current=$iv_ruleREALLiteral.current.getText(); }
+	EOF;
+
+// Rule REALLiteral
+ruleREALLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw='-'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getREALLiteralAccess().getHyphenMinusKeyword_0());
+			}
+		)?
+		this_INT_1=RULE_INT
+		{
+			$current.merge(this_INT_1);
+		}
+		{
+			newLeafNode(this_INT_1, grammarAccess.getREALLiteralAccess().getINTTerminalRuleCall_1());
+		}
+		kw='.'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getREALLiteralAccess().getFullStopKeyword_2());
+		}
+		this_INT_3=RULE_INT
+		{
+			$current.merge(this_INT_3);
+		}
+		{
+			newLeafNode(this_INT_3, grammarAccess.getREALLiteralAccess().getINTTerminalRuleCall_3());
+		}
+	)
+;
+
+// Entry rule entryRuleINTLiteral
+entryRuleINTLiteral returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getINTLiteralRule()); }
+	iv_ruleINTLiteral=ruleINTLiteral
+	{ $current=$iv_ruleINTLiteral.current.getText(); }
+	EOF;
+
+// Rule INTLiteral
+ruleINTLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw='-'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getINTLiteralAccess().getHyphenMinusKeyword_0());
+			}
+		)?
+		this_INT_1=RULE_INT
+		{
+			$current.merge(this_INT_1);
+		}
+		{
+			newLeafNode(this_INT_1, grammarAccess.getINTLiteralAccess().getINTTerminalRuleCall_1());
+		}
+	)
+;
+
 // Entry rule entryRuleImport
 entryRuleImport returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getImportRule()); }
@@ -3255,19 +3333,20 @@ ruleIntEnumberation returns [EObject current=null]
 		(
 			(
 				(
-					lv_entry_2_0=RULE_INT
 					{
-						newLeafNode(lv_entry_2_0, grammarAccess.getIntEnumberationAccess().getEntryINTTerminalRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getIntEnumberationAccess().getEntryINTLiteralParserRuleCall_2_0_0());
 					}
+					lv_entry_2_0=ruleINTLiteral
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getIntEnumberationRule());
+							$current = createModelElementForParent(grammarAccess.getIntEnumberationRule());
 						}
-						addWithLastConsumed(
+						add(
 							$current,
 							"entry",
 							lv_entry_2_0,
-							"org.eclipse.xtext.common.Terminals.INT");
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.INTLiteral");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -3278,19 +3357,20 @@ ruleIntEnumberation returns [EObject current=null]
 				}
 				(
 					(
-						lv_entry_4_0=RULE_INT
 						{
-							newLeafNode(lv_entry_4_0, grammarAccess.getIntEnumberationAccess().getEntryINTTerminalRuleCall_2_1_1_0());
+							newCompositeNode(grammarAccess.getIntEnumberationAccess().getEntryINTLiteralParserRuleCall_2_1_1_0());
 						}
+						lv_entry_4_0=ruleINTLiteral
 						{
 							if ($current==null) {
-								$current = createModelElement(grammarAccess.getIntEnumberationRule());
+								$current = createModelElementForParent(grammarAccess.getIntEnumberationRule());
 							}
-							addWithLastConsumed(
+							add(
 								$current,
 								"entry",
 								lv_entry_4_0,
-								"org.eclipse.xtext.common.Terminals.INT");
+								"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.INTLiteral");
+							afterParserOrEnumRuleCall();
 						}
 					)
 				)
@@ -3333,19 +3413,20 @@ ruleRealEnumeration returns [EObject current=null]
 		(
 			(
 				(
-					lv_entry_2_0=RULE_INT
 					{
-						newLeafNode(lv_entry_2_0, grammarAccess.getRealEnumerationAccess().getEntryINTTerminalRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getRealEnumerationAccess().getEntryREALLiteralParserRuleCall_2_0_0());
 					}
+					lv_entry_2_0=ruleREALLiteral
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getRealEnumerationRule());
+							$current = createModelElementForParent(grammarAccess.getRealEnumerationRule());
 						}
-						addWithLastConsumed(
+						add(
 							$current,
 							"entry",
 							lv_entry_2_0,
-							"org.eclipse.xtext.common.Terminals.INT");
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.REALLiteral");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -3356,19 +3437,20 @@ ruleRealEnumeration returns [EObject current=null]
 				}
 				(
 					(
-						lv_entry_4_0=RULE_INT
 						{
-							newLeafNode(lv_entry_4_0, grammarAccess.getRealEnumerationAccess().getEntryINTTerminalRuleCall_2_1_1_0());
+							newCompositeNode(grammarAccess.getRealEnumerationAccess().getEntryREALLiteralParserRuleCall_2_1_1_0());
 						}
+						lv_entry_4_0=ruleREALLiteral
 						{
 							if ($current==null) {
-								$current = createModelElement(grammarAccess.getRealEnumerationRule());
+								$current = createModelElementForParent(grammarAccess.getRealEnumerationRule());
 							}
-							addWithLastConsumed(
+							add(
 								$current,
 								"entry",
 								lv_entry_4_0,
-								"org.eclipse.xtext.common.Terminals.INT");
+								"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.REALLiteral");
+							afterParserOrEnumRuleCall();
 						}
 					)
 				)
