@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.xmi.XMLResource
+import java.util.HashMap
 
 abstract class ReasonerWorkspace{
 	
@@ -47,13 +49,17 @@ abstract class ReasonerWorkspace{
 	public def File getFile(String name)
 	public def void refreshFile(String name)
 	
+	private static final val savingOption = new HashMap() => [
+		put(XMLResource::OPTION_SCHEMA_LOCATION,true)
+	]
+	
 	/**
 	 * Writes a model 
 	 */
 	def public URI writeModel(EObject modelRoot, String name) {
 	    val resource = getResource(name);
 	    resource.getContents().add(modelRoot);
-		resource.save(Collections.EMPTY_MAP);
+		resource.save(savingOption);
 		return resource.URI
 	}
 	
