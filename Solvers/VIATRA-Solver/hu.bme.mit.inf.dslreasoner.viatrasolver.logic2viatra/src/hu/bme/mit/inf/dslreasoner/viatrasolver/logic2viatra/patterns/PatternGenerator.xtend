@@ -187,7 +187,7 @@ class PatternGenerator {
 			}
 			
 			private pattern elementCloseWorld(element:DefinedElement) {
-				PartialInterpretation.newElements(i,element);
+				PartialInterpretation.openWorldElements(i,element);
 			    PartialInterpretation.maxNewElements(i,0);
 			} or {
 				Scope.targetTypeInterpretation(scope,interpretation);

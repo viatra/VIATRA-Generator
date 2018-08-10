@@ -116,6 +116,8 @@ class GenericTypeIndexer extends TypeIndexer {
 		// because there is no definition, dynamic covers all definition
 		// 4: T is not abstract
 		Type.isAbstract(dynamic,false);
+		// 5. element is not primitive datatype
+		neg find isPrimitive(element);
 	}
 	
 	/**

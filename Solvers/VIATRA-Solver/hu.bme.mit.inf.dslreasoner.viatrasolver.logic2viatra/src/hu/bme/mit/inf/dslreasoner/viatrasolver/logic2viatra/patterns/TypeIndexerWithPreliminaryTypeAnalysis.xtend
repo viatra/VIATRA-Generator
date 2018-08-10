@@ -86,6 +86,10 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 		} or {
 			find interpretation(problem,interpretation);
 			PartialInterpretation.openWorldElements(interpretation,element);
+			«FOR inhibitorType : inhibitorTypes»
+				neg «referInstanceOf(inhibitorType,Modality.MUST,"element")»
+			«ENDFOR»
+			neg find isPrimitive(element);
 		} or
 		«ENDIF»
 		{ «referInstanceOf(type,Modality.MUST,"element")» }
