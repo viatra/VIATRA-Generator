@@ -15,16 +15,15 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.NaryRelationLink
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.UnaryElementRelationLink
 import java.math.BigDecimal
 import java.util.HashMap
@@ -36,9 +35,6 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 
 @Data class KnownElements {
 	val Map<Type,Set<DefinedElement>> knownElementsByType
@@ -93,6 +89,10 @@ class ScopeLoader {
 		
 		aggregated.minNewElements = updateLowerLimit(scope.isSetsNew,numberOfKnownElements,aggregated.minNewElements,getLowerLimit(scope.number))
 		aggregated.maxNewElements = updateUpperLimit(scope.isSetsNew,numberOfKnownElements,aggregated.maxNewElements,getUpperLimit(scope.number))
+		
+		if(aggregated.maxNewElements < 0) {
+			inconsistencies+='''Inconsistent scope: problem already contains «numberOfKnownElements» elements, but scope sets the upper limit to «getUpperLimit(scope.number)»!'''
+		}
 	}
 	def dispatch setSpecification(ClassTypeScope scope, TypeScopes aggregated, Map<Type, Set<DefinedElement>> knownElements, Ecore2Logic ecore2Logic, Ecore2Logic_Trace trace, List<String> inconsistencies) {
 		val target = scope.type.element
@@ -161,7 +161,7 @@ class ScopeLoader {
 					val notDefinedInScope = known.filter[!definedInScope.contains(it)]
 					inconsistencies += '''Inconsistent scope: problem already contains literal«IF notDefinedInScope.size > 0»s«ENDIF» that excluded by a scope: «FOR e: notDefinedInScope SEPARATOR ", "»«e»«ENDFOR».'''
 				}
-				known.clear
+				//known.clear
 				known += definedInScope
 			}
 	}

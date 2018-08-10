@@ -3,20 +3,23 @@ package hu.bme.mit.inf.dslreasoner.application.execution
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.io.File
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import java.util.LinkedList
+import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
-import org.eclipse.ui.IWorkbench
-import org.eclipse.ui.IWorkbenchPage
-import org.eclipse.ui.IWorkbenchWindow
-import org.eclipse.ui.PlatformUI
+import org.eclipse.jface.text.DocumentEvent
+import org.eclipse.jface.text.IDocumentListener
+import org.eclipse.swt.graphics.Color
 import org.eclipse.ui.console.ConsolePlugin
-import org.eclipse.ui.console.IConsoleConstants
-import org.eclipse.ui.console.IConsoleView
 import org.eclipse.ui.console.MessageConsole
-import java.util.List
+import org.eclipse.ui.console.MessageConsoleStream
+import org.eclipse.xtend.lib.annotations.Data
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Future
+import javax.swing.text.BadLocationException
 
 //import org.eclipse.ui.console.MessageConsole
 
@@ -65,26 +68,46 @@ class ScriptConsole {
 		]
 	}
 	
+	public def writeMessage(CharSequence message, String separator, ScriptConsoleDecorator[] decorators) {
+		val resolvedText = this.resolveToText(message, separator, decorators)
+		if(messageWorkspace!==null) {
+			messageWorkspace.writeText(messageFileName,resolvedText);
+		}
+		if(printToConsole) {
+			println(resolvedText)
+		}
+		if(runtimeConsole!==null) {
+			writeToRuntimeConsole(message, separator, decorators)
+		}
+	}
 	public def writeMessage(String message) {
-		if(messageWorkspace!=null) {
+		if(messageWorkspace!==null) {
 			messageWorkspace.writeText(messageFileName,message);
 		}
 		if(printToConsole) {
 			println(message)
 		}
 		if(runtimeConsole!==null) {
-			this.writeToRuntimeConsole(message)
+			writeToRuntimeConsole(message)
+		}
+	}
+	public def writeError(CharSequence message, String separator, ScriptConsoleDecorator[] decorators) {
+		val resolvedText = this.resolveToText(message, separator, decorators)
+		if(errorWorkspace!==null) {
+			errorWorkspace.writeText(errorFileName,resolvedText);
+		}
+		println(message)
+		if(runtimeConsole!==null) {
+			writeToRuntimeConsole(message, separator, decorators)
 		}
 	}
 	public def writeError(String message) {
-		if(errorWorkspace!=null) {
+		if(errorWorkspace!==null) {
 			errorWorkspace.writeText(errorFileName,message);
 		}
-		if(printToConsole) {
-			println(message)
-		}
+		println(message)
 		if(runtimeConsole!==null) {
-			this.writeToRuntimeConsole(message)
+			writeToRuntimeConsole(message)
 		}
 	}
 	public def writeStatistics(LinkedHashMap<String,? extends Object> statistics) {
@@ -153,27 +176,143 @@ class ScriptConsole {
 			if(existingConsolesWithID.empty) {
 				val MessageConsole res = new MessageConsole(consoleID,null)
 				conMan.addConsoles(#[res]);
+				
 				return res
 			} else {
 				return existingConsolesWithID.head as MessageConsole
 			}
 		}
 	}
-	
+	private def resolveToText(CharSequence message, String separator, ScriptConsoleDecorator[] decorators) {
+		val messageString = message.toString
+		// 0. split the message
+		val separatedMessage = if(messageString.startsWith(separator,-1)) {
+			#[""]+messageString.split(separator,-1)
+		} else {
+			messageString.split(separator,-1).toList
+		}
+		if(separatedMessage.size-1 !== decorators.size) {
+			throw new IllegalArgumentException
+		}
+		
+		return '''«FOR i : 0..<decorators.size»«separatedMessage.get(i)»«decorators.get(i)»«ENDFOR»«separatedMessage.last»'''
+	}
 	private def writeToRuntimeConsole(CharSequence message) {
 		// 1. reveal the console view
-//		val IWorkbench wb = PlatformUI.getWorkbench();
-//		val IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
-//		val IWorkbenchPage page = win.getActivePage();
-//		val id = IConsoleConstants.ID_CONSOLE_VIEW;
-//		val view = page.showView(id) as IConsoleView;
-//		view.display(this.runtimeConsole);	
-		
 		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(this.runtimeConsole);
-		
-		// 2. write to the console
 		val stream = this.runtimeConsole.newMessageStream
 		stream.println(message.toString)
 		stream.close
+	}
+	private def writeToRuntimeConsole(CharSequence message, String separator, ScriptConsoleDecorator[] decorators) {
+		val messageString = message.toString
+		// 0. split the message
+		val separatedMessage = if(messageString.startsWith(separator)) {
+			#[""]+messageString.split(separator,-1)
+		} else {
+			messageString.split(separator,-1).toList
+		}
+		if(separatedMessage.size-1 !== decorators.size) {
+			throw new IllegalArgumentException
+		}
+		
+		// 1. reveal the console view
+		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(this.runtimeConsole);
+		val stream = this.runtimeConsole.newMessageStream
+		
+		// 2. print the segments of the view
+		for(i : 0..<decorators.size) {
+			stream.print(separatedMessage.get(i))
+			writeDecoratedTextToRuntimeConsole(decorators.get(i),stream)
+			
+		}
+		// 2.1 write the last segment of 
+		stream.println(separatedMessage.last)
+		
+		//stream.println(message.toString)
+		stream.close
+	}
+	private def writeDecoratedTextToRuntimeConsole(ScriptConsoleDecorator message, MessageConsoleStream stream) {
+		val originalBackgroundColor = this.runtimeConsole.background
+		var Color newColor = null;
+		
+		val text = '''[«message.text»]'''
+		if(message.red >= 0 && message.green >= 0 && message.blue >= 0) {
+			newColor = new Color(originalBackgroundColor.device,message.red,message.green,message.blue)
+			this.runtimeConsole.setBackground(newColor)
+		}
+		stream.flush
+		val CompletableFuture<Boolean> finished = new CompletableFuture<Boolean>
+		val listener = new IDocumentListener() {
+			override documentAboutToBeChanged(DocumentEvent event) { }
+			override documentChanged(DocumentEvent event) {
+				//println('''ftext="«event.fText»", message="«message.text»" endswith=«event.fText.endsWith(message.text)»''')
+				if(event.fText.endsWith(text)) {
+					val from = event.fDocument.length-text.length+1
+					val length = message.text.length
+					//println('''from: «from» length «length»''')
+					try{
+						runtimeConsole.addHyperlink(
+							new ScriptConsoleFileHiperlink(message.hyperlink),
+							from,
+							length
+						)
+						//println("link added")
+					} catch(BadLocationException e) {
+						
+					} finally {
+						runtimeConsole.document.removeDocumentListener(this)
+						finished.complete(true)
+					}
+				}
+				
+			}
+		}
+		runtimeConsole.document.addDocumentListener(listener)
+		stream.print(text)
+		stream.flush
+		finished.get
+		//stream.console.new
+		if(message.red >= 0 && message.green >= 0 && message.blue >= 0) {
+			newColor.dispose
+			this.runtimeConsole.setBackground(originalBackgroundColor)
+		}
+	}
+}
+@Data
+class ScriptConsoleDecorator {
+	String text
+	File hyperlink
+	int Red
+	int Green
+	int Blue
+	
+	public new(String text) {
+		this.text = text
+		this.hyperlink = null
+		this.Red = -1
+		this.Green = -1
+		this.Blue = -1
+	}
+	public new(String text, File hyperlink) {
+		this.text = text
+		this.hyperlink = hyperlink
+		this.Red = -1
+		this.Green = -1
+		this.Blue = -1
+	}
+	public new(String text, int red, int green, int blue) {
+		this.text = text
+		this.hyperlink = null
+		this.Red = red
+		this.Green = green
+		this.Blue = blue
+	}
+	public new(String text, File hyperlink, int red, int green, int blue) {
+		this.text = text
+		this.hyperlink = hyperlink
+		this.Red = red
+		this.Green = green
+		this.Blue = blue
 	}
 }

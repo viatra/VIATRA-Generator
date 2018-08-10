@@ -26,6 +26,8 @@ import java.util.Scanner
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
 import hu.bme.mit.inf.dslreasoner.workspace.URIBasedWorkspace
+import java.util.LinkedList
+import java.io.File
 
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
@@ -212,25 +214,62 @@ class GenerationTaskExecutor {
 							outputWorkspace
 						}
 						
+						val emfRepresentations = new LinkedList
+						val gmlRepresentations = new LinkedList
+						val dotRepresentations = new LinkedList
+						
 						for(interpretationIndex : 0..<interpretations.size) {
 							monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»: Visualising solution «interpretationIndex+1»/«interpretations.size»''')
 							val interpretation = interpretations.get(interpretationIndex)
 							val model = logic2Ecore.transformInterpretation(interpretation,modelGeneration.trace)
-							outputWorkspaceForRun.writeModel(model,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».xmi''')
+							val emfFileName = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».xmi'''
+							outputWorkspaceForRun.writeModel(model,emfFileName)
+							emfRepresentations += outputWorkspaceForRun.getFile(emfFileName)
 							
 							val representation = solution.representation.get(interpretationIndex)
 							if(representation instanceof PartialInterpretation) {
 								val vis1 = new PartialInterpretation2Gml
 								val gml = vis1.transform(representation)
-								outputWorkspaceForRun.writeText('''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».gml''',gml)
+								val glmFilename = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».gml'''
+								outputWorkspaceForRun.writeText(glmFilename,gml)
+								gmlRepresentations += outputWorkspaceForRun.getFile(glmFilename)
 								if(representation.newElements.size + representation.problem.elements.size < 150) {
 									val vis2 = new GraphvizVisualiser
 									val dot = vis2.visualiseConcretization(representation)
-									dot.writeToFile(outputWorkspaceForRun,'''model«IF runs>1»_«run»«ENDIF»_«interpretationIndex+1».png''')
+									val dotFileName = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».png'''
+									dot.writeToFile(outputWorkspaceForRun,dotFileName)
+									dotRepresentations += outputWorkspaceForRun.getFile(dotFileName)
 								}
+								else {
+									dotRepresentations += null
+								}
+							} else {
+								gmlRepresentations += null
+								dotRepresentations += null
 							}
 							monitor.worked(100)
 						}
+						console.writeMessage(
+							'''Models:         «FOR f : emfRepresentations»#«ENDFOR»''',
+							"#",
+							emfRepresentations.map[
+								new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
+							]
+						)
+						console.writeMessage(
+							'''Visualisations: «FOR f : gmlRepresentations»#«ENDFOR»''',
+							"#",
+							gmlRepresentations.map[
+								new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
+							]
+						)
+						console.writeMessage(
+							'''Visualisations: «FOR f : dotRepresentations»#«ENDFOR»''',
+							"#",
+							dotRepresentations.map[
+								new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
+							]
+						)						
 					} else {
 						monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
 					}
@@ -259,6 +298,15 @@ class GenerationTaskExecutor {
 			Error occured («e.class.simpleName»): «e.message»
 			«FOR s : e.stackTrace SEPARATOR "\n"»    «s»«ENDFOR»''')
 		}
+	}
+	
+	private def fileRepresentationInConsole(File file) {
+//		if(file.name.contains('.')) {
+//			return file.name.substring(0,file.name.lastIndexOf('.'))
+//		} else {
+//			file.name
+//		}
+		file.name
 	}
 	
 	private def dispatch soutionDescription(InconsistencyResult s) {
