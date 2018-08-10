@@ -56,7 +56,7 @@ class ViatraReasoner extends LogicReasoner{
 		val transformationStartTime = System.nanoTime
 		
 		val emptySolution = initialiser.initialisePartialInterpretation(problem,viatraConfig.typeScopes).output
-		if(viatraConfig.documentationLevel == DocumentationLevel::FULL && workspace !== null) {
+		if((viatraConfig.documentationLevel == DocumentationLevel::FULL || viatraConfig.documentationLevel == DocumentationLevel::NORMAL) && workspace !== null) {
 			workspace.writeModel(emptySolution,"init.partialmodel")
 		} 
 		emptySolution.problemConainer = problem
