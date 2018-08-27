@@ -32,6 +32,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2NeighbourhoodRepresentation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
+import java.util.HashSet
 
 class NeighbourhoodBasedStateCoderFactory implements IStateCoderFactory {
 	val List<NeighbourhoodBasedPartialInterpretationStateCoder> statecoders = new LinkedList
@@ -115,7 +116,7 @@ class NeighbourhoodBasedPartialInterpretationStateCoder implements IStateCoder{
     	if(this.nodeRepresentations === null || this.modelRepresentation === null) {
     		val startTime = System.nanoTime
     		//relevantObjects.forEach[println(it)]
-    		val code = calculator.createRepresentation(target,range,parallels,maxNumber,relevantTypes,relevantRelations)
+    		val code = calculator.createRepresentation(target,range,parallels,maxNumber,relevantTypes,relevantRelations, null)
     		this.modelRepresentation = code.modelRepresentation
     		this.nodeRepresentations = code.nodeRepresentations
     		statecoderRuntime += (System.nanoTime - startTime)

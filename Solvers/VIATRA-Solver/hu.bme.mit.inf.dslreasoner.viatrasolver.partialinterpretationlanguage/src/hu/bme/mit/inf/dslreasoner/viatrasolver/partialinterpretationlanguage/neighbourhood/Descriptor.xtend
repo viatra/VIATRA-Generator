@@ -4,6 +4,7 @@ import java.util.HashMap
 import java.util.Map
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Data
+import java.util.List
 
 @Data abstract class AbstractNodeDescriptor {
 	long dataHash
@@ -24,6 +25,7 @@ import org.eclipse.xtend.lib.annotations.Data
 //	}
 }
 
+//TODO: Modify for patterns
 @Data class LocalNodeDescriptor extends AbstractNodeDescriptor{
 	Set<String> types
 	String id;
@@ -87,6 +89,14 @@ import org.eclipse.xtend.lib.annotations.Data
 //	}
 }
 
+//TODO: PatternRelation
+
+@Data class PatternRelation<NODESHAPE> {
+	String patternName
+	int param
+	List<NODESHAPE> parameters
+}
+
 @Data class IncomingRelation<FROM> {
 	FROM from
 	String type
@@ -97,6 +107,7 @@ import org.eclipse.xtend.lib.annotations.Data
 	String type
 }
 
+//TODO: Modify for hypergraphs
 @Data class FurtherNodeDescriptor<NodeRep> extends AbstractNodeDescriptor{
 	
 	 NodeRep previousRepresentation
