@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.URI
 import hu.bme.mit.inf.dslreasoner.workspace.URIBasedWorkspace
 import java.util.LinkedList
 import java.io.File
+import org.eclipse.ui.console.ConsolePlugin
 
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
@@ -64,7 +65,7 @@ class GenerationTaskExecutor {
 		val memoryLimit = scriptExecutor.getMemoryLimit(configSpecification)
 		
 		// 2. create console
-		val console = new ScriptConsole(false,true,false,
+		val console = new ScriptConsole(true,false,
 			if(messageFile!==null) URI.createURI(messageFile.path) else null,
 			if(debugFolder!==null) URI.createURI('''«debugFolder.path»/errors.txt''') else null,
 			if(statisticsFile!==null) URI.createURI(statisticsFile.path) else null

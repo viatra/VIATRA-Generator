@@ -22,7 +22,9 @@ class StandaloneScriptExecutor {
 	def static void main(String[] args) {
 		if(args.size == 1) {
 			val message = executeScript(args.head)
-			println(message)
+			if(message !== null) {
+				println(message)
+			}	
 		} else if(args.size == 0){
 			println('''Run generator with script file path as parameter!''')
 		} else { // args.size > 1
@@ -36,6 +38,7 @@ class StandaloneScriptExecutor {
 		ApplicationConfigurationStandaloneSetup.doSetup
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi",new XMIResourceFactoryImpl)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("logicproblem",new XMIResourceFactoryImpl)
+		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("partialmodel",new XMIResourceFactoryImpl)
 		ReteEngine.getClass
 		
 		val ext = path.split("\\.").last
@@ -46,7 +49,8 @@ class StandaloneScriptExecutor {
 			try{
 				resource = resourceSet.getResource(URI.createURI(path),true)
 			} catch(Exception e) {
-				return '''Unable to load Configuration Script!'''
+				val message = '''Unable to load Configuration Script!'''
+				return message
 			}
 			
 			EcoreUtil::resolveAll(resource)
@@ -57,18 +61,21 @@ class StandaloneScriptExecutor {
 					val executor = new ScriptExecutor
 					executor.executeScript(content,new NullProgressMonitor)
 				} else {
-					return('''Content is not a Configuration Script! (Found : «content.class.simpleName»)''')
+					val message = '''Content is not a Configuration Script! (Found : «content.class.simpleName»)'''
+					return message
 				}
 			} else {
-				return '''
+				val message =  '''
 				The Configuration Script contains «errors.size» error«IF errors.size>1»s«ENDIF»:
 					«FOR error : errors»
 					«"\t"»«error.message»
 					«ENDFOR»
 				'''
+				return message
 			}
 		} else {
-			return '''Unsupported file extension: «ext»'''
+			val message =  '''Unsupported file extension: «ext»'''
+			return message
 		}
 	}
 }
