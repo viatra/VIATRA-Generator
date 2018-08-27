@@ -13,6 +13,7 @@ import java.util.Map
 import java.util.Optional
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {
@@ -75,6 +76,16 @@ class SolverLoader {
 		} else if(solver === Solver::VIATRA_SOLVER) {
 			return new ViatraReasonerConfiguration => [c|
 				c.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualiser
+				if(config.containsKey("diversity-range")) {
+					val stringValue = config.get("diversity-range")
+					try{
+						val range = Integer.parseInt(stringValue)
+						c.diversityRequirement = new DiversityDescriptor => [
+							it.ensureDiversity = true
+							it.range = range
+						]
+					} catch (NumberFormatException e) {console.writeError('''Malformed number format: «e.message»''')}
+				}
 			]
 		} else {
 			throw new UnsupportedOperationException('''Unknown solver: «solver»''')
