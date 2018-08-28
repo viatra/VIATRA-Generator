@@ -9,6 +9,8 @@ import java.util.LinkedHashSet
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import java.util.concurrent.CompletableFuture
+import javax.swing.text.BadLocationException
 import org.eclipse.emf.common.util.URI
 import org.eclipse.jface.text.DocumentEvent
 import org.eclipse.jface.text.IDocumentListener
@@ -17,9 +19,6 @@ import org.eclipse.ui.console.ConsolePlugin
 import org.eclipse.ui.console.MessageConsole
 import org.eclipse.ui.console.MessageConsoleStream
 import org.eclipse.xtend.lib.annotations.Data
-import java.util.concurrent.CompletableFuture
-import java.util.concurrent.Future
-import javax.swing.text.BadLocationException
 
 //import org.eclipse.ui.console.MessageConsole
 
@@ -44,7 +43,6 @@ class ScriptConsole {
 	static val empty = ""
 	
 	public new(
-		boolean printToConsole,
 		boolean printToRuntimeConsole,
 		boolean cleanFiles,
 		URI messageConsoleURI,
@@ -60,7 +58,7 @@ class ScriptConsole {
 		this.statisticsWorkspace = prepareWorkspace(statisticsConsoleURI,errorMessagesDuringInitialisation)
 		this.statisticsFileName = prepareFileName(statisticsConsoleURI)
 		
-		this.printToConsole = printToConsole
+		this.printToConsole = (ConsolePlugin.getDefault() === null)
 		this.runtimeConsole = if(printToRuntimeConsole) { prepareRuntimeConsole } else { null }
 		
 		errorMessagesDuringInitialisation.forEach[
@@ -195,7 +193,7 @@ class ScriptConsole {
 			throw new IllegalArgumentException
 		}
 		
-		return '''«FOR i : 0..<decorators.size»«separatedMessage.get(i)»«decorators.get(i)»«ENDFOR»«separatedMessage.last»'''
+		return '''«FOR i : 0..<decorators.size»«separatedMessage.get(i)»[«decorators.get(i).text»]«ENDFOR»«separatedMessage.last»'''
 	}
 	private def writeToRuntimeConsole(CharSequence message) {
 		// 1. reveal the console view
