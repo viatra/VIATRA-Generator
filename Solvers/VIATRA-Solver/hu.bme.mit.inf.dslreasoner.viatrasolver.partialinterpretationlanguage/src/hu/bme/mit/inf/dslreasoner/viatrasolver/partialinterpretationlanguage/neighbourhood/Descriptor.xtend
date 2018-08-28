@@ -5,6 +5,7 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Data
 import java.util.List
+import java.util.HashSet
 
 @Data abstract class AbstractNodeDescriptor {
 	long dataHash
@@ -25,10 +26,11 @@ import java.util.List
 //	}
 }
 
-//TODO: Modify for patterns
+
 @Data class LocalNodeDescriptor extends AbstractNodeDescriptor{
 	Set<String> types
 	String id;
+
 	new(String id, Set<String> types) {
 		super(calcualteDataHash(id,types))
 		this.types = types
@@ -89,8 +91,6 @@ import java.util.List
 //	}
 }
 
-//TODO: PatternRelation
-
 @Data class PatternRelation<NODESHAPE> {
 	String patternName
 	int param
@@ -107,28 +107,31 @@ import java.util.List
 	String type
 }
 
-//TODO: Modify for hypergraphs
 @Data class FurtherNodeDescriptor<NodeRep> extends AbstractNodeDescriptor{
 	
 	 NodeRep previousRepresentation
 	 Map<IncomingRelation<NodeRep>,Integer> incomingEdges
 	 Map<OutgoingRelation<NodeRep>,Integer> outgoingEdges
+	 Set<PatternRelation<NodeRep>> patterns
 	 
 	 new(
 	 	NodeRep previousRepresentation,
 	 	Map<IncomingRelation<NodeRep>,Integer> incomingEdges,
-		Map<OutgoingRelation<NodeRep>,Integer> outgoingEdges)
+		Map<OutgoingRelation<NodeRep>,Integer> outgoingEdges,
+		Set<PatternRelation<NodeRep>> patterns)
 	{
-	 	super(calculateDataHash(previousRepresentation,incomingEdges,outgoingEdges))
+	 	super(calculateDataHash(previousRepresentation,incomingEdges,outgoingEdges,patterns))
 	 	this.previousRepresentation = previousRepresentation
 	 	this.incomingEdges = new HashMap(incomingEdges)
 	 	this.outgoingEdges = new HashMap(outgoingEdges)
+	 	this.patterns=new HashSet(patterns)
 	 }
 	 
 	static def private <NodeRep> int calculateDataHash(
 	 	NodeRep previousRepresentation,
 	 	Map<IncomingRelation<NodeRep>,Integer> incomingEdges,
-		Map<OutgoingRelation<NodeRep>,Integer> outgoingEdges)
+		Map<OutgoingRelation<NodeRep>,Integer> outgoingEdges,
+		Set<PatternRelation<NodeRep>> patterns)
 	{
 	    val int prime = 31;
 	    var int result = previousRepresentation.hashCode;
@@ -136,6 +139,8 @@ import java.util.List
 	   		result = prime * result + incomingEdges.hashCode();
 	   	if(outgoingEdges !== null) 
 	   		result = prime * result + outgoingEdges.hashCode();
+	   	if (patterns !== null)
+	   		result = prime * result + patterns.hashCode();
 	    return result;
   	}
   	

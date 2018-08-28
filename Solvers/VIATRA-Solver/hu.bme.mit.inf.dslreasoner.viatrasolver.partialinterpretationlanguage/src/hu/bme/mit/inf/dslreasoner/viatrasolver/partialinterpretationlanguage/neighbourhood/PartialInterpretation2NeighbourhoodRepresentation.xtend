@@ -99,7 +99,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	def Map<DefinedElement, List<PatternRelation<DefinedElement>>> createPatternRelations(
 		PartialInterpretation model, Set<ViatraQueryMatcher<? extends IPatternMatch>> relevantPatterns) {
 		val Map<DefinedElement, List<PatternRelation<DefinedElement>>> result=new HashMap;
-		if (relevantPatterns==null) return result;
+		if (relevantPatterns===null) return result;
 		for (element : model.elements) {
 			result.put(element,new LinkedList<PatternRelation<DefinedElement>>)
 		}
@@ -122,7 +122,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				}
 				var id=0;
 				for (DefinedElement e:sanitizedMatch) {
-					if (e!=null) {
+					if (e!==null) {
 						result.get(e).add(new PatternRelation<DefinedElement>(name,id,sanitizedMatch))
 					}
 					id++	
@@ -131,13 +131,6 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			
 			println('''Ignored params '''+ignoredParams+''' of pattern '''+ name)
 		}
-		
-		/*for(relevantPattern : relevantPatterns) {
-		 * 	relevantPattern.allMatches.forEach[
-		 * 		it.
-		 * 	]
-		 }*/
-		
 		
 		return result;
 		
@@ -222,7 +215,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			} else if (range > 0) {
 				val previous = doRecursiveNeighbourCalculation(model, types, IncomingRelations, OutgoingRelations, PatternRelations,
 					range - 1, parallels, maxNumber)
-				val r = calculateFurtherNodeDescriptors(model, previous, IncomingRelations, OutgoingRelations,
+				val r = calculateFurtherNodeDescriptors(model, previous, IncomingRelations, OutgoingRelations,PatternRelations,
 					parallels, maxNumber)
 				// println('''Level «range» finished.''')
 				val res = createFurtherRepresentation(r.key, r.value, previous, deepRepresentation)
@@ -235,7 +228,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				} else
 					return res
 			} else if (range == FixPointRage) {
-				return refineUntilFixpoint(model, types, IncomingRelations, OutgoingRelations, parallels, maxNumber)
+				return refineUntilFixpoint(model, types, IncomingRelations, OutgoingRelations, PatternRelations, parallels, maxNumber)
 			} else if (range == GraphWidthRange) {
 				val width = this.getWidth(types, IncomingRelations, OutgoingRelations)
 				// println(width)
@@ -246,7 +239,9 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 
 		def private refineUntilFixpoint(PartialInterpretation model, Map<DefinedElement, Set<String>> types,
 			Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
-			Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations, int parallels,
+			Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations,
+			Map<DefinedElement, List<PatternRelation<DefinedElement>>> PatternRelations,
+			int parallels,
 			int maxNumbers) {
 				var lastRange = 0
 				val last = calculateLocalNodeDescriptors(model, types, maxNumbers)
@@ -256,7 +251,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				do {
 					val nextRange = lastRange + 1
 					val next = calculateFurtherNodeDescriptors(model, lastRepresentation, IncomingRelations,
-						OutgoingRelations, parallels, maxNumbers)
+						OutgoingRelations, PatternRelations, parallels, maxNumbers)
 					val nextRepresentation = createFurtherRepresentation(next.key, next.value, lastRepresentation,
 						deepRepresentation)
 
@@ -286,9 +281,9 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 					node2Type.put(element, new HashSet)
 				}
 
-//		for(typeDefinition : model.problem.types.filter(TypeDefinition)) {
-//			// Dont need
-//		}
+		//		for(typeDefinition : model.problem.types.filter(TypeDefinition)) {
+		//			// Dont need
+		//		}
 				for (typeInterpretation : model.partialtypeinterpratation) {
 					if (typeInterpretation instanceof PartialPrimitiveInterpretation) {
 					} else if (typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -328,7 +323,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				}
 
 				/**
-				 * Creates a local representation of the objects (aka zero range neighbourhood)
+				 * Creates the representation of the initial shape (aka zero range neighbourhood)
 				 */
 				def abstract protected NeighbourhoodWithTraces<ModelRepresentation, NodeRepresentation> createLocalRepresentation(
 					Map<DefinedElement, LocalNodeDescriptor> node2Representation,
@@ -336,7 +331,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				)
 
 				/**
-				 * Creates a 
+				 * Creates the representation of a shape (aka neighbourhood) with positive range
 				 */
 				def abstract protected NeighbourhoodWithTraces<ModelRepresentation, NodeRepresentation> createFurtherRepresentation(
 					Map<FurtherNodeDescriptor<NodeRepresentation>, Integer> nodeDescriptors,
@@ -383,6 +378,19 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 					}
 					return res;
 				}
+				
+				private def calculatePatterns(Map<DefinedElement, List<PatternRelation<DefinedElement>>> PatternRelations,
+						DefinedElement object,
+						Map<DefinedElement, ? extends NodeRepresentation> previousNodeRepresentations) {
+						val res = new HashSet<PatternRelation<NodeRepresentation>>()
+						
+						for (patternRelation : PatternRelations.get(object)) {
+							val matchshape=patternRelation.parameters.map[previousNodeRepresentations.getOrDefault(it,null)]
+							res.add(new PatternRelation<NodeRepresentation>(patternRelation.patternName,patternRelation.param,matchshape))
+						}
+						
+						return res
+				}
 
 				/*def private <KEY,VALUE> void addOrCreate_Set(Map<KEY,Set<VALUE>> map, KEY key, VALUE value) {
 				 * 	var Set<VALUE> s;
@@ -397,7 +405,9 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				private def calculateFurtherNodeDescriptors(PartialInterpretation model,
 					NeighbourhoodWithTraces<ModelRepresentation, NodeRepresentation> previous,
 					Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
-					Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations, int parallels,
+					Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations,
+					Map<DefinedElement, List<PatternRelation<DefinedElement>>> PatternRelations,
+					int parallels,
 					int maxNumber) {
 						val previousNodeRepresentations = previous.nodeRepresentations
 						val node2Representation = new HashMap<DefinedElement, FurtherNodeDescriptor<NodeRepresentation>>
@@ -419,14 +429,15 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 								previousNodeRepresentations, parallels)
 							val outgoingEdges = this.calcuateOutgoingEdges(OutgoingRelations, object,
 								previousNodeRepresentations, parallels)
-							// TODO: patternDescriptors
+							val patterns = this.calculatePatterns(PatternRelations, object, previousNodeRepresentations)
+							
 							val previousType = previousNodeRepresentations.get(object)
 
 							if (previousType === null) {
 								println("Error in state coder")
 							}
 
-							val nodeDescriptor = new FurtherNodeDescriptor(previousType, incomingEdges, outgoingEdges)
+							val nodeDescriptor = new FurtherNodeDescriptor(previousType, incomingEdges, outgoingEdges, patterns)
 
 							if (this.mergeSimilarNeighbourhood) {
 								if (descriptor2Number.containsKey(nodeDescriptor)) {
