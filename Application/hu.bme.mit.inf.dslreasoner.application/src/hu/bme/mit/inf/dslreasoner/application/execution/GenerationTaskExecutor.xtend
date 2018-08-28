@@ -19,16 +19,13 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.Insta
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
-import hu.bme.mit.inf.dslreasoner.workspace.ProjectWorkspace
+import hu.bme.mit.inf.dslreasoner.workspace.URIBasedWorkspace
+import java.io.File
 import java.util.LinkedHashMap
+import java.util.LinkedList
 import java.util.Optional
-import java.util.Scanner
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
-import hu.bme.mit.inf.dslreasoner.workspace.URIBasedWorkspace
-import java.util.LinkedList
-import java.io.File
-import org.eclipse.ui.console.ConsolePlugin
 
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
@@ -228,49 +225,57 @@ class GenerationTaskExecutor {
 							emfRepresentations += outputWorkspaceForRun.getFile(emfFileName)
 							
 							val representation = solution.representation.get(interpretationIndex)
-							if(representation instanceof PartialInterpretation) {
-								val vis1 = new PartialInterpretation2Gml
-								val gml = vis1.transform(representation)
-								val glmFilename = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».gml'''
-								outputWorkspaceForRun.writeText(glmFilename,gml)
-								gmlRepresentations += outputWorkspaceForRun.getFile(glmFilename)
-								if(representation.newElements.size + representation.problem.elements.size < 150) {
-									val vis2 = new GraphvizVisualiser
-									val dot = vis2.visualiseConcretization(representation)
-									val dotFileName = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».png'''
-									dot.writeToFile(outputWorkspaceForRun,dotFileName)
-									dotRepresentations += outputWorkspaceForRun.getFile(dotFileName)
-								}
-								else {
+							if(documentationLevel.atLeastNormal) {
+								if(representation instanceof PartialInterpretation) {
+									val vis1 = new PartialInterpretation2Gml
+									val gml = vis1.transform(representation)
+									val glmFilename = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».gml'''
+									outputWorkspaceForRun.writeText(glmFilename,gml)
+									gmlRepresentations += outputWorkspaceForRun.getFile(glmFilename)
+									if(representation.newElements.size + representation.problem.elements.size < 150) {
+										val vis2 = new GraphvizVisualiser
+										val dot = vis2.visualiseConcretization(representation)
+										val dotFileName = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».png'''
+										dot.writeToFile(outputWorkspaceForRun,dotFileName)
+										dotRepresentations += outputWorkspaceForRun.getFile(dotFileName)
+									}
+									else {
+										dotRepresentations += null
+									}
+								} else {
+									gmlRepresentations += null
 									dotRepresentations += null
 								}
-							} else {
-								gmlRepresentations += null
-								dotRepresentations += null
 							}
 							monitor.worked(100)
 						}
-						console.writeMessage(
-							'''Models:         «FOR f : emfRepresentations»#«ENDFOR»''',
-							"#",
-							emfRepresentations.map[
-								new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
-							]
-						)
-						console.writeMessage(
-							'''Visualisations: «FOR f : gmlRepresentations»#«ENDFOR»''',
-							"#",
-							gmlRepresentations.map[
-								new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
-							]
-						)
-						console.writeMessage(
-							'''Visualisations: «FOR f : dotRepresentations»#«ENDFOR»''',
-							"#",
-							dotRepresentations.map[
-								new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
-							]
-						)						
+						if(!emfRepresentations.empty) {
+							console.writeMessage(
+								'''Models:         «FOR f : emfRepresentations»#«ENDFOR»''',
+								"#",
+								emfRepresentations.map[
+									new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
+								]
+							)
+						}
+						if(!gmlRepresentations.empty) {
+							console.writeMessage(
+								'''Visualisations: «FOR f : gmlRepresentations»#«ENDFOR»''',
+								"#",
+								gmlRepresentations.map[
+									new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
+								]
+							)
+						}
+						if(!dotRepresentations.empty) {
+							console.writeMessage(
+								'''Visualisations: «FOR f : dotRepresentations»#«ENDFOR»''',
+								"#",
+								dotRepresentations.map[
+									new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
+								]
+							)
+						}					
 					} else {
 						monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
 					}

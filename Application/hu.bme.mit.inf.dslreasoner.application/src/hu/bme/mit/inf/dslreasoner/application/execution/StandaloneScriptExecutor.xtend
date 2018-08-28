@@ -32,7 +32,7 @@ class StandaloneScriptExecutor {
 		}
 	}
 	
-	def static executeScript(String path){
+	def static loadScript(String path) {
 		//Initialise extensions
 		EMFPatternLanguageStandaloneSetup.doSetup
 		ApplicationConfigurationStandaloneSetup.doSetup
@@ -49,8 +49,8 @@ class StandaloneScriptExecutor {
 			try{
 				resource = resourceSet.getResource(URI.createURI(path),true)
 			} catch(Exception e) {
-				val message = '''Unable to load Configuration Script!'''
-				return message
+				val message = '''Unable to load Configuration Script! «e.message»'''
+				throw new IllegalArgumentException(message)
 			}
 			
 			EcoreUtil::resolveAll(resource)
@@ -58,11 +58,10 @@ class StandaloneScriptExecutor {
 			if(errors.empty) {
 				val content = resource.contents.head
 				if(content instanceof ConfigurationScript) {
-					val executor = new ScriptExecutor
-					executor.executeScript(content,new NullProgressMonitor)
+					return content
 				} else {
 					val message = '''Content is not a Configuration Script! (Found : «content.class.simpleName»)'''
-					return message
+					throw new IllegalArgumentException(message)
 				}
 			} else {
 				val message =  '''
@@ -71,11 +70,21 @@ class StandaloneScriptExecutor {
 					«"\t"»«error.message»
 					«ENDFOR»
 				'''
-				return message
+				throw new IllegalArgumentException(message)
 			}
 		} else {
-			val message =  '''Unsupported file extension: «ext»'''
-			return message
+			throw new IllegalArgumentException('''Unsupported file extension: «ext»''')
+		}
+	}
+	
+	def static executeScript(String path){
+		val executor = new ScriptExecutor
+		try{
+			val content = loadScript(path)
+			executor.executeScript(content,new NullProgressMonitor)
+			return null
+		} catch(Exception e) {
+			return e.message
 		}
 	}
 }
