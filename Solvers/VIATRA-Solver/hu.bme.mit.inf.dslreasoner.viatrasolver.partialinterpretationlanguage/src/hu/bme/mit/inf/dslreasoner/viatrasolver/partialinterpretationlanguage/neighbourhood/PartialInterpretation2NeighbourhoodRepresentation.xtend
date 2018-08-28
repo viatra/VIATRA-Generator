@@ -99,11 +99,11 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	def Map<DefinedElement, List<PatternRelation<DefinedElement>>> createPatternRelations(
 		PartialInterpretation model, Set<ViatraQueryMatcher<? extends IPatternMatch>> relevantPatterns) {
 		val Map<DefinedElement, List<PatternRelation<DefinedElement>>> result=new HashMap;
-		if (relevantPatterns===null) return result;
+		
 		for (element : model.elements) {
 			result.put(element,new LinkedList<PatternRelation<DefinedElement>>)
 		}
-		
+		if (relevantPatterns===null) return result;
 		for (pattern : relevantPatterns) {
 			val name=pattern.patternName
 			val arity=pattern.parameterNames.size
