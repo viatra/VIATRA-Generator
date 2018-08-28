@@ -163,6 +163,9 @@ class InstanceModel2PartialInterpretation {
 	private def dispatch shortValue(Integer value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
 		integers += value
 	}
+	private def dispatch shortValue(Short value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+		integers += Integer.valueOf(value)
+	}
 	private def dispatch shortValue(Float value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
 		reals += BigDecimal.valueOf(value)
 	}
@@ -197,6 +200,10 @@ class InstanceModel2PartialInterpretation {
 	
 	dispatch protected def translateValue(Integer value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
 		value.lookup(partialInterpretationTrace.primitiveValues.integerMap)
+	}
+	
+	dispatch protected def translateValue(Short value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
+		Integer.valueOf(value).lookup(partialInterpretationTrace.primitiveValues.integerMap)
 	}
 	
 	dispatch protected def translateValue(Double value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
