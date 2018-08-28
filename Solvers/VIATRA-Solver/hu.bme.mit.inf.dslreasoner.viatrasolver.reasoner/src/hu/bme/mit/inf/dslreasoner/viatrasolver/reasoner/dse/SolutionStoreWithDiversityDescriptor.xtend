@@ -40,7 +40,7 @@ class SolutionStoreWithDiversityDescriptor {
 				descriptor.parallels,
 				descriptor.maxNumber,
 				descriptor.relevantTypes,
-				descriptor.relevantRelations).modelRepresentation.hashCode
+				descriptor.relevantRelations,null).modelRepresentation.hashCode
 			val isDifferent = solutionCodeList.forall[previous | ! code.equals(previous)]
 			runtime += System.nanoTime - start
 			allCheck++
@@ -66,7 +66,7 @@ class SolutionStoreWithDiversityDescriptor {
 				descriptor.parallels,
 				descriptor.maxNumber,
 				descriptor.relevantTypes,
-				descriptor.relevantRelations).modelRepresentation.hashCode
+				descriptor.relevantRelations,null).modelRepresentation.hashCode
 			solutionCodeList += code
 			runtime += System.nanoTime - start
 		}
