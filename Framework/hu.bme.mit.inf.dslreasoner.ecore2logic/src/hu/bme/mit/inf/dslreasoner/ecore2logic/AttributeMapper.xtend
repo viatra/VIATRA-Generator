@@ -107,7 +107,7 @@ class EAttributeMapper_RelationsOverTypes implements EAttributeMapper {
 	
 	override TypeDescriptor TypeOfRange(Ecore2Logic_Trace trace, EAttribute attribute) {
 		if(attribute.EType instanceof EEnum) return enumMapper.TypeofEEnum(trace,attribute.EType as EEnum)
-		else if(attribute.EType.name.equals("EInt")) return LogicInt
+		else if(attribute.EType.name.equals("EInt") || attribute.EType.name.equals("EShort")) return LogicInt
 		else if(attribute.EType.name.equals("EBoolean")) return LogicBool
 		else if(attribute.EType.name.equals("EDouble") ||
 			    attribute.EType.name.equals("EFloat")) return LogicReal
