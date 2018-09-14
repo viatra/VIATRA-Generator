@@ -151,7 +151,7 @@ class  Viatra2Logic {
 			val parameterName = '''parameter «vParam.name»'''
 			val parameterType = getType(vParam,types,ecore2LogicTrace)
 			if(parameterType === null) {
-				throw new AssertionError('''null type for parameter «vParam.name»''')
+				throw new AssertionError('''null type for parameter «vParam.name» in pattern «pquery.fullyQualifiedName»''')
 			}
 			val lParam = createVar(parameterName,parameterType)
 			viatra2LogicTrace.parameter2Variable.put(pquery->vParam,lParam)
@@ -450,6 +450,8 @@ class  Viatra2Logic {
 			return LogicReal
 		} else if(c == Boolean) {
 			return LogicBool
+		} else if(c == String) {
+			return LogicString
 		} else if(c.superclass == java.lang.Enum){
 			val enums = ecore2Logic.allEnumsInScope(ecore2LogicTrace.trace)
 			for(enum : enums) {
