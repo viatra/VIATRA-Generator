@@ -93,7 +93,11 @@ class SolverLoader {
 	}
 	
 	def dispatch void setRunIndex(AlloySolverConfiguration config, Map<String, String> parameters, int runIndex, ScriptConsole console) {
-		parameters.getAsBoolean("randomise",console).ifPresent[config.randomise = runIndex]
+		parameters.getAsBoolean("randomize",console).ifPresent[
+			if(it) {
+				config.randomise = runIndex-1
+			}
+		]
 	}
 	def dispatch void setRunIndex(LogicSolverConfiguration config, Map<String, String> parameters, int runIndex, ScriptConsole console) {
 		
