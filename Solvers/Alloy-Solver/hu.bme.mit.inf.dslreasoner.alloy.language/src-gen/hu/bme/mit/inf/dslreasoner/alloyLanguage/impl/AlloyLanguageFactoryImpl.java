@@ -83,6 +83,7 @@ public class AlloyLanguageFactoryImpl extends EFactoryImpl implements AlloyLangu
       case AlloyLanguagePackage.ALS_TYPE_SCOPE: return createALSTypeScope();
       case AlloyLanguagePackage.ALS_SIG_SCOPE: return createALSSigScope();
       case AlloyLanguagePackage.ALS_INT_SCOPE: return createALSIntScope();
+      case AlloyLanguagePackage.ALS_STRING_SCOPE: return createALSStringScope();
       case AlloyLanguagePackage.ALS_QUANTIFIED_EX: return createALSQuantifiedEx();
       case AlloyLanguagePackage.ALS_OR: return createALSOr();
       case AlloyLanguagePackage.ALS_IFF: return createALSIff();
@@ -115,8 +116,10 @@ public class AlloyLanguageFactoryImpl extends EFactoryImpl implements AlloyLangu
       case AlloyLanguagePackage.ALS_IDEN: return createALSIden();
       case AlloyLanguagePackage.ALS_UNIV: return createALSUniv();
       case AlloyLanguagePackage.ALS_INT: return createALSInt();
+      case AlloyLanguagePackage.ALS_STRING: return createALSString();
       case AlloyLanguagePackage.ALS_REFERENCE: return createALSReference();
       case AlloyLanguagePackage.ALS_NUMBER_LITERAL: return createALSNumberLiteral();
+      case AlloyLanguagePackage.ALS_STRING_LITERAL: return createALSStringLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -356,6 +359,17 @@ public class AlloyLanguageFactoryImpl extends EFactoryImpl implements AlloyLangu
   {
     ALSIntScopeImpl alsIntScope = new ALSIntScopeImpl();
     return alsIntScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ALSStringScope createALSStringScope()
+  {
+    ALSStringScopeImpl alsStringScope = new ALSStringScopeImpl();
+    return alsStringScope;
   }
 
   /**
@@ -715,6 +729,17 @@ public class AlloyLanguageFactoryImpl extends EFactoryImpl implements AlloyLangu
    * <!-- end-user-doc -->
    * @generated
    */
+  public ALSString createALSString()
+  {
+    ALSStringImpl alsString = new ALSStringImpl();
+    return alsString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ALSReference createALSReference()
   {
     ALSReferenceImpl alsReference = new ALSReferenceImpl();
@@ -730,6 +755,17 @@ public class AlloyLanguageFactoryImpl extends EFactoryImpl implements AlloyLangu
   {
     ALSNumberLiteralImpl alsNumberLiteral = new ALSNumberLiteralImpl();
     return alsNumberLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ALSStringLiteral createALSStringLiteral()
+  {
+    ALSStringLiteralImpl alsStringLiteral = new ALSStringLiteralImpl();
+    return alsStringLiteral;
   }
 
   /**

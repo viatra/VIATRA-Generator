@@ -22,8 +22,8 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 
 	protected AlloyLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_ALSAnd_AmpersandAmpersandKeyword_1_1_0_or_AndKeyword_1_1_1;
-	protected AbstractElementAlias match_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_a;
-	protected AbstractElementAlias match_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_p;
+	protected AbstractElementAlias match_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_a;
+	protected AbstractElementAlias match_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_p;
 	protected AbstractElementAlias match_ALSIff_IffKeyword_1_1_1_or_LessThanSignEqualsSignGreaterThanSignKeyword_1_1_0;
 	protected AbstractElementAlias match_ALSImpl_EqualsSignGreaterThanSignKeyword_1_1_0_or_ImpliesKeyword_1_1_1;
 	protected AbstractElementAlias match_ALSOr_OrKeyword_1_1_1_or_VerticalLineVerticalLineKeyword_1_1_0;
@@ -33,8 +33,8 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (AlloyLanguageGrammarAccess) access;
 		match_ALSAnd_AmpersandAmpersandKeyword_1_1_0_or_AndKeyword_1_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getALSAndAccess().getAmpersandAmpersandKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getALSAndAccess().getAndKeyword_1_1_1()));
-		match_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_a = new TokenAlias(true, true, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_6_0());
-		match_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_p = new TokenAlias(true, false, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_6_0());
+		match_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_a = new TokenAlias(true, true, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_8_0());
+		match_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_p = new TokenAlias(true, false, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_8_0());
 		match_ALSIff_IffKeyword_1_1_1_or_LessThanSignEqualsSignGreaterThanSignKeyword_1_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getALSIffAccess().getIffKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getALSIffAccess().getLessThanSignEqualsSignGreaterThanSignKeyword_1_1_0()));
 		match_ALSImpl_EqualsSignGreaterThanSignKeyword_1_1_0_or_ImpliesKeyword_1_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getALSImplAccess().getEqualsSignGreaterThanSignKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getALSImplAccess().getImpliesKeyword_1_1_1()));
 		match_ALSOr_OrKeyword_1_1_1_or_VerticalLineVerticalLineKeyword_1_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getALSOrAccess().getOrKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getALSOrAccess().getVerticalLineVerticalLineKeyword_1_1_0()));
@@ -55,10 +55,10 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_ALSAnd_AmpersandAmpersandKeyword_1_1_0_or_AndKeyword_1_1_1.equals(syntax))
 				emit_ALSAnd_AmpersandAmpersandKeyword_1_1_0_or_AndKeyword_1_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_a.equals(syntax))
-				emit_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_p.equals(syntax))
-				emit_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_a.equals(syntax))
+				emit_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_p.equals(syntax))
+				emit_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ALSIff_IffKeyword_1_1_1_or_LessThanSignEqualsSignGreaterThanSignKeyword_1_1_0.equals(syntax))
 				emit_ALSIff_IffKeyword_1_1_1_or_LessThanSignEqualsSignGreaterThanSignKeyword_1_1_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ALSImpl_EqualsSignGreaterThanSignKeyword_1_1_0_or_ImpliesKeyword_1_1_1.equals(syntax))
@@ -73,7 +73,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 
 	/**
 	 * Ambiguous syntax:
-	 *     '&&' | 'and'
+	 *     'and' | '&&'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     {ALSAnd.leftOperand=} (ambiguity) rightOperand=ALSComparison
@@ -91,18 +91,20 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) (ambiguity) '*' operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) '-' operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) 'Int' (rule start)
+	 *     (rule start) (ambiguity) 'String' (rule start)
 	 *     (rule start) (ambiguity) '^' operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) 'iden' (rule start)
 	 *     (rule start) (ambiguity) 'none' (rule start)
 	 *     (rule start) (ambiguity) 'sum' variables+=ALSVariableDeclaration
 	 *     (rule start) (ambiguity) 'univ' (rule start)
 	 *     (rule start) (ambiguity) '~' operand=ALSBasicRelationTerm
-	 *     (rule start) (ambiguity) ('!' | 'not') operand=ALSBasicRelationTerm
+	 *     (rule start) (ambiguity) ('not' | '!') operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) referred=[ALSRelationDeclaration|ID]
 	 *     (rule start) (ambiguity) referredDefinition=[ALSDefinition|ID]
 	 *     (rule start) (ambiguity) referredNumericOperator=ALSNumericOperator
 	 *     (rule start) (ambiguity) type=ALSMultiplicity
 	 *     (rule start) (ambiguity) value=INT
+	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {ALSAnd.leftOperand=}
 	 *     (rule start) (ambiguity) {ALSDirectProduct.leftOperand=}
 	 *     (rule start) (ambiguity) {ALSEquals.leftOperand=}
@@ -123,7 +125,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) (ambiguity) {ALSRangeRestrictionRight.relation=}
 	 *     (rule start) (ambiguity) {ALSSubset.leftOperand=}
 	 */
-	protected void emit_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -138,7 +140,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) (ambiguity) '^' operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) 'sum' variables+=ALSVariableDeclaration
 	 *     (rule start) (ambiguity) '~' operand=ALSBasicRelationTerm
-	 *     (rule start) (ambiguity) ('!' | 'not') operand=ALSBasicRelationTerm
+	 *     (rule start) (ambiguity) ('not' | '!') operand=ALSBasicRelationTerm
 	 *     (rule start) (ambiguity) referredDefinition=[ALSDefinition|ID]
 	 *     (rule start) (ambiguity) referredNumericOperator=ALSNumericOperator
 	 *     (rule start) (ambiguity) type=ALSMultiplicity
@@ -162,7 +164,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) (ambiguity) {ALSRangeRestrictionRight.relation=}
 	 *     (rule start) (ambiguity) {ALSSubset.leftOperand=}
 	 */
-	protected void emit_ALSBasicRelationTerm_LeftParenthesisKeyword_6_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ALSBasicRelationTerm_LeftParenthesisKeyword_8_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -190,7 +192,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Ambiguous syntax:
-	 *     '||' | 'or'
+	 *     'or' | '||'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     {ALSOr.leftOperand=} (ambiguity) rightOperand=ALSIff
@@ -201,7 +203,7 @@ public class AlloyLanguageSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Ambiguous syntax:
-	 *     '!' | 'not'
+	 *     'not' | '!'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '('* (ambiguity) operand=ALSBasicRelationTerm

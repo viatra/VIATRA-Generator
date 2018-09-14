@@ -769,6 +769,34 @@ public interface AlloyLanguagePackage extends EPackage
   int ALS_INT_SCOPE_FEATURE_COUNT = ALS_TYPE_SCOPE_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringScopeImpl <em>ALS String Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringScopeImpl
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSStringScope()
+   * @generated
+   */
+  int ALS_STRING_SCOPE = 18;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALS_STRING_SCOPE__NUMBER = ALS_TYPE_SCOPE__NUMBER;
+
+  /**
+   * The number of structural features of the '<em>ALS String Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALS_STRING_SCOPE_FEATURE_COUNT = ALS_TYPE_SCOPE_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSQuantifiedExImpl <em>ALS Quantified Ex</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -776,7 +804,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSQuantifiedEx()
    * @generated
    */
-  int ALS_QUANTIFIED_EX = 18;
+  int ALS_QUANTIFIED_EX = 19;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -831,7 +859,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSOr()
    * @generated
    */
-  int ALS_OR = 19;
+  int ALS_OR = 20;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -868,7 +896,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSIff()
    * @generated
    */
-  int ALS_IFF = 20;
+  int ALS_IFF = 21;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -905,7 +933,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSImpl()
    * @generated
    */
-  int ALS_IMPL = 21;
+  int ALS_IMPL = 22;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -951,7 +979,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSAnd()
    * @generated
    */
-  int ALS_AND = 22;
+  int ALS_AND = 23;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -988,7 +1016,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSEquals()
    * @generated
    */
-  int ALS_EQUALS = 23;
+  int ALS_EQUALS = 24;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1025,7 +1053,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSNotEquals()
    * @generated
    */
-  int ALS_NOT_EQUALS = 24;
+  int ALS_NOT_EQUALS = 25;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1062,7 +1090,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSSubset()
    * @generated
    */
-  int ALS_SUBSET = 25;
+  int ALS_SUBSET = 26;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1099,7 +1127,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSLess()
    * @generated
    */
-  int ALS_LESS = 26;
+  int ALS_LESS = 27;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1136,7 +1164,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSLeq()
    * @generated
    */
-  int ALS_LEQ = 27;
+  int ALS_LEQ = 28;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1173,7 +1201,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSMore()
    * @generated
    */
-  int ALS_MORE = 28;
+  int ALS_MORE = 29;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1210,7 +1238,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSMeq()
    * @generated
    */
-  int ALS_MEQ = 29;
+  int ALS_MEQ = 30;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1247,7 +1275,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSOverride()
    * @generated
    */
-  int ALS_OVERRIDE = 30;
+  int ALS_OVERRIDE = 31;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1284,7 +1312,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSRangeRestrictionRight()
    * @generated
    */
-  int ALS_RANGE_RESTRICTION_RIGHT = 31;
+  int ALS_RANGE_RESTRICTION_RIGHT = 32;
 
   /**
    * The feature id for the '<em><b>Relation</b></em>' containment reference.
@@ -1321,7 +1349,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSRangeRestrictionLeft()
    * @generated
    */
-  int ALS_RANGE_RESTRICTION_LEFT = 32;
+  int ALS_RANGE_RESTRICTION_LEFT = 33;
 
   /**
    * The feature id for the '<em><b>Filter</b></em>' containment reference.
@@ -1358,7 +1386,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSJoin()
    * @generated
    */
-  int ALS_JOIN = 33;
+  int ALS_JOIN = 34;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1395,7 +1423,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSMinus()
    * @generated
    */
-  int ALS_MINUS = 34;
+  int ALS_MINUS = 35;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1432,7 +1460,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSPlus()
    * @generated
    */
-  int ALS_PLUS = 35;
+  int ALS_PLUS = 36;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1469,7 +1497,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSIntersection()
    * @generated
    */
-  int ALS_INTERSECTION = 36;
+  int ALS_INTERSECTION = 37;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1506,7 +1534,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSDirectProduct()
    * @generated
    */
-  int ALS_DIRECT_PRODUCT = 37;
+  int ALS_DIRECT_PRODUCT = 38;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1561,7 +1589,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSNot()
    * @generated
    */
-  int ALS_NOT = 38;
+  int ALS_NOT = 39;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1589,7 +1617,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSInverseRelation()
    * @generated
    */
-  int ALS_INVERSE_RELATION = 39;
+  int ALS_INVERSE_RELATION = 40;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1617,7 +1645,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getAlSTransitiveClosure()
    * @generated
    */
-  int AL_STRANSITIVE_CLOSURE = 40;
+  int AL_STRANSITIVE_CLOSURE = 41;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1645,7 +1673,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSReflectiveTransitiveClosure()
    * @generated
    */
-  int ALS_REFLECTIVE_TRANSITIVE_CLOSURE = 41;
+  int ALS_REFLECTIVE_TRANSITIVE_CLOSURE = 42;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1673,7 +1701,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSCardinality()
    * @generated
    */
-  int ALS_CARDINALITY = 42;
+  int ALS_CARDINALITY = 43;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1701,7 +1729,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSUnaryMinus()
    * @generated
    */
-  int ALS_UNARY_MINUS = 43;
+  int ALS_UNARY_MINUS = 44;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1729,7 +1757,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSSum()
    * @generated
    */
-  int ALS_SUM = 44;
+  int ALS_SUM = 45;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1766,7 +1794,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSFunctionCall()
    * @generated
    */
-  int ALS_FUNCTION_CALL = 45;
+  int ALS_FUNCTION_CALL = 46;
 
   /**
    * The feature id for the '<em><b>Referred Definition</b></em>' reference.
@@ -1812,7 +1840,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSNone()
    * @generated
    */
-  int ALS_NONE = 46;
+  int ALS_NONE = 47;
 
   /**
    * The number of structural features of the '<em>ALS None</em>' class.
@@ -1831,7 +1859,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSIden()
    * @generated
    */
-  int ALS_IDEN = 47;
+  int ALS_IDEN = 48;
 
   /**
    * The number of structural features of the '<em>ALS Iden</em>' class.
@@ -1850,7 +1878,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSUniv()
    * @generated
    */
-  int ALS_UNIV = 48;
+  int ALS_UNIV = 49;
 
   /**
    * The number of structural features of the '<em>ALS Univ</em>' class.
@@ -1869,7 +1897,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSInt()
    * @generated
    */
-  int ALS_INT = 49;
+  int ALS_INT = 50;
 
   /**
    * The number of structural features of the '<em>ALS Int</em>' class.
@@ -1881,6 +1909,25 @@ public interface AlloyLanguagePackage extends EPackage
   int ALS_INT_FEATURE_COUNT = ALS_TERM_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringImpl <em>ALS String</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringImpl
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSString()
+   * @generated
+   */
+  int ALS_STRING = 51;
+
+  /**
+   * The number of structural features of the '<em>ALS String</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALS_STRING_FEATURE_COUNT = ALS_TERM_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSReferenceImpl <em>ALS Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1888,7 +1935,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSReference()
    * @generated
    */
-  int ALS_REFERENCE = 50;
+  int ALS_REFERENCE = 52;
 
   /**
    * The feature id for the '<em><b>Referred</b></em>' reference.
@@ -1916,7 +1963,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSNumberLiteral()
    * @generated
    */
-  int ALS_NUMBER_LITERAL = 51;
+  int ALS_NUMBER_LITERAL = 53;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1937,6 +1984,34 @@ public interface AlloyLanguagePackage extends EPackage
   int ALS_NUMBER_LITERAL_FEATURE_COUNT = ALS_TERM_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringLiteralImpl <em>ALS String Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringLiteralImpl
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSStringLiteral()
+   * @generated
+   */
+  int ALS_STRING_LITERAL = 54;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALS_STRING_LITERAL__VALUE = ALS_TERM_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>ALS String Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALS_STRING_LITERAL_FEATURE_COUNT = ALS_TERM_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSMultiplicity <em>ALS Multiplicity</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1944,7 +2019,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSMultiplicity()
    * @generated
    */
-  int ALS_MULTIPLICITY = 52;
+  int ALS_MULTIPLICITY = 55;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSNumericOperator <em>ALS Numeric Operator</em>}' enum.
@@ -1954,7 +2029,7 @@ public interface AlloyLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSNumericOperator()
    * @generated
    */
-  int ALS_NUMERIC_OPERATOR = 53;
+  int ALS_NUMERIC_OPERATOR = 56;
 
 
   /**
@@ -2433,6 +2508,16 @@ public interface AlloyLanguagePackage extends EPackage
    * @generated
    */
   EClass getALSIntScope();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringScope <em>ALS String Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ALS String Scope</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringScope
+   * @generated
+   */
+  EClass getALSStringScope();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSQuantifiedEx <em>ALS Quantified Ex</em>}'.
@@ -3371,6 +3456,16 @@ public interface AlloyLanguagePackage extends EPackage
   EClass getALSInt();
 
   /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString <em>ALS String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ALS String</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString
+   * @generated
+   */
+  EClass getALSString();
+
+  /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSReference <em>ALS Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3411,6 +3506,27 @@ public interface AlloyLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getALSNumberLiteral_Value();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral <em>ALS String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>ALS String Literal</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral
+   * @generated
+   */
+  EClass getALSStringLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral#getValue()
+   * @see #getALSStringLiteral()
+   * @generated
+   */
+  EAttribute getALSStringLiteral_Value();
 
   /**
    * Returns the meta object for enum '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSMultiplicity <em>ALS Multiplicity</em>}'.
@@ -3850,6 +3966,16 @@ public interface AlloyLanguagePackage extends EPackage
      * @generated
      */
     EClass ALS_INT_SCOPE = eINSTANCE.getALSIntScope();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringScopeImpl <em>ALS String Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringScopeImpl
+     * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSStringScope()
+     * @generated
+     */
+    EClass ALS_STRING_SCOPE = eINSTANCE.getALSStringScope();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSQuantifiedExImpl <em>ALS Quantified Ex</em>}' class.
@@ -4620,6 +4746,16 @@ public interface AlloyLanguagePackage extends EPackage
     EClass ALS_INT = eINSTANCE.getALSInt();
 
     /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringImpl <em>ALS String</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringImpl
+     * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSString()
+     * @generated
+     */
+    EClass ALS_STRING = eINSTANCE.getALSString();
+
+    /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSReferenceImpl <em>ALS Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4654,6 +4790,24 @@ public interface AlloyLanguagePackage extends EPackage
      * @generated
      */
     EAttribute ALS_NUMBER_LITERAL__VALUE = eINSTANCE.getALSNumberLiteral_Value();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringLiteralImpl <em>ALS String Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.ALSStringLiteralImpl
+     * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.impl.AlloyLanguagePackageImpl#getALSStringLiteral()
+     * @generated
+     */
+    EClass ALS_STRING_LITERAL = eINSTANCE.getALSStringLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ALS_STRING_LITERAL__VALUE = eINSTANCE.getALSStringLiteral_Value();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSMultiplicity <em>ALS Multiplicity</em>}' enum.

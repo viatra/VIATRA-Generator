@@ -177,6 +177,7 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 		else if(label == this.logicBooleanTrue) return true
 		else if(label == this.logicBooleanFalse) return false
 		else if(this.alloyAtom2LogicElement.containsKey(label)) return label.lookup(alloyAtom2LogicElement)
+		else if(label.isString) return parseString(label)
 		else throw new IllegalArgumentException('''Unknown atom label: "«label»"!''')
 	}
 	def private isNumber(String s) {
@@ -186,6 +187,12 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 		}catch(NumberFormatException e) {
 			return false
 		}
+	}
+	def private isString(String label) {
+		label.startsWith("\"") && label.endsWith("\"")
+	}
+	def private parseString(String label) {
+		label.substring(1,label.length-1)
 	}
 	
 	override getAllIntegersInStructure() {

@@ -165,6 +165,11 @@ public class AlloyLanguageAdapterFactory extends AdapterFactoryImpl
         return createALSIntScopeAdapter();
       }
       @Override
+      public Adapter caseALSStringScope(ALSStringScope object)
+      {
+        return createALSStringScopeAdapter();
+      }
+      @Override
       public Adapter caseALSQuantifiedEx(ALSQuantifiedEx object)
       {
         return createALSQuantifiedExAdapter();
@@ -325,6 +330,11 @@ public class AlloyLanguageAdapterFactory extends AdapterFactoryImpl
         return createALSIntAdapter();
       }
       @Override
+      public Adapter caseALSString(ALSString object)
+      {
+        return createALSStringAdapter();
+      }
+      @Override
       public Adapter caseALSReference(ALSReference object)
       {
         return createALSReferenceAdapter();
@@ -333,6 +343,11 @@ public class AlloyLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseALSNumberLiteral(ALSNumberLiteral object)
       {
         return createALSNumberLiteralAdapter();
+      }
+      @Override
+      public Adapter caseALSStringLiteral(ALSStringLiteral object)
+      {
+        return createALSStringLiteralAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -622,6 +637,21 @@ public class AlloyLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createALSIntScopeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringScope <em>ALS String Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringScope
+   * @generated
+   */
+  public Adapter createALSStringScopeAdapter()
   {
     return null;
   }
@@ -1107,6 +1137,21 @@ public class AlloyLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString <em>ALS String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString
+   * @generated
+   */
+  public Adapter createALSStringAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSReference <em>ALS Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1132,6 +1177,21 @@ public class AlloyLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createALSNumberLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral <em>ALS String Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral
+   * @generated
+   */
+  public Adapter createALSStringLiteralAdapter()
   {
     return null;
   }

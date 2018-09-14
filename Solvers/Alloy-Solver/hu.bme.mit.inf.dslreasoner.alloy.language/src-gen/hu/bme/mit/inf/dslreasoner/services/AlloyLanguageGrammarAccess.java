@@ -296,7 +296,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//fields+=ALSFieldDeclaration)*)? '}'
 		public Group getGroup() { return cGroup; }
 
-		//(multiplicity=ALSMultiplicity? & abstract?='abstract'?)
+		//multiplicity=ALSMultiplicity? & abstract?='abstract'?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//multiplicity=ALSMultiplicity?
@@ -712,7 +712,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//ALSQuantified ALSTerm:
 		//	{ALSQuantifiedEx} type=ALSMultiplicity
 		//	disj?='disj'? variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)* '{' expression=ALSTerm '}' |
-		//	ALSOr
+		//	ALSOr;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{ALSQuantifiedEx} type=ALSMultiplicity disj?='disj'? variables+=ALSVariableDeclaration (','
@@ -785,7 +785,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSIffParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSOr ALSTerm:
-		//	ALSIff ({ALSOr.leftOperand=current} ("||" | "or") rightOperand=ALSIff)?
+		//	ALSIff ({ALSOr.leftOperand=current} ("||" | "or") rightOperand=ALSIff)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSIff ({ALSOr.leftOperand=current} ("||" | "or") rightOperand=ALSIff)?
@@ -800,7 +800,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{ALSOr.leftOperand=current}
 		public Action getALSOrLeftOperandAction_1_0() { return cALSOrLeftOperandAction_1_0; }
 
-		//("||" | "or")
+		//"||" | "or"
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//"||"
@@ -829,7 +829,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSImplParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSIff ALSTerm:
-		//	ALSImpl ({ALSIff.leftOperand=current} ("<=>" | "iff") rightOperand=ALSImpl)?
+		//	ALSImpl ({ALSIff.leftOperand=current} ("<=>" | "iff") rightOperand=ALSImpl)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSImpl ({ALSIff.leftOperand=current} ("<=>" | "iff") rightOperand=ALSImpl)?
@@ -844,7 +844,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{ALSIff.leftOperand=current}
 		public Action getALSIffLeftOperandAction_1_0() { return cALSIffLeftOperandAction_1_0; }
 
-		//("<=>" | "iff")
+		//"<=>" | "iff"
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//"<=>"
@@ -877,7 +877,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cElseOperandALSAndParserRuleCall_1_3_1_0 = (RuleCall)cElseOperandAssignment_1_3_1.eContents().get(0);
 		
 		//ALSImpl ALSTerm:
-		//	ALSAnd ({ALSImpl.leftOperand=current} ("=>" | "implies") rightOperand=ALSAnd ('else' elseOperand=ALSAnd)?)?
+		//	ALSAnd ({ALSImpl.leftOperand=current} ("=>" | "implies") rightOperand=ALSAnd ('else' elseOperand=ALSAnd)?)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSAnd ({ALSImpl.leftOperand=current} ("=>" | "implies") rightOperand=ALSAnd ('else' elseOperand=ALSAnd)?)?
@@ -892,7 +892,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{ALSImpl.leftOperand=current}
 		public Action getALSImplLeftOperandAction_1_0() { return cALSImplLeftOperandAction_1_0; }
 
-		//("=>" | "implies")
+		//"=>" | "implies"
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//"=>"
@@ -933,7 +933,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSComparisonParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSAnd ALSTerm:
-		//	ALSComparison ({ALSAnd.leftOperand=current} ("&&" | "and") rightOperand=ALSComparison)?
+		//	ALSComparison ({ALSAnd.leftOperand=current} ("&&" | "and") rightOperand=ALSComparison)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSComparison ({ALSAnd.leftOperand=current} ("&&" | "and") rightOperand=ALSComparison)?
@@ -948,7 +948,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{ALSAnd.leftOperand=current}
 		public Action getALSAndLeftOperandAction_1_0() { return cALSAndLeftOperandAction_1_0; }
 
-		//("&&" | "and")
+		//"&&" | "and"
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//"&&"
@@ -997,7 +997,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//ALSComparison ALSTerm:
 		//	ALSOverride (({ALSEquals.leftOperand=current} "=" | {ALSNotEquals.leftOperand=current} "!=" |
 		//	{ALSSubset.leftOperand=current} "in" | {ALSLess.leftOperand=current} ">" | {ALSLeq.leftOperand=current} ">=" |
-		//	{ALSMore.leftOperand=current} "<" | {ALSMeq.leftOperand=current} "<=") rightOperand=ALSOverride)?
+		//	{ALSMore.leftOperand=current} "<" | {ALSMeq.leftOperand=current} "<=") rightOperand=ALSOverride)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSOverride (({ALSEquals.leftOperand=current} "=" | {ALSNotEquals.leftOperand=current} "!=" |
@@ -1013,9 +1013,9 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{ALSMeq.leftOperand=current} "<=") rightOperand=ALSOverride)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//({ALSEquals.leftOperand=current} "=" | {ALSNotEquals.leftOperand=current} "!=" | {ALSSubset.leftOperand=current} "in" |
+		//{ALSEquals.leftOperand=current} "=" | {ALSNotEquals.leftOperand=current} "!=" | {ALSSubset.leftOperand=current} "in" |
 		//{ALSLess.leftOperand=current} ">" | {ALSLeq.leftOperand=current} ">=" | {ALSMore.leftOperand=current} "<" |
-		//{ALSMeq.leftOperand=current} "<=")
+		//{ALSMeq.leftOperand=current} "<="
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
 		//{ALSEquals.leftOperand=current} "="
@@ -1099,7 +1099,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSRangeRestrictionRightParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSOverride ALSTerm:
-		//	ALSRangeRestrictionRight ({ALSOverride.leftOperand=current} '++' rightOperand=ALSRangeRestrictionRight)?
+		//	ALSRangeRestrictionRight ({ALSOverride.leftOperand=current} '++' rightOperand=ALSRangeRestrictionRight)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSRangeRestrictionRight ({ALSOverride.leftOperand=current} '++' rightOperand=ALSRangeRestrictionRight)?
@@ -1135,7 +1135,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFilterALSRangeRestrictionLeftParserRuleCall_1_2_0 = (RuleCall)cFilterAssignment_1_2.eContents().get(0);
 		
 		//ALSRangeRestrictionRight ALSTerm:
-		//	ALSRangeRestrictionLeft ({ALSRangeRestrictionRight.relation=current} ':>' filter=ALSRangeRestrictionLeft)?
+		//	ALSRangeRestrictionLeft ({ALSRangeRestrictionRight.relation=current} ':>' filter=ALSRangeRestrictionLeft)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSRangeRestrictionLeft ({ALSRangeRestrictionRight.relation=current} ':>' filter=ALSRangeRestrictionLeft)?
@@ -1171,7 +1171,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRelationALSJoinParserRuleCall_1_2_0 = (RuleCall)cRelationAssignment_1_2.eContents().get(0);
 		
 		//ALSRangeRestrictionLeft ALSTerm:
-		//	ALSJoin ({ALSRangeRestrictionLeft.filter=current} '<:' relation=ALSJoin)?
+		//	ALSJoin ({ALSRangeRestrictionLeft.filter=current} '<:' relation=ALSJoin)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSJoin ({ALSRangeRestrictionLeft.filter=current} '<:' relation=ALSJoin)?
@@ -1207,7 +1207,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSMinusParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSJoin ALSTerm:
-		//	ALSMinus ({ALSJoin.leftOperand=current} '.' rightOperand=ALSMinus)*
+		//	ALSMinus ({ALSJoin.leftOperand=current} '.' rightOperand=ALSMinus)*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSMinus ({ALSJoin.leftOperand=current} '.' rightOperand=ALSMinus)*
@@ -1243,7 +1243,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSPlusParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSMinus ALSTerm:
-		//	ALSPlus ({ALSMinus.leftOperand=current} '-' rightOperand=ALSPlus)*
+		//	ALSPlus ({ALSMinus.leftOperand=current} '-' rightOperand=ALSPlus)*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSPlus ({ALSMinus.leftOperand=current} '-' rightOperand=ALSPlus)*
@@ -1279,7 +1279,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSIntersectionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSPlus ALSTerm:
-		//	ALSIntersection ({ALSPlus.leftOperand=current} '+' rightOperand=ALSIntersection)*
+		//	ALSIntersection ({ALSPlus.leftOperand=current} '+' rightOperand=ALSIntersection)*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSIntersection ({ALSPlus.leftOperand=current} '+' rightOperand=ALSIntersection)*
@@ -1315,7 +1315,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightOperandALSDirectProductParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
 		
 		//ALSIntersection ALSTerm:
-		//	ALSDirectProduct ({ALSIntersection.leftOperand=current} '&' rightOperand=ALSDirectProduct)*
+		//	ALSDirectProduct ({ALSIntersection.leftOperand=current} '&' rightOperand=ALSDirectProduct)*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSDirectProduct ({ALSIntersection.leftOperand=current} '&' rightOperand=ALSDirectProduct)*
@@ -1359,7 +1359,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//	ALSPreficed ({ALSDirectProduct.leftOperand=current} leftMultiplicit=ALSMultiplicity?
 		//	'->'
 		//	rightMultiplicit=ALSMultiplicity?
-		//	rightOperand=ALSPreficed)?
+		//	rightOperand=ALSPreficed)?;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ALSPreficed ({ALSDirectProduct.leftOperand=current} leftMultiplicit=ALSMultiplicity? '->'
@@ -1472,7 +1472,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//	operand=ALSBasicRelationTerm | {ALSSum} 'sum' variables+=ALSVariableDeclaration (','
 		//	variables+=ALSVariableDeclaration)* '{' expression=ALSTerm '}' | {ALSFunctionCall}
 		//	(referredDefinition=[ALSDefinition] | referredNumericOperator=ALSNumericOperator) '[' params+=ALSTerm (','
-		//	params+=ALSTerm)* ']' | ALSBasicRelationTerm
+		//	params+=ALSTerm)* ']' | ALSBasicRelationTerm;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{ALSNot} => ("!" | 'not') operand=ALSBasicRelationTerm | {ALSInverseRelation} => "~" operand=ALSBasicRelationTerm |
@@ -1492,7 +1492,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//=> ("!" | 'not')
 		public Group getGroup_0_1() { return cGroup_0_1; }
 
-		//("!" | 'not')
+		//"!" | 'not'
 		public Alternatives getAlternatives_0_1_0() { return cAlternatives_0_1_0; }
 
 		//"!"
@@ -1628,7 +1628,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{ALSFunctionCall}
 		public Action getALSFunctionCallAction_7_0() { return cALSFunctionCallAction_7_0; }
 
-		//(referredDefinition=[ALSDefinition] | referredNumericOperator=ALSNumericOperator)
+		//referredDefinition=[ALSDefinition] | referredNumericOperator=ALSNumericOperator
 		public Alternatives getAlternatives_7_1() { return cAlternatives_7_1; }
 
 		//referredDefinition=[ALSDefinition]
@@ -1723,27 +1723,34 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cALSIntAction_3_0 = (Action)cGroup_3.eContents().get(0);
 		private final Keyword cIntKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
 		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
-		private final Action cALSReferenceAction_4_0 = (Action)cGroup_4.eContents().get(0);
-		private final Assignment cReferredAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final CrossReference cReferredALSRelationDeclarationCrossReference_4_1_0 = (CrossReference)cReferredAssignment_4_1.eContents().get(0);
-		private final RuleCall cReferredALSRelationDeclarationIDTerminalRuleCall_4_1_0_1 = (RuleCall)cReferredALSRelationDeclarationCrossReference_4_1_0.eContents().get(1);
+		private final Action cALSStringAction_4_0 = (Action)cGroup_4.eContents().get(0);
+		private final Keyword cStringKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		private final Group cGroup_5 = (Group)cAlternatives.eContents().get(5);
-		private final Action cALSNumberLiteralAction_5_0 = (Action)cGroup_5.eContents().get(0);
-		private final Assignment cValueAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cValueINTTerminalRuleCall_5_1_0 = (RuleCall)cValueAssignment_5_1.eContents().get(0);
+		private final Action cALSReferenceAction_5_0 = (Action)cGroup_5.eContents().get(0);
+		private final Assignment cReferredAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cReferredALSRelationDeclarationCrossReference_5_1_0 = (CrossReference)cReferredAssignment_5_1.eContents().get(0);
+		private final RuleCall cReferredALSRelationDeclarationIDTerminalRuleCall_5_1_0_1 = (RuleCall)cReferredALSRelationDeclarationCrossReference_5_1_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cAlternatives.eContents().get(6);
-		private final Keyword cLeftParenthesisKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final RuleCall cALSTermParserRuleCall_6_1 = (RuleCall)cGroup_6.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_6_2 = (Keyword)cGroup_6.eContents().get(2);
+		private final Action cALSNumberLiteralAction_6_0 = (Action)cGroup_6.eContents().get(0);
+		private final Assignment cValueAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cValueINTTerminalRuleCall_6_1_0 = (RuleCall)cValueAssignment_6_1.eContents().get(0);
+		private final Group cGroup_7 = (Group)cAlternatives.eContents().get(7);
+		private final Action cALSStringLiteralAction_7_0 = (Action)cGroup_7.eContents().get(0);
+		private final Assignment cValueAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_7_1_0 = (RuleCall)cValueAssignment_7_1.eContents().get(0);
+		private final Group cGroup_8 = (Group)cAlternatives.eContents().get(8);
+		private final Keyword cLeftParenthesisKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final RuleCall cALSTermParserRuleCall_8_1 = (RuleCall)cGroup_8.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_8_2 = (Keyword)cGroup_8.eContents().get(2);
 		
 		//ALSBasicRelationTerm ALSTerm:
-		//	{ALSNone} 'none' | {ALSIden} 'iden' | {ALSUniv} 'univ' | {ALSInt} 'Int' | {ALSReference}
-		//	referred=[ALSRelationDeclaration] | {ALSNumberLiteral} value=INT |
-		//	'(' ALSTerm ')'
+		//	{ALSNone} 'none' | {ALSIden} 'iden' | {ALSUniv} 'univ' | {ALSInt} 'Int' | {ALSString} 'String' | {ALSReference}
+		//	referred=[ALSRelationDeclaration] | {ALSNumberLiteral} value=INT | {ALSStringLiteral} value=STRING |
+		//	'(' ALSTerm ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ALSNone} 'none' | {ALSIden} 'iden' | {ALSUniv} 'univ' | {ALSInt} 'Int' | {ALSReference}
-		//referred=[ALSRelationDeclaration] | {ALSNumberLiteral} value=INT | '(' ALSTerm ')'
+		//{ALSNone} 'none' | {ALSIden} 'iden' | {ALSUniv} 'univ' | {ALSInt} 'Int' | {ALSString} 'String' | {ALSReference}
+		//referred=[ALSRelationDeclaration] | {ALSNumberLiteral} value=INT | {ALSStringLiteral} value=STRING | '(' ALSTerm ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{ALSNone} 'none'
@@ -1782,44 +1789,65 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//'Int'
 		public Keyword getIntKeyword_3_1() { return cIntKeyword_3_1; }
 
-		//{ALSReference} referred=[ALSRelationDeclaration]
+		//{ALSString} 'String'
 		public Group getGroup_4() { return cGroup_4; }
 
-		//{ALSReference}
-		public Action getALSReferenceAction_4_0() { return cALSReferenceAction_4_0; }
+		//{ALSString}
+		public Action getALSStringAction_4_0() { return cALSStringAction_4_0; }
 
-		//referred=[ALSRelationDeclaration]
-		public Assignment getReferredAssignment_4_1() { return cReferredAssignment_4_1; }
+		//'String'
+		public Keyword getStringKeyword_4_1() { return cStringKeyword_4_1; }
 
-		//[ALSRelationDeclaration]
-		public CrossReference getReferredALSRelationDeclarationCrossReference_4_1_0() { return cReferredALSRelationDeclarationCrossReference_4_1_0; }
-
-		//ID
-		public RuleCall getReferredALSRelationDeclarationIDTerminalRuleCall_4_1_0_1() { return cReferredALSRelationDeclarationIDTerminalRuleCall_4_1_0_1; }
-
-		//{ALSNumberLiteral} value=INT
+		//{ALSReference} referred=[ALSRelationDeclaration]
 		public Group getGroup_5() { return cGroup_5; }
 
-		//{ALSNumberLiteral}
-		public Action getALSNumberLiteralAction_5_0() { return cALSNumberLiteralAction_5_0; }
+		//{ALSReference}
+		public Action getALSReferenceAction_5_0() { return cALSReferenceAction_5_0; }
 
-		//value=INT
-		public Assignment getValueAssignment_5_1() { return cValueAssignment_5_1; }
+		//referred=[ALSRelationDeclaration]
+		public Assignment getReferredAssignment_5_1() { return cReferredAssignment_5_1; }
 
-		//INT
-		public RuleCall getValueINTTerminalRuleCall_5_1_0() { return cValueINTTerminalRuleCall_5_1_0; }
+		//[ALSRelationDeclaration]
+		public CrossReference getReferredALSRelationDeclarationCrossReference_5_1_0() { return cReferredALSRelationDeclarationCrossReference_5_1_0; }
 
-		//'(' ALSTerm ')'
+		//ID
+		public RuleCall getReferredALSRelationDeclarationIDTerminalRuleCall_5_1_0_1() { return cReferredALSRelationDeclarationIDTerminalRuleCall_5_1_0_1; }
+
+		//{ALSNumberLiteral} value=INT
 		public Group getGroup_6() { return cGroup_6; }
 
+		//{ALSNumberLiteral}
+		public Action getALSNumberLiteralAction_6_0() { return cALSNumberLiteralAction_6_0; }
+
+		//value=INT
+		public Assignment getValueAssignment_6_1() { return cValueAssignment_6_1; }
+
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_6_1_0() { return cValueINTTerminalRuleCall_6_1_0; }
+
+		//{ALSStringLiteral} value=STRING
+		public Group getGroup_7() { return cGroup_7; }
+
+		//{ALSStringLiteral}
+		public Action getALSStringLiteralAction_7_0() { return cALSStringLiteralAction_7_0; }
+
+		//value=STRING
+		public Assignment getValueAssignment_7_1() { return cValueAssignment_7_1; }
+
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_7_1_0() { return cValueSTRINGTerminalRuleCall_7_1_0; }
+
+		//'(' ALSTerm ')'
+		public Group getGroup_8() { return cGroup_8; }
+
 		//'('
-		public Keyword getLeftParenthesisKeyword_6_0() { return cLeftParenthesisKeyword_6_0; }
+		public Keyword getLeftParenthesisKeyword_8_0() { return cLeftParenthesisKeyword_8_0; }
 
 		//ALSTerm
-		public RuleCall getALSTermParserRuleCall_6_1() { return cALSTermParserRuleCall_6_1; }
+		public RuleCall getALSTermParserRuleCall_8_1() { return cALSTermParserRuleCall_8_1; }
 
 		//')'
-		public Keyword getRightParenthesisKeyword_6_2() { return cRightParenthesisKeyword_6_2; }
+		public Keyword getRightParenthesisKeyword_8_2() { return cRightParenthesisKeyword_8_2; }
 	}
 
 	public class ALSRunCommandElements extends AbstractParserRuleElementFinder {
@@ -1890,12 +1918,13 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cALSSigScopeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cALSIntScopeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cALSStringScopeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//ALSTypeScope:
-		//	ALSSigScope | ALSIntScope;
+		//	ALSSigScope | ALSIntScope | ALSStringScope;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ALSSigScope | ALSIntScope
+		//ALSSigScope | ALSIntScope | ALSStringScope
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ALSSigScope
@@ -1903,6 +1932,9 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ALSIntScope
 		public RuleCall getALSIntScopeParserRuleCall_1() { return cALSIntScopeParserRuleCall_1; }
+
+		//ALSStringScope
+		public RuleCall getALSStringScopeParserRuleCall_2() { return cALSStringScopeParserRuleCall_2; }
 	}
 
 	public class ALSSigScopeElements extends AbstractParserRuleElementFinder {
@@ -1967,6 +1999,34 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'Int'
 		public Keyword getIntKeyword_1() { return cIntKeyword_1; }
+	}
+
+	public class ALSStringScopeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.AlloyLanguage.ALSStringScope");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cExactlyKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNumberAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNumberINTTerminalRuleCall_1_0 = (RuleCall)cNumberAssignment_1.eContents().get(0);
+		private final Keyword cStringKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//ALSStringScope:
+		//	'exactly' number=INT 'String';
+		@Override public ParserRule getRule() { return rule; }
+
+		//'exactly' number=INT 'String'
+		public Group getGroup() { return cGroup; }
+
+		//'exactly'
+		public Keyword getExactlyKeyword_0() { return cExactlyKeyword_0; }
+
+		//number=INT
+		public Assignment getNumberAssignment_1() { return cNumberAssignment_1; }
+
+		//INT
+		public RuleCall getNumberINTTerminalRuleCall_1_0() { return cNumberINTTerminalRuleCall_1_0; }
+
+		//'String'
+		public Keyword getStringKeyword_2() { return cStringKeyword_2; }
 	}
 	
 	
@@ -2120,6 +2180,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final ALSTypeScopeElements pALSTypeScope;
 	private final ALSSigScopeElements pALSSigScope;
 	private final ALSIntScopeElements pALSIntScope;
+	private final ALSStringScopeElements pALSStringScope;
 	
 	private final Grammar grammar;
 
@@ -2168,6 +2229,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pALSTypeScope = new ALSTypeScopeElements();
 		this.pALSSigScope = new ALSSigScopeElements();
 		this.pALSIntScope = new ALSIntScopeElements();
+		this.pALSStringScope = new ALSStringScopeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2374,7 +2436,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//ALSQuantified ALSTerm:
 	//	{ALSQuantifiedEx} type=ALSMultiplicity
 	//	disj?='disj'? variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)* '{' expression=ALSTerm '}' |
-	//	ALSOr
+	//	ALSOr;
 	public ALSQuantifiedElements getALSQuantifiedAccess() {
 		return pALSQuantified;
 	}
@@ -2384,7 +2446,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSOr ALSTerm:
-	//	ALSIff ({ALSOr.leftOperand=current} ("||" | "or") rightOperand=ALSIff)?
+	//	ALSIff ({ALSOr.leftOperand=current} ("||" | "or") rightOperand=ALSIff)?;
 	public ALSOrElements getALSOrAccess() {
 		return pALSOr;
 	}
@@ -2394,7 +2456,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSIff ALSTerm:
-	//	ALSImpl ({ALSIff.leftOperand=current} ("<=>" | "iff") rightOperand=ALSImpl)?
+	//	ALSImpl ({ALSIff.leftOperand=current} ("<=>" | "iff") rightOperand=ALSImpl)?;
 	public ALSIffElements getALSIffAccess() {
 		return pALSIff;
 	}
@@ -2404,7 +2466,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSImpl ALSTerm:
-	//	ALSAnd ({ALSImpl.leftOperand=current} ("=>" | "implies") rightOperand=ALSAnd ('else' elseOperand=ALSAnd)?)?
+	//	ALSAnd ({ALSImpl.leftOperand=current} ("=>" | "implies") rightOperand=ALSAnd ('else' elseOperand=ALSAnd)?)?;
 	public ALSImplElements getALSImplAccess() {
 		return pALSImpl;
 	}
@@ -2414,7 +2476,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSAnd ALSTerm:
-	//	ALSComparison ({ALSAnd.leftOperand=current} ("&&" | "and") rightOperand=ALSComparison)?
+	//	ALSComparison ({ALSAnd.leftOperand=current} ("&&" | "and") rightOperand=ALSComparison)?;
 	public ALSAndElements getALSAndAccess() {
 		return pALSAnd;
 	}
@@ -2426,7 +2488,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//ALSComparison ALSTerm:
 	//	ALSOverride (({ALSEquals.leftOperand=current} "=" | {ALSNotEquals.leftOperand=current} "!=" |
 	//	{ALSSubset.leftOperand=current} "in" | {ALSLess.leftOperand=current} ">" | {ALSLeq.leftOperand=current} ">=" |
-	//	{ALSMore.leftOperand=current} "<" | {ALSMeq.leftOperand=current} "<=") rightOperand=ALSOverride)?
+	//	{ALSMore.leftOperand=current} "<" | {ALSMeq.leftOperand=current} "<=") rightOperand=ALSOverride)?;
 	public ALSComparisonElements getALSComparisonAccess() {
 		return pALSComparison;
 	}
@@ -2436,7 +2498,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSOverride ALSTerm:
-	//	ALSRangeRestrictionRight ({ALSOverride.leftOperand=current} '++' rightOperand=ALSRangeRestrictionRight)?
+	//	ALSRangeRestrictionRight ({ALSOverride.leftOperand=current} '++' rightOperand=ALSRangeRestrictionRight)?;
 	public ALSOverrideElements getALSOverrideAccess() {
 		return pALSOverride;
 	}
@@ -2446,7 +2508,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSRangeRestrictionRight ALSTerm:
-	//	ALSRangeRestrictionLeft ({ALSRangeRestrictionRight.relation=current} ':>' filter=ALSRangeRestrictionLeft)?
+	//	ALSRangeRestrictionLeft ({ALSRangeRestrictionRight.relation=current} ':>' filter=ALSRangeRestrictionLeft)?;
 	public ALSRangeRestrictionRightElements getALSRangeRestrictionRightAccess() {
 		return pALSRangeRestrictionRight;
 	}
@@ -2456,7 +2518,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSRangeRestrictionLeft ALSTerm:
-	//	ALSJoin ({ALSRangeRestrictionLeft.filter=current} '<:' relation=ALSJoin)?
+	//	ALSJoin ({ALSRangeRestrictionLeft.filter=current} '<:' relation=ALSJoin)?;
 	public ALSRangeRestrictionLeftElements getALSRangeRestrictionLeftAccess() {
 		return pALSRangeRestrictionLeft;
 	}
@@ -2466,7 +2528,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSJoin ALSTerm:
-	//	ALSMinus ({ALSJoin.leftOperand=current} '.' rightOperand=ALSMinus)*
+	//	ALSMinus ({ALSJoin.leftOperand=current} '.' rightOperand=ALSMinus)*;
 	public ALSJoinElements getALSJoinAccess() {
 		return pALSJoin;
 	}
@@ -2476,7 +2538,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSMinus ALSTerm:
-	//	ALSPlus ({ALSMinus.leftOperand=current} '-' rightOperand=ALSPlus)*
+	//	ALSPlus ({ALSMinus.leftOperand=current} '-' rightOperand=ALSPlus)*;
 	public ALSMinusElements getALSMinusAccess() {
 		return pALSMinus;
 	}
@@ -2486,7 +2548,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSPlus ALSTerm:
-	//	ALSIntersection ({ALSPlus.leftOperand=current} '+' rightOperand=ALSIntersection)*
+	//	ALSIntersection ({ALSPlus.leftOperand=current} '+' rightOperand=ALSIntersection)*;
 	public ALSPlusElements getALSPlusAccess() {
 		return pALSPlus;
 	}
@@ -2496,7 +2558,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSIntersection ALSTerm:
-	//	ALSDirectProduct ({ALSIntersection.leftOperand=current} '&' rightOperand=ALSDirectProduct)*
+	//	ALSDirectProduct ({ALSIntersection.leftOperand=current} '&' rightOperand=ALSDirectProduct)*;
 	public ALSIntersectionElements getALSIntersectionAccess() {
 		return pALSIntersection;
 	}
@@ -2510,7 +2572,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//	ALSPreficed ({ALSDirectProduct.leftOperand=current} leftMultiplicit=ALSMultiplicity?
 	//	'->'
 	//	rightMultiplicit=ALSMultiplicity?
-	//	rightOperand=ALSPreficed)?
+	//	rightOperand=ALSPreficed)?;
 	public ALSDirectProductElements getALSDirectProductAccess() {
 		return pALSDirectProduct;
 	}
@@ -2526,7 +2588,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//	operand=ALSBasicRelationTerm | {ALSSum} 'sum' variables+=ALSVariableDeclaration (','
 	//	variables+=ALSVariableDeclaration)* '{' expression=ALSTerm '}' | {ALSFunctionCall}
 	//	(referredDefinition=[ALSDefinition] | referredNumericOperator=ALSNumericOperator) '[' params+=ALSTerm (','
-	//	params+=ALSTerm)* ']' | ALSBasicRelationTerm
+	//	params+=ALSTerm)* ']' | ALSBasicRelationTerm;
 	public ALSPreficedElements getALSPreficedAccess() {
 		return pALSPreficed;
 	}
@@ -2557,9 +2619,9 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSBasicRelationTerm ALSTerm:
-	//	{ALSNone} 'none' | {ALSIden} 'iden' | {ALSUniv} 'univ' | {ALSInt} 'Int' | {ALSReference}
-	//	referred=[ALSRelationDeclaration] | {ALSNumberLiteral} value=INT |
-	//	'(' ALSTerm ')'
+	//	{ALSNone} 'none' | {ALSIden} 'iden' | {ALSUniv} 'univ' | {ALSInt} 'Int' | {ALSString} 'String' | {ALSReference}
+	//	referred=[ALSRelationDeclaration] | {ALSNumberLiteral} value=INT | {ALSStringLiteral} value=STRING |
+	//	'(' ALSTerm ')';
 	public ALSBasicRelationTermElements getALSBasicRelationTermAccess() {
 		return pALSBasicRelationTerm;
 	}
@@ -2582,7 +2644,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ALSTypeScope:
-	//	ALSSigScope | ALSIntScope;
+	//	ALSSigScope | ALSIntScope | ALSStringScope;
 	public ALSTypeScopeElements getALSTypeScopeAccess() {
 		return pALSTypeScope;
 	}
@@ -2611,6 +2673,16 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getALSIntScopeAccess().getRule();
 	}
 
+	//ALSStringScope:
+	//	'exactly' number=INT 'String';
+	public ALSStringScopeElements getALSStringScopeAccess() {
+		return pALSStringScope;
+	}
+	
+	public ParserRule getALSStringScopeRule() {
+		return getALSStringScopeAccess().getRule();
+	}
+
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
@@ -2624,7 +2696,7 @@ public class AlloyLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 

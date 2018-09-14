@@ -47,6 +47,9 @@ import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSRunCommand;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSigScope;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSignatureBody;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSignatureDeclaration;
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString;
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral;
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringScope;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSubset;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSum;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSTerm;
@@ -200,6 +203,13 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
    * @generated
    */
   private EClass alsIntScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass alsStringScopeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -430,6 +440,13 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass alsStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass alsReferenceEClass = null;
 
   /**
@@ -438,6 +455,13 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
    * @generated
    */
   private EClass alsNumberLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass alsStringLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -964,6 +988,16 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
   public EClass getALSIntScope()
   {
     return alsIntScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getALSStringScope()
+  {
+    return alsStringScopeEClass;
   }
 
   /**
@@ -1851,6 +1885,16 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getALSString()
+  {
+    return alsStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getALSReference()
   {
     return alsReferenceEClass;
@@ -1884,6 +1928,26 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
   public EAttribute getALSNumberLiteral_Value()
   {
     return (EAttribute)alsNumberLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getALSStringLiteral()
+  {
+    return alsStringLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getALSStringLiteral_Value()
+  {
+    return (EAttribute)alsStringLiteralEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1998,6 +2062,8 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
     createEReference(alsSigScopeEClass, ALS_SIG_SCOPE__TYPE);
 
     alsIntScopeEClass = createEClass(ALS_INT_SCOPE);
+
+    alsStringScopeEClass = createEClass(ALS_STRING_SCOPE);
 
     alsQuantifiedExEClass = createEClass(ALS_QUANTIFIED_EX);
     createEAttribute(alsQuantifiedExEClass, ALS_QUANTIFIED_EX__TYPE);
@@ -2119,11 +2185,16 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
 
     alsIntEClass = createEClass(ALS_INT);
 
+    alsStringEClass = createEClass(ALS_STRING);
+
     alsReferenceEClass = createEClass(ALS_REFERENCE);
     createEReference(alsReferenceEClass, ALS_REFERENCE__REFERRED);
 
     alsNumberLiteralEClass = createEClass(ALS_NUMBER_LITERAL);
     createEAttribute(alsNumberLiteralEClass, ALS_NUMBER_LITERAL__VALUE);
+
+    alsStringLiteralEClass = createEClass(ALS_STRING_LITERAL);
+    createEAttribute(alsStringLiteralEClass, ALS_STRING_LITERAL__VALUE);
 
     // Create enums
     alsMultiplicityEEnum = createEEnum(ALS_MULTIPLICITY);
@@ -2169,6 +2240,7 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
     alsVariableDeclarationEClass.getESuperTypes().add(this.getALSRelationDeclaration());
     alsSigScopeEClass.getESuperTypes().add(this.getALSTypeScope());
     alsIntScopeEClass.getESuperTypes().add(this.getALSTypeScope());
+    alsStringScopeEClass.getESuperTypes().add(this.getALSTypeScope());
     alsQuantifiedExEClass.getESuperTypes().add(this.getALSTerm());
     alsOrEClass.getESuperTypes().add(this.getALSTerm());
     alsIffEClass.getESuperTypes().add(this.getALSTerm());
@@ -2201,8 +2273,10 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
     alsIdenEClass.getESuperTypes().add(this.getALSTerm());
     alsUnivEClass.getESuperTypes().add(this.getALSTerm());
     alsIntEClass.getESuperTypes().add(this.getALSTerm());
+    alsStringEClass.getESuperTypes().add(this.getALSTerm());
     alsReferenceEClass.getESuperTypes().add(this.getALSTerm());
     alsNumberLiteralEClass.getESuperTypes().add(this.getALSTerm());
+    alsStringLiteralEClass.getESuperTypes().add(this.getALSTerm());
 
     // Initialize classes and features; add operations and parameters
     initEClass(alsDocumentEClass, ALSDocument.class, "ALSDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2267,6 +2341,8 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
     initEReference(getALSSigScope_Type(), this.getALSSignatureDeclaration(), null, "type", null, 0, 1, ALSSigScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(alsIntScopeEClass, ALSIntScope.class, "ALSIntScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(alsStringScopeEClass, ALSStringScope.class, "ALSStringScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(alsQuantifiedExEClass, ALSQuantifiedEx.class, "ALSQuantifiedEx", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getALSQuantifiedEx_Type(), this.getALSMultiplicity(), "type", null, 0, 1, ALSQuantifiedEx.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2388,11 +2464,16 @@ public class AlloyLanguagePackageImpl extends EPackageImpl implements AlloyLangu
 
     initEClass(alsIntEClass, ALSInt.class, "ALSInt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(alsStringEClass, ALSString.class, "ALSString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(alsReferenceEClass, ALSReference.class, "ALSReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getALSReference_Referred(), this.getALSRelationDeclaration(), null, "referred", null, 0, 1, ALSReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(alsNumberLiteralEClass, ALSNumberLiteral.class, "ALSNumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getALSNumberLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, ALSNumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(alsStringLiteralEClass, ALSStringLiteral.class, "ALSStringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getALSStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, ALSStringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(alsMultiplicityEEnum, ALSMultiplicity.class, "ALSMultiplicity");

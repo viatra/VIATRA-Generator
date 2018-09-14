@@ -210,6 +210,14 @@ public class AlloyLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AlloyLanguagePackage.ALS_STRING_SCOPE:
+      {
+        ALSStringScope alsStringScope = (ALSStringScope)theEObject;
+        T result = caseALSStringScope(alsStringScope);
+        if (result == null) result = caseALSTypeScope(alsStringScope);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AlloyLanguagePackage.ALS_QUANTIFIED_EX:
       {
         ALSQuantifiedEx alsQuantifiedEx = (ALSQuantifiedEx)theEObject;
@@ -466,6 +474,14 @@ public class AlloyLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AlloyLanguagePackage.ALS_STRING:
+      {
+        ALSString alsString = (ALSString)theEObject;
+        T result = caseALSString(alsString);
+        if (result == null) result = caseALSTerm(alsString);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AlloyLanguagePackage.ALS_REFERENCE:
       {
         ALSReference alsReference = (ALSReference)theEObject;
@@ -479,6 +495,14 @@ public class AlloyLanguageSwitch<T> extends Switch<T>
         ALSNumberLiteral alsNumberLiteral = (ALSNumberLiteral)theEObject;
         T result = caseALSNumberLiteral(alsNumberLiteral);
         if (result == null) result = caseALSTerm(alsNumberLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AlloyLanguagePackage.ALS_STRING_LITERAL:
+      {
+        ALSStringLiteral alsStringLiteral = (ALSStringLiteral)theEObject;
+        T result = caseALSStringLiteral(alsStringLiteral);
+        if (result == null) result = caseALSTerm(alsStringLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -770,6 +794,22 @@ public class AlloyLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseALSIntScope(ALSIntScope object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ALS String Scope</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ALS String Scope</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseALSStringScope(ALSStringScope object)
   {
     return null;
   }
@@ -1287,6 +1327,22 @@ public class AlloyLanguageSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>ALS String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ALS String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseALSString(ALSString object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>ALS Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1314,6 +1370,22 @@ public class AlloyLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseALSNumberLiteral(ALSNumberLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>ALS String Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>ALS String Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseALSStringLiteral(ALSStringLiteral object)
   {
     return null;
   }
