@@ -186,6 +186,7 @@ class GenerationTaskExecutor {
 				console.writeMessage("Model generation started")
 				for(run : 1..runs) {
 					monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»''')
+					val visualisationProgressMonitor= new EclipseBasedProgressMonitor(monitor)
 					
 					// 6.2 For each run, the configuration and the workspace is adjusted
 					solverLoader.setRunIndex(solverConfig,configurationMap,run,console)
@@ -240,44 +241,44 @@ class GenerationTaskExecutor {
 										dotRepresentations += outputWorkspaceForRun.getFile(dotFileName)
 									}
 									else {
-										dotRepresentations += null
+										dotRepresentations.add(null)
 									}
 								} else {
-									gmlRepresentations += null
-									dotRepresentations += null
+									gmlRepresentations.add(null)
+									dotRepresentations.add(null)
 								}
 							}
-							monitor.worked(100)
+							visualisationProgressMonitor.worked(1.0/interpretations.size)
 						}
 						if(!emfRepresentations.empty) {
 							console.writeMessage(
-								'''Models:         «FOR f : emfRepresentations»#«ENDFOR»''',
+								'''Models:         «FOR f : emfRepresentations.filterNull»#«ENDFOR»''',
 								"#",
-								emfRepresentations.map[
+								emfRepresentations.filterNull.map[
 									new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
 								]
 							)
 						}
 						if(!gmlRepresentations.empty) {
 							console.writeMessage(
-								'''Visualisations: «FOR f : gmlRepresentations»#«ENDFOR»''',
+								'''Visualisations: «FOR f : gmlRepresentations.filterNull»#«ENDFOR»''',
 								"#",
-								gmlRepresentations.map[
+								gmlRepresentations.filterNull.map[
 									new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
 								]
 							)
 						}
 						if(!dotRepresentations.empty) {
 							console.writeMessage(
-								'''Visualisations: «FOR f : dotRepresentations»#«ENDFOR»''',
+								'''Visualisations: «FOR f : dotRepresentations.filterNull»#«ENDFOR»''',
 								"#",
-								dotRepresentations.map[
+								dotRepresentations.filterNull.map[
 									new ScriptConsoleDecorator('''«it.fileRepresentationInConsole»''',it)
 								]
 							)
 						}					
 					} else {
-						monitor.worked(solverConfig.solutionScope.numberOfRequiredSolution*100)
+						visualisationProgressMonitor.worked(1.0)
 					}
 					solutionVisualisationTime = System.nanoTime - solutionVisualisationTime
 					

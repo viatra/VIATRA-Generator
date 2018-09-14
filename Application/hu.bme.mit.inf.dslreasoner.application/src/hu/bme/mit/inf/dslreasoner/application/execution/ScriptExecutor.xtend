@@ -102,12 +102,12 @@ class ScriptExecutor {
 	/**
 	 * Mapping time = 100
 	 * Solving = 1000 * runs
-	 * Visualisation = runs * number * 100
+	 * Visualisation = 1000 * runs
 	 */
 	def protected dispatch getTotalWork(GenerationTask task) {
 		val runs = if(task.runSpecified) { task.runs } else { 1	}
 		val number = if(task.numberSpecified) { task.number } else { 1 }
-		return 100 + runs*1000 +runs*number*100
+		return 100 + runs*1000 +runs*1000
 	}
 	def protected dispatch getTotalWork(Task task) {
 		throw new IllegalArgumentException('''Unsupported task type: «task.class.simpleName»!''')
