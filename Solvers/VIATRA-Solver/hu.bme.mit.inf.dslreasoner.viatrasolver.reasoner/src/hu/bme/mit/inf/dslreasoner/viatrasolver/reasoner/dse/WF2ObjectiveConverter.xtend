@@ -18,7 +18,7 @@ class WF2ObjectiveConverter {
 	{
 		val res = new ConstraintsObjective('''unfinishedWFs''',
 			unfinishedWF.map[
-				new QueryConstraint(it.fullyQualifiedName,it,1.0)
+				new QueryConstraint(it.fullyQualifiedName,it,2.0)
 			].toList
 		)
 		res.withComparator(Comparators.LOWER_IS_BETTER)
