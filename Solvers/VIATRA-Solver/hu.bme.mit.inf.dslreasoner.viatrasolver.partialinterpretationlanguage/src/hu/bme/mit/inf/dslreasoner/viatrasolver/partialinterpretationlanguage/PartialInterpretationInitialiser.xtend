@@ -41,6 +41,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialComplexTypeInterpretation> type2Interpretation
@@ -201,9 +202,23 @@ class PartialInterpretationInitialiser {
 			val typeInterpretation = typeDeclaration.initialisePartialTypeInterpretation(engine)
 			interpretation.partialtypeinterpratation += typeInterpretation
 			type2Interpretation.put(typeDeclaration,typeInterpretation)
+			interpretation.scopes += initialiseTypeScope(typeInterpretation, minNewElementsByType.get(typeDeclaration),maxNewElementsByType.get(typeDeclaration))
+			
 		}
 		interpretation.problem.connectSuperypes(type2Interpretation)
 		return type2Interpretation
+	}
+	
+	def private initialiseTypeScope(PartialTypeInterpratation interpretation, Integer min, Integer max) {
+		val res = createScope
+		res.targetTypeInterpretation = interpretation
+		if(min !== null) {
+			res.minNewElements = min
+		}
+		if(max !== null) {
+			res.maxNewElements = max
+		}
+		return res
 	}
 	
 	def private connectSuperypes(LogicProblem problem, Map<TypeDeclaration, PartialComplexTypeInterpretation> trace) {
