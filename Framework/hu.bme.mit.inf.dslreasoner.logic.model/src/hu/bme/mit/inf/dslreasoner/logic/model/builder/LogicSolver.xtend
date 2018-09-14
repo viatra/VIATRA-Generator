@@ -203,5 +203,5 @@ public abstract class SolverProgressMonitor {
 	}
 }
 public class NullSolverProgressMonitor extends SolverProgressMonitor {
-	override protected processWorked(double amount) { throw new UnsupportedOperationException("TODO: auto-generated method stub") }
+	override protected processWorked(double amount) {  }
 }
