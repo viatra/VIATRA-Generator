@@ -24,6 +24,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeCo
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
 
 class RelationDefinitionIndexer {
 	val PatternGenerator base;
@@ -135,6 +136,35 @@ class RelationDefinitionIndexer {
 				return base.referAttributeByName(key,
 					constraint.getVariableInTuple(0).canonizeName,
 					constraint.getVariableInTuple(1).canonizeName,
+					modality.toMustMay)
+			} else throw new UnsupportedOperationException('''unknown key: «key.class»''')
+		} else {
+			throw new UnsupportedOperationException('''Unsupported touple size: «touple.size»''')
+		}
+	}
+	private dispatch def transformConstraint(TypeFilterConstraint constraint, Modality modality) {
+		val touple = constraint.variablesTuple
+		if(touple.size == 1) {
+			val inputKey = constraint.equivalentJudgement.inputKey
+			if(inputKey instanceof EClassTransitiveInstancesKey) {
+				return base.typeIndexer.referInstanceOf(inputKey.emfKey,modality.toMustMay,
+					(constraint.getVariablesTuple.get(0) as PVariable).canonizeName)
+			} else if(inputKey instanceof EDataTypeInSlotsKey){
+				return '''// type constraint is enforced by construction'''
+			}
+			
+		} else if(touple.size == 2){
+			val key = (constraint.equivalentJudgement.inputKey as EStructuralFeatureInstancesKey).emfKey
+			if(key instanceof EReference) {
+				return base.referRelationByName(
+					key,
+					(constraint.getVariablesTuple.get(0) as PVariable).canonizeName,
+					(constraint.getVariablesTuple.get(1) as PVariable).canonizeName,
+					modality.toMustMay)
+			} else if (key instanceof EAttribute) {
+				return base.referAttributeByName(key,
+					(constraint.getVariablesTuple.get(0) as PVariable).canonizeName,
+					(constraint.getVariablesTuple.get(1) as PVariable).canonizeName,
 					modality.toMustMay)
 			} else throw new UnsupportedOperationException('''unknown key: «key.class»''')
 		} else {

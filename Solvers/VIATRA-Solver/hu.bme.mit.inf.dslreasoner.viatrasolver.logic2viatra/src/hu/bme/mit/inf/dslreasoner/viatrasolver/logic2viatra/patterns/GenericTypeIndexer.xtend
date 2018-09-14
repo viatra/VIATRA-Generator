@@ -155,6 +155,11 @@ class GenericTypeIndexer extends TypeIndexer {
 		find supertypeStar(type,definedSupertype);
 		TypeDefinition(definedSupertype);
 	}
+	
+	private pattern scopeDisallowsNewElementsFromType(typeInterpretation:PartialComplexTypeInterpretation) {
+		Scope.targetTypeInterpretation(scope,typeInterpretation);
+		Scope.maxNewElements(scope,0);
+	}
 	'''
 	
 	public override generateInstanceOfQueries(LogicProblem problem, PartialInterpretation emptySolution,TypeAnalysisResult typeAnalysisResult) {
@@ -190,6 +195,7 @@ class GenericTypeIndexer extends TypeIndexer {
 			Type.name(type,"«type.name»");
 			find possibleDynamicType(problem,interpretation,dynamic,element);
 			find supertypeStar(dynamic,type);
+			neg find scopeDisallowsNewElementsFromType(dynamic);
 		}
 		'''
 	}

@@ -6,6 +6,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationStatistics
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ScopePropagator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.ObjectCreationPrecondition
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
@@ -31,6 +32,7 @@ class RefinementRuleProvider {
 	def LinkedHashMap<ObjectCreationPrecondition, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>> 
 		createObjectRefinementRules(
 			GeneratedPatterns patterns,
+			ScopePropagator scopePropagator,
 			boolean nameNewElement,
 			ModelGenerationStatistics statistics
 		)
@@ -41,7 +43,7 @@ class RefinementRuleProvider {
 			val inverseRelation = LHSEntry.key.inverseContainment
 			val type = LHSEntry.key.newType
 			val lhs = LHSEntry.value as IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>>
-			val rule = createObjectCreationRule(containmentRelation,inverseRelation,type,lhs,nameNewElement,statistics)
+			val rule = createObjectCreationRule(containmentRelation,inverseRelation,type,lhs,nameNewElement,scopePropagator,statistics)
 			res.put(LHSEntry.key,rule)
 		}
 		return res
@@ -53,6 +55,7 @@ class RefinementRuleProvider {
 		Type type,
 		IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs,
 		boolean nameNewElement,
+		ScopePropagator scopePropagator,
 		ModelGenerationStatistics statistics)
 	{
 		val name = '''addObject_«type.name.canonizeName»«
@@ -80,10 +83,10 @@ class RefinementRuleProvider {
 					
 					// Existence
 					interpretation.newElements+=newElement
-					interpretation.maxNewElements=interpretation.maxNewElements-1
+					/*interpretation.maxNewElements=interpretation.maxNewElements-1
 					if(interpretation.minNewElements > 0) {
 						interpretation.minNewElements=interpretation.minNewElements-1
-					}
+					}*/
 					
 					// Types
 					typeInterpretation.elements += newElement
@@ -94,6 +97,10 @@ class RefinementRuleProvider {
 					// Inverse Containment
 					val newLink2 = factory2.createBinaryElementRelationLink => [it.param1 = newElement it.param2 = container]
 					inverseRelationInterpretation.relationlinks+=newLink2
+					
+					// Scope propagation
+					scopePropagator.propagateAdditionToType(typeInterpretation)
+					
 					statistics.addExecutionTime(System.nanoTime-startTime)
 				]
 			} else {
@@ -113,10 +120,10 @@ class RefinementRuleProvider {
 					
 					// Existence
 					interpretation.newElements+=newElement
-					interpretation.maxNewElements=interpretation.maxNewElements-1
+					/*interpretation.maxNewElements=interpretation.maxNewElements-1
 					if(interpretation.minNewElements > 0) {
 						interpretation.minNewElements=interpretation.minNewElements-1
-					}
+					}*/
 					
 					// Types
 					typeInterpretation.elements += newElement
@@ -124,6 +131,10 @@ class RefinementRuleProvider {
 					// ContainmentRelation
 					val newLink = factory2.createBinaryElementRelationLink => [it.param1 = container it.param2 = newElement]
 					relationInterpretation.relationlinks+=newLink
+					
+					// Scope propagation
+					scopePropagator.propagateAdditionToType(typeInterpretation)
+					
 					statistics.addExecutionTime(System.nanoTime-startTime)
 				]
 			}
@@ -141,14 +152,18 @@ class RefinementRuleProvider {
 				
 				// Existence
 				interpretation.newElements+=newElement
+				/*
 				interpretation.maxNewElements=interpretation.maxNewElements-1
 				if(interpretation.minNewElements > 0) {
 					interpretation.minNewElements=interpretation.minNewElements-1
-				}
+				}*/
 				
 				// Types
 				typeInterpretation.elements += newElement
 				typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
+				
+				// Scope propagation
+				scopePropagator.propagateAdditionToType(typeInterpretation)
 				
 				statistics.addExecutionTime(System.nanoTime-startTime)
 			]
