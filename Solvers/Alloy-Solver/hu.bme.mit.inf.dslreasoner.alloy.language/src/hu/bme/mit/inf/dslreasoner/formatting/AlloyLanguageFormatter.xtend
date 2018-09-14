@@ -86,8 +86,8 @@ class AlloyLanguageFormatter extends AbstractDeclarativeFormatter {
 //		c.setLinewrap.before(ALSPreficedAccess.rightCurlyBracketKeyword_5_6)
 //		c.setIndentationDecrement.before(ALSPreficedAccess.rightCurlyBracketKeyword_5_6)
 		
-		c.setNoSpace.after(ALSBasicRelationTermAccess.leftParenthesisKeyword_6_0)
-		c.setNoSpace.before(ALSBasicRelationTermAccess.rightParenthesisKeyword_6_2)
+		c.setNoSpace.after(ALSBasicRelationTermAccess.leftParenthesisKeyword_8_0)
+		c.setNoSpace.before(ALSBasicRelationTermAccess.rightParenthesisKeyword_8_2)
 		
 		// Quantified expression
 		c.setNoSpace.before(ALSQuantifiedAccess.commaKeyword_0_4_0)

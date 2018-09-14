@@ -91,6 +91,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ALSSignatureDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ALSIntScope" eSuperTypes="#//ALSTypeScope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSStringScope" eSuperTypes="#//ALSTypeScope"/>
   <eClassifiers xsi:type="ecore:EClass" name="ALSQuantifiedEx" eSuperTypes="#//ALSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ALSMultiplicity"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disj" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -258,10 +259,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="ALSIden" eSuperTypes="#//ALSTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="ALSUniv" eSuperTypes="#//ALSTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="ALSInt" eSuperTypes="#//ALSTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSString" eSuperTypes="#//ALSTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="ALSReference" eSuperTypes="#//ALSTerm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//ALSRelationDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ALSNumberLiteral" eSuperTypes="#//ALSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ALSStringLiteral" eSuperTypes="#//ALSTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

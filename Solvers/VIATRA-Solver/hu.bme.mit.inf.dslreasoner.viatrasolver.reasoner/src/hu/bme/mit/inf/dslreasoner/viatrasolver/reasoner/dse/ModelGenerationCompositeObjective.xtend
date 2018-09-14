@@ -63,7 +63,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 		sum+=multiplicity
 		sum += unfinishedWFsFitness//*0.5
 		
-//		println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
+		//println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
 		
 		return sum
 	}

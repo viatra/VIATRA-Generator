@@ -128,12 +128,14 @@ enum ALSNumericOperator: plus|sub|mul|rem|div;
 ALSVariableDeclaration: name=ALSID ':'  range = ALSTerm;
 
 ALSBasicRelationTerm returns ALSTerm: 
-	{ALSNone} 'none'|
-	{ALSIden} 'iden'|
-	{ALSUniv} 'univ'|
-	{ALSInt}  'Int' |
+	{ALSNone}   'none'|
+	{ALSIden}   'iden'|
+	{ALSUniv}   'univ'|
+	{ALSInt}    'Int' |
+	{ALSString} 'String' |
 	{ALSReference} referred = [ALSRelationDeclaration] |
 	{ALSNumberLiteral} value = INT|
+	{ALSStringLiteral} value = STRING|
 	'(' ALSTerm ')'
 ;
 
@@ -143,7 +145,8 @@ ALSBasicRelationTerm returns ALSTerm:
 ALSRunCommand:
 	{ALSRunCommand} 'run' '{' '}' ('for' typeScopes+=ALSTypeScope (',' typeScopes+=ALSTypeScope)*)?;
 
-ALSTypeScope: ALSSigScope | ALSIntScope;
+ALSTypeScope: ALSSigScope | ALSIntScope | ALSStringScope;
 
 ALSSigScope: (exactly?='exactly')? number = INT type = [ALSSignatureDeclaration];
 ALSIntScope: number = INT 'Int';
+ALSStringScope: 'exactly' number = INT 'String';

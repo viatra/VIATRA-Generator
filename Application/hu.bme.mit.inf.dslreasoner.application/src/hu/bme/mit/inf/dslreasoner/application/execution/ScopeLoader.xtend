@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.HashSet
 
 @Data class KnownElements {
 	val Map<Type,Set<DefinedElement>> knownElementsByType
@@ -58,11 +59,18 @@ class ScopeLoader {
 	
 	def protected initialiseknownElements(LogicProblem p, TypeScopes s) {
 		val Map<Type,Set<DefinedElement>> res = new HashMap
+		
+		// 1. fill map with every types
+		for(t : p.types) {
+			res.put(t,new HashSet)
+		}
+		
+		// 2. fill map with every objects
 		for(definedType : p.types.filter(TypeDefinition)) {
 			val supertypes = definedType.<Type>transitiveClosureStar[x|x.supertypes]
 			for(supertype : supertypes) {
 				for(element : definedType.elements) {
-					res.putOrAddToSet(supertype,element)
+					res.get(supertype).add(element)
 				}
 			}
 		}
@@ -107,7 +115,7 @@ class ScopeLoader {
 						updateLowerLimit(
 							scope.setsNew,
 							known,
-							type.lookup(aggregated.minNewElementsByType),
+							aggregated.minNewElementsByType.get(type),
 							getLowerLimit(scope.number)
 						)
 					)
@@ -115,7 +123,7 @@ class ScopeLoader {
 						updateUpperLimit(
 							scope.setsNew,
 							known,
-							type.lookup(aggregated.minNewElementsByType),
+							aggregated.maxNewElementsByType.get(type),
 							getUpperLimit(scope.number)
 						)
 					)
@@ -128,6 +136,9 @@ class ScopeLoader {
 		val number = scope.number
 		if(number instanceof IntEnumberation) {
 			addToKnownCollection(aggregated.knownIntegers,number.entry,scope.isSetsNew,inconsistencies)
+			if(!scope.isSetsNew) {
+				aggregated.maxNewIntegers = 0
+			}
 		} else {
 			aggregated.minNewIntegers = updateLowerLimit(scope.isSetsNew,aggregated.knownIntegers.size,aggregated.minNewIntegers,number.lowerLimit)
 			aggregated.maxNewIntegers = updateLowerLimit(scope.isSetsNew,aggregated.knownIntegers.size,aggregated.maxNewIntegers,number.upperLimit)
@@ -139,6 +150,9 @@ class ScopeLoader {
 		if(number instanceof RealEnumeration) {
 			val x = number.entry;
 			<BigDecimal>addToKnownCollection(aggregated.knownReals,x,scope.isSetsNew,inconsistencies)
+			if(!scope.isSetsNew) {
+				aggregated.maxNewReals = 0
+			}
 		} else {
 			aggregated.minNewReals = updateLowerLimit(scope.isSetsNew,aggregated.knownReals.size,aggregated.minNewReals,number.lowerLimit)
 			aggregated.maxNewReals = updateLowerLimit(scope.isSetsNew,aggregated.knownReals.size,aggregated.maxNewReals,number.upperLimit)
@@ -148,6 +162,9 @@ class ScopeLoader {
 		val number = scope.number
 		if(number instanceof StringEnumeration) {
 			<String>addToKnownCollection(aggregated.knownStrings,number.entry,scope.isSetsNew,inconsistencies)
+			if(!scope.isSetsNew) {
+				aggregated.maxNewStrings = 0
+			}
 		} else {
 			aggregated.minNewStrings = updateLowerLimit(scope.isSetsNew,aggregated.knownStrings.size,aggregated.minNewStrings,number.lowerLimit)
 			aggregated.maxNewStrings = updateLowerLimit(scope.isSetsNew,aggregated.knownStrings.size,aggregated.maxNewStrings,number.upperLimit)
@@ -166,19 +183,21 @@ class ScopeLoader {
 			}
 	}
 	
-	def updateLowerLimit(boolean isAdditional, int known, int original, int value) {
+	def updateLowerLimit(boolean isAdditional, int known, Integer original, int value) {
+		val o = if(original === null) {0} else {original}
 		if(isAdditional) {
-			return Math.max(original,value)
+			return Math.max(o,value)
 		} else {
-			return Math.max(original,value-known)
+			return Math.max(o,value-known)
 		}
 	}
-	def updateUpperLimit(boolean isAdditional, int known, int original, int value) {
+	def updateUpperLimit(boolean isAdditional, int known, Integer original, int value) {
+		val o = if(original === null) {Integer.MAX_VALUE} else {original}
 		if(isAdditional) {
-			return Math.min(original,value)
+			return Math.min(o,value)
 		} else {
 			val target = if(value == Integer.MAX_VALUE) { Integer.MAX_VALUE } else {value-known}
-			return Math.min(original,target)
+			return Math.min(o,target)
 		}
 	}
 	

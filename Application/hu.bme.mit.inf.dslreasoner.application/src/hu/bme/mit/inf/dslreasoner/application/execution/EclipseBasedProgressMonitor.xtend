@@ -9,9 +9,15 @@ class EclipseBasedProgressMonitor extends SolverProgressMonitor{
 	public new(IProgressMonitor internalMonitor) {
 		this.internalMonitor = internalMonitor
 	}
+	var double currentDouble = 0.0
+	var int currentInt = 0
 	
 	override protected processWorked(double amount) {
-		internalMonitor.worked((amount*1000).intValue)
+		val newDouble = currentDouble+amount
+		val newInt = (newDouble*1000).intValue
+		internalMonitor.worked(newInt-currentInt)
+		currentDouble = newDouble
+		currentInt = newInt
 	}
 	
 	override isCancelled() {

@@ -72,6 +72,15 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 			null
 		}
 		'''
+		private pattern scopeDisallowsNew«base.canonizeName(type.name)»(problem:LogicProblem, interpretation:PartialInterpretation) {
+			find interpretation(problem,interpretation);
+			PartialInterpretation.scopes(interpretation,scope);
+			Scope.targetTypeInterpretation(scope,typeInterpretation);
+			Scope.maxNewElements(scope,0);
+			PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+			Type.name(type,"«type.name»");
+		}
+		
 		/**
 		 * An element may be an instance of type "«type.name»".
 		 */
@@ -82,6 +91,7 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 			«FOR inhibitorType : inhibitorTypes»
 				neg «referInstanceOf(inhibitorType,Modality.MUST,"element")»
 			«ENDFOR»
+			neg find scopeDisallowsNew«base.canonizeName(type.name)»(problem, interpretation);
 			neg find isPrimitive(element);
 		} or {
 			find interpretation(problem,interpretation);
@@ -89,6 +99,7 @@ class TypeIndexerWithPreliminaryTypeAnalysis extends TypeIndexer{
 			«FOR inhibitorType : inhibitorTypes»
 				neg «referInstanceOf(inhibitorType,Modality.MUST,"element")»
 			«ENDFOR»
+			neg find scopeDisallowsNew«base.canonizeName(type.name)»(problem, interpretation);
 			neg find isPrimitive(element);
 		} or
 		«ENDIF»

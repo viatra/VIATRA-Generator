@@ -37,7 +37,7 @@ class UnfinishedWFObjective implements IObjective {
 		var sumOfMatches = 0
 		for(matcher : matchers) {
 			val number = matcher.countMatches
-//			println('''«matcher.patternName» = «number»''')
+			//println('''«matcher.patternName» = «number»''')
 			sumOfMatches+=number
 		}
 		return sumOfMatches.doubleValue

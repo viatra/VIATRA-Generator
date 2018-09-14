@@ -185,6 +185,15 @@ public interface AlloyLanguageFactory extends EFactory
   ALSIntScope createALSIntScope();
 
   /**
+   * Returns a new object of class '<em>ALS String Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ALS String Scope</em>'.
+   * @generated
+   */
+  ALSStringScope createALSStringScope();
+
+  /**
    * Returns a new object of class '<em>ALS Quantified Ex</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -473,6 +482,15 @@ public interface AlloyLanguageFactory extends EFactory
   ALSInt createALSInt();
 
   /**
+   * Returns a new object of class '<em>ALS String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ALS String</em>'.
+   * @generated
+   */
+  ALSString createALSString();
+
+  /**
    * Returns a new object of class '<em>ALS Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -489,6 +507,15 @@ public interface AlloyLanguageFactory extends EFactory
    * @generated
    */
   ALSNumberLiteral createALSNumberLiteral();
+
+  /**
+   * Returns a new object of class '<em>ALS String Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>ALS String Literal</em>'.
+   * @generated
+   */
+  ALSStringLiteral createALSStringLiteral();
 
   /**
    * Returns the package supported by this factory.

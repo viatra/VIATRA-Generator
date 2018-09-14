@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'enum'", "'{'", "','", "'}'", "'abstract'", "'sig'", "'extends'", "'in'", "'+'", "':'", "'fun'", "'['", "']'", "'pred'", "'fact'", "'disj'", "'||'", "'or'", "'<=>'", "'iff'", "'=>'", "'implies'", "'else'", "'&&'", "'and'", "'='", "'!='", "'>'", "'>='", "'<'", "'<='", "'++'", "':>'", "'<:'", "'.'", "'-'", "'&'", "'->'", "'!'", "'not'", "'~'", "'^'", "'*'", "'#'", "'sum'", "'none'", "'iden'", "'univ'", "'Int'", "'('", "')'", "'run'", "'for'", "'exactly'", "'all'", "'no'", "'some'", "'lone'", "'one'", "'set'", "'plus'", "'sub'", "'mul'", "'rem'", "'div'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'enum'", "'{'", "','", "'}'", "'abstract'", "'sig'", "'extends'", "'in'", "'+'", "':'", "'fun'", "'['", "']'", "'pred'", "'fact'", "'disj'", "'||'", "'or'", "'<=>'", "'iff'", "'=>'", "'implies'", "'else'", "'&&'", "'and'", "'='", "'!='", "'>'", "'>='", "'<'", "'<='", "'++'", "':>'", "'<:'", "'.'", "'-'", "'&'", "'->'", "'!'", "'not'", "'~'", "'^'", "'*'", "'#'", "'sum'", "'none'", "'iden'", "'univ'", "'Int'", "'String'", "'('", "')'", "'run'", "'for'", "'exactly'", "'all'", "'no'", "'some'", "'lone'", "'one'", "'set'", "'plus'", "'sub'", "'mul'", "'rem'", "'div'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -86,6 +86,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
     public static final int T__31=31;
     public static final int T__75=75;
     public static final int T__32=32;
+    public static final int T__76=76;
     public static final int RULE_WS=9;
     public static final int RULE_ANY_OTHER=10;
     public static final int T__48=48;
@@ -217,12 +218,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     break;
                 case 15:
                 case 16:
-                case 65:
                 case 66:
                 case 67:
                 case 68:
                 case 69:
                 case 70:
+                case 71:
                     {
                     alt1=2;
                     }
@@ -1291,7 +1292,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                 int alt4=3;
                 int LA4_0 = input.LA(1);
 
-                if ( LA4_0 >= 65 && LA4_0 <= 70 && getUnorderedGroupHelper().canSelect(grammarAccess.getALSSignatureBodyAccess().getUnorderedGroup_0(), 0) ) {
+                if ( LA4_0 >= 66 && LA4_0 <= 71 && getUnorderedGroupHelper().canSelect(grammarAccess.getALSSignatureBodyAccess().getUnorderedGroup_0(), 0) ) {
                     alt4=1;
                 }
                 else if ( LA4_0 == 15 && getUnorderedGroupHelper().canSelect(grammarAccess.getALSSignatureBodyAccess().getUnorderedGroup_0(), 1) ) {
@@ -3040,10 +3041,10 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( ((LA16_0>=65 && LA16_0<=70)) ) {
+            if ( ((LA16_0>=66 && LA16_0<=71)) ) {
                 alt16=1;
             }
-            else if ( ((LA16_0>=RULE_ID && LA16_0<=RULE_INT)||LA16_0==46||(LA16_0>=49 && LA16_0<=60)||(LA16_0>=71 && LA16_0<=75)) ) {
+            else if ( ((LA16_0>=RULE_ID && LA16_0<=RULE_STRING)||LA16_0==46||(LA16_0>=49 && LA16_0<=61)||(LA16_0>=72 && LA16_0<=76)) ) {
                 alt16=2;
             }
             else {
@@ -5957,7 +5958,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
             int alt37=2;
             int LA37_0 = input.LA(1);
 
-            if ( (LA37_0==48||(LA37_0>=65 && LA37_0<=70)) ) {
+            if ( (LA37_0==48||(LA37_0>=66 && LA37_0<=71)) ) {
                 alt37=1;
             }
             switch (alt37) {
@@ -5981,7 +5982,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     int alt35=2;
                     int LA35_0 = input.LA(1);
 
-                    if ( ((LA35_0>=65 && LA35_0<=70)) ) {
+                    if ( ((LA35_0>=66 && LA35_0<=71)) ) {
                         alt35=1;
                     }
                     switch (alt35) {
@@ -6033,7 +6034,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     int alt36=2;
                     int LA36_0 = input.LA(1);
 
-                    if ( ((LA36_0>=65 && LA36_0<=70)) ) {
+                    if ( ((LA36_0>=66 && LA36_0<=71)) ) {
                         alt36=1;
                     }
                     switch (alt36) {
@@ -6892,7 +6893,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     if ( (LA40_0==RULE_ID) ) {
                         alt40=1;
                     }
-                    else if ( ((LA40_0>=71 && LA40_0<=75)) ) {
+                    else if ( ((LA40_0>=72 && LA40_0<=76)) ) {
                         alt40=2;
                     }
                     else {
@@ -7339,7 +7340,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALSBasicRelationTerm"
-    // InternalAlloyLanguage.g:2602:1: ruleALSBasicRelationTerm returns [EObject current=null] : ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () ( (otherlv_9= RULE_ID ) ) ) | ( () ( (lv_value_11_0= RULE_INT ) ) ) | (otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')' ) ) ;
+    // InternalAlloyLanguage.g:2602:1: ruleALSBasicRelationTerm returns [EObject current=null] : ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () otherlv_9= 'String' ) | ( () ( (otherlv_11= RULE_ID ) ) ) | ( () ( (lv_value_13_0= RULE_INT ) ) ) | ( () ( (lv_value_15_0= RULE_STRING ) ) ) | (otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')' ) ) ;
     public final EObject ruleALSBasicRelationTerm() throws RecognitionException {
         EObject current = null;
 
@@ -7348,20 +7349,22 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
         Token otherlv_5=null;
         Token otherlv_7=null;
         Token otherlv_9=null;
-        Token lv_value_11_0=null;
-        Token otherlv_12=null;
-        Token otherlv_14=null;
-        EObject this_ALSTerm_13 = null;
+        Token otherlv_11=null;
+        Token lv_value_13_0=null;
+        Token lv_value_15_0=null;
+        Token otherlv_16=null;
+        Token otherlv_18=null;
+        EObject this_ALSTerm_17 = null;
 
 
          enterRule(); 
             
         try {
-            // InternalAlloyLanguage.g:2605:28: ( ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () ( (otherlv_9= RULE_ID ) ) ) | ( () ( (lv_value_11_0= RULE_INT ) ) ) | (otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')' ) ) )
-            // InternalAlloyLanguage.g:2606:1: ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () ( (otherlv_9= RULE_ID ) ) ) | ( () ( (lv_value_11_0= RULE_INT ) ) ) | (otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')' ) )
+            // InternalAlloyLanguage.g:2605:28: ( ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () otherlv_9= 'String' ) | ( () ( (otherlv_11= RULE_ID ) ) ) | ( () ( (lv_value_13_0= RULE_INT ) ) ) | ( () ( (lv_value_15_0= RULE_STRING ) ) ) | (otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')' ) ) )
+            // InternalAlloyLanguage.g:2606:1: ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () otherlv_9= 'String' ) | ( () ( (otherlv_11= RULE_ID ) ) ) | ( () ( (lv_value_13_0= RULE_INT ) ) ) | ( () ( (lv_value_15_0= RULE_STRING ) ) ) | (otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')' ) )
             {
-            // InternalAlloyLanguage.g:2606:1: ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () ( (otherlv_9= RULE_ID ) ) ) | ( () ( (lv_value_11_0= RULE_INT ) ) ) | (otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')' ) )
-            int alt43=7;
+            // InternalAlloyLanguage.g:2606:1: ( ( () otherlv_1= 'none' ) | ( () otherlv_3= 'iden' ) | ( () otherlv_5= 'univ' ) | ( () otherlv_7= 'Int' ) | ( () otherlv_9= 'String' ) | ( () ( (otherlv_11= RULE_ID ) ) ) | ( () ( (lv_value_13_0= RULE_INT ) ) ) | ( () ( (lv_value_15_0= RULE_STRING ) ) ) | (otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')' ) )
+            int alt43=9;
             switch ( input.LA(1) ) {
             case 56:
                 {
@@ -7383,19 +7386,29 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                 alt43=4;
                 }
                 break;
-            case RULE_ID:
+            case 60:
                 {
                 alt43=5;
                 }
                 break;
-            case RULE_INT:
+            case RULE_ID:
                 {
                 alt43=6;
                 }
                 break;
-            case 60:
+            case RULE_INT:
                 {
                 alt43=7;
+                }
+                break;
+            case RULE_STRING:
+                {
+                alt43=8;
+                }
+                break;
+            case 61:
+                {
+                alt43=9;
                 }
                 break;
             default:
@@ -7532,10 +7545,10 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalAlloyLanguage.g:2650:6: ( () ( (otherlv_9= RULE_ID ) ) )
+                    // InternalAlloyLanguage.g:2650:6: ( () otherlv_9= 'String' )
                     {
-                    // InternalAlloyLanguage.g:2650:6: ( () ( (otherlv_9= RULE_ID ) ) )
-                    // InternalAlloyLanguage.g:2650:7: () ( (otherlv_9= RULE_ID ) )
+                    // InternalAlloyLanguage.g:2650:6: ( () otherlv_9= 'String' )
+                    // InternalAlloyLanguage.g:2650:7: () otherlv_9= 'String'
                     {
                     // InternalAlloyLanguage.g:2650:7: ()
                     // InternalAlloyLanguage.g:2651:5: 
@@ -7543,18 +7556,49 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                               current = forceCreateModelElement(
-                                  grammarAccess.getALSBasicRelationTermAccess().getALSReferenceAction_4_0(),
+                                  grammarAccess.getALSBasicRelationTermAccess().getALSStringAction_4_0(),
                                   current);
                           
                     }
 
                     }
 
-                    // InternalAlloyLanguage.g:2656:2: ( (otherlv_9= RULE_ID ) )
-                    // InternalAlloyLanguage.g:2657:1: (otherlv_9= RULE_ID )
+                    otherlv_9=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                          	newLeafNode(otherlv_9, grammarAccess.getALSBasicRelationTermAccess().getStringKeyword_4_1());
+                          
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // InternalAlloyLanguage.g:2661:6: ( () ( (otherlv_11= RULE_ID ) ) )
                     {
-                    // InternalAlloyLanguage.g:2657:1: (otherlv_9= RULE_ID )
-                    // InternalAlloyLanguage.g:2658:3: otherlv_9= RULE_ID
+                    // InternalAlloyLanguage.g:2661:6: ( () ( (otherlv_11= RULE_ID ) ) )
+                    // InternalAlloyLanguage.g:2661:7: () ( (otherlv_11= RULE_ID ) )
+                    {
+                    // InternalAlloyLanguage.g:2661:7: ()
+                    // InternalAlloyLanguage.g:2662:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                              current = forceCreateModelElement(
+                                  grammarAccess.getALSBasicRelationTermAccess().getALSReferenceAction_5_0(),
+                                  current);
+                          
+                    }
+
+                    }
+
+                    // InternalAlloyLanguage.g:2667:2: ( (otherlv_11= RULE_ID ) )
+                    // InternalAlloyLanguage.g:2668:1: (otherlv_11= RULE_ID )
+                    {
+                    // InternalAlloyLanguage.g:2668:1: (otherlv_11= RULE_ID )
+                    // InternalAlloyLanguage.g:2669:3: otherlv_11= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7563,10 +7607,10 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                       	        }
                               
                     }
-                    otherlv_9=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      		newLeafNode(otherlv_9, grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationCrossReference_4_1_0()); 
+                      		newLeafNode(otherlv_11, grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationCrossReference_5_1_0()); 
                       	
                     }
 
@@ -7581,35 +7625,35 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
-                case 6 :
-                    // InternalAlloyLanguage.g:2670:6: ( () ( (lv_value_11_0= RULE_INT ) ) )
+                case 7 :
+                    // InternalAlloyLanguage.g:2681:6: ( () ( (lv_value_13_0= RULE_INT ) ) )
                     {
-                    // InternalAlloyLanguage.g:2670:6: ( () ( (lv_value_11_0= RULE_INT ) ) )
-                    // InternalAlloyLanguage.g:2670:7: () ( (lv_value_11_0= RULE_INT ) )
+                    // InternalAlloyLanguage.g:2681:6: ( () ( (lv_value_13_0= RULE_INT ) ) )
+                    // InternalAlloyLanguage.g:2681:7: () ( (lv_value_13_0= RULE_INT ) )
                     {
-                    // InternalAlloyLanguage.g:2670:7: ()
-                    // InternalAlloyLanguage.g:2671:5: 
+                    // InternalAlloyLanguage.g:2681:7: ()
+                    // InternalAlloyLanguage.g:2682:5: 
                     {
                     if ( state.backtracking==0 ) {
 
                               current = forceCreateModelElement(
-                                  grammarAccess.getALSBasicRelationTermAccess().getALSNumberLiteralAction_5_0(),
+                                  grammarAccess.getALSBasicRelationTermAccess().getALSNumberLiteralAction_6_0(),
                                   current);
                           
                     }
 
                     }
 
-                    // InternalAlloyLanguage.g:2676:2: ( (lv_value_11_0= RULE_INT ) )
-                    // InternalAlloyLanguage.g:2677:1: (lv_value_11_0= RULE_INT )
+                    // InternalAlloyLanguage.g:2687:2: ( (lv_value_13_0= RULE_INT ) )
+                    // InternalAlloyLanguage.g:2688:1: (lv_value_13_0= RULE_INT )
                     {
-                    // InternalAlloyLanguage.g:2677:1: (lv_value_11_0= RULE_INT )
-                    // InternalAlloyLanguage.g:2678:3: lv_value_11_0= RULE_INT
+                    // InternalAlloyLanguage.g:2688:1: (lv_value_13_0= RULE_INT )
+                    // InternalAlloyLanguage.g:2689:3: lv_value_13_0= RULE_INT
                     {
-                    lv_value_11_0=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
+                    lv_value_13_0=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      			newLeafNode(lv_value_11_0, grammarAccess.getALSBasicRelationTermAccess().getValueINTTerminalRuleCall_5_1_0()); 
+                      			newLeafNode(lv_value_13_0, grammarAccess.getALSBasicRelationTermAccess().getValueINTTerminalRuleCall_6_1_0()); 
                       		
                     }
                     if ( state.backtracking==0 ) {
@@ -7620,7 +7664,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                              		setWithLastConsumed(
                              			current, 
                              			"value",
-                              		lv_value_11_0, 
+                              		lv_value_13_0, 
                               		"org.eclipse.xtext.common.Terminals.INT");
                       	    
                     }
@@ -7636,38 +7680,93 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
-                case 7 :
-                    // InternalAlloyLanguage.g:2695:6: (otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')' )
+                case 8 :
+                    // InternalAlloyLanguage.g:2706:6: ( () ( (lv_value_15_0= RULE_STRING ) ) )
                     {
-                    // InternalAlloyLanguage.g:2695:6: (otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')' )
-                    // InternalAlloyLanguage.g:2695:8: otherlv_12= '(' this_ALSTerm_13= ruleALSTerm otherlv_14= ')'
+                    // InternalAlloyLanguage.g:2706:6: ( () ( (lv_value_15_0= RULE_STRING ) ) )
+                    // InternalAlloyLanguage.g:2706:7: () ( (lv_value_15_0= RULE_STRING ) )
                     {
-                    otherlv_12=(Token)match(input,60,FOLLOW_12); if (state.failed) return current;
+                    // InternalAlloyLanguage.g:2706:7: ()
+                    // InternalAlloyLanguage.g:2707:5: 
+                    {
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_12, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_6_0());
+                              current = forceCreateModelElement(
+                                  grammarAccess.getALSBasicRelationTermAccess().getALSStringLiteralAction_7_0(),
+                                  current);
+                          
+                    }
+
+                    }
+
+                    // InternalAlloyLanguage.g:2712:2: ( (lv_value_15_0= RULE_STRING ) )
+                    // InternalAlloyLanguage.g:2713:1: (lv_value_15_0= RULE_STRING )
+                    {
+                    // InternalAlloyLanguage.g:2713:1: (lv_value_15_0= RULE_STRING )
+                    // InternalAlloyLanguage.g:2714:3: lv_value_15_0= RULE_STRING
+                    {
+                    lv_value_15_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			newLeafNode(lv_value_15_0, grammarAccess.getALSBasicRelationTermAccess().getValueSTRINGTerminalRuleCall_7_1_0()); 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getALSBasicRelationTermRule());
+                      	        }
+                             		setWithLastConsumed(
+                             			current, 
+                             			"value",
+                              		lv_value_15_0, 
+                              		"org.eclipse.xtext.common.Terminals.STRING");
+                      	    
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 9 :
+                    // InternalAlloyLanguage.g:2731:6: (otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')' )
+                    {
+                    // InternalAlloyLanguage.g:2731:6: (otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')' )
+                    // InternalAlloyLanguage.g:2731:8: otherlv_16= '(' this_ALSTerm_17= ruleALSTerm otherlv_18= ')'
+                    {
+                    otherlv_16=(Token)match(input,61,FOLLOW_12); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                          	newLeafNode(otherlv_16, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_8_0());
                           
                     }
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getALSBasicRelationTermAccess().getALSTermParserRuleCall_6_1()); 
+                              newCompositeNode(grammarAccess.getALSBasicRelationTermAccess().getALSTermParserRuleCall_8_1()); 
                           
                     }
                     pushFollow(FOLLOW_34);
-                    this_ALSTerm_13=ruleALSTerm();
+                    this_ALSTerm_17=ruleALSTerm();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_ALSTerm_13; 
+                              current = this_ALSTerm_17; 
                               afterParserOrEnumRuleCall();
                           
                     }
-                    otherlv_14=(Token)match(input,61,FOLLOW_2); if (state.failed) return current;
+                    otherlv_18=(Token)match(input,62,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_14, grammarAccess.getALSBasicRelationTermAccess().getRightParenthesisKeyword_6_2());
+                          	newLeafNode(otherlv_18, grammarAccess.getALSBasicRelationTermAccess().getRightParenthesisKeyword_8_2());
                           
                     }
 
@@ -7699,7 +7798,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleALSRunCommand"
-    // InternalAlloyLanguage.g:2720:1: entryRuleALSRunCommand returns [EObject current=null] : iv_ruleALSRunCommand= ruleALSRunCommand EOF ;
+    // InternalAlloyLanguage.g:2756:1: entryRuleALSRunCommand returns [EObject current=null] : iv_ruleALSRunCommand= ruleALSRunCommand EOF ;
     public final EObject entryRuleALSRunCommand() throws RecognitionException {
         EObject current = null;
 
@@ -7707,8 +7806,8 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAlloyLanguage.g:2721:2: (iv_ruleALSRunCommand= ruleALSRunCommand EOF )
-            // InternalAlloyLanguage.g:2722:2: iv_ruleALSRunCommand= ruleALSRunCommand EOF
+            // InternalAlloyLanguage.g:2757:2: (iv_ruleALSRunCommand= ruleALSRunCommand EOF )
+            // InternalAlloyLanguage.g:2758:2: iv_ruleALSRunCommand= ruleALSRunCommand EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getALSRunCommandRule()); 
@@ -7739,7 +7838,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALSRunCommand"
-    // InternalAlloyLanguage.g:2729:1: ruleALSRunCommand returns [EObject current=null] : ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? ) ;
+    // InternalAlloyLanguage.g:2765:1: ruleALSRunCommand returns [EObject current=null] : ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? ) ;
     public final EObject ruleALSRunCommand() throws RecognitionException {
         EObject current = null;
 
@@ -7756,14 +7855,14 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalAlloyLanguage.g:2732:28: ( ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? ) )
-            // InternalAlloyLanguage.g:2733:1: ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? )
+            // InternalAlloyLanguage.g:2768:28: ( ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? ) )
+            // InternalAlloyLanguage.g:2769:1: ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? )
             {
-            // InternalAlloyLanguage.g:2733:1: ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? )
-            // InternalAlloyLanguage.g:2733:2: () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )?
+            // InternalAlloyLanguage.g:2769:1: ( () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )? )
+            // InternalAlloyLanguage.g:2769:2: () otherlv_1= 'run' otherlv_2= '{' otherlv_3= '}' (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )?
             {
-            // InternalAlloyLanguage.g:2733:2: ()
-            // InternalAlloyLanguage.g:2734:5: 
+            // InternalAlloyLanguage.g:2769:2: ()
+            // InternalAlloyLanguage.g:2770:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -7775,7 +7874,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,62,FOLLOW_5); if (state.failed) return current;
+            otherlv_1=(Token)match(input,63,FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getALSRunCommandAccess().getRunKeyword_1());
@@ -7793,28 +7892,28 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_3, grammarAccess.getALSRunCommandAccess().getRightCurlyBracketKeyword_3());
                   
             }
-            // InternalAlloyLanguage.g:2751:1: (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )?
+            // InternalAlloyLanguage.g:2787:1: (otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )* )?
             int alt45=2;
             int LA45_0 = input.LA(1);
 
-            if ( (LA45_0==63) ) {
+            if ( (LA45_0==64) ) {
                 alt45=1;
             }
             switch (alt45) {
                 case 1 :
-                    // InternalAlloyLanguage.g:2751:3: otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )*
+                    // InternalAlloyLanguage.g:2787:3: otherlv_4= 'for' ( (lv_typeScopes_5_0= ruleALSTypeScope ) ) (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )*
                     {
-                    otherlv_4=(Token)match(input,63,FOLLOW_36); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,64,FOLLOW_36); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getALSRunCommandAccess().getForKeyword_4_0());
                           
                     }
-                    // InternalAlloyLanguage.g:2755:1: ( (lv_typeScopes_5_0= ruleALSTypeScope ) )
-                    // InternalAlloyLanguage.g:2756:1: (lv_typeScopes_5_0= ruleALSTypeScope )
+                    // InternalAlloyLanguage.g:2791:1: ( (lv_typeScopes_5_0= ruleALSTypeScope ) )
+                    // InternalAlloyLanguage.g:2792:1: (lv_typeScopes_5_0= ruleALSTypeScope )
                     {
-                    // InternalAlloyLanguage.g:2756:1: (lv_typeScopes_5_0= ruleALSTypeScope )
-                    // InternalAlloyLanguage.g:2757:3: lv_typeScopes_5_0= ruleALSTypeScope
+                    // InternalAlloyLanguage.g:2792:1: (lv_typeScopes_5_0= ruleALSTypeScope )
+                    // InternalAlloyLanguage.g:2793:3: lv_typeScopes_5_0= ruleALSTypeScope
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -7845,7 +7944,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalAlloyLanguage.g:2773:2: (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )*
+                    // InternalAlloyLanguage.g:2809:2: (otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) ) )*
                     loop44:
                     do {
                         int alt44=2;
@@ -7858,7 +7957,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt44) {
                     	case 1 :
-                    	    // InternalAlloyLanguage.g:2773:4: otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) )
+                    	    // InternalAlloyLanguage.g:2809:4: otherlv_6= ',' ( (lv_typeScopes_7_0= ruleALSTypeScope ) )
                     	    {
                     	    otherlv_6=(Token)match(input,13,FOLLOW_36); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -7866,11 +7965,11 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     	          	newLeafNode(otherlv_6, grammarAccess.getALSRunCommandAccess().getCommaKeyword_4_2_0());
                     	          
                     	    }
-                    	    // InternalAlloyLanguage.g:2777:1: ( (lv_typeScopes_7_0= ruleALSTypeScope ) )
-                    	    // InternalAlloyLanguage.g:2778:1: (lv_typeScopes_7_0= ruleALSTypeScope )
+                    	    // InternalAlloyLanguage.g:2813:1: ( (lv_typeScopes_7_0= ruleALSTypeScope ) )
+                    	    // InternalAlloyLanguage.g:2814:1: (lv_typeScopes_7_0= ruleALSTypeScope )
                     	    {
-                    	    // InternalAlloyLanguage.g:2778:1: (lv_typeScopes_7_0= ruleALSTypeScope )
-                    	    // InternalAlloyLanguage.g:2779:3: lv_typeScopes_7_0= ruleALSTypeScope
+                    	    // InternalAlloyLanguage.g:2814:1: (lv_typeScopes_7_0= ruleALSTypeScope )
+                    	    // InternalAlloyLanguage.g:2815:3: lv_typeScopes_7_0= ruleALSTypeScope
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
@@ -7939,7 +8038,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleALSTypeScope"
-    // InternalAlloyLanguage.g:2803:1: entryRuleALSTypeScope returns [EObject current=null] : iv_ruleALSTypeScope= ruleALSTypeScope EOF ;
+    // InternalAlloyLanguage.g:2839:1: entryRuleALSTypeScope returns [EObject current=null] : iv_ruleALSTypeScope= ruleALSTypeScope EOF ;
     public final EObject entryRuleALSTypeScope() throws RecognitionException {
         EObject current = null;
 
@@ -7947,8 +8046,8 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAlloyLanguage.g:2804:2: (iv_ruleALSTypeScope= ruleALSTypeScope EOF )
-            // InternalAlloyLanguage.g:2805:2: iv_ruleALSTypeScope= ruleALSTypeScope EOF
+            // InternalAlloyLanguage.g:2840:2: (iv_ruleALSTypeScope= ruleALSTypeScope EOF )
+            // InternalAlloyLanguage.g:2841:2: iv_ruleALSTypeScope= ruleALSTypeScope EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getALSTypeScopeRule()); 
@@ -7979,7 +8078,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALSTypeScope"
-    // InternalAlloyLanguage.g:2812:1: ruleALSTypeScope returns [EObject current=null] : (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope ) ;
+    // InternalAlloyLanguage.g:2848:1: ruleALSTypeScope returns [EObject current=null] : (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope | this_ALSStringScope_2= ruleALSStringScope ) ;
     public final EObject ruleALSTypeScope() throws RecognitionException {
         EObject current = null;
 
@@ -7987,19 +8086,46 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
         EObject this_ALSIntScope_1 = null;
 
+        EObject this_ALSStringScope_2 = null;
+
 
          enterRule(); 
             
         try {
-            // InternalAlloyLanguage.g:2815:28: ( (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope ) )
-            // InternalAlloyLanguage.g:2816:1: (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope )
+            // InternalAlloyLanguage.g:2851:28: ( (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope | this_ALSStringScope_2= ruleALSStringScope ) )
+            // InternalAlloyLanguage.g:2852:1: (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope | this_ALSStringScope_2= ruleALSStringScope )
             {
-            // InternalAlloyLanguage.g:2816:1: (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope )
-            int alt46=2;
+            // InternalAlloyLanguage.g:2852:1: (this_ALSSigScope_0= ruleALSSigScope | this_ALSIntScope_1= ruleALSIntScope | this_ALSStringScope_2= ruleALSStringScope )
+            int alt46=3;
             int LA46_0 = input.LA(1);
 
-            if ( (LA46_0==64) ) {
-                alt46=1;
+            if ( (LA46_0==65) ) {
+                int LA46_1 = input.LA(2);
+
+                if ( (LA46_1==RULE_INT) ) {
+                    int LA46_3 = input.LA(3);
+
+                    if ( (LA46_3==RULE_ID) ) {
+                        alt46=1;
+                    }
+                    else if ( (LA46_3==60) ) {
+                        alt46=3;
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return current;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 46, 3, input);
+
+                        throw nvae;
+                    }
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return current;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 46, 1, input);
+
+                    throw nvae;
+                }
             }
             else if ( (LA46_0==RULE_INT) ) {
                 int LA46_2 = input.LA(2);
@@ -8027,7 +8153,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt46) {
                 case 1 :
-                    // InternalAlloyLanguage.g:2817:5: this_ALSSigScope_0= ruleALSSigScope
+                    // InternalAlloyLanguage.g:2853:5: this_ALSSigScope_0= ruleALSSigScope
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8049,7 +8175,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAlloyLanguage.g:2827:5: this_ALSIntScope_1= ruleALSIntScope
+                    // InternalAlloyLanguage.g:2863:5: this_ALSIntScope_1= ruleALSIntScope
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -8064,6 +8190,28 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
                        
                               current = this_ALSIntScope_1; 
+                              afterParserOrEnumRuleCall();
+                          
+                    }
+
+                    }
+                    break;
+                case 3 :
+                    // InternalAlloyLanguage.g:2873:5: this_ALSStringScope_2= ruleALSStringScope
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                              newCompositeNode(grammarAccess.getALSTypeScopeAccess().getALSStringScopeParserRuleCall_2()); 
+                          
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_ALSStringScope_2=ruleALSStringScope();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                              current = this_ALSStringScope_2; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -8093,7 +8241,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleALSSigScope"
-    // InternalAlloyLanguage.g:2843:1: entryRuleALSSigScope returns [EObject current=null] : iv_ruleALSSigScope= ruleALSSigScope EOF ;
+    // InternalAlloyLanguage.g:2889:1: entryRuleALSSigScope returns [EObject current=null] : iv_ruleALSSigScope= ruleALSSigScope EOF ;
     public final EObject entryRuleALSSigScope() throws RecognitionException {
         EObject current = null;
 
@@ -8101,8 +8249,8 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAlloyLanguage.g:2844:2: (iv_ruleALSSigScope= ruleALSSigScope EOF )
-            // InternalAlloyLanguage.g:2845:2: iv_ruleALSSigScope= ruleALSSigScope EOF
+            // InternalAlloyLanguage.g:2890:2: (iv_ruleALSSigScope= ruleALSSigScope EOF )
+            // InternalAlloyLanguage.g:2891:2: iv_ruleALSSigScope= ruleALSSigScope EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getALSSigScopeRule()); 
@@ -8133,7 +8281,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALSSigScope"
-    // InternalAlloyLanguage.g:2852:1: ruleALSSigScope returns [EObject current=null] : ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) ) ;
+    // InternalAlloyLanguage.g:2898:1: ruleALSSigScope returns [EObject current=null] : ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleALSSigScope() throws RecognitionException {
         EObject current = null;
 
@@ -8144,27 +8292,27 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalAlloyLanguage.g:2855:28: ( ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) ) )
-            // InternalAlloyLanguage.g:2856:1: ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) )
+            // InternalAlloyLanguage.g:2901:28: ( ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) ) )
+            // InternalAlloyLanguage.g:2902:1: ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) )
             {
-            // InternalAlloyLanguage.g:2856:1: ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) )
-            // InternalAlloyLanguage.g:2856:2: ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) )
+            // InternalAlloyLanguage.g:2902:1: ( ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) ) )
+            // InternalAlloyLanguage.g:2902:2: ( (lv_exactly_0_0= 'exactly' ) )? ( (lv_number_1_0= RULE_INT ) ) ( (otherlv_2= RULE_ID ) )
             {
-            // InternalAlloyLanguage.g:2856:2: ( (lv_exactly_0_0= 'exactly' ) )?
+            // InternalAlloyLanguage.g:2902:2: ( (lv_exactly_0_0= 'exactly' ) )?
             int alt47=2;
             int LA47_0 = input.LA(1);
 
-            if ( (LA47_0==64) ) {
+            if ( (LA47_0==65) ) {
                 alt47=1;
             }
             switch (alt47) {
                 case 1 :
-                    // InternalAlloyLanguage.g:2857:1: (lv_exactly_0_0= 'exactly' )
+                    // InternalAlloyLanguage.g:2903:1: (lv_exactly_0_0= 'exactly' )
                     {
-                    // InternalAlloyLanguage.g:2857:1: (lv_exactly_0_0= 'exactly' )
-                    // InternalAlloyLanguage.g:2858:3: lv_exactly_0_0= 'exactly'
+                    // InternalAlloyLanguage.g:2903:1: (lv_exactly_0_0= 'exactly' )
+                    // InternalAlloyLanguage.g:2904:3: lv_exactly_0_0= 'exactly'
                     {
-                    lv_exactly_0_0=(Token)match(input,64,FOLLOW_38); if (state.failed) return current;
+                    lv_exactly_0_0=(Token)match(input,65,FOLLOW_38); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_exactly_0_0, grammarAccess.getALSSigScopeAccess().getExactlyExactlyKeyword_0_0());
@@ -8187,11 +8335,11 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAlloyLanguage.g:2871:3: ( (lv_number_1_0= RULE_INT ) )
-            // InternalAlloyLanguage.g:2872:1: (lv_number_1_0= RULE_INT )
+            // InternalAlloyLanguage.g:2917:3: ( (lv_number_1_0= RULE_INT ) )
+            // InternalAlloyLanguage.g:2918:1: (lv_number_1_0= RULE_INT )
             {
-            // InternalAlloyLanguage.g:2872:1: (lv_number_1_0= RULE_INT )
-            // InternalAlloyLanguage.g:2873:3: lv_number_1_0= RULE_INT
+            // InternalAlloyLanguage.g:2918:1: (lv_number_1_0= RULE_INT )
+            // InternalAlloyLanguage.g:2919:3: lv_number_1_0= RULE_INT
             {
             lv_number_1_0=(Token)match(input,RULE_INT,FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -8217,11 +8365,11 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalAlloyLanguage.g:2889:2: ( (otherlv_2= RULE_ID ) )
-            // InternalAlloyLanguage.g:2890:1: (otherlv_2= RULE_ID )
+            // InternalAlloyLanguage.g:2935:2: ( (otherlv_2= RULE_ID ) )
+            // InternalAlloyLanguage.g:2936:1: (otherlv_2= RULE_ID )
             {
-            // InternalAlloyLanguage.g:2890:1: (otherlv_2= RULE_ID )
-            // InternalAlloyLanguage.g:2891:3: otherlv_2= RULE_ID
+            // InternalAlloyLanguage.g:2936:1: (otherlv_2= RULE_ID )
+            // InternalAlloyLanguage.g:2937:3: otherlv_2= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -8265,7 +8413,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleALSIntScope"
-    // InternalAlloyLanguage.g:2910:1: entryRuleALSIntScope returns [EObject current=null] : iv_ruleALSIntScope= ruleALSIntScope EOF ;
+    // InternalAlloyLanguage.g:2956:1: entryRuleALSIntScope returns [EObject current=null] : iv_ruleALSIntScope= ruleALSIntScope EOF ;
     public final EObject entryRuleALSIntScope() throws RecognitionException {
         EObject current = null;
 
@@ -8273,8 +8421,8 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalAlloyLanguage.g:2911:2: (iv_ruleALSIntScope= ruleALSIntScope EOF )
-            // InternalAlloyLanguage.g:2912:2: iv_ruleALSIntScope= ruleALSIntScope EOF
+            // InternalAlloyLanguage.g:2957:2: (iv_ruleALSIntScope= ruleALSIntScope EOF )
+            // InternalAlloyLanguage.g:2958:2: iv_ruleALSIntScope= ruleALSIntScope EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getALSIntScopeRule()); 
@@ -8305,7 +8453,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALSIntScope"
-    // InternalAlloyLanguage.g:2919:1: ruleALSIntScope returns [EObject current=null] : ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' ) ;
+    // InternalAlloyLanguage.g:2965:1: ruleALSIntScope returns [EObject current=null] : ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' ) ;
     public final EObject ruleALSIntScope() throws RecognitionException {
         EObject current = null;
 
@@ -8315,17 +8463,17 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalAlloyLanguage.g:2922:28: ( ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' ) )
-            // InternalAlloyLanguage.g:2923:1: ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' )
+            // InternalAlloyLanguage.g:2968:28: ( ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' ) )
+            // InternalAlloyLanguage.g:2969:1: ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' )
             {
-            // InternalAlloyLanguage.g:2923:1: ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' )
-            // InternalAlloyLanguage.g:2923:2: ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int'
+            // InternalAlloyLanguage.g:2969:1: ( ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int' )
+            // InternalAlloyLanguage.g:2969:2: ( (lv_number_0_0= RULE_INT ) ) otherlv_1= 'Int'
             {
-            // InternalAlloyLanguage.g:2923:2: ( (lv_number_0_0= RULE_INT ) )
-            // InternalAlloyLanguage.g:2924:1: (lv_number_0_0= RULE_INT )
+            // InternalAlloyLanguage.g:2969:2: ( (lv_number_0_0= RULE_INT ) )
+            // InternalAlloyLanguage.g:2970:1: (lv_number_0_0= RULE_INT )
             {
-            // InternalAlloyLanguage.g:2924:1: (lv_number_0_0= RULE_INT )
-            // InternalAlloyLanguage.g:2925:3: lv_number_0_0= RULE_INT
+            // InternalAlloyLanguage.g:2970:1: (lv_number_0_0= RULE_INT )
+            // InternalAlloyLanguage.g:2971:3: lv_number_0_0= RULE_INT
             {
             lv_number_0_0=(Token)match(input,RULE_INT,FOLLOW_39); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -8379,8 +8527,130 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleALSIntScope"
 
 
+    // $ANTLR start "entryRuleALSStringScope"
+    // InternalAlloyLanguage.g:2999:1: entryRuleALSStringScope returns [EObject current=null] : iv_ruleALSStringScope= ruleALSStringScope EOF ;
+    public final EObject entryRuleALSStringScope() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleALSStringScope = null;
+
+
+        try {
+            // InternalAlloyLanguage.g:3000:2: (iv_ruleALSStringScope= ruleALSStringScope EOF )
+            // InternalAlloyLanguage.g:3001:2: iv_ruleALSStringScope= ruleALSStringScope EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getALSStringScopeRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleALSStringScope=ruleALSStringScope();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleALSStringScope; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleALSStringScope"
+
+
+    // $ANTLR start "ruleALSStringScope"
+    // InternalAlloyLanguage.g:3008:1: ruleALSStringScope returns [EObject current=null] : (otherlv_0= 'exactly' ( (lv_number_1_0= RULE_INT ) ) otherlv_2= 'String' ) ;
+    public final EObject ruleALSStringScope() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_number_1_0=null;
+        Token otherlv_2=null;
+
+         enterRule(); 
+            
+        try {
+            // InternalAlloyLanguage.g:3011:28: ( (otherlv_0= 'exactly' ( (lv_number_1_0= RULE_INT ) ) otherlv_2= 'String' ) )
+            // InternalAlloyLanguage.g:3012:1: (otherlv_0= 'exactly' ( (lv_number_1_0= RULE_INT ) ) otherlv_2= 'String' )
+            {
+            // InternalAlloyLanguage.g:3012:1: (otherlv_0= 'exactly' ( (lv_number_1_0= RULE_INT ) ) otherlv_2= 'String' )
+            // InternalAlloyLanguage.g:3012:3: otherlv_0= 'exactly' ( (lv_number_1_0= RULE_INT ) ) otherlv_2= 'String'
+            {
+            otherlv_0=(Token)match(input,65,FOLLOW_38); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                  	newLeafNode(otherlv_0, grammarAccess.getALSStringScopeAccess().getExactlyKeyword_0());
+                  
+            }
+            // InternalAlloyLanguage.g:3016:1: ( (lv_number_1_0= RULE_INT ) )
+            // InternalAlloyLanguage.g:3017:1: (lv_number_1_0= RULE_INT )
+            {
+            // InternalAlloyLanguage.g:3017:1: (lv_number_1_0= RULE_INT )
+            // InternalAlloyLanguage.g:3018:3: lv_number_1_0= RULE_INT
+            {
+            lv_number_1_0=(Token)match(input,RULE_INT,FOLLOW_40); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(lv_number_1_0, grammarAccess.getALSStringScopeAccess().getNumberINTTerminalRuleCall_1_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
+
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getALSStringScopeRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"number",
+                      		lv_number_1_0, 
+                      		"org.eclipse.xtext.common.Terminals.INT");
+              	    
+            }
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                  	newLeafNode(otherlv_2, grammarAccess.getALSStringScopeAccess().getStringKeyword_2());
+                  
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleALSStringScope"
+
+
     // $ANTLR start "ruleALSMultiplicity"
-    // InternalAlloyLanguage.g:2953:1: ruleALSMultiplicity returns [Enumerator current=null] : ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) ) ;
+    // InternalAlloyLanguage.g:3046:1: ruleALSMultiplicity returns [Enumerator current=null] : ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) ) ;
     public final Enumerator ruleALSMultiplicity() throws RecognitionException {
         Enumerator current = null;
 
@@ -8393,38 +8663,38 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // InternalAlloyLanguage.g:2955:28: ( ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) ) )
-            // InternalAlloyLanguage.g:2956:1: ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) )
+            // InternalAlloyLanguage.g:3048:28: ( ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) ) )
+            // InternalAlloyLanguage.g:3049:1: ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) )
             {
-            // InternalAlloyLanguage.g:2956:1: ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) )
+            // InternalAlloyLanguage.g:3049:1: ( (enumLiteral_0= 'all' ) | (enumLiteral_1= 'no' ) | (enumLiteral_2= 'some' ) | (enumLiteral_3= 'lone' ) | (enumLiteral_4= 'one' ) | (enumLiteral_5= 'set' ) )
             int alt48=6;
             switch ( input.LA(1) ) {
-            case 65:
+            case 66:
                 {
                 alt48=1;
                 }
                 break;
-            case 66:
+            case 67:
                 {
                 alt48=2;
                 }
                 break;
-            case 67:
+            case 68:
                 {
                 alt48=3;
                 }
                 break;
-            case 68:
+            case 69:
                 {
                 alt48=4;
                 }
                 break;
-            case 69:
+            case 70:
                 {
                 alt48=5;
                 }
                 break;
-            case 70:
+            case 71:
                 {
                 alt48=6;
                 }
@@ -8439,12 +8709,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt48) {
                 case 1 :
-                    // InternalAlloyLanguage.g:2956:2: (enumLiteral_0= 'all' )
+                    // InternalAlloyLanguage.g:3049:2: (enumLiteral_0= 'all' )
                     {
-                    // InternalAlloyLanguage.g:2956:2: (enumLiteral_0= 'all' )
-                    // InternalAlloyLanguage.g:2956:4: enumLiteral_0= 'all'
+                    // InternalAlloyLanguage.g:3049:2: (enumLiteral_0= 'all' )
+                    // InternalAlloyLanguage.g:3049:4: enumLiteral_0= 'all'
                     {
-                    enumLiteral_0=(Token)match(input,65,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,66,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSMultiplicityAccess().getAllEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -8458,12 +8728,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAlloyLanguage.g:2962:6: (enumLiteral_1= 'no' )
+                    // InternalAlloyLanguage.g:3055:6: (enumLiteral_1= 'no' )
                     {
-                    // InternalAlloyLanguage.g:2962:6: (enumLiteral_1= 'no' )
-                    // InternalAlloyLanguage.g:2962:8: enumLiteral_1= 'no'
+                    // InternalAlloyLanguage.g:3055:6: (enumLiteral_1= 'no' )
+                    // InternalAlloyLanguage.g:3055:8: enumLiteral_1= 'no'
                     {
-                    enumLiteral_1=(Token)match(input,66,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSMultiplicityAccess().getNoEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -8477,12 +8747,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAlloyLanguage.g:2968:6: (enumLiteral_2= 'some' )
+                    // InternalAlloyLanguage.g:3061:6: (enumLiteral_2= 'some' )
                     {
-                    // InternalAlloyLanguage.g:2968:6: (enumLiteral_2= 'some' )
-                    // InternalAlloyLanguage.g:2968:8: enumLiteral_2= 'some'
+                    // InternalAlloyLanguage.g:3061:6: (enumLiteral_2= 'some' )
+                    // InternalAlloyLanguage.g:3061:8: enumLiteral_2= 'some'
                     {
-                    enumLiteral_2=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSMultiplicityAccess().getSomeEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -8496,12 +8766,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalAlloyLanguage.g:2974:6: (enumLiteral_3= 'lone' )
+                    // InternalAlloyLanguage.g:3067:6: (enumLiteral_3= 'lone' )
                     {
-                    // InternalAlloyLanguage.g:2974:6: (enumLiteral_3= 'lone' )
-                    // InternalAlloyLanguage.g:2974:8: enumLiteral_3= 'lone'
+                    // InternalAlloyLanguage.g:3067:6: (enumLiteral_3= 'lone' )
+                    // InternalAlloyLanguage.g:3067:8: enumLiteral_3= 'lone'
                     {
-                    enumLiteral_3=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSMultiplicityAccess().getLoneEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -8515,12 +8785,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalAlloyLanguage.g:2980:6: (enumLiteral_4= 'one' )
+                    // InternalAlloyLanguage.g:3073:6: (enumLiteral_4= 'one' )
                     {
-                    // InternalAlloyLanguage.g:2980:6: (enumLiteral_4= 'one' )
-                    // InternalAlloyLanguage.g:2980:8: enumLiteral_4= 'one'
+                    // InternalAlloyLanguage.g:3073:6: (enumLiteral_4= 'one' )
+                    // InternalAlloyLanguage.g:3073:8: enumLiteral_4= 'one'
                     {
-                    enumLiteral_4=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_4=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSMultiplicityAccess().getOneEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
@@ -8534,12 +8804,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalAlloyLanguage.g:2986:6: (enumLiteral_5= 'set' )
+                    // InternalAlloyLanguage.g:3079:6: (enumLiteral_5= 'set' )
                     {
-                    // InternalAlloyLanguage.g:2986:6: (enumLiteral_5= 'set' )
-                    // InternalAlloyLanguage.g:2986:8: enumLiteral_5= 'set'
+                    // InternalAlloyLanguage.g:3079:6: (enumLiteral_5= 'set' )
+                    // InternalAlloyLanguage.g:3079:8: enumLiteral_5= 'set'
                     {
-                    enumLiteral_5=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_5=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSMultiplicityAccess().getSetEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
@@ -8575,7 +8845,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleALSNumericOperator"
-    // InternalAlloyLanguage.g:2996:1: ruleALSNumericOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) ) ;
+    // InternalAlloyLanguage.g:3089:1: ruleALSNumericOperator returns [Enumerator current=null] : ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) ) ;
     public final Enumerator ruleALSNumericOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -8587,33 +8857,33 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // InternalAlloyLanguage.g:2998:28: ( ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) ) )
-            // InternalAlloyLanguage.g:2999:1: ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) )
+            // InternalAlloyLanguage.g:3091:28: ( ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) ) )
+            // InternalAlloyLanguage.g:3092:1: ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) )
             {
-            // InternalAlloyLanguage.g:2999:1: ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) )
+            // InternalAlloyLanguage.g:3092:1: ( (enumLiteral_0= 'plus' ) | (enumLiteral_1= 'sub' ) | (enumLiteral_2= 'mul' ) | (enumLiteral_3= 'rem' ) | (enumLiteral_4= 'div' ) )
             int alt49=5;
             switch ( input.LA(1) ) {
-            case 71:
+            case 72:
                 {
                 alt49=1;
                 }
                 break;
-            case 72:
+            case 73:
                 {
                 alt49=2;
                 }
                 break;
-            case 73:
+            case 74:
                 {
                 alt49=3;
                 }
                 break;
-            case 74:
+            case 75:
                 {
                 alt49=4;
                 }
                 break;
-            case 75:
+            case 76:
                 {
                 alt49=5;
                 }
@@ -8628,12 +8898,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt49) {
                 case 1 :
-                    // InternalAlloyLanguage.g:2999:2: (enumLiteral_0= 'plus' )
+                    // InternalAlloyLanguage.g:3092:2: (enumLiteral_0= 'plus' )
                     {
-                    // InternalAlloyLanguage.g:2999:2: (enumLiteral_0= 'plus' )
-                    // InternalAlloyLanguage.g:2999:4: enumLiteral_0= 'plus'
+                    // InternalAlloyLanguage.g:3092:2: (enumLiteral_0= 'plus' )
+                    // InternalAlloyLanguage.g:3092:4: enumLiteral_0= 'plus'
                     {
-                    enumLiteral_0=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSNumericOperatorAccess().getPlusEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -8647,12 +8917,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalAlloyLanguage.g:3005:6: (enumLiteral_1= 'sub' )
+                    // InternalAlloyLanguage.g:3098:6: (enumLiteral_1= 'sub' )
                     {
-                    // InternalAlloyLanguage.g:3005:6: (enumLiteral_1= 'sub' )
-                    // InternalAlloyLanguage.g:3005:8: enumLiteral_1= 'sub'
+                    // InternalAlloyLanguage.g:3098:6: (enumLiteral_1= 'sub' )
+                    // InternalAlloyLanguage.g:3098:8: enumLiteral_1= 'sub'
                     {
-                    enumLiteral_1=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSNumericOperatorAccess().getSubEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -8666,12 +8936,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalAlloyLanguage.g:3011:6: (enumLiteral_2= 'mul' )
+                    // InternalAlloyLanguage.g:3104:6: (enumLiteral_2= 'mul' )
                     {
-                    // InternalAlloyLanguage.g:3011:6: (enumLiteral_2= 'mul' )
-                    // InternalAlloyLanguage.g:3011:8: enumLiteral_2= 'mul'
+                    // InternalAlloyLanguage.g:3104:6: (enumLiteral_2= 'mul' )
+                    // InternalAlloyLanguage.g:3104:8: enumLiteral_2= 'mul'
                     {
-                    enumLiteral_2=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSNumericOperatorAccess().getMulEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -8685,12 +8955,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalAlloyLanguage.g:3017:6: (enumLiteral_3= 'rem' )
+                    // InternalAlloyLanguage.g:3110:6: (enumLiteral_3= 'rem' )
                     {
-                    // InternalAlloyLanguage.g:3017:6: (enumLiteral_3= 'rem' )
-                    // InternalAlloyLanguage.g:3017:8: enumLiteral_3= 'rem'
+                    // InternalAlloyLanguage.g:3110:6: (enumLiteral_3= 'rem' )
+                    // InternalAlloyLanguage.g:3110:8: enumLiteral_3= 'rem'
                     {
-                    enumLiteral_3=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,75,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSNumericOperatorAccess().getRemEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -8704,12 +8974,12 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalAlloyLanguage.g:3023:6: (enumLiteral_4= 'div' )
+                    // InternalAlloyLanguage.g:3116:6: (enumLiteral_4= 'div' )
                     {
-                    // InternalAlloyLanguage.g:3023:6: (enumLiteral_4= 'div' )
-                    // InternalAlloyLanguage.g:3023:8: enumLiteral_4= 'div'
+                    // InternalAlloyLanguage.g:3116:6: (enumLiteral_4= 'div' )
+                    // InternalAlloyLanguage.g:3116:8: enumLiteral_4= 'div'
                     {
-                    enumLiteral_4=(Token)match(input,75,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_4=(Token)match(input,76,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getALSNumericOperatorAccess().getDivEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
@@ -8749,22 +9019,22 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
     protected DFA10 dfa10 = new DFA10(this);
     protected DFA42 dfa42 = new DFA42(this);
     static final String dfa_1s = "\12\uffff";
-    static final String dfa_2s = "\10\uffff\1\11\1\uffff";
-    static final String dfa_3s = "\7\4\1\uffff\1\15\1\uffff";
-    static final String dfa_4s = "\7\113\1\uffff\1\106\1\uffff";
-    static final String dfa_5s = "\7\uffff\1\2\1\uffff\1\1";
+    static final String dfa_2s = "\11\uffff\1\10";
+    static final String dfa_3s = "\7\4\2\uffff\1\15";
+    static final String dfa_4s = "\7\114\2\uffff\1\107";
+    static final String dfa_5s = "\7\uffff\1\2\1\1\1\uffff";
     static final String dfa_6s = "\12\uffff}>";
     static final String[] dfa_7s = {
-            "\2\7\50\uffff\1\7\2\uffff\14\7\4\uffff\1\1\1\2\1\3\1\4\1\5\1\6\5\7",
-            "\1\10\1\11\24\uffff\1\7\23\uffff\1\11\2\uffff\14\11\4\uffff\13\11",
-            "\1\10\1\11\24\uffff\1\7\23\uffff\1\11\2\uffff\14\11\4\uffff\13\11",
-            "\1\10\1\11\24\uffff\1\7\23\uffff\1\11\2\uffff\14\11\4\uffff\13\11",
-            "\1\10\1\11\24\uffff\1\7\23\uffff\1\11\2\uffff\14\11\4\uffff\13\11",
-            "\1\10\1\11\24\uffff\1\7\23\uffff\1\11\2\uffff\14\11\4\uffff\13\11",
-            "\1\10\1\11\24\uffff\1\7\23\uffff\1\11\2\uffff\14\11\4\uffff\13\11",
+            "\3\7\47\uffff\1\7\2\uffff\15\7\4\uffff\1\1\1\2\1\3\1\4\1\5\1\6\5\7",
+            "\1\11\2\10\23\uffff\1\7\23\uffff\1\10\2\uffff\15\10\4\uffff\13\10",
+            "\1\11\2\10\23\uffff\1\7\23\uffff\1\10\2\uffff\15\10\4\uffff\13\10",
+            "\1\11\2\10\23\uffff\1\7\23\uffff\1\10\2\uffff\15\10\4\uffff\13\10",
+            "\1\11\2\10\23\uffff\1\7\23\uffff\1\10\2\uffff\15\10\4\uffff\13\10",
+            "\1\11\2\10\23\uffff\1\7\23\uffff\1\10\2\uffff\15\10\4\uffff\13\10",
+            "\1\11\2\10\23\uffff\1\7\23\uffff\1\10\2\uffff\15\10\4\uffff\13\10",
             "",
-            "\2\11\3\uffff\2\11\1\7\1\uffff\1\11\4\uffff\6\11\1\uffff\17\11\20\uffff\6\11",
-            ""
+            "",
+            "\2\10\3\uffff\2\10\1\7\1\uffff\1\10\4\uffff\6\10\1\uffff\17\10\21\uffff\6\10"
     };
 
     static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
@@ -8795,11 +9065,11 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
     static final String dfa_8s = "\13\uffff";
     static final String dfa_9s = "\10\uffff\1\12\2\uffff";
     static final String dfa_10s = "\1\4\7\uffff\1\14\2\uffff";
-    static final String dfa_11s = "\1\113\7\uffff\1\106\2\uffff";
+    static final String dfa_11s = "\1\114\7\uffff\1\107\2\uffff";
     static final String dfa_12s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\uffff\1\10\1\11";
     static final String dfa_13s = "\13\uffff}>";
     static final String[] dfa_14s = {
-            "\1\10\1\12\50\uffff\1\6\2\uffff\2\1\1\2\1\3\1\4\1\5\1\7\5\12\12\uffff\5\11",
+            "\1\10\2\12\47\uffff\1\6\2\uffff\2\1\1\2\1\3\1\4\1\5\1\7\6\12\12\uffff\5\11",
             "",
             "",
             "",
@@ -8807,7 +9077,7 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
             "",
             "",
             "",
-            "\3\12\3\uffff\2\12\2\uffff\1\11\1\12\3\uffff\26\12\14\uffff\1\12\3\uffff\6\12",
+            "\3\12\3\uffff\2\12\2\uffff\1\11\1\12\3\uffff\26\12\15\uffff\1\12\3\uffff\6\12",
             "",
             ""
     };
@@ -8841,16 +9111,16 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x4000000003218800L,0x000000000000007EL});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x8000000003218800L,0x00000000000000FCL});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000018000L,0x000000000000007EL});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000018000L,0x00000000000000FCL});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000063000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000081000L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000004010L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x1FFE400000000030L,0x0000000000000FFEL});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x3FFE400000000070L,0x0000000000001FFCL});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000400000L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000802000L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000004000L});
@@ -8870,13 +9140,14 @@ public class InternalAlloyLanguageParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000400000000002L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000080002L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000800000000002L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0001000000000002L,0x000000000000007EL});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0001000000000002L,0x00000000000000FCL});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x2000000000000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x8000000000000002L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x4000000000000000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000001L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000020L,0x0000000000000002L});
     public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000002002L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0800000000000000L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x1000000000000000L});
 
 }

@@ -126,11 +126,14 @@ public class AlloyLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getALSBasicRelationTermAccess().getGroup_4(), "rule__ALSBasicRelationTerm__Group_4__0");
 					put(grammarAccess.getALSBasicRelationTermAccess().getGroup_5(), "rule__ALSBasicRelationTerm__Group_5__0");
 					put(grammarAccess.getALSBasicRelationTermAccess().getGroup_6(), "rule__ALSBasicRelationTerm__Group_6__0");
+					put(grammarAccess.getALSBasicRelationTermAccess().getGroup_7(), "rule__ALSBasicRelationTerm__Group_7__0");
+					put(grammarAccess.getALSBasicRelationTermAccess().getGroup_8(), "rule__ALSBasicRelationTerm__Group_8__0");
 					put(grammarAccess.getALSRunCommandAccess().getGroup(), "rule__ALSRunCommand__Group__0");
 					put(grammarAccess.getALSRunCommandAccess().getGroup_4(), "rule__ALSRunCommand__Group_4__0");
 					put(grammarAccess.getALSRunCommandAccess().getGroup_4_2(), "rule__ALSRunCommand__Group_4_2__0");
 					put(grammarAccess.getALSSigScopeAccess().getGroup(), "rule__ALSSigScope__Group__0");
 					put(grammarAccess.getALSIntScopeAccess().getGroup(), "rule__ALSIntScope__Group__0");
+					put(grammarAccess.getALSStringScopeAccess().getGroup(), "rule__ALSStringScope__Group__0");
 					put(grammarAccess.getALSDocumentAccess().getEnumDeclarationsAssignment_0_0(), "rule__ALSDocument__EnumDeclarationsAssignment_0_0");
 					put(grammarAccess.getALSDocumentAccess().getSignatureBodiesAssignment_0_1(), "rule__ALSDocument__SignatureBodiesAssignment_0_1");
 					put(grammarAccess.getALSDocumentAccess().getFunctionDefinitionsAssignment_0_2(), "rule__ALSDocument__FunctionDefinitionsAssignment_0_2");
@@ -201,14 +204,16 @@ public class AlloyLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getALSPreficedAccess().getParamsAssignment_7_4_1(), "rule__ALSPreficed__ParamsAssignment_7_4_1");
 					put(grammarAccess.getALSVariableDeclarationAccess().getNameAssignment_0(), "rule__ALSVariableDeclaration__NameAssignment_0");
 					put(grammarAccess.getALSVariableDeclarationAccess().getRangeAssignment_2(), "rule__ALSVariableDeclaration__RangeAssignment_2");
-					put(grammarAccess.getALSBasicRelationTermAccess().getReferredAssignment_4_1(), "rule__ALSBasicRelationTerm__ReferredAssignment_4_1");
-					put(grammarAccess.getALSBasicRelationTermAccess().getValueAssignment_5_1(), "rule__ALSBasicRelationTerm__ValueAssignment_5_1");
+					put(grammarAccess.getALSBasicRelationTermAccess().getReferredAssignment_5_1(), "rule__ALSBasicRelationTerm__ReferredAssignment_5_1");
+					put(grammarAccess.getALSBasicRelationTermAccess().getValueAssignment_6_1(), "rule__ALSBasicRelationTerm__ValueAssignment_6_1");
+					put(grammarAccess.getALSBasicRelationTermAccess().getValueAssignment_7_1(), "rule__ALSBasicRelationTerm__ValueAssignment_7_1");
 					put(grammarAccess.getALSRunCommandAccess().getTypeScopesAssignment_4_1(), "rule__ALSRunCommand__TypeScopesAssignment_4_1");
 					put(grammarAccess.getALSRunCommandAccess().getTypeScopesAssignment_4_2_1(), "rule__ALSRunCommand__TypeScopesAssignment_4_2_1");
 					put(grammarAccess.getALSSigScopeAccess().getExactlyAssignment_0(), "rule__ALSSigScope__ExactlyAssignment_0");
 					put(grammarAccess.getALSSigScopeAccess().getNumberAssignment_1(), "rule__ALSSigScope__NumberAssignment_1");
 					put(grammarAccess.getALSSigScopeAccess().getTypeAssignment_2(), "rule__ALSSigScope__TypeAssignment_2");
 					put(grammarAccess.getALSIntScopeAccess().getNumberAssignment_0(), "rule__ALSIntScope__NumberAssignment_0");
+					put(grammarAccess.getALSStringScopeAccess().getNumberAssignment_1(), "rule__ALSStringScope__NumberAssignment_1");
 					put(grammarAccess.getALSSignatureBodyAccess().getUnorderedGroup_0(), "rule__ALSSignatureBody__UnorderedGroup_0");
 				}
 			};

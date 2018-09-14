@@ -2650,7 +2650,18 @@ ruleALSBasicRelationTerm returns [EObject current=null]
     |((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getALSBasicRelationTermAccess().getALSReferenceAction_4_0(),
+            grammarAccess.getALSBasicRelationTermAccess().getALSStringAction_4_0(),
+            $current);
+    }
+)	otherlv_9='String' 
+    {
+    	newLeafNode(otherlv_9, grammarAccess.getALSBasicRelationTermAccess().getStringKeyword_4_1());
+    }
+)
+    |((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getALSBasicRelationTermAccess().getALSReferenceAction_5_0(),
             $current);
     }
 )(
@@ -2660,9 +2671,9 @@ ruleALSBasicRelationTerm returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getALSBasicRelationTermRule());
 	        }
         }
-	otherlv_9=RULE_ID
+	otherlv_11=RULE_ID
 	{
-		newLeafNode(otherlv_9, grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationCrossReference_4_1_0()); 
+		newLeafNode(otherlv_11, grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationCrossReference_5_1_0()); 
 	}
 
 )
@@ -2670,14 +2681,14 @@ ruleALSBasicRelationTerm returns [EObject current=null]
     |((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getALSBasicRelationTermAccess().getALSNumberLiteralAction_5_0(),
+            grammarAccess.getALSBasicRelationTermAccess().getALSNumberLiteralAction_6_0(),
             $current);
     }
 )(
 (
-		lv_value_11_0=RULE_INT
+		lv_value_13_0=RULE_INT
 		{
-			newLeafNode(lv_value_11_0, grammarAccess.getALSBasicRelationTermAccess().getValueINTTerminalRuleCall_5_1_0()); 
+			newLeafNode(lv_value_13_0, grammarAccess.getALSBasicRelationTermAccess().getValueINTTerminalRuleCall_6_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -2686,28 +2697,53 @@ ruleALSBasicRelationTerm returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"value",
-        		lv_value_11_0, 
+        		lv_value_13_0, 
         		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
 ))
-    |(	otherlv_12='(' 
+    |((
     {
-    	newLeafNode(otherlv_12, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_6_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getALSBasicRelationTermAccess().getALSStringLiteralAction_7_0(),
+            $current);
+    }
+)(
+(
+		lv_value_15_0=RULE_STRING
+		{
+			newLeafNode(lv_value_15_0, grammarAccess.getALSBasicRelationTermAccess().getValueSTRINGTerminalRuleCall_7_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getALSBasicRelationTermRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"value",
+        		lv_value_15_0, 
+        		"org.eclipse.xtext.common.Terminals.STRING");
+	    }
+
+)
+))
+    |(	otherlv_16='(' 
+    {
+    	newLeafNode(otherlv_16, grammarAccess.getALSBasicRelationTermAccess().getLeftParenthesisKeyword_8_0());
     }
 
     { 
-        newCompositeNode(grammarAccess.getALSBasicRelationTermAccess().getALSTermParserRuleCall_6_1()); 
+        newCompositeNode(grammarAccess.getALSBasicRelationTermAccess().getALSTermParserRuleCall_8_1()); 
     }
-    this_ALSTerm_13=ruleALSTerm
+    this_ALSTerm_17=ruleALSTerm
     { 
-        $current = $this_ALSTerm_13.current; 
+        $current = $this_ALSTerm_17.current; 
         afterParserOrEnumRuleCall();
     }
-	otherlv_14=')' 
+	otherlv_18=')' 
     {
-    	newLeafNode(otherlv_14, grammarAccess.getALSBasicRelationTermAccess().getRightParenthesisKeyword_6_2());
+    	newLeafNode(otherlv_18, grammarAccess.getALSBasicRelationTermAccess().getRightParenthesisKeyword_8_2());
     }
 ))
 ;
@@ -2832,6 +2868,16 @@ ruleALSTypeScope returns [EObject current=null]
         $current = $this_ALSIntScope_1.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getALSTypeScopeAccess().getALSStringScopeParserRuleCall_2()); 
+    }
+    this_ALSStringScope_2=ruleALSStringScope
+    { 
+        $current = $this_ALSStringScope_2.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2941,6 +2987,53 @@ ruleALSIntScope returns [EObject current=null]
 )	otherlv_1='Int' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getALSIntScopeAccess().getIntKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleALSStringScope
+entryRuleALSStringScope returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getALSStringScopeRule()); }
+	 iv_ruleALSStringScope=ruleALSStringScope 
+	 { $current=$iv_ruleALSStringScope.current; } 
+	 EOF 
+;
+
+// Rule ALSStringScope
+ruleALSStringScope returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='exactly' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getALSStringScopeAccess().getExactlyKeyword_0());
+    }
+(
+(
+		lv_number_1_0=RULE_INT
+		{
+			newLeafNode(lv_number_1_0, grammarAccess.getALSStringScopeAccess().getNumberINTTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getALSStringScopeRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"number",
+        		lv_number_1_0, 
+        		"org.eclipse.xtext.common.Terminals.INT");
+	    }
+
+)
+)	otherlv_2='String' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getALSStringScopeAccess().getStringKeyword_2());
     }
 )
 ;

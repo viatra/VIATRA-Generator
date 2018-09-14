@@ -29,6 +29,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.Positi
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
 
 class Constraint2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
@@ -209,6 +210,7 @@ class Constraint2Logic {
 			return transformPathConstraint(type,src,trg,ecore2LogicTrace,variable2Variable,viatra2LogicTrace)
 		} else throw new IllegalArgumentException('''unknown tuple: «tuple»''')
 	}
+	
 	def Term transformTypeConstraint(
 		EClass type,
 		PVariable variable,
@@ -240,6 +242,31 @@ class Constraint2Logic {
 		} else {
 			throw new IllegalArgumentException('''Unsupported path expression: «feature.class.name»''')
 		}
+	}
+	
+	def dispatch Term transformConstraint(TypeFilterConstraint constraint,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,
+		Map<PVariable, Variable> variable2Variable,
+		Viatra2LogicConfiguration config)
+	{
+		val tuple = constraint.variablesTuple
+		if(tuple.size == 1) {
+			val typeConstraint = constraint.equivalentJudgement.inputKey
+			if(typeConstraint instanceof EClassTransitiveInstancesKey) {
+				val type = typeConstraint.emfKey
+				val variable = tuple.get(0) as PVariable
+				return transformTypeConstraint(type,variable,ecore2LogicTrace,variable2Variable,viatra2LogicTrace)
+			} else if(typeConstraint instanceof EDataTypeInSlotsKey) {
+				// If the type is a primitive type or EEnum, then instanceof is an unnecessary constraint
+				return null
+			}
+		} else if(tuple.size == 2) {
+			val type = (constraint.equivalentJudgement.inputKey as EStructuralFeatureInstancesKey).emfKey
+			val src = tuple.get(0) as PVariable
+			val trg = tuple.get(1) as PVariable
+			return transformPathConstraint(type,src,trg,ecore2LogicTrace,variable2Variable,viatra2LogicTrace)
+		} else throw new IllegalArgumentException('''unknown tuple: «tuple»''')
 	}
 	
 	def dispatch Term transformConstraint(PConstraint constraint,

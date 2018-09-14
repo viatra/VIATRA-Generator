@@ -66,6 +66,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSInt
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral
 
 class Logic2AlloyLanguageMapper {
 	private val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
@@ -295,7 +298,8 @@ class Logic2AlloyLanguageMapper {
 		return createALSReference => [ it.referred = support.getBooleanType(trace) ]
 	}
 	def dispatch protected ALSTerm transformTypeReference(IntTypeReference intTypeReference, Logic2AlloyLanguageMapperTrace trace) { createALSInt }
-	def dispatch protected ALSTerm transformTypeReference(RealTypeReference realTypeReference, Logic2AlloyLanguageMapperTrace trace) {throw new UnsupportedOperationException('''Real types are not supported in Alloy.''')}
+	def dispatch protected ALSTerm transformTypeReference(RealTypeReference realTypeReference, Logic2AlloyLanguageMapperTrace trace) { createALSInt }
+	def dispatch protected ALSTerm transformTypeReference(StringTypeReference stringTypeReference, Logic2AlloyLanguageMapperTrace trace) { createALSString }
 	def dispatch protected ALSTerm transformTypeReference(ComplexTypeReference complexTypeReference, Logic2AlloyLanguageMapperTrace trace) {
 		val types = typeMapper.transformTypeReference(complexTypeReference.referred, this, trace)
 		return support.unfoldPlus(types.map[t|createALSReference=>[referred = t]])
@@ -305,7 +309,22 @@ class Logic2AlloyLanguageMapper {
 	// Scopes
 	//////////////
 	
-	def transformRunCommand(ALSDocument specification, Logic2AlloyLanguageMapperTrace trace, AlloySolverConfiguration config) {
+	def transformRunCommand(ALSDocument specification, Logic2AlloyLanguageMapperTrace trace, AlloySolverConfiguration config)
+	{
+		val knownStringNumber = specification.eAllContents.filter(ALSStringLiteral).map[it.value].toSet.size
+		
+		// add fact to ensure the existence of all literals in the scope
+		if(!config.typeScopes.knownStrings.empty) {
+			specification.factDeclarations += createALSFactDeclaration => [
+				it.name = "EnsureAllStrings"
+				val List<? extends ALSTerm> equals = config.typeScopes.knownStrings.map[x|createALSEquals => [
+					it.leftOperand =createALSStringLiteral => [it.value = x]
+					it.rightOperand =createALSStringLiteral => [it.value = x]
+				]].toList
+				it.term = support.unfoldAnd(equals)
+			]
+		}
+		
 		specification.runCommand = createALSRunCommand => [
 			it.typeScopes+= createALSSigScope => [
 				it.type= typeMapper.getUndefinedSupertype(trace)
@@ -336,10 +355,18 @@ class Logic2AlloyLanguageMapper {
 						if(scope*2+1 < config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) {
 							scope += ((config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) - (scope*2))/2
 						}
-						number = Integer.SIZE-Integer.numberOfLeadingZeros(scope)
+						number = Integer.SIZE-Integer.numberOfLeadingZeros(scope)+1
 					}
 				]
 			}
+			if(config.typeScopes.maxNewStrings === LogicSolverConfiguration::Unlimited) {
+				throw new UnsupportedOperationException('''An string scope have to be specified for Alloy!''')
+			} else {
+				if(config.typeScopes.maxNewStrings != 0) {
+					it.typeScopes += createALSStringScope => [it.number = config.typeScopes.maxNewStrings - knownStringNumber]
+				}
+			}
+			
 //			for(definedScope : config.typeScopes.allDefinedScope) {
 //				it.typeScopes += createALSSigScope => [
 //					it.type = definedScope.type.lookup(trace.type2ALSType)
@@ -349,7 +376,6 @@ class Logic2AlloyLanguageMapper {
 //			}
 		]
 	}
-	
 	
 	//////////////
 	// Assertions + Terms
@@ -372,11 +398,16 @@ class Logic2AlloyLanguageMapper {
 		return  support.booleanToLogicValue((createALSReference => [referred = refFinal]),trace)
 	}
 	def dispatch protected ALSTerm transformTerm(RealLiteral literal, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
-		throw new UnsupportedOperationException("RealLiteral is not supported")
+		val v = literal.value.intValue
+		if(v>=0) { createALSNumberLiteral => [value = v]}
+		else {createALSUnaryMinus  => [it.operand = createALSNumberLiteral => [value = v] ] } 
 	}
 	def dispatch protected ALSTerm transformTerm(IntLiteral literal, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables)  {
 		if(literal.value>=0) { createALSNumberLiteral => [value = literal.value]}
 		else {createALSUnaryMinus  => [it.operand = createALSNumberLiteral => [value = literal.value] ] } 
+	}
+	def dispatch protected ALSTerm transformTerm(StringLiteral literal, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables)  {
+		createALSStringLiteral => [it.value = literal.value]
 	}
 	
 	def dispatch protected ALSTerm transformTerm(Not not, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {

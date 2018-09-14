@@ -45,6 +45,9 @@ import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSRunCommand;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSigScope;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSignatureBody;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSignatureDeclaration;
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString;
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral;
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringScope;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSubset;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSSum;
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSUnaryMinus;
@@ -200,6 +203,15 @@ public class AlloyLanguageSemanticSequencer extends AbstractDelegatingSemanticSe
 				return; 
 			case AlloyLanguagePackage.ALS_SIGNATURE_DECLARATION:
 				sequence_ALSSignatureDeclaration(context, (ALSSignatureDeclaration) semanticObject); 
+				return; 
+			case AlloyLanguagePackage.ALS_STRING:
+				sequence_ALSBasicRelationTerm(context, (ALSString) semanticObject); 
+				return; 
+			case AlloyLanguagePackage.ALS_STRING_LITERAL:
+				sequence_ALSBasicRelationTerm(context, (ALSStringLiteral) semanticObject); 
+				return; 
+			case AlloyLanguagePackage.ALS_STRING_SCOPE:
+				sequence_ALSStringScope(context, (ALSStringScope) semanticObject); 
 				return; 
 			case AlloyLanguagePackage.ALS_SUBSET:
 				sequence_ALSComparison(context, (ALSSubset) semanticObject); 
@@ -469,7 +481,7 @@ public class AlloyLanguageSemanticSequencer extends AbstractDelegatingSemanticSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AlloyLanguagePackage.Literals.ALS_NUMBER_LITERAL__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getValueINTTerminalRuleCall_5_1_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getValueINTTerminalRuleCall_6_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -522,7 +534,107 @@ public class AlloyLanguageSemanticSequencer extends AbstractDelegatingSemanticSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AlloyLanguagePackage.Literals.ALS_REFERENCE__REFERRED));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationIDTerminalRuleCall_4_1_0_1(), semanticObject.getReferred());
+		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getReferredALSRelationDeclarationIDTerminalRuleCall_5_1_0_1(), semanticObject.eGet(AlloyLanguagePackage.Literals.ALS_REFERENCE__REFERRED, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ALSTerm returns ALSString
+	 *     ALSQuantified returns ALSString
+	 *     ALSOr returns ALSString
+	 *     ALSOr.ALSOr_1_0 returns ALSString
+	 *     ALSIff returns ALSString
+	 *     ALSIff.ALSIff_1_0 returns ALSString
+	 *     ALSImpl returns ALSString
+	 *     ALSImpl.ALSImpl_1_0 returns ALSString
+	 *     ALSAnd returns ALSString
+	 *     ALSAnd.ALSAnd_1_0 returns ALSString
+	 *     ALSComparison returns ALSString
+	 *     ALSComparison.ALSEquals_1_0_0_0 returns ALSString
+	 *     ALSComparison.ALSNotEquals_1_0_1_0 returns ALSString
+	 *     ALSComparison.ALSSubset_1_0_2_0 returns ALSString
+	 *     ALSComparison.ALSLess_1_0_3_0 returns ALSString
+	 *     ALSComparison.ALSLeq_1_0_4_0 returns ALSString
+	 *     ALSComparison.ALSMore_1_0_5_0 returns ALSString
+	 *     ALSComparison.ALSMeq_1_0_6_0 returns ALSString
+	 *     ALSOverride returns ALSString
+	 *     ALSOverride.ALSOverride_1_0 returns ALSString
+	 *     ALSRangeRestrictionRight returns ALSString
+	 *     ALSRangeRestrictionRight.ALSRangeRestrictionRight_1_0 returns ALSString
+	 *     ALSRangeRestrictionLeft returns ALSString
+	 *     ALSRangeRestrictionLeft.ALSRangeRestrictionLeft_1_0 returns ALSString
+	 *     ALSJoin returns ALSString
+	 *     ALSJoin.ALSJoin_1_0 returns ALSString
+	 *     ALSMinus returns ALSString
+	 *     ALSMinus.ALSMinus_1_0 returns ALSString
+	 *     ALSPlus returns ALSString
+	 *     ALSPlus.ALSPlus_1_0 returns ALSString
+	 *     ALSIntersection returns ALSString
+	 *     ALSIntersection.ALSIntersection_1_0 returns ALSString
+	 *     ALSDirectProduct returns ALSString
+	 *     ALSDirectProduct.ALSDirectProduct_1_0 returns ALSString
+	 *     ALSPreficed returns ALSString
+	 *     ALSBasicRelationTerm returns ALSString
+	 *
+	 * Constraint:
+	 *     {ALSString}
+	 */
+	protected void sequence_ALSBasicRelationTerm(ISerializationContext context, ALSString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ALSTerm returns ALSStringLiteral
+	 *     ALSQuantified returns ALSStringLiteral
+	 *     ALSOr returns ALSStringLiteral
+	 *     ALSOr.ALSOr_1_0 returns ALSStringLiteral
+	 *     ALSIff returns ALSStringLiteral
+	 *     ALSIff.ALSIff_1_0 returns ALSStringLiteral
+	 *     ALSImpl returns ALSStringLiteral
+	 *     ALSImpl.ALSImpl_1_0 returns ALSStringLiteral
+	 *     ALSAnd returns ALSStringLiteral
+	 *     ALSAnd.ALSAnd_1_0 returns ALSStringLiteral
+	 *     ALSComparison returns ALSStringLiteral
+	 *     ALSComparison.ALSEquals_1_0_0_0 returns ALSStringLiteral
+	 *     ALSComparison.ALSNotEquals_1_0_1_0 returns ALSStringLiteral
+	 *     ALSComparison.ALSSubset_1_0_2_0 returns ALSStringLiteral
+	 *     ALSComparison.ALSLess_1_0_3_0 returns ALSStringLiteral
+	 *     ALSComparison.ALSLeq_1_0_4_0 returns ALSStringLiteral
+	 *     ALSComparison.ALSMore_1_0_5_0 returns ALSStringLiteral
+	 *     ALSComparison.ALSMeq_1_0_6_0 returns ALSStringLiteral
+	 *     ALSOverride returns ALSStringLiteral
+	 *     ALSOverride.ALSOverride_1_0 returns ALSStringLiteral
+	 *     ALSRangeRestrictionRight returns ALSStringLiteral
+	 *     ALSRangeRestrictionRight.ALSRangeRestrictionRight_1_0 returns ALSStringLiteral
+	 *     ALSRangeRestrictionLeft returns ALSStringLiteral
+	 *     ALSRangeRestrictionLeft.ALSRangeRestrictionLeft_1_0 returns ALSStringLiteral
+	 *     ALSJoin returns ALSStringLiteral
+	 *     ALSJoin.ALSJoin_1_0 returns ALSStringLiteral
+	 *     ALSMinus returns ALSStringLiteral
+	 *     ALSMinus.ALSMinus_1_0 returns ALSStringLiteral
+	 *     ALSPlus returns ALSStringLiteral
+	 *     ALSPlus.ALSPlus_1_0 returns ALSStringLiteral
+	 *     ALSIntersection returns ALSStringLiteral
+	 *     ALSIntersection.ALSIntersection_1_0 returns ALSStringLiteral
+	 *     ALSDirectProduct returns ALSStringLiteral
+	 *     ALSDirectProduct.ALSDirectProduct_1_0 returns ALSStringLiteral
+	 *     ALSPreficed returns ALSStringLiteral
+	 *     ALSBasicRelationTerm returns ALSStringLiteral
+	 *
+	 * Constraint:
+	 *     value=STRING
+	 */
+	protected void sequence_ALSBasicRelationTerm(ISerializationContext context, ALSStringLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AlloyLanguagePackage.Literals.ALS_STRING_LITERAL__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AlloyLanguagePackage.Literals.ALS_STRING_LITERAL__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getALSBasicRelationTermAccess().getValueSTRINGTerminalRuleCall_7_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -2206,6 +2318,25 @@ public class AlloyLanguageSemanticSequencer extends AbstractDelegatingSemanticSe
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getALSSignatureDeclarationAccess().getNameALSIDParserRuleCall_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ALSTypeScope returns ALSStringScope
+	 *     ALSStringScope returns ALSStringScope
+	 *
+	 * Constraint:
+	 *     number=INT
+	 */
+	protected void sequence_ALSStringScope(ISerializationContext context, ALSStringScope semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, AlloyLanguagePackage.Literals.ALS_TYPE_SCOPE__NUMBER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, AlloyLanguagePackage.Literals.ALS_TYPE_SCOPE__NUMBER));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getALSStringScopeAccess().getNumberINTTerminalRuleCall_1_0(), semanticObject.getNumber());
 		feeder.finish();
 	}
 	
