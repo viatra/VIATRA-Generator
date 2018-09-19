@@ -1,6 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.domains.transima.fam
 
-import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
+import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/"
 
 @Constraint(message="terminatorAndInformation", severity="error", key={T})
 pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
