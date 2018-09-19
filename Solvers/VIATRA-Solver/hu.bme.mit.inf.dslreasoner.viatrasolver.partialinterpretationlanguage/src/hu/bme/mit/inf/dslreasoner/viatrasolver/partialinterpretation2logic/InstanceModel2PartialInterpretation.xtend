@@ -40,7 +40,16 @@ class InstanceModel2PartialInterpretation {
 		return transform(metamodelTranslationResult,objects,withID)
 	}
 	
-	public def transform(
+	public def transformWithTrace(
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
+		Resource resource,
+		boolean withID)
+	{
+		val objects = resource.allContents.toList
+		return transformWithTrace(metamodelTranslationResult,objects,withID)
+	}
+	
+	public def transformWithTrace(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
 		List<EObject> objects,
 		boolean withID) 
@@ -130,7 +139,15 @@ class InstanceModel2PartialInterpretation {
 			}
 		}
 		
-		return partialInterpretation
+		return new TracedOutput(partialInterpretation,object2DefinedElement)
+	}
+	
+	public def transform(
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
+		List<EObject> objects,
+		boolean withID) 
+	{
+		return transformWithTrace(metamodelTranslationResult,objects,withID).output
 	}
 	
 	private def createTypeScopesFromKnownAttributeValues(List<EObject> objects, Set<EAttribute> attributesUsed) {

@@ -92,6 +92,34 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 
 		return res;
 	}
+	
+		/**
+	 * Creates a neighbourhood representation with traces
+	 * @param model The model to be represented.
+	 * @param range The range of the neighbourhood.
+	 * @param parallels The maximal number of parallel references to be differentiated.
+	 * @param maxNumber The maximal number of elements in a equivalence class that can be differentiated.
+	 * @param relevantTypes The set of types to include in the diversity calculations (when value is null, all types are considered)
+	 * @param relevantRelations The set of relations to include in the diversity calculations (when value is null, all relations are considered)
+	 * @param relevantPatterns The set of patterns to include in the diversity calculations 
+	 * 		  (NOT the well-formedness constraints) - when value is null, NO patterns are considered
+	 */
+	def public createRepresentation(PartialInterpretation model, int range, int parallels, int maxNumber,
+		Map<String,List<List<DefinedElement>>>  relevantPatterns) {
+
+		val Map<DefinedElement, Set<String>> types = new HashMap
+		fillTypes(model, types, null)
+		val Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations = new HashMap;
+		val Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations = new HashMap;
+		fillReferences(model, IncomingRelations, OutgoingRelations, null);
+		val Map<DefinedElement, List<PatternRelation<DefinedElement>>> PatternRelations = createPatternRelations(model,
+			relevantPatterns);
+			
+		val res = doRecursiveNeighbourCalculation(model, types, IncomingRelations, OutgoingRelations, PatternRelations,range, parallels,
+			maxNumber);
+		
+		return res;
+	}
 
 	/**
 	 * Collects all pattern relations for shaping
@@ -130,6 +158,32 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			}
 			
 			println('''Ignored params '''+ignoredParams+''' of pattern '''+ name)
+		}
+		
+		return result;
+		
+	}
+	
+	def Map<DefinedElement, List<PatternRelation<DefinedElement>>> createPatternRelations(
+		PartialInterpretation model, Map<String,List<List<DefinedElement>>> relevantPatterns) {
+		val Map<DefinedElement, List<PatternRelation<DefinedElement>>> result=new HashMap;
+		
+		for (element : model.elements) {
+			result.put(element,new LinkedList<PatternRelation<DefinedElement>>)
+		}
+		if (relevantPatterns===null) return result;
+		for (patternName : relevantPatterns.keySet) {
+			val allMatches=relevantPatterns.get(patternName)
+			
+			for (match : allMatches) {
+				var id=0;
+				for (matchedElement:match) {
+					if (matchedElement!==null) {
+						result.get(matchedElement).add(new PatternRelation<DefinedElement>(patternName,id,match))
+					}
+					id++	
+				}
+			}
 		}
 		
 		return result;
