@@ -1,0 +1,12 @@
+package hu.bme.mit.inf.dslreasoner.domains.fam
+
+import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
+
+@Constraint(message="terminatorAndInformation", severity="error", key={T})
+pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
+	FunctionalOutput.outgoingLinks(Out,I);
+	FunctionalOutput.terminator(Out,T); 
+} or {
+	InformationLink.to(I,In);
+	FunctionalInput.terminator(In,T);
+}

@@ -1,0 +1,27 @@
+import epackage "inputs/FamMetamodel.ecore"
+import viatra	"inputs/FamPatterns.vql"
+
+
+
+generate {
+	metamodel = { package functionalarchitecture }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.fam  }
+	partial-model = { "inputs/FamInstance.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node = 5
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	number = 5
+	runs = 1
+	
+	debug =			"outputs/debug"
+	log =			"outputs/log.txt"
+	output =		"outputs/models"
+	statistics =	"outputs/statistics.csv"
+}

@@ -1,0 +1,27 @@
+import epackage "error"
+import viatra	"error"
+
+
+
+generate {
+	metamodel = { package functionalarchitecture }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.fam  }
+	partial-model = { "platform:/resource/FAM-Standalone+DF/inputs/FamInstance.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node += 5
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	number = 5
+	runs = 1
+	
+	debug =			"platform:/resource/FAM-Standalone+DF/outputs/debug"
+	log =			"platform:/resource/FAM-Standalone+DF/outputs/log.txt"
+	output =		"platform:/resource/FAM-Standalone+DF/outputs/models"
+	statistics =	"platform:/resource/FAM-Standalone+DF/outputs/statistics.csv"
+}
