@@ -296,7 +296,14 @@ class  Viatra2Logic {
 	def TypeReference getType(PParameter v, Map<PBody, Map<PVariable, Set<IInputKey>>> types, TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
 		// If parameter type is specified then the specified type is used
 		if(v.declaredUnaryType !== null) {
-			return transformTypeReference(v.declaredUnaryType,ecore2LogicTrace)
+			val res = transformTypeReference(v.declaredUnaryType,ecore2LogicTrace)
+			if(res === null) {
+				throw new AssertionError('''
+				Unable to translate declared type «v.declaredUnaryType».
+				''')
+			} else {
+				return res
+			}
 		}
 		// Otherwise, calculate the type based on the type of the variable in the bodies
 		else {
