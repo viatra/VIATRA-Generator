@@ -59,6 +59,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 
 @Data class InterpretationValidationResult {
 	val List<String> problems;
@@ -171,6 +172,7 @@ class LogicStructureBuilder{
 	def protected dispatch Object resolve(IntLiteral literal,  LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value as Integer }
 	def protected dispatch Object resolve(BoolLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value }
 	def protected dispatch Object resolve(RealLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value as BigDecimal }
+	def protected dispatch Object resolve(StringLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value }
 	
 	def protected dispatch Object resolve(Not not, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {
 		return ! (not.operand.resolve(interpretation,variableBinding) as Boolean) }
