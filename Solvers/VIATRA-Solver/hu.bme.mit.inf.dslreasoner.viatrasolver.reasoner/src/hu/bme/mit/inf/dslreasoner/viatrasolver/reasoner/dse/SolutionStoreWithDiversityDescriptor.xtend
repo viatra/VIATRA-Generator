@@ -6,18 +6,31 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 import java.util.LinkedList
 import java.util.List
 import org.eclipse.viatra.dse.base.ThreadContext
+import java.util.HashSet
+import java.util.Set
+
+enum DiversityGranularity {
+	Nodewise, Graphwise
+}
 
 class SolutionStoreWithDiversityDescriptor {
 	val DiversityDescriptor descriptor
+	DiversityGranularity granularity
 	val PartialInterpretation2ImmutableTypeLattice solutionCoder = new PartialInterpretation2ImmutableTypeLattice
-	val List<Integer> solutionCodeList = new LinkedList
+	val Set<Integer> solutionCodeList = new HashSet
 	
 	var long runtime
 	var int allCheck
 	var int successfulCheck
 	
-	public new(DiversityDescriptor descriptor) {
-		this.descriptor = descriptor
+	new(DiversityDescriptor descriptor) {
+		if(descriptor.ensureDiversity) {
+			this.descriptor = descriptor
+			this.granularity = DiversityGranularity::Nodewise
+		} else {
+			this.descriptor = null
+			this.granularity = DiversityGranularity::Nodewise
+		}
 	}
 	
 	def public isActive() {
@@ -35,13 +48,32 @@ class SolutionStoreWithDiversityDescriptor {
 		if(active) {
 			val start = System.nanoTime
 			val model = context.model as PartialInterpretation
-			val code = solutionCoder.createRepresentation(model,
+			var boolean isDifferent
+			if(this.granularity == DiversityGranularity::Graphwise) {
+				val code = solutionCoder.createRepresentation(model,
 				descriptor.range,
 				descriptor.parallels,
 				descriptor.maxNumber,
 				descriptor.relevantTypes,
 				descriptor.relevantRelations).modelRepresentation.hashCode
-			val isDifferent = solutionCodeList.forall[previous | ! code.equals(previous)]
+			
+				isDifferent = !solutionCodeList.contains(code)
+			} else if(this.granularity == DiversityGranularity::Nodewise){
+				val codes = solutionCoder.createRepresentation(model,
+				descriptor.range,
+				descriptor.parallels,
+				descriptor.maxNumber,
+				descriptor.relevantTypes,
+				descriptor.relevantRelations).modelRepresentation.keySet.map[hashCode].toList
+				val differentCodes = codes.filter[!solutionCodeList.contains(it)]
+				//println(differentCodes.size)
+				
+				isDifferent = differentCodes.size>=3
+				if(isDifferent)println(differentCodes.size)
+			} else {
+				throw new UnsupportedOperationException('''Unsupported diversity type: «this.granularity»''')
+			}
+			
 			runtime += System.nanoTime - start
 			allCheck++
 			if(isDifferent) { successfulCheck++ }
@@ -61,13 +93,28 @@ class SolutionStoreWithDiversityDescriptor {
 		if(active) {
 			val start = System.nanoTime
 			val model = context.model as PartialInterpretation
-			val code = solutionCoder.createRepresentation(model,
+			if(this.granularity == DiversityGranularity::Graphwise) {
+				val code = solutionCoder.createRepresentation(model,
 				descriptor.range,
 				descriptor.parallels,
 				descriptor.maxNumber,
 				descriptor.relevantTypes,
 				descriptor.relevantRelations).modelRepresentation.hashCode
-			solutionCodeList += code
+			
+				solutionCodeList += code.hashCode
+			} else if(this.granularity == DiversityGranularity::Nodewise){
+				val codes = solutionCoder.createRepresentation(model,
+				descriptor.range,
+				descriptor.parallels,
+				descriptor.maxNumber,
+				descriptor.relevantTypes,
+				descriptor.relevantRelations).modelRepresentation.keySet.map[hashCode].toList
+				
+				solutionCodeList += codes.map[it.hashCode]
+			} else {
+				throw new UnsupportedOperationException('''Unsupported diversity type: «this.granularity»''')
+			}
+			
 			runtime += System.nanoTime - start
 		}
 	}
