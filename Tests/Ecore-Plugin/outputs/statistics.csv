@@ -1,0 +1,64 @@
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;_Solution2FoundAt;_Solution3FoundAt;_Solution4FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;963;10981;20587;28028267344;944;963;974;985;998;675;331;46;0;41
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;_Solution2FoundAt;_Solution3FoundAt;_Solution4FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+2;1;ModelResultImpl;1485;7933;16659;19719216169;660;682;697;715;728;533;354;29;0;55
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;Answer0Time;Answer1Time;Answer2Time;Answer3Time;Answer4Time;Alloy2KodKodTransformationTime;warnings
+2;1;ModelResultImpl;1032;4928;-1;660853711;1387;1438;1485;1539;1580;859;[== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String}]
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;Answer0Time;Answer1Time;Answer2Time;Answer3Time;Answer4Time;Alloy2KodKodTransformationTime;warnings
+2;1;ModelResultImpl;62;1991;-1;403150236;187;206;224;249;269;180;[== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String}]
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;Answer0Time;Answer1Time;Answer2Time;Answer3Time;Answer4Time;Alloy2KodKodTransformationTime;warnings
+2;1;ModelResultImpl;1370;5611;-1;106059204862;983;1046;1085;1150;1184;481;[== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String}]
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;Answer0Time;Answer1Time;Answer2Time;Answer3Time;Answer4Time;Alloy2KodKodTransformationTime;warnings
+2;1;ModelResultImpl;82;2461;-1;254200930176;282;310;343;374;403;169;[== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String}]
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;Answer0Time;Answer1Time;Answer2Time;Answer3Time;Answer4Time;Alloy2KodKodTransformationTime;warnings
+2;1;ModelResultImpl;1159;5901;-1;200731387125;1011;1099;1186;1269;1371;365;[== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String},== is redundant, because the left and right expressions always have the same value.
+Left type = {String}
+Right type = {String}]
