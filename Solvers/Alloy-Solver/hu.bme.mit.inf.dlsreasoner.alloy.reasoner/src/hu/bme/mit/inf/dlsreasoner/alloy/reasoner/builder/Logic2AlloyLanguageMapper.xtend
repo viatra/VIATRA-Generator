@@ -12,7 +12,6 @@ import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguageFactory
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.UpperMultiplicityAssertion
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion
@@ -48,6 +47,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TransitiveClosure
@@ -65,14 +66,11 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSInt
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
-import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSStringLiteral
 
 class Logic2AlloyLanguageMapper {
 	private val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
 	private val Logic2AlloyLanguageMapper_Support support = new Logic2AlloyLanguageMapper_Support;
+	private val RunCommandMapper runCommandMapper
 	@Accessors(PUBLIC_GETTER) private val Logic2AlloyLanguageMapper_TypeMapper typeMapper;
 	@Accessors(PUBLIC_GETTER) private val Logic2AlloyLanguageMapper_ConstantMapper constantMapper = new Logic2AlloyLanguageMapper_ConstantMapper(this)
 	@Accessors(PUBLIC_GETTER) private val Logic2AlloyLanguageMapper_FunctionMapper functionMapper = new Logic2AlloyLanguageMapper_FunctionMapper(this)
@@ -81,6 +79,7 @@ class Logic2AlloyLanguageMapper {
 	
 	public new(Logic2AlloyLanguageMapper_TypeMapper typeMapper) {
 		this.typeMapper = typeMapper
+		this.runCommandMapper = new RunCommandMapper(typeMapper)
 	}
 	
 	public def TracedOutput<ALSDocument,Logic2AlloyLanguageMapperTrace> transformProblem(LogicProblem problem, AlloySolverConfiguration config) {
@@ -146,7 +145,7 @@ class Logic2AlloyLanguageMapper {
 			}
 		}
 		
-		transformRunCommand(specification, trace, config)
+		runCommandMapper.transformRunCommand(this, specification, trace, config)
 		
 		return new TracedOutput(specification,trace)
 	}
@@ -303,78 +302,6 @@ class Logic2AlloyLanguageMapper {
 	def dispatch protected ALSTerm transformTypeReference(ComplexTypeReference complexTypeReference, Logic2AlloyLanguageMapperTrace trace) {
 		val types = typeMapper.transformTypeReference(complexTypeReference.referred, this, trace)
 		return support.unfoldPlus(types.map[t|createALSReference=>[referred = t]])
-	}	
-	
-	//////////////
-	// Scopes
-	//////////////
-	
-	def transformRunCommand(ALSDocument specification, Logic2AlloyLanguageMapperTrace trace, AlloySolverConfiguration config)
-	{
-		val knownStringNumber = specification.eAllContents.filter(ALSStringLiteral).map[it.value].toSet.size
-		
-		// add fact to ensure the existence of all literals in the scope
-		if(!config.typeScopes.knownStrings.empty) {
-			specification.factDeclarations += createALSFactDeclaration => [
-				it.name = "EnsureAllStrings"
-				val List<? extends ALSTerm> equals = config.typeScopes.knownStrings.map[x|createALSEquals => [
-					it.leftOperand =createALSStringLiteral => [it.value = x]
-					it.rightOperand =createALSStringLiteral => [it.value = x]
-				]].toList
-				it.term = support.unfoldAnd(equals)
-			]
-		}
-		
-		specification.runCommand = createALSRunCommand => [
-			it.typeScopes+= createALSSigScope => [
-				it.type= typeMapper.getUndefinedSupertype(trace)
-				it.number = typeMapper.getUndefinedSupertypeScope(config.typeScopes.maxNewElements,trace) 
-				it.exactly = (config.typeScopes.maxNewElements == config.typeScopes.minNewElements)
-			]
-			if(config.typeScopes.maxNewIntegers == LogicSolverConfiguration::Unlimited) {
-				val integersUsed = specification.eAllContents.filter(ALSInt)
-				if(integersUsed.empty) {
-					// If no integer scope is defined, but the problem has no integers
-					// => scope can be empty
-					it.typeScopes+= createALSIntScope => [
-						it.number = 0
-					]
-				} else {
-					// If no integer scope is defined, and the problem has integers
-					// => error
-					throw new UnsupportedOperationException('''An integer scope have to be specified for Alloy!''')
-				}
-			} else {
-				it.typeScopes += createALSIntScope => [
-					if(config.typeScopes.knownIntegers.empty) {
-						number = Integer.SIZE-Integer.numberOfLeadingZeros(config.typeScopes.maxNewIntegers+1/2)
-					} else {
-						var scope = Math.max(
-							Math.abs(config.typeScopes.knownIntegers.max),
-							Math.abs(config.typeScopes.knownIntegers.min))
-						if(scope*2+1 < config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) {
-							scope += ((config.typeScopes.knownIntegers.size + config.typeScopes.maxNewIntegers) - (scope*2))/2
-						}
-						number = Integer.SIZE-Integer.numberOfLeadingZeros(scope)+1
-					}
-				]
-			}
-			if(config.typeScopes.maxNewStrings === LogicSolverConfiguration::Unlimited) {
-				throw new UnsupportedOperationException('''An string scope have to be specified for Alloy!''')
-			} else {
-				if(config.typeScopes.maxNewStrings != 0) {
-					it.typeScopes += createALSStringScope => [it.number = config.typeScopes.maxNewStrings - knownStringNumber]
-				}
-			}
-			
-//			for(definedScope : config.typeScopes.allDefinedScope) {
-//				it.typeScopes += createALSSigScope => [
-//					it.type = definedScope.type.lookup(trace.type2ALSType)
-//					it.number = definedScope.upperLimit
-//					it.exactly = (definedScope.upperLimit == definedScope.lowerLimit)
-//				]
-//			}
-		]
 	}
 	
 	//////////////

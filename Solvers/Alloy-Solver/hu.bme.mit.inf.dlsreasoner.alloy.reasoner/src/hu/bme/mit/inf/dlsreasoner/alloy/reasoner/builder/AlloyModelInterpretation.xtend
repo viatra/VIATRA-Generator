@@ -19,6 +19,8 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Map
 import java.util.Set
+import java.util.SortedSet
+import java.util.TreeSet
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
@@ -34,6 +36,8 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 	
 	private var String logicBooleanTrue;
 	private var String logicBooleanFalse;
+	private SortedSet<Integer> integerAtoms = new TreeSet
+	private SortedSet<String> stringAtoms = new TreeSet
 		
 	private val Map<String, DefinedElement> alloyAtom2LogicElement = new HashMap
 	private val Map<TypeDeclaration, List<DefinedElement>> interpretationOfUndefinedType = new HashMap
@@ -42,8 +46,8 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 	private val Map<FunctionDeclaration, ? extends Map<ParameterSubstitution, Object>> function2Value
 	private val Map<RelationDeclaration, ? extends Set<ParameterSubstitution>> relation2Value
 	
-	private val int minInt
-	private val int maxInt
+	//private val int minInt
+	//private val int maxInt
 	
 	public new (AlloyModelInterpretation_TypeInterpretation typeInterpretator, A4Solution solution, Logic2AlloyLanguageMapper forwardMapper, Logic2AlloyLanguageMapperTrace trace) {
 		this.typeInterpretator = typeInterpretator
@@ -60,8 +64,7 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 				name2AlloyField.put(field.label,field)
 			}
 		}
-		
-		val unknownAtoms = collectUnknownAndResolveKnownAtoms(solution.allAtoms)
+		val unknownAtoms = collectUnknownAndResolveKnownAtoms(solution)
 		this.typeInterpretator.resolveUnknownAtoms(
 			unknownAtoms,
 			solution,
@@ -101,31 +104,46 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 		this.relation2Value = Union(hostedRelation2Value,globalRelation2Value)
 		
 		//Int limits
-		this.minInt = solution.min
-		this.maxInt = solution.max
+		//this.minInt = solution.min
+		//this.maxInt = solution.max
 		
 		//print(trace)
 	}
 	
-	def List<ExprVar> collectUnknownAndResolveKnownAtoms(Iterable<ExprVar> allAtoms) {
+	def List<ExprVar> collectUnknownAndResolveKnownAtoms(A4Solution solution) {
+		val Iterable<ExprVar> allAtoms = solution.allAtoms
 		val List<ExprVar> unknownAtoms = new LinkedList
 		
 		for(atom: allAtoms) {
 			val typeName = getName(atom.type)
 			val atomName = atom.name
-			//println(atom.toString + "  < -  " + typeName)
+			println(atom.toString + "  < -  " + typeName)
 			if(typeName == forwardTrace.logicLanguage.name) {
 				this.logicLanguage = atom
 			} else if(typeName == "Int" || typeName == "seq/Int") {
-				// do nothing, integers will be parsed from the string
+				val value = Integer.parseInt(atomName.join)
+				this.integerAtoms.add(value)
 			} else if(forwardTrace.boolType != null && typeName == forwardTrace.boolType.name) {
 				if(atomName.head == forwardTrace.boolTrue.name) { this.logicBooleanTrue = atom.label }
 				else if(atomName.head == forwardTrace.boolFalse.name) { this.logicBooleanFalse = atom.label}
 				else throw new UnsupportedOperationException('''Unknown boolean value: «atom»''')
+			} else if(typeName == "String") {
+				val value = parseString(atomName.join)
+				this.stringAtoms.add(value)
+			} else {
+				unknownAtoms += atom
 			}
-			else unknownAtoms += atom
 		}
-		
+		val integerSignature = solution.allReachableSigs.filter[it.label=="Int"].head
+		for(i : solution.eval(integerSignature)) {
+			val value = Integer.parseInt(i.atom(0))
+			this.integerAtoms.add(value)
+		}
+		val stringSignature = solution.allReachableSigs.filter[it.label=="String"].head
+		for(i : solution.eval(stringSignature)) {
+			val value = parseString(i.atom(0))
+			this.stringAtoms.add(value)
+		}
 		return unknownAtoms
 	}
 	
@@ -196,17 +214,16 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 	}
 	
 	override getAllIntegersInStructure() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		this.integerAtoms
 	}
 	
 	override getAllRealsInStructure() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		new TreeSet
 	}
 	
 	override getAllStringsInStructure() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		this.stringAtoms
 	}
-	
 }
 
 /**
