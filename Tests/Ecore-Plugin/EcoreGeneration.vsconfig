@@ -11,7 +11,7 @@ generate {
 	metamodel = allSupported
 	//constraints = { ...  }
 	partial-model = { "platform:/resource/Ecore-Plugin/InitialPackage.ecore" }
-	solver = AlloySolver
+	solver = ViatraSolver
 	scope = {
 		#node += 5,
 		#string += { "A", "B" },
