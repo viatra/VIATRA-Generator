@@ -246,7 +246,7 @@ class PartialInterpretationInitialiser {
 				#[assertion]
 			} else if(assertion instanceof And){
 				val res = assertion.operands.filter(SymbolicValue)
-				if(res.size != assertion.operands) {
+				if(res.size != assertion.operands.size) {
 					throw new UnsupportedOperationException('''Assertion describing partial model of "«r.interpretationOf.name»" contains unsupported constructs''')
 				} else {
 					res

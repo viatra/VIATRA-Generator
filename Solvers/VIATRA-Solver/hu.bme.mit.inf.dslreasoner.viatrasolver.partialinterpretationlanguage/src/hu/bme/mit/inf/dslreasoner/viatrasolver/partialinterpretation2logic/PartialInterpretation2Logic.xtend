@@ -27,6 +27,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
 
 @Data class PartialInterpretation2Logic_Trace {
 	Map<DefinedElement,DefinedElement> new2Old = new HashMap
@@ -157,7 +158,6 @@ class PartialInterpretation2Logic {
 			p.add(assertion)
 			p.annotations+= ^annotation
 		}
-		
 	}
 	
 	def private createLink(RelationLink link, SymbolicDeclaration relationDeclaration) {
@@ -181,6 +181,9 @@ class PartialInterpretation2Logic {
 		return element.value.asTerm
 	}
 	def private dispatch createValueInLink(RealElement element) {
+		return element.value.asTerm
+	}
+	def private dispatch createValueInLink(StringElement element) {
 		return element.value.asTerm
 	}
 	def private dispatch createValueInLink(DefinedElement element) {
