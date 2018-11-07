@@ -91,7 +91,11 @@ class Logic2Ecore {
 									val list = sourceObject.eGet(attributeType) as List<? super Object>
 									list += l.key
 								} else {
-									sourceObject.eSet(attributeType,l)
+									try {
+										sourceObject.eSet(attributeType,l.key)
+									} catch(Exception e) {
+										e.printStackTrace
+									}
 								}
 							}
 						}

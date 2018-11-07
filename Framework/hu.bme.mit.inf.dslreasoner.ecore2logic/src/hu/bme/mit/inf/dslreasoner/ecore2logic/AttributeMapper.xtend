@@ -112,7 +112,7 @@ class EAttributeMapper_RelationsOverTypes implements EAttributeMapper {
 		else if(attribute.EType.name.equals("EDouble") ||
 			    attribute.EType.name.equals("EFloat")) return LogicReal
 		else if(attribute.EType.name.equals("EString")) return LogicString
-		else throw new UnsupportedOperationException('''Unsupported attribute type: «attribute.EType.name»''')
+		else throw new UnsupportedOperationException('''Unsupported attribute type: «attribute.EType.name» of «attribute.EContainingClass.EPackage»::«attribute.EContainingClass.name».«attribute.name»''')
 	}
 	
 	override relationOfAttribute(Ecore2Logic_Trace trace, EAttribute attribute) {
