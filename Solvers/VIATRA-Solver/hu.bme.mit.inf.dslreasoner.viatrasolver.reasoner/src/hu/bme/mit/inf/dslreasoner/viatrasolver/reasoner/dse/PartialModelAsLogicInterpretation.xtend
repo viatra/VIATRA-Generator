@@ -109,7 +109,7 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 		if(this.trace.containsKey(e)) return e.lookup(trace) as DefinedElement
 		else return e;
 	}
-	def dispatch elementLookupForward(BooleanElement e) {
+	def dispatch elementLookupForward(Boolean e) {
 		this.booleanForwardTrace.get(e)
 	}
 	def dispatch elementLookupForward(Integer e) {
