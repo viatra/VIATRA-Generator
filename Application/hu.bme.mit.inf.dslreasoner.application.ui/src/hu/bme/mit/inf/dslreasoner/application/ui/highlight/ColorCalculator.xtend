@@ -3,16 +3,16 @@ package hu.bme.mit.inf.dslreasoner.application.ui.highlight
 import java.util.List
 import java.util.Random
 import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EEnum
+import org.eclipse.emf.ecore.EDataType
 
 class ColorCalculator {
 	
-	public def dispatch getColor(EClass c) {
+	def dispatch getColor(EClass c) {
 		val supertypes = (c.getEAllSuperTypes + #[c])
 		val typeHashcodes = supertypes.map[(c.getEPackage.nsURI->c.name).hashCode+2]
 		return randomColor(typeHashcodes)
 	}
-	public def dispatch getColor(EEnum e) {
+	def dispatch getColor(EDataType e) {
 		return randomColor((e.getEPackage.nsURI->e.name).hashCode)
 	}
 	
