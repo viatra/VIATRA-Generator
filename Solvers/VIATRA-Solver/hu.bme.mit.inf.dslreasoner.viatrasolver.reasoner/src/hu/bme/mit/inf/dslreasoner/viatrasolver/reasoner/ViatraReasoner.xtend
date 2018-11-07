@@ -31,6 +31,8 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SolutionStoreWithDiversityDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityGranularity
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -169,12 +171,14 @@ class ViatraReasoner extends LogicReasoner{
 			return createInsuficientResourcesResult=>[
 				it.problem = problem
 				it.resourceName="time"
+				it.representation += strategy.solutionStoreWithCopy.solutions
 				it.statistics = statistics
 			]
 		} else {
 			if(solutionStore.solutions.empty) {
 				return createInconsistencyResult => [
 					it.problem = problem
+					it.representation += strategy.solutionStoreWithCopy.solutions
 					it.statistics = statistics
 				]
 			} else {
