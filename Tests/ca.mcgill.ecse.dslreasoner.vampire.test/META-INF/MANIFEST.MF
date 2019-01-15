@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.vampire.test
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: ca.mcgill.ecse.dslreasoner.vampire.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ ca.mcgill.ecse.dslreasoner.vampire.language;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
+ ca.mcgill.ecse.dslreasoner.vampire.reasoner;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.viatra2logic;bundle-version="1.0.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.13.0",
+ hu.bme.mit.inf.dlsreasoner.alloy.reasoner;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0"
+

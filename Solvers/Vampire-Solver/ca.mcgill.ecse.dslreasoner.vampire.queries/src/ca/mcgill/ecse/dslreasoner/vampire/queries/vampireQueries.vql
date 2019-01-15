@@ -1,0 +1,57 @@
+package ca.mcgill.ecse.dslreasoner.vampire.queries
+
+import "http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage"
+
+pattern VLSComment(term: VLSComment){
+	VLSComment(term);
+}
+
+pattern VLSFofFormula(term: VLSFofFormula){
+	VLSFofFormula(term);
+}
+
+pattern VLSAnnotation(term: VLSAnnotation){
+	VLSAnnotation(term);
+}
+
+
+//VLSFormula
+pattern VLSOr(term: VLSOr){
+	VLSOr(term);
+}
+
+pattern VLSAnd(term: VLSAnd){
+	VLSAnd(term);
+}
+
+pattern VLSEquivalent(term: VLSEquivalent){
+	VLSEquivalent(term);
+}
+
+pattern VLSFunction(term: VLSFunction){
+	VLSFunction(term);
+}
+
+pattern VLSExistentialQuantifier(term: VLSExistentialQuantifier){
+	VLSExistentialQuantifier(term);
+}
+
+pattern VLSUniversalQuantifier(term: VLSUniversalQuantifier){
+	VLSUniversalQuantifier(term);
+}
+
+pattern VLSUnaryNegation(term: VLSUnaryNegation){
+	VLSUnaryNegation(term);
+}
+
+pattern VLSInequality(term: VLSInequality){
+	VLSInequality(term);
+}
+
+pattern VLSFunctionFof(term: VLSFunctionFof){
+	VLSFunctionFof(term);
+}
+
+//pattern VLSFofTerm(term: VLSFofTerm){
+//	VLSFofTerm(term);
+//}

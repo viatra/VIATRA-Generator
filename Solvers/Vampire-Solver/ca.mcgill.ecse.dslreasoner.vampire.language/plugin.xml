@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage"
+			class = "ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage"
+			genModel = "model/generated/VampireLanguage.genmodel" />
+	</extension>
+</plugin>
