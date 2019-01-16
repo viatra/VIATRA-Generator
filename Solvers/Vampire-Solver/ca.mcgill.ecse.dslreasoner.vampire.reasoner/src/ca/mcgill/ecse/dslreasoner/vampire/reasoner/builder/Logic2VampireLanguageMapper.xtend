@@ -59,7 +59,7 @@ class Logic2VampireLanguageMapper {
 		// create model bases
 		// TODO
 		val initialComment = createVLSComment => [
-			it.comment = "%This is an initial Test Comment \r"
+			it.comment = "This is an initial Test Comment"
 		]
 
 		val specification = createVampireModel => [

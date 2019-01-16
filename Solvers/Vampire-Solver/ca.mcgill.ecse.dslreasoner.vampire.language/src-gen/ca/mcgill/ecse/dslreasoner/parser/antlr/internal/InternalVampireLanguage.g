@@ -331,21 +331,27 @@ ruleVLSComment returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='%'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getVLSCommentAccess().getPercentSignKeyword_0());
+		}
 		(
-			lv_comment_0_0=RULE_SINGLE_COMMENT
-			{
-				newLeafNode(lv_comment_0_0, grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0());
-			}
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getVLSCommentRule());
+			(
+				lv_comment_1_0=RULE_SINGLE_COMMENT
+				{
+					newLeafNode(lv_comment_1_0, grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0());
 				}
-				setWithLastConsumed(
-					$current,
-					"comment",
-					lv_comment_0_0,
-					"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
-			}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getVLSCommentRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"comment",
+						lv_comment_1_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
+				}
+			)
 		)
 	)
 ;
@@ -2652,11 +2658,11 @@ fragment RULE_UNSIGNED_RAT_ID : RULE_LITERAL '/' '1'..'9' RULE_INT?;
 
 RULE_SIGNED_RAT_ID : RULE_SIGN* RULE_UNSIGNED_RAT_ID;
 
-fragment RULE_ANY_OTHER : '%' ~(('\n'|'\r'))* '\r';
+fragment RULE_ID : ~(('\n'|'\r'))*;
+
+fragment RULE_ANY_OTHER : RULE_ID;
 
 RULE_SINGLE_COMMENT : RULE_ANY_OTHER;
-
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 fragment RULE_INT : ('0'..'9')+;
 

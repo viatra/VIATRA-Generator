@@ -11,5 +11,5 @@ package ca.mcgill.ecse.dslreasoner.scoping
  * on how and when to use it.
  */
 class VampireLanguageScopeProvider extends AbstractVampireLanguageScopeProvider {
-
+	//TODO
 }

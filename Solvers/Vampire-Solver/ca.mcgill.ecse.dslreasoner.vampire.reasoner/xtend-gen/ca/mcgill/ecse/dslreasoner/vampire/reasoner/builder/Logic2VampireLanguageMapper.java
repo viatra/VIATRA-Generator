@@ -93,7 +93,7 @@ public class Logic2VampireLanguageMapper {
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration configuration) {
     VLSComment _createVLSComment = this.factory.createVLSComment();
     final Procedure1<VLSComment> _function = (VLSComment it) -> {
-      it.setComment("%This is an initial Test Comment \r");
+      it.setComment("This is an initial Test Comment");
     };
     final VLSComment initialComment = ObjectExtensions.<VLSComment>operator_doubleArrow(_createVLSComment, _function);
     VampireModel _createVampireModel = this.factory.createVampireModel();

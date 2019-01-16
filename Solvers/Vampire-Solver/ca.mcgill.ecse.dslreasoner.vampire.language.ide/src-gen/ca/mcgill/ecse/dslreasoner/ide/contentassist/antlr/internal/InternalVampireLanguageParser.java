@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalVampireLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LOWER_WORD_ID", "RULE_SINGLE_QUOTE", "RULE_LITERAL", "RULE_SIGNED_LITERAL", "RULE_DOLLAR_ID", "RULE_DOUBLE_DOLLAR_ID", "RULE_SINGLE_COMMENT", "RULE_UPPER_WORD_ID", "RULE_SIGNED_REAL_ID", "RULE_SIGNED_RAT_ID", "RULE_DOUBLE_QUOTE", "RULE_ALPHA_NUMERIC", "RULE_SIGN", "RULE_INT", "RULE_UNSIGNED_REAL_FRAC_ID", "RULE_UNSIGNED_REAL_EXP_ID", "RULE_UNSIGNED_RAT_ID", "RULE_ANY_OTHER", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'axiom'", "'conjecture'", "'hypothesis'", "'definition'", "'assumption'", "'lemma'", "'theorem'", "'corollary'", "'negated_conjecture'", "'plain'", "'type'", "'fi_domain'", "'fi_functors'", "'fi_predicates'", "'unknown'", "'include('", "',['", "']'", "','", "'fof'", "'('", "')'", "'.'", "'['", "'<=>'", "'=>'", "'<='", "'<~>'", "'~|'", "'~&'", "'&'", "'|'", "'!'", "':'", "'?'", "'~'", "'!='", "'='", "':='", "'$true'", "'$false'", "'$less'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_LOWER_WORD_ID", "RULE_SINGLE_QUOTE", "RULE_LITERAL", "RULE_SIGNED_LITERAL", "RULE_DOLLAR_ID", "RULE_DOUBLE_DOLLAR_ID", "RULE_SINGLE_COMMENT", "RULE_UPPER_WORD_ID", "RULE_SIGNED_REAL_ID", "RULE_SIGNED_RAT_ID", "RULE_DOUBLE_QUOTE", "RULE_ALPHA_NUMERIC", "RULE_SIGN", "RULE_INT", "RULE_UNSIGNED_REAL_FRAC_ID", "RULE_UNSIGNED_REAL_EXP_ID", "RULE_UNSIGNED_RAT_ID", "RULE_ID", "RULE_ANY_OTHER", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'axiom'", "'conjecture'", "'hypothesis'", "'definition'", "'assumption'", "'lemma'", "'theorem'", "'corollary'", "'negated_conjecture'", "'plain'", "'type'", "'fi_domain'", "'fi_functors'", "'fi_predicates'", "'unknown'", "'include('", "',['", "']'", "','", "'%'", "'fof'", "'('", "')'", "'.'", "'['", "'<=>'", "'=>'", "'<='", "'<~>'", "'~|'", "'~&'", "'&'", "'|'", "'!'", "':'", "'?'", "'~'", "'!='", "'='", "':='", "'$true'", "'$false'", "'$less'"
     };
     public static final int RULE_UNSIGNED_RAT_ID=20;
     public static final int T__50=50;
@@ -42,7 +42,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
     public static final int T__54=54;
     public static final int T__60=60;
     public static final int T__61=61;
-    public static final int RULE_ID=22;
+    public static final int RULE_ID=21;
     public static final int RULE_SINGLE_QUOTE=5;
     public static final int RULE_SINGLE_COMMENT=10;
     public static final int T__27=27;
@@ -54,6 +54,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
     public static final int T__67=67;
     public static final int RULE_SIGNED_RAT_ID=13;
     public static final int T__68=68;
+    public static final int T__69=69;
     public static final int T__62=62;
     public static final int T__63=63;
     public static final int T__64=64;
@@ -77,7 +78,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
     public static final int RULE_WS=26;
     public static final int RULE_DOLLAR_ID=8;
     public static final int RULE_ALPHA_NUMERIC=15;
-    public static final int RULE_ANY_OTHER=21;
+    public static final int RULE_ANY_OTHER=22;
     public static final int RULE_DOUBLE_DOLLAR_ID=9;
     public static final int T__48=48;
     public static final int T__49=49;
@@ -176,7 +177,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==RULE_SINGLE_COMMENT||LA1_0==42||LA1_0==46) ) {
+                if ( (LA1_0==42||(LA1_0>=46 && LA1_0<=47)) ) {
                     alt1=1;
                 }
 
@@ -406,31 +407,31 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "ruleVLSComment"
-    // InternalVampireLanguage.g:137:1: ruleVLSComment : ( ( rule__VLSComment__CommentAssignment ) ) ;
+    // InternalVampireLanguage.g:137:1: ruleVLSComment : ( ( rule__VLSComment__Group__0 ) ) ;
     public final void ruleVLSComment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:141:2: ( ( ( rule__VLSComment__CommentAssignment ) ) )
-            // InternalVampireLanguage.g:142:2: ( ( rule__VLSComment__CommentAssignment ) )
+            // InternalVampireLanguage.g:141:2: ( ( ( rule__VLSComment__Group__0 ) ) )
+            // InternalVampireLanguage.g:142:2: ( ( rule__VLSComment__Group__0 ) )
             {
-            // InternalVampireLanguage.g:142:2: ( ( rule__VLSComment__CommentAssignment ) )
-            // InternalVampireLanguage.g:143:3: ( rule__VLSComment__CommentAssignment )
+            // InternalVampireLanguage.g:142:2: ( ( rule__VLSComment__Group__0 ) )
+            // InternalVampireLanguage.g:143:3: ( rule__VLSComment__Group__0 )
             {
-             before(grammarAccess.getVLSCommentAccess().getCommentAssignment()); 
-            // InternalVampireLanguage.g:144:3: ( rule__VLSComment__CommentAssignment )
-            // InternalVampireLanguage.g:144:4: rule__VLSComment__CommentAssignment
+             before(grammarAccess.getVLSCommentAccess().getGroup()); 
+            // InternalVampireLanguage.g:144:3: ( rule__VLSComment__Group__0 )
+            // InternalVampireLanguage.g:144:4: rule__VLSComment__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__VLSComment__CommentAssignment();
+            rule__VLSComment__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getVLSCommentAccess().getCommentAssignment()); 
+             after(grammarAccess.getVLSCommentAccess().getGroup()); 
 
             }
 
@@ -2852,12 +2853,12 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
                 alt2=1;
                 }
                 break;
-            case RULE_SINGLE_COMMENT:
+            case 46:
                 {
                 alt2=2;
                 }
                 break;
-            case 46:
+            case 47:
                 {
                 alt2=3;
                 }
@@ -3690,22 +3691,22 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             // InternalVampireLanguage.g:1194:1: ( ( ( rule__VLSBinary__Group_1_0__0 ) ) | ( ( ( rule__VLSBinary__Group_1_1__0 ) ) ( ( rule__VLSBinary__Group_1_1__0 )* ) ) | ( ( ( rule__VLSBinary__Group_1_2__0 ) ) ( ( rule__VLSBinary__Group_1_2__0 )* ) ) )
             int alt9=3;
             switch ( input.LA(1) ) {
-            case 51:
             case 52:
             case 53:
             case 54:
             case 55:
             case 56:
+            case 57:
                 {
                 alt9=1;
                 }
                 break;
-            case 57:
+            case 58:
                 {
                 alt9=2;
                 }
                 break;
-            case 58:
+            case 59:
                 {
                 alt9=3;
                 }
@@ -3778,7 +3779,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
                         int alt7=2;
                         int LA7_0 = input.LA(1);
 
-                        if ( (LA7_0==57) ) {
+                        if ( (LA7_0==58) ) {
                             alt7=1;
                         }
 
@@ -3846,7 +3847,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
                         int alt8=2;
                         int LA8_0 = input.LA(1);
 
-                        if ( (LA8_0==58) ) {
+                        if ( (LA8_0==59) ) {
                             alt8=1;
                         }
 
@@ -3906,32 +3907,32 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             // InternalVampireLanguage.g:1235:1: ( ( ( rule__VLSBinary__Group_1_0_0_0__0 ) ) | ( ( rule__VLSBinary__Group_1_0_0_1__0 ) ) | ( ( rule__VLSBinary__Group_1_0_0_2__0 ) ) | ( ( rule__VLSBinary__Group_1_0_0_3__0 ) ) | ( ( rule__VLSBinary__Group_1_0_0_4__0 ) ) | ( ( rule__VLSBinary__Group_1_0_0_5__0 ) ) )
             int alt10=6;
             switch ( input.LA(1) ) {
-            case 51:
+            case 52:
                 {
                 alt10=1;
                 }
                 break;
-            case 52:
+            case 53:
                 {
                 alt10=2;
                 }
                 break;
-            case 53:
+            case 54:
                 {
                 alt10=3;
                 }
                 break;
-            case 54:
+            case 55:
                 {
                 alt10=4;
                 }
                 break;
-            case 55:
+            case 56:
                 {
                 alt10=5;
                 }
                 break;
-            case 56:
+            case 57:
                 {
                 alt10=6;
                 }
@@ -4121,17 +4122,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             // InternalVampireLanguage.g:1280:1: ( ( ruleVLSUniversalQuantifier ) | ( ruleVLSExistentialQuantifier ) | ( ruleVLSUnaryNegation ) | ( ruleVLSUnaryInfix ) | ( ( rule__VLSUnitaryFormula__Group_4__0 ) ) )
             int alt11=5;
             switch ( input.LA(1) ) {
-            case 59:
+            case 60:
                 {
                 alt11=1;
                 }
                 break;
-            case 61:
+            case 62:
                 {
                 alt11=2;
                 }
                 break;
-            case 62:
+            case 63:
                 {
                 alt11=3;
                 }
@@ -4160,14 +4161,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             case 39:
             case 40:
             case 41:
-            case 66:
             case 67:
             case 68:
+            case 69:
                 {
                 alt11=4;
                 }
                 break;
-            case 47:
+            case 48:
                 {
                 alt11=5;
                 }
@@ -4308,17 +4309,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             // InternalVampireLanguage.g:1319:1: ( ( ( rule__VLSUnaryInfix__Group_1_0_0__0 ) ) | ( ( rule__VLSUnaryInfix__Group_1_0_1__0 ) ) | ( ( rule__VLSUnaryInfix__Group_1_0_2__0 ) ) )
             int alt12=3;
             switch ( input.LA(1) ) {
-            case 63:
+            case 64:
                 {
                 alt12=1;
                 }
                 break;
-            case 64:
+            case 65:
                 {
                 alt12=2;
                 }
                 break;
-            case 65:
+            case 66:
                 {
                 alt12=3;
                 }
@@ -4560,12 +4561,12 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
                 alt14=1;
                 }
                 break;
-            case 66:
+            case 67:
                 {
                 alt14=2;
                 }
                 break;
-            case 67:
+            case 68:
                 {
                 alt14=3;
                 }
@@ -4837,7 +4838,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             if ( ((LA16_0>=RULE_LOWER_WORD_ID && LA16_0<=RULE_SINGLE_QUOTE)||(LA16_0>=RULE_DOLLAR_ID && LA16_0<=RULE_DOUBLE_DOLLAR_ID)||(LA16_0>=27 && LA16_0<=41)) ) {
                 alt16=1;
             }
-            else if ( (LA16_0==68) ) {
+            else if ( (LA16_0==69) ) {
                 alt16=2;
             }
             else {
@@ -6189,17 +6190,172 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
     // $ANTLR end "rule__VLSInclude__Group_2_2__1__Impl"
 
 
+    // $ANTLR start "rule__VLSComment__Group__0"
+    // InternalVampireLanguage.g:1837:1: rule__VLSComment__Group__0 : rule__VLSComment__Group__0__Impl rule__VLSComment__Group__1 ;
+    public final void rule__VLSComment__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalVampireLanguage.g:1841:1: ( rule__VLSComment__Group__0__Impl rule__VLSComment__Group__1 )
+            // InternalVampireLanguage.g:1842:2: rule__VLSComment__Group__0__Impl rule__VLSComment__Group__1
+            {
+            pushFollow(FOLLOW_11);
+            rule__VLSComment__Group__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__VLSComment__Group__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__VLSComment__Group__0"
+
+
+    // $ANTLR start "rule__VLSComment__Group__0__Impl"
+    // InternalVampireLanguage.g:1849:1: rule__VLSComment__Group__0__Impl : ( '%' ) ;
+    public final void rule__VLSComment__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalVampireLanguage.g:1853:1: ( ( '%' ) )
+            // InternalVampireLanguage.g:1854:1: ( '%' )
+            {
+            // InternalVampireLanguage.g:1854:1: ( '%' )
+            // InternalVampireLanguage.g:1855:2: '%'
+            {
+             before(grammarAccess.getVLSCommentAccess().getPercentSignKeyword_0()); 
+            match(input,46,FOLLOW_2); 
+             after(grammarAccess.getVLSCommentAccess().getPercentSignKeyword_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__VLSComment__Group__0__Impl"
+
+
+    // $ANTLR start "rule__VLSComment__Group__1"
+    // InternalVampireLanguage.g:1864:1: rule__VLSComment__Group__1 : rule__VLSComment__Group__1__Impl ;
+    public final void rule__VLSComment__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalVampireLanguage.g:1868:1: ( rule__VLSComment__Group__1__Impl )
+            // InternalVampireLanguage.g:1869:2: rule__VLSComment__Group__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__VLSComment__Group__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__VLSComment__Group__1"
+
+
+    // $ANTLR start "rule__VLSComment__Group__1__Impl"
+    // InternalVampireLanguage.g:1875:1: rule__VLSComment__Group__1__Impl : ( ( rule__VLSComment__CommentAssignment_1 ) ) ;
+    public final void rule__VLSComment__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalVampireLanguage.g:1879:1: ( ( ( rule__VLSComment__CommentAssignment_1 ) ) )
+            // InternalVampireLanguage.g:1880:1: ( ( rule__VLSComment__CommentAssignment_1 ) )
+            {
+            // InternalVampireLanguage.g:1880:1: ( ( rule__VLSComment__CommentAssignment_1 ) )
+            // InternalVampireLanguage.g:1881:2: ( rule__VLSComment__CommentAssignment_1 )
+            {
+             before(grammarAccess.getVLSCommentAccess().getCommentAssignment_1()); 
+            // InternalVampireLanguage.g:1882:2: ( rule__VLSComment__CommentAssignment_1 )
+            // InternalVampireLanguage.g:1882:3: rule__VLSComment__CommentAssignment_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__VLSComment__CommentAssignment_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getVLSCommentAccess().getCommentAssignment_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__VLSComment__Group__1__Impl"
+
+
     // $ANTLR start "rule__VLSFofFormula__Group__0"
-    // InternalVampireLanguage.g:1837:1: rule__VLSFofFormula__Group__0 : rule__VLSFofFormula__Group__0__Impl rule__VLSFofFormula__Group__1 ;
+    // InternalVampireLanguage.g:1891:1: rule__VLSFofFormula__Group__0 : rule__VLSFofFormula__Group__0__Impl rule__VLSFofFormula__Group__1 ;
     public final void rule__VLSFofFormula__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1841:1: ( rule__VLSFofFormula__Group__0__Impl rule__VLSFofFormula__Group__1 )
-            // InternalVampireLanguage.g:1842:2: rule__VLSFofFormula__Group__0__Impl rule__VLSFofFormula__Group__1
+            // InternalVampireLanguage.g:1895:1: ( rule__VLSFofFormula__Group__0__Impl rule__VLSFofFormula__Group__1 )
+            // InternalVampireLanguage.g:1896:2: rule__VLSFofFormula__Group__0__Impl rule__VLSFofFormula__Group__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_12);
             rule__VLSFofFormula__Group__0__Impl();
 
             state._fsp--;
@@ -6228,20 +6384,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__0__Impl"
-    // InternalVampireLanguage.g:1849:1: rule__VLSFofFormula__Group__0__Impl : ( 'fof' ) ;
+    // InternalVampireLanguage.g:1903:1: rule__VLSFofFormula__Group__0__Impl : ( 'fof' ) ;
     public final void rule__VLSFofFormula__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1853:1: ( ( 'fof' ) )
-            // InternalVampireLanguage.g:1854:1: ( 'fof' )
+            // InternalVampireLanguage.g:1907:1: ( ( 'fof' ) )
+            // InternalVampireLanguage.g:1908:1: ( 'fof' )
             {
-            // InternalVampireLanguage.g:1854:1: ( 'fof' )
-            // InternalVampireLanguage.g:1855:2: 'fof'
+            // InternalVampireLanguage.g:1908:1: ( 'fof' )
+            // InternalVampireLanguage.g:1909:2: 'fof'
             {
              before(grammarAccess.getVLSFofFormulaAccess().getFofKeyword_0()); 
-            match(input,46,FOLLOW_2); 
+            match(input,47,FOLLOW_2); 
              after(grammarAccess.getVLSFofFormulaAccess().getFofKeyword_0()); 
 
             }
@@ -6265,16 +6421,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__1"
-    // InternalVampireLanguage.g:1864:1: rule__VLSFofFormula__Group__1 : rule__VLSFofFormula__Group__1__Impl rule__VLSFofFormula__Group__2 ;
+    // InternalVampireLanguage.g:1918:1: rule__VLSFofFormula__Group__1 : rule__VLSFofFormula__Group__1__Impl rule__VLSFofFormula__Group__2 ;
     public final void rule__VLSFofFormula__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1868:1: ( rule__VLSFofFormula__Group__1__Impl rule__VLSFofFormula__Group__2 )
-            // InternalVampireLanguage.g:1869:2: rule__VLSFofFormula__Group__1__Impl rule__VLSFofFormula__Group__2
+            // InternalVampireLanguage.g:1922:1: ( rule__VLSFofFormula__Group__1__Impl rule__VLSFofFormula__Group__2 )
+            // InternalVampireLanguage.g:1923:2: rule__VLSFofFormula__Group__1__Impl rule__VLSFofFormula__Group__2
             {
-            pushFollow(FOLLOW_12);
+            pushFollow(FOLLOW_13);
             rule__VLSFofFormula__Group__1__Impl();
 
             state._fsp--;
@@ -6303,20 +6459,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__1__Impl"
-    // InternalVampireLanguage.g:1876:1: rule__VLSFofFormula__Group__1__Impl : ( '(' ) ;
+    // InternalVampireLanguage.g:1930:1: rule__VLSFofFormula__Group__1__Impl : ( '(' ) ;
     public final void rule__VLSFofFormula__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1880:1: ( ( '(' ) )
-            // InternalVampireLanguage.g:1881:1: ( '(' )
+            // InternalVampireLanguage.g:1934:1: ( ( '(' ) )
+            // InternalVampireLanguage.g:1935:1: ( '(' )
             {
-            // InternalVampireLanguage.g:1881:1: ( '(' )
-            // InternalVampireLanguage.g:1882:2: '('
+            // InternalVampireLanguage.g:1935:1: ( '(' )
+            // InternalVampireLanguage.g:1936:2: '('
             {
              before(grammarAccess.getVLSFofFormulaAccess().getLeftParenthesisKeyword_1()); 
-            match(input,47,FOLLOW_2); 
+            match(input,48,FOLLOW_2); 
              after(grammarAccess.getVLSFofFormulaAccess().getLeftParenthesisKeyword_1()); 
 
             }
@@ -6340,16 +6496,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__2"
-    // InternalVampireLanguage.g:1891:1: rule__VLSFofFormula__Group__2 : rule__VLSFofFormula__Group__2__Impl rule__VLSFofFormula__Group__3 ;
+    // InternalVampireLanguage.g:1945:1: rule__VLSFofFormula__Group__2 : rule__VLSFofFormula__Group__2__Impl rule__VLSFofFormula__Group__3 ;
     public final void rule__VLSFofFormula__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1895:1: ( rule__VLSFofFormula__Group__2__Impl rule__VLSFofFormula__Group__3 )
-            // InternalVampireLanguage.g:1896:2: rule__VLSFofFormula__Group__2__Impl rule__VLSFofFormula__Group__3
+            // InternalVampireLanguage.g:1949:1: ( rule__VLSFofFormula__Group__2__Impl rule__VLSFofFormula__Group__3 )
+            // InternalVampireLanguage.g:1950:2: rule__VLSFofFormula__Group__2__Impl rule__VLSFofFormula__Group__3
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_14);
             rule__VLSFofFormula__Group__2__Impl();
 
             state._fsp--;
@@ -6378,21 +6534,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__2__Impl"
-    // InternalVampireLanguage.g:1903:1: rule__VLSFofFormula__Group__2__Impl : ( ( rule__VLSFofFormula__NameAssignment_2 ) ) ;
+    // InternalVampireLanguage.g:1957:1: rule__VLSFofFormula__Group__2__Impl : ( ( rule__VLSFofFormula__NameAssignment_2 ) ) ;
     public final void rule__VLSFofFormula__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1907:1: ( ( ( rule__VLSFofFormula__NameAssignment_2 ) ) )
-            // InternalVampireLanguage.g:1908:1: ( ( rule__VLSFofFormula__NameAssignment_2 ) )
+            // InternalVampireLanguage.g:1961:1: ( ( ( rule__VLSFofFormula__NameAssignment_2 ) ) )
+            // InternalVampireLanguage.g:1962:1: ( ( rule__VLSFofFormula__NameAssignment_2 ) )
             {
-            // InternalVampireLanguage.g:1908:1: ( ( rule__VLSFofFormula__NameAssignment_2 ) )
-            // InternalVampireLanguage.g:1909:2: ( rule__VLSFofFormula__NameAssignment_2 )
+            // InternalVampireLanguage.g:1962:1: ( ( rule__VLSFofFormula__NameAssignment_2 ) )
+            // InternalVampireLanguage.g:1963:2: ( rule__VLSFofFormula__NameAssignment_2 )
             {
              before(grammarAccess.getVLSFofFormulaAccess().getNameAssignment_2()); 
-            // InternalVampireLanguage.g:1910:2: ( rule__VLSFofFormula__NameAssignment_2 )
-            // InternalVampireLanguage.g:1910:3: rule__VLSFofFormula__NameAssignment_2
+            // InternalVampireLanguage.g:1964:2: ( rule__VLSFofFormula__NameAssignment_2 )
+            // InternalVampireLanguage.g:1964:3: rule__VLSFofFormula__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__NameAssignment_2();
@@ -6425,16 +6581,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__3"
-    // InternalVampireLanguage.g:1918:1: rule__VLSFofFormula__Group__3 : rule__VLSFofFormula__Group__3__Impl rule__VLSFofFormula__Group__4 ;
+    // InternalVampireLanguage.g:1972:1: rule__VLSFofFormula__Group__3 : rule__VLSFofFormula__Group__3__Impl rule__VLSFofFormula__Group__4 ;
     public final void rule__VLSFofFormula__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1922:1: ( rule__VLSFofFormula__Group__3__Impl rule__VLSFofFormula__Group__4 )
-            // InternalVampireLanguage.g:1923:2: rule__VLSFofFormula__Group__3__Impl rule__VLSFofFormula__Group__4
+            // InternalVampireLanguage.g:1976:1: ( rule__VLSFofFormula__Group__3__Impl rule__VLSFofFormula__Group__4 )
+            // InternalVampireLanguage.g:1977:2: rule__VLSFofFormula__Group__3__Impl rule__VLSFofFormula__Group__4
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__VLSFofFormula__Group__3__Impl();
 
             state._fsp--;
@@ -6463,17 +6619,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__3__Impl"
-    // InternalVampireLanguage.g:1930:1: rule__VLSFofFormula__Group__3__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:1984:1: rule__VLSFofFormula__Group__3__Impl : ( ',' ) ;
     public final void rule__VLSFofFormula__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1934:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:1935:1: ( ',' )
+            // InternalVampireLanguage.g:1988:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:1989:1: ( ',' )
             {
-            // InternalVampireLanguage.g:1935:1: ( ',' )
-            // InternalVampireLanguage.g:1936:2: ','
+            // InternalVampireLanguage.g:1989:1: ( ',' )
+            // InternalVampireLanguage.g:1990:2: ','
             {
              before(grammarAccess.getVLSFofFormulaAccess().getCommaKeyword_3()); 
             match(input,45,FOLLOW_2); 
@@ -6500,16 +6656,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__4"
-    // InternalVampireLanguage.g:1945:1: rule__VLSFofFormula__Group__4 : rule__VLSFofFormula__Group__4__Impl rule__VLSFofFormula__Group__5 ;
+    // InternalVampireLanguage.g:1999:1: rule__VLSFofFormula__Group__4 : rule__VLSFofFormula__Group__4__Impl rule__VLSFofFormula__Group__5 ;
     public final void rule__VLSFofFormula__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1949:1: ( rule__VLSFofFormula__Group__4__Impl rule__VLSFofFormula__Group__5 )
-            // InternalVampireLanguage.g:1950:2: rule__VLSFofFormula__Group__4__Impl rule__VLSFofFormula__Group__5
+            // InternalVampireLanguage.g:2003:1: ( rule__VLSFofFormula__Group__4__Impl rule__VLSFofFormula__Group__5 )
+            // InternalVampireLanguage.g:2004:2: rule__VLSFofFormula__Group__4__Impl rule__VLSFofFormula__Group__5
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_14);
             rule__VLSFofFormula__Group__4__Impl();
 
             state._fsp--;
@@ -6538,21 +6694,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__4__Impl"
-    // InternalVampireLanguage.g:1957:1: rule__VLSFofFormula__Group__4__Impl : ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) ) ;
+    // InternalVampireLanguage.g:2011:1: rule__VLSFofFormula__Group__4__Impl : ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) ) ;
     public final void rule__VLSFofFormula__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1961:1: ( ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) ) )
-            // InternalVampireLanguage.g:1962:1: ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) )
+            // InternalVampireLanguage.g:2015:1: ( ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) ) )
+            // InternalVampireLanguage.g:2016:1: ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) )
             {
-            // InternalVampireLanguage.g:1962:1: ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) )
-            // InternalVampireLanguage.g:1963:2: ( rule__VLSFofFormula__FofRoleAssignment_4 )
+            // InternalVampireLanguage.g:2016:1: ( ( rule__VLSFofFormula__FofRoleAssignment_4 ) )
+            // InternalVampireLanguage.g:2017:2: ( rule__VLSFofFormula__FofRoleAssignment_4 )
             {
              before(grammarAccess.getVLSFofFormulaAccess().getFofRoleAssignment_4()); 
-            // InternalVampireLanguage.g:1964:2: ( rule__VLSFofFormula__FofRoleAssignment_4 )
-            // InternalVampireLanguage.g:1964:3: rule__VLSFofFormula__FofRoleAssignment_4
+            // InternalVampireLanguage.g:2018:2: ( rule__VLSFofFormula__FofRoleAssignment_4 )
+            // InternalVampireLanguage.g:2018:3: rule__VLSFofFormula__FofRoleAssignment_4
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__FofRoleAssignment_4();
@@ -6585,16 +6741,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__5"
-    // InternalVampireLanguage.g:1972:1: rule__VLSFofFormula__Group__5 : rule__VLSFofFormula__Group__5__Impl rule__VLSFofFormula__Group__6 ;
+    // InternalVampireLanguage.g:2026:1: rule__VLSFofFormula__Group__5 : rule__VLSFofFormula__Group__5__Impl rule__VLSFofFormula__Group__6 ;
     public final void rule__VLSFofFormula__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1976:1: ( rule__VLSFofFormula__Group__5__Impl rule__VLSFofFormula__Group__6 )
-            // InternalVampireLanguage.g:1977:2: rule__VLSFofFormula__Group__5__Impl rule__VLSFofFormula__Group__6
+            // InternalVampireLanguage.g:2030:1: ( rule__VLSFofFormula__Group__5__Impl rule__VLSFofFormula__Group__6 )
+            // InternalVampireLanguage.g:2031:2: rule__VLSFofFormula__Group__5__Impl rule__VLSFofFormula__Group__6
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSFofFormula__Group__5__Impl();
 
             state._fsp--;
@@ -6623,17 +6779,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__5__Impl"
-    // InternalVampireLanguage.g:1984:1: rule__VLSFofFormula__Group__5__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:2038:1: rule__VLSFofFormula__Group__5__Impl : ( ',' ) ;
     public final void rule__VLSFofFormula__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:1988:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:1989:1: ( ',' )
+            // InternalVampireLanguage.g:2042:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:2043:1: ( ',' )
             {
-            // InternalVampireLanguage.g:1989:1: ( ',' )
-            // InternalVampireLanguage.g:1990:2: ','
+            // InternalVampireLanguage.g:2043:1: ( ',' )
+            // InternalVampireLanguage.g:2044:2: ','
             {
              before(grammarAccess.getVLSFofFormulaAccess().getCommaKeyword_5()); 
             match(input,45,FOLLOW_2); 
@@ -6660,16 +6816,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__6"
-    // InternalVampireLanguage.g:1999:1: rule__VLSFofFormula__Group__6 : rule__VLSFofFormula__Group__6__Impl rule__VLSFofFormula__Group__7 ;
+    // InternalVampireLanguage.g:2053:1: rule__VLSFofFormula__Group__6 : rule__VLSFofFormula__Group__6__Impl rule__VLSFofFormula__Group__7 ;
     public final void rule__VLSFofFormula__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2003:1: ( rule__VLSFofFormula__Group__6__Impl rule__VLSFofFormula__Group__7 )
-            // InternalVampireLanguage.g:2004:2: rule__VLSFofFormula__Group__6__Impl rule__VLSFofFormula__Group__7
+            // InternalVampireLanguage.g:2057:1: ( rule__VLSFofFormula__Group__6__Impl rule__VLSFofFormula__Group__7 )
+            // InternalVampireLanguage.g:2058:2: rule__VLSFofFormula__Group__6__Impl rule__VLSFofFormula__Group__7
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__VLSFofFormula__Group__6__Impl();
 
             state._fsp--;
@@ -6698,21 +6854,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__6__Impl"
-    // InternalVampireLanguage.g:2011:1: rule__VLSFofFormula__Group__6__Impl : ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) ) ;
+    // InternalVampireLanguage.g:2065:1: rule__VLSFofFormula__Group__6__Impl : ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) ) ;
     public final void rule__VLSFofFormula__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2015:1: ( ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) ) )
-            // InternalVampireLanguage.g:2016:1: ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) )
+            // InternalVampireLanguage.g:2069:1: ( ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) ) )
+            // InternalVampireLanguage.g:2070:1: ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) )
             {
-            // InternalVampireLanguage.g:2016:1: ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) )
-            // InternalVampireLanguage.g:2017:2: ( rule__VLSFofFormula__FofFormulaAssignment_6 )
+            // InternalVampireLanguage.g:2070:1: ( ( rule__VLSFofFormula__FofFormulaAssignment_6 ) )
+            // InternalVampireLanguage.g:2071:2: ( rule__VLSFofFormula__FofFormulaAssignment_6 )
             {
              before(grammarAccess.getVLSFofFormulaAccess().getFofFormulaAssignment_6()); 
-            // InternalVampireLanguage.g:2018:2: ( rule__VLSFofFormula__FofFormulaAssignment_6 )
-            // InternalVampireLanguage.g:2018:3: rule__VLSFofFormula__FofFormulaAssignment_6
+            // InternalVampireLanguage.g:2072:2: ( rule__VLSFofFormula__FofFormulaAssignment_6 )
+            // InternalVampireLanguage.g:2072:3: rule__VLSFofFormula__FofFormulaAssignment_6
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__FofFormulaAssignment_6();
@@ -6745,16 +6901,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__7"
-    // InternalVampireLanguage.g:2026:1: rule__VLSFofFormula__Group__7 : rule__VLSFofFormula__Group__7__Impl rule__VLSFofFormula__Group__8 ;
+    // InternalVampireLanguage.g:2080:1: rule__VLSFofFormula__Group__7 : rule__VLSFofFormula__Group__7__Impl rule__VLSFofFormula__Group__8 ;
     public final void rule__VLSFofFormula__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2030:1: ( rule__VLSFofFormula__Group__7__Impl rule__VLSFofFormula__Group__8 )
-            // InternalVampireLanguage.g:2031:2: rule__VLSFofFormula__Group__7__Impl rule__VLSFofFormula__Group__8
+            // InternalVampireLanguage.g:2084:1: ( rule__VLSFofFormula__Group__7__Impl rule__VLSFofFormula__Group__8 )
+            // InternalVampireLanguage.g:2085:2: rule__VLSFofFormula__Group__7__Impl rule__VLSFofFormula__Group__8
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__VLSFofFormula__Group__7__Impl();
 
             state._fsp--;
@@ -6783,20 +6939,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__7__Impl"
-    // InternalVampireLanguage.g:2038:1: rule__VLSFofFormula__Group__7__Impl : ( ( rule__VLSFofFormula__Group_7__0 )? ) ;
+    // InternalVampireLanguage.g:2092:1: rule__VLSFofFormula__Group__7__Impl : ( ( rule__VLSFofFormula__Group_7__0 )? ) ;
     public final void rule__VLSFofFormula__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2042:1: ( ( ( rule__VLSFofFormula__Group_7__0 )? ) )
-            // InternalVampireLanguage.g:2043:1: ( ( rule__VLSFofFormula__Group_7__0 )? )
+            // InternalVampireLanguage.g:2096:1: ( ( ( rule__VLSFofFormula__Group_7__0 )? ) )
+            // InternalVampireLanguage.g:2097:1: ( ( rule__VLSFofFormula__Group_7__0 )? )
             {
-            // InternalVampireLanguage.g:2043:1: ( ( rule__VLSFofFormula__Group_7__0 )? )
-            // InternalVampireLanguage.g:2044:2: ( rule__VLSFofFormula__Group_7__0 )?
+            // InternalVampireLanguage.g:2097:1: ( ( rule__VLSFofFormula__Group_7__0 )? )
+            // InternalVampireLanguage.g:2098:2: ( rule__VLSFofFormula__Group_7__0 )?
             {
              before(grammarAccess.getVLSFofFormulaAccess().getGroup_7()); 
-            // InternalVampireLanguage.g:2045:2: ( rule__VLSFofFormula__Group_7__0 )?
+            // InternalVampireLanguage.g:2099:2: ( rule__VLSFofFormula__Group_7__0 )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -6805,7 +6961,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             }
             switch (alt23) {
                 case 1 :
-                    // InternalVampireLanguage.g:2045:3: rule__VLSFofFormula__Group_7__0
+                    // InternalVampireLanguage.g:2099:3: rule__VLSFofFormula__Group_7__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__VLSFofFormula__Group_7__0();
@@ -6841,16 +6997,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__8"
-    // InternalVampireLanguage.g:2053:1: rule__VLSFofFormula__Group__8 : rule__VLSFofFormula__Group__8__Impl rule__VLSFofFormula__Group__9 ;
+    // InternalVampireLanguage.g:2107:1: rule__VLSFofFormula__Group__8 : rule__VLSFofFormula__Group__8__Impl rule__VLSFofFormula__Group__9 ;
     public final void rule__VLSFofFormula__Group__8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2057:1: ( rule__VLSFofFormula__Group__8__Impl rule__VLSFofFormula__Group__9 )
-            // InternalVampireLanguage.g:2058:2: rule__VLSFofFormula__Group__8__Impl rule__VLSFofFormula__Group__9
+            // InternalVampireLanguage.g:2111:1: ( rule__VLSFofFormula__Group__8__Impl rule__VLSFofFormula__Group__9 )
+            // InternalVampireLanguage.g:2112:2: rule__VLSFofFormula__Group__8__Impl rule__VLSFofFormula__Group__9
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__VLSFofFormula__Group__8__Impl();
 
             state._fsp--;
@@ -6879,20 +7035,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__8__Impl"
-    // InternalVampireLanguage.g:2065:1: rule__VLSFofFormula__Group__8__Impl : ( ')' ) ;
+    // InternalVampireLanguage.g:2119:1: rule__VLSFofFormula__Group__8__Impl : ( ')' ) ;
     public final void rule__VLSFofFormula__Group__8__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2069:1: ( ( ')' ) )
-            // InternalVampireLanguage.g:2070:1: ( ')' )
+            // InternalVampireLanguage.g:2123:1: ( ( ')' ) )
+            // InternalVampireLanguage.g:2124:1: ( ')' )
             {
-            // InternalVampireLanguage.g:2070:1: ( ')' )
-            // InternalVampireLanguage.g:2071:2: ')'
+            // InternalVampireLanguage.g:2124:1: ( ')' )
+            // InternalVampireLanguage.g:2125:2: ')'
             {
              before(grammarAccess.getVLSFofFormulaAccess().getRightParenthesisKeyword_8()); 
-            match(input,48,FOLLOW_2); 
+            match(input,49,FOLLOW_2); 
              after(grammarAccess.getVLSFofFormulaAccess().getRightParenthesisKeyword_8()); 
 
             }
@@ -6916,14 +7072,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__9"
-    // InternalVampireLanguage.g:2080:1: rule__VLSFofFormula__Group__9 : rule__VLSFofFormula__Group__9__Impl ;
+    // InternalVampireLanguage.g:2134:1: rule__VLSFofFormula__Group__9 : rule__VLSFofFormula__Group__9__Impl ;
     public final void rule__VLSFofFormula__Group__9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2084:1: ( rule__VLSFofFormula__Group__9__Impl )
-            // InternalVampireLanguage.g:2085:2: rule__VLSFofFormula__Group__9__Impl
+            // InternalVampireLanguage.g:2138:1: ( rule__VLSFofFormula__Group__9__Impl )
+            // InternalVampireLanguage.g:2139:2: rule__VLSFofFormula__Group__9__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__Group__9__Impl();
@@ -6949,20 +7105,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group__9__Impl"
-    // InternalVampireLanguage.g:2091:1: rule__VLSFofFormula__Group__9__Impl : ( '.' ) ;
+    // InternalVampireLanguage.g:2145:1: rule__VLSFofFormula__Group__9__Impl : ( '.' ) ;
     public final void rule__VLSFofFormula__Group__9__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2095:1: ( ( '.' ) )
-            // InternalVampireLanguage.g:2096:1: ( '.' )
+            // InternalVampireLanguage.g:2149:1: ( ( '.' ) )
+            // InternalVampireLanguage.g:2150:1: ( '.' )
             {
-            // InternalVampireLanguage.g:2096:1: ( '.' )
-            // InternalVampireLanguage.g:2097:2: '.'
+            // InternalVampireLanguage.g:2150:1: ( '.' )
+            // InternalVampireLanguage.g:2151:2: '.'
             {
              before(grammarAccess.getVLSFofFormulaAccess().getFullStopKeyword_9()); 
-            match(input,49,FOLLOW_2); 
+            match(input,50,FOLLOW_2); 
              after(grammarAccess.getVLSFofFormulaAccess().getFullStopKeyword_9()); 
 
             }
@@ -6986,16 +7142,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group_7__0"
-    // InternalVampireLanguage.g:2107:1: rule__VLSFofFormula__Group_7__0 : rule__VLSFofFormula__Group_7__0__Impl rule__VLSFofFormula__Group_7__1 ;
+    // InternalVampireLanguage.g:2161:1: rule__VLSFofFormula__Group_7__0 : rule__VLSFofFormula__Group_7__0__Impl rule__VLSFofFormula__Group_7__1 ;
     public final void rule__VLSFofFormula__Group_7__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2111:1: ( rule__VLSFofFormula__Group_7__0__Impl rule__VLSFofFormula__Group_7__1 )
-            // InternalVampireLanguage.g:2112:2: rule__VLSFofFormula__Group_7__0__Impl rule__VLSFofFormula__Group_7__1
+            // InternalVampireLanguage.g:2165:1: ( rule__VLSFofFormula__Group_7__0__Impl rule__VLSFofFormula__Group_7__1 )
+            // InternalVampireLanguage.g:2166:2: rule__VLSFofFormula__Group_7__0__Impl rule__VLSFofFormula__Group_7__1
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__VLSFofFormula__Group_7__0__Impl();
 
             state._fsp--;
@@ -7024,17 +7180,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group_7__0__Impl"
-    // InternalVampireLanguage.g:2119:1: rule__VLSFofFormula__Group_7__0__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:2173:1: rule__VLSFofFormula__Group_7__0__Impl : ( ',' ) ;
     public final void rule__VLSFofFormula__Group_7__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2123:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:2124:1: ( ',' )
+            // InternalVampireLanguage.g:2177:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:2178:1: ( ',' )
             {
-            // InternalVampireLanguage.g:2124:1: ( ',' )
-            // InternalVampireLanguage.g:2125:2: ','
+            // InternalVampireLanguage.g:2178:1: ( ',' )
+            // InternalVampireLanguage.g:2179:2: ','
             {
              before(grammarAccess.getVLSFofFormulaAccess().getCommaKeyword_7_0()); 
             match(input,45,FOLLOW_2); 
@@ -7061,14 +7217,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group_7__1"
-    // InternalVampireLanguage.g:2134:1: rule__VLSFofFormula__Group_7__1 : rule__VLSFofFormula__Group_7__1__Impl ;
+    // InternalVampireLanguage.g:2188:1: rule__VLSFofFormula__Group_7__1 : rule__VLSFofFormula__Group_7__1__Impl ;
     public final void rule__VLSFofFormula__Group_7__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2138:1: ( rule__VLSFofFormula__Group_7__1__Impl )
-            // InternalVampireLanguage.g:2139:2: rule__VLSFofFormula__Group_7__1__Impl
+            // InternalVampireLanguage.g:2192:1: ( rule__VLSFofFormula__Group_7__1__Impl )
+            // InternalVampireLanguage.g:2193:2: rule__VLSFofFormula__Group_7__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__Group_7__1__Impl();
@@ -7094,21 +7250,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__Group_7__1__Impl"
-    // InternalVampireLanguage.g:2145:1: rule__VLSFofFormula__Group_7__1__Impl : ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) ) ;
+    // InternalVampireLanguage.g:2199:1: rule__VLSFofFormula__Group_7__1__Impl : ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) ) ;
     public final void rule__VLSFofFormula__Group_7__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2149:1: ( ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) ) )
-            // InternalVampireLanguage.g:2150:1: ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) )
+            // InternalVampireLanguage.g:2203:1: ( ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) ) )
+            // InternalVampireLanguage.g:2204:1: ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) )
             {
-            // InternalVampireLanguage.g:2150:1: ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) )
-            // InternalVampireLanguage.g:2151:2: ( rule__VLSFofFormula__AnnotationsAssignment_7_1 )
+            // InternalVampireLanguage.g:2204:1: ( ( rule__VLSFofFormula__AnnotationsAssignment_7_1 ) )
+            // InternalVampireLanguage.g:2205:2: ( rule__VLSFofFormula__AnnotationsAssignment_7_1 )
             {
              before(grammarAccess.getVLSFofFormulaAccess().getAnnotationsAssignment_7_1()); 
-            // InternalVampireLanguage.g:2152:2: ( rule__VLSFofFormula__AnnotationsAssignment_7_1 )
-            // InternalVampireLanguage.g:2152:3: rule__VLSFofFormula__AnnotationsAssignment_7_1
+            // InternalVampireLanguage.g:2206:2: ( rule__VLSFofFormula__AnnotationsAssignment_7_1 )
+            // InternalVampireLanguage.g:2206:3: rule__VLSFofFormula__AnnotationsAssignment_7_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__AnnotationsAssignment_7_1();
@@ -7141,16 +7297,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__0"
-    // InternalVampireLanguage.g:2161:1: rule__VLSAnnotation__Group__0 : rule__VLSAnnotation__Group__0__Impl rule__VLSAnnotation__Group__1 ;
+    // InternalVampireLanguage.g:2215:1: rule__VLSAnnotation__Group__0 : rule__VLSAnnotation__Group__0__Impl rule__VLSAnnotation__Group__1 ;
     public final void rule__VLSAnnotation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2165:1: ( rule__VLSAnnotation__Group__0__Impl rule__VLSAnnotation__Group__1 )
-            // InternalVampireLanguage.g:2166:2: rule__VLSAnnotation__Group__0__Impl rule__VLSAnnotation__Group__1
+            // InternalVampireLanguage.g:2219:1: ( rule__VLSAnnotation__Group__0__Impl rule__VLSAnnotation__Group__1 )
+            // InternalVampireLanguage.g:2220:2: rule__VLSAnnotation__Group__0__Impl rule__VLSAnnotation__Group__1
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__VLSAnnotation__Group__0__Impl();
 
             state._fsp--;
@@ -7179,31 +7335,31 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__0__Impl"
-    // InternalVampireLanguage.g:2173:1: rule__VLSAnnotation__Group__0__Impl : ( ( '[' )? ) ;
+    // InternalVampireLanguage.g:2227:1: rule__VLSAnnotation__Group__0__Impl : ( ( '[' )? ) ;
     public final void rule__VLSAnnotation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2177:1: ( ( ( '[' )? ) )
-            // InternalVampireLanguage.g:2178:1: ( ( '[' )? )
+            // InternalVampireLanguage.g:2231:1: ( ( ( '[' )? ) )
+            // InternalVampireLanguage.g:2232:1: ( ( '[' )? )
             {
-            // InternalVampireLanguage.g:2178:1: ( ( '[' )? )
-            // InternalVampireLanguage.g:2179:2: ( '[' )?
+            // InternalVampireLanguage.g:2232:1: ( ( '[' )? )
+            // InternalVampireLanguage.g:2233:2: ( '[' )?
             {
              before(grammarAccess.getVLSAnnotationAccess().getLeftSquareBracketKeyword_0()); 
-            // InternalVampireLanguage.g:2180:2: ( '[' )?
+            // InternalVampireLanguage.g:2234:2: ( '[' )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==50) ) {
+            if ( (LA24_0==51) ) {
                 alt24=1;
             }
             switch (alt24) {
                 case 1 :
-                    // InternalVampireLanguage.g:2180:3: '['
+                    // InternalVampireLanguage.g:2234:3: '['
                     {
-                    match(input,50,FOLLOW_2); 
+                    match(input,51,FOLLOW_2); 
 
                     }
                     break;
@@ -7233,16 +7389,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__1"
-    // InternalVampireLanguage.g:2188:1: rule__VLSAnnotation__Group__1 : rule__VLSAnnotation__Group__1__Impl rule__VLSAnnotation__Group__2 ;
+    // InternalVampireLanguage.g:2242:1: rule__VLSAnnotation__Group__1 : rule__VLSAnnotation__Group__1__Impl rule__VLSAnnotation__Group__2 ;
     public final void rule__VLSAnnotation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2192:1: ( rule__VLSAnnotation__Group__1__Impl rule__VLSAnnotation__Group__2 )
-            // InternalVampireLanguage.g:2193:2: rule__VLSAnnotation__Group__1__Impl rule__VLSAnnotation__Group__2
+            // InternalVampireLanguage.g:2246:1: ( rule__VLSAnnotation__Group__1__Impl rule__VLSAnnotation__Group__2 )
+            // InternalVampireLanguage.g:2247:2: rule__VLSAnnotation__Group__1__Impl rule__VLSAnnotation__Group__2
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__VLSAnnotation__Group__1__Impl();
 
             state._fsp--;
@@ -7271,20 +7427,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__1__Impl"
-    // InternalVampireLanguage.g:2200:1: rule__VLSAnnotation__Group__1__Impl : ( ( rule__VLSAnnotation__NameAssignment_1 )? ) ;
+    // InternalVampireLanguage.g:2254:1: rule__VLSAnnotation__Group__1__Impl : ( ( rule__VLSAnnotation__NameAssignment_1 )? ) ;
     public final void rule__VLSAnnotation__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2204:1: ( ( ( rule__VLSAnnotation__NameAssignment_1 )? ) )
-            // InternalVampireLanguage.g:2205:1: ( ( rule__VLSAnnotation__NameAssignment_1 )? )
+            // InternalVampireLanguage.g:2258:1: ( ( ( rule__VLSAnnotation__NameAssignment_1 )? ) )
+            // InternalVampireLanguage.g:2259:1: ( ( rule__VLSAnnotation__NameAssignment_1 )? )
             {
-            // InternalVampireLanguage.g:2205:1: ( ( rule__VLSAnnotation__NameAssignment_1 )? )
-            // InternalVampireLanguage.g:2206:2: ( rule__VLSAnnotation__NameAssignment_1 )?
+            // InternalVampireLanguage.g:2259:1: ( ( rule__VLSAnnotation__NameAssignment_1 )? )
+            // InternalVampireLanguage.g:2260:2: ( rule__VLSAnnotation__NameAssignment_1 )?
             {
              before(grammarAccess.getVLSAnnotationAccess().getNameAssignment_1()); 
-            // InternalVampireLanguage.g:2207:2: ( rule__VLSAnnotation__NameAssignment_1 )?
+            // InternalVampireLanguage.g:2261:2: ( rule__VLSAnnotation__NameAssignment_1 )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -7293,7 +7449,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             }
             switch (alt25) {
                 case 1 :
-                    // InternalVampireLanguage.g:2207:3: rule__VLSAnnotation__NameAssignment_1
+                    // InternalVampireLanguage.g:2261:3: rule__VLSAnnotation__NameAssignment_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__VLSAnnotation__NameAssignment_1();
@@ -7329,16 +7485,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__2"
-    // InternalVampireLanguage.g:2215:1: rule__VLSAnnotation__Group__2 : rule__VLSAnnotation__Group__2__Impl rule__VLSAnnotation__Group__3 ;
+    // InternalVampireLanguage.g:2269:1: rule__VLSAnnotation__Group__2 : rule__VLSAnnotation__Group__2__Impl rule__VLSAnnotation__Group__3 ;
     public final void rule__VLSAnnotation__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2219:1: ( rule__VLSAnnotation__Group__2__Impl rule__VLSAnnotation__Group__3 )
-            // InternalVampireLanguage.g:2220:2: rule__VLSAnnotation__Group__2__Impl rule__VLSAnnotation__Group__3
+            // InternalVampireLanguage.g:2273:1: ( rule__VLSAnnotation__Group__2__Impl rule__VLSAnnotation__Group__3 )
+            // InternalVampireLanguage.g:2274:2: rule__VLSAnnotation__Group__2__Impl rule__VLSAnnotation__Group__3
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__VLSAnnotation__Group__2__Impl();
 
             state._fsp--;
@@ -7367,29 +7523,29 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__2__Impl"
-    // InternalVampireLanguage.g:2227:1: rule__VLSAnnotation__Group__2__Impl : ( ( rule__VLSAnnotation__Group_2__0 )? ) ;
+    // InternalVampireLanguage.g:2281:1: rule__VLSAnnotation__Group__2__Impl : ( ( rule__VLSAnnotation__Group_2__0 )? ) ;
     public final void rule__VLSAnnotation__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2231:1: ( ( ( rule__VLSAnnotation__Group_2__0 )? ) )
-            // InternalVampireLanguage.g:2232:1: ( ( rule__VLSAnnotation__Group_2__0 )? )
+            // InternalVampireLanguage.g:2285:1: ( ( ( rule__VLSAnnotation__Group_2__0 )? ) )
+            // InternalVampireLanguage.g:2286:1: ( ( rule__VLSAnnotation__Group_2__0 )? )
             {
-            // InternalVampireLanguage.g:2232:1: ( ( rule__VLSAnnotation__Group_2__0 )? )
-            // InternalVampireLanguage.g:2233:2: ( rule__VLSAnnotation__Group_2__0 )?
+            // InternalVampireLanguage.g:2286:1: ( ( rule__VLSAnnotation__Group_2__0 )? )
+            // InternalVampireLanguage.g:2287:2: ( rule__VLSAnnotation__Group_2__0 )?
             {
              before(grammarAccess.getVLSAnnotationAccess().getGroup_2()); 
-            // InternalVampireLanguage.g:2234:2: ( rule__VLSAnnotation__Group_2__0 )?
+            // InternalVampireLanguage.g:2288:2: ( rule__VLSAnnotation__Group_2__0 )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
-            if ( (LA26_0==47) ) {
+            if ( (LA26_0==48) ) {
                 alt26=1;
             }
             switch (alt26) {
                 case 1 :
-                    // InternalVampireLanguage.g:2234:3: rule__VLSAnnotation__Group_2__0
+                    // InternalVampireLanguage.g:2288:3: rule__VLSAnnotation__Group_2__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__VLSAnnotation__Group_2__0();
@@ -7425,14 +7581,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__3"
-    // InternalVampireLanguage.g:2242:1: rule__VLSAnnotation__Group__3 : rule__VLSAnnotation__Group__3__Impl ;
+    // InternalVampireLanguage.g:2296:1: rule__VLSAnnotation__Group__3 : rule__VLSAnnotation__Group__3__Impl ;
     public final void rule__VLSAnnotation__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2246:1: ( rule__VLSAnnotation__Group__3__Impl )
-            // InternalVampireLanguage.g:2247:2: rule__VLSAnnotation__Group__3__Impl
+            // InternalVampireLanguage.g:2300:1: ( rule__VLSAnnotation__Group__3__Impl )
+            // InternalVampireLanguage.g:2301:2: rule__VLSAnnotation__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotation__Group__3__Impl();
@@ -7458,20 +7614,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group__3__Impl"
-    // InternalVampireLanguage.g:2253:1: rule__VLSAnnotation__Group__3__Impl : ( ( ']' )? ) ;
+    // InternalVampireLanguage.g:2307:1: rule__VLSAnnotation__Group__3__Impl : ( ( ']' )? ) ;
     public final void rule__VLSAnnotation__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2257:1: ( ( ( ']' )? ) )
-            // InternalVampireLanguage.g:2258:1: ( ( ']' )? )
+            // InternalVampireLanguage.g:2311:1: ( ( ( ']' )? ) )
+            // InternalVampireLanguage.g:2312:1: ( ( ']' )? )
             {
-            // InternalVampireLanguage.g:2258:1: ( ( ']' )? )
-            // InternalVampireLanguage.g:2259:2: ( ']' )?
+            // InternalVampireLanguage.g:2312:1: ( ( ']' )? )
+            // InternalVampireLanguage.g:2313:2: ( ']' )?
             {
              before(grammarAccess.getVLSAnnotationAccess().getRightSquareBracketKeyword_3()); 
-            // InternalVampireLanguage.g:2260:2: ( ']' )?
+            // InternalVampireLanguage.g:2314:2: ( ']' )?
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -7480,7 +7636,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
             }
             switch (alt27) {
                 case 1 :
-                    // InternalVampireLanguage.g:2260:3: ']'
+                    // InternalVampireLanguage.g:2314:3: ']'
                     {
                     match(input,44,FOLLOW_2); 
 
@@ -7512,16 +7668,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group_2__0"
-    // InternalVampireLanguage.g:2269:1: rule__VLSAnnotation__Group_2__0 : rule__VLSAnnotation__Group_2__0__Impl rule__VLSAnnotation__Group_2__1 ;
+    // InternalVampireLanguage.g:2323:1: rule__VLSAnnotation__Group_2__0 : rule__VLSAnnotation__Group_2__0__Impl rule__VLSAnnotation__Group_2__1 ;
     public final void rule__VLSAnnotation__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2273:1: ( rule__VLSAnnotation__Group_2__0__Impl rule__VLSAnnotation__Group_2__1 )
-            // InternalVampireLanguage.g:2274:2: rule__VLSAnnotation__Group_2__0__Impl rule__VLSAnnotation__Group_2__1
+            // InternalVampireLanguage.g:2327:1: ( rule__VLSAnnotation__Group_2__0__Impl rule__VLSAnnotation__Group_2__1 )
+            // InternalVampireLanguage.g:2328:2: rule__VLSAnnotation__Group_2__0__Impl rule__VLSAnnotation__Group_2__1
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__VLSAnnotation__Group_2__0__Impl();
 
             state._fsp--;
@@ -7550,20 +7706,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group_2__0__Impl"
-    // InternalVampireLanguage.g:2281:1: rule__VLSAnnotation__Group_2__0__Impl : ( '(' ) ;
+    // InternalVampireLanguage.g:2335:1: rule__VLSAnnotation__Group_2__0__Impl : ( '(' ) ;
     public final void rule__VLSAnnotation__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2285:1: ( ( '(' ) )
-            // InternalVampireLanguage.g:2286:1: ( '(' )
+            // InternalVampireLanguage.g:2339:1: ( ( '(' ) )
+            // InternalVampireLanguage.g:2340:1: ( '(' )
             {
-            // InternalVampireLanguage.g:2286:1: ( '(' )
-            // InternalVampireLanguage.g:2287:2: '('
+            // InternalVampireLanguage.g:2340:1: ( '(' )
+            // InternalVampireLanguage.g:2341:2: '('
             {
              before(grammarAccess.getVLSAnnotationAccess().getLeftParenthesisKeyword_2_0()); 
-            match(input,47,FOLLOW_2); 
+            match(input,48,FOLLOW_2); 
              after(grammarAccess.getVLSAnnotationAccess().getLeftParenthesisKeyword_2_0()); 
 
             }
@@ -7587,16 +7743,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group_2__1"
-    // InternalVampireLanguage.g:2296:1: rule__VLSAnnotation__Group_2__1 : rule__VLSAnnotation__Group_2__1__Impl rule__VLSAnnotation__Group_2__2 ;
+    // InternalVampireLanguage.g:2350:1: rule__VLSAnnotation__Group_2__1 : rule__VLSAnnotation__Group_2__1__Impl rule__VLSAnnotation__Group_2__2 ;
     public final void rule__VLSAnnotation__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2300:1: ( rule__VLSAnnotation__Group_2__1__Impl rule__VLSAnnotation__Group_2__2 )
-            // InternalVampireLanguage.g:2301:2: rule__VLSAnnotation__Group_2__1__Impl rule__VLSAnnotation__Group_2__2
+            // InternalVampireLanguage.g:2354:1: ( rule__VLSAnnotation__Group_2__1__Impl rule__VLSAnnotation__Group_2__2 )
+            // InternalVampireLanguage.g:2355:2: rule__VLSAnnotation__Group_2__1__Impl rule__VLSAnnotation__Group_2__2
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__VLSAnnotation__Group_2__1__Impl();
 
             state._fsp--;
@@ -7625,21 +7781,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group_2__1__Impl"
-    // InternalVampireLanguage.g:2308:1: rule__VLSAnnotation__Group_2__1__Impl : ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) ) ;
+    // InternalVampireLanguage.g:2362:1: rule__VLSAnnotation__Group_2__1__Impl : ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) ) ;
     public final void rule__VLSAnnotation__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2312:1: ( ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) ) )
-            // InternalVampireLanguage.g:2313:1: ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) )
+            // InternalVampireLanguage.g:2366:1: ( ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) ) )
+            // InternalVampireLanguage.g:2367:1: ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) )
             {
-            // InternalVampireLanguage.g:2313:1: ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) )
-            // InternalVampireLanguage.g:2314:2: ( rule__VLSAnnotation__FollowupAssignment_2_1 )
+            // InternalVampireLanguage.g:2367:1: ( ( rule__VLSAnnotation__FollowupAssignment_2_1 ) )
+            // InternalVampireLanguage.g:2368:2: ( rule__VLSAnnotation__FollowupAssignment_2_1 )
             {
              before(grammarAccess.getVLSAnnotationAccess().getFollowupAssignment_2_1()); 
-            // InternalVampireLanguage.g:2315:2: ( rule__VLSAnnotation__FollowupAssignment_2_1 )
-            // InternalVampireLanguage.g:2315:3: rule__VLSAnnotation__FollowupAssignment_2_1
+            // InternalVampireLanguage.g:2369:2: ( rule__VLSAnnotation__FollowupAssignment_2_1 )
+            // InternalVampireLanguage.g:2369:3: rule__VLSAnnotation__FollowupAssignment_2_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotation__FollowupAssignment_2_1();
@@ -7672,14 +7828,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group_2__2"
-    // InternalVampireLanguage.g:2323:1: rule__VLSAnnotation__Group_2__2 : rule__VLSAnnotation__Group_2__2__Impl ;
+    // InternalVampireLanguage.g:2377:1: rule__VLSAnnotation__Group_2__2 : rule__VLSAnnotation__Group_2__2__Impl ;
     public final void rule__VLSAnnotation__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2327:1: ( rule__VLSAnnotation__Group_2__2__Impl )
-            // InternalVampireLanguage.g:2328:2: rule__VLSAnnotation__Group_2__2__Impl
+            // InternalVampireLanguage.g:2381:1: ( rule__VLSAnnotation__Group_2__2__Impl )
+            // InternalVampireLanguage.g:2382:2: rule__VLSAnnotation__Group_2__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotation__Group_2__2__Impl();
@@ -7705,20 +7861,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__Group_2__2__Impl"
-    // InternalVampireLanguage.g:2334:1: rule__VLSAnnotation__Group_2__2__Impl : ( ')' ) ;
+    // InternalVampireLanguage.g:2388:1: rule__VLSAnnotation__Group_2__2__Impl : ( ')' ) ;
     public final void rule__VLSAnnotation__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2338:1: ( ( ')' ) )
-            // InternalVampireLanguage.g:2339:1: ( ')' )
+            // InternalVampireLanguage.g:2392:1: ( ( ')' ) )
+            // InternalVampireLanguage.g:2393:1: ( ')' )
             {
-            // InternalVampireLanguage.g:2339:1: ( ')' )
-            // InternalVampireLanguage.g:2340:2: ')'
+            // InternalVampireLanguage.g:2393:1: ( ')' )
+            // InternalVampireLanguage.g:2394:2: ')'
             {
              before(grammarAccess.getVLSAnnotationAccess().getRightParenthesisKeyword_2_2()); 
-            match(input,48,FOLLOW_2); 
+            match(input,49,FOLLOW_2); 
              after(grammarAccess.getVLSAnnotationAccess().getRightParenthesisKeyword_2_2()); 
 
             }
@@ -7742,16 +7898,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group__0"
-    // InternalVampireLanguage.g:2350:1: rule__VLSAnnotationTerms__Group__0 : rule__VLSAnnotationTerms__Group__0__Impl rule__VLSAnnotationTerms__Group__1 ;
+    // InternalVampireLanguage.g:2404:1: rule__VLSAnnotationTerms__Group__0 : rule__VLSAnnotationTerms__Group__0__Impl rule__VLSAnnotationTerms__Group__1 ;
     public final void rule__VLSAnnotationTerms__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2354:1: ( rule__VLSAnnotationTerms__Group__0__Impl rule__VLSAnnotationTerms__Group__1 )
-            // InternalVampireLanguage.g:2355:2: rule__VLSAnnotationTerms__Group__0__Impl rule__VLSAnnotationTerms__Group__1
+            // InternalVampireLanguage.g:2408:1: ( rule__VLSAnnotationTerms__Group__0__Impl rule__VLSAnnotationTerms__Group__1 )
+            // InternalVampireLanguage.g:2409:2: rule__VLSAnnotationTerms__Group__0__Impl rule__VLSAnnotationTerms__Group__1
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_14);
             rule__VLSAnnotationTerms__Group__0__Impl();
 
             state._fsp--;
@@ -7780,21 +7936,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group__0__Impl"
-    // InternalVampireLanguage.g:2362:1: rule__VLSAnnotationTerms__Group__0__Impl : ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) ) ;
+    // InternalVampireLanguage.g:2416:1: rule__VLSAnnotationTerms__Group__0__Impl : ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) ) ;
     public final void rule__VLSAnnotationTerms__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2366:1: ( ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) ) )
-            // InternalVampireLanguage.g:2367:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) )
+            // InternalVampireLanguage.g:2420:1: ( ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) ) )
+            // InternalVampireLanguage.g:2421:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) )
             {
-            // InternalVampireLanguage.g:2367:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) )
-            // InternalVampireLanguage.g:2368:2: ( rule__VLSAnnotationTerms__TermsAssignment_0 )
+            // InternalVampireLanguage.g:2421:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_0 ) )
+            // InternalVampireLanguage.g:2422:2: ( rule__VLSAnnotationTerms__TermsAssignment_0 )
             {
              before(grammarAccess.getVLSAnnotationTermsAccess().getTermsAssignment_0()); 
-            // InternalVampireLanguage.g:2369:2: ( rule__VLSAnnotationTerms__TermsAssignment_0 )
-            // InternalVampireLanguage.g:2369:3: rule__VLSAnnotationTerms__TermsAssignment_0
+            // InternalVampireLanguage.g:2423:2: ( rule__VLSAnnotationTerms__TermsAssignment_0 )
+            // InternalVampireLanguage.g:2423:3: rule__VLSAnnotationTerms__TermsAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotationTerms__TermsAssignment_0();
@@ -7827,14 +7983,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group__1"
-    // InternalVampireLanguage.g:2377:1: rule__VLSAnnotationTerms__Group__1 : rule__VLSAnnotationTerms__Group__1__Impl ;
+    // InternalVampireLanguage.g:2431:1: rule__VLSAnnotationTerms__Group__1 : rule__VLSAnnotationTerms__Group__1__Impl ;
     public final void rule__VLSAnnotationTerms__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2381:1: ( rule__VLSAnnotationTerms__Group__1__Impl )
-            // InternalVampireLanguage.g:2382:2: rule__VLSAnnotationTerms__Group__1__Impl
+            // InternalVampireLanguage.g:2435:1: ( rule__VLSAnnotationTerms__Group__1__Impl )
+            // InternalVampireLanguage.g:2436:2: rule__VLSAnnotationTerms__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotationTerms__Group__1__Impl();
@@ -7860,20 +8016,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group__1__Impl"
-    // InternalVampireLanguage.g:2388:1: rule__VLSAnnotationTerms__Group__1__Impl : ( ( rule__VLSAnnotationTerms__Group_1__0 )* ) ;
+    // InternalVampireLanguage.g:2442:1: rule__VLSAnnotationTerms__Group__1__Impl : ( ( rule__VLSAnnotationTerms__Group_1__0 )* ) ;
     public final void rule__VLSAnnotationTerms__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2392:1: ( ( ( rule__VLSAnnotationTerms__Group_1__0 )* ) )
-            // InternalVampireLanguage.g:2393:1: ( ( rule__VLSAnnotationTerms__Group_1__0 )* )
+            // InternalVampireLanguage.g:2446:1: ( ( ( rule__VLSAnnotationTerms__Group_1__0 )* ) )
+            // InternalVampireLanguage.g:2447:1: ( ( rule__VLSAnnotationTerms__Group_1__0 )* )
             {
-            // InternalVampireLanguage.g:2393:1: ( ( rule__VLSAnnotationTerms__Group_1__0 )* )
-            // InternalVampireLanguage.g:2394:2: ( rule__VLSAnnotationTerms__Group_1__0 )*
+            // InternalVampireLanguage.g:2447:1: ( ( rule__VLSAnnotationTerms__Group_1__0 )* )
+            // InternalVampireLanguage.g:2448:2: ( rule__VLSAnnotationTerms__Group_1__0 )*
             {
              before(grammarAccess.getVLSAnnotationTermsAccess().getGroup_1()); 
-            // InternalVampireLanguage.g:2395:2: ( rule__VLSAnnotationTerms__Group_1__0 )*
+            // InternalVampireLanguage.g:2449:2: ( rule__VLSAnnotationTerms__Group_1__0 )*
             loop28:
             do {
                 int alt28=2;
@@ -7886,7 +8042,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
                 switch (alt28) {
             	case 1 :
-            	    // InternalVampireLanguage.g:2395:3: rule__VLSAnnotationTerms__Group_1__0
+            	    // InternalVampireLanguage.g:2449:3: rule__VLSAnnotationTerms__Group_1__0
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__VLSAnnotationTerms__Group_1__0();
@@ -7925,16 +8081,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group_1__0"
-    // InternalVampireLanguage.g:2404:1: rule__VLSAnnotationTerms__Group_1__0 : rule__VLSAnnotationTerms__Group_1__0__Impl rule__VLSAnnotationTerms__Group_1__1 ;
+    // InternalVampireLanguage.g:2458:1: rule__VLSAnnotationTerms__Group_1__0 : rule__VLSAnnotationTerms__Group_1__0__Impl rule__VLSAnnotationTerms__Group_1__1 ;
     public final void rule__VLSAnnotationTerms__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2408:1: ( rule__VLSAnnotationTerms__Group_1__0__Impl rule__VLSAnnotationTerms__Group_1__1 )
-            // InternalVampireLanguage.g:2409:2: rule__VLSAnnotationTerms__Group_1__0__Impl rule__VLSAnnotationTerms__Group_1__1
+            // InternalVampireLanguage.g:2462:1: ( rule__VLSAnnotationTerms__Group_1__0__Impl rule__VLSAnnotationTerms__Group_1__1 )
+            // InternalVampireLanguage.g:2463:2: rule__VLSAnnotationTerms__Group_1__0__Impl rule__VLSAnnotationTerms__Group_1__1
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__VLSAnnotationTerms__Group_1__0__Impl();
 
             state._fsp--;
@@ -7963,17 +8119,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group_1__0__Impl"
-    // InternalVampireLanguage.g:2416:1: rule__VLSAnnotationTerms__Group_1__0__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:2470:1: rule__VLSAnnotationTerms__Group_1__0__Impl : ( ',' ) ;
     public final void rule__VLSAnnotationTerms__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2420:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:2421:1: ( ',' )
+            // InternalVampireLanguage.g:2474:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:2475:1: ( ',' )
             {
-            // InternalVampireLanguage.g:2421:1: ( ',' )
-            // InternalVampireLanguage.g:2422:2: ','
+            // InternalVampireLanguage.g:2475:1: ( ',' )
+            // InternalVampireLanguage.g:2476:2: ','
             {
              before(grammarAccess.getVLSAnnotationTermsAccess().getCommaKeyword_1_0()); 
             match(input,45,FOLLOW_2); 
@@ -8000,14 +8156,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group_1__1"
-    // InternalVampireLanguage.g:2431:1: rule__VLSAnnotationTerms__Group_1__1 : rule__VLSAnnotationTerms__Group_1__1__Impl ;
+    // InternalVampireLanguage.g:2485:1: rule__VLSAnnotationTerms__Group_1__1 : rule__VLSAnnotationTerms__Group_1__1__Impl ;
     public final void rule__VLSAnnotationTerms__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2435:1: ( rule__VLSAnnotationTerms__Group_1__1__Impl )
-            // InternalVampireLanguage.g:2436:2: rule__VLSAnnotationTerms__Group_1__1__Impl
+            // InternalVampireLanguage.g:2489:1: ( rule__VLSAnnotationTerms__Group_1__1__Impl )
+            // InternalVampireLanguage.g:2490:2: rule__VLSAnnotationTerms__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotationTerms__Group_1__1__Impl();
@@ -8033,21 +8189,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__Group_1__1__Impl"
-    // InternalVampireLanguage.g:2442:1: rule__VLSAnnotationTerms__Group_1__1__Impl : ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) ) ;
+    // InternalVampireLanguage.g:2496:1: rule__VLSAnnotationTerms__Group_1__1__Impl : ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) ) ;
     public final void rule__VLSAnnotationTerms__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2446:1: ( ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) ) )
-            // InternalVampireLanguage.g:2447:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) )
+            // InternalVampireLanguage.g:2500:1: ( ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) ) )
+            // InternalVampireLanguage.g:2501:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) )
             {
-            // InternalVampireLanguage.g:2447:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) )
-            // InternalVampireLanguage.g:2448:2: ( rule__VLSAnnotationTerms__TermsAssignment_1_1 )
+            // InternalVampireLanguage.g:2501:1: ( ( rule__VLSAnnotationTerms__TermsAssignment_1_1 ) )
+            // InternalVampireLanguage.g:2502:2: ( rule__VLSAnnotationTerms__TermsAssignment_1_1 )
             {
              before(grammarAccess.getVLSAnnotationTermsAccess().getTermsAssignment_1_1()); 
-            // InternalVampireLanguage.g:2449:2: ( rule__VLSAnnotationTerms__TermsAssignment_1_1 )
-            // InternalVampireLanguage.g:2449:3: rule__VLSAnnotationTerms__TermsAssignment_1_1
+            // InternalVampireLanguage.g:2503:2: ( rule__VLSAnnotationTerms__TermsAssignment_1_1 )
+            // InternalVampireLanguage.g:2503:3: rule__VLSAnnotationTerms__TermsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotationTerms__TermsAssignment_1_1();
@@ -8080,16 +8236,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group__0"
-    // InternalVampireLanguage.g:2458:1: rule__VLSBinary__Group__0 : rule__VLSBinary__Group__0__Impl rule__VLSBinary__Group__1 ;
+    // InternalVampireLanguage.g:2512:1: rule__VLSBinary__Group__0 : rule__VLSBinary__Group__0__Impl rule__VLSBinary__Group__1 ;
     public final void rule__VLSBinary__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2462:1: ( rule__VLSBinary__Group__0__Impl rule__VLSBinary__Group__1 )
-            // InternalVampireLanguage.g:2463:2: rule__VLSBinary__Group__0__Impl rule__VLSBinary__Group__1
+            // InternalVampireLanguage.g:2516:1: ( rule__VLSBinary__Group__0__Impl rule__VLSBinary__Group__1 )
+            // InternalVampireLanguage.g:2517:2: rule__VLSBinary__Group__0__Impl rule__VLSBinary__Group__1
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__VLSBinary__Group__0__Impl();
 
             state._fsp--;
@@ -8118,17 +8274,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group__0__Impl"
-    // InternalVampireLanguage.g:2470:1: rule__VLSBinary__Group__0__Impl : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:2524:1: rule__VLSBinary__Group__0__Impl : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSBinary__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2474:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:2475:1: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:2528:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:2529:1: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:2475:1: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:2476:2: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:2529:1: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:2530:2: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSUnitaryFormulaParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -8159,14 +8315,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group__1"
-    // InternalVampireLanguage.g:2485:1: rule__VLSBinary__Group__1 : rule__VLSBinary__Group__1__Impl ;
+    // InternalVampireLanguage.g:2539:1: rule__VLSBinary__Group__1 : rule__VLSBinary__Group__1__Impl ;
     public final void rule__VLSBinary__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2489:1: ( rule__VLSBinary__Group__1__Impl )
-            // InternalVampireLanguage.g:2490:2: rule__VLSBinary__Group__1__Impl
+            // InternalVampireLanguage.g:2543:1: ( rule__VLSBinary__Group__1__Impl )
+            // InternalVampireLanguage.g:2544:2: rule__VLSBinary__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group__1__Impl();
@@ -8192,29 +8348,29 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group__1__Impl"
-    // InternalVampireLanguage.g:2496:1: rule__VLSBinary__Group__1__Impl : ( ( rule__VLSBinary__Alternatives_1 )? ) ;
+    // InternalVampireLanguage.g:2550:1: rule__VLSBinary__Group__1__Impl : ( ( rule__VLSBinary__Alternatives_1 )? ) ;
     public final void rule__VLSBinary__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2500:1: ( ( ( rule__VLSBinary__Alternatives_1 )? ) )
-            // InternalVampireLanguage.g:2501:1: ( ( rule__VLSBinary__Alternatives_1 )? )
+            // InternalVampireLanguage.g:2554:1: ( ( ( rule__VLSBinary__Alternatives_1 )? ) )
+            // InternalVampireLanguage.g:2555:1: ( ( rule__VLSBinary__Alternatives_1 )? )
             {
-            // InternalVampireLanguage.g:2501:1: ( ( rule__VLSBinary__Alternatives_1 )? )
-            // InternalVampireLanguage.g:2502:2: ( rule__VLSBinary__Alternatives_1 )?
+            // InternalVampireLanguage.g:2555:1: ( ( rule__VLSBinary__Alternatives_1 )? )
+            // InternalVampireLanguage.g:2556:2: ( rule__VLSBinary__Alternatives_1 )?
             {
              before(grammarAccess.getVLSBinaryAccess().getAlternatives_1()); 
-            // InternalVampireLanguage.g:2503:2: ( rule__VLSBinary__Alternatives_1 )?
+            // InternalVampireLanguage.g:2557:2: ( rule__VLSBinary__Alternatives_1 )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
-            if ( ((LA29_0>=51 && LA29_0<=58)) ) {
+            if ( ((LA29_0>=52 && LA29_0<=59)) ) {
                 alt29=1;
             }
             switch (alt29) {
                 case 1 :
-                    // InternalVampireLanguage.g:2503:3: rule__VLSBinary__Alternatives_1
+                    // InternalVampireLanguage.g:2557:3: rule__VLSBinary__Alternatives_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__VLSBinary__Alternatives_1();
@@ -8250,16 +8406,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0__0"
-    // InternalVampireLanguage.g:2512:1: rule__VLSBinary__Group_1_0__0 : rule__VLSBinary__Group_1_0__0__Impl rule__VLSBinary__Group_1_0__1 ;
+    // InternalVampireLanguage.g:2566:1: rule__VLSBinary__Group_1_0__0 : rule__VLSBinary__Group_1_0__0__Impl rule__VLSBinary__Group_1_0__1 ;
     public final void rule__VLSBinary__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2516:1: ( rule__VLSBinary__Group_1_0__0__Impl rule__VLSBinary__Group_1_0__1 )
-            // InternalVampireLanguage.g:2517:2: rule__VLSBinary__Group_1_0__0__Impl rule__VLSBinary__Group_1_0__1
+            // InternalVampireLanguage.g:2570:1: ( rule__VLSBinary__Group_1_0__0__Impl rule__VLSBinary__Group_1_0__1 )
+            // InternalVampireLanguage.g:2571:2: rule__VLSBinary__Group_1_0__0__Impl rule__VLSBinary__Group_1_0__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSBinary__Group_1_0__0__Impl();
 
             state._fsp--;
@@ -8288,21 +8444,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0__0__Impl"
-    // InternalVampireLanguage.g:2524:1: rule__VLSBinary__Group_1_0__0__Impl : ( ( rule__VLSBinary__Alternatives_1_0_0 ) ) ;
+    // InternalVampireLanguage.g:2578:1: rule__VLSBinary__Group_1_0__0__Impl : ( ( rule__VLSBinary__Alternatives_1_0_0 ) ) ;
     public final void rule__VLSBinary__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2528:1: ( ( ( rule__VLSBinary__Alternatives_1_0_0 ) ) )
-            // InternalVampireLanguage.g:2529:1: ( ( rule__VLSBinary__Alternatives_1_0_0 ) )
+            // InternalVampireLanguage.g:2582:1: ( ( ( rule__VLSBinary__Alternatives_1_0_0 ) ) )
+            // InternalVampireLanguage.g:2583:1: ( ( rule__VLSBinary__Alternatives_1_0_0 ) )
             {
-            // InternalVampireLanguage.g:2529:1: ( ( rule__VLSBinary__Alternatives_1_0_0 ) )
-            // InternalVampireLanguage.g:2530:2: ( rule__VLSBinary__Alternatives_1_0_0 )
+            // InternalVampireLanguage.g:2583:1: ( ( rule__VLSBinary__Alternatives_1_0_0 ) )
+            // InternalVampireLanguage.g:2584:2: ( rule__VLSBinary__Alternatives_1_0_0 )
             {
              before(grammarAccess.getVLSBinaryAccess().getAlternatives_1_0_0()); 
-            // InternalVampireLanguage.g:2531:2: ( rule__VLSBinary__Alternatives_1_0_0 )
-            // InternalVampireLanguage.g:2531:3: rule__VLSBinary__Alternatives_1_0_0
+            // InternalVampireLanguage.g:2585:2: ( rule__VLSBinary__Alternatives_1_0_0 )
+            // InternalVampireLanguage.g:2585:3: rule__VLSBinary__Alternatives_1_0_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Alternatives_1_0_0();
@@ -8335,14 +8491,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0__1"
-    // InternalVampireLanguage.g:2539:1: rule__VLSBinary__Group_1_0__1 : rule__VLSBinary__Group_1_0__1__Impl ;
+    // InternalVampireLanguage.g:2593:1: rule__VLSBinary__Group_1_0__1 : rule__VLSBinary__Group_1_0__1__Impl ;
     public final void rule__VLSBinary__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2543:1: ( rule__VLSBinary__Group_1_0__1__Impl )
-            // InternalVampireLanguage.g:2544:2: rule__VLSBinary__Group_1_0__1__Impl
+            // InternalVampireLanguage.g:2597:1: ( rule__VLSBinary__Group_1_0__1__Impl )
+            // InternalVampireLanguage.g:2598:2: rule__VLSBinary__Group_1_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0__1__Impl();
@@ -8368,21 +8524,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0__1__Impl"
-    // InternalVampireLanguage.g:2550:1: rule__VLSBinary__Group_1_0__1__Impl : ( ( rule__VLSBinary__RightAssignment_1_0_1 ) ) ;
+    // InternalVampireLanguage.g:2604:1: rule__VLSBinary__Group_1_0__1__Impl : ( ( rule__VLSBinary__RightAssignment_1_0_1 ) ) ;
     public final void rule__VLSBinary__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2554:1: ( ( ( rule__VLSBinary__RightAssignment_1_0_1 ) ) )
-            // InternalVampireLanguage.g:2555:1: ( ( rule__VLSBinary__RightAssignment_1_0_1 ) )
+            // InternalVampireLanguage.g:2608:1: ( ( ( rule__VLSBinary__RightAssignment_1_0_1 ) ) )
+            // InternalVampireLanguage.g:2609:1: ( ( rule__VLSBinary__RightAssignment_1_0_1 ) )
             {
-            // InternalVampireLanguage.g:2555:1: ( ( rule__VLSBinary__RightAssignment_1_0_1 ) )
-            // InternalVampireLanguage.g:2556:2: ( rule__VLSBinary__RightAssignment_1_0_1 )
+            // InternalVampireLanguage.g:2609:1: ( ( rule__VLSBinary__RightAssignment_1_0_1 ) )
+            // InternalVampireLanguage.g:2610:2: ( rule__VLSBinary__RightAssignment_1_0_1 )
             {
              before(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_0_1()); 
-            // InternalVampireLanguage.g:2557:2: ( rule__VLSBinary__RightAssignment_1_0_1 )
-            // InternalVampireLanguage.g:2557:3: rule__VLSBinary__RightAssignment_1_0_1
+            // InternalVampireLanguage.g:2611:2: ( rule__VLSBinary__RightAssignment_1_0_1 )
+            // InternalVampireLanguage.g:2611:3: rule__VLSBinary__RightAssignment_1_0_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__RightAssignment_1_0_1();
@@ -8415,16 +8571,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_0__0"
-    // InternalVampireLanguage.g:2566:1: rule__VLSBinary__Group_1_0_0_0__0 : rule__VLSBinary__Group_1_0_0_0__0__Impl rule__VLSBinary__Group_1_0_0_0__1 ;
+    // InternalVampireLanguage.g:2620:1: rule__VLSBinary__Group_1_0_0_0__0 : rule__VLSBinary__Group_1_0_0_0__0__Impl rule__VLSBinary__Group_1_0_0_0__1 ;
     public final void rule__VLSBinary__Group_1_0_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2570:1: ( rule__VLSBinary__Group_1_0_0_0__0__Impl rule__VLSBinary__Group_1_0_0_0__1 )
-            // InternalVampireLanguage.g:2571:2: rule__VLSBinary__Group_1_0_0_0__0__Impl rule__VLSBinary__Group_1_0_0_0__1
+            // InternalVampireLanguage.g:2624:1: ( rule__VLSBinary__Group_1_0_0_0__0__Impl rule__VLSBinary__Group_1_0_0_0__1 )
+            // InternalVampireLanguage.g:2625:2: rule__VLSBinary__Group_1_0_0_0__0__Impl rule__VLSBinary__Group_1_0_0_0__1
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__VLSBinary__Group_1_0_0_0__0__Impl();
 
             state._fsp--;
@@ -8453,21 +8609,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_0__0__Impl"
-    // InternalVampireLanguage.g:2578:1: rule__VLSBinary__Group_1_0_0_0__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2632:1: rule__VLSBinary__Group_1_0_0_0__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_0_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2582:1: ( ( () ) )
-            // InternalVampireLanguage.g:2583:1: ( () )
+            // InternalVampireLanguage.g:2636:1: ( ( () ) )
+            // InternalVampireLanguage.g:2637:1: ( () )
             {
-            // InternalVampireLanguage.g:2583:1: ( () )
-            // InternalVampireLanguage.g:2584:2: ()
+            // InternalVampireLanguage.g:2637:1: ( () )
+            // InternalVampireLanguage.g:2638:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSEquivalentLeftAction_1_0_0_0_0()); 
-            // InternalVampireLanguage.g:2585:2: ()
-            // InternalVampireLanguage.g:2585:3: 
+            // InternalVampireLanguage.g:2639:2: ()
+            // InternalVampireLanguage.g:2639:3: 
             {
             }
 
@@ -8490,14 +8646,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_0__1"
-    // InternalVampireLanguage.g:2593:1: rule__VLSBinary__Group_1_0_0_0__1 : rule__VLSBinary__Group_1_0_0_0__1__Impl ;
+    // InternalVampireLanguage.g:2647:1: rule__VLSBinary__Group_1_0_0_0__1 : rule__VLSBinary__Group_1_0_0_0__1__Impl ;
     public final void rule__VLSBinary__Group_1_0_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2597:1: ( rule__VLSBinary__Group_1_0_0_0__1__Impl )
-            // InternalVampireLanguage.g:2598:2: rule__VLSBinary__Group_1_0_0_0__1__Impl
+            // InternalVampireLanguage.g:2651:1: ( rule__VLSBinary__Group_1_0_0_0__1__Impl )
+            // InternalVampireLanguage.g:2652:2: rule__VLSBinary__Group_1_0_0_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0_0_0__1__Impl();
@@ -8523,20 +8679,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_0__1__Impl"
-    // InternalVampireLanguage.g:2604:1: rule__VLSBinary__Group_1_0_0_0__1__Impl : ( '<=>' ) ;
+    // InternalVampireLanguage.g:2658:1: rule__VLSBinary__Group_1_0_0_0__1__Impl : ( '<=>' ) ;
     public final void rule__VLSBinary__Group_1_0_0_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2608:1: ( ( '<=>' ) )
-            // InternalVampireLanguage.g:2609:1: ( '<=>' )
+            // InternalVampireLanguage.g:2662:1: ( ( '<=>' ) )
+            // InternalVampireLanguage.g:2663:1: ( '<=>' )
             {
-            // InternalVampireLanguage.g:2609:1: ( '<=>' )
-            // InternalVampireLanguage.g:2610:2: '<=>'
+            // InternalVampireLanguage.g:2663:1: ( '<=>' )
+            // InternalVampireLanguage.g:2664:2: '<=>'
             {
              before(grammarAccess.getVLSBinaryAccess().getLessThanSignEqualsSignGreaterThanSignKeyword_1_0_0_0_1()); 
-            match(input,51,FOLLOW_2); 
+            match(input,52,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getLessThanSignEqualsSignGreaterThanSignKeyword_1_0_0_0_1()); 
 
             }
@@ -8560,16 +8716,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_1__0"
-    // InternalVampireLanguage.g:2620:1: rule__VLSBinary__Group_1_0_0_1__0 : rule__VLSBinary__Group_1_0_0_1__0__Impl rule__VLSBinary__Group_1_0_0_1__1 ;
+    // InternalVampireLanguage.g:2674:1: rule__VLSBinary__Group_1_0_0_1__0 : rule__VLSBinary__Group_1_0_0_1__0__Impl rule__VLSBinary__Group_1_0_0_1__1 ;
     public final void rule__VLSBinary__Group_1_0_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2624:1: ( rule__VLSBinary__Group_1_0_0_1__0__Impl rule__VLSBinary__Group_1_0_0_1__1 )
-            // InternalVampireLanguage.g:2625:2: rule__VLSBinary__Group_1_0_0_1__0__Impl rule__VLSBinary__Group_1_0_0_1__1
+            // InternalVampireLanguage.g:2678:1: ( rule__VLSBinary__Group_1_0_0_1__0__Impl rule__VLSBinary__Group_1_0_0_1__1 )
+            // InternalVampireLanguage.g:2679:2: rule__VLSBinary__Group_1_0_0_1__0__Impl rule__VLSBinary__Group_1_0_0_1__1
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_23);
             rule__VLSBinary__Group_1_0_0_1__0__Impl();
 
             state._fsp--;
@@ -8598,21 +8754,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_1__0__Impl"
-    // InternalVampireLanguage.g:2632:1: rule__VLSBinary__Group_1_0_0_1__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2686:1: rule__VLSBinary__Group_1_0_0_1__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_0_0_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2636:1: ( ( () ) )
-            // InternalVampireLanguage.g:2637:1: ( () )
+            // InternalVampireLanguage.g:2690:1: ( ( () ) )
+            // InternalVampireLanguage.g:2691:1: ( () )
             {
-            // InternalVampireLanguage.g:2637:1: ( () )
-            // InternalVampireLanguage.g:2638:2: ()
+            // InternalVampireLanguage.g:2691:1: ( () )
+            // InternalVampireLanguage.g:2692:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSImpliesLeftAction_1_0_0_1_0()); 
-            // InternalVampireLanguage.g:2639:2: ()
-            // InternalVampireLanguage.g:2639:3: 
+            // InternalVampireLanguage.g:2693:2: ()
+            // InternalVampireLanguage.g:2693:3: 
             {
             }
 
@@ -8635,14 +8791,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_1__1"
-    // InternalVampireLanguage.g:2647:1: rule__VLSBinary__Group_1_0_0_1__1 : rule__VLSBinary__Group_1_0_0_1__1__Impl ;
+    // InternalVampireLanguage.g:2701:1: rule__VLSBinary__Group_1_0_0_1__1 : rule__VLSBinary__Group_1_0_0_1__1__Impl ;
     public final void rule__VLSBinary__Group_1_0_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2651:1: ( rule__VLSBinary__Group_1_0_0_1__1__Impl )
-            // InternalVampireLanguage.g:2652:2: rule__VLSBinary__Group_1_0_0_1__1__Impl
+            // InternalVampireLanguage.g:2705:1: ( rule__VLSBinary__Group_1_0_0_1__1__Impl )
+            // InternalVampireLanguage.g:2706:2: rule__VLSBinary__Group_1_0_0_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0_0_1__1__Impl();
@@ -8668,20 +8824,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_1__1__Impl"
-    // InternalVampireLanguage.g:2658:1: rule__VLSBinary__Group_1_0_0_1__1__Impl : ( '=>' ) ;
+    // InternalVampireLanguage.g:2712:1: rule__VLSBinary__Group_1_0_0_1__1__Impl : ( '=>' ) ;
     public final void rule__VLSBinary__Group_1_0_0_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2662:1: ( ( '=>' ) )
-            // InternalVampireLanguage.g:2663:1: ( '=>' )
+            // InternalVampireLanguage.g:2716:1: ( ( '=>' ) )
+            // InternalVampireLanguage.g:2717:1: ( '=>' )
             {
-            // InternalVampireLanguage.g:2663:1: ( '=>' )
-            // InternalVampireLanguage.g:2664:2: '=>'
+            // InternalVampireLanguage.g:2717:1: ( '=>' )
+            // InternalVampireLanguage.g:2718:2: '=>'
             {
              before(grammarAccess.getVLSBinaryAccess().getEqualsSignGreaterThanSignKeyword_1_0_0_1_1()); 
-            match(input,52,FOLLOW_2); 
+            match(input,53,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getEqualsSignGreaterThanSignKeyword_1_0_0_1_1()); 
 
             }
@@ -8705,16 +8861,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_2__0"
-    // InternalVampireLanguage.g:2674:1: rule__VLSBinary__Group_1_0_0_2__0 : rule__VLSBinary__Group_1_0_0_2__0__Impl rule__VLSBinary__Group_1_0_0_2__1 ;
+    // InternalVampireLanguage.g:2728:1: rule__VLSBinary__Group_1_0_0_2__0 : rule__VLSBinary__Group_1_0_0_2__0__Impl rule__VLSBinary__Group_1_0_0_2__1 ;
     public final void rule__VLSBinary__Group_1_0_0_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2678:1: ( rule__VLSBinary__Group_1_0_0_2__0__Impl rule__VLSBinary__Group_1_0_0_2__1 )
-            // InternalVampireLanguage.g:2679:2: rule__VLSBinary__Group_1_0_0_2__0__Impl rule__VLSBinary__Group_1_0_0_2__1
+            // InternalVampireLanguage.g:2732:1: ( rule__VLSBinary__Group_1_0_0_2__0__Impl rule__VLSBinary__Group_1_0_0_2__1 )
+            // InternalVampireLanguage.g:2733:2: rule__VLSBinary__Group_1_0_0_2__0__Impl rule__VLSBinary__Group_1_0_0_2__1
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__VLSBinary__Group_1_0_0_2__0__Impl();
 
             state._fsp--;
@@ -8743,21 +8899,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_2__0__Impl"
-    // InternalVampireLanguage.g:2686:1: rule__VLSBinary__Group_1_0_0_2__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2740:1: rule__VLSBinary__Group_1_0_0_2__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_0_0_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2690:1: ( ( () ) )
-            // InternalVampireLanguage.g:2691:1: ( () )
+            // InternalVampireLanguage.g:2744:1: ( ( () ) )
+            // InternalVampireLanguage.g:2745:1: ( () )
             {
-            // InternalVampireLanguage.g:2691:1: ( () )
-            // InternalVampireLanguage.g:2692:2: ()
+            // InternalVampireLanguage.g:2745:1: ( () )
+            // InternalVampireLanguage.g:2746:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSRevImpliesLeftAction_1_0_0_2_0()); 
-            // InternalVampireLanguage.g:2693:2: ()
-            // InternalVampireLanguage.g:2693:3: 
+            // InternalVampireLanguage.g:2747:2: ()
+            // InternalVampireLanguage.g:2747:3: 
             {
             }
 
@@ -8780,14 +8936,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_2__1"
-    // InternalVampireLanguage.g:2701:1: rule__VLSBinary__Group_1_0_0_2__1 : rule__VLSBinary__Group_1_0_0_2__1__Impl ;
+    // InternalVampireLanguage.g:2755:1: rule__VLSBinary__Group_1_0_0_2__1 : rule__VLSBinary__Group_1_0_0_2__1__Impl ;
     public final void rule__VLSBinary__Group_1_0_0_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2705:1: ( rule__VLSBinary__Group_1_0_0_2__1__Impl )
-            // InternalVampireLanguage.g:2706:2: rule__VLSBinary__Group_1_0_0_2__1__Impl
+            // InternalVampireLanguage.g:2759:1: ( rule__VLSBinary__Group_1_0_0_2__1__Impl )
+            // InternalVampireLanguage.g:2760:2: rule__VLSBinary__Group_1_0_0_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0_0_2__1__Impl();
@@ -8813,20 +8969,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_2__1__Impl"
-    // InternalVampireLanguage.g:2712:1: rule__VLSBinary__Group_1_0_0_2__1__Impl : ( '<=' ) ;
+    // InternalVampireLanguage.g:2766:1: rule__VLSBinary__Group_1_0_0_2__1__Impl : ( '<=' ) ;
     public final void rule__VLSBinary__Group_1_0_0_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2716:1: ( ( '<=' ) )
-            // InternalVampireLanguage.g:2717:1: ( '<=' )
+            // InternalVampireLanguage.g:2770:1: ( ( '<=' ) )
+            // InternalVampireLanguage.g:2771:1: ( '<=' )
             {
-            // InternalVampireLanguage.g:2717:1: ( '<=' )
-            // InternalVampireLanguage.g:2718:2: '<='
+            // InternalVampireLanguage.g:2771:1: ( '<=' )
+            // InternalVampireLanguage.g:2772:2: '<='
             {
              before(grammarAccess.getVLSBinaryAccess().getLessThanSignEqualsSignKeyword_1_0_0_2_1()); 
-            match(input,53,FOLLOW_2); 
+            match(input,54,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getLessThanSignEqualsSignKeyword_1_0_0_2_1()); 
 
             }
@@ -8850,16 +9006,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_3__0"
-    // InternalVampireLanguage.g:2728:1: rule__VLSBinary__Group_1_0_0_3__0 : rule__VLSBinary__Group_1_0_0_3__0__Impl rule__VLSBinary__Group_1_0_0_3__1 ;
+    // InternalVampireLanguage.g:2782:1: rule__VLSBinary__Group_1_0_0_3__0 : rule__VLSBinary__Group_1_0_0_3__0__Impl rule__VLSBinary__Group_1_0_0_3__1 ;
     public final void rule__VLSBinary__Group_1_0_0_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2732:1: ( rule__VLSBinary__Group_1_0_0_3__0__Impl rule__VLSBinary__Group_1_0_0_3__1 )
-            // InternalVampireLanguage.g:2733:2: rule__VLSBinary__Group_1_0_0_3__0__Impl rule__VLSBinary__Group_1_0_0_3__1
+            // InternalVampireLanguage.g:2786:1: ( rule__VLSBinary__Group_1_0_0_3__0__Impl rule__VLSBinary__Group_1_0_0_3__1 )
+            // InternalVampireLanguage.g:2787:2: rule__VLSBinary__Group_1_0_0_3__0__Impl rule__VLSBinary__Group_1_0_0_3__1
             {
-            pushFollow(FOLLOW_24);
+            pushFollow(FOLLOW_25);
             rule__VLSBinary__Group_1_0_0_3__0__Impl();
 
             state._fsp--;
@@ -8888,21 +9044,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_3__0__Impl"
-    // InternalVampireLanguage.g:2740:1: rule__VLSBinary__Group_1_0_0_3__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2794:1: rule__VLSBinary__Group_1_0_0_3__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_0_0_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2744:1: ( ( () ) )
-            // InternalVampireLanguage.g:2745:1: ( () )
+            // InternalVampireLanguage.g:2798:1: ( ( () ) )
+            // InternalVampireLanguage.g:2799:1: ( () )
             {
-            // InternalVampireLanguage.g:2745:1: ( () )
-            // InternalVampireLanguage.g:2746:2: ()
+            // InternalVampireLanguage.g:2799:1: ( () )
+            // InternalVampireLanguage.g:2800:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSXnorLeftAction_1_0_0_3_0()); 
-            // InternalVampireLanguage.g:2747:2: ()
-            // InternalVampireLanguage.g:2747:3: 
+            // InternalVampireLanguage.g:2801:2: ()
+            // InternalVampireLanguage.g:2801:3: 
             {
             }
 
@@ -8925,14 +9081,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_3__1"
-    // InternalVampireLanguage.g:2755:1: rule__VLSBinary__Group_1_0_0_3__1 : rule__VLSBinary__Group_1_0_0_3__1__Impl ;
+    // InternalVampireLanguage.g:2809:1: rule__VLSBinary__Group_1_0_0_3__1 : rule__VLSBinary__Group_1_0_0_3__1__Impl ;
     public final void rule__VLSBinary__Group_1_0_0_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2759:1: ( rule__VLSBinary__Group_1_0_0_3__1__Impl )
-            // InternalVampireLanguage.g:2760:2: rule__VLSBinary__Group_1_0_0_3__1__Impl
+            // InternalVampireLanguage.g:2813:1: ( rule__VLSBinary__Group_1_0_0_3__1__Impl )
+            // InternalVampireLanguage.g:2814:2: rule__VLSBinary__Group_1_0_0_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0_0_3__1__Impl();
@@ -8958,20 +9114,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_3__1__Impl"
-    // InternalVampireLanguage.g:2766:1: rule__VLSBinary__Group_1_0_0_3__1__Impl : ( '<~>' ) ;
+    // InternalVampireLanguage.g:2820:1: rule__VLSBinary__Group_1_0_0_3__1__Impl : ( '<~>' ) ;
     public final void rule__VLSBinary__Group_1_0_0_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2770:1: ( ( '<~>' ) )
-            // InternalVampireLanguage.g:2771:1: ( '<~>' )
+            // InternalVampireLanguage.g:2824:1: ( ( '<~>' ) )
+            // InternalVampireLanguage.g:2825:1: ( '<~>' )
             {
-            // InternalVampireLanguage.g:2771:1: ( '<~>' )
-            // InternalVampireLanguage.g:2772:2: '<~>'
+            // InternalVampireLanguage.g:2825:1: ( '<~>' )
+            // InternalVampireLanguage.g:2826:2: '<~>'
             {
              before(grammarAccess.getVLSBinaryAccess().getLessThanSignTildeGreaterThanSignKeyword_1_0_0_3_1()); 
-            match(input,54,FOLLOW_2); 
+            match(input,55,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getLessThanSignTildeGreaterThanSignKeyword_1_0_0_3_1()); 
 
             }
@@ -8995,16 +9151,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_4__0"
-    // InternalVampireLanguage.g:2782:1: rule__VLSBinary__Group_1_0_0_4__0 : rule__VLSBinary__Group_1_0_0_4__0__Impl rule__VLSBinary__Group_1_0_0_4__1 ;
+    // InternalVampireLanguage.g:2836:1: rule__VLSBinary__Group_1_0_0_4__0 : rule__VLSBinary__Group_1_0_0_4__0__Impl rule__VLSBinary__Group_1_0_0_4__1 ;
     public final void rule__VLSBinary__Group_1_0_0_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2786:1: ( rule__VLSBinary__Group_1_0_0_4__0__Impl rule__VLSBinary__Group_1_0_0_4__1 )
-            // InternalVampireLanguage.g:2787:2: rule__VLSBinary__Group_1_0_0_4__0__Impl rule__VLSBinary__Group_1_0_0_4__1
+            // InternalVampireLanguage.g:2840:1: ( rule__VLSBinary__Group_1_0_0_4__0__Impl rule__VLSBinary__Group_1_0_0_4__1 )
+            // InternalVampireLanguage.g:2841:2: rule__VLSBinary__Group_1_0_0_4__0__Impl rule__VLSBinary__Group_1_0_0_4__1
             {
-            pushFollow(FOLLOW_25);
+            pushFollow(FOLLOW_26);
             rule__VLSBinary__Group_1_0_0_4__0__Impl();
 
             state._fsp--;
@@ -9033,21 +9189,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_4__0__Impl"
-    // InternalVampireLanguage.g:2794:1: rule__VLSBinary__Group_1_0_0_4__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2848:1: rule__VLSBinary__Group_1_0_0_4__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_0_0_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2798:1: ( ( () ) )
-            // InternalVampireLanguage.g:2799:1: ( () )
+            // InternalVampireLanguage.g:2852:1: ( ( () ) )
+            // InternalVampireLanguage.g:2853:1: ( () )
             {
-            // InternalVampireLanguage.g:2799:1: ( () )
-            // InternalVampireLanguage.g:2800:2: ()
+            // InternalVampireLanguage.g:2853:1: ( () )
+            // InternalVampireLanguage.g:2854:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSNorLeftAction_1_0_0_4_0()); 
-            // InternalVampireLanguage.g:2801:2: ()
-            // InternalVampireLanguage.g:2801:3: 
+            // InternalVampireLanguage.g:2855:2: ()
+            // InternalVampireLanguage.g:2855:3: 
             {
             }
 
@@ -9070,14 +9226,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_4__1"
-    // InternalVampireLanguage.g:2809:1: rule__VLSBinary__Group_1_0_0_4__1 : rule__VLSBinary__Group_1_0_0_4__1__Impl ;
+    // InternalVampireLanguage.g:2863:1: rule__VLSBinary__Group_1_0_0_4__1 : rule__VLSBinary__Group_1_0_0_4__1__Impl ;
     public final void rule__VLSBinary__Group_1_0_0_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2813:1: ( rule__VLSBinary__Group_1_0_0_4__1__Impl )
-            // InternalVampireLanguage.g:2814:2: rule__VLSBinary__Group_1_0_0_4__1__Impl
+            // InternalVampireLanguage.g:2867:1: ( rule__VLSBinary__Group_1_0_0_4__1__Impl )
+            // InternalVampireLanguage.g:2868:2: rule__VLSBinary__Group_1_0_0_4__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0_0_4__1__Impl();
@@ -9103,20 +9259,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_4__1__Impl"
-    // InternalVampireLanguage.g:2820:1: rule__VLSBinary__Group_1_0_0_4__1__Impl : ( '~|' ) ;
+    // InternalVampireLanguage.g:2874:1: rule__VLSBinary__Group_1_0_0_4__1__Impl : ( '~|' ) ;
     public final void rule__VLSBinary__Group_1_0_0_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2824:1: ( ( '~|' ) )
-            // InternalVampireLanguage.g:2825:1: ( '~|' )
+            // InternalVampireLanguage.g:2878:1: ( ( '~|' ) )
+            // InternalVampireLanguage.g:2879:1: ( '~|' )
             {
-            // InternalVampireLanguage.g:2825:1: ( '~|' )
-            // InternalVampireLanguage.g:2826:2: '~|'
+            // InternalVampireLanguage.g:2879:1: ( '~|' )
+            // InternalVampireLanguage.g:2880:2: '~|'
             {
              before(grammarAccess.getVLSBinaryAccess().getTildeVerticalLineKeyword_1_0_0_4_1()); 
-            match(input,55,FOLLOW_2); 
+            match(input,56,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getTildeVerticalLineKeyword_1_0_0_4_1()); 
 
             }
@@ -9140,16 +9296,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_5__0"
-    // InternalVampireLanguage.g:2836:1: rule__VLSBinary__Group_1_0_0_5__0 : rule__VLSBinary__Group_1_0_0_5__0__Impl rule__VLSBinary__Group_1_0_0_5__1 ;
+    // InternalVampireLanguage.g:2890:1: rule__VLSBinary__Group_1_0_0_5__0 : rule__VLSBinary__Group_1_0_0_5__0__Impl rule__VLSBinary__Group_1_0_0_5__1 ;
     public final void rule__VLSBinary__Group_1_0_0_5__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2840:1: ( rule__VLSBinary__Group_1_0_0_5__0__Impl rule__VLSBinary__Group_1_0_0_5__1 )
-            // InternalVampireLanguage.g:2841:2: rule__VLSBinary__Group_1_0_0_5__0__Impl rule__VLSBinary__Group_1_0_0_5__1
+            // InternalVampireLanguage.g:2894:1: ( rule__VLSBinary__Group_1_0_0_5__0__Impl rule__VLSBinary__Group_1_0_0_5__1 )
+            // InternalVampireLanguage.g:2895:2: rule__VLSBinary__Group_1_0_0_5__0__Impl rule__VLSBinary__Group_1_0_0_5__1
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_27);
             rule__VLSBinary__Group_1_0_0_5__0__Impl();
 
             state._fsp--;
@@ -9178,21 +9334,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_5__0__Impl"
-    // InternalVampireLanguage.g:2848:1: rule__VLSBinary__Group_1_0_0_5__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2902:1: rule__VLSBinary__Group_1_0_0_5__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_0_0_5__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2852:1: ( ( () ) )
-            // InternalVampireLanguage.g:2853:1: ( () )
+            // InternalVampireLanguage.g:2906:1: ( ( () ) )
+            // InternalVampireLanguage.g:2907:1: ( () )
             {
-            // InternalVampireLanguage.g:2853:1: ( () )
-            // InternalVampireLanguage.g:2854:2: ()
+            // InternalVampireLanguage.g:2907:1: ( () )
+            // InternalVampireLanguage.g:2908:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSNandLeftAction_1_0_0_5_0()); 
-            // InternalVampireLanguage.g:2855:2: ()
-            // InternalVampireLanguage.g:2855:3: 
+            // InternalVampireLanguage.g:2909:2: ()
+            // InternalVampireLanguage.g:2909:3: 
             {
             }
 
@@ -9215,14 +9371,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_5__1"
-    // InternalVampireLanguage.g:2863:1: rule__VLSBinary__Group_1_0_0_5__1 : rule__VLSBinary__Group_1_0_0_5__1__Impl ;
+    // InternalVampireLanguage.g:2917:1: rule__VLSBinary__Group_1_0_0_5__1 : rule__VLSBinary__Group_1_0_0_5__1__Impl ;
     public final void rule__VLSBinary__Group_1_0_0_5__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2867:1: ( rule__VLSBinary__Group_1_0_0_5__1__Impl )
-            // InternalVampireLanguage.g:2868:2: rule__VLSBinary__Group_1_0_0_5__1__Impl
+            // InternalVampireLanguage.g:2921:1: ( rule__VLSBinary__Group_1_0_0_5__1__Impl )
+            // InternalVampireLanguage.g:2922:2: rule__VLSBinary__Group_1_0_0_5__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_0_0_5__1__Impl();
@@ -9248,20 +9404,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_0_0_5__1__Impl"
-    // InternalVampireLanguage.g:2874:1: rule__VLSBinary__Group_1_0_0_5__1__Impl : ( '~&' ) ;
+    // InternalVampireLanguage.g:2928:1: rule__VLSBinary__Group_1_0_0_5__1__Impl : ( '~&' ) ;
     public final void rule__VLSBinary__Group_1_0_0_5__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2878:1: ( ( '~&' ) )
-            // InternalVampireLanguage.g:2879:1: ( '~&' )
+            // InternalVampireLanguage.g:2932:1: ( ( '~&' ) )
+            // InternalVampireLanguage.g:2933:1: ( '~&' )
             {
-            // InternalVampireLanguage.g:2879:1: ( '~&' )
-            // InternalVampireLanguage.g:2880:2: '~&'
+            // InternalVampireLanguage.g:2933:1: ( '~&' )
+            // InternalVampireLanguage.g:2934:2: '~&'
             {
              before(grammarAccess.getVLSBinaryAccess().getTildeAmpersandKeyword_1_0_0_5_1()); 
-            match(input,56,FOLLOW_2); 
+            match(input,57,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getTildeAmpersandKeyword_1_0_0_5_1()); 
 
             }
@@ -9285,16 +9441,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_1__0"
-    // InternalVampireLanguage.g:2890:1: rule__VLSBinary__Group_1_1__0 : rule__VLSBinary__Group_1_1__0__Impl rule__VLSBinary__Group_1_1__1 ;
+    // InternalVampireLanguage.g:2944:1: rule__VLSBinary__Group_1_1__0 : rule__VLSBinary__Group_1_1__0__Impl rule__VLSBinary__Group_1_1__1 ;
     public final void rule__VLSBinary__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2894:1: ( rule__VLSBinary__Group_1_1__0__Impl rule__VLSBinary__Group_1_1__1 )
-            // InternalVampireLanguage.g:2895:2: rule__VLSBinary__Group_1_1__0__Impl rule__VLSBinary__Group_1_1__1
+            // InternalVampireLanguage.g:2948:1: ( rule__VLSBinary__Group_1_1__0__Impl rule__VLSBinary__Group_1_1__1 )
+            // InternalVampireLanguage.g:2949:2: rule__VLSBinary__Group_1_1__0__Impl rule__VLSBinary__Group_1_1__1
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_28);
             rule__VLSBinary__Group_1_1__0__Impl();
 
             state._fsp--;
@@ -9323,21 +9479,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_1__0__Impl"
-    // InternalVampireLanguage.g:2902:1: rule__VLSBinary__Group_1_1__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:2956:1: rule__VLSBinary__Group_1_1__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2906:1: ( ( () ) )
-            // InternalVampireLanguage.g:2907:1: ( () )
+            // InternalVampireLanguage.g:2960:1: ( ( () ) )
+            // InternalVampireLanguage.g:2961:1: ( () )
             {
-            // InternalVampireLanguage.g:2907:1: ( () )
-            // InternalVampireLanguage.g:2908:2: ()
+            // InternalVampireLanguage.g:2961:1: ( () )
+            // InternalVampireLanguage.g:2962:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSAndLeftAction_1_1_0()); 
-            // InternalVampireLanguage.g:2909:2: ()
-            // InternalVampireLanguage.g:2909:3: 
+            // InternalVampireLanguage.g:2963:2: ()
+            // InternalVampireLanguage.g:2963:3: 
             {
             }
 
@@ -9360,16 +9516,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_1__1"
-    // InternalVampireLanguage.g:2917:1: rule__VLSBinary__Group_1_1__1 : rule__VLSBinary__Group_1_1__1__Impl rule__VLSBinary__Group_1_1__2 ;
+    // InternalVampireLanguage.g:2971:1: rule__VLSBinary__Group_1_1__1 : rule__VLSBinary__Group_1_1__1__Impl rule__VLSBinary__Group_1_1__2 ;
     public final void rule__VLSBinary__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2921:1: ( rule__VLSBinary__Group_1_1__1__Impl rule__VLSBinary__Group_1_1__2 )
-            // InternalVampireLanguage.g:2922:2: rule__VLSBinary__Group_1_1__1__Impl rule__VLSBinary__Group_1_1__2
+            // InternalVampireLanguage.g:2975:1: ( rule__VLSBinary__Group_1_1__1__Impl rule__VLSBinary__Group_1_1__2 )
+            // InternalVampireLanguage.g:2976:2: rule__VLSBinary__Group_1_1__1__Impl rule__VLSBinary__Group_1_1__2
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSBinary__Group_1_1__1__Impl();
 
             state._fsp--;
@@ -9398,20 +9554,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_1__1__Impl"
-    // InternalVampireLanguage.g:2929:1: rule__VLSBinary__Group_1_1__1__Impl : ( '&' ) ;
+    // InternalVampireLanguage.g:2983:1: rule__VLSBinary__Group_1_1__1__Impl : ( '&' ) ;
     public final void rule__VLSBinary__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2933:1: ( ( '&' ) )
-            // InternalVampireLanguage.g:2934:1: ( '&' )
+            // InternalVampireLanguage.g:2987:1: ( ( '&' ) )
+            // InternalVampireLanguage.g:2988:1: ( '&' )
             {
-            // InternalVampireLanguage.g:2934:1: ( '&' )
-            // InternalVampireLanguage.g:2935:2: '&'
+            // InternalVampireLanguage.g:2988:1: ( '&' )
+            // InternalVampireLanguage.g:2989:2: '&'
             {
              before(grammarAccess.getVLSBinaryAccess().getAmpersandKeyword_1_1_1()); 
-            match(input,57,FOLLOW_2); 
+            match(input,58,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getAmpersandKeyword_1_1_1()); 
 
             }
@@ -9435,14 +9591,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_1__2"
-    // InternalVampireLanguage.g:2944:1: rule__VLSBinary__Group_1_1__2 : rule__VLSBinary__Group_1_1__2__Impl ;
+    // InternalVampireLanguage.g:2998:1: rule__VLSBinary__Group_1_1__2 : rule__VLSBinary__Group_1_1__2__Impl ;
     public final void rule__VLSBinary__Group_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2948:1: ( rule__VLSBinary__Group_1_1__2__Impl )
-            // InternalVampireLanguage.g:2949:2: rule__VLSBinary__Group_1_1__2__Impl
+            // InternalVampireLanguage.g:3002:1: ( rule__VLSBinary__Group_1_1__2__Impl )
+            // InternalVampireLanguage.g:3003:2: rule__VLSBinary__Group_1_1__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_1__2__Impl();
@@ -9468,21 +9624,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_1__2__Impl"
-    // InternalVampireLanguage.g:2955:1: rule__VLSBinary__Group_1_1__2__Impl : ( ( rule__VLSBinary__RightAssignment_1_1_2 ) ) ;
+    // InternalVampireLanguage.g:3009:1: rule__VLSBinary__Group_1_1__2__Impl : ( ( rule__VLSBinary__RightAssignment_1_1_2 ) ) ;
     public final void rule__VLSBinary__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2959:1: ( ( ( rule__VLSBinary__RightAssignment_1_1_2 ) ) )
-            // InternalVampireLanguage.g:2960:1: ( ( rule__VLSBinary__RightAssignment_1_1_2 ) )
+            // InternalVampireLanguage.g:3013:1: ( ( ( rule__VLSBinary__RightAssignment_1_1_2 ) ) )
+            // InternalVampireLanguage.g:3014:1: ( ( rule__VLSBinary__RightAssignment_1_1_2 ) )
             {
-            // InternalVampireLanguage.g:2960:1: ( ( rule__VLSBinary__RightAssignment_1_1_2 ) )
-            // InternalVampireLanguage.g:2961:2: ( rule__VLSBinary__RightAssignment_1_1_2 )
+            // InternalVampireLanguage.g:3014:1: ( ( rule__VLSBinary__RightAssignment_1_1_2 ) )
+            // InternalVampireLanguage.g:3015:2: ( rule__VLSBinary__RightAssignment_1_1_2 )
             {
              before(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_1_2()); 
-            // InternalVampireLanguage.g:2962:2: ( rule__VLSBinary__RightAssignment_1_1_2 )
-            // InternalVampireLanguage.g:2962:3: rule__VLSBinary__RightAssignment_1_1_2
+            // InternalVampireLanguage.g:3016:2: ( rule__VLSBinary__RightAssignment_1_1_2 )
+            // InternalVampireLanguage.g:3016:3: rule__VLSBinary__RightAssignment_1_1_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__RightAssignment_1_1_2();
@@ -9515,16 +9671,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_2__0"
-    // InternalVampireLanguage.g:2971:1: rule__VLSBinary__Group_1_2__0 : rule__VLSBinary__Group_1_2__0__Impl rule__VLSBinary__Group_1_2__1 ;
+    // InternalVampireLanguage.g:3025:1: rule__VLSBinary__Group_1_2__0 : rule__VLSBinary__Group_1_2__0__Impl rule__VLSBinary__Group_1_2__1 ;
     public final void rule__VLSBinary__Group_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2975:1: ( rule__VLSBinary__Group_1_2__0__Impl rule__VLSBinary__Group_1_2__1 )
-            // InternalVampireLanguage.g:2976:2: rule__VLSBinary__Group_1_2__0__Impl rule__VLSBinary__Group_1_2__1
+            // InternalVampireLanguage.g:3029:1: ( rule__VLSBinary__Group_1_2__0__Impl rule__VLSBinary__Group_1_2__1 )
+            // InternalVampireLanguage.g:3030:2: rule__VLSBinary__Group_1_2__0__Impl rule__VLSBinary__Group_1_2__1
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_29);
             rule__VLSBinary__Group_1_2__0__Impl();
 
             state._fsp--;
@@ -9553,21 +9709,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_2__0__Impl"
-    // InternalVampireLanguage.g:2983:1: rule__VLSBinary__Group_1_2__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:3037:1: rule__VLSBinary__Group_1_2__0__Impl : ( () ) ;
     public final void rule__VLSBinary__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:2987:1: ( ( () ) )
-            // InternalVampireLanguage.g:2988:1: ( () )
+            // InternalVampireLanguage.g:3041:1: ( ( () ) )
+            // InternalVampireLanguage.g:3042:1: ( () )
             {
-            // InternalVampireLanguage.g:2988:1: ( () )
-            // InternalVampireLanguage.g:2989:2: ()
+            // InternalVampireLanguage.g:3042:1: ( () )
+            // InternalVampireLanguage.g:3043:2: ()
             {
              before(grammarAccess.getVLSBinaryAccess().getVLSOrLeftAction_1_2_0()); 
-            // InternalVampireLanguage.g:2990:2: ()
-            // InternalVampireLanguage.g:2990:3: 
+            // InternalVampireLanguage.g:3044:2: ()
+            // InternalVampireLanguage.g:3044:3: 
             {
             }
 
@@ -9590,16 +9746,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_2__1"
-    // InternalVampireLanguage.g:2998:1: rule__VLSBinary__Group_1_2__1 : rule__VLSBinary__Group_1_2__1__Impl rule__VLSBinary__Group_1_2__2 ;
+    // InternalVampireLanguage.g:3052:1: rule__VLSBinary__Group_1_2__1 : rule__VLSBinary__Group_1_2__1__Impl rule__VLSBinary__Group_1_2__2 ;
     public final void rule__VLSBinary__Group_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3002:1: ( rule__VLSBinary__Group_1_2__1__Impl rule__VLSBinary__Group_1_2__2 )
-            // InternalVampireLanguage.g:3003:2: rule__VLSBinary__Group_1_2__1__Impl rule__VLSBinary__Group_1_2__2
+            // InternalVampireLanguage.g:3056:1: ( rule__VLSBinary__Group_1_2__1__Impl rule__VLSBinary__Group_1_2__2 )
+            // InternalVampireLanguage.g:3057:2: rule__VLSBinary__Group_1_2__1__Impl rule__VLSBinary__Group_1_2__2
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSBinary__Group_1_2__1__Impl();
 
             state._fsp--;
@@ -9628,20 +9784,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_2__1__Impl"
-    // InternalVampireLanguage.g:3010:1: rule__VLSBinary__Group_1_2__1__Impl : ( '|' ) ;
+    // InternalVampireLanguage.g:3064:1: rule__VLSBinary__Group_1_2__1__Impl : ( '|' ) ;
     public final void rule__VLSBinary__Group_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3014:1: ( ( '|' ) )
-            // InternalVampireLanguage.g:3015:1: ( '|' )
+            // InternalVampireLanguage.g:3068:1: ( ( '|' ) )
+            // InternalVampireLanguage.g:3069:1: ( '|' )
             {
-            // InternalVampireLanguage.g:3015:1: ( '|' )
-            // InternalVampireLanguage.g:3016:2: '|'
+            // InternalVampireLanguage.g:3069:1: ( '|' )
+            // InternalVampireLanguage.g:3070:2: '|'
             {
              before(grammarAccess.getVLSBinaryAccess().getVerticalLineKeyword_1_2_1()); 
-            match(input,58,FOLLOW_2); 
+            match(input,59,FOLLOW_2); 
              after(grammarAccess.getVLSBinaryAccess().getVerticalLineKeyword_1_2_1()); 
 
             }
@@ -9665,14 +9821,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_2__2"
-    // InternalVampireLanguage.g:3025:1: rule__VLSBinary__Group_1_2__2 : rule__VLSBinary__Group_1_2__2__Impl ;
+    // InternalVampireLanguage.g:3079:1: rule__VLSBinary__Group_1_2__2 : rule__VLSBinary__Group_1_2__2__Impl ;
     public final void rule__VLSBinary__Group_1_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3029:1: ( rule__VLSBinary__Group_1_2__2__Impl )
-            // InternalVampireLanguage.g:3030:2: rule__VLSBinary__Group_1_2__2__Impl
+            // InternalVampireLanguage.g:3083:1: ( rule__VLSBinary__Group_1_2__2__Impl )
+            // InternalVampireLanguage.g:3084:2: rule__VLSBinary__Group_1_2__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__Group_1_2__2__Impl();
@@ -9698,21 +9854,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__Group_1_2__2__Impl"
-    // InternalVampireLanguage.g:3036:1: rule__VLSBinary__Group_1_2__2__Impl : ( ( rule__VLSBinary__RightAssignment_1_2_2 ) ) ;
+    // InternalVampireLanguage.g:3090:1: rule__VLSBinary__Group_1_2__2__Impl : ( ( rule__VLSBinary__RightAssignment_1_2_2 ) ) ;
     public final void rule__VLSBinary__Group_1_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3040:1: ( ( ( rule__VLSBinary__RightAssignment_1_2_2 ) ) )
-            // InternalVampireLanguage.g:3041:1: ( ( rule__VLSBinary__RightAssignment_1_2_2 ) )
+            // InternalVampireLanguage.g:3094:1: ( ( ( rule__VLSBinary__RightAssignment_1_2_2 ) ) )
+            // InternalVampireLanguage.g:3095:1: ( ( rule__VLSBinary__RightAssignment_1_2_2 ) )
             {
-            // InternalVampireLanguage.g:3041:1: ( ( rule__VLSBinary__RightAssignment_1_2_2 ) )
-            // InternalVampireLanguage.g:3042:2: ( rule__VLSBinary__RightAssignment_1_2_2 )
+            // InternalVampireLanguage.g:3095:1: ( ( rule__VLSBinary__RightAssignment_1_2_2 ) )
+            // InternalVampireLanguage.g:3096:2: ( rule__VLSBinary__RightAssignment_1_2_2 )
             {
              before(grammarAccess.getVLSBinaryAccess().getRightAssignment_1_2_2()); 
-            // InternalVampireLanguage.g:3043:2: ( rule__VLSBinary__RightAssignment_1_2_2 )
-            // InternalVampireLanguage.g:3043:3: rule__VLSBinary__RightAssignment_1_2_2
+            // InternalVampireLanguage.g:3097:2: ( rule__VLSBinary__RightAssignment_1_2_2 )
+            // InternalVampireLanguage.g:3097:3: rule__VLSBinary__RightAssignment_1_2_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSBinary__RightAssignment_1_2_2();
@@ -9745,16 +9901,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnitaryFormula__Group_4__0"
-    // InternalVampireLanguage.g:3052:1: rule__VLSUnitaryFormula__Group_4__0 : rule__VLSUnitaryFormula__Group_4__0__Impl rule__VLSUnitaryFormula__Group_4__1 ;
+    // InternalVampireLanguage.g:3106:1: rule__VLSUnitaryFormula__Group_4__0 : rule__VLSUnitaryFormula__Group_4__0__Impl rule__VLSUnitaryFormula__Group_4__1 ;
     public final void rule__VLSUnitaryFormula__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3056:1: ( rule__VLSUnitaryFormula__Group_4__0__Impl rule__VLSUnitaryFormula__Group_4__1 )
-            // InternalVampireLanguage.g:3057:2: rule__VLSUnitaryFormula__Group_4__0__Impl rule__VLSUnitaryFormula__Group_4__1
+            // InternalVampireLanguage.g:3110:1: ( rule__VLSUnitaryFormula__Group_4__0__Impl rule__VLSUnitaryFormula__Group_4__1 )
+            // InternalVampireLanguage.g:3111:2: rule__VLSUnitaryFormula__Group_4__0__Impl rule__VLSUnitaryFormula__Group_4__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSUnitaryFormula__Group_4__0__Impl();
 
             state._fsp--;
@@ -9783,20 +9939,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnitaryFormula__Group_4__0__Impl"
-    // InternalVampireLanguage.g:3064:1: rule__VLSUnitaryFormula__Group_4__0__Impl : ( '(' ) ;
+    // InternalVampireLanguage.g:3118:1: rule__VLSUnitaryFormula__Group_4__0__Impl : ( '(' ) ;
     public final void rule__VLSUnitaryFormula__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3068:1: ( ( '(' ) )
-            // InternalVampireLanguage.g:3069:1: ( '(' )
+            // InternalVampireLanguage.g:3122:1: ( ( '(' ) )
+            // InternalVampireLanguage.g:3123:1: ( '(' )
             {
-            // InternalVampireLanguage.g:3069:1: ( '(' )
-            // InternalVampireLanguage.g:3070:2: '('
+            // InternalVampireLanguage.g:3123:1: ( '(' )
+            // InternalVampireLanguage.g:3124:2: '('
             {
              before(grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0()); 
-            match(input,47,FOLLOW_2); 
+            match(input,48,FOLLOW_2); 
              after(grammarAccess.getVLSUnitaryFormulaAccess().getLeftParenthesisKeyword_4_0()); 
 
             }
@@ -9820,16 +9976,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnitaryFormula__Group_4__1"
-    // InternalVampireLanguage.g:3079:1: rule__VLSUnitaryFormula__Group_4__1 : rule__VLSUnitaryFormula__Group_4__1__Impl rule__VLSUnitaryFormula__Group_4__2 ;
+    // InternalVampireLanguage.g:3133:1: rule__VLSUnitaryFormula__Group_4__1 : rule__VLSUnitaryFormula__Group_4__1__Impl rule__VLSUnitaryFormula__Group_4__2 ;
     public final void rule__VLSUnitaryFormula__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3083:1: ( rule__VLSUnitaryFormula__Group_4__1__Impl rule__VLSUnitaryFormula__Group_4__2 )
-            // InternalVampireLanguage.g:3084:2: rule__VLSUnitaryFormula__Group_4__1__Impl rule__VLSUnitaryFormula__Group_4__2
+            // InternalVampireLanguage.g:3137:1: ( rule__VLSUnitaryFormula__Group_4__1__Impl rule__VLSUnitaryFormula__Group_4__2 )
+            // InternalVampireLanguage.g:3138:2: rule__VLSUnitaryFormula__Group_4__1__Impl rule__VLSUnitaryFormula__Group_4__2
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__VLSUnitaryFormula__Group_4__1__Impl();
 
             state._fsp--;
@@ -9858,17 +10014,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnitaryFormula__Group_4__1__Impl"
-    // InternalVampireLanguage.g:3091:1: rule__VLSUnitaryFormula__Group_4__1__Impl : ( ruleVLSTerm ) ;
+    // InternalVampireLanguage.g:3145:1: rule__VLSUnitaryFormula__Group_4__1__Impl : ( ruleVLSTerm ) ;
     public final void rule__VLSUnitaryFormula__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3095:1: ( ( ruleVLSTerm ) )
-            // InternalVampireLanguage.g:3096:1: ( ruleVLSTerm )
+            // InternalVampireLanguage.g:3149:1: ( ( ruleVLSTerm ) )
+            // InternalVampireLanguage.g:3150:1: ( ruleVLSTerm )
             {
-            // InternalVampireLanguage.g:3096:1: ( ruleVLSTerm )
-            // InternalVampireLanguage.g:3097:2: ruleVLSTerm
+            // InternalVampireLanguage.g:3150:1: ( ruleVLSTerm )
+            // InternalVampireLanguage.g:3151:2: ruleVLSTerm
             {
              before(grammarAccess.getVLSUnitaryFormulaAccess().getVLSTermParserRuleCall_4_1()); 
             pushFollow(FOLLOW_2);
@@ -9899,14 +10055,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnitaryFormula__Group_4__2"
-    // InternalVampireLanguage.g:3106:1: rule__VLSUnitaryFormula__Group_4__2 : rule__VLSUnitaryFormula__Group_4__2__Impl ;
+    // InternalVampireLanguage.g:3160:1: rule__VLSUnitaryFormula__Group_4__2 : rule__VLSUnitaryFormula__Group_4__2__Impl ;
     public final void rule__VLSUnitaryFormula__Group_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3110:1: ( rule__VLSUnitaryFormula__Group_4__2__Impl )
-            // InternalVampireLanguage.g:3111:2: rule__VLSUnitaryFormula__Group_4__2__Impl
+            // InternalVampireLanguage.g:3164:1: ( rule__VLSUnitaryFormula__Group_4__2__Impl )
+            // InternalVampireLanguage.g:3165:2: rule__VLSUnitaryFormula__Group_4__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnitaryFormula__Group_4__2__Impl();
@@ -9932,20 +10088,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnitaryFormula__Group_4__2__Impl"
-    // InternalVampireLanguage.g:3117:1: rule__VLSUnitaryFormula__Group_4__2__Impl : ( ')' ) ;
+    // InternalVampireLanguage.g:3171:1: rule__VLSUnitaryFormula__Group_4__2__Impl : ( ')' ) ;
     public final void rule__VLSUnitaryFormula__Group_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3121:1: ( ( ')' ) )
-            // InternalVampireLanguage.g:3122:1: ( ')' )
+            // InternalVampireLanguage.g:3175:1: ( ( ')' ) )
+            // InternalVampireLanguage.g:3176:1: ( ')' )
             {
-            // InternalVampireLanguage.g:3122:1: ( ')' )
-            // InternalVampireLanguage.g:3123:2: ')'
+            // InternalVampireLanguage.g:3176:1: ( ')' )
+            // InternalVampireLanguage.g:3177:2: ')'
             {
              before(grammarAccess.getVLSUnitaryFormulaAccess().getRightParenthesisKeyword_4_2()); 
-            match(input,48,FOLLOW_2); 
+            match(input,49,FOLLOW_2); 
              after(grammarAccess.getVLSUnitaryFormulaAccess().getRightParenthesisKeyword_4_2()); 
 
             }
@@ -9969,16 +10125,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group__0"
-    // InternalVampireLanguage.g:3133:1: rule__VLSUniversalQuantifier__Group__0 : rule__VLSUniversalQuantifier__Group__0__Impl rule__VLSUniversalQuantifier__Group__1 ;
+    // InternalVampireLanguage.g:3187:1: rule__VLSUniversalQuantifier__Group__0 : rule__VLSUniversalQuantifier__Group__0__Impl rule__VLSUniversalQuantifier__Group__1 ;
     public final void rule__VLSUniversalQuantifier__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3137:1: ( rule__VLSUniversalQuantifier__Group__0__Impl rule__VLSUniversalQuantifier__Group__1 )
-            // InternalVampireLanguage.g:3138:2: rule__VLSUniversalQuantifier__Group__0__Impl rule__VLSUniversalQuantifier__Group__1
+            // InternalVampireLanguage.g:3191:1: ( rule__VLSUniversalQuantifier__Group__0__Impl rule__VLSUniversalQuantifier__Group__1 )
+            // InternalVampireLanguage.g:3192:2: rule__VLSUniversalQuantifier__Group__0__Impl rule__VLSUniversalQuantifier__Group__1
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_30);
             rule__VLSUniversalQuantifier__Group__0__Impl();
 
             state._fsp--;
@@ -10007,21 +10163,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group__0__Impl"
-    // InternalVampireLanguage.g:3145:1: rule__VLSUniversalQuantifier__Group__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:3199:1: rule__VLSUniversalQuantifier__Group__0__Impl : ( () ) ;
     public final void rule__VLSUniversalQuantifier__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3149:1: ( ( () ) )
-            // InternalVampireLanguage.g:3150:1: ( () )
+            // InternalVampireLanguage.g:3203:1: ( ( () ) )
+            // InternalVampireLanguage.g:3204:1: ( () )
             {
-            // InternalVampireLanguage.g:3150:1: ( () )
-            // InternalVampireLanguage.g:3151:2: ()
+            // InternalVampireLanguage.g:3204:1: ( () )
+            // InternalVampireLanguage.g:3205:2: ()
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getVLSUniversalQuantifierAction_0()); 
-            // InternalVampireLanguage.g:3152:2: ()
-            // InternalVampireLanguage.g:3152:3: 
+            // InternalVampireLanguage.g:3206:2: ()
+            // InternalVampireLanguage.g:3206:3: 
             {
             }
 
@@ -10044,16 +10200,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group__1"
-    // InternalVampireLanguage.g:3160:1: rule__VLSUniversalQuantifier__Group__1 : rule__VLSUniversalQuantifier__Group__1__Impl rule__VLSUniversalQuantifier__Group__2 ;
+    // InternalVampireLanguage.g:3214:1: rule__VLSUniversalQuantifier__Group__1 : rule__VLSUniversalQuantifier__Group__1__Impl rule__VLSUniversalQuantifier__Group__2 ;
     public final void rule__VLSUniversalQuantifier__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3164:1: ( rule__VLSUniversalQuantifier__Group__1__Impl rule__VLSUniversalQuantifier__Group__2 )
-            // InternalVampireLanguage.g:3165:2: rule__VLSUniversalQuantifier__Group__1__Impl rule__VLSUniversalQuantifier__Group__2
+            // InternalVampireLanguage.g:3218:1: ( rule__VLSUniversalQuantifier__Group__1__Impl rule__VLSUniversalQuantifier__Group__2 )
+            // InternalVampireLanguage.g:3219:2: rule__VLSUniversalQuantifier__Group__1__Impl rule__VLSUniversalQuantifier__Group__2
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSUniversalQuantifier__Group__1__Impl();
 
             state._fsp--;
@@ -10082,21 +10238,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group__1__Impl"
-    // InternalVampireLanguage.g:3172:1: rule__VLSUniversalQuantifier__Group__1__Impl : ( ( rule__VLSUniversalQuantifier__Group_1__0 ) ) ;
+    // InternalVampireLanguage.g:3226:1: rule__VLSUniversalQuantifier__Group__1__Impl : ( ( rule__VLSUniversalQuantifier__Group_1__0 ) ) ;
     public final void rule__VLSUniversalQuantifier__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3176:1: ( ( ( rule__VLSUniversalQuantifier__Group_1__0 ) ) )
-            // InternalVampireLanguage.g:3177:1: ( ( rule__VLSUniversalQuantifier__Group_1__0 ) )
+            // InternalVampireLanguage.g:3230:1: ( ( ( rule__VLSUniversalQuantifier__Group_1__0 ) ) )
+            // InternalVampireLanguage.g:3231:1: ( ( rule__VLSUniversalQuantifier__Group_1__0 ) )
             {
-            // InternalVampireLanguage.g:3177:1: ( ( rule__VLSUniversalQuantifier__Group_1__0 ) )
-            // InternalVampireLanguage.g:3178:2: ( rule__VLSUniversalQuantifier__Group_1__0 )
+            // InternalVampireLanguage.g:3231:1: ( ( rule__VLSUniversalQuantifier__Group_1__0 ) )
+            // InternalVampireLanguage.g:3232:2: ( rule__VLSUniversalQuantifier__Group_1__0 )
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getGroup_1()); 
-            // InternalVampireLanguage.g:3179:2: ( rule__VLSUniversalQuantifier__Group_1__0 )
-            // InternalVampireLanguage.g:3179:3: rule__VLSUniversalQuantifier__Group_1__0
+            // InternalVampireLanguage.g:3233:2: ( rule__VLSUniversalQuantifier__Group_1__0 )
+            // InternalVampireLanguage.g:3233:3: rule__VLSUniversalQuantifier__Group_1__0
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__Group_1__0();
@@ -10129,14 +10285,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group__2"
-    // InternalVampireLanguage.g:3187:1: rule__VLSUniversalQuantifier__Group__2 : rule__VLSUniversalQuantifier__Group__2__Impl ;
+    // InternalVampireLanguage.g:3241:1: rule__VLSUniversalQuantifier__Group__2 : rule__VLSUniversalQuantifier__Group__2__Impl ;
     public final void rule__VLSUniversalQuantifier__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3191:1: ( rule__VLSUniversalQuantifier__Group__2__Impl )
-            // InternalVampireLanguage.g:3192:2: rule__VLSUniversalQuantifier__Group__2__Impl
+            // InternalVampireLanguage.g:3245:1: ( rule__VLSUniversalQuantifier__Group__2__Impl )
+            // InternalVampireLanguage.g:3246:2: rule__VLSUniversalQuantifier__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__Group__2__Impl();
@@ -10162,21 +10318,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group__2__Impl"
-    // InternalVampireLanguage.g:3198:1: rule__VLSUniversalQuantifier__Group__2__Impl : ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) ) ;
+    // InternalVampireLanguage.g:3252:1: rule__VLSUniversalQuantifier__Group__2__Impl : ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) ) ;
     public final void rule__VLSUniversalQuantifier__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3202:1: ( ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) ) )
-            // InternalVampireLanguage.g:3203:1: ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) )
+            // InternalVampireLanguage.g:3256:1: ( ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) ) )
+            // InternalVampireLanguage.g:3257:1: ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) )
             {
-            // InternalVampireLanguage.g:3203:1: ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) )
-            // InternalVampireLanguage.g:3204:2: ( rule__VLSUniversalQuantifier__OperandAssignment_2 )
+            // InternalVampireLanguage.g:3257:1: ( ( rule__VLSUniversalQuantifier__OperandAssignment_2 ) )
+            // InternalVampireLanguage.g:3258:2: ( rule__VLSUniversalQuantifier__OperandAssignment_2 )
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getOperandAssignment_2()); 
-            // InternalVampireLanguage.g:3205:2: ( rule__VLSUniversalQuantifier__OperandAssignment_2 )
-            // InternalVampireLanguage.g:3205:3: rule__VLSUniversalQuantifier__OperandAssignment_2
+            // InternalVampireLanguage.g:3259:2: ( rule__VLSUniversalQuantifier__OperandAssignment_2 )
+            // InternalVampireLanguage.g:3259:3: rule__VLSUniversalQuantifier__OperandAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__OperandAssignment_2();
@@ -10209,16 +10365,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__0"
-    // InternalVampireLanguage.g:3214:1: rule__VLSUniversalQuantifier__Group_1__0 : rule__VLSUniversalQuantifier__Group_1__0__Impl rule__VLSUniversalQuantifier__Group_1__1 ;
+    // InternalVampireLanguage.g:3268:1: rule__VLSUniversalQuantifier__Group_1__0 : rule__VLSUniversalQuantifier__Group_1__0__Impl rule__VLSUniversalQuantifier__Group_1__1 ;
     public final void rule__VLSUniversalQuantifier__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3218:1: ( rule__VLSUniversalQuantifier__Group_1__0__Impl rule__VLSUniversalQuantifier__Group_1__1 )
-            // InternalVampireLanguage.g:3219:2: rule__VLSUniversalQuantifier__Group_1__0__Impl rule__VLSUniversalQuantifier__Group_1__1
+            // InternalVampireLanguage.g:3272:1: ( rule__VLSUniversalQuantifier__Group_1__0__Impl rule__VLSUniversalQuantifier__Group_1__1 )
+            // InternalVampireLanguage.g:3273:2: rule__VLSUniversalQuantifier__Group_1__0__Impl rule__VLSUniversalQuantifier__Group_1__1
             {
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_31);
             rule__VLSUniversalQuantifier__Group_1__0__Impl();
 
             state._fsp--;
@@ -10247,20 +10403,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__0__Impl"
-    // InternalVampireLanguage.g:3226:1: rule__VLSUniversalQuantifier__Group_1__0__Impl : ( '!' ) ;
+    // InternalVampireLanguage.g:3280:1: rule__VLSUniversalQuantifier__Group_1__0__Impl : ( '!' ) ;
     public final void rule__VLSUniversalQuantifier__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3230:1: ( ( '!' ) )
-            // InternalVampireLanguage.g:3231:1: ( '!' )
+            // InternalVampireLanguage.g:3284:1: ( ( '!' ) )
+            // InternalVampireLanguage.g:3285:1: ( '!' )
             {
-            // InternalVampireLanguage.g:3231:1: ( '!' )
-            // InternalVampireLanguage.g:3232:2: '!'
+            // InternalVampireLanguage.g:3285:1: ( '!' )
+            // InternalVampireLanguage.g:3286:2: '!'
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getExclamationMarkKeyword_1_0()); 
-            match(input,59,FOLLOW_2); 
+            match(input,60,FOLLOW_2); 
              after(grammarAccess.getVLSUniversalQuantifierAccess().getExclamationMarkKeyword_1_0()); 
 
             }
@@ -10284,16 +10440,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__1"
-    // InternalVampireLanguage.g:3241:1: rule__VLSUniversalQuantifier__Group_1__1 : rule__VLSUniversalQuantifier__Group_1__1__Impl rule__VLSUniversalQuantifier__Group_1__2 ;
+    // InternalVampireLanguage.g:3295:1: rule__VLSUniversalQuantifier__Group_1__1 : rule__VLSUniversalQuantifier__Group_1__1__Impl rule__VLSUniversalQuantifier__Group_1__2 ;
     public final void rule__VLSUniversalQuantifier__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3245:1: ( rule__VLSUniversalQuantifier__Group_1__1__Impl rule__VLSUniversalQuantifier__Group_1__2 )
-            // InternalVampireLanguage.g:3246:2: rule__VLSUniversalQuantifier__Group_1__1__Impl rule__VLSUniversalQuantifier__Group_1__2
+            // InternalVampireLanguage.g:3299:1: ( rule__VLSUniversalQuantifier__Group_1__1__Impl rule__VLSUniversalQuantifier__Group_1__2 )
+            // InternalVampireLanguage.g:3300:2: rule__VLSUniversalQuantifier__Group_1__1__Impl rule__VLSUniversalQuantifier__Group_1__2
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__VLSUniversalQuantifier__Group_1__1__Impl();
 
             state._fsp--;
@@ -10322,20 +10478,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__1__Impl"
-    // InternalVampireLanguage.g:3253:1: rule__VLSUniversalQuantifier__Group_1__1__Impl : ( '[' ) ;
+    // InternalVampireLanguage.g:3307:1: rule__VLSUniversalQuantifier__Group_1__1__Impl : ( '[' ) ;
     public final void rule__VLSUniversalQuantifier__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3257:1: ( ( '[' ) )
-            // InternalVampireLanguage.g:3258:1: ( '[' )
+            // InternalVampireLanguage.g:3311:1: ( ( '[' ) )
+            // InternalVampireLanguage.g:3312:1: ( '[' )
             {
-            // InternalVampireLanguage.g:3258:1: ( '[' )
-            // InternalVampireLanguage.g:3259:2: '['
+            // InternalVampireLanguage.g:3312:1: ( '[' )
+            // InternalVampireLanguage.g:3313:2: '['
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getLeftSquareBracketKeyword_1_1()); 
-            match(input,50,FOLLOW_2); 
+            match(input,51,FOLLOW_2); 
              after(grammarAccess.getVLSUniversalQuantifierAccess().getLeftSquareBracketKeyword_1_1()); 
 
             }
@@ -10359,14 +10515,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__2"
-    // InternalVampireLanguage.g:3268:1: rule__VLSUniversalQuantifier__Group_1__2 : rule__VLSUniversalQuantifier__Group_1__2__Impl rule__VLSUniversalQuantifier__Group_1__3 ;
+    // InternalVampireLanguage.g:3322:1: rule__VLSUniversalQuantifier__Group_1__2 : rule__VLSUniversalQuantifier__Group_1__2__Impl rule__VLSUniversalQuantifier__Group_1__3 ;
     public final void rule__VLSUniversalQuantifier__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3272:1: ( rule__VLSUniversalQuantifier__Group_1__2__Impl rule__VLSUniversalQuantifier__Group_1__3 )
-            // InternalVampireLanguage.g:3273:2: rule__VLSUniversalQuantifier__Group_1__2__Impl rule__VLSUniversalQuantifier__Group_1__3
+            // InternalVampireLanguage.g:3326:1: ( rule__VLSUniversalQuantifier__Group_1__2__Impl rule__VLSUniversalQuantifier__Group_1__3 )
+            // InternalVampireLanguage.g:3327:2: rule__VLSUniversalQuantifier__Group_1__2__Impl rule__VLSUniversalQuantifier__Group_1__3
             {
             pushFollow(FOLLOW_9);
             rule__VLSUniversalQuantifier__Group_1__2__Impl();
@@ -10397,21 +10553,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__2__Impl"
-    // InternalVampireLanguage.g:3280:1: rule__VLSUniversalQuantifier__Group_1__2__Impl : ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) ) ;
+    // InternalVampireLanguage.g:3334:1: rule__VLSUniversalQuantifier__Group_1__2__Impl : ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) ) ;
     public final void rule__VLSUniversalQuantifier__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3284:1: ( ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) ) )
-            // InternalVampireLanguage.g:3285:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) )
+            // InternalVampireLanguage.g:3338:1: ( ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) ) )
+            // InternalVampireLanguage.g:3339:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) )
             {
-            // InternalVampireLanguage.g:3285:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) )
-            // InternalVampireLanguage.g:3286:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 )
+            // InternalVampireLanguage.g:3339:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 ) )
+            // InternalVampireLanguage.g:3340:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 )
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesAssignment_1_2()); 
-            // InternalVampireLanguage.g:3287:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 )
-            // InternalVampireLanguage.g:3287:3: rule__VLSUniversalQuantifier__VariablesAssignment_1_2
+            // InternalVampireLanguage.g:3341:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_2 )
+            // InternalVampireLanguage.g:3341:3: rule__VLSUniversalQuantifier__VariablesAssignment_1_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__VariablesAssignment_1_2();
@@ -10444,14 +10600,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__3"
-    // InternalVampireLanguage.g:3295:1: rule__VLSUniversalQuantifier__Group_1__3 : rule__VLSUniversalQuantifier__Group_1__3__Impl rule__VLSUniversalQuantifier__Group_1__4 ;
+    // InternalVampireLanguage.g:3349:1: rule__VLSUniversalQuantifier__Group_1__3 : rule__VLSUniversalQuantifier__Group_1__3__Impl rule__VLSUniversalQuantifier__Group_1__4 ;
     public final void rule__VLSUniversalQuantifier__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3299:1: ( rule__VLSUniversalQuantifier__Group_1__3__Impl rule__VLSUniversalQuantifier__Group_1__4 )
-            // InternalVampireLanguage.g:3300:2: rule__VLSUniversalQuantifier__Group_1__3__Impl rule__VLSUniversalQuantifier__Group_1__4
+            // InternalVampireLanguage.g:3353:1: ( rule__VLSUniversalQuantifier__Group_1__3__Impl rule__VLSUniversalQuantifier__Group_1__4 )
+            // InternalVampireLanguage.g:3354:2: rule__VLSUniversalQuantifier__Group_1__3__Impl rule__VLSUniversalQuantifier__Group_1__4
             {
             pushFollow(FOLLOW_9);
             rule__VLSUniversalQuantifier__Group_1__3__Impl();
@@ -10482,20 +10638,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__3__Impl"
-    // InternalVampireLanguage.g:3307:1: rule__VLSUniversalQuantifier__Group_1__3__Impl : ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* ) ;
+    // InternalVampireLanguage.g:3361:1: rule__VLSUniversalQuantifier__Group_1__3__Impl : ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* ) ;
     public final void rule__VLSUniversalQuantifier__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3311:1: ( ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* ) )
-            // InternalVampireLanguage.g:3312:1: ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* )
+            // InternalVampireLanguage.g:3365:1: ( ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* ) )
+            // InternalVampireLanguage.g:3366:1: ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* )
             {
-            // InternalVampireLanguage.g:3312:1: ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* )
-            // InternalVampireLanguage.g:3313:2: ( rule__VLSUniversalQuantifier__Group_1_3__0 )*
+            // InternalVampireLanguage.g:3366:1: ( ( rule__VLSUniversalQuantifier__Group_1_3__0 )* )
+            // InternalVampireLanguage.g:3367:2: ( rule__VLSUniversalQuantifier__Group_1_3__0 )*
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getGroup_1_3()); 
-            // InternalVampireLanguage.g:3314:2: ( rule__VLSUniversalQuantifier__Group_1_3__0 )*
+            // InternalVampireLanguage.g:3368:2: ( rule__VLSUniversalQuantifier__Group_1_3__0 )*
             loop30:
             do {
                 int alt30=2;
@@ -10508,7 +10664,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
                 switch (alt30) {
             	case 1 :
-            	    // InternalVampireLanguage.g:3314:3: rule__VLSUniversalQuantifier__Group_1_3__0
+            	    // InternalVampireLanguage.g:3368:3: rule__VLSUniversalQuantifier__Group_1_3__0
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__VLSUniversalQuantifier__Group_1_3__0();
@@ -10547,16 +10703,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__4"
-    // InternalVampireLanguage.g:3322:1: rule__VLSUniversalQuantifier__Group_1__4 : rule__VLSUniversalQuantifier__Group_1__4__Impl rule__VLSUniversalQuantifier__Group_1__5 ;
+    // InternalVampireLanguage.g:3376:1: rule__VLSUniversalQuantifier__Group_1__4 : rule__VLSUniversalQuantifier__Group_1__4__Impl rule__VLSUniversalQuantifier__Group_1__5 ;
     public final void rule__VLSUniversalQuantifier__Group_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3326:1: ( rule__VLSUniversalQuantifier__Group_1__4__Impl rule__VLSUniversalQuantifier__Group_1__5 )
-            // InternalVampireLanguage.g:3327:2: rule__VLSUniversalQuantifier__Group_1__4__Impl rule__VLSUniversalQuantifier__Group_1__5
+            // InternalVampireLanguage.g:3380:1: ( rule__VLSUniversalQuantifier__Group_1__4__Impl rule__VLSUniversalQuantifier__Group_1__5 )
+            // InternalVampireLanguage.g:3381:2: rule__VLSUniversalQuantifier__Group_1__4__Impl rule__VLSUniversalQuantifier__Group_1__5
             {
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_33);
             rule__VLSUniversalQuantifier__Group_1__4__Impl();
 
             state._fsp--;
@@ -10585,17 +10741,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__4__Impl"
-    // InternalVampireLanguage.g:3334:1: rule__VLSUniversalQuantifier__Group_1__4__Impl : ( ']' ) ;
+    // InternalVampireLanguage.g:3388:1: rule__VLSUniversalQuantifier__Group_1__4__Impl : ( ']' ) ;
     public final void rule__VLSUniversalQuantifier__Group_1__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3338:1: ( ( ']' ) )
-            // InternalVampireLanguage.g:3339:1: ( ']' )
+            // InternalVampireLanguage.g:3392:1: ( ( ']' ) )
+            // InternalVampireLanguage.g:3393:1: ( ']' )
             {
-            // InternalVampireLanguage.g:3339:1: ( ']' )
-            // InternalVampireLanguage.g:3340:2: ']'
+            // InternalVampireLanguage.g:3393:1: ( ']' )
+            // InternalVampireLanguage.g:3394:2: ']'
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getRightSquareBracketKeyword_1_4()); 
             match(input,44,FOLLOW_2); 
@@ -10622,14 +10778,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__5"
-    // InternalVampireLanguage.g:3349:1: rule__VLSUniversalQuantifier__Group_1__5 : rule__VLSUniversalQuantifier__Group_1__5__Impl ;
+    // InternalVampireLanguage.g:3403:1: rule__VLSUniversalQuantifier__Group_1__5 : rule__VLSUniversalQuantifier__Group_1__5__Impl ;
     public final void rule__VLSUniversalQuantifier__Group_1__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3353:1: ( rule__VLSUniversalQuantifier__Group_1__5__Impl )
-            // InternalVampireLanguage.g:3354:2: rule__VLSUniversalQuantifier__Group_1__5__Impl
+            // InternalVampireLanguage.g:3407:1: ( rule__VLSUniversalQuantifier__Group_1__5__Impl )
+            // InternalVampireLanguage.g:3408:2: rule__VLSUniversalQuantifier__Group_1__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__Group_1__5__Impl();
@@ -10655,20 +10811,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1__5__Impl"
-    // InternalVampireLanguage.g:3360:1: rule__VLSUniversalQuantifier__Group_1__5__Impl : ( ':' ) ;
+    // InternalVampireLanguage.g:3414:1: rule__VLSUniversalQuantifier__Group_1__5__Impl : ( ':' ) ;
     public final void rule__VLSUniversalQuantifier__Group_1__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3364:1: ( ( ':' ) )
-            // InternalVampireLanguage.g:3365:1: ( ':' )
+            // InternalVampireLanguage.g:3418:1: ( ( ':' ) )
+            // InternalVampireLanguage.g:3419:1: ( ':' )
             {
-            // InternalVampireLanguage.g:3365:1: ( ':' )
-            // InternalVampireLanguage.g:3366:2: ':'
+            // InternalVampireLanguage.g:3419:1: ( ':' )
+            // InternalVampireLanguage.g:3420:2: ':'
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getColonKeyword_1_5()); 
-            match(input,60,FOLLOW_2); 
+            match(input,61,FOLLOW_2); 
              after(grammarAccess.getVLSUniversalQuantifierAccess().getColonKeyword_1_5()); 
 
             }
@@ -10692,16 +10848,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1_3__0"
-    // InternalVampireLanguage.g:3376:1: rule__VLSUniversalQuantifier__Group_1_3__0 : rule__VLSUniversalQuantifier__Group_1_3__0__Impl rule__VLSUniversalQuantifier__Group_1_3__1 ;
+    // InternalVampireLanguage.g:3430:1: rule__VLSUniversalQuantifier__Group_1_3__0 : rule__VLSUniversalQuantifier__Group_1_3__0__Impl rule__VLSUniversalQuantifier__Group_1_3__1 ;
     public final void rule__VLSUniversalQuantifier__Group_1_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3380:1: ( rule__VLSUniversalQuantifier__Group_1_3__0__Impl rule__VLSUniversalQuantifier__Group_1_3__1 )
-            // InternalVampireLanguage.g:3381:2: rule__VLSUniversalQuantifier__Group_1_3__0__Impl rule__VLSUniversalQuantifier__Group_1_3__1
+            // InternalVampireLanguage.g:3434:1: ( rule__VLSUniversalQuantifier__Group_1_3__0__Impl rule__VLSUniversalQuantifier__Group_1_3__1 )
+            // InternalVampireLanguage.g:3435:2: rule__VLSUniversalQuantifier__Group_1_3__0__Impl rule__VLSUniversalQuantifier__Group_1_3__1
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__VLSUniversalQuantifier__Group_1_3__0__Impl();
 
             state._fsp--;
@@ -10730,17 +10886,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1_3__0__Impl"
-    // InternalVampireLanguage.g:3388:1: rule__VLSUniversalQuantifier__Group_1_3__0__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:3442:1: rule__VLSUniversalQuantifier__Group_1_3__0__Impl : ( ',' ) ;
     public final void rule__VLSUniversalQuantifier__Group_1_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3392:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:3393:1: ( ',' )
+            // InternalVampireLanguage.g:3446:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:3447:1: ( ',' )
             {
-            // InternalVampireLanguage.g:3393:1: ( ',' )
-            // InternalVampireLanguage.g:3394:2: ','
+            // InternalVampireLanguage.g:3447:1: ( ',' )
+            // InternalVampireLanguage.g:3448:2: ','
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getCommaKeyword_1_3_0()); 
             match(input,45,FOLLOW_2); 
@@ -10767,14 +10923,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1_3__1"
-    // InternalVampireLanguage.g:3403:1: rule__VLSUniversalQuantifier__Group_1_3__1 : rule__VLSUniversalQuantifier__Group_1_3__1__Impl ;
+    // InternalVampireLanguage.g:3457:1: rule__VLSUniversalQuantifier__Group_1_3__1 : rule__VLSUniversalQuantifier__Group_1_3__1__Impl ;
     public final void rule__VLSUniversalQuantifier__Group_1_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3407:1: ( rule__VLSUniversalQuantifier__Group_1_3__1__Impl )
-            // InternalVampireLanguage.g:3408:2: rule__VLSUniversalQuantifier__Group_1_3__1__Impl
+            // InternalVampireLanguage.g:3461:1: ( rule__VLSUniversalQuantifier__Group_1_3__1__Impl )
+            // InternalVampireLanguage.g:3462:2: rule__VLSUniversalQuantifier__Group_1_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__Group_1_3__1__Impl();
@@ -10800,21 +10956,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__Group_1_3__1__Impl"
-    // InternalVampireLanguage.g:3414:1: rule__VLSUniversalQuantifier__Group_1_3__1__Impl : ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) ) ;
+    // InternalVampireLanguage.g:3468:1: rule__VLSUniversalQuantifier__Group_1_3__1__Impl : ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) ) ;
     public final void rule__VLSUniversalQuantifier__Group_1_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3418:1: ( ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) ) )
-            // InternalVampireLanguage.g:3419:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) )
+            // InternalVampireLanguage.g:3472:1: ( ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) ) )
+            // InternalVampireLanguage.g:3473:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) )
             {
-            // InternalVampireLanguage.g:3419:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) )
-            // InternalVampireLanguage.g:3420:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 )
+            // InternalVampireLanguage.g:3473:1: ( ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 ) )
+            // InternalVampireLanguage.g:3474:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 )
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesAssignment_1_3_1()); 
-            // InternalVampireLanguage.g:3421:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 )
-            // InternalVampireLanguage.g:3421:3: rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1
+            // InternalVampireLanguage.g:3475:2: ( rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 )
+            // InternalVampireLanguage.g:3475:3: rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1();
@@ -10847,16 +11003,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group__0"
-    // InternalVampireLanguage.g:3430:1: rule__VLSExistentialQuantifier__Group__0 : rule__VLSExistentialQuantifier__Group__0__Impl rule__VLSExistentialQuantifier__Group__1 ;
+    // InternalVampireLanguage.g:3484:1: rule__VLSExistentialQuantifier__Group__0 : rule__VLSExistentialQuantifier__Group__0__Impl rule__VLSExistentialQuantifier__Group__1 ;
     public final void rule__VLSExistentialQuantifier__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3434:1: ( rule__VLSExistentialQuantifier__Group__0__Impl rule__VLSExistentialQuantifier__Group__1 )
-            // InternalVampireLanguage.g:3435:2: rule__VLSExistentialQuantifier__Group__0__Impl rule__VLSExistentialQuantifier__Group__1
+            // InternalVampireLanguage.g:3488:1: ( rule__VLSExistentialQuantifier__Group__0__Impl rule__VLSExistentialQuantifier__Group__1 )
+            // InternalVampireLanguage.g:3489:2: rule__VLSExistentialQuantifier__Group__0__Impl rule__VLSExistentialQuantifier__Group__1
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_34);
             rule__VLSExistentialQuantifier__Group__0__Impl();
 
             state._fsp--;
@@ -10885,21 +11041,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group__0__Impl"
-    // InternalVampireLanguage.g:3442:1: rule__VLSExistentialQuantifier__Group__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:3496:1: rule__VLSExistentialQuantifier__Group__0__Impl : ( () ) ;
     public final void rule__VLSExistentialQuantifier__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3446:1: ( ( () ) )
-            // InternalVampireLanguage.g:3447:1: ( () )
+            // InternalVampireLanguage.g:3500:1: ( ( () ) )
+            // InternalVampireLanguage.g:3501:1: ( () )
             {
-            // InternalVampireLanguage.g:3447:1: ( () )
-            // InternalVampireLanguage.g:3448:2: ()
+            // InternalVampireLanguage.g:3501:1: ( () )
+            // InternalVampireLanguage.g:3502:2: ()
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getVLSExistentialQuantifierAction_0()); 
-            // InternalVampireLanguage.g:3449:2: ()
-            // InternalVampireLanguage.g:3449:3: 
+            // InternalVampireLanguage.g:3503:2: ()
+            // InternalVampireLanguage.g:3503:3: 
             {
             }
 
@@ -10922,16 +11078,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group__1"
-    // InternalVampireLanguage.g:3457:1: rule__VLSExistentialQuantifier__Group__1 : rule__VLSExistentialQuantifier__Group__1__Impl rule__VLSExistentialQuantifier__Group__2 ;
+    // InternalVampireLanguage.g:3511:1: rule__VLSExistentialQuantifier__Group__1 : rule__VLSExistentialQuantifier__Group__1__Impl rule__VLSExistentialQuantifier__Group__2 ;
     public final void rule__VLSExistentialQuantifier__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3461:1: ( rule__VLSExistentialQuantifier__Group__1__Impl rule__VLSExistentialQuantifier__Group__2 )
-            // InternalVampireLanguage.g:3462:2: rule__VLSExistentialQuantifier__Group__1__Impl rule__VLSExistentialQuantifier__Group__2
+            // InternalVampireLanguage.g:3515:1: ( rule__VLSExistentialQuantifier__Group__1__Impl rule__VLSExistentialQuantifier__Group__2 )
+            // InternalVampireLanguage.g:3516:2: rule__VLSExistentialQuantifier__Group__1__Impl rule__VLSExistentialQuantifier__Group__2
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSExistentialQuantifier__Group__1__Impl();
 
             state._fsp--;
@@ -10960,21 +11116,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group__1__Impl"
-    // InternalVampireLanguage.g:3469:1: rule__VLSExistentialQuantifier__Group__1__Impl : ( ( rule__VLSExistentialQuantifier__Group_1__0 ) ) ;
+    // InternalVampireLanguage.g:3523:1: rule__VLSExistentialQuantifier__Group__1__Impl : ( ( rule__VLSExistentialQuantifier__Group_1__0 ) ) ;
     public final void rule__VLSExistentialQuantifier__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3473:1: ( ( ( rule__VLSExistentialQuantifier__Group_1__0 ) ) )
-            // InternalVampireLanguage.g:3474:1: ( ( rule__VLSExistentialQuantifier__Group_1__0 ) )
+            // InternalVampireLanguage.g:3527:1: ( ( ( rule__VLSExistentialQuantifier__Group_1__0 ) ) )
+            // InternalVampireLanguage.g:3528:1: ( ( rule__VLSExistentialQuantifier__Group_1__0 ) )
             {
-            // InternalVampireLanguage.g:3474:1: ( ( rule__VLSExistentialQuantifier__Group_1__0 ) )
-            // InternalVampireLanguage.g:3475:2: ( rule__VLSExistentialQuantifier__Group_1__0 )
+            // InternalVampireLanguage.g:3528:1: ( ( rule__VLSExistentialQuantifier__Group_1__0 ) )
+            // InternalVampireLanguage.g:3529:2: ( rule__VLSExistentialQuantifier__Group_1__0 )
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getGroup_1()); 
-            // InternalVampireLanguage.g:3476:2: ( rule__VLSExistentialQuantifier__Group_1__0 )
-            // InternalVampireLanguage.g:3476:3: rule__VLSExistentialQuantifier__Group_1__0
+            // InternalVampireLanguage.g:3530:2: ( rule__VLSExistentialQuantifier__Group_1__0 )
+            // InternalVampireLanguage.g:3530:3: rule__VLSExistentialQuantifier__Group_1__0
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__Group_1__0();
@@ -11007,14 +11163,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group__2"
-    // InternalVampireLanguage.g:3484:1: rule__VLSExistentialQuantifier__Group__2 : rule__VLSExistentialQuantifier__Group__2__Impl ;
+    // InternalVampireLanguage.g:3538:1: rule__VLSExistentialQuantifier__Group__2 : rule__VLSExistentialQuantifier__Group__2__Impl ;
     public final void rule__VLSExistentialQuantifier__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3488:1: ( rule__VLSExistentialQuantifier__Group__2__Impl )
-            // InternalVampireLanguage.g:3489:2: rule__VLSExistentialQuantifier__Group__2__Impl
+            // InternalVampireLanguage.g:3542:1: ( rule__VLSExistentialQuantifier__Group__2__Impl )
+            // InternalVampireLanguage.g:3543:2: rule__VLSExistentialQuantifier__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__Group__2__Impl();
@@ -11040,21 +11196,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group__2__Impl"
-    // InternalVampireLanguage.g:3495:1: rule__VLSExistentialQuantifier__Group__2__Impl : ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) ) ;
+    // InternalVampireLanguage.g:3549:1: rule__VLSExistentialQuantifier__Group__2__Impl : ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) ) ;
     public final void rule__VLSExistentialQuantifier__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3499:1: ( ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) ) )
-            // InternalVampireLanguage.g:3500:1: ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) )
+            // InternalVampireLanguage.g:3553:1: ( ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) ) )
+            // InternalVampireLanguage.g:3554:1: ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) )
             {
-            // InternalVampireLanguage.g:3500:1: ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) )
-            // InternalVampireLanguage.g:3501:2: ( rule__VLSExistentialQuantifier__OperandAssignment_2 )
+            // InternalVampireLanguage.g:3554:1: ( ( rule__VLSExistentialQuantifier__OperandAssignment_2 ) )
+            // InternalVampireLanguage.g:3555:2: ( rule__VLSExistentialQuantifier__OperandAssignment_2 )
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getOperandAssignment_2()); 
-            // InternalVampireLanguage.g:3502:2: ( rule__VLSExistentialQuantifier__OperandAssignment_2 )
-            // InternalVampireLanguage.g:3502:3: rule__VLSExistentialQuantifier__OperandAssignment_2
+            // InternalVampireLanguage.g:3556:2: ( rule__VLSExistentialQuantifier__OperandAssignment_2 )
+            // InternalVampireLanguage.g:3556:3: rule__VLSExistentialQuantifier__OperandAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__OperandAssignment_2();
@@ -11087,16 +11243,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__0"
-    // InternalVampireLanguage.g:3511:1: rule__VLSExistentialQuantifier__Group_1__0 : rule__VLSExistentialQuantifier__Group_1__0__Impl rule__VLSExistentialQuantifier__Group_1__1 ;
+    // InternalVampireLanguage.g:3565:1: rule__VLSExistentialQuantifier__Group_1__0 : rule__VLSExistentialQuantifier__Group_1__0__Impl rule__VLSExistentialQuantifier__Group_1__1 ;
     public final void rule__VLSExistentialQuantifier__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3515:1: ( rule__VLSExistentialQuantifier__Group_1__0__Impl rule__VLSExistentialQuantifier__Group_1__1 )
-            // InternalVampireLanguage.g:3516:2: rule__VLSExistentialQuantifier__Group_1__0__Impl rule__VLSExistentialQuantifier__Group_1__1
+            // InternalVampireLanguage.g:3569:1: ( rule__VLSExistentialQuantifier__Group_1__0__Impl rule__VLSExistentialQuantifier__Group_1__1 )
+            // InternalVampireLanguage.g:3570:2: rule__VLSExistentialQuantifier__Group_1__0__Impl rule__VLSExistentialQuantifier__Group_1__1
             {
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_31);
             rule__VLSExistentialQuantifier__Group_1__0__Impl();
 
             state._fsp--;
@@ -11125,20 +11281,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__0__Impl"
-    // InternalVampireLanguage.g:3523:1: rule__VLSExistentialQuantifier__Group_1__0__Impl : ( '?' ) ;
+    // InternalVampireLanguage.g:3577:1: rule__VLSExistentialQuantifier__Group_1__0__Impl : ( '?' ) ;
     public final void rule__VLSExistentialQuantifier__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3527:1: ( ( '?' ) )
-            // InternalVampireLanguage.g:3528:1: ( '?' )
+            // InternalVampireLanguage.g:3581:1: ( ( '?' ) )
+            // InternalVampireLanguage.g:3582:1: ( '?' )
             {
-            // InternalVampireLanguage.g:3528:1: ( '?' )
-            // InternalVampireLanguage.g:3529:2: '?'
+            // InternalVampireLanguage.g:3582:1: ( '?' )
+            // InternalVampireLanguage.g:3583:2: '?'
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getQuestionMarkKeyword_1_0()); 
-            match(input,61,FOLLOW_2); 
+            match(input,62,FOLLOW_2); 
              after(grammarAccess.getVLSExistentialQuantifierAccess().getQuestionMarkKeyword_1_0()); 
 
             }
@@ -11162,16 +11318,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__1"
-    // InternalVampireLanguage.g:3538:1: rule__VLSExistentialQuantifier__Group_1__1 : rule__VLSExistentialQuantifier__Group_1__1__Impl rule__VLSExistentialQuantifier__Group_1__2 ;
+    // InternalVampireLanguage.g:3592:1: rule__VLSExistentialQuantifier__Group_1__1 : rule__VLSExistentialQuantifier__Group_1__1__Impl rule__VLSExistentialQuantifier__Group_1__2 ;
     public final void rule__VLSExistentialQuantifier__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3542:1: ( rule__VLSExistentialQuantifier__Group_1__1__Impl rule__VLSExistentialQuantifier__Group_1__2 )
-            // InternalVampireLanguage.g:3543:2: rule__VLSExistentialQuantifier__Group_1__1__Impl rule__VLSExistentialQuantifier__Group_1__2
+            // InternalVampireLanguage.g:3596:1: ( rule__VLSExistentialQuantifier__Group_1__1__Impl rule__VLSExistentialQuantifier__Group_1__2 )
+            // InternalVampireLanguage.g:3597:2: rule__VLSExistentialQuantifier__Group_1__1__Impl rule__VLSExistentialQuantifier__Group_1__2
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__VLSExistentialQuantifier__Group_1__1__Impl();
 
             state._fsp--;
@@ -11200,20 +11356,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__1__Impl"
-    // InternalVampireLanguage.g:3550:1: rule__VLSExistentialQuantifier__Group_1__1__Impl : ( '[' ) ;
+    // InternalVampireLanguage.g:3604:1: rule__VLSExistentialQuantifier__Group_1__1__Impl : ( '[' ) ;
     public final void rule__VLSExistentialQuantifier__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3554:1: ( ( '[' ) )
-            // InternalVampireLanguage.g:3555:1: ( '[' )
+            // InternalVampireLanguage.g:3608:1: ( ( '[' ) )
+            // InternalVampireLanguage.g:3609:1: ( '[' )
             {
-            // InternalVampireLanguage.g:3555:1: ( '[' )
-            // InternalVampireLanguage.g:3556:2: '['
+            // InternalVampireLanguage.g:3609:1: ( '[' )
+            // InternalVampireLanguage.g:3610:2: '['
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getLeftSquareBracketKeyword_1_1()); 
-            match(input,50,FOLLOW_2); 
+            match(input,51,FOLLOW_2); 
              after(grammarAccess.getVLSExistentialQuantifierAccess().getLeftSquareBracketKeyword_1_1()); 
 
             }
@@ -11237,14 +11393,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__2"
-    // InternalVampireLanguage.g:3565:1: rule__VLSExistentialQuantifier__Group_1__2 : rule__VLSExistentialQuantifier__Group_1__2__Impl rule__VLSExistentialQuantifier__Group_1__3 ;
+    // InternalVampireLanguage.g:3619:1: rule__VLSExistentialQuantifier__Group_1__2 : rule__VLSExistentialQuantifier__Group_1__2__Impl rule__VLSExistentialQuantifier__Group_1__3 ;
     public final void rule__VLSExistentialQuantifier__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3569:1: ( rule__VLSExistentialQuantifier__Group_1__2__Impl rule__VLSExistentialQuantifier__Group_1__3 )
-            // InternalVampireLanguage.g:3570:2: rule__VLSExistentialQuantifier__Group_1__2__Impl rule__VLSExistentialQuantifier__Group_1__3
+            // InternalVampireLanguage.g:3623:1: ( rule__VLSExistentialQuantifier__Group_1__2__Impl rule__VLSExistentialQuantifier__Group_1__3 )
+            // InternalVampireLanguage.g:3624:2: rule__VLSExistentialQuantifier__Group_1__2__Impl rule__VLSExistentialQuantifier__Group_1__3
             {
             pushFollow(FOLLOW_9);
             rule__VLSExistentialQuantifier__Group_1__2__Impl();
@@ -11275,21 +11431,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__2__Impl"
-    // InternalVampireLanguage.g:3577:1: rule__VLSExistentialQuantifier__Group_1__2__Impl : ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) ) ;
+    // InternalVampireLanguage.g:3631:1: rule__VLSExistentialQuantifier__Group_1__2__Impl : ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) ) ;
     public final void rule__VLSExistentialQuantifier__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3581:1: ( ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) ) )
-            // InternalVampireLanguage.g:3582:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) )
+            // InternalVampireLanguage.g:3635:1: ( ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) ) )
+            // InternalVampireLanguage.g:3636:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) )
             {
-            // InternalVampireLanguage.g:3582:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) )
-            // InternalVampireLanguage.g:3583:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 )
+            // InternalVampireLanguage.g:3636:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 ) )
+            // InternalVampireLanguage.g:3637:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 )
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesAssignment_1_2()); 
-            // InternalVampireLanguage.g:3584:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 )
-            // InternalVampireLanguage.g:3584:3: rule__VLSExistentialQuantifier__VariablesAssignment_1_2
+            // InternalVampireLanguage.g:3638:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_2 )
+            // InternalVampireLanguage.g:3638:3: rule__VLSExistentialQuantifier__VariablesAssignment_1_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__VariablesAssignment_1_2();
@@ -11322,14 +11478,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__3"
-    // InternalVampireLanguage.g:3592:1: rule__VLSExistentialQuantifier__Group_1__3 : rule__VLSExistentialQuantifier__Group_1__3__Impl rule__VLSExistentialQuantifier__Group_1__4 ;
+    // InternalVampireLanguage.g:3646:1: rule__VLSExistentialQuantifier__Group_1__3 : rule__VLSExistentialQuantifier__Group_1__3__Impl rule__VLSExistentialQuantifier__Group_1__4 ;
     public final void rule__VLSExistentialQuantifier__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3596:1: ( rule__VLSExistentialQuantifier__Group_1__3__Impl rule__VLSExistentialQuantifier__Group_1__4 )
-            // InternalVampireLanguage.g:3597:2: rule__VLSExistentialQuantifier__Group_1__3__Impl rule__VLSExistentialQuantifier__Group_1__4
+            // InternalVampireLanguage.g:3650:1: ( rule__VLSExistentialQuantifier__Group_1__3__Impl rule__VLSExistentialQuantifier__Group_1__4 )
+            // InternalVampireLanguage.g:3651:2: rule__VLSExistentialQuantifier__Group_1__3__Impl rule__VLSExistentialQuantifier__Group_1__4
             {
             pushFollow(FOLLOW_9);
             rule__VLSExistentialQuantifier__Group_1__3__Impl();
@@ -11360,20 +11516,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__3__Impl"
-    // InternalVampireLanguage.g:3604:1: rule__VLSExistentialQuantifier__Group_1__3__Impl : ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* ) ;
+    // InternalVampireLanguage.g:3658:1: rule__VLSExistentialQuantifier__Group_1__3__Impl : ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* ) ;
     public final void rule__VLSExistentialQuantifier__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3608:1: ( ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* ) )
-            // InternalVampireLanguage.g:3609:1: ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* )
+            // InternalVampireLanguage.g:3662:1: ( ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* ) )
+            // InternalVampireLanguage.g:3663:1: ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* )
             {
-            // InternalVampireLanguage.g:3609:1: ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* )
-            // InternalVampireLanguage.g:3610:2: ( rule__VLSExistentialQuantifier__Group_1_3__0 )*
+            // InternalVampireLanguage.g:3663:1: ( ( rule__VLSExistentialQuantifier__Group_1_3__0 )* )
+            // InternalVampireLanguage.g:3664:2: ( rule__VLSExistentialQuantifier__Group_1_3__0 )*
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getGroup_1_3()); 
-            // InternalVampireLanguage.g:3611:2: ( rule__VLSExistentialQuantifier__Group_1_3__0 )*
+            // InternalVampireLanguage.g:3665:2: ( rule__VLSExistentialQuantifier__Group_1_3__0 )*
             loop31:
             do {
                 int alt31=2;
@@ -11386,7 +11542,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
                 switch (alt31) {
             	case 1 :
-            	    // InternalVampireLanguage.g:3611:3: rule__VLSExistentialQuantifier__Group_1_3__0
+            	    // InternalVampireLanguage.g:3665:3: rule__VLSExistentialQuantifier__Group_1_3__0
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__VLSExistentialQuantifier__Group_1_3__0();
@@ -11425,16 +11581,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__4"
-    // InternalVampireLanguage.g:3619:1: rule__VLSExistentialQuantifier__Group_1__4 : rule__VLSExistentialQuantifier__Group_1__4__Impl rule__VLSExistentialQuantifier__Group_1__5 ;
+    // InternalVampireLanguage.g:3673:1: rule__VLSExistentialQuantifier__Group_1__4 : rule__VLSExistentialQuantifier__Group_1__4__Impl rule__VLSExistentialQuantifier__Group_1__5 ;
     public final void rule__VLSExistentialQuantifier__Group_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3623:1: ( rule__VLSExistentialQuantifier__Group_1__4__Impl rule__VLSExistentialQuantifier__Group_1__5 )
-            // InternalVampireLanguage.g:3624:2: rule__VLSExistentialQuantifier__Group_1__4__Impl rule__VLSExistentialQuantifier__Group_1__5
+            // InternalVampireLanguage.g:3677:1: ( rule__VLSExistentialQuantifier__Group_1__4__Impl rule__VLSExistentialQuantifier__Group_1__5 )
+            // InternalVampireLanguage.g:3678:2: rule__VLSExistentialQuantifier__Group_1__4__Impl rule__VLSExistentialQuantifier__Group_1__5
             {
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_33);
             rule__VLSExistentialQuantifier__Group_1__4__Impl();
 
             state._fsp--;
@@ -11463,17 +11619,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__4__Impl"
-    // InternalVampireLanguage.g:3631:1: rule__VLSExistentialQuantifier__Group_1__4__Impl : ( ']' ) ;
+    // InternalVampireLanguage.g:3685:1: rule__VLSExistentialQuantifier__Group_1__4__Impl : ( ']' ) ;
     public final void rule__VLSExistentialQuantifier__Group_1__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3635:1: ( ( ']' ) )
-            // InternalVampireLanguage.g:3636:1: ( ']' )
+            // InternalVampireLanguage.g:3689:1: ( ( ']' ) )
+            // InternalVampireLanguage.g:3690:1: ( ']' )
             {
-            // InternalVampireLanguage.g:3636:1: ( ']' )
-            // InternalVampireLanguage.g:3637:2: ']'
+            // InternalVampireLanguage.g:3690:1: ( ']' )
+            // InternalVampireLanguage.g:3691:2: ']'
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getRightSquareBracketKeyword_1_4()); 
             match(input,44,FOLLOW_2); 
@@ -11500,14 +11656,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__5"
-    // InternalVampireLanguage.g:3646:1: rule__VLSExistentialQuantifier__Group_1__5 : rule__VLSExistentialQuantifier__Group_1__5__Impl ;
+    // InternalVampireLanguage.g:3700:1: rule__VLSExistentialQuantifier__Group_1__5 : rule__VLSExistentialQuantifier__Group_1__5__Impl ;
     public final void rule__VLSExistentialQuantifier__Group_1__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3650:1: ( rule__VLSExistentialQuantifier__Group_1__5__Impl )
-            // InternalVampireLanguage.g:3651:2: rule__VLSExistentialQuantifier__Group_1__5__Impl
+            // InternalVampireLanguage.g:3704:1: ( rule__VLSExistentialQuantifier__Group_1__5__Impl )
+            // InternalVampireLanguage.g:3705:2: rule__VLSExistentialQuantifier__Group_1__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__Group_1__5__Impl();
@@ -11533,20 +11689,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1__5__Impl"
-    // InternalVampireLanguage.g:3657:1: rule__VLSExistentialQuantifier__Group_1__5__Impl : ( ':' ) ;
+    // InternalVampireLanguage.g:3711:1: rule__VLSExistentialQuantifier__Group_1__5__Impl : ( ':' ) ;
     public final void rule__VLSExistentialQuantifier__Group_1__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3661:1: ( ( ':' ) )
-            // InternalVampireLanguage.g:3662:1: ( ':' )
+            // InternalVampireLanguage.g:3715:1: ( ( ':' ) )
+            // InternalVampireLanguage.g:3716:1: ( ':' )
             {
-            // InternalVampireLanguage.g:3662:1: ( ':' )
-            // InternalVampireLanguage.g:3663:2: ':'
+            // InternalVampireLanguage.g:3716:1: ( ':' )
+            // InternalVampireLanguage.g:3717:2: ':'
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getColonKeyword_1_5()); 
-            match(input,60,FOLLOW_2); 
+            match(input,61,FOLLOW_2); 
              after(grammarAccess.getVLSExistentialQuantifierAccess().getColonKeyword_1_5()); 
 
             }
@@ -11570,16 +11726,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1_3__0"
-    // InternalVampireLanguage.g:3673:1: rule__VLSExistentialQuantifier__Group_1_3__0 : rule__VLSExistentialQuantifier__Group_1_3__0__Impl rule__VLSExistentialQuantifier__Group_1_3__1 ;
+    // InternalVampireLanguage.g:3727:1: rule__VLSExistentialQuantifier__Group_1_3__0 : rule__VLSExistentialQuantifier__Group_1_3__0__Impl rule__VLSExistentialQuantifier__Group_1_3__1 ;
     public final void rule__VLSExistentialQuantifier__Group_1_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3677:1: ( rule__VLSExistentialQuantifier__Group_1_3__0__Impl rule__VLSExistentialQuantifier__Group_1_3__1 )
-            // InternalVampireLanguage.g:3678:2: rule__VLSExistentialQuantifier__Group_1_3__0__Impl rule__VLSExistentialQuantifier__Group_1_3__1
+            // InternalVampireLanguage.g:3731:1: ( rule__VLSExistentialQuantifier__Group_1_3__0__Impl rule__VLSExistentialQuantifier__Group_1_3__1 )
+            // InternalVampireLanguage.g:3732:2: rule__VLSExistentialQuantifier__Group_1_3__0__Impl rule__VLSExistentialQuantifier__Group_1_3__1
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__VLSExistentialQuantifier__Group_1_3__0__Impl();
 
             state._fsp--;
@@ -11608,17 +11764,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1_3__0__Impl"
-    // InternalVampireLanguage.g:3685:1: rule__VLSExistentialQuantifier__Group_1_3__0__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:3739:1: rule__VLSExistentialQuantifier__Group_1_3__0__Impl : ( ',' ) ;
     public final void rule__VLSExistentialQuantifier__Group_1_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3689:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:3690:1: ( ',' )
+            // InternalVampireLanguage.g:3743:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:3744:1: ( ',' )
             {
-            // InternalVampireLanguage.g:3690:1: ( ',' )
-            // InternalVampireLanguage.g:3691:2: ','
+            // InternalVampireLanguage.g:3744:1: ( ',' )
+            // InternalVampireLanguage.g:3745:2: ','
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getCommaKeyword_1_3_0()); 
             match(input,45,FOLLOW_2); 
@@ -11645,14 +11801,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1_3__1"
-    // InternalVampireLanguage.g:3700:1: rule__VLSExistentialQuantifier__Group_1_3__1 : rule__VLSExistentialQuantifier__Group_1_3__1__Impl ;
+    // InternalVampireLanguage.g:3754:1: rule__VLSExistentialQuantifier__Group_1_3__1 : rule__VLSExistentialQuantifier__Group_1_3__1__Impl ;
     public final void rule__VLSExistentialQuantifier__Group_1_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3704:1: ( rule__VLSExistentialQuantifier__Group_1_3__1__Impl )
-            // InternalVampireLanguage.g:3705:2: rule__VLSExistentialQuantifier__Group_1_3__1__Impl
+            // InternalVampireLanguage.g:3758:1: ( rule__VLSExistentialQuantifier__Group_1_3__1__Impl )
+            // InternalVampireLanguage.g:3759:2: rule__VLSExistentialQuantifier__Group_1_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__Group_1_3__1__Impl();
@@ -11678,21 +11834,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__Group_1_3__1__Impl"
-    // InternalVampireLanguage.g:3711:1: rule__VLSExistentialQuantifier__Group_1_3__1__Impl : ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) ) ;
+    // InternalVampireLanguage.g:3765:1: rule__VLSExistentialQuantifier__Group_1_3__1__Impl : ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) ) ;
     public final void rule__VLSExistentialQuantifier__Group_1_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3715:1: ( ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) ) )
-            // InternalVampireLanguage.g:3716:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) )
+            // InternalVampireLanguage.g:3769:1: ( ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) ) )
+            // InternalVampireLanguage.g:3770:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) )
             {
-            // InternalVampireLanguage.g:3716:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) )
-            // InternalVampireLanguage.g:3717:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 )
+            // InternalVampireLanguage.g:3770:1: ( ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 ) )
+            // InternalVampireLanguage.g:3771:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 )
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesAssignment_1_3_1()); 
-            // InternalVampireLanguage.g:3718:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 )
-            // InternalVampireLanguage.g:3718:3: rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1
+            // InternalVampireLanguage.g:3772:2: ( rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 )
+            // InternalVampireLanguage.g:3772:3: rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1();
@@ -11725,16 +11881,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__Group__0"
-    // InternalVampireLanguage.g:3727:1: rule__VLSUnaryNegation__Group__0 : rule__VLSUnaryNegation__Group__0__Impl rule__VLSUnaryNegation__Group__1 ;
+    // InternalVampireLanguage.g:3781:1: rule__VLSUnaryNegation__Group__0 : rule__VLSUnaryNegation__Group__0__Impl rule__VLSUnaryNegation__Group__1 ;
     public final void rule__VLSUnaryNegation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3731:1: ( rule__VLSUnaryNegation__Group__0__Impl rule__VLSUnaryNegation__Group__1 )
-            // InternalVampireLanguage.g:3732:2: rule__VLSUnaryNegation__Group__0__Impl rule__VLSUnaryNegation__Group__1
+            // InternalVampireLanguage.g:3785:1: ( rule__VLSUnaryNegation__Group__0__Impl rule__VLSUnaryNegation__Group__1 )
+            // InternalVampireLanguage.g:3786:2: rule__VLSUnaryNegation__Group__0__Impl rule__VLSUnaryNegation__Group__1
             {
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_35);
             rule__VLSUnaryNegation__Group__0__Impl();
 
             state._fsp--;
@@ -11763,21 +11919,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__Group__0__Impl"
-    // InternalVampireLanguage.g:3739:1: rule__VLSUnaryNegation__Group__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:3793:1: rule__VLSUnaryNegation__Group__0__Impl : ( () ) ;
     public final void rule__VLSUnaryNegation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3743:1: ( ( () ) )
-            // InternalVampireLanguage.g:3744:1: ( () )
+            // InternalVampireLanguage.g:3797:1: ( ( () ) )
+            // InternalVampireLanguage.g:3798:1: ( () )
             {
-            // InternalVampireLanguage.g:3744:1: ( () )
-            // InternalVampireLanguage.g:3745:2: ()
+            // InternalVampireLanguage.g:3798:1: ( () )
+            // InternalVampireLanguage.g:3799:2: ()
             {
              before(grammarAccess.getVLSUnaryNegationAccess().getVLSUnaryNegationAction_0()); 
-            // InternalVampireLanguage.g:3746:2: ()
-            // InternalVampireLanguage.g:3746:3: 
+            // InternalVampireLanguage.g:3800:2: ()
+            // InternalVampireLanguage.g:3800:3: 
             {
             }
 
@@ -11800,16 +11956,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__Group__1"
-    // InternalVampireLanguage.g:3754:1: rule__VLSUnaryNegation__Group__1 : rule__VLSUnaryNegation__Group__1__Impl rule__VLSUnaryNegation__Group__2 ;
+    // InternalVampireLanguage.g:3808:1: rule__VLSUnaryNegation__Group__1 : rule__VLSUnaryNegation__Group__1__Impl rule__VLSUnaryNegation__Group__2 ;
     public final void rule__VLSUnaryNegation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3758:1: ( rule__VLSUnaryNegation__Group__1__Impl rule__VLSUnaryNegation__Group__2 )
-            // InternalVampireLanguage.g:3759:2: rule__VLSUnaryNegation__Group__1__Impl rule__VLSUnaryNegation__Group__2
+            // InternalVampireLanguage.g:3812:1: ( rule__VLSUnaryNegation__Group__1__Impl rule__VLSUnaryNegation__Group__2 )
+            // InternalVampireLanguage.g:3813:2: rule__VLSUnaryNegation__Group__1__Impl rule__VLSUnaryNegation__Group__2
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__VLSUnaryNegation__Group__1__Impl();
 
             state._fsp--;
@@ -11838,20 +11994,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__Group__1__Impl"
-    // InternalVampireLanguage.g:3766:1: rule__VLSUnaryNegation__Group__1__Impl : ( '~' ) ;
+    // InternalVampireLanguage.g:3820:1: rule__VLSUnaryNegation__Group__1__Impl : ( '~' ) ;
     public final void rule__VLSUnaryNegation__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3770:1: ( ( '~' ) )
-            // InternalVampireLanguage.g:3771:1: ( '~' )
+            // InternalVampireLanguage.g:3824:1: ( ( '~' ) )
+            // InternalVampireLanguage.g:3825:1: ( '~' )
             {
-            // InternalVampireLanguage.g:3771:1: ( '~' )
-            // InternalVampireLanguage.g:3772:2: '~'
+            // InternalVampireLanguage.g:3825:1: ( '~' )
+            // InternalVampireLanguage.g:3826:2: '~'
             {
              before(grammarAccess.getVLSUnaryNegationAccess().getTildeKeyword_1()); 
-            match(input,62,FOLLOW_2); 
+            match(input,63,FOLLOW_2); 
              after(grammarAccess.getVLSUnaryNegationAccess().getTildeKeyword_1()); 
 
             }
@@ -11875,14 +12031,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__Group__2"
-    // InternalVampireLanguage.g:3781:1: rule__VLSUnaryNegation__Group__2 : rule__VLSUnaryNegation__Group__2__Impl ;
+    // InternalVampireLanguage.g:3835:1: rule__VLSUnaryNegation__Group__2 : rule__VLSUnaryNegation__Group__2__Impl ;
     public final void rule__VLSUnaryNegation__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3785:1: ( rule__VLSUnaryNegation__Group__2__Impl )
-            // InternalVampireLanguage.g:3786:2: rule__VLSUnaryNegation__Group__2__Impl
+            // InternalVampireLanguage.g:3839:1: ( rule__VLSUnaryNegation__Group__2__Impl )
+            // InternalVampireLanguage.g:3840:2: rule__VLSUnaryNegation__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryNegation__Group__2__Impl();
@@ -11908,21 +12064,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__Group__2__Impl"
-    // InternalVampireLanguage.g:3792:1: rule__VLSUnaryNegation__Group__2__Impl : ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) ) ;
+    // InternalVampireLanguage.g:3846:1: rule__VLSUnaryNegation__Group__2__Impl : ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) ) ;
     public final void rule__VLSUnaryNegation__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3796:1: ( ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) ) )
-            // InternalVampireLanguage.g:3797:1: ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) )
+            // InternalVampireLanguage.g:3850:1: ( ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) ) )
+            // InternalVampireLanguage.g:3851:1: ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) )
             {
-            // InternalVampireLanguage.g:3797:1: ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) )
-            // InternalVampireLanguage.g:3798:2: ( rule__VLSUnaryNegation__OperandAssignment_2 )
+            // InternalVampireLanguage.g:3851:1: ( ( rule__VLSUnaryNegation__OperandAssignment_2 ) )
+            // InternalVampireLanguage.g:3852:2: ( rule__VLSUnaryNegation__OperandAssignment_2 )
             {
              before(grammarAccess.getVLSUnaryNegationAccess().getOperandAssignment_2()); 
-            // InternalVampireLanguage.g:3799:2: ( rule__VLSUnaryNegation__OperandAssignment_2 )
-            // InternalVampireLanguage.g:3799:3: rule__VLSUnaryNegation__OperandAssignment_2
+            // InternalVampireLanguage.g:3853:2: ( rule__VLSUnaryNegation__OperandAssignment_2 )
+            // InternalVampireLanguage.g:3853:3: rule__VLSUnaryNegation__OperandAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryNegation__OperandAssignment_2();
@@ -11955,16 +12111,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group__0"
-    // InternalVampireLanguage.g:3808:1: rule__VLSUnaryInfix__Group__0 : rule__VLSUnaryInfix__Group__0__Impl rule__VLSUnaryInfix__Group__1 ;
+    // InternalVampireLanguage.g:3862:1: rule__VLSUnaryInfix__Group__0 : rule__VLSUnaryInfix__Group__0__Impl rule__VLSUnaryInfix__Group__1 ;
     public final void rule__VLSUnaryInfix__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3812:1: ( rule__VLSUnaryInfix__Group__0__Impl rule__VLSUnaryInfix__Group__1 )
-            // InternalVampireLanguage.g:3813:2: rule__VLSUnaryInfix__Group__0__Impl rule__VLSUnaryInfix__Group__1
+            // InternalVampireLanguage.g:3866:1: ( rule__VLSUnaryInfix__Group__0__Impl rule__VLSUnaryInfix__Group__1 )
+            // InternalVampireLanguage.g:3867:2: rule__VLSUnaryInfix__Group__0__Impl rule__VLSUnaryInfix__Group__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_36);
             rule__VLSUnaryInfix__Group__0__Impl();
 
             state._fsp--;
@@ -11993,17 +12149,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group__0__Impl"
-    // InternalVampireLanguage.g:3820:1: rule__VLSUnaryInfix__Group__0__Impl : ( ruleVLSAtomic ) ;
+    // InternalVampireLanguage.g:3874:1: rule__VLSUnaryInfix__Group__0__Impl : ( ruleVLSAtomic ) ;
     public final void rule__VLSUnaryInfix__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3824:1: ( ( ruleVLSAtomic ) )
-            // InternalVampireLanguage.g:3825:1: ( ruleVLSAtomic )
+            // InternalVampireLanguage.g:3878:1: ( ( ruleVLSAtomic ) )
+            // InternalVampireLanguage.g:3879:1: ( ruleVLSAtomic )
             {
-            // InternalVampireLanguage.g:3825:1: ( ruleVLSAtomic )
-            // InternalVampireLanguage.g:3826:2: ruleVLSAtomic
+            // InternalVampireLanguage.g:3879:1: ( ruleVLSAtomic )
+            // InternalVampireLanguage.g:3880:2: ruleVLSAtomic
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getVLSAtomicParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -12034,14 +12190,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group__1"
-    // InternalVampireLanguage.g:3835:1: rule__VLSUnaryInfix__Group__1 : rule__VLSUnaryInfix__Group__1__Impl ;
+    // InternalVampireLanguage.g:3889:1: rule__VLSUnaryInfix__Group__1 : rule__VLSUnaryInfix__Group__1__Impl ;
     public final void rule__VLSUnaryInfix__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3839:1: ( rule__VLSUnaryInfix__Group__1__Impl )
-            // InternalVampireLanguage.g:3840:2: rule__VLSUnaryInfix__Group__1__Impl
+            // InternalVampireLanguage.g:3893:1: ( rule__VLSUnaryInfix__Group__1__Impl )
+            // InternalVampireLanguage.g:3894:2: rule__VLSUnaryInfix__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__Group__1__Impl();
@@ -12067,29 +12223,29 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group__1__Impl"
-    // InternalVampireLanguage.g:3846:1: rule__VLSUnaryInfix__Group__1__Impl : ( ( rule__VLSUnaryInfix__Group_1__0 )? ) ;
+    // InternalVampireLanguage.g:3900:1: rule__VLSUnaryInfix__Group__1__Impl : ( ( rule__VLSUnaryInfix__Group_1__0 )? ) ;
     public final void rule__VLSUnaryInfix__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3850:1: ( ( ( rule__VLSUnaryInfix__Group_1__0 )? ) )
-            // InternalVampireLanguage.g:3851:1: ( ( rule__VLSUnaryInfix__Group_1__0 )? )
+            // InternalVampireLanguage.g:3904:1: ( ( ( rule__VLSUnaryInfix__Group_1__0 )? ) )
+            // InternalVampireLanguage.g:3905:1: ( ( rule__VLSUnaryInfix__Group_1__0 )? )
             {
-            // InternalVampireLanguage.g:3851:1: ( ( rule__VLSUnaryInfix__Group_1__0 )? )
-            // InternalVampireLanguage.g:3852:2: ( rule__VLSUnaryInfix__Group_1__0 )?
+            // InternalVampireLanguage.g:3905:1: ( ( rule__VLSUnaryInfix__Group_1__0 )? )
+            // InternalVampireLanguage.g:3906:2: ( rule__VLSUnaryInfix__Group_1__0 )?
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getGroup_1()); 
-            // InternalVampireLanguage.g:3853:2: ( rule__VLSUnaryInfix__Group_1__0 )?
+            // InternalVampireLanguage.g:3907:2: ( rule__VLSUnaryInfix__Group_1__0 )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
-            if ( ((LA32_0>=63 && LA32_0<=65)) ) {
+            if ( ((LA32_0>=64 && LA32_0<=66)) ) {
                 alt32=1;
             }
             switch (alt32) {
                 case 1 :
-                    // InternalVampireLanguage.g:3853:3: rule__VLSUnaryInfix__Group_1__0
+                    // InternalVampireLanguage.g:3907:3: rule__VLSUnaryInfix__Group_1__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__VLSUnaryInfix__Group_1__0();
@@ -12125,16 +12281,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1__0"
-    // InternalVampireLanguage.g:3862:1: rule__VLSUnaryInfix__Group_1__0 : rule__VLSUnaryInfix__Group_1__0__Impl rule__VLSUnaryInfix__Group_1__1 ;
+    // InternalVampireLanguage.g:3916:1: rule__VLSUnaryInfix__Group_1__0 : rule__VLSUnaryInfix__Group_1__0__Impl rule__VLSUnaryInfix__Group_1__1 ;
     public final void rule__VLSUnaryInfix__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3866:1: ( rule__VLSUnaryInfix__Group_1__0__Impl rule__VLSUnaryInfix__Group_1__1 )
-            // InternalVampireLanguage.g:3867:2: rule__VLSUnaryInfix__Group_1__0__Impl rule__VLSUnaryInfix__Group_1__1
+            // InternalVampireLanguage.g:3920:1: ( rule__VLSUnaryInfix__Group_1__0__Impl rule__VLSUnaryInfix__Group_1__1 )
+            // InternalVampireLanguage.g:3921:2: rule__VLSUnaryInfix__Group_1__0__Impl rule__VLSUnaryInfix__Group_1__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSUnaryInfix__Group_1__0__Impl();
 
             state._fsp--;
@@ -12163,21 +12319,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1__0__Impl"
-    // InternalVampireLanguage.g:3874:1: rule__VLSUnaryInfix__Group_1__0__Impl : ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) ) ;
+    // InternalVampireLanguage.g:3928:1: rule__VLSUnaryInfix__Group_1__0__Impl : ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) ) ;
     public final void rule__VLSUnaryInfix__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3878:1: ( ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) ) )
-            // InternalVampireLanguage.g:3879:1: ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) )
+            // InternalVampireLanguage.g:3932:1: ( ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) ) )
+            // InternalVampireLanguage.g:3933:1: ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) )
             {
-            // InternalVampireLanguage.g:3879:1: ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) )
-            // InternalVampireLanguage.g:3880:2: ( rule__VLSUnaryInfix__Alternatives_1_0 )
+            // InternalVampireLanguage.g:3933:1: ( ( rule__VLSUnaryInfix__Alternatives_1_0 ) )
+            // InternalVampireLanguage.g:3934:2: ( rule__VLSUnaryInfix__Alternatives_1_0 )
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getAlternatives_1_0()); 
-            // InternalVampireLanguage.g:3881:2: ( rule__VLSUnaryInfix__Alternatives_1_0 )
-            // InternalVampireLanguage.g:3881:3: rule__VLSUnaryInfix__Alternatives_1_0
+            // InternalVampireLanguage.g:3935:2: ( rule__VLSUnaryInfix__Alternatives_1_0 )
+            // InternalVampireLanguage.g:3935:3: rule__VLSUnaryInfix__Alternatives_1_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__Alternatives_1_0();
@@ -12210,14 +12366,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1__1"
-    // InternalVampireLanguage.g:3889:1: rule__VLSUnaryInfix__Group_1__1 : rule__VLSUnaryInfix__Group_1__1__Impl ;
+    // InternalVampireLanguage.g:3943:1: rule__VLSUnaryInfix__Group_1__1 : rule__VLSUnaryInfix__Group_1__1__Impl ;
     public final void rule__VLSUnaryInfix__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3893:1: ( rule__VLSUnaryInfix__Group_1__1__Impl )
-            // InternalVampireLanguage.g:3894:2: rule__VLSUnaryInfix__Group_1__1__Impl
+            // InternalVampireLanguage.g:3947:1: ( rule__VLSUnaryInfix__Group_1__1__Impl )
+            // InternalVampireLanguage.g:3948:2: rule__VLSUnaryInfix__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__Group_1__1__Impl();
@@ -12243,21 +12399,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1__1__Impl"
-    // InternalVampireLanguage.g:3900:1: rule__VLSUnaryInfix__Group_1__1__Impl : ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) ) ;
+    // InternalVampireLanguage.g:3954:1: rule__VLSUnaryInfix__Group_1__1__Impl : ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) ) ;
     public final void rule__VLSUnaryInfix__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3904:1: ( ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) ) )
-            // InternalVampireLanguage.g:3905:1: ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) )
+            // InternalVampireLanguage.g:3958:1: ( ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) ) )
+            // InternalVampireLanguage.g:3959:1: ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) )
             {
-            // InternalVampireLanguage.g:3905:1: ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) )
-            // InternalVampireLanguage.g:3906:2: ( rule__VLSUnaryInfix__RightAssignment_1_1 )
+            // InternalVampireLanguage.g:3959:1: ( ( rule__VLSUnaryInfix__RightAssignment_1_1 ) )
+            // InternalVampireLanguage.g:3960:2: ( rule__VLSUnaryInfix__RightAssignment_1_1 )
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getRightAssignment_1_1()); 
-            // InternalVampireLanguage.g:3907:2: ( rule__VLSUnaryInfix__RightAssignment_1_1 )
-            // InternalVampireLanguage.g:3907:3: rule__VLSUnaryInfix__RightAssignment_1_1
+            // InternalVampireLanguage.g:3961:2: ( rule__VLSUnaryInfix__RightAssignment_1_1 )
+            // InternalVampireLanguage.g:3961:3: rule__VLSUnaryInfix__RightAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__RightAssignment_1_1();
@@ -12290,16 +12446,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_0__0"
-    // InternalVampireLanguage.g:3916:1: rule__VLSUnaryInfix__Group_1_0_0__0 : rule__VLSUnaryInfix__Group_1_0_0__0__Impl rule__VLSUnaryInfix__Group_1_0_0__1 ;
+    // InternalVampireLanguage.g:3970:1: rule__VLSUnaryInfix__Group_1_0_0__0 : rule__VLSUnaryInfix__Group_1_0_0__0__Impl rule__VLSUnaryInfix__Group_1_0_0__1 ;
     public final void rule__VLSUnaryInfix__Group_1_0_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3920:1: ( rule__VLSUnaryInfix__Group_1_0_0__0__Impl rule__VLSUnaryInfix__Group_1_0_0__1 )
-            // InternalVampireLanguage.g:3921:2: rule__VLSUnaryInfix__Group_1_0_0__0__Impl rule__VLSUnaryInfix__Group_1_0_0__1
+            // InternalVampireLanguage.g:3974:1: ( rule__VLSUnaryInfix__Group_1_0_0__0__Impl rule__VLSUnaryInfix__Group_1_0_0__1 )
+            // InternalVampireLanguage.g:3975:2: rule__VLSUnaryInfix__Group_1_0_0__0__Impl rule__VLSUnaryInfix__Group_1_0_0__1
             {
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_38);
             rule__VLSUnaryInfix__Group_1_0_0__0__Impl();
 
             state._fsp--;
@@ -12328,21 +12484,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_0__0__Impl"
-    // InternalVampireLanguage.g:3928:1: rule__VLSUnaryInfix__Group_1_0_0__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:3982:1: rule__VLSUnaryInfix__Group_1_0_0__0__Impl : ( () ) ;
     public final void rule__VLSUnaryInfix__Group_1_0_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3932:1: ( ( () ) )
-            // InternalVampireLanguage.g:3933:1: ( () )
+            // InternalVampireLanguage.g:3986:1: ( ( () ) )
+            // InternalVampireLanguage.g:3987:1: ( () )
             {
-            // InternalVampireLanguage.g:3933:1: ( () )
-            // InternalVampireLanguage.g:3934:2: ()
+            // InternalVampireLanguage.g:3987:1: ( () )
+            // InternalVampireLanguage.g:3988:2: ()
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getVLSInequalityLeftAction_1_0_0_0()); 
-            // InternalVampireLanguage.g:3935:2: ()
-            // InternalVampireLanguage.g:3935:3: 
+            // InternalVampireLanguage.g:3989:2: ()
+            // InternalVampireLanguage.g:3989:3: 
             {
             }
 
@@ -12365,14 +12521,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_0__1"
-    // InternalVampireLanguage.g:3943:1: rule__VLSUnaryInfix__Group_1_0_0__1 : rule__VLSUnaryInfix__Group_1_0_0__1__Impl ;
+    // InternalVampireLanguage.g:3997:1: rule__VLSUnaryInfix__Group_1_0_0__1 : rule__VLSUnaryInfix__Group_1_0_0__1__Impl ;
     public final void rule__VLSUnaryInfix__Group_1_0_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3947:1: ( rule__VLSUnaryInfix__Group_1_0_0__1__Impl )
-            // InternalVampireLanguage.g:3948:2: rule__VLSUnaryInfix__Group_1_0_0__1__Impl
+            // InternalVampireLanguage.g:4001:1: ( rule__VLSUnaryInfix__Group_1_0_0__1__Impl )
+            // InternalVampireLanguage.g:4002:2: rule__VLSUnaryInfix__Group_1_0_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__Group_1_0_0__1__Impl();
@@ -12398,20 +12554,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_0__1__Impl"
-    // InternalVampireLanguage.g:3954:1: rule__VLSUnaryInfix__Group_1_0_0__1__Impl : ( '!=' ) ;
+    // InternalVampireLanguage.g:4008:1: rule__VLSUnaryInfix__Group_1_0_0__1__Impl : ( '!=' ) ;
     public final void rule__VLSUnaryInfix__Group_1_0_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3958:1: ( ( '!=' ) )
-            // InternalVampireLanguage.g:3959:1: ( '!=' )
+            // InternalVampireLanguage.g:4012:1: ( ( '!=' ) )
+            // InternalVampireLanguage.g:4013:1: ( '!=' )
             {
-            // InternalVampireLanguage.g:3959:1: ( '!=' )
-            // InternalVampireLanguage.g:3960:2: '!='
+            // InternalVampireLanguage.g:4013:1: ( '!=' )
+            // InternalVampireLanguage.g:4014:2: '!='
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getExclamationMarkEqualsSignKeyword_1_0_0_1()); 
-            match(input,63,FOLLOW_2); 
+            match(input,64,FOLLOW_2); 
              after(grammarAccess.getVLSUnaryInfixAccess().getExclamationMarkEqualsSignKeyword_1_0_0_1()); 
 
             }
@@ -12435,16 +12591,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_1__0"
-    // InternalVampireLanguage.g:3970:1: rule__VLSUnaryInfix__Group_1_0_1__0 : rule__VLSUnaryInfix__Group_1_0_1__0__Impl rule__VLSUnaryInfix__Group_1_0_1__1 ;
+    // InternalVampireLanguage.g:4024:1: rule__VLSUnaryInfix__Group_1_0_1__0 : rule__VLSUnaryInfix__Group_1_0_1__0__Impl rule__VLSUnaryInfix__Group_1_0_1__1 ;
     public final void rule__VLSUnaryInfix__Group_1_0_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3974:1: ( rule__VLSUnaryInfix__Group_1_0_1__0__Impl rule__VLSUnaryInfix__Group_1_0_1__1 )
-            // InternalVampireLanguage.g:3975:2: rule__VLSUnaryInfix__Group_1_0_1__0__Impl rule__VLSUnaryInfix__Group_1_0_1__1
+            // InternalVampireLanguage.g:4028:1: ( rule__VLSUnaryInfix__Group_1_0_1__0__Impl rule__VLSUnaryInfix__Group_1_0_1__1 )
+            // InternalVampireLanguage.g:4029:2: rule__VLSUnaryInfix__Group_1_0_1__0__Impl rule__VLSUnaryInfix__Group_1_0_1__1
             {
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_39);
             rule__VLSUnaryInfix__Group_1_0_1__0__Impl();
 
             state._fsp--;
@@ -12473,21 +12629,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_1__0__Impl"
-    // InternalVampireLanguage.g:3982:1: rule__VLSUnaryInfix__Group_1_0_1__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4036:1: rule__VLSUnaryInfix__Group_1_0_1__0__Impl : ( () ) ;
     public final void rule__VLSUnaryInfix__Group_1_0_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:3986:1: ( ( () ) )
-            // InternalVampireLanguage.g:3987:1: ( () )
+            // InternalVampireLanguage.g:4040:1: ( ( () ) )
+            // InternalVampireLanguage.g:4041:1: ( () )
             {
-            // InternalVampireLanguage.g:3987:1: ( () )
-            // InternalVampireLanguage.g:3988:2: ()
+            // InternalVampireLanguage.g:4041:1: ( () )
+            // InternalVampireLanguage.g:4042:2: ()
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getVLSEqualityLeftAction_1_0_1_0()); 
-            // InternalVampireLanguage.g:3989:2: ()
-            // InternalVampireLanguage.g:3989:3: 
+            // InternalVampireLanguage.g:4043:2: ()
+            // InternalVampireLanguage.g:4043:3: 
             {
             }
 
@@ -12510,14 +12666,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_1__1"
-    // InternalVampireLanguage.g:3997:1: rule__VLSUnaryInfix__Group_1_0_1__1 : rule__VLSUnaryInfix__Group_1_0_1__1__Impl ;
+    // InternalVampireLanguage.g:4051:1: rule__VLSUnaryInfix__Group_1_0_1__1 : rule__VLSUnaryInfix__Group_1_0_1__1__Impl ;
     public final void rule__VLSUnaryInfix__Group_1_0_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4001:1: ( rule__VLSUnaryInfix__Group_1_0_1__1__Impl )
-            // InternalVampireLanguage.g:4002:2: rule__VLSUnaryInfix__Group_1_0_1__1__Impl
+            // InternalVampireLanguage.g:4055:1: ( rule__VLSUnaryInfix__Group_1_0_1__1__Impl )
+            // InternalVampireLanguage.g:4056:2: rule__VLSUnaryInfix__Group_1_0_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__Group_1_0_1__1__Impl();
@@ -12543,20 +12699,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_1__1__Impl"
-    // InternalVampireLanguage.g:4008:1: rule__VLSUnaryInfix__Group_1_0_1__1__Impl : ( '=' ) ;
+    // InternalVampireLanguage.g:4062:1: rule__VLSUnaryInfix__Group_1_0_1__1__Impl : ( '=' ) ;
     public final void rule__VLSUnaryInfix__Group_1_0_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4012:1: ( ( '=' ) )
-            // InternalVampireLanguage.g:4013:1: ( '=' )
+            // InternalVampireLanguage.g:4066:1: ( ( '=' ) )
+            // InternalVampireLanguage.g:4067:1: ( '=' )
             {
-            // InternalVampireLanguage.g:4013:1: ( '=' )
-            // InternalVampireLanguage.g:4014:2: '='
+            // InternalVampireLanguage.g:4067:1: ( '=' )
+            // InternalVampireLanguage.g:4068:2: '='
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getEqualsSignKeyword_1_0_1_1()); 
-            match(input,64,FOLLOW_2); 
+            match(input,65,FOLLOW_2); 
              after(grammarAccess.getVLSUnaryInfixAccess().getEqualsSignKeyword_1_0_1_1()); 
 
             }
@@ -12580,16 +12736,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_2__0"
-    // InternalVampireLanguage.g:4024:1: rule__VLSUnaryInfix__Group_1_0_2__0 : rule__VLSUnaryInfix__Group_1_0_2__0__Impl rule__VLSUnaryInfix__Group_1_0_2__1 ;
+    // InternalVampireLanguage.g:4078:1: rule__VLSUnaryInfix__Group_1_0_2__0 : rule__VLSUnaryInfix__Group_1_0_2__0__Impl rule__VLSUnaryInfix__Group_1_0_2__1 ;
     public final void rule__VLSUnaryInfix__Group_1_0_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4028:1: ( rule__VLSUnaryInfix__Group_1_0_2__0__Impl rule__VLSUnaryInfix__Group_1_0_2__1 )
-            // InternalVampireLanguage.g:4029:2: rule__VLSUnaryInfix__Group_1_0_2__0__Impl rule__VLSUnaryInfix__Group_1_0_2__1
+            // InternalVampireLanguage.g:4082:1: ( rule__VLSUnaryInfix__Group_1_0_2__0__Impl rule__VLSUnaryInfix__Group_1_0_2__1 )
+            // InternalVampireLanguage.g:4083:2: rule__VLSUnaryInfix__Group_1_0_2__0__Impl rule__VLSUnaryInfix__Group_1_0_2__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_36);
             rule__VLSUnaryInfix__Group_1_0_2__0__Impl();
 
             state._fsp--;
@@ -12618,21 +12774,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_2__0__Impl"
-    // InternalVampireLanguage.g:4036:1: rule__VLSUnaryInfix__Group_1_0_2__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4090:1: rule__VLSUnaryInfix__Group_1_0_2__0__Impl : ( () ) ;
     public final void rule__VLSUnaryInfix__Group_1_0_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4040:1: ( ( () ) )
-            // InternalVampireLanguage.g:4041:1: ( () )
+            // InternalVampireLanguage.g:4094:1: ( ( () ) )
+            // InternalVampireLanguage.g:4095:1: ( () )
             {
-            // InternalVampireLanguage.g:4041:1: ( () )
-            // InternalVampireLanguage.g:4042:2: ()
+            // InternalVampireLanguage.g:4095:1: ( () )
+            // InternalVampireLanguage.g:4096:2: ()
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getVLSAssignmentLeftAction_1_0_2_0()); 
-            // InternalVampireLanguage.g:4043:2: ()
-            // InternalVampireLanguage.g:4043:3: 
+            // InternalVampireLanguage.g:4097:2: ()
+            // InternalVampireLanguage.g:4097:3: 
             {
             }
 
@@ -12655,14 +12811,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_2__1"
-    // InternalVampireLanguage.g:4051:1: rule__VLSUnaryInfix__Group_1_0_2__1 : rule__VLSUnaryInfix__Group_1_0_2__1__Impl ;
+    // InternalVampireLanguage.g:4105:1: rule__VLSUnaryInfix__Group_1_0_2__1 : rule__VLSUnaryInfix__Group_1_0_2__1__Impl ;
     public final void rule__VLSUnaryInfix__Group_1_0_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4055:1: ( rule__VLSUnaryInfix__Group_1_0_2__1__Impl )
-            // InternalVampireLanguage.g:4056:2: rule__VLSUnaryInfix__Group_1_0_2__1__Impl
+            // InternalVampireLanguage.g:4109:1: ( rule__VLSUnaryInfix__Group_1_0_2__1__Impl )
+            // InternalVampireLanguage.g:4110:2: rule__VLSUnaryInfix__Group_1_0_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSUnaryInfix__Group_1_0_2__1__Impl();
@@ -12688,20 +12844,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__Group_1_0_2__1__Impl"
-    // InternalVampireLanguage.g:4062:1: rule__VLSUnaryInfix__Group_1_0_2__1__Impl : ( ':=' ) ;
+    // InternalVampireLanguage.g:4116:1: rule__VLSUnaryInfix__Group_1_0_2__1__Impl : ( ':=' ) ;
     public final void rule__VLSUnaryInfix__Group_1_0_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4066:1: ( ( ':=' ) )
-            // InternalVampireLanguage.g:4067:1: ( ':=' )
+            // InternalVampireLanguage.g:4120:1: ( ( ':=' ) )
+            // InternalVampireLanguage.g:4121:1: ( ':=' )
             {
-            // InternalVampireLanguage.g:4067:1: ( ':=' )
-            // InternalVampireLanguage.g:4068:2: ':='
+            // InternalVampireLanguage.g:4121:1: ( ':=' )
+            // InternalVampireLanguage.g:4122:2: ':='
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getColonEqualsSignKeyword_1_0_2_1()); 
-            match(input,65,FOLLOW_2); 
+            match(input,66,FOLLOW_2); 
              after(grammarAccess.getVLSUnaryInfixAccess().getColonEqualsSignKeyword_1_0_2_1()); 
 
             }
@@ -12725,16 +12881,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_0__0"
-    // InternalVampireLanguage.g:4078:1: rule__VLSAtomicConstant__Group_0__0 : rule__VLSAtomicConstant__Group_0__0__Impl rule__VLSAtomicConstant__Group_0__1 ;
+    // InternalVampireLanguage.g:4132:1: rule__VLSAtomicConstant__Group_0__0 : rule__VLSAtomicConstant__Group_0__0__Impl rule__VLSAtomicConstant__Group_0__1 ;
     public final void rule__VLSAtomicConstant__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4082:1: ( rule__VLSAtomicConstant__Group_0__0__Impl rule__VLSAtomicConstant__Group_0__1 )
-            // InternalVampireLanguage.g:4083:2: rule__VLSAtomicConstant__Group_0__0__Impl rule__VLSAtomicConstant__Group_0__1
+            // InternalVampireLanguage.g:4136:1: ( rule__VLSAtomicConstant__Group_0__0__Impl rule__VLSAtomicConstant__Group_0__1 )
+            // InternalVampireLanguage.g:4137:2: rule__VLSAtomicConstant__Group_0__0__Impl rule__VLSAtomicConstant__Group_0__1
             {
-            pushFollow(FOLLOW_39);
+            pushFollow(FOLLOW_40);
             rule__VLSAtomicConstant__Group_0__0__Impl();
 
             state._fsp--;
@@ -12763,21 +12919,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_0__0__Impl"
-    // InternalVampireLanguage.g:4090:1: rule__VLSAtomicConstant__Group_0__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4144:1: rule__VLSAtomicConstant__Group_0__0__Impl : ( () ) ;
     public final void rule__VLSAtomicConstant__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4094:1: ( ( () ) )
-            // InternalVampireLanguage.g:4095:1: ( () )
+            // InternalVampireLanguage.g:4148:1: ( ( () ) )
+            // InternalVampireLanguage.g:4149:1: ( () )
             {
-            // InternalVampireLanguage.g:4095:1: ( () )
-            // InternalVampireLanguage.g:4096:2: ()
+            // InternalVampireLanguage.g:4149:1: ( () )
+            // InternalVampireLanguage.g:4150:2: ()
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getVLSConstantAction_0_0()); 
-            // InternalVampireLanguage.g:4097:2: ()
-            // InternalVampireLanguage.g:4097:3: 
+            // InternalVampireLanguage.g:4151:2: ()
+            // InternalVampireLanguage.g:4151:3: 
             {
             }
 
@@ -12800,14 +12956,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_0__1"
-    // InternalVampireLanguage.g:4105:1: rule__VLSAtomicConstant__Group_0__1 : rule__VLSAtomicConstant__Group_0__1__Impl ;
+    // InternalVampireLanguage.g:4159:1: rule__VLSAtomicConstant__Group_0__1 : rule__VLSAtomicConstant__Group_0__1__Impl ;
     public final void rule__VLSAtomicConstant__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4109:1: ( rule__VLSAtomicConstant__Group_0__1__Impl )
-            // InternalVampireLanguage.g:4110:2: rule__VLSAtomicConstant__Group_0__1__Impl
+            // InternalVampireLanguage.g:4163:1: ( rule__VLSAtomicConstant__Group_0__1__Impl )
+            // InternalVampireLanguage.g:4164:2: rule__VLSAtomicConstant__Group_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicConstant__Group_0__1__Impl();
@@ -12833,21 +12989,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_0__1__Impl"
-    // InternalVampireLanguage.g:4116:1: rule__VLSAtomicConstant__Group_0__1__Impl : ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) ) ;
+    // InternalVampireLanguage.g:4170:1: rule__VLSAtomicConstant__Group_0__1__Impl : ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) ) ;
     public final void rule__VLSAtomicConstant__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4120:1: ( ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) ) )
-            // InternalVampireLanguage.g:4121:1: ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) )
+            // InternalVampireLanguage.g:4174:1: ( ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) ) )
+            // InternalVampireLanguage.g:4175:1: ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) )
             {
-            // InternalVampireLanguage.g:4121:1: ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) )
-            // InternalVampireLanguage.g:4122:2: ( rule__VLSAtomicConstant__NameAssignment_0_1 )
+            // InternalVampireLanguage.g:4175:1: ( ( rule__VLSAtomicConstant__NameAssignment_0_1 ) )
+            // InternalVampireLanguage.g:4176:2: ( rule__VLSAtomicConstant__NameAssignment_0_1 )
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getNameAssignment_0_1()); 
-            // InternalVampireLanguage.g:4123:2: ( rule__VLSAtomicConstant__NameAssignment_0_1 )
-            // InternalVampireLanguage.g:4123:3: rule__VLSAtomicConstant__NameAssignment_0_1
+            // InternalVampireLanguage.g:4177:2: ( rule__VLSAtomicConstant__NameAssignment_0_1 )
+            // InternalVampireLanguage.g:4177:3: rule__VLSAtomicConstant__NameAssignment_0_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicConstant__NameAssignment_0_1();
@@ -12880,16 +13036,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_1__0"
-    // InternalVampireLanguage.g:4132:1: rule__VLSAtomicConstant__Group_1__0 : rule__VLSAtomicConstant__Group_1__0__Impl rule__VLSAtomicConstant__Group_1__1 ;
+    // InternalVampireLanguage.g:4186:1: rule__VLSAtomicConstant__Group_1__0 : rule__VLSAtomicConstant__Group_1__0__Impl rule__VLSAtomicConstant__Group_1__1 ;
     public final void rule__VLSAtomicConstant__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4136:1: ( rule__VLSAtomicConstant__Group_1__0__Impl rule__VLSAtomicConstant__Group_1__1 )
-            // InternalVampireLanguage.g:4137:2: rule__VLSAtomicConstant__Group_1__0__Impl rule__VLSAtomicConstant__Group_1__1
+            // InternalVampireLanguage.g:4190:1: ( rule__VLSAtomicConstant__Group_1__0__Impl rule__VLSAtomicConstant__Group_1__1 )
+            // InternalVampireLanguage.g:4191:2: rule__VLSAtomicConstant__Group_1__0__Impl rule__VLSAtomicConstant__Group_1__1
             {
-            pushFollow(FOLLOW_40);
+            pushFollow(FOLLOW_41);
             rule__VLSAtomicConstant__Group_1__0__Impl();
 
             state._fsp--;
@@ -12918,21 +13074,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_1__0__Impl"
-    // InternalVampireLanguage.g:4144:1: rule__VLSAtomicConstant__Group_1__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4198:1: rule__VLSAtomicConstant__Group_1__0__Impl : ( () ) ;
     public final void rule__VLSAtomicConstant__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4148:1: ( ( () ) )
-            // InternalVampireLanguage.g:4149:1: ( () )
+            // InternalVampireLanguage.g:4202:1: ( ( () ) )
+            // InternalVampireLanguage.g:4203:1: ( () )
             {
-            // InternalVampireLanguage.g:4149:1: ( () )
-            // InternalVampireLanguage.g:4150:2: ()
+            // InternalVampireLanguage.g:4203:1: ( () )
+            // InternalVampireLanguage.g:4204:2: ()
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getVLSTrueAction_1_0()); 
-            // InternalVampireLanguage.g:4151:2: ()
-            // InternalVampireLanguage.g:4151:3: 
+            // InternalVampireLanguage.g:4205:2: ()
+            // InternalVampireLanguage.g:4205:3: 
             {
             }
 
@@ -12955,14 +13111,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_1__1"
-    // InternalVampireLanguage.g:4159:1: rule__VLSAtomicConstant__Group_1__1 : rule__VLSAtomicConstant__Group_1__1__Impl ;
+    // InternalVampireLanguage.g:4213:1: rule__VLSAtomicConstant__Group_1__1 : rule__VLSAtomicConstant__Group_1__1__Impl ;
     public final void rule__VLSAtomicConstant__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4163:1: ( rule__VLSAtomicConstant__Group_1__1__Impl )
-            // InternalVampireLanguage.g:4164:2: rule__VLSAtomicConstant__Group_1__1__Impl
+            // InternalVampireLanguage.g:4217:1: ( rule__VLSAtomicConstant__Group_1__1__Impl )
+            // InternalVampireLanguage.g:4218:2: rule__VLSAtomicConstant__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicConstant__Group_1__1__Impl();
@@ -12988,20 +13144,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_1__1__Impl"
-    // InternalVampireLanguage.g:4170:1: rule__VLSAtomicConstant__Group_1__1__Impl : ( '$true' ) ;
+    // InternalVampireLanguage.g:4224:1: rule__VLSAtomicConstant__Group_1__1__Impl : ( '$true' ) ;
     public final void rule__VLSAtomicConstant__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4174:1: ( ( '$true' ) )
-            // InternalVampireLanguage.g:4175:1: ( '$true' )
+            // InternalVampireLanguage.g:4228:1: ( ( '$true' ) )
+            // InternalVampireLanguage.g:4229:1: ( '$true' )
             {
-            // InternalVampireLanguage.g:4175:1: ( '$true' )
-            // InternalVampireLanguage.g:4176:2: '$true'
+            // InternalVampireLanguage.g:4229:1: ( '$true' )
+            // InternalVampireLanguage.g:4230:2: '$true'
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getTrueKeyword_1_1()); 
-            match(input,66,FOLLOW_2); 
+            match(input,67,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicConstantAccess().getTrueKeyword_1_1()); 
 
             }
@@ -13025,16 +13181,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_2__0"
-    // InternalVampireLanguage.g:4186:1: rule__VLSAtomicConstant__Group_2__0 : rule__VLSAtomicConstant__Group_2__0__Impl rule__VLSAtomicConstant__Group_2__1 ;
+    // InternalVampireLanguage.g:4240:1: rule__VLSAtomicConstant__Group_2__0 : rule__VLSAtomicConstant__Group_2__0__Impl rule__VLSAtomicConstant__Group_2__1 ;
     public final void rule__VLSAtomicConstant__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4190:1: ( rule__VLSAtomicConstant__Group_2__0__Impl rule__VLSAtomicConstant__Group_2__1 )
-            // InternalVampireLanguage.g:4191:2: rule__VLSAtomicConstant__Group_2__0__Impl rule__VLSAtomicConstant__Group_2__1
+            // InternalVampireLanguage.g:4244:1: ( rule__VLSAtomicConstant__Group_2__0__Impl rule__VLSAtomicConstant__Group_2__1 )
+            // InternalVampireLanguage.g:4245:2: rule__VLSAtomicConstant__Group_2__0__Impl rule__VLSAtomicConstant__Group_2__1
             {
-            pushFollow(FOLLOW_41);
+            pushFollow(FOLLOW_42);
             rule__VLSAtomicConstant__Group_2__0__Impl();
 
             state._fsp--;
@@ -13063,21 +13219,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_2__0__Impl"
-    // InternalVampireLanguage.g:4198:1: rule__VLSAtomicConstant__Group_2__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4252:1: rule__VLSAtomicConstant__Group_2__0__Impl : ( () ) ;
     public final void rule__VLSAtomicConstant__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4202:1: ( ( () ) )
-            // InternalVampireLanguage.g:4203:1: ( () )
+            // InternalVampireLanguage.g:4256:1: ( ( () ) )
+            // InternalVampireLanguage.g:4257:1: ( () )
             {
-            // InternalVampireLanguage.g:4203:1: ( () )
-            // InternalVampireLanguage.g:4204:2: ()
+            // InternalVampireLanguage.g:4257:1: ( () )
+            // InternalVampireLanguage.g:4258:2: ()
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getVLSFalseAction_2_0()); 
-            // InternalVampireLanguage.g:4205:2: ()
-            // InternalVampireLanguage.g:4205:3: 
+            // InternalVampireLanguage.g:4259:2: ()
+            // InternalVampireLanguage.g:4259:3: 
             {
             }
 
@@ -13100,14 +13256,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_2__1"
-    // InternalVampireLanguage.g:4213:1: rule__VLSAtomicConstant__Group_2__1 : rule__VLSAtomicConstant__Group_2__1__Impl ;
+    // InternalVampireLanguage.g:4267:1: rule__VLSAtomicConstant__Group_2__1 : rule__VLSAtomicConstant__Group_2__1__Impl ;
     public final void rule__VLSAtomicConstant__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4217:1: ( rule__VLSAtomicConstant__Group_2__1__Impl )
-            // InternalVampireLanguage.g:4218:2: rule__VLSAtomicConstant__Group_2__1__Impl
+            // InternalVampireLanguage.g:4271:1: ( rule__VLSAtomicConstant__Group_2__1__Impl )
+            // InternalVampireLanguage.g:4272:2: rule__VLSAtomicConstant__Group_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicConstant__Group_2__1__Impl();
@@ -13133,20 +13289,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__Group_2__1__Impl"
-    // InternalVampireLanguage.g:4224:1: rule__VLSAtomicConstant__Group_2__1__Impl : ( '$false' ) ;
+    // InternalVampireLanguage.g:4278:1: rule__VLSAtomicConstant__Group_2__1__Impl : ( '$false' ) ;
     public final void rule__VLSAtomicConstant__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4228:1: ( ( '$false' ) )
-            // InternalVampireLanguage.g:4229:1: ( '$false' )
+            // InternalVampireLanguage.g:4282:1: ( ( '$false' ) )
+            // InternalVampireLanguage.g:4283:1: ( '$false' )
             {
-            // InternalVampireLanguage.g:4229:1: ( '$false' )
-            // InternalVampireLanguage.g:4230:2: '$false'
+            // InternalVampireLanguage.g:4283:1: ( '$false' )
+            // InternalVampireLanguage.g:4284:2: '$false'
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getFalseKeyword_2_1()); 
-            match(input,67,FOLLOW_2); 
+            match(input,68,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicConstantAccess().getFalseKeyword_2_1()); 
 
             }
@@ -13170,16 +13326,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0__0"
-    // InternalVampireLanguage.g:4240:1: rule__VLSAtomicFunction__Group_0__0 : rule__VLSAtomicFunction__Group_0__0__Impl rule__VLSAtomicFunction__Group_0__1 ;
+    // InternalVampireLanguage.g:4294:1: rule__VLSAtomicFunction__Group_0__0 : rule__VLSAtomicFunction__Group_0__0__Impl rule__VLSAtomicFunction__Group_0__1 ;
     public final void rule__VLSAtomicFunction__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4244:1: ( rule__VLSAtomicFunction__Group_0__0__Impl rule__VLSAtomicFunction__Group_0__1 )
-            // InternalVampireLanguage.g:4245:2: rule__VLSAtomicFunction__Group_0__0__Impl rule__VLSAtomicFunction__Group_0__1
+            // InternalVampireLanguage.g:4298:1: ( rule__VLSAtomicFunction__Group_0__0__Impl rule__VLSAtomicFunction__Group_0__1 )
+            // InternalVampireLanguage.g:4299:2: rule__VLSAtomicFunction__Group_0__0__Impl rule__VLSAtomicFunction__Group_0__1
             {
-            pushFollow(FOLLOW_39);
+            pushFollow(FOLLOW_40);
             rule__VLSAtomicFunction__Group_0__0__Impl();
 
             state._fsp--;
@@ -13208,21 +13364,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0__0__Impl"
-    // InternalVampireLanguage.g:4252:1: rule__VLSAtomicFunction__Group_0__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4306:1: rule__VLSAtomicFunction__Group_0__0__Impl : ( () ) ;
     public final void rule__VLSAtomicFunction__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4256:1: ( ( () ) )
-            // InternalVampireLanguage.g:4257:1: ( () )
+            // InternalVampireLanguage.g:4310:1: ( ( () ) )
+            // InternalVampireLanguage.g:4311:1: ( () )
             {
-            // InternalVampireLanguage.g:4257:1: ( () )
-            // InternalVampireLanguage.g:4258:2: ()
+            // InternalVampireLanguage.g:4311:1: ( () )
+            // InternalVampireLanguage.g:4312:2: ()
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getVLSFunctionAction_0_0()); 
-            // InternalVampireLanguage.g:4259:2: ()
-            // InternalVampireLanguage.g:4259:3: 
+            // InternalVampireLanguage.g:4313:2: ()
+            // InternalVampireLanguage.g:4313:3: 
             {
             }
 
@@ -13245,16 +13401,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0__1"
-    // InternalVampireLanguage.g:4267:1: rule__VLSAtomicFunction__Group_0__1 : rule__VLSAtomicFunction__Group_0__1__Impl rule__VLSAtomicFunction__Group_0__2 ;
+    // InternalVampireLanguage.g:4321:1: rule__VLSAtomicFunction__Group_0__1 : rule__VLSAtomicFunction__Group_0__1__Impl rule__VLSAtomicFunction__Group_0__2 ;
     public final void rule__VLSAtomicFunction__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4271:1: ( rule__VLSAtomicFunction__Group_0__1__Impl rule__VLSAtomicFunction__Group_0__2 )
-            // InternalVampireLanguage.g:4272:2: rule__VLSAtomicFunction__Group_0__1__Impl rule__VLSAtomicFunction__Group_0__2
+            // InternalVampireLanguage.g:4325:1: ( rule__VLSAtomicFunction__Group_0__1__Impl rule__VLSAtomicFunction__Group_0__2 )
+            // InternalVampireLanguage.g:4326:2: rule__VLSAtomicFunction__Group_0__1__Impl rule__VLSAtomicFunction__Group_0__2
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_12);
             rule__VLSAtomicFunction__Group_0__1__Impl();
 
             state._fsp--;
@@ -13283,21 +13439,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0__1__Impl"
-    // InternalVampireLanguage.g:4279:1: rule__VLSAtomicFunction__Group_0__1__Impl : ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) ) ;
+    // InternalVampireLanguage.g:4333:1: rule__VLSAtomicFunction__Group_0__1__Impl : ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) ) ;
     public final void rule__VLSAtomicFunction__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4283:1: ( ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) ) )
-            // InternalVampireLanguage.g:4284:1: ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) )
+            // InternalVampireLanguage.g:4337:1: ( ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) ) )
+            // InternalVampireLanguage.g:4338:1: ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) )
             {
-            // InternalVampireLanguage.g:4284:1: ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) )
-            // InternalVampireLanguage.g:4285:2: ( rule__VLSAtomicFunction__ConstantAssignment_0_1 )
+            // InternalVampireLanguage.g:4338:1: ( ( rule__VLSAtomicFunction__ConstantAssignment_0_1 ) )
+            // InternalVampireLanguage.g:4339:2: ( rule__VLSAtomicFunction__ConstantAssignment_0_1 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getConstantAssignment_0_1()); 
-            // InternalVampireLanguage.g:4286:2: ( rule__VLSAtomicFunction__ConstantAssignment_0_1 )
-            // InternalVampireLanguage.g:4286:3: rule__VLSAtomicFunction__ConstantAssignment_0_1
+            // InternalVampireLanguage.g:4340:2: ( rule__VLSAtomicFunction__ConstantAssignment_0_1 )
+            // InternalVampireLanguage.g:4340:3: rule__VLSAtomicFunction__ConstantAssignment_0_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__ConstantAssignment_0_1();
@@ -13330,14 +13486,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0__2"
-    // InternalVampireLanguage.g:4294:1: rule__VLSAtomicFunction__Group_0__2 : rule__VLSAtomicFunction__Group_0__2__Impl ;
+    // InternalVampireLanguage.g:4348:1: rule__VLSAtomicFunction__Group_0__2 : rule__VLSAtomicFunction__Group_0__2__Impl ;
     public final void rule__VLSAtomicFunction__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4298:1: ( rule__VLSAtomicFunction__Group_0__2__Impl )
-            // InternalVampireLanguage.g:4299:2: rule__VLSAtomicFunction__Group_0__2__Impl
+            // InternalVampireLanguage.g:4352:1: ( rule__VLSAtomicFunction__Group_0__2__Impl )
+            // InternalVampireLanguage.g:4353:2: rule__VLSAtomicFunction__Group_0__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__Group_0__2__Impl();
@@ -13363,21 +13519,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0__2__Impl"
-    // InternalVampireLanguage.g:4305:1: rule__VLSAtomicFunction__Group_0__2__Impl : ( ( rule__VLSAtomicFunction__Group_0_2__0 ) ) ;
+    // InternalVampireLanguage.g:4359:1: rule__VLSAtomicFunction__Group_0__2__Impl : ( ( rule__VLSAtomicFunction__Group_0_2__0 ) ) ;
     public final void rule__VLSAtomicFunction__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4309:1: ( ( ( rule__VLSAtomicFunction__Group_0_2__0 ) ) )
-            // InternalVampireLanguage.g:4310:1: ( ( rule__VLSAtomicFunction__Group_0_2__0 ) )
+            // InternalVampireLanguage.g:4363:1: ( ( ( rule__VLSAtomicFunction__Group_0_2__0 ) ) )
+            // InternalVampireLanguage.g:4364:1: ( ( rule__VLSAtomicFunction__Group_0_2__0 ) )
             {
-            // InternalVampireLanguage.g:4310:1: ( ( rule__VLSAtomicFunction__Group_0_2__0 ) )
-            // InternalVampireLanguage.g:4311:2: ( rule__VLSAtomicFunction__Group_0_2__0 )
+            // InternalVampireLanguage.g:4364:1: ( ( rule__VLSAtomicFunction__Group_0_2__0 ) )
+            // InternalVampireLanguage.g:4365:2: ( rule__VLSAtomicFunction__Group_0_2__0 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getGroup_0_2()); 
-            // InternalVampireLanguage.g:4312:2: ( rule__VLSAtomicFunction__Group_0_2__0 )
-            // InternalVampireLanguage.g:4312:3: rule__VLSAtomicFunction__Group_0_2__0
+            // InternalVampireLanguage.g:4366:2: ( rule__VLSAtomicFunction__Group_0_2__0 )
+            // InternalVampireLanguage.g:4366:3: rule__VLSAtomicFunction__Group_0_2__0
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__Group_0_2__0();
@@ -13410,16 +13566,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__0"
-    // InternalVampireLanguage.g:4321:1: rule__VLSAtomicFunction__Group_0_2__0 : rule__VLSAtomicFunction__Group_0_2__0__Impl rule__VLSAtomicFunction__Group_0_2__1 ;
+    // InternalVampireLanguage.g:4375:1: rule__VLSAtomicFunction__Group_0_2__0 : rule__VLSAtomicFunction__Group_0_2__0__Impl rule__VLSAtomicFunction__Group_0_2__1 ;
     public final void rule__VLSAtomicFunction__Group_0_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4325:1: ( rule__VLSAtomicFunction__Group_0_2__0__Impl rule__VLSAtomicFunction__Group_0_2__1 )
-            // InternalVampireLanguage.g:4326:2: rule__VLSAtomicFunction__Group_0_2__0__Impl rule__VLSAtomicFunction__Group_0_2__1
+            // InternalVampireLanguage.g:4379:1: ( rule__VLSAtomicFunction__Group_0_2__0__Impl rule__VLSAtomicFunction__Group_0_2__1 )
+            // InternalVampireLanguage.g:4380:2: rule__VLSAtomicFunction__Group_0_2__0__Impl rule__VLSAtomicFunction__Group_0_2__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSAtomicFunction__Group_0_2__0__Impl();
 
             state._fsp--;
@@ -13448,20 +13604,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__0__Impl"
-    // InternalVampireLanguage.g:4333:1: rule__VLSAtomicFunction__Group_0_2__0__Impl : ( '(' ) ;
+    // InternalVampireLanguage.g:4387:1: rule__VLSAtomicFunction__Group_0_2__0__Impl : ( '(' ) ;
     public final void rule__VLSAtomicFunction__Group_0_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4337:1: ( ( '(' ) )
-            // InternalVampireLanguage.g:4338:1: ( '(' )
+            // InternalVampireLanguage.g:4391:1: ( ( '(' ) )
+            // InternalVampireLanguage.g:4392:1: ( '(' )
             {
-            // InternalVampireLanguage.g:4338:1: ( '(' )
-            // InternalVampireLanguage.g:4339:2: '('
+            // InternalVampireLanguage.g:4392:1: ( '(' )
+            // InternalVampireLanguage.g:4393:2: '('
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getLeftParenthesisKeyword_0_2_0()); 
-            match(input,47,FOLLOW_2); 
+            match(input,48,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicFunctionAccess().getLeftParenthesisKeyword_0_2_0()); 
 
             }
@@ -13485,16 +13641,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__1"
-    // InternalVampireLanguage.g:4348:1: rule__VLSAtomicFunction__Group_0_2__1 : rule__VLSAtomicFunction__Group_0_2__1__Impl rule__VLSAtomicFunction__Group_0_2__2 ;
+    // InternalVampireLanguage.g:4402:1: rule__VLSAtomicFunction__Group_0_2__1 : rule__VLSAtomicFunction__Group_0_2__1__Impl rule__VLSAtomicFunction__Group_0_2__2 ;
     public final void rule__VLSAtomicFunction__Group_0_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4352:1: ( rule__VLSAtomicFunction__Group_0_2__1__Impl rule__VLSAtomicFunction__Group_0_2__2 )
-            // InternalVampireLanguage.g:4353:2: rule__VLSAtomicFunction__Group_0_2__1__Impl rule__VLSAtomicFunction__Group_0_2__2
+            // InternalVampireLanguage.g:4406:1: ( rule__VLSAtomicFunction__Group_0_2__1__Impl rule__VLSAtomicFunction__Group_0_2__2 )
+            // InternalVampireLanguage.g:4407:2: rule__VLSAtomicFunction__Group_0_2__1__Impl rule__VLSAtomicFunction__Group_0_2__2
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__VLSAtomicFunction__Group_0_2__1__Impl();
 
             state._fsp--;
@@ -13523,21 +13679,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__1__Impl"
-    // InternalVampireLanguage.g:4360:1: rule__VLSAtomicFunction__Group_0_2__1__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) ) ;
+    // InternalVampireLanguage.g:4414:1: rule__VLSAtomicFunction__Group_0_2__1__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) ) ;
     public final void rule__VLSAtomicFunction__Group_0_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4364:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) ) )
-            // InternalVampireLanguage.g:4365:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) )
+            // InternalVampireLanguage.g:4418:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) ) )
+            // InternalVampireLanguage.g:4419:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) )
             {
-            // InternalVampireLanguage.g:4365:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) )
-            // InternalVampireLanguage.g:4366:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 )
+            // InternalVampireLanguage.g:4419:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 ) )
+            // InternalVampireLanguage.g:4420:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsAssignment_0_2_1()); 
-            // InternalVampireLanguage.g:4367:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 )
-            // InternalVampireLanguage.g:4367:3: rule__VLSAtomicFunction__TermsAssignment_0_2_1
+            // InternalVampireLanguage.g:4421:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_1 )
+            // InternalVampireLanguage.g:4421:3: rule__VLSAtomicFunction__TermsAssignment_0_2_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__TermsAssignment_0_2_1();
@@ -13570,16 +13726,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__2"
-    // InternalVampireLanguage.g:4375:1: rule__VLSAtomicFunction__Group_0_2__2 : rule__VLSAtomicFunction__Group_0_2__2__Impl rule__VLSAtomicFunction__Group_0_2__3 ;
+    // InternalVampireLanguage.g:4429:1: rule__VLSAtomicFunction__Group_0_2__2 : rule__VLSAtomicFunction__Group_0_2__2__Impl rule__VLSAtomicFunction__Group_0_2__3 ;
     public final void rule__VLSAtomicFunction__Group_0_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4379:1: ( rule__VLSAtomicFunction__Group_0_2__2__Impl rule__VLSAtomicFunction__Group_0_2__3 )
-            // InternalVampireLanguage.g:4380:2: rule__VLSAtomicFunction__Group_0_2__2__Impl rule__VLSAtomicFunction__Group_0_2__3
+            // InternalVampireLanguage.g:4433:1: ( rule__VLSAtomicFunction__Group_0_2__2__Impl rule__VLSAtomicFunction__Group_0_2__3 )
+            // InternalVampireLanguage.g:4434:2: rule__VLSAtomicFunction__Group_0_2__2__Impl rule__VLSAtomicFunction__Group_0_2__3
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__VLSAtomicFunction__Group_0_2__2__Impl();
 
             state._fsp--;
@@ -13608,20 +13764,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__2__Impl"
-    // InternalVampireLanguage.g:4387:1: rule__VLSAtomicFunction__Group_0_2__2__Impl : ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* ) ;
+    // InternalVampireLanguage.g:4441:1: rule__VLSAtomicFunction__Group_0_2__2__Impl : ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* ) ;
     public final void rule__VLSAtomicFunction__Group_0_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4391:1: ( ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* ) )
-            // InternalVampireLanguage.g:4392:1: ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* )
+            // InternalVampireLanguage.g:4445:1: ( ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* ) )
+            // InternalVampireLanguage.g:4446:1: ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* )
             {
-            // InternalVampireLanguage.g:4392:1: ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* )
-            // InternalVampireLanguage.g:4393:2: ( rule__VLSAtomicFunction__Group_0_2_2__0 )*
+            // InternalVampireLanguage.g:4446:1: ( ( rule__VLSAtomicFunction__Group_0_2_2__0 )* )
+            // InternalVampireLanguage.g:4447:2: ( rule__VLSAtomicFunction__Group_0_2_2__0 )*
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getGroup_0_2_2()); 
-            // InternalVampireLanguage.g:4394:2: ( rule__VLSAtomicFunction__Group_0_2_2__0 )*
+            // InternalVampireLanguage.g:4448:2: ( rule__VLSAtomicFunction__Group_0_2_2__0 )*
             loop33:
             do {
                 int alt33=2;
@@ -13634,7 +13790,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
                 switch (alt33) {
             	case 1 :
-            	    // InternalVampireLanguage.g:4394:3: rule__VLSAtomicFunction__Group_0_2_2__0
+            	    // InternalVampireLanguage.g:4448:3: rule__VLSAtomicFunction__Group_0_2_2__0
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__VLSAtomicFunction__Group_0_2_2__0();
@@ -13673,14 +13829,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__3"
-    // InternalVampireLanguage.g:4402:1: rule__VLSAtomicFunction__Group_0_2__3 : rule__VLSAtomicFunction__Group_0_2__3__Impl ;
+    // InternalVampireLanguage.g:4456:1: rule__VLSAtomicFunction__Group_0_2__3 : rule__VLSAtomicFunction__Group_0_2__3__Impl ;
     public final void rule__VLSAtomicFunction__Group_0_2__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4406:1: ( rule__VLSAtomicFunction__Group_0_2__3__Impl )
-            // InternalVampireLanguage.g:4407:2: rule__VLSAtomicFunction__Group_0_2__3__Impl
+            // InternalVampireLanguage.g:4460:1: ( rule__VLSAtomicFunction__Group_0_2__3__Impl )
+            // InternalVampireLanguage.g:4461:2: rule__VLSAtomicFunction__Group_0_2__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__Group_0_2__3__Impl();
@@ -13706,20 +13862,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2__3__Impl"
-    // InternalVampireLanguage.g:4413:1: rule__VLSAtomicFunction__Group_0_2__3__Impl : ( ')' ) ;
+    // InternalVampireLanguage.g:4467:1: rule__VLSAtomicFunction__Group_0_2__3__Impl : ( ')' ) ;
     public final void rule__VLSAtomicFunction__Group_0_2__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4417:1: ( ( ')' ) )
-            // InternalVampireLanguage.g:4418:1: ( ')' )
+            // InternalVampireLanguage.g:4471:1: ( ( ')' ) )
+            // InternalVampireLanguage.g:4472:1: ( ')' )
             {
-            // InternalVampireLanguage.g:4418:1: ( ')' )
-            // InternalVampireLanguage.g:4419:2: ')'
+            // InternalVampireLanguage.g:4472:1: ( ')' )
+            // InternalVampireLanguage.g:4473:2: ')'
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getRightParenthesisKeyword_0_2_3()); 
-            match(input,48,FOLLOW_2); 
+            match(input,49,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicFunctionAccess().getRightParenthesisKeyword_0_2_3()); 
 
             }
@@ -13743,16 +13899,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2_2__0"
-    // InternalVampireLanguage.g:4429:1: rule__VLSAtomicFunction__Group_0_2_2__0 : rule__VLSAtomicFunction__Group_0_2_2__0__Impl rule__VLSAtomicFunction__Group_0_2_2__1 ;
+    // InternalVampireLanguage.g:4483:1: rule__VLSAtomicFunction__Group_0_2_2__0 : rule__VLSAtomicFunction__Group_0_2_2__0__Impl rule__VLSAtomicFunction__Group_0_2_2__1 ;
     public final void rule__VLSAtomicFunction__Group_0_2_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4433:1: ( rule__VLSAtomicFunction__Group_0_2_2__0__Impl rule__VLSAtomicFunction__Group_0_2_2__1 )
-            // InternalVampireLanguage.g:4434:2: rule__VLSAtomicFunction__Group_0_2_2__0__Impl rule__VLSAtomicFunction__Group_0_2_2__1
+            // InternalVampireLanguage.g:4487:1: ( rule__VLSAtomicFunction__Group_0_2_2__0__Impl rule__VLSAtomicFunction__Group_0_2_2__1 )
+            // InternalVampireLanguage.g:4488:2: rule__VLSAtomicFunction__Group_0_2_2__0__Impl rule__VLSAtomicFunction__Group_0_2_2__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSAtomicFunction__Group_0_2_2__0__Impl();
 
             state._fsp--;
@@ -13781,17 +13937,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2_2__0__Impl"
-    // InternalVampireLanguage.g:4441:1: rule__VLSAtomicFunction__Group_0_2_2__0__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:4495:1: rule__VLSAtomicFunction__Group_0_2_2__0__Impl : ( ',' ) ;
     public final void rule__VLSAtomicFunction__Group_0_2_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4445:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:4446:1: ( ',' )
+            // InternalVampireLanguage.g:4499:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:4500:1: ( ',' )
             {
-            // InternalVampireLanguage.g:4446:1: ( ',' )
-            // InternalVampireLanguage.g:4447:2: ','
+            // InternalVampireLanguage.g:4500:1: ( ',' )
+            // InternalVampireLanguage.g:4501:2: ','
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getCommaKeyword_0_2_2_0()); 
             match(input,45,FOLLOW_2); 
@@ -13818,14 +13974,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2_2__1"
-    // InternalVampireLanguage.g:4456:1: rule__VLSAtomicFunction__Group_0_2_2__1 : rule__VLSAtomicFunction__Group_0_2_2__1__Impl ;
+    // InternalVampireLanguage.g:4510:1: rule__VLSAtomicFunction__Group_0_2_2__1 : rule__VLSAtomicFunction__Group_0_2_2__1__Impl ;
     public final void rule__VLSAtomicFunction__Group_0_2_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4460:1: ( rule__VLSAtomicFunction__Group_0_2_2__1__Impl )
-            // InternalVampireLanguage.g:4461:2: rule__VLSAtomicFunction__Group_0_2_2__1__Impl
+            // InternalVampireLanguage.g:4514:1: ( rule__VLSAtomicFunction__Group_0_2_2__1__Impl )
+            // InternalVampireLanguage.g:4515:2: rule__VLSAtomicFunction__Group_0_2_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__Group_0_2_2__1__Impl();
@@ -13851,21 +14007,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_0_2_2__1__Impl"
-    // InternalVampireLanguage.g:4467:1: rule__VLSAtomicFunction__Group_0_2_2__1__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) ) ;
+    // InternalVampireLanguage.g:4521:1: rule__VLSAtomicFunction__Group_0_2_2__1__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) ) ;
     public final void rule__VLSAtomicFunction__Group_0_2_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4471:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) ) )
-            // InternalVampireLanguage.g:4472:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) )
+            // InternalVampireLanguage.g:4525:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) ) )
+            // InternalVampireLanguage.g:4526:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) )
             {
-            // InternalVampireLanguage.g:4472:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) )
-            // InternalVampireLanguage.g:4473:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 )
+            // InternalVampireLanguage.g:4526:1: ( ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 ) )
+            // InternalVampireLanguage.g:4527:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsAssignment_0_2_2_1()); 
-            // InternalVampireLanguage.g:4474:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 )
-            // InternalVampireLanguage.g:4474:3: rule__VLSAtomicFunction__TermsAssignment_0_2_2_1
+            // InternalVampireLanguage.g:4528:2: ( rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 )
+            // InternalVampireLanguage.g:4528:3: rule__VLSAtomicFunction__TermsAssignment_0_2_2_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__TermsAssignment_0_2_2_1();
@@ -13898,16 +14054,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__0"
-    // InternalVampireLanguage.g:4483:1: rule__VLSAtomicFunction__Group_1__0 : rule__VLSAtomicFunction__Group_1__0__Impl rule__VLSAtomicFunction__Group_1__1 ;
+    // InternalVampireLanguage.g:4537:1: rule__VLSAtomicFunction__Group_1__0 : rule__VLSAtomicFunction__Group_1__0__Impl rule__VLSAtomicFunction__Group_1__1 ;
     public final void rule__VLSAtomicFunction__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4487:1: ( rule__VLSAtomicFunction__Group_1__0__Impl rule__VLSAtomicFunction__Group_1__1 )
-            // InternalVampireLanguage.g:4488:2: rule__VLSAtomicFunction__Group_1__0__Impl rule__VLSAtomicFunction__Group_1__1
+            // InternalVampireLanguage.g:4541:1: ( rule__VLSAtomicFunction__Group_1__0__Impl rule__VLSAtomicFunction__Group_1__1 )
+            // InternalVampireLanguage.g:4542:2: rule__VLSAtomicFunction__Group_1__0__Impl rule__VLSAtomicFunction__Group_1__1
             {
-            pushFollow(FOLLOW_42);
+            pushFollow(FOLLOW_43);
             rule__VLSAtomicFunction__Group_1__0__Impl();
 
             state._fsp--;
@@ -13936,21 +14092,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__0__Impl"
-    // InternalVampireLanguage.g:4495:1: rule__VLSAtomicFunction__Group_1__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4549:1: rule__VLSAtomicFunction__Group_1__0__Impl : ( () ) ;
     public final void rule__VLSAtomicFunction__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4499:1: ( ( () ) )
-            // InternalVampireLanguage.g:4500:1: ( () )
+            // InternalVampireLanguage.g:4553:1: ( ( () ) )
+            // InternalVampireLanguage.g:4554:1: ( () )
             {
-            // InternalVampireLanguage.g:4500:1: ( () )
-            // InternalVampireLanguage.g:4501:2: ()
+            // InternalVampireLanguage.g:4554:1: ( () )
+            // InternalVampireLanguage.g:4555:2: ()
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getVLSLessAction_1_0()); 
-            // InternalVampireLanguage.g:4502:2: ()
-            // InternalVampireLanguage.g:4502:3: 
+            // InternalVampireLanguage.g:4556:2: ()
+            // InternalVampireLanguage.g:4556:3: 
             {
             }
 
@@ -13973,16 +14129,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__1"
-    // InternalVampireLanguage.g:4510:1: rule__VLSAtomicFunction__Group_1__1 : rule__VLSAtomicFunction__Group_1__1__Impl rule__VLSAtomicFunction__Group_1__2 ;
+    // InternalVampireLanguage.g:4564:1: rule__VLSAtomicFunction__Group_1__1 : rule__VLSAtomicFunction__Group_1__1__Impl rule__VLSAtomicFunction__Group_1__2 ;
     public final void rule__VLSAtomicFunction__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4514:1: ( rule__VLSAtomicFunction__Group_1__1__Impl rule__VLSAtomicFunction__Group_1__2 )
-            // InternalVampireLanguage.g:4515:2: rule__VLSAtomicFunction__Group_1__1__Impl rule__VLSAtomicFunction__Group_1__2
+            // InternalVampireLanguage.g:4568:1: ( rule__VLSAtomicFunction__Group_1__1__Impl rule__VLSAtomicFunction__Group_1__2 )
+            // InternalVampireLanguage.g:4569:2: rule__VLSAtomicFunction__Group_1__1__Impl rule__VLSAtomicFunction__Group_1__2
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_12);
             rule__VLSAtomicFunction__Group_1__1__Impl();
 
             state._fsp--;
@@ -14011,21 +14167,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__1__Impl"
-    // InternalVampireLanguage.g:4522:1: rule__VLSAtomicFunction__Group_1__1__Impl : ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) ) ;
+    // InternalVampireLanguage.g:4576:1: rule__VLSAtomicFunction__Group_1__1__Impl : ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) ) ;
     public final void rule__VLSAtomicFunction__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4526:1: ( ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) ) )
-            // InternalVampireLanguage.g:4527:1: ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) )
+            // InternalVampireLanguage.g:4580:1: ( ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) ) )
+            // InternalVampireLanguage.g:4581:1: ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) )
             {
-            // InternalVampireLanguage.g:4527:1: ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) )
-            // InternalVampireLanguage.g:4528:2: ( rule__VLSAtomicFunction__NameAssignment_1_1 )
+            // InternalVampireLanguage.g:4581:1: ( ( rule__VLSAtomicFunction__NameAssignment_1_1 ) )
+            // InternalVampireLanguage.g:4582:2: ( rule__VLSAtomicFunction__NameAssignment_1_1 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getNameAssignment_1_1()); 
-            // InternalVampireLanguage.g:4529:2: ( rule__VLSAtomicFunction__NameAssignment_1_1 )
-            // InternalVampireLanguage.g:4529:3: rule__VLSAtomicFunction__NameAssignment_1_1
+            // InternalVampireLanguage.g:4583:2: ( rule__VLSAtomicFunction__NameAssignment_1_1 )
+            // InternalVampireLanguage.g:4583:3: rule__VLSAtomicFunction__NameAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__NameAssignment_1_1();
@@ -14058,16 +14214,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__2"
-    // InternalVampireLanguage.g:4537:1: rule__VLSAtomicFunction__Group_1__2 : rule__VLSAtomicFunction__Group_1__2__Impl rule__VLSAtomicFunction__Group_1__3 ;
+    // InternalVampireLanguage.g:4591:1: rule__VLSAtomicFunction__Group_1__2 : rule__VLSAtomicFunction__Group_1__2__Impl rule__VLSAtomicFunction__Group_1__3 ;
     public final void rule__VLSAtomicFunction__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4541:1: ( rule__VLSAtomicFunction__Group_1__2__Impl rule__VLSAtomicFunction__Group_1__3 )
-            // InternalVampireLanguage.g:4542:2: rule__VLSAtomicFunction__Group_1__2__Impl rule__VLSAtomicFunction__Group_1__3
+            // InternalVampireLanguage.g:4595:1: ( rule__VLSAtomicFunction__Group_1__2__Impl rule__VLSAtomicFunction__Group_1__3 )
+            // InternalVampireLanguage.g:4596:2: rule__VLSAtomicFunction__Group_1__2__Impl rule__VLSAtomicFunction__Group_1__3
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSAtomicFunction__Group_1__2__Impl();
 
             state._fsp--;
@@ -14096,20 +14252,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__2__Impl"
-    // InternalVampireLanguage.g:4549:1: rule__VLSAtomicFunction__Group_1__2__Impl : ( '(' ) ;
+    // InternalVampireLanguage.g:4603:1: rule__VLSAtomicFunction__Group_1__2__Impl : ( '(' ) ;
     public final void rule__VLSAtomicFunction__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4553:1: ( ( '(' ) )
-            // InternalVampireLanguage.g:4554:1: ( '(' )
+            // InternalVampireLanguage.g:4607:1: ( ( '(' ) )
+            // InternalVampireLanguage.g:4608:1: ( '(' )
             {
-            // InternalVampireLanguage.g:4554:1: ( '(' )
-            // InternalVampireLanguage.g:4555:2: '('
+            // InternalVampireLanguage.g:4608:1: ( '(' )
+            // InternalVampireLanguage.g:4609:2: '('
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getLeftParenthesisKeyword_1_2()); 
-            match(input,47,FOLLOW_2); 
+            match(input,48,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicFunctionAccess().getLeftParenthesisKeyword_1_2()); 
 
             }
@@ -14133,16 +14289,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__3"
-    // InternalVampireLanguage.g:4564:1: rule__VLSAtomicFunction__Group_1__3 : rule__VLSAtomicFunction__Group_1__3__Impl rule__VLSAtomicFunction__Group_1__4 ;
+    // InternalVampireLanguage.g:4618:1: rule__VLSAtomicFunction__Group_1__3 : rule__VLSAtomicFunction__Group_1__3__Impl rule__VLSAtomicFunction__Group_1__4 ;
     public final void rule__VLSAtomicFunction__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4568:1: ( rule__VLSAtomicFunction__Group_1__3__Impl rule__VLSAtomicFunction__Group_1__4 )
-            // InternalVampireLanguage.g:4569:2: rule__VLSAtomicFunction__Group_1__3__Impl rule__VLSAtomicFunction__Group_1__4
+            // InternalVampireLanguage.g:4622:1: ( rule__VLSAtomicFunction__Group_1__3__Impl rule__VLSAtomicFunction__Group_1__4 )
+            // InternalVampireLanguage.g:4623:2: rule__VLSAtomicFunction__Group_1__3__Impl rule__VLSAtomicFunction__Group_1__4
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_14);
             rule__VLSAtomicFunction__Group_1__3__Impl();
 
             state._fsp--;
@@ -14171,21 +14327,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__3__Impl"
-    // InternalVampireLanguage.g:4576:1: rule__VLSAtomicFunction__Group_1__3__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) ) ;
+    // InternalVampireLanguage.g:4630:1: rule__VLSAtomicFunction__Group_1__3__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) ) ;
     public final void rule__VLSAtomicFunction__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4580:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) ) )
-            // InternalVampireLanguage.g:4581:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) )
+            // InternalVampireLanguage.g:4634:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) ) )
+            // InternalVampireLanguage.g:4635:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) )
             {
-            // InternalVampireLanguage.g:4581:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) )
-            // InternalVampireLanguage.g:4582:2: ( rule__VLSAtomicFunction__TermsAssignment_1_3 )
+            // InternalVampireLanguage.g:4635:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_3 ) )
+            // InternalVampireLanguage.g:4636:2: ( rule__VLSAtomicFunction__TermsAssignment_1_3 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsAssignment_1_3()); 
-            // InternalVampireLanguage.g:4583:2: ( rule__VLSAtomicFunction__TermsAssignment_1_3 )
-            // InternalVampireLanguage.g:4583:3: rule__VLSAtomicFunction__TermsAssignment_1_3
+            // InternalVampireLanguage.g:4637:2: ( rule__VLSAtomicFunction__TermsAssignment_1_3 )
+            // InternalVampireLanguage.g:4637:3: rule__VLSAtomicFunction__TermsAssignment_1_3
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__TermsAssignment_1_3();
@@ -14218,16 +14374,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__4"
-    // InternalVampireLanguage.g:4591:1: rule__VLSAtomicFunction__Group_1__4 : rule__VLSAtomicFunction__Group_1__4__Impl rule__VLSAtomicFunction__Group_1__5 ;
+    // InternalVampireLanguage.g:4645:1: rule__VLSAtomicFunction__Group_1__4 : rule__VLSAtomicFunction__Group_1__4__Impl rule__VLSAtomicFunction__Group_1__5 ;
     public final void rule__VLSAtomicFunction__Group_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4595:1: ( rule__VLSAtomicFunction__Group_1__4__Impl rule__VLSAtomicFunction__Group_1__5 )
-            // InternalVampireLanguage.g:4596:2: rule__VLSAtomicFunction__Group_1__4__Impl rule__VLSAtomicFunction__Group_1__5
+            // InternalVampireLanguage.g:4649:1: ( rule__VLSAtomicFunction__Group_1__4__Impl rule__VLSAtomicFunction__Group_1__5 )
+            // InternalVampireLanguage.g:4650:2: rule__VLSAtomicFunction__Group_1__4__Impl rule__VLSAtomicFunction__Group_1__5
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSAtomicFunction__Group_1__4__Impl();
 
             state._fsp--;
@@ -14256,17 +14412,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__4__Impl"
-    // InternalVampireLanguage.g:4603:1: rule__VLSAtomicFunction__Group_1__4__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:4657:1: rule__VLSAtomicFunction__Group_1__4__Impl : ( ',' ) ;
     public final void rule__VLSAtomicFunction__Group_1__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4607:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:4608:1: ( ',' )
+            // InternalVampireLanguage.g:4661:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:4662:1: ( ',' )
             {
-            // InternalVampireLanguage.g:4608:1: ( ',' )
-            // InternalVampireLanguage.g:4609:2: ','
+            // InternalVampireLanguage.g:4662:1: ( ',' )
+            // InternalVampireLanguage.g:4663:2: ','
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getCommaKeyword_1_4()); 
             match(input,45,FOLLOW_2); 
@@ -14293,16 +14449,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__5"
-    // InternalVampireLanguage.g:4618:1: rule__VLSAtomicFunction__Group_1__5 : rule__VLSAtomicFunction__Group_1__5__Impl rule__VLSAtomicFunction__Group_1__6 ;
+    // InternalVampireLanguage.g:4672:1: rule__VLSAtomicFunction__Group_1__5 : rule__VLSAtomicFunction__Group_1__5__Impl rule__VLSAtomicFunction__Group_1__6 ;
     public final void rule__VLSAtomicFunction__Group_1__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4622:1: ( rule__VLSAtomicFunction__Group_1__5__Impl rule__VLSAtomicFunction__Group_1__6 )
-            // InternalVampireLanguage.g:4623:2: rule__VLSAtomicFunction__Group_1__5__Impl rule__VLSAtomicFunction__Group_1__6
+            // InternalVampireLanguage.g:4676:1: ( rule__VLSAtomicFunction__Group_1__5__Impl rule__VLSAtomicFunction__Group_1__6 )
+            // InternalVampireLanguage.g:4677:2: rule__VLSAtomicFunction__Group_1__5__Impl rule__VLSAtomicFunction__Group_1__6
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__VLSAtomicFunction__Group_1__5__Impl();
 
             state._fsp--;
@@ -14331,21 +14487,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__5__Impl"
-    // InternalVampireLanguage.g:4630:1: rule__VLSAtomicFunction__Group_1__5__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) ) ;
+    // InternalVampireLanguage.g:4684:1: rule__VLSAtomicFunction__Group_1__5__Impl : ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) ) ;
     public final void rule__VLSAtomicFunction__Group_1__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4634:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) ) )
-            // InternalVampireLanguage.g:4635:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) )
+            // InternalVampireLanguage.g:4688:1: ( ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) ) )
+            // InternalVampireLanguage.g:4689:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) )
             {
-            // InternalVampireLanguage.g:4635:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) )
-            // InternalVampireLanguage.g:4636:2: ( rule__VLSAtomicFunction__TermsAssignment_1_5 )
+            // InternalVampireLanguage.g:4689:1: ( ( rule__VLSAtomicFunction__TermsAssignment_1_5 ) )
+            // InternalVampireLanguage.g:4690:2: ( rule__VLSAtomicFunction__TermsAssignment_1_5 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsAssignment_1_5()); 
-            // InternalVampireLanguage.g:4637:2: ( rule__VLSAtomicFunction__TermsAssignment_1_5 )
-            // InternalVampireLanguage.g:4637:3: rule__VLSAtomicFunction__TermsAssignment_1_5
+            // InternalVampireLanguage.g:4691:2: ( rule__VLSAtomicFunction__TermsAssignment_1_5 )
+            // InternalVampireLanguage.g:4691:3: rule__VLSAtomicFunction__TermsAssignment_1_5
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__TermsAssignment_1_5();
@@ -14378,14 +14534,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__6"
-    // InternalVampireLanguage.g:4645:1: rule__VLSAtomicFunction__Group_1__6 : rule__VLSAtomicFunction__Group_1__6__Impl ;
+    // InternalVampireLanguage.g:4699:1: rule__VLSAtomicFunction__Group_1__6 : rule__VLSAtomicFunction__Group_1__6__Impl ;
     public final void rule__VLSAtomicFunction__Group_1__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4649:1: ( rule__VLSAtomicFunction__Group_1__6__Impl )
-            // InternalVampireLanguage.g:4650:2: rule__VLSAtomicFunction__Group_1__6__Impl
+            // InternalVampireLanguage.g:4703:1: ( rule__VLSAtomicFunction__Group_1__6__Impl )
+            // InternalVampireLanguage.g:4704:2: rule__VLSAtomicFunction__Group_1__6__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__Group_1__6__Impl();
@@ -14411,20 +14567,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__Group_1__6__Impl"
-    // InternalVampireLanguage.g:4656:1: rule__VLSAtomicFunction__Group_1__6__Impl : ( ')' ) ;
+    // InternalVampireLanguage.g:4710:1: rule__VLSAtomicFunction__Group_1__6__Impl : ( ')' ) ;
     public final void rule__VLSAtomicFunction__Group_1__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4660:1: ( ( ')' ) )
-            // InternalVampireLanguage.g:4661:1: ( ')' )
+            // InternalVampireLanguage.g:4714:1: ( ( ')' ) )
+            // InternalVampireLanguage.g:4715:1: ( ')' )
             {
-            // InternalVampireLanguage.g:4661:1: ( ')' )
-            // InternalVampireLanguage.g:4662:2: ')'
+            // InternalVampireLanguage.g:4715:1: ( ')' )
+            // InternalVampireLanguage.g:4716:2: ')'
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getRightParenthesisKeyword_1_6()); 
-            match(input,48,FOLLOW_2); 
+            match(input,49,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicFunctionAccess().getRightParenthesisKeyword_1_6()); 
 
             }
@@ -14448,16 +14604,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group__0"
-    // InternalVampireLanguage.g:4672:1: rule__VLSFunctionFof__Group__0 : rule__VLSFunctionFof__Group__0__Impl rule__VLSFunctionFof__Group__1 ;
+    // InternalVampireLanguage.g:4726:1: rule__VLSFunctionFof__Group__0 : rule__VLSFunctionFof__Group__0__Impl rule__VLSFunctionFof__Group__1 ;
     public final void rule__VLSFunctionFof__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4676:1: ( rule__VLSFunctionFof__Group__0__Impl rule__VLSFunctionFof__Group__1 )
-            // InternalVampireLanguage.g:4677:2: rule__VLSFunctionFof__Group__0__Impl rule__VLSFunctionFof__Group__1
+            // InternalVampireLanguage.g:4730:1: ( rule__VLSFunctionFof__Group__0__Impl rule__VLSFunctionFof__Group__1 )
+            // InternalVampireLanguage.g:4731:2: rule__VLSFunctionFof__Group__0__Impl rule__VLSFunctionFof__Group__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_12);
             rule__VLSFunctionFof__Group__0__Impl();
 
             state._fsp--;
@@ -14486,21 +14642,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group__0__Impl"
-    // InternalVampireLanguage.g:4684:1: rule__VLSFunctionFof__Group__0__Impl : ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) ) ;
+    // InternalVampireLanguage.g:4738:1: rule__VLSFunctionFof__Group__0__Impl : ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) ) ;
     public final void rule__VLSFunctionFof__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4688:1: ( ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) ) )
-            // InternalVampireLanguage.g:4689:1: ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) )
+            // InternalVampireLanguage.g:4742:1: ( ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) ) )
+            // InternalVampireLanguage.g:4743:1: ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) )
             {
-            // InternalVampireLanguage.g:4689:1: ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) )
-            // InternalVampireLanguage.g:4690:2: ( rule__VLSFunctionFof__FunctorAssignment_0 )
+            // InternalVampireLanguage.g:4743:1: ( ( rule__VLSFunctionFof__FunctorAssignment_0 ) )
+            // InternalVampireLanguage.g:4744:2: ( rule__VLSFunctionFof__FunctorAssignment_0 )
             {
              before(grammarAccess.getVLSFunctionFofAccess().getFunctorAssignment_0()); 
-            // InternalVampireLanguage.g:4691:2: ( rule__VLSFunctionFof__FunctorAssignment_0 )
-            // InternalVampireLanguage.g:4691:3: rule__VLSFunctionFof__FunctorAssignment_0
+            // InternalVampireLanguage.g:4745:2: ( rule__VLSFunctionFof__FunctorAssignment_0 )
+            // InternalVampireLanguage.g:4745:3: rule__VLSFunctionFof__FunctorAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__FunctorAssignment_0();
@@ -14533,14 +14689,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group__1"
-    // InternalVampireLanguage.g:4699:1: rule__VLSFunctionFof__Group__1 : rule__VLSFunctionFof__Group__1__Impl ;
+    // InternalVampireLanguage.g:4753:1: rule__VLSFunctionFof__Group__1 : rule__VLSFunctionFof__Group__1__Impl ;
     public final void rule__VLSFunctionFof__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4703:1: ( rule__VLSFunctionFof__Group__1__Impl )
-            // InternalVampireLanguage.g:4704:2: rule__VLSFunctionFof__Group__1__Impl
+            // InternalVampireLanguage.g:4757:1: ( rule__VLSFunctionFof__Group__1__Impl )
+            // InternalVampireLanguage.g:4758:2: rule__VLSFunctionFof__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__Group__1__Impl();
@@ -14566,29 +14722,29 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group__1__Impl"
-    // InternalVampireLanguage.g:4710:1: rule__VLSFunctionFof__Group__1__Impl : ( ( rule__VLSFunctionFof__Group_1__0 )? ) ;
+    // InternalVampireLanguage.g:4764:1: rule__VLSFunctionFof__Group__1__Impl : ( ( rule__VLSFunctionFof__Group_1__0 )? ) ;
     public final void rule__VLSFunctionFof__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4714:1: ( ( ( rule__VLSFunctionFof__Group_1__0 )? ) )
-            // InternalVampireLanguage.g:4715:1: ( ( rule__VLSFunctionFof__Group_1__0 )? )
+            // InternalVampireLanguage.g:4768:1: ( ( ( rule__VLSFunctionFof__Group_1__0 )? ) )
+            // InternalVampireLanguage.g:4769:1: ( ( rule__VLSFunctionFof__Group_1__0 )? )
             {
-            // InternalVampireLanguage.g:4715:1: ( ( rule__VLSFunctionFof__Group_1__0 )? )
-            // InternalVampireLanguage.g:4716:2: ( rule__VLSFunctionFof__Group_1__0 )?
+            // InternalVampireLanguage.g:4769:1: ( ( rule__VLSFunctionFof__Group_1__0 )? )
+            // InternalVampireLanguage.g:4770:2: ( rule__VLSFunctionFof__Group_1__0 )?
             {
              before(grammarAccess.getVLSFunctionFofAccess().getGroup_1()); 
-            // InternalVampireLanguage.g:4717:2: ( rule__VLSFunctionFof__Group_1__0 )?
+            // InternalVampireLanguage.g:4771:2: ( rule__VLSFunctionFof__Group_1__0 )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
-            if ( (LA34_0==47) ) {
+            if ( (LA34_0==48) ) {
                 alt34=1;
             }
             switch (alt34) {
                 case 1 :
-                    // InternalVampireLanguage.g:4717:3: rule__VLSFunctionFof__Group_1__0
+                    // InternalVampireLanguage.g:4771:3: rule__VLSFunctionFof__Group_1__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__VLSFunctionFof__Group_1__0();
@@ -14624,16 +14780,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__0"
-    // InternalVampireLanguage.g:4726:1: rule__VLSFunctionFof__Group_1__0 : rule__VLSFunctionFof__Group_1__0__Impl rule__VLSFunctionFof__Group_1__1 ;
+    // InternalVampireLanguage.g:4780:1: rule__VLSFunctionFof__Group_1__0 : rule__VLSFunctionFof__Group_1__0__Impl rule__VLSFunctionFof__Group_1__1 ;
     public final void rule__VLSFunctionFof__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4730:1: ( rule__VLSFunctionFof__Group_1__0__Impl rule__VLSFunctionFof__Group_1__1 )
-            // InternalVampireLanguage.g:4731:2: rule__VLSFunctionFof__Group_1__0__Impl rule__VLSFunctionFof__Group_1__1
+            // InternalVampireLanguage.g:4784:1: ( rule__VLSFunctionFof__Group_1__0__Impl rule__VLSFunctionFof__Group_1__1 )
+            // InternalVampireLanguage.g:4785:2: rule__VLSFunctionFof__Group_1__0__Impl rule__VLSFunctionFof__Group_1__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSFunctionFof__Group_1__0__Impl();
 
             state._fsp--;
@@ -14662,20 +14818,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__0__Impl"
-    // InternalVampireLanguage.g:4738:1: rule__VLSFunctionFof__Group_1__0__Impl : ( '(' ) ;
+    // InternalVampireLanguage.g:4792:1: rule__VLSFunctionFof__Group_1__0__Impl : ( '(' ) ;
     public final void rule__VLSFunctionFof__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4742:1: ( ( '(' ) )
-            // InternalVampireLanguage.g:4743:1: ( '(' )
+            // InternalVampireLanguage.g:4796:1: ( ( '(' ) )
+            // InternalVampireLanguage.g:4797:1: ( '(' )
             {
-            // InternalVampireLanguage.g:4743:1: ( '(' )
-            // InternalVampireLanguage.g:4744:2: '('
+            // InternalVampireLanguage.g:4797:1: ( '(' )
+            // InternalVampireLanguage.g:4798:2: '('
             {
              before(grammarAccess.getVLSFunctionFofAccess().getLeftParenthesisKeyword_1_0()); 
-            match(input,47,FOLLOW_2); 
+            match(input,48,FOLLOW_2); 
              after(grammarAccess.getVLSFunctionFofAccess().getLeftParenthesisKeyword_1_0()); 
 
             }
@@ -14699,16 +14855,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__1"
-    // InternalVampireLanguage.g:4753:1: rule__VLSFunctionFof__Group_1__1 : rule__VLSFunctionFof__Group_1__1__Impl rule__VLSFunctionFof__Group_1__2 ;
+    // InternalVampireLanguage.g:4807:1: rule__VLSFunctionFof__Group_1__1 : rule__VLSFunctionFof__Group_1__1__Impl rule__VLSFunctionFof__Group_1__2 ;
     public final void rule__VLSFunctionFof__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4757:1: ( rule__VLSFunctionFof__Group_1__1__Impl rule__VLSFunctionFof__Group_1__2 )
-            // InternalVampireLanguage.g:4758:2: rule__VLSFunctionFof__Group_1__1__Impl rule__VLSFunctionFof__Group_1__2
+            // InternalVampireLanguage.g:4811:1: ( rule__VLSFunctionFof__Group_1__1__Impl rule__VLSFunctionFof__Group_1__2 )
+            // InternalVampireLanguage.g:4812:2: rule__VLSFunctionFof__Group_1__1__Impl rule__VLSFunctionFof__Group_1__2
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__VLSFunctionFof__Group_1__1__Impl();
 
             state._fsp--;
@@ -14737,21 +14893,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__1__Impl"
-    // InternalVampireLanguage.g:4765:1: rule__VLSFunctionFof__Group_1__1__Impl : ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) ) ;
+    // InternalVampireLanguage.g:4819:1: rule__VLSFunctionFof__Group_1__1__Impl : ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) ) ;
     public final void rule__VLSFunctionFof__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4769:1: ( ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) ) )
-            // InternalVampireLanguage.g:4770:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) )
+            // InternalVampireLanguage.g:4823:1: ( ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) ) )
+            // InternalVampireLanguage.g:4824:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) )
             {
-            // InternalVampireLanguage.g:4770:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) )
-            // InternalVampireLanguage.g:4771:2: ( rule__VLSFunctionFof__TermsAssignment_1_1 )
+            // InternalVampireLanguage.g:4824:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_1 ) )
+            // InternalVampireLanguage.g:4825:2: ( rule__VLSFunctionFof__TermsAssignment_1_1 )
             {
              before(grammarAccess.getVLSFunctionFofAccess().getTermsAssignment_1_1()); 
-            // InternalVampireLanguage.g:4772:2: ( rule__VLSFunctionFof__TermsAssignment_1_1 )
-            // InternalVampireLanguage.g:4772:3: rule__VLSFunctionFof__TermsAssignment_1_1
+            // InternalVampireLanguage.g:4826:2: ( rule__VLSFunctionFof__TermsAssignment_1_1 )
+            // InternalVampireLanguage.g:4826:3: rule__VLSFunctionFof__TermsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__TermsAssignment_1_1();
@@ -14784,16 +14940,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__2"
-    // InternalVampireLanguage.g:4780:1: rule__VLSFunctionFof__Group_1__2 : rule__VLSFunctionFof__Group_1__2__Impl rule__VLSFunctionFof__Group_1__3 ;
+    // InternalVampireLanguage.g:4834:1: rule__VLSFunctionFof__Group_1__2 : rule__VLSFunctionFof__Group_1__2__Impl rule__VLSFunctionFof__Group_1__3 ;
     public final void rule__VLSFunctionFof__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4784:1: ( rule__VLSFunctionFof__Group_1__2__Impl rule__VLSFunctionFof__Group_1__3 )
-            // InternalVampireLanguage.g:4785:2: rule__VLSFunctionFof__Group_1__2__Impl rule__VLSFunctionFof__Group_1__3
+            // InternalVampireLanguage.g:4838:1: ( rule__VLSFunctionFof__Group_1__2__Impl rule__VLSFunctionFof__Group_1__3 )
+            // InternalVampireLanguage.g:4839:2: rule__VLSFunctionFof__Group_1__2__Impl rule__VLSFunctionFof__Group_1__3
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__VLSFunctionFof__Group_1__2__Impl();
 
             state._fsp--;
@@ -14822,20 +14978,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__2__Impl"
-    // InternalVampireLanguage.g:4792:1: rule__VLSFunctionFof__Group_1__2__Impl : ( ( rule__VLSFunctionFof__Group_1_2__0 )* ) ;
+    // InternalVampireLanguage.g:4846:1: rule__VLSFunctionFof__Group_1__2__Impl : ( ( rule__VLSFunctionFof__Group_1_2__0 )* ) ;
     public final void rule__VLSFunctionFof__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4796:1: ( ( ( rule__VLSFunctionFof__Group_1_2__0 )* ) )
-            // InternalVampireLanguage.g:4797:1: ( ( rule__VLSFunctionFof__Group_1_2__0 )* )
+            // InternalVampireLanguage.g:4850:1: ( ( ( rule__VLSFunctionFof__Group_1_2__0 )* ) )
+            // InternalVampireLanguage.g:4851:1: ( ( rule__VLSFunctionFof__Group_1_2__0 )* )
             {
-            // InternalVampireLanguage.g:4797:1: ( ( rule__VLSFunctionFof__Group_1_2__0 )* )
-            // InternalVampireLanguage.g:4798:2: ( rule__VLSFunctionFof__Group_1_2__0 )*
+            // InternalVampireLanguage.g:4851:1: ( ( rule__VLSFunctionFof__Group_1_2__0 )* )
+            // InternalVampireLanguage.g:4852:2: ( rule__VLSFunctionFof__Group_1_2__0 )*
             {
              before(grammarAccess.getVLSFunctionFofAccess().getGroup_1_2()); 
-            // InternalVampireLanguage.g:4799:2: ( rule__VLSFunctionFof__Group_1_2__0 )*
+            // InternalVampireLanguage.g:4853:2: ( rule__VLSFunctionFof__Group_1_2__0 )*
             loop35:
             do {
                 int alt35=2;
@@ -14848,7 +15004,7 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
                 switch (alt35) {
             	case 1 :
-            	    // InternalVampireLanguage.g:4799:3: rule__VLSFunctionFof__Group_1_2__0
+            	    // InternalVampireLanguage.g:4853:3: rule__VLSFunctionFof__Group_1_2__0
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__VLSFunctionFof__Group_1_2__0();
@@ -14887,14 +15043,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__3"
-    // InternalVampireLanguage.g:4807:1: rule__VLSFunctionFof__Group_1__3 : rule__VLSFunctionFof__Group_1__3__Impl ;
+    // InternalVampireLanguage.g:4861:1: rule__VLSFunctionFof__Group_1__3 : rule__VLSFunctionFof__Group_1__3__Impl ;
     public final void rule__VLSFunctionFof__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4811:1: ( rule__VLSFunctionFof__Group_1__3__Impl )
-            // InternalVampireLanguage.g:4812:2: rule__VLSFunctionFof__Group_1__3__Impl
+            // InternalVampireLanguage.g:4865:1: ( rule__VLSFunctionFof__Group_1__3__Impl )
+            // InternalVampireLanguage.g:4866:2: rule__VLSFunctionFof__Group_1__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__Group_1__3__Impl();
@@ -14920,20 +15076,20 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1__3__Impl"
-    // InternalVampireLanguage.g:4818:1: rule__VLSFunctionFof__Group_1__3__Impl : ( ')' ) ;
+    // InternalVampireLanguage.g:4872:1: rule__VLSFunctionFof__Group_1__3__Impl : ( ')' ) ;
     public final void rule__VLSFunctionFof__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4822:1: ( ( ')' ) )
-            // InternalVampireLanguage.g:4823:1: ( ')' )
+            // InternalVampireLanguage.g:4876:1: ( ( ')' ) )
+            // InternalVampireLanguage.g:4877:1: ( ')' )
             {
-            // InternalVampireLanguage.g:4823:1: ( ')' )
-            // InternalVampireLanguage.g:4824:2: ')'
+            // InternalVampireLanguage.g:4877:1: ( ')' )
+            // InternalVampireLanguage.g:4878:2: ')'
             {
              before(grammarAccess.getVLSFunctionFofAccess().getRightParenthesisKeyword_1_3()); 
-            match(input,48,FOLLOW_2); 
+            match(input,49,FOLLOW_2); 
              after(grammarAccess.getVLSFunctionFofAccess().getRightParenthesisKeyword_1_3()); 
 
             }
@@ -14957,16 +15113,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1_2__0"
-    // InternalVampireLanguage.g:4834:1: rule__VLSFunctionFof__Group_1_2__0 : rule__VLSFunctionFof__Group_1_2__0__Impl rule__VLSFunctionFof__Group_1_2__1 ;
+    // InternalVampireLanguage.g:4888:1: rule__VLSFunctionFof__Group_1_2__0 : rule__VLSFunctionFof__Group_1_2__0__Impl rule__VLSFunctionFof__Group_1_2__1 ;
     public final void rule__VLSFunctionFof__Group_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4838:1: ( rule__VLSFunctionFof__Group_1_2__0__Impl rule__VLSFunctionFof__Group_1_2__1 )
-            // InternalVampireLanguage.g:4839:2: rule__VLSFunctionFof__Group_1_2__0__Impl rule__VLSFunctionFof__Group_1_2__1
+            // InternalVampireLanguage.g:4892:1: ( rule__VLSFunctionFof__Group_1_2__0__Impl rule__VLSFunctionFof__Group_1_2__1 )
+            // InternalVampireLanguage.g:4893:2: rule__VLSFunctionFof__Group_1_2__0__Impl rule__VLSFunctionFof__Group_1_2__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSFunctionFof__Group_1_2__0__Impl();
 
             state._fsp--;
@@ -14995,17 +15151,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1_2__0__Impl"
-    // InternalVampireLanguage.g:4846:1: rule__VLSFunctionFof__Group_1_2__0__Impl : ( ',' ) ;
+    // InternalVampireLanguage.g:4900:1: rule__VLSFunctionFof__Group_1_2__0__Impl : ( ',' ) ;
     public final void rule__VLSFunctionFof__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4850:1: ( ( ',' ) )
-            // InternalVampireLanguage.g:4851:1: ( ',' )
+            // InternalVampireLanguage.g:4904:1: ( ( ',' ) )
+            // InternalVampireLanguage.g:4905:1: ( ',' )
             {
-            // InternalVampireLanguage.g:4851:1: ( ',' )
-            // InternalVampireLanguage.g:4852:2: ','
+            // InternalVampireLanguage.g:4905:1: ( ',' )
+            // InternalVampireLanguage.g:4906:2: ','
             {
              before(grammarAccess.getVLSFunctionFofAccess().getCommaKeyword_1_2_0()); 
             match(input,45,FOLLOW_2); 
@@ -15032,14 +15188,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1_2__1"
-    // InternalVampireLanguage.g:4861:1: rule__VLSFunctionFof__Group_1_2__1 : rule__VLSFunctionFof__Group_1_2__1__Impl ;
+    // InternalVampireLanguage.g:4915:1: rule__VLSFunctionFof__Group_1_2__1 : rule__VLSFunctionFof__Group_1_2__1__Impl ;
     public final void rule__VLSFunctionFof__Group_1_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4865:1: ( rule__VLSFunctionFof__Group_1_2__1__Impl )
-            // InternalVampireLanguage.g:4866:2: rule__VLSFunctionFof__Group_1_2__1__Impl
+            // InternalVampireLanguage.g:4919:1: ( rule__VLSFunctionFof__Group_1_2__1__Impl )
+            // InternalVampireLanguage.g:4920:2: rule__VLSFunctionFof__Group_1_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__Group_1_2__1__Impl();
@@ -15065,21 +15221,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__Group_1_2__1__Impl"
-    // InternalVampireLanguage.g:4872:1: rule__VLSFunctionFof__Group_1_2__1__Impl : ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) ) ;
+    // InternalVampireLanguage.g:4926:1: rule__VLSFunctionFof__Group_1_2__1__Impl : ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) ) ;
     public final void rule__VLSFunctionFof__Group_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4876:1: ( ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) ) )
-            // InternalVampireLanguage.g:4877:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) )
+            // InternalVampireLanguage.g:4930:1: ( ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) ) )
+            // InternalVampireLanguage.g:4931:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) )
             {
-            // InternalVampireLanguage.g:4877:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) )
-            // InternalVampireLanguage.g:4878:2: ( rule__VLSFunctionFof__TermsAssignment_1_2_1 )
+            // InternalVampireLanguage.g:4931:1: ( ( rule__VLSFunctionFof__TermsAssignment_1_2_1 ) )
+            // InternalVampireLanguage.g:4932:2: ( rule__VLSFunctionFof__TermsAssignment_1_2_1 )
             {
              before(grammarAccess.getVLSFunctionFofAccess().getTermsAssignment_1_2_1()); 
-            // InternalVampireLanguage.g:4879:2: ( rule__VLSFunctionFof__TermsAssignment_1_2_1 )
-            // InternalVampireLanguage.g:4879:3: rule__VLSFunctionFof__TermsAssignment_1_2_1
+            // InternalVampireLanguage.g:4933:2: ( rule__VLSFunctionFof__TermsAssignment_1_2_1 )
+            // InternalVampireLanguage.g:4933:3: rule__VLSFunctionFof__TermsAssignment_1_2_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__TermsAssignment_1_2_1();
@@ -15112,16 +15268,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_0__0"
-    // InternalVampireLanguage.g:4888:1: rule__VLSDefinedTerm__Group_0__0 : rule__VLSDefinedTerm__Group_0__0__Impl rule__VLSDefinedTerm__Group_0__1 ;
+    // InternalVampireLanguage.g:4942:1: rule__VLSDefinedTerm__Group_0__0 : rule__VLSDefinedTerm__Group_0__0__Impl rule__VLSDefinedTerm__Group_0__1 ;
     public final void rule__VLSDefinedTerm__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4892:1: ( rule__VLSDefinedTerm__Group_0__0__Impl rule__VLSDefinedTerm__Group_0__1 )
-            // InternalVampireLanguage.g:4893:2: rule__VLSDefinedTerm__Group_0__0__Impl rule__VLSDefinedTerm__Group_0__1
+            // InternalVampireLanguage.g:4946:1: ( rule__VLSDefinedTerm__Group_0__0__Impl rule__VLSDefinedTerm__Group_0__1 )
+            // InternalVampireLanguage.g:4947:2: rule__VLSDefinedTerm__Group_0__0__Impl rule__VLSDefinedTerm__Group_0__1
             {
-            pushFollow(FOLLOW_43);
+            pushFollow(FOLLOW_44);
             rule__VLSDefinedTerm__Group_0__0__Impl();
 
             state._fsp--;
@@ -15150,21 +15306,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_0__0__Impl"
-    // InternalVampireLanguage.g:4900:1: rule__VLSDefinedTerm__Group_0__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:4954:1: rule__VLSDefinedTerm__Group_0__0__Impl : ( () ) ;
     public final void rule__VLSDefinedTerm__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4904:1: ( ( () ) )
-            // InternalVampireLanguage.g:4905:1: ( () )
+            // InternalVampireLanguage.g:4958:1: ( ( () ) )
+            // InternalVampireLanguage.g:4959:1: ( () )
             {
-            // InternalVampireLanguage.g:4905:1: ( () )
-            // InternalVampireLanguage.g:4906:2: ()
+            // InternalVampireLanguage.g:4959:1: ( () )
+            // InternalVampireLanguage.g:4960:2: ()
             {
              before(grammarAccess.getVLSDefinedTermAccess().getVLSIntAction_0_0()); 
-            // InternalVampireLanguage.g:4907:2: ()
-            // InternalVampireLanguage.g:4907:3: 
+            // InternalVampireLanguage.g:4961:2: ()
+            // InternalVampireLanguage.g:4961:3: 
             {
             }
 
@@ -15187,14 +15343,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_0__1"
-    // InternalVampireLanguage.g:4915:1: rule__VLSDefinedTerm__Group_0__1 : rule__VLSDefinedTerm__Group_0__1__Impl ;
+    // InternalVampireLanguage.g:4969:1: rule__VLSDefinedTerm__Group_0__1 : rule__VLSDefinedTerm__Group_0__1__Impl ;
     public final void rule__VLSDefinedTerm__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4919:1: ( rule__VLSDefinedTerm__Group_0__1__Impl )
-            // InternalVampireLanguage.g:4920:2: rule__VLSDefinedTerm__Group_0__1__Impl
+            // InternalVampireLanguage.g:4973:1: ( rule__VLSDefinedTerm__Group_0__1__Impl )
+            // InternalVampireLanguage.g:4974:2: rule__VLSDefinedTerm__Group_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__Group_0__1__Impl();
@@ -15220,21 +15376,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_0__1__Impl"
-    // InternalVampireLanguage.g:4926:1: rule__VLSDefinedTerm__Group_0__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) ) ;
+    // InternalVampireLanguage.g:4980:1: rule__VLSDefinedTerm__Group_0__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) ) ;
     public final void rule__VLSDefinedTerm__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4930:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) ) )
-            // InternalVampireLanguage.g:4931:1: ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) )
+            // InternalVampireLanguage.g:4984:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) ) )
+            // InternalVampireLanguage.g:4985:1: ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) )
             {
-            // InternalVampireLanguage.g:4931:1: ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) )
-            // InternalVampireLanguage.g:4932:2: ( rule__VLSDefinedTerm__ValueAssignment_0_1 )
+            // InternalVampireLanguage.g:4985:1: ( ( rule__VLSDefinedTerm__ValueAssignment_0_1 ) )
+            // InternalVampireLanguage.g:4986:2: ( rule__VLSDefinedTerm__ValueAssignment_0_1 )
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueAssignment_0_1()); 
-            // InternalVampireLanguage.g:4933:2: ( rule__VLSDefinedTerm__ValueAssignment_0_1 )
-            // InternalVampireLanguage.g:4933:3: rule__VLSDefinedTerm__ValueAssignment_0_1
+            // InternalVampireLanguage.g:4987:2: ( rule__VLSDefinedTerm__ValueAssignment_0_1 )
+            // InternalVampireLanguage.g:4987:3: rule__VLSDefinedTerm__ValueAssignment_0_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__ValueAssignment_0_1();
@@ -15267,16 +15423,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_1__0"
-    // InternalVampireLanguage.g:4942:1: rule__VLSDefinedTerm__Group_1__0 : rule__VLSDefinedTerm__Group_1__0__Impl rule__VLSDefinedTerm__Group_1__1 ;
+    // InternalVampireLanguage.g:4996:1: rule__VLSDefinedTerm__Group_1__0 : rule__VLSDefinedTerm__Group_1__0__Impl rule__VLSDefinedTerm__Group_1__1 ;
     public final void rule__VLSDefinedTerm__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4946:1: ( rule__VLSDefinedTerm__Group_1__0__Impl rule__VLSDefinedTerm__Group_1__1 )
-            // InternalVampireLanguage.g:4947:2: rule__VLSDefinedTerm__Group_1__0__Impl rule__VLSDefinedTerm__Group_1__1
+            // InternalVampireLanguage.g:5000:1: ( rule__VLSDefinedTerm__Group_1__0__Impl rule__VLSDefinedTerm__Group_1__1 )
+            // InternalVampireLanguage.g:5001:2: rule__VLSDefinedTerm__Group_1__0__Impl rule__VLSDefinedTerm__Group_1__1
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_45);
             rule__VLSDefinedTerm__Group_1__0__Impl();
 
             state._fsp--;
@@ -15305,21 +15461,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_1__0__Impl"
-    // InternalVampireLanguage.g:4954:1: rule__VLSDefinedTerm__Group_1__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:5008:1: rule__VLSDefinedTerm__Group_1__0__Impl : ( () ) ;
     public final void rule__VLSDefinedTerm__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4958:1: ( ( () ) )
-            // InternalVampireLanguage.g:4959:1: ( () )
+            // InternalVampireLanguage.g:5012:1: ( ( () ) )
+            // InternalVampireLanguage.g:5013:1: ( () )
             {
-            // InternalVampireLanguage.g:4959:1: ( () )
-            // InternalVampireLanguage.g:4960:2: ()
+            // InternalVampireLanguage.g:5013:1: ( () )
+            // InternalVampireLanguage.g:5014:2: ()
             {
              before(grammarAccess.getVLSDefinedTermAccess().getVLSRealAction_1_0()); 
-            // InternalVampireLanguage.g:4961:2: ()
-            // InternalVampireLanguage.g:4961:3: 
+            // InternalVampireLanguage.g:5015:2: ()
+            // InternalVampireLanguage.g:5015:3: 
             {
             }
 
@@ -15342,14 +15498,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_1__1"
-    // InternalVampireLanguage.g:4969:1: rule__VLSDefinedTerm__Group_1__1 : rule__VLSDefinedTerm__Group_1__1__Impl ;
+    // InternalVampireLanguage.g:5023:1: rule__VLSDefinedTerm__Group_1__1 : rule__VLSDefinedTerm__Group_1__1__Impl ;
     public final void rule__VLSDefinedTerm__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4973:1: ( rule__VLSDefinedTerm__Group_1__1__Impl )
-            // InternalVampireLanguage.g:4974:2: rule__VLSDefinedTerm__Group_1__1__Impl
+            // InternalVampireLanguage.g:5027:1: ( rule__VLSDefinedTerm__Group_1__1__Impl )
+            // InternalVampireLanguage.g:5028:2: rule__VLSDefinedTerm__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__Group_1__1__Impl();
@@ -15375,21 +15531,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_1__1__Impl"
-    // InternalVampireLanguage.g:4980:1: rule__VLSDefinedTerm__Group_1__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) ) ;
+    // InternalVampireLanguage.g:5034:1: rule__VLSDefinedTerm__Group_1__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) ) ;
     public final void rule__VLSDefinedTerm__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:4984:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) ) )
-            // InternalVampireLanguage.g:4985:1: ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) )
+            // InternalVampireLanguage.g:5038:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) ) )
+            // InternalVampireLanguage.g:5039:1: ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) )
             {
-            // InternalVampireLanguage.g:4985:1: ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) )
-            // InternalVampireLanguage.g:4986:2: ( rule__VLSDefinedTerm__ValueAssignment_1_1 )
+            // InternalVampireLanguage.g:5039:1: ( ( rule__VLSDefinedTerm__ValueAssignment_1_1 ) )
+            // InternalVampireLanguage.g:5040:2: ( rule__VLSDefinedTerm__ValueAssignment_1_1 )
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueAssignment_1_1()); 
-            // InternalVampireLanguage.g:4987:2: ( rule__VLSDefinedTerm__ValueAssignment_1_1 )
-            // InternalVampireLanguage.g:4987:3: rule__VLSDefinedTerm__ValueAssignment_1_1
+            // InternalVampireLanguage.g:5041:2: ( rule__VLSDefinedTerm__ValueAssignment_1_1 )
+            // InternalVampireLanguage.g:5041:3: rule__VLSDefinedTerm__ValueAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__ValueAssignment_1_1();
@@ -15422,16 +15578,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_2__0"
-    // InternalVampireLanguage.g:4996:1: rule__VLSDefinedTerm__Group_2__0 : rule__VLSDefinedTerm__Group_2__0__Impl rule__VLSDefinedTerm__Group_2__1 ;
+    // InternalVampireLanguage.g:5050:1: rule__VLSDefinedTerm__Group_2__0 : rule__VLSDefinedTerm__Group_2__0__Impl rule__VLSDefinedTerm__Group_2__1 ;
     public final void rule__VLSDefinedTerm__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5000:1: ( rule__VLSDefinedTerm__Group_2__0__Impl rule__VLSDefinedTerm__Group_2__1 )
-            // InternalVampireLanguage.g:5001:2: rule__VLSDefinedTerm__Group_2__0__Impl rule__VLSDefinedTerm__Group_2__1
+            // InternalVampireLanguage.g:5054:1: ( rule__VLSDefinedTerm__Group_2__0__Impl rule__VLSDefinedTerm__Group_2__1 )
+            // InternalVampireLanguage.g:5055:2: rule__VLSDefinedTerm__Group_2__0__Impl rule__VLSDefinedTerm__Group_2__1
             {
-            pushFollow(FOLLOW_45);
+            pushFollow(FOLLOW_46);
             rule__VLSDefinedTerm__Group_2__0__Impl();
 
             state._fsp--;
@@ -15460,21 +15616,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_2__0__Impl"
-    // InternalVampireLanguage.g:5008:1: rule__VLSDefinedTerm__Group_2__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:5062:1: rule__VLSDefinedTerm__Group_2__0__Impl : ( () ) ;
     public final void rule__VLSDefinedTerm__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5012:1: ( ( () ) )
-            // InternalVampireLanguage.g:5013:1: ( () )
+            // InternalVampireLanguage.g:5066:1: ( ( () ) )
+            // InternalVampireLanguage.g:5067:1: ( () )
             {
-            // InternalVampireLanguage.g:5013:1: ( () )
-            // InternalVampireLanguage.g:5014:2: ()
+            // InternalVampireLanguage.g:5067:1: ( () )
+            // InternalVampireLanguage.g:5068:2: ()
             {
              before(grammarAccess.getVLSDefinedTermAccess().getVLSRationalAction_2_0()); 
-            // InternalVampireLanguage.g:5015:2: ()
-            // InternalVampireLanguage.g:5015:3: 
+            // InternalVampireLanguage.g:5069:2: ()
+            // InternalVampireLanguage.g:5069:3: 
             {
             }
 
@@ -15497,14 +15653,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_2__1"
-    // InternalVampireLanguage.g:5023:1: rule__VLSDefinedTerm__Group_2__1 : rule__VLSDefinedTerm__Group_2__1__Impl ;
+    // InternalVampireLanguage.g:5077:1: rule__VLSDefinedTerm__Group_2__1 : rule__VLSDefinedTerm__Group_2__1__Impl ;
     public final void rule__VLSDefinedTerm__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5027:1: ( rule__VLSDefinedTerm__Group_2__1__Impl )
-            // InternalVampireLanguage.g:5028:2: rule__VLSDefinedTerm__Group_2__1__Impl
+            // InternalVampireLanguage.g:5081:1: ( rule__VLSDefinedTerm__Group_2__1__Impl )
+            // InternalVampireLanguage.g:5082:2: rule__VLSDefinedTerm__Group_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__Group_2__1__Impl();
@@ -15530,21 +15686,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_2__1__Impl"
-    // InternalVampireLanguage.g:5034:1: rule__VLSDefinedTerm__Group_2__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) ) ;
+    // InternalVampireLanguage.g:5088:1: rule__VLSDefinedTerm__Group_2__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) ) ;
     public final void rule__VLSDefinedTerm__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5038:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) ) )
-            // InternalVampireLanguage.g:5039:1: ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) )
+            // InternalVampireLanguage.g:5092:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) ) )
+            // InternalVampireLanguage.g:5093:1: ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) )
             {
-            // InternalVampireLanguage.g:5039:1: ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) )
-            // InternalVampireLanguage.g:5040:2: ( rule__VLSDefinedTerm__ValueAssignment_2_1 )
+            // InternalVampireLanguage.g:5093:1: ( ( rule__VLSDefinedTerm__ValueAssignment_2_1 ) )
+            // InternalVampireLanguage.g:5094:2: ( rule__VLSDefinedTerm__ValueAssignment_2_1 )
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueAssignment_2_1()); 
-            // InternalVampireLanguage.g:5041:2: ( rule__VLSDefinedTerm__ValueAssignment_2_1 )
-            // InternalVampireLanguage.g:5041:3: rule__VLSDefinedTerm__ValueAssignment_2_1
+            // InternalVampireLanguage.g:5095:2: ( rule__VLSDefinedTerm__ValueAssignment_2_1 )
+            // InternalVampireLanguage.g:5095:3: rule__VLSDefinedTerm__ValueAssignment_2_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__ValueAssignment_2_1();
@@ -15577,16 +15733,16 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_3__0"
-    // InternalVampireLanguage.g:5050:1: rule__VLSDefinedTerm__Group_3__0 : rule__VLSDefinedTerm__Group_3__0__Impl rule__VLSDefinedTerm__Group_3__1 ;
+    // InternalVampireLanguage.g:5104:1: rule__VLSDefinedTerm__Group_3__0 : rule__VLSDefinedTerm__Group_3__0__Impl rule__VLSDefinedTerm__Group_3__1 ;
     public final void rule__VLSDefinedTerm__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5054:1: ( rule__VLSDefinedTerm__Group_3__0__Impl rule__VLSDefinedTerm__Group_3__1 )
-            // InternalVampireLanguage.g:5055:2: rule__VLSDefinedTerm__Group_3__0__Impl rule__VLSDefinedTerm__Group_3__1
+            // InternalVampireLanguage.g:5108:1: ( rule__VLSDefinedTerm__Group_3__0__Impl rule__VLSDefinedTerm__Group_3__1 )
+            // InternalVampireLanguage.g:5109:2: rule__VLSDefinedTerm__Group_3__0__Impl rule__VLSDefinedTerm__Group_3__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__VLSDefinedTerm__Group_3__0__Impl();
 
             state._fsp--;
@@ -15615,21 +15771,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_3__0__Impl"
-    // InternalVampireLanguage.g:5062:1: rule__VLSDefinedTerm__Group_3__0__Impl : ( () ) ;
+    // InternalVampireLanguage.g:5116:1: rule__VLSDefinedTerm__Group_3__0__Impl : ( () ) ;
     public final void rule__VLSDefinedTerm__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5066:1: ( ( () ) )
-            // InternalVampireLanguage.g:5067:1: ( () )
+            // InternalVampireLanguage.g:5120:1: ( ( () ) )
+            // InternalVampireLanguage.g:5121:1: ( () )
             {
-            // InternalVampireLanguage.g:5067:1: ( () )
-            // InternalVampireLanguage.g:5068:2: ()
+            // InternalVampireLanguage.g:5121:1: ( () )
+            // InternalVampireLanguage.g:5122:2: ()
             {
              before(grammarAccess.getVLSDefinedTermAccess().getVLSDoubleQuoteAction_3_0()); 
-            // InternalVampireLanguage.g:5069:2: ()
-            // InternalVampireLanguage.g:5069:3: 
+            // InternalVampireLanguage.g:5123:2: ()
+            // InternalVampireLanguage.g:5123:3: 
             {
             }
 
@@ -15652,14 +15808,14 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_3__1"
-    // InternalVampireLanguage.g:5077:1: rule__VLSDefinedTerm__Group_3__1 : rule__VLSDefinedTerm__Group_3__1__Impl ;
+    // InternalVampireLanguage.g:5131:1: rule__VLSDefinedTerm__Group_3__1 : rule__VLSDefinedTerm__Group_3__1__Impl ;
     public final void rule__VLSDefinedTerm__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5081:1: ( rule__VLSDefinedTerm__Group_3__1__Impl )
-            // InternalVampireLanguage.g:5082:2: rule__VLSDefinedTerm__Group_3__1__Impl
+            // InternalVampireLanguage.g:5135:1: ( rule__VLSDefinedTerm__Group_3__1__Impl )
+            // InternalVampireLanguage.g:5136:2: rule__VLSDefinedTerm__Group_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__Group_3__1__Impl();
@@ -15685,21 +15841,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__Group_3__1__Impl"
-    // InternalVampireLanguage.g:5088:1: rule__VLSDefinedTerm__Group_3__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) ) ;
+    // InternalVampireLanguage.g:5142:1: rule__VLSDefinedTerm__Group_3__1__Impl : ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) ) ;
     public final void rule__VLSDefinedTerm__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5092:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) ) )
-            // InternalVampireLanguage.g:5093:1: ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) )
+            // InternalVampireLanguage.g:5146:1: ( ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) ) )
+            // InternalVampireLanguage.g:5147:1: ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) )
             {
-            // InternalVampireLanguage.g:5093:1: ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) )
-            // InternalVampireLanguage.g:5094:2: ( rule__VLSDefinedTerm__ValueAssignment_3_1 )
+            // InternalVampireLanguage.g:5147:1: ( ( rule__VLSDefinedTerm__ValueAssignment_3_1 ) )
+            // InternalVampireLanguage.g:5148:2: ( rule__VLSDefinedTerm__ValueAssignment_3_1 )
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueAssignment_3_1()); 
-            // InternalVampireLanguage.g:5095:2: ( rule__VLSDefinedTerm__ValueAssignment_3_1 )
-            // InternalVampireLanguage.g:5095:3: rule__VLSDefinedTerm__ValueAssignment_3_1
+            // InternalVampireLanguage.g:5149:2: ( rule__VLSDefinedTerm__ValueAssignment_3_1 )
+            // InternalVampireLanguage.g:5149:3: rule__VLSDefinedTerm__ValueAssignment_3_1
             {
             pushFollow(FOLLOW_2);
             rule__VLSDefinedTerm__ValueAssignment_3_1();
@@ -15732,17 +15888,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VampireModel__IncludesAssignment_0"
-    // InternalVampireLanguage.g:5104:1: rule__VampireModel__IncludesAssignment_0 : ( ruleVLSInclude ) ;
+    // InternalVampireLanguage.g:5158:1: rule__VampireModel__IncludesAssignment_0 : ( ruleVLSInclude ) ;
     public final void rule__VampireModel__IncludesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5108:1: ( ( ruleVLSInclude ) )
-            // InternalVampireLanguage.g:5109:2: ( ruleVLSInclude )
+            // InternalVampireLanguage.g:5162:1: ( ( ruleVLSInclude ) )
+            // InternalVampireLanguage.g:5163:2: ( ruleVLSInclude )
             {
-            // InternalVampireLanguage.g:5109:2: ( ruleVLSInclude )
-            // InternalVampireLanguage.g:5110:3: ruleVLSInclude
+            // InternalVampireLanguage.g:5163:2: ( ruleVLSInclude )
+            // InternalVampireLanguage.g:5164:3: ruleVLSInclude
             {
              before(grammarAccess.getVampireModelAccess().getIncludesVLSIncludeParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15773,17 +15929,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VampireModel__CommentsAssignment_1"
-    // InternalVampireLanguage.g:5119:1: rule__VampireModel__CommentsAssignment_1 : ( ruleVLSComment ) ;
+    // InternalVampireLanguage.g:5173:1: rule__VampireModel__CommentsAssignment_1 : ( ruleVLSComment ) ;
     public final void rule__VampireModel__CommentsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5123:1: ( ( ruleVLSComment ) )
-            // InternalVampireLanguage.g:5124:2: ( ruleVLSComment )
+            // InternalVampireLanguage.g:5177:1: ( ( ruleVLSComment ) )
+            // InternalVampireLanguage.g:5178:2: ( ruleVLSComment )
             {
-            // InternalVampireLanguage.g:5124:2: ( ruleVLSComment )
-            // InternalVampireLanguage.g:5125:3: ruleVLSComment
+            // InternalVampireLanguage.g:5178:2: ( ruleVLSComment )
+            // InternalVampireLanguage.g:5179:3: ruleVLSComment
             {
              before(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15814,17 +15970,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VampireModel__FormulasAssignment_2"
-    // InternalVampireLanguage.g:5134:1: rule__VampireModel__FormulasAssignment_2 : ( ruleVLSFofFormula ) ;
+    // InternalVampireLanguage.g:5188:1: rule__VampireModel__FormulasAssignment_2 : ( ruleVLSFofFormula ) ;
     public final void rule__VampireModel__FormulasAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5138:1: ( ( ruleVLSFofFormula ) )
-            // InternalVampireLanguage.g:5139:2: ( ruleVLSFofFormula )
+            // InternalVampireLanguage.g:5192:1: ( ( ruleVLSFofFormula ) )
+            // InternalVampireLanguage.g:5193:2: ( ruleVLSFofFormula )
             {
-            // InternalVampireLanguage.g:5139:2: ( ruleVLSFofFormula )
-            // InternalVampireLanguage.g:5140:3: ruleVLSFofFormula
+            // InternalVampireLanguage.g:5193:2: ( ruleVLSFofFormula )
+            // InternalVampireLanguage.g:5194:3: ruleVLSFofFormula
             {
              before(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -15855,17 +16011,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSInclude__FileNameAssignment_1"
-    // InternalVampireLanguage.g:5149:1: rule__VLSInclude__FileNameAssignment_1 : ( RULE_SINGLE_QUOTE ) ;
+    // InternalVampireLanguage.g:5203:1: rule__VLSInclude__FileNameAssignment_1 : ( RULE_SINGLE_QUOTE ) ;
     public final void rule__VLSInclude__FileNameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5153:1: ( ( RULE_SINGLE_QUOTE ) )
-            // InternalVampireLanguage.g:5154:2: ( RULE_SINGLE_QUOTE )
+            // InternalVampireLanguage.g:5207:1: ( ( RULE_SINGLE_QUOTE ) )
+            // InternalVampireLanguage.g:5208:2: ( RULE_SINGLE_QUOTE )
             {
-            // InternalVampireLanguage.g:5154:2: ( RULE_SINGLE_QUOTE )
-            // InternalVampireLanguage.g:5155:3: RULE_SINGLE_QUOTE
+            // InternalVampireLanguage.g:5208:2: ( RULE_SINGLE_QUOTE )
+            // InternalVampireLanguage.g:5209:3: RULE_SINGLE_QUOTE
             {
              before(grammarAccess.getVLSIncludeAccess().getFileNameSINGLE_QUOTETerminalRuleCall_1_0()); 
             match(input,RULE_SINGLE_QUOTE,FOLLOW_2); 
@@ -15892,17 +16048,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSInclude__NamesAssignment_2_1"
-    // InternalVampireLanguage.g:5164:1: rule__VLSInclude__NamesAssignment_2_1 : ( ruleVLSName ) ;
+    // InternalVampireLanguage.g:5218:1: rule__VLSInclude__NamesAssignment_2_1 : ( ruleVLSName ) ;
     public final void rule__VLSInclude__NamesAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5168:1: ( ( ruleVLSName ) )
-            // InternalVampireLanguage.g:5169:2: ( ruleVLSName )
+            // InternalVampireLanguage.g:5222:1: ( ( ruleVLSName ) )
+            // InternalVampireLanguage.g:5223:2: ( ruleVLSName )
             {
-            // InternalVampireLanguage.g:5169:2: ( ruleVLSName )
-            // InternalVampireLanguage.g:5170:3: ruleVLSName
+            // InternalVampireLanguage.g:5223:2: ( ruleVLSName )
+            // InternalVampireLanguage.g:5224:3: ruleVLSName
             {
              before(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15933,17 +16089,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSInclude__NamesAssignment_2_2_1"
-    // InternalVampireLanguage.g:5179:1: rule__VLSInclude__NamesAssignment_2_2_1 : ( ruleVLSName ) ;
+    // InternalVampireLanguage.g:5233:1: rule__VLSInclude__NamesAssignment_2_2_1 : ( ruleVLSName ) ;
     public final void rule__VLSInclude__NamesAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5183:1: ( ( ruleVLSName ) )
-            // InternalVampireLanguage.g:5184:2: ( ruleVLSName )
+            // InternalVampireLanguage.g:5237:1: ( ( ruleVLSName ) )
+            // InternalVampireLanguage.g:5238:2: ( ruleVLSName )
             {
-            // InternalVampireLanguage.g:5184:2: ( ruleVLSName )
-            // InternalVampireLanguage.g:5185:3: ruleVLSName
+            // InternalVampireLanguage.g:5238:2: ( ruleVLSName )
+            // InternalVampireLanguage.g:5239:3: ruleVLSName
             {
              before(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15974,21 +16130,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSName__NameAssignment"
-    // InternalVampireLanguage.g:5194:1: rule__VLSName__NameAssignment : ( ( rule__VLSName__NameAlternatives_0 ) ) ;
+    // InternalVampireLanguage.g:5248:1: rule__VLSName__NameAssignment : ( ( rule__VLSName__NameAlternatives_0 ) ) ;
     public final void rule__VLSName__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5198:1: ( ( ( rule__VLSName__NameAlternatives_0 ) ) )
-            // InternalVampireLanguage.g:5199:2: ( ( rule__VLSName__NameAlternatives_0 ) )
+            // InternalVampireLanguage.g:5252:1: ( ( ( rule__VLSName__NameAlternatives_0 ) ) )
+            // InternalVampireLanguage.g:5253:2: ( ( rule__VLSName__NameAlternatives_0 ) )
             {
-            // InternalVampireLanguage.g:5199:2: ( ( rule__VLSName__NameAlternatives_0 ) )
-            // InternalVampireLanguage.g:5200:3: ( rule__VLSName__NameAlternatives_0 )
+            // InternalVampireLanguage.g:5253:2: ( ( rule__VLSName__NameAlternatives_0 ) )
+            // InternalVampireLanguage.g:5254:3: ( rule__VLSName__NameAlternatives_0 )
             {
              before(grammarAccess.getVLSNameAccess().getNameAlternatives_0()); 
-            // InternalVampireLanguage.g:5201:3: ( rule__VLSName__NameAlternatives_0 )
-            // InternalVampireLanguage.g:5201:4: rule__VLSName__NameAlternatives_0
+            // InternalVampireLanguage.g:5255:3: ( rule__VLSName__NameAlternatives_0 )
+            // InternalVampireLanguage.g:5255:4: rule__VLSName__NameAlternatives_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSName__NameAlternatives_0();
@@ -16020,22 +16176,22 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
     // $ANTLR end "rule__VLSName__NameAssignment"
 
 
-    // $ANTLR start "rule__VLSComment__CommentAssignment"
-    // InternalVampireLanguage.g:5209:1: rule__VLSComment__CommentAssignment : ( RULE_SINGLE_COMMENT ) ;
-    public final void rule__VLSComment__CommentAssignment() throws RecognitionException {
+    // $ANTLR start "rule__VLSComment__CommentAssignment_1"
+    // InternalVampireLanguage.g:5263:1: rule__VLSComment__CommentAssignment_1 : ( RULE_SINGLE_COMMENT ) ;
+    public final void rule__VLSComment__CommentAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5213:1: ( ( RULE_SINGLE_COMMENT ) )
-            // InternalVampireLanguage.g:5214:2: ( RULE_SINGLE_COMMENT )
+            // InternalVampireLanguage.g:5267:1: ( ( RULE_SINGLE_COMMENT ) )
+            // InternalVampireLanguage.g:5268:2: ( RULE_SINGLE_COMMENT )
             {
-            // InternalVampireLanguage.g:5214:2: ( RULE_SINGLE_COMMENT )
-            // InternalVampireLanguage.g:5215:3: RULE_SINGLE_COMMENT
+            // InternalVampireLanguage.g:5268:2: ( RULE_SINGLE_COMMENT )
+            // InternalVampireLanguage.g:5269:3: RULE_SINGLE_COMMENT
             {
-             before(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0()); 
+             before(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0()); 
             match(input,RULE_SINGLE_COMMENT,FOLLOW_2); 
-             after(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0()); 
+             after(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0()); 
 
             }
 
@@ -16054,25 +16210,25 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
         }
         return ;
     }
-    // $ANTLR end "rule__VLSComment__CommentAssignment"
+    // $ANTLR end "rule__VLSComment__CommentAssignment_1"
 
 
     // $ANTLR start "rule__VLSFofFormula__NameAssignment_2"
-    // InternalVampireLanguage.g:5224:1: rule__VLSFofFormula__NameAssignment_2 : ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) ) ;
+    // InternalVampireLanguage.g:5278:1: rule__VLSFofFormula__NameAssignment_2 : ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) ) ;
     public final void rule__VLSFofFormula__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5228:1: ( ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) ) )
-            // InternalVampireLanguage.g:5229:2: ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) )
+            // InternalVampireLanguage.g:5282:1: ( ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) ) )
+            // InternalVampireLanguage.g:5283:2: ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) )
             {
-            // InternalVampireLanguage.g:5229:2: ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) )
-            // InternalVampireLanguage.g:5230:3: ( rule__VLSFofFormula__NameAlternatives_2_0 )
+            // InternalVampireLanguage.g:5283:2: ( ( rule__VLSFofFormula__NameAlternatives_2_0 ) )
+            // InternalVampireLanguage.g:5284:3: ( rule__VLSFofFormula__NameAlternatives_2_0 )
             {
              before(grammarAccess.getVLSFofFormulaAccess().getNameAlternatives_2_0()); 
-            // InternalVampireLanguage.g:5231:3: ( rule__VLSFofFormula__NameAlternatives_2_0 )
-            // InternalVampireLanguage.g:5231:4: rule__VLSFofFormula__NameAlternatives_2_0
+            // InternalVampireLanguage.g:5285:3: ( rule__VLSFofFormula__NameAlternatives_2_0 )
+            // InternalVampireLanguage.g:5285:4: rule__VLSFofFormula__NameAlternatives_2_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSFofFormula__NameAlternatives_2_0();
@@ -16105,17 +16261,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__FofRoleAssignment_4"
-    // InternalVampireLanguage.g:5239:1: rule__VLSFofFormula__FofRoleAssignment_4 : ( ruleVLSRole ) ;
+    // InternalVampireLanguage.g:5293:1: rule__VLSFofFormula__FofRoleAssignment_4 : ( ruleVLSRole ) ;
     public final void rule__VLSFofFormula__FofRoleAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5243:1: ( ( ruleVLSRole ) )
-            // InternalVampireLanguage.g:5244:2: ( ruleVLSRole )
+            // InternalVampireLanguage.g:5297:1: ( ( ruleVLSRole ) )
+            // InternalVampireLanguage.g:5298:2: ( ruleVLSRole )
             {
-            // InternalVampireLanguage.g:5244:2: ( ruleVLSRole )
-            // InternalVampireLanguage.g:5245:3: ruleVLSRole
+            // InternalVampireLanguage.g:5298:2: ( ruleVLSRole )
+            // InternalVampireLanguage.g:5299:3: ruleVLSRole
             {
              before(grammarAccess.getVLSFofFormulaAccess().getFofRoleVLSRoleParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -16146,17 +16302,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__FofFormulaAssignment_6"
-    // InternalVampireLanguage.g:5254:1: rule__VLSFofFormula__FofFormulaAssignment_6 : ( ruleVLSTerm ) ;
+    // InternalVampireLanguage.g:5308:1: rule__VLSFofFormula__FofFormulaAssignment_6 : ( ruleVLSTerm ) ;
     public final void rule__VLSFofFormula__FofFormulaAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5258:1: ( ( ruleVLSTerm ) )
-            // InternalVampireLanguage.g:5259:2: ( ruleVLSTerm )
+            // InternalVampireLanguage.g:5312:1: ( ( ruleVLSTerm ) )
+            // InternalVampireLanguage.g:5313:2: ( ruleVLSTerm )
             {
-            // InternalVampireLanguage.g:5259:2: ( ruleVLSTerm )
-            // InternalVampireLanguage.g:5260:3: ruleVLSTerm
+            // InternalVampireLanguage.g:5313:2: ( ruleVLSTerm )
+            // InternalVampireLanguage.g:5314:3: ruleVLSTerm
             {
              before(grammarAccess.getVLSFofFormulaAccess().getFofFormulaVLSTermParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
@@ -16187,17 +16343,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFofFormula__AnnotationsAssignment_7_1"
-    // InternalVampireLanguage.g:5269:1: rule__VLSFofFormula__AnnotationsAssignment_7_1 : ( ruleVLSAnnotation ) ;
+    // InternalVampireLanguage.g:5323:1: rule__VLSFofFormula__AnnotationsAssignment_7_1 : ( ruleVLSAnnotation ) ;
     public final void rule__VLSFofFormula__AnnotationsAssignment_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5273:1: ( ( ruleVLSAnnotation ) )
-            // InternalVampireLanguage.g:5274:2: ( ruleVLSAnnotation )
+            // InternalVampireLanguage.g:5327:1: ( ( ruleVLSAnnotation ) )
+            // InternalVampireLanguage.g:5328:2: ( ruleVLSAnnotation )
             {
-            // InternalVampireLanguage.g:5274:2: ( ruleVLSAnnotation )
-            // InternalVampireLanguage.g:5275:3: ruleVLSAnnotation
+            // InternalVampireLanguage.g:5328:2: ( ruleVLSAnnotation )
+            // InternalVampireLanguage.g:5329:3: ruleVLSAnnotation
             {
              before(grammarAccess.getVLSFofFormulaAccess().getAnnotationsVLSAnnotationParserRuleCall_7_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16228,21 +16384,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__NameAssignment_1"
-    // InternalVampireLanguage.g:5284:1: rule__VLSAnnotation__NameAssignment_1 : ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) ) ;
+    // InternalVampireLanguage.g:5338:1: rule__VLSAnnotation__NameAssignment_1 : ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) ) ;
     public final void rule__VLSAnnotation__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5288:1: ( ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) ) )
-            // InternalVampireLanguage.g:5289:2: ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) )
+            // InternalVampireLanguage.g:5342:1: ( ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) ) )
+            // InternalVampireLanguage.g:5343:2: ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) )
             {
-            // InternalVampireLanguage.g:5289:2: ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) )
-            // InternalVampireLanguage.g:5290:3: ( rule__VLSAnnotation__NameAlternatives_1_0 )
+            // InternalVampireLanguage.g:5343:2: ( ( rule__VLSAnnotation__NameAlternatives_1_0 ) )
+            // InternalVampireLanguage.g:5344:3: ( rule__VLSAnnotation__NameAlternatives_1_0 )
             {
              before(grammarAccess.getVLSAnnotationAccess().getNameAlternatives_1_0()); 
-            // InternalVampireLanguage.g:5291:3: ( rule__VLSAnnotation__NameAlternatives_1_0 )
-            // InternalVampireLanguage.g:5291:4: rule__VLSAnnotation__NameAlternatives_1_0
+            // InternalVampireLanguage.g:5345:3: ( rule__VLSAnnotation__NameAlternatives_1_0 )
+            // InternalVampireLanguage.g:5345:4: rule__VLSAnnotation__NameAlternatives_1_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSAnnotation__NameAlternatives_1_0();
@@ -16275,17 +16431,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotation__FollowupAssignment_2_1"
-    // InternalVampireLanguage.g:5299:1: rule__VLSAnnotation__FollowupAssignment_2_1 : ( ruleVLSAnnotationTerms ) ;
+    // InternalVampireLanguage.g:5353:1: rule__VLSAnnotation__FollowupAssignment_2_1 : ( ruleVLSAnnotationTerms ) ;
     public final void rule__VLSAnnotation__FollowupAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5303:1: ( ( ruleVLSAnnotationTerms ) )
-            // InternalVampireLanguage.g:5304:2: ( ruleVLSAnnotationTerms )
+            // InternalVampireLanguage.g:5357:1: ( ( ruleVLSAnnotationTerms ) )
+            // InternalVampireLanguage.g:5358:2: ( ruleVLSAnnotationTerms )
             {
-            // InternalVampireLanguage.g:5304:2: ( ruleVLSAnnotationTerms )
-            // InternalVampireLanguage.g:5305:3: ruleVLSAnnotationTerms
+            // InternalVampireLanguage.g:5358:2: ( ruleVLSAnnotationTerms )
+            // InternalVampireLanguage.g:5359:3: ruleVLSAnnotationTerms
             {
              before(grammarAccess.getVLSAnnotationAccess().getFollowupVLSAnnotationTermsParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16316,17 +16472,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__TermsAssignment_0"
-    // InternalVampireLanguage.g:5314:1: rule__VLSAnnotationTerms__TermsAssignment_0 : ( ruleVLSAnnotation ) ;
+    // InternalVampireLanguage.g:5368:1: rule__VLSAnnotationTerms__TermsAssignment_0 : ( ruleVLSAnnotation ) ;
     public final void rule__VLSAnnotationTerms__TermsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5318:1: ( ( ruleVLSAnnotation ) )
-            // InternalVampireLanguage.g:5319:2: ( ruleVLSAnnotation )
+            // InternalVampireLanguage.g:5372:1: ( ( ruleVLSAnnotation ) )
+            // InternalVampireLanguage.g:5373:2: ( ruleVLSAnnotation )
             {
-            // InternalVampireLanguage.g:5319:2: ( ruleVLSAnnotation )
-            // InternalVampireLanguage.g:5320:3: ruleVLSAnnotation
+            // InternalVampireLanguage.g:5373:2: ( ruleVLSAnnotation )
+            // InternalVampireLanguage.g:5374:3: ruleVLSAnnotation
             {
              before(grammarAccess.getVLSAnnotationTermsAccess().getTermsVLSAnnotationParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -16357,17 +16513,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAnnotationTerms__TermsAssignment_1_1"
-    // InternalVampireLanguage.g:5329:1: rule__VLSAnnotationTerms__TermsAssignment_1_1 : ( ruleVLSAnnotation ) ;
+    // InternalVampireLanguage.g:5383:1: rule__VLSAnnotationTerms__TermsAssignment_1_1 : ( ruleVLSAnnotation ) ;
     public final void rule__VLSAnnotationTerms__TermsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5333:1: ( ( ruleVLSAnnotation ) )
-            // InternalVampireLanguage.g:5334:2: ( ruleVLSAnnotation )
+            // InternalVampireLanguage.g:5387:1: ( ( ruleVLSAnnotation ) )
+            // InternalVampireLanguage.g:5388:2: ( ruleVLSAnnotation )
             {
-            // InternalVampireLanguage.g:5334:2: ( ruleVLSAnnotation )
-            // InternalVampireLanguage.g:5335:3: ruleVLSAnnotation
+            // InternalVampireLanguage.g:5388:2: ( ruleVLSAnnotation )
+            // InternalVampireLanguage.g:5389:3: ruleVLSAnnotation
             {
              before(grammarAccess.getVLSAnnotationTermsAccess().getTermsVLSAnnotationParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16398,17 +16554,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__RightAssignment_1_0_1"
-    // InternalVampireLanguage.g:5344:1: rule__VLSBinary__RightAssignment_1_0_1 : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:5398:1: rule__VLSBinary__RightAssignment_1_0_1 : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSBinary__RightAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5348:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:5349:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5402:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:5403:2: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:5349:2: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:5350:3: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:5403:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5404:3: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSBinaryAccess().getRightVLSUnitaryFormulaParserRuleCall_1_0_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16439,17 +16595,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__RightAssignment_1_1_2"
-    // InternalVampireLanguage.g:5359:1: rule__VLSBinary__RightAssignment_1_1_2 : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:5413:1: rule__VLSBinary__RightAssignment_1_1_2 : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSBinary__RightAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5363:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:5364:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5417:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:5418:2: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:5364:2: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:5365:3: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:5418:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5419:3: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSBinaryAccess().getRightVLSUnitaryFormulaParserRuleCall_1_1_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16480,17 +16636,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSBinary__RightAssignment_1_2_2"
-    // InternalVampireLanguage.g:5374:1: rule__VLSBinary__RightAssignment_1_2_2 : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:5428:1: rule__VLSBinary__RightAssignment_1_2_2 : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSBinary__RightAssignment_1_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5378:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:5379:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5432:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:5433:2: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:5379:2: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:5380:3: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:5433:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5434:3: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSBinaryAccess().getRightVLSUnitaryFormulaParserRuleCall_1_2_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16521,17 +16677,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__VariablesAssignment_1_2"
-    // InternalVampireLanguage.g:5389:1: rule__VLSUniversalQuantifier__VariablesAssignment_1_2 : ( ruleVLSVariable ) ;
+    // InternalVampireLanguage.g:5443:1: rule__VLSUniversalQuantifier__VariablesAssignment_1_2 : ( ruleVLSVariable ) ;
     public final void rule__VLSUniversalQuantifier__VariablesAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5393:1: ( ( ruleVLSVariable ) )
-            // InternalVampireLanguage.g:5394:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5447:1: ( ( ruleVLSVariable ) )
+            // InternalVampireLanguage.g:5448:2: ( ruleVLSVariable )
             {
-            // InternalVampireLanguage.g:5394:2: ( ruleVLSVariable )
-            // InternalVampireLanguage.g:5395:3: ruleVLSVariable
+            // InternalVampireLanguage.g:5448:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5449:3: ruleVLSVariable
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16562,17 +16718,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1"
-    // InternalVampireLanguage.g:5404:1: rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 : ( ruleVLSVariable ) ;
+    // InternalVampireLanguage.g:5458:1: rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1 : ( ruleVLSVariable ) ;
     public final void rule__VLSUniversalQuantifier__VariablesAssignment_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5408:1: ( ( ruleVLSVariable ) )
-            // InternalVampireLanguage.g:5409:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5462:1: ( ( ruleVLSVariable ) )
+            // InternalVampireLanguage.g:5463:2: ( ruleVLSVariable )
             {
-            // InternalVampireLanguage.g:5409:2: ( ruleVLSVariable )
-            // InternalVampireLanguage.g:5410:3: ruleVLSVariable
+            // InternalVampireLanguage.g:5463:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5464:3: ruleVLSVariable
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16603,17 +16759,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUniversalQuantifier__OperandAssignment_2"
-    // InternalVampireLanguage.g:5419:1: rule__VLSUniversalQuantifier__OperandAssignment_2 : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:5473:1: rule__VLSUniversalQuantifier__OperandAssignment_2 : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSUniversalQuantifier__OperandAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5423:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:5424:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5477:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:5478:2: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:5424:2: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:5425:3: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:5478:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5479:3: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSUniversalQuantifierAccess().getOperandVLSUnitaryFormulaParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16644,17 +16800,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__VariablesAssignment_1_2"
-    // InternalVampireLanguage.g:5434:1: rule__VLSExistentialQuantifier__VariablesAssignment_1_2 : ( ruleVLSVariable ) ;
+    // InternalVampireLanguage.g:5488:1: rule__VLSExistentialQuantifier__VariablesAssignment_1_2 : ( ruleVLSVariable ) ;
     public final void rule__VLSExistentialQuantifier__VariablesAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5438:1: ( ( ruleVLSVariable ) )
-            // InternalVampireLanguage.g:5439:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5492:1: ( ( ruleVLSVariable ) )
+            // InternalVampireLanguage.g:5493:2: ( ruleVLSVariable )
             {
-            // InternalVampireLanguage.g:5439:2: ( ruleVLSVariable )
-            // InternalVampireLanguage.g:5440:3: ruleVLSVariable
+            // InternalVampireLanguage.g:5493:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5494:3: ruleVLSVariable
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16685,17 +16841,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1"
-    // InternalVampireLanguage.g:5449:1: rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 : ( ruleVLSVariable ) ;
+    // InternalVampireLanguage.g:5503:1: rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1 : ( ruleVLSVariable ) ;
     public final void rule__VLSExistentialQuantifier__VariablesAssignment_1_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5453:1: ( ( ruleVLSVariable ) )
-            // InternalVampireLanguage.g:5454:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5507:1: ( ( ruleVLSVariable ) )
+            // InternalVampireLanguage.g:5508:2: ( ruleVLSVariable )
             {
-            // InternalVampireLanguage.g:5454:2: ( ruleVLSVariable )
-            // InternalVampireLanguage.g:5455:3: ruleVLSVariable
+            // InternalVampireLanguage.g:5508:2: ( ruleVLSVariable )
+            // InternalVampireLanguage.g:5509:3: ruleVLSVariable
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16726,17 +16882,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSExistentialQuantifier__OperandAssignment_2"
-    // InternalVampireLanguage.g:5464:1: rule__VLSExistentialQuantifier__OperandAssignment_2 : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:5518:1: rule__VLSExistentialQuantifier__OperandAssignment_2 : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSExistentialQuantifier__OperandAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5468:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:5469:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5522:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:5523:2: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:5469:2: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:5470:3: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:5523:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5524:3: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSExistentialQuantifierAccess().getOperandVLSUnitaryFormulaParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16767,17 +16923,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryNegation__OperandAssignment_2"
-    // InternalVampireLanguage.g:5479:1: rule__VLSUnaryNegation__OperandAssignment_2 : ( ruleVLSUnitaryFormula ) ;
+    // InternalVampireLanguage.g:5533:1: rule__VLSUnaryNegation__OperandAssignment_2 : ( ruleVLSUnitaryFormula ) ;
     public final void rule__VLSUnaryNegation__OperandAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5483:1: ( ( ruleVLSUnitaryFormula ) )
-            // InternalVampireLanguage.g:5484:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5537:1: ( ( ruleVLSUnitaryFormula ) )
+            // InternalVampireLanguage.g:5538:2: ( ruleVLSUnitaryFormula )
             {
-            // InternalVampireLanguage.g:5484:2: ( ruleVLSUnitaryFormula )
-            // InternalVampireLanguage.g:5485:3: ruleVLSUnitaryFormula
+            // InternalVampireLanguage.g:5538:2: ( ruleVLSUnitaryFormula )
+            // InternalVampireLanguage.g:5539:3: ruleVLSUnitaryFormula
             {
              before(grammarAccess.getVLSUnaryNegationAccess().getOperandVLSUnitaryFormulaParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16808,17 +16964,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSUnaryInfix__RightAssignment_1_1"
-    // InternalVampireLanguage.g:5494:1: rule__VLSUnaryInfix__RightAssignment_1_1 : ( ruleVLSAtomic ) ;
+    // InternalVampireLanguage.g:5548:1: rule__VLSUnaryInfix__RightAssignment_1_1 : ( ruleVLSAtomic ) ;
     public final void rule__VLSUnaryInfix__RightAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5498:1: ( ( ruleVLSAtomic ) )
-            // InternalVampireLanguage.g:5499:2: ( ruleVLSAtomic )
+            // InternalVampireLanguage.g:5552:1: ( ( ruleVLSAtomic ) )
+            // InternalVampireLanguage.g:5553:2: ( ruleVLSAtomic )
             {
-            // InternalVampireLanguage.g:5499:2: ( ruleVLSAtomic )
-            // InternalVampireLanguage.g:5500:3: ruleVLSAtomic
+            // InternalVampireLanguage.g:5553:2: ( ruleVLSAtomic )
+            // InternalVampireLanguage.g:5554:3: ruleVLSAtomic
             {
              before(grammarAccess.getVLSUnaryInfixAccess().getRightVLSAtomicParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16849,21 +17005,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicConstant__NameAssignment_0_1"
-    // InternalVampireLanguage.g:5509:1: rule__VLSAtomicConstant__NameAssignment_0_1 : ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) ) ;
+    // InternalVampireLanguage.g:5563:1: rule__VLSAtomicConstant__NameAssignment_0_1 : ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) ) ;
     public final void rule__VLSAtomicConstant__NameAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5513:1: ( ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) ) )
-            // InternalVampireLanguage.g:5514:2: ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) )
+            // InternalVampireLanguage.g:5567:1: ( ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) ) )
+            // InternalVampireLanguage.g:5568:2: ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) )
             {
-            // InternalVampireLanguage.g:5514:2: ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) )
-            // InternalVampireLanguage.g:5515:3: ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 )
+            // InternalVampireLanguage.g:5568:2: ( ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 ) )
+            // InternalVampireLanguage.g:5569:3: ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 )
             {
              before(grammarAccess.getVLSAtomicConstantAccess().getNameAlternatives_0_1_0()); 
-            // InternalVampireLanguage.g:5516:3: ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 )
-            // InternalVampireLanguage.g:5516:4: rule__VLSAtomicConstant__NameAlternatives_0_1_0
+            // InternalVampireLanguage.g:5570:3: ( rule__VLSAtomicConstant__NameAlternatives_0_1_0 )
+            // InternalVampireLanguage.g:5570:4: rule__VLSAtomicConstant__NameAlternatives_0_1_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicConstant__NameAlternatives_0_1_0();
@@ -16896,21 +17052,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__ConstantAssignment_0_1"
-    // InternalVampireLanguage.g:5524:1: rule__VLSAtomicFunction__ConstantAssignment_0_1 : ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) ) ;
+    // InternalVampireLanguage.g:5578:1: rule__VLSAtomicFunction__ConstantAssignment_0_1 : ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) ) ;
     public final void rule__VLSAtomicFunction__ConstantAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5528:1: ( ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) ) )
-            // InternalVampireLanguage.g:5529:2: ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) )
+            // InternalVampireLanguage.g:5582:1: ( ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) ) )
+            // InternalVampireLanguage.g:5583:2: ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) )
             {
-            // InternalVampireLanguage.g:5529:2: ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) )
-            // InternalVampireLanguage.g:5530:3: ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 )
+            // InternalVampireLanguage.g:5583:2: ( ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 ) )
+            // InternalVampireLanguage.g:5584:3: ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getConstantAlternatives_0_1_0()); 
-            // InternalVampireLanguage.g:5531:3: ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 )
-            // InternalVampireLanguage.g:5531:4: rule__VLSAtomicFunction__ConstantAlternatives_0_1_0
+            // InternalVampireLanguage.g:5585:3: ( rule__VLSAtomicFunction__ConstantAlternatives_0_1_0 )
+            // InternalVampireLanguage.g:5585:4: rule__VLSAtomicFunction__ConstantAlternatives_0_1_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSAtomicFunction__ConstantAlternatives_0_1_0();
@@ -16943,17 +17099,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__TermsAssignment_0_2_1"
-    // InternalVampireLanguage.g:5539:1: rule__VLSAtomicFunction__TermsAssignment_0_2_1 : ( ruleVLSFofTerm ) ;
+    // InternalVampireLanguage.g:5593:1: rule__VLSAtomicFunction__TermsAssignment_0_2_1 : ( ruleVLSFofTerm ) ;
     public final void rule__VLSAtomicFunction__TermsAssignment_0_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5543:1: ( ( ruleVLSFofTerm ) )
-            // InternalVampireLanguage.g:5544:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5597:1: ( ( ruleVLSFofTerm ) )
+            // InternalVampireLanguage.g:5598:2: ( ruleVLSFofTerm )
             {
-            // InternalVampireLanguage.g:5544:2: ( ruleVLSFofTerm )
-            // InternalVampireLanguage.g:5545:3: ruleVLSFofTerm
+            // InternalVampireLanguage.g:5598:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5599:3: ruleVLSFofTerm
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_0_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16984,17 +17140,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__TermsAssignment_0_2_2_1"
-    // InternalVampireLanguage.g:5554:1: rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 : ( ruleVLSFofTerm ) ;
+    // InternalVampireLanguage.g:5608:1: rule__VLSAtomicFunction__TermsAssignment_0_2_2_1 : ( ruleVLSFofTerm ) ;
     public final void rule__VLSAtomicFunction__TermsAssignment_0_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5558:1: ( ( ruleVLSFofTerm ) )
-            // InternalVampireLanguage.g:5559:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5612:1: ( ( ruleVLSFofTerm ) )
+            // InternalVampireLanguage.g:5613:2: ( ruleVLSFofTerm )
             {
-            // InternalVampireLanguage.g:5559:2: ( ruleVLSFofTerm )
-            // InternalVampireLanguage.g:5560:3: ruleVLSFofTerm
+            // InternalVampireLanguage.g:5613:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5614:3: ruleVLSFofTerm
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_0_2_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -17025,24 +17181,24 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__NameAssignment_1_1"
-    // InternalVampireLanguage.g:5569:1: rule__VLSAtomicFunction__NameAssignment_1_1 : ( ( '$less' ) ) ;
+    // InternalVampireLanguage.g:5623:1: rule__VLSAtomicFunction__NameAssignment_1_1 : ( ( '$less' ) ) ;
     public final void rule__VLSAtomicFunction__NameAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5573:1: ( ( ( '$less' ) ) )
-            // InternalVampireLanguage.g:5574:2: ( ( '$less' ) )
+            // InternalVampireLanguage.g:5627:1: ( ( ( '$less' ) ) )
+            // InternalVampireLanguage.g:5628:2: ( ( '$less' ) )
             {
-            // InternalVampireLanguage.g:5574:2: ( ( '$less' ) )
-            // InternalVampireLanguage.g:5575:3: ( '$less' )
-            {
-             before(grammarAccess.getVLSAtomicFunctionAccess().getNameLessKeyword_1_1_0()); 
-            // InternalVampireLanguage.g:5576:3: ( '$less' )
-            // InternalVampireLanguage.g:5577:4: '$less'
+            // InternalVampireLanguage.g:5628:2: ( ( '$less' ) )
+            // InternalVampireLanguage.g:5629:3: ( '$less' )
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getNameLessKeyword_1_1_0()); 
-            match(input,68,FOLLOW_2); 
+            // InternalVampireLanguage.g:5630:3: ( '$less' )
+            // InternalVampireLanguage.g:5631:4: '$less'
+            {
+             before(grammarAccess.getVLSAtomicFunctionAccess().getNameLessKeyword_1_1_0()); 
+            match(input,69,FOLLOW_2); 
              after(grammarAccess.getVLSAtomicFunctionAccess().getNameLessKeyword_1_1_0()); 
 
             }
@@ -17070,17 +17226,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__TermsAssignment_1_3"
-    // InternalVampireLanguage.g:5588:1: rule__VLSAtomicFunction__TermsAssignment_1_3 : ( ruleVLSFofTerm ) ;
+    // InternalVampireLanguage.g:5642:1: rule__VLSAtomicFunction__TermsAssignment_1_3 : ( ruleVLSFofTerm ) ;
     public final void rule__VLSAtomicFunction__TermsAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5592:1: ( ( ruleVLSFofTerm ) )
-            // InternalVampireLanguage.g:5593:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5646:1: ( ( ruleVLSFofTerm ) )
+            // InternalVampireLanguage.g:5647:2: ( ruleVLSFofTerm )
             {
-            // InternalVampireLanguage.g:5593:2: ( ruleVLSFofTerm )
-            // InternalVampireLanguage.g:5594:3: ruleVLSFofTerm
+            // InternalVampireLanguage.g:5647:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5648:3: ruleVLSFofTerm
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_1_3_0()); 
             pushFollow(FOLLOW_2);
@@ -17111,17 +17267,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSAtomicFunction__TermsAssignment_1_5"
-    // InternalVampireLanguage.g:5603:1: rule__VLSAtomicFunction__TermsAssignment_1_5 : ( ruleVLSFofTerm ) ;
+    // InternalVampireLanguage.g:5657:1: rule__VLSAtomicFunction__TermsAssignment_1_5 : ( ruleVLSFofTerm ) ;
     public final void rule__VLSAtomicFunction__TermsAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5607:1: ( ( ruleVLSFofTerm ) )
-            // InternalVampireLanguage.g:5608:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5661:1: ( ( ruleVLSFofTerm ) )
+            // InternalVampireLanguage.g:5662:2: ( ruleVLSFofTerm )
             {
-            // InternalVampireLanguage.g:5608:2: ( ruleVLSFofTerm )
-            // InternalVampireLanguage.g:5609:3: ruleVLSFofTerm
+            // InternalVampireLanguage.g:5662:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5663:3: ruleVLSFofTerm
             {
              before(grammarAccess.getVLSAtomicFunctionAccess().getTermsVLSFofTermParserRuleCall_1_5_0()); 
             pushFollow(FOLLOW_2);
@@ -17152,17 +17308,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSVariable__NameAssignment"
-    // InternalVampireLanguage.g:5618:1: rule__VLSVariable__NameAssignment : ( RULE_UPPER_WORD_ID ) ;
+    // InternalVampireLanguage.g:5672:1: rule__VLSVariable__NameAssignment : ( RULE_UPPER_WORD_ID ) ;
     public final void rule__VLSVariable__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5622:1: ( ( RULE_UPPER_WORD_ID ) )
-            // InternalVampireLanguage.g:5623:2: ( RULE_UPPER_WORD_ID )
+            // InternalVampireLanguage.g:5676:1: ( ( RULE_UPPER_WORD_ID ) )
+            // InternalVampireLanguage.g:5677:2: ( RULE_UPPER_WORD_ID )
             {
-            // InternalVampireLanguage.g:5623:2: ( RULE_UPPER_WORD_ID )
-            // InternalVampireLanguage.g:5624:3: RULE_UPPER_WORD_ID
+            // InternalVampireLanguage.g:5677:2: ( RULE_UPPER_WORD_ID )
+            // InternalVampireLanguage.g:5678:3: RULE_UPPER_WORD_ID
             {
              before(grammarAccess.getVLSVariableAccess().getNameUPPER_WORD_IDTerminalRuleCall_0()); 
             match(input,RULE_UPPER_WORD_ID,FOLLOW_2); 
@@ -17189,21 +17345,21 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__FunctorAssignment_0"
-    // InternalVampireLanguage.g:5633:1: rule__VLSFunctionFof__FunctorAssignment_0 : ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) ) ;
+    // InternalVampireLanguage.g:5687:1: rule__VLSFunctionFof__FunctorAssignment_0 : ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) ) ;
     public final void rule__VLSFunctionFof__FunctorAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5637:1: ( ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) ) )
-            // InternalVampireLanguage.g:5638:2: ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) )
+            // InternalVampireLanguage.g:5691:1: ( ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) ) )
+            // InternalVampireLanguage.g:5692:2: ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) )
             {
-            // InternalVampireLanguage.g:5638:2: ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) )
-            // InternalVampireLanguage.g:5639:3: ( rule__VLSFunctionFof__FunctorAlternatives_0_0 )
+            // InternalVampireLanguage.g:5692:2: ( ( rule__VLSFunctionFof__FunctorAlternatives_0_0 ) )
+            // InternalVampireLanguage.g:5693:3: ( rule__VLSFunctionFof__FunctorAlternatives_0_0 )
             {
              before(grammarAccess.getVLSFunctionFofAccess().getFunctorAlternatives_0_0()); 
-            // InternalVampireLanguage.g:5640:3: ( rule__VLSFunctionFof__FunctorAlternatives_0_0 )
-            // InternalVampireLanguage.g:5640:4: rule__VLSFunctionFof__FunctorAlternatives_0_0
+            // InternalVampireLanguage.g:5694:3: ( rule__VLSFunctionFof__FunctorAlternatives_0_0 )
+            // InternalVampireLanguage.g:5694:4: rule__VLSFunctionFof__FunctorAlternatives_0_0
             {
             pushFollow(FOLLOW_2);
             rule__VLSFunctionFof__FunctorAlternatives_0_0();
@@ -17236,17 +17392,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__TermsAssignment_1_1"
-    // InternalVampireLanguage.g:5648:1: rule__VLSFunctionFof__TermsAssignment_1_1 : ( ruleVLSFofTerm ) ;
+    // InternalVampireLanguage.g:5702:1: rule__VLSFunctionFof__TermsAssignment_1_1 : ( ruleVLSFofTerm ) ;
     public final void rule__VLSFunctionFof__TermsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5652:1: ( ( ruleVLSFofTerm ) )
-            // InternalVampireLanguage.g:5653:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5706:1: ( ( ruleVLSFofTerm ) )
+            // InternalVampireLanguage.g:5707:2: ( ruleVLSFofTerm )
             {
-            // InternalVampireLanguage.g:5653:2: ( ruleVLSFofTerm )
-            // InternalVampireLanguage.g:5654:3: ruleVLSFofTerm
+            // InternalVampireLanguage.g:5707:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5708:3: ruleVLSFofTerm
             {
              before(grammarAccess.getVLSFunctionFofAccess().getTermsVLSFofTermParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -17277,17 +17433,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSFunctionFof__TermsAssignment_1_2_1"
-    // InternalVampireLanguage.g:5663:1: rule__VLSFunctionFof__TermsAssignment_1_2_1 : ( ruleVLSFofTerm ) ;
+    // InternalVampireLanguage.g:5717:1: rule__VLSFunctionFof__TermsAssignment_1_2_1 : ( ruleVLSFofTerm ) ;
     public final void rule__VLSFunctionFof__TermsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5667:1: ( ( ruleVLSFofTerm ) )
-            // InternalVampireLanguage.g:5668:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5721:1: ( ( ruleVLSFofTerm ) )
+            // InternalVampireLanguage.g:5722:2: ( ruleVLSFofTerm )
             {
-            // InternalVampireLanguage.g:5668:2: ( ruleVLSFofTerm )
-            // InternalVampireLanguage.g:5669:3: ruleVLSFofTerm
+            // InternalVampireLanguage.g:5722:2: ( ruleVLSFofTerm )
+            // InternalVampireLanguage.g:5723:3: ruleVLSFofTerm
             {
              before(grammarAccess.getVLSFunctionFofAccess().getTermsVLSFofTermParserRuleCall_1_2_1_0()); 
             pushFollow(FOLLOW_2);
@@ -17318,17 +17474,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__ValueAssignment_0_1"
-    // InternalVampireLanguage.g:5678:1: rule__VLSDefinedTerm__ValueAssignment_0_1 : ( RULE_SIGNED_LITERAL ) ;
+    // InternalVampireLanguage.g:5732:1: rule__VLSDefinedTerm__ValueAssignment_0_1 : ( RULE_SIGNED_LITERAL ) ;
     public final void rule__VLSDefinedTerm__ValueAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5682:1: ( ( RULE_SIGNED_LITERAL ) )
-            // InternalVampireLanguage.g:5683:2: ( RULE_SIGNED_LITERAL )
+            // InternalVampireLanguage.g:5736:1: ( ( RULE_SIGNED_LITERAL ) )
+            // InternalVampireLanguage.g:5737:2: ( RULE_SIGNED_LITERAL )
             {
-            // InternalVampireLanguage.g:5683:2: ( RULE_SIGNED_LITERAL )
-            // InternalVampireLanguage.g:5684:3: RULE_SIGNED_LITERAL
+            // InternalVampireLanguage.g:5737:2: ( RULE_SIGNED_LITERAL )
+            // InternalVampireLanguage.g:5738:3: RULE_SIGNED_LITERAL
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueSIGNED_LITERALTerminalRuleCall_0_1_0()); 
             match(input,RULE_SIGNED_LITERAL,FOLLOW_2); 
@@ -17355,17 +17511,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__ValueAssignment_1_1"
-    // InternalVampireLanguage.g:5693:1: rule__VLSDefinedTerm__ValueAssignment_1_1 : ( RULE_SIGNED_REAL_ID ) ;
+    // InternalVampireLanguage.g:5747:1: rule__VLSDefinedTerm__ValueAssignment_1_1 : ( RULE_SIGNED_REAL_ID ) ;
     public final void rule__VLSDefinedTerm__ValueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5697:1: ( ( RULE_SIGNED_REAL_ID ) )
-            // InternalVampireLanguage.g:5698:2: ( RULE_SIGNED_REAL_ID )
+            // InternalVampireLanguage.g:5751:1: ( ( RULE_SIGNED_REAL_ID ) )
+            // InternalVampireLanguage.g:5752:2: ( RULE_SIGNED_REAL_ID )
             {
-            // InternalVampireLanguage.g:5698:2: ( RULE_SIGNED_REAL_ID )
-            // InternalVampireLanguage.g:5699:3: RULE_SIGNED_REAL_ID
+            // InternalVampireLanguage.g:5752:2: ( RULE_SIGNED_REAL_ID )
+            // InternalVampireLanguage.g:5753:3: RULE_SIGNED_REAL_ID
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueSIGNED_REAL_IDTerminalRuleCall_1_1_0()); 
             match(input,RULE_SIGNED_REAL_ID,FOLLOW_2); 
@@ -17392,17 +17548,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__ValueAssignment_2_1"
-    // InternalVampireLanguage.g:5708:1: rule__VLSDefinedTerm__ValueAssignment_2_1 : ( RULE_SIGNED_RAT_ID ) ;
+    // InternalVampireLanguage.g:5762:1: rule__VLSDefinedTerm__ValueAssignment_2_1 : ( RULE_SIGNED_RAT_ID ) ;
     public final void rule__VLSDefinedTerm__ValueAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5712:1: ( ( RULE_SIGNED_RAT_ID ) )
-            // InternalVampireLanguage.g:5713:2: ( RULE_SIGNED_RAT_ID )
+            // InternalVampireLanguage.g:5766:1: ( ( RULE_SIGNED_RAT_ID ) )
+            // InternalVampireLanguage.g:5767:2: ( RULE_SIGNED_RAT_ID )
             {
-            // InternalVampireLanguage.g:5713:2: ( RULE_SIGNED_RAT_ID )
-            // InternalVampireLanguage.g:5714:3: RULE_SIGNED_RAT_ID
+            // InternalVampireLanguage.g:5767:2: ( RULE_SIGNED_RAT_ID )
+            // InternalVampireLanguage.g:5768:3: RULE_SIGNED_RAT_ID
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueSIGNED_RAT_IDTerminalRuleCall_2_1_0()); 
             match(input,RULE_SIGNED_RAT_ID,FOLLOW_2); 
@@ -17429,17 +17585,17 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
 
     // $ANTLR start "rule__VLSDefinedTerm__ValueAssignment_3_1"
-    // InternalVampireLanguage.g:5723:1: rule__VLSDefinedTerm__ValueAssignment_3_1 : ( RULE_DOUBLE_QUOTE ) ;
+    // InternalVampireLanguage.g:5777:1: rule__VLSDefinedTerm__ValueAssignment_3_1 : ( RULE_DOUBLE_QUOTE ) ;
     public final void rule__VLSDefinedTerm__ValueAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalVampireLanguage.g:5727:1: ( ( RULE_DOUBLE_QUOTE ) )
-            // InternalVampireLanguage.g:5728:2: ( RULE_DOUBLE_QUOTE )
+            // InternalVampireLanguage.g:5781:1: ( ( RULE_DOUBLE_QUOTE ) )
+            // InternalVampireLanguage.g:5782:2: ( RULE_DOUBLE_QUOTE )
             {
-            // InternalVampireLanguage.g:5728:2: ( RULE_DOUBLE_QUOTE )
-            // InternalVampireLanguage.g:5729:3: RULE_DOUBLE_QUOTE
+            // InternalVampireLanguage.g:5782:2: ( RULE_DOUBLE_QUOTE )
+            // InternalVampireLanguage.g:5783:3: RULE_DOUBLE_QUOTE
             {
              before(grammarAccess.getVLSDefinedTermAccess().getValueDOUBLE_QUOTETerminalRuleCall_3_1_0()); 
             match(input,RULE_DOUBLE_QUOTE,FOLLOW_2); 
@@ -17471,30 +17627,30 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
     static final String dfa_1s = "\30\uffff";
     static final String dfa_2s = "\1\uffff\23\24\4\uffff";
     static final String dfa_3s = "\1\4\23\55\4\uffff";
-    static final String dfa_4s = "\1\104\23\101\4\uffff";
+    static final String dfa_4s = "\1\105\23\102\4\uffff";
     static final String dfa_5s = "\24\uffff\1\1\1\2\1\3\1\4";
     static final String dfa_6s = "\30\uffff}>";
     static final String[] dfa_7s = {
-            "\1\1\1\2\1\uffff\1\27\1\3\1\4\1\uffff\1\26\3\27\14\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\30\uffff\2\24\1\25",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
-            "\1\24\1\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\1\1\2\1\uffff\1\27\1\3\1\4\1\uffff\1\26\3\27\14\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\31\uffff\2\24\1\25",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
+            "\1\24\2\uffff\1\25\1\24\2\uffff\10\24\4\uffff\3\24",
             "",
             "",
             "",
@@ -17530,48 +17686,49 @@ public class InternalVampireLanguageParser extends AbstractInternalContentAssist
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000440000000402L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0200000000000002L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0400000000000002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000C40000000002L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0400000000000002L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0800000000000002L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000080000000000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x00000000000000F0L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000300000000000L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x00000000000000B0L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x000003FFF8000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x680083FFF8007BB0L,0x000000000000001CL});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0001200000000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0002000000000000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x000493FFF8000030L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x07F8000000000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x00000000000000B0L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x000003FFF8000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0xD00103FFF8007BB0L,0x0000000000000038L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0002200000000000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x000913FFF8000030L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0FF0000000000000L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0010000000000000L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0040000000000000L});
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x01F8000000000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0200000000000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0100000000000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x03F0000000000000L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0400000000000000L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x1000000000000000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x1000000000000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x2000000000000000L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x4000000000000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x8000000000000000L,0x0000000000000003L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x000003FFF8007BB0L,0x000000000000001CL});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x8000000000000000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x8000000000000000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x000003FFF8007BB0L,0x0000000000000038L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x000003FFF8000330L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x000003FFF8000330L,0x000000000000000CL});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x000003FFF8000330L,0x0000000000000010L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x000003FFF8000330L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x000003FFF8000330L,0x0000000000000018L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x000003FFF8000330L,0x0000000000000020L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000002000L});
 
 }
