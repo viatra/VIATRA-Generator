@@ -50,9 +50,12 @@ terminal UNSIGNED_RAT_ID:  (LITERAL) ('/') ('1'..'9') (INT)? ;
 terminal SIGNED_RAT_ID: (SIGN)* (UNSIGNED_RAT_ID);
 
 //Overwriting is necessary
-terminal ANY_OTHER: '%' (!('\n'|'\r'))* ('\r');
+terminal ID: (!('\n'|'\r'))* ;
+terminal ANY_OTHER: ID;
 terminal SINGLE_COMMENT: ANY_OTHER;
 //terminal ID:  ( !('('|')'|'\r'|'\n') )+ ;
+
+
 
 
 
@@ -71,7 +74,7 @@ VLSName:
 
 // <comments>
 VLSComment:
-	comment = SINGLE_COMMENT
+	'%' comment = SINGLE_COMMENT
 	//need to add a new line at the end of the file for the case where the last line is a comment
 ;
 

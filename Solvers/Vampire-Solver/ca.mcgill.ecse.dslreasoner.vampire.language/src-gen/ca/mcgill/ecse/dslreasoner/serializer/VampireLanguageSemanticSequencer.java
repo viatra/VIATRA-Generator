@@ -596,7 +596,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_COMMENT__COMMENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0(), semanticObject.getComment());
+		feeder.accept(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0(), semanticObject.getComment());
 		feeder.finish();
 	}
 	

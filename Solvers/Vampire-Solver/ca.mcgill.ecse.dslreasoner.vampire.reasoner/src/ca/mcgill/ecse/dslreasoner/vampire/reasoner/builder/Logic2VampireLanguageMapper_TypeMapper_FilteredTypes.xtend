@@ -104,7 +104,7 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 				it.variables += createVLSVariable => [it.name = "A"]
 				it.operand = createVLSEquivalent => [
 					it.left = createVLSFunction => [
-						it.constant = "Object"
+						it.constant = "object"
 						it.terms += createVLSVariable => [
 							it.name = "A"
 						]

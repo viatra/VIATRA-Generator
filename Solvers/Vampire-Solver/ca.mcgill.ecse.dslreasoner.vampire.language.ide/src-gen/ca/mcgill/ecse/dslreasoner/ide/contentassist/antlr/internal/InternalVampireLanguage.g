@@ -140,9 +140,9 @@ ruleVLSComment
 	}
 	:
 	(
-		{ before(grammarAccess.getVLSCommentAccess().getCommentAssignment()); }
-		(rule__VLSComment__CommentAssignment)
-		{ after(grammarAccess.getVLSCommentAccess().getCommentAssignment()); }
+		{ before(grammarAccess.getVLSCommentAccess().getGroup()); }
+		(rule__VLSComment__Group__0)
+		{ after(grammarAccess.getVLSCommentAccess().getGroup()); }
 	)
 ;
 finally {
@@ -1827,6 +1827,60 @@ rule__VLSInclude__Group_2_2__1__Impl
 	{ before(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_2_1()); }
 	(rule__VLSInclude__NamesAssignment_2_2_1)
 	{ after(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_2_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__VLSComment__Group__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSComment__Group__0__Impl
+	rule__VLSComment__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSComment__Group__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSCommentAccess().getPercentSignKeyword_0()); }
+	'%'
+	{ after(grammarAccess.getVLSCommentAccess().getPercentSignKeyword_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSComment__Group__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__VLSComment__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSComment__Group__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getVLSCommentAccess().getCommentAssignment_1()); }
+	(rule__VLSComment__CommentAssignment_1)
+	{ after(grammarAccess.getVLSCommentAccess().getCommentAssignment_1()); }
 )
 ;
 finally {
@@ -5206,15 +5260,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__VLSComment__CommentAssignment
+rule__VLSComment__CommentAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0()); }
+		{ before(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0()); }
 		RULE_SINGLE_COMMENT
-		{ after(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0()); }
+		{ after(grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -5765,11 +5819,11 @@ fragment RULE_UNSIGNED_RAT_ID : RULE_LITERAL '/' '1'..'9' RULE_INT?;
 
 RULE_SIGNED_RAT_ID : RULE_SIGN* RULE_UNSIGNED_RAT_ID;
 
-fragment RULE_ANY_OTHER : '%' ~(('\n'|'\r'))* '\r';
+fragment RULE_ID : ~(('\n'|'\r'))*;
+
+fragment RULE_ANY_OTHER : RULE_ID;
 
 RULE_SINGLE_COMMENT : RULE_ANY_OTHER;
-
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 fragment RULE_INT : ('0'..'9')+;
 

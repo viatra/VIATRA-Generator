@@ -63,7 +63,7 @@ public class VampireTest {
       final URI logicURI = URI.createFileURI("output/files/logProb.logicproblem");
       final Resource logRes = rs.createResource(logicURI);
       LogicProblem problem = VampireTest.builder.createProblem();
-      VampireTest.deMorgan(problem);
+      VampireTest.rockPaperScisors(problem);
       logRes.getContents().add(problem);
       logRes.save(Collections.EMPTY_MAP);
       InputOutput.<String>println("Problem Created");

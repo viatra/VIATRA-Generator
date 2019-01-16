@@ -16,5 +16,11 @@ Require-Bundle: com.google.guava,
  hu.bme.mit.inf.dslreasoner.viatra2logic;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.13.0",
  hu.bme.mit.inf.dlsreasoner.alloy.reasoner;bundle-version="1.0.0",
- hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0"
+ hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatraquery;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.logic2ecore;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.visualisation;bundle-version="1.0.0",
+ ModelGenExampleFAM_plugin;bundle-version="1.0.0",
+ ModelGenExampleFAM_plugin.validation;bundle-version="0.0.1"
 

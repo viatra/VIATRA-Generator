@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?>
 <language:LogicProblem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem" xmlns:language_1="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language">
+  <types xsi:type="language_1:TypeDefinition" name="oldRPS" elements="//@elements.0 //@elements.1 //@elements.2"/>
   <assertions name="assertion1">
-    <value xsi:type="language_1:Iff">
-      <leftOperand xsi:type="language_1:Not">
-        <operand xsi:type="language_1:And">
-          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@constants.0"/>
-          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@constants.1"/>
-        </operand>
-      </leftOperand>
-      <rightOperand xsi:type="language_1:Or">
-        <operands xsi:type="language_1:Not">
-          <operand xsi:type="language_1:SymbolicValue" symbolicReference="//@constants.0"/>
-        </operands>
-        <operands xsi:type="language_1:Not">
-          <operand xsi:type="language_1:SymbolicValue" symbolicReference="//@constants.1"/>
-        </operands>
-      </rightOperand>
+    <value xsi:type="language_1:Forall">
+      <quantifiedVariables name="x">
+        <range xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+      </quantifiedVariables>
+      <expression xsi:type="language_1:Exists">
+        <quantifiedVariables name="y">
+          <range xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+        </quantifiedVariables>
+        <expression xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.0">
+          <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@quantifiedVariables.0"/>
+          <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@expression/@quantifiedVariables.0"/>
+        </expression>
+      </expression>
     </value>
   </assertions>
-  <constants xsi:type="language_1:ConstantDeclaration" name="constant1">
-    <type xsi:type="language_1:BoolTypeReference"/>
-  </constants>
-  <constants xsi:type="language_1:ConstantDeclaration" name="constant2">
-    <type xsi:type="language_1:BoolTypeReference"/>
-  </constants>
+  <relations xsi:type="language_1:RelationDeclaration" name="beats2">
+    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+  </relations>
+  <elements name="Rock" definedInType="//@types.0"/>
+  <elements name="Paper" definedInType="//@types.0"/>
+  <elements name="Scissor" definedInType="//@types.0"/>
 </language:LogicProblem>

@@ -50,7 +50,7 @@ class VampireTest {
 		
 		var LogicProblem problem = builder.createProblem
 		
-		//*
+		/*
 		deMorgan(problem)
 		/*/
 		rockPaperScisors(problem)

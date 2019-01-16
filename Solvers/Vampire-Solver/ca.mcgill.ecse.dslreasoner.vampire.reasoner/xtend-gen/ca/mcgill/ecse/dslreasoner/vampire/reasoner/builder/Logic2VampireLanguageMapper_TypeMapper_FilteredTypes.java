@@ -203,7 +203,7 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
         final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
           VLSFunction _createVLSFunction = this.factory.createVLSFunction();
           final Procedure1<VLSFunction> _function_6 = (VLSFunction it_3) -> {
-            it_3.setConstant("Object");
+            it_3.setConstant("object");
             EList<VLSTerm> _terms = it_3.getTerms();
             VLSVariable _createVLSVariable_2 = this.factory.createVLSVariable();
             final Procedure1<VLSVariable> _function_7 = (VLSVariable it_4) -> {

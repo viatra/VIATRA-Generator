@@ -160,21 +160,29 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class VLSCommentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSComment");
-		private final Assignment cCommentAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cCommentSINGLE_COMMENTTerminalRuleCall_0 = (RuleCall)cCommentAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPercentSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cCommentAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cCommentSINGLE_COMMENTTerminalRuleCall_1_0 = (RuleCall)cCommentAssignment_1.eContents().get(0);
 		
 		//// <comments>
 		//VLSComment:
-		//	comment=SINGLE_COMMENT
+		//	'%' comment=SINGLE_COMMENT
 		//	//need to add a new line at the end of the file for the case where the last line is a comment
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'%' comment=SINGLE_COMMENT
+		public Group getGroup() { return cGroup; }
+		
+		//'%'
+		public Keyword getPercentSignKeyword_0() { return cPercentSignKeyword_0; }
+		
 		//comment=SINGLE_COMMENT
-		public Assignment getCommentAssignment() { return cCommentAssignment; }
+		public Assignment getCommentAssignment_1() { return cCommentAssignment_1; }
 		
 		//SINGLE_COMMENT
-		public RuleCall getCommentSINGLE_COMMENTTerminalRuleCall_0() { return cCommentSINGLE_COMMENTTerminalRuleCall_0; }
+		public RuleCall getCommentSINGLE_COMMENTTerminalRuleCall_1_0() { return cCommentSINGLE_COMMENTTerminalRuleCall_1_0; }
 	}
 	public class VLSFofFormulaElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSFofFormula");
@@ -1520,6 +1528,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final TerminalRule tSIGNED_REAL_ID;
 	private final TerminalRule tUNSIGNED_RAT_ID;
 	private final TerminalRule tSIGNED_RAT_ID;
+	private final TerminalRule tID;
 	private final TerminalRule tANY_OTHER;
 	private final TerminalRule tSINGLE_COMMENT;
 	private final VLSIncludeElements pVLSInclude;
@@ -1584,6 +1593,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.tSIGNED_REAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_REAL_ID");
 		this.tUNSIGNED_RAT_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.UNSIGNED_RAT_ID");
 		this.tSIGNED_RAT_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_RAT_ID");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.ID");
 		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.ANY_OTHER");
 		this.tSINGLE_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
 		this.pVLSInclude = new VLSIncludeElements();
@@ -1756,8 +1766,14 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return tSIGNED_RAT_ID;
 	}
 	
+	//terminal ID:
+	//	!('\n' | '\r')*;
+	public TerminalRule getIDRule() {
+		return tID;
+	}
+	
 	//terminal ANY_OTHER:
-	//	'%' !('\n' | '\r')* '\r';
+	//	ID;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
 	}
@@ -1795,7 +1811,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// <comments>
 	//VLSComment:
-	//	comment=SINGLE_COMMENT
+	//	'%' comment=SINGLE_COMMENT
 	//	//need to add a new line at the end of the file for the case where the last line is a comment
 	//;
 	public VLSCommentElements getVLSCommentAccess() {
@@ -2180,12 +2196,6 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getVLSDefinedTermRule() {
 		return getVLSDefinedTermAccess().getRule();
-	}
-	
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
-	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
 	}
 	
 	//terminal INT returns ecore::EInt:

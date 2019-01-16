@@ -25,5 +25,6 @@ Export-Package: ca.mcgill.ecse.dslreasoner.generator,
  ca.mcgill.ecse.dslreasoner.serializer,
  ca.mcgill.ecse.dslreasoner.validation,
  ca.mcgill.ecse.dslreasoner.vampireLanguage.util,
- ca.mcgill.ecse.dslreasoner.scoping
+ ca.mcgill.ecse.dslreasoner.scoping,
+ ca.mcgill.ecse.dslreasoner.formatting2
 Import-Package: org.apache.log4j
