@@ -38,11 +38,11 @@ class VampireLanguageFormatter extends AbstractFormatter2 {
 	}
 	
 	def dispatch void format(VLSFofFormula formula, extension IFormattableDocument document){
-		formula.append[newLine]
+//		formula.append[newLine]
 	}
 	
 	def dispatch void format(VLSComment comment, extension IFormattableDocument document){
-		comment.append[newLine]
+//		comment.append[newLine]
 	}
 	// TODO: implement for VLSFofFormula, VLSAnnotation, VLSAnd, VLSOr, VLSUniversalQuantifier, VLSExistentialQuantifier, VLSUnaryNegation, VLSFunction, VLSLess, VLSFunctionFof, VLSEquivalent, VLSImplies, VLSRevImplies, VLSXnor, VLSNor, VLSNand, VLSInequality, VLSEquality, VLSAssignment
 }

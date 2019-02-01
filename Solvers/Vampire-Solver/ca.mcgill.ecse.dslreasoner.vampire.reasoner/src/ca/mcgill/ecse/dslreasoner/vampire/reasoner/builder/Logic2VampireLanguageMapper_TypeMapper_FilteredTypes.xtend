@@ -97,6 +97,7 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 		}
 
 		// 5. create fof function that is an or with all the elements in map
+		// Do this only if there are more than 1 type
 		val hierarch = createVLSFofFormula => [
 			it.name = "hierarchyHandler"
 			it.fofRole = "axiom"
@@ -115,6 +116,7 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 		]
 
 		trace.specification.formulas += hierarch
+
 	}
 
 	def boolean dfsSupertypeCheck(Type type, Type type2) {

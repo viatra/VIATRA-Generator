@@ -22,10 +22,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 class MedicalSystem {
 	def static void main(String[] args) {
 		init()
-		val workspace = new FileSystemWorkspace('''outputModels/''',"")
+		val workspace = new FileSystemWorkspace('''output/MedicalSystem/''',"")
 		workspace.initAndClear
 		val root = load()
 		println("Problem Loaded")
+		
 		
 //		val rs = new ResourceSetImpl
 //		val logRes = rs.createResource(URI.createFileURI("vampireMidel.tptp"))
@@ -40,7 +41,7 @@ class MedicalSystem {
 		reasoner = new VampireSolver
 		val vampireConfig = new VampireSolverConfiguration => [
 			//add configuration things, in config file first
-			it.writeToFile = false
+			it.writeToFile = true
 		]
 		
 		solution = reasoner.solve(root, vampireConfig,	workspace)

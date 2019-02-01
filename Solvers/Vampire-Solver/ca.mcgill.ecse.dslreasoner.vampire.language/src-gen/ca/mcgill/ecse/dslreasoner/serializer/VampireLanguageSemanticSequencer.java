@@ -14,6 +14,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFalse;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof;
@@ -29,7 +30,10 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOr;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSRational;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSReal;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSRevImplies;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrue;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
@@ -99,6 +103,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 			case VampireLanguagePackage.VLS_FALSE:
 				sequence_VLSAtomicConstant(context, (VLSFalse) semanticObject); 
 				return; 
+			case VampireLanguagePackage.VLS_FINITE_MODEL:
+				sequence_VLSFiniteModel(context, (VLSFiniteModel) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_FOF_FORMULA:
 				sequence_VLSFofFormula(context, (VLSFofFormula) semanticObject); 
 				return; 
@@ -144,8 +151,17 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 			case VampireLanguagePackage.VLS_REV_IMPLIES:
 				sequence_VLSBinary(context, (VLSRevImplies) semanticObject); 
 				return; 
+			case VampireLanguagePackage.VLS_SATISFIABLE:
+				sequence_VLSSatisfiable(context, (VLSSatisfiable) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_TFF_FORMULA:
+				sequence_VLSTffFormula(context, (VLSTffFormula) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_TRUE:
 				sequence_VLSAtomicConstant(context, (VLSTrue) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_TRYING:
+				sequence_VLSTrying(context, (VLSTrying) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_UNARY_NEGATION:
 				sequence_VLSUnaryNegation(context, (VLSUnaryNegation) semanticObject); 
@@ -766,6 +782,18 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSFiniteModel returns VLSFiniteModel
+	 *
+	 * Constraint:
+	 *     {VLSFiniteModel}
+	 */
+	protected void sequence_VLSFiniteModel(ISerializationContext context, VLSFiniteModel semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     VLSFofFormula returns VLSFofFormula
 	 *
 	 * Constraint:
@@ -810,6 +838,49 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSName(ISerializationContext context, VLSName semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSConfirmations returns VLSSatisfiable
+	 *     VLSSatisfiable returns VLSSatisfiable
+	 *
+	 * Constraint:
+	 *     {VLSSatisfiable}
+	 */
+	protected void sequence_VLSSatisfiable(ISerializationContext context, VLSSatisfiable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSTffFormula returns VLSTffFormula
+	 *
+	 * Constraint:
+	 *     ((name=LOWER_WORD_ID | name=SIGNED_LITERAL | name=SINGLE_QUOTE) fofRole=VLSRole fofFormula=VLSTerm annotations=VLSAnnotation?)
+	 */
+	protected void sequence_VLSTffFormula(ISerializationContext context, VLSTffFormula semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSTrying returns VLSTrying
+	 *
+	 * Constraint:
+	 *     name=LITERAL
+	 */
+	protected void sequence_VLSTrying(ISerializationContext context, VLSTrying semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TRYING__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TRYING__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVLSTryingAccess().getNameLITERALTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -1001,7 +1072,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 *     VampireModel returns VampireModel
 	 *
 	 * Constraint:
-	 *     (includes+=VLSInclude | comments+=VLSComment | formulas+=VLSFofFormula)+
+	 *     (includes+=VLSInclude | comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula | tfformulas+=VLSTffFormula)+
 	 */
 	protected void sequence_VampireModel(ISerializationContext context, VampireModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

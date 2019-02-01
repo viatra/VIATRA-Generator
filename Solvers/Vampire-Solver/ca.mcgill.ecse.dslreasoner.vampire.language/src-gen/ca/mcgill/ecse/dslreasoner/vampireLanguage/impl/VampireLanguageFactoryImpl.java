@@ -69,7 +69,12 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
       case VampireLanguagePackage.VLS_INCLUDE: return createVLSInclude();
       case VampireLanguagePackage.VLS_NAME: return createVLSName();
       case VampireLanguagePackage.VLS_COMMENT: return createVLSComment();
+      case VampireLanguagePackage.VLS_CONFIRMATIONS: return createVLSConfirmations();
+      case VampireLanguagePackage.VLS_SATISFIABLE: return createVLSSatisfiable();
+      case VampireLanguagePackage.VLS_TRYING: return createVLSTrying();
+      case VampireLanguagePackage.VLS_FINITE_MODEL: return createVLSFiniteModel();
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
+      case VampireLanguagePackage.VLS_TFF_FORMULA: return createVLSTffFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
       case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
       case VampireLanguagePackage.VLS_VARIABLE: return createVLSVariable();
@@ -152,10 +157,65 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
+  public VLSConfirmations createVLSConfirmations()
+  {
+    VLSConfirmationsImpl vlsConfirmations = new VLSConfirmationsImpl();
+    return vlsConfirmations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSSatisfiable createVLSSatisfiable()
+  {
+    VLSSatisfiableImpl vlsSatisfiable = new VLSSatisfiableImpl();
+    return vlsSatisfiable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSTrying createVLSTrying()
+  {
+    VLSTryingImpl vlsTrying = new VLSTryingImpl();
+    return vlsTrying;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSFiniteModel createVLSFiniteModel()
+  {
+    VLSFiniteModelImpl vlsFiniteModel = new VLSFiniteModelImpl();
+    return vlsFiniteModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VLSFofFormula createVLSFofFormula()
   {
     VLSFofFormulaImpl vlsFofFormula = new VLSFofFormulaImpl();
     return vlsFofFormula;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSTffFormula createVLSTffFormula()
+  {
+    VLSTffFormulaImpl vlsTffFormula = new VLSTffFormulaImpl();
+    return vlsTffFormula;
   }
 
   /**

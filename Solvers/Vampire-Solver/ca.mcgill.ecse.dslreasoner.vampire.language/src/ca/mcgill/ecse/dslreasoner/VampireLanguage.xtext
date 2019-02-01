@@ -10,15 +10,15 @@ generate vampireLanguage "http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage"
 //@@@@@@@@@@@
 
 VampireModel:	
-	// TODO ensures there is always exactly 1 conjecture
 	(
 		includes += VLSInclude |
 		comments += VLSComment | 
-		formulas += VLSFofFormula
+		confirmations += VLSConfirmations|
+		formulas += VLSFofFormula |
+		tfformulas += VLSTffFormula
+		
 	)*	
 ;
-
-
 
 //////////////////////////////////
 // VLS terminals
@@ -56,9 +56,6 @@ terminal SINGLE_COMMENT: ANY_OTHER;
 //terminal ID:  ( !('('|')'|'\r'|'\n') )+ ;
 
 
-
-
-
 //////////////////////////////////
 // VLS types
 //////////////////////////////////
@@ -80,10 +77,33 @@ VLSComment:
 
 //VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
 
+VLSConfirmations:
+	  VLSSatisfiable //| VLSFiniteModel// | VLSTrying
+;
+
+VLSSatisfiable:
+	{VLSSatisfiable} 'Satisfiable!'
+;
+
+VLSTrying:
+	'TRYING' '[' name = LITERAL ']'
+;
+
+VLSFiniteModel:
+	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
+;
+
 // <FOF formulas>
 VLSFofFormula:
 	'fof' '(' name = (LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
 ;
+
+
+VLSTffFormula:
+	'tff' '(' name = (LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
+;
+
+
 /*
 //NAME
 VLSName:
@@ -93,70 +113,76 @@ VLSName:
 */
 //<ROLE>
 VLSRole:
-	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
-	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
-	VLSPlain | VLSType |VLSFi_Domain | VLSFi_Functors | VLSFi_Predicates | VLSUnknown
+	"axiom" | "conjecture" | "hypothesis" | "definition" | "assumption" | "lemma"
+	| "theorem" |	"corollary" | "negated_conjecture" | "plain" | "type" |
+	"fi_domain" | "fi_functors" | "fi_predicates" | "unknown"
 ;
 
-VLSAxiom:
-	"axiom"
-;
-
-VLSConjecture:
-	"conjecture"
-;
-
-VLSHypothesis:
-	"hypothesis"
-;
-	
-VLSDefinition:
-	"definition"
-;
-
-VLSAssumption:
-	"assumption"
-;
-		
-VLSLemma:
-	"lemma"
-;
-			
-VLSTheorem:
-	"theorem"
-;
-				
-VLSCorollary:
-	"corollary"
-;
-			
-VLSNegated_Conjecture:
-	"negated_conjecture"	
-;
-
-VLSPlain:
-	"plain"
-;
-
-VLSType:
-	"type"
-;
-
-VLSFi_Domain:
-	"fi_domain"
-;
-
-VLSFi_Functors:
-	"fi_functors"
-;
-
-VLSFi_Predicates:
-	"fi_predicates"
-;
-
-VLSUnknown:
-	"unknown"
-;
+//VLSRole:
+//	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
+//	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
+//	VLSPlain | VLSType |VLSFi_Domain | VLSFi_Functors | VLSFi_Predicates | VLSUnknown
+//;
+//
+//VLSAxiom:
+//	"axiom"
+//;
+//
+//VLSConjecture:
+//	"conjecture"
+//;
+//
+//VLSHypothesis:
+//	"hypothesis"
+//;
+//	
+//VLSDefinition:
+//	"definition"
+//;
+//
+//VLSAssumption:
+//	"assumption"
+//;
+//		
+//VLSLemma:
+//	"lemma"
+//;
+//			
+//VLSTheorem:
+//	"theorem"
+//;
+//				
+//VLSCorollary:
+//	"corollary"
+//;
+//			
+//VLSNegated_Conjecture:
+//	"negated_conjecture"	
+//;
+//
+//VLSPlain:
+//	"plain"
+//;
+//
+//VLSType:
+//	"type"
+//;
+//
+//VLSFi_Domain:
+//	"fi_domain"
+//;
+//
+//VLSFi_Functors:
+//	"fi_functors"
+//;
+//
+//VLSFi_Predicates:
+//	"fi_predicates"
+//;
+//
+//VLSUnknown:
+//	"unknown"
+//;
 
 // <ANNOTATION>
 // Not at all based on the website. based on what we think the output will be like 

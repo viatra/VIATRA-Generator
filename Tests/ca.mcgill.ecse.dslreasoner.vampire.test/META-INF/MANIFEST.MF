@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test
-Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.vampire.test
+Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.vampire.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: ca.mcgill.ecse.dslreasoner.vampire.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -22,5 +22,10 @@ Require-Bundle: com.google.guava,
  hu.bme.mit.inf.dslreasoner.logic2ecore;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.visualisation;bundle-version="1.0.0",
  ModelGenExampleFAM_plugin;bundle-version="1.0.0",
- ModelGenExampleFAM_plugin.validation;bundle-version="0.0.1"
+ ModelGenExampleFAM_plugin.validation;bundle-version="0.0.1",
+ hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.validation;bundle-version="0.0.1",
+ org.eclipse.viatra.query.runtime;bundle-version="2.1.0",
+ org.eclipse.collections;bundle-version="9.2.0",
+ hu.bme.mit.inf.dslreasoner.application.FAMTest;bundle-version="1.0.0"
 

@@ -4,8 +4,10 @@
 package ca.mcgill.ecse.dslreasoner.vampireLanguage.impl;
 
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSComment;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInclude;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
 
@@ -33,7 +35,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl#getConfirmations <em>Confirmations</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl#getFormulas <em>Formulas</em>}</li>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl#getTfformulas <em>Tfformulas</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,6 +65,16 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
   protected EList<VLSComment> comments;
 
   /**
+   * The cached value of the '{@link #getConfirmations() <em>Confirmations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getConfirmations()
+   * @generated
+   * @ordered
+   */
+  protected EList<VLSConfirmations> confirmations;
+
+  /**
    * The cached value of the '{@link #getFormulas() <em>Formulas</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -69,6 +83,16 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
    * @ordered
    */
   protected EList<VLSFofFormula> formulas;
+
+  /**
+   * The cached value of the '{@link #getTfformulas() <em>Tfformulas</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTfformulas()
+   * @generated
+   * @ordered
+   */
+  protected EList<VLSTffFormula> tfformulas;
 
   /**
    * <!-- begin-user-doc -->
@@ -124,6 +148,20 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<VLSConfirmations> getConfirmations()
+  {
+    if (confirmations == null)
+    {
+      confirmations = new EObjectContainmentEList<VLSConfirmations>(VLSConfirmations.class, this, VampireLanguagePackage.VAMPIRE_MODEL__CONFIRMATIONS);
+    }
+    return confirmations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<VLSFofFormula> getFormulas()
   {
     if (formulas == null)
@@ -131,6 +169,20 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
       formulas = new EObjectContainmentEList<VLSFofFormula>(VLSFofFormula.class, this, VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS);
     }
     return formulas;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<VLSTffFormula> getTfformulas()
+  {
+    if (tfformulas == null)
+    {
+      tfformulas = new EObjectContainmentEList<VLSTffFormula>(VLSTffFormula.class, this, VampireLanguagePackage.VAMPIRE_MODEL__TFFORMULAS);
+    }
+    return tfformulas;
   }
 
   /**
@@ -147,8 +199,12 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
         return ((InternalEList<?>)getIncludes()).basicRemove(otherEnd, msgs);
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
+      case VampireLanguagePackage.VAMPIRE_MODEL__CONFIRMATIONS:
+        return ((InternalEList<?>)getConfirmations()).basicRemove(otherEnd, msgs);
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
         return ((InternalEList<?>)getFormulas()).basicRemove(otherEnd, msgs);
+      case VampireLanguagePackage.VAMPIRE_MODEL__TFFORMULAS:
+        return ((InternalEList<?>)getTfformulas()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -167,8 +223,12 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
         return getIncludes();
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         return getComments();
+      case VampireLanguagePackage.VAMPIRE_MODEL__CONFIRMATIONS:
+        return getConfirmations();
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
         return getFormulas();
+      case VampireLanguagePackage.VAMPIRE_MODEL__TFFORMULAS:
+        return getTfformulas();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -192,9 +252,17 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
         getComments().clear();
         getComments().addAll((Collection<? extends VLSComment>)newValue);
         return;
+      case VampireLanguagePackage.VAMPIRE_MODEL__CONFIRMATIONS:
+        getConfirmations().clear();
+        getConfirmations().addAll((Collection<? extends VLSConfirmations>)newValue);
+        return;
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
         getFormulas().clear();
         getFormulas().addAll((Collection<? extends VLSFofFormula>)newValue);
+        return;
+      case VampireLanguagePackage.VAMPIRE_MODEL__TFFORMULAS:
+        getTfformulas().clear();
+        getTfformulas().addAll((Collection<? extends VLSTffFormula>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -216,8 +284,14 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         getComments().clear();
         return;
+      case VampireLanguagePackage.VAMPIRE_MODEL__CONFIRMATIONS:
+        getConfirmations().clear();
+        return;
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
         getFormulas().clear();
+        return;
+      case VampireLanguagePackage.VAMPIRE_MODEL__TFFORMULAS:
+        getTfformulas().clear();
         return;
     }
     super.eUnset(featureID);
@@ -237,8 +311,12 @@ public class VampireModelImpl extends MinimalEObjectImpl.Container implements Va
         return includes != null && !includes.isEmpty();
       case VampireLanguagePackage.VAMPIRE_MODEL__COMMENTS:
         return comments != null && !comments.isEmpty();
+      case VampireLanguagePackage.VAMPIRE_MODEL__CONFIRMATIONS:
+        return confirmations != null && !confirmations.isEmpty();
       case VampireLanguagePackage.VAMPIRE_MODEL__FORMULAS:
         return formulas != null && !formulas.isEmpty();
+      case VampireLanguagePackage.VAMPIRE_MODEL__TFFORMULAS:
+        return tfformulas != null && !tfformulas.isEmpty();
     }
     return super.eIsSet(featureID);
   }

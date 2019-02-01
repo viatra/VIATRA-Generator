@@ -66,7 +66,7 @@
 //		println("Problem created")
 //		var LogicResult solution
 //		var LogicReasoner reasoner
-//		//*
+//		/*
 //		reasoner = new ViatraReasoner
 //		val viatraConfig = new ViatraReasonerConfiguration => [
 //			it.typeScopes.maxNewElements = 40

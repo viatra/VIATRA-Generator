@@ -15,10 +15,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class VampireLanguageFormatter extends AbstractFormatter2 {
@@ -49,17 +47,9 @@ public class VampireLanguageFormatter extends AbstractFormatter2 {
   }
   
   protected void _format(final VLSFofFormula formula, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.<VLSFofFormula>append(formula, _function);
   }
   
   protected void _format(final VLSComment comment, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.<VLSComment>append(comment, _function);
   }
   
   public void format(final Object comment, final IFormattableDocument document) {

@@ -96,9 +96,34 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSCommentAdapter();
       }
       @Override
+      public Adapter caseVLSConfirmations(VLSConfirmations object)
+      {
+        return createVLSConfirmationsAdapter();
+      }
+      @Override
+      public Adapter caseVLSSatisfiable(VLSSatisfiable object)
+      {
+        return createVLSSatisfiableAdapter();
+      }
+      @Override
+      public Adapter caseVLSTrying(VLSTrying object)
+      {
+        return createVLSTryingAdapter();
+      }
+      @Override
+      public Adapter caseVLSFiniteModel(VLSFiniteModel object)
+      {
+        return createVLSFiniteModelAdapter();
+      }
+      @Override
       public Adapter caseVLSFofFormula(VLSFofFormula object)
       {
         return createVLSFofFormulaAdapter();
+      }
+      @Override
+      public Adapter caseVLSTffFormula(VLSTffFormula object)
+      {
+        return createVLSTffFormulaAdapter();
       }
       @Override
       public Adapter caseVLSAnnotation(VLSAnnotation object)
@@ -323,6 +348,66 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations <em>VLS Confirmations</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations
+   * @generated
+   */
+  public Adapter createVLSConfirmationsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable <em>VLS Satisfiable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable
+   * @generated
+   */
+  public Adapter createVLSSatisfiableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying <em>VLS Trying</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying
+   * @generated
+   */
+  public Adapter createVLSTryingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel <em>VLS Finite Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel
+   * @generated
+   */
+  public Adapter createVLSFiniteModelAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula <em>VLS Fof Formula</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -333,6 +418,21 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSFofFormulaAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula <em>VLS Tff Formula</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula
+   * @generated
+   */
+  public Adapter createVLSTffFormulaAdapter()
   {
     return null;
   }
