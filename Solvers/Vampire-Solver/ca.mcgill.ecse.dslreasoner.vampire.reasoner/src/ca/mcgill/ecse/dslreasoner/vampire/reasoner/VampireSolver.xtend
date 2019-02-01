@@ -1,18 +1,18 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner
 
+import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetupGenerated
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper_FilteredTypes
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import java.io.PrintWriter
-import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper_FilteredTypes
 
 class VampireSolver extends LogicReasoner{
 	
@@ -23,14 +23,14 @@ class VampireSolver extends LogicReasoner{
 	}
 	
 	 val Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper(new Logic2VampireLanguageMapper_TypeMapper_FilteredTypes)
-//	 //not for now
-//	 val VampireHandler handler = new VampireHandler
-//	 val Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper
+	 val Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper
+	 val VampireHandler handler = new VampireHandler
 	 
-	 val fileName = "problem.tptp"
 	 
-	 override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
-		val vampireConfig = configuration.asConfig
+	 val fileName = "vampireProblem.tptp"
+	 
+	 override solve(LogicProblem problem, LogicSolverConfiguration config, ReasonerWorkspace workspace) throws LogicReasonerException {
+		val vampireConfig = config.asConfig
 		
 		// Start: Logic -> Vampire mapping
 		val transformationStart = System.currentTimeMillis
@@ -41,36 +41,38 @@ class VampireSolver extends LogicReasoner{
 		
 		var String fileURI = null;
 		var String vampireCode = null;
+		vampireCode = workspace.writeModelToString(vampireProblem,fileName)
 		if(vampireConfig.writeToFile) {
 			fileURI = workspace.writeModel(vampireProblem,fileName).toFileString
-		} else {
-			vampireCode = workspace.writeModelToString(vampireProblem,fileName)
-		} 
+		}
+		
+		//Result as String
+
+				
 		val transformationTime = System.currentTimeMillis - transformationStart
 		// Finish: Logic -> Vampire mapping
 		
-		//Creates a file containing the tptp code after transformation
-		val out = new PrintWriter("output/files/vampireCode.tptp")
-		out.println(vampireCode)
-		out.close()
-		
-		
-		/* 	
-		 * not for now -> Start: Solving Alloy problem
-		 *  
+				
+		/*	  
 		// Start: Solving Alloy problem
 		val solverStart = System.currentTimeMillis
-		val result2 = handler.callSolver(alloyProblem,workspace,alloyConfig,fileURI,alloyCode)
-		val logicResult = backwardMapper.transformOutput(problem,configuration.solutionScope.numberOfRequiredSolution,result2,forwardTrace,transformationTime)
+		//Calling Solver (Currently Manually)
+		val result2 = handler.callSolver(vampireProblem,workspace,vampireConfig,vampireCode)
+//		val result2 = null
+		//TODO
+		//Backwards Mapper
+		val logicResult = backwardMapper.transformOutput(problem,config.solutionScope.numberOfRequiredSolution,result2,forwardTrace,transformationTime)
+		
 		val solverFinish = System.currentTimeMillis-solverStart
 		// Finish: Solving Alloy problem
 				
 		if(vampireConfig.writeToFile) workspace.deactivateModel(fileName)
 		
 		return logicResult
-		*/
 		
+		/*/
 		return null // for now
+		//*/
 	}
 	
 	def asConfig(LogicSolverConfiguration configuration){

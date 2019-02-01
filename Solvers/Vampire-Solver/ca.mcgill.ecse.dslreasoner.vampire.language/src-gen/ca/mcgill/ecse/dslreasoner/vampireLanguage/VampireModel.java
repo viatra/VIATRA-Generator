@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getIncludes <em>Includes</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getComments <em>Comments</em>}</li>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getConfirmations <em>Confirmations</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getFormulas <em>Formulas</em>}</li>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getTfformulas <em>Tfformulas</em>}</li>
  * </ul>
  *
  * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVampireModel()
@@ -60,6 +62,22 @@ public interface VampireModel extends EObject
   EList<VLSComment> getComments();
 
   /**
+   * Returns the value of the '<em><b>Confirmations</b></em>' containment reference list.
+   * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Confirmations</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Confirmations</em>' containment reference list.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVampireModel_Confirmations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<VLSConfirmations> getConfirmations();
+
+  /**
    * Returns the value of the '<em><b>Formulas</b></em>' containment reference list.
    * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula}.
    * <!-- begin-user-doc -->
@@ -74,5 +92,21 @@ public interface VampireModel extends EObject
    * @generated
    */
   EList<VLSFofFormula> getFormulas();
+
+  /**
+   * Returns the value of the '<em><b>Tfformulas</b></em>' containment reference list.
+   * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Tfformulas</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tfformulas</em>' containment reference list.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVampireModel_Tfformulas()
+   * @model containment="true"
+   * @generated
+   */
+  EList<VLSTffFormula> getTfformulas();
 
 } // VampireModel

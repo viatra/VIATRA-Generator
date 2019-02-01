@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import java.io.File
 
 class VampireTest {
 	
@@ -39,15 +40,11 @@ class VampireTest {
 		map.put("logicproblem", new XMIResourceFactoryImpl)
 		VampireLanguageStandaloneSetup.doSetup
 		
-		val workspace = new FileSystemWorkspace('''output/models/''',"")
+		val workspace = new FileSystemWorkspace('''output/VampireTest''',"")
 		workspace.initAndClear
 		
-		// Load and create top level elements
-		// Load source model
-		val rs = new ResourceSetImpl
-		val logicURI = URI.createFileURI("output/files/logProb.logicproblem")
-		val logRes = rs.createResource(logicURI)
-		
+		//Storing the logicProblem
+		val filename = "problem.logicproblem"
 		var LogicProblem problem = builder.createProblem
 		
 		/*
@@ -56,8 +53,7 @@ class VampireTest {
 		rockPaperScisors(problem)
 		//*/
 		
-		logRes.contents.add(problem)
-		logRes.save(Collections.EMPTY_MAP)
+		workspace.writeModel(problem, filename)
 
 		//problem.add(Assertion( Y && X <=> X) )
 		
@@ -69,7 +65,7 @@ class VampireTest {
 		reasoner = new VampireSolver
 		val vampireConfig = new VampireSolverConfiguration => [
 			//add configuration things, in config file first
-			it.writeToFile = false
+			it.writeToFile = true
 		]
 		
 		solution = reasoner.solve(problem, vampireConfig,	workspace)
@@ -86,6 +82,10 @@ class VampireTest {
 		
 		//output solution
 		
+	}
+	
+	def name() {
+		return this.class.simpleName
 	}
 	
 	static def deMorgan(LogicProblem problem) {
@@ -144,7 +144,10 @@ class VampireTest {
 			//x.range
 			Exists[
 				val y = addVar("y",oldRPS)
-				beats2.call(x,y)
+				And(beats2.call(x,y),
+				x != y,
+				Not(beats2.call(y, x))
+				)
 			]
 		]))
 		//*/

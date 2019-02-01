@@ -60,6 +60,42 @@ public interface VampireLanguageFactory extends EFactory
   VLSComment createVLSComment();
 
   /**
+   * Returns a new object of class '<em>VLS Confirmations</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Confirmations</em>'.
+   * @generated
+   */
+  VLSConfirmations createVLSConfirmations();
+
+  /**
+   * Returns a new object of class '<em>VLS Satisfiable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Satisfiable</em>'.
+   * @generated
+   */
+  VLSSatisfiable createVLSSatisfiable();
+
+  /**
+   * Returns a new object of class '<em>VLS Trying</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Trying</em>'.
+   * @generated
+   */
+  VLSTrying createVLSTrying();
+
+  /**
+   * Returns a new object of class '<em>VLS Finite Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Finite Model</em>'.
+   * @generated
+   */
+  VLSFiniteModel createVLSFiniteModel();
+
+  /**
    * Returns a new object of class '<em>VLS Fof Formula</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +103,15 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSFofFormula createVLSFofFormula();
+
+  /**
+   * Returns a new object of class '<em>VLS Tff Formula</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Tff Formula</em>'.
+   * @generated
+   */
+  VLSTffFormula createVLSTffFormula();
 
   /**
    * Returns a new object of class '<em>VLS Annotation</em>'.

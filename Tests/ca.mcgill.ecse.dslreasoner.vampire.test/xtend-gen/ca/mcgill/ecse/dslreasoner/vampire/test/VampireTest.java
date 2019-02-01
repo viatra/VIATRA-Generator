@@ -11,6 +11,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Distinct;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Exists;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Iff;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not;
@@ -25,12 +26,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
-import java.util.Collections;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -56,16 +54,13 @@ public class VampireTest {
       map.put("logicproblem", _xMIResourceFactoryImpl);
       VampireLanguageStandaloneSetup.doSetup();
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("output/models/");
+      _builder.append("output/VampireTest");
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_builder.toString(), "");
       workspace.initAndClear();
-      final ResourceSetImpl rs = new ResourceSetImpl();
-      final URI logicURI = URI.createFileURI("output/files/logProb.logicproblem");
-      final Resource logRes = rs.createResource(logicURI);
+      final String filename = "problem.logicproblem";
       LogicProblem problem = VampireTest.builder.createProblem();
       VampireTest.rockPaperScisors(problem);
-      logRes.getContents().add(problem);
-      logRes.save(Collections.EMPTY_MAP);
+      workspace.writeModel(problem, filename);
       InputOutput.<String>println("Problem Created");
       LogicResult solution = null;
       LogicReasoner reasoner = null;
@@ -73,7 +68,7 @@ public class VampireTest {
       reasoner = _vampireSolver;
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
-        it.writeToFile = false;
+        it.writeToFile = true;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       solution = reasoner.solve(problem, vampireConfig, workspace);
@@ -81,6 +76,10 @@ public class VampireTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public String name() {
+    return this.getClass().getSimpleName();
   }
   
   public static Assertion deMorgan(final LogicProblem problem) {
@@ -120,10 +119,13 @@ public class VampireTest {
         {
           final Variable x = it.addVar("x", oldRPS);
           final Function1<VariableContext, TermDescription> _function_1 = (VariableContext it_1) -> {
-            SymbolicValue _xblockexpression_2 = null;
+            And _xblockexpression_2 = null;
             {
               final Variable y = it_1.addVar("y", oldRPS);
-              _xblockexpression_2 = VampireTest.builder.call(beats2, x, y);
+              SymbolicValue _call = VampireTest.builder.call(beats2, x, y);
+              Distinct _notEquals = VampireTest.builder.operator_notEquals(x, y);
+              _xblockexpression_2 = VampireTest.builder.And(_call, _notEquals, 
+                VampireTest.builder.Not(VampireTest.builder.call(beats2, y, x)));
             }
             return _xblockexpression_2;
           };

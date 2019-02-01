@@ -7,8 +7,12 @@
         eType="#//VLSInclude" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
         eType="#//VLSComment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="confirmations" upperBound="-1"
+        eType="#//VLSConfirmations" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="formulas" upperBound="-1"
         eType="#//VLSFofFormula" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tfformulas" upperBound="-1"
+        eType="#//VLSTffFormula" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSInclude">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -21,7 +25,21 @@
   <eClassifiers xsi:type="ecore:EClass" name="VLSComment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSConfirmations"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSSatisfiable" eSuperTypes="#//VLSConfirmations"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSTrying">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSFiniteModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="VLSFofFormula">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fofRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fofFormula" eType="#//VLSTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" eType="#//VLSAnnotation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSTffFormula">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fofRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fofFormula" eType="#//VLSTerm"

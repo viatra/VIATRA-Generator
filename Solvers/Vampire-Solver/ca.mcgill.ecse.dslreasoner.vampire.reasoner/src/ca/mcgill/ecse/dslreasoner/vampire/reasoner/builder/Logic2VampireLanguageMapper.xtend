@@ -55,7 +55,7 @@ class Logic2VampireLanguageMapper {
 	}
 
 	public def TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(LogicProblem problem,
-		VampireSolverConfiguration configuration) {
+		VampireSolverConfiguration config) {
 		// create model bases
 		// TODO
 		val initialComment = createVLSComment => [

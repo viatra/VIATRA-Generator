@@ -119,9 +119,29 @@ ruleVampireModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getVampireModelAccess().getConfirmationsVLSConfirmationsParserRuleCall_2_0());
 				}
-				lv_formulas_2_0=ruleVLSFofFormula
+				lv_confirmations_2_0=ruleVLSConfirmations
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
+					}
+					add(
+						$current,
+						"confirmations",
+						lv_confirmations_2_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSConfirmations");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_3_0());
+				}
+				lv_formulas_3_0=ruleVLSFofFormula
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
@@ -129,8 +149,28 @@ ruleVampireModel returns [EObject current=null]
 					add(
 						$current,
 						"formulas",
-						lv_formulas_2_0,
+						lv_formulas_3_0,
 						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSFofFormula");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVampireModelAccess().getTfformulasVLSTffFormulaParserRuleCall_4_0());
+				}
+				lv_tfformulas_4_0=ruleVLSTffFormula
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
+					}
+					add(
+						$current,
+						"tfformulas",
+						lv_tfformulas_4_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffFormula");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -356,6 +396,61 @@ ruleVLSComment returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleVLSConfirmations
+entryRuleVLSConfirmations returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSConfirmationsRule()); }
+	iv_ruleVLSConfirmations=ruleVLSConfirmations
+	{ $current=$iv_ruleVLSConfirmations.current; }
+	EOF;
+
+// Rule VLSConfirmations
+ruleVLSConfirmations returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	{
+		newCompositeNode(grammarAccess.getVLSConfirmationsAccess().getVLSSatisfiableParserRuleCall());
+	}
+	this_VLSSatisfiable_0=ruleVLSSatisfiable
+	{
+		$current = $this_VLSSatisfiable_0.current;
+		afterParserOrEnumRuleCall();
+	}
+;
+
+// Entry rule entryRuleVLSSatisfiable
+entryRuleVLSSatisfiable returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSSatisfiableRule()); }
+	iv_ruleVLSSatisfiable=ruleVLSSatisfiable
+	{ $current=$iv_ruleVLSSatisfiable.current; }
+	EOF;
+
+// Rule VLSSatisfiable
+ruleVLSSatisfiable returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getVLSSatisfiableAccess().getVLSSatisfiableAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='Satisfiable!'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getVLSSatisfiableAccess().getSatisfiableKeyword_1());
+		}
+	)
+;
+
 // Entry rule entryRuleVLSFofFormula
 entryRuleVLSFofFormula returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getVLSFofFormulaRule()); }
@@ -512,6 +607,162 @@ ruleVLSFofFormula returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleVLSTffFormula
+entryRuleVLSTffFormula returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTffFormulaRule()); }
+	iv_ruleVLSTffFormula=ruleVLSTffFormula
+	{ $current=$iv_ruleVLSTffFormula.current; }
+	EOF;
+
+// Rule VLSTffFormula
+ruleVLSTffFormula returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='tff'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getVLSTffFormulaAccess().getTffKeyword_0());
+		}
+		otherlv_1='('
+		{
+			newLeafNode(otherlv_1, grammarAccess.getVLSTffFormulaAccess().getLeftParenthesisKeyword_1());
+		}
+		(
+			(
+				(
+					lv_name_2_1=RULE_LOWER_WORD_ID
+					{
+						newLeafNode(lv_name_2_1, grammarAccess.getVLSTffFormulaAccess().getNameLOWER_WORD_IDTerminalRuleCall_2_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getVLSTffFormulaRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_2_1,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.LOWER_WORD_ID");
+					}
+					    |
+					lv_name_2_2=RULE_SIGNED_LITERAL
+					{
+						newLeafNode(lv_name_2_2, grammarAccess.getVLSTffFormulaAccess().getNameSIGNED_LITERALTerminalRuleCall_2_0_1());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getVLSTffFormulaRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_2_2,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_LITERAL");
+					}
+					    |
+					lv_name_2_3=RULE_SINGLE_QUOTE
+					{
+						newLeafNode(lv_name_2_3, grammarAccess.getVLSTffFormulaAccess().getNameSINGLE_QUOTETerminalRuleCall_2_0_2());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getVLSTffFormulaRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_2_3,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_QUOTE");
+					}
+				)
+			)
+		)
+		otherlv_3=','
+		{
+			newLeafNode(otherlv_3, grammarAccess.getVLSTffFormulaAccess().getCommaKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getFofRoleVLSRoleParserRuleCall_4_0());
+				}
+				lv_fofRole_4_0=ruleVLSRole
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSTffFormulaRule());
+					}
+					set(
+						$current,
+						"fofRole",
+						lv_fofRole_4_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSRole");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_5=','
+		{
+			newLeafNode(otherlv_5, grammarAccess.getVLSTffFormulaAccess().getCommaKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getFofFormulaVLSTermParserRuleCall_6_0());
+				}
+				lv_fofFormula_6_0=ruleVLSTerm
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSTffFormulaRule());
+					}
+					set(
+						$current,
+						"fofFormula",
+						lv_fofFormula_6_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTerm");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_7=','
+			{
+				newLeafNode(otherlv_7, grammarAccess.getVLSTffFormulaAccess().getCommaKeyword_7_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getAnnotationsVLSAnnotationParserRuleCall_7_1_0());
+					}
+					lv_annotations_8_0=ruleVLSAnnotation
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getVLSTffFormulaRule());
+						}
+						set(
+							$current,
+							"annotations",
+							lv_annotations_8_0,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSAnnotation");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_9=')'
+		{
+			newLeafNode(otherlv_9, grammarAccess.getVLSTffFormulaAccess().getRightParenthesisKeyword_8());
+		}
+		otherlv_10='.'
+		{
+			newLeafNode(otherlv_10, grammarAccess.getVLSTffFormulaAccess().getFullStopKeyword_9());
+		}
+	)
+;
+
 // Entry rule entryRuleVLSRole
 entryRuleVLSRole returns [String current=null]:
 	{ newCompositeNode(grammarAccess.getVLSRoleRule()); }
@@ -528,501 +779,96 @@ ruleVLSRole returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 	leaveRule();
 }:
 	(
+		kw='axiom'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSAxiomParserRuleCall_0());
-		}
-		this_VLSAxiom_0=ruleVLSAxiom
-		{
-			$current.merge(this_VLSAxiom_0);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getAxiomKeyword_0());
 		}
 		    |
+		kw='conjecture'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSConjectureParserRuleCall_1());
-		}
-		this_VLSConjecture_1=ruleVLSConjecture
-		{
-			$current.merge(this_VLSConjecture_1);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getConjectureKeyword_1());
 		}
 		    |
+		kw='hypothesis'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSHypothesisParserRuleCall_2());
-		}
-		this_VLSHypothesis_2=ruleVLSHypothesis
-		{
-			$current.merge(this_VLSHypothesis_2);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getHypothesisKeyword_2());
 		}
 		    |
+		kw='definition'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSDefinitionParserRuleCall_3());
-		}
-		this_VLSDefinition_3=ruleVLSDefinition
-		{
-			$current.merge(this_VLSDefinition_3);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getDefinitionKeyword_3());
 		}
 		    |
+		kw='assumption'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSAssumptionParserRuleCall_4());
-		}
-		this_VLSAssumption_4=ruleVLSAssumption
-		{
-			$current.merge(this_VLSAssumption_4);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getAssumptionKeyword_4());
 		}
 		    |
+		kw='lemma'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSLemmaParserRuleCall_5());
-		}
-		this_VLSLemma_5=ruleVLSLemma
-		{
-			$current.merge(this_VLSLemma_5);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getLemmaKeyword_5());
 		}
 		    |
+		kw='theorem'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSTheoremParserRuleCall_6());
-		}
-		this_VLSTheorem_6=ruleVLSTheorem
-		{
-			$current.merge(this_VLSTheorem_6);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getTheoremKeyword_6());
 		}
 		    |
+		kw='corollary'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSCorollaryParserRuleCall_7());
-		}
-		this_VLSCorollary_7=ruleVLSCorollary
-		{
-			$current.merge(this_VLSCorollary_7);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getCorollaryKeyword_7());
 		}
 		    |
+		kw='negated_conjecture'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSNegated_ConjectureParserRuleCall_8());
-		}
-		this_VLSNegated_Conjecture_8=ruleVLSNegated_Conjecture
-		{
-			$current.merge(this_VLSNegated_Conjecture_8);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getNegated_conjectureKeyword_8());
 		}
 		    |
+		kw='plain'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSPlainParserRuleCall_9());
-		}
-		this_VLSPlain_9=ruleVLSPlain
-		{
-			$current.merge(this_VLSPlain_9);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getPlainKeyword_9());
 		}
 		    |
+		kw='type'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSTypeParserRuleCall_10());
-		}
-		this_VLSType_10=ruleVLSType
-		{
-			$current.merge(this_VLSType_10);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getTypeKeyword_10());
 		}
 		    |
+		kw='fi_domain'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSFi_DomainParserRuleCall_11());
-		}
-		this_VLSFi_Domain_11=ruleVLSFi_Domain
-		{
-			$current.merge(this_VLSFi_Domain_11);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getFi_domainKeyword_11());
 		}
 		    |
+		kw='fi_functors'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSFi_FunctorsParserRuleCall_12());
-		}
-		this_VLSFi_Functors_12=ruleVLSFi_Functors
-		{
-			$current.merge(this_VLSFi_Functors_12);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getFi_functorsKeyword_12());
 		}
 		    |
+		kw='fi_predicates'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSFi_PredicatesParserRuleCall_13());
-		}
-		this_VLSFi_Predicates_13=ruleVLSFi_Predicates
-		{
-			$current.merge(this_VLSFi_Predicates_13);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getFi_predicatesKeyword_13());
 		}
 		    |
+		kw='unknown'
 		{
-			newCompositeNode(grammarAccess.getVLSRoleAccess().getVLSUnknownParserRuleCall_14());
-		}
-		this_VLSUnknown_14=ruleVLSUnknown
-		{
-			$current.merge(this_VLSUnknown_14);
-		}
-		{
-			afterParserOrEnumRuleCall();
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getVLSRoleAccess().getUnknownKeyword_14());
 		}
 	)
-;
-
-// Entry rule entryRuleVLSAxiom
-entryRuleVLSAxiom returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSAxiomRule()); }
-	iv_ruleVLSAxiom=ruleVLSAxiom
-	{ $current=$iv_ruleVLSAxiom.current.getText(); }
-	EOF;
-
-// Rule VLSAxiom
-ruleVLSAxiom returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='axiom'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSAxiomAccess().getAxiomKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSConjecture
-entryRuleVLSConjecture returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSConjectureRule()); }
-	iv_ruleVLSConjecture=ruleVLSConjecture
-	{ $current=$iv_ruleVLSConjecture.current.getText(); }
-	EOF;
-
-// Rule VLSConjecture
-ruleVLSConjecture returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='conjecture'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSConjectureAccess().getConjectureKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSHypothesis
-entryRuleVLSHypothesis returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSHypothesisRule()); }
-	iv_ruleVLSHypothesis=ruleVLSHypothesis
-	{ $current=$iv_ruleVLSHypothesis.current.getText(); }
-	EOF;
-
-// Rule VLSHypothesis
-ruleVLSHypothesis returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='hypothesis'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSHypothesisAccess().getHypothesisKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSDefinition
-entryRuleVLSDefinition returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSDefinitionRule()); }
-	iv_ruleVLSDefinition=ruleVLSDefinition
-	{ $current=$iv_ruleVLSDefinition.current.getText(); }
-	EOF;
-
-// Rule VLSDefinition
-ruleVLSDefinition returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='definition'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSDefinitionAccess().getDefinitionKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSAssumption
-entryRuleVLSAssumption returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSAssumptionRule()); }
-	iv_ruleVLSAssumption=ruleVLSAssumption
-	{ $current=$iv_ruleVLSAssumption.current.getText(); }
-	EOF;
-
-// Rule VLSAssumption
-ruleVLSAssumption returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='assumption'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSAssumptionAccess().getAssumptionKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSLemma
-entryRuleVLSLemma returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSLemmaRule()); }
-	iv_ruleVLSLemma=ruleVLSLemma
-	{ $current=$iv_ruleVLSLemma.current.getText(); }
-	EOF;
-
-// Rule VLSLemma
-ruleVLSLemma returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='lemma'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSLemmaAccess().getLemmaKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSTheorem
-entryRuleVLSTheorem returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSTheoremRule()); }
-	iv_ruleVLSTheorem=ruleVLSTheorem
-	{ $current=$iv_ruleVLSTheorem.current.getText(); }
-	EOF;
-
-// Rule VLSTheorem
-ruleVLSTheorem returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='theorem'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSTheoremAccess().getTheoremKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSCorollary
-entryRuleVLSCorollary returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSCorollaryRule()); }
-	iv_ruleVLSCorollary=ruleVLSCorollary
-	{ $current=$iv_ruleVLSCorollary.current.getText(); }
-	EOF;
-
-// Rule VLSCorollary
-ruleVLSCorollary returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='corollary'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSCorollaryAccess().getCorollaryKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSNegated_Conjecture
-entryRuleVLSNegated_Conjecture returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSNegated_ConjectureRule()); }
-	iv_ruleVLSNegated_Conjecture=ruleVLSNegated_Conjecture
-	{ $current=$iv_ruleVLSNegated_Conjecture.current.getText(); }
-	EOF;
-
-// Rule VLSNegated_Conjecture
-ruleVLSNegated_Conjecture returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='negated_conjecture'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSNegated_ConjectureAccess().getNegated_conjectureKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSPlain
-entryRuleVLSPlain returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSPlainRule()); }
-	iv_ruleVLSPlain=ruleVLSPlain
-	{ $current=$iv_ruleVLSPlain.current.getText(); }
-	EOF;
-
-// Rule VLSPlain
-ruleVLSPlain returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='plain'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSPlainAccess().getPlainKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSType
-entryRuleVLSType returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSTypeRule()); }
-	iv_ruleVLSType=ruleVLSType
-	{ $current=$iv_ruleVLSType.current.getText(); }
-	EOF;
-
-// Rule VLSType
-ruleVLSType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='type'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSTypeAccess().getTypeKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSFi_Domain
-entryRuleVLSFi_Domain returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSFi_DomainRule()); }
-	iv_ruleVLSFi_Domain=ruleVLSFi_Domain
-	{ $current=$iv_ruleVLSFi_Domain.current.getText(); }
-	EOF;
-
-// Rule VLSFi_Domain
-ruleVLSFi_Domain returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='fi_domain'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSFi_DomainAccess().getFi_domainKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSFi_Functors
-entryRuleVLSFi_Functors returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSFi_FunctorsRule()); }
-	iv_ruleVLSFi_Functors=ruleVLSFi_Functors
-	{ $current=$iv_ruleVLSFi_Functors.current.getText(); }
-	EOF;
-
-// Rule VLSFi_Functors
-ruleVLSFi_Functors returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='fi_functors'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSFi_FunctorsAccess().getFi_functorsKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSFi_Predicates
-entryRuleVLSFi_Predicates returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSFi_PredicatesRule()); }
-	iv_ruleVLSFi_Predicates=ruleVLSFi_Predicates
-	{ $current=$iv_ruleVLSFi_Predicates.current.getText(); }
-	EOF;
-
-// Rule VLSFi_Predicates
-ruleVLSFi_Predicates returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='fi_predicates'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSFi_PredicatesAccess().getFi_predicatesKeyword());
-	}
-;
-
-// Entry rule entryRuleVLSUnknown
-entryRuleVLSUnknown returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getVLSUnknownRule()); }
-	iv_ruleVLSUnknown=ruleVLSUnknown
-	{ $current=$iv_ruleVLSUnknown.current.getText(); }
-	EOF;
-
-// Rule VLSUnknown
-ruleVLSUnknown returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	kw='unknown'
-	{
-		$current.merge(kw);
-		newLeafNode(kw, grammarAccess.getVLSUnknownAccess().getUnknownKeyword());
-	}
 ;
 
 // Entry rule entryRuleVLSAnnotation

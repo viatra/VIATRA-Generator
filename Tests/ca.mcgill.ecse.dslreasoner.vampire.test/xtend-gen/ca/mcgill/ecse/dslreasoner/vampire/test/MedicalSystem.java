@@ -29,7 +29,7 @@ public class MedicalSystem {
     try {
       MedicalSystem.init();
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("outputModels/");
+      _builder.append("output/MedicalSystem/");
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_builder.toString(), "");
       workspace.initAndClear();
       final LogicProblem root = MedicalSystem.load();
@@ -40,7 +40,7 @@ public class MedicalSystem {
       reasoner = _vampireSolver;
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
-        it.writeToFile = false;
+        it.writeToFile = true;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       solution = reasoner.solve(root, vampireConfig, workspace);

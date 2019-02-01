@@ -86,13 +86,31 @@ public interface VampireLanguagePackage extends EPackage
   int VAMPIRE_MODEL__COMMENTS = 1;
 
   /**
+   * The feature id for the '<em><b>Confirmations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VAMPIRE_MODEL__CONFIRMATIONS = 2;
+
+  /**
    * The feature id for the '<em><b>Formulas</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VAMPIRE_MODEL__FORMULAS = 2;
+  int VAMPIRE_MODEL__FORMULAS = 3;
+
+  /**
+   * The feature id for the '<em><b>Tfformulas</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VAMPIRE_MODEL__TFFORMULAS = 4;
 
   /**
    * The number of structural features of the '<em>Vampire Model</em>' class.
@@ -101,7 +119,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VAMPIRE_MODEL_FEATURE_COUNT = 3;
+  int VAMPIRE_MODEL_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSIncludeImpl <em>VLS Include</em>}' class.
@@ -197,6 +215,91 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_COMMENT_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSConfirmationsImpl <em>VLS Confirmations</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSConfirmationsImpl
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSConfirmations()
+   * @generated
+   */
+  int VLS_CONFIRMATIONS = 4;
+
+  /**
+   * The number of structural features of the '<em>VLS Confirmations</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_CONFIRMATIONS_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSSatisfiableImpl <em>VLS Satisfiable</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSSatisfiableImpl
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSSatisfiable()
+   * @generated
+   */
+  int VLS_SATISFIABLE = 5;
+
+  /**
+   * The number of structural features of the '<em>VLS Satisfiable</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_SATISFIABLE_FEATURE_COUNT = VLS_CONFIRMATIONS_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTryingImpl <em>VLS Trying</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTryingImpl
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTrying()
+   * @generated
+   */
+  int VLS_TRYING = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TRYING__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>VLS Trying</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TRYING_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl <em>VLS Finite Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFiniteModel()
+   * @generated
+   */
+  int VLS_FINITE_MODEL = 7;
+
+  /**
+   * The number of structural features of the '<em>VLS Finite Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FINITE_MODEL_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFofFormulaImpl <em>VLS Fof Formula</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -204,7 +307,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFofFormula()
    * @generated
    */
-  int VLS_FOF_FORMULA = 4;
+  int VLS_FOF_FORMULA = 8;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -252,6 +355,61 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_FOF_FORMULA_FEATURE_COUNT = 4;
 
   /**
+   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTffFormulaImpl <em>VLS Tff Formula</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTffFormulaImpl
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTffFormula()
+   * @generated
+   */
+  int VLS_TFF_FORMULA = 9;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TFF_FORMULA__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Fof Role</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TFF_FORMULA__FOF_ROLE = 1;
+
+  /**
+   * The feature id for the '<em><b>Fof Formula</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TFF_FORMULA__FOF_FORMULA = 2;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TFF_FORMULA__ANNOTATIONS = 3;
+
+  /**
+   * The number of structural features of the '<em>VLS Tff Formula</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TFF_FORMULA_FEATURE_COUNT = 4;
+
+  /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSAnnotationImpl <em>VLS Annotation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -259,7 +417,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAnnotation()
    * @generated
    */
-  int VLS_ANNOTATION = 5;
+  int VLS_ANNOTATION = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -305,7 +463,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTerm()
    * @generated
    */
-  int VLS_TERM = 6;
+  int VLS_TERM = 11;
 
   /**
    * The number of structural features of the '<em>VLS Term</em>' class.
@@ -324,7 +482,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSVariable()
    * @generated
    */
-  int VLS_VARIABLE = 7;
+  int VLS_VARIABLE = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -352,7 +510,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunctionFof()
    * @generated
    */
-  int VLS_FUNCTION_FOF = 8;
+  int VLS_FUNCTION_FOF = 13;
 
   /**
    * The feature id for the '<em><b>Functor</b></em>' attribute.
@@ -389,7 +547,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSDefinedTerm()
    * @generated
    */
-  int VLS_DEFINED_TERM = 9;
+  int VLS_DEFINED_TERM = 14;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -417,7 +575,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSEquivalent()
    * @generated
    */
-  int VLS_EQUIVALENT = 10;
+  int VLS_EQUIVALENT = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -454,7 +612,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSImplies()
    * @generated
    */
-  int VLS_IMPLIES = 11;
+  int VLS_IMPLIES = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -491,7 +649,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRevImplies()
    * @generated
    */
-  int VLS_REV_IMPLIES = 12;
+  int VLS_REV_IMPLIES = 17;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -528,7 +686,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSXnor()
    * @generated
    */
-  int VLS_XNOR = 13;
+  int VLS_XNOR = 18;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -565,7 +723,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSNor()
    * @generated
    */
-  int VLS_NOR = 14;
+  int VLS_NOR = 19;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -602,7 +760,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSNand()
    * @generated
    */
-  int VLS_NAND = 15;
+  int VLS_NAND = 20;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -639,7 +797,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAnd()
    * @generated
    */
-  int VLS_AND = 16;
+  int VLS_AND = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -676,7 +834,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSOr()
    * @generated
    */
-  int VLS_OR = 17;
+  int VLS_OR = 22;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -713,7 +871,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSUniversalQuantifier()
    * @generated
    */
-  int VLS_UNIVERSAL_QUANTIFIER = 18;
+  int VLS_UNIVERSAL_QUANTIFIER = 23;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -750,7 +908,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSExistentialQuantifier()
    * @generated
    */
-  int VLS_EXISTENTIAL_QUANTIFIER = 19;
+  int VLS_EXISTENTIAL_QUANTIFIER = 24;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -787,7 +945,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSUnaryNegation()
    * @generated
    */
-  int VLS_UNARY_NEGATION = 20;
+  int VLS_UNARY_NEGATION = 25;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -815,7 +973,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSInequality()
    * @generated
    */
-  int VLS_INEQUALITY = 21;
+  int VLS_INEQUALITY = 26;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -852,7 +1010,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSEquality()
    * @generated
    */
-  int VLS_EQUALITY = 22;
+  int VLS_EQUALITY = 27;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -889,7 +1047,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSAssignment()
    * @generated
    */
-  int VLS_ASSIGNMENT = 23;
+  int VLS_ASSIGNMENT = 28;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -926,7 +1084,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSConstant()
    * @generated
    */
-  int VLS_CONSTANT = 24;
+  int VLS_CONSTANT = 29;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -954,7 +1112,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTrue()
    * @generated
    */
-  int VLS_TRUE = 25;
+  int VLS_TRUE = 30;
 
   /**
    * The number of structural features of the '<em>VLS True</em>' class.
@@ -973,7 +1131,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFalse()
    * @generated
    */
-  int VLS_FALSE = 26;
+  int VLS_FALSE = 31;
 
   /**
    * The number of structural features of the '<em>VLS False</em>' class.
@@ -992,7 +1150,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFunction()
    * @generated
    */
-  int VLS_FUNCTION = 27;
+  int VLS_FUNCTION = 32;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -1029,7 +1187,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSLess()
    * @generated
    */
-  int VLS_LESS = 28;
+  int VLS_LESS = 33;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1066,7 +1224,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSInt()
    * @generated
    */
-  int VLS_INT = 29;
+  int VLS_INT = 34;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1094,7 +1252,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSReal()
    * @generated
    */
-  int VLS_REAL = 30;
+  int VLS_REAL = 35;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1122,7 +1280,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSRational()
    * @generated
    */
-  int VLS_RATIONAL = 31;
+  int VLS_RATIONAL = 36;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1150,7 +1308,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSDoubleQuote()
    * @generated
    */
-  int VLS_DOUBLE_QUOTE = 32;
+  int VLS_DOUBLE_QUOTE = 37;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1204,6 +1362,17 @@ public interface VampireLanguagePackage extends EPackage
   EReference getVampireModel_Comments();
 
   /**
+   * Returns the meta object for the containment reference list '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getConfirmations <em>Confirmations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Confirmations</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getConfirmations()
+   * @see #getVampireModel()
+   * @generated
+   */
+  EReference getVampireModel_Confirmations();
+
+  /**
    * Returns the meta object for the containment reference list '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getFormulas <em>Formulas</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1213,6 +1382,17 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EReference getVampireModel_Formulas();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getTfformulas <em>Tfformulas</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tfformulas</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getTfformulas()
+   * @see #getVampireModel()
+   * @generated
+   */
+  EReference getVampireModel_Tfformulas();
 
   /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInclude <em>VLS Include</em>}'.
@@ -1289,6 +1469,57 @@ public interface VampireLanguagePackage extends EPackage
   EAttribute getVLSComment_Comment();
 
   /**
+   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations <em>VLS Confirmations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Confirmations</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations
+   * @generated
+   */
+  EClass getVLSConfirmations();
+
+  /**
+   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable <em>VLS Satisfiable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Satisfiable</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable
+   * @generated
+   */
+  EClass getVLSSatisfiable();
+
+  /**
+   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying <em>VLS Trying</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Trying</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying
+   * @generated
+   */
+  EClass getVLSTrying();
+
+  /**
+   * Returns the meta object for the attribute '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying#getName()
+   * @see #getVLSTrying()
+   * @generated
+   */
+  EAttribute getVLSTrying_Name();
+
+  /**
+   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel <em>VLS Finite Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Finite Model</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel
+   * @generated
+   */
+  EClass getVLSFiniteModel();
+
+  /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula <em>VLS Fof Formula</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1341,6 +1572,60 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EReference getVLSFofFormula_Annotations();
+
+  /**
+   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula <em>VLS Tff Formula</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Tff Formula</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula
+   * @generated
+   */
+  EClass getVLSTffFormula();
+
+  /**
+   * Returns the meta object for the attribute '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getName()
+   * @see #getVLSTffFormula()
+   * @generated
+   */
+  EAttribute getVLSTffFormula_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofRole <em>Fof Role</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Fof Role</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofRole()
+   * @see #getVLSTffFormula()
+   * @generated
+   */
+  EAttribute getVLSTffFormula_FofRole();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofFormula <em>Fof Formula</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Fof Formula</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofFormula()
+   * @see #getVLSTffFormula()
+   * @generated
+   */
+  EReference getVLSTffFormula_FofFormula();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Annotations</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getAnnotations()
+   * @see #getVLSTffFormula()
+   * @generated
+   */
+  EReference getVLSTffFormula_Annotations();
 
   /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnnotation <em>VLS Annotation</em>}'.
@@ -2101,12 +2386,28 @@ public interface VampireLanguagePackage extends EPackage
     EReference VAMPIRE_MODEL__COMMENTS = eINSTANCE.getVampireModel_Comments();
 
     /**
+     * The meta object literal for the '<em><b>Confirmations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VAMPIRE_MODEL__CONFIRMATIONS = eINSTANCE.getVampireModel_Confirmations();
+
+    /**
      * The meta object literal for the '<em><b>Formulas</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference VAMPIRE_MODEL__FORMULAS = eINSTANCE.getVampireModel_Formulas();
+
+    /**
+     * The meta object literal for the '<em><b>Tfformulas</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VAMPIRE_MODEL__TFFORMULAS = eINSTANCE.getVampireModel_Tfformulas();
 
     /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSIncludeImpl <em>VLS Include</em>}' class.
@@ -2171,6 +2472,54 @@ public interface VampireLanguagePackage extends EPackage
     EAttribute VLS_COMMENT__COMMENT = eINSTANCE.getVLSComment_Comment();
 
     /**
+     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSConfirmationsImpl <em>VLS Confirmations</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSConfirmationsImpl
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSConfirmations()
+     * @generated
+     */
+    EClass VLS_CONFIRMATIONS = eINSTANCE.getVLSConfirmations();
+
+    /**
+     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSSatisfiableImpl <em>VLS Satisfiable</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSSatisfiableImpl
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSSatisfiable()
+     * @generated
+     */
+    EClass VLS_SATISFIABLE = eINSTANCE.getVLSSatisfiable();
+
+    /**
+     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTryingImpl <em>VLS Trying</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTryingImpl
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTrying()
+     * @generated
+     */
+    EClass VLS_TRYING = eINSTANCE.getVLSTrying();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_TRYING__NAME = eINSTANCE.getVLSTrying_Name();
+
+    /**
+     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl <em>VLS Finite Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSFiniteModel()
+     * @generated
+     */
+    EClass VLS_FINITE_MODEL = eINSTANCE.getVLSFiniteModel();
+
+    /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFofFormulaImpl <em>VLS Fof Formula</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2211,6 +2560,48 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EReference VLS_FOF_FORMULA__ANNOTATIONS = eINSTANCE.getVLSFofFormula_Annotations();
+
+    /**
+     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTffFormulaImpl <em>VLS Tff Formula</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTffFormulaImpl
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTffFormula()
+     * @generated
+     */
+    EClass VLS_TFF_FORMULA = eINSTANCE.getVLSTffFormula();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_TFF_FORMULA__NAME = eINSTANCE.getVLSTffFormula_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Fof Role</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_TFF_FORMULA__FOF_ROLE = eINSTANCE.getVLSTffFormula_FofRole();
+
+    /**
+     * The meta object literal for the '<em><b>Fof Formula</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_TFF_FORMULA__FOF_FORMULA = eINSTANCE.getVLSTffFormula_FofFormula();
+
+    /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_TFF_FORMULA__ANNOTATIONS = eINSTANCE.getVLSTffFormula_Annotations();
 
     /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSAnnotationImpl <em>VLS Annotation</em>}' class.

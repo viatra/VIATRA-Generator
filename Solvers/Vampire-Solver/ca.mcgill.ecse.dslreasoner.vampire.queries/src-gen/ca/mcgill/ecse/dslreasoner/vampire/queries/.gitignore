@@ -11,3 +11,16 @@
 /.VLSUnaryNegation.java._trace
 /.VLSUniversalQuantifier.java._trace
 /.VampireQueries.java._trace
+/VLSAnd.java
+/VLSAnnotation.java
+/VLSComment.java
+/VLSEquivalent.java
+/VLSExistentialQuantifier.java
+/VLSFofFormula.java
+/VLSFunction.java
+/VLSFunctionFof.java
+/VLSInequality.java
+/VLSOr.java
+/VLSUnaryNegation.java
+/VLSUniversalQuantifier.java
+/VampireQueries.java
