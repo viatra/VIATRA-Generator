@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cftLanguage" nsURI="http://www.bme.hu/mit/inf/dslreasoner/faulttree/components/CftLanguage"
+    nsPrefix="cftLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="CftModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageName" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//ImportDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentDefinitions" upperBound="-1"
+        eType="#//ComponentDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformationDefinitions"
+        upperBound="-1" eType="#//TransformationDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
+        eType="#//InputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" unique="false"
+        upperBound="-1" eType="#//EventDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventDefinitions" upperBound="-1"
+        eType="#//EventDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputEvent" eSuperTypes="#//EventDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="#//EventDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicEventDefinition" eSuperTypes="#//EventDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rate" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GateDefinition" eSuperTypes="#//EventDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" unique="false"
+        upperBound="-1" eType="#//EventDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndGate" eSuperTypes="#//GateDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrGate" eSuperTypes="#//GateDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingDefinitions" upperBound="-1"
+        eType="#//MappingDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="topLevel" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.ecore#//Pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//MappingParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentInstance" eType="#//ComponentInstance"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lookupDefinitions" upperBound="-1"
+        eType="#//LookupDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
+        eType="#//Assignment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LookupDefinition" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="#//MappingDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" unique="false"
+        upperBound="-1" eType="#//MappingParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="#//EventReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" eType="#//EventReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//EventDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//ComponentDefinition"/>
+  </eClassifiers>
+</ecore:EPackage>

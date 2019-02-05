@@ -1,0 +1,82 @@
+grammar hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/viatra/query/patternlanguage/emf/PatternLanguage" as vql
+
+generate cftLanguage "http://www.bme.hu/mit/inf/dslreasoner/faulttree/components/CftLanguage"
+
+CftModel:
+	"package" packageName=QualifiedName ";"?
+	imports+=ImportDeclaration*
+	(componentDefinitions+=ComponentDefinition | transformationDefinitions+=TransformationDefinition)*;
+
+ImportDeclaration:
+	"import" importedNamespace=QualifiedNameWithWildcard ";"?;
+
+ComponentDefinition:
+	"cft" name=ID "{"
+	(("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[EventDeclaration]* ";")?)
+	(eventDefinitions+=EventDefinition ";")*
+	"}";
+
+EventDeclaration:
+	InputEvent | EventDefinition;
+
+InputEvent:
+	name=ID multiple?="[]"?;
+
+EventDefinition:
+	BasicEventDefinition | GateDefinition;
+
+BasicEventDefinition:
+	name=ID "lambda" "=" rate=DOULBE;
+
+GateDefinition:
+	AndGate | OrGate;
+
+AndGate:
+	name=ID "and" inputEvents+=[EventDeclaration]*;
+
+OrGate:
+	name=ID "or" inputEvents+=[EventDeclaration]*;
+
+TransformationDefinition:
+	"transformation" name=ID "{"
+	mappingDefinitions+=MappingDefinition*
+	"}";
+
+MappingDefinition:
+	topLevel?="toplevel"? "mapping" pattern=[vql::Pattern|QualifiedName]
+	"(" parameters+=MappingParameter ("," parameters+=MappingParameter)* ")"
+	(componentInstance=ComponentInstance)? ("{"
+		((lookupDefinitions+=LookupDefinition | assignments+=Assignment) ";")*
+	"}")?;
+
+MappingParameter:
+	name=ID;
+
+LookupDefinition:
+	"lookup" mapping=[MappingDefinition]
+	"(" arguments+=[MappingParameter] ("," arguments+=[MappingParameter])* ")"
+	"as" name=ID;
+
+Variable:
+	ComponentInstance | LookupDefinition;
+
+Assignment:
+	input=EventReference (multiple?="+=" | ":=") output=EventReference;
+
+EventReference:
+	component=[Variable] "." event=[EventDeclaration];
+
+ComponentInstance:
+	"=>" componentType=[ComponentDefinition|QualifiedName] name=ID?;
+
+QualifiedName returns ecore::EString:
+	ID ("." ID)*;
+
+QualifiedNameWithWildcard returns ecore::EString:
+	QualifiedName ("." "*")?;
+
+terminal DOULBE returns ecore::EDouble:
+	('0'..'9')+ ("." ('0'..'9')+ | ("." ('0'..'9')+)? ("e" | "E") ("+" | "-")? ('0'..'9')+);
