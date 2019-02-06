@@ -3,26 +3,22 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl;
 
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.AndGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Assignment;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.BasicEventDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguageFactory;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentInstance;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventReference;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.GateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ImportDeclaration;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.InputEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.LookupDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingParameter;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.OrGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Variable;
+
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
+
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -61,62 +57,6 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
    * @generated
    */
   private EClass importDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass componentDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eventDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass inputEventEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eventDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass basicEventDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass gateDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass andGateEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass orGateEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -224,8 +164,10 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
     isInited = true;
 
     // Initialize simple dependencies
+    CftPackage.eINSTANCE.eClass();
     EcorePackage.eINSTANCE.eClass();
     PatternLanguagePackage.eINSTANCE.eClass();
+    FtPackage.eINSTANCE.eClass();
     XtypePackage.eINSTANCE.eClass();
     TypesPackage.eINSTANCE.eClass();
     XbasePackage.eINSTANCE.eClass();
@@ -319,182 +261,6 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
   public EAttribute getImportDeclaration_ImportedNamespace()
   {
     return (EAttribute)importDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getComponentDefinition()
-  {
-    return componentDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getComponentDefinition_Name()
-  {
-    return (EAttribute)componentDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getComponentDefinition_InputEvents()
-  {
-    return (EReference)componentDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getComponentDefinition_OutputEvents()
-  {
-    return (EReference)componentDefinitionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getComponentDefinition_EventDefinitions()
-  {
-    return (EReference)componentDefinitionEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEventDeclaration()
-  {
-    return eventDeclarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEventDeclaration_Name()
-  {
-    return (EAttribute)eventDeclarationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getInputEvent()
-  {
-    return inputEventEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getInputEvent_Multiple()
-  {
-    return (EAttribute)inputEventEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEventDefinition()
-  {
-    return eventDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getBasicEventDefinition()
-  {
-    return basicEventDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getBasicEventDefinition_Rate()
-  {
-    return (EAttribute)basicEventDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getGateDefinition()
-  {
-    return gateDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getGateDefinition_InputEvents()
-  {
-    return (EReference)gateDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getAndGate()
-  {
-    return andGateEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getOrGate()
-  {
-    return orGateEClass;
   }
 
   /**
@@ -823,30 +589,6 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
     importDeclarationEClass = createEClass(IMPORT_DECLARATION);
     createEAttribute(importDeclarationEClass, IMPORT_DECLARATION__IMPORTED_NAMESPACE);
 
-    componentDefinitionEClass = createEClass(COMPONENT_DEFINITION);
-    createEAttribute(componentDefinitionEClass, COMPONENT_DEFINITION__NAME);
-    createEReference(componentDefinitionEClass, COMPONENT_DEFINITION__INPUT_EVENTS);
-    createEReference(componentDefinitionEClass, COMPONENT_DEFINITION__OUTPUT_EVENTS);
-    createEReference(componentDefinitionEClass, COMPONENT_DEFINITION__EVENT_DEFINITIONS);
-
-    eventDeclarationEClass = createEClass(EVENT_DECLARATION);
-    createEAttribute(eventDeclarationEClass, EVENT_DECLARATION__NAME);
-
-    inputEventEClass = createEClass(INPUT_EVENT);
-    createEAttribute(inputEventEClass, INPUT_EVENT__MULTIPLE);
-
-    eventDefinitionEClass = createEClass(EVENT_DEFINITION);
-
-    basicEventDefinitionEClass = createEClass(BASIC_EVENT_DEFINITION);
-    createEAttribute(basicEventDefinitionEClass, BASIC_EVENT_DEFINITION__RATE);
-
-    gateDefinitionEClass = createEClass(GATE_DEFINITION);
-    createEReference(gateDefinitionEClass, GATE_DEFINITION__INPUT_EVENTS);
-
-    andGateEClass = createEClass(AND_GATE);
-
-    orGateEClass = createEClass(OR_GATE);
-
     transformationDefinitionEClass = createEClass(TRANSFORMATION_DEFINITION);
     createEAttribute(transformationDefinitionEClass, TRANSFORMATION_DEFINITION__NAME);
     createEReference(transformationDefinitionEClass, TRANSFORMATION_DEFINITION__MAPPING_DEFINITIONS);
@@ -908,6 +650,7 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
 
     // Obtain other dependent packages
     EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+    CftPackage theCftPackage = (CftPackage)EPackage.Registry.INSTANCE.getEPackage(CftPackage.eNS_URI);
     PatternLanguagePackage thePatternLanguagePackage = (PatternLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(PatternLanguagePackage.eNS_URI);
 
     // Create type parameters
@@ -915,12 +658,6 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    inputEventEClass.getESuperTypes().add(this.getEventDeclaration());
-    eventDefinitionEClass.getESuperTypes().add(this.getEventDeclaration());
-    basicEventDefinitionEClass.getESuperTypes().add(this.getEventDefinition());
-    gateDefinitionEClass.getESuperTypes().add(this.getEventDefinition());
-    andGateEClass.getESuperTypes().add(this.getGateDefinition());
-    orGateEClass.getESuperTypes().add(this.getGateDefinition());
     lookupDefinitionEClass.getESuperTypes().add(this.getVariable());
     componentInstanceEClass.getESuperTypes().add(this.getVariable());
 
@@ -928,35 +665,11 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
     initEClass(cftModelEClass, CftModel.class, "CftModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCftModel_PackageName(), theEcorePackage.getEString(), "packageName", null, 0, 1, CftModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCftModel_Imports(), this.getImportDeclaration(), null, "imports", null, 0, -1, CftModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCftModel_ComponentDefinitions(), this.getComponentDefinition(), null, "componentDefinitions", null, 0, -1, CftModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCftModel_ComponentDefinitions(), theCftPackage.getComponentDefinition(), null, "componentDefinitions", null, 0, -1, CftModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCftModel_TransformationDefinitions(), this.getTransformationDefinition(), null, "transformationDefinitions", null, 0, -1, CftModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(importDeclarationEClass, ImportDeclaration.class, "ImportDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImportDeclaration_ImportedNamespace(), theEcorePackage.getEString(), "importedNamespace", null, 0, 1, ImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(componentDefinitionEClass, ComponentDefinition.class, "ComponentDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getComponentDefinition_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComponentDefinition_InputEvents(), this.getInputEvent(), null, "inputEvents", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComponentDefinition_OutputEvents(), this.getEventDeclaration(), null, "outputEvents", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComponentDefinition_EventDefinitions(), this.getEventDefinition(), null, "eventDefinitions", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eventDeclarationEClass, EventDeclaration.class, "EventDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEventDeclaration_Name(), theEcorePackage.getEString(), "name", null, 0, 1, EventDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(inputEventEClass, InputEvent.class, "InputEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getInputEvent_Multiple(), theEcorePackage.getEBoolean(), "multiple", null, 0, 1, InputEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(basicEventDefinitionEClass, BasicEventDefinition.class, "BasicEventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBasicEventDefinition_Rate(), theEcorePackage.getEDouble(), "rate", null, 0, 1, BasicEventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(gateDefinitionEClass, GateDefinition.class, "GateDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGateDefinition_InputEvents(), this.getEventDeclaration(), null, "inputEvents", null, 0, -1, GateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(andGateEClass, AndGate.class, "AndGate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(orGateEClass, OrGate.class, "OrGate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(transformationDefinitionEClass, TransformationDefinition.class, "TransformationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTransformationDefinition_Name(), theEcorePackage.getEString(), "name", null, 0, 1, TransformationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -987,10 +700,10 @@ public class CftLanguagePackageImpl extends EPackageImpl implements CftLanguageP
 
     initEClass(eventReferenceEClass, EventReference.class, "EventReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventReference_Component(), this.getVariable(), null, "component", null, 0, 1, EventReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEventReference_Event(), this.getEventDeclaration(), null, "event", null, 0, 1, EventReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEventReference_Event(), theCftPackage.getEventDeclaration(), null, "event", null, 0, 1, EventReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(componentInstanceEClass, ComponentInstance.class, "ComponentInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getComponentInstance_ComponentType(), this.getComponentDefinition(), null, "componentType", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getComponentInstance_ComponentType(), theCftPackage.getComponentDefinition(), null, "componentType", null, 0, 1, ComponentInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

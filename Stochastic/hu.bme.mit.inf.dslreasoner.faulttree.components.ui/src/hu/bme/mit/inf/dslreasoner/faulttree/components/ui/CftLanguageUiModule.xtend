@@ -3,11 +3,22 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.components.ui
 
+import hu.bme.mit.inf.dslreasoner.faulttree.components.ui.syntaxcoloring.CftLanguageSemanticHighlightingCalculator
+import hu.bme.mit.inf.dslreasoner.faulttree.components.ui.syntaxcoloring.CftLanguageTokenToAttributeIdMapper
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class CftLanguageUiModule extends AbstractCftLanguageUiModule {
+	def Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		CftLanguageTokenToAttributeIdMapper
+	}
+	
+	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		CftLanguageSemanticHighlightingCalculator
+	}
 }

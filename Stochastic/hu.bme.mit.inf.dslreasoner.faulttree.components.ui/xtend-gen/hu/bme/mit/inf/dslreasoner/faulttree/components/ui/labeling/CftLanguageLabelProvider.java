@@ -4,7 +4,9 @@
 package hu.bme.mit.inf.dslreasoner.faulttree.components.ui.labeling;
 
 import com.google.inject.Inject;
+import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.viatra.query.patternlanguage.emf.vql.Pattern;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 /**
@@ -17,5 +19,14 @@ public class CftLanguageLabelProvider extends DefaultEObjectLabelProvider {
   @Inject
   public CftLanguageLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
+  }
+  
+  public String text(final MappingDefinition mappingDefinition) {
+    Pattern _pattern = mappingDefinition.getPattern();
+    String _name = null;
+    if (_pattern!=null) {
+      _name=_pattern.getName();
+    }
+    return _name;
   }
 }

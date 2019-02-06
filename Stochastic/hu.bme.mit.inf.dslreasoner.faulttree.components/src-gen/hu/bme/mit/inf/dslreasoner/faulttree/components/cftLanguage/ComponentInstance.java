@@ -3,6 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage;
 
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 
 /**
  * <!-- begin-user-doc -->

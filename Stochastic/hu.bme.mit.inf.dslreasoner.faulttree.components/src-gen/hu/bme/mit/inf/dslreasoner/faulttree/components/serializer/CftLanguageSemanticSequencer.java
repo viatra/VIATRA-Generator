@@ -4,22 +4,27 @@
 package hu.bme.mit.inf.dslreasoner.faulttree.components.serializer;
 
 import com.google.inject.Inject;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.AndGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Assignment;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.BasicEventDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentInstance;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventReference;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ImportDeclaration;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.InputEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.LookupDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingParameter;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.OrGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.services.CftLanguageGrammarAccess;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.AndGateDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.BasicEventDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.KOfMGateDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.OrGateDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantDistribution;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ExponentialDistribution;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -43,22 +48,34 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
-		if (epackage == CftLanguagePackage.eINSTANCE)
+		if (epackage == CftPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case CftLanguagePackage.AND_GATE:
-				sequence_AndGate(context, (AndGate) semanticObject); 
+			case CftPackage.AND_GATE_DEFINITION:
+				sequence_AndGateDefinition(context, (AndGateDefinition) semanticObject); 
 				return; 
+			case CftPackage.BASIC_EVENT_DEFINITION:
+				sequence_BasicEventDefinition(context, (BasicEventDefinition) semanticObject); 
+				return; 
+			case CftPackage.COMPONENT_DEFINITION:
+				sequence_ComponentDefinition(context, (ComponentDefinition) semanticObject); 
+				return; 
+			case CftPackage.INTPUT_EVENT:
+				sequence_InputEvent(context, (IntputEvent) semanticObject); 
+				return; 
+			case CftPackage.KOF_MGATE_DEFINITION:
+				sequence_KOfMGateDefinition(context, (KOfMGateDefinition) semanticObject); 
+				return; 
+			case CftPackage.OR_GATE_DEFINITION:
+				sequence_OrGateDefinition(context, (OrGateDefinition) semanticObject); 
+				return; 
+			}
+		else if (epackage == CftLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case CftLanguagePackage.ASSIGNMENT:
 				sequence_Assignment(context, (Assignment) semanticObject); 
 				return; 
-			case CftLanguagePackage.BASIC_EVENT_DEFINITION:
-				sequence_BasicEventDefinition(context, (BasicEventDefinition) semanticObject); 
-				return; 
 			case CftLanguagePackage.CFT_MODEL:
 				sequence_CftModel(context, (CftModel) semanticObject); 
-				return; 
-			case CftLanguagePackage.COMPONENT_DEFINITION:
-				sequence_ComponentDefinition(context, (ComponentDefinition) semanticObject); 
 				return; 
 			case CftLanguagePackage.COMPONENT_INSTANCE:
 				sequence_ComponentInstance(context, (ComponentInstance) semanticObject); 
@@ -69,9 +86,6 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case CftLanguagePackage.IMPORT_DECLARATION:
 				sequence_ImportDeclaration(context, (ImportDeclaration) semanticObject); 
 				return; 
-			case CftLanguagePackage.INPUT_EVENT:
-				sequence_InputEvent(context, (InputEvent) semanticObject); 
-				return; 
 			case CftLanguagePackage.LOOKUP_DEFINITION:
 				sequence_LookupDefinition(context, (LookupDefinition) semanticObject); 
 				return; 
@@ -81,11 +95,17 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case CftLanguagePackage.MAPPING_PARAMETER:
 				sequence_MappingParameter(context, (MappingParameter) semanticObject); 
 				return; 
-			case CftLanguagePackage.OR_GATE:
-				sequence_OrGate(context, (OrGate) semanticObject); 
-				return; 
 			case CftLanguagePackage.TRANSFORMATION_DEFINITION:
 				sequence_TransformationDefinition(context, (TransformationDefinition) semanticObject); 
+				return; 
+			}
+		else if (epackage == FtPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case FtPackage.CONSTANT_DISTRIBUTION:
+				sequence_ConstantDistribution(context, (ConstantDistribution) semanticObject); 
+				return; 
+			case FtPackage.EXPONENTIAL_DISTRIBUTION:
+				sequence_ExponentialDistribution(context, (ExponentialDistribution) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -94,15 +114,14 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	/**
 	 * Contexts:
-	 *     EventDeclaration returns AndGate
-	 *     EventDefinition returns AndGate
-	 *     GateDefinition returns AndGate
-	 *     AndGate returns AndGate
+	 *     EventDefinition returns AndGateDefinition
+	 *     GateDefinition returns AndGateDefinition
+	 *     AndGateDefinition returns AndGateDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID inputEvents+=[EventDeclaration|ID]*)
+	 *     (name=ValidId inputEvents+=[EventDeclaration|ValidId]*)
 	 */
-	protected void sequence_AndGate(ISerializationContext context, AndGate semanticObject) {
+	protected void sequence_AndGateDefinition(ISerializationContext context, AndGateDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -121,23 +140,22 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	/**
 	 * Contexts:
-	 *     EventDeclaration returns BasicEventDefinition
 	 *     EventDefinition returns BasicEventDefinition
 	 *     BasicEventDefinition returns BasicEventDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID rate=DOULBE)
+	 *     (name=ValidId distribution=Distribution)
 	 */
 	protected void sequence_BasicEventDefinition(ISerializationContext context, BasicEventDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, CftLanguagePackage.Literals.EVENT_DECLARATION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CftLanguagePackage.Literals.EVENT_DECLARATION__NAME));
-			if (transientValues.isValueTransient(semanticObject, CftLanguagePackage.Literals.BASIC_EVENT_DEFINITION__RATE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CftLanguagePackage.Literals.BASIC_EVENT_DEFINITION__RATE));
+			if (transientValues.isValueTransient(semanticObject, CftPackage.Literals.EVENT_DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CftPackage.Literals.EVENT_DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, CftPackage.Literals.BASIC_EVENT_DEFINITION__DISTRIBUTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CftPackage.Literals.BASIC_EVENT_DEFINITION__DISTRIBUTION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBasicEventDefinitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getBasicEventDefinitionAccess().getRateDOULBETerminalRuleCall_3_0(), semanticObject.getRate());
+		feeder.accept(grammarAccess.getBasicEventDefinitionAccess().getNameValidIdParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getBasicEventDefinitionAccess().getDistributionDistributionParserRuleCall_1_0(), semanticObject.getDistribution());
 		feeder.finish();
 	}
 	
@@ -163,7 +181,7 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     ComponentDefinition returns ComponentDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID (inputEvents+=InputEvent | outputEvents+=[EventDeclaration|ID])* eventDefinitions+=EventDefinition*)
+	 *     (name=ValidId (inputEvents+=InputEvent | outputEvents+=[EventDeclaration|ValidId])* eventDefinitions+=EventDefinition*)
 	 */
 	protected void sequence_ComponentDefinition(ISerializationContext context, ComponentDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -185,10 +203,29 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	/**
 	 * Contexts:
+	 *     Distribution returns ConstantDistribution
+	 *     ConstantDistribution returns ConstantDistribution
+	 *
+	 * Constraint:
+	 *     p=Double
+	 */
+	protected void sequence_ConstantDistribution(ISerializationContext context, ConstantDistribution semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FtPackage.Literals.CONSTANT_DISTRIBUTION__P) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FtPackage.Literals.CONSTANT_DISTRIBUTION__P));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConstantDistributionAccess().getPDoubleParserRuleCall_2_0(), semanticObject.getP());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     EventReference returns EventReference
 	 *
 	 * Constraint:
-	 *     (component=[Variable|ID] event=[EventDeclaration|ID])
+	 *     (component=[Variable|ValidId] event=[EventDeclaration|ValidId])
 	 */
 	protected void sequence_EventReference(ISerializationContext context, EventReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -198,8 +235,27 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CftLanguagePackage.Literals.EVENT_REFERENCE__EVENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEventReferenceAccess().getComponentVariableIDTerminalRuleCall_0_0_1(), semanticObject.eGet(CftLanguagePackage.Literals.EVENT_REFERENCE__COMPONENT, false));
-		feeder.accept(grammarAccess.getEventReferenceAccess().getEventEventDeclarationIDTerminalRuleCall_2_0_1(), semanticObject.eGet(CftLanguagePackage.Literals.EVENT_REFERENCE__EVENT, false));
+		feeder.accept(grammarAccess.getEventReferenceAccess().getComponentVariableValidIdParserRuleCall_0_0_1(), semanticObject.eGet(CftLanguagePackage.Literals.EVENT_REFERENCE__COMPONENT, false));
+		feeder.accept(grammarAccess.getEventReferenceAccess().getEventEventDeclarationValidIdParserRuleCall_2_0_1(), semanticObject.eGet(CftLanguagePackage.Literals.EVENT_REFERENCE__EVENT, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Distribution returns ExponentialDistribution
+	 *     ExponentialDistribution returns ExponentialDistribution
+	 *
+	 * Constraint:
+	 *     lambda=Double
+	 */
+	protected void sequence_ExponentialDistribution(ISerializationContext context, ExponentialDistribution semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FtPackage.Literals.EXPONENTIAL_DISTRIBUTION__LAMBDA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FtPackage.Literals.EXPONENTIAL_DISTRIBUTION__LAMBDA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExponentialDistributionAccess().getLambdaDoubleParserRuleCall_2_0(), semanticObject.getLambda());
 		feeder.finish();
 	}
 	
@@ -224,13 +280,26 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	/**
 	 * Contexts:
-	 *     EventDeclaration returns InputEvent
-	 *     InputEvent returns InputEvent
+	 *     InputEvent returns IntputEvent
 	 *
 	 * Constraint:
-	 *     (name=ID multiple?='[]'?)
+	 *     (name=ValidId multiple?='[]'?)
 	 */
-	protected void sequence_InputEvent(ISerializationContext context, InputEvent semanticObject) {
+	protected void sequence_InputEvent(ISerializationContext context, IntputEvent semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EventDefinition returns KOfMGateDefinition
+	 *     GateDefinition returns KOfMGateDefinition
+	 *     KOfMGateDefinition returns KOfMGateDefinition
+	 *
+	 * Constraint:
+	 *     (name=ValidId k=INT (m=INT | m=OF_INT) inputEvents+=[EventDeclaration|ValidId]*)
+	 */
+	protected void sequence_KOfMGateDefinition(ISerializationContext context, KOfMGateDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -241,7 +310,7 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     Variable returns LookupDefinition
 	 *
 	 * Constraint:
-	 *     (mapping=[MappingDefinition|ID] arguments+=[MappingParameter|ID] arguments+=[MappingParameter|ID]* name=ID)
+	 *     (mapping=[MappingDefinition|QualifiedName] arguments+=[MappingParameter|ValidId] arguments+=[MappingParameter|ValidId]* name=ValidId)
 	 */
 	protected void sequence_LookupDefinition(ISerializationContext context, LookupDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -272,7 +341,7 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     MappingParameter returns MappingParameter
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     name=ValidId
 	 */
 	protected void sequence_MappingParameter(ISerializationContext context, MappingParameter semanticObject) {
 		if (errorAcceptor != null) {
@@ -280,22 +349,21 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CftLanguagePackage.Literals.MAPPING_PARAMETER__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMappingParameterAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getMappingParameterAccess().getNameValidIdParserRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     EventDeclaration returns OrGate
-	 *     EventDefinition returns OrGate
-	 *     GateDefinition returns OrGate
-	 *     OrGate returns OrGate
+	 *     EventDefinition returns OrGateDefinition
+	 *     GateDefinition returns OrGateDefinition
+	 *     OrGateDefinition returns OrGateDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID inputEvents+=[EventDeclaration|ID]*)
+	 *     (name=ValidId inputEvents+=[EventDeclaration|ValidId]*)
 	 */
-	protected void sequence_OrGate(ISerializationContext context, OrGate semanticObject) {
+	protected void sequence_OrGateDefinition(ISerializationContext context, OrGateDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -305,7 +373,7 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     TransformationDefinition returns TransformationDefinition
 	 *
 	 * Constraint:
-	 *     (name=ID mappingDefinitions+=MappingDefinition*)
+	 *     (name=ValidId mappingDefinitions+=MappingDefinition*)
 	 */
 	protected void sequence_TransformationDefinition(ISerializationContext context, TransformationDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

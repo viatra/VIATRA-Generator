@@ -6,8 +6,10 @@ package hu.bme.mit.inf.dslreasoner.faulttree.components;
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.AbstractCftLanguageRuntimeModule;
+import hu.bme.mit.inf.dslreasoner.faulttree.components.conversion.CftLanguageValueConverterService;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.naming.CftLanguageQualifiedNameProvider;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.scoping.CftLanguageImportedNamespaceAwareLocalScopeProvider;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -33,5 +35,10 @@ public class CftLanguageRuntimeModule extends AbstractCftLanguageRuntimeModule {
   @Override
   public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
     return CftLanguageQualifiedNameProvider.class;
+  }
+  
+  @Override
+  public Class<? extends IValueConverterService> bindIValueConverterService() {
+    return CftLanguageValueConverterService.class;
   }
 }

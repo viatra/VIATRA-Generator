@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Transformation
+Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.faulttree.transformation
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.faulttree.transformation
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

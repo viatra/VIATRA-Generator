@@ -7,9 +7,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentInstance;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventReference;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.LookupDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition;
@@ -18,6 +16,8 @@ import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Transformatio
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Variable;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.scoping.AbstractCftLanguageScopeProvider;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.scoping.CftLanguageImportedNamespaceAwareLocalScopeProvider;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration;
 import java.util.ArrayList;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;

@@ -29,6 +29,8 @@ Workflow {
 			
 			referencedResource = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel"
 			referencedResource = "platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.genmodel"
+			referencedResource = "platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.model/model/ft.genmodel"
+			referencedResource = "platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.model/model/cft.genmodel"
 
 			serializer = {
 				generateStub = false

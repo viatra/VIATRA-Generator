@@ -2,7 +2,8 @@ grammar hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage with org.ecl
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/emf/PatternLanguage" as vql
-
+import "http://www.bme.hu/mit/inf/dslreasoner/faulttree/model/ft" as ft
+import "http://www.bme.hu/mit/inf/dslreasoner/faulttree/model/cft" as cft
 generate cftLanguage "http://www.bme.hu/mit/inf/dslreasoner/faulttree/components/CftLanguage"
 
 CftModel:
@@ -13,35 +14,44 @@ CftModel:
 ImportDeclaration:
 	"import" importedNamespace=QualifiedNameWithWildcard ";"?;
 
-ComponentDefinition:
-	"cft" name=ID "{"
-	(("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[EventDeclaration]* ";")?)
+ComponentDefinition returns cft::ComponentDefinition:
+	"cft" name=ValidId "{"
+	(("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[cft::EventDeclaration|ValidId]* ";")?)
 	(eventDefinitions+=EventDefinition ";")*
 	"}";
 
-EventDeclaration:
-	InputEvent | EventDefinition;
+InputEvent returns cft::IntputEvent:
+	name=ValidId multiple?="[]"?;
 
-InputEvent:
-	name=ID multiple?="[]"?;
-
-EventDefinition:
+EventDefinition returns cft::EventDefinition:
 	BasicEventDefinition | GateDefinition;
 
-BasicEventDefinition:
-	name=ID "lambda" "=" rate=DOULBE;
+BasicEventDefinition returns cft::BasicEventDefinition:
+	name=ValidId distribution=Distribution;
 
-GateDefinition:
-	AndGate | OrGate;
+Distribution returns ft::Distribution:
+	ConstantDistribution | ExponentialDistribution;
 
-AndGate:
-	name=ID "and" inputEvents+=[EventDeclaration]*;
+ConstantDistribution returns ft::ConstantDistribution:
+	"p" "=" p=Double;
 
-OrGate:
-	name=ID "or" inputEvents+=[EventDeclaration]*;
+ExponentialDistribution returns ft::ExponentialDistribution:
+	"lambda" "=" lambda=Double;
+
+GateDefinition returns cft::GateDefinition:
+	AndGateDefinition | OrGateDefinition | KOfMGateDefinition;
+
+AndGateDefinition returns cft::AndGateDefinition:
+	name=ValidId "and" inputEvents+=[cft::EventDeclaration|ValidId]*;
+
+OrGateDefinition returns cft::OrGateDefinition:
+	name=ValidId "or" inputEvents+=[cft::EventDeclaration|ValidId]*;
+
+KOfMGateDefinition returns cft::KOfMGateDefinition:
+	name=ValidId k=INT ("of" m=INT | m=OF_INT) inputEvents+=[cft::EventDeclaration|ValidId]*;
 
 TransformationDefinition:
-	"transformation" name=ID "{"
+	"transformation" name=ValidId "{"
 	mappingDefinitions+=MappingDefinition*
 	"}";
 
@@ -49,16 +59,16 @@ MappingDefinition:
 	topLevel?="toplevel"? "mapping" pattern=[vql::Pattern|QualifiedName]
 	"(" parameters+=MappingParameter ("," parameters+=MappingParameter)* ")"
 	(componentInstance=ComponentInstance)? ("{"
-		((lookupDefinitions+=LookupDefinition | assignments+=Assignment) ";")*
+	((lookupDefinitions+=LookupDefinition | assignments+=Assignment) ";")*
 	"}")?;
 
 MappingParameter:
-	name=ID;
+	name=ValidId;
 
 LookupDefinition:
-	"lookup" mapping=[MappingDefinition]
-	"(" arguments+=[MappingParameter] ("," arguments+=[MappingParameter])* ")"
-	"as" name=ID;
+	"lookup" mapping=[MappingDefinition|QualifiedName]
+	"(" arguments+=[MappingParameter|ValidId] ("," arguments+=[MappingParameter|ValidId])* ")"
+	"as" name=ValidId;
 
 Variable:
 	ComponentInstance | LookupDefinition;
@@ -67,16 +77,25 @@ Assignment:
 	input=EventReference (multiple?="+=" | ":=") output=EventReference;
 
 EventReference:
-	component=[Variable] "." event=[EventDeclaration];
+	component=[Variable|ValidId] "." event=[cft::EventDeclaration|ValidId];
 
 ComponentInstance:
-	"=>" componentType=[ComponentDefinition|QualifiedName] name=ID?;
+	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?;
 
 QualifiedName returns ecore::EString:
-	ID ("." ID)*;
+	ValidId ("." ValidId)*;
 
 QualifiedNameWithWildcard returns ecore::EString:
 	QualifiedName ("." "*")?;
 
-terminal DOULBE returns ecore::EDouble:
+ValidId:
+	ID | OF_INT;
+
+Double returns ecore::EDouble:
+	INT | T_DOUBLE;
+
+terminal OF_INT returns ecore::EInt:
+	"o" "f" ('0'..'9')+;
+
+terminal T_DOUBLE:
 	('0'..'9')+ ("." ('0'..'9')+ | ("." ('0'..'9')+)? ("e" | "E") ("+" | "-")? ('0'..'9')+);

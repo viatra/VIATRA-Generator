@@ -3,6 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage;
 
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**

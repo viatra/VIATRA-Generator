@@ -114,7 +114,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCftKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final UnorderedGroup cUnorderedGroup_3 = (UnorderedGroup)cGroup.eContents().get(3);
 		private final Group cGroup_3_0 = (Group)cUnorderedGroup_3.eContents().get(0);
@@ -126,7 +126,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cOutKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
 		private final Assignment cOutputEventsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final CrossReference cOutputEventsEventDeclarationCrossReference_3_1_1_0 = (CrossReference)cOutputEventsAssignment_3_1_1.eContents().get(0);
-		private final RuleCall cOutputEventsEventDeclarationIDTerminalRuleCall_3_1_1_0_1 = (RuleCall)cOutputEventsEventDeclarationCrossReference_3_1_1_0.eContents().get(1);
+		private final RuleCall cOutputEventsEventDeclarationValidIdParserRuleCall_3_1_1_0_1 = (RuleCall)cOutputEventsEventDeclarationCrossReference_3_1_1_0.eContents().get(1);
 		private final Keyword cSemicolonKeyword_3_1_2 = (Keyword)cGroup_3_1.eContents().get(2);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Assignment cEventDefinitionsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
@@ -134,29 +134,29 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//ComponentDefinition:
-		//	"cft" name=ID "{" (("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[EventDeclaration]* ";")?)
-		//	(eventDefinitions+=EventDefinition ";")*
+		//ComponentDefinition cft::ComponentDefinition:
+		//	"cft" name=ValidId "{" (("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[cft::EventDeclaration|ValidId]*
+		//	";")?) (eventDefinitions+=EventDefinition ";")*
 		//	"}";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"cft" name=ID "{" (("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[EventDeclaration]* ";")?)
-		//(eventDefinitions+=EventDefinition ";")* "}"
+		//"cft" name=ValidId "{" (("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[cft::EventDeclaration|ValidId]*
+		//";")?) (eventDefinitions+=EventDefinition ";")* "}"
 		public Group getGroup() { return cGroup; }
 		
 		//"cft"
 		public Keyword getCftKeyword_0() { return cCftKeyword_0; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_1_0() { return cNameValidIdParserRuleCall_1_0; }
 		
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[EventDeclaration]* ";")?
+		//("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[cft::EventDeclaration|ValidId]* ";")?
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 		
 		//("in" inputEvents+=InputEvent* ";")?
@@ -174,20 +174,20 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//";"
 		public Keyword getSemicolonKeyword_3_0_2() { return cSemicolonKeyword_3_0_2; }
 		
-		//("out" outputEvents+=[EventDeclaration]* ";")?
+		//("out" outputEvents+=[cft::EventDeclaration|ValidId]* ";")?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//"out"
 		public Keyword getOutKeyword_3_1_0() { return cOutKeyword_3_1_0; }
 		
-		//outputEvents+=[EventDeclaration]*
+		//outputEvents+=[cft::EventDeclaration|ValidId]*
 		public Assignment getOutputEventsAssignment_3_1_1() { return cOutputEventsAssignment_3_1_1; }
 		
-		//[EventDeclaration]
+		//[cft::EventDeclaration|ValidId]
 		public CrossReference getOutputEventsEventDeclarationCrossReference_3_1_1_0() { return cOutputEventsEventDeclarationCrossReference_3_1_1_0; }
 		
-		//ID
-		public RuleCall getOutputEventsEventDeclarationIDTerminalRuleCall_3_1_1_0_1() { return cOutputEventsEventDeclarationIDTerminalRuleCall_3_1_1_0_1; }
+		//ValidId
+		public RuleCall getOutputEventsEventDeclarationValidIdParserRuleCall_3_1_1_0_1() { return cOutputEventsEventDeclarationValidIdParserRuleCall_3_1_1_0_1; }
 		
 		//";"
 		public Keyword getSemicolonKeyword_3_1_2() { return cSemicolonKeyword_3_1_2; }
@@ -207,45 +207,26 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-	public class EventDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.EventDeclaration");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cInputEventParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEventDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//EventDeclaration:
-		//	InputEvent | EventDefinition;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//InputEvent | EventDefinition
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//InputEvent
-		public RuleCall getInputEventParserRuleCall_0() { return cInputEventParserRuleCall_0; }
-		
-		//EventDefinition
-		public RuleCall getEventDefinitionParserRuleCall_1() { return cEventDefinitionParserRuleCall_1; }
-	}
 	public class InputEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.InputEvent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Assignment cMultipleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Keyword cMultipleLeftSquareBracketRightSquareBracketKeyword_1_0 = (Keyword)cMultipleAssignment_1.eContents().get(0);
 		
-		//InputEvent:
-		//	name=ID multiple?="[]"?;
+		//InputEvent cft::IntputEvent:
+		//	name=ValidId multiple?="[]"?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID multiple?="[]"?
+		//name=ValidId multiple?="[]"?
 		public Group getGroup() { return cGroup; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_0_0() { return cNameValidIdParserRuleCall_0_0; }
 		
 		//multiple?="[]"?
 		public Assignment getMultipleAssignment_1() { return cMultipleAssignment_1; }
@@ -259,7 +240,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cBasicEventDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cGateDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//EventDefinition:
+		//EventDefinition cft::EventDefinition:
 		//	BasicEventDefinition | GateDefinition;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -276,154 +257,290 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.BasicEventDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Keyword cLambdaKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cRateAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cRateDOULBETerminalRuleCall_3_0 = (RuleCall)cRateAssignment_3.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Assignment cDistributionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDistributionDistributionParserRuleCall_1_0 = (RuleCall)cDistributionAssignment_1.eContents().get(0);
 		
-		//BasicEventDefinition:
-		//	name=ID "lambda" "=" rate=DOULBE;
+		//BasicEventDefinition cft::BasicEventDefinition:
+		//	name=ValidId distribution=Distribution;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID "lambda" "=" rate=DOULBE
+		//name=ValidId distribution=Distribution
 		public Group getGroup() { return cGroup; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_0_0() { return cNameValidIdParserRuleCall_0_0; }
 		
-		//"lambda"
-		public Keyword getLambdaKeyword_1() { return cLambdaKeyword_1; }
+		//distribution=Distribution
+		public Assignment getDistributionAssignment_1() { return cDistributionAssignment_1; }
+		
+		//Distribution
+		public RuleCall getDistributionDistributionParserRuleCall_1_0() { return cDistributionDistributionParserRuleCall_1_0; }
+	}
+	public class DistributionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.Distribution");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConstantDistributionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cExponentialDistributionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Distribution ft::Distribution:
+		//	ConstantDistribution | ExponentialDistribution;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ConstantDistribution | ExponentialDistribution
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ConstantDistribution
+		public RuleCall getConstantDistributionParserRuleCall_0() { return cConstantDistributionParserRuleCall_0; }
+		
+		//ExponentialDistribution
+		public RuleCall getExponentialDistributionParserRuleCall_1() { return cExponentialDistributionParserRuleCall_1; }
+	}
+	public class ConstantDistributionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ConstantDistribution");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cPAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPDoubleParserRuleCall_2_0 = (RuleCall)cPAssignment_2.eContents().get(0);
+		
+		//ConstantDistribution ft::ConstantDistribution:
+		//	"p" "=" p=Double;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"p" "=" p=Double
+		public Group getGroup() { return cGroup; }
+		
+		//"p"
+		public Keyword getPKeyword_0() { return cPKeyword_0; }
 		
 		//"="
-		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 		
-		//rate=DOULBE
-		public Assignment getRateAssignment_3() { return cRateAssignment_3; }
+		//p=Double
+		public Assignment getPAssignment_2() { return cPAssignment_2; }
 		
-		//DOULBE
-		public RuleCall getRateDOULBETerminalRuleCall_3_0() { return cRateDOULBETerminalRuleCall_3_0; }
+		//Double
+		public RuleCall getPDoubleParserRuleCall_2_0() { return cPDoubleParserRuleCall_2_0; }
+	}
+	public class ExponentialDistributionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ExponentialDistribution");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLambdaKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cLambdaAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cLambdaDoubleParserRuleCall_2_0 = (RuleCall)cLambdaAssignment_2.eContents().get(0);
+		
+		//ExponentialDistribution ft::ExponentialDistribution:
+		//	"lambda" "=" lambda=Double;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"lambda" "=" lambda=Double
+		public Group getGroup() { return cGroup; }
+		
+		//"lambda"
+		public Keyword getLambdaKeyword_0() { return cLambdaKeyword_0; }
+		
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//lambda=Double
+		public Assignment getLambdaAssignment_2() { return cLambdaAssignment_2; }
+		
+		//Double
+		public RuleCall getLambdaDoubleParserRuleCall_2_0() { return cLambdaDoubleParserRuleCall_2_0; }
 	}
 	public class GateDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.GateDefinition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cAndGateParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cOrGateParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cAndGateDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cOrGateDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cKOfMGateDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//GateDefinition:
-		//	AndGate | OrGate;
+		//GateDefinition cft::GateDefinition:
+		//	AndGateDefinition | OrGateDefinition | KOfMGateDefinition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//AndGate | OrGate
+		//AndGateDefinition | OrGateDefinition | KOfMGateDefinition
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//AndGate
-		public RuleCall getAndGateParserRuleCall_0() { return cAndGateParserRuleCall_0; }
+		//AndGateDefinition
+		public RuleCall getAndGateDefinitionParserRuleCall_0() { return cAndGateDefinitionParserRuleCall_0; }
 		
-		//OrGate
-		public RuleCall getOrGateParserRuleCall_1() { return cOrGateParserRuleCall_1; }
+		//OrGateDefinition
+		public RuleCall getOrGateDefinitionParserRuleCall_1() { return cOrGateDefinitionParserRuleCall_1; }
+		
+		//KOfMGateDefinition
+		public RuleCall getKOfMGateDefinitionParserRuleCall_2() { return cKOfMGateDefinitionParserRuleCall_2; }
 	}
-	public class AndGateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.AndGate");
+	public class AndGateDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.AndGateDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cAndKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cInputEventsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cInputEventsEventDeclarationCrossReference_2_0 = (CrossReference)cInputEventsAssignment_2.eContents().get(0);
-		private final RuleCall cInputEventsEventDeclarationIDTerminalRuleCall_2_0_1 = (RuleCall)cInputEventsEventDeclarationCrossReference_2_0.eContents().get(1);
+		private final RuleCall cInputEventsEventDeclarationValidIdParserRuleCall_2_0_1 = (RuleCall)cInputEventsEventDeclarationCrossReference_2_0.eContents().get(1);
 		
-		//AndGate:
-		//	name=ID "and" inputEvents+=[EventDeclaration]*;
+		//AndGateDefinition cft::AndGateDefinition:
+		//	name=ValidId "and" inputEvents+=[cft::EventDeclaration|ValidId]*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID "and" inputEvents+=[EventDeclaration]*
+		//name=ValidId "and" inputEvents+=[cft::EventDeclaration|ValidId]*
 		public Group getGroup() { return cGroup; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_0_0() { return cNameValidIdParserRuleCall_0_0; }
 		
 		//"and"
 		public Keyword getAndKeyword_1() { return cAndKeyword_1; }
 		
-		//inputEvents+=[EventDeclaration]*
+		//inputEvents+=[cft::EventDeclaration|ValidId]*
 		public Assignment getInputEventsAssignment_2() { return cInputEventsAssignment_2; }
 		
-		//[EventDeclaration]
+		//[cft::EventDeclaration|ValidId]
 		public CrossReference getInputEventsEventDeclarationCrossReference_2_0() { return cInputEventsEventDeclarationCrossReference_2_0; }
 		
-		//ID
-		public RuleCall getInputEventsEventDeclarationIDTerminalRuleCall_2_0_1() { return cInputEventsEventDeclarationIDTerminalRuleCall_2_0_1; }
+		//ValidId
+		public RuleCall getInputEventsEventDeclarationValidIdParserRuleCall_2_0_1() { return cInputEventsEventDeclarationValidIdParserRuleCall_2_0_1; }
 	}
-	public class OrGateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.OrGate");
+	public class OrGateDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.OrGateDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cOrKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cInputEventsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cInputEventsEventDeclarationCrossReference_2_0 = (CrossReference)cInputEventsAssignment_2.eContents().get(0);
-		private final RuleCall cInputEventsEventDeclarationIDTerminalRuleCall_2_0_1 = (RuleCall)cInputEventsEventDeclarationCrossReference_2_0.eContents().get(1);
+		private final RuleCall cInputEventsEventDeclarationValidIdParserRuleCall_2_0_1 = (RuleCall)cInputEventsEventDeclarationCrossReference_2_0.eContents().get(1);
 		
-		//OrGate:
-		//	name=ID "or" inputEvents+=[EventDeclaration]*;
+		//OrGateDefinition cft::OrGateDefinition:
+		//	name=ValidId "or" inputEvents+=[cft::EventDeclaration|ValidId]*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID "or" inputEvents+=[EventDeclaration]*
+		//name=ValidId "or" inputEvents+=[cft::EventDeclaration|ValidId]*
 		public Group getGroup() { return cGroup; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_0_0() { return cNameValidIdParserRuleCall_0_0; }
 		
 		//"or"
 		public Keyword getOrKeyword_1() { return cOrKeyword_1; }
 		
-		//inputEvents+=[EventDeclaration]*
+		//inputEvents+=[cft::EventDeclaration|ValidId]*
 		public Assignment getInputEventsAssignment_2() { return cInputEventsAssignment_2; }
 		
-		//[EventDeclaration]
+		//[cft::EventDeclaration|ValidId]
 		public CrossReference getInputEventsEventDeclarationCrossReference_2_0() { return cInputEventsEventDeclarationCrossReference_2_0; }
 		
-		//ID
-		public RuleCall getInputEventsEventDeclarationIDTerminalRuleCall_2_0_1() { return cInputEventsEventDeclarationIDTerminalRuleCall_2_0_1; }
+		//ValidId
+		public RuleCall getInputEventsEventDeclarationValidIdParserRuleCall_2_0_1() { return cInputEventsEventDeclarationValidIdParserRuleCall_2_0_1; }
+	}
+	public class KOfMGateDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.KOfMGateDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Assignment cKAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cKINTTerminalRuleCall_1_0 = (RuleCall)cKAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Keyword cOfKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Assignment cMAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cMINTTerminalRuleCall_2_0_1_0 = (RuleCall)cMAssignment_2_0_1.eContents().get(0);
+		private final Assignment cMAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cMOF_INTTerminalRuleCall_2_1_0 = (RuleCall)cMAssignment_2_1.eContents().get(0);
+		private final Assignment cInputEventsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cInputEventsEventDeclarationCrossReference_3_0 = (CrossReference)cInputEventsAssignment_3.eContents().get(0);
+		private final RuleCall cInputEventsEventDeclarationValidIdParserRuleCall_3_0_1 = (RuleCall)cInputEventsEventDeclarationCrossReference_3_0.eContents().get(1);
+		
+		//KOfMGateDefinition cft::KOfMGateDefinition:
+		//	name=ValidId k=INT ("of" m=INT | m=OF_INT) inputEvents+=[cft::EventDeclaration|ValidId]*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=ValidId k=INT ("of" m=INT | m=OF_INT) inputEvents+=[cft::EventDeclaration|ValidId]*
+		public Group getGroup() { return cGroup; }
+		
+		//name=ValidId
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_0_0() { return cNameValidIdParserRuleCall_0_0; }
+		
+		//k=INT
+		public Assignment getKAssignment_1() { return cKAssignment_1; }
+		
+		//INT
+		public RuleCall getKINTTerminalRuleCall_1_0() { return cKINTTerminalRuleCall_1_0; }
+		
+		//"of" m=INT | m=OF_INT
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//"of" m=INT
+		public Group getGroup_2_0() { return cGroup_2_0; }
+		
+		//"of"
+		public Keyword getOfKeyword_2_0_0() { return cOfKeyword_2_0_0; }
+		
+		//m=INT
+		public Assignment getMAssignment_2_0_1() { return cMAssignment_2_0_1; }
+		
+		//INT
+		public RuleCall getMINTTerminalRuleCall_2_0_1_0() { return cMINTTerminalRuleCall_2_0_1_0; }
+		
+		//m=OF_INT
+		public Assignment getMAssignment_2_1() { return cMAssignment_2_1; }
+		
+		//OF_INT
+		public RuleCall getMOF_INTTerminalRuleCall_2_1_0() { return cMOF_INTTerminalRuleCall_2_1_0; }
+		
+		//inputEvents+=[cft::EventDeclaration|ValidId]*
+		public Assignment getInputEventsAssignment_3() { return cInputEventsAssignment_3; }
+		
+		//[cft::EventDeclaration|ValidId]
+		public CrossReference getInputEventsEventDeclarationCrossReference_3_0() { return cInputEventsEventDeclarationCrossReference_3_0; }
+		
+		//ValidId
+		public RuleCall getInputEventsEventDeclarationValidIdParserRuleCall_3_0_1() { return cInputEventsEventDeclarationValidIdParserRuleCall_3_0_1; }
 	}
 	public class TransformationDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.TransformationDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTransformationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cMappingDefinitionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cMappingDefinitionsMappingDefinitionParserRuleCall_3_0 = (RuleCall)cMappingDefinitionsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//TransformationDefinition:
-		//	"transformation" name=ID "{"
+		//	"transformation" name=ValidId "{"
 		//	mappingDefinitions+=MappingDefinition*
 		//	"}";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"transformation" name=ID "{" mappingDefinitions+=MappingDefinition* "}"
+		//"transformation" name=ValidId "{" mappingDefinitions+=MappingDefinition* "}"
 		public Group getGroup() { return cGroup; }
 		
 		//"transformation"
 		public Keyword getTransformationKeyword_0() { return cTransformationKeyword_0; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_1_0() { return cNameValidIdParserRuleCall_1_0; }
 		
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
@@ -560,17 +677,17 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class MappingParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.MappingParameter");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//MappingParameter:
-		//	name=ID;
+		//	name=ValidId;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment() { return cNameAssignment; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_0() { return cNameValidIdParserRuleCall_0; }
 	}
 	public class LookupDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.LookupDefinition");
@@ -578,69 +695,69 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLookupKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cMappingAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cMappingMappingDefinitionCrossReference_1_0 = (CrossReference)cMappingAssignment_1.eContents().get(0);
-		private final RuleCall cMappingMappingDefinitionIDTerminalRuleCall_1_0_1 = (RuleCall)cMappingMappingDefinitionCrossReference_1_0.eContents().get(1);
+		private final RuleCall cMappingMappingDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cMappingMappingDefinitionCrossReference_1_0.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cArgumentsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cArgumentsMappingParameterCrossReference_3_0 = (CrossReference)cArgumentsAssignment_3.eContents().get(0);
-		private final RuleCall cArgumentsMappingParameterIDTerminalRuleCall_3_0_1 = (RuleCall)cArgumentsMappingParameterCrossReference_3_0.eContents().get(1);
+		private final RuleCall cArgumentsMappingParameterValidIdParserRuleCall_3_0_1 = (RuleCall)cArgumentsMappingParameterCrossReference_3_0.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cArgumentsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final CrossReference cArgumentsMappingParameterCrossReference_4_1_0 = (CrossReference)cArgumentsAssignment_4_1.eContents().get(0);
-		private final RuleCall cArgumentsMappingParameterIDTerminalRuleCall_4_1_0_1 = (RuleCall)cArgumentsMappingParameterCrossReference_4_1_0.eContents().get(1);
+		private final RuleCall cArgumentsMappingParameterValidIdParserRuleCall_4_1_0_1 = (RuleCall)cArgumentsMappingParameterCrossReference_4_1_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Keyword cAsKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Assignment cNameAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cNameIDTerminalRuleCall_7_0 = (RuleCall)cNameAssignment_7.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_7_0 = (RuleCall)cNameAssignment_7.eContents().get(0);
 		
 		//LookupDefinition:
-		//	"lookup" mapping=[MappingDefinition]
-		//	"(" arguments+=[MappingParameter] ("," arguments+=[MappingParameter])* ")"
-		//	"as" name=ID;
+		//	"lookup" mapping=[MappingDefinition|QualifiedName]
+		//	"(" arguments+=[MappingParameter|ValidId] ("," arguments+=[MappingParameter|ValidId])* ")"
+		//	"as" name=ValidId;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"lookup" mapping=[MappingDefinition] "(" arguments+=[MappingParameter] ("," arguments+=[MappingParameter])* ")" "as"
-		//name=ID
+		//"lookup" mapping=[MappingDefinition|QualifiedName] "(" arguments+=[MappingParameter|ValidId] (","
+		//arguments+=[MappingParameter|ValidId])* ")" "as" name=ValidId
 		public Group getGroup() { return cGroup; }
 		
 		//"lookup"
 		public Keyword getLookupKeyword_0() { return cLookupKeyword_0; }
 		
-		//mapping=[MappingDefinition]
+		//mapping=[MappingDefinition|QualifiedName]
 		public Assignment getMappingAssignment_1() { return cMappingAssignment_1; }
 		
-		//[MappingDefinition]
+		//[MappingDefinition|QualifiedName]
 		public CrossReference getMappingMappingDefinitionCrossReference_1_0() { return cMappingMappingDefinitionCrossReference_1_0; }
 		
-		//ID
-		public RuleCall getMappingMappingDefinitionIDTerminalRuleCall_1_0_1() { return cMappingMappingDefinitionIDTerminalRuleCall_1_0_1; }
+		//QualifiedName
+		public RuleCall getMappingMappingDefinitionQualifiedNameParserRuleCall_1_0_1() { return cMappingMappingDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
 		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 		
-		//arguments+=[MappingParameter]
+		//arguments+=[MappingParameter|ValidId]
 		public Assignment getArgumentsAssignment_3() { return cArgumentsAssignment_3; }
 		
-		//[MappingParameter]
+		//[MappingParameter|ValidId]
 		public CrossReference getArgumentsMappingParameterCrossReference_3_0() { return cArgumentsMappingParameterCrossReference_3_0; }
 		
-		//ID
-		public RuleCall getArgumentsMappingParameterIDTerminalRuleCall_3_0_1() { return cArgumentsMappingParameterIDTerminalRuleCall_3_0_1; }
+		//ValidId
+		public RuleCall getArgumentsMappingParameterValidIdParserRuleCall_3_0_1() { return cArgumentsMappingParameterValidIdParserRuleCall_3_0_1; }
 		
-		//("," arguments+=[MappingParameter])*
+		//("," arguments+=[MappingParameter|ValidId])*
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//","
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 		
-		//arguments+=[MappingParameter]
+		//arguments+=[MappingParameter|ValidId]
 		public Assignment getArgumentsAssignment_4_1() { return cArgumentsAssignment_4_1; }
 		
-		//[MappingParameter]
+		//[MappingParameter|ValidId]
 		public CrossReference getArgumentsMappingParameterCrossReference_4_1_0() { return cArgumentsMappingParameterCrossReference_4_1_0; }
 		
-		//ID
-		public RuleCall getArgumentsMappingParameterIDTerminalRuleCall_4_1_0_1() { return cArgumentsMappingParameterIDTerminalRuleCall_4_1_0_1; }
+		//ValidId
+		public RuleCall getArgumentsMappingParameterValidIdParserRuleCall_4_1_0_1() { return cArgumentsMappingParameterValidIdParserRuleCall_4_1_0_1; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
@@ -648,11 +765,11 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//"as"
 		public Keyword getAsKeyword_6() { return cAsKeyword_6; }
 		
-		//name=ID
+		//name=ValidId
 		public Assignment getNameAssignment_7() { return cNameAssignment_7; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_7_0() { return cNameIDTerminalRuleCall_7_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_7_0() { return cNameValidIdParserRuleCall_7_0; }
 	}
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.Variable");
@@ -721,39 +838,39 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cComponentAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cComponentVariableCrossReference_0_0 = (CrossReference)cComponentAssignment_0.eContents().get(0);
-		private final RuleCall cComponentVariableIDTerminalRuleCall_0_0_1 = (RuleCall)cComponentVariableCrossReference_0_0.eContents().get(1);
+		private final RuleCall cComponentVariableValidIdParserRuleCall_0_0_1 = (RuleCall)cComponentVariableCrossReference_0_0.eContents().get(1);
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cEventAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cEventEventDeclarationCrossReference_2_0 = (CrossReference)cEventAssignment_2.eContents().get(0);
-		private final RuleCall cEventEventDeclarationIDTerminalRuleCall_2_0_1 = (RuleCall)cEventEventDeclarationCrossReference_2_0.eContents().get(1);
+		private final RuleCall cEventEventDeclarationValidIdParserRuleCall_2_0_1 = (RuleCall)cEventEventDeclarationCrossReference_2_0.eContents().get(1);
 		
 		//EventReference:
-		//	component=[Variable] "." event=[EventDeclaration];
+		//	component=[Variable|ValidId] "." event=[cft::EventDeclaration|ValidId];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//component=[Variable] "." event=[EventDeclaration]
+		//component=[Variable|ValidId] "." event=[cft::EventDeclaration|ValidId]
 		public Group getGroup() { return cGroup; }
 		
-		//component=[Variable]
+		//component=[Variable|ValidId]
 		public Assignment getComponentAssignment_0() { return cComponentAssignment_0; }
 		
-		//[Variable]
+		//[Variable|ValidId]
 		public CrossReference getComponentVariableCrossReference_0_0() { return cComponentVariableCrossReference_0_0; }
 		
-		//ID
-		public RuleCall getComponentVariableIDTerminalRuleCall_0_0_1() { return cComponentVariableIDTerminalRuleCall_0_0_1; }
+		//ValidId
+		public RuleCall getComponentVariableValidIdParserRuleCall_0_0_1() { return cComponentVariableValidIdParserRuleCall_0_0_1; }
 		
 		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
 		
-		//event=[EventDeclaration]
+		//event=[cft::EventDeclaration|ValidId]
 		public Assignment getEventAssignment_2() { return cEventAssignment_2; }
 		
-		//[EventDeclaration]
+		//[cft::EventDeclaration|ValidId]
 		public CrossReference getEventEventDeclarationCrossReference_2_0() { return cEventEventDeclarationCrossReference_2_0; }
 		
-		//ID
-		public RuleCall getEventEventDeclarationIDTerminalRuleCall_2_0_1() { return cEventEventDeclarationIDTerminalRuleCall_2_0_1; }
+		//ValidId
+		public RuleCall getEventEventDeclarationValidIdParserRuleCall_2_0_1() { return cEventEventDeclarationValidIdParserRuleCall_2_0_1; }
 	}
 	public class ComponentInstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ComponentInstance");
@@ -766,19 +883,19 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ComponentInstance:
-		//	"=>" componentType=[ComponentDefinition|QualifiedName] name=ID?;
+		//	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"=>" componentType=[ComponentDefinition|QualifiedName] name=ID?
+		//"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?
 		public Group getGroup() { return cGroup; }
 		
 		//"=>"
 		public Keyword getEqualsSignGreaterThanSignKeyword_0() { return cEqualsSignGreaterThanSignKeyword_0; }
 		
-		//componentType=[ComponentDefinition|QualifiedName]
+		//componentType=[cft::ComponentDefinition|QualifiedName]
 		public Assignment getComponentTypeAssignment_1() { return cComponentTypeAssignment_1; }
 		
-		//[ComponentDefinition|QualifiedName]
+		//[cft::ComponentDefinition|QualifiedName]
 		public CrossReference getComponentTypeComponentDefinitionCrossReference_1_0() { return cComponentTypeComponentDefinitionCrossReference_1_0; }
 		
 		//QualifiedName
@@ -793,29 +910,29 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cValidIdParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final RuleCall cValidIdParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ("." ID)*;
+		//	ValidId ("." ValidId)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID ("." ID)*
+		//ValidId ("." ValidId)*
 		public Group getGroup() { return cGroup; }
 		
-		//ID
-		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+		//ValidId
+		public RuleCall getValidIdParserRuleCall_0() { return cValidIdParserRuleCall_0; }
 		
-		//("." ID)*
+		//("." ValidId)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//"."
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 		
-		//ID
-		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+		//ValidId
+		public RuleCall getValidIdParserRuleCall_1_1() { return cValidIdParserRuleCall_1_1; }
 	}
 	public class QualifiedNameWithWildcardElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.QualifiedNameWithWildcard");
@@ -844,18 +961,59 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//"*"
 		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
 	}
+	public class ValidIdElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ValidId");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cOF_INTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ValidId:
+		//	ID | OF_INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ID | OF_INT
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+		
+		//OF_INT
+		public RuleCall getOF_INTTerminalRuleCall_1() { return cOF_INTTerminalRuleCall_1; }
+	}
+	public class DoubleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.Double");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cT_DOUBLETerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Double ecore::EDouble:
+		//	INT | T_DOUBLE;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//INT | T_DOUBLE
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
+		
+		//T_DOUBLE
+		public RuleCall getT_DOUBLETerminalRuleCall_1() { return cT_DOUBLETerminalRuleCall_1; }
+	}
 	
 	
 	private final CftModelElements pCftModel;
 	private final ImportDeclarationElements pImportDeclaration;
 	private final ComponentDefinitionElements pComponentDefinition;
-	private final EventDeclarationElements pEventDeclaration;
 	private final InputEventElements pInputEvent;
 	private final EventDefinitionElements pEventDefinition;
 	private final BasicEventDefinitionElements pBasicEventDefinition;
+	private final DistributionElements pDistribution;
+	private final ConstantDistributionElements pConstantDistribution;
+	private final ExponentialDistributionElements pExponentialDistribution;
 	private final GateDefinitionElements pGateDefinition;
-	private final AndGateElements pAndGate;
-	private final OrGateElements pOrGate;
+	private final AndGateDefinitionElements pAndGateDefinition;
+	private final OrGateDefinitionElements pOrGateDefinition;
+	private final KOfMGateDefinitionElements pKOfMGateDefinition;
 	private final TransformationDefinitionElements pTransformationDefinition;
 	private final MappingDefinitionElements pMappingDefinition;
 	private final MappingParameterElements pMappingParameter;
@@ -866,7 +1024,10 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final ComponentInstanceElements pComponentInstance;
 	private final QualifiedNameElements pQualifiedName;
 	private final QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
-	private final TerminalRule tDOULBE;
+	private final ValidIdElements pValidId;
+	private final DoubleElements pDouble;
+	private final TerminalRule tOF_INT;
+	private final TerminalRule tT_DOUBLE;
 	
 	private final Grammar grammar;
 	
@@ -880,13 +1041,16 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pCftModel = new CftModelElements();
 		this.pImportDeclaration = new ImportDeclarationElements();
 		this.pComponentDefinition = new ComponentDefinitionElements();
-		this.pEventDeclaration = new EventDeclarationElements();
 		this.pInputEvent = new InputEventElements();
 		this.pEventDefinition = new EventDefinitionElements();
 		this.pBasicEventDefinition = new BasicEventDefinitionElements();
+		this.pDistribution = new DistributionElements();
+		this.pConstantDistribution = new ConstantDistributionElements();
+		this.pExponentialDistribution = new ExponentialDistributionElements();
 		this.pGateDefinition = new GateDefinitionElements();
-		this.pAndGate = new AndGateElements();
-		this.pOrGate = new OrGateElements();
+		this.pAndGateDefinition = new AndGateDefinitionElements();
+		this.pOrGateDefinition = new OrGateDefinitionElements();
+		this.pKOfMGateDefinition = new KOfMGateDefinitionElements();
 		this.pTransformationDefinition = new TransformationDefinitionElements();
 		this.pMappingDefinition = new MappingDefinitionElements();
 		this.pMappingParameter = new MappingParameterElements();
@@ -897,7 +1061,10 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pComponentInstance = new ComponentInstanceElements();
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pQualifiedNameWithWildcard = new QualifiedNameWithWildcardElements();
-		this.tDOULBE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.DOULBE");
+		this.pValidId = new ValidIdElements();
+		this.pDouble = new DoubleElements();
+		this.tOF_INT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.OF_INT");
+		this.tT_DOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.T_DOUBLE");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -949,9 +1116,9 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getImportDeclarationAccess().getRule();
 	}
 	
-	//ComponentDefinition:
-	//	"cft" name=ID "{" (("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[EventDeclaration]* ";")?)
-	//	(eventDefinitions+=EventDefinition ";")*
+	//ComponentDefinition cft::ComponentDefinition:
+	//	"cft" name=ValidId "{" (("in" inputEvents+=InputEvent* ";")? & ("out" outputEvents+=[cft::EventDeclaration|ValidId]*
+	//	";")?) (eventDefinitions+=EventDefinition ";")*
 	//	"}";
 	public ComponentDefinitionElements getComponentDefinitionAccess() {
 		return pComponentDefinition;
@@ -961,18 +1128,8 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getComponentDefinitionAccess().getRule();
 	}
 	
-	//EventDeclaration:
-	//	InputEvent | EventDefinition;
-	public EventDeclarationElements getEventDeclarationAccess() {
-		return pEventDeclaration;
-	}
-	
-	public ParserRule getEventDeclarationRule() {
-		return getEventDeclarationAccess().getRule();
-	}
-	
-	//InputEvent:
-	//	name=ID multiple?="[]"?;
+	//InputEvent cft::IntputEvent:
+	//	name=ValidId multiple?="[]"?;
 	public InputEventElements getInputEventAccess() {
 		return pInputEvent;
 	}
@@ -981,7 +1138,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getInputEventAccess().getRule();
 	}
 	
-	//EventDefinition:
+	//EventDefinition cft::EventDefinition:
 	//	BasicEventDefinition | GateDefinition;
 	public EventDefinitionElements getEventDefinitionAccess() {
 		return pEventDefinition;
@@ -991,8 +1148,8 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getEventDefinitionAccess().getRule();
 	}
 	
-	//BasicEventDefinition:
-	//	name=ID "lambda" "=" rate=DOULBE;
+	//BasicEventDefinition cft::BasicEventDefinition:
+	//	name=ValidId distribution=Distribution;
 	public BasicEventDefinitionElements getBasicEventDefinitionAccess() {
 		return pBasicEventDefinition;
 	}
@@ -1001,8 +1158,38 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getBasicEventDefinitionAccess().getRule();
 	}
 	
-	//GateDefinition:
-	//	AndGate | OrGate;
+	//Distribution ft::Distribution:
+	//	ConstantDistribution | ExponentialDistribution;
+	public DistributionElements getDistributionAccess() {
+		return pDistribution;
+	}
+	
+	public ParserRule getDistributionRule() {
+		return getDistributionAccess().getRule();
+	}
+	
+	//ConstantDistribution ft::ConstantDistribution:
+	//	"p" "=" p=Double;
+	public ConstantDistributionElements getConstantDistributionAccess() {
+		return pConstantDistribution;
+	}
+	
+	public ParserRule getConstantDistributionRule() {
+		return getConstantDistributionAccess().getRule();
+	}
+	
+	//ExponentialDistribution ft::ExponentialDistribution:
+	//	"lambda" "=" lambda=Double;
+	public ExponentialDistributionElements getExponentialDistributionAccess() {
+		return pExponentialDistribution;
+	}
+	
+	public ParserRule getExponentialDistributionRule() {
+		return getExponentialDistributionAccess().getRule();
+	}
+	
+	//GateDefinition cft::GateDefinition:
+	//	AndGateDefinition | OrGateDefinition | KOfMGateDefinition;
 	public GateDefinitionElements getGateDefinitionAccess() {
 		return pGateDefinition;
 	}
@@ -1011,28 +1198,38 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getGateDefinitionAccess().getRule();
 	}
 	
-	//AndGate:
-	//	name=ID "and" inputEvents+=[EventDeclaration]*;
-	public AndGateElements getAndGateAccess() {
-		return pAndGate;
+	//AndGateDefinition cft::AndGateDefinition:
+	//	name=ValidId "and" inputEvents+=[cft::EventDeclaration|ValidId]*;
+	public AndGateDefinitionElements getAndGateDefinitionAccess() {
+		return pAndGateDefinition;
 	}
 	
-	public ParserRule getAndGateRule() {
-		return getAndGateAccess().getRule();
+	public ParserRule getAndGateDefinitionRule() {
+		return getAndGateDefinitionAccess().getRule();
 	}
 	
-	//OrGate:
-	//	name=ID "or" inputEvents+=[EventDeclaration]*;
-	public OrGateElements getOrGateAccess() {
-		return pOrGate;
+	//OrGateDefinition cft::OrGateDefinition:
+	//	name=ValidId "or" inputEvents+=[cft::EventDeclaration|ValidId]*;
+	public OrGateDefinitionElements getOrGateDefinitionAccess() {
+		return pOrGateDefinition;
 	}
 	
-	public ParserRule getOrGateRule() {
-		return getOrGateAccess().getRule();
+	public ParserRule getOrGateDefinitionRule() {
+		return getOrGateDefinitionAccess().getRule();
+	}
+	
+	//KOfMGateDefinition cft::KOfMGateDefinition:
+	//	name=ValidId k=INT ("of" m=INT | m=OF_INT) inputEvents+=[cft::EventDeclaration|ValidId]*;
+	public KOfMGateDefinitionElements getKOfMGateDefinitionAccess() {
+		return pKOfMGateDefinition;
+	}
+	
+	public ParserRule getKOfMGateDefinitionRule() {
+		return getKOfMGateDefinitionAccess().getRule();
 	}
 	
 	//TransformationDefinition:
-	//	"transformation" name=ID "{"
+	//	"transformation" name=ValidId "{"
 	//	mappingDefinitions+=MappingDefinition*
 	//	"}";
 	public TransformationDefinitionElements getTransformationDefinitionAccess() {
@@ -1057,7 +1254,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//MappingParameter:
-	//	name=ID;
+	//	name=ValidId;
 	public MappingParameterElements getMappingParameterAccess() {
 		return pMappingParameter;
 	}
@@ -1067,9 +1264,9 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//LookupDefinition:
-	//	"lookup" mapping=[MappingDefinition]
-	//	"(" arguments+=[MappingParameter] ("," arguments+=[MappingParameter])* ")"
-	//	"as" name=ID;
+	//	"lookup" mapping=[MappingDefinition|QualifiedName]
+	//	"(" arguments+=[MappingParameter|ValidId] ("," arguments+=[MappingParameter|ValidId])* ")"
+	//	"as" name=ValidId;
 	public LookupDefinitionElements getLookupDefinitionAccess() {
 		return pLookupDefinition;
 	}
@@ -1099,7 +1296,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//EventReference:
-	//	component=[Variable] "." event=[EventDeclaration];
+	//	component=[Variable|ValidId] "." event=[cft::EventDeclaration|ValidId];
 	public EventReferenceElements getEventReferenceAccess() {
 		return pEventReference;
 	}
@@ -1109,7 +1306,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ComponentInstance:
-	//	"=>" componentType=[ComponentDefinition|QualifiedName] name=ID?;
+	//	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?;
 	public ComponentInstanceElements getComponentInstanceAccess() {
 		return pComponentInstance;
 	}
@@ -1119,7 +1316,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//QualifiedName:
-	//	ID ("." ID)*;
+	//	ValidId ("." ValidId)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -1138,10 +1335,36 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getQualifiedNameWithWildcardAccess().getRule();
 	}
 	
-	//terminal DOULBE returns ecore::EDouble:
+	//ValidId:
+	//	ID | OF_INT;
+	public ValidIdElements getValidIdAccess() {
+		return pValidId;
+	}
+	
+	public ParserRule getValidIdRule() {
+		return getValidIdAccess().getRule();
+	}
+	
+	//Double ecore::EDouble:
+	//	INT | T_DOUBLE;
+	public DoubleElements getDoubleAccess() {
+		return pDouble;
+	}
+	
+	public ParserRule getDoubleRule() {
+		return getDoubleAccess().getRule();
+	}
+	
+	//terminal OF_INT returns ecore::EInt:
+	//	"o" "f" '0'..'9'+;
+	public TerminalRule getOF_INTRule() {
+		return tOF_INT;
+	}
+	
+	//terminal T_DOUBLE:
 	//	'0'..'9'+ ("." '0'..'9'+ | ("." '0'..'9'+)? ("e" | "E") ("+" | "-")? '0'..'9'+);
-	public TerminalRule getDOULBERule() {
-		return tDOULBE;
+	public TerminalRule getT_DOUBLERule() {
+		return tT_DOUBLE;
 	}
 	
 	//terminal ID:

@@ -4,8 +4,9 @@
 package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentInstance;
+
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 
 import org.eclipse.emf.common.notify.Notification;
 

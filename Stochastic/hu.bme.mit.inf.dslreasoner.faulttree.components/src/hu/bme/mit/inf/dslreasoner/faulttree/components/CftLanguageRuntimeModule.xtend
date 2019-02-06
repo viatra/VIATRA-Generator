@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.faulttree.components
 
 import com.google.inject.Binder
 import com.google.inject.name.Names
+import hu.bme.mit.inf.dslreasoner.faulttree.components.conversion.CftLanguageValueConverterService
 import hu.bme.mit.inf.dslreasoner.faulttree.components.naming.CftLanguageQualifiedNameProvider
 import hu.bme.mit.inf.dslreasoner.faulttree.components.scoping.CftLanguageImportedNamespaceAwareLocalScopeProvider
 import org.eclipse.xtext.scoping.IScopeProvider
@@ -30,4 +31,7 @@ class CftLanguageRuntimeModule extends AbstractCftLanguageRuntimeModule {
 		CftLanguageQualifiedNameProvider
 	}
 	
+	override bindIValueConverterService() {
+		CftLanguageValueConverterService
+	}
 }

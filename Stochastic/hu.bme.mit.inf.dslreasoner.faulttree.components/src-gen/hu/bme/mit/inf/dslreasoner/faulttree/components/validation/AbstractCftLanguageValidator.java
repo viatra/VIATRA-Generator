@@ -14,6 +14,8 @@ public abstract class AbstractCftLanguageValidator extends AbstractDeclarativeVa
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>();
 		result.add(hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage.eINSTANCE);
+		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.bme.hu/mit/inf/dslreasoner/faulttree/model/cft"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.bme.hu/mit/inf/dslreasoner/faulttree/model/ft"));
 		return result;
 	}
 }

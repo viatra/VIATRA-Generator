@@ -4,6 +4,7 @@
 package hu.bme.mit.inf.dslreasoner.faulttree.components.ui.labeling
 
 import com.google.inject.Inject
+import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 
@@ -19,13 +20,7 @@ class CftLanguageLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
-	// Labels and icons can be computed like this:
-	
-//	def text(Greeting ele) {
-//		'A greeting to ' + ele.name
-//	}
-//
-//	def image(Greeting ele) {
-//		'Greeting.gif'
-//	}
+	def text(MappingDefinition mappingDefinition) {
+		mappingDefinition.pattern?.name
+	}
 }

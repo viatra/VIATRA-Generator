@@ -3,6 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.components.ui.outline
 
+import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDefinition
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
 
 /**
@@ -11,5 +13,11 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline
  */
 class CftLanguageOutlineTreeProvider extends DefaultOutlineTreeProvider {
-
+	def _isLeaf(EventDefinition eventDefinition) {
+		true
+	}
+	
+	def _isLeaf(MappingDefinition mappingDefinition) {
+		true
+	}
 }

@@ -7,38 +7,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//ImportDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentDefinitions" upperBound="-1"
-        eType="#//ComponentDefinition" containment="true"/>
+        eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.model/model/cft.ecore#//ComponentDefinition"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformationDefinitions"
         upperBound="-1" eType="#//TransformationDefinition" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComponentDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
-        eType="#//InputEvent" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" unique="false"
-        upperBound="-1" eType="#//EventDeclaration"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventDefinitions" upperBound="-1"
-        eType="#//EventDefinition" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InputEvent" eSuperTypes="#//EventDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="#//EventDeclaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BasicEventDefinition" eSuperTypes="#//EventDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rate" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GateDefinition" eSuperTypes="#//EventDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" unique="false"
-        upperBound="-1" eType="#//EventDeclaration"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AndGate" eSuperTypes="#//GateDefinition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OrGate" eSuperTypes="#//GateDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="TransformationDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingDefinitions" upperBound="-1"
@@ -76,9 +52,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//EventDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.model/model/cft.ecore#//EventDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComponentInstance" eSuperTypes="#//Variable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//ComponentDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.model/model/cft.ecore#//ComponentDefinition"/>
   </eClassifiers>
 </ecore:EPackage>

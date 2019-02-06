@@ -5,9 +5,10 @@ package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ImportDeclaration;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition;
+
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 
 import java.util.Collection;
 

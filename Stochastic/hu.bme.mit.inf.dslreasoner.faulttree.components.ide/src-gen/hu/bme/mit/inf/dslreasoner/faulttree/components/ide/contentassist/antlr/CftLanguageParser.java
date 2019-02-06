@@ -32,12 +32,15 @@ public class CftLanguageParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, CftLanguageGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getCftModelAccess().getAlternatives_4(), "rule__CftModel__Alternatives_4");
-			builder.put(grammarAccess.getEventDeclarationAccess().getAlternatives(), "rule__EventDeclaration__Alternatives");
 			builder.put(grammarAccess.getEventDefinitionAccess().getAlternatives(), "rule__EventDefinition__Alternatives");
+			builder.put(grammarAccess.getDistributionAccess().getAlternatives(), "rule__Distribution__Alternatives");
 			builder.put(grammarAccess.getGateDefinitionAccess().getAlternatives(), "rule__GateDefinition__Alternatives");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getAlternatives_2(), "rule__KOfMGateDefinition__Alternatives_2");
 			builder.put(grammarAccess.getMappingDefinitionAccess().getAlternatives_8_1_0(), "rule__MappingDefinition__Alternatives_8_1_0");
 			builder.put(grammarAccess.getVariableAccess().getAlternatives(), "rule__Variable__Alternatives");
 			builder.put(grammarAccess.getAssignmentAccess().getAlternatives_1(), "rule__Assignment__Alternatives_1");
+			builder.put(grammarAccess.getValidIdAccess().getAlternatives(), "rule__ValidId__Alternatives");
+			builder.put(grammarAccess.getDoubleAccess().getAlternatives(), "rule__Double__Alternatives");
 			builder.put(grammarAccess.getCftModelAccess().getGroup(), "rule__CftModel__Group__0");
 			builder.put(grammarAccess.getImportDeclarationAccess().getGroup(), "rule__ImportDeclaration__Group__0");
 			builder.put(grammarAccess.getComponentDefinitionAccess().getGroup(), "rule__ComponentDefinition__Group__0");
@@ -46,8 +49,12 @@ public class CftLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getComponentDefinitionAccess().getGroup_4(), "rule__ComponentDefinition__Group_4__0");
 			builder.put(grammarAccess.getInputEventAccess().getGroup(), "rule__InputEvent__Group__0");
 			builder.put(grammarAccess.getBasicEventDefinitionAccess().getGroup(), "rule__BasicEventDefinition__Group__0");
-			builder.put(grammarAccess.getAndGateAccess().getGroup(), "rule__AndGate__Group__0");
-			builder.put(grammarAccess.getOrGateAccess().getGroup(), "rule__OrGate__Group__0");
+			builder.put(grammarAccess.getConstantDistributionAccess().getGroup(), "rule__ConstantDistribution__Group__0");
+			builder.put(grammarAccess.getExponentialDistributionAccess().getGroup(), "rule__ExponentialDistribution__Group__0");
+			builder.put(grammarAccess.getAndGateDefinitionAccess().getGroup(), "rule__AndGateDefinition__Group__0");
+			builder.put(grammarAccess.getOrGateDefinitionAccess().getGroup(), "rule__OrGateDefinition__Group__0");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getGroup(), "rule__KOfMGateDefinition__Group__0");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getGroup_2_0(), "rule__KOfMGateDefinition__Group_2_0__0");
 			builder.put(grammarAccess.getTransformationDefinitionAccess().getGroup(), "rule__TransformationDefinition__Group__0");
 			builder.put(grammarAccess.getMappingDefinitionAccess().getGroup(), "rule__MappingDefinition__Group__0");
 			builder.put(grammarAccess.getMappingDefinitionAccess().getGroup_5(), "rule__MappingDefinition__Group_5__0");
@@ -74,11 +81,18 @@ public class CftLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getInputEventAccess().getNameAssignment_0(), "rule__InputEvent__NameAssignment_0");
 			builder.put(grammarAccess.getInputEventAccess().getMultipleAssignment_1(), "rule__InputEvent__MultipleAssignment_1");
 			builder.put(grammarAccess.getBasicEventDefinitionAccess().getNameAssignment_0(), "rule__BasicEventDefinition__NameAssignment_0");
-			builder.put(grammarAccess.getBasicEventDefinitionAccess().getRateAssignment_3(), "rule__BasicEventDefinition__RateAssignment_3");
-			builder.put(grammarAccess.getAndGateAccess().getNameAssignment_0(), "rule__AndGate__NameAssignment_0");
-			builder.put(grammarAccess.getAndGateAccess().getInputEventsAssignment_2(), "rule__AndGate__InputEventsAssignment_2");
-			builder.put(grammarAccess.getOrGateAccess().getNameAssignment_0(), "rule__OrGate__NameAssignment_0");
-			builder.put(grammarAccess.getOrGateAccess().getInputEventsAssignment_2(), "rule__OrGate__InputEventsAssignment_2");
+			builder.put(grammarAccess.getBasicEventDefinitionAccess().getDistributionAssignment_1(), "rule__BasicEventDefinition__DistributionAssignment_1");
+			builder.put(grammarAccess.getConstantDistributionAccess().getPAssignment_2(), "rule__ConstantDistribution__PAssignment_2");
+			builder.put(grammarAccess.getExponentialDistributionAccess().getLambdaAssignment_2(), "rule__ExponentialDistribution__LambdaAssignment_2");
+			builder.put(grammarAccess.getAndGateDefinitionAccess().getNameAssignment_0(), "rule__AndGateDefinition__NameAssignment_0");
+			builder.put(grammarAccess.getAndGateDefinitionAccess().getInputEventsAssignment_2(), "rule__AndGateDefinition__InputEventsAssignment_2");
+			builder.put(grammarAccess.getOrGateDefinitionAccess().getNameAssignment_0(), "rule__OrGateDefinition__NameAssignment_0");
+			builder.put(grammarAccess.getOrGateDefinitionAccess().getInputEventsAssignment_2(), "rule__OrGateDefinition__InputEventsAssignment_2");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getNameAssignment_0(), "rule__KOfMGateDefinition__NameAssignment_0");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getKAssignment_1(), "rule__KOfMGateDefinition__KAssignment_1");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getMAssignment_2_0_1(), "rule__KOfMGateDefinition__MAssignment_2_0_1");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getMAssignment_2_1(), "rule__KOfMGateDefinition__MAssignment_2_1");
+			builder.put(grammarAccess.getKOfMGateDefinitionAccess().getInputEventsAssignment_3(), "rule__KOfMGateDefinition__InputEventsAssignment_3");
 			builder.put(grammarAccess.getTransformationDefinitionAccess().getNameAssignment_1(), "rule__TransformationDefinition__NameAssignment_1");
 			builder.put(grammarAccess.getTransformationDefinitionAccess().getMappingDefinitionsAssignment_3(), "rule__TransformationDefinition__MappingDefinitionsAssignment_3");
 			builder.put(grammarAccess.getMappingDefinitionAccess().getTopLevelAssignment_0(), "rule__MappingDefinition__TopLevelAssignment_0");

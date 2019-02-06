@@ -67,14 +67,6 @@ public class CftLanguageFactoryImpl extends EFactoryImpl implements CftLanguageF
     {
       case CftLanguagePackage.CFT_MODEL: return createCftModel();
       case CftLanguagePackage.IMPORT_DECLARATION: return createImportDeclaration();
-      case CftLanguagePackage.COMPONENT_DEFINITION: return createComponentDefinition();
-      case CftLanguagePackage.EVENT_DECLARATION: return createEventDeclaration();
-      case CftLanguagePackage.INPUT_EVENT: return createInputEvent();
-      case CftLanguagePackage.EVENT_DEFINITION: return createEventDefinition();
-      case CftLanguagePackage.BASIC_EVENT_DEFINITION: return createBasicEventDefinition();
-      case CftLanguagePackage.GATE_DEFINITION: return createGateDefinition();
-      case CftLanguagePackage.AND_GATE: return createAndGate();
-      case CftLanguagePackage.OR_GATE: return createOrGate();
       case CftLanguagePackage.TRANSFORMATION_DEFINITION: return createTransformationDefinition();
       case CftLanguagePackage.MAPPING_DEFINITION: return createMappingDefinition();
       case CftLanguagePackage.MAPPING_PARAMETER: return createMappingParameter();
@@ -110,102 +102,6 @@ public class CftLanguageFactoryImpl extends EFactoryImpl implements CftLanguageF
   {
     ImportDeclarationImpl importDeclaration = new ImportDeclarationImpl();
     return importDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ComponentDefinition createComponentDefinition()
-  {
-    ComponentDefinitionImpl componentDefinition = new ComponentDefinitionImpl();
-    return componentDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EventDeclaration createEventDeclaration()
-  {
-    EventDeclarationImpl eventDeclaration = new EventDeclarationImpl();
-    return eventDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public InputEvent createInputEvent()
-  {
-    InputEventImpl inputEvent = new InputEventImpl();
-    return inputEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EventDefinition createEventDefinition()
-  {
-    EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
-    return eventDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public BasicEventDefinition createBasicEventDefinition()
-  {
-    BasicEventDefinitionImpl basicEventDefinition = new BasicEventDefinitionImpl();
-    return basicEventDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public GateDefinition createGateDefinition()
-  {
-    GateDefinitionImpl gateDefinition = new GateDefinitionImpl();
-    return gateDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public AndGate createAndGate()
-  {
-    AndGateImpl andGate = new AndGateImpl();
-    return andGate;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public OrGate createOrGate()
-  {
-    OrGateImpl orGate = new OrGateImpl();
-    return orGate;
   }
 
   /**

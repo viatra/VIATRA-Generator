@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ft -->
+      <package
+            uri="http://www.bme.hu/mit/inf/dslreasoner/faulttree/model/ft"
+            class="hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage"
+            genModel="model/ft.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated cft -->
+      <package
+            uri="http://www.bme.hu/mit/inf/dslreasoner/faulttree/model/cft"
+            class="hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage"
+            genModel="model/cft.genmodel"/>
+   </extension>
+
+</plugin>

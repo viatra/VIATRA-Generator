@@ -141,302 +141,6 @@ public interface CftLanguagePackage extends EPackage
   int IMPORT_DECLARATION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.ComponentDefinitionImpl <em>Component Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.ComponentDefinitionImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getComponentDefinition()
-   * @generated
-   */
-  int COMPONENT_DEFINITION = 2;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_DEFINITION__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Input Events</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_DEFINITION__INPUT_EVENTS = 1;
-
-  /**
-   * The feature id for the '<em><b>Output Events</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_DEFINITION__OUTPUT_EVENTS = 2;
-
-  /**
-   * The feature id for the '<em><b>Event Definitions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_DEFINITION__EVENT_DEFINITIONS = 3;
-
-  /**
-   * The number of structural features of the '<em>Component Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_DEFINITION_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDeclarationImpl <em>Event Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDeclarationImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getEventDeclaration()
-   * @generated
-   */
-  int EVENT_DECLARATION = 3;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVENT_DECLARATION__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Event Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVENT_DECLARATION_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.InputEventImpl <em>Input Event</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.InputEventImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getInputEvent()
-   * @generated
-   */
-  int INPUT_EVENT = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INPUT_EVENT__NAME = EVENT_DECLARATION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Multiple</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INPUT_EVENT__MULTIPLE = EVENT_DECLARATION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Input Event</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INPUT_EVENT_FEATURE_COUNT = EVENT_DECLARATION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDefinitionImpl <em>Event Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDefinitionImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getEventDefinition()
-   * @generated
-   */
-  int EVENT_DEFINITION = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVENT_DEFINITION__NAME = EVENT_DECLARATION__NAME;
-
-  /**
-   * The number of structural features of the '<em>Event Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVENT_DEFINITION_FEATURE_COUNT = EVENT_DECLARATION_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.BasicEventDefinitionImpl <em>Basic Event Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.BasicEventDefinitionImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getBasicEventDefinition()
-   * @generated
-   */
-  int BASIC_EVENT_DEFINITION = 6;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BASIC_EVENT_DEFINITION__NAME = EVENT_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Rate</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BASIC_EVENT_DEFINITION__RATE = EVENT_DEFINITION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Basic Event Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BASIC_EVENT_DEFINITION_FEATURE_COUNT = EVENT_DEFINITION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.GateDefinitionImpl <em>Gate Definition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.GateDefinitionImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getGateDefinition()
-   * @generated
-   */
-  int GATE_DEFINITION = 7;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GATE_DEFINITION__NAME = EVENT_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Input Events</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GATE_DEFINITION__INPUT_EVENTS = EVENT_DEFINITION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Gate Definition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GATE_DEFINITION_FEATURE_COUNT = EVENT_DEFINITION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.AndGateImpl <em>And Gate</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.AndGateImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getAndGate()
-   * @generated
-   */
-  int AND_GATE = 8;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_GATE__NAME = GATE_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Input Events</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_GATE__INPUT_EVENTS = GATE_DEFINITION__INPUT_EVENTS;
-
-  /**
-   * The number of structural features of the '<em>And Gate</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_GATE_FEATURE_COUNT = GATE_DEFINITION_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.OrGateImpl <em>Or Gate</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.OrGateImpl
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getOrGate()
-   * @generated
-   */
-  int OR_GATE = 9;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_GATE__NAME = GATE_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Input Events</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_GATE__INPUT_EVENTS = GATE_DEFINITION__INPUT_EVENTS;
-
-  /**
-   * The number of structural features of the '<em>Or Gate</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_GATE_FEATURE_COUNT = GATE_DEFINITION_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.TransformationDefinitionImpl <em>Transformation Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -444,7 +148,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getTransformationDefinition()
    * @generated
    */
-  int TRANSFORMATION_DEFINITION = 10;
+  int TRANSFORMATION_DEFINITION = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -481,7 +185,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getMappingDefinition()
    * @generated
    */
-  int MAPPING_DEFINITION = 11;
+  int MAPPING_DEFINITION = 3;
 
   /**
    * The feature id for the '<em><b>Top Level</b></em>' attribute.
@@ -554,7 +258,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getMappingParameter()
    * @generated
    */
-  int MAPPING_PARAMETER = 12;
+  int MAPPING_PARAMETER = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -582,7 +286,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getVariable()
    * @generated
    */
-  int VARIABLE = 14;
+  int VARIABLE = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -610,7 +314,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getLookupDefinition()
    * @generated
    */
-  int LOOKUP_DEFINITION = 13;
+  int LOOKUP_DEFINITION = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -656,7 +360,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 15;
+  int ASSIGNMENT = 7;
 
   /**
    * The feature id for the '<em><b>Input</b></em>' containment reference.
@@ -702,7 +406,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getEventReference()
    * @generated
    */
-  int EVENT_REFERENCE = 16;
+  int EVENT_REFERENCE = 8;
 
   /**
    * The feature id for the '<em><b>Component</b></em>' reference.
@@ -739,7 +443,7 @@ public interface CftLanguagePackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getComponentInstance()
    * @generated
    */
-  int COMPONENT_INSTANCE = 17;
+  int COMPONENT_INSTANCE = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -843,174 +547,6 @@ public interface CftLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getImportDeclaration_ImportedNamespace();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition <em>Component Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Component Definition</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition
-   * @generated
-   */
-  EClass getComponentDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getName()
-   * @see #getComponentDefinition()
-   * @generated
-   */
-  EAttribute getComponentDefinition_Name();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getInputEvents <em>Input Events</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Input Events</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getInputEvents()
-   * @see #getComponentDefinition()
-   * @generated
-   */
-  EReference getComponentDefinition_InputEvents();
-
-  /**
-   * Returns the meta object for the reference list '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getOutputEvents <em>Output Events</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Output Events</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getOutputEvents()
-   * @see #getComponentDefinition()
-   * @generated
-   */
-  EReference getComponentDefinition_OutputEvents();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getEventDefinitions <em>Event Definitions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Event Definitions</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition#getEventDefinitions()
-   * @see #getComponentDefinition()
-   * @generated
-   */
-  EReference getComponentDefinition_EventDefinitions();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration <em>Event Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Event Declaration</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration
-   * @generated
-   */
-  EClass getEventDeclaration();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration#getName()
-   * @see #getEventDeclaration()
-   * @generated
-   */
-  EAttribute getEventDeclaration_Name();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.InputEvent <em>Input Event</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Input Event</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.InputEvent
-   * @generated
-   */
-  EClass getInputEvent();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.InputEvent#isMultiple <em>Multiple</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Multiple</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.InputEvent#isMultiple()
-   * @see #getInputEvent()
-   * @generated
-   */
-  EAttribute getInputEvent_Multiple();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDefinition <em>Event Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Event Definition</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDefinition
-   * @generated
-   */
-  EClass getEventDefinition();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.BasicEventDefinition <em>Basic Event Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Basic Event Definition</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.BasicEventDefinition
-   * @generated
-   */
-  EClass getBasicEventDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.BasicEventDefinition#getRate <em>Rate</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Rate</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.BasicEventDefinition#getRate()
-   * @see #getBasicEventDefinition()
-   * @generated
-   */
-  EAttribute getBasicEventDefinition_Rate();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.GateDefinition <em>Gate Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Gate Definition</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.GateDefinition
-   * @generated
-   */
-  EClass getGateDefinition();
-
-  /**
-   * Returns the meta object for the reference list '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.GateDefinition#getInputEvents <em>Input Events</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Input Events</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.GateDefinition#getInputEvents()
-   * @see #getGateDefinition()
-   * @generated
-   */
-  EReference getGateDefinition_InputEvents();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.AndGate <em>And Gate</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>And Gate</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.AndGate
-   * @generated
-   */
-  EClass getAndGate();
-
-  /**
-   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.OrGate <em>Or Gate</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Or Gate</em>'.
-   * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.OrGate
-   * @generated
-   */
-  EClass getOrGate();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition <em>Transformation Definition</em>}'.
@@ -1372,150 +908,6 @@ public interface CftLanguagePackage extends EPackage
      * @generated
      */
     EAttribute IMPORT_DECLARATION__IMPORTED_NAMESPACE = eINSTANCE.getImportDeclaration_ImportedNamespace();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.ComponentDefinitionImpl <em>Component Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.ComponentDefinitionImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getComponentDefinition()
-     * @generated
-     */
-    EClass COMPONENT_DEFINITION = eINSTANCE.getComponentDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute COMPONENT_DEFINITION__NAME = eINSTANCE.getComponentDefinition_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Input Events</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPONENT_DEFINITION__INPUT_EVENTS = eINSTANCE.getComponentDefinition_InputEvents();
-
-    /**
-     * The meta object literal for the '<em><b>Output Events</b></em>' reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPONENT_DEFINITION__OUTPUT_EVENTS = eINSTANCE.getComponentDefinition_OutputEvents();
-
-    /**
-     * The meta object literal for the '<em><b>Event Definitions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPONENT_DEFINITION__EVENT_DEFINITIONS = eINSTANCE.getComponentDefinition_EventDefinitions();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDeclarationImpl <em>Event Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDeclarationImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getEventDeclaration()
-     * @generated
-     */
-    EClass EVENT_DECLARATION = eINSTANCE.getEventDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EVENT_DECLARATION__NAME = eINSTANCE.getEventDeclaration_Name();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.InputEventImpl <em>Input Event</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.InputEventImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getInputEvent()
-     * @generated
-     */
-    EClass INPUT_EVENT = eINSTANCE.getInputEvent();
-
-    /**
-     * The meta object literal for the '<em><b>Multiple</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute INPUT_EVENT__MULTIPLE = eINSTANCE.getInputEvent_Multiple();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDefinitionImpl <em>Event Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.EventDefinitionImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getEventDefinition()
-     * @generated
-     */
-    EClass EVENT_DEFINITION = eINSTANCE.getEventDefinition();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.BasicEventDefinitionImpl <em>Basic Event Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.BasicEventDefinitionImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getBasicEventDefinition()
-     * @generated
-     */
-    EClass BASIC_EVENT_DEFINITION = eINSTANCE.getBasicEventDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Rate</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute BASIC_EVENT_DEFINITION__RATE = eINSTANCE.getBasicEventDefinition_Rate();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.GateDefinitionImpl <em>Gate Definition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.GateDefinitionImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getGateDefinition()
-     * @generated
-     */
-    EClass GATE_DEFINITION = eINSTANCE.getGateDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Input Events</b></em>' reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference GATE_DEFINITION__INPUT_EVENTS = eINSTANCE.getGateDefinition_InputEvents();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.AndGateImpl <em>And Gate</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.AndGateImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getAndGate()
-     * @generated
-     */
-    EClass AND_GATE = eINSTANCE.getAndGate();
-
-    /**
-     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.OrGateImpl <em>Or Gate</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.OrGateImpl
-     * @see hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.CftLanguagePackageImpl#getOrGate()
-     * @generated
-     */
-    EClass OR_GATE = eINSTANCE.getOrGate();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.TransformationDefinitionImpl <em>Transformation Definition</em>}' class.

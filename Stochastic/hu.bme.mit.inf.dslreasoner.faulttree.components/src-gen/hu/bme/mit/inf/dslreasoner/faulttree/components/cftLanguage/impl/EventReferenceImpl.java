@@ -4,9 +4,10 @@
 package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftLanguagePackage;
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventDeclaration;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventReference;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Variable;
+
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration;
 
 import org.eclipse.emf.common.notify.Notification;
 

@@ -3,6 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage;
 
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -72,7 +74,7 @@ public interface CftModel extends EObject
 
   /**
    * Returns the value of the '<em><b>Component Definitions</b></em>' containment reference list.
-   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition}.
+   * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Component Definitions</em>' containment reference list isn't clear,

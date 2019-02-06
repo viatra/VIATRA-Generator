@@ -123,10 +123,10 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('in' ';')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     inputEvents+=InputEvent ';' (ambiguity) (('out' ';')? ('out' ';' 'in' ';')?)+ 'out' outputEvents+=[EventDeclaration|ID]
-	 *     name=ID '{' (ambiguity) 'out' (';' (ambiguity) 'out')* outputEvents+=[EventDeclaration|ID]
-	 *     outputEvents+=[EventDeclaration|ID] ';' (ambiguity) ('out' ';' (ambiguity))* '}' (rule end)
-	 *     outputEvents+=[EventDeclaration|ID] ';' (ambiguity) ('out' ';' (ambiguity))* eventDefinitions+=EventDefinition
+	 *     inputEvents+=InputEvent ';' (ambiguity) (('out' ';')? ('out' ';' 'in' ';')?)+ 'out' outputEvents+=[EventDeclaration|ValidId]
+	 *     name=ValidId '{' (ambiguity) 'out' (';' (ambiguity) 'out')* outputEvents+=[EventDeclaration|ValidId]
+	 *     outputEvents+=[EventDeclaration|ValidId] ';' (ambiguity) ('out' ';' (ambiguity))* '}' (rule end)
+	 *     outputEvents+=[EventDeclaration|ValidId] ';' (ambiguity) ('out' ';' (ambiguity))* eventDefinitions+=EventDefinition
 	 */
 	protected void emit_ComponentDefinition___InKeyword_3_0_0_SemicolonKeyword_3_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -137,8 +137,8 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('out' ';' ('in' ';')*)*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     outputEvents+=[EventDeclaration|ID] ';' ('in' ';')* (ambiguity) '}' (rule end)
-	 *     outputEvents+=[EventDeclaration|ID] ';' ('in' ';')* (ambiguity) eventDefinitions+=EventDefinition
+	 *     outputEvents+=[EventDeclaration|ValidId] ';' ('in' ';')* (ambiguity) '}' (rule end)
+	 *     outputEvents+=[EventDeclaration|ValidId] ';' ('in' ';')* (ambiguity) eventDefinitions+=EventDefinition
 	 */
 	protected void emit_ComponentDefinition___OutKeyword_3_1_0_SemicolonKeyword_3_1_2___InKeyword_3_0_0_SemicolonKeyword_3_0_2__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -151,8 +151,8 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * This ambiguous syntax occurs at:
 	 *     inputEvents+=InputEvent ';' (ambiguity) ('in' ';' (ambiguity))* '}' (rule end)
 	 *     inputEvents+=InputEvent ';' (ambiguity) ('in' ';' (ambiguity))* eventDefinitions+=EventDefinition
-	 *     name=ID '{' (ambiguity) 'in' (';' (ambiguity) 'in')* inputEvents+=InputEvent
-	 *     outputEvents+=[EventDeclaration|ID] ';' (ambiguity) (('in' ';')? ('in' ';' 'out' ';')?)+ 'in' inputEvents+=InputEvent
+	 *     name=ValidId '{' (ambiguity) 'in' (';' (ambiguity) 'in')* inputEvents+=InputEvent
+	 *     outputEvents+=[EventDeclaration|ValidId] ';' (ambiguity) (('in' ';')? ('in' ';' 'out' ';')?)+ 'in' inputEvents+=InputEvent
 	 */
 	protected void emit_ComponentDefinition___OutKeyword_3_1_0_SemicolonKeyword_3_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -164,7 +164,7 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     inputEvents+=InputEvent (ambiguity) inputEvents+=InputEvent
-	 *     name=ID '{' ('out' ';')* 'in' (ambiguity) inputEvents+=InputEvent
+	 *     name=ValidId '{' ('out' ';')* 'in' (ambiguity) inputEvents+=InputEvent
 	 */
 	protected void emit_ComponentDefinition___SemicolonKeyword_3_0_2___OutKeyword_3_1_0_SemicolonKeyword_3_1_2__a_InKeyword_3_0_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -175,8 +175,8 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (';' ('in' ';')* 'out')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID '{' ('in' ';')* 'out' (ambiguity) outputEvents+=[EventDeclaration|ID]
-	 *     outputEvents+=[EventDeclaration|ID] (ambiguity) outputEvents+=[EventDeclaration|ID]
+	 *     name=ValidId '{' ('in' ';')* 'out' (ambiguity) outputEvents+=[EventDeclaration|ValidId]
+	 *     outputEvents+=[EventDeclaration|ValidId] (ambiguity) outputEvents+=[EventDeclaration|ValidId]
 	 */
 	protected void emit_ComponentDefinition___SemicolonKeyword_3_1_2___InKeyword_3_0_0_SemicolonKeyword_3_0_2__a_OutKeyword_3_1_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -187,8 +187,8 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (('in' ';') | ('out' ';'))*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID '{' (ambiguity) '}' (rule end)
-	 *     name=ID '{' (ambiguity) eventDefinitions+=EventDefinition
+	 *     name=ValidId '{' (ambiguity) '}' (rule end)
+	 *     name=ValidId '{' (ambiguity) eventDefinitions+=EventDefinition
 	 */
 	protected void emit_ComponentDefinition_____InKeyword_3_0_0_SemicolonKeyword_3_0_2___or___OutKeyword_3_1_0_SemicolonKeyword_3_1_2____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -199,7 +199,7 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (('in' ';')? ('in' ';' 'out' ';')?)+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     outputEvents+=[EventDeclaration|ID] ';' ('out' ';')* (ambiguity) 'in' inputEvents+=InputEvent
+	 *     outputEvents+=[EventDeclaration|ValidId] ';' ('out' ';')* (ambiguity) 'in' inputEvents+=InputEvent
 	 */
 	protected void emit_ComponentDefinition_____InKeyword_3_0_0_SemicolonKeyword_3_0_2__q___InKeyword_3_0_0_SemicolonKeyword_3_0_2_OutKeyword_3_1_0_SemicolonKeyword_3_1_2__q__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -210,7 +210,7 @@ public class CftLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (('out' ';')? ('out' ';' 'in' ';')?)+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     inputEvents+=InputEvent ';' ('in' ';')* (ambiguity) 'out' outputEvents+=[EventDeclaration|ID]
+	 *     inputEvents+=InputEvent ';' ('in' ';')* (ambiguity) 'out' outputEvents+=[EventDeclaration|ValidId]
 	 */
 	protected void emit_ComponentDefinition_____OutKeyword_3_1_0_SemicolonKeyword_3_1_2__q___OutKeyword_3_1_0_SemicolonKeyword_3_1_2_InKeyword_3_0_0_SemicolonKeyword_3_0_2__q__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

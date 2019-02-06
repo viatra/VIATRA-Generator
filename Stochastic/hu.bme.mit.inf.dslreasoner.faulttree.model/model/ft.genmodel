@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.dslreasoner.faulttree.model/ecore-gen"
+    modelPluginID="hu.bme.mit.inf.dslreasoner.faulttree.model" modelName="Ft" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ft.ecore</foreignModel>
+  <genPackages prefix="Ft" basePackage="hu.bme.mit.inf.dslreasoner.faulttree.model"
+      disposableProviderFactory="true" ecorePackage="ft.ecore#/">
+    <genClasses ecoreClass="ft.ecore#//FaultTree">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ft.ecore#//FaultTree/events"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ft.ecore#//FaultTree/topEvent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ft.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//Event/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ft.ecore#//BasicEvent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ft.ecore#//BasicEvent/distribution"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ft.ecore#//Gate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ft.ecore#//Gate/inputEvents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ft.ecore#//Distribution"/>
+    <genClasses ecoreClass="ft.ecore#//ConstantDistribution">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//ConstantDistribution/p"/>
+    </genClasses>
+    <genClasses ecoreClass="ft.ecore#//ExponentialDistribution">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//ExponentialDistribution/lambda"/>
+    </genClasses>
+    <genClasses ecoreClass="ft.ecore#//AndGate"/>
+    <genClasses ecoreClass="ft.ecore#//OrGate"/>
+    <genClasses ecoreClass="ft.ecore#//KOfMGate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//KOfMGate/k"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//KOfMGate/m"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

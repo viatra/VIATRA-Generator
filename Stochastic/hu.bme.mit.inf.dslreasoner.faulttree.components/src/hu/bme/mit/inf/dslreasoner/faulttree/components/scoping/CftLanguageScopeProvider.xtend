@@ -5,13 +5,13 @@ package hu.bme.mit.inf.dslreasoner.faulttree.components.scoping
 
 import com.google.common.collect.Lists
 import com.google.inject.Inject
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.ComponentInstance
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.EventReference
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.LookupDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Variable
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition
 import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
