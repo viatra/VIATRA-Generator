@@ -3,7 +3,7 @@
 package hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl;
 
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
-import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -13,18 +13,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Intput Event</b></em>'.
+ * An implementation of the model object '<em><b>Input Event</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.IntputEventImpl#isMultiple <em>Multiple</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputEventImpl#isMultiple <em>Multiple</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent {
+public class InputEventImpl extends EventDeclarationImpl implements InputEvent {
 	/**
 	 * The default value of the '{@link #isMultiple() <em>Multiple</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,7 +50,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IntputEventImpl() {
+	protected InputEventImpl() {
 		super();
 	}
 
@@ -61,7 +61,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CftPackage.Literals.INTPUT_EVENT;
+		return CftPackage.Literals.INPUT_EVENT;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 		boolean oldMultiple = multiple;
 		multiple = newMultiple;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.INTPUT_EVENT__MULTIPLE, oldMultiple, multiple));
+			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.INPUT_EVENT__MULTIPLE, oldMultiple, multiple));
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CftPackage.INTPUT_EVENT__MULTIPLE:
+			case CftPackage.INPUT_EVENT__MULTIPLE:
 				return isMultiple();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -109,7 +109,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CftPackage.INTPUT_EVENT__MULTIPLE:
+			case CftPackage.INPUT_EVENT__MULTIPLE:
 				setMultiple((Boolean)newValue);
 				return;
 		}
@@ -124,7 +124,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CftPackage.INTPUT_EVENT__MULTIPLE:
+			case CftPackage.INPUT_EVENT__MULTIPLE:
 				setMultiple(MULTIPLE_EDEFAULT);
 				return;
 		}
@@ -139,7 +139,7 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CftPackage.INTPUT_EVENT__MULTIPLE:
+			case CftPackage.INPUT_EVENT__MULTIPLE:
 				return multiple != MULTIPLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -161,4 +161,4 @@ public class IntputEventImpl extends EventDeclarationImpl implements IntputEvent
 		return result.toString();
 	}
 
-} //IntputEventImpl
+} //InputEventImpl

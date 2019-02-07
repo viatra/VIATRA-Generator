@@ -4,7 +4,7 @@
     nsPrefix="cft">
   <eClassifiers xsi:type="ecore:EClass" name="ComponentDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
-        eType="#//IntputEvent" containment="true"/>
+        eType="#//InputEvent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventDefinitions" upperBound="-1"
         eType="#//EventDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" upperBound="-1"
@@ -20,7 +20,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="distribution" lowerBound="1"
         eType="ecore:EClass ft.ecore#//Distribution" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntputEvent" eSuperTypes="#//EventDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="InputEvent" eSuperTypes="#//EventDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventDeclaration" abstract="true">
@@ -45,10 +45,11 @@
         eType="#//Output" containment="true" eOpposite="#//Output/component"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentDefinition" lowerBound="1"
         eType="#//ComponentDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Input">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="intputEvent" lowerBound="1"
-        eType="#//IntputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvent" lowerBound="1"
+        eType="#//InputEvent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
         eType="#//Component" eOpposite="#//Component/inputs"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingConnections" upperBound="-1"

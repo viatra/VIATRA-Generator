@@ -287,14 +287,14 @@ public interface CftPackage extends EPackage {
 	int BASIC_EVENT_DEFINITION_OPERATION_COUNT = EVENT_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.IntputEventImpl <em>Intput Event</em>}' class.
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputEventImpl <em>Input Event</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.IntputEventImpl
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getIntputEvent()
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputEventImpl
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getInputEvent()
 	 * @generated
 	 */
-	int INTPUT_EVENT = 4;
+	int INPUT_EVENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -303,7 +303,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTPUT_EVENT__NAME = EVENT_DECLARATION__NAME;
+	int INPUT_EVENT__NAME = EVENT_DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Multiple</b></em>' attribute.
@@ -312,25 +312,25 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTPUT_EVENT__MULTIPLE = EVENT_DECLARATION_FEATURE_COUNT + 0;
+	int INPUT_EVENT__MULTIPLE = EVENT_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Intput Event</em>' class.
+	 * The number of structural features of the '<em>Input Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTPUT_EVENT_FEATURE_COUNT = EVENT_DECLARATION_FEATURE_COUNT + 1;
+	int INPUT_EVENT_FEATURE_COUNT = EVENT_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Intput Event</em>' class.
+	 * The number of operations of the '<em>Input Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTPUT_EVENT_OPERATION_COUNT = EVENT_DECLARATION_OPERATION_COUNT + 0;
+	int INPUT_EVENT_OPERATION_COUNT = EVENT_DECLARATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.AndGateDefinitionImpl <em>And Gate Definition</em>}' class.
@@ -572,13 +572,22 @@ public interface CftPackage extends EPackage {
 	int COMPONENT__COMPONENT_DEFINITION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__NAME = 3;
+
+	/**
 	 * The number of structural features of the '<em>Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = 3;
+	int COMPONENT_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Component</em>' class.
@@ -600,13 +609,13 @@ public interface CftPackage extends EPackage {
 	int INPUT = 11;
 
 	/**
-	 * The feature id for the '<em><b>Intput Event</b></em>' reference.
+	 * The feature id for the '<em><b>Input Event</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT__INTPUT_EVENT = 0;
+	int INPUT__INPUT_EVENT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Component</b></em>' container reference.
@@ -853,25 +862,25 @@ public interface CftPackage extends EPackage {
 	EReference getBasicEventDefinition_Distribution();
 
 	/**
-	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent <em>Intput Event</em>}'.
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent <em>Input Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Intput Event</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent
+	 * @return the meta object for class '<em>Input Event</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent
 	 * @generated
 	 */
-	EClass getIntputEvent();
+	EClass getInputEvent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent#isMultiple <em>Multiple</em>}'.
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent#isMultiple <em>Multiple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Multiple</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent#isMultiple()
-	 * @see #getIntputEvent()
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent#isMultiple()
+	 * @see #getInputEvent()
 	 * @generated
 	 */
-	EAttribute getIntputEvent_Multiple();
+	EAttribute getInputEvent_Multiple();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration <em>Event Declaration</em>}'.
@@ -1022,6 +1031,17 @@ public interface CftPackage extends EPackage {
 	EReference getComponent_ComponentDefinition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#getName()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EAttribute getComponent_Name();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input <em>Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1032,15 +1052,15 @@ public interface CftPackage extends EPackage {
 	EClass getInput();
 
 	/**
-	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getIntputEvent <em>Intput Event</em>}'.
+	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getInputEvent <em>Input Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Intput Event</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getIntputEvent()
+	 * @return the meta object for the reference '<em>Input Event</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getInputEvent()
 	 * @see #getInput()
 	 * @generated
 	 */
-	EReference getInput_IntputEvent();
+	EReference getInput_InputEvent();
 
 	/**
 	 * Returns the meta object for the container reference '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getComponent <em>Component</em>}'.
@@ -1251,14 +1271,14 @@ public interface CftPackage extends EPackage {
 		EReference BASIC_EVENT_DEFINITION__DISTRIBUTION = eINSTANCE.getBasicEventDefinition_Distribution();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.IntputEventImpl <em>Intput Event</em>}' class.
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputEventImpl <em>Input Event</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.IntputEventImpl
-		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getIntputEvent()
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputEventImpl
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getInputEvent()
 		 * @generated
 		 */
-		EClass INTPUT_EVENT = eINSTANCE.getIntputEvent();
+		EClass INPUT_EVENT = eINSTANCE.getInputEvent();
 
 		/**
 		 * The meta object literal for the '<em><b>Multiple</b></em>' attribute feature.
@@ -1266,7 +1286,7 @@ public interface CftPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INTPUT_EVENT__MULTIPLE = eINSTANCE.getIntputEvent_Multiple();
+		EAttribute INPUT_EVENT__MULTIPLE = eINSTANCE.getInputEvent_Multiple();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.EventDeclarationImpl <em>Event Declaration</em>}' class.
@@ -1393,6 +1413,14 @@ public interface CftPackage extends EPackage {
 		EReference COMPONENT__COMPONENT_DEFINITION = eINSTANCE.getComponent_ComponentDefinition();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONENT__NAME = eINSTANCE.getComponent_Name();
+
+		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl <em>Input</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1403,12 +1431,12 @@ public interface CftPackage extends EPackage {
 		EClass INPUT = eINSTANCE.getInput();
 
 		/**
-		 * The meta object literal for the '<em><b>Intput Event</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Input Event</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INPUT__INTPUT_EVENT = eINSTANCE.getInput_IntputEvent();
+		EReference INPUT__INPUT_EVENT = eINSTANCE.getInput_InputEvent();
 
 		/**
 		 * The meta object literal for the '<em><b>Component</b></em>' container reference feature.

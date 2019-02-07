@@ -58,7 +58,7 @@ public class CftFactoryImpl extends EFactoryImpl implements CftFactory {
 		switch (eClass.getClassifierID()) {
 			case CftPackage.COMPONENT_DEFINITION: return createComponentDefinition();
 			case CftPackage.BASIC_EVENT_DEFINITION: return createBasicEventDefinition();
-			case CftPackage.INTPUT_EVENT: return createIntputEvent();
+			case CftPackage.INPUT_EVENT: return createInputEvent();
 			case CftPackage.AND_GATE_DEFINITION: return createAndGateDefinition();
 			case CftPackage.OR_GATE_DEFINITION: return createOrGateDefinition();
 			case CftPackage.KOF_MGATE_DEFINITION: return createKOfMGateDefinition();
@@ -100,9 +100,9 @@ public class CftFactoryImpl extends EFactoryImpl implements CftFactory {
 	 * @generated
 	 */
 	@Override
-	public IntputEvent createIntputEvent() {
-		IntputEventImpl intputEvent = new IntputEventImpl();
-		return intputEvent;
+	public InputEvent createInputEvent() {
+		InputEventImpl inputEvent = new InputEventImpl();
+		return inputEvent;
 	}
 
 	/**

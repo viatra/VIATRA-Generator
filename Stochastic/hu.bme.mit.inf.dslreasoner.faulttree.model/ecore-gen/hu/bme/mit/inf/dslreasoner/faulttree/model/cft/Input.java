@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getIntputEvent <em>Intput Event</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getInputEvent <em>Input Event</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getComponent <em>Component</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getIncomingConnections <em>Incoming Connections</em>}</li>
  * </ul>
@@ -26,30 +26,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Input extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Intput Event</b></em>' reference.
+	 * Returns the value of the '<em><b>Input Event</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Intput Event</em>' reference isn't clear,
+	 * If the meaning of the '<em>Input Event</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Intput Event</em>' reference.
-	 * @see #setIntputEvent(IntputEvent)
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage#getInput_IntputEvent()
+	 * @return the value of the '<em>Input Event</em>' reference.
+	 * @see #setInputEvent(InputEvent)
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage#getInput_InputEvent()
 	 * @model required="true"
 	 * @generated
 	 */
-	IntputEvent getIntputEvent();
+	InputEvent getInputEvent();
 
 	/**
-	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getIntputEvent <em>Intput Event</em>}' reference.
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getInputEvent <em>Input Event</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Intput Event</em>' reference.
-	 * @see #getIntputEvent()
+	 * @param value the new value of the '<em>Input Event</em>' reference.
+	 * @see #getInputEvent()
 	 * @generated
 	 */
-	void setIntputEvent(IntputEvent value);
+	void setInputEvent(InputEvent value);
 
 	/**
 	 * Returns the value of the '<em><b>Component</b></em>' container reference.

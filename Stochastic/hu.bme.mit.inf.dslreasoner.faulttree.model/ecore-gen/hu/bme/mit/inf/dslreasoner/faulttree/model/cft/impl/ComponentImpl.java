@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getInputs <em>Inputs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getComponentDefinition <em>Component Definition</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -69,6 +70,26 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * @ordered
 	 */
 	protected ComponentDefinition componentDefinition;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,6 +181,29 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.COMPONENT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -203,6 +247,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 			case CftPackage.COMPONENT__COMPONENT_DEFINITION:
 				if (resolve) return getComponentDefinition();
 				return basicGetComponentDefinition();
+			case CftPackage.COMPONENT__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,6 +273,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 			case CftPackage.COMPONENT__COMPONENT_DEFINITION:
 				setComponentDefinition((ComponentDefinition)newValue);
 				return;
+			case CftPackage.COMPONENT__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -248,6 +297,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 			case CftPackage.COMPONENT__COMPONENT_DEFINITION:
 				setComponentDefinition((ComponentDefinition)null);
 				return;
+			case CftPackage.COMPONENT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -266,8 +318,26 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 				return outputs != null && !outputs.isEmpty();
 			case CftPackage.COMPONENT__COMPONENT_DEFINITION:
 				return componentDefinition != null;
+			case CftPackage.COMPONENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ComponentImpl

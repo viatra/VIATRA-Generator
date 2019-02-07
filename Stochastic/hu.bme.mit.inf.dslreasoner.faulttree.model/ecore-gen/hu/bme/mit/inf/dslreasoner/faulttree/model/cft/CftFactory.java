@@ -40,13 +40,13 @@ public interface CftFactory extends EFactory {
 	BasicEventDefinition createBasicEventDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Intput Event</em>'.
+	 * Returns a new object of class '<em>Input Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Intput Event</em>'.
+	 * @return a new object of class '<em>Input Event</em>'.
 	 * @generated
 	 */
-	IntputEvent createIntputEvent();
+	InputEvent createInputEvent();
 
 	/**
 	 * Returns a new object of class '<em>And Gate Definition</em>'.

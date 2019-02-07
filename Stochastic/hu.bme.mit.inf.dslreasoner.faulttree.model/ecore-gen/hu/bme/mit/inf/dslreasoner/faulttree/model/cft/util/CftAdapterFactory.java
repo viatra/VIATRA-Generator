@@ -84,8 +84,8 @@ public class CftAdapterFactory extends AdapterFactoryImpl {
 				return createBasicEventDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseIntputEvent(IntputEvent object) {
-				return createIntputEventAdapter();
+			public Adapter caseInputEvent(InputEvent object) {
+				return createInputEventAdapter();
 			}
 			@Override
 			public Adapter caseEventDeclaration(EventDeclaration object) {
@@ -200,16 +200,16 @@ public class CftAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent <em>Intput Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent <em>Input Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent
 	 * @generated
 	 */
-	public Adapter createIntputEventAdapter() {
+	public Adapter createInputEventAdapter() {
 		return null;
 	}
 

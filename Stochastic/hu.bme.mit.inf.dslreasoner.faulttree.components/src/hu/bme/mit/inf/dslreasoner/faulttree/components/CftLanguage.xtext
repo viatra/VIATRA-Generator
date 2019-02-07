@@ -20,7 +20,7 @@ ComponentDefinition returns cft::ComponentDefinition:
 	(eventDefinitions+=EventDefinition ";")*
 	"}";
 
-InputEvent returns cft::IntputEvent:
+InputEvent returns cft::InputEvent:
 	name=ValidId multiple?="[]"?;
 
 EventDefinition returns cft::EventDefinition:

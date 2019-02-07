@@ -14,7 +14,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.GateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input;
-import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.KOfMGateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.OrGateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
@@ -68,7 +68,7 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass intputEventEClass = null;
+	private EClass inputEventEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,8 +303,8 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getIntputEvent() {
-		return intputEventEClass;
+	public EClass getInputEvent() {
+		return inputEventEClass;
 	}
 
 	/**
@@ -313,8 +313,8 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getIntputEvent_Multiple() {
-		return (EAttribute)intputEventEClass.getEStructuralFeatures().get(0);
+	public EAttribute getInputEvent_Multiple() {
+		return (EAttribute)inputEventEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -463,6 +463,16 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getComponent_Name() {
+		return (EAttribute)componentEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getInput() {
 		return inputEClass;
 	}
@@ -473,7 +483,7 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getInput_IntputEvent() {
+	public EReference getInput_InputEvent() {
 		return (EReference)inputEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -610,8 +620,8 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		basicEventDefinitionEClass = createEClass(BASIC_EVENT_DEFINITION);
 		createEReference(basicEventDefinitionEClass, BASIC_EVENT_DEFINITION__DISTRIBUTION);
 
-		intputEventEClass = createEClass(INTPUT_EVENT);
-		createEAttribute(intputEventEClass, INTPUT_EVENT__MULTIPLE);
+		inputEventEClass = createEClass(INPUT_EVENT);
+		createEAttribute(inputEventEClass, INPUT_EVENT__MULTIPLE);
 
 		eventDeclarationEClass = createEClass(EVENT_DECLARATION);
 		createEAttribute(eventDeclarationEClass, EVENT_DECLARATION__NAME);
@@ -632,9 +642,10 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		createEReference(componentEClass, COMPONENT__INPUTS);
 		createEReference(componentEClass, COMPONENT__OUTPUTS);
 		createEReference(componentEClass, COMPONENT__COMPONENT_DEFINITION);
+		createEAttribute(componentEClass, COMPONENT__NAME);
 
 		inputEClass = createEClass(INPUT);
-		createEReference(inputEClass, INPUT__INTPUT_EVENT);
+		createEReference(inputEClass, INPUT__INPUT_EVENT);
 		createEReference(inputEClass, INPUT__COMPONENT);
 		createEReference(inputEClass, INPUT__INCOMING_CONNECTIONS);
 
@@ -682,14 +693,14 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		eventDefinitionEClass.getESuperTypes().add(this.getEventDeclaration());
 		gateDefinitionEClass.getESuperTypes().add(this.getEventDefinition());
 		basicEventDefinitionEClass.getESuperTypes().add(this.getEventDefinition());
-		intputEventEClass.getESuperTypes().add(this.getEventDeclaration());
+		inputEventEClass.getESuperTypes().add(this.getEventDeclaration());
 		andGateDefinitionEClass.getESuperTypes().add(this.getGateDefinition());
 		orGateDefinitionEClass.getESuperTypes().add(this.getGateDefinition());
 		kOfMGateDefinitionEClass.getESuperTypes().add(this.getGateDefinition());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(componentDefinitionEClass, ComponentDefinition.class, "ComponentDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComponentDefinition_InputEvents(), this.getIntputEvent(), null, "inputEvents", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentDefinition_InputEvents(), this.getInputEvent(), null, "inputEvents", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentDefinition_EventDefinitions(), this.getEventDefinition(), null, "eventDefinitions", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponentDefinition_OutputEvents(), this.getEventDeclaration(), null, "outputEvents", null, 0, -1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponentDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, ComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -702,8 +713,8 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		initEClass(basicEventDefinitionEClass, BasicEventDefinition.class, "BasicEventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBasicEventDefinition_Distribution(), theFtPackage.getDistribution(), null, "distribution", null, 1, 1, BasicEventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(intputEventEClass, IntputEvent.class, "IntputEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntputEvent_Multiple(), ecorePackage.getEBoolean(), "multiple", null, 0, 1, IntputEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(inputEventEClass, InputEvent.class, "InputEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getInputEvent_Multiple(), ecorePackage.getEBoolean(), "multiple", null, 0, 1, InputEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventDeclarationEClass, EventDeclaration.class, "EventDeclaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEventDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EventDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -724,9 +735,10 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		initEReference(getComponent_Inputs(), this.getInput(), this.getInput_Component(), "inputs", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_Outputs(), this.getOutput(), this.getOutput_Component(), "outputs", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_ComponentDefinition(), this.getComponentDefinition(), null, "componentDefinition", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputEClass, Input.class, "Input", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInput_IntputEvent(), this.getIntputEvent(), null, "intputEvent", null, 1, 1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInput_InputEvent(), this.getInputEvent(), null, "inputEvent", null, 1, 1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInput_Component(), this.getComponent(), this.getComponent_Inputs(), "component", null, 1, 1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInput_IncomingConnections(), this.getConnection(), this.getConnection_Input(), "incomingConnections", null, 0, -1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

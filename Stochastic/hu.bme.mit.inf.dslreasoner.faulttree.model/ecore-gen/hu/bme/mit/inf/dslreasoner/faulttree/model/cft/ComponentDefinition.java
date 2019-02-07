@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface ComponentDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Input Events</b></em>' containment reference list.
-	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent}.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Input Events</em>' containment reference list isn't clear,
@@ -40,7 +40,7 @@ public interface ComponentDefinition extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<IntputEvent> getInputEvents();
+	EList<InputEvent> getInputEvents();
 
 	/**
 	 * Returns the value of the '<em><b>Event Definitions</b></em>' containment reference list.

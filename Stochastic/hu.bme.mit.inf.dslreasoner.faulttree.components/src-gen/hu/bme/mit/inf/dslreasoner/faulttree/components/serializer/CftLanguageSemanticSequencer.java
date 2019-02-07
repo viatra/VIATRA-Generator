@@ -19,7 +19,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.AndGateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.BasicEventDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
-import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.KOfMGateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.OrGateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantDistribution;
@@ -59,8 +59,8 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case CftPackage.COMPONENT_DEFINITION:
 				sequence_ComponentDefinition(context, (ComponentDefinition) semanticObject); 
 				return; 
-			case CftPackage.INTPUT_EVENT:
-				sequence_InputEvent(context, (IntputEvent) semanticObject); 
+			case CftPackage.INPUT_EVENT:
+				sequence_InputEvent(context, (InputEvent) semanticObject); 
 				return; 
 			case CftPackage.KOF_MGATE_DEFINITION:
 				sequence_KOfMGateDefinition(context, (KOfMGateDefinition) semanticObject); 
@@ -280,12 +280,12 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	/**
 	 * Contexts:
-	 *     InputEvent returns IntputEvent
+	 *     InputEvent returns InputEvent
 	 *
 	 * Constraint:
 	 *     (name=ValidId multiple?='[]'?)
 	 */
-	protected void sequence_InputEvent(ISerializationContext context, IntputEvent semanticObject) {
+	protected void sequence_InputEvent(ISerializationContext context, InputEvent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

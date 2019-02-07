@@ -95,10 +95,10 @@ public class CftSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CftPackage.INTPUT_EVENT: {
-				IntputEvent intputEvent = (IntputEvent)theEObject;
-				T result = caseIntputEvent(intputEvent);
-				if (result == null) result = caseEventDeclaration(intputEvent);
+			case CftPackage.INPUT_EVENT: {
+				InputEvent inputEvent = (InputEvent)theEObject;
+				T result = caseInputEvent(inputEvent);
+				if (result == null) result = caseEventDeclaration(inputEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -230,17 +230,17 @@ public class CftSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Intput Event</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Input Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Intput Event</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Input Event</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIntputEvent(IntputEvent object) {
+	public T caseInputEvent(InputEvent object) {
 		return null;
 	}
 

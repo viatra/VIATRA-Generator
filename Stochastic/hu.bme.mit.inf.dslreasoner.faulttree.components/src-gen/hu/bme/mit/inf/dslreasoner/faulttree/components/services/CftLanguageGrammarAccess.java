@@ -215,7 +215,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cMultipleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Keyword cMultipleLeftSquareBracketRightSquareBracketKeyword_1_0 = (Keyword)cMultipleAssignment_1.eContents().get(0);
 		
-		//InputEvent cft::IntputEvent:
+		//InputEvent cft::InputEvent:
 		//	name=ValidId multiple?="[]"?;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1128,7 +1128,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getComponentDefinitionAccess().getRule();
 	}
 	
-	//InputEvent cft::IntputEvent:
+	//InputEvent cft::InputEvent:
 	//	name=ValidId multiple?="[]"?;
 	public InputEventElements getInputEventAccess() {
 		return pInputEvent;

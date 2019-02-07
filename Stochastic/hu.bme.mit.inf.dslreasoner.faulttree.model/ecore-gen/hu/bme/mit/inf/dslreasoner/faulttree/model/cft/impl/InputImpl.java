@@ -6,8 +6,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Connection;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input;
-import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent;
-
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -33,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl#getIntputEvent <em>Intput Event</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl#getInputEvent <em>Input Event</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl#getComponent <em>Component</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl#getIncomingConnections <em>Incoming Connections</em>}</li>
  * </ul>
@@ -42,14 +41,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	/**
-	 * The cached value of the '{@link #getIntputEvent() <em>Intput Event</em>}' reference.
+	 * The cached value of the '{@link #getInputEvent() <em>Input Event</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIntputEvent()
+	 * @see #getInputEvent()
 	 * @generated
 	 * @ordered
 	 */
-	protected IntputEvent intputEvent;
+	protected InputEvent inputEvent;
 
 	/**
 	 * The cached value of the '{@link #getIncomingConnections() <em>Incoming Connections</em>}' containment reference list.
@@ -86,16 +85,16 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	 * @generated
 	 */
 	@Override
-	public IntputEvent getIntputEvent() {
-		if (intputEvent != null && intputEvent.eIsProxy()) {
-			InternalEObject oldIntputEvent = (InternalEObject)intputEvent;
-			intputEvent = (IntputEvent)eResolveProxy(oldIntputEvent);
-			if (intputEvent != oldIntputEvent) {
+	public InputEvent getInputEvent() {
+		if (inputEvent != null && inputEvent.eIsProxy()) {
+			InternalEObject oldInputEvent = (InternalEObject)inputEvent;
+			inputEvent = (InputEvent)eResolveProxy(oldInputEvent);
+			if (inputEvent != oldInputEvent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CftPackage.INPUT__INTPUT_EVENT, oldIntputEvent, intputEvent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CftPackage.INPUT__INPUT_EVENT, oldInputEvent, inputEvent));
 			}
 		}
-		return intputEvent;
+		return inputEvent;
 	}
 
 	/**
@@ -103,8 +102,8 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntputEvent basicGetIntputEvent() {
-		return intputEvent;
+	public InputEvent basicGetInputEvent() {
+		return inputEvent;
 	}
 
 	/**
@@ -113,11 +112,11 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	 * @generated
 	 */
 	@Override
-	public void setIntputEvent(IntputEvent newIntputEvent) {
-		IntputEvent oldIntputEvent = intputEvent;
-		intputEvent = newIntputEvent;
+	public void setInputEvent(InputEvent newInputEvent) {
+		InputEvent oldInputEvent = inputEvent;
+		inputEvent = newInputEvent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.INPUT__INTPUT_EVENT, oldIntputEvent, intputEvent));
+			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.INPUT__INPUT_EVENT, oldInputEvent, inputEvent));
 	}
 
 	/**
@@ -233,9 +232,9 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CftPackage.INPUT__INTPUT_EVENT:
-				if (resolve) return getIntputEvent();
-				return basicGetIntputEvent();
+			case CftPackage.INPUT__INPUT_EVENT:
+				if (resolve) return getInputEvent();
+				return basicGetInputEvent();
 			case CftPackage.INPUT__COMPONENT:
 				return getComponent();
 			case CftPackage.INPUT__INCOMING_CONNECTIONS:
@@ -253,8 +252,8 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CftPackage.INPUT__INTPUT_EVENT:
-				setIntputEvent((IntputEvent)newValue);
+			case CftPackage.INPUT__INPUT_EVENT:
+				setInputEvent((InputEvent)newValue);
 				return;
 			case CftPackage.INPUT__COMPONENT:
 				setComponent((Component)newValue);
@@ -275,8 +274,8 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CftPackage.INPUT__INTPUT_EVENT:
-				setIntputEvent((IntputEvent)null);
+			case CftPackage.INPUT__INPUT_EVENT:
+				setInputEvent((InputEvent)null);
 				return;
 			case CftPackage.INPUT__COMPONENT:
 				setComponent((Component)null);
@@ -296,8 +295,8 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CftPackage.INPUT__INTPUT_EVENT:
-				return intputEvent != null;
+			case CftPackage.INPUT__INPUT_EVENT:
+				return inputEvent != null;
 			case CftPackage.INPUT__COMPONENT:
 				return getComponent() != null;
 			case CftPackage.INPUT__INCOMING_CONNECTIONS:

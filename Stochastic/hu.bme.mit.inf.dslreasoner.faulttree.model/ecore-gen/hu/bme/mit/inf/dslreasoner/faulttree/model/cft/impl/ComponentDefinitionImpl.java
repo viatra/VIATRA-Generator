@@ -6,8 +6,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDefinition;
-import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.IntputEvent;
-
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -50,7 +49,7 @@ public class ComponentDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<IntputEvent> inputEvents;
+	protected EList<InputEvent> inputEvents;
 
 	/**
 	 * The cached value of the '{@link #getEventDefinitions() <em>Event Definitions</em>}' containment reference list.
@@ -117,9 +116,9 @@ public class ComponentDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 */
 	@Override
-	public EList<IntputEvent> getInputEvents() {
+	public EList<InputEvent> getInputEvents() {
 		if (inputEvents == null) {
-			inputEvents = new EObjectContainmentEList<IntputEvent>(IntputEvent.class, this, CftPackage.COMPONENT_DEFINITION__INPUT_EVENTS);
+			inputEvents = new EObjectContainmentEList<InputEvent>(InputEvent.class, this, CftPackage.COMPONENT_DEFINITION__INPUT_EVENTS);
 		}
 		return inputEvents;
 	}
@@ -220,7 +219,7 @@ public class ComponentDefinitionImpl extends MinimalEObjectImpl.Container implem
 		switch (featureID) {
 			case CftPackage.COMPONENT_DEFINITION__INPUT_EVENTS:
 				getInputEvents().clear();
-				getInputEvents().addAll((Collection<? extends IntputEvent>)newValue);
+				getInputEvents().addAll((Collection<? extends InputEvent>)newValue);
 				return;
 			case CftPackage.COMPONENT_DEFINITION__EVENT_DEFINITIONS:
 				getEventDefinitions().clear();
