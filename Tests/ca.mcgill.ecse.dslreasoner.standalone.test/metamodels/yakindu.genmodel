@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/ca.mcgill.ecse.dslreasoner.standalone.test/src"
+    modelPluginID="ca.mcgill.ecse.dslreasoner.standalone.test" modelName="Yakindu"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>yakindu.ecore</foreignModel>
+  <genPackages prefix="yakindu" basePackage="ca.mcgill.ecse.dslreasoner.standalone.test"
+      disposableProviderFactory="true" ecorePackage="yakindu.ecore#/">
+    <genClasses image="false" ecoreClass="yakindu.ecore#//Pseudostate"/>
+    <genClasses image="false" ecoreClass="yakindu.ecore#//Vertex">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference yakindu.ecore#//Vertex/incomingTransitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference yakindu.ecore#//Vertex/outgoingTransitions"/>
+    </genClasses>
+    <genClasses ecoreClass="yakindu.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference yakindu.ecore#//Region/vertices"/>
+    </genClasses>
+    <genClasses ecoreClass="yakindu.ecore#//Transition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference yakindu.ecore#//Transition/target"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference yakindu.ecore#//Transition/source"/>
+    </genClasses>
+    <genClasses ecoreClass="yakindu.ecore#//Statechart"/>
+    <genClasses ecoreClass="yakindu.ecore#//Entry"/>
+    <genClasses ecoreClass="yakindu.ecore#//Synchronization"/>
+    <genClasses ecoreClass="yakindu.ecore#//State"/>
+    <genClasses image="false" ecoreClass="yakindu.ecore#//RegularState"/>
+    <genClasses image="false" ecoreClass="yakindu.ecore#//CompositeElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference yakindu.ecore#//CompositeElement/regions"/>
+    </genClasses>
+    <genClasses ecoreClass="yakindu.ecore#//Choice"/>
+    <genClasses ecoreClass="yakindu.ecore#//Exit"/>
+    <genClasses ecoreClass="yakindu.ecore#//FinalState"/>
+  </genPackages>
+</genmodel:GenModel>

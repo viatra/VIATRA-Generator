@@ -1,0 +1,32 @@
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;441;2068;2486;3217702419;62;29;140;4;0;2
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;463;2860;2654;3199911479;74;37;138;5;0;3
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;499;2201;2467;3339884626;68;36;141;4;0;2
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;452;2821;2223;3526490298;59;27;122;5;0;2
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;_Solution2FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;11;1529;1717;4396467206;87;94;100;54;17;4;0;3
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;_Solution2FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;15;1411;1457;4222415279;54;68;77;36;10;4;0;5
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;9;1335;1288;2769089958;64;74;31;12;1;0;2
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;4;1180;1189;2923747093;50;58;26;10;1;0;1
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;839;2519;2455;3266543842;68;33;193;5;0;3
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;11;2019;1948;3337962573;91;104;53;16;2;0;3
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;1719;3345;2829;7904668959;235;261;107;497;53;0;6
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;13;1736;1740;2852471270;62;73;37;19;1;0;2
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;529;2502;2857;3681787432;68;30;125;4;0;2
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;788;2572;2188;3322713636;67;30;148;5;0;4
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;443;2849;2573;4906642931;151;171;75;124;7;0;8
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;_Solution2FoundAt;_Solution3FoundAt;_Solution4FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+2;1;ModelResultImpl;19;4315;9042;20459725100;239;247;252;257;261;217;19;6;0;11
