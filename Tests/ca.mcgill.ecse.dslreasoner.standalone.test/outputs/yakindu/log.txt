@@ -1,0 +1,1 @@
+Model generation startedProblem is consistent, 2 models are generated!Models:         [1.xmi][2.xmi]Visualisations: [1.gml][2.gml]Visualisations: [1.png][2.png]Model generation finished

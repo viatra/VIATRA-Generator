@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated fam -->
+      <package
+            uri="FamMetamodel"
+            class="ca.mcgill.ecse.dslreasoner.standalone.test.fam.famPackage"
+            genModel="metamodels/fam.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated yakindu -->
+      <package
+            uri="YakinduMetamodel"
+            class="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage"
+            genModel="metamodels/yakindu.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated filesystem -->
+      <package
+            uri="FileSystemMetamodel"
+            class="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage"
+            genModel="metamodels/filesystem.genmodel"/>
+   </extension>
+
+</plugin>

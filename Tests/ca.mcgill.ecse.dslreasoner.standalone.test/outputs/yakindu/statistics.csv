@@ -1,0 +1,2 @@
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;_Solution1FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
+1;1;ModelResultImpl;335;2777;2544;7194393100;105;140;61;186;9;0;3

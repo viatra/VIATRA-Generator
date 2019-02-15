@@ -1,0 +1,103 @@
+package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries
+
+import "FamMetamodel"
+
+@Constraint(message="terminatorAndInformation", severity="error", key={T})
+pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
+	FunctionalOutput.outgoingLinks(Out,I);
+	FunctionalOutput.terminator(Out,T); 
+} or {
+	InformationLink.to(I,In);
+	FunctionalInput.terminator(In,T);
+}
+
+@QueryBasedFeature 
+pattern type(This : Function, Target : FunctionType) = {
+	find rootElements(_Model, This);
+	Target == FunctionType::Root;
+} or {
+	neg find parent(_Child, This);
+	neg find rootElements(_Model, This);
+	Target == FunctionType::Leaf;
+} or  {
+	find parent(This, _Par);
+	find parent(_Child, This);
+	Target == FunctionType::Intermediate;
+}
+
+pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
+	FunctionalArchitectureModel.rootElements(Model, Root);
+}
+
+pattern parent(Func : Function, Par : Function) = {
+	Function.parent(Func, Par);
+}
+
+@QueryBasedFeature 
+pattern model(This:FunctionalElement, Target: FunctionalArchitectureModel) {
+	FunctionalElement(This);
+	FunctionalArchitectureModel(Target);
+}
+
+/*
+@Constraint(message="noRoot", severity="error", key={fam})
+pattern noRoot(fam: FunctionalArchitectureModel) {
+	FunctionalArchitectureModel(fam);
+	neg find hasRoot(_);
+}
+@Constraint(message="noIntermediate", severity="error", key={fam})
+pattern noInt(fam: FunctionalArchitectureModel) {
+	FunctionalArchitectureModel(fam);
+	neg find hasInt(_);
+}
+@Constraint(message="noLeaf", severity="error", key={fam})
+pattern noLeaf(fam: FunctionalArchitectureModel) {
+	FunctionalArchitectureModel(fam);
+	neg find hasLeaf(_);
+}
+*/
+
+/*
+@QueryBasedFeature
+pattern model(This : FunctionalElement, Target : FunctionalArchitectureModel) = {
+	find parent+(This, Parent);
+	find rootElements(Target, Parent);
+} or {
+	find rootElements(Target, This);
+}
+
+pattern interfaceData(FI : FunctionalInterface, FD : FunctionalData) = {
+	FunctionalInterface.data(FI, FD);
+}
+
+@QueryBasedFeature
+pattern inputs(This : FunctionalInterface, Target : FunctionalInput) = {
+	find interfaceData(This, Target);
+}
+
+@QueryBasedFeature
+pattern outputs(This : FunctionalInterface, Target : FunctionalOutput) = {
+	find interfaceData(This, Target);
+}
+
+@QueryBasedFeature
+pattern outgoingLinks(This : FunctionalElement, Target : InformationLink) = {
+	FunctionalElement.interface.outputs(This, Output);
+	InformationLink.from(Target, Output);
+}
+
+@QueryBasedFeature
+pattern incomingLinks(This : FunctionalElement, Target : InformationLink) = {
+	FunctionalElement.interface.inputs(This, Input);
+	InformationLink.to(Target, Input);
+}
+
+@QueryBasedFeature
+pattern connects(This : FunctionalElement, Target : FunctionalElement) = {
+	FunctionalElement.outgoingLinks(This,Link);
+	FunctionalElement.incomingLinks(Target,Link);
+}*/
+
+/*pattern frequency(a: Function, b : EInt) {
+	Function.minimumFrequency(a,b);
+}*/
