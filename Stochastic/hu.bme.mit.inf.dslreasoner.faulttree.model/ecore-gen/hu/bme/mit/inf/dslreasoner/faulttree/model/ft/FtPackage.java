@@ -57,6 +57,34 @@ public interface FtPackage extends EPackage {
 	FtPackage eINSTANCE = hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ReliabilityModelImpl <em>Reliability Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ReliabilityModelImpl
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getReliabilityModel()
+	 * @generated
+	 */
+	int RELIABILITY_MODEL = 10;
+
+	/**
+	 * The number of structural features of the '<em>Reliability Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELIABILITY_MODEL_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Reliability Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELIABILITY_MODEL_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FaultTreeImpl <em>Fault Tree</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,7 +101,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAULT_TREE__EVENTS = 0;
+	int FAULT_TREE__EVENTS = RELIABILITY_MODEL_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Top Event</b></em>' reference.
@@ -82,7 +110,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAULT_TREE__TOP_EVENT = 1;
+	int FAULT_TREE__TOP_EVENT = RELIABILITY_MODEL_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Fault Tree</em>' class.
@@ -91,7 +119,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAULT_TREE_FEATURE_COUNT = 2;
+	int FAULT_TREE_FEATURE_COUNT = RELIABILITY_MODEL_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Fault Tree</em>' class.
@@ -100,7 +128,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAULT_TREE_OPERATION_COUNT = 0;
+	int FAULT_TREE_OPERATION_COUNT = RELIABILITY_MODEL_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.EventImpl <em>Event</em>}' class.
@@ -110,16 +138,7 @@ public interface FtPackage extends EPackage {
 	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getEvent()
 	 * @generated
 	 */
-	int EVENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__NAME = 0;
+	int EVENT = 12;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -128,7 +147,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = 1;
+	int EVENT_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Event</em>' class.
@@ -138,6 +157,43 @@ public interface FtPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.RandomEventImpl <em>Random Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.RandomEventImpl
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getRandomEvent()
+	 * @generated
+	 */
+	int RANDOM_EVENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOM_EVENT__NAME = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Random Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOM_EVENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Random Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANDOM_EVENT_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.BasicEventImpl <em>Basic Event</em>}' class.
@@ -156,7 +212,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EVENT__NAME = EVENT__NAME;
+	int BASIC_EVENT__NAME = RANDOM_EVENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Distribution</b></em>' containment reference.
@@ -165,7 +221,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EVENT__DISTRIBUTION = EVENT_FEATURE_COUNT + 0;
+	int BASIC_EVENT__DISTRIBUTION = RANDOM_EVENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Basic Event</em>' class.
@@ -174,7 +230,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EVENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int BASIC_EVENT_FEATURE_COUNT = RANDOM_EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Basic Event</em>' class.
@@ -183,7 +239,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_EVENT_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
+	int BASIC_EVENT_OPERATION_COUNT = RANDOM_EVENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.GateImpl <em>Gate</em>}' class.
@@ -202,7 +258,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__NAME = EVENT__NAME;
+	int GATE__NAME = RANDOM_EVENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Input Events</b></em>' reference list.
@@ -211,7 +267,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__INPUT_EVENTS = EVENT_FEATURE_COUNT + 0;
+	int GATE__INPUT_EVENTS = RANDOM_EVENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Gate</em>' class.
@@ -220,7 +276,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int GATE_FEATURE_COUNT = RANDOM_EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Gate</em>' class.
@@ -229,7 +285,7 @@ public interface FtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
+	int GATE_OPERATION_COUNT = RANDOM_EVENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.DistributionImpl <em>Distribution</em>}' class.
@@ -463,22 +519,13 @@ public interface FtPackage extends EPackage {
 	int KOF_MGATE__K = GATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>M</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KOF_MGATE__M = GATE_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>KOf MGate</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KOF_MGATE_FEATURE_COUNT = GATE_FEATURE_COUNT + 2;
+	int KOF_MGATE_FEATURE_COUNT = GATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>KOf MGate</em>' class.
@@ -488,6 +535,80 @@ public interface FtPackage extends EPackage {
 	 * @ordered
 	 */
 	int KOF_MGATE_OPERATION_COUNT = GATE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantModelImpl <em>Constant Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantModelImpl
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getConstantModel()
+	 * @generated
+	 */
+	int CONSTANT_MODEL = 11;
+
+	/**
+	 * The feature id for the '<em><b>Failed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_MODEL__FAILED = RELIABILITY_MODEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constant Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_MODEL_FEATURE_COUNT = RELIABILITY_MODEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Constant Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_MODEL_OPERATION_COUNT = RELIABILITY_MODEL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantEventImpl <em>Constant Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantEventImpl
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getConstantEvent()
+	 * @generated
+	 */
+	int CONSTANT_EVENT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Failed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_EVENT__FAILED = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constant Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_EVENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Constant Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_EVENT_OPERATION_COUNT = EVENT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -523,25 +644,25 @@ public interface FtPackage extends EPackage {
 	EReference getFaultTree_TopEvent();
 
 	/**
-	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event <em>Event</em>}'.
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent <em>Random Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Event</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event
+	 * @return the meta object for class '<em>Random Event</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent
 	 * @generated
 	 */
-	EClass getEvent();
+	EClass getRandomEvent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event#getName()
-	 * @see #getEvent()
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent#getName()
+	 * @see #getRandomEvent()
 	 * @generated
 	 */
-	EAttribute getEvent_Name();
+	EAttribute getRandomEvent_Name();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.BasicEvent <em>Basic Event</em>}'.
@@ -679,15 +800,66 @@ public interface FtPackage extends EPackage {
 	EAttribute getKOfMGate_K();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.KOfMGate#getM <em>M</em>}'.
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ReliabilityModel <em>Reliability Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>M</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.KOfMGate#getM()
-	 * @see #getKOfMGate()
+	 * @return the meta object for class '<em>Reliability Model</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ReliabilityModel
 	 * @generated
 	 */
-	EAttribute getKOfMGate_M();
+	EClass getReliabilityModel();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel <em>Constant Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Model</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel
+	 * @generated
+	 */
+	EClass getConstantModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel#isFailed <em>Failed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Failed</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel#isFailed()
+	 * @see #getConstantModel()
+	 * @generated
+	 */
+	EAttribute getConstantModel_Failed();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event
+	 * @generated
+	 */
+	EClass getEvent();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent <em>Constant Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Event</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent
+	 * @generated
+	 */
+	EClass getConstantEvent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent#isFailed <em>Failed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Failed</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent#isFailed()
+	 * @see #getConstantEvent()
+	 * @generated
+	 */
+	EAttribute getConstantEvent_Failed();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -739,14 +911,14 @@ public interface FtPackage extends EPackage {
 		EReference FAULT_TREE__TOP_EVENT = eINSTANCE.getFaultTree_TopEvent();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.EventImpl <em>Event</em>}' class.
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.RandomEventImpl <em>Random Event</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.EventImpl
-		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getEvent()
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.RandomEventImpl
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getRandomEvent()
 		 * @generated
 		 */
-		EClass EVENT = eINSTANCE.getEvent();
+		EClass RANDOM_EVENT = eINSTANCE.getRandomEvent();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -754,7 +926,7 @@ public interface FtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
+		EAttribute RANDOM_EVENT__NAME = eINSTANCE.getRandomEvent_Name();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.BasicEventImpl <em>Basic Event</em>}' class.
@@ -877,12 +1049,60 @@ public interface FtPackage extends EPackage {
 		EAttribute KOF_MGATE__K = eINSTANCE.getKOfMGate_K();
 
 		/**
-		 * The meta object literal for the '<em><b>M</b></em>' attribute feature.
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ReliabilityModelImpl <em>Reliability Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ReliabilityModelImpl
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getReliabilityModel()
+		 * @generated
+		 */
+		EClass RELIABILITY_MODEL = eINSTANCE.getReliabilityModel();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantModelImpl <em>Constant Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantModelImpl
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getConstantModel()
+		 * @generated
+		 */
+		EClass CONSTANT_MODEL = eINSTANCE.getConstantModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Failed</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KOF_MGATE__M = eINSTANCE.getKOfMGate_M();
+		EAttribute CONSTANT_MODEL__FAILED = eINSTANCE.getConstantModel_Failed();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.EventImpl <em>Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.EventImpl
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getEvent()
+		 * @generated
+		 */
+		EClass EVENT = eINSTANCE.getEvent();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantEventImpl <em>Constant Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.ConstantEventImpl
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.FtPackageImpl#getConstantEvent()
+		 * @generated
+		 */
+		EClass CONSTANT_EVENT = eINSTANCE.getConstantEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Failed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTANT_EVENT__FAILED = eINSTANCE.getConstantEvent_Failed();
 
 	}
 

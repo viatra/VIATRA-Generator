@@ -20,10 +20,10 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface Gate extends Event {
+public interface Gate extends RandomEvent {
 	/**
 	 * Returns the value of the '<em><b>Input Events</b></em>' reference list.
-	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event}.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Input Events</em>' reference list isn't clear,
@@ -32,9 +32,9 @@ public interface Gate extends Event {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input Events</em>' reference list.
 	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage#getGate_InputEvents()
-	 * @model
+	 * @model lower="2"
 	 * @generated
 	 */
-	EList<Event> getInputEvents();
+	EList<RandomEvent> getInputEvents();
 
 } // Gate

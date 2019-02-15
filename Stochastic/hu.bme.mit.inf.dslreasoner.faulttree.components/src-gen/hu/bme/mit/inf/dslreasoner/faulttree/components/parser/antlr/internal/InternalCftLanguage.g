@@ -575,9 +575,9 @@ ruleConstantDistribution returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='p'
+		otherlv_0='prob'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getConstantDistributionAccess().getPKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getConstantDistributionAccess().getProbKeyword_0());
 		}
 		otherlv_1='='
 		{
@@ -1494,19 +1494,20 @@ ruleComponentInstance returns [EObject current=null]
 		)
 		(
 			(
-				lv_name_2_0=RULE_ID
 				{
-					newLeafNode(lv_name_2_0, grammarAccess.getComponentInstanceAccess().getNameIDTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getComponentInstanceAccess().getNameValidIdParserRuleCall_2_0());
 				}
+				lv_name_2_0=ruleValidId
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getComponentInstanceRule());
+						$current = createModelElementForParent(grammarAccess.getComponentInstanceRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"name",
 						lv_name_2_0,
-						"org.eclipse.xtext.common.Terminals.ID");
+						"hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ValidId");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)?

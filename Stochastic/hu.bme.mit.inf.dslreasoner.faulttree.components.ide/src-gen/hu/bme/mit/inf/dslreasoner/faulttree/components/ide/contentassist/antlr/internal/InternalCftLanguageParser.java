@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCftLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_OF_INT", "RULE_INT", "RULE_T_DOUBLE", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "':='", "'package'", "';'", "'import'", "'cft'", "'{'", "'}'", "'in'", "'out'", "'p'", "'='", "'lambda'", "'and'", "'or'", "'of'", "'transformation'", "'mapping'", "'('", "')'", "','", "'lookup'", "'as'", "'.'", "'=>'", "'*'", "'[]'", "'toplevel'", "'+='"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_OF_INT", "RULE_INT", "RULE_T_DOUBLE", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "':='", "'package'", "';'", "'import'", "'cft'", "'{'", "'}'", "'in'", "'out'", "'prob'", "'='", "'lambda'", "'and'", "'or'", "'of'", "'transformation'", "'mapping'", "'('", "')'", "','", "'lookup'", "'as'", "'.'", "'=>'", "'*'", "'[]'", "'toplevel'", "'+='"
     };
     public static final int RULE_STRING=8;
     public static final int RULE_SL_COMMENT=10;
@@ -4992,21 +4992,21 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ConstantDistribution__Group__0__Impl"
-    // InternalCftLanguage.g:1561:1: rule__ConstantDistribution__Group__0__Impl : ( 'p' ) ;
+    // InternalCftLanguage.g:1561:1: rule__ConstantDistribution__Group__0__Impl : ( 'prob' ) ;
     public final void rule__ConstantDistribution__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCftLanguage.g:1565:1: ( ( 'p' ) )
-            // InternalCftLanguage.g:1566:1: ( 'p' )
+            // InternalCftLanguage.g:1565:1: ( ( 'prob' ) )
+            // InternalCftLanguage.g:1566:1: ( 'prob' )
             {
-            // InternalCftLanguage.g:1566:1: ( 'p' )
-            // InternalCftLanguage.g:1567:2: 'p'
+            // InternalCftLanguage.g:1566:1: ( 'prob' )
+            // InternalCftLanguage.g:1567:2: 'prob'
             {
-             before(grammarAccess.getConstantDistributionAccess().getPKeyword_0()); 
+             before(grammarAccess.getConstantDistributionAccess().getProbKeyword_0()); 
             match(input,22,FOLLOW_2); 
-             after(grammarAccess.getConstantDistributionAccess().getPKeyword_0()); 
+             after(grammarAccess.getConstantDistributionAccess().getProbKeyword_0()); 
 
             }
 
@@ -9567,7 +9567,7 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
             // InternalCftLanguage.g:3065:1: ( rule__ComponentInstance__Group__1__Impl rule__ComponentInstance__Group__2 )
             // InternalCftLanguage.g:3066:2: rule__ComponentInstance__Group__1__Impl rule__ComponentInstance__Group__2
             {
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_3);
             rule__ComponentInstance__Group__1__Impl();
 
             state._fsp--;
@@ -9693,7 +9693,7 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
             int alt28=2;
             int LA28_0 = input.LA(1);
 
-            if ( (LA28_0==RULE_ID) ) {
+            if ( ((LA28_0>=RULE_ID && LA28_0<=RULE_OF_INT)) ) {
                 alt28=1;
             }
             switch (alt28) {
@@ -9880,7 +9880,7 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
             	case 1 :
             	    // InternalCftLanguage.g:3160:3: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_35);
+            	    pushFollow(FOLLOW_34);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -10245,7 +10245,7 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
             // InternalCftLanguage.g:3281:1: ( rule__QualifiedNameWithWildcard__Group_1__0__Impl rule__QualifiedNameWithWildcard__Group_1__1 )
             // InternalCftLanguage.g:3282:2: rule__QualifiedNameWithWildcard__Group_1__0__Impl rule__QualifiedNameWithWildcard__Group_1__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_35);
             rule__QualifiedNameWithWildcard__Group_1__0__Impl();
 
             state._fsp--;
@@ -10588,7 +10588,7 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
             // InternalCftLanguage.g:3394:1: ( rule__ComponentDefinition__UnorderedGroup_3__Impl ( rule__ComponentDefinition__UnorderedGroup_3__1 )? )
             // InternalCftLanguage.g:3395:2: rule__ComponentDefinition__UnorderedGroup_3__Impl ( rule__ComponentDefinition__UnorderedGroup_3__1 )?
             {
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_36);
             rule__ComponentDefinition__UnorderedGroup_3__Impl();
 
             state._fsp--;
@@ -12562,21 +12562,25 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ComponentInstance__NameAssignment_2"
-    // InternalCftLanguage.g:4130:1: rule__ComponentInstance__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalCftLanguage.g:4130:1: rule__ComponentInstance__NameAssignment_2 : ( ruleValidId ) ;
     public final void rule__ComponentInstance__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCftLanguage.g:4134:1: ( ( RULE_ID ) )
-            // InternalCftLanguage.g:4135:2: ( RULE_ID )
+            // InternalCftLanguage.g:4134:1: ( ( ruleValidId ) )
+            // InternalCftLanguage.g:4135:2: ( ruleValidId )
             {
-            // InternalCftLanguage.g:4135:2: ( RULE_ID )
-            // InternalCftLanguage.g:4136:3: RULE_ID
+            // InternalCftLanguage.g:4135:2: ( ruleValidId )
+            // InternalCftLanguage.g:4136:3: ruleValidId
             {
-             before(grammarAccess.getComponentInstanceAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getComponentInstanceAccess().getNameIDTerminalRuleCall_2_0()); 
+             before(grammarAccess.getComponentInstanceAccess().getNameValidIdParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleValidId();
+
+            state._fsp--;
+
+             after(grammarAccess.getComponentInstanceAccess().getNameValidIdParserRuleCall_2_0()); 
 
             }
 
@@ -12635,9 +12639,8 @@ public class InternalCftLanguageParser extends AbstractInternalContentAssistPars
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000010000002000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000200000030L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000800000002L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000300002L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000300002L});
 
 }

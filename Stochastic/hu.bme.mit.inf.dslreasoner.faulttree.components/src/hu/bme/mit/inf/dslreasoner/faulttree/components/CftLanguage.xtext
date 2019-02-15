@@ -33,7 +33,7 @@ Distribution returns ft::Distribution:
 	ConstantDistribution | ExponentialDistribution;
 
 ConstantDistribution returns ft::ConstantDistribution:
-	"p" "=" p=Double;
+	"prob" "=" p=Double;
 
 ExponentialDistribution returns ft::ExponentialDistribution:
 	"lambda" "=" lambda=Double;
@@ -80,7 +80,7 @@ EventReference:
 	component=[Variable|ValidId] "." event=[cft::EventDeclaration|ValidId];
 
 ComponentInstance:
-	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?;
+	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ValidId?;
 
 QualifiedName returns ecore::EString:
 	ValidId ("." ValidId)*;

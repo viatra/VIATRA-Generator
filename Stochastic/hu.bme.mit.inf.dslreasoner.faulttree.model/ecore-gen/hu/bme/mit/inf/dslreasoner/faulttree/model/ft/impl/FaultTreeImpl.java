@@ -2,9 +2,9 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl;
 
-import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FaultTree;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent;
 
 import java.util.Collection;
 
@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -36,7 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class FaultTreeImpl extends MinimalEObjectImpl.Container implements FaultTree {
+public class FaultTreeImpl extends ReliabilityModelImpl implements FaultTree {
 	/**
 	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -45,7 +44,7 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Event> events;
+	protected EList<RandomEvent> events;
 
 	/**
 	 * The cached value of the '{@link #getTopEvent() <em>Top Event</em>}' reference.
@@ -55,7 +54,7 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 	 * @generated
 	 * @ordered
 	 */
-	protected Event topEvent;
+	protected RandomEvent topEvent;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,9 +81,9 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 	 * @generated
 	 */
 	@Override
-	public EList<Event> getEvents() {
+	public EList<RandomEvent> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentEList<Event>(Event.class, this, FtPackage.FAULT_TREE__EVENTS);
+			events = new EObjectContainmentEList<RandomEvent>(RandomEvent.class, this, FtPackage.FAULT_TREE__EVENTS);
 		}
 		return events;
 	}
@@ -95,10 +94,10 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 	 * @generated
 	 */
 	@Override
-	public Event getTopEvent() {
+	public RandomEvent getTopEvent() {
 		if (topEvent != null && topEvent.eIsProxy()) {
 			InternalEObject oldTopEvent = (InternalEObject)topEvent;
-			topEvent = (Event)eResolveProxy(oldTopEvent);
+			topEvent = (RandomEvent)eResolveProxy(oldTopEvent);
 			if (topEvent != oldTopEvent) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FtPackage.FAULT_TREE__TOP_EVENT, oldTopEvent, topEvent));
@@ -112,7 +111,7 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event basicGetTopEvent() {
+	public RandomEvent basicGetTopEvent() {
 		return topEvent;
 	}
 
@@ -122,8 +121,8 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 	 * @generated
 	 */
 	@Override
-	public void setTopEvent(Event newTopEvent) {
-		Event oldTopEvent = topEvent;
+	public void setTopEvent(RandomEvent newTopEvent) {
+		RandomEvent oldTopEvent = topEvent;
 		topEvent = newTopEvent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FtPackage.FAULT_TREE__TOP_EVENT, oldTopEvent, topEvent));
@@ -171,10 +170,10 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 		switch (featureID) {
 			case FtPackage.FAULT_TREE__EVENTS:
 				getEvents().clear();
-				getEvents().addAll((Collection<? extends Event>)newValue);
+				getEvents().addAll((Collection<? extends RandomEvent>)newValue);
 				return;
 			case FtPackage.FAULT_TREE__TOP_EVENT:
-				setTopEvent((Event)newValue);
+				setTopEvent((RandomEvent)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -192,7 +191,7 @@ public class FaultTreeImpl extends MinimalEObjectImpl.Container implements Fault
 				getEvents().clear();
 				return;
 			case FtPackage.FAULT_TREE__TOP_EVENT:
-				setTopEvent((Event)null);
+				setTopEvent((RandomEvent)null);
 				return;
 		}
 		super.eUnset(featureID);

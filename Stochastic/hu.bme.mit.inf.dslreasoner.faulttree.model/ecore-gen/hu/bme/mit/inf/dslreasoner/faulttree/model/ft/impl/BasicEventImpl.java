@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class BasicEventImpl extends EventImpl implements BasicEvent {
+public class BasicEventImpl extends RandomEventImpl implements BasicEvent {
 	/**
 	 * The cached value of the '{@link #getDistribution() <em>Distribution</em>}' containment reference.
 	 * <!-- begin-user-doc -->

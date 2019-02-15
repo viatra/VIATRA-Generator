@@ -23,5 +23,6 @@ class Ecore2CftTransformation {
 		for (handler : mappingHandlers) {
 			handler.instantiateConnections(trace)
 		}
+		trace.componentFaultTree
 	}
 }

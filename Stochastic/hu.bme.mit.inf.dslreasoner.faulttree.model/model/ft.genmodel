@@ -11,8 +11,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ft.ecore#//FaultTree/events"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ft.ecore#//FaultTree/topEvent"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="ft.ecore#//Event">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//Event/name"/>
+    <genClasses image="false" ecoreClass="ft.ecore#//RandomEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//RandomEvent/name"/>
     </genClasses>
     <genClasses ecoreClass="ft.ecore#//BasicEvent">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ft.ecore#//BasicEvent/distribution"/>
@@ -31,7 +31,14 @@
     <genClasses ecoreClass="ft.ecore#//OrGate"/>
     <genClasses ecoreClass="ft.ecore#//KOfMGate">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//KOfMGate/k"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//KOfMGate/m"/>
+    </genClasses>
+    <genClasses ecoreClass="ft.ecore#//ReliabilityModel"/>
+    <genClasses ecoreClass="ft.ecore#//ConstantModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//ConstantModel/failed"/>
+    </genClasses>
+    <genClasses ecoreClass="ft.ecore#//Event"/>
+    <genClasses ecoreClass="ft.ecore#//ConstantEvent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ft.ecore#//ConstantEvent/failed"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -85,6 +85,24 @@ public interface FtFactory extends EFactory {
 	KOfMGate createKOfMGate();
 
 	/**
+	 * Returns a new object of class '<em>Constant Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Model</em>'.
+	 * @generated
+	 */
+	ConstantModel createConstantModel();
+
+	/**
+	 * Returns a new object of class '<em>Constant Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Event</em>'.
+	 * @generated
+	 */
+	ConstantEvent createConstantEvent();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

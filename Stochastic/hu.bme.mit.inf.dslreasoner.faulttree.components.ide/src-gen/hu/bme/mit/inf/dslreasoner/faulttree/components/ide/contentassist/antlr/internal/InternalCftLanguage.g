@@ -1564,9 +1564,9 @@ rule__ConstantDistribution__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getConstantDistributionAccess().getPKeyword_0()); }
-	'p'
-	{ after(grammarAccess.getConstantDistributionAccess().getPKeyword_0()); }
+	{ before(grammarAccess.getConstantDistributionAccess().getProbKeyword_0()); }
+	'prob'
+	{ after(grammarAccess.getConstantDistributionAccess().getProbKeyword_0()); }
 )
 ;
 finally {
@@ -4133,9 +4133,9 @@ rule__ComponentInstance__NameAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getComponentInstanceAccess().getNameIDTerminalRuleCall_2_0()); }
-		RULE_ID
-		{ after(grammarAccess.getComponentInstanceAccess().getNameIDTerminalRuleCall_2_0()); }
+		{ before(grammarAccess.getComponentInstanceAccess().getNameValidIdParserRuleCall_2_0()); }
+		ruleValidId
+		{ after(grammarAccess.getComponentInstanceAccess().getNameValidIdParserRuleCall_2_0()); }
 	)
 ;
 finally {

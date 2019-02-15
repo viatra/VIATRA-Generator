@@ -19,7 +19,7 @@ package hu.bme.mit.inf.dslreasoner.faulttree.model.ft;
  * @model
  * @generated
  */
-public interface BasicEvent extends Event {
+public interface BasicEvent extends RandomEvent {
 	/**
 	 * Returns the value of the '<em><b>Distribution</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

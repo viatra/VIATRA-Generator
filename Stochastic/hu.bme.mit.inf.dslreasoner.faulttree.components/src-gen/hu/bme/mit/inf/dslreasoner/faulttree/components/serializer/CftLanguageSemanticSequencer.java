@@ -194,7 +194,7 @@ public class CftLanguageSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     ComponentInstance returns ComponentInstance
 	 *
 	 * Constraint:
-	 *     (componentType=[ComponentDefinition|QualifiedName] name=ID?)
+	 *     (componentType=[ComponentDefinition|QualifiedName] name=ValidId?)
 	 */
 	protected void sequence_ComponentInstance(ISerializationContext context, ComponentInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

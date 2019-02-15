@@ -69,18 +69,21 @@ public class FtSwitch<T> extends Switch<T> {
 			case FtPackage.FAULT_TREE: {
 				FaultTree faultTree = (FaultTree)theEObject;
 				T result = caseFaultTree(faultTree);
+				if (result == null) result = caseReliabilityModel(faultTree);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FtPackage.EVENT: {
-				Event event = (Event)theEObject;
-				T result = caseEvent(event);
+			case FtPackage.RANDOM_EVENT: {
+				RandomEvent randomEvent = (RandomEvent)theEObject;
+				T result = caseRandomEvent(randomEvent);
+				if (result == null) result = caseEvent(randomEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FtPackage.BASIC_EVENT: {
 				BasicEvent basicEvent = (BasicEvent)theEObject;
 				T result = caseBasicEvent(basicEvent);
+				if (result == null) result = caseRandomEvent(basicEvent);
 				if (result == null) result = caseEvent(basicEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -88,6 +91,7 @@ public class FtSwitch<T> extends Switch<T> {
 			case FtPackage.GATE: {
 				Gate gate = (Gate)theEObject;
 				T result = caseGate(gate);
+				if (result == null) result = caseRandomEvent(gate);
 				if (result == null) result = caseEvent(gate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -116,6 +120,7 @@ public class FtSwitch<T> extends Switch<T> {
 				AndGate andGate = (AndGate)theEObject;
 				T result = caseAndGate(andGate);
 				if (result == null) result = caseGate(andGate);
+				if (result == null) result = caseRandomEvent(andGate);
 				if (result == null) result = caseEvent(andGate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -124,6 +129,7 @@ public class FtSwitch<T> extends Switch<T> {
 				OrGate orGate = (OrGate)theEObject;
 				T result = caseOrGate(orGate);
 				if (result == null) result = caseGate(orGate);
+				if (result == null) result = caseRandomEvent(orGate);
 				if (result == null) result = caseEvent(orGate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -132,7 +138,34 @@ public class FtSwitch<T> extends Switch<T> {
 				KOfMGate kOfMGate = (KOfMGate)theEObject;
 				T result = caseKOfMGate(kOfMGate);
 				if (result == null) result = caseGate(kOfMGate);
+				if (result == null) result = caseRandomEvent(kOfMGate);
 				if (result == null) result = caseEvent(kOfMGate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FtPackage.RELIABILITY_MODEL: {
+				ReliabilityModel reliabilityModel = (ReliabilityModel)theEObject;
+				T result = caseReliabilityModel(reliabilityModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FtPackage.CONSTANT_MODEL: {
+				ConstantModel constantModel = (ConstantModel)theEObject;
+				T result = caseConstantModel(constantModel);
+				if (result == null) result = caseReliabilityModel(constantModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FtPackage.EVENT: {
+				Event event = (Event)theEObject;
+				T result = caseEvent(event);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FtPackage.CONSTANT_EVENT: {
+				ConstantEvent constantEvent = (ConstantEvent)theEObject;
+				T result = caseConstantEvent(constantEvent);
+				if (result == null) result = caseEvent(constantEvent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,17 +189,17 @@ public class FtSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Random Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Random Event</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEvent(Event object) {
+	public T caseRandomEvent(RandomEvent object) {
 		return null;
 	}
 
@@ -287,6 +320,66 @@ public class FtSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseKOfMGate(KOfMGate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reliability Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reliability Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReliabilityModel(ReliabilityModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantModel(ConstantModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEvent(Event object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantEvent(ConstantEvent object) {
 		return null;
 	}
 

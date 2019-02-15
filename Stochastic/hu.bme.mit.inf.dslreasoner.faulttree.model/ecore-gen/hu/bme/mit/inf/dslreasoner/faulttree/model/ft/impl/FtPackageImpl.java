@@ -5,6 +5,8 @@ package hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.AndGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.BasicEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantDistribution;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Distribution;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ExponentialDistribution;
@@ -14,6 +16,8 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Gate;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.KOfMGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.OrGate;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ReliabilityModel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -41,7 +45,7 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass eventEClass = null;
+	private EClass randomEventEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -98,6 +102,34 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 	 * @generated
 	 */
 	private EClass kOfMGateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reliabilityModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantEventEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -196,8 +228,8 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getEvent() {
-		return eventEClass;
+	public EClass getRandomEvent() {
+		return randomEventEClass;
 	}
 
 	/**
@@ -206,8 +238,8 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getEvent_Name() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(0);
+	public EAttribute getRandomEvent_Name() {
+		return (EAttribute)randomEventEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -346,8 +378,58 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getKOfMGate_M() {
-		return (EAttribute)kOfMGateEClass.getEStructuralFeatures().get(1);
+	public EClass getReliabilityModel() {
+		return reliabilityModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConstantModel() {
+		return constantModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getConstantModel_Failed() {
+		return (EAttribute)constantModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEvent() {
+		return eventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConstantEvent() {
+		return constantEventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getConstantEvent_Failed() {
+		return (EAttribute)constantEventEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -383,8 +465,8 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 		createEReference(faultTreeEClass, FAULT_TREE__EVENTS);
 		createEReference(faultTreeEClass, FAULT_TREE__TOP_EVENT);
 
-		eventEClass = createEClass(EVENT);
-		createEAttribute(eventEClass, EVENT__NAME);
+		randomEventEClass = createEClass(RANDOM_EVENT);
+		createEAttribute(randomEventEClass, RANDOM_EVENT__NAME);
 
 		basicEventEClass = createEClass(BASIC_EVENT);
 		createEReference(basicEventEClass, BASIC_EVENT__DISTRIBUTION);
@@ -406,7 +488,16 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 
 		kOfMGateEClass = createEClass(KOF_MGATE);
 		createEAttribute(kOfMGateEClass, KOF_MGATE__K);
-		createEAttribute(kOfMGateEClass, KOF_MGATE__M);
+
+		reliabilityModelEClass = createEClass(RELIABILITY_MODEL);
+
+		constantModelEClass = createEClass(CONSTANT_MODEL);
+		createEAttribute(constantModelEClass, CONSTANT_MODEL__FAILED);
+
+		eventEClass = createEClass(EVENT);
+
+		constantEventEClass = createEClass(CONSTANT_EVENT);
+		createEAttribute(constantEventEClass, CONSTANT_EVENT__FAILED);
 	}
 
 	/**
@@ -437,27 +528,31 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		basicEventEClass.getESuperTypes().add(this.getEvent());
-		gateEClass.getESuperTypes().add(this.getEvent());
+		faultTreeEClass.getESuperTypes().add(this.getReliabilityModel());
+		randomEventEClass.getESuperTypes().add(this.getEvent());
+		basicEventEClass.getESuperTypes().add(this.getRandomEvent());
+		gateEClass.getESuperTypes().add(this.getRandomEvent());
 		constantDistributionEClass.getESuperTypes().add(this.getDistribution());
 		exponentialDistributionEClass.getESuperTypes().add(this.getDistribution());
 		andGateEClass.getESuperTypes().add(this.getGate());
 		orGateEClass.getESuperTypes().add(this.getGate());
 		kOfMGateEClass.getESuperTypes().add(this.getGate());
+		constantModelEClass.getESuperTypes().add(this.getReliabilityModel());
+		constantEventEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(faultTreeEClass, FaultTree.class, "FaultTree", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFaultTree_Events(), this.getEvent(), null, "events", null, 0, -1, FaultTree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFaultTree_TopEvent(), this.getEvent(), null, "topEvent", null, 1, 1, FaultTree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFaultTree_Events(), this.getRandomEvent(), null, "events", null, 0, -1, FaultTree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFaultTree_TopEvent(), this.getRandomEvent(), null, "topEvent", null, 1, 1, FaultTree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(randomEventEClass, RandomEvent.class, "RandomEvent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRandomEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, RandomEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(basicEventEClass, BasicEvent.class, "BasicEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBasicEvent_Distribution(), this.getDistribution(), null, "distribution", null, 1, 1, BasicEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(gateEClass, Gate.class, "Gate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGate_InputEvents(), this.getEvent(), null, "inputEvents", null, 0, -1, Gate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGate_InputEvents(), this.getRandomEvent(), null, "inputEvents", null, 2, -1, Gate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(distributionEClass, Distribution.class, "Distribution", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -473,7 +568,16 @@ public class FtPackageImpl extends EPackageImpl implements FtPackage {
 
 		initEClass(kOfMGateEClass, KOfMGate.class, "KOfMGate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKOfMGate_K(), ecorePackage.getEInt(), "k", null, 0, 1, KOfMGate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKOfMGate_M(), ecorePackage.getEInt(), "m", null, 0, 1, KOfMGate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(reliabilityModelEClass, ReliabilityModel.class, "ReliabilityModel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constantModelEClass, ConstantModel.class, "ConstantModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConstantModel_Failed(), ecorePackage.getEBoolean(), "failed", null, 0, 1, ConstantModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constantEventEClass, ConstantEvent.class, "ConstantEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConstantEvent_Failed(), ecorePackage.getEBoolean(), "failed", null, 0, 1, ConstantEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

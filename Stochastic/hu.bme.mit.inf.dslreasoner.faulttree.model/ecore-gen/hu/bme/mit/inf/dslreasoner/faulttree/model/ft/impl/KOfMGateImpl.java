@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.KOfMGateImpl#getK <em>K</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl.KOfMGateImpl#getM <em>M</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,26 +44,6 @@ public class KOfMGateImpl extends GateImpl implements KOfMGate {
 	 * @ordered
 	 */
 	protected int k = K_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getM() <em>M</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getM()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int M_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getM() <em>M</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getM()
-	 * @generated
-	 * @ordered
-	 */
-	protected int m = M_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,35 +93,10 @@ public class KOfMGateImpl extends GateImpl implements KOfMGate {
 	 * @generated
 	 */
 	@Override
-	public int getM() {
-		return m;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setM(int newM) {
-		int oldM = m;
-		m = newM;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FtPackage.KOF_MGATE__M, oldM, m));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FtPackage.KOF_MGATE__K:
 				return getK();
-			case FtPackage.KOF_MGATE__M:
-				return getM();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,9 +111,6 @@ public class KOfMGateImpl extends GateImpl implements KOfMGate {
 		switch (featureID) {
 			case FtPackage.KOF_MGATE__K:
 				setK((Integer)newValue);
-				return;
-			case FtPackage.KOF_MGATE__M:
-				setM((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,9 +127,6 @@ public class KOfMGateImpl extends GateImpl implements KOfMGate {
 			case FtPackage.KOF_MGATE__K:
 				setK(K_EDEFAULT);
 				return;
-			case FtPackage.KOF_MGATE__M:
-				setM(M_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,8 +141,6 @@ public class KOfMGateImpl extends GateImpl implements KOfMGate {
 		switch (featureID) {
 			case FtPackage.KOF_MGATE__K:
 				return k != K_EDEFAULT;
-			case FtPackage.KOF_MGATE__M:
-				return m != M_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -211,8 +157,6 @@ public class KOfMGateImpl extends GateImpl implements KOfMGate {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (k: ");
 		result.append(k);
-		result.append(", m: ");
-		result.append(m);
 		result.append(')');
 		return result.toString();
 	}

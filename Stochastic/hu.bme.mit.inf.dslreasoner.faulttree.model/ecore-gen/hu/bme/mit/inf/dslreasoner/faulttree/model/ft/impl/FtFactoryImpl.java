@@ -63,6 +63,8 @@ public class FtFactoryImpl extends EFactoryImpl implements FtFactory {
 			case FtPackage.AND_GATE: return createAndGate();
 			case FtPackage.OR_GATE: return createOrGate();
 			case FtPackage.KOF_MGATE: return createKOfMGate();
+			case FtPackage.CONSTANT_MODEL: return createConstantModel();
+			case FtPackage.CONSTANT_EVENT: return createConstantEvent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +145,28 @@ public class FtFactoryImpl extends EFactoryImpl implements FtFactory {
 	public KOfMGate createKOfMGate() {
 		KOfMGateImpl kOfMGate = new KOfMGateImpl();
 		return kOfMGate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConstantModel createConstantModel() {
+		ConstantModelImpl constantModel = new ConstantModelImpl();
+		return constantModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConstantEvent createConstantEvent() {
+		ConstantEventImpl constantEvent = new ConstantEventImpl();
+		return constantEvent;
 	}
 
 	/**

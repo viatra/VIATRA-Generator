@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_OF_INT", "RULE_ID", "RULE_T_DOUBLE", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'package'", "';'", "'import'", "'cft'", "'{'", "'in'", "'out'", "'}'", "'[]'", "'p'", "'='", "'lambda'", "'and'", "'or'", "'of'", "'transformation'", "'toplevel'", "'mapping'", "'('", "','", "')'", "'lookup'", "'as'", "'+='", "':='", "'.'", "'=>'", "'*'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_OF_INT", "RULE_ID", "RULE_T_DOUBLE", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'package'", "';'", "'import'", "'cft'", "'{'", "'in'", "'out'", "'}'", "'[]'", "'prob'", "'='", "'lambda'", "'and'", "'or'", "'of'", "'transformation'", "'toplevel'", "'mapping'", "'('", "','", "')'", "'lookup'", "'as'", "'+='", "':='", "'.'", "'=>'", "'*'"
     };
     public static final int RULE_STRING=8;
     public static final int RULE_SL_COMMENT=10;
@@ -1549,7 +1549,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConstantDistribution"
-    // InternalCftLanguage.g:570:1: ruleConstantDistribution returns [EObject current=null] : (otherlv_0= 'p' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) ) ;
+    // InternalCftLanguage.g:570:1: ruleConstantDistribution returns [EObject current=null] : (otherlv_0= 'prob' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) ) ;
     public final EObject ruleConstantDistribution() throws RecognitionException {
         EObject current = null;
 
@@ -1562,15 +1562,15 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCftLanguage.g:576:2: ( (otherlv_0= 'p' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) ) )
-            // InternalCftLanguage.g:577:2: (otherlv_0= 'p' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) )
+            // InternalCftLanguage.g:576:2: ( (otherlv_0= 'prob' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) ) )
+            // InternalCftLanguage.g:577:2: (otherlv_0= 'prob' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) )
             {
-            // InternalCftLanguage.g:577:2: (otherlv_0= 'p' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) )
-            // InternalCftLanguage.g:578:3: otherlv_0= 'p' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) )
+            // InternalCftLanguage.g:577:2: (otherlv_0= 'prob' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) ) )
+            // InternalCftLanguage.g:578:3: otherlv_0= 'prob' otherlv_1= '=' ( (lv_p_2_0= ruleDouble ) )
             {
             otherlv_0=(Token)match(input,22,FOLLOW_15); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getConstantDistributionAccess().getPKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getConstantDistributionAccess().getProbKeyword_0());
             		
             otherlv_1=(Token)match(input,23,FOLLOW_16); 
 
@@ -3861,22 +3861,23 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleComponentInstance"
-    // InternalCftLanguage.g:1467:1: ruleComponentInstance returns [EObject current=null] : (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= RULE_ID ) )? ) ;
+    // InternalCftLanguage.g:1467:1: ruleComponentInstance returns [EObject current=null] : (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= ruleValidId ) )? ) ;
     public final EObject ruleComponentInstance() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
-        Token lv_name_2_0=null;
+        AntlrDatatypeRuleToken lv_name_2_0 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalCftLanguage.g:1473:2: ( (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= RULE_ID ) )? ) )
-            // InternalCftLanguage.g:1474:2: (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= RULE_ID ) )? )
+            // InternalCftLanguage.g:1473:2: ( (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= ruleValidId ) )? ) )
+            // InternalCftLanguage.g:1474:2: (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= ruleValidId ) )? )
             {
-            // InternalCftLanguage.g:1474:2: (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= RULE_ID ) )? )
-            // InternalCftLanguage.g:1475:3: otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= RULE_ID ) )?
+            // InternalCftLanguage.g:1474:2: (otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= ruleValidId ) )? )
+            // InternalCftLanguage.g:1475:3: otherlv_0= '=>' ( ( ruleQualifiedName ) ) ( (lv_name_2_0= ruleValidId ) )?
             {
             otherlv_0=(Token)match(input,39,FOLLOW_3); 
 
@@ -3896,7 +3897,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
             					newCompositeNode(grammarAccess.getComponentInstanceAccess().getComponentTypeComponentDefinitionCrossReference_1_0());
             				
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_18);
             ruleQualifiedName();
 
             state._fsp--;
@@ -3910,33 +3911,38 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalCftLanguage.g:1495:3: ( (lv_name_2_0= RULE_ID ) )?
+            // InternalCftLanguage.g:1495:3: ( (lv_name_2_0= ruleValidId ) )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
-            if ( (LA26_0==RULE_ID) ) {
+            if ( ((LA26_0>=RULE_OF_INT && LA26_0<=RULE_ID)) ) {
                 alt26=1;
             }
             switch (alt26) {
                 case 1 :
-                    // InternalCftLanguage.g:1496:4: (lv_name_2_0= RULE_ID )
+                    // InternalCftLanguage.g:1496:4: (lv_name_2_0= ruleValidId )
                     {
-                    // InternalCftLanguage.g:1496:4: (lv_name_2_0= RULE_ID )
-                    // InternalCftLanguage.g:1497:5: lv_name_2_0= RULE_ID
+                    // InternalCftLanguage.g:1496:4: (lv_name_2_0= ruleValidId )
+                    // InternalCftLanguage.g:1497:5: lv_name_2_0= ruleValidId
                     {
-                    lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-                    					newLeafNode(lv_name_2_0, grammarAccess.getComponentInstanceAccess().getNameIDTerminalRuleCall_2_0());
+                    					newCompositeNode(grammarAccess.getComponentInstanceAccess().getNameValidIdParserRuleCall_2_0());
                     				
+                    pushFollow(FOLLOW_2);
+                    lv_name_2_0=ruleValidId();
+
+                    state._fsp--;
+
 
                     					if (current==null) {
-                    						current = createModelElement(grammarAccess.getComponentInstanceRule());
+                    						current = createModelElementForParent(grammarAccess.getComponentInstanceRule());
                     					}
-                    					setWithLastConsumed(
+                    					set(
                     						current,
                     						"name",
                     						lv_name_2_0,
-                    						"org.eclipse.xtext.common.Terminals.ID");
+                    						"hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ValidId");
+                    					afterParserOrEnumRuleCall();
                     				
 
                     }
@@ -3970,7 +3976,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalCftLanguage.g:1517:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // InternalCftLanguage.g:1518:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -3978,8 +3984,8 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCftLanguage.g:1517:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // InternalCftLanguage.g:1518:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // InternalCftLanguage.g:1518:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalCftLanguage.g:1519:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              newCompositeNode(grammarAccess.getQualifiedNameRule()); 
             pushFollow(FOLLOW_1);
@@ -4006,7 +4012,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalCftLanguage.g:1524:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* ) ;
+    // InternalCftLanguage.g:1525:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4020,16 +4026,16 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCftLanguage.g:1530:2: ( (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* ) )
-            // InternalCftLanguage.g:1531:2: (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* )
+            // InternalCftLanguage.g:1531:2: ( (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* ) )
+            // InternalCftLanguage.g:1532:2: (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* )
             {
-            // InternalCftLanguage.g:1531:2: (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* )
-            // InternalCftLanguage.g:1532:3: this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )*
+            // InternalCftLanguage.g:1532:2: (this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )* )
+            // InternalCftLanguage.g:1533:3: this_ValidId_0= ruleValidId (kw= '.' this_ValidId_2= ruleValidId )*
             {
 
             			newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIdParserRuleCall_0());
             		
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_33);
             this_ValidId_0=ruleValidId();
 
             state._fsp--;
@@ -4040,7 +4046,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
             			afterParserOrEnumRuleCall();
             		
-            // InternalCftLanguage.g:1542:3: (kw= '.' this_ValidId_2= ruleValidId )*
+            // InternalCftLanguage.g:1543:3: (kw= '.' this_ValidId_2= ruleValidId )*
             loop27:
             do {
                 int alt27=2;
@@ -4059,7 +4065,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
                 switch (alt27) {
             	case 1 :
-            	    // InternalCftLanguage.g:1543:4: kw= '.' this_ValidId_2= ruleValidId
+            	    // InternalCftLanguage.g:1544:4: kw= '.' this_ValidId_2= ruleValidId
             	    {
             	    kw=(Token)match(input,38,FOLLOW_3); 
 
@@ -4069,7 +4075,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
             	    				newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIdParserRuleCall_1_1());
             	    			
-            	    pushFollow(FOLLOW_34);
+            	    pushFollow(FOLLOW_33);
             	    this_ValidId_2=ruleValidId();
 
             	    state._fsp--;
@@ -4112,7 +4118,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildcard"
-    // InternalCftLanguage.g:1563:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
+    // InternalCftLanguage.g:1564:1: entryRuleQualifiedNameWithWildcard returns [String current=null] : iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF ;
     public final String entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         String current = null;
 
@@ -4120,8 +4126,8 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCftLanguage.g:1563:65: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
-            // InternalCftLanguage.g:1564:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
+            // InternalCftLanguage.g:1564:65: (iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF )
+            // InternalCftLanguage.g:1565:2: iv_ruleQualifiedNameWithWildcard= ruleQualifiedNameWithWildcard EOF
             {
              newCompositeNode(grammarAccess.getQualifiedNameWithWildcardRule()); 
             pushFollow(FOLLOW_1);
@@ -4148,7 +4154,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQualifiedNameWithWildcard"
-    // InternalCftLanguage.g:1570:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? ) ;
+    // InternalCftLanguage.g:1571:1: ruleQualifiedNameWithWildcard returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedNameWithWildcard() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4160,16 +4166,16 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCftLanguage.g:1576:2: ( (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? ) )
-            // InternalCftLanguage.g:1577:2: (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? )
+            // InternalCftLanguage.g:1577:2: ( (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? ) )
+            // InternalCftLanguage.g:1578:2: (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? )
             {
-            // InternalCftLanguage.g:1577:2: (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? )
-            // InternalCftLanguage.g:1578:3: this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )?
+            // InternalCftLanguage.g:1578:2: (this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )? )
+            // InternalCftLanguage.g:1579:3: this_QualifiedName_0= ruleQualifiedName (kw= '.' kw= '*' )?
             {
 
             			newCompositeNode(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0());
             		
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_33);
             this_QualifiedName_0=ruleQualifiedName();
 
             state._fsp--;
@@ -4180,7 +4186,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
             			afterParserOrEnumRuleCall();
             		
-            // InternalCftLanguage.g:1588:3: (kw= '.' kw= '*' )?
+            // InternalCftLanguage.g:1589:3: (kw= '.' kw= '*' )?
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -4189,9 +4195,9 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt28) {
                 case 1 :
-                    // InternalCftLanguage.g:1589:4: kw= '.' kw= '*'
+                    // InternalCftLanguage.g:1590:4: kw= '.' kw= '*'
                     {
-                    kw=(Token)match(input,38,FOLLOW_35); 
+                    kw=(Token)match(input,38,FOLLOW_34); 
 
                     				current.merge(kw);
                     				newLeafNode(kw, grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1_0());
@@ -4230,7 +4236,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleValidId"
-    // InternalCftLanguage.g:1604:1: entryRuleValidId returns [String current=null] : iv_ruleValidId= ruleValidId EOF ;
+    // InternalCftLanguage.g:1605:1: entryRuleValidId returns [String current=null] : iv_ruleValidId= ruleValidId EOF ;
     public final String entryRuleValidId() throws RecognitionException {
         String current = null;
 
@@ -4238,8 +4244,8 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCftLanguage.g:1604:47: (iv_ruleValidId= ruleValidId EOF )
-            // InternalCftLanguage.g:1605:2: iv_ruleValidId= ruleValidId EOF
+            // InternalCftLanguage.g:1605:47: (iv_ruleValidId= ruleValidId EOF )
+            // InternalCftLanguage.g:1606:2: iv_ruleValidId= ruleValidId EOF
             {
              newCompositeNode(grammarAccess.getValidIdRule()); 
             pushFollow(FOLLOW_1);
@@ -4266,7 +4272,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleValidId"
-    // InternalCftLanguage.g:1611:1: ruleValidId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT ) ;
+    // InternalCftLanguage.g:1612:1: ruleValidId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT ) ;
     public final AntlrDatatypeRuleToken ruleValidId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4277,10 +4283,10 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCftLanguage.g:1617:2: ( (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT ) )
-            // InternalCftLanguage.g:1618:2: (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT )
+            // InternalCftLanguage.g:1618:2: ( (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT ) )
+            // InternalCftLanguage.g:1619:2: (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT )
             {
-            // InternalCftLanguage.g:1618:2: (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT )
+            // InternalCftLanguage.g:1619:2: (this_ID_0= RULE_ID | this_OF_INT_1= RULE_OF_INT )
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -4298,7 +4304,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt29) {
                 case 1 :
-                    // InternalCftLanguage.g:1619:3: this_ID_0= RULE_ID
+                    // InternalCftLanguage.g:1620:3: this_ID_0= RULE_ID
                     {
                     this_ID_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -4311,7 +4317,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCftLanguage.g:1627:3: this_OF_INT_1= RULE_OF_INT
+                    // InternalCftLanguage.g:1628:3: this_OF_INT_1= RULE_OF_INT
                     {
                     this_OF_INT_1=(Token)match(input,RULE_OF_INT,FOLLOW_2); 
 
@@ -4346,7 +4352,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDouble"
-    // InternalCftLanguage.g:1638:1: entryRuleDouble returns [String current=null] : iv_ruleDouble= ruleDouble EOF ;
+    // InternalCftLanguage.g:1639:1: entryRuleDouble returns [String current=null] : iv_ruleDouble= ruleDouble EOF ;
     public final String entryRuleDouble() throws RecognitionException {
         String current = null;
 
@@ -4354,8 +4360,8 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCftLanguage.g:1638:46: (iv_ruleDouble= ruleDouble EOF )
-            // InternalCftLanguage.g:1639:2: iv_ruleDouble= ruleDouble EOF
+            // InternalCftLanguage.g:1639:46: (iv_ruleDouble= ruleDouble EOF )
+            // InternalCftLanguage.g:1640:2: iv_ruleDouble= ruleDouble EOF
             {
              newCompositeNode(grammarAccess.getDoubleRule()); 
             pushFollow(FOLLOW_1);
@@ -4382,7 +4388,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDouble"
-    // InternalCftLanguage.g:1645:1: ruleDouble returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE ) ;
+    // InternalCftLanguage.g:1646:1: ruleDouble returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE ) ;
     public final AntlrDatatypeRuleToken ruleDouble() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4393,10 +4399,10 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCftLanguage.g:1651:2: ( (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE ) )
-            // InternalCftLanguage.g:1652:2: (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE )
+            // InternalCftLanguage.g:1652:2: ( (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE ) )
+            // InternalCftLanguage.g:1653:2: (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE )
             {
-            // InternalCftLanguage.g:1652:2: (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE )
+            // InternalCftLanguage.g:1653:2: (this_INT_0= RULE_INT | this_T_DOUBLE_1= RULE_T_DOUBLE )
             int alt30=2;
             int LA30_0 = input.LA(1);
 
@@ -4414,7 +4420,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt30) {
                 case 1 :
-                    // InternalCftLanguage.g:1653:3: this_INT_0= RULE_INT
+                    // InternalCftLanguage.g:1654:3: this_INT_0= RULE_INT
                     {
                     this_INT_0=(Token)match(input,RULE_INT,FOLLOW_2); 
 
@@ -4427,7 +4433,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCftLanguage.g:1661:3: this_T_DOUBLE_1= RULE_T_DOUBLE
+                    // InternalCftLanguage.g:1662:3: this_T_DOUBLE_1= RULE_T_DOUBLE
                     {
                     this_T_DOUBLE_1=(Token)match(input,RULE_T_DOUBLE,FOLLOW_2); 
 
@@ -4497,8 +4503,7 @@ public class InternalCftLanguageParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000003000000000L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000400000060L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000004000000002L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000004000000002L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000010000000000L});
 
 }

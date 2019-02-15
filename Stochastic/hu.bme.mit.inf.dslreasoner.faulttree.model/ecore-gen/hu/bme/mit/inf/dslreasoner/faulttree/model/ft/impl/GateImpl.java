@@ -2,9 +2,9 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl;
 
-import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Gate;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent;
 
 import java.util.Collection;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *
  * @generated
  */
-public abstract class GateImpl extends EventImpl implements Gate {
+public abstract class GateImpl extends RandomEventImpl implements Gate {
 	/**
 	 * The cached value of the '{@link #getInputEvents() <em>Input Events</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ public abstract class GateImpl extends EventImpl implements Gate {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Event> inputEvents;
+	protected EList<RandomEvent> inputEvents;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,9 +63,9 @@ public abstract class GateImpl extends EventImpl implements Gate {
 	 * @generated
 	 */
 	@Override
-	public EList<Event> getInputEvents() {
+	public EList<RandomEvent> getInputEvents() {
 		if (inputEvents == null) {
-			inputEvents = new EObjectResolvingEList<Event>(Event.class, this, FtPackage.GATE__INPUT_EVENTS);
+			inputEvents = new EObjectResolvingEList<RandomEvent>(RandomEvent.class, this, FtPackage.GATE__INPUT_EVENTS);
 		}
 		return inputEvents;
 	}
@@ -95,7 +95,7 @@ public abstract class GateImpl extends EventImpl implements Gate {
 		switch (featureID) {
 			case FtPackage.GATE__INPUT_EVENTS:
 				getInputEvents().clear();
-				getInputEvents().addAll((Collection<? extends Event>)newValue);
+				getInputEvents().addAll((Collection<? extends RandomEvent>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

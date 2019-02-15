@@ -72,8 +72,8 @@ public class FtAdapterFactory extends AdapterFactoryImpl {
 				return createFaultTreeAdapter();
 			}
 			@Override
-			public Adapter caseEvent(Event object) {
-				return createEventAdapter();
+			public Adapter caseRandomEvent(RandomEvent object) {
+				return createRandomEventAdapter();
 			}
 			@Override
 			public Adapter caseBasicEvent(BasicEvent object) {
@@ -106,6 +106,22 @@ public class FtAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseKOfMGate(KOfMGate object) {
 				return createKOfMGateAdapter();
+			}
+			@Override
+			public Adapter caseReliabilityModel(ReliabilityModel object) {
+				return createReliabilityModelAdapter();
+			}
+			@Override
+			public Adapter caseConstantModel(ConstantModel object) {
+				return createConstantModelAdapter();
+			}
+			@Override
+			public Adapter caseEvent(Event object) {
+				return createEventAdapter();
+			}
+			@Override
+			public Adapter caseConstantEvent(ConstantEvent object) {
+				return createConstantEventAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -142,16 +158,16 @@ public class FtAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event <em>Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent <em>Random Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent
 	 * @generated
 	 */
-	public Adapter createEventAdapter() {
+	public Adapter createRandomEventAdapter() {
 		return null;
 	}
 
@@ -264,6 +280,62 @@ public class FtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKOfMGateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ReliabilityModel <em>Reliability Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ReliabilityModel
+	 * @generated
+	 */
+	public Adapter createReliabilityModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel <em>Constant Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantModel
+	 * @generated
+	 */
+	public Adapter createConstantModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event
+	 * @generated
+	 */
+	public Adapter createEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent <em>Constant Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.ConstantEvent
+	 * @generated
+	 */
+	public Adapter createConstantEventAdapter() {
 		return null;
 	}
 

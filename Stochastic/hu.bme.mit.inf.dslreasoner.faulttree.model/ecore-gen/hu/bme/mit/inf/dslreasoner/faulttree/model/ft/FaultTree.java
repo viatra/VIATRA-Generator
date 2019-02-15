@@ -4,8 +4,6 @@ package hu.bme.mit.inf.dslreasoner.faulttree.model.ft;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Fault Tree</b></em>'.
@@ -23,10 +21,10 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface FaultTree extends EObject {
+public interface FaultTree extends ReliabilityModel {
 	/**
 	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Event}.
+	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
@@ -38,7 +36,7 @@ public interface FaultTree extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Event> getEvents();
+	EList<RandomEvent> getEvents();
 
 	/**
 	 * Returns the value of the '<em><b>Top Event</b></em>' reference.
@@ -49,12 +47,12 @@ public interface FaultTree extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Top Event</em>' reference.
-	 * @see #setTopEvent(Event)
+	 * @see #setTopEvent(RandomEvent)
 	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage#getFaultTree_TopEvent()
 	 * @model required="true"
 	 * @generated
 	 */
-	Event getTopEvent();
+	RandomEvent getTopEvent();
 
 	/**
 	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FaultTree#getTopEvent <em>Top Event</em>}' reference.
@@ -64,6 +62,6 @@ public interface FaultTree extends EObject {
 	 * @see #getTopEvent()
 	 * @generated
 	 */
-	void setTopEvent(Event value);
+	void setTopEvent(RandomEvent value);
 
 } // FaultTree

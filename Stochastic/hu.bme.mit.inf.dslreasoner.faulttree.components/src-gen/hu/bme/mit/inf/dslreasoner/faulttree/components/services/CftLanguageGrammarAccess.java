@@ -302,20 +302,20 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class ConstantDistributionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.ConstantDistribution");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cProbKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cPAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cPDoubleParserRuleCall_2_0 = (RuleCall)cPAssignment_2.eContents().get(0);
 		
 		//ConstantDistribution ft::ConstantDistribution:
-		//	"p" "=" p=Double;
+		//	"prob" "=" p=Double;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"p" "=" p=Double
+		//"prob" "=" p=Double
 		public Group getGroup() { return cGroup; }
 		
-		//"p"
-		public Keyword getPKeyword_0() { return cPKeyword_0; }
+		//"prob"
+		public Keyword getProbKeyword_0() { return cProbKeyword_0; }
 		
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
@@ -880,13 +880,13 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cComponentTypeComponentDefinitionCrossReference_1_0 = (CrossReference)cComponentTypeAssignment_1.eContents().get(0);
 		private final RuleCall cComponentTypeComponentDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cComponentTypeComponentDefinitionCrossReference_1_0.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final RuleCall cNameValidIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ComponentInstance:
-		//	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?;
+		//	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ValidId?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?
+		//"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ValidId?
 		public Group getGroup() { return cGroup; }
 		
 		//"=>"
@@ -901,11 +901,11 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getComponentTypeComponentDefinitionQualifiedNameParserRuleCall_1_0_1() { return cComponentTypeComponentDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
-		//name=ID?
+		//name=ValidId?
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		//ValidId
+		public RuleCall getNameValidIdParserRuleCall_2_0() { return cNameValidIdParserRuleCall_2_0; }
 	}
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.faulttree.components.CftLanguage.QualifiedName");
@@ -1169,7 +1169,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ConstantDistribution ft::ConstantDistribution:
-	//	"p" "=" p=Double;
+	//	"prob" "=" p=Double;
 	public ConstantDistributionElements getConstantDistributionAccess() {
 		return pConstantDistribution;
 	}
@@ -1306,7 +1306,7 @@ public class CftLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ComponentInstance:
-	//	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ID?;
+	//	"=>" componentType=[cft::ComponentDefinition|QualifiedName] name=ValidId?;
 	public ComponentInstanceElements getComponentInstanceAccess() {
 		return pComponentInstance;
 	}
