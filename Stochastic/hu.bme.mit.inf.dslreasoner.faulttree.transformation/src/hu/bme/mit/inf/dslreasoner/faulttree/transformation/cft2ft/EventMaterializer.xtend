@@ -43,7 +43,13 @@ class EventMaterializer {
 		val eventKey = new EventKey(component, eventDeclaration)
 		pushEventKey(eventKey)
 		try {
-			materializationCache.computeIfAbsent(eventKey)[materialize(it.component, it.event)]
+			// computeIfAbsent cannot be used recursively, so we must manually cache the event. 
+			var event = materializationCache.get(eventKey)
+			if (event === null) {
+				event = materialize(component, eventDeclaration)
+				materializationCache.put(eventKey, event)
+			}
+			event
 		} finally {
 			popEventKey(eventKey)
 		}
@@ -147,7 +153,13 @@ class EventMaterializer {
 		val inputKey = new EventKey(component, inputEvent)
 		pushEventKey(inputKey)
 		try {
-			 multipleInputCache.computeIfAbsent(inputKey)[materializeConnectedEvents(it.component, it.event)]
+			// computeIfAbsent cannot be used recursively, so we must manually cache the event. 
+			var eventCollection = multipleInputCache.get(inputKey)
+			if (eventCollection === null) {
+				eventCollection = materializeConnectedEvents(component, inputEvent)
+				multipleInputCache.put(inputKey, eventCollection)
+			}
+			eventCollection
 		} finally {
 			popEventKey(inputKey)
 		}

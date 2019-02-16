@@ -25,7 +25,6 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.transformation.cft2ft.EventCollection;
 import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.function.Function;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -145,10 +144,16 @@ public class EventMaterializer {
       this.pushEventKey(eventKey);
       Event _xtrycatchfinallyexpression = null;
       try {
-        final Function<EventMaterializer.EventKey<EventDeclaration>, Event> _function = (EventMaterializer.EventKey<EventDeclaration> it) -> {
-          return this.materialize(it.component, it.event);
-        };
-        _xtrycatchfinallyexpression = this.materializationCache.computeIfAbsent(eventKey, _function);
+        Event _xblockexpression_1 = null;
+        {
+          Event event = this.materializationCache.get(eventKey);
+          if ((event == null)) {
+            event = this.materialize(component, eventDeclaration);
+            this.materializationCache.put(eventKey, event);
+          }
+          _xblockexpression_1 = event;
+        }
+        _xtrycatchfinallyexpression = _xblockexpression_1;
       } finally {
         this.popEventKey(eventKey);
       }
@@ -386,10 +391,16 @@ public class EventMaterializer {
       this.pushEventKey(inputKey);
       EventCollection _xtrycatchfinallyexpression = null;
       try {
-        final Function<EventMaterializer.EventKey<InputEvent>, EventCollection> _function = (EventMaterializer.EventKey<InputEvent> it) -> {
-          return this.materializeConnectedEvents(it.component, it.event);
-        };
-        _xtrycatchfinallyexpression = this.multipleInputCache.computeIfAbsent(inputKey, _function);
+        EventCollection _xblockexpression_1 = null;
+        {
+          EventCollection eventCollection = this.multipleInputCache.get(inputKey);
+          if ((eventCollection == null)) {
+            eventCollection = this.materializeConnectedEvents(component, inputEvent);
+            this.multipleInputCache.put(inputKey, eventCollection);
+          }
+          _xblockexpression_1 = eventCollection;
+        }
+        _xtrycatchfinallyexpression = _xblockexpression_1;
       } finally {
         this.popEventKey(inputKey);
       }
