@@ -1,4 +1,5 @@
 import epackage "http://www.eclipse.org/emf/2002/Ecore"
+import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries.EcorePatterns"
 
 metamodel allSupported { package ecore excluding {
 		EClassifier.instanceClass,EClassifier.defaultValue,EEnumLiteral.instance,EStructuralFeature.defaultValue,
@@ -9,7 +10,7 @@ metamodel allSupported { package ecore excluding {
 
 generate {
 	metamodel = allSupported
-	//constraints = { ...  }
+//	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries}
 	partial-model = { "platform:/resource/Ecore-Plugin/InitialPackage.ecore" }
 	solver = ViatraSolver
 	scope = {
@@ -23,7 +24,7 @@ generate {
 		log-level = normal
 	}
 	
-	number = 5
+	number = 3
 	runs = 1
 	
 	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/debug"

@@ -63,7 +63,7 @@ public interface FunctionalElement extends EObject {
 	 * @see #setModel(FunctionalArchitectureModel)
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.fam.famPackage#getFunctionalElement_Model()
 	 * @model required="true" transient="true" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='ca.mcgill.ecse.dslreasoner.standalone.test.xyz.model'"
+	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.model'"
 	 * @generated
 	 */
 	FunctionalArchitectureModel getModel();

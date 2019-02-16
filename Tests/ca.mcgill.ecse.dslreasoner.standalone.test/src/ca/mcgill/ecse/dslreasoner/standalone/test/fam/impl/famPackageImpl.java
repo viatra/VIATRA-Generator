@@ -561,13 +561,13 @@ public class famPackageImpl extends EPackageImpl implements famPackage {
 		  (getFunctionalElement_Model(), 
 		   source, 
 		   new String[] {
-			 "patternFQN", "ca.mcgill.ecse.dslreasoner.standalone.test.xyz.model"
+			 "patternFQN", "ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.model"
 		   });	
 		addAnnotation
 		  (getFunction_Type(), 
 		   source, 
 		   new String[] {
-			 "patternFQN", "ca.mcgill.ecse.dslreasoner.standalone.test.xyz.type"
+			 "patternFQN", "ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.type"
 		   });
 	}
 

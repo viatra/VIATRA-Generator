@@ -53,7 +53,7 @@ public interface Function extends FunctionalElement {
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.fam.FunctionType
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.fam.famPackage#getFunction_Type()
 	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='ca.mcgill.ecse.dslreasoner.standalone.test.xyz.type'"
+	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.type'"
 	 * @generated
 	 */
 	FunctionType getType();

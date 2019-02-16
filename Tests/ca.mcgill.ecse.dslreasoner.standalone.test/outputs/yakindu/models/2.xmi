@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<yakindu:Statechart xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yakindu="YakinduMetamodel">
-  <regions>
-    <vertices xsi:type="yakindu:Synchronization"/>
-  </regions>
-  <regions>
-    <vertices xsi:type="yakindu:FinalState"/>
-  </regions>
-</yakindu:Statechart>
+<filesystem:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:filesystem="FileSystemMetamodel">
+  <filesystems>
+    <root/>
+  </filesystems>
+  <otherFSObjects xsi:type="filesystem:File"/>
+  <otherFSObjects xsi:type="filesystem:File"/>
+</filesystem:Model>

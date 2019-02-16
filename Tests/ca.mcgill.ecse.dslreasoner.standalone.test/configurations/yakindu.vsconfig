@@ -1,13 +1,13 @@
 import epackage "YakinduMetamodel"
-//import viatra ""
+import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.YakinduPatterns"
 
 generate {
 	metamodel = { package yakindu }
-//	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.xyz }
+	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries }
 	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/yakinduInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 5
+		#node = 6
 	}
 	
 	config = {
