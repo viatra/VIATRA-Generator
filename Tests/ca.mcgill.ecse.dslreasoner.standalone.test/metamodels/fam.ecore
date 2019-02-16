@@ -10,7 +10,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//FunctionalArchitectureModel"
         volatile="true" transient="true" derived="true">
       <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
-        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.xyz.model"/>
+        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.model"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Function"
@@ -26,7 +26,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//FunctionType"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
-        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.xyz.type"/>
+        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.type"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

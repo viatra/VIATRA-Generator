@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="packageName" nsURI="nsUri" nsPrefix="nsPrefix">
-  <eClassifiers xsi:type="ecore:EEnum" name="packageName" instanceClassName="A"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="packageName"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="packageName" instanceClassName="nsPrefix"/>
-  <eSubpackages name="A" nsURI="nsPrefix" nsPrefix="A">
-    <eClassifiers xsi:type="ecore:EEnum"/>
-  </eSubpackages>
+  <eAnnotations/>
+  <eAnnotations source="B"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="nsPrefix" instanceTypeName="nsUri" serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="nsPrefix" instanceClassName="packageName"/>
+  <eClassifiers xsi:type="ecore:EClass" name="nsUri"/>
 </ecore:EPackage>
