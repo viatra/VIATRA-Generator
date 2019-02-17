@@ -3,11 +3,11 @@ import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPattern
 
 generate {
 	metamodel = { package fam }
-	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries}
-	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/famInstance.xmi"}
+//	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries}
+//	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/famInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 5
+		#node = 10
 	}
 	
 	config = {
@@ -15,7 +15,7 @@ generate {
 		log-level = normal
 	}
 	
-	number = 2
+	number = 5
 	runs = 1
 	
 	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/debug"

@@ -62,7 +62,6 @@ public interface FileSystem extends EObject {
 	 * @return the value of the '<em>Live</em>' reference list.
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage#getFileSystem_Live()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live'"
 	 * @generated
 	 */
 	EList<FSObject> getLive();

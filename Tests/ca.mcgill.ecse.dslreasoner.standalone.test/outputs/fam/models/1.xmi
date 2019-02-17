@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="packageName" nsURI="nsUri" nsPrefix="nsPrefix">
-  <eAnnotations>
-    <details/>
-  </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" instanceClassName="nsPrefix" eSuperTypes="//%">
-    <eOperations upperBound="0"/>
-  </eClassifiers>
-  <eSubpackages name="B" nsURI="nsPrefix"/>
-</ecore:EPackage>
+<fam:FunctionalInterface xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="FamMetamodel">
+  <data xsi:type="fam:FunctionalOutput"/>
+  <data xsi:type="fam:FunctionalOutput">
+    <terminator/>
+  </data>
+  <data xsi:type="fam:FunctionalInput"/>
+  <data xsi:type="fam:FunctionalOutput">
+    <terminator/>
+  </data>
+</fam:FunctionalInterface>

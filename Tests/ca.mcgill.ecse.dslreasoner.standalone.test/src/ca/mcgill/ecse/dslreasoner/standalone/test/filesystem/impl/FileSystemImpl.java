@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -43,16 +42,6 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 * @ordered
 	 */
 	protected Dir root;
-
-	/**
-	 * The cached setting delegate for the '{@link #getLive() <em>Live</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLive()
-	 * @generated
-	 * @ordered
-	 */
-	protected EStructuralFeature.Internal.SettingDelegate LIVE__ESETTING_DELEGATE = ((EStructuralFeature.Internal)filesystemPackage.Literals.FILE_SYSTEM__LIVE).getSettingDelegate();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,7 +112,11 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<FSObject> getLive() {
-		return (EList<FSObject>)LIVE__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
+		// TODO: implement this method to return the 'Live' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -197,7 +190,7 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 			case filesystemPackage.FILE_SYSTEM__ROOT:
 				return root != null;
 			case filesystemPackage.FILE_SYSTEM__LIVE:
-				return LIVE__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
+				return !getLive().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

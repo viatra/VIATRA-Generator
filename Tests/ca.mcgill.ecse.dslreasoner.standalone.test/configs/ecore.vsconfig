@@ -10,7 +10,7 @@ metamodel allSupported { package ecore excluding {
 
 generate {
 	metamodel = allSupported
-//	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries}
+	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries}
 	partial-model = { "platform:/resource/Ecore-Plugin/InitialPackage.ecore" }
 	solver = ViatraSolver
 	scope = {
@@ -27,8 +27,8 @@ generate {
 	number = 3
 	runs = 1
 	
-	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/debug"
-	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/log.txt"
-	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/models"
-	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/statistics.csv"
+	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/debug"
+	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/log.txt"
+	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/models"
+	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/statistics.csv"
 }

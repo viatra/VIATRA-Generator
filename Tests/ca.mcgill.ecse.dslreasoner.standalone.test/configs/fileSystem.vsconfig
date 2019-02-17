@@ -7,7 +7,7 @@ generate {
 	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/filesystemInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 5
+		# node = 10
 	}
 	
 	config = {
@@ -15,11 +15,11 @@ generate {
 		log-level = normal
 	}
 	
-	number = 2
+	number = 5
 	runs = 1
 	
-	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/yakindu/debug"
-	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/yakindu/log.txt"
-	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/yakindu/models"
-	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/yakindu/statistics.csv"
+	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/debug"
+	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/log.txt"
+	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/models"
+	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/statistics.csv"
 }

@@ -8,11 +8,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="interface" eType="#//FunctionalInterface"
         containment="true" eOpposite="#//FunctionalInterface/element"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//FunctionalArchitectureModel"
-        volatile="true" transient="true" derived="true">
-      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
-        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.model"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Function"
         eOpposite="#//Function/subElements"/>
   </eClassifiers>
@@ -24,11 +20,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="subElements" upperBound="-1"
         eType="#//FunctionalElement" containment="true" eOpposite="#//FunctionalElement/parent"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//FunctionType"
-        changeable="false" volatile="true" transient="true" derived="true">
-      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
-        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.type"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FAMTerminator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//FunctionalData"
