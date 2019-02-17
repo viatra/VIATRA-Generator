@@ -22,6 +22,10 @@ import org.eclipse.xtext.EcoreUtil2
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternCall
+import org.eclipse.viatra.query.runtime.api.IPatternMatch
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import java.util.LinkedHashMap
+import java.util.LinkedList
 
 class QueryLoader {
 	//val parser = new VQLParser
@@ -33,6 +37,9 @@ class QueryLoader {
 		for(entry: specification.entries) {
 			patterns += getPatterns(entry)
 		}
+		
+		//val errors = patterns.map[eResource].toSet.map[errors]
+		//errors.forEach[println(it)]
 		
 		val allConcernedPatterns = patterns.allReferredPatterns
 		val pattern2Specification = allConcernedPatterns.translatePatterns()
@@ -108,7 +115,15 @@ class QueryLoader {
 	}
 	
 	def private translatePatterns(Set<Pattern> xtextPattern) {
-		xtextPattern.toInvertedMap[builder.getOrCreateSpecification(it) as IQuerySpecification<?>]
+		val res = new LinkedHashMap<Pattern,IQuerySpecification<?>>
+		val patterns = new LinkedList<IQuerySpecification<?>>
+		for(pattern : xtextPattern) {
+			val querySpecification = builder.getOrCreateSpecification(pattern,patterns,true)
+			res.put(pattern,querySpecification)
+			patterns += querySpecification
+		}
+		
+		return res
 	}
 	
 	def private calculateDerivedFeatures(Set<EPackage> packages, Iterable<IQuerySpecification<?>> patterns) {

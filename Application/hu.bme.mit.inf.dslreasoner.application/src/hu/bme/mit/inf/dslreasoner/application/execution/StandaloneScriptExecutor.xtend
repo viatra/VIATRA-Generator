@@ -17,6 +17,11 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint
 import org.eclipse.viatra.query.runtime.rete.util.ReteHintOptions
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
+import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneCompilerSetup
+import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated
+import org.eclipse.xtext.resource.XtextResourceSet
+import com.google.inject.Injector
+import com.google.inject.Guice
 
 class StandaloneScriptExecutor {
 	def static void main(String[] args) {
@@ -32,9 +37,19 @@ class StandaloneScriptExecutor {
 		}
 	}
 	
+	static def protected Injector internalCreateInjector() {
+        var newInjector = new EMFPatternLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+		val PatternLanguageWithRSModule module = new PatternLanguageWithRSModule
+		newInjector = Guice.createInjector(module)
+		//val XtextInjectorProvider x = null
+		return newInjector;
+    }
+	
+	
 	def static loadScript(String path) {
 		//Initialise extensions
-		EMFPatternLanguageStandaloneSetup.doSetup
+		val i = (new PatternLanguageWithRSSetup).createInjectorAndDoEMFRegistration
+		//PatternLanguageWithRSSetup.createInjectorAndDoEMFRegistration
 		ApplicationConfigurationStandaloneSetup.doSetup
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi",new XMIResourceFactoryImpl)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("logicproblem",new XMIResourceFactoryImpl)
@@ -43,7 +58,9 @@ class StandaloneScriptExecutor {
 		
 		val ext = path.split("\\.").last
 		if(ext.equals("vsconfig")) {
-			val resourceSet = new ResourceSetImpl
+			
+			val resourceSet = //new ResourceSetImpl
+				i.getInstance(XtextResourceSet);
 			var Resource resource 
 			
 			try{
