@@ -20,6 +20,8 @@ import org.eclipse.xtext.conversion.ValueConverterException
 import org.eclipse.xtext.linking.impl.DefaultLinkingService
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.emf.ecore.EPackage
 
 class ApplicationConfigurationLinkingService extends DefaultLinkingService{
 
@@ -57,11 +59,32 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService{
 	}
 
     private def getEPackage(EPackageImport packageImport, ILeafNode node) {
-        getNSUri(node).flatMap [ uri |
-            Optional.ofNullable(metamodelProvider.loadEPackage(uri, packageImport.eResource.resourceSet))
-        ].map [ ePackage |
-            Collections.singletonList(ePackage as EObject)
-        ].orElse(emptyList)
+        val x = getNSUri(node)
+        if(x.isPresent) {
+        	val uriString = x.get
+        	val epackageByMetamodelProvider = metamodelProvider.loadEPackage(uriString, packageImport.eResource.resourceSet)
+        	val epackageByMe = ePackageByMe(packageImport.eResource.resourceSet,uriString)
+        	//println(epackageByMetamodelProvider)
+        	//println(epackageByMe)
+            if(epackageByMetamodelProvider!==null) {
+            	return  Collections.singletonList(epackageByMetamodelProvider as EObject)
+            } else if(epackageByMe !== null) {
+            	return Collections.singletonList(epackageByMe as EObject)
+            } else {
+            	emptyList
+            }           
+        } else {
+        	return emptyList
+        }
+    }
+    
+    private def ePackageByMe(ResourceSet rs, String uri) {
+    	try {
+    		val resource = rs.getResource(URI.createURI(uri), true);
+    		return resource.contents.head as EPackage
+    	} catch (Exception e) {
+    		return null
+    	}
     }
     
     private def getViatra(ViatraImport viatraImport, INode node) {
