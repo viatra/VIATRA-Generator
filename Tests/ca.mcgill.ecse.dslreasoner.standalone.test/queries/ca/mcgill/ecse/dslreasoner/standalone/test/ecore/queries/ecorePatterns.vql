@@ -14,13 +14,13 @@ pattern loopInInheritence(a: EClass) {
 pattern opposite(a:EReference, b: EReference) {
 	EReference.eOpposite(a,b);
 }
-@Constraint(key={a}, severity="error", message="error")
-pattern oppositeDifferentClass(a:EReference) {
-	EReference.eOpposite(a,b);
-	EReference.eContainingClass(a,aContaining);
-	EReference.eType(b,bTarget);
-	aContaining != bTarget;
-}
+//@Constraint(key={a}, severity="error", message="error")
+//pattern oppositeDifferentClass(a:EReference) {
+//	EReference.eOpposite(a,b);
+//	EReference.eContainingClass(a,aContaining);
+//	EReference.eType(b,bTarget);
+//	aContaining != bTarget;
+//}
 
 @Constraint(key={a}, severity="error", message="error")
 pattern nonSymmetricOpposite(a:EReference, b:EReference) {

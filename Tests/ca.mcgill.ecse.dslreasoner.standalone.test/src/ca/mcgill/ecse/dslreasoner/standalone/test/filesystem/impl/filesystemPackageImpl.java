@@ -317,8 +317,6 @@ public class filesystemPackageImpl extends EPackageImpl implements filesystemPac
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
-		// org.eclipse.viatra.query.querybasedfeature
-		createOrgAnnotations();
 	}
 
 	/**
@@ -334,22 +332,6 @@ public class filesystemPackageImpl extends EPackageImpl implements filesystemPac
 		   source, 
 		   new String[] {
 			 "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>org.eclipse.viatra.query.querybasedfeature</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createOrgAnnotations() {
-		String source = "org.eclipse.viatra.query.querybasedfeature";	
-		addAnnotation
-		  (getFileSystem_Live(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live"
 		   });
 	}
 

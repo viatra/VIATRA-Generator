@@ -1,6 +1,6 @@
 one sig util'language {
-	util'root : one type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))),
-	util'contains : (type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart)))))))))) lone->set (type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))))
+	util'root : one type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))),
+	util'contains : (type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart)))))))))) lone->set (type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))))
 }
 abstract sig util'Object {
 }
@@ -12,7 +12,8 @@ sig type'FunctionalArchitectureModel'class in util'Object {
 	rootElements'reference'FunctionalArchitectureModel : set type'FunctionalElement'class
 }
 sig type'Function'class in type'FunctionalElement'class {
-	subElements'reference'Function : set type'FunctionalElement'class
+	subElements'reference'Function : set type'FunctionalElement'class,
+	type'attribute'Function : one type'FunctionType'enum
 }
 sig type'FAMTerminator'class in util'Object {
 	data'reference'FAMTerminator : lone type'FunctionalData'class
@@ -41,17 +42,14 @@ sig type'FunctionalArchitectureModel'class'DefinedPart in type'FunctionalArchite
 }
 sig type'FunctionalArchitectureModel'class'UndefinedPart in type'FunctionalArchitectureModel'class {
 }
-one sig element'o'1 in type'FunctionalArchitectureModel'class'DefinedPart {
-}
 one sig element'Root'literal'FunctionType,
 element'Intermediate'literal'FunctionType,
 element'Leaf'literal'FunctionType in type'FunctionType'enum {
 }
-pred pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'terminatorAndInformation [parameter'T: type'FAMTerminator'class, parameter'I: type'InformationLink'class] {
-	(some variable'Out: type'FunctionalOutput'class { parameter'I in variable'Out.outgoingLinks'reference'FunctionalOutput && parameter'T in variable'Out.terminator'reference'FunctionalData }) || (some variable'In: type'FunctionalInput'class { variable'In in parameter'I.to'reference'InformationLink && (variable'In in type'FunctionalInput'class && parameter'T in variable'In.terminator'reference'FunctionalData) })
+one sig element'o'1 in type'FunctionalArchitectureModel'class'DefinedPart {
 }
-pred pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'type [parameter'This: type'Function'class, parameter'Target: type'FunctionType'enum] {
-	(some variable'Model: type'FunctionalArchitectureModel'class { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'rootElements [ variable'Model , parameter'This ] && parameter'Target = element'Root'literal'FunctionType }) || ((all variable'Child: type'Function'class, variable'Model: type'FunctionalArchitectureModel'class { parameter'This in type'Function'class && (! (pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'parent [ variable'Child , parameter'This ]) && (! (pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'rootElements [ variable'Model , parameter'This ]) && parameter'Target = element'Leaf'literal'FunctionType)) }) || (some variable'Par: type'Function'class, variable'Child: type'Function'class { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'parent [ parameter'This , variable'Par ] && (pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'parent [ variable'Child , parameter'This ] && parameter'Target = element'Intermediate'literal'FunctionType) }))
+pred pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'terminatorAndInformation [parameter'T: type'FAMTerminator'class, parameter'I: type'InformationLink'class] {
+	(some variable'Out: type'FunctionalOutput'class { parameter'I in variable'Out.outgoingLinks'reference'FunctionalOutput && parameter'T in variable'Out.terminator'reference'FunctionalData }) or (some variable'In: type'FunctionalInput'class { variable'In in parameter'I.to'reference'InformationLink && (variable'In in type'FunctionalInput'class && parameter'T in variable'In.terminator'reference'FunctionalData) })
 }
 pred pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'rootElements [parameter'Model: type'FunctionalArchitectureModel'class, parameter'Root: type'Function'class] {
 	parameter'Root in type'Function'class && parameter'Root in parameter'Model.rootElements'reference'FunctionalArchitectureModel
@@ -159,19 +157,19 @@ fact util'containmentDefinition {
 	util'language.util'contains = interface'reference'FunctionalElement + (rootElements'reference'FunctionalArchitectureModel + (subElements'reference'Function + (data'reference'FunctionalInterface + (outgoingLinks'reference'FunctionalOutput + terminator'reference'FunctionalData))))
 }
 fact util'noParentForRoot {
-	no parent: type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { parent->(util'language.util'root) in util'language.util'contains }
+	no parent: type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { parent->(util'language.util'root) in util'language.util'contains }
 }
 fact util'atLeastOneParent {
-	all child: type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { child = util'language.util'root || (some parent: type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { parent->child in util'language.util'contains }) }
+	all child: type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { child = util'language.util'root or (some parent: type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { parent->child in util'language.util'contains }) }
 }
 fact util'noCircularContainment {
-	no circle: type'FunctionalArchitectureModel'class + (type'FunctionalData'class + (type'Function'class + (type'FAMTerminator'class + (type'InformationLink'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalInput'class + (type'FunctionalOutput'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { circle->circle in ^ (util'language.util'contains) }
+	no circle: type'InformationLink'class + (type'FunctionalOutput'class + (type'FunctionalInput'class + (type'FunctionalData'class + (type'FunctionalArchitectureModel'class + (type'FAMTerminator'class + (type'Function'class + (type'FunctionalInterface'class + (type'FunctionalElement'class + (type'FunctionalArchitectureModel'class'DefinedPart + type'FunctionalArchitectureModel'class'UndefinedPart))))))))) { circle->circle in ^ (util'language.util'contains) }
 }
 fact lowerMultiplicity'model'FunctionalElement {
 	all src: type'FunctionalElement'class { some trg'1: type'FunctionalArchitectureModel'class { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'model [ src , trg'1 ] } }
 }
 fact upperMultiplicity'model'FunctionalElement {
-	all src: type'FunctionalElement'class, trg'1: type'FunctionalArchitectureModel'class, trg'2: type'FunctionalArchitectureModel'class { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'model [ src , trg'1 ] && pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'model [ src , trg'2 ] => ! (trg'1 != trg'2) }
+	all src: type'FunctionalElement'class, trg'1: type'FunctionalArchitectureModel'class, trg'2: type'FunctionalArchitectureModel'class { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'model [ src , trg'1 ] && pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'model [ src , trg'2 ] implies ! (trg'1 != trg'2) }
 }
 fact oppositeReference'interface'FunctionalElement {
 	interface'reference'FunctionalElement = ~ element'reference'FunctionalInterface
@@ -191,13 +189,7 @@ fact oppositeReference'to'InformationLink {
 fact oppositeReference'data'FunctionalInterface {
 	data'reference'FunctionalInterface = ~ interface'reference'FunctionalData
 }
-fact lowerMultiplicity'type'Function {
-	all src: type'Function'class { some trg'1: type'FunctionType'enum { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'type [ src , trg'1 ] } }
-}
-fact upperMultiplicity'type'Function {
-	all src: type'Function'class, trg'1: type'FunctionType'enum, trg'2: type'FunctionType'enum { pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'type [ src , trg'1 ] && pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'type [ src , trg'2 ] => ! (trg'1 != trg'2) }
-}
 fact errorpattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'terminatorAndInformation {
 	all p0: type'FAMTerminator'class, p1: type'InformationLink'class { ! (pattern'ca'mcgill'ecse'dslreasoner'standalone'test'fam'queries'terminatorAndInformation [ p0 , p1 ]) }
 }
-run { } for exactly 5 util'Object , 31 Int , exactly 0 String
+run { } for exactly 10 util'Object , 31 Int , exactly 0 String

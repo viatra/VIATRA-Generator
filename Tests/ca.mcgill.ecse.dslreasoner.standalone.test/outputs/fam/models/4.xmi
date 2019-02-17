@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="packageName" nsURI="nsUri" nsPrefix="nsPrefix">
-  <eAnnotations/>
-  <eAnnotations source="B"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="nsPrefix" instanceTypeName="nsUri" serializable="false"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="nsPrefix" instanceClassName="packageName"/>
-  <eClassifiers xsi:type="ecore:EClass" name="nsUri"/>
-</ecore:EPackage>
+<fam:FunctionalInterface xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="FamMetamodel">
+  <data xsi:type="fam:FunctionalInput" IncomingLinks="//@data.1/@outgoingLinks.0"/>
+  <data xsi:type="fam:FunctionalOutput">
+    <outgoingLinks to="//@data.0"/>
+  </data>
+  <data xsi:type="fam:FunctionalOutput">
+    <terminator/>
+  </data>
+  <data xsi:type="fam:FunctionalOutput"/>
+</fam:FunctionalInterface>

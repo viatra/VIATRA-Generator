@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries
 
-import "FamMetamodel"
+import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
 
 @Constraint(message="terminatorAndInformation", severity="error", key={T})
 pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
