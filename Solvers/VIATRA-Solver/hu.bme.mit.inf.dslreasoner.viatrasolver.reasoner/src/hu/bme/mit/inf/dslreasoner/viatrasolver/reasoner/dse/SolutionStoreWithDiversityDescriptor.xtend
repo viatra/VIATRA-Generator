@@ -68,8 +68,7 @@ class SolutionStoreWithDiversityDescriptor {
 				val differentCodes = codes.filter[!solutionCodeList.contains(it)]
 				//println(differentCodes.size)
 				
-				isDifferent = differentCodes.size>=3
-				if(isDifferent)println(differentCodes.size)
+				isDifferent = differentCodes.size>=1
 			} else {
 				throw new UnsupportedOperationException('''Unsupported diversity type: «this.granularity»''')
 			}

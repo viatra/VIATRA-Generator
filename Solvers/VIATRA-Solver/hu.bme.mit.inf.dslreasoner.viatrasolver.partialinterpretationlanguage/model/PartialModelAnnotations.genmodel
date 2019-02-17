@@ -10,7 +10,6 @@
   <genPackages prefix="Partial2logicannotations" basePackage="hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage"
       disposableProviderFactory="true" ecorePackage="PartialModelAnnotations.ecore#/">
     <genClasses ecoreClass="PartialModelAnnotations.ecore#//PartialModelRelation2Assertion">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialModelAnnotations.ecore#//PartialModelRelation2Assertion/links"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialModelAnnotations.ecore#//PartialModelRelation2Assertion/targetRelation"/>
     </genClasses>
   </genPackages>
