@@ -472,7 +472,7 @@ class  Viatra2Logic {
 	}
 	def dispatch TypeReference transformTypeReference(EClassTransitiveInstancesKey k,TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
 		val c = k.wrappedKey
-		
+				
 		if(this.ecore2Logic.allClassesInScope(ecore2LogicTrace.trace).toList.contains(c)) {
 			return builder.toTypeReference(this.ecore2Logic.TypeofEClass(ecore2LogicTrace.trace,k.wrappedKey))
 		} else {
@@ -490,7 +490,7 @@ class  Viatra2Logic {
 	}
 	
 	def dispatch TypeReference transformTypeReference(IInputKey k,TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace) {
-		println(k)
+		//println(k)
 		throw new IllegalArgumentException('''Unsupported type: «k.class.simpleName»''')
 	}
 	

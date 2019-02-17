@@ -31,6 +31,7 @@ class EClassMapper_AllElementAsObject implements EClassMapper{
 		}
 		for(c:classes) {
 			for(s : c.ESuperTypes) {
+				//println('''«c.name» -> «s.name»''')
 				Supertype(classMapperTrace.typeMap.get(c),classMapperTrace.typeMap.get(s))
 			}
 		}

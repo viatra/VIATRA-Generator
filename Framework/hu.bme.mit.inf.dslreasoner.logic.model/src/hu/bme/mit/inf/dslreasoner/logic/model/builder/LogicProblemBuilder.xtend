@@ -557,6 +557,9 @@ public class LogicProblemBuilder{
 		return relationReference
 	}
 	def private checkRelationCall(SymbolicValue value, Relation referredRelation) {
+//		if(value === null || referredRelation === null) {
+//			println("gebasz")
+//		}
 		if(value.parameterSubstitutions.size != referredRelation.parameters.size) {
 			throw new LogicProblemBuilderException(
 				'''The relation "«referredRelation.name»" called has «referredRelation.parameters.size» parameters but it is called with «value.parameterSubstitutions.size»!''')

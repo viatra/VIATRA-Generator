@@ -124,6 +124,8 @@ class EReferenceMapper_RelationsOverTypes implements EReferenceMapper{
 				} else {
 					val sourceType = reference.EContainingClass
 					val targetType = reference.EType as EClass
+					//val name = '''oppositeReference «reference.name» «sourceType.name»'''
+					//println(name)
 					val assertion = Assertion('''oppositeReference «reference.name» «sourceType.name»''',
 						Forall[
 							val src = addVar('''src''', trace.TypeofEClass(sourceType))
