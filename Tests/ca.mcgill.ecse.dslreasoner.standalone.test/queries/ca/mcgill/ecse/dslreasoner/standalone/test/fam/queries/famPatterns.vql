@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries
 
-import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
+import epackage "FamMetamodel"
 
 @Constraint(message="terminatorAndInformation", severity="error", key={T})
 pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
@@ -11,6 +11,7 @@ pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
 	FunctionalInput.terminator(In,T);
 }
 
+/*
 @QueryBasedFeature 
 pattern type(This : Function, Target : FunctionType) = {
 	find rootElements(_Model, This);

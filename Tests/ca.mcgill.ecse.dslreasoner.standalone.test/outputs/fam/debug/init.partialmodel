@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="7" maxNewElements="7">
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="6" maxNewElements="6">
   <problem href="generation.logicproblem#/"/>
   <partialrelationinterpretation>
     <interpretationOf href="generation.logicproblem#//@relations.0"/>
@@ -86,6 +86,7 @@
     <interpretationOf href="generation.logicproblem#//@types.0"/>
   </partialtypeinterpratation>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1">
+    <elements href="generation.logicproblem#//@elements.3"/>
     <interpretationOf href="generation.logicproblem#//@types.1"/>
   </partialtypeinterpratation>
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2" supertypeInterpretation="//@partialtypeinterpratation.4">
@@ -109,6 +110,9 @@
   <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.8">
     <interpretationOf href="generation.logicproblem#//@types.8"/>
   </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.9" supertypeInterpretation="//@partialtypeinterpratation.5">
+    <interpretationOf href="generation.logicproblem#//@types.11"/>
+  </partialtypeinterpratation>
   <openWorldElements xsi:type="partialinterpretation:IntegerElement" name="New Integers"/>
   <openWorldElements xsi:type="partialinterpretation:RealElement" name="New Reals"/>
   <openWorldElements xsi:type="partialinterpretation:StringElement" name="New Strings"/>
@@ -122,4 +126,5 @@
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.10"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.11"/>
   <scopes targetTypeInterpretation="//@partialtypeinterpratation.12"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.13"/>
 </partialinterpretation:PartialInterpretation>
