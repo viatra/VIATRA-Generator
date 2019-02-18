@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
 <yakindu:Statechart xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yakindu="YakinduMetamodel">
   <regions>
-    <vertices xsi:type="yakindu:Exit"/>
-    <vertices xsi:type="yakindu:State" incomingTransitions="//@regions.0/@vertices.4/@outgoingTransitions.0"/>
-    <vertices xsi:type="yakindu:Entry">
-      <outgoingTransitions target="//@regions.0/@vertices.4"/>
-    </vertices>
-    <vertices xsi:type="yakindu:Exit"/>
-    <vertices xsi:type="yakindu:State" incomingTransitions="//@regions.0/@vertices.2/@outgoingTransitions.0">
-      <outgoingTransitions target="//@regions.0/@vertices.1"/>
-    </vertices>
     <vertices xsi:type="yakindu:FinalState"/>
+    <vertices xsi:type="yakindu:State"/>
+    <vertices xsi:type="yakindu:State"/>
+    <vertices xsi:type="yakindu:FinalState"/>
+    <vertices xsi:type="yakindu:State"/>
+    <vertices xsi:type="yakindu:Entry">
+      <outgoingTransitions target="//@regions.0/@vertices.6"/>
+    </vertices>
+    <vertices xsi:type="yakindu:FinalState" incomingTransitions="//@regions.0/@vertices.5/@outgoingTransitions.0"/>
   </regions>
 </yakindu:Statechart>

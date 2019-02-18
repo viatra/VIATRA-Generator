@@ -1402,7 +1402,7 @@
     </value>
   </relations>
   <elements name="o 1" definedInType="//@types.13 //@types.15"/>
-  <containmentHierarchies typesOrderedInHierarchy="//@types.7 //@types.6 //@types.2 //@types.8 //@types.0 //@types.1 //@types.4 //@types.5 //@types.3 //@types.10 //@types.11 //@types.9 //@types.12 //@types.13 //@types.14 //@types.15 //@types.16" containmentRelations="//@relations.1 //@relations.2 //@relations.5"/>
+  <containmentHierarchies typesOrderedInHierarchy="//@types.7 //@types.2 //@types.4 //@types.6 //@types.10 //@types.1 //@types.8 //@types.5 //@types.0 //@types.12 //@types.11 //@types.3 //@types.9 //@types.13 //@types.14 //@types.15 //@types.16" containmentRelations="//@relations.1 //@relations.2 //@relations.5"/>
   <annotations xsi:type="ecore2logicannotations:LowerMultiplicityAssertion" target="//@assertions.0" relation="//@relations.3" lower="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.1" relation="//@relations.3" upper="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.2" relation="//@relations.4" upper="1"/>

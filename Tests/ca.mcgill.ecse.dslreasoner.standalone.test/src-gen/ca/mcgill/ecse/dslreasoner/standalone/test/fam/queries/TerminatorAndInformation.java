@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/queries/ca/mcgill/ecse/dslreasoner/standalone/test/fam/queries/famSPatterns.vql
+ * Generated from platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/queries/ca/mcgill/ecse/dslreasoner/standalone/test/fam/queries/famPatterns.vql
  */
 package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries;
 
