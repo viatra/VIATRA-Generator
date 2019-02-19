@@ -1,8 +1,6 @@
 import epackage "inputs/FamMetamodel.ecore"
 import viatra	"inputs/FamPatterns.vql"
 
-
-
 generate {
 	metamodel = { package functionalarchitecture }
 	constraints = { package hu.bme.mit.inf.dslreasoner.domains.fam  }
