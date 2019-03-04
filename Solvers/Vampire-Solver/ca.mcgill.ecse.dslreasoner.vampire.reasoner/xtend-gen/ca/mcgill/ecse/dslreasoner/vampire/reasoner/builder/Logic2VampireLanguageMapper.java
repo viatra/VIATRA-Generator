@@ -4,6 +4,7 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ConstantMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_RelationMapper;
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ScopeMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSComment;
@@ -84,6 +85,9 @@ public class Logic2VampireLanguageMapper {
   private final Logic2VampireLanguageMapper_RelationMapper relationMapper = new Logic2VampireLanguageMapper_RelationMapper(this);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
+  private final Logic2VampireLanguageMapper_ScopeMapper scopeMapper = new Logic2VampireLanguageMapper_ScopeMapper(this);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private final Logic2VampireLanguageMapper_TypeMapper typeMapper;
   
   public Logic2VampireLanguageMapper(final Logic2VampireLanguageMapper_TypeMapper typeMapper) {
@@ -112,6 +116,7 @@ public class Logic2VampireLanguageMapper {
     if (_not) {
       this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
     }
+    this.scopeMapper.transformScope(config, trace);
     trace.constantDefinitions = this.collectConstantDefinitions(problem);
     trace.relationDefinitions = this.collectRelationDefinitions(problem);
     final Consumer<Relation> _function_3 = (Relation it) -> {
@@ -316,13 +321,13 @@ public class Logic2VampireLanguageMapper {
   
   /**
    * def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
-   * List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-   * Map<Variable, VLSVariable> variables) {
-   * if (trace.relationDefinitions.containsKey(relation)) {
-   * this.transformSymbolicReference(relation.lookup(trace.relationDefinitions),
-   * parameterSubstitutions, trace, variables)
-   * }
-   * else {
+   * 	List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+   * 	Map<Variable, VLSVariable> variables) {
+   * 	if (trace.relationDefinitions.containsKey(relation)) {
+   * 		this.transformSymbolicReference(relation.lookup(trace.relationDefinitions),
+   * 			parameterSubstitutions, trace, variables)
+   * 	}
+   * 	else {
    * //						if (relationMapper.transformToHostedField(relation, trace)) {
    * //							val VLSRelation = relation.lookup(trace.relationDeclaration2Field)
    * //							// R(a,b) =>
@@ -348,7 +353,7 @@ public class Logic2VampireLanguageMapper {
    * //								rightOperand = target
    * //							]
    * //						}
-   * }
+   * 	}
    * }
    */
   protected VLSTerm _transformSymbolicReference(final Relation relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
@@ -433,6 +438,11 @@ public class Logic2VampireLanguageMapper {
   @Pure
   public Logic2VampireLanguageMapper_RelationMapper getRelationMapper() {
     return this.relationMapper;
+  }
+  
+  @Pure
+  public Logic2VampireLanguageMapper_ScopeMapper getScopeMapper() {
+    return this.scopeMapper;
   }
   
   @Pure

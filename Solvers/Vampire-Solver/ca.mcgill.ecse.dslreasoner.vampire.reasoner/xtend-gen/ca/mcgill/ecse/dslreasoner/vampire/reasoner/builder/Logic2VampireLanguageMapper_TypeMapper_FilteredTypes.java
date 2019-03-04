@@ -7,7 +7,6 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation_TypeInterpretation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDoubleQuote;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
@@ -27,10 +26,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -58,14 +57,10 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
       {
         VLSFunction _createVLSFunction = this.factory.createVLSFunction();
         final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-          it.setConstant(this.support.toIDMultiple("type", type.getName()));
+          it.setConstant(this.support.toIDMultiple("t", type.getName()));
           EList<VLSTerm> _terms = it.getTerms();
-          VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
-          final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {
-            it_1.setName(variable.getName());
-          };
-          VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_2);
-          _terms.add(_doubleArrow);
+          VLSVariable _duplicate = this.support.duplicate(variable);
+          _terms.add(_duplicate);
         };
         final VLSFunction typePred = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
         typeTrace.type2Predicate.put(type, typePred);
@@ -74,6 +69,22 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
     Iterable<TypeDefinition> _filter = Iterables.<TypeDefinition>filter(types, TypeDefinition.class);
     for (final TypeDefinition type_1 : _filter) {
       {
+        final List<VLSFunction> orElems = CollectionLiterals.<VLSFunction>newArrayList();
+        EList<DefinedElement> _elements = type_1.getElements();
+        for (final DefinedElement e : _elements) {
+          {
+            VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+            final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
+              it.setConstant(this.support.toIDMultiple("e", e.getName(), type_1.getName()));
+              EList<VLSTerm> _terms = it.getTerms();
+              VLSVariable _duplicate = this.support.duplicate(variable);
+              _terms.add(_duplicate);
+            };
+            final VLSFunction enumElemPred = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
+            typeTrace.element2Predicate.put(e, enumElemPred);
+            orElems.add(enumElemPred);
+          }
+        }
         VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
           it.setName(this.support.toIDMultiple("typeDef", type_1.getName()));
@@ -81,53 +92,15 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
           VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
           final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
             EList<VLSVariable> _variables = it_1.getVariables();
-            VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
-            final Procedure1<VLSVariable> _function_3 = (VLSVariable it_2) -> {
-              it_2.setName(variable.getName());
-            };
-            VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_3);
-            _variables.add(_doubleArrow);
+            VLSVariable _duplicate = this.support.duplicate(variable);
+            _variables.add(_duplicate);
             VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-            final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_2) -> {
-              VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-              final Procedure1<VLSFunction> _function_5 = (VLSFunction it_3) -> {
-                it_3.setConstant(CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, typeTrace.type2Predicate).getConstant());
-                EList<VLSTerm> _terms = it_3.getTerms();
-                VLSVariable _createVLSVariable_2 = this.factory.createVLSVariable();
-                final Procedure1<VLSVariable> _function_6 = (VLSVariable it_4) -> {
-                  it_4.setName("A");
-                };
-                VLSVariable _doubleArrow_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_2, _function_6);
-                _terms.add(_doubleArrow_1);
-              };
-              VLSFunction _doubleArrow_1 = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_5);
-              it_2.setLeft(_doubleArrow_1);
-              CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, typeTrace.type2Predicate);
-              final Function1<DefinedElement, VLSEquality> _function_6 = (DefinedElement e) -> {
-                VLSEquality _createVLSEquality = this.factory.createVLSEquality();
-                final Procedure1<VLSEquality> _function_7 = (VLSEquality it_3) -> {
-                  VLSVariable _createVLSVariable_2 = this.factory.createVLSVariable();
-                  final Procedure1<VLSVariable> _function_8 = (VLSVariable it_4) -> {
-                    it_4.setName(variable.getName());
-                  };
-                  VLSVariable _doubleArrow_2 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_2, _function_8);
-                  it_3.setLeft(_doubleArrow_2);
-                  VLSDoubleQuote _createVLSDoubleQuote = this.factory.createVLSDoubleQuote();
-                  final Procedure1<VLSDoubleQuote> _function_9 = (VLSDoubleQuote it_4) -> {
-                    String _name = e.getName();
-                    String _plus = ("\"a" + _name);
-                    String _plus_1 = (_plus + "\"");
-                    it_4.setValue(_plus_1);
-                  };
-                  VLSDoubleQuote _doubleArrow_3 = ObjectExtensions.<VLSDoubleQuote>operator_doubleArrow(_createVLSDoubleQuote, _function_9);
-                  it_3.setRight(_doubleArrow_3);
-                };
-                return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_7);
-              };
-              it_2.setRight(this.support.unfoldOr(ListExtensions.<DefinedElement, VLSEquality>map(type_1.getElements(), _function_6)));
+            final Procedure1<VLSEquivalent> _function_3 = (VLSEquivalent it_2) -> {
+              it_2.setLeft(CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, typeTrace.type2Predicate));
+              it_2.setRight(this.support.unfoldOr(orElems));
             };
-            VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_4);
-            it_1.setOperand(_doubleArrow_1);
+            VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_3);
+            it_1.setOperand(_doubleArrow);
           };
           VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_2);
           it.setFofFormula(_doubleArrow);
@@ -201,19 +174,7 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
         _variables.add(_doubleArrow);
         VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
         final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
-          VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-          final Procedure1<VLSFunction> _function_6 = (VLSFunction it_3) -> {
-            it_3.setConstant("object");
-            EList<VLSTerm> _terms = it_3.getTerms();
-            VLSVariable _createVLSVariable_2 = this.factory.createVLSVariable();
-            final Procedure1<VLSVariable> _function_7 = (VLSVariable it_4) -> {
-              it_4.setName("A");
-            };
-            VLSVariable _doubleArrow_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_2, _function_7);
-            _terms.add(_doubleArrow_1);
-          };
-          VLSFunction _doubleArrow_1 = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_6);
-          it_2.setLeft(_doubleArrow_1);
+          it_2.setLeft(this.support.topLevelTypeFunc());
           Collection<VLSTerm> _values = typeTrace.type2And.values();
           ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
           it_2.setRight(this.support.unfoldOr(_arrayList));

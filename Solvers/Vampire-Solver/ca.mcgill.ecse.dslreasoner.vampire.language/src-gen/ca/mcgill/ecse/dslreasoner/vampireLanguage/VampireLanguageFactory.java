@@ -78,24 +78,6 @@ public interface VampireLanguageFactory extends EFactory
   VLSSatisfiable createVLSSatisfiable();
 
   /**
-   * Returns a new object of class '<em>VLS Trying</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Trying</em>'.
-   * @generated
-   */
-  VLSTrying createVLSTrying();
-
-  /**
-   * Returns a new object of class '<em>VLS Finite Model</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Finite Model</em>'.
-   * @generated
-   */
-  VLSFiniteModel createVLSFiniteModel();
-
-  /**
    * Returns a new object of class '<em>VLS Fof Formula</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

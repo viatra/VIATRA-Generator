@@ -11,6 +11,8 @@ import java.util.ArrayList
 import java.util.Collection
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.List
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 
 class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2VampireLanguageMapper_TypeMapper {
 	private val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support
@@ -25,50 +27,66 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 		val typeTrace = new Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes
 		trace.typeMapperTrace = typeTrace
 
-		val VLSVariable variable = createVLSVariable => [it.name = "A"] // did not work
-		// 1. store predicates for declarations in trace
+		// The variable
+		val VLSVariable variable = createVLSVariable => [it.name = "A"]
+
+		// 1. Each type (class) is a predicate with a single variable as input
 		for (type : types) {
 			val typePred = createVLSFunction => [
-				it.constant = support.toIDMultiple("type", type.name)
-				it.terms += createVLSVariable => [it.name = variable.name]
+				it.constant = support.toIDMultiple("t", type.name)
+				it.terms += support.duplicate(variable)
 			]
 			typeTrace.type2Predicate.put(type, typePred)
 		}
 
-		// 2. Map each type definition to fof formula
+		// 2. Map each ENUM type definition to fof formula
 		for (type : types.filter(TypeDefinition)) {
+			val List<VLSFunction> orElems = newArrayList
+			for (e : type.elements) {
+				val enumElemPred = createVLSFunction => [
+					it.constant = support.toIDMultiple("e", e.name, type.name)
+					it.terms += support.duplicate(variable)
+				]
+				typeTrace.element2Predicate.put(e, enumElemPred)
+				orElems.add(enumElemPred)
+			}
 
 			val res = createVLSFofFormula => [
 				it.name = support.toIDMultiple("typeDef", type.name)
 				// below is temporary solution
 				it.fofRole = "axiom"
 				it.fofFormula = createVLSUniversalQuantifier => [
-					it.variables += createVLSVariable => [it.name = variable.name]
+					it.variables += support.duplicate(variable)
 					it.operand = createVLSEquivalent => [
-						it.left = createVLSFunction => [
-							it.constant = type.lookup(typeTrace.type2Predicate).constant
-							it.terms += createVLSVariable => [it.name = "A"]
-						]
+//						it.left = createVLSFunction => [
+//							it.constant = type.lookup(typeTrace.type2Predicate).constant
+//							it.terms += createVLSVariable => [it.name = "A"]
+//						]
+						it.left = type.lookup(typeTrace.type2Predicate)
 
-						type.lookup(typeTrace.type2Predicate)
-						it.right = support.unfoldOr(type.elements.map [ e |
-							createVLSEquality => [
-								it.left = createVLSVariable => [it.name = variable.name]
+						it.right = support.unfoldOr(orElems)
+
+					// TEMPPPPPPP
+//						it.right = support.unfoldOr(type.elements.map [e |
+//							
+//							createVLSEquality => [
+//								it.left = support.duplicate(variable)
 //								it.right = createVLSDoubleQuote => [
-//									it.value = "\"" + e.name + "\""
+//									it.value = "\"a" + e.name + "\""
 //								]
-								it.right = createVLSDoubleQuote => [
-									it.value = "\"a" + e.name + "\""
-								]
-							]
-						])
+//							]
+//						])
+					// END TEMPPPPP
 					]
 				]
 
 			]
 			trace.specification.formulas += res
 		}
-		// 2.5. Currently allowing duplicate types. Not problematic cuz strings are by def unique
+		
+		//HIERARCHY HANDLER
+		
+		
 		// 3. For each non-abstract type, create an and sequence containing all typedeclaration predicates
 		// and store in a map
 //		val List<VLSTerm> type2PossibleNot = new ArrayList
@@ -97,19 +115,17 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 		}
 
 		// 5. create fof function that is an or with all the elements in map
-		// Do this only if there are more than 1 type
+		
+		
+		
+		
 		val hierarch = createVLSFofFormula => [
 			it.name = "hierarchyHandler"
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
 				it.variables += createVLSVariable => [it.name = "A"]
 				it.operand = createVLSEquivalent => [
-					it.left = createVLSFunction => [
-						it.constant = "object"
-						it.terms += createVLSVariable => [
-							it.name = "A"
-						]
-					]
+					it.left = support.topLevelTypeFunc
 					it.right = support.unfoldOr(new ArrayList<VLSTerm>(typeTrace.type2And.values))
 				]
 			]

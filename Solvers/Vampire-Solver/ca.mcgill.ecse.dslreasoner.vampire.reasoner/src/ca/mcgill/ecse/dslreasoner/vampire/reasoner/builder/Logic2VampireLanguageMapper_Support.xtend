@@ -1,17 +1,18 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.QuantifiedExpression
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.QuantifiedExpression
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
 import java.util.Map
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import org.eclipse.emf.common.util.EList
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
 
 class Logic2VampireLanguageMapper_Support {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -23,6 +24,19 @@ class Logic2VampireLanguageMapper_Support {
 
 	def protected String toID(String ids) {
 		ids.split("\\s+").join("_")
+	}
+
+	def protected VLSVariable duplicate(VLSVariable vrbl) {
+		return createVLSVariable => [it.name = vrbl.name]
+	}
+
+	def protected VLSFunction topLevelTypeFunc() {
+		return createVLSFunction => [
+			it.constant = "object"
+			it.terms += createVLSVariable => [
+				it.name = "A"
+			]
+		]
 	}
 
 	// Support Functions
@@ -41,7 +55,6 @@ class Logic2VampireLanguageMapper_Support {
 	}
 
 	def protected VLSTerm unfoldOr(List<? extends VLSTerm> operands) {
-
 //		if(operands.size == 0) {basically return true}
 		/*else*/ if (operands.size == 1) {
 			return operands.head
@@ -56,20 +69,21 @@ class Logic2VampireLanguageMapper_Support {
 
 	def protected VLSTerm unfoldDistinctTerms(Logic2VampireLanguageMapper m, EList<Term> operands,
 		Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-			if(operands.size == 1) { return m.transformTerm(operands.head,trace,variables) }
-		else if(operands.size > 1) {
-			val notEquals = new ArrayList<VLSTerm>(operands.size*operands.size/2)
-			for(i:0..<operands.size) {
-				for(j: i+1..<operands.size) {
-					notEquals+=createVLSInequality=>[
-						it.left= m.transformTerm(operands.get(i),trace,variables)
-						it.right = m.transformTerm(operands.get(j),trace,variables)
+		if (operands.size == 1) {
+			return m.transformTerm(operands.head, trace, variables)
+		} else if (operands.size > 1) {
+			val notEquals = new ArrayList<VLSTerm>(operands.size * operands.size / 2)
+			for (i : 0 ..< operands.size) {
+				for (j : i + 1 ..< operands.size) {
+					notEquals += createVLSInequality => [
+						it.left = m.transformTerm(operands.get(i), trace, variables)
+						it.right = m.transformTerm(operands.get(j), trace, variables)
 					]
 				}
 			}
 			return notEquals.unfoldAnd
-		 }
-		else throw new UnsupportedOperationException('''Logic operator with 0 operands!''')
+		} else
+			throw new UnsupportedOperationException('''Logic operator with 0 operands!''')
 	}
 
 	// Symbolic
@@ -105,7 +119,6 @@ class Logic2VampireLanguageMapper_Support {
 			]
 			typedefs.add(eq)
 		}
-		
 
 		createVLSUniversalQuantifier => [
 			it.variables += variableMap.values

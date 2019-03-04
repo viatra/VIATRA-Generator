@@ -54,8 +54,6 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSIncludeAccess().getGroup_2_2(), "rule__VLSInclude__Group_2_2__0");
 					put(grammarAccess.getVLSCommentAccess().getGroup(), "rule__VLSComment__Group__0");
 					put(grammarAccess.getVLSSatisfiableAccess().getGroup(), "rule__VLSSatisfiable__Group__0");
-					put(grammarAccess.getVLSTryingAccess().getGroup(), "rule__VLSTrying__Group__0");
-					put(grammarAccess.getVLSFiniteModelAccess().getGroup(), "rule__VLSFiniteModel__Group__0");
 					put(grammarAccess.getVLSFofFormulaAccess().getGroup(), "rule__VLSFofFormula__Group__0");
 					put(grammarAccess.getVLSFofFormulaAccess().getGroup_7(), "rule__VLSFofFormula__Group_7__0");
 					put(grammarAccess.getVLSTffFormulaAccess().getGroup(), "rule__VLSTffFormula__Group__0");
@@ -111,7 +109,6 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVLSIncludeAccess().getNamesAssignment_2_2_1(), "rule__VLSInclude__NamesAssignment_2_2_1");
 					put(grammarAccess.getVLSNameAccess().getNameAssignment(), "rule__VLSName__NameAssignment");
 					put(grammarAccess.getVLSCommentAccess().getCommentAssignment_1(), "rule__VLSComment__CommentAssignment_1");
-					put(grammarAccess.getVLSTryingAccess().getNameAssignment_2(), "rule__VLSTrying__NameAssignment_2");
 					put(grammarAccess.getVLSFofFormulaAccess().getNameAssignment_2(), "rule__VLSFofFormula__NameAssignment_2");
 					put(grammarAccess.getVLSFofFormulaAccess().getFofRoleAssignment_4(), "rule__VLSFofFormula__FofRoleAssignment_4");
 					put(grammarAccess.getVLSFofFormulaAccess().getFofFormulaAssignment_6(), "rule__VLSFofFormula__FofFormulaAssignment_6");

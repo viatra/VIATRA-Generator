@@ -10,6 +10,7 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException;
@@ -30,7 +31,8 @@ public class VampireSolver extends LogicReasoner {
     VampireLanguageStandaloneSetup.doSetup();
   }
   
-  private final Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper(new Logic2VampireLanguageMapper_TypeMapper_FilteredTypes());
+  private final Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper(
+    new Logic2VampireLanguageMapper_TypeMapper_FilteredTypes());
   
   private final Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper();
   
@@ -48,7 +50,9 @@ public class VampireSolver extends LogicReasoner {
     String fileURI = null;
     String vampireCode = null;
     vampireCode = workspace.writeModelToString(vampireProblem, this.fileName);
-    if (vampireConfig.writeToFile) {
+    final boolean writeFile = ((vampireConfig.documentationLevel == DocumentationLevel.NORMAL) || 
+      (vampireConfig.documentationLevel == DocumentationLevel.FULL));
+    if (writeFile) {
       fileURI = workspace.writeModel(vampireProblem, this.fileName).toFileString();
     }
     long _currentTimeMillis = System.currentTimeMillis();

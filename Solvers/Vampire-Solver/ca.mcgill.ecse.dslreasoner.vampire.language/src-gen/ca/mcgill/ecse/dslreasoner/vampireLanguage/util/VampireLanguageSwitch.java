@@ -116,20 +116,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VampireLanguagePackage.VLS_TRYING:
-      {
-        VLSTrying vlsTrying = (VLSTrying)theEObject;
-        T result = caseVLSTrying(vlsTrying);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case VampireLanguagePackage.VLS_FINITE_MODEL:
-      {
-        VLSFiniteModel vlsFiniteModel = (VLSFiniteModel)theEObject;
-        T result = caseVLSFiniteModel(vlsFiniteModel);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case VampireLanguagePackage.VLS_FOF_FORMULA:
       {
         VLSFofFormula vlsFofFormula = (VLSFofFormula)theEObject;
@@ -466,38 +452,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVLSSatisfiable(VLSSatisfiable object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>VLS Trying</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>VLS Trying</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVLSTrying(VLSTrying object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>VLS Finite Model</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>VLS Finite Model</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVLSFiniteModel(VLSFiniteModel object)
   {
     return null;
   }

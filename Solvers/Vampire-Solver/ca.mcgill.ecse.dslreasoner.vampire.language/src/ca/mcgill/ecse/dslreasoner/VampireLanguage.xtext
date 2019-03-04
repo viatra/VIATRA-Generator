@@ -85,13 +85,13 @@ VLSSatisfiable:
 	{VLSSatisfiable} 'Satisfiable!'
 ;
 
-VLSTrying:
-	'TRYING' '[' name = LITERAL ']'
-;
-
-VLSFiniteModel:
-	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
-;
+//VLSTrying:
+//	'TRYING' '[' name = LITERAL ']'
+//;
+//
+//VLSFiniteModel:
+//	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
+//;
 
 // <FOF formulas>
 VLSFofFormula:

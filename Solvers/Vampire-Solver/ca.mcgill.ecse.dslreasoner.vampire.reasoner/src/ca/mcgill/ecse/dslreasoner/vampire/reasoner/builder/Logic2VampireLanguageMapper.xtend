@@ -48,6 +48,8 @@ class Logic2VampireLanguageMapper {
 		this)
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_RelationMapper relationMapper = new Logic2VampireLanguageMapper_RelationMapper(
 		this)
+	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ScopeMapper scopeMapper = new Logic2VampireLanguageMapper_ScopeMapper(
+		this)
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_TypeMapper typeMapper
 
 	public new(Logic2VampireLanguageMapper_TypeMapper typeMapper) {
@@ -72,11 +74,15 @@ class Logic2VampireLanguageMapper {
 //			it.incQueryEngine = viatraQueryEngine.on(new EMFScope(problem))
 		]
 
-		// call mappers
+		// TYPE MAPPER
 		if (!problem.types.isEmpty) {
 			typeMapper.transformTypes(problem.types, problem.elements, this, trace)
 		}
 
+		// SCOPE MAPPER
+		scopeMapper.transformScope(config, trace)
+		
+		
 		trace.constantDefinitions = problem.collectConstantDefinitions
 		trace.relationDefinitions = problem.collectRelationDefinitions
 
@@ -204,8 +210,9 @@ class Logic2VampireLanguageMapper {
 		]
 	}
 
-	def dispatch protected VLSTerm transformTerm(Distinct distinct, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-		support.unfoldDistinctTerms(this,distinct.operands,trace,variables) }
+	def dispatch protected VLSTerm transformTerm(Distinct distinct, Logic2VampireLanguageMapperTrace trace,
+		Map<Variable, VLSVariable> variables) { support.unfoldDistinctTerms(this, distinct.operands, trace, variables) }
+
 //	
 //		def dispatch protected ALSTerm transformTerm(Plus plus, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
 //		createALSFunctionCall => [it.params += plus.leftOperand.transformTerm(trace,variables) it.params += plus.rightOperand.transformTerm(trace,variables) it.referredNumericOperator = ALSNumericOperator.PLUS] }
@@ -228,12 +235,14 @@ class Logic2VampireLanguageMapper {
 		support.createExistentiallyQuantifiedExpression(this, exists, trace, variables)
 	}
 
-	def dispatch protected VLSTerm transformTerm(InstanceOf instanceOf, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
+	def dispatch protected VLSTerm transformTerm(InstanceOf instanceOf, Logic2VampireLanguageMapperTrace trace,
+		Map<Variable, VLSVariable> variables) {
 		return createVLSFunction => [
-			it.constant = support.toIDMultiple("type", (instanceOf.range as ComplexTypeReference).referred.name )
+			it.constant = support.toIDMultiple("type", (instanceOf.range as ComplexTypeReference).referred.name)
 			it.terms += instanceOf.value.transformTerm(trace, variables)
 		]
 	}
+
 //	
 //	def dispatch protected ALSTerm transformTerm(TransitiveClosure tc, Logic2AlloyLanguageMapperTrace trace, Map<Variable, ALSVariableDeclaration> variables) {
 //		return this.relationMapper.transformTransitiveRelationReference(
@@ -253,50 +262,49 @@ class Logic2VampireLanguageMapper {
 	def dispatch protected VLSTerm transformSymbolicReference(DefinedElement referred,
 		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
-			typeMapper.transformReference(referred, trace)
-		}
+		typeMapper.transformReference(referred, trace)
+	}
 
-		def dispatch protected VLSTerm transformSymbolicReference(ConstantDeclaration constant,
-			List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-			Map<Variable, VLSVariable> variables) {
-				// might need to make sure that only declared csts get transformed. see for Alloy
-				val res = createVLSConstant => [
-					// ask if necessary VLSConstantDeclaration and not just directly strng
-					it.name = support.toID(constant.name)
-				]
-				// no postprocessing cuz booleans are accepted
-				return res
-			}
+	def dispatch protected VLSTerm transformSymbolicReference(ConstantDeclaration constant,
+		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+		Map<Variable, VLSVariable> variables) {
+		// might need to make sure that only declared csts get transformed. see for Alloy
+		val res = createVLSConstant => [
+			// ask if necessary VLSConstantDeclaration and not just directly strng
+			it.name = support.toID(constant.name)
+		]
+		// no postprocessing cuz booleans are accepted
+		return res
+	}
 
-			// NOT NEEDED FOR NOW
-			// TODO
-			def dispatch protected VLSTerm transformSymbolicReference(ConstantDefinition constant,
-				List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-				Map<Variable, VLSVariable> variables) {
+	// NOT NEEDED FOR NOW
+	// TODO
+	def dispatch protected VLSTerm transformSymbolicReference(ConstantDefinition constant,
+		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+		Map<Variable, VLSVariable> variables) {
 //		val res = createVLSFunctionCall => [
 //			it.referredDefinition = constant.lookup(trace.constantDefinition2Function)
 //		]
 //		return support.postprocessResultOfSymbolicReference(constant.type,res,trace)
-				}
+	}
 
-				def dispatch protected VLSTerm transformSymbolicReference(Variable variable,
-					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-					Map<Variable, VLSVariable> variables) {
+	def dispatch protected VLSTerm transformSymbolicReference(Variable variable, List<Term> parameterSubstitutions,
+		Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 
-					// cannot treat variable as function (constant) because of name ID not being the same
-					// below does not work
-					val res = createVLSVariable => [
+		// cannot treat variable as function (constant) because of name ID not being the same
+		// below does not work
+		val res = createVLSVariable => [
 //						it.name = support.toIDMultiple("Var", variable.lookup(variables).name)
-						it.name = support.toID(variable.lookup(variables).name)
-					]
-					// no need for potprocessing cuz booleans are supported
-					return res
-				}
+			it.name = support.toID(variable.lookup(variables).name)
+		]
+		// no need for potprocessing cuz booleans are supported
+		return res
+	}
 
-				// TODO
-				def dispatch protected VLSTerm transformSymbolicReference(FunctionDeclaration function,
-					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-					Map<Variable, VLSVariable> variables) {
+	// TODO
+	def dispatch protected VLSTerm transformSymbolicReference(FunctionDeclaration function,
+		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+		Map<Variable, VLSVariable> variables) {
 //		if(trace.functionDefinitions.containsKey(function)) {
 //			return this.transformSymbolicReference(function.lookup(trace.functionDefinitions),parameterSubstitutions,trace,variables)
 //		} else {
@@ -316,71 +324,68 @@ class Logic2VampireLanguageMapper {
 //				return support.postprocessResultOfSymbolicReference(function.range,res,trace)
 //			}
 //		}
-				}
+	}
 
-				// TODO
-				def dispatch protected VLSTerm transformSymbolicReference(FunctionDefinition function,
-					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-					Map<Variable, VLSVariable> variables) {
+	// TODO
+	def dispatch protected VLSTerm transformSymbolicReference(FunctionDefinition function,
+		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+		Map<Variable, VLSVariable> variables) {
 //		val result = createVLSFunctionCall => [
 //			it.referredDefinition = function.lookup(trace.functionDefinition2Function)
 //			it.params += parameterSubstitutions.map[it.transformTerm(trace,variables)]
 //		]
 //		return support.postprocessResultOfSymbolicReference(function.range,result,trace)
-				}
+	}
 
-				// TODO
-				/*
-				def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
-					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-					Map<Variable, VLSVariable> variables) {
-					if (trace.relationDefinitions.containsKey(relation)) {
-						this.transformSymbolicReference(relation.lookup(trace.relationDefinitions),
-							parameterSubstitutions, trace, variables)
-					}
-					else {
-//						if (relationMapper.transformToHostedField(relation, trace)) {
-//							val VLSRelation = relation.lookup(trace.relationDeclaration2Field)
-//							// R(a,b) =>
-//							// b in a.R
-//							return createVLSSubset => [
-//								it.leftOperand = parameterSubstitutions.get(1).transformTerm(trace, variables)
-//								it.rightOperand = createVLSJoin => [
-//									it.leftOperand = parameterSubstitutions.get(0).transformTerm(trace, variables)
-//									it.rightOperand = createVLSReference => [it.referred = VLSRelation]
-//								]
-//							]
-//						} else {
-//							val target = createVLSJoin => [
-//								leftOperand = createVLSReference => [referred = trace.logicLanguage]
-//								rightOperand = createVLSReference => [
-//									referred = relation.lookup(trace.relationDeclaration2Global)
-//								]
-//							]
-//							val source = support.unfoldTermDirectProduct(this, parameterSubstitutions, trace, variables)
-//
-//							return createVLSSubset => [
-//								leftOperand = source
-//								rightOperand = target
-//							]
-//						}
-					}
-				}
-				*/
-
-				// TODO
-				def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
-					List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
-					Map<Variable, VLSVariable> variables) {
+	// TODO
+	/*
+	 * def dispatch protected VLSTerm transformSymbolicReference(Relation relation,
+	 * 	List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
+	 * 	Map<Variable, VLSVariable> variables) {
+	 * 	if (trace.relationDefinitions.containsKey(relation)) {
+	 * 		this.transformSymbolicReference(relation.lookup(trace.relationDefinitions),
+	 * 			parameterSubstitutions, trace, variables)
+	 * 	}
+	 * 	else {
+	 * //						if (relationMapper.transformToHostedField(relation, trace)) {
+	 * //							val VLSRelation = relation.lookup(trace.relationDeclaration2Field)
+	 * //							// R(a,b) =>
+	 * //							// b in a.R
+	 * //							return createVLSSubset => [
+	 * //								it.leftOperand = parameterSubstitutions.get(1).transformTerm(trace, variables)
+	 * //								it.rightOperand = createVLSJoin => [
+	 * //									it.leftOperand = parameterSubstitutions.get(0).transformTerm(trace, variables)
+	 * //									it.rightOperand = createVLSReference => [it.referred = VLSRelation]
+	 * //								]
+	 * //							]
+	 * //						} else {
+	 * //							val target = createVLSJoin => [
+	 * //								leftOperand = createVLSReference => [referred = trace.logicLanguage]
+	 * //								rightOperand = createVLSReference => [
+	 * //									referred = relation.lookup(trace.relationDeclaration2Global)
+	 * //								]
+	 * //							]
+	 * //							val source = support.unfoldTermDirectProduct(this, parameterSubstitutions, trace, variables)
+	 * //
+	 * //							return createVLSSubset => [
+	 * //								leftOperand = source
+	 * //								rightOperand = target
+	 * //							]
+	 * //						}
+	 * 	}
+	 * }
+	 */
+	// TODO
+	def dispatch protected VLSTerm transformSymbolicReference(Relation relation, List<Term> parameterSubstitutions,
+		Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 //					 createVLSFunction => [
 //						it.referredDefinition = relation.lookup(trace.relationDefinition2Predicate)
 //						it.params += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
 //					]
-					return createVLSFunction => [
-						it.constant = support.toIDMultiple("rel", relation.name)
-						it.terms += parameterSubstitutions.map[p | p.transformTerm(trace,variables)]
-					]
-				}
+		return createVLSFunction => [
+			it.constant = support.toIDMultiple("rel", relation.name)
+			it.terms += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
+		]
+	}
 
-			}
-			
+}

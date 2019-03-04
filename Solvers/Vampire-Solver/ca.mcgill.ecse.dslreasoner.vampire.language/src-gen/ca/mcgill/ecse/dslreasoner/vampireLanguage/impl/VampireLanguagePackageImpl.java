@@ -15,7 +15,6 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFalse;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof;
@@ -35,7 +34,6 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrue;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
@@ -100,20 +98,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
    * @generated
    */
   private EClass vlsSatisfiableEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass vlsTryingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass vlsFiniteModelEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -536,36 +520,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
   public EClass getVLSSatisfiable()
   {
     return vlsSatisfiableEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVLSTrying()
-  {
-    return vlsTryingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getVLSTrying_Name()
-  {
-    return (EAttribute)vlsTryingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVLSFiniteModel()
-  {
-    return vlsFiniteModelEClass;
   }
 
   /**
@@ -1389,11 +1343,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
 
     vlsSatisfiableEClass = createEClass(VLS_SATISFIABLE);
 
-    vlsTryingEClass = createEClass(VLS_TRYING);
-    createEAttribute(vlsTryingEClass, VLS_TRYING__NAME);
-
-    vlsFiniteModelEClass = createEClass(VLS_FINITE_MODEL);
-
     vlsFofFormulaEClass = createEClass(VLS_FOF_FORMULA);
     createEAttribute(vlsFofFormulaEClass, VLS_FOF_FORMULA__NAME);
     createEAttribute(vlsFofFormulaEClass, VLS_FOF_FORMULA__FOF_ROLE);
@@ -1580,11 +1529,6 @@ public class VampireLanguagePackageImpl extends EPackageImpl implements VampireL
     initEClass(vlsConfirmationsEClass, VLSConfirmations.class, "VLSConfirmations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(vlsSatisfiableEClass, VLSSatisfiable.class, "VLSSatisfiable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(vlsTryingEClass, VLSTrying.class, "VLSTrying", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVLSTrying_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSTrying.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(vlsFiniteModelEClass, VLSFiniteModel.class, "VLSFiniteModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(vlsFofFormulaEClass, VLSFofFormula.class, "VLSFofFormula", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVLSFofFormula_Name(), ecorePackage.getEString(), "name", null, 0, 1, VLSFofFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
