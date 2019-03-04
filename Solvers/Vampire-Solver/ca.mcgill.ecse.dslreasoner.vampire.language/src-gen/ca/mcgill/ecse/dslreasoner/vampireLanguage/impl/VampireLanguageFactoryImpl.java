@@ -71,8 +71,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
       case VampireLanguagePackage.VLS_COMMENT: return createVLSComment();
       case VampireLanguagePackage.VLS_CONFIRMATIONS: return createVLSConfirmations();
       case VampireLanguagePackage.VLS_SATISFIABLE: return createVLSSatisfiable();
-      case VampireLanguagePackage.VLS_TRYING: return createVLSTrying();
-      case VampireLanguagePackage.VLS_FINITE_MODEL: return createVLSFiniteModel();
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
       case VampireLanguagePackage.VLS_TFF_FORMULA: return createVLSTffFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
@@ -172,28 +170,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSSatisfiableImpl vlsSatisfiable = new VLSSatisfiableImpl();
     return vlsSatisfiable;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSTrying createVLSTrying()
-  {
-    VLSTryingImpl vlsTrying = new VLSTryingImpl();
-    return vlsTrying;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSFiniteModel createVLSFiniteModel()
-  {
-    VLSFiniteModelImpl vlsFiniteModel = new VLSFiniteModelImpl();
-    return vlsFiniteModel;
   }
 
   /**

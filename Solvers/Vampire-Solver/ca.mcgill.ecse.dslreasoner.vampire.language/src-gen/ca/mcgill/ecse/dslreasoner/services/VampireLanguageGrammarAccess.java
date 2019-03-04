@@ -234,64 +234,6 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//'Satisfiable!'
 		public Keyword getSatisfiableKeyword_1() { return cSatisfiableKeyword_1; }
 	}
-	public class VLSTryingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTrying");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTRYINGKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameLITERALTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//VLSTrying:
-		//	'TRYING' '[' name=LITERAL ']';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'TRYING' '[' name=LITERAL ']'
-		public Group getGroup() { return cGroup; }
-		
-		//'TRYING'
-		public Keyword getTRYINGKeyword_0() { return cTRYINGKeyword_0; }
-		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
-		
-		//name=LITERAL
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-		
-		//LITERAL
-		public RuleCall getNameLITERALTerminalRuleCall_2_0() { return cNameLITERALTerminalRuleCall_2_0; }
-		
-		//']'
-		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
-	}
-	public class VLSFiniteModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSFiniteModel");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cVLSFiniteModelAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cFiniteKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cModelKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cFoundKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//VLSFiniteModel:
-		//	{VLSFiniteModel} 'Finite' 'Model' 'Found!';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{VLSFiniteModel} 'Finite' 'Model' 'Found!'
-		public Group getGroup() { return cGroup; }
-		
-		//{VLSFiniteModel}
-		public Action getVLSFiniteModelAction_0() { return cVLSFiniteModelAction_0; }
-		
-		//'Finite'
-		public Keyword getFiniteKeyword_1() { return cFiniteKeyword_1; }
-		
-		//'Model'
-		public Keyword getModelKeyword_2() { return cModelKeyword_2; }
-		
-		//'Found!'
-		public Keyword getFoundKeyword_3() { return cFoundKeyword_3; }
-	}
 	public class VLSFofFormulaElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSFofFormula");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -315,6 +257,13 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		private final Keyword cFullStopKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
+		////VLSTrying:
+		////	'TRYING' '[' name = LITERAL ']'
+		////;
+		////
+		////VLSFiniteModel:
+		////	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
+		////;
 		//// <FOF formulas>
 		//VLSFofFormula:
 		//	'fof' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','
@@ -1633,8 +1582,6 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final VLSCommentElements pVLSComment;
 	private final VLSConfirmationsElements pVLSConfirmations;
 	private final VLSSatisfiableElements pVLSSatisfiable;
-	private final VLSTryingElements pVLSTrying;
-	private final VLSFiniteModelElements pVLSFiniteModel;
 	private final VLSFofFormulaElements pVLSFofFormula;
 	private final VLSTffFormulaElements pVLSTffFormula;
 	private final VLSRoleElements pVLSRole;
@@ -1688,8 +1635,6 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pVLSComment = new VLSCommentElements();
 		this.pVLSConfirmations = new VLSConfirmationsElements();
 		this.pVLSSatisfiable = new VLSSatisfiableElements();
-		this.pVLSTrying = new VLSTryingElements();
-		this.pVLSFiniteModel = new VLSFiniteModelElements();
 		this.pVLSFofFormula = new VLSFofFormulaElements();
 		this.pVLSTffFormula = new VLSTffFormulaElements();
 		this.pVLSRole = new VLSRoleElements();
@@ -1922,26 +1867,13 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getVLSSatisfiableAccess().getRule();
 	}
 	
-	//VLSTrying:
-	//	'TRYING' '[' name=LITERAL ']';
-	public VLSTryingElements getVLSTryingAccess() {
-		return pVLSTrying;
-	}
-	
-	public ParserRule getVLSTryingRule() {
-		return getVLSTryingAccess().getRule();
-	}
-	
-	//VLSFiniteModel:
-	//	{VLSFiniteModel} 'Finite' 'Model' 'Found!';
-	public VLSFiniteModelElements getVLSFiniteModelAccess() {
-		return pVLSFiniteModel;
-	}
-	
-	public ParserRule getVLSFiniteModelRule() {
-		return getVLSFiniteModelAccess().getRule();
-	}
-	
+	////VLSTrying:
+	////	'TRYING' '[' name = LITERAL ']'
+	////;
+	////
+	////VLSFiniteModel:
+	////	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
+	////;
 	//// <FOF formulas>
 	//VLSFofFormula:
 	//	'fof' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','

@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapperTrace;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
@@ -13,7 +12,7 @@ import java.util.Map;
 public class Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes implements Logic2VampireLanguageMapper_TypeMapperTrace {
   public final Map<Type, VLSFunction> type2Predicate = new HashMap<Type, VLSFunction>();
   
-  public final Map<DefinedElement, VLSEquality> definedElement2Declaration = new HashMap<DefinedElement, VLSEquality>();
+  public final Map<DefinedElement, VLSFunction> element2Predicate = new HashMap<DefinedElement, VLSFunction>();
   
   public final Map<Type, VLSTerm> type2PossibleNot = new HashMap<Type, VLSTerm>();
   

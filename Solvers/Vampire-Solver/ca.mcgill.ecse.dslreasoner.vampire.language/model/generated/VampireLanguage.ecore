@@ -27,10 +27,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSConfirmations"/>
   <eClassifiers xsi:type="ecore:EClass" name="VLSSatisfiable" eSuperTypes="#//VLSConfirmations"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSTrying">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSFiniteModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="VLSFofFormula">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fofRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

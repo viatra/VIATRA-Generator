@@ -25,10 +25,6 @@
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSConfirmations"/>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSSatisfiable"/>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSTrying">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSTrying/name"/>
-    </genClasses>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSFiniteModel"/>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSFofFormula">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFofFormula/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSFofFormula/fofRole"/>

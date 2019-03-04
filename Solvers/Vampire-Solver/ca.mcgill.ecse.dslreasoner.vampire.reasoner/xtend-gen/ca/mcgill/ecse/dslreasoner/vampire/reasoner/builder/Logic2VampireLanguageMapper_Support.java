@@ -50,6 +50,29 @@ public class Logic2VampireLanguageMapper_Support {
     return IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(ids.split("\\s+"))), "_");
   }
   
+  protected VLSVariable duplicate(final VLSVariable vrbl) {
+    VLSVariable _createVLSVariable = this.factory.createVLSVariable();
+    final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
+      it.setName(vrbl.getName());
+    };
+    return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
+  }
+  
+  protected VLSFunction topLevelTypeFunc() {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant("object");
+      EList<VLSTerm> _terms = it.getTerms();
+      VLSVariable _createVLSVariable = this.factory.createVLSVariable();
+      final Procedure1<VLSVariable> _function_1 = (VLSVariable it_1) -> {
+        it_1.setName("A");
+      };
+      VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
+      _terms.add(_doubleArrow);
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
   protected VLSTerm unfoldAnd(final List<? extends VLSTerm> operands) {
     int _size = operands.size();
     boolean _equals = (_size == 1);
