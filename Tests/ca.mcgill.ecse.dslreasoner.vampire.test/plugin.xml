@@ -1,1 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><plugin/>
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns" id="ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns">
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.terminatorAndInformation"/>
+    </group>
+  </extension>
+</plugin>

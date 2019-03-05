@@ -1,11 +1,11 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse
 
 import functionalarchitecture.FunctionalarchitecturePackage
-import hu.bme.mit.inf.dslreasoner.domains.y
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.YakinduPatterns
 
 class YakinduTest {
 	def static void main(String[] args) {
@@ -23,11 +23,11 @@ class YakinduTest {
 
 		val metamodel = GeneralTest.loadMetamodel(YakindummPackage.eINSTANCE)
 		val partialModel = GeneralTest.loadPartialModel(inputs, "Yakindu.xmi")
-		val queries = GeneralTest.loadQueries(metamodel, 
+//		val queries = GeneralTest.loadQueries(metamodel, FamPa
 
 		println("DSL loaded")
 		
-		GeneralTest.createAndSolveProblem(metamodel, partialModel, queries, workspace)	
+//		GeneralTest.createAndSolveProblem(metamodel, partialModel, queries, workspace)	
 	}
 	
 	

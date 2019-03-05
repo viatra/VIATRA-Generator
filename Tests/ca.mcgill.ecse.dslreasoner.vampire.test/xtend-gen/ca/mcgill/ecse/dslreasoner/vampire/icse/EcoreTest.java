@@ -8,6 +8,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
@@ -70,7 +71,7 @@ public class EcoreTest {
       reasoner = _vampireSolver;
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
-        it.writeToFile = true;
+        it.documentationLevel = DocumentationLevel.FULL;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       solution = reasoner.solve(logicProblem, vampireConfig, workspace);

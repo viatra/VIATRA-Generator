@@ -6,6 +6,7 @@ import functionalarchitecture.FunctionalarchitecturePackage
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
@@ -22,9 +23,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns
-import java.util.LinkedHashMap
-import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
 
 class EcoreTest {
 	def static void main(String[] args) {
@@ -62,7 +60,7 @@ class EcoreTest {
 		reasoner = new VampireSolver
 		val vampireConfig = new VampireSolverConfiguration => [
 			//add configuration things, in config file first
-			it.writeToFile = true
+			it.documentationLevel = DocumentationLevel::FULL
 		]
 		
 		solution = reasoner.solve(logicProblem, vampireConfig,	workspace)

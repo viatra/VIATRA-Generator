@@ -89,27 +89,25 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 		
 		// 3. For each non-abstract type, create an and sequence containing all typedeclaration predicates
 		// and store in a map
-//		val List<VLSTerm> type2PossibleNot = new ArrayList
-//		val List<VLSTerm> type2And = new ArrayList
-		for (type : types.filter[!isIsAbstract]) {
-			for (type2 : types) {
+		for (t1 : types.filter[!isIsAbstract]) {
+			for (t2 : types) {
 				// possible improvement: check all supertypes and decide if negated or not based on negations/not negations of supertypes
-				if (type == type2 || dfsSupertypeCheck(type, type2)) {
-					typeTrace.type2PossibleNot.put(type2, createVLSFunction => [
-						it.constant = type2.lookup(typeTrace.type2Predicate).constant
-						it.terms += createVLSVariable => [it.name = "A"]
+				if (t1 == t2 || dfsSupertypeCheck(t1, t2)) {
+					typeTrace.type2PossibleNot.put(t2, createVLSFunction => [
+						it.constant = t2.lookup(typeTrace.type2Predicate).constant
+						it.terms += support.duplicate(variable)
 					])
 				} else {
-					typeTrace.type2PossibleNot.put(type2, createVLSUnaryNegation => [
+					typeTrace.type2PossibleNot.put(t2, createVLSUnaryNegation => [
 						it.operand = createVLSFunction => [
-							it.constant = type2.lookup(typeTrace.type2Predicate).constant
-							it.terms += createVLSVariable => [it.name = "A"]
+							it.constant = t2.lookup(typeTrace.type2Predicate).constant
+							it.terms += support.duplicate(variable)
 						]
 					])
 				}
 //				typeTrace.type2PossibleNot.put(type2, type2.lookup(typeTrace.type2Predicate))
 			}
-			typeTrace.type2And.put(type, support.unfoldAnd(new ArrayList<VLSTerm>(typeTrace.type2PossibleNot.values)))
+			typeTrace.type2And.put(t1, support.unfoldAnd(new ArrayList<VLSTerm>(typeTrace.type2PossibleNot.values)))
 //			typeTrace.type2And.put(type, type.lookup(typeTrace.type2Predicate) )
 			typeTrace.type2PossibleNot.clear
 		}
@@ -123,7 +121,7 @@ class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Logic2Vamp
 			it.name = "hierarchyHandler"
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
-				it.variables += createVLSVariable => [it.name = "A"]
+				it.variables += support.duplicate(variable)
 				it.operand = createVLSEquivalent => [
 					it.left = support.topLevelTypeFunc
 					it.right = support.unfoldOr(new ArrayList<VLSTerm>(typeTrace.type2And.values))

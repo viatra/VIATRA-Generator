@@ -18,7 +18,6 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 	def dispatch public void transformScope(LogicSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
 		val VLSVariable variable = createVLSVariable => [it.name = "A"]
 
-		
 		// 1. make a list of constants equaling the min number of specified objects
 		val List<VLSConstant> instances = newArrayList
 		for (var i = 0; i < config.typeScopes.minNewElements; i++) {
@@ -28,47 +27,37 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 			]
 			instances.add(cst)
 		}
-		
-		
+
 		// TODO: specify for the max
-
-
-		// 2. Create initial fof formula to specify the number of elems
-		val cstDec = createVLSFofFormula => [
-			it.name = "typeScope"
-			it.fofRole = "axiom"
-			it.fofFormula = createVLSUniversalQuantifier => [
-				it.variables += support.duplicate(variable)
-				// check below
-				it.operand = createVLSEquivalent => [
-					it.left = support.topLevelTypeFunc
-					it.right = support.unfoldOr(instances.map [ i |
-						createVLSEquality => [
-							it.left = createVLSVariable => [it.name = variable.name]
-							it.right = i
-						]
-					])
+		if (config.typeScopes.minNewElements != 0) {
+			// 2. Create initial fof formula to specify the number of elems
+			val cstDec = createVLSFofFormula => [
+				it.name = "typeScope"
+				it.fofRole = "axiom"
+				it.fofFormula = createVLSUniversalQuantifier => [
+					it.variables += support.duplicate(variable)
+					// check below
+					it.operand = createVLSEquivalent => [
+						it.left = support.topLevelTypeFunc
+						it.right = support.unfoldOr(instances.map [ i |
+							createVLSEquality => [
+								it.left = createVLSVariable => [it.name = variable.name]
+								it.right = i
+							]
+						])
+					]
 				]
 			]
-		]
-		trace.specification.formulas += cstDec
+			trace.specification.formulas += cstDec
 
-
-		// TODO: specify for scope per type
-
-
-
-		// 3. Specify uniqueness of elements
-		val uniqueness = createVLSFofFormula => [
-			it.name = "typeUniqueness"
-			it.fofRole = "axiom"
-			it.fofFormula = support.unfoldOr(instances.map [ i |
-				createVLSEquality => [
-					it.left = createVLSVariable => [it.name = variable.name]
-					it.right = i
-				]
-			])
-		]
-		trace.specification.formulas += cstDec
+			// TODO: specify for scope per type
+			// 3. Specify uniqueness of elements
+			val uniqueness = createVLSFofFormula => [
+				it.name = "typeUniqueness"
+				it.fofRole = "axiom"
+				it.fofFormula = support.establishUniqueness(instances)
+			]
+			trace.specification.formulas += uniqueness
+		}
 	}
 }

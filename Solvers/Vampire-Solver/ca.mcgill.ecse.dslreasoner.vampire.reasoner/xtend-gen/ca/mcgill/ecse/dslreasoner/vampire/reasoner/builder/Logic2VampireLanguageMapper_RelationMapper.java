@@ -61,7 +61,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         VLSFunction _createVLSFunction = this.factory.createVLSFunction();
         final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
           TypeReference _range = variable.getRange();
-          it.setConstant(this.support.toIDMultiple("type", ((ComplexTypeReference) _range).getReferred().getName()));
+          it.setConstant(this.support.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
           EList<VLSTerm> _terms = it.getTerms();
           VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
           final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {
@@ -75,7 +75,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         VLSFunction _createVLSFunction_1 = this.factory.createVLSFunction();
         final Procedure1<VLSFunction> _function_2 = (VLSFunction it) -> {
           TypeReference _range = variable.getRange();
-          it.setConstant(this.support.toIDMultiple("type", ((ComplexTypeReference) _range).getReferred().getName()));
+          it.setConstant(this.support.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
           EList<VLSTerm> _terms = it.getTerms();
           VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
           final Procedure1<VLSVariable> _function_3 = (VLSVariable it_1) -> {
@@ -215,7 +215,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         VLSFunction _createVLSFunction = this.factory.createVLSFunction();
         final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
           TypeReference _get = r.getParameters().get((i).intValue());
-          it.setConstant(this.support.toIDMultiple("type", ((ComplexTypeReference) _get).getReferred().getName()));
+          it.setConstant(this.support.toIDMultiple("t", ((ComplexTypeReference) _get).getReferred().getName()));
           EList<VLSTerm> _terms = it.getTerms();
           VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
           final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {

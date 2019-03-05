@@ -4,6 +4,7 @@ import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
@@ -40,7 +41,7 @@ public class MedicalSystem {
       reasoner = _vampireSolver;
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
-        it.writeToFile = true;
+        it.documentationLevel = DocumentationLevel.FULL;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       solution = reasoner.solve(root, vampireConfig, workspace);

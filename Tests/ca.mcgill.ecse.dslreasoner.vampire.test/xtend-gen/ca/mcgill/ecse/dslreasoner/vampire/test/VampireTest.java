@@ -4,6 +4,7 @@ import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.VariableContext;
@@ -68,7 +69,8 @@ public class VampireTest {
       reasoner = _vampireSolver;
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
-        it.writeToFile = true;
+        it.documentationLevel = DocumentationLevel.FULL;
+        it.typeScopes.minNewElements = 4;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       solution = reasoner.solve(problem, vampireConfig, workspace);

@@ -3,6 +3,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -71,6 +73,36 @@ public class Logic2VampireLanguageMapper_Support {
       _terms.add(_doubleArrow);
     };
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
+  public VLSTerm establishUniqueness(final List<VLSConstant> terms) {
+    final List<VLSInequality> eqs = CollectionLiterals.<VLSInequality>newArrayList();
+    List<VLSConstant> _subList = terms.subList(1, ((Object[])Conversions.unwrapArray(terms, Object.class)).length);
+    for (final VLSConstant t1 : _subList) {
+      List<VLSConstant> _subList_1 = terms.subList(0, terms.indexOf(t1));
+      for (final VLSConstant t2 : _subList_1) {
+        {
+          VLSInequality _createVLSInequality = this.factory.createVLSInequality();
+          final Procedure1<VLSInequality> _function = (VLSInequality it) -> {
+            VLSConstant _createVLSConstant = this.factory.createVLSConstant();
+            final Procedure1<VLSConstant> _function_1 = (VLSConstant it_1) -> {
+              it_1.setName(t2.getName());
+            };
+            VLSConstant _doubleArrow = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function_1);
+            it.setLeft(_doubleArrow);
+            VLSConstant _createVLSConstant_1 = this.factory.createVLSConstant();
+            final Procedure1<VLSConstant> _function_2 = (VLSConstant it_1) -> {
+              it_1.setName(t1.getName());
+            };
+            VLSConstant _doubleArrow_1 = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant_1, _function_2);
+            it.setRight(_doubleArrow_1);
+          };
+          final VLSInequality eq = ObjectExtensions.<VLSInequality>operator_doubleArrow(_createVLSInequality, _function);
+          eqs.add(eq);
+        }
+      }
+    }
+    return this.unfoldAnd(eqs);
   }
   
   protected VLSTerm unfoldAnd(final List<? extends VLSTerm> operands) {
@@ -180,7 +212,7 @@ public class Logic2VampireLanguageMapper_Support {
           VLSFunction _createVLSFunction = this.factory.createVLSFunction();
           final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
             TypeReference _range = variable.getRange();
-            it.setConstant(this.toIDMultiple("type", ((ComplexTypeReference) _range).getReferred().getName()));
+            it.setConstant(this.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
             EList<VLSTerm> _terms = it.getTerms();
             VLSVariable _createVLSVariable = this.factory.createVLSVariable();
             final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {
@@ -229,7 +261,7 @@ public class Logic2VampireLanguageMapper_Support {
           VLSFunction _createVLSFunction = this.factory.createVLSFunction();
           final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
             TypeReference _range = variable.getRange();
-            it.setConstant(this.toIDMultiple("type", ((ComplexTypeReference) _range).getReferred().getName()));
+            it.setConstant(this.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
             EList<VLSTerm> _terms = it.getTerms();
             VLSVariable _createVLSVariable = this.factory.createVLSVariable();
             final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {

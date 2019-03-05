@@ -1,4 +1,4 @@
-package hu.bme.mit.inf.dslreasoner.domains.fam
+package ca.mcgill.ecse.dslreasoner.vampire.queries
 
 import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
 

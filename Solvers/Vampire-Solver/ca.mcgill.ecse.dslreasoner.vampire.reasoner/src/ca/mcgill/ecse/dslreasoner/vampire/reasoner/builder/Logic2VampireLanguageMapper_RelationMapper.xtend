@@ -39,7 +39,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 			relationVar2VLS.put(variable, v)
 
 			val varTypeComply = createVLSFunction => [
-				it.constant = support.toIDMultiple("type", (variable.range as ComplexTypeReference).referred.name)
+				it.constant = support.toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
 				it.terms += createVLSVariable => [
 					it.name = support.toIDMultiple("Var", variable.name)
 				]
@@ -47,7 +47,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 			relationVar2TypeDecComply.put(variable, varTypeComply)
 			
 			val varTypeRes = createVLSFunction => [
-				it.constant = support.toIDMultiple("type", (variable.range as ComplexTypeReference).referred.name)
+				it.constant = support.toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
 				it.terms += createVLSVariable => [
 					it.name = support.toIDMultiple("Var", variable.name)
 				]
@@ -136,7 +136,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 			relationVar2VLS.add(v)
 
 			val varTypeComply = createVLSFunction => [
-				it.constant = support.toIDMultiple("type", (r.parameters.get(i) as ComplexTypeReference).referred.name)
+				it.constant = support.toIDMultiple("t", (r.parameters.get(i) as ComplexTypeReference).referred.name)
 				it.terms += createVLSVariable => [
 					it.name = support.toIDMultiple("Var", i.toString)
 				]

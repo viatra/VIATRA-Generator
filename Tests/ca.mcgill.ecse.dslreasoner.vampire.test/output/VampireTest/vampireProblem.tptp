@@ -1,1 +1,7 @@
-% This is an initial Test Comment fof ( typeDef_oldRPS , axiom , ! [ A ] : ( type_oldRPS ( A ) <=> ( A = "aRock" | ( A = "aPaper" | A = "aScissor" ) ) ) ) . fof ( hierarchyHandler , axiom , ! [ A ] : ( object ( A ) <=> type_oldRPS ( A ) ) ) . fof ( compliance_beats2 , axiom , ! [ Var_0 , Var_1 ] : ( rel_beats2 ( Var_0 , Var_1 ) => ( type_oldRPS ( Var_0 ) & type_oldRPS ( Var_1 ) ) ) ) . fof ( assertion1 , axiom , ! [ Var_x ] : ( type_oldRPS ( Var_x ) => ? [ Var_y ] : ( type_oldRPS ( Var_y ) & ( rel_beats2 ( Var_x , Var_y ) & ( Var_x != Var_y & ~ rel_beats2 ( Var_y , Var_x ) ) ) ) ) ) .
+% This is an initial Test Comment
+fof ( typeDef_oldRPS , axiom , ! [ A ] : ( t_oldRPS ( A ) <=> ( e_Rock_oldRPS ( A ) | ( e_Paper_oldRPS ( A ) | e_Scissor_oldRPS ( A ) ) ) ) ) .
+fof ( hierarchyHandler , axiom , ! [ A ] : ( object ( A ) <=> t_oldRPS ( A ) ) ) .
+fof ( typeScope , axiom , ! [ A ] : ( object ( A ) <=> ( A = o1 | ( A = o2 | ( A = o3 | A = o4 ) ) ) ) ) .
+fof ( typeUniqueness , axiom , o1 != o2 & ( o1 != o3 & ( o2 != o3 & ( o1 != o4 & ( o2 != o4 & o3 != o4 ) ) ) ) ) .
+fof ( compliance_beats2 , axiom , ! [ Var_0 , Var_1 ] : ( rel_beats2 ( Var_0 , Var_1 ) => ( t_oldRPS ( Var_0 ) & t_oldRPS ( Var_1 ) ) ) ) .
+fof ( assertion1 , axiom , ! [ Var_x ] : ( t_oldRPS ( Var_x ) => ? [ Var_y ] : ( t_oldRPS ( Var_y ) & ( rel_beats2 ( Var_x , Var_y ) & ( Var_x != Var_y & ~ rel_beats2 ( Var_y , Var_x ) ) ) ) ) ) .
