@@ -115,47 +115,39 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
       return Boolean.valueOf((!_isIsAbstract));
     };
     Iterable<Type> _filter_1 = IterableExtensions.<Type>filter(types, _function_1);
-    for (final Type type_2 : _filter_1) {
+    for (final Type t1 : _filter_1) {
       {
-        for (final Type type2 : types) {
-          if ((Objects.equal(type_2, type2) || this.dfsSupertypeCheck(type_2, type2))) {
+        for (final Type t2 : types) {
+          if ((Objects.equal(t1, t2) || this.dfsSupertypeCheck(t1, t2))) {
             VLSFunction _createVLSFunction = this.factory.createVLSFunction();
             final Procedure1<VLSFunction> _function_2 = (VLSFunction it) -> {
-              it.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(type2, typeTrace.type2Predicate).getConstant());
+              it.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(t2, typeTrace.type2Predicate).getConstant());
               EList<VLSTerm> _terms = it.getTerms();
-              VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
-              final Procedure1<VLSVariable> _function_3 = (VLSVariable it_1) -> {
-                it_1.setName("A");
-              };
-              VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_3);
-              _terms.add(_doubleArrow);
+              VLSVariable _duplicate = this.support.duplicate(variable);
+              _terms.add(_duplicate);
             };
             VLSFunction _doubleArrow = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_2);
-            typeTrace.type2PossibleNot.put(type2, _doubleArrow);
+            typeTrace.type2PossibleNot.put(t2, _doubleArrow);
           } else {
             VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
             final Procedure1<VLSUnaryNegation> _function_3 = (VLSUnaryNegation it) -> {
               VLSFunction _createVLSFunction_1 = this.factory.createVLSFunction();
               final Procedure1<VLSFunction> _function_4 = (VLSFunction it_1) -> {
-                it_1.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(type2, typeTrace.type2Predicate).getConstant());
+                it_1.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(t2, typeTrace.type2Predicate).getConstant());
                 EList<VLSTerm> _terms = it_1.getTerms();
-                VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
-                final Procedure1<VLSVariable> _function_5 = (VLSVariable it_2) -> {
-                  it_2.setName("A");
-                };
-                VLSVariable _doubleArrow_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_5);
-                _terms.add(_doubleArrow_1);
+                VLSVariable _duplicate = this.support.duplicate(variable);
+                _terms.add(_duplicate);
               };
               VLSFunction _doubleArrow_1 = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction_1, _function_4);
               it.setOperand(_doubleArrow_1);
             };
             VLSUnaryNegation _doubleArrow_1 = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_3);
-            typeTrace.type2PossibleNot.put(type2, _doubleArrow_1);
+            typeTrace.type2PossibleNot.put(t2, _doubleArrow_1);
           }
         }
         Collection<VLSTerm> _values = typeTrace.type2PossibleNot.values();
         ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
-        typeTrace.type2And.put(type_2, this.support.unfoldAnd(_arrayList));
+        typeTrace.type2And.put(t1, this.support.unfoldAnd(_arrayList));
         typeTrace.type2PossibleNot.clear();
       }
     }
@@ -166,21 +158,17 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_3 = (VLSUniversalQuantifier it_1) -> {
         EList<VLSVariable> _variables = it_1.getVariables();
-        VLSVariable _createVLSVariable_1 = this.factory.createVLSVariable();
-        final Procedure1<VLSVariable> _function_4 = (VLSVariable it_2) -> {
-          it_2.setName("A");
-        };
-        VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_4);
-        _variables.add(_doubleArrow);
+        VLSVariable _duplicate = this.support.duplicate(variable);
+        _variables.add(_duplicate);
         VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-        final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
+        final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_2) -> {
           it_2.setLeft(this.support.topLevelTypeFunc());
           Collection<VLSTerm> _values = typeTrace.type2And.values();
           ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
           it_2.setRight(this.support.unfoldOr(_arrayList));
         };
-        VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_5);
-        it_1.setOperand(_doubleArrow_1);
+        VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_4);
+        it_1.setOperand(_doubleArrow);
       };
       VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_3);
       it.setFofFormula(_doubleArrow);

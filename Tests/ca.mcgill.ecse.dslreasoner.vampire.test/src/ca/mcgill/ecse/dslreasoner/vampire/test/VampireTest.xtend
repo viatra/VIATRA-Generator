@@ -1,23 +1,19 @@
 package ca.mcgill.ecse.dslreasoner.vampire.test
 
-
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
-import java.util.Collections
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import java.io.File
 
 class VampireTest {
 	
@@ -65,7 +61,8 @@ class VampireTest {
 		reasoner = new VampireSolver
 		val vampireConfig = new VampireSolverConfiguration => [
 			//add configuration things, in config file first
-			it.writeToFile = true
+			it.documentationLevel = DocumentationLevel::FULL
+			it.typeScopes.minNewElements = 4
 		]
 		
 		solution = reasoner.solve(problem, vampireConfig,	workspace)

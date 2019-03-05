@@ -238,7 +238,7 @@ class Logic2VampireLanguageMapper {
 	def dispatch protected VLSTerm transformTerm(InstanceOf instanceOf, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
 		return createVLSFunction => [
-			it.constant = support.toIDMultiple("type", (instanceOf.range as ComplexTypeReference).referred.name)
+			it.constant = support.toIDMultiple("t", (instanceOf.range as ComplexTypeReference).referred.name)
 			it.terms += instanceOf.value.transformTerm(trace, variables)
 		]
 	}

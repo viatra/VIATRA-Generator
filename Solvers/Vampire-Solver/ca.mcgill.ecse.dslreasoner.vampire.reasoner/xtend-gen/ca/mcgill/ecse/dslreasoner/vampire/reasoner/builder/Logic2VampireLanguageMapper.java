@@ -273,7 +273,7 @@ public class Logic2VampireLanguageMapper {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
       TypeReference _range = instanceOf.getRange();
-      it.setConstant(this.support.toIDMultiple("type", ((ComplexTypeReference) _range).getReferred().getName()));
+      it.setConstant(this.support.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
       EList<VLSTerm> _terms = it.getTerms();
       VLSTerm _transformTerm = this.transformTerm(instanceOf.getValue(), trace, variables);
       _terms.add(_transformTerm);

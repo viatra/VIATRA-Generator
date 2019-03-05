@@ -1,11 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
+import ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns;
 import functionalarchitecture.FunctionalarchitecturePackage;
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
+import java.util.LinkedList;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -30,9 +31,10 @@ public class FAMTest {
     map.put("logicproblem", _xMIResourceFactoryImpl);
     InputOutput.<String>println("Input and output workspaces are created");
     final EcoreMetamodelDescriptor metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE);
-    final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FunctionalArchitectureModel.xmi");
+    final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FunctionalArchitectureModel2.xmi");
     final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance());
     InputOutput.<String>println("DSL loaded");
-    GeneralTest.createAndSolveProblem(metamodel, partialModel, queries, workspace);
+    LinkedList<EObject> _linkedList = new LinkedList<EObject>();
+    GeneralTest.createAndSolveProblem(metamodel, _linkedList, queries, workspace);
   }
 }

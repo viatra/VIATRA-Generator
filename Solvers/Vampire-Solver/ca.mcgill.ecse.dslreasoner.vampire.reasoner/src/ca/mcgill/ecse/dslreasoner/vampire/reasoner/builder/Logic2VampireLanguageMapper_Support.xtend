@@ -13,6 +13,8 @@ import java.util.HashMap
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.EList
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInequality
 
 class Logic2VampireLanguageMapper_Support {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -26,6 +28,7 @@ class Logic2VampireLanguageMapper_Support {
 		ids.split("\\s+").join("_")
 	}
 
+	//TODO Make more general
 	def protected VLSVariable duplicate(VLSVariable vrbl) {
 		return createVLSVariable => [it.name = vrbl.name]
 	}
@@ -37,6 +40,25 @@ class Logic2VampireLanguageMapper_Support {
 				it.name = "A"
 			]
 		]
+	}
+	
+	//TODO Make more general
+	def establishUniqueness(List<VLSConstant> terms) {
+		val List<VLSInequality> eqs = newArrayList
+		for (t1 : terms.subList(1, terms.length)){
+			for (t2 : terms.subList(0, terms.indexOf(t1))){
+				val eq = createVLSInequality => [
+					//TEMP
+					it.left = createVLSConstant => [it.name = t2.name]
+					it.right = createVLSConstant => [it.name = t1.name]
+					//TEMP
+				]
+				eqs.add(eq)
+			}			
+		}
+		
+		return unfoldAnd(eqs)
+		
 	}
 
 	// Support Functions
@@ -111,7 +133,7 @@ class Logic2VampireLanguageMapper_Support {
 		val typedefs = new ArrayList<VLSTerm>
 		for (variable : expression.quantifiedVariables) {
 			val eq = createVLSFunction => [
-				it.constant = toIDMultiple("type", (variable.range as ComplexTypeReference).referred.name)
+				it.constant = toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
 				it.terms += createVLSVariable => [
 					it.name = toIDMultiple("Var", variable.name)
 				]
@@ -138,7 +160,7 @@ class Logic2VampireLanguageMapper_Support {
 		val typedefs = new ArrayList<VLSTerm>
 		for (variable : expression.quantifiedVariables) {
 			val eq = createVLSFunction => [
-				it.constant = toIDMultiple("type", (variable.range as ComplexTypeReference).referred.name)
+				it.constant = toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
 				it.terms += createVLSVariable => [
 					it.name = toIDMultiple("Var", variable.name)
 				]
@@ -157,5 +179,7 @@ class Logic2VampireLanguageMapper_Support {
 	def protected withAddition(Map<Variable, VLSVariable> map1, Map<Variable, VLSVariable> map2) {
 		new HashMap(map1) => [putAll(map2)]
 	}
+	
+	
 
 }
