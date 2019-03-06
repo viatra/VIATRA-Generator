@@ -1,20 +1,21 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInequality
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.QuantifiedExpression
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.EList
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInequality
 
 class Logic2VampireLanguageMapper_Support {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -28,10 +29,28 @@ class Logic2VampireLanguageMapper_Support {
 		ids.split("\\s+").join("_")
 	}
 
+	//Term Handling
 	//TODO Make more general
-	def protected VLSVariable duplicate(VLSVariable vrbl) {
-		return createVLSVariable => [it.name = vrbl.name]
+	def protected VLSVariable duplicate(VLSVariable term) {
+		return createVLSVariable => [it.name = term.name]
 	}
+	
+	def protected VLSFunction duplicate(VLSFunction term) {
+		return createVLSFunction => [
+			it.constant = term.constant
+			for ( v : term.terms){
+				it.terms += duplicate(v as VLSVariable)
+			}
+			]
+	}
+	
+	def protected VLSFunction duplicate(VLSFunction term, VLSVariable v) {
+		return createVLSFunction => [
+			it.constant = term.constant
+			it.terms += duplicate(v)
+			]
+	}
+	
 
 	def protected VLSFunction topLevelTypeFunc() {
 		return createVLSFunction => [
@@ -174,6 +193,21 @@ class Logic2VampireLanguageMapper_Support {
 			it.operand = unfoldAnd(typedefs)
 
 		]
+	}
+	
+	def protected boolean dfsSupertypeCheck(Type type, Type type2) {
+		// There is surely a better way to do this
+		if (type.supertypes.isEmpty)
+			return false
+		else {
+			if (type.supertypes.contains(type2))
+				return true
+			else {
+				for (supertype : type.supertypes) {
+					if(dfsSupertypeCheck(supertype, type2)) return true
+				}
+			}
+		}
 	}
 
 	def protected withAddition(Map<Variable, VLSVariable> map1, Map<Variable, VLSVariable> map2) {

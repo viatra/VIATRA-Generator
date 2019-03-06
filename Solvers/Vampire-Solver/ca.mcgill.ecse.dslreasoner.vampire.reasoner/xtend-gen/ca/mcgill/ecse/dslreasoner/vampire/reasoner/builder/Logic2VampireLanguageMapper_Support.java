@@ -17,6 +17,7 @@ import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.QuantifiedExpression;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
 import java.util.ArrayList;
@@ -52,12 +53,37 @@ public class Logic2VampireLanguageMapper_Support {
     return IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(ids.split("\\s+"))), "_");
   }
   
-  protected VLSVariable duplicate(final VLSVariable vrbl) {
+  protected VLSVariable duplicate(final VLSVariable term) {
     VLSVariable _createVLSVariable = this.factory.createVLSVariable();
     final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
-      it.setName(vrbl.getName());
+      it.setName(term.getName());
     };
     return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
+  }
+  
+  protected VLSFunction duplicate(final VLSFunction term) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant(term.getConstant());
+      EList<VLSTerm> _terms = term.getTerms();
+      for (final VLSTerm v : _terms) {
+        EList<VLSTerm> _terms_1 = it.getTerms();
+        VLSVariable _duplicate = this.duplicate(((VLSVariable) v));
+        _terms_1.add(_duplicate);
+      }
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
+  protected VLSFunction duplicate(final VLSFunction term, final VLSVariable v) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant(term.getConstant());
+      EList<VLSTerm> _terms = it.getTerms();
+      VLSVariable _duplicate = this.duplicate(v);
+      _terms.add(_duplicate);
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
   protected VLSFunction topLevelTypeFunc() {
@@ -285,6 +311,30 @@ public class Logic2VampireLanguageMapper_Support {
       _xblockexpression = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_1);
     }
     return _xblockexpression;
+  }
+  
+  protected boolean dfsSupertypeCheck(final Type type, final Type type2) {
+    boolean _xifexpression = false;
+    boolean _isEmpty = type.getSupertypes().isEmpty();
+    if (_isEmpty) {
+      return false;
+    } else {
+      boolean _xifexpression_1 = false;
+      boolean _contains = type.getSupertypes().contains(type2);
+      if (_contains) {
+        return true;
+      } else {
+        EList<Type> _supertypes = type.getSupertypes();
+        for (final Type supertype : _supertypes) {
+          boolean _dfsSupertypeCheck = this.dfsSupertypeCheck(supertype, type2);
+          if (_dfsSupertypeCheck) {
+            return true;
+          }
+        }
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
   
   protected HashMap<Variable, VLSVariable> withAddition(final Map<Variable, VLSVariable> map1, final Map<Variable, VLSVariable> map2) {

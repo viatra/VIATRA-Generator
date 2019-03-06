@@ -4,7 +4,6 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper;
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation_TypeInterpretation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDoubleQuote;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
@@ -46,8 +45,6 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
   
   @Override
   public void transformTypes(final Collection<Type> types, final Collection<DefinedElement> elements, final Logic2VampireLanguageMapper mapper, final Logic2VampireLanguageMapperTrace trace) {
-    final Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes typeTrace = new Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes();
-    trace.typeMapperTrace = typeTrace;
     VLSVariable _createVLSVariable = this.factory.createVLSVariable();
     final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
       it.setName("A");
@@ -57,13 +54,13 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
       {
         VLSFunction _createVLSFunction = this.factory.createVLSFunction();
         final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-          it.setConstant(this.support.toIDMultiple("t", type.getName()));
+          it.setConstant(this.support.toIDMultiple("t", type.getName().split(" ")[0]));
           EList<VLSTerm> _terms = it.getTerms();
           VLSVariable _duplicate = this.support.duplicate(variable);
           _terms.add(_duplicate);
         };
         final VLSFunction typePred = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
-        typeTrace.type2Predicate.put(type, typePred);
+        trace.type2Predicate.put(type, typePred);
       }
     }
     Iterable<TypeDefinition> _filter = Iterables.<TypeDefinition>filter(types, TypeDefinition.class);
@@ -75,19 +72,19 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
           {
             VLSFunction _createVLSFunction = this.factory.createVLSFunction();
             final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-              it.setConstant(this.support.toIDMultiple("e", e.getName(), type_1.getName()));
+              it.setConstant(this.support.toIDMultiple("e", e.getName().split(" ")[0], e.getName().split(" ")[2]));
               EList<VLSTerm> _terms = it.getTerms();
               VLSVariable _duplicate = this.support.duplicate(variable);
               _terms.add(_duplicate);
             };
             final VLSFunction enumElemPred = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
-            typeTrace.element2Predicate.put(e, enumElemPred);
+            trace.element2Predicate.put(e, enumElemPred);
             orElems.add(enumElemPred);
           }
         }
         VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
-          it.setName(this.support.toIDMultiple("typeDef", type_1.getName()));
+          it.setName(this.support.toIDMultiple("typeDef", type_1.getName().split(" ")[0]));
           it.setFofRole("axiom");
           VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
           final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
@@ -96,7 +93,7 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
             _variables.add(_duplicate);
             VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
             final Procedure1<VLSEquivalent> _function_3 = (VLSEquivalent it_2) -> {
-              it_2.setLeft(CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, typeTrace.type2Predicate));
+              it_2.setLeft(CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate));
               it_2.setRight(this.support.unfoldOr(orElems));
             };
             VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_3);
@@ -118,37 +115,21 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
     for (final Type t1 : _filter_1) {
       {
         for (final Type t2 : types) {
-          if ((Objects.equal(t1, t2) || this.dfsSupertypeCheck(t1, t2))) {
-            VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-            final Procedure1<VLSFunction> _function_2 = (VLSFunction it) -> {
-              it.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(t2, typeTrace.type2Predicate).getConstant());
-              EList<VLSTerm> _terms = it.getTerms();
-              VLSVariable _duplicate = this.support.duplicate(variable);
-              _terms.add(_duplicate);
-            };
-            VLSFunction _doubleArrow = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_2);
-            typeTrace.type2PossibleNot.put(t2, _doubleArrow);
+          if ((Objects.equal(t1, t2) || this.support.dfsSupertypeCheck(t1, t2))) {
+            trace.type2PossibleNot.put(t2, this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(t2, trace.type2Predicate)));
           } else {
             VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
-            final Procedure1<VLSUnaryNegation> _function_3 = (VLSUnaryNegation it) -> {
-              VLSFunction _createVLSFunction_1 = this.factory.createVLSFunction();
-              final Procedure1<VLSFunction> _function_4 = (VLSFunction it_1) -> {
-                it_1.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(t2, typeTrace.type2Predicate).getConstant());
-                EList<VLSTerm> _terms = it_1.getTerms();
-                VLSVariable _duplicate = this.support.duplicate(variable);
-                _terms.add(_duplicate);
-              };
-              VLSFunction _doubleArrow_1 = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction_1, _function_4);
-              it.setOperand(_doubleArrow_1);
+            final Procedure1<VLSUnaryNegation> _function_2 = (VLSUnaryNegation it) -> {
+              it.setOperand(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(t2, trace.type2Predicate)));
             };
-            VLSUnaryNegation _doubleArrow_1 = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_3);
-            typeTrace.type2PossibleNot.put(t2, _doubleArrow_1);
+            VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_2);
+            trace.type2PossibleNot.put(t2, _doubleArrow);
           }
         }
-        Collection<VLSTerm> _values = typeTrace.type2PossibleNot.values();
+        Collection<VLSTerm> _values = trace.type2PossibleNot.values();
         ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
-        typeTrace.type2And.put(t1, this.support.unfoldAnd(_arrayList));
-        typeTrace.type2PossibleNot.clear();
+        trace.type2And.put(t1, this.support.unfoldAnd(_arrayList));
+        trace.type2PossibleNot.clear();
       }
     }
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
@@ -163,7 +144,7 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
         VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
         final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_2) -> {
           it_2.setLeft(this.support.topLevelTypeFunc());
-          Collection<VLSTerm> _values = typeTrace.type2And.values();
+          Collection<VLSTerm> _values = trace.type2And.values();
           ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
           it_2.setRight(this.support.unfoldOr(_arrayList));
         };
@@ -176,30 +157,6 @@ public class Logic2VampireLanguageMapper_TypeMapper_FilteredTypes implements Log
     final VLSFofFormula hierarch = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_2);
     EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
     _formulas.add(hierarch);
-  }
-  
-  public boolean dfsSupertypeCheck(final Type type, final Type type2) {
-    boolean _xifexpression = false;
-    boolean _isEmpty = type.getSupertypes().isEmpty();
-    if (_isEmpty) {
-      return false;
-    } else {
-      boolean _xifexpression_1 = false;
-      boolean _contains = type.getSupertypes().contains(type2);
-      if (_contains) {
-        return true;
-      } else {
-        EList<Type> _supertypes = type.getSupertypes();
-        for (final Type supertype : _supertypes) {
-          boolean _dfsSupertypeCheck = this.dfsSupertypeCheck(supertype, type2);
-          if (_dfsSupertypeCheck) {
-            return true;
-          }
-        }
-      }
-      _xifexpression = _xifexpression_1;
-    }
-    return _xifexpression;
   }
   
   @Override
