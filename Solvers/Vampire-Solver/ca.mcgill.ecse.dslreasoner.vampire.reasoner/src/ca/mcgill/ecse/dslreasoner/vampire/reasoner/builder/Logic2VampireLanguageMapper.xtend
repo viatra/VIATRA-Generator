@@ -51,11 +51,8 @@ class Logic2VampireLanguageMapper {
 		this)
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ScopeMapper scopeMapper = new Logic2VampireLanguageMapper_ScopeMapper(
 		this)
-	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_TypeMapper typeMapper
-
-	public new(Logic2VampireLanguageMapper_TypeMapper typeMapper) {
-		this.typeMapper = typeMapper
-	}
+	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_TypeMapper typeMapper = new Logic2VampireLanguageMapper_TypeMapper(
+		this)
 
 	public def TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(LogicProblem problem,
 		VampireSolverConfiguration config) {
@@ -82,8 +79,7 @@ class Logic2VampireLanguageMapper {
 
 		// SCOPE MAPPER
 		scopeMapper.transformScope(config, trace)
-		
-		
+
 		trace.constantDefinitions = problem.collectConstantDefinitions
 		trace.relationDefinitions = problem.collectRelationDefinitions
 
