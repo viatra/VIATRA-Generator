@@ -90,7 +90,7 @@ class Logic2VampireLanguageMapper_TypeMapper {
 			trace.specification.formulas += res
 
 			// Create objects for the enum elements
-			val List<VLSFunction> enumScopeElems = newArrayList
+			val List<VLSTerm> enumScopeElems = newArrayList
 			for (var i = 0; i < type.elements.length; i++) {
 				val num = i + 1
 				val cstTerm = createVLSFunctionAsTerm => [
@@ -100,6 +100,18 @@ class Logic2VampireLanguageMapper_TypeMapper {
 				trace.uniqueInstances.add(cst)
 				val fct = support.duplicate(type.elements.get(i).lookup(trace.element2Predicate), cstTerm)
 				enumScopeElems.add(fct)
+				
+				//For paradox Only
+				for (var j = 0; j < type.elements.length; j++) {
+					if(j != i) {
+						val op = support.duplicate(type.elements.get(j).lookup(trace.element2Predicate), cstTerm)
+						val negFct = createVLSUnaryNegation => [
+							it.operand = op
+						]
+						enumScopeElems.add(negFct)
+					}
+				}
+				//End Paradox
 //				enumScopeElems.add(support.topLevelTypeFunc(cstTerm))
 			}
 			
