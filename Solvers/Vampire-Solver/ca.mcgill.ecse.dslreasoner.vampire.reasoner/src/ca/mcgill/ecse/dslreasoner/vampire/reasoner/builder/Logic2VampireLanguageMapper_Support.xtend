@@ -2,6 +2,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInequality
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
@@ -36,6 +37,14 @@ class Logic2VampireLanguageMapper_Support {
 	def protected VLSVariable duplicate(VLSVariable term) {
 		return createVLSVariable => [it.name = term.name]
 	}
+	
+	def protected VLSFunctionAsTerm duplicate(VLSFunctionAsTerm term) {
+		return createVLSFunctionAsTerm => [it.functor = term.functor]
+	}
+	
+	def protected VLSConstant duplicate(VLSConstant term) {
+		return createVLSConstant => [it.name = term.name]
+	}
 
 	def protected VLSFunction duplicate(VLSFunction term) {
 		return createVLSFunction => [
@@ -52,6 +61,19 @@ class Logic2VampireLanguageMapper_Support {
 			it.terms += duplicate(v)
 		]
 	}
+	
+	def protected VLSFunction duplicate(VLSFunction term, VLSFunctionAsTerm v) {
+		return createVLSFunction => [
+			it.constant = term.constant
+			it.terms += duplicate(v)
+		]
+	}
+	
+	def protected VLSConstant toConstant(VLSFunctionAsTerm term) {
+		return createVLSConstant => [
+			it.name = term.functor
+		]
+	}
 
 	def protected VLSFunction topLevelTypeFunc() {
 		return createVLSFunction => [
@@ -59,6 +81,13 @@ class Logic2VampireLanguageMapper_Support {
 			it.terms += createVLSVariable => [
 				it.name = "A"
 			]
+		]
+	}
+	
+	def protected VLSFunction topLevelTypeFunc(VLSFunctionAsTerm v) {
+		return createVLSFunction => [
+			it.constant = "object"
+			it.terms += duplicate(v)
 		]
 	}
 

@@ -48,8 +48,8 @@ pattern VLSInequality(term: VLSInequality){
 	VLSInequality(term);
 }
 
-pattern VLSFunctionFof(term: VLSFunctionFof){
-	VLSFunctionFof(term);
+pattern VLSFunctionFof(term: VLSFunctionAsTerm){
+	VLSFunctionAsTerm(term);
 }
 
 //pattern VLSFofTerm(term: VLSFofTerm){

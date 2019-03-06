@@ -19,13 +19,14 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		val VLSVariable variable = createVLSVariable => [it.name = "A"]
 
 		// 1. make a list of constants equaling the min number of specified objects
-		val List<VLSConstant> instances = newArrayList
+		val localInstances = newArrayList
 		for (var i = 0; i < config.typeScopes.minNewElements; i++) {
 			val num = i + 1
 			val cst = createVLSConstant => [
 				it.name = "o" + num
 			]
-			instances.add(cst)
+			trace.uniqueInstances.add(cst)
+			localInstances.add(cst)
 		}
 
 		// TODO: specify for the max
@@ -37,14 +38,14 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 				it.fofFormula = createVLSUniversalQuantifier => [
 					it.variables += support.duplicate(variable)
 					// check below
-					it.operand = createVLSEquivalent => [
-						it.left = support.topLevelTypeFunc
-						it.right = support.unfoldOr(instances.map [ i |
+					it.operand = createVLSImplies => [
+						it.left = support.unfoldOr(localInstances.map [ i |
 							createVLSEquality => [
 								it.left = createVLSVariable => [it.name = variable.name]
 								it.right = i
 							]
 						])
+						it.right = support.topLevelTypeFunc
 					]
 				]
 			]
@@ -55,7 +56,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 			val uniqueness = createVLSFofFormula => [
 				it.name = "typeUniqueness"
 				it.fofRole = "axiom"
-				it.fofFormula = support.establishUniqueness(instances)
+				it.fofFormula = support.establishUniqueness(trace.uniqueInstances)
 			]
 			trace.specification.formulas += uniqueness
 		}

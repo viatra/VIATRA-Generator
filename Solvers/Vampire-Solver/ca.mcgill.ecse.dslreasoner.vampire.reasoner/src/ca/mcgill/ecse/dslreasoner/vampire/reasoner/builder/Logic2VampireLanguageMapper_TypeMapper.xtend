@@ -14,8 +14,9 @@ import java.util.Collection
 import java.util.List
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.Collections
 
-class Logic2VampireLanguageMapper_TypeMapper  {
+class Logic2VampireLanguageMapper_TypeMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
 	private val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support
 	val Logic2VampireLanguageMapper base
@@ -25,8 +26,9 @@ class Logic2VampireLanguageMapper_TypeMapper  {
 		this.base = base
 	}
 
-	def protected transformTypes(Collection<Type> types, Collection<DefinedElement> elements, Logic2VampireLanguageMapper mapper, Logic2VampireLanguageMapperTrace trace) {
-		
+	def protected transformTypes(Collection<Type> types, Collection<DefinedElement> elements,
+		Logic2VampireLanguageMapper mapper, Logic2VampireLanguageMapperTrace trace) {
+
 //		val typeTrace = new Logic2VampireLanguageMapper_TypeMapperTrace_FilteredTypes
 //		trace.typeMapperTrace = typeTrace
 		val VLSVariable variable = createVLSVariable => [it.name = "A"]
@@ -86,14 +88,38 @@ class Logic2VampireLanguageMapper_TypeMapper  {
 
 			]
 			trace.specification.formulas += res
+
+			// Create objects for the enum elements
+			val List<VLSFunction> enumScopeElems = newArrayList
+			for (var i = 0; i < type.elements.length; i++) {
+				val num = i + 1
+				val cstTerm = createVLSFunctionAsTerm => [
+					it.functor = "eo" + num
+				]
+				val cst = support.toConstant(cstTerm)
+				trace.uniqueInstances.add(cst)
+				val fct = support.duplicate(type.elements.get(i).lookup(trace.element2Predicate), cstTerm)
+				enumScopeElems.add(fct)
+//				enumScopeElems.add(support.topLevelTypeFunc(cstTerm))
+			}
+			
+			
+			
+			val enumScope = createVLSFofFormula => [
+				it.name = support.toIDMultiple("enumScope", type.name.split(" ").get(0))
+				// below is temporary solution
+				it.fofRole = "axiom"			
+				it.fofFormula = support.unfoldAnd(enumScopeElems)
+			]
+			
+			trace.specification.formulas += enumScope
 		}
-		
-		//HIERARCHY HANDLER
-		
-		
+
+		// HIERARCHY HANDLER
 		// 3. For each non-abstract type, create an and sequence containing all typedeclaration predicates
 		// and store in a map
-		for (t1 : types.filter[!isIsAbstract]) {
+//		println(types.filter[!isIsAbstract])
+		for (t1 : types.filter[!isIsAbstract].filter(TypeDeclaration)) {
 			for (t2 : types) {
 				// possible improvement: check all supertypes and decide if negated or not based on negations/not negations of supertypes
 				if (t1 == t2 || support.dfsSupertypeCheck(t1, t2)) {
@@ -121,7 +147,9 @@ class Logic2VampireLanguageMapper_TypeMapper  {
 				it.operand = createVLSEquivalent => [
 					it.left = support.topLevelTypeFunc
 //					it.right = support.unfoldOr(new ArrayList<VLSTerm>(typeTrace.type2And.values))
-					it.right = support.unfoldOr(new ArrayList<VLSTerm>(trace.type2And.values))
+					val reversedList = new ArrayList<VLSTerm>(trace.type2And.values)
+//					Collections.reverse(reversedList)
+					it.right = support.unfoldOr(reversedList)
 				]
 			]
 		]
@@ -130,7 +158,7 @@ class Logic2VampireLanguageMapper_TypeMapper  {
 
 	}
 
-	//below are from previous interface
+	// below are from previous interface
 	def protected transformTypeReference(Type referred, Logic2VampireLanguageMapper mapper,
 		Logic2VampireLanguageMapperTrace trace) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")

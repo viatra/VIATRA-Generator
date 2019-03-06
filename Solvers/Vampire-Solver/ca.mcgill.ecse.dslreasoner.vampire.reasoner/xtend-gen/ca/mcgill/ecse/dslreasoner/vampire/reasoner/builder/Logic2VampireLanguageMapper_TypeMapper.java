@@ -3,10 +3,12 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDoubleQuote;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
@@ -16,6 +18,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
@@ -24,6 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -107,14 +111,38 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           final VLSFofFormula res = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_1);
           EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
           _formulas.add(res);
+          final List<VLSFunction> enumScopeElems = CollectionLiterals.<VLSFunction>newArrayList();
+          for (int i = 0; (i < ((Object[])Conversions.unwrapArray(type_1.getElements(), Object.class)).length); i++) {
+            {
+              final int num = (i + 1);
+              VLSFunctionAsTerm _createVLSFunctionAsTerm = this.factory.createVLSFunctionAsTerm();
+              final Procedure1<VLSFunctionAsTerm> _function_2 = (VLSFunctionAsTerm it) -> {
+                it.setFunctor(("eo" + Integer.valueOf(num)));
+              };
+              final VLSFunctionAsTerm cstTerm = ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function_2);
+              final VLSConstant cst = this.support.toConstant(cstTerm);
+              trace.uniqueInstances.add(cst);
+              final VLSFunction fct = this.support.duplicate(CollectionsUtil.<DefinedElement, VLSFunction>lookup(type_1.getElements().get(i), trace.element2Predicate), cstTerm);
+              enumScopeElems.add(fct);
+            }
+          }
+          VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
+          final Procedure1<VLSFofFormula> _function_2 = (VLSFofFormula it) -> {
+            it.setName(this.support.toIDMultiple("enumScope", type_1.getName().split(" ")[0]));
+            it.setFofRole("axiom");
+            it.setFofFormula(this.support.unfoldAnd(enumScopeElems));
+          };
+          final VLSFofFormula enumScope = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_2);
+          EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
+          _formulas_1.add(enumScope);
         }
       }
       final Function1<Type, Boolean> _function_1 = (Type it) -> {
         boolean _isIsAbstract = it.isIsAbstract();
         return Boolean.valueOf((!_isIsAbstract));
       };
-      Iterable<Type> _filter_1 = IterableExtensions.<Type>filter(types, _function_1);
-      for (final Type t1 : _filter_1) {
+      Iterable<TypeDeclaration> _filter_1 = Iterables.<TypeDeclaration>filter(IterableExtensions.<Type>filter(types, _function_1), TypeDeclaration.class);
+      for (final TypeDeclaration t1 : _filter_1) {
         {
           for (final Type t2 : types) {
             if ((Objects.equal(t1, t2) || this.support.dfsSupertypeCheck(t1, t2))) {
@@ -147,8 +175,8 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_2) -> {
             it_2.setLeft(this.support.topLevelTypeFunc());
             Collection<VLSTerm> _values = trace.type2And.values();
-            ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
-            it_2.setRight(this.support.unfoldOr(_arrayList));
+            final ArrayList<VLSTerm> reversedList = new ArrayList<VLSTerm>(_values);
+            it_2.setRight(this.support.unfoldOr(reversedList));
           };
           VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_4);
           it_1.setOperand(_doubleArrow);

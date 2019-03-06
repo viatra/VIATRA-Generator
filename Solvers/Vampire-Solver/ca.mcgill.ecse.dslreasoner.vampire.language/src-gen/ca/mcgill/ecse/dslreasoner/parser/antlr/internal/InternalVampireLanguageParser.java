@@ -5509,13 +5509,13 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVLSFofTerm"
-    // InternalVampireLanguage.g:2172:1: ruleVLSFofTerm returns [EObject current=null] : (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) ;
+    // InternalVampireLanguage.g:2172:1: ruleVLSFofTerm returns [EObject current=null] : (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionAsTerm_1= ruleVLSFunctionAsTerm | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) ;
     public final EObject ruleVLSFofTerm() throws RecognitionException {
         EObject current = null;
 
         EObject this_VLSVariable_0 = null;
 
-        EObject this_VLSFunctionFof_1 = null;
+        EObject this_VLSFunctionAsTerm_1 = null;
 
         EObject this_VLSDefinedTerm_2 = null;
 
@@ -5524,10 +5524,10 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalVampireLanguage.g:2178:2: ( (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) )
-            // InternalVampireLanguage.g:2179:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
+            // InternalVampireLanguage.g:2178:2: ( (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionAsTerm_1= ruleVLSFunctionAsTerm | this_VLSDefinedTerm_2= ruleVLSDefinedTerm ) )
+            // InternalVampireLanguage.g:2179:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionAsTerm_1= ruleVLSFunctionAsTerm | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
             {
-            // InternalVampireLanguage.g:2179:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionFof_1= ruleVLSFunctionFof | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
+            // InternalVampireLanguage.g:2179:2: (this_VLSVariable_0= ruleVLSVariable | this_VLSFunctionAsTerm_1= ruleVLSFunctionAsTerm | this_VLSDefinedTerm_2= ruleVLSDefinedTerm )
             int alt31=3;
             switch ( input.LA(1) ) {
             case RULE_UPPER_WORD_ID:
@@ -5578,18 +5578,18 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalVampireLanguage.g:2189:3: this_VLSFunctionFof_1= ruleVLSFunctionFof
+                    // InternalVampireLanguage.g:2189:3: this_VLSFunctionAsTerm_1= ruleVLSFunctionAsTerm
                     {
 
-                    			newCompositeNode(grammarAccess.getVLSFofTermAccess().getVLSFunctionFofParserRuleCall_1());
+                    			newCompositeNode(grammarAccess.getVLSFofTermAccess().getVLSFunctionAsTermParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
-                    this_VLSFunctionFof_1=ruleVLSFunctionFof();
+                    this_VLSFunctionAsTerm_1=ruleVLSFunctionAsTerm();
 
                     state._fsp--;
 
 
-                    			current = this_VLSFunctionFof_1;
+                    			current = this_VLSFunctionAsTerm_1;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -5635,25 +5635,25 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleVLSFofTerm"
 
 
-    // $ANTLR start "entryRuleVLSFunctionFof"
-    // InternalVampireLanguage.g:2210:1: entryRuleVLSFunctionFof returns [EObject current=null] : iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF ;
-    public final EObject entryRuleVLSFunctionFof() throws RecognitionException {
+    // $ANTLR start "entryRuleVLSFunctionAsTerm"
+    // InternalVampireLanguage.g:2210:1: entryRuleVLSFunctionAsTerm returns [EObject current=null] : iv_ruleVLSFunctionAsTerm= ruleVLSFunctionAsTerm EOF ;
+    public final EObject entryRuleVLSFunctionAsTerm() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleVLSFunctionFof = null;
+        EObject iv_ruleVLSFunctionAsTerm = null;
 
 
         try {
-            // InternalVampireLanguage.g:2210:55: (iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF )
-            // InternalVampireLanguage.g:2211:2: iv_ruleVLSFunctionFof= ruleVLSFunctionFof EOF
+            // InternalVampireLanguage.g:2210:58: (iv_ruleVLSFunctionAsTerm= ruleVLSFunctionAsTerm EOF )
+            // InternalVampireLanguage.g:2211:2: iv_ruleVLSFunctionAsTerm= ruleVLSFunctionAsTerm EOF
             {
-             newCompositeNode(grammarAccess.getVLSFunctionFofRule()); 
+             newCompositeNode(grammarAccess.getVLSFunctionAsTermRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleVLSFunctionFof=ruleVLSFunctionFof();
+            iv_ruleVLSFunctionAsTerm=ruleVLSFunctionAsTerm();
 
             state._fsp--;
 
-             current =iv_ruleVLSFunctionFof; 
+             current =iv_ruleVLSFunctionAsTerm; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -5668,12 +5668,12 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleVLSFunctionFof"
+    // $ANTLR end "entryRuleVLSFunctionAsTerm"
 
 
-    // $ANTLR start "ruleVLSFunctionFof"
-    // InternalVampireLanguage.g:2217:1: ruleVLSFunctionFof returns [EObject current=null] : ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? ) ;
-    public final EObject ruleVLSFunctionFof() throws RecognitionException {
+    // $ANTLR start "ruleVLSFunctionAsTerm"
+    // InternalVampireLanguage.g:2217:1: ruleVLSFunctionAsTerm returns [EObject current=null] : ( ( ( (lv_functor_0_1= RULE_LOWER_WORD_ID | lv_functor_0_2= RULE_SINGLE_QUOTE | lv_functor_0_3= RULE_DOLLAR_ID | lv_functor_0_4= RULE_DOUBLE_DOLLAR_ID ) ) ) (otherlv_1= '(' ( (lv_terms_2_0= ruleVLSFofTerm ) ) (otherlv_3= ',' ( (lv_terms_4_0= ruleVLSFofTerm ) ) )* otherlv_5= ')' )? ) ;
+    public final EObject ruleVLSFunctionAsTerm() throws RecognitionException {
         EObject current = null;
 
         Token lv_functor_0_1=null;
@@ -5740,11 +5740,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     {
                     lv_functor_0_1=(Token)match(input,RULE_LOWER_WORD_ID,FOLLOW_31); 
 
-                    						newLeafNode(lv_functor_0_1, grammarAccess.getVLSFunctionFofAccess().getFunctorLOWER_WORD_IDTerminalRuleCall_0_0_0());
+                    						newLeafNode(lv_functor_0_1, grammarAccess.getVLSFunctionAsTermAccess().getFunctorLOWER_WORD_IDTerminalRuleCall_0_0_0());
                     					
 
                     						if (current==null) {
-                    							current = createModelElement(grammarAccess.getVLSFunctionFofRule());
+                    							current = createModelElement(grammarAccess.getVLSFunctionAsTermRule());
                     						}
                     						setWithLastConsumed(
                     							current,
@@ -5760,11 +5760,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     {
                     lv_functor_0_2=(Token)match(input,RULE_SINGLE_QUOTE,FOLLOW_31); 
 
-                    						newLeafNode(lv_functor_0_2, grammarAccess.getVLSFunctionFofAccess().getFunctorSINGLE_QUOTETerminalRuleCall_0_0_1());
+                    						newLeafNode(lv_functor_0_2, grammarAccess.getVLSFunctionAsTermAccess().getFunctorSINGLE_QUOTETerminalRuleCall_0_0_1());
                     					
 
                     						if (current==null) {
-                    							current = createModelElement(grammarAccess.getVLSFunctionFofRule());
+                    							current = createModelElement(grammarAccess.getVLSFunctionAsTermRule());
                     						}
                     						setWithLastConsumed(
                     							current,
@@ -5780,11 +5780,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     {
                     lv_functor_0_3=(Token)match(input,RULE_DOLLAR_ID,FOLLOW_31); 
 
-                    						newLeafNode(lv_functor_0_3, grammarAccess.getVLSFunctionFofAccess().getFunctorDOLLAR_IDTerminalRuleCall_0_0_2());
+                    						newLeafNode(lv_functor_0_3, grammarAccess.getVLSFunctionAsTermAccess().getFunctorDOLLAR_IDTerminalRuleCall_0_0_2());
                     					
 
                     						if (current==null) {
-                    							current = createModelElement(grammarAccess.getVLSFunctionFofRule());
+                    							current = createModelElement(grammarAccess.getVLSFunctionAsTermRule());
                     						}
                     						setWithLastConsumed(
                     							current,
@@ -5800,11 +5800,11 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     {
                     lv_functor_0_4=(Token)match(input,RULE_DOUBLE_DOLLAR_ID,FOLLOW_31); 
 
-                    						newLeafNode(lv_functor_0_4, grammarAccess.getVLSFunctionFofAccess().getFunctorDOUBLE_DOLLAR_IDTerminalRuleCall_0_0_3());
+                    						newLeafNode(lv_functor_0_4, grammarAccess.getVLSFunctionAsTermAccess().getFunctorDOUBLE_DOLLAR_IDTerminalRuleCall_0_0_3());
                     					
 
                     						if (current==null) {
-                    							current = createModelElement(grammarAccess.getVLSFunctionFofRule());
+                    							current = createModelElement(grammarAccess.getVLSFunctionAsTermRule());
                     						}
                     						setWithLastConsumed(
                     							current,
@@ -5837,7 +5837,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     {
                     otherlv_1=(Token)match(input,34,FOLLOW_30); 
 
-                    				newLeafNode(otherlv_1, grammarAccess.getVLSFunctionFofAccess().getLeftParenthesisKeyword_1_0());
+                    				newLeafNode(otherlv_1, grammarAccess.getVLSFunctionAsTermAccess().getLeftParenthesisKeyword_1_0());
                     			
                     // InternalVampireLanguage.g:2295:4: ( (lv_terms_2_0= ruleVLSFofTerm ) )
                     // InternalVampireLanguage.g:2296:5: (lv_terms_2_0= ruleVLSFofTerm )
@@ -5846,7 +5846,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     // InternalVampireLanguage.g:2297:6: lv_terms_2_0= ruleVLSFofTerm
                     {
 
-                    						newCompositeNode(grammarAccess.getVLSFunctionFofAccess().getTermsVLSFofTermParserRuleCall_1_1_0());
+                    						newCompositeNode(grammarAccess.getVLSFunctionAsTermAccess().getTermsVLSFofTermParserRuleCall_1_1_0());
                     					
                     pushFollow(FOLLOW_14);
                     lv_terms_2_0=ruleVLSFofTerm();
@@ -5855,7 +5855,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
                     						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getVLSFunctionFofRule());
+                    							current = createModelElementForParent(grammarAccess.getVLSFunctionAsTermRule());
                     						}
                     						add(
                     							current,
@@ -5887,7 +5887,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     	    {
                     	    otherlv_3=(Token)match(input,29,FOLLOW_30); 
 
-                    	    					newLeafNode(otherlv_3, grammarAccess.getVLSFunctionFofAccess().getCommaKeyword_1_2_0());
+                    	    					newLeafNode(otherlv_3, grammarAccess.getVLSFunctionAsTermAccess().getCommaKeyword_1_2_0());
                     	    				
                     	    // InternalVampireLanguage.g:2319:5: ( (lv_terms_4_0= ruleVLSFofTerm ) )
                     	    // InternalVampireLanguage.g:2320:6: (lv_terms_4_0= ruleVLSFofTerm )
@@ -5896,7 +5896,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
                     	    // InternalVampireLanguage.g:2321:7: lv_terms_4_0= ruleVLSFofTerm
                     	    {
 
-                    	    							newCompositeNode(grammarAccess.getVLSFunctionFofAccess().getTermsVLSFofTermParserRuleCall_1_2_1_0());
+                    	    							newCompositeNode(grammarAccess.getVLSFunctionAsTermAccess().getTermsVLSFofTermParserRuleCall_1_2_1_0());
                     	    						
                     	    pushFollow(FOLLOW_14);
                     	    lv_terms_4_0=ruleVLSFofTerm();
@@ -5905,7 +5905,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
 
                     	    							if (current==null) {
-                    	    								current = createModelElementForParent(grammarAccess.getVLSFunctionFofRule());
+                    	    								current = createModelElementForParent(grammarAccess.getVLSFunctionAsTermRule());
                     	    							}
                     	    							add(
                     	    								current,
@@ -5931,7 +5931,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
 
                     otherlv_5=(Token)match(input,35,FOLLOW_2); 
 
-                    				newLeafNode(otherlv_5, grammarAccess.getVLSFunctionFofAccess().getRightParenthesisKeyword_1_3());
+                    				newLeafNode(otherlv_5, grammarAccess.getVLSFunctionAsTermAccess().getRightParenthesisKeyword_1_3());
                     			
 
                     }
@@ -5958,7 +5958,7 @@ public class InternalVampireLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleVLSFunctionFof"
+    // $ANTLR end "ruleVLSFunctionAsTerm"
 
 
     // $ANTLR start "entryRuleVLSDefinedTerm"
