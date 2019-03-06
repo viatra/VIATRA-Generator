@@ -30,15 +30,13 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		// 1.1 if variable has type, creating list of type declarations
 		val List<VLSVariable> relVar2VLS = new ArrayList
 		val List<VLSFunction> relVar2TypeDecComply = new ArrayList
-		val typedefs = new ArrayList<VLSTerm>
-
 		for (i : 0 ..< r.parameters.length) {
 
 			val v = createVLSVariable => [
 				it.name = support.toIDMultiple("V", i.toString)
 			]
 			relVar2VLS.add(v)
-			
+
 			val relType = (r.parameters.get(i) as ComplexTypeReference).referred
 			val varTypeComply = support.duplicate(relType.lookup(trace.type2Predicate), v)
 			relVar2TypeDecComply.add(varTypeComply)
@@ -47,33 +45,26 @@ class Logic2VampireLanguageMapper_RelationMapper {
 
 		val comply = createVLSFofFormula => [
 			val nameArray = r.name.split(" ")
-			it.name = support.toIDMultiple("compliance", nameArray.get(0),
-				nameArray.get(2))
+			it.name = support.toIDMultiple("compliance", nameArray.get(0), nameArray.get(2))
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
-
 				for (v : relVar2VLS) {
 					it.variables += support.duplicate(v)
 				}
-
 				it.operand = createVLSImplies => [
-					it.left = createVLSFunction => [
-						it.constant = support.toIDMultiple("rel", r.name)
-
-						for (i : 0 ..< r.parameters.length) {
-							val v = createVLSVariable => [
-								it.name = relVar2VLS.get(i).name
-							]
-							it.terms += v
+					val rel = createVLSFunction => [
+						it.constant = support.toIDMultiple("r", nameArray.get(0), nameArray.get(2))
+						for (v : relVar2VLS) {
+							it.terms += support.duplicate(v)
 						}
-
 					]
+					trace.rel2Predicate.put(r, rel)
+					it.left = support.duplicate(rel)
 					it.right = support.unfoldAnd(relVar2TypeDecComply)
 				]
 			]
 		]
 
-		// trace.relationDefinition2Predicate.put(r,res)
 		trace.specification.formulas += comply
 	}
 
@@ -100,9 +91,8 @@ class Logic2VampireLanguageMapper_RelationMapper {
 			relationVar2TypeDecComply.put(variable, varTypeComply)
 			relationVar2TypeDecRes.put(variable, support.duplicate(varTypeComply))
 		}
-
+		val nameArray = reldef.name.split(" ")
 		val comply = createVLSFofFormula => [
-			val nameArray = reldef.name.split(" ")
 			it.name = support.toIDMultiple("compliance", nameArray.get(nameArray.length - 2),
 				nameArray.get(nameArray.length - 1))
 			it.fofRole = "axiom"
@@ -127,7 +117,8 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		]
 
 		val res = createVLSFofFormula => [
-			it.name = support.toIDMultiple("relation", reldef.name)
+			it.name = support.toIDMultiple("relation", nameArray.get(nameArray.length - 2),
+				nameArray.get(nameArray.length - 1))
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
 				for (variable : reldef.variables) {

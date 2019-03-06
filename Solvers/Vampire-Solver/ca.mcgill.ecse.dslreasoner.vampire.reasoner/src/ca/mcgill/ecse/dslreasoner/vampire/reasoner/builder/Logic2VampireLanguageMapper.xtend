@@ -40,6 +40,7 @@ import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 
 class Logic2VampireLanguageMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -227,18 +228,18 @@ class Logic2VampireLanguageMapper {
 //	
 	def dispatch protected VLSTerm transformTerm(Forall forall, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
-		support.createUniversallyQuantifiedExpression(this, forall, trace, variables)
+		support.createQuantifiedExpression(this, forall, trace, variables, true)
 	}
 
 	def dispatch protected VLSTerm transformTerm(Exists exists, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
-		support.createExistentiallyQuantifiedExpression(this, exists, trace, variables)
+		support.createQuantifiedExpression(this, exists, trace, variables, false)
 	}
 
 	def dispatch protected VLSTerm transformTerm(InstanceOf instanceOf, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
 		return createVLSFunction => [
-			it.constant = support.toIDMultiple("t", (instanceOf.range as ComplexTypeReference).referred.name)
+			it.constant = (instanceOf.range as ComplexTypeReference).referred.lookup(trace.type2Predicate).constant
 			it.terms += instanceOf.value.transformTerm(trace, variables)
 		]
 	}
@@ -292,13 +293,8 @@ class Logic2VampireLanguageMapper {
 		Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 
 		// cannot treat variable as function (constant) because of name ID not being the same
-		// below does not work
-		val res = createVLSVariable => [
-//						it.name = support.toIDMultiple("Var", variable.lookup(variables).name)
-			it.name = support.toID(variable.lookup(variables).name)
-		]
 		// no need for potprocessing cuz booleans are supported
-		return res
+		return support.duplicate(variable.lookup(variables))
 	}
 
 	// TODO
@@ -383,7 +379,7 @@ class Logic2VampireLanguageMapper {
 //						it.params += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
 //					]
 		return createVLSFunction => [
-			it.constant = support.toIDMultiple("rel", relation.name)
+			it.constant = (relation as RelationDeclaration).lookup(trace.rel2Predicate).constant
 			it.terms += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
 		]
 	}

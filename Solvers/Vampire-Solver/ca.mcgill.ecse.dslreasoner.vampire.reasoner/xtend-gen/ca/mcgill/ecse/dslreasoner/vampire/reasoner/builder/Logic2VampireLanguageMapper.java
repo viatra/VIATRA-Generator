@@ -50,6 +50,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
@@ -262,18 +263,18 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected VLSTerm _transformTerm(final Forall forall, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    return this.support.createUniversallyQuantifiedExpression(this, forall, trace, variables);
+    return this.support.createQuantifiedExpression(this, forall, trace, variables, true);
   }
   
   protected VLSTerm _transformTerm(final Exists exists, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    return this.support.createExistentiallyQuantifiedExpression(this, exists, trace, variables);
+    return this.support.createQuantifiedExpression(this, exists, trace, variables, false);
   }
   
   protected VLSTerm _transformTerm(final InstanceOf instanceOf, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
       TypeReference _range = instanceOf.getRange();
-      it.setConstant(this.support.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
+      it.setConstant(CollectionsUtil.<Type, VLSFunction>lookup(((ComplexTypeReference) _range).getReferred(), trace.type2Predicate).getConstant());
       EList<VLSTerm> _terms = it.getTerms();
       VLSTerm _transformTerm = this.transformTerm(instanceOf.getValue(), trace, variables);
       _terms.add(_transformTerm);
@@ -303,12 +304,7 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected VLSTerm _transformSymbolicReference(final Variable variable, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-    final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
-      it.setName(this.support.toID(CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables).getName()));
-    };
-    final VLSVariable res = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
-    return res;
+    return this.support.duplicate(CollectionsUtil.<Variable, VLSVariable>lookup(variable, variables));
   }
   
   protected VLSTerm _transformSymbolicReference(final FunctionDeclaration function, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
@@ -359,7 +355,7 @@ public class Logic2VampireLanguageMapper {
   protected VLSTerm _transformSymbolicReference(final Relation relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
-      it.setConstant(this.support.toIDMultiple("rel", relation.getName()));
+      it.setConstant(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) relation), trace.rel2Predicate).getConstant());
       EList<VLSTerm> _terms = it.getTerms();
       final Function1<Term, VLSTerm> _function_1 = (Term p) -> {
         return this.transformTerm(p, trace, variables);
