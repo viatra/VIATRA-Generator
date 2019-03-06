@@ -48,7 +48,6 @@ public class Logic2VampireLanguageMapper_RelationMapper {
   public void _transformRelation(final RelationDeclaration r, final Logic2VampireLanguageMapperTrace trace) {
     final List<VLSVariable> relVar2VLS = new ArrayList<VLSVariable>();
     final List<VLSFunction> relVar2TypeDecComply = new ArrayList<VLSFunction>();
-    final ArrayList<VLSTerm> typedefs = new ArrayList<VLSTerm>();
     int _length = ((Object[])Conversions.unwrapArray(r.getParameters(), Object.class)).length;
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _length, true);
     for (final Integer i : _doubleDotLessThan) {
@@ -68,8 +67,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
       final String[] nameArray = r.getName().split(" ");
-      it.setName(this.support.toIDMultiple("compliance", nameArray[0], 
-        nameArray[2]));
+      it.setName(this.support.toIDMultiple("compliance", nameArray[0], nameArray[2]));
       it.setFofRole("axiom");
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it_1) -> {
@@ -82,23 +80,16 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         final Procedure1<VLSImplies> _function_2 = (VLSImplies it_2) -> {
           VLSFunction _createVLSFunction = this.factory.createVLSFunction();
           final Procedure1<VLSFunction> _function_3 = (VLSFunction it_3) -> {
-            it_3.setConstant(this.support.toIDMultiple("rel", r.getName()));
-            int _length_1 = ((Object[])Conversions.unwrapArray(r.getParameters(), Object.class)).length;
-            ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _length_1, true);
-            for (final Integer i_1 : _doubleDotLessThan_1) {
-              {
-                VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-                final Procedure1<VLSVariable> _function_4 = (VLSVariable it_4) -> {
-                  it_4.setName(relVar2VLS.get((i_1).intValue()).getName());
-                };
-                final VLSVariable v_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_4);
-                EList<VLSTerm> _terms = it_3.getTerms();
-                _terms.add(v_1);
-              }
+            it_3.setConstant(this.support.toIDMultiple("r", nameArray[0], nameArray[2]));
+            for (final VLSVariable v_1 : relVar2VLS) {
+              EList<VLSTerm> _terms = it_3.getTerms();
+              VLSVariable _duplicate_1 = this.support.duplicate(v_1);
+              _terms.add(_duplicate_1);
             }
           };
-          VLSFunction _doubleArrow = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_3);
-          it_2.setLeft(_doubleArrow);
+          final VLSFunction rel = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_3);
+          trace.rel2Predicate.put(r, rel);
+          it_2.setLeft(this.support.duplicate(rel));
           it_2.setRight(this.support.unfoldAnd(relVar2TypeDecComply));
         };
         VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_2);
@@ -139,9 +130,9 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         relationVar2TypeDecRes.put(variable, this.support.duplicate(varTypeComply));
       }
     }
+    final String[] nameArray = reldef.getName().split(" ");
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
-      final String[] nameArray = reldef.getName().split(" ");
       int _length = nameArray.length;
       int _minus = (_length - 2);
       int _length_1 = nameArray.length;
@@ -190,7 +181,12 @@ public class Logic2VampireLanguageMapper_RelationMapper {
     final VLSFofFormula comply = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
     VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
-      it.setName(this.support.toIDMultiple("relation", reldef.getName()));
+      int _length = nameArray.length;
+      int _minus = (_length - 2);
+      int _length_1 = nameArray.length;
+      int _minus_1 = (_length_1 - 1);
+      it.setName(this.support.toIDMultiple("relation", nameArray[_minus], 
+        nameArray[_minus_1]));
       it.setFofRole("axiom");
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<language:LogicProblem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem" xmlns:language_1="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:viatra2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/viatra2logicannotation">
+<language:LogicProblem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem" xmlns:language_1="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language">
   <types xsi:type="language_1:TypeDeclaration" name="FunctionalElement class" subtypes="//@types.2" isAbstract="true"/>
   <types xsi:type="language_1:TypeDeclaration" name="FunctionalArchitectureModel class"/>
   <types xsi:type="language_1:TypeDeclaration" name="Function class" supertypes="//@types.0"/>
@@ -494,22 +494,6 @@
       </expression>
     </value>
   </assertions>
-  <assertions name="errorpattern ca mcgill ecse dslreasoner vampire queries terminatorAndInformation" annotations="//@annotations.20">
-    <value xsi:type="language_1:Forall">
-      <quantifiedVariables name="p0">
-        <range xsi:type="language_1:ComplexTypeReference" referred="//@types.3"/>
-      </quantifiedVariables>
-      <quantifiedVariables name="p1">
-        <range xsi:type="language_1:ComplexTypeReference" referred="//@types.4"/>
-      </quantifiedVariables>
-      <expression xsi:type="language_1:Not">
-        <operand xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15">
-          <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.19/@value/@quantifiedVariables.0"/>
-          <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.19/@value/@quantifiedVariables.1"/>
-        </operand>
-      </expression>
-    </value>
-  </assertions>
   <relations xsi:type="language_1:RelationDeclaration" name="interface reference FunctionalElement">
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.5"/>
@@ -570,48 +554,6 @@
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.2"/>
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.9"/>
   </relations>
-  <relations xsi:type="language_1:RelationDefinition" name="pattern ca mcgill ecse dslreasoner vampire queries terminatorAndInformation" annotations="//@annotations.19">
-    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.3"/>
-    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.4"/>
-    <variables name="parameter T">
-      <range xsi:type="language_1:ComplexTypeReference" referred="//@types.3"/>
-    </variables>
-    <variables name="parameter I">
-      <range xsi:type="language_1:ComplexTypeReference" referred="//@types.4"/>
-    </variables>
-    <value xsi:type="language_1:Or">
-      <operands xsi:type="language_1:Exists">
-        <quantifiedVariables name="variable Out">
-          <range xsi:type="language_1:ComplexTypeReference" referred="//@types.7"/>
-        </quantifiedVariables>
-        <expression xsi:type="language_1:And">
-          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.11">
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@value/@operands.0/@quantifiedVariables.0"/>
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@variables.1"/>
-          </operands>
-          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.12">
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@value/@operands.0/@quantifiedVariables.0"/>
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@variables.0"/>
-          </operands>
-        </expression>
-      </operands>
-      <operands xsi:type="language_1:Exists">
-        <quantifiedVariables name="variable In">
-          <range xsi:type="language_1:ComplexTypeReference" referred="//@types.6"/>
-        </quantifiedVariables>
-        <expression xsi:type="language_1:And">
-          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.7">
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@variables.1"/>
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@value/@operands.1/@quantifiedVariables.0"/>
-          </operands>
-          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.12">
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@value/@operands.1/@quantifiedVariables.0"/>
-            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15/@variables.0"/>
-          </operands>
-        </expression>
-      </operands>
-    </value>
-  </relations>
   <elements name="Root literal FunctionType" definedInType="//@types.9"/>
   <elements name="Intermediate literal FunctionType" definedInType="//@types.9"/>
   <elements name="Leaf literal FunctionType" definedInType="//@types.9"/>
@@ -635,6 +577,4 @@
   <annotations xsi:type="ecore2logicannotations:InverseRelationAssertion" target="//@assertions.16" inverseA="//@relations.8" inverseB="//@relations.13"/>
   <annotations xsi:type="ecore2logicannotations:LowerMultiplicityAssertion" target="//@assertions.17" relation="//@relations.14" lower="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.18" relation="//@relations.14" upper="1"/>
-  <annotations xsi:type="viatra2logicannotations:TransfomedViatraQuery" target="//@relations.15" patternFullyQualifiedName="ca.mcgill.ecse.dslreasoner.vampire.queries.terminatorAndInformation"/>
-  <annotations xsi:type="viatra2logicannotations:TransformedViatraWellformednessConstraint" target="//@assertions.19" query="//@annotations.19"/>
 </language:LogicProblem>

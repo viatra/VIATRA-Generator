@@ -15,7 +15,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
@@ -59,9 +58,7 @@ public class GeneralTest {
         final InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic();
         Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
         final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
-        LogicProblem problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
-        Viatra2LogicConfiguration _viatra2LogicConfiguration = new Viatra2LogicConfiguration();
-        problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, _viatra2LogicConfiguration).getOutput();
+        LogicProblem problem = modelGenerationProblem.getOutput();
         workspace.writeModel(problem, "Fam.logicproblem");
         InputOutput.<String>println("Problem created");
         LogicResult solution = null;

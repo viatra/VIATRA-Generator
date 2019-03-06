@@ -20,6 +20,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
+import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -220,13 +221,13 @@ public class Logic2VampireLanguageMapper_Support {
    * 	ids.map[it.split("\\s+").join("'")].join("'")
    * }
    */
-  protected VLSTerm createUniversallyQuantifiedExpression(final Logic2VampireLanguageMapper mapper, final QuantifiedExpression expression, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    VLSUniversalQuantifier _xblockexpression = null;
+  protected VLSTerm createQuantifiedExpression(final Logic2VampireLanguageMapper mapper, final QuantifiedExpression expression, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables, final boolean isUniversal) {
+    VLSTerm _xblockexpression = null;
     {
       final Function1<Variable, VLSVariable> _function = (Variable v) -> {
         VLSVariable _createVLSVariable = this.factory.createVLSVariable();
         final Procedure1<VLSVariable> _function_1 = (VLSVariable it) -> {
-          it.setName(this.toIDMultiple("Var", v.getName()));
+          it.setName(this.toIDMultiple("V", v.getName()));
         };
         return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
       };
@@ -235,80 +236,43 @@ public class Logic2VampireLanguageMapper_Support {
       EList<Variable> _quantifiedVariables = expression.getQuantifiedVariables();
       for (final Variable variable : _quantifiedVariables) {
         {
-          VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-          final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-            TypeReference _range = variable.getRange();
-            it.setConstant(this.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
-            EList<VLSTerm> _terms = it.getTerms();
-            VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-            final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {
-              it_1.setName(this.toIDMultiple("Var", variable.getName()));
-            };
-            VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_2);
-            _terms.add(_doubleArrow);
-          };
-          final VLSFunction eq = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
+          TypeReference _range = variable.getRange();
+          final VLSFunction eq = this.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(((ComplexTypeReference) _range).getReferred(), trace.type2Predicate), CollectionsUtil.<Variable, VLSVariable>lookup(variable, variableMap));
           typedefs.add(eq);
         }
       }
-      VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-      final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it) -> {
-        EList<VLSVariable> _variables = it.getVariables();
-        Collection<VLSVariable> _values = variableMap.values();
-        Iterables.<VLSVariable>addAll(_variables, _values);
-        VLSImplies _createVLSImplies = this.factory.createVLSImplies();
-        final Procedure1<VLSImplies> _function_2 = (VLSImplies it_1) -> {
-          it_1.setLeft(this.unfoldAnd(typedefs));
-          it_1.setRight(mapper.transformTerm(expression.getExpression(), trace, this.withAddition(variables, variableMap)));
+      VLSTerm _xifexpression = null;
+      if (isUniversal) {
+        VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
+        final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it) -> {
+          EList<VLSVariable> _variables = it.getVariables();
+          Collection<VLSVariable> _values = variableMap.values();
+          Iterables.<VLSVariable>addAll(_variables, _values);
+          VLSImplies _createVLSImplies = this.factory.createVLSImplies();
+          final Procedure1<VLSImplies> _function_2 = (VLSImplies it_1) -> {
+            it_1.setLeft(this.unfoldAnd(typedefs));
+            it_1.setRight(mapper.transformTerm(expression.getExpression(), trace, this.withAddition(variables, variableMap)));
+          };
+          VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_2);
+          it.setOperand(_doubleArrow);
         };
-        VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_2);
-        it.setOperand(_doubleArrow);
-      };
-      _xblockexpression = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_1);
-    }
-    return _xblockexpression;
-  }
-  
-  protected VLSTerm createExistentiallyQuantifiedExpression(final Logic2VampireLanguageMapper mapper, final QuantifiedExpression expression, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    VLSExistentialQuantifier _xblockexpression = null;
-    {
-      final Function1<Variable, VLSVariable> _function = (Variable v) -> {
-        VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-        final Procedure1<VLSVariable> _function_1 = (VLSVariable it) -> {
-          it.setName(this.toIDMultiple("Var", v.getName()));
-        };
-        return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
-      };
-      final Map<Variable, VLSVariable> variableMap = IterableExtensions.<Variable, VLSVariable>toInvertedMap(expression.getQuantifiedVariables(), _function);
-      final ArrayList<VLSTerm> typedefs = new ArrayList<VLSTerm>();
-      EList<Variable> _quantifiedVariables = expression.getQuantifiedVariables();
-      for (final Variable variable : _quantifiedVariables) {
+        _xifexpression = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_1);
+      } else {
+        VLSExistentialQuantifier _xblockexpression_1 = null;
         {
-          VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-          final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-            TypeReference _range = variable.getRange();
-            it.setConstant(this.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
-            EList<VLSTerm> _terms = it.getTerms();
-            VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-            final Procedure1<VLSVariable> _function_2 = (VLSVariable it_1) -> {
-              it_1.setName(this.toIDMultiple("Var", variable.getName()));
-            };
-            VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_2);
-            _terms.add(_doubleArrow);
+          typedefs.add(mapper.transformTerm(expression.getExpression(), trace, this.withAddition(variables, variableMap)));
+          VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
+          final Procedure1<VLSExistentialQuantifier> _function_2 = (VLSExistentialQuantifier it) -> {
+            EList<VLSVariable> _variables = it.getVariables();
+            Collection<VLSVariable> _values = variableMap.values();
+            Iterables.<VLSVariable>addAll(_variables, _values);
+            it.setOperand(this.unfoldAnd(typedefs));
           };
-          final VLSFunction eq = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
-          typedefs.add(eq);
+          _xblockexpression_1 = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_2);
         }
+        _xifexpression = _xblockexpression_1;
       }
-      typedefs.add(mapper.transformTerm(expression.getExpression(), trace, this.withAddition(variables, variableMap)));
-      VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
-      final Procedure1<VLSExistentialQuantifier> _function_1 = (VLSExistentialQuantifier it) -> {
-        EList<VLSVariable> _variables = it.getVariables();
-        Collection<VLSVariable> _values = variableMap.values();
-        Iterables.<VLSVariable>addAll(_variables, _values);
-        it.setOperand(this.unfoldAnd(typedefs));
-      };
-      _xblockexpression = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_1);
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }

@@ -39,8 +39,9 @@ class GeneralTest {
 		val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
-		var problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
-		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
+		var problem = modelGenerationProblem.output
+//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
+//		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 
 		workspace.writeModel(problem, "Fam.logicproblem")
 

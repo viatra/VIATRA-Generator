@@ -17,6 +17,8 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.EList
 
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+
 class Logic2VampireLanguageMapper_Support {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
 
@@ -29,28 +31,27 @@ class Logic2VampireLanguageMapper_Support {
 		ids.split("\\s+").join("_")
 	}
 
-	//Term Handling
-	//TODO Make more general
+	// Term Handling
+	// TODO Make more general
 	def protected VLSVariable duplicate(VLSVariable term) {
 		return createVLSVariable => [it.name = term.name]
 	}
-	
+
 	def protected VLSFunction duplicate(VLSFunction term) {
 		return createVLSFunction => [
 			it.constant = term.constant
-			for ( v : term.terms){
+			for (v : term.terms) {
 				it.terms += duplicate(v as VLSVariable)
 			}
-			]
+		]
 	}
-	
+
 	def protected VLSFunction duplicate(VLSFunction term, VLSVariable v) {
 		return createVLSFunction => [
 			it.constant = term.constant
 			it.terms += duplicate(v)
-			]
+		]
 	}
-	
 
 	def protected VLSFunction topLevelTypeFunc() {
 		return createVLSFunction => [
@@ -60,24 +61,22 @@ class Logic2VampireLanguageMapper_Support {
 			]
 		]
 	}
-	
-	//TODO Make more general
+
+	// TODO Make more general
 	def establishUniqueness(List<VLSConstant> terms) {
 		val List<VLSInequality> eqs = newArrayList
-		for (t1 : terms.subList(1, terms.length)){
-			for (t2 : terms.subList(0, terms.indexOf(t1))){
+		for (t1 : terms.subList(1, terms.length)) {
+			for (t2 : terms.subList(0, terms.indexOf(t1))) {
 				val eq = createVLSInequality => [
-					//TEMP
+					// TEMP
 					it.left = createVLSConstant => [it.name = t2.name]
 					it.right = createVLSConstant => [it.name = t1.name]
-					//TEMP
+				// TEMP
 				]
 				eqs.add(eq)
-			}			
+			}
 		}
-		
 		return unfoldAnd(eqs)
-		
 	}
 
 	// Support Functions
@@ -108,6 +107,7 @@ class Logic2VampireLanguageMapper_Support {
 			throw new UnsupportedOperationException('''Logic operator with 0 operands!''') // TEMP
 	}
 
+	// can delete below
 	def protected VLSTerm unfoldDistinctTerms(Logic2VampireLanguageMapper m, EList<Term> operands,
 		Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 		if (operands.size == 1) {
@@ -143,58 +143,36 @@ class Logic2VampireLanguageMapper_Support {
 	 * }
 	 */
 	// QUANTIFIERS + VARIABLES
-	def protected VLSTerm createUniversallyQuantifiedExpression(Logic2VampireLanguageMapper mapper,
-		QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
+	def protected VLSTerm createQuantifiedExpression(Logic2VampireLanguageMapper mapper,
+		QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables, boolean isUniversal) {
 		val variableMap = expression.quantifiedVariables.toInvertedMap [ v |
-			createVLSVariable => [it.name = toIDMultiple("Var", v.name)]
+			createVLSVariable => [it.name = toIDMultiple("V", v.name)]
 		]
 
 		val typedefs = new ArrayList<VLSTerm>
 		for (variable : expression.quantifiedVariables) {
-			val eq = createVLSFunction => [
-				it.constant = toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
-				it.terms += createVLSVariable => [
-					it.name = toIDMultiple("Var", variable.name)
-				]
-
-			]
+			val eq = duplicate((variable.range as ComplexTypeReference).referred.lookup(trace.type2Predicate), variable.lookup(variableMap))
 			typedefs.add(eq)
 		}
-
-		createVLSUniversalQuantifier => [
-			it.variables += variableMap.values
-			it.operand = createVLSImplies => [
-				it.left = unfoldAnd(typedefs)
-				it.right = mapper.transformTerm(expression.expression, trace, variables.withAddition(variableMap))
-			]
-		]
-	}
-
-	def protected VLSTerm createExistentiallyQuantifiedExpression(Logic2VampireLanguageMapper mapper,
-		QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
-		val variableMap = expression.quantifiedVariables.toInvertedMap [ v |
-			createVLSVariable => [it.name = toIDMultiple("Var", v.name)]
-		]
-
-		val typedefs = new ArrayList<VLSTerm>
-		for (variable : expression.quantifiedVariables) {
-			val eq = createVLSFunction => [
-				it.constant = toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
-				it.terms += createVLSVariable => [
-					it.name = toIDMultiple("Var", variable.name)
+		if (isUniversal) {
+			createVLSUniversalQuantifier => [
+				it.variables += variableMap.values
+				it.operand = createVLSImplies => [
+					it.left = unfoldAnd(typedefs)
+					it.right = mapper.transformTerm(expression.expression, trace, variables.withAddition(variableMap))
 				]
 			]
-			typedefs.add(eq)
+		} else {
+			typedefs.add(mapper.transformTerm(expression.expression, trace, variables.withAddition(variableMap)))
+			createVLSExistentialQuantifier => [
+				it.variables += variableMap.values
+				it.operand = unfoldAnd(typedefs)
+
+			]
 		}
 
-		typedefs.add(mapper.transformTerm(expression.expression, trace, variables.withAddition(variableMap)))
-		createVLSExistentialQuantifier => [
-			it.variables += variableMap.values
-			it.operand = unfoldAnd(typedefs)
-
-		]
 	}
-	
+
 	def protected boolean dfsSupertypeCheck(Type type, Type type2) {
 		// There is surely a better way to do this
 		if (type.supertypes.isEmpty)
@@ -213,7 +191,5 @@ class Logic2VampireLanguageMapper_Support {
 	def protected withAddition(Map<Variable, VLSVariable> map1, Map<Variable, VLSVariable> map2) {
 		new HashMap(map1) => [putAll(map2)]
 	}
-	
-	
 
 }
