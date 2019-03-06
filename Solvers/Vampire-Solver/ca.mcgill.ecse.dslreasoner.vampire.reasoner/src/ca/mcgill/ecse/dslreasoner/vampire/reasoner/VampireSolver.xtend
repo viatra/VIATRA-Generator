@@ -3,7 +3,6 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetupGenerated
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper_FilteredTypes
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage
@@ -14,6 +13,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper
 
 class VampireSolver extends LogicReasoner {
 
@@ -23,8 +23,7 @@ class VampireSolver extends LogicReasoner {
 		VampireLanguageStandaloneSetup::doSetup()
 	}
 
-	val Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper(
-		new Logic2VampireLanguageMapper_TypeMapper_FilteredTypes)
+	val Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper
 	val Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper
 	val VampireHandler handler = new VampireHandler
 

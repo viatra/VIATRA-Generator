@@ -89,11 +89,7 @@ public class Logic2VampireLanguageMapper {
   private final Logic2VampireLanguageMapper_ScopeMapper scopeMapper = new Logic2VampireLanguageMapper_ScopeMapper(this);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private final Logic2VampireLanguageMapper_TypeMapper typeMapper;
-  
-  public Logic2VampireLanguageMapper(final Logic2VampireLanguageMapper_TypeMapper typeMapper) {
-    this.typeMapper = typeMapper;
-  }
+  private final Logic2VampireLanguageMapper_TypeMapper typeMapper = new Logic2VampireLanguageMapper_TypeMapper(this);
   
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration config) {
     VLSComment _createVLSComment = this.factory.createVLSComment();

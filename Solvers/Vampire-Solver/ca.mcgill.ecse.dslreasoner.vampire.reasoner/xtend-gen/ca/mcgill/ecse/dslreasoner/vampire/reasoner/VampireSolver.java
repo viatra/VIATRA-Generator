@@ -5,7 +5,6 @@ import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetupGenerated;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper_FilteredTypes;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
@@ -31,8 +30,7 @@ public class VampireSolver extends LogicReasoner {
     VampireLanguageStandaloneSetup.doSetup();
   }
   
-  private final Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper(
-    new Logic2VampireLanguageMapper_TypeMapper_FilteredTypes());
+  private final Logic2VampireLanguageMapper forwardMapper = new Logic2VampireLanguageMapper();
   
   private final Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper();
   
