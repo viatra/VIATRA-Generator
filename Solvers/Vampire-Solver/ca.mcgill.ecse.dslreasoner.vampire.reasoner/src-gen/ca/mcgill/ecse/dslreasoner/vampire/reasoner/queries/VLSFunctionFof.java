@@ -3,6 +3,7 @@
  */
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries;
 
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -40,8 +41,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern VLSFunctionFof(term: VLSFunctionFof){
- *         	VLSFunctionFof(term);
+ *         pattern VLSFunctionFof(term: VLSFunctionAsTerm){
+ *         	VLSFunctionAsTerm(term);
  *         }
  * </pre></code>
  * 
@@ -64,11 +65,11 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof fTerm;
+    private VLSFunctionAsTerm fTerm;
     
     private static List<String> parameterNames = makeImmutableList("term");
     
-    private Match(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    private Match(final VLSFunctionAsTerm pTerm) {
       this.fTerm = pTerm;
     }
     
@@ -78,7 +79,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
       return null;
     }
     
-    public ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof getTerm() {
+    public VLSFunctionAsTerm getTerm() {
       return this.fTerm;
     }
     
@@ -86,13 +87,13 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("term".equals(parameterName) ) {
-          this.fTerm = (ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof) newValue;
+          this.fTerm = (VLSFunctionAsTerm) newValue;
           return true;
       }
       return false;
     }
     
-    public void setTerm(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public void setTerm(final VLSFunctionAsTerm pTerm) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fTerm = pTerm;
     }
@@ -173,7 +174,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static VLSFunctionFof.Match newMutableMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public static VLSFunctionFof.Match newMutableMatch(final VLSFunctionAsTerm pTerm) {
       return new Mutable(pTerm);
     }
     
@@ -185,12 +186,12 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the (partial) match object.
      * 
      */
-    public static VLSFunctionFof.Match newMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public static VLSFunctionFof.Match newMatch(final VLSFunctionAsTerm pTerm) {
       return new Immutable(pTerm);
     }
     
     private static final class Mutable extends VLSFunctionFof.Match {
-      Mutable(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+      Mutable(final VLSFunctionAsTerm pTerm) {
         super(pTerm);
       }
       
@@ -201,7 +202,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
     }
     
     private static final class Immutable extends VLSFunctionFof.Match {
-      Immutable(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+      Immutable(final VLSFunctionAsTerm pTerm) {
         super(pTerm);
       }
       
@@ -223,8 +224,8 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern VLSFunctionFof(term: VLSFunctionFof){
-   * 	VLSFunctionFof(term);
+   * pattern VLSFunctionFof(term: VLSFunctionAsTerm){
+   * 	VLSFunctionAsTerm(term);
    * }
    * </pre></code>
    * 
@@ -282,7 +283,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<VLSFunctionFof.Match> getAllMatches(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public Collection<VLSFunctionFof.Match> getAllMatches(final VLSFunctionAsTerm pTerm) {
       return rawStreamAllMatches(new Object[]{pTerm}).collect(Collectors.toSet());
     }
     
@@ -296,7 +297,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<VLSFunctionFof.Match> streamAllMatches(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public Stream<VLSFunctionFof.Match> streamAllMatches(final VLSFunctionAsTerm pTerm) {
       return rawStreamAllMatches(new Object[]{pTerm});
     }
     
@@ -307,7 +308,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<VLSFunctionFof.Match> getOneArbitraryMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public Optional<VLSFunctionFof.Match> getOneArbitraryMatch(final VLSFunctionAsTerm pTerm) {
       return rawGetOneArbitraryMatch(new Object[]{pTerm});
     }
     
@@ -318,7 +319,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public boolean hasMatch(final VLSFunctionAsTerm pTerm) {
       return rawHasMatch(new Object[]{pTerm});
     }
     
@@ -328,7 +329,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public int countMatches(final VLSFunctionAsTerm pTerm) {
       return rawCountMatches(new Object[]{pTerm});
     }
     
@@ -340,7 +341,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm, final Consumer<? super VLSFunctionFof.Match> processor) {
+    public boolean forOneArbitraryMatch(final VLSFunctionAsTerm pTerm, final Consumer<? super VLSFunctionFof.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pTerm}, processor);
     }
     
@@ -352,7 +353,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the (partial) match object.
      * 
      */
-    public VLSFunctionFof.Match newMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof pTerm) {
+    public VLSFunctionFof.Match newMatch(final VLSFunctionAsTerm pTerm) {
       return VLSFunctionFof.Match.newMatch(pTerm);
     }
     
@@ -361,8 +362,8 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof> rawStreamAllValuesOfterm(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_TERM, parameters).map(ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof.class::cast);
+    protected Stream<VLSFunctionAsTerm> rawStreamAllValuesOfterm(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_TERM, parameters).map(VLSFunctionAsTerm.class::cast);
     }
     
     /**
@@ -370,7 +371,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof> getAllValuesOfterm() {
+    public Set<VLSFunctionAsTerm> getAllValuesOfterm() {
       return rawStreamAllValuesOfterm(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -379,14 +380,14 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof> streamAllValuesOfterm() {
+    public Stream<VLSFunctionAsTerm> streamAllValuesOfterm() {
       return rawStreamAllValuesOfterm(emptyArray());
     }
     
     @Override
     protected VLSFunctionFof.Match tupleToMatch(final Tuple t) {
       try {
-          return VLSFunctionFof.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof) t.get(POSITION_TERM));
+          return VLSFunctionFof.Match.newMatch((VLSFunctionAsTerm) t.get(POSITION_TERM));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -396,7 +397,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
     @Override
     protected VLSFunctionFof.Match arrayToMatch(final Object[] match) {
       try {
-          return VLSFunctionFof.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof) match[POSITION_TERM]);
+          return VLSFunctionFof.Match.newMatch((VLSFunctionAsTerm) match[POSITION_TERM]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -406,7 +407,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
     @Override
     protected VLSFunctionFof.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return VLSFunctionFof.Match.newMutableMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof) match[POSITION_TERM]);
+          return VLSFunctionFof.Match.newMutableMatch((VLSFunctionAsTerm) match[POSITION_TERM]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -457,7 +458,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
   
   @Override
   public VLSFunctionFof.Match newMatch(final Object... parameters) {
-    return VLSFunctionFof.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof) parameters[0]);
+    return VLSFunctionFof.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm) parameters[0]);
   }
   
   /**
@@ -489,7 +490,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static VLSFunctionFof.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_term = new PParameter("term", "ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionFof", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionFof")), PParameterDirection.INOUT);
+    private final PParameter parameter_term = new PParameter("term", "ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionAsTerm")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_term);
     
@@ -519,12 +520,12 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
       {
           PBody body = new PBody(this);
           PVariable var_term = body.getOrCreateVariableByName("term");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_term), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionFof")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_term), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionAsTerm")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_term, parameter_term)
           ));
-          // 	VLSFunctionFof(term)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_term), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionFof")));
+          // 	VLSFunctionAsTerm(term)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_term), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionAsTerm")));
           bodies.add(body);
       }
       return bodies;

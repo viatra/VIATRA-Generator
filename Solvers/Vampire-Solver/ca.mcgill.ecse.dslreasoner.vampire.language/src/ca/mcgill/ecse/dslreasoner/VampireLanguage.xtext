@@ -289,10 +289,10 @@ VLSVariable :
 
 VLSFofTerm returns VLSTerm:
 	//(VLSVariable | VLSFunction | VLSTffConditional | VLSTffLet | VLSTffTuple)
-	(VLSVariable | VLSFunctionFof | VLSDefinedTerm )
+	(VLSVariable | VLSFunctionAsTerm | VLSDefinedTerm )
 ;
 
-VLSFunctionFof:
+VLSFunctionAsTerm:
 	//? on next line causes warning
 	//TODO might need replace DOLLAR_ID with enum rule 
 	functor = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?

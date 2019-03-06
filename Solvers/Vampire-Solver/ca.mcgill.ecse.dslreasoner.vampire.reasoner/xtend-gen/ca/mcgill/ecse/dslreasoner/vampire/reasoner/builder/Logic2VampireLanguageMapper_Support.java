@@ -6,6 +6,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInequality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOr;
@@ -62,6 +63,22 @@ public class Logic2VampireLanguageMapper_Support {
     return ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
   }
   
+  protected VLSFunctionAsTerm duplicate(final VLSFunctionAsTerm term) {
+    VLSFunctionAsTerm _createVLSFunctionAsTerm = this.factory.createVLSFunctionAsTerm();
+    final Procedure1<VLSFunctionAsTerm> _function = (VLSFunctionAsTerm it) -> {
+      it.setFunctor(term.getFunctor());
+    };
+    return ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function);
+  }
+  
+  protected VLSConstant duplicate(final VLSConstant term) {
+    VLSConstant _createVLSConstant = this.factory.createVLSConstant();
+    final Procedure1<VLSConstant> _function = (VLSConstant it) -> {
+      it.setName(term.getName());
+    };
+    return ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function);
+  }
+  
   protected VLSFunction duplicate(final VLSFunction term) {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
@@ -87,6 +104,25 @@ public class Logic2VampireLanguageMapper_Support {
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
+  protected VLSFunction duplicate(final VLSFunction term, final VLSFunctionAsTerm v) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant(term.getConstant());
+      EList<VLSTerm> _terms = it.getTerms();
+      VLSFunctionAsTerm _duplicate = this.duplicate(v);
+      _terms.add(_duplicate);
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
+  protected VLSConstant toConstant(final VLSFunctionAsTerm term) {
+    VLSConstant _createVLSConstant = this.factory.createVLSConstant();
+    final Procedure1<VLSConstant> _function = (VLSConstant it) -> {
+      it.setName(term.getFunctor());
+    };
+    return ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function);
+  }
+  
   protected VLSFunction topLevelTypeFunc() {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
@@ -98,6 +134,17 @@ public class Logic2VampireLanguageMapper_Support {
       };
       VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
       _terms.add(_doubleArrow);
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
+  protected VLSFunction topLevelTypeFunc(final VLSFunctionAsTerm v) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant("object");
+      EList<VLSTerm> _terms = it.getTerms();
+      VLSFunctionAsTerm _duplicate = this.duplicate(v);
+      _terms.add(_duplicate);
     };
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }

@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapperTrace;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
@@ -14,7 +15,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class Logic2VampireLanguageMapperTrace {
@@ -33,6 +36,8 @@ public class Logic2VampireLanguageMapperTrace {
   public final Map<Type, VLSTerm> type2PossibleNot = new HashMap<Type, VLSTerm>();
   
   public final Map<Type, VLSTerm> type2And = new HashMap<Type, VLSTerm>();
+  
+  public final List<VLSConstant> uniqueInstances = CollectionLiterals.<VLSConstant>newArrayList();
   
   public Map<ConstantDeclaration, ConstantDefinition> constantDefinitions;
   

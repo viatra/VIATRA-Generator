@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
@@ -13,6 +14,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
 import java.util.HashMap
+import java.util.List
 import java.util.Map
 
 interface Logic2VampireLanguageMapper_TypeMapperTrace {}
@@ -32,6 +34,9 @@ class Logic2VampireLanguageMapperTrace {
 	public val Map<DefinedElement, VLSFunction> element2Predicate = new HashMap
 	public val Map<Type, VLSTerm> type2PossibleNot = new HashMap
 	public val Map<Type, VLSTerm> type2And = new HashMap
+	//Uniqueness
+	public val List<VLSConstant> uniqueInstances = newArrayList
+	
 	
 	public var Map<ConstantDeclaration, ConstantDefinition> constantDefinitions
 	public var Map<RelationDeclaration, RelationDefinition> relationDefinitions

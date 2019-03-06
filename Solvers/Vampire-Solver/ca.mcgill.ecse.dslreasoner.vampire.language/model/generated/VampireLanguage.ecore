@@ -54,7 +54,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="VLSVariable" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSFunctionFof" eSuperTypes="#//VLSTerm">
+  <eClassifiers xsi:type="ecore:EClass" name="VLSFunctionAsTerm" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="functor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="-1"
         eType="#//VLSTerm" containment="true"/>
