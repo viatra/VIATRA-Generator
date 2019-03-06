@@ -111,7 +111,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           final VLSFofFormula res = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_1);
           EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
           _formulas.add(res);
-          final List<VLSFunction> enumScopeElems = CollectionLiterals.<VLSFunction>newArrayList();
+          final List<VLSTerm> enumScopeElems = CollectionLiterals.<VLSTerm>newArrayList();
           for (int i = 0; (i < ((Object[])Conversions.unwrapArray(type_1.getElements(), Object.class)).length); i++) {
             {
               final int num = (i + 1);
@@ -124,6 +124,17 @@ public class Logic2VampireLanguageMapper_TypeMapper {
               trace.uniqueInstances.add(cst);
               final VLSFunction fct = this.support.duplicate(CollectionsUtil.<DefinedElement, VLSFunction>lookup(type_1.getElements().get(i), trace.element2Predicate), cstTerm);
               enumScopeElems.add(fct);
+              for (int j = 0; (j < ((Object[])Conversions.unwrapArray(type_1.getElements(), Object.class)).length); j++) {
+                if ((j != i)) {
+                  final VLSFunction op = this.support.duplicate(CollectionsUtil.<DefinedElement, VLSFunction>lookup(type_1.getElements().get(j), trace.element2Predicate), cstTerm);
+                  VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
+                  final Procedure1<VLSUnaryNegation> _function_3 = (VLSUnaryNegation it) -> {
+                    it.setOperand(op);
+                  };
+                  final VLSUnaryNegation negFct = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_3);
+                  enumScopeElems.add(negFct);
+                }
+              }
             }
           }
           VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
