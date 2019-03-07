@@ -23,12 +23,12 @@ class FAMTest {
 		println("Input and output workspaces are created")
 
 		val metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE)
-		val partialModel = GeneralTest.loadPartialModel(inputs, "FunctionalArchitectureModel2.xmi")
+		val partialModel = GeneralTest.loadPartialModel(inputs, "FaModel.xmi")
 		val queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance)
 
 		println("DSL loaded")
 		
-		GeneralTest.createAndSolveProblem(metamodel, new LinkedList<EObject>, queries, workspace)	
+		GeneralTest.createAndSolveProblem(metamodel, partialModel, queries, workspace)	
 	}
 	
 	

@@ -78,7 +78,14 @@ public class Logic2VampireLanguageMapper_TypeMapper {
             {
               VLSFunction _createVLSFunction = this.factory.createVLSFunction();
               final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-                it.setConstant(this.support.toIDMultiple("e", e.getName().split(" ")[0], e.getName().split(" ")[2]));
+                final String[] splitName = e.getName().split(" ");
+                int _length = splitName.length;
+                boolean _greaterThan = (_length > 2);
+                if (_greaterThan) {
+                  it.setConstant(this.support.toIDMultiple("e", splitName[0], splitName[2]));
+                } else {
+                  it.setConstant(this.support.toIDMultiple("e", splitName[0]));
+                }
                 EList<VLSTerm> _terms = it.getTerms();
                 VLSVariable _duplicate = this.support.duplicate(variable);
                 _terms.add(_duplicate);
@@ -175,7 +182,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
       }
       VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
       final Procedure1<VLSFofFormula> _function_2 = (VLSFofFormula it) -> {
-        it.setName("hierarchyHandler");
+        it.setName("inheritanceHierarchyHandler");
         it.setFofRole("axiom");
         VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
         final Procedure1<VLSUniversalQuantifier> _function_3 = (VLSUniversalQuantifier it_1) -> {

@@ -2,6 +2,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
@@ -39,6 +40,7 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -52,6 +54,8 @@ public class GeneralTest {
     try {
       String _xblockexpression = null;
       {
+        @Extension
+        final VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE;
         final Ecore2Logic ecore2Logic = new Ecore2Logic();
         final Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic);
         final Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic);
@@ -68,7 +72,8 @@ public class GeneralTest {
         VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
         final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
           it.documentationLevel = DocumentationLevel.FULL;
-          it.typeScopes.minNewElements = 5;
+          it.typeScopes.minNewElements = 3;
+          it.typeScopes.maxNewElements = 6;
         };
         final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
         solution = reasoner.solve(problem, vampireConfig, workspace);
