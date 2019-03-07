@@ -7,6 +7,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import java.util.ArrayList
 import java.util.HashMap
@@ -43,7 +44,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 
 		}
 
-		val comply = createVLSFofFormula => [
+		val comply = createVLSFofFormula=> [
 			val nameArray = r.name.split(" ")
 			it.name = support.toIDMultiple("compliance", nameArray.get(0), nameArray.get(2))
 			it.fofRole = "axiom"

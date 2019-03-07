@@ -2,19 +2,23 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
+import functionalarchitecture.Function
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
+import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
@@ -26,13 +30,12 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
+import org.eclipse.emf.ecore.EClassifier
 
 class GeneralTest {
 	def static String createAndSolveProblem(EcoreMetamodelDescriptor metamodel, List<EObject> partialModel,
 		ViatraQuerySetDescriptor queries, FileSystemWorkspace workspace) {
+		val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
 		val Ecore2Logic ecore2Logic = new Ecore2Logic
 		val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
 		val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
@@ -52,10 +55,17 @@ class GeneralTest {
 		
 		//*
 		reasoner = new VampireSolver
+//		val typeMap = new HashMap<Type, Integer>
+//		val n = Function.simpleName
+//		val classif = factory.vampireLanguagePackage.getEClassifier(n) as EClass
+//		val x = ecore2Logic.TypeofEClass(modelGenerationProblem.trace, classif)
+//		typeMap.put(x, 3)
 		val vampireConfig = new VampireSolverConfiguration => [
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
-			it.typeScopes.minNewElements = 5
+			it.typeScopes.minNewElements = 3
+			it.typeScopes.maxNewElements = 6
+//			it.typeScopes.minNewElementsByType = typeMap
 		]
 		solution = reasoner.solve(problem, vampireConfig, workspace)
 		

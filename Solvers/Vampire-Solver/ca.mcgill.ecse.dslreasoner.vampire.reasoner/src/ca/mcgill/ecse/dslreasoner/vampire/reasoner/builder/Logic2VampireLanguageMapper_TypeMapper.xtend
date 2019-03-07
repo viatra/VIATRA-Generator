@@ -48,7 +48,13 @@ class Logic2VampireLanguageMapper_TypeMapper {
 			val List<VLSFunction> orElems = newArrayList
 			for (e : type.elements) {
 				val enumElemPred = createVLSFunction => [
-					it.constant = support.toIDMultiple("e", e.name.split(" ").get(0), e.name.split(" ").get(2))
+					val splitName = e.name.split(" ")
+					if( splitName.length > 2) {
+						it.constant = support.toIDMultiple("e", splitName.get(0), splitName.get(2))
+					}
+					else {
+						it.constant = support.toIDMultiple("e", splitName.get(0))
+					}
 					it.terms += support.duplicate(variable)
 				]
 //				typeTrace.element2Predicate.put(e, enumElemPred)
@@ -63,26 +69,8 @@ class Logic2VampireLanguageMapper_TypeMapper {
 				it.fofFormula = createVLSUniversalQuantifier => [
 					it.variables += support.duplicate(variable)
 					it.operand = createVLSEquivalent => [
-//						it.left = createVLSFunction => [
-//							it.constant = type.lookup(typeTrace.type2Predicate).constant
-//							it.terms += createVLSVariable => [it.name = "A"]
-//						]
-//						it.left = type.lookup(typeTrace.type2Predicate)
 						it.left = type.lookup(trace.type2Predicate)
-
 						it.right = support.unfoldOr(orElems)
-
-					// TEMPPPPPPP
-//						it.right = support.unfoldOr(type.elements.map [e |
-//							
-//							createVLSEquality => [
-//								it.left = support.duplicate(variable)
-//								it.right = createVLSDoubleQuote => [
-//									it.value = "\"a" + e.name + "\""
-//								]
-//							]
-//						])
-					// END TEMPPPPP
 					]
 				]
 
@@ -152,7 +140,7 @@ class Logic2VampireLanguageMapper_TypeMapper {
 
 		// 5. create fof function that is an or with all the elements in map
 		val hierarch = createVLSFofFormula => [
-			it.name = "hierarchyHandler"
+			it.name = "inheritanceHierarchyHandler"
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
 				it.variables += support.duplicate(variable)
