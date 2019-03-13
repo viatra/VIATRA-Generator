@@ -6,6 +6,7 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
@@ -15,6 +16,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -47,24 +50,26 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     final int GLOBAL_MAX = config.typeScopes.maxNewElements;
     final ArrayList<Object> localInstances = CollectionLiterals.<Object>newArrayList();
     if ((GLOBAL_MIN != 0)) {
-      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, false);
-      this.makeFofFormula(localInstances, trace, true, "object");
+      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false);
+      this.makeFofFormula(localInstances, trace, true, null);
     }
     if ((GLOBAL_MAX != 0)) {
-      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true);
-      this.makeFofFormula(localInstances, trace, false, "object");
+      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true);
+      this.makeFofFormula(localInstances, trace, false, null);
     }
     int i = 0;
     int minNum = (-1);
+    Map<Type, Integer> startPoints = new HashMap<Type, Integer>();
     Set<Type> _keySet = config.typeScopes.minNewElementsByType.keySet();
     for (final Type t : _keySet) {
       {
         minNum = (CollectionsUtil.<Type, Integer>lookup(t, config.typeScopes.minNewElementsByType)).intValue();
         if ((minNum != 0)) {
-          this.getInstanceConstants((i + minNum), i, localInstances, trace, false);
+          this.getInstanceConstants((i + minNum), i, localInstances, trace, true, false);
+          startPoints.put(t, Integer.valueOf(i));
           int _i = i;
           i = (_i + minNum);
-          this.makeFofFormula(localInstances, trace, true, t.toString());
+          this.makeFofFormula(localInstances, trace, true, t);
         }
       }
     }
@@ -73,10 +78,14 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       {
         Integer maxNum = CollectionsUtil.<Type, Integer>lookup(t_1, config.typeScopes.maxNewElementsByType);
         minNum = (CollectionsUtil.<Type, Integer>lookup(t_1, config.typeScopes.minNewElementsByType)).intValue();
-        if (((maxNum).intValue() != 0)) {
-          int forLimit = Math.min(GLOBAL_MAX, ((i + (maxNum).intValue()) - minNum));
-          this.getInstanceConstants(GLOBAL_MAX, i, localInstances, trace, false);
-          this.makeFofFormula(localInstances, trace, false, t_1.toString());
+        Integer startpoint = CollectionsUtil.<Type, Integer>lookup(t_1, startPoints);
+        if ((minNum != 0)) {
+          this.getInstanceConstants(((startpoint).intValue() + minNum), (startpoint).intValue(), localInstances, trace, true, false);
+        }
+        if (((maxNum).intValue() != minNum)) {
+          int instEndInd = Math.min(GLOBAL_MAX, ((i + (maxNum).intValue()) - minNum));
+          this.getInstanceConstants(instEndInd, i, localInstances, trace, false, false);
+          this.makeFofFormula(localInstances, trace, false, t_1);
         }
       }
     }
@@ -95,9 +104,11 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     }
   }
   
-  protected void getInstanceConstants(final int numElems, final int init, final ArrayList list, final Logic2VampireLanguageMapperTrace trace, final boolean addToTrace) {
-    list.clear();
-    for (int i = init; (i < numElems); i++) {
+  protected void getInstanceConstants(final int endInd, final int startInd, final ArrayList list, final Logic2VampireLanguageMapperTrace trace, final boolean clear, final boolean addToTrace) {
+    if (clear) {
+      list.clear();
+    }
+    for (int i = startInd; (i < endInd); i++) {
       {
         final int num = (i + 1);
         VLSConstant _createVLSConstant = this.factory.createVLSConstant();
@@ -113,7 +124,18 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     }
   }
   
-  protected void makeFofFormula(final ArrayList list, final Logic2VampireLanguageMapperTrace trace, final boolean minimum, final String name) {
+  protected void makeFofFormula(final ArrayList list, final Logic2VampireLanguageMapperTrace trace, final boolean minimum, final Type type) {
+    String nm = "";
+    VLSFunction tm = null;
+    if ((type == null)) {
+      nm = "object";
+      tm = this.support.topLevelTypeFunc();
+    } else {
+      nm = CollectionsUtil.<Type, VLSFunction>lookup(type, trace.type2Predicate).getConstant().toString();
+      tm = this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(type, trace.type2Predicate));
+    }
+    final String name = nm;
+    final VLSFunction term = tm;
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
       String _xifexpression = null;
@@ -146,8 +168,9 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
               return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_4);
             };
             it_2.setLeft(this.support.unfoldOr(ListExtensions.<VLSTerm, VLSEquality>map(list, _function_3)));
-            it_2.setRight(this.support.topLevelTypeFunc());
+            it_2.setRight(term);
           } else {
+            it_2.setLeft(term);
             final Function1<VLSTerm, VLSEquality> _function_4 = (VLSTerm i) -> {
               VLSEquality _createVLSEquality = this.factory.createVLSEquality();
               final Procedure1<VLSEquality> _function_5 = (VLSEquality it_3) -> {
@@ -162,7 +185,6 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
               return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_5);
             };
             it_2.setRight(this.support.unfoldOr(ListExtensions.<VLSTerm, VLSEquality>map(list, _function_4)));
-            it_2.setLeft(this.support.topLevelTypeFunc());
           }
         };
         VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_2);

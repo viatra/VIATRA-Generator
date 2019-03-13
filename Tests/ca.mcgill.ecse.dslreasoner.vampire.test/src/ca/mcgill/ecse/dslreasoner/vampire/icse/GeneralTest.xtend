@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
 import org.eclipse.emf.ecore.EClassifier
+import functionalarchitecture.FunctionalOutput
 
 class GeneralTest {
 	def static String createAndSolveProblem(EcoreMetamodelDescriptor metamodel, List<EObject> partialModel,
@@ -45,43 +46,70 @@ class GeneralTest {
 		var problem = modelGenerationProblem.output
 //		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
-
 		workspace.writeModel(problem, "Fam.logicproblem")
 
 		println("Problem created")
 
 		var LogicResult solution
 		var LogicReasoner reasoner
-		
-		//*
+
+		// *
 		reasoner = new VampireSolver
-//		val typeMap = new HashMap<Type, Integer>
-//		val n = Function.simpleName
-//		val classif = factory.vampireLanguagePackage.getEClassifier(n) as EClass
-//		val x = ecore2Logic.TypeofEClass(modelGenerationProblem.trace, classif)
-//		typeMap.put(x, 3)
+
+		// Setting up scope
+		val typeMapMin = new HashMap<Type, Integer>
+		val typeMapMax = new HashMap<Type, Integer>
+		val list2MapMin = metamodel.classes.toMap[s|s.name]
+		val list2MapMax = metamodel.classes.toMap[s|s.name]
+
+		// Minimum Scope
+		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
+			list2MapMin.get(Function.simpleName)
+		), 3)
+		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
+			list2MapMin.get(functionalarchitecture.FunctionalInterface.simpleName)
+		), 2)
+		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
+			list2MapMin.get(FunctionalOutput.simpleName)
+		), 1)
+
+		// Maximum Scope
+		typeMapMax.put(ecore2Logic.TypeofEClass(
+			modelGenerationProblem.trace,
+			list2MapMax.get(Function.simpleName)
+		), 5)
+		typeMapMax.put(ecore2Logic.TypeofEClass(
+			modelGenerationProblem.trace,
+			list2MapMax.get(functionalarchitecture.FunctionalInterface.simpleName)
+		), 2)
+		typeMapMax.put(ecore2Logic.TypeofEClass(
+			modelGenerationProblem.trace,
+			list2MapMax.get(FunctionalOutput.simpleName)
+		), 4)
+
+		// Configuration
 		val vampireConfig = new VampireSolverConfiguration => [
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
-			it.typeScopes.minNewElements = 3
-			it.typeScopes.maxNewElements = 6
-//			it.typeScopes.minNewElementsByType = typeMap
+			it.typeScopes.minNewElements = 6
+			it.typeScopes.maxNewElements = 8
+			it.typeScopes.minNewElementsByType = typeMapMin
+			it.typeScopes.maxNewElementsByType = typeMapMax
 		]
 		solution = reasoner.solve(problem, vampireConfig, workspace)
-		
-		/*/
-		
-		reasoner = new AlloySolver
-		val alloyConfig = new AlloySolverConfiguration => [
-			it.typeScopes.maxNewElements = 7
-			it.typeScopes.minNewElements = 3
-			it.solutionScope.numberOfRequiredSolution = 1
-			it.typeScopes.maxNewIntegers = 0
-			it.documentationLevel = DocumentationLevel::NORMAL
-		]
-		solution = reasoner.solve(problem, alloyConfig, workspace)
-		//*/
 
+		/*/
+		 * 
+		 * reasoner = new AlloySolver
+		 * val alloyConfig = new AlloySolverConfiguration => [
+		 * 	it.typeScopes.maxNewElements = 7
+		 * 	it.typeScopes.minNewElements = 3
+		 * 	it.solutionScope.numberOfRequiredSolution = 1
+		 * 	it.typeScopes.maxNewIntegers = 0
+		 * 	it.documentationLevel = DocumentationLevel::NORMAL
+		 * ]
+		 * solution = reasoner.solve(problem, alloyConfig, workspace)
+		 //*/
 		println("Problem solved")
 	}
 
