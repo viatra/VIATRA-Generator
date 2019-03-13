@@ -1,13 +1,15 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
-import java.util.List
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import java.util.ArrayList
+import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.HashMap
 
 class Logic2VampireLanguageMapper_ScopeMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -21,9 +23,9 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 	def dispatch public void transformScope(LogicSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
 
-//		HANDLE ERRORS RELATED TO MAX > MIN
-//		HANDLE ERROR RELATED TO SUM(MIN TYPES) > MAX OBJECTS
-//		NOT SPECIFIED MEANS =0 ?
+//		TODO HANDLE ERRORS RELATED TO MAX > MIN
+//		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES) > MAX OBJECTS
+//		TODO NOT SPECIFIED MEANS =0 ?
 		// 1. make a list of constants equaling the min number of specified objects
 		val GLOBAL_MIN = config.typeScopes.minNewElements
 		val GLOBAL_MAX = config.typeScopes.maxNewElements
@@ -32,42 +34,47 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Minimum_General
 		if (GLOBAL_MIN != 0) {
-			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, false) // fix last param
-			makeFofFormula(localInstances, trace, true, "object")
+			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false) // fix last param
+			makeFofFormula(localInstances, trace, true, null)
 		}
 
 		// Handling Maximum_General
 		if (GLOBAL_MAX != 0) {
-			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true) // fix last param
-			makeFofFormula(localInstances, trace, false, "object")
+			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true) // fix last param
+			makeFofFormula(localInstances, trace, false, null)
 		}
 
 		// Handling Minimum_Specific
 		var i = 0
 		var minNum = -1
+		var Map<Type, Integer> startPoints = new HashMap
 		for (t : config.typeScopes.minNewElementsByType.keySet) {
 			minNum = t.lookup(config.typeScopes.minNewElementsByType)
 			if (minNum != 0) {
-				getInstanceConstants(i+minNum, i, localInstances, trace, false)
+				getInstanceConstants(i + minNum, i, localInstances, trace, true, false)
+				startPoints.put(t, i)
 				i += minNum
-				makeFofFormula(localInstances, trace, true, t.toString)//fix last param
+				makeFofFormula(localInstances, trace, true, t)
 			}
 		}
 
-		//TODO: calc sum of mins, compare to current value of i
-		
+		// TODO: calc sum of mins, compare to current value of i
 		// Handling Maximum_Specific
 		for (t : config.typeScopes.maxNewElementsByType.keySet) {
 			var maxNum = t.lookup(config.typeScopes.maxNewElementsByType)
 			minNum = t.lookup(config.typeScopes.minNewElementsByType)
-			if (maxNum != 0) {
-				var forLimit = Math.min(GLOBAL_MAX, i+maxNum-minNum)
-				getInstanceConstants(GLOBAL_MAX, i, localInstances, trace, false)
-				makeFofFormula(localInstances, trace, false, t.toString)//fix last param
+			var startpoint = t.lookup(startPoints)
+			if (minNum != 0) {
+				getInstanceConstants(startpoint + minNum, startpoint, localInstances, trace, true, false)
+			}
+			if (maxNum != minNum) {
+				var instEndInd = Math.min(GLOBAL_MAX, i + maxNum - minNum)
+				getInstanceConstants(instEndInd, i, localInstances, trace, false, false)
+				makeFofFormula(localInstances, trace, false, t)
 			}
 		}
 
-		// 3. Specify uniqueness of elements
+// 3. Specify uniqueness of elements
 		if (trace.uniqueInstances.length != 0) {
 			val uniqueness = createVLSFofFormula => [
 				it.name = "typeUniqueness"
@@ -79,10 +86,12 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 	}
 
-	def protected void getInstanceConstants(int numElems, int init, ArrayList list,
-		Logic2VampireLanguageMapperTrace trace, boolean addToTrace) {
-		list.clear
-		for (var i = init; i < numElems; i++) {
+	def protected void getInstanceConstants(int endInd, int startInd, ArrayList list,
+		Logic2VampireLanguageMapperTrace trace, boolean clear, boolean addToTrace) {
+		if (clear) {
+			list.clear
+		}
+		for (var i = startInd; i < endInd; i++) {
 			val num = i + 1
 			val cst = createVLSConstant => [
 				it.name = "o" + num
@@ -94,7 +103,20 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		}
 	}
 
-	def protected void makeFofFormula(ArrayList list, Logic2VampireLanguageMapperTrace trace, boolean minimum, String name) {
+	def protected void makeFofFormula(ArrayList list, Logic2VampireLanguageMapperTrace trace, boolean minimum,
+		Type type) {
+		var nm = ""
+		var VLSFunction tm = null
+		if (type === null) {
+			nm = "object"
+			tm = support.topLevelTypeFunc
+		} else {
+			nm = type.lookup(trace.type2Predicate).constant.toString
+			tm = support.duplicate(type.lookup(trace.type2Predicate))
+		}
+		val name = nm
+		val term = tm
+
 		val cstDec = createVLSFofFormula => [
 			it.name = support.toIDMultiple("typeScope", if(minimum) "min" else "max", name)
 			it.fofRole = "axiom"
@@ -109,15 +131,16 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 								it.right = i
 							]
 						])
-						it.right = support.topLevelTypeFunc
+						it.right = term
 					} else {
+						it.left = term
 						it.right = support.unfoldOr(list.map [ i |
 							createVLSEquality => [
 								it.left = createVLSVariable => [it.name = variable.name]
 								it.right = i
 							]
 						])
-						it.left = support.topLevelTypeFunc
+
 					}
 				]
 			]

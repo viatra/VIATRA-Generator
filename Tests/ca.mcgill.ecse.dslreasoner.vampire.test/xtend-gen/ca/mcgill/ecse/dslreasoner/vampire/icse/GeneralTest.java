@@ -5,6 +5,8 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import functionalarchitecture.Function;
+import functionalarchitecture.FunctionalOutput;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
@@ -12,6 +14,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
@@ -21,6 +24,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.Insta
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -69,13 +73,46 @@ public class GeneralTest {
         LogicReasoner reasoner = null;
         VampireSolver _vampireSolver = new VampireSolver();
         reasoner = _vampireSolver;
-        VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
-        final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
-          it.documentationLevel = DocumentationLevel.FULL;
-          it.typeScopes.minNewElements = 3;
-          it.typeScopes.maxNewElements = 6;
+        final HashMap<Type, Integer> typeMapMin = new HashMap<Type, Integer>();
+        final HashMap<Type, Integer> typeMapMax = new HashMap<Type, Integer>();
+        final Function1<EClass, String> _function = (EClass s) -> {
+          return s.getName();
         };
-        final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
+        final Map<String, EClass> list2MapMin = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function);
+        final Function1<EClass, String> _function_1 = (EClass s) -> {
+          return s.getName();
+        };
+        final Map<String, EClass> list2MapMax = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function_1);
+        typeMapMin.put(
+          ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
+            list2MapMin.get(Function.class.getSimpleName())), Integer.valueOf(3));
+        typeMapMin.put(
+          ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
+            list2MapMin.get(functionalarchitecture.FunctionalInterface.class.getSimpleName())), Integer.valueOf(2));
+        typeMapMin.put(
+          ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
+            list2MapMin.get(FunctionalOutput.class.getSimpleName())), Integer.valueOf(1));
+        typeMapMax.put(
+          ecore2Logic.TypeofEClass(
+            modelGenerationProblem.getTrace(), 
+            list2MapMax.get(Function.class.getSimpleName())), Integer.valueOf(5));
+        typeMapMax.put(
+          ecore2Logic.TypeofEClass(
+            modelGenerationProblem.getTrace(), 
+            list2MapMax.get(functionalarchitecture.FunctionalInterface.class.getSimpleName())), Integer.valueOf(2));
+        typeMapMax.put(
+          ecore2Logic.TypeofEClass(
+            modelGenerationProblem.getTrace(), 
+            list2MapMax.get(FunctionalOutput.class.getSimpleName())), Integer.valueOf(4));
+        VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
+        final Procedure1<VampireSolverConfiguration> _function_2 = (VampireSolverConfiguration it) -> {
+          it.documentationLevel = DocumentationLevel.FULL;
+          it.typeScopes.minNewElements = 6;
+          it.typeScopes.maxNewElements = 8;
+          it.typeScopes.minNewElementsByType = typeMapMin;
+          it.typeScopes.maxNewElementsByType = typeMapMax;
+        };
+        final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function_2);
         solution = reasoner.solve(problem, vampireConfig, workspace);
         _xblockexpression = InputOutput.<String>println("Problem solved");
       }
