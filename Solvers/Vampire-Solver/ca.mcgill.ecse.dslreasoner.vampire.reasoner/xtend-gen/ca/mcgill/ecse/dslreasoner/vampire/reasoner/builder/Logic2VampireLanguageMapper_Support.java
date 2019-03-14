@@ -104,6 +104,19 @@ public class Logic2VampireLanguageMapper_Support {
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
+  protected VLSFunction duplicate(final VLSFunction term, final List<VLSVariable> vars) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant(term.getConstant());
+      for (final VLSVariable v : vars) {
+        EList<VLSTerm> _terms = it.getTerms();
+        VLSVariable _duplicate = this.duplicate(v);
+        _terms.add(_duplicate);
+      }
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
   protected VLSFunction duplicate(final VLSFunction term, final VLSFunctionAsTerm v) {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
@@ -134,6 +147,17 @@ public class Logic2VampireLanguageMapper_Support {
       };
       VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_1);
       _terms.add(_doubleArrow);
+    };
+    return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+  }
+  
+  protected VLSFunction topLevelTypeFunc(final VLSVariable v) {
+    VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+    final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+      it.setConstant("object");
+      EList<VLSTerm> _terms = it.getTerms();
+      VLSVariable _duplicate = this.duplicate(v);
+      _terms.add(_duplicate);
     };
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
@@ -284,7 +308,8 @@ public class Logic2VampireLanguageMapper_Support {
       for (final Variable variable : _quantifiedVariables) {
         {
           TypeReference _range = variable.getRange();
-          final VLSFunction eq = this.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(((ComplexTypeReference) _range).getReferred(), trace.type2Predicate), CollectionsUtil.<Variable, VLSVariable>lookup(variable, variableMap));
+          final VLSFunction eq = this.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(((ComplexTypeReference) _range).getReferred(), trace.type2Predicate), 
+            CollectionsUtil.<Variable, VLSVariable>lookup(variable, variableMap));
           typedefs.add(eq);
         }
       }

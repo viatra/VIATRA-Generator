@@ -47,6 +47,8 @@ class Logic2VampireLanguageMapper {
 	private val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support;
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ConstantMapper constantMapper = new Logic2VampireLanguageMapper_ConstantMapper(
 		this)
+	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ContainmentMapper containmentMapper = new Logic2VampireLanguageMapper_ContainmentMapper(
+		this)
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_RelationMapper relationMapper = new Logic2VampireLanguageMapper_RelationMapper(
 		this)
 	@Accessors(PUBLIC_GETTER) private val Logic2VampireLanguageMapper_ScopeMapper scopeMapper = new Logic2VampireLanguageMapper_ScopeMapper(
@@ -80,24 +82,26 @@ class Logic2VampireLanguageMapper {
 		// SCOPE MAPPER
 		scopeMapper.transformScope(config, trace)
 
-		trace.constantDefinitions = problem.collectConstantDefinitions
+		// RELATION MAPPER
 		trace.relationDefinitions = problem.collectRelationDefinitions
-
 		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
+		
+		// CONTAINMENT MAPPER
+		containmentMapper.transformContainment(problem.containmentHierarchies, trace)
 
+		// CONSTANT MAPPER
 		// only transforms definitions
+		trace.constantDefinitions = problem.collectConstantDefinitions
 		// problem.constants.filter(ConstantDefinition).forEach[this.constantMapper.transformConstant(it, trace)]
 		problem.constants.filter(ConstantDefinition).forEach [
 			this.constantMapper.transformConstantDefinitionSpecification(it, trace)
 		]
 
-		// //////////////////
-		// Transform Assertions
-		// //////////////////
+		// ASSERTION MAPPER
 		for (assertion : problem.assertions) {
 			transformAssertion(assertion, trace)
 		}
-
+		// OUTPUT
 		return new TracedOutput(specification, trace)
 	}
 

@@ -65,13 +65,13 @@ class GeneralTest {
 		// Minimum Scope
 		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
 			list2MapMin.get(Function.simpleName)
-		), 3)
+		), 1)
 		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
 			list2MapMin.get(functionalarchitecture.FunctionalInterface.simpleName)
 		), 2)
 		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
 			list2MapMin.get(FunctionalOutput.simpleName)
-		), 1)
+		), 3)
 
 		// Maximum Scope
 		typeMapMax.put(ecore2Logic.TypeofEClass(
