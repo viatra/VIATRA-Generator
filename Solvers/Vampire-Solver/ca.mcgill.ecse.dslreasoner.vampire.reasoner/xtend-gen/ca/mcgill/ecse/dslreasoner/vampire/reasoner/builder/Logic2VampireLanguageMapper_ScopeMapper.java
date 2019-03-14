@@ -3,6 +3,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
@@ -48,16 +49,19 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
   public void _transformScope(final LogicSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
     final int GLOBAL_MIN = config.typeScopes.minNewElements;
     final int GLOBAL_MAX = config.typeScopes.maxNewElements;
-    final ArrayList<Object> localInstances = CollectionLiterals.<Object>newArrayList();
+    final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();
     if ((GLOBAL_MIN != 0)) {
       this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false);
+      for (final VLSConstant i : trace.uniqueInstances) {
+        localInstances.add(this.support.duplicate(i));
+      }
       this.makeFofFormula(localInstances, trace, true, null);
     }
     if ((GLOBAL_MAX != 0)) {
       this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true);
-      this.makeFofFormula(localInstances, trace, false, null);
+      this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, false, null);
     }
-    int i = 0;
+    int i_1 = 1;
     int minNum = (-1);
     Map<Type, Integer> startPoints = new HashMap<Type, Integer>();
     Set<Type> _keySet = config.typeScopes.minNewElementsByType.keySet();
@@ -65,10 +69,10 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       {
         minNum = (CollectionsUtil.<Type, Integer>lookup(t, config.typeScopes.minNewElementsByType)).intValue();
         if ((minNum != 0)) {
-          this.getInstanceConstants((i + minNum), i, localInstances, trace, true, false);
-          startPoints.put(t, Integer.valueOf(i));
-          int _i = i;
-          i = (_i + minNum);
+          this.getInstanceConstants((i_1 + minNum), i_1, localInstances, trace, true, false);
+          startPoints.put(t, Integer.valueOf(i_1));
+          int _i = i_1;
+          i_1 = (_i + minNum);
           this.makeFofFormula(localInstances, trace, true, t);
         }
       }
@@ -83,8 +87,8 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
           this.getInstanceConstants(((startpoint).intValue() + minNum), (startpoint).intValue(), localInstances, trace, true, false);
         }
         if (((maxNum).intValue() != minNum)) {
-          int instEndInd = Math.min(GLOBAL_MAX, ((i + (maxNum).intValue()) - minNum));
-          this.getInstanceConstants(instEndInd, i, localInstances, trace, false, false);
+          int instEndInd = Math.min(GLOBAL_MAX, ((i_1 + (maxNum).intValue()) - minNum));
+          this.getInstanceConstants(instEndInd, i_1, localInstances, trace, false, false);
           this.makeFofFormula(localInstances, trace, false, t_1);
         }
       }
@@ -126,18 +130,24 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
   
   protected void makeFofFormula(final ArrayList list, final Logic2VampireLanguageMapperTrace trace, final boolean minimum, final Type type) {
     String nm = "";
-    VLSFunction tm = null;
+    VLSTerm tm = null;
     if ((type == null)) {
       nm = "object";
       tm = this.support.topLevelTypeFunc();
     } else {
       nm = CollectionsUtil.<Type, VLSFunction>lookup(type, trace.type2Predicate).getConstant().toString();
-      tm = this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(type, trace.type2Predicate));
+      VLSAnd _createVLSAnd = this.factory.createVLSAnd();
+      final Procedure1<VLSAnd> _function = (VLSAnd it) -> {
+        it.setLeft(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(type, trace.type2Predicate)));
+        it.setRight(this.support.topLevelTypeFunc());
+      };
+      VLSAnd _doubleArrow = ObjectExtensions.<VLSAnd>operator_doubleArrow(_createVLSAnd, _function);
+      tm = _doubleArrow;
     }
     final String name = nm;
-    final VLSFunction term = tm;
+    final VLSTerm term = tm;
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-    final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+    final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
       String _xifexpression = null;
       if (minimum) {
         _xifexpression = "min";
@@ -147,30 +157,13 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       it.setName(this.support.toIDMultiple("typeScope", _xifexpression, name));
       it.setFofRole("axiom");
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-      final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it_1) -> {
+      final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
         EList<VLSVariable> _variables = it_1.getVariables();
         VLSVariable _duplicate = this.support.duplicate(this.variable);
         _variables.add(_duplicate);
         VLSImplies _createVLSImplies = this.factory.createVLSImplies();
-        final Procedure1<VLSImplies> _function_2 = (VLSImplies it_2) -> {
+        final Procedure1<VLSImplies> _function_3 = (VLSImplies it_2) -> {
           if (minimum) {
-            final Function1<VLSTerm, VLSEquality> _function_3 = (VLSTerm i) -> {
-              VLSEquality _createVLSEquality = this.factory.createVLSEquality();
-              final Procedure1<VLSEquality> _function_4 = (VLSEquality it_3) -> {
-                VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-                final Procedure1<VLSVariable> _function_5 = (VLSVariable it_4) -> {
-                  it_4.setName(this.variable.getName());
-                };
-                VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_5);
-                it_3.setLeft(_doubleArrow);
-                it_3.setRight(i);
-              };
-              return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_4);
-            };
-            it_2.setLeft(this.support.unfoldOr(ListExtensions.<VLSTerm, VLSEquality>map(list, _function_3)));
-            it_2.setRight(term);
-          } else {
-            it_2.setLeft(term);
             final Function1<VLSTerm, VLSEquality> _function_4 = (VLSTerm i) -> {
               VLSEquality _createVLSEquality = this.factory.createVLSEquality();
               final Procedure1<VLSEquality> _function_5 = (VLSEquality it_3) -> {
@@ -178,22 +171,39 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
                 final Procedure1<VLSVariable> _function_6 = (VLSVariable it_4) -> {
                   it_4.setName(this.variable.getName());
                 };
-                VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_6);
-                it_3.setLeft(_doubleArrow);
+                VLSVariable _doubleArrow_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_6);
+                it_3.setLeft(_doubleArrow_1);
                 it_3.setRight(i);
               };
               return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_5);
             };
-            it_2.setRight(this.support.unfoldOr(ListExtensions.<VLSTerm, VLSEquality>map(list, _function_4)));
+            it_2.setLeft(this.support.unfoldOr(ListExtensions.<VLSTerm, VLSEquality>map(list, _function_4)));
+            it_2.setRight(term);
+          } else {
+            it_2.setLeft(term);
+            final Function1<VLSTerm, VLSEquality> _function_5 = (VLSTerm i) -> {
+              VLSEquality _createVLSEquality = this.factory.createVLSEquality();
+              final Procedure1<VLSEquality> _function_6 = (VLSEquality it_3) -> {
+                VLSVariable _createVLSVariable = this.factory.createVLSVariable();
+                final Procedure1<VLSVariable> _function_7 = (VLSVariable it_4) -> {
+                  it_4.setName(this.variable.getName());
+                };
+                VLSVariable _doubleArrow_1 = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_7);
+                it_3.setLeft(_doubleArrow_1);
+                it_3.setRight(i);
+              };
+              return ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_6);
+            };
+            it_2.setRight(this.support.unfoldOr(ListExtensions.<VLSTerm, VLSEquality>map(list, _function_5)));
           }
         };
-        VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_2);
-        it_1.setOperand(_doubleArrow);
+        VLSImplies _doubleArrow_1 = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_3);
+        it_1.setOperand(_doubleArrow_1);
       };
-      VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_1);
-      it.setFofFormula(_doubleArrow);
+      VLSUniversalQuantifier _doubleArrow_1 = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_2);
+      it.setFofFormula(_doubleArrow_1);
     };
-    final VLSFofFormula cstDec = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+    final VLSFofFormula cstDec = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_1);
     EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
     _formulas.add(cstDec);
   }

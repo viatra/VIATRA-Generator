@@ -85,13 +85,13 @@ public class GeneralTest {
         final Map<String, EClass> list2MapMax = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function_1);
         typeMapMin.put(
           ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
-            list2MapMin.get(Function.class.getSimpleName())), Integer.valueOf(3));
+            list2MapMin.get(Function.class.getSimpleName())), Integer.valueOf(1));
         typeMapMin.put(
           ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
             list2MapMin.get(functionalarchitecture.FunctionalInterface.class.getSimpleName())), Integer.valueOf(2));
         typeMapMin.put(
           ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
-            list2MapMin.get(FunctionalOutput.class.getSimpleName())), Integer.valueOf(1));
+            list2MapMin.get(FunctionalOutput.class.getSimpleName())), Integer.valueOf(3));
         typeMapMax.put(
           ecore2Logic.TypeofEClass(
             modelGenerationProblem.getTrace(), 

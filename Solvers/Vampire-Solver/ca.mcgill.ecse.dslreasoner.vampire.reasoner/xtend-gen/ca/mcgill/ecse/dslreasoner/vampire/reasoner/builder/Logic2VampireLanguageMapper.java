@@ -3,6 +3,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ConstantMapper;
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ContainmentMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_RelationMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_ScopeMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
@@ -83,6 +84,9 @@ public class Logic2VampireLanguageMapper {
   private final Logic2VampireLanguageMapper_ConstantMapper constantMapper = new Logic2VampireLanguageMapper_ConstantMapper(this);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
+  private final Logic2VampireLanguageMapper_ContainmentMapper containmentMapper = new Logic2VampireLanguageMapper_ContainmentMapper(this);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private final Logic2VampireLanguageMapper_RelationMapper relationMapper = new Logic2VampireLanguageMapper_RelationMapper(this);
   
   @Accessors(AccessorType.PUBLIC_GETTER)
@@ -114,12 +118,13 @@ public class Logic2VampireLanguageMapper {
       this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
     }
     this.scopeMapper.transformScope(config, trace);
-    trace.constantDefinitions = this.collectConstantDefinitions(problem);
     trace.relationDefinitions = this.collectRelationDefinitions(problem);
     final Consumer<Relation> _function_3 = (Relation it) -> {
       this.relationMapper.transformRelation(it, trace);
     };
     problem.getRelations().forEach(_function_3);
+    this.containmentMapper.transformContainment(problem.getContainmentHierarchies(), trace);
+    trace.constantDefinitions = this.collectConstantDefinitions(problem);
     final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
       this.constantMapper.transformConstantDefinitionSpecification(it, trace);
     };
@@ -425,6 +430,11 @@ public class Logic2VampireLanguageMapper {
   @Pure
   public Logic2VampireLanguageMapper_ConstantMapper getConstantMapper() {
     return this.constantMapper;
+  }
+  
+  @Pure
+  public Logic2VampireLanguageMapper_ContainmentMapper getContainmentMapper() {
+    return this.containmentMapper;
   }
   
   @Pure

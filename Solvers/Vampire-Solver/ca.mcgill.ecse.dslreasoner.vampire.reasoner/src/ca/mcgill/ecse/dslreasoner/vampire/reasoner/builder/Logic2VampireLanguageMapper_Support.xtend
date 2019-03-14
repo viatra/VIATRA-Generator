@@ -37,11 +37,11 @@ class Logic2VampireLanguageMapper_Support {
 	def protected VLSVariable duplicate(VLSVariable term) {
 		return createVLSVariable => [it.name = term.name]
 	}
-	
+
 	def protected VLSFunctionAsTerm duplicate(VLSFunctionAsTerm term) {
 		return createVLSFunctionAsTerm => [it.functor = term.functor]
 	}
-	
+
 	def protected VLSConstant duplicate(VLSConstant term) {
 		return createVLSConstant => [it.name = term.name]
 	}
@@ -61,14 +61,23 @@ class Logic2VampireLanguageMapper_Support {
 			it.terms += duplicate(v)
 		]
 	}
-	
+
+	def protected VLSFunction duplicate(VLSFunction term, List<VLSVariable> vars) {
+		return createVLSFunction => [
+			it.constant = term.constant
+			for (v : vars) {
+				it.terms += duplicate(v)
+			}
+		]
+	}
+
 	def protected VLSFunction duplicate(VLSFunction term, VLSFunctionAsTerm v) {
 		return createVLSFunction => [
 			it.constant = term.constant
 			it.terms += duplicate(v)
 		]
 	}
-	
+
 	def protected VLSConstant toConstant(VLSFunctionAsTerm term) {
 		return createVLSConstant => [
 			it.name = term.functor
@@ -84,6 +93,13 @@ class Logic2VampireLanguageMapper_Support {
 		]
 	}
 	
+	def protected VLSFunction topLevelTypeFunc(VLSVariable v) {
+		return createVLSFunction => [
+			it.constant = "object"
+			it.terms += duplicate(v)
+		]
+	}
+
 	def protected VLSFunction topLevelTypeFunc(VLSFunctionAsTerm v) {
 		return createVLSFunction => [
 			it.constant = "object"
@@ -173,14 +189,16 @@ class Logic2VampireLanguageMapper_Support {
 	 */
 	// QUANTIFIERS + VARIABLES
 	def protected VLSTerm createQuantifiedExpression(Logic2VampireLanguageMapper mapper,
-		QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables, boolean isUniversal) {
+		QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables,
+		boolean isUniversal) {
 		val variableMap = expression.quantifiedVariables.toInvertedMap [ v |
 			createVLSVariable => [it.name = toIDMultiple("V", v.name)]
 		]
 
 		val typedefs = new ArrayList<VLSTerm>
 		for (variable : expression.quantifiedVariables) {
-			val eq = duplicate((variable.range as ComplexTypeReference).referred.lookup(trace.type2Predicate), variable.lookup(variableMap))
+			val eq = duplicate((variable.range as ComplexTypeReference).referred.lookup(trace.type2Predicate),
+				variable.lookup(variableMap))
 			typedefs.add(eq)
 		}
 		if (isUniversal) {

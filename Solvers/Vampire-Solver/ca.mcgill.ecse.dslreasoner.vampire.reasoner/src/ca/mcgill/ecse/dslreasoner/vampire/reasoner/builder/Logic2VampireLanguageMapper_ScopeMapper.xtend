@@ -10,6 +10,8 @@ import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import java.util.HashMap
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
+import java.util.List
 
 class Logic2VampireLanguageMapper_ScopeMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -24,7 +26,8 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 	def dispatch public void transformScope(LogicSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
 
 //		TODO HANDLE ERRORS RELATED TO MAX > MIN
-//		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES) > MAX OBJECTS
+//		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES)+1(for root) > MAX OBJECTS
+//		TODO HANDLE 
 //		TODO NOT SPECIFIED MEANS =0 ?
 		// 1. make a list of constants equaling the min number of specified objects
 		val GLOBAL_MIN = config.typeScopes.minNewElements
@@ -34,18 +37,22 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Minimum_General
 		if (GLOBAL_MIN != 0) {
-			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false) // fix last param
+			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false)
+			for(i : trace.uniqueInstances){
+				localInstances.add(support.duplicate(i))
+			}
+			
 			makeFofFormula(localInstances, trace, true, null)
 		}
 
 		// Handling Maximum_General
 		if (GLOBAL_MAX != 0) {
-			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true) // fix last param
-			makeFofFormula(localInstances, trace, false, null)
+			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true)
+			makeFofFormula(trace.uniqueInstances as ArrayList, trace, false, null)
 		}
 
 		// Handling Minimum_Specific
-		var i = 0
+		var i = 1
 		var minNum = -1
 		var Map<Type, Integer> startPoints = new HashMap
 		for (t : config.typeScopes.minNewElementsByType.keySet) {
@@ -106,13 +113,17 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 	def protected void makeFofFormula(ArrayList list, Logic2VampireLanguageMapperTrace trace, boolean minimum,
 		Type type) {
 		var nm = ""
-		var VLSFunction tm = null
+		var VLSTerm tm = null
 		if (type === null) {
 			nm = "object"
 			tm = support.topLevelTypeFunc
 		} else {
 			nm = type.lookup(trace.type2Predicate).constant.toString
-			tm = support.duplicate(type.lookup(trace.type2Predicate))
+			tm = createVLSAnd => [
+				it.left = support.duplicate(type.lookup(trace.type2Predicate))
+				it.right = support.topLevelTypeFunc
+			]
+//			tm = support.duplicate(type.lookup(trace.type2Predicate))
 		}
 		val name = nm
 		val term = tm
