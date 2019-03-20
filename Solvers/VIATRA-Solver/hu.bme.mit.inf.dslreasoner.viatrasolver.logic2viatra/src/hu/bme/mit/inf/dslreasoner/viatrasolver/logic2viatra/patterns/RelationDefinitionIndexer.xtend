@@ -71,7 +71,7 @@ class RelationDefinitionIndexer {
 		]
 	}
 	
-	private def relationDefinitionName(RelationDefinition relation, Modality modality)
+	def String relationDefinitionName(RelationDefinition relation, Modality modality)
 		'''«modality.name.toLowerCase»InRelation_«base.canonizeName(relation.name)»'''
 	
 	private def canonizeName(PVariable v) {

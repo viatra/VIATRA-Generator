@@ -16,15 +16,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import jnr.constants.platform.Signal;
-import org.apache.commons.lang.SystemUtils;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -60,17 +56,11 @@ public class StormDftHandler {
   
   private static final Pattern RESULT_PATTERN = Pattern.compile(StormDftHandler.RESULT_REGEX);
   
-  private static final int SIGNAL_EXIT_VALUE_OFFSET = new Function0<Integer>() {
-    public Integer apply() {
-      int _xifexpression = (int) 0;
-      if (SystemUtils.IS_OS_SOLARIS) {
-        _xifexpression = 0;
-      } else {
-        _xifexpression = 0x80;
-      }
-      return _xifexpression;
-    }
-  }.apply().intValue();
+  private static final int SIGNAL_EXIT_VALUE_OFFSET = 0x80;
+  
+  private static final int SIGXCPU = 24;
+  
+  private static final int SIGXFSZ = 25;
   
   private static final int STORM_GENERAL_ERROR = ((-1) & 0xff);
   
@@ -305,9 +295,7 @@ public class StormDftHandler {
         _matched=true;
       }
       if (!_matched) {
-        int _intValue = Signal.SIGXCPU.intValue();
-        int _plus = (StormDftHandler.SIGNAL_EXIT_VALUE_OFFSET + _intValue);
-        if (Objects.equal(exitValue, _plus)) {
+        if (Objects.equal(exitValue, (StormDftHandler.SIGNAL_EXIT_VALUE_OFFSET + StormDftHandler.SIGXCPU))) {
           _matched=true;
         }
       }
@@ -320,9 +308,7 @@ public class StormDftHandler {
         _matched=true;
       }
       if (!_matched) {
-        int _intValue_1 = Signal.SIGXFSZ.intValue();
-        int _plus_1 = (StormDftHandler.SIGNAL_EXIT_VALUE_OFFSET + _intValue_1);
-        if (Objects.equal(exitValue, _plus_1)) {
+        if (Objects.equal(exitValue, (StormDftHandler.SIGNAL_EXIT_VALUE_OFFSET + StormDftHandler.SIGXFSZ))) {
           _matched=true;
         }
       }
@@ -334,14 +320,7 @@ public class StormDftHandler {
       {
         if ((exitValue > StormDftHandler.SIGNAL_EXIT_VALUE_OFFSET)) {
           final int signalNumber = (exitValue - StormDftHandler.SIGNAL_EXIT_VALUE_OFFSET);
-          final Function1<Signal, Boolean> _function = (Signal it) -> {
-            int _intValue_2 = it.intValue();
-            return Boolean.valueOf((_intValue_2 == signalNumber));
-          };
-          final Signal signal = IterableExtensions.<Signal>findFirst(((Iterable<Signal>)Conversions.doWrapArray(Signal.values())), _function);
-          if ((signal != null)) {
-            throw new StormDftException(((("Storm unexpectedly killed by signal " + signal) + ": ") + error));
-          }
+          throw new StormDftException(((("Storm unexpectedly killed by signal " + Integer.valueOf(signalNumber)) + ": ") + error));
         }
         throw new StormDftException(((("Storm unexpectedly exit with status " + Integer.valueOf(exitValue)) + ": ") + error));
       }

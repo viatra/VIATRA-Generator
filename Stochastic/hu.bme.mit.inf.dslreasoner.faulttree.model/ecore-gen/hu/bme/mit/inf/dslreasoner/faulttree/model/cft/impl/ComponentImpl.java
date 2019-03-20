@@ -6,6 +6,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
 
 import java.util.Collection;
@@ -32,15 +33,37 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getExists <em>Exists</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getInputs <em>Inputs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getComponentDefinition <em>Component Definition</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#getName <em>Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl#isMultipleAllowed <em>Multiple Allowed</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ComponentImpl extends MinimalEObjectImpl.Container implements Component {
+	/**
+	 * The default value of the '{@link #getExists() <em>Exists</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExists()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Modality EXISTS_EDEFAULT = Modality.MUST;
+
+	/**
+	 * The cached value of the '{@link #getExists() <em>Exists</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExists()
+	 * @generated
+	 * @ordered
+	 */
+	protected Modality exists = EXISTS_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -90,6 +113,26 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isMultipleAllowed() <em>Multiple Allowed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMultipleAllowed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean MULTIPLE_ALLOWED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isMultipleAllowed() <em>Multiple Allowed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMultipleAllowed()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean multipleAllowed = MULTIPLE_ALLOWED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -204,6 +247,52 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Modality getExists() {
+		return exists;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setExists(Modality newExists) {
+		Modality oldExists = exists;
+		exists = newExists == null ? EXISTS_EDEFAULT : newExists;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.COMPONENT__EXISTS, oldExists, exists));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isMultipleAllowed() {
+		return multipleAllowed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMultipleAllowed(boolean newMultipleAllowed) {
+		boolean oldMultipleAllowed = multipleAllowed;
+		multipleAllowed = newMultipleAllowed;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.COMPONENT__MULTIPLE_ALLOWED, oldMultipleAllowed, multipleAllowed));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -240,6 +329,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CftPackage.COMPONENT__EXISTS:
+				return getExists();
 			case CftPackage.COMPONENT__INPUTS:
 				return getInputs();
 			case CftPackage.COMPONENT__OUTPUTS:
@@ -249,6 +340,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 				return basicGetComponentDefinition();
 			case CftPackage.COMPONENT__NAME:
 				return getName();
+			case CftPackage.COMPONENT__MULTIPLE_ALLOWED:
+				return isMultipleAllowed();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -262,6 +355,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CftPackage.COMPONENT__EXISTS:
+				setExists((Modality)newValue);
+				return;
 			case CftPackage.COMPONENT__INPUTS:
 				getInputs().clear();
 				getInputs().addAll((Collection<? extends Input>)newValue);
@@ -276,6 +372,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 			case CftPackage.COMPONENT__NAME:
 				setName((String)newValue);
 				return;
+			case CftPackage.COMPONENT__MULTIPLE_ALLOWED:
+				setMultipleAllowed((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -288,6 +387,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CftPackage.COMPONENT__EXISTS:
+				setExists(EXISTS_EDEFAULT);
+				return;
 			case CftPackage.COMPONENT__INPUTS:
 				getInputs().clear();
 				return;
@@ -299,6 +401,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 				return;
 			case CftPackage.COMPONENT__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case CftPackage.COMPONENT__MULTIPLE_ALLOWED:
+				setMultipleAllowed(MULTIPLE_ALLOWED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -312,6 +417,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CftPackage.COMPONENT__EXISTS:
+				return exists != EXISTS_EDEFAULT;
 			case CftPackage.COMPONENT__INPUTS:
 				return inputs != null && !inputs.isEmpty();
 			case CftPackage.COMPONENT__OUTPUTS:
@@ -320,6 +427,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 				return componentDefinition != null;
 			case CftPackage.COMPONENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case CftPackage.COMPONENT__MULTIPLE_ALLOWED:
+				return multipleAllowed != MULTIPLE_ALLOWED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -334,8 +443,12 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
+		result.append(" (exists: ");
+		result.append(exists);
+		result.append(", name: ");
 		result.append(name);
+		result.append(", multipleAllowed: ");
+		result.append(multipleAllowed);
 		result.append(')');
 		return result.toString();
 	}

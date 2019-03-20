@@ -2,8 +2,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.faulttree.model.cft;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Connection</b></em>'.
@@ -21,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Connection extends EObject {
+public interface Connection extends ModalElement {
 	/**
 	 * Returns the value of the '<em><b>Input</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input#getIncomingConnections <em>Incoming Connections</em>}'.

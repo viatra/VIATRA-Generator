@@ -7,7 +7,9 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentFaultTree;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.util.CftExtensions;
 import hu.bme.mit.inf.dslreasoner.faulttree.transformation.ecore2cft.ComponentNameGenerator;
 import hu.bme.mit.inf.dslreasoner.faulttree.transformation.ecore2cft.InputTrace;
 import java.util.Map;
@@ -21,9 +23,11 @@ public class ComponentInstanceTrace {
   
   private final Map<EventDeclaration, Output> outputEventsMap;
   
-  protected ComponentInstanceTrace(final ComponentFaultTree faultTree, final ComponentDefinition componentDefinition, final ComponentNameGenerator nameGenerator) {
+  protected ComponentInstanceTrace(final ComponentFaultTree faultTree, final ComponentDefinition componentDefinition, final ComponentNameGenerator nameGenerator, final Modality exists, final boolean multipleAllowed) {
     this.componentInstance.setComponentDefinition(componentDefinition);
     this.componentInstance.setName(nameGenerator.nextName(componentDefinition));
+    this.componentInstance.setExists(exists);
+    this.componentInstance.setMultipleAllowed(multipleAllowed);
     this.inputEventsMap = Maps.<InputEvent, InputTrace>newHashMapWithExpectedSize(componentDefinition.getInputEvents().size());
     EList<InputEvent> _inputEvents = componentDefinition.getInputEvents();
     for (final InputEvent inputEvent : _inputEvents) {
@@ -48,6 +52,10 @@ public class ComponentInstanceTrace {
   }
   
   public void assign(final EventDeclaration inputEvent, final ComponentInstanceTrace sourceComponent, final EventDeclaration outputEvent) {
+    this.assign(inputEvent, sourceComponent, outputEvent, Modality.MUST);
+  }
+  
+  public void assign(final EventDeclaration inputEvent, final ComponentInstanceTrace sourceComponent, final EventDeclaration outputEvent, final Modality exists) {
     final InputTrace inputTrace = this.inputEventsMap.get(inputEvent);
     if ((inputTrace == null)) {
       throw new IllegalArgumentException(("Unknown input: " + inputEvent));
@@ -56,10 +64,14 @@ public class ComponentInstanceTrace {
     if ((output == null)) {
       throw new IllegalArgumentException(("Unknown output: " + outputEvent));
     }
-    inputTrace.assign(output);
+    inputTrace.assign(output, exists);
   }
   
   protected EList<Output> getOutputs() {
     return this.componentInstance.getOutputs();
+  }
+  
+  protected boolean appearsExactlyOnce() {
+    return CftExtensions.appearsExactlyOnce(this.componentInstance);
   }
 }

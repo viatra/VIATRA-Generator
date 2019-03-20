@@ -7,3 +7,14 @@
 /.StormDftException.java._trace
 /.ReliabilityModelSolution.java._trace
 /.ReliabilityResult.java._trace
+/.ReliabilityResult.xtendbin
+/.StormDftConfiguration.xtendbin
+/.StormDftHandler.xtendbin
+/.StormDftSolver.xtendbin
+/ApproximationHeuristic.java
+/FtAnalysisObjective.java
+/ReliabilityResult.java
+/StormDftConfiguration.java
+/StormDftException.java
+/StormDftHandler.java
+/StormDftSolver.java

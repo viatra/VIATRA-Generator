@@ -144,6 +144,7 @@ public class CftSwitch<T> extends Switch<T> {
 			case CftPackage.COMPONENT: {
 				Component component = (Component)theEObject;
 				T result = caseComponent(component);
+				if (result == null) result = caseModalElement(component);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -162,6 +163,13 @@ public class CftSwitch<T> extends Switch<T> {
 			case CftPackage.CONNECTION: {
 				Connection connection = (Connection)theEObject;
 				T result = caseConnection(connection);
+				if (result == null) result = caseModalElement(connection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CftPackage.MODAL_ELEMENT: {
+				ModalElement modalElement = (ModalElement)theEObject;
+				T result = caseModalElement(modalElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -376,6 +384,21 @@ public class CftSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnection(Connection object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Modal Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Modal Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModalElement(ModalElement object) {
 		return null;
 	}
 

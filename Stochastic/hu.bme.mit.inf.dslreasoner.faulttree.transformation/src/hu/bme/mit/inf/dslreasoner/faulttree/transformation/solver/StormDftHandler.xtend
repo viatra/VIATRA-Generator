@@ -8,8 +8,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.regex.Pattern
-import jnr.constants.platform.Signal
-import org.apache.commons.lang.SystemUtils
 
 class StormDftException extends RuntimeException {
 	new(String s) {
@@ -29,8 +27,9 @@ class StormDftHandler {
 	static val RESULT_REGEX = '''^Result:\s*\[(?:(?<«SINGLE_RESULT_GROUP»>«DOUBLE_REGEX»)|\((?<«LOWER_BOUND_GROUP»>«DOUBLE_REGEX»),\s*(?<«UPPER_BOUND_GROUP»>«DOUBLE_REGEX»)\))\]'''
 	static val RESULT_PATTERN = Pattern.compile(RESULT_REGEX)
 
-	// See http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/jdk7-b147/src/solaris/native/java/lang/UNIXProcess_md.c#l332
-	static val SIGNAL_EXIT_VALUE_OFFSET = if(SystemUtils.IS_OS_SOLARIS) 0 else 0x80
+	static val SIGNAL_EXIT_VALUE_OFFSET = 0x80
+	static val SIGXCPU = 24
+	static val SIGXFSZ = 25
 
 	static val STORM_GENERAL_ERROR = (-1).bitwiseAnd(0xff)
 	static val STORM_TIMEOUT = (-2).bitwiseAnd(0xff)
@@ -166,18 +165,15 @@ class StormDftHandler {
 			case STORM_GENERAL_ERROR:
 				throw new StormDftException("Storm error: " + error)
 			case STORM_TIMEOUT,
-			case SIGNAL_EXIT_VALUE_OFFSET + Signal.SIGXCPU.intValue:
+			case SIGNAL_EXIT_VALUE_OFFSET + SIGXCPU:
 				ReliabilityResult.TIMEOUT
 			case STORM_MEMOUT,
-			case SIGNAL_EXIT_VALUE_OFFSET + Signal.SIGXFSZ.intValue:
+			case SIGNAL_EXIT_VALUE_OFFSET + SIGXFSZ:
 				ReliabilityResult.MEMOUT
 			default: {
 				if (exitValue > SIGNAL_EXIT_VALUE_OFFSET) {
 					val signalNumber = exitValue - SIGNAL_EXIT_VALUE_OFFSET
-					val signal = Signal.values.findFirst[intValue == signalNumber]
-					if (signal !== null) {
-						throw new StormDftException("Storm unexpectedly killed by signal " + signal + ": " + error)
-					}
+					throw new StormDftException("Storm unexpectedly killed by signal " + signalNumber + ": " + error)
 				}
 				throw new StormDftException("Storm unexpectedly exit with status " + exitValue + ": " + error)
 			}

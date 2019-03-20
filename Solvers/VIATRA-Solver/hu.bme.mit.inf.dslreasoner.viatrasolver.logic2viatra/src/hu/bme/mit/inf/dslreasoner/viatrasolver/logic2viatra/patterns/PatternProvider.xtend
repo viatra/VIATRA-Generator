@@ -2,8 +2,10 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationStatistics
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysis
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
@@ -11,7 +13,9 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.util.ParseUtil
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import java.util.Collection
 import java.util.Map
+import java.util.Set
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
@@ -19,8 +23,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.util.Collection
-import java.util.Set
 
 @Data class GeneratedPatterns {
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
@@ -29,7 +31,14 @@ import java.util.Set
 	public Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
 	public Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
+	public Map<RelationDefinition, ModalPatternQueries> modalRelationQueries
 	public Collection<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allQueries
+}
+
+@Data class ModalPatternQueries {
+	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> mayQuery
+	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> mustQuery
+	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> currentQuery
 }
 
 class PatternProvider {
@@ -71,7 +80,7 @@ class PatternProvider {
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		TypeAnalysisResult typeAnalysisResult,
-		 Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries
+		Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries
 	) {
 		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			invalidWFQueries = patternGenerator.invalidIndexer.getInvalidateByWfQueryNames(problem).mapValues[it.lookup(queries)]
@@ -85,6 +94,14 @@ class PatternProvider {
 			refineTypeQueries = patternGenerator.typeRefinementGenerator.getRefineTypeQueryNames(problem,emptySolution,typeAnalysisResult).mapValues[it.lookup(queries)]
 		val Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			refineRelationQueries = patternGenerator.relationRefinementGenerator.getRefineRelationQueries(problem).mapValues[it.lookup(queries)]
+		val Map<RelationDefinition, ModalPatternQueries> modalRelationQueries = problem.relations.filter(RelationDefinition).toMap([it], [ relationDefinition |
+			val indexer = patternGenerator.relationDefinitionIndexer
+			new ModalPatternQueries(
+				indexer.relationDefinitionName(relationDefinition, Modality.MAY).lookup(queries),
+				indexer.relationDefinitionName(relationDefinition, Modality.MUST).lookup(queries),
+				indexer.relationDefinitionName(relationDefinition, Modality.CURRENT).lookup(queries)
+			)
+		])
 		return new GeneratedPatterns(
 			invalidWFQueries,
 			unfinishedWFQueries,
@@ -92,6 +109,7 @@ class PatternProvider {
 			refineObjectsQueries,
 			refineTypeQueries,
 			refineRelationQueries,
+			modalRelationQueries,
 			queries.values
 		)
 	}

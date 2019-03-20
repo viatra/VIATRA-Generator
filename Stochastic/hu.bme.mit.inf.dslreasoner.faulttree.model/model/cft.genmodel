@@ -7,6 +7,11 @@
   <foreignModel>cft.ecore</foreignModel>
   <genPackages prefix="Cft" basePackage="hu.bme.mit.inf.dslreasoner.faulttree.model"
       disposableProviderFactory="true" ecorePackage="cft.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="cft.ecore#//Modality">
+      <genEnumLiterals ecoreEnumLiteral="cft.ecore#//Modality/MAY"/>
+      <genEnumLiterals ecoreEnumLiteral="cft.ecore#//Modality/CURRENT"/>
+      <genEnumLiterals ecoreEnumLiteral="cft.ecore#//Modality/MUST"/>
+    </genEnums>
     <genClasses ecoreClass="cft.ecore#//ComponentDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cft.ecore#//ComponentDefinition/inputEvents"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cft.ecore#//ComponentDefinition/eventDefinitions"/>
@@ -41,6 +46,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cft.ecore#//Component/outputs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cft.ecore#//Component/componentDefinition"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cft.ecore#//Component/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cft.ecore#//Component/multipleAllowed"/>
     </genClasses>
     <genClasses ecoreClass="cft.ecore#//Input">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cft.ecore#//Input/inputEvent"/>
@@ -55,6 +61,9 @@
     <genClasses ecoreClass="cft.ecore#//Connection">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cft.ecore#//Connection/input"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cft.ecore#//Connection/output"/>
+    </genClasses>
+    <genClasses ecoreClass="cft.ecore#//ModalElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cft.ecore#//ModalElement/exists"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

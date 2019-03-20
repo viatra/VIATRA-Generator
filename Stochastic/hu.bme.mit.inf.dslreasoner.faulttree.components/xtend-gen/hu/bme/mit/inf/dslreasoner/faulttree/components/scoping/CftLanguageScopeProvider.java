@@ -14,6 +14,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefini
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingParameter;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Variable;
+import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.MappingDefinitionImpl;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.scoping.AbstractCftLanguageScopeProvider;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.scoping.CftLanguageImportedNamespaceAwareLocalScopeProvider;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
@@ -108,11 +109,7 @@ public class CftLanguageScopeProvider extends AbstractCftLanguageScopeProvider {
       final ArrayList<IEObjectDescription> mappingDefinitionDescriptions = Lists.<IEObjectDescription>newArrayListWithExpectedSize(IterableExtensions.size(ruleDefinitions));
       for (final MappingDefinition ruleDefinition : ruleDefinitions) {
         {
-          Pattern _pattern = null;
-          if (ruleDefinition!=null) {
-            _pattern=ruleDefinition.getPattern();
-          }
-          final Pattern pattern = _pattern;
+          final Pattern pattern = this.safelyGetPattern(ruleDefinition);
           if ((pattern != null)) {
             IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(resourceDescriptions.getExportedObjectsByObject(pattern));
             QualifiedName _qualifiedName = null;
@@ -130,6 +127,25 @@ public class CftLanguageScopeProvider extends AbstractCftLanguageScopeProvider {
       _xblockexpression = mappingDefinitionDescriptions;
     }
     return _xblockexpression;
+  }
+  
+  private Pattern safelyGetPattern(final MappingDefinition mappingDefinition) {
+    Pattern _switchResult = null;
+    boolean _matched = false;
+    if (mappingDefinition instanceof MappingDefinitionImpl) {
+      _matched=true;
+      _switchResult = ((MappingDefinitionImpl)mappingDefinition).basicGetPattern();
+    }
+    if (!_matched) {
+      if (Objects.equal(mappingDefinition, null)) {
+        _matched=true;
+        _switchResult = null;
+      }
+    }
+    if (!_matched) {
+      _switchResult = mappingDefinition.getPattern();
+    }
+    return _switchResult;
   }
   
   private IResourceDescriptions getResourceDescriptions(final Notifier notifier) {

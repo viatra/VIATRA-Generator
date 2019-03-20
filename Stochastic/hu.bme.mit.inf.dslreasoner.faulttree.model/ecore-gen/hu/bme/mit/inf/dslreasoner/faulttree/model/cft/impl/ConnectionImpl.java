@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Connection;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ConnectionImpl#getExists <em>Exists</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ConnectionImpl#getInput <em>Input</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ConnectionImpl#getOutput <em>Output</em>}</li>
  * </ul>
@@ -33,6 +35,26 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class ConnectionImpl extends MinimalEObjectImpl.Container implements Connection {
+	/**
+	 * The default value of the '{@link #getExists() <em>Exists</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExists()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Modality EXISTS_EDEFAULT = Modality.MUST;
+
+	/**
+	 * The cached value of the '{@link #getExists() <em>Exists</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExists()
+	 * @generated
+	 * @ordered
+	 */
+	protected Modality exists = EXISTS_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOutput() <em>Output</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -173,6 +195,29 @@ public class ConnectionImpl extends MinimalEObjectImpl.Container implements Conn
 	 * @generated
 	 */
 	@Override
+	public Modality getExists() {
+		return exists;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setExists(Modality newExists) {
+		Modality oldExists = exists;
+		exists = newExists == null ? EXISTS_EDEFAULT : newExists;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CftPackage.CONNECTION__EXISTS, oldExists, exists));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CftPackage.CONNECTION__INPUT:
@@ -225,6 +270,8 @@ public class ConnectionImpl extends MinimalEObjectImpl.Container implements Conn
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case CftPackage.CONNECTION__EXISTS:
+				return getExists();
 			case CftPackage.CONNECTION__INPUT:
 				return getInput();
 			case CftPackage.CONNECTION__OUTPUT:
@@ -242,6 +289,9 @@ public class ConnectionImpl extends MinimalEObjectImpl.Container implements Conn
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case CftPackage.CONNECTION__EXISTS:
+				setExists((Modality)newValue);
+				return;
 			case CftPackage.CONNECTION__INPUT:
 				setInput((Input)newValue);
 				return;
@@ -260,6 +310,9 @@ public class ConnectionImpl extends MinimalEObjectImpl.Container implements Conn
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case CftPackage.CONNECTION__EXISTS:
+				setExists(EXISTS_EDEFAULT);
+				return;
 			case CftPackage.CONNECTION__INPUT:
 				setInput((Input)null);
 				return;
@@ -278,12 +331,30 @@ public class ConnectionImpl extends MinimalEObjectImpl.Container implements Conn
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case CftPackage.CONNECTION__EXISTS:
+				return exists != EXISTS_EDEFAULT;
 			case CftPackage.CONNECTION__INPUT:
 				return getInput() != null;
 			case CftPackage.CONNECTION__OUTPUT:
 				return output != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (exists: ");
+		result.append(exists);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ConnectionImpl

@@ -124,6 +124,10 @@ public class CftAdapterFactory extends AdapterFactoryImpl {
 				return createConnectionAdapter();
 			}
 			@Override
+			public Adapter caseModalElement(ModalElement object) {
+				return createModalElementAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -336,6 +340,20 @@ public class CftAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConnectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement <em>Modal Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement
+	 * @generated
+	 */
+	public Adapter createModalElementAdapter() {
 		return null;
 	}
 

@@ -2,6 +2,7 @@ grammar hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration with org
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/emf/PatternLanguage" as viatra
+import "http://www.bme.hu/mit/inf/dslreasoner/faulttree/components/CftLanguage" as cftLanguage
 generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 
 ConfigurationScript:
@@ -22,10 +23,11 @@ INTLiteral returns ecore::EInt: '-'? INT;
 // Imports
 ///////////////////////////////////////////////////
 
-Import: EPackageImport | ViatraImport;
+Import: EPackageImport | ViatraImport | CftImport;
 
 EPackageImport: "import" "epackage" importedPackage=[ecore::EPackage|STRING];
 ViatraImport: "import" "viatra" importedViatra=[viatra::PatternModel|STRING];
+CftImport: "import" "reliability" importedCft=[cftLanguage::CftModel|STRING];
 
 ///////////////////////////////////////////////////
 // Declaration
@@ -38,6 +40,7 @@ Declaration :
 	| GraphPatternDeclaration
 	| ConfigDeclaration
 	| ScopeDeclaration
+	| ObjectiveDeclaration
 ;
 
 ///////////////////////////////////////////////////
@@ -89,6 +92,23 @@ GraphPatternReference: referred = [GraphPatternDeclaration];
 GraphPattern: GraphPatternReference|PatternSpecification;
 
 ///////////////////////////////////////////////////
+// Objectives
+///////////////////////////////////////////////////
+
+ObjectiveSpecification: '{' entries += ObjectiveEntry (',' entries += ObjectiveEntry)* '}';
+ObjectiveEntry: OptimizationEntry | ThresholdEntry;
+enum OptimizationDirection: MINIMIZE='minimize' | MAXIMIZE='maximize';
+OptimizationEntry: direction=OptimizationDirection function=ObjectiveFunction;
+enum ComparisonOperator: LESS_EQUALS='<=' | GREATER_EQUALS='>=';
+ThresholdEntry: function=ObjectiveFunction operator=ComparisonOperator threshold=REALLiteral;
+ObjectiveFunction: ReliabiltiyFunction;
+ReliabiltiyFunction: 'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation = [cftLanguage::TransformationDefinition];
+
+ObjectiveDeclaration: 'objectives' name = ID specification = ObjectiveSpecification;
+ObjectiveReference: referred = [ObjectiveDeclaration];
+Objective: ObjectiveReference|ObjectiveSpecification;
+
+///////////////////////////////////////////////////
 // SolverConfig
 ///////////////////////////////////////////////////
 
@@ -99,7 +119,8 @@ ConfigDeclaration :
 	'config' name = ID specification = ConfigSpecification
 ;
 ConfigEntry: DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
-DocumentationEntry: "log-level" '=' level = DocumentLevelSpecification; enum DocumentLevelSpecification: none | normal | full;
+DocumentationEntry: "log-level" '=' level = DocumentLevelSpecification;
+enum DocumentLevelSpecification: none | normal | full;
 RuntimeEntry: "runtime" "=" millisecLimit = INT;
 MemoryEntry: "memory" "=" megabyteLimit = INT;
 CustomEntry: key = STRING "=" value = STRING;
@@ -160,6 +181,7 @@ GenerationTask:  'generate' {GenerationTask} '{'(
 		('metamodel' '=' metamodel = Metamodel)? &
 		('partial-model'  '=' partialModel = PartialModel)? &
 		('constraints'  '=' patterns = GraphPattern)? &
+		('objectives'  '=' objectives = Objective)? &
 		
 		// model set
 		('scope' '=' scope = Scope)? &

@@ -4,6 +4,7 @@ package hu.bme.mit.inf.dslreasoner.faulttree.model.cft;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -535,6 +536,43 @@ public interface CftPackage extends EPackage {
 	int COMPONENT_FAULT_TREE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement <em>Modal Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getModalElement()
+	 * @generated
+	 */
+	int MODAL_ELEMENT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Exists</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODAL_ELEMENT__EXISTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Modal Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODAL_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Modal Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODAL_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.ComponentImpl <em>Component</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,13 +583,22 @@ public interface CftPackage extends EPackage {
 	int COMPONENT = 10;
 
 	/**
+	 * The feature id for the '<em><b>Exists</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__EXISTS = MODAL_ELEMENT__EXISTS;
+
+	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__INPUTS = 0;
+	int COMPONENT__INPUTS = MODAL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Outputs</b></em>' containment reference list.
@@ -560,7 +607,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__OUTPUTS = 1;
+	int COMPONENT__OUTPUTS = MODAL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Component Definition</b></em>' reference.
@@ -569,7 +616,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__COMPONENT_DEFINITION = 2;
+	int COMPONENT__COMPONENT_DEFINITION = MODAL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -578,7 +625,16 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT__NAME = 3;
+	int COMPONENT__NAME = MODAL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Multiple Allowed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__MULTIPLE_ALLOWED = MODAL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Component</em>' class.
@@ -587,7 +643,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = 4;
+	int COMPONENT_FEATURE_COUNT = MODAL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Component</em>' class.
@@ -596,7 +652,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_OPERATION_COUNT = 0;
+	int COMPONENT_OPERATION_COUNT = MODAL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl <em>Input</em>}' class.
@@ -719,13 +775,22 @@ public interface CftPackage extends EPackage {
 	int CONNECTION = 13;
 
 	/**
+	 * The feature id for the '<em><b>Exists</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION__EXISTS = MODAL_ELEMENT__EXISTS;
+
+	/**
 	 * The feature id for the '<em><b>Input</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION__INPUT = 0;
+	int CONNECTION__INPUT = MODAL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Output</b></em>' reference.
@@ -734,7 +799,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION__OUTPUT = 1;
+	int CONNECTION__OUTPUT = MODAL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Connection</em>' class.
@@ -743,7 +808,7 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_FEATURE_COUNT = 2;
+	int CONNECTION_FEATURE_COUNT = MODAL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Connection</em>' class.
@@ -752,7 +817,18 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_OPERATION_COUNT = 0;
+	int CONNECTION_OPERATION_COUNT = MODAL_ELEMENT_OPERATION_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality <em>Modality</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getModality()
+	 * @generated
+	 */
+	int MODALITY = 15;
 
 
 	/**
@@ -1042,6 +1118,17 @@ public interface CftPackage extends EPackage {
 	EAttribute getComponent_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#isMultipleAllowed <em>Multiple Allowed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Multiple Allowed</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#isMultipleAllowed()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EAttribute getComponent_MultipleAllowed();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input <em>Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1158,6 +1245,37 @@ public interface CftPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConnection_Output();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement <em>Modal Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Modal Element</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement
+	 * @generated
+	 */
+	EClass getModalElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement#getExists <em>Exists</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exists</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement#getExists()
+	 * @see #getModalElement()
+	 * @generated
+	 */
+	EAttribute getModalElement_Exists();
+
+	/**
+	 * Returns the meta object for enum '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality <em>Modality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Modality</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality
+	 * @generated
+	 */
+	EEnum getModality();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1421,6 +1539,14 @@ public interface CftPackage extends EPackage {
 		EAttribute COMPONENT__NAME = eINSTANCE.getComponent_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Multiple Allowed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPONENT__MULTIPLE_ALLOWED = eINSTANCE.getComponent_MultipleAllowed();
+
+		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.InputImpl <em>Input</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1513,6 +1639,34 @@ public interface CftPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONNECTION__OUTPUT = eINSTANCE.getConnection_Output();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement <em>Modal Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getModalElement()
+		 * @generated
+		 */
+		EClass MODAL_ELEMENT = eINSTANCE.getModalElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Exists</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODAL_ELEMENT__EXISTS = eINSTANCE.getModalElement_Exists();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality <em>Modality</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality
+		 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl.CftPackageImpl#getModality()
+		 * @generated
+		 */
+		EEnum MODALITY = eINSTANCE.getModality();
 
 	}
 

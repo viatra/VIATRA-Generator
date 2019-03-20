@@ -16,6 +16,8 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.GateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.KOfMGateDefinition;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ModalElement;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.OrGateDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
 
@@ -23,6 +25,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.FtPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -132,6 +135,20 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	private EClass connectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modalElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum modalityEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -473,6 +490,16 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getComponent_MultipleAllowed() {
+		return (EAttribute)componentEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getInput() {
 		return inputEClass;
 	}
@@ -583,6 +610,36 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getModalElement() {
+		return modalElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getModalElement_Exists() {
+		return (EAttribute)modalElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getModality() {
+		return modalityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public CftFactory getCftFactory() {
 		return (CftFactory)getEFactoryInstance();
 	}
@@ -643,6 +700,7 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		createEReference(componentEClass, COMPONENT__OUTPUTS);
 		createEReference(componentEClass, COMPONENT__COMPONENT_DEFINITION);
 		createEAttribute(componentEClass, COMPONENT__NAME);
+		createEAttribute(componentEClass, COMPONENT__MULTIPLE_ALLOWED);
 
 		inputEClass = createEClass(INPUT);
 		createEReference(inputEClass, INPUT__INPUT_EVENT);
@@ -657,6 +715,12 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		connectionEClass = createEClass(CONNECTION);
 		createEReference(connectionEClass, CONNECTION__INPUT);
 		createEReference(connectionEClass, CONNECTION__OUTPUT);
+
+		modalElementEClass = createEClass(MODAL_ELEMENT);
+		createEAttribute(modalElementEClass, MODAL_ELEMENT__EXISTS);
+
+		// Create enums
+		modalityEEnum = createEEnum(MODALITY);
 	}
 
 	/**
@@ -697,6 +761,8 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		andGateDefinitionEClass.getESuperTypes().add(this.getGateDefinition());
 		orGateDefinitionEClass.getESuperTypes().add(this.getGateDefinition());
 		kOfMGateDefinitionEClass.getESuperTypes().add(this.getGateDefinition());
+		componentEClass.getESuperTypes().add(this.getModalElement());
+		connectionEClass.getESuperTypes().add(this.getModalElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(componentDefinitionEClass, ComponentDefinition.class, "ComponentDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -736,6 +802,7 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		initEReference(getComponent_Outputs(), this.getOutput(), this.getOutput_Component(), "outputs", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComponent_ComponentDefinition(), this.getComponentDefinition(), null, "componentDefinition", null, 1, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComponent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComponent_MultipleAllowed(), ecorePackage.getEBoolean(), "multipleAllowed", "false", 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputEClass, Input.class, "Input", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInput_InputEvent(), this.getInputEvent(), null, "inputEvent", null, 1, 1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -750,6 +817,15 @@ public class CftPackageImpl extends EPackageImpl implements CftPackage {
 		initEClass(connectionEClass, Connection.class, "Connection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConnection_Input(), this.getInput(), this.getInput_IncomingConnections(), "input", null, 1, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConnection_Output(), this.getOutput(), this.getOutput_OutgoingConnections(), "output", null, 1, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(modalElementEClass, ModalElement.class, "ModalElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getModalElement_Exists(), this.getModality(), "exists", "MUST", 0, 1, ModalElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(modalityEEnum, Modality.class, "Modality");
+		addEEnumLiteral(modalityEEnum, Modality.MAY);
+		addEEnumLiteral(modalityEEnum, Modality.CURRENT);
+		addEEnumLiteral(modalityEEnum, Modality.MUST);
 
 		// Create resource
 		createResource(eNS_URI);

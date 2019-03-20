@@ -11,6 +11,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.LookupDefinit
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.MappingDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Variable
+import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.impl.MappingDefinitionImpl
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition
 import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.emf.ecore.EObject
@@ -68,7 +69,7 @@ class CftLanguageScopeProvider extends AbstractCftLanguageScopeProvider {
 		Iterable<? extends MappingDefinition> ruleDefinitions) {
 		val mappingDefinitionDescriptions = Lists.newArrayListWithExpectedSize(ruleDefinitions.size)
 		for (ruleDefinition : ruleDefinitions) {
-			val pattern = ruleDefinition?.pattern
+			val pattern = ruleDefinition.safelyGetPattern
 			if (pattern !== null) {
 				val patternName = resourceDescriptions.getExportedObjectsByObject(pattern).head?.qualifiedName
 				if (patternName !== null) {
@@ -78,6 +79,14 @@ class CftLanguageScopeProvider extends AbstractCftLanguageScopeProvider {
 
 		}
 		mappingDefinitionDescriptions
+	}
+	
+	private def safelyGetPattern(MappingDefinition mappingDefinition) {
+		switch (mappingDefinition) {
+			MappingDefinitionImpl: mappingDefinition.basicGetPattern
+			case null: null
+			default: mappingDefinition.pattern
+		}
 	}
 
 	private def getResourceDescriptions(Notifier notifier) {

@@ -19,18 +19,19 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 public class Ft2GalileoTransformation {
   public CharSequence toGalileo(final FaultTree faultTree) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("toplevel ");
+    _builder.append("toplevel \"");
     String _name = faultTree.getTopEvent().getName();
     _builder.append(_name);
-    _builder.append(";");
+    _builder.append("\";");
     _builder.newLineIfNotEmpty();
     {
       EList<RandomEvent> _events = faultTree.getEvents();
       for(final RandomEvent event : _events) {
+        _builder.append("\"");
         String _name_1 = event.getName();
         _builder.append(_name_1);
-        _builder.append(" ");
-        StringConcatenationClient _defineEvent = this.defineEvent(event);
+        _builder.append("\" ");
+        Object _defineEvent = this.defineEvent(event);
         _builder.append(_defineEvent);
         _builder.append(";");
         _builder.newLineIfNotEmpty();
@@ -39,8 +40,12 @@ public class Ft2GalileoTransformation {
     return _builder;
   }
   
-  protected StringConcatenationClient _defineEvent(final BasicEvent basicEvent) {
-    return this.defineDistribution(basicEvent.getDistribution());
+  protected Object _defineEvent(final BasicEvent basicEvent) {
+    StringConcatenation _builder = new StringConcatenation();
+    StringConcatenationClient _defineDistribution = this.defineDistribution(basicEvent.getDistribution());
+    _builder.append(_defineDistribution);
+    _builder.append(" dorm=0.0");
+    return _builder;
   }
   
   protected StringConcatenationClient _defineDistribution(final ConstantDistribution distribution) {
@@ -87,8 +92,10 @@ public class Ft2GalileoTransformation {
             } else {
               _builder.appendImmediate(" ", "");
             }
+            _builder.append("\"");
             String _name = input.getName();
             _builder.append(_name);
+            _builder.append("\"");
           }
         }
       }
@@ -138,7 +145,7 @@ public class Ft2GalileoTransformation {
     throw new IllegalArgumentException(("Unknown random even: " + randomEvent));
   }
   
-  protected StringConcatenationClient defineEvent(final RandomEvent basicEvent) {
+  protected Object defineEvent(final RandomEvent basicEvent) {
     if (basicEvent instanceof BasicEvent) {
       return _defineEvent((BasicEvent)basicEvent);
     } else if (basicEvent instanceof Gate) {

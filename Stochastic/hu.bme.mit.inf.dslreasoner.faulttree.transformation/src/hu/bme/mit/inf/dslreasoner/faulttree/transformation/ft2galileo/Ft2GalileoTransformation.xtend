@@ -14,14 +14,15 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 
 class Ft2GalileoTransformation {
 	def toGalileo(FaultTree faultTree) '''
-		toplevel «faultTree.topEvent.name»;
+		toplevel "«faultTree.topEvent.name»";
 		«FOR event : faultTree.events»
-			«event.name» «defineEvent(event)»;
+			"«event.name»" «defineEvent(event)»;
 		«ENDFOR»
 	'''
 
 	protected dispatch def defineEvent(BasicEvent basicEvent) {
-		defineDistribution(basicEvent.distribution)
+		// ft-diet (https://moves.rwth-aachen.de/ft-diet/) needs a dormancy factor.
+		'''«defineDistribution(basicEvent.distribution)» dorm=0.0'''
 	}
 
 	protected dispatch def StringConcatenationClient defineDistribution(ConstantDistribution distribution) {
@@ -37,7 +38,7 @@ class Ft2GalileoTransformation {
 	}
 
 	protected dispatch def StringConcatenationClient defineEvent(Gate gate) {
-		'''«defineGate(gate)» «FOR input : gate.inputEvents SEPARATOR " "»«input.name»«ENDFOR»'''
+		'''«defineGate(gate)» «FOR input : gate.inputEvents SEPARATOR " "»"«input.name»"«ENDFOR»'''
 	}
 
 	protected dispatch def StringConcatenationClient defineGate(AndGate gate) '''and'''

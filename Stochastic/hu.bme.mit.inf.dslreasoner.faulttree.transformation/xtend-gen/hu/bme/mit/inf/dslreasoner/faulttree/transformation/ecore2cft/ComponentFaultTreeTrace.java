@@ -3,6 +3,7 @@ package hu.bme.mit.inf.dslreasoner.faulttree.transformation.ecore2cft;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftFactory;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentFaultTree;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
 import hu.bme.mit.inf.dslreasoner.faulttree.transformation.ecore2cft.ComponentInstanceTrace;
 import hu.bme.mit.inf.dslreasoner.faulttree.transformation.ecore2cft.ComponentNameGenerator;
@@ -24,13 +25,17 @@ public class ComponentFaultTreeTrace {
   private final Map<IPatternMatch, ComponentInstanceTrace> componentInstancesMap = CollectionLiterals.<IPatternMatch, ComponentInstanceTrace>newHashMap();
   
   public ComponentInstanceTrace instantiateComponent(final IPatternMatch patternMatch, final ComponentDefinition componenDefinition) {
+    return this.instantiateComponent(patternMatch, componenDefinition, Modality.MUST, false);
+  }
+  
+  public ComponentInstanceTrace instantiateComponent(final IPatternMatch patternMatch, final ComponentDefinition componenDefinition, final Modality exists, final boolean allowMultiple) {
     ComponentInstanceTrace _xblockexpression = null;
     {
       boolean _containsKey = this.componentInstancesMap.containsKey(patternMatch);
       if (_containsKey) {
         throw new IllegalArgumentException(("Already instantiated component for match: " + patternMatch));
       }
-      final ComponentInstanceTrace componentTrace = new ComponentInstanceTrace(this.componentFaultTree, componenDefinition, this.nameGenerator);
+      final ComponentInstanceTrace componentTrace = new ComponentInstanceTrace(this.componentFaultTree, componenDefinition, this.nameGenerator, exists, allowMultiple);
       this.componentInstancesMap.put(patternMatch, componentTrace);
       _xblockexpression = componentTrace;
     }
@@ -52,6 +57,11 @@ public class ComponentFaultTreeTrace {
       String _plus_1 = (_plus + 
         " instead");
       throw new IllegalArgumentException(_plus_1);
+    }
+    boolean _appearsExactlyOnce = trace.appearsExactlyOnce();
+    boolean _not = (!_appearsExactlyOnce);
+    if (_not) {
+      throw new IllegalArgumentException("Top level must appear in the fault tree exactly once");
     }
     this.componentFaultTree.setTopEvent(IterableExtensions.<Output>head(outputs));
   }

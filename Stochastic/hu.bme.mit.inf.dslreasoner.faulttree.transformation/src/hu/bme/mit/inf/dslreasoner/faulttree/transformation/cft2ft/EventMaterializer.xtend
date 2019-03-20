@@ -17,6 +17,8 @@ import java.util.Map
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
 
+import static extension hu.bme.mit.inf.dslreasoner.faulttree.model.util.CftExtensions.*
+
 class EventMaterializer {
 	extension val FtFactory = FtFactory.eINSTANCE
 
@@ -169,8 +171,10 @@ class EventMaterializer {
 		val input = findInput(component, inputEvent)
 		val builder = EventCollection.builder
 		for (connection : input.incomingConnections) {
-			val materializedEvent = getOrMaterialize(connection.output)
-			builder.add(materializedEvent)
+			if (connection.isCurrentlyConnected) {
+				val materializedEvent = getOrMaterialize(connection.output)
+				builder.add(materializedEvent)
+			}
 		}
 		builder.build
 	}

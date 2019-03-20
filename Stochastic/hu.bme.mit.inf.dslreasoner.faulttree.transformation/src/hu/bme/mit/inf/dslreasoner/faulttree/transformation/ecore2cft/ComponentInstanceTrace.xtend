@@ -6,8 +6,11 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentDefinition
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.ComponentFaultTree
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.EventDeclaration
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output
 import java.util.Map
+
+import static extension hu.bme.mit.inf.dslreasoner.faulttree.model.util.CftExtensions.*
 
 class ComponentInstanceTrace {
 	val componentInstance = CftFactory.eINSTANCE.createComponent
@@ -15,9 +18,11 @@ class ComponentInstanceTrace {
 	val Map<EventDeclaration, Output> outputEventsMap
 
 	protected new(ComponentFaultTree faultTree, ComponentDefinition componentDefinition,
-		ComponentNameGenerator nameGenerator) {
+		ComponentNameGenerator nameGenerator, Modality exists, boolean multipleAllowed) {
 		componentInstance.componentDefinition = componentDefinition
 		componentInstance.name = nameGenerator.nextName(componentDefinition)
+		componentInstance.exists = exists
+		componentInstance.multipleAllowed = multipleAllowed
 		inputEventsMap = Maps.newHashMapWithExpectedSize(componentDefinition.inputEvents.size)
 		for (inputEvent : componentDefinition.inputEvents) {
 			val inputTrace = new InputTrace(componentInstance, inputEvent)
@@ -34,6 +39,11 @@ class ComponentInstanceTrace {
 	}
 
 	def void assign(EventDeclaration inputEvent, ComponentInstanceTrace sourceComponent, EventDeclaration outputEvent) {
+		assign(inputEvent, sourceComponent, outputEvent, Modality.MUST)
+	}
+
+	def void assign(EventDeclaration inputEvent, ComponentInstanceTrace sourceComponent, EventDeclaration outputEvent,
+		Modality exists) {
 		val inputTrace = inputEventsMap.get(inputEvent)
 		if (inputTrace === null) {
 			throw new IllegalArgumentException("Unknown input: " + inputEvent)
@@ -42,10 +52,14 @@ class ComponentInstanceTrace {
 		if (output === null) {
 			throw new IllegalArgumentException("Unknown output: " + outputEvent)
 		}
-		inputTrace.assign(output)
+		inputTrace.assign(output, exists)
 	}
 
 	protected def getOutputs() {
 		componentInstance.outputs
+	}
+
+	protected def appearsExactlyOnce() {
+		componentInstance.appearsExactlyOnce
 	}
 }

@@ -4,8 +4,6 @@ package hu.bme.mit.inf.dslreasoner.faulttree.model.cft;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Component</b></em>'.
@@ -19,13 +17,14 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#getComponentDefinition <em>Component Definition</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#getName <em>Name</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#isMultipleAllowed <em>Multiple Allowed</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage#getComponent()
  * @model
  * @generated
  */
-public interface Component extends EObject {
+public interface Component extends ModalElement {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
 	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input}.
@@ -113,5 +112,32 @@ public interface Component extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Multiple Allowed</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Multiple Allowed</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Multiple Allowed</em>' attribute.
+	 * @see #setMultipleAllowed(boolean)
+	 * @see hu.bme.mit.inf.dslreasoner.faulttree.model.cft.CftPackage#getComponent_MultipleAllowed()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isMultipleAllowed();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component#isMultipleAllowed <em>Multiple Allowed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Multiple Allowed</em>' attribute.
+	 * @see #isMultipleAllowed()
+	 * @generated
+	 */
+	void setMultipleAllowed(boolean value);
 
 } // Component

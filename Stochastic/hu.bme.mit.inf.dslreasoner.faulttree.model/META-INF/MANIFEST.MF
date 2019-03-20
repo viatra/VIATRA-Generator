@@ -8,13 +8,18 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.faulttree.model
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: hu.bme.mit.inf.dslreasoner.faulttree.model.ft,
+Export-Package: hu.bme.mit.inf.dslreasoner.faulttree.model.cft,
+ hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl,
+ hu.bme.mit.inf.dslreasoner.faulttree.model.cft.util,
+ hu.bme.mit.inf.dslreasoner.faulttree.model.ft,
  hu.bme.mit.inf.dslreasoner.faulttree.model.ft.impl,
  hu.bme.mit.inf.dslreasoner.faulttree.model.ft.util,
- hu.bme.mit.inf.dslreasoner.faulttree.model.cft,
- hu.bme.mit.inf.dslreasoner.faulttree.model.cft.impl,
- hu.bme.mit.inf.dslreasoner.faulttree.model.cft.util
+ hu.bme.mit.inf.dslreasoner.faulttree.model.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- hu.bme.mit.inf.dslreasoner.faulttree.model;visibility:=reexport
+ hu.bme.mit.inf.dslreasoner.faulttree.model;visibility:=reexport,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro
 Bundle-ActivationPolicy: lazy

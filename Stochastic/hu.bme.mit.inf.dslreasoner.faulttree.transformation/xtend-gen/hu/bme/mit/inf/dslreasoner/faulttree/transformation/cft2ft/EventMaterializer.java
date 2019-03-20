@@ -22,6 +22,7 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.Gate;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.KOfMGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.OrGate;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.ft.RandomEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.util.CftExtensions;
 import hu.bme.mit.inf.dslreasoner.faulttree.transformation.cft2ft.EventCollection;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -416,7 +417,8 @@ public class EventMaterializer {
       final EventCollection.Builder builder = EventCollection.builder();
       EList<Connection> _incomingConnections = input.getIncomingConnections();
       for (final Connection connection : _incomingConnections) {
-        {
+        boolean _isCurrentlyConnected = CftExtensions.isCurrentlyConnected(connection);
+        if (_isCurrentlyConnected) {
           final Event materializedEvent = this.getOrMaterialize(connection.getOutput());
           builder.add(materializedEvent);
         }

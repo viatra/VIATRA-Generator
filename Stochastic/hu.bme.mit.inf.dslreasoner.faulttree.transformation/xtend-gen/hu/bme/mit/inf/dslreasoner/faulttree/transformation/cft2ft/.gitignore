@@ -6,3 +6,11 @@
 /.FaultTreeBuilder.java._trace
 /.FaultModelBuilder.java._trace
 /.EventCollection.java._trace
+/.Cft2FtTransformation.xtendbin
+/.EventCollection.xtendbin
+/.EventMaterializer.xtendbin
+/.FaultTreeBuilder.xtendbin
+/Cft2FtTransformation.java
+/EventCollection.java
+/EventMaterializer.java
+/FaultTreeBuilder.java

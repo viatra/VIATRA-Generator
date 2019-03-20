@@ -38,7 +38,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="topEvent" lowerBound="1"
         eType="#//Output"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Component">
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//ModalElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
         eType="#//Input" containment="true" eOpposite="#//Input/component"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
@@ -46,6 +46,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentDefinition" lowerBound="1"
         eType="#//ComponentDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multipleAllowed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Input">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvent" lowerBound="1"
@@ -63,10 +65,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
         eType="#//Component" eOpposite="#//Component/outputs"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Connection">
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//ModalElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" eType="#//Input"
         eOpposite="#//Input/incomingConnections"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
         eType="#//Output" eOpposite="#//Output/outgoingConnections"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Modality">
+    <eLiterals name="MAY"/>
+    <eLiterals name="CURRENT" value="1"/>
+    <eLiterals name="MUST" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModalElement" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exists" eType="#//Modality"
+        defaultValueLiteral="MUST"/>
   </eClassifiers>
 </ecore:EPackage>

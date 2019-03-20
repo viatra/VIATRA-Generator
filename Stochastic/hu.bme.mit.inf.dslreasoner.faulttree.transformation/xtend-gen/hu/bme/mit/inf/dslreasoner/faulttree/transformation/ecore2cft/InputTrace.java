@@ -5,7 +5,9 @@ import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Component;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Connection;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Input;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.InputEvent;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Modality;
 import hu.bme.mit.inf.dslreasoner.faulttree.model.cft.Output;
+import hu.bme.mit.inf.dslreasoner.faulttree.model.util.CftExtensions;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -22,14 +24,20 @@ public class InputTrace {
     _inputs.add(this.input);
   }
   
-  public void assign(final Output output) {
+  public void assign(final Output output, final Modality exists) {
     final Connection connection = this.connectionsMap.get(output);
     if ((connection == null)) {
       final Connection newConnection = CftFactory.eINSTANCE.createConnection();
       newConnection.setOutput(output);
+      newConnection.setExists(exists);
       EList<Connection> _incomingConnections = this.input.getIncomingConnections();
       _incomingConnections.add(newConnection);
       this.connectionsMap.put(output, newConnection);
+    } else {
+      boolean _isMoreConcreteThan = CftExtensions.isMoreConcreteThan(exists, connection.getExists());
+      if (_isMoreConcreteThan) {
+        connection.setExists(exists);
+      }
     }
   }
 }

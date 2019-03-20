@@ -204,6 +204,15 @@
 			</activeWhen>
 		</handler>
 	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="vsconfig"
+			id="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.contenttype"
+			name="ApplicationConfiguration File"
+			priority="normal">
+		</content-type>
+	</extension>
 	<!-- adding resource factories -->
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -388,12 +397,18 @@
 			class="hu.bme.mit.inf.dslreasoner.application.ui.ApplicationConfigurationExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="vsconfig">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.contenttype"
+			contentViewerId="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.compare.contentMergeViewers"
 			class="hu.bme.mit.inf.dslreasoner.application.ui.ApplicationConfigurationExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="vsconfig" label="ApplicationConfiguration Compare">
 		</viewer>
+		<contentTypeBinding
+			contentTypeId="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.contenttype"
+			contentMergeViewerId="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.editors.documentProviders"

@@ -3,27 +3,26 @@
  */
 package hu.bme.mit.inf.dslreasoner.application.scoping
 
-import com.google.common.base.Function
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPackageEntry
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.AllPatternEntry
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassReference
+import com.google.inject.Inject
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CftImport
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternElement
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
+import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.scoping.IScope
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.Scopes
+
+import static hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage.Literals.*
 
 /**
  * This class contains custom scoping description.
@@ -32,150 +31,116 @@ import org.eclipse.xtext.scoping.Scopes
  * on how and when to use it.
  */
 class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigurationScopeProvider {
-	
-	private val language = ApplicationConfigurationPackage.eINSTANCE
-	protected val nameConverter = new Function<PatternModel,QualifiedName>() {
-		override apply(PatternModel input) {
-			println(input)
-			val res = QualifiedName.create(input.packageName.split("\\."))
-			println(res.toString)
-			return res
-		}
-	}
-	
+
+	@Inject IQualifiedNameConverter qualifiedNameConverter
+
 	override getScope(EObject context, EReference reference) {
-		val document = EcoreUtil2.getContainerOfType(context,ConfigurationScript)
-		if(context instanceof MetamodelElement) {
-			return context.scopeForMetamodelElement(reference,document)
-		} else if(context instanceof MetamodelSpecification) {
-			return context.scopeForMetamodelSpecification(reference,document)
-		} else if(context instanceof AllPackageEntry){
-			return context.scopeForAllPackageEntry(reference,document)
-		} else if(context instanceof PatternElement) {
-			return context.scopeForPatternElement(reference,document)
-		} else if(context instanceof PatternSpecification) {
-			return context.scopeForPatternSpecification(reference,document)
-		} else if(context instanceof AllPatternEntry) {
-			return context.scopeForAllPatternEntry(reference,document)
-		} else if(context instanceof ClassReference) {
-			return context.scopeForClassReference(reference,document)
-		}else {
-			return super.getScope(context,reference)
+		val document = EcoreUtil2.getContainerOfType(context, ConfigurationScript)
+		switch (reference) {
+			case METAMODEL_ENTRY__PACKAGE:
+				getEPackageScope(document)
+			case METAMODEL_ELEMENT__CLASSIFIER:
+				getEClassifierScope(context, document)
+			case METAMODEL_ELEMENT__FEATURE:
+				getEStructuralFeatureScope(context, reference, document)
+			case PATTERN_ENTRY__PACKAGE:
+				getViatraPackageScope(context, reference, document)
+			case PATTERN_ELEMENT__PATTERN:
+				getViatraPatternScope(context, document)
+			case RELIABILTIY_FUNCTION__PACKAGE:
+				getCftPackageScope(context, reference, document)
+			case RELIABILTIY_FUNCTION__TRANSFORMATION:
+				getCftTransformationScope(context, document)
+			default:
+				super.getScope(context, reference)
 		}
-	}
-	
-	private def allEPackages(ConfigurationScript document) {
-		return document.imports.filter(EPackageImport).map[it.importedPackage].filterNull
-	}
-	private def allViatraPackages(ConfigurationScript document) {
-		val res = document.imports.filter(ViatraImport).map[it.importedViatra].filterNull
-		//println('''All packages: «res.map[packageName].toList»''')
-		return  res
-	}
-	private def allEClassifiers(ConfigurationScript document) {
-		document.allEPackages.map[EClassifiers].flatten
-	}
-	private def allPatterns(ConfigurationScript document) {
-		val res = document.allViatraPackages.map[patterns].flatten
-		//println('''All patterns: «res.map[name].toList»''')
-		return res
 	}
 
-	protected def scopeForMetamodelElement(MetamodelElement context, EReference reference, ConfigurationScript document) {
-		if(reference === language.metamodelEntry_Package) {
-			return Scopes.scopeFor(document.allEPackages)
-		} else if(reference === language.metamodelElement_Classifier) {
-			if(context.package !== null) {
-				return Scopes.scopeFor(context.package.EClassifiers)
+	private def getAllEPackages(ConfigurationScript document) {
+		document.imports.filter(EPackageImport).map[importedPackage].filterNull
+	}
+
+	private def getAllViatraPackages(ConfigurationScript document) {
+		document.imports.filter(ViatraImport).map[importedViatra].filterNull
+	}
+
+	private def getAllEClassifiers(ConfigurationScript document) {
+		document.allEPackages.map[EClassifiers].flatten
+	}
+
+	private def getAllPatterns(ConfigurationScript document) {
+		document.allViatraPackages.map[patterns].flatten
+	}
+
+	private def getAllCftPackages(ConfigurationScript document) {
+		document.imports.filter(CftImport).map[importedCft].filterNull
+	}
+
+	private def getAllCftTransformations(ConfigurationScript document) {
+		document.allCftPackages.map[transformationDefinitions].flatten
+	}
+
+	private def getEPackageScope(ConfigurationScript document) {
+		Scopes.scopeFor(document.allEPackages)
+	}
+
+	private def getEClassifierScope(EObject context, ConfigurationScript document) {
+		val classifiers = switch (context) {
+			MetamodelEntry case context.package !== null:
+				context.package.EClassifiers
+			default:
+				document.allEClassifiers
+		}
+		Scopes.scopeFor(classifiers)
+	}
+
+	private def getEStructuralFeatureScope(EObject context, EReference reference, ConfigurationScript document) {
+		val referredClassifier = if (context instanceof MetamodelElement) {
+				context.classifier
 			} else {
-				return Scopes.scopeFor(document.allEClassifiers)
+				null
 			}
-		} if (reference === language.metamodelElement_Feature) {
-			val referredClassifier = context.classifier
-			if(referredClassifier instanceof EClass) {
-				return Scopes.scopeFor(referredClassifier.EAllStructuralFeatures)
-			} else if(referredClassifier instanceof EEnum) {
-				return Scopes.scopeFor(referredClassifier.ELiterals)
-			} else {
-				super.getScope(context,reference)
-			}
+		switch (referredClassifier) {
+			EClass:
+				Scopes.scopeFor(referredClassifier.EAllStructuralFeatures)
+			EEnum:
+				Scopes.scopeFor(referredClassifier.ELiterals)
+			default:
+				super.getScope(context, reference)
 		}
 	}
-	
-	protected def scopeForMetamodelSpecification(MetamodelSpecification context, EReference reference, ConfigurationScript document) {
-		if(reference === language.metamodelEntry_Package) {
-			return Scopes.scopeFor(document.allEPackages)
-		} else if(reference ===language.metamodelElement_Classifier) {
-			return Scopes.scopeFor(document.allEClassifiers)
-		} else {
-			return super.getScope(context,reference)
-		}
+
+	private def getViatraPackageScope(EObject context, EReference reference, ConfigurationScript document) {
+		val patternModelNameConverter = [ PatternModel patternModel |
+			qualifiedNameConverter.toQualifiedName(patternModel.packageName)
+		]
+		Scopes.scopeFor(document.allViatraPackages, patternModelNameConverter, super.getScope(context, reference))
 	}
-	
-	protected def scopeForAllPackageEntry(AllPackageEntry context, EReference reference, ConfigurationScript document) {
-		if(reference === language.metamodelEntry_Package) {
-			return Scopes.scopeFor(document.allEPackages)
-		} else if(reference === language.metamodelElement_Classifier) {
-			if(context.package === null) {
-				return Scopes.scopeFor(document.allEClassifiers)
-			} else {
-				return Scopes.scopeFor(context.package.EClassifiers)
-			}
-		} else {
-			return super.getScope(context,reference)
+
+	private def getViatraPatternScope(EObject context, ConfigurationScript document) {
+		val patterns = switch (context) {
+			PatternEntry case context.package !== null:
+				context.package.patterns
+			default:
+				document.allPatterns
 		}
+		Scopes.scopeFor(patterns)
 	}
-	
-	//////////
-	
-	def IScope scopeForClassReference(ClassReference classReference, EReference eReference, ConfigurationScript document) {
-		if(eReference === language.metamodelEntry_Package) {
-			return Scopes.scopeFor(document.allEPackages)
-		} else if(eReference === language.metamodelElement_Classifier) {
-			Scopes.scopeFor(document.allEClassifiers)
-		} else {
-			return super.getScope(classReference,eReference)
-		}
+
+	private def getCftPackageScope(EObject context, EReference reference, ConfigurationScript document) {
+		val cftModelNameConverter = [ CftModel cftModel |
+			qualifiedNameConverter.toQualifiedName(cftModel.packageName)
+		]
+		Scopes.scopeFor(document.allCftPackages, cftModelNameConverter, super.getScope(context, reference))
 	}
-	
-	//////////
-	
-	protected def scopeForPatternElement(PatternElement context, EReference reference, ConfigurationScript document) {
-		if(reference === language.patternEntry_Package) {
-			return Scopes.scopeFor(document.allViatraPackages,nameConverter,super.getScope(context,reference))
-		} else if(reference === language.patternElement_Pattern) {
-			if(context.package !== null) {
-				return Scopes.scopeFor(context.package.patterns)
-			} else {
-				return Scopes.scopeFor(document.allPatterns)
-			}
-		} else {
-			super.getScope(context,reference)
+
+	private def getCftTransformationScope(EObject context, ConfigurationScript document) {
+		val transformations = switch (context) {
+			ReliabiltiyFunction case context.package !== null:
+				context.package.transformationDefinitions
+			default:
+				document.allCftTransformations
 		}
-	}
-	
-	protected def scopeForPatternSpecification(PatternSpecification context, EReference reference, ConfigurationScript document) {
-		if(reference === language.patternEntry_Package) {
-			return Scopes.scopeFor(document.allViatraPackages,nameConverter,super.getScope(context,reference))
-		} else if(reference ===language.patternElement_Pattern) {
-			return Scopes.scopeFor(document.allPatterns)
-		} else {
-			return super.getScope(context,reference)
-		}
-	}
-	
-	protected def scopeForAllPatternEntry(AllPatternEntry context, EReference reference, ConfigurationScript document) {
-		if(reference === language.patternEntry_Package) {
-			val res =  Scopes.scopeFor(document.allViatraPackages,nameConverter,super.getScope(context,reference))
-			return res
-		} else if(reference === language.patternElement_Pattern) {
-			if(context.package === null) {
-				return Scopes.scopeFor(document.allPatterns)
-			} else {
-				return Scopes.scopeFor(context.package.patterns)
-			}
-		} else {
-			return super.getScope(context,reference)
-		}
+		Scopes.scopeFor(transformations)
 	}
 }
