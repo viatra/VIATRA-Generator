@@ -112,7 +112,7 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 
 	private def getViatraPackageScope(EObject context, EReference reference, ConfigurationScript document) {
 		val patternModelNameConverter = [ PatternModel patternModel |
-			qualifiedNameConverter.toQualifiedName(patternModel.packageName)
+			toQualifiedNameOrNull(patternModel.packageName)
 		]
 		Scopes.scopeFor(document.allViatraPackages, patternModelNameConverter, super.getScope(context, reference))
 	}
@@ -129,7 +129,7 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 
 	private def getCftPackageScope(EObject context, EReference reference, ConfigurationScript document) {
 		val cftModelNameConverter = [ CftModel cftModel |
-			qualifiedNameConverter.toQualifiedName(cftModel.packageName)
+			toQualifiedNameOrNull(cftModel.packageName)
 		]
 		Scopes.scopeFor(document.allCftPackages, cftModelNameConverter, super.getScope(context, reference))
 	}
@@ -142,5 +142,13 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 				document.allCftTransformations
 		}
 		Scopes.scopeFor(transformations)
+	}
+	
+	private def toQualifiedNameOrNull(String packageName) {
+		if (packageName === null) {
+			null
+		} else {
+			qualifiedNameConverter.toQualifiedName(packageName)
+		}	
 	}
 }
