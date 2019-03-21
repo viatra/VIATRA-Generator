@@ -38,10 +38,10 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		// Handling Minimum_General
 		if (GLOBAL_MIN != 0) {
 			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false)
-			for(i : trace.uniqueInstances){
+			for (i : trace.uniqueInstances) {
 				localInstances.add(support.duplicate(i))
 			}
-			
+
 			makeFofFormula(localInstances, trace, true, null)
 		}
 
@@ -83,14 +83,15 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 // 3. Specify uniqueness of elements
 		if (trace.uniqueInstances.length != 0) {
-			val uniqueness = createVLSFofFormula => [
-				it.name = "typeUniqueness"
-				it.fofRole = "axiom"
-				it.fofFormula = support.establishUniqueness(trace.uniqueInstances)
-			]
-			trace.specification.formulas += uniqueness
+			for (e : trace.uniqueInstances) {
+				val uniqueness = createVLSFofFormula => [
+					it.name = support.toIDMultiple("t_uniqueness", e.name)
+					it.fofRole = "axiom"
+					it.fofFormula = support.establishUniqueness(trace.uniqueInstances, e)
+				]
+				trace.specification.formulas += uniqueness
+			}
 		}
-
 	}
 
 	def protected void getInstanceConstants(int endInd, int startInd, ArrayList list,

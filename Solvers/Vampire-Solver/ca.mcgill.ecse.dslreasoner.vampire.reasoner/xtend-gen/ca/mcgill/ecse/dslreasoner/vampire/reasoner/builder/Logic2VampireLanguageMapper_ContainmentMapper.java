@@ -10,9 +10,12 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSExistentialQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
+import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
@@ -21,9 +24,13 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -107,69 +114,155 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
       it.setName("B");
     };
     final VLSVariable varB = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_1, _function_2);
+    VLSVariable _createVLSVariable_2 = this.factory.createVLSVariable();
+    final Procedure1<VLSVariable> _function_3 = (VLSVariable it) -> {
+      it.setName("C");
+    };
+    final VLSVariable varC = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_2, _function_3);
     final ArrayList<VLSVariable> varList = CollectionLiterals.<VLSVariable>newArrayList(varB, varA);
+    final Map<VLSFunction, List<VLSFunction>> type2cont = new HashMap<VLSFunction, List<VLSFunction>>();
     for (final Relation l_1 : relationsList) {
       {
-        final String relName = CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_1), trace.rel2Predicate).getConstant().toString();
-        TypeReference _get = l_1.getParameters().get(0);
+        final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_1), trace.rel2Predicate), varList);
+        TypeReference _get = l_1.getParameters().get(1);
         Type _referred = ((ComplexTypeReference) _get).getReferred();
-        final Type fromType = ((Type) _referred);
-        TypeReference _get_1 = l_1.getParameters().get(1);
-        Type _referred_1 = ((ComplexTypeReference) _get_1).getReferred();
-        final Type toType = ((Type) _referred_1);
-        final ArrayList<VLSFunction> listForAnd = CollectionLiterals.<VLSFunction>newArrayList();
-        listForAnd.add(this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_1), trace.rel2Predicate), varList));
+        final Type toType = ((Type) _referred);
+        final VLSFunction toFunc = CollectionsUtil.<Type, VLSFunction>lookup(toType, trace.type2Predicate);
+        this.addToMap(type2cont, toFunc, rel);
+        EList<Type> _subtypes = toType.getSubtypes();
+        for (final Type c : _subtypes) {
+          this.addToMap(type2cont, toFunc, rel);
+        }
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
-        final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
-          it.setName(this.support.toIDMultiple("containment", relName));
+        final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
+          it.setName(this.support.toIDMultiple("noDupCont", rel.getConstant().toString()));
+          it.setFofRole("axiom");
+          VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
+          final Procedure1<VLSExistentialQuantifier> _function_5 = (VLSExistentialQuantifier it_1) -> {
+            EList<VLSVariable> _variables = it_1.getVariables();
+            VLSVariable _duplicate = this.support.duplicate(varA);
+            _variables.add(_duplicate);
+            EList<VLSVariable> _variables_1 = it_1.getVariables();
+            VLSVariable _duplicate_1 = this.support.duplicate(varB);
+            _variables_1.add(_duplicate_1);
+            VLSImplies _createVLSImplies = this.factory.createVLSImplies();
+            final Procedure1<VLSImplies> _function_6 = (VLSImplies it_2) -> {
+              it_2.setLeft(this.support.duplicate(rel, CollectionLiterals.<VLSVariable>newArrayList(varA, varB)));
+              VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
+              final Procedure1<VLSUnaryNegation> _function_7 = (VLSUnaryNegation it_3) -> {
+                VLSExistentialQuantifier _createVLSExistentialQuantifier_1 = this.factory.createVLSExistentialQuantifier();
+                final Procedure1<VLSExistentialQuantifier> _function_8 = (VLSExistentialQuantifier it_4) -> {
+                  EList<VLSVariable> _variables_2 = it_4.getVariables();
+                  VLSVariable _duplicate_2 = this.support.duplicate(varC);
+                  _variables_2.add(_duplicate_2);
+                  EList<VLSVariable> _variables_3 = it_4.getVariables();
+                  VLSVariable _duplicate_3 = this.support.duplicate(varB);
+                  _variables_3.add(_duplicate_3);
+                  it_4.setOperand(this.support.duplicate(rel, CollectionLiterals.<VLSVariable>newArrayList(varC, varB)));
+                };
+                VLSExistentialQuantifier _doubleArrow = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier_1, _function_8);
+                it_3.setOperand(_doubleArrow);
+              };
+              VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_7);
+              it_2.setRight(_doubleArrow);
+            };
+            VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_6);
+            it_1.setOperand(_doubleArrow);
+          };
+          VLSExistentialQuantifier _doubleArrow = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_5);
+          it.setFofFormula(_doubleArrow);
+        };
+        final VLSFofFormula relFormula = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_4);
+        EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
+        _formulas_1.add(relFormula);
+      }
+    }
+    Set<Map.Entry<VLSFunction, List<VLSFunction>>> _entrySet = type2cont.entrySet();
+    for (final Map.Entry<VLSFunction, List<VLSFunction>> e : _entrySet) {
+      {
+        VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
+        final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
+          it.setName(this.support.toIDMultiple("containment", e.getKey().getConstant().toString()));
           it.setFofRole("axiom");
           VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-          final Procedure1<VLSUniversalQuantifier> _function_4 = (VLSUniversalQuantifier it_1) -> {
+          final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
             EList<VLSVariable> _variables = it_1.getVariables();
             VLSVariable _duplicate = this.support.duplicate(varA);
             _variables.add(_duplicate);
             VLSImplies _createVLSImplies = this.factory.createVLSImplies();
-            final Procedure1<VLSImplies> _function_5 = (VLSImplies it_2) -> {
-              it_2.setLeft(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(toType, trace.type2Predicate), varA));
+            final Procedure1<VLSImplies> _function_6 = (VLSImplies it_2) -> {
+              it_2.setLeft(this.support.duplicate(e.getKey(), varA));
               VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
-              final Procedure1<VLSExistentialQuantifier> _function_6 = (VLSExistentialQuantifier it_3) -> {
+              final Procedure1<VLSExistentialQuantifier> _function_7 = (VLSExistentialQuantifier it_3) -> {
                 EList<VLSVariable> _variables_1 = it_3.getVariables();
                 VLSVariable _duplicate_1 = this.support.duplicate(varB);
                 _variables_1.add(_duplicate_1);
-                it_3.setOperand(this.support.unfoldAnd(listForAnd));
+                int _length = ((Object[])Conversions.unwrapArray(e.getValue(), Object.class)).length;
+                boolean _greaterThan = (_length > 1);
+                if (_greaterThan) {
+                  it_3.setOperand(this.makeUnique(e.getValue()));
+                } else {
+                  it_3.setOperand(e.getValue().get(0));
+                }
               };
-              VLSExistentialQuantifier _doubleArrow = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_6);
+              VLSExistentialQuantifier _doubleArrow = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_7);
               it_2.setRight(_doubleArrow);
-              VLSEquality _createVLSEquality = this.factory.createVLSEquality();
-              final Procedure1<VLSEquality> _function_7 = (VLSEquality it_3) -> {
-                it_3.setLeft(this.support.duplicate(this.variable));
-                VLSConstant _createVLSConstant = this.factory.createVLSConstant();
-                final Procedure1<VLSConstant> _function_8 = (VLSConstant it_4) -> {
-                  it_4.setName("o1");
-                };
-                VLSConstant _doubleArrow_1 = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function_8);
-                it_3.setRight(_doubleArrow_1);
-              };
-              ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_7);
             };
-            VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_5);
+            VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_6);
             it_1.setOperand(_doubleArrow);
           };
-          VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_4);
+          VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_5);
           it.setFofFormula(_doubleArrow);
         };
-        final VLSFofFormula relFormula = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_3);
+        final VLSFofFormula relFormula = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_4);
         EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
         _formulas_1.add(relFormula);
-        TypeReference _get_2 = l_1.getParameters().get(1);
-        Type _referred_2 = ((ComplexTypeReference) _get_2).getReferred();
-        Type pointingTo = ((Type) _referred_2);
-        containmentListCopy.remove(pointingTo);
-        EList<Type> _subtypes = pointingTo.getSubtypes();
-        for (final Type c : _subtypes) {
-          containmentListCopy.remove(c);
-        }
       }
     }
+  }
+  
+  protected VLSTerm makeUnique(final List<VLSFunction> list) {
+    final List<VLSTerm> possibleNots = CollectionLiterals.<VLSTerm>newArrayList();
+    final List<VLSTerm> uniqueRels = CollectionLiterals.<VLSTerm>newArrayList();
+    for (final VLSFunction t1 : list) {
+      {
+        for (final VLSFunction t2 : list) {
+          boolean _equals = Objects.equal(t1, t2);
+          if (_equals) {
+            final VLSFunction fct = this.support.duplicate(t2);
+            possibleNots.add(fct);
+          } else {
+            final VLSFunction op = this.support.duplicate(t2);
+            VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
+            final Procedure1<VLSUnaryNegation> _function = (VLSUnaryNegation it) -> {
+              it.setOperand(op);
+            };
+            final VLSUnaryNegation negFct = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function);
+            possibleNots.add(negFct);
+          }
+        }
+        uniqueRels.add(this.support.unfoldAnd(possibleNots));
+        possibleNots.clear();
+      }
+    }
+    return this.support.unfoldOr(uniqueRels);
+  }
+  
+  protected Object addToMap(final Map<VLSFunction, List<VLSFunction>> type2cont, final VLSFunction toFunc, final VLSFunction rel) {
+    Object _xifexpression = null;
+    boolean _containsKey = type2cont.containsKey(toFunc);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      _xifexpression = type2cont.put(toFunc, CollectionLiterals.<VLSFunction>newArrayList(rel));
+    } else {
+      boolean _xifexpression_1 = false;
+      boolean _contains = type2cont.get(toFunc).contains(rel);
+      boolean _not_1 = (!_contains);
+      if (_not_1) {
+        _xifexpression_1 = type2cont.get(toFunc).add(rel);
+      }
+      _xifexpression = Boolean.valueOf(_xifexpression_1);
+    }
+    return _xifexpression;
   }
 }

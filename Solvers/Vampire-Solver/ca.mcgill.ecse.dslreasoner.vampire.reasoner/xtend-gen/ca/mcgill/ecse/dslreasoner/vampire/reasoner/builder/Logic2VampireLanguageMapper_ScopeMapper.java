@@ -96,15 +96,19 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     int _length = ((Object[])Conversions.unwrapArray(trace.uniqueInstances, Object.class)).length;
     boolean _notEquals = (_length != 0);
     if (_notEquals) {
-      VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-      final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
-        it.setName("typeUniqueness");
-        it.setFofRole("axiom");
-        it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances));
-      };
-      final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
-      EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
-      _formulas.add(uniqueness);
+      for (final VLSConstant e : trace.uniqueInstances) {
+        {
+          VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
+          final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+            it.setName(this.support.toIDMultiple("t_uniqueness", e.getName()));
+            it.setFofRole("axiom");
+            it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances, e));
+          };
+          final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+          EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
+          _formulas.add(uniqueness);
+        }
+      }
     }
   }
   
