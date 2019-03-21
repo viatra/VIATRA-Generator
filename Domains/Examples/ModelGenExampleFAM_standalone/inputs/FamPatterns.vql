@@ -1,7 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.domains.fam
 
-import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
-//import epackage "platform:/resource/ModelGenExampleFAM/inputs/FamMetamodel.ecore";
+//import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
+import epackage "platform:/resource/ModelGenExampleFAM/inputs/FamMetamodel.ecore";
 
 @Constraint(message="terminatorAndInformation", severity="error", key={T})
 pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {

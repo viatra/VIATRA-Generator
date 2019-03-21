@@ -108,7 +108,7 @@ public class GeneralTest {
         final Procedure1<VampireSolverConfiguration> _function_2 = (VampireSolverConfiguration it) -> {
           it.documentationLevel = DocumentationLevel.FULL;
           it.typeScopes.minNewElements = 6;
-          it.typeScopes.maxNewElements = 8;
+          it.typeScopes.maxNewElements = 40;
           it.typeScopes.minNewElementsByType = typeMapMin;
           it.typeScopes.maxNewElementsByType = typeMapMax;
         };

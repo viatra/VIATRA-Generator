@@ -34,3 +34,11 @@
 /OppositeMatcher.java
 /PatternContentMatch.java
 /PatternContentMatcher.java
+/.ContentInNotLive.java._trace
+/.DirectSupertype.java._trace
+/.Live.java._trace
+/.LoopInInheritence.java._trace
+/.NonSymmetricOpposite.java._trace
+/.Opposite.java._trace
+/.OppositeDifferentClass.java._trace
+/.PatternContent.java._trace

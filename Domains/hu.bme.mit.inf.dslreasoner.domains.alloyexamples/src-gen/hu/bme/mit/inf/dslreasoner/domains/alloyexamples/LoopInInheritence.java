@@ -1,8 +1,9 @@
 /**
- * Generated from platform:/resource/ca.mcgill.ecse.dslreasoner.vampire.queries/src/ca/mcgill/ecse/dslreasoner/vampire/queries/vampireQueries.vql
+ * Generated from platform:/resource/hu.bme.mit.inf.dslreasoner.domains.alloyexamples/patterns/hu/bme/mit/inf/dslreasoner/domains/alloyexamples/Ecore.vql
  */
-package ca.mcgill.ecse.dslreasoner.vampire.queries;
+package hu.bme.mit.inf.dslreasoner.domains.alloyexamples;
 
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.DirectSupertype;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -26,7 +27,10 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.BinaryTransitiveClosure;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -40,8 +44,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern VLSUniversalQuantifier(term: VLSUniversalQuantifier){
- *         	VLSUniversalQuantifier(term);
+ *         {@literal @}Constraint(key={a}, severity="error", message="error")
+ *         pattern loopInInheritence(a: EClass) {
+ *         	find directSupertype+(a,a);
  *         }
  * </pre></code>
  * 
@@ -50,9 +55,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecification<VLSUniversalQuantifier.Matcher> {
+public final class LoopInInheritence extends BaseGeneratedEMFQuerySpecification<LoopInInheritence.Matcher> {
   /**
-   * Pattern-specific match representation of the ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier pattern,
+   * Pattern-specific match representation of the hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -64,69 +69,69 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier fTerm;
+    private EClass fA;
     
-    private static List<String> parameterNames = makeImmutableList("term");
+    private static List<String> parameterNames = makeImmutableList("a");
     
-    private Match(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      this.fTerm = pTerm;
+    private Match(final EClass pA) {
+      this.fA = pA;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("term".equals(parameterName)) return this.fTerm;
+      if ("a".equals(parameterName)) return this.fA;
       return null;
     }
     
-    public ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier getTerm() {
-      return this.fTerm;
+    public EClass getA() {
+      return this.fA;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("term".equals(parameterName) ) {
-          this.fTerm = (ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier) newValue;
+      if ("a".equals(parameterName) ) {
+          this.fA = (EClass) newValue;
           return true;
       }
       return false;
     }
     
-    public void setTerm(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
+    public void setA(final EClass pA) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fTerm = pTerm;
+      this.fA = pA;
     }
     
     @Override
     public String patternName() {
-      return "ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier";
+      return "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence";
     }
     
     @Override
     public List<String> parameterNames() {
-      return VLSUniversalQuantifier.Match.parameterNames;
+      return LoopInInheritence.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fTerm};
+      return new Object[]{fA};
     }
     
     @Override
-    public VLSUniversalQuantifier.Match toImmutable() {
-      return isMutable() ? newMatch(fTerm) : this;
+    public LoopInInheritence.Match toImmutable() {
+      return isMutable() ? newMatch(fA) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"term\"=" + prettyPrintValue(fTerm));
+      result.append("\"a\"=" + prettyPrintValue(fA));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fTerm);
+      return Objects.hash(fA);
     }
     
     @Override
@@ -136,9 +141,9 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof VLSUniversalQuantifier.Match)) {
-          VLSUniversalQuantifier.Match other = (VLSUniversalQuantifier.Match) obj;
-          return Objects.equals(fTerm, other.fTerm);
+      if ((obj instanceof LoopInInheritence.Match)) {
+          LoopInInheritence.Match other = (LoopInInheritence.Match) obj;
+          return Objects.equals(fA, other.fA);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -150,8 +155,8 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
     }
     
     @Override
-    public VLSUniversalQuantifier specification() {
-      return VLSUniversalQuantifier.instance();
+    public LoopInInheritence specification() {
+      return LoopInInheritence.instance();
     }
     
     /**
@@ -161,7 +166,7 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
      * @return the empty match.
      * 
      */
-    public static VLSUniversalQuantifier.Match newEmptyMatch() {
+    public static LoopInInheritence.Match newEmptyMatch() {
       return new Mutable(null);
     }
     
@@ -169,29 +174,29 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static VLSUniversalQuantifier.Match newMutableMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return new Mutable(pTerm);
+    public static LoopInInheritence.Match newMutableMatch(final EClass pA) {
+      return new Mutable(pA);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static VLSUniversalQuantifier.Match newMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return new Immutable(pTerm);
+    public static LoopInInheritence.Match newMatch(final EClass pA) {
+      return new Immutable(pA);
     }
     
-    private static final class Mutable extends VLSUniversalQuantifier.Match {
-      Mutable(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-        super(pTerm);
+    private static final class Mutable extends LoopInInheritence.Match {
+      Mutable(final EClass pA) {
+        super(pA);
       }
       
       @Override
@@ -200,9 +205,9 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
       }
     }
     
-    private static final class Immutable extends VLSUniversalQuantifier.Match {
-      Immutable(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-        super(pTerm);
+    private static final class Immutable extends LoopInInheritence.Match {
+      Immutable(final EClass pA) {
+        super(pA);
       }
       
       @Override
@@ -213,7 +218,7 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
   }
   
   /**
-   * Generated pattern matcher API of the ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier pattern,
+   * Generated pattern matcher API of the hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -223,16 +228,17 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern VLSUniversalQuantifier(term: VLSUniversalQuantifier){
-   * 	VLSUniversalQuantifier(term);
+   * {@literal @}Constraint(key={a}, severity="error", message="error")
+   * pattern loopInInheritence(a: EClass) {
+   * 	find directSupertype+(a,a);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see VLSUniversalQuantifier
+   * @see LoopInInheritence
    * 
    */
-  public static class Matcher extends BaseMatcher<VLSUniversalQuantifier.Match> {
+  public static class Matcher extends BaseMatcher<LoopInInheritence.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -241,7 +247,7 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static VLSUniversalQuantifier.Matcher on(final ViatraQueryEngine engine) {
+    public static LoopInInheritence.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -256,13 +262,13 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static VLSUniversalQuantifier.Matcher create() {
+    public static LoopInInheritence.Matcher create() {
       return new Matcher();
     }
     
-    private final static int POSITION_TERM = 0;
+    private final static int POSITION_A = 0;
     
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(VLSUniversalQuantifier.Matcher.class);
+    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(LoopInInheritence.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -278,12 +284,12 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<VLSUniversalQuantifier.Match> getAllMatches(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return rawStreamAllMatches(new Object[]{pTerm}).collect(Collectors.toSet());
+    public Collection<LoopInInheritence.Match> getAllMatches(final EClass pA) {
+      return rawStreamAllMatches(new Object[]{pA}).collect(Collectors.toSet());
     }
     
     /**
@@ -292,101 +298,101 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<VLSUniversalQuantifier.Match> streamAllMatches(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return rawStreamAllMatches(new Object[]{pTerm});
+    public Stream<LoopInInheritence.Match> streamAllMatches(final EClass pA) {
+      return rawStreamAllMatches(new Object[]{pA});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<VLSUniversalQuantifier.Match> getOneArbitraryMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return rawGetOneArbitraryMatch(new Object[]{pTerm});
+    public Optional<LoopInInheritence.Match> getOneArbitraryMatch(final EClass pA) {
+      return rawGetOneArbitraryMatch(new Object[]{pA});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return rawHasMatch(new Object[]{pTerm});
+    public boolean hasMatch(final EClass pA) {
+      return rawHasMatch(new Object[]{pA});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return rawCountMatches(new Object[]{pTerm});
+    public int countMatches(final EClass pA) {
+      return rawCountMatches(new Object[]{pA});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm, final Consumer<? super VLSUniversalQuantifier.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pTerm}, processor);
+    public boolean forOneArbitraryMatch(final EClass pA, final Consumer<? super LoopInInheritence.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pA}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pTerm the fixed value of pattern parameter term, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public VLSUniversalQuantifier.Match newMatch(final ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier pTerm) {
-      return VLSUniversalQuantifier.Match.newMatch(pTerm);
+    public LoopInInheritence.Match newMatch(final EClass pA) {
+      return LoopInInheritence.Match.newMatch(pA);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for term.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier> rawStreamAllValuesOfterm(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_TERM, parameters).map(ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier.class::cast);
+    protected Stream<EClass> rawStreamAllValuesOfa(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_A, parameters).map(EClass.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for term.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier> getAllValuesOfterm() {
-      return rawStreamAllValuesOfterm(emptyArray()).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfa() {
+      return rawStreamAllValuesOfa(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for term.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier> streamAllValuesOfterm() {
-      return rawStreamAllValuesOfterm(emptyArray());
+    public Stream<EClass> streamAllValuesOfa() {
+      return rawStreamAllValuesOfa(emptyArray());
     }
     
     @Override
-    protected VLSUniversalQuantifier.Match tupleToMatch(final Tuple t) {
+    protected LoopInInheritence.Match tupleToMatch(final Tuple t) {
       try {
-          return VLSUniversalQuantifier.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier) t.get(POSITION_TERM));
+          return LoopInInheritence.Match.newMatch((EClass) t.get(POSITION_A));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -394,9 +400,9 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
     }
     
     @Override
-    protected VLSUniversalQuantifier.Match arrayToMatch(final Object[] match) {
+    protected LoopInInheritence.Match arrayToMatch(final Object[] match) {
       try {
-          return VLSUniversalQuantifier.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier) match[POSITION_TERM]);
+          return LoopInInheritence.Match.newMatch((EClass) match[POSITION_A]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -404,9 +410,9 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
     }
     
     @Override
-    protected VLSUniversalQuantifier.Match arrayToMatchMutable(final Object[] match) {
+    protected LoopInInheritence.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return VLSUniversalQuantifier.Match.newMutableMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier) match[POSITION_TERM]);
+          return LoopInInheritence.Match.newMutableMatch((EClass) match[POSITION_A]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -418,12 +424,12 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<VLSUniversalQuantifier.Matcher> querySpecification() {
-      return VLSUniversalQuantifier.instance();
+    public static IQuerySpecification<LoopInInheritence.Matcher> querySpecification() {
+      return LoopInInheritence.instance();
     }
   }
   
-  private VLSUniversalQuantifier() {
+  private LoopInInheritence() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -432,7 +438,7 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static VLSUniversalQuantifier instance() {
+  public static LoopInInheritence instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -441,35 +447,35 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
   }
   
   @Override
-  protected VLSUniversalQuantifier.Matcher instantiate(final ViatraQueryEngine engine) {
-    return VLSUniversalQuantifier.Matcher.on(engine);
+  protected LoopInInheritence.Matcher instantiate(final ViatraQueryEngine engine) {
+    return LoopInInheritence.Matcher.on(engine);
   }
   
   @Override
-  public VLSUniversalQuantifier.Matcher instantiate() {
-    return VLSUniversalQuantifier.Matcher.create();
+  public LoopInInheritence.Matcher instantiate() {
+    return LoopInInheritence.Matcher.create();
   }
   
   @Override
-  public VLSUniversalQuantifier.Match newEmptyMatch() {
-    return VLSUniversalQuantifier.Match.newEmptyMatch();
+  public LoopInInheritence.Match newEmptyMatch() {
+    return LoopInInheritence.Match.newEmptyMatch();
   }
   
   @Override
-  public VLSUniversalQuantifier.Match newMatch(final Object... parameters) {
-    return VLSUniversalQuantifier.Match.newMatch((ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier) parameters[0]);
+  public LoopInInheritence.Match newMatch(final Object... parameters) {
+    return LoopInInheritence.Match.newMatch((org.eclipse.emf.ecore.EClass) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier (visibility: PUBLIC, simpleName: VLSUniversalQuantifier, identifier: ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: ca.mcgill.ecse.dslreasoner.vampire.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence (visibility: PUBLIC, simpleName: LoopInInheritence, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier (visibility: PUBLIC, simpleName: VLSUniversalQuantifier, identifier: ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: ca.mcgill.ecse.dslreasoner.vampire.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence (visibility: PUBLIC, simpleName: LoopInInheritence, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private final static VLSUniversalQuantifier INSTANCE = new VLSUniversalQuantifier();
+    private final static LoopInInheritence INSTANCE = new LoopInInheritence();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -487,11 +493,11 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static VLSUniversalQuantifier.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private final static LoopInInheritence.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_term = new PParameter("term", "ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSUniversalQuantifier")), PParameterDirection.INOUT);
+    private final PParameter parameter_a = new PParameter("a", "org.eclipse.emf.ecore.EClass", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EClass")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_term);
+    private final List<PParameter> parameters = Arrays.asList(parameter_a);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -499,12 +505,12 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
     
     @Override
     public String getFullyQualifiedName() {
-      return "ca.mcgill.ecse.dslreasoner.vampire.queries.VLSUniversalQuantifier";
+      return "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("term");
+      return Arrays.asList("a");
     }
     
     @Override
@@ -518,14 +524,23 @@ public final class VLSUniversalQuantifier extends BaseGeneratedEMFQuerySpecifica
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_term = body.getOrCreateVariableByName("term");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_term), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSUniversalQuantifier")));
+          PVariable var_a = body.getOrCreateVariableByName("a");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_a), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_term, parameter_term)
+             new ExportedParameter(body, var_a, parameter_a)
           ));
-          // 	VLSUniversalQuantifier(term)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_term), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSUniversalQuantifier")));
+          // 	find directSupertype+(a,a)
+          new BinaryTransitiveClosure(body, Tuples.flatTupleOf(var_a, var_a), DirectSupertype.instance().getInternalQueryRepresentation());
           bodies.add(body);
+      }
+      {
+          PAnnotation annotation = new PAnnotation("Constraint");
+          annotation.addAttribute("key", Arrays.asList(new Object[] {
+                              new ParameterReference("a")
+                              }));
+          annotation.addAttribute("severity", "error");
+          annotation.addAttribute("message", "error");
+          addAnnotation(annotation);
       }
       return bodies;
     }
