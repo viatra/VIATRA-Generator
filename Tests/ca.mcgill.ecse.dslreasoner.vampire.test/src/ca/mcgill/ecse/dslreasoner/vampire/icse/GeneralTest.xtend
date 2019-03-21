@@ -4,11 +4,11 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import functionalarchitecture.Function
+import functionalarchitecture.FunctionalInterface
+import functionalarchitecture.FunctionalOutput
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
@@ -30,8 +30,7 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
-import org.eclipse.emf.ecore.EClassifier
-import functionalarchitecture.FunctionalOutput
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 
 class GeneralTest {
 	def static String createAndSolveProblem(EcoreMetamodelDescriptor metamodel, List<EObject> partialModel,
@@ -67,7 +66,7 @@ class GeneralTest {
 			list2MapMin.get(Function.simpleName)
 		), 1)
 		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
-			list2MapMin.get(functionalarchitecture.FunctionalInterface.simpleName)
+			list2MapMin.get(FunctionalInterface.simpleName)
 		), 2)
 		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
 			list2MapMin.get(FunctionalOutput.simpleName)
@@ -80,7 +79,7 @@ class GeneralTest {
 		), 5)
 		typeMapMax.put(ecore2Logic.TypeofEClass(
 			modelGenerationProblem.trace,
-			list2MapMax.get(functionalarchitecture.FunctionalInterface.simpleName)
+			list2MapMax.get(FunctionalInterface.simpleName)
 		), 2)
 		typeMapMax.put(ecore2Logic.TypeofEClass(
 			modelGenerationProblem.trace,
@@ -92,7 +91,7 @@ class GeneralTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 			it.typeScopes.minNewElements = 6
-			it.typeScopes.maxNewElements = 8
+			it.typeScopes.maxNewElements = 40
 			it.typeScopes.minNewElementsByType = typeMapMin
 			it.typeScopes.maxNewElementsByType = typeMapMax
 		]

@@ -81,6 +81,14 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 			val fromType = (l.parameters.get(0) as ComplexTypeReference).referred as Type
 			val toType = (l.parameters.get(1) as ComplexTypeReference).referred as Type
 
+			val listForAnd = newArrayList
+//			listForAnd.add(support.duplicate(fromType.lookup(trace.type2Predicate), varB))
+			listForAnd.add(support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate), varList))
+//			listForAnd.add(createVLSInequality => [
+//				it.left = support.duplicate(varA)
+//				it.right = support.duplicate(varB)
+//			])
+
 			val relFormula = createVLSFofFormula => [
 				it.name = support.toIDMultiple("containment", relName)
 				it.fofRole = "axiom"
@@ -91,11 +99,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 						it.left = support.duplicate(toType.lookup(trace.type2Predicate), varA)
 						it.right = createVLSExistentialQuantifier => [
 							it.variables += support.duplicate(varB)
-							it.operand = createVLSAnd => [
-								it.left = support.duplicate(fromType.lookup(trace.type2Predicate), varB)
-								it.right = support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate),
-									varList)
-							]
+							it.operand = support.unfoldAnd(listForAnd)
 						]
 
 						createVLSEquality => [

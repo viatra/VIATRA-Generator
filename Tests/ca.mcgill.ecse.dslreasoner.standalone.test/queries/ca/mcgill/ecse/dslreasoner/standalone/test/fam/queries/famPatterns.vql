@@ -25,7 +25,7 @@ pattern type(This : Function, Target : FunctionType) = {
 	find parent(_Child, This);
 	Target == FunctionType::Intermediate;
 }
-
+*/
 pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
 	FunctionalArchitectureModel.rootElements(Model, Root);
 }
@@ -33,7 +33,7 @@ pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
 pattern parent(Func : Function, Par : Function) = {
 	Function.parent(Func, Par);
 }
-
+/*
 @QueryBasedFeature 
 pattern model(This:FunctionalElement, Target: FunctionalArchitectureModel) {
 	FunctionalElement(This);

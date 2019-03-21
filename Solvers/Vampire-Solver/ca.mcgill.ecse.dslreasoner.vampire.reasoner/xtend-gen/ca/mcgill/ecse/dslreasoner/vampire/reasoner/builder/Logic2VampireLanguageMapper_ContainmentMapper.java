@@ -3,7 +3,6 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
@@ -118,6 +117,8 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         TypeReference _get_1 = l_1.getParameters().get(1);
         Type _referred_1 = ((ComplexTypeReference) _get_1).getReferred();
         final Type toType = ((Type) _referred_1);
+        final ArrayList<VLSFunction> listForAnd = CollectionLiterals.<VLSFunction>newArrayList();
+        listForAnd.add(this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_1), trace.rel2Predicate), varList));
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
           it.setName(this.support.toIDMultiple("containment", relName));
@@ -135,13 +136,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
                 EList<VLSVariable> _variables_1 = it_3.getVariables();
                 VLSVariable _duplicate_1 = this.support.duplicate(varB);
                 _variables_1.add(_duplicate_1);
-                VLSAnd _createVLSAnd = this.factory.createVLSAnd();
-                final Procedure1<VLSAnd> _function_7 = (VLSAnd it_4) -> {
-                  it_4.setLeft(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(fromType, trace.type2Predicate), varB));
-                  it_4.setRight(this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_1), trace.rel2Predicate), varList));
-                };
-                VLSAnd _doubleArrow = ObjectExtensions.<VLSAnd>operator_doubleArrow(_createVLSAnd, _function_7);
-                it_3.setOperand(_doubleArrow);
+                it_3.setOperand(this.support.unfoldAnd(listForAnd));
               };
               VLSExistentialQuantifier _doubleArrow = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_6);
               it_2.setRight(_doubleArrow);
