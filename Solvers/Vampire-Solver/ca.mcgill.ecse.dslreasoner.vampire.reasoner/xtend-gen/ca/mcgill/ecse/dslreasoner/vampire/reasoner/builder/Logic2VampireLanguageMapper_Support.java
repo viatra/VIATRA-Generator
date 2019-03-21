@@ -14,6 +14,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.QuantifiedExpression;
@@ -173,31 +174,28 @@ public class Logic2VampireLanguageMapper_Support {
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
-  public VLSTerm establishUniqueness(final List<VLSConstant> terms) {
+  public VLSTerm establishUniqueness(final List<VLSConstant> terms, final VLSConstant t2) {
     final List<VLSInequality> eqs = CollectionLiterals.<VLSInequality>newArrayList();
-    List<VLSConstant> _subList = terms.subList(1, ((Object[])Conversions.unwrapArray(terms, Object.class)).length);
-    for (final VLSConstant t1 : _subList) {
-      List<VLSConstant> _subList_1 = terms.subList(0, terms.indexOf(t1));
-      for (final VLSConstant t2 : _subList_1) {
-        {
-          VLSInequality _createVLSInequality = this.factory.createVLSInequality();
-          final Procedure1<VLSInequality> _function = (VLSInequality it) -> {
-            VLSConstant _createVLSConstant = this.factory.createVLSConstant();
-            final Procedure1<VLSConstant> _function_1 = (VLSConstant it_1) -> {
-              it_1.setName(t2.getName());
-            };
-            VLSConstant _doubleArrow = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function_1);
-            it.setLeft(_doubleArrow);
-            VLSConstant _createVLSConstant_1 = this.factory.createVLSConstant();
-            final Procedure1<VLSConstant> _function_2 = (VLSConstant it_1) -> {
-              it_1.setName(t1.getName());
-            };
-            VLSConstant _doubleArrow_1 = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant_1, _function_2);
-            it.setRight(_doubleArrow_1);
+    for (final VLSConstant t1 : terms) {
+      boolean _notEquals = (!Objects.equal(t1, t2));
+      if (_notEquals) {
+        VLSInequality _createVLSInequality = this.factory.createVLSInequality();
+        final Procedure1<VLSInequality> _function = (VLSInequality it) -> {
+          VLSConstant _createVLSConstant = this.factory.createVLSConstant();
+          final Procedure1<VLSConstant> _function_1 = (VLSConstant it_1) -> {
+            it_1.setName(t2.getName());
           };
-          final VLSInequality eq = ObjectExtensions.<VLSInequality>operator_doubleArrow(_createVLSInequality, _function);
-          eqs.add(eq);
-        }
+          VLSConstant _doubleArrow = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function_1);
+          it.setLeft(_doubleArrow);
+          VLSConstant _createVLSConstant_1 = this.factory.createVLSConstant();
+          final Procedure1<VLSConstant> _function_2 = (VLSConstant it_1) -> {
+            it_1.setName(t1.getName());
+          };
+          VLSConstant _doubleArrow_1 = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant_1, _function_2);
+          it.setRight(_doubleArrow_1);
+        };
+        final VLSInequality eq = ObjectExtensions.<VLSInequality>operator_doubleArrow(_createVLSInequality, _function);
+        eqs.add(eq);
       }
     }
     return this.unfoldAnd(eqs);

@@ -90,8 +90,8 @@ class GeneralTest {
 		val vampireConfig = new VampireSolverConfiguration => [
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
-			it.typeScopes.minNewElements = 6
-			it.typeScopes.maxNewElements = 40
+			it.typeScopes.minNewElements = 96
+			it.typeScopes.maxNewElements = 96
 			it.typeScopes.minNewElementsByType = typeMapMin
 			it.typeScopes.maxNewElementsByType = typeMapMax
 		]

@@ -92,7 +92,7 @@ class Logic2VampireLanguageMapper_Support {
 			]
 		]
 	}
-	
+
 	def protected VLSFunction topLevelTypeFunc(VLSVariable v) {
 		return createVLSFunction => [
 			it.constant = "object"
@@ -108,15 +108,26 @@ class Logic2VampireLanguageMapper_Support {
 	}
 
 	// TODO Make more general
-	def establishUniqueness(List<VLSConstant> terms) {
+	def establishUniqueness(List<VLSConstant> terms, VLSConstant t2) {
+//		val List<VLSInequality> eqs = newArrayList
+//		for (t1 : terms.subList(1, terms.length)) {
+//			for (t2 : terms.subList(0, terms.indexOf(t1))) {
+//				val eq = createVLSInequality => [
+//					// TEMP
+//					it.left = createVLSConstant => [it.name = t2.name]
+//					it.right = createVLSConstant => [it.name = t1.name]
+//				// TEMP
+//				]
+//				eqs.add(eq)
+//			}
+//		}
+//		return unfoldAnd(eqs)
 		val List<VLSInequality> eqs = newArrayList
-		for (t1 : terms.subList(1, terms.length)) {
-			for (t2 : terms.subList(0, terms.indexOf(t1))) {
+		for (t1 : terms) {
+			if (t1 != t2) {
 				val eq = createVLSInequality => [
-					// TEMP
 					it.left = createVLSConstant => [it.name = t2.name]
 					it.right = createVLSConstant => [it.name = t1.name]
-				// TEMP
 				]
 				eqs.add(eq)
 			}

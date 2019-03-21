@@ -223,31 +223,68 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           trace.type2PossibleNot.clear();
         }
       }
+      final List<VLSTerm> type2Not = CollectionLiterals.<VLSTerm>newArrayList();
+      for (final Type t : types) {
+        VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
+        final Procedure1<VLSUnaryNegation> _function_2 = (VLSUnaryNegation it) -> {
+          it.setOperand(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(t, trace.type2Predicate)));
+        };
+        VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_2);
+        type2Not.add(_doubleArrow);
+      }
       VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-      final Procedure1<VLSFofFormula> _function_2 = (VLSFofFormula it) -> {
-        it.setName("inheritanceHierarchyHandler");
+      final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
+        it.setName("notObjectHandler");
         it.setFofRole("axiom");
         VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-        final Procedure1<VLSUniversalQuantifier> _function_3 = (VLSUniversalQuantifier it_1) -> {
+        final Procedure1<VLSUniversalQuantifier> _function_4 = (VLSUniversalQuantifier it_1) -> {
           EList<VLSVariable> _variables = it_1.getVariables();
           VLSVariable _duplicate = this.support.duplicate(variable);
           _variables.add(_duplicate);
           VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-          final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_2) -> {
+          final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
+            VLSUnaryNegation _createVLSUnaryNegation_1 = this.factory.createVLSUnaryNegation();
+            final Procedure1<VLSUnaryNegation> _function_6 = (VLSUnaryNegation it_3) -> {
+              it_3.setOperand(this.support.topLevelTypeFunc());
+            };
+            VLSUnaryNegation _doubleArrow_1 = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation_1, _function_6);
+            it_2.setLeft(_doubleArrow_1);
+            it_2.setRight(this.support.unfoldAnd(type2Not));
+          };
+          VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_5);
+          it_1.setOperand(_doubleArrow_1);
+        };
+        VLSUniversalQuantifier _doubleArrow_1 = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_4);
+        it.setFofFormula(_doubleArrow_1);
+      };
+      final VLSFofFormula notObj = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_3);
+      EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
+      _formulas.add(notObj);
+      VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
+      final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
+        it.setName("inheritanceHierarchyHandler");
+        it.setFofRole("axiom");
+        VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
+        final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
+          EList<VLSVariable> _variables = it_1.getVariables();
+          VLSVariable _duplicate = this.support.duplicate(variable);
+          _variables.add(_duplicate);
+          VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
+          final Procedure1<VLSEquivalent> _function_6 = (VLSEquivalent it_2) -> {
             it_2.setLeft(this.support.topLevelTypeFunc());
             Collection<VLSTerm> _values = trace.type2And.values();
             final ArrayList<VLSTerm> reversedList = new ArrayList<VLSTerm>(_values);
             it_2.setRight(this.support.unfoldOr(reversedList));
           };
-          VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_4);
-          it_1.setOperand(_doubleArrow);
+          VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_6);
+          it_1.setOperand(_doubleArrow_1);
         };
-        VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_3);
-        it.setFofFormula(_doubleArrow);
+        VLSUniversalQuantifier _doubleArrow_1 = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_5);
+        it.setFofFormula(_doubleArrow_1);
       };
-      final VLSFofFormula hierarch = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_2);
-      EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
-      _xblockexpression = _formulas.add(hierarch);
+      final VLSFofFormula hierarch = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_4);
+      EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
+      _xblockexpression = _formulas_1.add(hierarch);
     }
     return _xblockexpression;
   }

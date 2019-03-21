@@ -91,13 +91,12 @@ class Logic2VampireLanguageMapper_TypeMapper {
 							it.right = support.unfoldOr(typeDefs)
 						]
 //						it.right = support.unfoldOr((typeDefs))
-
 					]
 				]
 			]
 			trace.specification.formulas += res
 
-			for (var i = globalCounter; i < globalCounter+type.elements.length; i++) {
+			for (var i = globalCounter; i < globalCounter + type.elements.length; i++) {
 				// Create objects for the enum elements
 				val num = i + 1
 				val cstTerm = createVLSFunctionAsTerm => [
@@ -127,7 +126,7 @@ class Logic2VampireLanguageMapper_TypeMapper {
 				trace.specification.formulas += enumScope
 
 			}
-			globalCounter+=type.elements.size
+			globalCounter += type.elements.size
 		}
 
 		// HIERARCHY HANDLER
@@ -148,9 +147,35 @@ class Logic2VampireLanguageMapper_TypeMapper {
 //			typeTrace.type2PossibleNot.clear
 			trace.type2And.put(t1, support.unfoldAnd(new ArrayList<VLSTerm>(trace.type2PossibleNot.values)))
 			trace.type2PossibleNot.clear
+
 		}
 
-		// 5. create fof function that is an or with all the elements in map
+		// 4. case where an object is not an object
+		val List<VLSTerm> type2Not = newArrayList
+		
+		for(t : types) {
+			type2Not.add(createVLSUnaryNegation => [
+				it.operand = support.duplicate(t.lookup(trace.type2Predicate))
+			])
+		}
+
+		val notObj = createVLSFofFormula => [
+			it.name = "notObjectHandler"
+			it.fofRole = "axiom"
+			it.fofFormula = createVLSUniversalQuantifier => [
+				it.variables += support.duplicate(variable)
+				it.operand = createVLSEquivalent => [
+					it.left = createVLSUnaryNegation => [
+						it.operand = support.topLevelTypeFunc
+					]
+					it.right = support.unfoldAnd(type2Not)
+				]
+			]
+		]
+
+		trace.specification.formulas += notObj
+
+		// 4. create fof function that is an or with all the elements in map
 		val hierarch = createVLSFofFormula => [
 			it.name = "inheritanceHierarchyHandler"
 			it.fofRole = "axiom"
