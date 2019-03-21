@@ -8,21 +8,15 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor;
 
 public class ExecuteScriptHandler extends AbstractHandler implements IHandler {
 
-	ScriptExecutor scriptExecutor = new ScriptExecutor();
+	ScriptExecutor scriptExecutor = new ScriptExecutor(RuntimeConsoleBasedScriptConsole.FACTORY);
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {

@@ -1,27 +1,17 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import com.google.inject.Guice
+import com.google.inject.Injector
 import hu.bme.mit.inf.dslreasoner.application.ApplicationConfigurationStandaloneSetup
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
-import org.eclipse.emf.ecore.util.EcoreUtil
-import java.io.FileNotFoundException
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
-import java.io.IOException
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import org.eclipse.viatra.query.runtime.matchers.backend.IQueryBackendFactoryProvider
-import org.eclipse.viatra.query.runtime.rete.matcher.ReteBackendFactoryProvider
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions
-import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint
-import org.eclipse.viatra.query.runtime.rete.util.ReteHintOptions
+import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
-import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneCompilerSetup
-import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated
 import org.eclipse.xtext.resource.XtextResourceSet
-import com.google.inject.Injector
-import com.google.inject.Guice
 
 class StandaloneScriptExecutor {
 	def static void main(String[] args) {
@@ -94,8 +84,12 @@ class StandaloneScriptExecutor {
 		}
 	}
 	
-	def static executeScript(String path){
-		val executor = new ScriptExecutor
+	def static executeScript(String path) {
+		executeScript(path, StandardOutputBasedScriptConsole.FACTORY)
+	}
+	
+	def static executeScript(String path, ScriptConsole.Factory scriptConsoleFactory){
+		val executor = new ScriptExecutor(scriptConsoleFactory)
 		try{
 			val content = loadScript(path)
 			executor.executeScript(content,new NullProgressMonitor)

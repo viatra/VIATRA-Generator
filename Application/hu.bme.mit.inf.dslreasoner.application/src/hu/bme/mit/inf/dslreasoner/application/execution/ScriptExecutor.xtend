@@ -4,6 +4,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigRef
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference
@@ -24,14 +25,17 @@ import hu.bme.mit.inf.dslreasoner.application.execution.util.ApplicationConfigur
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import java.util.LinkedHashMap
 import java.util.Optional
-import org.eclipse.emf.common.util.URI
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification
-import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Status
+import org.eclipse.core.runtime.jobs.Job
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
+@FinalFieldsConstructor
 class ScriptExecutor {
 	val parser = new ApplicationConfigurationParser
+	
+	val ScriptConsole.Factory scriptConsoleFactory
 	
 	/**
 	 * Executes a script
@@ -92,7 +96,7 @@ class ScriptExecutor {
 	
 	def public dispatch execute(GenerationTask task, IProgressMonitor monitor) {
 		val generationTaskExecutor = new GenerationTaskExecutor
-		generationTaskExecutor.executeGenerationTask(task,this,monitor)
+		generationTaskExecutor.executeGenerationTask(task,this,scriptConsoleFactory,monitor)
 	}
 	
 	def public dispatch execute(Task task, IProgressMonitor monitor) {

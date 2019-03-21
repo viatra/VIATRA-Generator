@@ -41,6 +41,7 @@ class GenerationTaskExecutor {
 	def executeGenerationTask(
 		GenerationTask task,
 		ScriptExecutor scriptExecutor,
+		ScriptConsole.Factory scriptConsoleFactory,
 		IProgressMonitor monitor)
 	{		
 		monitor.subTask('''Collecting all resources''')
@@ -62,7 +63,7 @@ class GenerationTaskExecutor {
 		val memoryLimit = scriptExecutor.getMemoryLimit(configSpecification)
 		
 		// 2. create console
-		val console = new ScriptConsole(true,false,
+		val console = scriptConsoleFactory.createScriptConsole(false,
 			if(messageFile!==null) URI.createURI(messageFile.path) else null,
 			if(debugFolder!==null) URI.createURI('''«debugFolder.path»/errors.txt''') else null,
 			if(statisticsFile!==null) URI.createURI(statisticsFile.path) else null
