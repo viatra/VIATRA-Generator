@@ -35,6 +35,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Metamodel
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Mtff;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectiveDeclaration;
@@ -49,7 +50,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSp
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope;
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyProbability;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeReference;
@@ -175,6 +176,9 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.MODEL_ENTRY:
 				sequence_ModelEntry(context, (ModelEntry) semanticObject); 
 				return; 
+			case ApplicationConfigurationPackage.MTFF:
+				sequence_Mtff(context, (Mtff) semanticObject); 
+				return; 
 			case ApplicationConfigurationPackage.OBJECT_REFERENCE:
 				sequence_ObjectReference(context, (ObjectReference) semanticObject); 
 				return; 
@@ -217,8 +221,8 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 			case ApplicationConfigurationPackage.REAL_TYPE_SCOPE:
 				sequence_RealTypeScope(context, (RealTypeScope) semanticObject); 
 				return; 
-			case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION:
-				sequence_ReliabiltiyFunction(context, (ReliabiltiyFunction) semanticObject); 
+			case ApplicationConfigurationPackage.RELIABILTIY_PROBABILITY:
+				sequence_ReliabiltiyProbability(context, (ReliabiltiyProbability) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.RUNTIME_ENTRY:
 				sequence_RuntimeEntry(context, (RuntimeEntry) semanticObject); 
@@ -775,6 +779,20 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
+	 *     ObjectiveFunction returns Mtff
+	 *     ReliabilityObjectiveFunction returns Mtff
+	 *     Mtff returns Mtff
+	 *
+	 * Constraint:
+	 *     (package=[CftModel|QualifiedName]? transformation=[TransformationDefinition|ID])
+	 */
+	protected void sequence_Mtff(ISerializationContext context, Mtff semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     TypeReference returns ObjectReference
 	 *     ObjectReference returns ObjectReference
 	 *
@@ -998,13 +1016,14 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Contexts:
-	 *     ObjectiveFunction returns ReliabiltiyFunction
-	 *     ReliabiltiyFunction returns ReliabiltiyFunction
+	 *     ObjectiveFunction returns ReliabiltiyProbability
+	 *     ReliabilityObjectiveFunction returns ReliabiltiyProbability
+	 *     ReliabiltiyProbability returns ReliabiltiyProbability
 	 *
 	 * Constraint:
-	 *     (package=[CftModel|QualifiedName]? transformation=[TransformationDefinition|ID])
+	 *     (package=[CftModel|QualifiedName]? transformation=[TransformationDefinition|ID] time=REALLiteral)
 	 */
-	protected void sequence_ReliabiltiyFunction(ISerializationContext context, ReliabiltiyFunction semanticObject) {
+	protected void sequence_ReliabiltiyProbability(ISerializationContext context, ReliabiltiyProbability semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

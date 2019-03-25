@@ -261,9 +261,19 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
         return createObjectiveFunctionAdapter();
       }
       @Override
-      public Adapter caseReliabiltiyFunction(ReliabiltiyFunction object)
+      public Adapter caseReliabilityObjectiveFunction(ReliabilityObjectiveFunction object)
       {
-        return createReliabiltiyFunctionAdapter();
+        return createReliabilityObjectiveFunctionAdapter();
+      }
+      @Override
+      public Adapter caseReliabiltiyProbability(ReliabiltiyProbability object)
+      {
+        return createReliabiltiyProbabilityAdapter();
+      }
+      @Override
+      public Adapter caseMtff(Mtff object)
+      {
+        return createMtffAdapter();
       }
       @Override
       public Adapter caseObjectiveDeclaration(ObjectiveDeclaration object)
@@ -1038,16 +1048,46 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction <em>Reliabiltiy Function</em>}'.
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction <em>Reliability Objective Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction
    * @generated
    */
-  public Adapter createReliabiltiyFunctionAdapter()
+  public Adapter createReliabilityObjectiveFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyProbability <em>Reliabiltiy Probability</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyProbability
+   * @generated
+   */
+  public Adapter createReliabiltiyProbabilityAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Mtff <em>Mtff</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Mtff
+   * @generated
+   */
+  public Adapter createMtffAdapter()
   {
     return null;
   }

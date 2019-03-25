@@ -10,7 +10,6 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageI
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel
 import org.eclipse.emf.ecore.EClass
@@ -23,6 +22,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.Scopes
 
 import static hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage.Literals.*
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction
 
 /**
  * This class contains custom scoping description.
@@ -47,9 +47,9 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 				getViatraPackageScope(context, reference, document)
 			case PATTERN_ELEMENT__PATTERN:
 				getViatraPatternScope(context, document)
-			case RELIABILTIY_FUNCTION__PACKAGE:
+			case RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE:
 				getCftPackageScope(context, reference, document)
-			case RELIABILTIY_FUNCTION__TRANSFORMATION:
+			case RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION:
 				getCftTransformationScope(context, document)
 			default:
 				super.getScope(context, reference)
@@ -136,7 +136,7 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 
 	private def getCftTransformationScope(EObject context, ConfigurationScript document) {
 		val transformations = switch (context) {
-			ReliabiltiyFunction case context.package !== null:
+			ReliabilityObjectiveFunction case context.package !== null:
 				context.package.transformationDefinitions
 			default:
 				document.allCftTransformations

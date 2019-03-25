@@ -1260,17 +1260,36 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	public class ObjectiveFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectiveFunction");
-		private final RuleCall cReliabiltiyFunctionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final RuleCall cReliabilityObjectiveFunctionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//ObjectiveFunction:
-		//	ReliabiltiyFunction;
+		//	ReliabilityObjectiveFunction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ReliabiltiyFunction
-		public RuleCall getReliabiltiyFunctionParserRuleCall() { return cReliabiltiyFunctionParserRuleCall; }
+		//ReliabilityObjectiveFunction
+		public RuleCall getReliabilityObjectiveFunctionParserRuleCall() { return cReliabilityObjectiveFunctionParserRuleCall; }
 	}
-	public class ReliabiltiyFunctionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ReliabiltiyFunction");
+	public class ReliabilityObjectiveFunctionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ReliabilityObjectiveFunction");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cReliabiltiyProbabilityParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMtffParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ReliabilityObjectiveFunction:
+		//	ReliabiltiyProbability | Mtff;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ReliabiltiyProbability | Mtff
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ReliabiltiyProbability
+		public RuleCall getReliabiltiyProbabilityParserRuleCall_0() { return cReliabiltiyProbabilityParserRuleCall_0; }
+		
+		//Mtff
+		public RuleCall getMtffParserRuleCall_1() { return cMtffParserRuleCall_1; }
+	}
+	public class ReliabiltiyProbabilityElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ReliabiltiyProbability");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cReliabilityKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1281,18 +1300,78 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Assignment cTransformationAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cTransformationTransformationDefinitionCrossReference_2_0 = (CrossReference)cTransformationAssignment_2.eContents().get(0);
 		private final RuleCall cTransformationTransformationDefinitionIDTerminalRuleCall_2_0_1 = (RuleCall)cTransformationTransformationDefinitionCrossReference_2_0.eContents().get(1);
+		private final Keyword cAtKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTimeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTimeREALLiteralParserRuleCall_4_0 = (RuleCall)cTimeAssignment_4.eContents().get(0);
 		
-		//ReliabiltiyFunction:
+		//ReliabiltiyProbability:
 		//	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')?
-		//	transformation=[cftLanguage::TransformationDefinition];
+		//	transformation=[cftLanguage::TransformationDefinition]
+		//	'at' time=REALLiteral;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')?
-		//transformation=[cftLanguage::TransformationDefinition]
+		//transformation=[cftLanguage::TransformationDefinition] 'at' time=REALLiteral
 		public Group getGroup() { return cGroup; }
 		
 		//'reliability'
 		public Keyword getReliabilityKeyword_0() { return cReliabilityKeyword_0; }
+		
+		//(package=[cftLanguage::CftModel|QualifiedName] '::')?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//package=[cftLanguage::CftModel|QualifiedName]
+		public Assignment getPackageAssignment_1_0() { return cPackageAssignment_1_0; }
+		
+		//[cftLanguage::CftModel|QualifiedName]
+		public CrossReference getPackageCftModelCrossReference_1_0_0() { return cPackageCftModelCrossReference_1_0_0; }
+		
+		//QualifiedName
+		public RuleCall getPackageCftModelQualifiedNameParserRuleCall_1_0_0_1() { return cPackageCftModelQualifiedNameParserRuleCall_1_0_0_1; }
+		
+		//'::'
+		public Keyword getColonColonKeyword_1_1() { return cColonColonKeyword_1_1; }
+		
+		//transformation=[cftLanguage::TransformationDefinition]
+		public Assignment getTransformationAssignment_2() { return cTransformationAssignment_2; }
+		
+		//[cftLanguage::TransformationDefinition]
+		public CrossReference getTransformationTransformationDefinitionCrossReference_2_0() { return cTransformationTransformationDefinitionCrossReference_2_0; }
+		
+		//ID
+		public RuleCall getTransformationTransformationDefinitionIDTerminalRuleCall_2_0_1() { return cTransformationTransformationDefinitionIDTerminalRuleCall_2_0_1; }
+		
+		//'at'
+		public Keyword getAtKeyword_3() { return cAtKeyword_3; }
+		
+		//time=REALLiteral
+		public Assignment getTimeAssignment_4() { return cTimeAssignment_4; }
+		
+		//REALLiteral
+		public RuleCall getTimeREALLiteralParserRuleCall_4_0() { return cTimeREALLiteralParserRuleCall_4_0; }
+	}
+	public class MtffElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.Mtff");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMtffKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cPackageAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final CrossReference cPackageCftModelCrossReference_1_0_0 = (CrossReference)cPackageAssignment_1_0.eContents().get(0);
+		private final RuleCall cPackageCftModelQualifiedNameParserRuleCall_1_0_0_1 = (RuleCall)cPackageCftModelCrossReference_1_0_0.eContents().get(1);
+		private final Keyword cColonColonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cTransformationAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTransformationTransformationDefinitionCrossReference_2_0 = (CrossReference)cTransformationAssignment_2.eContents().get(0);
+		private final RuleCall cTransformationTransformationDefinitionIDTerminalRuleCall_2_0_1 = (RuleCall)cTransformationTransformationDefinitionCrossReference_2_0.eContents().get(1);
+		
+		//Mtff:
+		//	'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation=[cftLanguage::TransformationDefinition];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation=[cftLanguage::TransformationDefinition]
+		public Group getGroup() { return cGroup; }
+		
+		//'mtff'
+		public Keyword getMtffKeyword_0() { return cMtffKeyword_0; }
 		
 		//(package=[cftLanguage::CftModel|QualifiedName] '::')?
 		public Group getGroup_1() { return cGroup_1; }
@@ -3025,7 +3104,9 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	private final ComparisonOperatorElements eComparisonOperator;
 	private final ThresholdEntryElements pThresholdEntry;
 	private final ObjectiveFunctionElements pObjectiveFunction;
-	private final ReliabiltiyFunctionElements pReliabiltiyFunction;
+	private final ReliabilityObjectiveFunctionElements pReliabilityObjectiveFunction;
+	private final ReliabiltiyProbabilityElements pReliabiltiyProbability;
+	private final MtffElements pMtff;
 	private final ObjectiveDeclarationElements pObjectiveDeclaration;
 	private final ObjectiveReferenceElements pObjectiveReference;
 	private final ObjectiveElements pObjective;
@@ -3116,7 +3197,9 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.eComparisonOperator = new ComparisonOperatorElements();
 		this.pThresholdEntry = new ThresholdEntryElements();
 		this.pObjectiveFunction = new ObjectiveFunctionElements();
-		this.pReliabiltiyFunction = new ReliabiltiyFunctionElements();
+		this.pReliabilityObjectiveFunction = new ReliabilityObjectiveFunctionElements();
+		this.pReliabiltiyProbability = new ReliabiltiyProbabilityElements();
+		this.pMtff = new MtffElements();
 		this.pObjectiveDeclaration = new ObjectiveDeclarationElements();
 		this.pObjectiveReference = new ObjectiveReferenceElements();
 		this.pObjective = new ObjectiveElements();
@@ -3625,7 +3708,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ObjectiveFunction:
-	//	ReliabiltiyFunction;
+	//	ReliabilityObjectiveFunction;
 	public ObjectiveFunctionElements getObjectiveFunctionAccess() {
 		return pObjectiveFunction;
 	}
@@ -3634,15 +3717,36 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		return getObjectiveFunctionAccess().getRule();
 	}
 	
-	//ReliabiltiyFunction:
-	//	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')?
-	//	transformation=[cftLanguage::TransformationDefinition];
-	public ReliabiltiyFunctionElements getReliabiltiyFunctionAccess() {
-		return pReliabiltiyFunction;
+	//ReliabilityObjectiveFunction:
+	//	ReliabiltiyProbability | Mtff;
+	public ReliabilityObjectiveFunctionElements getReliabilityObjectiveFunctionAccess() {
+		return pReliabilityObjectiveFunction;
 	}
 	
-	public ParserRule getReliabiltiyFunctionRule() {
-		return getReliabiltiyFunctionAccess().getRule();
+	public ParserRule getReliabilityObjectiveFunctionRule() {
+		return getReliabilityObjectiveFunctionAccess().getRule();
+	}
+	
+	//ReliabiltiyProbability:
+	//	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')?
+	//	transformation=[cftLanguage::TransformationDefinition]
+	//	'at' time=REALLiteral;
+	public ReliabiltiyProbabilityElements getReliabiltiyProbabilityAccess() {
+		return pReliabiltiyProbability;
+	}
+	
+	public ParserRule getReliabiltiyProbabilityRule() {
+		return getReliabiltiyProbabilityAccess().getRule();
+	}
+	
+	//Mtff:
+	//	'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation=[cftLanguage::TransformationDefinition];
+	public MtffElements getMtffAccess() {
+		return pMtff;
+	}
+	
+	public ParserRule getMtffRule() {
+		return getMtffAccess().getRule();
 	}
 	
 	//ObjectiveDeclaration:

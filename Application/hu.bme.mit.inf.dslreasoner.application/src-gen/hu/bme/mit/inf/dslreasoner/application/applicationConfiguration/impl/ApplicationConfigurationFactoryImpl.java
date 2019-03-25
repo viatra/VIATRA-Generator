@@ -103,7 +103,9 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
       case ApplicationConfigurationPackage.OPTIMIZATION_ENTRY: return createOptimizationEntry();
       case ApplicationConfigurationPackage.THRESHOLD_ENTRY: return createThresholdEntry();
       case ApplicationConfigurationPackage.OBJECTIVE_FUNCTION: return createObjectiveFunction();
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION: return createReliabiltiyFunction();
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION: return createReliabilityObjectiveFunction();
+      case ApplicationConfigurationPackage.RELIABILTIY_PROBABILITY: return createReliabiltiyProbability();
+      case ApplicationConfigurationPackage.MTFF: return createMtff();
       case ApplicationConfigurationPackage.OBJECTIVE_DECLARATION: return createObjectiveDeclaration();
       case ApplicationConfigurationPackage.OBJECTIVE_REFERENCE: return createObjectiveReference();
       case ApplicationConfigurationPackage.OBJECTIVE: return createObjective();
@@ -644,10 +646,34 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
    * @generated
    */
   @Override
-  public ReliabiltiyFunction createReliabiltiyFunction()
+  public ReliabilityObjectiveFunction createReliabilityObjectiveFunction()
   {
-    ReliabiltiyFunctionImpl reliabiltiyFunction = new ReliabiltiyFunctionImpl();
-    return reliabiltiyFunction;
+    ReliabilityObjectiveFunctionImpl reliabilityObjectiveFunction = new ReliabilityObjectiveFunctionImpl();
+    return reliabilityObjectiveFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ReliabiltiyProbability createReliabiltiyProbability()
+  {
+    ReliabiltiyProbabilityImpl reliabiltiyProbability = new ReliabiltiyProbabilityImpl();
+    return reliabiltiyProbability;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Mtff createMtff()
+  {
+    MtffImpl mtff = new MtffImpl();
+    return mtff;
   }
 
   /**

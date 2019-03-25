@@ -101,8 +101,13 @@ enum OptimizationDirection: MINIMIZE='minimize' | MAXIMIZE='maximize';
 OptimizationEntry: direction=OptimizationDirection function=ObjectiveFunction;
 enum ComparisonOperator: LESS_EQUALS='<=' | GREATER_EQUALS='>=';
 ThresholdEntry: function=ObjectiveFunction operator=ComparisonOperator threshold=REALLiteral;
-ObjectiveFunction: ReliabiltiyFunction;
-ReliabiltiyFunction: 'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation = [cftLanguage::TransformationDefinition];
+ObjectiveFunction: ReliabilityObjectiveFunction;
+ReliabilityObjectiveFunction: ReliabiltiyProbability | Mtff;
+ReliabiltiyProbability:
+	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation = [cftLanguage::TransformationDefinition]
+	'at' time=REALLiteral;
+Mtff:
+	'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation = [cftLanguage::TransformationDefinition];
 
 ObjectiveDeclaration: 'objectives' name = ID specification = ObjectiveSpecification;
 ObjectiveReference: referred = [ObjectiveDeclaration];

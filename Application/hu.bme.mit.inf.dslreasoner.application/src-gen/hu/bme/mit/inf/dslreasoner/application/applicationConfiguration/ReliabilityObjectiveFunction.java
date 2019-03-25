@@ -8,22 +8,22 @@ import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.Transformatio
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Reliabiltiy Function</b></em>'.
+ * A representation of the model object '<em><b>Reliability Objective Function</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction#getPackage <em>Package</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction#getPackage <em>Package</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction#getTransformation <em>Transformation</em>}</li>
  * </ul>
  *
- * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getReliabiltiyFunction()
+ * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getReliabilityObjectiveFunction()
  * @model
  * @generated
  */
-public interface ReliabiltiyFunction extends ObjectiveFunction
+public interface ReliabilityObjectiveFunction extends ObjectiveFunction
 {
   /**
    * Returns the value of the '<em><b>Package</b></em>' reference.
@@ -35,14 +35,14 @@ public interface ReliabiltiyFunction extends ObjectiveFunction
    * <!-- end-user-doc -->
    * @return the value of the '<em>Package</em>' reference.
    * @see #setPackage(CftModel)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getReliabiltiyFunction_Package()
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getReliabilityObjectiveFunction_Package()
    * @model
    * @generated
    */
   CftModel getPackage();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction#getPackage <em>Package</em>}' reference.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction#getPackage <em>Package</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Package</em>' reference.
@@ -61,14 +61,14 @@ public interface ReliabiltiyFunction extends ObjectiveFunction
    * <!-- end-user-doc -->
    * @return the value of the '<em>Transformation</em>' reference.
    * @see #setTransformation(TransformationDefinition)
-   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getReliabiltiyFunction_Transformation()
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getReliabilityObjectiveFunction_Transformation()
    * @model
    * @generated
    */
   TransformationDefinition getTransformation();
 
   /**
-   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction#getTransformation <em>Transformation</em>}' reference.
+   * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction#getTransformation <em>Transformation</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Transformation</em>' reference.
@@ -77,4 +77,4 @@ public interface ReliabiltiyFunction extends ObjectiveFunction
    */
   void setTransformation(TransformationDefinition value);
 
-} // ReliabiltiyFunction
+} // ReliabilityObjectiveFunction

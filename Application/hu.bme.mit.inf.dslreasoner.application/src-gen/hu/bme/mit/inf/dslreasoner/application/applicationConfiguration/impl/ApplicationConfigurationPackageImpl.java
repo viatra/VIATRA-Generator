@@ -47,6 +47,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Metamodel
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Mtff;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.NumberSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope;
@@ -70,7 +71,8 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnume
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealScope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealTypeScope;
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyProbability;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Scope;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeDeclaration;
@@ -382,7 +384,21 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass reliabiltiyFunctionEClass = null;
+  private EClass reliabilityObjectiveFunctionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass reliabiltiyProbabilityEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mtffEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1523,9 +1539,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   @Override
-  public EClass getReliabiltiyFunction()
+  public EClass getReliabilityObjectiveFunction()
   {
-    return reliabiltiyFunctionEClass;
+    return reliabilityObjectiveFunctionEClass;
   }
 
   /**
@@ -1534,9 +1550,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   @Override
-  public EReference getReliabiltiyFunction_Package()
+  public EReference getReliabilityObjectiveFunction_Package()
   {
-    return (EReference)reliabiltiyFunctionEClass.getEStructuralFeatures().get(0);
+    return (EReference)reliabilityObjectiveFunctionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1545,9 +1561,42 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   @Override
-  public EReference getReliabiltiyFunction_Transformation()
+  public EReference getReliabilityObjectiveFunction_Transformation()
   {
-    return (EReference)reliabiltiyFunctionEClass.getEStructuralFeatures().get(1);
+    return (EReference)reliabilityObjectiveFunctionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getReliabiltiyProbability()
+  {
+    return reliabiltiyProbabilityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getReliabiltiyProbability_Time()
+  {
+    return (EAttribute)reliabiltiyProbabilityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getMtff()
+  {
+    return mtffEClass;
   }
 
   /**
@@ -2655,9 +2704,14 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     objectiveFunctionEClass = createEClass(OBJECTIVE_FUNCTION);
 
-    reliabiltiyFunctionEClass = createEClass(RELIABILTIY_FUNCTION);
-    createEReference(reliabiltiyFunctionEClass, RELIABILTIY_FUNCTION__PACKAGE);
-    createEReference(reliabiltiyFunctionEClass, RELIABILTIY_FUNCTION__TRANSFORMATION);
+    reliabilityObjectiveFunctionEClass = createEClass(RELIABILITY_OBJECTIVE_FUNCTION);
+    createEReference(reliabilityObjectiveFunctionEClass, RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE);
+    createEReference(reliabilityObjectiveFunctionEClass, RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION);
+
+    reliabiltiyProbabilityEClass = createEClass(RELIABILTIY_PROBABILITY);
+    createEAttribute(reliabiltiyProbabilityEClass, RELIABILTIY_PROBABILITY__TIME);
+
+    mtffEClass = createEClass(MTFF);
 
     objectiveDeclarationEClass = createEClass(OBJECTIVE_DECLARATION);
     createEReference(objectiveDeclarationEClass, OBJECTIVE_DECLARATION__SPECIFICATION);
@@ -2848,7 +2902,9 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     objectiveSpecificationEClass.getESuperTypes().add(this.getObjective());
     optimizationEntryEClass.getESuperTypes().add(this.getObjectiveEntry());
     thresholdEntryEClass.getESuperTypes().add(this.getObjectiveEntry());
-    reliabiltiyFunctionEClass.getESuperTypes().add(this.getObjectiveFunction());
+    reliabilityObjectiveFunctionEClass.getESuperTypes().add(this.getObjectiveFunction());
+    reliabiltiyProbabilityEClass.getESuperTypes().add(this.getReliabilityObjectiveFunction());
+    mtffEClass.getESuperTypes().add(this.getReliabilityObjectiveFunction());
     objectiveDeclarationEClass.getESuperTypes().add(this.getDeclaration());
     objectiveReferenceEClass.getESuperTypes().add(this.getObjective());
     configSpecificationEClass.getESuperTypes().add(this.getConfig());
@@ -2989,9 +3045,14 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     initEClass(objectiveFunctionEClass, ObjectiveFunction.class, "ObjectiveFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(reliabiltiyFunctionEClass, ReliabiltiyFunction.class, "ReliabiltiyFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReliabiltiyFunction_Package(), theCftLanguagePackage.getCftModel(), null, "package", null, 0, 1, ReliabiltiyFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getReliabiltiyFunction_Transformation(), theCftLanguagePackage.getTransformationDefinition(), null, "transformation", null, 0, 1, ReliabiltiyFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(reliabilityObjectiveFunctionEClass, ReliabilityObjectiveFunction.class, "ReliabilityObjectiveFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getReliabilityObjectiveFunction_Package(), theCftLanguagePackage.getCftModel(), null, "package", null, 0, 1, ReliabilityObjectiveFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReliabilityObjectiveFunction_Transformation(), theCftLanguagePackage.getTransformationDefinition(), null, "transformation", null, 0, 1, ReliabilityObjectiveFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(reliabiltiyProbabilityEClass, ReliabiltiyProbability.class, "ReliabiltiyProbability", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getReliabiltiyProbability_Time(), theEcorePackage.getEBigDecimal(), "time", null, 0, 1, ReliabiltiyProbability.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(mtffEClass, Mtff.class, "Mtff", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(objectiveDeclarationEClass, ObjectiveDeclaration.class, "ObjectiveDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getObjectiveDeclaration_Specification(), this.getObjectiveSpecification(), null, "specification", null, 0, 1, ObjectiveDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

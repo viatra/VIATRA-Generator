@@ -42,6 +42,7 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 			builder.put(grammarAccess.getPatternEntryAccess().getAlternatives(), "rule__PatternEntry__Alternatives");
 			builder.put(grammarAccess.getGraphPatternAccess().getAlternatives(), "rule__GraphPattern__Alternatives");
 			builder.put(grammarAccess.getObjectiveEntryAccess().getAlternatives(), "rule__ObjectiveEntry__Alternatives");
+			builder.put(grammarAccess.getReliabilityObjectiveFunctionAccess().getAlternatives(), "rule__ReliabilityObjectiveFunction__Alternatives");
 			builder.put(grammarAccess.getObjectiveAccess().getAlternatives(), "rule__Objective__Alternatives");
 			builder.put(grammarAccess.getConfigEntryAccess().getAlternatives(), "rule__ConfigEntry__Alternatives");
 			builder.put(grammarAccess.getConfigAccess().getAlternatives(), "rule__Config__Alternatives");
@@ -101,8 +102,10 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 			builder.put(grammarAccess.getObjectiveSpecificationAccess().getGroup_2(), "rule__ObjectiveSpecification__Group_2__0");
 			builder.put(grammarAccess.getOptimizationEntryAccess().getGroup(), "rule__OptimizationEntry__Group__0");
 			builder.put(grammarAccess.getThresholdEntryAccess().getGroup(), "rule__ThresholdEntry__Group__0");
-			builder.put(grammarAccess.getReliabiltiyFunctionAccess().getGroup(), "rule__ReliabiltiyFunction__Group__0");
-			builder.put(grammarAccess.getReliabiltiyFunctionAccess().getGroup_1(), "rule__ReliabiltiyFunction__Group_1__0");
+			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getGroup(), "rule__ReliabiltiyProbability__Group__0");
+			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getGroup_1(), "rule__ReliabiltiyProbability__Group_1__0");
+			builder.put(grammarAccess.getMtffAccess().getGroup(), "rule__Mtff__Group__0");
+			builder.put(grammarAccess.getMtffAccess().getGroup_1(), "rule__Mtff__Group_1__0");
 			builder.put(grammarAccess.getObjectiveDeclarationAccess().getGroup(), "rule__ObjectiveDeclaration__Group__0");
 			builder.put(grammarAccess.getConfigSpecificationAccess().getGroup(), "rule__ConfigSpecification__Group__0");
 			builder.put(grammarAccess.getConfigSpecificationAccess().getGroup_2(), "rule__ConfigSpecification__Group_2__0");
@@ -196,8 +199,11 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 			builder.put(grammarAccess.getThresholdEntryAccess().getFunctionAssignment_0(), "rule__ThresholdEntry__FunctionAssignment_0");
 			builder.put(grammarAccess.getThresholdEntryAccess().getOperatorAssignment_1(), "rule__ThresholdEntry__OperatorAssignment_1");
 			builder.put(grammarAccess.getThresholdEntryAccess().getThresholdAssignment_2(), "rule__ThresholdEntry__ThresholdAssignment_2");
-			builder.put(grammarAccess.getReliabiltiyFunctionAccess().getPackageAssignment_1_0(), "rule__ReliabiltiyFunction__PackageAssignment_1_0");
-			builder.put(grammarAccess.getReliabiltiyFunctionAccess().getTransformationAssignment_2(), "rule__ReliabiltiyFunction__TransformationAssignment_2");
+			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getPackageAssignment_1_0(), "rule__ReliabiltiyProbability__PackageAssignment_1_0");
+			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getTransformationAssignment_2(), "rule__ReliabiltiyProbability__TransformationAssignment_2");
+			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getTimeAssignment_4(), "rule__ReliabiltiyProbability__TimeAssignment_4");
+			builder.put(grammarAccess.getMtffAccess().getPackageAssignment_1_0(), "rule__Mtff__PackageAssignment_1_0");
+			builder.put(grammarAccess.getMtffAccess().getTransformationAssignment_2(), "rule__Mtff__TransformationAssignment_2");
 			builder.put(grammarAccess.getObjectiveDeclarationAccess().getNameAssignment_1(), "rule__ObjectiveDeclaration__NameAssignment_1");
 			builder.put(grammarAccess.getObjectiveDeclarationAccess().getSpecificationAssignment_2(), "rule__ObjectiveDeclaration__SpecificationAssignment_2");
 			builder.put(grammarAccess.getObjectiveReferenceAccess().getReferredAssignment(), "rule__ObjectiveReference__ReferredAssignment");

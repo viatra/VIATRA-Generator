@@ -4,7 +4,7 @@
 package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl;
 
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabiltiyFunction;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction;
 
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel;
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.TransformationDefinition;
@@ -18,19 +18,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reliabiltiy Function</b></em>'.
+ * An implementation of the model object '<em><b>Reliability Objective Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ReliabiltiyFunctionImpl#getPackage <em>Package</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ReliabiltiyFunctionImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ReliabilityObjectiveFunctionImpl#getPackage <em>Package</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ReliabilityObjectiveFunctionImpl#getTransformation <em>Transformation</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements ReliabiltiyFunction
+public class ReliabilityObjectiveFunctionImpl extends ObjectiveFunctionImpl implements ReliabilityObjectiveFunction
 {
   /**
    * The cached value of the '{@link #getPackage() <em>Package</em>}' reference.
@@ -57,7 +57,7 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReliabiltiyFunctionImpl()
+  protected ReliabilityObjectiveFunctionImpl()
   {
     super();
   }
@@ -70,7 +70,7 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
   @Override
   protected EClass eStaticClass()
   {
-    return ApplicationConfigurationPackage.Literals.RELIABILTIY_FUNCTION;
+    return ApplicationConfigurationPackage.Literals.RELIABILITY_OBJECTIVE_FUNCTION;
   }
 
   /**
@@ -88,7 +88,7 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
       if (package_ != oldPackage)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__PACKAGE, oldPackage, package_));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE, oldPackage, package_));
       }
     }
     return package_;
@@ -115,7 +115,7 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
     CftModel oldPackage = package_;
     package_ = newPackage;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__PACKAGE, oldPackage, package_));
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE, oldPackage, package_));
   }
 
   /**
@@ -133,7 +133,7 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
       if (transformation != oldTransformation)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__TRANSFORMATION, oldTransformation, transformation));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION, oldTransformation, transformation));
       }
     }
     return transformation;
@@ -160,7 +160,7 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
     TransformationDefinition oldTransformation = transformation;
     transformation = newTransformation;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__TRANSFORMATION, oldTransformation, transformation));
+      eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION, oldTransformation, transformation));
   }
 
   /**
@@ -173,10 +173,10 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__PACKAGE:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE:
         if (resolve) return getPackage();
         return basicGetPackage();
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__TRANSFORMATION:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION:
         if (resolve) return getTransformation();
         return basicGetTransformation();
     }
@@ -193,10 +193,10 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__PACKAGE:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE:
         setPackage((CftModel)newValue);
         return;
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__TRANSFORMATION:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION:
         setTransformation((TransformationDefinition)newValue);
         return;
     }
@@ -213,10 +213,10 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__PACKAGE:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE:
         setPackage((CftModel)null);
         return;
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__TRANSFORMATION:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION:
         setTransformation((TransformationDefinition)null);
         return;
     }
@@ -233,12 +233,12 @@ public class ReliabiltiyFunctionImpl extends ObjectiveFunctionImpl implements Re
   {
     switch (featureID)
     {
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__PACKAGE:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE:
         return package_ != null;
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION__TRANSFORMATION:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION:
         return transformation != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ReliabiltiyFunctionImpl
+} //ReliabilityObjectiveFunctionImpl

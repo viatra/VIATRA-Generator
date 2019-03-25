@@ -2095,24 +2095,60 @@ ruleObjectiveFunction returns [EObject current=null]
 	leaveRule();
 }:
 	{
-		newCompositeNode(grammarAccess.getObjectiveFunctionAccess().getReliabiltiyFunctionParserRuleCall());
+		newCompositeNode(grammarAccess.getObjectiveFunctionAccess().getReliabilityObjectiveFunctionParserRuleCall());
 	}
-	this_ReliabiltiyFunction_0=ruleReliabiltiyFunction
+	this_ReliabilityObjectiveFunction_0=ruleReliabilityObjectiveFunction
 	{
-		$current = $this_ReliabiltiyFunction_0.current;
+		$current = $this_ReliabilityObjectiveFunction_0.current;
 		afterParserOrEnumRuleCall();
 	}
 ;
 
-// Entry rule entryRuleReliabiltiyFunction
-entryRuleReliabiltiyFunction returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getReliabiltiyFunctionRule()); }
-	iv_ruleReliabiltiyFunction=ruleReliabiltiyFunction
-	{ $current=$iv_ruleReliabiltiyFunction.current; }
+// Entry rule entryRuleReliabilityObjectiveFunction
+entryRuleReliabilityObjectiveFunction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getReliabilityObjectiveFunctionRule()); }
+	iv_ruleReliabilityObjectiveFunction=ruleReliabilityObjectiveFunction
+	{ $current=$iv_ruleReliabilityObjectiveFunction.current; }
 	EOF;
 
-// Rule ReliabiltiyFunction
-ruleReliabiltiyFunction returns [EObject current=null]
+// Rule ReliabilityObjectiveFunction
+ruleReliabilityObjectiveFunction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getReliabilityObjectiveFunctionAccess().getReliabiltiyProbabilityParserRuleCall_0());
+		}
+		this_ReliabiltiyProbability_0=ruleReliabiltiyProbability
+		{
+			$current = $this_ReliabiltiyProbability_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getReliabilityObjectiveFunctionAccess().getMtffParserRuleCall_1());
+		}
+		this_Mtff_1=ruleMtff
+		{
+			$current = $this_Mtff_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleReliabiltiyProbability
+entryRuleReliabiltiyProbability returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getReliabiltiyProbabilityRule()); }
+	iv_ruleReliabiltiyProbability=ruleReliabiltiyProbability
+	{ $current=$iv_ruleReliabiltiyProbability.current; }
+	EOF;
+
+// Rule ReliabiltiyProbability
+ruleReliabiltiyProbability returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -2122,18 +2158,18 @@ ruleReliabiltiyFunction returns [EObject current=null]
 	(
 		otherlv_0='reliability'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getReliabiltiyFunctionAccess().getReliabilityKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getReliabiltiyProbabilityAccess().getReliabilityKeyword_0());
 		}
 		(
 			(
 				(
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getReliabiltiyFunctionRule());
+							$current = createModelElement(grammarAccess.getReliabiltiyProbabilityRule());
 						}
 					}
 					{
-						newCompositeNode(grammarAccess.getReliabiltiyFunctionAccess().getPackageCftModelCrossReference_1_0_0());
+						newCompositeNode(grammarAccess.getReliabiltiyProbabilityAccess().getPackageCftModelCrossReference_1_0_0());
 					}
 					ruleQualifiedName
 					{
@@ -2143,19 +2179,100 @@ ruleReliabiltiyFunction returns [EObject current=null]
 			)
 			otherlv_2='::'
 			{
-				newLeafNode(otherlv_2, grammarAccess.getReliabiltiyFunctionAccess().getColonColonKeyword_1_1());
+				newLeafNode(otherlv_2, grammarAccess.getReliabiltiyProbabilityAccess().getColonColonKeyword_1_1());
 			}
 		)?
 		(
 			(
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getReliabiltiyFunctionRule());
+						$current = createModelElement(grammarAccess.getReliabiltiyProbabilityRule());
 					}
 				}
 				otherlv_3=RULE_ID
 				{
-					newLeafNode(otherlv_3, grammarAccess.getReliabiltiyFunctionAccess().getTransformationTransformationDefinitionCrossReference_2_0());
+					newLeafNode(otherlv_3, grammarAccess.getReliabiltiyProbabilityAccess().getTransformationTransformationDefinitionCrossReference_2_0());
+				}
+			)
+		)
+		otherlv_4='at'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getReliabiltiyProbabilityAccess().getAtKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getReliabiltiyProbabilityAccess().getTimeREALLiteralParserRuleCall_4_0());
+				}
+				lv_time_5_0=ruleREALLiteral
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getReliabiltiyProbabilityRule());
+					}
+					set(
+						$current,
+						"time",
+						lv_time_5_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.REALLiteral");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleMtff
+entryRuleMtff returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMtffRule()); }
+	iv_ruleMtff=ruleMtff
+	{ $current=$iv_ruleMtff.current; }
+	EOF;
+
+// Rule Mtff
+ruleMtff returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='mtff'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getMtffAccess().getMtffKeyword_0());
+		}
+		(
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMtffRule());
+						}
+					}
+					{
+						newCompositeNode(grammarAccess.getMtffAccess().getPackageCftModelCrossReference_1_0_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_2='::'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getMtffAccess().getColonColonKeyword_1_1());
+			}
+		)?
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMtffRule());
+					}
+				}
+				otherlv_3=RULE_ID
+				{
+					newLeafNode(otherlv_3, grammarAccess.getMtffAccess().getTransformationTransformationDefinitionCrossReference_2_0());
 				}
 			)
 		)

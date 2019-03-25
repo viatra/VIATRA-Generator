@@ -361,11 +361,29 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ApplicationConfigurationPackage.RELIABILTIY_FUNCTION:
+      case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION:
       {
-        ReliabiltiyFunction reliabiltiyFunction = (ReliabiltiyFunction)theEObject;
-        T result = caseReliabiltiyFunction(reliabiltiyFunction);
-        if (result == null) result = caseObjectiveFunction(reliabiltiyFunction);
+        ReliabilityObjectiveFunction reliabilityObjectiveFunction = (ReliabilityObjectiveFunction)theEObject;
+        T result = caseReliabilityObjectiveFunction(reliabilityObjectiveFunction);
+        if (result == null) result = caseObjectiveFunction(reliabilityObjectiveFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.RELIABILTIY_PROBABILITY:
+      {
+        ReliabiltiyProbability reliabiltiyProbability = (ReliabiltiyProbability)theEObject;
+        T result = caseReliabiltiyProbability(reliabiltiyProbability);
+        if (result == null) result = caseReliabilityObjectiveFunction(reliabiltiyProbability);
+        if (result == null) result = caseObjectiveFunction(reliabiltiyProbability);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.MTFF:
+      {
+        Mtff mtff = (Mtff)theEObject;
+        T result = caseMtff(mtff);
+        if (result == null) result = caseReliabilityObjectiveFunction(mtff);
+        if (result == null) result = caseObjectiveFunction(mtff);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1278,17 +1296,49 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Reliabiltiy Function</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Reliability Objective Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reliabiltiy Function</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Reliability Objective Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseReliabiltiyFunction(ReliabiltiyFunction object)
+  public T caseReliabilityObjectiveFunction(ReliabilityObjectiveFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reliabiltiy Probability</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reliabiltiy Probability</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReliabiltiyProbability(ReliabiltiyProbability object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mtff</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mtff</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMtff(Mtff object)
   {
     return null;
   }

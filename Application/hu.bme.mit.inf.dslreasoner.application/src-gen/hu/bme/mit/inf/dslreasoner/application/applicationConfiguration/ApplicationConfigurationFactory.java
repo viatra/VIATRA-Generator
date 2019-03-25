@@ -357,13 +357,31 @@ public interface ApplicationConfigurationFactory extends EFactory
   ObjectiveFunction createObjectiveFunction();
 
   /**
-   * Returns a new object of class '<em>Reliabiltiy Function</em>'.
+   * Returns a new object of class '<em>Reliability Objective Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reliabiltiy Function</em>'.
+   * @return a new object of class '<em>Reliability Objective Function</em>'.
    * @generated
    */
-  ReliabiltiyFunction createReliabiltiyFunction();
+  ReliabilityObjectiveFunction createReliabilityObjectiveFunction();
+
+  /**
+   * Returns a new object of class '<em>Reliabiltiy Probability</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reliabiltiy Probability</em>'.
+   * @generated
+   */
+  ReliabiltiyProbability createReliabiltiyProbability();
+
+  /**
+   * Returns a new object of class '<em>Mtff</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mtff</em>'.
+   * @generated
+   */
+  Mtff createMtff();
 
   /**
    * Returns a new object of class '<em>Objective Declaration</em>'.
