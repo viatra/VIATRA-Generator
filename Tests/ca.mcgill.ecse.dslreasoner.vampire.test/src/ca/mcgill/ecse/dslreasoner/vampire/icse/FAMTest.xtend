@@ -19,6 +19,7 @@ class FAMTest {
 		val reg = Resource.Factory.Registry.INSTANCE
 		val map = reg.extensionToFactoryMap
 		map.put("logicproblem", new XMIResourceFactoryImpl)
+		
 
 		println("Input and output workspaces are created")
 

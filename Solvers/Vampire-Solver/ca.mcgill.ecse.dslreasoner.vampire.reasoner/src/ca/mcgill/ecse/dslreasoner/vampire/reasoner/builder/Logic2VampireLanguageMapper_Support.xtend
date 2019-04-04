@@ -109,6 +109,8 @@ class Logic2VampireLanguageMapper_Support {
 
 // TODO Make more general
 	def establishUniqueness(List<VLSConstant> terms, VLSConstant t2) {
+		
+//		OLD
 //		val List<VLSInequality> eqs = newArrayList
 //		for (t1 : terms.subList(1, terms.length)) {
 //			for (t2 : terms.subList(0, terms.indexOf(t1))) {
@@ -122,6 +124,8 @@ class Logic2VampireLanguageMapper_Support {
 //			}
 //		}
 //		return unfoldAnd(eqs)
+//		END OLD
+
 		val List<VLSInequality> eqs = newArrayList
 		for (t1 : terms) {
 			if (t1 != t2) {

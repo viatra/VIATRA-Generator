@@ -69,6 +69,7 @@ public class GeneralTest {
         LogicProblem problem = modelGenerationProblem.getOutput();
         workspace.writeModel(problem, "Fam.logicproblem");
         InputOutput.<String>println("Problem created");
+        long startTime = System.currentTimeMillis();
         LogicResult solution = null;
         LogicReasoner reasoner = null;
         VampireSolver _vampireSolver = new VampireSolver();
@@ -107,10 +108,22 @@ public class GeneralTest {
         VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
         final Procedure1<VampireSolverConfiguration> _function_2 = (VampireSolverConfiguration it) -> {
           it.documentationLevel = DocumentationLevel.FULL;
+          it.typeScopes.minNewElements = 4;
+          it.typeScopes.maxNewElements = 7;
+          it.typeScopes.minNewElementsByType = typeMapMin;
+          it.typeScopes.maxNewElementsByType = typeMapMax;
         };
         final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function_2);
         solution = reasoner.solve(problem, vampireConfig, workspace);
-        _xblockexpression = InputOutput.<String>println("Problem solved");
+        long _currentTimeMillis = System.currentTimeMillis();
+        long _minus = (_currentTimeMillis - startTime);
+        long totalTimeMin = (_minus / 60000);
+        long _currentTimeMillis_1 = System.currentTimeMillis();
+        long _minus_1 = (_currentTimeMillis_1 - startTime);
+        long _divide = (_minus_1 / 1000);
+        long totalTimeSec = (_divide % 60);
+        InputOutput.<String>println("Problem solved");
+        _xblockexpression = InputOutput.<String>println(((("Time was: " + Long.valueOf(totalTimeMin)) + ":") + Long.valueOf(totalTimeSec)));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
