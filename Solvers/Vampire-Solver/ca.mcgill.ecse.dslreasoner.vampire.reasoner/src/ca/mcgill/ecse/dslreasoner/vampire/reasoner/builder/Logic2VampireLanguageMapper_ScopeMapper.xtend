@@ -36,31 +36,30 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		val localInstances = newArrayList
 
+		val consistant = GLOBAL_MAX > GLOBAL_MIN
+
 		// Handling Minimum_General
 		if (GLOBAL_MIN != ABSOLUTE_MIN) {
-			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false)
-			for (i : trace.uniqueInstances) {
-				localInstances.add(support.duplicate(i))
+			// *
+			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, !consistant)
+			if (consistant) {
+				for (i : trace.uniqueInstances) {
+					localInstances.add(support.duplicate(i))
+				}
+				makeFofFormula(localInstances, trace, true, null)
+			} else {
+				makeFofFormula(trace.uniqueInstances as ArrayList, trace, true, null)
 			}
-
-			makeFofFormula(localInstances, trace, true, null)
-
-//			//For testing Min>Max scope
-//			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, true)
-//			makeFofFormula(trace.uniqueInstances as ArrayList, trace, true, null)
-//			//end for testing
-
 		}
 
 		// Handling Maximum_General
 		if (GLOBAL_MAX != ABSOLUTE_MAX) {
-			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true)
-			makeFofFormula(trace.uniqueInstances as ArrayList, trace, false, null)
-
-//			//For testing Min>Max scope
-//			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, false)
-//			makeFofFormula(localInstances, trace, false, null)
-//			//end for testing
+			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, consistant)
+			if (consistant) {
+				makeFofFormula(trace.uniqueInstances as ArrayList, trace, false, null)
+			} else {
+				makeFofFormula(localInstances, trace, false, null)
+			}
 		}
 
 		// Handling Minimum_Specific
@@ -94,14 +93,30 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		}
 
 // 3. Specify uniqueness of elements
-		if (trace.uniqueInstances.length != 0) {
+		val numInst = trace.uniqueInstances.length
+		var ind = 1
+		if (numInst != 0) {
+			/*
+			 * // SHORTER
+			 * for (e : trace.uniqueInstances.subList(0, numInst-1)) {
+			 /*/
+			// LONGER
 			for (e : trace.uniqueInstances) {
+				// */
+				val x = ind
 				val uniqueness = createVLSFofFormula => [
 					it.name = support.toIDMultiple("t_uniqueness", e.name)
 					it.fofRole = "axiom"
+					/*
+					 * // SHORTER
+					 * it.fofFormula = support.establishUniqueness(trace.uniqueInstances.subList(x, numInst), e)
+					 /*/
+					// LONGER
 					it.fofFormula = support.establishUniqueness(trace.uniqueInstances, e)
+				// */
 				]
 				trace.specification.formulas += uniqueness
+				ind++
 			}
 		}
 	}

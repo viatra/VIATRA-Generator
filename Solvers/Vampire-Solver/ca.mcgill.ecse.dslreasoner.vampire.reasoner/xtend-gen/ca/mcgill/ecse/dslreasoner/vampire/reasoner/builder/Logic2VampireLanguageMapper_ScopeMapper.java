@@ -52,16 +52,25 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     final int GLOBAL_MIN = config.typeScopes.minNewElements;
     final int GLOBAL_MAX = config.typeScopes.maxNewElements;
     final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();
+    final boolean consistant = (GLOBAL_MAX > GLOBAL_MIN);
     if ((GLOBAL_MIN != ABSOLUTE_MIN)) {
-      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false);
-      for (final VLSConstant i : trace.uniqueInstances) {
-        localInstances.add(this.support.duplicate(i));
+      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, (!consistant));
+      if (consistant) {
+        for (final VLSConstant i : trace.uniqueInstances) {
+          localInstances.add(this.support.duplicate(i));
+        }
+        this.makeFofFormula(localInstances, trace, true, null);
+      } else {
+        this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, true, null);
       }
-      this.makeFofFormula(localInstances, trace, true, null);
     }
     if ((GLOBAL_MAX != ABSOLUTE_MAX)) {
-      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true);
-      this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, false, null);
+      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, consistant);
+      if (consistant) {
+        this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, false, null);
+      } else {
+        this.makeFofFormula(localInstances, trace, false, null);
+      }
     }
     int i_1 = 1;
     int minNum = (-1);
@@ -95,11 +104,12 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
         }
       }
     }
-    int _length = ((Object[])Conversions.unwrapArray(trace.uniqueInstances, Object.class)).length;
-    boolean _notEquals = (_length != 0);
-    if (_notEquals) {
+    final int numInst = ((Object[])Conversions.unwrapArray(trace.uniqueInstances, Object.class)).length;
+    int ind = 1;
+    if ((numInst != 0)) {
       for (final VLSConstant e : trace.uniqueInstances) {
         {
+          final int x = ind;
           VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
           final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
             it.setName(this.support.toIDMultiple("t_uniqueness", e.getName()));
@@ -109,6 +119,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
           final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
           EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
           _formulas.add(uniqueness);
+          ind++;
         }
       }
     }
