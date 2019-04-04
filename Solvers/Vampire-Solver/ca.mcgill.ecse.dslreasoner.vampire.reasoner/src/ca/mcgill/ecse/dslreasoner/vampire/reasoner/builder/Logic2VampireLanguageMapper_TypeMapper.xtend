@@ -150,10 +150,10 @@ class Logic2VampireLanguageMapper_TypeMapper {
 
 		}
 
-		// 4. case where an object is not an object
+		// 3.5: case where an object is not an object
 		val List<VLSTerm> type2Not = newArrayList
-		
-		for(t : types) {
+
+		for (t : types) {
 			type2Not.add(createVLSUnaryNegation => [
 				it.operand = support.duplicate(t.lookup(trace.type2Predicate))
 			])
@@ -174,7 +174,7 @@ class Logic2VampireLanguageMapper_TypeMapper {
 		]
 
 		trace.specification.formulas += notObj
-
+		// End 3.5
 		// 4. create fof function that is an or with all the elements in map
 		val hierarch = createVLSFofFormula => [
 			it.name = "inheritanceHierarchyHandler"

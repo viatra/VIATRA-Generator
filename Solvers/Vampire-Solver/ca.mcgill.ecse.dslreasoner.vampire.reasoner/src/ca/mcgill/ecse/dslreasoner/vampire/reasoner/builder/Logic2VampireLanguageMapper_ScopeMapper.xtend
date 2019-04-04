@@ -24,11 +24,12 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 	}
 
 	def dispatch public void transformScope(LogicSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
+		val ABSOLUTE_MIN = 0
+		val ABSOLUTE_MAX = Integer.MAX_VALUE
 
 //		TODO HANDLE ERRORS RELATED TO MAX > MIN
 //		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES)+1(for root) > MAX OBJECTS
 //		TODO HANDLE 
-//		TODO NOT SPECIFIED MEANS =0 ?
 		// 1. make a list of constants equaling the min number of specified objects
 		val GLOBAL_MIN = config.typeScopes.minNewElements
 		val GLOBAL_MAX = config.typeScopes.maxNewElements
@@ -36,19 +37,30 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		val localInstances = newArrayList
 
 		// Handling Minimum_General
-		if (GLOBAL_MIN != 0) {
+		if (GLOBAL_MIN != ABSOLUTE_MIN) {
 			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false)
 			for (i : trace.uniqueInstances) {
 				localInstances.add(support.duplicate(i))
 			}
 
 			makeFofFormula(localInstances, trace, true, null)
+
+//			//For testing Min>Max scope
+//			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, true)
+//			makeFofFormula(trace.uniqueInstances as ArrayList, trace, true, null)
+//			//end for testing
+
 		}
 
 		// Handling Maximum_General
-		if (GLOBAL_MAX != 0) {
+		if (GLOBAL_MAX != ABSOLUTE_MAX) {
 			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true)
 			makeFofFormula(trace.uniqueInstances as ArrayList, trace, false, null)
+
+//			//For testing Min>Max scope
+//			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, false)
+//			makeFofFormula(localInstances, trace, false, null)
+//			//end for testing
 		}
 
 		// Handling Minimum_Specific

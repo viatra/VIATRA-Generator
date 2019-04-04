@@ -90,10 +90,10 @@ class GeneralTest {
 		val vampireConfig = new VampireSolverConfiguration => [
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
-			it.typeScopes.minNewElements = 96
-			it.typeScopes.maxNewElements = 96
-			it.typeScopes.minNewElementsByType = typeMapMin
-			it.typeScopes.maxNewElementsByType = typeMapMax
+//			it.typeScopes.minNewElements = 501
+//			it.typeScopes.maxNewElements = 500
+//			it.typeScopes.minNewElementsByType = typeMapMin
+//			it.typeScopes.maxNewElementsByType = typeMapMax
 		]
 		solution = reasoner.solve(problem, vampireConfig, workspace)
 

@@ -23,7 +23,7 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 class Logic2VampireLanguageMapper_Support {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
 
-	// ID Handler
+// ID Handler
 	def protected String toIDMultiple(String... ids) {
 		ids.map[it.split("\\s+").join("_")].join("_")
 	}
@@ -32,8 +32,8 @@ class Logic2VampireLanguageMapper_Support {
 		ids.split("\\s+").join("_")
 	}
 
-	// Term Handling
-	// TODO Make more general
+// Term Handling
+// TODO Make more general
 	def protected VLSVariable duplicate(VLSVariable term) {
 		return createVLSVariable => [it.name = term.name]
 	}
@@ -107,7 +107,7 @@ class Logic2VampireLanguageMapper_Support {
 		]
 	}
 
-	// TODO Make more general
+// TODO Make more general
 	def establishUniqueness(List<VLSConstant> terms, VLSConstant t2) {
 //		val List<VLSInequality> eqs = newArrayList
 //		for (t1 : terms.subList(1, terms.length)) {
@@ -135,9 +135,9 @@ class Logic2VampireLanguageMapper_Support {
 		return unfoldAnd(eqs)
 	}
 
-	// Support Functions
-	// booleans
-	// AND and OR
+// Support Functions
+// booleans
+// AND and OR
 	def protected VLSTerm unfoldAnd(List<? extends VLSTerm> operands) {
 		if (operands.size == 1) {
 			return operands.head
@@ -163,7 +163,7 @@ class Logic2VampireLanguageMapper_Support {
 			throw new UnsupportedOperationException('''Logic operator with 0 operands!''') // TEMP
 	}
 
-	// can delete below
+// can delete below
 	def protected VLSTerm unfoldDistinctTerms(Logic2VampireLanguageMapper m, EList<Term> operands,
 		Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables) {
 		if (operands.size == 1) {
@@ -183,8 +183,8 @@ class Logic2VampireLanguageMapper_Support {
 			throw new UnsupportedOperationException('''Logic operator with 0 operands!''')
 	}
 
-	// Symbolic
-	// def postprocessResultOfSymbolicReference(TypeReference type, VLSTerm term, Logic2VampireLanguageMapperTrace trace) {
+// Symbolic
+// def postprocessResultOfSymbolicReference(TypeReference type, VLSTerm term, Logic2VampireLanguageMapperTrace trace) {
 //		if(type instanceof BoolTypeReference) {
 //			return booleanToLogicValue(term ,trace)
 //		}
@@ -198,7 +198,7 @@ class Logic2VampireLanguageMapper_Support {
 	 * 	ids.map[it.split("\\s+").join("'")].join("'")
 	 * }
 	 */
-	// QUANTIFIERS + VARIABLES
+// QUANTIFIERS + VARIABLES
 	def protected VLSTerm createQuantifiedExpression(Logic2VampireLanguageMapper mapper,
 		QuantifiedExpression expression, Logic2VampireLanguageMapperTrace trace, Map<Variable, VLSVariable> variables,
 		boolean isUniversal) {
@@ -244,6 +244,32 @@ class Logic2VampireLanguageMapper_Support {
 				}
 			}
 		}
+	}
+	//TODO rewrite such that it uses "listSubTypes"
+	def protected boolean dfsSubtypeCheck(Type type, Type type2) {
+		// There is surely a better way to do this
+		if (type.subtypes.isEmpty)
+			return false
+		else {
+			if (type.subtypes.contains(type2))
+				return true
+			else {
+				for (subtype : type.subtypes) {
+					if(dfsSubtypeCheck(subtype, type2)) return true
+				}
+			}
+		}
+	}
+
+	def protected List<Type> listSubtypes(Type t) {
+		var List<Type> allSubtypes = newArrayList
+		if (!t.subtypes.isEmpty) {
+			for (subt : t.subtypes) {
+				allSubtypes.add(subt)
+				allSubtypes = listSubtypes(subt)
+			}
+		}
+		return allSubtypes
 	}
 
 	def protected withAddition(Map<Variable, VLSVariable> map1, Map<Variable, VLSVariable> map2) {

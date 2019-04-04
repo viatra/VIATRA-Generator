@@ -371,6 +371,46 @@ public class Logic2VampireLanguageMapper_Support {
     return _xifexpression;
   }
   
+  protected boolean dfsSubtypeCheck(final Type type, final Type type2) {
+    boolean _xifexpression = false;
+    boolean _isEmpty = type.getSubtypes().isEmpty();
+    if (_isEmpty) {
+      return false;
+    } else {
+      boolean _xifexpression_1 = false;
+      boolean _contains = type.getSubtypes().contains(type2);
+      if (_contains) {
+        return true;
+      } else {
+        EList<Type> _subtypes = type.getSubtypes();
+        for (final Type subtype : _subtypes) {
+          boolean _dfsSubtypeCheck = this.dfsSubtypeCheck(subtype, type2);
+          if (_dfsSubtypeCheck) {
+            return true;
+          }
+        }
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  protected List<Type> listSubtypes(final Type t) {
+    List<Type> allSubtypes = CollectionLiterals.<Type>newArrayList();
+    boolean _isEmpty = t.getSubtypes().isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      EList<Type> _subtypes = t.getSubtypes();
+      for (final Type subt : _subtypes) {
+        {
+          allSubtypes.add(subt);
+          allSubtypes = this.listSubtypes(subt);
+        }
+      }
+    }
+    return allSubtypes;
+  }
+  
   protected HashMap<Variable, VLSVariable> withAddition(final Map<Variable, VLSVariable> map1, final Map<Variable, VLSVariable> map2) {
     HashMap<Variable, VLSVariable> _hashMap = new HashMap<Variable, VLSVariable>(map1);
     final Procedure1<HashMap<Variable, VLSVariable>> _function = (HashMap<Variable, VLSVariable> it) -> {
