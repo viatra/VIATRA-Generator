@@ -47,17 +47,19 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
   }
   
   public void _transformScope(final LogicSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
+    final int ABSOLUTE_MIN = 0;
+    final int ABSOLUTE_MAX = Integer.MAX_VALUE;
     final int GLOBAL_MIN = config.typeScopes.minNewElements;
     final int GLOBAL_MAX = config.typeScopes.maxNewElements;
     final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();
-    if ((GLOBAL_MIN != 0)) {
+    if ((GLOBAL_MIN != ABSOLUTE_MIN)) {
       this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, false);
       for (final VLSConstant i : trace.uniqueInstances) {
         localInstances.add(this.support.duplicate(i));
       }
       this.makeFofFormula(localInstances, trace, true, null);
     }
-    if ((GLOBAL_MAX != 0)) {
+    if ((GLOBAL_MAX != ABSOLUTE_MAX)) {
       this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, true);
       this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, false, null);
     }

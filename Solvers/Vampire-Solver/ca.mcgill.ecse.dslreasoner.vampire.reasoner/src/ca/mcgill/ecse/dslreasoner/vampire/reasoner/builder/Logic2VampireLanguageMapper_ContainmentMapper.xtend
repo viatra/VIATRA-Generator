@@ -27,7 +27,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 	def public void transformContainment(List<ContainmentHierarchy> hierarchies,
 		Logic2VampireLanguageMapperTrace trace) {
-
+		//TODO throw error is there exists a circular containment that does not involve hierarchy
 		// TODO CONSIDER CASE WHERE MULTIPLE CONTAINMMENT HIERARCHIES EXIST
 		// TEMP
 		val hierarchy = hierarchies.get(0)
@@ -91,6 +91,9 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 			for (c : toType.subtypes) {
 				addToMap(type2cont, toFunc, rel)
 			}
+//			for (c : support.listSubtypes(toType)) {
+//				addToMap(type2cont, toFunc, rel)
+//			}
 
 //			val listForAnd = newArrayList
 ////			listForAnd.add(support.duplicate(fromType.lookup(trace.type2Predicate), varB))
