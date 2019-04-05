@@ -87,7 +87,7 @@ class Logic2VampireLanguageMapper {
 		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
 		
 		// CONTAINMENT MAPPER
-		containmentMapper.transformContainment(problem.containmentHierarchies, trace)
+		containmentMapper.transformContainment(config,problem.containmentHierarchies, trace)
 
 		// CONSTANT MAPPER
 		// only transforms definitions

@@ -1,17 +1,15 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import java.util.ArrayList
+import java.util.HashMap
 import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.util.HashMap
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
-import java.util.List
 
 class Logic2VampireLanguageMapper_ScopeMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -23,7 +21,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		this.base = base
 	}
 
-	def dispatch public void transformScope(LogicSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
+	def dispatch public void transformScope(VampireSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
 		val ABSOLUTE_MIN = 0
 		val ABSOLUTE_MAX = Integer.MAX_VALUE
 
@@ -40,7 +38,6 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Minimum_General
 		if (GLOBAL_MIN != ABSOLUTE_MIN) {
-			// *
 			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, !consistant)
 			if (consistant) {
 				for (i : trace.uniqueInstances) {
@@ -94,7 +91,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 // 3. Specify uniqueness of elements
 		// TEMP
-		val DUPLICATES = false
+		val DUPLICATES = config.uniquenessDuplicates
 
 		val numInst = trace.uniqueInstances.length
 		var ind = 1

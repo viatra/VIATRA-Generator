@@ -93,9 +93,11 @@ class GeneralTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 			it.typeScopes.minNewElements = 4
-			it.typeScopes.maxNewElements = 7
+			it.typeScopes.maxNewElements = 25
 			it.typeScopes.minNewElementsByType = typeMapMin
 			it.typeScopes.maxNewElementsByType = typeMapMax
+			it.contCycleLevel = 5
+			it.uniquenessDuplicates = false
 		]
 		solution = reasoner.solve(problem, vampireConfig, workspace)
 

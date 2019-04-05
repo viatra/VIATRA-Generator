@@ -123,7 +123,7 @@ public class Logic2VampireLanguageMapper {
       this.relationMapper.transformRelation(it, trace);
     };
     problem.getRelations().forEach(_function_3);
-    this.containmentMapper.transformContainment(problem.getContainmentHierarchies(), trace);
+    this.containmentMapper.transformContainment(config, problem.getContainmentHierarchies(), trace);
     trace.constantDefinitions = this.collectConstantDefinitions(problem);
     final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
       this.constantMapper.transformConstantDefinitionSpecification(it, trace);

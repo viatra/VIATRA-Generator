@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
@@ -16,6 +17,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
@@ -52,7 +54,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     this.base = base;
   }
   
-  public void transformContainment(final List<ContainmentHierarchy> hierarchies, final Logic2VampireLanguageMapperTrace trace) {
+  public void transformContainment(final VampireSolverConfiguration config, final List<ContainmentHierarchy> hierarchies, final Logic2VampireLanguageMapperTrace trace) {
     final ContainmentHierarchy hierarchy = hierarchies.get(0);
     final EList<Type> containmentListCopy = hierarchy.getTypesOrderedInHierarchy();
     final EList<Relation> relationsList = hierarchy.getContainmentRelations();
@@ -135,7 +137,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         }
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
-          it.setName(this.support.toIDMultiple("noDupCont", rel.getConstant().toString()));
+          it.setName(this.support.toIDMultiple("containment_noDup", rel.getConstant().toString()));
           it.setFofRole("axiom");
           VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
           final Procedure1<VLSExistentialQuantifier> _function_5 = (VLSExistentialQuantifier it_1) -> {
@@ -217,6 +219,57 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         final VLSFofFormula relFormula = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_4);
         EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
         _formulas_1.add(relFormula);
+      }
+    }
+    final ArrayList<VLSVariable> variables = CollectionLiterals.<VLSVariable>newArrayList();
+    final ArrayList<VLSFunction> disjunctionList = CollectionLiterals.<VLSFunction>newArrayList();
+    final ArrayList<VLSTerm> conjunctionList = CollectionLiterals.<VLSTerm>newArrayList();
+    for (int i = 1; (i <= config.contCycleLevel); i++) {
+      {
+        final int ind = i;
+        VLSVariable _createVLSVariable_3 = this.factory.createVLSVariable();
+        final Procedure1<VLSVariable> _function_4 = (VLSVariable it) -> {
+          String _string = Integer.toString(ind);
+          String _plus = ("V" + _string);
+          it.setName(_plus);
+        };
+        VLSVariable _doubleArrow = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_3, _function_4);
+        variables.add(_doubleArrow);
+        for (int j = 0; (j < i); j++) {
+          {
+            for (final Relation l_2 : relationsList) {
+              {
+                final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_2), trace.rel2Predicate), CollectionLiterals.<VLSVariable>newArrayList(variables.get(j), variables.get(((j + 1) % i))));
+                disjunctionList.add(rel);
+              }
+            }
+            conjunctionList.add(this.support.unfoldOr(disjunctionList));
+            disjunctionList.clear();
+          }
+        }
+        VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
+        final Procedure1<VLSFofFormula> _function_5 = (VLSFofFormula it) -> {
+          it.setName(this.support.toIDMultiple("containment_noCycle", Integer.toString(ind)));
+          it.setFofRole("axiom");
+          VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
+          final Procedure1<VLSUnaryNegation> _function_6 = (VLSUnaryNegation it_1) -> {
+            VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
+            final Procedure1<VLSExistentialQuantifier> _function_7 = (VLSExistentialQuantifier it_2) -> {
+              EList<VLSVariable> _variables = it_2.getVariables();
+              List<VLSVariable> _duplicate = this.support.duplicate(variables);
+              Iterables.<VLSVariable>addAll(_variables, _duplicate);
+              it_2.setOperand(this.support.unfoldAnd(conjunctionList));
+            };
+            VLSExistentialQuantifier _doubleArrow_1 = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_7);
+            it_1.setOperand(_doubleArrow_1);
+          };
+          VLSUnaryNegation _doubleArrow_1 = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_6);
+          it.setFofFormula(_doubleArrow_1);
+        };
+        final VLSFofFormula contCycleForm = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_5);
+        EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
+        _formulas_1.add(contCycleForm);
+        conjunctionList.clear();
       }
     }
   }

@@ -129,6 +129,14 @@ public class Logic2VampireLanguageMapper_Support {
     return ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
   }
   
+  protected List<VLSVariable> duplicate(final List<VLSVariable> vars) {
+    ArrayList<VLSVariable> newList = CollectionLiterals.<VLSVariable>newArrayList();
+    for (final VLSVariable v : vars) {
+      newList.add(this.duplicate(v));
+    }
+    return newList;
+  }
+  
   protected VLSConstant toConstant(final VLSFunctionAsTerm term) {
     VLSConstant _createVLSConstant = this.factory.createVLSConstant();
     final Procedure1<VLSConstant> _function = (VLSConstant it) -> {

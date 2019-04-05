@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
@@ -25,9 +25,9 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		this.base = base
 	}
 
-	def public void transformContainment(List<ContainmentHierarchy> hierarchies,
+	def public void transformContainment(VampireSolverConfiguration config, List<ContainmentHierarchy> hierarchies,
 		Logic2VampireLanguageMapperTrace trace) {
-		//TODO throw error is there exists a circular containment that does not involve hierarchy
+		// TODO throw error is there exists a circular containment that does not involve hierarchy
 		// TODO CONSIDER CASE WHERE MULTIPLE CONTAINMMENT HIERARCHIES EXIST
 		// TEMP
 		val hierarchy = hierarchies.get(0)
@@ -94,7 +94,6 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 //			for (c : support.listSubtypes(toType)) {
 //				addToMap(type2cont, toFunc, rel)
 //			}
-
 //			val listForAnd = newArrayList
 ////			listForAnd.add(support.duplicate(fromType.lookup(trace.type2Predicate), varB))
 //			listForAnd.add(support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate), varList))
@@ -111,7 +110,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 			// STEP 3
 			// Ensure that an objct only has 1 parent
 			val relFormula = createVLSFofFormula => [
-				it.name = support.toIDMultiple("noDupCont", rel.constant.toString)
+				it.name = support.toIDMultiple("containment_noDup", rel.constant.toString)
 				it.fofRole = "axiom"
 				it.fofFormula = createVLSExistentialQuantifier => [
 					it.variables += support.duplicate(varA)
@@ -133,7 +132,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 		}
 
-// STEP  CONT'D
+// STEP 2 CONT'D
 		for (e : type2cont.entrySet) {
 			val relFormula = createVLSFofFormula => [
 				it.name = support.toIDMultiple("containment", e.key.constant.toString)
@@ -159,8 +158,39 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 		}
 
-	// STEP 4
-	// Ensure that there are no cycles in the hierarchy (maybe same as for step3?)
+		// STEP 4
+		// Ensure that there are no cycles in the hierarchy (maybe same as for step3?)
+		// Attempt 1: all possibilities, even the impossible one, based on MM constraints, are listed
+		
+		
+		val variables = newArrayList
+		val disjunctionList = newArrayList
+		val conjunctionList = newArrayList
+		for (var i = 1; i <= config.contCycleLevel; i++) {
+			val ind = i
+			variables.add(createVLSVariable => [it.name = ("V"+Integer.toString(ind))])
+			for ( var j = 0; j < i;j++){
+				for (l : relationsList) {
+					val rel = support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate), newArrayList(variables.get(j), variables.get((j+1)%i)))
+					disjunctionList.add(rel)
+				}
+				conjunctionList.add(support.unfoldOr(disjunctionList))
+				disjunctionList.clear
+			}
+			
+			val contCycleForm = createVLSFofFormula => [
+				it.name = support.toIDMultiple("containment_noCycle", Integer.toString(ind))
+				it.fofRole = "axiom"
+				it.fofFormula = createVLSUnaryNegation => [
+					it.operand = createVLSExistentialQuantifier => [
+						it.variables += support.duplicate(variables)
+						it.operand = support.unfoldAnd(conjunctionList)
+					]
+				]
+			]
+			trace.specification.formulas += contCycleForm
+			conjunctionList.clear
+		}
 	}
 
 	protected def VLSTerm makeUnique(List<VLSFunction> list) {
