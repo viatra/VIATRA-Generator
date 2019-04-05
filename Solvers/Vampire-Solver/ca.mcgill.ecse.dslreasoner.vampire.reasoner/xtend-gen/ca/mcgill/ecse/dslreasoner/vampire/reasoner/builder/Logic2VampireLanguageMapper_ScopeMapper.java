@@ -105,7 +105,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
         }
       }
     }
-    final boolean DUPLICATES = true;
+    final boolean DUPLICATES = false;
     final int numInst = ((Object[])Conversions.unwrapArray(trace.uniqueInstances, Object.class)).length;
     int ind = 1;
     if ((numInst != 0)) {
