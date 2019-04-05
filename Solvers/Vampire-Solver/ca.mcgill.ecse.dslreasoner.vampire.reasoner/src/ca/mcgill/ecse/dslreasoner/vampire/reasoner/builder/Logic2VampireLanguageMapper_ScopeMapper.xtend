@@ -94,7 +94,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 // 3. Specify uniqueness of elements
 		// TEMP
-		val DUPLICATES = true
+		val DUPLICATES = false
 
 		val numInst = trace.uniqueInstances.length
 		var ind = 1
