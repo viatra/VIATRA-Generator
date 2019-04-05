@@ -18,6 +18,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
@@ -104,22 +105,42 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
         }
       }
     }
+    final boolean DUPLICATES = true;
     final int numInst = ((Object[])Conversions.unwrapArray(trace.uniqueInstances, Object.class)).length;
     int ind = 1;
     if ((numInst != 0)) {
-      for (final VLSConstant e : trace.uniqueInstances) {
-        {
-          final int x = ind;
-          VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-          final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
-            it.setName(this.support.toIDMultiple("t_uniqueness", e.getName()));
-            it.setFofRole("axiom");
-            it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances, e));
-          };
-          final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
-          EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
-          _formulas.add(uniqueness);
-          ind++;
+      if (DUPLICATES) {
+        for (final VLSConstant e : trace.uniqueInstances) {
+          {
+            final int x = ind;
+            VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
+            final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+              it.setName(this.support.toIDMultiple("t_uniqueness", e.getName()));
+              it.setFofRole("axiom");
+              it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances, e));
+            };
+            final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+            EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
+            _formulas.add(uniqueness);
+            ind++;
+          }
+        }
+      } else {
+        List<VLSConstant> _subList = trace.uniqueInstances.subList(0, (numInst - 1));
+        for (final VLSConstant e_1 : _subList) {
+          {
+            final int x = ind;
+            VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
+            final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+              it.setName(this.support.toIDMultiple("t_uniqueness", e_1.getName()));
+              it.setFofRole("axiom");
+              it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances.subList(x, numInst), e_1));
+            };
+            final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+            EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
+            _formulas.add(uniqueness);
+            ind++;
+          }
         }
       }
     }

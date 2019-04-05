@@ -93,30 +93,36 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		}
 
 // 3. Specify uniqueness of elements
+		// TEMP
+		val DUPLICATES = true
+
 		val numInst = trace.uniqueInstances.length
 		var ind = 1
 		if (numInst != 0) {
-			/*
-			 * // SHORTER
-			 * for (e : trace.uniqueInstances.subList(0, numInst-1)) {
-			 /*/
-			// LONGER
-			for (e : trace.uniqueInstances) {
-				// */
-				val x = ind
-				val uniqueness = createVLSFofFormula => [
-					it.name = support.toIDMultiple("t_uniqueness", e.name)
-					it.fofRole = "axiom"
-					/*
-					 * // SHORTER
-					 * it.fofFormula = support.establishUniqueness(trace.uniqueInstances.subList(x, numInst), e)
-					 /*/
-					// LONGER
-					it.fofFormula = support.establishUniqueness(trace.uniqueInstances, e)
-				// */
-				]
-				trace.specification.formulas += uniqueness
-				ind++
+			if (DUPLICATES) {
+				// W/ DUPLICATES
+				for (e : trace.uniqueInstances) {
+					val x = ind
+					val uniqueness = createVLSFofFormula => [
+						it.name = support.toIDMultiple("t_uniqueness", e.name)
+						it.fofRole = "axiom"
+						it.fofFormula = support.establishUniqueness(trace.uniqueInstances, e)
+					]
+					trace.specification.formulas += uniqueness
+					ind++
+				}
+			} else {
+				// W/O DUPLICATES
+				for (e : trace.uniqueInstances.subList(0, numInst - 1)) {
+					val x = ind
+					val uniqueness = createVLSFofFormula => [
+						it.name = support.toIDMultiple("t_uniqueness", e.name)
+						it.fofRole = "axiom"
+						it.fofFormula = support.establishUniqueness(trace.uniqueInstances.subList(x, numInst), e)
+					]
+					trace.specification.formulas += uniqueness
+					ind++
+				}
 			}
 		}
 	}
