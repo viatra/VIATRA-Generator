@@ -109,9 +109,11 @@ public class GeneralTest {
         final Procedure1<VampireSolverConfiguration> _function_2 = (VampireSolverConfiguration it) -> {
           it.documentationLevel = DocumentationLevel.FULL;
           it.typeScopes.minNewElements = 4;
-          it.typeScopes.maxNewElements = 7;
+          it.typeScopes.maxNewElements = 25;
           it.typeScopes.minNewElementsByType = typeMapMin;
           it.typeScopes.maxNewElementsByType = typeMapMax;
+          it.contCycleLevel = 5;
+          it.uniquenessDuplicates = false;
         };
         final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function_2);
         solution = reasoner.solve(problem, vampireConfig, workspace);

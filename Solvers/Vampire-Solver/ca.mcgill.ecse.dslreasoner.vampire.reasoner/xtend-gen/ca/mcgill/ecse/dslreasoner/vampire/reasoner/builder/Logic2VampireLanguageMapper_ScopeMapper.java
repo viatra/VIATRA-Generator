@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
@@ -13,7 +14,6 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     this.base = base;
   }
   
-  public void _transformScope(final LogicSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
+  public void _transformScope(final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
     final int ABSOLUTE_MIN = 0;
     final int ABSOLUTE_MAX = Integer.MAX_VALUE;
     final int GLOBAL_MIN = config.typeScopes.minNewElements;
@@ -105,7 +105,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
         }
       }
     }
-    final boolean DUPLICATES = false;
+    final boolean DUPLICATES = config.uniquenessDuplicates;
     final int numInst = ((Object[])Conversions.unwrapArray(trace.uniqueInstances, Object.class)).length;
     int ind = 1;
     if ((numInst != 0)) {
@@ -246,7 +246,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     _formulas.add(cstDec);
   }
   
-  public void transformScope(final LogicSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
+  public void transformScope(final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
     _transformScope(config, trace);
     return;
   }

@@ -77,6 +77,14 @@ class Logic2VampireLanguageMapper_Support {
 			it.terms += duplicate(v)
 		]
 	}
+	
+	def protected List<VLSVariable> duplicate(List<VLSVariable> vars) {
+			var newList = newArrayList
+			for (v : vars) {
+				newList.add(duplicate(v))
+			}
+			return newList
+	}
 
 	def protected VLSConstant toConstant(VLSFunctionAsTerm term) {
 		return createVLSConstant => [
