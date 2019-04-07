@@ -9,7 +9,7 @@ import org.eclipse.viatra.dse.objectives.Comparators
 class UnfinishedMultiplicityObjective implements IObjective {
 	val MultiplicityGoalConstraintCalculator unfinishedMultiplicity;
 	
-	public new(MultiplicityGoalConstraintCalculator unfinishedMultiplicity) {
+	new(MultiplicityGoalConstraintCalculator unfinishedMultiplicity) {
 		this.unfinishedMultiplicity = unfinishedMultiplicity
 	}
 	

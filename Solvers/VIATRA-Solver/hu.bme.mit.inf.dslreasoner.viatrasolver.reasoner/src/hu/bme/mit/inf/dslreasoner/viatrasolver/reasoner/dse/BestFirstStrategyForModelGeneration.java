@@ -75,7 +75,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	// Running
 	private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
 	private SolutionStore solutionStore;
-	private SolutionStoreWithCopy solutionStoreWithCopy;
 	private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
@@ -97,9 +96,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.method = method;
 	}
 	
-	public SolutionStoreWithCopy getSolutionStoreWithCopy() {
-		return solutionStoreWithCopy;
-	}
 	public SolutionStoreWithDiversityDescriptor getSolutionStoreWithDiversityDescriptor() {
 		return solutionStoreWithDiversityDescriptor;
 	}
@@ -121,7 +117,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			matchers.add(matcher);
 		}
 		
-		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
 
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
@@ -146,13 +141,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			return;
 		}
 		
-		final Fitness firstFittness = context.calculateFitness();
-		checkForSolution(firstFittness);
+		final Fitness firstfitness = context.calculateFitness();
+		checkForSolution(firstfitness);
 		
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		final Object[] firstTrajectory = context.getTrajectory().toArray(new Object[0]);
-		TrajectoryWithFitness currentTrajectoryWithFittness = new TrajectoryWithFitness(firstTrajectory, firstFittness);
-		trajectoiresToExplore.add(currentTrajectoryWithFittness);
+		TrajectoryWithFitness currentTrajectoryWithfitness = new TrajectoryWithFitness(firstTrajectory, firstfitness);
+		trajectoiresToExplore.add(currentTrajectoryWithfitness);
 		
 		//if(configuration)
 		visualiseCurrentState();
@@ -167,22 +162,22 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		
 		mainLoop: while (!isInterrupted && !configuration.progressMonitor.isCancelled()) {
 
-			if (currentTrajectoryWithFittness == null) {
+			if (currentTrajectoryWithfitness == null) {
 				if (trajectoiresToExplore.isEmpty()) {
 					logger.debug("State space is fully traversed.");
 					return;
 				} else {
-					currentTrajectoryWithFittness = selectState();
+					currentTrajectoryWithfitness = selectState();
 					if (logger.isDebugEnabled()) {
 						logger.debug("Current trajectory: " + Arrays.toString(context.getTrajectory().toArray()));
-						logger.debug("New trajectory is chosen: " + currentTrajectoryWithFittness);
+						logger.debug("New trajectory is chosen: " + currentTrajectoryWithfitness);
 					}
-					context.getDesignSpaceManager().executeTrajectoryWithMinimalBacktrackWithoutStateCoding(currentTrajectoryWithFittness.trajectory);
+					context.getDesignSpaceManager().executeTrajectoryWithMinimalBacktrackWithoutStateCoding(currentTrajectoryWithfitness.trajectory);
 				}
 			}
 			
 //			visualiseCurrentState();
-//			boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
+//			boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithfitness);
 //			if(consistencyCheckResult == true) {
 //				continue mainLoop;
 //			}
@@ -194,7 +189,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				final Object nextActivation = iterator.next();
 //				if (!iterator.hasNext()) {
 //					logger.debug("Last untraversed activation of the state.");
-//					trajectoiresToExplore.remove(currentTrajectoryWithFittness);
+//					trajectoiresToExplore.remove(currentTrajectoryWithfitness);
 //				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
@@ -209,7 +204,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //					System.out.println("---------");
 //				}
 				
-				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
+				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithfitness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 
 				if (context.isCurrentStateAlreadyTraversed()) {
@@ -227,31 +222,31 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 						continue;
 					}
 
-					TrajectoryWithFitness nextTrajectoryWithFittness = new TrajectoryWithFitness(
+					TrajectoryWithFitness nextTrajectoryWithfitness = new TrajectoryWithFitness(
 							context.getTrajectory().toArray(), nextFitness);
-					trajectoiresToExplore.add(nextTrajectoryWithFittness);
+					trajectoiresToExplore.add(nextTrajectoryWithfitness);
 
-					int compare = objectiveComparatorHelper.compare(currentTrajectoryWithFittness.fitness,
-							nextTrajectoryWithFittness.fitness);
+					int compare = objectiveComparatorHelper.compare(currentTrajectoryWithfitness.fitness,
+							nextTrajectoryWithfitness.fitness);
 					if (compare < 0) {
 						logger.debug("Better fitness, moving on: " + nextFitness);
-						currentTrajectoryWithFittness = nextTrajectoryWithFittness;
+						currentTrajectoryWithfitness = nextTrajectoryWithfitness;
 						continue mainLoop;
 					} else if (compare == 0) {
 						logger.debug("Equally good fitness, moving on: " + nextFitness);
-						currentTrajectoryWithFittness = nextTrajectoryWithFittness;
+						currentTrajectoryWithfitness = nextTrajectoryWithfitness;
 						continue mainLoop;
 					} else {
 						logger.debug("Worse fitness.");
-						currentTrajectoryWithFittness = null;
+						currentTrajectoryWithfitness = null;
 						continue mainLoop;
 					}
 				}
 			}
 
 			logger.debug("State is fully traversed.");
-			trajectoiresToExplore.remove(currentTrajectoryWithFittness);
-			currentTrajectoryWithFittness = null;
+			trajectoiresToExplore.remove(currentTrajectoryWithfitness);
+			currentTrajectoryWithfitness = null;
 
 		}
 		logger.info("Interrupted.");
@@ -269,15 +264,11 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		return activationIds;
 	}
 
-	private void checkForSolution(final Fitness fittness) {
-		if (fittness.isSatisifiesHardObjectives()) {
+	private void checkForSolution(final Fitness fitness) {
+		if (fitness.isSatisifiesHardObjectives()) {
 			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				solutionStoreWithCopy.newSolution(context);
 				solutionStoreWithDiversityDescriptor.newSolution(context);
 				solutionStore.newSolution(context);
-				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
-
-				logger.debug("Found a solution.");
 			}
 		}
 	}
@@ -311,11 +302,11 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	}	
 
 	public void visualiseCurrentState() {
-		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
+		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugConfiguration.partialInterpretatioVisualiser;
 		if(partialInterpretatioVisualiser != null && this.configuration.documentationLevel == DocumentationLevel.FULL && workspace != null) {
 			PartialInterpretation p = (PartialInterpretation) (context.getModel());
 			int id = ++numberOfPrintedModel;
-			if (id % configuration.debugCongiguration.partalInterpretationVisualisationFrequency == 0) {
+			if (id % configuration.debugConfiguration.partalInterpretationVisualisationFrequency == 0) {
 				PartialInterpretationVisualisation visualisation = partialInterpretatioVisualiser.visualiseConcretization(p);
 				visualisation.writeToFile(workspace, String.format("state%09d.png", id));
 			}

@@ -184,7 +184,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 					} else {
 						lastAnswer = lastAnswer.next
 					}
-					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolution)
+					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolutions)
 					
 					val runtime = System.currentTimeMillis -startTime
 					synchronized(this) {
@@ -201,8 +201,8 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 	}
 	
 	def hasEnoughSolution(List<?> answers) {
-		if(configuration.solutionScope.numberOfRequiredSolution < 0) return false
-		else return answers.size() == configuration.solutionScope.numberOfRequiredSolution
+		if(configuration.solutionScope.numberOfRequiredSolutions < 0) return false
+		else return answers.size() == configuration.solutionScope.numberOfRequiredSolutions
 	}
 	
 	public def getPartialAnswers() {

@@ -7,7 +7,7 @@ generate {
 	partial-model = { "inputs/FamInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 5
+		#node = 500
 	}
 	
 	config = {

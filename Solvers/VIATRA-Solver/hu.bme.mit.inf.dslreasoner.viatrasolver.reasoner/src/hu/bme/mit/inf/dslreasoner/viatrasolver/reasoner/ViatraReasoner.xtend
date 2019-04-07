@@ -17,11 +17,13 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.IdentifierBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyForModelGeneration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundHandler
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ScopeObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SurelyViolatedObjectiveGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedMultiplicityObjective
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedWFObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ViatraReasonerSolutionSaver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.WF2ObjectiveConverter
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.List
@@ -31,44 +33,41 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SolutionStoreWithDiversityDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityGranularity
 
-class ViatraReasoner extends LogicReasoner{
+class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
 	val ModelGenerationMethodProvider modelGenerationMethodProvider = new ModelGenerationMethodProvider
-	val extension LogicresultFactory factory = LogicresultFactory.eINSTANCE	
+	val extension LogicresultFactory factory = LogicresultFactory.eINSTANCE
 	val WF2ObjectiveConverter wf2ObjectiveConverter = new WF2ObjectiveConverter
-	
-	
-	override solve(LogicProblem problem, LogicSolverConfiguration configuration, ReasonerWorkspace workspace) throws LogicReasonerException {
+
+	override solve(LogicProblem problem, LogicSolverConfiguration configuration,
+		ReasonerWorkspace workspace) throws LogicReasonerException {
 		val viatraConfig = configuration.asConfig
-		
-		if(viatraConfig.debugCongiguration.logging) {
+
+		if (viatraConfig.debugConfiguration.logging) {
 			DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.VERBOSE_FULL)
 		} else {
 			DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.WARN)
 		}
-		
+
 		val DesignSpaceExplorer dse = new DesignSpaceExplorer();
-		
+
 		dse.addMetaModelPackage(LogiclanguagePackage.eINSTANCE)
 		dse.addMetaModelPackage(LogicproblemPackage.eINSTANCE)
 		dse.addMetaModelPackage(PartialinterpretationPackage.eINSTANCE)
-		
+
 		val transformationStartTime = System.nanoTime
-		
-		
-		
-		val emptySolution = initialiser.initialisePartialInterpretation(problem,viatraConfig.typeScopes).output
-		if((viatraConfig.documentationLevel == DocumentationLevel::FULL || viatraConfig.documentationLevel == DocumentationLevel::NORMAL) && workspace !== null) {
-			workspace.writeModel(emptySolution,"init.partialmodel")
-		} 
+
+		val emptySolution = initialiser.initialisePartialInterpretation(problem, viatraConfig.typeScopes).output
+		if ((viatraConfig.documentationLevel == DocumentationLevel::FULL ||
+			viatraConfig.documentationLevel == DocumentationLevel::NORMAL) && workspace !== null) {
+			workspace.writeModel(emptySolution, "init.partialmodel")
+		}
 		emptySolution.problemConainer = problem
-		
+
 		val ScopePropagator scopePropagator = new ScopePropagator(emptySolution)
-		scopePropagator.propagateAllScopeConstraints		
-		
+		scopePropagator.propagateAllScopeConstraints
+
 		val method = modelGenerationMethodProvider.createModelGenerationMethod(
 			problem,
 			emptySolution,
@@ -78,138 +77,151 @@ class ViatraReasoner extends LogicReasoner{
 			scopePropagator,
 			viatraConfig.documentationLevel
 		)
-		
+
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
-			new UnfinishedWFObjective(method.unfinishedWF)
+			wf2ObjectiveConverter.createCompletenessObjective(method.unfinishedWF)
 		))
 
-		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationObjective(method.invalidWF))
-		for(additionalConstraint : viatraConfig.searchSpaceConstraints.additionalGlobalConstraints) {
+		val solutionStore = new SolutionStore(configuration.solutionScope.numberOfRequiredSolutions)
+		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
+		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayOfSize(0, 0))
+		val solutionCopier = solutionSaver.solutionCopier
+		solutionStore.withSolutionSaver(solutionSaver)
+		dse.solutionStore = solutionStore
+
+		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationGlobalConstraint(method.invalidWF))
+		dse.addGlobalConstraint(new SurelyViolatedObjectiveGlobalConstraint(solutionSaver))
+		for (additionalConstraint : viatraConfig.searchSpaceConstraints.additionalGlobalConstraints) {
 			dse.addGlobalConstraint(additionalConstraint.apply(method))
 		}
-		
-		dse.setInitialModel(emptySolution,false)
-		
-		val IStateCoderFactory statecoder = if(viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
-			new NeighbourhoodBasedStateCoderFactory
-		} else {
-			new IdentifierBasedStateCoderFactory
-		}
+
+		dse.setInitialModel(emptySolution, false)
+
+		val IStateCoderFactory statecoder = if (viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
+				new NeighbourhoodBasedStateCoderFactory
+			} else {
+				new IdentifierBasedStateCoderFactory
+			}
 		dse.stateCoderFactory = statecoder
-		
+
 		dse.maxNumberOfThreads = 1
-		
-		val solutionStore =  new SolutionStore(configuration.solutionScope.numberOfRequiredSolution)
-		dse.solutionStore = solutionStore
-		
-		for(rule : method.relationRefinementRules) {
+
+		for (rule : method.relationRefinementRules) {
 			dse.addTransformationRule(rule)
 		}
-		for(rule : method.objectRefinementRules) {
+		for (rule : method.objectRefinementRules) {
 			dse.addTransformationRule(rule)
 		}
-		
-		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
+
+		val strategy = new BestFirstStrategyForModelGeneration(workspace, viatraConfig, method)
 		viatraConfig.progressMonitor.workedForwardTransformation
-		
+
 		val transformationTime = System.nanoTime - transformationStartTime
 		val solverStartTime = System.nanoTime
-		
+
 		var boolean stoppedByTimeout
-		var boolean stoppedByException
-		try{
-			stoppedByTimeout = dse.startExplorationWithTimeout(strategy,configuration.runtimeLimit*1000);
-			stoppedByException = false
+		try {
+			stoppedByTimeout = dse.startExplorationWithTimeout(strategy, configuration.runtimeLimit * 1000);
 		} catch (NullPointerException npe) {
 			stoppedByTimeout = false
-			stoppedByException = true
 		}
 		val solverTime = System.nanoTime - solverStartTime
 		viatraConfig.progressMonitor.workedSearchFinished
-		
-		//additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
+
+		// additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
 		val statistics = createStatistics => [
-			//it.solverTime = viatraConfig.runtimeLimit
-			it.solverTime = (solverTime/1000000) as int
-			it.transformationTime = (transformationTime/1000000) as int
-			for(x : 0..<strategy.solutionStoreWithCopy.allRuntimes.size) {
+			// it.solverTime = viatraConfig.runtimeLimit
+			it.solverTime = (solverTime / 1000000) as int
+			it.transformationTime = (transformationTime / 1000000) as int
+			for (pair : solutionCopier.getAllCopierRuntimes(true).indexed) {
 				it.entries += createIntStatisticEntry => [
-					it.name = '''_Solution«x»FoundAt'''
-					it.value = (strategy.solutionStoreWithCopy.allRuntimes.get(x)/1000000) as int
+					it.name = '''_Solution«pair.key»FoundAt'''
+					it.value = (pair.value / 1000000) as int
 				]
 			}
 			it.entries += createIntStatisticEntry => [
-				it.name = "TransformationExecutionTime" it.value = (method.statistics.transformationExecutionTime/1000000) as int
+				it.name = "TransformationExecutionTime"
+				it.value = (method.statistics.transformationExecutionTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "TypeAnalysisTime" it.value = (method.statistics.PreliminaryTypeAnalisisTime/1000000) as int
+				it.name = "TypeAnalysisTime"
+				it.value = (method.statistics.PreliminaryTypeAnalisisTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "StateCoderTime" it.value = (statecoder.runtime/1000000) as int
+				it.name = "StateCoderTime"
+				it.value = (statecoder.runtime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "StateCoderFailCount" it.value = strategy.numberOfStatecoderFail
+				it.name = "StateCoderFailCount"
+				it.value = strategy.numberOfStatecoderFail
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "SolutionCopyTime" it.value = (strategy.solutionStoreWithCopy.sumRuntime/1000000) as int
+				it.name = "SolutionCopyTime"
+				it.value = (solutionCopier.getTotalCopierRuntime / 1000000) as int
 			]
-			if(strategy.solutionStoreWithDiversityDescriptor.isActive) {
+			if (strategy.solutionStoreWithDiversityDescriptor.isActive) {
 				it.entries += createIntStatisticEntry => [
-					it.name = "SolutionDiversityCheckTime" it.value = (strategy.solutionStoreWithDiversityDescriptor.sumRuntime/1000000) as int
+					it.name = "SolutionDiversityCheckTime"
+					it.value = (strategy.solutionStoreWithDiversityDescriptor.sumRuntime / 1000000) as int
 				]
 				it.entries += createRealStatisticEntry => [
-					it.name = "SolutionDiversitySuccessRate" it.value = strategy.solutionStoreWithDiversityDescriptor.successRate
+					it.name = "SolutionDiversitySuccessRate"
+					it.value = strategy.solutionStoreWithDiversityDescriptor.successRate
 				]
 			}
 		]
-		
+
 		viatraConfig.progressMonitor.workedBackwardTransformationFinished
-		
-		if(stoppedByTimeout) {
-			return createInsuficientResourcesResult=>[
+
+		if (stoppedByTimeout) {
+			return createInsuficientResourcesResult => [
 				it.problem = problem
-				it.resourceName="time"
-				it.representation += strategy.solutionStoreWithCopy.solutions
+				it.resourceName = "time"
+				it.representation += solutionCopier.getPartialInterpretations(true)
 				it.statistics = statistics
 			]
 		} else {
-			if(solutionStore.solutions.empty) {
+			if (solutionStore.solutions.empty) {
 				return createInconsistencyResult => [
 					it.problem = problem
-					it.representation += strategy.solutionStoreWithCopy.solutions
+					it.representation += solutionCopier.getPartialInterpretations(true)
 					it.statistics = statistics
 				]
 			} else {
 				return createModelResult => [
 					it.problem = problem
-					it.trace = strategy.solutionStoreWithCopy.copyTraces
-					it.representation += strategy.solutionStoreWithCopy.solutions
+					it.trace = solutionCopier.getTraces(true)
+					it.representation += solutionCopier.getPartialInterpretations(true)
 					it.statistics = statistics
 				]
 			}
 		}
 	}
 
-    private def dispatch long runtime(NeighbourhoodBasedStateCoderFactory sc) {
-        sc.sumStatecoderRuntime
-    }
+	private def dispatch long runtime(NeighbourhoodBasedStateCoderFactory sc) {
+		sc.sumStatecoderRuntime
+	}
 
-    private def dispatch long runtime(IdentifierBasedStateCoderFactory sc) {
-        sc.sumStatecoderRuntime
-    }
+	private def dispatch long runtime(IdentifierBasedStateCoderFactory sc) {
+		sc.sumStatecoderRuntime
+	}
 
 	override getInterpretations(ModelResult modelResult) {
-		val indexes = 0..<modelResult.representation.size
+		val indexes = 0 ..< modelResult.representation.size
 		val traces = modelResult.trace as List<Map<EObject, EObject>>;
-		val res = indexes.map[i | new PartialModelAsLogicInterpretation(modelResult.representation.get(i) as PartialInterpretation,traces.get(i))].toList
+		val res = indexes.map [ i |
+			new PartialModelAsLogicInterpretation(modelResult.representation.get(i) as PartialInterpretation,
+				traces.get(i))
+		].toList
 		return res
 	}
-	
+
 	private def ViatraReasonerConfiguration asConfig(LogicSolverConfiguration configuration) {
-		if(configuration instanceof ViatraReasonerConfiguration) {
+		if (configuration instanceof ViatraReasonerConfiguration) {
 			return configuration
-		} else throw new IllegalArgumentException('''Wrong configuration. Expected: «ViatraReasonerConfiguration.name», but got: «configuration.class.name»"''')
+		} else
+			throw new IllegalArgumentException('''Wrong configuration. Expected: «ViatraReasonerConfiguration.name», but got: «configuration.class.name»"''')
 	}
 }

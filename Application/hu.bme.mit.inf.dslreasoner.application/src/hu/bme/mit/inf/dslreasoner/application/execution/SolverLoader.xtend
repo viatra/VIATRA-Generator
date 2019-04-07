@@ -75,7 +75,7 @@ class SolverLoader {
 			]
 		} else if(solver === Solver::VIATRA_SOLVER) {
 			return new ViatraReasonerConfiguration => [c|
-				c.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualiser
+				c.debugConfiguration.partialInterpretatioVisualiser = new GraphvizVisualiser
 				if(config.containsKey("diversity-range")) {
 					val stringValue = config.get("diversity-range")
 					try{

@@ -159,7 +159,7 @@ public class TypeScopes {
  */
 public class SolutionScope {
 	public static val All = Integer.MAX_VALUE;
-	public var numberOfRequiredSolution = 1
+	public var numberOfRequiredSolutions = 1
 }
 /** Progress monitor class for a solver to
  * <li>(optionally) report progress via {@link worked}</li>

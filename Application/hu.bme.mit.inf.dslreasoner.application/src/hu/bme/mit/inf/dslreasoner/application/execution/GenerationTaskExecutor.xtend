@@ -138,7 +138,7 @@ class GenerationTaskExecutor {
 			
 			// 5.2 set values that defined directly 
 			solverConfig.solutionScope = new SolutionScope => [
-				it.numberOfRequiredSolution = if(task.numberSpecified) {
+				it.numberOfRequiredSolutions = if(task.numberSpecified) {
 					task.number
 				} else {
 					1

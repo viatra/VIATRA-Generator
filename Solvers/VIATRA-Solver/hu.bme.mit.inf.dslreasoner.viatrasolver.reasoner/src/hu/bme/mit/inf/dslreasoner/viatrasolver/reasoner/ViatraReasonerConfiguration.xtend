@@ -12,7 +12,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 
-public enum StateCoderStrategy {
+enum StateCoderStrategy {
 	Neighbourhood, NeighbourhoodWithEquivalence, IDBased, DefinedByDiversity
 }
 
@@ -40,14 +40,14 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	/**
 	 * Configuration for debugging support.
 	 */
-	public var DebugConfiguration debugCongiguration = new DebugConfiguration
+	public var DebugConfiguration debugConfiguration = new DebugConfiguration
 	/**
 	 * Configuration for cutting search space.
 	 */
 	 public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
 }
 
-public class DiversityDescriptor {
+class DiversityDescriptor {
 	public var ensureDiversity = false
 	public static val FixPointRange = -1
 	public var int range = FixPointRange
@@ -57,19 +57,19 @@ public class DiversityDescriptor {
 	public var Set<RelationDeclaration> relevantRelations = null
 }
 
-public class DebugConfiguration {
+class DebugConfiguration {
 	public var logging = false
 	public var PartialInterpretationVisualiser partialInterpretatioVisualiser = null;
 	public var partalInterpretationVisualisationFrequency = 1
 }
 
-public class InternalConsistencyCheckerConfiguration {
+class InternalConsistencyCheckerConfiguration {
 	public var LogicReasoner internalIncosnsitencyDetector = null
 	public var LogicSolverConfiguration internalInconsistencDetectorConfiguration = null
 	public var incternalConsistencyCheckingFrequency = 1
 }
 
-public class SearchSpaceConstraint {
+class SearchSpaceConstraint {
 	public static val UNLIMITED_MAXDEPTH = Integer.MAX_VALUE
 	public var int maxDepth = UNLIMITED_MAXDEPTH
 	public var List<Function1<ModelGenerationMethod, ModelGenerationMethodBasedGlobalConstraint>> additionalGlobalConstraints = new LinkedList

@@ -11,28 +11,28 @@ class MultiplicityGoalConstraintCalculator {
 	val IQuerySpecification<?> querySpecification;
 	var ViatraQueryMatcher<?> matcher;
 		
-	public new(String targetRelationName, IQuerySpecification<?> querySpecification) {
+	new(String targetRelationName, IQuerySpecification<?> querySpecification) {
 		this.targetRelationName = targetRelationName
 		this.querySpecification = querySpecification
 		this.matcher = null
 	}
 	
-	public new(MultiplicityGoalConstraintCalculator other) {
+	new(MultiplicityGoalConstraintCalculator other) {
 		this.targetRelationName = other.targetRelationName
 		this.querySpecification = other.querySpecification
 		this.matcher = null
 	}
 	
-	def public getName() {
+	def getName() {
 		targetRelationName
 	}
 	
-	def public init(Notifier notifier) {
+	def init(Notifier notifier) {
 		val engine = ViatraQueryEngine.on(new EMFScope(notifier))
 		matcher = querySpecification.getMatcher(engine)
 	}
 	
-	def public calculateValue() {
+	def calculateValue() {
 		var res = 0
 		val allMatches = this.matcher.allMatches
 		for(match : allMatches) {

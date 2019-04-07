@@ -10,6 +10,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageI
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
 import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel
 import org.eclipse.emf.ecore.EClass
@@ -22,7 +23,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.Scopes
 
 import static hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage.Literals.*
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction
 
 /**
  * This class contains custom scoping description.
