@@ -21,6 +21,26 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum ComparisonOperator implements Enumerator
 {
   /**
+   * The '<em><b>LESS</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #LESS_VALUE
+   * @generated
+   * @ordered
+   */
+  LESS(0, "LESS", "<"),
+
+  /**
+   * The '<em><b>GREATER</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #GREATER_VALUE
+   * @generated
+   * @ordered
+   */
+  GREATER(1, "GREATER", ">"),
+
+  /**
    * The '<em><b>LESS EQUALS</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -28,7 +48,7 @@ public enum ComparisonOperator implements Enumerator
    * @generated
    * @ordered
    */
-  LESS_EQUALS(0, "LESS_EQUALS", "<="),
+  LESS_EQUALS(2, "LESS_EQUALS", "<="),
 
   /**
    * The '<em><b>GREATER EQUALS</b></em>' literal object.
@@ -38,7 +58,37 @@ public enum ComparisonOperator implements Enumerator
    * @generated
    * @ordered
    */
-  GREATER_EQUALS(1, "GREATER_EQUALS", ">=");
+  GREATER_EQUALS(3, "GREATER_EQUALS", ">=");
+
+  /**
+   * The '<em><b>LESS</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>LESS</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #LESS
+   * @model literal="&lt;"
+   * @generated
+   * @ordered
+   */
+  public static final int LESS_VALUE = 0;
+
+  /**
+   * The '<em><b>GREATER</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>GREATER</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #GREATER
+   * @model literal="&gt;"
+   * @generated
+   * @ordered
+   */
+  public static final int GREATER_VALUE = 1;
 
   /**
    * The '<em><b>LESS EQUALS</b></em>' literal value.
@@ -53,7 +103,7 @@ public enum ComparisonOperator implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int LESS_EQUALS_VALUE = 0;
+  public static final int LESS_EQUALS_VALUE = 2;
 
   /**
    * The '<em><b>GREATER EQUALS</b></em>' literal value.
@@ -68,7 +118,7 @@ public enum ComparisonOperator implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int GREATER_EQUALS_VALUE = 1;
+  public static final int GREATER_EQUALS_VALUE = 3;
 
   /**
    * An array of all the '<em><b>Comparison Operator</b></em>' enumerators.
@@ -79,6 +129,8 @@ public enum ComparisonOperator implements Enumerator
   private static final ComparisonOperator[] VALUES_ARRAY =
     new ComparisonOperator[]
     {
+      LESS,
+      GREATER,
       LESS_EQUALS,
       GREATER_EQUALS,
     };
@@ -145,6 +197,8 @@ public enum ComparisonOperator implements Enumerator
   {
     switch (value)
     {
+      case LESS_VALUE: return LESS;
+      case GREATER_VALUE: return GREATER;
       case LESS_EQUALS_VALUE: return LESS_EQUALS;
       case GREATER_EQUALS_VALUE: return GREATER_EQUALS;
     }

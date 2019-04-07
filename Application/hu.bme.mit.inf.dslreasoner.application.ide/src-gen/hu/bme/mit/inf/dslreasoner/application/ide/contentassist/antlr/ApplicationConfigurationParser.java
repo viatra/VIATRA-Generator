@@ -42,6 +42,7 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 			builder.put(grammarAccess.getPatternEntryAccess().getAlternatives(), "rule__PatternEntry__Alternatives");
 			builder.put(grammarAccess.getGraphPatternAccess().getAlternatives(), "rule__GraphPattern__Alternatives");
 			builder.put(grammarAccess.getObjectiveEntryAccess().getAlternatives(), "rule__ObjectiveEntry__Alternatives");
+			builder.put(grammarAccess.getObjectiveFunctionAccess().getAlternatives(), "rule__ObjectiveFunction__Alternatives");
 			builder.put(grammarAccess.getReliabilityObjectiveFunctionAccess().getAlternatives(), "rule__ReliabilityObjectiveFunction__Alternatives");
 			builder.put(grammarAccess.getObjectiveAccess().getAlternatives(), "rule__Objective__Alternatives");
 			builder.put(grammarAccess.getConfigEntryAccess().getAlternatives(), "rule__ConfigEntry__Alternatives");
@@ -102,6 +103,9 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 			builder.put(grammarAccess.getObjectiveSpecificationAccess().getGroup_2(), "rule__ObjectiveSpecification__Group_2__0");
 			builder.put(grammarAccess.getOptimizationEntryAccess().getGroup(), "rule__OptimizationEntry__Group__0");
 			builder.put(grammarAccess.getThresholdEntryAccess().getGroup(), "rule__ThresholdEntry__Group__0");
+			builder.put(grammarAccess.getCostObjectiveFunctionAccess().getGroup(), "rule__CostObjectiveFunction__Group__0");
+			builder.put(grammarAccess.getCostObjectiveFunctionAccess().getGroup_3(), "rule__CostObjectiveFunction__Group_3__0");
+			builder.put(grammarAccess.getCostEntryAccess().getGroup(), "rule__CostEntry__Group__0");
 			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getGroup(), "rule__ReliabiltiyProbability__Group__0");
 			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getGroup_1(), "rule__ReliabiltiyProbability__Group_1__0");
 			builder.put(grammarAccess.getMtffAccess().getGroup(), "rule__Mtff__Group__0");
@@ -199,6 +203,10 @@ public class ApplicationConfigurationParser extends AbstractContentAssistParser 
 			builder.put(grammarAccess.getThresholdEntryAccess().getFunctionAssignment_0(), "rule__ThresholdEntry__FunctionAssignment_0");
 			builder.put(grammarAccess.getThresholdEntryAccess().getOperatorAssignment_1(), "rule__ThresholdEntry__OperatorAssignment_1");
 			builder.put(grammarAccess.getThresholdEntryAccess().getThresholdAssignment_2(), "rule__ThresholdEntry__ThresholdAssignment_2");
+			builder.put(grammarAccess.getCostObjectiveFunctionAccess().getEntriesAssignment_2(), "rule__CostObjectiveFunction__EntriesAssignment_2");
+			builder.put(grammarAccess.getCostObjectiveFunctionAccess().getEntriesAssignment_3_1(), "rule__CostObjectiveFunction__EntriesAssignment_3_1");
+			builder.put(grammarAccess.getCostEntryAccess().getPatternElementAssignment_0(), "rule__CostEntry__PatternElementAssignment_0");
+			builder.put(grammarAccess.getCostEntryAccess().getWeightAssignment_2(), "rule__CostEntry__WeightAssignment_2");
 			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getPackageAssignment_1_0(), "rule__ReliabiltiyProbability__PackageAssignment_1_0");
 			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getTransformationAssignment_2(), "rule__ReliabiltiyProbability__TransformationAssignment_2");
 			builder.put(grammarAccess.getReliabiltiyProbabilityAccess().getTimeAssignment_4(), "rule__ReliabiltiyProbability__TimeAssignment_4");

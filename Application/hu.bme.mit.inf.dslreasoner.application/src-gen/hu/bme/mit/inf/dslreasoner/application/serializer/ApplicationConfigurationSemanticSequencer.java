@@ -14,6 +14,8 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigDec
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport;
@@ -112,6 +114,12 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 				return; 
 			case ApplicationConfigurationPackage.CONFIGURATION_SCRIPT:
 				sequence_ConfigurationScript(context, (ConfigurationScript) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.COST_ENTRY:
+				sequence_CostEntry(context, (CostEntry) semanticObject); 
+				return; 
+			case ApplicationConfigurationPackage.COST_OBJECTIVE_FUNCTION:
+				sequence_CostObjectiveFunction(context, (CostObjectiveFunction) semanticObject); 
 				return; 
 			case ApplicationConfigurationPackage.CUSTOM_ENTRY:
 				sequence_CustomEntry(context, (CustomEntry) semanticObject); 
@@ -396,6 +404,40 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *     ((imports+=Import+ commands+=Command+) | commands+=Command+)?
 	 */
 	protected void sequence_ConfigurationScript(ISerializationContext context, ConfigurationScript semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     CostEntry returns CostEntry
+	 *
+	 * Constraint:
+	 *     (patternElement=PatternElement weight=INTLiteral)
+	 */
+	protected void sequence_CostEntry(ISerializationContext context, CostEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.COST_ENTRY__PATTERN_ELEMENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.COST_ENTRY__PATTERN_ELEMENT));
+			if (transientValues.isValueTransient(semanticObject, ApplicationConfigurationPackage.Literals.COST_ENTRY__WEIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ApplicationConfigurationPackage.Literals.COST_ENTRY__WEIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCostEntryAccess().getPatternElementPatternElementParserRuleCall_0_0(), semanticObject.getPatternElement());
+		feeder.accept(grammarAccess.getCostEntryAccess().getWeightINTLiteralParserRuleCall_2_0(), semanticObject.getWeight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ObjectiveFunction returns CostObjectiveFunction
+	 *     CostObjectiveFunction returns CostObjectiveFunction
+	 *
+	 * Constraint:
+	 *     (entries+=CostEntry entries+=CostEntry*)
+	 */
+	protected void sequence_CostObjectiveFunction(ISerializationContext context, CostObjectiveFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

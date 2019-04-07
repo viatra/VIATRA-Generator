@@ -1260,14 +1260,100 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	public class ObjectiveFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ObjectiveFunction");
-		private final RuleCall cReliabilityObjectiveFunctionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cCostObjectiveFunctionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cReliabilityObjectiveFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ObjectiveFunction:
-		//	ReliabilityObjectiveFunction;
+		//	CostObjectiveFunction | ReliabilityObjectiveFunction;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//CostObjectiveFunction | ReliabilityObjectiveFunction
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//CostObjectiveFunction
+		public RuleCall getCostObjectiveFunctionParserRuleCall_0() { return cCostObjectiveFunctionParserRuleCall_0; }
+		
 		//ReliabilityObjectiveFunction
-		public RuleCall getReliabilityObjectiveFunctionParserRuleCall() { return cReliabilityObjectiveFunctionParserRuleCall; }
+		public RuleCall getReliabilityObjectiveFunctionParserRuleCall_1() { return cReliabilityObjectiveFunctionParserRuleCall_1; }
+	}
+	public class CostObjectiveFunctionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.CostObjectiveFunction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCostKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cEntriesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cEntriesCostEntryParserRuleCall_2_0 = (RuleCall)cEntriesAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cEntriesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cEntriesCostEntryParserRuleCall_3_1_0 = (RuleCall)cEntriesAssignment_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//CostObjectiveFunction:
+		//	'cost' '{' entries+=CostEntry (',' entries+=CostEntry)* '}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'cost' '{' entries+=CostEntry (',' entries+=CostEntry)* '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'cost'
+		public Keyword getCostKeyword_0() { return cCostKeyword_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//entries+=CostEntry
+		public Assignment getEntriesAssignment_2() { return cEntriesAssignment_2; }
+		
+		//CostEntry
+		public RuleCall getEntriesCostEntryParserRuleCall_2_0() { return cEntriesCostEntryParserRuleCall_2_0; }
+		
+		//(',' entries+=CostEntry)*
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//','
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
+		
+		//entries+=CostEntry
+		public Assignment getEntriesAssignment_3_1() { return cEntriesAssignment_3_1; }
+		
+		//CostEntry
+		public RuleCall getEntriesCostEntryParserRuleCall_3_1_0() { return cEntriesCostEntryParserRuleCall_3_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+	public class CostEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.CostEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cPatternElementAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cPatternElementPatternElementParserRuleCall_0_0 = (RuleCall)cPatternElementAssignment_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cWeightAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cWeightINTLiteralParserRuleCall_2_0 = (RuleCall)cWeightAssignment_2.eContents().get(0);
+		
+		//CostEntry:
+		//	patternElement=PatternElement '=' weight=INTLiteral;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//patternElement=PatternElement '=' weight=INTLiteral
+		public Group getGroup() { return cGroup; }
+		
+		//patternElement=PatternElement
+		public Assignment getPatternElementAssignment_0() { return cPatternElementAssignment_0; }
+		
+		//PatternElement
+		public RuleCall getPatternElementPatternElementParserRuleCall_0_0() { return cPatternElementPatternElementParserRuleCall_0_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//weight=INTLiteral
+		public Assignment getWeightAssignment_2() { return cWeightAssignment_2; }
+		
+		//INTLiteral
+		public RuleCall getWeightINTLiteralParserRuleCall_2_0() { return cWeightINTLiteralParserRuleCall_2_0; }
 	}
 	public class ReliabilityObjectiveFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ReliabilityObjectiveFunction");
@@ -2967,29 +3053,45 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	public class ComparisonOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.ComparisonOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cLESS_EQUALSEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cLESS_EQUALSLessThanSignEqualsSignKeyword_0_0 = (Keyword)cLESS_EQUALSEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cGREATER_EQUALSEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cGREATER_EQUALSGreaterThanSignEqualsSignKeyword_1_0 = (Keyword)cGREATER_EQUALSEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cLESSEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLESSLessThanSignKeyword_0_0 = (Keyword)cLESSEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cGREATEREnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cGREATERGreaterThanSignKeyword_1_0 = (Keyword)cGREATEREnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cLESS_EQUALSEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cLESS_EQUALSLessThanSignEqualsSignKeyword_2_0 = (Keyword)cLESS_EQUALSEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cGREATER_EQUALSEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cGREATER_EQUALSGreaterThanSignEqualsSignKeyword_3_0 = (Keyword)cGREATER_EQUALSEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum ComparisonOperator:
-		//	LESS_EQUALS='<=' | GREATER_EQUALS='>=';
+		//	LESS='<' | GREATER='>' | LESS_EQUALS='<=' | GREATER_EQUALS='>=';
 		public EnumRule getRule() { return rule; }
 		
-		//LESS_EQUALS='<=' | GREATER_EQUALS='>='
+		//LESS='<' | GREATER='>' | LESS_EQUALS='<=' | GREATER_EQUALS='>='
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
+		//LESS='<'
+		public EnumLiteralDeclaration getLESSEnumLiteralDeclaration_0() { return cLESSEnumLiteralDeclaration_0; }
+		
+		//'<'
+		public Keyword getLESSLessThanSignKeyword_0_0() { return cLESSLessThanSignKeyword_0_0; }
+		
+		//GREATER='>'
+		public EnumLiteralDeclaration getGREATEREnumLiteralDeclaration_1() { return cGREATEREnumLiteralDeclaration_1; }
+		
+		//'>'
+		public Keyword getGREATERGreaterThanSignKeyword_1_0() { return cGREATERGreaterThanSignKeyword_1_0; }
+		
 		//LESS_EQUALS='<='
-		public EnumLiteralDeclaration getLESS_EQUALSEnumLiteralDeclaration_0() { return cLESS_EQUALSEnumLiteralDeclaration_0; }
+		public EnumLiteralDeclaration getLESS_EQUALSEnumLiteralDeclaration_2() { return cLESS_EQUALSEnumLiteralDeclaration_2; }
 		
 		//'<='
-		public Keyword getLESS_EQUALSLessThanSignEqualsSignKeyword_0_0() { return cLESS_EQUALSLessThanSignEqualsSignKeyword_0_0; }
+		public Keyword getLESS_EQUALSLessThanSignEqualsSignKeyword_2_0() { return cLESS_EQUALSLessThanSignEqualsSignKeyword_2_0; }
 		
 		//GREATER_EQUALS='>='
-		public EnumLiteralDeclaration getGREATER_EQUALSEnumLiteralDeclaration_1() { return cGREATER_EQUALSEnumLiteralDeclaration_1; }
+		public EnumLiteralDeclaration getGREATER_EQUALSEnumLiteralDeclaration_3() { return cGREATER_EQUALSEnumLiteralDeclaration_3; }
 		
 		//'>='
-		public Keyword getGREATER_EQUALSGreaterThanSignEqualsSignKeyword_1_0() { return cGREATER_EQUALSGreaterThanSignEqualsSignKeyword_1_0; }
+		public Keyword getGREATER_EQUALSGreaterThanSignEqualsSignKeyword_3_0() { return cGREATER_EQUALSGreaterThanSignEqualsSignKeyword_3_0; }
 	}
 	public class DocumentLevelSpecificationElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.DocumentLevelSpecification");
@@ -3104,6 +3206,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	private final ComparisonOperatorElements eComparisonOperator;
 	private final ThresholdEntryElements pThresholdEntry;
 	private final ObjectiveFunctionElements pObjectiveFunction;
+	private final CostObjectiveFunctionElements pCostObjectiveFunction;
+	private final CostEntryElements pCostEntry;
 	private final ReliabilityObjectiveFunctionElements pReliabilityObjectiveFunction;
 	private final ReliabiltiyProbabilityElements pReliabiltiyProbability;
 	private final MtffElements pMtff;
@@ -3197,6 +3301,8 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		this.eComparisonOperator = new ComparisonOperatorElements();
 		this.pThresholdEntry = new ThresholdEntryElements();
 		this.pObjectiveFunction = new ObjectiveFunctionElements();
+		this.pCostObjectiveFunction = new CostObjectiveFunctionElements();
+		this.pCostEntry = new CostEntryElements();
 		this.pReliabilityObjectiveFunction = new ReliabilityObjectiveFunctionElements();
 		this.pReliabiltiyProbability = new ReliabiltiyProbabilityElements();
 		this.pMtff = new MtffElements();
@@ -3688,7 +3794,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//enum ComparisonOperator:
-	//	LESS_EQUALS='<=' | GREATER_EQUALS='>=';
+	//	LESS='<' | GREATER='>' | LESS_EQUALS='<=' | GREATER_EQUALS='>=';
 	public ComparisonOperatorElements getComparisonOperatorAccess() {
 		return eComparisonOperator;
 	}
@@ -3708,13 +3814,33 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ObjectiveFunction:
-	//	ReliabilityObjectiveFunction;
+	//	CostObjectiveFunction | ReliabilityObjectiveFunction;
 	public ObjectiveFunctionElements getObjectiveFunctionAccess() {
 		return pObjectiveFunction;
 	}
 	
 	public ParserRule getObjectiveFunctionRule() {
 		return getObjectiveFunctionAccess().getRule();
+	}
+	
+	//CostObjectiveFunction:
+	//	'cost' '{' entries+=CostEntry (',' entries+=CostEntry)* '}';
+	public CostObjectiveFunctionElements getCostObjectiveFunctionAccess() {
+		return pCostObjectiveFunction;
+	}
+	
+	public ParserRule getCostObjectiveFunctionRule() {
+		return getCostObjectiveFunctionAccess().getRule();
+	}
+	
+	//CostEntry:
+	//	patternElement=PatternElement '=' weight=INTLiteral;
+	public CostEntryElements getCostEntryAccess() {
+		return pCostEntry;
+	}
+	
+	public ParserRule getCostEntryRule() {
+		return getCostEntryAccess().getRule();
 	}
 	
 	//ReliabilityObjectiveFunction:

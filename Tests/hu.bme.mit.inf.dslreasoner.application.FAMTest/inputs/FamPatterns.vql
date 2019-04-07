@@ -5,8 +5,12 @@ import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
 @Constraint(message="terminatorAndInformation", severity="error", key={T})
 pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
 	FunctionalOutput.outgoingLinks(Out,I);
-	FunctionalOutput.terminator(Out,T); 
+	FunctionalOutput.terminator(Out,T);
 } or {
 	InformationLink.to(I,In);
 	FunctionalInput.terminator(In,T);
+}
+
+pattern informationLink(I : InformationLink) {
+	InformationLink(I);
 }

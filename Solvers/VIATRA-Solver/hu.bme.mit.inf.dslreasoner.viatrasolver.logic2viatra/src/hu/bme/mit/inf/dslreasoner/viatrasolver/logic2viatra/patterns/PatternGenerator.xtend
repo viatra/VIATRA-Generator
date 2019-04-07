@@ -55,7 +55,7 @@ class PatternGenerator {
 		typeIndexer.requiresTypeAnalysis || typeRefinementGenerator.requiresTypeAnalysis
 	}
 	
-	public dispatch def referRelation(
+	public dispatch def CharSequence referRelation(
 		RelationDeclaration referred,
 		String sourceVariable,
 		String targetVariable,
@@ -64,7 +64,7 @@ class PatternGenerator {
 	{
 		return this.relationDeclarationIndexer.referRelation(referred,sourceVariable,targetVariable,modality)
 	}
-	public dispatch def referRelation(
+	public dispatch def CharSequence referRelation(
 		RelationDefinition referred,
 		String sourceVariable,
 		String targetVariable,

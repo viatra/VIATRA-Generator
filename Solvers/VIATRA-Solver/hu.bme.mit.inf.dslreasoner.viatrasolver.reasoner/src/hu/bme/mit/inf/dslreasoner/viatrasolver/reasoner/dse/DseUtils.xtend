@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.IThreeValuedObjective
 import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.dse.objectives.Comparators
 import org.eclipse.viatra.dse.objectives.Fitness

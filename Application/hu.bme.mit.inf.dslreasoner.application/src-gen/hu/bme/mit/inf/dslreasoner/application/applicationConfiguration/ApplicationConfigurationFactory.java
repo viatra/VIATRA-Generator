@@ -357,6 +357,24 @@ public interface ApplicationConfigurationFactory extends EFactory
   ObjectiveFunction createObjectiveFunction();
 
   /**
+   * Returns a new object of class '<em>Cost Objective Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cost Objective Function</em>'.
+   * @generated
+   */
+  CostObjectiveFunction createCostObjectiveFunction();
+
+  /**
+   * Returns a new object of class '<em>Cost Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cost Entry</em>'.
+   * @generated
+   */
+  CostEntry createCostEntry();
+
+  /**
    * Returns a new object of class '<em>Reliability Objective Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

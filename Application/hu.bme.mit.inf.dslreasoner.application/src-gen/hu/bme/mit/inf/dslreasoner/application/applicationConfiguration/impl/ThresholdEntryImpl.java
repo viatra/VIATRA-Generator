@@ -39,7 +39,7 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
    * @generated
    * @ordered
    */
-  protected static final ComparisonOperator OPERATOR_EDEFAULT = ComparisonOperator.LESS_EQUALS;
+  protected static final ComparisonOperator OPERATOR_EDEFAULT = ComparisonOperator.LESS;
 
   /**
    * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.

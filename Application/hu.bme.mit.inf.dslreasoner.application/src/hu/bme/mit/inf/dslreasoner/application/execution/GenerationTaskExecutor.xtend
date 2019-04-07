@@ -133,7 +133,9 @@ class GenerationTaskExecutor {
 			// 5. create a solver and a configuration
 			// 5.1 initialize
 			val solver = solverLoader.loadSolver(task.solver,configurationMap)
-			val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,console)
+			val objectiveSpecification = scriptExecutor.getObjectiveSpecification(task.objectives)
+			val objectiveEntries = objectiveSpecification?.entries ?: emptyList
+			val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,objectiveEntries,console)
 			
 			
 			// 5.2 set values that defined directly 

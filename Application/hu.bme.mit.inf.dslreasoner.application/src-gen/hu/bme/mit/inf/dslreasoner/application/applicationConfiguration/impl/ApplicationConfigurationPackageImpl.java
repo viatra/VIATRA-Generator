@@ -18,6 +18,8 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEnt
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry;
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Declaration;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification;
@@ -378,6 +380,20 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
    * @generated
    */
   private EClass objectiveFunctionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass costObjectiveFunctionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass costEntryEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1531,6 +1547,61 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
   public EClass getObjectiveFunction()
   {
     return objectiveFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getCostObjectiveFunction()
+  {
+    return costObjectiveFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCostObjectiveFunction_Entries()
+  {
+    return (EReference)costObjectiveFunctionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getCostEntry()
+  {
+    return costEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCostEntry_PatternElement()
+  {
+    return (EReference)costEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getCostEntry_Weight()
+  {
+    return (EAttribute)costEntryEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2704,6 +2775,13 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     objectiveFunctionEClass = createEClass(OBJECTIVE_FUNCTION);
 
+    costObjectiveFunctionEClass = createEClass(COST_OBJECTIVE_FUNCTION);
+    createEReference(costObjectiveFunctionEClass, COST_OBJECTIVE_FUNCTION__ENTRIES);
+
+    costEntryEClass = createEClass(COST_ENTRY);
+    createEReference(costEntryEClass, COST_ENTRY__PATTERN_ELEMENT);
+    createEAttribute(costEntryEClass, COST_ENTRY__WEIGHT);
+
     reliabilityObjectiveFunctionEClass = createEClass(RELIABILITY_OBJECTIVE_FUNCTION);
     createEReference(reliabilityObjectiveFunctionEClass, RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE);
     createEReference(reliabilityObjectiveFunctionEClass, RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION);
@@ -2902,6 +2980,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     objectiveSpecificationEClass.getESuperTypes().add(this.getObjective());
     optimizationEntryEClass.getESuperTypes().add(this.getObjectiveEntry());
     thresholdEntryEClass.getESuperTypes().add(this.getObjectiveEntry());
+    costObjectiveFunctionEClass.getESuperTypes().add(this.getObjectiveFunction());
     reliabilityObjectiveFunctionEClass.getESuperTypes().add(this.getObjectiveFunction());
     reliabiltiyProbabilityEClass.getESuperTypes().add(this.getReliabilityObjectiveFunction());
     mtffEClass.getESuperTypes().add(this.getReliabilityObjectiveFunction());
@@ -3045,6 +3124,13 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     initEClass(objectiveFunctionEClass, ObjectiveFunction.class, "ObjectiveFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(costObjectiveFunctionEClass, CostObjectiveFunction.class, "CostObjectiveFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCostObjectiveFunction_Entries(), this.getCostEntry(), null, "entries", null, 0, -1, CostObjectiveFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(costEntryEClass, CostEntry.class, "CostEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCostEntry_PatternElement(), this.getPatternElement(), null, "patternElement", null, 0, 1, CostEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getCostEntry_Weight(), theEcorePackage.getEInt(), "weight", null, 0, 1, CostEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(reliabilityObjectiveFunctionEClass, ReliabilityObjectiveFunction.class, "ReliabilityObjectiveFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReliabilityObjectiveFunction_Package(), theCftLanguagePackage.getCftModel(), null, "package", null, 0, 1, ReliabilityObjectiveFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReliabilityObjectiveFunction_Transformation(), theCftLanguagePackage.getTransformationDefinition(), null, "transformation", null, 0, 1, ReliabilityObjectiveFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3183,6 +3269,8 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     addEEnumLiteral(optimizationDirectionEEnum, OptimizationDirection.MAXIMIZE);
 
     initEEnum(comparisonOperatorEEnum, ComparisonOperator.class, "ComparisonOperator");
+    addEEnumLiteral(comparisonOperatorEEnum, ComparisonOperator.LESS);
+    addEEnumLiteral(comparisonOperatorEEnum, ComparisonOperator.GREATER);
     addEEnumLiteral(comparisonOperatorEEnum, ComparisonOperator.LESS_EQUALS);
     addEEnumLiteral(comparisonOperatorEEnum, ComparisonOperator.GREATER_EQUALS);
 

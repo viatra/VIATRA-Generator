@@ -2094,14 +2094,161 @@ ruleObjectiveFunction returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	{
-		newCompositeNode(grammarAccess.getObjectiveFunctionAccess().getReliabilityObjectiveFunctionParserRuleCall());
-	}
-	this_ReliabilityObjectiveFunction_0=ruleReliabilityObjectiveFunction
-	{
-		$current = $this_ReliabilityObjectiveFunction_0.current;
-		afterParserOrEnumRuleCall();
-	}
+	(
+		{
+			newCompositeNode(grammarAccess.getObjectiveFunctionAccess().getCostObjectiveFunctionParserRuleCall_0());
+		}
+		this_CostObjectiveFunction_0=ruleCostObjectiveFunction
+		{
+			$current = $this_CostObjectiveFunction_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getObjectiveFunctionAccess().getReliabilityObjectiveFunctionParserRuleCall_1());
+		}
+		this_ReliabilityObjectiveFunction_1=ruleReliabilityObjectiveFunction
+		{
+			$current = $this_ReliabilityObjectiveFunction_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleCostObjectiveFunction
+entryRuleCostObjectiveFunction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCostObjectiveFunctionRule()); }
+	iv_ruleCostObjectiveFunction=ruleCostObjectiveFunction
+	{ $current=$iv_ruleCostObjectiveFunction.current; }
+	EOF;
+
+// Rule CostObjectiveFunction
+ruleCostObjectiveFunction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='cost'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getCostObjectiveFunctionAccess().getCostKeyword_0());
+		}
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getCostObjectiveFunctionAccess().getLeftCurlyBracketKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getCostObjectiveFunctionAccess().getEntriesCostEntryParserRuleCall_2_0());
+				}
+				lv_entries_2_0=ruleCostEntry
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getCostObjectiveFunctionRule());
+					}
+					add(
+						$current,
+						"entries",
+						lv_entries_2_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.CostEntry");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_3=','
+			{
+				newLeafNode(otherlv_3, grammarAccess.getCostObjectiveFunctionAccess().getCommaKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getCostObjectiveFunctionAccess().getEntriesCostEntryParserRuleCall_3_1_0());
+					}
+					lv_entries_4_0=ruleCostEntry
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getCostObjectiveFunctionRule());
+						}
+						add(
+							$current,
+							"entries",
+							lv_entries_4_0,
+							"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.CostEntry");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+		otherlv_5='}'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getCostObjectiveFunctionAccess().getRightCurlyBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleCostEntry
+entryRuleCostEntry returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCostEntryRule()); }
+	iv_ruleCostEntry=ruleCostEntry
+	{ $current=$iv_ruleCostEntry.current; }
+	EOF;
+
+// Rule CostEntry
+ruleCostEntry returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getCostEntryAccess().getPatternElementPatternElementParserRuleCall_0_0());
+				}
+				lv_patternElement_0_0=rulePatternElement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getCostEntryRule());
+					}
+					set(
+						$current,
+						"patternElement",
+						lv_patternElement_0_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.PatternElement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_1='='
+		{
+			newLeafNode(otherlv_1, grammarAccess.getCostEntryAccess().getEqualsSignKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getCostEntryAccess().getWeightINTLiteralParserRuleCall_2_0());
+				}
+				lv_weight_2_0=ruleINTLiteral
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getCostEntryRule());
+					}
+					set(
+						$current,
+						"weight",
+						lv_weight_2_0,
+						"hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration.INTLiteral");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
 ;
 
 // Entry rule entryRuleReliabilityObjectiveFunction
@@ -4917,18 +5064,34 @@ ruleComparisonOperator returns [Enumerator current=null]
 }:
 	(
 		(
-			enumLiteral_0='<='
+			enumLiteral_0='<'
 			{
-				$current = grammarAccess.getComparisonOperatorAccess().getLESS_EQUALSEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorAccess().getLESS_EQUALSEnumLiteralDeclaration_0());
+				$current = grammarAccess.getComparisonOperatorAccess().getLESSEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorAccess().getLESSEnumLiteralDeclaration_0());
 			}
 		)
 		    |
 		(
-			enumLiteral_1='>='
+			enumLiteral_1='>'
 			{
-				$current = grammarAccess.getComparisonOperatorAccess().getGREATER_EQUALSEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorAccess().getGREATER_EQUALSEnumLiteralDeclaration_1());
+				$current = grammarAccess.getComparisonOperatorAccess().getGREATEREnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorAccess().getGREATEREnumLiteralDeclaration_1());
+			}
+		)
+		    |
+		(
+			enumLiteral_2='<='
+			{
+				$current = grammarAccess.getComparisonOperatorAccess().getLESS_EQUALSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getComparisonOperatorAccess().getLESS_EQUALSEnumLiteralDeclaration_2());
+			}
+		)
+		    |
+		(
+			enumLiteral_3='>='
+			{
+				$current = grammarAccess.getComparisonOperatorAccess().getGREATER_EQUALSEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_3, grammarAccess.getComparisonOperatorAccess().getGREATER_EQUALSEnumLiteralDeclaration_3());
 			}
 		)
 	)

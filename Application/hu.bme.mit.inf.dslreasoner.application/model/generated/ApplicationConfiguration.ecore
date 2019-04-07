@@ -114,14 +114,25 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//OptimizationDirection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ComparisonOperator">
-    <eLiterals name="LESS_EQUALS" literal="&lt;="/>
-    <eLiterals name="GREATER_EQUALS" value="1" literal=">="/>
+    <eLiterals name="LESS" literal="&lt;"/>
+    <eLiterals name="GREATER" value="1" literal=">"/>
+    <eLiterals name="LESS_EQUALS" value="2" literal="&lt;="/>
+    <eLiterals name="GREATER_EQUALS" value="3" literal=">="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThresholdEntry" eSuperTypes="#//ObjectiveEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//ComparisonOperator"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectiveFunction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CostObjectiveFunction" eSuperTypes="#//ObjectiveFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//CostEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CostEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patternElement" eType="#//PatternElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReliabilityObjectiveFunction" eSuperTypes="#//ObjectiveFunction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.components/model/generated/CftLanguage.ecore#//CftModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.components/model/generated/CftLanguage.ecore#//TransformationDefinition"/>

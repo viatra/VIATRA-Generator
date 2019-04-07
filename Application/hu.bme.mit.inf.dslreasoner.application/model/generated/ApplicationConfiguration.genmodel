@@ -11,6 +11,8 @@
       <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//OptimizationDirection/MAXIMIZE"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ApplicationConfiguration.ecore#//ComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//ComparisonOperator/LESS"/>
+      <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//ComparisonOperator/GREATER"/>
       <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//ComparisonOperator/LESS_EQUALS"/>
       <genEnumLiterals ecoreEnumLiteral="ApplicationConfiguration.ecore#//ComparisonOperator/GREATER_EQUALS"/>
     </genEnums>
@@ -122,6 +124,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//ThresholdEntry/threshold"/>
     </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//ObjectiveFunction"/>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//CostObjectiveFunction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//CostObjectiveFunction/entries"/>
+    </genClasses>
+    <genClasses ecoreClass="ApplicationConfiguration.ecore#//CostEntry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//CostEntry/patternElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ApplicationConfiguration.ecore#//CostEntry/weight"/>
+    </genClasses>
     <genClasses ecoreClass="ApplicationConfiguration.ecore#//ReliabilityObjectiveFunction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ReliabilityObjectiveFunction/package"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ApplicationConfiguration.ecore#//ReliabilityObjectiveFunction/transformation"/>

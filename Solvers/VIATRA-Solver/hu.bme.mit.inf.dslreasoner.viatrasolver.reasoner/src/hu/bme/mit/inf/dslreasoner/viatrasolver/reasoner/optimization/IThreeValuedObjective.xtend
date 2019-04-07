@@ -1,4 +1,4 @@
-package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
+package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization
 
 import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.dse.objectives.IObjective

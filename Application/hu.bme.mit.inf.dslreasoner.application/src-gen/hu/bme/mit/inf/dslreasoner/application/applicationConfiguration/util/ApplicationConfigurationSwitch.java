@@ -361,6 +361,21 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ApplicationConfigurationPackage.COST_OBJECTIVE_FUNCTION:
+      {
+        CostObjectiveFunction costObjectiveFunction = (CostObjectiveFunction)theEObject;
+        T result = caseCostObjectiveFunction(costObjectiveFunction);
+        if (result == null) result = caseObjectiveFunction(costObjectiveFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ApplicationConfigurationPackage.COST_ENTRY:
+      {
+        CostEntry costEntry = (CostEntry)theEObject;
+        T result = caseCostEntry(costEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION:
       {
         ReliabilityObjectiveFunction reliabilityObjectiveFunction = (ReliabilityObjectiveFunction)theEObject;
@@ -1291,6 +1306,38 @@ public class ApplicationConfigurationSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseObjectiveFunction(ObjectiveFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Cost Objective Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Cost Objective Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCostObjectiveFunction(CostObjectiveFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Cost Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Cost Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCostEntry(CostEntry object)
   {
     return null;
   }

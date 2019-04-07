@@ -261,6 +261,16 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
         return createObjectiveFunctionAdapter();
       }
       @Override
+      public Adapter caseCostObjectiveFunction(CostObjectiveFunction object)
+      {
+        return createCostObjectiveFunctionAdapter();
+      }
+      @Override
+      public Adapter caseCostEntry(CostEntry object)
+      {
+        return createCostEntryAdapter();
+      }
+      @Override
       public Adapter caseReliabilityObjectiveFunction(ReliabilityObjectiveFunction object)
       {
         return createReliabilityObjectiveFunctionAdapter();
@@ -1043,6 +1053,36 @@ public class ApplicationConfigurationAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createObjectiveFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction <em>Cost Objective Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction
+   * @generated
+   */
+  public Adapter createCostObjectiveFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry <em>Cost Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry
+   * @generated
+   */
+  public Adapter createCostEntryAdapter()
   {
     return null;
   }

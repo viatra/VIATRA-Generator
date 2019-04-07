@@ -7,7 +7,12 @@ generate {
 	partial-model = { "inputs/FamInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 500
+		#node = 5
+	}
+	objectives = {
+		minimize cost {
+			hu.bme.mit.inf.dslreasoner.domains.fam::informationLink = 1
+		}
 	}
 	
 	config = {

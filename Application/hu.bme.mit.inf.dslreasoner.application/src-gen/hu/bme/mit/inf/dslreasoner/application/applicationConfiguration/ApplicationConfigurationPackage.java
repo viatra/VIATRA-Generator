@@ -1007,7 +1007,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjective()
    * @generated
    */
-  int OBJECTIVE = 42;
+  int OBJECTIVE = 44;
 
   /**
    * The number of structural features of the '<em>Objective</em>' class.
@@ -1177,6 +1177,71 @@ public interface ApplicationConfigurationPackage extends EPackage
   int OBJECTIVE_FUNCTION_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostObjectiveFunctionImpl <em>Cost Objective Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostObjectiveFunctionImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getCostObjectiveFunction()
+   * @generated
+   */
+  int COST_OBJECTIVE_FUNCTION = 37;
+
+  /**
+   * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COST_OBJECTIVE_FUNCTION__ENTRIES = OBJECTIVE_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Cost Objective Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COST_OBJECTIVE_FUNCTION_FEATURE_COUNT = OBJECTIVE_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostEntryImpl <em>Cost Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostEntryImpl
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getCostEntry()
+   * @generated
+   */
+  int COST_ENTRY = 38;
+
+  /**
+   * The feature id for the '<em><b>Pattern Element</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COST_ENTRY__PATTERN_ELEMENT = 0;
+
+  /**
+   * The feature id for the '<em><b>Weight</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COST_ENTRY__WEIGHT = 1;
+
+  /**
+   * The number of structural features of the '<em>Cost Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COST_ENTRY_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ReliabilityObjectiveFunctionImpl <em>Reliability Objective Function</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1184,7 +1249,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getReliabilityObjectiveFunction()
    * @generated
    */
-  int RELIABILITY_OBJECTIVE_FUNCTION = 37;
+  int RELIABILITY_OBJECTIVE_FUNCTION = 39;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' reference.
@@ -1221,7 +1286,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getReliabiltiyProbability()
    * @generated
    */
-  int RELIABILTIY_PROBABILITY = 38;
+  int RELIABILTIY_PROBABILITY = 40;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' reference.
@@ -1267,7 +1332,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMtff()
    * @generated
    */
-  int MTFF = 39;
+  int MTFF = 41;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' reference.
@@ -1304,7 +1369,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectiveDeclaration()
    * @generated
    */
-  int OBJECTIVE_DECLARATION = 40;
+  int OBJECTIVE_DECLARATION = 42;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1341,7 +1406,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectiveReference()
    * @generated
    */
-  int OBJECTIVE_REFERENCE = 41;
+  int OBJECTIVE_REFERENCE = 43;
 
   /**
    * The feature id for the '<em><b>Referred</b></em>' reference.
@@ -1369,7 +1434,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfig()
    * @generated
    */
-  int CONFIG = 51;
+  int CONFIG = 53;
 
   /**
    * The number of structural features of the '<em>Config</em>' class.
@@ -1388,7 +1453,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigSpecification()
    * @generated
    */
-  int CONFIG_SPECIFICATION = 43;
+  int CONFIG_SPECIFICATION = 45;
 
   /**
    * The feature id for the '<em><b>Entries</b></em>' containment reference list.
@@ -1416,7 +1481,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigDeclaration()
    * @generated
    */
-  int CONFIG_DECLARATION = 44;
+  int CONFIG_DECLARATION = 46;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1453,7 +1518,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigEntry()
    * @generated
    */
-  int CONFIG_ENTRY = 45;
+  int CONFIG_ENTRY = 47;
 
   /**
    * The number of structural features of the '<em>Config Entry</em>' class.
@@ -1472,7 +1537,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getDocumentationEntry()
    * @generated
    */
-  int DOCUMENTATION_ENTRY = 46;
+  int DOCUMENTATION_ENTRY = 48;
 
   /**
    * The feature id for the '<em><b>Level</b></em>' attribute.
@@ -1500,7 +1565,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRuntimeEntry()
    * @generated
    */
-  int RUNTIME_ENTRY = 47;
+  int RUNTIME_ENTRY = 49;
 
   /**
    * The feature id for the '<em><b>Millisec Limit</b></em>' attribute.
@@ -1528,7 +1593,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getMemoryEntry()
    * @generated
    */
-  int MEMORY_ENTRY = 48;
+  int MEMORY_ENTRY = 50;
 
   /**
    * The feature id for the '<em><b>Megabyte Limit</b></em>' attribute.
@@ -1556,7 +1621,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getCustomEntry()
    * @generated
    */
-  int CUSTOM_ENTRY = 49;
+  int CUSTOM_ENTRY = 51;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1593,7 +1658,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getConfigReference()
    * @generated
    */
-  int CONFIG_REFERENCE = 50;
+  int CONFIG_REFERENCE = 52;
 
   /**
    * The feature id for the '<em><b>Config</b></em>' reference.
@@ -1621,7 +1686,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScope()
    * @generated
    */
-  int SCOPE = 73;
+  int SCOPE = 75;
 
   /**
    * The number of structural features of the '<em>Scope</em>' class.
@@ -1640,7 +1705,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeSpecification()
    * @generated
    */
-  int SCOPE_SPECIFICATION = 52;
+  int SCOPE_SPECIFICATION = 54;
 
   /**
    * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -1668,7 +1733,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeScope()
    * @generated
    */
-  int TYPE_SCOPE = 53;
+  int TYPE_SCOPE = 55;
 
   /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
@@ -1714,7 +1779,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassTypeScope()
    * @generated
    */
-  int CLASS_TYPE_SCOPE = 54;
+  int CLASS_TYPE_SCOPE = 56;
 
   /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
@@ -1769,7 +1834,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectTypeScope()
    * @generated
    */
-  int OBJECT_TYPE_SCOPE = 55;
+  int OBJECT_TYPE_SCOPE = 57;
 
   /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
@@ -1824,7 +1889,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerTypeScope()
    * @generated
    */
-  int INTEGER_TYPE_SCOPE = 56;
+  int INTEGER_TYPE_SCOPE = 58;
 
   /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
@@ -1879,7 +1944,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealTypeScope()
    * @generated
    */
-  int REAL_TYPE_SCOPE = 57;
+  int REAL_TYPE_SCOPE = 59;
 
   /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
@@ -1934,7 +1999,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringTypeScope()
    * @generated
    */
-  int STRING_TYPE_SCOPE = 58;
+  int STRING_TYPE_SCOPE = 60;
 
   /**
    * The feature id for the '<em><b>Sets New</b></em>' attribute.
@@ -1989,7 +2054,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTypeReference()
    * @generated
    */
-  int TYPE_REFERENCE = 59;
+  int TYPE_REFERENCE = 61;
 
   /**
    * The number of structural features of the '<em>Type Reference</em>' class.
@@ -2008,7 +2073,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getClassReference()
    * @generated
    */
-  int CLASS_REFERENCE = 60;
+  int CLASS_REFERENCE = 62;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -2036,7 +2101,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getObjectReference()
    * @generated
    */
-  int OBJECT_REFERENCE = 61;
+  int OBJECT_REFERENCE = 63;
 
   /**
    * The number of structural features of the '<em>Object Reference</em>' class.
@@ -2055,7 +2120,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerReference()
    * @generated
    */
-  int INTEGER_REFERENCE = 62;
+  int INTEGER_REFERENCE = 64;
 
   /**
    * The number of structural features of the '<em>Integer Reference</em>' class.
@@ -2074,7 +2139,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealReference()
    * @generated
    */
-  int REAL_REFERENCE = 63;
+  int REAL_REFERENCE = 65;
 
   /**
    * The number of structural features of the '<em>Real Reference</em>' class.
@@ -2093,7 +2158,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringReference()
    * @generated
    */
-  int STRING_REFERENCE = 64;
+  int STRING_REFERENCE = 66;
 
   /**
    * The number of structural features of the '<em>String Reference</em>' class.
@@ -2112,7 +2177,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getNumberSpecification()
    * @generated
    */
-  int NUMBER_SPECIFICATION = 65;
+  int NUMBER_SPECIFICATION = 67;
 
   /**
    * The number of structural features of the '<em>Number Specification</em>' class.
@@ -2131,7 +2196,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getExactNumber()
    * @generated
    */
-  int EXACT_NUMBER = 66;
+  int EXACT_NUMBER = 68;
 
   /**
    * The feature id for the '<em><b>Exact Number</b></em>' attribute.
@@ -2168,7 +2233,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntervallNumber()
    * @generated
    */
-  int INTERVALL_NUMBER = 67;
+  int INTERVALL_NUMBER = 69;
 
   /**
    * The feature id for the '<em><b>Min</b></em>' attribute.
@@ -2214,7 +2279,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntEnumberation()
    * @generated
    */
-  int INT_ENUMBERATION = 68;
+  int INT_ENUMBERATION = 70;
 
   /**
    * The feature id for the '<em><b>Entry</b></em>' attribute list.
@@ -2242,7 +2307,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealEnumeration()
    * @generated
    */
-  int REAL_ENUMERATION = 69;
+  int REAL_ENUMERATION = 71;
 
   /**
    * The feature id for the '<em><b>Entry</b></em>' attribute list.
@@ -2270,7 +2335,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringEnumeration()
    * @generated
    */
-  int STRING_ENUMERATION = 70;
+  int STRING_ENUMERATION = 72;
 
   /**
    * The feature id for the '<em><b>Entry</b></em>' attribute list.
@@ -2298,7 +2363,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeDeclaration()
    * @generated
    */
-  int SCOPE_DECLARATION = 71;
+  int SCOPE_DECLARATION = 73;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2335,7 +2400,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getScopeReference()
    * @generated
    */
-  int SCOPE_REFERENCE = 72;
+  int SCOPE_REFERENCE = 74;
 
   /**
    * The feature id for the '<em><b>Referred</b></em>' reference.
@@ -2363,7 +2428,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getTask()
    * @generated
    */
-  int TASK = 74;
+  int TASK = 76;
 
   /**
    * The number of structural features of the '<em>Task</em>' class.
@@ -2382,7 +2447,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getGenerationTask()
    * @generated
    */
-  int GENERATION_TASK = 75;
+  int GENERATION_TASK = 77;
 
   /**
    * The feature id for the '<em><b>Metamodel</b></em>' containment reference.
@@ -2536,7 +2601,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getIntegerScope()
    * @generated
    */
-  int INTEGER_SCOPE = 76;
+  int INTEGER_SCOPE = 78;
 
   /**
    * The number of structural features of the '<em>Integer Scope</em>' class.
@@ -2555,7 +2620,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getRealScope()
    * @generated
    */
-  int REAL_SCOPE = 77;
+  int REAL_SCOPE = 79;
 
   /**
    * The number of structural features of the '<em>Real Scope</em>' class.
@@ -2574,7 +2639,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getStringScope()
    * @generated
    */
-  int STRING_SCOPE = 78;
+  int STRING_SCOPE = 80;
 
   /**
    * The number of structural features of the '<em>String Scope</em>' class.
@@ -2593,7 +2658,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getOptimizationDirection()
    * @generated
    */
-  int OPTIMIZATION_DIRECTION = 79;
+  int OPTIMIZATION_DIRECTION = 81;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ComparisonOperator <em>Comparison Operator</em>}' enum.
@@ -2603,7 +2668,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getComparisonOperator()
    * @generated
    */
-  int COMPARISON_OPERATOR = 80;
+  int COMPARISON_OPERATOR = 82;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification <em>Document Level Specification</em>}' enum.
@@ -2613,7 +2678,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getDocumentLevelSpecification()
    * @generated
    */
-  int DOCUMENT_LEVEL_SPECIFICATION = 81;
+  int DOCUMENT_LEVEL_SPECIFICATION = 83;
 
   /**
    * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Solver <em>Solver</em>}' enum.
@@ -2623,7 +2688,7 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getSolver()
    * @generated
    */
-  int SOLVER = 82;
+  int SOLVER = 84;
 
 
   /**
@@ -3347,6 +3412,59 @@ public interface ApplicationConfigurationPackage extends EPackage
    * @generated
    */
   EClass getObjectiveFunction();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction <em>Cost Objective Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cost Objective Function</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction
+   * @generated
+   */
+  EClass getCostObjectiveFunction();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction#getEntries <em>Entries</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entries</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction#getEntries()
+   * @see #getCostObjectiveFunction()
+   * @generated
+   */
+  EReference getCostObjectiveFunction_Entries();
+
+  /**
+   * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry <em>Cost Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cost Entry</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry
+   * @generated
+   */
+  EClass getCostEntry();
+
+  /**
+   * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry#getPatternElement <em>Pattern Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Pattern Element</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry#getPatternElement()
+   * @see #getCostEntry()
+   * @generated
+   */
+  EReference getCostEntry_PatternElement();
+
+  /**
+   * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry#getWeight <em>Weight</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Weight</em>'.
+   * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostEntry#getWeight()
+   * @see #getCostEntry()
+   * @generated
+   */
+  EAttribute getCostEntry_Weight();
 
   /**
    * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction <em>Reliability Objective Function</em>}'.
@@ -4984,6 +5102,50 @@ public interface ApplicationConfigurationPackage extends EPackage
      * @generated
      */
     EClass OBJECTIVE_FUNCTION = eINSTANCE.getObjectiveFunction();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostObjectiveFunctionImpl <em>Cost Objective Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostObjectiveFunctionImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getCostObjectiveFunction()
+     * @generated
+     */
+    EClass COST_OBJECTIVE_FUNCTION = eINSTANCE.getCostObjectiveFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COST_OBJECTIVE_FUNCTION__ENTRIES = eINSTANCE.getCostObjectiveFunction_Entries();
+
+    /**
+     * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostEntryImpl <em>Cost Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.CostEntryImpl
+     * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ApplicationConfigurationPackageImpl#getCostEntry()
+     * @generated
+     */
+    EClass COST_ENTRY = eINSTANCE.getCostEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Pattern Element</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COST_ENTRY__PATTERN_ELEMENT = eINSTANCE.getCostEntry_PatternElement();
+
+    /**
+     * The meta object literal for the '<em><b>Weight</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COST_ENTRY__WEIGHT = eINSTANCE.getCostEntry_Weight();
 
     /**
      * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ReliabilityObjectiveFunctionImpl <em>Reliability Objective Function</em>}' class.

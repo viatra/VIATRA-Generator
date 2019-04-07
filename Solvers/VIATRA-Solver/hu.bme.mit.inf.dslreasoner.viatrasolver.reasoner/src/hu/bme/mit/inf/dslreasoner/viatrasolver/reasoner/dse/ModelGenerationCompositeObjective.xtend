@@ -1,6 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
 import com.google.common.collect.ImmutableList
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.IThreeValuedObjective
 import java.util.Comparator
 import java.util.List
 import org.eclipse.viatra.dse.base.ThreadContext

@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 
+import com.google.common.collect.ImmutableList
+import com.google.common.collect.Lists
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
@@ -25,6 +27,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SurelyViolatedObject
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedMultiplicityObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ViatraReasonerSolutionSaver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.WF2ObjectiveConverter
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ThreeValuedCostElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ThreeValuedCostObjective
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.List
 import java.util.Map
@@ -84,9 +88,36 @@ class ViatraReasoner extends LogicReasoner {
 			wf2ObjectiveConverter.createCompletenessObjective(method.unfinishedWF)
 		))
 
+		val extermalObjectives = Lists.newArrayListWithExpectedSize(viatraConfig.costObjectives.size)
+		for (entry : viatraConfig.costObjectives.indexed) {
+			val objectiveName = '''costObjective«entry.key»'''
+			val objectiveConfig = entry.value
+			val elementsBuilder = ImmutableList.builder
+			for (elementConfig : objectiveConfig.elements) {
+				val relationName = elementConfig.patternQualifiedName
+				val modalQueries = method.modalRelationQueries.get(relationName)
+				if (modalQueries === null) {
+					throw new IllegalArgumentException("Unknown relation: " + relationName)
+				}
+				elementsBuilder.add(new ThreeValuedCostElement(
+					modalQueries.currentQuery,
+					modalQueries.mayQuery,
+					modalQueries.mustQuery,
+					elementConfig.weight
+				))
+			}
+			val costElements = elementsBuilder.build
+			val costObjective = new ThreeValuedCostObjective(objectiveName, costElements, objectiveConfig.kind,
+				objectiveConfig.threshold, 3)
+			dse.addObjective(costObjective)
+			if (objectiveConfig.findExtremum) {
+				extermalObjectives += costObjective
+			}
+		}
+
 		val solutionStore = new SolutionStore(configuration.solutionScope.numberOfRequiredSolutions)
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayOfSize(0, 0))
+		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayList(extermalObjectives))
 		val solutionCopier = solutionSaver.solutionCopier
 		solutionStore.withSolutionSaver(solutionSaver)
 		dse.solutionStore = solutionStore

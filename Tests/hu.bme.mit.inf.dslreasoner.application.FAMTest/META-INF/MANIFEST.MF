@@ -3,13 +3,17 @@ Bundle-ManifestVersion: 2
 Bundle-Name: FAMTest
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.application.FAMTest;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.application.FAMTest
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: com.google.guava,
+Export-Package: hu.bme.mit.inf.dslreasoner.application.FAMTest
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.viatra.query.runtime,
+ org.eclipse.viatra.query.runtime.rete,
+ org.eclipse.viatra.query.runtime.localsearch,
+ com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  hu.bme.mit.inf.dslreasoner.application;bundle-version="1.0.0";visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.12.0"
-Export-Package: hu.bme.mit.inf.dslreasoner.application.FAMTest
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.application.FAMTest

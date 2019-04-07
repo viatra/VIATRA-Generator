@@ -103,6 +103,8 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
       case ApplicationConfigurationPackage.OPTIMIZATION_ENTRY: return createOptimizationEntry();
       case ApplicationConfigurationPackage.THRESHOLD_ENTRY: return createThresholdEntry();
       case ApplicationConfigurationPackage.OBJECTIVE_FUNCTION: return createObjectiveFunction();
+      case ApplicationConfigurationPackage.COST_OBJECTIVE_FUNCTION: return createCostObjectiveFunction();
+      case ApplicationConfigurationPackage.COST_ENTRY: return createCostEntry();
       case ApplicationConfigurationPackage.RELIABILITY_OBJECTIVE_FUNCTION: return createReliabilityObjectiveFunction();
       case ApplicationConfigurationPackage.RELIABILTIY_PROBABILITY: return createReliabiltiyProbability();
       case ApplicationConfigurationPackage.MTFF: return createMtff();
@@ -638,6 +640,30 @@ public class ApplicationConfigurationFactoryImpl extends EFactoryImpl implements
   {
     ObjectiveFunctionImpl objectiveFunction = new ObjectiveFunctionImpl();
     return objectiveFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public CostObjectiveFunction createCostObjectiveFunction()
+  {
+    CostObjectiveFunctionImpl costObjectiveFunction = new CostObjectiveFunctionImpl();
+    return costObjectiveFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public CostEntry createCostEntry()
+  {
+    CostEntryImpl costEntry = new CostEntryImpl();
+    return costEntry;
   }
 
   /**

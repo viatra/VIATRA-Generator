@@ -6,203 +6,328 @@ import "http://www.bme.hu/mit/inf/dslreasoner/faulttree/components/CftLanguage" 
 generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 
 ConfigurationScript:
-	(imports += Import)*
-	(commands += Command)*
-;
+	(imports+=Import)*
+	(commands+=Command)*;
 
-Command :
-	Declaration | Task
-;
+Command:
+	Declaration | Task;
 
 QualifiedName returns ecore::EString:
-  ID ('.' ID)*;
-REALLiteral returns ecore::EBigDecimal: '-'? INT '.' INT;
-INTLiteral returns ecore::EInt: '-'? INT;
+	ID ('.' ID)*;
+
+REALLiteral returns ecore::EBigDecimal:
+	'-'? INT '.' INT;
+
+INTLiteral returns ecore::EInt:
+	'-'? INT;
 
 ///////////////////////////////////////////////////
 // Imports
 ///////////////////////////////////////////////////
+Import:
+	EPackageImport | ViatraImport | CftImport;
 
-Import: EPackageImport | ViatraImport | CftImport;
+EPackageImport:
+	"import" "epackage" importedPackage=[ecore::EPackage|STRING];
 
-EPackageImport: "import" "epackage" importedPackage=[ecore::EPackage|STRING];
-ViatraImport: "import" "viatra" importedViatra=[viatra::PatternModel|STRING];
-CftImport: "import" "reliability" importedCft=[cftLanguage::CftModel|STRING];
+ViatraImport:
+	"import" "viatra" importedViatra=[viatra::PatternModel|STRING];
 
+CftImport:
+	"import" "reliability" importedCft=[cftLanguage::CftModel|STRING];
+	
 ///////////////////////////////////////////////////
 // Declaration
 ///////////////////////////////////////////////////
-
-Declaration :
+Declaration:
 	FileDeclaration
 	| MetamodelDeclaration
 	| PartialModelDeclaration
 	| GraphPatternDeclaration
 	| ConfigDeclaration
 	| ScopeDeclaration
-	| ObjectiveDeclaration
-;
+	| ObjectiveDeclaration;
 
 ///////////////////////////////////////////////////
 // Files and Folders
 ///////////////////////////////////////////////////
+FileSpecification:
+	path=STRING;
 
-FileSpecification: path = STRING;
-FileDeclaration: 'file' name = ID '=' specification = FileSpecification;
-FileReference: referred = [FileDeclaration];
-File: FileSpecification | FileReference;
+FileDeclaration:
+	'file' name=ID '=' specification=FileSpecification;
+
+FileReference:
+	referred=[FileDeclaration];
+
+File:
+	FileSpecification | FileReference;
 
 ///////////////////////////////////////////////////
 // Metamodel
 ///////////////////////////////////////////////////
+MetamodelSpecification:
+	'{' (entries+=MetamodelEntry) (',' entries+=MetamodelEntry)* '}';
 
-MetamodelSpecification: '{' (entries += MetamodelEntry) (',' entries += MetamodelEntry)* '}';
-MetamodelEntry: MetamodelElement | AllPackageEntry;
-AllPackageEntry: "package" package=[ecore::EPackage|QualifiedName] ("excluding" '{'exclusion +=MetamodelElement (',' exclusion +=MetamodelElement)*'}')?;
-MetamodelElement: (package=[ecore::EPackage|QualifiedName] '::')? classifier = [ecore::EClassifier] ('.' feature= [ecore::ENamedElement])?;
+MetamodelEntry:
+	MetamodelElement | AllPackageEntry;
 
-MetamodelDeclaration: 'metamodel' name = ID specification = MetamodelSpecification;
-MetamodelReference: referred = [MetamodelDeclaration];
-Metamodel: MetamodelReference | MetamodelSpecification;
+AllPackageEntry:
+	"package" package=[ecore::EPackage|QualifiedName] ("excluding" '{' exclusion+=MetamodelElement (','
+	exclusion+=MetamodelElement)* '}')?;
+
+MetamodelElement:
+	(package=[ecore::EPackage|QualifiedName] '::')? classifier=[ecore::EClassifier] ('.'
+	feature=[ecore::ENamedElement])?;
+
+MetamodelDeclaration:
+	'metamodel' name=ID specification=MetamodelSpecification;
+
+MetamodelReference:
+	referred=[MetamodelDeclaration];
+
+Metamodel:
+	MetamodelReference | MetamodelSpecification;
 
 ///////////////////////////////////////////////////
 // Partial Model
 ///////////////////////////////////////////////////
+PartialModelSpecification:
+	'{' entry+=PartialModelEntry (',' entry+=PartialModelEntry)? '}';
 
-PartialModelSpecification: '{' entry += PartialModelEntry (',' entry += PartialModelEntry)? '}';
-PartialModelEntry: ModelEntry | FolderEntry;
-ModelEntry: path = File;
-FolderEntry: "folder" path = File ("excluding" "{" exclusion += ModelEntry ("," exclusion += ModelEntry)* "}")?;
+PartialModelEntry:
+	ModelEntry | FolderEntry;
 
-PartialModelDeclaration: 'models' name = ID specification = PartialModelSpecification;
-PartialModelReference : referred = [PartialModelDeclaration];
-PartialModel: PartialModelSpecification | PartialModelReference;
+ModelEntry:
+	path=File;
+
+FolderEntry:
+	"folder" path=File ("excluding" "{" exclusion+=ModelEntry ("," exclusion+=ModelEntry)* "}")?;
+
+PartialModelDeclaration:
+	'models' name=ID specification=PartialModelSpecification;
+
+PartialModelReference:
+	referred=[PartialModelDeclaration];
+
+PartialModel:
+	PartialModelSpecification | PartialModelReference;
 
 ///////////////////////////////////////////////////
 // Patterns
 ///////////////////////////////////////////////////
+PatternSpecification:
+	'{' entries+=PatternEntry (',' entries+=PatternEntry)* '}';
 
-PatternSpecification: '{' entries += PatternEntry (',' entries += PatternEntry)* '}';
-PatternEntry: PatternElement | AllPatternEntry;
-AllPatternEntry: 'package' package = [viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion += PatternElement (',' exclusuion += PatternElement)* '}')?;
-PatternElement: (package =[viatra::PatternModel|QualifiedName] '::')? pattern = [viatra::Pattern];
+PatternEntry:
+	PatternElement | AllPatternEntry;
 
-GraphPatternDeclaration: 'constraints' name = ID specification = PatternSpecification;
-GraphPatternReference: referred = [GraphPatternDeclaration];
-GraphPattern: GraphPatternReference|PatternSpecification;
+AllPatternEntry:
+	'package' package=[viatra::PatternModel|QualifiedName] ('excluding' '{' exclusuion+=PatternElement (','
+	exclusuion+=PatternElement)* '}')?;
+
+PatternElement:
+	(package=[viatra::PatternModel|QualifiedName] '::')? pattern=[viatra::Pattern];
+
+GraphPatternDeclaration:
+	'constraints' name=ID specification=PatternSpecification;
+
+GraphPatternReference:
+	referred=[GraphPatternDeclaration];
+
+GraphPattern:
+	GraphPatternReference | PatternSpecification;
 
 ///////////////////////////////////////////////////
 // Objectives
 ///////////////////////////////////////////////////
+ObjectiveSpecification:
+	'{' entries+=ObjectiveEntry (',' entries+=ObjectiveEntry)* '}';
 
-ObjectiveSpecification: '{' entries += ObjectiveEntry (',' entries += ObjectiveEntry)* '}';
-ObjectiveEntry: OptimizationEntry | ThresholdEntry;
-enum OptimizationDirection: MINIMIZE='minimize' | MAXIMIZE='maximize';
-OptimizationEntry: direction=OptimizationDirection function=ObjectiveFunction;
-enum ComparisonOperator: LESS_EQUALS='<=' | GREATER_EQUALS='>=';
-ThresholdEntry: function=ObjectiveFunction operator=ComparisonOperator threshold=REALLiteral;
-ObjectiveFunction: ReliabilityObjectiveFunction;
-ReliabilityObjectiveFunction: ReliabiltiyProbability | Mtff;
+ObjectiveEntry:
+	OptimizationEntry | ThresholdEntry;
+
+enum OptimizationDirection:
+	MINIMIZE='minimize' | MAXIMIZE='maximize';
+
+OptimizationEntry:
+	direction=OptimizationDirection function=ObjectiveFunction;
+
+enum ComparisonOperator:
+	LESS='<' | GREATER='>' | LESS_EQUALS='<=' | GREATER_EQUALS='>=';
+
+ThresholdEntry:
+	function=ObjectiveFunction operator=ComparisonOperator threshold=REALLiteral;
+
+ObjectiveFunction:
+	CostObjectiveFunction | ReliabilityObjectiveFunction;
+
+CostObjectiveFunction:
+	'cost' '{' entries+=CostEntry (',' entries+=CostEntry)* '}';
+
+CostEntry:
+	patternElement=PatternElement '=' weight=INTLiteral;
+
+ReliabilityObjectiveFunction:
+	ReliabiltiyProbability | Mtff;
+
 ReliabiltiyProbability:
-	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation = [cftLanguage::TransformationDefinition]
+	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')?
+	transformation=[cftLanguage::TransformationDefinition]
 	'at' time=REALLiteral;
-Mtff:
-	'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation = [cftLanguage::TransformationDefinition];
 
-ObjectiveDeclaration: 'objectives' name = ID specification = ObjectiveSpecification;
-ObjectiveReference: referred = [ObjectiveDeclaration];
-Objective: ObjectiveReference|ObjectiveSpecification;
+Mtff:
+	'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation=[cftLanguage::TransformationDefinition];
+
+ObjectiveDeclaration:
+	'objectives' name=ID specification=ObjectiveSpecification;
+
+ObjectiveReference:
+	referred=[ObjectiveDeclaration];
+
+Objective:
+	ObjectiveReference | ObjectiveSpecification;
 
 ///////////////////////////////////////////////////
 // SolverConfig
 ///////////////////////////////////////////////////
-
-ConfigSpecification: {ConfigSpecification}'{'
-		(entries += ConfigEntry ("," entries += ConfigEntry)*)?
+ConfigSpecification:
+	{ConfigSpecification} '{'
+	(entries+=ConfigEntry ("," entries+=ConfigEntry)*)?
 	'}';
-ConfigDeclaration :
-	'config' name = ID specification = ConfigSpecification
-;
-ConfigEntry: DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
-DocumentationEntry: "log-level" '=' level = DocumentLevelSpecification;
-enum DocumentLevelSpecification: none | normal | full;
-RuntimeEntry: "runtime" "=" millisecLimit = INT;
-MemoryEntry: "memory" "=" megabyteLimit = INT;
-CustomEntry: key = STRING "=" value = STRING;
 
-ConfigReference: config = [ConfigDeclaration];
-Config: ConfigSpecification | ConfigReference;
+ConfigDeclaration:
+	'config' name=ID specification=ConfigSpecification;
 
-enum Solver: SMTSolver | AlloySolver | ViatraSolver;
+ConfigEntry:
+	DocumentationEntry | RuntimeEntry | MemoryEntry | CustomEntry;
 
-ScopeSpecification: {ScopeSpecification} '{' 
-		(scopes += TypeScope (',' scopes += TypeScope)*)?
-'}';
-TypeScope: ClassTypeScope | ObjectTypeScope | IntegerTypeScope | RealTypeScope | StringTypeScope;
-ClassTypeScope: '#' type = ClassReference
-	(setsNew ?='+=' | setsSum ?= '=')
-	(number = ExactNumber | number = IntervallNumber)
-;
-ObjectTypeScope: '#' type = ObjectReference
-	(setsNew ?='+=' | setsSum ?= '=')
-	(number = ExactNumber | number = IntervallNumber)
-;
-IntegerTypeScope: '#' type = IntegerReference
-	(setsNew ?='+=' | setsSum ?= '=')
-	(number = ExactNumber | number = IntervallNumber | number = IntEnumberation)
-;
-RealTypeScope: '#' type = RealReference
-	(setsNew ?='+=' | setsSum ?= '=')
-	(number = ExactNumber | number = IntervallNumber | number = RealEnumeration)
-;
-StringTypeScope: '#' type = StringReference
-	(setsNew ?='+=' | setsSum ?= '=')
-	(number = ExactNumber | number = IntervallNumber | number = StringEnumeration)
-;
+DocumentationEntry:
+	"log-level" '=' level=DocumentLevelSpecification;
 
-TypeReference: ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
-ClassReference: '<' element = MetamodelElement '>';
-ObjectReference: {ObjectReference} 'node';
-IntegerReference: {IntegerScope} 'int';
-RealReference: {RealScope} 'real';
-StringReference: {StringScope} 'string';
+enum DocumentLevelSpecification:
+	none | normal | full;
 
-NumberSpecification: ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration;
-ExactNumber: exactNumber = INT | exactUnlimited ?= '*';
-IntervallNumber: min = INT '..' (maxNumber = INT | maxUnlimited ?= '*');
-IntEnumberation: {IntEnumberation} '{' (entry += INTLiteral (',' entry += INTLiteral)*)?'}';
-RealEnumeration: {RealEnumeration} '{' (entry += REALLiteral (',' entry += REALLiteral)*)?'}';
-StringEnumeration: {StringEnumeration} '{' (entry += STRING (',' entry += STRING)*)?'}';
+RuntimeEntry:
+	"runtime" "=" millisecLimit=INT;
 
-ScopeDeclaration: 'scope' name = ID specification = ScopeSpecification;
-ScopeReference: referred = [ScopeDeclaration];
-Scope: ScopeSpecification | ScopeReference;
+MemoryEntry:
+	"memory" "=" megabyteLimit=INT;
 
-Task: GenerationTask /*| CoverageCalculation | ValidationTask*/;
+CustomEntry:
+	key=STRING "=" value=STRING;
 
-GenerationTask:  'generate' {GenerationTask} '{'(
-	
-		// domain
-		('metamodel' '=' metamodel = Metamodel)? &
-		('partial-model'  '=' partialModel = PartialModel)? &
-		('constraints'  '=' patterns = GraphPattern)? &
-		('objectives'  '=' objectives = Objective)? &
-		
-		// model set
-		('scope' '=' scope = Scope)? &
-		(numberSpecified ?= 'number' '=' number= INT)? &
-		(runSpecified ?= 'runs' '=' runs = INT)? &
-		// Solver
-		('solver' '=' solver = Solver)? &
-		('config' '=' config = Config)? &
-		
-		// output texts
-		('debug' '=' debugFolder = File)? &
-		('log' '=' targetLogFile = File)? &
-		('statistics' '=' targetStatisticsFile = File)? &
-		
-		// output models
-		('output' '=' tagetFolder = File)?
-		
-	)'}'
-;
+ConfigReference:
+	config=[ConfigDeclaration];
+
+Config:
+	ConfigSpecification | ConfigReference;
+
+enum Solver:
+	SMTSolver | AlloySolver | ViatraSolver;
+
+ScopeSpecification:
+	{ScopeSpecification} '{'
+	(scopes+=TypeScope (',' scopes+=TypeScope)*)?
+	'}';
+
+TypeScope:
+	ClassTypeScope | ObjectTypeScope | IntegerTypeScope | RealTypeScope | StringTypeScope;
+
+ClassTypeScope:
+	'#' type=ClassReference
+	(setsNew?='+=' | setsSum?='=')
+	(number=ExactNumber | number=IntervallNumber);
+
+ObjectTypeScope:
+	'#' type=ObjectReference
+	(setsNew?='+=' | setsSum?='=')
+	(number=ExactNumber | number=IntervallNumber);
+
+IntegerTypeScope:
+	'#' type=IntegerReference
+	(setsNew?='+=' | setsSum?='=')
+	(number=ExactNumber | number=IntervallNumber | number=IntEnumberation);
+
+RealTypeScope:
+	'#' type=RealReference
+	(setsNew?='+=' | setsSum?='=')
+	(number=ExactNumber | number=IntervallNumber | number=RealEnumeration);
+
+StringTypeScope:
+	'#' type=StringReference
+	(setsNew?='+=' | setsSum?='=')
+	(number=ExactNumber | number=IntervallNumber | number=StringEnumeration);
+
+TypeReference:
+	ClassReference | ObjectReference | IntegerReference | RealReference | StringReference;
+
+ClassReference:
+	'<' element=MetamodelElement '>';
+
+ObjectReference:
+	{ObjectReference} 'node';
+
+IntegerReference:
+	{IntegerScope} 'int';
+
+RealReference:
+	{RealScope} 'real';
+
+StringReference:
+	{StringScope} 'string';
+
+NumberSpecification:
+	ExactNumber | IntervallNumber | IntEnumberation | RealEnumeration | StringEnumeration;
+
+ExactNumber:
+	exactNumber=INT | exactUnlimited?='*';
+
+IntervallNumber:
+	min=INT '..' (maxNumber=INT | maxUnlimited?='*');
+
+IntEnumberation:
+	{IntEnumberation} '{' (entry+=INTLiteral (',' entry+=INTLiteral)*)? '}';
+
+RealEnumeration:
+	{RealEnumeration} '{' (entry+=REALLiteral (',' entry+=REALLiteral)*)? '}';
+
+StringEnumeration:
+	{StringEnumeration} '{' (entry+=STRING (',' entry+=STRING)*)? '}';
+
+ScopeDeclaration:
+	'scope' name=ID specification=ScopeSpecification;
+
+ScopeReference:
+	referred=[ScopeDeclaration];
+
+Scope:
+	ScopeSpecification | ScopeReference;
+
+Task:
+	GenerationTask /*| CoverageCalculation | ValidationTask*/;
+
+GenerationTask:
+	'generate' {GenerationTask} '{' (
+
+	// domain
+	('metamodel' '=' metamodel=Metamodel)? &
+	('partial-model' '=' partialModel=PartialModel)? &
+	('constraints' '=' patterns=GraphPattern)? &
+	('objectives' '=' objectives=Objective)? &
+
+	// model set
+	('scope' '=' scope=Scope)? &
+	(numberSpecified?='number' '=' number=INT)? &
+	(runSpecified?='runs' '=' runs=INT)? &
+	// Solver
+	('solver' '=' solver=Solver)? &
+	('config' '=' config=Config)? &
+
+	// output texts
+	('debug' '=' debugFolder=File)? &
+	('log' '=' targetLogFile=File)? &
+	('statistics' '=' targetStatisticsFile=File)? &
+
+	// output models
+	('output' '=' tagetFolder=File)?) '}';

@@ -30,6 +30,8 @@ import org.eclipse.core.runtime.Status
 import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectiveSpecification
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectiveReference
 
 @FinalFieldsConstructor
 class ScriptExecutor {
@@ -40,7 +42,7 @@ class ScriptExecutor {
 	/**
 	 * Executes a script
 	 */
-	public def executeScript(URI uri) {
+	def executeScript(URI uri) {
 		val job = new Job('''Model Generation: «uri.lastSegment»''') {
 			override protected run(IProgressMonitor monitor) {
 				try{
@@ -57,7 +59,7 @@ class ScriptExecutor {
 		job.schedule();
 	}
 	
-	public def executeScript(ConfigurationScript script, IProgressMonitor monitor) {
+	def executeScript(ConfigurationScript script, IProgressMonitor monitor) {
 		script.activateAllEPackageReferences
 		val tasks = script.commands.filter(Task)
 		
@@ -94,12 +96,12 @@ class ScriptExecutor {
 //		}
 	}
 	
-	def public dispatch execute(GenerationTask task, IProgressMonitor monitor) {
+	def dispatch void execute(GenerationTask task, IProgressMonitor monitor) {
 		val generationTaskExecutor = new GenerationTaskExecutor
 		generationTaskExecutor.executeGenerationTask(task,this,scriptConsoleFactory,monitor)
 	}
 	
-	def public dispatch execute(Task task, IProgressMonitor monitor) {
+	def dispatch void execute(Task task, IProgressMonitor monitor) {
 		throw new IllegalArgumentException('''Unsupported task type: «task.class.simpleName»!''')
 	}
 	
@@ -171,6 +173,16 @@ class ScriptExecutor {
 		config.referred.specification
 	}
 	def dispatch getScopeSpecification(Void config) {
+		null
+	}
+	
+	def dispatch getObjectiveSpecification(ObjectiveSpecification config) {
+		config
+	}
+	def dispatch getObjectiveSpecification(ObjectiveReference config) {
+		config.referred.specification
+	}
+	def dispatch getObjectiveSpecification(Void config) {
 		null
 	}
 	
