@@ -150,6 +150,7 @@ class SolverLoader {
 							} else {
 								packageName + "." + pattern.name
 							}
+							element.weight = costEntry.weight
 							costObjectiveConfig.elements += element
 						}
 					} else {

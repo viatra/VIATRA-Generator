@@ -69,7 +69,6 @@ class ThreeValuedCostObjective extends AbstractThreeValuedObjective {
 			if (matcher.weight <= 0) {
 				cost += matcher.weight * matcher.mustMatcher.countMatches
 			} else if (matcher.mayMatcher.countMatches > 0) {
-				// TODO Count may matches.
 				return Double.POSITIVE_INFINITY
 			}
 		}

@@ -88,7 +88,7 @@ class ViatraReasoner extends LogicReasoner {
 			wf2ObjectiveConverter.createCompletenessObjective(method.unfinishedWF)
 		))
 
-		val extermalObjectives = Lists.newArrayListWithExpectedSize(viatraConfig.costObjectives.size)
+		val extremalObjectives = Lists.newArrayListWithExpectedSize(viatraConfig.costObjectives.size)
 		for (entry : viatraConfig.costObjectives.indexed) {
 			val objectiveName = '''costObjective«entry.key»'''
 			val objectiveConfig = entry.value
@@ -111,13 +111,18 @@ class ViatraReasoner extends LogicReasoner {
 				objectiveConfig.threshold, 3)
 			dse.addObjective(costObjective)
 			if (objectiveConfig.findExtremum) {
-				extermalObjectives += costObjective
+				extremalObjectives += costObjective
 			}
 		}
 
-		val solutionStore = new SolutionStore(configuration.solutionScope.numberOfRequiredSolutions)
+		val numberOfRequiredSolutions = configuration.solutionScope.numberOfRequiredSolutions
+		val solutionStore = if (extremalObjectives.empty) {
+				new SolutionStore(numberOfRequiredSolutions)
+			} else {
+				new SolutionStore()
+			}
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayList(extermalObjectives))
+		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayList(extremalObjectives), numberOfRequiredSolutions)
 		val solutionCopier = solutionSaver.solutionCopier
 		solutionStore.withSolutionSaver(solutionSaver)
 		dse.solutionStore = solutionStore

@@ -18,14 +18,16 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class ViatraReasonerSolutionSaver implements ISolutionSaver {
 	@Accessors val solutionCopier = new SolutionCopier
 	val boolean hasExtremalObjectives
+	val int numberOfRequiredSolutions
 	val ObjectiveComparatorHelper comparatorHelper
 	val Map<SolutionTrajectory, Fitness> trajectories = new HashMap
 
 	@Accessors(PUBLIC_SETTER) var Map<Object, Solution> solutionsCollection
 
-	new(IObjective[][] leveledExtremalObjectives) {
+	new(IObjective[][] leveledExtremalObjectives, int numberOfRequiredSolutions) {
 		comparatorHelper = new ObjectiveComparatorHelper(leveledExtremalObjectives)
 		hasExtremalObjectives = leveledExtremalObjectives.exists[!empty]
+		this.numberOfRequiredSolutions = numberOfRequiredSolutions
 	}
 
 	override saveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
@@ -48,6 +50,9 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 			if (isLastFitnessBetter > 0) {
 				dominatedTrajectories += entry.key
 			}
+		}
+		if (dominatedTrajectories.size == 0 && !needsMoreSolutionsWithSameFitness) {
+			return false
 		}
 		// We must save the new trajectory before removing dominated trajectories
 		// to avoid removing the current solution when it is reachable only via dominated trajectories.
@@ -86,14 +91,29 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 		}
 		solutionSaved
 	}
-	
-	def isFitnessDominated(Fitness fitness) {
+
+	def fitnessMayBeSaved(Fitness fitness) {
+		if (!hasExtremalObjectives) {
+			return true
+		}
+		var boolean mayDominate
 		for (existingFitness : trajectories.values) {
 			val isNewFitnessBetter = comparatorHelper.compare(fitness, existingFitness)
 			if (isNewFitnessBetter < 0) {
-				return true
+				return false
+			}
+			if (isNewFitnessBetter > 0) {
+				mayDominate = true
 			}
 		}
-		false
+		mayDominate || needsMoreSolutionsWithSameFitness
+	}
+
+	private def boolean needsMoreSolutionsWithSameFitness() {
+		if (solutionsCollection === null) {
+			// The solutions collection will only be initialized upon saving the first solution.
+			return true
+		}
+		solutionsCollection.size < numberOfRequiredSolutions
 	}
 }

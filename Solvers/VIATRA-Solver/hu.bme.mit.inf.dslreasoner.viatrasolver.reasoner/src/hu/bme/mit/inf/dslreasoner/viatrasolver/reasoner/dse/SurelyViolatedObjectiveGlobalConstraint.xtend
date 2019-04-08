@@ -24,6 +24,6 @@ class SurelyViolatedObjectiveGlobalConstraint implements IGlobalConstraint {
 
 	override checkGlobalConstraint(ThreadContext context) {
 		val bestFitness = DseUtils.caclulateBestPossibleFitness(context)
-		bestFitness.satisifiesHardObjectives && !solutionSaver.isFitnessDominated(bestFitness)
+		bestFitness.satisifiesHardObjectives && solutionSaver.fitnessMayBeSaved(bestFitness)
 	}
 }

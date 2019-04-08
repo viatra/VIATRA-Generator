@@ -11,6 +11,6 @@ pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
 	FunctionalInput.terminator(In,T);
 }
 
-pattern informationLink(I : InformationLink) {
-	InformationLink(I);
+pattern functionalOutput(O : FunctionalOutput) {
+	FunctionalOutput(O);
 }
