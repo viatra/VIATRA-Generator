@@ -19,6 +19,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.IdentifierBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyForModelGeneration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityChecker
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundHandler
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
@@ -122,7 +123,9 @@ class ViatraReasoner extends LogicReasoner {
 				new SolutionStore()
 			}
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayList(extremalObjectives), numberOfRequiredSolutions)
+		val diversityChecker = DiversityChecker.of(viatraConfig.diversityRequirement)
+		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayList(extremalObjectives), numberOfRequiredSolutions,
+			diversityChecker)
 		val solutionCopier = solutionSaver.solutionCopier
 		solutionStore.withSolutionSaver(solutionSaver)
 		dse.solutionStore = solutionStore
@@ -197,14 +200,14 @@ class ViatraReasoner extends LogicReasoner {
 				it.name = "SolutionCopyTime"
 				it.value = (solutionCopier.getTotalCopierRuntime / 1000000) as int
 			]
-			if (strategy.solutionStoreWithDiversityDescriptor.isActive) {
+			if (diversityChecker.isActive) {
 				it.entries += createIntStatisticEntry => [
 					it.name = "SolutionDiversityCheckTime"
-					it.value = (strategy.solutionStoreWithDiversityDescriptor.sumRuntime / 1000000) as int
+					it.value = (diversityChecker.totalRuntime / 1000000) as int
 				]
 				it.entries += createRealStatisticEntry => [
 					it.name = "SolutionDiversitySuccessRate"
-					it.value = strategy.solutionStoreWithDiversityDescriptor.successRate
+					it.value = diversityChecker.successRate
 				]
 			}
 		]

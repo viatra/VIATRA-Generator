@@ -75,7 +75,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	// Running
 	private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
 	private SolutionStore solutionStore;
-	private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
@@ -96,9 +95,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.method = method;
 	}
 	
-	public SolutionStoreWithDiversityDescriptor getSolutionStoreWithDiversityDescriptor() {
-		return solutionStoreWithDiversityDescriptor;
-	}
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
 	}
@@ -117,8 +113,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			matchers.add(matcher);
 		}
 		
-		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
-
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		this.comparator = new Comparator<TrajectoryWithFitness>() {
 			@Override
@@ -142,7 +136,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		}
 		
 		final Fitness firstfitness = context.calculateFitness();
-		checkForSolution(firstfitness);
+		solutionStore.newSolution(context);
 		
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		final Object[] firstTrajectory = context.getTrajectory().toArray(new Object[0]);
@@ -215,7 +209,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 					context.backtrack();
 				} else {
 					final Fitness nextFitness = context.calculateFitness();
-					checkForSolution(nextFitness);
+					solutionStore.newSolution(context);
 					if (context.getDepth() > configuration.searchSpaceConstraints.maxDepth) {
 						logger.debug("Reached max depth.");
 						context.backtrack();
@@ -262,15 +256,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			activationIds = Collections.emptyList();
 		}
 		return activationIds;
-	}
-
-	private void checkForSolution(final Fitness fitness) {
-		if (fitness.isSatisifiesHardObjectives()) {
-			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				solutionStoreWithDiversityDescriptor.newSolution(context);
-				solutionStore.newSolution(context);
-			}
-		}
 	}
 
 	@Override

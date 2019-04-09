@@ -13,10 +13,11 @@ import org.eclipse.viatra.dse.solutionstore.SolutionStore.ISolutionSaver
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
- * Based on {@link org.eclipse.viatra.dse.solutionstore.SolutionStore.BestSolutionSaver}.
+ * Based on {@link SolutionStore.BestSolutionSaver}.
  */
 class ViatraReasonerSolutionSaver implements ISolutionSaver {
 	@Accessors val solutionCopier = new SolutionCopier
+	@Accessors val DiversityChecker diversityChecker
 	val boolean hasExtremalObjectives
 	val int numberOfRequiredSolutions
 	val ObjectiveComparatorHelper comparatorHelper
@@ -24,7 +25,8 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 
 	@Accessors(PUBLIC_SETTER) var Map<Object, Solution> solutionsCollection
 
-	new(IObjective[][] leveledExtremalObjectives, int numberOfRequiredSolutions) {
+	new(IObjective[][] leveledExtremalObjectives, int numberOfRequiredSolutions, DiversityChecker diversityChecker) {
+		this.diversityChecker = diversityChecker
 		comparatorHelper = new ObjectiveComparatorHelper(leveledExtremalObjectives)
 		hasExtremalObjectives = leveledExtremalObjectives.exists[!empty]
 		this.numberOfRequiredSolutions = numberOfRequiredSolutions
@@ -34,12 +36,15 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 		if (hasExtremalObjectives) {
 			saveBestSolutionOnly(context, id, solutionTrajectory)
 		} else {
-			basicSaveSolution(context, id, solutionTrajectory)
+			saveAnyDiverseSolution(context, id, solutionTrajectory)
 		}
 	}
 
 	private def saveBestSolutionOnly(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
 		val fitness = context.lastFitness
+		if (!fitness.satisifiesHardObjectives) {
+			return false
+		}
 		val dominatedTrajectories = newArrayList
 		for (entry : trajectories.entrySet) {
 			val isLastFitnessBetter = comparatorHelper.compare(fitness, entry.value)
@@ -54,9 +59,12 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 		if (dominatedTrajectories.size == 0 && !needsMoreSolutionsWithSameFitness) {
 			return false
 		}
+		if (!diversityChecker.newSolution(context, id, dominatedTrajectories.map[solution.stateCode])) {
+			return false
+		}
 		// We must save the new trajectory before removing dominated trajectories
 		// to avoid removing the current solution when it is reachable only via dominated trajectories.
-		val solutionSaved = basicSaveSolution(context, id, solutionTrajectory)
+		val solutionSaved = basicSaveSolution(context, id, solutionTrajectory, fitness)
 		for (dominatedTrajectory : dominatedTrajectories) {
 			trajectories -= dominatedTrajectory
 			val dominatedSolution = dominatedTrajectory.solution
@@ -73,8 +81,18 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 		solutionSaved
 	}
 
-	private def basicSaveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
+	private def saveAnyDiverseSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
 		val fitness = context.lastFitness
+		if (!fitness.satisifiesHardObjectives) {
+			return false
+		}
+		if (!diversityChecker.newSolution(context, id, emptyList)) {
+			return false
+		}
+		basicSaveSolution(context, id, solutionTrajectory, fitness)
+	}
+
+	private def basicSaveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory, Fitness fitness) {
 		var boolean solutionSaved = false
 		var dseSolution = solutionsCollection.get(id)
 		if (dseSolution === null) {
