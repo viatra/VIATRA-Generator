@@ -1,27 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import functionalarchitecture.Function;
-import functionalarchitecture.FunctionalOutput;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
-import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
-import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,94 +28,24 @@ import org.eclipse.viatra.query.runtime.api.IQueryGroup;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class GeneralTest {
-  public static String createAndSolveProblem(final EcoreMetamodelDescriptor metamodel, final List<EObject> partialModel, final ViatraQuerySetDescriptor queries, final FileSystemWorkspace workspace) {
-    try {
-      String _xblockexpression = null;
-      {
-        @Extension
-        final VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE;
-        final Ecore2Logic ecore2Logic = new Ecore2Logic();
-        final Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic);
-        final Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic);
-        final InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic();
-        Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
-        final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
-        LogicProblem problem = modelGenerationProblem.getOutput();
-        workspace.writeModel(problem, "Fam.logicproblem");
-        InputOutput.<String>println("Problem created");
-        long startTime = System.currentTimeMillis();
-        LogicResult solution = null;
-        LogicReasoner reasoner = null;
-        VampireSolver _vampireSolver = new VampireSolver();
-        reasoner = _vampireSolver;
-        final HashMap<Type, Integer> typeMapMin = new HashMap<Type, Integer>();
-        final HashMap<Type, Integer> typeMapMax = new HashMap<Type, Integer>();
-        final Function1<EClass, String> _function = (EClass s) -> {
-          return s.getName();
-        };
-        final Map<String, EClass> list2MapMin = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function);
-        final Function1<EClass, String> _function_1 = (EClass s) -> {
-          return s.getName();
-        };
-        final Map<String, EClass> list2MapMax = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function_1);
-        typeMapMin.put(
-          ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
-            list2MapMin.get(Function.class.getSimpleName())), Integer.valueOf(1));
-        typeMapMin.put(
-          ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
-            list2MapMin.get(functionalarchitecture.FunctionalInterface.class.getSimpleName())), Integer.valueOf(2));
-        typeMapMin.put(
-          ecore2Logic.TypeofEClass(modelGenerationProblem.getTrace(), 
-            list2MapMin.get(FunctionalOutput.class.getSimpleName())), Integer.valueOf(3));
-        typeMapMax.put(
-          ecore2Logic.TypeofEClass(
-            modelGenerationProblem.getTrace(), 
-            list2MapMax.get(Function.class.getSimpleName())), Integer.valueOf(5));
-        typeMapMax.put(
-          ecore2Logic.TypeofEClass(
-            modelGenerationProblem.getTrace(), 
-            list2MapMax.get(functionalarchitecture.FunctionalInterface.class.getSimpleName())), Integer.valueOf(2));
-        typeMapMax.put(
-          ecore2Logic.TypeofEClass(
-            modelGenerationProblem.getTrace(), 
-            list2MapMax.get(FunctionalOutput.class.getSimpleName())), Integer.valueOf(4));
-        VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
-        final Procedure1<VampireSolverConfiguration> _function_2 = (VampireSolverConfiguration it) -> {
-          it.documentationLevel = DocumentationLevel.FULL;
-          it.typeScopes.minNewElements = 4;
-          it.typeScopes.maxNewElements = 25;
-          it.typeScopes.minNewElementsByType = typeMapMin;
-          it.typeScopes.maxNewElementsByType = typeMapMax;
-          it.contCycleLevel = 5;
-          it.uniquenessDuplicates = false;
-        };
-        final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function_2);
-        solution = reasoner.solve(problem, vampireConfig, workspace);
-        long _currentTimeMillis = System.currentTimeMillis();
-        long _minus = (_currentTimeMillis - startTime);
-        long totalTimeMin = (_minus / 60000);
-        long _currentTimeMillis_1 = System.currentTimeMillis();
-        long _minus_1 = (_currentTimeMillis_1 - startTime);
-        long _divide = (_minus_1 / 1000);
-        long totalTimeSec = (_divide % 60);
-        InputOutput.<String>println("Problem solved");
-        _xblockexpression = InputOutput.<String>println(((("Time was: " + Long.valueOf(totalTimeMin)) + ":") + Long.valueOf(totalTimeSec)));
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+  public static Map<Type, Integer> getTypeMap(final Map<Class, Integer> classMap, final EcoreMetamodelDescriptor metamodel, final Ecore2Logic e2l, final Ecore2Logic_Trace trace) {
+    final HashMap<Type, Integer> typeMap = new HashMap<Type, Integer>();
+    final Function1<EClass, String> _function = (EClass s) -> {
+      return s.getName();
+    };
+    final Map<String, EClass> listMap = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function);
+    Set<Class> _keySet = classMap.keySet();
+    for (final Class elem : _keySet) {
+      typeMap.put(
+        e2l.TypeofEClass(trace, listMap.get(elem.getSimpleName())), classMap.get(elem));
     }
+    return typeMap;
   }
   
   public static EcoreMetamodelDescriptor loadMetamodel(final EPackage pckg) {

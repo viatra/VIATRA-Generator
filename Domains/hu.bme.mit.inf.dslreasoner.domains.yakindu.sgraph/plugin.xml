@@ -3,35 +3,6 @@
     <!-- @generated yakindu_simplified -->
     <package class="hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage" genModel="model/yakindu_simplified.genmodel" uri="hu.bme.mit.inf.yakindumm"/>
   </extension>
-  <extension id="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns" id="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns">
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.entryInRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.noEntryInRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.multipleEntryInRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.transition"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.incomingToEntry"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.noOutgoingTransitionFromEntry"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.multipleTransitionFromEntry"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.outgoingFromExit"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.outgoingFromFinal"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.noStateInRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.StateInRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.choiceHasNoOutgoing"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.choiceHasNoIncoming"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.synchHasNoOutgoing"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.synchHasNoIncoming"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.SynchronizedIncomingInSameRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.notSynchronizingStates"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.hasMultipleOutgoingTrainsition"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.hasMultipleIncomingTrainsition"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.SynchronizedRegionsAreNotSiblings"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.child"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.SynchronizedRegionDoesNotHaveMultipleRegions"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.hasMultipleRegions"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.synchThree"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.twoSynch"/>
-    </group>
-  </extension>
   <extension id="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.mutated.Mutated" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.mutated.Mutated" id="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.mutated.Mutated">
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.mutated.entryInRegion_M0"/>

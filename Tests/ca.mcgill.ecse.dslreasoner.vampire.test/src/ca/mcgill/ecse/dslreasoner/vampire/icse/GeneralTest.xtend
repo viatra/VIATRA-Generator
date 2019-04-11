@@ -1,25 +1,14 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse
 
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
-import functionalarchitecture.Function
-import functionalarchitecture.FunctionalInterface
-import functionalarchitecture.FunctionalOutput
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
+import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
-import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
-import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.HashMap
 import java.util.List
+import java.util.Map
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
@@ -30,100 +19,18 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 
-class GeneralTest {
-	def static String createAndSolveProblem(EcoreMetamodelDescriptor metamodel, List<EObject> partialModel,
-		ViatraQuerySetDescriptor queries, FileSystemWorkspace workspace) {
-		val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
-		val Ecore2Logic ecore2Logic = new Ecore2Logic
-		val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
-		val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
-		val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
-
-		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
-		var problem = modelGenerationProblem.output
-//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
-//		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
-		workspace.writeModel(problem, "Fam.logicproblem")
-
-		println("Problem created")
+class GeneralTest {	
+	def static Map<Type, Integer> getTypeMap(Map<Class, Integer> classMap, EcoreMetamodelDescriptor metamodel, Ecore2Logic e2l, Ecore2Logic_Trace trace) {
+		val typeMap = new HashMap<Type, Integer>
+		val listMap = metamodel.classes.toMap[s|s.name]
 		
-		var startTime = System.currentTimeMillis
-
-		var LogicResult solution
-		var LogicReasoner reasoner
-
-		// *
-		reasoner = new VampireSolver
-
-		// Setting up scope
-		val typeMapMin = new HashMap<Type, Integer>
-		val typeMapMax = new HashMap<Type, Integer>
-		val list2MapMin = metamodel.classes.toMap[s|s.name]
-		val list2MapMax = metamodel.classes.toMap[s|s.name]
-
-		// Minimum Scope
-		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
-			list2MapMin.get(Function.simpleName)
-		), 1)
-		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
-			list2MapMin.get(FunctionalInterface.simpleName)
-		), 2)
-		typeMapMin.put(ecore2Logic.TypeofEClass(modelGenerationProblem.trace, 
-			list2MapMin.get(FunctionalOutput.simpleName)
-		), 3)
-
-		// Maximum Scope
-		typeMapMax.put(ecore2Logic.TypeofEClass(
-			modelGenerationProblem.trace,
-			list2MapMax.get(Function.simpleName)
-		), 5)
-		typeMapMax.put(ecore2Logic.TypeofEClass(
-			modelGenerationProblem.trace,
-			list2MapMax.get(FunctionalInterface.simpleName)
-		), 2)
-		typeMapMax.put(ecore2Logic.TypeofEClass(
-			modelGenerationProblem.trace,
-			list2MapMax.get(FunctionalOutput.simpleName)
-		), 4)
-
-		// Configuration
-		val vampireConfig = new VampireSolverConfiguration => [
-			// add configuration things, in config file first
-			it.documentationLevel = DocumentationLevel::FULL
-			it.typeScopes.minNewElements = 4
-			it.typeScopes.maxNewElements = 25
-			it.typeScopes.minNewElementsByType = typeMapMin
-			it.typeScopes.maxNewElementsByType = typeMapMax
-			it.contCycleLevel = 5
-			it.uniquenessDuplicates = false
-		]
-		solution = reasoner.solve(problem, vampireConfig, workspace)
-
-		/*/
-		 * 
-		 * reasoner = new AlloySolver
-		 * val alloyConfig = new AlloySolverConfiguration => [
-		 * 	it.typeScopes.maxNewElements = 7
-		 * 	it.typeScopes.minNewElements = 3
-		 * 	it.solutionScope.numberOfRequiredSolution = 1
-		 * 	it.typeScopes.maxNewIntegers = 0
-		 * 	it.documentationLevel = DocumentationLevel::NORMAL
-		 * ]
-		 * solution = reasoner.solve(problem, alloyConfig, workspace)
-		 //*/
-		 
-		 
-		var totalTimeMin = (System.currentTimeMillis - startTime)/60000
-		var totalTimeSec = ((System.currentTimeMillis - startTime)/1000)% 60
-		 
-		println("Problem solved")
-		println("Time was: " + totalTimeMin + ":" + totalTimeSec)
-		
-		
-		
-		
+		for (Class  elem : classMap.keySet) {
+			typeMap.put(e2l.TypeofEClass(
+			trace, listMap.get(elem.simpleName)
+		), classMap.get(elem))
+		}
+		return typeMap
 	}
 
 	def static loadMetamodel(EPackage pckg) {
