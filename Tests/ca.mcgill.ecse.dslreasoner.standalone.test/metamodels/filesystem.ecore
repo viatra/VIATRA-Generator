@@ -10,7 +10,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="live" upperBound="-1" eType="#//FSObject"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
-        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.live"/>
+        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.vampire.queries.live"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
