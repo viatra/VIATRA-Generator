@@ -64,10 +64,17 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         Type _referred = ((ComplexTypeReference) _get).getReferred();
         Type pointingTo = ((Type) _referred);
         containmentListCopy.remove(pointingTo);
-        EList<Type> _subtypes = pointingTo.getSubtypes();
-        for (final Type c : _subtypes) {
+        List<Type> allSubtypes = CollectionLiterals.<Type>newArrayList();
+        this.support.listSubtypes(pointingTo, allSubtypes);
+        for (final Type c : allSubtypes) {
           containmentListCopy.remove(c);
         }
+      }
+    }
+    for (final Type c : containmentListCopy) {
+      boolean _isIsAbstract = c.isIsAbstract();
+      if (_isIsAbstract) {
+        containmentListCopy.remove(c);
       }
     }
     final String topName = CollectionsUtil.<Type, VLSFunction>lookup(containmentListCopy.get(0), trace.type2Predicate).getConstant().toString();
@@ -132,7 +139,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         final VLSFunction toFunc = CollectionsUtil.<Type, VLSFunction>lookup(toType, trace.type2Predicate);
         this.addToMap(type2cont, toFunc, rel);
         EList<Type> _subtypes = toType.getSubtypes();
-        for (final Type c : _subtypes) {
+        for (final Type c_1 : _subtypes) {
           this.addToMap(type2cont, toFunc, rel);
         }
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
@@ -184,7 +191,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
       {
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
-          it.setName(this.support.toIDMultiple("containment", e.getKey().getConstant().toString()));
+          it.setName(this.support.toIDMultiple("containment_contained", e.getKey().getConstant().toString()));
           it.setFofRole("axiom");
           VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
           final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {

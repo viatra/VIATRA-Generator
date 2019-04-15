@@ -3,7 +3,6 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
@@ -17,14 +16,10 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
@@ -64,10 +59,19 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         relVar2TypeDecComply.add(varTypeComply);
       }
     }
+    final String[] nameArray = r.getName().split(" ");
+    String relNameVar = "";
+    int _length_1 = nameArray.length;
+    boolean _equals = (_length_1 == 3);
+    if (_equals) {
+      relNameVar = this.support.toIDMultiple(nameArray[0], nameArray[2]);
+    } else {
+      relNameVar = r.getName();
+    }
+    final String relName = relNameVar;
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
-      final String[] nameArray = r.getName().split(" ");
-      it.setName(this.support.toIDMultiple("compliance", nameArray[0], nameArray[2]));
+      it.setName(this.support.toIDMultiple("compliance", relName));
       it.setFofRole("axiom");
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it_1) -> {
@@ -80,7 +84,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
         final Procedure1<VLSImplies> _function_2 = (VLSImplies it_2) -> {
           VLSFunction _createVLSFunction = this.factory.createVLSFunction();
           final Procedure1<VLSFunction> _function_3 = (VLSFunction it_3) -> {
-            it_3.setConstant(this.support.toIDMultiple("r", nameArray[0], nameArray[2]));
+            it_3.setConstant(this.support.toIDMultiple("r", relName));
             for (final VLSVariable v_1 : relVar2VLS) {
               EList<VLSTerm> _terms = it_3.getTerms();
               VLSVariable _duplicate_1 = this.support.duplicate(v_1);
@@ -104,145 +108,6 @@ public class Logic2VampireLanguageMapper_RelationMapper {
   }
   
   public void _transformRelation(final RelationDefinition reldef, final Logic2VampireLanguageMapperTrace trace) {
-    final Map<Variable, VLSVariable> relationVar2VLS = new HashMap<Variable, VLSVariable>();
-    final Map<Variable, VLSFunction> relationVar2TypeDecComply = new HashMap<Variable, VLSFunction>();
-    final Map<Variable, VLSFunction> relationVar2TypeDecRes = new HashMap<Variable, VLSFunction>();
-    final ArrayList<VLSTerm> typedefs = new ArrayList<VLSTerm>();
-    EList<Variable> _variables = reldef.getVariables();
-    for (final Variable variable : _variables) {
-      {
-        VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-        final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
-          it.setName(this.support.toIDMultiple("V", variable.getName()));
-        };
-        final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
-        relationVar2VLS.put(variable, v);
-        VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-        final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-          TypeReference _range = variable.getRange();
-          it.setConstant(this.support.toIDMultiple("t", ((ComplexTypeReference) _range).getReferred().getName()));
-          EList<VLSTerm> _terms = it.getTerms();
-          VLSVariable _duplicate = this.support.duplicate(v);
-          _terms.add(_duplicate);
-        };
-        final VLSFunction varTypeComply = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
-        relationVar2TypeDecComply.put(variable, varTypeComply);
-        relationVar2TypeDecRes.put(variable, this.support.duplicate(varTypeComply));
-      }
-    }
-    final String[] nameArray = reldef.getName().split(" ");
-    VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-    final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
-      int _length = nameArray.length;
-      int _minus = (_length - 2);
-      int _length_1 = nameArray.length;
-      int _minus_1 = (_length_1 - 1);
-      it.setName(this.support.toIDMultiple("compliance", nameArray[_minus], 
-        nameArray[_minus_1]));
-      it.setFofRole("axiom");
-      VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-      final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it_1) -> {
-        EList<Variable> _variables_1 = reldef.getVariables();
-        for (final Variable variable_1 : _variables_1) {
-          EList<VLSVariable> _variables_2 = it_1.getVariables();
-          VLSVariable _duplicate = this.support.duplicate(CollectionsUtil.<Variable, VLSVariable>lookup(variable_1, relationVar2VLS));
-          _variables_2.add(_duplicate);
-        }
-        VLSImplies _createVLSImplies = this.factory.createVLSImplies();
-        final Procedure1<VLSImplies> _function_2 = (VLSImplies it_2) -> {
-          VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-          final Procedure1<VLSFunction> _function_3 = (VLSFunction it_3) -> {
-            it_3.setConstant(this.support.toIDMultiple("rel", reldef.getName()));
-            EList<Variable> _variables_3 = reldef.getVariables();
-            for (final Variable variable_2 : _variables_3) {
-              {
-                VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-                final Procedure1<VLSVariable> _function_4 = (VLSVariable it_4) -> {
-                  it_4.setName(CollectionsUtil.<Variable, VLSVariable>lookup(variable_2, relationVar2VLS).getName());
-                };
-                final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_4);
-                EList<VLSTerm> _terms = it_3.getTerms();
-                _terms.add(v);
-              }
-            }
-          };
-          VLSFunction _doubleArrow = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_3);
-          it_2.setLeft(_doubleArrow);
-          Collection<VLSFunction> _values = relationVar2TypeDecComply.values();
-          ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
-          it_2.setRight(this.support.unfoldAnd(_arrayList));
-        };
-        VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_2);
-        it_1.setOperand(_doubleArrow);
-      };
-      VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_1);
-      it.setFofFormula(_doubleArrow);
-    };
-    final VLSFofFormula comply = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
-    VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
-    final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
-      int _length = nameArray.length;
-      int _minus = (_length - 2);
-      int _length_1 = nameArray.length;
-      int _minus_1 = (_length_1 - 1);
-      it.setName(this.support.toIDMultiple("relation", nameArray[_minus], 
-        nameArray[_minus_1]));
-      it.setFofRole("axiom");
-      VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-      final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
-        EList<Variable> _variables_1 = reldef.getVariables();
-        for (final Variable variable_1 : _variables_1) {
-          {
-            VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-            final Procedure1<VLSVariable> _function_3 = (VLSVariable it_2) -> {
-              it_2.setName(CollectionsUtil.<Variable, VLSVariable>lookup(variable_1, relationVar2VLS).getName());
-            };
-            final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_3);
-            EList<VLSVariable> _variables_2 = it_1.getVariables();
-            _variables_2.add(v);
-          }
-        }
-        VLSImplies _createVLSImplies = this.factory.createVLSImplies();
-        final Procedure1<VLSImplies> _function_3 = (VLSImplies it_2) -> {
-          Collection<VLSFunction> _values = relationVar2TypeDecRes.values();
-          ArrayList<VLSTerm> _arrayList = new ArrayList<VLSTerm>(_values);
-          it_2.setLeft(this.support.unfoldAnd(_arrayList));
-          VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-          final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_3) -> {
-            VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-            final Procedure1<VLSFunction> _function_5 = (VLSFunction it_4) -> {
-              it_4.setConstant(this.support.toIDMultiple("rel", reldef.getName()));
-              EList<Variable> _variables_2 = reldef.getVariables();
-              for (final Variable variable_2 : _variables_2) {
-                {
-                  VLSVariable _createVLSVariable = this.factory.createVLSVariable();
-                  final Procedure1<VLSVariable> _function_6 = (VLSVariable it_5) -> {
-                    it_5.setName(CollectionsUtil.<Variable, VLSVariable>lookup(variable_2, relationVar2VLS).getName());
-                  };
-                  final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function_6);
-                  EList<VLSTerm> _terms = it_4.getTerms();
-                  _terms.add(v);
-                }
-              }
-            };
-            VLSFunction _doubleArrow = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_5);
-            it_3.setLeft(_doubleArrow);
-            it_3.setRight(this.base.transformTerm(reldef.getValue(), trace, relationVar2VLS));
-          };
-          VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_4);
-          it_2.setRight(_doubleArrow);
-        };
-        VLSImplies _doubleArrow = ObjectExtensions.<VLSImplies>operator_doubleArrow(_createVLSImplies, _function_3);
-        it_1.setOperand(_doubleArrow);
-      };
-      VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_2);
-      it.setFofFormula(_doubleArrow);
-    };
-    final VLSFofFormula res = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_1);
-    EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
-    _formulas.add(comply);
-    EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
-    _formulas_1.add(res);
   }
   
   public void transformRelation(final Relation r, final Logic2VampireLanguageMapperTrace trace) {

@@ -44,14 +44,19 @@ class Logic2VampireLanguageMapper_TypeMapper {
 
 			// Create a VLSFunction for each Enum Element
 			val List<VLSFunction> orElems = newArrayList
+
 			for (e : type.elements) {
+				val nameArray = e.name.split(" ")
+				var relNameVar = ""
+				if (nameArray.length == 3) {
+					relNameVar = support.toIDMultiple(nameArray.get(0), nameArray.get(2))
+				} else {
+					relNameVar = e.name
+				}
+				val relName = relNameVar
+				
 				val enumElemPred = createVLSFunction => [
-					val splitName = e.name.split(" ")
-					if (splitName.length > 2) {
-						it.constant = support.toIDMultiple("e", splitName.get(0), splitName.get(2))
-					} else {
-						it.constant = support.toIDMultiple("e", splitName.get(0))
-					}
+					it.constant = support.toIDMultiple("e", relName)
 					it.terms += support.duplicate(variable)
 				]
 				trace.element2Predicate.put(e, enumElemPred)
@@ -80,7 +85,7 @@ class Logic2VampireLanguageMapper_TypeMapper {
 
 			// Implement Enum Inheritence Hierarchy
 			val res = createVLSFofFormula => [
-				it.name = support.toIDMultiple("typeDef", type.name.split(" ").get(0))
+				it.name = support.toIDMultiple("typeDef", type.lookup(trace.type2Predicate).constant.toString)
 				it.fofRole = "axiom"
 				it.fofFormula = createVLSUniversalQuantifier => [
 					it.variables += support.duplicate(variable)
@@ -105,9 +110,9 @@ class Logic2VampireLanguageMapper_TypeMapper {
 				val cst = support.toConstant(cstTerm)
 				trace.uniqueInstances.add(cst)
 
-				val index = i
+				val index = i-globalCounter
 				val enumScope = createVLSFofFormula => [
-					it.name = support.toIDMultiple("enumScope", type.name.split(" ").get(0),
+					it.name = support.toIDMultiple("enumScope", type.lookup(trace.type2Predicate).constant.toString,
 						type.elements.get(index).name.split(" ").get(0))
 					it.fofRole = "axiom"
 					it.fofFormula = createVLSUniversalQuantifier => [

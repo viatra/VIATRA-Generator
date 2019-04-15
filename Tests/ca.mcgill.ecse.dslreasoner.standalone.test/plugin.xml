@@ -20,13 +20,6 @@
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries.nonSymmetricOpposite"/>
     </group>
   </extension>
-  <extension id="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPatterns" id="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPatterns">
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.terminatorAndInformation"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.rootElements"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.parent"/>
-    </group>
-  </extension>
   <extension id="extension.derived.ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.model" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
     <wellbehaving-derived-feature classifier-name="FunctionalElement" feature-name="model" package-nsUri="FamMetamodel"/>
   </extension>
