@@ -1,0 +1,164 @@
+package hu.bme.mit.inf.dslreasoner.domains.satellite.queries
+
+import "http://www.example.org/satellite"
+
+@Constraint(severity = "error", key = {Link},
+	message = "Communication links must start from the containing element.")
+pattern communicationLinkDoesNotStartAtContainingElement(Link : DirectedCommunicationLink) {
+	CommunicatingElement.communicationLink(Element, Link);
+	DirectedCommunicationLink.source(Link, SourceComm);
+	CommunicatingElement.commSubsystem(SourceElement, SourceComm);
+	Element != SourceElement;
+}
+
+// At least two spacecraft must have the interferometry payload configured
+
+//@Constraint(severity = "error", key = {Mission},
+//	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
+pattern notEnoughInterferometryPayloads(Mission : InterferometryMission) {
+	InterferometryMission(Mission);
+	neg find atLeastTwoInterferometryPayloads(Mission);
+}
+
+private pattern atLeastTwoInterferometryPayloads(Mission : InterferometryMission) {
+	find spacecraftWithInterferometryPayload(Mission, Spacecraft1);
+	find spacecraftWithInterferometryPayload(Mission, Spacecraft2);
+	Spacecraft1 != Spacecraft2;
+}
+
+private pattern spacecraftWithInterferometryPayload(Mission : ConstellationMission, Spacecraft : Spacecraft) {
+	ConstellationMission.spacecraft(Mission, Spacecraft);
+	Spacecraft.payload(Spacecraft, Payload);
+	InterferometryPayload(Payload);
+}
+
+// All spacecraft must have some communication path to the ground station
+
+@Constraint(severity = "error", key = {Spacecraft},
+	message = "Spacecraft has no communication path to the ground station.")
+pattern noLinkToGroundStation(Spacecraft : Spacecraft) {
+	ConstellationMission.groundStationNetwork(Mission, GroundStation);
+	ConstellationMission.spacecraft(Mission, Spacecraft);
+	neg find indirectCommunicationLink(Spacecraft, GroundStation);
+}
+
+// No communication loops may exist
+// No spacecraft may directly communicate with itself
+
+@Constraint(severity = "error", key = {Element},
+	message = "Communication loop.")
+pattern communicationLoop(Element : CommunicatingElement) {
+	find indirectCommunicationLink(Element, Element);
+}
+
+private pattern indirectCommunicationLink(Source : CommunicatingElement, Target : CommunicatingElement) {
+	find directCommunicationLink+(Source, Target);
+}
+
+private pattern directCommunicationLink(Source : CommunicatingElement, Target : CommunicatingElement) {
+	DirectedCommunicationLink.source(Link, SourceSubsystem);
+	DirectedCommunicationLink.target(Link, TargetSubsystem);
+	CommunicatingElement.commSubsystem(Source, SourceSubsystem);
+	CommunicatingElement.commSubsystem(Target, TargetSubsystem);
+}
+
+// Source and target communication systems must be compatible.
+
+@Constraint(severity = "error", key = {Link},
+	message = "Two ends of a communication link must use the same band.")
+pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
+	DirectedCommunicationLink.source(Link, SourceSubsystem);
+	DirectedCommunicationLink.target(Link, TargetSubsystem);
+	CommSubsystem.band(SourceSubsystem, Band);
+	neg find commSubsystemBand(TargetSubsystem, Band);
+}
+
+private pattern commSubsystemBand(Comm : CommSubsystem, Band : TransceiverBand) {
+	CommSubsystem.band(Comm, Band);
+}
+
+@Constraint(severity = "error", key = {Link},
+	message = "Two ends of a communication link must use the same antenna gain.")
+pattern incompatibleSourceAndTargetGain(Link : DirectedCommunicationLink) {
+	DirectedCommunicationLink.source(Link, SourceSubsystem);
+	DirectedCommunicationLink.target(Link, TargetSubsystem);
+	CommSubsystem.gain(SourceSubsystem, Gain);
+	neg find commSubsystemGain(TargetSubsystem, Gain);
+}
+
+private pattern commSubsystemGain(Comm : CommSubsystem, Gain : AntennaGain) {
+	CommSubsystem.gain(Comm, Gain);
+}
+
+// UHF-band transmitters may only be combined with a low gain antenna
+
+@Constraint(severity = "error", key = {Comm},
+	message = "UHF transceiver must be combined with a low gain antenna.")
+pattern uhfAntennaGainNotLow(Comm : CommSubsystem) {
+	CommSubsystem.band(Comm, TransceiverBand::UHF);
+	// VIATRA will fail to infer a type constraint for the virtual variable introduced
+	// when an enum literal appears in a negative pattern call, so we use a helper pattern
+	// instead of neg find commSubsystemGain(Comm, AntennaGain::LOW);
+	neg find commSubsystemGainLow(Comm);
+}
+
+private pattern commSubsystemGainLow(Comm : CommSubsystem) {
+	CommSubsystem.gain(Comm, AntennaGain::LOW);
+}
+
+// X-band transmitters may only be combined with a medium gain antenna
+
+@Constraint(severity = "error", key = {Comm},
+	message = "X-band transceiver must be combined with a medium gain antenna.")
+pattern xAntennaGainNotMedium(Comm : CommSubsystem) {
+	CommSubsystem.band(Comm, TransceiverBand::X);
+	neg find commSubsystemGainMedium(Comm);
+}
+
+private pattern commSubsystemGainMedium(Comm : CommSubsystem) {
+	CommSubsystem.gain(Comm, AntennaGain::MEDIUM);
+}
+
+// Ka-band transmitters may only be combined with a medium or high gain antenna
+
+@Constraint(severity = "error", key = {Comm},
+	message = "Ka-band transceiver must be combined with a medium or high gain antenna.")
+pattern kaAntennaGainLow(Comm : CommSubsystem) {
+	CommSubsystem.band(Comm, TransceiverBand::Ka);
+	CommSubsystem.gain(Comm, AntennaGain::LOW);
+}
+
+// 3U CubeSats are assumed to only be able to downlink to Earth using an X-band trasmitter,
+// but cross-link using UHF
+
+@Constraint(severity = "error", key = {Sat},
+	message = "3U CubeSats can only cross-link using UHF.")
+pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
+	CommunicatingElement.commSubsystem(Sat, SourceComm);
+	neg find commSubsystemBandUhf(SourceComm);
+	DirectedCommunicationLink.source(Link, SourceComm);
+	DirectedCommunicationLink.target(Link, TargetComm);
+	CommunicatingElement.commSubsystem(Target, TargetComm);
+	neg find groundStationNetwork(Target);
+}
+
+private pattern commSubsystemBandUhf(Comm : CommSubsystem) {
+	CommSubsystem.band(Comm, TransceiverBand::UHF);
+}
+
+private pattern groundStationNetwork(Network : GroundStationNetwork) {
+	GroundStationNetwork(Network);
+}
+
+// Only a Small Satellite can be configured with a Ka-band communication system
+
+@Constraint(severity = "error", key = {Spacecraft},
+	message = "Only a Small Satellite can be configured with a Ka-band communication system.")
+pattern cubeSatWithKaAntenna(Spacecraft : Spacecraft) {
+	CommunicatingElement.commSubsystem.band(Spacecraft, TransceiverBand::Ka);
+	neg find smallSat(Spacecraft);
+}
+
+private pattern smallSat(Sat : SmallSat) {
+	SmallSat(Sat);
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="satellite" nsURI="http://www.example.org/satellite" nsPrefix="satellite">
+  <eClassifiers xsi:type="ecore:EClass" name="ConstellationMission" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groundStationNetwork" lowerBound="1"
+        eType="#//GroundStationNetwork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spacecraft" lowerBound="2"
+        upperBound="50" eType="#//Spacecraft" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryMission" eSuperTypes="#//ConstellationMission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observationTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat" defaultValueLiteral="2.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommunicatingElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commSubsystem" lowerBound="1"
+        upperBound="2" eType="#//CommSubsystem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationLink" eType="#//DirectedCommunicationLink"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroundStationNetwork" eSuperTypes="#//CommunicatingElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Spacecraft" abstract="true" eSuperTypes="#//CommunicatingElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat3U" eSuperTypes="#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat6U" eSuperTypes="#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmallSat" eSuperTypes="#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="band" lowerBound="1" eType="#//TransceiverBand"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gain" lowerBound="1" eType="#//AntennaGain"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransceiverBand">
+    <eLiterals name="UHF"/>
+    <eLiterals name="X" value="1"/>
+    <eLiterals name="Ka" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectedCommunicationLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//CommSubsystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//CommSubsystem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AntennaGain">
+    <eLiterals name="LOW"/>
+    <eLiterals name="MEDIUM" value="1"/>
+    <eLiterals name="HIGH" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>
+</ecore:EPackage>

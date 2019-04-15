@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/hu.bme.mit.inf.dslreasoner.domains.cps/ecore-gen"
+    creationIcons="false" editDirectory="/hu.bme.mit.inf.dslreasoner.domains.cps.edit/src-gen"
+    editorDirectory="/hu.bme.mit.inf.dslreasoner.domains.cps.editor/src-gen" modelPluginID="hu.bme.mit.inf.dslreasoner.domains.cps"
+    modelName="Cps" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>cps.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="Cps" basePackage="hu.bme.mit.inf.dslreasoner.domains" disposableProviderFactory="true"
+      ecorePackage="cps.ecore#/">
+    <genClasses ecoreClass="cps.ecore#//CyberPhysicalSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/requests"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/applicationTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/hostTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/hosts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/applications"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//ApplicationType">
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationType/instances"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationType/requirements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationType/dependsOn"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//HostType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostType/defaultMemory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostType/defaultHdd"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostType/instances"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostType/canConnectTo"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//Request">
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//Request/requirements"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//Requirement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//Requirement/request"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//Requirement/count"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//Requirement/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//Requirement/instances"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//ApplicationInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationInstance/requirement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationInstance/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationInstance/allocatedTo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationInstance/dependsOn"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//ResourceRequirement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//ResourceRequirement/requiredMemory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//ResourceRequirement/requiredHdd"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ResourceRequirement/hostType"/>
+    </genClasses>
+    <genClasses ecoreClass="cps.ecore#//HostInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostInstance/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/availableMemory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/availableHdd"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/totalMemory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/totalHdd"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostInstance/applications"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostInstance/connectedTo"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

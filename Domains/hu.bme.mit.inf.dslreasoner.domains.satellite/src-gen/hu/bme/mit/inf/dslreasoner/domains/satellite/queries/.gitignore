@@ -1,0 +1,16 @@
+/.SatelliteQueries.java._trace
+/.NoLinkToGroundStation.java._trace
+/.CommunicationLoop.java._trace
+/.SingleInterferometryPayload.java._trace
+/.NoInterferometryPayload.java._trace
+/.NotENoughInterferometryPayloads.java._trace
+/.NotEnoughInterferometryPayloads.java._trace
+/.UhfAntennaGainNotLow.java._trace
+/.XAntennaGainNotMedium.java._trace
+/.KaAntennaGainLow.java._trace
+/.IncompatibleSourceAndTarget.java._trace
+/.IncompatibleSourceAndTargetBand.java._trace
+/.IncompatibleSourceAndTargetGain.java._trace
+/.CubeSatWithKaAntenna.java._trace
+/.ThreeUCubeSatWithNonUhfCrossLink.java._trace
+/.CommunicationLinkDoesNotStartAtContainingElement.java._trace

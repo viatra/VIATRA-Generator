@@ -18,7 +18,8 @@ class WF2ObjectiveConverter {
 
 	def createCompletenessObjective(
 		Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWF) {
-		createConstraintObjective(UNFINISHED_WFS_NAME, unfinishedWF)
+		// createConstraintObjective(UNFINISHED_WFS_NAME, unfinishedWF)
+		new UnfinishedWFObjective(unfinishedWF)
 	}
 
 	def createInvalidationObjective(

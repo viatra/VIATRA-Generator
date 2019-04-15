@@ -1,10 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: FAMTest
+Bundle-Name: %pluginName
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.application.FAMTest;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: hu.bme.mit.inf.dslreasoner.application.FAMTest
-Require-Bundle: org.eclipse.emf.ecore,
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: hu.bme.mit.inf.dslreasoner.application.FAMTest,
+ functionalarchitecture,
+ functionalarchitecture.impl,
+ functionalarchitecture.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.viatra.query.runtime,
  org.eclipse.viatra.query.runtime.rete,
  org.eclipse.viatra.query.runtime.localsearch,
@@ -13,6 +20,7 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  hu.bme.mit.inf.dslreasoner.application;bundle-version="1.0.0";visibility:=reexport
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.12.0"
