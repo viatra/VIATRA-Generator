@@ -1,7 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse
 
-import ca.mcgill.ecse.dslreasoner.vampire.queries
 import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage
+import ca.mcgill.ecse.dslreasoner.vampire.queries.FileSystemPatterns
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
@@ -24,7 +24,7 @@ class FileSystemTest {
 
 		// Workspace setup
 		val inputs = new FileSystemWorkspace('''initialModels/''', "")
-		val workspace = new FileSystemWorkspace('''output/FAMTest/''', "")
+		val workspace = new FileSystemWorkspace('''output/FileSystemTest/''', "")
 		workspace.initAndClear
 
 		// Logicproblem writing setup
@@ -34,9 +34,10 @@ class FileSystemTest {
 
 		println("Input and output workspaces are created")
 
+
 		val metamodel = GeneralTest.loadMetamodel(filesystemPackage.eINSTANCE)
 		val partialModel = GeneralTest.loadPartialModel(inputs, "fs/filesystemInstance.xmi")
-		//val queries = GeneralTest.loadQueries(metamodel, FileSystemPatterns.instance)
+		val queries = GeneralTest.loadQueries(metamodel, FileSystemPatterns.instance)
 
 		println("DSL loaded")
 
@@ -44,7 +45,7 @@ class FileSystemTest {
 		var problem = modelGenerationProblem.output
 //		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
-		workspace.writeModel(problem, "Fam.logicproblem")
+		workspace.writeModel(problem, "FileSystem.logicproblem")
 
 		println("Problem created")
 
@@ -75,8 +76,8 @@ class FileSystemTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 4
-			it.typeScopes.maxNewElements = 5
+			it.typeScopes.minNewElements = 40
+			it.typeScopes.maxNewElements = 59
 			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5

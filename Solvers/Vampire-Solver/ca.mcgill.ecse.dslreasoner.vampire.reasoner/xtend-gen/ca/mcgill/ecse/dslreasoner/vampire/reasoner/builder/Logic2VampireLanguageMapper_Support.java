@@ -403,20 +403,14 @@ public class Logic2VampireLanguageMapper_Support {
     return _xifexpression;
   }
   
-  protected List<Type> listSubtypes(final Type t) {
-    List<Type> allSubtypes = CollectionLiterals.<Type>newArrayList();
-    boolean _isEmpty = t.getSubtypes().isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      EList<Type> _subtypes = t.getSubtypes();
-      for (final Type subt : _subtypes) {
-        {
-          allSubtypes.add(subt);
-          allSubtypes = this.listSubtypes(subt);
-        }
+  protected void listSubtypes(final Type t, final List<Type> allSubtypes) {
+    EList<Type> _subtypes = t.getSubtypes();
+    for (final Type subt : _subtypes) {
+      {
+        allSubtypes.add(subt);
+        this.listSubtypes(subt, allSubtypes);
       }
     }
-    return allSubtypes;
   }
   
   protected HashMap<Variable, VLSVariable> withAddition(final Map<Variable, VLSVariable> map1, final Map<Variable, VLSVariable> map2) {

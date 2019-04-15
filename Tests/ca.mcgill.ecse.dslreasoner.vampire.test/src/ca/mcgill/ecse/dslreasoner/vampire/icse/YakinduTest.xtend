@@ -35,7 +35,7 @@ class YakinduTest {
 
 		val metamodel = GeneralTest.loadMetamodel(yakinduPackage.eINSTANCE)
 		val partialModel = GeneralTest.loadPartialModel(inputs, "yakindu/yakinduinstance.xmi")
-//		val queries = GeneralTest.loadQueries(metamodel, FamPa
+//		val queries = GeneralTest.loadQueries(metamodel, yakinduPatterns.instance)
 		val queries = null
 
 		println("DSL loaded")
@@ -75,8 +75,8 @@ class YakinduTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 20
-			it.typeScopes.maxNewElements = 30
+			it.typeScopes.minNewElements = 53
+			it.typeScopes.maxNewElements = 53
 			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5

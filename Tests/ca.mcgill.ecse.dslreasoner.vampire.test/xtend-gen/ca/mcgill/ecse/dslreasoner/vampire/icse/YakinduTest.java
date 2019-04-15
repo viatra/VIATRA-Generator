@@ -68,8 +68,8 @@ public class YakinduTest {
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
-        it.typeScopes.minNewElements = 20;
-        it.typeScopes.maxNewElements = 30;
+        it.typeScopes.minNewElements = 53;
+        it.typeScopes.maxNewElements = 53;
         int _size = typeMapMin.size();
         boolean _notEquals = (_size != 0);
         if (_notEquals) {

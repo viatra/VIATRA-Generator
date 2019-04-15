@@ -39,7 +39,15 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		for (l : relationsList) {
 			var pointingTo = (l.parameters.get(1) as ComplexTypeReference).referred as Type
 			containmentListCopy.remove(pointingTo)
-			for (c : pointingTo.subtypes) {
+			var List<Type> allSubtypes = newArrayList
+			support.listSubtypes(pointingTo, allSubtypes)
+			for (c : allSubtypes) {
+				containmentListCopy.remove(c)
+			}
+		}
+		
+		for (c : containmentListCopy) {
+			if(c.isIsAbstract) {
 				containmentListCopy.remove(c)
 			}
 		}
@@ -135,7 +143,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 // STEP 2 CONT'D
 		for (e : type2cont.entrySet) {
 			val relFormula = createVLSFofFormula => [
-				it.name = support.toIDMultiple("containment", e.key.constant.toString)
+				it.name = support.toIDMultiple("containment_contained", e.key.constant.toString)
 				it.fofRole = "axiom"
 
 				it.fofFormula = createVLSUniversalQuantifier => [

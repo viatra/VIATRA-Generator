@@ -273,15 +273,11 @@ class Logic2VampireLanguageMapper_Support {
 		}
 	}
 
-	def protected List<Type> listSubtypes(Type t) {
-		var List<Type> allSubtypes = newArrayList
-		if (!t.subtypes.isEmpty) {
-			for (subt : t.subtypes) {
-				allSubtypes.add(subt)
-				allSubtypes = listSubtypes(subt)
-			}
+	def protected void listSubtypes(Type t, List<Type> allSubtypes) {
+		for (subt : t.subtypes) {
+			allSubtypes.add(subt)
+			listSubtypes(subt, allSubtypes)
 		}
-		return allSubtypes
 	}
 
 	def protected withAddition(Map<Variable, VLSVariable> map1, Map<Variable, VLSVariable> map2) {

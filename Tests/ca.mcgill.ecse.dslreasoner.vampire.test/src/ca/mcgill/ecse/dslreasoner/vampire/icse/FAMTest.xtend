@@ -1,6 +1,5 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse
 
-import ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import functionalarchitecture.Function
@@ -39,14 +38,15 @@ class FAMTest {
 
 		// Load DSL
 		val metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE)
-		val partialModel = GeneralTest.loadPartialModel(inputs, "FaModel.xmi")
-		val queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance)
+		val partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi")
+//		val queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance)
+		val queries = null
 
 		println("DSL loaded")
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
-//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
+		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 		workspace.writeModel(problem, "Fam.logicproblem")
 

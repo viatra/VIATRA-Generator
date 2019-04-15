@@ -2,6 +2,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage;
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
+import ca.mcgill.ecse.dslreasoner.vampire.queries.FileSystemPatterns;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
@@ -15,6 +16,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
+import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.HashMap;
@@ -40,7 +42,7 @@ public class FileSystemTest {
       _builder.append("initialModels/");
       final FileSystemWorkspace inputs = new FileSystemWorkspace(_builder.toString(), "");
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("output/FAMTest/");
+      _builder_1.append("output/FileSystemTest/");
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_builder_1.toString(), "");
       workspace.initAndClear();
       final Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
@@ -50,11 +52,12 @@ public class FileSystemTest {
       InputOutput.<String>println("Input and output workspaces are created");
       final EcoreMetamodelDescriptor metamodel = GeneralTest.loadMetamodel(filesystemPackage.eINSTANCE);
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "fs/filesystemInstance.xmi");
+      final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, FileSystemPatterns.instance());
       InputOutput.<String>println("DSL loaded");
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
-      workspace.writeModel(problem, "Fam.logicproblem");
+      workspace.writeModel(problem, "FileSystem.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
       LogicReasoner reasoner = null;
@@ -67,8 +70,8 @@ public class FileSystemTest {
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
-        it.typeScopes.minNewElements = 4;
-        it.typeScopes.maxNewElements = 5;
+        it.typeScopes.minNewElements = 40;
+        it.typeScopes.maxNewElements = 59;
         int _size = typeMapMin.size();
         boolean _notEquals = (_size != 0);
         if (_notEquals) {

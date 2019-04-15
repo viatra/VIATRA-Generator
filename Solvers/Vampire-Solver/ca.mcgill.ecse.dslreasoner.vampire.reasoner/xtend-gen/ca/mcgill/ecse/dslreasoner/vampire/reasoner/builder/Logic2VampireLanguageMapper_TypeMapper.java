@@ -78,16 +78,19 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           EList<DefinedElement> _elements = type_1.getElements();
           for (final DefinedElement e : _elements) {
             {
+              final String[] nameArray = e.getName().split(" ");
+              String relNameVar = "";
+              int _length = nameArray.length;
+              boolean _equals = (_length == 3);
+              if (_equals) {
+                relNameVar = this.support.toIDMultiple(nameArray[0], nameArray[2]);
+              } else {
+                relNameVar = e.getName();
+              }
+              final String relName = relNameVar;
               VLSFunction _createVLSFunction = this.factory.createVLSFunction();
               final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-                final String[] splitName = e.getName().split(" ");
-                int _length = splitName.length;
-                boolean _greaterThan = (_length > 2);
-                if (_greaterThan) {
-                  it.setConstant(this.support.toIDMultiple("e", splitName[0], splitName[2]));
-                } else {
-                  it.setConstant(this.support.toIDMultiple("e", splitName[0]));
-                }
+                it.setConstant(this.support.toIDMultiple("e", relName));
                 EList<VLSTerm> _terms = it.getTerms();
                 VLSVariable _duplicate = this.support.duplicate(variable);
                 _terms.add(_duplicate);
@@ -123,7 +126,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           }
           VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
           final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
-            it.setName(this.support.toIDMultiple("typeDef", type_1.getName().split(" ")[0]));
+            it.setName(this.support.toIDMultiple("typeDef", CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate).getConstant().toString()));
             it.setFofRole("axiom");
             VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
             final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
@@ -160,10 +163,10 @@ public class Logic2VampireLanguageMapper_TypeMapper {
               final VLSFunctionAsTerm cstTerm = ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function_2);
               final VLSConstant cst = this.support.toConstant(cstTerm);
               trace.uniqueInstances.add(cst);
-              final int index = i;
+              final int index = (i - globalCounter);
               VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
               final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
-                it.setName(this.support.toIDMultiple("enumScope", type_1.getName().split(" ")[0], 
+                it.setName(this.support.toIDMultiple("enumScope", CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate).getConstant().toString(), 
                   type_1.getElements().get(index).getName().split(" ")[0]));
                 it.setFofRole("axiom");
                 VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();

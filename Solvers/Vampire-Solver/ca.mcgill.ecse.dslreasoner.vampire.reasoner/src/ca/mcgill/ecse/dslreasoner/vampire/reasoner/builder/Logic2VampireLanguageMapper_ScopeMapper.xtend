@@ -29,6 +29,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 //		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES)+1(for root) > MAX OBJECTS
 //		TODO HANDLE 
 		// 1. make a list of constants equaling the min number of specified objects
+		//These numbers do not include enums or initial model elements
 		val GLOBAL_MIN = config.typeScopes.minNewElements
 		val GLOBAL_MAX = config.typeScopes.maxNewElements
 

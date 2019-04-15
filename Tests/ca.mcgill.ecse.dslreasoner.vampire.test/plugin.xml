@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
-  <extension id="ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns" id="ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns">
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.terminatorAndInformation"/>
+  <extension id="ca.mcgill.ecse.dslreasoner.vampire.queries.EcorePatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.dslreasoner.vampire.queries.EcorePatterns" id="ca.mcgill.ecse.dslreasoner.vampire.queries.EcorePatterns">
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.directSupertype"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.loopInInheritence"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.opposite"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.nonSymmetricOpposite"/>
     </group>
   </extension>
   <extension id="ca.mcgill.ecse.dslreasoner.vampire.queries.FileSystemPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
@@ -11,7 +14,18 @@
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.queries.contentInNotLive"/>
     </group>
   </extension>
+  <extension id="ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.EcorePatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.EcorePatterns" id="ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.EcorePatterns">
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.directSupertype"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.loopInInheritence"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.opposite"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore.nonSymmetricOpposite"/>
+    </group>
+  </extension>
   <extension id="extension.derived.ca.mcgill.ecse.dslreasoner.vampire.queries.live" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="FileSystem" feature-name="live" package-nsUri="FileSystemMetamodel"/>
+  </extension>
+  <extension id="extension.derived.ca.mcgill.ecse.dslreasoner.vampire.test.queries.filesystem.live" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
     <wellbehaving-derived-feature classifier-name="FileSystem" feature-name="live" package-nsUri="FileSystemMetamodel"/>
   </extension>
 </plugin>

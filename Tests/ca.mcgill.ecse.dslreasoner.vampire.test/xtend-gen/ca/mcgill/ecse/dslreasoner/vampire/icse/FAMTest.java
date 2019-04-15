@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
-import ca.mcgill.ecse.dslreasoner.vampire.queries.FamPatterns;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import functionalarchitecture.Function;
@@ -18,7 +17,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.HashMap;
@@ -53,12 +51,13 @@ public class FAMTest {
       map.put("logicproblem", _xMIResourceFactoryImpl);
       InputOutput.<String>println("Input and output workspaces are created");
       final EcoreMetamodelDescriptor metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE);
-      final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FaModel.xmi");
-      final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance());
+      final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi");
+      final Object queries = null;
       InputOutput.<String>println("DSL loaded");
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
+      problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
       workspace.writeModel(problem, "Fam.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
