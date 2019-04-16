@@ -179,7 +179,7 @@ class RelationDefinitionIndexer {
 	}
 	
 	private def CharSequence transformEquality(Modality modality, PVariable a, PVariable b) {
-		if(modality.isMustOrCurrent) '''«a.canonizeName» == «b.canonizeName»;'''
+		if(modality.isMustOrCurrent) '''find mustEquivalent(problem, interpretation, «a.canonizeName», «b.canonizeName»);'''
 		else '''find mayEquivalent(problem, interpretation, «a.canonizeName», «b.canonizeName»);'''
 	}	
 	
@@ -187,11 +187,11 @@ class RelationDefinitionIndexer {
 		val a = inequality.who
 		val b = inequality.withWhom
 		if(modality.isCurrent) {
-			return '''«a.canonizeName» != «b.canonizeName»;'''
+			return '''neg find mustEquivalent(problem, interpretation, «a.canonizeName», «b.canonizeName»);'''
 		} else if(modality.isMust) {
 			return '''neg find mayEquivalent(problem, interpretation, «a.canonizeName», «b.canonizeName»);'''
-		} else {
-			return '''«a.canonizeName» != «b.canonizeName»;'''
+		} else { // modality.isMay
+			return '''neg find mustEquivalent(problem, interpretation, «a.canonizeName», «b.canonizeName»);'''
 		}
 	}
 	
