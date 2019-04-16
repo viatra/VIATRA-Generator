@@ -203,6 +203,11 @@ class PatternGenerator {
 				find mayExist(problem,interpretation,b);
 				a == b;
 			}
+			pattern mustEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
+				find mustExist(problem,interpretation,a);
+				find mustExist(problem,interpretation,b);
+				a == b;
+			}
 			
 			////////////////////////
 			// 0.3 Required Patterns by TypeIndexer
