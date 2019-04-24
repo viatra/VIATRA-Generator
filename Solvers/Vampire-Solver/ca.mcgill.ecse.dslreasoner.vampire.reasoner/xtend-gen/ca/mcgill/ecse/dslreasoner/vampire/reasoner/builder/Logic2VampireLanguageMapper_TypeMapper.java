@@ -62,7 +62,13 @@ public class Logic2VampireLanguageMapper_TypeMapper {
         {
           VLSFunction _createVLSFunction = this.factory.createVLSFunction();
           final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
-            it.setConstant(this.support.toIDMultiple("t", type.getName().split(" ")[0]));
+            int _length = type.getName().split(" ").length;
+            boolean _equals = (_length == 3);
+            if (_equals) {
+              it.setConstant(this.support.toIDMultiple("t", type.getName().split(" ")[0], type.getName().split(" ")[2]));
+            } else {
+              it.setConstant(this.support.toIDMultiple("t", type.getName().split(" ")[0]));
+            }
             EList<VLSTerm> _terms = it.getTerms();
             VLSVariable _duplicate = this.support.duplicate(variable);
             _terms.add(_duplicate);
@@ -74,6 +80,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
       Iterable<TypeDefinition> _filter = Iterables.<TypeDefinition>filter(types, TypeDefinition.class);
       for (final TypeDefinition type_1 : _filter) {
         {
+          final boolean isNotEnum = ((((Object[])Conversions.unwrapArray(type_1.getSupertypes(), Object.class)).length == 1) && type_1.getSupertypes().get(0).isIsAbstract());
           final List<VLSFunction> orElems = CollectionLiterals.<VLSFunction>newArrayList();
           EList<DefinedElement> _elements = type_1.getElements();
           for (final DefinedElement e : _elements) {
@@ -156,17 +163,26 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           for (int i = globalCounter; (i < (globalCounter + ((Object[])Conversions.unwrapArray(type_1.getElements(), Object.class)).length)); i++) {
             {
               final int num = (i + 1);
+              final int index = (i - globalCounter);
               VLSFunctionAsTerm _createVLSFunctionAsTerm = this.factory.createVLSFunctionAsTerm();
               final Procedure1<VLSFunctionAsTerm> _function_2 = (VLSFunctionAsTerm it) -> {
                 it.setFunctor(("eo" + Integer.valueOf(num)));
               };
               final VLSFunctionAsTerm cstTerm = ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function_2);
+              if (isNotEnum) {
+                trace.definedElement2String.put(type_1.getElements().get(index), cstTerm.getFunctor());
+              }
               final VLSConstant cst = this.support.toConstant(cstTerm);
               trace.uniqueInstances.add(cst);
-              final int index = (i - globalCounter);
               VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
               final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
-                it.setName(this.support.toIDMultiple("enumScope", CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate).getConstant().toString(), 
+                String _xifexpression = null;
+                if (isNotEnum) {
+                  _xifexpression = "definedType";
+                } else {
+                  _xifexpression = "enumScope";
+                }
+                it.setName(this.support.toIDMultiple(_xifexpression, CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate).getConstant().toString(), 
                   type_1.getElements().get(index).getName().split(" ")[0]));
                 it.setFofRole("axiom");
                 VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();

@@ -19,9 +19,11 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
@@ -34,6 +36,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -58,6 +61,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     final ContainmentHierarchy hierarchy = hierarchies.get(0);
     final EList<Type> containmentListCopy = hierarchy.getTypesOrderedInHierarchy();
     final EList<Relation> relationsList = hierarchy.getContainmentRelations();
+    final ArrayList<Object> toRemove = CollectionLiterals.<Object>newArrayList();
     for (final Relation l : relationsList) {
       {
         TypeReference _get = l.getParameters().get(1);
@@ -71,14 +75,40 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         }
       }
     }
-    for (final Type c : containmentListCopy) {
-      boolean _isIsAbstract = c.isIsAbstract();
-      if (_isIsAbstract) {
-        containmentListCopy.remove(c);
+    Type topTermVar = containmentListCopy.get(0);
+    for (final Relation l_1 : relationsList) {
+      {
+        TypeReference _get = l_1.getParameters().get(0);
+        Type _referred = ((ComplexTypeReference) _get).getReferred();
+        Type pointingFrom = ((Type) _referred);
+        boolean _contains = containmentListCopy.contains(pointingFrom);
+        if (_contains) {
+          topTermVar = pointingFrom;
+        }
       }
     }
-    final String topName = CollectionsUtil.<Type, VLSFunction>lookup(containmentListCopy.get(0), trace.type2Predicate).getConstant().toString();
-    final VLSFunction topTerm = this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(containmentListCopy.get(0), trace.type2Predicate));
+    final String topName = CollectionsUtil.<Type, VLSFunction>lookup(topTermVar, trace.type2Predicate).getConstant().toString();
+    final VLSFunction topTerm = this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(topTermVar, trace.type2Predicate));
+    boolean topLvlIsInInitModel = false;
+    String topLvlString = "";
+    EList<Type> _subtypes = topTermVar.getSubtypes();
+    for (final Type c : _subtypes) {
+      boolean _equals = c.getClass().getSimpleName().equals("TypeDefinitionImpl");
+      if (_equals) {
+        EList<DefinedElement> _elements = ((TypeDefinition) c).getElements();
+        for (final DefinedElement d : _elements) {
+          boolean _containsKey = trace.definedElement2String.containsKey(d);
+          if (_containsKey) {
+            topLvlIsInInitModel = true;
+            topLvlString = CollectionsUtil.<DefinedElement, String>lookup(d, trace.definedElement2String);
+          }
+        }
+      }
+    }
+    final boolean topInIM = topLvlIsInInitModel;
+    final String topStr = topLvlString;
+    InputOutput.<Boolean>print(Boolean.valueOf(topInIM));
+    InputOutput.<String>print(topStr);
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
       it.setName(this.support.toIDMultiple("containment_topLevel", topName));
@@ -96,7 +126,13 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
             it_3.setLeft(this.support.duplicate(this.variable));
             VLSConstant _createVLSConstant = this.factory.createVLSConstant();
             final Procedure1<VLSConstant> _function_4 = (VLSConstant it_4) -> {
-              it_4.setName("o1");
+              String _xifexpression = null;
+              if (topInIM) {
+                _xifexpression = topStr;
+              } else {
+                _xifexpression = "o1";
+              }
+              it_4.setName(_xifexpression);
             };
             VLSConstant _doubleArrow = ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function_4);
             it_3.setRight(_doubleArrow);
@@ -130,16 +166,16 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     final VLSVariable varC = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable_2, _function_3);
     final ArrayList<VLSVariable> varList = CollectionLiterals.<VLSVariable>newArrayList(varB, varA);
     final Map<VLSFunction, List<VLSFunction>> type2cont = new HashMap<VLSFunction, List<VLSFunction>>();
-    for (final Relation l_1 : relationsList) {
+    for (final Relation l_2 : relationsList) {
       {
-        final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_1), trace.rel2Predicate), varList);
-        TypeReference _get = l_1.getParameters().get(1);
+        final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_2), trace.rel2Predicate), varList);
+        TypeReference _get = l_2.getParameters().get(1);
         Type _referred = ((ComplexTypeReference) _get).getReferred();
         final Type toType = ((Type) _referred);
         final VLSFunction toFunc = CollectionsUtil.<Type, VLSFunction>lookup(toType, trace.type2Predicate);
         this.addToMap(type2cont, toFunc, rel);
-        EList<Type> _subtypes = toType.getSubtypes();
-        for (final Type c_1 : _subtypes) {
+        EList<Type> _subtypes_1 = toType.getSubtypes();
+        for (final Type c_1 : _subtypes_1) {
           this.addToMap(type2cont, toFunc, rel);
         }
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
@@ -244,9 +280,9 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         variables.add(_doubleArrow);
         for (int j = 0; (j < i); j++) {
           {
-            for (final Relation l_2 : relationsList) {
+            for (final Relation l_3 : relationsList) {
               {
-                final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_2), trace.rel2Predicate), CollectionLiterals.<VLSVariable>newArrayList(variables.get(j), variables.get(((j + 1) % i))));
+                final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_3), trace.rel2Predicate), CollectionLiterals.<VLSVariable>newArrayList(variables.get(j), variables.get(((j + 1) % i))));
                 disjunctionList.add(rel);
               }
             }

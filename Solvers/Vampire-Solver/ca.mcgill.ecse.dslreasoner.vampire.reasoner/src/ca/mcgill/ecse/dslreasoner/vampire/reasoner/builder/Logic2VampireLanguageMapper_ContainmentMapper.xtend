@@ -14,10 +14,11 @@ import java.util.List
 import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 
 class Logic2VampireLanguageMapper_ContainmentMapper {
-	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
-	private val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support
+	val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
+	val Logic2VampireLanguageMapper_Support support = new Logic2VampireLanguageMapper_Support
 	val Logic2VampireLanguageMapper base
 	private val VLSVariable variable = createVLSVariable => [it.name = "A"]
 
@@ -34,6 +35,8 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 		val containmentListCopy = hierarchy.typesOrderedInHierarchy
 		val relationsList = hierarchy.containmentRelations
+		val toRemove = newArrayList
+		
 		// STEP 1
 		// Find root element
 		for (l : relationsList) {
@@ -46,16 +49,51 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 			}
 		}
 		
-		for (c : containmentListCopy) {
-			if(c.isIsAbstract) {
-				containmentListCopy.remove(c)
+//		OLD
+//		for (c : containmentListCopy) {
+//			if(c.isIsAbstract) {
+//				toRemove.add(c)
+//			}
+//		}
+		// State that there must exist 1 and only 1 root element
+//		val topName = containmentListCopy.get(0).lookup(trace.type2Predicate).constant.toString
+//		val topTerm = support.duplicate(containmentListCopy.get(0).lookup(trace.type2Predicate))
+
+		var topTermVar = containmentListCopy.get(0)
+		for (l : relationsList) {
+			var pointingFrom = (l.parameters.get(0) as ComplexTypeReference).referred as Type
+			if(containmentListCopy.contains(pointingFrom)) {
+				//The correct topTerm will be identified
+				topTermVar = pointingFrom
 			}
 		}
-
-		// State that there must exist 1 and only 1 root element
-		val topName = containmentListCopy.get(0).lookup(trace.type2Predicate).constant.toString
-		val topTerm = support.duplicate(containmentListCopy.get(0).lookup(trace.type2Predicate))
-
+		
+		val topName = topTermVar.lookup(trace.type2Predicate).constant.toString
+		val topTerm = support.duplicate(topTermVar.lookup(trace.type2Predicate))
+		
+		
+		
+		var topLvlIsInInitModel = false
+		var topLvlString = ""
+		for ( c : topTermVar.subtypes) {
+			if (c.class.simpleName.equals("TypeDefinitionImpl") ) {
+				
+				for (d : (c as TypeDefinition).elements) {
+				if (trace.definedElement2String.containsKey(d)) {
+					topLvlIsInInitModel = true
+					topLvlString = d.lookup(trace.definedElement2String)
+				}
+			}
+			
+			}
+			
+			
+		}
+		val topInIM = topLvlIsInInitModel
+		val topStr = topLvlString
+		print(topInIM)
+		print(topStr)
+		
 		val contTop = createVLSFofFormula => [
 			it.name = support.toIDMultiple("containment_topLevel", topName)
 			it.fofRole = "axiom"
@@ -67,7 +105,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 					it.right = createVLSEquality => [
 						it.left = support.duplicate(variable)
 						it.right = createVLSConstant => [
-							it.name = "o1"
+							it.name = if (topInIM) topStr else "o1"
 						]
 					]
 				]
