@@ -33,14 +33,24 @@ class Logic2VampireLanguageMapper_TypeMapper {
 		// 1. Each type (class) is a predicate with a single variable as input
 		for (type : types) {
 			val typePred = createVLSFunction => [
-				it.constant = support.toIDMultiple("t", type.name.split(" ").get(0))
+				if(type.name.split(" ").length == 3) {
+					it.constant = support.toIDMultiple("t", type.name.split(" ").get(0), type.name.split(" ").get(2))
+				}
+				else {
+					it.constant = support.toIDMultiple("t", type.name.split(" ").get(0))
+				}
 				it.terms += support.duplicate(variable)
 			]
 			trace.type2Predicate.put(type, typePred)
 		}
 
 		// 2. Map each ENUM type definition to fof formula
+		//    This also Handles initial Model stuff
 		for (type : types.filter(TypeDefinition)) {
+			
+			//Detect if is an Enum
+			//Otherwise, it is a defined element (from initial model)
+			val isNotEnum = type.supertypes.length == 1 && type.supertypes.get(0).isIsAbstract
 
 			// Create a VLSFunction for each Enum Element
 			val List<VLSFunction> orElems = newArrayList
@@ -104,15 +114,20 @@ class Logic2VampireLanguageMapper_TypeMapper {
 			for (var i = globalCounter; i < globalCounter + type.elements.length; i++) {
 				// Create objects for the enum elements
 				val num = i + 1
+				val index = i-globalCounter
+				
 				val cstTerm = createVLSFunctionAsTerm => [
 					it.functor = "eo" + num
 				]
+				if (isNotEnum) {
+					trace.definedElement2String.put(type.elements.get(index),cstTerm.functor)
+				}
+				
 				val cst = support.toConstant(cstTerm)
 				trace.uniqueInstances.add(cst)
-
-				val index = i-globalCounter
+				
 				val enumScope = createVLSFofFormula => [
-					it.name = support.toIDMultiple("enumScope", type.lookup(trace.type2Predicate).constant.toString,
+					it.name = support.toIDMultiple(if(isNotEnum) "definedType" else "enumScope", type.lookup(trace.type2Predicate).constant.toString,
 						type.elements.get(index).name.split(" ").get(0))
 					it.fofRole = "axiom"
 					it.fofFormula = createVLSUniversalQuantifier => [

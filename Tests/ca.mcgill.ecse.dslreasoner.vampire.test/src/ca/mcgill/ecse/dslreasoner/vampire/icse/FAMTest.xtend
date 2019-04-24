@@ -81,8 +81,8 @@ class FAMTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 4
-			it.typeScopes.maxNewElements = 5
+			it.typeScopes.minNewElements = 24
+			it.typeScopes.maxNewElements = 25
 			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5
