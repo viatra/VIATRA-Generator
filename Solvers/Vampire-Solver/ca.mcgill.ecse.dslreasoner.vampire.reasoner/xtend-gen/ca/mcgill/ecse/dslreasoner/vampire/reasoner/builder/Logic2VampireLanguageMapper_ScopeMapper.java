@@ -47,11 +47,12 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     this.base = base;
   }
   
-  public void _transformScope(final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
+  public void _transformScope(final List<Type> types, final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
     final int ABSOLUTE_MIN = 0;
     final int ABSOLUTE_MAX = Integer.MAX_VALUE;
-    final int GLOBAL_MIN = config.typeScopes.minNewElements;
-    final int GLOBAL_MAX = config.typeScopes.maxNewElements;
+    int elemsInIM = trace.definedElement2String.size();
+    final int GLOBAL_MIN = (config.typeScopes.minNewElements - elemsInIM);
+    final int GLOBAL_MAX = (config.typeScopes.maxNewElements - elemsInIM);
     final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();
     final boolean consistant = (GLOBAL_MAX > GLOBAL_MIN);
     if ((GLOBAL_MIN != ABSOLUTE_MIN)) {
@@ -74,34 +75,37 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       }
     }
     int i_1 = 1;
+    if ((((Boolean) trace.topLvlElementIsInInitialModel)).booleanValue()) {
+      i_1 = 0;
+    }
     int minNum = (-1);
     Map<Type, Integer> startPoints = new HashMap<Type, Integer>();
     Set<Type> _keySet = config.typeScopes.minNewElementsByType.keySet();
-    for (final Type t : _keySet) {
+    for (final Type tConfig : _keySet) {
       {
-        minNum = (CollectionsUtil.<Type, Integer>lookup(t, config.typeScopes.minNewElementsByType)).intValue();
+        minNum = (CollectionsUtil.<Type, Integer>lookup(tConfig, config.typeScopes.minNewElementsByType)).intValue();
         if ((minNum != 0)) {
           this.getInstanceConstants((i_1 + minNum), i_1, localInstances, trace, true, false);
-          startPoints.put(t, Integer.valueOf(i_1));
+          startPoints.put(tConfig, Integer.valueOf(i_1));
           int _i = i_1;
           i_1 = (_i + minNum);
-          this.makeFofFormula(localInstances, trace, true, t);
+          this.makeFofFormula(localInstances, trace, true, tConfig);
         }
       }
     }
     Set<Type> _keySet_1 = config.typeScopes.maxNewElementsByType.keySet();
-    for (final Type t_1 : _keySet_1) {
+    for (final Type tConfig_1 : _keySet_1) {
       {
-        Integer maxNum = CollectionsUtil.<Type, Integer>lookup(t_1, config.typeScopes.maxNewElementsByType);
-        minNum = (CollectionsUtil.<Type, Integer>lookup(t_1, config.typeScopes.minNewElementsByType)).intValue();
-        Integer startpoint = CollectionsUtil.<Type, Integer>lookup(t_1, startPoints);
+        Integer maxNum = CollectionsUtil.<Type, Integer>lookup(tConfig_1, config.typeScopes.maxNewElementsByType);
+        minNum = (CollectionsUtil.<Type, Integer>lookup(tConfig_1, config.typeScopes.minNewElementsByType)).intValue();
+        Integer startpoint = CollectionsUtil.<Type, Integer>lookup(tConfig_1, startPoints);
         if ((minNum != 0)) {
           this.getInstanceConstants(((startpoint).intValue() + minNum), (startpoint).intValue(), localInstances, trace, true, false);
         }
         if (((maxNum).intValue() != minNum)) {
           int instEndInd = Math.min(GLOBAL_MAX, ((i_1 + (maxNum).intValue()) - minNum));
           this.getInstanceConstants(instEndInd, i_1, localInstances, trace, false, false);
-          this.makeFofFormula(localInstances, trace, false, t_1);
+          this.makeFofFormula(localInstances, trace, false, tConfig_1);
         }
       }
     }
@@ -246,8 +250,8 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     _formulas.add(cstDec);
   }
   
-  public void transformScope(final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
-    _transformScope(config, trace);
+  public void transformScope(final List<Type> types, final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
+    _transformScope(types, config, trace);
     return;
   }
 }

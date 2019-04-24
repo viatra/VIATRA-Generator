@@ -14,6 +14,7 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region
 
 class YakinduTest {
 	def static void main(String[] args) {
@@ -42,7 +43,7 @@ class YakinduTest {
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
-//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
+		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 		workspace.writeModel(problem, "Yakindu.logicproblem")
 
@@ -58,14 +59,14 @@ class YakinduTest {
 		// /////////////////////////////////////////////////////
 		// Minimum Scope
 		val classMapMin = new HashMap<Class, Integer>
-//		classMapMin.put(Function, 1)
+		classMapMin.put(Region, 1)
 //		classMapMin.put(FunctionalInterface, 2)
 //		classMapMin.put(FunctionalOutput, 3)
 		val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
 
 		// Maximum Scope
 		val classMapMax = new HashMap<Class, Integer>
-//		classMapMax.put(Function, 5)
+		classMapMax.put(Region, 5)
 //		classMapMax.put(FunctionalInterface, 2)
 //		classMapMax.put(FunctionalOutput, 4)
 		val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
@@ -75,8 +76,8 @@ class YakinduTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 53
-			it.typeScopes.maxNewElements = 53
+			it.typeScopes.minNewElements = 20
+			it.typeScopes.maxNewElements = 30
 			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5

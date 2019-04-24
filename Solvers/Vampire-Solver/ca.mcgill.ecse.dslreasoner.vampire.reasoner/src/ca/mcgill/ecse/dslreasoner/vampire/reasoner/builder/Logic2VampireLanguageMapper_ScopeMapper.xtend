@@ -5,8 +5,10 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import java.util.ArrayList
 import java.util.HashMap
+import java.util.List
 import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
@@ -21,7 +23,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		this.base = base
 	}
 
-	def dispatch public void transformScope(VampireSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
+	def dispatch public void transformScope(List<Type> types, VampireSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
 		val ABSOLUTE_MIN = 0
 		val ABSOLUTE_MAX = Integer.MAX_VALUE
 
@@ -31,8 +33,22 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		// 1. make a list of constants equaling the min number of specified objects
 		//These numbers do not include enums or initial model elements
 		
-		val GLOBAL_MIN = config.typeScopes.minNewElements
-		val GLOBAL_MAX = config.typeScopes.maxNewElements
+		//Number of defined non-abstract elements that are not enum elements
+		//Equals the number of elements in te initial model
+		var elemsInIM = trace.definedElement2String.size
+//		var elemsInIM = 0
+//		
+//		for(t : types.filter(TypeDefinition).filter[!isIsAbstract]) {
+//			val len = t.name.length
+//			val isNotEnum = !t.name.substring(len-4, len).equals("enum")
+//			if (isNotEnum) {
+//				elemsInIM += 1
+//			}
+//		}
+		
+		//TODO handle errors related to GLOBAL_MIN/MAX < 0
+		val GLOBAL_MIN = config.typeScopes.minNewElements-elemsInIM
+		val GLOBAL_MAX = config.typeScopes.maxNewElements-elemsInIM
 
 		val localInstances = newArrayList
 
@@ -63,31 +79,61 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Minimum_Specific
 		var i = 1
+		if (trace.topLvlElementIsInInitialModel as Boolean){
+			i = 0
+		}
 		var minNum = -1
 		var Map<Type, Integer> startPoints = new HashMap
-		for (t : config.typeScopes.minNewElementsByType.keySet) {
-			minNum = t.lookup(config.typeScopes.minNewElementsByType)
+//		var inIM = false
+		for (tConfig : config.typeScopes.minNewElementsByType.keySet) {
+//			var numIniIntModel = 0
+//			for (elem : trace.definedElement2String.keySet) {
+//				println(elem.definedInType)
+//				for (tDefined : elem.definedInType) {
+//					inIM = support.dfsSubtypeCheck(tConfig, tDefined) || tConfig.equals(tDefined)
+//				}
+//				if (inIM) {
+//					numIniIntModel += 1
+//				}
+//				inIM = false
+//			}		
+			
+			minNum = tConfig.lookup(config.typeScopes.minNewElementsByType)//-numIniIntModel
 			if (minNum != 0) {
 				getInstanceConstants(i + minNum, i, localInstances, trace, true, false)
-				startPoints.put(t, i)
+				startPoints.put(tConfig, i)
 				i += minNum
-				makeFofFormula(localInstances, trace, true, t)
+				makeFofFormula(localInstances, trace, true, tConfig)
 			}
 		}
 
 		// TODO: calc sum of mins, compare to current value of i
 		// Handling Maximum_Specific
-		for (t : config.typeScopes.maxNewElementsByType.keySet) {
-			var maxNum = t.lookup(config.typeScopes.maxNewElementsByType)
-			minNum = t.lookup(config.typeScopes.minNewElementsByType)
-			var startpoint = t.lookup(startPoints)
+		for (tConfig : config.typeScopes.maxNewElementsByType.keySet) {
+			
+//			var numIniIntModel = 0
+//			for (elem : trace.definedElement2String.keySet) {
+//				println(elem.definedInType)
+//				for (tDefined : elem.definedInType) {
+//					inIM = support.dfsSubtypeCheck(tConfig, tDefined) || tConfig.equals(tDefined)
+//				}
+//				if (inIM) {
+//					numIniIntModel += 1
+//				}
+//				inIM = false
+//			}	
+			
+			var maxNum = tConfig.lookup(config.typeScopes.maxNewElementsByType)//-numIniIntModel
+			minNum = tConfig.lookup(config.typeScopes.minNewElementsByType)//-numIniIntModel
+			var startpoint = tConfig.lookup(startPoints)
 			if (minNum != 0) {
 				getInstanceConstants(startpoint + minNum, startpoint, localInstances, trace, true, false)
 			}
+			//I do not understand the line below
 			if (maxNum != minNum) {
 				var instEndInd = Math.min(GLOBAL_MAX, i + maxNum - minNum)
 				getInstanceConstants(instEndInd, i, localInstances, trace, false, false)
-				makeFofFormula(localInstances, trace, false, t)
+				makeFofFormula(localInstances, trace, false, tConfig)
 			}
 		}
 

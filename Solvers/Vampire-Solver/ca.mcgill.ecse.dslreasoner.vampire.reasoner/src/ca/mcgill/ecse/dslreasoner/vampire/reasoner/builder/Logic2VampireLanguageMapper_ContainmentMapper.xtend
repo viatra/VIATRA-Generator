@@ -15,6 +15,7 @@ import java.util.Map
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDefinitionImpl
 
 class Logic2VampireLanguageMapper_ContainmentMapper {
 	val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -36,7 +37,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		val containmentListCopy = hierarchy.typesOrderedInHierarchy
 		val relationsList = hierarchy.containmentRelations
 		val toRemove = newArrayList
-		
+
 		// STEP 1
 		// Find root element
 		for (l : relationsList) {
@@ -48,7 +49,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 				containmentListCopy.remove(c)
 			}
 		}
-		
+
 //		OLD
 //		for (c : containmentListCopy) {
 //			if(c.isIsAbstract) {
@@ -58,42 +59,43 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		// State that there must exist 1 and only 1 root element
 //		val topName = containmentListCopy.get(0).lookup(trace.type2Predicate).constant.toString
 //		val topTerm = support.duplicate(containmentListCopy.get(0).lookup(trace.type2Predicate))
-
 		var topTermVar = containmentListCopy.get(0)
 		for (l : relationsList) {
 			var pointingFrom = (l.parameters.get(0) as ComplexTypeReference).referred as Type
-			if(containmentListCopy.contains(pointingFrom)) {
-				//The correct topTerm will be identified
+			if (containmentListCopy.contains(pointingFrom)) {
+				// The correct topTerm will be identified
 				topTermVar = pointingFrom
 			}
 		}
-		
+
 		val topName = topTermVar.lookup(trace.type2Predicate).constant.toString
 		val topTerm = support.duplicate(topTermVar.lookup(trace.type2Predicate))
-		
-		
-		
+
 		var topLvlIsInInitModel = false
 		var topLvlString = ""
-		for ( c : topTermVar.subtypes) {
-			if (c.class.simpleName.equals("TypeDefinitionImpl") ) {
+		var listToCheck = newArrayList(topTermVar)
+		listToCheck.addAll(topTermVar.subtypes)
+		for (c : listToCheck) {
+			if (c.class == typeof(TypeDefinitionImpl)) {
+				
+				if((c as TypeDefinition).elements.length >1) {
+					throw new IllegalArgumentException("You cannot have multiple top-level elements in your initial model")
+				}
 				
 				for (d : (c as TypeDefinition).elements) {
-				if (trace.definedElement2String.containsKey(d)) {
-					topLvlIsInInitModel = true
-					topLvlString = d.lookup(trace.definedElement2String)
+					if (trace.definedElement2String.containsKey(d)) {
+						topLvlIsInInitModel = true
+						topLvlString = d.lookup(trace.definedElement2String)
+					}
 				}
 			}
-			
-			}
-			
-			
+
 		}
+
+		trace.topLvlElementIsInInitialModel = topLvlIsInInitModel
 		val topInIM = topLvlIsInInitModel
 		val topStr = topLvlString
-		print(topInIM)
-		print(topStr)
-		
+
 		val contTop = createVLSFofFormula => [
 			it.name = support.toIDMultiple("containment_topLevel", topName)
 			it.fofRole = "axiom"
@@ -105,7 +107,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 					it.right = createVLSEquality => [
 						it.left = support.duplicate(variable)
 						it.right = createVLSConstant => [
-							it.name = if (topInIM) topStr else "o1"
+							it.name = if(topInIM) topStr else "o1"
 						]
 					]
 				]
@@ -119,8 +121,8 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		]
 		trace.specification.formulas += contTop
 
-		// STEP 2
-		// for each edge, if the pointedTo element exists,the edge must exist also
+// STEP 2
+// for each edge, if the pointedTo element exists,the edge must exist also
 		val varA = createVLSVariable => [it.name = "A"]
 		val varB = createVLSVariable => [it.name = "B"]
 		val varC = createVLSVariable => [it.name = "C"]
@@ -207,23 +209,22 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		// STEP 4
 		// Ensure that there are no cycles in the hierarchy (maybe same as for step3?)
 		// Attempt 1: all possibilities, even the impossible one, based on MM constraints, are listed
-		
-		
 		val variables = newArrayList
 		val disjunctionList = newArrayList
 		val conjunctionList = newArrayList
 		for (var i = 1; i <= config.contCycleLevel; i++) {
 			val ind = i
-			variables.add(createVLSVariable => [it.name = ("V"+Integer.toString(ind))])
-			for ( var j = 0; j < i;j++){
+			variables.add(createVLSVariable => [it.name = ("V" + Integer.toString(ind))])
+			for (var j = 0; j < i; j++) {
 				for (l : relationsList) {
-					val rel = support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate), newArrayList(variables.get(j), variables.get((j+1)%i)))
+					val rel = support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate),
+						newArrayList(variables.get(j), variables.get((j + 1) % i)))
 					disjunctionList.add(rel)
 				}
 				conjunctionList.add(support.unfoldOr(disjunctionList))
 				disjunctionList.clear
 			}
-			
+
 			val contCycleForm = createVLSFofFormula => [
 				it.name = support.toIDMultiple("containment_noCycle", Integer.toString(ind))
 				it.fofRole = "axiom"

@@ -117,13 +117,13 @@ public class Logic2VampireLanguageMapper {
     if (_not) {
       this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
     }
-    this.scopeMapper.transformScope(config, trace);
     trace.relationDefinitions = this.collectRelationDefinitions(problem);
     final Consumer<Relation> _function_3 = (Relation it) -> {
       this.relationMapper.transformRelation(it, trace);
     };
     problem.getRelations().forEach(_function_3);
     this.containmentMapper.transformContainment(config, problem.getContainmentHierarchies(), trace);
+    this.scopeMapper.transformScope(problem.getTypes(), config, trace);
     trace.constantDefinitions = this.collectConstantDefinitions(problem);
     final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
       this.constantMapper.transformConstantDefinitionSpecification(it, trace);
