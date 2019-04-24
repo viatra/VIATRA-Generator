@@ -57,6 +57,7 @@ public class FileSystemTest {
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
+      problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
       workspace.writeModel(problem, "FileSystem.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
@@ -70,8 +71,8 @@ public class FileSystemTest {
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
-        it.typeScopes.minNewElements = 40;
-        it.typeScopes.maxNewElements = 59;
+        it.typeScopes.minNewElements = 10;
+        it.typeScopes.maxNewElements = 25;
         int _size = typeMapMin.size();
         boolean _notEquals = (_size != 0);
         if (_notEquals) {

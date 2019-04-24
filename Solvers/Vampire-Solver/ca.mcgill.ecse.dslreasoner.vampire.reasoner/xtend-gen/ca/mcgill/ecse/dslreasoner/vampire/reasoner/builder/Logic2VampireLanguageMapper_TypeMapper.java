@@ -77,10 +77,16 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           trace.type2Predicate.put(type, typePred);
         }
       }
-      Iterable<TypeDefinition> _filter = Iterables.<TypeDefinition>filter(types, TypeDefinition.class);
+      final Function1<TypeDefinition, Boolean> _function_1 = (TypeDefinition it) -> {
+        boolean _isIsAbstract = it.isIsAbstract();
+        return Boolean.valueOf((!_isIsAbstract));
+      };
+      Iterable<TypeDefinition> _filter = IterableExtensions.<TypeDefinition>filter(Iterables.<TypeDefinition>filter(types, TypeDefinition.class), _function_1);
       for (final TypeDefinition type_1 : _filter) {
         {
-          final boolean isNotEnum = ((((Object[])Conversions.unwrapArray(type_1.getSupertypes(), Object.class)).length == 1) && type_1.getSupertypes().get(0).isIsAbstract());
+          final int len = type_1.getName().length();
+          boolean _equals = type_1.getName().substring((len - 4), len).equals("enum");
+          final boolean isNotEnum = (!_equals);
           final List<VLSFunction> orElems = CollectionLiterals.<VLSFunction>newArrayList();
           EList<DefinedElement> _elements = type_1.getElements();
           for (final DefinedElement e : _elements) {
@@ -88,21 +94,21 @@ public class Logic2VampireLanguageMapper_TypeMapper {
               final String[] nameArray = e.getName().split(" ");
               String relNameVar = "";
               int _length = nameArray.length;
-              boolean _equals = (_length == 3);
-              if (_equals) {
+              boolean _equals_1 = (_length == 3);
+              if (_equals_1) {
                 relNameVar = this.support.toIDMultiple(nameArray[0], nameArray[2]);
               } else {
                 relNameVar = e.getName();
               }
               final String relName = relNameVar;
               VLSFunction _createVLSFunction = this.factory.createVLSFunction();
-              final Procedure1<VLSFunction> _function_1 = (VLSFunction it) -> {
+              final Procedure1<VLSFunction> _function_2 = (VLSFunction it) -> {
                 it.setConstant(this.support.toIDMultiple("e", relName));
                 EList<VLSTerm> _terms = it.getTerms();
                 VLSVariable _duplicate = this.support.duplicate(variable);
                 _terms.add(_duplicate);
               };
-              final VLSFunction enumElemPred = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_1);
+              final VLSFunction enumElemPred = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_2);
               trace.element2Predicate.put(e, enumElemPred);
             }
           }
@@ -113,17 +119,17 @@ public class Logic2VampireLanguageMapper_TypeMapper {
             {
               EList<DefinedElement> _elements_2 = type_1.getElements();
               for (final DefinedElement t2 : _elements_2) {
-                boolean _equals = Objects.equal(t1, t2);
-                if (_equals) {
+                boolean _equals_1 = Objects.equal(t1, t2);
+                if (_equals_1) {
                   final VLSFunction fct = this.support.duplicate(CollectionsUtil.<DefinedElement, VLSFunction>lookup(t2, trace.element2Predicate), variable);
                   possibleNots.add(fct);
                 } else {
                   final VLSFunction op = this.support.duplicate(CollectionsUtil.<DefinedElement, VLSFunction>lookup(t2, trace.element2Predicate), variable);
                   VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
-                  final Procedure1<VLSUnaryNegation> _function_1 = (VLSUnaryNegation it) -> {
+                  final Procedure1<VLSUnaryNegation> _function_2 = (VLSUnaryNegation it) -> {
                     it.setOperand(op);
                   };
-                  final VLSUnaryNegation negFct = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_1);
+                  final VLSUnaryNegation negFct = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_2);
                   possibleNots.add(negFct);
                 }
               }
@@ -132,32 +138,32 @@ public class Logic2VampireLanguageMapper_TypeMapper {
             }
           }
           VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-          final Procedure1<VLSFofFormula> _function_1 = (VLSFofFormula it) -> {
+          final Procedure1<VLSFofFormula> _function_2 = (VLSFofFormula it) -> {
             it.setName(this.support.toIDMultiple("typeDef", CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate).getConstant().toString()));
             it.setFofRole("axiom");
             VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-            final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
+            final Procedure1<VLSUniversalQuantifier> _function_3 = (VLSUniversalQuantifier it_1) -> {
               EList<VLSVariable> _variables = it_1.getVariables();
               VLSVariable _duplicate = this.support.duplicate(variable);
               _variables.add(_duplicate);
               VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-              final Procedure1<VLSEquivalent> _function_3 = (VLSEquivalent it_2) -> {
+              final Procedure1<VLSEquivalent> _function_4 = (VLSEquivalent it_2) -> {
                 it_2.setLeft(CollectionsUtil.<TypeDefinition, VLSFunction>lookup(type_1, trace.type2Predicate));
                 VLSAnd _createVLSAnd = this.factory.createVLSAnd();
-                final Procedure1<VLSAnd> _function_4 = (VLSAnd it_3) -> {
+                final Procedure1<VLSAnd> _function_5 = (VLSAnd it_3) -> {
                   it_3.setLeft(this.support.topLevelTypeFunc(variable));
                   it_3.setRight(this.support.unfoldOr(typeDefs));
                 };
-                VLSAnd _doubleArrow = ObjectExtensions.<VLSAnd>operator_doubleArrow(_createVLSAnd, _function_4);
+                VLSAnd _doubleArrow = ObjectExtensions.<VLSAnd>operator_doubleArrow(_createVLSAnd, _function_5);
                 it_2.setRight(_doubleArrow);
               };
-              VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_3);
+              VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_4);
               it_1.setOperand(_doubleArrow);
             };
-            VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_2);
+            VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_3);
             it.setFofFormula(_doubleArrow);
           };
-          final VLSFofFormula res = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_1);
+          final VLSFofFormula res = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_2);
           EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
           _formulas.add(res);
           for (int i = globalCounter; (i < (globalCounter + ((Object[])Conversions.unwrapArray(type_1.getElements(), Object.class)).length)); i++) {
@@ -165,17 +171,17 @@ public class Logic2VampireLanguageMapper_TypeMapper {
               final int num = (i + 1);
               final int index = (i - globalCounter);
               VLSFunctionAsTerm _createVLSFunctionAsTerm = this.factory.createVLSFunctionAsTerm();
-              final Procedure1<VLSFunctionAsTerm> _function_2 = (VLSFunctionAsTerm it) -> {
+              final Procedure1<VLSFunctionAsTerm> _function_3 = (VLSFunctionAsTerm it) -> {
                 it.setFunctor(("eo" + Integer.valueOf(num)));
               };
-              final VLSFunctionAsTerm cstTerm = ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function_2);
+              final VLSFunctionAsTerm cstTerm = ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function_3);
               if (isNotEnum) {
                 trace.definedElement2String.put(type_1.getElements().get(index), cstTerm.getFunctor());
               }
               final VLSConstant cst = this.support.toConstant(cstTerm);
               trace.uniqueInstances.add(cst);
               VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
-              final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
+              final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
                 String _xifexpression = null;
                 if (isNotEnum) {
                   _xifexpression = "definedType";
@@ -186,28 +192,28 @@ public class Logic2VampireLanguageMapper_TypeMapper {
                   type_1.getElements().get(index).getName().split(" ")[0]));
                 it.setFofRole("axiom");
                 VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-                final Procedure1<VLSUniversalQuantifier> _function_4 = (VLSUniversalQuantifier it_1) -> {
+                final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
                   EList<VLSVariable> _variables = it_1.getVariables();
                   VLSVariable _duplicate = this.support.duplicate(variable);
                   _variables.add(_duplicate);
                   VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-                  final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
+                  final Procedure1<VLSEquivalent> _function_6 = (VLSEquivalent it_2) -> {
                     VLSEquality _createVLSEquality = this.factory.createVLSEquality();
-                    final Procedure1<VLSEquality> _function_6 = (VLSEquality it_3) -> {
+                    final Procedure1<VLSEquality> _function_7 = (VLSEquality it_3) -> {
                       it_3.setLeft(this.support.duplicate(variable));
                       it_3.setRight(this.support.duplicate(this.support.toConstant(cstTerm)));
                     };
-                    VLSEquality _doubleArrow = ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_6);
+                    VLSEquality _doubleArrow = ObjectExtensions.<VLSEquality>operator_doubleArrow(_createVLSEquality, _function_7);
                     it_2.setLeft(_doubleArrow);
                     it_2.setRight(this.support.duplicate(CollectionsUtil.<DefinedElement, VLSFunction>lookup(type_1.getElements().get(index), trace.element2Predicate), variable));
                   };
-                  VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_5);
+                  VLSEquivalent _doubleArrow = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_6);
                   it_1.setOperand(_doubleArrow);
                 };
-                VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_4);
+                VLSUniversalQuantifier _doubleArrow = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_5);
                 it.setFofFormula(_doubleArrow);
               };
-              final VLSFofFormula enumScope = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_3);
+              final VLSFofFormula enumScope = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_4);
               EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
               _formulas_1.add(enumScope);
             }
@@ -217,11 +223,11 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           globalCounter = (_globalCounter + _size);
         }
       }
-      final Function1<Type, Boolean> _function_1 = (Type it) -> {
+      final Function1<Type, Boolean> _function_2 = (Type it) -> {
         boolean _isIsAbstract = it.isIsAbstract();
         return Boolean.valueOf((!_isIsAbstract));
       };
-      Iterable<Type> _filter_1 = IterableExtensions.<Type>filter(types, _function_1);
+      Iterable<Type> _filter_1 = IterableExtensions.<Type>filter(types, _function_2);
       for (final Type t1 : _filter_1) {
         {
           for (final Type t2 : types) {
@@ -229,10 +235,10 @@ public class Logic2VampireLanguageMapper_TypeMapper {
               trace.type2PossibleNot.put(t2, this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(t2, trace.type2Predicate)));
             } else {
               VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
-              final Procedure1<VLSUnaryNegation> _function_2 = (VLSUnaryNegation it) -> {
+              final Procedure1<VLSUnaryNegation> _function_3 = (VLSUnaryNegation it) -> {
                 it.setOperand(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(t2, trace.type2Predicate)));
               };
-              VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_2);
+              VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_3);
               trace.type2PossibleNot.put(t2, _doubleArrow);
             }
           }
@@ -245,43 +251,15 @@ public class Logic2VampireLanguageMapper_TypeMapper {
       final List<VLSTerm> type2Not = CollectionLiterals.<VLSTerm>newArrayList();
       for (final Type t : types) {
         VLSUnaryNegation _createVLSUnaryNegation = this.factory.createVLSUnaryNegation();
-        final Procedure1<VLSUnaryNegation> _function_2 = (VLSUnaryNegation it) -> {
+        final Procedure1<VLSUnaryNegation> _function_3 = (VLSUnaryNegation it) -> {
           it.setOperand(this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(t, trace.type2Predicate)));
         };
-        VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_2);
+        VLSUnaryNegation _doubleArrow = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation, _function_3);
         type2Not.add(_doubleArrow);
       }
       VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-      final Procedure1<VLSFofFormula> _function_3 = (VLSFofFormula it) -> {
-        it.setName("notObjectHandler");
-        it.setFofRole("axiom");
-        VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
-        final Procedure1<VLSUniversalQuantifier> _function_4 = (VLSUniversalQuantifier it_1) -> {
-          EList<VLSVariable> _variables = it_1.getVariables();
-          VLSVariable _duplicate = this.support.duplicate(variable);
-          _variables.add(_duplicate);
-          VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
-          final Procedure1<VLSEquivalent> _function_5 = (VLSEquivalent it_2) -> {
-            VLSUnaryNegation _createVLSUnaryNegation_1 = this.factory.createVLSUnaryNegation();
-            final Procedure1<VLSUnaryNegation> _function_6 = (VLSUnaryNegation it_3) -> {
-              it_3.setOperand(this.support.topLevelTypeFunc());
-            };
-            VLSUnaryNegation _doubleArrow_1 = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation_1, _function_6);
-            it_2.setLeft(_doubleArrow_1);
-            it_2.setRight(this.support.unfoldAnd(type2Not));
-          };
-          VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_5);
-          it_1.setOperand(_doubleArrow_1);
-        };
-        VLSUniversalQuantifier _doubleArrow_1 = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_4);
-        it.setFofFormula(_doubleArrow_1);
-      };
-      final VLSFofFormula notObj = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_3);
-      EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
-      _formulas.add(notObj);
-      VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
       final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
-        it.setName("inheritanceHierarchyHandler");
+        it.setName("notObjectHandler");
         it.setFofRole("axiom");
         VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
         final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
@@ -290,10 +268,13 @@ public class Logic2VampireLanguageMapper_TypeMapper {
           _variables.add(_duplicate);
           VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
           final Procedure1<VLSEquivalent> _function_6 = (VLSEquivalent it_2) -> {
-            it_2.setLeft(this.support.topLevelTypeFunc());
-            Collection<VLSTerm> _values = trace.type2And.values();
-            final ArrayList<VLSTerm> reversedList = new ArrayList<VLSTerm>(_values);
-            it_2.setRight(this.support.unfoldOr(reversedList));
+            VLSUnaryNegation _createVLSUnaryNegation_1 = this.factory.createVLSUnaryNegation();
+            final Procedure1<VLSUnaryNegation> _function_7 = (VLSUnaryNegation it_3) -> {
+              it_3.setOperand(this.support.topLevelTypeFunc());
+            };
+            VLSUnaryNegation _doubleArrow_1 = ObjectExtensions.<VLSUnaryNegation>operator_doubleArrow(_createVLSUnaryNegation_1, _function_7);
+            it_2.setLeft(_doubleArrow_1);
+            it_2.setRight(this.support.unfoldAnd(type2Not));
           };
           VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_6);
           it_1.setOperand(_doubleArrow_1);
@@ -301,7 +282,32 @@ public class Logic2VampireLanguageMapper_TypeMapper {
         VLSUniversalQuantifier _doubleArrow_1 = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_5);
         it.setFofFormula(_doubleArrow_1);
       };
-      final VLSFofFormula hierarch = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_4);
+      final VLSFofFormula notObj = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_4);
+      EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
+      _formulas.add(notObj);
+      VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
+      final Procedure1<VLSFofFormula> _function_5 = (VLSFofFormula it) -> {
+        it.setName("inheritanceHierarchyHandler");
+        it.setFofRole("axiom");
+        VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
+        final Procedure1<VLSUniversalQuantifier> _function_6 = (VLSUniversalQuantifier it_1) -> {
+          EList<VLSVariable> _variables = it_1.getVariables();
+          VLSVariable _duplicate = this.support.duplicate(variable);
+          _variables.add(_duplicate);
+          VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
+          final Procedure1<VLSEquivalent> _function_7 = (VLSEquivalent it_2) -> {
+            it_2.setLeft(this.support.topLevelTypeFunc());
+            Collection<VLSTerm> _values = trace.type2And.values();
+            final ArrayList<VLSTerm> reversedList = new ArrayList<VLSTerm>(_values);
+            it_2.setRight(this.support.unfoldOr(reversedList));
+          };
+          VLSEquivalent _doubleArrow_1 = ObjectExtensions.<VLSEquivalent>operator_doubleArrow(_createVLSEquivalent, _function_7);
+          it_1.setOperand(_doubleArrow_1);
+        };
+        VLSUniversalQuantifier _doubleArrow_1 = ObjectExtensions.<VLSUniversalQuantifier>operator_doubleArrow(_createVLSUniversalQuantifier, _function_6);
+        it.setFofFormula(_doubleArrow_1);
+      };
+      final VLSFofFormula hierarch = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula_1, _function_5);
       EList<VLSFofFormula> _formulas_1 = trace.specification.getFormulas();
       _xblockexpression = _formulas_1.add(hierarch);
     }

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
@@ -55,6 +56,7 @@ public class YakinduTest {
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
+      problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
       workspace.writeModel(problem, "Yakindu.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
@@ -62,14 +64,16 @@ public class YakinduTest {
       VampireSolver _vampireSolver = new VampireSolver();
       reasoner = _vampireSolver;
       final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
+      classMapMin.put(Region.class, Integer.valueOf(1));
       final Map<Type, Integer> typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       final HashMap<Class, Integer> classMapMax = new HashMap<Class, Integer>();
+      classMapMax.put(Region.class, Integer.valueOf(5));
       final Map<Type, Integer> typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
-        it.typeScopes.minNewElements = 53;
-        it.typeScopes.maxNewElements = 53;
+        it.typeScopes.minNewElements = 20;
+        it.typeScopes.maxNewElements = 30;
         int _size = typeMapMin.size();
         boolean _notEquals = (_size != 0);
         if (_notEquals) {

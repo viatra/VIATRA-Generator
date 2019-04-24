@@ -44,13 +44,31 @@ class Logic2VampireLanguageMapper_TypeMapper {
 			trace.type2Predicate.put(type, typePred)
 		}
 
-		// 2. Map each ENUM type definition to fof formula
-		//    This also Handles initial Model stuff
-		for (type : types.filter(TypeDefinition)) {
+		// 2. Map each ENUM/InitialModelElement type definition to fof formula
+		//    In the case where , for example, a supertype that is abstract has a subtype of which an instance is in the initial model,
+		//    The logic problem will contain a TypeDefinition for the subtype as well as for the supertype
+		//    This defined elemtn for the supertype will be abstract, and we do not wish to associate a constant to it, or associate it with a type
+		//    Within our vampireproblem.tptp
+		for (type : types.filter(TypeDefinition).filter[!isIsAbstract]) {
+
+			//Detect if it is a defined element (from initial model)
+			//Otherwise it is an Enum
 			
-			//Detect if is an Enum
-			//Otherwise, it is a defined element (from initial model)
-			val isNotEnum = type.supertypes.length == 1 && type.supertypes.get(0).isIsAbstract
+			//val isNotEnum = type.supertypes.length == 1 && type.supertypes.get(0).isIsAbstract
+			//^does not work in cases where a defined type already has a supertype from within the MM
+			
+//			var isNotEnumVar = !type.supertypes.isEmpty 
+//			if(isNotEnumVar) {
+//				for (sup : type.supertypes){
+//					type.name.contains(sup.name)
+//				}
+//			}
+//			
+//			val isNotEnum = isNotEnumVar
+			
+			//Another possibility is..
+			val len = type.name.length
+			val isNotEnum = !type.name.substring(len-4, len).equals("enum")
 
 			// Create a VLSFunction for each Enum Element
 			val List<VLSFunction> orElems = newArrayList

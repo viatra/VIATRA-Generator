@@ -78,16 +78,16 @@ class Logic2VampireLanguageMapper {
 		if (!problem.types.isEmpty) {
 			typeMapper.transformTypes(problem.types, problem.elements, this, trace)
 		}
-
-		// SCOPE MAPPER
-		scopeMapper.transformScope(config, trace)
-
+		
 		// RELATION MAPPER
 		trace.relationDefinitions = problem.collectRelationDefinitions
 		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
 		
 		// CONTAINMENT MAPPER
 		containmentMapper.transformContainment(config,problem.containmentHierarchies, trace)
+
+		// SCOPE MAPPER
+		scopeMapper.transformScope(problem.types, config, trace)
 
 		// CONSTANT MAPPER
 		// only transforms definitions

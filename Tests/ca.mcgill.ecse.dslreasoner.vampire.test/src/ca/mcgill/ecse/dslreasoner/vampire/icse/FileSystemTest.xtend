@@ -43,7 +43,7 @@ class FileSystemTest {
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
-//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
+		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 		workspace.writeModel(problem, "FileSystem.logicproblem")
 
@@ -76,8 +76,8 @@ class FileSystemTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 40
-			it.typeScopes.maxNewElements = 59
+			it.typeScopes.minNewElements = 10
+			it.typeScopes.maxNewElements = 25
 			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5

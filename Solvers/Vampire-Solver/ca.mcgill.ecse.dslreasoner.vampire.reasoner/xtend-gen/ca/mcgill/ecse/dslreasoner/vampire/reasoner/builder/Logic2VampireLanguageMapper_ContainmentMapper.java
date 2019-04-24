@@ -25,6 +25,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDefinitionImpl;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -91,10 +91,17 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     final VLSFunction topTerm = this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(topTermVar, trace.type2Predicate));
     boolean topLvlIsInInitModel = false;
     String topLvlString = "";
-    EList<Type> _subtypes = topTermVar.getSubtypes();
-    for (final Type c : _subtypes) {
-      boolean _equals = c.getClass().getSimpleName().equals("TypeDefinitionImpl");
+    ArrayList<Type> listToCheck = CollectionLiterals.<Type>newArrayList(topTermVar);
+    listToCheck.addAll(topTermVar.getSubtypes());
+    for (final Type c : listToCheck) {
+      Class<? extends Type> _class = c.getClass();
+      boolean _equals = Objects.equal(_class, TypeDefinitionImpl.class);
       if (_equals) {
+        int _length = ((Object[])Conversions.unwrapArray(((TypeDefinition) c).getElements(), Object.class)).length;
+        boolean _greaterThan = (_length > 1);
+        if (_greaterThan) {
+          throw new IllegalArgumentException("You cannot have multiple top-level elements in your initial model");
+        }
         EList<DefinedElement> _elements = ((TypeDefinition) c).getElements();
         for (final DefinedElement d : _elements) {
           boolean _containsKey = trace.definedElement2String.containsKey(d);
@@ -105,10 +112,9 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         }
       }
     }
+    trace.topLvlElementIsInInitialModel = Boolean.valueOf(topLvlIsInInitModel);
     final boolean topInIM = topLvlIsInInitModel;
     final String topStr = topLvlString;
-    InputOutput.<Boolean>print(Boolean.valueOf(topInIM));
-    InputOutput.<String>print(topStr);
     VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
     final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
       it.setName(this.support.toIDMultiple("containment_topLevel", topName));
@@ -174,8 +180,8 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
         final Type toType = ((Type) _referred);
         final VLSFunction toFunc = CollectionsUtil.<Type, VLSFunction>lookup(toType, trace.type2Predicate);
         this.addToMap(type2cont, toFunc, rel);
-        EList<Type> _subtypes_1 = toType.getSubtypes();
-        for (final Type c_1 : _subtypes_1) {
+        EList<Type> _subtypes = toType.getSubtypes();
+        for (final Type c_1 : _subtypes) {
           this.addToMap(type2cont, toFunc, rel);
         }
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
@@ -242,9 +248,9 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
                 EList<VLSVariable> _variables_1 = it_3.getVariables();
                 VLSVariable _duplicate_1 = this.support.duplicate(varB);
                 _variables_1.add(_duplicate_1);
-                int _length = ((Object[])Conversions.unwrapArray(e.getValue(), Object.class)).length;
-                boolean _greaterThan = (_length > 1);
-                if (_greaterThan) {
+                int _length_1 = ((Object[])Conversions.unwrapArray(e.getValue(), Object.class)).length;
+                boolean _greaterThan_1 = (_length_1 > 1);
+                if (_greaterThan_1) {
                   it_3.setOperand(this.makeUnique(e.getValue()));
                 } else {
                   it_3.setOperand(e.getValue().get(0));
@@ -282,7 +288,8 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
           {
             for (final Relation l_3 : relationsList) {
               {
-                final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_3), trace.rel2Predicate), CollectionLiterals.<VLSVariable>newArrayList(variables.get(j), variables.get(((j + 1) % i))));
+                final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_3), trace.rel2Predicate), 
+                  CollectionLiterals.<VLSVariable>newArrayList(variables.get(j), variables.get(((j + 1) % i))));
                 disjunctionList.add(rel);
               }
             }
