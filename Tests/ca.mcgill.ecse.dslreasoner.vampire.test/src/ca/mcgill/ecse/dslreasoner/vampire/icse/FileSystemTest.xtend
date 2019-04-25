@@ -15,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.*
 
 class FileSystemTest {
 	def static void main(String[] args) {
@@ -59,16 +60,18 @@ class FileSystemTest {
 		// /////////////////////////////////////////////////////
 		// Minimum Scope
 		val classMapMin = new HashMap<Class, Integer>
-//		classMapMin.put(Function, 1)
-//		classMapMin.put(FunctionalInterface, 2)
-//		classMapMin.put(FunctionalOutput, 3)
+//		Currently does not work
+//		classMapMin.put(FSObject, 20)
+		classMapMin.put(Dir, 10)
+		classMapMin.put(File, 5)
 		val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
 
 		// Maximum Scope
 		val classMapMax = new HashMap<Class, Integer>
-//		classMapMax.put(Function, 5)
-//		classMapMax.put(FunctionalInterface, 2)
-//		classMapMax.put(FunctionalOutput, 4)
+		classMapMax.put(File, 15)
+		classMapMax.put(Dir, 15)
+//		Currently does not work
+//		classMapMax.put(FSObject, 20)
 		val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
 
 		// Define Config File		

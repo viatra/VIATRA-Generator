@@ -66,15 +66,12 @@ public class FAMTest {
       VampireSolver _vampireSolver = new VampireSolver();
       reasoner = _vampireSolver;
       final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
-      classMapMin.put(FunctionalArchitectureModel.class, Integer.valueOf(1));
-      classMapMin.put(Function.class, Integer.valueOf(1));
-      classMapMin.put(functionalarchitecture.FunctionalInterface.class, Integer.valueOf(2));
       classMapMin.put(FunctionalOutput.class, Integer.valueOf(3));
       final Map<Type, Integer> typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       final HashMap<Class, Integer> classMapMax = new HashMap<Class, Integer>();
       classMapMax.put(FunctionalArchitectureModel.class, Integer.valueOf(3));
       classMapMax.put(Function.class, Integer.valueOf(5));
-      classMapMax.put(functionalarchitecture.FunctionalInterface.class, Integer.valueOf(2));
+      classMapMax.put(functionalarchitecture.FunctionalInterface.class, Integer.valueOf(3));
       classMapMax.put(FunctionalOutput.class, Integer.valueOf(4));
       final Map<Type, Integer> typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();

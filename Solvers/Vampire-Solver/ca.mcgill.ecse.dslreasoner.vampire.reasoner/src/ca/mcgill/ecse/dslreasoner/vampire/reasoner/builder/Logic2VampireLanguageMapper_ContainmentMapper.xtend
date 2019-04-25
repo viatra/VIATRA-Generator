@@ -70,6 +70,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 		val topName = topTermVar.lookup(trace.type2Predicate).constant.toString
 		val topTerm = support.duplicate(topTermVar.lookup(trace.type2Predicate))
+		trace.topLevelType = topTermVar
 
 		var topLvlIsInInitModel = false
 		var topLvlString = ""
@@ -129,16 +130,22 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 		val varList = newArrayList(varB, varA)
 		val Map<VLSFunction, List<VLSFunction>> type2cont = new HashMap
 		for (l : relationsList) {
-			val rel = support.duplicate((l as RelationDeclaration).lookup(trace.rel2Predicate), varList)
+			val rel = (l as RelationDeclaration).lookup(trace.rel2Predicate)
 //			val fromType = (l.parameters.get(0) as ComplexTypeReference).referred as Type
 			val toType = ((l.parameters.get(1) as ComplexTypeReference).referred as Type)
 			val toFunc = toType.lookup(trace.type2Predicate)
 
-			addToMap(type2cont, toFunc, rel)
-
-			for (c : toType.subtypes) {
-				addToMap(type2cont, toFunc, rel)
+			addToMap(type2cont, support.duplicate(toFunc), support.duplicate(rel, varList))
+			
+			var subTypes = newArrayList
+			support.listSubtypes(toType, subTypes)
+			for (c : subTypes) {
+				addToMap(type2cont, support.duplicate(c.lookup(trace.type2Predicate)), support.duplicate(rel, varList))
 			}
+
+
+
+
 //			for (c : support.listSubtypes(toType)) {
 //				addToMap(type2cont, toFunc, rel)
 //			}
@@ -182,6 +189,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 // STEP 2 CONT'D
 		for (e : type2cont.entrySet) {
+			println(e.key + "   " + e.value)
 			val relFormula = createVLSFofFormula => [
 				it.name = support.toIDMultiple("containment_contained", e.key.constant.toString)
 				it.fofRole = "axiom"
@@ -192,6 +200,11 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 						it.left = support.duplicate(e.key, varA)
 						it.right = createVLSExistentialQuantifier => [
 							it.variables += support.duplicate(varB)
+//							for ( x : type2cont.entrySet) {
+//								if (support.dfsSupertypeCheck(e.key, x.key)) {
+//									e.value.addAll(x.value)
+//								}
+//							}
 							if (e.value.length > 1) {
 								it.operand = makeUnique(e.value)
 							} else {
@@ -264,11 +277,20 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 	}
 
 	protected def Object addToMap(Map<VLSFunction, List<VLSFunction>> type2cont, VLSFunction toFunc, VLSFunction rel) {
-		if (!type2cont.containsKey(toFunc)) {
+		var keyInMap = false
+		var existingKey = createVLSFunction
+		for (k : type2cont.keySet) {
+			if (k.constant.equals(toFunc.constant)) {
+				keyInMap = true
+				existingKey = k
+			}
+		}
+		
+		if (!keyInMap) {
 			type2cont.put(toFunc, newArrayList(rel))
 		} else {
-			if (!type2cont.get(toFunc).contains(rel)) {
-				type2cont.get(toFunc).add(rel)
+			if (!type2cont.get(existingKey).contains(rel)) {
+				type2cont.get(existingKey).add(rel)
 			// type2cont.replace(toFunc, newArrayList(firstRel))
 			}
 
