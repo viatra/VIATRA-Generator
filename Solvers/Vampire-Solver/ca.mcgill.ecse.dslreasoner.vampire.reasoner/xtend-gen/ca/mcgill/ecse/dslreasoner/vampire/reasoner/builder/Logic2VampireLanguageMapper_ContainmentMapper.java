@@ -37,6 +37,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -89,6 +90,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     }
     final String topName = CollectionsUtil.<Type, VLSFunction>lookup(topTermVar, trace.type2Predicate).getConstant().toString();
     final VLSFunction topTerm = this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(topTermVar, trace.type2Predicate));
+    trace.topLevelType = topTermVar;
     boolean topLvlIsInInitModel = false;
     String topLvlString = "";
     ArrayList<Type> listToCheck = CollectionLiterals.<Type>newArrayList(topTermVar);
@@ -174,15 +176,16 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     final Map<VLSFunction, List<VLSFunction>> type2cont = new HashMap<VLSFunction, List<VLSFunction>>();
     for (final Relation l_2 : relationsList) {
       {
-        final VLSFunction rel = this.support.duplicate(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_2), trace.rel2Predicate), varList);
+        final VLSFunction rel = CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) l_2), trace.rel2Predicate);
         TypeReference _get = l_2.getParameters().get(1);
         Type _referred = ((ComplexTypeReference) _get).getReferred();
         final Type toType = ((Type) _referred);
         final VLSFunction toFunc = CollectionsUtil.<Type, VLSFunction>lookup(toType, trace.type2Predicate);
-        this.addToMap(type2cont, toFunc, rel);
-        EList<Type> _subtypes = toType.getSubtypes();
-        for (final Type c_1 : _subtypes) {
-          this.addToMap(type2cont, toFunc, rel);
+        this.addToMap(type2cont, this.support.duplicate(toFunc), this.support.duplicate(rel, varList));
+        ArrayList<Type> subTypes = CollectionLiterals.<Type>newArrayList();
+        this.support.listSubtypes(toType, subTypes);
+        for (final Type c_1 : subTypes) {
+          this.addToMap(type2cont, this.support.duplicate(CollectionsUtil.<Type, VLSFunction>lookup(c_1, trace.type2Predicate)), this.support.duplicate(rel, varList));
         }
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
@@ -231,6 +234,11 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     Set<Map.Entry<VLSFunction, List<VLSFunction>>> _entrySet = type2cont.entrySet();
     for (final Map.Entry<VLSFunction, List<VLSFunction>> e : _entrySet) {
       {
+        VLSFunction _key = e.getKey();
+        String _plus = (_key + "   ");
+        List<VLSFunction> _value = e.getValue();
+        String _plus_1 = (_plus + _value);
+        InputOutput.<String>println(_plus_1);
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
           it.setName(this.support.toIDMultiple("containment_contained", e.getKey().getConstant().toString()));
@@ -352,20 +360,32 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
   }
   
   protected Object addToMap(final Map<VLSFunction, List<VLSFunction>> type2cont, final VLSFunction toFunc, final VLSFunction rel) {
-    Object _xifexpression = null;
-    boolean _containsKey = type2cont.containsKey(toFunc);
-    boolean _not = (!_containsKey);
-    if (_not) {
-      _xifexpression = type2cont.put(toFunc, CollectionLiterals.<VLSFunction>newArrayList(rel));
-    } else {
-      boolean _xifexpression_1 = false;
-      boolean _contains = type2cont.get(toFunc).contains(rel);
-      boolean _not_1 = (!_contains);
-      if (_not_1) {
-        _xifexpression_1 = type2cont.get(toFunc).add(rel);
+    Object _xblockexpression = null;
+    {
+      boolean keyInMap = false;
+      VLSFunction existingKey = this.factory.createVLSFunction();
+      Set<VLSFunction> _keySet = type2cont.keySet();
+      for (final VLSFunction k : _keySet) {
+        boolean _equals = k.getConstant().equals(toFunc.getConstant());
+        if (_equals) {
+          keyInMap = true;
+          existingKey = k;
+        }
       }
-      _xifexpression = Boolean.valueOf(_xifexpression_1);
+      Object _xifexpression = null;
+      if ((!keyInMap)) {
+        _xifexpression = type2cont.put(toFunc, CollectionLiterals.<VLSFunction>newArrayList(rel));
+      } else {
+        boolean _xifexpression_1 = false;
+        boolean _contains = type2cont.get(existingKey).contains(rel);
+        boolean _not = (!_contains);
+        if (_not) {
+          _xifexpression_1 = type2cont.get(existingKey).add(rel);
+        }
+        _xifexpression = Boolean.valueOf(_xifexpression_1);
+      }
+      _xblockexpression = _xifexpression;
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
 }

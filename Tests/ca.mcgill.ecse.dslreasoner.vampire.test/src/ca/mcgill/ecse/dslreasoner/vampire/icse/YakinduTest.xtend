@@ -14,7 +14,8 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region
+
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.*
 
 class YakinduTest {
 	def static void main(String[] args) {
@@ -60,15 +61,15 @@ class YakinduTest {
 		// Minimum Scope
 		val classMapMin = new HashMap<Class, Integer>
 		classMapMin.put(Region, 1)
-//		classMapMin.put(FunctionalInterface, 2)
-//		classMapMin.put(FunctionalOutput, 3)
+		classMapMin.put(Transition, 2)
+		classMapMin.put(CompositeElement, 3)
 		val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
 
 		// Maximum Scope
 		val classMapMax = new HashMap<Class, Integer>
 		classMapMax.put(Region, 5)
-//		classMapMax.put(FunctionalInterface, 2)
-//		classMapMax.put(FunctionalOutput, 4)
+		classMapMax.put(Transition, 2)
+		classMapMax.put(Synchronization, 4)
 		val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
 
 		// Define Config File		

@@ -1,6 +1,9 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.CompositeElement;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Synchronization;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
@@ -65,9 +68,13 @@ public class YakinduTest {
       reasoner = _vampireSolver;
       final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
       classMapMin.put(Region.class, Integer.valueOf(1));
+      classMapMin.put(Transition.class, Integer.valueOf(2));
+      classMapMin.put(CompositeElement.class, Integer.valueOf(3));
       final Map<Type, Integer> typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       final HashMap<Class, Integer> classMapMax = new HashMap<Class, Integer>();
       classMapMax.put(Region.class, Integer.valueOf(5));
+      classMapMax.put(Transition.class, Integer.valueOf(2));
+      classMapMax.put(Synchronization.class, Integer.valueOf(4));
       final Map<Type, Integer> typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {

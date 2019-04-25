@@ -1,5 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
+import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.Dir;
+import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.File;
 import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage;
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
 import ca.mcgill.ecse.dslreasoner.vampire.queries.FileSystemPatterns;
@@ -65,8 +67,12 @@ public class FileSystemTest {
       VampireSolver _vampireSolver = new VampireSolver();
       reasoner = _vampireSolver;
       final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
+      classMapMin.put(Dir.class, Integer.valueOf(10));
+      classMapMin.put(File.class, Integer.valueOf(5));
       final Map<Type, Integer> typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       final HashMap<Class, Integer> classMapMax = new HashMap<Class, Integer>();
+      classMapMax.put(File.class, Integer.valueOf(15));
+      classMapMax.put(Dir.class, Integer.valueOf(15));
       final Map<Type, Integer> typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {

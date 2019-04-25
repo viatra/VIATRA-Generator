@@ -14,7 +14,10 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
+import com.google.common.base.Objects;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -80,33 +84,73 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     }
     int minNum = (-1);
     Map<Type, Integer> startPoints = new HashMap<Type, Integer>();
-    Set<Type> _keySet = config.typeScopes.minNewElementsByType.keySet();
-    for (final Type tConfig : _keySet) {
+    final Function1<Type, Boolean> _function = (Type it) -> {
+      boolean _equals = it.equals(trace.topLevelType);
+      return Boolean.valueOf((!_equals));
+    };
+    Iterable<Type> _filter = IterableExtensions.<Type>filter(config.typeScopes.minNewElementsByType.keySet(), _function);
+    for (final Type t : _filter) {
       {
-        minNum = (CollectionsUtil.<Type, Integer>lookup(tConfig, config.typeScopes.minNewElementsByType)).intValue();
+        int numIniIntModel = 0;
+        Set<DefinedElement> _keySet = trace.definedElement2String.keySet();
+        for (final DefinedElement elem : _keySet) {
+          EList<TypeDefinition> _definedInType = elem.getDefinedInType();
+          for (final TypeDefinition tDefined : _definedInType) {
+            boolean _dfsSubtypeCheck = this.support.dfsSubtypeCheck(t, tDefined);
+            if (_dfsSubtypeCheck) {
+              int _numIniIntModel = numIniIntModel;
+              numIniIntModel = (_numIniIntModel + 1);
+            }
+          }
+        }
+        Integer _lookup = CollectionsUtil.<Type, Integer>lookup(t, config.typeScopes.minNewElementsByType);
+        int _minus = ((_lookup).intValue() - numIniIntModel);
+        minNum = _minus;
         if ((minNum != 0)) {
           this.getInstanceConstants((i_1 + minNum), i_1, localInstances, trace, true, false);
-          startPoints.put(tConfig, Integer.valueOf(i_1));
+          startPoints.put(t, Integer.valueOf(i_1));
           int _i = i_1;
           i_1 = (_i + minNum);
-          this.makeFofFormula(localInstances, trace, true, tConfig);
+          this.makeFofFormula(localInstances, trace, true, t);
         }
       }
     }
-    Set<Type> _keySet_1 = config.typeScopes.maxNewElementsByType.keySet();
-    for (final Type tConfig_1 : _keySet_1) {
+    final Function1<Type, Boolean> _function_1 = (Type it) -> {
+      boolean _equals = it.equals(trace.topLevelType);
+      return Boolean.valueOf((!_equals));
+    };
+    Iterable<Type> _filter_1 = IterableExtensions.<Type>filter(config.typeScopes.maxNewElementsByType.keySet(), _function_1);
+    for (final Type t_1 : _filter_1) {
       {
-        Integer maxNum = CollectionsUtil.<Type, Integer>lookup(tConfig_1, config.typeScopes.maxNewElementsByType);
-        minNum = (CollectionsUtil.<Type, Integer>lookup(tConfig_1, config.typeScopes.minNewElementsByType)).intValue();
-        Integer startpoint = CollectionsUtil.<Type, Integer>lookup(tConfig_1, startPoints);
+        int numIniIntModel = 0;
+        Set<DefinedElement> _keySet = trace.definedElement2String.keySet();
+        for (final DefinedElement elem : _keySet) {
+          EList<TypeDefinition> _definedInType = elem.getDefinedInType();
+          boolean _equals = Objects.equal(_definedInType, t_1);
+          if (_equals) {
+            int _numIniIntModel = numIniIntModel;
+            numIniIntModel = (_numIniIntModel + 1);
+          }
+        }
+        Integer _lookup = CollectionsUtil.<Type, Integer>lookup(t_1, config.typeScopes.maxNewElementsByType);
+        int maxNum = ((_lookup).intValue() - numIniIntModel);
+        boolean _contains = config.typeScopes.minNewElementsByType.keySet().contains(t_1);
+        if (_contains) {
+          Integer _lookup_1 = CollectionsUtil.<Type, Integer>lookup(t_1, config.typeScopes.minNewElementsByType);
+          int _minus = ((_lookup_1).intValue() - numIniIntModel);
+          minNum = _minus;
+        } else {
+          minNum = 0;
+        }
         if ((minNum != 0)) {
+          Integer startpoint = CollectionsUtil.<Type, Integer>lookup(t_1, startPoints);
           this.getInstanceConstants(((startpoint).intValue() + minNum), (startpoint).intValue(), localInstances, trace, true, false);
+        } else {
+          localInstances.clear();
         }
-        if (((maxNum).intValue() != minNum)) {
-          int instEndInd = Math.min(GLOBAL_MAX, ((i_1 + (maxNum).intValue()) - minNum));
-          this.getInstanceConstants(instEndInd, i_1, localInstances, trace, false, false);
-          this.makeFofFormula(localInstances, trace, false, tConfig_1);
-        }
+        int instEndInd = Math.min(GLOBAL_MAX, ((i_1 + maxNum) - minNum));
+        this.getInstanceConstants(instEndInd, i_1, localInstances, trace, false, false);
+        this.makeFofFormula(localInstances, trace, false, t_1);
       }
     }
     final boolean DUPLICATES = config.uniquenessDuplicates;
@@ -118,12 +162,12 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
           {
             final int x = ind;
             VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-            final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+            final Procedure1<VLSFofFormula> _function_2 = (VLSFofFormula it) -> {
               it.setName(this.support.toIDMultiple("t_uniqueness", e.getName()));
               it.setFofRole("axiom");
               it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances, e));
             };
-            final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+            final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_2);
             EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
             _formulas.add(uniqueness);
             ind++;
@@ -135,12 +179,12 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
           {
             final int x = ind;
             VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
-            final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
+            final Procedure1<VLSFofFormula> _function_2 = (VLSFofFormula it) -> {
               it.setName(this.support.toIDMultiple("t_uniqueness", e_1.getName()));
               it.setFofRole("axiom");
               it.setFofFormula(this.support.establishUniqueness(trace.uniqueInstances.subList(x, numInst), e_1));
             };
-            final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function);
+            final VLSFofFormula uniqueness = ObjectExtensions.<VLSFofFormula>operator_doubleArrow(_createVLSFofFormula, _function_2);
             EList<VLSFofFormula> _formulas = trace.specification.getFormulas();
             _formulas.add(uniqueness);
             ind++;

@@ -23,18 +23,22 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		this.base = base
 	}
 
-	def dispatch public void transformScope(List<Type> types, VampireSolverConfiguration config, Logic2VampireLanguageMapperTrace trace) {
+	def dispatch public void transformScope(List<Type> types, VampireSolverConfiguration config,
+		Logic2VampireLanguageMapperTrace trace) {
 		val ABSOLUTE_MIN = 0
 		val ABSOLUTE_MAX = Integer.MAX_VALUE
 
 //		TODO HANDLE ERRORS RELATED TO MAX > MIN
 //		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES)+1(for root) > MAX OBJECTS
-//		TODO HANDLE 
-		// 1. make a list of constants equaling the min number of specified objects
-		//These numbers do not include enums or initial model elements
+//		TODO HANDLE case where init model does not satisfy for example ine and only one criterion of toplvl elem
+//		We are currently ignoring all typescope spec related to the topLevel type
+//		TODO Case where typeScope spec continas numbers for a type and its subtype
+//		We shouldnt waste constants for each one
 		
-		//Number of defined non-abstract elements that are not enum elements
-		//Equals the number of elements in te initial model
+		// 1. make a list of constants equaling the min number of specified objects
+		// These numbers do not include enums or initial model elements
+		// Number of defined non-abstract elements that are not enum elements
+		// Equals the number of elements in te initial model
 		var elemsInIM = trace.definedElement2String.size
 //		var elemsInIM = 0
 //		
@@ -45,10 +49,9 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 //				elemsInIM += 1
 //			}
 //		}
-		
-		//TODO handle errors related to GLOBAL_MIN/MAX < 0
-		val GLOBAL_MIN = config.typeScopes.minNewElements-elemsInIM
-		val GLOBAL_MAX = config.typeScopes.maxNewElements-elemsInIM
+		// TODO handle errors related to GLOBAL_MIN/MAX < 0
+		val GLOBAL_MIN = config.typeScopes.minNewElements - elemsInIM
+		val GLOBAL_MAX = config.typeScopes.maxNewElements - elemsInIM
 
 		val localInstances = newArrayList
 
@@ -79,62 +82,60 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Minimum_Specific
 		var i = 1
-		if (trace.topLvlElementIsInInitialModel as Boolean){
+		if (trace.topLvlElementIsInInitialModel as Boolean) {
 			i = 0
 		}
 		var minNum = -1
 		var Map<Type, Integer> startPoints = new HashMap
-//		var inIM = false
-		for (tConfig : config.typeScopes.minNewElementsByType.keySet) {
-//			var numIniIntModel = 0
-//			for (elem : trace.definedElement2String.keySet) {
-//				println(elem.definedInType)
-//				for (tDefined : elem.definedInType) {
-//					inIM = support.dfsSubtypeCheck(tConfig, tDefined) || tConfig.equals(tDefined)
-//				}
-//				if (inIM) {
-//					numIniIntModel += 1
-//				}
-//				inIM = false
-//			}		
-			
-			minNum = tConfig.lookup(config.typeScopes.minNewElementsByType)//-numIniIntModel
+		for (t : config.typeScopes.minNewElementsByType.keySet.filter[!equals(trace.topLevelType)]) {
+			var numIniIntModel = 0
+			for (elem : trace.definedElement2String.keySet) {
+				for (tDefined : elem.definedInType) {
+					if (support.dfsSubtypeCheck(t, tDefined)) {
+						numIniIntModel += 1
+					}
+				}
+			}
+			minNum = t.lookup(config.typeScopes.minNewElementsByType) - numIniIntModel
 			if (minNum != 0) {
 				getInstanceConstants(i + minNum, i, localInstances, trace, true, false)
-				startPoints.put(tConfig, i)
+				startPoints.put(t, i)
 				i += minNum
-				makeFofFormula(localInstances, trace, true, tConfig)
+				makeFofFormula(localInstances, trace, true, t)
 			}
 		}
 
 		// TODO: calc sum of mins, compare to current value of i
 		// Handling Maximum_Specific
-		for (tConfig : config.typeScopes.maxNewElementsByType.keySet) {
-			
-//			var numIniIntModel = 0
-//			for (elem : trace.definedElement2String.keySet) {
-//				println(elem.definedInType)
-//				for (tDefined : elem.definedInType) {
-//					inIM = support.dfsSubtypeCheck(tConfig, tDefined) || tConfig.equals(tDefined)
-//				}
-//				if (inIM) {
-//					numIniIntModel += 1
-//				}
-//				inIM = false
-//			}	
-			
-			var maxNum = tConfig.lookup(config.typeScopes.maxNewElementsByType)//-numIniIntModel
-			minNum = tConfig.lookup(config.typeScopes.minNewElementsByType)//-numIniIntModel
-			var startpoint = tConfig.lookup(startPoints)
+		for (t : config.typeScopes.maxNewElementsByType.keySet.filter[!equals(trace.topLevelType)]) {
+
+			var numIniIntModel = 0
+			for (elem : trace.definedElement2String.keySet) {
+				if (elem.definedInType == t) {
+					numIniIntModel += 1
+				}
+			}
+
+			var maxNum = t.lookup(config.typeScopes.maxNewElementsByType) - numIniIntModel
+			if (config.typeScopes.minNewElementsByType.keySet.contains(t)) {
+				minNum = t.lookup(config.typeScopes.minNewElementsByType) - numIniIntModel
+			} else {
+				minNum = 0
+			}
+
 			if (minNum != 0) {
+				var startpoint = t.lookup(startPoints)
 				getInstanceConstants(startpoint + minNum, startpoint, localInstances, trace, true, false)
 			}
-			//I do not understand the line below
-			if (maxNum != minNum) {
-				var instEndInd = Math.min(GLOBAL_MAX, i + maxNum - minNum)
-				getInstanceConstants(instEndInd, i, localInstances, trace, false, false)
-				makeFofFormula(localInstances, trace, false, tConfig)
+			else {
+				localInstances.clear
 			}
+			// I do not understand the line below
+//			if (maxNum != minNum) {
+			var instEndInd = Math.min(GLOBAL_MAX, i + maxNum - minNum)
+			getInstanceConstants(instEndInd, i, localInstances, trace, false, false)
+			makeFofFormula(localInstances, trace, false, t)
+//			}
 		}
 
 // 3. Specify uniqueness of elements

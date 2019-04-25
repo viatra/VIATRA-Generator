@@ -47,7 +47,7 @@ class FAMTest {
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
-//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
+		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 		workspace.writeModel(problem, "Fam.logicproblem")
 
@@ -63,9 +63,9 @@ class FAMTest {
 		// /////////////////////////////////////////////////////
 		// Minimum Scope
 		val classMapMin = new HashMap<Class, Integer>
-		classMapMin.put(FunctionalArchitectureModel, 1)
-		classMapMin.put(Function, 1)
-		classMapMin.put(FunctionalInterface, 2)
+//		classMapMin.put(FunctionalArchitectureModel, 1)
+//		classMapMin.put(Function, 1)
+//		classMapMin.put(FunctionalInterface, 2)
 		classMapMin.put(FunctionalOutput, 3)
 		
 		val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
@@ -74,7 +74,7 @@ class FAMTest {
 		val classMapMax = new HashMap<Class, Integer>
 		classMapMax.put(FunctionalArchitectureModel, 3)
 		classMapMax.put(Function, 5)
-		classMapMax.put(FunctionalInterface, 2)
+		classMapMax.put(FunctionalInterface, 3)
 		classMapMax.put(FunctionalOutput, 4)
 		
 		val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)

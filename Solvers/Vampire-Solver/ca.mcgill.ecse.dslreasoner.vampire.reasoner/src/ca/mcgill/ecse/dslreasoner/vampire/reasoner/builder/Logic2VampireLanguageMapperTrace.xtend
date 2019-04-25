@@ -32,6 +32,7 @@ class Logic2VampireLanguageMapperTrace {
 	
 	public var Map<DefinedElement, String> definedElement2String = new HashMap
 	public var topLvlElementIsInInitialModel = null
+	public var topLevelType = null
 	
 	public val Map<Type, VLSFunction> type2Predicate = new HashMap;
 	public val Map<DefinedElement, VLSFunction> element2Predicate = new HashMap
