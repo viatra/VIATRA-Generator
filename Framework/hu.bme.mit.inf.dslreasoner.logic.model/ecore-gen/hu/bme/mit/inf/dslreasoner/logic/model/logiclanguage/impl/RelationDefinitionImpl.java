@@ -92,6 +92,7 @@ public class RelationDefinitionImpl extends RelationImpl implements RelationDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getVariables() {
 		if (variables == null) {
 			variables = new EObjectContainmentEList<Variable>(Variable.class, this, LogiclanguagePackage.RELATION_DEFINITION__VARIABLES);
@@ -104,6 +105,7 @@ public class RelationDefinitionImpl extends RelationImpl implements RelationDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getValue() {
 		return value;
 	}
@@ -128,6 +130,7 @@ public class RelationDefinitionImpl extends RelationImpl implements RelationDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Term newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -147,6 +150,7 @@ public class RelationDefinitionImpl extends RelationImpl implements RelationDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationDeclaration getDefines() {
 		if (defines != null && defines.eIsProxy()) {
 			InternalEObject oldDefines = (InternalEObject)defines;
@@ -173,6 +177,7 @@ public class RelationDefinitionImpl extends RelationImpl implements RelationDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefines(RelationDeclaration newDefines) {
 		RelationDeclaration oldDefines = defines;
 		defines = newDefines;

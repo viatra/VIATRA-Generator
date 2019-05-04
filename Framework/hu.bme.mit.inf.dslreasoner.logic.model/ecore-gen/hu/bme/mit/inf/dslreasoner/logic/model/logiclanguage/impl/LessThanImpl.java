@@ -73,6 +73,7 @@ public class LessThanImpl extends PrimitiveRelationImpl implements LessThan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getLeftOperand() {
 		return leftOperand;
 	}
@@ -97,6 +98,7 @@ public class LessThanImpl extends PrimitiveRelationImpl implements LessThan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLeftOperand(Term newLeftOperand) {
 		if (newLeftOperand != leftOperand) {
 			NotificationChain msgs = null;
@@ -116,6 +118,7 @@ public class LessThanImpl extends PrimitiveRelationImpl implements LessThan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getRightOperand() {
 		return rightOperand;
 	}
@@ -140,6 +143,7 @@ public class LessThanImpl extends PrimitiveRelationImpl implements LessThan {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRightOperand(Term newRightOperand) {
 		if (newRightOperand != rightOperand) {
 			NotificationChain msgs = null;

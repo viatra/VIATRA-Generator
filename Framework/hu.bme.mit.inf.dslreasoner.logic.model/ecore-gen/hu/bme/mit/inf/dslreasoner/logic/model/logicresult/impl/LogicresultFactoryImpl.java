@@ -75,6 +75,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ModelResult createModelResult() {
 		ModelResultImpl modelResult = new ModelResultImpl();
 		return modelResult;
@@ -85,6 +86,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InconsistencyResult createInconsistencyResult() {
 		InconsistencyResultImpl inconsistencyResult = new InconsistencyResultImpl();
 		return inconsistencyResult;
@@ -95,6 +97,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InsuficientResourcesResult createInsuficientResourcesResult() {
 		InsuficientResourcesResultImpl insuficientResourcesResult = new InsuficientResourcesResultImpl();
 		return insuficientResourcesResult;
@@ -105,6 +108,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ErrorResult createErrorResult() {
 		ErrorResultImpl errorResult = new ErrorResultImpl();
 		return errorResult;
@@ -115,6 +119,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Statistics createStatistics() {
 		StatisticsImpl statistics = new StatisticsImpl();
 		return statistics;
@@ -125,6 +130,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UndecidableResult createUndecidableResult() {
 		UndecidableResultImpl undecidableResult = new UndecidableResultImpl();
 		return undecidableResult;
@@ -135,6 +141,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntStatisticEntry createIntStatisticEntry() {
 		IntStatisticEntryImpl intStatisticEntry = new IntStatisticEntryImpl();
 		return intStatisticEntry;
@@ -145,6 +152,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RealStatisticEntry createRealStatisticEntry() {
 		RealStatisticEntryImpl realStatisticEntry = new RealStatisticEntryImpl();
 		return realStatisticEntry;
@@ -155,6 +163,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringStatisticEntry createStringStatisticEntry() {
 		StringStatisticEntryImpl stringStatisticEntry = new StringStatisticEntryImpl();
 		return stringStatisticEntry;
@@ -165,6 +174,7 @@ public class LogicresultFactoryImpl extends EFactoryImpl implements LogicresultF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicresultPackage getLogicresultPackage() {
 		return (LogicresultPackage)getEPackage();
 	}

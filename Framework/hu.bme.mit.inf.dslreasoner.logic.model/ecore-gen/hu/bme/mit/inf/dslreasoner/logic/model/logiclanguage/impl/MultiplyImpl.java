@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class MultiplyImpl extends IntOperationImpl implements Multiply {
+public class MultiplyImpl extends NumericOperationImpl implements Multiply {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

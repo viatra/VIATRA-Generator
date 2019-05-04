@@ -84,6 +84,7 @@ public class IfThenElseImpl extends TermImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getCondition() {
 		return condition;
 	}
@@ -108,6 +109,7 @@ public class IfThenElseImpl extends TermImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCondition(Term newCondition) {
 		if (newCondition != condition) {
 			NotificationChain msgs = null;
@@ -127,6 +129,7 @@ public class IfThenElseImpl extends TermImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getIfTrue() {
 		return ifTrue;
 	}
@@ -151,6 +154,7 @@ public class IfThenElseImpl extends TermImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfTrue(Term newIfTrue) {
 		if (newIfTrue != ifTrue) {
 			NotificationChain msgs = null;
@@ -170,6 +174,7 @@ public class IfThenElseImpl extends TermImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getIfFalse() {
 		return ifFalse;
 	}
@@ -194,6 +199,7 @@ public class IfThenElseImpl extends TermImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIfFalse(Term newIfFalse) {
 		if (newIfFalse != ifFalse) {
 			NotificationChain msgs = null;

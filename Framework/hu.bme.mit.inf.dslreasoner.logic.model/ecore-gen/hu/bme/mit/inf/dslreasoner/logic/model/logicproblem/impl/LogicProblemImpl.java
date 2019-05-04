@@ -152,6 +152,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Type> getTypes() {
 		if (types == null) {
 			types = new EObjectContainmentEList<Type>(Type.class, this, LogicproblemPackage.LOGIC_PROBLEM__TYPES);
@@ -164,6 +165,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Function> getFunctions() {
 		if (functions == null) {
 			functions = new EObjectContainmentEList<Function>(Function.class, this, LogicproblemPackage.LOGIC_PROBLEM__FUNCTIONS);
@@ -176,6 +178,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Assertion> getAssertions() {
 		if (assertions == null) {
 			assertions = new EObjectContainmentEList<Assertion>(Assertion.class, this, LogicproblemPackage.LOGIC_PROBLEM__ASSERTIONS);
@@ -188,6 +191,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Relation> getRelations() {
 		if (relations == null) {
 			relations = new EObjectContainmentEList<Relation>(Relation.class, this, LogicproblemPackage.LOGIC_PROBLEM__RELATIONS);
@@ -200,6 +204,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Constant> getConstants() {
 		if (constants == null) {
 			constants = new EObjectContainmentEList<Constant>(Constant.class, this, LogicproblemPackage.LOGIC_PROBLEM__CONSTANTS);
@@ -212,6 +217,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DefinedElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentEList<DefinedElement>(DefinedElement.class, this, LogicproblemPackage.LOGIC_PROBLEM__ELEMENTS);
@@ -224,6 +230,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ContainmentHierarchy> getContainmentHierarchies() {
 		if (containmentHierarchies == null) {
 			containmentHierarchies = new EObjectContainmentEList<ContainmentHierarchy>(ContainmentHierarchy.class, this, LogicproblemPackage.LOGIC_PROBLEM__CONTAINMENT_HIERARCHIES);
@@ -236,6 +243,7 @@ public class LogicProblemImpl extends MinimalEObjectImpl.Container implements Lo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Annotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, LogicproblemPackage.LOGIC_PROBLEM__ANNOTATIONS);

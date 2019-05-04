@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class DivisonImpl extends IntOperationImpl implements Divison {
+public class DivisonImpl extends NumericOperationImpl implements Divison {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

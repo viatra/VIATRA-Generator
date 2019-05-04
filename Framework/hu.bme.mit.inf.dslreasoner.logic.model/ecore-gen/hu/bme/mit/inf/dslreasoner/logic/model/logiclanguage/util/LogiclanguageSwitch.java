@@ -353,18 +353,18 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case LogiclanguagePackage.INT_OPERATION: {
-				IntOperation intOperation = (IntOperation)theEObject;
-				T result = caseIntOperation(intOperation);
-				if (result == null) result = caseTerm(intOperation);
-				if (result == null) result = caseTermDescription(intOperation);
+			case LogiclanguagePackage.NUMERIC_OPERATION: {
+				NumericOperation numericOperation = (NumericOperation)theEObject;
+				T result = caseNumericOperation(numericOperation);
+				if (result == null) result = caseTerm(numericOperation);
+				if (result == null) result = caseTermDescription(numericOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case LogiclanguagePackage.PLUS: {
 				Plus plus = (Plus)theEObject;
 				T result = casePlus(plus);
-				if (result == null) result = caseIntOperation(plus);
+				if (result == null) result = caseNumericOperation(plus);
 				if (result == null) result = caseTerm(plus);
 				if (result == null) result = caseTermDescription(plus);
 				if (result == null) result = defaultCase(theEObject);
@@ -373,7 +373,7 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 			case LogiclanguagePackage.MINUS: {
 				Minus minus = (Minus)theEObject;
 				T result = caseMinus(minus);
-				if (result == null) result = caseIntOperation(minus);
+				if (result == null) result = caseNumericOperation(minus);
 				if (result == null) result = caseTerm(minus);
 				if (result == null) result = caseTermDescription(minus);
 				if (result == null) result = defaultCase(theEObject);
@@ -382,7 +382,7 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 			case LogiclanguagePackage.MULTIPLY: {
 				Multiply multiply = (Multiply)theEObject;
 				T result = caseMultiply(multiply);
-				if (result == null) result = caseIntOperation(multiply);
+				if (result == null) result = caseNumericOperation(multiply);
 				if (result == null) result = caseTerm(multiply);
 				if (result == null) result = caseTermDescription(multiply);
 				if (result == null) result = defaultCase(theEObject);
@@ -391,7 +391,7 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 			case LogiclanguagePackage.DIVISON: {
 				Divison divison = (Divison)theEObject;
 				T result = caseDivison(divison);
-				if (result == null) result = caseIntOperation(divison);
+				if (result == null) result = caseNumericOperation(divison);
 				if (result == null) result = caseTerm(divison);
 				if (result == null) result = caseTermDescription(divison);
 				if (result == null) result = defaultCase(theEObject);
@@ -400,7 +400,7 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 			case LogiclanguagePackage.MOD: {
 				Mod mod = (Mod)theEObject;
 				T result = caseMod(mod);
-				if (result == null) result = caseIntOperation(mod);
+				if (result == null) result = caseNumericOperation(mod);
 				if (result == null) result = caseTerm(mod);
 				if (result == null) result = caseTermDescription(mod);
 				if (result == null) result = defaultCase(theEObject);
@@ -549,6 +549,71 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 				T result = caseTransitiveClosure(transitiveClosure);
 				if (result == null) result = caseTerm(transitiveClosure);
 				if (result == null) result = caseTermDescription(transitiveClosure);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.POW: {
+				Pow pow = (Pow)theEObject;
+				T result = casePow(pow);
+				if (result == null) result = caseNumericOperation(pow);
+				if (result == null) result = caseTerm(pow);
+				if (result == null) result = caseTermDescription(pow);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.AGGREGATE_EXPRESSION: {
+				AggregateExpression aggregateExpression = (AggregateExpression)theEObject;
+				T result = caseAggregateExpression(aggregateExpression);
+				if (result == null) result = caseTerm(aggregateExpression);
+				if (result == null) result = caseTermDescription(aggregateExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.SUM: {
+				Sum sum = (Sum)theEObject;
+				T result = caseSum(sum);
+				if (result == null) result = caseProjectedAggregateExpression(sum);
+				if (result == null) result = caseAggregateExpression(sum);
+				if (result == null) result = caseTerm(sum);
+				if (result == null) result = caseTermDescription(sum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.COUNT: {
+				Count count = (Count)theEObject;
+				T result = caseCount(count);
+				if (result == null) result = caseAggregateExpression(count);
+				if (result == null) result = caseTerm(count);
+				if (result == null) result = caseTermDescription(count);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.MIN: {
+				Min min = (Min)theEObject;
+				T result = caseMin(min);
+				if (result == null) result = caseProjectedAggregateExpression(min);
+				if (result == null) result = caseAggregateExpression(min);
+				if (result == null) result = caseTerm(min);
+				if (result == null) result = caseTermDescription(min);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.MAX: {
+				Max max = (Max)theEObject;
+				T result = caseMax(max);
+				if (result == null) result = caseProjectedAggregateExpression(max);
+				if (result == null) result = caseAggregateExpression(max);
+				if (result == null) result = caseTerm(max);
+				if (result == null) result = caseTermDescription(max);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case LogiclanguagePackage.PROJECTED_AGGREGATE_EXPRESSION: {
+				ProjectedAggregateExpression projectedAggregateExpression = (ProjectedAggregateExpression)theEObject;
+				T result = caseProjectedAggregateExpression(projectedAggregateExpression);
+				if (result == null) result = caseAggregateExpression(projectedAggregateExpression);
+				if (result == null) result = caseTerm(projectedAggregateExpression);
+				if (result == null) result = caseTermDescription(projectedAggregateExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1067,17 +1132,17 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Int Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Numeric Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Int Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Numeric Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIntOperation(IntOperation object) {
+	public T caseNumericOperation(NumericOperation object) {
 		return null;
 	}
 
@@ -1423,6 +1488,111 @@ public class LogiclanguageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTransitiveClosure(TransitiveClosure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pow</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pow</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePow(Pow object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Aggregate Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Aggregate Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAggregateExpression(AggregateExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSum(Sum object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Count</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Count</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCount(Count object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Min</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Min</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMin(Min object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Max</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Max</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMax(Max object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Projected Aggregate Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Projected Aggregate Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProjectedAggregateExpression(ProjectedAggregateExpression object) {
 		return null;
 	}
 

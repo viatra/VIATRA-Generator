@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ModImpl extends IntOperationImpl implements Mod {
+public class ModImpl extends NumericOperationImpl implements Mod {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

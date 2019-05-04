@@ -69,6 +69,7 @@ public class InsuficientResourcesResultImpl extends UnknownResultImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -78,6 +79,7 @@ public class InsuficientResourcesResultImpl extends UnknownResultImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -152,7 +154,7 @@ public class InsuficientResourcesResultImpl extends UnknownResultImpl implements
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (resourceName: ");
 		result.append(resourceName);
 		result.append(')');

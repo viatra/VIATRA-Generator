@@ -66,6 +66,7 @@ public class OrImpl extends BoolOperationImpl implements Or {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Term> getOperands() {
 		if (operands == null) {
 			operands = new EObjectContainmentEList<Term>(Term.class, this, LogiclanguagePackage.OR__OPERANDS);

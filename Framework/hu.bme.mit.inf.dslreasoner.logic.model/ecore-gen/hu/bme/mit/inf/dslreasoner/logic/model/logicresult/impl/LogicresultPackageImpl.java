@@ -151,7 +151,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link LogicresultPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -165,13 +165,16 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 		if (isInited) return (LogicresultPackage)EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI);
 
 		// Obtain or create and register package
-		LogicresultPackageImpl theLogicresultPackage = (LogicresultPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LogicresultPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LogicresultPackageImpl());
+		Object registeredLogicresultPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		LogicresultPackageImpl theLogicresultPackage = registeredLogicresultPackage instanceof LogicresultPackageImpl ? (LogicresultPackageImpl)registeredLogicresultPackage : new LogicresultPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		LogiclanguagePackageImpl theLogiclanguagePackage = (LogiclanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI) instanceof LogiclanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI) : LogiclanguagePackage.eINSTANCE);
-		LogicproblemPackageImpl theLogicproblemPackage = (LogicproblemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI) instanceof LogicproblemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI) : LogicproblemPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI);
+		LogiclanguagePackageImpl theLogiclanguagePackage = (LogiclanguagePackageImpl)(registeredPackage instanceof LogiclanguagePackageImpl ? registeredPackage : LogiclanguagePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI);
+		LogicproblemPackageImpl theLogicproblemPackage = (LogicproblemPackageImpl)(registeredPackage instanceof LogicproblemPackageImpl ? registeredPackage : LogicproblemPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theLogicresultPackage.createPackageContents();
@@ -186,7 +189,6 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 		// Mark meta-data to indicate it can't be changed
 		theLogicresultPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(LogicresultPackage.eNS_URI, theLogicresultPackage);
 		return theLogicresultPackage;
@@ -197,6 +199,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLogicResult() {
 		return logicResultEClass;
 	}
@@ -206,6 +209,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicResult_Problem() {
 		return (EReference)logicResultEClass.getEStructuralFeatures().get(0);
 	}
@@ -215,6 +219,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicResult_Statistics() {
 		return (EReference)logicResultEClass.getEStructuralFeatures().get(1);
 	}
@@ -224,6 +229,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLogicResult_Trace() {
 		return (EAttribute)logicResultEClass.getEStructuralFeatures().get(2);
 	}
@@ -233,6 +239,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getLogicResult_Representation() {
 		return (EAttribute)logicResultEClass.getEStructuralFeatures().get(3);
 	}
@@ -242,6 +249,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getModelResult() {
 		return modelResultEClass;
 	}
@@ -251,6 +259,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getModelResult_MaxInteger() {
 		return (EAttribute)modelResultEClass.getEStructuralFeatures().get(0);
 	}
@@ -260,6 +269,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getModelResult_MinInteger() {
 		return (EAttribute)modelResultEClass.getEStructuralFeatures().get(1);
 	}
@@ -269,6 +279,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInconsistencyResult() {
 		return inconsistencyResultEClass;
 	}
@@ -278,6 +289,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUnknownResult() {
 		return unknownResultEClass;
 	}
@@ -287,6 +299,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInsuficientResourcesResult() {
 		return insuficientResourcesResultEClass;
 	}
@@ -296,6 +309,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInsuficientResourcesResult_ResourceName() {
 		return (EAttribute)insuficientResourcesResultEClass.getEStructuralFeatures().get(0);
 	}
@@ -305,6 +319,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getErrorResult() {
 		return errorResultEClass;
 	}
@@ -314,6 +329,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getErrorResult_Message() {
 		return (EAttribute)errorResultEClass.getEStructuralFeatures().get(0);
 	}
@@ -323,6 +339,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatistics() {
 		return statisticsEClass;
 	}
@@ -332,6 +349,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStatistics_Entries() {
 		return (EReference)statisticsEClass.getEStructuralFeatures().get(0);
 	}
@@ -341,6 +359,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStatistics_TransformationTime() {
 		return (EAttribute)statisticsEClass.getEStructuralFeatures().get(1);
 	}
@@ -350,6 +369,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStatistics_SolverTime() {
 		return (EAttribute)statisticsEClass.getEStructuralFeatures().get(2);
 	}
@@ -359,6 +379,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStatistics_SolverMemory() {
 		return (EAttribute)statisticsEClass.getEStructuralFeatures().get(3);
 	}
@@ -368,6 +389,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatisticEntry() {
 		return statisticEntryEClass;
 	}
@@ -377,6 +399,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStatisticEntry_Name() {
 		return (EAttribute)statisticEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -386,6 +409,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUndecidableResult() {
 		return undecidableResultEClass;
 	}
@@ -395,6 +419,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIntStatisticEntry() {
 		return intStatisticEntryEClass;
 	}
@@ -404,6 +429,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIntStatisticEntry_Value() {
 		return (EAttribute)intStatisticEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -413,6 +439,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRealStatisticEntry() {
 		return realStatisticEntryEClass;
 	}
@@ -422,6 +449,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRealStatisticEntry_Value() {
 		return (EAttribute)realStatisticEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -431,6 +459,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStringStatisticEntry() {
 		return stringStatisticEntryEClass;
 	}
@@ -440,6 +469,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringStatisticEntry_Value() {
 		return (EAttribute)stringStatisticEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -449,6 +479,7 @@ public class LogicresultPackageImpl extends EPackageImpl implements LogicresultP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicresultFactory getLogicresultFactory() {
 		return (LogicresultFactory)getEFactoryInstance();
 	}

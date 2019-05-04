@@ -90,6 +90,7 @@ public class FunctionDefinitionImpl extends FunctionImpl implements FunctionDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getVariable() {
 		if (variable == null) {
 			variable = new EObjectContainmentEList<Variable>(Variable.class, this, LogiclanguagePackage.FUNCTION_DEFINITION__VARIABLE);
@@ -102,6 +103,7 @@ public class FunctionDefinitionImpl extends FunctionImpl implements FunctionDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionDeclaration getDefines() {
 		if (defines != null && defines.eIsProxy()) {
 			InternalEObject oldDefines = (InternalEObject)defines;
@@ -128,6 +130,7 @@ public class FunctionDefinitionImpl extends FunctionImpl implements FunctionDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefines(FunctionDeclaration newDefines) {
 		FunctionDeclaration oldDefines = defines;
 		defines = newDefines;
@@ -140,6 +143,7 @@ public class FunctionDefinitionImpl extends FunctionImpl implements FunctionDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getValue() {
 		return value;
 	}
@@ -164,6 +168,7 @@ public class FunctionDefinitionImpl extends FunctionImpl implements FunctionDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Term newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;

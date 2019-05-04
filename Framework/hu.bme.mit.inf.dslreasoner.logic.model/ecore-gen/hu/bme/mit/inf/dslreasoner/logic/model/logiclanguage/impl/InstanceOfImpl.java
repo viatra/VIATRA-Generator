@@ -74,6 +74,7 @@ public class InstanceOfImpl extends TermImpl implements InstanceOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getValue() {
 		return value;
 	}
@@ -98,6 +99,7 @@ public class InstanceOfImpl extends TermImpl implements InstanceOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Term newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -117,6 +119,7 @@ public class InstanceOfImpl extends TermImpl implements InstanceOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeReference getRange() {
 		return range;
 	}
@@ -141,6 +144,7 @@ public class InstanceOfImpl extends TermImpl implements InstanceOf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRange(TypeReference newRange) {
 		if (newRange != range) {
 			NotificationChain msgs = null;

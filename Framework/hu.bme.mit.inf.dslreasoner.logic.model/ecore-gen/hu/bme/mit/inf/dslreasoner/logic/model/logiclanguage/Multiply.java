@@ -13,5 +13,5 @@ package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage;
  * @model
  * @generated
  */
-public interface Multiply extends IntOperation {
+public interface Multiply extends NumericOperation {
 } // Multiply

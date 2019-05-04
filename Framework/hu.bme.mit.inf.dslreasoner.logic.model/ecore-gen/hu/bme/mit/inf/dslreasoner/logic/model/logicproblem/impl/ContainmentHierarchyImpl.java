@@ -105,6 +105,7 @@ public class ContainmentHierarchyImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Type> getTypesOrderedInHierarchy() {
 		if (typesOrderedInHierarchy == null) {
 			typesOrderedInHierarchy = new EObjectResolvingEList<Type>(Type.class, this, LogicproblemPackage.CONTAINMENT_HIERARCHY__TYPES_ORDERED_IN_HIERARCHY);
@@ -117,6 +118,7 @@ public class ContainmentHierarchyImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Function> getContainmentFunctions() {
 		if (containmentFunctions == null) {
 			containmentFunctions = new EObjectResolvingEList<Function>(Function.class, this, LogicproblemPackage.CONTAINMENT_HIERARCHY__CONTAINMENT_FUNCTIONS);
@@ -129,6 +131,7 @@ public class ContainmentHierarchyImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Relation> getContainmentRelations() {
 		if (containmentRelations == null) {
 			containmentRelations = new EObjectResolvingEList<Relation>(Relation.class, this, LogicproblemPackage.CONTAINMENT_HIERARCHY__CONTAINMENT_RELATIONS);
@@ -141,6 +144,7 @@ public class ContainmentHierarchyImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constant getRootConstant() {
 		if (rootConstant != null && rootConstant.eIsProxy()) {
 			InternalEObject oldRootConstant = (InternalEObject)rootConstant;
@@ -167,6 +171,7 @@ public class ContainmentHierarchyImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRootConstant(Constant newRootConstant) {
 		Constant oldRootConstant = rootConstant;
 		rootConstant = newRootConstant;

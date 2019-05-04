@@ -74,6 +74,7 @@ public class ConstantDefinitionImpl extends ConstantImpl implements ConstantDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getValue() {
 		return value;
 	}
@@ -98,6 +99,7 @@ public class ConstantDefinitionImpl extends ConstantImpl implements ConstantDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Term newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -117,6 +119,7 @@ public class ConstantDefinitionImpl extends ConstantImpl implements ConstantDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConstantDeclaration getDefines() {
 		if (defines != null && defines.eIsProxy()) {
 			InternalEObject oldDefines = (InternalEObject)defines;
@@ -143,6 +146,7 @@ public class ConstantDefinitionImpl extends ConstantImpl implements ConstantDefi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefines(ConstantDeclaration newDefines) {
 		ConstantDeclaration oldDefines = defines;
 		defines = newDefines;

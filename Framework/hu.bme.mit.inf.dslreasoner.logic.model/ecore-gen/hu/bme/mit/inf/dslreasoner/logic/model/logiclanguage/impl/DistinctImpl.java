@@ -66,6 +66,7 @@ public class DistinctImpl extends PrimitiveRelationImpl implements Distinct {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Term> getOperands() {
 		if (operands == null) {
 			operands = new EObjectContainmentEList<Term>(Term.class, this, LogiclanguagePackage.DISTINCT__OPERANDS);

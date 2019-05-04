@@ -409,6 +409,51 @@ public interface LogiclanguageFactory extends EFactory {
 	TransitiveClosure createTransitiveClosure();
 
 	/**
+	 * Returns a new object of class '<em>Pow</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pow</em>'.
+	 * @generated
+	 */
+	Pow createPow();
+
+	/**
+	 * Returns a new object of class '<em>Sum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sum</em>'.
+	 * @generated
+	 */
+	Sum createSum();
+
+	/**
+	 * Returns a new object of class '<em>Count</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Count</em>'.
+	 * @generated
+	 */
+	Count createCount();
+
+	/**
+	 * Returns a new object of class '<em>Min</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Min</em>'.
+	 * @generated
+	 */
+	Min createMin();
+
+	/**
+	 * Returns a new object of class '<em>Max</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Max</em>'.
+	 * @generated
+	 */
+	Max createMax();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

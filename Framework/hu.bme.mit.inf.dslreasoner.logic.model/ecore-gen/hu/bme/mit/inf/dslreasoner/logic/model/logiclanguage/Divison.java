@@ -13,5 +13,5 @@ package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage;
  * @model
  * @generated
  */
-public interface Divison extends IntOperation {
+public interface Divison extends NumericOperation {
 } // Divison

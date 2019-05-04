@@ -80,6 +80,7 @@ public abstract class RelationImpl extends SymbolicDeclarationImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeReference> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, LogiclanguagePackage.RELATION__PARAMETERS);
@@ -92,6 +93,7 @@ public abstract class RelationImpl extends SymbolicDeclarationImpl implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RelationAnnotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectWithInverseResolvingEList<RelationAnnotation>(RelationAnnotation.class, this, LogiclanguagePackage.RELATION__ANNOTATIONS, LogicproblemPackage.RELATION_ANNOTATION__TARGET);

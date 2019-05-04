@@ -64,6 +64,7 @@ public class AssertionAnnotationImpl extends AnnotationImpl implements Assertion
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Assertion getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -105,6 +106,7 @@ public class AssertionAnnotationImpl extends AnnotationImpl implements Assertion
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Assertion newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;

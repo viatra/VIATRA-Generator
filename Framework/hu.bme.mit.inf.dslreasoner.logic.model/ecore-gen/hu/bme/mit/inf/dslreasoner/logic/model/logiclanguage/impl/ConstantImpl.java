@@ -79,6 +79,7 @@ public abstract class ConstantImpl extends SymbolicDeclarationImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeReference getType() {
 		return type;
 	}
@@ -103,6 +104,7 @@ public abstract class ConstantImpl extends SymbolicDeclarationImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(TypeReference newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
@@ -122,6 +124,7 @@ public abstract class ConstantImpl extends SymbolicDeclarationImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ConstantAnnotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectWithInverseResolvingEList<ConstantAnnotation>(ConstantAnnotation.class, this, LogiclanguagePackage.CONSTANT__ANNOTATIONS, LogicproblemPackage.CONSTANT_ANNOTATION__TARGET);

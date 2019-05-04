@@ -133,6 +133,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<StatisticEntry> getEntries() {
 		if (entries == null) {
 			entries = new EObjectContainmentEList<StatisticEntry>(StatisticEntry.class, this, LogicresultPackage.STATISTICS__ENTRIES);
@@ -145,6 +146,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getTransformationTime() {
 		return transformationTime;
 	}
@@ -154,6 +156,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformationTime(int newTransformationTime) {
 		int oldTransformationTime = transformationTime;
 		transformationTime = newTransformationTime;
@@ -166,6 +169,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getSolverTime() {
 		return solverTime;
 	}
@@ -175,6 +179,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSolverTime(int newSolverTime) {
 		int oldSolverTime = solverTime;
 		solverTime = newSolverTime;
@@ -187,6 +192,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getSolverMemory() {
 		return solverMemory;
 	}
@@ -196,6 +202,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSolverMemory(int newSolverMemory) {
 		int oldSolverMemory = solverMemory;
 		solverMemory = newSolverMemory;
@@ -316,7 +323,7 @@ public class StatisticsImpl extends MinimalEObjectImpl.Container implements Stat
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (transformationTime: ");
 		result.append(transformationTime);
 		result.append(", solverTime: ");

@@ -62,6 +62,7 @@ public class DefinedElementImpl extends SymbolicDeclarationImpl implements Defin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeDefinition> getDefinedInType() {
 		if (definedInType == null) {
 			definedInType = new EObjectWithInverseResolvingEList.ManyInverse<TypeDefinition>(TypeDefinition.class, this, LogiclanguagePackage.DEFINED_ELEMENT__DEFINED_IN_TYPE, LogiclanguagePackage.TYPE_DEFINITION__ELEMENTS);

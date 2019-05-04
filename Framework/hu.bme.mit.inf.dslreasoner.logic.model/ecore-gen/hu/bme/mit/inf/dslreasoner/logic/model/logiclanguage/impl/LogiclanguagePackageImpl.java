@@ -2,6 +2,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AtomicTerm;
@@ -12,6 +13,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Constant;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDefinition;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Count;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Distinct;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Divison;
@@ -26,22 +28,26 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Iff;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Impl;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral;
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LessOrEqualThan;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LessThan;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Max;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Min;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Minus;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Mod;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.MoreOrEqualThan;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.MoreThan;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Multiply;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Plus;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Pow;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.PrimitiveRelation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.PrimitiveTypeReference;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.QuantifiedExpression;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference;
@@ -50,6 +56,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Sum;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
@@ -328,7 +335,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass intOperationEClass = null;
+	private EClass numericOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -492,6 +499,55 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	private EClass transitiveClosureEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass powEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass aggregateExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sumEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass countEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass minEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass maxEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass projectedAggregateExpressionEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -519,7 +575,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link LogiclanguagePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -533,13 +589,16 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		if (isInited) return (LogiclanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI);
 
 		// Obtain or create and register package
-		LogiclanguagePackageImpl theLogiclanguagePackage = (LogiclanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LogiclanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LogiclanguagePackageImpl());
+		Object registeredLogiclanguagePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		LogiclanguagePackageImpl theLogiclanguagePackage = registeredLogiclanguagePackage instanceof LogiclanguagePackageImpl ? (LogiclanguagePackageImpl)registeredLogiclanguagePackage : new LogiclanguagePackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		LogicproblemPackageImpl theLogicproblemPackage = (LogicproblemPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI) instanceof LogicproblemPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI) : LogicproblemPackage.eINSTANCE);
-		LogicresultPackageImpl theLogicresultPackage = (LogicresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI) instanceof LogicresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI) : LogicresultPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI);
+		LogicproblemPackageImpl theLogicproblemPackage = (LogicproblemPackageImpl)(registeredPackage instanceof LogicproblemPackageImpl ? registeredPackage : LogicproblemPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI);
+		LogicresultPackageImpl theLogicresultPackage = (LogicresultPackageImpl)(registeredPackage instanceof LogicresultPackageImpl ? registeredPackage : LogicresultPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theLogiclanguagePackage.createPackageContents();
@@ -554,7 +613,6 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		// Mark meta-data to indicate it can't be changed
 		theLogiclanguagePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(LogiclanguagePackage.eNS_URI, theLogiclanguagePackage);
 		return theLogiclanguagePackage;
@@ -565,6 +623,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getType() {
 		return typeEClass;
 	}
@@ -574,6 +633,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_Name() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
 	}
@@ -583,6 +643,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_Subtypes() {
 		return (EReference)typeEClass.getEStructuralFeatures().get(1);
 	}
@@ -592,6 +653,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getType_Supertypes() {
 		return (EReference)typeEClass.getEStructuralFeatures().get(2);
 	}
@@ -601,6 +663,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getType_IsAbstract() {
 		return (EAttribute)typeEClass.getEStructuralFeatures().get(3);
 	}
@@ -610,6 +673,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDefinedElement() {
 		return definedElementEClass;
 	}
@@ -619,6 +683,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDefinedElement_DefinedInType() {
 		return (EReference)definedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -628,6 +693,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeDefinition() {
 		return typeDefinitionEClass;
 	}
@@ -637,6 +703,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeDefinition_Elements() {
 		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -646,6 +713,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypeDefinition_Defines() {
 		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -655,6 +723,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeReference() {
 		return typeReferenceEClass;
 	}
@@ -664,6 +733,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComplexTypeReference() {
 		return complexTypeReferenceEClass;
 	}
@@ -673,6 +743,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComplexTypeReference_Referred() {
 		return (EReference)complexTypeReferenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -682,6 +753,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveTypeReference() {
 		return primitiveTypeReferenceEClass;
 	}
@@ -691,6 +763,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIntTypeReference() {
 		return intTypeReferenceEClass;
 	}
@@ -700,6 +773,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBoolTypeReference() {
 		return boolTypeReferenceEClass;
 	}
@@ -709,6 +783,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRealTypeReference() {
 		return realTypeReferenceEClass;
 	}
@@ -718,6 +793,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunction() {
 		return functionEClass;
 	}
@@ -727,6 +803,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunction_Range() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(0);
 	}
@@ -736,6 +813,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunction_Parameters() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(1);
 	}
@@ -745,6 +823,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunction_Annotations() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(2);
 	}
@@ -754,6 +833,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTerm() {
 		return termEClass;
 	}
@@ -763,6 +843,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSymbolicDeclaration() {
 		return symbolicDeclarationEClass;
 	}
@@ -772,6 +853,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSymbolicDeclaration_Name() {
 		return (EAttribute)symbolicDeclarationEClass.getEStructuralFeatures().get(0);
 	}
@@ -781,6 +863,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSymbolicValue() {
 		return symbolicValueEClass;
 	}
@@ -790,6 +873,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSymbolicValue_SymbolicReference() {
 		return (EReference)symbolicValueEClass.getEStructuralFeatures().get(0);
 	}
@@ -799,6 +883,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSymbolicValue_ParameterSubstitutions() {
 		return (EReference)symbolicValueEClass.getEStructuralFeatures().get(1);
 	}
@@ -808,6 +893,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAtomicTerm() {
 		return atomicTermEClass;
 	}
@@ -817,6 +903,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIntLiteral() {
 		return intLiteralEClass;
 	}
@@ -826,6 +913,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIntLiteral_Value() {
 		return (EAttribute)intLiteralEClass.getEStructuralFeatures().get(0);
 	}
@@ -835,6 +923,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBoolLiteral() {
 		return boolLiteralEClass;
 	}
@@ -844,6 +933,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBoolLiteral_Value() {
 		return (EAttribute)boolLiteralEClass.getEStructuralFeatures().get(0);
 	}
@@ -853,6 +943,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRealLiteral() {
 		return realLiteralEClass;
 	}
@@ -862,6 +953,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRealLiteral_Value() {
 		return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
 	}
@@ -871,6 +963,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariable() {
 		return variableEClass;
 	}
@@ -880,6 +973,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariable_Range() {
 		return (EReference)variableEClass.getEStructuralFeatures().get(0);
 	}
@@ -889,6 +983,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getQuantifiedExpression() {
 		return quantifiedExpressionEClass;
 	}
@@ -898,6 +993,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getQuantifiedExpression_QuantifiedVariables() {
 		return (EReference)quantifiedExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -907,6 +1003,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getQuantifiedExpression_Expression() {
 		return (EReference)quantifiedExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -916,6 +1013,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExists() {
 		return existsEClass;
 	}
@@ -925,6 +1023,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getForall() {
 		return forallEClass;
 	}
@@ -934,6 +1033,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBoolOperation() {
 		return boolOperationEClass;
 	}
@@ -943,6 +1043,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnd() {
 		return andEClass;
 	}
@@ -952,6 +1053,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnd_Operands() {
 		return (EReference)andEClass.getEStructuralFeatures().get(0);
 	}
@@ -961,6 +1063,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOr() {
 		return orEClass;
 	}
@@ -970,6 +1073,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOr_Operands() {
 		return (EReference)orEClass.getEStructuralFeatures().get(0);
 	}
@@ -979,6 +1083,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImpl() {
 		return implEClass;
 	}
@@ -988,6 +1093,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getImpl_LeftOperand() {
 		return (EReference)implEClass.getEStructuralFeatures().get(0);
 	}
@@ -997,6 +1103,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getImpl_RightOperand() {
 		return (EReference)implEClass.getEStructuralFeatures().get(1);
 	}
@@ -1006,6 +1113,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNot() {
 		return notEClass;
 	}
@@ -1015,6 +1123,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNot_Operand() {
 		return (EReference)notEClass.getEStructuralFeatures().get(0);
 	}
@@ -1024,6 +1133,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIff() {
 		return iffEClass;
 	}
@@ -1033,6 +1143,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIff_LeftOperand() {
 		return (EReference)iffEClass.getEStructuralFeatures().get(0);
 	}
@@ -1042,6 +1153,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIff_RightOperand() {
 		return (EReference)iffEClass.getEStructuralFeatures().get(1);
 	}
@@ -1051,6 +1163,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveRelation() {
 		return primitiveRelationEClass;
 	}
@@ -1060,6 +1173,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEquals() {
 		return equalsEClass;
 	}
@@ -1069,6 +1183,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEquals_LeftOperand() {
 		return (EReference)equalsEClass.getEStructuralFeatures().get(0);
 	}
@@ -1078,6 +1193,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEquals_RightOperand() {
 		return (EReference)equalsEClass.getEStructuralFeatures().get(1);
 	}
@@ -1087,6 +1203,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDistinct() {
 		return distinctEClass;
 	}
@@ -1096,6 +1213,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDistinct_Operands() {
 		return (EReference)distinctEClass.getEStructuralFeatures().get(0);
 	}
@@ -1105,6 +1223,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLessThan() {
 		return lessThanEClass;
 	}
@@ -1114,6 +1233,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLessThan_LeftOperand() {
 		return (EReference)lessThanEClass.getEStructuralFeatures().get(0);
 	}
@@ -1123,6 +1243,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLessThan_RightOperand() {
 		return (EReference)lessThanEClass.getEStructuralFeatures().get(1);
 	}
@@ -1132,6 +1253,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMoreThan() {
 		return moreThanEClass;
 	}
@@ -1141,6 +1263,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMoreThan_LeftOperand() {
 		return (EReference)moreThanEClass.getEStructuralFeatures().get(0);
 	}
@@ -1150,6 +1273,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMoreThan_RightOperand() {
 		return (EReference)moreThanEClass.getEStructuralFeatures().get(1);
 	}
@@ -1159,6 +1283,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLessOrEqualThan() {
 		return lessOrEqualThanEClass;
 	}
@@ -1168,6 +1293,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLessOrEqualThan_LeftOperand() {
 		return (EReference)lessOrEqualThanEClass.getEStructuralFeatures().get(0);
 	}
@@ -1177,6 +1303,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLessOrEqualThan_RightOperand() {
 		return (EReference)lessOrEqualThanEClass.getEStructuralFeatures().get(1);
 	}
@@ -1186,6 +1313,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMoreOrEqualThan() {
 		return moreOrEqualThanEClass;
 	}
@@ -1195,6 +1323,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMoreOrEqualThan_LeftOperand() {
 		return (EReference)moreOrEqualThanEClass.getEStructuralFeatures().get(0);
 	}
@@ -1204,6 +1333,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMoreOrEqualThan_RightOperand() {
 		return (EReference)moreOrEqualThanEClass.getEStructuralFeatures().get(1);
 	}
@@ -1213,8 +1343,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getIntOperation() {
-		return intOperationEClass;
+	@Override
+	public EClass getNumericOperation() {
+		return numericOperationEClass;
 	}
 
 	/**
@@ -1222,8 +1353,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntOperation_LeftOperand() {
-		return (EReference)intOperationEClass.getEStructuralFeatures().get(0);
+	@Override
+	public EReference getNumericOperation_LeftOperand() {
+		return (EReference)numericOperationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1231,8 +1363,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIntOperation_RightOperand() {
-		return (EReference)intOperationEClass.getEStructuralFeatures().get(1);
+	@Override
+	public EReference getNumericOperation_RightOperand() {
+		return (EReference)numericOperationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1240,6 +1373,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPlus() {
 		return plusEClass;
 	}
@@ -1249,6 +1383,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMinus() {
 		return minusEClass;
 	}
@@ -1258,6 +1393,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMultiply() {
 		return multiplyEClass;
 	}
@@ -1267,6 +1403,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDivison() {
 		return divisonEClass;
 	}
@@ -1276,6 +1413,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMod() {
 		return modEClass;
 	}
@@ -1285,6 +1423,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeDescriptor() {
 		return typeDescriptorEClass;
 	}
@@ -1294,6 +1433,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTermDescription() {
 		return termDescriptionEClass;
 	}
@@ -1303,6 +1443,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssertion() {
 		return assertionEClass;
 	}
@@ -1312,6 +1453,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssertion_Value() {
 		return (EReference)assertionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1321,6 +1463,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAssertion_Name() {
 		return (EAttribute)assertionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1330,6 +1473,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssertion_Annotations() {
 		return (EReference)assertionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1339,6 +1483,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelation() {
 		return relationEClass;
 	}
@@ -1348,6 +1493,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelation_Parameters() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1357,6 +1503,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelation_Annotations() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1366,6 +1513,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstant() {
 		return constantEClass;
 	}
@@ -1375,6 +1523,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstant_Type() {
 		return (EReference)constantEClass.getEStructuralFeatures().get(0);
 	}
@@ -1384,6 +1533,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstant_Annotations() {
 		return (EReference)constantEClass.getEStructuralFeatures().get(1);
 	}
@@ -1393,6 +1543,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstantDefinition() {
 		return constantDefinitionEClass;
 	}
@@ -1402,6 +1553,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstantDefinition_Value() {
 		return (EReference)constantDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1411,6 +1563,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstantDefinition_Defines() {
 		return (EReference)constantDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1420,6 +1573,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationDefinition() {
 		return relationDefinitionEClass;
 	}
@@ -1429,6 +1583,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDefinition_Variables() {
 		return (EReference)relationDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1438,6 +1593,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDefinition_Value() {
 		return (EReference)relationDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1447,6 +1603,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDefinition_Defines() {
 		return (EReference)relationDefinitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1456,6 +1613,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionDefinition() {
 		return functionDefinitionEClass;
 	}
@@ -1465,6 +1623,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionDefinition_Variable() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -1474,6 +1633,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionDefinition_Defines() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -1483,6 +1643,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionDefinition_Value() {
 		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -1492,6 +1653,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIfThenElse() {
 		return ifThenElseEClass;
 	}
@@ -1501,6 +1663,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfThenElse_Condition() {
 		return (EReference)ifThenElseEClass.getEStructuralFeatures().get(0);
 	}
@@ -1510,6 +1673,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfThenElse_IfTrue() {
 		return (EReference)ifThenElseEClass.getEStructuralFeatures().get(1);
 	}
@@ -1519,6 +1683,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getIfThenElse_IfFalse() {
 		return (EReference)ifThenElseEClass.getEStructuralFeatures().get(2);
 	}
@@ -1528,6 +1693,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstantDeclaration() {
 		return constantDeclarationEClass;
 	}
@@ -1537,6 +1703,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationDeclaration() {
 		return relationDeclarationEClass;
 	}
@@ -1546,6 +1713,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionDeclaration() {
 		return functionDeclarationEClass;
 	}
@@ -1555,6 +1723,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypeDeclaration() {
 		return typeDeclarationEClass;
 	}
@@ -1564,6 +1733,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUnknownBecauseUninterpreted() {
 		return unknownBecauseUninterpretedEClass;
 	}
@@ -1573,6 +1743,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInstanceOf() {
 		return instanceOfEClass;
 	}
@@ -1582,6 +1753,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInstanceOf_Value() {
 		return (EReference)instanceOfEClass.getEStructuralFeatures().get(0);
 	}
@@ -1591,6 +1763,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInstanceOf_Range() {
 		return (EReference)instanceOfEClass.getEStructuralFeatures().get(1);
 	}
@@ -1600,6 +1773,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStringTypeReference() {
 		return stringTypeReferenceEClass;
 	}
@@ -1609,6 +1783,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStringLiteral() {
 		return stringLiteralEClass;
 	}
@@ -1618,6 +1793,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringLiteral_Value() {
 		return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
 	}
@@ -1627,6 +1803,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransitiveClosure() {
 		return transitiveClosureEClass;
 	}
@@ -1636,6 +1813,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransitiveClosure_LeftOperand() {
 		return (EReference)transitiveClosureEClass.getEStructuralFeatures().get(0);
 	}
@@ -1645,6 +1823,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransitiveClosure_RightOperand() {
 		return (EReference)transitiveClosureEClass.getEStructuralFeatures().get(1);
 	}
@@ -1654,6 +1833,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransitiveClosure_Relation() {
 		return (EReference)transitiveClosureEClass.getEStructuralFeatures().get(2);
 	}
@@ -1663,6 +1843,97 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getPow() {
+		return powEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAggregateExpression() {
+		return aggregateExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAggregateExpression_Relation() {
+		return (EReference)aggregateExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSum() {
+		return sumEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCount() {
+		return countEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMin() {
+		return minEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMax() {
+		return maxEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getProjectedAggregateExpression() {
+		return projectedAggregateExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getProjectedAggregateExpression_ProjectionIndex() {
+		return (EAttribute)projectedAggregateExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public LogiclanguageFactory getLogiclanguageFactory() {
 		return (LogiclanguageFactory)getEFactoryInstance();
 	}
@@ -1792,9 +2063,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		createEReference(moreOrEqualThanEClass, MORE_OR_EQUAL_THAN__LEFT_OPERAND);
 		createEReference(moreOrEqualThanEClass, MORE_OR_EQUAL_THAN__RIGHT_OPERAND);
 
-		intOperationEClass = createEClass(INT_OPERATION);
-		createEReference(intOperationEClass, INT_OPERATION__LEFT_OPERAND);
-		createEReference(intOperationEClass, INT_OPERATION__RIGHT_OPERAND);
+		numericOperationEClass = createEClass(NUMERIC_OPERATION);
+		createEReference(numericOperationEClass, NUMERIC_OPERATION__LEFT_OPERAND);
+		createEReference(numericOperationEClass, NUMERIC_OPERATION__RIGHT_OPERAND);
 
 		plusEClass = createEClass(PLUS);
 
@@ -1865,6 +2136,22 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		createEReference(transitiveClosureEClass, TRANSITIVE_CLOSURE__LEFT_OPERAND);
 		createEReference(transitiveClosureEClass, TRANSITIVE_CLOSURE__RIGHT_OPERAND);
 		createEReference(transitiveClosureEClass, TRANSITIVE_CLOSURE__RELATION);
+
+		powEClass = createEClass(POW);
+
+		aggregateExpressionEClass = createEClass(AGGREGATE_EXPRESSION);
+		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__RELATION);
+
+		sumEClass = createEClass(SUM);
+
+		countEClass = createEClass(COUNT);
+
+		minEClass = createEClass(MIN);
+
+		maxEClass = createEClass(MAX);
+
+		projectedAggregateExpressionEClass = createEClass(PROJECTED_AGGREGATE_EXPRESSION);
+		createEAttribute(projectedAggregateExpressionEClass, PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX);
 	}
 
 	/**
@@ -1932,12 +2219,12 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		moreThanEClass.getESuperTypes().add(this.getPrimitiveRelation());
 		lessOrEqualThanEClass.getESuperTypes().add(this.getPrimitiveRelation());
 		moreOrEqualThanEClass.getESuperTypes().add(this.getPrimitiveRelation());
-		intOperationEClass.getESuperTypes().add(this.getTerm());
-		plusEClass.getESuperTypes().add(this.getIntOperation());
-		minusEClass.getESuperTypes().add(this.getIntOperation());
-		multiplyEClass.getESuperTypes().add(this.getIntOperation());
-		divisonEClass.getESuperTypes().add(this.getIntOperation());
-		modEClass.getESuperTypes().add(this.getIntOperation());
+		numericOperationEClass.getESuperTypes().add(this.getTerm());
+		plusEClass.getESuperTypes().add(this.getNumericOperation());
+		minusEClass.getESuperTypes().add(this.getNumericOperation());
+		multiplyEClass.getESuperTypes().add(this.getNumericOperation());
+		divisonEClass.getESuperTypes().add(this.getNumericOperation());
+		modEClass.getESuperTypes().add(this.getNumericOperation());
 		relationEClass.getESuperTypes().add(this.getSymbolicDeclaration());
 		constantEClass.getESuperTypes().add(this.getSymbolicDeclaration());
 		constantDefinitionEClass.getESuperTypes().add(this.getConstant());
@@ -1953,6 +2240,13 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		stringTypeReferenceEClass.getESuperTypes().add(this.getPrimitiveTypeReference());
 		stringLiteralEClass.getESuperTypes().add(this.getAtomicTerm());
 		transitiveClosureEClass.getESuperTypes().add(this.getTerm());
+		powEClass.getESuperTypes().add(this.getNumericOperation());
+		aggregateExpressionEClass.getESuperTypes().add(this.getTerm());
+		sumEClass.getESuperTypes().add(this.getProjectedAggregateExpression());
+		countEClass.getESuperTypes().add(this.getAggregateExpression());
+		minEClass.getESuperTypes().add(this.getProjectedAggregateExpression());
+		maxEClass.getESuperTypes().add(this.getProjectedAggregateExpression());
+		projectedAggregateExpressionEClass.getESuperTypes().add(this.getAggregateExpression());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1962,7 +2256,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEAttribute(getType_IsAbstract(), ecorePackage.getEBoolean(), "isAbstract", null, 1, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(definedElementEClass, DefinedElement.class, "DefinedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinedElement_DefinedInType(), this.getTypeDefinition(), this.getTypeDefinition_Elements(), "definedInType", null, 1, -1, DefinedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinedElement_DefinedInType(), this.getTypeDefinition(), this.getTypeDefinition_Elements(), "definedInType", null, 0, -1, DefinedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeDefinition_Elements(), this.getDefinedElement(), this.getDefinedElement_DefinedInType(), "elements", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2061,9 +2355,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEReference(getMoreOrEqualThan_LeftOperand(), this.getTerm(), null, "leftOperand", null, 0, 1, MoreOrEqualThan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMoreOrEqualThan_RightOperand(), this.getTerm(), null, "rightOperand", null, 0, 1, MoreOrEqualThan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(intOperationEClass, IntOperation.class, "IntOperation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIntOperation_LeftOperand(), this.getTerm(), null, "leftOperand", null, 0, 1, IntOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIntOperation_RightOperand(), this.getTerm(), null, "rightOperand", null, 0, 1, IntOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(numericOperationEClass, NumericOperation.class, "NumericOperation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNumericOperation_LeftOperand(), this.getTerm(), null, "leftOperand", null, 0, 1, NumericOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNumericOperation_RightOperand(), this.getTerm(), null, "rightOperand", null, 0, 1, NumericOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2134,6 +2428,22 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEReference(getTransitiveClosure_LeftOperand(), this.getTerm(), null, "leftOperand", null, 0, 1, TransitiveClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransitiveClosure_RightOperand(), this.getTerm(), null, "rightOperand", null, 0, 1, TransitiveClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransitiveClosure_Relation(), this.getRelation(), null, "relation", null, 0, 1, TransitiveClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(powEClass, Pow.class, "Pow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(aggregateExpressionEClass, AggregateExpression.class, "AggregateExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAggregateExpression_Relation(), this.getRelation(), null, "relation", null, 0, 1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sumEClass, Sum.class, "Sum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(countEClass, Count.class, "Count", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(minEClass, Min.class, "Min", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(maxEClass, Max.class, "Max", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(projectedAggregateExpressionEClass, ProjectedAggregateExpression.class, "ProjectedAggregateExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProjectedAggregateExpression_ProjectionIndex(), ecorePackage.getEInt(), "projectionIndex", "-1", 1, 1, ProjectedAggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

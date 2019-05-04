@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class MinusImpl extends IntOperationImpl implements Minus {
+public class MinusImpl extends NumericOperationImpl implements Minus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

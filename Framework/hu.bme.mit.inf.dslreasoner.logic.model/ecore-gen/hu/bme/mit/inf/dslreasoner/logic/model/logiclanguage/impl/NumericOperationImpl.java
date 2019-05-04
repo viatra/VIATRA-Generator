@@ -2,8 +2,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl;
 
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -16,19 +16,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Int Operation</b></em>'.
+ * An implementation of the model object '<em><b>Numeric Operation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.IntOperationImpl#getLeftOperand <em>Left Operand</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.IntOperationImpl#getRightOperand <em>Right Operand</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.NumericOperationImpl#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.NumericOperationImpl#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class IntOperationImpl extends TermImpl implements IntOperation {
+public abstract class NumericOperationImpl extends TermImpl implements NumericOperation {
 	/**
 	 * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IntOperationImpl() {
+	protected NumericOperationImpl() {
 		super();
 	}
 
@@ -65,7 +65,7 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return LogiclanguagePackage.Literals.INT_OPERATION;
+		return LogiclanguagePackage.Literals.NUMERIC_OPERATION;
 	}
 
 	/**
@@ -73,6 +73,7 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getLeftOperand() {
 		return leftOperand;
 	}
@@ -86,7 +87,7 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 		Term oldLeftOperand = leftOperand;
 		leftOperand = newLeftOperand;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -97,18 +98,19 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLeftOperand(Term newLeftOperand) {
 		if (newLeftOperand != leftOperand) {
 			NotificationChain msgs = null;
 			if (leftOperand != null)
-				msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND, null, msgs);
+				msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND, null, msgs);
 			if (newLeftOperand != null)
-				msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND, null, msgs);
+				msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND, null, msgs);
 			msgs = basicSetLeftOperand(newLeftOperand, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
+			eNotify(new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
 	}
 
 	/**
@@ -116,6 +118,7 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getRightOperand() {
 		return rightOperand;
 	}
@@ -129,7 +132,7 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 		Term oldRightOperand = rightOperand;
 		rightOperand = newRightOperand;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND, oldRightOperand, newRightOperand);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND, oldRightOperand, newRightOperand);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -140,18 +143,19 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRightOperand(Term newRightOperand) {
 		if (newRightOperand != rightOperand) {
 			NotificationChain msgs = null;
 			if (rightOperand != null)
-				msgs = ((InternalEObject)rightOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND, null, msgs);
+				msgs = ((InternalEObject)rightOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND, null, msgs);
 			if (newRightOperand != null)
-				msgs = ((InternalEObject)newRightOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND, null, msgs);
+				msgs = ((InternalEObject)newRightOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND, null, msgs);
 			msgs = basicSetRightOperand(newRightOperand, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND, newRightOperand, newRightOperand));
+			eNotify(new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND, newRightOperand, newRightOperand));
 	}
 
 	/**
@@ -162,9 +166,9 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND:
 				return basicSetLeftOperand(null, msgs);
-			case LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND:
 				return basicSetRightOperand(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -178,9 +182,9 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND:
 				return getLeftOperand();
-			case LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND:
 				return getRightOperand();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -194,10 +198,10 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND:
 				setLeftOperand((Term)newValue);
 				return;
-			case LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND:
 				setRightOperand((Term)newValue);
 				return;
 		}
@@ -212,10 +216,10 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND:
 				setLeftOperand((Term)null);
 				return;
-			case LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND:
 				setRightOperand((Term)null);
 				return;
 		}
@@ -230,12 +234,12 @@ public abstract class IntOperationImpl extends TermImpl implements IntOperation 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case LogiclanguagePackage.INT_OPERATION__LEFT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__LEFT_OPERAND:
 				return leftOperand != null;
-			case LogiclanguagePackage.INT_OPERATION__RIGHT_OPERAND:
+			case LogiclanguagePackage.NUMERIC_OPERATION__RIGHT_OPERAND:
 				return rightOperand != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //IntOperationImpl
+} //NumericOperationImpl

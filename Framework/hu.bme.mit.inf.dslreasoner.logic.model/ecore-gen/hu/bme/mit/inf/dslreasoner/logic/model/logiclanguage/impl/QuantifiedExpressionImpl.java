@@ -81,6 +81,7 @@ public abstract class QuantifiedExpressionImpl extends TermImpl implements Quant
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getQuantifiedVariables() {
 		if (quantifiedVariables == null) {
 			quantifiedVariables = new EObjectContainmentEList<Variable>(Variable.class, this, LogiclanguagePackage.QUANTIFIED_EXPRESSION__QUANTIFIED_VARIABLES);
@@ -93,6 +94,7 @@ public abstract class QuantifiedExpressionImpl extends TermImpl implements Quant
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getExpression() {
 		return expression;
 	}
@@ -117,6 +119,7 @@ public abstract class QuantifiedExpressionImpl extends TermImpl implements Quant
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpression(Term newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;

@@ -102,6 +102,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getValue() {
 		return value;
 	}
@@ -126,6 +127,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Term newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -145,6 +147,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -154,6 +157,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -166,6 +170,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AssertionAnnotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectWithInverseResolvingEList<AssertionAnnotation>(AssertionAnnotation.class, this, LogiclanguagePackage.ASSERTION__ANNOTATIONS, LogicproblemPackage.ASSERTION_ANNOTATION__TARGET);
@@ -293,7 +298,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');
