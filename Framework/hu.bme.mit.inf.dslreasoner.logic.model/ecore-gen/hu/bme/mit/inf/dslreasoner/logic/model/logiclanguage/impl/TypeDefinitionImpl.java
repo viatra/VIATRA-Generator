@@ -77,6 +77,7 @@ public class TypeDefinitionImpl extends TypeImpl implements TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DefinedElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectWithInverseResolvingEList.ManyInverse<DefinedElement>(DefinedElement.class, this, LogiclanguagePackage.TYPE_DEFINITION__ELEMENTS, LogiclanguagePackage.DEFINED_ELEMENT__DEFINED_IN_TYPE);
@@ -89,6 +90,7 @@ public class TypeDefinitionImpl extends TypeImpl implements TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeDeclaration getDefines() {
 		if (defines != null && defines.eIsProxy()) {
 			InternalEObject oldDefines = (InternalEObject)defines;
@@ -115,6 +117,7 @@ public class TypeDefinitionImpl extends TypeImpl implements TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefines(TypeDeclaration newDefines) {
 		TypeDeclaration oldDefines = defines;
 		defines = newDefines;

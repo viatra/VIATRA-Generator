@@ -119,6 +119,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -128,6 +129,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -140,6 +142,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Type> getSubtypes() {
 		if (subtypes == null) {
 			subtypes = new EObjectWithInverseResolvingEList.ManyInverse<Type>(Type.class, this, LogiclanguagePackage.TYPE__SUBTYPES, LogiclanguagePackage.TYPE__SUPERTYPES);
@@ -152,6 +155,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Type> getSupertypes() {
 		if (supertypes == null) {
 			supertypes = new EObjectWithInverseResolvingEList.ManyInverse<Type>(Type.class, this, LogiclanguagePackage.TYPE__SUPERTYPES, LogiclanguagePackage.TYPE__SUBTYPES);
@@ -164,6 +168,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsAbstract() {
 		return isAbstract;
 	}
@@ -173,6 +178,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsAbstract(boolean newIsAbstract) {
 		boolean oldIsAbstract = isAbstract;
 		isAbstract = newIsAbstract;
@@ -313,7 +319,7 @@ public abstract class TypeImpl extends MinimalEObjectImpl.Container implements T
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", isAbstract: ");

@@ -69,6 +69,7 @@ public class ErrorResultImpl extends UnknownResultImpl implements ErrorResult {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}
@@ -78,6 +79,7 @@ public class ErrorResultImpl extends UnknownResultImpl implements ErrorResult {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMessage(String newMessage) {
 		String oldMessage = message;
 		message = newMessage;
@@ -152,7 +154,7 @@ public class ErrorResultImpl extends UnknownResultImpl implements ErrorResult {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (message: ");
 		result.append(message);
 		result.append(')');

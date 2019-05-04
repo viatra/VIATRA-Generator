@@ -109,7 +109,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link LogicproblemPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -123,13 +123,16 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 		if (isInited) return (LogicproblemPackage)EPackage.Registry.INSTANCE.getEPackage(LogicproblemPackage.eNS_URI);
 
 		// Obtain or create and register package
-		LogicproblemPackageImpl theLogicproblemPackage = (LogicproblemPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LogicproblemPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LogicproblemPackageImpl());
+		Object registeredLogicproblemPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		LogicproblemPackageImpl theLogicproblemPackage = registeredLogicproblemPackage instanceof LogicproblemPackageImpl ? (LogicproblemPackageImpl)registeredLogicproblemPackage : new LogicproblemPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		LogiclanguagePackageImpl theLogiclanguagePackage = (LogiclanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI) instanceof LogiclanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI) : LogiclanguagePackage.eINSTANCE);
-		LogicresultPackageImpl theLogicresultPackage = (LogicresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI) instanceof LogicresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI) : LogicresultPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(LogiclanguagePackage.eNS_URI);
+		LogiclanguagePackageImpl theLogiclanguagePackage = (LogiclanguagePackageImpl)(registeredPackage instanceof LogiclanguagePackageImpl ? registeredPackage : LogiclanguagePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(LogicresultPackage.eNS_URI);
+		LogicresultPackageImpl theLogicresultPackage = (LogicresultPackageImpl)(registeredPackage instanceof LogicresultPackageImpl ? registeredPackage : LogicresultPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theLogicproblemPackage.createPackageContents();
@@ -144,7 +147,6 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 		// Mark meta-data to indicate it can't be changed
 		theLogicproblemPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(LogicproblemPackage.eNS_URI, theLogicproblemPackage);
 		return theLogicproblemPackage;
@@ -155,6 +157,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getLogicProblem() {
 		return logicProblemEClass;
 	}
@@ -164,6 +167,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Types() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(0);
 	}
@@ -173,6 +177,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Functions() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(1);
 	}
@@ -182,6 +187,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Assertions() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(2);
 	}
@@ -191,6 +197,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Relations() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(3);
 	}
@@ -200,6 +207,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Constants() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(4);
 	}
@@ -209,6 +217,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Elements() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(5);
 	}
@@ -218,6 +227,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_ContainmentHierarchies() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(6);
 	}
@@ -227,6 +237,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getLogicProblem_Annotations() {
 		return (EReference)logicProblemEClass.getEStructuralFeatures().get(7);
 	}
@@ -236,6 +247,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getContainmentHierarchy() {
 		return containmentHierarchyEClass;
 	}
@@ -245,6 +257,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getContainmentHierarchy_TypesOrderedInHierarchy() {
 		return (EReference)containmentHierarchyEClass.getEStructuralFeatures().get(0);
 	}
@@ -254,6 +267,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getContainmentHierarchy_ContainmentFunctions() {
 		return (EReference)containmentHierarchyEClass.getEStructuralFeatures().get(1);
 	}
@@ -263,6 +277,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getContainmentHierarchy_ContainmentRelations() {
 		return (EReference)containmentHierarchyEClass.getEStructuralFeatures().get(2);
 	}
@@ -272,6 +287,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getContainmentHierarchy_RootConstant() {
 		return (EReference)containmentHierarchyEClass.getEStructuralFeatures().get(3);
 	}
@@ -281,6 +297,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationAnnotation() {
 		return relationAnnotationEClass;
 	}
@@ -290,6 +307,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationAnnotation_Target() {
 		return (EReference)relationAnnotationEClass.getEStructuralFeatures().get(0);
 	}
@@ -299,6 +317,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConstantAnnotation() {
 		return constantAnnotationEClass;
 	}
@@ -308,6 +327,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getConstantAnnotation_Target() {
 		return (EReference)constantAnnotationEClass.getEStructuralFeatures().get(0);
 	}
@@ -317,6 +337,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionAnnotation() {
 		return functionAnnotationEClass;
 	}
@@ -326,6 +347,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionAnnotation_Target() {
 		return (EReference)functionAnnotationEClass.getEStructuralFeatures().get(0);
 	}
@@ -335,6 +357,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssertionAnnotation() {
 		return assertionAnnotationEClass;
 	}
@@ -344,6 +367,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssertionAnnotation_Target() {
 		return (EReference)assertionAnnotationEClass.getEStructuralFeatures().get(0);
 	}
@@ -353,6 +377,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnnotation() {
 		return annotationEClass;
 	}
@@ -362,6 +387,7 @@ public class LogicproblemPackageImpl extends EPackageImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicproblemFactory getLogicproblemFactory() {
 		return (LogicproblemFactory)getEFactoryInstance();
 	}

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class PlusImpl extends IntOperationImpl implements Plus {
+public class PlusImpl extends NumericOperationImpl implements Plus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

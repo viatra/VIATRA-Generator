@@ -66,6 +66,7 @@ public class AndImpl extends BoolOperationImpl implements And {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Term> getOperands() {
 		if (operands == null) {
 			operands = new EObjectContainmentEList<Term>(Term.class, this, LogiclanguagePackage.AND__OPERANDS);

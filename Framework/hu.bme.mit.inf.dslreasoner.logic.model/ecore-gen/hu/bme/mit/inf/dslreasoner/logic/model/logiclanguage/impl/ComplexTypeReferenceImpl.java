@@ -61,6 +61,7 @@ public class ComplexTypeReferenceImpl extends TypeReferenceImpl implements Compl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Type getReferred() {
 		if (referred != null && referred.eIsProxy()) {
 			InternalEObject oldReferred = (InternalEObject)referred;
@@ -87,6 +88,7 @@ public class ComplexTypeReferenceImpl extends TypeReferenceImpl implements Compl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferred(Type newReferred) {
 		Type oldReferred = referred;
 		referred = newReferred;

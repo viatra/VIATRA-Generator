@@ -62,6 +62,7 @@ public class VariableImpl extends SymbolicDeclarationImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeReference getRange() {
 		return range;
 	}
@@ -86,6 +87,7 @@ public class VariableImpl extends SymbolicDeclarationImpl implements Variable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRange(TypeReference newRange) {
 		if (newRange != range) {
 			NotificationChain msgs = null;

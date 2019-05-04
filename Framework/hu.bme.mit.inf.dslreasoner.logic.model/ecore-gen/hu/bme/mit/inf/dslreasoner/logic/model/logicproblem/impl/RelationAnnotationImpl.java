@@ -64,6 +64,7 @@ public class RelationAnnotationImpl extends AnnotationImpl implements RelationAn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Relation getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -105,6 +106,7 @@ public class RelationAnnotationImpl extends AnnotationImpl implements RelationAn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Relation newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;

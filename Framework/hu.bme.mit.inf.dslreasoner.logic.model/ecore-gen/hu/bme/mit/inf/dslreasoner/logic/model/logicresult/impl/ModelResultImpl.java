@@ -90,6 +90,7 @@ public class ModelResultImpl extends LogicResultImpl implements ModelResult {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMaxInteger() {
 		return maxInteger;
 	}
@@ -99,6 +100,7 @@ public class ModelResultImpl extends LogicResultImpl implements ModelResult {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMaxInteger(int newMaxInteger) {
 		int oldMaxInteger = maxInteger;
 		maxInteger = newMaxInteger;
@@ -111,6 +113,7 @@ public class ModelResultImpl extends LogicResultImpl implements ModelResult {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMinInteger() {
 		return minInteger;
 	}
@@ -120,6 +123,7 @@ public class ModelResultImpl extends LogicResultImpl implements ModelResult {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinInteger(int newMinInteger) {
 		int oldMinInteger = minInteger;
 		minInteger = newMinInteger;
@@ -204,7 +208,7 @@ public class ModelResultImpl extends LogicResultImpl implements ModelResult {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (maxInteger: ");
 		result.append(maxInteger);
 		result.append(", minInteger: ");

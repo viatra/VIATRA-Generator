@@ -99,6 +99,11 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 			case LogiclanguagePackage.STRING_TYPE_REFERENCE: return createStringTypeReference();
 			case LogiclanguagePackage.STRING_LITERAL: return createStringLiteral();
 			case LogiclanguagePackage.TRANSITIVE_CLOSURE: return createTransitiveClosure();
+			case LogiclanguagePackage.POW: return createPow();
+			case LogiclanguagePackage.SUM: return createSum();
+			case LogiclanguagePackage.COUNT: return createCount();
+			case LogiclanguagePackage.MIN: return createMin();
+			case LogiclanguagePackage.MAX: return createMax();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -109,6 +114,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinedElement createDefinedElement() {
 		DefinedElementImpl definedElement = new DefinedElementImpl();
 		return definedElement;
@@ -119,6 +125,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeDefinition createTypeDefinition() {
 		TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
 		return typeDefinition;
@@ -129,6 +136,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComplexTypeReference createComplexTypeReference() {
 		ComplexTypeReferenceImpl complexTypeReference = new ComplexTypeReferenceImpl();
 		return complexTypeReference;
@@ -139,6 +147,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntTypeReference createIntTypeReference() {
 		IntTypeReferenceImpl intTypeReference = new IntTypeReferenceImpl();
 		return intTypeReference;
@@ -149,6 +158,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BoolTypeReference createBoolTypeReference() {
 		BoolTypeReferenceImpl boolTypeReference = new BoolTypeReferenceImpl();
 		return boolTypeReference;
@@ -159,6 +169,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RealTypeReference createRealTypeReference() {
 		RealTypeReferenceImpl realTypeReference = new RealTypeReferenceImpl();
 		return realTypeReference;
@@ -169,6 +180,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SymbolicValue createSymbolicValue() {
 		SymbolicValueImpl symbolicValue = new SymbolicValueImpl();
 		return symbolicValue;
@@ -179,6 +191,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntLiteral createIntLiteral() {
 		IntLiteralImpl intLiteral = new IntLiteralImpl();
 		return intLiteral;
@@ -189,6 +202,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BoolLiteral createBoolLiteral() {
 		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
 		return boolLiteral;
@@ -199,6 +213,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RealLiteral createRealLiteral() {
 		RealLiteralImpl realLiteral = new RealLiteralImpl();
 		return realLiteral;
@@ -209,6 +224,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable createVariable() {
 		VariableImpl variable = new VariableImpl();
 		return variable;
@@ -219,6 +235,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Exists createExists() {
 		ExistsImpl exists = new ExistsImpl();
 		return exists;
@@ -229,6 +246,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Forall createForall() {
 		ForallImpl forall = new ForallImpl();
 		return forall;
@@ -239,6 +257,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public And createAnd() {
 		AndImpl and = new AndImpl();
 		return and;
@@ -249,6 +268,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Or createOr() {
 		OrImpl or = new OrImpl();
 		return or;
@@ -259,6 +279,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Impl createImpl() {
 		ImplImpl impl = new ImplImpl();
 		return impl;
@@ -269,6 +290,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Not createNot() {
 		NotImpl not = new NotImpl();
 		return not;
@@ -279,6 +301,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Iff createIff() {
 		IffImpl iff = new IffImpl();
 		return iff;
@@ -289,6 +312,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Equals createEquals() {
 		EqualsImpl equals = new EqualsImpl();
 		return equals;
@@ -299,6 +323,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Distinct createDistinct() {
 		DistinctImpl distinct = new DistinctImpl();
 		return distinct;
@@ -309,6 +334,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LessThan createLessThan() {
 		LessThanImpl lessThan = new LessThanImpl();
 		return lessThan;
@@ -319,6 +345,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MoreThan createMoreThan() {
 		MoreThanImpl moreThan = new MoreThanImpl();
 		return moreThan;
@@ -329,6 +356,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LessOrEqualThan createLessOrEqualThan() {
 		LessOrEqualThanImpl lessOrEqualThan = new LessOrEqualThanImpl();
 		return lessOrEqualThan;
@@ -339,6 +367,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MoreOrEqualThan createMoreOrEqualThan() {
 		MoreOrEqualThanImpl moreOrEqualThan = new MoreOrEqualThanImpl();
 		return moreOrEqualThan;
@@ -349,6 +378,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Plus createPlus() {
 		PlusImpl plus = new PlusImpl();
 		return plus;
@@ -359,6 +389,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Minus createMinus() {
 		MinusImpl minus = new MinusImpl();
 		return minus;
@@ -369,6 +400,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Multiply createMultiply() {
 		MultiplyImpl multiply = new MultiplyImpl();
 		return multiply;
@@ -379,6 +411,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Divison createDivison() {
 		DivisonImpl divison = new DivisonImpl();
 		return divison;
@@ -389,6 +422,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mod createMod() {
 		ModImpl mod = new ModImpl();
 		return mod;
@@ -399,6 +433,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Assertion createAssertion() {
 		AssertionImpl assertion = new AssertionImpl();
 		return assertion;
@@ -409,6 +444,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConstantDefinition createConstantDefinition() {
 		ConstantDefinitionImpl constantDefinition = new ConstantDefinitionImpl();
 		return constantDefinition;
@@ -419,6 +455,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationDefinition createRelationDefinition() {
 		RelationDefinitionImpl relationDefinition = new RelationDefinitionImpl();
 		return relationDefinition;
@@ -429,6 +466,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionDefinition createFunctionDefinition() {
 		FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
 		return functionDefinition;
@@ -439,6 +477,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IfThenElse createIfThenElse() {
 		IfThenElseImpl ifThenElse = new IfThenElseImpl();
 		return ifThenElse;
@@ -449,6 +488,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConstantDeclaration createConstantDeclaration() {
 		ConstantDeclarationImpl constantDeclaration = new ConstantDeclarationImpl();
 		return constantDeclaration;
@@ -459,6 +499,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationDeclaration createRelationDeclaration() {
 		RelationDeclarationImpl relationDeclaration = new RelationDeclarationImpl();
 		return relationDeclaration;
@@ -469,6 +510,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionDeclaration createFunctionDeclaration() {
 		FunctionDeclarationImpl functionDeclaration = new FunctionDeclarationImpl();
 		return functionDeclaration;
@@ -479,6 +521,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeDeclaration createTypeDeclaration() {
 		TypeDeclarationImpl typeDeclaration = new TypeDeclarationImpl();
 		return typeDeclaration;
@@ -489,6 +532,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UnknownBecauseUninterpreted createUnknownBecauseUninterpreted() {
 		UnknownBecauseUninterpretedImpl unknownBecauseUninterpreted = new UnknownBecauseUninterpretedImpl();
 		return unknownBecauseUninterpreted;
@@ -499,6 +543,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InstanceOf createInstanceOf() {
 		InstanceOfImpl instanceOf = new InstanceOfImpl();
 		return instanceOf;
@@ -509,6 +554,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringTypeReference createStringTypeReference() {
 		StringTypeReferenceImpl stringTypeReference = new StringTypeReferenceImpl();
 		return stringTypeReference;
@@ -519,6 +565,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringLiteral createStringLiteral() {
 		StringLiteralImpl stringLiteral = new StringLiteralImpl();
 		return stringLiteral;
@@ -529,6 +576,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitiveClosure createTransitiveClosure() {
 		TransitiveClosureImpl transitiveClosure = new TransitiveClosureImpl();
 		return transitiveClosure;
@@ -539,6 +587,62 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Pow createPow() {
+		PowImpl pow = new PowImpl();
+		return pow;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Sum createSum() {
+		SumImpl sum = new SumImpl();
+		return sum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Count createCount() {
+		CountImpl count = new CountImpl();
+		return count;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Min createMin() {
+		MinImpl min = new MinImpl();
+		return min;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Max createMax() {
+		MaxImpl max = new MaxImpl();
+		return max;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public LogiclanguagePackage getLogiclanguagePackage() {
 		return (LogiclanguagePackage)getEPackage();
 	}

@@ -111,6 +111,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicProblem getProblem() {
 		if (problem != null && problem.eIsProxy()) {
 			InternalEObject oldProblem = (InternalEObject)problem;
@@ -137,6 +138,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProblem(LogicProblem newProblem) {
 		LogicProblem oldProblem = problem;
 		problem = newProblem;
@@ -149,6 +151,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Statistics getStatistics() {
 		return statistics;
 	}
@@ -173,6 +176,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatistics(Statistics newStatistics) {
 		if (newStatistics != statistics) {
 			NotificationChain msgs = null;
@@ -192,6 +196,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object getTrace() {
 		return trace;
 	}
@@ -201,6 +206,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTrace(Object newTrace) {
 		Object oldTrace = trace;
 		trace = newTrace;
@@ -213,6 +219,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Object> getRepresentation() {
 		if (representation == null) {
 			representation = new EDataTypeUniqueEList<Object>(Object.class, this, LogicresultPackage.LOGIC_RESULT__REPRESENTATION);
@@ -334,7 +341,7 @@ public abstract class LogicResultImpl extends MinimalEObjectImpl.Container imple
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (trace: ");
 		result.append(trace);
 		result.append(", representation: ");

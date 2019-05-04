@@ -36,7 +36,7 @@ public interface DefinedElement extends SymbolicDeclaration {
 	 * @return the value of the '<em>Defined In Type</em>' reference list.
 	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage#getDefinedElement_DefinedInType()
 	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition#getElements
-	 * @model opposite="elements" required="true"
+	 * @model opposite="elements"
 	 * @generated
 	 */
 	EList<TypeDefinition> getDefinedInType();

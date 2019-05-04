@@ -64,6 +64,7 @@ public class ConstantAnnotationImpl extends AnnotationImpl implements ConstantAn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constant getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -105,6 +106,7 @@ public class ConstantAnnotationImpl extends AnnotationImpl implements ConstantAn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Constant newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;

@@ -81,6 +81,7 @@ public class SymbolicValueImpl extends TermImpl implements SymbolicValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SymbolicDeclaration getSymbolicReference() {
 		if (symbolicReference != null && symbolicReference.eIsProxy()) {
 			InternalEObject oldSymbolicReference = (InternalEObject)symbolicReference;
@@ -107,6 +108,7 @@ public class SymbolicValueImpl extends TermImpl implements SymbolicValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSymbolicReference(SymbolicDeclaration newSymbolicReference) {
 		SymbolicDeclaration oldSymbolicReference = symbolicReference;
 		symbolicReference = newSymbolicReference;
@@ -119,6 +121,7 @@ public class SymbolicValueImpl extends TermImpl implements SymbolicValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Term> getParameterSubstitutions() {
 		if (parameterSubstitutions == null) {
 			parameterSubstitutions = new EObjectContainmentEList<Term>(Term.class, this, LogiclanguagePackage.SYMBOLIC_VALUE__PARAMETER_SUBSTITUTIONS);

@@ -64,6 +64,7 @@ public class FunctionAnnotationImpl extends AnnotationImpl implements FunctionAn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Function getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -105,6 +106,7 @@ public class FunctionAnnotationImpl extends AnnotationImpl implements FunctionAn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Function newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;

@@ -13,5 +13,5 @@ package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage;
  * @model
  * @generated
  */
-public interface Mod extends IntOperation {
+public interface Mod extends NumericOperation {
 } // Mod

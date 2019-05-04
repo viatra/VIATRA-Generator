@@ -130,17 +130,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Term"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntOperation" abstract="true" eSuperTypes="#//Term">
+  <eClassifiers xsi:type="ecore:EClass" name="NumericOperation" abstract="true" eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Term"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Term"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//IntOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//IntOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Multiply" eSuperTypes="#//IntOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Divison" eSuperTypes="#//IntOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mod" eSuperTypes="#//IntOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//NumericOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//NumericOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiply" eSuperTypes="#//NumericOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Divison" eSuperTypes="#//NumericOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mod" eSuperTypes="#//NumericOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeDescriptor" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="TermDescription" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Assertion">
@@ -210,5 +210,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Term"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//Relation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pow" eSuperTypes="#//NumericOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AggregateExpression" abstract="true"
+      eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//Relation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sum" eSuperTypes="#//ProjectedAggregateExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Count" eSuperTypes="#//AggregateExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Min" eSuperTypes="#//ProjectedAggregateExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Max" eSuperTypes="#//ProjectedAggregateExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProjectedAggregateExpression" abstract="true"
+      eSuperTypes="#//AggregateExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectionIndex" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
   </eClassifiers>
 </ecore:EPackage>

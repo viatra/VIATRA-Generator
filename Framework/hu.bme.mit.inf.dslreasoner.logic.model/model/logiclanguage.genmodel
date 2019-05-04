@@ -104,9 +104,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//MoreOrEqualThan/leftOperand"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//MoreOrEqualThan/rightOperand"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="logiclanguage.ecore#//IntOperation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IntOperation/leftOperand"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//IntOperation/rightOperand"/>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//NumericOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//NumericOperation/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//NumericOperation/rightOperand"/>
     </genClasses>
     <genClasses ecoreClass="logiclanguage.ecore#//Plus"/>
     <genClasses ecoreClass="logiclanguage.ecore#//Minus"/>
@@ -156,6 +156,26 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//InstanceOf/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//InstanceOf/range"/>
     </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//StringTypeReference"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//TransitiveClosure">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//TransitiveClosure/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//TransitiveClosure/rightOperand"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//TransitiveClosure/relation"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Pow"/>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//AggregateExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/relation"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//Sum"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Count"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Min"/>
+    <genClasses ecoreClass="logiclanguage.ecore#//Max"/>
+    <genClasses image="false" ecoreClass="logiclanguage.ecore#//ProjectedAggregateExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//ProjectedAggregateExpression/projectionIndex"/>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Logicproblem" basePackage="hu.bme.mit.inf.dslreasoner.logic.model"
       disposableProviderFactory="true" ecorePackage="logicproblem.ecore#/">
@@ -171,8 +191,8 @@
     </genClasses>
     <genClasses ecoreClass="logicproblem.ecore#//ContainmentHierarchy">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/typesOrderedInHierarchy"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/parentFunctions"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/parentRelations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/containmentFunctions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/containmentRelations"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logicproblem.ecore#//ContainmentHierarchy/rootConstant"/>
     </genClasses>
     <genClasses ecoreClass="logicproblem.ecore#//RelationAnnotation">

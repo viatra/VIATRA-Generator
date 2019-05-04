@@ -94,6 +94,7 @@ public abstract class FunctionImpl extends SymbolicDeclarationImpl implements Fu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeReference getRange() {
 		return range;
 	}
@@ -118,6 +119,7 @@ public abstract class FunctionImpl extends SymbolicDeclarationImpl implements Fu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRange(TypeReference newRange) {
 		if (newRange != range) {
 			NotificationChain msgs = null;
@@ -137,6 +139,7 @@ public abstract class FunctionImpl extends SymbolicDeclarationImpl implements Fu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypeReference> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, LogiclanguagePackage.FUNCTION__PARAMETERS);
@@ -149,6 +152,7 @@ public abstract class FunctionImpl extends SymbolicDeclarationImpl implements Fu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FunctionAnnotation> getAnnotations() {
 		if (annotations == null) {
 			annotations = new EObjectWithInverseResolvingEList<FunctionAnnotation>(FunctionAnnotation.class, this, LogiclanguagePackage.FUNCTION__ANNOTATIONS, LogicproblemPackage.FUNCTION_ANNOTATION__TARGET);

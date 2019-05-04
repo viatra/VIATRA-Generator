@@ -13,5 +13,5 @@ package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage;
  * @model
  * @generated
  */
-public interface Minus extends IntOperation {
+public interface Minus extends NumericOperation {
 } // Minus

@@ -204,8 +204,8 @@ public class LogiclanguageAdapterFactory extends AdapterFactoryImpl {
 				return createMoreOrEqualThanAdapter();
 			}
 			@Override
-			public Adapter caseIntOperation(IntOperation object) {
-				return createIntOperationAdapter();
+			public Adapter caseNumericOperation(NumericOperation object) {
+				return createNumericOperationAdapter();
 			}
 			@Override
 			public Adapter casePlus(Plus object) {
@@ -298,6 +298,34 @@ public class LogiclanguageAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransitiveClosure(TransitiveClosure object) {
 				return createTransitiveClosureAdapter();
+			}
+			@Override
+			public Adapter casePow(Pow object) {
+				return createPowAdapter();
+			}
+			@Override
+			public Adapter caseAggregateExpression(AggregateExpression object) {
+				return createAggregateExpressionAdapter();
+			}
+			@Override
+			public Adapter caseSum(Sum object) {
+				return createSumAdapter();
+			}
+			@Override
+			public Adapter caseCount(Count object) {
+				return createCountAdapter();
+			}
+			@Override
+			public Adapter caseMin(Min object) {
+				return createMinAdapter();
+			}
+			@Override
+			public Adapter caseMax(Max object) {
+				return createMaxAdapter();
+			}
+			@Override
+			public Adapter caseProjectedAggregateExpression(ProjectedAggregateExpression object) {
+				return createProjectedAggregateExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -796,16 +824,16 @@ public class LogiclanguageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation <em>Int Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation <em>Numeric Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation
 	 * @generated
 	 */
-	public Adapter createIntOperationAdapter() {
+	public Adapter createNumericOperationAdapter() {
 		return null;
 	}
 
@@ -1128,6 +1156,104 @@ public class LogiclanguageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransitiveClosureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Pow <em>Pow</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Pow
+	 * @generated
+	 */
+	public Adapter createPowAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression <em>Aggregate Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression
+	 * @generated
+	 */
+	public Adapter createAggregateExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Sum <em>Sum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Sum
+	 * @generated
+	 */
+	public Adapter createSumAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Count <em>Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Count
+	 * @generated
+	 */
+	public Adapter createCountAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Min <em>Min</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Min
+	 * @generated
+	 */
+	public Adapter createMinAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Max <em>Max</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Max
+	 * @generated
+	 */
+	public Adapter createMaxAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression <em>Projected Aggregate Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression
+	 * @generated
+	 */
+	public Adapter createProjectedAggregateExpressionAdapter() {
 		return null;
 	}
 

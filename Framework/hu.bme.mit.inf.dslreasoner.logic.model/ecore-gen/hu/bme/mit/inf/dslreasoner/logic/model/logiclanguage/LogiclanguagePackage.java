@@ -1506,14 +1506,14 @@ public interface LogiclanguagePackage extends EPackage {
 	int MORE_OR_EQUAL_THAN_OPERATION_COUNT = PRIMITIVE_RELATION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.IntOperationImpl <em>Int Operation</em>}' class.
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.NumericOperationImpl <em>Numeric Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.IntOperationImpl
-	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getIntOperation()
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.NumericOperationImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getNumericOperation()
 	 * @generated
 	 */
-	int INT_OPERATION = 34;
+	int NUMERIC_OPERATION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1522,7 +1522,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INT_OPERATION__LEFT_OPERAND = TERM_FEATURE_COUNT + 0;
+	int NUMERIC_OPERATION__LEFT_OPERAND = TERM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -1531,25 +1531,25 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INT_OPERATION__RIGHT_OPERAND = TERM_FEATURE_COUNT + 1;
+	int NUMERIC_OPERATION__RIGHT_OPERAND = TERM_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Int Operation</em>' class.
+	 * The number of structural features of the '<em>Numeric Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INT_OPERATION_FEATURE_COUNT = TERM_FEATURE_COUNT + 2;
+	int NUMERIC_OPERATION_FEATURE_COUNT = TERM_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of operations of the '<em>Int Operation</em>' class.
+	 * The number of operations of the '<em>Numeric Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INT_OPERATION_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
+	int NUMERIC_OPERATION_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.PlusImpl <em>Plus</em>}' class.
@@ -1568,7 +1568,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUS__LEFT_OPERAND = INT_OPERATION__LEFT_OPERAND;
+	int PLUS__LEFT_OPERAND = NUMERIC_OPERATION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -1577,7 +1577,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUS__RIGHT_OPERAND = INT_OPERATION__RIGHT_OPERAND;
+	int PLUS__RIGHT_OPERAND = NUMERIC_OPERATION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Plus</em>' class.
@@ -1586,7 +1586,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUS_FEATURE_COUNT = INT_OPERATION_FEATURE_COUNT + 0;
+	int PLUS_FEATURE_COUNT = NUMERIC_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Plus</em>' class.
@@ -1595,7 +1595,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLUS_OPERATION_COUNT = INT_OPERATION_OPERATION_COUNT + 0;
+	int PLUS_OPERATION_COUNT = NUMERIC_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MinusImpl <em>Minus</em>}' class.
@@ -1614,7 +1614,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MINUS__LEFT_OPERAND = INT_OPERATION__LEFT_OPERAND;
+	int MINUS__LEFT_OPERAND = NUMERIC_OPERATION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -1623,7 +1623,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MINUS__RIGHT_OPERAND = INT_OPERATION__RIGHT_OPERAND;
+	int MINUS__RIGHT_OPERAND = NUMERIC_OPERATION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Minus</em>' class.
@@ -1632,7 +1632,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MINUS_FEATURE_COUNT = INT_OPERATION_FEATURE_COUNT + 0;
+	int MINUS_FEATURE_COUNT = NUMERIC_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Minus</em>' class.
@@ -1641,7 +1641,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MINUS_OPERATION_COUNT = INT_OPERATION_OPERATION_COUNT + 0;
+	int MINUS_OPERATION_COUNT = NUMERIC_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MultiplyImpl <em>Multiply</em>}' class.
@@ -1660,7 +1660,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY__LEFT_OPERAND = INT_OPERATION__LEFT_OPERAND;
+	int MULTIPLY__LEFT_OPERAND = NUMERIC_OPERATION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -1669,7 +1669,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY__RIGHT_OPERAND = INT_OPERATION__RIGHT_OPERAND;
+	int MULTIPLY__RIGHT_OPERAND = NUMERIC_OPERATION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Multiply</em>' class.
@@ -1678,7 +1678,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_FEATURE_COUNT = INT_OPERATION_FEATURE_COUNT + 0;
+	int MULTIPLY_FEATURE_COUNT = NUMERIC_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Multiply</em>' class.
@@ -1687,7 +1687,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_OPERATION_COUNT = INT_OPERATION_OPERATION_COUNT + 0;
+	int MULTIPLY_OPERATION_COUNT = NUMERIC_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.DivisonImpl <em>Divison</em>}' class.
@@ -1706,7 +1706,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISON__LEFT_OPERAND = INT_OPERATION__LEFT_OPERAND;
+	int DIVISON__LEFT_OPERAND = NUMERIC_OPERATION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -1715,7 +1715,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISON__RIGHT_OPERAND = INT_OPERATION__RIGHT_OPERAND;
+	int DIVISON__RIGHT_OPERAND = NUMERIC_OPERATION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Divison</em>' class.
@@ -1724,7 +1724,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISON_FEATURE_COUNT = INT_OPERATION_FEATURE_COUNT + 0;
+	int DIVISON_FEATURE_COUNT = NUMERIC_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Divison</em>' class.
@@ -1733,7 +1733,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISON_OPERATION_COUNT = INT_OPERATION_OPERATION_COUNT + 0;
+	int DIVISON_OPERATION_COUNT = NUMERIC_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.ModImpl <em>Mod</em>}' class.
@@ -1752,7 +1752,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOD__LEFT_OPERAND = INT_OPERATION__LEFT_OPERAND;
+	int MOD__LEFT_OPERAND = NUMERIC_OPERATION__LEFT_OPERAND;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -1761,7 +1761,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOD__RIGHT_OPERAND = INT_OPERATION__RIGHT_OPERAND;
+	int MOD__RIGHT_OPERAND = NUMERIC_OPERATION__RIGHT_OPERAND;
 
 	/**
 	 * The number of structural features of the '<em>Mod</em>' class.
@@ -1770,7 +1770,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOD_FEATURE_COUNT = INT_OPERATION_FEATURE_COUNT + 0;
+	int MOD_FEATURE_COUNT = NUMERIC_OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Mod</em>' class.
@@ -1779,7 +1779,7 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOD_OPERATION_COUNT = INT_OPERATION_OPERATION_COUNT + 0;
+	int MOD_OPERATION_COUNT = NUMERIC_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -2686,6 +2686,311 @@ public interface LogiclanguagePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.PowImpl <em>Pow</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.PowImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getPow()
+	 * @generated
+	 */
+	int POW = 58;
+
+	/**
+	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POW__LEFT_OPERAND = NUMERIC_OPERATION__LEFT_OPERAND;
+
+	/**
+	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POW__RIGHT_OPERAND = NUMERIC_OPERATION__RIGHT_OPERAND;
+
+	/**
+	 * The number of structural features of the '<em>Pow</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POW_FEATURE_COUNT = NUMERIC_OPERATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Pow</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POW_OPERATION_COUNT = NUMERIC_OPERATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.AggregateExpressionImpl <em>Aggregate Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.AggregateExpressionImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getAggregateExpression()
+	 * @generated
+	 */
+	int AGGREGATE_EXPRESSION = 59;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGGREGATE_EXPRESSION__RELATION = TERM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Aggregate Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGGREGATE_EXPRESSION_FEATURE_COUNT = TERM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Aggregate Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGGREGATE_EXPRESSION_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.ProjectedAggregateExpressionImpl <em>Projected Aggregate Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.ProjectedAggregateExpressionImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getProjectedAggregateExpression()
+	 * @generated
+	 */
+	int PROJECTED_AGGREGATE_EXPRESSION = 64;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECTED_AGGREGATE_EXPRESSION__RELATION = AGGREGATE_EXPRESSION__RELATION;
+
+	/**
+	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX = AGGREGATE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Projected Aggregate Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECTED_AGGREGATE_EXPRESSION_FEATURE_COUNT = AGGREGATE_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Projected Aggregate Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECTED_AGGREGATE_EXPRESSION_OPERATION_COUNT = AGGREGATE_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.SumImpl <em>Sum</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.SumImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getSum()
+	 * @generated
+	 */
+	int SUM = 60;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUM__RELATION = PROJECTED_AGGREGATE_EXPRESSION__RELATION;
+
+	/**
+	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUM__PROJECTION_INDEX = PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX;
+
+	/**
+	 * The number of structural features of the '<em>Sum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUM_FEATURE_COUNT = PROJECTED_AGGREGATE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Sum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUM_OPERATION_COUNT = PROJECTED_AGGREGATE_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.CountImpl <em>Count</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.CountImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getCount()
+	 * @generated
+	 */
+	int COUNT = 61;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNT__RELATION = AGGREGATE_EXPRESSION__RELATION;
+
+	/**
+	 * The number of structural features of the '<em>Count</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNT_FEATURE_COUNT = AGGREGATE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Count</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNT_OPERATION_COUNT = AGGREGATE_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MinImpl <em>Min</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MinImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getMin()
+	 * @generated
+	 */
+	int MIN = 62;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIN__RELATION = PROJECTED_AGGREGATE_EXPRESSION__RELATION;
+
+	/**
+	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIN__PROJECTION_INDEX = PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX;
+
+	/**
+	 * The number of structural features of the '<em>Min</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIN_FEATURE_COUNT = PROJECTED_AGGREGATE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Min</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIN_OPERATION_COUNT = PROJECTED_AGGREGATE_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MaxImpl <em>Max</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MaxImpl
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getMax()
+	 * @generated
+	 */
+	int MAX = 63;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAX__RELATION = PROJECTED_AGGREGATE_EXPRESSION__RELATION;
+
+	/**
+	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAX__PROJECTION_INDEX = PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX;
+
+	/**
+	 * The number of structural features of the '<em>Max</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAX_FEATURE_COUNT = PROJECTED_AGGREGATE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Max</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAX_OPERATION_COUNT = PROJECTED_AGGREGATE_EXPRESSION_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3444,36 +3749,36 @@ public interface LogiclanguagePackage extends EPackage {
 	EReference getMoreOrEqualThan_RightOperand();
 
 	/**
-	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation <em>Int Operation</em>}'.
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation <em>Numeric Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Int Operation</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation
+	 * @return the meta object for class '<em>Numeric Operation</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation
 	 * @generated
 	 */
-	EClass getIntOperation();
+	EClass getNumericOperation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation#getLeftOperand <em>Left Operand</em>}'.
+	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation#getLeftOperand <em>Left Operand</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation#getLeftOperand()
-	 * @see #getIntOperation()
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation#getLeftOperand()
+	 * @see #getNumericOperation()
 	 * @generated
 	 */
-	EReference getIntOperation_LeftOperand();
+	EReference getNumericOperation_LeftOperand();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation#getRightOperand <em>Right Operand</em>}'.
+	 * Returns the meta object for the containment reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation#getRightOperand <em>Right Operand</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntOperation#getRightOperand()
-	 * @see #getIntOperation()
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.NumericOperation#getRightOperand()
+	 * @see #getNumericOperation()
 	 * @generated
 	 */
-	EReference getIntOperation_RightOperand();
+	EReference getNumericOperation_RightOperand();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Plus <em>Plus</em>}'.
@@ -3968,6 +4273,98 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransitiveClosure_Relation();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Pow <em>Pow</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Pow</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Pow
+	 * @generated
+	 */
+	EClass getPow();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression <em>Aggregate Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Aggregate Expression</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression
+	 * @generated
+	 */
+	EClass getAggregateExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression#getRelation <em>Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Relation</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression#getRelation()
+	 * @see #getAggregateExpression()
+	 * @generated
+	 */
+	EReference getAggregateExpression_Relation();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Sum <em>Sum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sum</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Sum
+	 * @generated
+	 */
+	EClass getSum();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Count <em>Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Count</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Count
+	 * @generated
+	 */
+	EClass getCount();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Min <em>Min</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Min</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Min
+	 * @generated
+	 */
+	EClass getMin();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Max <em>Max</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Max</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Max
+	 * @generated
+	 */
+	EClass getMax();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression <em>Projected Aggregate Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Projected Aggregate Expression</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression
+	 * @generated
+	 */
+	EClass getProjectedAggregateExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression#getProjectionIndex <em>Projection Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Projection Index</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ProjectedAggregateExpression#getProjectionIndex()
+	 * @see #getProjectedAggregateExpression()
+	 * @generated
+	 */
+	EAttribute getProjectedAggregateExpression_ProjectionIndex();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -4637,14 +5034,14 @@ public interface LogiclanguagePackage extends EPackage {
 		EReference MORE_OR_EQUAL_THAN__RIGHT_OPERAND = eINSTANCE.getMoreOrEqualThan_RightOperand();
 
 		/**
-		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.IntOperationImpl <em>Int Operation</em>}' class.
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.NumericOperationImpl <em>Numeric Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.IntOperationImpl
-		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getIntOperation()
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.NumericOperationImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getNumericOperation()
 		 * @generated
 		 */
-		EClass INT_OPERATION = eINSTANCE.getIntOperation();
+		EClass NUMERIC_OPERATION = eINSTANCE.getNumericOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
@@ -4652,7 +5049,7 @@ public interface LogiclanguagePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INT_OPERATION__LEFT_OPERAND = eINSTANCE.getIntOperation_LeftOperand();
+		EReference NUMERIC_OPERATION__LEFT_OPERAND = eINSTANCE.getNumericOperation_LeftOperand();
 
 		/**
 		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
@@ -4660,7 +5057,7 @@ public interface LogiclanguagePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INT_OPERATION__RIGHT_OPERAND = eINSTANCE.getIntOperation_RightOperand();
+		EReference NUMERIC_OPERATION__RIGHT_OPERAND = eINSTANCE.getNumericOperation_RightOperand();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.PlusImpl <em>Plus</em>}' class.
@@ -5083,6 +5480,92 @@ public interface LogiclanguagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITIVE_CLOSURE__RELATION = eINSTANCE.getTransitiveClosure_Relation();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.PowImpl <em>Pow</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.PowImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getPow()
+		 * @generated
+		 */
+		EClass POW = eINSTANCE.getPow();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.AggregateExpressionImpl <em>Aggregate Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.AggregateExpressionImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getAggregateExpression()
+		 * @generated
+		 */
+		EClass AGGREGATE_EXPRESSION = eINSTANCE.getAggregateExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Relation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AGGREGATE_EXPRESSION__RELATION = eINSTANCE.getAggregateExpression_Relation();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.SumImpl <em>Sum</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.SumImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getSum()
+		 * @generated
+		 */
+		EClass SUM = eINSTANCE.getSum();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.CountImpl <em>Count</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.CountImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getCount()
+		 * @generated
+		 */
+		EClass COUNT = eINSTANCE.getCount();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MinImpl <em>Min</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MinImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getMin()
+		 * @generated
+		 */
+		EClass MIN = eINSTANCE.getMin();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MaxImpl <em>Max</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.MaxImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getMax()
+		 * @generated
+		 */
+		EClass MAX = eINSTANCE.getMax();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.ProjectedAggregateExpressionImpl <em>Projected Aggregate Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.ProjectedAggregateExpressionImpl
+		 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.LogiclanguagePackageImpl#getProjectedAggregateExpression()
+		 * @generated
+		 */
+		EClass PROJECTED_AGGREGATE_EXPRESSION = eINSTANCE.getProjectedAggregateExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Projection Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX = eINSTANCE.getProjectedAggregateExpression_ProjectionIndex();
 
 	}
 

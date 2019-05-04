@@ -73,6 +73,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicProblem createLogicProblem() {
 		LogicProblemImpl logicProblem = new LogicProblemImpl();
 		return logicProblem;
@@ -83,6 +84,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ContainmentHierarchy createContainmentHierarchy() {
 		ContainmentHierarchyImpl containmentHierarchy = new ContainmentHierarchyImpl();
 		return containmentHierarchy;
@@ -93,6 +95,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationAnnotation createRelationAnnotation() {
 		RelationAnnotationImpl relationAnnotation = new RelationAnnotationImpl();
 		return relationAnnotation;
@@ -103,6 +106,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConstantAnnotation createConstantAnnotation() {
 		ConstantAnnotationImpl constantAnnotation = new ConstantAnnotationImpl();
 		return constantAnnotation;
@@ -113,6 +117,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionAnnotation createFunctionAnnotation() {
 		FunctionAnnotationImpl functionAnnotation = new FunctionAnnotationImpl();
 		return functionAnnotation;
@@ -123,6 +128,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssertionAnnotation createAssertionAnnotation() {
 		AssertionAnnotationImpl assertionAnnotation = new AssertionAnnotationImpl();
 		return assertionAnnotation;
@@ -133,6 +139,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Annotation createAnnotation() {
 		AnnotationImpl annotation = new AnnotationImpl();
 		return annotation;
@@ -143,6 +150,7 @@ public class LogicproblemFactoryImpl extends EFactoryImpl implements Logicproble
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicproblemPackage getLogicproblemPackage() {
 		return (LogicproblemPackage)getEPackage();
 	}

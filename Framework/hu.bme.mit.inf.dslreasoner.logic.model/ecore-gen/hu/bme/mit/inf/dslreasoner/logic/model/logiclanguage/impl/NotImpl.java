@@ -62,6 +62,7 @@ public class NotImpl extends BoolOperationImpl implements Not {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Term getOperand() {
 		return operand;
 	}
@@ -86,6 +87,7 @@ public class NotImpl extends BoolOperationImpl implements Not {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperand(Term newOperand) {
 		if (newOperand != operand) {
 			NotificationChain msgs = null;
