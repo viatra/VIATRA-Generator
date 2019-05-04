@@ -22,6 +22,11 @@
       <genEnumLiterals ecoreEnumLiteral="satellite.ecore#//AntennaGain/MEDIUM"/>
       <genEnumLiterals ecoreEnumLiteral="satellite.ecore#//AntennaGain/HIGH"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="satellite.ecore#//SpacecraftKind">
+      <genEnumLiterals ecoreEnumLiteral="satellite.ecore#//SpacecraftKind/CubeSat3U"/>
+      <genEnumLiterals ecoreEnumLiteral="satellite.ecore#//SpacecraftKind/CubeSat6U"/>
+      <genEnumLiterals ecoreEnumLiteral="satellite.ecore#//SpacecraftKind/SmallSat"/>
+    </genEnums>
     <genClasses ecoreClass="satellite.ecore#//ConstellationMission">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//ConstellationMission/groundStationNetwork"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//ConstellationMission/spacecraft"/>
@@ -36,10 +41,8 @@
     <genClasses ecoreClass="satellite.ecore#//GroundStationNetwork"/>
     <genClasses ecoreClass="satellite.ecore#//Spacecraft">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//Spacecraft/payload"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//Spacecraft/kind"/>
     </genClasses>
-    <genClasses ecoreClass="satellite.ecore#//CubeSat3U"/>
-    <genClasses ecoreClass="satellite.ecore#//CubeSat6U"/>
-    <genClasses ecoreClass="satellite.ecore#//SmallSat"/>
     <genClasses ecoreClass="satellite.ecore#//CommSubsystem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/band"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/gain"/>

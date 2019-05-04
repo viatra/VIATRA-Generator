@@ -5,6 +5,8 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkDoesNotStartAtContainingElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLoop;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CostMetric;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CoverageMetric;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CubeSatWithKaAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetBand;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetGain;
@@ -12,6 +14,7 @@ import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.KaAntennaGainLow;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NotEnoughInterferometryPayloads;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.ThreeUCubeSatWithNonUhfCrossLink;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.TimeMetric;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.UhfAntennaGainNotLow;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.XAntennaGainNotMedium;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -36,6 +39,9 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>kaAntennaGainLow</li>
  * <li>threeUCubeSatWithNonUhfCrossLink</li>
  * <li>cubeSatWithKaAntenna</li>
+ * <li>coverageMetric</li>
+ * <li>timeMetric</li>
+ * <li>costMetric</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -71,6 +77,9 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
     querySpecifications.add(KaAntennaGainLow.instance());
     querySpecifications.add(ThreeUCubeSatWithNonUhfCrossLink.instance());
     querySpecifications.add(CubeSatWithKaAntenna.instance());
+    querySpecifications.add(CoverageMetric.instance());
+    querySpecifications.add(TimeMetric.instance());
+    querySpecifications.add(CostMetric.instance());
   }
   
   public CommunicationLinkDoesNotStartAtContainingElement getCommunicationLinkDoesNotStartAtContainingElement() {
@@ -159,5 +168,29 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
   
   public CubeSatWithKaAntenna.Matcher getCubeSatWithKaAntenna(final ViatraQueryEngine engine) {
     return CubeSatWithKaAntenna.Matcher.on(engine);
+  }
+  
+  public CoverageMetric getCoverageMetric() {
+    return CoverageMetric.instance();
+  }
+  
+  public CoverageMetric.Matcher getCoverageMetric(final ViatraQueryEngine engine) {
+    return CoverageMetric.Matcher.on(engine);
+  }
+  
+  public TimeMetric getTimeMetric() {
+    return TimeMetric.instance();
+  }
+  
+  public TimeMetric.Matcher getTimeMetric(final ViatraQueryEngine engine) {
+    return TimeMetric.Matcher.on(engine);
+  }
+  
+  public CostMetric getCostMetric() {
+    return CostMetric.instance();
+  }
+  
+  public CostMetric.Matcher getCostMetric(final ViatraQueryEngine engine) {
+    return CostMetric.Matcher.on(engine);
   }
 }

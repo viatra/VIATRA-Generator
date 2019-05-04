@@ -6,8 +6,6 @@ import hu.bme.mit.inf.dslreasoner.domains.satellite.AntennaGain;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.CommSubsystem;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.ConstellationMission;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat6U;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.DirectedCommunicationLink;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.GroundStationNetwork;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.InterferometryMission;
@@ -15,8 +13,8 @@ import hu.bme.mit.inf.dslreasoner.domains.satellite.InterferometryPayload;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.Payload;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.SatelliteFactory;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.SatellitePackage;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.TransceiverBand;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -74,27 +72,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass cubeSat3UEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass cubeSat6UEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass smallSatEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass commSubsystemEClass = null;
 
 	/**
@@ -131,6 +108,13 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	private EEnum antennaGainEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum spacecraftKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -312,28 +296,8 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
-	public EClass getCubeSat3U() {
-		return cubeSat3UEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getCubeSat6U() {
-		return cubeSat6UEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getSmallSat() {
-		return smallSatEClass;
+	public EAttribute getSpacecraft_Kind() {
+		return (EAttribute) spacecraftEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -442,6 +406,16 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
+	public EEnum getSpacecraftKind() {
+		return spacecraftKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public SatelliteFactory getSatelliteFactory() {
 		return (SatelliteFactory) getEFactoryInstance();
 	}
@@ -481,12 +455,7 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		spacecraftEClass = createEClass(SPACECRAFT);
 		createEReference(spacecraftEClass, SPACECRAFT__PAYLOAD);
-
-		cubeSat3UEClass = createEClass(CUBE_SAT3_U);
-
-		cubeSat6UEClass = createEClass(CUBE_SAT6_U);
-
-		smallSatEClass = createEClass(SMALL_SAT);
+		createEAttribute(spacecraftEClass, SPACECRAFT__KIND);
 
 		commSubsystemEClass = createEClass(COMM_SUBSYSTEM);
 		createEAttribute(commSubsystemEClass, COMM_SUBSYSTEM__BAND);
@@ -503,6 +472,7 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		// Create enums
 		transceiverBandEEnum = createEEnum(TRANSCEIVER_BAND);
 		antennaGainEEnum = createEEnum(ANTENNA_GAIN);
+		spacecraftKindEEnum = createEEnum(SPACECRAFT_KIND);
 	}
 
 	/**
@@ -537,9 +507,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		interferometryMissionEClass.getESuperTypes().add(this.getConstellationMission());
 		groundStationNetworkEClass.getESuperTypes().add(this.getCommunicatingElement());
 		spacecraftEClass.getESuperTypes().add(this.getCommunicatingElement());
-		cubeSat3UEClass.getESuperTypes().add(this.getSpacecraft());
-		cubeSat6UEClass.getESuperTypes().add(this.getSpacecraft());
-		smallSatEClass.getESuperTypes().add(this.getSpacecraft());
 		interferometryPayloadEClass.getESuperTypes().add(this.getPayload());
 
 		// Initialize classes, features, and operations; add parameters
@@ -575,15 +542,8 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		initEReference(getSpacecraft_Payload(), this.getPayload(), null, "payload", null, 0, 1, Spacecraft.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(cubeSat3UEClass, CubeSat3U.class, "CubeSat3U", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(cubeSat6UEClass, CubeSat6U.class, "CubeSat6U", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(smallSatEClass, SmallSat.class, "SmallSat", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSpacecraft_Kind(), this.getSpacecraftKind(), "kind", null, 1, 1, Spacecraft.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(commSubsystemEClass, CommSubsystem.class, "CommSubsystem", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -616,6 +576,11 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		addEEnumLiteral(antennaGainEEnum, AntennaGain.LOW);
 		addEEnumLiteral(antennaGainEEnum, AntennaGain.MEDIUM);
 		addEEnumLiteral(antennaGainEEnum, AntennaGain.HIGH);
+
+		initEEnum(spacecraftKindEEnum, SpacecraftKind.class, "SpacecraftKind");
+		addEEnumLiteral(spacecraftKindEEnum, SpacecraftKind.CUBE_SAT3_U);
+		addEEnumLiteral(spacecraftKindEEnum, SpacecraftKind.CUBE_SAT6_U);
+		addEEnumLiteral(spacecraftKindEEnum, SpacecraftKind.SMALL_SAT);
 
 		// Create resource
 		createResource(eNS_URI);

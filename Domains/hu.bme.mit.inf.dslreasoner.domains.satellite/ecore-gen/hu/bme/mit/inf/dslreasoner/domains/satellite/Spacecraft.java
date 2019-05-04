@@ -12,6 +12,7 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft#getPayload <em>Payload</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft#getKind <em>Kind</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SatellitePackage#getSpacecraft()
@@ -44,5 +45,34 @@ public interface Spacecraft extends CommunicatingElement {
 	 * @generated
 	 */
 	void setPayload(Payload value);
+
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind
+	 * @see #setKind(SpacecraftKind)
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SatellitePackage#getSpacecraft_Kind()
+	 * @model required="true"
+	 * @generated
+	 */
+	SpacecraftKind getKind();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(SpacecraftKind value);
 
 } // Spacecraft

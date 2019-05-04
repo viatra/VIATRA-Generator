@@ -6,6 +6,7 @@ import hu.bme.mit.inf.dslreasoner.domains.satellite.Payload;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.SatellitePackage;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft;
 
+import hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -23,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SpacecraftImpl#getPayload <em>Payload</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SpacecraftImpl#getKind <em>Kind</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,6 +39,25 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 * @ordered
 	 */
 	protected Payload payload;
+
+	/**
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final SpacecraftKind KIND_EDEFAULT = SpacecraftKind.CUBE_SAT3_U;
+	/**
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected SpacecraftKind kind = KIND_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,6 +136,29 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 * @generated
 	 */
 	@Override
+	public SpacecraftKind getKind() {
+		return kind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setKind(SpacecraftKind newKind) {
+		SpacecraftKind oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SatellitePackage.SPACECRAFT__KIND, oldKind, kind));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
@@ -133,6 +177,8 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			return getPayload();
+		case SatellitePackage.SPACECRAFT__KIND:
+			return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -147,6 +193,9 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			setPayload((Payload) newValue);
+			return;
+		case SatellitePackage.SPACECRAFT__KIND:
+			setKind((SpacecraftKind) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -163,6 +212,9 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			setPayload((Payload) null);
 			return;
+		case SatellitePackage.SPACECRAFT__KIND:
+			setKind(KIND_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -177,8 +229,27 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			return payload != null;
+		case SatellitePackage.SPACECRAFT__KIND:
+			return kind != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (kind: ");
+		result.append(kind);
+		result.append(')');
+		return result.toString();
 	}
 
 } //SpacecraftImpl

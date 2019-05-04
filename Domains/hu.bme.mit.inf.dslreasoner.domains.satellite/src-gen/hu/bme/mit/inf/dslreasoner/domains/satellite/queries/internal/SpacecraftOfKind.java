@@ -19,7 +19,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -31,8 +30,8 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
  * 
  * <p>Original source:
  *         <code><pre>
- *         private pattern smallSat(Sat : Spacecraft) {
- *         	Spacecraft.kind(Sat, SpacecraftKind::SmallSat);
+ *         private pattern spacecraftOfKind(Spacecraft : Spacecraft, Kind : SpacecraftKind) {
+ *         	Spacecraft.kind(Spacecraft, Kind);
  *         }
  * </pre></code>
  * 
@@ -41,8 +40,8 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
  * 
  */
 @SuppressWarnings("all")
-public final class SmallSat extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
-  private SmallSat() {
+public final class SpacecraftOfKind extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
+  private SpacecraftOfKind() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -51,7 +50,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecificationWithGeneri
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static SmallSat instance() {
+  public static SpacecraftOfKind instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -60,15 +59,15 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecificationWithGeneri
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SmallSat (visibility: PUBLIC, simpleName: SmallSat, identifier: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SmallSat, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftOfKind (visibility: PUBLIC, simpleName: SpacecraftOfKind, identifier: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftOfKind, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SmallSat (visibility: PUBLIC, simpleName: SmallSat, identifier: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SmallSat, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftOfKind (visibility: PUBLIC, simpleName: SpacecraftOfKind, identifier: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftOfKind, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final SmallSat INSTANCE = new SmallSat();
+    private static final SpacecraftOfKind INSTANCE = new SpacecraftOfKind();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -86,11 +85,13 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecificationWithGeneri
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final SmallSat.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final SpacecraftOfKind.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Sat = new PParameter("Sat", "hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
+    private final PParameter parameter_Spacecraft = new PParameter("Spacecraft", "hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_Sat);
+    private final PParameter parameter_Kind = new PParameter("Kind", "hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind", new EDataTypeInSlotsKey((EDataType)getClassifierLiteralSafe("http://www.example.org/satellite", "SpacecraftKind")), PParameterDirection.INOUT);
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_Spacecraft, parameter_Kind);
     
     private GeneratedPQuery() {
       super(PVisibility.PRIVATE);
@@ -98,12 +99,12 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecificationWithGeneri
     
     @Override
     public String getFullyQualifiedName() {
-      return "hu.bme.mit.inf.dslreasoner.domains.satellite.queries.smallSat";
+      return "hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("Sat");
+      return Arrays.asList("Spacecraft","Kind");
     }
     
     @Override
@@ -117,19 +118,20 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecificationWithGeneri
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_Sat = body.getOrCreateVariableByName("Sat");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
+          PVariable var_Spacecraft = body.getOrCreateVariableByName("Spacecraft");
+          PVariable var_Kind = body.getOrCreateVariableByName("Kind");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Kind), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "SpacecraftKind")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_Sat, parameter_Sat)
+             new ExportedParameter(body, var_Spacecraft, parameter_Spacecraft),
+             new ExportedParameter(body, var_Kind, parameter_Kind)
           ));
-          // 	Spacecraft.kind(Sat, SpacecraftKind::SmallSat)
+          // 	Spacecraft.kind(Spacecraft, Kind)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, getEnumLiteral("http://www.example.org/satellite", "SpacecraftKind", "SmallSat").getInstance());
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "Spacecraft", "kind")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "SpacecraftKind")));
-          new Equality(body, var__virtual_1_, var__virtual_0_);
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "Spacecraft", "kind")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "SpacecraftKind")));
+          new Equality(body, var__virtual_0_, var_Kind);
           bodies.add(body);
       }
       return bodies;

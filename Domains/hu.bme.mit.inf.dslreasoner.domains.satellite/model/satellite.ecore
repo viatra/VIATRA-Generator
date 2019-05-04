@@ -21,10 +21,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Spacecraft" abstract="true" eSuperTypes="#//CommunicatingElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="#//SpacecraftKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CubeSat3U" eSuperTypes="#//Spacecraft"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CubeSat6U" eSuperTypes="#//Spacecraft"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SmallSat" eSuperTypes="#//Spacecraft"/>
   <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="band" lowerBound="1" eType="#//TransceiverBand"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gain" lowerBound="1" eType="#//AntennaGain"/>
@@ -47,4 +45,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpacecraftKind">
+    <eLiterals name="CubeSat3U"/>
+    <eLiterals name="CubeSat6U" value="1"/>
+    <eLiterals name="SmallSat" value="2"/>
+  </eClassifiers>
 </ecore:EPackage>

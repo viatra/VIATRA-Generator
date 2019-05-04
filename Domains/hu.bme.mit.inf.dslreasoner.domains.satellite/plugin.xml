@@ -17,6 +17,9 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.kaAntennaGainLow"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.threeUCubeSatWithNonUhfCrossLink"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.cubeSatWithKaAntenna"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.coverageMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.timeMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.costMetric"/>
     </group>
   </extension>
 </plugin>

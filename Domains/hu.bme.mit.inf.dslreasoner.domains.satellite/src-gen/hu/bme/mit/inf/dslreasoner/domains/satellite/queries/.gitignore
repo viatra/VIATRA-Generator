@@ -14,3 +14,9 @@
 /.CubeSatWithKaAntenna.java._trace
 /.ThreeUCubeSatWithNonUhfCrossLink.java._trace
 /.CommunicationLinkDoesNotStartAtContainingElement.java._trace
+/.SpacecraftWithInterferometryPayload.java._trace
+/.SatelliteMetrics.java._trace
+/.CoverageMetric.java._trace
+/.TimeMetric.java._trace
+/.CostMetric.java._trace
+/.SpacecraftCost.java._trace

@@ -3,10 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.domains.satellite;singleton:=true
 Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: hu.bme.mit.inf.dslreasoner.domains.satellite,
  hu.bme.mit.inf.dslreasoner.domains.satellite.impl,
+ hu.bme.mit.inf.dslreasoner.domains.satellite.metrics,
  hu.bme.mit.inf.dslreasoner.domains.satellite.queries,
  hu.bme.mit.inf.dslreasoner.domains.satellite.runner,
  hu.bme.mit.inf.dslreasoner.domains.satellite.util
@@ -17,7 +19,7 @@ Require-Bundle: org.eclipse.viatra.query.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime,
  hu.bme.mit.inf.dslreasoner.application
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
 Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.domains.satellite
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
