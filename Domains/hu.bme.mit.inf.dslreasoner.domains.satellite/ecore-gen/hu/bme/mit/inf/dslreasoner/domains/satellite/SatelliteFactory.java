@@ -67,6 +67,33 @@ public interface SatelliteFactory extends EFactory {
 	InterferometryPayload createInterferometryPayload();
 
 	/**
+	 * Returns a new object of class '<em>Cube Sat3 U</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cube Sat3 U</em>'.
+	 * @generated
+	 */
+	CubeSat3U createCubeSat3U();
+
+	/**
+	 * Returns a new object of class '<em>Cube Sat6 U</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cube Sat6 U</em>'.
+	 * @generated
+	 */
+	CubeSat6U createCubeSat6U();
+
+	/**
+	 * Returns a new object of class '<em>Small Sat</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Small Sat</em>'.
+	 * @generated
+	 */
+	SmallSat createSmallSat();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -28,6 +28,8 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
@@ -45,8 +47,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  *         <code><pre>
  *         // At least two spacecraft must have the interferometry payload configured
  *         
- *         //{@literal @}Constraint(severity = "error", key = {Mission},
- *         //	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
+ *         {@literal @}Constraint(severity = "error", key = {Mission},
+ *         	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
  *         pattern notEnoughInterferometryPayloads(Mission : InterferometryMission) {
  *         	InterferometryMission(Mission);
  *         	neg find atLeastTwoInterferometryPayloads(Mission);
@@ -233,8 +235,8 @@ public final class NotEnoughInterferometryPayloads extends BaseGeneratedEMFQuery
    * <code><pre>
    * // At least two spacecraft must have the interferometry payload configured
    * 
-   * //{@literal @}Constraint(severity = "error", key = {Mission},
-   * //	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
+   * {@literal @}Constraint(severity = "error", key = {Mission},
+   * 	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
    * pattern notEnoughInterferometryPayloads(Mission : InterferometryMission) {
    * 	InterferometryMission(Mission);
    * 	neg find atLeastTwoInterferometryPayloads(Mission);
@@ -541,6 +543,15 @@ public final class NotEnoughInterferometryPayloads extends BaseGeneratedEMFQuery
           // 	neg find atLeastTwoInterferometryPayloads(Mission)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_Mission), AtLeastTwoInterferometryPayloads.instance().getInternalQueryRepresentation());
           bodies.add(body);
+      }
+      {
+          PAnnotation annotation = new PAnnotation("Constraint");
+          annotation.addAttribute("severity", "error");
+          annotation.addAttribute("key", Arrays.asList(new Object[] {
+                              new ParameterReference("Mission")
+                              }));
+          annotation.addAttribute("message", "Interferometry mission needs at least two spacecraft configured with the interferometry payload.");
+          addAnnotation(annotation);
       }
       return bodies;
     }

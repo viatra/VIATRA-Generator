@@ -463,6 +463,262 @@ public interface SatellitePackage extends EPackage {
 	int INTERFEROMETRY_PAYLOAD_OPERATION_COUNT = PAYLOAD_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSatImpl <em>Cube Sat</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSatImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getCubeSat()
+	 * @generated
+	 */
+	int CUBE_SAT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
+
+	/**
+	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__PAYLOAD = SPACECRAFT__PAYLOAD;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__KIND = SPACECRAFT__KIND;
+
+	/**
+	 * The number of structural features of the '<em>Cube Sat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT_FEATURE_COUNT = SPACECRAFT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Cube Sat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT_OPERATION_COUNT = SPACECRAFT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat3UImpl <em>Cube Sat3 U</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat3UImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getCubeSat3U()
+	 * @generated
+	 */
+	int CUBE_SAT3_U = 9;
+
+	/**
+	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT3_U__COMM_SUBSYSTEM = CUBE_SAT__COMM_SUBSYSTEM;
+
+	/**
+	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT3_U__COMMUNICATION_LINK = CUBE_SAT__COMMUNICATION_LINK;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT3_U__PAYLOAD = CUBE_SAT__PAYLOAD;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT3_U__KIND = CUBE_SAT__KIND;
+
+	/**
+	 * The number of structural features of the '<em>Cube Sat3 U</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT3_U_FEATURE_COUNT = CUBE_SAT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Cube Sat3 U</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT3_U_OPERATION_COUNT = CUBE_SAT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat6UImpl <em>Cube Sat6 U</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat6UImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getCubeSat6U()
+	 * @generated
+	 */
+	int CUBE_SAT6_U = 10;
+
+	/**
+	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT6_U__COMM_SUBSYSTEM = CUBE_SAT__COMM_SUBSYSTEM;
+
+	/**
+	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT6_U__COMMUNICATION_LINK = CUBE_SAT__COMMUNICATION_LINK;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT6_U__PAYLOAD = CUBE_SAT__PAYLOAD;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT6_U__KIND = CUBE_SAT__KIND;
+
+	/**
+	 * The number of structural features of the '<em>Cube Sat6 U</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT6_U_FEATURE_COUNT = CUBE_SAT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Cube Sat6 U</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT6_U_OPERATION_COUNT = CUBE_SAT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SmallSatImpl <em>Small Sat</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SmallSatImpl
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getSmallSat()
+	 * @generated
+	 */
+	int SMALL_SAT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMALL_SAT__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
+
+	/**
+	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMALL_SAT__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMALL_SAT__PAYLOAD = SPACECRAFT__PAYLOAD;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMALL_SAT__KIND = SPACECRAFT__KIND;
+
+	/**
+	 * The number of structural features of the '<em>Small Sat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMALL_SAT_FEATURE_COUNT = SPACECRAFT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Small Sat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMALL_SAT_OPERATION_COUNT = SPACECRAFT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.TransceiverBand <em>Transceiver Band</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -470,7 +726,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getTransceiverBand()
 	 * @generated
 	 */
-	int TRANSCEIVER_BAND = 9;
+	int TRANSCEIVER_BAND = 13;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.AntennaGain <em>Antenna Gain</em>}' enum.
@@ -480,7 +736,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getAntennaGain()
 	 * @generated
 	 */
-	int ANTENNA_GAIN = 10;
+	int ANTENNA_GAIN = 14;
 
 	/**
 	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind <em>Spacecraft Kind</em>}' enum.
@@ -490,7 +746,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getSpacecraftKind()
 	 * @generated
 	 */
-	int SPACECRAFT_KIND = 11;
+	int SPACECRAFT_KIND = 15;
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.ConstellationMission <em>Constellation Mission</em>}'.
@@ -702,6 +958,46 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInterferometryPayload();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U <em>Cube Sat3 U</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cube Sat3 U</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U
+	 * @generated
+	 */
+	EClass getCubeSat3U();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat6U <em>Cube Sat6 U</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cube Sat6 U</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat6U
+	 * @generated
+	 */
+	EClass getCubeSat6U();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat <em>Small Sat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Small Sat</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat
+	 * @generated
+	 */
+	EClass getSmallSat();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat <em>Cube Sat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cube Sat</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat
+	 * @generated
+	 */
+	EClass getCubeSat();
 
 	/**
 	 * Returns the meta object for enum '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.TransceiverBand <em>Transceiver Band</em>}'.
@@ -934,6 +1230,46 @@ public interface SatellitePackage extends EPackage {
 		 * @generated
 		 */
 		EClass INTERFEROMETRY_PAYLOAD = eINSTANCE.getInterferometryPayload();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat3UImpl <em>Cube Sat3 U</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat3UImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getCubeSat3U()
+		 * @generated
+		 */
+		EClass CUBE_SAT3_U = eINSTANCE.getCubeSat3U();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat6UImpl <em>Cube Sat6 U</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSat6UImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getCubeSat6U()
+		 * @generated
+		 */
+		EClass CUBE_SAT6_U = eINSTANCE.getCubeSat6U();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SmallSatImpl <em>Small Sat</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SmallSatImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getSmallSat()
+		 * @generated
+		 */
+		EClass SMALL_SAT = eINSTANCE.getSmallSat();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSatImpl <em>Cube Sat</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.CubeSatImpl
+		 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.impl.SatellitePackageImpl#getCubeSat()
+		 * @generated
+		 */
+		EClass CUBE_SAT = eINSTANCE.getCubeSat();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.TransceiverBand <em>Transceiver Band</em>}' enum.

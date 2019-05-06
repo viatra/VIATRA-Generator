@@ -4,7 +4,7 @@
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
 import hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SmallSat;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SmallSat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;

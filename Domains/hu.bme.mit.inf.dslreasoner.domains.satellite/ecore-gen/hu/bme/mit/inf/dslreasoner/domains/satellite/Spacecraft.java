@@ -57,22 +57,10 @@ public interface Spacecraft extends CommunicatingElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind
-	 * @see #setKind(SpacecraftKind)
 	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SatellitePackage#getSpacecraft_Kind()
-	 * @model required="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	SpacecraftKind getKind();
-
-	/**
-	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft#getKind <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kind</em>' attribute.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SpacecraftKind
-	 * @see #getKind()
-	 * @generated
-	 */
-	void setKind(SpacecraftKind value);
 
 } // Spacecraft

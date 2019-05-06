@@ -67,6 +67,12 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 			return createDirectedCommunicationLink();
 		case SatellitePackage.INTERFEROMETRY_PAYLOAD:
 			return createInterferometryPayload();
+		case SatellitePackage.CUBE_SAT3_U:
+			return createCubeSat3U();
+		case SatellitePackage.CUBE_SAT6_U:
+			return createCubeSat6U();
+		case SatellitePackage.SMALL_SAT:
+			return createSmallSat();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -163,6 +169,39 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 	public InterferometryPayload createInterferometryPayload() {
 		InterferometryPayloadImpl interferometryPayload = new InterferometryPayloadImpl();
 		return interferometryPayload;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CubeSat3U createCubeSat3U() {
+		CubeSat3UImpl cubeSat3U = new CubeSat3UImpl();
+		return cubeSat3U;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CubeSat6U createCubeSat6U() {
+		CubeSat6UImpl cubeSat6U = new CubeSat6UImpl();
+		return cubeSat6U;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SmallSat createSmallSat() {
+		SmallSatImpl smallSat = new SmallSatImpl();
+		return smallSat;
 	}
 
 	/**

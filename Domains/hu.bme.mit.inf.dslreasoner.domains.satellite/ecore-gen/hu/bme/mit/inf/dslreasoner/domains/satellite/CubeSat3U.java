@@ -12,5 +12,5 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite;
  * @model
  * @generated
  */
-public interface CubeSat3U extends Spacecraft {
+public interface CubeSat3U extends CubeSat {
 } // CubeSat3U

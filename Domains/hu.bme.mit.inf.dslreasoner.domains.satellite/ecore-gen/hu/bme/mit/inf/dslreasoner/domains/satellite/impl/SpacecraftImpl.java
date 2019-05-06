@@ -49,15 +49,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 * @ordered
 	 */
 	protected static final SpacecraftKind KIND_EDEFAULT = SpacecraftKind.CUBE_SAT3_U;
-	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected SpacecraftKind kind = KIND_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,20 +128,9 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 */
 	@Override
 	public SpacecraftKind getKind() {
-		return kind;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setKind(SpacecraftKind newKind) {
-		SpacecraftKind oldKind = kind;
-		kind = newKind == null ? KIND_EDEFAULT : newKind;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SatellitePackage.SPACECRAFT__KIND, oldKind, kind));
+		// TODO: implement this method to return the 'Kind' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -194,9 +174,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			setPayload((Payload) newValue);
 			return;
-		case SatellitePackage.SPACECRAFT__KIND:
-			setKind((SpacecraftKind) newValue);
-			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -211,9 +188,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			setPayload((Payload) null);
-			return;
-		case SatellitePackage.SPACECRAFT__KIND:
-			setKind(KIND_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -230,26 +204,9 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			return payload != null;
 		case SatellitePackage.SPACECRAFT__KIND:
-			return kind != KIND_EDEFAULT;
+			return getKind() != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy())
-			return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (kind: ");
-		result.append(kind);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SpacecraftImpl

@@ -112,6 +112,26 @@ public class SatelliteAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseCubeSat3U(CubeSat3U object) {
+			return createCubeSat3UAdapter();
+		}
+
+		@Override
+		public Adapter caseCubeSat6U(CubeSat6U object) {
+			return createCubeSat6UAdapter();
+		}
+
+		@Override
+		public Adapter caseSmallSat(SmallSat object) {
+			return createSmallSatAdapter();
+		}
+
+		@Override
+		public Adapter caseCubeSat(CubeSat object) {
+			return createCubeSatAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -253,6 +273,62 @@ public class SatelliteAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInterferometryPayloadAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U <em>Cube Sat3 U</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U
+	 * @generated
+	 */
+	public Adapter createCubeSat3UAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat6U <em>Cube Sat6 U</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat6U
+	 * @generated
+	 */
+	public Adapter createCubeSat6UAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat <em>Small Sat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat
+	 * @generated
+	 */
+	public Adapter createSmallSatAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat <em>Cube Sat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat
+	 * @generated
+	 */
+	public Adapter createCubeSatAdapter() {
 		return null;
 	}
 

@@ -20,3 +20,6 @@
 /.TimeMetric.java._trace
 /.CostMetric.java._trace
 /.SpacecraftCost.java._trace
+/.SpacecraftOfKind.java._trace
+/.NoPotentialLinkToGroundStation.java._trace
+/.SmallSat.java._trace

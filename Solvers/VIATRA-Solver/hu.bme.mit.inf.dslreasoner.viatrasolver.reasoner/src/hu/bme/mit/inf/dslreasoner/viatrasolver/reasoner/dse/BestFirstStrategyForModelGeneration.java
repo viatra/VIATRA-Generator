@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
@@ -93,6 +94,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.workspace = workspace;
 		this.configuration = configuration;
 		this.method = method;
+		//logger.setLevel(Level.DEBUG);
 	}
 	
 	public int getNumberOfStatecoderFail() {

@@ -13,8 +13,8 @@ pattern communicationLinkDoesNotStartAtContainingElement(Link : DirectedCommunic
 
 // At least two spacecraft must have the interferometry payload configured
 
-//@Constraint(severity = "error", key = {Mission},
-//	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
+@Constraint(severity = "error", key = {Mission},
+	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
 pattern notEnoughInterferometryPayloads(Mission : InterferometryMission) {
 	InterferometryMission(Mission);
 	neg find atLeastTwoInterferometryPayloads(Mission);
@@ -40,6 +40,41 @@ pattern noLinkToGroundStation(Spacecraft : Spacecraft) {
 	ConstellationMission.groundStationNetwork(Mission, GroundStation);
 	ConstellationMission.spacecraft(Mission, Spacecraft);
 	neg find indirectCommunicationLink(Spacecraft, GroundStation);
+}
+
+@Constraint(severity = "error", key = {Spacecraft},
+	message = "Spacecraft has no potential communication path to the ground station.")
+pattern noPotentialLinkToGroundStation(Spacecraft : Spacecraft) {
+	ConstellationMission.groundStationNetwork(Mission, GroundStation);
+	ConstellationMission.spacecraft(Mission, Spacecraft);
+	neg find indirectLinkAllowed(Spacecraft, GroundStation);
+}
+
+private pattern indirectLinkAllowed(From : Spacecraft, To : CommunicatingElement) {
+	find linkAllowed+(From, To);
+}
+
+private pattern linkAllowed(From : Spacecraft, To : CommunicatingElement) {
+	find matchingAntenna(From, To, _);
+	neg find cubeSat3U(From);
+} or {
+	find matchingAntenna(From, To, TransceiverBand::UHF);
+	CubeSat3U(From);
+} or {
+	find matchingAntenna(From, To, _);
+	CubeSat3U(From);
+	GroundStationNetwork(To);
+}
+
+private pattern matchingAntenna(From : Spacecraft, To : CommunicatingElement, Band : TransceiverBand) {
+	CommunicatingElement.commSubsystem.band(From, Band);
+	CommunicatingElement.commSubsystem.band(To, Band);
+	CommunicatingElement.commSubsystem.gain(From, Gain);
+	CommunicatingElement.commSubsystem.gain(To, Gain);
+}
+
+private pattern cubeSat3U(Sat : CubeSat3U) {
+	CubeSat3U(Sat);
 }
 
 // No communication loops may exist
@@ -133,8 +168,7 @@ pattern kaAntennaGainLow(Comm : CommSubsystem) {
 
 @Constraint(severity = "error", key = {Sat},
 	message = "3U CubeSats can only cross-link using UHF.")
-pattern threeUCubeSatWithNonUhfCrossLink(Sat : Spacecraft) {
-	Spacecraft.kind(Sat, SpacecraftKind::CubeSat3U);
+pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
 	CommunicatingElement.commSubsystem(Sat, SourceComm);
 	neg find commSubsystemBandUhf(SourceComm);
 	DirectedCommunicationLink.source(Link, SourceComm);
@@ -160,10 +194,23 @@ pattern cubeSatWithKaAntenna(Spacecraft : Spacecraft) {
 	neg find smallSat(Spacecraft);
 }
 
-private pattern smallSat(Sat : Spacecraft) {
-	Spacecraft.kind(Sat, SpacecraftKind::SmallSat);
+pattern smallSat(Sat : SmallSat) {
+	SmallSat(Sat);
 }
 
+@QueryBasedFeature(feature = "kind")
+pattern spacecraftOfKind(Spacecraft : Spacecraft, Kind : SpacecraftKind) {
+	CubeSat3U(Spacecraft);
+	Kind == SpacecraftKind::CubeSat3U;
+} or {
+	CubeSat6U(Spacecraft);
+	Kind == SpacecraftKind::CubeSat6U;
+} or {
+	SmallSat(Spacecraft);
+	Kind == SpacecraftKind::SmallSat;
+}
+
+/*
 //
 // Metrics
 //
@@ -262,10 +309,6 @@ private pattern spacecraftCost(Mission : InterferometryMission, Spacecraft : Spa
 	Cost == eval(BasePrice * Math.pow(KindCount, -0.25) + InterferometryPayloadCost + AdditionalCommSubsystemCost);
 }
 
-private pattern spacecraftOfKind(Spacecraft : Spacecraft, Kind : SpacecraftKind) {
-	Spacecraft.kind(Spacecraft, Kind);
-}
-
 private pattern basePrice(Spacecraft : Spacecraft, BasePrice : java Double) {
 	Spacecraft.kind(Spacecraft, SpacecraftKind::CubeSat3U);
 	BasePrice == 250000.0;
@@ -298,3 +341,4 @@ private pattern spacecraftWithTwoCommSubsystems(Spacecraft : Spacecraft) {
 	Spacecraft.commSubsystem(Spacecraft, Subsystem2);
 	Subsystem1 != Subsystem2;
 }
+*/

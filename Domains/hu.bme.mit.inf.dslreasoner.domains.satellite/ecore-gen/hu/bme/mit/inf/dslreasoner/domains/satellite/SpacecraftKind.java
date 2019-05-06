@@ -38,13 +38,13 @@ public enum SpacecraftKind implements Enumerator {
 	 */
 	CUBE_SAT6_U(1, "CubeSat6U", "CubeSat6U"),
 	/**
-	* The '<em><b>Small Sat</b></em>' literal object.
-	* <!-- begin-user-doc -->
+	 * The '<em><b>Small Sat</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	* <!-- end-user-doc -->
-	* @see #SMALL_SAT_VALUE
-	* @generated
-	* @ordered
-	*/
+	 * @see #SMALL_SAT_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	SMALL_SAT(2, "SmallSat", "SmallSat");
 
 	/**

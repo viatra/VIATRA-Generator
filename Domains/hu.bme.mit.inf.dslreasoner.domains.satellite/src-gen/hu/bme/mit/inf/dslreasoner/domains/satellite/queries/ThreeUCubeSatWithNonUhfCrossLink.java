@@ -3,7 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
-import hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CommSubsystemBandUhf;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.GroundStationNetwork;
 import java.util.Arrays;
@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -27,7 +26,6 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
@@ -37,7 +35,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterRe
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -56,8 +53,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  *         
  *         {@literal @}Constraint(severity = "error", key = {Sat},
  *         	message = "3U CubeSats can only cross-link using UHF.")
- *         pattern threeUCubeSatWithNonUhfCrossLink(Sat : Spacecraft) {
- *         	Spacecraft.kind(Sat, SpacecraftKind::CubeSat3U);
+ *         pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
  *         	CommunicatingElement.commSubsystem(Sat, SourceComm);
  *         	neg find commSubsystemBandUhf(SourceComm);
  *         	DirectedCommunicationLink.source(Link, SourceComm);
@@ -86,11 +82,11 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Spacecraft fSat;
+    private CubeSat3U fSat;
     
     private static List<String> parameterNames = makeImmutableList("Sat");
     
-    private Match(final Spacecraft pSat) {
+    private Match(final CubeSat3U pSat) {
       this.fSat = pSat;
     }
     
@@ -100,7 +96,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
       return null;
     }
     
-    public Spacecraft getSat() {
+    public CubeSat3U getSat() {
       return this.fSat;
     }
     
@@ -108,13 +104,13 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("Sat".equals(parameterName) ) {
-          this.fSat = (Spacecraft) newValue;
+          this.fSat = (CubeSat3U) newValue;
           return true;
       }
       return false;
     }
     
-    public void setSat(final Spacecraft pSat) {
+    public void setSat(final CubeSat3U pSat) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fSat = pSat;
     }
@@ -195,7 +191,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ThreeUCubeSatWithNonUhfCrossLink.Match newMutableMatch(final Spacecraft pSat) {
+    public static ThreeUCubeSatWithNonUhfCrossLink.Match newMutableMatch(final CubeSat3U pSat) {
       return new Mutable(pSat);
     }
     
@@ -207,12 +203,12 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the (partial) match object.
      * 
      */
-    public static ThreeUCubeSatWithNonUhfCrossLink.Match newMatch(final Spacecraft pSat) {
+    public static ThreeUCubeSatWithNonUhfCrossLink.Match newMatch(final CubeSat3U pSat) {
       return new Immutable(pSat);
     }
     
     private static final class Mutable extends ThreeUCubeSatWithNonUhfCrossLink.Match {
-      Mutable(final Spacecraft pSat) {
+      Mutable(final CubeSat3U pSat) {
         super(pSat);
       }
       
@@ -223,7 +219,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
     }
     
     private static final class Immutable extends ThreeUCubeSatWithNonUhfCrossLink.Match {
-      Immutable(final Spacecraft pSat) {
+      Immutable(final CubeSat3U pSat) {
         super(pSat);
       }
       
@@ -250,8 +246,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
    * 
    * {@literal @}Constraint(severity = "error", key = {Sat},
    * 	message = "3U CubeSats can only cross-link using UHF.")
-   * pattern threeUCubeSatWithNonUhfCrossLink(Sat : Spacecraft) {
-   * 	Spacecraft.kind(Sat, SpacecraftKind::CubeSat3U);
+   * pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
    * 	CommunicatingElement.commSubsystem(Sat, SourceComm);
    * 	neg find commSubsystemBandUhf(SourceComm);
    * 	DirectedCommunicationLink.source(Link, SourceComm);
@@ -315,7 +310,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ThreeUCubeSatWithNonUhfCrossLink.Match> getAllMatches(final Spacecraft pSat) {
+    public Collection<ThreeUCubeSatWithNonUhfCrossLink.Match> getAllMatches(final CubeSat3U pSat) {
       return rawStreamAllMatches(new Object[]{pSat}).collect(Collectors.toSet());
     }
     
@@ -329,7 +324,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<ThreeUCubeSatWithNonUhfCrossLink.Match> streamAllMatches(final Spacecraft pSat) {
+    public Stream<ThreeUCubeSatWithNonUhfCrossLink.Match> streamAllMatches(final CubeSat3U pSat) {
       return rawStreamAllMatches(new Object[]{pSat});
     }
     
@@ -340,7 +335,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<ThreeUCubeSatWithNonUhfCrossLink.Match> getOneArbitraryMatch(final Spacecraft pSat) {
+    public Optional<ThreeUCubeSatWithNonUhfCrossLink.Match> getOneArbitraryMatch(final CubeSat3U pSat) {
       return rawGetOneArbitraryMatch(new Object[]{pSat});
     }
     
@@ -351,7 +346,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Spacecraft pSat) {
+    public boolean hasMatch(final CubeSat3U pSat) {
       return rawHasMatch(new Object[]{pSat});
     }
     
@@ -361,7 +356,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Spacecraft pSat) {
+    public int countMatches(final CubeSat3U pSat) {
       return rawCountMatches(new Object[]{pSat});
     }
     
@@ -373,7 +368,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Spacecraft pSat, final Consumer<? super ThreeUCubeSatWithNonUhfCrossLink.Match> processor) {
+    public boolean forOneArbitraryMatch(final CubeSat3U pSat, final Consumer<? super ThreeUCubeSatWithNonUhfCrossLink.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pSat}, processor);
     }
     
@@ -385,7 +380,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the (partial) match object.
      * 
      */
-    public ThreeUCubeSatWithNonUhfCrossLink.Match newMatch(final Spacecraft pSat) {
+    public ThreeUCubeSatWithNonUhfCrossLink.Match newMatch(final CubeSat3U pSat) {
       return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch(pSat);
     }
     
@@ -394,8 +389,8 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Spacecraft> rawStreamAllValuesOfSat(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_SAT, parameters).map(Spacecraft.class::cast);
+    protected Stream<CubeSat3U> rawStreamAllValuesOfSat(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_SAT, parameters).map(CubeSat3U.class::cast);
     }
     
     /**
@@ -403,7 +398,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Spacecraft> getAllValuesOfSat() {
+    public Set<CubeSat3U> getAllValuesOfSat() {
       return rawStreamAllValuesOfSat(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -412,14 +407,14 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Spacecraft> streamAllValuesOfSat() {
+    public Stream<CubeSat3U> streamAllValuesOfSat() {
       return rawStreamAllValuesOfSat(emptyArray());
     }
     
     @Override
     protected ThreeUCubeSatWithNonUhfCrossLink.Match tupleToMatch(final Tuple t) {
       try {
-          return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((Spacecraft) t.get(POSITION_SAT));
+          return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((CubeSat3U) t.get(POSITION_SAT));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -429,7 +424,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
     @Override
     protected ThreeUCubeSatWithNonUhfCrossLink.Match arrayToMatch(final Object[] match) {
       try {
-          return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((Spacecraft) match[POSITION_SAT]);
+          return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((CubeSat3U) match[POSITION_SAT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -439,7 +434,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
     @Override
     protected ThreeUCubeSatWithNonUhfCrossLink.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ThreeUCubeSatWithNonUhfCrossLink.Match.newMutableMatch((Spacecraft) match[POSITION_SAT]);
+          return ThreeUCubeSatWithNonUhfCrossLink.Match.newMutableMatch((CubeSat3U) match[POSITION_SAT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -490,7 +485,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
   
   @Override
   public ThreeUCubeSatWithNonUhfCrossLink.Match newMatch(final Object... parameters) {
-    return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft) parameters[0]);
+    return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U) parameters[0]);
   }
   
   /**
@@ -522,7 +517,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final ThreeUCubeSatWithNonUhfCrossLink.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Sat = new PParameter("Sat", "hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
+    private final PParameter parameter_Sat = new PParameter("Sat", "hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CubeSat3U")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Sat);
     
@@ -556,44 +551,36 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
           PVariable var_Link = body.getOrCreateVariableByName("Link");
           PVariable var_TargetComm = body.getOrCreateVariableByName("TargetComm");
           PVariable var_Target = body.getOrCreateVariableByName("Target");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CubeSat3U")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_Sat, parameter_Sat)
           ));
-          // 	Spacecraft.kind(Sat, SpacecraftKind::CubeSat3U)
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, getEnumLiteral("http://www.example.org/satellite", "SpacecraftKind", "CubeSat3U").getInstance());
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "Spacecraft", "kind")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "SpacecraftKind")));
-          new Equality(body, var__virtual_1_, var__virtual_0_);
           // 	CommunicatingElement.commSubsystem(Sat, SourceComm)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_2_, var_SourceComm);
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Sat, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_0_, var_SourceComm);
           // 	neg find commSubsystemBandUhf(SourceComm)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_SourceComm), CommSubsystemBandUhf.instance().getInternalQueryRepresentation());
           // 	DirectedCommunicationLink.source(Link, SourceComm)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "source")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_3_, var_SourceComm);
+          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "source")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_1_, var_SourceComm);
           // 	DirectedCommunicationLink.target(Link, TargetComm)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          PVariable var__virtual_4_ = body.getOrCreateVariableByName(".virtual{4}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_4_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "target")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_4_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_4_, var_TargetComm);
+          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "target")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_2_, var_TargetComm);
           // 	CommunicatingElement.commSubsystem(Target, TargetComm)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Target), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_5_ = body.getOrCreateVariableByName(".virtual{5}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Target, var__virtual_5_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_5_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_5_, var_TargetComm);
+          PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Target, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_3_, var_TargetComm);
           // 	neg find groundStationNetwork(Target)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_Target), GroundStationNetwork.instance().getInternalQueryRepresentation());
           bodies.add(body);
