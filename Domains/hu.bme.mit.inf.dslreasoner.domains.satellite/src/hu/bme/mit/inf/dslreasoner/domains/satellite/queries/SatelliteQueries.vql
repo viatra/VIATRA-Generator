@@ -2,13 +2,17 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite.queries
 
 import "http://www.example.org/satellite"
 
-@Constraint(severity = "error", key = {Link},
-	message = "Communication links must start from the containing element.")
-pattern communicationLinkDoesNotStartAtContainingElement(Link : DirectedCommunicationLink) {
-	CommunicatingElement.communicationLink(Element, Link);
-	DirectedCommunicationLink.source(Link, SourceComm);
-	CommunicatingElement.commSubsystem(SourceElement, SourceComm);
-	Element != SourceElement;
+@Constraint(severity = "error", key = {Element},
+	message = "Only one communication link is allowed per element.")
+pattern multipleCommunicationLinks(Element : CommunicatingElement) {
+	CommunicatingElement.commSubsystem.communicationLink(Element, Link1);
+	CommunicatingElement.commSubsystem.communicationLink(Element, Link2);
+	Link1 != Link2;
+}
+
+@QueryBasedFeature(feature = "communicationLink")
+pattern communicationLinkOfElement(Element : CommunicatingElement, Link : DirectedCommunicationLink) {
+	CommunicatingElement.commSubsystem.communicationLink(Element, Link);
 }
 
 // At least two spacecraft must have the interferometry payload configured

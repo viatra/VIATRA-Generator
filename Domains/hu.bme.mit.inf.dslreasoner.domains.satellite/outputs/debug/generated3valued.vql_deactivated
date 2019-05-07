@@ -110,22 +110,22 @@ private pattern mayInstanceOfConstellationMission_class(problem:LogicProblem, in
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfInterferometryMission_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfInterferometryMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewConstellationMission_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfInterferometryMission_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfInterferometryMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewConstellationMission_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -154,20 +154,20 @@ private pattern mayInstanceOfInterferometryMission_class(problem:LogicProblem, i
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find scopeDisallowsNewInterferometryMission_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find scopeDisallowsNewInterferometryMission_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -196,10 +196,10 @@ private pattern mayInstanceOfCommunicatingElement_class(problem:LogicProblem, in
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class_UndefinedPart(problem,interpretation,element);
 	neg find scopeDisallowsNewCommunicatingElement_class(problem, interpretation);
 	neg find isPrimitive(element);
@@ -207,10 +207,10 @@ private pattern mayInstanceOfCommunicatingElement_class(problem:LogicProblem, in
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class_UndefinedPart(problem,interpretation,element);
 	neg find scopeDisallowsNewCommunicatingElement_class(problem, interpretation);
 	neg find isPrimitive(element);
@@ -240,9 +240,9 @@ private pattern mayInstanceOfGroundStationNetwork_class(problem:LogicProblem, in
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class_UndefinedPart(problem,interpretation,element);
 	neg find scopeDisallowsNewGroundStationNetwork_class(problem, interpretation);
 	neg find isPrimitive(element);
@@ -250,9 +250,9 @@ private pattern mayInstanceOfGroundStationNetwork_class(problem:LogicProblem, in
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class_UndefinedPart(problem,interpretation,element);
 	neg find scopeDisallowsNewGroundStationNetwork_class(problem, interpretation);
 	neg find isPrimitive(element);
@@ -282,24 +282,24 @@ private pattern mayInstanceOfSpacecraft_class(problem:LogicProblem, interpretati
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find scopeDisallowsNewSpacecraft_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find scopeDisallowsNewSpacecraft_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -328,20 +328,20 @@ private pattern mayInstanceOfCommSubsystem_class(problem:LogicProblem, interpret
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCommSubsystem_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCommSubsystem_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -369,19 +369,19 @@ private pattern mayInstanceOfDirectedCommunicationLink_class(problem:LogicProble
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewDirectedCommunicationLink_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewDirectedCommunicationLink_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -410,20 +410,20 @@ private pattern mayInstanceOfPayload_class(problem:LogicProblem, interpretation:
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfInterferometryPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfInterferometryPayload_class(problem,interpretation,element);
 	neg find scopeDisallowsNewPayload_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfInterferometryPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfInterferometryPayload_class(problem,interpretation,element);
 	neg find scopeDisallowsNewPayload_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -452,18 +452,18 @@ private pattern mayInstanceOfInterferometryPayload_class(problem:LogicProblem, i
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewInterferometryPayload_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewInterferometryPayload_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -491,25 +491,25 @@ private pattern mayInstanceOfCubeSat3U_class(problem:LogicProblem, interpretatio
 {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat6U_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCubeSat3U_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat6U_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCubeSat3U_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -538,24 +538,24 @@ private pattern mayInstanceOfCubeSat6U_class(problem:LogicProblem, interpretatio
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat3U_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCubeSat6U_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat3U_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCubeSat6U_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -584,22 +584,22 @@ private pattern mayInstanceOfSmallSat_class(problem:LogicProblem, interpretation
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find scopeDisallowsNewSmallSat_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find scopeDisallowsNewSmallSat_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -628,26 +628,26 @@ private pattern mayInstanceOfCubeSat_class(problem:LogicProblem, interpretation:
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat3U_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat6U_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCubeSat_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat3U_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat6U_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCubeSat_class(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -760,9 +760,9 @@ private pattern mayInstanceOfConstellationMission_class_UndefinedPart(problem:Lo
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfInterferometryMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewConstellationMission_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
@@ -770,9 +770,9 @@ private pattern mayInstanceOfConstellationMission_class_UndefinedPart(problem:Lo
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfInterferometryMission_class(problem,interpretation,element);
 	neg find scopeDisallowsNewConstellationMission_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
@@ -823,18 +823,18 @@ private pattern mayInstanceOfInterferometryMission_class_UndefinedPart(problem:L
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find scopeDisallowsNewInterferometryMission_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find scopeDisallowsNewInterferometryMission_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -884,10 +884,10 @@ private pattern mayInstanceOfCommunicatingElement_class_UndefinedPart(problem:Lo
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfSpacecraft_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCommunicatingElement_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
@@ -895,10 +895,10 @@ private pattern mayInstanceOfCommunicatingElement_class_UndefinedPart(problem:Lo
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfSpacecraft_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCommunicatingElement_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
@@ -949,9 +949,9 @@ private pattern mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem:Lo
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfSpacecraft_class(problem,interpretation,element);
 	neg find scopeDisallowsNewGroundStationNetwork_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
@@ -959,9 +959,9 @@ private pattern mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem:Lo
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfSpacecraft_class(problem,interpretation,element);
 	neg find scopeDisallowsNewGroundStationNetwork_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
@@ -1012,18 +1012,18 @@ private pattern mayInstanceOfCommSubsystem_class_UndefinedPart(problem:LogicProb
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCommSubsystem_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.openWorldElements(interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
 	neg find scopeDisallowsNewCommSubsystem_class_UndefinedPart(problem, interpretation);
 	neg find isPrimitive(element);
 } or
@@ -1155,43 +1155,21 @@ private pattern mayInRelationcommSubsystem_reference_CommunicatingElement(
 /**
  * Matcher for detecting tuples t where []communicationLink reference CommunicatingElement(source,target)
  */
-private pattern mustInRelationcommunicationLink_reference_CommunicatingElement(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	source: DefinedElement, target:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"communicationLink reference CommunicatingElement");
-	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
-	BinaryElementRelationLink.param1(link,source);
-	BinaryElementRelationLink.param2(link,target);
-}
+ private pattern mustInRelationcommunicationLink_reference_CommunicatingElement(
+ 	problem:LogicProblem, interpretation:PartialInterpretation,
+ 	source: DefinedElement, target:DefinedElement)
+ {
+ 	find mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkOfElement(problem,interpretation,source,target);
+ }
 /**
- * Matcher for detecting tuples t where <>communicationLink reference CommunicatingElement(source,target)
+ * Matcher for detecting tuples t where []communicationLink reference CommunicatingElement(source,target)
  */
-private pattern mayInRelationcommunicationLink_reference_CommunicatingElement(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	source: DefinedElement, target:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	// The two endpoint of the link have to exist
-	find mayExist(problem, interpretation, source);
-	find mayExist(problem, interpretation, target);
-	// Type consistency
-	find mayInstanceOfCommunicatingElement_class(problem,interpretation,source);
-	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,target);
-	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
-	// the upper bound of the multiplicity should be considered.
-	numberOfExistingReferences == count find mustInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,source,_);
-	check(numberOfExistingReferences < 1);
-	// The reference is containment, then a new reference cannot be create if:
-	// 1. Multiple parents
-	neg find mustContains4(problem,interpretation,_,target);
-	// 2. Circle in the containment hierarchy
-	neg find mustTransitiveContains(source,target);
-} or {
-	find mustInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,source,target);
-}
+ private pattern mayInRelationcommunicationLink_reference_CommunicatingElement(
+ 	problem:LogicProblem, interpretation:PartialInterpretation,
+ 	source: DefinedElement, target:DefinedElement)
+ {
+ 	find mayInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkOfElement(problem,interpretation,source,target);
+ }
 /**
  * Matcher for detecting tuples t where []payload reference Spacecraft(source,target)
  */
@@ -1231,6 +1209,46 @@ private pattern mayInRelationpayload_reference_Spacecraft(
 	neg find mustTransitiveContains(source,target);
 } or {
 	find mustInRelationpayload_reference_Spacecraft(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []communicationLink reference CommSubsystem(source,target)
+ */
+private pattern mustInRelationcommunicationLink_reference_CommSubsystem(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"communicationLink reference CommSubsystem");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>communicationLink reference CommSubsystem(source,target)
+ */
+private pattern mayInRelationcommunicationLink_reference_CommSubsystem(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfCommSubsystem_class(problem,interpretation,source);
+	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 1);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,source,target);
 }
 /**
  * Matcher for detecting tuples t where []source reference DirectedCommunicationLink(source,target)
@@ -1394,69 +1412,118 @@ private pattern mayInRelationgain_attribute_CommSubsystem(
 //////////
 // 1.3 Relation Definition Indexers
 //////////
-// Must, May and Current queries for pattern hu bme mit inf dslreasoner domains satellite queries communicationLinkDoesNotStartAtContainingElement
-private pattern mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(
+// Must, May and Current queries for pattern hu bme mit inf dslreasoner domains satellite queries multipleCommunicationLinks
+private pattern mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	var_Link)
+	var_Element)
 {
 	find interpretation(problem,interpretation);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	// Element is exported
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual0);
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual0,var_virtual1);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_Link1);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual2);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual2);
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual2,var_virtual3);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual3);
+	find mustEquivalent(problem, interpretation, var_virtual3, var_Link2);
+	neg find mayEquivalent(problem, interpretation, var_Link1, var_Link2);
+}
+private pattern mayInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_Element)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	// Element is exported
+	find mayInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	find mayInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
+	find mayInstanceOfCommSubsystem_class(problem,interpretation,var_virtual0);
+	find mayInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual0,var_virtual1);
+	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_Link1);
+	find mayInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	find mayInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual2);
+	find mayInstanceOfCommSubsystem_class(problem,interpretation,var_virtual2);
+	find mayInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual2,var_virtual3);
+	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual3);
+	find mayEquivalent(problem, interpretation, var_virtual3, var_Link2);
+	neg find mustEquivalent(problem, interpretation, var_Link1, var_Link2);
+}
+private pattern currentInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_Element)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	// Element is exported
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual0);
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual0,var_virtual1);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_Link1);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
+	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual2);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual2);
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual2,var_virtual3);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual3);
+	find mustEquivalent(problem, interpretation, var_virtual3, var_Link2);
+	neg find mustEquivalent(problem, interpretation, var_Link1, var_Link2);
+}
+// Must, May and Current queries for pattern hu bme mit inf dslreasoner domains satellite queries communicationLinkOfElement
+private pattern mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkOfElement(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_Element, var_Link)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
 	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_Link);
+	// Element is exported
 	// Link is exported
 	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
-	find mustInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
-	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual0);
-	find mustEquivalent(problem, interpretation, var_virtual0, var_Link);
-	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_Link);
-	find mustInRelationsource_reference_DirectedCommunicationLink(problem,interpretation,var_Link,var_virtual1);
-	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual1);
-	find mustEquivalent(problem, interpretation, var_virtual1, var_SourceComm);
-	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_SourceElement);
-	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_SourceElement,var_virtual2);
-	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual2);
-	find mustEquivalent(problem, interpretation, var_virtual2, var_SourceComm);
-	neg find mayEquivalent(problem, interpretation, var_Element, var_SourceElement);
+	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual0);
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual0,var_virtual1);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_Link);
 }
-private pattern mayInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(
+private pattern mayInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkOfElement(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	var_Link)
+	var_Element, var_Link)
 {
 	find interpretation(problem,interpretation);
+	find mayInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
 	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_Link);
+	// Element is exported
 	// Link is exported
 	find mayInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
-	find mayInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
-	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual0);
-	find mayEquivalent(problem, interpretation, var_virtual0, var_Link);
-	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_Link);
-	find mayInRelationsource_reference_DirectedCommunicationLink(problem,interpretation,var_Link,var_virtual1);
-	find mayInstanceOfCommSubsystem_class(problem,interpretation,var_virtual1);
-	find mayEquivalent(problem, interpretation, var_virtual1, var_SourceComm);
-	find mayInstanceOfCommunicatingElement_class(problem,interpretation,var_SourceElement);
-	find mayInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_SourceElement,var_virtual2);
-	find mayInstanceOfCommSubsystem_class(problem,interpretation,var_virtual2);
-	find mayEquivalent(problem, interpretation, var_virtual2, var_SourceComm);
-	neg find mustEquivalent(problem, interpretation, var_Element, var_SourceElement);
+	find mayInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
+	find mayInstanceOfCommSubsystem_class(problem,interpretation,var_virtual0);
+	find mayInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual0,var_virtual1);
+	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_Link);
 }
-private pattern currentInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(
+private pattern currentInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkOfElement(
 	problem:LogicProblem, interpretation:PartialInterpretation,
-	var_Link)
+	var_Element, var_Link)
 {
 	find interpretation(problem,interpretation);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
 	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_Link);
+	// Element is exported
 	// Link is exported
 	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_Element);
-	find mustInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
-	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual0);
-	find mustEquivalent(problem, interpretation, var_virtual0, var_Link);
-	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_Link);
-	find mustInRelationsource_reference_DirectedCommunicationLink(problem,interpretation,var_Link,var_virtual1);
-	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual1);
-	find mustEquivalent(problem, interpretation, var_virtual1, var_SourceComm);
-	find mustInstanceOfCommunicatingElement_class(problem,interpretation,var_SourceElement);
-	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_SourceElement,var_virtual2);
-	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual2);
-	find mustEquivalent(problem, interpretation, var_virtual2, var_SourceComm);
-	neg find mustEquivalent(problem, interpretation, var_Element, var_SourceElement);
+	find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,var_Element,var_virtual0);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,var_virtual0);
+	find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,var_virtual0,var_virtual1);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_Link);
 }
 // Must, May and Current queries for pattern hu bme mit inf dslreasoner domains satellite queries notEnoughInterferometryPayloads
 private pattern mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_notEnoughInterferometryPayloads(
@@ -2875,9 +2942,9 @@ private pattern mustContains4(problem:LogicProblem, interpretation:PartialInterp
 	
 	{ find mustInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,source,target); }or
 	
-	{ find mustInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,source,target); }or
+	{ find mustInRelationpayload_reference_Spacecraft(problem,interpretation,source,target); }or
 	
-	{ find mustInRelationpayload_reference_Spacecraft(problem,interpretation,source,target); }
+	{ find mustInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,source,target); }
 
 private pattern mustTransitiveContains(source,target) {
 	find mustContains2+(source,target);
@@ -2888,10 +2955,10 @@ private pattern mustTransitiveContains(source,target) {
 //////////
 // 2.1 Invalidated by WF Queries
 //////////
-pattern invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(problem:LogicProblem, interpretation:PartialInterpretation,
-	var_Link)
+pattern invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_Element)
 {
-	find mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(problem,interpretation,var_Link);
+	find mustInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(problem,interpretation,var_Element);
 }
 pattern invalidatedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_notEnoughInterferometryPayloads(problem:LogicProblem, interpretation:PartialInterpretation,
 	var_Mission)
@@ -3021,10 +3088,10 @@ pattern unfinishedLowerMultiplicity_gain_attribute_CommSubsystem(problem:LogicPr
 //////////
 // 3.2 Unfinishedness Measured by WF Queries
 //////////
-pattern unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(problem:LogicProblem, interpretation:PartialInterpretation,
-	var_Link)
+pattern unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_Element)
 {
-	find currentInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_communicationLinkDoesNotStartAtContainingElement(problem,interpretation,var_Link);
+	find currentInRelation_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_multipleCommunicationLinks(problem,interpretation,var_Element);
 }
 pattern unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_queries_notEnoughInterferometryPayloads(problem:LogicProblem, interpretation:PartialInterpretation,
 	var_Mission)
@@ -3090,35 +3157,7 @@ pattern unfinishedBy_pattern_hu_bme_mit_inf_dslreasoner_domains_satellite_querie
 private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
 {
 	find interpretation(problem,interpretation);
-	find mustInstanceOfInterferometryPayload_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
 	find mustInstanceOfSpacecraft_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfCubeSat_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfConstellationMission_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfInterferometryMission_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfCubeSat3U_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
-	find mustInstanceOfCommunicatingElement_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
@@ -3130,15 +3169,43 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
-	find mustInstanceOfCommSubsystem_class(problem,interpretation,root);
-	find mustExist(problem, interpretation, root);
-}or{
-	find interpretation(problem,interpretation);
 	find mustInstanceOfGroundStationNetwork_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
 	find mustInstanceOfPayload_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCubeSat_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCubeSat3U_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfInterferometryPayload_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfConstellationMission_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfInterferometryMission_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }or{
 	find interpretation(problem,interpretation);
@@ -3181,7 +3248,63 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find mustInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
 }
-pattern createObject_DirectedCommunicationLink_class_by_communicationLink_reference_CommunicatingElement(
+pattern createObject_GroundStationNetwork_class_UndefinedPart_by_groundStationNetwork_reference_ConstellationMission(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"GroundStationNetwork class UndefinedPart");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"groundStationNetwork reference ConstellationMission");
+	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
+	find mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,newObject);
+	find mayInRelationgroundStationNetwork_reference_ConstellationMission(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_GroundStationNetwork_class_UndefinedPart(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"GroundStationNetwork class UndefinedPart");
+	find mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_SmallSat_class_by_spacecraft_reference_ConstellationMission(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"SmallSat class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"spacecraft reference ConstellationMission");
+	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
+	find mayInstanceOfSmallSat_class(problem,interpretation,newObject);
+	find mayInRelationspacecraft_reference_ConstellationMission(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_SmallSat_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"SmallSat class");
+	find mayInstanceOfSmallSat_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_DirectedCommunicationLink_class_by_communicationLink_reference_CommSubsystem(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
 	container:DefinedElement)
@@ -3190,10 +3313,10 @@ pattern createObject_DirectedCommunicationLink_class_by_communicationLink_refere
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
 	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"DirectedCommunicationLink class");
 	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"communicationLink reference CommunicatingElement");
-	find mustInstanceOfCommunicatingElement_class(problem,interpretation,container);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"communicationLink reference CommSubsystem");
+	find mustInstanceOfCommSubsystem_class(problem,interpretation,container);
 	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,newObject);
-	find mayInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,container,newObject);
+	find mayInRelationcommunicationLink_reference_CommSubsystem(problem,interpretation,container,newObject);
 	find mustExist(problem, interpretation, container);
 	neg find mustExist(problem, interpretation, newObject);
 }
@@ -3206,6 +3329,90 @@ pattern createObject_DirectedCommunicationLink_class(
 	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
 	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"DirectedCommunicationLink class");
 	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_CubeSat3U_class_by_spacecraft_reference_ConstellationMission(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat3U class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"spacecraft reference ConstellationMission");
+	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
+	find mayInstanceOfCubeSat3U_class(problem,interpretation,newObject);
+	find mayInRelationspacecraft_reference_ConstellationMission(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_CubeSat3U_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat3U class");
+	find mayInstanceOfCubeSat3U_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_CubeSat6U_class_by_spacecraft_reference_ConstellationMission(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat6U class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"spacecraft reference ConstellationMission");
+	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
+	find mayInstanceOfCubeSat6U_class(problem,interpretation,newObject);
+	find mayInRelationspacecraft_reference_ConstellationMission(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_CubeSat6U_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat6U class");
+	find mayInstanceOfCubeSat6U_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_CommSubsystem_class_UndefinedPart_by_commSubsystem_reference_CommunicatingElement(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CommSubsystem class UndefinedPart");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"commSubsystem reference CommunicatingElement");
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,container);
+	find mayInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,newObject);
+	find mayInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_CommSubsystem_class_UndefinedPart(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CommSubsystem class UndefinedPart");
+	find mayInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,newObject);
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
@@ -3249,243 +3456,118 @@ pattern createObject_InterferometryPayload_class(
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
-pattern createObject_GroundStationNetwork_class_UndefinedPart_by_groundStationNetwork_reference_ConstellationMission(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"GroundStationNetwork class UndefinedPart");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"groundStationNetwork reference ConstellationMission");
-	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
-	find mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,newObject);
-	find mayInRelationgroundStationNetwork_reference_ConstellationMission(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_GroundStationNetwork_class_UndefinedPart(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"GroundStationNetwork class UndefinedPart");
-	find mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_CubeSat3U_class_by_spacecraft_reference_ConstellationMission(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat3U class");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"spacecraft reference ConstellationMission");
-	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
-	find mayInstanceOfCubeSat3U_class(problem,interpretation,newObject);
-	find mayInRelationspacecraft_reference_ConstellationMission(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_CubeSat3U_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat3U class");
-	find mayInstanceOfCubeSat3U_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_SmallSat_class_by_spacecraft_reference_ConstellationMission(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"SmallSat class");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"spacecraft reference ConstellationMission");
-	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
-	find mayInstanceOfSmallSat_class(problem,interpretation,newObject);
-	find mayInRelationspacecraft_reference_ConstellationMission(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_SmallSat_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"SmallSat class");
-	find mayInstanceOfSmallSat_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_CommSubsystem_class_UndefinedPart_by_commSubsystem_reference_CommunicatingElement(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CommSubsystem class UndefinedPart");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"commSubsystem reference CommunicatingElement");
-	find mustInstanceOfCommunicatingElement_class(problem,interpretation,container);
-	find mayInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,newObject);
-	find mayInRelationcommSubsystem_reference_CommunicatingElement(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_CommSubsystem_class_UndefinedPart(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CommSubsystem class UndefinedPart");
-	find mayInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_CubeSat6U_class_by_spacecraft_reference_ConstellationMission(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
-	container:DefinedElement)
-{
-	find interpretation(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat6U class");
-	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
-	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"spacecraft reference ConstellationMission");
-	find mustInstanceOfConstellationMission_class(problem,interpretation,container);
-	find mayInstanceOfCubeSat6U_class(problem,interpretation,newObject);
-	find mayInRelationspacecraft_reference_ConstellationMission(problem,interpretation,container,newObject);
-	find mustExist(problem, interpretation, container);
-	neg find mustExist(problem, interpretation, newObject);
-}
-pattern createObject_CubeSat6U_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"CubeSat6U class");
-	find mayInstanceOfCubeSat6U_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
-}
 
 //////////
 // 4.2 Type refinement
 //////////
+pattern refineTypeTo_GroundStationNetwork_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfSpacecraft_class(problem,interpretation,element);
+}
+pattern refineTypeTo_SmallSat_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfCubeSat_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+}
 pattern refineTypeTo_DirectedCommunicationLink_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
 	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-}
-pattern refineTypeTo_InterferometryMission_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfInterferometryMission_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfInterferometryMission_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-}
-pattern refineTypeTo_InterferometryPayload_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfInterferometryPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfInterferometryPayload_class(problem,interpretation,element);
-}
-pattern refineTypeTo_GroundStationNetwork_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
 	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfSpacecraft_class(problem,interpretation,element);
 }
 pattern refineTypeTo_CubeSat3U_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfCubeSat3U_class(problem,interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat3U_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat6U_class(problem,interpretation,element);
-}
-pattern refineTypeTo_SmallSat_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfSmallSat_class(problem,interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfCubeSat_class(problem,interpretation,element);
-	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
-}
-pattern refineTypeTo_CommSubsystem_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,element);
-	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
-	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
-	neg find mustInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,element);
 }
 pattern refineTypeTo_CubeSat6U_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfCubeSat6U_class(problem,interpretation,element);
 	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
-	neg find mustInstanceOfPayload_class(problem,interpretation,element);
-	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfGroundStationNetwork_class(problem,interpretation,element);
 	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat3U_class(problem,interpretation,element);
-	neg find mustInstanceOfSmallSat_class(problem,interpretation,element);
 	neg find mustInstanceOfCubeSat6U_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+}
+pattern refineTypeTo_CommSubsystem_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+}
+pattern refineTypeTo_InterferometryMission_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfInterferometryMission_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfInterferometryMission_class_UndefinedPart(problem,interpretation,element);
+}
+pattern refineTypeTo_InterferometryPayload_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfInterferometryPayload_class(problem,interpretation,element);
+	neg find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,element);
+	neg find mustInstanceOfCommSubsystem_class(problem,interpretation,element);
+	neg find mustInstanceOfCommunicatingElement_class(problem,interpretation,element);
+	neg find mustInstanceOfConstellationMission_class(problem,interpretation,element);
+	neg find mustInstanceOfInterferometryPayload_class(problem,interpretation,element);
 }
 
 //////////
 // 4.3 Relation refinement
 //////////
+pattern refineRelation_communicationLink_reference_CommunicatingElement(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"communicationLink reference CommunicatingElement");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfCommunicatingElement_class(problem,interpretation,from);
+	find mustInstanceOfDirectedCommunicationLink_class(problem,interpretation,to);
+	find mayInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,from,to);
+	neg find mustInRelationcommunicationLink_reference_CommunicatingElement(problem,interpretation,from,to);
+}
 pattern refineRelation_source_reference_DirectedCommunicationLink(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	relationIterpretation:PartialRelationInterpretation,

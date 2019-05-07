@@ -3,7 +3,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
-import hu.bme.mit.inf.dslreasoner.domains.satellite.DirectedCommunicationLink;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CommSubsystemGain;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,6 +42,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
+import satellite.DirectedCommunicationLink;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -476,7 +476,7 @@ public final class IncompatibleSourceAndTargetGain extends BaseGeneratedEMFQuery
   
   @Override
   public IncompatibleSourceAndTargetGain.Match newMatch(final Object... parameters) {
-    return IncompatibleSourceAndTargetGain.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.DirectedCommunicationLink) parameters[0]);
+    return IncompatibleSourceAndTargetGain.Match.newMatch((satellite.DirectedCommunicationLink) parameters[0]);
   }
   
   /**
@@ -508,7 +508,7 @@ public final class IncompatibleSourceAndTargetGain extends BaseGeneratedEMFQuery
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final IncompatibleSourceAndTargetGain.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Link = new PParameter("Link", "hu.bme.mit.inf.dslreasoner.domains.satellite.DirectedCommunicationLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "DirectedCommunicationLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_Link = new PParameter("Link", "satellite.DirectedCommunicationLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "DirectedCommunicationLink")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Link);
     

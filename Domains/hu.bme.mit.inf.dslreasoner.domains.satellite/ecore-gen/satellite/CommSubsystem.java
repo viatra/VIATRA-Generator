@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link satellite.CommSubsystem#getBand <em>Band</em>}</li>
  *   <li>{@link satellite.CommSubsystem#getGain <em>Gain</em>}</li>
+ *   <li>{@link satellite.CommSubsystem#getCommunicationLink <em>Communication Link</em>}</li>
  * </ul>
  *
  * @see satellite.SatellitePackage#getCommSubsystem()
@@ -79,5 +80,31 @@ public interface CommSubsystem extends EObject {
 	 * @generated
 	 */
 	void setGain(AntennaGain value);
+
+	/**
+	 * Returns the value of the '<em><b>Communication Link</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Communication Link</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Communication Link</em>' containment reference.
+	 * @see #setCommunicationLink(DirectedCommunicationLink)
+	 * @see satellite.SatellitePackage#getCommSubsystem_CommunicationLink()
+	 * @model containment="true"
+	 * @generated
+	 */
+	DirectedCommunicationLink getCommunicationLink();
+
+	/**
+	 * Sets the value of the '{@link satellite.CommSubsystem#getCommunicationLink <em>Communication Link</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Communication Link</em>' containment reference.
+	 * @see #getCommunicationLink()
+	 * @generated
+	 */
+	void setCommunicationLink(DirectedCommunicationLink value);
 
 } // CommSubsystem

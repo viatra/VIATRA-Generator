@@ -127,6 +127,11 @@ public class SatelliteAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseCubeSat(CubeSat object) {
+			return createCubeSatAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -310,6 +315,20 @@ public class SatelliteAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSmallSatAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link satellite.CubeSat <em>Cube Sat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see satellite.CubeSat
+	 * @generated
+	 */
+	public Adapter createCubeSatAdapter() {
 		return null;
 	}
 

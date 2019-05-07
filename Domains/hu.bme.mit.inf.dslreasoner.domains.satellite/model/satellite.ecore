@@ -18,7 +18,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="commSubsystem" lowerBound="1"
         upperBound="2" eType="#//CommSubsystem" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="communicationLink" eType="#//DirectedCommunicationLink"
-        containment="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.communicationLinkOfElement"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GroundStationNetwork" eSuperTypes="#//CommunicatingElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Spacecraft" abstract="true" eSuperTypes="#//CommunicatingElement">
@@ -34,6 +38,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="band" lowerBound="1" eType="#//TransceiverBand"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gain" lowerBound="1" eType="#//AntennaGain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationLink" eType="#//DirectedCommunicationLink"
+        containment="true" eOpposite="#//DirectedCommunicationLink/source"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TransceiverBand">
     <eLiterals name="UHF"/>
@@ -42,7 +48,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DirectedCommunicationLink">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//CommSubsystem"/>
+        eType="#//CommSubsystem" eOpposite="#//CommSubsystem/communicationLink"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//CommSubsystem"/>
   </eClassifiers>

@@ -3,7 +3,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
-import hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CommSubsystemBandUhf;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.GroundStationNetwork;
 import java.util.Arrays;
@@ -42,6 +41,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
+import satellite.CubeSat3U;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -485,7 +485,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
   
   @Override
   public ThreeUCubeSatWithNonUhfCrossLink.Match newMatch(final Object... parameters) {
-    return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U) parameters[0]);
+    return ThreeUCubeSatWithNonUhfCrossLink.Match.newMatch((satellite.CubeSat3U) parameters[0]);
   }
   
   /**
@@ -517,7 +517,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final ThreeUCubeSatWithNonUhfCrossLink.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Sat = new PParameter("Sat", "hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CubeSat3U")), PParameterDirection.INOUT);
+    private final PParameter parameter_Sat = new PParameter("Sat", "satellite.CubeSat3U", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CubeSat3U")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Sat);
     

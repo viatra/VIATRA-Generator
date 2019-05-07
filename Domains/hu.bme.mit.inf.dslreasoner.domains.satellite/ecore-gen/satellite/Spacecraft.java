@@ -59,7 +59,6 @@ public interface Spacecraft extends CommunicatingElement {
 	 * @see satellite.SpacecraftKind
 	 * @see satellite.SatellitePackage#getSpacecraft_Kind()
 	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind'"
 	 * @generated
 	 */
 	SpacecraftKind getKind();

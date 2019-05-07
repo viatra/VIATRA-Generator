@@ -3,12 +3,13 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkDoesNotStartAtContainingElement;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkOfElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLoop;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CubeSatWithKaAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetBand;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetGain;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.KaAntennaGainLow;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.MultipleCommunicationLinks;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoPotentialLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NotEnoughInterferometryPayloads;
@@ -28,7 +29,8 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package hu.bme.mit.inf.dslreasoner.domains.satellite.queries, the group contains the definition of the following patterns: <ul>
- * <li>communicationLinkDoesNotStartAtContainingElement</li>
+ * <li>multipleCommunicationLinks</li>
+ * <li>communicationLinkOfElement</li>
  * <li>notEnoughInterferometryPayloads</li>
  * <li>noLinkToGroundStation</li>
  * <li>noPotentialLinkToGroundStation</li>
@@ -66,7 +68,8 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
   private static SatelliteQueries INSTANCE;
   
   private SatelliteQueries() {
-    querySpecifications.add(CommunicationLinkDoesNotStartAtContainingElement.instance());
+    querySpecifications.add(MultipleCommunicationLinks.instance());
+    querySpecifications.add(CommunicationLinkOfElement.instance());
     querySpecifications.add(NotEnoughInterferometryPayloads.instance());
     querySpecifications.add(NoLinkToGroundStation.instance());
     querySpecifications.add(NoPotentialLinkToGroundStation.instance());
@@ -82,12 +85,20 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
     querySpecifications.add(SpacecraftOfKind.instance());
   }
   
-  public CommunicationLinkDoesNotStartAtContainingElement getCommunicationLinkDoesNotStartAtContainingElement() {
-    return CommunicationLinkDoesNotStartAtContainingElement.instance();
+  public MultipleCommunicationLinks getMultipleCommunicationLinks() {
+    return MultipleCommunicationLinks.instance();
   }
   
-  public CommunicationLinkDoesNotStartAtContainingElement.Matcher getCommunicationLinkDoesNotStartAtContainingElement(final ViatraQueryEngine engine) {
-    return CommunicationLinkDoesNotStartAtContainingElement.Matcher.on(engine);
+  public MultipleCommunicationLinks.Matcher getMultipleCommunicationLinks(final ViatraQueryEngine engine) {
+    return MultipleCommunicationLinks.Matcher.on(engine);
+  }
+  
+  public CommunicationLinkOfElement getCommunicationLinkOfElement() {
+    return CommunicationLinkOfElement.instance();
+  }
+  
+  public CommunicationLinkOfElement.Matcher getCommunicationLinkOfElement(final ViatraQueryEngine engine) {
+    return CommunicationLinkOfElement.Matcher.on(engine);
   }
   
   public NotEnoughInterferometryPayloads getNotEnoughInterferometryPayloads() {

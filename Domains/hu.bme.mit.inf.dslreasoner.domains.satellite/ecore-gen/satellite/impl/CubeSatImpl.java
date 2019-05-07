@@ -4,23 +4,23 @@ package satellite.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import satellite.CubeSat3U;
+import satellite.CubeSat;
 import satellite.SatellitePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Cube Sat3 U</b></em>'.
+ * An implementation of the model object '<em><b>Cube Sat</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class CubeSat3UImpl extends CubeSatImpl implements CubeSat3U {
+public abstract class CubeSatImpl extends SpacecraftImpl implements CubeSat {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CubeSat3UImpl() {
+	protected CubeSatImpl() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public class CubeSat3UImpl extends CubeSatImpl implements CubeSat3U {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SatellitePackage.Literals.CUBE_SAT3_U;
+		return SatellitePackage.Literals.CUBE_SAT;
 	}
 
-} //CubeSat3UImpl
+} //CubeSatImpl

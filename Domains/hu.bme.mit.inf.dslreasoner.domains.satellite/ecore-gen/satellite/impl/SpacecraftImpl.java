@@ -6,7 +6,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -42,15 +41,14 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	protected Payload payload;
 
 	/**
-	 * The cached setting delegate for the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected EStructuralFeature.Internal.SettingDelegate KIND__ESETTING_DELEGATE = ((EStructuralFeature.Internal) SatellitePackage.Literals.SPACECRAFT__KIND)
-			.getSettingDelegate();
+	protected static final SpacecraftKind KIND_EDEFAULT = SpacecraftKind.CUBE_SAT3_U;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,7 +128,9 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 */
 	@Override
 	public SpacecraftKind getKind() {
-		return (SpacecraftKind) KIND__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
+		// TODO: implement this method to return the 'Kind' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			return payload != null;
 		case SatellitePackage.SPACECRAFT__KIND:
-			return KIND__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
+			return getKind() != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
