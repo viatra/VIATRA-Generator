@@ -301,7 +301,7 @@ private pattern missionCost(Mission : InterferometryMission, Cost : java Double)
 
 private pattern spacecraftCost(Mission : InterferometryMission, Spacecraft : Spacecraft, Cost : java Double) {
 	ConstellationMission.spacecraft(Mission, Spacecraft);
-	Spacecraft.kind(Spacecraft, Kind);
+	find spacecraftOfKind(Spacecraft, Kind);
 	KindCount == count find spacecraftOfKind(_, Kind);
 	find basePrice(Spacecraft, BasePrice);
 	find interferometryPayloadCost(Spacecraft, InterferometryPayloadCost);
@@ -310,13 +310,13 @@ private pattern spacecraftCost(Mission : InterferometryMission, Spacecraft : Spa
 }
 
 private pattern basePrice(Spacecraft : Spacecraft, BasePrice : java Double) {
-	Spacecraft.kind(Spacecraft, SpacecraftKind::CubeSat3U);
+	CubeSat3U(Spacecraft):
 	BasePrice == 250000.0;
 } or {
-	Spacecraft.kind(Spacecraft, SpacecraftKind::CubeSat6U);
+	CubeSat6U(Spacecraft):
 	BasePrice == 750000.0;
 } or {
-	Spacecraft.kind(Spacecraft, SpacecraftKind::SmallSat);
+	SmallSat(Spacecraft):
 	BasePrice == 3000000.0;
 }
 

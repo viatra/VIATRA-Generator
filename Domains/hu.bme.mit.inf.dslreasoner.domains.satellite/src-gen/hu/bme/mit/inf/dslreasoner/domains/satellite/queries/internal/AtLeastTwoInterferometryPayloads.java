@@ -88,7 +88,7 @@ public final class AtLeastTwoInterferometryPayloads extends BaseGeneratedEMFQuer
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final AtLeastTwoInterferometryPayloads.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Mission = new PParameter("Mission", "hu.bme.mit.inf.dslreasoner.domains.satellite.InterferometryMission", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "InterferometryMission")), PParameterDirection.INOUT);
+    private final PParameter parameter_Mission = new PParameter("Mission", "satellite.InterferometryMission", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "InterferometryMission")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Mission);
     
