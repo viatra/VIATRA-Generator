@@ -3,12 +3,16 @@
 package satellite.impl;
 
 import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -43,6 +47,16 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 	 * @ordered
 	 */
 	protected EList<CommSubsystem> commSubsystem;
+
+	/**
+	 * The cached value of the '{@link #getCommunicationLink() <em>Communication Link</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCommunicationLink()
+	 * @generated
+	 * @ordered
+	 */
+	protected DirectedCommunicationLink communicationLink;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,10 +98,7 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 	 */
 	@Override
 	public DirectedCommunicationLink getCommunicationLink() {
-		DirectedCommunicationLink communicationLink = basicGetCommunicationLink();
-		return communicationLink != null && communicationLink.eIsProxy()
-				? (DirectedCommunicationLink) eResolveProxy((InternalEObject) communicationLink)
-				: communicationLink;
+		return communicationLink;
 	}
 
 	/**
@@ -95,11 +106,46 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DirectedCommunicationLink basicGetCommunicationLink() {
-		// TODO: implement this method to return the 'Communication Link' reference
-		// -> do not perform proxy resolution
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public NotificationChain basicSetCommunicationLink(DirectedCommunicationLink newCommunicationLink,
+			NotificationChain msgs) {
+		DirectedCommunicationLink oldCommunicationLink = communicationLink;
+		communicationLink = newCommunicationLink;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK, oldCommunicationLink,
+					newCommunicationLink);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setCommunicationLink(DirectedCommunicationLink newCommunicationLink) {
+		if (newCommunicationLink != communicationLink) {
+			NotificationChain msgs = null;
+			if (communicationLink != null)
+				msgs = ((InternalEObject) communicationLink).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK, null,
+						msgs);
+			if (newCommunicationLink != null)
+				msgs = ((InternalEObject) newCommunicationLink).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK, null,
+						msgs);
+			msgs = basicSetCommunicationLink(newCommunicationLink, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK, newCommunicationLink,
+					newCommunicationLink));
 	}
 
 	/**
@@ -112,6 +158,8 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 		switch (featureID) {
 		case SatellitePackage.COMMUNICATING_ELEMENT__COMM_SUBSYSTEM:
 			return ((InternalEList<?>) getCommSubsystem()).basicRemove(otherEnd, msgs);
+		case SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK:
+			return basicSetCommunicationLink(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -127,9 +175,7 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 		case SatellitePackage.COMMUNICATING_ELEMENT__COMM_SUBSYSTEM:
 			return getCommSubsystem();
 		case SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK:
-			if (resolve)
-				return getCommunicationLink();
-			return basicGetCommunicationLink();
+			return getCommunicationLink();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -147,6 +193,9 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 			getCommSubsystem().clear();
 			getCommSubsystem().addAll((Collection<? extends CommSubsystem>) newValue);
 			return;
+		case SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK:
+			setCommunicationLink((DirectedCommunicationLink) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -161,6 +210,9 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 		switch (featureID) {
 		case SatellitePackage.COMMUNICATING_ELEMENT__COMM_SUBSYSTEM:
 			getCommSubsystem().clear();
+			return;
+		case SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK:
+			setCommunicationLink((DirectedCommunicationLink) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -177,7 +229,7 @@ public abstract class CommunicatingElementImpl extends MinimalEObjectImpl.Contai
 		case SatellitePackage.COMMUNICATING_ELEMENT__COMM_SUBSYSTEM:
 			return commSubsystem != null && !commSubsystem.isEmpty();
 		case SatellitePackage.COMMUNICATING_ELEMENT__COMMUNICATION_LINK:
-			return basicGetCommunicationLink() != null;
+			return communicationLink != null;
 		}
 		return super.eIsSet(featureID);
 	}

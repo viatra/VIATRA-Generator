@@ -3,6 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
+import hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.IndirectCommunicationLink;
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,7 +39,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import satellite.CommunicatingElement;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -472,7 +472,7 @@ public final class CommunicationLoop extends BaseGeneratedEMFQuerySpecification<
   
   @Override
   public CommunicationLoop.Match newMatch(final Object... parameters) {
-    return CommunicationLoop.Match.newMatch((satellite.CommunicatingElement) parameters[0]);
+    return CommunicationLoop.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement) parameters[0]);
   }
   
   /**
@@ -504,7 +504,7 @@ public final class CommunicationLoop extends BaseGeneratedEMFQuerySpecification<
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final CommunicationLoop.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Element = new PParameter("Element", "satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_Element = new PParameter("Element", "hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Element);
     

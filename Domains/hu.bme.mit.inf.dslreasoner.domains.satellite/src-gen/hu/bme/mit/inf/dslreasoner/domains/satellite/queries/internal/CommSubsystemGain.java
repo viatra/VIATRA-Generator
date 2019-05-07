@@ -87,9 +87,9 @@ public final class CommSubsystemGain extends BaseGeneratedEMFQuerySpecificationW
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final CommSubsystemGain.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Comm = new PParameter("Comm", "satellite.CommSubsystem", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommSubsystem")), PParameterDirection.INOUT);
+    private final PParameter parameter_Comm = new PParameter("Comm", "hu.bme.mit.inf.dslreasoner.domains.satellite.CommSubsystem", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommSubsystem")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_Gain = new PParameter("Gain", "satellite.AntennaGain", new EDataTypeInSlotsKey((EDataType)getClassifierLiteralSafe("http://www.example.org/satellite", "AntennaGain")), PParameterDirection.INOUT);
+    private final PParameter parameter_Gain = new PParameter("Gain", "hu.bme.mit.inf.dslreasoner.domains.satellite.AntennaGain", new EDataTypeInSlotsKey((EDataType)getClassifierLiteralSafe("http://www.example.org/satellite", "AntennaGain")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Comm, parameter_Gain);
     

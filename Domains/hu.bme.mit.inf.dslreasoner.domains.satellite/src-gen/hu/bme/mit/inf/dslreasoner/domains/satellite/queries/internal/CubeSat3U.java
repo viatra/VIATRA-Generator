@@ -83,7 +83,7 @@ public final class CubeSat3U extends BaseGeneratedEMFQuerySpecificationWithGener
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final CubeSat3U.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Sat = new PParameter("Sat", "satellite.CubeSat3U", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CubeSat3U")), PParameterDirection.INOUT);
+    private final PParameter parameter_Sat = new PParameter("Sat", "hu.bme.mit.inf.dslreasoner.domains.satellite.CubeSat3U", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CubeSat3U")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Sat);
     

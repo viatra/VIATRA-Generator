@@ -88,9 +88,9 @@ public final class DirectCommunicationLink extends BaseGeneratedEMFQuerySpecific
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final DirectCommunicationLink.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Source = new PParameter("Source", "satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_Source = new PParameter("Source", "hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_Target = new PParameter("Target", "satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_Target = new PParameter("Target", "hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Source, parameter_Target);
     

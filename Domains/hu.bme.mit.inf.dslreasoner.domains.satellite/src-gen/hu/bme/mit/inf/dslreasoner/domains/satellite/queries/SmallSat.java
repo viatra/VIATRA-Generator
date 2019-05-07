@@ -64,11 +64,11 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private satellite.SmallSat fSat;
+    private hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat fSat;
     
     private static List<String> parameterNames = makeImmutableList("Sat");
     
-    private Match(final satellite.SmallSat pSat) {
+    private Match(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       this.fSat = pSat;
     }
     
@@ -78,7 +78,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
       return null;
     }
     
-    public satellite.SmallSat getSat() {
+    public hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat getSat() {
       return this.fSat;
     }
     
@@ -86,13 +86,13 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("Sat".equals(parameterName) ) {
-          this.fSat = (satellite.SmallSat) newValue;
+          this.fSat = (hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat) newValue;
           return true;
       }
       return false;
     }
     
-    public void setSat(final satellite.SmallSat pSat) {
+    public void setSat(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fSat = pSat;
     }
@@ -173,7 +173,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static SmallSat.Match newMutableMatch(final satellite.SmallSat pSat) {
+    public static SmallSat.Match newMutableMatch(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return new Mutable(pSat);
     }
     
@@ -185,12 +185,12 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the (partial) match object.
      * 
      */
-    public static SmallSat.Match newMatch(final satellite.SmallSat pSat) {
+    public static SmallSat.Match newMatch(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return new Immutable(pSat);
     }
     
     private static final class Mutable extends SmallSat.Match {
-      Mutable(final satellite.SmallSat pSat) {
+      Mutable(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
         super(pSat);
       }
       
@@ -201,7 +201,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
     }
     
     private static final class Immutable extends SmallSat.Match {
-      Immutable(final satellite.SmallSat pSat) {
+      Immutable(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
         super(pSat);
       }
       
@@ -282,7 +282,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<SmallSat.Match> getAllMatches(final satellite.SmallSat pSat) {
+    public Collection<SmallSat.Match> getAllMatches(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return rawStreamAllMatches(new Object[]{pSat}).collect(Collectors.toSet());
     }
     
@@ -296,7 +296,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<SmallSat.Match> streamAllMatches(final satellite.SmallSat pSat) {
+    public Stream<SmallSat.Match> streamAllMatches(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return rawStreamAllMatches(new Object[]{pSat});
     }
     
@@ -307,7 +307,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<SmallSat.Match> getOneArbitraryMatch(final satellite.SmallSat pSat) {
+    public Optional<SmallSat.Match> getOneArbitraryMatch(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return rawGetOneArbitraryMatch(new Object[]{pSat});
     }
     
@@ -318,7 +318,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final satellite.SmallSat pSat) {
+    public boolean hasMatch(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return rawHasMatch(new Object[]{pSat});
     }
     
@@ -328,7 +328,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final satellite.SmallSat pSat) {
+    public int countMatches(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return rawCountMatches(new Object[]{pSat});
     }
     
@@ -340,7 +340,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final satellite.SmallSat pSat, final Consumer<? super SmallSat.Match> processor) {
+    public boolean forOneArbitraryMatch(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat, final Consumer<? super SmallSat.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pSat}, processor);
     }
     
@@ -352,7 +352,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the (partial) match object.
      * 
      */
-    public SmallSat.Match newMatch(final satellite.SmallSat pSat) {
+    public SmallSat.Match newMatch(final hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat pSat) {
       return SmallSat.Match.newMatch(pSat);
     }
     
@@ -361,8 +361,8 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<satellite.SmallSat> rawStreamAllValuesOfSat(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_SAT, parameters).map(satellite.SmallSat.class::cast);
+    protected Stream<hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat> rawStreamAllValuesOfSat(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_SAT, parameters).map(hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat.class::cast);
     }
     
     /**
@@ -370,7 +370,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<satellite.SmallSat> getAllValuesOfSat() {
+    public Set<hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat> getAllValuesOfSat() {
       return rawStreamAllValuesOfSat(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -379,14 +379,14 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<satellite.SmallSat> streamAllValuesOfSat() {
+    public Stream<hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat> streamAllValuesOfSat() {
       return rawStreamAllValuesOfSat(emptyArray());
     }
     
     @Override
     protected SmallSat.Match tupleToMatch(final Tuple t) {
       try {
-          return SmallSat.Match.newMatch((satellite.SmallSat) t.get(POSITION_SAT));
+          return SmallSat.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat) t.get(POSITION_SAT));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -396,7 +396,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
     @Override
     protected SmallSat.Match arrayToMatch(final Object[] match) {
       try {
-          return SmallSat.Match.newMatch((satellite.SmallSat) match[POSITION_SAT]);
+          return SmallSat.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat) match[POSITION_SAT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -406,7 +406,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
     @Override
     protected SmallSat.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return SmallSat.Match.newMutableMatch((satellite.SmallSat) match[POSITION_SAT]);
+          return SmallSat.Match.newMutableMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat) match[POSITION_SAT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -457,7 +457,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
   
   @Override
   public SmallSat.Match newMatch(final Object... parameters) {
-    return SmallSat.Match.newMatch((satellite.SmallSat) parameters[0]);
+    return SmallSat.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat) parameters[0]);
   }
   
   /**
@@ -489,7 +489,7 @@ public final class SmallSat extends BaseGeneratedEMFQuerySpecification<SmallSat.
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final SmallSat.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Sat = new PParameter("Sat", "satellite.SmallSat", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "SmallSat")), PParameterDirection.INOUT);
+    private final PParameter parameter_Sat = new PParameter("Sat", "hu.bme.mit.inf.dslreasoner.domains.satellite.SmallSat", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "SmallSat")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Sat);
     

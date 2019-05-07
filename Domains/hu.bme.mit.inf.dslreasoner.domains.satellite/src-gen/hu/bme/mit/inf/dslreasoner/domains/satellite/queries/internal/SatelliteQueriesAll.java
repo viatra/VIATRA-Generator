@@ -3,13 +3,12 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal;
 
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkOfElement;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkDoesNotStartAtContainingElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLoop;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CubeSatWithKaAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetBand;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetGain;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.KaAntennaGainLow;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.MultipleCommunicationLinks;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoPotentialLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NotEnoughInterferometryPayloads;
@@ -40,8 +39,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <p>A private group that includes private patterns as well. Only intended use case is for pattern testing.
  * 
  * <p> From package hu.bme.mit.inf.dslreasoner.domains.satellite.queries, the group contains the definition of the following patterns: <ul>
- * <li>multipleCommunicationLinks</li>
- * <li>communicationLinkOfElement</li>
+ * <li>communicationLinkDoesNotStartAtContainingElement</li>
  * <li>notEnoughInterferometryPayloads</li>
  * <li>atLeastTwoInterferometryPayloads</li>
  * <li>spacecraftWithInterferometryPayload</li>
@@ -93,8 +91,7 @@ public final class SatelliteQueriesAll extends BaseGeneratedPatternGroup {
   private static SatelliteQueriesAll INSTANCE;
   
   private SatelliteQueriesAll() {
-    querySpecifications.add(MultipleCommunicationLinks.instance());
-    querySpecifications.add(CommunicationLinkOfElement.instance());
+    querySpecifications.add(CommunicationLinkDoesNotStartAtContainingElement.instance());
     querySpecifications.add(NotEnoughInterferometryPayloads.instance());
     querySpecifications.add(AtLeastTwoInterferometryPayloads.instance());
     querySpecifications.add(SpacecraftWithInterferometryPayload.instance());

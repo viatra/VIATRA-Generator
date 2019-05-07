@@ -4,16 +4,13 @@ package satellite.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import satellite.AntennaGain;
 import satellite.CommSubsystem;
-import satellite.DirectedCommunicationLink;
 import satellite.SatellitePackage;
 import satellite.TransceiverBand;
 
@@ -27,7 +24,6 @@ import satellite.TransceiverBand;
  * <ul>
  *   <li>{@link satellite.impl.CommSubsystemImpl#getBand <em>Band</em>}</li>
  *   <li>{@link satellite.impl.CommSubsystemImpl#getGain <em>Gain</em>}</li>
- *   <li>{@link satellite.impl.CommSubsystemImpl#getCommunicationLink <em>Communication Link</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,16 +68,6 @@ public class CommSubsystemImpl extends MinimalEObjectImpl.Container implements C
 	 * @ordered
 	 */
 	protected AntennaGain gain = GAIN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getCommunicationLink() <em>Communication Link</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCommunicationLink()
-	 * @generated
-	 * @ordered
-	 */
-	protected DirectedCommunicationLink communicationLink;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,81 +142,12 @@ public class CommSubsystemImpl extends MinimalEObjectImpl.Container implements C
 	 * @generated
 	 */
 	@Override
-	public DirectedCommunicationLink getCommunicationLink() {
-		return communicationLink;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetCommunicationLink(DirectedCommunicationLink newCommunicationLink,
-			NotificationChain msgs) {
-		DirectedCommunicationLink oldCommunicationLink = communicationLink;
-		communicationLink = newCommunicationLink;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK, oldCommunicationLink, newCommunicationLink);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setCommunicationLink(DirectedCommunicationLink newCommunicationLink) {
-		if (newCommunicationLink != communicationLink) {
-			NotificationChain msgs = null;
-			if (communicationLink != null)
-				msgs = ((InternalEObject) communicationLink).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK, null, msgs);
-			if (newCommunicationLink != null)
-				msgs = ((InternalEObject) newCommunicationLink).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK, null, msgs);
-			msgs = basicSetCommunicationLink(newCommunicationLink, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK,
-					newCommunicationLink, newCommunicationLink));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-		case SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK:
-			return basicSetCommunicationLink(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case SatellitePackage.COMM_SUBSYSTEM__BAND:
 			return getBand();
 		case SatellitePackage.COMM_SUBSYSTEM__GAIN:
 			return getGain();
-		case SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK:
-			return getCommunicationLink();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -248,9 +165,6 @@ public class CommSubsystemImpl extends MinimalEObjectImpl.Container implements C
 			return;
 		case SatellitePackage.COMM_SUBSYSTEM__GAIN:
 			setGain((AntennaGain) newValue);
-			return;
-		case SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK:
-			setCommunicationLink((DirectedCommunicationLink) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,9 +184,6 @@ public class CommSubsystemImpl extends MinimalEObjectImpl.Container implements C
 		case SatellitePackage.COMM_SUBSYSTEM__GAIN:
 			setGain(GAIN_EDEFAULT);
 			return;
-		case SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK:
-			setCommunicationLink((DirectedCommunicationLink) null);
-			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -289,8 +200,6 @@ public class CommSubsystemImpl extends MinimalEObjectImpl.Container implements C
 			return band != BAND_EDEFAULT;
 		case SatellitePackage.COMM_SUBSYSTEM__GAIN:
 			return gain != GAIN_EDEFAULT;
-		case SatellitePackage.COMM_SUBSYSTEM__COMMUNICATION_LINK:
-			return communicationLink != null;
 		}
 		return super.eIsSet(featureID);
 	}

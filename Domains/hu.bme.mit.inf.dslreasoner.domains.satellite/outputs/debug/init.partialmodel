@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="8" maxNewElements="16">
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="16" maxNewElements="32">
   <problem href="outputs/debug/generation.logicproblem#/"/>
   <partialrelationinterpretation>
     <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.0"/>
@@ -55,11 +55,6 @@
   </partialrelationinterpretation>
   <partialrelationinterpretation>
     <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.8"/>
-    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.8/@parameters.0"/>
-    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.8/@parameters.1"/>
-  </partialrelationinterpretation>
-  <partialrelationinterpretation>
-    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.9"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="outputs/debug/generation.logicproblem#//@elements.11"/>
       <param2 href="outputs/debug/generation.logicproblem#//@elements.1"/>
@@ -68,11 +63,11 @@
       <param1 href="outputs/debug/generation.logicproblem#//@elements.12"/>
       <param2 href="outputs/debug/generation.logicproblem#//@elements.2"/>
     </relationlinks>
-    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.9/@parameters.0"/>
-    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.9/@parameters.1"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.8/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.8/@parameters.1"/>
   </partialrelationinterpretation>
   <partialrelationinterpretation>
-    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.10"/>
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.9"/>
     <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
       <param1 href="outputs/debug/generation.logicproblem#//@elements.11"/>
       <param2 href="outputs/debug/generation.logicproblem#//@elements.4"/>
@@ -81,8 +76,8 @@
       <param1 href="outputs/debug/generation.logicproblem#//@elements.12"/>
       <param2 href="outputs/debug/generation.logicproblem#//@elements.5"/>
     </relationlinks>
-    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.10/@parameters.0"/>
-    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.10/@parameters.1"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.9/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.9/@parameters.1"/>
   </partialrelationinterpretation>
   <newElements xsi:type="partialinterpretation:BooleanElement" name="true" valueSet="true" value="true"/>
   <newElements xsi:type="partialinterpretation:BooleanElement" name="false" valueSet="true"/>

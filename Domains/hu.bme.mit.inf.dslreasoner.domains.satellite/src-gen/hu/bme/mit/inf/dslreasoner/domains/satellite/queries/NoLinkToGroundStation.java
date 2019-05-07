@@ -3,6 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
+import hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.IndirectCommunicationLink;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,7 +41,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import satellite.Spacecraft;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -476,7 +476,7 @@ public final class NoLinkToGroundStation extends BaseGeneratedEMFQuerySpecificat
   
   @Override
   public NoLinkToGroundStation.Match newMatch(final Object... parameters) {
-    return NoLinkToGroundStation.Match.newMatch((satellite.Spacecraft) parameters[0]);
+    return NoLinkToGroundStation.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft) parameters[0]);
   }
   
   /**
@@ -508,7 +508,7 @@ public final class NoLinkToGroundStation extends BaseGeneratedEMFQuerySpecificat
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final NoLinkToGroundStation.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Spacecraft = new PParameter("Spacecraft", "satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
+    private final PParameter parameter_Spacecraft = new PParameter("Spacecraft", "hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Spacecraft);
     

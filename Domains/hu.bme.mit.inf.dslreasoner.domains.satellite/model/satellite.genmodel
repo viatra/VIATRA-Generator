@@ -35,7 +35,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="satellite.ecore#//CommunicatingElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//CommunicatingElement/commSubsystem"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//CommunicatingElement/communicationLink"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//CommunicatingElement/communicationLink"/>
     </genClasses>
     <genClasses ecoreClass="satellite.ecore#//GroundStationNetwork"/>
     <genClasses image="false" ecoreClass="satellite.ecore#//Spacecraft">
@@ -45,7 +45,6 @@
     <genClasses ecoreClass="satellite.ecore#//CommSubsystem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/band"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/gain"/>
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//CommSubsystem/communicationLink"/>
     </genClasses>
     <genClasses ecoreClass="satellite.ecore#//DirectedCommunicationLink">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//DirectedCommunicationLink/source"/>
@@ -56,6 +55,5 @@
     <genClasses ecoreClass="satellite.ecore#//CubeSat3U"/>
     <genClasses ecoreClass="satellite.ecore#//CubeSat6U"/>
     <genClasses ecoreClass="satellite.ecore#//SmallSat"/>
-    <genClasses image="false" ecoreClass="satellite.ecore#//CubeSat"/>
   </genPackages>
 </genmodel:GenModel>

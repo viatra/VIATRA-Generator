@@ -141,8 +141,6 @@ public class SatelliteSwitch<T> extends Switch<T> {
 			CubeSat3U cubeSat3U = (CubeSat3U) theEObject;
 			T result = caseCubeSat3U(cubeSat3U);
 			if (result == null)
-				result = caseCubeSat(cubeSat3U);
-			if (result == null)
 				result = caseSpacecraft(cubeSat3U);
 			if (result == null)
 				result = caseCommunicatingElement(cubeSat3U);
@@ -153,8 +151,6 @@ public class SatelliteSwitch<T> extends Switch<T> {
 		case SatellitePackage.CUBE_SAT6_U: {
 			CubeSat6U cubeSat6U = (CubeSat6U) theEObject;
 			T result = caseCubeSat6U(cubeSat6U);
-			if (result == null)
-				result = caseCubeSat(cubeSat6U);
 			if (result == null)
 				result = caseSpacecraft(cubeSat6U);
 			if (result == null)
@@ -170,17 +166,6 @@ public class SatelliteSwitch<T> extends Switch<T> {
 				result = caseSpacecraft(smallSat);
 			if (result == null)
 				result = caseCommunicatingElement(smallSat);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case SatellitePackage.CUBE_SAT: {
-			CubeSat cubeSat = (CubeSat) theEObject;
-			T result = caseCubeSat(cubeSat);
-			if (result == null)
-				result = caseSpacecraft(cubeSat);
-			if (result == null)
-				result = caseCommunicatingElement(cubeSat);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -367,21 +352,6 @@ public class SatelliteSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSmallSat(SmallSat object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Cube Sat</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Cube Sat</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCubeSat(CubeSat object) {
 		return null;
 	}
 

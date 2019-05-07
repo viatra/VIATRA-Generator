@@ -83,7 +83,7 @@ public final class GroundStationNetwork extends BaseGeneratedEMFQuerySpecificati
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final GroundStationNetwork.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Network = new PParameter("Network", "satellite.GroundStationNetwork", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "GroundStationNetwork")), PParameterDirection.INOUT);
+    private final PParameter parameter_Network = new PParameter("Network", "hu.bme.mit.inf.dslreasoner.domains.satellite.GroundStationNetwork", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "GroundStationNetwork")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Network);
     

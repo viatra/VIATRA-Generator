@@ -12,5 +12,5 @@ package satellite;
  * @model
  * @generated
  */
-public interface CubeSat6U extends CubeSat {
+public interface CubeSat6U extends Spacecraft {
 } // CubeSat6U

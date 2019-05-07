@@ -85,9 +85,9 @@ public final class IndirectLinkAllowed extends BaseGeneratedEMFQuerySpecificatio
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final IndirectLinkAllowed.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_From = new PParameter("From", "satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
+    private final PParameter parameter_From = new PParameter("From", "hu.bme.mit.inf.dslreasoner.domains.satellite.Spacecraft", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "Spacecraft")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_To = new PParameter("To", "satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_To = new PParameter("To", "hu.bme.mit.inf.dslreasoner.domains.satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_From, parameter_To);
     
