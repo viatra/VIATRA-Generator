@@ -53,14 +53,34 @@ abstract class Interval {
 		override operator_divide(Interval other) {
 			EMPTY
 		}
+
+		override toString() {
+			"∅"
+		}
 	}
 
 	public static val Interval ZERO = new NonEmpty(BigDecimal.ZERO, BigDecimal.ZERO)
 
 	public static val Interval UNBOUNDED = new NonEmpty(null, null)
 
+	static def Interval of(BigDecimal lower, BigDecimal upper) {
+		new NonEmpty(lower, upper)
+	}
+
+	static def between(double lower, double upper) {
+		of(new BigDecimal(lower, ROUND_DOWN), new BigDecimal(upper, ROUND_UP))
+	}
+
+	static def upTo(double upper) {
+		of(null, new BigDecimal(upper, ROUND_UP))
+	}
+
+	static def above(double lower) {
+		of(new BigDecimal(lower, ROUND_DOWN), null)
+	}
+
 	@Data
-	static class NonEmpty extends Interval {
+	private static class NonEmpty extends Interval {
 		val BigDecimal lower
 		val BigDecimal upper
 
@@ -141,7 +161,9 @@ abstract class Interval {
 		}
 
 		def operator_multiply(NonEmpty other) {
-			if (nonpositive) {
+			if (this == ZERO || other == ZERO) {
+				ZERO
+			} else if (nonpositive) {
 				if (other.nonpositive) {
 					new NonEmpty(
 						upper.multiply(other.upper, ROUND_DOWN),
@@ -155,7 +177,7 @@ abstract class Interval {
 				} else {
 					new NonEmpty(
 						lower.tryMultiply(other.upper, ROUND_DOWN),
-						upper.tryMultiply(other.lower, ROUND_UP)
+						lower.tryMultiply(other.lower, ROUND_UP)
 					)
 				}
 			} else if (nonnegative) {
@@ -236,7 +258,11 @@ abstract class Interval {
 		}
 
 		def operator_divide(NonEmpty other) {
-			if (other.strictlyNegative) {
+			if (other == ZERO) {
+				EMPTY
+			} else if (this == ZERO) {
+				ZERO
+			} else if (other.strictlyNegative) {
 				if (nonpositive) {
 					new NonEmpty(
 						upper.tryDivide(other.lower, ROUND_DOWN),
@@ -271,30 +297,24 @@ abstract class Interval {
 					)
 				}
 			} else { // other contains 0
-				if (other.lower == BigDecimal.ZERO) {
-					if (other.upper == BigDecimal.ZERO) { // [0, 0]
-						EMPTY
-					} else { // 0 == other.lower < other.upper
-						if (nonpositive) {
-							new NonEmpty(null, upper.tryDivide(other.upper, ROUND_UP))
-						} else if (nonnegative) {
-							new NonEmpty(lower.tryDivide(other.upper, ROUND_DOWN), null)
-						} else { // lower < 0 < upper
-							UNBOUNDED
-						}
-					}
-				} else {
-					if (other.upper == BigDecimal.ZERO) { // other.lower < other.upper == 0
-						if (nonpositive) {
-							new NonEmpty(upper.tryDivide(other.lower, ROUND_DOWN), null)
-						} else if (nonnegative) {
-							new NonEmpty(null, lower.tryDivide(other.lower, ROUND_UP))
-						} else { // lower < 0 < upper
-							UNBOUNDED
-						}
-					} else { // other.lower < 0 < other.upper
+				if (other.lower == BigDecimal.ZERO) { // 0 == other.lower < other.upper, because [0, 0] was exluded earlier
+					if (nonpositive) {
+						new NonEmpty(null, upper.tryDivide(other.upper, ROUND_UP))
+					} else if (nonnegative) {
+						new NonEmpty(lower.tryDivide(other.upper, ROUND_DOWN), null)
+					} else { // lower < 0 < upper
 						UNBOUNDED
 					}
+				} else if (other.upper == BigDecimal.ZERO) { // other.lower < other.upper == 0
+					if (nonpositive) {
+						new NonEmpty(upper.tryDivide(other.lower, ROUND_DOWN), null)
+					} else if (nonnegative) {
+						new NonEmpty(null, lower.tryDivide(other.lower, ROUND_UP))
+					} else { // lower < 0 < upper
+						UNBOUNDED
+					}
+				} else { // other.lower < 0 < other.upper
+					UNBOUNDED
 				}
 			}
 		}
@@ -313,6 +333,10 @@ abstract class Interval {
 			} else {
 				a?.divide(b, mc)
 			}
+		}
+
+		override toString() {
+			'''«IF lower === null»(-∞«ELSE»[«lower»«ENDIF», «IF upper === null»∞)«ELSE»«upper»]«ENDIF»'''
 		}
 	}
 }
