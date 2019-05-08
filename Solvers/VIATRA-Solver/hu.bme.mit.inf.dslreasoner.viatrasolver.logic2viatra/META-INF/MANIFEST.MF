@@ -4,6 +4,7 @@ Bundle-Name: Logic2viatra
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatraquery;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.interval,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries
 Require-Bundle: hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
