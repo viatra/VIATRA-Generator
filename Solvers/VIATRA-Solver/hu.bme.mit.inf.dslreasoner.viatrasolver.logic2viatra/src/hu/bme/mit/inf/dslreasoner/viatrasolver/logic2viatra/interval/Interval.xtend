@@ -190,7 +190,7 @@ abstract class Interval {
 		override join(Interval other) {
 			switch (other) {
 				case EMPTY: this
-				NonEmpty: new NonEmpty(lower.tryMin(other.lower), upper.tryMin(other.upper))
+				NonEmpty: new NonEmpty(lower.tryMin(other.lower), upper.tryMax(other.upper))
 				default: throw new IllegalArgumentException("")
 			}
 		}
