@@ -13,7 +13,47 @@ abstract class Interval {
 	private new() {
 	}
 
-	abstract def boolean isZero()
+	abstract def boolean mustEqual(Interval other)
+
+	abstract def boolean mayEqual(Interval other)
+
+	def mustNotEqual(Interval other) {
+		!mayEqual(other)
+	}
+
+	def mayNotEqual(Interval other) {
+		!mustEqual(other)
+	}
+	
+	abstract def boolean mustBeLessThan(Interval other)
+	
+	abstract def boolean mayBeLessThan(Interval other)
+	
+	def mustBeLessThanOrEqual(Interval other) {
+		!mayBeGreaterThan(other)
+	}
+	
+	def mayBeLessThanOrEqual(Interval other) {
+		!mustBeGreaterThan(other)
+	}
+	
+	def mustBeGreaterThan(Interval other) {
+		other.mustBeLessThan(this)
+	}
+	
+	def mayBeGreaterThan(Interval other) {
+		other.mayBeLessThan(this)
+	}
+	
+	def mustBeGreaterThanOrEqual(Interval other) {
+		other.mustBeLessThanOrEqual(this)
+	}
+	
+	def mayBeGreaterThanOrEqual(Interval other) {
+		other.mayBeLessThanOrEqual(this)
+	}
+	
+	abstract def Interval join(Interval other)
 
 	def operator_plus() {
 		this
@@ -30,8 +70,24 @@ abstract class Interval {
 	abstract def Interval operator_divide(Interval other)
 
 	public static val EMPTY = new Interval {
-		override isZero() {
+		override mustEqual(Interval other) {
+			true
+		}
+
+		override mayEqual(Interval other) {
 			false
+		}
+		
+		override mustBeLessThan(Interval other) {
+			true
+		}
+		
+		override mayBeLessThan(Interval other) {
+			false
+		}
+		
+		override join(Interval other) {
+			other
 		}
 
 		override operator_minus() {
@@ -98,8 +154,45 @@ abstract class Interval {
 			this.upper = upper
 		}
 
-		override isZero() {
-			upper == BigDecimal.ZERO && lower == BigDecimal.ZERO
+		override mustEqual(Interval other) {
+			switch (other) {
+				case EMPTY: true
+				NonEmpty: lower == upper && lower == other.lower && lower == other.upper
+				default: throw new IllegalArgumentException("")
+			}
+		}
+
+		override mayEqual(Interval other) {
+			if (other instanceof NonEmpty) {
+				(lower === null || other.upper === null || lower <= other.upper) &&
+					(other.lower === null || upper === null || other.lower <= upper)
+			} else {
+				false
+			}
+		}
+		
+		override mustBeLessThan(Interval other) {
+			switch (other) {
+				case EMPTY: true
+				NonEmpty: upper !== null && other.lower !== null && upper < other.lower
+				default: throw new IllegalArgumentException("")
+			}
+		}
+		
+		override mayBeLessThan(Interval other) {
+			if (other instanceof NonEmpty) {
+				lower === null || other.upper === null || lower < other.upper
+			} else {
+				false
+			}
+		}
+		
+		override join(Interval other) {
+			switch (other) {
+				case EMPTY: this
+				NonEmpty: new NonEmpty(lower.tryMin(other.lower), upper.tryMin(other.upper))
+				default: throw new IllegalArgumentException("")
+			}
 		}
 
 		override operator_minus() {
