@@ -53,6 +53,10 @@ abstract class Interval implements Comparable<Interval> {
 		other.mayBeLessThanOrEqual(this)
 	}
 
+	abstract def Interval min(Interval other)
+	
+	abstract def Interval max(Interval other)
+
 	abstract def Interval join(Interval other)
 
 	def operator_plus() {
@@ -86,6 +90,14 @@ abstract class Interval implements Comparable<Interval> {
 
 		override mayBeLessThan(Interval other) {
 			false
+		}
+
+		override min(Interval other) {
+			EMPTY
+		}
+		
+		override max(Interval other) {
+			EMPTY
 		}
 
 		override join(Interval other) {
@@ -173,7 +185,7 @@ abstract class Interval implements Comparable<Interval> {
 			switch (other) {
 				case EMPTY: true
 				NonEmpty: lower == upper && lower == other.lower && lower == other.upper
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
@@ -190,7 +202,7 @@ abstract class Interval implements Comparable<Interval> {
 			switch (other) {
 				case EMPTY: true
 				NonEmpty: upper !== null && other.lower !== null && upper < other.lower
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
@@ -202,11 +214,41 @@ abstract class Interval implements Comparable<Interval> {
 			}
 		}
 
+		override min(Interval other) {
+			switch (other) {
+				case EMPTY: this
+				NonEmpty: min(other)
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
+			}
+		}
+		
+		def min(NonEmpty other) {
+			new NonEmpty(
+				lower.tryMin(other.lower),
+				if (other.upper === null) upper else upper?.min(other.upper)
+			)
+		}
+		
+		override max(Interval other) {
+			switch (other) {
+				case EMPTY: this
+				NonEmpty: max(other)
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
+			}
+		}
+		
+		def max(NonEmpty other) {
+			new NonEmpty(
+				if (other.lower === null) lower else lower?.min(other.lower),
+				upper.tryMax(other.upper)
+			)
+		}
+
 		override join(Interval other) {
 			switch (other) {
 				case EMPTY: this
 				NonEmpty: new NonEmpty(lower.tryMin(other.lower), upper.tryMax(other.upper))
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
@@ -218,7 +260,7 @@ abstract class Interval implements Comparable<Interval> {
 			switch (other) {
 				case EMPTY: EMPTY
 				NonEmpty: operator_plus(other)
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
@@ -241,7 +283,7 @@ abstract class Interval implements Comparable<Interval> {
 			switch (other) {
 				case EMPTY: EMPTY
 				NonEmpty: operator_minus(other)
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
@@ -369,7 +411,7 @@ abstract class Interval implements Comparable<Interval> {
 			switch (other) {
 				case EMPTY: EMPTY
 				NonEmpty: operator_divide(other)
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 

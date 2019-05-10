@@ -27,6 +27,30 @@ public enum IntervalAggregationMode implements BinaryOperator<Interval> {
 			return Interval.ZERO;
 		}
 	},
+	
+	MIN("intervalMin", "Find the minimum a set of intervals") {
+		@Override
+		public IntervalRedBlackNode createNode(Interval interval) {
+			return new IntervalRedBlackNode(interval) {
+				@Override
+				public Interval op(Interval left, Interval right) {
+					return left.min(right);
+				}
+			};
+		}
+	},
+	
+	MAX("intervalMax", "Find the maximum a set of intervals") {
+		@Override
+		public IntervalRedBlackNode createNode(Interval interval) {
+			return new IntervalRedBlackNode(interval) {
+				@Override
+				public Interval op(Interval left, Interval right) {
+					return left.max(right);
+				}
+			};
+		}
+	},
 
 	JOIN("intervalJoin", "Calculate the smallest interval containing all the intervals in a set") {
 		@Override
