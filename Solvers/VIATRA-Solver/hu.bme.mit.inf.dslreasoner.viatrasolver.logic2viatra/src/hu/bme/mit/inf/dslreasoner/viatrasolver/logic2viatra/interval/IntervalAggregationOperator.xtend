@@ -36,13 +36,13 @@ class IntervalAggregationOperator implements IMultisetAggregationOperator<Interv
 
 	override getAggregate(IntervalRedBlackNode result) {
 		if (result.leaf) {
-			null
+			mode.neutral
 		} else {
 			result.result
 		}
 	}
 
 	override aggregateStream(Stream<Interval> stream) {
-		stream.reduce(mode).orElse(null)
+		stream.reduce(mode).orElse(mode.neutral)
 	}
 }

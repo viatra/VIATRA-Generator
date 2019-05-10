@@ -21,6 +21,11 @@ public enum IntervalAggregationMode implements BinaryOperator<Interval> {
 				}
 			};
 		}
+		
+		@Override
+		public Interval getNeutral() {
+			return Interval.ZERO;
+		}
 	},
 
 	JOIN("intervalJoin", "Calculate the smallest interval containing all the intervals in a set") {
@@ -63,4 +68,8 @@ public enum IntervalAggregationMode implements BinaryOperator<Interval> {
 	}
 
 	public abstract IntervalRedBlackNode createNode(Interval interval);
+	
+	public Interval getNeutral() {
+		return Interval.EMPTY;
+	}
 }

@@ -24,7 +24,7 @@ class SumTest {
 
 	@Test
 	def void emptyTest() {
-		assertEquals(null)
+		assertEquals(ZERO)
 	}
 
 	@Test
@@ -37,7 +37,7 @@ class SumTest {
 	def void addRemoveTest() {
 		add(between(-1, 1))
 		remove(between(-1, 1))
-		assertEquals(null)
+		assertEquals(ZERO)
 	}
 
 	@Test
@@ -79,7 +79,7 @@ class SumTest {
 		remove(between(-1, 1))
 		remove(between(-1, 1))
 		remove(between(-1, 1))
-		assertEquals(null)
+		assertEquals(ZERO)
 	}
 
 	@Test
@@ -108,7 +108,7 @@ class SumTest {
 			} else {
 				current.remove(interval)
 			}
-			val expected = current.stream.reduce(aggregator.mode).orElse(null)
+			val expected = current.stream.reduce(aggregator.mode).orElse(ZERO)
 			update(interval, isInsert)
 			assertEquals(expected)
 		}
