@@ -5,7 +5,7 @@ import java.math.MathContext
 import java.math.RoundingMode
 import org.eclipse.xtend.lib.annotations.Data
 
-abstract class Interval {
+abstract class Interval implements Comparable<Interval> {
 	static val PRECISION = 32
 	static val ROUND_DOWN = new MathContext(PRECISION, RoundingMode.FLOOR)
 	static val ROUND_UP = new MathContext(PRECISION, RoundingMode.CEILING)
@@ -24,35 +24,35 @@ abstract class Interval {
 	def mayNotEqual(Interval other) {
 		!mustEqual(other)
 	}
-	
+
 	abstract def boolean mustBeLessThan(Interval other)
-	
+
 	abstract def boolean mayBeLessThan(Interval other)
-	
+
 	def mustBeLessThanOrEqual(Interval other) {
 		!mayBeGreaterThan(other)
 	}
-	
+
 	def mayBeLessThanOrEqual(Interval other) {
 		!mustBeGreaterThan(other)
 	}
-	
+
 	def mustBeGreaterThan(Interval other) {
 		other.mustBeLessThan(this)
 	}
-	
+
 	def mayBeGreaterThan(Interval other) {
 		other.mayBeLessThan(this)
 	}
-	
+
 	def mustBeGreaterThanOrEqual(Interval other) {
 		other.mustBeLessThanOrEqual(this)
 	}
-	
+
 	def mayBeGreaterThanOrEqual(Interval other) {
 		other.mayBeLessThanOrEqual(this)
 	}
-	
+
 	abstract def Interval join(Interval other)
 
 	def operator_plus() {
@@ -64,6 +64,8 @@ abstract class Interval {
 	abstract def Interval operator_plus(Interval other)
 
 	abstract def Interval operator_minus(Interval other)
+
+	abstract def Interval operator_multiply(int count)
 
 	abstract def Interval operator_multiply(Interval other)
 
@@ -77,15 +79,15 @@ abstract class Interval {
 		override mayEqual(Interval other) {
 			false
 		}
-		
+
 		override mustBeLessThan(Interval other) {
 			true
 		}
-		
+
 		override mayBeLessThan(Interval other) {
 			false
 		}
-		
+
 		override join(Interval other) {
 			other
 		}
@@ -102,6 +104,10 @@ abstract class Interval {
 			EMPTY
 		}
 
+		override operator_multiply(int count) {
+			EMPTY
+		}
+
 		override operator_multiply(Interval other) {
 			EMPTY
 		}
@@ -113,6 +119,15 @@ abstract class Interval {
 		override toString() {
 			"∅"
 		}
+
+		override compareTo(Interval o) {
+			if (o == EMPTY) {
+				0
+			} else {
+				-1
+			}
+		}
+
 	}
 
 	public static val Interval ZERO = new NonEmpty(BigDecimal.ZERO, BigDecimal.ZERO)
@@ -170,7 +185,7 @@ abstract class Interval {
 				false
 			}
 		}
-		
+
 		override mustBeLessThan(Interval other) {
 			switch (other) {
 				case EMPTY: true
@@ -178,7 +193,7 @@ abstract class Interval {
 				default: throw new IllegalArgumentException("")
 			}
 		}
-		
+
 		override mayBeLessThan(Interval other) {
 			if (other instanceof NonEmpty) {
 				lower === null || other.upper === null || lower < other.upper
@@ -186,7 +201,7 @@ abstract class Interval {
 				false
 			}
 		}
-		
+
 		override join(Interval other) {
 			switch (other) {
 				case EMPTY: this
@@ -243,6 +258,14 @@ abstract class Interval {
 			} else {
 				a?.subtract(b, mc)
 			}
+		}
+
+		override operator_multiply(int count) {
+			val bigCount = new BigDecimal(count)
+			new NonEmpty(
+				lower.tryMultiply(bigCount, ROUND_DOWN),
+				upper.tryMultiply(bigCount, ROUND_UP)
+			)
 		}
 
 		override operator_multiply(Interval other) {
@@ -430,6 +453,39 @@ abstract class Interval {
 
 		override toString() {
 			'''«IF lower === null»(-∞«ELSE»[«lower»«ENDIF», «IF upper === null»∞)«ELSE»«upper»]«ENDIF»'''
+		}
+
+		override compareTo(Interval o) {
+			switch (o) {
+				case EMPTY: 1
+				NonEmpty: compareTo(o)
+				default: throw new IllegalArgumentException("")
+			}
+		}
+
+		def compareTo(NonEmpty o) {
+			if (lower === null) {
+				if (o.lower !== null) {
+					return -1
+				}
+			} else if (o.lower === null) { // lower !== null
+				return 1
+			} else { // both lower and o.lower are finite
+				val lowerDifference = lower.compareTo(o.lower)
+				if (lowerDifference != 0) {
+					return lowerDifference
+				}
+			}
+			if (upper === null) {
+				if (o.upper === null) {
+					return 0
+				} else {
+					return 1
+				}
+			} else if (o.upper === null) { // upper !== null
+				return -1
+			}
+			upper.compareTo(o.upper)
 		}
 	}
 }
