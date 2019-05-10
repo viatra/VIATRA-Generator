@@ -54,26 +54,28 @@ abstract class Interval implements Comparable<Interval> {
 	}
 
 	abstract def Interval min(Interval other)
-	
+
 	abstract def Interval max(Interval other)
 
 	abstract def Interval join(Interval other)
 
-	def operator_plus() {
+	def +() {
 		this
 	}
 
-	abstract def Interval operator_minus()
+	abstract def Interval -()
 
-	abstract def Interval operator_plus(Interval other)
+	abstract def Interval +(Interval other)
 
-	abstract def Interval operator_minus(Interval other)
+	abstract def Interval -(Interval other)
 
-	abstract def Interval operator_multiply(int count)
+	abstract def Interval *(int count)
 
-	abstract def Interval operator_multiply(Interval other)
+	abstract def Interval *(Interval other)
 
-	abstract def Interval operator_divide(Interval other)
+	abstract def Interval /(Interval other)
+
+	abstract def Interval **(Interval other)
 
 	public static val EMPTY = new Interval {
 		override mustEqual(Interval other) {
@@ -95,7 +97,7 @@ abstract class Interval implements Comparable<Interval> {
 		override min(Interval other) {
 			EMPTY
 		}
-		
+
 		override max(Interval other) {
 			EMPTY
 		}
@@ -104,27 +106,31 @@ abstract class Interval implements Comparable<Interval> {
 			other
 		}
 
-		override operator_minus() {
+		override -() {
 			EMPTY
 		}
 
-		override operator_plus(Interval other) {
+		override +(Interval other) {
 			EMPTY
 		}
 
-		override operator_minus(Interval other) {
+		override -(Interval other) {
 			EMPTY
 		}
 
-		override operator_multiply(int count) {
+		override *(int count) {
 			EMPTY
 		}
 
-		override operator_multiply(Interval other) {
+		override *(Interval other) {
 			EMPTY
 		}
 
-		override operator_divide(Interval other) {
+		override /(Interval other) {
+			EMPTY
+		}
+
+		override **(Interval other) {
 			EMPTY
 		}
 
@@ -221,14 +227,14 @@ abstract class Interval implements Comparable<Interval> {
 				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
-		
+
 		def min(NonEmpty other) {
 			new NonEmpty(
 				lower.tryMin(other.lower),
-				if (other.upper === null) upper else upper?.min(other.upper)
+				if(other.upper === null) upper else if(upper === null) other.upper else upper.min(other.upper)
 			)
 		}
-		
+
 		override max(Interval other) {
 			switch (other) {
 				case EMPTY: this
@@ -236,10 +242,10 @@ abstract class Interval implements Comparable<Interval> {
 				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
-		
+
 		def max(NonEmpty other) {
 			new NonEmpty(
-				if (other.lower === null) lower else lower?.min(other.lower),
+				if(other.lower === null) lower else if(lower === null) other.lower else lower.max(other.lower),
 				upper.tryMax(other.upper)
 			)
 		}
@@ -252,19 +258,19 @@ abstract class Interval implements Comparable<Interval> {
 			}
 		}
 
-		override operator_minus() {
+		override -() {
 			new NonEmpty(upper?.negate(ROUND_DOWN), lower?.negate(ROUND_UP))
 		}
 
-		override operator_plus(Interval other) {
+		override +(Interval other) {
 			switch (other) {
 				case EMPTY: EMPTY
-				NonEmpty: operator_plus(other)
+				NonEmpty: this + other
 				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
-		def operator_plus(NonEmpty other) {
+		def +(NonEmpty other) {
 			new NonEmpty(
 				lower.tryAdd(other.lower, ROUND_DOWN),
 				upper.tryAdd(other.upper, ROUND_UP)
@@ -279,15 +285,15 @@ abstract class Interval implements Comparable<Interval> {
 			}
 		}
 
-		override operator_minus(Interval other) {
+		override -(Interval other) {
 			switch (other) {
 				case EMPTY: EMPTY
-				NonEmpty: operator_minus(other)
+				NonEmpty: this - other
 				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
-		def operator_minus(NonEmpty other) {
+		def -(NonEmpty other) {
 			new NonEmpty(
 				lower.trySubtract(other.upper, ROUND_DOWN),
 				upper.trySubtract(other.lower, ROUND_UP)
@@ -302,7 +308,7 @@ abstract class Interval implements Comparable<Interval> {
 			}
 		}
 
-		override operator_multiply(int count) {
+		override *(int count) {
 			val bigCount = new BigDecimal(count)
 			new NonEmpty(
 				lower.tryMultiply(bigCount, ROUND_DOWN),
@@ -310,15 +316,15 @@ abstract class Interval implements Comparable<Interval> {
 			)
 		}
 
-		override operator_multiply(Interval other) {
+		override *(Interval other) {
 			switch (other) {
 				case EMPTY: EMPTY
-				NonEmpty: operator_multiply(other)
-				default: throw new IllegalArgumentException("")
+				NonEmpty: this * other
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
-		def operator_multiply(NonEmpty other) {
+		def *(NonEmpty other) {
 			if (this == ZERO || other == ZERO) {
 				ZERO
 			} else if (nonpositive) {
@@ -407,15 +413,15 @@ abstract class Interval implements Comparable<Interval> {
 			}
 		}
 
-		override operator_divide(Interval other) {
+		override /(Interval other) {
 			switch (other) {
 				case EMPTY: EMPTY
-				NonEmpty: operator_divide(other)
+				NonEmpty: this / other
 				default: throw new IllegalArgumentException("Unknown interval: " + other)
 			}
 		}
 
-		def operator_divide(NonEmpty other) {
+		def /(NonEmpty other) {
 			if (other == ZERO) {
 				EMPTY
 			} else if (this == ZERO) {
@@ -493,6 +499,51 @@ abstract class Interval implements Comparable<Interval> {
 			}
 		}
 
+		override **(Interval other) {
+			switch (other) {
+				case EMPTY: EMPTY
+				NonEmpty: this ** other
+				default: throw new IllegalArgumentException("Unknown interval: " + other)
+			}
+		}
+
+		def **(NonEmpty other) {
+			// XXX This should use proper rounding for log and exp instead of
+			// converting to double.
+			// XXX We should not ignore (integer) powers of negative numbers.
+			val lowerLog = if (lower === null || lower <= BigDecimal.ZERO) {
+					null
+				} else {
+					new BigDecimal(Math.log(lower.doubleValue), ROUND_DOWN)
+				}
+			val upperLog = if (upper === null) {
+					null
+				} else if (upper == BigDecimal.ZERO) {
+					return ZERO
+				} else if (upper < BigDecimal.ZERO) {
+					return EMPTY
+				} else {
+					new BigDecimal(Math.log(upper.doubleValue), ROUND_UP)
+				}
+			val log = new NonEmpty(lowerLog, upperLog)
+			val product = log * other
+			if (product instanceof NonEmpty) {
+				val lowerResult = if (product.lower === null) {
+						BigDecimal.ZERO
+					} else {
+						new BigDecimal(Math.exp(product.lower.doubleValue), ROUND_DOWN)
+					}
+				val upperResult = if (product.upper === null) {
+						null
+					} else {
+						new BigDecimal(Math.exp(product.upper.doubleValue), ROUND_UP)
+					}
+				new NonEmpty(lowerResult, upperResult)
+			} else {
+				throw new IllegalArgumentException("Unknown interval: " + product)
+			}
+		}
+
 		override toString() {
 			'''«IF lower === null»(-∞«ELSE»[«lower»«ENDIF», «IF upper === null»∞)«ELSE»«upper»]«ENDIF»'''
 		}
@@ -501,7 +552,7 @@ abstract class Interval implements Comparable<Interval> {
 			switch (o) {
 				case EMPTY: 1
 				NonEmpty: compareTo(o)
-				default: throw new IllegalArgumentException("")
+				default: throw new IllegalArgumentException("Unknown interval: " + o)
 			}
 		}
 

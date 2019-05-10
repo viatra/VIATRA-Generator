@@ -13,7 +13,7 @@ import org.junit.Test
 
 import static hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.interval.Interval.*
 
-class SumTest {
+class SumAggregatorTest {
 	val aggregator = new IntervalAggregationOperator(IntervalAggregationMode.SUM)
 	var IntervalRedBlackNode value = null
 
