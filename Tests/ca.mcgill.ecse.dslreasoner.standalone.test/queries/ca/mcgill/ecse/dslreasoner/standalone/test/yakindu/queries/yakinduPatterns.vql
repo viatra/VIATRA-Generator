@@ -217,11 +217,11 @@ pattern twoSynch(s1 : Synchronization, s2 : Synchronization) {
 /**
  * Model generation task: at least one synch
  */
-//@Constraint(severity="error", message="error", key = {s})
-//pattern noSynch(s:Statechart) {
-//	Statechart(s);
-//	neg find synch(_);
-//}
-//pattern synch(s:Synchronization) {
-//	Synchronization(s);
-//}
+@Constraint(severity="error", message="error", key = {s})
+pattern noSynch(s:Statechart) {
+	Statechart(s);
+	neg find synch(_);
+}
+pattern synch(s:Synchronization) {
+	Synchronization(s);
+}
