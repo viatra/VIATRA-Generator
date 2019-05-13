@@ -9,7 +9,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu;
  * <!-- end-user-doc -->
  *
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getChoice()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getChoice()
  * @model
  * @generated
  */

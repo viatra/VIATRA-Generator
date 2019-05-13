@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition#getSource <em>Source</em>}</li>
  * </ul>
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getTransition()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getTransition()
  * @model
  * @generated
  */
@@ -33,7 +33,7 @@ public interface Transition extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(Vertex)
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getTransition_Target()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getTransition_Target()
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex#getIncomingTransitions
 	 * @model opposite="incomingTransitions" required="true" ordered="false"
 	 * @generated
@@ -61,7 +61,7 @@ public interface Transition extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' container reference.
 	 * @see #setSource(Vertex)
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getTransition_Source()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getTransition_Source()
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex#getOutgoingTransitions
 	 * @model opposite="outgoingTransitions" transient="false" ordered="false"
 	 * @generated

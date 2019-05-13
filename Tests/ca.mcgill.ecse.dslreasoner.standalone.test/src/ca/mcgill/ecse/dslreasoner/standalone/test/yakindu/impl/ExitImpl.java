@@ -3,7 +3,7 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Exit;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -31,7 +31,7 @@ public class ExitImpl extends PseudostateImpl implements Exit {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.EXIT;
+		return YakinduPackage.Literals.EXIT;
 	}
 
 } //ExitImpl

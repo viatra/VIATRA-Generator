@@ -4,7 +4,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -58,7 +58,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.TRANSITION;
+		return YakinduPackage.Literals.TRANSITION;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 			target = (Vertex)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, yakinduPackage.TRANSITION__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, YakinduPackage.TRANSITION__TARGET, oldTarget, target));
 			}
 		}
 		return target;
@@ -96,7 +96,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 		Vertex oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, yakinduPackage.TRANSITION__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, YakinduPackage.TRANSITION__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -111,14 +111,14 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, yakinduPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, YakinduPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, yakinduPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, YakinduPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, yakinduPackage.TRANSITION__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, YakinduPackage.TRANSITION__TARGET, newTarget, newTarget));
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * @generated
 	 */
 	public Vertex getSource() {
-		if (eContainerFeatureID() != yakinduPackage.TRANSITION__SOURCE) return null;
+		if (eContainerFeatureID() != YakinduPackage.TRANSITION__SOURCE) return null;
 		return (Vertex)eInternalContainer();
 	}
 
@@ -137,7 +137,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * @generated
 	 */
 	public NotificationChain basicSetSource(Vertex newSource, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSource, yakinduPackage.TRANSITION__SOURCE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newSource, YakinduPackage.TRANSITION__SOURCE, msgs);
 		return msgs;
 	}
 
@@ -147,19 +147,19 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * @generated
 	 */
 	public void setSource(Vertex newSource) {
-		if (newSource != eInternalContainer() || (eContainerFeatureID() != yakinduPackage.TRANSITION__SOURCE && newSource != null)) {
+		if (newSource != eInternalContainer() || (eContainerFeatureID() != YakinduPackage.TRANSITION__SOURCE && newSource != null)) {
 			if (EcoreUtil.isAncestor(this, newSource))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, yakinduPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, YakinduPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, yakinduPackage.TRANSITION__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, YakinduPackage.TRANSITION__SOURCE, newSource, newSource));
 	}
 
 	/**
@@ -170,11 +170,11 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.TRANSITION__TARGET:
+			case YakinduPackage.TRANSITION__TARGET:
 				if (target != null)
-					msgs = ((InternalEObject)target).eInverseRemove(this, yakinduPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
+					msgs = ((InternalEObject)target).eInverseRemove(this, YakinduPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
 				return basicSetTarget((Vertex)otherEnd, msgs);
-			case yakinduPackage.TRANSITION__SOURCE:
+			case YakinduPackage.TRANSITION__SOURCE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetSource((Vertex)otherEnd, msgs);
@@ -190,9 +190,9 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.TRANSITION__TARGET:
+			case YakinduPackage.TRANSITION__TARGET:
 				return basicSetTarget(null, msgs);
-			case yakinduPackage.TRANSITION__SOURCE:
+			case YakinduPackage.TRANSITION__SOURCE:
 				return basicSetSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -206,8 +206,8 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case yakinduPackage.TRANSITION__SOURCE:
-				return eInternalContainer().eInverseRemove(this, yakinduPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
+			case YakinduPackage.TRANSITION__SOURCE:
+				return eInternalContainer().eInverseRemove(this, YakinduPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -220,10 +220,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case yakinduPackage.TRANSITION__TARGET:
+			case YakinduPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
-			case yakinduPackage.TRANSITION__SOURCE:
+			case YakinduPackage.TRANSITION__SOURCE:
 				return getSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -237,10 +237,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case yakinduPackage.TRANSITION__TARGET:
+			case YakinduPackage.TRANSITION__TARGET:
 				setTarget((Vertex)newValue);
 				return;
-			case yakinduPackage.TRANSITION__SOURCE:
+			case YakinduPackage.TRANSITION__SOURCE:
 				setSource((Vertex)newValue);
 				return;
 		}
@@ -255,10 +255,10 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.TRANSITION__TARGET:
+			case YakinduPackage.TRANSITION__TARGET:
 				setTarget((Vertex)null);
 				return;
-			case yakinduPackage.TRANSITION__SOURCE:
+			case YakinduPackage.TRANSITION__SOURCE:
 				setSource((Vertex)null);
 				return;
 		}
@@ -273,9 +273,9 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.TRANSITION__TARGET:
+			case YakinduPackage.TRANSITION__TARGET:
 				return target != null;
-			case yakinduPackage.TRANSITION__SOURCE:
+			case YakinduPackage.TRANSITION__SOURCE:
 				return getSource() != null;
 		}
 		return super.eIsSet(featureID);

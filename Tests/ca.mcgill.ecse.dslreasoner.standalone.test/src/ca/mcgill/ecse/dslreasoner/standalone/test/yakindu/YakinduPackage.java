@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduFactory
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduFactory
  * @model kind="package"
  * @generated
  */
-public interface yakinduPackage extends EPackage {
+public interface YakinduPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -53,14 +53,14 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	yakinduPackage eINSTANCE = ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl.init();
+	YakinduPackage eINSTANCE = ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.VertexImpl <em>Vertex</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.VertexImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getVertex()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getVertex()
 	 * @generated
 	 */
 	int VERTEX = 1;
@@ -106,7 +106,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.PseudostateImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getPseudostate()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getPseudostate()
 	 * @generated
 	 */
 	int PSEUDOSTATE = 0;
@@ -152,7 +152,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.RegionImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getRegion()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getRegion()
 	 * @generated
 	 */
 	int REGION = 2;
@@ -189,7 +189,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.TransitionImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getTransition()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getTransition()
 	 * @generated
 	 */
 	int TRANSITION = 3;
@@ -235,7 +235,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.CompositeElementImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getCompositeElement()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getCompositeElement()
 	 * @generated
 	 */
 	int COMPOSITE_ELEMENT = 9;
@@ -272,7 +272,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.StatechartImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getStatechart()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getStatechart()
 	 * @generated
 	 */
 	int STATECHART = 4;
@@ -309,7 +309,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.EntryImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getEntry()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getEntry()
 	 * @generated
 	 */
 	int ENTRY = 5;
@@ -355,7 +355,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.SynchronizationImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getSynchronization()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getSynchronization()
 	 * @generated
 	 */
 	int SYNCHRONIZATION = 6;
@@ -401,7 +401,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.RegularStateImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getRegularState()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getRegularState()
 	 * @generated
 	 */
 	int REGULAR_STATE = 8;
@@ -447,7 +447,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.StateImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getState()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getState()
 	 * @generated
 	 */
 	int STATE = 7;
@@ -502,7 +502,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.ChoiceImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getChoice()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getChoice()
 	 * @generated
 	 */
 	int CHOICE = 10;
@@ -548,7 +548,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.ExitImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getExit()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getExit()
 	 * @generated
 	 */
 	int EXIT = 11;
@@ -594,7 +594,7 @@ public interface yakinduPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.FinalStateImpl
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getFinalState()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getFinalState()
 	 * @generated
 	 */
 	int FINAL_STATE = 12;
@@ -839,7 +839,7 @@ public interface yakinduPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	yakinduFactory getyakinduFactory();
+	YakinduFactory getYakinduFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -860,7 +860,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.PseudostateImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getPseudostate()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getPseudostate()
 		 * @generated
 		 */
 		EClass PSEUDOSTATE = eINSTANCE.getPseudostate();
@@ -870,7 +870,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.VertexImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getVertex()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getVertex()
 		 * @generated
 		 */
 		EClass VERTEX = eINSTANCE.getVertex();
@@ -896,7 +896,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.RegionImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getRegion()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getRegion()
 		 * @generated
 		 */
 		EClass REGION = eINSTANCE.getRegion();
@@ -914,7 +914,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.TransitionImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getTransition()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getTransition()
 		 * @generated
 		 */
 		EClass TRANSITION = eINSTANCE.getTransition();
@@ -940,7 +940,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.StatechartImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getStatechart()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getStatechart()
 		 * @generated
 		 */
 		EClass STATECHART = eINSTANCE.getStatechart();
@@ -950,7 +950,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.EntryImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getEntry()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getEntry()
 		 * @generated
 		 */
 		EClass ENTRY = eINSTANCE.getEntry();
@@ -960,7 +960,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.SynchronizationImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getSynchronization()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getSynchronization()
 		 * @generated
 		 */
 		EClass SYNCHRONIZATION = eINSTANCE.getSynchronization();
@@ -970,7 +970,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.StateImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getState()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getState()
 		 * @generated
 		 */
 		EClass STATE = eINSTANCE.getState();
@@ -980,7 +980,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.RegularStateImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getRegularState()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getRegularState()
 		 * @generated
 		 */
 		EClass REGULAR_STATE = eINSTANCE.getRegularState();
@@ -990,7 +990,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.CompositeElementImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getCompositeElement()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getCompositeElement()
 		 * @generated
 		 */
 		EClass COMPOSITE_ELEMENT = eINSTANCE.getCompositeElement();
@@ -1008,7 +1008,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.ChoiceImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getChoice()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getChoice()
 		 * @generated
 		 */
 		EClass CHOICE = eINSTANCE.getChoice();
@@ -1018,7 +1018,7 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.ExitImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getExit()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getExit()
 		 * @generated
 		 */
 		EClass EXIT = eINSTANCE.getExit();
@@ -1028,11 +1028,11 @@ public interface yakinduPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.FinalStateImpl
-		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduPackageImpl#getFinalState()
+		 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduPackageImpl#getFinalState()
 		 * @generated
 		 */
 		EClass FINAL_STATE = eINSTANCE.getFinalState();
 
 	}
 
-} //yakinduPackage
+} //YakinduPackage

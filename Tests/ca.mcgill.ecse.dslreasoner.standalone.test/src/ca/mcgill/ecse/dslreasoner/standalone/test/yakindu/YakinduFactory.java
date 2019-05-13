@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage
  * @generated
  */
-public interface yakinduFactory extends EFactory {
+public interface YakinduFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	yakinduFactory eINSTANCE = ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.yakinduFactoryImpl.init();
+	YakinduFactory eINSTANCE = ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl.YakinduFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Region</em>'.
@@ -109,6 +109,6 @@ public interface yakinduFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	yakinduPackage getyakinduPackage();
+	YakinduPackage getYakinduPackage();
 
-} //yakinduFactory
+} //YakinduFactory

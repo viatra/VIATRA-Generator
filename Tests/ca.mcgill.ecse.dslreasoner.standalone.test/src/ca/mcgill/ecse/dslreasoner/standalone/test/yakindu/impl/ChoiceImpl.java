@@ -3,7 +3,7 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Choice;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -31,7 +31,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.CHOICE;
+		return YakinduPackage.Literals.CHOICE;
 	}
 
 } //ChoiceImpl

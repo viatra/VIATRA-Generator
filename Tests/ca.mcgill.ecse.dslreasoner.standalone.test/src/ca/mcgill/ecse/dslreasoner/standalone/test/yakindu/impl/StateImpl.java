@@ -5,7 +5,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.CompositeElement;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.State;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import java.util.Collection;
 
@@ -59,7 +59,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.STATE;
+		return YakinduPackage.Literals.STATE;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentEList<Region>(Region.class, this, yakinduPackage.STATE__REGIONS);
+			regions = new EObjectContainmentEList<Region>(Region.class, this, YakinduPackage.STATE__REGIONS);
 		}
 		return regions;
 	}
@@ -82,7 +82,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.STATE__REGIONS:
+			case YakinduPackage.STATE__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -96,7 +96,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case yakinduPackage.STATE__REGIONS:
+			case YakinduPackage.STATE__REGIONS:
 				return getRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -111,7 +111,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case yakinduPackage.STATE__REGIONS:
+			case YakinduPackage.STATE__REGIONS:
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
 				return;
@@ -127,7 +127,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.STATE__REGIONS:
+			case YakinduPackage.STATE__REGIONS:
 				getRegions().clear();
 				return;
 		}
@@ -142,7 +142,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.STATE__REGIONS:
+			case YakinduPackage.STATE__REGIONS:
 				return regions != null && !regions.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -157,7 +157,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == CompositeElement.class) {
 			switch (derivedFeatureID) {
-				case yakinduPackage.STATE__REGIONS: return yakinduPackage.COMPOSITE_ELEMENT__REGIONS;
+				case YakinduPackage.STATE__REGIONS: return YakinduPackage.COMPOSITE_ELEMENT__REGIONS;
 				default: return -1;
 			}
 		}
@@ -173,7 +173,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == CompositeElement.class) {
 			switch (baseFeatureID) {
-				case yakinduPackage.COMPOSITE_ELEMENT__REGIONS: return yakinduPackage.STATE__REGIONS;
+				case YakinduPackage.COMPOSITE_ELEMENT__REGIONS: return YakinduPackage.STATE__REGIONS;
 				default: return -1;
 			}
 		}

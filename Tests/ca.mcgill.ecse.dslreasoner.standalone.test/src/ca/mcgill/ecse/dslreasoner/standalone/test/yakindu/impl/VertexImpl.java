@@ -4,7 +4,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import java.util.Collection;
 
@@ -72,7 +72,7 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.VERTEX;
+		return YakinduPackage.Literals.VERTEX;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public EList<Transition> getIncomingTransitions() {
 		if (incomingTransitions == null) {
-			incomingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, yakinduPackage.VERTEX__INCOMING_TRANSITIONS, yakinduPackage.TRANSITION__TARGET);
+			incomingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, YakinduPackage.VERTEX__INCOMING_TRANSITIONS, YakinduPackage.TRANSITION__TARGET);
 		}
 		return incomingTransitions;
 	}
@@ -94,7 +94,7 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public EList<Transition> getOutgoingTransitions() {
 		if (outgoingTransitions == null) {
-			outgoingTransitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, yakinduPackage.VERTEX__OUTGOING_TRANSITIONS, yakinduPackage.TRANSITION__SOURCE);
+			outgoingTransitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, YakinduPackage.VERTEX__OUTGOING_TRANSITIONS, YakinduPackage.TRANSITION__SOURCE);
 		}
 		return outgoingTransitions;
 	}
@@ -108,9 +108,9 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.VERTEX__INCOMING_TRANSITIONS:
+			case YakinduPackage.VERTEX__INCOMING_TRANSITIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingTransitions()).basicAdd(otherEnd, msgs);
-			case yakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
+			case YakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingTransitions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -124,9 +124,9 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.VERTEX__INCOMING_TRANSITIONS:
+			case YakinduPackage.VERTEX__INCOMING_TRANSITIONS:
 				return ((InternalEList<?>)getIncomingTransitions()).basicRemove(otherEnd, msgs);
-			case yakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
+			case YakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
 				return ((InternalEList<?>)getOutgoingTransitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -140,9 +140,9 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case yakinduPackage.VERTEX__INCOMING_TRANSITIONS:
+			case YakinduPackage.VERTEX__INCOMING_TRANSITIONS:
 				return getIncomingTransitions();
-			case yakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
+			case YakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
 				return getOutgoingTransitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -157,11 +157,11 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case yakinduPackage.VERTEX__INCOMING_TRANSITIONS:
+			case YakinduPackage.VERTEX__INCOMING_TRANSITIONS:
 				getIncomingTransitions().clear();
 				getIncomingTransitions().addAll((Collection<? extends Transition>)newValue);
 				return;
-			case yakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
+			case YakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
 				getOutgoingTransitions().clear();
 				getOutgoingTransitions().addAll((Collection<? extends Transition>)newValue);
 				return;
@@ -177,10 +177,10 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.VERTEX__INCOMING_TRANSITIONS:
+			case YakinduPackage.VERTEX__INCOMING_TRANSITIONS:
 				getIncomingTransitions().clear();
 				return;
-			case yakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
+			case YakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
 				getOutgoingTransitions().clear();
 				return;
 		}
@@ -195,9 +195,9 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.VERTEX__INCOMING_TRANSITIONS:
+			case YakinduPackage.VERTEX__INCOMING_TRANSITIONS:
 				return incomingTransitions != null && !incomingTransitions.isEmpty();
-			case yakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
+			case YakinduPackage.VERTEX__OUTGOING_TRANSITIONS:
 				return outgoingTransitions != null && !outgoingTransitions.isEmpty();
 		}
 		return super.eIsSet(featureID);

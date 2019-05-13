@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex#getOutgoingTransitions <em>Outgoing Transitions</em>}</li>
  * </ul>
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getVertex()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getVertex()
  * @model abstract="true"
  * @generated
  */
@@ -35,7 +35,7 @@ public interface Vertex extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Incoming Transitions</em>' reference list.
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getVertex_IncomingTransitions()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getVertex_IncomingTransitions()
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition#getTarget
 	 * @model opposite="target" ordered="false"
 	 * @generated
@@ -53,7 +53,7 @@ public interface Vertex extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Outgoing Transitions</em>' containment reference list.
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getVertex_OutgoingTransitions()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getVertex_OutgoingTransitions()
 	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition#getSource
 	 * @model opposite="source" containment="true" ordered="false"
 	 * @generated

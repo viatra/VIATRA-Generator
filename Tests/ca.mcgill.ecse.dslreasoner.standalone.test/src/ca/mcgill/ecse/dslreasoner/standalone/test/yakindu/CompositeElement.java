@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.CompositeElement#getRegions <em>Regions</em>}</li>
  * </ul>
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getCompositeElement()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getCompositeElement()
  * @model abstract="true"
  * @generated
  */
@@ -33,7 +33,7 @@ public interface CompositeElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Regions</em>' containment reference list.
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getCompositeElement_Regions()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getCompositeElement_Regions()
 	 * @model containment="true"
 	 * @generated
 	 */

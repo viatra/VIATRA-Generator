@@ -3,7 +3,7 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Statechart;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -31,7 +31,7 @@ public class StatechartImpl extends CompositeElementImpl implements Statechart {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.STATECHART;
+		return YakinduPackage.Literals.STATECHART;
 	}
 
 } //StatechartImpl

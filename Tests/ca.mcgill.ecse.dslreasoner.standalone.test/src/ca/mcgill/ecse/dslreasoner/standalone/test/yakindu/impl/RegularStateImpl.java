@@ -3,7 +3,7 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.RegularState;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -31,7 +31,7 @@ public abstract class RegularStateImpl extends VertexImpl implements RegularStat
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.REGULAR_STATE;
+		return YakinduPackage.Literals.REGULAR_STATE;
 	}
 
 } //RegularStateImpl

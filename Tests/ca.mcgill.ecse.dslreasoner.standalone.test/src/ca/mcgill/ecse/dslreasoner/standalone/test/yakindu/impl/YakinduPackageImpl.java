@@ -15,8 +15,8 @@ import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Statechart;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Synchronization;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Transition;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduFactory;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduFactory;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class yakinduPackageImpl extends EPackageImpl implements yakinduPackage {
+public class YakinduPackageImpl extends EPackageImpl implements YakinduPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,12 +133,12 @@ public class yakinduPackageImpl extends EPackageImpl implements yakinduPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#eNS_URI
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private yakinduPackageImpl() {
-		super(eNS_URI, yakinduFactory.eINSTANCE);
+	private YakinduPackageImpl() {
+		super(eNS_URI, YakinduFactory.eINSTANCE);
 	}
 
 	/**
@@ -150,8 +150,8 @@ public class yakinduPackageImpl extends EPackageImpl implements yakinduPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
-	 * <p>This method is used to initialize {@link yakinduPackage#eINSTANCE} when that field is accessed.
+	 *
+	 * <p>This method is used to initialize {@link YakinduPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -160,27 +160,27 @@ public class yakinduPackageImpl extends EPackageImpl implements yakinduPackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static yakinduPackage init() {
-		if (isInited) return (yakinduPackage)EPackage.Registry.INSTANCE.getEPackage(yakinduPackage.eNS_URI);
+	public static YakinduPackage init() {
+		if (isInited) return (YakinduPackage)EPackage.Registry.INSTANCE.getEPackage(YakinduPackage.eNS_URI);
 
 		// Obtain or create and register package
-		yakinduPackageImpl theyakinduPackage = (yakinduPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof yakinduPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new yakinduPackageImpl());
+		Object registeredYakinduPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		YakinduPackageImpl theYakinduPackage = registeredYakinduPackage instanceof YakinduPackageImpl ? (YakinduPackageImpl)registeredYakinduPackage : new YakinduPackageImpl();
 
 		isInited = true;
 
 		// Create package meta-data objects
-		theyakinduPackage.createPackageContents();
+		theYakinduPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theyakinduPackage.initializePackageContents();
+		theYakinduPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theyakinduPackage.freeze();
+		theYakinduPackage.freeze();
 
-  
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(yakinduPackage.eNS_URI, theyakinduPackage);
-		return theyakinduPackage;
+		EPackage.Registry.INSTANCE.put(YakinduPackage.eNS_URI, theYakinduPackage);
+		return theYakinduPackage;
 	}
 
 	/**
@@ -359,8 +359,8 @@ public class yakinduPackageImpl extends EPackageImpl implements yakinduPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public yakinduFactory getyakinduFactory() {
-		return (yakinduFactory)getEFactoryInstance();
+	public YakinduFactory getYakinduFactory() {
+		return (YakinduFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -491,4 +491,4 @@ public class yakinduPackageImpl extends EPackageImpl implements yakinduPackage {
 		createResource(eNS_URI);
 	}
 
-} //yakinduPackageImpl
+} //YakinduPackageImpl

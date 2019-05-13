@@ -16,17 +16,17 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage
  * @generated
  */
-public class yakinduAdapterFactory extends AdapterFactoryImpl {
+public class YakinduAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static yakinduPackage modelPackage;
+	protected static YakinduPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -34,9 +34,9 @@ public class yakinduAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public yakinduAdapterFactory() {
+	public YakinduAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = yakinduPackage.eINSTANCE;
+			modelPackage = YakinduPackage.eINSTANCE;
 		}
 	}
 
@@ -65,8 +65,8 @@ public class yakinduAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected yakinduSwitch<Adapter> modelSwitch =
-		new yakinduSwitch<Adapter>() {
+	protected YakinduSwitch<Adapter> modelSwitch =
+		new YakinduSwitch<Adapter>() {
 			@Override
 			public Adapter casePseudostate(Pseudostate object) {
 				return createPseudostateAdapter();
@@ -333,4 +333,4 @@ public class yakinduAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //yakinduAdapterFactory
+} //YakinduAdapterFactory

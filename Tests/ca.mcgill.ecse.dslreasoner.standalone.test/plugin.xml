@@ -5,10 +5,6 @@
     <package class="ca.mcgill.ecse.dslreasoner.standalone.test.fam.famPackage" genModel="metamodels/fam.genmodel" uri="FamMetamodel"/>
   </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
-    <!-- @generated yakindu -->
-    <package class="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage" genModel="metamodels/yakindu.genmodel" uri="YakinduMetamodel"/>
-  </extension>
-  <extension point="org.eclipse.emf.ecore.generated_package">
     <!-- @generated filesystem -->
     <package class="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage" genModel="metamodels/filesystem.genmodel" uri="FileSystemMetamodel"/>
   </extension>
@@ -32,74 +28,6 @@
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.patternContent"/>
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.live"/>
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.contentInNotLive"/>
-    </group>
-  </extension>
-  <extension id="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.YakinduMutatedPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.YakinduMutatedPatterns" id="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.YakinduMutatedPatterns">
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.entryInRegion_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.entryInRegion_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.entryInRegion_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noEntryInRegion_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noEntryInRegion_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noEntryInRegion_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noEntryInRegion_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noEntryInRegion_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noEntryInRegion_M5"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleEntryInRegion_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleEntryInRegion_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleEntryInRegion_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleEntryInRegion_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleEntryInRegion_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleEntryInRegion_M5"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.transition_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.transition_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.transition_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.transition_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.transition_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.incomingToEntry_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.incomingToEntry_1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.incomingToEntry_2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.incomingToEntry_3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.incomingToEntry_4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.incomingToEntry_5"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noOutgoingTransitionFromEntry_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noOutgoingTransitionFromEntry_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noOutgoingTransitionFromEntry_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noOutgoingTransitionFromEntry_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noOutgoingTransitionFromEntry_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noOutgoingTransitionFromEntry_M5"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleTransitionFromEntry_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleTransitionFromEntry_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleTransitionFromEntry_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleTransitionFromEntry_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.multipleTransitionFromEntry_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.outgoingFromExit_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.outgoingFromExit_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.outgoingFromExit_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.outgoingFromFinal_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.outgoingFromFinal_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.outgoingFromFinal_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noStateInRegion_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noStateInRegion_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noStateInRegion_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noStateInRegion_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.StateInRegion_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.StateInRegion_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.StateInRegion_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M5"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoOutgoing_M6"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M0"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M1"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M2"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M3"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M4"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M5"/>
-      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.choiceHasNoIncoming_M6"/>
     </group>
   </extension>
   <extension id="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.YakinduPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
@@ -129,6 +57,8 @@
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.hasMultipleRegions"/>
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.synchThree"/>
       <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.twoSynch"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.noSynch"/>
+      <query-specification fqn="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries.synch"/>
     </group>
   </extension>
   <extension id="extension.derived.ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.model" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
@@ -139,5 +69,9 @@
   </extension>
   <extension id="extension.derived.ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.live" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
     <wellbehaving-derived-feature classifier-name="FileSystem" feature-name="live" package-nsUri="FileSystemMetamodel"/>
+  </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated yakindu -->
+    <package class="ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage" genModel="metamodels/yakindu.genmodel" uri="YakinduMetamodel"/>
   </extension>
 </plugin>

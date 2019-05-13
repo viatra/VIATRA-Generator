@@ -5,7 +5,7 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>yakindu.ecore</foreignModel>
-  <genPackages prefix="Yakindu" basePackage="ca.mcgill.ecse.dslreasoner.standalone.test"
+  <genPackages prefix="yakindu" basePackage="ca.mcgill.ecse.dslreasoner.standalone.test"
       disposableProviderFactory="true" ecorePackage="yakindu.ecore#/">
     <genClasses image="false" ecoreClass="yakindu.ecore#//Pseudostate"/>
     <genClasses image="false" ecoreClass="yakindu.ecore#//Vertex">

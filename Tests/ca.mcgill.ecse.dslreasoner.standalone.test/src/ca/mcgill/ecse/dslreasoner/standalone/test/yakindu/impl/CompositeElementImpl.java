@@ -4,7 +4,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.CompositeElement;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import java.util.Collection;
 
@@ -60,7 +60,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.COMPOSITE_ELEMENT;
+		return YakinduPackage.Literals.COMPOSITE_ELEMENT;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentEList<Region>(Region.class, this, yakinduPackage.COMPOSITE_ELEMENT__REGIONS);
+			regions = new EObjectContainmentEList<Region>(Region.class, this, YakinduPackage.COMPOSITE_ELEMENT__REGIONS);
 		}
 		return regions;
 	}
@@ -83,7 +83,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.COMPOSITE_ELEMENT__REGIONS:
+			case YakinduPackage.COMPOSITE_ELEMENT__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -97,7 +97,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case yakinduPackage.COMPOSITE_ELEMENT__REGIONS:
+			case YakinduPackage.COMPOSITE_ELEMENT__REGIONS:
 				return getRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,7 +112,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case yakinduPackage.COMPOSITE_ELEMENT__REGIONS:
+			case YakinduPackage.COMPOSITE_ELEMENT__REGIONS:
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
 				return;
@@ -128,7 +128,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.COMPOSITE_ELEMENT__REGIONS:
+			case YakinduPackage.COMPOSITE_ELEMENT__REGIONS:
 				getRegions().clear();
 				return;
 		}
@@ -143,7 +143,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.COMPOSITE_ELEMENT__REGIONS:
+			case YakinduPackage.COMPOSITE_ELEMENT__REGIONS:
 				return regions != null && !regions.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -9,7 +9,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu;
  * <!-- end-user-doc -->
  *
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getRegularState()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getRegularState()
  * @model abstract="true"
  * @generated
  */

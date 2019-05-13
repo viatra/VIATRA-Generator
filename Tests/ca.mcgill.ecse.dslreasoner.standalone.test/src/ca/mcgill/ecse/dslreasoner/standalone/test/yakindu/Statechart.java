@@ -9,7 +9,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu;
  * <!-- end-user-doc -->
  *
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getStatechart()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getStatechart()
  * @model
  * @generated
  */

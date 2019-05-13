@@ -3,7 +3,7 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.FinalState;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -31,7 +31,7 @@ public class FinalStateImpl extends RegularStateImpl implements FinalState {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.FINAL_STATE;
+		return YakinduPackage.Literals.FINAL_STATE;
 	}
 
 } //FinalStateImpl

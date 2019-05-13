@@ -4,7 +4,7 @@ package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region;
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Vertex;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import java.util.Collection;
 
@@ -60,7 +60,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.REGION;
+		return YakinduPackage.Literals.REGION;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	 */
 	public EList<Vertex> getVertices() {
 		if (vertices == null) {
-			vertices = new EObjectContainmentEList<Vertex>(Vertex.class, this, yakinduPackage.REGION__VERTICES);
+			vertices = new EObjectContainmentEList<Vertex>(Vertex.class, this, YakinduPackage.REGION__VERTICES);
 		}
 		return vertices;
 	}
@@ -83,7 +83,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case yakinduPackage.REGION__VERTICES:
+			case YakinduPackage.REGION__VERTICES:
 				return ((InternalEList<?>)getVertices()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -97,7 +97,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case yakinduPackage.REGION__VERTICES:
+			case YakinduPackage.REGION__VERTICES:
 				return getVertices();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,7 +112,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case yakinduPackage.REGION__VERTICES:
+			case YakinduPackage.REGION__VERTICES:
 				getVertices().clear();
 				getVertices().addAll((Collection<? extends Vertex>)newValue);
 				return;
@@ -128,7 +128,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.REGION__VERTICES:
+			case YakinduPackage.REGION__VERTICES:
 				getVertices().clear();
 				return;
 		}
@@ -143,7 +143,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case yakinduPackage.REGION__VERTICES:
+			case YakinduPackage.REGION__VERTICES:
 				return vertices != null && !vertices.isEmpty();
 		}
 		return super.eIsSet(featureID);

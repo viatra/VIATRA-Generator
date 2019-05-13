@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Region#getVertices <em>Vertices</em>}</li>
  * </ul>
  *
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getRegion()
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getRegion()
  * @model
  * @generated
  */
@@ -33,7 +33,7 @@ public interface Region extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vertices</em>' containment reference list.
-	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage#getRegion_Vertices()
+	 * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage#getRegion_Vertices()
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */

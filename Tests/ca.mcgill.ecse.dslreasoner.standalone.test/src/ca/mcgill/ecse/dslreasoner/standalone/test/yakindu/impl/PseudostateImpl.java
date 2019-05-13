@@ -3,7 +3,7 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.impl;
 
 import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.Pseudostate;
-import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage;
+import ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -31,7 +31,7 @@ public abstract class PseudostateImpl extends VertexImpl implements Pseudostate 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return yakinduPackage.Literals.PSEUDOSTATE;
+		return YakinduPackage.Literals.PSEUDOSTATE;
 	}
 
 } //PseudostateImpl

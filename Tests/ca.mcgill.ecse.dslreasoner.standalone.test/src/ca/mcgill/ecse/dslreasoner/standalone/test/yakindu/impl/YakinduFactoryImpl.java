@@ -18,24 +18,24 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class yakinduFactoryImpl extends EFactoryImpl implements yakinduFactory {
+public class YakinduFactoryImpl extends EFactoryImpl implements YakinduFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static yakinduFactory init() {
+	public static YakinduFactory init() {
 		try {
-			yakinduFactory theyakinduFactory = (yakinduFactory)EPackage.Registry.INSTANCE.getEFactory(yakinduPackage.eNS_URI);
-			if (theyakinduFactory != null) {
-				return theyakinduFactory;
+			YakinduFactory theYakinduFactory = (YakinduFactory)EPackage.Registry.INSTANCE.getEFactory(YakinduPackage.eNS_URI);
+			if (theYakinduFactory != null) {
+				return theYakinduFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new yakinduFactoryImpl();
+		return new YakinduFactoryImpl();
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class yakinduFactoryImpl extends EFactoryImpl implements yakinduFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public yakinduFactoryImpl() {
+	public YakinduFactoryImpl() {
 		super();
 	}
 
@@ -56,15 +56,15 @@ public class yakinduFactoryImpl extends EFactoryImpl implements yakinduFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case yakinduPackage.REGION: return createRegion();
-			case yakinduPackage.TRANSITION: return createTransition();
-			case yakinduPackage.STATECHART: return createStatechart();
-			case yakinduPackage.ENTRY: return createEntry();
-			case yakinduPackage.SYNCHRONIZATION: return createSynchronization();
-			case yakinduPackage.STATE: return createState();
-			case yakinduPackage.CHOICE: return createChoice();
-			case yakinduPackage.EXIT: return createExit();
-			case yakinduPackage.FINAL_STATE: return createFinalState();
+			case YakinduPackage.REGION: return createRegion();
+			case YakinduPackage.TRANSITION: return createTransition();
+			case YakinduPackage.STATECHART: return createStatechart();
+			case YakinduPackage.ENTRY: return createEntry();
+			case YakinduPackage.SYNCHRONIZATION: return createSynchronization();
+			case YakinduPackage.STATE: return createState();
+			case YakinduPackage.CHOICE: return createChoice();
+			case YakinduPackage.EXIT: return createExit();
+			case YakinduPackage.FINAL_STATE: return createFinalState();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -165,8 +165,8 @@ public class yakinduFactoryImpl extends EFactoryImpl implements yakinduFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public yakinduPackage getyakinduPackage() {
-		return (yakinduPackage)getEPackage();
+	public YakinduPackage getYakinduPackage() {
+		return (YakinduPackage)getEPackage();
 	}
 
 	/**
@@ -176,8 +176,8 @@ public class yakinduFactoryImpl extends EFactoryImpl implements yakinduFactory {
 	 * @generated
 	 */
 	@Deprecated
-	public static yakinduPackage getPackage() {
-		return yakinduPackage.eINSTANCE;
+	public static YakinduPackage getPackage() {
+		return YakinduPackage.eINSTANCE;
 	}
 
-} //yakinduFactoryImpl
+} //YakinduFactoryImpl

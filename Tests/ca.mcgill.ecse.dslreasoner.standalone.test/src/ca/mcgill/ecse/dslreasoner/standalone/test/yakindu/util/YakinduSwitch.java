@@ -19,17 +19,17 @@ import org.eclipse.emf.ecore.util.Switch;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.yakinduPackage
+ * @see ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.YakinduPackage
  * @generated
  */
-public class yakinduSwitch<T> extends Switch<T> {
+public class YakinduSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static yakinduPackage modelPackage;
+	protected static YakinduPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +37,9 @@ public class yakinduSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public yakinduSwitch() {
+	public YakinduSwitch() {
 		if (modelPackage == null) {
-			modelPackage = yakinduPackage.eINSTANCE;
+			modelPackage = YakinduPackage.eINSTANCE;
 		}
 	}
 
@@ -66,39 +66,39 @@ public class yakinduSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case yakinduPackage.PSEUDOSTATE: {
+			case YakinduPackage.PSEUDOSTATE: {
 				Pseudostate pseudostate = (Pseudostate)theEObject;
 				T result = casePseudostate(pseudostate);
 				if (result == null) result = caseVertex(pseudostate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.VERTEX: {
+			case YakinduPackage.VERTEX: {
 				Vertex vertex = (Vertex)theEObject;
 				T result = caseVertex(vertex);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.REGION: {
+			case YakinduPackage.REGION: {
 				Region region = (Region)theEObject;
 				T result = caseRegion(region);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.TRANSITION: {
+			case YakinduPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.STATECHART: {
+			case YakinduPackage.STATECHART: {
 				Statechart statechart = (Statechart)theEObject;
 				T result = caseStatechart(statechart);
 				if (result == null) result = caseCompositeElement(statechart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.ENTRY: {
+			case YakinduPackage.ENTRY: {
 				Entry entry = (Entry)theEObject;
 				T result = caseEntry(entry);
 				if (result == null) result = casePseudostate(entry);
@@ -106,7 +106,7 @@ public class yakinduSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.SYNCHRONIZATION: {
+			case YakinduPackage.SYNCHRONIZATION: {
 				Synchronization synchronization = (Synchronization)theEObject;
 				T result = caseSynchronization(synchronization);
 				if (result == null) result = casePseudostate(synchronization);
@@ -114,7 +114,7 @@ public class yakinduSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.STATE: {
+			case YakinduPackage.STATE: {
 				State state = (State)theEObject;
 				T result = caseState(state);
 				if (result == null) result = caseRegularState(state);
@@ -123,20 +123,20 @@ public class yakinduSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.REGULAR_STATE: {
+			case YakinduPackage.REGULAR_STATE: {
 				RegularState regularState = (RegularState)theEObject;
 				T result = caseRegularState(regularState);
 				if (result == null) result = caseVertex(regularState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.COMPOSITE_ELEMENT: {
+			case YakinduPackage.COMPOSITE_ELEMENT: {
 				CompositeElement compositeElement = (CompositeElement)theEObject;
 				T result = caseCompositeElement(compositeElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.CHOICE: {
+			case YakinduPackage.CHOICE: {
 				Choice choice = (Choice)theEObject;
 				T result = caseChoice(choice);
 				if (result == null) result = casePseudostate(choice);
@@ -144,7 +144,7 @@ public class yakinduSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.EXIT: {
+			case YakinduPackage.EXIT: {
 				Exit exit = (Exit)theEObject;
 				T result = caseExit(exit);
 				if (result == null) result = casePseudostate(exit);
@@ -152,7 +152,7 @@ public class yakinduSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case yakinduPackage.FINAL_STATE: {
+			case YakinduPackage.FINAL_STATE: {
 				FinalState finalState = (FinalState)theEObject;
 				T result = caseFinalState(finalState);
 				if (result == null) result = caseRegularState(finalState);
@@ -375,4 +375,4 @@ public class yakinduSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //yakinduSwitch
+} //YakinduSwitch
