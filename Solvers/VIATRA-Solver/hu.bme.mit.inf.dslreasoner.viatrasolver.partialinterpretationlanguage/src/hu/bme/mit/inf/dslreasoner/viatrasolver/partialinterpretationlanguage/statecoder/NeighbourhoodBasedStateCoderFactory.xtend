@@ -128,13 +128,22 @@ class NeighbourhoodBasedPartialInterpretationStateCoder implements IStateCoder{
         val size = match.specification.parameters.size
         val res = new ArrayList(size)
         var int index = 0
+        var int equivalenceHash = 0
+        val prime = 31
+	   	
         while(index < size) {
         	res.add(getCode(match.get(index)))
         	index++
+        	for(var i = 0; i<index; i++) {
+        		val number = if(match.get(index) === match.get(i)){1}else{0}
+        		equivalenceHash = prime * equivalenceHash + number
+        	}
         }
+        
         statecoderRuntime += (System.nanoTime - startTime)
-        return match.specification.fullyQualifiedName->res.hashCode
+        return match.specification.fullyQualifiedName->(res->equivalenceHash).hashCode
     }
+    
     
     def private getCode(Object o) {
     	if(o instanceof DefinedElement) {
