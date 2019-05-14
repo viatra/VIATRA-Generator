@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Metrics
+Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.realistic.metrics
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: ca.mcgill.ecse.dslreasoner.realistic.metrics
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.14.0",
+ hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
+ Ecore-Plugin;bundle-version="1.0.0"
