@@ -1,7 +1,23 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: hu.bme.mit.inf.dslreasoner.domains.cps
-Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.domains.cps; singleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.domains.cps;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: hu.bme.mit.inf.dslreasoner.domains.cps,
+ hu.bme.mit.inf.dslreasoner.domains.cps.impl,
+ hu.bme.mit.inf.dslreasoner.domains.cps.queries,
+ hu.bme.mit.inf.dslreasoner.domains.cps.util
+Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
+ org.eclipse.viatra.query.runtime,
+ org.eclipse.viatra.query.runtime.rete,
+ org.eclipse.viatra.query.runtime.localsearch,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime
+Import-Package: org.apache.log4j
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.domains.cps
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

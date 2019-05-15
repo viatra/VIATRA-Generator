@@ -210,7 +210,7 @@ pattern spacecraftOfKind(Spacecraft : Spacecraft, Kind : SpacecraftKind) {
 	Kind == SpacecraftKind::SmallSat;
 }
 
-/*
+
 //
 // Metrics
 //
@@ -310,13 +310,13 @@ private pattern spacecraftCost(Mission : InterferometryMission, Spacecraft : Spa
 }
 
 private pattern basePrice(Spacecraft : Spacecraft, BasePrice : java Double) {
-	CubeSat3U(Spacecraft):
+	CubeSat3U(Spacecraft);
 	BasePrice == 250000.0;
 } or {
-	CubeSat6U(Spacecraft):
+	CubeSat6U(Spacecraft);
 	BasePrice == 750000.0;
 } or {
-	SmallSat(Spacecraft):
+	SmallSat(Spacecraft);
 	BasePrice == 3000000.0;
 }
 
@@ -341,4 +341,3 @@ private pattern spacecraftWithTwoCommSubsystems(Spacecraft : Spacecraft) {
 	Spacecraft.commSubsystem(Spacecraft, Subsystem2);
 	Subsystem1 != Subsystem2;
 }
-*/

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
 --><plugin>
-  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
-    <wellbehaving-derived-feature classifier-name="Spacecraft" feature-name="kind" package-nsUri="http://www.example.org/satellite"/>
-  </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <!-- @generated satellite -->
     <package class="satellite.SatellitePackage" genModel="model/satellite.genmodel" uri="http://www.example.org/satellite"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="Spacecraft" feature-name="kind" package-nsUri="http://www.example.org/satellite"/>
   </extension>
   <extension id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries">
@@ -23,6 +23,9 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.cubeSatWithKaAntenna"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.smallSat"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.coverageMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.timeMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.costMetric"/>
     </group>
   </extension>
 </plugin>

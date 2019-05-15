@@ -1,0 +1,16 @@
+/.CpsApplications.java._trace
+/.CpsQueries.java._trace
+/.CpsHosts.java._trace
+/.TotalMemory.java._trace
+/.TotalHdd.java._trace
+/.AvailableMemory.java._trace
+/.AvailableHdd.java._trace
+/.AllocationWithoutResourceRequirement.java._trace
+/.NotEnoughAvailableMemory.java._trace
+/.NotEnoughAvailableHdd.java._trace
+/.InstanceDoesNotSatisfyRequirement.java._trace
+/.RequirementNotSatisfied.java._trace
+/.AverageFreeMemoryMetric.java._trace
+/.AverageFreeHddMetric.java._trace
+/.CostMetric.java._trace
+/.CpsCost.java._trace

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cps" nsURI="http://www.example.org/cps" nsPrefix="cps">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="org.eclipse.viatra.query.querybasedfeature"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="CyberPhysicalSystem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requests" upperBound="-1"
         eType="#//Request" containment="true"/>
@@ -10,18 +13,24 @@
         eType="#//HostType" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" upperBound="-1"
         eType="#//HostInstance" changeable="false" volatile="true" transient="true"
-        derived="true"/>
+        derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsHosts"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="applications" upperBound="-1"
         eType="#//ApplicationInstance" changeable="false" volatile="true" transient="true"
-        derived="true"/>
+        derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsApplications"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
         eType="#//ApplicationInstance" containment="true" eOpposite="#//ApplicationInstance/type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
         eType="#//ResourceRequirement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" upperBound="-1"
-        eType="#//ApplicationType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="HostType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMemory" lowerBound="1"
@@ -30,8 +39,7 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
         eType="#//HostInstance" containment="true" eOpposite="#//HostInstance/type"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="canConnectTo" upperBound="-1"
-        eType="#//HostType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Request">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
@@ -46,13 +54,12 @@
         eType="#//ApplicationInstance" eOpposite="#//ApplicationInstance/requirement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="requirement" upperBound="-1"
-        eType="#//Requirement" eOpposite="#//Requirement/instances"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirement" eType="#//Requirement"
+        eOpposite="#//Requirement/instances"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ApplicationType"
         eOpposite="#//ApplicationType/instances"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedTo" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedTo" lowerBound="1"
         eType="#//HostInstance" eOpposite="#//HostInstance/applications"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" eType="#//ApplicationInstance"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResourceRequirement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredMemory" lowerBound="1"
@@ -66,16 +73,30 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//HostType"
         eOpposite="#//HostType/instances"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="availableMemory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableMemory"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="availableHdd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableHdd"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalMemory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalMemory"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalHdd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalHdd"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="applications" upperBound="-1"
         eType="#//ApplicationInstance" eOpposite="#//ApplicationInstance/allocatedTo"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connectedTo" upperBound="-1"
-        eType="#//HostInstance"/>
   </eClassifiers>
 </ecore:EPackage>

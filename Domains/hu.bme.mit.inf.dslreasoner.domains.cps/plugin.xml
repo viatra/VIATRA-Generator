@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated cps -->
+    <package class="hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage" genModel="model/cps.genmodel" uri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableHdd" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="HostInstance" feature-name="availableHdd" package-nsUri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableMemory" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="HostInstance" feature-name="availableMemory" package-nsUri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsApplications" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="CyberPhysicalSystem" feature-name="applications" package-nsUri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsHosts" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="CyberPhysicalSystem" feature-name="hosts" package-nsUri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalHdd" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="HostInstance" feature-name="totalHdd" package-nsUri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalMemory" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
+    <wellbehaving-derived-feature classifier-name="HostInstance" feature-name="totalMemory" package-nsUri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsQueries" id="hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsQueries">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsApplications"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsHosts"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalMemory"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalHdd"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableMemory"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableHdd"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.allocationWithoutResourceRequirement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.notEnoughAvailableMemory"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.notEnoughAvailableHdd"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.instanceDoesNotSatisfyRequirement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.requirementNotSatisfied"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.averageFreeMemoryMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.averageFreeHddMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.costMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsCost"/>
+    </group>
+  </extension>
+</plugin>
