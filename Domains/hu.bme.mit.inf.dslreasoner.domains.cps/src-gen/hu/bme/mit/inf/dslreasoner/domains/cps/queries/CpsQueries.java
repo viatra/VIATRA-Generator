@@ -15,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsHosts;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.InstanceDoesNotSatisfyRequirement;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableHdd;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RedundantInstancesOnSameHost;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalHdd;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalMemory;
@@ -40,6 +41,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>notEnoughAvailableHdd</li>
  * <li>instanceDoesNotSatisfyRequirement</li>
  * <li>requirementNotSatisfied</li>
+ * <li>redundantInstancesOnSameHost</li>
  * <li>averageFreeMemoryMetric</li>
  * <li>averageFreeHddMetric</li>
  * <li>costMetric</li>
@@ -79,6 +81,7 @@ public final class CpsQueries extends BaseGeneratedPatternGroup {
     querySpecifications.add(NotEnoughAvailableHdd.instance());
     querySpecifications.add(InstanceDoesNotSatisfyRequirement.instance());
     querySpecifications.add(RequirementNotSatisfied.instance());
+    querySpecifications.add(RedundantInstancesOnSameHost.instance());
     querySpecifications.add(AverageFreeMemoryMetric.instance());
     querySpecifications.add(AverageFreeHddMetric.instance());
     querySpecifications.add(CostMetric.instance());
@@ -171,6 +174,14 @@ public final class CpsQueries extends BaseGeneratedPatternGroup {
   
   public RequirementNotSatisfied.Matcher getRequirementNotSatisfied(final ViatraQueryEngine engine) {
     return RequirementNotSatisfied.Matcher.on(engine);
+  }
+  
+  public RedundantInstancesOnSameHost getRedundantInstancesOnSameHost() {
+    return RedundantInstancesOnSameHost.instance();
+  }
+  
+  public RedundantInstancesOnSameHost.Matcher getRedundantInstancesOnSameHost(final ViatraQueryEngine engine) {
+    return RedundantInstancesOnSameHost.Matcher.on(engine);
   }
   
   public AverageFreeMemoryMetric getAverageFreeMemoryMetric() {

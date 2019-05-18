@@ -35,6 +35,7 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.notEnoughAvailableHdd"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.instanceDoesNotSatisfyRequirement"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.requirementNotSatisfied"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.redundantInstancesOnSameHost"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.averageFreeMemoryMetric"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.averageFreeHddMetric"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.costMetric"/>

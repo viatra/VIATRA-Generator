@@ -96,6 +96,16 @@ pattern requirementNotSatisfied(Req : Requirement) {
 	check(Instances < RequiredCount);
 }
 
+@Constraint(severity = "error", key = {Req},
+	message = "Redundant instances must not be allocated to the same host.")
+pattern redundantInstancesOnSameHost(Req : Requirement) {
+	Requirement.instances(Req, App1);
+	Requirement.instances(Req, App2);
+	App1 != App2;
+	ApplicationInstance.allocatedTo(App1, Host);
+	ApplicationInstance.allocatedTo(App2, Host);
+}
+
 pattern averageFreeMemoryMetric(Average : java Double) {
 	Average == avg find freeMemoryPercentage(_, #_);
 }

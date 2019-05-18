@@ -14,3 +14,4 @@
 /.AverageFreeHddMetric.java._trace
 /.CostMetric.java._trace
 /.CpsCost.java._trace
+/.RedundantInstancesOnSameHost.java._trace

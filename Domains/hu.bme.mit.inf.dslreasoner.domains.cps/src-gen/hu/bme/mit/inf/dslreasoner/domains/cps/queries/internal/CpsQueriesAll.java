@@ -15,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsHosts;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.InstanceDoesNotSatisfyRequirement;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableHdd;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RedundantInstancesOnSameHost;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalHdd;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalMemory;
@@ -48,6 +49,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>instanceDoesNotSatisfyRequirement</li>
  * <li>satisfyingInstance</li>
  * <li>requirementNotSatisfied</li>
+ * <li>redundantInstancesOnSameHost</li>
  * <li>averageFreeMemoryMetric</li>
  * <li>freeMemoryPercentage</li>
  * <li>averageFreeHddMetric</li>
@@ -94,6 +96,7 @@ public final class CpsQueriesAll extends BaseGeneratedPatternGroup {
     querySpecifications.add(InstanceDoesNotSatisfyRequirement.instance());
     querySpecifications.add(SatisfyingInstance.instance());
     querySpecifications.add(RequirementNotSatisfied.instance());
+    querySpecifications.add(RedundantInstancesOnSameHost.instance());
     querySpecifications.add(AverageFreeMemoryMetric.instance());
     querySpecifications.add(FreeMemoryPercentage.instance());
     querySpecifications.add(AverageFreeHddMetric.instance());
