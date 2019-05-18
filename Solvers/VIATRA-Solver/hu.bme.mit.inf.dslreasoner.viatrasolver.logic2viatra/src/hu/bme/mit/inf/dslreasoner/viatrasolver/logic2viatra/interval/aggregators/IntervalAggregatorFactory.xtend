@@ -8,14 +8,14 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.aggregations.BoundAggre
 import org.eclipse.viatra.query.runtime.matchers.psystem.aggregations.IAggregatorFactory
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
-@AggregatorType(parameterTypes = #[Interval], returnTypes = #[Interval])
+@AggregatorType(parameterTypes=#[Interval], returnTypes=#[Interval])
 abstract class IntervalAggregatorFactory implements IAggregatorFactory {
 	val IntervalAggregationMode mode
-	
+
 	@FinalFieldsConstructor
 	protected new() {
 	}
-	
+
 	override getAggregatorLogic(Class<?> domainClass) {
 		if (domainClass == Interval) {
 			new BoundAggregator(new IntervalAggregationOperator(mode), Interval, Interval)

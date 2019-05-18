@@ -7,8 +7,8 @@ import org.eclipse.xtend.lib.annotations.Data
 
 abstract class Interval implements Comparable<Interval> {
 	static val PRECISION = 32
-	static val ROUND_DOWN = new MathContext(PRECISION, RoundingMode.FLOOR)
-	static val ROUND_UP = new MathContext(PRECISION, RoundingMode.CEILING)
+	package static val ROUND_DOWN = new MathContext(PRECISION, RoundingMode.FLOOR)
+	package static val ROUND_UP = new MathContext(PRECISION, RoundingMode.CEILING)
 
 	private new() {
 	}
