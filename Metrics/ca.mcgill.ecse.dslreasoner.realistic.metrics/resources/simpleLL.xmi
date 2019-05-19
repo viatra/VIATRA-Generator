@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LLMM:List xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:LLMM="llmm"
+    xsi:schemaLocation="llmm linkedList.ecore">
+  <first>
+    <value/>
+    <next>
+      <value/>
+      <next>
+        <value/>
+        <next>
+          <value/>
+        </next>
+      </next>
+    </next>
+  </first>
+</LLMM:List>
