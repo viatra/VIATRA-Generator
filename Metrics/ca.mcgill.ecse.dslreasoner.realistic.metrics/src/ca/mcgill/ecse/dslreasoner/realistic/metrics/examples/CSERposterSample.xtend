@@ -18,6 +18,7 @@ import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 import java.io.PrintWriter
 import linkedList.LinkedListPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
+import simpleStatechart.SimpleStatechartPackage
 
 class CSERposterSample {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -26,15 +27,18 @@ class CSERposterSample {
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
 	static val depth = 1
+	static val REALISTIC = "simpleSCRealistic"
+	static val IRREALISTIC = "simpleSCIrrealistic"
 	
 	def static void main(String[] args) {
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*", new XMIResourceFactoryImpl)
 		YakindummPackage.eINSTANCE.eClass
 		LinkedListPackage.eINSTANCE.eClass
+		SimpleStatechartPackage.eINSTANCE.eClass
 		ReteEngine.getClass
 		
 		val outputs = "outputs"
-		val instModName = "realisticModel"
+		val instModName = REALISTIC
 		val workspace = new FileSystemWorkspace('''resources''', "")
 		val model = workspace.readModel(EObject, instModName+".xmi")
 
@@ -60,7 +64,7 @@ class CSERposterSample {
 		
 		val hood = neighbourhoodComputer.createRepresentation(partialModelOutput, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		
-		val w2 = new PrintWriter(outputs+"/"+instModName+"NEIGHBOURHOOD.gml")
+		val w2 = new PrintWriter(outputs+"/"+instModName+depth+"NEIGHBOURHOOD.gml")
 		
 		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
 		

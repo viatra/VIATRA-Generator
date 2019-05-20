@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simpleSC:Statechart
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simpleSC="simpleSC"
+    xsi:schemaLocation="simpleSC simpleStatechart.ecore">
+  <state next="//@state.1"/>
+  <state next="//@state.0 //@state.2 //@state.3 //@state.4"/>
+  <state next="//@state.1"/>
+  <state/>
+  <state next="//@state.0"/>
+  <entry entry="//@state.0"/>
+</simpleSC:Statechart>

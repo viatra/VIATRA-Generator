@@ -29,9 +29,11 @@ class Neighbourhood2Gml {
 		val List<CharSequence> allEdgesText = newArrayList
 		val Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children = new HashMap
 
-		val Map<String, Object> edgeName2targetNode = new HashMap
-		val Map<String, List<Integer>> edgeName2inMultips = new HashMap
-		val Map<String, List<Integer>> edgeName2outMultips = new HashMap
+		// TODO these should not be hashmaps, as a given node can have multiple sameNamed edges to different 
+		val Map<IncomingRelation, Object> edgeNameIn2targetNode = new HashMap
+		val Map<OutgoingRelation, Object> edgeNameOut2targetNode = new HashMap
+		val Map<IncomingRelation, List<Integer>> edgeName2inMultips = new HashMap
+		val Map<OutgoingRelation, List<Integer>> edgeName2outMultips = new HashMap
 
 		val modRep = n.modelRepresentation as HashMap
 		// Store node text
@@ -61,8 +63,8 @@ class Neighbourhood2Gml {
 		// edge transforming
 		for (currentNode : children.keySet) {
 			println(currentNode)
-			transformEdge(edgeName2targetNode, edgeName2inMultips, edgeName2outMultips, allEdgesText, currentNode,
-				relevantObjectToID, children)
+			transformEdge(edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
+				allEdgesText, currentNode, relevantObjectToID, children)
 			for (edgeText : allEdgesText) {
 				fullEdgeText.add(edgeText)
 			}
@@ -83,17 +85,17 @@ class Neighbourhood2Gml {
 		'''.toString
 	}
 
-	protected def transformEdge(Map<String, Object> edgeName2targetNode, Map<String, List<Integer>> edgeName2inMultips,
-		Map<String, List<Integer>> edgeName2outMultips, List<CharSequence> allEdgesText,
+	protected def transformEdge(Map<IncomingRelation, Object> edgeNameIn2targetNode,
+		Map<OutgoingRelation, Object> edgeNameOut2targetNode, Map<IncomingRelation, List<Integer>> edgeName2inMultips,
+		Map<OutgoingRelation, List<Integer>> edgeName2outMultips, List<CharSequence> allEdgesText,
 		AbstractNodeDescriptor currentNode, Map<Object, Integer> relevantObjectToID,
 		Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children) {
 
-		edgeName2targetNode.clear
+		edgeNameIn2targetNode.clear
+		edgeNameOut2targetNode.clear
 		edgeName2inMultips.clear
 		edgeName2outMultips.clear
-		val List<String> modifiedEdgeNames = newArrayList
-
-		val sourceID = currentNode.lookup(relevantObjectToID)
+		val List<Object> modifiedEdgeNames = newArrayList
 
 		val List<FurtherNodeDescriptor> subNodes = currentNode.lookup(children)
 		for (subNode : subNodes) {
@@ -103,10 +105,9 @@ class Neighbourhood2Gml {
 //			mapPrinter(subNode.incomingEdges)
 //			println
 //			println
-
 			// handling outgoing edges
 			for (outEdge : subNode.outgoingEdges.keySet) {
-				val edgeName = (outEdge as OutgoingRelation).type
+				val edgeName = (outEdge as OutgoingRelation)
 				val edgePointingTo = (outEdge as OutgoingRelation).to
 				val edgeOutMultip = outEdge.lookup(subNode.outgoingEdges) as Integer
 
@@ -116,18 +117,18 @@ class Neighbourhood2Gml {
 				} else {
 					edgeName2outMultips.put(edgeName, newArrayList(edgeOutMultip))
 				}
-				edgeName2targetNode.put(edgeName, edgePointingTo)
+				edgeNameOut2targetNode.put(edgeName, edgePointingTo)
 
 			}
 
 		}
 
 		// handling incoming edges
-		for (outEdgeTarget : edgeName2targetNode.values) {
+		for (outEdgeTarget : edgeNameOut2targetNode.values) {
 			// currentNode = sourceParent
 			for (subNode : (outEdgeTarget as AbstractNodeDescriptor).lookup(children)) {
 				for (inEdge : subNode.incomingEdges.keySet) {
-					val edgeName = (inEdge as IncomingRelation).type
+					val edgeName = (inEdge as IncomingRelation)
 					val edgePointingFrom = (inEdge as IncomingRelation).from
 					val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
 
@@ -138,6 +139,7 @@ class Neighbourhood2Gml {
 							edgeName2inMultips.put(edgeName, newArrayList(edgeInMultip))
 							modifiedEdgeNames.add(edgeName)
 						}
+						edgeNameIn2targetNode.put(edgeName, edgePointingFrom)
 					}
 //				edgeName2targetNode.put(edgeName, edgePointingFrom)
 				}
@@ -146,75 +148,98 @@ class Neighbourhood2Gml {
 //			mapPrinter(edgeName2inMultips)
 			// fill in the 0 multiplicities (INCOMING)
 			for (edgeSoFar : modifiedEdgeNames) {
-				var inEdgesNum = edgeSoFar.lookup(edgeName2inMultips).size
+				val edgeAsRelation = edgeSoFar as IncomingRelation
+				var inEdgesNum = edgeAsRelation.lookup(edgeName2inMultips).size
 				val targetNode = outEdgeTarget as AbstractNodeDescriptor
 				val targetChildrenNum = targetNode.lookup(children).size
 				println("in " + edgeSoFar + "=>" + inEdgesNum + " != " + outEdgeTarget + "=>" + targetChildrenNum)
 				while (inEdgesNum != targetChildrenNum) {
 //					println("in" + inEdgesNum + "!=" + targetChildrenNum)
-					edgeSoFar.lookup(edgeName2inMultips).add(0)
+					edgeAsRelation.lookup(edgeName2inMultips).add(0)
 					inEdgesNum++
 				}
 			}
 			modifiedEdgeNames.clear
 
 		}
-		
+
 		mapPrinter(edgeName2outMultips)
-		
-		//TODO
 
 		// fill in the 0 multiplicities (OUTGOING)
-//		for (edge : edgeName2outMultips.keySet) {
-//			// handling outgoing edges
-//			var outEdgesNum = edge.lookup(edgeName2outMultips).size
-//			val sourceChildrenNum = currentNode.lookup(children).size
-//
-//			println("out" + outEdgesNum + "!=" + sourceChildrenNum)
-//			while (outEdgesNum != sourceChildrenNum) {
-//				edge.lookup(edgeName2outMultips).add(0)
-//				outEdgesNum++
-//			}
-//		}
-		println("xxxxxxxx")
-		mapPrinter(edgeName2targetNode)
+		for (edge : edgeName2outMultips.keySet) {
+			// handling outgoing edges
+			var outEdgesNum = edge.lookup(edgeName2outMultips).size
+			val sourceChildrenNum = currentNode.lookup(children).size
 
-		updateEdgeList(sourceID, relevantObjectToID, edgeName2targetNode, edgeName2inMultips, edgeName2outMultips,
+			println("out " + edge + "=>" + outEdgesNum + " != " + currentNode + "=>" + sourceChildrenNum)
+			while (outEdgesNum != sourceChildrenNum) {
+				edge.lookup(edgeName2outMultips).add(0)
+				outEdgesNum++
+			}
+		}
+		println("xxxxxxxx")
+		mapPrinter(edgeNameIn2targetNode)
+		mapPrinter(edgeNameOut2targetNode)
+		
+		
+
+		updateEdgeList(currentNode, relevantObjectToID, edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
 			allEdgesText)
 
 	}
 
-	def updateEdgeList(Integer sourceID, Map<Object, Integer> relevantObjectToID,
-		Map<String, Object> edgeName2targetNode, Map<String, List<Integer>> edgeName2inMultips,
-		Map<String, List<Integer>> edgeName2outMultips, List<CharSequence> allEdgesTexts) {
+	def updateEdgeList(AbstractNodeDescriptor currentNode, Map<Object, Integer> relevantObjectToID,
+		Map<IncomingRelation, Object> edgeNameIn2targetNode, 
+		Map<OutgoingRelation, Object> edgeNameOut2targetNode,
+		Map<IncomingRelation, List<Integer>> edgeName2inMultips,
+		Map<OutgoingRelation, List<Integer>> edgeName2outMultips, List<CharSequence> allEdgesTexts) {
 
-		for (edge : edgeName2targetNode.keySet) {
-			val targetID = edge.lookup(edgeName2targetNode).lookup(relevantObjectToID)
+		for (outEdge : edgeNameOut2targetNode.keySet) {
+			// TODO
+			val sourceID = currentNode.lookup(relevantObjectToID)
+			val targetNode = outEdge.lookup(edgeNameOut2targetNode)
+			val targetID = targetNode.lookup(relevantObjectToID)
+			val edgeName = outEdge.type
+			
+			//finding corresponding Incoming edge
+			var correspInEdgeSet = edgeNameIn2targetNode.keySet.filter[type.equals(edgeName) && lookup(edgeNameIn2targetNode).equals(currentNode)]
+			println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+			println(currentNode)
+			println(outEdge)
+			println(targetNode)
+			println(edgeNameIn2targetNode)
+			println(correspInEdgeSet.size)
+			val correspInEdge = correspInEdgeSet.get(0)
+			
+
 			allEdgesTexts.add(
 				'''
 					edge
 						[
 							source  «sourceID»
 							target  «targetID»
-							label	"«edge»"
+							label	"«edgeName»"
 							graphics
 							[
 								fill	"#000000"
 								targetArrow	"standard"
+								Line
+								[
+								]
 							]
 							LabelGraphics
 							[
-								text	"«edge»"
+								text	"«edgeName»"
 								fontSize	12
 								fontName	"Dialog"
 								configuration	"AutoFlippingLabel"
 								model	"six_pos"
 								position	"head"
 							]
-							«IF edgeName2outMultips.containsKey(edge)»
+							«IF edgeName2outMultips.containsKey(outEdge)»
 								LabelGraphics
 								[
-									text	"«edge.lookup(edgeName2outMultips).toString»"
+									text	"«outEdge.lookup(edgeName2outMultips).toString»"
 									fontSize	12
 									fontName	"Dialog"
 									configuration	"AutoFlippingLabel"
@@ -222,10 +247,10 @@ class Neighbourhood2Gml {
 									position	"stail"
 								]
 							«ENDIF»
-							«IF edgeName2inMultips.containsKey(edge)»
+							«IF edgeName2inMultips.containsKey(correspInEdge)»
 								LabelGraphics
 								[
-									text	"«edge.lookup(edgeName2inMultips).toString»"
+									text	"«correspInEdge.lookup(edgeName2inMultips).toString»"
 									fontSize	12
 									fontName	"Dialog"
 									configuration	"AutoFlippingLabel"

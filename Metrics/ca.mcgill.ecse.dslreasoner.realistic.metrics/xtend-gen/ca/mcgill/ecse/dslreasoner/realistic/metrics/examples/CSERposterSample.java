@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import simpleStatechart.SimpleStatechartPackage;
 
 @SuppressWarnings("all")
 public class CSERposterSample {
@@ -53,6 +54,10 @@ public class CSERposterSample {
   
   private final static int depth = 1;
   
+  private final static String REALISTIC = "simpleSCRealistic";
+  
+  private final static String IRREALISTIC = "simpleSCIrrealistic";
+  
   public static void main(final String[] args) {
     try {
       Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
@@ -60,9 +65,10 @@ public class CSERposterSample {
       _extensionToFactoryMap.put("*", _xMIResourceFactoryImpl);
       YakindummPackage.eINSTANCE.eClass();
       LinkedListPackage.eINSTANCE.eClass();
+      SimpleStatechartPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
       final String outputs = "outputs";
-      final String instModName = "realisticModel";
+      final String instModName = CSERposterSample.REALISTIC;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("resources");
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_builder.toString(), "");
@@ -92,7 +98,7 @@ public class CSERposterSample {
       writer.print(CSERposterSample.partialVisualizer.transform(partialModelOutput));
       writer.close();
       final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> hood = CSERposterSample.neighbourhoodComputer.createRepresentation(partialModelOutput, CSERposterSample.depth, Integer.MAX_VALUE, Integer.MAX_VALUE);
-      final PrintWriter w2 = new PrintWriter((((outputs + "/") + instModName) + "NEIGHBOURHOOD.gml"));
+      final PrintWriter w2 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
       w2.print(CSERposterSample.neighbourhoodVisualizer.transform(hood, partialModelOutput));
       w2.close();
       InputOutput.<String>println("visualization done");

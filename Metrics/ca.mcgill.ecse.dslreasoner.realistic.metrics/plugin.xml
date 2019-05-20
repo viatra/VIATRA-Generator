@@ -14,4 +14,12 @@
             genModel="resources/linkedList.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated simpleStatechart -->
+      <package
+            uri="simpleSC"
+            class="simpleStatechart.SimpleStatechartPackage"
+            genModel="resources/simpleStatechart.genmodel"/>
+   </extension>
+
 </plugin>
