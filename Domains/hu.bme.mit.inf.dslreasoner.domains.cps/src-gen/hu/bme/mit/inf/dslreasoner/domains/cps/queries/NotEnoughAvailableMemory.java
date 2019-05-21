@@ -4,7 +4,7 @@
 package hu.bme.mit.inf.dslreasoner.domains.cps.queries;
 
 import hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AvailableMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.AvailableMemory;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;

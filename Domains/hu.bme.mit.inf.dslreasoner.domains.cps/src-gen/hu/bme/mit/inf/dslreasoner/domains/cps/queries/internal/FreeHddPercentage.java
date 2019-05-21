@@ -3,8 +3,8 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal;
 
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AvailableHdd;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalHdd;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.AvailableHdd;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.TotalHdd;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;

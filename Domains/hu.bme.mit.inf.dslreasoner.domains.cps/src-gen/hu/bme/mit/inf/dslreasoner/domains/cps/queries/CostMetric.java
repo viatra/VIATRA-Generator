@@ -43,6 +43,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
+ *         // Total cost
+ *         
  *         pattern costMetric(Cost : java Integer) {
  *         	Cost == sum find cpsCost(_, #_);
  *         }
@@ -226,6 +228,8 @@ public final class CostMetric extends BaseGeneratedEMFQuerySpecification<CostMet
    * 
    * <p>Original source:
    * <code><pre>
+   * // Total cost
+   * 
    * pattern costMetric(Cost : java Integer) {
    * 	Cost == sum find cpsCost(_, #_);
    * }

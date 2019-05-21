@@ -2,11 +2,9 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.cps.impl;
 
-import hu.bme.mit.inf.dslreasoner.domains.cps.ApplicationInstance;
 import hu.bme.mit.inf.dslreasoner.domains.cps.ApplicationType;
 import hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage;
 import hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem;
-import hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance;
 import hu.bme.mit.inf.dslreasoner.domains.cps.HostType;
 import hu.bme.mit.inf.dslreasoner.domains.cps.Request;
 
@@ -17,7 +15,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -36,8 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.impl.CyberPhysicalSystemImpl#getRequests <em>Requests</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.impl.CyberPhysicalSystemImpl#getApplicationTypes <em>Application Types</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.impl.CyberPhysicalSystemImpl#getHostTypes <em>Host Types</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.impl.CyberPhysicalSystemImpl#getHosts <em>Hosts</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.impl.CyberPhysicalSystemImpl#getApplications <em>Applications</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,28 +67,6 @@ public class CyberPhysicalSystemImpl extends MinimalEObjectImpl.Container implem
 	 * @ordered
 	 */
 	protected EList<HostType> hostTypes;
-
-	/**
-	 * The cached setting delegate for the '{@link #getHosts() <em>Hosts</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHosts()
-	 * @generated
-	 * @ordered
-	 */
-	protected EStructuralFeature.Internal.SettingDelegate HOSTS__ESETTING_DELEGATE = ((EStructuralFeature.Internal) CpsPackage.Literals.CYBER_PHYSICAL_SYSTEM__HOSTS)
-			.getSettingDelegate();
-
-	/**
-	 * The cached setting delegate for the '{@link #getApplications() <em>Applications</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getApplications()
-	 * @generated
-	 * @ordered
-	 */
-	protected EStructuralFeature.Internal.SettingDelegate APPLICATIONS__ESETTING_DELEGATE = ((EStructuralFeature.Internal) CpsPackage.Literals.CYBER_PHYSICAL_SYSTEM__APPLICATIONS)
-			.getSettingDelegate();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,28 +134,6 @@ public class CyberPhysicalSystemImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public EList<HostInstance> getHosts() {
-		return (EList<HostInstance>) HOSTS__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public EList<ApplicationInstance> getApplications() {
-		return (EList<ApplicationInstance>) APPLICATIONS__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -210,10 +161,6 @@ public class CyberPhysicalSystemImpl extends MinimalEObjectImpl.Container implem
 			return getApplicationTypes();
 		case CpsPackage.CYBER_PHYSICAL_SYSTEM__HOST_TYPES:
 			return getHostTypes();
-		case CpsPackage.CYBER_PHYSICAL_SYSTEM__HOSTS:
-			return getHosts();
-		case CpsPackage.CYBER_PHYSICAL_SYSTEM__APPLICATIONS:
-			return getApplications();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -278,10 +225,6 @@ public class CyberPhysicalSystemImpl extends MinimalEObjectImpl.Container implem
 			return applicationTypes != null && !applicationTypes.isEmpty();
 		case CpsPackage.CYBER_PHYSICAL_SYSTEM__HOST_TYPES:
 			return hostTypes != null && !hostTypes.isEmpty();
-		case CpsPackage.CYBER_PHYSICAL_SYSTEM__HOSTS:
-			return HOSTS__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
-		case CpsPackage.CYBER_PHYSICAL_SYSTEM__APPLICATIONS:
-			return APPLICATIONS__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
 		}
 		return super.eIsSet(featureID);
 	}

@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see hu.bme.mit.inf.dslreasoner.domains.cps.CpsFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore settingDelegates='org.eclipse.viatra.query.querybasedfeature'"
  * @generated
  */
 public interface CpsPackage extends EPackage {
@@ -95,31 +94,13 @@ public interface CpsPackage extends EPackage {
 	int CYBER_PHYSICAL_SYSTEM__HOST_TYPES = 2;
 
 	/**
-	 * The feature id for the '<em><b>Hosts</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CYBER_PHYSICAL_SYSTEM__HOSTS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Applications</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CYBER_PHYSICAL_SYSTEM__APPLICATIONS = 4;
-
-	/**
 	 * The number of structural features of the '<em>Cyber Physical System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYBER_PHYSICAL_SYSTEM_FEATURE_COUNT = 5;
+	int CYBER_PHYSICAL_SYSTEM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Cyber Physical System</em>' class.
@@ -471,49 +452,13 @@ public interface CpsPackage extends EPackage {
 	int HOST_INSTANCE__TYPE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Available Memory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HOST_INSTANCE__AVAILABLE_MEMORY = 1;
-
-	/**
-	 * The feature id for the '<em><b>Available Hdd</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HOST_INSTANCE__AVAILABLE_HDD = 2;
-
-	/**
-	 * The feature id for the '<em><b>Total Memory</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HOST_INSTANCE__TOTAL_MEMORY = 3;
-
-	/**
-	 * The feature id for the '<em><b>Total Hdd</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HOST_INSTANCE__TOTAL_HDD = 4;
-
-	/**
 	 * The feature id for the '<em><b>Applications</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HOST_INSTANCE__APPLICATIONS = 5;
+	int HOST_INSTANCE__APPLICATIONS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Host Instance</em>' class.
@@ -522,7 +467,7 @@ public interface CpsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HOST_INSTANCE_FEATURE_COUNT = 6;
+	int HOST_INSTANCE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Host Instance</em>' class.
@@ -575,28 +520,6 @@ public interface CpsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCyberPhysicalSystem_HostTypes();
-
-	/**
-	 * Returns the meta object for the reference list '{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getHosts <em>Hosts</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Hosts</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getHosts()
-	 * @see #getCyberPhysicalSystem()
-	 * @generated
-	 */
-	EReference getCyberPhysicalSystem_Hosts();
-
-	/**
-	 * Returns the meta object for the reference list '{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getApplications <em>Applications</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Applications</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getApplications()
-	 * @see #getCyberPhysicalSystem()
-	 * @generated
-	 */
-	EReference getCyberPhysicalSystem_Applications();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.cps.ApplicationType <em>Application Type</em>}'.
@@ -867,50 +790,6 @@ public interface CpsPackage extends EPackage {
 	EReference getHostInstance_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getAvailableMemory <em>Available Memory</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Available Memory</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getAvailableMemory()
-	 * @see #getHostInstance()
-	 * @generated
-	 */
-	EAttribute getHostInstance_AvailableMemory();
-
-	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getAvailableHdd <em>Available Hdd</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Available Hdd</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getAvailableHdd()
-	 * @see #getHostInstance()
-	 * @generated
-	 */
-	EAttribute getHostInstance_AvailableHdd();
-
-	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getTotalMemory <em>Total Memory</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Total Memory</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getTotalMemory()
-	 * @see #getHostInstance()
-	 * @generated
-	 */
-	EAttribute getHostInstance_TotalMemory();
-
-	/**
-	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getTotalHdd <em>Total Hdd</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Total Hdd</em>'.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getTotalHdd()
-	 * @see #getHostInstance()
-	 * @generated
-	 */
-	EAttribute getHostInstance_TotalHdd();
-
-	/**
 	 * Returns the meta object for the reference list '{@link hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance#getApplications <em>Applications</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -977,22 +856,6 @@ public interface CpsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CYBER_PHYSICAL_SYSTEM__HOST_TYPES = eINSTANCE.getCyberPhysicalSystem_HostTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>Hosts</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CYBER_PHYSICAL_SYSTEM__HOSTS = eINSTANCE.getCyberPhysicalSystem_Hosts();
-
-		/**
-		 * The meta object literal for the '<em><b>Applications</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CYBER_PHYSICAL_SYSTEM__APPLICATIONS = eINSTANCE.getCyberPhysicalSystem_Applications();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.cps.impl.ApplicationTypeImpl <em>Application Type</em>}' class.
@@ -1207,38 +1070,6 @@ public interface CpsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference HOST_INSTANCE__TYPE = eINSTANCE.getHostInstance_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Available Memory</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute HOST_INSTANCE__AVAILABLE_MEMORY = eINSTANCE.getHostInstance_AvailableMemory();
-
-		/**
-		 * The meta object literal for the '<em><b>Available Hdd</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute HOST_INSTANCE__AVAILABLE_HDD = eINSTANCE.getHostInstance_AvailableHdd();
-
-		/**
-		 * The meta object literal for the '<em><b>Total Memory</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute HOST_INSTANCE__TOTAL_MEMORY = eINSTANCE.getHostInstance_TotalMemory();
-
-		/**
-		 * The meta object literal for the '<em><b>Total Hdd</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute HOST_INSTANCE__TOTAL_HDD = eINSTANCE.getHostInstance_TotalHdd();
 
 		/**
 		 * The meta object literal for the '<em><b>Applications</b></em>' reference list feature.

@@ -3,22 +3,22 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.cps.queries;
 
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.Allocate;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AllocationWithoutResourceRequirement;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AvailableHdd;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AvailableMemory;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeHddMetric;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeMemoryMetric;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CostMetric;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsApplications;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsCost;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsHosts;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CreateHostInstance;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.GuidanceObjective;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.InstanceDoesNotSatisfyRequirement;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableHdd;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableMemory;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RedundantInstancesOnSameHost;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RemoveHostInstance;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalHdd;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.ResourceRequirement;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.UnallocateAppInstance;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 
@@ -30,12 +30,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package hu.bme.mit.inf.dslreasoner.domains.cps.queries, the group contains the definition of the following patterns: <ul>
- * <li>cpsApplications</li>
- * <li>cpsHosts</li>
- * <li>totalMemory</li>
- * <li>totalHdd</li>
- * <li>availableMemory</li>
- * <li>availableHdd</li>
+ * <li>resourceRequirement</li>
  * <li>allocationWithoutResourceRequirement</li>
  * <li>notEnoughAvailableMemory</li>
  * <li>notEnoughAvailableHdd</li>
@@ -46,6 +41,11 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>averageFreeHddMetric</li>
  * <li>costMetric</li>
  * <li>cpsCost</li>
+ * <li>allocate</li>
+ * <li>unallocateAppInstance</li>
+ * <li>createHostInstance</li>
+ * <li>removeHostInstance</li>
+ * <li>guidanceObjective</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -70,12 +70,7 @@ public final class CpsQueries extends BaseGeneratedPatternGroup {
   private static CpsQueries INSTANCE;
   
   private CpsQueries() {
-    querySpecifications.add(CpsApplications.instance());
-    querySpecifications.add(CpsHosts.instance());
-    querySpecifications.add(TotalMemory.instance());
-    querySpecifications.add(TotalHdd.instance());
-    querySpecifications.add(AvailableMemory.instance());
-    querySpecifications.add(AvailableHdd.instance());
+    querySpecifications.add(ResourceRequirement.instance());
     querySpecifications.add(AllocationWithoutResourceRequirement.instance());
     querySpecifications.add(NotEnoughAvailableMemory.instance());
     querySpecifications.add(NotEnoughAvailableHdd.instance());
@@ -86,54 +81,19 @@ public final class CpsQueries extends BaseGeneratedPatternGroup {
     querySpecifications.add(AverageFreeHddMetric.instance());
     querySpecifications.add(CostMetric.instance());
     querySpecifications.add(CpsCost.instance());
+    querySpecifications.add(Allocate.instance());
+    querySpecifications.add(UnallocateAppInstance.instance());
+    querySpecifications.add(CreateHostInstance.instance());
+    querySpecifications.add(RemoveHostInstance.instance());
+    querySpecifications.add(GuidanceObjective.instance());
   }
   
-  public CpsApplications getCpsApplications() {
-    return CpsApplications.instance();
+  public ResourceRequirement getResourceRequirement() {
+    return ResourceRequirement.instance();
   }
   
-  public CpsApplications.Matcher getCpsApplications(final ViatraQueryEngine engine) {
-    return CpsApplications.Matcher.on(engine);
-  }
-  
-  public CpsHosts getCpsHosts() {
-    return CpsHosts.instance();
-  }
-  
-  public CpsHosts.Matcher getCpsHosts(final ViatraQueryEngine engine) {
-    return CpsHosts.Matcher.on(engine);
-  }
-  
-  public TotalMemory getTotalMemory() {
-    return TotalMemory.instance();
-  }
-  
-  public TotalMemory.Matcher getTotalMemory(final ViatraQueryEngine engine) {
-    return TotalMemory.Matcher.on(engine);
-  }
-  
-  public TotalHdd getTotalHdd() {
-    return TotalHdd.instance();
-  }
-  
-  public TotalHdd.Matcher getTotalHdd(final ViatraQueryEngine engine) {
-    return TotalHdd.Matcher.on(engine);
-  }
-  
-  public AvailableMemory getAvailableMemory() {
-    return AvailableMemory.instance();
-  }
-  
-  public AvailableMemory.Matcher getAvailableMemory(final ViatraQueryEngine engine) {
-    return AvailableMemory.Matcher.on(engine);
-  }
-  
-  public AvailableHdd getAvailableHdd() {
-    return AvailableHdd.instance();
-  }
-  
-  public AvailableHdd.Matcher getAvailableHdd(final ViatraQueryEngine engine) {
-    return AvailableHdd.Matcher.on(engine);
+  public ResourceRequirement.Matcher getResourceRequirement(final ViatraQueryEngine engine) {
+    return ResourceRequirement.Matcher.on(engine);
   }
   
   public AllocationWithoutResourceRequirement getAllocationWithoutResourceRequirement() {
@@ -214,5 +174,45 @@ public final class CpsQueries extends BaseGeneratedPatternGroup {
   
   public CpsCost.Matcher getCpsCost(final ViatraQueryEngine engine) {
     return CpsCost.Matcher.on(engine);
+  }
+  
+  public Allocate getAllocate() {
+    return Allocate.instance();
+  }
+  
+  public Allocate.Matcher getAllocate(final ViatraQueryEngine engine) {
+    return Allocate.Matcher.on(engine);
+  }
+  
+  public UnallocateAppInstance getUnallocateAppInstance() {
+    return UnallocateAppInstance.instance();
+  }
+  
+  public UnallocateAppInstance.Matcher getUnallocateAppInstance(final ViatraQueryEngine engine) {
+    return UnallocateAppInstance.Matcher.on(engine);
+  }
+  
+  public CreateHostInstance getCreateHostInstance() {
+    return CreateHostInstance.instance();
+  }
+  
+  public CreateHostInstance.Matcher getCreateHostInstance(final ViatraQueryEngine engine) {
+    return CreateHostInstance.Matcher.on(engine);
+  }
+  
+  public RemoveHostInstance getRemoveHostInstance() {
+    return RemoveHostInstance.instance();
+  }
+  
+  public RemoveHostInstance.Matcher getRemoveHostInstance(final ViatraQueryEngine engine) {
+    return RemoveHostInstance.Matcher.on(engine);
+  }
+  
+  public GuidanceObjective getGuidanceObjective() {
+    return GuidanceObjective.instance();
+  }
+  
+  public GuidanceObjective.Matcher getGuidanceObjective(final ViatraQueryEngine engine) {
+    return GuidanceObjective.Matcher.on(engine);
   }
 }

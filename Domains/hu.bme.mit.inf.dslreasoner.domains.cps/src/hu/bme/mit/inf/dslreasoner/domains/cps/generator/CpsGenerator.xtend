@@ -5,6 +5,8 @@ import hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem
 import hu.bme.mit.inf.dslreasoner.domains.cps.HostType
 import java.util.Collection
 import java.util.Random
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 
 class CpsGenerator {
 	extension val CpsFactory = CpsFactory.eINSTANCE
@@ -28,8 +30,11 @@ class CpsGenerator {
 	}
 
 	def generateCpsProblem() {
+		val resourceSet = new ResourceSetImpl
+		val resource = resourceSet.createResource(URI.createFileURI("dummy.dummyext"))
 		createCyberPhysicalSystem => [
 			val cps = it
+			resource.contents += cps
 			createLowCpuHostTypes
 			val highCpuHostTypes = createHighCpuHostTypes
 			for (var int i = 0; i < applicationTypeCount; i++) {
@@ -58,6 +63,7 @@ class CpsGenerator {
 		val hdd = nextInt(MIN_HDD, MAX_HDD)
 		for (hostType : allowedHostTypes) {
 			appType.requirements += createResourceRequirement => [
+				it.hostType = hostType
 				requiredMemory = memory
 				requiredHdd = hdd
 			]
@@ -83,6 +89,7 @@ class CpsGenerator {
 
 	private def createHostType(CyberPhysicalSystem it, int cost, int memory, int hdd) {
 		val hostType = createHostType => [
+			it.cost = cost
 			defaultMemory = memory
 			defaultHdd = hdd
 		]

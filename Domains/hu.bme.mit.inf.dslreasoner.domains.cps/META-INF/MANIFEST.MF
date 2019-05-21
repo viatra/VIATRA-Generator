@@ -18,7 +18,12 @@ Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.xtend.lib;bundle-version="2.16.0",
- org.eclipse.xtend.lib.macro;bundle-version="2.16.0"
+ org.eclipse.xtend.lib.macro;bundle-version="2.16.0",
+ hu.bme.mit.inf.dslreasoner.application;bundle-version="1.0.0",
+ org.eclipse.viatra.dse;bundle-version="0.22.0",
+ org.eclipse.viatra.dse.genetic;bundle-version="0.22.0",
+ hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner;bundle-version="1.0.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.15.0"
 Import-Package: org.apache.log4j
 Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.domains.cps
 Bundle-ActivationPolicy: lazy

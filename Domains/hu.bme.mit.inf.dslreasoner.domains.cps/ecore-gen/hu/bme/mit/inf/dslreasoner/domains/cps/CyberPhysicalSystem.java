@@ -18,8 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getRequests <em>Requests</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getApplicationTypes <em>Application Types</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getHostTypes <em>Host Types</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getHosts <em>Hosts</em>}</li>
- *   <li>{@link hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem#getApplications <em>Applications</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage#getCyberPhysicalSystem()
@@ -74,39 +72,5 @@ public interface CyberPhysicalSystem extends EObject {
 	 * @generated
 	 */
 	EList<HostType> getHostTypes();
-
-	/**
-	 * Returns the value of the '<em><b>Hosts</b></em>' reference list.
-	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.domains.cps.HostInstance}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Hosts</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Hosts</em>' reference list.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage#getCyberPhysicalSystem_Hosts()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsHosts'"
-	 * @generated
-	 */
-	EList<HostInstance> getHosts();
-
-	/**
-	 * Returns the value of the '<em><b>Applications</b></em>' reference list.
-	 * The list contents are of type {@link hu.bme.mit.inf.dslreasoner.domains.cps.ApplicationInstance}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Applications</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Applications</em>' reference list.
-	 * @see hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage#getCyberPhysicalSystem_Applications()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsApplications'"
-	 * @generated
-	 */
-	EList<ApplicationInstance> getApplications();
 
 } // CyberPhysicalSystem

@@ -193,26 +193,6 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getCyberPhysicalSystem_Hosts() {
-		return (EReference) cyberPhysicalSystemEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCyberPhysicalSystem_Applications() {
-		return (EReference) cyberPhysicalSystemEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getApplicationType() {
 		return applicationTypeEClass;
 	}
@@ -463,48 +443,8 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getHostInstance_AvailableMemory() {
-		return (EAttribute) hostInstanceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getHostInstance_AvailableHdd() {
-		return (EAttribute) hostInstanceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getHostInstance_TotalMemory() {
-		return (EAttribute) hostInstanceEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getHostInstance_TotalHdd() {
-		return (EAttribute) hostInstanceEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getHostInstance_Applications() {
-		return (EReference) hostInstanceEClass.getEStructuralFeatures().get(5);
+		return (EReference) hostInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -541,8 +481,6 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 		createEReference(cyberPhysicalSystemEClass, CYBER_PHYSICAL_SYSTEM__REQUESTS);
 		createEReference(cyberPhysicalSystemEClass, CYBER_PHYSICAL_SYSTEM__APPLICATION_TYPES);
 		createEReference(cyberPhysicalSystemEClass, CYBER_PHYSICAL_SYSTEM__HOST_TYPES);
-		createEReference(cyberPhysicalSystemEClass, CYBER_PHYSICAL_SYSTEM__HOSTS);
-		createEReference(cyberPhysicalSystemEClass, CYBER_PHYSICAL_SYSTEM__APPLICATIONS);
 
 		applicationTypeEClass = createEClass(APPLICATION_TYPE);
 		createEReference(applicationTypeEClass, APPLICATION_TYPE__INSTANCES);
@@ -575,10 +513,6 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 
 		hostInstanceEClass = createEClass(HOST_INSTANCE);
 		createEReference(hostInstanceEClass, HOST_INSTANCE__TYPE);
-		createEAttribute(hostInstanceEClass, HOST_INSTANCE__AVAILABLE_MEMORY);
-		createEAttribute(hostInstanceEClass, HOST_INSTANCE__AVAILABLE_HDD);
-		createEAttribute(hostInstanceEClass, HOST_INSTANCE__TOTAL_MEMORY);
-		createEAttribute(hostInstanceEClass, HOST_INSTANCE__TOTAL_HDD);
 		createEReference(hostInstanceEClass, HOST_INSTANCE__APPLICATIONS);
 	}
 
@@ -624,12 +558,6 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 		initEReference(getCyberPhysicalSystem_HostTypes(), this.getHostType(), null, "hostTypes", null, 0, -1,
 				CyberPhysicalSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCyberPhysicalSystem_Hosts(), this.getHostInstance(), null, "hosts", null, 0, -1,
-				CyberPhysicalSystem.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCyberPhysicalSystem_Applications(), this.getApplicationInstance(), null, "applications", null,
-				0, -1, CyberPhysicalSystem.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(applicationTypeEClass, ApplicationType.class, "ApplicationType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -703,17 +631,6 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 		initEReference(getHostInstance_Type(), this.getHostType(), this.getHostType_Instances(), "type", null, 1, 1,
 				HostInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHostInstance_AvailableMemory(), ecorePackage.getEInt(), "availableMemory", null, 0, 1,
-				HostInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHostInstance_AvailableHdd(), ecorePackage.getEInt(), "availableHdd", null, 0, 1,
-				HostInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHostInstance_TotalMemory(), ecorePackage.getEInt(), "totalMemory", null, 0, 1,
-				HostInstance.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHostInstance_TotalHdd(), ecorePackage.getEInt(), "totalHdd", null, 0, 1, HostInstance.class,
-				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getHostInstance_Applications(), this.getApplicationInstance(),
 				this.getApplicationInstance_AllocatedTo(), "applications", null, 0, -1, HostInstance.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
@@ -721,45 +638,6 @@ public class CpsPackageImpl extends EPackageImpl implements CpsPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
-		// org.eclipse.viatra.query.querybasedfeature
-		createOrgAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
-		addAnnotation(this, source, new String[] { "settingDelegates", "org.eclipse.viatra.query.querybasedfeature" });
-	}
-
-	/**
-	 * Initializes the annotations for <b>org.eclipse.viatra.query.querybasedfeature</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createOrgAnnotations() {
-		String source = "org.eclipse.viatra.query.querybasedfeature";
-		addAnnotation(getCyberPhysicalSystem_Hosts(), source,
-				new String[] { "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsHosts" });
-		addAnnotation(getCyberPhysicalSystem_Applications(), source,
-				new String[] { "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsApplications" });
-		addAnnotation(getHostInstance_AvailableMemory(), source,
-				new String[] { "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableMemory" });
-		addAnnotation(getHostInstance_AvailableHdd(), source,
-				new String[] { "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.cps.queries.availableHdd" });
-		addAnnotation(getHostInstance_TotalMemory(), source,
-				new String[] { "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalMemory" });
-		addAnnotation(getHostInstance_TotalHdd(), source,
-				new String[] { "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.cps.queries.totalHdd" });
 	}
 
 } //CpsPackageImpl

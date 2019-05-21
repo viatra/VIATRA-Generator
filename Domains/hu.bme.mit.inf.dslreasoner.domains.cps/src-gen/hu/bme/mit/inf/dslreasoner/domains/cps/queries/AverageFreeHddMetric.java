@@ -43,6 +43,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
+ *         // Free HDD
+ *         
  *         pattern averageFreeHddMetric(Average : java Double) {
  *         	Average == avg find freeHddPercentage(_, #_);
  *         }
@@ -226,6 +228,8 @@ public final class AverageFreeHddMetric extends BaseGeneratedEMFQuerySpecificati
    * 
    * <p>Original source:
    * <code><pre>
+   * // Free HDD
+   * 
    * pattern averageFreeHddMetric(Average : java Double) {
    * 	Average == avg find freeHddPercentage(_, #_);
    * }

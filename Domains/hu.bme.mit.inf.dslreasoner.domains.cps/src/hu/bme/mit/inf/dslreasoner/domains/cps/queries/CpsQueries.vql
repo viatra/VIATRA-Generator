@@ -3,28 +3,23 @@ package hu.bme.mit.inf.dslreasoner.domains.cps.queries
 import "http://www.eclipse.org/emf/2002/Ecore"
 import "http://www.example.org/cps"
 
-@QueryBasedFeature(feature = "applications")
-pattern cpsApplications(Cps : CyberPhysicalSystem, AppInstance : ApplicationInstance) {
+private pattern cpsApplications(Cps : CyberPhysicalSystem, AppInstance : ApplicationInstance) {
 	CyberPhysicalSystem.applicationTypes.instances(Cps, AppInstance);
 }
 
-@QueryBasedFeature(feature = "hosts")
-pattern cpsHosts(Cps : CyberPhysicalSystem, HostInstance : HostInstance) {
+private pattern cpsHosts(Cps : CyberPhysicalSystem, HostInstance : HostInstance) {
 	CyberPhysicalSystem.hostTypes.instances(Cps, HostInstance);
 }
 
-@QueryBasedFeature(feature = "totalMemory")
-pattern totalMemory(Host : HostInstance, Memory : EInt) {
+private pattern totalMemory(Host : HostInstance, Memory : EInt) {
 	HostInstance.type.defaultMemory(Host, Memory);
 }
 
-@QueryBasedFeature(feature = "totalHdd")
-pattern totalHdd(Host : HostInstance, Hdd : EInt) {
+private pattern totalHdd(Host : HostInstance, Hdd : EInt) {
 	HostInstance.type.defaultHdd(Host, Hdd);
 }
 
-@QueryBasedFeature(feature = "availableMemory")
-pattern availableMemory(Host : HostInstance, Memory : java Integer) {
+private pattern availableMemory(Host : HostInstance, Memory : java Integer) {
 	find totalMemory(Host, TotalMemory);
 	RequiredMemory == sum find memoryRequirement(Host, _, #_);
 	Memory == eval(TotalMemory - RequiredMemory);
@@ -35,8 +30,7 @@ private pattern memoryRequirement(Host : HostInstance, App : ApplicationInstance
 	ResourceRequirement.requiredMemory(Req, Memory);
 }
 
-@QueryBasedFeature(feature = "availableHdd")
-pattern availableHdd(Host : HostInstance, Hdd : java Integer) {
+private pattern availableHdd(Host : HostInstance, Hdd : java Integer) {
 	find totalHdd(Host, TotalHdd);
 	RequiredHdd == sum find hddRequirement(Host, _, #_);
 	Hdd == eval(TotalHdd - RequiredHdd);
@@ -47,7 +41,7 @@ private pattern hddRequirement(Host : HostInstance, App : ApplicationInstance, H
 	ResourceRequirement.requiredHdd(Req, Hdd);
 }
 
-private pattern resourceRequirement(Host : HostInstance, App : ApplicationInstance, Req : ResourceRequirement) {
+pattern resourceRequirement(Host : HostInstance, App : ApplicationInstance, Req : ResourceRequirement) {
 	ApplicationInstance.allocatedTo(App, Host);
 	ApplicationInstance.type.requirements(App, Req);
 	HostInstance.type(Host, HostType);
@@ -106,6 +100,12 @@ pattern redundantInstancesOnSameHost(Req : Requirement) {
 	ApplicationInstance.allocatedTo(App2, Host);
 }
 
+//
+// Metrics
+//
+
+// Free memory
+
 pattern averageFreeMemoryMetric(Average : java Double) {
 	Average == avg find freeMemoryPercentage(_, #_);
 }
@@ -116,6 +116,8 @@ private pattern freeMemoryPercentage(Host : HostInstance, Free : java Double) {
 	Free == eval((Available as double) / Total);
 }
 
+// Free HDD
+
 pattern averageFreeHddMetric(Average : java Double) {
 	Average == avg find freeHddPercentage(_, #_);
 }
@@ -125,6 +127,8 @@ private pattern freeHddPercentage(Host : HostInstance, Free : java Double) {
 	find availableHdd(Host, Available);
 	Free == eval((Available as double) / Total);
 }
+
+// Total cost
 
 pattern costMetric(Cost : java Integer) {
 	Cost == sum find cpsCost(_, #_);
@@ -139,4 +143,56 @@ pattern cpsCost(Cps : CyberPhysicalSystem, Cost : java Integer) {
 private pattern hostInstanceCost(Cps : CyberPhysicalSystem, Host : HostInstance, Cost : EInt) {
 	find cpsHosts(Cps, Host);
 	HostInstance.type.cost(Host, Cost);
+}
+
+//
+// Transformation rule preconditions for rule-based DSE
+//
+
+pattern allocate(App : ApplicationInstance, Host : HostInstance) {
+	ApplicationInstance.type.requirements(App, Req);
+	ResourceRequirement.hostType.instances(Req, Host);
+	find unallocatedAppInstance(App);
+	find availableMemory(Host, AvailableMem);
+	find availableHdd(Host, AvailableHdd);
+	ResourceRequirement.requiredMemory(Req, RequiredMem);
+	ResourceRequirement.requiredHdd(Req, RequiredHdd);
+	check(AvailableMem >= RequiredMem);
+	check(AvailableHdd >= RequiredHdd);
+	neg ApplicationInstance.requirement.instances.allocatedTo(App, Host);
+}
+
+pattern unallocateAppInstance(App : ApplicationInstance) {
+	ApplicationInstance.allocatedTo(App, _);
+}
+
+pattern createHostInstance(HostType : HostType) {
+	find unallocatedAppInstance(App);
+	ApplicationInstance.type.requirements.hostType(App, HostType);
+}
+
+pattern removeHostInstance(HostInstance : HostInstance) {
+	neg HostInstance.applications(HostInstance, _);
+}
+
+private pattern unallocatedAppInstance(App : ApplicationInstance) {
+	neg ApplicationInstance.allocatedTo(App, _);
+}
+
+private pattern requiredAppInstances(Req : Requirement, Remaining : java Integer) {
+	Instances == count find satisfyingInstance(Req, _);
+	Requirement.count(Req, RequiredCount);
+	Remaining == eval(RequiredCount - Instances);
+}
+
+private pattern noHostToAllocateTo(App : ApplicationInstance) {
+	find unallocatedAppInstance(App);
+	neg find allocate(App, _);
+}
+
+pattern guidanceObjective(Value : java Integer) {
+	UnallocatedInstances == count find unallocatedAppInstance(_);
+	RequiredInstances == sum find requiredAppInstances(_, #_);
+	NoHostToAllocate == count find noHostToAllocateTo(_);
+	Value == eval(2 * UnallocatedInstances + 4 * RequiredInstances + NoHostToAllocate);
 }

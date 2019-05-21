@@ -3,7 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal;
 
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsHosts;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.CpsHosts;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;

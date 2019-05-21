@@ -15,3 +15,13 @@
 /.CostMetric.java._trace
 /.CpsCost.java._trace
 /.RedundantInstancesOnSameHost.java._trace
+/.Allocate.java._trace
+/.CpsTransformationRules.java._trace
+/.ResourceRequirement.java._trace
+/.CreateInstance.java._trace
+/.CreateHostInstance.java._trace
+/.UnallocatedAppInstance.java._trace
+/.RequiredAppInstances.java._trace
+/.GuidanceObjective.java._trace
+/.RemoveHostInstance.java._trace
+/.UnallocateAppInstance.java._trace

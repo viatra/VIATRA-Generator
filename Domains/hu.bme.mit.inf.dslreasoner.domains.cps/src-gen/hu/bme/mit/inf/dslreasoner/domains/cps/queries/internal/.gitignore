@@ -9,3 +9,12 @@
 /.FreeHddPercentage.java._trace
 /.ApplicationInstance.java._trace
 /.HostInstanceCost.java._trace
+/.AvailableHdd.java._trace
+/.AvailableMemory.java._trace
+/.CpsApplications.java._trace
+/.CpsHosts.java._trace
+/.TotalHdd.java._trace
+/.TotalMemory.java._trace
+/.RequiredAppInstances.java._trace
+/.UnallocatedAppInstance.java._trace
+/.NoHostToAllocateTo.java._trace

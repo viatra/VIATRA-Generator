@@ -43,6 +43,12 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
+ *         //
+ *         // Metrics
+ *         //
+ *         
+ *         // Free memory
+ *         
  *         pattern averageFreeMemoryMetric(Average : java Double) {
  *         	Average == avg find freeMemoryPercentage(_, #_);
  *         }
@@ -226,6 +232,12 @@ public final class AverageFreeMemoryMetric extends BaseGeneratedEMFQuerySpecific
    * 
    * <p>Original source:
    * <code><pre>
+   * //
+   * // Metrics
+   * //
+   * 
+   * // Free memory
+   * 
    * pattern averageFreeMemoryMetric(Average : java Double) {
    * 	Average == avg find freeMemoryPercentage(_, #_);
    * }

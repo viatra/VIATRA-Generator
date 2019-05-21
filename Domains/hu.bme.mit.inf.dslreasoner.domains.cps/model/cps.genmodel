@@ -15,8 +15,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/requests"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/applicationTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/hostTypes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/hosts"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//CyberPhysicalSystem/applications"/>
     </genClasses>
     <genClasses ecoreClass="cps.ecore#//ApplicationType">
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//ApplicationType/instances"/>
@@ -49,10 +47,6 @@
     </genClasses>
     <genClasses ecoreClass="cps.ecore#//HostInstance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostInstance/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/availableMemory"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/availableHdd"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/totalMemory"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cps.ecore#//HostInstance/totalHdd"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cps.ecore#//HostInstance/applications"/>
     </genClasses>
   </genPackages>

@@ -4,7 +4,7 @@
 package hu.bme.mit.inf.dslreasoner.domains.cps.queries;
 
 import hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsApplications;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.CpsApplications;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.HostInstanceCost;
 import java.util.Arrays;
 import java.util.Collection;

@@ -3,29 +3,37 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal;
 
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.Allocate;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AllocationWithoutResourceRequirement;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AvailableHdd;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AvailableMemory;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeHddMetric;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeMemoryMetric;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CostMetric;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsApplications;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsCost;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsHosts;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.CreateHostInstance;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.GuidanceObjective;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.InstanceDoesNotSatisfyRequirement;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableHdd;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.NotEnoughAvailableMemory;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RedundantInstancesOnSameHost;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RemoveHostInstance;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalHdd;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.TotalMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.ResourceRequirement;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.UnallocateAppInstance;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.AvailableHdd;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.AvailableMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.CpsApplications;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.CpsHosts;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.FreeHddPercentage;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.FreeMemoryPercentage;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.HddRequirement;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.HostInstanceCost;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.MemoryRequirement;
-import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.ResourceRequirement;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.NoHostToAllocateTo;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.RequiredAppInstances;
 import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.SatisfyingInstance;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.TotalHdd;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.TotalMemory;
+import hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.UnallocatedAppInstance;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 
 /**
@@ -57,6 +65,14 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>costMetric</li>
  * <li>cpsCost</li>
  * <li>hostInstanceCost</li>
+ * <li>allocate</li>
+ * <li>unallocateAppInstance</li>
+ * <li>createHostInstance</li>
+ * <li>removeHostInstance</li>
+ * <li>unallocatedAppInstance</li>
+ * <li>requiredAppInstances</li>
+ * <li>noHostToAllocateTo</li>
+ * <li>guidanceObjective</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -104,5 +120,13 @@ public final class CpsQueriesAll extends BaseGeneratedPatternGroup {
     querySpecifications.add(CostMetric.instance());
     querySpecifications.add(CpsCost.instance());
     querySpecifications.add(HostInstanceCost.instance());
+    querySpecifications.add(Allocate.instance());
+    querySpecifications.add(UnallocateAppInstance.instance());
+    querySpecifications.add(CreateHostInstance.instance());
+    querySpecifications.add(RemoveHostInstance.instance());
+    querySpecifications.add(UnallocatedAppInstance.instance());
+    querySpecifications.add(RequiredAppInstances.instance());
+    querySpecifications.add(NoHostToAllocateTo.instance());
+    querySpecifications.add(GuidanceObjective.instance());
   }
 }
