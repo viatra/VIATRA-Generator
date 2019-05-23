@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_rUcIgHyxEemI79hpD-o6pA">
+  <imports href="cps.ecore#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_ttviMHyxEemI79hpD-o6pA" name="createAppInstance">
+    <lhs xmi:id="_tuVYEHyxEemI79hpD-o6pA" name="Lhs">
+      <nodes xmi:id="_8OoYwHyxEemI79hpD-o6pA" name="req" outgoing="_APd7gHyzEemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement"/>
+      </nodes>
+      <nodes xmi:id="__cBFUHyyEemI79hpD-o6pA" incoming="_APd7gHyzEemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType"/>
+      </nodes>
+      <edges xmi:id="_APd7gHyzEemI79hpD-o6pA" source="_8OoYwHyxEemI79hpD-o6pA" target="__cBFUHyyEemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement/type"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_txSlcHyxEemI79hpD-o6pA" name="Rhs">
+      <nodes xmi:id="_8OufYHyxEemI79hpD-o6pA" name="req" outgoing="_6YaokHyyEemI79hpD-o6pA _APd7gXyzEemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement"/>
+      </nodes>
+      <nodes xmi:id="_KIXvwHyyEemI79hpD-o6pA" incoming="_6YaokHyyEemI79hpD-o6pA _AoFP0HyzEemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance"/>
+      </nodes>
+      <nodes xmi:id="__cBFUXyyEemI79hpD-o6pA" incoming="_APd7gXyzEemI79hpD-o6pA" outgoing="_AoFP0HyzEemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType"/>
+      </nodes>
+      <edges xmi:id="_6YaokHyyEemI79hpD-o6pA" source="_8OufYHyxEemI79hpD-o6pA" target="_KIXvwHyyEemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement/instances"/>
+      </edges>
+      <edges xmi:id="_APd7gXyzEemI79hpD-o6pA" source="_8OufYHyxEemI79hpD-o6pA" target="__cBFUXyyEemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement/type"/>
+      </edges>
+      <edges xmi:id="_AoFP0HyzEemI79hpD-o6pA" source="__cBFUXyyEemI79hpD-o6pA" target="_KIXvwHyyEemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType/instances"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_8OufYXyxEemI79hpD-o6pA" origin="_8OoYwHyxEemI79hpD-o6pA" image="_8OufYHyxEemI79hpD-o6pA"/>
+    <mappings xmi:id="__cBsYHyyEemI79hpD-o6pA" origin="__cBFUHyyEemI79hpD-o6pA" image="__cBFUXyyEemI79hpD-o6pA"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_M36NQHy0EemI79hpD-o6pA" name="createHostInstance">
+    <lhs xmi:id="_M4D-QHy0EemI79hpD-o6pA" name="Lhs">
+      <nodes xmi:id="_ZpwIEHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType"/>
+      </nodes>
+    </lhs>
+    <rhs xmi:id="_M4HBkHy0EemI79hpD-o6pA" name="Rhs">
+      <nodes xmi:id="_Zp2OsHy0EemI79hpD-o6pA" outgoing="_faZ4EHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType"/>
+      </nodes>
+      <nodes xmi:id="_bFDBYHy0EemI79hpD-o6pA" incoming="_faZ4EHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostInstance"/>
+      </nodes>
+      <edges xmi:id="_faZ4EHy0EemI79hpD-o6pA" source="_Zp2OsHy0EemI79hpD-o6pA" target="_bFDBYHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType/instances"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_Zp2OsXy0EemI79hpD-o6pA" origin="_ZpwIEHy0EemI79hpD-o6pA" image="_Zp2OsHy0EemI79hpD-o6pA"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_2yQIQHy0EemI79hpD-o6pA" name="deleteHostInstance">
+    <lhs xmi:id="_2yTLkHy0EemI79hpD-o6pA" name="Lhs">
+      <nodes xmi:id="_5jfg0Hy0EemI79hpD-o6pA" outgoing="_7KrhEHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType"/>
+      </nodes>
+      <nodes xmi:id="_6FqZwHy0EemI79hpD-o6pA" incoming="_7KrhEHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostInstance"/>
+      </nodes>
+      <edges xmi:id="_7KrhEHy0EemI79hpD-o6pA" source="_5jfg0Hy0EemI79hpD-o6pA" target="_6FqZwHy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType/instances"/>
+      </edges>
+      <formula xsi:type="henshin:Not" xmi:id="__tHxgHy0EemI79hpD-o6pA">
+        <child xsi:type="henshin:NestedCondition" xmi:id="__tIYkHy0EemI79hpD-o6pA">
+          <conclusion xmi:id="__tIYkXy0EemI79hpD-o6pA">
+            <nodes xmi:id="_8lTsAHy0EemI79hpD-o6pA" outgoing="__HvMgHy0EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationInstance"/>
+            </nodes>
+            <nodes xmi:id="__tI_oHy0EemI79hpD-o6pA" incoming="__HvMgHy0EemI79hpD-o6pA _AuDqEHy1EemI79hpD-o6pA">
+              <type href="cps.ecore#//HostInstance"/>
+            </nodes>
+            <nodes xmi:id="_AuDDAHy1EemI79hpD-o6pA" outgoing="_AuDqEHy1EemI79hpD-o6pA">
+              <type href="cps.ecore#//HostType"/>
+            </nodes>
+            <edges xmi:id="__HvMgHy0EemI79hpD-o6pA" source="_8lTsAHy0EemI79hpD-o6pA" target="__tI_oHy0EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationInstance/allocatedTo"/>
+            </edges>
+            <edges xmi:id="_AuDqEHy1EemI79hpD-o6pA" source="_AuDDAHy1EemI79hpD-o6pA" target="__tI_oHy0EemI79hpD-o6pA">
+              <type href="cps.ecore#//HostType/instances"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="__tI_oXy0EemI79hpD-o6pA" origin="_6FqZwHy0EemI79hpD-o6pA" image="__tI_oHy0EemI79hpD-o6pA"/>
+          <mappings xmi:id="_AuDDAXy1EemI79hpD-o6pA" origin="_5jfg0Hy0EemI79hpD-o6pA" image="_AuDDAHy1EemI79hpD-o6pA"/>
+        </child>
+      </formula>
+    </lhs>
+    <rhs xmi:id="_2yUZsHy0EemI79hpD-o6pA" name="Rhs">
+      <nodes xmi:id="_5jfg0Xy0EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType"/>
+      </nodes>
+    </rhs>
+    <mappings xmi:id="_5jfg0ny0EemI79hpD-o6pA" origin="_5jfg0Hy0EemI79hpD-o6pA" image="_5jfg0Xy0EemI79hpD-o6pA"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_W9WPYHy4EemI79hpD-o6pA" name="allocate">
+    <lhs xmi:id="_W9ag0Hy4EemI79hpD-o6pA" name="Lhs">
+      <nodes xmi:id="_QzQ2QHy5EemI79hpD-o6pA" outgoing="_hW5nsHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement"/>
+      </nodes>
+      <nodes xmi:id="_U88ocHy5EemI79hpD-o6pA" outgoing="_epK2IHy5EemI79hpD-o6pA _f_l2gHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType"/>
+      </nodes>
+      <nodes xmi:id="_WEdqIHy5EemI79hpD-o6pA" incoming="_f_l2gHy5EemI79hpD-o6pA _hW5nsHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance"/>
+      </nodes>
+      <nodes xmi:id="_XGRscHy5EemI79hpD-o6pA" incoming="_fGY9oHy5EemI79hpD-o6pA" outgoing="_fggGwHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType"/>
+      </nodes>
+      <nodes xmi:id="_XfSpYHy5EemI79hpD-o6pA" incoming="_fggGwHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostInstance"/>
+      </nodes>
+      <nodes xmi:id="_YuZg0Hy5EemI79hpD-o6pA" incoming="_epK2IHy5EemI79hpD-o6pA" outgoing="_fGY9oHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ResourceRequirement"/>
+      </nodes>
+      <edges xmi:id="_epK2IHy5EemI79hpD-o6pA" source="_U88ocHy5EemI79hpD-o6pA" target="_YuZg0Hy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType/requirements"/>
+      </edges>
+      <edges xmi:id="_fGY9oHy5EemI79hpD-o6pA" source="_YuZg0Hy5EemI79hpD-o6pA" target="_XGRscHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ResourceRequirement/hostType"/>
+      </edges>
+      <edges xmi:id="_fggGwHy5EemI79hpD-o6pA" source="_XGRscHy5EemI79hpD-o6pA" target="_XfSpYHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType/instances"/>
+      </edges>
+      <edges xmi:id="_f_l2gHy5EemI79hpD-o6pA" source="_U88ocHy5EemI79hpD-o6pA" target="_WEdqIHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType/instances"/>
+      </edges>
+      <edges xmi:id="_hW5nsHy5EemI79hpD-o6pA" source="_QzQ2QHy5EemI79hpD-o6pA" target="_WEdqIHy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement/instances"/>
+      </edges>
+      <formula xsi:type="henshin:Not" xmi:id="_jOTOMHy5EemI79hpD-o6pA">
+        <child xsi:type="henshin:NestedCondition" xmi:id="_jOTOMXy5EemI79hpD-o6pA">
+          <conclusion xmi:id="_jOTOMny5EemI79hpD-o6pA">
+            <nodes xmi:id="_jOT1QHy5EemI79hpD-o6pA" outgoing="_jOT1RHy5EemI79hpD-o6pA _mLtagHy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//Requirement"/>
+            </nodes>
+            <nodes xmi:id="_jOT1Qny5EemI79hpD-o6pA" incoming="_jOT1RHy5EemI79hpD-o6pA _jOUcUny5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationInstance"/>
+            </nodes>
+            <nodes xmi:id="_jOT1RXy5EemI79hpD-o6pA" outgoing="_jOUcUXy5EemI79hpD-o6pA _jOUcUny5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationType"/>
+            </nodes>
+            <nodes xmi:id="_jOT1R3y5EemI79hpD-o6pA" incoming="_jOUcUXy5EemI79hpD-o6pA" outgoing="_jOUcVXy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ResourceRequirement"/>
+            </nodes>
+            <nodes xmi:id="_jOUcU3y5EemI79hpD-o6pA" incoming="_jOUcVXy5EemI79hpD-o6pA" outgoing="_jOVDYny5EemI79hpD-o6pA">
+              <type href="cps.ecore#//HostType"/>
+            </nodes>
+            <nodes xmi:id="_jOVDYHy5EemI79hpD-o6pA" incoming="_jOVDYny5EemI79hpD-o6pA _l0ud4Hy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//HostInstance"/>
+            </nodes>
+            <nodes xmi:id="_iu3gMHy5EemI79hpD-o6pA" incoming="_mLtagHy5EemI79hpD-o6pA" outgoing="_l0ud4Hy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationInstance"/>
+            </nodes>
+            <edges xmi:id="_jOT1RHy5EemI79hpD-o6pA" source="_jOT1QHy5EemI79hpD-o6pA" target="_jOT1Qny5EemI79hpD-o6pA">
+              <type href="cps.ecore#//Requirement/instances"/>
+            </edges>
+            <edges xmi:id="_jOUcUXy5EemI79hpD-o6pA" source="_jOT1RXy5EemI79hpD-o6pA" target="_jOT1R3y5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationType/requirements"/>
+            </edges>
+            <edges xmi:id="_jOUcUny5EemI79hpD-o6pA" source="_jOT1RXy5EemI79hpD-o6pA" target="_jOT1Qny5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationType/instances"/>
+            </edges>
+            <edges xmi:id="_jOUcVXy5EemI79hpD-o6pA" source="_jOT1R3y5EemI79hpD-o6pA" target="_jOUcU3y5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ResourceRequirement/hostType"/>
+            </edges>
+            <edges xmi:id="_jOVDYny5EemI79hpD-o6pA" source="_jOUcU3y5EemI79hpD-o6pA" target="_jOVDYHy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//HostType/instances"/>
+            </edges>
+            <edges xmi:id="_l0ud4Hy5EemI79hpD-o6pA" source="_iu3gMHy5EemI79hpD-o6pA" target="_jOVDYHy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//ApplicationInstance/allocatedTo"/>
+            </edges>
+            <edges xmi:id="_mLtagHy5EemI79hpD-o6pA" source="_jOT1QHy5EemI79hpD-o6pA" target="_iu3gMHy5EemI79hpD-o6pA">
+              <type href="cps.ecore#//Requirement/instances"/>
+            </edges>
+          </conclusion>
+          <mappings xmi:id="_jOT1QXy5EemI79hpD-o6pA" origin="_QzQ2QHy5EemI79hpD-o6pA" image="_jOT1QHy5EemI79hpD-o6pA"/>
+          <mappings xmi:id="_jOT1Q3y5EemI79hpD-o6pA" origin="_WEdqIHy5EemI79hpD-o6pA" image="_jOT1Qny5EemI79hpD-o6pA"/>
+          <mappings xmi:id="_jOT1Rny5EemI79hpD-o6pA" origin="_U88ocHy5EemI79hpD-o6pA" image="_jOT1RXy5EemI79hpD-o6pA"/>
+          <mappings xmi:id="_jOUcUHy5EemI79hpD-o6pA" origin="_YuZg0Hy5EemI79hpD-o6pA" image="_jOT1R3y5EemI79hpD-o6pA"/>
+          <mappings xmi:id="_jOUcVHy5EemI79hpD-o6pA" origin="_XGRscHy5EemI79hpD-o6pA" image="_jOUcU3y5EemI79hpD-o6pA"/>
+          <mappings xmi:id="_jOVDYXy5EemI79hpD-o6pA" origin="_XfSpYHy5EemI79hpD-o6pA" image="_jOVDYHy5EemI79hpD-o6pA"/>
+        </child>
+      </formula>
+    </lhs>
+    <rhs xmi:id="_W9bH4Hy4EemI79hpD-o6pA" name="Rhs">
+      <nodes xmi:id="_QzT5kHy5EemI79hpD-o6pA" outgoing="_hW5nsXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement"/>
+      </nodes>
+      <nodes xmi:id="_U89PgHy5EemI79hpD-o6pA" outgoing="_epK2IXy5EemI79hpD-o6pA _f_l2gXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType"/>
+      </nodes>
+      <nodes xmi:id="_WEdqIXy5EemI79hpD-o6pA" incoming="_f_l2gXy5EemI79hpD-o6pA _hW5nsXy5EemI79hpD-o6pA" outgoing="_gh0Z0Hy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance"/>
+      </nodes>
+      <nodes xmi:id="_XGRscXy5EemI79hpD-o6pA" incoming="_fGY9oXy5EemI79hpD-o6pA" outgoing="_fggGwXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType"/>
+      </nodes>
+      <nodes xmi:id="_XfSpYXy5EemI79hpD-o6pA" incoming="_fggGwXy5EemI79hpD-o6pA _gh0Z0Hy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostInstance"/>
+      </nodes>
+      <nodes xmi:id="_YuZg0Xy5EemI79hpD-o6pA" incoming="_epK2IXy5EemI79hpD-o6pA" outgoing="_fGY9oXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ResourceRequirement"/>
+      </nodes>
+      <edges xmi:id="_epK2IXy5EemI79hpD-o6pA" source="_U89PgHy5EemI79hpD-o6pA" target="_YuZg0Xy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType/requirements"/>
+      </edges>
+      <edges xmi:id="_fGY9oXy5EemI79hpD-o6pA" source="_YuZg0Xy5EemI79hpD-o6pA" target="_XGRscXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ResourceRequirement/hostType"/>
+      </edges>
+      <edges xmi:id="_fggGwXy5EemI79hpD-o6pA" source="_XGRscXy5EemI79hpD-o6pA" target="_XfSpYXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostType/instances"/>
+      </edges>
+      <edges xmi:id="_f_l2gXy5EemI79hpD-o6pA" source="_U89PgHy5EemI79hpD-o6pA" target="_WEdqIXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationType/instances"/>
+      </edges>
+      <edges xmi:id="_gh0Z0Hy5EemI79hpD-o6pA" source="_WEdqIXy5EemI79hpD-o6pA" target="_XfSpYXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance/allocatedTo"/>
+      </edges>
+      <edges xmi:id="_hW5nsXy5EemI79hpD-o6pA" source="_QzT5kHy5EemI79hpD-o6pA" target="_WEdqIXy5EemI79hpD-o6pA">
+        <type href="cps.ecore#//Requirement/instances"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_QzUgoHy5EemI79hpD-o6pA" origin="_QzQ2QHy5EemI79hpD-o6pA" image="_QzT5kHy5EemI79hpD-o6pA"/>
+    <mappings xmi:id="_U89PgXy5EemI79hpD-o6pA" origin="_U88ocHy5EemI79hpD-o6pA" image="_U89PgHy5EemI79hpD-o6pA"/>
+    <mappings xmi:id="_WEdqIny5EemI79hpD-o6pA" origin="_WEdqIHy5EemI79hpD-o6pA" image="_WEdqIXy5EemI79hpD-o6pA"/>
+    <mappings xmi:id="_XGRscny5EemI79hpD-o6pA" origin="_XGRscHy5EemI79hpD-o6pA" image="_XGRscXy5EemI79hpD-o6pA"/>
+    <mappings xmi:id="_XfSpYny5EemI79hpD-o6pA" origin="_XfSpYHy5EemI79hpD-o6pA" image="_XfSpYXy5EemI79hpD-o6pA"/>
+    <mappings xmi:id="_YuZg0ny5EemI79hpD-o6pA" origin="_YuZg0Hy5EemI79hpD-o6pA" image="_YuZg0Xy5EemI79hpD-o6pA"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_1VgrMHy5EemI79hpD-o6pA" name="unallocate">
+    <lhs xmi:id="_1Vk8oHy5EemI79hpD-o6pA" name="Lhs">
+      <nodes xmi:id="_OdtesHy6EemI79hpD-o6pA" outgoing="_UpBxcHy6EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance"/>
+      </nodes>
+      <nodes xmi:id="_PGadcHy6EemI79hpD-o6pA" incoming="_UpBxcHy6EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostInstance"/>
+      </nodes>
+      <edges xmi:id="_UpBxcHy6EemI79hpD-o6pA" source="_OdtesHy6EemI79hpD-o6pA" target="_PGadcHy6EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance/allocatedTo"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_1VmKwHy5EemI79hpD-o6pA" name="Rhs">
+      <nodes xmi:id="_OdwiAHy6EemI79hpD-o6pA">
+        <type href="cps.ecore#//ApplicationInstance"/>
+      </nodes>
+      <nodes xmi:id="_PGadcXy6EemI79hpD-o6pA">
+        <type href="cps.ecore#//HostInstance"/>
+      </nodes>
+    </rhs>
+    <mappings xmi:id="_OdwiAXy6EemI79hpD-o6pA" origin="_OdtesHy6EemI79hpD-o6pA" image="_OdwiAHy6EemI79hpD-o6pA"/>
+    <mappings xmi:id="_PGadcny6EemI79hpD-o6pA" origin="_PGadcHy6EemI79hpD-o6pA" image="_PGadcXy6EemI79hpD-o6pA"/>
+  </units>
+</henshin:Module>

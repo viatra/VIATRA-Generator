@@ -23,7 +23,20 @@ Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
  org.eclipse.viatra.dse;bundle-version="0.22.0",
  org.eclipse.viatra.dse.genetic;bundle-version="0.22.0",
  hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner;bundle-version="1.0.0",
- org.eclipse.emf.ecore.xmi;bundle-version="2.15.0"
+ org.eclipse.emf.ecore.xmi;bundle-version="2.15.0",
+ uk.ac.kcl.inf.mdeoptimiser.libraries.core;bundle-version="1.0.0",
+ uk.ac.kcl.inf.mdeoptimiser.interfaces.cli;bundle-version="1.0.0",
+ org.eclipse.emf.henshin.interpreter;bundle-version="1.5.0",
+ uk.ac.kcl.inf.mdeoptimiser.libraries.rulegen;bundle-version="1.0.0",
+ org.sidiff.common;bundle-version="1.0.0",
+ org.sidiff.common.emf;bundle-version="1.0.0",
+ org.sidiff.common.emf.extensions;bundle-version="1.0.0",
+ org.moeaframework;bundle-version="2.13.0",
+ org.apache.commons.math3;bundle-version="3.6.1",
+ org.apache.commons.lang3;bundle-version="3.8.1",
+ com.google.inject;bundle-version="3.0.0",
+ org.sidiff.common.henshin;bundle-version="1.0.0",
+ org.sidiff.serge;bundle-version="1.0.0"
 Import-Package: org.apache.log4j
 Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.domains.cps
 Bundle-ActivationPolicy: lazy

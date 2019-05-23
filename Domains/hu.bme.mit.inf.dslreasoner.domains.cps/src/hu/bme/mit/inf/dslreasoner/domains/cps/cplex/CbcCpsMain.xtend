@@ -19,11 +19,11 @@ class CbcCpsMain {
 		new IllegalStateException("This is a static utility class and should not be instantiated directly.")
 	}
 
-	static def void main(String[] args) {
+	public static def void main(String[] args) {
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 			new XMIResourceFactoryImpl)
 		EPackage.Registry.INSTANCE.put(CpsPackage.eNS_URI, CpsPackage.eINSTANCE)
-		val generator = new CpsGenerator(1, 4, 1)
+		val generator = new CpsGenerator(1, 4, 2)
 		val problem = generator.generateCpsProblem
 		val toLp = new CpsToLpTranslator(problem, 10, true)
 		val lp = toLp.lpProblem
@@ -49,5 +49,6 @@ class CbcCpsMain {
 		} finally {
 			reader.close
 		}
+		println("Additional cost: " + problem.requests.flatMap[requirements.map[count]].reduce[p1, p2|p1 + p2] * 5)
 	}
 }

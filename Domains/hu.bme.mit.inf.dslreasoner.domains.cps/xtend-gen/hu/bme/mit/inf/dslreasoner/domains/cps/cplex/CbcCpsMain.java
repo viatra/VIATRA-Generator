@@ -2,12 +2,15 @@ package hu.bme.mit.inf.dslreasoner.domains.cps.cplex;
 
 import hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage;
 import hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem;
+import hu.bme.mit.inf.dslreasoner.domains.cps.Request;
+import hu.bme.mit.inf.dslreasoner.domains.cps.Requirement;
 import hu.bme.mit.inf.dslreasoner.domains.cps.cplex.CpsToLpTranslator;
 import hu.bme.mit.inf.dslreasoner.domains.cps.generator.CpsGenerator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -15,7 +18,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class CbcCpsMain {
@@ -33,7 +40,7 @@ public class CbcCpsMain {
       XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
       _extensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, _xMIResourceFactoryImpl);
       EPackage.Registry.INSTANCE.put(CpsPackage.eNS_URI, CpsPackage.eINSTANCE);
-      final CpsGenerator generator = new CpsGenerator(1, 4, 1);
+      final CpsGenerator generator = new CpsGenerator(1, 4, 2);
       final CyberPhysicalSystem problem = generator.generateCpsProblem();
       final CpsToLpTranslator toLp = new CpsToLpTranslator(problem, 10, true);
       final CharSequence lp = toLp.getLpProblem();
@@ -70,6 +77,19 @@ public class CbcCpsMain {
       } finally {
         reader.close();
       }
+      final Function1<Request, List<Integer>> _function_1 = (Request it) -> {
+        final Function1<Requirement, Integer> _function_2 = (Requirement it_1) -> {
+          return Integer.valueOf(it_1.getCount());
+        };
+        return ListExtensions.<Requirement, Integer>map(it.getRequirements(), _function_2);
+      };
+      final Function2<Integer, Integer, Integer> _function_2 = (Integer p1, Integer p2) -> {
+        return Integer.valueOf(((p1).intValue() + (p2).intValue()));
+      };
+      Integer _reduce = IterableExtensions.<Integer>reduce(IterableExtensions.<Request, Integer>flatMap(problem.getRequests(), _function_1), _function_2);
+      int _multiply = ((_reduce).intValue() * 5);
+      String _plus_1 = ("Additional cost: " + Integer.valueOf(_multiply));
+      InputOutput.<String>println(_plus_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
