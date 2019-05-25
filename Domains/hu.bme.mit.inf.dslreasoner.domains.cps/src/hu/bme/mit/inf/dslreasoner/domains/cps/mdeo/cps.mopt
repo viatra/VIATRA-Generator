@@ -16,11 +16,13 @@ goal {
 }
 
 search {
-//	mutate using <cps.henshin> unit "createAppInstance"
-//	mutate using <cps.henshin> unit "createHostInstance"
-//	mutate using <cps.henshin> unit "allocate"
-//	mutate using <cps.henshin> unit "deleteAppInstance"
-//	mutate using <cps.henshin> unit "unallocate"
+//	mutate using <cps_fixup.henshin> unit "createAppInstance"
+//	mutate using <cps_fixup.henshin> unit "deleteAppInstance"
+//	mutate using <cps_fixup.henshin> unit "createHostInstance"
+//	mutate using <cps_fixup.henshin> unit "deleteHostInstance"
+//	mutate using <cps_fixup.henshin> unit "allocate"
+//	mutate using <cps_fixup.henshin> unit "unallocate"
+//	mutate using <cps_fixup.henshin> unit "reallocate"
 	mutate { "ApplicationInstance" }
 	mutate { "HostInstance" }
 }

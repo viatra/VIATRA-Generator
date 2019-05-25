@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.domains.cps.generator;
 
+import hu.bme.mit.inf.dslreasoner.domains.cps.ApplicationInstance;
 import hu.bme.mit.inf.dslreasoner.domains.cps.ApplicationType;
 import hu.bme.mit.inf.dslreasoner.domains.cps.CpsFactory;
 import hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem;
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -46,11 +48,18 @@ public class CpsGenerator {
   
   private final int demandFactor;
   
+  private final boolean populateAppInstances;
+  
   public CpsGenerator(final long randomSeed, final int applicationTypeCount, final int demandFactor) {
+    this(randomSeed, applicationTypeCount, demandFactor, false);
+  }
+  
+  public CpsGenerator(final long randomSeed, final int applicationTypeCount, final int demandFactor, final boolean populateAppInstances) {
     Random _random = new Random(randomSeed);
     this.random = _random;
     this.applicationTypeCount = applicationTypeCount;
     this.demandFactor = demandFactor;
+    this.populateAppInstances = populateAppInstances;
   }
   
   public CyberPhysicalSystem generateCpsProblem() {
@@ -83,6 +92,20 @@ public class CpsGenerator {
               final Procedure1<Requirement> _function_2 = (Requirement it_2) -> {
                 it_2.setCount(this.nextInt(CpsGenerator.MIN_REPLICAS, CpsGenerator.MAX_REPLICAS));
                 it_2.setType(appType);
+                if (this.populateAppInstances) {
+                  int _count = it_2.getCount();
+                  ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _count, true);
+                  for (final Integer j : _doubleDotLessThan) {
+                    {
+                      final ApplicationInstance app = this._cpsFactory.createApplicationInstance();
+                      app.setType(appType);
+                      EList<ApplicationInstance> _instances = appType.getInstances();
+                      _instances.add(app);
+                      EList<ApplicationInstance> _instances_1 = it_2.getInstances();
+                      _instances_1.add(app);
+                    }
+                  }
+                }
               };
               Requirement _doubleArrow = ObjectExtensions.<Requirement>operator_doubleArrow(_createRequirement, _function_2);
               _requirements.add(_doubleArrow);

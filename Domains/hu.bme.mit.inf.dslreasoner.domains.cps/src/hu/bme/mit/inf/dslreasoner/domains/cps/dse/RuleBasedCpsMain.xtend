@@ -20,7 +20,7 @@ class RuleBasedCpsMain {
 		new IllegalStateException("This is a static utility class and should not be instantiated directly.")
 	}
 
-	static def void main(String[] args) {
+	public static def void main(String[] args) {
 		DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.VERBOSE_FULL)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 			new XMIResourceFactoryImpl)

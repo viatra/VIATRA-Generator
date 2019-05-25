@@ -22,11 +22,17 @@ class CpsGenerator {
 	val Random random
 	val int applicationTypeCount
 	val int demandFactor
+	val boolean populateAppInstances
 
 	new(long randomSeed, int applicationTypeCount, int demandFactor) {
+		this(randomSeed, applicationTypeCount, demandFactor, false)
+	}
+
+	new(long randomSeed, int applicationTypeCount, int demandFactor, boolean populateAppInstances) {
 		this.random = new Random(randomSeed)
 		this.applicationTypeCount = applicationTypeCount
 		this.demandFactor = demandFactor
+		this.populateAppInstances = populateAppInstances
 	}
 
 	def generateCpsProblem() {
@@ -50,6 +56,14 @@ class CpsGenerator {
 						requirements += createRequirement => [
 							count = nextInt(CpsGenerator.MIN_REPLICAS, CpsGenerator.MAX_REPLICAS)
 							type = appType
+							if (populateAppInstances) {
+								for (j : 0 ..< count) {
+									val app = createApplicationInstance
+									app.type = appType
+									appType.instances += app
+									instances += app
+								}
+							}
 						]
 					}
 				]

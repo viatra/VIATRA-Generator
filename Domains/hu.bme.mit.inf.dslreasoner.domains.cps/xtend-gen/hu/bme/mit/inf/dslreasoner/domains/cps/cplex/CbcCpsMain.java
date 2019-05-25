@@ -13,7 +13,8 @@ import java.io.FileWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -30,6 +31,8 @@ public class CbcCpsMain {
   
   private static final String SOLUTION_FILE = "solution.txt";
   
+  private static final Pattern VALUE_REGEX = Pattern.compile("Optimal - objective value\\s*([0-9]+(\\.[0-9]+)?)");
+  
   private CbcCpsMain() {
     new IllegalStateException("This is a static utility class and should not be instantiated directly.");
   }
@@ -40,7 +43,7 @@ public class CbcCpsMain {
       XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
       _extensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, _xMIResourceFactoryImpl);
       EPackage.Registry.INSTANCE.put(CpsPackage.eNS_URI, CpsPackage.eINSTANCE);
-      final CpsGenerator generator = new CpsGenerator(1, 4, 2);
+      final CpsGenerator generator = new CpsGenerator(1, 4, 1);
       final CyberPhysicalSystem problem = generator.generateCpsProblem();
       final CpsToLpTranslator toLp = new CpsToLpTranslator(problem, 10, true);
       final CharSequence lp = toLp.getLpProblem();
@@ -69,27 +72,36 @@ public class CbcCpsMain {
       }
       FileReader _fileReader = new FileReader(CbcCpsMain.SOLUTION_FILE);
       final BufferedReader reader = new BufferedReader(_fileReader);
+      double value = Double.NaN;
       try {
-        final Consumer<String> _function = (String it) -> {
-          InputOutput.<String>println(it);
-        };
-        reader.lines().forEach(_function);
+        String line = null;
+        while (((line = reader.readLine()) != null)) {
+          {
+            InputOutput.<String>println(line);
+            final Matcher matcher = CbcCpsMain.VALUE_REGEX.matcher(line);
+            boolean _matches = matcher.matches();
+            if (_matches) {
+              value = Double.parseDouble(matcher.group(1));
+            }
+          }
+        }
       } finally {
         reader.close();
       }
-      final Function1<Request, List<Integer>> _function_1 = (Request it) -> {
-        final Function1<Requirement, Integer> _function_2 = (Requirement it_1) -> {
+      final Function1<Request, List<Integer>> _function = (Request it) -> {
+        final Function1<Requirement, Integer> _function_1 = (Requirement it_1) -> {
           return Integer.valueOf(it_1.getCount());
         };
-        return ListExtensions.<Requirement, Integer>map(it.getRequirements(), _function_2);
+        return ListExtensions.<Requirement, Integer>map(it.getRequirements(), _function_1);
       };
-      final Function2<Integer, Integer, Integer> _function_2 = (Integer p1, Integer p2) -> {
+      final Function2<Integer, Integer, Integer> _function_1 = (Integer p1, Integer p2) -> {
         return Integer.valueOf(((p1).intValue() + (p2).intValue()));
       };
-      Integer _reduce = IterableExtensions.<Integer>reduce(IterableExtensions.<Request, Integer>flatMap(problem.getRequests(), _function_1), _function_2);
-      int _multiply = ((_reduce).intValue() * 5);
-      String _plus_1 = ("Additional cost: " + Integer.valueOf(_multiply));
-      InputOutput.<String>println(_plus_1);
+      Integer _reduce = IterableExtensions.<Integer>reduce(IterableExtensions.<Request, Integer>flatMap(problem.getRequests(), _function), _function_1);
+      final int applicationCost = ((_reduce).intValue() * 5);
+      final double cost = (applicationCost + value);
+      InputOutput.println();
+      InputOutput.<String>println(("Cost: " + Double.valueOf(cost)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
