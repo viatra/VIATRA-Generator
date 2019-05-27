@@ -315,7 +315,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	}	
 	
 	private void logCurrentStateMetric() {
-		if(this.configuration.documentationLevel != DocumentationLevel.METRICS || workspace == null) {
+		if(this.configuration.documentationLevel != DocumentationLevel.NONE || workspace == null) {
 			return;
 		}
 		

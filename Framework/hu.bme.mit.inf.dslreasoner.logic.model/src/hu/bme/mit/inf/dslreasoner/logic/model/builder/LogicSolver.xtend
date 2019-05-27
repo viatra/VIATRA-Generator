@@ -65,10 +65,7 @@ public enum DocumentationLevel {
 	/**
 	 * The solver writes only temporary files.
 	 */
-	NONE,
-	
-	METRICS,
-	
+	NONE,	
 	/**
 	 * The solver is requested to write important artifacts and documents that are constructed during the generation.
 	 * This option should not affect the performance of the solver seriously. 

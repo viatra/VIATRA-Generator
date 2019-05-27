@@ -53,6 +53,7 @@ class PartialInterpretationMetric {
 			
 			//output the trajectory
 			try{
+				new File("debug/metric/trajectories/").mkdir();
 				val path = "debug/metric/trajectories/trajectory"+trajectory.stateCoder.createStateCode.toString+".csv"
 				val PrintWriter writer = new PrintWriter(new File(path))
 				val output = new StringBuilder
