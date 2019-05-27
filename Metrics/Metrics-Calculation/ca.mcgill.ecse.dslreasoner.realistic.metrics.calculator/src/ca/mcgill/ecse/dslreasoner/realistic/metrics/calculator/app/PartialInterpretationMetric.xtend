@@ -17,33 +17,41 @@ import org.eclipse.viatra.dse.api.Solution
 
 class PartialInterpretationMetric {
 	var static state = 0;
-	def static void calculateMetric(PartialInterpretation partial, String path, int id, String currentStateId){
+	
+	// calculate the metrics for a state
+	def static void calculateMetric(PartialInterpretation partial, String path, String currentStateId){
 		val metrics = new ArrayList<Metric>();
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
 		
+		//make dir since the folder can be none existing
 		new File(path).mkdir();
-		val filename = path + "/state_"+state+".csv";
+		val filename = path + "/state_"+currentStateId+".csv";
 		state++;
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, currentStateId);
 		
 		CsvFileWriter.write(metricCalculator.evaluateAllMetrics(), filename);
 	}
 	
-	def static void outputTrajectories(PartialInterpretation empty, List<Solution>  solutions){
-		
+	def static void outputTrajectories(PartialInterpretation empty, List<Solution>  solutions){	
 		for(solution : solutions){
+			//need to copy the empty solution because the transition directly worked on the graph
 			val emptySolutionCopy = EcoreUtil.copy(empty)
 			val trajectory = solution.shortestTrajectory;
 			trajectory.modelWithEditingDomain = emptySolutionCopy
+			
+			// state codes that will record the trajectory
 			val stateCodes = newArrayList()
 			
+			//transform and record the state codes for each state
 			while(trajectory.doNextTransformation){
-				println(trajectory.stateCoder.createStateCode)
+				//println(trajectory.stateCoder.createStateCode)
 				stateCodes.add(trajectory.stateCoder.createStateCode.toString)
 			}
 			
+			
+			//output the trajectory
 			try{
 				val path = "debug/metric/trajectories/trajectory"+trajectory.stateCoder.createStateCode.toString+".csv"
 				val PrintWriter writer = new PrintWriter(new File(path))

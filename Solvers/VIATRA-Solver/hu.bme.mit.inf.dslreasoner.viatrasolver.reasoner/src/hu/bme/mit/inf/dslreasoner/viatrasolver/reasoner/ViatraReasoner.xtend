@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.PartialInterpretationMetric
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
@@ -27,12 +28,11 @@ import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SolutionStoreWithDiversityDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityGranularity
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -61,11 +61,12 @@ class ViatraReasoner extends LogicReasoner{
 		
 		
 		val emptySolution = initialiser.initialisePartialInterpretation(problem,viatraConfig.typeScopes).output
+		
 		if((viatraConfig.documentationLevel == DocumentationLevel::FULL || viatraConfig.documentationLevel == DocumentationLevel::NORMAL) && workspace !== null) {
 			workspace.writeModel(emptySolution,"init.partialmodel")
 		} 
 		emptySolution.problemConainer = problem
-		
+		val emptySolutionCopy = EcoreUtil.copy(emptySolution)
 		val ScopePropagator scopePropagator = new ScopePropagator(emptySolution)
 		scopePropagator.propagateAllScopeConstraints		
 		
@@ -128,6 +129,11 @@ class ViatraReasoner extends LogicReasoner{
 		}
 		val solverTime = System.nanoTime - solverStartTime
 		viatraConfig.progressMonitor.workedSearchFinished
+		
+		//find trajectory to each solution
+		if(viatraConfig.documentationLevel == DocumentationLevel.METRICS){
+			PartialInterpretationMetric.outputTrajectories(emptySolutionCopy, dse.solutions.toList());
+		}
 		
 		//additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
 		val statistics = createStatistics => [

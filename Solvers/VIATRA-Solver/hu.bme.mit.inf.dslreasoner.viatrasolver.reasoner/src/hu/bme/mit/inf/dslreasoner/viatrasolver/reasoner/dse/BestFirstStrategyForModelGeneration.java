@@ -32,6 +32,7 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.PartialInterpretationMetric;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
@@ -190,6 +191,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			List<Object> activationIds = selectActivation();
 			Iterator<Object> iterator = activationIds.iterator();
 
+			
 			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
 				final Object nextActivation = iterator.next();
 //				if (!iterator.hasNext()) {
@@ -198,7 +200,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
-
+				
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
 //					System.out.println(matcher.getPatternName());
@@ -208,6 +210,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //					}
 //					System.out.println("---------");
 //				}
+				
+				//calculate the metrics for each state
+				logCurrentStateMetric();
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
@@ -248,7 +253,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 					}
 				}
 			}
-
 			logger.debug("State is fully traversed.");
 			trajectoiresToExplore.remove(currentTrajectoryWithFittness);
 			currentTrajectoryWithFittness = null;
@@ -309,6 +313,15 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			return trajectoiresToExplore.element();
 		}
 	}	
+	
+	private void logCurrentStateMetric() {
+		if(this.configuration.documentationLevel != DocumentationLevel.METRICS || workspace == null) {
+			return;
+		}
+		
+		PartialInterpretation interpretation = (PartialInterpretation)context.getModel();   //pattern.get("interpretation");
+		PartialInterpretationMetric.calculateMetric(interpretation, "debug/metric/" + context.getModel().hashCode(), context.getCurrentStateId().toString());		
+	}
 
 	public void visualiseCurrentState() {
 		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
