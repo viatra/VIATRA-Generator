@@ -19,7 +19,7 @@ class PartialInterpretationMetric {
 	var static state = 0;
 	
 	// calculate the metrics for a state
-	def static void calculateMetric(PartialInterpretation partial, String path, String currentStateId){
+	def static void calculateMetric(PartialInterpretation partial, String path, String currentStateId, Integer counter){
 		val metrics = new ArrayList<Metric>();
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
@@ -27,7 +27,7 @@ class PartialInterpretationMetric {
 		
 		//make dir since the folder can be none existing
 		new File(path).mkdir();
-		val filename = path + "/state_"+currentStateId+".csv";
+		val filename = path + "/state_"+currentStateId+"-"+counter+".csv";
 		state++;
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, currentStateId);
 		
@@ -44,10 +44,16 @@ class PartialInterpretationMetric {
 			// state codes that will record the trajectory
 			val stateCodes = newArrayList()
 			
+			var counter = 0
 			//transform and record the state codes for each state
 			while(trajectory.doNextTransformation){
 				//println(trajectory.stateCoder.createStateCode)
-				stateCodes.add(trajectory.stateCoder.createStateCode.toString)
+				val stateId = trajectory.stateCoder.createStateCode.toString
+				val interpretation = trajectory.getModel();
+				//calculate metrics of current state
+				calculateMetric(interpretation as PartialInterpretation, "debug/metric/output", stateId, counter)
+				stateCodes.add(stateId)
+				counter++
 			}
 			
 			

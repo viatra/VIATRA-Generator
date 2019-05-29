@@ -212,7 +212,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				}
 				
 				//calculate the metrics for each state
-				logCurrentStateMetric();
+//				logCurrentStateMetric();
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
@@ -314,14 +314,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		}
 	}	
 	
-	private void logCurrentStateMetric() {
-		if(this.configuration.documentationLevel != DocumentationLevel.NONE || workspace == null) {
-			return;
-		}
-		
-		PartialInterpretation interpretation = (PartialInterpretation)context.getModel();   //pattern.get("interpretation");
-		PartialInterpretationMetric.calculateMetric(interpretation, "debug/metric/" + context.getModel().hashCode(), context.getCurrentStateId().toString());		
-	}
+//	private void logCurrentStateMetric() {
+//		if(this.configuration.documentationLevel != DocumentationLevel.NONE || workspace == null) {
+//			return;
+//		}
+//		
+//		PartialInterpretation interpretation = (PartialInterpretation)context.getModel();   //pattern.get("interpretation");
+//		PartialInterpretationMetric.calculateMetric(interpretation, "debug/metric/" + context.getModel().hashCode(), context.getCurrentStateId().toString());		
+//	}
 
 	public void visualiseCurrentState() {
 		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
