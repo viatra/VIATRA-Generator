@@ -73,12 +73,12 @@ def getmetrics(filename):
 #
 # read number of files in the given path RANDOMLY
 #
-def readmultiplefiles(dirName, numberOfFiles, shouldShuffle = True):
+def readmultiplefiles(dirName, maxNumberOfFiles, shouldShuffle = True):
     list_of_files = glob.glob(dirName + '*.csv')  # create the list of file
     if shouldShuffle: 
         random.shuffle(list_of_files)
     #if the number of files is out of bound then just give the whole list
-    file_names =  list_of_files[:numberOfFiles] if numberOfFiles > len(list_of_files) else list_of_files
+    file_names =  list_of_files[:maxNumberOfFiles]
     # print(file_names)
     return file_names
 

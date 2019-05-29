@@ -1,35 +1,32 @@
-from sklearn.datasets import load_digits
-from sklearn.manifold import MDS
-import matplotlib.pyplot as plt
-from scipy import stats
-import numpy as np
+from pyclustering.cluster.kmedoids import kmedoids
+from pyclustering.utils import read_sample
+from pyclustering.samples.definitions import FCPS_SAMPLES
+from pyclustering.utils.metric import distance_metric, type_metric
+import matplotlib.pyplot as plt 
 
-dist = []
+# metric = distance_metric(type_metric.MINKOWSKI, degree=2)
+# print(metric([1,1], [2,2]))
 
-for i in range(100):
-    rvs = stats.uniform.rvs(size=500, loc=0., scale=1)
-    dist.append(rvs)
+# Load list of points for cluster analysis.
+sample = [[1,1,1], [2,2,2],[3,3,3]]
 
-for i in range(100):
-    rvs2 = stats.powerlaw .rvs(1.66, size=500)
-    dist.append(rvs2)
+# Set random initial medoids.
+initial_medoids = [1, 1 ,1]
+# Create instance of K-Medoids algorithm.
+kmedoids_instance = kmedoids(sample, initial_medoids)
+# Run cluster analysis and obtain results.
+kmedoids_instance.process()
+centoids = kmedoids_instance.get_medoids()
+clusters = kmedoids_instance.get_clusters()
+# Show allocated clusters.
+for cluster_id in range(len(clusters)):
+    for index in clusters[cluster_id]:
+        if(cluster_id == 0):
+            plt.plot(sample[index][0], sample[index][1], 'ro')
+            print(sample[index][0])
+        else:
+            plt.plot(sample[index][0], sample[index][1], 'bo')
 
-matrix = np.empty((len(dist),len(dist)))
-
-for i in range(len(dist)):
-    matrix[i,i] = 0
-    for j in range(i+1, len(dist)):
-        value, p = stats.ks_2samp(dist[i], dist[j])
-        matrix[i, j] = value
-        matrix[j, i] = value
-
-embedding = MDS(n_components=2, dissimilarity='precomputed')
-trans = embedding.fit_transform(X=matrix)
-x = (trans[:100,0]).tolist()
-y = (trans[:100,1]).tolist()
-
-x2 = (trans[100:,0]).tolist()
-y2 = (trans[100:,1]).tolist()
-plt.plot(x, y, 'yo')
-plt.plot(x2, y2, 'ro')
+plt.plot(sample[centoids[0]][0], sample[centoids[0]][1], 'bo')
+# plt.plot(sample[centoids[1]][0], sample[centoids[1]][1], 'ro')
 plt.show()
