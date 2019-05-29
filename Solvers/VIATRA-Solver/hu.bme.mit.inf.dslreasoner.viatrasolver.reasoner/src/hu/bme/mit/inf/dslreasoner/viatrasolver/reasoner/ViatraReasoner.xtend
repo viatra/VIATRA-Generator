@@ -132,6 +132,7 @@ class ViatraReasoner extends LogicReasoner{
 		
 		//find trajectory to each solution
 		if(viatraConfig.documentationLevel == DocumentationLevel.NONE){
+			PartialInterpretationMetric.initPaths();
 			PartialInterpretationMetric.outputTrajectories(emptySolutionCopy, dse.solutions.toList());
 		}
 		

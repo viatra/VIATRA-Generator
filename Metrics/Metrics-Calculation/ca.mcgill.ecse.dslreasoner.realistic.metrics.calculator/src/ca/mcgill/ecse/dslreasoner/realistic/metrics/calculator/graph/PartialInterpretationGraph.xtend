@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.BooleanElementImpl
@@ -8,10 +9,13 @@ import java.util.ArrayList
 import java.util.List
 
 class PartialInterpretationGraph extends Graph{
-	var lastStateId="";
 	
-	new(PartialInterpretation partial, List<Metric> metrics, String name){
-		partial.problem.relations.forEach[
+	/**
+	 * Define a new PartialInterpretationGraph by parse every element from a PartialInterpretation
+	 */
+	new(PartialInterpretation partial, List<Metric> metrics, String name){		
+		//the edge types are defined in terms of RelationDeclaration
+		partial.problem.relations.filter(RelationDeclaration).forEach[
 			this.statistic.addType(it.name);
 		]
 		// add all elements
@@ -32,7 +36,7 @@ class PartialInterpretationGraph extends Graph{
 		this.metrics = metrics;	
 	}
 	
-		/**
+	/**
 	 * Set basic information for the output
 	 */
 	override setBasicInformation(ArrayList<ArrayList<String>> output){

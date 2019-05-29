@@ -18,6 +18,11 @@ import org.eclipse.viatra.dse.api.Solution
 class PartialInterpretationMetric {
 	var static state = 0;
 	
+	def static void initPaths(){
+		new File("debug/metric/").mkdir();
+		new File("debug/metric/trajectories/").mkdir();
+	}
+	
 	// calculate the metrics for a state
 	def static void calculateMetric(PartialInterpretation partial, String path, String currentStateId, Integer counter){
 		val metrics = new ArrayList<Metric>();
