@@ -3,3 +3,4 @@ bin/
 testInput/
 testOutput/
 xtend-gen/
+*.csv

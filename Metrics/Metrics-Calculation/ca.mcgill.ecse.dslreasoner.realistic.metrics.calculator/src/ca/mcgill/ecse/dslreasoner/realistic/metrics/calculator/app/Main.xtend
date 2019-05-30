@@ -25,17 +25,17 @@ class Main {
 		//init model
 		YakindummPackageImpl.eINSTANCE.eClass;
 //		Yakindumm2PackageImpl.eINSTANCE.eClass;
-		val infos = initData();									
+		//val infos = initData();									
 										
 		println("Start Reading Models...");
 		var reader = new GraphReader(YakindummPackageImpl.eINSTANCE);
-		for(info : infos){
-			calculateAllModels(info.inputFolder, info.outputFolder,info.numRuns, reader);
-		}
+//		for(info : infos){
+//			calculateAllModels(info.inputFolder, info.outputFolder,info.numRuns, reader);
+//		}
 		
 		//human input has different package declaration
 //		reader = new GraphReader(Yakindumm2PackageImpl.eINSTANCE);
-		val human = new RWInformation("inputs/humanInput/", "../plot/statistics/humanOutput/", 1);
+		val human = new RWInformation("inputs/Random/", "outputs/", 1);
 		calculateAllModels(human.inputFolder, human.outputFolder,human.numRuns, reader);
 		
 		
