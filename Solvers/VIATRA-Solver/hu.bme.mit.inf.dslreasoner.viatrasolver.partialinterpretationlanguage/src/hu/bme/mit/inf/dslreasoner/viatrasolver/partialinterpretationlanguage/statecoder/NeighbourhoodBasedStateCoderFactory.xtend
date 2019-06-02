@@ -43,7 +43,7 @@ class NeighbourhoodBasedStateCoderFactory implements IStateCoderFactory {
 	val Set<RelationDeclaration> relevantRelations
 	
 	public new() {
-		this.range = PartialInterpretation2NeighbourhoodRepresentation::FixPointRage
+		this.range = PartialInterpretation2NeighbourhoodRepresentation::GraphWidthRange
 		this.parallels = PartialInterpretation2NeighbourhoodRepresentation::FullParallels
 		this.maxNumber = PartialInterpretation2NeighbourhoodRepresentation::MaxNumbers
 		this.relevantTypes = null
