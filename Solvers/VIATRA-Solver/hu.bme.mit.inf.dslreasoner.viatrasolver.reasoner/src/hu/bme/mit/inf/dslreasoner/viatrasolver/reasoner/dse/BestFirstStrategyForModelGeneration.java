@@ -14,9 +14,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -32,6 +34,7 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.MetricDistanceGroup;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.PartialInterpretationMetric;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
@@ -189,8 +192,24 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //			}
 
 			List<Object> activationIds = selectActivation();
+			PartialInterpretation model = (PartialInterpretation) context.getModel();
+			System.out.println(model.getNewElements().size() );
+			PartialInterpretationMetric.initPaths();
+			if(model.getNewElements().size() >= 10) {
+				Map<Object, Double> valueMap = new HashMap<Object, Double>();
+				System.out.println(PartialInterpretationMetric.calculateMetricDistance(model).getMPCDistance());
+				for(Object id : activationIds) {
+					context.executeAcitvationId(id);
+					model = (PartialInterpretation) context.getModel();
+					MetricDistanceGroup g = PartialInterpretationMetric.calculateMetricDistance(model);
+					valueMap.put(id, g.getMPCDistance());
+					context.backtrack();
+				}
+				Collections.sort(activationIds, Comparator.comparing(li -> valueMap.get(li)));
+			}
+			
+			
 			Iterator<Object> iterator = activationIds.iterator();
-
 			
 			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
 				final Object nextActivation = iterator.next();
@@ -217,10 +236,10 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 
-				if (context.isCurrentStateAlreadyTraversed()) {
-					logger.info("The new state is already visited.");
-					context.backtrack();
-				} else if (!context.checkGlobalConstraints()) {
+/*				if (context.isCurrentStateAlreadyTraversed()) {
+//					logger.info("The new state is already visited.");
+//					context.backtrack();
+//				} else*/ if (!context.checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
 					context.backtrack();
 				} else {
