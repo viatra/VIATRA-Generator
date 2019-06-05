@@ -1,4 +1,4 @@
-package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.output;
+package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io;
 
 import java.io.File
 import java.io.FileNotFoundException

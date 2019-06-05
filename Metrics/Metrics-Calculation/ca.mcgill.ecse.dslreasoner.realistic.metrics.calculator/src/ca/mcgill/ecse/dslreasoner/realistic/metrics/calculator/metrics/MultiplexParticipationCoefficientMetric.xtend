@@ -2,11 +2,13 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.GraphStatistic
 import java.text.DecimalFormat
+import java.util.ArrayList
 import java.util.HashMap
+import org.eclipse.emf.ecore.EObject
 
 class MultiplexParticipationCoefficientMetric extends Metric {
-	static val countName = "MPCCount";
-	static val valueName = "MPCValue";
+	public static val countName = "MPCCount";
+	public static val valueName = "MPCValue";
 	
 	
 	override evaluate(GraphStatistic g) {
@@ -18,26 +20,7 @@ class MultiplexParticipationCoefficientMetric extends Metric {
 		val map = new HashMap<String, Integer>();
 		//calculate the metric distribution
 		g.allNodes.forEach[n|
-			val edgeCounts = g.outDegree(n) + g.inDegree(n);
-			
-			var coef = 0.0;
-			
-			for(type : g.allTypes){
-				val degree = g.dimentionalDegree(n, type) as double;
-				coef += Math.pow(degree / edgeCounts, 2);
-			}		
-			coef = 1 - coef;		
-			coef = coef * typeCounts / (typeCounts-1);
-			
-			//Consider the case that either typeCounts-1 or the edgeCounts could be 0 in some situation
-			//in this case the metric should be evaluated to 0
-			if(typeCounts == 1){
-				println("bad");
-			}
-			
-			if(Double.isNaN(coef)){
-				coef = 0;
-			}
+			var coef = calculateMPC(n, g, typeCounts);
 			
 			//format number to String
 			val value = formatter.format(coef);
@@ -61,5 +44,37 @@ class MultiplexParticipationCoefficientMetric extends Metric {
 		}
 		
 		return datas;
+	}
+	
+	override evaluateSamples(GraphStatistic g){
+		val samples = new ArrayList<Double>();
+		val typeCounts = g.allTypes.size;
+		//calculate the metric distribution
+		g.allNodes.forEach[
+			samples.add(calculateMPC(it, g, typeCounts));
+		]
+		
+		return samples;
+	}
+	
+	def double calculateMPC(EObject n, GraphStatistic g, int typeCounts){
+		val edgeCounts = g.outDegree(n) + g.inDegree(n);
+			
+		var coef = 0.0;
+		
+		for(type : g.allTypes){
+			val degree = g.dimentionalDegree(n, type) as double;
+			coef += Math.pow(degree / edgeCounts, 2);
+		}		
+		coef = 1 - coef;		
+		coef = coef * typeCounts / (typeCounts-1);
+		
+		//Consider the case that either typeCounts-1 or the edgeCounts could be 0 in some situation
+		//in this case the metric should be evaluated to 0
+		if(Double.isNaN(coef)){
+			coef = 0;
+		}
+		
+		return coef;
 	}
 }

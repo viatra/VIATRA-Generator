@@ -4,4 +4,5 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.GraphStatis
 
 abstract class Metric {
 	abstract def String[][] evaluate(GraphStatistic g);
+	abstract def double[] evaluateSamples(GraphStatistic g);
 }

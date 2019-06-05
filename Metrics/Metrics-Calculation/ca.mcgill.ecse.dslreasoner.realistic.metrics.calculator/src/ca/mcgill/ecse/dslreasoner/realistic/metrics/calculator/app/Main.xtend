@@ -1,8 +1,8 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.EMFGraph
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.input.GraphReader
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.output.CsvFileWriter
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.CsvFileWriter
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.GraphReader
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl
 import java.util.ArrayList
 

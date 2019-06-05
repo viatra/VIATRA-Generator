@@ -1,8 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup
 import java.util.ArrayList
 import java.util.List
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MultiplexParticipationCoefficientMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeActivityMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.OutDegreeMetric
 
 abstract class Graph {
 	
@@ -32,6 +36,22 @@ abstract class Graph {
 		}
 		return result;
 	}	
+	
+	def MetricSampleGroup evaluateAllMetricsToSamples(){
+		var sample = new MetricSampleGroup();
+		
+		for(metric : this.metrics){
+			if(metric instanceof MultiplexParticipationCoefficientMetric){
+				sample.mpcSamples = metric.evaluateSamples(this.statistic);				
+			}else if(metric instanceof NodeActivityMetric){
+				sample.naSamples = metric.evaluateSamples(this.statistic);
+			}else if(metric instanceof OutDegreeMetric){
+				sample.outDegreeSamples = metric.evaluateSamples(this.statistic);
+			}
+		}
+		
+		return sample;
+	}
 	
 	def void setBasicInformation(ArrayList<ArrayList<String>> result);
 	

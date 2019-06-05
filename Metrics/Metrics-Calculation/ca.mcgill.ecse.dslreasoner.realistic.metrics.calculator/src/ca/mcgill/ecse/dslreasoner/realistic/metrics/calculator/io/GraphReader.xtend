@@ -1,4 +1,4 @@
-package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.input
+package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io;
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.EMFGraph
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric

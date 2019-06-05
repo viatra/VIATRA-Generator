@@ -1,11 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.PartialInterpretationGraph
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.CsvFileWriter
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MultiplexParticipationCoefficientMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeActivityMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.OutDegreeMetric
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.output.CsvFileWriter
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.io.File
 import java.io.FileNotFoundException
@@ -17,10 +18,28 @@ import org.eclipse.viatra.dse.api.Solution
 
 class PartialInterpretationMetric {
 	var static state = 0;
+	var static KSDistance ks;
 	
 	def static void initPaths(){
 		new File("debug/metric/").mkdir();
 		new File("debug/metric/trajectories/").mkdir();
+		ks = new KSDistance(Domain.Yakinduum);
+	}
+	
+	def static MetricDistanceGroup calculateMetricDistance(PartialInterpretation partial){
+		val metrics = new ArrayList<Metric>();
+		metrics.add(new OutDegreeMetric());
+		metrics.add(new NodeActivityMetric());
+		metrics.add(new MultiplexParticipationCoefficientMetric());
+		
+		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
+		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
+		
+		var mpc = ks.mpcDistance(metricSamples.mpcSamples);
+		var na = ks.naDistance(metricSamples.naSamples);
+		var outDegree = ks.outDegreeDistance(metricSamples.outDegreeSamples);
+		
+		return new MetricDistanceGroup(mpc, na, outDegree);
 	}
 	
 	// calculate the metrics for a state
@@ -77,5 +96,29 @@ class PartialInterpretationMetric {
 				e.printStackTrace()
 			}
 		}			
+	}
+}
+
+class MetricDistanceGroup{
+	var double mpcDistance;
+	var double naDistance;
+	var double outDegreeDistance;
+	
+	new(double mpcDistance, double naDistance, double outDegreeDistance){
+		this.mpcDistance = mpcDistance;
+		this.naDistance = naDistance;
+		this.outDegreeDistance = outDegreeDistance;
+	}
+	
+	def double getMPCDistance(){
+		return this.mpcDistance
+	}
+	
+	def double getNADistance(){
+		return this.naDistance
+	}
+	
+	def double getOutDegreeDistance(){
+		return this.outDegreeDistance
 	}
 }

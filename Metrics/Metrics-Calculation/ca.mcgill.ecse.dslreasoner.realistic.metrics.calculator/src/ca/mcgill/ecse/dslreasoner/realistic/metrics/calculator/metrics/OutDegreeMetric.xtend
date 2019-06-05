@@ -1,11 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.GraphStatistic
+import java.util.ArrayList
 import java.util.HashMap
 
 class OutDegreeMetric extends Metric {
-	static val countName = "OutDegreeCount";
-	static val valueName = "OutDegreeValue";
+	public static val countName = "OutDegreeCount";
+	public static val valueName = "OutDegreeValue";
 	
 	override evaluate(GraphStatistic g) {
 		val map = new HashMap<Integer, Integer>();
@@ -34,5 +35,15 @@ class OutDegreeMetric extends Metric {
 		return datas;
 	}
 	
+	override evaluateSamples(GraphStatistic g){
+		val samples = new ArrayList<Double>();
+		
+		//calculate the metric distribution
+		g.allNodes.forEach[
+			samples.add(g.outDegree(it) as double);
+		]
+		
+		return samples;
+	}
 	
 }
