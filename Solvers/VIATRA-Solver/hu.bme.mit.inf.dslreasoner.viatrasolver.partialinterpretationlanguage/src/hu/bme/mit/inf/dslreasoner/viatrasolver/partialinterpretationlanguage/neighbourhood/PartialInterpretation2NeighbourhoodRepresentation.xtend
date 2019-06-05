@@ -41,6 +41,13 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 		return createRepresentation(model,range,parallels,maxNumber,null,null)
 	}
 	
+	/**
+	 * Creates a neighbourhood representation with traces
+	 * @param model The model to be represented.
+	 * @param range The range of the neighbourhood.
+	 * @param parallels The maximal number of parallel references to be differentiated.
+	 * @param maxNumber The maximal number of elements in a equivalence class that chan be differentiated.
+	 */
 	def public createRepresentation(
 		PartialInterpretation model,
 		int range, int parallels, int maxNumber,
