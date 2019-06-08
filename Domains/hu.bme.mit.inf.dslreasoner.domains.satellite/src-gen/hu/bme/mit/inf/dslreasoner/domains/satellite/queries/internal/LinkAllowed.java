@@ -18,7 +18,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -32,13 +31,13 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
  * <p>Original source:
  *         <code><pre>
  *         private pattern linkAllowed(From : Spacecraft, To : CommunicatingElement) {
- *         	find matchingAntenna(From, To, _);
+ *         	find matchingAntenna(From, To);
  *         	neg find cubeSat3U(From);
  *         } or {
- *         	find matchingAntenna(From, To, TransceiverBand::UHF);
+ *         	find matchingAntenna(From, To);
  *         	CubeSat3U(From);
  *         } or {
- *         	find matchingAntenna(From, To, _);
+ *         	find matchingAntenna(From, To);
  *         	CubeSat3U(From);
  *         	GroundStationNetwork(To);
  *         }
@@ -129,15 +128,14 @@ public final class LinkAllowed extends BaseGeneratedEMFQuerySpecificationWithGen
           PBody body = new PBody(this);
           PVariable var_From = body.getOrCreateVariableByName("From");
           PVariable var_To = body.getOrCreateVariableByName("To");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_From), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_To), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_From, parameter_From),
              new ExportedParameter(body, var_To, parameter_To)
           ));
-          // 	find matchingAntenna(From, To, _)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_From, var_To, var___0_), MatchingAntenna.instance().getInternalQueryRepresentation());
+          // 	find matchingAntenna(From, To)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_From, var_To), MatchingAntenna.instance().getInternalQueryRepresentation());
           // 	neg find cubeSat3U(From)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_From), CubeSat3U.instance().getInternalQueryRepresentation());
           bodies.add(body);
@@ -152,10 +150,8 @@ public final class LinkAllowed extends BaseGeneratedEMFQuerySpecificationWithGen
              new ExportedParameter(body, var_From, parameter_From),
              new ExportedParameter(body, var_To, parameter_To)
           ));
-          // 	find matchingAntenna(From, To, TransceiverBand::UHF)
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, getEnumLiteral("http://www.example.org/satellite", "TransceiverBand", "UHF").getInstance());
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_From, var_To, var__virtual_0_), MatchingAntenna.instance().getInternalQueryRepresentation());
+          // 	find matchingAntenna(From, To)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_From, var_To), MatchingAntenna.instance().getInternalQueryRepresentation());
           // 	CubeSat3U(From)
           new TypeConstraint(body, Tuples.flatTupleOf(var_From), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CubeSat3U")));
           bodies.add(body);
@@ -164,15 +160,14 @@ public final class LinkAllowed extends BaseGeneratedEMFQuerySpecificationWithGen
           PBody body = new PBody(this);
           PVariable var_From = body.getOrCreateVariableByName("From");
           PVariable var_To = body.getOrCreateVariableByName("To");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
           new TypeConstraint(body, Tuples.flatTupleOf(var_From), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_To), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_From, parameter_From),
              new ExportedParameter(body, var_To, parameter_To)
           ));
-          // 	find matchingAntenna(From, To, _)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_From, var_To, var___0_), MatchingAntenna.instance().getInternalQueryRepresentation());
+          // 	find matchingAntenna(From, To)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_From, var_To), MatchingAntenna.instance().getInternalQueryRepresentation());
           // 	CubeSat3U(From)
           new TypeConstraint(body, Tuples.flatTupleOf(var_From), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CubeSat3U")));
           // 	GroundStationNetwork(To)

@@ -28,10 +28,6 @@ public interface CommunicatingElement extends EObject {
 	 * Returns the value of the '<em><b>Comm Subsystem</b></em>' containment reference list.
 	 * The list contents are of type {@link satellite.CommSubsystem}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Comm Subsystem</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Comm Subsystem</em>' containment reference list.
 	 * @see satellite.SatellitePackage#getCommunicatingElement_CommSubsystem()
@@ -43,10 +39,6 @@ public interface CommunicatingElement extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Communication Link</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Communication Link</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Communication Link</em>' containment reference.
 	 * @see #setCommunicationLink(DirectedCommunicationLink)

@@ -1,0 +1,20 @@
+
+============================================
+
+Batch 0 duration: 00:02:29.245
+
+--------------------------------------------
+Evaluation data for solution: ./mdeo-results/experiment-satellite.mopt-190525-195435-matching-henshin/batch-0796A23B6.xmi
+
+Objective values:
+Cost: 1158414.6563694086
+
+Constraint values:
+PatternMatch: 13.0
+
+Transformations chain:
+Length: 2
+Sequence: {1=addCubeSat3U, 2=addCubeSat3U, 3=addCubeSat3U} -> {1=addCubeSat3U, 2=addCubeSat3U, 3=addCubeSat3U}
+
+============================================
+

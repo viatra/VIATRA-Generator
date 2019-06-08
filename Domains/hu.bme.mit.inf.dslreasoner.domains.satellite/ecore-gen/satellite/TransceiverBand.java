@@ -51,10 +51,6 @@ public enum TransceiverBand implements Enumerator {
 	/**
 	 * The '<em><b>UHF</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>UHF</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UHF
 	 * @model
@@ -66,10 +62,6 @@ public enum TransceiverBand implements Enumerator {
 	/**
 	 * The '<em><b>X</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>X</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #X
 	 * @model
@@ -81,10 +73,6 @@ public enum TransceiverBand implements Enumerator {
 	/**
 	 * The '<em><b>Ka</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Ka</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #KA
 	 * @model name="Ka"

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
 <satellite:InterferometryMission xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:satellite="http://www.example.org/satellite" xsi:schemaLocation="http://www.example.org/satellite model/satellite.ecore">
   <groundStationNetwork>
-    <commSubsystem band="X" gain="MEDIUM"/>
-    <commSubsystem band="Ka" gain="HIGH"/>
+    <commSubsystem xsi:type="satellite:KaCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
   </groundStationNetwork>
-  <spacecraft xsi:type="satellite:CubeSat3U">
-    <commSubsystem band="X" gain="HIGH"/>
-    <commSubsystem band="X" gain="MEDIUM"/>
-    <communicationLink source="//@spacecraft.0/@commSubsystem.1" target="//@groundStationNetwork/@commSubsystem.0"/>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:KaCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <communicationLink source="//@spacecraft.0/@commSubsystem.0" target="//@groundStationNetwork/@commSubsystem.0"/>
     <payload xsi:type="satellite:InterferometryPayload"/>
   </spacecraft>
-  <spacecraft xsi:type="satellite:CubeSat6U">
-    <commSubsystem band="X" gain="HIGH"/>
-    <commSubsystem band="Ka" gain="HIGH"/>
-    <communicationLink source="//@spacecraft.1/@commSubsystem.1" target="//@groundStationNetwork/@commSubsystem.1"/>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <communicationLink source="//@spacecraft.1/@commSubsystem.0" target="//@groundStationNetwork/@commSubsystem.1"/>
     <payload xsi:type="satellite:InterferometryPayload"/>
   </spacecraft>
 </satellite:InterferometryMission>

@@ -7,10 +7,8 @@
     xsi:schemaLocation="http://www.example.org/satellite ../model/satellite.ecore">
   <groundStationNetwork>
     <commSubsystem
-        band="X"
-        gain="MEDIUM"/>
+        xsi:type="satellite:XCommSubsystem"/>
     <commSubsystem
-        band="Ka"
-        gain="HIGH"/>
+        xsi:type="satellite:KaCommSubsystem"/>
   </groundStationNetwork>
 </satellite:InterferometryMission>

@@ -3,7 +3,6 @@
 package satellite.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -61,8 +60,6 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 			return createInterferometryMission();
 		case SatellitePackage.GROUND_STATION_NETWORK:
 			return createGroundStationNetwork();
-		case SatellitePackage.COMM_SUBSYSTEM:
-			return createCommSubsystem();
 		case SatellitePackage.DIRECTED_COMMUNICATION_LINK:
 			return createDirectedCommunicationLink();
 		case SatellitePackage.INTERFEROMETRY_PAYLOAD:
@@ -73,46 +70,14 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 			return createCubeSat6U();
 		case SatellitePackage.SMALL_SAT:
 			return createSmallSat();
+		case SatellitePackage.UHF_COMM_SUBSYSTEM:
+			return createUHFCommSubsystem();
+		case SatellitePackage.XCOMM_SUBSYSTEM:
+			return createXCommSubsystem();
+		case SatellitePackage.KA_COMM_SUBSYSTEM:
+			return createKaCommSubsystem();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-		case SatellitePackage.TRANSCEIVER_BAND:
-			return createTransceiverBandFromString(eDataType, initialValue);
-		case SatellitePackage.ANTENNA_GAIN:
-			return createAntennaGainFromString(eDataType, initialValue);
-		case SatellitePackage.SPACECRAFT_KIND:
-			return createSpacecraftKindFromString(eDataType, initialValue);
-		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-		case SatellitePackage.TRANSCEIVER_BAND:
-			return convertTransceiverBandToString(eDataType, instanceValue);
-		case SatellitePackage.ANTENNA_GAIN:
-			return convertAntennaGainToString(eDataType, instanceValue);
-		case SatellitePackage.SPACECRAFT_KIND:
-			return convertSpacecraftKindToString(eDataType, instanceValue);
-		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -136,17 +101,6 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 	public GroundStationNetwork createGroundStationNetwork() {
 		GroundStationNetworkImpl groundStationNetwork = new GroundStationNetworkImpl();
 		return groundStationNetwork;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public CommSubsystem createCommSubsystem() {
-		CommSubsystemImpl commSubsystem = new CommSubsystemImpl();
-		return commSubsystem;
 	}
 
 	/**
@@ -209,12 +163,10 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TransceiverBand createTransceiverBandFromString(EDataType eDataType, String initialValue) {
-		TransceiverBand result = TransceiverBand.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException(
-					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
+	@Override
+	public UHFCommSubsystem createUHFCommSubsystem() {
+		UHFCommSubsystemImpl uhfCommSubsystem = new UHFCommSubsystemImpl();
+		return uhfCommSubsystem;
 	}
 
 	/**
@@ -222,8 +174,10 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertTransceiverBandToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+	@Override
+	public XCommSubsystem createXCommSubsystem() {
+		XCommSubsystemImpl xCommSubsystem = new XCommSubsystemImpl();
+		return xCommSubsystem;
 	}
 
 	/**
@@ -231,43 +185,10 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AntennaGain createAntennaGainFromString(EDataType eDataType, String initialValue) {
-		AntennaGain result = AntennaGain.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException(
-					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertAntennaGainToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SpacecraftKind createSpacecraftKindFromString(EDataType eDataType, String initialValue) {
-		SpacecraftKind result = SpacecraftKind.get(initialValue);
-		if (result == null)
-			throw new IllegalArgumentException(
-					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertSpacecraftKindToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+	@Override
+	public KaCommSubsystem createKaCommSubsystem() {
+		KaCommSubsystemImpl kaCommSubsystem = new KaCommSubsystemImpl();
+		return kaCommSubsystem;
 	}
 
 	/**

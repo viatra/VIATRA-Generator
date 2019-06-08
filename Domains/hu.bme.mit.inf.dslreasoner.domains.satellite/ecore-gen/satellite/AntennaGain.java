@@ -51,10 +51,6 @@ public enum AntennaGain implements Enumerator {
 	/**
 	 * The '<em><b>LOW</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>LOW</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #LOW
 	 * @model
@@ -66,10 +62,6 @@ public enum AntennaGain implements Enumerator {
 	/**
 	 * The '<em><b>MEDIUM</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>MEDIUM</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MEDIUM
 	 * @model
@@ -81,10 +73,6 @@ public enum AntennaGain implements Enumerator {
 	/**
 	 * The '<em><b>HIGH</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>HIGH</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #HIGH
 	 * @model

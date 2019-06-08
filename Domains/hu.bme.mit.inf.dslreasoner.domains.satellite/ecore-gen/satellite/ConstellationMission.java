@@ -27,10 +27,6 @@ public interface ConstellationMission extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Ground Station Network</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ground Station Network</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ground Station Network</em>' containment reference.
 	 * @see #setGroundStationNetwork(GroundStationNetwork)
@@ -54,10 +50,6 @@ public interface ConstellationMission extends EObject {
 	 * Returns the value of the '<em><b>Spacecraft</b></em>' containment reference list.
 	 * The list contents are of type {@link satellite.Spacecraft}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Spacecraft</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Spacecraft</em>' containment reference list.
 	 * @see satellite.SatellitePackage#getConstellationMission_Spacecraft()

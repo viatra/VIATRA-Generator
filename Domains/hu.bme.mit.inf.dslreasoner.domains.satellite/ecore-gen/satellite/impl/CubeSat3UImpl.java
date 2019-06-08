@@ -14,7 +14,7 @@ import satellite.SatellitePackage;
  *
  * @generated
  */
-public class CubeSat3UImpl extends SpacecraftImpl implements CubeSat3U {
+public class CubeSat3UImpl extends CubeSatImpl implements CubeSat3U {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

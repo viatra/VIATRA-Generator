@@ -40,15 +40,6 @@ public interface SatelliteFactory extends EFactory {
 	GroundStationNetwork createGroundStationNetwork();
 
 	/**
-	 * Returns a new object of class '<em>Comm Subsystem</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Comm Subsystem</em>'.
-	 * @generated
-	 */
-	CommSubsystem createCommSubsystem();
-
-	/**
 	 * Returns a new object of class '<em>Directed Communication Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,6 +83,33 @@ public interface SatelliteFactory extends EFactory {
 	 * @generated
 	 */
 	SmallSat createSmallSat();
+
+	/**
+	 * Returns a new object of class '<em>UHF Comm Subsystem</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>UHF Comm Subsystem</em>'.
+	 * @generated
+	 */
+	UHFCommSubsystem createUHFCommSubsystem();
+
+	/**
+	 * Returns a new object of class '<em>XComm Subsystem</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XComm Subsystem</em>'.
+	 * @generated
+	 */
+	XCommSubsystem createXCommSubsystem();
+
+	/**
+	 * Returns a new object of class '<em>Ka Comm Subsystem</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ka Comm Subsystem</em>'.
+	 * @generated
+	 */
+	KaCommSubsystem createKaCommSubsystem();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -8,18 +8,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificationWithGenericMatcher;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
-import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -31,8 +26,8 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
  * 
  * <p>Original source:
  *         <code><pre>
- *         private pattern commSubsystemBandUhf(Comm : CommSubsystem) {
- *         	CommSubsystem.band(Comm, TransceiverBand::UHF);
+ *         private pattern commSubsystemBandUhf(Comm : UHFCommSubsystem) {
+ *         	UHFCommSubsystem(Comm);
  *         }
  * </pre></code>
  * 
@@ -88,7 +83,7 @@ public final class CommSubsystemBandUhf extends BaseGeneratedEMFQuerySpecificati
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final CommSubsystemBandUhf.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Comm = new PParameter("Comm", "satellite.CommSubsystem", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommSubsystem")), PParameterDirection.INOUT);
+    private final PParameter parameter_Comm = new PParameter("Comm", "satellite.UHFCommSubsystem", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "UHFCommSubsystem")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_Comm);
     
@@ -118,18 +113,12 @@ public final class CommSubsystemBandUhf extends BaseGeneratedEMFQuerySpecificati
       {
           PBody body = new PBody(this);
           PVariable var_Comm = body.getOrCreateVariableByName("Comm");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Comm), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Comm), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "UHFCommSubsystem")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_Comm, parameter_Comm)
           ));
-          // 	CommSubsystem.band(Comm, TransceiverBand::UHF)
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, getEnumLiteral("http://www.example.org/satellite", "TransceiverBand", "UHF").getInstance());
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Comm), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Comm, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommSubsystem", "band")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "TransceiverBand")));
-          new Equality(body, var__virtual_1_, var__virtual_0_);
+          // 	UHFCommSubsystem(Comm)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Comm), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "UHFCommSubsystem")));
           bodies.add(body);
       }
       return bodies;

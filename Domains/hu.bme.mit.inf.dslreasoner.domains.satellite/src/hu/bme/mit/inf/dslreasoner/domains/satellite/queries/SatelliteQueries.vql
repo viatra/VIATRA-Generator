@@ -55,26 +55,40 @@ private pattern indirectLinkAllowed(From : Spacecraft, To : CommunicatingElement
 }
 
 private pattern linkAllowed(From : Spacecraft, To : CommunicatingElement) {
-	find matchingAntenna(From, To, _);
+	find matchingAntenna(From, To);
 	neg find cubeSat3U(From);
 } or {
-	find matchingAntenna(From, To, TransceiverBand::UHF);
+	find matchingAntenna(From, To);
 	CubeSat3U(From);
 } or {
-	find matchingAntenna(From, To, _);
+	find matchingAntenna(From, To);
 	CubeSat3U(From);
 	GroundStationNetwork(To);
 }
 
-private pattern matchingAntenna(From : Spacecraft, To : CommunicatingElement, Band : TransceiverBand) {
-	CommunicatingElement.commSubsystem.band(From, Band);
-	CommunicatingElement.commSubsystem.band(To, Band);
-	CommunicatingElement.commSubsystem.gain(From, Gain);
-	CommunicatingElement.commSubsystem.gain(To, Gain);
+private pattern matchingAntenna(From : Spacecraft, To : CommunicatingElement) {
+	CommunicatingElement.commSubsystem(From, FromSys);
+	CommunicatingElement.commSubsystem(To, ToSys);
+	find matchingCommSubsystem(FromSys, ToSys);
+}
+
+private pattern matchingCommSubsystem(From : CommSubsystem, To : CommSubsystem) {
+	UHFCommSubsystem(From);
+	UHFCommSubsystem(To);
+} or {
+	XCommSubsystem(From);
+	XCommSubsystem(To);
+} or {
+	KaCommSubsystem(From);
+	KaCommSubsystem(To);
 }
 
 private pattern cubeSat3U(Sat : CubeSat3U) {
 	CubeSat3U(Sat);
+}
+
+private pattern cubeSat6U(Sat : CubeSat6U) {
+	CubeSat6U(Sat);
 }
 
 // No communication loops may exist
@@ -104,63 +118,7 @@ private pattern directCommunicationLink(Source : CommunicatingElement, Target : 
 pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
 	DirectedCommunicationLink.source(Link, SourceSubsystem);
 	DirectedCommunicationLink.target(Link, TargetSubsystem);
-	CommSubsystem.band(SourceSubsystem, Band);
-	neg find commSubsystemBand(TargetSubsystem, Band);
-}
-
-private pattern commSubsystemBand(Comm : CommSubsystem, Band : TransceiverBand) {
-	CommSubsystem.band(Comm, Band);
-}
-
-@Constraint(severity = "error", key = {Link},
-	message = "Two ends of a communication link must use the same antenna gain.")
-pattern incompatibleSourceAndTargetGain(Link : DirectedCommunicationLink) {
-	DirectedCommunicationLink.source(Link, SourceSubsystem);
-	DirectedCommunicationLink.target(Link, TargetSubsystem);
-	CommSubsystem.gain(SourceSubsystem, Gain);
-	neg find commSubsystemGain(TargetSubsystem, Gain);
-}
-
-private pattern commSubsystemGain(Comm : CommSubsystem, Gain : AntennaGain) {
-	CommSubsystem.gain(Comm, Gain);
-}
-
-// UHF-band transmitters may only be combined with a low gain antenna
-
-@Constraint(severity = "error", key = {Comm},
-	message = "UHF transceiver must be combined with a low gain antenna.")
-pattern uhfAntennaGainNotLow(Comm : CommSubsystem) {
-	CommSubsystem.band(Comm, TransceiverBand::UHF);
-	// VIATRA will fail to infer a type constraint for the virtual variable introduced
-	// when an enum literal appears in a negative pattern call, so we use a helper pattern
-	// instead of neg find commSubsystemGain(Comm, AntennaGain::LOW);
-	neg find commSubsystemGainLow(Comm);
-}
-
-private pattern commSubsystemGainLow(Comm : CommSubsystem) {
-	CommSubsystem.gain(Comm, AntennaGain::LOW);
-}
-
-// X-band transmitters may only be combined with a medium gain antenna
-
-@Constraint(severity = "error", key = {Comm},
-	message = "X-band transceiver must be combined with a medium gain antenna.")
-pattern xAntennaGainNotMedium(Comm : CommSubsystem) {
-	CommSubsystem.band(Comm, TransceiverBand::X);
-	neg find commSubsystemGainMedium(Comm);
-}
-
-private pattern commSubsystemGainMedium(Comm : CommSubsystem) {
-	CommSubsystem.gain(Comm, AntennaGain::MEDIUM);
-}
-
-// Ka-band transmitters may only be combined with a medium or high gain antenna
-
-@Constraint(severity = "error", key = {Comm},
-	message = "Ka-band transceiver must be combined with a medium or high gain antenna.")
-pattern kaAntennaGainLow(Comm : CommSubsystem) {
-	CommSubsystem.band(Comm, TransceiverBand::Ka);
-	CommSubsystem.gain(Comm, AntennaGain::LOW);
+	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
 }
 
 // 3U CubeSats are assumed to only be able to downlink to Earth using an X-band trasmitter,
@@ -177,8 +135,8 @@ pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
 	neg find groundStationNetwork(Target);
 }
 
-private pattern commSubsystemBandUhf(Comm : CommSubsystem) {
-	CommSubsystem.band(Comm, TransceiverBand::UHF);
+private pattern commSubsystemBandUhf(Comm : UHFCommSubsystem) {
+	UHFCommSubsystem(Comm);
 }
 
 private pattern groundStationNetwork(Network : GroundStationNetwork) {
@@ -190,7 +148,8 @@ private pattern groundStationNetwork(Network : GroundStationNetwork) {
 @Constraint(severity = "error", key = {Spacecraft},
 	message = "Only a Small Satellite can be configured with a Ka-band communication system.")
 pattern cubeSatWithKaAntenna(Spacecraft : Spacecraft) {
-	CommunicatingElement.commSubsystem.band(Spacecraft, TransceiverBand::Ka);
+	CommunicatingElement.commSubsystem(Spacecraft, Comm);
+	KaCommSubsystem(Comm);
 	neg find smallSat(Spacecraft);
 }
 
@@ -198,146 +157,147 @@ pattern smallSat(Sat : SmallSat) {
 	SmallSat(Sat);
 }
 
-@QueryBasedFeature(feature = "kind")
-pattern spacecraftOfKind(Spacecraft : Spacecraft, Kind : SpacecraftKind) {
-	CubeSat3U(Spacecraft);
-	Kind == SpacecraftKind::CubeSat3U;
-} or {
-	CubeSat6U(Spacecraft);
-	Kind == SpacecraftKind::CubeSat6U;
-} or {
-	SmallSat(Spacecraft);
-	Kind == SpacecraftKind::SmallSat;
-}
-
-
+////
+//// Metrics
+////
 //
-// Metrics
+//// Coverage
 //
-
-// Coverage
-
-pattern coverageMetric(Coverage : java Double) {
-	Coverage == sum find missionCoverage(_, #_);
-}
-
-private pattern missionCoverage(Mission : InterferometryMission, Coverage : java Double) {
-	InterferometryMission.observationTime(Mission, ObservationTime);
-	ObserverCount == count find spacecraftWithInterferometryPayload(Mission, _);
-	Coverage == eval(Math.pow(1 - 2.0 / ObserverCount, 1 + 9 * (1.0 / ObservationTime)) + 0.05 * ObservationTime / 3);
-}
-
-// Time
-
-pattern timeMetric(Time : java Double) {
-	Time == sum find missionTime(_, #_);
-}
-
-private pattern missionTime(Mission : InterferometryMission, Time : java Double) {
-	InterferometryMission.observationTime(Mission, ObservationTime);
-	TrasmitTime == sum find transmitTime(Mission, _, #_);
-	Time == eval(TrasmitTime + 60.0 * ObservationTime);
-}
-
-private pattern transmitTime(Mission : InterferometryMission, Spacecraft : Spacecraft, TransmitTime : java Double) {
-	ConstellationMission.spacecraft(Mission, Spacecraft);
-	find scienceData(Spacecraft, ScienceData);
-	IncomingData == sum find incomingData(Spacecraft, _, #_);
-	find transmitRate(Spacecraft, TransmitRate);
-	TransmitTime == eval((ScienceData + IncomingData) / (7.5 * TransmitRate));
-}
-
-private pattern incomingData(Spacecraft : Spacecraft, Source : Spacecraft, Data : java Double) {
-	find indirectCommunicationLink(Source, Spacecraft);
-	find scienceData(Source, Data);
-}
-
-private pattern scienceData(Spacecraft : Spacecraft, Data : java Double) {
-	ConstellationMission.spacecraft(Mission, Spacecraft);
-	InterferometryMission.observationTime(Mission, ObservationTime);
-	Data == eval(12.0 * ObservationTime);
-}
-
-private pattern transmitRate(Spacecraft : Spacecraft, TransmitRate : java Double) {
-	find spacecraftUplink(Spacecraft, TransceiverBand::UHF, Target);
-	Spacecraft(Target);
-	TransmitRate == 5.0;
-} or {
-	find spacecraftUplink(Spacecraft, TransceiverBand::X, Target);
-	Spacecraft(Target);
-	TransmitRate == 1.6;
-} or {
-	find spacecraftUplink(Spacecraft, TransceiverBand::X, Target);
-	GroundStationNetwork(Target);
-	TransmitRate == 0.7;
-} or {
-	find spacecraftUplink(Spacecraft, TransceiverBand::Ka, Target);
-	Spacecraft(Target);
-	TransmitRate == 220.0;
-} or {
-	find spacecraftUplink(Spacecraft, TransceiverBand::Ka, Target);
-	GroundStationNetwork(Target);
-	TransmitRate == 80.0;
-}
-
-private pattern spacecraftUplink(Spacecraft : Spacecraft, Band : TransceiverBand, Target : CommunicatingElement) {
-	CommunicatingElement.communicationLink(Spacecraft, Link);
-	DirectedCommunicationLink.source.band(Link, Band);
-	DirectedCommunicationLink.target(Link, TargetSubsystem);
-	CommunicatingElement.commSubsystem(Target, TargetSubsystem);
-}
-
-// Cost
-
-pattern costMetric(Cost : java Double) {
-	Cost == sum find missionCost(_, #_);
-}
-
-private pattern missionCost(Mission : InterferometryMission, Cost : java Double) {
-	InterferometryMission.observationTime(Mission, ObservationTime);
-	SpacecraftCost == sum find spacecraftCost(Mission, _, #_);
-	Cost == eval(SpacecraftCost + 100000.0 * ObservationTime);
-}
-
-private pattern spacecraftCost(Mission : InterferometryMission, Spacecraft : Spacecraft, Cost : java Double) {
-	ConstellationMission.spacecraft(Mission, Spacecraft);
-	find spacecraftOfKind(Spacecraft, Kind);
-	KindCount == count find spacecraftOfKind(_, Kind);
-	find basePrice(Spacecraft, BasePrice);
-	find interferometryPayloadCost(Spacecraft, InterferometryPayloadCost);
-	find additionalCommSubsystemCost(Spacecraft, AdditionalCommSubsystemCost);
-	Cost == eval(BasePrice * Math.pow(KindCount, -0.25) + InterferometryPayloadCost + AdditionalCommSubsystemCost);
-}
-
-private pattern basePrice(Spacecraft : Spacecraft, BasePrice : java Double) {
-	CubeSat3U(Spacecraft);
-	BasePrice == 250000.0;
-} or {
-	CubeSat6U(Spacecraft);
-	BasePrice == 750000.0;
-} or {
-	SmallSat(Spacecraft);
-	BasePrice == 3000000.0;
-}
-
-private pattern interferometryPayloadCost(Spacecraft : Spacecraft, Cost : java Double) {
-	find spacecraftWithInterferometryPayload(_, Spacecraft);
-	Cost == 50000.0;
-} or {
-	neg find spacecraftWithInterferometryPayload(_, Spacecraft);
-	Cost == 0.0;
-}
-
-private pattern additionalCommSubsystemCost(Spacecraft : Spacecraft, Cost : java Double) {
-	find spacecraftWithTwoCommSubsystems(Spacecraft);
-	Cost == 100000.0;
-} or {
-	neg find spacecraftWithTwoCommSubsystems(Spacecraft);
-	Cost == 0.0;
-}
-
-private pattern spacecraftWithTwoCommSubsystems(Spacecraft : Spacecraft) {
-	Spacecraft.commSubsystem(Spacecraft, Subsystem1);
-	Spacecraft.commSubsystem(Spacecraft, Subsystem2);
-	Subsystem1 != Subsystem2;
-}
+//pattern coverageMetric(Coverage : java Double) {
+//	Coverage == sum find missionCoverage(_, #_);
+//}
+//
+//private pattern missionCoverage(Mission : InterferometryMission, Coverage : java Double) {
+//	InterferometryMission.observationTime(Mission, ObservationTime);
+//	ObserverCount == count find spacecraftWithInterferometryPayload(Mission, _);
+//	Coverage == eval(Math.pow(1 - 2.0 / ObserverCount, 1 + 9 * (1.0 / ObservationTime)) + 0.05 * ObservationTime / 3);
+//}
+//
+//// Time
+//
+//pattern timeMetric(Time : java Double) {
+//	Time == sum find missionTime(_, #_);
+//}
+//
+//private pattern missionTime(Mission : InterferometryMission, Time : java Double) {
+//	InterferometryMission.observationTime(Mission, ObservationTime);
+//	TrasmitTime == sum find transmitTime(Mission, _, #_);
+//	Time == eval(TrasmitTime + 60.0 * ObservationTime);
+//}
+//
+//private pattern transmitTime(Mission : InterferometryMission, Spacecraft : Spacecraft, TransmitTime : java Double) {
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	find scienceData(Spacecraft, ScienceData);
+//	IncomingData == sum find incomingData(Spacecraft, _, #_);
+//	find transmitRate(Spacecraft, TransmitRate);
+//	TransmitTime == eval((ScienceData + IncomingData) / (7.5 * TransmitRate));
+//}
+//
+//private pattern incomingData(Spacecraft : Spacecraft, Source : Spacecraft, Data : java Double) {
+//	find indirectCommunicationLink(Source, Spacecraft);
+//	find scienceData(Source, Data);
+//}
+//
+//private pattern scienceData(Spacecraft : Spacecraft, Data : java Double) {
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	InterferometryMission.observationTime(Mission, ObservationTime);
+//	Data == eval(12.0 * ObservationTime);
+//}
+//
+//private pattern transmitRate(Spacecraft : Spacecraft, TransmitRate : java Double) {
+//	find spacecraftUplink(Spacecraft, Comm, Target);
+//	UHFCommSubsystem(Comm);
+//	Spacecraft(Target);
+//	TransmitRate == 5.0;
+//} or {
+//	find spacecraftUplink(Spacecraft, Comm, Target);
+//	XCommSubsystem(Comm);
+//	Spacecraft(Target);
+//	TransmitRate == 1.6;
+//} or {
+//	find spacecraftUplink(Spacecraft, Comm, Target);
+//	XCommSubsystem(Comm);
+//	GroundStationNetwork(Target);
+//	TransmitRate == 0.7;
+//} or {
+//	find spacecraftUplink(Spacecraft, Comm, Target);
+//	KaCommSubsystem(Comm);
+//	Spacecraft(Target);
+//	TransmitRate == 220.0;
+//} or {
+//	find spacecraftUplink(Spacecraft, Comm, Target);
+//	KaCommSubsystem(Comm);
+//	GroundStationNetwork(Target);
+//	TransmitRate == 80.0;
+//}
+//
+//private pattern spacecraftUplink(Spacecraft : Spacecraft, TargetSubsystem : CommSubsystem, Target : CommunicatingElement) {
+//	CommunicatingElement.communicationLink(Spacecraft, Link);
+//	DirectedCommunicationLink.target(Link, TargetSubsystem);
+//	CommunicatingElement.commSubsystem(Target, TargetSubsystem);
+//}
+//
+//// Cost
+//
+//pattern costMetric(Cost : java Double) {
+//	Cost == sum find missionCost(_, #_);
+//}
+//
+//private pattern missionCost(Mission : InterferometryMission, Cost : java Double) {
+//	InterferometryMission.observationTime(Mission, ObservationTime);
+//	SpacecraftCost == sum find spacecraftCost(Mission, _, #_);
+//	Cost == eval(SpacecraftCost + 100000.0 * ObservationTime);
+//}
+//
+//private pattern spacecraftCost(Mission : InterferometryMission, Spacecraft : Spacecraft, Cost : java Double) {
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	find spacecraftOfKindCount(Spacecraft, KindCount);
+//	find basePrice(Spacecraft, BasePrice);
+//	find interferometryPayloadCost(Spacecraft, InterferometryPayloadCost);
+//	find additionalCommSubsystemCost(Spacecraft, AdditionalCommSubsystemCost);
+//	Cost == eval(BasePrice * Math.pow(KindCount, -0.25) + InterferometryPayloadCost + AdditionalCommSubsystemCost);
+//}
+//
+//private pattern spacecraftOfKindCount(Sat : Spacecraft, Count : java Integer) {
+//	CubeSat3U(Sat);
+//	Count == count find cubeSat3U(_);
+//} or {
+//	CubeSat6U(Sat);
+//	Count == count find cubeSat6U(_);
+//} or {
+//	SmallSat(Sat);
+//	Count == count find smallSat(_);
+//}
+//
+//private pattern basePrice(Spacecraft : Spacecraft, BasePrice : java Double) {
+//	CubeSat3U(Spacecraft);
+//	BasePrice == 250000.0;
+//} or {
+//	CubeSat6U(Spacecraft);
+//	BasePrice == 750000.0;
+//} or {
+//	SmallSat(Spacecraft);
+//	BasePrice == 3000000.0;
+//}
+//
+//private pattern interferometryPayloadCost(Spacecraft : Spacecraft, Cost : java Double) {
+//	find spacecraftWithInterferometryPayload(_, Spacecraft);
+//	Cost == 50000.0;
+//} or {
+//	neg find spacecraftWithInterferometryPayload(_, Spacecraft);
+//	Cost == 0.0;
+//}
+//
+//private pattern additionalCommSubsystemCost(Spacecraft : Spacecraft, Cost : java Double) {
+//	find spacecraftWithTwoCommSubsystems(Spacecraft);
+//	Cost == 100000.0;
+//} or {
+//	neg find spacecraftWithTwoCommSubsystems(Spacecraft);
+//	Cost == 0.0;
+//}
+//
+//private pattern spacecraftWithTwoCommSubsystems(Spacecraft : Spacecraft) {
+//	Spacecraft.commSubsystem(Spacecraft, Subsystem1);
+//	Spacecraft.commSubsystem(Spacecraft, Subsystem2);
+//	Subsystem1 != Subsystem2;
+//}

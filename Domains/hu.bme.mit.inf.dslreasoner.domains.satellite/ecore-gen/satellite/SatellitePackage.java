@@ -4,7 +4,6 @@ package satellite;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -22,7 +21,6 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see satellite.SatelliteFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore settingDelegates='org.eclipse.viatra.query.querybasedfeature'"
  * @generated
  */
 public interface SatellitePackage extends EPackage {
@@ -289,22 +287,13 @@ public interface SatellitePackage extends EPackage {
 	int SPACECRAFT__PAYLOAD = COMMUNICATING_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Kind</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPACECRAFT__KIND = COMMUNICATING_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Spacecraft</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPACECRAFT_FEATURE_COUNT = COMMUNICATING_ELEMENT_FEATURE_COUNT + 2;
+	int SPACECRAFT_FEATURE_COUNT = COMMUNICATING_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Spacecraft</em>' class.
@@ -326,31 +315,13 @@ public interface SatellitePackage extends EPackage {
 	int COMM_SUBSYSTEM = 5;
 
 	/**
-	 * The feature id for the '<em><b>Band</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMM_SUBSYSTEM__BAND = 0;
-
-	/**
-	 * The feature id for the '<em><b>Gain</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMM_SUBSYSTEM__GAIN = 1;
-
-	/**
 	 * The number of structural features of the '<em>Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMM_SUBSYSTEM_FEATURE_COUNT = 2;
+	int COMM_SUBSYSTEM_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Comm Subsystem</em>' class.
@@ -464,6 +435,61 @@ public interface SatellitePackage extends EPackage {
 	int INTERFEROMETRY_PAYLOAD_OPERATION_COUNT = PAYLOAD_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link satellite.impl.CubeSatImpl <em>Cube Sat</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see satellite.impl.CubeSatImpl
+	 * @see satellite.impl.SatellitePackageImpl#getCubeSat()
+	 * @generated
+	 */
+	int CUBE_SAT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
+
+	/**
+	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT__PAYLOAD = SPACECRAFT__PAYLOAD;
+
+	/**
+	 * The number of structural features of the '<em>Cube Sat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT_FEATURE_COUNT = SPACECRAFT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Cube Sat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUBE_SAT_OPERATION_COUNT = SPACECRAFT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link satellite.impl.CubeSat3UImpl <em>Cube Sat3 U</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -480,7 +506,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT3_U__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
+	int CUBE_SAT3_U__COMM_SUBSYSTEM = CUBE_SAT__COMM_SUBSYSTEM;
 
 	/**
 	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
@@ -489,7 +515,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT3_U__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
+	int CUBE_SAT3_U__COMMUNICATION_LINK = CUBE_SAT__COMMUNICATION_LINK;
 
 	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
@@ -498,16 +524,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT3_U__PAYLOAD = SPACECRAFT__PAYLOAD;
-
-	/**
-	 * The feature id for the '<em><b>Kind</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUBE_SAT3_U__KIND = SPACECRAFT__KIND;
+	int CUBE_SAT3_U__PAYLOAD = CUBE_SAT__PAYLOAD;
 
 	/**
 	 * The number of structural features of the '<em>Cube Sat3 U</em>' class.
@@ -516,7 +533,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT3_U_FEATURE_COUNT = SPACECRAFT_FEATURE_COUNT + 0;
+	int CUBE_SAT3_U_FEATURE_COUNT = CUBE_SAT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Cube Sat3 U</em>' class.
@@ -525,7 +542,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT3_U_OPERATION_COUNT = SPACECRAFT_OPERATION_COUNT + 0;
+	int CUBE_SAT3_U_OPERATION_COUNT = CUBE_SAT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link satellite.impl.CubeSat6UImpl <em>Cube Sat6 U</em>}' class.
@@ -544,7 +561,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT6_U__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
+	int CUBE_SAT6_U__COMM_SUBSYSTEM = CUBE_SAT__COMM_SUBSYSTEM;
 
 	/**
 	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
@@ -553,7 +570,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT6_U__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
+	int CUBE_SAT6_U__COMMUNICATION_LINK = CUBE_SAT__COMMUNICATION_LINK;
 
 	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
@@ -562,16 +579,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT6_U__PAYLOAD = SPACECRAFT__PAYLOAD;
-
-	/**
-	 * The feature id for the '<em><b>Kind</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUBE_SAT6_U__KIND = SPACECRAFT__KIND;
+	int CUBE_SAT6_U__PAYLOAD = CUBE_SAT__PAYLOAD;
 
 	/**
 	 * The number of structural features of the '<em>Cube Sat6 U</em>' class.
@@ -580,7 +588,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT6_U_FEATURE_COUNT = SPACECRAFT_FEATURE_COUNT + 0;
+	int CUBE_SAT6_U_FEATURE_COUNT = CUBE_SAT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Cube Sat6 U</em>' class.
@@ -589,7 +597,7 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CUBE_SAT6_U_OPERATION_COUNT = SPACECRAFT_OPERATION_COUNT + 0;
+	int CUBE_SAT6_U_OPERATION_COUNT = CUBE_SAT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link satellite.impl.SmallSatImpl <em>Small Sat</em>}' class.
@@ -629,15 +637,6 @@ public interface SatellitePackage extends EPackage {
 	int SMALL_SAT__PAYLOAD = SPACECRAFT__PAYLOAD;
 
 	/**
-	 * The feature id for the '<em><b>Kind</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SMALL_SAT__KIND = SPACECRAFT__KIND;
-
-	/**
 	 * The number of structural features of the '<em>Small Sat</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -656,34 +655,88 @@ public interface SatellitePackage extends EPackage {
 	int SMALL_SAT_OPERATION_COUNT = SPACECRAFT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link satellite.TransceiverBand <em>Transceiver Band</em>}' enum.
+	 * The meta object id for the '{@link satellite.impl.UHFCommSubsystemImpl <em>UHF Comm Subsystem</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see satellite.TransceiverBand
-	 * @see satellite.impl.SatellitePackageImpl#getTransceiverBand()
+	 * @see satellite.impl.UHFCommSubsystemImpl
+	 * @see satellite.impl.SatellitePackageImpl#getUHFCommSubsystem()
 	 * @generated
 	 */
-	int TRANSCEIVER_BAND = 12;
+	int UHF_COMM_SUBSYSTEM = 13;
 
 	/**
-	 * The meta object id for the '{@link satellite.AntennaGain <em>Antenna Gain</em>}' enum.
+	 * The number of structural features of the '<em>UHF Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see satellite.AntennaGain
-	 * @see satellite.impl.SatellitePackageImpl#getAntennaGain()
 	 * @generated
+	 * @ordered
 	 */
-	int ANTENNA_GAIN = 13;
+	int UHF_COMM_SUBSYSTEM_FEATURE_COUNT = COMM_SUBSYSTEM_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link satellite.SpacecraftKind <em>Spacecraft Kind</em>}' enum.
+	 * The number of operations of the '<em>UHF Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see satellite.SpacecraftKind
-	 * @see satellite.impl.SatellitePackageImpl#getSpacecraftKind()
+	 * @generated
+	 * @ordered
+	 */
+	int UHF_COMM_SUBSYSTEM_OPERATION_COUNT = COMM_SUBSYSTEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link satellite.impl.XCommSubsystemImpl <em>XComm Subsystem</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see satellite.impl.XCommSubsystemImpl
+	 * @see satellite.impl.SatellitePackageImpl#getXCommSubsystem()
 	 * @generated
 	 */
-	int SPACECRAFT_KIND = 14;
+	int XCOMM_SUBSYSTEM = 14;
+
+	/**
+	 * The number of structural features of the '<em>XComm Subsystem</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMM_SUBSYSTEM_FEATURE_COUNT = COMM_SUBSYSTEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>XComm Subsystem</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMM_SUBSYSTEM_OPERATION_COUNT = COMM_SUBSYSTEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link satellite.impl.KaCommSubsystemImpl <em>Ka Comm Subsystem</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see satellite.impl.KaCommSubsystemImpl
+	 * @see satellite.impl.SatellitePackageImpl#getKaCommSubsystem()
+	 * @generated
+	 */
+	int KA_COMM_SUBSYSTEM = 15;
+
+	/**
+	 * The number of structural features of the '<em>Ka Comm Subsystem</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KA_COMM_SUBSYSTEM_FEATURE_COUNT = COMM_SUBSYSTEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Ka Comm Subsystem</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KA_COMM_SUBSYSTEM_OPERATION_COUNT = COMM_SUBSYSTEM_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link satellite.ConstellationMission <em>Constellation Mission</em>}'.
@@ -802,17 +855,6 @@ public interface SatellitePackage extends EPackage {
 	EReference getSpacecraft_Payload();
 
 	/**
-	 * Returns the meta object for the attribute '{@link satellite.Spacecraft#getKind <em>Kind</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see satellite.Spacecraft#getKind()
-	 * @see #getSpacecraft()
-	 * @generated
-	 */
-	EAttribute getSpacecraft_Kind();
-
-	/**
 	 * Returns the meta object for class '{@link satellite.CommSubsystem <em>Comm Subsystem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -821,28 +863,6 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCommSubsystem();
-
-	/**
-	 * Returns the meta object for the attribute '{@link satellite.CommSubsystem#getBand <em>Band</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Band</em>'.
-	 * @see satellite.CommSubsystem#getBand()
-	 * @see #getCommSubsystem()
-	 * @generated
-	 */
-	EAttribute getCommSubsystem_Band();
-
-	/**
-	 * Returns the meta object for the attribute '{@link satellite.CommSubsystem#getGain <em>Gain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Gain</em>'.
-	 * @see satellite.CommSubsystem#getGain()
-	 * @see #getCommSubsystem()
-	 * @generated
-	 */
-	EAttribute getCommSubsystem_Gain();
 
 	/**
 	 * Returns the meta object for class '{@link satellite.DirectedCommunicationLink <em>Directed Communication Link</em>}'.
@@ -927,34 +947,44 @@ public interface SatellitePackage extends EPackage {
 	EClass getSmallSat();
 
 	/**
-	 * Returns the meta object for enum '{@link satellite.TransceiverBand <em>Transceiver Band</em>}'.
+	 * Returns the meta object for class '{@link satellite.CubeSat <em>Cube Sat</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Transceiver Band</em>'.
-	 * @see satellite.TransceiverBand
+	 * @return the meta object for class '<em>Cube Sat</em>'.
+	 * @see satellite.CubeSat
 	 * @generated
 	 */
-	EEnum getTransceiverBand();
+	EClass getCubeSat();
 
 	/**
-	 * Returns the meta object for enum '{@link satellite.AntennaGain <em>Antenna Gain</em>}'.
+	 * Returns the meta object for class '{@link satellite.UHFCommSubsystem <em>UHF Comm Subsystem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Antenna Gain</em>'.
-	 * @see satellite.AntennaGain
+	 * @return the meta object for class '<em>UHF Comm Subsystem</em>'.
+	 * @see satellite.UHFCommSubsystem
 	 * @generated
 	 */
-	EEnum getAntennaGain();
+	EClass getUHFCommSubsystem();
 
 	/**
-	 * Returns the meta object for enum '{@link satellite.SpacecraftKind <em>Spacecraft Kind</em>}'.
+	 * Returns the meta object for class '{@link satellite.XCommSubsystem <em>XComm Subsystem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Spacecraft Kind</em>'.
-	 * @see satellite.SpacecraftKind
+	 * @return the meta object for class '<em>XComm Subsystem</em>'.
+	 * @see satellite.XCommSubsystem
 	 * @generated
 	 */
-	EEnum getSpacecraftKind();
+	EClass getXCommSubsystem();
+
+	/**
+	 * Returns the meta object for class '{@link satellite.KaCommSubsystem <em>Ka Comm Subsystem</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ka Comm Subsystem</em>'.
+	 * @see satellite.KaCommSubsystem
+	 * @generated
+	 */
+	EClass getKaCommSubsystem();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1079,14 +1109,6 @@ public interface SatellitePackage extends EPackage {
 		EReference SPACECRAFT__PAYLOAD = eINSTANCE.getSpacecraft_Payload();
 
 		/**
-		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SPACECRAFT__KIND = eINSTANCE.getSpacecraft_Kind();
-
-		/**
 		 * The meta object literal for the '{@link satellite.impl.CommSubsystemImpl <em>Comm Subsystem</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1095,22 +1117,6 @@ public interface SatellitePackage extends EPackage {
 		 * @generated
 		 */
 		EClass COMM_SUBSYSTEM = eINSTANCE.getCommSubsystem();
-
-		/**
-		 * The meta object literal for the '<em><b>Band</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COMM_SUBSYSTEM__BAND = eINSTANCE.getCommSubsystem_Band();
-
-		/**
-		 * The meta object literal for the '<em><b>Gain</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COMM_SUBSYSTEM__GAIN = eINSTANCE.getCommSubsystem_Gain();
 
 		/**
 		 * The meta object literal for the '{@link satellite.impl.DirectedCommunicationLinkImpl <em>Directed Communication Link</em>}' class.
@@ -1189,34 +1195,44 @@ public interface SatellitePackage extends EPackage {
 		EClass SMALL_SAT = eINSTANCE.getSmallSat();
 
 		/**
-		 * The meta object literal for the '{@link satellite.TransceiverBand <em>Transceiver Band</em>}' enum.
+		 * The meta object literal for the '{@link satellite.impl.CubeSatImpl <em>Cube Sat</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see satellite.TransceiverBand
-		 * @see satellite.impl.SatellitePackageImpl#getTransceiverBand()
+		 * @see satellite.impl.CubeSatImpl
+		 * @see satellite.impl.SatellitePackageImpl#getCubeSat()
 		 * @generated
 		 */
-		EEnum TRANSCEIVER_BAND = eINSTANCE.getTransceiverBand();
+		EClass CUBE_SAT = eINSTANCE.getCubeSat();
 
 		/**
-		 * The meta object literal for the '{@link satellite.AntennaGain <em>Antenna Gain</em>}' enum.
+		 * The meta object literal for the '{@link satellite.impl.UHFCommSubsystemImpl <em>UHF Comm Subsystem</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see satellite.AntennaGain
-		 * @see satellite.impl.SatellitePackageImpl#getAntennaGain()
+		 * @see satellite.impl.UHFCommSubsystemImpl
+		 * @see satellite.impl.SatellitePackageImpl#getUHFCommSubsystem()
 		 * @generated
 		 */
-		EEnum ANTENNA_GAIN = eINSTANCE.getAntennaGain();
+		EClass UHF_COMM_SUBSYSTEM = eINSTANCE.getUHFCommSubsystem();
 
 		/**
-		 * The meta object literal for the '{@link satellite.SpacecraftKind <em>Spacecraft Kind</em>}' enum.
+		 * The meta object literal for the '{@link satellite.impl.XCommSubsystemImpl <em>XComm Subsystem</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see satellite.SpacecraftKind
-		 * @see satellite.impl.SatellitePackageImpl#getSpacecraftKind()
+		 * @see satellite.impl.XCommSubsystemImpl
+		 * @see satellite.impl.SatellitePackageImpl#getXCommSubsystem()
 		 * @generated
 		 */
-		EEnum SPACECRAFT_KIND = eINSTANCE.getSpacecraftKind();
+		EClass XCOMM_SUBSYSTEM = eINSTANCE.getXCommSubsystem();
+
+		/**
+		 * The meta object literal for the '{@link satellite.impl.KaCommSubsystemImpl <em>Ka Comm Subsystem</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see satellite.impl.KaCommSubsystemImpl
+		 * @see satellite.impl.SatellitePackageImpl#getKaCommSubsystem()
+		 * @generated
+		 */
+		EClass KA_COMM_SUBSYSTEM = eINSTANCE.getKaCommSubsystem();
 
 	}
 

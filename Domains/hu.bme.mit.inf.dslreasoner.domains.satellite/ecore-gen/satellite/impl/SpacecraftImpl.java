@@ -6,7 +6,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -14,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import satellite.Payload;
 import satellite.SatellitePackage;
 import satellite.Spacecraft;
-import satellite.SpacecraftKind;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +23,6 @@ import satellite.SpacecraftKind;
  * </p>
  * <ul>
  *   <li>{@link satellite.impl.SpacecraftImpl#getPayload <em>Payload</em>}</li>
- *   <li>{@link satellite.impl.SpacecraftImpl#getKind <em>Kind</em>}</li>
  * </ul>
  *
  * @generated
@@ -40,17 +37,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 * @ordered
 	 */
 	protected Payload payload;
-
-	/**
-	 * The cached setting delegate for the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected EStructuralFeature.Internal.SettingDelegate KIND__ESETTING_DELEGATE = ((EStructuralFeature.Internal) SatellitePackage.Literals.SPACECRAFT__KIND)
-			.getSettingDelegate();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,16 +115,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public SpacecraftKind getKind() {
-		return (SpacecraftKind) KIND__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
@@ -157,8 +133,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			return getPayload();
-		case SatellitePackage.SPACECRAFT__KIND:
-			return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,8 +177,6 @@ public abstract class SpacecraftImpl extends CommunicatingElementImpl implements
 		switch (featureID) {
 		case SatellitePackage.SPACECRAFT__PAYLOAD:
 			return payload != null;
-		case SatellitePackage.SPACECRAFT__KIND:
-			return KIND__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
 		}
 		return super.eIsSet(featureID);
 	}

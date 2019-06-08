@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="satellite" nsURI="http://www.example.org/satellite" nsPrefix="satellite">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="org.eclipse.viatra.query.querybasedfeature"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstellationMission" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groundStationNetwork" lowerBound="1"
+        eType="ecore:EClass satellite.ecore#//GroundStationNetwork" containment="true"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spacecraft" lowerBound="2"
+        upperBound="50" eType="ecore:EClass satellite.ecore#//Spacecraft" containment="true"
+        resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryMission" eSuperTypes="satellite.ecore#//ConstellationMission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observationTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat" defaultValueLiteral="2.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommunicatingElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commSubsystem" lowerBound="1"
+        upperBound="2" eType="ecore:EClass satellite.ecore#//CommSubsystem" containment="true"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationLink" eType="ecore:EClass satellite.ecore#//DirectedCommunicationLink"
+        containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroundStationNetwork" eSuperTypes="satellite.ecore#//CommunicatingElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Spacecraft" abstract="true" eSuperTypes="satellite.ecore#//CommunicatingElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="ecore:EClass satellite.ecore#//Payload"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="ecore:EEnum satellite.ecore#//SpacecraftKind"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="band" lowerBound="1" eType="ecore:EEnum satellite.ecore#//TransceiverBand"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gain" lowerBound="1" eType="ecore:EEnum satellite.ecore#//AntennaGain"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectedCommunicationLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="ecore:EClass satellite.ecore#//CommSubsystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass satellite.ecore#//CommSubsystem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="satellite.ecore#//Payload"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat3U" eSuperTypes="satellite.ecore#//CubeSat"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat6U" eSuperTypes="satellite.ecore#//CubeSat"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmallSat" eSuperTypes="satellite.ecore#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat" abstract="true" eSuperTypes="satellite.ecore#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransceiverBand">
+    <eLiterals name="UHF"/>
+    <eLiterals name="X" value="1"/>
+    <eLiterals name="Ka" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AntennaGain">
+    <eLiterals name="LOW"/>
+    <eLiterals name="MEDIUM" value="1"/>
+    <eLiterals name="HIGH" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpacecraftKind">
+    <eLiterals name="CubeSat3U"/>
+    <eLiterals name="CubeSat6U" value="1"/>
+    <eLiterals name="SmallSat" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

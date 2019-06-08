@@ -51,10 +51,6 @@ public enum SpacecraftKind implements Enumerator {
 	/**
 	 * The '<em><b>Cube Sat3 U</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Cube Sat3 U</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CUBE_SAT3_U
 	 * @model name="CubeSat3U"
@@ -66,10 +62,6 @@ public enum SpacecraftKind implements Enumerator {
 	/**
 	 * The '<em><b>Cube Sat6 U</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Cube Sat6 U</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CUBE_SAT6_U
 	 * @model name="CubeSat6U"
@@ -81,10 +73,6 @@ public enum SpacecraftKind implements Enumerator {
 	/**
 	 * The '<em><b>Small Sat</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Small Sat</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SMALL_SAT
 	 * @model name="SmallSat"

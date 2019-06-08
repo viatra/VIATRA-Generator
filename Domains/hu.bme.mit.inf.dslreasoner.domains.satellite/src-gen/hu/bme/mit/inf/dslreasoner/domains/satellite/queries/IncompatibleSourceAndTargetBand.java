@@ -3,7 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CommSubsystemBand;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MatchingCommSubsystem;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -25,7 +24,6 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
@@ -56,8 +54,7 @@ import satellite.DirectedCommunicationLink;
  *         pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
  *         	DirectedCommunicationLink.source(Link, SourceSubsystem);
  *         	DirectedCommunicationLink.target(Link, TargetSubsystem);
- *         	CommSubsystem.band(SourceSubsystem, Band);
- *         	neg find commSubsystemBand(TargetSubsystem, Band);
+ *         	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
  *         }
  * </pre></code>
  * 
@@ -246,8 +243,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
    * pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
    * 	DirectedCommunicationLink.source(Link, SourceSubsystem);
    * 	DirectedCommunicationLink.target(Link, TargetSubsystem);
-   * 	CommSubsystem.band(SourceSubsystem, Band);
-   * 	neg find commSubsystemBand(TargetSubsystem, Band);
+   * 	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
    * }
    * </pre></code>
    * 
@@ -544,7 +540,6 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
           PVariable var_Link = body.getOrCreateVariableByName("Link");
           PVariable var_SourceSubsystem = body.getOrCreateVariableByName("SourceSubsystem");
           PVariable var_TargetSubsystem = body.getOrCreateVariableByName("TargetSubsystem");
-          PVariable var_Band = body.getOrCreateVariableByName("Band");
           new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_Link, parameter_Link)
@@ -561,14 +556,8 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
           new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "target")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
           new Equality(body, var__virtual_1_, var_TargetSubsystem);
-          // 	CommSubsystem.band(SourceSubsystem, Band)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommSubsystem", "band")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "TransceiverBand")));
-          new Equality(body, var__virtual_2_, var_Band);
-          // 	neg find commSubsystemBand(TargetSubsystem, Band)
-          new NegativePatternCall(body, Tuples.flatTupleOf(var_TargetSubsystem, var_Band), CommSubsystemBand.instance().getInternalQueryRepresentation());
+          // 	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem)
+          new NegativePatternCall(body, Tuples.flatTupleOf(var_SourceSubsystem, var_TargetSubsystem), MatchingCommSubsystem.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       {

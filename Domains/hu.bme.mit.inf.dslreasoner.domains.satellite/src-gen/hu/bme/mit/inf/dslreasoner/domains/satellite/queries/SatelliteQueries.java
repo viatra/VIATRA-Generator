@@ -5,21 +5,13 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkDoesNotStartAtContainingElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLoop;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CostMetric;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CoverageMetric;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CubeSatWithKaAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetBand;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetGain;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.KaAntennaGainLow;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoPotentialLinkToGroundStation;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NotEnoughInterferometryPayloads;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SmallSat;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SpacecraftOfKind;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.ThreeUCubeSatWithNonUhfCrossLink;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.TimeMetric;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.UhfAntennaGainNotLow;
-import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.XAntennaGainNotMedium;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 
@@ -37,17 +29,9 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>noPotentialLinkToGroundStation</li>
  * <li>communicationLoop</li>
  * <li>incompatibleSourceAndTargetBand</li>
- * <li>incompatibleSourceAndTargetGain</li>
- * <li>uhfAntennaGainNotLow</li>
- * <li>xAntennaGainNotMedium</li>
- * <li>kaAntennaGainLow</li>
  * <li>threeUCubeSatWithNonUhfCrossLink</li>
  * <li>cubeSatWithKaAntenna</li>
  * <li>smallSat</li>
- * <li>spacecraftOfKind</li>
- * <li>coverageMetric</li>
- * <li>timeMetric</li>
- * <li>costMetric</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -78,17 +62,9 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
     querySpecifications.add(NoPotentialLinkToGroundStation.instance());
     querySpecifications.add(CommunicationLoop.instance());
     querySpecifications.add(IncompatibleSourceAndTargetBand.instance());
-    querySpecifications.add(IncompatibleSourceAndTargetGain.instance());
-    querySpecifications.add(UhfAntennaGainNotLow.instance());
-    querySpecifications.add(XAntennaGainNotMedium.instance());
-    querySpecifications.add(KaAntennaGainLow.instance());
     querySpecifications.add(ThreeUCubeSatWithNonUhfCrossLink.instance());
     querySpecifications.add(CubeSatWithKaAntenna.instance());
     querySpecifications.add(SmallSat.instance());
-    querySpecifications.add(SpacecraftOfKind.instance());
-    querySpecifications.add(CoverageMetric.instance());
-    querySpecifications.add(TimeMetric.instance());
-    querySpecifications.add(CostMetric.instance());
   }
   
   public CommunicationLinkDoesNotStartAtContainingElement getCommunicationLinkDoesNotStartAtContainingElement() {
@@ -139,38 +115,6 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
     return IncompatibleSourceAndTargetBand.Matcher.on(engine);
   }
   
-  public IncompatibleSourceAndTargetGain getIncompatibleSourceAndTargetGain() {
-    return IncompatibleSourceAndTargetGain.instance();
-  }
-  
-  public IncompatibleSourceAndTargetGain.Matcher getIncompatibleSourceAndTargetGain(final ViatraQueryEngine engine) {
-    return IncompatibleSourceAndTargetGain.Matcher.on(engine);
-  }
-  
-  public UhfAntennaGainNotLow getUhfAntennaGainNotLow() {
-    return UhfAntennaGainNotLow.instance();
-  }
-  
-  public UhfAntennaGainNotLow.Matcher getUhfAntennaGainNotLow(final ViatraQueryEngine engine) {
-    return UhfAntennaGainNotLow.Matcher.on(engine);
-  }
-  
-  public XAntennaGainNotMedium getXAntennaGainNotMedium() {
-    return XAntennaGainNotMedium.instance();
-  }
-  
-  public XAntennaGainNotMedium.Matcher getXAntennaGainNotMedium(final ViatraQueryEngine engine) {
-    return XAntennaGainNotMedium.Matcher.on(engine);
-  }
-  
-  public KaAntennaGainLow getKaAntennaGainLow() {
-    return KaAntennaGainLow.instance();
-  }
-  
-  public KaAntennaGainLow.Matcher getKaAntennaGainLow(final ViatraQueryEngine engine) {
-    return KaAntennaGainLow.Matcher.on(engine);
-  }
-  
   public ThreeUCubeSatWithNonUhfCrossLink getThreeUCubeSatWithNonUhfCrossLink() {
     return ThreeUCubeSatWithNonUhfCrossLink.instance();
   }
@@ -193,37 +137,5 @@ public final class SatelliteQueries extends BaseGeneratedPatternGroup {
   
   public SmallSat.Matcher getSmallSat(final ViatraQueryEngine engine) {
     return SmallSat.Matcher.on(engine);
-  }
-  
-  public SpacecraftOfKind getSpacecraftOfKind() {
-    return SpacecraftOfKind.instance();
-  }
-  
-  public SpacecraftOfKind.Matcher getSpacecraftOfKind(final ViatraQueryEngine engine) {
-    return SpacecraftOfKind.Matcher.on(engine);
-  }
-  
-  public CoverageMetric getCoverageMetric() {
-    return CoverageMetric.instance();
-  }
-  
-  public CoverageMetric.Matcher getCoverageMetric(final ViatraQueryEngine engine) {
-    return CoverageMetric.Matcher.on(engine);
-  }
-  
-  public TimeMetric getTimeMetric() {
-    return TimeMetric.instance();
-  }
-  
-  public TimeMetric.Matcher getTimeMetric(final ViatraQueryEngine engine) {
-    return TimeMetric.Matcher.on(engine);
-  }
-  
-  public CostMetric getCostMetric() {
-    return CostMetric.instance();
-  }
-  
-  public CostMetric.Matcher getCostMetric(final ViatraQueryEngine engine) {
-    return CostMetric.Matcher.on(engine);
   }
 }

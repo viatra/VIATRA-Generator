@@ -1,0 +1,35 @@
+problem {
+	basepath <model>
+	metamodel <satellite.SatellitePackage>
+	model <../inputs/SatelliteInstance.xmi>
+}
+
+goal {
+	objective Cost minimise java { "hu.bme.mit.inf.dslreasoner.domains.satellite.mdeo.CostObjective" }
+	constraint PatternMatch java { "hu.bme.mit.inf.dslreasoner.domains.satellite.mdeo.PatternMatchConstraint" }
+}
+
+search {
+	mutate using <satellite_fixup.henshin> unit "addCubeSat3U"
+//	mutate { "CubeSat3U" }
+//	mutate { "CubeSat6U" }
+//	mutate { "SmallSat" }
+//	mutate { "InterferometryPayload" }
+//	mutate { "CommSubsystem" }
+//	mutate { "DirectedCommunicationLink" }
+}
+
+solver {
+	optimisation provider moea algorithm NSGAII {
+		variation: mutation
+		population: 25
+		mutation.step: 3
+		mutation.strategy: random
+	}
+
+	termination {
+		time: 120
+	}
+
+	batches 1
+}

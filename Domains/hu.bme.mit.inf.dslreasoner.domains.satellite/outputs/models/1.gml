@@ -5,330 +5,6 @@ graph
 			id	0
 			graphics
 			[
-				w	244.20000000000002
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"UHF literal TransceiverBand"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	TransceiverBand enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	1
-			graphics
-			[
-				w	226.60000000000002
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"X literal TransceiverBand"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	TransceiverBand enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	2
-			graphics
-			[
-				w	235.4
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"Ka literal TransceiverBand"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	TransceiverBand enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	3
-			graphics
-			[
-				w	209.00000000000003
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"LOW literal AntennaGain"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	AntennaGain enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	4
-			graphics
-			[
-				w	235.4
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"MEDIUM literal AntennaGain"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	AntennaGain enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	5
-			graphics
-			[
-				w	217.8
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"HIGH literal AntennaGain"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	AntennaGain enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	6
-			graphics
-			[
-				w	288.20000000000005
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"CubeSat3U literal SpacecraftKind"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	SpacecraftKind enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	7
-			graphics
-			[
-				w	288.20000000000005
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"CubeSat6U literal SpacecraftKind"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	SpacecraftKind enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	8
-			graphics
-			[
-				w	279.40000000000003
-				h	40
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"SmallSat literal SpacecraftKind"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	SpacecraftKind enum
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	9
-			graphics
-			[
 				w	315.70000000000005
 				h	82
 				type	"rectangle"
@@ -365,7 +41,7 @@ graph
 	
 	node
 		[
-			id	10
+			id	1
 			graphics
 			[
 				w	308.0
@@ -404,11 +80,11 @@ graph
 	
 	node
 		[
-			id	11
+			id	2
 			graphics
 			[
-				w	254.10000000000002
-				h	54
+				w	261.8
+				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -429,7 +105,9 @@ graph
 			[
 				text	"
 	CommSubsystem class DefinedPart
+	XCommSubsystem class DefinedPart
 	CommSubsystem class
+	XCommSubsystem class
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -441,11 +119,11 @@ graph
 	
 	node
 		[
-			id	12
+			id	3
 			graphics
 			[
-				w	254.10000000000002
-				h	54
+				w	269.5
+				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -466,7 +144,9 @@ graph
 			[
 				text	"
 	CommSubsystem class DefinedPart
+	KaCommSubsystem class DefinedPart
 	CommSubsystem class
+	KaCommSubsystem class
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -478,7 +158,7 @@ graph
 	
 	node
 		[
-			id	13
+			id	4
 			graphics
 			[
 				w	41.800000000000004
@@ -513,7 +193,7 @@ graph
 	
 	node
 		[
-			id	14
+			id	5
 			graphics
 			[
 				w	50.6
@@ -548,47 +228,7 @@ graph
 	
 	node
 		[
-			id	15
-			graphics
-			[
-				w	323.40000000000003
-				h	96
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommunicatingElement class
-	Spacecraft class
-	CubeSat6U class
-	CubeSat class
-	CommunicatingElement class UndefinedPart
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	16
+			id	6
 			graphics
 			[
 				w	323.40000000000003
@@ -628,7 +268,163 @@ graph
 	
 	node
 		[
-			id	17
+			id	7
+			graphics
+			[
+				w	277.20000000000005
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommSubsystem class
+	XCommSubsystem class
+	CommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	8
+			graphics
+			[
+				w	277.20000000000005
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommSubsystem class
+	XCommSubsystem class
+	CommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	9
+			graphics
+			[
+				w	323.40000000000003
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommunicatingElement class
+	Spacecraft class
+	SmallSat class
+	CommunicatingElement class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	10
+			graphics
+			[
+				w	277.20000000000005
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommSubsystem class
+	XCommSubsystem class
+	CommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	11
 			graphics
 			[
 				w	223.3
@@ -665,44 +461,7 @@ graph
 	
 	node
 		[
-			id	18
-			graphics
-			[
-				w	269.5
-				h	54
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommSubsystem class
-	CommSubsystem class UndefinedPart
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	19
+			id	12
 			graphics
 			[
 				w	223.3
@@ -739,11 +498,11 @@ graph
 	
 	node
 		[
-			id	20
+			id	13
 			graphics
 			[
-				w	269.5
-				h	54
+				w	284.90000000000003
+				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -764,7 +523,9 @@ graph
 			[
 				text	"
 	CommSubsystem class
+	KaCommSubsystem class
 	CommSubsystem class UndefinedPart
+	KaCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -776,7 +537,7 @@ graph
 	
 	node
 		[
-			id	21
+			id	14
 			graphics
 			[
 				w	254.10000000000002
@@ -812,81 +573,7 @@ graph
 	
 	node
 		[
-			id	22
-			graphics
-			[
-				w	269.5
-				h	54
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommSubsystem class
-	CommSubsystem class UndefinedPart
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	23
-			graphics
-			[
-				w	269.5
-				h	54
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommSubsystem class
-	CommSubsystem class UndefinedPart
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	24
+			id	15
 			graphics
 			[
 				w	254.10000000000002
@@ -922,7 +609,7 @@ graph
 	
 	node
 		[
-			id	25
+			id	16
 			graphics
 			[
 				w	112.2
@@ -957,7 +644,7 @@ graph
 	
 	node
 		[
-			id	26
+			id	17
 			graphics
 			[
 				w	85.80000000000001
@@ -992,7 +679,7 @@ graph
 	
 	node
 		[
-			id	27
+			id	18
 			graphics
 			[
 				w	103.4
@@ -1027,7 +714,7 @@ graph
 	
 	node
 		[
-			id	28
+			id	19
 			graphics
 			[
 				w	103.4
@@ -1061,8 +748,8 @@ graph
 		]
 	edge
 	[
-		source	9
-		target	10
+		source	0
+		target	1
 		graphics
 		[
 			fill	"#000000"
@@ -1081,7 +768,187 @@ graph
 	]
 	edge
 	[
+		source	0
+		target	6
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"spacecraft reference ConstellationMission"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	0
+		target	9
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"spacecraft reference ConstellationMission"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	1
+		target	2
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"commSubsystem reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	1
+		target	3
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"commSubsystem reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	6
+		target	7
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"commSubsystem reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	6
+		target	8
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"commSubsystem reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
 		source	9
+		target	10
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"commSubsystem reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	9
+		target	13
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"commSubsystem reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	9
+		target	14
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"communicationLink reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	6
 		target	15
 		graphics
 		[
@@ -1091,7 +958,27 @@ graph
 		]
 		LabelGraphics
 		[
-			text	"spacecraft reference ConstellationMission"
+			text	"communicationLink reference CommunicatingElement"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	6
+		target	11
+		graphics
+		[
+			fill	"#000000"
+			width	3
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"payload reference Spacecraft"
 			fontSize	14
 			fontName	"Consolas"
 			configuration	"AutoFlippingLabel"
@@ -1102,187 +989,7 @@ graph
 	edge
 	[
 		source	9
-		target	16
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"spacecraft reference ConstellationMission"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	10
-		target	11
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"commSubsystem reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	10
 		target	12
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"commSubsystem reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	15
-		target	18
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"commSubsystem reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	16
-		target	20
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"commSubsystem reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	15
-		target	22
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"commSubsystem reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	16
-		target	23
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"commSubsystem reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	15
-		target	21
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"communicationLink reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	16
-		target	24
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"communicationLink reference CommunicatingElement"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	16
-		target	17
 		graphics
 		[
 			fill	"#000000"
@@ -1301,28 +1008,27 @@ graph
 	]
 	edge
 	[
+		source	14
+		target	13
+		graphics
+		[
+			fill	"#000000"
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"source reference DirectedCommunicationLink"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
 		source	15
-		target	19
-		graphics
-		[
-			fill	"#000000"
-			width	3
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"payload reference Spacecraft"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	21
-		target	18
+		target	7
 		graphics
 		[
 			fill	"#000000"
@@ -1340,27 +1046,8 @@ graph
 	]
 	edge
 	[
-		source	24
-		target	23
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"source reference DirectedCommunicationLink"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	21
-		target	12
+		source	14
+		target	3
 		graphics
 		[
 			fill	"#000000"
@@ -1378,8 +1065,8 @@ graph
 	]
 	edge
 	[
-		source	24
-		target	11
+		source	15
+		target	2
 		graphics
 		[
 			fill	"#000000"
@@ -1388,234 +1075,6 @@ graph
 		LabelGraphics
 		[
 			text	"target reference DirectedCommunicationLink"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	11
-		target	1
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"band attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	12
-		target	2
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"band attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	18
-		target	2
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"band attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	20
-		target	1
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"band attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	22
-		target	1
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"band attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	23
-		target	1
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"band attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	11
-		target	4
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"gain attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	12
-		target	5
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"gain attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	18
-		target	5
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"gain attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	20
-		target	5
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"gain attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	22
-		target	5
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"gain attribute CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
-		source	23
-		target	4
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"gain attribute CommSubsystem"
 			fontSize	14
 			fontName	"Consolas"
 			configuration	"AutoFlippingLabel"

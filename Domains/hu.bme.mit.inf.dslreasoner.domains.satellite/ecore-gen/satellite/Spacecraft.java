@@ -12,7 +12,6 @@ package satellite;
  * </p>
  * <ul>
  *   <li>{@link satellite.Spacecraft#getPayload <em>Payload</em>}</li>
- *   <li>{@link satellite.Spacecraft#getKind <em>Kind</em>}</li>
  * </ul>
  *
  * @see satellite.SatellitePackage#getSpacecraft()
@@ -23,10 +22,6 @@ public interface Spacecraft extends CommunicatingElement {
 	/**
 	 * Returns the value of the '<em><b>Payload</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Payload</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Payload</em>' containment reference.
 	 * @see #setPayload(Payload)
@@ -45,23 +40,5 @@ public interface Spacecraft extends CommunicatingElement {
 	 * @generated
 	 */
 	void setPayload(Payload value);
-
-	/**
-	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
-	 * The literals are from the enumeration {@link satellite.SpacecraftKind}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Kind</em>' attribute.
-	 * @see satellite.SpacecraftKind
-	 * @see satellite.SatellitePackage#getSpacecraft_Kind()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='hu.bme.mit.inf.dslreasoner.domains.satellite.queries.spacecraftOfKind'"
-	 * @generated
-	 */
-	SpacecraftKind getKind();
 
 } // Spacecraft

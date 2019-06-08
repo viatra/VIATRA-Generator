@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -25,7 +24,6 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
@@ -35,7 +33,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterRe
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -55,7 +52,8 @@ import satellite.Spacecraft;
  *         {@literal @}Constraint(severity = "error", key = {Spacecraft},
  *         	message = "Only a Small Satellite can be configured with a Ka-band communication system.")
  *         pattern cubeSatWithKaAntenna(Spacecraft : Spacecraft) {
- *         	CommunicatingElement.commSubsystem.band(Spacecraft, TransceiverBand::Ka);
+ *         	CommunicatingElement.commSubsystem(Spacecraft, Comm);
+ *         	KaCommSubsystem(Comm);
  *         	neg find smallSat(Spacecraft);
  *         }
  * </pre></code>
@@ -243,7 +241,8 @@ public final class CubeSatWithKaAntenna extends BaseGeneratedEMFQuerySpecificati
    * {@literal @}Constraint(severity = "error", key = {Spacecraft},
    * 	message = "Only a Small Satellite can be configured with a Ka-band communication system.")
    * pattern cubeSatWithKaAntenna(Spacecraft : Spacecraft) {
-   * 	CommunicatingElement.commSubsystem.band(Spacecraft, TransceiverBand::Ka);
+   * 	CommunicatingElement.commSubsystem(Spacecraft, Comm);
+   * 	KaCommSubsystem(Comm);
    * 	neg find smallSat(Spacecraft);
    * }
    * </pre></code>
@@ -539,21 +538,19 @@ public final class CubeSatWithKaAntenna extends BaseGeneratedEMFQuerySpecificati
       {
           PBody body = new PBody(this);
           PVariable var_Spacecraft = body.getOrCreateVariableByName("Spacecraft");
+          PVariable var_Comm = body.getOrCreateVariableByName("Comm");
           new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "Spacecraft")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_Spacecraft, parameter_Spacecraft)
           ));
-          // 	CommunicatingElement.commSubsystem.band(Spacecraft, TransceiverBand::Ka)
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, getEnumLiteral("http://www.example.org/satellite", "TransceiverBand", "Ka").getInstance());
+          // 	CommunicatingElement.commSubsystem(Spacecraft, Comm)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommSubsystem", "band")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.example.org/satellite", "TransceiverBand")));
-          new Equality(body, var__virtual_2_, var__virtual_0_);
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Spacecraft, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_0_, var_Comm);
+          // 	KaCommSubsystem(Comm)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Comm), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "KaCommSubsystem")));
           // 	neg find smallSat(Spacecraft)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_Spacecraft), SmallSat.instance().getInternalQueryRepresentation());
           bodies.add(body);
