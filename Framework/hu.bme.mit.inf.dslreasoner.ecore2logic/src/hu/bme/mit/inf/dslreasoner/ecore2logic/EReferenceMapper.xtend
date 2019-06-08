@@ -32,7 +32,7 @@ class EReferenceMapper_RelationsOverTypes implements EReferenceMapper{
 	val extension Ecore2logicannotationsFactory builder2 = Ecore2logicannotationsFactory.eINSTANCE
 	val extension EClassMapper classMapper;
 	
-	public new(EClassMapper classMapper) {
+	new(EClassMapper classMapper) {
 		this.classMapper = classMapper
 	}
 	
@@ -117,7 +117,7 @@ class EReferenceMapper_RelationsOverTypes implements EReferenceMapper{
 	def createInverseReferenceConstraints(Ecore2Logic_Trace trace, LogicProblem problem, Iterable<EReference> references) {
 		trace.referenceMapperTrace.asTrace.inverseEdges = new HashMap
 		for(reference : references) {
-			if(reference.EOpposite!=null) {
+			if(reference.EOpposite!==null && references.exists[it === reference.EOpposite]) {
 				val opposite = reference.EOpposite
 				if(trace.referenceMapperTrace.asTrace.inverseEdges.containsKey(opposite)) {
 					trace.referenceMapperTrace.asTrace.inverseEdges.put(reference,trace.referenceMapperTrace.asTrace.inverseEdges.get(opposite))
