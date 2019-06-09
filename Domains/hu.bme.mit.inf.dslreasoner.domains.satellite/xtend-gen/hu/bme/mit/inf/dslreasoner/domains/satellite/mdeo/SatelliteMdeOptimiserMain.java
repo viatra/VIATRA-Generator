@@ -1,8 +1,5 @@
-package hu.bme.mit.inf.dslreasoner.domains.cps.mdeo;
+package hu.bme.mit.inf.dslreasoner.domains.satellite.mdeo;
 
-import hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage;
-import hu.bme.mit.inf.dslreasoner.domains.cps.CyberPhysicalSystem;
-import hu.bme.mit.inf.dslreasoner.domains.cps.generator.CpsGenerator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -10,44 +7,34 @@ import java.io.FileWriter;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import satellite.SatellitePackage;
 import uk.ac.kcl.inf.mdeoptimiser.interfaces.cli.Run;
 
 @SuppressWarnings("all")
-public class CpsMdeOptimiserMain {
+public class SatelliteMdeOptimiserMain {
   private static final String PROJECT_PATH = ".";
   
-  private static final String PROBLEM_PATH = "model/problem.xmi";
+  private static final String MOPT_PATH = "src/hu/bme/mit/inf/dslreasoner/domains/satellite/mdeo/satellite.mopt";
   
-  private static final String MOPT_PATH = "src/hu/bme/mit/inf/dslreasoner/domains/cps/mdeo/cps.mopt";
-  
-  private CpsMdeOptimiserMain() {
+  private SatelliteMdeOptimiserMain() {
     new IllegalStateException("This is a static utility class and should not be instantiated directly.");
   }
   
   public static void main(final String[] args) {
-    try {
-      Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-      XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
-      _extensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, _xMIResourceFactoryImpl);
-      EPackage.Registry.INSTANCE.put(CpsPackage.eNS_URI, CpsPackage.eINSTANCE);
-      final CpsGenerator generator = new CpsGenerator(1, 4, 1);
-      final CyberPhysicalSystem problem = generator.generateCpsProblem();
-      Resource _eResource = problem.eResource();
-      _eResource.setURI(URI.createFileURI(CpsMdeOptimiserMain.PROBLEM_PATH));
-      problem.eResource().save(CollectionLiterals.<Object, Object>emptyMap());
-      Pair<String, String> _mappedTo = Pair.<String, String>of("cps.ecore", CpsPackage.eNS_URI);
-      CpsMdeOptimiserMain.fixupHenshinModel("model/cps.henshin", "model/cps_fixup.henshin", Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
-      Run.main(new String[] { "-p", CpsMdeOptimiserMain.PROJECT_PATH, "-m", CpsMdeOptimiserMain.MOPT_PATH });
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+    XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
+    _extensionToFactoryMap.put(Resource.Factory.Registry.DEFAULT_EXTENSION, _xMIResourceFactoryImpl);
+    EPackage.Registry.INSTANCE.put(SatellitePackage.eNS_URI, SatellitePackage.eINSTANCE);
+    Pair<String, String> _mappedTo = Pair.<String, String>of("satellite.ecore", SatellitePackage.eNS_URI);
+    SatelliteMdeOptimiserMain.fixupHenshinModel("model/satellite.henshin", "model/satellite_fixup.henshin", 
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo)));
+    Run.main(new String[] { "-p", SatelliteMdeOptimiserMain.PROJECT_PATH, "-m", SatelliteMdeOptimiserMain.MOPT_PATH });
   }
   
   private static void fixupHenshinModel(final String originalPath, final String outputPath, final Map<String, String> remapMap) {

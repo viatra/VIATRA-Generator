@@ -20,4 +20,42 @@
     </rhs>
     <mappings xmi:id="_Qn4G0X9EEemiUoPdWqOlQg" origin="_Qn3fwH9EEemiUoPdWqOlQg" image="_Qn4G0H9EEemiUoPdWqOlQg"/>
   </units>
+  <units xsi:type="henshin:Rule" xmi:id="_kgBHMH9KEemiUoPdWqOlQg" name="addCubeSat6U">
+    <lhs xmi:id="_kgHN0H9KEemiUoPdWqOlQg" name="Lhs">
+      <nodes xmi:id="_obHq0H9KEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//InterferometryMission"/>
+      </nodes>
+    </lhs>
+    <rhs xmi:id="_kgIb8H9KEemiUoPdWqOlQg" name="Rhs">
+      <nodes xmi:id="_obIR4H9KEemiUoPdWqOlQg" outgoing="_skabcH9KEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//InterferometryMission"/>
+      </nodes>
+      <nodes xmi:id="_qHno4H9KEemiUoPdWqOlQg" incoming="_skabcH9KEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//CubeSat6U"/>
+      </nodes>
+      <edges xmi:id="_skabcH9KEemiUoPdWqOlQg" source="_obIR4H9KEemiUoPdWqOlQg" target="_qHno4H9KEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//ConstellationMission/spacecraft"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_obIR4X9KEemiUoPdWqOlQg" origin="_obHq0H9KEemiUoPdWqOlQg" image="_obIR4H9KEemiUoPdWqOlQg"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_xFdIQH9LEemiUoPdWqOlQg" name="addSmallSat">
+    <lhs xmi:id="_xFiAwH9LEemiUoPdWqOlQg" name="Lhs">
+      <nodes xmi:id="_a7r_UH9MEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//InterferometryMission"/>
+      </nodes>
+    </lhs>
+    <rhs xmi:id="_xFjO4H9LEemiUoPdWqOlQg" name="Rhs">
+      <nodes xmi:id="_a7w30H9MEemiUoPdWqOlQg" outgoing="_hORXsH9MEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//InterferometryMission"/>
+      </nodes>
+      <nodes xmi:id="_dt0vwH9MEemiUoPdWqOlQg" incoming="_hORXsH9MEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//SmallSat"/>
+      </nodes>
+      <edges xmi:id="_hORXsH9MEemiUoPdWqOlQg" source="_a7w30H9MEemiUoPdWqOlQg" target="_dt0vwH9MEemiUoPdWqOlQg">
+        <type href="http://www.example.org/satellite#//ConstellationMission/spacecraft"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_a7xe4H9MEemiUoPdWqOlQg" origin="_a7r_UH9MEemiUoPdWqOlQg" image="_a7w30H9MEemiUoPdWqOlQg"/>
+  </units>
 </henshin:Module>

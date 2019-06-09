@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import satellite.SatellitePackage
-import uk.ac.kcl.inf.mdeoptimiser.languages.MoptStandaloneSetup
+import uk.ac.kcl.inf.mdeoptimiser.interfaces.cli.Run
 
 class SatelliteMdeOptimiserMain {
 	static val PROJECT_PATH = "."
@@ -25,8 +25,7 @@ class SatelliteMdeOptimiserMain {
 		EPackage.Registry.INSTANCE.put(SatellitePackage.eNS_URI, SatellitePackage.eINSTANCE)
 		fixupHenshinModel("model/satellite.henshin", "model/satellite_fixup.henshin",
 			#{"satellite.ecore" -> SatellitePackage.eNS_URI})
-		val injector = new MoptStandaloneSetup().createInjectorAndDoEMFRegistration();
-		injector.getInstance(ExcludedRun).run(PROJECT_PATH, MOPT_PATH)
+		Run.main(#["-p", PROJECT_PATH, "-m", MOPT_PATH])
 	}
 
 	private def static void fixupHenshinModel(String originalPath, String outputPath, Map<String, String> remapMap) {

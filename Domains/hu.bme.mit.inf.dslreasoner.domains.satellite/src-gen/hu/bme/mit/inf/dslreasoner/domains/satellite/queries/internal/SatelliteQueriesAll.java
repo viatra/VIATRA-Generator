@@ -5,6 +5,8 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal;
 
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLinkDoesNotStartAtContainingElement;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CommunicationLoop;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CostMetric;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CoverageMetric;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.CubeSatWithKaAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.IncompatibleSourceAndTargetBand;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoLinkToGroundStation;
@@ -12,18 +14,33 @@ import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NoPotentialLinkToGro
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.NotEnoughInterferometryPayloads;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SmallSat;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.ThreeUCubeSatWithNonUhfCrossLink;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.TimeMetric;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.AdditionalCommSubsystemCost;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.AtLeastTwoInterferometryPayloads;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.BasePrice;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CommSubsystemBandUhf;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CubeSat3U;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.CubeSat6U;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.DirectCommunicationLink;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.GroundStationNetwork;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.IncomingData;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.IndirectCommunicationLink;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.IndirectLinkAllowed;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.InterferometryPayloadCost;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.LinkAllowed;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MatchingAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MatchingCommSubsystem;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MissionCost;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MissionCoverage;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MissionTime;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.ScienceData;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftCost;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftOfKindCount;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftUplink;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftWithInterferometryPayload;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftWithTwoCommSubsystems;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.TransmitRate;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.TransmitTime;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.TransmittingCommSubsystem;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 
@@ -55,6 +72,23 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>groundStationNetwork</li>
  * <li>cubeSatWithKaAntenna</li>
  * <li>smallSat</li>
+ * <li>coverageMetric</li>
+ * <li>missionCoverage</li>
+ * <li>timeMetric</li>
+ * <li>missionTime</li>
+ * <li>transmitTime</li>
+ * <li>incomingData</li>
+ * <li>scienceData</li>
+ * <li>transmitRate</li>
+ * <li>spacecraftUplink</li>
+ * <li>costMetric</li>
+ * <li>missionCost</li>
+ * <li>spacecraftCost</li>
+ * <li>spacecraftOfKindCount</li>
+ * <li>basePrice</li>
+ * <li>interferometryPayloadCost</li>
+ * <li>additionalCommSubsystemCost</li>
+ * <li>spacecraftWithTwoCommSubsystems</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -101,5 +135,22 @@ public final class SatelliteQueriesAll extends BaseGeneratedPatternGroup {
     querySpecifications.add(GroundStationNetwork.instance());
     querySpecifications.add(CubeSatWithKaAntenna.instance());
     querySpecifications.add(SmallSat.instance());
+    querySpecifications.add(CoverageMetric.instance());
+    querySpecifications.add(MissionCoverage.instance());
+    querySpecifications.add(TimeMetric.instance());
+    querySpecifications.add(MissionTime.instance());
+    querySpecifications.add(TransmitTime.instance());
+    querySpecifications.add(IncomingData.instance());
+    querySpecifications.add(ScienceData.instance());
+    querySpecifications.add(TransmitRate.instance());
+    querySpecifications.add(SpacecraftUplink.instance());
+    querySpecifications.add(CostMetric.instance());
+    querySpecifications.add(MissionCost.instance());
+    querySpecifications.add(SpacecraftCost.instance());
+    querySpecifications.add(SpacecraftOfKindCount.instance());
+    querySpecifications.add(BasePrice.instance());
+    querySpecifications.add(InterferometryPayloadCost.instance());
+    querySpecifications.add(AdditionalCommSubsystemCost.instance());
+    querySpecifications.add(SpacecraftWithTwoCommSubsystems.instance());
   }
 }

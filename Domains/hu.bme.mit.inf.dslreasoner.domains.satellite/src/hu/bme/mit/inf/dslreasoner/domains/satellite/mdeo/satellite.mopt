@@ -10,13 +10,14 @@ goal {
 }
 
 search {
-	mutate using <satellite_fixup.henshin> unit "addCubeSat3U"
-//	mutate { "CubeSat3U" }
-//	mutate { "CubeSat6U" }
-//	mutate { "SmallSat" }
-//	mutate { "InterferometryPayload" }
-//	mutate { "CommSubsystem" }
-//	mutate { "DirectedCommunicationLink" }
+//	mutate using <satellite_fixup.henshin> unit "addCubeSat3U"
+	mutate { "CubeSat3U" }
+	mutate { "CubeSat6U" }
+	mutate { "SmallSat" }
+	mutate { "InterferometryPayload" }
+	mutate { "UHFCommSubsystem" }
+	mutate { "XCommSubsystem" }
+	mutate { "KaCommSubsystem" }
 }
 
 solver {
