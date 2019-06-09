@@ -14,7 +14,6 @@ import satellite.ConstellationMission;
 import satellite.CubeSat;
 import satellite.CubeSat3U;
 import satellite.CubeSat6U;
-import satellite.DirectedCommunicationLink;
 import satellite.GroundStationNetwork;
 import satellite.InterferometryMission;
 import satellite.InterferometryPayload;
@@ -75,13 +74,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	private EClass commSubsystemEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass directedCommunicationLinkEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -286,16 +278,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
-	public EReference getCommunicatingElement_CommunicationLink() {
-		return (EReference) communicatingElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getGroundStationNetwork() {
 		return groundStationNetworkEClass;
 	}
@@ -336,28 +318,8 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
-	public EClass getDirectedCommunicationLink() {
-		return directedCommunicationLinkEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDirectedCommunicationLink_Source() {
-		return (EReference) directedCommunicationLinkEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDirectedCommunicationLink_Target() {
-		return (EReference) directedCommunicationLinkEClass.getEStructuralFeatures().get(1);
+	public EReference getCommSubsystem_Target() {
+		return (EReference) commSubsystemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -489,7 +451,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		communicatingElementEClass = createEClass(COMMUNICATING_ELEMENT);
 		createEReference(communicatingElementEClass, COMMUNICATING_ELEMENT__COMM_SUBSYSTEM);
-		createEReference(communicatingElementEClass, COMMUNICATING_ELEMENT__COMMUNICATION_LINK);
 
 		groundStationNetworkEClass = createEClass(GROUND_STATION_NETWORK);
 
@@ -497,10 +458,7 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		createEReference(spacecraftEClass, SPACECRAFT__PAYLOAD);
 
 		commSubsystemEClass = createEClass(COMM_SUBSYSTEM);
-
-		directedCommunicationLinkEClass = createEClass(DIRECTED_COMMUNICATION_LINK);
-		createEReference(directedCommunicationLinkEClass, DIRECTED_COMMUNICATION_LINK__SOURCE);
-		createEReference(directedCommunicationLinkEClass, DIRECTED_COMMUNICATION_LINK__TARGET);
+		createEReference(commSubsystemEClass, COMM_SUBSYSTEM__TARGET);
 
 		payloadEClass = createEClass(PAYLOAD);
 
@@ -583,9 +541,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		initEReference(getCommunicatingElement_CommSubsystem(), this.getCommSubsystem(), null, "commSubsystem", null, 1,
 				2, CommunicatingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCommunicatingElement_CommunicationLink(), this.getDirectedCommunicationLink(), null,
-				"communicationLink", null, 0, 1, CommunicatingElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(groundStationNetworkEClass, GroundStationNetwork.class, "GroundStationNetwork", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -598,15 +553,9 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		initEClass(commSubsystemEClass, CommSubsystem.class, "CommSubsystem", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(directedCommunicationLinkEClass, DirectedCommunicationLink.class, "DirectedCommunicationLink",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDirectedCommunicationLink_Source(), this.getCommSubsystem(), null, "source", null, 1, 1,
-				DirectedCommunicationLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDirectedCommunicationLink_Target(), this.getCommSubsystem(), null, "target", null, 1, 1,
-				DirectedCommunicationLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCommSubsystem_Target(), this.getCommSubsystem(), null, "target", null, 0, 1,
+				CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(payloadEClass, Payload.class, "Payload", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

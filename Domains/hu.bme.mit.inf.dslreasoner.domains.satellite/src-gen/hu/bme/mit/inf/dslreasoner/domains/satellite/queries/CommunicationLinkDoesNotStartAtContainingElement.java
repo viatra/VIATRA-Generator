@@ -3,6 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.satellite.queries;
 
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.TransmittingCommSubsystem;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -23,15 +24,14 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -39,20 +39,19 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import satellite.DirectedCommunicationLink;
+import satellite.CommunicatingElement;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
  *         <code><pre>
- *         {@literal @}Constraint(severity = "error", key = {Link},
- *         	message = "Communication links must start from the containing element.")
- *         pattern communicationLinkDoesNotStartAtContainingElement(Link : DirectedCommunicationLink) {
- *         	CommunicatingElement.communicationLink(Element, Link);
- *         	DirectedCommunicationLink.source(Link, SourceComm);
- *         	CommunicatingElement.commSubsystem(SourceElement, SourceComm);
- *         	Element != SourceElement;
+ *         {@literal @}Constraint(severity = "error", key = {Element},
+ *         	message = "A communicating element may not have two transmitting communication subsystems..")
+ *         pattern communicationLinkDoesNotStartAtContainingElement(Element : CommunicatingElement) {
+ *         	find transmittingCommSubsystem(Element, Comm1);
+ *         	find transmittingCommSubsystem(Element, Comm2);
+ *         	Comm1 != Comm2;
  *         }
  * </pre></code>
  * 
@@ -75,37 +74,37 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private DirectedCommunicationLink fLink;
+    private CommunicatingElement fElement;
     
-    private static List<String> parameterNames = makeImmutableList("Link");
+    private static List<String> parameterNames = makeImmutableList("Element");
     
-    private Match(final DirectedCommunicationLink pLink) {
-      this.fLink = pLink;
+    private Match(final CommunicatingElement pElement) {
+      this.fElement = pElement;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("Link".equals(parameterName)) return this.fLink;
+      if ("Element".equals(parameterName)) return this.fElement;
       return null;
     }
     
-    public DirectedCommunicationLink getLink() {
-      return this.fLink;
+    public CommunicatingElement getElement() {
+      return this.fElement;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("Link".equals(parameterName) ) {
-          this.fLink = (DirectedCommunicationLink) newValue;
+      if ("Element".equals(parameterName) ) {
+          this.fElement = (CommunicatingElement) newValue;
           return true;
       }
       return false;
     }
     
-    public void setLink(final DirectedCommunicationLink pLink) {
+    public void setElement(final CommunicatingElement pElement) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fLink = pLink;
+      this.fElement = pElement;
     }
     
     @Override
@@ -120,24 +119,24 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fLink};
+      return new Object[]{fElement};
     }
     
     @Override
     public CommunicationLinkDoesNotStartAtContainingElement.Match toImmutable() {
-      return isMutable() ? newMatch(fLink) : this;
+      return isMutable() ? newMatch(fElement) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"Link\"=" + prettyPrintValue(fLink));
+      result.append("\"Element\"=" + prettyPrintValue(fElement));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fLink);
+      return Objects.hash(fElement);
     }
     
     @Override
@@ -149,7 +148,7 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
       }
       if ((obj instanceof CommunicationLinkDoesNotStartAtContainingElement.Match)) {
           CommunicationLinkDoesNotStartAtContainingElement.Match other = (CommunicationLinkDoesNotStartAtContainingElement.Match) obj;
-          return Objects.equals(fLink, other.fLink);
+          return Objects.equals(fElement, other.fElement);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -180,29 +179,29 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static CommunicationLinkDoesNotStartAtContainingElement.Match newMutableMatch(final DirectedCommunicationLink pLink) {
-      return new Mutable(pLink);
+    public static CommunicationLinkDoesNotStartAtContainingElement.Match newMutableMatch(final CommunicatingElement pElement) {
+      return new Mutable(pElement);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static CommunicationLinkDoesNotStartAtContainingElement.Match newMatch(final DirectedCommunicationLink pLink) {
-      return new Immutable(pLink);
+    public static CommunicationLinkDoesNotStartAtContainingElement.Match newMatch(final CommunicatingElement pElement) {
+      return new Immutable(pElement);
     }
     
     private static final class Mutable extends CommunicationLinkDoesNotStartAtContainingElement.Match {
-      Mutable(final DirectedCommunicationLink pLink) {
-        super(pLink);
+      Mutable(final CommunicatingElement pElement) {
+        super(pElement);
       }
       
       @Override
@@ -212,8 +211,8 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
     }
     
     private static final class Immutable extends CommunicationLinkDoesNotStartAtContainingElement.Match {
-      Immutable(final DirectedCommunicationLink pLink) {
-        super(pLink);
+      Immutable(final CommunicatingElement pElement) {
+        super(pElement);
       }
       
       @Override
@@ -234,13 +233,12 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
    * 
    * <p>Original source:
    * <code><pre>
-   * {@literal @}Constraint(severity = "error", key = {Link},
-   * 	message = "Communication links must start from the containing element.")
-   * pattern communicationLinkDoesNotStartAtContainingElement(Link : DirectedCommunicationLink) {
-   * 	CommunicatingElement.communicationLink(Element, Link);
-   * 	DirectedCommunicationLink.source(Link, SourceComm);
-   * 	CommunicatingElement.commSubsystem(SourceElement, SourceComm);
-   * 	Element != SourceElement;
+   * {@literal @}Constraint(severity = "error", key = {Element},
+   * 	message = "A communicating element may not have two transmitting communication subsystems..")
+   * pattern communicationLinkDoesNotStartAtContainingElement(Element : CommunicatingElement) {
+   * 	find transmittingCommSubsystem(Element, Comm1);
+   * 	find transmittingCommSubsystem(Element, Comm2);
+   * 	Comm1 != Comm2;
    * }
    * </pre></code>
    * 
@@ -276,7 +274,7 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
       return new Matcher();
     }
     
-    private static final int POSITION_LINK = 0;
+    private static final int POSITION_ELEMENT = 0;
     
     private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(CommunicationLinkDoesNotStartAtContainingElement.Matcher.class);
     
@@ -294,12 +292,12 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<CommunicationLinkDoesNotStartAtContainingElement.Match> getAllMatches(final DirectedCommunicationLink pLink) {
-      return rawStreamAllMatches(new Object[]{pLink}).collect(Collectors.toSet());
+    public Collection<CommunicationLinkDoesNotStartAtContainingElement.Match> getAllMatches(final CommunicatingElement pElement) {
+      return rawStreamAllMatches(new Object[]{pElement}).collect(Collectors.toSet());
     }
     
     /**
@@ -308,101 +306,101 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<CommunicationLinkDoesNotStartAtContainingElement.Match> streamAllMatches(final DirectedCommunicationLink pLink) {
-      return rawStreamAllMatches(new Object[]{pLink});
+    public Stream<CommunicationLinkDoesNotStartAtContainingElement.Match> streamAllMatches(final CommunicatingElement pElement) {
+      return rawStreamAllMatches(new Object[]{pElement});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<CommunicationLinkDoesNotStartAtContainingElement.Match> getOneArbitraryMatch(final DirectedCommunicationLink pLink) {
-      return rawGetOneArbitraryMatch(new Object[]{pLink});
+    public Optional<CommunicationLinkDoesNotStartAtContainingElement.Match> getOneArbitraryMatch(final CommunicatingElement pElement) {
+      return rawGetOneArbitraryMatch(new Object[]{pElement});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final DirectedCommunicationLink pLink) {
-      return rawHasMatch(new Object[]{pLink});
+    public boolean hasMatch(final CommunicatingElement pElement) {
+      return rawHasMatch(new Object[]{pElement});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final DirectedCommunicationLink pLink) {
-      return rawCountMatches(new Object[]{pLink});
+    public int countMatches(final CommunicatingElement pElement) {
+      return rawCountMatches(new Object[]{pElement});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final DirectedCommunicationLink pLink, final Consumer<? super CommunicationLinkDoesNotStartAtContainingElement.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pLink}, processor);
+    public boolean forOneArbitraryMatch(final CommunicatingElement pElement, final Consumer<? super CommunicationLinkDoesNotStartAtContainingElement.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pElement}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pElement the fixed value of pattern parameter Element, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public CommunicationLinkDoesNotStartAtContainingElement.Match newMatch(final DirectedCommunicationLink pLink) {
-      return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch(pLink);
+    public CommunicationLinkDoesNotStartAtContainingElement.Match newMatch(final CommunicatingElement pElement) {
+      return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch(pElement);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for Link.
+     * Retrieve the set of values that occur in matches for Element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<DirectedCommunicationLink> rawStreamAllValuesOfLink(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_LINK, parameters).map(DirectedCommunicationLink.class::cast);
+    protected Stream<CommunicatingElement> rawStreamAllValuesOfElement(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_ELEMENT, parameters).map(CommunicatingElement.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for Link.
+     * Retrieve the set of values that occur in matches for Element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<DirectedCommunicationLink> getAllValuesOfLink() {
-      return rawStreamAllValuesOfLink(emptyArray()).collect(Collectors.toSet());
+    public Set<CommunicatingElement> getAllValuesOfElement() {
+      return rawStreamAllValuesOfElement(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for Link.
+     * Retrieve the set of values that occur in matches for Element.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<DirectedCommunicationLink> streamAllValuesOfLink() {
-      return rawStreamAllValuesOfLink(emptyArray());
+    public Stream<CommunicatingElement> streamAllValuesOfElement() {
+      return rawStreamAllValuesOfElement(emptyArray());
     }
     
     @Override
     protected CommunicationLinkDoesNotStartAtContainingElement.Match tupleToMatch(final Tuple t) {
       try {
-          return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch((DirectedCommunicationLink) t.get(POSITION_LINK));
+          return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch((CommunicatingElement) t.get(POSITION_ELEMENT));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -412,7 +410,7 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
     @Override
     protected CommunicationLinkDoesNotStartAtContainingElement.Match arrayToMatch(final Object[] match) {
       try {
-          return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch((DirectedCommunicationLink) match[POSITION_LINK]);
+          return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch((CommunicatingElement) match[POSITION_ELEMENT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -422,7 +420,7 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
     @Override
     protected CommunicationLinkDoesNotStartAtContainingElement.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return CommunicationLinkDoesNotStartAtContainingElement.Match.newMutableMatch((DirectedCommunicationLink) match[POSITION_LINK]);
+          return CommunicationLinkDoesNotStartAtContainingElement.Match.newMutableMatch((CommunicatingElement) match[POSITION_ELEMENT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -473,7 +471,7 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
   
   @Override
   public CommunicationLinkDoesNotStartAtContainingElement.Match newMatch(final Object... parameters) {
-    return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch((satellite.DirectedCommunicationLink) parameters[0]);
+    return CommunicationLinkDoesNotStartAtContainingElement.Match.newMatch((satellite.CommunicatingElement) parameters[0]);
   }
   
   /**
@@ -505,9 +503,9 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final CommunicationLinkDoesNotStartAtContainingElement.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Link = new PParameter("Link", "satellite.DirectedCommunicationLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "DirectedCommunicationLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_Element = new PParameter("Element", "satellite.CommunicatingElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommunicatingElement")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_Link);
+    private final List<PParameter> parameters = Arrays.asList(parameter_Element);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -520,7 +518,7 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("Link");
+      return Arrays.asList("Element");
     }
     
     @Override
@@ -534,43 +532,28 @@ public final class CommunicationLinkDoesNotStartAtContainingElement extends Base
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_Link = body.getOrCreateVariableByName("Link");
           PVariable var_Element = body.getOrCreateVariableByName("Element");
-          PVariable var_SourceComm = body.getOrCreateVariableByName("SourceComm");
-          PVariable var_SourceElement = body.getOrCreateVariableByName("SourceElement");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_Link, parameter_Link)
-          ));
-          // 	CommunicatingElement.communicationLink(Element, Link)
+          PVariable var_Comm1 = body.getOrCreateVariableByName("Comm1");
+          PVariable var_Comm2 = body.getOrCreateVariableByName("Comm2");
           new TypeConstraint(body, Tuples.flatTupleOf(var_Element), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Element, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "communicationLink")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          new Equality(body, var__virtual_0_, var_Link);
-          // 	DirectedCommunicationLink.source(Link, SourceComm)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "source")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_1_, var_SourceComm);
-          // 	CommunicatingElement.commSubsystem(SourceElement, SourceComm)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceElement), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceElement, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_2_, var_SourceComm);
-          // 	Element != SourceElement
-          new Inequality(body, var_Element, var_SourceElement);
+          body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+             new ExportedParameter(body, var_Element, parameter_Element)
+          ));
+          // 	find transmittingCommSubsystem(Element, Comm1)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_Element, var_Comm1), TransmittingCommSubsystem.instance().getInternalQueryRepresentation());
+          // 	find transmittingCommSubsystem(Element, Comm2)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_Element, var_Comm2), TransmittingCommSubsystem.instance().getInternalQueryRepresentation());
+          // 	Comm1 != Comm2
+          new Inequality(body, var_Comm1, var_Comm2);
           bodies.add(body);
       }
       {
           PAnnotation annotation = new PAnnotation("Constraint");
           annotation.addAttribute("severity", "error");
           annotation.addAttribute("key", Arrays.asList(new Object[] {
-                              new ParameterReference("Link")
+                              new ParameterReference("Element")
                               }));
-          annotation.addAttribute("message", "Communication links must start from the containing element.");
+          annotation.addAttribute("message", "A communicating element may not have two transmitting communication subsystems..");
           addAnnotation(annotation);
       }
       return bodies;

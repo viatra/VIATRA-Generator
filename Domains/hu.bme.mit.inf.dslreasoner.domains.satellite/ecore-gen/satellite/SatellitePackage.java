@@ -177,22 +177,13 @@ public interface SatellitePackage extends EPackage {
 	int COMMUNICATING_ELEMENT__COMM_SUBSYSTEM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMUNICATING_ELEMENT__COMMUNICATION_LINK = 1;
-
-	/**
 	 * The number of structural features of the '<em>Communicating Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMMUNICATING_ELEMENT_FEATURE_COUNT = 2;
+	int COMMUNICATING_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Communicating Element</em>' class.
@@ -221,15 +212,6 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int GROUND_STATION_NETWORK__COMM_SUBSYSTEM = COMMUNICATING_ELEMENT__COMM_SUBSYSTEM;
-
-	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GROUND_STATION_NETWORK__COMMUNICATION_LINK = COMMUNICATING_ELEMENT__COMMUNICATION_LINK;
 
 	/**
 	 * The number of structural features of the '<em>Ground Station Network</em>' class.
@@ -269,15 +251,6 @@ public interface SatellitePackage extends EPackage {
 	int SPACECRAFT__COMM_SUBSYSTEM = COMMUNICATING_ELEMENT__COMM_SUBSYSTEM;
 
 	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPACECRAFT__COMMUNICATION_LINK = COMMUNICATING_ELEMENT__COMMUNICATION_LINK;
-
-	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,13 +288,22 @@ public interface SatellitePackage extends EPackage {
 	int COMM_SUBSYSTEM = 5;
 
 	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMM_SUBSYSTEM__TARGET = 0;
+
+	/**
 	 * The number of structural features of the '<em>Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMM_SUBSYSTEM_FEATURE_COUNT = 0;
+	int COMM_SUBSYSTEM_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Comm Subsystem</em>' class.
@@ -333,52 +315,6 @@ public interface SatellitePackage extends EPackage {
 	int COMM_SUBSYSTEM_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link satellite.impl.DirectedCommunicationLinkImpl <em>Directed Communication Link</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see satellite.impl.DirectedCommunicationLinkImpl
-	 * @see satellite.impl.SatellitePackageImpl#getDirectedCommunicationLink()
-	 * @generated
-	 */
-	int DIRECTED_COMMUNICATION_LINK = 6;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTED_COMMUNICATION_LINK__SOURCE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTED_COMMUNICATION_LINK__TARGET = 1;
-
-	/**
-	 * The number of structural features of the '<em>Directed Communication Link</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTED_COMMUNICATION_LINK_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Directed Communication Link</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTED_COMMUNICATION_LINK_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link satellite.impl.PayloadImpl <em>Payload</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -386,7 +322,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getPayload()
 	 * @generated
 	 */
-	int PAYLOAD = 7;
+	int PAYLOAD = 6;
 
 	/**
 	 * The number of structural features of the '<em>Payload</em>' class.
@@ -414,7 +350,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getInterferometryPayload()
 	 * @generated
 	 */
-	int INTERFEROMETRY_PAYLOAD = 8;
+	int INTERFEROMETRY_PAYLOAD = 7;
 
 	/**
 	 * The number of structural features of the '<em>Interferometry Payload</em>' class.
@@ -442,7 +378,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getCubeSat()
 	 * @generated
 	 */
-	int CUBE_SAT = 12;
+	int CUBE_SAT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
@@ -452,15 +388,6 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int CUBE_SAT__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
-
-	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUBE_SAT__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
 
 	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
@@ -497,7 +424,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getCubeSat3U()
 	 * @generated
 	 */
-	int CUBE_SAT3_U = 9;
+	int CUBE_SAT3_U = 8;
 
 	/**
 	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
@@ -507,15 +434,6 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int CUBE_SAT3_U__COMM_SUBSYSTEM = CUBE_SAT__COMM_SUBSYSTEM;
-
-	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUBE_SAT3_U__COMMUNICATION_LINK = CUBE_SAT__COMMUNICATION_LINK;
 
 	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
@@ -552,7 +470,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getCubeSat6U()
 	 * @generated
 	 */
-	int CUBE_SAT6_U = 10;
+	int CUBE_SAT6_U = 9;
 
 	/**
 	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
@@ -562,15 +480,6 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int CUBE_SAT6_U__COMM_SUBSYSTEM = CUBE_SAT__COMM_SUBSYSTEM;
-
-	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUBE_SAT6_U__COMMUNICATION_LINK = CUBE_SAT__COMMUNICATION_LINK;
 
 	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
@@ -607,7 +516,7 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getSmallSat()
 	 * @generated
 	 */
-	int SMALL_SAT = 11;
+	int SMALL_SAT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Comm Subsystem</b></em>' containment reference list.
@@ -617,15 +526,6 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int SMALL_SAT__COMM_SUBSYSTEM = SPACECRAFT__COMM_SUBSYSTEM;
-
-	/**
-	 * The feature id for the '<em><b>Communication Link</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SMALL_SAT__COMMUNICATION_LINK = SPACECRAFT__COMMUNICATION_LINK;
 
 	/**
 	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
@@ -662,7 +562,16 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getUHFCommSubsystem()
 	 * @generated
 	 */
-	int UHF_COMM_SUBSYSTEM = 13;
+	int UHF_COMM_SUBSYSTEM = 12;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UHF_COMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
 	 * The number of structural features of the '<em>UHF Comm Subsystem</em>' class.
@@ -690,7 +599,16 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getXCommSubsystem()
 	 * @generated
 	 */
-	int XCOMM_SUBSYSTEM = 14;
+	int XCOMM_SUBSYSTEM = 13;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
 	 * The number of structural features of the '<em>XComm Subsystem</em>' class.
@@ -718,7 +636,16 @@ public interface SatellitePackage extends EPackage {
 	 * @see satellite.impl.SatellitePackageImpl#getKaCommSubsystem()
 	 * @generated
 	 */
-	int KA_COMM_SUBSYSTEM = 15;
+	int KA_COMM_SUBSYSTEM = 14;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KA_COMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
 	 * The number of structural features of the '<em>Ka Comm Subsystem</em>' class.
@@ -813,17 +740,6 @@ public interface SatellitePackage extends EPackage {
 	EReference getCommunicatingElement_CommSubsystem();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link satellite.CommunicatingElement#getCommunicationLink <em>Communication Link</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Communication Link</em>'.
-	 * @see satellite.CommunicatingElement#getCommunicationLink()
-	 * @see #getCommunicatingElement()
-	 * @generated
-	 */
-	EReference getCommunicatingElement_CommunicationLink();
-
-	/**
 	 * Returns the meta object for class '{@link satellite.GroundStationNetwork <em>Ground Station Network</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -865,36 +781,15 @@ public interface SatellitePackage extends EPackage {
 	EClass getCommSubsystem();
 
 	/**
-	 * Returns the meta object for class '{@link satellite.DirectedCommunicationLink <em>Directed Communication Link</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Directed Communication Link</em>'.
-	 * @see satellite.DirectedCommunicationLink
-	 * @generated
-	 */
-	EClass getDirectedCommunicationLink();
-
-	/**
-	 * Returns the meta object for the reference '{@link satellite.DirectedCommunicationLink#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see satellite.DirectedCommunicationLink#getSource()
-	 * @see #getDirectedCommunicationLink()
-	 * @generated
-	 */
-	EReference getDirectedCommunicationLink_Source();
-
-	/**
-	 * Returns the meta object for the reference '{@link satellite.DirectedCommunicationLink#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link satellite.CommSubsystem#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see satellite.DirectedCommunicationLink#getTarget()
-	 * @see #getDirectedCommunicationLink()
+	 * @see satellite.CommSubsystem#getTarget()
+	 * @see #getCommSubsystem()
 	 * @generated
 	 */
-	EReference getDirectedCommunicationLink_Target();
+	EReference getCommSubsystem_Target();
 
 	/**
 	 * Returns the meta object for class '{@link satellite.Payload <em>Payload</em>}'.
@@ -1073,14 +968,6 @@ public interface SatellitePackage extends EPackage {
 		EReference COMMUNICATING_ELEMENT__COMM_SUBSYSTEM = eINSTANCE.getCommunicatingElement_CommSubsystem();
 
 		/**
-		 * The meta object literal for the '<em><b>Communication Link</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMMUNICATING_ELEMENT__COMMUNICATION_LINK = eINSTANCE.getCommunicatingElement_CommunicationLink();
-
-		/**
 		 * The meta object literal for the '{@link satellite.impl.GroundStationNetworkImpl <em>Ground Station Network</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1119,30 +1006,12 @@ public interface SatellitePackage extends EPackage {
 		EClass COMM_SUBSYSTEM = eINSTANCE.getCommSubsystem();
 
 		/**
-		 * The meta object literal for the '{@link satellite.impl.DirectedCommunicationLinkImpl <em>Directed Communication Link</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see satellite.impl.DirectedCommunicationLinkImpl
-		 * @see satellite.impl.SatellitePackageImpl#getDirectedCommunicationLink()
-		 * @generated
-		 */
-		EClass DIRECTED_COMMUNICATION_LINK = eINSTANCE.getDirectedCommunicationLink();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DIRECTED_COMMUNICATION_LINK__SOURCE = eINSTANCE.getDirectedCommunicationLink_Source();
-
-		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DIRECTED_COMMUNICATION_LINK__TARGET = eINSTANCE.getDirectedCommunicationLink_Target();
+		EReference COMM_SUBSYSTEM__TARGET = eINSTANCE.getCommSubsystem_Target();
 
 		/**
 		 * The meta object literal for the '{@link satellite.impl.PayloadImpl <em>Payload</em>}' class.

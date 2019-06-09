@@ -29,8 +29,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
  * <p>Original source:
  *         <code><pre>
  *         private pattern directCommunicationLink(Source : CommunicatingElement, Target : CommunicatingElement) {
- *         	DirectedCommunicationLink.source(Link, SourceSubsystem);
- *         	DirectedCommunicationLink.target(Link, TargetSubsystem);
+ *         	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
  *         	CommunicatingElement.commSubsystem(Source, SourceSubsystem);
  *         	CommunicatingElement.commSubsystem(Target, TargetSubsystem);
  *         }
@@ -121,7 +120,6 @@ public final class DirectCommunicationLink extends BaseGeneratedEMFQuerySpecific
           PBody body = new PBody(this);
           PVariable var_Source = body.getOrCreateVariableByName("Source");
           PVariable var_Target = body.getOrCreateVariableByName("Target");
-          PVariable var_Link = body.getOrCreateVariableByName("Link");
           PVariable var_SourceSubsystem = body.getOrCreateVariableByName("SourceSubsystem");
           PVariable var_TargetSubsystem = body.getOrCreateVariableByName("TargetSubsystem");
           new TypeConstraint(body, Tuples.flatTupleOf(var_Source), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
@@ -130,30 +128,24 @@ public final class DirectCommunicationLink extends BaseGeneratedEMFQuerySpecific
              new ExportedParameter(body, var_Source, parameter_Source),
              new ExportedParameter(body, var_Target, parameter_Target)
           ));
-          // 	DirectedCommunicationLink.source(Link, SourceSubsystem)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
+          // 	CommSubsystem.target(SourceSubsystem, TargetSubsystem)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "source")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommSubsystem", "target")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_0_, var_SourceSubsystem);
-          // 	DirectedCommunicationLink.target(Link, TargetSubsystem)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "target")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_1_, var_TargetSubsystem);
+          new Equality(body, var__virtual_0_, var_TargetSubsystem);
           // 	CommunicatingElement.commSubsystem(Source, SourceSubsystem)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Source), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Source, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_2_, var_SourceSubsystem);
+          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Source, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_1_, var_SourceSubsystem);
           // 	CommunicatingElement.commSubsystem(Target, TargetSubsystem)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Target), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Target, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_3_, var_TargetSubsystem);
+          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Target, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_2_, var_TargetSubsystem);
           bodies.add(body);
       }
       return bodies;

@@ -40,15 +40,6 @@ public interface SatelliteFactory extends EFactory {
 	GroundStationNetwork createGroundStationNetwork();
 
 	/**
-	 * Returns a new object of class '<em>Directed Communication Link</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Directed Communication Link</em>'.
-	 * @generated
-	 */
-	DirectedCommunicationLink createDirectedCommunicationLink();
-
-	/**
 	 * Returns a new object of class '<em>Interferometry Payload</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

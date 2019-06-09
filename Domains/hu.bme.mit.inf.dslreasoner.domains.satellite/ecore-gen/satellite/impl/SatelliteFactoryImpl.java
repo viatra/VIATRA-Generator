@@ -60,8 +60,6 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 			return createInterferometryMission();
 		case SatellitePackage.GROUND_STATION_NETWORK:
 			return createGroundStationNetwork();
-		case SatellitePackage.DIRECTED_COMMUNICATION_LINK:
-			return createDirectedCommunicationLink();
 		case SatellitePackage.INTERFEROMETRY_PAYLOAD:
 			return createInterferometryPayload();
 		case SatellitePackage.CUBE_SAT3_U:
@@ -101,17 +99,6 @@ public class SatelliteFactoryImpl extends EFactoryImpl implements SatelliteFacto
 	public GroundStationNetwork createGroundStationNetwork() {
 		GroundStationNetworkImpl groundStationNetwork = new GroundStationNetworkImpl();
 		return groundStationNetwork;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DirectedCommunicationLink createDirectedCommunicationLink() {
-		DirectedCommunicationLinkImpl directedCommunicationLink = new DirectedCommunicationLinkImpl();
-		return directedCommunicationLink;
 	}
 
 	/**

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ASCII"?>
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="32" maxNewElements="64">
+  <problem href="dummy.dummyext#//@problemConainer"/>
+  <partialrelationinterpretation>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@relations.0"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="dummy.dummyext#//@problemConainer/@elements.0"/>
+      <param2 href="dummy.dummyext#//@problemConainer/@elements.1"/>
+    </relationlinks>
+    <param1 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.0/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.0/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@relations.1"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.1/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.1/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@relations.2"/>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="dummy.dummyext#//@problemConainer/@elements.1"/>
+      <param2 href="dummy.dummyext#//@problemConainer/@elements.2"/>
+    </relationlinks>
+    <relationlinks xsi:type="partialinterpretation:BinaryElementRelationLink">
+      <param1 href="dummy.dummyext#//@problemConainer/@elements.1"/>
+      <param2 href="dummy.dummyext#//@problemConainer/@elements.3"/>
+    </relationlinks>
+    <param1 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.2/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.2/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@relations.3"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.3/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.3/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@relations.4"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.4/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="dummy.dummyext#//@problemConainer/@relations.4/@parameters.1"/>
+  </partialrelationinterpretation>
+  <newElements xsi:type="partialinterpretation:BooleanElement" name="true" valueSet="true" value="true"/>
+  <newElements xsi:type="partialinterpretation:BooleanElement" name="false" valueSet="true"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialBooleanInterpretation" elements="//@newElements.0 //@newElements.1"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialIntegerInterpretation" elements="//@openWorldElements.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialRealInterpretation" elements="//@openWorldElements.1"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialStringInterpretation" elements="//@openWorldElements.2"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.0"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.0"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1" supertypeInterpretation="//@partialtypeinterpratation.4">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.0"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.1"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.1"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.2"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.3" supertypeInterpretation="//@partialtypeinterpratation.6">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.1"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.3"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.4" supertypeInterpretation="//@partialtypeinterpratation.6 //@partialtypeinterpratation.21">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.4"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.5">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.2"/>
+    <elements href="dummy.dummyext#//@problemConainer/@elements.3"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.5"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.6">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.6"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.7" supertypeInterpretation="//@partialtypeinterpratation.10">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.7"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.8" supertypeInterpretation="//@partialtypeinterpratation.15 //@partialtypeinterpratation.8 //@partialtypeinterpratation.6 //@partialtypeinterpratation.21">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.8"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.9" supertypeInterpretation="//@partialtypeinterpratation.15 //@partialtypeinterpratation.8 //@partialtypeinterpratation.6 //@partialtypeinterpratation.21">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.9"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.10" supertypeInterpretation="//@partialtypeinterpratation.8 //@partialtypeinterpratation.6 //@partialtypeinterpratation.21">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.10"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.11" supertypeInterpretation="//@partialtypeinterpratation.8 //@partialtypeinterpratation.6 //@partialtypeinterpratation.21">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.11"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.12" supertypeInterpretation="//@partialtypeinterpratation.9 //@partialtypeinterpratation.23">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.12"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.13" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.2"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.13"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.14" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <elements href="dummy.dummyext#//@problemConainer/@elements.3"/>
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.14"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.15" supertypeInterpretation="//@partialtypeinterpratation.4">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.16"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.16" supertypeInterpretation="//@partialtypeinterpratation.5 //@partialtypeinterpratation.4 //@partialtypeinterpratation.19">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.18"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.17" supertypeInterpretation="//@partialtypeinterpratation.6">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.20"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.18" supertypeInterpretation="//@partialtypeinterpratation.7 //@partialtypeinterpratation.6 //@partialtypeinterpratation.21">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.22"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.19" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.24"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.20" supertypeInterpretation="//@partialtypeinterpratation.17 //@partialtypeinterpratation.9 //@partialtypeinterpratation.23">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.26"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.21" supertypeInterpretation="//@partialtypeinterpratation.18 //@partialtypeinterpratation.9 //@partialtypeinterpratation.23">
+    <interpretationOf href="dummy.dummyext#//@problemConainer/@types.28"/>
+  </partialtypeinterpratation>
+  <openWorldElements xsi:type="partialinterpretation:IntegerElement" name="New Integers"/>
+  <openWorldElements xsi:type="partialinterpretation:RealElement" name="New Reals"/>
+  <openWorldElements xsi:type="partialinterpretation:StringElement" name="New Strings"/>
+  <openWorldElements name="New Objects"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.4"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.5"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.6"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.7"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.8"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.9"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.10"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.11"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.12"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.13"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.14"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.15"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.16"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.17"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.18"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.19"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.20"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.21"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.22"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.23"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.24"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.25"/>
+</partialinterpretation:PartialInterpretation>

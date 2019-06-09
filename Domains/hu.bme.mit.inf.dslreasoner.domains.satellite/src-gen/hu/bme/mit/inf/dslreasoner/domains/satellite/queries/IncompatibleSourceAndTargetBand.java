@@ -40,7 +40,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import satellite.DirectedCommunicationLink;
+import satellite.CommSubsystem;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -49,11 +49,10 @@ import satellite.DirectedCommunicationLink;
  *         <code><pre>
  *         // Source and target communication systems must be compatible.
  *         
- *         {@literal @}Constraint(severity = "error", key = {Link},
+ *         {@literal @}Constraint(severity = "error", key = {SourceSubsystem},
  *         	message = "Two ends of a communication link must use the same band.")
- *         pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
- *         	DirectedCommunicationLink.source(Link, SourceSubsystem);
- *         	DirectedCommunicationLink.target(Link, TargetSubsystem);
+ *         pattern incompatibleSourceAndTargetBand(SourceSubsystem : CommSubsystem) {
+ *         	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
  *         	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
  *         }
  * </pre></code>
@@ -77,37 +76,37 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private DirectedCommunicationLink fLink;
+    private CommSubsystem fSourceSubsystem;
     
-    private static List<String> parameterNames = makeImmutableList("Link");
+    private static List<String> parameterNames = makeImmutableList("SourceSubsystem");
     
-    private Match(final DirectedCommunicationLink pLink) {
-      this.fLink = pLink;
+    private Match(final CommSubsystem pSourceSubsystem) {
+      this.fSourceSubsystem = pSourceSubsystem;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("Link".equals(parameterName)) return this.fLink;
+      if ("SourceSubsystem".equals(parameterName)) return this.fSourceSubsystem;
       return null;
     }
     
-    public DirectedCommunicationLink getLink() {
-      return this.fLink;
+    public CommSubsystem getSourceSubsystem() {
+      return this.fSourceSubsystem;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("Link".equals(parameterName) ) {
-          this.fLink = (DirectedCommunicationLink) newValue;
+      if ("SourceSubsystem".equals(parameterName) ) {
+          this.fSourceSubsystem = (CommSubsystem) newValue;
           return true;
       }
       return false;
     }
     
-    public void setLink(final DirectedCommunicationLink pLink) {
+    public void setSourceSubsystem(final CommSubsystem pSourceSubsystem) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fLink = pLink;
+      this.fSourceSubsystem = pSourceSubsystem;
     }
     
     @Override
@@ -122,24 +121,24 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fLink};
+      return new Object[]{fSourceSubsystem};
     }
     
     @Override
     public IncompatibleSourceAndTargetBand.Match toImmutable() {
-      return isMutable() ? newMatch(fLink) : this;
+      return isMutable() ? newMatch(fSourceSubsystem) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"Link\"=" + prettyPrintValue(fLink));
+      result.append("\"SourceSubsystem\"=" + prettyPrintValue(fSourceSubsystem));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fLink);
+      return Objects.hash(fSourceSubsystem);
     }
     
     @Override
@@ -151,7 +150,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
       }
       if ((obj instanceof IncompatibleSourceAndTargetBand.Match)) {
           IncompatibleSourceAndTargetBand.Match other = (IncompatibleSourceAndTargetBand.Match) obj;
-          return Objects.equals(fLink, other.fLink);
+          return Objects.equals(fSourceSubsystem, other.fSourceSubsystem);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -182,29 +181,29 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static IncompatibleSourceAndTargetBand.Match newMutableMatch(final DirectedCommunicationLink pLink) {
-      return new Mutable(pLink);
+    public static IncompatibleSourceAndTargetBand.Match newMutableMatch(final CommSubsystem pSourceSubsystem) {
+      return new Mutable(pSourceSubsystem);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static IncompatibleSourceAndTargetBand.Match newMatch(final DirectedCommunicationLink pLink) {
-      return new Immutable(pLink);
+    public static IncompatibleSourceAndTargetBand.Match newMatch(final CommSubsystem pSourceSubsystem) {
+      return new Immutable(pSourceSubsystem);
     }
     
     private static final class Mutable extends IncompatibleSourceAndTargetBand.Match {
-      Mutable(final DirectedCommunicationLink pLink) {
-        super(pLink);
+      Mutable(final CommSubsystem pSourceSubsystem) {
+        super(pSourceSubsystem);
       }
       
       @Override
@@ -214,8 +213,8 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
     }
     
     private static final class Immutable extends IncompatibleSourceAndTargetBand.Match {
-      Immutable(final DirectedCommunicationLink pLink) {
-        super(pLink);
+      Immutable(final CommSubsystem pSourceSubsystem) {
+        super(pSourceSubsystem);
       }
       
       @Override
@@ -238,11 +237,10 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
    * <code><pre>
    * // Source and target communication systems must be compatible.
    * 
-   * {@literal @}Constraint(severity = "error", key = {Link},
+   * {@literal @}Constraint(severity = "error", key = {SourceSubsystem},
    * 	message = "Two ends of a communication link must use the same band.")
-   * pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
-   * 	DirectedCommunicationLink.source(Link, SourceSubsystem);
-   * 	DirectedCommunicationLink.target(Link, TargetSubsystem);
+   * pattern incompatibleSourceAndTargetBand(SourceSubsystem : CommSubsystem) {
+   * 	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
    * 	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
    * }
    * </pre></code>
@@ -279,7 +277,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
       return new Matcher();
     }
     
-    private static final int POSITION_LINK = 0;
+    private static final int POSITION_SOURCESUBSYSTEM = 0;
     
     private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(IncompatibleSourceAndTargetBand.Matcher.class);
     
@@ -297,12 +295,12 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<IncompatibleSourceAndTargetBand.Match> getAllMatches(final DirectedCommunicationLink pLink) {
-      return rawStreamAllMatches(new Object[]{pLink}).collect(Collectors.toSet());
+    public Collection<IncompatibleSourceAndTargetBand.Match> getAllMatches(final CommSubsystem pSourceSubsystem) {
+      return rawStreamAllMatches(new Object[]{pSourceSubsystem}).collect(Collectors.toSet());
     }
     
     /**
@@ -311,101 +309,101 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<IncompatibleSourceAndTargetBand.Match> streamAllMatches(final DirectedCommunicationLink pLink) {
-      return rawStreamAllMatches(new Object[]{pLink});
+    public Stream<IncompatibleSourceAndTargetBand.Match> streamAllMatches(final CommSubsystem pSourceSubsystem) {
+      return rawStreamAllMatches(new Object[]{pSourceSubsystem});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<IncompatibleSourceAndTargetBand.Match> getOneArbitraryMatch(final DirectedCommunicationLink pLink) {
-      return rawGetOneArbitraryMatch(new Object[]{pLink});
+    public Optional<IncompatibleSourceAndTargetBand.Match> getOneArbitraryMatch(final CommSubsystem pSourceSubsystem) {
+      return rawGetOneArbitraryMatch(new Object[]{pSourceSubsystem});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final DirectedCommunicationLink pLink) {
-      return rawHasMatch(new Object[]{pLink});
+    public boolean hasMatch(final CommSubsystem pSourceSubsystem) {
+      return rawHasMatch(new Object[]{pSourceSubsystem});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final DirectedCommunicationLink pLink) {
-      return rawCountMatches(new Object[]{pLink});
+    public int countMatches(final CommSubsystem pSourceSubsystem) {
+      return rawCountMatches(new Object[]{pSourceSubsystem});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final DirectedCommunicationLink pLink, final Consumer<? super IncompatibleSourceAndTargetBand.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pLink}, processor);
+    public boolean forOneArbitraryMatch(final CommSubsystem pSourceSubsystem, final Consumer<? super IncompatibleSourceAndTargetBand.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pSourceSubsystem}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pLink the fixed value of pattern parameter Link, or null if not bound.
+     * @param pSourceSubsystem the fixed value of pattern parameter SourceSubsystem, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public IncompatibleSourceAndTargetBand.Match newMatch(final DirectedCommunicationLink pLink) {
-      return IncompatibleSourceAndTargetBand.Match.newMatch(pLink);
+    public IncompatibleSourceAndTargetBand.Match newMatch(final CommSubsystem pSourceSubsystem) {
+      return IncompatibleSourceAndTargetBand.Match.newMatch(pSourceSubsystem);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for Link.
+     * Retrieve the set of values that occur in matches for SourceSubsystem.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<DirectedCommunicationLink> rawStreamAllValuesOfLink(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_LINK, parameters).map(DirectedCommunicationLink.class::cast);
+    protected Stream<CommSubsystem> rawStreamAllValuesOfSourceSubsystem(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_SOURCESUBSYSTEM, parameters).map(CommSubsystem.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for Link.
+     * Retrieve the set of values that occur in matches for SourceSubsystem.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<DirectedCommunicationLink> getAllValuesOfLink() {
-      return rawStreamAllValuesOfLink(emptyArray()).collect(Collectors.toSet());
+    public Set<CommSubsystem> getAllValuesOfSourceSubsystem() {
+      return rawStreamAllValuesOfSourceSubsystem(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for Link.
+     * Retrieve the set of values that occur in matches for SourceSubsystem.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<DirectedCommunicationLink> streamAllValuesOfLink() {
-      return rawStreamAllValuesOfLink(emptyArray());
+    public Stream<CommSubsystem> streamAllValuesOfSourceSubsystem() {
+      return rawStreamAllValuesOfSourceSubsystem(emptyArray());
     }
     
     @Override
     protected IncompatibleSourceAndTargetBand.Match tupleToMatch(final Tuple t) {
       try {
-          return IncompatibleSourceAndTargetBand.Match.newMatch((DirectedCommunicationLink) t.get(POSITION_LINK));
+          return IncompatibleSourceAndTargetBand.Match.newMatch((CommSubsystem) t.get(POSITION_SOURCESUBSYSTEM));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -415,7 +413,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
     @Override
     protected IncompatibleSourceAndTargetBand.Match arrayToMatch(final Object[] match) {
       try {
-          return IncompatibleSourceAndTargetBand.Match.newMatch((DirectedCommunicationLink) match[POSITION_LINK]);
+          return IncompatibleSourceAndTargetBand.Match.newMatch((CommSubsystem) match[POSITION_SOURCESUBSYSTEM]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -425,7 +423,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
     @Override
     protected IncompatibleSourceAndTargetBand.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return IncompatibleSourceAndTargetBand.Match.newMutableMatch((DirectedCommunicationLink) match[POSITION_LINK]);
+          return IncompatibleSourceAndTargetBand.Match.newMutableMatch((CommSubsystem) match[POSITION_SOURCESUBSYSTEM]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -476,7 +474,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
   
   @Override
   public IncompatibleSourceAndTargetBand.Match newMatch(final Object... parameters) {
-    return IncompatibleSourceAndTargetBand.Match.newMatch((satellite.DirectedCommunicationLink) parameters[0]);
+    return IncompatibleSourceAndTargetBand.Match.newMatch((satellite.CommSubsystem) parameters[0]);
   }
   
   /**
@@ -508,9 +506,9 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final IncompatibleSourceAndTargetBand.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_Link = new PParameter("Link", "satellite.DirectedCommunicationLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "DirectedCommunicationLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_SourceSubsystem = new PParameter("SourceSubsystem", "satellite.CommSubsystem", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/satellite", "CommSubsystem")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_Link);
+    private final List<PParameter> parameters = Arrays.asList(parameter_SourceSubsystem);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -523,7 +521,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("Link");
+      return Arrays.asList("SourceSubsystem");
     }
     
     @Override
@@ -537,25 +535,18 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_Link = body.getOrCreateVariableByName("Link");
           PVariable var_SourceSubsystem = body.getOrCreateVariableByName("SourceSubsystem");
           PVariable var_TargetSubsystem = body.getOrCreateVariableByName("TargetSubsystem");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_Link, parameter_Link)
+             new ExportedParameter(body, var_SourceSubsystem, parameter_SourceSubsystem)
           ));
-          // 	DirectedCommunicationLink.source(Link, SourceSubsystem)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
+          // 	CommSubsystem.target(SourceSubsystem, TargetSubsystem)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "source")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceSubsystem, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommSubsystem", "target")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_0_, var_SourceSubsystem);
-          // 	DirectedCommunicationLink.target(Link, TargetSubsystem)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "target")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_1_, var_TargetSubsystem);
+          new Equality(body, var__virtual_0_, var_TargetSubsystem);
           // 	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_SourceSubsystem, var_TargetSubsystem), MatchingCommSubsystem.instance().getInternalQueryRepresentation());
           bodies.add(body);
@@ -564,7 +555,7 @@ public final class IncompatibleSourceAndTargetBand extends BaseGeneratedEMFQuery
           PAnnotation annotation = new PAnnotation("Constraint");
           annotation.addAttribute("severity", "error");
           annotation.addAttribute("key", Arrays.asList(new Object[] {
-                              new ParameterReference("Link")
+                              new ParameterReference("SourceSubsystem")
                               }));
           annotation.addAttribute("message", "Two ends of a communication link must use the same band.");
           addAnnotation(annotation);

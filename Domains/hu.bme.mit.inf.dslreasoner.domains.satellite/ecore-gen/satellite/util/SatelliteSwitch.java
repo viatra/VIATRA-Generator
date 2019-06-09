@@ -114,13 +114,6 @@ public class SatelliteSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case SatellitePackage.DIRECTED_COMMUNICATION_LINK: {
-			DirectedCommunicationLink directedCommunicationLink = (DirectedCommunicationLink) theEObject;
-			T result = caseDirectedCommunicationLink(directedCommunicationLink);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case SatellitePackage.PAYLOAD: {
 			Payload payload = (Payload) theEObject;
 			T result = casePayload(payload);
@@ -304,21 +297,6 @@ public class SatelliteSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCommSubsystem(CommSubsystem object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Directed Communication Link</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Directed Communication Link</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDirectedCommunicationLink(DirectedCommunicationLink object) {
 		return null;
 	}
 

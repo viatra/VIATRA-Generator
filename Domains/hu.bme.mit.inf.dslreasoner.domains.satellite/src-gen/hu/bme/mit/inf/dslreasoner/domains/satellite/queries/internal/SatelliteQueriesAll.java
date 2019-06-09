@@ -24,6 +24,7 @@ import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.LinkAllowed
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MatchingAntenna;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.MatchingCommSubsystem;
 import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.SpacecraftWithInterferometryPayload;
+import hu.bme.mit.inf.dslreasoner.domains.satellite.queries.internal.TransmittingCommSubsystem;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 
 /**
@@ -33,6 +34,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * 
  * <p> From package hu.bme.mit.inf.dslreasoner.domains.satellite.queries, the group contains the definition of the following patterns: <ul>
  * <li>communicationLinkDoesNotStartAtContainingElement</li>
+ * <li>transmittingCommSubsystem</li>
  * <li>notEnoughInterferometryPayloads</li>
  * <li>atLeastTwoInterferometryPayloads</li>
  * <li>spacecraftWithInterferometryPayload</li>
@@ -78,6 +80,7 @@ public final class SatelliteQueriesAll extends BaseGeneratedPatternGroup {
   
   private SatelliteQueriesAll() {
     querySpecifications.add(CommunicationLinkDoesNotStartAtContainingElement.instance());
+    querySpecifications.add(TransmittingCommSubsystem.instance());
     querySpecifications.add(NotEnoughInterferometryPayloads.instance());
     querySpecifications.add(AtLeastTwoInterferometryPayloads.instance());
     querySpecifications.add(SpacecraftWithInterferometryPayload.instance());

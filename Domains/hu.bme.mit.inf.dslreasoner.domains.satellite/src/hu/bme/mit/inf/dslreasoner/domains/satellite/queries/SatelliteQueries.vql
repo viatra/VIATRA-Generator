@@ -2,13 +2,17 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite.queries
 
 import "http://www.example.org/satellite"
 
-@Constraint(severity = "error", key = {Link},
-	message = "Communication links must start from the containing element.")
-pattern communicationLinkDoesNotStartAtContainingElement(Link : DirectedCommunicationLink) {
-	CommunicatingElement.communicationLink(Element, Link);
-	DirectedCommunicationLink.source(Link, SourceComm);
-	CommunicatingElement.commSubsystem(SourceElement, SourceComm);
-	Element != SourceElement;
+@Constraint(severity = "error", key = {Element},
+	message = "A communicating element may not have two transmitting communication subsystems..")
+pattern communicationLinkDoesNotStartAtContainingElement(Element : CommunicatingElement) {
+	find transmittingCommSubsystem(Element, Comm1);
+	find transmittingCommSubsystem(Element, Comm2);
+	Comm1 != Comm2;
+}
+
+private pattern transmittingCommSubsystem(Element : CommunicatingElement, Comm : CommSubsystem) {
+	CommunicatingElement.commSubsystem(Element, Comm);
+	CommSubsystem.target(Comm, _);
 }
 
 // At least two spacecraft must have the interferometry payload configured
@@ -105,19 +109,17 @@ private pattern indirectCommunicationLink(Source : CommunicatingElement, Target 
 }
 
 private pattern directCommunicationLink(Source : CommunicatingElement, Target : CommunicatingElement) {
-	DirectedCommunicationLink.source(Link, SourceSubsystem);
-	DirectedCommunicationLink.target(Link, TargetSubsystem);
+	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
 	CommunicatingElement.commSubsystem(Source, SourceSubsystem);
 	CommunicatingElement.commSubsystem(Target, TargetSubsystem);
 }
 
 // Source and target communication systems must be compatible.
 
-@Constraint(severity = "error", key = {Link},
+@Constraint(severity = "error", key = {SourceSubsystem},
 	message = "Two ends of a communication link must use the same band.")
-pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
-	DirectedCommunicationLink.source(Link, SourceSubsystem);
-	DirectedCommunicationLink.target(Link, TargetSubsystem);
+pattern incompatibleSourceAndTargetBand(SourceSubsystem : CommSubsystem) {
+	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
 	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
 }
 
@@ -129,8 +131,7 @@ pattern incompatibleSourceAndTargetBand(Link : DirectedCommunicationLink) {
 pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
 	CommunicatingElement.commSubsystem(Sat, SourceComm);
 	neg find commSubsystemBandUhf(SourceComm);
-	DirectedCommunicationLink.source(Link, SourceComm);
-	DirectedCommunicationLink.target(Link, TargetComm);
+	CommSubsystem.target(SourceComm, TargetComm);
 	CommunicatingElement.commSubsystem(Target, TargetComm);
 	neg find groundStationNetwork(Target);
 }

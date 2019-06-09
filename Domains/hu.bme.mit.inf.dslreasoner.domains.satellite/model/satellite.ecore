@@ -14,20 +14,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="CommunicatingElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="commSubsystem" lowerBound="1"
         upperBound="2" eType="#//CommSubsystem" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationLink" eType="#//DirectedCommunicationLink"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GroundStationNetwork" eSuperTypes="#//CommunicatingElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Spacecraft" abstract="true" eSuperTypes="#//CommunicatingElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DirectedCommunicationLink">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//CommSubsystem"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//CommSubsystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>

@@ -56,8 +56,7 @@ import satellite.CubeSat3U;
  *         pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
  *         	CommunicatingElement.commSubsystem(Sat, SourceComm);
  *         	neg find commSubsystemBandUhf(SourceComm);
- *         	DirectedCommunicationLink.source(Link, SourceComm);
- *         	DirectedCommunicationLink.target(Link, TargetComm);
+ *         	CommSubsystem.target(SourceComm, TargetComm);
  *         	CommunicatingElement.commSubsystem(Target, TargetComm);
  *         	neg find groundStationNetwork(Target);
  *         }
@@ -249,8 +248,7 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
    * pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
    * 	CommunicatingElement.commSubsystem(Sat, SourceComm);
    * 	neg find commSubsystemBandUhf(SourceComm);
-   * 	DirectedCommunicationLink.source(Link, SourceComm);
-   * 	DirectedCommunicationLink.target(Link, TargetComm);
+   * 	CommSubsystem.target(SourceComm, TargetComm);
    * 	CommunicatingElement.commSubsystem(Target, TargetComm);
    * 	neg find groundStationNetwork(Target);
    * }
@@ -548,7 +546,6 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
           PBody body = new PBody(this);
           PVariable var_Sat = body.getOrCreateVariableByName("Sat");
           PVariable var_SourceComm = body.getOrCreateVariableByName("SourceComm");
-          PVariable var_Link = body.getOrCreateVariableByName("Link");
           PVariable var_TargetComm = body.getOrCreateVariableByName("TargetComm");
           PVariable var_Target = body.getOrCreateVariableByName("Target");
           new TypeConstraint(body, Tuples.flatTupleOf(var_Sat), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CubeSat3U")));
@@ -563,24 +560,18 @@ public final class ThreeUCubeSatWithNonUhfCrossLink extends BaseGeneratedEMFQuer
           new Equality(body, var__virtual_0_, var_SourceComm);
           // 	neg find commSubsystemBandUhf(SourceComm)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_SourceComm), CommSubsystemBandUhf.instance().getInternalQueryRepresentation());
-          // 	DirectedCommunicationLink.source(Link, SourceComm)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
+          // 	CommSubsystem.target(SourceComm, TargetComm)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceComm), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "source")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_SourceComm, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommSubsystem", "target")));
           new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_1_, var_SourceComm);
-          // 	DirectedCommunicationLink.target(Link, TargetComm)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "DirectedCommunicationLink")));
-          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Link, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "DirectedCommunicationLink", "target")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_2_, var_TargetComm);
+          new Equality(body, var__virtual_1_, var_TargetComm);
           // 	CommunicatingElement.commSubsystem(Target, TargetComm)
           new TypeConstraint(body, Tuples.flatTupleOf(var_Target), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommunicatingElement")));
-          PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_Target, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_3_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
-          new Equality(body, var__virtual_3_, var_TargetComm);
+          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_Target, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/satellite", "CommunicatingElement", "commSubsystem")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/satellite", "CommSubsystem")));
+          new Equality(body, var__virtual_2_, var_TargetComm);
           // 	neg find groundStationNetwork(Target)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_Target), GroundStationNetwork.instance().getInternalQueryRepresentation());
           bodies.add(body);

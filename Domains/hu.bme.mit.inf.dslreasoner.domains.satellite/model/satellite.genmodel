@@ -20,16 +20,13 @@
     </genClasses>
     <genClasses image="false" ecoreClass="satellite.ecore#//CommunicatingElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//CommunicatingElement/commSubsystem"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//CommunicatingElement/communicationLink"/>
     </genClasses>
     <genClasses ecoreClass="satellite.ecore#//GroundStationNetwork"/>
     <genClasses image="false" ecoreClass="satellite.ecore#//Spacecraft">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//Spacecraft/payload"/>
     </genClasses>
-    <genClasses ecoreClass="satellite.ecore#//CommSubsystem"/>
-    <genClasses ecoreClass="satellite.ecore#//DirectedCommunicationLink">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//DirectedCommunicationLink/source"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//DirectedCommunicationLink/target"/>
+    <genClasses ecoreClass="satellite.ecore#//CommSubsystem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//CommSubsystem/target"/>
     </genClasses>
     <genClasses image="false" ecoreClass="satellite.ecore#//Payload"/>
     <genClasses ecoreClass="satellite.ecore#//InterferometryPayload"/>
