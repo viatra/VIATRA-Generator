@@ -50,10 +50,46 @@ graph
 		[
 		]
 	]
+	node
+	[
+		id	2
+		label	""
+		graphics
+		[
+			x	641.0
+			y	184.0
+			w	36.0
+			h	30.0
+			type	"rectangle"
+			fill	"#CCCCFF"
+			outline	"#000000"
+		]
+		LabelGraphics
+		[
+		]
+	]
+	node
+	[
+		id	3
+		label	""
+		graphics
+		[
+			x	608.476623535156
+			y	435.7376708984377
+			w	126.0
+			h	61.0
+			fill	"#CCCCFF"
+			outline	"#000000"
+		]
+		LabelGraphics
+		[
+		]
+	]
 	edge
 	[
 		source	0
 		target	1
+		label	"name"
 		graphics
 		[
 			fill	"#000000"
@@ -65,6 +101,8 @@ graph
 			fontSize	12
 			fontName	"Dialog"
 			configuration	"AutoFlippingLabel"
+			contentWidth	34.017578125
+			contentHeight	18.701171875
 			model	"six_pos"
 			position	"tail"
 		]
@@ -74,6 +112,8 @@ graph
 			fontSize	12
 			fontName	"Dialog"
 			configuration	"AutoFlippingLabel"
+			contentWidth	20.669921875
+			contentHeight	18.701171875
 			model	"six_pos"
 			position	"stail"
 		]
@@ -83,8 +123,38 @@ graph
 			fontSize	12
 			fontName	"Dialog"
 			configuration	"AutoFlippingLabel"
+			contentWidth	20.669921875
+			contentHeight	18.701171875
 			model	"six_pos"
 			position	"ttail"
+		]
+	]
+	edge
+	[
+		source	3
+		target	0
+		graphics
+		[
+			fill	"#000000"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	608.476623535156
+					y	435.7376708984377
+				]
+				point
+				[
+					x	370.0
+					y	435.7376708984377
+				]
+				point
+				[
+					x	370.0
+					y	238.0
+				]
+			]
 		]
 	]
 ]

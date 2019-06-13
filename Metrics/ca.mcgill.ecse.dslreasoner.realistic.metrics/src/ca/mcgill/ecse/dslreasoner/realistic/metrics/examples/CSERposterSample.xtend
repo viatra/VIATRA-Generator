@@ -26,7 +26,7 @@ class CSERposterSample {
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
-	static val depth = 1
+	static val depth = 0
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 	
@@ -38,7 +38,7 @@ class CSERposterSample {
 		ReteEngine.getClass
 		
 		val outputs = "outputs"
-		val instModName = REALISTIC
+		val instModName = "thursdayModel"
 		val workspace = new FileSystemWorkspace('''resources''', "")
 		val model = workspace.readModel(EObject, instModName+".xmi")
 
@@ -69,8 +69,6 @@ class CSERposterSample {
 		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
 		
 		w2.close
-		
-		println("visualization done")
 		
 //		partialModelOutput.openWorldElements
 		//RESULTS

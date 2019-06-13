@@ -8,11 +8,15 @@
   <genPackages prefix="LinkedList" disposableProviderFactory="true" ecorePackage="linkedList.ecore#/">
     <genClasses ecoreClass="linkedList.ecore#//List">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference linkedList.ecore#//List/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference linkedList.ecore#//List/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference linkedList.ecore#//List/objects"/>
     </genClasses>
     <genClasses ecoreClass="linkedList.ecore#//Element">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference linkedList.ecore#//Element/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference linkedList.ecore#//Element/next"/>
     </genClasses>
-    <genClasses ecoreClass="linkedList.ecore#//Object"/>
+    <genClasses ecoreClass="linkedList.ecore#//Object">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference linkedList.ecore#//Object/owner"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

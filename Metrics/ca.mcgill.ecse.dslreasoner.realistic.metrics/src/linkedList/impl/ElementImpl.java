@@ -6,8 +6,6 @@ import linkedList.Element;
 import linkedList.LinkedListPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -30,7 +28,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class ElementImpl extends MinimalEObjectImpl.Container implements Element {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()
@@ -40,7 +38,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	protected linkedList.Object value;
 
 	/**
-	 * The cached value of the '{@link #getNext() <em>Next</em>}' containment reference.
+	 * The cached value of the '{@link #getNext() <em>Next</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getNext()
@@ -74,6 +72,14 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * @generated
 	 */
 	public linkedList.Object getValue() {
+		if (value != null && value.eIsProxy()) {
+			InternalEObject oldValue = (InternalEObject)value;
+			value = (linkedList.Object)eResolveProxy(oldValue);
+			if (value != oldValue) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LinkedListPackage.ELEMENT__VALUE, oldValue, value));
+			}
+		}
 		return value;
 	}
 
@@ -82,14 +88,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(linkedList.Object newValue, NotificationChain msgs) {
-		linkedList.Object oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LinkedListPackage.ELEMENT__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public linkedList.Object basicGetValue() {
+		return value;
 	}
 
 	/**
@@ -98,17 +98,10 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * @generated
 	 */
 	public void setValue(linkedList.Object newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LinkedListPackage.ELEMENT__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LinkedListPackage.ELEMENT__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LinkedListPackage.ELEMENT__VALUE, newValue, newValue));
+		linkedList.Object oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LinkedListPackage.ELEMENT__VALUE, oldValue, value));
 	}
 
 	/**
@@ -117,6 +110,14 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * @generated
 	 */
 	public Element getNext() {
+		if (next != null && next.eIsProxy()) {
+			InternalEObject oldNext = (InternalEObject)next;
+			next = (Element)eResolveProxy(oldNext);
+			if (next != oldNext) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LinkedListPackage.ELEMENT__NEXT, oldNext, next));
+			}
+		}
 		return next;
 	}
 
@@ -125,14 +126,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetNext(Element newNext, NotificationChain msgs) {
-		Element oldNext = next;
-		next = newNext;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LinkedListPackage.ELEMENT__NEXT, oldNext, newNext);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Element basicGetNext() {
+		return next;
 	}
 
 	/**
@@ -141,33 +136,10 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	 * @generated
 	 */
 	public void setNext(Element newNext) {
-		if (newNext != next) {
-			NotificationChain msgs = null;
-			if (next != null)
-				msgs = ((InternalEObject)next).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LinkedListPackage.ELEMENT__NEXT, null, msgs);
-			if (newNext != null)
-				msgs = ((InternalEObject)newNext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LinkedListPackage.ELEMENT__NEXT, null, msgs);
-			msgs = basicSetNext(newNext, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LinkedListPackage.ELEMENT__NEXT, newNext, newNext));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case LinkedListPackage.ELEMENT__VALUE:
-				return basicSetValue(null, msgs);
-			case LinkedListPackage.ELEMENT__NEXT:
-				return basicSetNext(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		Element oldNext = next;
+		next = newNext;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, LinkedListPackage.ELEMENT__NEXT, oldNext, next));
 	}
 
 	/**
@@ -179,9 +151,11 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case LinkedListPackage.ELEMENT__VALUE:
-				return getValue();
+				if (resolve) return getValue();
+				return basicGetValue();
 			case LinkedListPackage.ELEMENT__NEXT:
-				return getNext();
+				if (resolve) return getNext();
+				return basicGetNext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

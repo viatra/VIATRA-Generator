@@ -36,7 +36,6 @@ import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import simpleStatechart.SimpleStatechartPackage;
 
@@ -52,7 +51,7 @@ public class CSERposterSample {
   
   private final static Neighbourhood2Gml neighbourhoodVisualizer = new Neighbourhood2Gml();
   
-  private final static int depth = 1;
+  private final static int depth = 0;
   
   private final static String REALISTIC = "simpleSCRealistic";
   
@@ -68,7 +67,7 @@ public class CSERposterSample {
       SimpleStatechartPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
       final String outputs = "outputs";
-      final String instModName = CSERposterSample.REALISTIC;
+      final String instModName = "thursdayModel";
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("resources");
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_builder.toString(), "");
@@ -101,7 +100,6 @@ public class CSERposterSample {
       final PrintWriter w2 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
       w2.print(CSERposterSample.neighbourhoodVisualizer.transform(hood, partialModelOutput));
       w2.close();
-      InputOutput.<String>println("visualization done");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

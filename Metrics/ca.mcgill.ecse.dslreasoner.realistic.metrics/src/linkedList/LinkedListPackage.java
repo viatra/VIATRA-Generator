@@ -66,7 +66,7 @@ public interface LinkedListPackage extends EPackage {
 	int LIST = 0;
 
 	/**
-	 * The feature id for the '<em><b>First</b></em>' containment reference.
+	 * The feature id for the '<em><b>First</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -75,13 +75,31 @@ public interface LinkedListPackage extends EPackage {
 	int LIST__FIRST = 0;
 
 	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST__ELEMENTS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST__OBJECTS = 2;
+
+	/**
 	 * The number of structural features of the '<em>List</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_FEATURE_COUNT = 1;
+	int LIST_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>List</em>' class.
@@ -103,7 +121,7 @@ public interface LinkedListPackage extends EPackage {
 	int ELEMENT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -112,7 +130,7 @@ public interface LinkedListPackage extends EPackage {
 	int ELEMENT__VALUE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Next</b></em>' containment reference.
+	 * The feature id for the '<em><b>Next</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -149,13 +167,22 @@ public interface LinkedListPackage extends EPackage {
 	int OBJECT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Owner</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT__OWNER = 0;
+
+	/**
 	 * The number of structural features of the '<em>Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_FEATURE_COUNT = 0;
+	int OBJECT_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Object</em>' class.
@@ -178,15 +205,37 @@ public interface LinkedListPackage extends EPackage {
 	EClass getList();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link linkedList.List#getFirst <em>First</em>}'.
+	 * Returns the meta object for the reference '{@link linkedList.List#getFirst <em>First</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>First</em>'.
+	 * @return the meta object for the reference '<em>First</em>'.
 	 * @see linkedList.List#getFirst()
 	 * @see #getList()
 	 * @generated
 	 */
 	EReference getList_First();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link linkedList.List#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see linkedList.List#getElements()
+	 * @see #getList()
+	 * @generated
+	 */
+	EReference getList_Elements();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link linkedList.List#getObjects <em>Objects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Objects</em>'.
+	 * @see linkedList.List#getObjects()
+	 * @see #getList()
+	 * @generated
+	 */
+	EReference getList_Objects();
 
 	/**
 	 * Returns the meta object for class '{@link linkedList.Element <em>Element</em>}'.
@@ -199,10 +248,10 @@ public interface LinkedListPackage extends EPackage {
 	EClass getElement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link linkedList.Element#getValue <em>Value</em>}'.
+	 * Returns the meta object for the reference '{@link linkedList.Element#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @return the meta object for the reference '<em>Value</em>'.
 	 * @see linkedList.Element#getValue()
 	 * @see #getElement()
 	 * @generated
@@ -210,10 +259,10 @@ public interface LinkedListPackage extends EPackage {
 	EReference getElement_Value();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link linkedList.Element#getNext <em>Next</em>}'.
+	 * Returns the meta object for the reference '{@link linkedList.Element#getNext <em>Next</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Next</em>'.
+	 * @return the meta object for the reference '<em>Next</em>'.
 	 * @see linkedList.Element#getNext()
 	 * @see #getElement()
 	 * @generated
@@ -229,6 +278,17 @@ public interface LinkedListPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getObject();
+
+	/**
+	 * Returns the meta object for the reference '{@link linkedList.Object#getOwner <em>Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Owner</em>'.
+	 * @see linkedList.Object#getOwner()
+	 * @see #getObject()
+	 * @generated
+	 */
+	EReference getObject_Owner();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -264,12 +324,28 @@ public interface LinkedListPackage extends EPackage {
 		EClass LIST = eINSTANCE.getList();
 
 		/**
-		 * The meta object literal for the '<em><b>First</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>First</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference LIST__FIRST = eINSTANCE.getList_First();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIST__ELEMENTS = eINSTANCE.getList_Elements();
+
+		/**
+		 * The meta object literal for the '<em><b>Objects</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIST__OBJECTS = eINSTANCE.getList_Objects();
 
 		/**
 		 * The meta object literal for the '{@link linkedList.impl.ElementImpl <em>Element</em>}' class.
@@ -282,7 +358,7 @@ public interface LinkedListPackage extends EPackage {
 		EClass ELEMENT = eINSTANCE.getElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -290,7 +366,7 @@ public interface LinkedListPackage extends EPackage {
 		EReference ELEMENT__VALUE = eINSTANCE.getElement_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Next</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Next</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -306,6 +382,14 @@ public interface LinkedListPackage extends EPackage {
 		 * @generated
 		 */
 		EClass OBJECT = eINSTANCE.getObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Owner</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OBJECT__OWNER = eINSTANCE.getObject_Owner();
 
 	}
 

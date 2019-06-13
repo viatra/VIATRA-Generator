@@ -23,52 +23,52 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Element extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @return the value of the '<em>Value</em>' reference.
 	 * @see #setValue(linkedList.Object)
 	 * @see linkedList.LinkedListPackage#getElement_Value()
-	 * @model containment="true" required="true"
+	 * @model
 	 * @generated
 	 */
 	linkedList.Object getValue();
 
 	/**
-	 * Sets the value of the '{@link linkedList.Element#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link linkedList.Element#getValue <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @param value the new value of the '<em>Value</em>' reference.
 	 * @see #getValue()
 	 * @generated
 	 */
 	void setValue(linkedList.Object value);
 
 	/**
-	 * Returns the value of the '<em><b>Next</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Next</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Next</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Next</em>' containment reference.
+	 * @return the value of the '<em>Next</em>' reference.
 	 * @see #setNext(Element)
 	 * @see linkedList.LinkedListPackage#getElement_Next()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
 	Element getNext();
 
 	/**
-	 * Sets the value of the '{@link linkedList.Element#getNext <em>Next</em>}' containment reference.
+	 * Sets the value of the '{@link linkedList.Element#getNext <em>Next</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Next</em>' containment reference.
+	 * @param value the new value of the '<em>Next</em>' reference.
 	 * @see #getNext()
 	 * @generated
 	 */

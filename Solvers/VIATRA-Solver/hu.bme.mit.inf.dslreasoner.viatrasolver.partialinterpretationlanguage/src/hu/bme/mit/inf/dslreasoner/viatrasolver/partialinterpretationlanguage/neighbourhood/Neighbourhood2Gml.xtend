@@ -11,6 +11,7 @@ import java.util.Set
 import java.util.logging.Handler
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.util.concurrent.TimeUnit
 
 class Neighbourhood2Gml {
 
@@ -40,12 +41,15 @@ class Neighbourhood2Gml {
 		for (nodeKey : modRep.keySet) {
 			fullNodeText.add(transformNode(nodeKey, modRep, relevantObjectToID))
 		}
+		println("1/5: Nodes transformed")
 
 		// calculate deeper neighbourhood
 		calculateDepth(modRep.keySet.get(0))
 		val deeperNeighbourhood = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE,
 			Integer.MAX_VALUE)
 		val deepModRep = deeperNeighbourhood.modelRepresentation as HashMap
+		println("2/5: Deeper neighbourhood calculated")
+		
 
 		// Associate each deepNode to their parent
 		for (deepNodeKey : deepModRep.keySet) {
@@ -59,10 +63,11 @@ class Neighbourhood2Gml {
 				}
 			}
 		}
+		println("3/5: Deeper nodes associated to current nodes")
 
 		// edge transforming
 		for (currentNode : children.keySet) {
-			println(currentNode)
+//			println(currentNode)
 			transformEdge(edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
 				allEdgesText, currentNode, relevantObjectToID, children)
 			for (edgeText : allEdgesText) {
@@ -70,6 +75,7 @@ class Neighbourhood2Gml {
 			}
 			allEdgesText.clear
 		}
+		println("4/5: Edges transformed")
 
 //		mapPrinter(children)
 		'''
@@ -83,6 +89,8 @@ class Neighbourhood2Gml {
 				«ENDFOR»
 			]
 		'''.toString
+		
+		println("5/5: Visualization completed")
 	}
 
 	protected def transformEdge(Map<IncomingRelation, Object> edgeNameIn2targetNode,
@@ -122,48 +130,63 @@ class Neighbourhood2Gml {
 			}
 
 		}
-
+		var visitedNodes = newArrayList
 		// handling incoming edges
 		for (outEdgeTarget : edgeNameOut2targetNode.values) {
-			// currentNode = sourceParent
-			for (subNode : (outEdgeTarget as AbstractNodeDescriptor).lookup(children)) {
-				for (inEdge : subNode.incomingEdges.keySet) {
-					val edgeName = (inEdge as IncomingRelation)
-					val edgePointingFrom = (inEdge as IncomingRelation).from
-					val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
-
-					if (edgePointingFrom.equals(currentNode)) {
-						if (edgeName2inMultips.containsKey(edgeName)) {
-							edgeName.lookup(edgeName2inMultips).add(edgeInMultip)
-						} else {
-							edgeName2inMultips.put(edgeName, newArrayList(edgeInMultip))
-							modifiedEdgeNames.add(edgeName)
+			
+			if(!visitedNodes.contains(outEdgeTarget)) {
+				visitedNodes.add(outEdgeTarget)
+				// currentNode = sourceParent
+				for (subNode : (outEdgeTarget as AbstractNodeDescriptor).lookup(children)) {
+					for (inEdge : subNode.incomingEdges.keySet) {
+						val edgeName = (inEdge as IncomingRelation)
+						val edgePointingFrom = (inEdge as IncomingRelation).from
+						val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
+	
+						if (edgePointingFrom.equals(currentNode)) {
+							if (edgeName2inMultips.containsKey(edgeName)) {
+								edgeName.lookup(edgeName2inMultips).add(edgeInMultip)
+							} else {
+								edgeName2inMultips.put(edgeName, newArrayList(edgeInMultip))
+								modifiedEdgeNames.add(edgeName)
+							}
+							edgeNameIn2targetNode.put(edgeName, edgePointingFrom)
 						}
-						edgeNameIn2targetNode.put(edgeName, edgePointingFrom)
+	//				edgeName2targetNode.put(edgeName, edgePointingFrom)
 					}
-//				edgeName2targetNode.put(edgeName, edgePointingFrom)
 				}
-			}
-
-//			mapPrinter(edgeName2inMultips)
-			// fill in the 0 multiplicities (INCOMING)
-			for (edgeSoFar : modifiedEdgeNames) {
-				val edgeAsRelation = edgeSoFar as IncomingRelation
-				var inEdgesNum = edgeAsRelation.lookup(edgeName2inMultips).size
-				val targetNode = outEdgeTarget as AbstractNodeDescriptor
-				val targetChildrenNum = targetNode.lookup(children).size
-				println("in " + edgeSoFar + "=>" + inEdgesNum + " != " + outEdgeTarget + "=>" + targetChildrenNum)
-				while (inEdgesNum != targetChildrenNum) {
-//					println("in" + inEdgesNum + "!=" + targetChildrenNum)
-					edgeAsRelation.lookup(edgeName2inMultips).add(0)
-					inEdgesNum++
+//				println()
+//				println("inMultips1----------------------")
+//				mapPrinter(edgeName2inMultips)
+//				println("inMultipsEND----------------------")
+//				println()
+	
+	//			mapPrinter(edgeName2inMultips)
+				// fill in the 0 multiplicities (INCOMING)
+				for (edgeSoFar : modifiedEdgeNames) {
+					val edgeAsRelation = edgeSoFar as IncomingRelation
+					var inEdgesNum = edgeAsRelation.lookup(edgeName2inMultips).size
+					val targetNode = outEdgeTarget as AbstractNodeDescriptor
+					val targetChildrenNum = targetNode.lookup(children).size
+	//				println("in " + edgeSoFar + "=>" + inEdgesNum + " != " + outEdgeTarget + "=>" + targetChildrenNum)
+					while (inEdgesNum != targetChildrenNum) {
+	//					println("in" + inEdgesNum + "!=" + targetChildrenNum)
+						edgeAsRelation.lookup(edgeName2inMultips).add(0)
+						inEdgesNum++
+					}
 				}
+				modifiedEdgeNames.clear
+				
+	//			mapPrinter(edgeName2outMultips)
+//				println()
+//				println("inMultips2----------------------")
+//				mapPrinter(edgeName2inMultips)
+//				println("inMultipsEND----------------------")
+//				println()
 			}
-			modifiedEdgeNames.clear
-
 		}
 
-		mapPrinter(edgeName2outMultips)
+		
 
 		// fill in the 0 multiplicities (OUTGOING)
 		for (edge : edgeName2outMultips.keySet) {
@@ -171,15 +194,15 @@ class Neighbourhood2Gml {
 			var outEdgesNum = edge.lookup(edgeName2outMultips).size
 			val sourceChildrenNum = currentNode.lookup(children).size
 
-			println("out " + edge + "=>" + outEdgesNum + " != " + currentNode + "=>" + sourceChildrenNum)
+//			println("out " + edge + "=>" + outEdgesNum + " != " + currentNode + "=>" + sourceChildrenNum)
 			while (outEdgesNum != sourceChildrenNum) {
 				edge.lookup(edgeName2outMultips).add(0)
 				outEdgesNum++
 			}
 		}
-		println("xxxxxxxx")
-		mapPrinter(edgeNameIn2targetNode)
-		mapPrinter(edgeNameOut2targetNode)
+//		println("xxxxxxxx")
+//		mapPrinter(edgeNameIn2targetNode)
+//		mapPrinter(edgeNameOut2targetNode)
 		
 		
 
@@ -203,12 +226,12 @@ class Neighbourhood2Gml {
 			
 			//finding corresponding Incoming edge
 			var correspInEdgeSet = edgeNameIn2targetNode.keySet.filter[type.equals(edgeName) && lookup(edgeNameIn2targetNode).equals(currentNode)]
-			println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
-			println(currentNode)
-			println(outEdge)
-			println(targetNode)
-			println(edgeNameIn2targetNode)
-			println(correspInEdgeSet.size)
+//			println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
+//			println(currentNode)
+//			println(outEdge)
+//			println(targetNode)
+//			println(edgeNameIn2targetNode)
+//			println(correspInEdgeSet.size)
 			val correspInEdge = correspInEdgeSet.get(0)
 			
 
