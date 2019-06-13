@@ -18,8 +18,8 @@ METAMODEL = 'Meta Mode'
 
 STATE_ID = 'State Id'
 
-HUMAN_OUT_D_REP = '../input/humanOutput/R_20158_run_1.csv'
+HUMAN_OUT_D_REP = '../input/humanOutput/R_2015225_run_1.csv'
 
-HUMAN_MPC_REP = '../input/humanOutput/R_2015246_run_1.csv'
+HUMAN_MPC_REP = '../input/humanOutput/R_2016324_run_1.csv'
 
-HUMAN_NA_REP = '../input/humanOutput/R_2016176_run_1.csv'
+HUMAN_NA_REP = '../input/humanOutput/R_2017419_run_1.csv'

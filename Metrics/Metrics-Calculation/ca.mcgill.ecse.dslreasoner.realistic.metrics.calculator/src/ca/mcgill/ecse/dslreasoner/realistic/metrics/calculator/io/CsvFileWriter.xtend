@@ -21,7 +21,7 @@ class CsvFileWriter {
 					output.append(datarow.get(i) + ',');
 				}
 				
-				if(datarow.size > 1){
+				if(datarow.size >= 1){
 					output.append(datarow.get(datarow.size() - 1));
 					output.append('\n');
 				}

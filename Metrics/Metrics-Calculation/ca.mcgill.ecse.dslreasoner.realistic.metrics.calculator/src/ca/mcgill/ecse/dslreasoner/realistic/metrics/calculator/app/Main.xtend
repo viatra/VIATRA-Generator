@@ -35,7 +35,7 @@ class Main {
 		
 		//human input has different package declaration
 //		reader = new GraphReader(Yakindumm2PackageImpl.eINSTANCE);
-		val human = new RWInformation("inputs/Random/", "outputs/", 1);
+		val human = new RWInformation("inputs/Fake_Random_Random/", "outputs/", 1);
 		calculateAllModels(human.inputFolder, human.outputFolder,human.numRuns, reader);
 		
 		

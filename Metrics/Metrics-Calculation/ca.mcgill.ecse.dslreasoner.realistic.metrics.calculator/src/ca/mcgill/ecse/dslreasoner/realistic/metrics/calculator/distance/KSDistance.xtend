@@ -1,9 +1,9 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader
 import java.util.List
 import org.apache.commons.math3.stat.inference.KolmogorovSmirnovTest
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader
 
 class KSDistance {
 	var static ksTester = new KolmogorovSmirnovTest();

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.JSDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.PartialInterpretationGraph
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.CsvFileWriter
@@ -17,16 +18,33 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.dse.api.Solution
 
 class PartialInterpretationMetric {
-	var static state = 0;
 	var static KSDistance ks;
+	var static JSDistance js;
 	
 	def static void initPaths(){
 		new File("debug/metric/").mkdir();
 		new File("debug/metric/trajectories/").mkdir();
 		ks = new KSDistance(Domain.Yakinduum);
+		js = new JSDistance(Domain.Yakinduum);
 	}
 	
 	def static MetricDistanceGroup calculateMetricDistance(PartialInterpretation partial){
+		val metrics = new ArrayList<Metric>();
+		metrics.add(new OutDegreeMetric());
+		metrics.add(new NodeActivityMetric());
+		metrics.add(new MultiplexParticipationCoefficientMetric());
+		
+		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
+		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
+		
+		var mpc = js.mpcDistance(metricSamples.mpcSamples);
+		var na = js.naDistance(metricSamples.naSamples);
+		var outDegree = js.outDegreeDistance(metricSamples.outDegreeSamples);
+		
+		return new MetricDistanceGroup(mpc, na, outDegree);
+	}
+	
+	def static MetricDistanceGroup calculateMetricDistanceKS(PartialInterpretation partial){
 		val metrics = new ArrayList<Metric>();
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
@@ -52,7 +70,6 @@ class PartialInterpretationMetric {
 		//make dir since the folder can be none existing
 		new File(path).mkdir();
 		val filename = path + "/state_"+currentStateId+"-"+counter+".csv";
-		state++;
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, currentStateId);
 		
 		CsvFileWriter.write(metricCalculator.evaluateAllMetrics(), filename);
@@ -60,20 +77,22 @@ class PartialInterpretationMetric {
 	
 	def static void outputTrajectories(PartialInterpretation empty, List<Solution>  solutions){	
 		for(solution : solutions){
+			
 			//need to copy the empty solution because the transition directly worked on the graph
 			val emptySolutionCopy = EcoreUtil.copy(empty)
 			val trajectory = solution.shortestTrajectory;
-			trajectory.modelWithEditingDomain = emptySolutionCopy
+			trajectory.model = emptySolutionCopy
 			
 			// state codes that will record the trajectory
 			val stateCodes = newArrayList()
-			
 			var counter = 0
+
 			//transform and record the state codes for each state
 			while(trajectory.doNextTransformation){
 				//println(trajectory.stateCoder.createStateCode)
 				val stateId = trajectory.stateCoder.createStateCode.toString
 				val interpretation = trajectory.getModel();
+				println(stateId)
 				//calculate metrics of current state
 				calculateMetric(interpretation as PartialInterpretation, "debug/metric/output", stateId, counter)
 				stateCodes.add(stateId)

@@ -191,24 +191,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				continue mainLoop;
 //			}
 
+			
+			
 			List<Object> activationIds = selectActivation();
-			PartialInterpretation model = (PartialInterpretation) context.getModel();
-			System.out.println(model.getNewElements().size() );
-			PartialInterpretationMetric.initPaths();
-			if(model.getNewElements().size() >= 10) {
-				Map<Object, Double> valueMap = new HashMap<Object, Double>();
-				System.out.println(PartialInterpretationMetric.calculateMetricDistance(model).getMPCDistance());
-				for(Object id : activationIds) {
-					context.executeAcitvationId(id);
-					model = (PartialInterpretation) context.getModel();
-					MetricDistanceGroup g = PartialInterpretationMetric.calculateMetricDistance(model);
-					valueMap.put(id, g.getMPCDistance());
-					context.backtrack();
-				}
-				Collections.sort(activationIds, Comparator.comparing(li -> valueMap.get(li)));
-			}
-			
-			
 			Iterator<Object> iterator = activationIds.iterator();
 			
 			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
@@ -219,7 +204,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
-				
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
 //					System.out.println(matcher.getPatternName());
