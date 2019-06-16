@@ -16,8 +16,9 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ScopePropagator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.PartialInterpretationInitialiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.AbstractNeighbourhoodBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.IdentifierBasedStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.PairwiseNeighbourhoodBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyForModelGeneration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityChecker
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundHandler
@@ -49,7 +50,7 @@ class ViatraReasoner extends LogicReasoner {
 		ReasonerWorkspace workspace) throws LogicReasonerException {
 		val viatraConfig = configuration.asConfig
 
-		if (viatraConfig.debugConfiguration.logging) {
+		if (viatraConfig.documentationLevel == DocumentationLevel.FULL) {
 			DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.VERBOSE_FULL)
 		} else {
 			DesignSpaceExplorer.turnOnLogging(DseLoggingLevel.WARN)
@@ -139,7 +140,7 @@ class ViatraReasoner extends LogicReasoner {
 		dse.setInitialModel(emptySolution, false)
 
 		val IStateCoderFactory statecoder = if (viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
-				new NeighbourhoodBasedStateCoderFactory
+				new PairwiseNeighbourhoodBasedStateCoderFactory
 			} else {
 				new IdentifierBasedStateCoderFactory
 			}
@@ -239,7 +240,7 @@ class ViatraReasoner extends LogicReasoner {
 		}
 	}
 
-	private def dispatch long runtime(NeighbourhoodBasedStateCoderFactory sc) {
+	private def dispatch long runtime(AbstractNeighbourhoodBasedStateCoderFactory sc) {
 		sc.sumStatecoderRuntime
 	}
 

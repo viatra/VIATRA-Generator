@@ -12,6 +12,16 @@ public enum ObjectiveKind {
 			return Comparators.LOWER_IS_BETTER;
 		}
 
+		@Override
+		public double getInvalidValue() {
+			return Double.POSITIVE_INFINITY;
+		}
+
+		@Override
+		public double getSatisfiedValue() {
+			return Double.NEGATIVE_INFINITY;
+		}
+
 	},
 	HIGHER_IS_BETTER {
 
@@ -20,9 +30,23 @@ public enum ObjectiveKind {
 			return Comparators.HIGHER_IS_BETTER;
 		}
 
+		@Override
+		public double getInvalidValue() {
+			return Double.NEGATIVE_INFINITY;
+		}
+
+		@Override
+		public double getSatisfiedValue() {
+			return Double.POSITIVE_INFINITY;
+		}
+
 	};
 
 	public abstract Comparator<Double> getComparator();
+
+	public abstract double getInvalidValue();
+
+	public abstract double getSatisfiedValue();
 
 	public static ObjectiveKind fromComparator(Comparator<Double> comparator) {
 		if (Comparators.LOWER_IS_BETTER.equals(comparator)) {

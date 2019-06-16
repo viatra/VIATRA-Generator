@@ -1,1 +1,1 @@
-Model generation finished
+Model generation started

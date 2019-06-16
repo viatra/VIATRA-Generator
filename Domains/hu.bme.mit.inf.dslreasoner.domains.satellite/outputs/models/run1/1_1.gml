@@ -270,6 +270,43 @@ graph
 			id	7
 			graphics
 			[
+				w	223.3
+				h	54
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	Payload class
+	InterferometryPayload class
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	8
+			graphics
+			[
 				w	269.5
 				h	68
 				type	"rectangle"
@@ -294,43 +331,6 @@ graph
 	CommSubsystem class
 	UHFCommSubsystem class
 	CommSubsystem class UndefinedPart
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	8
-			graphics
-			[
-				w	223.3
-				h	54
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	Payload class
-	InterferometryPayload class
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -407,7 +407,7 @@ graph
 				text	"
 	CommunicatingElement class
 	Spacecraft class
-	CubeSat6U class
+	CubeSat3U class
 	CubeSat class
 	CommunicatingElement class UndefinedPart
 	"
@@ -577,7 +577,45 @@ graph
 			id	15
 			graphics
 			[
-				w	277.20000000000005
+				w	269.5
+				h	68
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommSubsystem class
+	UHFCommSubsystem class
+	CommSubsystem class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	16
+			graphics
+			[
+				w	284.90000000000003
 				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
@@ -599,9 +637,9 @@ graph
 			[
 				text	"
 	CommSubsystem class
-	XCommSubsystem class
+	KaCommSubsystem class
 	CommSubsystem class UndefinedPart
-	XCommSubsystem class UndefinedPart
+	KaCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -613,7 +651,7 @@ graph
 	
 	node
 		[
-			id	16
+			id	17
 			graphics
 			[
 				w	223.3
@@ -639,45 +677,6 @@ graph
 				text	"
 	Payload class
 	InterferometryPayload class
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	17
-			graphics
-			[
-				w	277.20000000000005
-				h	82
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommSubsystem class
-	XCommSubsystem class
-	CommSubsystem class UndefinedPart
-	XCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -715,7 +714,7 @@ graph
 				text	"
 	CommunicatingElement class
 	Spacecraft class
-	CubeSat3U class
+	CubeSat6U class
 	CubeSat class
 	CommunicatingElement class UndefinedPart
 	"
@@ -732,8 +731,8 @@ graph
 			id	19
 			graphics
 			[
-				w	269.5
-				h	68
+				w	277.20000000000005
+				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -754,8 +753,9 @@ graph
 			[
 				text	"
 	CommSubsystem class
-	UHFCommSubsystem class
+	XCommSubsystem class
 	CommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -770,8 +770,8 @@ graph
 			id	20
 			graphics
 			[
-				w	269.5
-				h	68
+				w	277.20000000000005
+				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -792,8 +792,9 @@ graph
 			[
 				text	"
 	CommSubsystem class
-	UHFCommSubsystem class
+	XCommSubsystem class
 	CommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -846,7 +847,7 @@ graph
 			graphics
 			[
 				w	323.40000000000003
-				h	82
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -868,7 +869,8 @@ graph
 				text	"
 	CommunicatingElement class
 	Spacecraft class
-	SmallSat class
+	CubeSat3U class
+	CubeSat class
 	CommunicatingElement class UndefinedPart
 	"
 				fontSize	14
@@ -884,8 +886,8 @@ graph
 			id	23
 			graphics
 			[
-				w	277.20000000000005
-				h	82
+				w	269.5
+				h	68
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -906,9 +908,8 @@ graph
 			[
 				text	"
 	CommSubsystem class
-	XCommSubsystem class
+	UHFCommSubsystem class
 	CommSubsystem class UndefinedPart
-	XCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -1000,7 +1001,7 @@ graph
 			graphics
 			[
 				w	323.40000000000003
-				h	82
+				h	96
 				type	"rectangle"
 				fill	"#FFFFFF"
 				fill2	"#FFFFFF"
@@ -1022,7 +1023,8 @@ graph
 				text	"
 	CommunicatingElement class
 	Spacecraft class
-	SmallSat class
+	CubeSat3U class
+	CubeSat class
 	CommunicatingElement class UndefinedPart
 	"
 				fontSize	14
@@ -1036,6 +1038,44 @@ graph
 	node
 		[
 			id	27
+			graphics
+			[
+				w	269.5
+				h	68
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommSubsystem class
+	UHFCommSubsystem class
+	CommSubsystem class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	28
 			graphics
 			[
 				w	277.20000000000005
@@ -1074,7 +1114,7 @@ graph
 	
 	node
 		[
-			id	28
+			id	29
 			graphics
 			[
 				w	223.3
@@ -1100,45 +1140,6 @@ graph
 				text	"
 	Payload class
 	InterferometryPayload class
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	29
-			graphics
-			[
-				w	284.90000000000003
-				h	82
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommSubsystem class
-	KaCommSubsystem class
-	CommSubsystem class UndefinedPart
-	KaCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -1193,44 +1194,6 @@ graph
 			id	31
 			graphics
 			[
-				w	269.5
-				h	68
-				type	"rectangle"
-				fill	"#FFFFFF"
-				fill2	"#FFFFFF"
-				outline	"#000000"
-			]
-			LabelGraphics
-			[
-				text	"null"
-				outline	"#000000"
-				fill	"#FFFFFF"
-				fontSize	16
-				fontName	"Monospace"
-				autoSizePolicy	"node_width"
-				anchor	"t"
-				borderDistance	0.0
-			]
-			LabelGraphics
-			[
-				text	"
-	CommSubsystem class
-	UHFCommSubsystem class
-	CommSubsystem class UndefinedPart
-	"
-				fontSize	14
-				fontName	"Consolas"
-				alignment	"left"
-				anchor	"tl"
-				borderDistance	6
-			]
-		]
-	
-	node
-		[
-			id	32
-			graphics
-			[
 				w	223.3
 				h	54
 				type	"rectangle"
@@ -1265,7 +1228,7 @@ graph
 	
 	node
 		[
-			id	33
+			id	32
 			graphics
 			[
 				w	269.5
@@ -1292,6 +1255,45 @@ graph
 	CommSubsystem class
 	UHFCommSubsystem class
 	CommSubsystem class UndefinedPart
+	"
+				fontSize	14
+				fontName	"Consolas"
+				alignment	"left"
+				anchor	"tl"
+				borderDistance	6
+			]
+		]
+	
+	node
+		[
+			id	33
+			graphics
+			[
+				w	277.20000000000005
+				h	82
+				type	"rectangle"
+				fill	"#FFFFFF"
+				fill2	"#FFFFFF"
+				outline	"#000000"
+			]
+			LabelGraphics
+			[
+				text	"null"
+				outline	"#000000"
+				fill	"#FFFFFF"
+				fontSize	16
+				fontName	"Monospace"
+				autoSizePolicy	"node_width"
+				anchor	"t"
+				borderDistance	0.0
+			]
+			LabelGraphics
+			[
+				text	"
+	CommSubsystem class
+	XCommSubsystem class
+	CommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -1345,7 +1347,7 @@ graph
 			id	35
 			graphics
 			[
-				w	277.20000000000005
+				w	284.90000000000003
 				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
@@ -1367,9 +1369,9 @@ graph
 			[
 				text	"
 	CommSubsystem class
-	XCommSubsystem class
+	KaCommSubsystem class
 	CommSubsystem class UndefinedPart
-	XCommSubsystem class UndefinedPart
+	KaCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -1421,7 +1423,7 @@ graph
 			id	37
 			graphics
 			[
-				w	284.90000000000003
+				w	277.20000000000005
 				h	82
 				type	"rectangle"
 				fill	"#FFFFFF"
@@ -1443,9 +1445,9 @@ graph
 			[
 				text	"
 	CommSubsystem class
-	KaCommSubsystem class
+	XCommSubsystem class
 	CommSubsystem class UndefinedPart
-	KaCommSubsystem class UndefinedPart
+	XCommSubsystem class UndefinedPart
 	"
 				fontSize	14
 				fontName	"Consolas"
@@ -1817,7 +1819,7 @@ graph
 	edge
 	[
 		source	6
-		target	7
+		target	8
 		graphics
 		[
 			fill	"#000000"
@@ -1917,7 +1919,7 @@ graph
 	edge
 	[
 		source	14
-		target	17
+		target	16
 		graphics
 		[
 			fill	"#000000"
@@ -2037,7 +2039,7 @@ graph
 	edge
 	[
 		source	26
-		target	29
+		target	28
 		graphics
 		[
 			fill	"#000000"
@@ -2057,7 +2059,7 @@ graph
 	edge
 	[
 		source	30
-		target	31
+		target	32
 		graphics
 		[
 			fill	"#000000"
@@ -2137,7 +2139,7 @@ graph
 	edge
 	[
 		source	6
-		target	8
+		target	7
 		graphics
 		[
 			fill	"#000000"
@@ -2177,7 +2179,7 @@ graph
 	edge
 	[
 		source	14
-		target	16
+		target	17
 		graphics
 		[
 			fill	"#000000"
@@ -2237,7 +2239,7 @@ graph
 	edge
 	[
 		source	26
-		target	28
+		target	29
 		graphics
 		[
 			fill	"#000000"
@@ -2257,7 +2259,7 @@ graph
 	edge
 	[
 		source	30
-		target	32
+		target	31
 		graphics
 		[
 			fill	"#000000"
@@ -2315,8 +2317,8 @@ graph
 	]
 	edge
 	[
-		source	11
-		target	2
+		source	12
+		target	8
 		graphics
 		[
 			fill	"#000000"
@@ -2334,7 +2336,26 @@ graph
 	]
 	edge
 	[
-		source	15
+		source	16
+		target	3
+		graphics
+		[
+			fill	"#000000"
+			targetArrow	"standard"
+		]
+		LabelGraphics
+		[
+			text	"target reference CommSubsystem"
+			fontSize	14
+			fontName	"Consolas"
+			configuration	"AutoFlippingLabel"
+			model	"six_pos"
+			position	"thead"
+		]
+	]
+	edge
+	[
+		source	19
 		target	9
 		graphics
 		[
@@ -2353,27 +2374,8 @@ graph
 	]
 	edge
 	[
-		source	20
-		target	7
-		graphics
-		[
-			fill	"#000000"
-			targetArrow	"standard"
-		]
-		LabelGraphics
-		[
-			text	"target reference CommSubsystem"
-			fontSize	14
-			fontName	"Consolas"
-			configuration	"AutoFlippingLabel"
-			model	"six_pos"
-			position	"thead"
-		]
-	]
-	edge
-	[
 		source	23
-		target	15
+		target	12
 		graphics
 		[
 			fill	"#000000"
@@ -2392,7 +2394,7 @@ graph
 	edge
 	[
 		source	27
-		target	24
+		target	15
 		graphics
 		[
 			fill	"#000000"
@@ -2410,8 +2412,8 @@ graph
 	]
 	edge
 	[
-		source	31
-		target	19
+		source	32
+		target	15
 		graphics
 		[
 			fill	"#000000"
@@ -2430,7 +2432,7 @@ graph
 	edge
 	[
 		source	35
-		target	2
+		target	16
 		graphics
 		[
 			fill	"#000000"

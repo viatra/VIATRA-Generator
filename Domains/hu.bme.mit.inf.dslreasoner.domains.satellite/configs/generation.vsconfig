@@ -3,7 +3,7 @@ import viatra "src/hu/bme/mit/inf/dslreasoner/domains/satellite/queries/Satellit
 
 generate {
 	metamodel = { package satellite excluding { InterferometryMission.observationTime } }
-	constraints = { package hu.bme.mit.inf.dslreasoner.domains.satellite.queries  }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.satellite.queries }
 	partial-model = { "inputs/SatelliteInstance.xmi"}
 	solver = ViatraSolver
 	scope = {

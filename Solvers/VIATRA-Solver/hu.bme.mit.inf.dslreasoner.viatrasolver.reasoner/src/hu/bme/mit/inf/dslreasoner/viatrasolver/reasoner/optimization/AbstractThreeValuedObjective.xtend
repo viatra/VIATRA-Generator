@@ -1,60 +1,10 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization
 
-import java.util.Comparator
 import org.eclipse.viatra.dse.base.ThreadContext
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
 
-abstract class ObjectiveThreshold {
-	public static val NO_THRESHOLD = new hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold {
-		override isHard() {
-			false
-		}
-
-		override satisfiesThreshold(double cost, Comparator<Double> comparator) {
-			true
-		}
-	}
-
-	private new() {
-	}
-
-	def boolean isHard() {
-		true
-	}
-
-	def boolean satisfiesThreshold(double cost, Comparator<Double> comparator)
-
-	@Data
-	static class Exclusive extends ObjectiveThreshold {
-		val double threshold
-
-		override satisfiesThreshold(double cost, Comparator<Double> comparator) {
-			comparator.compare(threshold, cost) > 0
-		}
-	}
-
-	@Data
-	static class Inclusive extends ObjectiveThreshold {
-		val double threshold
-
-		override satisfiesThreshold(double cost, Comparator<Double> comparator) {
-			comparator.compare(threshold, cost) >= 0
-		}
-	}
-}
-
-abstract class AbstractThreeValuedObjective implements IThreeValuedObjective {
-	@Accessors val String name
-	@Accessors ObjectiveKind kind
-	@Accessors ObjectiveThreshold threshold
-	@Accessors int level
-
+abstract class AbstractThreeValuedObjective extends DirectionalThresholdObjective implements IThreeValuedObjective {
 	protected new(String name, ObjectiveKind kind, ObjectiveThreshold threshold, int level) {
-		this.name = name
-		this.kind = kind
-		this.threshold = threshold
-		this.level = level
+		super(name, kind, threshold, level)
 	}
 
 	abstract def double getLowestPossibleFitness(ThreadContext threadContext)
@@ -82,21 +32,4 @@ abstract class AbstractThreeValuedObjective implements IThreeValuedObjective {
 				throw new IllegalStateException("Unknown three valued objective kind: " + kind)
 		}
 	}
-
-	override isHardObjective() {
-		threshold.hard
-	}
-
-	override satisifiesHardObjective(Double fitness) {
-		threshold.satisfiesThreshold(fitness, comparator)
-	}
-
-	override getComparator() {
-		kind.comparator
-	}
-
-	override setComparator(Comparator<Double> comparator) {
-		kind = ObjectiveKind.fromComparator(comparator)
-	}
-
 }

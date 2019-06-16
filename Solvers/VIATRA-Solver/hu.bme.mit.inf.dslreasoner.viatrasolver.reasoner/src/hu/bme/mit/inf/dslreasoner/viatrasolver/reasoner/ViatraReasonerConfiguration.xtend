@@ -64,8 +64,7 @@ class DiversityDescriptor {
 }
 
 class DebugConfiguration {
-	public var logging = false
-	public var PartialInterpretationVisualiser partialInterpretatioVisualiser = null;
+	public var PartialInterpretationVisualiser partialInterpretatioVisualiser = null
 	public var partalInterpretationVisualisationFrequency = 1
 }
 

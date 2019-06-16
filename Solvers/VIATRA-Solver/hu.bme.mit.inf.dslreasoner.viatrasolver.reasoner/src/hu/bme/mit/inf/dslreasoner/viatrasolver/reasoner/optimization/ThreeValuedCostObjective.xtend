@@ -42,7 +42,7 @@ class ThreeValuedCostObjective extends AbstractThreeValuedObjective {
 		])
 	}
 
-	override getFitness(ThreadContext context) {
+	override getRawFitness(ThreadContext context) {
 		var int cost = 0
 		for (matcher : matchers) {
 			cost += matcher.weight * matcher.currentMatcher.countMatches

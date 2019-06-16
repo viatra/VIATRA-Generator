@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
 import org.eclipse.viatra.dse.base.ThreadContext;
@@ -254,6 +254,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			activationIds = new ArrayList<Object>(context.getUntraversedActivationIds());
 			Collections.shuffle(activationIds);
 		} catch (NullPointerException e) {
+			logger.warn("Unexpected state code: " + context.getDesignSpaceManager().getCurrentState());
 			numberOfStatecoderFail++;
 			activationIds = Collections.emptyList();
 		}
@@ -295,7 +296,10 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			int id = ++numberOfPrintedModel;
 			if (id % configuration.debugConfiguration.partalInterpretationVisualisationFrequency == 0) {
 				PartialInterpretationVisualisation visualisation = partialInterpretatioVisualiser.visualiseConcretization(p);
-				visualisation.writeToFile(workspace, String.format("state%09d.png", id));
+				logger.debug("Visualizing state: " + id + " (" + context.getDesignSpaceManager().getCurrentState() + ")");
+				String name = String.format("state%09d", id);
+				visualisation.writeToFile(workspace, name + ".png");
+				workspace.writeModel((EObject) context.getModel(), name + ".xmi");
 			}
 		}
 	}
