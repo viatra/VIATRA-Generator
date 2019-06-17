@@ -24,40 +24,6 @@ class PartialInterpretationMetric {
 	def static void initPaths(){
 		new File("debug/metric/").mkdir();
 		new File("debug/metric/trajectories/").mkdir();
-		ks = new KSDistance(Domain.Yakinduum);
-		js = new JSDistance(Domain.Yakinduum);
-	}
-	
-	def static MetricDistanceGroup calculateMetricDistance(PartialInterpretation partial){
-		val metrics = new ArrayList<Metric>();
-		metrics.add(new OutDegreeMetric());
-		metrics.add(new NodeActivityMetric());
-		metrics.add(new MultiplexParticipationCoefficientMetric());
-		
-		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
-		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
-		
-		var mpc = js.mpcDistance(metricSamples.mpcSamples);
-		var na = js.naDistance(metricSamples.naSamples);
-		var outDegree = js.outDegreeDistance(metricSamples.outDegreeSamples);
-		
-		return new MetricDistanceGroup(mpc, na, outDegree);
-	}
-	
-	def static MetricDistanceGroup calculateMetricDistanceKS(PartialInterpretation partial){
-		val metrics = new ArrayList<Metric>();
-		metrics.add(new OutDegreeMetric());
-		metrics.add(new NodeActivityMetric());
-		metrics.add(new MultiplexParticipationCoefficientMetric());
-		
-		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
-		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
-		
-		var mpc = ks.mpcDistance(metricSamples.mpcSamples);
-		var na = ks.naDistance(metricSamples.naSamples);
-		var outDegree = ks.outDegreeDistance(metricSamples.outDegreeSamples);
-		
-		return new MetricDistanceGroup(mpc, na, outDegree);
 	}
 	
 	// calculate the metrics for a state
@@ -115,29 +81,5 @@ class PartialInterpretationMetric {
 				e.printStackTrace()
 			}
 		}			
-	}
-}
-
-class MetricDistanceGroup{
-	var double mpcDistance;
-	var double naDistance;
-	var double outDegreeDistance;
-	
-	new(double mpcDistance, double naDistance, double outDegreeDistance){
-		this.mpcDistance = mpcDistance;
-		this.naDistance = naDistance;
-		this.outDegreeDistance = outDegreeDistance;
-	}
-	
-	def double getMPCDistance(){
-		return this.mpcDistance
-	}
-	
-	def double getNADistance(){
-		return this.naDistance
-	}
-	
-	def double getOutDegreeDistance(){
-		return this.outDegreeDistance
 	}
 }
