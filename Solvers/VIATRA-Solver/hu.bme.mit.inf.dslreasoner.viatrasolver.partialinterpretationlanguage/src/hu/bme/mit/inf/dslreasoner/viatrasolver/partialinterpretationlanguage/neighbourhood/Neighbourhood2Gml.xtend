@@ -41,14 +41,14 @@ class Neighbourhood2Gml {
 		for (nodeKey : modRep.keySet) {
 			fullNodeText.add(transformNode(nodeKey, modRep, relevantObjectToID))
 		}
-		println("1/5: Nodes transformed")
+		println("1/4: Nodes transformed")
 
 		// calculate deeper neighbourhood
 		calculateDepth(modRep.keySet.get(0))
 		val deeperNeighbourhood = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE,
 			Integer.MAX_VALUE)
 		val deepModRep = deeperNeighbourhood.modelRepresentation as HashMap
-		println("2/5: Deeper neighbourhood calculated")
+		println("2/4: Deeper neighbourhood calculated")
 		
 
 		// Associate each deepNode to their parent
@@ -63,7 +63,7 @@ class Neighbourhood2Gml {
 				}
 			}
 		}
-		println("3/5: Deeper nodes associated to current nodes")
+		println("3/4: Deeper nodes associated to current nodes")
 
 		// edge transforming
 		for (currentNode : children.keySet) {
@@ -75,7 +75,7 @@ class Neighbourhood2Gml {
 			}
 			allEdgesText.clear
 		}
-		println("4/5: Edges transformed")
+		println("4/4: Edges transformed")
 
 //		mapPrinter(children)
 		'''
@@ -90,7 +90,6 @@ class Neighbourhood2Gml {
 			]
 		'''.toString
 		
-		println("5/5: Visualization completed")
 	}
 
 	protected def transformEdge(Map<IncomingRelation, Object> edgeNameIn2targetNode,
