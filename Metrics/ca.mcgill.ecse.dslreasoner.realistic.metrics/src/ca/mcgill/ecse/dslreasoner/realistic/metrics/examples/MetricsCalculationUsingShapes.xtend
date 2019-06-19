@@ -6,12 +6,16 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
@@ -24,8 +28,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 
 class MetricsCalculationUsingShapes {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -33,13 +35,15 @@ class MetricsCalculationUsingShapes {
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
-	static val depth = 0
-
+	 private static DecimalFormat df = new DecimalFormat("0.000");
+	
 	def static void main(String[] args) {
+		df.roundingMode = RoundingMode.UP
 
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*", new XMIResourceFactoryImpl)
 		YakindummPackage.eINSTANCE.eClass
 		ReteEngine.getClass
+		
 
 		val fileDir = "Human//"
 		val outputs = "outputs//calculatedMetrics//" + fileDir
@@ -47,20 +51,29 @@ class MetricsCalculationUsingShapes {
 
 		val workspace = new FileSystemWorkspace(inputs, "")
 
-		var naForAllModels = newArrayList
-		var modelNA = 0.0
+		var naForAllModelsWnh1 = newArrayList
+		var naForAllModelsWnh2 = newArrayList
+		var naForAllModelsWnh3 = newArrayList
+		var naForAllModelsWOnh = newArrayList
+		var modelNA = newArrayList
 		
 		println("Average NAs per model")
 		
-		for (fileName : workspace.allFiles/*.subList(0, 100)*/) {
+		for (fileName : workspace.allFiles.subList(0, 10)) {
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
-			val partialModel = getPartialModel(workspace, fileName)
+			val model = workspace.readModel(EObject, fileName)
 			
-			modelNA = measureNodeActivitiy(partialModel)
-			//TEMP
-			naForAllModels.add(modelNA)
+			//Calculate NA without nh
+			modelNA = measureNAwithoutNH(model)
+			naForAllModelsWOnh.add(df.format(modelNA.get(0)))
 			
-			println(nameWOExt + " : " + modelNA)
+			
+			//Calculate NA with nh
+			val partialModel = getPartialModel(workspace, model)
+			modelNA = measureNAwithNH(partialModel)
+			naForAllModelsWnh1.add(df.format(modelNA.get(0)))
+			naForAllModelsWnh2.add(df.format(modelNA.get(1)))
+			//println(nameWOExt + " : " + df.format(modelNA))
 
 		// Visualize Model
 //			val writer = new PrintWriter(outputs + "//" + nameWOExt + "MODEL.gml")
@@ -73,15 +86,45 @@ class MetricsCalculationUsingShapes {
 //			w2.print(neighbourhoodVisualizer.transform(hood, partialModel))
 //			w2.close
 		}
+		println("W/O NH : " + naForAllModelsWOnh)
+		println("W/ NH 1: " + naForAllModelsWnh1)
+		println("W/ NH 2: " + naForAllModelsWnh2)
+		println("W/ NH 3: " + naForAllModelsWnh3)
+		
 
 	}
+	
+	def static measureNAwithoutNH(EObject model) {
+		val nodes = model.eResource.allContents.toList
+		val numNodes = nodes.length
+		
+		var currentNA = 0
+		var seenDims = newArrayList
+		
+		var totalNA = 0.0
+		
+		for(node: nodes){
+			currentNA = 0
+			seenDims.clear
+			for(reference : node.eClass.EAllReferences){
+				if(!seenDims.contains(reference.name)){
+					currentNA++
+					seenDims.add(reference.name)
+				}
+			}
+			
+			totalNA += currentNA			
+		}
+		
+		val averageNA = totalNA/numNodes
+		
+		return newArrayList(averageNA)
+	}
 
-	def static measureNodeActivitiy(PartialInterpretation partialModel) {
-		val depth = 1
+	def static measureNAwithNH(PartialInterpretation partialModel) {
 		// Get neighbouhood at d=0
-		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nh = neighbourhoodComputer.createRepresentation(partialModel, 1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap
-//		val nhRep = nh.previousRepresentation.modelRepresentation as HashMap
 		val nhRep = neighbourhoodComputer.createRepresentation(partialModel, 0, Integer.MAX_VALUE, Integer.MAX_VALUE).modelRepresentation as HashMap
 		val nhDeepNodes = nhDeepRep.keySet
 		val nhNodes = nhRep.keySet
@@ -115,21 +158,32 @@ class MetricsCalculationUsingShapes {
 
 		// Get NAs per node (distribution)
 		val naDistrib = newArrayList
-		var avgNA = 0
-		for (activeDimsForNode : activeDims.values) {
+		var totalNA = 0.0
+		//weight is the number of model nodes that are linked to the NH node
+		var totalNAwithWeight = 0.0
+		var numModelElemsWithWeight = 0
+		for (nhNode : activeDims.keySet) {
+			
+			var activeDimsForNode = nhNode.lookup(activeDims)
+			var numNodeOccurences = nhNode.lookup(nhRep) as Integer
+			
 			naDistrib.add(activeDimsForNode.length)
-			avgNA += activeDimsForNode.length
+			totalNA += activeDimsForNode.length
+			
+			totalNAwithWeight += activeDimsForNode.length * numNodeOccurences
+			numModelElemsWithWeight += numNodeOccurences
+			
 		}
 //		println(activeDims)
 
 		// return average NA
-		return (avgNA as float) / activeDims.values.length
+		val averageNA = totalNA / activeDims.values.length
+		val averageNAwithWeight = totalNAwithWeight / numModelElemsWithWeight
+		return newArrayList(averageNA, averageNAwithWeight)
 
 	}
 
-	def static getPartialModel(FileSystemWorkspace workspace, String fileName) {
-		val model = workspace.readModel(EObject, fileName)
-
+	def static getPartialModel(FileSystemWorkspace workspace, EObject model) {
 		val pckg = model.eClass.EPackage
 		val metamodel = new EcoreMetamodelDescriptor(
 			pckg.EClassifiers.filter(EClass).toList,
