@@ -12,8 +12,11 @@ import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
@@ -24,6 +27,7 @@ import java.io.PrintWriter;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +64,8 @@ public class MetricsCalculationUsingShapes {
   
   private final static Neighbourhood2Gml neighbourhoodVisualizer = new Neighbourhood2Gml();
   
+  private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
+  
   private static DecimalFormat df = new DecimalFormat("0.000");
   
   public static void main(final String[] args) {
@@ -72,7 +78,7 @@ public class MetricsCalculationUsingShapes {
       YakindummPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
       final String fileDir = "Human//";
-      final String outputs = ("outputs//calculatedMetrics//" + fileDir);
+      final String outputFileName = "stats.csv";
       final String inputs = ("inputs//" + fileDir);
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
       ArrayList<List<String>> naForAllModelsWnh = new ArrayList<List<String>>();
@@ -87,7 +93,8 @@ public class MetricsCalculationUsingShapes {
           modelNA = MetricsCalculationUsingShapes.measureNAwithoutNH(model);
           naForAllModelsWOnh.add(MetricsCalculationUsingShapes.df.format(modelNA.get(0)));
           final PartialInterpretation partialModel = MetricsCalculationUsingShapes.getPartialModel(workspace, model);
-          for (int i = 0; (i < 2); i++) {
+          final int upLim = 3;
+          for (int i = 0; (i < upLim); i++) {
             {
               modelNA = MetricsCalculationUsingShapes.measureNAwithNH(partialModel, Integer.valueOf(i));
               final ArrayList<List<String>> _converted_naForAllModelsWnh = (ArrayList<List<String>>)naForAllModelsWnh;
@@ -100,9 +107,22 @@ public class MetricsCalculationUsingShapes {
               }
             }
           }
+          for (int i = upLim; (i < (upLim * 2)); i++) {
+            {
+              modelNA = MetricsCalculationUsingShapes.measureNAwithNHNew(partialModel, Integer.valueOf((i - upLim)));
+              final ArrayList<List<String>> _converted_naForAllModelsWnh = (ArrayList<List<String>>)naForAllModelsWnh;
+              int _length = ((Object[])Conversions.unwrapArray(_converted_naForAllModelsWnh, Object.class)).length;
+              boolean _lessEqualsThan = (_length <= i);
+              if (_lessEqualsThan) {
+                naForAllModelsWnh.add(CollectionLiterals.<String>newArrayList(MetricsCalculationUsingShapes.df.format(modelNA.get(1))));
+              } else {
+                naForAllModelsWnh.get(i).add(MetricsCalculationUsingShapes.df.format(modelNA.get(1)));
+              }
+            }
+          }
         }
       }
-      final PrintWriter writer = new PrintWriter((outputFolder + "stats.csv"));
+      final PrintWriter writer = new PrintWriter((outputFolder + outputFileName));
       writer.append("noNH");
       writer.append(",");
       writer.append(String.join(",", naForAllModelsWOnh));
@@ -232,6 +252,73 @@ public class MetricsCalculationUsingShapes {
     final double averageNA = (totalNA / _length);
     final double averageNAwithWeight = (totalNAwithWeight / numModelElemsWithWeight);
     return CollectionLiterals.<Double>newArrayList(Double.valueOf(averageNA), Double.valueOf(averageNAwithWeight));
+  }
+  
+  public static ArrayList<Double> measureNAwithNHNew(final PartialInterpretation partialModel, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
+    final HashMap nhRep = ((HashMap) _modelRepresentation);
+    final GraphShape<Object, Object> nhShapeGraph = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel);
+    double totalMetricValue = 0.0;
+    int numNodes = 0;
+    double weightedActiveDimSum = 0.0;
+    double partialSum = 0.0;
+    List<GraphNodeDescriptor> _nodes = nhShapeGraph.getNodes();
+    for (final GraphNodeDescriptor node : _nodes) {
+      {
+        weightedActiveDimSum = 0.0;
+        Collection _values = node.getIncomingEdges().values();
+        for (final Object inDistrib : _values) {
+          {
+            partialSum = 0.0;
+            for (final Integer value : ((List<Integer>) inDistrib)) {
+              if (((value).intValue() != 0)) {
+                double _partialSum = partialSum;
+                partialSum = (_partialSum + 1);
+              }
+            }
+            final int distribSize = ((Object[])Conversions.unwrapArray(((List) inDistrib), Object.class)).length;
+            double _weightedActiveDimSum = weightedActiveDimSum;
+            weightedActiveDimSum = (_weightedActiveDimSum + (partialSum / distribSize));
+            InputOutput.<List<Integer>>print(((List<Integer>) inDistrib));
+            InputOutput.<Double>println(Double.valueOf((partialSum / distribSize)));
+          }
+        }
+        Collection _values_1 = node.getOutgoingEdges().values();
+        for (final Object outDistrib : _values_1) {
+          {
+            partialSum = 0.0;
+            for (final Integer value : ((List<Integer>) outDistrib)) {
+              if (((value).intValue() != 0)) {
+                double _partialSum = partialSum;
+                partialSum = (_partialSum + 1);
+              }
+            }
+            final int distribSize = ((Object[])Conversions.unwrapArray(((List) outDistrib), Object.class)).length;
+            double _weightedActiveDimSum = weightedActiveDimSum;
+            weightedActiveDimSum = (_weightedActiveDimSum + (partialSum / distribSize));
+            InputOutput.<List<Integer>>print(((List<Integer>) outDistrib));
+            InputOutput.<Double>println(Double.valueOf((partialSum / distribSize)));
+          }
+        }
+        int _size = node.getOutgoingEdges().size();
+        int _size_1 = node.getIncomingEdges().size();
+        final int actDim = (_size + _size_1);
+        InputOutput.<String>println("---------------");
+        InputOutput.<String>println(("activeDims : " + Integer.valueOf(actDim)));
+        InputOutput.<String>println(("weightedSum: " + Double.valueOf(weightedActiveDimSum)));
+        InputOutput.<String>println("---------------");
+        Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(node.getCorrespondingAND(), nhRep);
+        final Integer numOccurrences = ((Integer) _lookup);
+        int _numNodes = numNodes;
+        numNodes = (_numNodes + 1);
+        final double nodeMetricVal = weightedActiveDimSum;
+        double _talMetricValue = totalMetricValue;
+        totalMetricValue = (_talMetricValue + nodeMetricVal);
+      }
+    }
+    final double averageMetricValue = (totalMetricValue / numNodes);
+    return CollectionLiterals.<Double>newArrayList(Double.valueOf(0.0), Double.valueOf(averageMetricValue));
   }
   
   public static PartialInterpretation getPartialModel(final FileSystemWorkspace workspace, final EObject model) {

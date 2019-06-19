@@ -19,6 +19,8 @@ import java.io.PrintWriter
 import linkedList.LinkedListPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
 import simpleStatechart.SimpleStatechartPackage
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
 
 class CSERposterSample {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -26,21 +28,22 @@ class CSERposterSample {
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
+	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	static val depth = 0
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
-	
+
 	def static void main(String[] args) {
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*", new XMIResourceFactoryImpl)
 		YakindummPackage.eINSTANCE.eClass
 		LinkedListPackage.eINSTANCE.eClass
 		SimpleStatechartPackage.eINSTANCE.eClass
 		ReteEngine.getClass
-		
+
 		val outputs = "outputs"
 		val instModName = "thursdayModel"
 		val workspace = new FileSystemWorkspace('''resources''', "")
-		val model = workspace.readModel(EObject, instModName+".xmi")
+		val model = workspace.readModel(EObject, instModName + ".xmi")
 
 		val pckg = model.eClass.EPackage
 		val metamodel = new EcoreMetamodelDescriptor(
@@ -54,25 +57,29 @@ class CSERposterSample {
 		)
 		val metamodelTransformationOutput = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration)
 
-		val partialModelOutput = partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource, false)
-		
-		val writer = new PrintWriter(outputs+"//"+instModName+"MODEL.gml")
-		
+		val partialModelOutput = partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource,
+			false)
+
+		val writer = new PrintWriter(outputs + "//" + instModName + "MODEL.gml")
+
 		writer.print(partialVisualizer.transform(partialModelOutput))
-		
+
 		writer.close
-		
-		val hood = neighbourhoodComputer.createRepresentation(partialModelOutput, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
-		
-		val w2 = new PrintWriter(outputs+"/"+instModName+depth+"NEIGHBOURHOOD.gml")
-		
-		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
-		
+
+		val hood = neighbourhoodComputer.createRepresentation(partialModelOutput, depth, Integer.MAX_VALUE,
+			Integer.MAX_VALUE)
+
+		val w2 = new PrintWriter(outputs + "/" + instModName + depth + "NEIGHBOURHOOD.gml")
+
+//		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
 		w2.close
 		
+		val y = neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput)
+
+		println(y)
+
 //		partialModelOutput.openWorldElements
-		//RESULTS
+	// RESULTS
 //		print(hood)
-		
 	}
 }

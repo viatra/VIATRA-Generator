@@ -10,27 +10,23 @@ import org.eclipse.xtend.lib.annotations.Data
 @Data class GraphShape<ModelRep, NodeRep> {
 	List<GraphNodeDescriptor> nodes
 	NeighbourhoodWithTraces<ModelRep, NodeRep> correspondingNH
+	Map<AbstractNodeDescriptor, GraphNodeDescriptor> abstract2graphNodes
 	
-	new(List<GraphNodeDescriptor> nodes, NeighbourhoodWithTraces<ModelRep, NodeRep> correspondingNH) {
+	new(List<GraphNodeDescriptor> nodes, NeighbourhoodWithTraces<ModelRep, NodeRep> correspondingNH, Map<AbstractNodeDescriptor, GraphNodeDescriptor> abstract2graphNodes) {
 		this.nodes = nodes
 		this.correspondingNH = correspondingNH
+		this.abstract2graphNodes = abstract2graphNodes
 	}
 }
 
-@Data class GraphNodeDescriptor {
-	LocalNodeDescriptor correspondingNode
+@Data class GraphNodeDescriptor<gndRep, andRep> {
+	AbstractNodeDescriptor correspondingAND
 	// String id
-	Map<IncomingRelation<GraphNodeDescriptor>, List<Integer>> incomingEdges
-	Map<OutgoingRelation<GraphNodeDescriptor>, List<Integer>> outgoingEdges
+	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
+	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
 
-//	new(String id, Set<String> types) {
-//		this.types = types
-//		this.id = id
-//		this.incomingEdges = new HashMap
-//		this.outgoingEdges = new HashMap
-//	}
-	new(LocalNodeDescriptor correspondingNode) {
-		this.correspondingNode = correspondingNode
+	new(AbstractNodeDescriptor correspondingNode) {
+		this.correspondingAND = correspondingNode
 		this.incomingEdges = new HashMap
 		this.outgoingEdges = new HashMap
 	}

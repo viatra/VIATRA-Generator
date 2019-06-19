@@ -20,16 +20,14 @@ class Neighbourhood2ShapeGraph {
 	val protected nodeHeight = 40
 	val protected borderDistance = 6
 	val protected ratio = 11.0 / 20.0
-//	var protected depth = 0
 
+//	var protected depth = 0
 	def public createShapeGraph(NeighbourhoodWithTraces n, PartialInterpretation pm) {
-		
-		//Maps for GraphShape Object
+
+		// Maps for GraphShape Object
 		val List<GraphNodeDescriptor> graphNodes = new ArrayList
 //		val Map<, Integer> node2Amount = new HashMap
-		
-
-		val Map<Object, Integer> relevantObjectToID = new HashMap
+		val Map<AbstractNodeDescriptor, GraphNodeDescriptor> LND2GND = new HashMap
 		val List<CharSequence> fullEdgeText = newArrayList
 		val List<CharSequence> allEdgesText = newArrayList
 		val Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children = new HashMap
@@ -41,27 +39,33 @@ class Neighbourhood2ShapeGraph {
 		val Map<OutgoingRelation, List<Integer>> edgeName2outMultips = new HashMap
 
 		val modRep = n.modelRepresentation as HashMap
-		
-		
+//		println("CP1")
 		// BEGIN TRANSFORMATION	
-		
-		//get nodes
+		// get nodes
 		for (nodeKey : modRep.keySet) {
-			val graphNodeRep = new GraphNodeDescriptor(toCorrespondingLND(nodeKey))
-			graphNodes.add(graphNodeRep)
+			val correspondingLND = toCorrespondingLND(nodeKey)
+			if (correspondingLND != null) {
+				val nodeDesc = nodeKey as AbstractNodeDescriptor
+				val graphNodeRep = new GraphNodeDescriptor(nodeDesc)
+				LND2GND.put(nodeDesc , graphNodeRep)
+				graphNodes.add(graphNodeRep)
+			}
+
 		}
+//		println("CP2")
 
 		// calculate deeper neighbourhood
 		val depth = calculateDepth(modRep.keySet.get(0))
 		val deeperNeighbourhood = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE,
 			Integer.MAX_VALUE)
-		val deepModRep = deeperNeighbourhood.modelRepresentation as HashMap		
+		val deepModRep = deeperNeighbourhood.modelRepresentation as HashMap
 
+//		println("CP3")
 		// Associate each deepNode to their parent
 		for (deepNodeKey : deepModRep.keySet) {
 			val deepNodeDesc = deepNodeKey as FurtherNodeDescriptor
 			val parentDesc = deepNodeDesc.previousRepresentation as AbstractNodeDescriptor
-			if (relevantObjectToID.keySet.contains(parentDesc)) {
+			if (LND2GND.keySet.contains(parentDesc)) {
 				if (children.keySet.contains(parentDesc)) {
 					parentDesc.lookup(children).add(deepNodeDesc)
 				} else {
@@ -69,27 +73,30 @@ class Neighbourhood2ShapeGraph {
 				}
 			}
 		}
-
+		
+//		println("CP4")
 		// get edges
 		for (currentNode : children.keySet) {
 			transformEdge(edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
-				allEdgesText, currentNode, relevantObjectToID, children)
-			for (edgeText : allEdgesText) {
-				fullEdgeText.add(edgeText)
-			}
-			allEdgesText.clear
+				currentNode, LND2GND, children)
 		}
-		println("4/4: Edges transformed")
 		
-		//create GraphShape Object
+//		println("CP5")
+		val gs = new GraphShape(graphNodes, n, LND2GND)
 		
+//		println("CP6")
+		// create GraphShape Object
+		return gs
+
 	}
 
 	protected def transformEdge(Map<IncomingRelation, Object> edgeNameIn2targetNode,
 		Map<OutgoingRelation, Object> edgeNameOut2targetNode, Map<IncomingRelation, List<Integer>> edgeName2inMultips,
-		Map<OutgoingRelation, List<Integer>> edgeName2outMultips, List<CharSequence> allEdgesText,
-		AbstractNodeDescriptor currentNode, Map<Object, Integer> relevantObjectToID,
+		Map<OutgoingRelation, List<Integer>> edgeName2outMultips,
+		AbstractNodeDescriptor currentNode, Map<AbstractNodeDescriptor, GraphNodeDescriptor> LND2GND,
 		Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children) {
+		
+//		println("CP4.0")
 
 		edgeNameIn2targetNode.clear
 		edgeNameOut2targetNode.clear
@@ -116,11 +123,12 @@ class Neighbourhood2ShapeGraph {
 			}
 
 		}
+//		println("CP4.1")
 		var visitedNodes = newArrayList
 		// handling incoming edges
 		for (outEdgeTarget : edgeNameOut2targetNode.values) {
-			
-			if(!visitedNodes.contains(outEdgeTarget)) {
+
+			if (!visitedNodes.contains(outEdgeTarget)) {
 				visitedNodes.add(outEdgeTarget)
 				// currentNode = sourceParent
 				for (subNode : (outEdgeTarget as AbstractNodeDescriptor).lookup(children)) {
@@ -128,7 +136,7 @@ class Neighbourhood2ShapeGraph {
 						val edgeName = (inEdge as IncomingRelation)
 						val edgePointingFrom = (inEdge as IncomingRelation).from
 						val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
-	
+
 						if (edgePointingFrom.equals(currentNode)) {
 							if (edgeName2inMultips.containsKey(edgeName)) {
 								edgeName.lookup(edgeName2inMultips).add(edgeInMultip)
@@ -138,10 +146,9 @@ class Neighbourhood2ShapeGraph {
 							}
 							edgeNameIn2targetNode.put(edgeName, edgePointingFrom)
 						}
-	//				edgeName2targetNode.put(edgeName, edgePointingFrom)
 					}
 				}
-	
+
 				// fill in the 0 multiplicities (INCOMING)
 				for (edgeSoFar : modifiedEdgeNames) {
 					val edgeAsRelation = edgeSoFar as IncomingRelation
@@ -156,8 +163,8 @@ class Neighbourhood2ShapeGraph {
 				modifiedEdgeNames.clear
 			}
 		}
-
 		
+//		println("CP4.2")
 
 		// fill in the 0 multiplicities (OUTGOING)
 		for (edge : edgeName2outMultips.keySet) {
@@ -165,90 +172,45 @@ class Neighbourhood2ShapeGraph {
 			var outEdgesNum = edge.lookup(edgeName2outMultips).size
 			val sourceChildrenNum = currentNode.lookup(children).size
 
-//			println("out " + edge + "=>" + outEdgesNum + " != " + currentNode + "=>" + sourceChildrenNum)
 			while (outEdgesNum != sourceChildrenNum) {
 				edge.lookup(edgeName2outMultips).add(0)
 				outEdgesNum++
 			}
 		}
+//		println("CP4.3")
 
-		
-		
-
-		associateEdgeToNode(currentNode, relevantObjectToID, edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
-			allEdgesText)
-
-	}
-
-	def associateEdgeToNode(AbstractNodeDescriptor currentNode, Map<Object, Integer> relevantObjectToID,
-		Map<IncomingRelation, Object> edgeNameIn2targetNode, 
-		Map<OutgoingRelation, Object> edgeNameOut2targetNode,
-		Map<IncomingRelation, List<Integer>> edgeName2inMultips,
-		Map<OutgoingRelation, List<Integer>> edgeName2outMultips, List<CharSequence> allEdgesTexts) {
-
+		// Associate relations with corresponding trg and src nodes
 		for (outEdge : edgeNameOut2targetNode.keySet) {
-			// TODO
-			val sourceID = currentNode.lookup(relevantObjectToID)
-			val targetNode = outEdge.lookup(edgeNameOut2targetNode)
-			val targetID = targetNode.lookup(relevantObjectToID)
+			
+			val sourceNode = currentNode
+
+			val sourceGND = sourceNode.lookup(LND2GND)
+			val sourceDistrib = outEdge.lookup(edgeName2outMultips)
+			val targetNode = outEdge.lookup(edgeNameOut2targetNode) as AbstractNodeDescriptor
+			val targetGND = targetNode.lookup(LND2GND)
 			val edgeName = outEdge.type
-			
-			//finding corresponding Incoming edge
-			var correspInEdgeSet = edgeNameIn2targetNode.keySet.filter[type.equals(edgeName) && lookup(edgeNameIn2targetNode).equals(currentNode)]
-
+			// finding corresponding Incoming edge
+			var correspInEdgeSet = edgeNameIn2targetNode.keySet.filter [
+				type.equals(edgeName) && lookup(edgeNameIn2targetNode).equals(sourceNode)
+			]
 			val correspInEdge = correspInEdgeSet.get(0)
+			val targetDistrib = correspInEdge.lookup(edgeName2inMultips)
+			val newInRel = new IncomingRelation(sourceGND, edgeName)
+			val newOutRel = new OutgoingRelation(targetGND, edgeName)
+//			print(0)
+			// filling  out graph represetation
+			
+			//TODO, replace edgeName with the actual Relation
+			sourceGND.outgoingEdges.put(edgeName, sourceDistrib)
+//			print(0)
+			targetGND.incomingEdges.put(edgeName, targetDistrib)
+//			print(0)
 			
 
-			allEdgesTexts.add(
-				'''
-					edge
-						[
-							source  «sourceID»
-							target  «targetID»
-							label	"«edgeName»"
-							graphics
-							[
-								fill	"#000000"
-								targetArrow	"standard"
-								Line
-								[
-								]
-							]
-							LabelGraphics
-							[
-								text	"«edgeName»"
-								fontSize	12
-								fontName	"Dialog"
-								configuration	"AutoFlippingLabel"
-								model	"six_pos"
-								position	"head"
-							]
-							«IF edgeName2outMultips.containsKey(outEdge)»
-								LabelGraphics
-								[
-									text	"«outEdge.lookup(edgeName2outMultips).toString»"
-									fontSize	12
-									fontName	"Dialog"
-									configuration	"AutoFlippingLabel"
-									model	"six_pos"
-									position	"stail"
-								]
-							«ENDIF»
-							«IF edgeName2inMultips.containsKey(correspInEdge)»
-								LabelGraphics
-								[
-									text	"«correspInEdge.lookup(edgeName2inMultips).toString»"
-									fontSize	12
-									fontName	"Dialog"
-									configuration	"AutoFlippingLabel"
-									model	"six_pos"
-									position	"ttail"
-								]
-							«ENDIF»
-						]
-				'''
-			)
 		}
+		
+//		println("CP4.4")
+
 	}
 
 	def calculateDepth(Object node) {
@@ -259,7 +221,7 @@ class Neighbourhood2ShapeGraph {
 			keyDescriptor = (keyDescriptor as FurtherNodeDescriptor).previousRepresentation
 			depth++
 		}
-		
+
 		return depth
 
 	}
@@ -272,6 +234,11 @@ class Neighbourhood2ShapeGraph {
 			topKeyDescriptor = (topKeyDescriptor as FurtherNodeDescriptor).previousRepresentation
 		}
 
-		return topKeyDescriptor as LocalNodeDescriptor
+		if ((topKeyDescriptor as LocalNodeDescriptor).types.empty) {
+			return null
+		} else {
+			return topKeyDescriptor as LocalNodeDescriptor
+		}
+
 	}
 }

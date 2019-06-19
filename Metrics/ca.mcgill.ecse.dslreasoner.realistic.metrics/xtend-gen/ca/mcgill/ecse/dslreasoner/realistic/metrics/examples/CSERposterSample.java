@@ -10,7 +10,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
@@ -36,6 +38,7 @@ import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import simpleStatechart.SimpleStatechartPackage;
 
@@ -50,6 +53,8 @@ public class CSERposterSample {
   private final static PartialInterpretation2Gml partialVisualizer = new PartialInterpretation2Gml();
   
   private final static Neighbourhood2Gml neighbourhoodVisualizer = new Neighbourhood2Gml();
+  
+  private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
   private final static int depth = 0;
   
@@ -92,14 +97,17 @@ public class CSERposterSample {
         false, _list_1, _list_2, _list_3, _list_4);
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTransformationOutput = CSERposterSample.ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
-      final PartialInterpretation partialModelOutput = CSERposterSample.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), false);
+      final PartialInterpretation partialModelOutput = CSERposterSample.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), 
+        false);
       final PrintWriter writer = new PrintWriter((((outputs + "//") + instModName) + "MODEL.gml"));
       writer.print(CSERposterSample.partialVisualizer.transform(partialModelOutput));
       writer.close();
-      final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> hood = CSERposterSample.neighbourhoodComputer.createRepresentation(partialModelOutput, CSERposterSample.depth, Integer.MAX_VALUE, Integer.MAX_VALUE);
+      final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> hood = CSERposterSample.neighbourhoodComputer.createRepresentation(partialModelOutput, CSERposterSample.depth, Integer.MAX_VALUE, 
+        Integer.MAX_VALUE);
       final PrintWriter w2 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
-      w2.print(CSERposterSample.neighbourhoodVisualizer.transform(hood, partialModelOutput));
       w2.close();
+      final GraphShape<Object, Object> y = CSERposterSample.neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput);
+      InputOutput.<GraphShape<Object, Object>>println(y);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -9,6 +9,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
@@ -37,6 +38,7 @@ class MetricsCalculationUsingShapes {
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
+	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	private static DecimalFormat df = new DecimalFormat("0.000");
 
 	def static void main(String[] args) {
@@ -48,7 +50,7 @@ class MetricsCalculationUsingShapes {
 		ReteEngine.getClass
 
 		val fileDir = "Human//"
-		val outputs = "outputs//calculatedMetrics//" + fileDir
+		val outputFileName = "stats.csv"
 		val inputs = "inputs//" + fileDir
 
 		val workspace = new FileSystemWorkspace(inputs, "")
@@ -69,8 +71,19 @@ class MetricsCalculationUsingShapes {
 
 			// Calculate NA with nh
 			val partialModel = getPartialModel(workspace, model)
-			for (var i = 0; i < 2; i++) {
+			val upLim = 3
+			for (var i = 0; i < upLim; i++) {
 				modelNA = measureNAwithNH(partialModel, i)
+				if (naForAllModelsWnh.length <= i) {
+					naForAllModelsWnh.add(newArrayList(df.format(modelNA.get(1))))
+				} else {
+					naForAllModelsWnh.get(i).add(df.format(modelNA.get(1)))
+				}
+
+			}
+
+			for (var i = upLim; i < upLim * 2; i++) {
+				modelNA = measureNAwithNHNew(partialModel, i-upLim)
 				if (naForAllModelsWnh.length <= i) {
 					naForAllModelsWnh.add(newArrayList(df.format(modelNA.get(1))))
 				} else {
@@ -93,36 +106,15 @@ class MetricsCalculationUsingShapes {
 //			w2.close
 		}
 		// Write to .csv
-		val writer = new PrintWriter(outputFolder + "stats.csv")
-//		writer.append("x")
-//		writer.append(",")
-//		writer.append("noNH")
-//
-//		for (var i = 0; i < naForAllModelsWnh.size; i++) {
-//			writer.append(",")
-//			writer.append("NH" + (i+1).toString)
-//		}
-//		
-//		writer.append("\n")
-//
-//		for (var i = 0; i < naForAllModelsWOnh.size; i++) {
-//			writer.append(i.toString)
-//			writer.append(",")
-//			writer.append(naForAllModelsWOnh.get(i))
-//			for (var j = 0; j < naForAllModelsWnh.size; j++) {
-//				writer.append(",")
-//				writer.append(naForAllModelsWnh.get(j).get(i))
-//			}
-//			writer.append("\n")
-//		}
+		val writer = new PrintWriter(outputFolder + outputFileName)
 		writer.append("noNH")
 		writer.append(",")
 		writer.append(String.join(",", naForAllModelsWOnh))
 		writer.append("\n");
-		
-		var ind=0
+
+		var ind = 0
 		for (List<String> rowData : naForAllModelsWnh) {
-			writer.append("NHD"+ ind.toString)
+			writer.append("NHD" + ind.toString)
 			writer.append(",")
 			writer.append(String.join(",", rowData));
 			writer.append("\n");
@@ -229,6 +221,67 @@ class MetricsCalculationUsingShapes {
 		val averageNA = totalNA / activeDims.values.length
 		val averageNAwithWeight = totalNAwithWeight / numModelElemsWithWeight
 		return newArrayList(averageNA, averageNAwithWeight)
+
+	}
+
+	def static measureNAwithNHNew(PartialInterpretation partialModel, Integer depth) {
+		// Get neighbouhood at d=0
+		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nhRep = nh.modelRepresentation as HashMap
+		val nhShapeGraph = neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel)
+
+		var totalMetricValue = 0.0
+		var numNodes = 0
+		var weightedActiveDimSum = 0.0
+		var partialSum = 0.0
+		for (node : nhShapeGraph.nodes) {
+			weightedActiveDimSum = 0.0
+			for (inDistrib : node.incomingEdges.values) {
+				partialSum = 0.0
+				for (value : inDistrib as List<Integer>) {
+					if (value != 0) {
+						partialSum += 1
+					}
+
+				}
+				val distribSize = (inDistrib as List).length
+				weightedActiveDimSum += (partialSum / distribSize)
+				print(inDistrib as List<Integer>)
+				println((partialSum / distribSize))
+			}
+
+			for (outDistrib : node.outgoingEdges.values) {
+				partialSum = 0.0
+				for (value : outDistrib as List<Integer>) {
+					if (value != 0) {
+						partialSum += 1
+					}
+				}
+				val distribSize = (outDistrib as List).length
+				weightedActiveDimSum += (partialSum / distribSize)
+				print(outDistrib as List<Integer>)
+				println((partialSum / distribSize))
+			}
+
+			val actDim = node.outgoingEdges.size + node.incomingEdges.size
+			println("---------------")
+			println("activeDims : " + actDim)
+			println("weightedSum: " + weightedActiveDimSum)
+			println("---------------")
+
+			val numOccurrences = node.getCorrespondingAND.lookup(nhRep) as Integer
+
+			numNodes += 1 // numOccurrences
+
+			val nodeMetricVal = weightedActiveDimSum //* numOccurrences
+
+			totalMetricValue += nodeMetricVal
+
+		}
+
+		val averageMetricValue = totalMetricValue / numNodes
+
+		return newArrayList(0.0, averageMetricValue)
 
 	}
 
