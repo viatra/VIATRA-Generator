@@ -21,16 +21,22 @@ import java.text.DecimalFormat
 import java.util.ArrayList
 import java.util.Collections
 import java.util.HashMap
+import java.util.HashSet
 import java.util.List
 import java.util.Map
+import java.util.Set
+import linkedList.LinkedListPackage
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
 
 class MetricsCalculationUsingShapes {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -47,52 +53,44 @@ class MetricsCalculationUsingShapes {
 
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*", new XMIResourceFactoryImpl)
 		YakindummPackage.eINSTANCE.eClass
+		LinkedListPackage.eINSTANCE.eClass
 		ReteEngine.getClass
 
 		val fileDir = "Human//"
 		val outputFileName = "stats.csv"
-		val inputs = "inputs//" + fileDir
+//		val inputs = "inputs//" + fileDir
+		val inputs = "resources//" //TESTING
 
 		val workspace = new FileSystemWorkspace(inputs, "")
 
-		var naForAllModelsWnh = new ArrayList<List<String>>
 		var naForAllModelsWOnh = newArrayList
-		var modelNA = newArrayList
+		var naForAllModelsWnh = new ArrayList<String>
+		var naForAllModelsWnhSHAPE = new ArrayList<String>
+
+		var modelNA = 0.0
 
 		println("Average NAs per model")
 
-		for (fileName : workspace.allFiles.subList(0, 200)) {
+//		for (fileName : workspace.allFiles.subList(0, 100)) {
+		for (fileName : newArrayList("thursdayModel.xmi")) { //TESTING
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
 
 			// Calculate NA without nh
 			modelNA = measureNAwithoutNH(model)
-			naForAllModelsWOnh.add(df.format(modelNA.get(0)))
+			naForAllModelsWOnh.add(df.format(modelNA))
 
 			// Calculate NA with nh
 			val partialModel = getPartialModel(workspace, model)
-			val upLim = 3
-			for (var i = 0; i < upLim; i++) {
-				modelNA = measureNAwithNH(partialModel, i)
-				if (naForAllModelsWnh.length <= i) {
-					naForAllModelsWnh.add(newArrayList(df.format(modelNA.get(1))))
-				} else {
-					naForAllModelsWnh.get(i).add(df.format(modelNA.get(1)))
-				}
+			modelNA = measureNAwithNH(partialModel)
+			naForAllModelsWnh.add(df.format(modelNA))
 
-			}
+			// Calculate NA with nh using SHAPE
+			modelNA = ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.MetricsCalculationUsingShapes.
+				measureNAwithNHShape(partialModel, 1)
+			naForAllModelsWnhSHAPE.add(df.format(modelNA))
 
-			for (var i = upLim; i < upLim * 2; i++) {
-				modelNA = measureNAwithNHNew(partialModel, i-upLim)
-				if (naForAllModelsWnh.length <= i) {
-					naForAllModelsWnh.add(newArrayList(df.format(modelNA.get(1))))
-				} else {
-					naForAllModelsWnh.get(i).add(df.format(modelNA.get(1)))
-				}
-
-			}
-
-//			naForAllModelsWnh2.add(df.format(modelNA.get(1)))
+		// TEMP
 		// println(nameWOExt + " : " + df.format(modelNA))
 		// Visualize Model
 //			val writer = new PrintWriter(outputs + "//" + nameWOExt + "MODEL.gml")
@@ -104,184 +102,174 @@ class MetricsCalculationUsingShapes {
 //			val w2 = new PrintWriter(outputs + nameWOExt + "NHOOD" + depth + ".gml")
 //			w2.print(neighbourhoodVisualizer.transform(hood, partialModel))
 //			w2.close
+		// ENDTEMP
 		}
+
 		// Write to .csv
 		val writer = new PrintWriter(outputFolder + outputFileName)
-		writer.append("noNH")
-		writer.append(",")
+		writer.append("noNH,")
 		writer.append(String.join(",", naForAllModelsWOnh))
 		writer.append("\n");
 
-		var ind = 0
-		for (List<String> rowData : naForAllModelsWnh) {
-			writer.append("NHD" + ind.toString)
-			writer.append(",")
-			writer.append(String.join(",", rowData));
-			writer.append("\n");
-			ind++
-		}
+		writer.append("NH-NoShape,")
+		writer.append(String.join(",", naForAllModelsWnh));
+		writer.append("\n");
+
+		writer.append("NH-Shape,")
+		writer.append(String.join(",", naForAllModelsWnhSHAPE));
+		writer.append("\n");
 
 		writer.close
 
 		// print Results
-		println("W/O NH : " + naForAllModelsWOnh)
-		var i = 0
-		for (sublist : naForAllModelsWnh) {
-			println("W/ NH " + i + ": " + sublist)
-			i++
-		}
+		println("W/O NH       : " + naForAllModelsWOnh)
+		println("W/ NH NoShape: " + naForAllModelsWnh)
+		println("W/ NH Shape 1: " + naForAllModelsWnhSHAPE)
 
 	}
 
 	def static measureNAwithoutNH(EObject model) {
 		val nodes = model.eResource.allContents.toList
-		val numNodes = nodes.length
-
-		var currentNA = 0
-		var seenDims = newArrayList
 
 		var totalNA = 0.0
+		val numNodes = nodes.length
 
+		// fill HashSet
+		var Map<EObject, Set<String>> node2ActiveDims = new HashMap
 		for (node : nodes) {
-			currentNA = 0
-			seenDims.clear
+			node2ActiveDims.put(node, new HashSet)
+		}
+
+		// iterate over nodes and their references
+		for (node : nodes) {
 			for (reference : node.eClass.EAllReferences) {
-				if (!seenDims.contains(reference.name)) {
-					currentNA++
-					seenDims.add(reference.name)
+				val pointingTo = node.eGet(reference)
+
+				if (!(pointingTo instanceof List)) {
+					if (pointingTo !== null) {
+						// Add for source
+						node.lookup(node2ActiveDims).add(reference.name)
+						// Add for target
+						(pointingTo as EObject).lookup(node2ActiveDims).add(reference.name)
+					}
+				} else {
+					val pointingToSet = pointingTo as List
+					if (!pointingToSet.empty) {
+						for (target : pointingToSet) {
+							// Add for source
+							node.lookup(node2ActiveDims).add(reference.name)
+							// Add for target
+							(target as EObject).lookup(node2ActiveDims).add(reference.name)
+						}
+					}
 				}
 			}
+		}
 
-			totalNA += currentNA
+		// Measure NA
+		for (activeDims : node2ActiveDims.values) {
+			totalNA += activeDims.length
 		}
 
 		val averageNA = totalNA / numNodes
 
-		return newArrayList(averageNA)
+		return averageNA
 	}
 
-	def static measureNAwithNH(PartialInterpretation partialModel, Integer depth) {
-		// Get neighbouhood at d=0
-//		val depth = 2
-		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth + 1, Integer.MAX_VALUE,
-			Integer.MAX_VALUE)
+	def static measureNAwithNH(PartialInterpretation partialModel) {
+		// Get required neighbourhoods
+		val nh = neighbourhoodComputer.createRepresentation(partialModel, 2, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap
-		val nhRep = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE,
-			Integer.MAX_VALUE).modelRepresentation as HashMap
+		val nhRep = neighbourhoodComputer.createRepresentation(partialModel, 1, Integer.MAX_VALUE, Integer.MAX_VALUE).
+			modelRepresentation as HashMap
 		val nhDeepNodes = nhDeepRep.keySet
 		val nhNodes = nhRep.keySet
 
-		var Map<AbstractNodeDescriptor, List<String>> activeDims = newHashMap
+		// Storing active dims in a HashMap
+		var Map<AbstractNodeDescriptor, Set<String>> node2ActiveDims = new HashMap
+
 		// fill activeDims with empty lists for each node descriptor
 		for (nhNode : nhNodes) {
-			activeDims.put(nhNode as AbstractNodeDescriptor, newArrayList)
+			node2ActiveDims.put(nhNode as AbstractNodeDescriptor, new HashSet)
 		}
 
-		// populate activeDims
+		// populate node2ActiveDims HashMap
 		for (nhDeepNode : nhDeepNodes) {
 			val nhDeepNodeDesc = nhDeepNode as FurtherNodeDescriptor
 			val nhParentNode = (nhDeepNodeDesc.previousRepresentation as AbstractNodeDescriptor)
 			// for incoming Edges
 			for (inEdge : nhDeepNodeDesc.incomingEdges.keySet) {
 				val edgeDim = (inEdge as IncomingRelation).type
-				if (!nhParentNode.lookup(activeDims).contains(edgeDim)) {
-					nhParentNode.lookup(activeDims).add(edgeDim)
-				}
+				nhParentNode.lookup(node2ActiveDims).add(edgeDim)
 			}
 
 			// for outgoing Edges
 			for (outEdge : nhDeepNodeDesc.outgoingEdges.keySet) {
 				val edgeDim = (outEdge as OutgoingRelation).type
-				if (!nhParentNode.lookup(activeDims).contains(edgeDim)) {
-					nhParentNode.lookup(activeDims).add(edgeDim)
-				}
+				nhParentNode.lookup(node2ActiveDims).add(edgeDim)
 			}
 		}
 
-		// Get NAs per node (distribution)
-		val naDistrib = newArrayList
+		// Get NAs per node, considering the number of occurences in the partialModel
 		var totalNA = 0.0
-		// weight is the number of model nodes that are linked to the NH node
-		var totalNAwithWeight = 0.0
-		var numModelElemsWithWeight = 0
-		for (nhNode : activeDims.keySet) {
-
-			var activeDimsForNode = nhNode.lookup(activeDims)
+		var numModelElems = 0
+		for (nhNode : node2ActiveDims.keySet) {
+			var activeDimsForNode = nhNode.lookup(node2ActiveDims)
 			var numNodeOccurences = nhNode.lookup(nhRep) as Integer
 
-			naDistrib.add(activeDimsForNode.length)
-			totalNA += activeDimsForNode.length
-
-			totalNAwithWeight += activeDimsForNode.length * numNodeOccurences
-			numModelElemsWithWeight += numNodeOccurences
-
+			// ASSUME THAT THERE IS NO NODE WITHOUT ANY CONNECTIONS
+			// ^valid assumption because of containment edges
+			if (!activeDimsForNode.empty) {
+				totalNA += (activeDimsForNode.length * numNodeOccurences)
+				numModelElems += numNodeOccurences
+			}
 		}
-//		println(activeDims)
+
 		// return average NA
-		val averageNA = totalNA / activeDims.values.length
-		val averageNAwithWeight = totalNAwithWeight / numModelElemsWithWeight
-		return newArrayList(averageNA, averageNAwithWeight)
+		val averageNAwithWeight = totalNA / numModelElems
+		return averageNAwithWeight
 
 	}
 
-	def static measureNAwithNHNew(PartialInterpretation partialModel, Integer depth) {
-		// Get neighbouhood at d=0
+	def static measureNAwithNHShape(PartialInterpretation partialModel, Integer depth) {
+		// Get NH Shape
 		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhRep = nh.modelRepresentation as HashMap
 		val nhShapeGraph = neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel)
+		for(x : nhShapeGraph.nodes) {
+			println(((x.correspondingAND as FurtherNodeDescriptor ).previousRepresentation as LocalNodeDescriptor).types)
+		}
+		println(nhShapeGraph)
 
+		// Useful variable initializations
 		var totalMetricValue = 0.0
-		var numNodes = 0
-		var weightedActiveDimSum = 0.0
-		var partialSum = 0.0
+		var numNodesTotal = 0
+		var Map<GraphNodeDescriptor, Set<Object>> node2ActiveDims = new HashMap
+
+		// look at the in and out edges of each shape node
 		for (node : nhShapeGraph.nodes) {
-			weightedActiveDimSum = 0.0
-			for (inDistrib : node.incomingEdges.values) {
-				partialSum = 0.0
-				for (value : inDistrib as List<Integer>) {
-					if (value != 0) {
-						partialSum += 1
-					}
+			node2ActiveDims.put(node, new HashSet)
 
-				}
-				val distribSize = (inDistrib as List).length
-				weightedActiveDimSum += (partialSum / distribSize)
-				print(inDistrib as List<Integer>)
-				println((partialSum / distribSize))
+			// Add actie dimsensions to HashMap
+			for (inEdge : node.incomingEdges.keySet) {
+				node.lookup(node2ActiveDims).add(inEdge)
+			}
+			for (outEdge : node.outgoingEdges.keySet) {
+				node.lookup(node2ActiveDims).add(outEdge)
 			}
 
-			for (outDistrib : node.outgoingEdges.values) {
-				partialSum = 0.0
-				for (value : outDistrib as List<Integer>) {
-					if (value != 0) {
-						partialSum += 1
-					}
-				}
-				val distribSize = (outDistrib as List).length
-				weightedActiveDimSum += (partialSum / distribSize)
-				print(outDistrib as List<Integer>)
-				println((partialSum / distribSize))
-			}
-
-			val actDim = node.outgoingEdges.size + node.incomingEdges.size
-			println("---------------")
-			println("activeDims : " + actDim)
-			println("weightedSum: " + weightedActiveDimSum)
-			println("---------------")
-
+			// Measure preliminary results for NA
 			val numOccurrences = node.getCorrespondingAND.lookup(nhRep) as Integer
+			val numActDims = node.lookup(node2ActiveDims).length
+			val totalActDims = numActDims * numOccurrences
 
-			numNodes += 1 // numOccurrences
-
-			val nodeMetricVal = weightedActiveDimSum //* numOccurrences
-
-			totalMetricValue += nodeMetricVal
+			numNodesTotal += numOccurrences
+			totalMetricValue += totalActDims
 
 		}
 
-		val averageMetricValue = totalMetricValue / numNodes
-
-		return newArrayList(0.0, averageMetricValue)
+		val averageMetricValue = totalMetricValue / numNodesTotal
+		return averageMetricValue
 
 	}
 

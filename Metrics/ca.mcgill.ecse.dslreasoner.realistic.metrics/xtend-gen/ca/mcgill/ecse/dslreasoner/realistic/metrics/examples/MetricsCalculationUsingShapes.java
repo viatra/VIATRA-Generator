@@ -15,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
@@ -30,9 +31,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import linkedList.LinkedListPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -76,123 +79,107 @@ public class MetricsCalculationUsingShapes {
       XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
       _extensionToFactoryMap.put("*", _xMIResourceFactoryImpl);
       YakindummPackage.eINSTANCE.eClass();
+      LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
       final String fileDir = "Human//";
       final String outputFileName = "stats.csv";
-      final String inputs = ("inputs//" + fileDir);
+      final String inputs = "resources//";
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
-      ArrayList<List<String>> naForAllModelsWnh = new ArrayList<List<String>>();
       ArrayList<String> naForAllModelsWOnh = CollectionLiterals.<String>newArrayList();
-      ArrayList<Double> modelNA = CollectionLiterals.<Double>newArrayList();
+      ArrayList<String> naForAllModelsWnh = new ArrayList<String>();
+      ArrayList<String> naForAllModelsWnhSHAPE = new ArrayList<String>();
+      double modelNA = 0.0;
       InputOutput.<String>println("Average NAs per model");
-      List<String> _subList = workspace.allFiles().subList(0, 200);
-      for (final String fileName : _subList) {
+      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("thursdayModel.xmi");
+      for (final String fileName : _newArrayList) {
         {
           final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
           final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
           modelNA = MetricsCalculationUsingShapes.measureNAwithoutNH(model);
-          naForAllModelsWOnh.add(MetricsCalculationUsingShapes.df.format(modelNA.get(0)));
+          naForAllModelsWOnh.add(MetricsCalculationUsingShapes.df.format(modelNA));
           final PartialInterpretation partialModel = MetricsCalculationUsingShapes.getPartialModel(workspace, model);
-          final int upLim = 3;
-          for (int i = 0; (i < upLim); i++) {
-            {
-              modelNA = MetricsCalculationUsingShapes.measureNAwithNH(partialModel, Integer.valueOf(i));
-              final ArrayList<List<String>> _converted_naForAllModelsWnh = (ArrayList<List<String>>)naForAllModelsWnh;
-              int _length = ((Object[])Conversions.unwrapArray(_converted_naForAllModelsWnh, Object.class)).length;
-              boolean _lessEqualsThan = (_length <= i);
-              if (_lessEqualsThan) {
-                naForAllModelsWnh.add(CollectionLiterals.<String>newArrayList(MetricsCalculationUsingShapes.df.format(modelNA.get(1))));
-              } else {
-                naForAllModelsWnh.get(i).add(MetricsCalculationUsingShapes.df.format(modelNA.get(1)));
-              }
-            }
-          }
-          for (int i = upLim; (i < (upLim * 2)); i++) {
-            {
-              modelNA = MetricsCalculationUsingShapes.measureNAwithNHNew(partialModel, Integer.valueOf((i - upLim)));
-              final ArrayList<List<String>> _converted_naForAllModelsWnh = (ArrayList<List<String>>)naForAllModelsWnh;
-              int _length = ((Object[])Conversions.unwrapArray(_converted_naForAllModelsWnh, Object.class)).length;
-              boolean _lessEqualsThan = (_length <= i);
-              if (_lessEqualsThan) {
-                naForAllModelsWnh.add(CollectionLiterals.<String>newArrayList(MetricsCalculationUsingShapes.df.format(modelNA.get(1))));
-              } else {
-                naForAllModelsWnh.get(i).add(MetricsCalculationUsingShapes.df.format(modelNA.get(1)));
-              }
-            }
-          }
+          modelNA = MetricsCalculationUsingShapes.measureNAwithNH(partialModel);
+          naForAllModelsWnh.add(MetricsCalculationUsingShapes.df.format(modelNA));
+          modelNA = MetricsCalculationUsingShapes.measureNAwithNHShape(partialModel, Integer.valueOf(1));
+          naForAllModelsWnhSHAPE.add(MetricsCalculationUsingShapes.df.format(modelNA));
         }
       }
       final PrintWriter writer = new PrintWriter((outputFolder + outputFileName));
-      writer.append("noNH");
-      writer.append(",");
+      writer.append("noNH,");
       writer.append(String.join(",", naForAllModelsWOnh));
       writer.append("\n");
-      int ind = 0;
-      for (final List<String> rowData : naForAllModelsWnh) {
-        {
-          String _string = Integer.valueOf(ind).toString();
-          String _plus = ("NHD" + _string);
-          writer.append(_plus);
-          writer.append(",");
-          writer.append(String.join(",", rowData));
-          writer.append("\n");
-          ind++;
-        }
-      }
+      writer.append("NH-NoShape,");
+      writer.append(String.join(",", naForAllModelsWnh));
+      writer.append("\n");
+      writer.append("NH-Shape,");
+      writer.append(String.join(",", naForAllModelsWnhSHAPE));
+      writer.append("\n");
       writer.close();
-      InputOutput.<String>println(("W/O NH : " + naForAllModelsWOnh));
-      int i = 0;
-      for (final List<String> sublist : naForAllModelsWnh) {
-        {
-          InputOutput.<String>println(((("W/ NH " + Integer.valueOf(i)) + ": ") + sublist));
-          i++;
-        }
-      }
+      InputOutput.<String>println(("W/O NH       : " + naForAllModelsWOnh));
+      InputOutput.<String>println(("W/ NH NoShape: " + naForAllModelsWnh));
+      InputOutput.<String>println(("W/ NH Shape 1: " + naForAllModelsWnhSHAPE));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public static ArrayList<Double> measureNAwithoutNH(final EObject model) {
+  public static double measureNAwithoutNH(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
-    final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
-    int currentNA = 0;
-    ArrayList<String> seenDims = CollectionLiterals.<String>newArrayList();
     double totalNA = 0.0;
+    final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
+    Map<EObject, Set<String>> node2ActiveDims = new HashMap<EObject, Set<String>>();
     for (final EObject node : nodes) {
-      {
-        currentNA = 0;
-        seenDims.clear();
-        EList<EReference> _eAllReferences = node.eClass().getEAllReferences();
-        for (final EReference reference : _eAllReferences) {
-          boolean _contains = seenDims.contains(reference.getName());
-          boolean _not = (!_contains);
-          if (_not) {
-            currentNA++;
-            seenDims.add(reference.getName());
+      HashSet<String> _hashSet = new HashSet<String>();
+      node2ActiveDims.put(node, _hashSet);
+    }
+    for (final EObject node_1 : nodes) {
+      EList<EReference> _eAllReferences = node_1.eClass().getEAllReferences();
+      for (final EReference reference : _eAllReferences) {
+        {
+          final Object pointingTo = node_1.eGet(reference);
+          if ((!(pointingTo instanceof List))) {
+            if ((pointingTo != null)) {
+              CollectionsUtil.<EObject, Set<String>>lookup(node_1, node2ActiveDims).add(reference.getName());
+              CollectionsUtil.<EObject, Set<String>>lookup(((EObject) pointingTo), node2ActiveDims).add(reference.getName());
+            }
+          } else {
+            final List pointingToSet = ((List) pointingTo);
+            boolean _isEmpty = pointingToSet.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              for (final Object target : pointingToSet) {
+                {
+                  CollectionsUtil.<EObject, Set<String>>lookup(node_1, node2ActiveDims).add(reference.getName());
+                  CollectionsUtil.<EObject, Set<String>>lookup(((EObject) target), node2ActiveDims).add(reference.getName());
+                }
+              }
+            }
           }
         }
-        double _talNA = totalNA;
-        totalNA = (_talNA + currentNA);
       }
     }
+    Collection<Set<String>> _values = node2ActiveDims.values();
+    for (final Set<String> activeDims : _values) {
+      double _talNA = totalNA;
+      int _length = ((Object[])Conversions.unwrapArray(activeDims, Object.class)).length;
+      totalNA = (_talNA + _length);
+    }
     final double averageNA = (totalNA / numNodes);
-    return CollectionLiterals.<Double>newArrayList(Double.valueOf(averageNA));
+    return averageNA;
   }
   
-  public static ArrayList<Double> measureNAwithNH(final PartialInterpretation partialModel, final Integer depth) {
-    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, ((depth).intValue() + 1), Integer.MAX_VALUE, 
-      Integer.MAX_VALUE);
+  public static double measureNAwithNH(final PartialInterpretation partialModel) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, 2, Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
-    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, (depth).intValue(), Integer.MAX_VALUE, 
-      Integer.MAX_VALUE).getModelRepresentation();
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, 1, Integer.MAX_VALUE, Integer.MAX_VALUE).getModelRepresentation();
     final HashMap nhRep = ((HashMap) _modelRepresentation_1);
     final Set nhDeepNodes = nhDeepRep.keySet();
     final Set nhNodes = nhRep.keySet();
-    Map<AbstractNodeDescriptor, List<String>> activeDims = CollectionLiterals.<AbstractNodeDescriptor, List<String>>newHashMap();
+    Map<AbstractNodeDescriptor, Set<String>> node2ActiveDims = new HashMap<AbstractNodeDescriptor, Set<String>>();
     for (final Object nhNode : nhNodes) {
-      activeDims.put(((AbstractNodeDescriptor) nhNode), CollectionLiterals.<String>newArrayList());
+      HashSet<String> _hashSet = new HashSet<String>();
+      node2ActiveDims.put(((AbstractNodeDescriptor) nhNode), _hashSet);
     }
     for (final Object nhDeepNode : nhDeepNodes) {
       {
@@ -203,122 +190,83 @@ public class MetricsCalculationUsingShapes {
         for (final Object inEdge : _keySet) {
           {
             final String edgeDim = ((IncomingRelation) inEdge).getType();
-            boolean _contains = CollectionsUtil.<AbstractNodeDescriptor, List<String>>lookup(nhParentNode, activeDims).contains(edgeDim);
-            boolean _not = (!_contains);
-            if (_not) {
-              CollectionsUtil.<AbstractNodeDescriptor, List<String>>lookup(nhParentNode, activeDims).add(edgeDim);
-            }
+            CollectionsUtil.<AbstractNodeDescriptor, Set<String>>lookup(nhParentNode, node2ActiveDims).add(edgeDim);
           }
         }
         Set _keySet_1 = nhDeepNodeDesc.getOutgoingEdges().keySet();
         for (final Object outEdge : _keySet_1) {
           {
             final String edgeDim = ((OutgoingRelation) outEdge).getType();
-            boolean _contains = CollectionsUtil.<AbstractNodeDescriptor, List<String>>lookup(nhParentNode, activeDims).contains(edgeDim);
-            boolean _not = (!_contains);
-            if (_not) {
-              CollectionsUtil.<AbstractNodeDescriptor, List<String>>lookup(nhParentNode, activeDims).add(edgeDim);
-            }
+            CollectionsUtil.<AbstractNodeDescriptor, Set<String>>lookup(nhParentNode, node2ActiveDims).add(edgeDim);
           }
         }
       }
     }
-    final ArrayList<Integer> naDistrib = CollectionLiterals.<Integer>newArrayList();
     double totalNA = 0.0;
-    double totalNAwithWeight = 0.0;
-    int numModelElemsWithWeight = 0;
-    Set<AbstractNodeDescriptor> _keySet = activeDims.keySet();
+    int numModelElems = 0;
+    Set<AbstractNodeDescriptor> _keySet = node2ActiveDims.keySet();
     for (final AbstractNodeDescriptor nhNode_1 : _keySet) {
       {
-        List<String> activeDimsForNode = CollectionsUtil.<AbstractNodeDescriptor, List<String>>lookup(nhNode_1, activeDims);
+        Set<String> activeDimsForNode = CollectionsUtil.<AbstractNodeDescriptor, Set<String>>lookup(nhNode_1, node2ActiveDims);
         Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(nhNode_1, nhRep);
         Integer numNodeOccurences = ((Integer) _lookup);
-        final List<String> _converted_activeDimsForNode = (List<String>)activeDimsForNode;
-        naDistrib.add(Integer.valueOf(((Object[])Conversions.unwrapArray(_converted_activeDimsForNode, Object.class)).length));
-        double _talNA = totalNA;
-        final List<String> _converted_activeDimsForNode_1 = (List<String>)activeDimsForNode;
-        int _length = ((Object[])Conversions.unwrapArray(_converted_activeDimsForNode_1, Object.class)).length;
-        totalNA = (_talNA + _length);
-        double _talNAwithWeight = totalNAwithWeight;
-        final List<String> _converted_activeDimsForNode_2 = (List<String>)activeDimsForNode;
-        int _length_1 = ((Object[])Conversions.unwrapArray(_converted_activeDimsForNode_2, Object.class)).length;
-        int _multiply = (_length_1 * (numNodeOccurences).intValue());
-        totalNAwithWeight = (_talNAwithWeight + _multiply);
-        int _numModelElemsWithWeight = numModelElemsWithWeight;
-        numModelElemsWithWeight = (_numModelElemsWithWeight + (numNodeOccurences).intValue());
+        boolean _isEmpty = activeDimsForNode.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          double _talNA = totalNA;
+          final Set<String> _converted_activeDimsForNode = (Set<String>)activeDimsForNode;
+          int _length = ((Object[])Conversions.unwrapArray(_converted_activeDimsForNode, Object.class)).length;
+          int _multiply = (_length * (numNodeOccurences).intValue());
+          totalNA = (_talNA + _multiply);
+          int _numModelElems = numModelElems;
+          numModelElems = (_numModelElems + (numNodeOccurences).intValue());
+        }
       }
     }
-    int _length = ((Object[])Conversions.unwrapArray(activeDims.values(), Object.class)).length;
-    final double averageNA = (totalNA / _length);
-    final double averageNAwithWeight = (totalNAwithWeight / numModelElemsWithWeight);
-    return CollectionLiterals.<Double>newArrayList(Double.valueOf(averageNA), Double.valueOf(averageNAwithWeight));
+    final double averageNAwithWeight = (totalNA / numModelElems);
+    return averageNAwithWeight;
   }
   
-  public static ArrayList<Double> measureNAwithNHNew(final PartialInterpretation partialModel, final Integer depth) {
+  public static double measureNAwithNHShape(final PartialInterpretation partialModel, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhRep = ((HashMap) _modelRepresentation);
     final GraphShape<Object, Object> nhShapeGraph = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel);
-    double totalMetricValue = 0.0;
-    int numNodes = 0;
-    double weightedActiveDimSum = 0.0;
-    double partialSum = 0.0;
     List<GraphNodeDescriptor> _nodes = nhShapeGraph.getNodes();
-    for (final GraphNodeDescriptor node : _nodes) {
+    for (final GraphNodeDescriptor x : _nodes) {
+      AbstractNodeDescriptor _correspondingAND = x.getCorrespondingAND();
+      Object _previousRepresentation = ((FurtherNodeDescriptor) _correspondingAND).getPreviousRepresentation();
+      InputOutput.<Set<String>>println(((LocalNodeDescriptor) _previousRepresentation).getTypes());
+    }
+    InputOutput.<GraphShape<Object, Object>>println(nhShapeGraph);
+    double totalMetricValue = 0.0;
+    int numNodesTotal = 0;
+    Map<GraphNodeDescriptor, Set<Object>> node2ActiveDims = new HashMap<GraphNodeDescriptor, Set<Object>>();
+    List<GraphNodeDescriptor> _nodes_1 = nhShapeGraph.getNodes();
+    for (final GraphNodeDescriptor node : _nodes_1) {
       {
-        weightedActiveDimSum = 0.0;
-        Collection _values = node.getIncomingEdges().values();
-        for (final Object inDistrib : _values) {
-          {
-            partialSum = 0.0;
-            for (final Integer value : ((List<Integer>) inDistrib)) {
-              if (((value).intValue() != 0)) {
-                double _partialSum = partialSum;
-                partialSum = (_partialSum + 1);
-              }
-            }
-            final int distribSize = ((Object[])Conversions.unwrapArray(((List) inDistrib), Object.class)).length;
-            double _weightedActiveDimSum = weightedActiveDimSum;
-            weightedActiveDimSum = (_weightedActiveDimSum + (partialSum / distribSize));
-            InputOutput.<List<Integer>>print(((List<Integer>) inDistrib));
-            InputOutput.<Double>println(Double.valueOf((partialSum / distribSize)));
-          }
+        HashSet<Object> _hashSet = new HashSet<Object>();
+        node2ActiveDims.put(node, _hashSet);
+        Set _keySet = node.getIncomingEdges().keySet();
+        for (final Object inEdge : _keySet) {
+          CollectionsUtil.<GraphNodeDescriptor, Set<Object>>lookup(node, node2ActiveDims).add(inEdge);
         }
-        Collection _values_1 = node.getOutgoingEdges().values();
-        for (final Object outDistrib : _values_1) {
-          {
-            partialSum = 0.0;
-            for (final Integer value : ((List<Integer>) outDistrib)) {
-              if (((value).intValue() != 0)) {
-                double _partialSum = partialSum;
-                partialSum = (_partialSum + 1);
-              }
-            }
-            final int distribSize = ((Object[])Conversions.unwrapArray(((List) outDistrib), Object.class)).length;
-            double _weightedActiveDimSum = weightedActiveDimSum;
-            weightedActiveDimSum = (_weightedActiveDimSum + (partialSum / distribSize));
-            InputOutput.<List<Integer>>print(((List<Integer>) outDistrib));
-            InputOutput.<Double>println(Double.valueOf((partialSum / distribSize)));
-          }
+        Set _keySet_1 = node.getOutgoingEdges().keySet();
+        for (final Object outEdge : _keySet_1) {
+          CollectionsUtil.<GraphNodeDescriptor, Set<Object>>lookup(node, node2ActiveDims).add(outEdge);
         }
-        int _size = node.getOutgoingEdges().size();
-        int _size_1 = node.getIncomingEdges().size();
-        final int actDim = (_size + _size_1);
-        InputOutput.<String>println("---------------");
-        InputOutput.<String>println(("activeDims : " + Integer.valueOf(actDim)));
-        InputOutput.<String>println(("weightedSum: " + Double.valueOf(weightedActiveDimSum)));
-        InputOutput.<String>println("---------------");
         Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(node.getCorrespondingAND(), nhRep);
         final Integer numOccurrences = ((Integer) _lookup);
-        int _numNodes = numNodes;
-        numNodes = (_numNodes + 1);
-        final double nodeMetricVal = weightedActiveDimSum;
+        final int numActDims = ((Object[])Conversions.unwrapArray(CollectionsUtil.<GraphNodeDescriptor, Set<Object>>lookup(node, node2ActiveDims), Object.class)).length;
+        final int totalActDims = (numActDims * (numOccurrences).intValue());
+        int _numNodesTotal = numNodesTotal;
+        numNodesTotal = (_numNodesTotal + (numOccurrences).intValue());
         double _talMetricValue = totalMetricValue;
-        totalMetricValue = (_talMetricValue + nodeMetricVal);
+        totalMetricValue = (_talMetricValue + totalActDims);
       }
     }
-    final double averageMetricValue = (totalMetricValue / numNodes);
-    return CollectionLiterals.<Double>newArrayList(Double.valueOf(0.0), Double.valueOf(averageMetricValue));
+    final double averageMetricValue = (totalMetricValue / numNodesTotal);
+    return averageMetricValue;
   }
   
   public static PartialInterpretation getPartialModel(final FileSystemWorkspace workspace, final EObject model) {
