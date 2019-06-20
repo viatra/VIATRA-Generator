@@ -29,7 +29,7 @@ class CSERposterSample {
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
-	static val depth = 0
+	static val depth = 1
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 
@@ -41,7 +41,7 @@ class CSERposterSample {
 		ReteEngine.getClass
 
 		val outputs = "outputs"
-		val instModName = "thursdayModel"
+		val instModName = "sampleList"
 		val workspace = new FileSystemWorkspace('''resources''', "")
 		val model = workspace.readModel(EObject, instModName + ".xmi")
 
@@ -71,7 +71,7 @@ class CSERposterSample {
 
 		val w2 = new PrintWriter(outputs + "/" + instModName + depth + "NEIGHBOURHOOD.gml")
 
-//		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
+		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
 		w2.close
 		
 		val y = neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput)

@@ -56,7 +56,7 @@ public class CSERposterSample {
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
-  private final static int depth = 0;
+  private final static int depth = 1;
   
   private final static String REALISTIC = "simpleSCRealistic";
   
@@ -72,7 +72,7 @@ public class CSERposterSample {
       SimpleStatechartPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
       final String outputs = "outputs";
-      final String instModName = "thursdayModel";
+      final String instModName = "sampleList";
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("resources");
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_builder.toString(), "");
@@ -105,6 +105,7 @@ public class CSERposterSample {
       final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> hood = CSERposterSample.neighbourhoodComputer.createRepresentation(partialModelOutput, CSERposterSample.depth, Integer.MAX_VALUE, 
         Integer.MAX_VALUE);
       final PrintWriter w2 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
+      w2.print(CSERposterSample.neighbourhoodVisualizer.transform(hood, partialModelOutput));
       w2.close();
       final GraphShape<Object, Object> y = CSERposterSample.neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput);
       InputOutput.<GraphShape<Object, Object>>println(y);

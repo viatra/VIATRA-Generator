@@ -12,10 +12,7 @@ import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptor;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
@@ -90,7 +87,7 @@ public class MetricsCalculationUsingShapes {
       ArrayList<String> naForAllModelsWnhSHAPE = new ArrayList<String>();
       double modelNA = 0.0;
       InputOutput.<String>println("Average NAs per model");
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("thursdayModel.xmi");
+      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("sampleList.xmi");
       for (final String fileName : _newArrayList) {
         {
           final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
@@ -228,45 +225,9 @@ public class MetricsCalculationUsingShapes {
   }
   
   public static double measureNAwithNHShape(final PartialInterpretation partialModel, final Integer depth) {
-    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
-    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
-    final HashMap nhRep = ((HashMap) _modelRepresentation);
-    final GraphShape<Object, Object> nhShapeGraph = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel);
-    List<GraphNodeDescriptor> _nodes = nhShapeGraph.getNodes();
-    for (final GraphNodeDescriptor x : _nodes) {
-      AbstractNodeDescriptor _correspondingAND = x.getCorrespondingAND();
-      Object _previousRepresentation = ((FurtherNodeDescriptor) _correspondingAND).getPreviousRepresentation();
-      InputOutput.<Set<String>>println(((LocalNodeDescriptor) _previousRepresentation).getTypes());
-    }
-    InputOutput.<GraphShape<Object, Object>>println(nhShapeGraph);
-    double totalMetricValue = 0.0;
-    int numNodesTotal = 0;
-    Map<GraphNodeDescriptor, Set<Object>> node2ActiveDims = new HashMap<GraphNodeDescriptor, Set<Object>>();
-    List<GraphNodeDescriptor> _nodes_1 = nhShapeGraph.getNodes();
-    for (final GraphNodeDescriptor node : _nodes_1) {
-      {
-        HashSet<Object> _hashSet = new HashSet<Object>();
-        node2ActiveDims.put(node, _hashSet);
-        Set _keySet = node.getIncomingEdges().keySet();
-        for (final Object inEdge : _keySet) {
-          CollectionsUtil.<GraphNodeDescriptor, Set<Object>>lookup(node, node2ActiveDims).add(inEdge);
-        }
-        Set _keySet_1 = node.getOutgoingEdges().keySet();
-        for (final Object outEdge : _keySet_1) {
-          CollectionsUtil.<GraphNodeDescriptor, Set<Object>>lookup(node, node2ActiveDims).add(outEdge);
-        }
-        Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(node.getCorrespondingAND(), nhRep);
-        final Integer numOccurrences = ((Integer) _lookup);
-        final int numActDims = ((Object[])Conversions.unwrapArray(CollectionsUtil.<GraphNodeDescriptor, Set<Object>>lookup(node, node2ActiveDims), Object.class)).length;
-        final int totalActDims = (numActDims * (numOccurrences).intValue());
-        int _numNodesTotal = numNodesTotal;
-        numNodesTotal = (_numNodesTotal + (numOccurrences).intValue());
-        double _talMetricValue = totalMetricValue;
-        totalMetricValue = (_talMetricValue + totalActDims);
-      }
-    }
-    final double averageMetricValue = (totalMetricValue / numNodesTotal);
-    return averageMetricValue;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field keySet is undefined for the type List"
+      + "\nThe method or field keySet is undefined for the type List");
   }
   
   public static PartialInterpretation getPartialModel(final FileSystemWorkspace workspace, final EObject model) {

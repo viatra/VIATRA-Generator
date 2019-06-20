@@ -72,7 +72,7 @@ class MetricsCalculationUsingShapes {
 		println("Average NAs per model")
 
 //		for (fileName : workspace.allFiles.subList(0, 100)) {
-		for (fileName : newArrayList("thursdayModel.xmi")) { //TESTING
+		for (fileName : newArrayList("sampleList.xmi")) { //TESTING
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
 

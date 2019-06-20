@@ -27,10 +27,10 @@ class Neighbourhood2ShapeGraph {
 		// Maps for GraphShape Object
 		val List<GraphNodeDescriptor> graphNodes = new ArrayList
 //		val Map<, Integer> node2Amount = new HashMap
-		val Map<AbstractNodeDescriptor, GraphNodeDescriptor> LND2GND = new HashMap
+		val Map<AbstractNodeDescriptor, GraphNodeDescriptor> AND2GND = new HashMap
 		val List<CharSequence> fullEdgeText = newArrayList
 		val List<CharSequence> allEdgesText = newArrayList
-		val Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children = new HashMap
+		val Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> AND2children = new HashMap
 
 		// TODO these should not be hashmaps, as a given node can have multiple sameNamed edges to different 
 		val Map<IncomingRelation, Object> edgeNameIn2targetNode = new HashMap
@@ -47,7 +47,7 @@ class Neighbourhood2ShapeGraph {
 			if (correspondingLND != null) {
 				val nodeDesc = nodeKey as AbstractNodeDescriptor
 				val graphNodeRep = new GraphNodeDescriptor(nodeDesc)
-				LND2GND.put(nodeDesc , graphNodeRep)
+				AND2GND.put(nodeDesc , graphNodeRep)
 				graphNodes.add(graphNodeRep)
 			}
 
@@ -65,24 +65,26 @@ class Neighbourhood2ShapeGraph {
 		for (deepNodeKey : deepModRep.keySet) {
 			val deepNodeDesc = deepNodeKey as FurtherNodeDescriptor
 			val parentDesc = deepNodeDesc.previousRepresentation as AbstractNodeDescriptor
-			if (LND2GND.keySet.contains(parentDesc)) {
-				if (children.keySet.contains(parentDesc)) {
-					parentDesc.lookup(children).add(deepNodeDesc)
+			if (AND2GND.keySet.contains(parentDesc)) {
+				if (AND2children.keySet.contains(parentDesc)) {
+					parentDesc.lookup(AND2children).add(deepNodeDesc)
 				} else {
-					children.put(parentDesc, newArrayList(deepNodeDesc))
+					AND2children.put(parentDesc, newArrayList(deepNodeDesc))
 				}
 			}
 		}
 		
 //		println("CP4")
-		// get edges
-		for (currentNode : children.keySet) {
+		// get edges for each Shape Graph Node
+		for (currentNode : AND2children.keySet) {
+//			val List<RelationGND> relations = 
 			transformEdge(edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
-				currentNode, LND2GND, children)
+				currentNode, AND2GND, AND2children)
+//			currentNode.lookup(AND2GND).edges.addAll(relations)
 		}
 		
 //		println("CP5")
-		val gs = new GraphShape(graphNodes, n, LND2GND)
+		val gs = new GraphShape(graphNodes, n, AND2GND)
 		
 //		println("CP6")
 		// create GraphShape Object
@@ -93,16 +95,22 @@ class Neighbourhood2ShapeGraph {
 	protected def transformEdge(Map<IncomingRelation, Object> edgeNameIn2targetNode,
 		Map<OutgoingRelation, Object> edgeNameOut2targetNode, Map<IncomingRelation, List<Integer>> edgeName2inMultips,
 		Map<OutgoingRelation, List<Integer>> edgeName2outMultips,
-		AbstractNodeDescriptor currentNode, Map<AbstractNodeDescriptor, GraphNodeDescriptor> LND2GND,
+		AbstractNodeDescriptor currentNode, Map<AbstractNodeDescriptor, GraphNodeDescriptor> AND2GND,
 		Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children) {
 		
 //		println("CP4.0")
+
+		println("-------------")
+		println(currentNode)
 
 		edgeNameIn2targetNode.clear
 		edgeNameOut2targetNode.clear
 		edgeName2inMultips.clear
 		edgeName2outMultips.clear
 		val List<Object> modifiedEdgeNames = newArrayList
+		
+//		val List<IncomingRelationGND> inRelations = newArrayList
+//		val List<OutgoingRelationGND> outRelations = newArrayList
 
 		val List<FurtherNodeDescriptor> subNodes = currentNode.lookup(children)
 		for (subNode : subNodes) {
@@ -119,6 +127,14 @@ class Neighbourhood2ShapeGraph {
 					edgeName2outMultips.put(edgeName, newArrayList(edgeOutMultip))
 				}
 				edgeNameOut2targetNode.put(edgeName, edgePointingTo)
+				
+//				//NEW METHOD
+//				var needNew = true
+//				for(rel : outRelations) {
+//					if(rel.type = 
+//				}
+//				
+//				if( outRelations
 
 			}
 
@@ -136,7 +152,7 @@ class Neighbourhood2ShapeGraph {
 						val edgeName = (inEdge as IncomingRelation)
 						val edgePointingFrom = (inEdge as IncomingRelation).from
 						val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
-
+						//TODO PROBLEMMMMMMMMMMM
 						if (edgePointingFrom.equals(currentNode)) {
 							if (edgeName2inMultips.containsKey(edgeName)) {
 								edgeName.lookup(edgeName2inMultips).add(edgeInMultip)
@@ -148,6 +164,9 @@ class Neighbourhood2ShapeGraph {
 						}
 					}
 				}
+				println("xxxxxxxxxxxxxxxxxx")
+				println(outEdgeTarget)
+				println(edgeName2inMultips)
 
 				// fill in the 0 multiplicities (INCOMING)
 				for (edgeSoFar : modifiedEdgeNames) {
@@ -184,10 +203,10 @@ class Neighbourhood2ShapeGraph {
 			
 			val sourceNode = currentNode
 
-			val sourceGND = sourceNode.lookup(LND2GND)
+			val sourceGND = sourceNode.lookup(AND2GND)
 			val sourceDistrib = outEdge.lookup(edgeName2outMultips)
 			val targetNode = outEdge.lookup(edgeNameOut2targetNode) as AbstractNodeDescriptor
-			val targetGND = targetNode.lookup(LND2GND)
+			val targetGND = targetNode.lookup(AND2GND)
 			val edgeName = outEdge.type
 			// finding corresponding Incoming edge
 			var correspInEdgeSet = edgeNameIn2targetNode.keySet.filter [

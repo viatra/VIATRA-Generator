@@ -19,15 +19,58 @@ import org.eclipse.xtend.lib.annotations.Data
 	}
 }
 
-@Data class GraphNodeDescriptor<gndRep, andRep> {
+//@Data class GraphNodeDescriptor<gndRep, andRep> {
+//	AbstractNodeDescriptor correspondingAND
+//	// String id
+//	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
+//	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
+//
+//	new(AbstractNodeDescriptor correspondingNode) {
+//		this.correspondingAND = correspondingNode
+//		this.incomingEdges = new HashMap
+//		this.outgoingEdges = new HashMap
+//	}
+//}
+
+ 
+ @Data class GraphNodeDescriptor<gndRep, andRep> {
 	AbstractNodeDescriptor correspondingAND
-	// String id
-	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
-	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
+	List<IncomingRelationGND> incomingEdges
+	List<OutgoingRelationGND> outgoingEdges
 
 	new(AbstractNodeDescriptor correspondingNode) {
 		this.correspondingAND = correspondingNode
-		this.incomingEdges = new HashMap
-		this.outgoingEdges = new HashMap
+		this.incomingEdges = newArrayList
+		this.outgoingEdges = newArrayList
+	}
+}
+
+@Data abstract class IncomingRelationGND {
+	GraphNodeDescriptor from
+	String type
+	List<Integer> sourceDistrib
+	List<Integer> targetDisrib
+	
+	new(GraphNodeDescriptor from, String type) {
+		this.from = from
+		this.type = type
+		this.sourceDistrib = newArrayList
+		this.targetDisrib = newArrayList
+		
+	}
+}
+
+@Data abstract class OutgoingRelationGND {
+	GraphNodeDescriptor to
+	String type
+	List<Integer> sourceDistrib
+	List<Integer> targetDisrib
+	
+	new(GraphNodeDescriptor from, String type) {
+		this.to = to
+		this.type = type
+		this.sourceDistrib = newArrayList
+		this.targetDisrib = newArrayList
+		
 	}
 }
