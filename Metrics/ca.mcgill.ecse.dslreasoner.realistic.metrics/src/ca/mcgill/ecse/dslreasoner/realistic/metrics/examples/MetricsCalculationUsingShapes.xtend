@@ -7,18 +7,16 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.PrintWriter
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import java.util.ArrayList
+import java.util.Collection
 import java.util.Collections
 import java.util.HashMap
 import java.util.HashSet
@@ -34,7 +32,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2GmlOLD
 
 class MetricsCalculationUsingShapes {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -42,7 +39,8 @@ class MetricsCalculationUsingShapes {
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	private static DecimalFormat df = new DecimalFormat("0.000");
-	private static final Integer NUMMEASUREMENTS = 4
+	private static final Integer NUMMEASUREMENTS = 9
+	private static final Integer NUMNA = 2
 
 	def static void main(String[] args) {
 		df.roundingMode = RoundingMode.UP
@@ -55,68 +53,68 @@ class MetricsCalculationUsingShapes {
 
 		val fileDir = "Human//"
 		val outputFileName = "stats.csv"
-		val inputs = "inputs//" + fileDir
-//		val inputs = "resources//" // TESTING
+//		val inputs = "inputs//" + fileDir
+		val inputs = "resources//" // TESTING
 		val workspace = new FileSystemWorkspace(inputs, "")
 
 		var List<List<String>> metricValues = newArrayList
-		
-		for ( var i = 0;i<NUMMEASUREMENTS;i++){
+
+		for (var i = 0; i < NUMMEASUREMENTS; i++) {
 			metricValues.add(newArrayList)
 		}
-		var modelNA = 0.0
+		var metricVal = 0.0
 
-		for (fileName : workspace.allFiles.subList(0, 100)) {
-//		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
+		var index = 0
+//		for (fileName : workspace.allFiles.subList(0, 100)) {
+		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
+			println(index++)
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
 			val partialModel = getPartialModel(workspace, model)
-			
-			///////////////
-			//NODE ACTIVITY
-			///////////////
-			
+
+			// /////////////
+			// NODE ACTIVITY
+			// /////////////
 			// Calculate NA from partial model
-			modelNA = getNAfromModel(model)
-			metricValues.get(0).add(df.format(modelNA))
+			metricVal = getNAfromModel(model)
+			metricValues.get(0).add(df.format(metricVal))
 
 			// Calculate NA from neighbourhood shape
-			modelNA = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel)
-			metricValues.get(1).add(df.format(modelNA))
-			
-			///////////////
-			//MPC
-			///////////////
-			
-			// Calculate MPC from partial model
-			modelNA = getMPCfromModel(model)
-			metricValues.get(2).add(df.format(modelNA))
+			metricVal = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel)
+			metricValues.get(1).add(df.format(metricVal))
 
-			// Calculate MPC from neighbourhood shape
-			modelNA = getMPCfromNHShape(partialModel)
-			metricValues.get(3).add(df.format(modelNA))
-			
+			// /////////////
+			// MPC
+			// /////////////
+			// Calculate MPC from partial model
+			metricVal = getMPCfromModel(model)
+			metricValues.get(2).add(df.format(metricVal))
+
+			for (var i = 0; i < NUMMEASUREMENTS - 3; i++) {
+				// Calculate MPC from neighbourhood shape
+				metricVal = getMPCfromNHShape(partialModel, i)
+				metricValues.get(i + 3).add(df.format(metricVal))
+			}
 
 		}
 
 		// Write to .csv
-		val writer = new PrintWriter(outputFolder + outputFileName)
-		writer.append("NA,Model,")
-		writer.append(String.join(",", metricValues.get(0)))
-		writer.append("\n");
-
-		writer.append("NA,Shape")
-		writer.append(String.join(",", metricValues.get(1)));
-		writer.append("\n");
+		val headers = newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape0,", "MPC,Shape1,", "MPC,Shape2,",
+			"MPC,Shape3,", "MPC,Shape4,", "MPC,Shape5,")
+		var writer = new PrintWriter(outputFolder + "statsNA.csv")
+		for (var i = 0; i < NUMNA; i++) {
+			writer.append(headers.get(i))
+			writer.append(String.join(",", metricValues.get(i)))
+			writer.append("\n");
+		}
+		writer.close
 		
-		writer.append("MPC,Model,")
-		writer.append(String.join(",", metricValues.get(2)))
-		writer.append("\n");
-
-		writer.append("MPC,Shape")
-		writer.append(String.join(",", metricValues.get(3)));
-		writer.append("\n");
-
+		writer = new PrintWriter(outputFolder + "statsMPC.csv")
+		for (var i = NUMNA; i < NUMMEASUREMENTS; i++) {
+			writer.append(headers.get(i))
+			writer.append(String.join(",", metricValues.get(i)))
+			writer.append("\n");
+		}
 		writer.close
 
 		// print Results
@@ -125,7 +123,9 @@ class MetricsCalculationUsingShapes {
 		println("from NH Shape     : " + metricValues.get(1))
 		println("MPC:")
 		println("from Partial Model: " + metricValues.get(2))
-		println("from NH Shape     : " + metricValues.get(3))
+		for (var i = 0; i < NUMMEASUREMENTS - 3; i++) {
+			println("from NH Shape " + i + "   : " + metricValues.get(i + 3))
+		}
 
 	}
 
@@ -231,11 +231,11 @@ class MetricsCalculationUsingShapes {
 		return averageNAwithWeight
 
 	}
-	
-	def static getNAfromNHShape(PartialInterpretation pm){
+
+	def static getNAfromNHShape(PartialInterpretation pm) {
 		getNAfromNHShape(pm, 1)
 	}
-	
+
 	def static getNAfromNHShape(PartialInterpretation partialModel, Integer depth) {
 		// Get NH Shape
 		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
@@ -266,23 +266,127 @@ class MetricsCalculationUsingShapes {
 			activeDims.clear
 		}
 
-		val averageMetricValue =  totalMetricValue / numNodesTotal
+		val averageMetricValue = totalMetricValue / numNodesTotal
 		return averageMetricValue
 
 	}
 
 	def static getMPCfromModel(EObject model) {
-		
-		return 0.0
+		val nodes = model.eResource.allContents.toList
+
+		var Set<String> allDimensions = new HashSet
+
+		// fill HashSet
+		var Map<EObject, Map<String, Integer>> node2Degrees = new HashMap
+		for (node : nodes) {
+			node2Degrees.put(node, newHashMap)
+		}
+
+		// iterate over nodes and their references
+		for (node : nodes) {
+
+			// calculate Degree for each reference Type
+			for (reference : node.eClass.EAllReferences) {
+				val pointingTo = node.eGet(reference)
+
+				if (!(pointingTo instanceof List)) {
+					if (pointingTo !== null) {
+						allDimensions.add(reference.name) // TODO
+						// Add for source
+						putInside(node, reference.name, 1, node2Degrees)
+						// Add for target
+						putInside((pointingTo as EObject), reference.name, 1, node2Degrees)
+					}
+				} else {
+					val pointingToList = pointingTo as List
+					if (!pointingToList.empty) {
+						allDimensions.add(reference.name) // TODO
+						// Add for source
+						putInside(node, reference.name, pointingToList.size, node2Degrees)
+						for (target : pointingToList) {
+							// Add for target
+							putInside((target as EObject), reference.name, 1, node2Degrees)
+						}
+					}
+				}
+			}
+		}
+
+		// Measure MPC
+		val numNodes = nodes.length
+		val totalNumDims = allDimensions.length
+		var totalMPC = 0.0
+		for (degrees : node2Degrees.values) {
+			var totalDegree = findSum(degrees.values)
+			var partialMPC = 1.0
+			for (degree : degrees.values) {
+				partialMPC -= Math.pow(degree.floatValue / totalDegree, 2)
+			}
+			totalMPC += partialMPC
+		}
+
+		val averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
+		return averageMPC
 	}
-	
+
 	def static getMPCfromNHShape(PartialInterpretation pm) {
 		getMPCfromNHShape(pm, 2)
 	}
-	
+
 	def static getMPCfromNHShape(PartialInterpretation partialModel, Integer depth) {
-		
-		return 0.0
+		// Get NH Shape
+		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nhRep = nh.modelRepresentation as HashMap
+		val nhShapeGraph = neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel)
+
+		// Useful variable initializations
+		var totalMPC = 0.0
+		var totalDegree = 0
+		var partialMPC = 0.0
+		var numNodes = 0
+		var Set<String> allDimensions = new HashSet
+		var Map<String, Integer> type2Num = new HashMap
+
+		// look at the in and out edges of each shape node
+		for (node : nhShapeGraph.nodes) {
+			totalDegree = node.incomingEdges.size + node.outgoingEdges.size
+
+			for (inEdge : node.incomingEdges) {
+				val edgeName = inEdge.type
+				allDimensions.add(edgeName)
+				if (type2Num.keySet.contains(edgeName)) {
+					type2Num.put(edgeName, edgeName.lookup(type2Num) + 1)
+				} else {
+					type2Num.put(edgeName, 1)
+				}
+			}
+			for (outEdge : node.outgoingEdges) {
+				val edgeName = outEdge.type
+				allDimensions.add(edgeName)
+				if (type2Num.keySet.contains(edgeName)) {
+					type2Num.put(edgeName, edgeName.lookup(type2Num) + 1)
+				} else {
+					type2Num.put(edgeName, 1)
+				}
+			}
+
+			// Measure preliminary results for MPC
+			partialMPC = 1.0
+			for (degree : type2Num.values) {
+				partialMPC -= Math.pow(degree.floatValue / totalDegree, 2)
+			}
+
+			val numOccurrences = node.correspondingAND.lookup(nhRep) as Integer
+			numNodes += numOccurrences
+
+			totalMPC += partialMPC * numOccurrences
+			type2Num.clear
+		}
+
+		val totalNumDims = allDimensions.size
+
+		val averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
+		return averageMPC
 	}
 
 	def static getPartialModel(FileSystemWorkspace workspace, EObject model) {
@@ -299,6 +403,23 @@ class MetricsCalculationUsingShapes {
 		val metamodelTransformationOutput = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration)
 
 		return partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource, false)
+	}
+
+	def static findSum(Collection<Integer> integers) {
+		var sum = 0
+		for (integer : integers) {
+			sum += integer
+		}
+		return sum
+	}
+
+	def static putInside(EObject object, String string, int i, Map<EObject, Map<String, Integer>> map) {
+		val Map<String, Integer> correspondingMap = object.lookup(map)
+		if (correspondingMap.keySet.contains(string)) {
+			correspondingMap.put(string, string.lookup(correspondingMap) + i)
+		} else {
+			correspondingMap.put(string, i)
+		}
 	}
 
 }
