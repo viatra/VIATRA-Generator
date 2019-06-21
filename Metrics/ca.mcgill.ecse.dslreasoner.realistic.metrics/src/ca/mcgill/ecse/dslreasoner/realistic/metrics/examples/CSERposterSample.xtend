@@ -17,20 +17,20 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 import java.io.PrintWriter
 import linkedList.LinkedListPackage
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
 import simpleStatechart.SimpleStatechartPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2GmlOLD
 
 class CSERposterSample {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val partialVisualizer = new PartialInterpretation2Gml
-	static val neighbourhoodVisualizer = new Neighbourhood2Gml
+	static val neighbourhoodVisualizer = new Neighbourhood2GmlOLD
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
-	static val depth = 0
+	static val depth = 1
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 
@@ -61,7 +61,7 @@ class CSERposterSample {
 		val partialModelOutput = partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource,
 			false)
 
-		val writer = new PrintWriter(outputs + "//" + instModName + "MODEL.gml")
+		val writer = new PrintWriter(outputs + "/" + instModName + "/" + instModName + "MODEL.gml")
 
 		writer.print(partialVisualizer.transform(partialModelOutput))
 
@@ -70,12 +70,12 @@ class CSERposterSample {
 		val hood = neighbourhoodComputer.createRepresentation(partialModelOutput, depth, Integer.MAX_VALUE,
 			Integer.MAX_VALUE)
 
-		val w2 = new PrintWriter(outputs + "/" + instModName + depth + "NEIGHBOURHOOD.gml")
+		val w2 = new PrintWriter(outputs + "/" + instModName + "/" + instModName + depth + "NEIGHBOURHOOD.gml")
 
 		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
 		w2.close
 
-		val w3 = new PrintWriter(outputs + "/" + instModName + depth + "SHAPE.txt")
+		val w3 = new PrintWriter(outputs + "/" + instModName + "/" + instModName + depth + "SHAPE.txt")
 
 		val y = neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput)
 

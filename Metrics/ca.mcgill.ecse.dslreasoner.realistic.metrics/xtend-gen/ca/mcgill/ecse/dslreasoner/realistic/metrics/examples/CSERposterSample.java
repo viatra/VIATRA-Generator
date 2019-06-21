@@ -15,7 +15,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2GmlOLD;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
@@ -56,11 +56,11 @@ public class CSERposterSample {
   
   private final static PartialInterpretation2Gml partialVisualizer = new PartialInterpretation2Gml();
   
-  private final static Neighbourhood2Gml neighbourhoodVisualizer = new Neighbourhood2Gml();
+  private final static Neighbourhood2GmlOLD neighbourhoodVisualizer = new Neighbourhood2GmlOLD();
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
-  private final static int depth = 0;
+  private final static int depth = 1;
   
   private final static String REALISTIC = "simpleSCRealistic";
   
@@ -103,15 +103,15 @@ public class CSERposterSample {
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTransformationOutput = CSERposterSample.ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       final PartialInterpretation partialModelOutput = CSERposterSample.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), 
         false);
-      final PrintWriter writer = new PrintWriter((((outputs + "//") + instModName) + "MODEL.gml"));
+      final PrintWriter writer = new PrintWriter((((((outputs + "/") + instModName) + "/") + instModName) + "MODEL.gml"));
       writer.print(CSERposterSample.partialVisualizer.transform(partialModelOutput));
       writer.close();
       final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> hood = CSERposterSample.neighbourhoodComputer.createRepresentation(partialModelOutput, CSERposterSample.depth, Integer.MAX_VALUE, 
         Integer.MAX_VALUE);
-      final PrintWriter w2 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
+      final PrintWriter w2 = new PrintWriter(((((((outputs + "/") + instModName) + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
       w2.print(CSERposterSample.neighbourhoodVisualizer.transform(hood, partialModelOutput));
       w2.close();
-      final PrintWriter w3 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "SHAPE.txt"));
+      final PrintWriter w3 = new PrintWriter(((((((outputs + "/") + instModName) + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "SHAPE.txt"));
       final GraphShape<Object, Object> y = CSERposterSample.neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput);
       List<GraphNodeDescriptorGND> _nodes = y.getNodes();
       for (final GraphNodeDescriptorGND node : _nodes) {

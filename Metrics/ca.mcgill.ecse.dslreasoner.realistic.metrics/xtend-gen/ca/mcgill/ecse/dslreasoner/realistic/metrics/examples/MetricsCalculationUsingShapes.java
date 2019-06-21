@@ -16,19 +16,16 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelationGND;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.io.PrintWriter;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -64,13 +61,11 @@ public class MetricsCalculationUsingShapes {
   
   private final static Ecore2Logic ecore2Logic = new Ecore2Logic();
   
-  private final static PartialInterpretation2Gml partialVisualizer = new PartialInterpretation2Gml();
-  
-  private final static Neighbourhood2Gml neighbourhoodVisualizer = new Neighbourhood2Gml();
-  
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
   private static DecimalFormat df = new DecimalFormat("0.000");
+  
+  private final static Integer NUMMEASUREMENTS = Integer.valueOf(4);
   
   public static void main(final String[] args) {
     try {
@@ -86,45 +81,61 @@ public class MetricsCalculationUsingShapes {
       final String outputFileName = "stats.csv";
       final String inputs = ("inputs//" + fileDir);
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
-      ArrayList<String> naForAllModelsWOnh = CollectionLiterals.<String>newArrayList();
-      ArrayList<String> naForAllModelsWnh = new ArrayList<String>();
-      ArrayList<String> naForAllModelsWnhSHAPE = new ArrayList<String>();
+      List<List<String>> metricValues = CollectionLiterals.<List<String>>newArrayList();
+      for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue()); i++) {
+        metricValues.add(CollectionLiterals.<String>newArrayList());
+      }
       double modelNA = 0.0;
-      InputOutput.<String>println("Average NAs per model");
       List<String> _subList = workspace.allFiles().subList(0, 100);
       for (final String fileName : _subList) {
         {
           final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
           final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
-          modelNA = MetricsCalculationUsingShapes.measureNAwithoutNH(model);
-          naForAllModelsWOnh.add(MetricsCalculationUsingShapes.df.format(modelNA));
           final PartialInterpretation partialModel = MetricsCalculationUsingShapes.getPartialModel(workspace, model);
-          modelNA = MetricsCalculationUsingShapes.measureNAwithNH(partialModel);
-          naForAllModelsWnh.add(MetricsCalculationUsingShapes.df.format(modelNA));
-          modelNA = MetricsCalculationUsingShapes.measureNAwithNHShape(partialModel, Integer.valueOf(1));
-          naForAllModelsWnhSHAPE.add(MetricsCalculationUsingShapes.df.format(modelNA));
+          modelNA = MetricsCalculationUsingShapes.getNAfromModel(model);
+          metricValues.get(0).add(MetricsCalculationUsingShapes.df.format(modelNA));
+          modelNA = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel);
+          metricValues.get(1).add(MetricsCalculationUsingShapes.df.format(modelNA));
+          modelNA = MetricsCalculationUsingShapes.getMPCfromModel(model);
+          metricValues.get(2).add(MetricsCalculationUsingShapes.df.format(modelNA));
+          modelNA = MetricsCalculationUsingShapes.getMPCfromNHShape(partialModel);
+          metricValues.get(3).add(MetricsCalculationUsingShapes.df.format(modelNA));
         }
       }
       final PrintWriter writer = new PrintWriter((outputFolder + outputFileName));
-      writer.append("noNH,");
-      writer.append(String.join(",", naForAllModelsWOnh));
+      writer.append("NA,Model,");
+      writer.append(String.join(",", metricValues.get(0)));
       writer.append("\n");
-      writer.append("NH-NoShape,");
-      writer.append(String.join(",", naForAllModelsWnh));
+      writer.append("NA,Shape");
+      writer.append(String.join(",", metricValues.get(1)));
       writer.append("\n");
-      writer.append("NH-Shape,");
-      writer.append(String.join(",", naForAllModelsWnhSHAPE));
+      writer.append("MPC,Model,");
+      writer.append(String.join(",", metricValues.get(2)));
+      writer.append("\n");
+      writer.append("MPC,Shape");
+      writer.append(String.join(",", metricValues.get(3)));
       writer.append("\n");
       writer.close();
-      InputOutput.<String>println(("W/O NH       : " + naForAllModelsWOnh));
-      InputOutput.<String>println(("W/ NH NoShape: " + naForAllModelsWnh));
-      InputOutput.<String>println(("W/ NH Shape 1: " + naForAllModelsWnhSHAPE));
+      InputOutput.<String>println("Node Activity:");
+      List<String> _get = metricValues.get(0);
+      String _plus = ("from Partial Model: " + _get);
+      InputOutput.<String>println(_plus);
+      List<String> _get_1 = metricValues.get(1);
+      String _plus_1 = ("from NH Shape     : " + _get_1);
+      InputOutput.<String>println(_plus_1);
+      InputOutput.<String>println("MPC:");
+      List<String> _get_2 = metricValues.get(2);
+      String _plus_2 = ("from Partial Model: " + _get_2);
+      InputOutput.<String>println(_plus_2);
+      List<String> _get_3 = metricValues.get(3);
+      String _plus_3 = ("from NH Shape     : " + _get_3);
+      InputOutput.<String>println(_plus_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public static double measureNAwithoutNH(final EObject model) {
+  public static double getNAfromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     double totalNA = 0.0;
     final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
@@ -169,7 +180,7 @@ public class MetricsCalculationUsingShapes {
     return averageNA;
   }
   
-  public static double measureNAwithNH(final PartialInterpretation partialModel) {
+  public static double getNAfromNHLattice(final PartialInterpretation partialModel) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, 2, Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
@@ -228,7 +239,11 @@ public class MetricsCalculationUsingShapes {
     return averageNAwithWeight;
   }
   
-  public static double measureNAwithNHShape(final PartialInterpretation partialModel, final Integer depth) {
+  public static double getNAfromNHShape(final PartialInterpretation pm) {
+    return MetricsCalculationUsingShapes.getNAfromNHShape(pm, Integer.valueOf(1));
+  }
+  
+  public static double getNAfromNHShape(final PartialInterpretation partialModel, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(partialModel, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhRep = ((HashMap) _modelRepresentation);
@@ -261,6 +276,18 @@ public class MetricsCalculationUsingShapes {
     }
     final double averageMetricValue = (totalMetricValue / numNodesTotal);
     return averageMetricValue;
+  }
+  
+  public static double getMPCfromModel(final EObject model) {
+    return 0.0;
+  }
+  
+  public static double getMPCfromNHShape(final PartialInterpretation pm) {
+    return MetricsCalculationUsingShapes.getMPCfromNHShape(pm, Integer.valueOf(2));
+  }
+  
+  public static double getMPCfromNHShape(final PartialInterpretation partialModel, final Integer depth) {
+    return 0.0;
   }
   
   public static PartialInterpretation getPartialModel(final FileSystemWorkspace workspace, final EObject model) {

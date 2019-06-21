@@ -9,7 +9,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
@@ -35,15 +34,15 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2GmlOLD
 
 class MetricsCalculationUsingShapes {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
-	static val partialVisualizer = new PartialInterpretation2Gml
-	static val neighbourhoodVisualizer = new Neighbourhood2Gml
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	private static DecimalFormat df = new DecimalFormat("0.000");
+	private static final Integer NUMMEASUREMENTS = 4
 
 	def static void main(String[] args) {
 		df.roundingMode = RoundingMode.UP
@@ -60,71 +59,77 @@ class MetricsCalculationUsingShapes {
 //		val inputs = "resources//" // TESTING
 		val workspace = new FileSystemWorkspace(inputs, "")
 
-		var naForAllModelsWOnh = newArrayList
-		var naForAllModelsWnh = new ArrayList<String>
-		var naForAllModelsWnhSHAPE = new ArrayList<String>
-
+		var List<List<String>> metricValues = newArrayList
+		
+		for ( var i = 0;i<NUMMEASUREMENTS;i++){
+			metricValues.add(newArrayList)
+		}
 		var modelNA = 0.0
-
-		println("Average NAs per model")
 
 		for (fileName : workspace.allFiles.subList(0, 100)) {
 //		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
-
-			// Calculate NA without nh
-			modelNA = measureNAwithoutNH(model)
-			naForAllModelsWOnh.add(df.format(modelNA))
-
-			// Calculate NA with nh
 			val partialModel = getPartialModel(workspace, model)
-			modelNA = measureNAwithNH(partialModel)
-			naForAllModelsWnh.add(df.format(modelNA))
+			
+			///////////////
+			//NODE ACTIVITY
+			///////////////
+			
+			// Calculate NA from partial model
+			modelNA = getNAfromModel(model)
+			metricValues.get(0).add(df.format(modelNA))
 
-			// Calculate NA with nh using SHAPE
-			modelNA = MetricsCalculationUsingShapes.measureNAwithNHShape(partialModel, 1)
-			naForAllModelsWnhSHAPE.add(df.format(modelNA))
+			// Calculate NA from neighbourhood shape
+			modelNA = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel)
+			metricValues.get(1).add(df.format(modelNA))
+			
+			///////////////
+			//MPC
+			///////////////
+			
+			// Calculate MPC from partial model
+			modelNA = getMPCfromModel(model)
+			metricValues.get(2).add(df.format(modelNA))
 
-		// TEMP
-		// println(nameWOExt + " : " + df.format(modelNA))
-		// Visualize Model
-//			val writer = new PrintWriter(outputs + "//" + nameWOExt + "MODEL.gml")
-//			writer.print(partialVisualizer.transform(partialModel))
-//			writer.close
-		// Visualize Neighbourhood
-//			val hood = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE,
-//				Integer.MAX_VALUE)
-//			val w2 = new PrintWriter(outputs + nameWOExt + "NHOOD" + depth + ".gml")
-//			w2.print(neighbourhoodVisualizer.transform(hood, partialModel))
-//			w2.close
-		// ENDTEMP
+			// Calculate MPC from neighbourhood shape
+			modelNA = getMPCfromNHShape(partialModel)
+			metricValues.get(3).add(df.format(modelNA))
+			
+
 		}
 
 		// Write to .csv
 		val writer = new PrintWriter(outputFolder + outputFileName)
-		writer.append("noNH,")
-		writer.append(String.join(",", naForAllModelsWOnh))
+		writer.append("NA,Model,")
+		writer.append(String.join(",", metricValues.get(0)))
 		writer.append("\n");
 
-		writer.append("NH-NoShape,")
-		writer.append(String.join(",", naForAllModelsWnh));
+		writer.append("NA,Shape")
+		writer.append(String.join(",", metricValues.get(1)));
+		writer.append("\n");
+		
+		writer.append("MPC,Model,")
+		writer.append(String.join(",", metricValues.get(2)))
 		writer.append("\n");
 
-		writer.append("NH-Shape,")
-		writer.append(String.join(",", naForAllModelsWnhSHAPE));
+		writer.append("MPC,Shape")
+		writer.append(String.join(",", metricValues.get(3)));
 		writer.append("\n");
 
 		writer.close
 
 		// print Results
-		println("W/O NH       : " + naForAllModelsWOnh)
-		println("W/ NH NoShape: " + naForAllModelsWnh)
-		println("W/ NH Shape 1: " + naForAllModelsWnhSHAPE)
+		println("Node Activity:")
+		println("from Partial Model: " + metricValues.get(0))
+		println("from NH Shape     : " + metricValues.get(1))
+		println("MPC:")
+		println("from Partial Model: " + metricValues.get(2))
+		println("from NH Shape     : " + metricValues.get(3))
 
 	}
 
-	def static measureNAwithoutNH(EObject model) {
+	def static getNAfromModel(EObject model) {
 		val nodes = model.eResource.allContents.toList
 
 		var totalNA = 0.0
@@ -172,7 +177,7 @@ class MetricsCalculationUsingShapes {
 		return averageNA
 	}
 
-	def static measureNAwithNH(PartialInterpretation partialModel) {
+	def static getNAfromNHLattice(PartialInterpretation partialModel) {
 		// Get required neighbourhoods
 		val nh = neighbourhoodComputer.createRepresentation(partialModel, 2, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap
@@ -226,8 +231,12 @@ class MetricsCalculationUsingShapes {
 		return averageNAwithWeight
 
 	}
-
-	def static measureNAwithNHShape(PartialInterpretation partialModel, Integer depth) {
+	
+	def static getNAfromNHShape(PartialInterpretation pm){
+		getNAfromNHShape(pm, 1)
+	}
+	
+	def static getNAfromNHShape(PartialInterpretation partialModel, Integer depth) {
 		// Get NH Shape
 		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhRep = nh.modelRepresentation as HashMap
@@ -260,6 +269,20 @@ class MetricsCalculationUsingShapes {
 		val averageMetricValue =  totalMetricValue / numNodesTotal
 		return averageMetricValue
 
+	}
+
+	def static getMPCfromModel(EObject model) {
+		
+		return 0.0
+	}
+	
+	def static getMPCfromNHShape(PartialInterpretation pm) {
+		getMPCfromNHShape(pm, 2)
+	}
+	
+	def static getMPCfromNHShape(PartialInterpretation partialModel, Integer depth) {
+		
+		return 0.0
 	}
 
 	def static getPartialModel(FileSystemWorkspace workspace, EObject model) {
