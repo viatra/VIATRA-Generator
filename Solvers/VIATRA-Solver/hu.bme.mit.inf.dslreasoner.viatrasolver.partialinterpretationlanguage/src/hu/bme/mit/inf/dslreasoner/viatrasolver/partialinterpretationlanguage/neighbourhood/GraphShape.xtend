@@ -8,32 +8,42 @@ import java.util.Set
 import org.eclipse.xtend.lib.annotations.Data
 
 @Data class GraphShape<ModelRep, NodeRep> {
-	List<GraphNodeDescriptor> nodes
+	List<GraphNodeDescriptorGND> nodes
 	NeighbourhoodWithTraces<ModelRep, NodeRep> correspondingNH
-	Map<AbstractNodeDescriptor, GraphNodeDescriptor> abstract2graphNodes
-	
-	new(List<GraphNodeDescriptor> nodes, NeighbourhoodWithTraces<ModelRep, NodeRep> correspondingNH, Map<AbstractNodeDescriptor, GraphNodeDescriptor> abstract2graphNodes) {
+	Map<AbstractNodeDescriptor, GraphNodeDescriptorGND> abstract2graphNodes
+
+	new(List<GraphNodeDescriptorGND> nodes, NeighbourhoodWithTraces<ModelRep, NodeRep> correspondingNH,
+		Map<AbstractNodeDescriptor, GraphNodeDescriptorGND> abstract2graphNodes) {
 		this.nodes = nodes
 		this.correspondingNH = correspondingNH
 		this.abstract2graphNodes = abstract2graphNodes
 	}
 }
 
-//@Data class GraphNodeDescriptor<gndRep, andRep> {
-//	AbstractNodeDescriptor correspondingAND
-//	// String id
-//	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
-//	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
+@Data class GraphNodeDescriptor<gndRep, andRep> {
+	AbstractNodeDescriptor correspondingAND
+	// String id
+	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
+	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
+
+	new(AbstractNodeDescriptor correspondingNode) {
+		this.correspondingAND = correspondingNode
+		this.incomingEdges = new HashMap
+		this.outgoingEdges = new HashMap
+	}
+}
+
 //
-//	new(AbstractNodeDescriptor correspondingNode) {
-//		this.correspondingAND = correspondingNode
-//		this.incomingEdges = new HashMap
-//		this.outgoingEdges = new HashMap
+//@Data class IncomingRelationGeneralized {
+//	IncomingRelation inRel
+//	FurtherNodeDescriptor targetNode
+//	
+//	new(IncomingRelation inRel,	FurtherNodeDescriptor targetNode) {
+//		this.inRel = inRel
+//		this.targetNode = targetNode
 //	}
 //}
-
- 
- @Data class GraphNodeDescriptor<gndRep, andRep> {
+@Data class GraphNodeDescriptorGND {
 	AbstractNodeDescriptor correspondingAND
 	List<IncomingRelationGND> incomingEdges
 	List<OutgoingRelationGND> outgoingEdges
@@ -45,32 +55,32 @@ import org.eclipse.xtend.lib.annotations.Data
 	}
 }
 
-@Data abstract class IncomingRelationGND {
-	GraphNodeDescriptor from
+@Data class IncomingRelationGND {
+	GraphNodeDescriptorGND from
 	String type
 	List<Integer> sourceDistrib
-	List<Integer> targetDisrib
-	
-	new(GraphNodeDescriptor from, String type) {
+	List<Integer> targetDistrib
+
+	new(GraphNodeDescriptorGND from, String type) {
 		this.from = from
 		this.type = type
 		this.sourceDistrib = newArrayList
-		this.targetDisrib = newArrayList
-		
+		this.targetDistrib = newArrayList
+
 	}
 }
 
-@Data abstract class OutgoingRelationGND {
-	GraphNodeDescriptor to
+@Data class OutgoingRelationGND {
+	GraphNodeDescriptorGND to
 	String type
 	List<Integer> sourceDistrib
-	List<Integer> targetDisrib
-	
-	new(GraphNodeDescriptor from, String type) {
+	List<Integer> targetDistrib
+
+	new(GraphNodeDescriptorGND to, String type) {
 		this.to = to
 		this.type = type
 		this.sourceDistrib = newArrayList
-		this.targetDisrib = newArrayList
-		
+		this.targetDistrib = newArrayList
+
 	}
 }

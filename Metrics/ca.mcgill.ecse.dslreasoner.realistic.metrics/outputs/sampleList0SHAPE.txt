@@ -1,0 +1,78 @@
+----------------------
+NEW NODE
+   -node type  : [Element class]
+   -Incoming Relations:
+       -----------------
+       -IN RELATION:
+              -type    : elements reference List
+              -from    : [List class]
+              -srcDis  : [4]
+              -trgDis  : [1, 1, 1]
+       -----------------
+       -IN RELATION:
+              -type    : first reference List
+              -from    : [List class]
+              -srcDis  : [1]
+              -trgDis  : [1, 0, 0]
+       -----------------
+       -IN RELATION:
+              -type    : next reference Element
+              -from    : [Element class]
+              -srcDis  : [1, 1, 0]
+              -trgDis  : [1, 1, 0]
+
+    -Outgoing Relations:
+       -----------------
+       -OUT RELATION:
+              -type    : next reference Element
+              -to      : [Element class]
+              -srcDis  : [1, 1, 0]
+              -trgDis  : [1, 1, 0]
+       -----------------
+       -OUT RELATION:
+              -type    : value reference Element
+              -to      : [Object class]
+              -srcDis  : [1, 1, 1]
+              -trgDis  : [1]
+----------------------
+NEW NODE
+   -node type  : [Object class]
+   -Incoming Relations:
+       -----------------
+       -IN RELATION:
+              -type    : objects reference List
+              -from    : [List class]
+              -srcDis  : [4]
+              -trgDis  : [1]
+       -----------------
+       -IN RELATION:
+              -type    : value reference Element
+              -from    : [Element class]
+              -srcDis  : [1, 1, 1]
+              -trgDis  : [1]
+
+    -Outgoing Relations:
+----------------------
+NEW NODE
+   -node type  : [List class]
+   -Incoming Relations:
+
+    -Outgoing Relations:
+       -----------------
+       -OUT RELATION:
+              -type    : elements reference List
+              -to      : [Element class]
+              -srcDis  : [4]
+              -trgDis  : [1, 1, 1]
+       -----------------
+       -OUT RELATION:
+              -type    : first reference List
+              -to      : [Element class]
+              -srcDis  : [1]
+              -trgDis  : [1, 0, 0]
+       -----------------
+       -OUT RELATION:
+              -type    : objects reference List
+              -to      : [Object class]
+              -srcDis  : [4]
+              -trgDis  : [1]

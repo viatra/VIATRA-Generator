@@ -21,6 +21,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import simpleStatechart.SimpleStatechartPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 
 class CSERposterSample {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -29,7 +30,7 @@ class CSERposterSample {
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
-	static val depth = 1
+	static val depth = 0
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 
@@ -73,10 +74,55 @@ class CSERposterSample {
 
 		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
 		w2.close
-		
+
+		val w3 = new PrintWriter(outputs + "/" + instModName + depth + "SHAPE.txt")
+
 		val y = neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput)
 
-		println(y)
+		for (node : y.nodes) {
+			w3.println("----------------------")
+			w3.println("NEW NODE")
+			if (depth == 1) {
+				w3.println("   -node type  : " +
+					((node.correspondingAND as FurtherNodeDescriptor).previousRepresentation as LocalNodeDescriptor).
+						types)
+			} else {
+				w3.println("   -node type  : " + (node.correspondingAND as LocalNodeDescriptor).types)
+			}
+
+			w3.println("   -Incoming Relations:")
+			for (inRel : node.incomingEdges) {
+				w3.println("       -----------------")
+				w3.println("       -IN RELATION:")
+				w3.println("              -type    : " + inRel.type)
+				if (depth == 1) {
+					w3.println("              -from    : " +
+						((inRel.from.correspondingAND as FurtherNodeDescriptor).
+							previousRepresentation as LocalNodeDescriptor).types)
+				} else {
+					w3.println("              -from    : " + (inRel.from.correspondingAND as LocalNodeDescriptor).types)
+				}
+				w3.println("              -srcDis  : " + inRel.sourceDistrib)
+				w3.println("              -trgDis  : " + inRel.targetDistrib)
+			}
+			w3.println()
+			w3.println("    -Outgoing Relations:")
+			for (outRel : node.outgoingEdges) {
+				w3.println("       -----------------")
+				w3.println("       -OUT RELATION:")
+				w3.println("              -type    : " + outRel.type)
+				if (depth == 1) {
+					w3.println("              -to      : " +
+						((outRel.to.correspondingAND as FurtherNodeDescriptor).
+							previousRepresentation as LocalNodeDescriptor).types)
+				} else {
+					w3.println("              -to      : " + (outRel.to.correspondingAND as LocalNodeDescriptor).types)
+				}
+				w3.println("              -srcDis  : " + outRel.sourceDistrib)
+				w3.println("              -trgDis  : " + outRel.targetDistrib)
+			}
+		}
+		w3.close
 
 //		partialModelOutput.openWorldElements
 	// RESULTS

@@ -1,67 +1,51 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood
 
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.ArrayList
 import java.util.HashMap
-import java.util.HashSet
 import java.util.List
 import java.util.Map
-import java.util.Set
-import java.util.logging.Handler
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.util.concurrent.TimeUnit
 
 class Neighbourhood2ShapeGraph {
 
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
-	val protected nodeNameSize = 14
-	val protected nodeHeight = 40
-	val protected borderDistance = 6
-	val protected ratio = 11.0 / 20.0
 
-//	var protected depth = 0
-	def public createShapeGraph(NeighbourhoodWithTraces n, PartialInterpretation pm) {
+	def createShapeGraph(NeighbourhoodWithTraces n, PartialInterpretation pm) {
+		val modRep = n.modelRepresentation as HashMap
+		val depth = calculateDepth(modRep.keySet.get(0))
+		return createShapeGraph(n, pm, depth)
+	}
+
+	def createShapeGraph(NeighbourhoodWithTraces n, PartialInterpretation pm, Integer depth) {
 
 		// Maps for GraphShape Object
-		val List<GraphNodeDescriptor> graphNodes = new ArrayList
-//		val Map<, Integer> node2Amount = new HashMap
-		val Map<AbstractNodeDescriptor, GraphNodeDescriptor> AND2GND = new HashMap
-		val List<CharSequence> fullEdgeText = newArrayList
-		val List<CharSequence> allEdgesText = newArrayList
+		val List<GraphNodeDescriptorGND> graphNodes = new ArrayList
+		val Map<AbstractNodeDescriptor, GraphNodeDescriptorGND> AND2GND = new HashMap
 		val Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> AND2children = new HashMap
 
-		// TODO these should not be hashmaps, as a given node can have multiple sameNamed edges to different 
-		val Map<IncomingRelation, Object> edgeNameIn2targetNode = new HashMap
-		val Map<OutgoingRelation, Object> edgeNameOut2targetNode = new HashMap
-		val Map<IncomingRelation, List<Integer>> edgeName2inMultips = new HashMap
-		val Map<OutgoingRelation, List<Integer>> edgeName2outMultips = new HashMap
-
 		val modRep = n.modelRepresentation as HashMap
-//		println("CP1")
+
 		// BEGIN TRANSFORMATION	
-		// get nodes
+		// SRTEP 1: get nodes and create GNDs
 		for (nodeKey : modRep.keySet) {
 			val correspondingLND = toCorrespondingLND(nodeKey)
 			if (correspondingLND != null) {
 				val nodeDesc = nodeKey as AbstractNodeDescriptor
-				val graphNodeRep = new GraphNodeDescriptor(nodeDesc)
-				AND2GND.put(nodeDesc , graphNodeRep)
+				val graphNodeRep = new GraphNodeDescriptorGND(nodeDesc)
+				AND2GND.put(nodeDesc, graphNodeRep)
 				graphNodes.add(graphNodeRep)
 			}
 
 		}
-//		println("CP2")
 
-		// calculate deeper neighbourhood
-		val depth = calculateDepth(modRep.keySet.get(0))
+		// STEP 2: calculate deeper neighbourhood
 		val deeperNeighbourhood = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE,
 			Integer.MAX_VALUE)
 		val deepModRep = deeperNeighbourhood.modelRepresentation as HashMap
 
-//		println("CP3")
-		// Associate each deepNode to their parent
+		// STEP3: Associate each deepNode to their parent
 		for (deepNodeKey : deepModRep.keySet) {
 			val deepNodeDesc = deepNodeKey as FurtherNodeDescriptor
 			val parentDesc = deepNodeDesc.previousRepresentation as AbstractNodeDescriptor
@@ -73,186 +57,135 @@ class Neighbourhood2ShapeGraph {
 				}
 			}
 		}
-		
-//		println("CP4")
-		// get edges for each Shape Graph Node
+
+		// STEP 4: get edges for each Shape Graph Node
 		for (currentNode : AND2children.keySet) {
-//			val List<RelationGND> relations = 
-			transformEdge(edgeNameIn2targetNode, edgeNameOut2targetNode, edgeName2inMultips, edgeName2outMultips,
-				currentNode, AND2GND, AND2children)
-//			currentNode.lookup(AND2GND).edges.addAll(relations)
+			transformEdge(currentNode, AND2GND, AND2children)
 		}
-		
-//		println("CP5")
-		val gs = new GraphShape(graphNodes, n, AND2GND)
-		
-//		println("CP6")
-		// create GraphShape Object
-		return gs
+
+		// STEP 5: find corresponding in- and out- edges, and fill distributions accordingly
+		for (node : graphNodes) {
+			for (outEdge : node.outgoingEdges) {
+				val toNode = outEdge.to
+				for (inEdge : toNode.incomingEdges) {
+					if (inEdge.from == node && inEdge.type == outEdge.type) {
+						// outEdge and inEdge correspond to eachother
+						// There should only be one
+						outEdge.targetDistrib.addAll(inEdge.targetDistrib)
+						inEdge.sourceDistrib.addAll(outEdge.sourceDistrib)
+					}
+				}
+			}
+		}
+
+		// STEP 6: return graphShape object
+		return new GraphShape(graphNodes, n, AND2GND)
 
 	}
 
-	protected def transformEdge(Map<IncomingRelation, Object> edgeNameIn2targetNode,
-		Map<OutgoingRelation, Object> edgeNameOut2targetNode, Map<IncomingRelation, List<Integer>> edgeName2inMultips,
-		Map<OutgoingRelation, List<Integer>> edgeName2outMultips,
-		AbstractNodeDescriptor currentNode, Map<AbstractNodeDescriptor, GraphNodeDescriptor> AND2GND,
+	protected def transformEdge(AbstractNodeDescriptor currentNode,
+		Map<AbstractNodeDescriptor, GraphNodeDescriptorGND> AND2GND,
 		Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> children) {
-		
-//		println("CP4.0")
 
-		println("-------------")
-		println(currentNode)
+		val List<IncomingRelationGND> inRelations = newArrayList
+		val List<OutgoingRelationGND> outRelations = newArrayList
 
-		edgeNameIn2targetNode.clear
-		edgeNameOut2targetNode.clear
-		edgeName2inMultips.clear
-		edgeName2outMultips.clear
-		val List<Object> modifiedEdgeNames = newArrayList
-		
-//		val List<IncomingRelationGND> inRelations = newArrayList
-//		val List<OutgoingRelationGND> outRelations = newArrayList
-
+		// Get children of current shallow node 
 		val List<FurtherNodeDescriptor> subNodes = currentNode.lookup(children)
 		for (subNode : subNodes) {
+			
 			// handling outgoing edges
 			for (outEdge : subNode.outgoingEdges.keySet) {
-				val edgeName = (outEdge as OutgoingRelation)
-				val edgePointingTo = (outEdge as OutgoingRelation).to
+				val edgeRelation = (outEdge as OutgoingRelation)
+				val edgeName = edgeRelation.type
+				val edgePointingTo = (outEdge as OutgoingRelation).to as AbstractNodeDescriptor
+				val edgePointingToGND = edgePointingTo.lookup(AND2GND)
 				val edgeOutMultip = outEdge.lookup(subNode.outgoingEdges) as Integer
 
-				// add multiplicity and target
-				if (edgeName2outMultips.containsKey(edgeName)) {
-					edgeName.lookup(edgeName2outMultips).add(edgeOutMultip)
+				var OutgoingRelationGND outRelation = null
+				var needNew = true
+				for (rel : outRelations) {
+					if (rel.type == edgeName && rel.to == edgePointingToGND) {
+						needNew = false
+						outRelation = rel
+					}
+				}
+				if (needNew) {
+					outRelation = new OutgoingRelationGND(edgePointingToGND, edgeName)
+					outRelation.sourceDistrib.add(edgeOutMultip)
+					outRelations.add(outRelation)
 				} else {
-					edgeName2outMultips.put(edgeName, newArrayList(edgeOutMultip))
+					outRelation.sourceDistrib.add(edgeOutMultip)
 				}
-				edgeNameOut2targetNode.put(edgeName, edgePointingTo)
-				
-//				//NEW METHOD
-//				var needNew = true
-//				for(rel : outRelations) {
-//					if(rel.type = 
-//				}
-//				
-//				if( outRelations
-
 			}
 
-		}
-//		println("CP4.1")
-		var visitedNodes = newArrayList
-		// handling incoming edges
-		for (outEdgeTarget : edgeNameOut2targetNode.values) {
+			// handling incoming edges
+			for (inEdge : subNode.incomingEdges.keySet) {
+				val edgeRelation = (inEdge as IncomingRelation)
+				val edgeName = edgeRelation.type
+				val edgePointingFrom = (inEdge as IncomingRelation).from as AbstractNodeDescriptor
+				val edgePointingFromGND = edgePointingFrom.lookup(AND2GND)
+				val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
 
-			if (!visitedNodes.contains(outEdgeTarget)) {
-				visitedNodes.add(outEdgeTarget)
-				// currentNode = sourceParent
-				for (subNode : (outEdgeTarget as AbstractNodeDescriptor).lookup(children)) {
-					for (inEdge : subNode.incomingEdges.keySet) {
-						val edgeName = (inEdge as IncomingRelation)
-						val edgePointingFrom = (inEdge as IncomingRelation).from
-						val edgeInMultip = inEdge.lookup(subNode.incomingEdges) as Integer
-						//TODO PROBLEMMMMMMMMMMM
-						if (edgePointingFrom.equals(currentNode)) {
-							if (edgeName2inMultips.containsKey(edgeName)) {
-								edgeName.lookup(edgeName2inMultips).add(edgeInMultip)
-							} else {
-								edgeName2inMultips.put(edgeName, newArrayList(edgeInMultip))
-								modifiedEdgeNames.add(edgeName)
-							}
-							edgeNameIn2targetNode.put(edgeName, edgePointingFrom)
-						}
+				var IncomingRelationGND inRelation = null
+				var needNew = true
+				for (rel : inRelations) {
+					if (rel.type == edgeName && rel.from == edgePointingFromGND) {
+						needNew = false
+						inRelation = rel
 					}
 				}
-				println("xxxxxxxxxxxxxxxxxx")
-				println(outEdgeTarget)
-				println(edgeName2inMultips)
-
-				// fill in the 0 multiplicities (INCOMING)
-				for (edgeSoFar : modifiedEdgeNames) {
-					val edgeAsRelation = edgeSoFar as IncomingRelation
-					var inEdgesNum = edgeAsRelation.lookup(edgeName2inMultips).size
-					val targetNode = outEdgeTarget as AbstractNodeDescriptor
-					val targetChildrenNum = targetNode.lookup(children).size
-					while (inEdgesNum != targetChildrenNum) {
-						edgeAsRelation.lookup(edgeName2inMultips).add(0)
-						inEdgesNum++
-					}
+				if (needNew) {
+					inRelation = new IncomingRelationGND(edgePointingFromGND, edgeName)
+					inRelation.targetDistrib.add(edgeInMultip)
+					inRelations.add(inRelation)
+				} else {
+					inRelation.targetDistrib.add(edgeInMultip)
 				}
-				modifiedEdgeNames.clear
 			}
 		}
-		
-//		println("CP4.2")
-
 		// fill in the 0 multiplicities (OUTGOING)
-		for (edge : edgeName2outMultips.keySet) {
-			// handling outgoing edges
-			var outEdgesNum = edge.lookup(edgeName2outMultips).size
+		for (outRelation : outRelations) {
+			var outEdgesNum = outRelation.sourceDistrib.size
 			val sourceChildrenNum = currentNode.lookup(children).size
-
 			while (outEdgesNum != sourceChildrenNum) {
-				edge.lookup(edgeName2outMultips).add(0)
+				outRelation.sourceDistrib.add(0)
 				outEdgesNum++
 			}
 		}
-//		println("CP4.3")
 
-		// Associate relations with corresponding trg and src nodes
-		for (outEdge : edgeNameOut2targetNode.keySet) {
-			
-			val sourceNode = currentNode
-
-			val sourceGND = sourceNode.lookup(AND2GND)
-			val sourceDistrib = outEdge.lookup(edgeName2outMultips)
-			val targetNode = outEdge.lookup(edgeNameOut2targetNode) as AbstractNodeDescriptor
-			val targetGND = targetNode.lookup(AND2GND)
-			val edgeName = outEdge.type
-			// finding corresponding Incoming edge
-			var correspInEdgeSet = edgeNameIn2targetNode.keySet.filter [
-				type.equals(edgeName) && lookup(edgeNameIn2targetNode).equals(sourceNode)
-			]
-			val correspInEdge = correspInEdgeSet.get(0)
-			val targetDistrib = correspInEdge.lookup(edgeName2inMultips)
-			val newInRel = new IncomingRelation(sourceGND, edgeName)
-			val newOutRel = new OutgoingRelation(targetGND, edgeName)
-//			print(0)
-			// filling  out graph represetation
-			
-			//TODO, replace edgeName with the actual Relation
-			sourceGND.outgoingEdges.put(edgeName, sourceDistrib)
-//			print(0)
-			targetGND.incomingEdges.put(edgeName, targetDistrib)
-//			print(0)
-			
-
+		// fill in the 0 multiplicities (INCOMING)
+		for (inRelation : inRelations) {
+			var inEdgesNum = inRelation.targetDistrib.size
+			val targetChildrenNum = currentNode.lookup(children).size
+			while (inEdgesNum != targetChildrenNum) {
+				inRelation.targetDistrib.add(0)
+				inEdgesNum++
+			}
 		}
-		
-//		println("CP4.4")
 
+		// Complete modifications required for creation of graphShape Object cration
+		val currentGND = currentNode.lookup(AND2GND)
+		currentGND.outgoingEdges.addAll(outRelations)
+		currentGND.incomingEdges.addAll(inRelations)
 	}
 
 	def calculateDepth(Object node) {
 		var keyDescriptor = node
 		var depth = 0
-
 		while (!keyDescriptor.class.equals(LocalNodeDescriptor)) {
 			keyDescriptor = (keyDescriptor as FurtherNodeDescriptor).previousRepresentation
 			depth++
 		}
-
 		return depth
-
 	}
 
 	def protected toCorrespondingLND(Object nodeKey) {
-
 		var topKeyDescriptor = nodeKey
-
 		while (!topKeyDescriptor.class.equals(LocalNodeDescriptor)) {
 			topKeyDescriptor = (topKeyDescriptor as FurtherNodeDescriptor).previousRepresentation
 		}
-
+		// Only keep relevant nodes
 		if ((topKeyDescriptor as LocalNodeDescriptor).types.empty) {
 			return null
 		} else {

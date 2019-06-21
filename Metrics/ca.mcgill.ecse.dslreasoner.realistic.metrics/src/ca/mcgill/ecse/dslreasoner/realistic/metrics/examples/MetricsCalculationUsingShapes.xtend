@@ -7,6 +7,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
@@ -29,14 +30,11 @@ import linkedList.LinkedListPackage
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
 
 class MetricsCalculationUsingShapes {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -58,9 +56,8 @@ class MetricsCalculationUsingShapes {
 
 		val fileDir = "Human//"
 		val outputFileName = "stats.csv"
-//		val inputs = "inputs//" + fileDir
-		val inputs = "resources//" //TESTING
-
+		val inputs = "inputs//" + fileDir
+//		val inputs = "resources//" // TESTING
 		val workspace = new FileSystemWorkspace(inputs, "")
 
 		var naForAllModelsWOnh = newArrayList
@@ -71,8 +68,8 @@ class MetricsCalculationUsingShapes {
 
 		println("Average NAs per model")
 
-//		for (fileName : workspace.allFiles.subList(0, 100)) {
-		for (fileName : newArrayList("sampleList.xmi")) { //TESTING
+		for (fileName : workspace.allFiles.subList(0, 100)) {
+//		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
 
@@ -86,8 +83,7 @@ class MetricsCalculationUsingShapes {
 			naForAllModelsWnh.add(df.format(modelNA))
 
 			// Calculate NA with nh using SHAPE
-			modelNA = ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.MetricsCalculationUsingShapes.
-				measureNAwithNHShape(partialModel, 1)
+			modelNA = MetricsCalculationUsingShapes.measureNAwithNHShape(partialModel, 1)
 			naForAllModelsWnhSHAPE.add(df.format(modelNA))
 
 		// TEMP
@@ -236,39 +232,32 @@ class MetricsCalculationUsingShapes {
 		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhRep = nh.modelRepresentation as HashMap
 		val nhShapeGraph = neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel)
-		for(x : nhShapeGraph.nodes) {
-			println(((x.correspondingAND as FurtherNodeDescriptor ).previousRepresentation as LocalNodeDescriptor).types)
-		}
-		println(nhShapeGraph)
 
 		// Useful variable initializations
 		var totalMetricValue = 0.0
 		var numNodesTotal = 0
-		var Map<GraphNodeDescriptor, Set<Object>> node2ActiveDims = new HashMap
+		var Set<Object> activeDims = new HashSet
 
 		// look at the in and out edges of each shape node
 		for (node : nhShapeGraph.nodes) {
-			node2ActiveDims.put(node, new HashSet)
-
-			// Add actie dimsensions to HashMap
-			for (inEdge : node.incomingEdges.keySet) {
-				node.lookup(node2ActiveDims).add(inEdge)
+			for (inEdge : node.incomingEdges) {
+				activeDims.add(inEdge.type)
 			}
-			for (outEdge : node.outgoingEdges.keySet) {
-				node.lookup(node2ActiveDims).add(outEdge)
+			for (outEdge : node.outgoingEdges) {
+				activeDims.add(outEdge.type)
 			}
 
 			// Measure preliminary results for NA
-			val numOccurrences = node.getCorrespondingAND.lookup(nhRep) as Integer
-			val numActDims = node.lookup(node2ActiveDims).length
+			val numOccurrences = node.correspondingAND.lookup(nhRep) as Integer
+			val numActDims = activeDims.length
 			val totalActDims = numActDims * numOccurrences
 
 			numNodesTotal += numOccurrences
 			totalMetricValue += totalActDims
-
+			activeDims.clear
 		}
 
-		val averageMetricValue = totalMetricValue / numNodesTotal
+		val averageMetricValue =  totalMetricValue / numNodesTotal
 		return averageMetricValue
 
 	}

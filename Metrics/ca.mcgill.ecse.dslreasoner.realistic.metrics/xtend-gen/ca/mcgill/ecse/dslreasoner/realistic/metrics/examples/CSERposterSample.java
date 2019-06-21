@@ -10,10 +10,15 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelationGND;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
@@ -38,7 +43,6 @@ import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import simpleStatechart.SimpleStatechartPackage;
 
@@ -56,7 +60,7 @@ public class CSERposterSample {
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
-  private final static int depth = 1;
+  private final static int depth = 0;
   
   private final static String REALISTIC = "simpleSCRealistic";
   
@@ -107,8 +111,87 @@ public class CSERposterSample {
       final PrintWriter w2 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "NEIGHBOURHOOD.gml"));
       w2.print(CSERposterSample.neighbourhoodVisualizer.transform(hood, partialModelOutput));
       w2.close();
+      final PrintWriter w3 = new PrintWriter(((((outputs + "/") + instModName) + Integer.valueOf(CSERposterSample.depth)) + "SHAPE.txt"));
       final GraphShape<Object, Object> y = CSERposterSample.neighbouhood2ShapeGraph.createShapeGraph(hood, partialModelOutput);
-      InputOutput.<GraphShape<Object, Object>>println(y);
+      List<GraphNodeDescriptorGND> _nodes = y.getNodes();
+      for (final GraphNodeDescriptorGND node : _nodes) {
+        {
+          w3.println("----------------------");
+          w3.println("NEW NODE");
+          if ((CSERposterSample.depth == 1)) {
+            AbstractNodeDescriptor _correspondingAND = node.getCorrespondingAND();
+            Object _previousRepresentation = ((FurtherNodeDescriptor) _correspondingAND).getPreviousRepresentation();
+            Set<String> _types = ((LocalNodeDescriptor) _previousRepresentation).getTypes();
+            String _plus = ("   -node type  : " + _types);
+            w3.println(_plus);
+          } else {
+            AbstractNodeDescriptor _correspondingAND_1 = node.getCorrespondingAND();
+            Set<String> _types_1 = ((LocalNodeDescriptor) _correspondingAND_1).getTypes();
+            String _plus_1 = ("   -node type  : " + _types_1);
+            w3.println(_plus_1);
+          }
+          w3.println("   -Incoming Relations:");
+          List<IncomingRelationGND> _incomingEdges = node.getIncomingEdges();
+          for (final IncomingRelationGND inRel : _incomingEdges) {
+            {
+              w3.println("       -----------------");
+              w3.println("       -IN RELATION:");
+              String _type = inRel.getType();
+              String _plus_2 = ("              -type    : " + _type);
+              w3.println(_plus_2);
+              if ((CSERposterSample.depth == 1)) {
+                AbstractNodeDescriptor _correspondingAND_2 = inRel.getFrom().getCorrespondingAND();
+                Object _previousRepresentation_1 = ((FurtherNodeDescriptor) _correspondingAND_2).getPreviousRepresentation();
+                Set<String> _types_2 = ((LocalNodeDescriptor) _previousRepresentation_1).getTypes();
+                String _plus_3 = ("              -from    : " + _types_2);
+                w3.println(_plus_3);
+              } else {
+                AbstractNodeDescriptor _correspondingAND_3 = inRel.getFrom().getCorrespondingAND();
+                Set<String> _types_3 = ((LocalNodeDescriptor) _correspondingAND_3).getTypes();
+                String _plus_4 = ("              -from    : " + _types_3);
+                w3.println(_plus_4);
+              }
+              List<Integer> _sourceDistrib = inRel.getSourceDistrib();
+              String _plus_5 = ("              -srcDis  : " + _sourceDistrib);
+              w3.println(_plus_5);
+              List<Integer> _targetDistrib = inRel.getTargetDistrib();
+              String _plus_6 = ("              -trgDis  : " + _targetDistrib);
+              w3.println(_plus_6);
+            }
+          }
+          w3.println();
+          w3.println("    -Outgoing Relations:");
+          List<OutgoingRelationGND> _outgoingEdges = node.getOutgoingEdges();
+          for (final OutgoingRelationGND outRel : _outgoingEdges) {
+            {
+              w3.println("       -----------------");
+              w3.println("       -OUT RELATION:");
+              String _type = outRel.getType();
+              String _plus_2 = ("              -type    : " + _type);
+              w3.println(_plus_2);
+              if ((CSERposterSample.depth == 1)) {
+                AbstractNodeDescriptor _correspondingAND_2 = outRel.getTo().getCorrespondingAND();
+                Object _previousRepresentation_1 = ((FurtherNodeDescriptor) _correspondingAND_2).getPreviousRepresentation();
+                Set<String> _types_2 = ((LocalNodeDescriptor) _previousRepresentation_1).getTypes();
+                String _plus_3 = ("              -to      : " + _types_2);
+                w3.println(_plus_3);
+              } else {
+                AbstractNodeDescriptor _correspondingAND_3 = outRel.getTo().getCorrespondingAND();
+                Set<String> _types_3 = ((LocalNodeDescriptor) _correspondingAND_3).getTypes();
+                String _plus_4 = ("              -to      : " + _types_3);
+                w3.println(_plus_4);
+              }
+              List<Integer> _sourceDistrib = outRel.getSourceDistrib();
+              String _plus_5 = ("              -srcDis  : " + _sourceDistrib);
+              w3.println(_plus_5);
+              List<Integer> _targetDistrib = outRel.getTargetDistrib();
+              String _plus_6 = ("              -trgDis  : " + _targetDistrib);
+              w3.println(_plus_6);
+            }
+          }
+        }
+      }
+      w3.close();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
