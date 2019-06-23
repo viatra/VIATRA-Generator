@@ -22,6 +22,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2GmlOLD
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 
 class CSERposterSample {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
@@ -30,7 +31,7 @@ class CSERposterSample {
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2GmlOLD
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
-	static val depth = 1
+	static val depth = 2
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 
@@ -82,26 +83,16 @@ class CSERposterSample {
 		for (node : y.nodes) {
 			w3.println("----------------------")
 			w3.println("NEW NODE")
-			if (depth == 1) {
-				w3.println("   -node type  : " +
-					((node.correspondingAND as FurtherNodeDescriptor).previousRepresentation as LocalNodeDescriptor).
-						types)
-			} else {
-				w3.println("   -node type  : " + (node.correspondingAND as LocalNodeDescriptor).types)
-			}
-
+			var locNode = Util.toLocalNode(node.correspondingAND)
+			w3.println("   -node type  : " + locNode)
+			
 			w3.println("   -Incoming Relations:")
 			for (inRel : node.incomingEdges) {
 				w3.println("       -----------------")
 				w3.println("       -IN RELATION:")
 				w3.println("              -type    : " + inRel.type)
-				if (depth == 1) {
-					w3.println("              -from    : " +
-						((inRel.from.correspondingAND as FurtherNodeDescriptor).
-							previousRepresentation as LocalNodeDescriptor).types)
-				} else {
-					w3.println("              -from    : " + (inRel.from.correspondingAND as LocalNodeDescriptor).types)
-				}
+				locNode = Util.toLocalNode(inRel.from.correspondingAND)
+				w3.println("              -from    : " + locNode)
 				w3.println("              -srcDis  : " + inRel.sourceDistrib)
 				w3.println("              -trgDis  : " + inRel.targetDistrib)
 			}
@@ -111,13 +102,8 @@ class CSERposterSample {
 				w3.println("       -----------------")
 				w3.println("       -OUT RELATION:")
 				w3.println("              -type    : " + outRel.type)
-				if (depth == 1) {
-					w3.println("              -to      : " +
-						((outRel.to.correspondingAND as FurtherNodeDescriptor).
-							previousRepresentation as LocalNodeDescriptor).types)
-				} else {
-					w3.println("              -to      : " + (outRel.to.correspondingAND as LocalNodeDescriptor).types)
-				}
+				locNode = Util.toLocalNode(outRel.to.correspondingAND)
+				w3.println("              -to    : " + locNode)
 				w3.println("              -srcDis  : " + outRel.sourceDistrib)
 				w3.println("              -trgDis  : " + outRel.targetDistrib)
 			}
@@ -128,4 +114,5 @@ class CSERposterSample {
 	// RESULTS
 //		print(hood)
 	}
+	
 }

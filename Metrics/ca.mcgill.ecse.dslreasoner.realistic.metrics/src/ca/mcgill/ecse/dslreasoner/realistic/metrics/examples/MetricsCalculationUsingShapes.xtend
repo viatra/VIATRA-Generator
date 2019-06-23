@@ -1,10 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
-import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
@@ -17,15 +13,12 @@ import java.io.PrintWriter
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.util.Collection
-import java.util.Collections
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
 import linkedList.LinkedListPackage
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
@@ -34,13 +27,14 @@ import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class MetricsCalculationUsingShapes {
-	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
+
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
-	static val Ecore2Logic ecore2Logic = new Ecore2Logic
+
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	private static DecimalFormat df = new DecimalFormat("0.000");
 	private static final Integer NUMMEASUREMENTS = 9
 	private static final Integer NUMNA = 2
+	private static final Integer NUMNAMPC = 4
 
 	def static void main(String[] args) {
 		df.roundingMode = RoundingMode.UP
@@ -53,24 +47,30 @@ class MetricsCalculationUsingShapes {
 
 		val fileDir = "Human//"
 		val outputFileName = "stats.csv"
-//		val inputs = "inputs//" + fileDir
-		val inputs = "resources//" // TESTING
+		val inputs = "inputs//" + fileDir
+//		val inputs = "resources//" // TESTING
 		val workspace = new FileSystemWorkspace(inputs, "")
 
+		// Where we stor metric values
 		var List<List<String>> metricValues = newArrayList
-
 		for (var i = 0; i < NUMMEASUREMENTS; i++) {
 			metricValues.add(newArrayList)
 		}
-		var metricVal = 0.0
+		
+		// Where we store deltas
+		var List<List<String>> deltas = newArrayList
+		for (var i = 0; i < NUMMEASUREMENTS; i++) {
+			deltas.add(newArrayList)
+		}
 
-		var index = 0
-//		for (fileName : workspace.allFiles.subList(0, 100)) {
-		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
-			println(index++)
+		var metricVal = 0.0
+		var progressTracker = 0
+		for (fileName : workspace.allFiles.subList(100, 120)) {
+//		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
+			print(progressTracker++ + "-")
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
-			val partialModel = getPartialModel(workspace, model)
+			val partialModel = Util.getPartialModel(workspace, model)
 
 			// /////////////
 			// NODE ACTIVITY
@@ -80,7 +80,7 @@ class MetricsCalculationUsingShapes {
 			metricValues.get(0).add(df.format(metricVal))
 
 			// Calculate NA from neighbourhood shape
-			metricVal = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel)
+			metricVal = getNAfromNHShape(partialModel)
 			metricValues.get(1).add(df.format(metricVal))
 
 			// /////////////
@@ -90,16 +90,27 @@ class MetricsCalculationUsingShapes {
 			metricVal = getMPCfromModel(model)
 			metricValues.get(2).add(df.format(metricVal))
 
-			for (var i = 0; i < NUMMEASUREMENTS - 3; i++) {
-				// Calculate MPC from neighbourhood shape
-				metricVal = getMPCfromNHShape(partialModel, i)
-				metricValues.get(i + 3).add(df.format(metricVal))
-			}
+			// Calculate MPC from neighbourhood shape
+			metricVal = getMPCfromNHShape(partialModel)
+			metricValues.get(3).add(df.format(metricVal))
 
+		// /////////////
+		// new metric
+		// /////////////
+		// Calculate MPC from partial model
+//			for (var i = 0; i < NUMMEASUREMENTS - 3; i++) {
+//				// Calculate MPC from neighbourhood shape
+//				metricVal = getMPCfromNHShape(partialModel, i)
+//				metricValues.get(i + 3).add(df.format(metricVal))
+//				val deltaVal = metricVal - Double.valueOf(metricValues.get(2).get(metricValues.get(2).length - 1))
+////				deltas.add(i+3, deltas.get(i+3) + Math.abs(deltaVal)) 
+//				deltas.get(i + 3).add(df.format(Math.abs(deltaVal)))
+//
+//			}
 		}
 
 		// Write to .csv
-		val headers = newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape0,", "MPC,Shape1,", "MPC,Shape2,",
+		val headers = newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape,", "MPC,Shape1,", "MPC,Shape2,",
 			"MPC,Shape3,", "MPC,Shape4,", "MPC,Shape5,")
 		var writer = new PrintWriter(outputFolder + "statsNA.csv")
 		for (var i = 0; i < NUMNA; i++) {
@@ -108,25 +119,40 @@ class MetricsCalculationUsingShapes {
 			writer.append("\n");
 		}
 		writer.close
-		
+
 		writer = new PrintWriter(outputFolder + "statsMPC.csv")
-		for (var i = NUMNA; i < NUMMEASUREMENTS; i++) {
+		for (var i = NUMNA; i < NUMNAMPC; i++) {
 			writer.append(headers.get(i))
 			writer.append(String.join(",", metricValues.get(i)))
 			writer.append("\n");
 		}
 		writer.close
 
+//		writer = new PrintWriter(outputFolder + "statsMPC.csv")
+//		for (var i = NUMNAMPC; i < NUMMEASUREMENTS; i++) {
+//			writer.append(headers.get(i))
+//			writer.append(String.join(",", metricValues.get(i)))
+//			writer.append("\n");
+//		}
+//		writer.close
 		// print Results
+		println()
 		println("Node Activity:")
 		println("from Partial Model: " + metricValues.get(0))
 		println("from NH Shape     : " + metricValues.get(1))
+
 		println("MPC:")
 		println("from Partial Model: " + metricValues.get(2))
-		for (var i = 0; i < NUMMEASUREMENTS - 3; i++) {
-			println("from NH Shape " + i + "   : " + metricValues.get(i + 3))
-		}
+		println("from NH Shape     : " + metricValues.get(3))
 
+//		println("new metric:")
+//		println("from Partial Model: " + metricValues.get(4))
+//		println("-----------------")
+//		for (var i = 0; i < NUMMEASUREMENTS - NUMNAMPC-1; i++) {
+//			println("from NH Shape " + i + "   : " + metricValues.get(i + NUMNAMPC+1))
+//			println("  avg delta=" + df.format(findSum2(deltas.get(i + NUMNAMPC+1)) / deltas.get(i+3).size) + "   " + deltas.get(i + NUMNAMPC+1))
+//			println("-----------------")
+//		}
 	}
 
 	def static getNAfromModel(EObject model) {
@@ -317,7 +343,7 @@ class MetricsCalculationUsingShapes {
 		val totalNumDims = allDimensions.length
 		var totalMPC = 0.0
 		for (degrees : node2Degrees.values) {
-			var totalDegree = findSum(degrees.values)
+			var totalDegree = Util.sum(degrees.values)
 			var partialMPC = 1.0
 			for (degree : degrees.values) {
 				partialMPC -= Math.pow(degree.floatValue / totalDegree, 2)
@@ -330,7 +356,7 @@ class MetricsCalculationUsingShapes {
 	}
 
 	def static getMPCfromNHShape(PartialInterpretation pm) {
-		getMPCfromNHShape(pm, 2)
+		getMPCfromNHShape(pm, 1)
 	}
 
 	def static getMPCfromNHShape(PartialInterpretation partialModel, Integer depth) {
@@ -341,32 +367,40 @@ class MetricsCalculationUsingShapes {
 
 		// Useful variable initializations
 		var totalMPC = 0.0
-		var totalDegree = 0
+		var totalDegree = 0.0
 		var partialMPC = 0.0
 		var numNodes = 0
+		var numToAdd = 0
 		var Set<String> allDimensions = new HashSet
 		var Map<String, Integer> type2Num = new HashMap
 
 		// look at the in and out edges of each shape node
 		for (node : nhShapeGraph.nodes) {
-			totalDegree = node.incomingEdges.size + node.outgoingEdges.size
-
+			totalDegree = 0.0
+			// relation type distribution can be measured by only considering the current nodes "view" 
+			// of its relations
 			for (inEdge : node.incomingEdges) {
 				val edgeName = inEdge.type
 				allDimensions.add(edgeName)
+				numToAdd = Util.sum(inEdge.targetDistrib)
+
+				totalDegree += numToAdd
 				if (type2Num.keySet.contains(edgeName)) {
-					type2Num.put(edgeName, edgeName.lookup(type2Num) + 1)
+					type2Num.put(edgeName, edgeName.lookup(type2Num) + numToAdd)
 				} else {
-					type2Num.put(edgeName, 1)
+					type2Num.put(edgeName, numToAdd)
 				}
 			}
 			for (outEdge : node.outgoingEdges) {
 				val edgeName = outEdge.type
 				allDimensions.add(edgeName)
+				numToAdd = Util.sum(outEdge.sourceDistrib)
+
+				totalDegree += numToAdd
 				if (type2Num.keySet.contains(edgeName)) {
-					type2Num.put(edgeName, edgeName.lookup(type2Num) + 1)
+					type2Num.put(edgeName, edgeName.lookup(type2Num) + numToAdd)
 				} else {
-					type2Num.put(edgeName, 1)
+					type2Num.put(edgeName, numToAdd)
 				}
 			}
 
@@ -387,30 +421,6 @@ class MetricsCalculationUsingShapes {
 
 		val averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
 		return averageMPC
-	}
-
-	def static getPartialModel(FileSystemWorkspace workspace, EObject model) {
-		val pckg = model.eClass.EPackage
-		val metamodel = new EcoreMetamodelDescriptor(
-			pckg.EClassifiers.filter(EClass).toList,
-			Collections::emptySet,
-			false,
-			pckg.EClassifiers.filter(EEnum).toList,
-			pckg.EClassifiers.filter(EEnum).map[ELiterals].flatten.toList,
-			pckg.EClassifiers.filter(EClass).map[EReferences].flatten.toList,
-			pckg.EClassifiers.filter(EClass).map[EAttributes].flatten.toList
-		)
-		val metamodelTransformationOutput = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration)
-
-		return partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource, false)
-	}
-
-	def static findSum(Collection<Integer> integers) {
-		var sum = 0
-		for (integer : integers) {
-			sum += integer
-		}
-		return sum
 	}
 
 	def static putInside(EObject object, String string, int i, Map<EObject, Map<String, Integer>> map) {

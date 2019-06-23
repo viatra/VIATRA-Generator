@@ -1,15 +1,8 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples;
 
-import com.google.common.collect.Iterables;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
@@ -28,7 +21,6 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,12 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import linkedList.LinkedListPackage;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -49,18 +36,12 @@ import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class MetricsCalculationUsingShapes {
-  private final static InstanceModel2PartialInterpretation partialInterpretation2Logic = new InstanceModel2PartialInterpretation();
-  
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
-  
-  private final static Ecore2Logic ecore2Logic = new Ecore2Logic();
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
@@ -69,6 +50,8 @@ public class MetricsCalculationUsingShapes {
   private final static Integer NUMMEASUREMENTS = Integer.valueOf(9);
   
   private final static Integer NUMNA = Integer.valueOf(2);
+  
+  private final static Integer NUMNAMPC = Integer.valueOf(4);
   
   public static void main(final String[] args) {
     try {
@@ -82,37 +65,38 @@ public class MetricsCalculationUsingShapes {
       ReteEngine.class.getClass();
       final String fileDir = "Human//";
       final String outputFileName = "stats.csv";
-      final String inputs = "resources//";
+      final String inputs = ("inputs//" + fileDir);
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
       List<List<String>> metricValues = CollectionLiterals.<List<String>>newArrayList();
       for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue()); i++) {
         metricValues.add(CollectionLiterals.<String>newArrayList());
       }
+      List<List<String>> deltas = CollectionLiterals.<List<String>>newArrayList();
+      for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue()); i++) {
+        deltas.add(CollectionLiterals.<String>newArrayList());
+      }
       double metricVal = 0.0;
-      int index = 0;
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("sampleList.xmi");
-      for (final String fileName : _newArrayList) {
+      int progressTracker = 0;
+      List<String> _subList = workspace.allFiles().subList(100, 120);
+      for (final String fileName : _subList) {
         {
-          int _plusPlus = index++;
-          InputOutput.<Integer>println(Integer.valueOf(_plusPlus));
+          int _plusPlus = progressTracker++;
+          String _plus = (Integer.valueOf(_plusPlus) + "-");
+          InputOutput.<String>print(_plus);
           final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
           final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
-          final PartialInterpretation partialModel = MetricsCalculationUsingShapes.getPartialModel(workspace, model);
+          final PartialInterpretation partialModel = Util.getPartialModel(workspace, model);
           metricVal = MetricsCalculationUsingShapes.getNAfromModel(model);
           metricValues.get(0).add(MetricsCalculationUsingShapes.df.format(metricVal));
           metricVal = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel);
           metricValues.get(1).add(MetricsCalculationUsingShapes.df.format(metricVal));
           metricVal = MetricsCalculationUsingShapes.getMPCfromModel(model);
           metricValues.get(2).add(MetricsCalculationUsingShapes.df.format(metricVal));
-          for (int i = 0; (i < ((MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue() - 3)); i++) {
-            {
-              metricVal = MetricsCalculationUsingShapes.getMPCfromNHShape(partialModel, Integer.valueOf(i));
-              metricValues.get((i + 3)).add(MetricsCalculationUsingShapes.df.format(metricVal));
-            }
-          }
+          metricVal = MetricsCalculationUsingShapes.getMPCfromNHShape(partialModel);
+          metricValues.get(3).add(MetricsCalculationUsingShapes.df.format(metricVal));
         }
       }
-      final ArrayList<String> headers = CollectionLiterals.<String>newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape0,", "MPC,Shape1,", "MPC,Shape2,", 
+      final ArrayList<String> headers = CollectionLiterals.<String>newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape,", "MPC,Shape1,", "MPC,Shape2,", 
         "MPC,Shape3,", "MPC,Shape4,", "MPC,Shape5,");
       PrintWriter writer = new PrintWriter((outputFolder + "statsNA.csv"));
       for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMNA).intValue()); i++) {
@@ -125,7 +109,7 @@ public class MetricsCalculationUsingShapes {
       writer.close();
       PrintWriter _printWriter = new PrintWriter((outputFolder + "statsMPC.csv"));
       writer = _printWriter;
-      for (Integer i = MetricsCalculationUsingShapes.NUMNA; (i.compareTo(MetricsCalculationUsingShapes.NUMMEASUREMENTS) < 0); i++) {
+      for (Integer i = MetricsCalculationUsingShapes.NUMNA; (i.compareTo(MetricsCalculationUsingShapes.NUMNAMPC) < 0); i++) {
         {
           writer.append(headers.get((i).intValue()));
           writer.append(String.join(",", metricValues.get((i).intValue())));
@@ -133,6 +117,7 @@ public class MetricsCalculationUsingShapes {
         }
       }
       writer.close();
+      InputOutput.println();
       InputOutput.<String>println("Node Activity:");
       List<String> _get = metricValues.get(0);
       String _plus = ("from Partial Model: " + _get);
@@ -144,11 +129,9 @@ public class MetricsCalculationUsingShapes {
       List<String> _get_2 = metricValues.get(2);
       String _plus_2 = ("from Partial Model: " + _get_2);
       InputOutput.<String>println(_plus_2);
-      for (int i = 0; (i < ((MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue() - 3)); i++) {
-        List<String> _get_3 = metricValues.get((i + 3));
-        String _plus_3 = ((("from NH Shape " + Integer.valueOf(i)) + "   : ") + _get_3);
-        InputOutput.<String>println(_plus_3);
-      }
+      List<String> _get_3 = metricValues.get(3);
+      String _plus_3 = ("from NH Shape     : " + _get_3);
+      InputOutput.<String>println(_plus_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -337,7 +320,7 @@ public class MetricsCalculationUsingShapes {
     Collection<Map<String, Integer>> _values = node2Degrees.values();
     for (final Map<String, Integer> degrees : _values) {
       {
-        int totalDegree = MetricsCalculationUsingShapes.findSum(degrees.values());
+        int totalDegree = Util.sum(degrees.values());
         double partialMPC = 1.0;
         Collection<Integer> _values_1 = degrees.values();
         for (final Integer degree : _values_1) {
@@ -358,7 +341,7 @@ public class MetricsCalculationUsingShapes {
   }
   
   public static double getMPCfromNHShape(final PartialInterpretation pm) {
-    return MetricsCalculationUsingShapes.getMPCfromNHShape(pm, Integer.valueOf(2));
+    return MetricsCalculationUsingShapes.getMPCfromNHShape(pm, Integer.valueOf(1));
   }
   
   public static double getMPCfromNHShape(final PartialInterpretation partialModel, final Integer depth) {
@@ -367,30 +350,31 @@ public class MetricsCalculationUsingShapes {
     final HashMap nhRep = ((HashMap) _modelRepresentation);
     final GraphShape<Object, Object> nhShapeGraph = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, partialModel);
     double totalMPC = 0.0;
-    int totalDegree = 0;
+    double totalDegree = 0.0;
     double partialMPC = 0.0;
     int numNodes = 0;
+    int numToAdd = 0;
     Set<String> allDimensions = new HashSet<String>();
     Map<String, Integer> type2Num = new HashMap<String, Integer>();
     List<GraphNodeDescriptorGND> _nodes = nhShapeGraph.getNodes();
     for (final GraphNodeDescriptorGND node : _nodes) {
       {
-        int _size = node.getIncomingEdges().size();
-        int _size_1 = node.getOutgoingEdges().size();
-        int _plus = (_size + _size_1);
-        totalDegree = _plus;
+        totalDegree = 0.0;
         List<IncomingRelationGND> _incomingEdges = node.getIncomingEdges();
         for (final IncomingRelationGND inEdge : _incomingEdges) {
           {
             final String edgeName = inEdge.getType();
             allDimensions.add(edgeName);
+            numToAdd = Util.sum(inEdge.getTargetDistrib());
+            double _talDegree = totalDegree;
+            totalDegree = (_talDegree + numToAdd);
             boolean _contains = type2Num.keySet().contains(edgeName);
             if (_contains) {
               Integer _lookup = CollectionsUtil.<String, Integer>lookup(edgeName, type2Num);
-              int _plus_1 = ((_lookup).intValue() + 1);
-              type2Num.put(edgeName, Integer.valueOf(_plus_1));
+              int _plus = ((_lookup).intValue() + numToAdd);
+              type2Num.put(edgeName, Integer.valueOf(_plus));
             } else {
-              type2Num.put(edgeName, Integer.valueOf(1));
+              type2Num.put(edgeName, Integer.valueOf(numToAdd));
             }
           }
         }
@@ -399,13 +383,16 @@ public class MetricsCalculationUsingShapes {
           {
             final String edgeName = outEdge.getType();
             allDimensions.add(edgeName);
+            numToAdd = Util.sum(outEdge.getSourceDistrib());
+            double _talDegree = totalDegree;
+            totalDegree = (_talDegree + numToAdd);
             boolean _contains = type2Num.keySet().contains(edgeName);
             if (_contains) {
               Integer _lookup = CollectionsUtil.<String, Integer>lookup(edgeName, type2Num);
-              int _plus_1 = ((_lookup).intValue() + 1);
-              type2Num.put(edgeName, Integer.valueOf(_plus_1));
+              int _plus = ((_lookup).intValue() + numToAdd);
+              type2Num.put(edgeName, Integer.valueOf(_plus));
             } else {
-              type2Num.put(edgeName, Integer.valueOf(1));
+              type2Num.put(edgeName, Integer.valueOf(numToAdd));
             }
           }
         }
@@ -414,7 +401,7 @@ public class MetricsCalculationUsingShapes {
         for (final Integer degree : _values) {
           double _partialMPC = partialMPC;
           float _floatValue = degree.floatValue();
-          float _divide = (_floatValue / totalDegree);
+          double _divide = (_floatValue / totalDegree);
           double _pow = Math.pow(_divide, 2);
           partialMPC = (_partialMPC - _pow);
         }
@@ -432,39 +419,6 @@ public class MetricsCalculationUsingShapes {
     float _divide = (_floatValue / (totalNumDims - 1));
     final double averageMPC = (_divide * (totalMPC / numNodes));
     return averageMPC;
-  }
-  
-  public static PartialInterpretation getPartialModel(final FileSystemWorkspace workspace, final EObject model) {
-    final EPackage pckg = model.eClass().getEPackage();
-    List<EClass> _list = IterableExtensions.<EClass>toList(Iterables.<EClass>filter(pckg.getEClassifiers(), EClass.class));
-    Set<EClass> _emptySet = Collections.<EClass>emptySet();
-    List<EEnum> _list_1 = IterableExtensions.<EEnum>toList(Iterables.<EEnum>filter(pckg.getEClassifiers(), EEnum.class));
-    final Function1<EEnum, EList<EEnumLiteral>> _function = (EEnum it) -> {
-      return it.getELiterals();
-    };
-    List<EEnumLiteral> _list_2 = IterableExtensions.<EEnumLiteral>toList(Iterables.<EEnumLiteral>concat(IterableExtensions.<EEnum, EList<EEnumLiteral>>map(Iterables.<EEnum>filter(pckg.getEClassifiers(), EEnum.class), _function)));
-    final Function1<EClass, EList<EReference>> _function_1 = (EClass it) -> {
-      return it.getEReferences();
-    };
-    List<EReference> _list_3 = IterableExtensions.<EReference>toList(Iterables.<EReference>concat(IterableExtensions.<EClass, EList<EReference>>map(Iterables.<EClass>filter(pckg.getEClassifiers(), EClass.class), _function_1)));
-    final Function1<EClass, EList<EAttribute>> _function_2 = (EClass it) -> {
-      return it.getEAttributes();
-    };
-    List<EAttribute> _list_4 = IterableExtensions.<EAttribute>toList(Iterables.<EAttribute>concat(IterableExtensions.<EClass, EList<EAttribute>>map(Iterables.<EClass>filter(pckg.getEClassifiers(), EClass.class), _function_2)));
-    final EcoreMetamodelDescriptor metamodel = new EcoreMetamodelDescriptor(_list, _emptySet, 
-      false, _list_1, _list_2, _list_3, _list_4);
-    Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
-    final TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTransformationOutput = MetricsCalculationUsingShapes.ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
-    return MetricsCalculationUsingShapes.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), false);
-  }
-  
-  public static int findSum(final Collection<Integer> integers) {
-    int sum = 0;
-    for (final Integer integer : integers) {
-      int _sum = sum;
-      sum = (_sum + (integer).intValue());
-    }
-    return sum;
   }
   
   public static Integer putInside(final EObject object, final String string, final int i, final Map<EObject, Map<String, Integer>> map) {
