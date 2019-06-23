@@ -2,36 +2,26 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
-import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
-import java.util.Collections
-import org.eclipse.emf.ecore.EClass
-import org.eclipse.emf.ecore.EEnum
+import java.io.PrintWriter
+import linkedList.LinkedListPackage
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
-import java.io.PrintWriter
-import linkedList.LinkedListPackage
 import simpleStatechart.SimpleStatechartPackage
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2GmlOLD
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 
 class CSERposterSample {
-	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 	static val partialVisualizer = new PartialInterpretation2Gml
-	static val neighbourhoodVisualizer = new Neighbourhood2GmlOLD
+	static val neighbourhoodVisualizer = new Neighbourhood2Gml
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
-	static val depth = 2
+	static val depth = 1
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 
@@ -47,20 +37,7 @@ class CSERposterSample {
 		val workspace = new FileSystemWorkspace('''resources''', "")
 		val model = workspace.readModel(EObject, instModName + ".xmi")
 
-		val pckg = model.eClass.EPackage
-		val metamodel = new EcoreMetamodelDescriptor(
-			pckg.EClassifiers.filter(EClass).toList,
-			Collections::emptySet,
-			false,
-			pckg.EClassifiers.filter(EEnum).toList,
-			pckg.EClassifiers.filter(EEnum).map[ELiterals].flatten.toList,
-			pckg.EClassifiers.filter(EClass).map[EReferences].flatten.toList,
-			pckg.EClassifiers.filter(EClass).map[EAttributes].flatten.toList
-		)
-		val metamodelTransformationOutput = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration)
-
-		val partialModelOutput = partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource,
-			false)
+		val partialModelOutput = Util.getPartialModel(workspace, model)
 
 		val writer = new PrintWriter(outputs + "/" + instModName + "/" + instModName + "MODEL.gml")
 
@@ -73,7 +50,7 @@ class CSERposterSample {
 
 		val w2 = new PrintWriter(outputs + "/" + instModName + "/" + instModName + depth + "NEIGHBOURHOOD.gml")
 
-		w2.print(neighbourhoodVisualizer.transform(hood, partialModelOutput))
+		w2.print(neighbourhoodVisualizer.transform2gml(hood, partialModelOutput))
 		w2.close
 
 		val w3 = new PrintWriter(outputs + "/" + instModName + "/" + instModName + depth + "SHAPE.txt")

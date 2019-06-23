@@ -5,7 +5,7 @@ graph
 			id	0
 			graphics
 			[
-				w	152.9
+				w	125.4
 				h	40
 				type	"roundrectangle"
 				fill	"#FFCC00"
@@ -26,7 +26,7 @@ graph
 			id	1
 			graphics
 			[
-				w	145.20000000000002
+				w	118.80000000000001
 				h	40
 				type	"roundrectangle"
 				fill	"#FFCC00"
@@ -47,7 +47,7 @@ graph
 			id	2
 			graphics
 			[
-				w	129.8
+				w	105.60000000000001
 				h	40
 				type	"roundrectangle"
 				fill	"#FFCC00"

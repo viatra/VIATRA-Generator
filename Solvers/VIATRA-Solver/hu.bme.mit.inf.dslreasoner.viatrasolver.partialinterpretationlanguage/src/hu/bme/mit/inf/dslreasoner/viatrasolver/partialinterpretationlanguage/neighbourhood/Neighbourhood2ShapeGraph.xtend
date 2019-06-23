@@ -29,11 +29,12 @@ class Neighbourhood2ShapeGraph {
 
 		// BEGIN TRANSFORMATION	
 		// SRTEP 1: get nodes and create GNDs
+		var ind = 0
 		for (nodeKey : modRep.keySet) {
 			val correspondingLND = toCorrespondingLND(nodeKey)
 			if (correspondingLND != null) {
 				val nodeDesc = nodeKey as AbstractNodeDescriptor
-				val graphNodeRep = new GraphNodeDescriptorGND(nodeDesc)
+				val graphNodeRep = new GraphNodeDescriptorGND(nodeDesc, ind++)
 				AND2GND.put(nodeDesc, graphNodeRep)
 				graphNodes.add(graphNodeRep)
 			}

@@ -25,13 +25,13 @@ NEW NODE
        -----------------
        -OUT RELATION:
               -type    : next reference Element
-              -to      : [Element class]
+              -to    : [Element class]
               -srcDis  : [1, 1, 0]
               -trgDis  : [1, 1, 0]
        -----------------
        -OUT RELATION:
               -type    : value reference Element
-              -to      : [Object class]
+              -to    : [Object class]
               -srcDis  : [1, 1, 1]
               -trgDis  : [1]
 ----------------------
@@ -61,18 +61,18 @@ NEW NODE
        -----------------
        -OUT RELATION:
               -type    : elements reference List
-              -to      : [Element class]
+              -to    : [Element class]
               -srcDis  : [4]
               -trgDis  : [1, 1, 1]
        -----------------
        -OUT RELATION:
               -type    : first reference List
-              -to      : [Element class]
+              -to    : [Element class]
               -srcDis  : [1]
               -trgDis  : [1, 0, 0]
        -----------------
        -OUT RELATION:
               -type    : objects reference List
-              -to      : [Object class]
+              -to    : [Object class]
               -srcDis  : [4]
               -trgDis  : [1]

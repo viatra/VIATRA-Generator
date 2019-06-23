@@ -88,34 +88,34 @@ import org.eclipse.xtend.lib.annotations.Data
 //	}
 }
 
-@Data class XXXGraphNodeDescriptorXXX extends AbstractNodeDescriptor {
-	LocalNodeDescriptor correspondingNode
-	// String id
-	Map<IncomingRelation<GraphNodeDescriptor>, List<Integer>> incomingEdges
-	Map<OutgoingRelation<GraphNodeDescriptor>, List<Integer>> outgoingEdges
-
-//	new(String id, Set<String> types) {
-//		this.types = types
-//		this.id = id
+//@Data class XXXGraphNodeDescriptorXXX extends AbstractNodeDescriptor {
+//	LocalNodeDescriptor correspondingNode
+//	// String id
+//	Map<IncomingRelation<GraphNodeDescriptor>, List<Integer>> incomingEdges
+//	Map<OutgoingRelation<GraphNodeDescriptor>, List<Integer>> outgoingEdges
+//
+////	new(String id, Set<String> types) {
+////		this.types = types
+////		this.id = id
+////		this.incomingEdges = new HashMap
+////		this.outgoingEdges = new HashMap
+////	}
+//	new(LocalNodeDescriptor correspondingNode) {
+//		super(calcualteDataHash(correspondingNode))
+//		this.correspondingNode = correspondingNode
 //		this.incomingEdges = new HashMap
 //		this.outgoingEdges = new HashMap
 //	}
-	new(LocalNodeDescriptor correspondingNode) {
-		super(calcualteDataHash(correspondingNode))
-		this.correspondingNode = correspondingNode
-		this.incomingEdges = new HashMap
-		this.outgoingEdges = new HashMap
-	}
-
-	def private static calcualteDataHash(LocalNodeDescriptor correspondingNode) {
-		val int prime = 31;
-		var result = 0
-		if (correspondingNode !== null)
-			result = correspondingNode.hashCode();
-		return result
-	}
-
-}
+//
+//	def private static calcualteDataHash(LocalNodeDescriptor correspondingNode) {
+//		val int prime = 31;
+//		var result = 0
+//		if (correspondingNode !== null)
+//			result = correspondingNode.hashCode();
+//		return result
+//	}
+//
+//}
 
 @Data class IncomingRelation<FROM> {
 	FROM from

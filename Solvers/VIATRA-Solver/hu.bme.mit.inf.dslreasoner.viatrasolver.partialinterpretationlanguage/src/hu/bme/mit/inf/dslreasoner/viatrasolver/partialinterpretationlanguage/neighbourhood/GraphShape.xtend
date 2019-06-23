@@ -20,18 +20,18 @@ import org.eclipse.xtend.lib.annotations.Data
 	}
 }
 
-@Data class GraphNodeDescriptor<gndRep, andRep> {
-	AbstractNodeDescriptor correspondingAND
-	// String id
-	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
-	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
-
-	new(AbstractNodeDescriptor correspondingNode) {
-		this.correspondingAND = correspondingNode
-		this.incomingEdges = new HashMap
-		this.outgoingEdges = new HashMap
-	}
-}
+//@Data class GraphNodeDescriptor<gndRep, andRep> {
+//	AbstractNodeDescriptor correspondingAND
+//	// String id
+//	Map<IncomingRelation<gndRep>, List<Integer>> incomingEdges
+//	Map<OutgoingRelation<gndRep>, List<Integer>> outgoingEdges
+//
+//	new(AbstractNodeDescriptor correspondingNode) {
+//		this.correspondingAND = correspondingNode
+//		this.incomingEdges = new HashMap
+//		this.outgoingEdges = new HashMap
+//	}
+//}
 
 //
 //@Data class IncomingRelationGeneralized {
@@ -44,11 +44,13 @@ import org.eclipse.xtend.lib.annotations.Data
 //	}
 //}
 @Data class GraphNodeDescriptorGND {
+	Integer uniqueID
 	AbstractNodeDescriptor correspondingAND
 	List<IncomingRelationGND> incomingEdges
 	List<OutgoingRelationGND> outgoingEdges
 
-	new(AbstractNodeDescriptor correspondingNode) {
+	new(AbstractNodeDescriptor correspondingNode, Integer uniqueID) {
+		this.uniqueID = uniqueID
 		this.correspondingAND = correspondingNode
 		this.incomingEdges = newArrayList
 		this.outgoingEdges = newArrayList
