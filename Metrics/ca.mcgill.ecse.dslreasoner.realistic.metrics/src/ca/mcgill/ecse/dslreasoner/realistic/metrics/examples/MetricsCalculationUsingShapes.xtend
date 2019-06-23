@@ -12,7 +12,6 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.PrintWriter
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
@@ -25,6 +24,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.emf.ecore.EClass
+import java.util.EventObject
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
 
 class MetricsCalculationUsingShapes {
 
@@ -34,7 +38,8 @@ class MetricsCalculationUsingShapes {
 	private static DecimalFormat df = new DecimalFormat("0.000");
 	private static final Integer NUMMEASUREMENTS = 9
 	private static final Integer NUMNA = 2
-	private static final Integer NUMNAMPC = 4
+	private static final Integer NUMMPC = 4
+	private static final Integer NUMNDA = 6
 
 	def static void main(String[] args) {
 		df.roundingMode = RoundingMode.UP
@@ -56,16 +61,18 @@ class MetricsCalculationUsingShapes {
 		for (var i = 0; i < NUMMEASUREMENTS; i++) {
 			metricValues.add(newArrayList)
 		}
-		
+
 		// Where we store deltas
+		var List<Double> totalDeltas = newArrayList
 		var List<List<String>> deltas = newArrayList
 		for (var i = 0; i < NUMMEASUREMENTS; i++) {
 			deltas.add(newArrayList)
 		}
 
-		var metricVal = 0.0
+		var calcVal = 0.0
+		var realVal = 0.0
 		var progressTracker = 0
-		for (fileName : workspace.allFiles.subList(100, 120)) {
+		for (fileName : workspace.allFiles.subList(100, 200)) {
 //		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
 			print(progressTracker++ + "-")
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
@@ -76,23 +83,55 @@ class MetricsCalculationUsingShapes {
 			// NODE ACTIVITY
 			// /////////////
 			// Calculate NA from partial model
-			metricVal = getNAfromModel(model)
-			metricValues.get(0).add(df.format(metricVal))
+			realVal = getNAfromModel(model)
+			metricValues.get(0).add(df.format(realVal))
 
 			// Calculate NA from neighbourhood shape
-			metricVal = getNAfromNHShape(partialModel)
-			metricValues.get(1).add(df.format(metricVal))
+			calcVal = getNAfromNHShape(partialModel)
+			metricValues.get(1).add(df.format(calcVal))
+
+			// Calculate delta
+			totalDeltas.add(Math.abs(calcVal - realVal))
 
 			// /////////////
-			// MPC
+			// Multiplex Participation Coeffifcient
 			// /////////////
 			// Calculate MPC from partial model
-			metricVal = getMPCfromModel(model)
-			metricValues.get(2).add(df.format(metricVal))
+			realVal = getMPCfromModel(model)
+			metricValues.get(2).add(df.format(realVal))
 
 			// Calculate MPC from neighbourhood shape
-			metricVal = getMPCfromNHShape(partialModel)
-			metricValues.get(3).add(df.format(metricVal))
+			calcVal = getMPCfromNHShape(partialModel)
+			metricValues.get(3).add(df.format(calcVal))
+
+			// Calculate delta
+			totalDeltas.add(Math.abs(calcVal - realVal))
+
+			// /////////////
+			// Node Dimension Activity
+			// /////////////
+			// Calculate MPC from partial model
+			realVal = getNDAfromModel(model)
+			metricValues.get(4).add(df.format(realVal))
+
+			// Calculate MPC from neighbourhood shape
+			calcVal = getNDAfromNHShape(partialModel)
+			metricValues.get(5).add(df.format(calcVal))
+			// Calculate delta
+			totalDeltas.add(Math.abs(calcVal - realVal))
+
+			// /////////////
+			// Node Dimension Connectivity
+			// /////////////
+			// Calculate MPC from partial model
+			realVal = getNDCfromModel(model)
+			metricValues.get(6).add(df.format(realVal))
+
+			// Calculate MPC from neighbourhood shape
+			calcVal = getNDCfromNHShape(partialModel)
+			metricValues.get(7).add(df.format(calcVal))
+			// Calculate delta
+			totalDeltas.add(Math.abs(calcVal - realVal))
 
 		// /////////////
 		// new metric
@@ -121,7 +160,7 @@ class MetricsCalculationUsingShapes {
 		writer.close
 
 		writer = new PrintWriter(outputFolder + "statsMPC.csv")
-		for (var i = NUMNA; i < NUMNAMPC; i++) {
+		for (var i = NUMNA; i < MetricsCalculationUsingShapes.NUMMPC; i++) {
 			writer.append(headers.get(i))
 			writer.append(String.join(",", metricValues.get(i)))
 			writer.append("\n");
@@ -136,14 +175,27 @@ class MetricsCalculationUsingShapes {
 //		}
 //		writer.close
 		// print Results
+		val numModels = metricValues.get(0).length
 		println()
 		println("Node Activity:")
 		println("from Partial Model: " + metricValues.get(0))
 		println("from NH Shape     : " + metricValues.get(1))
+		println("         Avg delta: " + df.format(totalDeltas.get(0) / numModels))
 
 		println("MPC:")
 		println("from Partial Model: " + metricValues.get(2))
 		println("from NH Shape     : " + metricValues.get(3))
+		println("         Avg delta: " + df.format(totalDeltas.get(1) / numModels))
+
+		println("NDA:")
+		println("from Partial Model: " + metricValues.get(4))
+		println("from NH Shape     : " + metricValues.get(5))
+		println("         Avg delta: " + df.format(totalDeltas.get(2) / numModels))
+
+		println("NDC:")
+		println("from Partial Model: " + metricValues.get(6))
+		println("from NH Shape     : " + metricValues.get(7))
+		println("         Avg delta: " + df.format(totalDeltas.get(3) / numModels))
 
 //		println("new metric:")
 //		println("from Partial Model: " + metricValues.get(4))
@@ -423,12 +475,155 @@ class MetricsCalculationUsingShapes {
 		return averageMPC
 	}
 
+	def static getNDAfromModel(EObject model) {
+		val Map<EObject, Set<EObject>> dim2NumActNodes = dim2NumActNodesFromModel(model)
+
+		var totalNDA = 0.0
+		for (actNodes : dim2NumActNodes.values) {
+			totalNDA += actNodes.length
+		}
+
+		val numDims = dim2NumActNodes.keySet.length
+		val avgNDA = totalNDA / numDims
+		return avgNDA
+	}
+
+	def static getNDAfromNHShape(PartialInterpretation pm) {
+		return getNDAfromNHShape(pm, 1)
+	}
+
+	def static getNDAfromNHShape(PartialInterpretation pm, Integer depth) {
+		// Get NH Shape
+		val nh = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nhRep = nh.modelRepresentation as HashMap
+		val nhShapeGraph = neighbouhood2ShapeGraph.createShapeGraph(nh, pm)
+
+		// TODO make below map from OutgoingRelationGND to value
+		val Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = dim2NumActNodesFromNHShape(nhShapeGraph)
+
+		// calculations
+		var totalNDA = 0.0
+		for (actNodes : dim2NumActNodes.values) {
+			for (actNode : actNodes) {
+				val numInstances = actNode.lookup(nhRep) as Integer
+				totalNDA += numInstances
+			}
+		}
+
+		val numDims = dim2NumActNodes.keySet.length
+		val avgNDA = totalNDA / numDims
+		return avgNDA
+	}
+
+	def static getNDCfromModel(EObject model) {
+
+		val NDA = getNDAfromModel(model)
+		val nodes = model.eResource.allContents.toList
+		val numNodes = nodes.length
+		val NDC = NDA / numNodes
+		return NDC
+	}
+
+	def static getNDCfromNHShape(PartialInterpretation pm) {
+		return getNDCfromNHShape(pm, 1)
+	}
+
+	def static getNDCfromNHShape(PartialInterpretation pm, Integer depth) {
+		// Get NH Shape
+		val nh = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nhRep = nh.modelRepresentation as HashMap
+		val gs = neighbouhood2ShapeGraph.createShapeGraph(nh, pm)
+
+		// calculations
+		val NDA = getNDAfromNHShape(pm, depth)
+		val nodes = gs.nodes
+		var numNodes = 0
+
+		// calculations
+		for (node : nodes) {
+			numNodes += node.correspondingAND.lookup(nhRep) as Integer
+		}
+
+		val NDC = NDA / numNodes
+		return NDC
+	}
+
+	def static dim2NumActNodesFromModel(EObject model) {
+		val nodes = model.eResource.allContents.toList
+
+		val Map<EObject, Set<EObject>> dim2NumActNodes = new HashMap
+
+		for (node : nodes) {
+			for (dim : node.eClass.EAllReferences) {
+				val dimName = dim
+
+				val srcName = node
+				val trgName = node.eGet(dim)
+
+				if (!(trgName instanceof List)) {
+					if (trgName !== null) {
+						if (dim2NumActNodes.keySet.contains(dimName)) {
+							dimName.lookup(dim2NumActNodes).add(srcName)
+						} else {
+							dim2NumActNodes.put(dimName, newHashSet(srcName))
+						}
+						dimName.lookup(dim2NumActNodes).addAll(trgName as EObject)
+					}
+				} else {
+					val trgSet = trgName as List
+					if (!trgSet.empty) {
+						if (dim2NumActNodes.keySet.contains(dimName)) {
+							dimName.lookup(dim2NumActNodes).addAll(srcName)
+						} else {
+							dim2NumActNodes.put(dimName, newHashSet(srcName))
+						}
+						for (target : trgSet) {
+							dimName.lookup(dim2NumActNodes).add(target as EObject)
+						}
+					}
+				}
+			}
+		}
+
+		return dim2NumActNodes
+	}
+
+	def static dim2NumActNodesFromNHShape(GraphShape gs) {
+		val nodes = gs.nodes as List<GraphNodeDescriptorGND>
+
+		val Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap
+
+		for (node : nodes) {
+			for (dim : node.outgoingEdges) {
+				val dimName = dim.type
+
+				val srcName = node.correspondingAND
+				val trgName = dim.to.correspondingAND
+
+				if (dim2NumActNodes.keySet.contains(dimName)) {
+					dimName.lookup(dim2NumActNodes).add(srcName)
+				} else {
+					dim2NumActNodes.put(dimName, newHashSet(srcName))
+				}
+				dimName.lookup(dim2NumActNodes).addAll(trgName)
+			}
+		}
+
+		return dim2NumActNodes
+	}
+
 	def static putInside(EObject object, String string, int i, Map<EObject, Map<String, Integer>> map) {
 		val Map<String, Integer> correspondingMap = object.lookup(map)
 		if (correspondingMap.keySet.contains(string)) {
 			correspondingMap.put(string, string.lookup(correspondingMap) + i)
 		} else {
 			correspondingMap.put(string, i)
+		}
+	}
+
+	def static printMap(Map<String, Set<String>> map) {
+		for (key : map.keySet) {
+			println(key + " -> " + key.lookup(map))
 		}
 	}
 

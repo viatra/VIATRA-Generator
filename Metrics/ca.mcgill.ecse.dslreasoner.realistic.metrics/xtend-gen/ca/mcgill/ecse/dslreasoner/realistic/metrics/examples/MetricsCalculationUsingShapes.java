@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -51,7 +52,9 @@ public class MetricsCalculationUsingShapes {
   
   private final static Integer NUMNA = Integer.valueOf(2);
   
-  private final static Integer NUMNAMPC = Integer.valueOf(4);
+  private final static Integer NUMMPC = Integer.valueOf(4);
+  
+  private final static Integer NUMNDA = Integer.valueOf(6);
   
   public static void main(final String[] args) {
     try {
@@ -71,13 +74,15 @@ public class MetricsCalculationUsingShapes {
       for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue()); i++) {
         metricValues.add(CollectionLiterals.<String>newArrayList());
       }
+      List<Double> totalDeltas = CollectionLiterals.<Double>newArrayList();
       List<List<String>> deltas = CollectionLiterals.<List<String>>newArrayList();
       for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue()); i++) {
         deltas.add(CollectionLiterals.<String>newArrayList());
       }
-      double metricVal = 0.0;
+      double calcVal = 0.0;
+      double realVal = 0.0;
       int progressTracker = 0;
-      List<String> _subList = workspace.allFiles().subList(100, 120);
+      List<String> _subList = workspace.allFiles().subList(100, 200);
       for (final String fileName : _subList) {
         {
           int _plusPlus = progressTracker++;
@@ -86,14 +91,26 @@ public class MetricsCalculationUsingShapes {
           final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
           final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
           final PartialInterpretation partialModel = Util.getPartialModel(workspace, model);
-          metricVal = MetricsCalculationUsingShapes.getNAfromModel(model);
-          metricValues.get(0).add(MetricsCalculationUsingShapes.df.format(metricVal));
-          metricVal = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel);
-          metricValues.get(1).add(MetricsCalculationUsingShapes.df.format(metricVal));
-          metricVal = MetricsCalculationUsingShapes.getMPCfromModel(model);
-          metricValues.get(2).add(MetricsCalculationUsingShapes.df.format(metricVal));
-          metricVal = MetricsCalculationUsingShapes.getMPCfromNHShape(partialModel);
-          metricValues.get(3).add(MetricsCalculationUsingShapes.df.format(metricVal));
+          realVal = MetricsCalculationUsingShapes.getNAfromModel(model);
+          metricValues.get(0).add(MetricsCalculationUsingShapes.df.format(realVal));
+          calcVal = MetricsCalculationUsingShapes.getNAfromNHShape(partialModel);
+          metricValues.get(1).add(MetricsCalculationUsingShapes.df.format(calcVal));
+          totalDeltas.add(Double.valueOf(Math.abs((calcVal - realVal))));
+          realVal = MetricsCalculationUsingShapes.getMPCfromModel(model);
+          metricValues.get(2).add(MetricsCalculationUsingShapes.df.format(realVal));
+          calcVal = MetricsCalculationUsingShapes.getMPCfromNHShape(partialModel);
+          metricValues.get(3).add(MetricsCalculationUsingShapes.df.format(calcVal));
+          totalDeltas.add(Double.valueOf(Math.abs((calcVal - realVal))));
+          realVal = MetricsCalculationUsingShapes.getNDAfromModel(model);
+          metricValues.get(4).add(MetricsCalculationUsingShapes.df.format(realVal));
+          calcVal = MetricsCalculationUsingShapes.getNDAfromNHShape(partialModel);
+          metricValues.get(5).add(MetricsCalculationUsingShapes.df.format(calcVal));
+          totalDeltas.add(Double.valueOf(Math.abs((calcVal - realVal))));
+          realVal = MetricsCalculationUsingShapes.getNDCfromModel(model);
+          metricValues.get(6).add(MetricsCalculationUsingShapes.df.format(realVal));
+          calcVal = MetricsCalculationUsingShapes.getNDCfromNHShape(partialModel);
+          metricValues.get(7).add(MetricsCalculationUsingShapes.df.format(calcVal));
+          totalDeltas.add(Double.valueOf(Math.abs((calcVal - realVal))));
         }
       }
       final ArrayList<String> headers = CollectionLiterals.<String>newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape,", "MPC,Shape1,", "MPC,Shape2,", 
@@ -109,7 +126,7 @@ public class MetricsCalculationUsingShapes {
       writer.close();
       PrintWriter _printWriter = new PrintWriter((outputFolder + "statsMPC.csv"));
       writer = _printWriter;
-      for (Integer i = MetricsCalculationUsingShapes.NUMNA; (i.compareTo(MetricsCalculationUsingShapes.NUMNAMPC) < 0); i++) {
+      for (Integer i = MetricsCalculationUsingShapes.NUMNA; (i.compareTo(MetricsCalculationUsingShapes.NUMMPC) < 0); i++) {
         {
           writer.append(headers.get((i).intValue()));
           writer.append(String.join(",", metricValues.get((i).intValue())));
@@ -117,6 +134,7 @@ public class MetricsCalculationUsingShapes {
         }
       }
       writer.close();
+      final int numModels = ((Object[])Conversions.unwrapArray(metricValues.get(0), Object.class)).length;
       InputOutput.println();
       InputOutput.<String>println("Node Activity:");
       List<String> _get = metricValues.get(0);
@@ -125,13 +143,47 @@ public class MetricsCalculationUsingShapes {
       List<String> _get_1 = metricValues.get(1);
       String _plus_1 = ("from NH Shape     : " + _get_1);
       InputOutput.<String>println(_plus_1);
-      InputOutput.<String>println("MPC:");
-      List<String> _get_2 = metricValues.get(2);
-      String _plus_2 = ("from Partial Model: " + _get_2);
+      Double _get_2 = totalDeltas.get(0);
+      double _divide = ((_get_2).doubleValue() / numModels);
+      String _format = MetricsCalculationUsingShapes.df.format(_divide);
+      String _plus_2 = ("         Avg delta: " + _format);
       InputOutput.<String>println(_plus_2);
-      List<String> _get_3 = metricValues.get(3);
-      String _plus_3 = ("from NH Shape     : " + _get_3);
+      InputOutput.<String>println("MPC:");
+      List<String> _get_3 = metricValues.get(2);
+      String _plus_3 = ("from Partial Model: " + _get_3);
       InputOutput.<String>println(_plus_3);
+      List<String> _get_4 = metricValues.get(3);
+      String _plus_4 = ("from NH Shape     : " + _get_4);
+      InputOutput.<String>println(_plus_4);
+      Double _get_5 = totalDeltas.get(1);
+      double _divide_1 = ((_get_5).doubleValue() / numModels);
+      String _format_1 = MetricsCalculationUsingShapes.df.format(_divide_1);
+      String _plus_5 = ("         Avg delta: " + _format_1);
+      InputOutput.<String>println(_plus_5);
+      InputOutput.<String>println("NDA:");
+      List<String> _get_6 = metricValues.get(4);
+      String _plus_6 = ("from Partial Model: " + _get_6);
+      InputOutput.<String>println(_plus_6);
+      List<String> _get_7 = metricValues.get(5);
+      String _plus_7 = ("from NH Shape     : " + _get_7);
+      InputOutput.<String>println(_plus_7);
+      Double _get_8 = totalDeltas.get(2);
+      double _divide_2 = ((_get_8).doubleValue() / numModels);
+      String _format_2 = MetricsCalculationUsingShapes.df.format(_divide_2);
+      String _plus_8 = ("         Avg delta: " + _format_2);
+      InputOutput.<String>println(_plus_8);
+      InputOutput.<String>println("NDC:");
+      List<String> _get_9 = metricValues.get(6);
+      String _plus_9 = ("from Partial Model: " + _get_9);
+      InputOutput.<String>println(_plus_9);
+      List<String> _get_10 = metricValues.get(7);
+      String _plus_10 = ("from NH Shape     : " + _get_10);
+      InputOutput.<String>println(_plus_10);
+      Double _get_11 = totalDeltas.get(3);
+      double _divide_3 = ((_get_11).doubleValue() / numModels);
+      String _format_3 = MetricsCalculationUsingShapes.df.format(_divide_3);
+      String _plus_11 = ("         Avg delta: " + _format_3);
+      InputOutput.<String>println(_plus_11);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -421,6 +473,142 @@ public class MetricsCalculationUsingShapes {
     return averageMPC;
   }
   
+  public static double getNDAfromModel(final EObject model) {
+    final Map<EObject, Set<EObject>> dim2NumActNodes = MetricsCalculationUsingShapes.dim2NumActNodesFromModel(model);
+    double totalNDA = 0.0;
+    Collection<Set<EObject>> _values = dim2NumActNodes.values();
+    for (final Set<EObject> actNodes : _values) {
+      double _talNDA = totalNDA;
+      int _length = ((Object[])Conversions.unwrapArray(actNodes, Object.class)).length;
+      totalNDA = (_talNDA + _length);
+    }
+    final int numDims = ((Object[])Conversions.unwrapArray(dim2NumActNodes.keySet(), Object.class)).length;
+    final double avgNDA = (totalNDA / numDims);
+    return avgNDA;
+  }
+  
+  public static double getNDAfromNHShape(final PartialInterpretation pm) {
+    return MetricsCalculationUsingShapes.getNDAfromNHShape(pm, Integer.valueOf(1));
+  }
+  
+  public static double getNDAfromNHShape(final PartialInterpretation pm, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(pm, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
+    final HashMap nhRep = ((HashMap) _modelRepresentation);
+    final GraphShape<Object, Object> nhShapeGraph = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, pm);
+    final Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = MetricsCalculationUsingShapes.dim2NumActNodesFromNHShape(nhShapeGraph);
+    double totalNDA = 0.0;
+    Collection<Set<AbstractNodeDescriptor>> _values = dim2NumActNodes.values();
+    for (final Set<AbstractNodeDescriptor> actNodes : _values) {
+      for (final AbstractNodeDescriptor actNode : actNodes) {
+        {
+          Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(actNode, nhRep);
+          final Integer numInstances = ((Integer) _lookup);
+          double _talNDA = totalNDA;
+          totalNDA = (_talNDA + (numInstances).intValue());
+        }
+      }
+    }
+    final int numDims = ((Object[])Conversions.unwrapArray(dim2NumActNodes.keySet(), Object.class)).length;
+    final double avgNDA = (totalNDA / numDims);
+    return avgNDA;
+  }
+  
+  public static double getNDCfromModel(final EObject model) {
+    final double NDA = MetricsCalculationUsingShapes.getNDAfromModel(model);
+    final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
+    final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
+    final double NDC = (NDA / numNodes);
+    return NDC;
+  }
+  
+  public static double getNDCfromNHShape(final PartialInterpretation pm) {
+    return MetricsCalculationUsingShapes.getNDCfromNHShape(pm, Integer.valueOf(1));
+  }
+  
+  public static double getNDCfromNHShape(final PartialInterpretation pm, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(pm, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
+    final HashMap nhRep = ((HashMap) _modelRepresentation);
+    final GraphShape<Object, Object> gs = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, pm);
+    final double NDA = MetricsCalculationUsingShapes.getNDAfromNHShape(pm, depth);
+    final List<GraphNodeDescriptorGND> nodes = gs.getNodes();
+    int numNodes = 0;
+    for (final GraphNodeDescriptorGND node : nodes) {
+      int _numNodes = numNodes;
+      Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(node.getCorrespondingAND(), nhRep);
+      numNodes = (_numNodes + (((Integer) _lookup)).intValue());
+    }
+    final double NDC = (NDA / numNodes);
+    return NDC;
+  }
+  
+  public static Map<EObject, Set<EObject>> dim2NumActNodesFromModel(final EObject model) {
+    final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
+    final Map<EObject, Set<EObject>> dim2NumActNodes = new HashMap<EObject, Set<EObject>>();
+    for (final EObject node : nodes) {
+      EList<EReference> _eAllReferences = node.eClass().getEAllReferences();
+      for (final EReference dim : _eAllReferences) {
+        {
+          final EReference dimName = dim;
+          final EObject srcName = node;
+          final Object trgName = node.eGet(dim);
+          if ((!(trgName instanceof List))) {
+            if ((trgName != null)) {
+              boolean _contains = dim2NumActNodes.keySet().contains(dimName);
+              if (_contains) {
+                CollectionsUtil.<EReference, Set<EObject>>lookup(dimName, dim2NumActNodes).add(srcName);
+              } else {
+                dim2NumActNodes.put(dimName, CollectionLiterals.<EObject>newHashSet(srcName));
+              }
+              CollectionExtensions.<EObject>addAll(CollectionsUtil.<EReference, Set<EObject>>lookup(dimName, dim2NumActNodes), ((EObject) trgName));
+            }
+          } else {
+            final List trgSet = ((List) trgName);
+            boolean _isEmpty = trgSet.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              boolean _contains_1 = dim2NumActNodes.keySet().contains(dimName);
+              if (_contains_1) {
+                CollectionExtensions.<EObject>addAll(CollectionsUtil.<EReference, Set<EObject>>lookup(dimName, dim2NumActNodes), srcName);
+              } else {
+                dim2NumActNodes.put(dimName, CollectionLiterals.<EObject>newHashSet(srcName));
+              }
+              for (final Object target : trgSet) {
+                CollectionsUtil.<EReference, Set<EObject>>lookup(dimName, dim2NumActNodes).add(((EObject) target));
+              }
+            }
+          }
+        }
+      }
+    }
+    return dim2NumActNodes;
+  }
+  
+  public static Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodesFromNHShape(final GraphShape gs) {
+    List _nodes = gs.getNodes();
+    final List<GraphNodeDescriptorGND> nodes = ((List<GraphNodeDescriptorGND>) _nodes);
+    final Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap<String, Set<AbstractNodeDescriptor>>();
+    for (final GraphNodeDescriptorGND node : nodes) {
+      List<OutgoingRelationGND> _outgoingEdges = node.getOutgoingEdges();
+      for (final OutgoingRelationGND dim : _outgoingEdges) {
+        {
+          final String dimName = dim.getType();
+          final AbstractNodeDescriptor srcName = node.getCorrespondingAND();
+          final AbstractNodeDescriptor trgName = dim.getTo().getCorrespondingAND();
+          boolean _contains = dim2NumActNodes.keySet().contains(dimName);
+          if (_contains) {
+            CollectionsUtil.<String, Set<AbstractNodeDescriptor>>lookup(dimName, dim2NumActNodes).add(srcName);
+          } else {
+            dim2NumActNodes.put(dimName, CollectionLiterals.<AbstractNodeDescriptor>newHashSet(srcName));
+          }
+          CollectionExtensions.<AbstractNodeDescriptor>addAll(CollectionsUtil.<String, Set<AbstractNodeDescriptor>>lookup(dimName, dim2NumActNodes), trgName);
+        }
+      }
+    }
+    return dim2NumActNodes;
+  }
+  
   public static Integer putInside(final EObject object, final String string, final int i, final Map<EObject, Map<String, Integer>> map) {
     Integer _xblockexpression = null;
     {
@@ -437,5 +625,14 @@ public class MetricsCalculationUsingShapes {
       _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
+  }
+  
+  public static void printMap(final Map<String, Set<String>> map) {
+    Set<String> _keySet = map.keySet();
+    for (final String key : _keySet) {
+      Set<String> _lookup = CollectionsUtil.<String, Set<String>>lookup(key, map);
+      String _plus = ((key + " -> ") + _lookup);
+      InputOutput.<String>println(_plus);
+    }
   }
 }
