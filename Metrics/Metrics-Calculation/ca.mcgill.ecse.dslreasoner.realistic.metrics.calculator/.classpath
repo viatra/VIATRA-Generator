@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/commons-math3-3.6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/commons-math3-3.6.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/weka.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

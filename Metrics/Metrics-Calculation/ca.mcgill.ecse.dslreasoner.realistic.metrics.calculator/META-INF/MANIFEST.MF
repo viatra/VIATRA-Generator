@@ -15,4 +15,9 @@ Require-Bundle: com.google.guava,
  hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
  org.eclipse.viatra.dse;bundle-version="0.21.2"
-Export-Package: ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app
+Export-Package: ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app,
+ ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance,
+ ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph,
+ ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io,
+ ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics,
+ ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.predictor
