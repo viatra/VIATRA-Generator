@@ -1,0 +1,54 @@
+package ca.mcgill.ecse.socialnetwork.plugin
+
+import epackage "http://ecse.mcgill.ca/socialnetwork"
+
+//@Constraint(message="terminatorAndInformation", severity="error", key={T})
+//pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
+//	FunctionalOutput.outgoingLinks(Out,I);
+//	FunctionalOutput.terminator(Out,T);
+//} or {
+//	InformationLink.to(I,In);
+//	FunctionalInput.terminator(In,T);
+//}
+
+@Constraint(message="singleFriendship", severity="error", key={p1})
+pattern singleFriendship(p1: Person) {
+	find friendship(p1, p);
+	neg find friendship(p, p1);
+}
+
+//@Constraint(message="cycle", severity="error", key={p})
+//pattern cycleInParenthood(p: Person) {
+//	find isAncestor(p, p);
+//}
+
+@Constraint(message="noFriend", severity="error", key={p})
+pattern noFriend(p: Person){
+	neg find friendship(p, _);
+}
+
+//@Constraint(message="brothhoodParent", severity="error", key={p1,p2})
+//pattern brothhoodParent(p1: Person, p2: Person){
+//	Person.parents(p1, parent1);
+//	Person.parents(p2, parent2);
+//	parent1 == parent2;
+//	find isAncestor(p1, p2);
+//}
+@Constraint(message="selfFriend", severity="error", key={p})
+pattern selfFriend(p: Person){
+	Person.friends(p,p);
+}
+
+pattern friendship(p1: Person, p2: Person){
+	Person.friends(p1,p2);
+}
+
+//pattern isAncestor(person : Person, ancestor : Person){
+//	Person.parents(person, ancestor);
+//} or {
+//	Person.parents(person, parent);
+//	find isAncestor(parent, ancestor);
+//}
+
+
+

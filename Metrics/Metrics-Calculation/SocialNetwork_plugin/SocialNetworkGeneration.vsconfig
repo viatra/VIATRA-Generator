@@ -1,0 +1,24 @@
+import epackage "model/socialnetwork.ecore"
+import viatra	"src/ca/mcgill/ecse/socialnetwork/plugin/Queries.vql"
+
+generate {
+	metamodel = { package socialnetwork }
+	//constraints = { package ca.mcgill.ecse.socialnetwork.plugin }
+	partial-model = { "inputs/280nodes.xmi"}
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 301
+	}
+	
+	number = 1
+	runs = 1
+	config = {
+		log-level = normal
+	}
+	
+	debug = "output/debug"
+	output = "output"
+	log = "output/log.txt"
+}

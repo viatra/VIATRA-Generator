@@ -1,0 +1,23 @@
+import epackage "../VIATRA-Generator/Domains/hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph/model/yakindu_simplified.ecore"
+import viatra	"../VIATRA-Generator/Domains/hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph/queries/hu/bme/mit/inf/dslreasoner/partialsnapshot_mavo/yakindu/patterns.vql"
+
+generate {
+	metamodel = { package yakindumm excluding { Synchronization}}
+	constraints = { package hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu }
+	partial-model = { "inputs/start.xmi"}
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 100
+	}
+	
+	number = 1
+	runs = 1
+	config = {
+		log-level = none
+	}
+	
+	debug = "debug"
+	output = "output/Viatra_100/"
+}
