@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -65,6 +66,15 @@ public class Util {
     Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
     final TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTransformationOutput = Util.ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
     return Util.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), false);
+  }
+  
+  public static double sum2(final Collection<Number> integers) {
+    double sum = 0.0;
+    for (final Number integer : integers) {
+      double _sum = sum;
+      sum = DoubleExtensions.operator_plus(Double.valueOf(_sum), integer);
+    }
+    return sum;
   }
   
   public static int sum(final Collection<Integer> integers) {

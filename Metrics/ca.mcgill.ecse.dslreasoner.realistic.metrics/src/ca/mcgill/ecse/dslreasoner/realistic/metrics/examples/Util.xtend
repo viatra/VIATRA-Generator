@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject
 class Util {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
-	
+
 	def static toLocalNode(AbstractNodeDescriptor descriptor) {
 		var AbstractNodeDescriptor d = descriptor
 		while (!d.class.equals(LocalNodeDescriptor)) {
@@ -42,8 +42,16 @@ class Util {
 
 		return partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource, false)
 	}
+
+	def static sum2(Collection<Number> integers) {
+		var sum = 0.0
+		for (integer : integers) {
+			sum += integer
+		}
+		return sum
+	}
 	
-		def static sum(Collection<Integer> integers) {
+	def static sum(Collection<Integer> integers) {
 		var sum = 0
 		for (integer : integers) {
 			sum += integer
