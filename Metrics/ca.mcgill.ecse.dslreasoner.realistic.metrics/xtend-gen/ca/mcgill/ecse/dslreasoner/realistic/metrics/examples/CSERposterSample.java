@@ -40,7 +40,7 @@ public class CSERposterSample {
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
-  private final static int depth = 1;
+  private final static int depth = 2;
   
   private final static String REALISTIC = "simpleSCRealistic";
   

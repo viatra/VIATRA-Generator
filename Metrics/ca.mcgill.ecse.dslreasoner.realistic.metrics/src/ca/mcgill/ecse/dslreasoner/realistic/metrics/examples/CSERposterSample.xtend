@@ -21,7 +21,7 @@ class CSERposterSample {
 	static val partialVisualizer = new PartialInterpretation2Gml
 	static val neighbourhoodVisualizer = new Neighbourhood2Gml
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
-	static val depth = 1
+	static val depth = 2
 	static val REALISTIC = "simpleSCRealistic"
 	static val IRREALISTIC = "simpleSCIrrealistic"
 

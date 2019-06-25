@@ -11,6 +11,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
+import java.io.File
 import java.io.PrintWriter
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -20,6 +21,7 @@ import java.util.List
 import java.util.Map
 import java.util.Set
 import linkedList.LinkedListPackage
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.impl.EReferenceImpl
 import org.eclipse.emf.ecore.resource.Resource
@@ -47,23 +49,26 @@ class MetricsCalculationUsingShapes {
 		YakindummPackage.eINSTANCE.eClass
 		LinkedListPackage.eINSTANCE.eClass
 		ReteEngine.getClass
-		
-		//SELECTION
+
+		// SELECTION
 		val testing = false
-		val fileSelector = 0
+		val fileSelector = "R1"
+		val bounded = false
 		val lowEnd = 0
-		val highEnd = 100
-		//END SELECTION
-		
-		var  fileDir = ""
-		
+		val highEnd = 1
+		// END SELECTION
+		var fileDir = ""
+
 		switch fileSelector {
-			case 1 : fileDir = "A0//models//"
-			default : fileDir = "Human//"
+			case "A0": fileDir = "A0//models//"
+			case "A20": fileDir = "A20//models//"
+			case "R1": fileDir = "RandomEMF-WF+7//models//"
+			case "R2": fileDir = "RandomEMF30//models//"
+			default: fileDir = "Human//"
 		}
 		val outputFileName = "stats.csv"
 		var inputs = ""
-		if(testing) {
+		if (testing) {
 			inputs = "resources//" // TESTING
 		} else {
 			inputs = "inputs//" + fileDir
@@ -88,11 +93,32 @@ class MetricsCalculationUsingShapes {
 		var realVal = 0.0
 		var progressTracker = 0
 		var List<String> listToLookThrough = newArrayList
+		var List<String> subDirList = newArrayList
 		if (testing) {
-			listToLookThrough = newArrayList("sampleList.xmi")	
+			listToLookThrough = newArrayList("sampleList.xmi")
 		} else {
-			listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
+			if (bounded) {
+				listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
+			} else {
+				// NOT GENERAL
+				for (run : workspace.allFiles) {
+					if (new File(URI.createFileURI(inputs + "/" + run).toFileString).isDirectory) {
+						val subWS = workspace.subWorkspace(run, "")
+					if (new File(subWS.workspaceURI.toFileString).isDirectory) {
+						for (file : subWS.allFiles) {
+							listToLookThrough.add(run + "/" + file)
+						}
+					}
+					}
+					else {
+						listToLookThrough.add(run)
+					}
+					
+				}
+			}
 		}
+
+		// BEGIN
 		print(listToLookThrough)
 		for (fileName : listToLookThrough) {
 			print(progressTracker++ + "-")
@@ -161,21 +187,21 @@ class MetricsCalculationUsingShapes {
 			calcVal = getEDAfromNHShape(partialModel, 2, 0)
 			metricValues.get(9).add(df.format(calcVal))
 			// Calculate delta
-			deltas.get(0).add( df.format(Math.abs((calcVal - realVal) / realVal * 100)))
+			deltas.get(0).add(df.format(Math.abs((calcVal - realVal) / realVal * 100)))
 			totalDeltas.set(4, totalDeltas.get(4) + (Math.abs((calcVal - realVal) / realVal * 100)))
-			
+
 			// Calculate MPC from neighbourhood shape
 			calcVal = getEDAfromNHShape(partialModel, 2, 1)
 			metricValues.get(10).add(df.format(calcVal))
 			// Calculate delta
-			deltas.get(1).add( df.format(Math.abs((calcVal - realVal) / realVal * 100)))
+			deltas.get(1).add(df.format(Math.abs((calcVal - realVal) / realVal * 100)))
 			totalDeltas.set(5, totalDeltas.get(5) + (Math.abs((calcVal - realVal) / realVal * 100)))
-			
+
 			// Calculate MPC from neighbourhood shape
 			calcVal = getEDAfromNHShape(partialModel, 2, 2)
 			metricValues.get(11).add(df.format(calcVal))
 			// Calculate delta
-			deltas.get(2).add( df.format(Math.abs((calcVal - realVal) / realVal * 100)))
+			deltas.get(2).add(df.format(Math.abs((calcVal - realVal) / realVal * 100)))
 			totalDeltas.set(6, totalDeltas.get(6) + (Math.abs((calcVal - realVal) / realVal * 100)))
 		// /////////////
 		// new metric
@@ -222,9 +248,9 @@ class MetricsCalculationUsingShapes {
 		writer.append("\n");
 
 		writer.close
-		
+
 		writer = new PrintWriter(outputFolder + "statsD0EDA2.csv")
-		for (var i = 8; i < 11; i+=2) {
+		for (var i = 8; i < 11; i += 2) {
 			writer.append(headers.get(i))
 			writer.append(String.join(",", metricValues.get(i)))
 			writer.append("\n");
@@ -234,9 +260,9 @@ class MetricsCalculationUsingShapes {
 		writer.append("\n");
 
 		writer.close
-		
+
 		writer = new PrintWriter(outputFolder + "statsD0EDA3.csv")
-		for (var i = 8; i < 12; i+=3) {
+		for (var i = 8; i < 12; i += 3) {
 			writer.append(headers.get(i))
 			writer.append(String.join(",", metricValues.get(i)))
 			writer.append("\n");
@@ -275,7 +301,7 @@ class MetricsCalculationUsingShapes {
 		println("           deltas : " + deltas.get(0))
 		println("       Avg % delta: " + df.format(totalDeltas.get(4) / numModels))
 		println("from NH Shape Out : " + metricValues.get(10))
-		println("           deltas : " + deltas.get(1))		
+		println("           deltas : " + deltas.get(1))
 		println("       Avg % delta: " + df.format(totalDeltas.get(5) / numModels))
 		println("from NH Shape Avg : " + metricValues.get(11))
 		println("           deltas : " + deltas.get(2))
@@ -670,17 +696,20 @@ class MetricsCalculationUsingShapes {
 				val toNode = dim.to
 				val numToNodeOcc = toNode.correspondingAND.lookup(nhRep) as Integer
 				val numToNodeChildren = dim.targetDistrib.size
-				
+
 				var amountToAdd = 0.0
-				
+
 				switch vers {
-					case 0 : amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren) // +
+					case 0:
+						amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren) // +
 //					Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) /2
-					case 1 : amountToAdd = (Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren)
-					default : amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren  +
-					Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) / 2.0
+					case 1:
+						amountToAdd = (Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren)
+					default:
+						amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren +
+							Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) / 2.0
 				}
-				
+
 				if (dim2Occ.keySet.contains(dimName)) {
 					newVal = dimName.lookup(dim2Occ) + amountToAdd
 				} else {

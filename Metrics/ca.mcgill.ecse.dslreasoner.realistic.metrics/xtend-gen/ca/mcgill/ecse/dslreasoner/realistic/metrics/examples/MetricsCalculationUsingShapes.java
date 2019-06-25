@@ -16,6 +16,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
+import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
+import java.io.File;
 import java.io.PrintWriter;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -28,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import linkedList.LinkedListPackage;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EReferenceImpl;
@@ -68,17 +71,31 @@ public class MetricsCalculationUsingShapes {
       LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
       final boolean testing = false;
-      final int fileSelector = 0;
+      final String fileSelector = "R1";
+      final boolean bounded = false;
       final int lowEnd = 0;
-      final int highEnd = 100;
+      final int highEnd = 1;
       String fileDir = "";
-      switch (fileSelector) {
-        case 1:
-          fileDir = "A0//models//";
-          break;
-        default:
-          fileDir = "Human//";
-          break;
+      if (fileSelector != null) {
+        switch (fileSelector) {
+          case "A0":
+            fileDir = "A0//models//";
+            break;
+          case "A20":
+            fileDir = "A20//models//";
+            break;
+          case "R1":
+            fileDir = "RandomEMF-WF+7//models//";
+            break;
+          case "R2":
+            fileDir = "RandomEMF30//models//";
+            break;
+          default:
+            fileDir = "Human//";
+            break;
+        }
+      } else {
+        fileDir = "Human//";
       }
       final String outputFileName = "stats.csv";
       String inputs = "";
@@ -104,10 +121,32 @@ public class MetricsCalculationUsingShapes {
       double realVal = 0.0;
       int progressTracker = 0;
       List<String> listToLookThrough = CollectionLiterals.<String>newArrayList();
+      List<String> subDirList = CollectionLiterals.<String>newArrayList();
       if (testing) {
         listToLookThrough = CollectionLiterals.<String>newArrayList("sampleList.xmi");
       } else {
-        listToLookThrough = workspace.allFiles().subList(lowEnd, highEnd);
+        if (bounded) {
+          listToLookThrough = workspace.allFiles().subList(lowEnd, highEnd);
+        } else {
+          List<String> _allFiles = workspace.allFiles();
+          for (final String run : _allFiles) {
+            String _fileString = URI.createFileURI(((inputs + "/") + run)).toFileString();
+            boolean _isDirectory = new File(_fileString).isDirectory();
+            if (_isDirectory) {
+              final ReasonerWorkspace subWS = workspace.subWorkspace(run, "");
+              String _fileString_1 = subWS.getWorkspaceURI().toFileString();
+              boolean _isDirectory_1 = new File(_fileString_1).isDirectory();
+              if (_isDirectory_1) {
+                List<String> _allFiles_1 = subWS.allFiles();
+                for (final String file : _allFiles_1) {
+                  listToLookThrough.add(((run + "/") + file));
+                }
+              }
+            } else {
+              listToLookThrough.add(run);
+            }
+          }
+        }
       }
       InputOutput.<List<String>>print(listToLookThrough);
       for (final String fileName : listToLookThrough) {
