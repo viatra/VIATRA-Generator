@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -68,11 +67,11 @@ public class Util {
     return Util.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), false);
   }
   
-  public static double sum2(final Collection<Number> integers) {
+  public static double sum2(final Collection<Double> integers) {
     double sum = 0.0;
-    for (final Number integer : integers) {
+    for (final Double integer : integers) {
       double _sum = sum;
-      sum = DoubleExtensions.operator_plus(Double.valueOf(_sum), integer);
+      sum = (_sum + (integer).doubleValue());
     }
     return sum;
   }

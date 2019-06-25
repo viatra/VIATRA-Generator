@@ -3,6 +3,8 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
@@ -19,17 +21,12 @@ import java.util.Map
 import java.util.Set
 import linkedList.LinkedListPackage
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.impl.EReferenceImpl
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.emf.ecore.EClass
-import java.util.EventObject
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
-import org.eclipse.emf.ecore.impl.EReferenceImpl
 
 class MetricsCalculationUsingShapes {
 
@@ -37,7 +34,7 @@ class MetricsCalculationUsingShapes {
 
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	private static DecimalFormat df = new DecimalFormat("0.000");
-	private static final Integer NUMMEASUREMENTS = 10
+	private static final Integer NUMMEASUREMENTS = 15
 	private static final Integer NUMNA = 2
 	private static final Integer NUMMPC = 4
 	private static final Integer NUMNDA = 6
@@ -50,11 +47,27 @@ class MetricsCalculationUsingShapes {
 		YakindummPackage.eINSTANCE.eClass
 		LinkedListPackage.eINSTANCE.eClass
 		ReteEngine.getClass
-
-		val fileDir = "Human//"
+		
+		//SELECTION
+		val testing = false
+		val fileSelector = 0
+		val lowEnd = 0
+		val highEnd = 100
+		//END SELECTION
+		
+		var  fileDir = ""
+		
+		switch fileSelector {
+			case 1 : fileDir = "A0//models//"
+			default : fileDir = "Human//"
+		}
 		val outputFileName = "stats.csv"
-		val inputs = "inputs//" + fileDir
-//		val inputs = "resources//" // TESTING
+		var inputs = ""
+		if(testing) {
+			inputs = "resources//" // TESTING
+		} else {
+			inputs = "inputs//" + fileDir
+		}
 		val workspace = new FileSystemWorkspace(inputs, "")
 
 		// Where we stor metric values
@@ -74,8 +87,14 @@ class MetricsCalculationUsingShapes {
 		var calcVal = 0.0
 		var realVal = 0.0
 		var progressTracker = 0
-		for (fileName : workspace.allFiles.subList(240, 440)) {
-//		for (fileName : newArrayList("sampleList.xmi")) { // TESTING
+		var List<String> listToLookThrough = newArrayList
+		if (testing) {
+			listToLookThrough = newArrayList("sampleList.xmi")	
+		} else {
+			listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
+		}
+		print(listToLookThrough)
+		for (fileName : listToLookThrough) {
 			print(progressTracker++ + "-")
 			val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 			val model = workspace.readModel(EObject, fileName)
@@ -139,11 +158,25 @@ class MetricsCalculationUsingShapes {
 			metricValues.get(8).add(df.format(realVal))
 
 			// Calculate MPC from neighbourhood shape
-			calcVal = getEDAfromNHShape(partialModel, 2)
+			calcVal = getEDAfromNHShape(partialModel, 2, 0)
 			metricValues.get(9).add(df.format(calcVal))
 			// Calculate delta
 			deltas.get(0).add( df.format(Math.abs((calcVal - realVal) / realVal * 100)))
 			totalDeltas.set(4, totalDeltas.get(4) + (Math.abs((calcVal - realVal) / realVal * 100)))
+			
+			// Calculate MPC from neighbourhood shape
+			calcVal = getEDAfromNHShape(partialModel, 2, 1)
+			metricValues.get(10).add(df.format(calcVal))
+			// Calculate delta
+			deltas.get(1).add( df.format(Math.abs((calcVal - realVal) / realVal * 100)))
+			totalDeltas.set(5, totalDeltas.get(5) + (Math.abs((calcVal - realVal) / realVal * 100)))
+			
+			// Calculate MPC from neighbourhood shape
+			calcVal = getEDAfromNHShape(partialModel, 2, 2)
+			metricValues.get(11).add(df.format(calcVal))
+			// Calculate delta
+			deltas.get(2).add( df.format(Math.abs((calcVal - realVal) / realVal * 100)))
+			totalDeltas.set(6, totalDeltas.get(6) + (Math.abs((calcVal - realVal) / realVal * 100)))
 		// /////////////
 		// new metric
 		// /////////////
@@ -161,7 +194,7 @@ class MetricsCalculationUsingShapes {
 
 		// Write to .csv
 		val headers = newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape,", "NDA,Model,", "NDA,Shape,",
-			"NDC,Model,", "NDC,Shape,", "EDA,Model,", "EDA,Shape,", "EDA,Deltas,")
+			"NDC,Model,", "NDC,Shape,", "EDA,Model,", "EDA,Shape,", "EDA,Deltas,", "EDA,Deltas,", "EDA,Deltas,")
 		var writer = new PrintWriter(outputFolder + "statsNA.csv")
 		for (var i = 0; i < NUMNA; i++) {
 			writer.append(headers.get(i))
@@ -178,7 +211,7 @@ class MetricsCalculationUsingShapes {
 		}
 		writer.close
 
-		writer = new PrintWriter(outputFolder + "statsEDA.csv")
+		writer = new PrintWriter(outputFolder + "statsD0EDA1.csv")
 		for (var i = 8; i < 10; i++) {
 			writer.append(headers.get(i))
 			writer.append(String.join(",", metricValues.get(i)))
@@ -186,6 +219,30 @@ class MetricsCalculationUsingShapes {
 		}
 		writer.append(headers.get(10))
 		writer.append(String.join(",", deltas.get(0)))
+		writer.append("\n");
+
+		writer.close
+		
+		writer = new PrintWriter(outputFolder + "statsD0EDA2.csv")
+		for (var i = 8; i < 11; i+=2) {
+			writer.append(headers.get(i))
+			writer.append(String.join(",", metricValues.get(i)))
+			writer.append("\n");
+		}
+		writer.append(headers.get(10))
+		writer.append(String.join(",", deltas.get(1)))
+		writer.append("\n");
+
+		writer.close
+		
+		writer = new PrintWriter(outputFolder + "statsD0EDA3.csv")
+		for (var i = 8; i < 12; i+=3) {
+			writer.append(headers.get(i))
+			writer.append(String.join(",", metricValues.get(i)))
+			writer.append("\n");
+		}
+		writer.append(headers.get(10))
+		writer.append(String.join(",", deltas.get(2)))
 		writer.append("\n");
 
 		writer.close
@@ -214,8 +271,15 @@ class MetricsCalculationUsingShapes {
 
 		println("EDA:")
 		println("from Partial Model: " + metricValues.get(8))
-		println("from NH Shape     : " + metricValues.get(9))
+		println("from NH Shape In  : " + metricValues.get(9))
+		println("           deltas : " + deltas.get(0))
 		println("       Avg % delta: " + df.format(totalDeltas.get(4) / numModels))
+		println("from NH Shape Out : " + metricValues.get(10))
+		println("           deltas : " + deltas.get(1))		
+		println("       Avg % delta: " + df.format(totalDeltas.get(5) / numModels))
+		println("from NH Shape Avg : " + metricValues.get(11))
+		println("           deltas : " + deltas.get(2))
+		println("       Avg % delta: " + df.format(totalDeltas.get(6) / numModels))
 
 //		println("new metric:")
 //		println("from Partial Model: " + metricValues.get(4))
@@ -581,17 +645,11 @@ class MetricsCalculationUsingShapes {
 		return avgEDA
 	}
 
-	def static printer(Map<EObject, Integer> map) {
-		for (key : map.keySet) {
-			print((key as EReferenceImpl).name + "=" + key.lookup(map) + ", ")
-		}
-	}
-
 	def static getEDAfromNHShape(PartialInterpretation pm) {
-		return getEDAfromNHShape(pm, 1)
+		return getEDAfromNHShape(pm, 1, 0)
 	}
 
-	def static getEDAfromNHShape(PartialInterpretation pm, Integer depth) {
+	def static getEDAfromNHShape(PartialInterpretation pm, Integer depth, Integer vers) {
 		// Get NH Shape
 		val nh = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhRep = nh.modelRepresentation as HashMap
@@ -601,8 +659,8 @@ class MetricsCalculationUsingShapes {
 		// calculations
 		val nodes = gs.nodes as List<GraphNodeDescriptorGND>
 
-		val Map<String, Integer> dim2Occ = new HashMap
-		var newVal = 0
+		val Map<String, Double> dim2Occ = new HashMap
+		var newVal = 0.0
 		for (node : nodes) {
 			for (dim : node.outgoingEdges) {
 				val dimName = dim.type
@@ -612,9 +670,17 @@ class MetricsCalculationUsingShapes {
 				val toNode = dim.to
 				val numToNodeOcc = toNode.correspondingAND.lookup(nhRep) as Integer
 				val numToNodeChildren = dim.targetDistrib.size
-
-				val amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren) // +
+				
+				var amountToAdd = 0.0
+				
+				switch vers {
+					case 0 : amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren) // +
 //					Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) /2
+					case 1 : amountToAdd = (Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren)
+					default : amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren  +
+					Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) / 2.0
+				}
+				
 				if (dim2Occ.keySet.contains(dimName)) {
 					newVal = dimName.lookup(dim2Occ) + amountToAdd
 				} else {
@@ -625,7 +691,7 @@ class MetricsCalculationUsingShapes {
 		}
 		println("Calc    :" + dim2Occ)
 		// calculations
-		var totalEDA = Util.sum(dim2Occ.values)
+		var totalEDA = Util.sum2(dim2Occ.values)
 		val numDims = dim2Occ.keySet.length
 		val avgEDA = Double.valueOf(totalEDA) / numDims
 		return avgEDA
@@ -726,6 +792,12 @@ class MetricsCalculationUsingShapes {
 		}
 
 		return dim2Occurences
+	}
+
+	def static printer(Map<EObject, Integer> map) {
+		for (key : map.keySet) {
+			print((key as EReferenceImpl).name + "=" + key.lookup(map) + ", ")
+		}
 	}
 
 	def static putInside(EObject object, String string, int i, Map<EObject, Map<String, Integer>> map) {

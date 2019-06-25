@@ -49,7 +49,7 @@ public class MetricsCalculationUsingShapes {
   
   private static DecimalFormat df = new DecimalFormat("0.000");
   
-  private final static Integer NUMMEASUREMENTS = Integer.valueOf(10);
+  private final static Integer NUMMEASUREMENTS = Integer.valueOf(15);
   
   private final static Integer NUMNA = Integer.valueOf(2);
   
@@ -67,9 +67,26 @@ public class MetricsCalculationUsingShapes {
       YakindummPackage.eINSTANCE.eClass();
       LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
-      final String fileDir = "Human//";
+      final boolean testing = false;
+      final int fileSelector = 0;
+      final int lowEnd = 0;
+      final int highEnd = 100;
+      String fileDir = "";
+      switch (fileSelector) {
+        case 1:
+          fileDir = "A0//models//";
+          break;
+        default:
+          fileDir = "Human//";
+          break;
+      }
       final String outputFileName = "stats.csv";
-      final String inputs = ("inputs//" + fileDir);
+      String inputs = "";
+      if (testing) {
+        inputs = "resources//";
+      } else {
+        inputs = ("inputs//" + fileDir);
+      }
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
       List<List<String>> metricValues = CollectionLiterals.<List<String>>newArrayList();
       for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMMEASUREMENTS).intValue()); i++) {
@@ -86,8 +103,14 @@ public class MetricsCalculationUsingShapes {
       double calcVal = 0.0;
       double realVal = 0.0;
       int progressTracker = 0;
-      List<String> _subList = workspace.allFiles().subList(240, 440);
-      for (final String fileName : _subList) {
+      List<String> listToLookThrough = CollectionLiterals.<String>newArrayList();
+      if (testing) {
+        listToLookThrough = CollectionLiterals.<String>newArrayList("sampleList.xmi");
+      } else {
+        listToLookThrough = workspace.allFiles().subList(lowEnd, highEnd);
+      }
+      InputOutput.<List<String>>print(listToLookThrough);
+      for (final String fileName : listToLookThrough) {
         {
           int _plusPlus = progressTracker++;
           String _plus = (Integer.valueOf(_plusPlus) + "-");
@@ -129,17 +152,31 @@ public class MetricsCalculationUsingShapes {
           totalDeltas.set(3, Double.valueOf(_plus_4));
           realVal = MetricsCalculationUsingShapes.getEDAfromModel(model);
           metricValues.get(8).add(MetricsCalculationUsingShapes.df.format(realVal));
-          calcVal = MetricsCalculationUsingShapes.getEDAfromNHShape(partialModel, Integer.valueOf(2));
+          calcVal = MetricsCalculationUsingShapes.getEDAfromNHShape(partialModel, Integer.valueOf(2), Integer.valueOf(0));
           metricValues.get(9).add(MetricsCalculationUsingShapes.df.format(calcVal));
           deltas.get(0).add(MetricsCalculationUsingShapes.df.format(Math.abs((((calcVal - realVal) / realVal) * 100))));
           Double _get_4 = totalDeltas.get(4);
           double _abs_4 = Math.abs((((calcVal - realVal) / realVal) * 100));
           double _plus_5 = ((_get_4).doubleValue() + _abs_4);
           totalDeltas.set(4, Double.valueOf(_plus_5));
+          calcVal = MetricsCalculationUsingShapes.getEDAfromNHShape(partialModel, Integer.valueOf(2), Integer.valueOf(1));
+          metricValues.get(10).add(MetricsCalculationUsingShapes.df.format(calcVal));
+          deltas.get(1).add(MetricsCalculationUsingShapes.df.format(Math.abs((((calcVal - realVal) / realVal) * 100))));
+          Double _get_5 = totalDeltas.get(5);
+          double _abs_5 = Math.abs((((calcVal - realVal) / realVal) * 100));
+          double _plus_6 = ((_get_5).doubleValue() + _abs_5);
+          totalDeltas.set(5, Double.valueOf(_plus_6));
+          calcVal = MetricsCalculationUsingShapes.getEDAfromNHShape(partialModel, Integer.valueOf(2), Integer.valueOf(2));
+          metricValues.get(11).add(MetricsCalculationUsingShapes.df.format(calcVal));
+          deltas.get(2).add(MetricsCalculationUsingShapes.df.format(Math.abs((((calcVal - realVal) / realVal) * 100))));
+          Double _get_6 = totalDeltas.get(6);
+          double _abs_6 = Math.abs((((calcVal - realVal) / realVal) * 100));
+          double _plus_7 = ((_get_6).doubleValue() + _abs_6);
+          totalDeltas.set(6, Double.valueOf(_plus_7));
         }
       }
       final ArrayList<String> headers = CollectionLiterals.<String>newArrayList("NA,Model,", "NA,Shape,", "MPC,Model,", "MPC,Shape,", "NDA,Model,", "NDA,Shape,", 
-        "NDC,Model,", "NDC,Shape,", "EDA,Model,", "EDA,Shape,", "EDA,Deltas,");
+        "NDC,Model,", "NDC,Shape,", "EDA,Model,", "EDA,Shape,", "EDA,Deltas,", "EDA,Deltas,", "EDA,Deltas,");
       PrintWriter writer = new PrintWriter((outputFolder + "statsNA.csv"));
       for (int i = 0; (i < (MetricsCalculationUsingShapes.NUMNA).intValue()); i++) {
         {
@@ -159,7 +196,7 @@ public class MetricsCalculationUsingShapes {
         }
       }
       writer.close();
-      PrintWriter _printWriter_1 = new PrintWriter((outputFolder + "statsEDA.csv"));
+      PrintWriter _printWriter_1 = new PrintWriter((outputFolder + "statsD0EDA1.csv"));
       writer = _printWriter_1;
       for (int i = 8; (i < 10); i++) {
         {
@@ -170,6 +207,46 @@ public class MetricsCalculationUsingShapes {
       }
       writer.append(headers.get(10));
       writer.append(String.join(",", deltas.get(0)));
+      writer.append("\n");
+      writer.close();
+      PrintWriter _printWriter_2 = new PrintWriter((outputFolder + "statsD0EDA2.csv"));
+      writer = _printWriter_2;
+      {
+        int i = 8;
+        boolean _while = (i < 11);
+        while (_while) {
+          {
+            writer.append(headers.get(i));
+            writer.append(String.join(",", metricValues.get(i)));
+            writer.append("\n");
+          }
+          int _i = i;
+          i = (_i + 2);
+          _while = (i < 11);
+        }
+      }
+      writer.append(headers.get(10));
+      writer.append(String.join(",", deltas.get(1)));
+      writer.append("\n");
+      writer.close();
+      PrintWriter _printWriter_3 = new PrintWriter((outputFolder + "statsD0EDA3.csv"));
+      writer = _printWriter_3;
+      {
+        int i = 8;
+        boolean _while = (i < 12);
+        while (_while) {
+          {
+            writer.append(headers.get(i));
+            writer.append(String.join(",", metricValues.get(i)));
+            writer.append("\n");
+          }
+          int _i = i;
+          i = (_i + 3);
+          _while = (i < 12);
+        }
+      }
+      writer.append(headers.get(10));
+      writer.append(String.join(",", deltas.get(2)));
       writer.append("\n");
       writer.close();
       final int numModels = ((Object[])Conversions.unwrapArray(metricValues.get(0), Object.class)).length;
@@ -227,13 +304,38 @@ public class MetricsCalculationUsingShapes {
       String _plus_12 = ("from Partial Model: " + _get_12);
       InputOutput.<String>println(_plus_12);
       List<String> _get_13 = metricValues.get(9);
-      String _plus_13 = ("from NH Shape     : " + _get_13);
+      String _plus_13 = ("from NH Shape In  : " + _get_13);
       InputOutput.<String>println(_plus_13);
-      Double _get_14 = totalDeltas.get(4);
-      double _divide_4 = ((_get_14).doubleValue() / numModels);
-      String _format_4 = MetricsCalculationUsingShapes.df.format(_divide_4);
-      String _plus_14 = ("       Avg % delta: " + _format_4);
+      List<String> _get_14 = deltas.get(0);
+      String _plus_14 = ("           deltas : " + _get_14);
       InputOutput.<String>println(_plus_14);
+      Double _get_15 = totalDeltas.get(4);
+      double _divide_4 = ((_get_15).doubleValue() / numModels);
+      String _format_4 = MetricsCalculationUsingShapes.df.format(_divide_4);
+      String _plus_15 = ("       Avg % delta: " + _format_4);
+      InputOutput.<String>println(_plus_15);
+      List<String> _get_16 = metricValues.get(10);
+      String _plus_16 = ("from NH Shape Out : " + _get_16);
+      InputOutput.<String>println(_plus_16);
+      List<String> _get_17 = deltas.get(1);
+      String _plus_17 = ("           deltas : " + _get_17);
+      InputOutput.<String>println(_plus_17);
+      Double _get_18 = totalDeltas.get(5);
+      double _divide_5 = ((_get_18).doubleValue() / numModels);
+      String _format_5 = MetricsCalculationUsingShapes.df.format(_divide_5);
+      String _plus_18 = ("       Avg % delta: " + _format_5);
+      InputOutput.<String>println(_plus_18);
+      List<String> _get_19 = metricValues.get(11);
+      String _plus_19 = ("from NH Shape Avg : " + _get_19);
+      InputOutput.<String>println(_plus_19);
+      List<String> _get_20 = deltas.get(2);
+      String _plus_20 = ("           deltas : " + _get_20);
+      InputOutput.<String>println(_plus_20);
+      Double _get_21 = totalDeltas.get(6);
+      double _divide_6 = ((_get_21).doubleValue() / numModels);
+      String _format_6 = MetricsCalculationUsingShapes.df.format(_divide_6);
+      String _plus_21 = ("       Avg % delta: " + _format_6);
+      InputOutput.<String>println(_plus_21);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -605,31 +707,19 @@ public class MetricsCalculationUsingShapes {
     return avgEDA;
   }
   
-  public static void printer(final Map<EObject, Integer> map) {
-    Set<EObject> _keySet = map.keySet();
-    for (final EObject key : _keySet) {
-      String _name = ((EReferenceImpl) key).getName();
-      String _plus = (_name + "=");
-      Integer _lookup = CollectionsUtil.<EObject, Integer>lookup(key, map);
-      String _plus_1 = (_plus + _lookup);
-      String _plus_2 = (_plus_1 + ", ");
-      InputOutput.<String>print(_plus_2);
-    }
-  }
-  
   public static double getEDAfromNHShape(final PartialInterpretation pm) {
-    return MetricsCalculationUsingShapes.getEDAfromNHShape(pm, Integer.valueOf(1));
+    return MetricsCalculationUsingShapes.getEDAfromNHShape(pm, Integer.valueOf(1), Integer.valueOf(0));
   }
   
-  public static double getEDAfromNHShape(final PartialInterpretation pm, final Integer depth) {
+  public static double getEDAfromNHShape(final PartialInterpretation pm, final Integer depth, final Integer vers) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = MetricsCalculationUsingShapes.neighbourhoodComputer.createRepresentation(pm, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhRep = ((HashMap) _modelRepresentation);
     final GraphShape<Object, Object> gs = MetricsCalculationUsingShapes.neighbouhood2ShapeGraph.createShapeGraph(nh, pm);
     List<GraphNodeDescriptorGND> _nodes = gs.getNodes();
     final List<GraphNodeDescriptorGND> nodes = ((List<GraphNodeDescriptorGND>) _nodes);
-    final Map<String, Integer> dim2Occ = new HashMap<String, Integer>();
-    int newVal = 0;
+    final Map<String, Double> dim2Occ = new HashMap<String, Double>();
+    double newVal = 0.0;
     for (final GraphNodeDescriptorGND node : nodes) {
       List<OutgoingRelationGND> _outgoingEdges = node.getOutgoingEdges();
       for (final OutgoingRelationGND dim : _outgoingEdges) {
@@ -642,23 +732,58 @@ public class MetricsCalculationUsingShapes {
           Object _lookup_1 = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(toNode.getCorrespondingAND(), nhRep);
           final Integer numToNodeOcc = ((Integer) _lookup_1);
           final int numToNodeChildren = dim.getTargetDistrib().size();
-          int _sum = Util.sum(dim.getSourceDistrib());
-          int _multiply = (_sum * (numNodeOcc).intValue());
-          final int amountToAdd = (_multiply / numNodeChildren);
+          double amountToAdd = 0.0;
+          if (vers != null) {
+            switch (vers) {
+              case 0:
+                int _sum = Util.sum(dim.getSourceDistrib());
+                int _multiply = (_sum * (numNodeOcc).intValue());
+                int _divide = (_multiply / numNodeChildren);
+                amountToAdd = _divide;
+                break;
+              case 1:
+                int _sum_1 = Util.sum(dim.getTargetDistrib());
+                int _multiply_1 = (_sum_1 * (numToNodeOcc).intValue());
+                int _divide_1 = (_multiply_1 / numToNodeChildren);
+                amountToAdd = _divide_1;
+                break;
+              default:
+                int _sum_2 = Util.sum(dim.getSourceDistrib());
+                int _multiply_2 = (_sum_2 * (numNodeOcc).intValue());
+                int _divide_2 = (_multiply_2 / numNodeChildren);
+                int _sum_3 = Util.sum(dim.getTargetDistrib());
+                int _multiply_3 = (_sum_3 * (numToNodeOcc).intValue());
+                int _divide_3 = (_multiply_3 / numToNodeChildren);
+                int _plus = (_divide_2 + _divide_3);
+                double _divide_4 = (_plus / 2.0);
+                amountToAdd = _divide_4;
+                break;
+            }
+          } else {
+            int _sum_2 = Util.sum(dim.getSourceDistrib());
+            int _multiply_2 = (_sum_2 * (numNodeOcc).intValue());
+            int _divide_2 = (_multiply_2 / numNodeChildren);
+            int _sum_3 = Util.sum(dim.getTargetDistrib());
+            int _multiply_3 = (_sum_3 * (numToNodeOcc).intValue());
+            int _divide_3 = (_multiply_3 / numToNodeChildren);
+            int _plus = (_divide_2 + _divide_3);
+            double _divide_4 = (_plus / 2.0);
+            amountToAdd = _divide_4;
+          }
           boolean _contains = dim2Occ.keySet().contains(dimName);
           if (_contains) {
-            Integer _lookup_2 = CollectionsUtil.<String, Integer>lookup(dimName, dim2Occ);
-            int _plus = ((_lookup_2).intValue() + amountToAdd);
-            newVal = _plus;
+            Double _lookup_2 = CollectionsUtil.<String, Double>lookup(dimName, dim2Occ);
+            double _plus_1 = ((_lookup_2).doubleValue() + amountToAdd);
+            newVal = _plus_1;
           } else {
             newVal = amountToAdd;
           }
-          dim2Occ.put(dimName, Integer.valueOf(newVal));
+          dim2Occ.put(dimName, Double.valueOf(newVal));
         }
       }
     }
     InputOutput.<String>println(("Calc    :" + dim2Occ));
-    int totalEDA = Util.sum(dim2Occ.values());
+    double totalEDA = Util.sum2(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
     Double _valueOf = Double.valueOf(totalEDA);
     final double avgEDA = ((_valueOf).doubleValue() / numDims);
@@ -772,6 +897,18 @@ public class MetricsCalculationUsingShapes {
       }
     }
     return dim2Occurences;
+  }
+  
+  public static void printer(final Map<EObject, Integer> map) {
+    Set<EObject> _keySet = map.keySet();
+    for (final EObject key : _keySet) {
+      String _name = ((EReferenceImpl) key).getName();
+      String _plus = (_name + "=");
+      Integer _lookup = CollectionsUtil.<EObject, Integer>lookup(key, map);
+      String _plus_1 = (_plus + _lookup);
+      String _plus_2 = (_plus_1 + ", ");
+      InputOutput.<String>print(_plus_2);
+    }
   }
   
   public static Integer putInside(final EObject object, final String string, final int i, final Map<EObject, Map<String, Integer>> map) {

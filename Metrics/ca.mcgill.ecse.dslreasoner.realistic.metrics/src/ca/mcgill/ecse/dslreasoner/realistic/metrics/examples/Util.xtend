@@ -43,7 +43,7 @@ class Util {
 		return partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource, false)
 	}
 
-	def static sum2(Collection<Number> integers) {
+	def static sum2(Collection<Double> integers) {
 		var sum = 0.0
 		for (integer : integers) {
 			sum += integer

@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 from os import listdir
 
 def main():
-	fileNames = ['statsNA', 'statsMPC']
+	#fileNames = ['statsNA', 'statsMPC', 'statsEDA']
+	fileNames = ['statsEDA1', 'statsEDA2', 'statsEDA3']
 	for csvFileName in fileNames:
 		csvLocation = '../ca.mcgill.ecse.dslreasoner.realistic.metrics/outputs/calculatedMetrics/stats/'
 		with open(csvLocation + csvFileName + '.csv') as f:
@@ -12,6 +13,9 @@ def main():
 			ind = 0
 			for row in reader:
 				rowName = row[0] + row[1]
+				for i in row[2:] :
+					print(i)
+					float(i)
 				rowVals = [float(i) for i in row[2:]]
 				if ind == 0 :
 					plt.plot(rowVals, label = rowName, lineWidth = 3)
