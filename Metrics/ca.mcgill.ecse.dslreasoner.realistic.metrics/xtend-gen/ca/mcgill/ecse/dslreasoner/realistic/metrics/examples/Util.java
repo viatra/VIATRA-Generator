@@ -7,15 +7,21 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
+import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -25,8 +31,12 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class Util {
@@ -93,5 +103,132 @@ public class Util {
       sum = (_sum + (_valueOf).doubleValue());
     }
     return sum;
+  }
+  
+  public static Integer putInside(final EObject object, final String string, final int i, final Map<EObject, Map<String, Integer>> map) {
+    Integer _xblockexpression = null;
+    {
+      final Map<String, Integer> correspondingMap = CollectionsUtil.<EObject, Map<String, Integer>>lookup(object, map);
+      Integer _xifexpression = null;
+      boolean _contains = correspondingMap.keySet().contains(string);
+      if (_contains) {
+        Integer _lookup = CollectionsUtil.<String, Integer>lookup(string, correspondingMap);
+        int _plus = ((_lookup).intValue() + i);
+        _xifexpression = correspondingMap.put(string, Integer.valueOf(_plus));
+      } else {
+        _xifexpression = correspondingMap.put(string, Integer.valueOf(i));
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public static Map<EObject, Set<EObject>> dim2NumActNodesFromModel(final EObject model) {
+    final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
+    final Map<EObject, Set<EObject>> dim2NumActNodes = new HashMap<EObject, Set<EObject>>();
+    for (final EObject node : nodes) {
+      EList<EReference> _eAllReferences = node.eClass().getEAllReferences();
+      for (final EReference dim : _eAllReferences) {
+        {
+          final EObject srcNode = node;
+          final Object trgNode = node.eGet(dim);
+          if ((!(trgNode instanceof List))) {
+            if ((trgNode != null)) {
+              boolean _contains = dim2NumActNodes.keySet().contains(dim);
+              if (_contains) {
+                CollectionsUtil.<EReference, Set<EObject>>lookup(dim, dim2NumActNodes).add(srcNode);
+              } else {
+                dim2NumActNodes.put(dim, CollectionLiterals.<EObject>newHashSet(srcNode));
+              }
+              CollectionExtensions.<EObject>addAll(CollectionsUtil.<EReference, Set<EObject>>lookup(dim, dim2NumActNodes), ((EObject) trgNode));
+            }
+          } else {
+            final List trgSet = ((List) trgNode);
+            boolean _isEmpty = trgSet.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              boolean _contains_1 = dim2NumActNodes.keySet().contains(dim);
+              if (_contains_1) {
+                CollectionExtensions.<EObject>addAll(CollectionsUtil.<EReference, Set<EObject>>lookup(dim, dim2NumActNodes), srcNode);
+              } else {
+                dim2NumActNodes.put(dim, CollectionLiterals.<EObject>newHashSet(srcNode));
+              }
+              for (final Object target : trgSet) {
+                CollectionsUtil.<EReference, Set<EObject>>lookup(dim, dim2NumActNodes).add(((EObject) target));
+              }
+            }
+          }
+        }
+      }
+    }
+    return dim2NumActNodes;
+  }
+  
+  public static Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodesFromNHShape(final GraphShape gs) {
+    List _nodes = gs.getNodes();
+    final List<GraphNodeDescriptorGND> nodes = ((List<GraphNodeDescriptorGND>) _nodes);
+    final Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap<String, Set<AbstractNodeDescriptor>>();
+    for (final GraphNodeDescriptorGND node : nodes) {
+      List<OutgoingRelationGND> _outgoingEdges = node.getOutgoingEdges();
+      for (final OutgoingRelationGND dim : _outgoingEdges) {
+        {
+          final String dimName = dim.getType();
+          final AbstractNodeDescriptor srcName = node.getCorrespondingAND();
+          final AbstractNodeDescriptor trgName = dim.getTo().getCorrespondingAND();
+          boolean _contains = dim2NumActNodes.keySet().contains(dimName);
+          if (_contains) {
+            CollectionsUtil.<String, Set<AbstractNodeDescriptor>>lookup(dimName, dim2NumActNodes).add(srcName);
+          } else {
+            dim2NumActNodes.put(dimName, CollectionLiterals.<AbstractNodeDescriptor>newHashSet(srcName));
+          }
+          CollectionExtensions.<AbstractNodeDescriptor>addAll(CollectionsUtil.<String, Set<AbstractNodeDescriptor>>lookup(dimName, dim2NumActNodes), trgName);
+        }
+      }
+    }
+    return dim2NumActNodes;
+  }
+  
+  public static Map<EObject, Integer> dim2NumOccurencesFromModel(final EObject model) {
+    final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
+    final Map<EObject, Integer> dim2Occurences = new HashMap<EObject, Integer>();
+    int newVal = 0;
+    for (final EObject node : nodes) {
+      EList<EReference> _eAllReferences = node.eClass().getEAllReferences();
+      for (final EReference dim : _eAllReferences) {
+        {
+          final Object target = node.eGet(dim);
+          if ((!(target instanceof List))) {
+            if ((target != null)) {
+              boolean _contains = dim2Occurences.keySet().contains(dim);
+              if (_contains) {
+                Integer _lookup = CollectionsUtil.<EReference, Integer>lookup(dim, dim2Occurences);
+                int _plus = ((_lookup).intValue() + 1);
+                newVal = _plus;
+              } else {
+                newVal = 1;
+              }
+              dim2Occurences.put(dim, Integer.valueOf(newVal));
+            }
+          } else {
+            final List trgSet = ((List) target);
+            boolean _isEmpty = trgSet.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              boolean _contains_1 = dim2Occurences.keySet().contains(dim);
+              if (_contains_1) {
+                Integer _lookup_1 = CollectionsUtil.<EReference, Integer>lookup(dim, dim2Occurences);
+                int _length = ((Object[])Conversions.unwrapArray(trgSet, Object.class)).length;
+                int _plus_1 = ((_lookup_1).intValue() + _length);
+                newVal = _plus_1;
+              } else {
+                newVal = ((Object[])Conversions.unwrapArray(trgSet, Object.class)).length;
+              }
+              dim2Occurences.put(dim, Integer.valueOf(newVal));
+            }
+          }
+        }
+      }
+    }
+    return dim2Occurences;
   }
 }
