@@ -67,12 +67,16 @@ class CalcNA {
 
 		return averageNA
 	}
-
+	
 	def static getNAfromNHLattice(PartialInterpretation partialModel) {
+		getNAfromNHLattice(partialModel, 1)
+	}
+
+	def static getNAfromNHLattice(PartialInterpretation partialModel, Integer depth) {
 		// Get required neighbourhoods
-		val nh = neighbourhoodComputer.createRepresentation(partialModel, 2, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth+1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap
-		val nhRep = neighbourhoodComputer.createRepresentation(partialModel, 1, Integer.MAX_VALUE, Integer.MAX_VALUE).
+		val nhRep = neighbourhoodComputer.createRepresentation(partialModel, depth, Integer.MAX_VALUE, Integer.MAX_VALUE).
 			modelRepresentation as HashMap
 		val nhDeepNodes = nhDeepRep.keySet
 		val nhNodes = nhRep.keySet

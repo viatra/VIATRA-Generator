@@ -73,7 +73,7 @@ public class CalcMPC {
     Collection<Map<String, Integer>> _values = node2Degrees.values();
     for (final Map<String, Integer> degrees : _values) {
       {
-        int totalDegree = Util.sum(degrees.values());
+        int totalDegree = Util.sumInt(degrees.values());
         double partialMPC = 1.0;
         Collection<Integer> _values_1 = degrees.values();
         for (final Integer degree : _values_1) {
@@ -118,7 +118,7 @@ public class CalcMPC {
           {
             final String edgeName = inEdge.getType();
             allDimensions.add(edgeName);
-            numToAdd = Util.sum(inEdge.getTargetDistrib());
+            numToAdd = Util.sumInt(inEdge.getTargetDistrib());
             double _talDegree = totalDegree;
             totalDegree = (_talDegree + numToAdd);
             boolean _contains = type2Num.keySet().contains(edgeName);
@@ -136,7 +136,7 @@ public class CalcMPC {
           {
             final String edgeName = outEdge.getType();
             allDimensions.add(edgeName);
-            numToAdd = Util.sum(outEdge.getSourceDistrib());
+            numToAdd = Util.sumInt(outEdge.getSourceDistrib());
             double _talDegree = totalDegree;
             totalDegree = (_talDegree + numToAdd);
             boolean _contains = type2Num.keySet().contains(edgeName);

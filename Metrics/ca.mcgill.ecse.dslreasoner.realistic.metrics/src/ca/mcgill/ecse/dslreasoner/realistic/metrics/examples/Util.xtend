@@ -50,7 +50,7 @@ class Util {
 		return partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource, false)
 	}
 
-	def static sum2(Collection<Double> integers) {
+	def static sumDbl(Collection<Double> integers) {
 		var sum = 0.0
 		for (integer : integers) {
 			sum += integer
@@ -58,7 +58,7 @@ class Util {
 		return sum
 	}
 
-	def static sum(Collection<Integer> integers) {
+	def static sumInt(Collection<Integer> integers) {
 		var sum = 0
 		for (integer : integers) {
 			sum += integer

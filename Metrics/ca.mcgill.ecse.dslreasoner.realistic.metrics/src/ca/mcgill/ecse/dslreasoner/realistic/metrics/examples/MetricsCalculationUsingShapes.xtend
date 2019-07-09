@@ -53,7 +53,7 @@ abstract class MetricsCalculationUsingShapes {
 		ReteEngine.getClass
 
 		// SELECTION
-		val testing = false
+		val testing = true
 		val fileSelector = "A0"
 		val bounded = false
 		val lowEnd = 0
@@ -77,7 +77,7 @@ abstract class MetricsCalculationUsingShapes {
 		val workspace = new FileSystemWorkspace(inputs, "")
 
 		// Where we store metric values
-		val metrics = newArrayList("NA" , "MPC" , "NDA", "NDC"/*, "EDA"*/ )
+		val metrics = newArrayList(/**/ "NA" , "MPC" , "NDA", "NDC", "EDA", "C"/* */ )
 		val calcMethods = newArrayList("Model", "NHLattice")
 
 //		var List<List<String>> metricValues = newArrayList
@@ -129,6 +129,7 @@ abstract class MetricsCalculationUsingShapes {
 		var method = MetricsCalculationUsingShapes.methods.get(0) // initialisation
 		// for each metric
 		for (metric : metrics) {
+			// print and write
 			println("Metric: " + metric)
 			var writer = new PrintWriter(outputFolder + "stats" + metric + ".csv")
 
@@ -136,6 +137,7 @@ abstract class MetricsCalculationUsingShapes {
 			val classObj = Class.forName(className)
 			// realVsNH
 			for (calcMethod : calcMethods) {
+				// print and write
 				print(metric + " " + calcMethod + " : ")
 				if (calcMethod == "Model") {
 					print("    ")
@@ -157,6 +159,8 @@ abstract class MetricsCalculationUsingShapes {
 						method = classObj.getMethod(methodName, EObject)
 						value = method.invoke(null, model) as Double
 					} else {
+//						method = classObj.getMethod(methodName, PartialInterpretation, Integer)
+//						value = method.invoke(null, partialModel, 0) as Double
 						method = classObj.getMethod(methodName, PartialInterpretation)
 						value = method.invoke(null, partialModel) as Double
 					}
@@ -168,6 +172,7 @@ abstract class MetricsCalculationUsingShapes {
 					writer.close
 				}
 				var duration = System.currentTimeMillis-startTime
+				//print and write
 				println()
 				println("    time: " + duration)
 				writer.append("\n");

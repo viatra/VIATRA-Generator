@@ -56,7 +56,7 @@ public abstract class MetricsCalculationUsingShapes {
       YakindummPackage.eINSTANCE.eClass();
       LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
-      final boolean testing = false;
+      final boolean testing = true;
       final String fileSelector = "A0";
       final boolean bounded = false;
       final int lowEnd = 0;
@@ -90,7 +90,7 @@ public abstract class MetricsCalculationUsingShapes {
         inputs = ("inputs//" + fileDir);
       }
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
-      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("NA", "MPC", "NDA", "NDC");
+      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("NA", "MPC", "NDA", "NDC", "EDA", "C");
       final ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
       double calcVal = 0.0;
       double realVal = 0.0;

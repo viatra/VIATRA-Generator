@@ -68,7 +68,7 @@ class CalcMPC {
 		val totalNumDims = allDimensions.length
 		var totalMPC = 0.0
 		for (degrees : node2Degrees.values) {
-			var totalDegree = Util.sum(degrees.values)
+			var totalDegree = Util.sumInt(degrees.values)
 			var partialMPC = 1.0
 			for (degree : degrees.values) {
 				partialMPC -= Math.pow(degree.floatValue / totalDegree, 2)
@@ -107,7 +107,7 @@ class CalcMPC {
 			for (inEdge : node.incomingEdges) {
 				val edgeName = inEdge.type
 				allDimensions.add(edgeName)
-				numToAdd = Util.sum(inEdge.targetDistrib)
+				numToAdd = Util.sumInt(inEdge.targetDistrib)
 
 				totalDegree += numToAdd
 				if (type2Num.keySet.contains(edgeName)) {
@@ -119,7 +119,7 @@ class CalcMPC {
 			for (outEdge : node.outgoingEdges) {
 				val edgeName = outEdge.type
 				allDimensions.add(edgeName)
-				numToAdd = Util.sum(outEdge.sourceDistrib)
+				numToAdd = Util.sumInt(outEdge.sourceDistrib)
 
 				totalDegree += numToAdd
 				if (type2Num.keySet.contains(edgeName)) {

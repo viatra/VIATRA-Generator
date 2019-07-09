@@ -1,19 +1,21 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.MetricsCalculationUsingShapes;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -26,10 +28,7 @@ public class CalcEDA {
   
   public static double getEDAfromModel(final EObject model) {
     final Map<EObject, Integer> dim2Occ = Util.dim2NumOccurencesFromModel(model);
-    InputOutput.<String>print("Real  :");
-    MetricsCalculationUsingShapes.printer(dim2Occ);
-    InputOutput.println();
-    int totalEDA = Util.sum(dim2Occ.values());
+    int totalEDA = Util.sumInt(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
     Double _valueOf = Double.valueOf(totalEDA);
     final double avgEDA = ((_valueOf).doubleValue() / numDims);
@@ -65,23 +64,23 @@ public class CalcEDA {
           if (vers != null) {
             switch (vers) {
               case 0:
-                int _sum = Util.sum(dim.getSourceDistrib());
-                int _multiply = (_sum * (numNodeOcc).intValue());
+                int _sumInt = Util.sumInt(dim.getSourceDistrib());
+                int _multiply = (_sumInt * (numNodeOcc).intValue());
                 int _divide = (_multiply / numNodeChildren);
                 amountToAdd = _divide;
                 break;
               case 1:
-                int _sum_1 = Util.sum(dim.getTargetDistrib());
-                int _multiply_1 = (_sum_1 * (numToNodeOcc).intValue());
+                int _sumInt_1 = Util.sumInt(dim.getTargetDistrib());
+                int _multiply_1 = (_sumInt_1 * (numToNodeOcc).intValue());
                 int _divide_1 = (_multiply_1 / numToNodeChildren);
                 amountToAdd = _divide_1;
                 break;
               default:
-                int _sum_2 = Util.sum(dim.getSourceDistrib());
-                int _multiply_2 = (_sum_2 * (numNodeOcc).intValue());
+                int _sumInt_2 = Util.sumInt(dim.getSourceDistrib());
+                int _multiply_2 = (_sumInt_2 * (numNodeOcc).intValue());
                 int _divide_2 = (_multiply_2 / numNodeChildren);
-                int _sum_3 = Util.sum(dim.getTargetDistrib());
-                int _multiply_3 = (_sum_3 * (numToNodeOcc).intValue());
+                int _sumInt_3 = Util.sumInt(dim.getTargetDistrib());
+                int _multiply_3 = (_sumInt_3 * (numToNodeOcc).intValue());
                 int _divide_3 = (_multiply_3 / numToNodeChildren);
                 int _plus = (_divide_2 + _divide_3);
                 double _divide_4 = (_plus / 2.0);
@@ -89,11 +88,11 @@ public class CalcEDA {
                 break;
             }
           } else {
-            int _sum_2 = Util.sum(dim.getSourceDistrib());
-            int _multiply_2 = (_sum_2 * (numNodeOcc).intValue());
+            int _sumInt_2 = Util.sumInt(dim.getSourceDistrib());
+            int _multiply_2 = (_sumInt_2 * (numNodeOcc).intValue());
             int _divide_2 = (_multiply_2 / numNodeChildren);
-            int _sum_3 = Util.sum(dim.getTargetDistrib());
-            int _multiply_3 = (_sum_3 * (numToNodeOcc).intValue());
+            int _sumInt_3 = Util.sumInt(dim.getTargetDistrib());
+            int _multiply_3 = (_sumInt_3 * (numToNodeOcc).intValue());
             int _divide_3 = (_multiply_3 / numToNodeChildren);
             int _plus = (_divide_2 + _divide_3);
             double _divide_4 = (_plus / 2.0);
@@ -112,7 +111,52 @@ public class CalcEDA {
       }
     }
     InputOutput.<String>println(("Calc    :" + dim2Occ));
-    double totalEDA = Util.sum2(dim2Occ.values());
+    double totalEDA = Util.sumDbl(dim2Occ.values());
+    final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
+    Double _valueOf = Double.valueOf(totalEDA);
+    final double avgEDA = ((_valueOf).doubleValue() / numDims);
+    return avgEDA;
+  }
+  
+  public static double getEDAfromNHLattice(final PartialInterpretation pm) {
+    return CalcEDA.getEDAfromNHLattice(pm, Integer.valueOf(0));
+  }
+  
+  public static double getEDAfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcEDA.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
+    final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = CalcEDA.neighbourhoodComputer.createRepresentation(pm, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE).getModelRepresentation();
+    final HashMap nhRep = ((HashMap) _modelRepresentation_1);
+    final Set nhDeepNodes = nhDeepRep.keySet();
+    final Set nhNodes = nhRep.keySet();
+    final Map<String, Double> dim2Occ = new HashMap<String, Double>();
+    double newVal = 0.0;
+    for (final Object node : nhDeepNodes) {
+      {
+        final FurtherNodeDescriptor<AbstractNodeDescriptor> nodeFND = ((FurtherNodeDescriptor<AbstractNodeDescriptor>) node);
+        Set<OutgoingRelation<AbstractNodeDescriptor>> _keySet = nodeFND.getOutgoingEdges().keySet();
+        for (final OutgoingRelation<AbstractNodeDescriptor> dim : _keySet) {
+          {
+            final String dimName = dim.getType();
+            Object _lookup = CollectionsUtil.<FurtherNodeDescriptor<AbstractNodeDescriptor>, Object>lookup(nodeFND, nhDeepRep);
+            final Integer numNodeOcc = ((Integer) _lookup);
+            final Integer numEdgeOcc = CollectionsUtil.<OutgoingRelation<AbstractNodeDescriptor>, Integer>lookup(dim, nodeFND.getOutgoingEdges());
+            int amountToAdd = ((numNodeOcc).intValue() * (numEdgeOcc).intValue());
+            boolean _contains = dim2Occ.keySet().contains(dimName);
+            if (_contains) {
+              Double _lookup_1 = CollectionsUtil.<String, Double>lookup(dimName, dim2Occ);
+              double _plus = ((_lookup_1).doubleValue() + amountToAdd);
+              newVal = _plus;
+            } else {
+              newVal = amountToAdd;
+            }
+            dim2Occ.put(dimName, Double.valueOf(newVal));
+          }
+        }
+      }
+    }
+    double totalEDA = Util.sumDbl(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
     Double _valueOf = Double.valueOf(totalEDA);
     final double avgEDA = ((_valueOf).doubleValue() / numDims);

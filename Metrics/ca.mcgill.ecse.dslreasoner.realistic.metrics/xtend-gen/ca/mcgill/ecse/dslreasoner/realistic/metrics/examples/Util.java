@@ -77,7 +77,7 @@ public class Util {
     return Util.partialInterpretation2Logic.transform(metamodelTransformationOutput, model.eResource(), false);
   }
   
-  public static double sum2(final Collection<Double> integers) {
+  public static double sumDbl(final Collection<Double> integers) {
     double sum = 0.0;
     for (final Double integer : integers) {
       double _sum = sum;
@@ -86,7 +86,7 @@ public class Util {
     return sum;
   }
   
-  public static int sum(final Collection<Integer> integers) {
+  public static int sumInt(final Collection<Integer> integers) {
     int sum = 0;
     for (final Integer integer : integers) {
       int _sum = sum;

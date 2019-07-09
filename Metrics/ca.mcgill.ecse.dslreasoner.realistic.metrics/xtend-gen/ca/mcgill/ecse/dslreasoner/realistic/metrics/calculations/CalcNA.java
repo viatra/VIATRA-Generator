@@ -77,10 +77,14 @@ public class CalcNA {
   }
   
   public static double getNAfromNHLattice(final PartialInterpretation partialModel) {
-    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcNA.neighbourhoodComputer.createRepresentation(partialModel, 2, Integer.MAX_VALUE, Integer.MAX_VALUE);
+    return CalcNA.getNAfromNHLattice(partialModel, Integer.valueOf(1));
+  }
+  
+  public static double getNAfromNHLattice(final PartialInterpretation partialModel, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcNA.neighbourhoodComputer.createRepresentation(partialModel, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
-    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = CalcNA.neighbourhoodComputer.createRepresentation(partialModel, 1, Integer.MAX_VALUE, Integer.MAX_VALUE).getModelRepresentation();
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = CalcNA.neighbourhoodComputer.createRepresentation(partialModel, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE).getModelRepresentation();
     final HashMap nhRep = ((HashMap) _modelRepresentation_1);
     final Set nhDeepNodes = nhDeepRep.keySet();
     final Set nhNodes = nhRep.keySet();
