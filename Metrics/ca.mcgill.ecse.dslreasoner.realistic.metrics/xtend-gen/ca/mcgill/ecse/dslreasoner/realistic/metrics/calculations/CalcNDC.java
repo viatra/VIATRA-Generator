@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDA;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
@@ -12,6 +13,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -46,6 +48,35 @@ public class CalcNDC {
       int _numNodes = numNodes;
       Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(node.getCorrespondingAND(), nhRep);
       numNodes = (_numNodes + (((Integer) _lookup)).intValue());
+    }
+    final double NDC = (NDA / numNodes);
+    return NDC;
+  }
+  
+  public static double getNDCfromNHLattice(final PartialInterpretation pm) {
+    return CalcNDC.getNDCfromNHLattice(pm, Integer.valueOf(1));
+  }
+  
+  public static double getNDCfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcNDC.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
+    final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = CalcNDC.neighbourhoodComputer.createRepresentation(pm, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE).getModelRepresentation();
+    final HashMap nhRep = ((HashMap) _modelRepresentation_1);
+    final double NDA = CalcNDA.getNDAfromNHLattice(nhDeepRep, nhRep, depth);
+    final Set nodes = nhRep.keySet();
+    int numNodes = 0;
+    for (final Object node : nodes) {
+      {
+        final AbstractNodeDescriptor nodeAND = ((AbstractNodeDescriptor) node);
+        boolean _isEmpty = Util.toLocalNode(nodeAND).getTypes().isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          int _numNodes = numNodes;
+          Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(nodeAND, nhRep);
+          numNodes = (_numNodes + (((Integer) _lookup)).intValue());
+        }
+      }
     }
     final double NDC = (NDA / numNodes);
     return NDC;

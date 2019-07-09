@@ -31,7 +31,7 @@ class Util {
 		while (!d.class.equals(LocalNodeDescriptor)) {
 			d = (d as FurtherNodeDescriptor).previousRepresentation as AbstractNodeDescriptor
 		}
-		return (d as LocalNodeDescriptor).types
+		return d as LocalNodeDescriptor
 	}
 
 	def static getPartialModel(FileSystemWorkspace workspace, EObject model) {
@@ -122,6 +122,30 @@ class Util {
 	}
 
 	def static dim2NumActNodesFromNHShape(GraphShape gs) {
+		val nodes = gs.nodes as List<GraphNodeDescriptorGND>
+
+		val Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap
+
+		for (node : nodes) {
+			for (dim : node.outgoingEdges) {
+				val dimName = dim.type
+
+				val srcName = node.correspondingAND
+				val trgName = dim.to.correspondingAND
+
+				if (dim2NumActNodes.keySet.contains(dimName)) {
+					dimName.lookup(dim2NumActNodes).add(srcName)
+				} else {
+					dim2NumActNodes.put(dimName, newHashSet(srcName))
+				}
+				dimName.lookup(dim2NumActNodes).addAll(trgName)
+			}
+		}
+
+		return dim2NumActNodes
+	}
+	
+		def static dim2NumActNodes(GraphShape gs) {
 		val nodes = gs.nodes as List<GraphNodeDescriptorGND>
 
 		val Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap

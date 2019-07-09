@@ -3,11 +3,14 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
@@ -162,6 +165,117 @@ public class CalcMPC {
         double _talMPC = totalMPC;
         totalMPC = (_talMPC + (partialMPC * (numOccurrences).intValue()));
         type2Num.clear();
+      }
+    }
+    final int totalNumDims = allDimensions.size();
+    float _floatValue = Integer.valueOf(totalNumDims).floatValue();
+    float _divide = (_floatValue / (totalNumDims - 1));
+    final double averageMPC = (_divide * (totalMPC / numNodes));
+    return averageMPC;
+  }
+  
+  public static double getMPCfromNHLattice(final PartialInterpretation pm) {
+    return CalcMPC.getMPCfromNHLattice(pm, Integer.valueOf(1));
+  }
+  
+  public static double getMPCfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+    final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcMPC.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
+    final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
+    Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation_1 = CalcMPC.neighbourhoodComputer.createRepresentation(pm, (depth).intValue(), Integer.MAX_VALUE, Integer.MAX_VALUE).getModelRepresentation();
+    final HashMap nhRep = ((HashMap) _modelRepresentation_1);
+    final Set nhDeepNodes = nhDeepRep.keySet();
+    final Set nhNodes = nhRep.keySet();
+    final Map<AbstractNodeDescriptor, List<FurtherNodeDescriptor>> AND2children = new HashMap<AbstractNodeDescriptor, List<FurtherNodeDescriptor>>();
+    for (final Object deepNodeKey : nhDeepNodes) {
+      {
+        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNodeKey);
+        Object _previousRepresentation = deepNodeDesc.getPreviousRepresentation();
+        final AbstractNodeDescriptor parentDesc = ((AbstractNodeDescriptor) _previousRepresentation);
+        boolean _contains = AND2children.keySet().contains(parentDesc);
+        if (_contains) {
+          CollectionsUtil.<AbstractNodeDescriptor, List<FurtherNodeDescriptor>>lookup(parentDesc, AND2children).add(deepNodeDesc);
+        } else {
+          AND2children.put(parentDesc, CollectionLiterals.<FurtherNodeDescriptor>newArrayList(deepNodeDesc));
+        }
+      }
+    }
+    double totalMPC = 0.0;
+    double totalDegree = 0.0;
+    double partialMPC = 0.0;
+    int numNodes = 0;
+    int numToAdd = 0;
+    Set<String> allDimensions = new HashSet<String>();
+    Map<String, Integer> type2Num = new HashMap<String, Integer>();
+    for (final Object node : nhNodes) {
+      {
+        final AbstractNodeDescriptor nodeAND = ((AbstractNodeDescriptor) node);
+        boolean _isEmpty = Util.toLocalNode(nodeAND).getTypes().isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          totalDegree = 0.0;
+          List<FurtherNodeDescriptor> _lookup = CollectionsUtil.<AbstractNodeDescriptor, List<FurtherNodeDescriptor>>lookup(nodeAND, AND2children);
+          for (final FurtherNodeDescriptor child : _lookup) {
+            {
+              Set _keySet = child.getIncomingEdges().keySet();
+              for (final Object inEdge : _keySet) {
+                {
+                  final IncomingRelation<AbstractNodeDescriptor> edgeDesc = ((IncomingRelation<AbstractNodeDescriptor>) inEdge);
+                  final String edgeName = edgeDesc.getType();
+                  allDimensions.add(edgeName);
+                  Object _lookup_1 = CollectionsUtil.<Object, Object>lookup(inEdge, child.getIncomingEdges());
+                  numToAdd = (((Integer) _lookup_1)).intValue();
+                  double _talDegree = totalDegree;
+                  totalDegree = (_talDegree + numToAdd);
+                  boolean _contains = type2Num.keySet().contains(edgeName);
+                  if (_contains) {
+                    Integer _lookup_2 = CollectionsUtil.<String, Integer>lookup(edgeName, type2Num);
+                    int _plus = ((_lookup_2).intValue() + numToAdd);
+                    type2Num.put(edgeName, Integer.valueOf(_plus));
+                  } else {
+                    type2Num.put(edgeName, Integer.valueOf(numToAdd));
+                  }
+                }
+              }
+              Set _keySet_1 = child.getOutgoingEdges().keySet();
+              for (final Object outEdge : _keySet_1) {
+                {
+                  final OutgoingRelation<AbstractNodeDescriptor> edgeDesc = ((OutgoingRelation<AbstractNodeDescriptor>) outEdge);
+                  final String edgeName = edgeDesc.getType();
+                  allDimensions.add(edgeName);
+                  Object _lookup_1 = CollectionsUtil.<Object, Object>lookup(outEdge, child.getOutgoingEdges());
+                  numToAdd = (((Integer) _lookup_1)).intValue();
+                  double _talDegree = totalDegree;
+                  totalDegree = (_talDegree + numToAdd);
+                  boolean _contains = type2Num.keySet().contains(edgeName);
+                  if (_contains) {
+                    Integer _lookup_2 = CollectionsUtil.<String, Integer>lookup(edgeName, type2Num);
+                    int _plus = ((_lookup_2).intValue() + numToAdd);
+                    type2Num.put(edgeName, Integer.valueOf(_plus));
+                  } else {
+                    type2Num.put(edgeName, Integer.valueOf(numToAdd));
+                  }
+                }
+              }
+            }
+          }
+          partialMPC = 1.0;
+          Collection<Integer> _values = type2Num.values();
+          for (final Integer degree : _values) {
+            double _partialMPC = partialMPC;
+            float _floatValue = degree.floatValue();
+            double _divide = (_floatValue / totalDegree);
+            double _pow = Math.pow(_divide, 2);
+            partialMPC = (_partialMPC - _pow);
+          }
+          Object _lookup_1 = CollectionsUtil.<Object, Object>lookup(node, nhRep);
+          final Integer numOccurrences = ((Integer) _lookup_1);
+          int _numNodes = numNodes;
+          numNodes = (_numNodes + (numOccurrences).intValue());
+          double _talMPC = totalMPC;
+          totalMPC = (_talMPC + (partialMPC * (numOccurrences).intValue()));
+          type2Num.clear();
+        }
       }
     }
     final int totalNumDims = allDimensions.size();

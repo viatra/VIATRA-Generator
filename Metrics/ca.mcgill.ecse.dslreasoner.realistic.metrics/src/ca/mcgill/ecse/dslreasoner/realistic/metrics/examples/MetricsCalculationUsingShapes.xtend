@@ -78,7 +78,7 @@ abstract class MetricsCalculationUsingShapes {
 
 		// Where we store metric values
 		val metrics = newArrayList("NA" , "MPC" , "NDA", "NDC"/*, "EDA"*/ )
-		val calcMethods = newArrayList("Model", "NHShape")
+		val calcMethods = newArrayList("Model", "NHLattice")
 
 //		var List<List<String>> metricValues = newArrayList
 //		for (var i = 0; i < 15; i++) {
@@ -138,12 +138,12 @@ abstract class MetricsCalculationUsingShapes {
 			for (calcMethod : calcMethods) {
 				print(metric + " " + calcMethod + " : ")
 				if (calcMethod == "Model") {
-					print("  ")
+					print("    ")
 				}
 				writer.append(metric)
 				writer.append(calcMethod)
 				
-				
+				var startTime = System.currentTimeMillis
 				// for each file
 				for (fileName : listToLookThrough) {
 					val nameWOExt = fileName.substring(0, fileName.indexOf("."))
@@ -167,7 +167,9 @@ abstract class MetricsCalculationUsingShapes {
 					writer.append(valAsStr)
 					writer.close
 				}
+				var duration = System.currentTimeMillis-startTime
 				println()
+				println("    time: " + duration)
 				writer.append("\n");
 			}
 			println()
@@ -383,77 +385,15 @@ abstract class MetricsCalculationUsingShapes {
 //		}
 	}
 
-	def static getEDAfromModel(EObject model) {
-		val Map<EObject, Integer> dim2Occ = dim2NumOccurencesFromModel(model)
-
-		print("Real  :")
-		printer(dim2Occ)
-		println()
-
-		var totalEDA = Util.sum(dim2Occ.values)
-		val numDims = dim2Occ.keySet.length
-		val avgEDA = Double.valueOf(totalEDA) / numDims
-		return avgEDA
-	}
-
-	def static getEDAfromNHShape(PartialInterpretation pm) {
-		return getEDAfromNHShape(pm, 1, 0)
-	}
-
-	def static getEDAfromNHShape(PartialInterpretation pm, Integer depth, Integer vers) {
-		// Get NH Shape
-		val nh = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
-		val nhRep = nh.modelRepresentation as HashMap
-		val gs = neighbouhood2ShapeGraph.createShapeGraph(nh, pm)
-
-		// TODO make below map from OutgoingRelationGND to value
-		// calculations
-		val nodes = gs.nodes as List<GraphNodeDescriptorGND>
-
-		val Map<String, Double> dim2Occ = new HashMap
-		var newVal = 0.0
-		for (node : nodes) {
-			for (dim : node.outgoingEdges) {
-				val dimName = dim.type
-				val numNodeOcc = node.correspondingAND.lookup(nhRep) as Integer
-				val numNodeChildren = dim.sourceDistrib.size
-
-				val toNode = dim.to
-				val numToNodeOcc = toNode.correspondingAND.lookup(nhRep) as Integer
-				val numToNodeChildren = dim.targetDistrib.size
-
-				var amountToAdd = 0.0
-
-				switch vers {
-					case 0:
-						amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren) // +
-//					Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) /2
-					case 1:
-						amountToAdd = (Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren)
-					default:
-						amountToAdd = (Util.sum(dim.sourceDistrib) * numNodeOcc / numNodeChildren +
-							Util.sum(dim.targetDistrib) * numToNodeOcc / numToNodeChildren) / 2.0
-				}
-
-				if (dim2Occ.keySet.contains(dimName)) {
-					newVal = dimName.lookup(dim2Occ) + amountToAdd
-				} else {
-					newVal = amountToAdd
-				}
-				dim2Occ.put(dimName, newVal)
-			}
-		}
-		println("Calc    :" + dim2Occ)
-		// calculations
-		var totalEDA = Util.sum2(dim2Occ.values)
-		val numDims = dim2Occ.keySet.length
-		val avgEDA = Double.valueOf(totalEDA) / numDims
-		return avgEDA
-	}
-
 	def static printer(Map<EObject, Integer> map) {
 		for (key : map.keySet) {
 			print((key as EReferenceImpl).name + "=" + key.lookup(map) + ", ")
+		}
+	}
+	
+	def static printStrMap(Map<String, Integer> map) {
+		for (key : map.keySet) {
+			print(key + "=" + key.lookup(map) + ", ")
 		}
 	}
 

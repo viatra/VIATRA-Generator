@@ -44,13 +44,13 @@ public class Util {
   
   private final static Ecore2Logic ecore2Logic = new Ecore2Logic();
   
-  public static Set<String> toLocalNode(final AbstractNodeDescriptor descriptor) {
+  public static LocalNodeDescriptor toLocalNode(final AbstractNodeDescriptor descriptor) {
     AbstractNodeDescriptor d = descriptor;
     while ((!d.getClass().equals(LocalNodeDescriptor.class))) {
       Object _previousRepresentation = ((FurtherNodeDescriptor) d).getPreviousRepresentation();
       d = ((AbstractNodeDescriptor) _previousRepresentation);
     }
-    return ((LocalNodeDescriptor) d).getTypes();
+    return ((LocalNodeDescriptor) d);
   }
   
   public static PartialInterpretation getPartialModel(final FileSystemWorkspace workspace, final EObject model) {
@@ -165,6 +165,30 @@ public class Util {
   }
   
   public static Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodesFromNHShape(final GraphShape gs) {
+    List _nodes = gs.getNodes();
+    final List<GraphNodeDescriptorGND> nodes = ((List<GraphNodeDescriptorGND>) _nodes);
+    final Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap<String, Set<AbstractNodeDescriptor>>();
+    for (final GraphNodeDescriptorGND node : nodes) {
+      List<OutgoingRelationGND> _outgoingEdges = node.getOutgoingEdges();
+      for (final OutgoingRelationGND dim : _outgoingEdges) {
+        {
+          final String dimName = dim.getType();
+          final AbstractNodeDescriptor srcName = node.getCorrespondingAND();
+          final AbstractNodeDescriptor trgName = dim.getTo().getCorrespondingAND();
+          boolean _contains = dim2NumActNodes.keySet().contains(dimName);
+          if (_contains) {
+            CollectionsUtil.<String, Set<AbstractNodeDescriptor>>lookup(dimName, dim2NumActNodes).add(srcName);
+          } else {
+            dim2NumActNodes.put(dimName, CollectionLiterals.<AbstractNodeDescriptor>newHashSet(srcName));
+          }
+          CollectionExtensions.<AbstractNodeDescriptor>addAll(CollectionsUtil.<String, Set<AbstractNodeDescriptor>>lookup(dimName, dim2NumActNodes), trgName);
+        }
+      }
+    }
+    return dim2NumActNodes;
+  }
+  
+  public static Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes(final GraphShape gs) {
     List _nodes = gs.getNodes();
     final List<GraphNodeDescriptorGND> nodes = ((List<GraphNodeDescriptorGND>) _nodes);
     final Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap<String, Set<AbstractNodeDescriptor>>();

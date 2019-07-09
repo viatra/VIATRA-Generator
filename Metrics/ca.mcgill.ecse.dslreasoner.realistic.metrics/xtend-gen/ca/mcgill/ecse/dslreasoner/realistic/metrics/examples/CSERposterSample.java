@@ -7,6 +7,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelationGND;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
@@ -18,7 +19,6 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import linkedList.LinkedListPackage;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -77,7 +77,7 @@ public class CSERposterSample {
         {
           w3.println("----------------------");
           w3.println("NEW NODE");
-          Set<String> locNode = Util.toLocalNode(node.getCorrespondingAND());
+          LocalNodeDescriptor locNode = Util.toLocalNode(node.getCorrespondingAND());
           w3.println(("   -node type  : " + locNode));
           w3.println("   -Incoming Relations:");
           List<IncomingRelationGND> _incomingEdges = node.getIncomingEdges();
