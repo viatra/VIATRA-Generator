@@ -215,6 +215,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="AggregateExpression" abstract="true"
       eSuperTypes="#//Term">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterSubstitution"
+        upperBound="-1" eType="#//AggregatedParameterSubstitution" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sum" eSuperTypes="#//ProjectedAggregateExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="Count" eSuperTypes="#//AggregateExpression"/>
@@ -224,5 +226,8 @@
       eSuperTypes="#//AggregateExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectionIndex" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AggregatedParameterSubstitution">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Variable"/>
   </eClassifiers>
 </ecore:EPackage>
