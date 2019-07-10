@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQR
 
 abstract class MetricsCalculationUsingShapes {
 	static val partialVisualizer = new PartialInterpretation2Gml
@@ -39,39 +40,42 @@ abstract class MetricsCalculationUsingShapes {
 
 		// SELECTION
 		val testing = false
-		val fileSelector = "V5"
+		//var fileSelector = "A0"
 		val bounded = false
 		val lowEnd = 0
 		val highEnd = 20
 		// END SELECTION
 		var fileDir = ""
 
-		switch fileSelector {
-			case "A0": fileDir = "A0//models//"
-			case "A20": fileDir = "A20//models//"
-			case "R1": fileDir = "RandomEMF-WF+7//models//"
-			case "R2": fileDir = "RandomEMF30//models//"
-			case "V1": fileDir = "VS-i//models//"
-			case "V2": fileDir = "VS-WF+All5//models//"
-			case "V3": fileDir = "VS-WF+All6//models//"
-			case "V4": fileDir = "VS-WF+All7//models//"
-			case "V5": fileDir = "VS+i//models//"
-			default: fileDir = "Human//"
-		}
-		var inputs = ""
-		if (testing) {
-			inputs = "resources//" // TESTING
-		} else {
-			inputs = "inputs//" + fileDir
-		}
-		val workspace = new FileSystemWorkspace(inputs, "")
-		//Create stats storage directory if necessary
-		val directoryPath = outputFolder + fileDir.split("//").get(0)
-		new File(directoryPath).mkdirs
+		val files = newArrayList("A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human")
 
-		// Where we store metric values
-		val metrics = newArrayList( /**/ /*"NA", "MPC", "NDA", "NDC", "EDA" , "C" */ )
-		val calcMethods = newArrayList("Model", "NHLattice")
+		for (fileSelector : files) {
+			switch fileSelector {
+				case "A0": fileDir = "A0//models//"
+				case "A20": fileDir = "A20//models//"
+				case "R1": fileDir = "RandomEMF-WF+7//models//"
+				case "R2": fileDir = "RandomEMF30//models//"
+				case "V1": fileDir = "VS-i//models//"
+				case "V2": fileDir = "VS-WF+All5//models//"
+				case "V3": fileDir = "VS-WF+All6//models//"
+				case "V4": fileDir = "VS-WF+All7//models//"
+				case "V5": fileDir = "VS+i//models//"
+				default: fileDir = "Human//"
+			}
+			var inputs = ""
+			if (testing) {
+				inputs = "resources//" // TESTING
+			} else {
+				inputs = "inputs//" + fileDir
+			}
+			val workspace = new FileSystemWorkspace(inputs, "")
+			// Create stats storage directory if necessary
+			val directoryPath = outputFolder + fileDir.split("//").get(0)
+			new File(directoryPath).mkdirs
+
+			// Where we store metric values
+			val metrics = newArrayList( /**/ /*"NA", "MPC", "NDA", "NDC", "EDA" , "C" */ )
+			val calcMethods = newArrayList("Model", "NHLattice")
 
 //		var List<List<String>> metricValues = newArrayList
 //		for (var i = 0; i < 15; i++) {
@@ -85,170 +89,171 @@ abstract class MetricsCalculationUsingShapes {
 //			deltas.add(newArrayList)
 //			totalDeltas.add(0.0)
 //		}
-		// ////////////////////
-		// Create list of things to look at
-		// ////////////////////
-		var calcVal = 0.0
-		var realVal = 0.0
-		var progressTracker = 0
-		var List<String> listToLookThrough = newArrayList
-		var List<String> subDirList = newArrayList
-		if (testing) {
-			listToLookThrough = newArrayList("sampleList.xmi")
-		} else {
-			if (bounded) {
-				// NOT GENERAL
-				var index = 0
-				for (run : workspace.allFiles) {
-					if (new File(URI.createFileURI(inputs + "/" + run).toFileString).isDirectory) {
-						val subWS = workspace.subWorkspace(run, "")
-						if (new File(subWS.workspaceURI.toFileString).isDirectory) {
-							for (file : subWS.allFiles) {
-								if(index>=lowEnd && index<=highEnd) {
+			// ////////////////////
+			// Create list of things to look at
+			// ////////////////////
+			var calcVal = 0.0
+			var realVal = 0.0
+			var progressTracker = 0
+			var List<String> listToLookThrough = newArrayList
+			var List<String> subDirList = newArrayList
+			if (testing) {
+				listToLookThrough = newArrayList("sampleList.xmi")
+			} else {
+				if (bounded) {
+					// NOT GENERAL
+					var index = 0
+					for (run : workspace.allFiles) {
+						if (new File(URI.createFileURI(inputs + "/" + run).toFileString).isDirectory) {
+							val subWS = workspace.subWorkspace(run, "")
+							if (new File(subWS.workspaceURI.toFileString).isDirectory) {
+								for (file : subWS.allFiles) {
+									if (index >= lowEnd && index <= highEnd) {
+										listToLookThrough.add(run + "/" + file)
+									}
+									index++
+								}
+							}
+						} else {
+							listToLookThrough.add(run)
+							index++
+						}
+					}
+
+					listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
+				} else {
+					// NOT GENERAL
+					for (run : workspace.allFiles) {
+						if (new File(URI.createFileURI(inputs + "/" + run).toFileString).isDirectory) {
+							val subWS = workspace.subWorkspace(run, "")
+							if (new File(subWS.workspaceURI.toFileString).isDirectory) {
+								for (file : subWS.allFiles) {
 									listToLookThrough.add(run + "/" + file)
 								}
-								index++								
 							}
+						} else {
+							listToLookThrough.add(run)
 						}
-					} else {
-						listToLookThrough.add(run)
-						index++
-					}
-				}
-				
-				
-				listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
-			} else {
-				// NOT GENERAL
-				for (run : workspace.allFiles) {
-					if (new File(URI.createFileURI(inputs + "/" + run).toFileString).isDirectory) {
-						val subWS = workspace.subWorkspace(run, "")
-						if (new File(subWS.workspaceURI.toFileString).isDirectory) {
-							for (file : subWS.allFiles) {
-								listToLookThrough.add(run + "/" + file)
-							}
-						}
-					} else {
-						listToLookThrough.add(run)
-					}
 
+					}
 				}
 			}
-		}
 
-		// ////////////////////
-		// PERFORM MEASUREMENTS
-		// ////////////////////
-		var method = MetricsCalculationUsingShapes.methods.get(0) // initialisation
-		// for each metric
-		for (metric : metrics) {
-			// print and write
-			println("Metric: " + metric)
-			var writer = new PrintWriter(directoryPath + "//" + metric + ".csv")
-
-			val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
-			val classObj = Class.forName(className)
-			// realVsNH
-			for (calcMethod : calcMethods) {
+			// ////////////////////
+			// PERFORM MEASUREMENTS
+			// ////////////////////
+			var method = MetricsCalculationUsingShapes.methods.get(0) // initialisation
+			// for each metric
+			for (metric : metrics) {
 				// print and write
-				print(metric + " " + calcMethod + " : ")
-				if (calcMethod == "Model") {
-					print("    ")
-				}
-				writer.append(metric + ",")
-				writer.append(calcMethod)
+				println("Metric: " + metric)
+				var writer = new PrintWriter(directoryPath + "//" + metric + ".csv")
 
-				var startTime = System.currentTimeMillis
-				// for each file
-				for (fileName : listToLookThrough) {
-					val nameWOExt = fileName.substring(0, fileName.indexOf("."))
-					val model = workspace.readModel(EObject, fileName)
-					val partialModel = Util.getPartialModel(workspace, model)
-					// For visualisation
+				val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
+				val classObj = Class.forName(className)
+				// realVsNH
+				for (calcMethod : calcMethods) {
+					// print and write
+					print(metric + " " + calcMethod + " : ")
+					if (calcMethod == "Model") {
+						print("    ")
+					}
+					writer.append(metric + ",")
+					writer.append(calcMethod)
+
+					var startTime = System.currentTimeMillis
+					// for each file
+					for (fileName : listToLookThrough) {
+						val nameWOExt = fileName.substring(0, fileName.indexOf("."))
+						val model = workspace.readModel(EObject, fileName)
+						val partialModel = Util.getPartialModel(workspace, model)
+						// For visualisation
 //					writer.close
 //					writer = new PrintWriter(outputFolder + fileSelector + "//" + nameWOExt + ".gml")
 //					writer.print(partialVisualizer.transform(partialModel))
 //					writer.close
 //					writer = new PrintWriter(outputFolder + fileSelector + "//" + metric + ".csv")					
-					//END VIDUALISATON
-					
-					// get method and invoke
-					val methodName = "get" + metric + "from" + calcMethod
-					var value = 0.0
-					if (calcMethod == "Model") {
-						method = classObj.getMethod(methodName, EObject)
-						value = method.invoke(null, model) as Double
-					} else {
+						// END VIDUALISATON
+						// get method and invoke
+						val methodName = "get" + metric + "from" + calcMethod
+						var value = 0.0
+						if (calcMethod == "Model") {
+							method = classObj.getMethod(methodName, EObject)
+							value = method.invoke(null, model) as Double
+						} else {
 //						method = classObj.getMethod(methodName, PartialInterpretation, Integer)
 //						value = method.invoke(null, partialModel, 0) as Double
-						method = classObj.getMethod(methodName, PartialInterpretation)
-						value = method.invoke(null, partialModel) as Double
+							method = classObj.getMethod(methodName, PartialInterpretation)
+							value = method.invoke(null, partialModel) as Double
+						}
+
+						// print and write
+						var valAsStr = df.format(value)
+						print(valAsStr + " ")
+						writer.append("," + valAsStr)
+
 					}
-
+					var duration = System.currentTimeMillis - startTime
 					// print and write
-					var valAsStr = df.format(value)
-					print(valAsStr + " ")
-					writer.append(","+valAsStr)
-
-				}
-				var duration = System.currentTimeMillis - startTime
-				// print and write
-				println()
+					println()
 //				println("    time: " + duration)
-				writer.append("\n");
+					writer.append("\n");
+				}
+				writer.close
+				println()
+			}
+
+			// ////////////
+			// EXPERIMENTAL
+			// ////////////
+			val METRICNAME = "SQR"
+			var writer = new PrintWriter(directoryPath + "//" + METRICNAME + "tot.csv")
+			println("Metric: " + METRICNAME)
+
+			for (var depth = -1; depth < 0; depth++) {
+				writer.append(METRICNAME + ",")
+				if (depth == -1) {
+					writer.append("Model")
+					print(METRICNAME + " Model    : ")
+
+					for (fileName : listToLookThrough) {
+						val model = workspace.readModel(EObject, fileName)
+						var value = CalcSQR.getSQRfromModel(model)
+						// print and write
+						var valAsStr = df.format(value)
+						print(valAsStr + " ")
+						writer.append(',' + valAsStr)
+					}
+					println()
+					writer.append("\n");
+
+				} else {
+					for (var version = 0; version < 3; version++) {
+						writer.append("NHLatticeD" + depth + "V" + version)
+						print(METRICNAME + " NH D" + depth + " V" + version + " : ")
+
+						for (fileName : listToLookThrough) {
+							val model = workspace.readModel(EObject, fileName)
+							val partialModel = Util.getPartialModel(workspace, model)
+							var value = CalcSQR.getSQRfromNHLattice(partialModel, depth, version)
+							// print and write
+							var valAsStr = df.format(value)
+							print(valAsStr + " ")
+							writer.append(',' + valAsStr)
+
+						}
+						println()
+						writer.append("\n");
+					}
+				}
 			}
 			writer.close
-			println()
-		}
 
 		// ////////////
 		// EXPERIMENTAL
 		// ////////////
-		var writer = new PrintWriter(directoryPath + "//C.csv")
-		println("Metric: C")
-
-		for (var depth = -1; depth < 0; depth++) {
-			writer.append("C,")
-			if (depth == -1) {
-				writer.append("Model")
-				print("C Model    : ")
-
-				for (fileName : listToLookThrough) {
-					val model = workspace.readModel(EObject, fileName)
-					var value = CalcC.getCfromModel(model)
-					// print and write
-					var valAsStr = df.format(value)
-					print(valAsStr + " ")
-					writer.append(',' + valAsStr)
-				}
-				println()
-				writer.append("\n");
-
-			} else {
-				for (var version = 0; version < 3; version++) {
-					writer.append("NHLatticeD" + depth + "V" + version)
-					print("C NH D" + depth + " V" + version + " : ")
-
-					for (fileName : listToLookThrough) {
-						val model = workspace.readModel(EObject, fileName)
-						val partialModel = Util.getPartialModel(workspace, model)
-						var value = CalcC.getCfromNHLattice(partialModel, depth, version)
-						// print and write
-						var valAsStr = df.format(value)
-						print(valAsStr + " ")
-						writer.append(',' + valAsStr )
-
-					}
-					println()
-					writer.append("\n");
-				}
-			}
 		}
-		writer.close
 
-	// ////////////
-	// EXPERIMENTAL
-	// ////////////
 	/*
 
 	 * // BEGIN

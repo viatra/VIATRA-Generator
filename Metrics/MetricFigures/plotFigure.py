@@ -5,10 +5,23 @@ from os import listdir, mkdir, path
 
 def main():
 	#fileNames = ['statsNA', 'statsMPC', 'statsEDA']
-	sources = ['A0', 'A20', 'Human', 'RandomEMF-WF+7', 'RandomEMF30', 'VS-i', 'VS-WF+All5', 'VS-WF+All6', 'VS-WF+All7', 'VS+i']
-	metrics = ['C']
-	for sourceName in sources:
-		for metricName in metrics :
+	sources = [
+			'A0'
+			, 'A20'
+			, 'Human'
+			, 'RandomEMF-WF+7'
+			, 'RandomEMF30'
+			, 'VS-i'
+			, 'VS-WF+All5'
+			, 'VS-WF+All6'
+			, 'VS-WF+All7'
+			, 'VS+i'
+			]
+	metrics = ['SQRtot']
+	
+	for metricName in metrics :
+		for sourceName in sources:
+		
 			csvLocation = '../ca.mcgill.ecse.dslreasoner.realistic.metrics/outputs/calculatedMetrics/'
 			csvFileName = sourceName + '/' + metricName
 			with open(csvLocation + csvFileName + '.csv') as f:
@@ -43,6 +56,8 @@ def main():
 			plt.savefig(pathName)
 			plt.show()
 			plt.clf()
+		#ADD COMPILATION OF SOURCES FOR A GIVEN METRIC HERE!!!!
+
 	
 if __name__== "__main__":
 	main()
