@@ -1,12 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcC;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.io.File;
@@ -32,35 +32,25 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public abstract class MetricsCalculationUsingShapes {
-  private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
-  
-  private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
+  private final static PartialInterpretation2Gml partialVisualizer = new PartialInterpretation2Gml();
   
   private static DecimalFormat df = new DecimalFormat("0.000");
-  
-  private final static Integer NUMMEASUREMENTS = Integer.valueOf(15);
-  
-  private final static Integer NUMNA = Integer.valueOf(2);
-  
-  private final static Integer NUMMPC = Integer.valueOf(4);
-  
-  private final static Integer NUMNDA = Integer.valueOf(6);
   
   public static void main(final String[] args) {
     try {
       MetricsCalculationUsingShapes.df.setRoundingMode(RoundingMode.UP);
-      final String outputFolder = "outputs//calculatedMetrics//stats//";
+      final String outputFolder = "outputs//calculatedMetrics//";
       Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
       XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
       _extensionToFactoryMap.put("*", _xMIResourceFactoryImpl);
       YakindummPackage.eINSTANCE.eClass();
       LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
-      final boolean testing = true;
-      final String fileSelector = "A0";
+      final boolean testing = false;
+      final String fileSelector = "V5";
       final boolean bounded = false;
       final int lowEnd = 0;
-      final int highEnd = 1;
+      final int highEnd = 20;
       String fileDir = "";
       if (fileSelector != null) {
         switch (fileSelector) {
@@ -76,6 +66,21 @@ public abstract class MetricsCalculationUsingShapes {
           case "R2":
             fileDir = "RandomEMF30//models//";
             break;
+          case "V1":
+            fileDir = "VS-i//models//";
+            break;
+          case "V2":
+            fileDir = "VS-WF+All5//models//";
+            break;
+          case "V3":
+            fileDir = "VS-WF+All6//models//";
+            break;
+          case "V4":
+            fileDir = "VS-WF+All7//models//";
+            break;
+          case "V5":
+            fileDir = "VS+i//models//";
+            break;
           default:
             fileDir = "Human//";
             break;
@@ -90,7 +95,10 @@ public abstract class MetricsCalculationUsingShapes {
         inputs = ("inputs//" + fileDir);
       }
       final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
-      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("NA", "MPC", "NDA", "NDC", "EDA", "C");
+      String _get = fileDir.split("//")[0];
+      final String directoryPath = (outputFolder + _get);
+      new File(directoryPath).mkdirs();
+      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList();
       final ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
       double calcVal = 0.0;
       double realVal = 0.0;
@@ -101,8 +109,7 @@ public abstract class MetricsCalculationUsingShapes {
         listToLookThrough = CollectionLiterals.<String>newArrayList("sampleList.xmi");
       } else {
         if (bounded) {
-          listToLookThrough = workspace.allFiles().subList(lowEnd, highEnd);
-        } else {
+          int index = 0;
           List<String> _allFiles = workspace.allFiles();
           for (final String run : _allFiles) {
             String _fileString = URI.createFileURI(((inputs + "/") + run)).toFileString();
@@ -114,11 +121,37 @@ public abstract class MetricsCalculationUsingShapes {
               if (_isDirectory_1) {
                 List<String> _allFiles_1 = subWS.allFiles();
                 for (final String file : _allFiles_1) {
-                  listToLookThrough.add(((run + "/") + file));
+                  {
+                    if (((index >= lowEnd) && (index <= highEnd))) {
+                      listToLookThrough.add(((run + "/") + file));
+                    }
+                    index++;
+                  }
                 }
               }
             } else {
               listToLookThrough.add(run);
+              index++;
+            }
+          }
+          listToLookThrough = workspace.allFiles().subList(lowEnd, highEnd);
+        } else {
+          List<String> _allFiles_2 = workspace.allFiles();
+          for (final String run_1 : _allFiles_2) {
+            String _fileString_2 = URI.createFileURI(((inputs + "/") + run_1)).toFileString();
+            boolean _isDirectory_2 = new File(_fileString_2).isDirectory();
+            if (_isDirectory_2) {
+              final ReasonerWorkspace subWS_1 = workspace.subWorkspace(run_1, "");
+              String _fileString_3 = subWS_1.getWorkspaceURI().toFileString();
+              boolean _isDirectory_3 = new File(_fileString_3).isDirectory();
+              if (_isDirectory_3) {
+                List<String> _allFiles_3 = subWS_1.allFiles();
+                for (final String file_1 : _allFiles_3) {
+                  listToLookThrough.add(((run_1 + "/") + file_1));
+                }
+              }
+            } else {
+              listToLookThrough.add(run_1);
             }
           }
         }
@@ -127,7 +160,7 @@ public abstract class MetricsCalculationUsingShapes {
       for (final String metric : metrics) {
         {
           InputOutput.<String>println(("Metric: " + metric));
-          PrintWriter writer = new PrintWriter((((outputFolder + "stats") + metric) + ".csv"));
+          PrintWriter writer = new PrintWriter((((directoryPath + "//") + metric) + ".csv"));
           final String className = ("ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric);
           final Class<?> classObj = Class.forName(className);
           for (final String calcMethod : calcMethods) {
@@ -137,7 +170,7 @@ public abstract class MetricsCalculationUsingShapes {
               if (_equals) {
                 InputOutput.<String>print("    ");
               }
-              writer.append(metric);
+              writer.append((metric + ","));
               writer.append(calcMethod);
               long startTime = System.currentTimeMillis();
               for (final String fileName : listToLookThrough) {
@@ -159,20 +192,61 @@ public abstract class MetricsCalculationUsingShapes {
                   }
                   String valAsStr = MetricsCalculationUsingShapes.df.format(value);
                   InputOutput.<String>print((valAsStr + " "));
-                  writer.append(valAsStr);
-                  writer.close();
+                  writer.append(("," + valAsStr));
                 }
               }
               long _currentTimeMillis = System.currentTimeMillis();
               long duration = (_currentTimeMillis - startTime);
               InputOutput.println();
-              InputOutput.<String>println(("    time: " + Long.valueOf(duration)));
               writer.append("\n");
             }
           }
+          writer.close();
           InputOutput.println();
         }
       }
+      PrintWriter writer = new PrintWriter((directoryPath + "//C.csv"));
+      InputOutput.<String>println("Metric: C");
+      for (int depth = (-1); (depth < 0); depth++) {
+        {
+          writer.append("C,");
+          if ((depth == (-1))) {
+            writer.append("Model");
+            InputOutput.<String>print("C Model    : ");
+            for (final String fileName : listToLookThrough) {
+              {
+                final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
+                double value = CalcC.getCfromModel(model);
+                String valAsStr = MetricsCalculationUsingShapes.df.format(value);
+                InputOutput.<String>print((valAsStr + " "));
+                writer.append(("," + valAsStr));
+              }
+            }
+            InputOutput.println();
+            writer.append("\n");
+          } else {
+            for (int version = 0; (version < 3); version++) {
+              {
+                writer.append(((("NHLatticeD" + Integer.valueOf(depth)) + "V") + Integer.valueOf(version)));
+                InputOutput.<String>print((((("C NH D" + Integer.valueOf(depth)) + " V") + Integer.valueOf(version)) + " : "));
+                for (final String fileName_1 : listToLookThrough) {
+                  {
+                    final EObject model = workspace.<EObject>readModel(EObject.class, fileName_1);
+                    final PartialInterpretation partialModel = Util.getPartialModel(workspace, model);
+                    double value = CalcC.getCfromNHLattice(partialModel, Integer.valueOf(depth), Integer.valueOf(version));
+                    String valAsStr = MetricsCalculationUsingShapes.df.format(value);
+                    InputOutput.<String>print((valAsStr + " "));
+                    writer.append(("," + valAsStr));
+                  }
+                }
+                InputOutput.println();
+                writer.append("\n");
+              }
+            }
+          }
+        }
+      }
+      writer.close();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

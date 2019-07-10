@@ -69,7 +69,10 @@ public class CalcC {
             }
           }
         }
-        double c = ((numTriangles / numNeighbours) / (numNeighbours - 1));
+        double c = 0.0;
+        if ((numTriangles > 0)) {
+          c = ((numTriangles / numNeighbours) / (numNeighbours - 1));
+        }
         double _talC = totalC;
         totalC = (_talC + c);
       }
@@ -79,13 +82,11 @@ public class CalcC {
     return avgC;
   }
   
-  public static double getCfromNHLattice(final PartialInterpretation pm) {
-    return CalcC.getCfromNHLattice(pm, Integer.valueOf(2));
+  public static double getCfromNHLattice(final PartialInterpretation pm, final Integer v) {
+    return 0.0;
   }
   
-  public static double getCfromNHLattice(final PartialInterpretation pm, final Integer depth) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field nodes is undefined"
-      + "\nlength cannot be resolved");
+  public static double getCfromNHLattice(final PartialInterpretation pm, final Integer depth, final Integer v) {
+    return 1.0;
   }
 }

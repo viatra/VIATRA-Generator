@@ -1,22 +1,16 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcC
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.Neighbourhood2ShapeGraph
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.File
 import java.io.PrintWriter
 import java.math.RoundingMode
 import java.text.DecimalFormat
-import java.util.HashMap
-import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
@@ -29,23 +23,14 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.lang.reflect.Method
 
 abstract class MetricsCalculationUsingShapes {
-
-	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
-
-	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
+	static val partialVisualizer = new PartialInterpretation2Gml
 	private static DecimalFormat df = new DecimalFormat("0.000");
-
-	private static final Integer NUMMEASUREMENTS = 15
-	private static final Integer NUMNA = 2
-	private static final Integer NUMMPC = 4
-	private static final Integer NUMNDA = 6
 
 	def static void main(String[] args) {
 		df.roundingMode = RoundingMode.UP
-		val outputFolder = "outputs//calculatedMetrics//stats//"
+		val outputFolder = "outputs//calculatedMetrics//"
 
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*", new XMIResourceFactoryImpl)
 		YakindummPackage.eINSTANCE.eClass
@@ -53,11 +38,11 @@ abstract class MetricsCalculationUsingShapes {
 		ReteEngine.getClass
 
 		// SELECTION
-		val testing = true
-		val fileSelector = "A0"
+		val testing = false
+		val fileSelector = "V5"
 		val bounded = false
 		val lowEnd = 0
-		val highEnd = 1
+		val highEnd = 20
 		// END SELECTION
 		var fileDir = ""
 
@@ -66,6 +51,11 @@ abstract class MetricsCalculationUsingShapes {
 			case "A20": fileDir = "A20//models//"
 			case "R1": fileDir = "RandomEMF-WF+7//models//"
 			case "R2": fileDir = "RandomEMF30//models//"
+			case "V1": fileDir = "VS-i//models//"
+			case "V2": fileDir = "VS-WF+All5//models//"
+			case "V3": fileDir = "VS-WF+All6//models//"
+			case "V4": fileDir = "VS-WF+All7//models//"
+			case "V5": fileDir = "VS+i//models//"
 			default: fileDir = "Human//"
 		}
 		var inputs = ""
@@ -75,9 +65,12 @@ abstract class MetricsCalculationUsingShapes {
 			inputs = "inputs//" + fileDir
 		}
 		val workspace = new FileSystemWorkspace(inputs, "")
+		//Create stats storage directory if necessary
+		val directoryPath = outputFolder + fileDir.split("//").get(0)
+		new File(directoryPath).mkdirs
 
 		// Where we store metric values
-		val metrics = newArrayList(/**/ "NA" , "MPC" , "NDA", "NDC", "EDA", "C"/* */ )
+		val metrics = newArrayList( /**/ /*"NA", "MPC", "NDA", "NDC", "EDA" , "C" */ )
 		val calcMethods = newArrayList("Model", "NHLattice")
 
 //		var List<List<String>> metricValues = newArrayList
@@ -104,6 +97,26 @@ abstract class MetricsCalculationUsingShapes {
 			listToLookThrough = newArrayList("sampleList.xmi")
 		} else {
 			if (bounded) {
+				// NOT GENERAL
+				var index = 0
+				for (run : workspace.allFiles) {
+					if (new File(URI.createFileURI(inputs + "/" + run).toFileString).isDirectory) {
+						val subWS = workspace.subWorkspace(run, "")
+						if (new File(subWS.workspaceURI.toFileString).isDirectory) {
+							for (file : subWS.allFiles) {
+								if(index>=lowEnd && index<=highEnd) {
+									listToLookThrough.add(run + "/" + file)
+								}
+								index++								
+							}
+						}
+					} else {
+						listToLookThrough.add(run)
+						index++
+					}
+				}
+				
+				
 				listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
 			} else {
 				// NOT GENERAL
@@ -131,7 +144,7 @@ abstract class MetricsCalculationUsingShapes {
 		for (metric : metrics) {
 			// print and write
 			println("Metric: " + metric)
-			var writer = new PrintWriter(outputFolder + "stats" + metric + ".csv")
+			var writer = new PrintWriter(directoryPath + "//" + metric + ".csv")
 
 			val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
 			val classObj = Class.forName(className)
@@ -142,16 +155,23 @@ abstract class MetricsCalculationUsingShapes {
 				if (calcMethod == "Model") {
 					print("    ")
 				}
-				writer.append(metric)
+				writer.append(metric + ",")
 				writer.append(calcMethod)
-				
+
 				var startTime = System.currentTimeMillis
 				// for each file
 				for (fileName : listToLookThrough) {
 					val nameWOExt = fileName.substring(0, fileName.indexOf("."))
 					val model = workspace.readModel(EObject, fileName)
 					val partialModel = Util.getPartialModel(workspace, model)
-
+					// For visualisation
+//					writer.close
+//					writer = new PrintWriter(outputFolder + fileSelector + "//" + nameWOExt + ".gml")
+//					writer.print(partialVisualizer.transform(partialModel))
+//					writer.close
+//					writer = new PrintWriter(outputFolder + fileSelector + "//" + metric + ".csv")					
+					//END VIDUALISATON
+					
 					// get method and invoke
 					val methodName = "get" + metric + "from" + calcMethod
 					var value = 0.0
@@ -168,18 +188,67 @@ abstract class MetricsCalculationUsingShapes {
 					// print and write
 					var valAsStr = df.format(value)
 					print(valAsStr + " ")
-					writer.append(valAsStr)
-					writer.close
+					writer.append(","+valAsStr)
+
 				}
-				var duration = System.currentTimeMillis-startTime
-				//print and write
+				var duration = System.currentTimeMillis - startTime
+				// print and write
 				println()
-				println("    time: " + duration)
+//				println("    time: " + duration)
 				writer.append("\n");
 			}
+			writer.close
 			println()
 		}
 
+		// ////////////
+		// EXPERIMENTAL
+		// ////////////
+		var writer = new PrintWriter(directoryPath + "//C.csv")
+		println("Metric: C")
+
+		for (var depth = -1; depth < 0; depth++) {
+			writer.append("C,")
+			if (depth == -1) {
+				writer.append("Model")
+				print("C Model    : ")
+
+				for (fileName : listToLookThrough) {
+					val model = workspace.readModel(EObject, fileName)
+					var value = CalcC.getCfromModel(model)
+					// print and write
+					var valAsStr = df.format(value)
+					print(valAsStr + " ")
+					writer.append(',' + valAsStr)
+				}
+				println()
+				writer.append("\n");
+
+			} else {
+				for (var version = 0; version < 3; version++) {
+					writer.append("NHLatticeD" + depth + "V" + version)
+					print("C NH D" + depth + " V" + version + " : ")
+
+					for (fileName : listToLookThrough) {
+						val model = workspace.readModel(EObject, fileName)
+						val partialModel = Util.getPartialModel(workspace, model)
+						var value = CalcC.getCfromNHLattice(partialModel, depth, version)
+						// print and write
+						var valAsStr = df.format(value)
+						print(valAsStr + " ")
+						writer.append(',' + valAsStr )
+
+					}
+					println()
+					writer.append("\n");
+				}
+			}
+		}
+		writer.close
+
+	// ////////////
+	// EXPERIMENTAL
+	// ////////////
 	/*
 
 	 * // BEGIN
@@ -395,13 +464,12 @@ abstract class MetricsCalculationUsingShapes {
 			print((key as EReferenceImpl).name + "=" + key.lookup(map) + ", ")
 		}
 	}
-	
+
 	def static printStrMap(Map<String, Integer> map) {
 		for (key : map.keySet) {
 			print(key + "=" + key.lookup(map) + ", ")
 		}
 	}
-
 
 	def static printMap(Map<String, Set<String>> map) {
 		for (key : map.keySet) {

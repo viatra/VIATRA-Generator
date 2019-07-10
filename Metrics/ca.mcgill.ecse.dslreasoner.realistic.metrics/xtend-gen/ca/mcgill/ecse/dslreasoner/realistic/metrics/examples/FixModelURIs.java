@@ -2,6 +2,8 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples;
 
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
+import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
+import java.io.File;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -19,43 +21,45 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 public class FixModelURIs {
   public static void main(final String[] args) {
     try {
-      final String location = "inputs/RandomEMF-WF+7/models/";
+      final String location = "inputs/VS+i/models/";
       final FileSystemWorkspace workspace = new FileSystemWorkspace(location, "");
       YakindummPackage.eINSTANCE.eClass();
       Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
       XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
       _extensionToFactoryMap.put("*", _xMIResourceFactoryImpl);
       final ResourceSetImpl rs = new ResourceSetImpl();
-      final boolean isParentDir = true;
-      if (isParentDir) {
-        for (int i = 1; (i < 21); i++) {
-          for (int j = 1; (j < 31); j++) {
-            {
-              final String path = (((((((location + "run") + Integer.valueOf(i)) + "/") + Integer.valueOf(i)) + "_") + Integer.valueOf(j)) + ".xmi");
-              final URI uri = URI.createFileURI(path);
-              byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
-              final String txt = new String(_readAllBytes, StandardCharsets.UTF_8);
-              final String newTxt = txt.replace("\"viatrasolver.domain.sgraph\"", "\"hu.bme.mit.inf.yakindumm\"");
-              InputOutput.<String>println(path);
-              final PrintWriter writer = new PrintWriter(path);
-              writer.append(newTxt);
-              writer.close();
+      List<String> _allFiles = workspace.allFiles();
+      for (final String run : _allFiles) {
+        String _fileString = URI.createFileURI((location + run)).toFileString();
+        boolean _isDirectory = new File(_fileString).isDirectory();
+        if (_isDirectory) {
+          final ReasonerWorkspace subWS = workspace.subWorkspace(run, "");
+          String _fileString_1 = subWS.getWorkspaceURI().toFileString();
+          boolean _isDirectory_1 = new File(_fileString_1).isDirectory();
+          if (_isDirectory_1) {
+            List<String> _allFiles_1 = subWS.allFiles();
+            for (final String file : _allFiles_1) {
+              {
+                final String path = (((location + run) + "/") + file);
+                byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
+                final String txt = new String(_readAllBytes, StandardCharsets.UTF_8);
+                final String newTxt = txt.replace("\"viatrasolver.domain.sgraph\"", "\"hu.bme.mit.inf.yakindumm\"");
+                InputOutput.<String>println(path);
+                final PrintWriter writer = new PrintWriter(path);
+                writer.append(newTxt);
+                writer.close();
+              }
             }
           }
-        }
-      } else {
-        List<String> _allFiles = workspace.allFiles();
-        for (final String f : _allFiles) {
-          {
-            final String path = ((location + "/") + f);
-            byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
-            final String txt = new String(_readAllBytes, StandardCharsets.UTF_8);
-            final String newTxt = txt.replace("\"viatrasolver.domain.sgraph\"", "\"hu.bme.mit.inf.yakindumm\"");
-            InputOutput.<String>println(path);
-            final PrintWriter writer = new PrintWriter(path);
-            writer.append(newTxt);
-            writer.close();
-          }
+        } else {
+          final String path = (location + run);
+          byte[] _readAllBytes = Files.readAllBytes(Paths.get(path));
+          final String txt = new String(_readAllBytes, StandardCharsets.UTF_8);
+          final String newTxt = txt.replace("\"viatrasolver.domain.sgraph\"", "\"hu.bme.mit.inf.yakindumm\"");
+          InputOutput.<String>println(path);
+          final PrintWriter writer = new PrintWriter(path);
+          writer.append(newTxt);
+          writer.close();
         }
       }
     } catch (Throwable _e) {

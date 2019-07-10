@@ -96,7 +96,7 @@ class CalcEDA {
 		val nhDeepNodes = nhDeepRep.keySet
 		val nhNodes = nhRep.keySet
 
-		// TODO make below map from OutgoingRelationGND to value
+		// TODO make below map from OutgoingRelation to value
 		// calculations
 		val Map<String, Double> dim2Occ = new HashMap
 		var newVal = 0.0
