@@ -17,10 +17,18 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeTypeMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.EdgeTypeMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.TypedOutDegree
+import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 
 class GraphReader{
 	val ResourceSet resSet = new ResourceSetImpl();
-	val referenceTypes = new ArrayList<String>();
+	val referenceTypes = new ArrayList<EReference>();
+	
+	def static void main(String[] args){
+		var g = new GraphReader(YakindummPackage.eINSTANCE);
+	}
 	
 	new(EPackage metaModel) {
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*",new XMIResourceFactoryImpl)
@@ -28,7 +36,7 @@ class GraphReader{
 		//find all reference types in the meta model
 		metaModel.eAllContents.forEach[
 			if(it instanceof EReference){
-				referenceTypes.add(it.name);
+				referenceTypes.add(it);
 			}
 		]
 	}
@@ -45,7 +53,10 @@ class GraphReader{
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
-				
+		metrics.add(new TypedOutDegree());		
+		metrics.add(new NodeTypeMetric());
+		metrics.add(new EdgeTypeMetric());
+		
 		//check all files in the directory with xmi
 		for(String name : dir.list.filter[it| it.endsWith(".xmi")]){
 			val file = new File(name);
@@ -71,7 +82,7 @@ class GraphReader{
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			throw new FileNotFoundException(getURI(path, name).toString + "reason: " + e.message)
+			throw new Exception(getURI(path, name).toString());
 		}
 	}
 	

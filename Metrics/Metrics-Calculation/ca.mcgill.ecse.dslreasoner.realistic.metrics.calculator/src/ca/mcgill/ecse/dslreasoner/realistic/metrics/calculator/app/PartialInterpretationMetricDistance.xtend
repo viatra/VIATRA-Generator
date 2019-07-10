@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.EuclideanDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.JSDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.StateData
@@ -8,6 +9,7 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MultiplexParticipationCoefficientMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeActivityMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.OutDegreeMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.TypedOutDegree
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.predictor.LinearModel
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.ArrayList
@@ -21,6 +23,7 @@ class PartialInterpretationMetricDistance {
 	
 	var KSDistance ks;
 	var JSDistance js;
+	var EuclideanDistance ed;
 	var Map<Object, StateData> stateAndHistory;
 	var OLSMultipleLinearRegression regression;
 	List<StateData> samples;
@@ -32,6 +35,7 @@ class PartialInterpretationMetricDistance {
 	new(){
 		ks = new KSDistance(Domain.Yakinduum);
 		js = new JSDistance(Domain.Yakinduum);
+		ed = new EuclideanDistance(Domain.Yakinduum);
 		regression = new OLSMultipleLinearRegression();
 		regression.noIntercept = false;
 		stateAndHistory = new HashMap<Object, StateData>();
@@ -44,6 +48,7 @@ class PartialInterpretationMetricDistance {
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
+		metrics.add(new TypedOutDegree());
 		
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
 		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
@@ -51,6 +56,24 @@ class PartialInterpretationMetricDistance {
 		var mpc = ks.mpcDistance(metricSamples.mpcSamples);
 		var na = ks.naDistance(metricSamples.naSamples);
 		var outDegree = ks.outDegreeDistance(metricSamples.outDegreeSamples);
+		var typedOutDegree = ks.typedOutDegreeDistance(metricSamples.typedOutDegreeSamples);
+		
+		return new MetricDistanceGroup(mpc, na, outDegree, typedOutDegree);
+	}
+	
+	def MetricDistanceGroup calculateMetricEuclidean(PartialInterpretation partial){
+		val metrics = new ArrayList<Metric>();
+		metrics.add(new OutDegreeMetric());
+		metrics.add(new NodeActivityMetric());
+		metrics.add(new MultiplexParticipationCoefficientMetric());
+		metrics.add(new TypedOutDegree());
+		
+		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
+		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
+		
+		var mpc = ed.mpcDistance(metricSamples.mpcSamples);
+		var na = ed.naDistance(metricSamples.naSamples);
+		var outDegree = ed.outDegreeDistance(metricSamples.outDegreeSamples);
 		
 		return new MetricDistanceGroup(mpc, na, outDegree);
 	}
@@ -132,14 +155,13 @@ class PartialInterpretationMetricDistance {
 	}
 	
 	def double[] calculateFeature(int step, int violations){
-		var features = newDoubleArrayOfSize(5);
+		var features = newDoubleArrayOfSize(2);
 		//constant term
 		features.set(0, 1);
 		
 		features.set(1, 1.0 / step);
-		features.set(2, violations);
-		features.set(3, Math.pow(violations, 2));
-		features.set(4, Math.pow(violations, 0.5));
+//		features.set(2, violations);
+//		features.set(3, Math.pow(violations, 2));
 		
 		return features;
 	}
@@ -149,11 +171,23 @@ class MetricDistanceGroup{
 	var double mpcDistance;
 	var double naDistance;
 	var double outDegreeDistance;
+	var double typedOutDegreeDistance;
+	
+	new(double mpcDistance, double naDistance, double outDegreeDistance, double typedOutDegreeDistance){
+		this.mpcDistance = mpcDistance;
+		this.naDistance = naDistance;
+		this.outDegreeDistance = outDegreeDistance;
+		this.typedOutDegreeDistance = typedOutDegreeDistance;
+	}
 	
 	new(double mpcDistance, double naDistance, double outDegreeDistance){
 		this.mpcDistance = mpcDistance;
 		this.naDistance = naDistance;
 		this.outDegreeDistance = outDegreeDistance;
+	}
+	
+	def double getTypedOutDegreeDistance(){
+		return this.typedOutDegreeDistance;
 	}
 	
 	def double getMPCDistance(){

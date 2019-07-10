@@ -4,11 +4,13 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.BooleanElementImpl
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialComplexTypeInterpretationImpl
 import java.util.ArrayList
 import java.util.List
 
 class PartialInterpretationGraph extends Graph{
+	val typeToExclude = "undefinedpart";
+	val classSuffix = " class";
 	
 	/**
 	 * Define a new PartialInterpretationGraph by parse every element from a PartialInterpretation
@@ -16,17 +18,21 @@ class PartialInterpretationGraph extends Graph{
 	new(PartialInterpretation partial, List<Metric> metrics, String name){		
 		//the edge types are defined in terms of RelationDeclaration
 		partial.problem.relations.filter(RelationDeclaration).forEach[
-			this.statistic.addType(it.name);
+			//only need the name of the reference type (remove everything with and after "reference")
+			this.statistic.addEdgeType(it.name.split(" ").get(0));
 		]
 		// add all elements
-		val elements = getElements(partial);
-		for(element : elements){
-			statistic.addNode(element)
+		val typeInterpretations = getTypes(partial);
+		for(type : typeInterpretations){
+			var typeName = type.interpretationOf.name.replace(classSuffix, '');
+			for(node : type.elements){
+				this.statistic.addNodeWithType(node, typeName);
+			}
 		}
 		
 		for(relationInterpretation : partial.partialrelationinterpretation) {
-			val type = relationInterpretation.interpretationOf.name
-			
+			//only need the name of the reference type (remove everything with and after "reference")
+			val type = relationInterpretation.interpretationOf.name.split(" ").get(0);
 			for(edge : relationInterpretation.relationlinks.filter(BinaryElementRelationLink)){
 				statistic.addEdge(edge.param1, edge.param2, type);
 			}			
@@ -62,8 +68,11 @@ class PartialInterpretationGraph extends Graph{
 		output.add(stateInfo);
 	}
 	
-	private def getElements(PartialInterpretation partial){
-		return partial.newElements.filter[!(it instanceof BooleanElementImpl)] + partial.problem.elements;
+	private def getTypes(PartialInterpretation partial){
+		//only the complex type interpretations are the ones defined in meta model
+		//do not care about undefined types as it will be included in the class type
+		return partial.partialtypeinterpratation.filter(PartialComplexTypeInterpretationImpl)
+												.filter[!it.interpretationOf.name.toLowerCase.contains(typeToExclude)];
 	}
 	
 	override getStatistic() {

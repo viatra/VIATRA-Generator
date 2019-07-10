@@ -2,11 +2,15 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup
-import java.util.ArrayList
-import java.util.List
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MultiplexParticipationCoefficientMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeActivityMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.OutDegreeMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.TypedOutDegree
+import java.util.ArrayList
+import java.util.HashMap
+import java.util.List
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeTypeMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.EdgeTypeMetric
 
 abstract class Graph {
 	
@@ -42,11 +46,17 @@ abstract class Graph {
 		
 		for(metric : this.metrics){
 			if(metric instanceof MultiplexParticipationCoefficientMetric){
-				sample.mpcSamples = metric.evaluateSamples(this.statistic);				
+				sample.mpcSamples = metric.evaluateSamples(this.statistic) as ArrayList<Double>;				
 			}else if(metric instanceof NodeActivityMetric){
-				sample.naSamples = metric.evaluateSamples(this.statistic);
+				sample.naSamples = metric.evaluateSamples(this.statistic) as ArrayList<Double>;
 			}else if(metric instanceof OutDegreeMetric){
-				sample.outDegreeSamples = metric.evaluateSamples(this.statistic);
+				sample.outDegreeSamples = metric.evaluateSamples(this.statistic) as ArrayList<Double>;
+			}else if(metric instanceof TypedOutDegree){
+				sample.typedOutDegreeSamples = metric.evaluateSamples(this.statistic) as HashMap<String, List<Integer>>;
+			}else if(metric instanceof NodeTypeMetric){
+				sample.nodeTypeSamples = metric.evaluateSamples(this.statistic) as HashMap<String, Double>;
+			}else if (metric instanceof EdgeTypeMetric){
+				sample.edgeTypeSamples = metric.evaluateSamples(this.statistic) as HashMap<String, Double>;
 			}
 		}
 		

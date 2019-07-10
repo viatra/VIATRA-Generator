@@ -5,20 +5,22 @@ import com.google.common.collect.Multimap
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
+import java.util.Map
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
 
 class GraphStatistic {
 	val incomingEdges = new HashMap<String, Multimap<EObject, EObject>>;
 	val outcomingEdges = new HashMap<String, Multimap<EObject, EObject>>;
-	
+
 	val edgeTypes = new HashSet<String>();
-	val nodes = new HashSet<EObject>();
-		
+	val nodeToType = new HashMap<EObject, Set<String>>();	
+
 	/**
 	 * Add an edge type to to the graph
 	 * @param type: type to add
 	 */
-	def void addType(String type){
+	def void addEdgeType(String type){
 		if(edgeTypes.contains(type)){
 	  		return;
 	  	}
@@ -28,15 +30,20 @@ class GraphStatistic {
 	}
 	
 	/**
-	 * Add a node to he graph 
+	 * Add a node to the graph with one type in its type hierarchy
 	 * @param node: node to add
 	 */
-	 def void addNode(EObject n){
-	 	if(nodes.contains(n)){
-	 		return;
-	 	}
-	 	
-	 	nodes.add(n);
+	 def void addNodeWithType(EObject n, String Type){
+	 	var types = nodeToType.getOrDefault(n, new HashSet<String>());
+	 	types.add(Type);
+	 	nodeToType.put(n, types);
+	 }
+	 
+	 /**
+	  * Add a node to the graph with all types in its type hierarchy
+	  */
+	 def void addNodeWithAllTypes(EObject n, Set<String> types){
+	 	nodeToType.put(n, types);
 	 }
 	 
 	 /**
@@ -82,7 +89,7 @@ class GraphStatistic {
 	  }
 	  
 	  /**
-	   * calculate the number of edge types for a given degree.
+	   * calculate the number of edge types for a given node.
 	   */
 	  def int numOfEdgeTypes(EObject o){
 	  	var count = 0;
@@ -100,8 +107,17 @@ class GraphStatistic {
 	  	return edgeTypes.toList();
 	  }
 	  
-	  def List<EObject> getAllNodes(){
-	  	return nodes.toList();
+	  def Map<EObject, Set<String>> getNodeToTypesMap(){
+	  	return nodeToType;
 	  }
+	  
+	  def List<EObject> getAllNodes(){
+	  	return nodeToType.keySet().toList();
+	  }
+	  
+	  def HashMap<String, Multimap<EObject, EObject>> getOutgoingEdges(){
+	  	return outcomingEdges; 
+	  }
+	  
 }
 

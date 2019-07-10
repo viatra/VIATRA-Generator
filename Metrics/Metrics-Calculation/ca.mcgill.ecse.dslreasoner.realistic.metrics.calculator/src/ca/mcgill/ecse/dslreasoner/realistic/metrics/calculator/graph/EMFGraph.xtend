@@ -2,13 +2,14 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
 import java.util.ArrayList
+import java.util.HashSet
 import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 
 class EMFGraph extends Graph{	
-	def void init (EObject root, List<Metric> metrics, String name, List<String> referenceTypes){
+	def void init (EObject root, List<Metric> metrics, String name, List<EReference> referenceTypes){
 		val otherContents = root.eAllContents.toList();
 		otherContents.add(root);
 		init(otherContents, metrics, name, referenceTypes);
@@ -21,13 +22,15 @@ class EMFGraph extends Graph{
 	 * @param name: name of the instance model
 	 * @param ReferenceTypes: reference types defined in the meta model
 	 */
-	def void init(List<EObject> objects, List<Metric> metrics, String name, List<String> referenceTypes){
+	def void init(List<EObject> objects, List<Metric> metrics, String name, List<EReference> referenceTypes){
 		objects.forEach[it|
-			statistic.addNode(it);
+			var types = new HashSet(it.eClass.EAllSuperTypes.map[it|it.name]);
+			types.add(it.eClass.name);
+			statistic.addNodeWithAllTypes(it, types);
 		]
 		
 		referenceTypes.forEach[it|
-			statistic.addType(it);
+			statistic.addEdgeType(it.name);
 		];
 		
 		objects.forEach[source|

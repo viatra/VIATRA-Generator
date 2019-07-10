@@ -11,13 +11,13 @@ class GraphCollection:
         self.nas = []
         self.mpcs = []
         self.name = name
+        self.size = number
         models = reader.readmultiplefiles(path, number, shouldShuffle)
         for i in range(len(models)):
             contents, out_d, na, mpc = reader.getmetrics(models[i])
             self.out_ds.append(out_d)
             self.nas.append(na)
             self.mpcs.append(mpc)
-        print(len(self.out_ds))
 
 #Graph stat for one graph
 class GraphStat:

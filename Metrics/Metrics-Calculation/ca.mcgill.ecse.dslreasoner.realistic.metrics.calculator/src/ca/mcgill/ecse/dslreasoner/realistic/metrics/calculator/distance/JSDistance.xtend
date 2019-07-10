@@ -7,7 +7,7 @@ import java.text.DecimalFormat
 import java.util.HashMap
 import java.util.List
 
-class JSDistance {
+class JSDistance extends CostDistance {
 	var HashMap<String, Double> mpcPMF;
 	var HashMap<String, Double> naPMF;
 	var HashMap<String, Double> outDegreePMF;
@@ -25,17 +25,6 @@ class JSDistance {
 		mpcPMF = pmfFromSamples(mpcSamples, formatter);
    		naPMF = pmfFromSamples(naSamples, formatter);
    		outDegreePMF = pmfFromSamples(outDegreeSamples, formatter);	
-	}
-	
-	def private pmfFromSamples(double[] samples, DecimalFormat formatter){
-		var length = samples.length;
-		var pmfMap = new HashMap<String, Double>();
-		
-		for(sample : samples){
-			pmfMap.put(formatter.format(sample), pmfMap.getOrDefault(formatter.format(sample), 0.0) + 1.0 / length);
-		}
-		
-		return pmfMap;
 	}
 	
 	def private combinePMF(HashMap<String, Double> pmf1, HashMap<String, Double> pmf2){
@@ -68,7 +57,7 @@ class JSDistance {
 		return distance;
 	}
 	
-	def double mpcDistance(List<Double> samples){
+	override double mpcDistance(List<Double> samples){
 		// map list to array
 		var map = pmfFromSamples(samples.stream().mapToDouble([it]).toArray(), formatter);
 		//if the size of array is smaller than 2, ks distance cannot be performed, simply return 1
@@ -76,7 +65,7 @@ class JSDistance {
 		return jsDivergence(map, mpcPMF);
 	}
 	
-	def double naDistance(List<Double> samples){
+	override double naDistance(List<Double> samples){
 		// map list to array
 		var map = pmfFromSamples(samples.stream().mapToDouble([it]).toArray(), formatter);
 		
@@ -85,7 +74,7 @@ class JSDistance {
 		return jsDivergence(map, naPMF);
 	}
 	
-	def double outDegreeDistance(List<Double> samples){
+	override double outDegreeDistance(List<Double> samples){
 		// map list to array
 		var map = pmfFromSamples(samples.stream().mapToDouble([it]).toArray(), formatter);
 		//if the size of array is smaller than 2, ks distance cannot be performed, simply return 1

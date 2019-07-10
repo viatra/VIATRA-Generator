@@ -8,17 +8,19 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import numpy as np
 from GraphType import GraphCollection
+import DistributionMetrics as metrics
 
 def main():
     # read models
-    human = GraphCollection('../input/humanOutput/', 500, 'Human')
-    viatra30 = GraphCollection('../input/viatraOutput30/', 500, 'Viatra (30 nodes)')
+    # human = GraphCollection('../input/humanOutput/', 500, 'Human')
+    # viatra30 = GraphCollection('../input/viatraOutput30/', 500,'Viatra (30 nodes)')
     # viatra60 = GraphCollection('../input/viatraOutput60/', 500, 'Viatra (60 nodes)')
-    # viatra100 = GraphCollection('../input/viatraOutput100/', 500, 'Viatra (100 nodes)')
+    viatra100 = GraphCollection('../input/viatraOutput100/', 500, 'Viatra (100 nodes)')
     # random = GraphCollection('../input/randomOutput/', 500, 'Random')
     # alloy = GraphCollection('../input/alloyOutput/', 500, 'Alloy (30 nodes)')
-
-    models_to_compare = [human, viatra30]
+    realistic_viatra = GraphCollection('../input/viatra_output_consistent_100/', 50, 'Realistic Viatra With Some Constraints (100 nodes)')
+    human100 = GraphCollection('../input/human_output_100/', 304, 'Human')
+    models_to_compare = [human100, realistic_viatra, viatra100]
     
     # define output folder
     outputFolder = '../output/'
@@ -38,7 +40,7 @@ def calculateKSMatrix(dists):
     for i in range(len(dist)):
         matrix[i,i] = 0
         for j in range(i+1, len(dist)):
-            value, p = stats.ks_2samp(dist[i], dist[j])
+            value = metrics.euclidean_distance(dist[i], dist[j])
             matrix[i, j] = value
             matrix[j, i] = value
     return matrix
@@ -50,13 +52,14 @@ def calculateMDS(dissimilarities):
     return trans
 
 def plot(graphTypes, coords, title='',index = 0, savePath = ''):
-    half_length = int(coords.shape[0] / len(graphTypes))
     color = ['blue', 'red', 'green', 'yellow']
     plt.figure(index, figsize=(7, 4))
     plt.title(title)
+    index = 0
     for i in range(len(graphTypes)):
-        x = (coords[(i*half_length):((i+1)*half_length), 0].tolist())
-        y = (coords[(i*half_length):((i+1)*half_length), 1].tolist())
+        x = (coords[index:index+graphTypes[i].size, 0].tolist())
+        y = (coords[index:index+graphTypes[i].size, 1].tolist())
+        index += graphTypes[i].size
         plt.plot(x, y, color=color[i], marker='o', label = graphTypes[i].name, linestyle='', alpha=0.7)
     plt.legend(loc='upper right')
     plt.savefig(fname = savePath, dpi=150)

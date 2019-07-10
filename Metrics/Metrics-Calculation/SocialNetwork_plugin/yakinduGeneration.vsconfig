@@ -1,5 +1,5 @@
-import epackage "../VIATRA-Generator/Domains/hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph/model/yakindu_simplified.ecore"
-import viatra	"../VIATRA-Generator/Domains/hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph/queries/hu/bme/mit/inf/dslreasoner/partialsnapshot_mavo/yakindu/patterns.vql"
+import epackage "../../../Domains/hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph/model/yakindu_simplified.ecore"
+import viatra	"../../../Domains/hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph/queries/hu/bme/mit/inf/dslreasoner/partialsnapshot_mavo/yakindu/patterns.vql"
 
 generate {
 	metamodel = { package yakindumm excluding { Synchronization}}
@@ -13,7 +13,7 @@ generate {
 	}
 	
 	number = 1
-	runs = 1
+	runs = 50
 	config = {
 		log-level = none
 	}

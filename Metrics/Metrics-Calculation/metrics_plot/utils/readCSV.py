@@ -24,9 +24,12 @@ def readcsvfile(filename):
             # meta models are string
             elif(arr[0] == constants.METAMODEL):
                 contents[constants.METAMODEL] = arr[1:]
-            # all other contants are integer
+            # NA and OD are integers
             else:
-                contents[arr[0]] = list(map(int, arr[1:]))
+                try:
+                    contents[arr[0]] = list(map(int, arr[1:]))
+                except:
+                    print(arr[0], ' is not integer')
     f.close()
     return contents
 
