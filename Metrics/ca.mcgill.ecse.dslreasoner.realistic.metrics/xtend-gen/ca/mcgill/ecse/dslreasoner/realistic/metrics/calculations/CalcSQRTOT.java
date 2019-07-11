@@ -16,10 +16,10 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcSQR {
+public class CalcSQRTOT {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
-  public static double getSQRfromModel(final EObject model) {
+  public static double getSQRTOTfromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
     for (final EObject node : nodes) {
@@ -53,14 +53,12 @@ public class CalcSQR {
       }
     }
     double totalC = 0.0;
-    double max2ndNeighbours = 0.0;
     double tot2ndNeighbours = 0.0;
     double num1stNeighbours = 0.0;
     for (final EObject node_2 : nodes) {
       {
         final Set<EObject> neighbours = CollectionsUtil.<EObject, Set<EObject>>lookup(node_2, node2Neighbours);
         num1stNeighbours = neighbours.size();
-        max2ndNeighbours = 0;
         tot2ndNeighbours = 0;
         double numSquares = 0.0;
         for (final EObject neighbour1 : neighbours) {
@@ -71,11 +69,6 @@ public class CalcSQR {
               double _t2ndNeighbours = tot2ndNeighbours;
               int _size = neighsOfNeigh.size();
               tot2ndNeighbours = (_t2ndNeighbours + _size);
-              int _size_1 = neighsOfNeigh.size();
-              boolean _lessThan = (max2ndNeighbours < _size_1);
-              if (_lessThan) {
-                max2ndNeighbours = neighsOfNeigh.size();
-              }
               for (final EObject neighOfNeigh1 : neighsOfNeigh) {
                 if (((!Objects.equal(neighOfNeigh1, node_2)) && CollectionsUtil.<EObject, Set<EObject>>lookup(neighOfNeigh1, node2Neighbours).contains(neighbour2))) {
                   numSquares++;
@@ -98,11 +91,11 @@ public class CalcSQR {
     return avgC;
   }
   
-  public static double getSQRfromNHLattice(final PartialInterpretation pm, final Integer v) {
+  public static double getSQRTOTfromNHLattice(final PartialInterpretation pm) {
     return 0.0;
   }
   
-  public static double getSQRfromNHLattice(final PartialInterpretation pm, final Integer depth, final Integer v) {
+  public static double getSQRTOTfromNHLattice(final PartialInterpretation pm, final Integer depth) {
     return 0.0;
   }
 }

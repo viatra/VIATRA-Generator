@@ -11,10 +11,106 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcSQR {
+class CalcSQRTOT {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
-	def static getSQRfromModel(EObject model) {
+	def static getSQRTOTfromModel(EObject model) {
+		val nodes = model.eResource.allContents.toList
+
+		// fill HashSet
+		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
+		for (node : nodes) {
+			node2Neighbours.put(node, new HashSet)
+		}
+
+		// iterate over nodes and add connected nodes
+		for (node : nodes) {
+			for (reference : node.eClass.EAllReferences) {
+				val pointingTo = node.eGet(reference)
+
+				if (!(pointingTo instanceof List)) {
+					if (pointingTo !== null) {
+						// Add for source
+						node.lookup(node2Neighbours).add(pointingTo as EObject)
+						// Add for target
+						(pointingTo as EObject).lookup(node2Neighbours).add(node)
+					}
+				} else {
+					val pointingToSet = pointingTo as List
+					if (!pointingToSet.empty) {
+						for (target : pointingToSet) {
+							// Add for source
+							node.lookup(node2Neighbours).add(target as EObject)
+							// Add for target
+							(target as EObject).lookup(node2Neighbours).add(node)
+						}
+					}
+				}
+			}
+		}
+
+		// Measurements
+		var totalC = 0.0
+		var tot2ndNeighbours = 0.0
+		var num1stNeighbours = 0.0
+		for (node : nodes) {
+			val neighbours = node.lookup(node2Neighbours)
+			num1stNeighbours = neighbours.size
+			tot2ndNeighbours = 0
+			var numSquares = 0.0
+			for (neighbour1 : neighbours) {
+				for (neighbour2 : neighbours) {
+					if (neighbour1 != neighbour2) {
+						val neighsOfNeigh = neighbour1.lookup(node2Neighbours)
+						tot2ndNeighbours += neighsOfNeigh.size
+						for (neighOfNeigh1 : neighsOfNeigh) {
+							if (neighOfNeigh1 != node && neighOfNeigh1.lookup(node2Neighbours).contains(neighbour2)) {
+//								print(neighbour1)
+//								print("   ")
+//								print(neighbour2)
+//								print("   ")
+//								print(neighOfNeigh1)
+//								println()
+								numSquares++
+							}
+						}
+
+					}
+				}
+			}
+
+//			println(node)
+			val num2ndNeighbours = tot2ndNeighbours
+
+//			print("(" + numSquares + "x" + num2ndNeighbours)
+			var sqr = 0.0
+			if (num2ndNeighbours != 0) {
+				sqr = numSquares / num2ndNeighbours
+			}
+
+//			println("=" + sqr + ")")
+			totalC += sqr
+		}
+		val numNodes = nodes.length
+		val avgC = totalC / numNodes
+
+		return avgC
+	}
+
+	def static getSQRTOTfromNHLattice(PartialInterpretation pm) {
+		return 0.0
+//		return getCfromNHLattice(pm, 2, v)
+	}
+
+	def static getSQRTOTfromNHLattice(PartialInterpretation pm, Integer depth) {
+		return 0.0
+	}
+}
+
+class CalcSQRMAX {
+	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
+
+	def static getSQRMAXfromModel(EObject model) {
 		val nodes = model.eResource.allContents.toList
 
 		// fill HashSet
@@ -52,22 +148,19 @@ class CalcSQR {
 		// Measurements
 		var totalC = 0.0
 		var max2ndNeighbours = 0.0
-		var tot2ndNeighbours = 0.0
 		var num1stNeighbours = 0.0
 		for (node : nodes) {
 			val neighbours = node.lookup(node2Neighbours)
 			num1stNeighbours = neighbours.size
 			max2ndNeighbours = 0
-			tot2ndNeighbours = 0
 			var numSquares = 0.0
 			for (neighbour1 : neighbours) {
 				for (neighbour2 : neighbours) {
 					if (neighbour1 != neighbour2) {
 						val neighsOfNeigh = neighbour1.lookup(node2Neighbours)
-						tot2ndNeighbours += neighsOfNeigh.size
 						if (max2ndNeighbours < neighsOfNeigh.size) {
-							max2ndNeighbours = neighsOfNeigh.size 
-						}			
+							max2ndNeighbours = neighsOfNeigh.size
+						}
 						for (neighOfNeigh1 : neighsOfNeigh) {
 							if (neighOfNeigh1 != node && neighOfNeigh1.lookup(node2Neighbours).contains(neighbour2)) {
 //								print(neighbour1)
@@ -76,19 +169,16 @@ class CalcSQR {
 //								print("   ")
 //								print(neighOfNeigh1)
 //								println()
-							numSquares++
+								numSquares++
+							}
 						}
-						}
-						
-						
-						
+
 					}
 				}
 			}
 //			println(node)
-//			val num2ndNeighbours = num1stNeighbours * max2ndNeighbours
-			val num2ndNeighbours = tot2ndNeighbours
-			
+			val num2ndNeighbours = num1stNeighbours * max2ndNeighbours
+
 //			print("(" + numSquares + "x" + num2ndNeighbours)
 			var sqr = 0.0
 			if (num2ndNeighbours != 0) {
@@ -104,11 +194,174 @@ class CalcSQR {
 		return avgC
 	}
 
-	def static getSQRfromNHLattice(PartialInterpretation pm, Integer v) {
+	def static getSQRMAXfromNHLattice(PartialInterpretation pm) {
 		return 0.0
 //		return getCfromNHLattice(pm, 2, v)
 	}
-	def static getSQRfromNHLattice(PartialInterpretation pm, Integer depth, Integer v) {
+
+	def static getSQRMAXfromNHLattice(PartialInterpretation pm, Integer depth) {
+		return 0.0
+	}
+}
+
+class CalcSQROSZ {
+	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
+
+	def static getSQROSZfromModel(EObject model) {
+		val nodes = model.eResource.allContents.toList
+
+		// fill HashSet
+		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
+		for (node : nodes) {
+			node2Neighbours.put(node, new HashSet)
+		}
+
+		// iterate over nodes and add connected nodes
+		for (node : nodes) {
+			for (reference : node.eClass.EAllReferences) {
+				val pointingTo = node.eGet(reference)
+
+				if (!(pointingTo instanceof List)) {
+					if (pointingTo !== null) {
+						// Add for source
+						node.lookup(node2Neighbours).add(pointingTo as EObject)
+						// Add for target
+						(pointingTo as EObject).lookup(node2Neighbours).add(node)
+					}
+				} else {
+					val pointingToSet = pointingTo as List
+					if (!pointingToSet.empty) {
+						for (target : pointingToSet) {
+							// Add for source
+							node.lookup(node2Neighbours).add(target as EObject)
+							// Add for target
+							(target as EObject).lookup(node2Neighbours).add(node)
+						}
+					}
+				}
+			}
+		}
+
+		// Measurements
+		var totalSQR = 0.0
+		var totalDenom = 0.0
+		var num1stNeighbours = 0.0
+		var num2ndNeighbours = 0.0
+		var num3rdNeighbours = 0.0
+		var num4thNeighbours = 0.0
+		for (node : nodes) {
+			val neighbours = node.lookup(node2Neighbours)
+			num1stNeighbours = neighbours.size
+			
+			for (neighbour1 : neighbours) {
+				val neighbours1 = neighbour1.lookup(node2Neighbours)
+				num2ndNeighbours = neighbours1.size
+				
+				for (neighbour2 : neighbours1) {
+					val neighbours2 = neighbour2.lookup(node2Neighbours)
+					num3rdNeighbours = neighbours2.size
+					
+					for (neighbour3 : neighbours2) {
+						val neighbours3 = neighbour3.lookup(node2Neighbours)
+						num4thNeighbours = neighbours3.size
+						
+						if(neighbours3.contains(node)) {
+							totalSQR += 1
+						}
+						totalDenom += num1stNeighbours * num2ndNeighbours * num3rdNeighbours * num4thNeighbours
+					}
+				}
+			}
+		}
+		val avgSQR = totalSQR / totalDenom
+
+		return avgSQR
+	}
+
+	def static getSQROSZfromNHLattice(PartialInterpretation pm) {
+		return 0.0
+//		return getCfromNHLattice(pm, 2, v)
+	}
+
+	def static getSQROSZfromNHLattice(PartialInterpretation pm, Integer depth) {
+		return 0.0
+	}
+}
+
+class CalcSQROSZ2 {
+	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
+
+	def static getSQROSZ2fromModel(EObject model) {
+		val nodes = model.eResource.allContents.toList
+
+		// fill HashSet
+		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
+		for (node : nodes) {
+			node2Neighbours.put(node, new HashSet)
+		}
+
+		// iterate over nodes and add connected nodes
+		for (node : nodes) {
+			for (reference : node.eClass.EAllReferences) {
+				val pointingTo = node.eGet(reference)
+
+				if (!(pointingTo instanceof List)) {
+					if (pointingTo !== null) {
+						// Add for source
+						node.lookup(node2Neighbours).add(pointingTo as EObject)
+						// Add for target
+						(pointingTo as EObject).lookup(node2Neighbours).add(node)
+					}
+				} else {
+					val pointingToSet = pointingTo as List
+					if (!pointingToSet.empty) {
+						for (target : pointingToSet) {
+							// Add for source
+							node.lookup(node2Neighbours).add(target as EObject)
+							// Add for target
+							(target as EObject).lookup(node2Neighbours).add(node)
+						}
+					}
+				}
+			}
+		}
+
+		// Measurements
+		var totalSQR = 0.0
+		var totalDenom = 0.0
+		var num4thNeighbours = 0.0
+		for (node : nodes) {
+			val neighbours = node.lookup(node2Neighbours)
+			
+			for (neighbour1 : neighbours) {
+				val neighbours1 = neighbour1.lookup(node2Neighbours)
+				
+				for (neighbour2 : neighbours1) {
+					val neighbours2 = neighbour2.lookup(node2Neighbours)
+					
+					for (neighbour3 : neighbours2) {
+						val neighbours3 = neighbour3.lookup(node2Neighbours)
+						num4thNeighbours = neighbours3.size
+						
+						if(neighbours3.contains(node)) {
+							totalSQR += 1
+						}
+						totalDenom += num4thNeighbours
+					}
+				}
+			}
+		}
+		val avgSQR = totalSQR / totalDenom
+
+		return avgSQR
+	}
+
+	def static getSQROSZ2fromNHLattice(PartialInterpretation pm) {
+		return 0.0
+//		return getCfromNHLattice(pm, 2, v)
+	}
+
+	def static getSQROSZ2fromNHLattice(PartialInterpretation pm, Integer depth) {
 		return 0.0
 	}
 }

@@ -1,6 +1,5 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples;
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQR;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
@@ -34,7 +33,9 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 public abstract class MetricsCalculationUsingShapes {
   private final static PartialInterpretation2Gml partialVisualizer = new PartialInterpretation2Gml();
   
-  private static DecimalFormat df = new DecimalFormat("0.000");
+  private static DecimalFormat df = new DecimalFormat("0.00000");
+  
+  private final static int PROGRESSPERCENTAGEJUMP = 10;
   
   public static void main(final String[] args) {
     try {
@@ -100,7 +101,7 @@ public abstract class MetricsCalculationUsingShapes {
           String _get = fileDir.split("//")[0];
           final String directoryPath = (outputFolder + _get);
           new File(directoryPath).mkdirs();
-          final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList();
+          final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQROSZ");
           final ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
           double calcVal = 0.0;
           double realVal = 0.0;
@@ -161,7 +162,11 @@ public abstract class MetricsCalculationUsingShapes {
           Method method = MetricsCalculationUsingShapes.class.getMethods()[0];
           for (final String metric : metrics) {
             {
-              InputOutput.<String>println(("Metric: " + metric));
+              String _get_1 = fileDir.split("//")[0];
+              String _plus = ("(" + _get_1);
+              String _plus_1 = (_plus + ") Metric: ");
+              String _plus_2 = (_plus_1 + metric);
+              InputOutput.<String>println(_plus_2);
               PrintWriter writer = new PrintWriter((((directoryPath + "//") + metric) + ".csv"));
               final String className = ("ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric);
               final Class<?> classObj = Class.forName(className);
@@ -175,6 +180,10 @@ public abstract class MetricsCalculationUsingShapes {
                   writer.append((metric + ","));
                   writer.append(calcMethod);
                   long startTime = System.currentTimeMillis();
+                  int fileIndex = 0;
+                  final List<String> _converted_listToLookThrough = (List<String>)listToLookThrough;
+                  final int numFiles = ((Object[])Conversions.unwrapArray(_converted_listToLookThrough, Object.class)).length;
+                  int currentProgress = 0;
                   for (final String fileName : listToLookThrough) {
                     {
                       final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
@@ -193,7 +202,18 @@ public abstract class MetricsCalculationUsingShapes {
                         value = (((Double) _invoke_1)).doubleValue();
                       }
                       String valAsStr = MetricsCalculationUsingShapes.df.format(value);
-                      InputOutput.<String>print((valAsStr + " "));
+                      int ratioAchieved = ((fileIndex * 100) / numFiles);
+                      if ((ratioAchieved >= currentProgress)) {
+                        String _plus_3 = (Integer.valueOf(currentProgress) + "%-");
+                        InputOutput.<String>print(_plus_3);
+                        int _currentProgress = currentProgress;
+                        currentProgress = (_currentProgress + MetricsCalculationUsingShapes.PROGRESSPERCENTAGEJUMP);
+                      }
+                      if ((fileIndex == (numFiles - 1))) {
+                        InputOutput.<String>print("100%");
+                      }
+                      int _fileIndex = fileIndex;
+                      fileIndex = (_fileIndex + 1);
                       writer.append(("," + valAsStr));
                     }
                   }
@@ -207,148 +227,11 @@ public abstract class MetricsCalculationUsingShapes {
               InputOutput.println();
             }
           }
-          final String METRICNAME = "SQR";
-          PrintWriter writer = new PrintWriter((((directoryPath + "//") + METRICNAME) + "tot.csv"));
-          InputOutput.<String>println(("Metric: " + METRICNAME));
-          for (int depth = (-1); (depth < 0); depth++) {
-            {
-              writer.append((METRICNAME + ","));
-              if ((depth == (-1))) {
-                writer.append("Model");
-                InputOutput.<String>print((METRICNAME + " Model    : "));
-                for (final String fileName : listToLookThrough) {
-                  {
-                    final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
-                    double value = CalcSQR.getSQRfromModel(model);
-                    String valAsStr = MetricsCalculationUsingShapes.df.format(value);
-                    InputOutput.<String>print((valAsStr + " "));
-                    writer.append(("," + valAsStr));
-                  }
-                }
-                InputOutput.println();
-                writer.append("\n");
-              } else {
-                for (int version = 0; (version < 3); version++) {
-                  {
-                    writer.append(((("NHLatticeD" + Integer.valueOf(depth)) + "V") + Integer.valueOf(version)));
-                    InputOutput.<String>print((((((METRICNAME + " NH D") + Integer.valueOf(depth)) + " V") + Integer.valueOf(version)) + " : "));
-                    for (final String fileName_1 : listToLookThrough) {
-                      {
-                        final EObject model = workspace.<EObject>readModel(EObject.class, fileName_1);
-                        final PartialInterpretation partialModel = Util.getPartialModel(workspace, model);
-                        double value = CalcSQR.getSQRfromNHLattice(partialModel, Integer.valueOf(depth), Integer.valueOf(version));
-                        String valAsStr = MetricsCalculationUsingShapes.df.format(value);
-                        InputOutput.<String>print((valAsStr + " "));
-                        writer.append(("," + valAsStr));
-                      }
-                    }
-                    InputOutput.println();
-                    writer.append("\n");
-                  }
-                }
-              }
-            }
-          }
-          writer.close();
         }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public static String printResults(final List<List<String>> metricValues, final List<Double> totalDeltas, final List<List<String>> deltas) {
-    String _xblockexpression = null;
-    {
-      final int numModels = ((Object[])Conversions.unwrapArray(metricValues.get(0), Object.class)).length;
-      InputOutput.println();
-      InputOutput.<String>println("Node Activity:");
-      List<String> _get = metricValues.get(0);
-      String _plus = ("from Partial Model: " + _get);
-      InputOutput.<String>println(_plus);
-      List<String> _get_1 = metricValues.get(1);
-      String _plus_1 = ("from NH Shape     : " + _get_1);
-      InputOutput.<String>println(_plus_1);
-      Double _get_2 = totalDeltas.get(0);
-      double _divide = ((_get_2).doubleValue() / numModels);
-      String _format = MetricsCalculationUsingShapes.df.format(_divide);
-      String _plus_2 = ("       Avg % delta: " + _format);
-      InputOutput.<String>println(_plus_2);
-      InputOutput.<String>println("MPC:");
-      List<String> _get_3 = metricValues.get(2);
-      String _plus_3 = ("from Partial Model: " + _get_3);
-      InputOutput.<String>println(_plus_3);
-      List<String> _get_4 = metricValues.get(3);
-      String _plus_4 = ("from NH Shape     : " + _get_4);
-      InputOutput.<String>println(_plus_4);
-      Double _get_5 = totalDeltas.get(1);
-      double _divide_1 = ((_get_5).doubleValue() / numModels);
-      String _format_1 = MetricsCalculationUsingShapes.df.format(_divide_1);
-      String _plus_5 = ("       Avg % delta: " + _format_1);
-      InputOutput.<String>println(_plus_5);
-      InputOutput.<String>println("NDA:");
-      List<String> _get_6 = metricValues.get(4);
-      String _plus_6 = ("from Partial Model: " + _get_6);
-      InputOutput.<String>println(_plus_6);
-      List<String> _get_7 = metricValues.get(5);
-      String _plus_7 = ("from NH Shape     : " + _get_7);
-      InputOutput.<String>println(_plus_7);
-      Double _get_8 = totalDeltas.get(2);
-      double _divide_2 = ((_get_8).doubleValue() / numModels);
-      String _format_2 = MetricsCalculationUsingShapes.df.format(_divide_2);
-      String _plus_8 = ("       Avg % delta: " + _format_2);
-      InputOutput.<String>println(_plus_8);
-      InputOutput.<String>println("NDC:");
-      List<String> _get_9 = metricValues.get(6);
-      String _plus_9 = ("from Partial Model: " + _get_9);
-      InputOutput.<String>println(_plus_9);
-      List<String> _get_10 = metricValues.get(7);
-      String _plus_10 = ("from NH Shape     : " + _get_10);
-      InputOutput.<String>println(_plus_10);
-      Double _get_11 = totalDeltas.get(3);
-      double _divide_3 = ((_get_11).doubleValue() / numModels);
-      String _format_3 = MetricsCalculationUsingShapes.df.format(_divide_3);
-      String _plus_11 = ("       Avg % delta: " + _format_3);
-      InputOutput.<String>println(_plus_11);
-      InputOutput.<String>println("EDA:");
-      List<String> _get_12 = metricValues.get(8);
-      String _plus_12 = ("from Partial Model: " + _get_12);
-      InputOutput.<String>println(_plus_12);
-      List<String> _get_13 = metricValues.get(9);
-      String _plus_13 = ("from NH Shape In  : " + _get_13);
-      InputOutput.<String>println(_plus_13);
-      List<String> _get_14 = deltas.get(0);
-      String _plus_14 = ("           deltas : " + _get_14);
-      InputOutput.<String>println(_plus_14);
-      Double _get_15 = totalDeltas.get(4);
-      double _divide_4 = ((_get_15).doubleValue() / numModels);
-      String _format_4 = MetricsCalculationUsingShapes.df.format(_divide_4);
-      String _plus_15 = ("       Avg % delta: " + _format_4);
-      InputOutput.<String>println(_plus_15);
-      List<String> _get_16 = metricValues.get(10);
-      String _plus_16 = ("from NH Shape Out : " + _get_16);
-      InputOutput.<String>println(_plus_16);
-      List<String> _get_17 = deltas.get(1);
-      String _plus_17 = ("           deltas : " + _get_17);
-      InputOutput.<String>println(_plus_17);
-      Double _get_18 = totalDeltas.get(5);
-      double _divide_5 = ((_get_18).doubleValue() / numModels);
-      String _format_5 = MetricsCalculationUsingShapes.df.format(_divide_5);
-      String _plus_18 = ("       Avg % delta: " + _format_5);
-      InputOutput.<String>println(_plus_18);
-      List<String> _get_19 = metricValues.get(11);
-      String _plus_19 = ("from NH Shape Avg : " + _get_19);
-      InputOutput.<String>println(_plus_19);
-      List<String> _get_20 = deltas.get(2);
-      String _plus_20 = ("           deltas : " + _get_20);
-      InputOutput.<String>println(_plus_20);
-      Double _get_21 = totalDeltas.get(6);
-      double _divide_6 = ((_get_21).doubleValue() / numModels);
-      String _format_6 = MetricsCalculationUsingShapes.df.format(_divide_6);
-      String _plus_21 = ("       Avg % delta: " + _format_6);
-      _xblockexpression = InputOutput.<String>println(_plus_21);
-    }
-    return _xblockexpression;
   }
   
   public static void printer(final Map<EObject, Integer> map) {
