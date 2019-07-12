@@ -27,6 +27,33 @@ class Util {
 	static val partialInterpretation2Logic = new InstanceModel2PartialInterpretation
 	static val Ecore2Logic ecore2Logic = new Ecore2Logic
 
+	def static difference(List<String> base, List<String> exp) {
+		val numElems = base.length
+		var totDif = 0.0
+		var totBase = 0.0
+		var underApproxExists = false
+		for (var i = 0; i < numElems; i++) {
+			var baseD = Double.valueOf(base.get(i))
+			totBase += baseD
+			var expD = Double.valueOf(exp.get(i))
+			totDif += Math.abs((baseD-expD) )
+			if (baseD > expD ) {
+				underApproxExists = true
+			}
+		}
+		
+		val avgDif = totDif/numElems
+		val avgBase = totBase/numElems
+		
+		var avgDifPerc = avgDif/avgBase
+		
+		if (underApproxExists) {
+			avgDifPerc *= -1
+		}
+		
+		return avgDifPerc
+	}
+
 	def static toLocalNode(AbstractNodeDescriptor descriptor) {
 		var AbstractNodeDescriptor d = descriptor
 		while (!d.class.equals(LocalNodeDescriptor)) {
@@ -145,8 +172,8 @@ class Util {
 
 		return dim2NumActNodes
 	}
-	
-		def static dim2NumActNodes(GraphShape gs) {
+
+	def static dim2NumActNodes(GraphShape gs) {
 		val nodes = gs.nodes as List<GraphNodeDescriptorGND>
 
 		val Map<String, Set<AbstractNodeDescriptor>> dim2NumActNodes = new HashMap
@@ -204,12 +231,12 @@ class Util {
 
 		return dim2Occurences
 	}
-	
+
 	def static void getNeighboursList(List<EObject> nodes, Map<EObject, Set<EObject>> node2Neighbours) {
 		for (node : nodes) {
 			for (reference : node.eClass.EAllReferences) {
 				val pointingTo = node.eGet(reference)
-		
+
 				if (!(pointingTo instanceof List)) {
 					if (pointingTo !== null) {
 						// Add for source
@@ -231,18 +258,18 @@ class Util {
 			}
 		}
 	}
-	
+
 	def static void fillWithNodes(List<EObject> nodes, Map<EObject, Set<EObject>> node2Neighbours) {
 		for (node : nodes) {
 			node2Neighbours.put(node, new HashSet)
 		}
 	}
-	
+
 	def static Integer factorial(Integer n) {
 		if (n < 2) {
 			return n
 		}
-		return n * factorial(n-1)
+		return n * factorial(n - 1)
 	}
 
 }

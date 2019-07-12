@@ -51,12 +51,35 @@ public abstract class MetricsCalculationUsingShapes {
       final boolean bounded = false;
       final int lowEnd = 0;
       final int highEnd = 20;
-      final boolean owSQR = false;
+      final String calcTesting = "max";
       String fileDir = "";
-      final ArrayList<String> files = CollectionLiterals.<String>newArrayList("A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human");
-      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRTOT");
-      final ArrayList<String> calcMethods1 = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
-      final ArrayList<String> calcMethods2 = CollectionLiterals.<String>newArrayList("Model", "NHLattice 0", "NHLattice 1");
+      ArrayList<String> files = CollectionLiterals.<String>newArrayList("A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human");
+      if (testing) {
+        files = CollectionLiterals.<String>newArrayList("test");
+      }
+      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRCNT");
+      ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList();
+      if (calcTesting != null) {
+        switch (calcTesting) {
+          case "max":
+            calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice 0", "NHLattice 1", "NHLattice 2", "NHLattice 3");
+            break;
+          case "true":
+            calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice 0", "NHLattice 1");
+            break;
+          case "false":
+            calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
+            break;
+          case "min":
+            calcMethods = CollectionLiterals.<String>newArrayList("Model");
+            break;
+          default:
+            calcMethods = CollectionLiterals.<String>newArrayList("ERROR");
+            break;
+        }
+      } else {
+        calcMethods = CollectionLiterals.<String>newArrayList("ERROR");
+      }
       for (final String fileSelector : files) {
         {
           if (fileSelector != null) {
@@ -172,15 +195,8 @@ public abstract class MetricsCalculationUsingShapes {
               PrintWriter writer = new PrintWriter((((directoryPath + "//") + metric) + ".csv"));
               final String className = ("ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric);
               final Class<?> classObj = Class.forName(className);
-              ArrayList<String> calcMethods = calcMethods1;
-              String _substring = metric.substring(0, 3);
-              boolean isSQRMetric = Objects.equal(_substring, "SQR");
-              if (owSQR) {
-                isSQRMetric = false;
-              }
-              if (isSQRMetric) {
-                calcMethods = calcMethods2;
-              }
+              final List<String> baseVals = CollectionLiterals.<String>newArrayList();
+              final List<String> expVals = CollectionLiterals.<String>newArrayList();
               for (final String calcMethod : calcMethods) {
                 {
                   InputOutput.<String>print((((metric + " ") + calcMethod) + " : "));
@@ -190,6 +206,7 @@ public abstract class MetricsCalculationUsingShapes {
                   }
                   writer.append((metric + ","));
                   writer.append(calcMethod);
+                  expVals.clear();
                   int fileIndex = 0;
                   final List<String> _converted_listToLookThrough = (List<String>)listToLookThrough;
                   final int numFiles = ((Object[])Conversions.unwrapArray(_converted_listToLookThrough, Object.class)).length;
@@ -206,8 +223,9 @@ public abstract class MetricsCalculationUsingShapes {
                         method = classObj.getMethod(methodName, EObject.class);
                         Object _invoke = method.invoke(null, model);
                         value = (((Double) _invoke)).doubleValue();
+                        baseVals.add(MetricsCalculationUsingShapes.df.format(value));
                       } else {
-                        if ((!isSQRMetric)) {
+                        if ((Objects.equal(calcTesting, "false") || Objects.equal(calcTesting, "min"))) {
                           method = classObj.getMethod(methodName, PartialInterpretation.class);
                           Object _invoke_1 = method.invoke(null, partialModel);
                           value = (((Double) _invoke_1)).doubleValue();
@@ -219,6 +237,7 @@ public abstract class MetricsCalculationUsingShapes {
                           method = classObj.getMethod(methodName, PartialInterpretation.class, Integer.class);
                           Object _invoke_2 = method.invoke(null, partialModel, depth);
                           value = (((Double) _invoke_2)).doubleValue();
+                          expVals.add(MetricsCalculationUsingShapes.df.format(value));
                         }
                       }
                       String valAsStr = MetricsCalculationUsingShapes.df.format(value);
@@ -236,6 +255,11 @@ public abstract class MetricsCalculationUsingShapes {
                       int _fileIndex = fileIndex;
                       fileIndex = (_fileIndex + 1);
                     }
+                  }
+                  if ((((!Objects.equal(calcMethod, "Model")) && (!Objects.equal(calcTesting, "false"))) && (!Objects.equal(calcTesting, "min")))) {
+                    double _difference = Util.difference(baseVals, expVals);
+                    String _plus_3 = ("  AVG Dif% : " + Double.valueOf(_difference));
+                    InputOutput.<String>print(_plus_3);
                   }
                   InputOutput.println();
                   writer.append("\n");

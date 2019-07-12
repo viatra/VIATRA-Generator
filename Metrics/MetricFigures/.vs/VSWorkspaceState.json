@@ -6,10 +6,11 @@
     "\\outputs\\A20",
     "\\outputs\\Human",
     "\\outputs\\RandomEMF-WF+7",
-    "\\outputs\\RandomEMF30",
-    "\\outputs\\VS-WF+All6",
-    "\\outputs\\_Cumulative"
+    "\\outputs\\VS+i",
+    "\\outputs\\VS-i",
+    "\\outputs\\VS-WF+All5",
+    "\\outputs\\VS-WF+All7"
   ],
-  "SelectedNode": "\\outputs\\_Cumulative\\SQRTOT_Model.png",
+  "SelectedNode": "\\outputs\\_Cumulative\\SQRCNT_NHLattice 0.png",
   "PreviewInSolutionExplorer": false
 }

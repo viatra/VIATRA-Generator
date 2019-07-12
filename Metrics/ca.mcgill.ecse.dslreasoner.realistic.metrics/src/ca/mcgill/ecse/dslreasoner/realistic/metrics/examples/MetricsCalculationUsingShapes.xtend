@@ -41,14 +41,23 @@ abstract class MetricsCalculationUsingShapes {
 		val bounded = false
 		val lowEnd = 0
 		val highEnd = 20
-		val owSQR = false
+		val calcTesting = "max" //max, true, false, min
 		// END SELECTION
 		var fileDir = ""
 
-		val files = newArrayList( /**/"A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human")
-		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRTOT" /*, "SQROCOOL" */ )
-		val calcMethods1 = newArrayList("Model", "NHLattice")
-		val calcMethods2 = newArrayList("Model", "NHLattice 0", "NHLattice 1")
+		var files = newArrayList( /**/"A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5",  "Human")
+		if (testing) {
+			files = newArrayList("test")
+		}
+		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRCNT" /*, "SQROCOOL" */ )
+		var calcMethods = newArrayList
+		switch calcTesting {
+			case "max": calcMethods = newArrayList("Model", "NHLattice 0", "NHLattice 1", "NHLattice 2", "NHLattice 3")
+			case "true": calcMethods = newArrayList("Model", "NHLattice 0", "NHLattice 1")
+			case "false": calcMethods = newArrayList("Model", "NHLattice")
+			case "min": calcMethods = newArrayList("Model")
+			default: calcMethods = newArrayList("ERROR")
+		}
 
 		for (fileSelector : files) {
 			switch fileSelector {
@@ -138,7 +147,7 @@ abstract class MetricsCalculationUsingShapes {
 
 			// ////////////////////
 			// PERFORM MEASUREMENTS
-			// ////////////////////
+			// ////////////////////			
 			var method = MetricsCalculationUsingShapes.methods.get(0) // initialisation
 			// for each metric
 			for (metric : metrics) {
@@ -148,18 +157,11 @@ abstract class MetricsCalculationUsingShapes {
 
 				val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
 				val classObj = Class.forName(className)
+				
+				val List<String> baseVals = newArrayList
+				val List<String> expVals = newArrayList
 
 				// realVsNH
-				var calcMethods = calcMethods1
-				// EXPERIMENTAL
-				var isSQRMetric = metric.substring(0, 3) == "SQR"
-				if (owSQR) {
-					isSQRMetric = false
-				}
-				if (isSQRMetric) {
-					calcMethods = calcMethods2
-				}
-				// END EXPERIMENTAL
 				for (calcMethod : calcMethods) {
 					// print and write
 					print(metric + " " + calcMethod + " : ")
@@ -170,6 +172,8 @@ abstract class MetricsCalculationUsingShapes {
 					writer.append(calcMethod)
 
 //					var startTime = System.currentTimeMillis
+
+					expVals.clear
 					// for each file
 					var fileIndex = 0
 					val numFiles = listToLookThrough.length
@@ -191,9 +195,10 @@ abstract class MetricsCalculationUsingShapes {
 						if (calcMethod == "Model") {
 							method = classObj.getMethod(methodName, EObject)
 							value = method.invoke(null, model) as Double
+							baseVals.add(df.format(value))
 						} else {
 							// EXPERIMENTAL
-							if (!isSQRMetric) {
+							if (calcTesting == "false" || calcTesting == "min") {
 //								method = classObj.getMethod(methodName, PartialInterpretation, Integer)
 //								value = method.invoke(null, partialModel, 0) as Double
 								method = classObj.getMethod(methodName, PartialInterpretation)
@@ -204,7 +209,7 @@ abstract class MetricsCalculationUsingShapes {
 
 								method = classObj.getMethod(methodName, PartialInterpretation, Integer)
 								value = method.invoke(null, partialModel, depth) as Double
-
+								expVals.add(df.format(value))
 							}
 						// END EXPERIMENTAL
 //						
@@ -228,10 +233,15 @@ abstract class MetricsCalculationUsingShapes {
 					// END PROGRESS TRACKER
 					}
 //					var duration = System.currentTimeMillis - startTime
+					if ( calcMethod != "Model" && calcTesting != "false" && calcTesting != "min" ) {
+						print("  AVG Dif% : " + Util.difference(baseVals, expVals))
+					}
 					// print and write
 					println()
 //					println("    time: " + duration)
 					writer.append("\n");
+					
+					
 				}
 				writer.close
 				println()

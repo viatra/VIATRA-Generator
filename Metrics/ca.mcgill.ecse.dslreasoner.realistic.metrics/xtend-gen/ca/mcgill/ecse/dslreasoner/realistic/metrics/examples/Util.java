@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -44,6 +45,37 @@ public class Util {
   private final static InstanceModel2PartialInterpretation partialInterpretation2Logic = new InstanceModel2PartialInterpretation();
   
   private final static Ecore2Logic ecore2Logic = new Ecore2Logic();
+  
+  public static double difference(final List<String> base, final List<String> exp) {
+    final int numElems = ((Object[])Conversions.unwrapArray(base, Object.class)).length;
+    double totDif = 0.0;
+    double totBase = 0.0;
+    boolean underApproxExists = false;
+    for (int i = 0; (i < numElems); i++) {
+      {
+        Double baseD = Double.valueOf(base.get(i));
+        double _tBase = totBase;
+        totBase = (_tBase + (baseD).doubleValue());
+        Double expD = Double.valueOf(exp.get(i));
+        double _tDif = totDif;
+        double _minus = DoubleExtensions.operator_minus(baseD, expD);
+        double _abs = Math.abs(_minus);
+        totDif = (_tDif + _abs);
+        boolean _greaterThan = (baseD.compareTo(expD) > 0);
+        if (_greaterThan) {
+          underApproxExists = true;
+        }
+      }
+    }
+    final double avgDif = (totDif / numElems);
+    final double avgBase = (totBase / numElems);
+    double avgDifPerc = (avgDif / avgBase);
+    if (underApproxExists) {
+      double _avgDifPerc = avgDifPerc;
+      avgDifPerc = (_avgDifPerc * (-1));
+    }
+    return avgDifPerc;
+  }
   
   public static LocalNodeDescriptor toLocalNode(final AbstractNodeDescriptor descriptor) {
     AbstractNodeDescriptor d = descriptor;

@@ -19,17 +19,21 @@ def main():
 			, 'VS+i'
 			]
 
-	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA"
-	metrics = ['SQRTOT']
+	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA", 'SQRMAX', 'SQRTOT', 'SQROCOOL', 'SQROSZ', 'SQROSZ2'
+	metrics = ['SQRCNT']
 	
 	xyInverted = False
-	testing = True
-
+	testing = "max" #max, true, false, min
 	#####END SELECTION
-	if testing :
+
+	if testing == "max" :
 		methods = ['Model', 'NHLattice 0', 'NHLattice 1', 'NHLattice 2', 'NHLattice 3']
-	else :
+	if testing == "true" :
+		methods = ['Model', 'NHLattice 0', 'NHLattice 1']
+	if testing == "false" :
 		methods = ['Model', 'NHLattice']
+	if testing == "min" :
+		methods = ['Model']
 	
 	numSources = len(sources)
 	numMethods =  len(methods)
@@ -45,33 +49,34 @@ def main():
 
 			#Make paths if inexistant
 			dirPathName = 'outputs/' + sourceName
-			pathName = dirPathName + '/' + metricName + "correct.png"
+			pathName = dirPathName + '/' + metricName + ".png"
 			createFiles(dirPathName, pathName)
 
 			#Manipulations
+			plt.figure(figsize=(16, 9))
 			with open(csvLocation + csvFileName + '.csv') as f:
 				reader = csv.reader(f, delimiter=',')
 				ind = 0
 				for row in reader:
-					#if ind < numMethods :
-					rowName = row[0] + row[1]
-					rowVals = [float(i) for i in row[2:]]
-					numVals = len(rowVals)
-					rowXs = np.arange(0, 1, 1 / numVals) 
-					allSources[srcInd][ind] = [i for i in rowVals]	
-					#Operations
-					#rowVals.sort()
-					if xyInverted :
-						rowTemp = [i for i in rowXs]
-						rowXs = [i for i in rowVals]
-						rowVals = [i for i in rowTemp]
+					if ind < numMethods :
+						rowName = row[0] + row[1]
+						rowVals = [float(i) for i in row[2:]]
+						numVals = len(rowVals)
+						rowXs = np.arange(0, 1, 1 / numVals) 
+						allSources[srcInd][ind] = [i for i in rowVals]	
+						#Operations
+						#rowVals.sort()
+						if xyInverted :
+							rowTemp = [i for i in rowXs]
+							rowXs = [i for i in rowVals]
+							rowVals = [i for i in rowTemp]
 					
-					#End Operations
-					if ind == 0 :
-						plt.plot(rowXs, rowVals, label = rowName, lineWidth = 3)
-					else :
-						plt.plot(rowXs, rowVals, label = rowName, alpha = 0.5)
-					ind += 1			
+						#End Operations
+						if ind == 0 :
+							plt.plot(rowXs, rowVals, label = rowName, lineWidth = 3)
+						else :
+							plt.plot(rowXs, rowVals, label = rowName, alpha = 0.5)
+						ind += 1			
 
 			#INDIVIDUAL FIGURES
 			#plt.title("Node Activity measurement w/ and w/o neighbourhood")
@@ -92,7 +97,7 @@ def main():
 		#COMPILATION FIGURE
 		for j in range(numMethods) :
 
-			plt.figure(figsize=(10, 7.6))
+			plt.figure(figsize=(16, 9))
 			#Make paths if inexistant
 			dirPathName = 'outputs/_Cumulative'
 			pathName = dirPathName + '/' + metricName + "_" + methods[j]+ ".png"
