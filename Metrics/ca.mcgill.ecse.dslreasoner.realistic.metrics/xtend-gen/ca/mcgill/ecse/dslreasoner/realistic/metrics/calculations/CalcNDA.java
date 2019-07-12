@@ -35,7 +35,10 @@ public class CalcNDA {
       totalNDA = (_talNDA + _length);
     }
     final int numDims = ((Object[])Conversions.unwrapArray(dim2NumActNodes.keySet(), Object.class)).length;
-    final double avgNDA = (totalNDA / numDims);
+    double avgNDA = 0.0;
+    if ((totalNDA != 0)) {
+      avgNDA = (totalNDA / numDims);
+    }
     return avgNDA;
   }
   
@@ -127,7 +130,10 @@ public class CalcNDA {
       }
     }
     final int numDims = ((Object[])Conversions.unwrapArray(dim2ActNodes.keySet(), Object.class)).length;
-    final double avgNDA = (totalNDA / numDims);
+    double avgNDA = 0.0;
+    if ((totalNDA != 0)) {
+      avgNDA = (totalNDA / numDims);
+    }
     return avgNDA;
   }
 }

@@ -1,15 +1,20 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.HashMap
-import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.awt.font.NumericShaper.Range
 
 class CalcSQRTOT {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
@@ -19,35 +24,10 @@ class CalcSQRTOT {
 
 		// fill HashSet
 		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
-		for (node : nodes) {
-			node2Neighbours.put(node, new HashSet)
-		}
+		Util.fillWithNodes(nodes, node2Neighbours)
 
 		// iterate over nodes and add connected nodes
-		for (node : nodes) {
-			for (reference : node.eClass.EAllReferences) {
-				val pointingTo = node.eGet(reference)
-
-				if (!(pointingTo instanceof List)) {
-					if (pointingTo !== null) {
-						// Add for source
-						node.lookup(node2Neighbours).add(pointingTo as EObject)
-						// Add for target
-						(pointingTo as EObject).lookup(node2Neighbours).add(node)
-					}
-				} else {
-					val pointingToSet = pointingTo as List
-					if (!pointingToSet.empty) {
-						for (target : pointingToSet) {
-							// Add for source
-							node.lookup(node2Neighbours).add(target as EObject)
-							// Add for target
-							(target as EObject).lookup(node2Neighbours).add(node)
-						}
-					}
-				}
-			}
-		}
+		Util.getNeighboursList(nodes, node2Neighbours)
 
 		// Measurements
 		var totalC = 0.0
@@ -58,13 +38,17 @@ class CalcSQRTOT {
 			num1stNeighbours = neighbours.size
 			tot2ndNeighbours = 0
 			var numSquares = 0.0
+//			println("xxxxxxxxxxxxxxxx")
+//			println(neighbours)
+//			println("xxxxxxxxxxxxxxxx")
 			for (neighbour1 : neighbours) {
+				val neighsOfNeigh = neighbour1.lookup(node2Neighbours)
+				tot2ndNeighbours += neighsOfNeigh.size - 1 // -1 to not consider edge to self
 				for (neighbour2 : neighbours) {
 					if (neighbour1 != neighbour2) {
-						val neighsOfNeigh = neighbour1.lookup(node2Neighbours)
-						tot2ndNeighbours += neighsOfNeigh.size
 						for (neighOfNeigh1 : neighsOfNeigh) {
 							if (neighOfNeigh1 != node && neighOfNeigh1.lookup(node2Neighbours).contains(neighbour2)) {
+//								print("-----")
 //								print(neighbour1)
 //								print("   ")
 //								print(neighbour2)
@@ -89,6 +73,7 @@ class CalcSQRTOT {
 			}
 
 //			println("=" + sqr + ")")
+//			println()
 			totalC += sqr
 		}
 		val numNodes = nodes.length
@@ -103,7 +88,83 @@ class CalcSQRTOT {
 	}
 
 	def static getSQRTOTfromNHLattice(PartialInterpretation pm, Integer depth) {
-		return 0.0
+		// Get required neighbourhoods
+		val nh = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE, Integer.MAX_VALUE)
+		val nhDeepRep = nh.modelRepresentation as HashMap
+		val nhRep = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE).
+			modelRepresentation as HashMap
+		val nhDeepNodes = nhDeepRep.keySet
+		val nhNodes = nhRep.keySet
+
+		// Operations
+		var totalSQR = 0.0
+		for (deepNode : nhDeepNodes) {
+			// travers node by node for the avg
+			val List<AbstractNodeDescriptor> relevantNodes = newArrayList
+			val nhDeepNodeDesc = deepNode as FurtherNodeDescriptor
+			for (inEdge : nhDeepNodeDesc.incomingEdges.keySet) {
+				val edgeDesc = (inEdge as IncomingRelation)
+				relevantNodes.add(edgeDesc.from as AbstractNodeDescriptor)
+			}
+			for (outEdge : nhDeepNodeDesc.outgoingEdges.keySet) {
+				val edgeDesc = (outEdge as OutgoingRelation)
+				relevantNodes.add(edgeDesc.to as AbstractNodeDescriptor)
+			}
+
+			// look for 2ndNeighbours
+			var numerator = 0.0
+			var denominator = 0.0
+			for (pot2ndN : nhDeepNodes) {
+				numerator = 0.0
+				denominator = 0.0
+				if (deepNode != pot2ndN) {
+					// find neighbours
+					val List<AbstractNodeDescriptor> neighbours = newArrayList
+					val pot2ndNDesc = pot2ndN as FurtherNodeDescriptor
+
+					for (inEdge : nhDeepNodeDesc.incomingEdges.keySet) {
+						val edgeDesc = (inEdge as IncomingRelation)
+						neighbours.add(edgeDesc.from as AbstractNodeDescriptor)
+					}
+
+					for (outEdge : nhDeepNodeDesc.outgoingEdges.keySet) {
+						val edgeDesc = (outEdge as OutgoingRelation)
+						neighbours.add(edgeDesc.to as AbstractNodeDescriptor)
+					}
+
+					// how many relevant neighbours?
+					var numRelNodes = 0
+					for (relNode : relevantNodes) {
+						if (neighbours.contains(relNode)) {
+							numRelNodes += 1
+						}
+					}
+
+					// DENOMINATOR and NUMERATOR
+					val factorialVal = Util.factorial(numRelNodes)
+					denominator += factorialVal * pot2ndNDesc.lookup(nhDeepRep) as Integer
+					if (numRelNodes > 1) {
+						numerator += factorialVal * pot2ndNDesc.lookup(nhDeepRep) as Integer
+					}
+				}
+			}
+			// add partial result
+//			println(numerator + "-----" + denominator)
+			if(numerator != 0) {
+				totalSQR += numerator / denominator
+			}
+			
+		}
+
+		val numDeepNodes = nhDeepNodes.length
+
+		var averageSQR = 0.0
+//		println(totalSQR + "   " + numDeepNodes)
+		if (totalSQR != 0) {
+			averageSQR = totalSQR / numDeepNodes
+		}
+
+		return averageSQR
 	}
 }
 
@@ -115,35 +176,10 @@ class CalcSQRMAX {
 
 		// fill HashSet
 		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
-		for (node : nodes) {
-			node2Neighbours.put(node, new HashSet)
-		}
+		Util.fillWithNodes(nodes, node2Neighbours)
 
 		// iterate over nodes and add connected nodes
-		for (node : nodes) {
-			for (reference : node.eClass.EAllReferences) {
-				val pointingTo = node.eGet(reference)
-
-				if (!(pointingTo instanceof List)) {
-					if (pointingTo !== null) {
-						// Add for source
-						node.lookup(node2Neighbours).add(pointingTo as EObject)
-						// Add for target
-						(pointingTo as EObject).lookup(node2Neighbours).add(node)
-					}
-				} else {
-					val pointingToSet = pointingTo as List
-					if (!pointingToSet.empty) {
-						for (target : pointingToSet) {
-							// Add for source
-							node.lookup(node2Neighbours).add(target as EObject)
-							// Add for target
-							(target as EObject).lookup(node2Neighbours).add(node)
-						}
-					}
-				}
-			}
-		}
+		Util.getNeighboursList(nodes, node2Neighbours)
 
 		// Measurements
 		var totalC = 0.0
@@ -212,35 +248,10 @@ class CalcSQROSZ {
 
 		// fill HashSet
 		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
-		for (node : nodes) {
-			node2Neighbours.put(node, new HashSet)
-		}
+		Util.fillWithNodes(nodes, node2Neighbours)
 
 		// iterate over nodes and add connected nodes
-		for (node : nodes) {
-			for (reference : node.eClass.EAllReferences) {
-				val pointingTo = node.eGet(reference)
-
-				if (!(pointingTo instanceof List)) {
-					if (pointingTo !== null) {
-						// Add for source
-						node.lookup(node2Neighbours).add(pointingTo as EObject)
-						// Add for target
-						(pointingTo as EObject).lookup(node2Neighbours).add(node)
-					}
-				} else {
-					val pointingToSet = pointingTo as List
-					if (!pointingToSet.empty) {
-						for (target : pointingToSet) {
-							// Add for source
-							node.lookup(node2Neighbours).add(target as EObject)
-							// Add for target
-							(target as EObject).lookup(node2Neighbours).add(node)
-						}
-					}
-				}
-			}
-		}
+		Util.getNeighboursList(nodes, node2Neighbours)
 
 		// Measurements
 		var totalSQR = 0.0
@@ -252,20 +263,20 @@ class CalcSQROSZ {
 		for (node : nodes) {
 			val neighbours = node.lookup(node2Neighbours)
 			num1stNeighbours = neighbours.size
-			
+
 			for (neighbour1 : neighbours) {
 				val neighbours1 = neighbour1.lookup(node2Neighbours)
 				num2ndNeighbours = neighbours1.size
-				
+
 				for (neighbour2 : neighbours1) {
 					val neighbours2 = neighbour2.lookup(node2Neighbours)
 					num3rdNeighbours = neighbours2.size
-					
+
 					for (neighbour3 : neighbours2) {
 						val neighbours3 = neighbour3.lookup(node2Neighbours)
 						num4thNeighbours = neighbours3.size
-						
-						if(neighbours3.contains(node)) {
+
+						if (neighbours3.contains(node)) {
 							totalSQR += 1
 						}
 						totalDenom += num1stNeighbours * num2ndNeighbours * num3rdNeighbours * num4thNeighbours
@@ -296,35 +307,10 @@ class CalcSQROSZ2 {
 
 		// fill HashSet
 		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
-		for (node : nodes) {
-			node2Neighbours.put(node, new HashSet)
-		}
+		Util.fillWithNodes(nodes, node2Neighbours)
 
 		// iterate over nodes and add connected nodes
-		for (node : nodes) {
-			for (reference : node.eClass.EAllReferences) {
-				val pointingTo = node.eGet(reference)
-
-				if (!(pointingTo instanceof List)) {
-					if (pointingTo !== null) {
-						// Add for source
-						node.lookup(node2Neighbours).add(pointingTo as EObject)
-						// Add for target
-						(pointingTo as EObject).lookup(node2Neighbours).add(node)
-					}
-				} else {
-					val pointingToSet = pointingTo as List
-					if (!pointingToSet.empty) {
-						for (target : pointingToSet) {
-							// Add for source
-							node.lookup(node2Neighbours).add(target as EObject)
-							// Add for target
-							(target as EObject).lookup(node2Neighbours).add(node)
-						}
-					}
-				}
-			}
-		}
+		Util.getNeighboursList(nodes, node2Neighbours)
 
 		// Measurements
 		var totalSQR = 0.0
@@ -332,18 +318,18 @@ class CalcSQROSZ2 {
 		var num4thNeighbours = 0.0
 		for (node : nodes) {
 			val neighbours = node.lookup(node2Neighbours)
-			
+
 			for (neighbour1 : neighbours) {
 				val neighbours1 = neighbour1.lookup(node2Neighbours)
-				
+
 				for (neighbour2 : neighbours1) {
 					val neighbours2 = neighbour2.lookup(node2Neighbours)
-					
+
 					for (neighbour3 : neighbours2) {
 						val neighbours3 = neighbour3.lookup(node2Neighbours)
 						num4thNeighbours = neighbours3.size
-						
-						if(neighbours3.contains(node)) {
+
+						if (neighbours3.contains(node)) {
 							totalSQR += 1
 						}
 						totalDenom += num4thNeighbours
@@ -362,6 +348,57 @@ class CalcSQROSZ2 {
 	}
 
 	def static getSQROSZ2fromNHLattice(PartialInterpretation pm, Integer depth) {
+		return 0.0
+	}
+}
+
+class CalcSQROCOOL {
+	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
+
+	def static getSQROCOOLfromModel(EObject model) {
+		val nodes = model.eResource.allContents.toList
+
+		// fill HashSet
+		var Map<EObject, Set<EObject>> node2Neighbours = new HashMap
+		Util.fillWithNodes(nodes, node2Neighbours)
+
+		// iterate over nodes and add connected nodes
+		Util.getNeighboursList(nodes, node2Neighbours)
+
+		// Measurements
+		var totalSQR = 0.0
+		var totalDenom = 0.0
+		var num4thNeighbours = 0.0
+		for (node : nodes) {
+			val neighbours = node.lookup(node2Neighbours)
+
+			for (neighbour1 : neighbours) {
+
+				for (neighbour2 : neighbours) {
+
+					for (neighbour3 : neighbours) {
+						val neighbours3 = neighbour3.lookup(node2Neighbours)
+						num4thNeighbours = neighbours3.size
+
+						if (neighbours3.contains(node)) {
+							totalSQR += 1
+						}
+						totalDenom += num4thNeighbours
+					}
+				}
+			}
+		}
+		val avgSQR = totalSQR / totalDenom
+
+		return avgSQR
+	}
+
+	def static getSQROCOOLfromNHLattice(PartialInterpretation pm) {
+		return 0.0
+//		return getCfromNHLattice(pm, 2, v)
+	}
+
+	def static getSQROCOOLfromNHLattice(PartialInterpretation pm, Integer depth) {
 		return 0.0
 	}
 }

@@ -51,8 +51,12 @@ public abstract class MetricsCalculationUsingShapes {
       final boolean bounded = false;
       final int lowEnd = 0;
       final int highEnd = 20;
+      final boolean owSQR = false;
       String fileDir = "";
       final ArrayList<String> files = CollectionLiterals.<String>newArrayList("A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human");
+      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRTOT");
+      final ArrayList<String> calcMethods1 = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
+      final ArrayList<String> calcMethods2 = CollectionLiterals.<String>newArrayList("Model", "NHLattice 0", "NHLattice 1");
       for (final String fileSelector : files) {
         {
           if (fileSelector != null) {
@@ -101,8 +105,6 @@ public abstract class MetricsCalculationUsingShapes {
           String _get = fileDir.split("//")[0];
           final String directoryPath = (outputFolder + _get);
           new File(directoryPath).mkdirs();
-          final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQROSZ");
-          final ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList("Model", "NHLattice");
           double calcVal = 0.0;
           double realVal = 0.0;
           int progressTracker = 0;
@@ -170,6 +172,15 @@ public abstract class MetricsCalculationUsingShapes {
               PrintWriter writer = new PrintWriter((((directoryPath + "//") + metric) + ".csv"));
               final String className = ("ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric);
               final Class<?> classObj = Class.forName(className);
+              ArrayList<String> calcMethods = calcMethods1;
+              String _substring = metric.substring(0, 3);
+              boolean isSQRMetric = Objects.equal(_substring, "SQR");
+              if (owSQR) {
+                isSQRMetric = false;
+              }
+              if (isSQRMetric) {
+                calcMethods = calcMethods2;
+              }
               for (final String calcMethod : calcMethods) {
                 {
                   InputOutput.<String>print((((metric + " ") + calcMethod) + " : "));
@@ -179,7 +190,6 @@ public abstract class MetricsCalculationUsingShapes {
                   }
                   writer.append((metric + ","));
                   writer.append(calcMethod);
-                  long startTime = System.currentTimeMillis();
                   int fileIndex = 0;
                   final List<String> _converted_listToLookThrough = (List<String>)listToLookThrough;
                   final int numFiles = ((Object[])Conversions.unwrapArray(_converted_listToLookThrough, Object.class)).length;
@@ -189,7 +199,7 @@ public abstract class MetricsCalculationUsingShapes {
                       final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
                       final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
                       final PartialInterpretation partialModel = Util.getPartialModel(workspace, model);
-                      final String methodName = ((("get" + metric) + "from") + calcMethod);
+                      String methodName = ((("get" + metric) + "from") + calcMethod);
                       double value = 0.0;
                       boolean _equals_1 = Objects.equal(calcMethod, "Model");
                       if (_equals_1) {
@@ -197,15 +207,26 @@ public abstract class MetricsCalculationUsingShapes {
                         Object _invoke = method.invoke(null, model);
                         value = (((Double) _invoke)).doubleValue();
                       } else {
-                        method = classObj.getMethod(methodName, PartialInterpretation.class);
-                        Object _invoke_1 = method.invoke(null, partialModel);
-                        value = (((Double) _invoke_1)).doubleValue();
+                        if ((!isSQRMetric)) {
+                          method = classObj.getMethod(methodName, PartialInterpretation.class);
+                          Object _invoke_1 = method.invoke(null, partialModel);
+                          value = (((Double) _invoke_1)).doubleValue();
+                        } else {
+                          String _get_2 = calcMethod.split(" ")[0];
+                          String _plus_3 = ((("get" + metric) + "from") + _get_2);
+                          methodName = _plus_3;
+                          final Integer depth = Integer.valueOf(calcMethod.split(" ")[1]);
+                          method = classObj.getMethod(methodName, PartialInterpretation.class, Integer.class);
+                          Object _invoke_2 = method.invoke(null, partialModel, depth);
+                          value = (((Double) _invoke_2)).doubleValue();
+                        }
                       }
                       String valAsStr = MetricsCalculationUsingShapes.df.format(value);
+                      writer.append(("," + valAsStr));
                       int ratioAchieved = ((fileIndex * 100) / numFiles);
                       if ((ratioAchieved >= currentProgress)) {
-                        String _plus_3 = (Integer.valueOf(currentProgress) + "%-");
-                        InputOutput.<String>print(_plus_3);
+                        String _plus_4 = (Integer.valueOf(currentProgress) + "%-");
+                        InputOutput.<String>print(_plus_4);
                         int _currentProgress = currentProgress;
                         currentProgress = (_currentProgress + MetricsCalculationUsingShapes.PROGRESSPERCENTAGEJUMP);
                       }
@@ -214,11 +235,8 @@ public abstract class MetricsCalculationUsingShapes {
                       }
                       int _fileIndex = fileIndex;
                       fileIndex = (_fileIndex + 1);
-                      writer.append(("," + valAsStr));
                     }
                   }
-                  long _currentTimeMillis = System.currentTimeMillis();
-                  long duration = (_currentTimeMillis - startTime);
                   InputOutput.println();
                   writer.append("\n");
                 }

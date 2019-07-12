@@ -135,7 +135,10 @@ public class CalcNA {
         }
       }
     }
-    final double averageNAwithWeight = (totalNA / numModelElems);
+    double averageNAwithWeight = 0.0;
+    if ((totalNA != 0)) {
+      averageNAwithWeight = (totalNA / numModelElems);
+    }
     return averageNAwithWeight;
   }
   
@@ -174,7 +177,10 @@ public class CalcNA {
         activeDims.clear();
       }
     }
-    final double averageMetricValue = (totalMetricValue / numNodesTotal);
+    double averageMetricValue = 0.0;
+    if ((totalMetricValue != 0)) {
+      averageMetricValue = (totalMetricValue / numNodesTotal);
+    }
     return averageMetricValue;
   }
 }

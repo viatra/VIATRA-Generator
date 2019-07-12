@@ -78,7 +78,10 @@ public class CalcC {
       }
     }
     final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
-    final double avgC = (totalC / numNodes);
+    double avgC = 0.0;
+    if ((totalC != 0)) {
+      avgC = (totalC / numNodes);
+    }
     return avgC;
   }
   

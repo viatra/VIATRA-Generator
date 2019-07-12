@@ -83,8 +83,10 @@ class CalcC {
 			
 		}
 		val numNodes = nodes.length
-		val avgC = totalC / numNodes
-
+		var avgC = 0.0
+		if (totalC != 0) {
+			avgC = totalC / numNodes
+		}
 		return avgC
 	}
 

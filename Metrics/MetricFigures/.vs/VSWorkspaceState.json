@@ -2,8 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\outputs",
+    "\\outputs\\A0",
+    "\\outputs\\A20",
+    "\\outputs\\Human",
+    "\\outputs\\RandomEMF-WF+7",
+    "\\outputs\\RandomEMF30",
+    "\\outputs\\VS-WF+All6",
     "\\outputs\\_Cumulative"
   ],
-  "SelectedNode": "\\outputs\\_Cumulative\\SQRtot.png",
+  "SelectedNode": "\\outputs\\_Cumulative\\SQRTOT_Model.png",
   "PreviewInSolutionExplorer": false
 }

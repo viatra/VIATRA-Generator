@@ -24,7 +24,7 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 abstract class MetricsCalculationUsingShapes {
 	static val partialVisualizer = new PartialInterpretation2Gml
 	private static DecimalFormat df = new DecimalFormat("0.00000");
-	
+
 	private static val PROGRESSPERCENTAGEJUMP = 10
 
 	def static void main(String[] args) {
@@ -41,10 +41,14 @@ abstract class MetricsCalculationUsingShapes {
 		val bounded = false
 		val lowEnd = 0
 		val highEnd = 20
+		val owSQR = false
 		// END SELECTION
 		var fileDir = ""
 
-		val files = newArrayList("A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human")
+		val files = newArrayList( /**/"A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human")
+		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRTOT" /*, "SQROCOOL" */ )
+		val calcMethods1 = newArrayList("Model", "NHLattice")
+		val calcMethods2 = newArrayList("Model", "NHLattice 0", "NHLattice 1")
 
 		for (fileSelector : files) {
 			switch fileSelector {
@@ -70,22 +74,18 @@ abstract class MetricsCalculationUsingShapes {
 			val directoryPath = outputFolder + fileDir.split("//").get(0)
 			new File(directoryPath).mkdirs
 
-			// Where we store metric values
-			val metrics = newArrayList( /* "NA", "MPC", "NDA", "NDC", "EDA" , "C", "SQRTOT",*/ "SQROSZ"/* */ )
-			val calcMethods = newArrayList("Model", "NHLattice")
-
-	//		var List<List<String>> metricValues = newArrayList
-	//		for (var i = 0; i < 15; i++) {
-	//			// metric name -> (list(realMetricVals), list(NHMetricVals) ) 
-	//			metricValues.add(newArrayList)
-	//		}
-	//		// Where we store deltas
-	//		var List<Double> totalDeltas = newArrayList
-	//		var List<List<String>> deltas = newArrayList
-	//		for (var i = 0; i < NUMMEASUREMENTS; i++) {
-	//			deltas.add(newArrayList)
-	//			totalDeltas.add(0.0)
-	//		}
+			// var List<List<String>> metricValues = newArrayList
+			// for (var i = 0; i < 15; i++) {
+			// // metric name -> (list(realMetricVals), list(NHMetricVals) ) 
+			// metricValues.add(newArrayList)
+			// }
+			// // Where we store deltas
+			// var List<Double> totalDeltas = newArrayList
+			// var List<List<String>> deltas = newArrayList
+			// for (var i = 0; i < NUMMEASUREMENTS; i++) {
+			// deltas.add(newArrayList)
+			// totalDeltas.add(0.0)
+			// }
 			// ////////////////////
 			// Create list of things to look at
 			// ////////////////////
@@ -143,12 +143,23 @@ abstract class MetricsCalculationUsingShapes {
 			// for each metric
 			for (metric : metrics) {
 				// print and write
-				println("(" +fileDir.split("//").get(0) + ") Metric: " + metric)
+				println("(" + fileDir.split("//").get(0) + ") Metric: " + metric)
 				var writer = new PrintWriter(directoryPath + "//" + metric + ".csv")
 
 				val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
 				val classObj = Class.forName(className)
+
 				// realVsNH
+				var calcMethods = calcMethods1
+				// EXPERIMENTAL
+				var isSQRMetric = metric.substring(0, 3) == "SQR"
+				if (owSQR) {
+					isSQRMetric = false
+				}
+				if (isSQRMetric) {
+					calcMethods = calcMethods2
+				}
+				// END EXPERIMENTAL
 				for (calcMethod : calcMethods) {
 					// print and write
 					print(metric + " " + calcMethod + " : ")
@@ -158,7 +169,7 @@ abstract class MetricsCalculationUsingShapes {
 					writer.append(metric + ",")
 					writer.append(calcMethod)
 
-					var startTime = System.currentTimeMillis
+//					var startTime = System.currentTimeMillis
 					// for each file
 					var fileIndex = 0
 					val numFiles = listToLookThrough.length
@@ -175,40 +186,51 @@ abstract class MetricsCalculationUsingShapes {
 //					writer = new PrintWriter(outputFolder + fileSelector + "//" + metric + ".csv")					
 						// END VIDUALISATON
 						// get method and invoke
-						val methodName = "get" + metric + "from" + calcMethod
+						var methodName = "get" + metric + "from" + calcMethod
 						var value = 0.0
 						if (calcMethod == "Model") {
 							method = classObj.getMethod(methodName, EObject)
 							value = method.invoke(null, model) as Double
 						} else {
-//						method = classObj.getMethod(methodName, PartialInterpretation, Integer)
-//						value = method.invoke(null, partialModel, 0) as Double
-							method = classObj.getMethod(methodName, PartialInterpretation)
-							value = method.invoke(null, partialModel) as Double
+							// EXPERIMENTAL
+							if (!isSQRMetric) {
+//								method = classObj.getMethod(methodName, PartialInterpretation, Integer)
+//								value = method.invoke(null, partialModel, 0) as Double
+								method = classObj.getMethod(methodName, PartialInterpretation)
+								value = method.invoke(null, partialModel) as Double
+							} else {
+								methodName = "get" + metric + "from" + calcMethod.split(" ").get(0)
+								val depth = Integer.valueOf(calcMethod.split(" ").get(1))
+
+								method = classObj.getMethod(methodName, PartialInterpretation, Integer)
+								value = method.invoke(null, partialModel, depth) as Double
+
+							}
+						// END EXPERIMENTAL
+//						
 						}
 
 						// print and write
 						var valAsStr = df.format(value)
 //						print(valAsStr + " ")
+						writer.append("," + valAsStr)
 
-						//PROGRESS TRACKER
+						// PROGRESS TRACKER
 						var ratioAchieved = fileIndex * 100 / numFiles
 						if (ratioAchieved >= currentProgress) {
 							print(currentProgress + "%-")
 							currentProgress += PROGRESSPERCENTAGEJUMP
 						}
-						if(fileIndex == numFiles-1) {
+						if (fileIndex == numFiles - 1) {
 							print("100%")
 						}
 						fileIndex += 1
-						//END PROGRESS TRACKER
-						writer.append("," + valAsStr)
-
+					// END PROGRESS TRACKER
 					}
-					var duration = System.currentTimeMillis - startTime
+//					var duration = System.currentTimeMillis - startTime
 					// print and write
 					println()
-//				println("    time: " + duration)
+//					println("    time: " + duration)
 					writer.append("\n");
 				}
 				writer.close
@@ -266,9 +288,8 @@ abstract class MetricsCalculationUsingShapes {
 //		// ////////////
 		}
 
-	
 	}
-	
+
 	def static printer(Map<EObject, Integer> map) {
 		for (key : map.keySet) {
 			print((key as EReferenceImpl).name + "=" + key.lookup(map) + ", ")

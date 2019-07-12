@@ -4,11 +4,12 @@ import matplotlib.pyplot as plt
 from os import listdir, mkdir, path
 
 def main():
-	#fileNames = ['statsNA', 'statsMPC', 'statsEDA']
+	#####SELECTION
 	sources = [
 			'A0'
 			, 'A20'
-			, 'Human'
+			, 
+			'Human'
 			, 'RandomEMF-WF+7'
 			, 'RandomEMF30'
 			, 'VS-i'
@@ -17,12 +18,20 @@ def main():
 			, 'VS-WF+All7'
 			, 'VS+i'
 			]
+
+	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA"
+	metrics = ['SQRTOT']
+	
+	xyInverted = False
+	testing = True
+
+	#####END SELECTION
+	if testing :
+		methods = ['Model', 'NHLattice 0', 'NHLattice 1', 'NHLattice 2', 'NHLattice 3']
+	else :
+		methods = ['Model', 'NHLattice']
+	
 	numSources = len(sources)
-
-	#'SQRTOT', 'SQRMAX'
-	metrics = ['SQROSZ']
-
-	methods = ['Model', 'NHLattice']
 	numMethods =  len(methods)
 
 	allSources = [[[] *  numMethods for i in range(numMethods)] for i in range(numSources)]
@@ -44,26 +53,35 @@ def main():
 				reader = csv.reader(f, delimiter=',')
 				ind = 0
 				for row in reader:
+					#if ind < numMethods :
 					rowName = row[0] + row[1]
 					rowVals = [float(i) for i in row[2:]]
 					numVals = len(rowVals)
 					rowXs = np.arange(0, 1, 1 / numVals) 
 					allSources[srcInd][ind] = [i for i in rowVals]	
 					#Operations
-					rowVals.sort()
+					#rowVals.sort()
+					if xyInverted :
+						rowTemp = [i for i in rowXs]
+						rowXs = [i for i in rowVals]
+						rowVals = [i for i in rowTemp]
 					
 					#End Operations
 					if ind == 0 :
-						plt.plot(rowVals, rowXs, label = rowName, lineWidth = 3)
+						plt.plot(rowXs, rowVals, label = rowName, lineWidth = 3)
 					else :
-						plt.plot(rowVals, rowXs, label = rowName, alpha = 0.5)
+						plt.plot(rowXs, rowVals, label = rowName, alpha = 0.5)
 					ind += 1			
 
 			#INDIVIDUAL FIGURES
 			#plt.title("Node Activity measurement w/ and w/o neighbourhood")
 			plt.title(metricName + " measurement for " + sourceName)
-			plt.ylabel("Empirical Distribution function")
-			plt.xlabel("Metric Value")
+			if xyInverted :
+				plt.ylabel("Models")
+				plt.xlabel("Metric Value")
+			else :
+				plt.xlabel("Models")
+				plt.ylabel("Metric Value")
 			plt.legend()
 			plt.savefig(pathName)
 			#plt.show()
@@ -73,6 +91,8 @@ def main():
 
 		#COMPILATION FIGURE
 		for j in range(numMethods) :
+
+			plt.figure(figsize=(10, 7.6))
 			#Make paths if inexistant
 			dirPathName = 'outputs/_Cumulative'
 			pathName = dirPathName + '/' + metricName + "_" + methods[j]+ ".png"
@@ -108,13 +128,12 @@ def main():
 
 				plt.plot(allSources[i][j], allSourcesX[i], label = sources[i], lineWidth = 3)
 		
-			#plt.figure(figsize=(10, 7.6))
 			plt.title(metricName + " measurement for all sources from " + methods[j])
 			plt.ylabel("Empirical Distribution function")
 			plt.xlabel("Metric Value")
 			plt.legend()
 			plt.savefig(pathName)
-			plt.show()
+			#plt.show()
 			plt.clf()
 		#END COMPILATION FIGURE
 

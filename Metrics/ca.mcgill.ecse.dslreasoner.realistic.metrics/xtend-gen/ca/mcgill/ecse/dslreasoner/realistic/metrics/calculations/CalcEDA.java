@@ -30,8 +30,14 @@ public class CalcEDA {
     final Map<EObject, Integer> dim2Occ = Util.dim2NumOccurencesFromModel(model);
     int totalEDA = Util.sumInt(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
+    double avgEDA = 0.0;
     Double _valueOf = Double.valueOf(totalEDA);
-    final double avgEDA = ((_valueOf).doubleValue() / numDims);
+    boolean _notEquals = ((_valueOf).doubleValue() != 0);
+    if (_notEquals) {
+      Double _valueOf_1 = Double.valueOf(totalEDA);
+      double _divide = ((_valueOf_1).doubleValue() / numDims);
+      avgEDA = _divide;
+    }
     return avgEDA;
   }
   
@@ -113,8 +119,14 @@ public class CalcEDA {
     InputOutput.<String>println(("Calc    :" + dim2Occ));
     double totalEDA = Util.sumDbl(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
+    double avgEDA = 0.0;
     Double _valueOf = Double.valueOf(totalEDA);
-    final double avgEDA = ((_valueOf).doubleValue() / numDims);
+    boolean _notEquals = ((_valueOf).doubleValue() != 0);
+    if (_notEquals) {
+      Double _valueOf_1 = Double.valueOf(totalEDA);
+      double _divide = ((_valueOf_1).doubleValue() / numDims);
+      avgEDA = _divide;
+    }
     return avgEDA;
   }
   
@@ -158,8 +170,14 @@ public class CalcEDA {
     }
     double totalEDA = Util.sumDbl(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
+    double avgEDA = 0.0;
     Double _valueOf = Double.valueOf(totalEDA);
-    final double avgEDA = ((_valueOf).doubleValue() / numDims);
+    boolean _notEquals = ((_valueOf).doubleValue() != 0);
+    if (_notEquals) {
+      Double _valueOf_1 = Double.valueOf(totalEDA);
+      double _divide = ((_valueOf_1).doubleValue() / numDims);
+      avgEDA = _divide;
+    }
     return avgEDA;
   }
 }

@@ -24,7 +24,11 @@ class CalcEDA {
 
 		var totalEDA = Util.sumInt(dim2Occ.values)
 		val numDims = dim2Occ.keySet.length
-		val avgEDA = Double.valueOf(totalEDA) / numDims
+		
+		var avgEDA = 0.0
+		if (Double.valueOf(totalEDA) != 0) {
+			avgEDA = Double.valueOf(totalEDA) / numDims
+		} 
 		return avgEDA
 	}
 
@@ -79,10 +83,14 @@ class CalcEDA {
 		// calculations
 		var totalEDA = Util.sumDbl(dim2Occ.values)
 		val numDims = dim2Occ.keySet.length
-		val avgEDA = Double.valueOf(totalEDA) / numDims
+
+		var avgEDA = 0.0
+		if (Double.valueOf(totalEDA) != 0) {
+			avgEDA = Double.valueOf(totalEDA) / numDims
+		}
 		return avgEDA
 	}
-	
+
 	def static getEDAfromNHLattice(PartialInterpretation pm) {
 		return getEDAfromNHLattice(pm, 0)
 	}
@@ -120,7 +128,11 @@ class CalcEDA {
 		// calculations
 		var totalEDA = Util.sumDbl(dim2Occ.values)
 		val numDims = dim2Occ.keySet.length
-		val avgEDA = Double.valueOf(totalEDA) / numDims
+		
+		var avgEDA = 0.0
+		if (Double.valueOf(totalEDA) != 0) {
+			avgEDA = Double.valueOf(totalEDA) / numDims
+		} 
 		return avgEDA
 	}
 }

@@ -28,7 +28,12 @@ class CalcNDA {
 		}
 
 		val numDims = dim2NumActNodes.keySet.length
-		val avgNDA = totalNDA / numDims
+		
+		
+		var avgNDA = 0.0
+		if (totalNDA != 0) {
+			avgNDA = totalNDA / numDims
+		}
 		return avgNDA
 	}
 
@@ -113,8 +118,11 @@ class CalcNDA {
 			}
 		}
 
-		val numDims = dim2ActNodes.keySet.length
-		val avgNDA = totalNDA / numDims
+		val numDims = dim2ActNodes.keySet.length		
+		var avgNDA = 0.0
+		if (totalNDA != 0) {
+			avgNDA = totalNDA / numDims
+		}
 		return avgNDA
 	}
 }

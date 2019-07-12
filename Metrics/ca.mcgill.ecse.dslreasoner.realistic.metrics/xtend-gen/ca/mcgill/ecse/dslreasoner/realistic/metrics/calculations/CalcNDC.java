@@ -28,7 +28,10 @@ public class CalcNDC {
     final double NDA = CalcNDA.getNDAfromModel(model);
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
-    final double NDC = (NDA / numNodes);
+    double NDC = 0.0;
+    if ((NDA != 0)) {
+      NDC = (NDA / numNodes);
+    }
     return NDC;
   }
   
@@ -49,7 +52,10 @@ public class CalcNDC {
       Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(node.getCorrespondingAND(), nhRep);
       numNodes = (_numNodes + (((Integer) _lookup)).intValue());
     }
-    final double NDC = (NDA / numNodes);
+    double NDC = 0.0;
+    if ((NDA != 0)) {
+      NDC = (NDA / numNodes);
+    }
     return NDC;
   }
   
@@ -78,7 +84,10 @@ public class CalcNDC {
         }
       }
     }
-    final double NDC = (NDA / numNodes);
+    double NDC = 0.0;
+    if ((NDA != 0)) {
+      NDC = (NDA / numNodes);
+    }
     return NDC;
   }
 }

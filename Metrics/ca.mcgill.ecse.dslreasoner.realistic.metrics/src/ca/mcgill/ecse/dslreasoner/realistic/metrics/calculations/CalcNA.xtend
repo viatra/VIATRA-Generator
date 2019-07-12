@@ -122,7 +122,11 @@ class CalcNA {
 		}
 
 		// return average NA
-		val averageNAwithWeight = totalNA / numModelElems
+		
+		var averageNAwithWeight = 0.0
+		if(totalNA != 0) {
+			averageNAwithWeight = totalNA / numModelElems
+		}
 		return averageNAwithWeight
 
 	}
@@ -160,8 +164,11 @@ class CalcNA {
 			totalMetricValue += totalActDims
 			activeDims.clear
 		}
-
-		val averageMetricValue = totalMetricValue / numNodesTotal
+		
+		var averageMetricValue = 0.0
+		if(totalMetricValue != 0) {
+			averageMetricValue = totalMetricValue / numNodesTotal
+		}
 		return averageMetricValue
 
 	}

@@ -20,6 +20,7 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -254,5 +255,49 @@ public class Util {
       }
     }
     return dim2Occurences;
+  }
+  
+  public static void getNeighboursList(final List<EObject> nodes, final Map<EObject, Set<EObject>> node2Neighbours) {
+    for (final EObject node : nodes) {
+      EList<EReference> _eAllReferences = node.eClass().getEAllReferences();
+      for (final EReference reference : _eAllReferences) {
+        {
+          final Object pointingTo = node.eGet(reference);
+          if ((!(pointingTo instanceof List))) {
+            if ((pointingTo != null)) {
+              CollectionsUtil.<EObject, Set<EObject>>lookup(node, node2Neighbours).add(((EObject) pointingTo));
+              CollectionsUtil.<EObject, Set<EObject>>lookup(((EObject) pointingTo), node2Neighbours).add(node);
+            }
+          } else {
+            final List pointingToSet = ((List) pointingTo);
+            boolean _isEmpty = pointingToSet.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              for (final Object target : pointingToSet) {
+                {
+                  CollectionsUtil.<EObject, Set<EObject>>lookup(node, node2Neighbours).add(((EObject) target));
+                  CollectionsUtil.<EObject, Set<EObject>>lookup(((EObject) target), node2Neighbours).add(node);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  public static void fillWithNodes(final List<EObject> nodes, final Map<EObject, Set<EObject>> node2Neighbours) {
+    for (final EObject node : nodes) {
+      HashSet<EObject> _hashSet = new HashSet<EObject>();
+      node2Neighbours.put(node, _hashSet);
+    }
+  }
+  
+  public static Integer factorial(final Integer n) {
+    if (((n).intValue() < 2)) {
+      return n;
+    }
+    Integer _factorial = Util.factorial(Integer.valueOf(((n).intValue() - 1)));
+    return Integer.valueOf(((n).intValue() * (_factorial).intValue()));
   }
 }

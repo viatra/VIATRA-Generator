@@ -87,9 +87,16 @@ public class CalcMPC {
         totalMPC = (_talMPC + partialMPC);
       }
     }
+    double averageMPC = 0.0;
     float _floatValue = Integer.valueOf(totalNumDims).floatValue();
-    float _divide = (_floatValue / (totalNumDims - 1));
-    final double averageMPC = (_divide * (totalMPC / numNodes));
+    double _multiply = (_floatValue * totalMPC);
+    boolean _notEquals = (_multiply != 0);
+    if (_notEquals) {
+      float _floatValue_1 = Integer.valueOf(totalNumDims).floatValue();
+      float _divide = (_floatValue_1 / (totalNumDims - 1));
+      double _multiply_1 = (_divide * (totalMPC / numNodes));
+      averageMPC = _multiply_1;
+    }
     return averageMPC;
   }
   
@@ -279,9 +286,16 @@ public class CalcMPC {
       }
     }
     final int totalNumDims = allDimensions.size();
+    double averageMPC = 0.0;
     float _floatValue = Integer.valueOf(totalNumDims).floatValue();
-    float _divide = (_floatValue / (totalNumDims - 1));
-    final double averageMPC = (_divide * (totalMPC / numNodes));
+    double _multiply = (_floatValue * totalMPC);
+    boolean _notEquals = (_multiply != 0);
+    if (_notEquals) {
+      float _floatValue_1 = Integer.valueOf(totalNumDims).floatValue();
+      float _divide = (_floatValue_1 / (totalNumDims - 1));
+      double _multiply_1 = (_divide * (totalMPC / numNodes));
+      averageMPC = _multiply_1;
+    }
     return averageMPC;
   }
 }

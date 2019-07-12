@@ -19,7 +19,11 @@ class CalcNDC {
 		val NDA = CalcNDA.getNDAfromModel(model)
 		val nodes = model.eResource.allContents.toList
 		val numNodes = nodes.length
-		val NDC = NDA / numNodes
+		
+		var NDC = 0.0
+		if(NDA != 0 ) {
+			NDC = NDA / numNodes
+		}
 		return NDC
 	}
 
@@ -43,7 +47,10 @@ class CalcNDC {
 			numNodes += node.correspondingAND.lookup(nhRep) as Integer
 		}
 
-		val NDC = NDA / numNodes
+		var NDC = 0.0
+		if(NDA != 0 ) {
+			NDC = NDA / numNodes
+		}
 		return NDC
 	}
 
@@ -71,7 +78,10 @@ class CalcNDC {
 			}
 		}
 
-		val NDC = NDA / numNodes
+		var NDC = 0.0
+		if(NDA != 0 ) {
+			NDC = NDA / numNodes
+		}
 		return NDC
 	}
 }

@@ -75,8 +75,12 @@ class CalcMPC {
 			}
 			totalMPC += partialMPC
 		}
-
-		val averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
+		
+		var averageMPC = 0.0
+		if ( totalNumDims.floatValue * totalMPC != 0) {
+			averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
+		}
+		
 		return averageMPC
 	}
 
@@ -236,8 +240,12 @@ class CalcMPC {
 		}
 
 		val totalNumDims = allDimensions.size
-
-		val averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
+		
+		var averageMPC = 0.0
+		if ( totalNumDims.floatValue * totalMPC != 0) {
+			averageMPC = ( totalNumDims.floatValue / (totalNumDims - 1) ) * (totalMPC / numNodes)
+		}
+		
 		return averageMPC
 	}
 }

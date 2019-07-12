@@ -13,6 +13,7 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.Collection
 import java.util.Collections
 import java.util.HashMap
+import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
@@ -202,6 +203,46 @@ class Util {
 		}
 
 		return dim2Occurences
+	}
+	
+	def static void getNeighboursList(List<EObject> nodes, Map<EObject, Set<EObject>> node2Neighbours) {
+		for (node : nodes) {
+			for (reference : node.eClass.EAllReferences) {
+				val pointingTo = node.eGet(reference)
+		
+				if (!(pointingTo instanceof List)) {
+					if (pointingTo !== null) {
+						// Add for source
+						node.lookup(node2Neighbours).add(pointingTo as EObject)
+						// Add for target
+						(pointingTo as EObject).lookup(node2Neighbours).add(node)
+					}
+				} else {
+					val pointingToSet = pointingTo as List
+					if (!pointingToSet.empty) {
+						for (target : pointingToSet) {
+							// Add for source
+							node.lookup(node2Neighbours).add(target as EObject)
+							// Add for target
+							(target as EObject).lookup(node2Neighbours).add(node)
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	def static void fillWithNodes(List<EObject> nodes, Map<EObject, Set<EObject>> node2Neighbours) {
+		for (node : nodes) {
+			node2Neighbours.put(node, new HashSet)
+		}
+	}
+	
+	def static Integer factorial(Integer n) {
+		if (n < 2) {
+			return n
+		}
+		return n * factorial(n-1)
 	}
 
 }
