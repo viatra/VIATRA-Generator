@@ -4,6 +4,7 @@ Bundle-Name: Logic2viatra
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatraquery;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.interval,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.interval.aggregators,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns,
@@ -22,7 +23,8 @@ Require-Bundle: hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.xtext;bundle-version="2.10.0",
  org.eclipse.viatra.transformation.runtime.emf;bundle-version="1.5.0",
- org.eclipse.xtext.xbase;bundle-version="2.10.0"
+ org.eclipse.xtext.xbase;bundle-version="2.10.0",
+ com.microsoft.z3;bundle-version="4.8.5"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j
 Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatraquery

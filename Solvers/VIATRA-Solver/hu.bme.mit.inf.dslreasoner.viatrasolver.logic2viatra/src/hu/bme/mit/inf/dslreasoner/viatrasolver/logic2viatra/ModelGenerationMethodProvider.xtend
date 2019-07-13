@@ -4,6 +4,11 @@ import com.google.common.collect.ImmutableMap
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedronScopePropagator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Z3PolyhedronSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.ModalPatternQueries
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules.GoalConstraintProvider
@@ -63,7 +68,7 @@ class ModelGenerationMethodProvider {
 		ReasonerWorkspace workspace,
 		boolean nameNewElements,
 		TypeInferenceMethod typeInferenceMethod,
-		ScopePropagator scopePropagator,
+		ScopePropagatorStrategy scopePropagatorStrategy,
 		DocumentationLevel debugLevel
 	) {
 		val statistics = new ModelGenerationStatistics
@@ -74,6 +79,8 @@ class ModelGenerationMethodProvider {
 
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
 			workspace, typeInferenceMethod, writeFiles)
+		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, queries)
+		scopePropagator.propagateAllScopeConstraints
 		val // LinkedHashMap<Pair<Relation, ? extends Type>, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>>
 		objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(queries, scopePropagator,
 			nameNewElements, statistics)
@@ -103,5 +110,20 @@ class ModelGenerationMethodProvider {
 			modalRelationQueries,
 			queries.allQueries
 		)
+	}
+
+	private def createScopePropagator(ScopePropagatorStrategy scopePropagatorStrategy,
+		PartialInterpretation emptySolution, GeneratedPatterns queries) {
+		switch (scopePropagatorStrategy) {
+			case BasicTypeHierarchy:
+				new ScopePropagator(emptySolution)
+			case PolyhedralTypeHierarchy: {
+				val types = queries.refineObjectQueries.keySet.map[newType].toSet
+				val solver = new Z3PolyhedronSolver
+				new PolyhedronScopePropagator(emptySolution, types, solver)
+			}
+			default:
+				throw new IllegalArgumentException("Unknown scope propagator strategy: " + scopePropagatorStrategy)
+		}
 	}
 }

@@ -12,7 +12,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethodProvider
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ScopePropagator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.PartialInterpretationInitialiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
@@ -71,16 +71,13 @@ class ViatraReasoner extends LogicReasoner {
 		}
 		emptySolution.problemConainer = problem
 
-		val ScopePropagator scopePropagator = new ScopePropagator(emptySolution)
-		scopePropagator.propagateAllScopeConstraints
-
 		val method = modelGenerationMethodProvider.createModelGenerationMethod(
 			problem,
 			emptySolution,
 			workspace,
 			viatraConfig.nameNewElements,
 			viatraConfig.typeInferenceMethod,
-			scopePropagator,
+			viatraConfig.scopePropagatorStrategy,
 			viatraConfig.documentationLevel
 		)
 

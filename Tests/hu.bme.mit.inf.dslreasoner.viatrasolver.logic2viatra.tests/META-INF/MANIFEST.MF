@@ -11,3 +11,5 @@ Require-Bundle: com.google.guava,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatraquery
+Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.tests.cardinality,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.tests.interval

@@ -6,6 +6,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold
@@ -49,6 +50,8 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	 * Configuration for cutting search space.
 	 */
 	public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
+	
+	public var ScopePropagatorStrategy scopePropagatorStrategy = ScopePropagatorStrategy.PolyhedralTypeHierarchy
 
 	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
 }
