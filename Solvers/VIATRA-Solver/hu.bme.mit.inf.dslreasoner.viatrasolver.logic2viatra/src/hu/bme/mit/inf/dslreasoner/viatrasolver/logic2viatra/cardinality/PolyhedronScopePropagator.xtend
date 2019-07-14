@@ -27,6 +27,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 		// Dimensions for instantiable types were created according to the type analysis,
 		// but for any possible primitive types, we create them on demand,
 		// as there is no Type directly associated with a PartialPrimitiveInterpretation.
+		// Below we will assume that each PartialTypeInterpretation has at most one Scope.
 		for (scope : p.scopes) {
 			switch (targetTypeInterpretation : scope.targetTypeInterpretation) {
 				PartialPrimitiveInterpretation: {

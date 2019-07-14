@@ -47,6 +47,20 @@ class ScopePropagator {
 				}
 			}
 		}
+		var boolean changed
+		do {
+			changed = false
+			for (scope : p.scopes) {
+				val subScopeSet = subScopes.get(scope)
+				val superScopeSet = superScopes.get(scope)
+				for (subScope : subScopeSet) {
+					changed = changed || superScopes.get(subScope).addAll(superScopeSet)
+				}
+				for (superScope : superScopeSet) {
+					changed = changed || subScopes.get(superScope).addAll(subScopeSet)
+				}
+			}
+		} while (changed)
 	}
 
 	def propagateAllScopeConstraints() {
