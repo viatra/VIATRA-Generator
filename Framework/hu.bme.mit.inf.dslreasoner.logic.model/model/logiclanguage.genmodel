@@ -169,6 +169,7 @@
     <genClasses image="false" ecoreClass="logiclanguage.ecore#//AggregateExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/relation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/parameterSubstitution"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/resultVariable"/>
     </genClasses>
     <genClasses ecoreClass="logiclanguage.ecore#//Sum"/>
     <genClasses ecoreClass="logiclanguage.ecore#//Count"/>

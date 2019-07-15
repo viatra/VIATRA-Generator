@@ -478,6 +478,7 @@ class LogicProblemBuilder{
 	def %(TermDescription left, TermDescription right) { Modulo(left,right) }
 	def Modulo(TermDescription left, TermDescription right) { createMod => [leftOperand = left.toTerm rightOperand = right.toTerm]}
 	
+	def Pow(TermDescription left, TermDescription right) {createPow => [leftOperand = left.toTerm rightOperand = right.toTerm]}
 	def asTerm(boolean value) { createBoolLiteral => [x|x.value = value]  }
 	def asTerm(int value) { createIntLiteral => [x|x.value = value] }
 	def asTerm(double value) { BigDecimal.valueOf(value).asTerm }
@@ -530,27 +531,28 @@ class LogicProblemBuilder{
 	
 	// AggregatedExpression
 	
-	private def <T extends AggregateExpression> configureAggregateExpression(T expression, Relation referred, List<Variable> terms) {
+	private def <T extends AggregateExpression> configureAggregateExpression(T expression, Relation referred, List<Variable> terms, Variable target) {
 		if(terms.size != referred.parameters.size) {
 			throw new LogicProblemBuilderException(
 			'''The function called has «referred.parameters.size» parameters but it is called with «terms.size»!''')
 		} else {
 			expression.relation = referred
+			expression.resultVariable = target
 			for(var i=0; i<referred.parameters.size;i++) {
-				val target = terms.get(i)
-				val substitution = createAggregatedParameterSubstitution => [it.variable = target]
+				val targetRelation = terms.get(i)
+				val substitution = createAggregatedParameterSubstitution => [it.variable = targetRelation]
 				expression.parameterSubstitution += substitution
 			}
 			return expression
 		}
 	}
-	private def <T extends ProjectedAggregateExpression> configureProjectedAggregateExpression(T expression, Relation referred, List<Variable> terms, int projection) {
+	private def <T extends ProjectedAggregateExpression> configureProjectedAggregateExpression(T expression, Relation referred, List<Variable> terms, Variable target, int projection) {
 		if(projection < 0 || projection >= referred.parameters.size) {
 			throw new LogicProblemBuilderException(
 			'''The function called has «referred.parameters.size» parameters but it is called with «terms.size»!''')
 		} else {
-			val res = expression.configureAggregateExpression(referred, terms)
-			if(res.parameterSubstitution.get(projection) !== null) {
+			val res = expression.configureAggregateExpression(referred, terms,target)
+			if(res.parameterSubstitution.get(projection).variable !== null) {
 				throw new LogicProblemBuilderException(
 				'''Projection over set variable!''')
 			}
@@ -564,10 +566,18 @@ class LogicProblemBuilder{
 		}
 		
 	}
-	def Count(Relation referred, List<Variable> terms) { createCount.configureAggregateExpression(referred,terms) }
-	def Sum(Relation referred,  List<Variable> terms, int projection) { createSum.configureProjectedAggregateExpression(referred,terms,projection) }
-	def Min(Relation referred,  List<Variable> terms, int projection) { createMin.configureProjectedAggregateExpression(referred,terms,projection) }
-	def Max(Relation referred,  List<Variable> terms, int projection) { createMax.configureProjectedAggregateExpression(referred,terms,projection) }
+	def Count(Relation referred, List<Variable> terms, Variable result) {
+		createCount.configureAggregateExpression(referred,terms,result)
+	}
+	def Sum(Relation referred,  List<Variable> terms, int projection, Variable result) {
+		createSum.configureProjectedAggregateExpression(referred,terms,result,projection)
+	}
+	def Min(Relation referred,  List<Variable> terms, int projection, Variable result) {
+		createMin.configureProjectedAggregateExpression(referred,terms,result,projection)
+	}
+	def Max(Relation referred,  List<Variable> terms, int projection, Variable result) {
+		createMax.configureProjectedAggregateExpression(referred,terms,result,projection)
+	}
 	
 	// Function calls
 	def call(Function function, TermDescription... substitutions) {
@@ -592,17 +602,19 @@ class LogicProblemBuilder{
 	def call(Relation relation, TermDescription... substitution) { relation.call(substitution as Iterable<? extends TermDescription>)}
 	def call(Relation relation, Iterable<? extends TermDescription> substitution) {
 		val relationReference = createSymbolicValue
+		if(relation === null) {
+			throw new LogicProblemBuilderException('''Call is referring to null!''')
+		}
 		relationReference.symbolicReference = relation
-		//println('''«relation.name»(«substitution.size»->«relation.parameters»)''')
 		for(value : substitution)
 			relationReference.parameterSubstitutions += value.toTerm
 		relationReference.checkRelationCall(relation)
 		return relationReference
 	}
 	def private checkRelationCall(SymbolicValue value, Relation referredRelation) {
-//		if(value === null || referredRelation === null) {
-//			println("gebasz")
-//		}
+		if(value === null || referredRelation === null) {
+			throw new LogicProblemBuilderException('''Call is referring to null!''')
+		}
 		if(value.parameterSubstitutions.size != referredRelation.parameters.size) {
 			throw new LogicProblemBuilderException(
 				'''The relation "«referredRelation.name»" called has «referredRelation.parameters.size» parameters but it is called with «value.parameterSubstitutions.size»!''')

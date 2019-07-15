@@ -1892,6 +1892,16 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * @generated
 	 */
 	@Override
+	public EReference getAggregateExpression_ResultVariable() {
+		return (EReference)aggregateExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getSum() {
 		return sumEClass;
 	}
@@ -2180,6 +2190,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		aggregateExpressionEClass = createEClass(AGGREGATE_EXPRESSION);
 		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__RELATION);
 		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION);
+		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__RESULT_VARIABLE);
 
 		sumEClass = createEClass(SUM);
 
@@ -2476,6 +2487,7 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 		initEClass(aggregateExpressionEClass, AggregateExpression.class, "AggregateExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAggregateExpression_Relation(), this.getRelation(), null, "relation", null, 0, 1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAggregateExpression_ParameterSubstitution(), this.getAggregatedParameterSubstitution(), null, "parameterSubstitution", null, 0, -1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAggregateExpression_ResultVariable(), this.getVariable(), null, "resultVariable", null, 0, 1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sumEClass, Sum.class, "Sum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

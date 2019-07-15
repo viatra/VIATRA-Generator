@@ -2760,13 +2760,22 @@ public interface LogiclanguagePackage extends EPackage {
 	int AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION = TERM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Result Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGGREGATE_EXPRESSION__RESULT_VARIABLE = TERM_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Aggregate Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AGGREGATE_EXPRESSION_FEATURE_COUNT = TERM_FEATURE_COUNT + 2;
+	int AGGREGATE_EXPRESSION_FEATURE_COUNT = TERM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Aggregate Expression</em>' class.
@@ -2804,6 +2813,15 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROJECTED_AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION = AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION;
+
+	/**
+	 * The feature id for the '<em><b>Result Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECTED_AGGREGATE_EXPRESSION__RESULT_VARIABLE = AGGREGATE_EXPRESSION__RESULT_VARIABLE;
 
 	/**
 	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
@@ -2861,6 +2879,15 @@ public interface LogiclanguagePackage extends EPackage {
 	int SUM__PARAMETER_SUBSTITUTION = PROJECTED_AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION;
 
 	/**
+	 * The feature id for the '<em><b>Result Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUM__RESULT_VARIABLE = PROJECTED_AGGREGATE_EXPRESSION__RESULT_VARIABLE;
+
+	/**
 	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2916,6 +2943,15 @@ public interface LogiclanguagePackage extends EPackage {
 	int COUNT__PARAMETER_SUBSTITUTION = AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION;
 
 	/**
+	 * The feature id for the '<em><b>Result Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNT__RESULT_VARIABLE = AGGREGATE_EXPRESSION__RESULT_VARIABLE;
+
+	/**
 	 * The number of structural features of the '<em>Count</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2960,6 +2996,15 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIN__PARAMETER_SUBSTITUTION = PROJECTED_AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION;
+
+	/**
+	 * The feature id for the '<em><b>Result Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIN__RESULT_VARIABLE = PROJECTED_AGGREGATE_EXPRESSION__RESULT_VARIABLE;
 
 	/**
 	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
@@ -3015,6 +3060,15 @@ public interface LogiclanguagePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAX__PARAMETER_SUBSTITUTION = PROJECTED_AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION;
+
+	/**
+	 * The feature id for the '<em><b>Result Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAX__RESULT_VARIABLE = PROJECTED_AGGREGATE_EXPRESSION__RESULT_VARIABLE;
 
 	/**
 	 * The feature id for the '<em><b>Projection Index</b></em>' attribute.
@@ -4409,6 +4463,17 @@ public interface LogiclanguagePackage extends EPackage {
 	EReference getAggregateExpression_ParameterSubstitution();
 
 	/**
+	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression#getResultVariable <em>Result Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Result Variable</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression#getResultVariable()
+	 * @see #getAggregateExpression()
+	 * @generated
+	 */
+	EReference getAggregateExpression_ResultVariable();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Sum <em>Sum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5640,6 +5705,14 @@ public interface LogiclanguagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION = eINSTANCE.getAggregateExpression_ParameterSubstitution();
+
+		/**
+		 * The meta object literal for the '<em><b>Result Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AGGREGATE_EXPRESSION__RESULT_VARIABLE = eINSTANCE.getAggregateExpression_ResultVariable();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.SumImpl <em>Sum</em>}' class.

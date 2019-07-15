@@ -217,6 +217,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//Relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterSubstitution"
         upperBound="-1" eType="#//AggregatedParameterSubstitution" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultVariable" eType="#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sum" eSuperTypes="#//ProjectedAggregateExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="Count" eSuperTypes="#//AggregateExpression"/>
