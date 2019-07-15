@@ -81,39 +81,48 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	/**
 	 * Gets the largest 
 	 */
+/**
+
+	 * Gets the minimal neighbourhood size such that every reachable node appears in the shape of every other at least once.
+
+	 */
+
 	def private getWidth(Map<DefinedElement, Set<String>> types,
 		Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
-		Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations)
-	{
-		val elements =  types.keySet
-		val Map<DefinedElement,Set<DefinedElement>> reachable = new HashMap
-		for(element : elements) {
+		Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations) {
+		val elements = types.keySet
+		var Map<DefinedElement, Set<DefinedElement>> reachable = new HashMap
+		var Map<DefinedElement, Set<DefinedElement>> newReachable = new HashMap
+		for (element : elements) {
 			val set = new HashSet
 			set.add(element)
-			reachable.put(element,set)
+			reachable.put(element, new HashSet)
+			newReachable.put(element, set)
 		}
-		
 		var int width = 0
 		var boolean newAdded
 		do {
+			var tmp = reachable
+			reachable = newReachable
+			newReachable = tmp
 			newAdded = false
-			for(element : elements) {
+			for (element : elements) {
 				val elementNeigbours = element.lookup(reachable)
-				val size = elementNeigbours.size
-				for(incoming : element.lookup(IncomingRelations)) {
-					elementNeigbours.addAll(incoming.from.lookup(reachable))
+				val newElementNeigbours = element.lookup(newReachable)
+				newElementNeigbours.addAll(elementNeigbours)
+				for (incoming : element.lookup(IncomingRelations)) {
+					newElementNeigbours.addAll(incoming.from.lookup(reachable))
 				}
-				for(outgoing : element.lookup(OutgoingRelations)) {
-					elementNeigbours.addAll(outgoing.to.lookup(reachable))
+				for (outgoing : element.lookup(OutgoingRelations)) {
+					newElementNeigbours.addAll(outgoing.to.lookup(reachable))
 				}
-				newAdded = newAdded || (elementNeigbours.size > size)
+				newAdded = newAdded || (newElementNeigbours.size > elementNeigbours.size)
 			}
-			
-			width +=1
-		} while(newAdded)
+			width += 1
+		} while (newAdded)
 		return width
 	}
-	
+		
 	/**
 	 * Creates a neighbourhood representation with traces
 	 * @param model The model to be represented.
