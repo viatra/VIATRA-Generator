@@ -18,6 +18,7 @@ import java.util.List
 import java.util.Map
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression
 import org.eclipse.xtend.lib.annotations.Accessors
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeTypeMetric
 
 class PartialInterpretationMetricDistance {
 	
@@ -48,17 +49,17 @@ class PartialInterpretationMetricDistance {
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
-		metrics.add(new TypedOutDegree());
-		
+		metrics.add(new NodeTypeMetric());
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
 		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
 		
 		var mpc = ks.mpcDistance(metricSamples.mpcSamples);
 		var na = ks.naDistance(metricSamples.naSamples);
 		var outDegree = ks.outDegreeDistance(metricSamples.outDegreeSamples);
-		var typedOutDegree = ks.typedOutDegreeDistance(metricSamples.typedOutDegreeSamples);
-		
-		return new MetricDistanceGroup(mpc, na, outDegree, typedOutDegree);
+		//var typedOutDegree = ks.typedOutDegreeDistance(metricSamples.typedOutDegreeSamples);
+		var distance = new MetricDistanceGroup(mpc, na, outDegree);
+		distance.nodeTypeInfo = metricSamples.nodeTypeSamples;
+		return distance;
 	}
 	
 	def MetricDistanceGroup calculateMetricEuclidean(PartialInterpretation partial){
@@ -66,7 +67,6 @@ class PartialInterpretationMetricDistance {
 		metrics.add(new OutDegreeMetric());
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
-		metrics.add(new TypedOutDegree());
 		
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
 		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
@@ -158,8 +158,8 @@ class PartialInterpretationMetricDistance {
 		var features = newDoubleArrayOfSize(2);
 		//constant term
 		features.set(0, 1);
-		
-		features.set(1, 1.0 / step);
+		features.set(0, Math.sqrt(step) + 30)
+		features.set(1, 1.0 / (step + 30) );
 //		features.set(2, violations);
 //		features.set(3, Math.pow(violations, 2));
 		
@@ -172,6 +172,7 @@ class MetricDistanceGroup{
 	var double naDistance;
 	var double outDegreeDistance;
 	var double typedOutDegreeDistance;
+	protected var HashMap<String, Double> nodeTypeInfo;
 	
 	new(double mpcDistance, double naDistance, double outDegreeDistance, double typedOutDegreeDistance){
 		this.mpcDistance = mpcDistance;
@@ -200,5 +201,9 @@ class MetricDistanceGroup{
 	
 	def double getOutDegreeDistance(){
 		return this.outDegreeDistance
+	}
+	
+	def double getNodeTypePercentage(String typeName){
+		return nodeTypeInfo.getOrDefault(typeName, 0.0);
 	}
 }

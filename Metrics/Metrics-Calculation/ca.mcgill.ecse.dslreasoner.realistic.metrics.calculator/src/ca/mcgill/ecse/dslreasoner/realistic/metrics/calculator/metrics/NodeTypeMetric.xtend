@@ -28,13 +28,11 @@ class NodeTypeMetric extends Metric {
 		var map = new HashMap<String, Double>();
 		var nodes = g.allNodes;
 		var single = 1.0 / nodes.size();
-		for(node : nodes){
-			var classes = new ArrayList(node.eClass.ESuperTypes);
-			classes.add(node.eClass);
-			
-			for(cl : classes){
-				var value = map.getOrDefault(cl.name, 0.0);
-				map.put(cl.name, value + single);
+		var nodeToType = g.nodeToTypesMap;
+		for(node : nodes){			
+			for(cl : nodeToType.get(node)){
+				var value = map.getOrDefault(cl, 0.0);
+				map.put(cl, value + single);
 			}	
 		}
 		

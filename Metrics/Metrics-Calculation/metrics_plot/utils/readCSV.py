@@ -29,7 +29,8 @@ def readcsvfile(filename):
                 try:
                     contents[arr[0]] = list(map(int, arr[1:]))
                 except:
-                    print(arr[0], ' is not integer')
+                    message = arr[0], ' is not integer'
+                    #print(message)
     f.close()
     return contents
 

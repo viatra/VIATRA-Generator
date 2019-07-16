@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import org.eclipse.viatra.query.runtime.matchers.aggregators.count;
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistance;
@@ -27,16 +24,16 @@ public class Main {
 		return message;
 	}
 	
-	private static String configFolder = "yakinduum/";
-	private static String configFileName = configFolder + "info.csv";
-	private static String aggregateViolationMeasureFileName = configFolder + "aggregateInfo2.csv";
+	private static String configFolder = "yakinduum/config15/";
+	private static String configFileName = configFolder + "info_new_metric.csv";
+	private static String aggregateViolationMeasureFileName = configFolder + "aggregateInfo.csv";
+	private static String fileReadFolder = "output/Viatra_100/";
 	
 	public static void main(String args[]) {
-//		try {
 		
 		
 		long begin = System.currentTimeMillis();
-		String message = null;//runWithPath("yakinduGeneration.vsconfig");
+		String message = runWithPath("yakinduGeneration.vsconfig");
 		long elapsed = System.currentTimeMillis() - begin;
 
 		if(message != null) {
@@ -48,17 +45,17 @@ public class Main {
 		infoOutput.add(time);
 		output.add(infoOutput);
 		System.out.println(time);
-		//CsvFileWriter.write(output, configFileName);
+		CsvFileWriter.write(output, configFileName);
 		
 		
 		output = new ArrayList<ArrayList<String>>();
 		output.add(prepareInfo());
-		//CsvFileWriter.append(output, configFileName);
+		CsvFileWriter.append(output, configFileName);
 		
-//		for(int i = 0; i < 50; i++) {
-//			singleModelViolationMeasure(i+1);
-//		}
-		aggregateViolationMeasure(50);
+		for(int i = 0; i < 50; i++) {
+			generateModel(i+1);
+		}
+		//aggregateViolationMeasure(50);
 		System.out.println("Finished");
 	}
 
@@ -70,7 +67,7 @@ public class Main {
 		infoOutput.add(run+ "");
 		infoOutput.addAll(calculateMetric(run));
 
-		YakinduumModel model = new YakinduumModel("output/Viatra_100/run"+run+"/"+ filename);
+		YakinduumModel model = new YakinduumModel(fileReadFolder +"run" +run + "/" + filename);
 		int violationCount = ViolationCheck.calculateViolationCounts(model.yakinduum);
 		infoOutput.add(violationCount + "");
 
@@ -78,18 +75,18 @@ public class Main {
 		
 		//save model to another directory
 		model.save(configFolder + run + ".xmi");
-		
+		output.add(infoOutput);
 		CsvFileWriter.append(output, configFileName);
 	}
 	
 	public static void singleModelViolationMeasure(int run) {
-		String filename = run+".xmi";
+		String filename = run+"_1.xmi";
 		//prepare initial info
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		ArrayList<String> infoOutput = new ArrayList<String>();
 		infoOutput.add(run+ "");
 
-		YakinduumModel model = new YakinduumModel("yakinduum\\config8\\"+ filename);
+		YakinduumModel model = new YakinduumModel("output/Viatra_100/run"+run+"/"+ filename);
 		
 		//parse map of violation counts to two list and add them to the result list 
 		Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
@@ -112,8 +109,8 @@ public class Main {
 		ArrayList<String> counts = new ArrayList<String>();
 		ArrayList<String> violationNames = null;
 		for(int run = 1; run < size+1; run++) {
-			String filename = run+".xmi";
-			YakinduumModel model = new YakinduumModel("yakinduum\\config8\\"+ filename);
+			String filename = run+"_1.xmi";
+			YakinduumModel model = new YakinduumModel("output/Viatra_100/run"+run+"/"+ filename);
 
 			Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
 			if(run == 1) {
@@ -147,7 +144,7 @@ public class Main {
 		//read model and metric
 		ArrayList<String> output = new ArrayList<String>();
 		GraphReader reader = new GraphReader(YakindummPackage.eINSTANCE);
-		EMFGraph graph = reader.readModels("output/Viatra_100/run"+run+"/").get(0);
+		EMFGraph graph = reader.readModel(fileReadFolder+"/run"+run, run + "_1.xmi");
 		
 		//KS distance
 		KSDistance ks = new KSDistance(Domain.Yakinduum);

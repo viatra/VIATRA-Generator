@@ -19,7 +19,11 @@ class PartialInterpretationGraph extends Graph{
 		//the edge types are defined in terms of RelationDeclaration
 		partial.problem.relations.filter(RelationDeclaration).forEach[
 			//only need the name of the reference type (remove everything with and after "reference")
-			this.statistic.addEdgeType(it.name.split(" ").get(0));
+			var n = it.name.split(" ").get(0);
+			// TODO: Here is to only consider one part of opposite edges
+			//if(!n.equals('target') && !n.equals('source') /* && !n.equals('incomingTransitions')*/){
+				this.statistic.addEdgeType(n);
+			//}
 		]
 		// add all elements
 		val typeInterpretations = getTypes(partial);
@@ -33,9 +37,12 @@ class PartialInterpretationGraph extends Graph{
 		for(relationInterpretation : partial.partialrelationinterpretation) {
 			//only need the name of the reference type (remove everything with and after "reference")
 			val type = relationInterpretation.interpretationOf.name.split(" ").get(0);
-			for(edge : relationInterpretation.relationlinks.filter(BinaryElementRelationLink)){
-				statistic.addEdge(edge.param1, edge.param2, type);
-			}			
+			// TODO: Here is to only consider one part of opposite edges
+			//if(!type.equals('target') && !type.equals('source') /*&& !type.equals('incomingTransitions')*/){
+				for(edge : relationInterpretation.relationlinks.filter(BinaryElementRelationLink)){
+					statistic.addEdge(edge.param1, edge.param2, type);
+				}	
+			//}
 		}	
 		
 		this.name = name;

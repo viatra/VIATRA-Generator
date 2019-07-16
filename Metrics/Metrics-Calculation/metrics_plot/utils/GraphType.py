@@ -11,8 +11,9 @@ class GraphCollection:
         self.nas = []
         self.mpcs = []
         self.name = name
-        self.size = number
         models = reader.readmultiplefiles(path, number, shouldShuffle)
+        print(len(models))
+        self.size = len(models)
         for i in range(len(models)):
             contents, out_d, na, mpc = reader.getmetrics(models[i])
             self.out_ds.append(out_d)

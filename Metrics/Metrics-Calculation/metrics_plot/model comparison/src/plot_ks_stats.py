@@ -12,15 +12,18 @@ import DistributionMetrics as metrics
 
 def main():
     # read models
-    # human = GraphCollection('../input/humanOutput/', 500, 'Human')
+    human = GraphCollection('../input/humanOutput/', 500, 'Human')
     # viatra30 = GraphCollection('../input/viatraOutput30/', 500,'Viatra (30 nodes)')
     # viatra60 = GraphCollection('../input/viatraOutput60/', 500, 'Viatra (60 nodes)')
     viatra100 = GraphCollection('../input/viatraOutput100/', 500, 'Viatra (100 nodes)')
+    viatra100R = GraphCollection('../input/realisticViatraOutput_container/', 500, 'Realistic Viatra containers (100 nodes)')
+    viatra100C = GraphCollection('../input/viatraOutput100C/', 500, 'Realistic Viatra consistent (100 nodes)')
+    viatra100EE = GraphCollection('../input/realisticViatra_excludeExit/', 500, 'Realistic Viatra no Exit (100 nodes)')
     # random = GraphCollection('../input/randomOutput/', 500, 'Random')
     # alloy = GraphCollection('../input/alloyOutput/', 500, 'Alloy (30 nodes)')
-    realistic_viatra = GraphCollection('../input/viatra_output_consistent_100/', 50, 'Realistic Viatra With Some Constraints (100 nodes)')
-    human100 = GraphCollection('../input/human_output_100/', 304, 'Human')
-    models_to_compare = [human100, realistic_viatra, viatra100]
+    # realistic_viatra = GraphCollection('../input/viatra_output_consistent_100/', 50, 'Realistic Viatra With Some Constraints (100 nodes)')
+    # human100 = GraphCollection('../input/human_output_100/', 304, 'Human')
+    models_to_compare = [human, viatra100EE,viatra100C]
     
     # define output folder
     outputFolder = '../output/'
@@ -40,7 +43,7 @@ def calculateKSMatrix(dists):
     for i in range(len(dist)):
         matrix[i,i] = 0
         for j in range(i+1, len(dist)):
-            value = metrics.euclidean_distance(dist[i], dist[j])
+            value, p = metrics.ks_distance(dist[i], dist[j])
             matrix[i, j] = value
             matrix[j, i] = value
     return matrix

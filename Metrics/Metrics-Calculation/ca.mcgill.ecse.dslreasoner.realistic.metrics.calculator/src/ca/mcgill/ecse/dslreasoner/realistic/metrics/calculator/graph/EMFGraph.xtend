@@ -30,13 +30,26 @@ class EMFGraph extends Graph{
 		]
 		
 		referenceTypes.forEach[it|
-			statistic.addEdgeType(it.name);
+			var typeToAdd = it;
+		
+			// TODO: Here is to only consider one part of opposite edges
+//		  	if(it.upperBound != -1 && it.EOpposite !== null && 
+//		  		(it.EOpposite.upperBound == -1 || it.EOpposite.upperBound > it.upperBound
+//		  	)){
+//				typeToAdd = it.EOpposite;
+//			}
+			//if(!typeToAdd.name.equals('incomingTransitions')){
+				statistic.addEdgeType(typeToAdd.name);
+			//}
 		];
 		
 		objects.forEach[source|
 			source.eClass.EAllReferences.forEach[r|
 				//add the type first (if it is not added already)
 				//many references
+//				if(r.name.equals('incomingTransitions')){
+//					return;
+//				}
 				if(r.isMany){
 					source.getNeighbours(r).forEach[target|
 						addEdge(source, target, r);
@@ -85,6 +98,14 @@ class EMFGraph extends Graph{
 	}
 	
 	def addEdge(EObject source, EObject target, EReference r){
+		// TODO: Here is to only consider one part of opposite edges
+		//check for the opposite reference and do not add if its opposite will be added
+//		if(r.upperBound != -1 && r.EOpposite !== null && 
+//		  		(r.EOpposite.upperBound == -1 || r.EOpposite.upperBound > r.upperBound
+//		 )){
+//			return;
+//		}
+		
 		if(target !== null && r !== null){
 			statistic.addEdge(source, target, r.name);
 		}

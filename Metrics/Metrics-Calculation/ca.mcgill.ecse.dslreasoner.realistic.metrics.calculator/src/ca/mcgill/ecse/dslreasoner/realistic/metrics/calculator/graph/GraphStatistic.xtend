@@ -8,6 +8,7 @@ import java.util.List
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
 
 class GraphStatistic {
 	val incomingEdges = new HashMap<String, Multimap<EObject, EObject>>;
@@ -21,9 +22,12 @@ class GraphStatistic {
 	 * @param type: type to add
 	 */
 	def void addEdgeType(String type){
+		
+		
 		if(edgeTypes.contains(type)){
-	  		return;
+			return;
 	  	}
+	  	
 		edgeTypes.add(type);
 		incomingEdges.put(type, ArrayListMultimap.create());
 		outcomingEdges.put(type, ArrayListMultimap.create());

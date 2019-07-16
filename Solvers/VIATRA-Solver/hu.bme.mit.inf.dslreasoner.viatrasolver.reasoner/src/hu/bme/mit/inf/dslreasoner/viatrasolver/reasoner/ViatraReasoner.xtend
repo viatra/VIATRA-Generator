@@ -34,6 +34,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.HillClimbingOnRealisticMetricStrategyForModelGeneration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstSearchForMetricModelGeneration
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
