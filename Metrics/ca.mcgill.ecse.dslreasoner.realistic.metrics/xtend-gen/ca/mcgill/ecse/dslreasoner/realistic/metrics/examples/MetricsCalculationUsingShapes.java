@@ -54,11 +54,11 @@ public abstract class MetricsCalculationUsingShapes {
       final String calcTesting = "max";
       String fileDir = "";
       ArrayList<String> files = CollectionLiterals.<String>newArrayList(
-        "A0", "V1", "H");
+        "A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "H");
       if (testing) {
         files = CollectionLiterals.<String>newArrayList("test");
       }
-      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRTOT");
+      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRNUM");
       ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList();
       if (calcTesting != null) {
         switch (calcTesting) {

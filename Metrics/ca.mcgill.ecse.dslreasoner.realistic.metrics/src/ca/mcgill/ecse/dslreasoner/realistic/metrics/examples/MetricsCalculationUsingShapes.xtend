@@ -47,20 +47,20 @@ abstract class MetricsCalculationUsingShapes {
 
 		var files = newArrayList( 
 			"A0"
-			//, "A20"
-			//, "R1"
-			//, "R2"
+			, "A20"
+			, "R1"
+			, "R2"
 			, "V1"
-			//, "V2"
-			//, "V3"
-			//, "V4"
-			//, "V5"
+			, "V2"
+			, "V3"
+			, "V4"
+			, "V5"
 			, "H"
 		)
 		if (testing) {
 			files = newArrayList("test")
 		}
-		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRTOT" /*, "SQROCOOL" */ )
+		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRNUM" /*, "SQROCOOL" */ )
 		var calcMethods = newArrayList
 		switch calcTesting {
 			case "max": calcMethods = newArrayList("Model", "NHLattice 0", "NHLattice 1", "NHLattice 2", "NHLattice 3")

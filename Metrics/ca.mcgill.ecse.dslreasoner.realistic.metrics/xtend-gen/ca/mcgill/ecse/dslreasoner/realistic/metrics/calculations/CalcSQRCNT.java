@@ -5,13 +5,10 @@ import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodWithTraces;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -87,35 +84,13 @@ public class CalcSQRCNT {
     final Set nhDeepNodes = nhDeepRep.keySet();
     final Set nhNodes = nhRep.keySet();
     final Map<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>> deep2shallowNeighbours = new HashMap<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>>();
-    for (final Object deepNode : nhDeepNodes) {
-      {
-        final Set<AbstractNodeDescriptor> neighbours = new HashSet<AbstractNodeDescriptor>();
-        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNode);
-        Set _keySet = deepNodeDesc.getIncomingEdges().keySet();
-        for (final Object inEdge : _keySet) {
-          {
-            final IncomingRelation edgeDesc = ((IncomingRelation) inEdge);
-            Object _from = edgeDesc.getFrom();
-            neighbours.add(((AbstractNodeDescriptor) _from));
-          }
-        }
-        Set _keySet_1 = deepNodeDesc.getOutgoingEdges().keySet();
-        for (final Object outEdge : _keySet_1) {
-          {
-            final OutgoingRelation edgeDesc = ((OutgoingRelation) outEdge);
-            Object _to = edgeDesc.getTo();
-            neighbours.add(((AbstractNodeDescriptor) _to));
-          }
-        }
-        deep2shallowNeighbours.put(deepNodeDesc, neighbours);
-      }
-    }
+    Util.getNeighbourSet(nhDeepNodes, deep2shallowNeighbours);
     double totalSQR = 0.0;
     double totNumNodes = 0.0;
     double numNeighbours = 0.0;
-    for (final Object deepNode_1 : nhDeepNodes) {
+    for (final Object deepNode : nhDeepNodes) {
       {
-        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNode_1);
+        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNode);
         boolean _isEmpty = Util.toLocalNode(deepNodeDesc).getTypes().isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
@@ -130,7 +105,7 @@ public class CalcSQRCNT {
                 if (_notEquals) {
                   for (final Object pot2ndN : nhDeepNodes) {
                     if ((!foundSquare)) {
-                      boolean _notEquals_1 = (!Objects.equal(deepNode_1, pot2ndN));
+                      boolean _notEquals_1 = (!Objects.equal(deepNode, pot2ndN));
                       if (_notEquals_1) {
                         final FurtherNodeDescriptor pot2ndNDesc = ((FurtherNodeDescriptor) pot2ndN);
                         final Set<AbstractNodeDescriptor> neighbours = CollectionsUtil.<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>>lookup(pot2ndNDesc, deep2shallowNeighbours);
@@ -149,7 +124,7 @@ public class CalcSQRCNT {
           if ((numSquares != 0)) {
             sqr = ((numSquares / numNeighbours) / (numNeighbours - 1));
           }
-          Object _lookup = CollectionsUtil.<Object, Object>lookup(deepNode_1, nhDeepRep);
+          Object _lookup = CollectionsUtil.<Object, Object>lookup(deepNode, nhDeepRep);
           Integer numOcc = ((Integer) _lookup);
           double _sqr = sqr;
           sqr = (_sqr * (numOcc).intValue());

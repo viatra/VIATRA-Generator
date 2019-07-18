@@ -13,7 +13,9 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
@@ -142,6 +144,42 @@ public class Util {
         _xifexpression = correspondingMap.put(string, Integer.valueOf(_plus));
       } else {
         _xifexpression = correspondingMap.put(string, Integer.valueOf(i));
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public static Integer putInside(final FurtherNodeDescriptor object, final AbstractNodeDescriptor nodeDesc, final int i, final Map<FurtherNodeDescriptor, Map<AbstractNodeDescriptor, Integer>> map) {
+    Integer _xblockexpression = null;
+    {
+      final Map<AbstractNodeDescriptor, Integer> correspondingMap = CollectionsUtil.<FurtherNodeDescriptor, Map<AbstractNodeDescriptor, Integer>>lookup(object, map);
+      Integer _xifexpression = null;
+      boolean _contains = correspondingMap.keySet().contains(nodeDesc);
+      if (_contains) {
+        Integer _lookup = CollectionsUtil.<AbstractNodeDescriptor, Integer>lookup(nodeDesc, correspondingMap);
+        int _plus = ((_lookup).intValue() + i);
+        _xifexpression = correspondingMap.put(nodeDesc, Integer.valueOf(_plus));
+      } else {
+        _xifexpression = correspondingMap.put(nodeDesc, Integer.valueOf(i));
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  public static Integer putInside(final AbstractNodeDescriptor object, final FurtherNodeDescriptor nodeDesc, final int i, final Map<AbstractNodeDescriptor, Map<FurtherNodeDescriptor, Integer>> map) {
+    Integer _xblockexpression = null;
+    {
+      final Map<FurtherNodeDescriptor, Integer> correspondingMap = CollectionsUtil.<AbstractNodeDescriptor, Map<FurtherNodeDescriptor, Integer>>lookup(object, map);
+      Integer _xifexpression = null;
+      boolean _contains = correspondingMap.keySet().contains(nodeDesc);
+      if (_contains) {
+        Integer _lookup = CollectionsUtil.<FurtherNodeDescriptor, Integer>lookup(nodeDesc, correspondingMap);
+        int _plus = ((_lookup).intValue() + i);
+        _xifexpression = correspondingMap.put(nodeDesc, Integer.valueOf(_plus));
+      } else {
+        _xifexpression = correspondingMap.put(nodeDesc, Integer.valueOf(i));
       }
       _xblockexpression = _xifexpression;
     }
@@ -306,6 +344,32 @@ public class Util {
             }
           }
         }
+      }
+    }
+  }
+  
+  public static void getNeighbourSet(final Set nhDeepNodes, final Map<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>> deep2shallowNeighbours) {
+    for (final Object deepNode : nhDeepNodes) {
+      {
+        final Set<AbstractNodeDescriptor> neighbours = new HashSet<AbstractNodeDescriptor>();
+        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNode);
+        Set _keySet = deepNodeDesc.getIncomingEdges().keySet();
+        for (final Object inEdge : _keySet) {
+          {
+            final IncomingRelation edgeDesc = ((IncomingRelation) inEdge);
+            Object _from = edgeDesc.getFrom();
+            neighbours.add(((AbstractNodeDescriptor) _from));
+          }
+        }
+        Set _keySet_1 = deepNodeDesc.getOutgoingEdges().keySet();
+        for (final Object outEdge : _keySet_1) {
+          {
+            final OutgoingRelation edgeDesc = ((OutgoingRelation) outEdge);
+            Object _to = edgeDesc.getTo();
+            neighbours.add(((AbstractNodeDescriptor) _to));
+          }
+        }
+        deep2shallowNeighbours.put(deepNodeDesc, neighbours);
       }
     }
   }

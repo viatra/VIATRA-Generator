@@ -8,7 +8,9 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphNodeDescriptorGND
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.GraphShape
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.LocalNodeDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelation
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.Collection
 import java.util.Collections
@@ -36,21 +38,20 @@ class Util {
 			var baseD = Double.valueOf(base.get(i))
 			totBase += baseD
 			var expD = Double.valueOf(exp.get(i))
-			totDif += Math.abs((baseD-expD) )
+			totDif += Math.abs((baseD - expD))
 //			if (baseD > expD ) {
 //				underApproxExists = true
 //			}
 		}
-		
-		val avgDif = totDif/numElems
-		val avgBase = totBase/numElems
-		
-		var avgDifPerc = avgDif/avgBase
-		
+
+		val avgDif = totDif / numElems
+		val avgBase = totBase / numElems
+
+		var avgDifPerc = avgDif / avgBase
+
 //		if (underApproxExists) {
 //			avgDifPerc *= -1
 //		}
-		
 		return avgDifPerc
 	}
 
@@ -108,6 +109,26 @@ class Util {
 			correspondingMap.put(string, string.lookup(correspondingMap) + i)
 		} else {
 			correspondingMap.put(string, i)
+		}
+	}
+
+	def static putInside(FurtherNodeDescriptor object, AbstractNodeDescriptor nodeDesc, int i,
+		Map<FurtherNodeDescriptor, Map<AbstractNodeDescriptor, Integer>> map) {
+		val Map<AbstractNodeDescriptor, Integer> correspondingMap = object.lookup(map)
+		if (correspondingMap.keySet.contains(nodeDesc)) {
+			correspondingMap.put(nodeDesc, nodeDesc.lookup(correspondingMap) + i)
+		} else {
+			correspondingMap.put(nodeDesc, i)
+		}
+	}
+
+	def static putInside(AbstractNodeDescriptor object, FurtherNodeDescriptor nodeDesc, int i,
+		Map<AbstractNodeDescriptor, Map<FurtherNodeDescriptor, Integer>> map) {
+		val Map<FurtherNodeDescriptor, Integer> correspondingMap = object.lookup(map)
+		if (correspondingMap.keySet.contains(nodeDesc)) {
+			correspondingMap.put(nodeDesc, nodeDesc.lookup(correspondingMap) + i)
+		} else {
+			correspondingMap.put(nodeDesc, i)
 		}
 	}
 
@@ -256,6 +277,26 @@ class Util {
 					}
 				}
 			}
+		}
+	}
+
+	def static void getNeighbourSet(Set nhDeepNodes,
+		Map<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>> deep2shallowNeighbours) {
+		for (deepNode : nhDeepNodes) {
+
+			// get neighbours
+			val Set<AbstractNodeDescriptor> neighbours = new HashSet
+			val deepNodeDesc = deepNode as FurtherNodeDescriptor
+			for (inEdge : deepNodeDesc.incomingEdges.keySet) {
+				val edgeDesc = (inEdge as IncomingRelation)
+				neighbours.add(edgeDesc.from as AbstractNodeDescriptor)
+			}
+			for (outEdge : deepNodeDesc.outgoingEdges.keySet) {
+				val edgeDesc = (outEdge as OutgoingRelation)
+				neighbours.add(edgeDesc.to as AbstractNodeDescriptor)
+			}
+			deep2shallowNeighbours.put(deepNodeDesc, neighbours)
+
 		}
 	}
 

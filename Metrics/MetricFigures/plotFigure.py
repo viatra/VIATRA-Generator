@@ -7,23 +7,23 @@ def main():
 	#####SELECTION
 	sources = [
 			'A0'
-			#, 'A20'
+			, 'A20'
 			, 'Human'
-			#, 'RandomEMF-WF+7'
-			#, 'RandomEMF30'
+			, 'RandomEMF-WF+7'
+			, 'RandomEMF30'
 			, 'VS-i'
-			#, 'VS-WF+All5'
-			#, 'VS-WF+All6'
-			#, 'VS-WF+All7'
-			#, 'VS+i'
+			, 'VS-WF+All5'
+			, 'VS-WF+All6'
+			, 'VS-WF+All7'
+			, 'VS+i'
 			]
 
 	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA", 'SQRMAX', 'SQRTOT', 'SQROCOOL', 'SQROSZ', 'SQROSZ2'
-	metrics = ['SQRTOT']
+	metrics = ['SQRNUM']
 	
 	xyInverted = False
 	compilation = True
-	testing = "max" #max, true, false, min
+	testing = "false" #max, true, false, min
 	#####END SELECTION
 
 	if testing == "max" :
@@ -93,8 +93,8 @@ def main():
 				plt.xlabel("Models")
 				plt.ylabel("Metric Value")
 			plt.legend()
-			plt.savefig(pathName)
-			plt.show()
+			#plt.savefig(pathName)
+			#plt.show()
 			plt.clf()
 
 			srcInd += 1
@@ -144,8 +144,8 @@ def main():
 				plt.ylabel("Empirical Distribution function")
 				plt.xlabel("Metric Value")
 				plt.legend()
-				#plt.savefig(pathName)
-				#plt.show()
+				plt.savefig(pathName)
+				plt.show()
 				plt.clf()
 		#END COMPILATION FIGURE
 		print('END ' + metricName)
