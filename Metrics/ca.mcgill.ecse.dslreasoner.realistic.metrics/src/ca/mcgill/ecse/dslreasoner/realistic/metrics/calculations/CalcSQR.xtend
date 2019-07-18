@@ -16,7 +16,14 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
+/////////////////////
+//SQRCNT(v) = # squares containing v / total # squares in model
+/////////////////////
 class CalcSQRTOT {
+
+	// ///////////////////
+	// SQRTOT(v) = # squares containing v / total # of 2-jump paths from v
+	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	def static getSQRTOTfromModel(EObject model) {
@@ -30,7 +37,7 @@ class CalcSQRTOT {
 		Util.getNeighboursList(nodes, node2Neighbours)
 
 		// Measurements
-		var totalC = 0.0
+		var totalSQR = 0.0
 		var tot2ndNeighbours = 0.0
 		var num1stNeighbours = 0.0
 		for (node : nodes) {
@@ -74,10 +81,10 @@ class CalcSQRTOT {
 
 //			println("=" + sqr + ")")
 //			println()
-			totalC += sqr
+			totalSQR += sqr
 		}
 		val numNodes = nodes.length
-		val avgC = totalC / numNodes
+		val avgC = totalSQR / numNodes
 
 		return avgC
 	}
@@ -97,69 +104,73 @@ class CalcSQRTOT {
 		val nhNodes = nhRep.keySet
 
 		// Operations
-		var totalSQR = 0.0
+		val Map<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>> deep2shallowNeighbours = new HashMap
+
 		for (deepNode : nhDeepNodes) {
-			// travers node by node for the avg
-			val List<AbstractNodeDescriptor> relevantNodes = newArrayList
-			val nhDeepNodeDesc = deepNode as FurtherNodeDescriptor
-			for (inEdge : nhDeepNodeDesc.incomingEdges.keySet) {
+
+			// get neighbours
+			val Set<AbstractNodeDescriptor> neighbours = new HashSet
+			val deepNodeDesc = deepNode as FurtherNodeDescriptor
+			for (inEdge : deepNodeDesc.incomingEdges.keySet) {
 				val edgeDesc = (inEdge as IncomingRelation)
-				relevantNodes.add(edgeDesc.from as AbstractNodeDescriptor)
+				neighbours.add(edgeDesc.from as AbstractNodeDescriptor)
 			}
-			for (outEdge : nhDeepNodeDesc.outgoingEdges.keySet) {
+			for (outEdge : deepNodeDesc.outgoingEdges.keySet) {
 				val edgeDesc = (outEdge as OutgoingRelation)
-				relevantNodes.add(edgeDesc.to as AbstractNodeDescriptor)
+				neighbours.add(edgeDesc.to as AbstractNodeDescriptor)
 			}
+			deep2shallowNeighbours.put(deepNodeDesc, neighbours)
 
-			// look for 2ndNeighbours
-			var numerator = 0.0
-			var denominator = 0.0
-			for (pot2ndN : nhDeepNodes) {
-				numerator = 0.0
-				denominator = 0.0
-				if (deepNode != pot2ndN) {
-					// find neighbours
-					val List<AbstractNodeDescriptor> neighbours = newArrayList
-					val pot2ndNDesc = pot2ndN as FurtherNodeDescriptor
+		}
 
-					for (inEdge : nhDeepNodeDesc.incomingEdges.keySet) {
-						val edgeDesc = (inEdge as IncomingRelation)
-						neighbours.add(edgeDesc.from as AbstractNodeDescriptor)
-					}
+		var totalSQR = 0.0
+		var tot2ndNeighbours = 0.0
+		for (deepNode : nhDeepNodes) {
+			val deepNodeDesc = deepNode as FurtherNodeDescriptor
+			var numSquares = 0.0
+			if (!Util.toLocalNode(deepNodeDesc).types.empty) {
+				// get neighbours
+				val Set<AbstractNodeDescriptor> relevantNodes = deepNodeDesc.lookup(deep2shallowNeighbours)
 
-					for (outEdge : nhDeepNodeDesc.outgoingEdges.keySet) {
-						val edgeDesc = (outEdge as OutgoingRelation)
-						neighbours.add(edgeDesc.to as AbstractNodeDescriptor)
-					}
+				
+				// look for 2ndNeighbours
+				for (rel1 : relevantNodes) {
+					for (rel2 : relevantNodes) {
+						if (rel1 != rel2) {
+							for (pot2ndN : nhDeepNodes) {
+								if (deepNode != pot2ndN) {
+									// find neighbours
+									val pot2ndNDesc = pot2ndN as FurtherNodeDescriptor
+									val Set<AbstractNodeDescriptor> neighbours = pot2ndNDesc.lookup(
+										deep2shallowNeighbours)
 
-					// how many relevant neighbours?
-					var numRelNodes = 0
-					for (relNode : relevantNodes) {
-						if (neighbours.contains(relNode)) {
-							numRelNodes += 1
+									// see if pot2ndN is 2nd Neighbour
+									if (neighbours.contains(rel1)) {
+										tot2ndNeighbours++
+									}
+
+									// see if square exists
+									if (neighbours.contains(rel1) && neighbours.contains(rel2)) {
+										numSquares++
+									}
+								}
+							}
 						}
-					}
-
-					// DENOMINATOR and NUMERATOR
-					val factorialVal = Util.factorial(numRelNodes)
-					denominator += factorialVal * pot2ndNDesc.lookup(nhDeepRep) as Integer
-					if (numRelNodes > 1) {
-						numerator += factorialVal * pot2ndNDesc.lookup(nhDeepRep) as Integer
 					}
 				}
 			}
-			// add partial result
-//			println(numerator + "-----" + denominator)
-			if (numerator != 0) {
-				totalSQR += numerator / denominator
+			var sqr = 0.0
+			if (tot2ndNeighbours != 0) {
+				sqr = numSquares / tot2ndNeighbours
 			}
+
+			totalSQR += sqr
 
 		}
 
 		val numDeepNodes = nhDeepNodes.length
 
 		var averageSQR = 0.0
-//		println(totalSQR + "   " + numDeepNodes)
 		if (totalSQR != 0) {
 			averageSQR = totalSQR / numDeepNodes
 		}
@@ -169,6 +180,10 @@ class CalcSQRTOT {
 }
 
 class CalcSQRMAX {
+
+	// ///////////////////
+	// SQRMAX(v) = # squares containing v / (# neighbours of v * max # of neeighbours of any neighbour of v)
+	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	def static getSQRMAXfromModel(EObject model) {
@@ -241,6 +256,11 @@ class CalcSQRMAX {
 }
 
 class CalcSQROSZ {
+
+	// ///////////////////
+	// SQROSZ(v) = # depth-4 paths that lead to v / 
+	// (# 1-d neighs * # 2-d neighs * # 3-d neighs * # 4-d neighs) (NOT MEANINGFUL????)
+	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	def static getSQROSZfromModel(EObject model) {
@@ -300,6 +320,10 @@ class CalcSQROSZ {
 }
 
 class CalcSQROSZ2 {
+
+	// ///////////////////
+	// SQROSZ2(v) = # depth-4 paths that lead to v / total # depth-4 paths
+	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	def static getSQROSZ2fromModel(EObject model) {
@@ -353,6 +377,11 @@ class CalcSQROSZ2 {
 }
 
 class CalcSQROCOOL {
+
+	// ///////////////////
+	// SQROCOOL (v) = (# 1-d neighs * # 1-d neighs ) / (# 1-d neighs * # 1-d neighs * # depth-2 paths from v)
+	// 1 / # depth-2 paths from v
+	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	def static getSQROCOOLfromModel(EObject model) {
@@ -404,6 +433,11 @@ class CalcSQROCOOL {
 }
 
 class CalcSQRCNT {
+
+	// ///////////////////
+	// SQRCNT(v) = # neighbour pairs of v that are linked by a 2-jump path / 
+	// (# neighbours of v * (#neighbours of v - 1) )
+	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	def static getSQRCNTfromModel(EObject model) {
@@ -472,7 +506,6 @@ class CalcSQRCNT {
 		}
 
 //		println("RESULT : " + avgSQR)
-
 		return avgSQR
 	}
 
@@ -509,7 +542,6 @@ class CalcSQRCNT {
 
 		}
 //		printMap(nhDeepRep, deep2shallowNeighbours)
-
 		// Operations
 		var totalSQR = 0.0
 		var totNumNodes = 0.0
@@ -520,10 +552,11 @@ class CalcSQRCNT {
 				// get neighbours
 				val Set<AbstractNodeDescriptor> relevantNodes = deepNodeDesc.lookup(deep2shallowNeighbours)
 
-				numNeighbours = relevantNodes.size
+				numNeighbours = relevantNodes.size // V1
 				var numSquares = 0.0
 				// look for 2ndNeighbours
 				for (rel1 : relevantNodes) {
+//					numNeighbours += rel1.lookup(nhRep) as Integer//V2
 					for (rel2 : relevantNodes) {
 						var foundSquare = false
 						if (rel1 != rel2) {
@@ -538,7 +571,8 @@ class CalcSQRCNT {
 
 										// see if square exists
 										if (neighbours.contains(rel1) && neighbours.contains(rel2)) {
-											numSquares++
+											numSquares++ // V1
+//											numSquares += rel1.lookup(nhRep) as Integer * rel2.lookup(nhRep) as Integer//V2
 											foundSquare = true
 										}
 									}

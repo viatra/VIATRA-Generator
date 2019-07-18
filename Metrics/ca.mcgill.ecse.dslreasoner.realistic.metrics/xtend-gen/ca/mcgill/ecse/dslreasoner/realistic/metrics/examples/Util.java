@@ -61,19 +61,11 @@ public class Util {
         double _minus = DoubleExtensions.operator_minus(baseD, expD);
         double _abs = Math.abs(_minus);
         totDif = (_tDif + _abs);
-        boolean _greaterThan = (baseD.compareTo(expD) > 0);
-        if (_greaterThan) {
-          underApproxExists = true;
-        }
       }
     }
     final double avgDif = (totDif / numElems);
     final double avgBase = (totBase / numElems);
     double avgDifPerc = (avgDif / avgBase);
-    if (underApproxExists) {
-      double _avgDifPerc = avgDifPerc;
-      avgDifPerc = (_avgDifPerc * (-1));
-    }
     return avgDifPerc;
   }
   

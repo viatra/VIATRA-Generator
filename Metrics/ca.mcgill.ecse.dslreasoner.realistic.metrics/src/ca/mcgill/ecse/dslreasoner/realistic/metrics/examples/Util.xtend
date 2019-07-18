@@ -37,9 +37,9 @@ class Util {
 			totBase += baseD
 			var expD = Double.valueOf(exp.get(i))
 			totDif += Math.abs((baseD-expD) )
-			if (baseD > expD ) {
-				underApproxExists = true
-			}
+//			if (baseD > expD ) {
+//				underApproxExists = true
+//			}
 		}
 		
 		val avgDif = totDif/numElems
@@ -47,9 +47,9 @@ class Util {
 		
 		var avgDifPerc = avgDif/avgBase
 		
-		if (underApproxExists) {
-			avgDifPerc *= -1
-		}
+//		if (underApproxExists) {
+//			avgDifPerc *= -1
+//		}
 		
 		return avgDifPerc
 	}

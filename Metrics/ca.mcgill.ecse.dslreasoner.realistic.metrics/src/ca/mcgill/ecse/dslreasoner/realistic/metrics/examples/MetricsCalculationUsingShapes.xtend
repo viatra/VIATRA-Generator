@@ -37,19 +37,30 @@ abstract class MetricsCalculationUsingShapes {
 		ReteEngine.getClass
 
 		// SELECTION
-		val testing = false
+		val testing = true
 		val bounded = false
 		val lowEnd = 0
 		val highEnd = 20
-		val calcTesting = "max" //max, true, false, min
+		val calcTesting = "max" // max, true, false, min
 		// END SELECTION
 		var fileDir = ""
 
-		var files = newArrayList( /**/"A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5",  "Human")
+		var files = newArrayList( 
+			"A0"
+			//, "A20"
+			//, "R1"
+			//, "R2"
+			, "V1"
+			//, "V2"
+			//, "V3"
+			//, "V4"
+			//, "V5"
+			, "H"
+		)
 		if (testing) {
 			files = newArrayList("test")
 		}
-		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRCNT" /*, "SQROCOOL" */ )
+		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRTOT" /*, "SQROCOOL" */ )
 		var calcMethods = newArrayList
 		switch calcTesting {
 			case "max": calcMethods = newArrayList("Model", "NHLattice 0", "NHLattice 1", "NHLattice 2", "NHLattice 3")
@@ -70,7 +81,8 @@ abstract class MetricsCalculationUsingShapes {
 				case "V3": fileDir = "VS-WF+All6//models//"
 				case "V4": fileDir = "VS-WF+All7//models//"
 				case "V5": fileDir = "VS+i//models//"
-				default: fileDir = "Human//"
+				case "H" : fileDir = "Human//"
+				default: fileDir = "_Test//"
 			}
 			var inputs = ""
 			if (testing) {
@@ -80,7 +92,8 @@ abstract class MetricsCalculationUsingShapes {
 			}
 			val workspace = new FileSystemWorkspace(inputs, "")
 			// Create stats storage directory if necessary
-			val directoryPath = outputFolder + fileDir.split("//").get(0)
+			var directoryPath = outputFolder + fileDir.split("//").get(0)
+			
 			new File(directoryPath).mkdirs
 
 			// var List<List<String>> metricValues = newArrayList
@@ -157,7 +170,7 @@ abstract class MetricsCalculationUsingShapes {
 
 				val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
 				val classObj = Class.forName(className)
-				
+
 				val List<String> baseVals = newArrayList
 				val List<String> expVals = newArrayList
 
@@ -172,7 +185,6 @@ abstract class MetricsCalculationUsingShapes {
 					writer.append(calcMethod)
 
 //					var startTime = System.currentTimeMillis
-
 					expVals.clear
 					// for each file
 					var fileIndex = 0
@@ -233,15 +245,14 @@ abstract class MetricsCalculationUsingShapes {
 					// END PROGRESS TRACKER
 					}
 //					var duration = System.currentTimeMillis - startTime
-					if ( calcMethod != "Model" && calcTesting != "false" && calcTesting != "min" ) {
+					if (calcMethod != "Model" && calcTesting != "false" && calcTesting != "min") {
 						print("  AVG Dif% : " + Util.difference(baseVals, expVals))
 					}
 					// print and write
 					println()
 //					println("    time: " + duration)
 					writer.append("\n");
-					
-					
+
 				}
 				writer.close
 				println()
@@ -297,6 +308,15 @@ abstract class MetricsCalculationUsingShapes {
 //		// EXPERIMENTAL
 //		// ////////////
 		}
+		
+		//Atempt to run Python
+		
+//		var location ="python /c start python ../../../../../../../../../MetricFigures/plotFigure.py"
+//		var command = "python ";
+//		var param = newArrayList
+//		val Process p = Runtime.getRuntime().exec(location, null);
+//		print(p)
+////		Runtime.getRuntime().exec("cmd.exe /c \"" + command +  "\"", null);
 
 	}
 

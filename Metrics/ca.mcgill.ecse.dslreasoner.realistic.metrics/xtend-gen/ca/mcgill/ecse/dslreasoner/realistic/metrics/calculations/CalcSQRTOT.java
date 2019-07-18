@@ -11,11 +11,11 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
@@ -28,7 +28,7 @@ public class CalcSQRTOT {
     Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
     Util.fillWithNodes(nodes, node2Neighbours);
     Util.getNeighboursList(nodes, node2Neighbours);
-    double totalC = 0.0;
+    double totalSQR = 0.0;
     double tot2ndNeighbours = 0.0;
     double num1stNeighbours = 0.0;
     for (final EObject node : nodes) {
@@ -61,12 +61,12 @@ public class CalcSQRTOT {
         if ((num2ndNeighbours != 0)) {
           sqr = (numSquares / num2ndNeighbours);
         }
-        double _talC = totalC;
-        totalC = (_talC + sqr);
+        double _talSQR = totalSQR;
+        totalSQR = (_talSQR + sqr);
       }
     }
     final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
-    final double avgC = (totalC / numNodes);
+    final double avgC = (totalSQR / numNodes);
     return avgC;
   }
   
@@ -82,79 +82,68 @@ public class CalcSQRTOT {
     final HashMap nhRep = ((HashMap) _modelRepresentation_1);
     final Set nhDeepNodes = nhDeepRep.keySet();
     final Set nhNodes = nhRep.keySet();
-    double totalSQR = 0.0;
+    final Map<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>> deep2shallowNeighbours = new HashMap<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>>();
     for (final Object deepNode : nhDeepNodes) {
       {
-        final List<AbstractNodeDescriptor> relevantNodes = CollectionLiterals.<AbstractNodeDescriptor>newArrayList();
-        final FurtherNodeDescriptor nhDeepNodeDesc = ((FurtherNodeDescriptor) deepNode);
-        Set _keySet = nhDeepNodeDesc.getIncomingEdges().keySet();
+        final Set<AbstractNodeDescriptor> neighbours = new HashSet<AbstractNodeDescriptor>();
+        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNode);
+        Set _keySet = deepNodeDesc.getIncomingEdges().keySet();
         for (final Object inEdge : _keySet) {
           {
             final IncomingRelation edgeDesc = ((IncomingRelation) inEdge);
             Object _from = edgeDesc.getFrom();
-            relevantNodes.add(((AbstractNodeDescriptor) _from));
+            neighbours.add(((AbstractNodeDescriptor) _from));
           }
         }
-        Set _keySet_1 = nhDeepNodeDesc.getOutgoingEdges().keySet();
+        Set _keySet_1 = deepNodeDesc.getOutgoingEdges().keySet();
         for (final Object outEdge : _keySet_1) {
           {
             final OutgoingRelation edgeDesc = ((OutgoingRelation) outEdge);
             Object _to = edgeDesc.getTo();
-            relevantNodes.add(((AbstractNodeDescriptor) _to));
+            neighbours.add(((AbstractNodeDescriptor) _to));
           }
         }
-        double numerator = 0.0;
-        double denominator = 0.0;
-        for (final Object pot2ndN : nhDeepNodes) {
-          {
-            numerator = 0.0;
-            denominator = 0.0;
-            boolean _notEquals = (!Objects.equal(deepNode, pot2ndN));
-            if (_notEquals) {
-              final List<AbstractNodeDescriptor> neighbours = CollectionLiterals.<AbstractNodeDescriptor>newArrayList();
-              final FurtherNodeDescriptor pot2ndNDesc = ((FurtherNodeDescriptor) pot2ndN);
-              Set _keySet_2 = nhDeepNodeDesc.getIncomingEdges().keySet();
-              for (final Object inEdge_1 : _keySet_2) {
-                {
-                  final IncomingRelation edgeDesc = ((IncomingRelation) inEdge_1);
-                  Object _from = edgeDesc.getFrom();
-                  neighbours.add(((AbstractNodeDescriptor) _from));
+        deep2shallowNeighbours.put(deepNodeDesc, neighbours);
+      }
+    }
+    double totalSQR = 0.0;
+    double tot2ndNeighbours = 0.0;
+    for (final Object deepNode_1 : nhDeepNodes) {
+      {
+        final FurtherNodeDescriptor deepNodeDesc = ((FurtherNodeDescriptor) deepNode_1);
+        double numSquares = 0.0;
+        boolean _isEmpty = Util.toLocalNode(deepNodeDesc).getTypes().isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          final Set<AbstractNodeDescriptor> relevantNodes = CollectionsUtil.<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>>lookup(deepNodeDesc, deep2shallowNeighbours);
+          for (final AbstractNodeDescriptor rel1 : relevantNodes) {
+            for (final AbstractNodeDescriptor rel2 : relevantNodes) {
+              boolean _notEquals = (!Objects.equal(rel1, rel2));
+              if (_notEquals) {
+                for (final Object pot2ndN : nhDeepNodes) {
+                  boolean _notEquals_1 = (!Objects.equal(deepNode_1, pot2ndN));
+                  if (_notEquals_1) {
+                    final FurtherNodeDescriptor pot2ndNDesc = ((FurtherNodeDescriptor) pot2ndN);
+                    final Set<AbstractNodeDescriptor> neighbours = CollectionsUtil.<FurtherNodeDescriptor, Set<AbstractNodeDescriptor>>lookup(pot2ndNDesc, deep2shallowNeighbours);
+                    boolean _contains = neighbours.contains(rel1);
+                    if (_contains) {
+                      tot2ndNeighbours++;
+                    }
+                    if ((neighbours.contains(rel1) && neighbours.contains(rel2))) {
+                      numSquares++;
+                    }
+                  }
                 }
-              }
-              Set _keySet_3 = nhDeepNodeDesc.getOutgoingEdges().keySet();
-              for (final Object outEdge_1 : _keySet_3) {
-                {
-                  final OutgoingRelation edgeDesc = ((OutgoingRelation) outEdge_1);
-                  Object _to = edgeDesc.getTo();
-                  neighbours.add(((AbstractNodeDescriptor) _to));
-                }
-              }
-              int numRelNodes = 0;
-              for (final AbstractNodeDescriptor relNode : relevantNodes) {
-                boolean _contains = neighbours.contains(relNode);
-                if (_contains) {
-                  int _numRelNodes = numRelNodes;
-                  numRelNodes = (_numRelNodes + 1);
-                }
-              }
-              final Integer factorialVal = Util.factorial(Integer.valueOf(numRelNodes));
-              double _denominator = denominator;
-              Object _lookup = CollectionsUtil.<Object, Object>lookup(pot2ndNDesc, nhDeepRep);
-              int _multiply = ((factorialVal).intValue() * (((Integer) _lookup)).intValue());
-              denominator = (_denominator + _multiply);
-              if ((numRelNodes > 1)) {
-                double _numerator = numerator;
-                Object _lookup_1 = CollectionsUtil.<Object, Object>lookup(pot2ndNDesc, nhDeepRep);
-                int _multiply_1 = ((factorialVal).intValue() * (((Integer) _lookup_1)).intValue());
-                numerator = (_numerator + _multiply_1);
               }
             }
           }
         }
-        if ((numerator != 0)) {
-          double _talSQR = totalSQR;
-          totalSQR = (_talSQR + (numerator / denominator));
+        double sqr = 0.0;
+        if ((tot2ndNeighbours != 0)) {
+          sqr = (numSquares / tot2ndNeighbours);
         }
+        double _talSQR = totalSQR;
+        totalSQR = (_talSQR + sqr);
       }
     }
     final int numDeepNodes = ((Object[])Conversions.unwrapArray(nhDeepNodes, Object.class)).length;

@@ -47,17 +47,18 @@ public abstract class MetricsCalculationUsingShapes {
       YakindummPackage.eINSTANCE.eClass();
       LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
-      final boolean testing = false;
+      final boolean testing = true;
       final boolean bounded = false;
       final int lowEnd = 0;
       final int highEnd = 20;
       final String calcTesting = "max";
       String fileDir = "";
-      ArrayList<String> files = CollectionLiterals.<String>newArrayList("A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "Human");
+      ArrayList<String> files = CollectionLiterals.<String>newArrayList(
+        "A0", "V1", "H");
       if (testing) {
         files = CollectionLiterals.<String>newArrayList("test");
       }
-      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRCNT");
+      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRTOT");
       ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList();
       if (calcTesting != null) {
         switch (calcTesting) {
@@ -111,12 +112,15 @@ public abstract class MetricsCalculationUsingShapes {
               case "V5":
                 fileDir = "VS+i//models//";
                 break;
-              default:
+              case "H":
                 fileDir = "Human//";
+                break;
+              default:
+                fileDir = "_Test//";
                 break;
             }
           } else {
-            fileDir = "Human//";
+            fileDir = "_Test//";
           }
           String inputs = "";
           if (testing) {
@@ -126,7 +130,7 @@ public abstract class MetricsCalculationUsingShapes {
           }
           final FileSystemWorkspace workspace = new FileSystemWorkspace(inputs, "");
           String _get = fileDir.split("//")[0];
-          final String directoryPath = (outputFolder + _get);
+          String directoryPath = (outputFolder + _get);
           new File(directoryPath).mkdirs();
           double calcVal = 0.0;
           double realVal = 0.0;
