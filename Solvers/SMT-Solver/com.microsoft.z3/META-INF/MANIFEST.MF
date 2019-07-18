@@ -9,7 +9,7 @@ Bundle-ClassPath: com.microsoft.z3.jar
 Bundle-NativeCode: lib/libz3.so;
  lib/libz3java.so;
  osname=Linux;
- processor=x86_64;
+ processor=x86_64,
  lib/libz3.dylib;
  lib/libz3java.dylib;
  osname=MacOSX;
