@@ -3,6 +3,7 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.Maps
+import com.google.common.collect.Sets
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.UnifinishedMultiplicityQueries
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
@@ -18,6 +19,7 @@ import java.util.Map
 import java.util.Set
 import javax.naming.OperationNotSupportedException
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.emf.EMFScope
@@ -32,6 +34,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 
 	new(PartialInterpretation p, Set<? extends Type> possibleNewDynamicTypes,
 		Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> unfinishedMultiplicityQueries,
+		IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery,
 		PolyhedronSolver solver, boolean propagateRelations) {
 		super(p)
 		val builder = new PolyhedronBuilder(p)
@@ -49,7 +52,8 @@ class PolyhedronScopePropagator extends ScopePropagator {
 			if (maximumNumberOfNewNodes <= 0) {
 				throw new IllegalStateException("Maximum number of new nodes is negative")
 			}
-			builder.buildMultiplicityConstraints(unfinishedMultiplicityQueries, maximumNumberOfNewNodes)
+			builder.buildMultiplicityConstraints(unfinishedMultiplicityQueries, hasElementInContainmentQuery,
+				maximumNumberOfNewNodes)
 			updaters = builder.updaters
 		}
 	}
@@ -57,6 +61,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 	override void propagateAllScopeConstraints() {
 		resetBounds()
 		populatePolyhedronFromScope()
+		println(polyhedron)
 		val result = operator.saturate()
 		if (result == PolyhedronSaturationResult.EMPTY) {
 			throw new IllegalStateException("Scope bounds cannot be satisfied")
@@ -66,7 +71,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 				super.propagateAllScopeConstraints()
 			}
 		}
-		// println(polyhedron)
+		println(polyhedron)
 	}
 
 	def resetBounds() {
@@ -188,13 +193,16 @@ class PolyhedronScopePropagator extends ScopePropagator {
 
 		def buildMultiplicityConstraints(
 			Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> constraints,
+			IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery,
 			int maximumNuberOfNewNodes) {
 			infinity = maximumNuberOfNewNodes * INFINITY_SCALE
 			queryEngine = ViatraQueryEngine.on(new EMFScope(p))
 			updatersBuilder = ImmutableList.builder
-			for (pair : constraints.entrySet.filter[key.containment].groupBy[key.targetType].entrySet) {
+			val containmentConstraints = constraints.entrySet.filter[key.containment].groupBy[key.targetType]
+			for (pair : containmentConstraints.entrySet) {
 				buildContainmentConstraints(pair.key, pair.value)
 			}
+			buildConstainmentRootConstraints(containmentConstraints.keySet, hasElementInContainmentQuery)
 			for (pair : constraints.entrySet) {
 				val constraint = pair.key
 				if (!constraint.containment) {
@@ -247,6 +255,19 @@ class PolyhedronScopePropagator extends ScopePropagator {
 			val updater = new ContainmentConstraintUpdater(containedType.name, orphanLowerBound, orphanUpperBound,
 				unfinishedMultiplicitiesMatchersBuilder.build, remainingContentsQueriesBuilder.build)
 			updatersBuilder.add(updater)
+		}
+
+		private def buildConstainmentRootConstraints(Set<Type> containedTypes,
+			IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery) {
+			val matcher = hasElementInContainmentQuery.getMatcher(queryEngine)
+			val rootDimensions = Sets.newHashSet(instanceCounts.values)
+			for (type : containedTypes) {
+				val containedDimensions = subtypeDimensions.get(type).keySet
+				rootDimensions.removeAll(containedDimensions)
+			}
+			for (dimension : rootDimensions) {
+				updatersBuilder.add(new ContainmentRootConstraintUpdater(dimension, matcher))
+			}
 		}
 
 		private def buildNonContainmentConstraints(RelationMultiplicityConstraint constraint,
@@ -366,12 +387,23 @@ class PolyhedronScopePropagator extends ScopePropagator {
 			orphansUpperBound.tightenLowerBound(sum)
 		}
 	}
-	
+
 	@FinalFieldsConstructor
 	static class ContainmentRootConstraintUpdater implements RelationConstraintUpdater {
-		
+		val LinearBoundedExpression typeCardinality
+		val ViatraQueryMatcher<? extends IPatternMatch> hasElementInContainmentMatcher
+
 		override update(PartialInterpretation p) {
-			throw new UnsupportedOperationException("TODO: auto-generated method stub")
+			if (hasElementInContainmentMatcher.hasMatch(p)) {
+				typeCardinality.tightenUpperBound(0)
+			} else {
+				typeCardinality.tightenUpperBound(1)
+			}
+		}
+
+		private static def <T extends IPatternMatch> hasMatch(ViatraQueryMatcher<T> matcher, PartialInterpretation p) {
+			val match = matcher.newMatch(p.problem, p)
+			matcher.countMatches(match) != 0
 		}
 	}
 }

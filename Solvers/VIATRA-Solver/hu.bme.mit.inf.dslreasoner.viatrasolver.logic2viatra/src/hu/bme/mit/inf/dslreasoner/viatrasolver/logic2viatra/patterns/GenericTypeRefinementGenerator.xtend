@@ -11,7 +11,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import java.util.HashMap
 
 class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
-	public new(PatternGenerator base) {
+	new(PatternGenerator base) {
 		super(base)
 	}
 	override requiresTypeAnalysis() { false }
@@ -25,7 +25,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 			inverseRelations.put(it.inverseB,it.inverseA)
 		]
 		return '''
-		private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
+		pattern «hasElementInContainmentName»(problem:LogicProblem, interpretation:PartialInterpretation)
 		«FOR type :containment.typesOrderedInHierarchy SEPARATOR "or"»{
 			find interpretation(problem,interpretation);
 			«base.typeIndexer.referInstanceOf(type,Modality.MUST,"root")»
@@ -77,7 +77,7 @@ class GenericTypeRefinementGenerator extends TypeRefinementGenerator {
 					typeInterpretation:PartialComplexTypeInterpretation)
 				{
 					find interpretation(problem,interpretation);
-					neg find hasElementInContainment(problem,interpretation);
+					neg find  «hasElementInContainmentName»(problem,interpretation);
 					PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
 					PartialComplexTypeInterpretation.interpretationOf.name(type,"«type.name»");
 					«base.typeIndexer.referInstanceOf(type,Modality.MAY,"newObject")»

@@ -45,6 +45,7 @@ class ModelGenerationStatistics {
 	Collection<? extends BatchTransformationRule<?, ?>> relationRefinementRules
 
 	List<MultiplicityGoalConstraintCalculator> unfinishedMultiplicities
+
 	Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWF
 
 	Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWF
@@ -125,8 +126,8 @@ class ModelGenerationMethodProvider {
 			case PolyhedralRelations: {
 				val types = queries.refineObjectQueries.keySet.map[newType].toSet
 				val solver = new CbcPolyhedronSolver
-				new PolyhedronScopePropagator(emptySolution, types, queries.multiplicityConstraintQueries, solver,
-					scopePropagatorStrategy.requiresUpperBoundIndexing)
+				new PolyhedronScopePropagator(emptySolution, types, queries.multiplicityConstraintQueries,
+					queries.hasElementInContainmentQuery, solver, scopePropagatorStrategy.requiresUpperBoundIndexing)
 			}
 			default:
 				throw new IllegalArgumentException("Unknown scope propagator strategy: " + scopePropagatorStrategy)

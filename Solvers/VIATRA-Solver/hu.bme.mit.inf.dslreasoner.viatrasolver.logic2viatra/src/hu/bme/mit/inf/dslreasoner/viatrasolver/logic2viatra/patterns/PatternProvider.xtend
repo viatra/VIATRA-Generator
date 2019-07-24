@@ -12,6 +12,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationConstraints
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationMultiplicityConstraint
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.util.ParseUtil
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
@@ -25,13 +26,13 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 
 @Data
 class GeneratedPatterns {
 	public Map<Relation, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
 	public Map<Relation, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWFQueries
 	public Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> multiplicityConstraintQueries
+	public IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery
 	public Map<Relation, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedMulticiplicityQueries
 	public Map<ObjectCreationPrecondition, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
@@ -105,6 +106,8 @@ class PatternProvider {
 				unrepairableMultiplicityQueryName?.lookup(queries),
 				remainingInverseMultiplicityQueryName?.lookup(queries), remainingContentsQueryName?.lookup(queries))
 		]
+		val hasElementInContainmentQuery = patternGenerator.typeRefinementGenerator.hasElementInContainmentName.lookup(
+			queries)
 		val unfinishedMultiplicityQueries = multiplicityConstraintQueries.entrySet.filter [
 			value.unfinishedMultiplicityQuery !== null
 		].toMap([key.relation], [value.unfinishedMultiplicityQuery])
@@ -126,6 +129,7 @@ class PatternProvider {
 			invalidWFQueries,
 			unfinishedWFQueries,
 			multiplicityConstraintQueries,
+			hasElementInContainmentQuery,
 			unfinishedMultiplicityQueries,
 			refineObjectsQueries,
 			refineTypeQueries,
