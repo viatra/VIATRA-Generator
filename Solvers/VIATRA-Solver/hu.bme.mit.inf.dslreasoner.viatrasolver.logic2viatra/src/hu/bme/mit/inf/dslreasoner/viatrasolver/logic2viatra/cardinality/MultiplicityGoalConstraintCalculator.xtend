@@ -1,4 +1,4 @@
-package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra
+package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 
 import org.eclipse.emf.common.notify.Notifier
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
@@ -37,7 +37,7 @@ class MultiplicityGoalConstraintCalculator {
 		val allMatches = this.matcher.allMatches
 		for(match : allMatches) {
 			//println(targetRelationName+ " missing multiplicity: "+match.get(3))
-			val missingMultiplicity = match.get(4) as Integer
+			val missingMultiplicity = match.get(2) as Integer
 			res += missingMultiplicity
 		}
 		//println(targetRelationName+ " all missing multiplicities: "+res)

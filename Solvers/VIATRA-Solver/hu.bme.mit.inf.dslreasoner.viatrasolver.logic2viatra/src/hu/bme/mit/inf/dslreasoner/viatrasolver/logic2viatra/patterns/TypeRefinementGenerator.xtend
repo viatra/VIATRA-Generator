@@ -86,8 +86,8 @@ abstract class TypeRefinementGenerator {
 	}
 	
 	protected def String patternName(Relation containmentRelation, Relation inverseContainment, Type newType) {
-		if(containmentRelation != null) {
-			if(inverseContainment != null) {
+		if(containmentRelation !== null) {
+			if(inverseContainment !== null) {
 				'''createObject_«base.canonizeName(newType.name)»_by_«base.canonizeName(containmentRelation.name)»_with_«base.canonizeName(inverseContainment.name)»'''
 			} else {
 				'''createObject_«base.canonizeName(newType.name)»_by_«base.canonizeName(containmentRelation.name)»'''

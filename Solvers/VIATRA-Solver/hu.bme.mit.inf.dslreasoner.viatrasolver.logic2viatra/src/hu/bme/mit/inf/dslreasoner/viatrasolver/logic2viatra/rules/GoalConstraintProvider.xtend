@@ -1,6 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules
 
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.MultiplicityGoalConstraintCalculator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.MultiplicityGoalConstraintCalculator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
 import java.util.ArrayList
 

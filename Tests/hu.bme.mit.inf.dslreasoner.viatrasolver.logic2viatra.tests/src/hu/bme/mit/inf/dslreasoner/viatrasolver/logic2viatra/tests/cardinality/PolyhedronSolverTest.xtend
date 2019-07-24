@@ -17,7 +17,7 @@ abstract class PolyhedronSolverTest {
 	var PolyhedronSaturationOperator operator
 
 	protected def PolyhedronSolver createSolver()
-	
+
 	@Before
 	def void setUp() {
 		solver = createSolver()
@@ -183,7 +183,7 @@ abstract class PolyhedronSolverTest {
 
 		assertEquals(PolyhedronSaturationResult.EMPTY, result)
 	}
-	
+
 	@Test
 	def void unboundedRelaxationWithNoIntegerSolutionTest() {
 		val x = new Dimension("x", 0, 1)
@@ -193,7 +193,29 @@ abstract class PolyhedronSolverTest {
 			#[new LinearConstraint(#{x -> 2}, 1, 1)],
 			#[x, y]
 		))
-		
+
+		val result = saturate()
+
+		assertEquals(PolyhedronSaturationResult.EMPTY, result)
+	}
+
+	@Test
+	def void emptyConstraintTest() {
+		val constraint = new LinearConstraint(emptyMap, 0, 1)
+		createSaturationOperator(new Polyhedron(#[], #[constraint], #[constraint]))
+
+		val result = saturate()
+
+		assertEquals(PolyhedronSaturationResult.SATURATED, result)
+		assertEquals(0, constraint.lowerBound)
+		assertEquals(0, constraint.upperBound)
+	}
+
+	@Test
+	def void emptyConstraintUnsatisfiableTest() {
+		val constraint = new LinearConstraint(emptyMap, 1, 0)
+		createSaturationOperator(new Polyhedron(#[], #[constraint], #[constraint]))
+
 		val result = saturate()
 
 		assertEquals(PolyhedronSaturationResult.EMPTY, result)

@@ -1,7 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.LowerMultiplicityAssertion
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
@@ -17,6 +16,7 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Transform
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationConstraints
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.HashMap
 import java.util.Map
@@ -26,22 +26,26 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 
 class PatternGenerator {
-	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer //= new TypeIndexer(this)
-	@Accessors(PUBLIC_GETTER) val RelationDeclarationIndexer relationDeclarationIndexer = new RelationDeclarationIndexer(this)
-	@Accessors(PUBLIC_GETTER) val RelationDefinitionIndexer relationDefinitionIndexer = new RelationDefinitionIndexer(this)
+	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer // = new TypeIndexer(this)
+	@Accessors(PUBLIC_GETTER) val RelationDeclarationIndexer relationDeclarationIndexer = new RelationDeclarationIndexer(
+		this)
+	@Accessors(PUBLIC_GETTER) val RelationDefinitionIndexer relationDefinitionIndexer = new RelationDefinitionIndexer(
+		this)
 	@Accessors(PUBLIC_GETTER) val ContainmentIndexer containmentIndexer = new ContainmentIndexer(this)
 	@Accessors(PUBLIC_GETTER) val InvalidIndexer invalidIndexer = new InvalidIndexer(this)
-	@Accessors(PUBLIC_GETTER) val UnfinishedIndexer unfinishedIndexer = new UnfinishedIndexer(this)
-	@Accessors(PUBLIC_GETTER) val TypeRefinementGenerator typeRefinementGenerator //= new RefinementGenerator(this)
-	@Accessors(PUBLIC_GETTER) val RelationRefinementGenerator relationRefinementGenerator = new RelationRefinementGenerator(this)
-	
-	public new(TypeInferenceMethod typeInferenceMethod) {
-		if(typeInferenceMethod == TypeInferenceMethod.Generic) {
+	@Accessors(PUBLIC_GETTER) val UnfinishedIndexer unfinishedIndexer
+	@Accessors(PUBLIC_GETTER) val TypeRefinementGenerator typeRefinementGenerator // = new RefinementGenerator(this)
+	@Accessors(PUBLIC_GETTER) val RelationRefinementGenerator relationRefinementGenerator = new RelationRefinementGenerator(
+		this)
+
+	new(TypeInferenceMethod typeInferenceMethod, ScopePropagatorStrategy scopePropagatorStrategy) {
+		if (typeInferenceMethod == TypeInferenceMethod.Generic) {
 			this.typeIndexer = new GenericTypeIndexer(this)
 			this.typeRefinementGenerator = new GenericTypeRefinementGenerator(this)
-		} else if(typeInferenceMethod == TypeInferenceMethod.PreliminaryAnalysis) {
+		} else if (typeInferenceMethod == TypeInferenceMethod.PreliminaryAnalysis) {
 			this.typeIndexer = new TypeIndexerWithPreliminaryTypeAnalysis(this)
 			this.typeRefinementGenerator = new TypeRefinementWithPreliminaryTypeAnalysis(this)
 		} else {
@@ -49,112 +53,100 @@ class PatternGenerator {
 			this.typeRefinementGenerator = null
 			throw new IllegalArgumentException('''Unknown type indexing technique : «typeInferenceMethod.name»''')
 		}
+		this.unfinishedIndexer = new UnfinishedIndexer(this, scopePropagatorStrategy.requiresUpperBoundIndexing)
 	}
-	
-	public def requiresTypeAnalysis() {
+
+	def requiresTypeAnalysis() {
 		typeIndexer.requiresTypeAnalysis || typeRefinementGenerator.requiresTypeAnalysis
 	}
-	
-	public dispatch def CharSequence referRelation(
-		RelationDeclaration referred,
-		String sourceVariable,
-		String targetVariable,
-		Modality modality,
-		Map<String,PQuery> fqn2PQuery)
-	{
-		return this.relationDeclarationIndexer.referRelation(referred,sourceVariable,targetVariable,modality)
+
+	dispatch def CharSequence referRelation(RelationDeclaration referred, String sourceVariable, String targetVariable,
+		Modality modality, Map<String, PQuery> fqn2PQuery) {
+		return this.relationDeclarationIndexer.referRelation(referred, sourceVariable, targetVariable, modality)
 	}
-	public dispatch def CharSequence referRelation(
-		RelationDefinition referred,
-		String sourceVariable,
-		String targetVariable,
-		Modality modality,
-		Map<String,PQuery> fqn2PQuery)
-	{
-		val pattern = referred.annotations.filter(TransfomedViatraQuery).head.patternFullyQualifiedName.lookup(fqn2PQuery)
-		return this.relationDefinitionIndexer.referPattern(pattern,#[sourceVariable,targetVariable],modality,true,false)
+
+	dispatch def CharSequence referRelation(RelationDefinition referred, String sourceVariable, String targetVariable,
+		Modality modality, Map<String, PQuery> fqn2PQuery) {
+		val pattern = referred.annotations.filter(TransfomedViatraQuery).head.patternFullyQualifiedName.lookup(
+			fqn2PQuery)
+		return this.relationDefinitionIndexer.referPattern(pattern, #[sourceVariable, targetVariable], modality, true,
+			false)
 	}
-	
-	def public referRelationByName(EReference reference,
-		String sourceVariable,
-		String targetVariable,
-		Modality modality)
-	{
-		'''find «modality.name.toLowerCase»InRelation«canonizeName('''«reference.name» reference «reference.EContainingClass.name»''')
-		»(problem,interpretation,«sourceVariable»,«targetVariable»);'''
+
+	def referRelationByName(EReference reference, String sourceVariable, String targetVariable, Modality modality) {
+		'''find «modality.name.toLowerCase»InRelation«canonizeName('''«reference.name» reference «reference.EContainingClass.name»''')»(problem,interpretation,«sourceVariable»,«targetVariable»);'''
 	}
-	
-	def public CharSequence referAttributeByName(EAttribute attribute,
-		String sourceVariable,
-		String targetVariable,
-		Modality modality)
-	{
-		'''find «modality.name.toLowerCase»InRelation«canonizeName('''«attribute.name» attribute «attribute.EContainingClass.name»''')
-		»(problem,interpretation,«sourceVariable»,«targetVariable»);'''
+
+	def CharSequence referAttributeByName(EAttribute attribute, String sourceVariable, String targetVariable,
+		Modality modality) {
+		'''find «modality.name.toLowerCase»InRelation«canonizeName('''«attribute.name» attribute «attribute.EContainingClass.name»''')»(problem,interpretation,«sourceVariable»,«targetVariable»);'''
 	}
-	
-	public def canonizeName(String name) {
+
+	def canonizeName(String name) {
 		name.split(' ').join('_')
 	}
-	
-	public def lowerMultiplicities(LogicProblem problem) {
-		problem.assertions.map[annotations].flatten.filter(LowerMultiplicityAssertion).filter[!it.relation.isDerived]
+
+	def wfQueries(LogicProblem problem) {
+		problem.assertions.map[it.annotations].flatten.filter(TransformedViatraWellformednessConstraint).map[it.query]
 	}
-	public def wfQueries(LogicProblem problem) {
-		problem.assertions.map[it.annotations]
-			.flatten
-			.filter(TransformedViatraWellformednessConstraint)
-			.map[it.query]
-	}
-	public def getContainments(LogicProblem p) {
+
+	def getContainments(LogicProblem p) {
 		return p.containmentHierarchies.head.containmentRelations
 	}
-	public def getInverseRelations(LogicProblem p) {
+
+	def getInverseRelations(LogicProblem p) {
 		val inverseRelations = new HashMap
-		p.annotations.filter(InverseRelationAssertion).forEach[
-			inverseRelations.put(it.inverseA,it.inverseB)
-			inverseRelations.put(it.inverseB,it.inverseA)
+		p.annotations.filter(InverseRelationAssertion).forEach [
+			inverseRelations.put(it.inverseA, it.inverseB)
+			inverseRelations.put(it.inverseB, it.inverseA)
 		]
 		return inverseRelations
 	}
-	public def isRepresentative(Relation relation, Relation inverse) {
-		if(inverse == null) {
+
+	def isRepresentative(Relation relation, Relation inverse) {
+		if (inverse === null) {
 			return true
 		} else {
-			relation.name.compareTo(inverse.name)<1
+			relation.name.compareTo(inverse.name) < 1
 		}
 	}
-	
-	public def isDerived(Relation relation) {
+
+	def isDerived(Relation relation) {
 		relation.annotations.exists[it instanceof DefinedByDerivedFeature]
 	}
-	public def getDerivedDefinition(RelationDeclaration relation) {
+
+	def getDerivedDefinition(RelationDeclaration relation) {
 		relation.annotations.filter(DefinedByDerivedFeature).head.query
 	}
-	
+
 	private def allTypeReferences(LogicProblem problem) {
 		problem.eAllContents.filter(TypeReference).toIterable
 	}
+
 	protected def hasBoolean(LogicProblem problem) {
 		problem.allTypeReferences.exists[it instanceof BoolTypeReference]
 	}
+
 	protected def hasInteger(LogicProblem problem) {
 		problem.allTypeReferences.exists[it instanceof IntTypeReference]
 	}
+
 	protected def hasReal(LogicProblem problem) {
 		problem.allTypeReferences.exists[it instanceof RealTypeReference]
 	}
+
 	protected def hasString(LogicProblem problem) {
 		problem.allTypeReferences.exists[it instanceof StringTypeReference]
 	}
-	
-	public def transformBaseProperties(
+
+	def transformBaseProperties(
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
-		Map<String,PQuery> fqn2PQuery,
-		TypeAnalysisResult typeAnalysisResult
+		Map<String, PQuery> fqn2PQuery,
+		TypeAnalysisResult typeAnalysisResult,
+		RelationConstraints constraints
 	) {
-		
+
 		return '''
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
@@ -188,7 +180,7 @@ class PatternGenerator {
 			
 			private pattern elementCloseWorld(element:DefinedElement) {
 				PartialInterpretation.openWorldElements(i,element);
-			    PartialInterpretation.maxNewElements(i,0);
+				PartialInterpretation.maxNewElements(i,0);
 			} or {
 				Scope.targetTypeInterpretation(scope,interpretation);
 				PartialTypeInterpratation.elements(interpretation,element);
@@ -221,7 +213,7 @@ class PatternGenerator {
 			//////////
 			// 1.1.1 primitive Type Indexers
 			//////////
-«««			pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+			«««			pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 «««				find interpretation(problem,interpretation);
 «««				PartialInterpretation.booleanelements(interpretation,element);
 «««			}
@@ -279,7 +271,7 @@ class PatternGenerator {
 			//////////
 			// 3.1 Unfinishedness Measured by Multiplicity
 			//////////
-			«unfinishedIndexer.generateUnfinishedMultiplicityQueries(problem,fqn2PQuery)»
+			«unfinishedIndexer.generateUnfinishedMultiplicityQueries(constraints.multiplicityConstraints,fqn2PQuery)»
 			
 			//////////
 			// 3.2 Unfinishedness Measured by WF Queries
@@ -302,6 +294,6 @@ class PatternGenerator {
 			// 4.3 Relation refinement
 			//////////
 			«relationRefinementGenerator.generateRefineReference(problem)»
-			'''
+		'''
 	}
 }

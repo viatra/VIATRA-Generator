@@ -1,10 +1,10 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.MultiplicityGoalConstraintCalculator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.MultiplicityGoalConstraintCalculator
 import java.util.Comparator
 import org.eclipse.viatra.dse.base.ThreadContext
-import org.eclipse.viatra.dse.objectives.IObjective
 import org.eclipse.viatra.dse.objectives.Comparators
+import org.eclipse.viatra.dse.objectives.IObjective
 
 class UnfinishedMultiplicityObjective implements IObjective {
 	val MultiplicityGoalConstraintCalculator unfinishedMultiplicity;
@@ -29,9 +29,9 @@ class UnfinishedMultiplicityObjective implements IObjective {
 	override satisifiesHardObjective(Double fitness) { return fitness <=0.01 }
 	
 	override setComparator(Comparator<Double> comparator) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException
 	}
 	override setLevel(int level) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException
 	}
 }

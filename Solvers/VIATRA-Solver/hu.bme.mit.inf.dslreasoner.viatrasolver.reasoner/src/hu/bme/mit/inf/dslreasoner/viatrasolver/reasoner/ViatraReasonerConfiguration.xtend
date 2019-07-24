@@ -51,7 +51,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	 */
 	public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
 	
-	public var ScopePropagatorStrategy scopePropagatorStrategy = ScopePropagatorStrategy.PolyhedralTypeHierarchy
+	public var ScopePropagatorStrategy scopePropagatorStrategy = ScopePropagatorStrategy.PolyhedralRelations
 
 	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
 }

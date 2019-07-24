@@ -5,7 +5,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.CbcPolyhedronSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.MultiplicityGoalConstraintCalculator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedronScopePropagator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationConstraintCalculator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
@@ -61,6 +63,7 @@ class ModelGenerationMethodProvider {
 	val PatternProvider patternProvider = new PatternProvider
 	val RefinementRuleProvider refinementRuleProvider = new RefinementRuleProvider
 	val GoalConstraintProvider goalConstraintProvider = new GoalConstraintProvider
+	val relationConstraintCalculator = new RelationConstraintCalculator
 
 	def ModelGenerationMethod createModelGenerationMethod(
 		LogicProblem logicProblem,
@@ -77,8 +80,9 @@ class ModelGenerationMethodProvider {
 		val Set<PQuery> existingQueries = logicProblem.relations.map[annotations].flatten.filter(TransfomedViatraQuery).
 			map[it.patternPQuery as PQuery].toSet
 
+		val relationConstraints = relationConstraintCalculator.calculateRelationConstraints(logicProblem)
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
-			workspace, typeInferenceMethod, writeFiles)
+			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, writeFiles)
 		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, queries)
 		scopePropagator.propagateAllScopeConstraints
 		val // LinkedHashMap<Pair<Relation, ? extends Type>, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>>
@@ -117,10 +121,12 @@ class ModelGenerationMethodProvider {
 		switch (scopePropagatorStrategy) {
 			case BasicTypeHierarchy:
 				new ScopePropagator(emptySolution)
-			case PolyhedralTypeHierarchy: {
+			case PolyhedralTypeHierarchy,
+			case PolyhedralRelations: {
 				val types = queries.refineObjectQueries.keySet.map[newType].toSet
 				val solver = new CbcPolyhedronSolver
-				new PolyhedronScopePropagator(emptySolution, types, solver)
+				new PolyhedronScopePropagator(emptySolution, types, queries.multiplicityConstraintQueries, solver,
+					scopePropagatorStrategy.requiresUpperBoundIndexing)
 			}
 			default:
 				throw new IllegalArgumentException("Unknown scope propagator strategy: " + scopePropagatorStrategy)

@@ -10,11 +10,6 @@ import java.util.Map
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 
-enum ScopePropagatorStrategy {
-	BasicTypeHierarchy,
-	PolyhedralTypeHierarchy
-}
-
 class ScopePropagator {
 	@Accessors(PROTECTED_GETTER) PartialInterpretation partialInterpretation
 	Map<PartialTypeInterpratation, Scope> type2Scope

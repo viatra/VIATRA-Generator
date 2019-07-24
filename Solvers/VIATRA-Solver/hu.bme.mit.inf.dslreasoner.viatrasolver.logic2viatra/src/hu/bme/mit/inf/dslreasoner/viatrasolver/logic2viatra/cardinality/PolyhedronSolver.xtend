@@ -52,18 +52,14 @@ class Polyhedron {
 	val List<LinearBoundedExpression> expressionsToSaturate
 
 	override toString() '''
-		Dimensions:
-			«FOR dimension : dimensions»
-				«dimension»
-			«ENDFOR»
-		Constraints:
-			«FOR constraint : constraints»
-				«constraint»
-			«ENDFOR»
-«««		Saturate:
-«««			«FOR expression : expressionsToSaturate»
-«««				«IF expression instanceof Dimension»dimension«ELSEIF expression instanceof LinearConstraint»constraint«ELSE»unknown«ENDIF» «expression»
-«««			«ENDFOR»
+	Dimensions:
+		«FOR dimension : dimensions»
+			«dimension»
+		«ENDFOR»
+	Constraints:
+		«FOR constraint : constraints»
+			«constraint»
+		«ENDFOR»
 	'''
 
 }
@@ -72,6 +68,18 @@ class Polyhedron {
 abstract class LinearBoundedExpression {
 	var Integer lowerBound
 	var Integer upperBound
+
+	def void tightenLowerBound(Integer tighterBound) {
+		if (lowerBound === null || (tighterBound !== null && lowerBound < tighterBound)) {
+			lowerBound = tighterBound
+		}
+	}
+
+	def void tightenUpperBound(Integer tighterBound) {
+		if (upperBound === null || (tighterBound !== null && upperBound > tighterBound)) {
+			upperBound = tighterBound
+		}
+	}
 }
 
 @Accessors

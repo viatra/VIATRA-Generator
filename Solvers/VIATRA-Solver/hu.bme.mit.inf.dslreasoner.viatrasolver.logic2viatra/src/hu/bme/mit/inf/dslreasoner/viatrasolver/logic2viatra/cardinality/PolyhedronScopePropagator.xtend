@@ -2,90 +2,60 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
+import com.google.common.collect.Maps
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.UnifinishedMultiplicityQueries
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.Scope
 import java.util.ArrayDeque
+import java.util.ArrayList
 import java.util.HashMap
 import java.util.HashSet
+import java.util.List
 import java.util.Map
 import java.util.Set
+import javax.naming.OperationNotSupportedException
+import org.eclipse.viatra.query.runtime.api.IPatternMatch
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import org.eclipse.viatra.query.runtime.emf.EMFScope
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 class PolyhedronScopePropagator extends ScopePropagator {
 	val Map<Scope, LinearBoundedExpression> scopeBounds
-	val LinearConstraint topLevelBounds
+	val LinearBoundedExpression topLevelBounds
+	val Polyhedron polyhedron
 	val PolyhedronSaturationOperator operator
+	List<RelationConstraintUpdater> updaters = emptyList
 
-	new(PartialInterpretation p, Set<? extends Type> possibleNewDynamicTypes, PolyhedronSolver solver) {
+	new(PartialInterpretation p, Set<? extends Type> possibleNewDynamicTypes,
+		Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> unfinishedMultiplicityQueries,
+		PolyhedronSolver solver, boolean propagateRelations) {
 		super(p)
-		val instanceCounts = possibleNewDynamicTypes.toInvertedMap[new Dimension(name, 0, null)]
-		val primitiveDimensions = new HashMap
-		val constraintsBuilder = ImmutableList.builder
-		val scopeBoundsBuilder = ImmutableMap.builder
-		// Dimensions for instantiable types were created according to the type analysis,
-		// but for any possible primitive types, we create them on demand,
-		// as there is no Type directly associated with a PartialPrimitiveInterpretation.
-		// Below we will assume that each PartialTypeInterpretation has at most one Scope.
-		for (scope : p.scopes) {
-			switch (targetTypeInterpretation : scope.targetTypeInterpretation) {
-				PartialPrimitiveInterpretation: {
-					val dimension = primitiveDimensions.computeIfAbsent(targetTypeInterpretation) [ interpretation |
-						new Dimension(interpretation.eClass.name, 0, null)
-					]
-					scopeBoundsBuilder.put(scope, dimension)
-				}
-				PartialComplexTypeInterpretation: {
-					val complexType = targetTypeInterpretation.interpretationOf
-					val dimensions = findSubtypeDimensions(complexType, instanceCounts)
-					switch (dimensions.size) {
-						case 0:
-							if (scope.minNewElements > 0) {
-								throw new IllegalArgumentException("Found scope for " + complexType.name +
-									", but the type cannot be instantiated")
-							}
-						case 1:
-							scopeBoundsBuilder.put(scope, dimensions.head)
-						default: {
-							val constraint = new LinearConstraint(dimensions.toInvertedMap[1], null, null)
-							constraintsBuilder.add(constraint)
-							scopeBoundsBuilder.put(scope, constraint)
-						}
-					}
-				}
-				default:
-					throw new IllegalArgumentException("Unknown PartialTypeInterpretation: " + targetTypeInterpretation)
-			}
-		}
-		val allDimensions = ImmutableList.builder.addAll(instanceCounts.values).addAll(primitiveDimensions.values).build
-		scopeBounds = scopeBoundsBuilder.build
-		topLevelBounds = new LinearConstraint(allDimensions.toInvertedMap[1], null, null)
-		constraintsBuilder.add(topLevelBounds)
-		val expressionsToSaturate = ImmutableList.builder.addAll(scopeBounds.values).add(topLevelBounds).build
-		val polyhedron = new Polyhedron(allDimensions, constraintsBuilder.build, expressionsToSaturate)
+		val builder = new PolyhedronBuilder(p)
+		builder.buildPolyhedron(possibleNewDynamicTypes)
+		scopeBounds = builder.scopeBounds
+		topLevelBounds = builder.topLevelBounds
+		polyhedron = builder.polyhedron
 		operator = solver.createSaturationOperator(polyhedron)
-	}
-
-	private def findSubtypeDimensions(Type type, Map<Type, Dimension> instanceCounts) {
-		val subtypes = new HashSet
-		val dimensions = new HashSet
-		val stack = new ArrayDeque
-		stack.addLast(type)
-		while (!stack.empty) {
-			val subtype = stack.removeLast
-			if (subtypes.add(subtype)) {
-				val dimension = instanceCounts.get(subtype)
-				if (dimension !== null) {
-					dimensions.add(dimension)
-				}
-				stack.addAll(subtype.subtypes)
+		if (propagateRelations) {
+			propagateAllScopeConstraints()
+			val maximumNumberOfNewNodes = topLevelBounds.upperBound
+			if (maximumNumberOfNewNodes === null) {
+				throw new IllegalStateException("Could not determine maximum number of new nodes, it may be unbounded")
 			}
+			if (maximumNumberOfNewNodes <= 0) {
+				throw new IllegalStateException("Maximum number of new nodes is negative")
+			}
+			builder.buildMultiplicityConstraints(unfinishedMultiplicityQueries, maximumNumberOfNewNodes)
+			updaters = builder.updaters
 		}
-		dimensions
 	}
 
 	override void propagateAllScopeConstraints() {
+		resetBounds()
 		populatePolyhedronFromScope()
 		val result = operator.saturate()
 		if (result == PolyhedronSaturationResult.EMPTY) {
@@ -96,20 +66,35 @@ class PolyhedronScopePropagator extends ScopePropagator {
 				super.propagateAllScopeConstraints()
 			}
 		}
+		// println(polyhedron)
+	}
+
+	def resetBounds() {
+		for (dimension : polyhedron.dimensions) {
+			dimension.lowerBound = 0
+			dimension.upperBound = null
+		}
+		for (constraint : polyhedron.constraints) {
+			constraint.lowerBound = null
+			constraint.upperBound = null
+		}
 	}
 
 	private def populatePolyhedronFromScope() {
-		topLevelBounds.lowerBound = partialInterpretation.minNewElements
+		topLevelBounds.tightenLowerBound(partialInterpretation.minNewElements)
 		if (partialInterpretation.maxNewElements >= 0) {
-			topLevelBounds.upperBound = partialInterpretation.maxNewElements
+			topLevelBounds.tightenUpperBound(partialInterpretation.maxNewElements)
 		}
 		for (pair : scopeBounds.entrySet) {
 			val scope = pair.key
 			val bounds = pair.value
-			bounds.lowerBound = scope.minNewElements
+			bounds.tightenLowerBound(scope.minNewElements)
 			if (scope.maxNewElements >= 0) {
-				bounds.upperBound = scope.maxNewElements
+				bounds.tightenUpperBound(scope.maxNewElements)
 			}
+		}
+		for (updater : updaters) {
+			updater.update(partialInterpretation)
 		}
 	}
 
@@ -149,6 +134,244 @@ class PolyhedronScopePropagator extends ScopePropagator {
 		}
 		if (bounds.upperBound === null) {
 			throw new IllegalArgumentException("Infinite upper bound: " + bounds)
+		}
+	}
+
+	private static def <T extends IPatternMatch> getCalculatedMultiplicity(ViatraQueryMatcher<T> matcher,
+		PartialInterpretation p) {
+		val match = matcher.newEmptyMatch
+		match.set(0, p.problem)
+		match.set(1, p)
+		val iterator = matcher.streamAllMatches(match).iterator
+		if (!iterator.hasNext) {
+			return null
+		}
+		val value = iterator.next.get(2) as Integer
+		if (iterator.hasNext) {
+			throw new IllegalArgumentException("Multiplicity calculation query has more than one match")
+		}
+		value
+	}
+
+	@FinalFieldsConstructor
+	private static class PolyhedronBuilder {
+		static val INFINITY_SCALE = 10
+
+		val PartialInterpretation p
+
+		Map<Type, Dimension> instanceCounts
+		Map<Type, Map<Dimension, Integer>> subtypeDimensions
+		Map<Map<Dimension, Integer>, LinearBoundedExpression> expressionsCache
+		Map<Type, LinearBoundedExpression> typeBounds
+		int infinity
+		ViatraQueryEngine queryEngine
+		ImmutableList.Builder<RelationConstraintUpdater> updatersBuilder
+
+		Map<Scope, LinearBoundedExpression> scopeBounds
+		LinearBoundedExpression topLevelBounds
+		Polyhedron polyhedron
+		List<RelationConstraintUpdater> updaters
+
+		def buildPolyhedron(Set<? extends Type> possibleNewDynamicTypes) {
+			instanceCounts = possibleNewDynamicTypes.toInvertedMap[new Dimension(name, 0, null)]
+			val types = p.problem.types
+			expressionsCache = Maps.newHashMapWithExpectedSize(types.size)
+			subtypeDimensions = types.toInvertedMap[findSubtypeDimensions.toInvertedMap[1]]
+			typeBounds = ImmutableMap.copyOf(subtypeDimensions.mapValues[toExpression])
+			scopeBounds = buildScopeBounds
+			topLevelBounds = instanceCounts.values.toInvertedMap[1].toExpression
+			val dimensions = ImmutableList.copyOf(instanceCounts.values)
+			val expressionsToSaturate = ImmutableList.copyOf(scopeBounds.values)
+			polyhedron = new Polyhedron(dimensions, new ArrayList, expressionsToSaturate)
+			addCachedConstraintsToPolyhedron()
+		}
+
+		def buildMultiplicityConstraints(
+			Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> constraints,
+			int maximumNuberOfNewNodes) {
+			infinity = maximumNuberOfNewNodes * INFINITY_SCALE
+			queryEngine = ViatraQueryEngine.on(new EMFScope(p))
+			updatersBuilder = ImmutableList.builder
+			for (pair : constraints.entrySet.filter[key.containment].groupBy[key.targetType].entrySet) {
+				buildContainmentConstraints(pair.key, pair.value)
+			}
+			for (pair : constraints.entrySet) {
+				val constraint = pair.key
+				if (!constraint.containment) {
+					buildNonContainmentConstraints(constraint, pair.value)
+				}
+			}
+			updaters = updatersBuilder.build
+			addCachedConstraintsToPolyhedron()
+		}
+
+		private def addCachedConstraintsToPolyhedron() {
+			val constraints = new HashSet
+			constraints.addAll(expressionsCache.values.filter(LinearConstraint))
+			constraints.removeAll(polyhedron.constraints)
+			polyhedron.constraints.addAll(constraints)
+		}
+
+		private def buildContainmentConstraints(Type containedType,
+			List<Map.Entry<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries>> constraints) {
+			val typeCoefficients = subtypeDimensions.get(containedType)
+			val orphansLowerBoundCoefficients = new HashMap(typeCoefficients)
+			val orphansUpperBoundCoefficients = new HashMap(typeCoefficients)
+			val unfinishedMultiplicitiesMatchersBuilder = ImmutableList.builder
+			val remainingContentsQueriesBuilder = ImmutableList.builder
+			for (pair : constraints) {
+				val constraint = pair.key
+				val containerCoefficients = subtypeDimensions.get(constraint.sourceType)
+				if (constraint.isUpperBoundFinite) {
+					orphansLowerBoundCoefficients.addCoefficients(-constraint.upperBound, containerCoefficients)
+				} else {
+					orphansLowerBoundCoefficients.addCoefficients(-infinity, containerCoefficients)
+				}
+				orphansUpperBoundCoefficients.addCoefficients(-constraint.lowerBound, containerCoefficients)
+				val queries = pair.value
+				if (constraint.constrainsUnfinished) {
+					if (queries.unfinishedMultiplicityQuery === null) {
+						throw new IllegalArgumentException(
+							"Containment constraints need unfinished multiplicity queries")
+					}
+					unfinishedMultiplicitiesMatchersBuilder.add(
+						queries.unfinishedMultiplicityQuery.getMatcher(queryEngine))
+				}
+				if (queries.remainingContentsQuery === null) {
+					throw new IllegalArgumentException("Containment constraints need remaining contents queries")
+				}
+				remainingContentsQueriesBuilder.add(queries.remainingContentsQuery.getMatcher(queryEngine))
+			}
+			val orphanLowerBound = orphansLowerBoundCoefficients.toExpression
+			val orphanUpperBound = orphansUpperBoundCoefficients.toExpression
+			val updater = new ContainmentConstraintUpdater(containedType.name, orphanLowerBound, orphanUpperBound,
+				unfinishedMultiplicitiesMatchersBuilder.build, remainingContentsQueriesBuilder.build)
+			updatersBuilder.add(updater)
+		}
+
+		private def buildNonContainmentConstraints(RelationMultiplicityConstraint constraint,
+			UnifinishedMultiplicityQueries queries) {
+		}
+
+		private def addCoefficients(Map<Dimension, Integer> accumulator, int scale, Map<Dimension, Integer> a) {
+			for (pair : a.entrySet) {
+				val dimension = pair.key
+				val currentValue = accumulator.get(pair.key) ?: 0
+				val newValue = currentValue + scale * pair.value
+				if (newValue == 0) {
+					accumulator.remove(dimension)
+				} else {
+					accumulator.put(dimension, newValue)
+				}
+			}
+		}
+
+		private def findSubtypeDimensions(Type type) {
+			val subtypes = new HashSet
+			val dimensions = new HashSet
+			val stack = new ArrayDeque
+			stack.addLast(type)
+			while (!stack.empty) {
+				val subtype = stack.removeLast
+				if (subtypes.add(subtype)) {
+					val dimension = instanceCounts.get(subtype)
+					if (dimension !== null) {
+						dimensions.add(dimension)
+					}
+					stack.addAll(subtype.subtypes)
+				}
+			}
+			dimensions
+		}
+
+		private def toExpression(Map<Dimension, Integer> coefficients) {
+			expressionsCache.computeIfAbsent(coefficients) [ c |
+				if (c.size == 1 && c.entrySet.head.value == 1) {
+					c.entrySet.head.key
+				} else {
+					new LinearConstraint(c, null, null)
+				}
+			]
+		}
+
+		private def buildScopeBounds() {
+			val scopeBoundsBuilder = ImmutableMap.builder
+			for (scope : p.scopes) {
+				switch (targetTypeInterpretation : scope.targetTypeInterpretation) {
+					PartialPrimitiveInterpretation:
+						throw new OperationNotSupportedException("Primitive type scopes are not yet implemented")
+					PartialComplexTypeInterpretation: {
+						val complexType = targetTypeInterpretation.interpretationOf
+						val typeBound = typeBounds.get(complexType)
+						if (typeBound === null) {
+							if (scope.minNewElements > 0) {
+								throw new IllegalArgumentException("Found scope for " + complexType.name +
+									", but the type cannot be instantiated")
+							}
+						} else {
+							scopeBoundsBuilder.put(scope, typeBound)
+						}
+					}
+					default:
+						throw new IllegalArgumentException("Unknown PartialTypeInterpretation: " +
+							targetTypeInterpretation)
+				}
+			}
+			scopeBoundsBuilder.build
+		}
+	}
+
+	private static interface RelationConstraintUpdater {
+		def void update(PartialInterpretation p)
+	}
+
+	@FinalFieldsConstructor
+	static class ContainmentConstraintUpdater implements RelationConstraintUpdater {
+		val String name
+		val LinearBoundedExpression orphansLowerBound
+		val LinearBoundedExpression orphansUpperBound
+		val List<ViatraQueryMatcher<? extends IPatternMatch>> unfinishedMultiplicitiesMatchers
+		val List<ViatraQueryMatcher<? extends IPatternMatch>> remainingContentsQueries
+
+		override update(PartialInterpretation p) {
+			tightenLowerBound(p)
+			tightenUpperBound(p)
+		}
+
+		private def tightenLowerBound(PartialInterpretation p) {
+			var int sum = 0
+			for (matcher : remainingContentsQueries) {
+				val value = matcher.getCalculatedMultiplicity(p)
+				if (value === null) {
+					throw new IllegalArgumentException("Remaining contents count is missing for " + name)
+				}
+				if (value == -1) {
+					// Infinite upper bound, no need to tighten.
+					return
+				}
+				sum += value
+			}
+			orphansLowerBound.tightenUpperBound(sum)
+		}
+
+		private def tightenUpperBound(PartialInterpretation p) {
+			var int sum = 0
+			for (matcher : unfinishedMultiplicitiesMatchers) {
+				val value = matcher.getCalculatedMultiplicity(p)
+				if (value === null) {
+					throw new IllegalArgumentException("Unfinished multiplicity is missing for " + name)
+				}
+				sum += value
+			}
+			orphansUpperBound.tightenLowerBound(sum)
+		}
+	}
+	
+	@FinalFieldsConstructor
+	static class ContainmentRootConstraintUpdater implements RelationConstraintUpdater {
+		
+		override update(PartialInterpretation p) {
+			throw new UnsupportedOperationException("TODO: auto-generated method stub")
 		}
 	}
 }
