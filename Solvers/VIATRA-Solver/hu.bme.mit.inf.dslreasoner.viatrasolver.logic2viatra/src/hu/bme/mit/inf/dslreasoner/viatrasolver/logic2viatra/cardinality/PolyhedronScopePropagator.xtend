@@ -61,7 +61,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 	override void propagateAllScopeConstraints() {
 		resetBounds()
 		populatePolyhedronFromScope()
-		println(polyhedron)
+//		println(polyhedron)
 		val result = operator.saturate()
 		if (result == PolyhedronSaturationResult.EMPTY) {
 			throw new IllegalStateException("Scope bounds cannot be satisfied")
@@ -71,7 +71,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 				super.propagateAllScopeConstraints()
 			}
 		}
-		println(polyhedron)
+//		println(polyhedron)
 	}
 
 	def resetBounds() {

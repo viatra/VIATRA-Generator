@@ -3,8 +3,8 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 import com.google.common.collect.ImmutableMap
 import hu.bme.mit.inf.dslreasoner.ilp.cbc.CbcResult
 import hu.bme.mit.inf.dslreasoner.ilp.cbc.CbcSolver
+import java.util.List
 import java.util.Map
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
@@ -21,8 +21,7 @@ class CbcPolyhedronSolver implements PolyhedronSolver {
 	}
 }
 
-class CbcSaturationOperator implements PolyhedronSaturationOperator {
-	@Accessors val Polyhedron polyhedron
+class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 	val double timeoutSeconds
 	val boolean silent
 	val double[] columnLowerBounds
@@ -31,7 +30,7 @@ class CbcSaturationOperator implements PolyhedronSaturationOperator {
 	val Map<Dimension, Integer> dimensionsToIndicesMap
 
 	new(Polyhedron polyhedron, double timeoutSeconds, boolean silent) {
-		this.polyhedron = polyhedron
+		super(polyhedron)
 		this.timeoutSeconds = timeoutSeconds
 		this.silent = silent
 		val numDimensions = polyhedron.dimensions.size
@@ -41,25 +40,26 @@ class CbcSaturationOperator implements PolyhedronSaturationOperator {
 		dimensionsToIndicesMap = ImmutableMap.copyOf(polyhedron.dimensions.indexed.toMap([value], [key]))
 	}
 
-	override saturate() {
+	override doSaturate() {
 		val numDimensions = polyhedron.dimensions.size
 		for (var int j = 0; j < numDimensions; j++) {
 			val dimension = polyhedron.dimensions.get(j)
 			columnLowerBounds.set(j, dimension.lowerBound.toDouble(Double.NEGATIVE_INFINITY))
 			columnUpperBounds.set(j, dimension.upperBound.toDouble(Double.POSITIVE_INFINITY))
 		}
-		val numConstraints = polyhedron.constraints.size
+		val constraints = nonTrivialConstraints
+		val numConstraints = constraints.size
 		val rowStarts = newIntArrayOfSize(numConstraints + 1)
 		val rowLowerBounds = newDoubleArrayOfSize(numConstraints)
 		val rowUpperBounds = newDoubleArrayOfSize(numConstraints)
-		val numEntries = polyhedron.constraints.map[coefficients.size].reduce[a, b|a + b] ?: 0
+		val numEntries = constraints.map[coefficients.size].reduce[a, b|a + b] ?: 0
 		rowStarts.set(numConstraints, numEntries)
 		val columnIndices = newIntArrayOfSize(numEntries)
 		val entries = newDoubleArrayOfSize(numEntries)
 		var int index = 0
 		for (var int i = 0; i < numConstraints; i++) {
 			rowStarts.set(i, index)
-			val constraint = polyhedron.constraints.get(i)
+			val constraint = constraints.get(i)
 			rowLowerBounds.set(i, constraint.lowerBound.toDouble(Double.NEGATIVE_INFINITY))
 			rowUpperBounds.set(i, constraint.upperBound.toDouble(Double.POSITIVE_INFINITY))
 			if (!dimensionsToIndicesMap.keySet.containsAll(constraint.coefficients.keySet)) {
@@ -102,11 +102,12 @@ class CbcSaturationOperator implements PolyhedronSaturationOperator {
 				CbcResult.SolutionBounded: {
 					val value = Math.floor(minimizationResult.value)
 					expressionToSaturate.lowerBound = value as int
-					setBound(expressionToSaturate, value, columnLowerBounds, rowLowerBounds)
+					setBound(expressionToSaturate, constraints, value, columnLowerBounds, rowLowerBounds)
 				}
 				case CbcResult.SOLUTION_UNBOUNDED: {
 					expressionToSaturate.lowerBound = null
-					setBound(expressionToSaturate, Double.NEGATIVE_INFINITY, columnLowerBounds, rowLowerBounds)
+					setBound(expressionToSaturate, constraints, Double.NEGATIVE_INFINITY, columnLowerBounds,
+						rowLowerBounds)
 				}
 				case CbcResult.UNSAT:
 					return PolyhedronSaturationResult.EMPTY
@@ -126,11 +127,12 @@ class CbcSaturationOperator implements PolyhedronSaturationOperator {
 				CbcResult.SolutionBounded: {
 					val value = Math.ceil(-maximizationResult.value)
 					expressionToSaturate.upperBound = value as int
-					setBound(expressionToSaturate, value, columnUpperBounds, rowUpperBounds)
+					setBound(expressionToSaturate, constraints, value, columnUpperBounds, rowUpperBounds)
 				}
 				case CbcResult.SOLUTION_UNBOUNDED: {
 					expressionToSaturate.upperBound = null
-					setBound(expressionToSaturate, Double.POSITIVE_INFINITY, columnUpperBounds, rowUpperBounds)
+					setBound(expressionToSaturate, constraints, Double.POSITIVE_INFINITY, columnUpperBounds,
+						rowUpperBounds)
 				}
 				case CbcResult.UNSAT:
 					throw new RuntimeException("Minimization was SAT, but maximization is UNSAT")
@@ -160,23 +162,19 @@ class CbcSaturationOperator implements PolyhedronSaturationOperator {
 		index
 	}
 
-	private def void setBound(LinearBoundedExpression expression, double bound, double[] columnBounds,
-		double[] rowBounds) {
+	private def void setBound(LinearBoundedExpression expression, List<LinearConstraint> constraints, double bound,
+		double[] columnBounds, double[] rowBounds) {
 		switch (expression) {
 			Dimension: {
 				val j = getIndex(expression)
 				columnBounds.set(j, bound)
 			}
 			LinearConstraint: {
-				val i = polyhedron.constraints.indexOf(expression)
+				val i = constraints.indexOf(expression)
 				if (i >= 0) {
 					rowBounds.set(i, bound)
 				}
 			}
 		}
-	}
-
-	override close() throws Exception {
-		// Nothing to close
 	}
 }

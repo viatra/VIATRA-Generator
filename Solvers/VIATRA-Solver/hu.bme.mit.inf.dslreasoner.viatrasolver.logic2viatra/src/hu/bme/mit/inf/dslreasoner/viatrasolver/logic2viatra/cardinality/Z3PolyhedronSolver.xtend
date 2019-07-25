@@ -8,7 +8,6 @@ import com.microsoft.z3.Optimize
 import com.microsoft.z3.Status
 import com.microsoft.z3.Symbol
 import java.util.Map
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 class Z3PolyhedronSolver implements PolyhedronSolver {
@@ -27,21 +26,20 @@ class Z3PolyhedronSolver implements PolyhedronSolver {
 	}
 }
 
-class Z3SaturationOperator implements PolyhedronSaturationOperator {
+class Z3SaturationOperator extends AbstractPolyhedronSaturationOperator {
 	static val INFINITY_SYMBOL_NAME = "oo"
 	static val MULT_SYMBOL_NAME = "*"
 
 	extension val Context context
 	val Symbol infinitySymbol
 	val Symbol multSymbol
-	@Accessors val Polyhedron polyhedron
 	val Map<Dimension, ArithExpr> variables
 
 	new(Polyhedron polyhedron, boolean lpRelaxation) {
+		super(polyhedron)
 		context = new Context
 		infinitySymbol = context.mkSymbol(INFINITY_SYMBOL_NAME)
 		multSymbol = context.mkSymbol(MULT_SYMBOL_NAME)
-		this.polyhedron = polyhedron
 		variables = polyhedron.dimensions.toInvertedMap [ dimension |
 			val name = dimension.name
 			if (lpRelaxation) {
@@ -52,8 +50,8 @@ class Z3SaturationOperator implements PolyhedronSaturationOperator {
 		]
 	}
 
-	override saturate() {
-		val status = doSaturate()
+	override doSaturate() {
+		val status = executeSolver()
 		convertStatusToSaturationResult(status)
 	}
 
@@ -70,7 +68,7 @@ class Z3SaturationOperator implements PolyhedronSaturationOperator {
 		}
 	}
 
-	private def doSaturate() {
+	private def executeSolver() {
 		for (expressionToSaturate : polyhedron.expressionsToSaturate) {
 			val expr = expressionToSaturate.toExpr
 			val lowerResult = saturateLowerBound(expr, expressionToSaturate)
@@ -147,7 +145,7 @@ class Z3SaturationOperator implements PolyhedronSaturationOperator {
 		for (pair : variables.entrySet) {
 			assertBounds(pair.value, pair.key)
 		}
-		for (constraint : polyhedron.constraints) {
+		for (constraint : nonTrivialConstraints) {
 			val expr = createLinearCombination(constraint.coefficients)
 			assertBounds(expr, constraint)
 		}
@@ -181,6 +179,9 @@ class Z3SaturationOperator implements PolyhedronSaturationOperator {
 
 	private def createLinearCombination(Map<Dimension, Integer> coefficients) {
 		val size = coefficients.size
+		if (size == 0) {
+			return mkInt(0)
+		}
 		val array = newArrayOfSize(size)
 		var int i = 0
 		for (pair : coefficients.entrySet) {
