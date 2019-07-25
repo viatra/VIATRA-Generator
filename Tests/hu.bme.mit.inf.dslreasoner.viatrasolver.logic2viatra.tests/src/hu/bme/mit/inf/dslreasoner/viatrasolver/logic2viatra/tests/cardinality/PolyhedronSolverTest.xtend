@@ -79,19 +79,6 @@ abstract class PolyhedronSolverTest {
 	}
 
 	@Test
-	def void singleDimensionConstraintIntegerTest() {
-		val x = new Dimension("x", null, null)
-		val constraint = new LinearConstraint(#{x -> 2}, 0, 3)
-		createSaturationOperator(new Polyhedron(#[x], #[constraint], #[x]))
-
-		val result = saturate()
-
-		assertEquals(PolyhedronSaturationResult.SATURATED, result)
-		assertEquals(0, x.lowerBound)
-		assertEquals(1, x.upperBound)
-	}
-
-	@Test
 	def void singleDimensionUnboundedFromAboveTest() {
 		val x = new Dimension("x", 0, null)
 		createSaturationOperator(new Polyhedron(#[x], #[], #[x]))
@@ -165,6 +152,60 @@ abstract class PolyhedronSolverTest {
 	}
 
 	@Test
+	def void emptyConstraintTest() {
+		val x = new Dimension("x", 0, 1)
+		val constraint = new LinearConstraint(emptyMap, 0, 1)
+		createSaturationOperator(new Polyhedron(#[x], #[constraint], #[constraint]))
+
+		val result = saturate()
+
+		assertEquals(PolyhedronSaturationResult.SATURATED, result)
+		assertEquals(0, constraint.lowerBound)
+		assertEquals(0, constraint.upperBound)
+	}
+
+	@Test
+	def void emptyConstraintUnsatisfiableTest() {
+		val x = new Dimension("x", 0, 1)
+		val constraint = new LinearConstraint(emptyMap, 1, 0)
+		createSaturationOperator(new Polyhedron(#[x], #[constraint], #[constraint]))
+
+		val result = saturate()
+
+		assertEquals(PolyhedronSaturationResult.EMPTY, result)
+	}
+
+	protected def createSaturationOperator(Polyhedron polyhedron) {
+		destroyOperatorIfExists()
+		operator = solver.createSaturationOperator(polyhedron)
+	}
+
+	protected def destroyOperatorIfExists() {
+		if (operator !== null) {
+			operator.close
+		}
+	}
+
+	protected def saturate() {
+		operator.saturate
+	}
+}
+
+abstract class IntegerPolyhedronSolverTest extends PolyhedronSolverTest {
+	@Test
+	def void singleDimensionConstraintNonIntegerTest() {
+		val x = new Dimension("x", null, null)
+		val constraint = new LinearConstraint(#{x -> 2}, 0, 3)
+		createSaturationOperator(new Polyhedron(#[x], #[constraint], #[x]))
+
+		val result = saturate()
+
+		assertEquals(PolyhedronSaturationResult.SATURATED, result)
+		assertEquals(0, x.lowerBound)
+		assertEquals(1, x.upperBound)
+	}
+
+	@Test
 	def void unsatisfiableMultipleInheritanceTest() {
 		val x = new Dimension("x", 0, 1)
 		val y = new Dimension("y", 0, 1)
@@ -198,41 +239,64 @@ abstract class PolyhedronSolverTest {
 
 		assertEquals(PolyhedronSaturationResult.EMPTY, result)
 	}
+}
 
+abstract class RelaxedPolyhedronSolverTest extends PolyhedronSolverTest {
 	@Test
-	def void emptyConstraintTest() {
-		val constraint = new LinearConstraint(emptyMap, 0, 1)
-		createSaturationOperator(new Polyhedron(#[], #[constraint], #[constraint]))
+	def void singleDimensionConstraintNonIntegerTest() {
+		val x = new Dimension("x", null, null)
+		val constraint = new LinearConstraint(#{x -> 2}, 0, 3)
+		createSaturationOperator(new Polyhedron(#[x], #[constraint], #[x]))
 
 		val result = saturate()
 
 		assertEquals(PolyhedronSaturationResult.SATURATED, result)
-		assertEquals(0, constraint.lowerBound)
-		assertEquals(0, constraint.upperBound)
+		assertEquals(0, x.lowerBound)
+		assertEquals(2, x.upperBound)
 	}
 
 	@Test
-	def void emptyConstraintUnsatisfiableTest() {
-		val constraint = new LinearConstraint(emptyMap, 1, 0)
-		createSaturationOperator(new Polyhedron(#[], #[constraint], #[constraint]))
+	def void unsatisfiableMultipleInheritanceTest() {
+		val x = new Dimension("x", 0, 1)
+		val y = new Dimension("y", 0, 1)
+		val z = new Dimension("z", 0, 1)
+		createSaturationOperator(new Polyhedron(
+			#[x, y, z],
+			#[
+				new LinearConstraint(#{x -> 1, y -> 1}, 1, 1),
+				new LinearConstraint(#{x -> 1, z -> 1}, 1, 1),
+				new LinearConstraint(#{y -> 1, z -> 1}, 1, 1)
+			],
+			#[x, y, z]
+		))
 
 		val result = saturate()
 
-		assertEquals(PolyhedronSaturationResult.EMPTY, result)
+		assertEquals(PolyhedronSaturationResult.SATURATED, result)
+		assertEquals(0, x.lowerBound)
+		assertEquals(1, x.upperBound)
+		assertEquals(0, y.lowerBound)
+		assertEquals(1, y.upperBound)
+		assertEquals(0, z.lowerBound)
+		assertEquals(1, z.upperBound)
 	}
 
-	private def createSaturationOperator(Polyhedron polyhedron) {
-		destroyOperatorIfExists()
-		operator = solver.createSaturationOperator(polyhedron)
-	}
+	@Test
+	def void unboundedRelaxationWithNoIntegerSolutionTest() {
+		val x = new Dimension("x", 0, 1)
+		val y = new Dimension("y", 0, null)
+		createSaturationOperator(new Polyhedron(
+			#[x, y],
+			#[new LinearConstraint(#{x -> 2}, 1, 1)],
+			#[x, y]
+		))
 
-	private def destroyOperatorIfExists() {
-		if (operator !== null) {
-			operator.close
-		}
-	}
+		val result = saturate()
 
-	private def saturate() {
-		operator.saturate
+		assertEquals(PolyhedronSaturationResult.SATURATED, result)
+		assertEquals(0, x.lowerBound)
+		assertEquals(1, x.upperBound)
+		assertEquals(0, y.lowerBound)
+		assertEquals(null, y.upperBound)
 	}
 }
