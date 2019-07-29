@@ -154,7 +154,9 @@ jint SolveModel(CoinModel &build, jdouble timeoutSeconds, jboolean silent, jdoub
     solver.loadFromCoinModel(build);
     CbcModel model{solver};
 
-    model.setDblParam(CbcModel::CbcMaximumSeconds, timeoutSeconds);
+    if (timeoutSeconds >= 0) {
+        model.setDblParam(CbcModel::CbcMaximumSeconds, timeoutSeconds);
+    }
     if (silent == JNI_FALSE) {
         model.messageHandler()->setLogLevel(2);
         model.solver()->messageHandler()->setLogLevel(1);
