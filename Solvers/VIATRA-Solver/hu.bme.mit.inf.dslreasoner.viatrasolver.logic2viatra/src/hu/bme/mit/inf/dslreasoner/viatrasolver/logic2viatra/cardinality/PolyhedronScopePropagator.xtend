@@ -104,41 +104,45 @@ class PolyhedronScopePropagator extends ScopePropagator {
 	}
 
 	private def populateScopesFromPolyhedron() {
-		checkFiniteBounds(topLevelBounds)
+		checkBounds(topLevelBounds)
 		if (partialInterpretation.minNewElements > topLevelBounds.lowerBound) {
 			throw new IllegalArgumentException('''Lower bound of «topLevelBounds» smaller than top-level scope: «partialInterpretation.minNewElements»''')
 		} else if (partialInterpretation.minNewElements != topLevelBounds.lowerBound) {
 			partialInterpretation.minNewElements = topLevelBounds.lowerBound
 		}
-		if (partialInterpretation.maxNewElements >= 0 &&
-			partialInterpretation.maxNewElements < topLevelBounds.upperBound) {
+		val topLevelUpperBound = topLevelBounds.upperBound ?: -1
+		if (partialInterpretation.maxNewElements >= 0 && topLevelUpperBound >= 0 &&
+			partialInterpretation.maxNewElements < topLevelUpperBound) {
 			throw new IllegalArgumentException('''Upper bound of «topLevelBounds» larger than top-level scope: «partialInterpretation.maxNewElements»''')
-		} else if (partialInterpretation.maxNewElements != topLevelBounds.upperBound) {
-			partialInterpretation.maxNewElements = topLevelBounds.upperBound
+		} else if (partialInterpretation.maxNewElements != topLevelUpperBound) {
+			partialInterpretation.maxNewElements = topLevelUpperBound
 		}
 		for (pair : scopeBounds.entrySet) {
 			val scope = pair.key
 			val bounds = pair.value
-			checkFiniteBounds(bounds)
+			checkBounds(bounds)
 			if (scope.minNewElements > bounds.lowerBound) {
 				throw new IllegalArgumentException('''Lower bound of «bounds» smaller than «scope.targetTypeInterpretation» scope: «scope.minNewElements»''')
 			} else if (scope.minNewElements != bounds.lowerBound) {
 				scope.minNewElements = bounds.lowerBound
 			}
-			if (scope.maxNewElements >= 0 && scope.maxNewElements < bounds.upperBound) {
+			val upperBound = bounds.upperBound ?: -1
+			if (scope.maxNewElements >= 0 && upperBound >= 0 && scope.maxNewElements < upperBound) {
 				throw new IllegalArgumentException('''Upper bound of «bounds» larger than «scope.targetTypeInterpretation» scope: «scope.maxNewElements»''')
-			} else if (scope.maxNewElements != bounds.upperBound) {
-				scope.maxNewElements = bounds.upperBound
+			} else if (scope.maxNewElements != upperBound) {
+				scope.maxNewElements = upperBound
 			}
 		}
 	}
 
-	private def checkFiniteBounds(LinearBoundedExpression bounds) {
+	private def checkBounds(LinearBoundedExpression bounds) {
 		if (bounds.lowerBound === null) {
 			throw new IllegalArgumentException("Infinite lower bound: " + bounds)
+		} else if (bounds.lowerBound < 0) {
+			throw new IllegalArgumentException("Negative lower bound: " + bounds)
 		}
-		if (bounds.upperBound === null) {
-			throw new IllegalArgumentException("Infinite upper bound: " + bounds)
+		if (bounds.upperBound !== null && bounds.upperBound < 0) {
+			throw new IllegalArgumentException("Negative upper bound: " + bounds)
 		}
 	}
 
