@@ -1,27 +1,32 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 
+import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
 import hu.bme.mit.inf.dslreasoner.ilp.cbc.CbcResult
 import hu.bme.mit.inf.dslreasoner.ilp.cbc.CbcSolver
+import java.util.HashSet
 import java.util.List
 import java.util.Map
+import java.util.Set
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
 class CbcPolyhedronSolver implements PolyhedronSolver {
+	val boolean lpRelaxation
 	val double timeoutSeconds
 	val boolean silent
 
 	new() {
-		this(10, true)
+		this(false, -1, true)
 	}
 
 	override createSaturationOperator(Polyhedron polyhedron) {
-		new CbcSaturationOperator(polyhedron, timeoutSeconds, silent)
+		new CbcSaturationOperator(polyhedron, lpRelaxation, timeoutSeconds, silent)
 	}
 }
 
 class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
+	val boolean lpRelaxation
 	val double timeoutSeconds
 	val boolean silent
 	val double[] columnLowerBounds
@@ -29,8 +34,9 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 	val double[] objective
 	val Map<Dimension, Integer> dimensionsToIndicesMap
 
-	new(Polyhedron polyhedron, double timeoutSeconds, boolean silent) {
+	new(Polyhedron polyhedron, boolean lpRelaxation, double timeoutSeconds, boolean silent) {
 		super(polyhedron)
+		this.lpRelaxation = lpRelaxation
 		this.timeoutSeconds = timeoutSeconds
 		this.silent = silent
 		val numDimensions = polyhedron.dimensions.size
@@ -56,6 +62,12 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 		rowStarts.set(numConstraints, numEntries)
 		val columnIndices = newIntArrayOfSize(numEntries)
 		val entries = newDoubleArrayOfSize(numEntries)
+		val unconstrainedDimensions = new HashSet
+		for (dimension : polyhedron.dimensions) {
+			if (dimension.lowerBound === null && dimension.upperBound === null) {
+				unconstrainedDimensions += dimension
+			}
+		}
 		var int index = 0
 		for (var int i = 0; i < numConstraints; i++) {
 			rowStarts.set(i, index)
@@ -69,6 +81,7 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 				val dimension = polyhedron.dimensions.get(j)
 				val coefficient = constraint.coefficients.get(dimension)
 				if (coefficient !== null && coefficient != 0) {
+					unconstrainedDimensions -= dimension
 					columnIndices.set(index, j)
 					entries.set(index, coefficient)
 					index++
@@ -79,71 +92,94 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 			throw new AssertionError("Last entry does not equal the number of entries in the constraint matrix")
 		}
 		for (expressionToSaturate : polyhedron.expressionsToSaturate) {
-			for (var int j = 0; j < numDimensions; j++) {
-				objective.set(j, 0)
-			}
-			switch (expressionToSaturate) {
-				Dimension: {
-					val j = getIndex(expressionToSaturate)
-					objective.set(j, 1)
-				}
-				LinearConstraint: {
-					for (pair : expressionToSaturate.coefficients.entrySet) {
-						val j = getIndex(pair.key)
-						objective.set(j, pair.value)
-					}
-				}
-				default:
-					throw new IllegalArgumentException("Unknown expression: " + expressionToSaturate)
-			}
-			val minimizationResult = CbcSolver.solve(columnLowerBounds, columnUpperBounds, rowStarts, columnIndices,
-				entries, rowLowerBounds, rowUpperBounds, objective, timeoutSeconds, silent)
-			switch (minimizationResult) {
-				CbcResult.SolutionBounded: {
-					val value = Math.floor(minimizationResult.value)
-					expressionToSaturate.lowerBound = value as int
-					setBound(expressionToSaturate, constraints, value, columnLowerBounds, rowLowerBounds)
-				}
-				case CbcResult.SOLUTION_UNBOUNDED: {
-					expressionToSaturate.lowerBound = null
-					setBound(expressionToSaturate, constraints, Double.NEGATIVE_INFINITY, columnLowerBounds,
-						rowLowerBounds)
-				}
-				case CbcResult.UNSAT:
-					return PolyhedronSaturationResult.EMPTY
-				case CbcResult.ABANDONED,
-				case CbcResult.TIMEOUT:
-					return PolyhedronSaturationResult.UNKNOWN
-				default:
-					throw new RuntimeException("Unknown CbcResult: " + minimizationResult)
-			}
-			for (var int j = 0; j < numDimensions; j++) {
-				val objectiveCoefficient = objective.get(j)
-				objective.set(j, -objectiveCoefficient)
-			}
-			val maximizationResult = CbcSolver.solve(columnLowerBounds, columnUpperBounds, rowStarts, columnIndices,
-				entries, rowLowerBounds, rowUpperBounds, objective, timeoutSeconds, silent)
-			switch (maximizationResult) {
-				CbcResult.SolutionBounded: {
-					val value = Math.ceil(-maximizationResult.value)
-					expressionToSaturate.upperBound = value as int
-					setBound(expressionToSaturate, constraints, value, columnUpperBounds, rowUpperBounds)
-				}
-				case CbcResult.SOLUTION_UNBOUNDED: {
-					expressionToSaturate.upperBound = null
-					setBound(expressionToSaturate, constraints, Double.POSITIVE_INFINITY, columnUpperBounds,
-						rowUpperBounds)
-				}
-				case CbcResult.UNSAT:
-					throw new RuntimeException("Minimization was SAT, but maximization is UNSAT")
-				case CbcResult.ABANDONED,
-				case CbcResult.TIMEOUT:
-					return PolyhedronSaturationResult.UNKNOWN
-				default:
-					throw new RuntimeException("Unknown CbcResult: " + maximizationResult)
+			val result = saturate(expressionToSaturate, rowStarts, columnIndices, entries, rowLowerBounds,
+				rowUpperBounds, unconstrainedDimensions, constraints)
+			if (result != PolyhedronSaturationResult.SATURATED) {
+				return result
 			}
 		}
 		PolyhedronSaturationResult.SATURATED
+	}
+
+	protected def saturate(LinearBoundedExpression expressionToSaturate, int[] rowStarts, int[] columnIndices,
+		double[] entries, double[] rowLowerBounds, double[] rowUpperBounds, Set<Dimension> unconstrainedDimensions,
+		ImmutableList<LinearConstraint> constraints) {
+		val numDimensions = objective.size
+		for (var int j = 0; j < numDimensions; j++) {
+			objective.set(j, 0)
+		}
+		switch (expressionToSaturate) {
+			Dimension: {
+				// CBC will return nonsensical results or call free() with invalid arguments if
+				// it is passed a fully unconstrained (-Inf lower and +Int upper bound, no inequalities) variable
+				// in the objective function.
+				if (unconstrainedDimensions.contains(expressionToSaturate)) {
+					return PolyhedronSaturationResult.SATURATED
+				}
+				val j = getIndex(expressionToSaturate)
+				objective.set(j, 1)
+			}
+			LinearConstraint: {
+				for (pair : expressionToSaturate.coefficients.entrySet) {
+					val dimension = pair.key
+					// We also have to check for unconstrained dimensions here to avoid crashing.
+					if (unconstrainedDimensions.contains(dimension)) {
+						expressionToSaturate.lowerBound = null
+						expressionToSaturate.upperBound = null
+						return PolyhedronSaturationResult.SATURATED
+					}
+					val j = getIndex(dimension)
+					objective.set(j, pair.value)
+				}
+			}
+			default:
+				throw new IllegalArgumentException("Unknown expression: " + expressionToSaturate)
+		}
+		val minimizationResult = CbcSolver.solve(columnLowerBounds, columnUpperBounds, rowStarts, columnIndices,
+			entries, rowLowerBounds, rowUpperBounds, objective, lpRelaxation, timeoutSeconds, silent)
+		switch (minimizationResult) {
+			CbcResult.SolutionBounded: {
+				val value = Math.floor(minimizationResult.value)
+				expressionToSaturate.lowerBound = value as int
+				setBound(expressionToSaturate, constraints, value, columnLowerBounds, rowLowerBounds)
+			}
+			case CbcResult.SOLUTION_UNBOUNDED: {
+				expressionToSaturate.lowerBound = null
+				setBound(expressionToSaturate, constraints, Double.NEGATIVE_INFINITY, columnLowerBounds, rowLowerBounds)
+			}
+			case CbcResult.UNSAT:
+				return PolyhedronSaturationResult.EMPTY
+			case CbcResult.ABANDONED,
+			case CbcResult.TIMEOUT:
+				return PolyhedronSaturationResult.UNKNOWN
+			default:
+				throw new RuntimeException("Unknown CbcResult: " + minimizationResult)
+		}
+		for (var int j = 0; j < numDimensions; j++) {
+			val objectiveCoefficient = objective.get(j)
+			objective.set(j, -objectiveCoefficient)
+		}
+		val maximizationResult = CbcSolver.solve(columnLowerBounds, columnUpperBounds, rowStarts, columnIndices,
+			entries, rowLowerBounds, rowUpperBounds, objective, lpRelaxation, timeoutSeconds, silent)
+		switch (maximizationResult) {
+			CbcResult.SolutionBounded: {
+				val value = Math.ceil(-maximizationResult.value)
+				expressionToSaturate.upperBound = value as int
+				setBound(expressionToSaturate, constraints, value, columnUpperBounds, rowUpperBounds)
+			}
+			case CbcResult.SOLUTION_UNBOUNDED: {
+				expressionToSaturate.upperBound = null
+				setBound(expressionToSaturate, constraints, Double.POSITIVE_INFINITY, columnUpperBounds, rowUpperBounds)
+			}
+			case CbcResult.UNSAT:
+				throw new RuntimeException("Minimization was SAT, but maximization is UNSAT")
+			case CbcResult.ABANDONED,
+			case CbcResult.TIMEOUT:
+				return PolyhedronSaturationResult.UNKNOWN
+			default:
+				throw new RuntimeException("Unknown CbcResult: " + maximizationResult)
+		}
+		return PolyhedronSaturationResult.SATURATED
 	}
 
 	private def toDouble(Integer nullableInt, double defaultValue) {

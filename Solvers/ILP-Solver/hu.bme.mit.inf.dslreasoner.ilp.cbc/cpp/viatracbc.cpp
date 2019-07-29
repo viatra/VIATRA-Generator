@@ -36,9 +36,10 @@ static const jint kCbcError = 5;
 static CoinModel CreateModel(JNIEnv *env, jdoubleArray columnLowerBoundsArray,
     jdoubleArray columnUpperBoundsArray, jintArray rowStartsArray, jintArray columnIndicesArray,
     jdoubleArray entriedArray, jdoubleArray rowLowerBoundsArray, jdoubleArray rowUpperBoundsArray,
-    jdoubleArray objectiveArray);
+    jdoubleArray objectiveArray, jboolean lpRelaxation);
 static void CreateModelColumns(JNIEnv *env, jdoubleArray columnLowerBoundsArray,
-    jdoubleArray columnUpperBoundsArray, jdoubleArray objectiveArray, CoinModel &build);
+    jdoubleArray columnUpperBoundsArray, jdoubleArray objectiveArray, jboolean lpRelaxation,
+    CoinModel &build);
 static void CreateModelRows(JNIEnv *env, jintArray rowStartsArray, jintArray columnIndicesArray,
     jdoubleArray entriesArray, jdoubleArray rowLowerBoundsArray, jdoubleArray rowUpperBoundsArray,
     CoinModel &build);
@@ -83,11 +84,11 @@ jint Java_hu_bme_mit_inf_dslreasoner_ilp_cbc_CbcSolver_solveIlpProblem(
     JNIEnv *env, jclass klazz, jdoubleArray columnLowerBoundsArray, jdoubleArray columnUpperBoundsArray,
     jintArray rowStartsArray, jintArray columnIndicesArray, jdoubleArray entriesArray,
     jdoubleArray rowLowerBoundsArray, jdoubleArray rowUpperBoundsArray, jdoubleArray objectiveArray,
-    jdoubleArray outputArray, jdouble timeoutSeconds, jboolean silent) {
+    jdoubleArray outputArray, jboolean lpRelaxation, jdouble timeoutSeconds, jboolean silent) {
     try {
         auto build = CreateModel(env, columnLowerBoundsArray, columnUpperBoundsArray,
             rowStartsArray, columnIndicesArray, entriesArray, rowLowerBoundsArray, rowUpperBoundsArray,
-            objectiveArray);
+            objectiveArray, lpRelaxation);
         double value;
         jint result = SolveModel(build, timeoutSeconds, silent, value);
         if (result == kCbcSolutionBounded) {
@@ -106,16 +107,18 @@ jint Java_hu_bme_mit_inf_dslreasoner_ilp_cbc_CbcSolver_solveIlpProblem(
 CoinModel CreateModel(JNIEnv *env, jdoubleArray columnLowerBoundsArray,
     jdoubleArray columnUpperBoundsArray, jintArray rowStartsArray, jintArray columnIndicesArray,
     jdoubleArray entriesArray, jdoubleArray rowLowerBoundsArray, jdoubleArray rowUpperBoundsArray,
-    jdoubleArray objectiveArray) {
+    jdoubleArray objectiveArray, jboolean lpRelaxation) {
     CoinModel build;
-    CreateModelColumns(env, columnLowerBoundsArray, columnUpperBoundsArray, objectiveArray, build);
+    CreateModelColumns(env, columnLowerBoundsArray, columnUpperBoundsArray, objectiveArray,
+        lpRelaxation, build);
     CreateModelRows(env, rowStartsArray, columnIndicesArray, entriesArray, rowLowerBoundsArray,
         rowUpperBoundsArray, build);
     return build;
 }
 
 void CreateModelColumns(JNIEnv *env, jdoubleArray columnLowerBoundsArray,
-    jdoubleArray columnUpperBoundsArray, jdoubleArray objectiveArray, CoinModel &build) {
+    jdoubleArray columnUpperBoundsArray, jdoubleArray objectiveArray, jboolean lpRelaxation,
+    CoinModel &build) {
     int numColumns = env->GetArrayLength(columnLowerBoundsArray);
     PinnedDoubleArray columnLowerBounds{env, columnLowerBoundsArray};
     PinnedDoubleArray columnUpperBounds{env, columnUpperBoundsArray};
@@ -123,7 +126,9 @@ void CreateModelColumns(JNIEnv *env, jdoubleArray columnLowerBoundsArray,
     for (int i = 0; i < numColumns; i++) {
         build.setColumnBounds(i, columnLowerBounds[i], columnUpperBounds[i]);
         build.setObjective(i, objective[i]);
-        build.setInteger(i);
+        if (!lpRelaxation) {
+            build.setInteger(i);
+        }
     }
 }
 
@@ -215,6 +220,9 @@ jint SolveModel(CoinModel &build, jdouble timeoutSeconds, jboolean silent, jdoub
     if (model.isInitialSolveProvenPrimalInfeasible()) {
         return kCbcUnsat;
     }
+    if (model.isInitialSolveProvenDualInfeasible()) {
+        return kCbcSolutionUnbounded;
+    }
     if (model.isInitialSolveAbandoned()) {
         return kCbcTimeout;
     }
@@ -226,20 +234,26 @@ jint SolveModel(CoinModel &build, jdouble timeoutSeconds, jboolean silent, jdoub
 
     model.branchAndBound();
 
-    if (model.isProvenInfeasible()) {
-        return kCbcUnsat;
-    }
-    if (model.isProvenDualInfeasible()) {
-        return kCbcSolutionUnbounded;
-    }
-    if (model.isProvenOptimal()) {
-        value = model.getMinimizationObjValue();
-        return kCbcSolutionBounded;
-    }
-    if (model.maximumSecondsReached()) {
+    switch (model.status()) {
+    case 0:
+        if (model.isProvenInfeasible()) {
+            return kCbcUnsat;
+        }
+        if (model.isProvenDualInfeasible()) {
+            return kCbcSolutionUnbounded;
+        }
+        if (model.isProvenOptimal()) {
+            value = model.getMinimizationObjValue();
+            return kCbcSolutionBounded;
+        }
+        throw std::runtime_error("CBC status is 0, but no solution is found");
+    case 1:
         return kCbcTimeout;
+    case 2:
+        return kCbcAbandoned;
+    default:
+        throw std::runtime_error("Unknown CBC status");
     }
-    return kCbcAbandoned;
 }
 
 void ThrowException(JNIEnv *env, const char *message) {

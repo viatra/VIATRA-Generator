@@ -15,14 +15,14 @@ public class CbcSolver {
 	}
 
 	public static CbcResult solve(double[] columnLowerBounds, double[] columnUpperBounds, int[] rowStarts,
-			int[] columnIndices, double[] entries, double[] rowLowerBounds, double[] rowUpperBounds,
-			double[] objective, double timeoutSeconds, boolean silent) {
+			int[] columnIndices, double[] entries, double[] rowLowerBounds, double[] rowUpperBounds, double[] objective,
+			boolean lpRelaxation, double timeoutSeconds, boolean silent) {
 		loadNatives();
 		validate(columnLowerBounds, columnUpperBounds, rowStarts, columnIndices, entries, rowLowerBounds,
 				rowUpperBounds, objective);
 		double[] output = new double[1];
 		int result = solveIlpProblem(columnLowerBounds, columnUpperBounds, rowStarts, columnIndices, entries,
-				rowLowerBounds, rowUpperBounds, objective, output, timeoutSeconds, silent);
+				rowLowerBounds, rowUpperBounds, objective, output, lpRelaxation, timeoutSeconds, silent);
 		if (result == CBC_SOLUTION_BOUNDED) {
 			return new CbcResult.SolutionBounded(output[0]);
 		} else if (result == CBC_SOLUTION_UNBOUNDED) {
@@ -67,5 +67,5 @@ public class CbcSolver {
 
 	private static native int solveIlpProblem(double[] columnLowerBounds, double[] columnUpperBounds, int[] rowStarts,
 			int[] columnIndices, double[] entries, double[] rowLowerBounds, double[] rowUpperBounds, double[] objective,
-			double[] output, double timeoutSeconds, boolean silent);
+			double[] output, boolean lpRelaxation, double timeoutSeconds, boolean silent);
 }

@@ -9,7 +9,7 @@ JNIEXPORT jint JNICALL Java_hu_bme_mit_inf_dslreasoner_ilp_cbc_CbcSolver_solveIl
     JNIEnv *env, jclass klazz, jdoubleArray columnLowerBoundsArray, jdoubleArray columnUpperBoundsArray,
     jintArray rowStartsArray, jintArray columnIndicesArray, jdoubleArray entriesArray,
     jdoubleArray rowLowerBoundsArray, jdoubleArray rowUpperBoundsArray, jdoubleArray objectiveArray,
-    jdoubleArray outputArray, jdouble timeoutSeconds, jboolean silent);
+    jdoubleArray outputArray, jboolean lpRelaxation, jdouble timeoutSeconds, jboolean silent);
 
 }
 
