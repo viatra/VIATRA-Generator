@@ -74,7 +74,7 @@ class UnfinishedIndexer {
 			«ENDIF»
 			
 			«IF indexUpperMultiplicities»
-				«IF constraint.constrainsUnrepairable»
+				«IF constraint.constrainsUnrepairable || constraint.constrainsRemainingInverse»
 					private pattern «repairMatchName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, source:DefinedElement, target:DefinedElement) {
 						find interpretation(problem,interpretation);
 						find mustExist(problem,interpretation,source);
@@ -84,15 +84,17 @@ class UnfinishedIndexer {
 						neg «base.referRelation(constraint.relation,"source","target",Modality.MUST,fqn2PQuery)»
 						«base.referRelation(constraint.relation,"source","target",Modality.MAY,fqn2PQuery)»
 					}
-					
+				«ENDIF»
+				
+				«IF constraint.constrainsUnrepairable»
 					private pattern «unrepairableMultiplicityName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, unrepairableMultiplicity:java Integer) {
 						find interpretation(problem,interpretation);
 						find mustExist(problem,interpretation,object);
 						«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"object")»
 						find «unfinishedMultiplicityName(constraint)»_helper(problem, interpretation, object, missingMultiplicity);
-						numerOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, object, _);
-						check(numerOfRepairMatches < missingMultiplicity);
-						unrepairableMultiplicity == eval(missingMultiplicity-numerOfRepairMatches);
+						numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, object, _);
+						check(numberOfRepairMatches < missingMultiplicity);
+						unrepairableMultiplicity == eval(missingMultiplicity-numberOfRepairMatches);
 					}
 					
 					private pattern «unrepairableMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, unrepairableMultiplicity:java Integer) {
@@ -112,7 +114,8 @@ class UnfinishedIndexer {
 						«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"object")»
 						numberOfExistingReferences == count «base.referRelation(constraint.relation,"_","object",Modality.MUST,fqn2PQuery)»
 						check(numberOfExistingReferences < «constraint.inverseUpperBound»);
-						remainingMultiplicity == eval(«constraint.inverseUpperBound»-numberOfExistingReferences);
+						numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, _, object);
+						remainingMultiplicity == eval(Math.min(«constraint.inverseUpperBound»-numberOfExistingReferences, numberOfRepairMatches));
 					}
 					
 					pattern «remainingMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, remainingMultiplicity:java Integer) {

@@ -50,7 +50,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 				throw new IllegalStateException("Could not determine maximum number of new nodes, it may be unbounded")
 			}
 			if (maximumNumberOfNewNodes <= 0) {
-				throw new IllegalStateException("Maximum number of new nodes is negative")
+				throw new IllegalStateException("Maximum number of new nodes is not positive")
 			}
 			builder.buildMultiplicityConstraints(unfinishedMultiplicityQueries, hasElementInContainmentQuery,
 				maximumNumberOfNewNodes)
@@ -65,7 +65,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 		val result = operator.saturate()
 //		println(polyhedron)
 		if (result == PolyhedronSaturationResult.EMPTY) {
-			throw new IllegalStateException("Scope bounds cannot be satisfied")
+			setScopesInvalid()
 		} else {
 			populateScopesFromPolyhedron()
 			if (result != PolyhedronSaturationResult.SATURATED) {
@@ -143,6 +143,15 @@ class PolyhedronScopePropagator extends ScopePropagator {
 		}
 		if (bounds.upperBound !== null && bounds.upperBound < 0) {
 			throw new IllegalArgumentException("Negative upper bound: " + bounds)
+		}
+	}
+
+	private def setScopesInvalid() {
+		partialInterpretation.minNewElements = Integer.MAX_VALUE
+		partialInterpretation.maxNewElements = 0
+		for (scope : partialInterpretation.scopes) {
+			scope.minNewElements = Integer.MAX_VALUE
+			scope.maxNewElements = 0
 		}
 	}
 
@@ -276,6 +285,37 @@ class PolyhedronScopePropagator extends ScopePropagator {
 
 		private def buildNonContainmentConstraints(RelationMultiplicityConstraint constraint,
 			UnifinishedMultiplicityQueries queries) {
+			if (constraint.constrainsRemainingInverse) {
+				if (queries.unfinishedMultiplicityQuery === null) {
+					throw new IllegalArgumentException("Reference constraints need unfinished multiplicity queries")
+				}
+				val unfinishedMultiplicityMatcher = queries.unfinishedMultiplicityQuery.getMatcher(queryEngine)
+				if (queries.remainingInverseMultiplicityQuery === null) {
+					throw new IllegalArgumentException(
+						"Reference constraints need remaining inverse multiplicity queries")
+				}
+				val remainingInverseMultiplicityMatcher = queries.remainingInverseMultiplicityQuery.getMatcher(
+					queryEngine)
+				val availableMultiplicityCoefficients = new HashMap
+				availableMultiplicityCoefficients.addCoefficients(constraint.inverseUpperBound,
+					subtypeDimensions.get(constraint.targetType))
+				availableMultiplicityCoefficients.addCoefficients(-constraint.lowerBound,
+					subtypeDimensions.get(constraint.targetType))
+				val availableMultiplicity = availableMultiplicityCoefficients.toExpression
+				updatersBuilder.add(
+					new UnfinishedMultiplicityConstraintUpdater(constraint.relation.name, availableMultiplicity,
+						unfinishedMultiplicityMatcher, remainingInverseMultiplicityMatcher))
+			}
+			if (constraint.constrainsUnrepairable) {
+				if (queries.unrepairableMultiplicityQuery === null) {
+					throw new IllegalArgumentException("Reference constraints need unrepairable multiplicity queries")
+				}
+				val unrepairableMultiplicityMatcher = queries.unrepairableMultiplicityQuery.getMatcher(queryEngine)
+				val targetTypeCardinality = typeBounds.get(constraint.targetType)
+				updatersBuilder.add(
+					new UnrepairableMultiplicityConstraintUpdater(constraint.relation.name, targetTypeCardinality,
+						unrepairableMultiplicityMatcher))
+			}
 		}
 
 		private def addCoefficients(Map<Dimension, Integer> accumulator, int scale, Map<Dimension, Integer> a) {
@@ -408,6 +448,42 @@ class PolyhedronScopePropagator extends ScopePropagator {
 		private static def <T extends IPatternMatch> hasMatch(ViatraQueryMatcher<T> matcher, PartialInterpretation p) {
 			val match = matcher.newMatch(p.problem, p)
 			matcher.countMatches(match) != 0
+		}
+	}
+
+	@FinalFieldsConstructor
+	static class UnfinishedMultiplicityConstraintUpdater implements RelationConstraintUpdater {
+		val String name
+		val LinearBoundedExpression availableMultiplicityExpression
+		val ViatraQueryMatcher<? extends IPatternMatch> unfinishedMultiplicityMatcher
+		val ViatraQueryMatcher<? extends IPatternMatch> remainingInverseMultiplicityMatcher
+
+		override update(PartialInterpretation p) {
+			val unfinishedMultiplicity = unfinishedMultiplicityMatcher.getCalculatedMultiplicity(p)
+			if (unfinishedMultiplicity === null) {
+				throw new IllegalArgumentException("Unfinished multiplicity is missing for " + name)
+			}
+			val remainingInverseMultiplicity = remainingInverseMultiplicityMatcher.getCalculatedMultiplicity(p)
+			if (remainingInverseMultiplicity === null) {
+				throw new IllegalArgumentException("Remaining inverse multiplicity is missing for " + name)
+			}
+			val int requiredMultiplicity = unfinishedMultiplicity - remainingInverseMultiplicity
+			availableMultiplicityExpression.tightenLowerBound(requiredMultiplicity)
+		}
+	}
+
+	@FinalFieldsConstructor
+	static class UnrepairableMultiplicityConstraintUpdater implements RelationConstraintUpdater {
+		val String name
+		val LinearBoundedExpression targetCardinalityExpression
+		val ViatraQueryMatcher<? extends IPatternMatch> unrepairableMultiplicityMatcher
+
+		override update(PartialInterpretation p) {
+			val value = unrepairableMultiplicityMatcher.getCalculatedMultiplicity(p)
+			if (value === null) {
+				throw new IllegalArgumentException("Unrepairable multiplicity is missing for " + name)
+			}
+			targetCardinalityExpression.tightenLowerBound(value)
 		}
 	}
 }

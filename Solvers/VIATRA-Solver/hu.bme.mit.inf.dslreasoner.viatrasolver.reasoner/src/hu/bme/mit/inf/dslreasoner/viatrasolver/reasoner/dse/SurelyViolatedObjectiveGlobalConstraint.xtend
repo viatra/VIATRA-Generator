@@ -9,9 +9,7 @@ class SurelyViolatedObjectiveGlobalConstraint implements IGlobalConstraint {
 	val ViatraReasonerSolutionSaver solutionSaver
 
 	override init(ThreadContext context) {
-		if (solutionSaver !== null) {
-			return
-		}
+		// Nothing to initialize.
 	}
 
 	override createNew() {
