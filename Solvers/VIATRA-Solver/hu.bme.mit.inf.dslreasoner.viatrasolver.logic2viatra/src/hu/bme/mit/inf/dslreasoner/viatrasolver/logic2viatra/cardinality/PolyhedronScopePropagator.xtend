@@ -2,9 +2,12 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
+import com.google.common.collect.ImmutableSet
 import com.google.common.collect.Maps
 import com.google.common.collect.Sets
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationStatistics
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.UnifinishedMultiplicityQueries
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
@@ -30,13 +33,14 @@ class PolyhedronScopePropagator extends ScopePropagator {
 	val LinearBoundedExpression topLevelBounds
 	val Polyhedron polyhedron
 	val PolyhedronSaturationOperator operator
+	val Set<Relation> relevantRelations
 	List<RelationConstraintUpdater> updaters = emptyList
 
-	new(PartialInterpretation p, Set<? extends Type> possibleNewDynamicTypes,
+	new(PartialInterpretation p, ModelGenerationStatistics statistics, Set<? extends Type> possibleNewDynamicTypes,
 		Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> unfinishedMultiplicityQueries,
 		IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery,
 		PolyhedronSolver solver, boolean propagateRelations) {
-		super(p)
+		super(p, statistics)
 		val builder = new PolyhedronBuilder(p)
 		builder.buildPolyhedron(possibleNewDynamicTypes)
 		scopeBounds = builder.scopeBounds
@@ -54,11 +58,14 @@ class PolyhedronScopePropagator extends ScopePropagator {
 			}
 			builder.buildMultiplicityConstraints(unfinishedMultiplicityQueries, hasElementInContainmentQuery,
 				maximumNumberOfNewNodes)
+			relevantRelations = builder.relevantRelations
 			updaters = builder.updaters
+		} else {
+			relevantRelations = emptySet
 		}
 	}
 
-	override void propagateAllScopeConstraints() {
+	override void doPropagateAllScopeConstraints() {
 		resetBounds()
 		populatePolyhedronFromScope()
 //		println(polyhedron)
@@ -71,6 +78,13 @@ class PolyhedronScopePropagator extends ScopePropagator {
 			if (result != PolyhedronSaturationResult.SATURATED) {
 				super.propagateAllScopeConstraints()
 			}
+		}
+	}
+	
+	override propagateAdditionToRelation(Relation r) {
+		super.propagateAdditionToRelation(r)
+		if (relevantRelations.contains(r)) {
+			propagateAllScopeConstraints()
 		}
 	}
 
@@ -188,6 +202,7 @@ class PolyhedronScopePropagator extends ScopePropagator {
 		Map<Scope, LinearBoundedExpression> scopeBounds
 		LinearBoundedExpression topLevelBounds
 		Polyhedron polyhedron
+		Set<Relation> relevantRelations
 		List<RelationConstraintUpdater> updaters
 
 		def buildPolyhedron(Set<? extends Type> possibleNewDynamicTypes) {
@@ -222,8 +237,20 @@ class PolyhedronScopePropagator extends ScopePropagator {
 					buildNonContainmentConstraints(constraint, pair.value)
 				}
 			}
+			buildRelevantRelations(constraints.keySet)
 			updaters = updatersBuilder.build
 			addCachedConstraintsToPolyhedron()
+		}
+		
+		private def buildRelevantRelations(Set<RelationMultiplicityConstraint> constraints) {
+			val builder = ImmutableSet.builder
+			for (constraint : constraints) {
+				builder.add(constraint.relation)
+				if (constraint.inverseRelation !== null) {
+					builder.add(constraint.inverseRelation)
+				}
+			}
+			relevantRelations = builder.build
 		}
 
 		private def addCachedConstraintsToPolyhedron() {

@@ -69,7 +69,7 @@ class PatternProvider {
 				val startTime = System.nanoTime
 				val result = typeAnalysis.performTypeAnalysis(problem, emptySolution)
 				val typeAnalysisTime = System.nanoTime - startTime
-				statistics.PreliminaryTypeAnalisisTime = typeAnalysisTime
+				statistics.preliminaryTypeAnalisisTime = typeAnalysisTime
 				result
 			} else {
 				null

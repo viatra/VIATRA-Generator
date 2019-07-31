@@ -20,6 +20,7 @@ class RelationConstraints {
 @Data
 class RelationMultiplicityConstraint {
 	Relation relation
+	Relation inverseRelation
 	boolean containment
 	boolean container
 	int lowerBound
@@ -47,7 +48,7 @@ class RelationMultiplicityConstraint {
 	}
 
 	def constrainsRemainingInverse() {
-		!containment && inverseUpperBoundFinite
+		lowerBound >= 1 && !containment && inverseUpperBoundFinite
 	}
 
 	def constrainsRemainingContents() {
@@ -119,8 +120,8 @@ class RelationConstraintCalculator {
 				inverseUpperMultiplicity = upperMultiplicities.get(relation)
 				container = containmentRelations.contains(inverseRelation)
 			}
-			val constraint = new RelationMultiplicityConstraint(relation, containment, container, lowerMultiplicity,
-				upperMultiplicity, inverseUpperMultiplicity)
+			val constraint = new RelationMultiplicityConstraint(relation, inverseRelation, containment, container,
+				lowerMultiplicity, upperMultiplicity, inverseUpperMultiplicity)
 			if (constraint.isActive) {
 				if (relation.parameters.size != 2) {
 					throw new IllegalArgumentException('''Relation «relation.name» has multiplicity or containment constraints, but it is not binary''')

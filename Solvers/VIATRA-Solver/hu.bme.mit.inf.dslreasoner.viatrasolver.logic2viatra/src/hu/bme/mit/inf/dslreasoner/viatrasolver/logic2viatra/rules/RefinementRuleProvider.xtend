@@ -98,10 +98,12 @@ class RefinementRuleProvider {
 					val newLink2 = factory2.createBinaryElementRelationLink => [it.param1 = newElement it.param2 = container]
 					inverseRelationInterpretation.relationlinks+=newLink2
 					
+					val propagatorStartTime = System.nanoTime
+					statistics.addExecutionTime(propagatorStartTime-startTime)
+					
 					// Scope propagation
 					scopePropagator.propagateAdditionToType(typeInterpretation)
-					
-					statistics.addExecutionTime(System.nanoTime-startTime)
+					statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
 				]
 			} else {
 				ruleBuilder.action[match |
@@ -132,10 +134,12 @@ class RefinementRuleProvider {
 					val newLink = factory2.createBinaryElementRelationLink => [it.param1 = container it.param2 = newElement]
 					relationInterpretation.relationlinks+=newLink
 					
+					val propagatorStartTime = System.nanoTime
+					statistics.addExecutionTime(propagatorStartTime-startTime)
+					
 					// Scope propagation
 					scopePropagator.propagateAdditionToType(typeInterpretation)
-					
-					statistics.addExecutionTime(System.nanoTime-startTime)
+					statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
 				]
 			}
 		} else {
@@ -162,29 +166,31 @@ class RefinementRuleProvider {
 				typeInterpretation.elements += newElement
 				typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
 				
+				val propagatorStartTime = System.nanoTime
+				statistics.addExecutionTime(propagatorStartTime-startTime)
+				
 				// Scope propagation
 				scopePropagator.propagateAdditionToType(typeInterpretation)
-				
-				statistics.addExecutionTime(System.nanoTime-startTime)
+				statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
 			]
 		}
 		return ruleBuilder.build
 	}
 	
-	def createRelationRefinementRules(GeneratedPatterns patterns, ModelGenerationStatistics statistics) {
+	def createRelationRefinementRules(GeneratedPatterns patterns, ScopePropagator scopePropagator, ModelGenerationStatistics statistics) {
 		val res = new LinkedHashMap
 		for(LHSEntry: patterns.refinerelationQueries.entrySet) {
 			val declaration = LHSEntry.key.key
 			val inverseReference = LHSEntry.key.value
 			val lhs = LHSEntry.value as IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>>
-			val rule = createRelationRefinementRule(declaration,inverseReference,lhs,statistics)
+			val rule = createRelationRefinementRule(declaration,inverseReference,lhs,scopePropagator,statistics)
 			res.put(LHSEntry.key,rule)
 		}
 		return res
 	}
 	
 	def private BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>
-		createRelationRefinementRule(RelationDeclaration declaration, Relation inverseRelation, IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs, ModelGenerationStatistics statistics)
+		createRelationRefinementRule(RelationDeclaration declaration, Relation inverseRelation, IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs, ScopePropagator scopePropagator, ModelGenerationStatistics statistics)
 	{
 		val name = '''addRelation_«declaration.name.canonizeName»«IF inverseRelation != null»_and_«inverseRelation.name.canonizeName»«ENDIF»'''
 		val ruleBuilder = factory.createRule
@@ -201,7 +207,13 @@ class RefinementRuleProvider {
 				val trg = match.get(4) as DefinedElement
 				val link = createBinaryElementRelationLink => [it.param1 = src it.param2 = trg]
 				relationInterpretation.relationlinks += link
-                statistics.addExecutionTime(System.nanoTime-startTime)
+				
+				val propagatorStartTime = System.nanoTime
+				statistics.addExecutionTime(propagatorStartTime-startTime)
+				
+				// Scope propagation
+				scopePropagator.propagateAdditionToRelation(declaration)
+				statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
 			]
 		} else {
 			ruleBuilder.action [ match |
@@ -217,7 +229,13 @@ class RefinementRuleProvider {
 				relationInterpretation.relationlinks += link
 				val inverseLink = createBinaryElementRelationLink => [it.param1 = trg it.param2 = src]
 				inverseInterpretation.relationlinks += inverseLink
-				statistics.addExecutionTime(System.nanoTime-startTime)
+				
+				val propagatorStartTime = System.nanoTime
+				statistics.addExecutionTime(propagatorStartTime-startTime)
+				
+				// Scope propagation
+				scopePropagator.propagateAdditionToRelation(declaration)
+				statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
 			]
 		}
 

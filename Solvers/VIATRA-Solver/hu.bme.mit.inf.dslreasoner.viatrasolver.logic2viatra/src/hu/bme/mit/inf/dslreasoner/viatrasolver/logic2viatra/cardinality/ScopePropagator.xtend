@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationStatistics
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
@@ -11,14 +13,15 @@ import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 
 class ScopePropagator {
-	@Accessors(PROTECTED_GETTER) PartialInterpretation partialInterpretation
-	Map<PartialTypeInterpratation, Scope> type2Scope
-
+	@Accessors(PROTECTED_GETTER) val PartialInterpretation partialInterpretation
+	val ModelGenerationStatistics statistics
+	val Map<PartialTypeInterpratation, Scope> type2Scope
 	val Map<Scope, Set<Scope>> superScopes
 	val Map<Scope, Set<Scope>> subScopes
 
-	new(PartialInterpretation p) {
+	new(PartialInterpretation p, ModelGenerationStatistics statistics) {
 		partialInterpretation = p
+		this.statistics = statistics
 		type2Scope = new HashMap
 		for (scope : p.scopes) {
 			type2Scope.put(scope.targetTypeInterpretation, scope)
@@ -57,8 +60,13 @@ class ScopePropagator {
 			}
 		} while (changed)
 	}
-
+	
 	def propagateAllScopeConstraints() {
+		statistics.incrementScopePropagationCount()
+		doPropagateAllScopeConstraints()
+	}
+
+	protected def doPropagateAllScopeConstraints() {
 		var boolean hadChanged
 		do {
 			hadChanged = false
@@ -94,6 +102,10 @@ class ScopePropagator {
 //		println(''' «this.partialInterpretation.minNewElements» - «this.partialInterpretation.maxNewElements»''')
 //		this.partialInterpretation.scopes.forEach[println(''' «(it.targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.name»: «it.minNewElements»-«it.maxNewElements»''')]
 //		println('''All constraints are propagated upon increasing «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
+	}
+	
+	def void propagateAdditionToRelation(Relation r) {
+		// Nothing to propagate.
 	}
 
 	private def propagateLowerLimitUp(Scope subScope, Scope superScope) {

@@ -27,6 +27,7 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Z3PolyhedronSolver
 
 class ModelGenerationStatistics {
 	public var long transformationExecutionTime = 0
@@ -35,7 +36,25 @@ class ModelGenerationStatistics {
 		transformationExecutionTime += amount
 	}
 
-	public var long PreliminaryTypeAnalisisTime = 0
+	public var long scopePropagationTime = 0
+
+	synchronized def addScopePropagationTime(long amount) {
+		scopePropagationTime += amount
+	}
+
+	public var long preliminaryTypeAnalisisTime = 0
+
+	public var int decisionsTried = 0
+	
+	synchronized def incrementDecisionCount() {
+		decisionsTried++
+	}
+	
+	public var int scopePropagatorInvocations
+	
+	synchronized def incrementScopePropagationCount() {
+		scopePropagatorInvocations++
+	}
 }
 
 @Data class ModelGenerationMethod {
@@ -84,12 +103,12 @@ class ModelGenerationMethodProvider {
 		val relationConstraints = relationConstraintCalculator.calculateRelationConstraints(logicProblem)
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
 			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, writeFiles)
-		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, queries)
+		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, queries, statistics)
 		scopePropagator.propagateAllScopeConstraints
-		val // LinkedHashMap<Pair<Relation, ? extends Type>, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>>
-		objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(queries, scopePropagator,
+		val objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(queries, scopePropagator,
 			nameNewElements, statistics)
-		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries, statistics)
+		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries, scopePropagator,
+			statistics)
 
 		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(queries)
 		val unfinishedWF = queries.getUnfinishedWFQueries.values
@@ -118,15 +137,26 @@ class ModelGenerationMethodProvider {
 	}
 
 	private def createScopePropagator(ScopePropagatorStrategy scopePropagatorStrategy,
-		PartialInterpretation emptySolution, GeneratedPatterns queries) {
+		PartialInterpretation emptySolution, GeneratedPatterns queries, ModelGenerationStatistics statistics) {
 		switch (scopePropagatorStrategy) {
-			case BasicTypeHierarchy:
-				new ScopePropagator(emptySolution)
-			case PolyhedralTypeHierarchy,
-			case PolyhedralRelations: {
+			case ScopePropagatorStrategy.BasicTypeHierarchy:
+				new ScopePropagator(emptySolution, statistics)
+			ScopePropagatorStrategy.Polyhedral: {
 				val types = queries.refineObjectQueries.keySet.map[newType].toSet
-				val solver = new CbcPolyhedronSolver
-				new PolyhedronScopePropagator(emptySolution, types, queries.multiplicityConstraintQueries,
+				val solver = switch (scopePropagatorStrategy.solver) {
+					case Z3Integer:
+						new Z3PolyhedronSolver(false, scopePropagatorStrategy.timeoutSeconds)
+					case Z3Real:
+						new Z3PolyhedronSolver(true, scopePropagatorStrategy.timeoutSeconds)
+					case Cbc:
+						new CbcPolyhedronSolver(false, scopePropagatorStrategy.timeoutSeconds, true)
+					case Clp:
+						new CbcPolyhedronSolver(true, scopePropagatorStrategy.timeoutSeconds, true)
+					default:
+						throw new IllegalArgumentException("Unknown polyhedron solver: " +
+							scopePropagatorStrategy.solver)
+				}
+				new PolyhedronScopePropagator(emptySolution, statistics, types, queries.multiplicityConstraintQueries,
 					queries.hasElementInContainmentQuery, solver, scopePropagatorStrategy.requiresUpperBoundIndexing)
 			}
 			default:

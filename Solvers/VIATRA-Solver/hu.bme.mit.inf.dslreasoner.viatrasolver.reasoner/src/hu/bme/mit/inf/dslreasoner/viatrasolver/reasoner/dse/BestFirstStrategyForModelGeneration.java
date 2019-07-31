@@ -189,6 +189,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
+				method.getStatistics().incrementDecisionCount();
 
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {

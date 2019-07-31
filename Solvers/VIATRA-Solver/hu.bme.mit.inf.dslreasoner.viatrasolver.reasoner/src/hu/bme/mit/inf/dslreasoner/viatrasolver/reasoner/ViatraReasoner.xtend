@@ -39,6 +39,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -137,11 +138,14 @@ class ViatraReasoner extends LogicReasoner {
 
 		dse.setInitialModel(emptySolution, false)
 
-		val IStateCoderFactory statecoder = if (viatraConfig.stateCoderStrategy == StateCoderStrategy.Neighbourhood) {
+		val IStateCoderFactory statecoder = switch (viatraConfig.stateCoderStrategy) {
+			case Neighbourhood:
+				new NeighbourhoodBasedStateCoderFactory
+			case PairwiseNeighbourhood:
 				new PairwiseNeighbourhoodBasedStateCoderFactory
-			} else {
+			default:
 				new IdentifierBasedStateCoderFactory
-			}
+		}
 		dse.stateCoderFactory = statecoder
 
 		dse.maxNumberOfThreads = 1
@@ -184,8 +188,12 @@ class ViatraReasoner extends LogicReasoner {
 				it.value = (method.statistics.transformationExecutionTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
+				it.name = "ScopePropagationTime"
+				it.value = (method.statistics.scopePropagationTime / 1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
 				it.name = "TypeAnalysisTime"
-				it.value = (method.statistics.PreliminaryTypeAnalisisTime / 1000000) as int
+				it.value = (method.statistics.preliminaryTypeAnalisisTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "StateCoderTime"
@@ -198,6 +206,18 @@ class ViatraReasoner extends LogicReasoner {
 			it.entries += createIntStatisticEntry => [
 				it.name = "SolutionCopyTime"
 				it.value = (solutionCopier.getTotalCopierRuntime / 1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "States"
+				it.value = dse.numberOfStates as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "Decisions"
+				it.value = method.statistics.decisionsTried
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "ScopePropagations"
+				it.value = method.statistics.scopePropagatorInvocations
 			]
 			if (diversityChecker.isActive) {
 				it.entries += createIntStatisticEntry => [
