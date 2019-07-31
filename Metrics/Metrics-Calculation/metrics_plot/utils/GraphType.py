@@ -25,6 +25,8 @@ class GraphStat:
     # init with teh file name of the stat
     def __init__(self, filename):
         contents, self.out_d, self.na, self.mpc = reader.getmetrics(filename)
-        self.num_nodes = np.array(contents[constants.NUMBER_NODES])
+        self.numNodes = np.array(contents[constants.NUMBER_NODES])
         if constants.STATE_ID in contents:
             self.id = (contents[constants.STATE_ID])[0]
+        if constants.Node_TYPE_KEY in contents:
+            self.nodeTypeStat = contents[constants.Node_TYPE_KEY]

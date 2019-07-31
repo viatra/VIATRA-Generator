@@ -12,4 +12,9 @@
       <query-specification fqn="ca.mcgill.ecse.socialnetwork.plugin.friendship"/>
     </group>
   </extension>
+  <extension id="queries.Ecore_pattern" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Ecore_pattern" id="queries.Ecore_pattern">
+      <query-specification fqn="queries.sameSuperClass"/>
+    </group>
+  </extension>
 </plugin>

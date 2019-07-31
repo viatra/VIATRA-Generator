@@ -24,9 +24,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 class GraphReader{
 	val ResourceSet resSet = new ResourceSetImpl();
 	val referenceTypes = new ArrayList<EReference>();
+	var String suffix;
 	
-	new(EPackage metaModel) {
+	new(EPackage metaModel, String suffix) {
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*",new XMIResourceFactoryImpl)
+		this.suffix = suffix;
 		
 		//find all reference types in the meta model
 		metaModel.eAllContents.forEach[
@@ -52,14 +54,14 @@ class GraphReader{
 		metrics.add(new NodeTypeMetric());
 		metrics.add(new EdgeTypeMetric());
 		
-		//check all files in the directory with xmi
-		for(String name : dir.list.filter[it| it.endsWith(".xmi")]){
+		//check all files in the directory with suffix
+		for(String name : dir.list.filter[it| it.endsWith(suffix)]){
 			val file = new File(name);
 			val roots = readModel(EObject, path,  file.name);			
 			//add a list of metrics
 			val g = new EMFGraph();
 			for(root : roots){
-				g.init(root, metrics, name.replaceFirst(".xmi", ""), referenceTypes);
+				g.init(root, metrics, name.replaceFirst(suffix, ""), referenceTypes);
 			}
 			
 			graphs.add(g);
@@ -82,7 +84,7 @@ class GraphReader{
 		//add a list of metrics
 		val g = new EMFGraph();
 		for(root : roots){
-			g.init(root, metrics, filename.replaceFirst(".xmi", ""), referenceTypes);
+			g.init(root, metrics, filename.replaceFirst(suffix, ""), referenceTypes);
 		}
 		return g
 	}

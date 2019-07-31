@@ -34,7 +34,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.HillClimbingOnRealisticMetricStrategyForModelGeneration
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstSearchForMetricModelGeneration
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -114,7 +113,7 @@ class ViatraReasoner extends LogicReasoner{
 			dse.addTransformationRule(rule)
 		}
 		
-		val strategy = new HillClimbingOnRealisticMetricStrategyForModelGeneration(workspace,viatraConfig,method)
+		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
 		viatraConfig.progressMonitor.workedForwardTransformation
 		
 		val transformationTime = System.nanoTime - transformationStartTime

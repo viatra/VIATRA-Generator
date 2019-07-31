@@ -1,22 +1,18 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
-import java.util.Set
 import org.apache.commons.math3.stat.inference.KolmogorovSmirnovTest
 
 class KSDistance extends CostDistance {
 	var static ksTester = new KolmogorovSmirnovTest();
 	var MetricSampleGroup g;
-	new(Domain d){
-		var metrics = RepMetricsReader.read(d);
-		this.g = metrics;
-	}
 	
+	new(MetricSampleGroup g){
+		this.g = g;	
+	}
 	override double mpcDistance(List<Double> samples){
 		//if the size of array is smaller than 2, ks distance cannot be performed, simply return 1
 		if(samples.size < 2) return 1;
@@ -62,5 +58,28 @@ class KSDistance extends CostDistance {
 		
 		
 		return value;
+	}
+	
+	def nodeTypeDistance(HashMap<String, Double> samples){
+		var typesDistMap = g.nodeTypeSamples;
+		var sourceDist = newArrayList();
+		var instanceDist = newArrayList();
+		
+		for(key : typesDistMap.keySet()){
+			sourceDist.add(typesDistMap.get(key));
+			instanceDist.add(samples.getOrDefault(key, 0.0));
+		}
+		
+		// Since we already know the pdf, we compute the ks-test manully
+		var ksStatistics = 0.0;
+		var sum1 = 0.0;
+		var sum2 = 0.0;
+		for(var i = 0; i < sourceDist.size(); i++){
+			sum1 += sourceDist.get(i);
+			sum2 += instanceDist.get(i);
+			
+			ksStatistics = Math.max(ksStatistics, Math.abs(sum1 - sum2));
+		} 
+		return ksStatistics;
 	}
 }

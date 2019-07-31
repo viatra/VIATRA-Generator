@@ -5,11 +5,13 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.JSDistan
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistance
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.StateData
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.PartialInterpretationGraph
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MultiplexParticipationCoefficientMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeActivityMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeTypeMetric
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.OutDegreeMetric
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.TypedOutDegree
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.predictor.LinearModel
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.ArrayList
@@ -18,7 +20,6 @@ import java.util.List
 import java.util.Map
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression
 import org.eclipse.xtend.lib.annotations.Accessors
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.NodeTypeMetric
 
 class PartialInterpretationMetricDistance {
 	
@@ -28,15 +29,17 @@ class PartialInterpretationMetricDistance {
 	var Map<Object, StateData> stateAndHistory;
 	var OLSMultipleLinearRegression regression;
 	List<StateData> samples;
-	
+	var MetricSampleGroup g;
 	@Accessors(PUBLIC_GETTER)
 	var LinearModel linearModel;
 	
 	
 	new(){
-		ks = new KSDistance(Domain.Yakinduum);
-		js = new JSDistance(Domain.Yakinduum);
-		ed = new EuclideanDistance(Domain.Yakinduum);
+		var metrics = RepMetricsReader.read(Domain.Yakinduum);
+		this.g = metrics;
+		ks = new KSDistance(g);
+		js = new JSDistance(g);
+		ed = new EuclideanDistance(g);
 		regression = new OLSMultipleLinearRegression();
 		regression.noIntercept = false;
 		stateAndHistory = new HashMap<Object, StateData>();
@@ -56,8 +59,9 @@ class PartialInterpretationMetricDistance {
 		var mpc = ks.mpcDistance(metricSamples.mpcSamples);
 		var na = ks.naDistance(metricSamples.naSamples);
 		var outDegree = ks.outDegreeDistance(metricSamples.outDegreeSamples);
+		var nodeType = ks.nodeTypeDistance(metricSamples.nodeTypeSamples);
 		//var typedOutDegree = ks.typedOutDegreeDistance(metricSamples.typedOutDegreeSamples);
-		var distance = new MetricDistanceGroup(mpc, na, outDegree);
+		var distance = new MetricDistanceGroup(mpc, na, outDegree, nodeType);
 		distance.nodeTypeInfo = metricSamples.nodeTypeSamples;
 		return distance;
 	}
@@ -171,14 +175,14 @@ class MetricDistanceGroup{
 	var double mpcDistance;
 	var double naDistance;
 	var double outDegreeDistance;
-	var double typedOutDegreeDistance;
+	var double nodeTypeDistance;
 	protected var HashMap<String, Double> nodeTypeInfo;
 	
-	new(double mpcDistance, double naDistance, double outDegreeDistance, double typedOutDegreeDistance){
+	new(double mpcDistance, double naDistance, double outDegreeDistance, double nodeTypeDistance){
 		this.mpcDistance = mpcDistance;
 		this.naDistance = naDistance;
 		this.outDegreeDistance = outDegreeDistance;
-		this.typedOutDegreeDistance = typedOutDegreeDistance;
+		this.nodeTypeDistance = nodeTypeDistance;
 	}
 	
 	new(double mpcDistance, double naDistance, double outDegreeDistance){
@@ -187,8 +191,8 @@ class MetricDistanceGroup{
 		this.outDegreeDistance = outDegreeDistance;
 	}
 	
-	def double getTypedOutDegreeDistance(){
-		return this.typedOutDegreeDistance;
+	def double getNodeTypeDistance(){
+		return this.nodeTypeDistance;
 	}
 	
 	def double getMPCDistance(){

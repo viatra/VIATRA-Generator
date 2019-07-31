@@ -21,16 +21,19 @@ class PartialInterpretationGraph extends Graph{
 			//only need the name of the reference type (remove everything with and after "reference")
 			var n = it.name.split(" ").get(0);
 			// TODO: Here is to only consider one part of opposite edges
-			//if(!n.equals('target') && !n.equals('source') /* && !n.equals('incomingTransitions')*/){
+			if(!n.equals('target') && !n.equals('source') /* && !n.equals('incomingTransitions')*/){
 				this.statistic.addEdgeType(n);
-			//}
+			}
 		]
 		// add all elements
 		val typeInterpretations = getTypes(partial);
 		for(type : typeInterpretations){
-			var typeName = type.interpretationOf.name.replace(classSuffix, '');
-			for(node : type.elements){
-				this.statistic.addNodeWithType(node, typeName);
+			//Only consider the most concrete class
+			if(type.interpretationOf.subtypes.size == 0){
+				var typeName = type.interpretationOf.name.replace(classSuffix, '');
+				for(node : type.elements){
+					this.statistic.addNodeWithType(node, typeName);
+				}
 			}
 		}
 		
@@ -38,11 +41,11 @@ class PartialInterpretationGraph extends Graph{
 			//only need the name of the reference type (remove everything with and after "reference")
 			val type = relationInterpretation.interpretationOf.name.split(" ").get(0);
 			// TODO: Here is to only consider one part of opposite edges
-			//if(!type.equals('target') && !type.equals('source') /*&& !type.equals('incomingTransitions')*/){
+			if(!type.equals('target') && !type.equals('source') /*&& !type.equals('incomingTransitions')*/){
 				for(edge : relationInterpretation.relationlinks.filter(BinaryElementRelationLink)){
 					statistic.addEdge(edge.param1, edge.param2, type);
 				}	
-			//}
+			}
 		}	
 		
 		this.name = name;

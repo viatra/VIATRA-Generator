@@ -1,0 +1,34 @@
+import viatra "./queries/queries/ecore_pattern.vql"
+import epackage "http://www.eclipse.org/emf/2002/Ecore"
+
+generate {
+	metamodel = {package ecore excluding{EClassifier.instanceClass, EClassifier.defaultValue, 
+										 EEnumLiteral.instance, EStructuralFeature.defaultValue, EStructuralFeature.changeable,
+										 EStructuralFeature.derived, ENamedElement.name, EClass.interface, EClass.abstract, EClassifier.instanceTypeName,
+										 EClassifier.instanceClassName, EPackage.nsPrefix, EPackage.nsURI, EAnnotation.source,
+										 EAttribute.iD, EDataType.serializable, EEnumLiteral.literal, EEnumLiteral.value,
+										 EGenericType.eTypeParameter, EReference.resolveProxies, EStringToStringMapEntry.key,
+										 EStringToStringMapEntry.value, EStructuralFeature.defaultValueLiteral, EStructuralFeature.transient,
+										 EStructuralFeature.unsettable, EStructuralFeature.volatile, ETypedElement.lowerBound,
+										 ETypedElement.many, ETypedElement.ordered, ETypedElement.required, ETypedElement.unique,ETypedElement.upperBound,
+										 EPackage.eFactoryInstance}}
+//	metamodel = {EPackage, EClass, EClassifier, EObject, ENamedElement, EModelElement, EReference, EStructuralFeature, ETypedElement}
+	partial-model = { "inputs/ecore.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 75
+	}
+	
+	number = 1
+	runs = 50
+	config = {
+		log-level = none
+	}
+	
+	debug = "debug"
+	output = "output/Ecore/"
+}

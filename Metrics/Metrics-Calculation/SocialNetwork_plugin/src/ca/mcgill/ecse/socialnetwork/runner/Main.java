@@ -11,6 +11,7 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistan
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.EMFGraph;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.CsvFileWriter;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.GraphReader;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup;
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.validation.ViolationCheck;
@@ -24,8 +25,8 @@ public class Main {
 		return message;
 	}
 	
-	private static String configFolder = "yakinduum/config15/";
-	private static String configFileName = configFolder + "info_new_metric.csv";
+	private static String configFolder = "yakinduum/config22/";
+	private static String configFileName = configFolder + "info_old_metric.csv";
 	private static String aggregateViolationMeasureFileName = configFolder + "aggregateInfo.csv";
 	private static String fileReadFolder = "output/Viatra_100/";
 	
@@ -33,29 +34,30 @@ public class Main {
 		
 		
 		long begin = System.currentTimeMillis();
-		String message = runWithPath("yakinduGeneration.vsconfig");
+		String message = runWithPath("ecore.vsconfig");
 		long elapsed = System.currentTimeMillis() - begin;
 
 		if(message != null) {
+			System.out.println(message);
 			return;
 		}
-		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		String time = formatTime(elapsed);
-		ArrayList<String> infoOutput = new ArrayList<String>();
-		infoOutput.add(time);
-		output.add(infoOutput);
-		System.out.println(time);
-		CsvFileWriter.write(output, configFileName);
-		
-		
-		output = new ArrayList<ArrayList<String>>();
-		output.add(prepareInfo());
-		CsvFileWriter.append(output, configFileName);
-		
-		for(int i = 0; i < 50; i++) {
-			generateModel(i+1);
-		}
-		//aggregateViolationMeasure(50);
+//		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+//		String time = formatTime(elapsed);
+//		ArrayList<String> infoOutput = new ArrayList<String>();
+//		infoOutput.add(time);
+//		output.add(infoOutput);
+//		System.out.println(time);
+//		CsvFileWriter.write(output, configFileName);
+//		
+//		
+//		output = new ArrayList<ArrayList<String>>();
+//		output.add(prepareInfo());
+//		CsvFileWriter.append(output, configFileName);
+//		
+//		for(int i = 0; i < 50; i++) {
+//			generateModel(i+1);
+//		}
+//		aggregateViolationMeasure(50);
 		System.out.println("Finished");
 	}
 
@@ -86,7 +88,7 @@ public class Main {
 		ArrayList<String> infoOutput = new ArrayList<String>();
 		infoOutput.add(run+ "");
 
-		YakinduumModel model = new YakinduumModel("output/Viatra_100/run"+run+"/"+ filename);
+		YakinduumModel model = new YakinduumModel(fileReadFolder+"/run"+run+"/"+ filename);
 		
 		//parse map of violation counts to two list and add them to the result list 
 		Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
@@ -110,7 +112,7 @@ public class Main {
 		ArrayList<String> violationNames = null;
 		for(int run = 1; run < size+1; run++) {
 			String filename = run+"_1.xmi";
-			YakinduumModel model = new YakinduumModel("output/Viatra_100/run"+run+"/"+ filename);
+			YakinduumModel model = new YakinduumModel(fileReadFolder+"/run"+run+"/"+ filename);
 
 			Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
 			if(run == 1) {
@@ -143,11 +145,11 @@ public class Main {
 	public static ArrayList<String> calculateMetric(int run) {
 		//read model and metric
 		ArrayList<String> output = new ArrayList<String>();
-		GraphReader reader = new GraphReader(YakindummPackage.eINSTANCE);
+		GraphReader reader = new GraphReader(YakindummPackage.eINSTANCE, ".xmi");
 		EMFGraph graph = reader.readModel(fileReadFolder+"/run"+run, run + "_1.xmi");
-		
+		MetricSampleGroup metrics = RepMetricsReader.read(Domain.Yakinduum);
 		//KS distance
-		KSDistance ks = new KSDistance(Domain.Yakinduum);
+		KSDistance ks = new KSDistance(metrics);
 		
 		//calculate and put metric data to output array
 		MetricSampleGroup samples = graph.evaluateAllMetricsToSamples();

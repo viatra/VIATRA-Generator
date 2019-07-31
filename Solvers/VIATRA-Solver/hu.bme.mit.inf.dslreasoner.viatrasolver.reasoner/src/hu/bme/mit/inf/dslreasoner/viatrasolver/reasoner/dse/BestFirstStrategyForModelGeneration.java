@@ -14,19 +14,19 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
 import org.eclipse.viatra.dse.base.ThreadContext;
 import org.eclipse.viatra.dse.objectives.Fitness;
+import org.eclipse.viatra.dse.objectives.IObjective;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
@@ -34,8 +34,6 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.MetricDistanceGroup;
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.PartialInterpretationMetric;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
@@ -115,7 +113,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public void initStrategy(ThreadContext context) {
 		this.context = context;
 		this.solutionStore = context.getGlobalContext().getSolutionStore();
-		
 		ViatraQueryEngine engine = context.getQueryEngine();
 //		// TODO: visualisation
 		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
@@ -191,11 +188,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				continue mainLoop;
 //			}
 
-			
-			
 			List<Object> activationIds = selectActivation();
 			Iterator<Object> iterator = activationIds.iterator();
-			
+
 			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
 				final Object nextActivation = iterator.next();
 //				if (!iterator.hasNext()) {
@@ -204,6 +199,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
+
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
 //					System.out.println(matcher.getPatternName());
@@ -214,16 +210,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //					System.out.println("---------");
 //				}
 				
-				//calculate the metrics for each state
-//				logCurrentStateMetric();
-				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 
-/*				if (context.isCurrentStateAlreadyTraversed()) {
-//					logger.info("The new state is already visited.");
-//					context.backtrack();
-//				} else*/ if (!context.checkGlobalConstraints()) {
+				if (context.isCurrentStateAlreadyTraversed()) {
+					logger.info("The new state is already visited.");
+					context.backtrack();
+				} else if (!context.checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
 					context.backtrack();
 				} else {
@@ -256,6 +249,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 					}
 				}
 			}
+
 			logger.debug("State is fully traversed.");
 			trajectoiresToExplore.remove(currentTrajectoryWithFittness);
 			currentTrajectoryWithFittness = null;
@@ -316,16 +310,17 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			return trajectoiresToExplore.element();
 		}
 	}	
-	
-//	private void logCurrentStateMetric() {
-//		if(this.configuration.documentationLevel != DocumentationLevel.NONE || workspace == null) {
-//			return;
-//		}
-//		
-//		PartialInterpretation interpretation = (PartialInterpretation)context.getModel();   //pattern.get("interpretation");
-//		PartialInterpretationMetric.calculateMetric(interpretation, "debug/metric/" + context.getModel().hashCode(), context.getCurrentStateId().toString());		
-//	}
 
+//	private void logCurrentStateMetric() {
+//	if(this.configuration.documentationLevel != DocumentationLevel.NONE || workspace == null) {
+//		return;
+//	}
+//	
+//	PartialInterpretation interpretation = (PartialInterpretation)context.getModel();   //pattern.get("interpretation");
+//	PartialInterpretationMetric.calculateMetric(interpretation, "debug/metric/" + context.getModel().hashCode(), context.getCurrentStateId().toString());		
+//}
+
+	
 	public void visualiseCurrentState() {
 		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
 		if(partialInterpretatioVisualiser != null && this.configuration.documentationLevel == DocumentationLevel.FULL && workspace != null) {

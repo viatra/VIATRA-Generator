@@ -13,8 +13,10 @@ def readcsvfile(filename):
     
     contents = {}
     with open(filename) as f:
-        for i, line in enumerate(f):
-            arr = line.split(',')
+        data = list(f)
+        f.close()
+        for i, line in enumerate(data):
+            arr = line.replace('\n', '').split(',')
             # if there is no element in the line, continue
             if len(line) < 0: continue
             # else check for contents
@@ -24,14 +26,17 @@ def readcsvfile(filename):
             # meta models are string
             elif(arr[0] == constants.METAMODEL):
                 contents[constants.METAMODEL] = arr[1:]
-            # NA and OD are integers
+            # Node types
+            elif(arr[0] == constants.NODE_TYPE):
+                types = data[i+1].replace('\n', '').split(',')
+                numbers = data[i+2].replace('\n', '').split(',')
+                contents[constants.Node_TYPE_KEY] = {t : n for t, n in zip(types, numbers)}
+            # NA and OD are integers, and store other information as string
             else:
                 try:
                     contents[arr[0]] = list(map(int, arr[1:]))
                 except:
-                    message = arr[0], ' is not integer'
-                    #print(message)
-    f.close()
+                    contents[arr[0]] = arr[1:]
     return contents
 
 def checkAndReshape(arr):

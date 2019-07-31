@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup
 import com.google.common.collect.Sets
 import java.text.DecimalFormat
 import java.util.HashMap
@@ -11,13 +10,13 @@ class JSDistance extends CostDistance {
 	var HashMap<String, Double> mpcPMF;
 	var HashMap<String, Double> naPMF;
 	var HashMap<String, Double> outDegreePMF;
+	var HashMap<String, Double> nodeTypesPMF;
 	var DecimalFormat formatter;
 	
-	new(Domain d){
-		var metrics = RepMetricsReader.read(d);
-		var mpcSamples = metrics.mpcSamples;
-		var naSamples = metrics.naSamples.stream.mapToDouble([it]).toArray();
-		var outDegreeSamples = metrics.outDegreeSamples.stream.mapToDouble([it]).toArray();
+	new(MetricSampleGroup g){
+		var mpcSamples = g.mpcSamples;
+		var naSamples = g.naSamples.stream.mapToDouble([it]).toArray();
+		var outDegreeSamples = g.outDegreeSamples.stream.mapToDouble([it]).toArray();
 		
 		//needs to format the number to string avoid precision issue
 		formatter = new DecimalFormat("#0.00000");  
@@ -25,6 +24,7 @@ class JSDistance extends CostDistance {
 		mpcPMF = pmfFromSamples(mpcSamples, formatter);
    		naPMF = pmfFromSamples(naSamples, formatter);
    		outDegreePMF = pmfFromSamples(outDegreeSamples, formatter);	
+   		nodeTypesPMF = g.nodeTypeSamples; 
 	}
 	
 	def private combinePMF(HashMap<String, Double> pmf1, HashMap<String, Double> pmf2){
@@ -80,5 +80,9 @@ class JSDistance extends CostDistance {
 		//if the size of array is smaller than 2, ks distance cannot be performed, simply return 1
 		if(map.size < 2) return 1;
 		return jsDivergence(map, outDegreePMF);
+	}
+	
+	def nodeTypeDistance(HashMap<String, Double> samples){
+		return klDivergence(samples, nodeTypesPMF);
 	}
 }

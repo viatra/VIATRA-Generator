@@ -24,7 +24,8 @@ class EMFGraph extends Graph{
 	 */
 	def void init(List<EObject> objects, List<Metric> metrics, String name, List<EReference> referenceTypes){
 		objects.forEach[it|
-			var types = new HashSet(it.eClass.EAllSuperTypes.map[it|it.name]);
+			// TODO: Maybe want to consider all the super types as well
+			var types = new HashSet();
 			types.add(it.eClass.name);
 			statistic.addNodeWithAllTypes(it, types);
 		]
@@ -38,18 +39,13 @@ class EMFGraph extends Graph{
 //		  	)){
 //				typeToAdd = it.EOpposite;
 //			}
-			//if(!typeToAdd.name.equals('incomingTransitions')){
-				statistic.addEdgeType(typeToAdd.name);
-			//}
+//			
+			statistic.addEdgeType(typeToAdd.name);
 		];
 		
 		objects.forEach[source|
 			source.eClass.EAllReferences.forEach[r|
-				//add the type first (if it is not added already)
 				//many references
-//				if(r.name.equals('incomingTransitions')){
-//					return;
-//				}
 				if(r.isMany){
 					source.getNeighbours(r).forEach[target|
 						addEdge(source, target, r);

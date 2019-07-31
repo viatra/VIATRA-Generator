@@ -5,6 +5,7 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.CsvFileWriter
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.GraphReader
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl
 import java.util.ArrayList
+import org.eclipse.emf.ecore.EcorePackage
 
 //import yakindumm2.impl.Yakindumm2PackageImpl
 
@@ -24,18 +25,19 @@ class Main {
 	def static void main(String[] args){
 		//init model
 		YakindummPackageImpl.eINSTANCE.eClass;
+		EcorePackage.eINSTANCE.eClass;
 //		Yakindumm2PackageImpl.eINSTANCE.eClass;
 		//val infos = initData();									
 										
 		println("Start Reading Models...");
-		var reader = new GraphReader(YakindummPackageImpl.eINSTANCE);
+		var reader = new GraphReader(EcorePackage.eINSTANCE, ".xmi");
 //		for(info : infos){
 //			calculateAllModels(info.inputFolder, info.outputFolder,info.numRuns, reader);
 //		}
 		
 		//human input has different package declaration
 //		reader = new GraphReader(Yakindumm2PackageImpl.eINSTANCE);
-		val human = new RWInformation("Inputs/config15/", "outputs/", 1);
+		val human = new RWInformation("Inputs/viatra75/", "outputs/", 50);
 		calculateAllModels(human.inputFolder, human.outputFolder,human.numRuns, reader);
 		
 		

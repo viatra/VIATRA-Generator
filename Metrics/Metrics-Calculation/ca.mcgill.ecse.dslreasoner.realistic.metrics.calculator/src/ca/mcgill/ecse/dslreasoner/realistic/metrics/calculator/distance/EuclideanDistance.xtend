@@ -18,13 +18,12 @@ class EuclideanDistance extends CostDistance{
 	var HashMap<String, Double> outDegreePMF;
 	var DecimalFormat formatter;
 	
-	new(Domain d){
-		var metrics = RepMetricsReader.read(d);
-		this.g = metrics;
+	new(MetricSampleGroup g){
+		this.g = g;
 		
-		var mpcSamples = metrics.mpcSamples;
-		var naSamples = metrics.naSamples.stream.mapToDouble([it]).toArray();
-		var outDegreeSamples = metrics.outDegreeSamples.stream.mapToDouble([it]).toArray();
+		var mpcSamples = g.mpcSamples;
+		var naSamples = g.naSamples.stream.mapToDouble([it]).toArray();
+		var outDegreeSamples = g.outDegreeSamples.stream.mapToDouble([it]).toArray();
 		
 		//needs to format the number to string avoid precision issue
 		formatter = new DecimalFormat("#0.00000");  
