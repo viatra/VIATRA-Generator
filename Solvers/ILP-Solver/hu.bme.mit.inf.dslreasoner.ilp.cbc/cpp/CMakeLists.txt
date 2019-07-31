@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.14.5)
+cmake_minimum_required(VERSION 3.10.2)
 project(hu.bme.mit.inf.dslreasoner.ilp.cbc)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 find_package(JNI REQUIRED)
 find_package(PkgConfig REQUIRED)
