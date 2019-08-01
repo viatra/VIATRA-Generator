@@ -21,7 +21,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"
+        eOpposite="#//CommSubsystem/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
+        eType="#//CommSubsystem" eOpposite="#//CommSubsystem/target"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>

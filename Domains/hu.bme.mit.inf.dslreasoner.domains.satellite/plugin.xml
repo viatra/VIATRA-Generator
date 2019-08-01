@@ -7,6 +7,7 @@
   <extension id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries">
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.communicationLinkDoesNotStartAtContainingElement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.transmittingGroundStationNetwork"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.notEnoughInterferometryPayloads"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.noLinkToGroundStation"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.noPotentialLinkToGroundStation"/>

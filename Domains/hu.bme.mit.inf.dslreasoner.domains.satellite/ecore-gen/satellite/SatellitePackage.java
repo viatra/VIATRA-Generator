@@ -297,13 +297,22 @@ public interface SatellitePackage extends EPackage {
 	int COMM_SUBSYSTEM__TARGET = 0;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMM_SUBSYSTEM__SOURCE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMM_SUBSYSTEM_FEATURE_COUNT = 1;
+	int COMM_SUBSYSTEM_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Comm Subsystem</em>' class.
@@ -574,6 +583,15 @@ public interface SatellitePackage extends EPackage {
 	int UHF_COMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UHF_COMM_SUBSYSTEM__SOURCE = COMM_SUBSYSTEM__SOURCE;
+
+	/**
 	 * The number of structural features of the '<em>UHF Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -611,6 +629,15 @@ public interface SatellitePackage extends EPackage {
 	int XCOMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMM_SUBSYSTEM__SOURCE = COMM_SUBSYSTEM__SOURCE;
+
+	/**
 	 * The number of structural features of the '<em>XComm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -646,6 +673,15 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int KA_COMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KA_COMM_SUBSYSTEM__SOURCE = COMM_SUBSYSTEM__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Ka Comm Subsystem</em>' class.
@@ -790,6 +826,17 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCommSubsystem_Target();
+
+	/**
+	 * Returns the meta object for the reference list '{@link satellite.CommSubsystem#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Source</em>'.
+	 * @see satellite.CommSubsystem#getSource()
+	 * @see #getCommSubsystem()
+	 * @generated
+	 */
+	EReference getCommSubsystem_Source();
 
 	/**
 	 * Returns the meta object for class '{@link satellite.Payload <em>Payload</em>}'.
@@ -1012,6 +1059,14 @@ public interface SatellitePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMM_SUBSYSTEM__TARGET = eINSTANCE.getCommSubsystem_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMM_SUBSYSTEM__SOURCE = eINSTANCE.getCommSubsystem_Source();
 
 		/**
 		 * The meta object literal for the '{@link satellite.impl.PayloadImpl <em>Payload</em>}' class.

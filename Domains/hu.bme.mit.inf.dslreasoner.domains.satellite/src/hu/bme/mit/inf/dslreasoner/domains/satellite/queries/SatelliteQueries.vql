@@ -3,7 +3,7 @@ package hu.bme.mit.inf.dslreasoner.domains.satellite.queries
 import "http://www.example.org/satellite"
 
 @Constraint(severity = "error", key = {Element},
-	message = "A communicating element may not have two transmitting communication subsystems..")
+	message = "A communicating element may not have two transmitting communication subsystems.")
 pattern communicationLinkDoesNotStartAtContainingElement(Element : CommunicatingElement) {
 	find transmittingCommSubsystem(Element, Comm1);
 	find transmittingCommSubsystem(Element, Comm2);
@@ -13,6 +13,12 @@ pattern communicationLinkDoesNotStartAtContainingElement(Element : Communicating
 private pattern transmittingCommSubsystem(Element : CommunicatingElement, Comm : CommSubsystem) {
 	CommunicatingElement.commSubsystem(Element, Comm);
 	CommSubsystem.target(Comm, _);
+}
+
+@Constraint(severity = "error", key = {Station},
+	message = "The ground station network may not have outgoing communication links.")
+pattern transmittingGroundStationNetwork(Station : GroundStationNetwork) {
+	find transmittingCommSubsystem(Station, _);
 }
 
 // At least two spacecraft must have the interferometry payload configured

@@ -2,6 +2,7 @@
  */
 package satellite;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link satellite.CommSubsystem#getTarget <em>Target</em>}</li>
+ *   <li>{@link satellite.CommSubsystem#getSource <em>Source</em>}</li>
  * </ul>
  *
  * @see satellite.SatellitePackage#getCommSubsystem()
@@ -24,12 +26,14 @@ public interface CommSubsystem extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link satellite.CommSubsystem#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(CommSubsystem)
 	 * @see satellite.SatellitePackage#getCommSubsystem_Target()
-	 * @model
+	 * @see satellite.CommSubsystem#getSource
+	 * @model opposite="source"
 	 * @generated
 	 */
 	CommSubsystem getTarget();
@@ -43,5 +47,19 @@ public interface CommSubsystem extends EObject {
 	 * @generated
 	 */
 	void setTarget(CommSubsystem value);
+
+	/**
+	 * Returns the value of the '<em><b>Source</b></em>' reference list.
+	 * The list contents are of type {@link satellite.CommSubsystem}.
+	 * It is bidirectional and its opposite is '{@link satellite.CommSubsystem#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source</em>' reference list.
+	 * @see satellite.SatellitePackage#getCommSubsystem_Source()
+	 * @see satellite.CommSubsystem#getTarget
+	 * @model opposite="target"
+	 * @generated
+	 */
+	EList<CommSubsystem> getSource();
 
 } // CommSubsystem

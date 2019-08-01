@@ -328,6 +328,16 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
+	public EReference getCommSubsystem_Source() {
+		return (EReference) commSubsystemEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPayload() {
 		return payloadEClass;
 	}
@@ -459,6 +469,7 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		commSubsystemEClass = createEClass(COMM_SUBSYSTEM);
 		createEReference(commSubsystemEClass, COMM_SUBSYSTEM__TARGET);
+		createEReference(commSubsystemEClass, COMM_SUBSYSTEM__SOURCE);
 
 		payloadEClass = createEClass(PAYLOAD);
 
@@ -553,9 +564,12 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		initEClass(commSubsystemEClass, CommSubsystem.class, "CommSubsystem", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCommSubsystem_Target(), this.getCommSubsystem(), null, "target", null, 0, 1,
-				CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCommSubsystem_Target(), this.getCommSubsystem(), this.getCommSubsystem_Source(), "target",
+				null, 0, 1, CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCommSubsystem_Source(), this.getCommSubsystem(), this.getCommSubsystem_Target(), "source",
+				null, 0, -1, CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(payloadEClass, Payload.class, "Payload", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
