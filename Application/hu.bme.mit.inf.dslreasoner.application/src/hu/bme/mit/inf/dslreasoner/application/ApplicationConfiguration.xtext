@@ -2,7 +2,6 @@ grammar hu.bme.mit.inf.dslreasoner.application.ApplicationConfiguration with org
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/query/patternlanguage/emf/PatternLanguage" as viatra
-import "http://www.bme.hu/mit/inf/dslreasoner/faulttree/components/CftLanguage" as cftLanguage
 generate applicationConfiguration "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 
 ConfigurationScript:
@@ -25,16 +24,13 @@ INTLiteral returns ecore::EInt:
 // Imports
 ///////////////////////////////////////////////////
 Import:
-	EPackageImport | ViatraImport | CftImport;
+	EPackageImport | ViatraImport;
 
 EPackageImport:
 	"import" "epackage" importedPackage=[ecore::EPackage|STRING];
 
 ViatraImport:
 	"import" "viatra" importedViatra=[viatra::PatternModel|STRING];
-
-CftImport:
-	"import" "reliability" importedCft=[cftLanguage::CftModel|STRING];
 	
 ///////////////////////////////////////////////////
 // Declaration
@@ -160,24 +156,13 @@ ThresholdEntry:
 	function=ObjectiveFunction operator=ComparisonOperator threshold=REALLiteral;
 
 ObjectiveFunction:
-	CostObjectiveFunction | ReliabilityObjectiveFunction;
+	CostObjectiveFunction;
 
 CostObjectiveFunction:
 	'cost' '{' entries+=CostEntry (',' entries+=CostEntry)* '}';
 
 CostEntry:
 	patternElement=PatternElement '=' weight=INTLiteral;
-
-ReliabilityObjectiveFunction:
-	ReliabiltiyProbability | Mtff;
-
-ReliabiltiyProbability:
-	'reliability' (package=[cftLanguage::CftModel|QualifiedName] '::')?
-	transformation=[cftLanguage::TransformationDefinition]
-	'at' time=REALLiteral;
-
-Mtff:
-	'mtff' (package=[cftLanguage::CftModel|QualifiedName] '::')? transformation=[cftLanguage::TransformationDefinition];
 
 ObjectiveDeclaration:
 	'objectives' name=ID specification=ObjectiveSpecification;

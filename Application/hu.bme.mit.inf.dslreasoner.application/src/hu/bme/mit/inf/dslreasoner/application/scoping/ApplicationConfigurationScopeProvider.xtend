@@ -4,15 +4,12 @@
 package hu.bme.mit.inf.dslreasoner.application.scoping
 
 import com.google.inject.Inject
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CftImport
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelElement
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ReliabilityObjectiveFunction
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
-import hu.bme.mit.inf.dslreasoner.faulttree.components.cftLanguage.CftModel
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
@@ -47,10 +44,6 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 				getViatraPackageScope(context, reference, document)
 			case PATTERN_ELEMENT__PATTERN:
 				getViatraPatternScope(context, document)
-			case RELIABILITY_OBJECTIVE_FUNCTION__PACKAGE:
-				getCftPackageScope(context, reference, document)
-			case RELIABILITY_OBJECTIVE_FUNCTION__TRANSFORMATION:
-				getCftTransformationScope(context, document)
 			default:
 				super.getScope(context, reference)
 		}
@@ -70,14 +63,6 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 
 	private def getAllPatterns(ConfigurationScript document) {
 		document.allViatraPackages.map[patterns].flatten
-	}
-
-	private def getAllCftPackages(ConfigurationScript document) {
-		document.imports.filter(CftImport).map[importedCft].filterNull
-	}
-
-	private def getAllCftTransformations(ConfigurationScript document) {
-		document.allCftPackages.map[transformationDefinitions].flatten
 	}
 
 	private def getEPackageScope(ConfigurationScript document) {
@@ -125,23 +110,6 @@ class ApplicationConfigurationScopeProvider extends AbstractApplicationConfigura
 				document.allPatterns
 		}
 		Scopes.scopeFor(patterns)
-	}
-
-	private def getCftPackageScope(EObject context, EReference reference, ConfigurationScript document) {
-		val cftModelNameConverter = [ CftModel cftModel |
-			toQualifiedNameOrNull(cftModel.packageName)
-		]
-		Scopes.scopeFor(document.allCftPackages, cftModelNameConverter, super.getScope(context, reference))
-	}
-
-	private def getCftTransformationScope(EObject context, ConfigurationScript document) {
-		val transformations = switch (context) {
-			ReliabilityObjectiveFunction case context.package !== null:
-				context.package.transformationDefinitions
-			default:
-				document.allCftTransformations
-		}
-		Scopes.scopeFor(transformations)
 	}
 	
 	private def toQualifiedNameOrNull(String packageName) {

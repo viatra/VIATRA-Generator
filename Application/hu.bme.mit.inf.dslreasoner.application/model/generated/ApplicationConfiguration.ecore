@@ -16,9 +16,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ViatraImport" eSuperTypes="#//Import">
     <eStructuralFeatures xsi:type="ecore:EReference" name="importedViatra" eType="ecore:EClass platform:/resource/org.eclipse.viatra.query.patternlanguage.emf/model/PatternLanguage.ecore#//PatternModel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CftImport" eSuperTypes="#//Import">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="importedCft" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.components/model/generated/CftLanguage.ecore#//CftModel"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration" eSuperTypes="#//Command">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
@@ -133,14 +130,6 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReliabilityObjectiveFunction" eSuperTypes="#//ObjectiveFunction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.components/model/generated/CftLanguage.ecore#//CftModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="ecore:EClass platform:/resource/hu.bme.mit.inf.dslreasoner.faulttree.components/model/generated/CftLanguage.ecore#//TransformationDefinition"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReliabiltiyProbability" eSuperTypes="#//ReliabilityObjectiveFunction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Mtff" eSuperTypes="#//ReliabilityObjectiveFunction"/>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectiveDeclaration" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ObjectiveSpecification"
         containment="true"/>

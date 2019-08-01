@@ -2,13 +2,9 @@ package hu.bme.mit.inf.dslreasoner.application.linking
 
 import com.google.inject.Inject
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CftImport
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ViatraImport
 import java.util.Collections
-import java.util.List
 import java.util.Optional
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -17,7 +13,6 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.viatra.query.patternlanguage.emf.scoping.IMetamodelProvider
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.conversion.ValueConverterException
 import org.eclipse.xtext.linking.impl.DefaultLinkingService
@@ -38,10 +33,6 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService {
 		} else if (context instanceof ViatraImport) {
 			if (ref == viatraImport_ImportedViatra) {
 				return getViatra(context, node)
-			}
-		} else if (context instanceof CftImport) {
-			if (ref == cftImport_ImportedCft) {
-				return getCftModel(context, node)
 			}
 		}
 		return super.getLinkedObjects(context, ref, node)
@@ -112,9 +103,5 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService {
 		} catch (ValueConverterException e) {
 			Optional.empty
 		}
-	}
-	
-	private def getCftModel(CftImport context, INode node) {
-		getByUri(context, cftImport_ImportedCft, node)
 	}
 }
