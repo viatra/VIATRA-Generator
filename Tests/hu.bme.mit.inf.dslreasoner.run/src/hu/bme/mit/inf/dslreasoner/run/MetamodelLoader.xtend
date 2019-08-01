@@ -1,9 +1,10 @@
 package hu.bme.mit.inf.dslreasoner.run
 
-import hu.bme.mit.inf.dslreasomer.domains.transima.fam.FunctionalArchitecture.FunctionalArchitecturePackage
+import functionalarchitecture.FunctionalarchitecturePackage
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore
 import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.FileSystem
 import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FilesystemPackage
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.patterns.Pattern
+import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
 import hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns
@@ -12,6 +13,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMetho
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethodBasedGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.Collection
+import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.List
 import java.util.Set
@@ -21,14 +23,14 @@ import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EEnumLiteral
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
-import org.eclipse.xtext.xbase.lib.Functions.Function1
-import java.util.HashMap
 import org.eclipse.emf.ecore.EcorePackage
-import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Ecore
+import org.eclipse.xtext.xbase.lib.Functions.Function1
+import hu.bme.mit.inf.dslreasoner.domains.transima.fam.Type
+import hu.bme.mit.inf.dslreasoner.domains.transima.fam.Model
 
 abstract class MetamodelLoader {
 	protected val ReasonerWorkspace workspace
-	public new(ReasonerWorkspace workspace) {
+	new(ReasonerWorkspace workspace) {
 		this.workspace = workspace
 	} 
 	def EcoreMetamodelDescriptor loadMetamodel()
@@ -53,7 +55,7 @@ class FAMLoader extends MetamodelLoader{
 	}
 	
 	override loadMetamodel() {
-		val package = FunctionalArchitecturePackage.eINSTANCE
+		val package = FunctionalarchitecturePackage.eINSTANCE
 		val List<EClass> classes = package.EClassifiers.filter(EClass).toList
 		val List<EEnum> enums = package.EClassifiers.filter(EEnum).toList
 		val List<EEnumLiteral> literals = enums.map[ELiterals].flatten.toList
@@ -70,12 +72,12 @@ class FAMLoader extends MetamodelLoader{
 	}
 	
 	override loadQueries(EcoreMetamodelDescriptor metamodel) {
-		val i = Pattern.instance
+		val i = FamPatterns.instance
 		val patterns = i.specifications.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
-		derivedFeatures.put(i.type,metamodel.attributes.filter[it.name == "type"].head)
-		derivedFeatures.put(i.model,metamodel.references.filter[it.name == "model"].head)
+		derivedFeatures.put(Type.instance,metamodel.attributes.filter[it.name == "type"].head)
+		derivedFeatures.put(Model.instance,metamodel.references.filter[it.name == "model"].head)
 		val res = new ViatraQuerySetDescriptor(
 			patterns,
 			wfPatterns,
@@ -92,8 +94,8 @@ class FAMLoader extends MetamodelLoader{
 
 class YakinduLoader extends MetamodelLoader{
 	
-	private var useSynchronization = true;
-	private var useComplexStates = false; 
+	var useSynchronization = true;
+	var useComplexStates = false; 
 	public static val patternsWithSynchronization = #[
 		"synchHasNoOutgoing", "synchHasNoIncoming", "SynchronizedIncomingInSameRegion", "notSynchronizingStates",
 		"hasMultipleOutgoingTrainsition", "hasMultipleIncomingTrainsition", "SynchronizedRegionsAreNotSiblings",
@@ -104,10 +106,10 @@ class YakinduLoader extends MetamodelLoader{
 		YakindummPackage.eINSTANCE.eClass
 	}
 	
-	public def setUseSynchronization(boolean useSynchronization) {
+	def setUseSynchronization(boolean useSynchronization) {
 		this.useSynchronization = useSynchronization
 	}
-	public def setUseComplexStates(boolean useComplexStates) {
+	def setUseComplexStates(boolean useComplexStates) {
 		this.useComplexStates = useComplexStates
 	}
 	

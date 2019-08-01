@@ -9,8 +9,7 @@ Bundle-Localization: plugin
 Export-Package: hu.bme.mit.inf.dslreasoner.domains.alloyexamples,
  hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem,
  hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.impl,
- hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.util,
- hu.bme.mit.inf.dslreasoner.domains.alloyexamples.util
+ hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.util
 Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
  org.eclipse.viatra.query.runtime,
  org.eclipse.core.runtime,

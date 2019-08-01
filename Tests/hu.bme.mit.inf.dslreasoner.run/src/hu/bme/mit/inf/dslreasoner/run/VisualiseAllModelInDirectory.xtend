@@ -1,16 +1,16 @@
 package hu.bme.mit.inf.dslreasoner.run
 
+import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.File
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage
-import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage
-import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage
 import org.eclipse.emf.ecore.resource.Resource
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class VisualiseAllModelInDirectory {
@@ -62,7 +62,7 @@ class VisualiseAllModelInDirectory {
 		}
 
 		if(!hasPng && model.newElements.size <160) {
-			val visualiser = new GraphvizVisualisation
+			val visualiser = new GraphvizVisualiser
 			val visualisation = visualiser.visualiseConcretization(model)
 			visualisation.writeToFile(workspace,fileNameWithoutExtension)
 			println('''«fileNameWithoutExtension».png''')
