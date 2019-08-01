@@ -34,7 +34,7 @@ class RelationDefinitionIndexer {
 		this.base = base
 	}
 	
-	public def generateRelationDefinitions(
+	def generateRelationDefinitions(
 		LogicProblem problem,
 		Iterable<RelationDefinition> relations,
 		Map<String,PQuery> fqn2PQuery) {
@@ -110,7 +110,7 @@ class RelationDefinitionIndexer {
 		else return Modality::MUST
 	} 
 	
-	def public referPattern(PQuery p, String[] variables, Modality modality, boolean positive, boolean transitive) '''
+	def referPattern(PQuery p, String[] variables, Modality modality, boolean positive, boolean transitive) '''
 		«IF !positive»neg «ENDIF»find «IF transitive»twoParam_«ENDIF»«modality.name.toLowerCase»InRelation_pattern_«p.fullyQualifiedName.replace('.','_')»«IF transitive»+«ENDIF»(«IF !transitive»problem,interpretation,«ENDIF»«variables.join(',')»);
 	'''
 	
@@ -228,10 +228,11 @@ class RelationDefinitionIndexer {
 		var String additionalDefinition;
 		if(target instanceof EEnumLiteral) {
 			targetString = '''const_«target.name»_«target.EEnum.name»'''
-			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
+			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» literal «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Enumerator) {
+			// XXX We should get the corresponding EEnum name instead of the java class name.
 			targetString = '''const_«target.name»_«target.class.simpleName»'''
-			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.class.simpleName»");  //LogicProblem.elements(problem,«targetString»);'''
+			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» literal «target.class.simpleName»");  //LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Integer) {
 			targetString = '''const_«target»_Integer'''
 			additionalDefinition = '''IntegerElement.value(«targetString»,«target»);'''

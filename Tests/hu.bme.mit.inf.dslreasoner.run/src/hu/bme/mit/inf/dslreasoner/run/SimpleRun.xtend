@@ -15,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
@@ -60,6 +61,7 @@ class SimpleRun {
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel,new Ecore2LogicConfiguration())
 		val modelExtensionProblem = instanceModel2Logic.transform(modelGenerationProblem,partialModel)
 		val validModelExtensionProblem = viatra2Logic.transformQueries(queries,modelExtensionProblem,new Viatra2LogicConfiguration)
+//		workspace.writeModel(validModelExtensionProblem.output, "generation.logicproblem")
 		
 		val logicProblem = validModelExtensionProblem.output
 		
@@ -72,6 +74,7 @@ class SimpleRun {
 			it.typeScopes.maxNewElements = 40
 			it.typeScopes.minNewElements = 40
 			it.solutionScope.numberOfRequiredSolutions = 1
+//			it.scopePropagatorStrategy = ScopePropagatorStrategy.BasicTypeHierarchy
 			it.documentationLevel = DocumentationLevel.NONE
 			it.debugConfiguration.partalInterpretationVisualisationFrequency = 1
 			it.debugConfiguration.partialInterpretatioVisualiser = new GraphvizVisualiser
@@ -91,12 +94,14 @@ class SimpleRun {
 		
 		println("Problem solved")
 		
-		val interpretations = reasoner.getInterpretations(solution as ModelResult)
+		val result = solution as ModelResult
+		val interpretations = reasoner.getInterpretations(result)
 		val models = new LinkedList
 		for(interpretation : interpretations) {
 			val instanceModel = logic2Ecore.transformInterpretation(interpretation,modelGenerationProblem.trace)
 			models+=instanceModel
 		}
+		println(result.statistics.solverTime)
 		
 		solution.writeSolution(workspace, #[])
 	}
@@ -129,7 +134,7 @@ class SimpleRun {
 	def static loadPartialModel(ReasonerWorkspace inputs) {
 		EMFPatternLanguageStandaloneSetup.doSetup
 		ReteEngine.getClass
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 		inputs.readModel(EObject,"FAM.xmi").eResource.allContents.toList
 	}
 	
