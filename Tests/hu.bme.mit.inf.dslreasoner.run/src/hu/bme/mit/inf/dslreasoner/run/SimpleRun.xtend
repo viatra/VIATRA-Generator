@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
+import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 
 class SimpleRun {
 	
@@ -125,7 +127,9 @@ class SimpleRun {
 	}
 	
 	def static loadPartialModel(ReasonerWorkspace inputs) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+		EMFPatternLanguageStandaloneSetup.doSetup
+		ReteEngine.getClass
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		inputs.readModel(EObject,"FAM.xmi").eResource.allContents.toList
 	}
 	

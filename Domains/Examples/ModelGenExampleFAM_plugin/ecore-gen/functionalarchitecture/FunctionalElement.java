@@ -33,13 +33,13 @@ public interface FunctionalElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Interface</em>' containment reference.
-	 * @see #setInterface(FunctionalInterface)
+	 * @see #setInterface(functionalarchitecture.FunctionalInterface)
 	 * @see functionalarchitecture.FunctionalarchitecturePackage#getFunctionalElement_Interface()
 	 * @see functionalarchitecture.FunctionalInterface#getElement
 	 * @model opposite="element" containment="true"
 	 * @generated
 	 */
-	FunctionalInterface getInterface();
+	functionalarchitecture.FunctionalInterface getInterface();
 
 	/**
 	 * Sets the value of the '{@link functionalarchitecture.FunctionalElement#getInterface <em>Interface</em>}' containment reference.
@@ -49,7 +49,7 @@ public interface FunctionalElement extends EObject {
 	 * @see #getInterface()
 	 * @generated
 	 */
-	void setInterface(FunctionalInterface value);
+	void setInterface(functionalarchitecture.FunctionalInterface value);
 
 	/**
 	 * Returns the value of the '<em><b>Model</b></em>' reference.

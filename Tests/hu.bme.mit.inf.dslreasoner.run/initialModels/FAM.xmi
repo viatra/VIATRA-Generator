@@ -1,3 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fam:FunctionalArchitectureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="FAM" xsi:schemaLocation="FAM FAM.ecore"/>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="http://www.inf.mit.bme.hu/viatrasolver/example/fam"/>

@@ -66,6 +66,7 @@ public class FunctionalInputImpl extends FunctionalDataImpl implements Functiona
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<InformationLink> getIncomingLinks() {
 		if (incomingLinks == null) {
 			incomingLinks = new EObjectWithInverseResolvingEList<InformationLink>(InformationLink.class, this, FunctionalarchitecturePackage.FUNCTIONAL_INPUT__INCOMING_LINKS, FunctionalarchitecturePackage.INFORMATION_LINK__TO);

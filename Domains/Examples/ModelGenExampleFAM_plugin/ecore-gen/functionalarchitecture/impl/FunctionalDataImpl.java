@@ -4,7 +4,6 @@ package functionalarchitecture.impl;
 
 import functionalarchitecture.FAMTerminator;
 import functionalarchitecture.FunctionalData;
-import functionalarchitecture.FunctionalInterface;
 import functionalarchitecture.FunctionalarchitecturePackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -67,6 +66,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FAMTerminator getTerminator() {
 		return terminator;
 	}
@@ -91,6 +91,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTerminator(FAMTerminator newTerminator) {
 		if (newTerminator != terminator) {
 			NotificationChain msgs = null;
@@ -110,9 +111,10 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionalInterface getInterface() {
+	@Override
+	public functionalarchitecture.FunctionalInterface getInterface() {
 		if (eContainerFeatureID() != FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE) return null;
-		return (FunctionalInterface)eInternalContainer();
+		return (functionalarchitecture.FunctionalInterface)eInternalContainer();
 	}
 
 	/**
@@ -120,7 +122,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInterface(FunctionalInterface newInterface, NotificationChain msgs) {
+	public NotificationChain basicSetInterface(functionalarchitecture.FunctionalInterface newInterface, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newInterface, FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE, msgs);
 		return msgs;
 	}
@@ -130,7 +132,8 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInterface(FunctionalInterface newInterface) {
+	@Override
+	public void setInterface(functionalarchitecture.FunctionalInterface newInterface) {
 		if (newInterface != eInternalContainer() || (eContainerFeatureID() != FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE && newInterface != null)) {
 			if (EcoreUtil.isAncestor(this, newInterface))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -138,7 +141,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newInterface != null)
-				msgs = ((InternalEObject)newInterface).eInverseAdd(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__DATA, FunctionalInterface.class, msgs);
+				msgs = ((InternalEObject)newInterface).eInverseAdd(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__DATA, functionalarchitecture.FunctionalInterface.class, msgs);
 			msgs = basicSetInterface(newInterface, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -161,7 +164,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 			case FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetInterface((FunctionalInterface)otherEnd, msgs);
+				return basicSetInterface((functionalarchitecture.FunctionalInterface)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -191,7 +194,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE:
-				return eInternalContainer().eInverseRemove(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__DATA, FunctionalInterface.class, msgs);
+				return eInternalContainer().eInverseRemove(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__DATA, functionalarchitecture.FunctionalInterface.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -224,7 +227,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 				setTerminator((FAMTerminator)newValue);
 				return;
 			case FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE:
-				setInterface((FunctionalInterface)newValue);
+				setInterface((functionalarchitecture.FunctionalInterface)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -242,7 +245,7 @@ public abstract class FunctionalDataImpl extends MinimalEObjectImpl.Container im
 				setTerminator((FAMTerminator)null);
 				return;
 			case FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE:
-				setInterface((FunctionalInterface)null);
+				setInterface((functionalarchitecture.FunctionalInterface)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -5,6 +5,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import java.util.Map
+import org.eclipse.emf.common.util.Enumerator
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EEnumLiteral
 import org.eclipse.emf.ecore.EReference
@@ -17,6 +18,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.BinaryTransitiveClosure
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall
@@ -24,7 +26,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeCo
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
 
 class RelationDefinitionIndexer {
 	val PatternGenerator base;
@@ -228,6 +229,9 @@ class RelationDefinitionIndexer {
 		if(target instanceof EEnumLiteral) {
 			targetString = '''const_«target.name»_«target.EEnum.name»'''
 			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
+		} else if(target instanceof Enumerator) {
+			targetString = '''const_«target.name»_«target.class.simpleName»'''
+			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.class.simpleName»");  //LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Integer) {
 			targetString = '''const_«target»_Integer'''
 			additionalDefinition = '''IntegerElement.value(«targetString»,«target»);'''
