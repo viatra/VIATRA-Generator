@@ -3,6 +3,7 @@
 package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregateExpression;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AggregatedParameterSubstitution;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.AtomicTerm;
@@ -546,6 +547,13 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * @generated
 	 */
 	private EClass projectedAggregateExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass aggregatedParameterSubstitutionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1874,6 +1882,26 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	 * @generated
 	 */
 	@Override
+	public EReference getAggregateExpression_ParameterSubstitution() {
+		return (EReference)aggregateExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAggregateExpression_ResultVariable() {
+		return (EReference)aggregateExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getSum() {
 		return sumEClass;
 	}
@@ -1926,6 +1954,26 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 	@Override
 	public EAttribute getProjectedAggregateExpression_ProjectionIndex() {
 		return (EAttribute)projectedAggregateExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAggregatedParameterSubstitution() {
+		return aggregatedParameterSubstitutionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAggregatedParameterSubstitution_Variable() {
+		return (EReference)aggregatedParameterSubstitutionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2141,6 +2189,8 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 		aggregateExpressionEClass = createEClass(AGGREGATE_EXPRESSION);
 		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__RELATION);
+		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__PARAMETER_SUBSTITUTION);
+		createEReference(aggregateExpressionEClass, AGGREGATE_EXPRESSION__RESULT_VARIABLE);
 
 		sumEClass = createEClass(SUM);
 
@@ -2152,6 +2202,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 		projectedAggregateExpressionEClass = createEClass(PROJECTED_AGGREGATE_EXPRESSION);
 		createEAttribute(projectedAggregateExpressionEClass, PROJECTED_AGGREGATE_EXPRESSION__PROJECTION_INDEX);
+
+		aggregatedParameterSubstitutionEClass = createEClass(AGGREGATED_PARAMETER_SUBSTITUTION);
+		createEReference(aggregatedParameterSubstitutionEClass, AGGREGATED_PARAMETER_SUBSTITUTION__VARIABLE);
 	}
 
 	/**
@@ -2433,6 +2486,8 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 		initEClass(aggregateExpressionEClass, AggregateExpression.class, "AggregateExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAggregateExpression_Relation(), this.getRelation(), null, "relation", null, 0, 1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAggregateExpression_ParameterSubstitution(), this.getAggregatedParameterSubstitution(), null, "parameterSubstitution", null, 0, -1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAggregateExpression_ResultVariable(), this.getVariable(), null, "resultVariable", null, 0, 1, AggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sumEClass, Sum.class, "Sum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2444,6 +2499,9 @@ public class LogiclanguagePackageImpl extends EPackageImpl implements Logiclangu
 
 		initEClass(projectedAggregateExpressionEClass, ProjectedAggregateExpression.class, "ProjectedAggregateExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProjectedAggregateExpression_ProjectionIndex(), ecorePackage.getEInt(), "projectionIndex", "-1", 1, 1, ProjectedAggregateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(aggregatedParameterSubstitutionEClass, AggregatedParameterSubstitution.class, "AggregatedParameterSubstitution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAggregatedParameterSubstitution_Variable(), this.getVariable(), null, "variable", null, 0, 1, AggregatedParameterSubstitution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

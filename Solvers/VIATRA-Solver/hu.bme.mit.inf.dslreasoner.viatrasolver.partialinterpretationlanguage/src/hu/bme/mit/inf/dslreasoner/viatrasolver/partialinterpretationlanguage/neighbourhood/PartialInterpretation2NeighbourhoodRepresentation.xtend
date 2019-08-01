@@ -131,12 +131,10 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				}
 				newAdded = newAdded || (newElementNeigbours.size > elementNeigbours.size)
 			}
-
 			width += 1
 		} while (newAdded)
 		return width
 	}
-
 	/**
 	 * Creates a neighbourhood representation with traces
 	 * @param model The model to be represented.

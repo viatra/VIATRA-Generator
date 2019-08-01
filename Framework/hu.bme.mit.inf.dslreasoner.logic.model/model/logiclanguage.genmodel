@@ -168,6 +168,8 @@
     <genClasses ecoreClass="logiclanguage.ecore#//Pow"/>
     <genClasses image="false" ecoreClass="logiclanguage.ecore#//AggregateExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/relation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/parameterSubstitution"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregateExpression/resultVariable"/>
     </genClasses>
     <genClasses ecoreClass="logiclanguage.ecore#//Sum"/>
     <genClasses ecoreClass="logiclanguage.ecore#//Count"/>
@@ -175,6 +177,9 @@
     <genClasses ecoreClass="logiclanguage.ecore#//Max"/>
     <genClasses image="false" ecoreClass="logiclanguage.ecore#//ProjectedAggregateExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute logiclanguage.ecore#//ProjectedAggregateExpression/projectionIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="logiclanguage.ecore#//AggregatedParameterSubstitution">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference logiclanguage.ecore#//AggregatedParameterSubstitution/variable"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Logicproblem" basePackage="hu.bme.mit.inf.dslreasoner.logic.model"

@@ -104,6 +104,7 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 			case LogiclanguagePackage.COUNT: return createCount();
 			case LogiclanguagePackage.MIN: return createMin();
 			case LogiclanguagePackage.MAX: return createMax();
+			case LogiclanguagePackage.AGGREGATED_PARAMETER_SUBSTITUTION: return createAggregatedParameterSubstitution();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -635,6 +636,17 @@ public class LogiclanguageFactoryImpl extends EFactoryImpl implements Logiclangu
 	public Max createMax() {
 		MaxImpl max = new MaxImpl();
 		return max;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AggregatedParameterSubstitution createAggregatedParameterSubstitution() {
+		AggregatedParameterSubstitutionImpl aggregatedParameterSubstitution = new AggregatedParameterSubstitutionImpl();
+		return aggregatedParameterSubstitution;
 	}
 
 	/**
