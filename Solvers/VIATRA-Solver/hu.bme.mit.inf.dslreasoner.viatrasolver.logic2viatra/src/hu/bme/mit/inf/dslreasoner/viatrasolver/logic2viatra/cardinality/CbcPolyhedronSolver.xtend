@@ -26,6 +26,8 @@ class CbcPolyhedronSolver implements PolyhedronSolver {
 }
 
 class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
+	static val EPSILON = 1e-6
+
 	val boolean lpRelaxation
 	val double timeoutSeconds
 	val boolean silent
@@ -139,12 +141,21 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 			entries, rowLowerBounds, rowUpperBounds, objective, lpRelaxation, timeoutSeconds, silent)
 		switch (minimizationResult) {
 			CbcResult.SolutionBounded: {
-				val value = Math.floor(minimizationResult.value)
-				expressionToSaturate.lowerBound = value as int
-				setBound(expressionToSaturate, constraints, value, columnLowerBounds, rowLowerBounds)
+				val doubleValue = minimizationResult.value
+				val roundedValue = Math.floor(doubleValue)
+				val intValue = roundedValue as int
+				val oldBound = expressionToSaturate.lowerBound
+				if (oldBound === null || intValue > oldBound) {
+					expressionToSaturate.lowerBound = intValue
+					setBound(expressionToSaturate, constraints, roundedValue, columnLowerBounds, rowLowerBounds)
+				} else if (oldBound - doubleValue > EPSILON) {
+					throw new IllegalStateException("Unexpected decrease of lower bound by " + (oldBound - doubleValue))
+				}
 			}
 			case CbcResult.SOLUTION_UNBOUNDED: {
-				expressionToSaturate.lowerBound = null
+				if (expressionToSaturate.lowerBound !== null) {
+					throw new IllegalStateException("Finite lower bound became infinite")
+				}
 				setBound(expressionToSaturate, constraints, Double.NEGATIVE_INFINITY, columnLowerBounds, rowLowerBounds)
 			}
 			case CbcResult.UNSAT:
@@ -163,11 +174,21 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 			entries, rowLowerBounds, rowUpperBounds, objective, lpRelaxation, timeoutSeconds, silent)
 		switch (maximizationResult) {
 			CbcResult.SolutionBounded: {
-				val value = Math.ceil(-maximizationResult.value)
-				expressionToSaturate.upperBound = value as int
-				setBound(expressionToSaturate, constraints, value, columnUpperBounds, rowUpperBounds)
+				val doubleValue = -maximizationResult.value
+				val roundedValue = Math.ceil(doubleValue)
+				val intValue = roundedValue as int
+				val oldBound = expressionToSaturate.upperBound
+				if (oldBound === null || intValue < oldBound) {
+					expressionToSaturate.upperBound = intValue
+					setBound(expressionToSaturate, constraints, roundedValue, columnUpperBounds, rowUpperBounds)
+				} else if (doubleValue - oldBound > EPSILON) {
+					throw new IllegalStateException("Unexpected increase of upper bound by " + (doubleValue - oldBound))
+				}
 			}
 			case CbcResult.SOLUTION_UNBOUNDED: {
+				if (expressionToSaturate.lowerBound !== null) {
+					throw new IllegalStateException("Finite upper bound became infinite")
+				}
 				expressionToSaturate.upperBound = null
 				setBound(expressionToSaturate, constraints, Double.POSITIVE_INFINITY, columnUpperBounds, rowUpperBounds)
 			}
