@@ -6,6 +6,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorConstraints
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
@@ -14,8 +16,6 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorConstraints
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorSolver
 
 enum StateCoderStrategy {
 	Neighbourhood,
@@ -28,7 +28,7 @@ enum StateCoderStrategy {
 class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	// public var Iterable<PQuery> existingQueries
 	public var nameNewElements = false
-	public var StateCoderStrategy stateCoderStrategy = StateCoderStrategy.PairwiseNeighbourhood
+	public var StateCoderStrategy stateCoderStrategy = StateCoderStrategy.Neighbourhood
 	public var TypeInferenceMethod typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
 	/**
 	 * Once per 1/randomBacktrackChance the search selects a random state.
@@ -54,7 +54,9 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	 */
 	public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
 
-	public var ScopePropagatorStrategy scopePropagatorStrategy = ScopePropagatorStrategy.BasicTypeHierarchy
+	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
+		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
+
 	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
 }
 

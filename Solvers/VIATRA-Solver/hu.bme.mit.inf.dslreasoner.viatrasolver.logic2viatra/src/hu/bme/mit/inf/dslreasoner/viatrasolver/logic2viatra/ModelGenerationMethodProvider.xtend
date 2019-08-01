@@ -10,6 +10,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Polyhedr
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationConstraintCalculator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.TypeHierarchyScopePropagator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Z3PolyhedronSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.ModalPatternQueries
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternProvider
@@ -27,7 +29,6 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.xtend.lib.annotations.Data
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Z3PolyhedronSolver
 
 class ModelGenerationStatistics {
 	public var long transformationExecutionTime = 0
@@ -139,8 +140,10 @@ class ModelGenerationMethodProvider {
 	private def createScopePropagator(ScopePropagatorStrategy scopePropagatorStrategy,
 		PartialInterpretation emptySolution, GeneratedPatterns queries, ModelGenerationStatistics statistics) {
 		switch (scopePropagatorStrategy) {
-			case ScopePropagatorStrategy.BasicTypeHierarchy:
+			case ScopePropagatorStrategy.Count:
 				new ScopePropagator(emptySolution, statistics)
+			case ScopePropagatorStrategy.BasicTypeHierarchy:
+				new TypeHierarchyScopePropagator(emptySolution, statistics)
 			ScopePropagatorStrategy.Polyhedral: {
 				val types = queries.refineObjectQueries.keySet.map[newType].toSet
 				val solver = switch (scopePropagatorStrategy.solver) {

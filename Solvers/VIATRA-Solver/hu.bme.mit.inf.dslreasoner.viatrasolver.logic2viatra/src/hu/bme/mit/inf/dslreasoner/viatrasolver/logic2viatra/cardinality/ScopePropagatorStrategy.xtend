@@ -16,7 +16,7 @@ enum PolyhedralScopePropagatorSolver {
 }
 
 abstract class ScopePropagatorStrategy {
-	public static val BasicCount = new Simple("BasicCount")
+	public static val Count = new Simple("Count")
 
 	public static val BasicTypeHierarchy = new Simple("BasicTypeHierarchy")
 

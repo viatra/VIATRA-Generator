@@ -28,7 +28,7 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
-class PolyhedronScopePropagator extends ScopePropagator {
+class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	val Map<Scope, LinearBoundedExpression> scopeBounds
 	val LinearBoundedExpression topLevelBounds
 	val Polyhedron polyhedron
