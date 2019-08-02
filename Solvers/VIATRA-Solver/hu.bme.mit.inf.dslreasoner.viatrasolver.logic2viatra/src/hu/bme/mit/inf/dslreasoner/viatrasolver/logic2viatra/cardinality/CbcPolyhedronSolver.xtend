@@ -142,13 +142,13 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 		switch (minimizationResult) {
 			CbcResult.SolutionBounded: {
 				val doubleValue = minimizationResult.value
-				val roundedValue = Math.floor(doubleValue)
+				val roundedValue = Math.ceil(doubleValue - EPSILON)
 				val intValue = roundedValue as int
 				val oldBound = expressionToSaturate.lowerBound
-				if (oldBound === null || intValue > oldBound) {
+				if (oldBound === null || intValue >= oldBound) {
 					expressionToSaturate.lowerBound = intValue
 					setBound(expressionToSaturate, constraints, roundedValue, columnLowerBounds, rowLowerBounds)
-				} else if (oldBound - doubleValue > EPSILON) {
+				} else {
 					throw new IllegalStateException("Unexpected decrease of lower bound by " + (oldBound - doubleValue))
 				}
 			}
@@ -175,13 +175,13 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 		switch (maximizationResult) {
 			CbcResult.SolutionBounded: {
 				val doubleValue = -maximizationResult.value
-				val roundedValue = Math.ceil(doubleValue)
+				val roundedValue = Math.floor(doubleValue + EPSILON)
 				val intValue = roundedValue as int
 				val oldBound = expressionToSaturate.upperBound
-				if (oldBound === null || intValue < oldBound) {
+				if (oldBound === null || intValue <= oldBound) {
 					expressionToSaturate.upperBound = intValue
 					setBound(expressionToSaturate, constraints, roundedValue, columnUpperBounds, rowUpperBounds)
-				} else if (doubleValue - oldBound > EPSILON) {
+				} else {
 					throw new IllegalStateException("Unexpected increase of upper bound by " + (doubleValue - oldBound))
 				}
 			}
