@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcC {
+class CalcC extends CalcMetric{
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
-	def static getCfromModel(EObject model) {
+	override calcFromModel(EObject model) {
 		val nodes = model.eResource.allContents.toList
 
 		// fill HashSet
@@ -90,12 +90,12 @@ class CalcC {
 		return avgC
 	}
 
-	def static getCfromNHLattice(PartialInterpretation pm, Integer v) {
+	override calcFromNHLattice(PartialInterpretation pm) {
 		return 0.0
 //		return getCfromNHLattice(pm, 2, v)
 	}
 
-	def static getCfromNHLattice(PartialInterpretation pm, Integer depth, Integer v) {
+	override calcFromNHLattice(PartialInterpretation pm, Integer depth) {
 		return 1.0
 //		// Get required neighbourhoods
 //		val nh = neighbourhoodComputer.createRepresentation(pm, depth+1, Integer.MAX_VALUE, Integer.MAX_VALUE)

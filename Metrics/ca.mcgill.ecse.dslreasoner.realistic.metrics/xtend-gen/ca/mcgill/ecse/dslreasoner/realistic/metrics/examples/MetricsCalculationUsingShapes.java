@@ -1,5 +1,9 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRCNT;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRNUM;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRTOT;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
@@ -47,18 +51,24 @@ public abstract class MetricsCalculationUsingShapes {
       YakindummPackage.eINSTANCE.eClass();
       LinkedListPackage.eINSTANCE.eClass();
       ReteEngine.class.getClass();
-      final boolean testing = true;
+      final boolean testing = false;
       final boolean bounded = false;
       final int lowEnd = 0;
       final int highEnd = 20;
       final String calcTesting = "max";
       String fileDir = "";
       ArrayList<String> files = CollectionLiterals.<String>newArrayList(
-        "A0", "A20", "R1", "R2", "V1", "V2", "V3", "V4", "V5", "H");
+        "A0");
       if (testing) {
         files = CollectionLiterals.<String>newArrayList("test");
       }
-      final ArrayList<String> metrics = CollectionLiterals.<String>newArrayList("SQRNUM");
+      final ArrayList<CalcMetric> metrics = new ArrayList<CalcMetric>();
+      CalcSQRCNT _calcSQRCNT = new CalcSQRCNT();
+      metrics.add(_calcSQRCNT);
+      CalcSQRNUM _calcSQRNUM = new CalcSQRNUM();
+      metrics.add(_calcSQRNUM);
+      CalcSQRTOT _calcSQRTOT = new CalcSQRTOT();
+      metrics.add(_calcSQRTOT);
       ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList();
       if (calcTesting != null) {
         switch (calcTesting) {
@@ -189,26 +199,25 @@ public abstract class MetricsCalculationUsingShapes {
             }
           }
           Method method = MetricsCalculationUsingShapes.class.getMethods()[0];
-          for (final String metric : metrics) {
+          for (final CalcMetric metricClass : metrics) {
             {
+              final String metricName = metricClass.getClass().getSimpleName().substring(4);
               String _get_1 = fileDir.split("//")[0];
               String _plus = ("(" + _get_1);
               String _plus_1 = (_plus + ") Metric: ");
-              String _plus_2 = (_plus_1 + metric);
+              String _plus_2 = (_plus_1 + metricName);
               InputOutput.<String>println(_plus_2);
-              PrintWriter writer = new PrintWriter((((directoryPath + "//") + metric) + ".csv"));
-              final String className = ("ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric);
-              final Class<?> classObj = Class.forName(className);
+              PrintWriter writer = new PrintWriter((((directoryPath + "//") + metricName) + ".csv"));
               final List<String> baseVals = CollectionLiterals.<String>newArrayList();
               final List<String> expVals = CollectionLiterals.<String>newArrayList();
               for (final String calcMethod : calcMethods) {
                 {
-                  InputOutput.<String>print((((metric + " ") + calcMethod) + " : "));
+                  InputOutput.<String>print((((metricName + " ") + calcMethod) + " : "));
                   boolean _equals = Objects.equal(calcMethod, "Model");
                   if (_equals) {
                     InputOutput.<String>print("    ");
                   }
-                  writer.append((metric + ","));
+                  writer.append((metricName + ","));
                   writer.append(calcMethod);
                   expVals.clear();
                   int fileIndex = 0;
@@ -220,27 +229,17 @@ public abstract class MetricsCalculationUsingShapes {
                       final String nameWOExt = fileName.substring(0, fileName.indexOf("."));
                       final EObject model = workspace.<EObject>readModel(EObject.class, fileName);
                       final PartialInterpretation partialModel = Util.getPartialModel(workspace, model);
-                      String methodName = ((("get" + metric) + "from") + calcMethod);
                       double value = 0.0;
                       boolean _equals_1 = Objects.equal(calcMethod, "Model");
                       if (_equals_1) {
-                        method = classObj.getMethod(methodName, EObject.class);
-                        Object _invoke = method.invoke(null, model);
-                        value = (((Double) _invoke)).doubleValue();
+                        value = metricClass.calcFromModel(model);
                         baseVals.add(MetricsCalculationUsingShapes.df.format(value));
                       } else {
                         if ((Objects.equal(calcTesting, "false") || Objects.equal(calcTesting, "min"))) {
-                          method = classObj.getMethod(methodName, PartialInterpretation.class);
-                          Object _invoke_1 = method.invoke(null, partialModel);
-                          value = (((Double) _invoke_1)).doubleValue();
+                          value = metricClass.calcFromNHLattice(partialModel);
                         } else {
-                          String _get_2 = calcMethod.split(" ")[0];
-                          String _plus_3 = ((("get" + metric) + "from") + _get_2);
-                          methodName = _plus_3;
                           final Integer depth = Integer.valueOf(calcMethod.split(" ")[1]);
-                          method = classObj.getMethod(methodName, PartialInterpretation.class, Integer.class);
-                          Object _invoke_2 = method.invoke(null, partialModel, depth);
-                          value = (((Double) _invoke_2)).doubleValue();
+                          value = metricClass.calcFromNHLattice(partialModel, depth);
                           expVals.add(MetricsCalculationUsingShapes.df.format(value));
                         }
                       }
@@ -248,8 +247,8 @@ public abstract class MetricsCalculationUsingShapes {
                       writer.append(("," + valAsStr));
                       int ratioAchieved = ((fileIndex * 100) / numFiles);
                       if ((ratioAchieved >= currentProgress)) {
-                        String _plus_4 = (Integer.valueOf(currentProgress) + "%-");
-                        InputOutput.<String>print(_plus_4);
+                        String _plus_3 = (Integer.valueOf(currentProgress) + "%-");
+                        InputOutput.<String>print(_plus_3);
                         int _currentProgress = currentProgress;
                         currentProgress = (_currentProgress + MetricsCalculationUsingShapes.PROGRESSPERCENTAGEJUMP);
                       }

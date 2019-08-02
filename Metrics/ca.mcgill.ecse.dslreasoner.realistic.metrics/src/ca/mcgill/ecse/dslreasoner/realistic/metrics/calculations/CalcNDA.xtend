@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcNDA {
+class CalcNDA extends CalcMetric{
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
-	def static getNDAfromModel(EObject model) {
+	override calcFromModel(EObject model) {
 		val Map<EObject, Set<EObject>> dim2NumActNodes = Util.dim2NumActNodesFromModel(model)
 
 		var totalNDA = 0.0
@@ -37,11 +37,11 @@ class CalcNDA {
 		return avgNDA
 	}
 
-	def static getNDAfromNHShape(PartialInterpretation pm) {
+	def  getNDAfromNHShape(PartialInterpretation pm) {
 		return getNDAfromNHShape(pm, 1)
 	}
 
-	def static getNDAfromNHShape(PartialInterpretation pm, Integer depth) {
+	def  getNDAfromNHShape(PartialInterpretation pm, Integer depth) {
 		// Get NH Shape
 		val nh = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhRep = nh.modelRepresentation as HashMap
@@ -64,21 +64,21 @@ class CalcNDA {
 		return avgNDA
 	}
 
-	def static getNDAfromNHLattice(PartialInterpretation pm) {
-		return getNDAfromNHLattice(pm, 1)
+	override calcFromNHLattice(PartialInterpretation pm) {
+		return calcFromNHLattice(pm, 1)
 	}
 
-	def static getNDAfromNHLattice(PartialInterpretation pm, Integer depth) {
+	override calcFromNHLattice(PartialInterpretation pm, Integer depth) {
 		// Get NH Lattice and deepLattice
 		val nh = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap
 		val nhRep = neighbourhoodComputer.createRepresentation(pm, depth, Integer.MAX_VALUE, Integer.MAX_VALUE).
 			modelRepresentation as HashMap
-		return(getNDAfromNHLattice(nhDeepRep, nhRep, depth))
+		return(calcFromNHLattice(nhDeepRep, nhRep, depth))
 
 	}
 
-	def static getNDAfromNHLattice(HashMap nhDeepRep, HashMap nhRep, Integer depth) {
+	def calcFromNHLattice(HashMap nhDeepRep, HashMap nhRep, Integer depth) {
 		//initialisations
 		val nhDeepNodes = nhDeepRep.keySet
 		val nhNodes = nhRep.keySet

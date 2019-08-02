@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcNA {
+class CalcNA extends CalcMetric {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
-	def static getNAfromModel(EObject model) {
+	override calcFromModel(EObject model) {
 		val nodes = model.eResource.allContents.toList
 
 		var totalNA = 0.0
@@ -68,11 +68,11 @@ class CalcNA {
 		return averageNA
 	}
 	
-	def static getNAfromNHLattice(PartialInterpretation partialModel) {
-		getNAfromNHLattice(partialModel, 1)
+	override calcFromNHLattice(PartialInterpretation partialModel) {
+		calcFromNHLattice(partialModel, 1)
 	}
 
-	def static getNAfromNHLattice(PartialInterpretation partialModel, Integer depth) {
+	override calcFromNHLattice(PartialInterpretation partialModel, Integer depth) {
 		// Get required neighbourhoods
 		val nh = neighbourhoodComputer.createRepresentation(partialModel, depth+1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap

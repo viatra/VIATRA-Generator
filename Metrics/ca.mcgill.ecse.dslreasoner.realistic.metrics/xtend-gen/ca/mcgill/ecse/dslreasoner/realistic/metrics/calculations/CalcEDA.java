@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
@@ -21,12 +22,13 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
-public class CalcEDA {
+public class CalcEDA extends CalcMetric {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
-  public static double getEDAfromModel(final EObject model) {
+  @Override
+  public double calcFromModel(final EObject model) {
     final Map<EObject, Integer> dim2Occ = Util.dim2NumOccurencesFromModel(model);
     int totalEDA = Util.sumInt(dim2Occ.values());
     final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
@@ -130,11 +132,13 @@ public class CalcEDA {
     return avgEDA;
   }
   
-  public static double getEDAfromNHLattice(final PartialInterpretation pm) {
-    return CalcEDA.getEDAfromNHLattice(pm, Integer.valueOf(0));
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm) {
+    return this.calcFromNHLattice(pm, Integer.valueOf(0));
   }
   
-  public static double getEDAfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcEDA.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);

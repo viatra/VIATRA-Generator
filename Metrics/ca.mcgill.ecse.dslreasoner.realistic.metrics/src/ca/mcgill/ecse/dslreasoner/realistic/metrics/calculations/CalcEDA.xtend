@@ -15,11 +15,11 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 
-class CalcEDA {
+class CalcEDA extends CalcMetric {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
-	def static getEDAfromModel(EObject model) {
+	override calcFromModel(EObject model) {
 		val Map<EObject, Integer> dim2Occ = Util.dim2NumOccurencesFromModel(model)
 
 		var totalEDA = Util.sumInt(dim2Occ.values)
@@ -91,11 +91,11 @@ class CalcEDA {
 		return avgEDA
 	}
 
-	def static getEDAfromNHLattice(PartialInterpretation pm) {
-		return getEDAfromNHLattice(pm, 0)
+	override calcFromNHLattice(PartialInterpretation pm) {
+		return calcFromNHLattice(pm, 0)
 	}
 
-	def static getEDAfromNHLattice(PartialInterpretation pm, Integer depth) {
+	override calcFromNHLattice(PartialInterpretation pm, Integer depth) {
 		// Get NH Lattice and deepLattice
 		val nh = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap

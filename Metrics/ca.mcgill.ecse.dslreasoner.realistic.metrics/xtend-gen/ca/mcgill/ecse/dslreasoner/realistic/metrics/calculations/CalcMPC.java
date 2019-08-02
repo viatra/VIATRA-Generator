@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
@@ -28,12 +29,13 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcMPC {
+public class CalcMPC extends CalcMetric {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
-  public static double getMPCfromModel(final EObject model) {
+  @Override
+  public double calcFromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     Set<String> allDimensions = new HashSet<String>();
     Map<EObject, Map<String, Integer>> node2Degrees = new HashMap<EObject, Map<String, Integer>>();
@@ -181,11 +183,13 @@ public class CalcMPC {
     return averageMPC;
   }
   
-  public static double getMPCfromNHLattice(final PartialInterpretation pm) {
-    return CalcMPC.getMPCfromNHLattice(pm, Integer.valueOf(1));
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm) {
+    return this.calcFromNHLattice(pm, Integer.valueOf(1));
   }
   
-  public static double getMPCfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcMPC.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);

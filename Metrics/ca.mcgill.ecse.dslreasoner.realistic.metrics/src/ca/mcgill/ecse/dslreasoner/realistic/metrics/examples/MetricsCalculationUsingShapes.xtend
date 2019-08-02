@@ -1,13 +1,27 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcC
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcEDA
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMPC
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNA
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDA
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDC
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRCNT
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRMAX
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRNUM
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQROCOOL
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQROSZ
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQROSZ2
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRTOT
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.File
 import java.io.PrintWriter
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.ArrayList
 import java.util.List
 import java.util.Map
 import java.util.Set
@@ -37,7 +51,7 @@ abstract class MetricsCalculationUsingShapes {
 		ReteEngine.getClass
 
 		// SELECTION
-		val testing = true
+		val testing = false
 		val bounded = false
 		val lowEnd = 0
 		val highEnd = 20
@@ -47,20 +61,34 @@ abstract class MetricsCalculationUsingShapes {
 
 		var files = newArrayList( 
 			"A0"
-			, "A20"
-			, "R1"
-			, "R2"
-			, "V1"
-			, "V2"
-			, "V3"
-			, "V4"
-			, "V5"
-			, "H"
+//			, "A20"
+//			, "R1"
+//			, "R2"
+//			, "V1"
+//			, "V2"
+//			, "V3"
+//			, "V4"
+//			, "V5"
+//			, "H"
 		)
 		if (testing) {
 			files = newArrayList("test")
 		}
-		val metrics = newArrayList( /* "NA",  "MPC", "NDA", "NDC", "EDA" , "C",*/ "SQRNUM" /*, "SQROCOOL" */ )
+		val metrics = new ArrayList<CalcMetric> 
+//		metrics.add(new CalcNA)
+//		metrics.add(new CalcMPC)
+//		metrics.add(new CalcNDA)
+//		metrics.add(new CalcNDC)
+//		metrics.add(new CalcEDA)
+//		metrics.add(new CalcC)
+		metrics.add(new CalcSQRCNT)
+//		metrics.add(new CalcSQRMAX)
+		metrics.add(new CalcSQRNUM)
+//		metrics.add(new CalcSQROCOOL)
+//		metrics.add(new CalcSQROSZ)
+//		metrics.add(new CalcSQROSZ2)
+		metrics.add(new CalcSQRTOT)
+//		
 		var calcMethods = newArrayList
 		switch calcTesting {
 			case "max": calcMethods = newArrayList("Model", "NHLattice 0", "NHLattice 1", "NHLattice 2", "NHLattice 3")
@@ -108,6 +136,7 @@ abstract class MetricsCalculationUsingShapes {
 			// deltas.add(newArrayList)
 			// totalDeltas.add(0.0)
 			// }
+			
 			// ////////////////////
 			// Create list of things to look at
 			// ////////////////////
@@ -163,25 +192,25 @@ abstract class MetricsCalculationUsingShapes {
 			// ////////////////////			
 			var method = MetricsCalculationUsingShapes.methods.get(0) // initialisation
 			// for each metric
-			for (metric : metrics) {
+			for (metricClass : metrics) {
+				val metricName = metricClass.class.simpleName.substring(4)
 				// print and write
-				println("(" + fileDir.split("//").get(0) + ") Metric: " + metric)
-				var writer = new PrintWriter(directoryPath + "//" + metric + ".csv")
-
-				val className = "ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.Calc" + metric
-				val classObj = Class.forName(className)
-
+				println("(" + fileDir.split("//").get(0) + ") Metric: " + metricName)
+				var writer = new PrintWriter(directoryPath + "//" + metricName + ".csv")
+				
+				//Calculate approximations
 				val List<String> baseVals = newArrayList
 				val List<String> expVals = newArrayList
+				//End Calculate Approximation
 
 				// realVsNH
 				for (calcMethod : calcMethods) {
 					// print and write
-					print(metric + " " + calcMethod + " : ")
+					print(metricName + " " + calcMethod + " : ")
 					if (calcMethod == "Model") {
 						print("    ")
 					}
-					writer.append(metric + ",")
+					writer.append(metricName + ",")
 					writer.append(calcMethod)
 
 //					var startTime = System.currentTimeMillis
@@ -202,25 +231,18 @@ abstract class MetricsCalculationUsingShapes {
 //					writer = new PrintWriter(outputFolder + fileSelector + "//" + metric + ".csv")					
 						// END VIDUALISATON
 						// get method and invoke
-						var methodName = "get" + metric + "from" + calcMethod
+//						var methodName = "get" + metric + "from" + calcMethod
 						var value = 0.0
 						if (calcMethod == "Model") {
-							method = classObj.getMethod(methodName, EObject)
-							value = method.invoke(null, model) as Double
+							value = metricClass.calcFromModel(model)
 							baseVals.add(df.format(value))
 						} else {
 							// EXPERIMENTAL
-							if (calcTesting == "false" || calcTesting == "min") {
-//								method = classObj.getMethod(methodName, PartialInterpretation, Integer)
-//								value = method.invoke(null, partialModel, 0) as Double
-								method = classObj.getMethod(methodName, PartialInterpretation)
-								value = method.invoke(null, partialModel) as Double
+							if (calcTesting == "false" || calcTesting == "min") {								
+								value = metricClass.calcFromNHLattice(partialModel)
 							} else {
-								methodName = "get" + metric + "from" + calcMethod.split(" ").get(0)
 								val depth = Integer.valueOf(calcMethod.split(" ").get(1))
-
-								method = classObj.getMethod(methodName, PartialInterpretation, Integer)
-								value = method.invoke(null, partialModel, depth) as Double
+								value = metricClass.calcFromNHLattice(partialModel, depth)
 								expVals.add(df.format(value))
 							}
 						// END EXPERIMENTAL

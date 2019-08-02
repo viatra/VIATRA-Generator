@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
@@ -12,10 +13,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcSQROCOOL {
+public class CalcSQROCOOL extends CalcMetric {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
-  public static double getSQROCOOLfromModel(final EObject model) {
+  @Override
+  public double calcFromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
     Util.fillWithNodes(nodes, node2Neighbours);
@@ -49,11 +51,13 @@ public class CalcSQROCOOL {
     return avgSQR;
   }
   
-  public static double getSQROCOOLfromNHLattice(final PartialInterpretation pm) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm) {
     return 0.0;
   }
   
-  public static double getSQROCOOLfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
     return 0.0;
   }
 }

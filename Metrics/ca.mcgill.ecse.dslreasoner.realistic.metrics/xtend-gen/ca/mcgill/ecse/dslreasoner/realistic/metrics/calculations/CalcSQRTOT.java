@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
@@ -19,10 +20,11 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcSQRTOT {
+public class CalcSQRTOT extends CalcMetric {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
-  public static double getSQRTOTfromModel(final EObject model) {
+  @Override
+  public double calcFromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
     Util.fillWithNodes(nodes, node2Neighbours);
@@ -69,11 +71,13 @@ public class CalcSQRTOT {
     return avgC;
   }
   
-  public static double getSQRTOTfromNHLattice(final PartialInterpretation pm) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm) {
     return 0.0;
   }
   
-  public static double getSQRTOTfromNHLattice(final PartialInterpretation pm, final Integer depth) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcSQRTOT.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);

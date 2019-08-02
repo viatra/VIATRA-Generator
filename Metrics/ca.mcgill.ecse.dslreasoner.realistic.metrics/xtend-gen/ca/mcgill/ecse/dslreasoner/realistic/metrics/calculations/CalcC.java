@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
@@ -16,10 +17,11 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcC {
+public class CalcC extends CalcMetric {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
-  public static double getCfromModel(final EObject model) {
+  @Override
+  public double calcFromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
     for (final EObject node : nodes) {
@@ -85,11 +87,13 @@ public class CalcC {
     return avgC;
   }
   
-  public static double getCfromNHLattice(final PartialInterpretation pm, final Integer v) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm) {
     return 0.0;
   }
   
-  public static double getCfromNHLattice(final PartialInterpretation pm, final Integer depth, final Integer v) {
+  @Override
+  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
     return 1.0;
   }
 }

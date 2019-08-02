@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EObject
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.MetricsCalculationUsingShapes
 
-class CalcMPC {
+class CalcMPC extends CalcMetric {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
-	def static getMPCfromModel(EObject model) {
+	override calcFromModel(EObject model) {
 		val nodes = model.eResource.allContents.toList
 
 		var Set<String> allDimensions = new HashSet
@@ -152,11 +152,11 @@ class CalcMPC {
 		return averageMPC
 	}
 
-	def static getMPCfromNHLattice(PartialInterpretation pm) {
-		getMPCfromNHLattice(pm, 1)
+	override calcFromNHLattice(PartialInterpretation pm) {
+		calcFromNHLattice(pm, 1)
 	}
 
-	def static getMPCfromNHLattice(PartialInterpretation pm, Integer depth) {
+	override calcFromNHLattice(PartialInterpretation pm, Integer depth) {
 		// Get NH Lattice and deepLattice
 		val nh = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap

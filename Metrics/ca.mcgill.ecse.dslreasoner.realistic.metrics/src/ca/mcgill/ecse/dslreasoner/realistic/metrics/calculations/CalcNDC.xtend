@@ -10,13 +10,14 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcNDC {
+class CalcNDC extends CalcMetric{
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
+	static val NDACalculator = new CalcNDA
 
-	def static getNDCfromModel(EObject model) {
+	override calcFromModel(EObject model) {
 
-		val NDA = CalcNDA.getNDAfromModel(model)
+		val NDA = NDACalculator.calcFromModel(model)
 		val nodes = model.eResource.allContents.toList
 		val numNodes = nodes.length
 		
@@ -38,7 +39,7 @@ class CalcNDC {
 		val gs = neighbouhood2ShapeGraph.createShapeGraph(nh, pm)
 
 		// calculations
-		val NDA = CalcNDA.getNDAfromNHShape(pm, depth)
+		val NDA = NDACalculator.getNDAfromNHShape(pm, depth)
 		val nodes = gs.nodes
 		var numNodes = 0
 
@@ -54,11 +55,11 @@ class CalcNDC {
 		return NDC
 	}
 
-	def static getNDCfromNHLattice(PartialInterpretation pm) {
-		return getNDCfromNHLattice(pm, 1)
+	override calcFromNHLattice(PartialInterpretation pm) {
+		return calcFromNHLattice(pm, 1)
 	}
 
-	def static getNDCfromNHLattice(PartialInterpretation pm, Integer depth) {
+	override calcFromNHLattice(PartialInterpretation pm, Integer depth) {
 		// Get NH Lattice and deepLattice
 		val nh = neighbourhoodComputer.createRepresentation(pm, depth + 1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 		val nhDeepRep = nh.modelRepresentation as HashMap
@@ -66,7 +67,7 @@ class CalcNDC {
 			modelRepresentation as HashMap
 
 		// calculations
-		val NDA = CalcNDA.getNDAfromNHLattice(nhDeepRep, nhRep, depth)
+		val NDA =NDACalculator.calcFromNHLattice(nhDeepRep, nhRep, depth)
 		val nodes = nhRep.keySet
 		var numNodes = 0
 
