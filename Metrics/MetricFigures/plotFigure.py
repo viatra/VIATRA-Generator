@@ -19,11 +19,11 @@ def main():
 			]
 
 	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA", 'SQRMAX', 'SQRTOT', 'SQROCOOL', 'SQROSZ', 'SQROSZ2'
-	metrics = ['SQRNUM']
+	metrics = ['SQRCNT']
 	
-	xyInverted = False
 	compilation = True
-	testing = "false" #max, true, false, min
+	showFigs = "01" # 00, 01, 10, 11
+	testing = "min" #max, true, false, min
 	#####END SELECTION
 
 	if testing == "max" :
@@ -38,14 +38,15 @@ def main():
 	numSources = len(sources)
 	numMethods =  len(methods)
 
-	allSources = [[[] *  numMethods for i in range(numMethods)] for i in range(numSources)]
-	allSourcesX = [[] *  numSources for i in range(numSources)]
+	allMetVals = [[[] *  numMethods for i in range(numMethods)] for i in range(numSources)]
+	allCDFs = [[] *  numSources for i in range(numSources)]
+	theoryValues = []
 		
 	for metricName in metrics :
 		print('Metric: ' + metricName)
 		srcInd = 0
 		for sourceName in sources:
-			print("  " + str(srcInd) + '/' + str(numSources) + ' : ' + sourceName)
+			print("  " + str(srcInd+1) + '/' + str(numSources) + ' : ' + sourceName)
 			csvLocation = '../ca.mcgill.ecse.dslreasoner.realistic.metrics/outputs/calculatedMetrics/'
 			csvFileName = sourceName + '/' + metricName
 
@@ -56,6 +57,8 @@ def main():
 
 			#Manipulations
 			plt.figure(figsize=(16, 9))
+			maxVal = 0
+			buffer = 0
 			with open(csvLocation + csvFileName + '.csv') as f:
 				reader = csv.reader(f, delimiter=',')
 				ind = 0
@@ -63,38 +66,47 @@ def main():
 					if ind < numMethods :
 						rowName = row[0] + row[1]
 						rowVals = [float(i) for i in row[2:]]
+						#rowVals = [1,2,2,3,4]
 						numVals = len(rowVals)
-						rowXs = np.arange(0, 1, 1 / numVals) 
-						allSources[srcInd][ind] = [i for i in rowVals]	
+						cdf = np.arange(0, 1, 1 / numVals) 
+						cdf = np.append([0], cdf)
+						cdf = np.append(cdf, [1])
+						allCDFs[srcInd] = [i for i in cdf]	
 						#Operations
 						if ind == 0 :
-							toPrint = [i for i in sorted(rowVals)]
+							
+							metVals = [i for i in sorted(rowVals)]
+							theoryValues = [i for i in rowVals]
 						else :
-							toPrint = [i for _,i in sorted(zip(allSources[srcInd][0], rowVals))]
-						if xyInverted :
-							rowTemp = [i for i in rowXs]
-							rowXs = [i for i in rowVals]
-							rowVals = [i for i in rowTemp]
-					
-						#End Operations
+							metVals = [i for _,i in sorted(zip(theoryValues, rowVals))]
+						
+						allMetVals[srcInd][ind] = [i for i in metVals]	
+						
+						#ADJUST X LIMITS
+						#We can do this because our metrics are all non-negative
+						maxVal = metVals[numVals-1]
+						buffer = float(maxVal) * 0.05
+						#technically, this has to be -inf
+						metVals = np.append([0-buffer], metVals)
+						#technically, this has to be +inf
+						metVals = np.append(metVals, [maxVal + buffer])
+
+						line = plt.step( metVals, cdf, label = rowName)
 						if ind == 0 :
-							plt.plot(rowXs, toPrint, label = rowName, lineWidth = 3)
-						else :
-							plt.plot(rowXs, toPrint, label = rowName, alpha = 0.5)
+							plt.setp(line, linewidth = 3)
+						else:
+							plt.setp(line, alpha = 0.5)
 						ind += 1			
 
 			#INDIVIDUAL FIGURES
-			#plt.title("Node Activity measurement w/ and w/o neighbourhood")
+			plt.xlim(0-buffer, maxVal+buffer)
 			plt.title(metricName + " measurement for " + sourceName)
-			if xyInverted :
-				plt.ylabel("Models")
-				plt.xlabel("Metric Value")
-			else :
-				plt.xlabel("Models")
-				plt.ylabel("Metric Value")
+			plt.xlabel("Metric Value")
+			plt.ylabel("Cumulative Distribution Function")
 			plt.legend()
 			#plt.savefig(pathName)
-			#plt.show()
+			if showFigs[0] == "1" :
+				plt.show()
 			plt.clf()
 
 			srcInd += 1
@@ -102,6 +114,8 @@ def main():
 		print('  Compilation for ' + metricName)
 		#COMPILATION FIGURE
 		if compilation :
+			maxVal = 0
+			buffer = 0
 			for j in range(numMethods) :
 
 				plt.figure(figsize=(16, 9))
@@ -110,42 +124,31 @@ def main():
 				pathName = dirPathName + '/' + metricName + "_" + methods[j]+ ".png"
 				createFiles(dirPathName, pathName)
 
-				maxModels = 0
-				maxMetVal = 0
-
+				#find the max value
 				for i in range(numSources) :
-					allSources[i][j].sort()
-
-					###for normalizing number of models
-					numModels = len(allSources[i][j])
-					if numModels > maxModels :
-						maxModels = numModels
-
-					###for normalizing metric values
-					#locMaxMetVal = max(allSources[i])
-					#if locMaxMetVal > maxMetVal :
-					#	maxMetVal = locMaxMetVal
+					numVals = len(allMetVals[i][j])
+					if allMetVals[i][j][numVals-1] > maxVal :
+						maxVal = allMetVals[i][j][numVals-1]
 		
 				for i in range(numSources) :
-					numModels = len(allSources[i][j])
+					#ADJUST X LIMITS
+					buffer = float(maxVal) * 0.05
+					#technically, this has to be -inf
+					allMetVals[i][j] = np.append([0-buffer], allMetVals[i][j])
+					#technically, this has to be +inf
+					allMetVals[i][j] = np.append(allMetVals[i][j], [maxVal + buffer])
 
-					###normalize number of models to (max number of models, 1)
-					#allSourcesX[i] = np.arange(0, maxModels, float(maxModels) / numModels) 
-					allSourcesX[i] = np.arange(0, 1, 1 / numModels) 
 
-					###normalize metric values to (max Metric Value, 1)
-					#currentMax = max(allSources[i])
-					#allSources[i] = [j * maxMetVal / currentMax for j in allSources[i]]
-					#allSources[i] = [j / currentMax for j in allSources[i]]
-
-					plt.plot(allSources[i][j], allSourcesX[i], label = sources[i], lineWidth = 3)
+					plt.step(allMetVals[i][j], allCDFs[i], label = sources[i], lineWidth = 3, alpha = 0.75)
 		
+				plt.xlim(0-buffer, maxVal+buffer)
 				plt.title(metricName + " measurement for all sources from " + methods[j])
-				plt.ylabel("Empirical Distribution function")
+				plt.ylabel("Cumulative Distribution function")
 				plt.xlabel("Metric Value")
 				plt.legend()
-				plt.savefig(pathName)
-				plt.show()
+				#plt.savefig(pathName)
+				if showFigs[1] == "1" :
+					plt.show()
 				plt.clf()
 		#END COMPILATION FIGURE
 		print('END ' + metricName)
