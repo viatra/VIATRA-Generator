@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.IncomingRelation
@@ -108,12 +109,11 @@ class CalcNA extends CalcMetric2 {
 		// Get NAs per node, considering the number of occurences in the partialModel
 		val List<Double> metricDistrib = newArrayList		
 		for (nhNode : node2ActiveDims.keySet) {
+			val nodeAND = nhNode as AbstractNodeDescriptor
 			var NAVal = nhNode.lookup(node2ActiveDims).length
 			var numNodeOccurences = nhNode.lookup(nhRep) as Integer
 
-			// ASSUME THAT THERE IS NO NODE WITHOUT ANY CONNECTIONS
-			// ^valid assumption because of containment edges
-			if (NAVal != 0) {
+			if (!Util.toLocalNode(nodeAND).types.empty) {
 				for(var i = 0; i< numNodeOccurences;i++) {
 					metricDistrib.add(NAVal as double)
 				}

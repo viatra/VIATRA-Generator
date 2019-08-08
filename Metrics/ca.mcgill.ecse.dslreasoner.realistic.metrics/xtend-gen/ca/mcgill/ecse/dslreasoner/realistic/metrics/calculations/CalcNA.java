@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
@@ -122,10 +123,13 @@ public class CalcNA extends CalcMetric2 {
     Set<AbstractNodeDescriptor> _keySet = node2ActiveDims.keySet();
     for (final AbstractNodeDescriptor nhNode_1 : _keySet) {
       {
+        final AbstractNodeDescriptor nodeAND = ((AbstractNodeDescriptor) nhNode_1);
         int NAVal = ((Object[])Conversions.unwrapArray(CollectionsUtil.<AbstractNodeDescriptor, Set<String>>lookup(nhNode_1, node2ActiveDims), Object.class)).length;
         Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(nhNode_1, nhRep);
         Integer numNodeOccurences = ((Integer) _lookup);
-        if ((NAVal != 0)) {
+        boolean _isEmpty = Util.toLocalNode(nodeAND).getTypes().isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
           for (int i = 0; (i < (numNodeOccurences).intValue()); i++) {
             metricDistrib.add(Double.valueOf(((double) NAVal)));
           }

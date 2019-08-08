@@ -11,22 +11,22 @@ def main():
 			, 'Human'
 			, 'RandomEMF-WF+7'
 			, 'RandomEMF30'
-			#, 'VS-i'
-			#, 'VS-WF+All5'
-			#, 'VS-WF+All6'
-			#, 'VS-WF+All7'
-			#, 'VS+i'
+			, 'VS-i'
+			, 'VS-WF+All5'
+			, 'VS-WF+All6'
+			, 'VS-WF+All7'
+			, 'VS+i'
 			]
 
 	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA", 'SQRMAX', 'SQRTOT', 'SQROCOOL', 'SQROSZ', 'SQROSZ2'
-	metrics = ['NA']
-	numPlotLines = 50
+	metrics = ['MPC']
+	numPlotLines = 5
 	compilation = True
 	showFigs = "01" # 00, 01, 10, 11
 	testing = "false" #max, true, false, min
 	#####END SELECTION
 
-	colors = ['b', 'r', 'g', 'm', 'c', 'y', 'k']
+	colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:brown', 'tab:pink', 'tab:gray', 'tab:olive', 'tab:cyan']
 	if testing == "max" :
 		methods = ['Model', 'NHLattice 0', 'NHLattice 1', 'NHLattice 2', 'NHLattice 3']
 	if testing == "true" :

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMPC
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNA
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
@@ -63,19 +64,19 @@ abstract class MetricsCalculationUsingShapes {
 			files = newArrayList("test")
 		}
 		val metrics = new ArrayList<CalcMetric2>
-		metrics.add(new CalcNA)
-//		metrics.add(new CalcMPC)
-//		metrics.add(new CalcNDA)
-//		metrics.add(new CalcNDC)
-//		metrics.add(new CalcEDA)
-//		metrics.add(new CalcC)
-//		metrics.add(new CalcSQRCNT)
-//		metrics.add(new CalcSQRMAX)
-//		metrics.add(new CalcSQRNUM)
-//		metrics.add(new CalcSQROCOOL)
-//		metrics.add(new CalcSQROSZ)
-//		metrics.add(new CalcSQROSZ2)
-//		metrics.add(new CalcSQRTOT)
+//		metrics.add(new CalcNA)
+		metrics.add(new CalcMPC)
+//		metrics.add(new CalcNDA)TODO
+//		metrics.add(new CalcNDC)TODO
+//		metrics.add(new CalcEDA)TODO
+//		metrics.add(new CalcC)TODO
+//		metrics.add(new CalcSQRCNT)TODO
+//		metrics.add(new CalcSQRMAX)TODO
+//		metrics.add(new CalcSQRNUM)TODO
+//		metrics.add(new CalcSQROCOOL)TODO
+//		metrics.add(new CalcSQROSZ)TODO
+//		metrics.add(new CalcSQROSZ2)TODO
+//		metrics.add(new CalcSQRTOT)TODO
 //		
 		var calcMethods = newArrayList
 		switch calcTesting {
