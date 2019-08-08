@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcC extends CalcMetric{
+class CalcC extends CalcMetric2{
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
 	override calcFromModel(EObject model) {
@@ -87,16 +87,16 @@ class CalcC extends CalcMetric{
 		if (totalC != 0) {
 			avgC = totalC / numNodes
 		}
-		return avgC
+		return newArrayList(0.0)
 	}
 
 	override calcFromNHLattice(PartialInterpretation pm) {
-		return 0.0
+		return newArrayList(0.0)
 //		return getCfromNHLattice(pm, 2, v)
 	}
 
 	override calcFromNHLattice(PartialInterpretation pm, Integer depth) {
-		return 1.0
+		return newArrayList(1.0)
 //		// Get required neighbourhoods
 //		val nh = neighbourhoodComputer.createRepresentation(pm, depth+1, Integer.MAX_VALUE, Integer.MAX_VALUE)
 //		val nhDeepRep = nh.modelRepresentation as HashMap

@@ -6,26 +6,32 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.HashMap
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcNDC extends CalcMetric{
+class CalcNDC extends CalcMetric2{
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 	static val NDACalculator = new CalcNDA
 
 	override calcFromModel(EObject model) {
 
-		val NDA = NDACalculator.calcFromModel(model)
+		val ndaDistrib = NDACalculator.calcFromModel(model)
 		val nodes = model.eResource.allContents.toList
 		val numNodes = nodes.length
 		
-		var NDC = 0.0
-		if(NDA != 0 ) {
-			NDC = NDA / numNodes
-		}
-		return NDC
+		val List<Double> metricDistrib = newArrayList
+		for (nda : ndaDistrib) {
+			var metVal = 0.0
+			if (nda != 0) {
+				metVal = nda / numNodes
+			}
+			metricDistrib.add(metVal)
+			}
+
+		return metricDistrib
 	}
 
 	def static getNDCfromNHShape(PartialInterpretation pm) {
@@ -67,22 +73,28 @@ class CalcNDC extends CalcMetric{
 			modelRepresentation as HashMap
 
 		// calculations
-		val NDA =NDACalculator.calcFromNHLattice(nhDeepRep, nhRep, depth)
+		val ndaDistrib = NDACalculator.calcFromNHLattice(nhDeepRep, nhRep, depth)
 		val nodes = nhRep.keySet
 		var numNodes = 0
 
-		// calculations
+		// get number of nodes
 		for (node : nodes) {
 			val nodeAND = node as AbstractNodeDescriptor
 			if (!Util.toLocalNode(nodeAND).types.empty) {
 				numNodes += nodeAND.lookup(nhRep) as Integer
 			}
 		}
+		
+		//get distribution
+		val List<Double> metricDistrib = newArrayList
+		for (nda : ndaDistrib) {
+			var metVal = 0.0
+			if (nda != 0) {
+				metVal = nda / numNodes
+			}
+			metricDistrib.add(metVal)
+			}
 
-		var NDC = 0.0
-		if(NDA != 0 ) {
-			NDC = NDA / numNodes
-		}
-		return NDC
+		return metricDistrib
 	}
 }

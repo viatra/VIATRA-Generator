@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
@@ -13,15 +13,16 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcC extends CalcMetric {
+public class CalcC extends CalcMetric2 {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
   @Override
-  public double calcFromModel(final EObject model) {
+  public List<Double> calcFromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
     for (final EObject node : nodes) {
@@ -84,16 +85,16 @@ public class CalcC extends CalcMetric {
     if ((totalC != 0)) {
       avgC = (totalC / numNodes);
     }
-    return avgC;
+    return CollectionLiterals.<Double>newArrayList(Double.valueOf(0.0));
   }
   
   @Override
-  public double calcFromNHLattice(final PartialInterpretation pm) {
-    return 0.0;
+  public List<Double> calcFromNHLattice(final PartialInterpretation pm) {
+    return CollectionLiterals.<Double>newArrayList(Double.valueOf(0.0));
   }
   
   @Override
-  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
-    return 1.0;
+  public List<Double> calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
+    return CollectionLiterals.<Double>newArrayList(Double.valueOf(1.0));
   }
 }

@@ -9,32 +9,26 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.HashMap
+import java.util.List
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcNDA extends CalcMetric{
+class CalcNDA extends CalcMetric2{
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
 	override calcFromModel(EObject model) {
 		val Map<EObject, Set<EObject>> dim2NumActNodes = Util.dim2NumActNodesFromModel(model)
 
-		var totalNDA = 0.0
+		val List<Double> metricDistrib = newArrayList
 		for (actNodes : dim2NumActNodes.values) {
-			totalNDA += actNodes.length
+			metricDistrib.add(actNodes.length as double)
 		}
 
-		val numDims = dim2NumActNodes.keySet.length
-		
-		
-		var avgNDA = 0.0
-		if (totalNDA != 0) {
-			avgNDA = totalNDA / numDims
-		}
-		return avgNDA
+		return metricDistrib
 	}
 
 	def  getNDAfromNHShape(PartialInterpretation pm) {
@@ -110,19 +104,16 @@ class CalcNDA extends CalcMetric{
 		}
 
 		// calculations
-		var totalNDA = 0.0
+		val List<Double> metricDistrib = newArrayList
 		for (actNodes : dim2ActNodes.values) {
+			var metVal = 0
 			for (actNode : actNodes) {
 				val numInstances = actNode.lookup(nhRep) as Integer
-				totalNDA += numInstances
+				metVal += numInstances
 			}
+			metricDistrib.add(metVal as double)
 		}
 
-		val numDims = dim2ActNodes.keySet.length		
-		var avgNDA = 0.0
-		if (totalNDA != 0) {
-			avgNDA = totalNDA / numDims
-		}
-		return avgNDA
+		return metricDistrib
 	}
 }

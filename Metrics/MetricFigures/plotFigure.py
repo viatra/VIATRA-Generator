@@ -19,14 +19,15 @@ def main():
 			]
 
 	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA", 'SQRMAX', 'SQRTOT', 'SQROCOOL', 'SQROSZ', 'SQROSZ2'
-	metrics = ['MPC']
-	numPlotLines = 5
+	metrics = ['NDC']
+	numPlotLines = 50
 	compilation = True
-	showFigs = "01" # 00, 01, 10, 11
+	showFigs = "11" # 00, 01, 10, 11
 	testing = "false" #max, true, false, min
 	#####END SELECTION
 
 	colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple', 'tab:brown', 'tab:pink', 'tab:gray', 'tab:olive', 'tab:cyan']
+	lineStyles = ["--", ":", ":", ":", ":", ":"]
 	if testing == "max" :
 		methods = ['Model', 'NHLattice 0', 'NHLattice 1', 'NHLattice 2', 'NHLattice 3']
 	if testing == "true" :
@@ -94,15 +95,9 @@ def main():
 					if methodInd < numMethods and lineNum < numPlotLines:
 						cdf, metVals = getArrays(row[3:], lowBound, highBound)
 						
-						line = plt.step( metVals, cdf,  color = colors[methodInd])
+						line = plt.step( metVals, cdf,  color = colors[methodInd], linewidth = 2, linestyle = lineStyles[methodInd])
 						if lineNum == 0 :
 							plt.setp(line, label = methodName)
-						if methodInd == 0 :
-							#Model
-							plt.setp(line, linewidth = 2, linestyle = "--")
-						else:
-							#NH
-							plt.setp(line, linewidth = 1, alpha = 0.7)
 						lineNum += 1
 
 			#INDIVIDUAL FIGURES

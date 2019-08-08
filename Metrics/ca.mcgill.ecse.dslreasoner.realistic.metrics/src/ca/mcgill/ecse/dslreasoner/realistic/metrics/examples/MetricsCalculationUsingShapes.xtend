@@ -1,8 +1,8 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMPC
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNA
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDA
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDC
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
@@ -65,11 +65,11 @@ abstract class MetricsCalculationUsingShapes {
 		}
 		val metrics = new ArrayList<CalcMetric2>
 //		metrics.add(new CalcNA)
-		metrics.add(new CalcMPC)
-//		metrics.add(new CalcNDA)TODO
-//		metrics.add(new CalcNDC)TODO
+//		metrics.add(new CalcMPC)
+//		metrics.add(new CalcNDA)
+//		metrics.add(new CalcNDC)
 //		metrics.add(new CalcEDA)TODO
-//		metrics.add(new CalcC)TODO
+//		metrics.add(new CalcC)
 //		metrics.add(new CalcSQRCNT)TODO
 //		metrics.add(new CalcSQRMAX)TODO
 //		metrics.add(new CalcSQRNUM)TODO
