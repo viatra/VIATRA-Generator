@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor;
@@ -23,17 +23,18 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
-public class CalcNA extends CalcMetric {
+public class CalcNA extends CalcMetric2 {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
   @Override
-  public double calcFromModel(final EObject model) {
+  public List<Double> calcFromModel(final EObject model) {
     final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
     double totalNA = 0.0;
     final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
@@ -68,23 +69,22 @@ public class CalcNA extends CalcMetric {
         }
       }
     }
+    final List<Double> metricDistrib = CollectionLiterals.<Double>newArrayList();
     Collection<Set<String>> _values = node2ActiveDims.values();
     for (final Set<String> activeDims : _values) {
-      double _talNA = totalNA;
       int _length = ((Object[])Conversions.unwrapArray(activeDims, Object.class)).length;
-      totalNA = (_talNA + _length);
+      metricDistrib.add(Double.valueOf(((double) _length)));
     }
-    final double averageNA = (totalNA / numNodes);
-    return averageNA;
+    return metricDistrib;
   }
   
   @Override
-  public double calcFromNHLattice(final PartialInterpretation partialModel) {
+  public List<Double> calcFromNHLattice(final PartialInterpretation partialModel) {
     return this.calcFromNHLattice(partialModel, Integer.valueOf(1));
   }
   
   @Override
-  public double calcFromNHLattice(final PartialInterpretation partialModel, final Integer depth) {
+  public List<Double> calcFromNHLattice(final PartialInterpretation partialModel, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcNA.neighbourhoodComputer.createRepresentation(partialModel, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
@@ -118,32 +118,21 @@ public class CalcNA extends CalcMetric {
         }
       }
     }
-    double totalNA = 0.0;
-    int numModelElems = 0;
+    final List<Double> metricDistrib = CollectionLiterals.<Double>newArrayList();
     Set<AbstractNodeDescriptor> _keySet = node2ActiveDims.keySet();
     for (final AbstractNodeDescriptor nhNode_1 : _keySet) {
       {
-        Set<String> activeDimsForNode = CollectionsUtil.<AbstractNodeDescriptor, Set<String>>lookup(nhNode_1, node2ActiveDims);
+        int NAVal = ((Object[])Conversions.unwrapArray(CollectionsUtil.<AbstractNodeDescriptor, Set<String>>lookup(nhNode_1, node2ActiveDims), Object.class)).length;
         Object _lookup = CollectionsUtil.<AbstractNodeDescriptor, Object>lookup(nhNode_1, nhRep);
         Integer numNodeOccurences = ((Integer) _lookup);
-        boolean _isEmpty = activeDimsForNode.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          double _talNA = totalNA;
-          final Set<String> _converted_activeDimsForNode = (Set<String>)activeDimsForNode;
-          int _length = ((Object[])Conversions.unwrapArray(_converted_activeDimsForNode, Object.class)).length;
-          int _multiply = (_length * (numNodeOccurences).intValue());
-          totalNA = (_talNA + _multiply);
-          int _numModelElems = numModelElems;
-          numModelElems = (_numModelElems + (numNodeOccurences).intValue());
+        if ((NAVal != 0)) {
+          for (int i = 0; (i < (numNodeOccurences).intValue()); i++) {
+            metricDistrib.add(Double.valueOf(((double) NAVal)));
+          }
         }
       }
     }
-    double averageNAwithWeight = 0.0;
-    if ((totalNA != 0)) {
-      averageNAwithWeight = (totalNA / numModelElems);
-    }
-    return averageNAwithWeight;
+    return metricDistrib;
   }
   
   public static double getNAfromNHShape(final PartialInterpretation pm) {

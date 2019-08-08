@@ -1,19 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcC
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcEDA
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMPC
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNA
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDA
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcNDC
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRCNT
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRMAX
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRNUM
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQROCOOL
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQROSZ
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQROSZ2
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcSQRTOT
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
@@ -54,40 +42,40 @@ abstract class MetricsCalculationUsingShapes {
 		val testing = false
 		val bounded = false
 		val lowEnd = 0
-		val highEnd = 20
-		val calcTesting = "max" // max, true, false, min
+		val highEnd = 100
+		val calcTesting = "false" // max, true, false, min
 		// END SELECTION
 		var fileDir = ""
 
-		var files = newArrayList( 
+		var files = newArrayList(
 			"A0"
-//			, "A20"
-//			, "R1"
-//			, "R2"
-//			, "V1"
-//			, "V2"
-//			, "V3"
-//			, "V4"
-//			, "V5"
-//			, "H"
+			, "A20"
+			, "R1"
+			, "R2"
+			, "V1"
+			, "V2"
+			, "V3"
+			, "V4"
+			, "V5"
+			, "H"
 		)
 		if (testing) {
 			files = newArrayList("test")
 		}
-		val metrics = new ArrayList<CalcMetric> 
-//		metrics.add(new CalcNA)
+		val metrics = new ArrayList<CalcMetric2>
+		metrics.add(new CalcNA)
 //		metrics.add(new CalcMPC)
 //		metrics.add(new CalcNDA)
 //		metrics.add(new CalcNDC)
 //		metrics.add(new CalcEDA)
 //		metrics.add(new CalcC)
-		metrics.add(new CalcSQRCNT)
+//		metrics.add(new CalcSQRCNT)
 //		metrics.add(new CalcSQRMAX)
-		metrics.add(new CalcSQRNUM)
+//		metrics.add(new CalcSQRNUM)
 //		metrics.add(new CalcSQROCOOL)
 //		metrics.add(new CalcSQROSZ)
 //		metrics.add(new CalcSQROSZ2)
-		metrics.add(new CalcSQRTOT)
+//		metrics.add(new CalcSQRTOT)
 //		
 		var calcMethods = newArrayList
 		switch calcTesting {
@@ -109,7 +97,7 @@ abstract class MetricsCalculationUsingShapes {
 				case "V3": fileDir = "VS-WF+All6//models//"
 				case "V4": fileDir = "VS-WF+All7//models//"
 				case "V5": fileDir = "VS+i//models//"
-				case "H" : fileDir = "Human//"
+				case "H": fileDir = "Human//"
 				default: fileDir = "_Test//"
 			}
 			var inputs = ""
@@ -121,7 +109,7 @@ abstract class MetricsCalculationUsingShapes {
 			val workspace = new FileSystemWorkspace(inputs, "")
 			// Create stats storage directory if necessary
 			var directoryPath = outputFolder + fileDir.split("//").get(0)
-			
+
 			new File(directoryPath).mkdirs
 
 			// var List<List<String>> metricValues = newArrayList
@@ -136,7 +124,6 @@ abstract class MetricsCalculationUsingShapes {
 			// deltas.add(newArrayList)
 			// totalDeltas.add(0.0)
 			// }
-			
 			// ////////////////////
 			// Create list of things to look at
 			// ////////////////////
@@ -168,7 +155,7 @@ abstract class MetricsCalculationUsingShapes {
 						}
 					}
 
-					listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
+					//listToLookThrough = workspace.allFiles.subList(lowEnd, highEnd)
 				} else {
 					// NOT GENERAL
 					for (run : workspace.allFiles) {
@@ -195,14 +182,14 @@ abstract class MetricsCalculationUsingShapes {
 			for (metricClass : metrics) {
 				val metricName = metricClass.class.simpleName.substring(4)
 				// print and write
-				println("(" + fileDir.split("//").get(0) + ") Metric: " + metricName)
+				val domName = fileDir.split("//").get(0)
+				println("(" + domName + ") Metric: " + metricName)
 				var writer = new PrintWriter(directoryPath + "//" + metricName + ".csv")
-				
-				//Calculate approximations
+
+				// Calculate approximations
 				val List<String> baseVals = newArrayList
 				val List<String> expVals = newArrayList
-				//End Calculate Approximation
-
+				// End Calculate Approximation
 				// realVsNH
 				for (calcMethod : calcMethods) {
 					// print and write
@@ -210,9 +197,7 @@ abstract class MetricsCalculationUsingShapes {
 					if (calcMethod == "Model") {
 						print("    ")
 					}
-					writer.append(metricName + ",")
-					writer.append(calcMethod)
-
+					
 //					var startTime = System.currentTimeMillis
 					expVals.clear
 					// for each file
@@ -232,27 +217,34 @@ abstract class MetricsCalculationUsingShapes {
 						// END VIDUALISATON
 						// get method and invoke
 //						var methodName = "get" + metric + "from" + calcMethod
-						var value = 0.0
+						var List<Double> values = null
 						if (calcMethod == "Model") {
-							value = metricClass.calcFromModel(model)
-							baseVals.add(df.format(value))
+							values = newArrayList(metricClass.calcFromModel(model))
+//							baseVals.add(df.format(value))
 						} else {
 							// EXPERIMENTAL
-							if (calcTesting == "false" || calcTesting == "min") {								
-								value = metricClass.calcFromNHLattice(partialModel)
+							if (calcTesting == "false" || calcTesting == "min") {
+								values = newArrayList(metricClass.calcFromNHLattice(partialModel))
 							} else {
 								val depth = Integer.valueOf(calcMethod.split(" ").get(1))
-								value = metricClass.calcFromNHLattice(partialModel, depth)
-								expVals.add(df.format(value))
+								values = newArrayList(metricClass.calcFromNHLattice(partialModel, depth))
+//								expVals.add(df.format(value))
 							}
 						// END EXPERIMENTAL
 //						
 						}
 
-						// print and write
-						var valAsStr = df.format(value)
+						// print and write						
 //						print(valAsStr + " ")
-						writer.append("," + valAsStr)
+						writer.append(metricName + ",")
+						writer.append(calcMethod + ",")
+						writer.append(domName + "-" + nameWOExt)
+						for(v : values) {
+							var valAsStr = df.format(v)
+							writer.append("," + valAsStr)
+						}
+						writer.append("\n")
+						
 
 						// PROGRESS TRACKER
 						var ratioAchieved = fileIndex * 100 / numFiles
@@ -273,7 +265,6 @@ abstract class MetricsCalculationUsingShapes {
 					// print and write
 					println()
 //					println("    time: " + duration)
-					writer.append("\n");
 
 				}
 				writer.close
@@ -330,16 +321,14 @@ abstract class MetricsCalculationUsingShapes {
 //		// EXPERIMENTAL
 //		// ////////////
 		}
-		
-		//Atempt to run Python
-		
+
+	// Atempt to run Python
 //		var location ="python /c start python ../../../../../../../../../MetricFigures/plotFigure.py"
 //		var command = "python ";
 //		var param = newArrayList
 //		val Process p = Runtime.getRuntime().exec(location, null);
 //		print(p)
 ////		Runtime.getRuntime().exec("cmd.exe /c \"" + command +  "\"", null);
-
 	}
 
 	def static printer(Map<EObject, Integer> map) {

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\model comparison",
+    "\\model comparison\\input",
+    "\\model comparison\\output",
+    "\\model comparison\\output\\Yakindumm",
+    "\\model comparison\\src",
+    "\\model_evolve_comparison",
+    "\\model_evolve_comparison\\src",
+    "\\type_analysis",
+    "\\type_analysis\\src"
+  ],
+  "SelectedNode": "\\model comparison\\src\\plot_ks_stats.py",
+  "PreviewInSolutionExplorer": false
+}

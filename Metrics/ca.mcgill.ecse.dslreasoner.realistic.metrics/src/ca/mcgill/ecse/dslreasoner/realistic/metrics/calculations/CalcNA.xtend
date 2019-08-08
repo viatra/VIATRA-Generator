@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
-class CalcNA extends CalcMetric {
+class CalcNA extends CalcMetric2 {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
@@ -58,14 +58,13 @@ class CalcNA extends CalcMetric {
 			}
 		}
 
-		// Measure NA
+		// Measure NA Distribution
+		val List<Double> metricDistrib = newArrayList
 		for (activeDims : node2ActiveDims.values) {
-			totalNA += activeDims.length
+			metricDistrib.add(activeDims.length as double)
 		}
 
-		val averageNA = totalNA / numNodes
-
-		return averageNA
+		return metricDistrib
 	}
 	
 	override calcFromNHLattice(PartialInterpretation partialModel) {
@@ -107,27 +106,20 @@ class CalcNA extends CalcMetric {
 		}
 
 		// Get NAs per node, considering the number of occurences in the partialModel
-		var totalNA = 0.0
-		var numModelElems = 0
+		val List<Double> metricDistrib = newArrayList		
 		for (nhNode : node2ActiveDims.keySet) {
-			var activeDimsForNode = nhNode.lookup(node2ActiveDims)
+			var NAVal = nhNode.lookup(node2ActiveDims).length
 			var numNodeOccurences = nhNode.lookup(nhRep) as Integer
 
 			// ASSUME THAT THERE IS NO NODE WITHOUT ANY CONNECTIONS
 			// ^valid assumption because of containment edges
-			if (!activeDimsForNode.empty) {
-				totalNA += (activeDimsForNode.length * numNodeOccurences)
-				numModelElems += numNodeOccurences
+			if (NAVal != 0) {
+				for(var i = 0; i< numNodeOccurences;i++) {
+					metricDistrib.add(NAVal as double)
+				}
 			}
 		}
-
-		// return average NA
-		
-		var averageNAwithWeight = 0.0
-		if(totalNA != 0) {
-			averageNAwithWeight = totalNA / numModelElems
-		}
-		return averageNAwithWeight
+		return metricDistrib
 
 	}
 
