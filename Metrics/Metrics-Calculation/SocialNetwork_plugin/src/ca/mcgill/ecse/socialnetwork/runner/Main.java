@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance.KSDistance;
@@ -28,13 +29,13 @@ public class Main {
 	private static String configFolder = "yakinduum/config22/";
 	private static String configFileName = configFolder + "info_old_metric.csv";
 	private static String aggregateViolationMeasureFileName = configFolder + "aggregateInfo.csv";
-	private static String fileReadFolder = "output/Viatra_100/";
+	private static String fileReadFolder = "output/Ecore_100/";
 	
 	public static void main(String args[]) {
-		
-		
+		String ecoreFile = args[0];
+		System.out.println("Generation Started");
 		long begin = System.currentTimeMillis();
-		String message = runWithPath("ecore.vsconfig");
+		String message = runWithPath(ecoreFile);
 		long elapsed = System.currentTimeMillis() - begin;
 
 		if(message != null) {
@@ -147,7 +148,7 @@ public class Main {
 		ArrayList<String> output = new ArrayList<String>();
 		GraphReader reader = new GraphReader(YakindummPackage.eINSTANCE, ".xmi");
 		EMFGraph graph = reader.readModel(fileReadFolder+"/run"+run, run + "_1.xmi");
-		MetricSampleGroup metrics = RepMetricsReader.read(Domain.Yakinduum);
+		MetricSampleGroup metrics = RepMetricsReader.read(Domain.Yakindumm);
 		//KS distance
 		KSDistance ks = new KSDistance(metrics);
 		

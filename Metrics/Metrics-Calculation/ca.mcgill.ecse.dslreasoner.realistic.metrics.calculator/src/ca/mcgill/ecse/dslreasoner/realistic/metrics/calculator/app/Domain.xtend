@@ -1,5 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app
 
 enum Domain{
-	Yakinduum
+	Yakindumm,
+	Ecore,
+	Github
 }

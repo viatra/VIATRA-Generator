@@ -1,4 +1,4 @@
-import viatra "./queries/queries/ecore_pattern.vql"
+import viatra "./queries/queries/Ecore.vql"
 import epackage "http://www.eclipse.org/emf/2002/Ecore"
 
 generate {
@@ -7,12 +7,20 @@ generate {
 										 EStructuralFeature.derived, ENamedElement.name, EClass.interface, EClass.abstract, EClassifier.instanceTypeName,
 										 EClassifier.instanceClassName, EPackage.nsPrefix, EPackage.nsURI, EAnnotation.source,
 										 EAttribute.iD, EDataType.serializable, EEnumLiteral.literal, EEnumLiteral.value,
-										 EGenericType.eTypeParameter, EReference.resolveProxies, EStringToStringMapEntry.key,
+										 EReference.resolveProxies, EReference.container, EReference.containment, EStringToStringMapEntry.key,
 										 EStringToStringMapEntry.value, EStructuralFeature.defaultValueLiteral, EStructuralFeature.transient,
 										 EStructuralFeature.unsettable, EStructuralFeature.volatile, ETypedElement.lowerBound,
 										 ETypedElement.many, ETypedElement.ordered, ETypedElement.required, ETypedElement.unique,ETypedElement.upperBound,
-										 EPackage.eFactoryInstance}}
-//	metamodel = {EPackage, EClass, EClassifier, EObject, ENamedElement, EModelElement, EReference, EStructuralFeature, ETypedElement}
+										 // cannot generate eFactoryInstance
+										 EPackage.eFactoryInstance, 
+										 //Derived edges
+										 EClass.eAllSuperTypes, EClass.eAllAttributes, EClass.eAllReferences, EClass.eAllContainments, EClass.eAllGenericSuperTypes,
+										 EClass. eAllOperations, EClass.eAllStructuralFeatures, EClass.eAttributes, EClass.eIDAttribute, EClass.eReferences,
+										 EAttribute.eAttributeType, EGenericType.eRawType, EReference.eReferenceType,
+										 //Generic Types
+										 EClass.eGenericSuperTypes, ETypedElement.eGenericType, EOperation.eGenericExceptions, EObject, EAnnotation.references, EAnnotation.contents
+										 
+										 }}
 	partial-model = { "inputs/ecore.xmi"}
 	constraints = { package queries }
 	
@@ -20,13 +28,17 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 75
+		#node = 100
 	}
 	
 	number = 1
-	runs = 50
+	runs = 1
 	config = {
-		log-level = none
+		log-level = none,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Ecore"
 	}
 	
 	debug = "debug"

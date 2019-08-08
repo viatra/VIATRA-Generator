@@ -20,6 +20,7 @@ import java.util.List
 import java.util.Map
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression
 import org.eclipse.xtend.lib.annotations.Accessors
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.EdgeTypeMetric
 
 class PartialInterpretationMetricDistance {
 	
@@ -34,8 +35,8 @@ class PartialInterpretationMetricDistance {
 	var LinearModel linearModel;
 	
 	
-	new(){
-		var metrics = RepMetricsReader.read(Domain.Yakinduum);
+	new(Domain d){
+		var metrics = RepMetricsReader.read(d);
 		this.g = metrics;
 		ks = new KSDistance(g);
 		js = new JSDistance(g);
@@ -53,6 +54,7 @@ class PartialInterpretationMetricDistance {
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
 		metrics.add(new NodeTypeMetric());
+		metrics.add(new EdgeTypeMetric());
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
 		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
 		
@@ -63,6 +65,7 @@ class PartialInterpretationMetricDistance {
 		//var typedOutDegree = ks.typedOutDegreeDistance(metricSamples.typedOutDegreeSamples);
 		var distance = new MetricDistanceGroup(mpc, na, outDegree, nodeType);
 		distance.nodeTypeInfo = metricSamples.nodeTypeSamples;
+		distance.edgeTypeDistance = ks.edgeTypeDistance(metricSamples.edgeTypeSamples);
 		return distance;
 	}
 	
@@ -177,7 +180,8 @@ class MetricDistanceGroup{
 	var double outDegreeDistance;
 	var double nodeTypeDistance;
 	protected var HashMap<String, Double> nodeTypeInfo;
-	
+	public var double edgeTypeDistance;
+		
 	new(double mpcDistance, double naDistance, double outDegreeDistance, double nodeTypeDistance){
 		this.mpcDistance = mpcDistance;
 		this.naDistance = naDistance;

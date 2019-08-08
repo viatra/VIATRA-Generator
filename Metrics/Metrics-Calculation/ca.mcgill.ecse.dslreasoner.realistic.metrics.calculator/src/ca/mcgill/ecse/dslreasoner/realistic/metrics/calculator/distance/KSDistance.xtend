@@ -70,13 +70,30 @@ class KSDistance extends CostDistance {
 			instanceDist.add(samples.getOrDefault(key, 0.0));
 		}
 		
+		return ks_distance_two_dist(sourceDist, instanceDist);
+	}
+	
+	def edgeTypeDistance(HashMap<String, Double> samples){
+		var typesDistMap = g.edgeTypeSamples;
+		var sourceDist = newArrayList();
+		var instanceDist = newArrayList();
+		
+		for(key : typesDistMap.keySet()){
+			sourceDist.add(typesDistMap.get(key));
+			instanceDist.add(samples.getOrDefault(key, 0.0));
+		}
+		
+		return ks_distance_two_dist(sourceDist, instanceDist);
+	}
+	
+	def double ks_distance_two_dist(List<Double> dist1, List<Double> dist2){
 		// Since we already know the pdf, we compute the ks-test manully
 		var ksStatistics = 0.0;
 		var sum1 = 0.0;
 		var sum2 = 0.0;
-		for(var i = 0; i < sourceDist.size(); i++){
-			sum1 += sourceDist.get(i);
-			sum2 += instanceDist.get(i);
+		for(var i = 0; i < dist1.size(); i++){
+			sum1 += dist1.get(i);
+			sum2 += dist2.get(i);
 			
 			ksStatistics = Math.max(ksStatistics, Math.abs(sum1 - sum2));
 		} 

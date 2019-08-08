@@ -28,3 +28,5 @@ HUMAN_MPC_REP = '../input/humanOutput/R_2016324_run_1.csv'
 
 HUMAN_NA_REP = '../input/humanOutput/R_2017419_run_1.csv'
 
+VIOLATION = 'violations'
+

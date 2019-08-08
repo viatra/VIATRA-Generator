@@ -9,11 +9,11 @@ import org.eclipse.emf.ecore.EObject
 class MultiplexParticipationCoefficientMetric extends Metric {
 	public static val countName = "MPCCount";
 	public static val valueName = "MPCValue";
-	
+	val formatter = new DecimalFormat("#0.00000");    
 	
 	override evaluate(GraphStatistic g) {
 		//because the precision issue of double, we translate double values into String to be the key
-		val formatter = new DecimalFormat("#0.00000");     
+		 
 		
 		//get number of different types
 		val typeCounts = g.allTypes.size;
@@ -75,6 +75,6 @@ class MultiplexParticipationCoefficientMetric extends Metric {
 			coef = 0;
 		}
 		
-		return coef;
+		return Double.parseDouble(formatter.format(coef));
 	}
 }

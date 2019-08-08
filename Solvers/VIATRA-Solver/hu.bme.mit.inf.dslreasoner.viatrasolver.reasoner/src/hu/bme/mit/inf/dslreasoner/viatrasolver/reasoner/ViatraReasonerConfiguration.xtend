@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
@@ -45,6 +46,14 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	 * Configuration for cutting search space.
 	 */
 	 public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
+	 
+	 public var RealisticGuidance realisticGuidance = RealisticGuidance.Composite;
+	 
+	 public var isWFOptional = false;
+	 
+	 public var allowMustViolations = false;
+	 
+	 public var String domain = '';
 }
 
 public class DiversityDescriptor {
@@ -55,6 +64,16 @@ public class DiversityDescriptor {
 	public var int maxNumber = Integer.MAX_VALUE
 	public var Set<TypeDeclaration> relevantTypes = null
 	public var Set<RelationDeclaration> relevantRelations = null
+}
+
+public enum RealisticGuidance{
+	MPC,
+	NodeActivity,
+	OutDegree,
+	NodeType,
+	Composite,
+	Composite_Without_Violations,
+	Violations
 }
 
 public class DebugConfiguration {

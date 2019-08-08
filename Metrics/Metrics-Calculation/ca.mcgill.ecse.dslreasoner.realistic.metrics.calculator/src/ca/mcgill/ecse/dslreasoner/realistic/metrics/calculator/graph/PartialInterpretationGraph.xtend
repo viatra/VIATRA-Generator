@@ -2,6 +2,8 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.Metric
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialComplexTypeInterpretationImpl
@@ -20,19 +22,25 @@ class PartialInterpretationGraph extends Graph{
 		partial.problem.relations.filter(RelationDeclaration).forEach[
 			//only need the name of the reference type (remove everything with and after "reference")
 			var n = it.name.split(" ").get(0);
-			// TODO: Here is to only consider one part of opposite edges
-			if(!n.equals('target') && !n.equals('source') /* && !n.equals('incomingTransitions')*/){
 				this.statistic.addEdgeType(n);
-			}
 		]
 		// add all elements
 		val typeInterpretations = getTypes(partial);
 		for(type : typeInterpretations){
 			//Only consider the most concrete class
-			if(type.interpretationOf.subtypes.size == 0){
+			if(isConcreteType(type.interpretationOf)){
 				var typeName = type.interpretationOf.name.replace(classSuffix, '');
 				for(node : type.elements){
-					this.statistic.addNodeWithType(node, typeName);
+					if(!this.statistic.containsNode(node)){
+						this.statistic.addNodeWithType(node, typeName);
+					}else{
+						// if the current type of the node is a super type of the type to check, 
+						// substitute the current type with the new type
+						var currentType = statistic.getTypesForNode(node).get(0);
+						if(isSuperType(currentType, type.interpretationOf)){
+							statistic.overwriteCurrentType(node, typeName);
+						}
+					}
 				}
 			}
 		}
@@ -40,16 +48,46 @@ class PartialInterpretationGraph extends Graph{
 		for(relationInterpretation : partial.partialrelationinterpretation) {
 			//only need the name of the reference type (remove everything with and after "reference")
 			val type = relationInterpretation.interpretationOf.name.split(" ").get(0);
-			// TODO: Here is to only consider one part of opposite edges
-			if(!type.equals('target') && !type.equals('source') /*&& !type.equals('incomingTransitions')*/){
-				for(edge : relationInterpretation.relationlinks.filter(BinaryElementRelationLink)){
-					statistic.addEdge(edge.param1, edge.param2, type);
-				}	
-			}
+			for(edge : relationInterpretation.relationlinks.filter(BinaryElementRelationLink)){
+				statistic.addEdge(edge.param1, edge.param2, type);
+			}	
 		}	
 		
 		this.name = name;
 		this.metrics = metrics;	
+	}
+	
+	/**
+	 * recursively check if a type is the super type of another
+	 */
+	 def boolean isSuperType(String typeName, Type subtypeToCheck){
+	 	var superTypes = subtypeToCheck.supertypes;
+	 	if(superTypes.size == 0){
+	 		return false;
+	 	}else if(subtypeToCheck.supertypes.map[it.name.replace(classSuffix, '')].contains(typeName)){
+	 		return true;
+	 	}else{
+	 		for(superType : superTypes){
+	 			if(isSuperType(typeName, superType)){
+	 				return true;
+	 			}
+	 		}
+	 		return false;
+	 	}
+	 }
+	 
+	 /**
+	  * Check if a Type object is the class that we want to consider
+	  *	A type object is to be considered if it satisfy one of the following:
+	  * 	1. if it is not abstract
+	  * 	2. if it is abstract but has a subclass of type TypeDefinition (This means the generation is
+	  * 	   started with nodes in this type) 
+	  */
+	def boolean isConcreteType(Type t){
+		if(!t.isAbstract || t.subtypes.findFirst[it instanceof TypeDefinition] !== null){
+			return true;
+		}
+		return false;
 	}
 	
 	/**

@@ -84,7 +84,8 @@ class ViatraReasoner extends LogicReasoner{
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
-			new UnfinishedWFObjective(method.unfinishedWF)
+			new UnfinishedWFObjective(method.unfinishedWF),
+			viatraConfig.isWFOptional
 		))
 
 		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationObjective(method.invalidWF))
@@ -113,7 +114,7 @@ class ViatraReasoner extends LogicReasoner{
 			dse.addTransformationRule(rule)
 		}
 		
-		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
+		val strategy = new HillClimbingOnRealisticMetricStrategyForModelGeneration(workspace,viatraConfig,method)
 		viatraConfig.progressMonitor.workedForwardTransformation
 		
 		val transformationTime = System.nanoTime - transformationStartTime

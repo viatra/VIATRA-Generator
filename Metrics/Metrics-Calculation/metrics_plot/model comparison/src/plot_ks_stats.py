@@ -12,31 +12,31 @@ import DistributionMetrics as metrics
 
 def main():
     # read models
-    human = GraphCollection('../input/yakindumm/human_output_100/', 500, 'Human')
-    human_na = GraphCollection('../input/yakindumm/human_output_100/na_rep/', 1, 'Human rep')
-    human_mpc = GraphCollection('../input/yakindumm/human_output_100/mpc_rep/', 1, 'Human rep')
-    human_od = GraphCollection('../input/yakindumm/human_output_100/od_rep/', 1, 'Human rep')
+    human = GraphCollection('../input/human_30_500_no_xml/', 500, 'human_no_xml')
+    human2 = GraphCollection('../input/human_30_500_xml/', 500, 'human_xml')
+    # human_na = GraphCollection('../input/human_models_50_500/na_rep/', 1, 'Human rep')
+    # human_mpc = GraphCollection('../input/human_models_50_500/mpc_rep/', 1, 'Human rep')
+    # human_od = GraphCollection('../input/human_models_50_500/od_rep/', 1, 'Human rep')
 
-    #viatra75 = GraphCollection('../input/viatra_75/', 500, 'Viatra (75 nodes)')
+    # viatra75 = GraphCollection('../input/viatra_75/', 500, 'Viatra (75 nodes)')
     # viatra30 = GraphCollection('../input/viatraOutput30/', 500,'Viatra (30 nodes)')
     # viatra60 = GraphCollection('../input/viatraOutput60/', 500, 'Viatra (60 nodes)')
     # viatra100 = GraphCollection('../input/viatraOutput100/', 500, 'Viatra (100 nodes)')
     # viatra100R = GraphCollection('../input/realisticViatraOutput_newMetric/', 500, 'Realistic Viatra (100 nodes)')
-    viatra100C = GraphCollection('../input/yakindumm/viatraOutput100C/', 500, 'Viatra consistent (100 nodes)')
+    # viatra100C = GraphCollection('../input/yakindumm/viatraOutput100C/', 500, 'Viatra consistent (100 nodes)')
     # viatra100EE = GraphCollection('../input/realisticViatra_excludeExit/', 500, 'Realistic Viatra no Exit (100 nodes)')
     # viatra100EEF = GraphCollection('../input/realisticViatra_excludeExitFinal/', 500, 'Realistic Viatra no Exit Final (100 nodes)')
-    viatra100NT = GraphCollection('../input/yakindumm/realisticVIatraOutput_nodeTypeKS/', 500, 'Realistic Viatra with Node Type KS (100 nodes)')
+    # viatra100NT = GraphCollection('../input/yakindumm/realisticVIatraOutput_nodeTypeKS/', 500, 'Realistic Viatra with Node Type KS (100 nodes)')
 
     # random = GraphCollection('../input/randomOutput/', 500, 'Random')
     # alloy = GraphCollection('../input/alloy/', 500, 'Alloy (30 nodes)')
     # realistic_viatra = GraphCollection('../input/viatra_output_consistent_100/', 50, 'Realistic Viatra With Some Constraints (100 nodes)')
-    # human100 = GraphCollection('../input/human_output_100/', 304, 'Human')
-    models_to_compare_na = [human, human_na, viatra100C,viatra100NT]
-    models_to_compare_mpc = [human, human_mpc ,viatra100C,viatra100NT]
-    models_to_compare_od = [human, human_od, viatra100C,viatra100NT]
+    models_to_compare_na = [human, human2]
+    models_to_compare_mpc = [human, human2]
+    models_to_compare_od = [human, human2]
     
     # define output folder
-    outputFolder = '../output/Yakindumm/'
+    outputFolder = '../output/'
 
     #calculate metrics
     metricStat(models_to_compare_na, 'Node Activity', nodeActivity, 0, outputFolder)

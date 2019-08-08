@@ -30,6 +30,8 @@ def readcsvfile(filename):
             elif(arr[0] == constants.NODE_TYPE):
                 types = data[i+1].replace('\n', '').split(',')
                 numbers = data[i+2].replace('\n', '').split(',')
+                #convert number to floats
+                numbers = [float(n) for n in numbers]
                 contents[constants.Node_TYPE_KEY] = {t : n for t, n in zip(types, numbers)}
             # NA and OD are integers, and store other information as string
             else:

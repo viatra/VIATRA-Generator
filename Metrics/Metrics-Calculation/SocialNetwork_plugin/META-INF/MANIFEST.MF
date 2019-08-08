@@ -7,6 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: ca.mcgill.ecse.socialnetwork.plugin,
+ ca.mcgill.ecse.socialnetwork.runner,
  queries,
  socialnetwork,
  socialnetwork.impl,
@@ -24,8 +25,9 @@ Require-Bundle: org.eclipse.viatra.query.runtime.rete,
  hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph;bundle-version="1.0.0",
  ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.validation;bundle-version="0.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Main-Class: ca.mcgill.ecse.socialnetwork.runner.Main
+Automatic-Module-Name: SocialNetwork_plugin
 Import-Package: org.apache.log4j,
  org.junit;version="4.12.0"
-Automatic-Module-Name: SocialNetwork_plugin
-Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8

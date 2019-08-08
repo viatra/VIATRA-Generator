@@ -26,15 +26,22 @@ class ModelGenerationCompositeObjective implements IObjective{
 	val ScopeObjective scopeObjective
 	val List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives
 	val UnfinishedWFObjective unfinishedWFObjective
+	var boolean isWFOptional = false;
 	
 	public new(
 		ScopeObjective scopeObjective,
 		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
-		UnfinishedWFObjective unfinishedWFObjective)
+		UnfinishedWFObjective unfinishedWFObjective,
+		boolean isWFOptional)
 	{
 		this.scopeObjective = scopeObjective
 		this.unfinishedMultiplicityObjectives = unfinishedMultiplicityObjectives
 		this.unfinishedWFObjective = unfinishedWFObjective
+		this.isWFOptional = isWFOptional;
+	}
+	
+	def getIsWFOptional(){
+		return this.isWFOptional;
 	}
 	
 	override init(ThreadContext context) {
@@ -45,7 +52,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 	
 	override createNew() {
 		return new ModelGenerationCompositeObjective(
-			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective)
+			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective, this.isWFOptional)
 	}
 	
 	override getComparator() { Comparators.LOWER_IS_BETTER }
@@ -53,7 +60,6 @@ class ModelGenerationCompositeObjective implements IObjective{
 		var sum = 0.0
 		val scopeFitnes = scopeObjective.getFitness(context)
 		//val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
-		val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
 		
 		sum+=scopeFitnes
 		var multiplicity = 0.0
@@ -61,7 +67,12 @@ class ModelGenerationCompositeObjective implements IObjective{
 			multiplicity+=multiplicityObjective.getFitness(context)//*0.5
 		}
 		sum+=multiplicity
-		sum += unfinishedWFsFitness//*0.5
+		
+		// the WF can be optional when generating realistic models
+		if(!isWFOptional){
+			val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
+			sum += unfinishedWFsFitness//*0.5
+		}
 		
 		//println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
 		
@@ -70,6 +81,9 @@ class ModelGenerationCompositeObjective implements IObjective{
 	
 	override getLevel() { 2 }
 	override getName() { "CompositeUnfinishednessObjective"}
+	def getObjective(){
+		return this.unfinishedMultiplicityObjectives;
+	}
 	
 	override isHardObjective() { true }
 	override satisifiesHardObjective(Double fitness) { fitness <= 0.001 }

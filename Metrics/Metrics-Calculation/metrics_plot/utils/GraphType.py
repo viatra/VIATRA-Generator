@@ -30,3 +30,6 @@ class GraphStat:
             self.id = (contents[constants.STATE_ID])[0]
         if constants.Node_TYPE_KEY in contents:
             self.nodeTypeStat = contents[constants.Node_TYPE_KEY]
+        if constants.VIOLATION in contents:
+            self.violations = int(contents[constants.VIOLATION][0])
+

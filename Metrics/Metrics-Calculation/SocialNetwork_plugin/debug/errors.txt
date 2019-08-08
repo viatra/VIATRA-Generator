@@ -1,0 +1,13 @@
+Error occured (IllegalArgumentException): Class EObject is not translated to logic!
+    hu.bme.mit.inf.dslreasoner.ecore2logic.EClassMapper_AllElementAsObject.TypeofEClass(EClassMapper_AllElementAsObject.java:63)
+    hu.bme.mit.inf.dslreasoner.ecore2logic.EReferenceMapper_RelationsOverTypes.createIndicatorDeclarations(EReferenceMapper_RelationsOverTypes.java:88)
+    hu.bme.mit.inf.dslreasoner.ecore2logic.EReferenceMapper_RelationsOverTypes.transformEReferences(EReferenceMapper_RelationsOverTypes.java:67)
+    hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic.transformEReferences(Ecore2Logic.java:120)
+    hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic.transformMetamodel(Ecore2Logic.java:81)
+    hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor.executeGenerationTask(GenerationTaskExecutor.java:189)
+    hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor._execute(ScriptExecutor.java:129)
+    hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor.execute(ScriptExecutor.java:338)
+    hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor.executeScript(ScriptExecutor.java:110)
+    hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor.executeScript(StandaloneScriptExecutor.java:149)
+    ca.mcgill.ecse.socialnetwork.runner.Main.runWithPath(Main.java:25)
+    ca.mcgill.ecse.socialnetwork.runner.Main.main(Main.java:38)

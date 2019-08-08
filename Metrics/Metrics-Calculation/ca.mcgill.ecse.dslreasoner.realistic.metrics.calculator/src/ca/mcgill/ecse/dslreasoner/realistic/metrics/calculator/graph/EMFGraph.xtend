@@ -7,10 +7,15 @@ import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class EMFGraph extends Graph{	
+	@Accessors(PUBLIC_GETTER)
+	var EObject root;
+	
 	def void init (EObject root, List<Metric> metrics, String name, List<EReference> referenceTypes){
 		val otherContents = root.eAllContents.toList();
+		this.root = root;
 		otherContents.add(root);
 		init(otherContents, metrics, name, referenceTypes);
 	}
@@ -30,17 +35,11 @@ class EMFGraph extends Graph{
 			statistic.addNodeWithAllTypes(it, types);
 		]
 		
-		referenceTypes.forEach[it|
-			var typeToAdd = it;
-		
-			// TODO: Here is to only consider one part of opposite edges
-//		  	if(it.upperBound != -1 && it.EOpposite !== null && 
-//		  		(it.EOpposite.upperBound == -1 || it.EOpposite.upperBound > it.upperBound
-//		  	)){
-//				typeToAdd = it.EOpposite;
-//			}
-//			
-			statistic.addEdgeType(typeToAdd.name);
+		referenceTypes.forEach[it|		
+			// Only consider the edges that are not derived to preserve the statistical property
+			if(!it.derived){
+				statistic.addEdgeType(it.name);
+			}
 		];
 		
 		objects.forEach[source|
@@ -60,6 +59,12 @@ class EMFGraph extends Graph{
 		
 		this.metrics = metrics;
 		this.name = name;
+	}
+	
+	def void removeReference(EReference r){
+		if (statistic.containsEdgeType(r.name)){
+			statistic.removeReference(r.name, r.containment);
+		}
 	}
 	
 	/**
@@ -94,15 +99,8 @@ class EMFGraph extends Graph{
 	}
 	
 	def addEdge(EObject source, EObject target, EReference r){
-		// TODO: Here is to only consider one part of opposite edges
-		//check for the opposite reference and do not add if its opposite will be added
-//		if(r.upperBound != -1 && r.EOpposite !== null && 
-//		  		(r.EOpposite.upperBound == -1 || r.EOpposite.upperBound > r.upperBound
-//		 )){
-//			return;
-//		}
-		
-		if(target !== null && r !== null){
+		//Only add the edge if the reference is not derived to preserve the statistical property
+		if(target !== null && r !== null && !r.derived){
 			statistic.addEdge(source, target, r.name);
 		}
 	}

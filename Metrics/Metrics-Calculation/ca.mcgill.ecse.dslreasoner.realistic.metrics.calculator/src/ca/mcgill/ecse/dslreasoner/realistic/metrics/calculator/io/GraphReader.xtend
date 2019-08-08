@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import org.eclipse.emf.ecore.EGenericType
+import org.eclipse.emf.ecore.EStructuralFeature
 
 class GraphReader{
 	val ResourceSet resSet = new ResourceSetImpl();
@@ -53,9 +55,11 @@ class GraphReader{
 		metrics.add(new TypedOutDegree());		
 		metrics.add(new NodeTypeMetric());
 		metrics.add(new EdgeTypeMetric());
-		
+		var count = 1
 		//check all files in the directory with suffix
 		for(String name : dir.list.filter[it| it.endsWith(suffix)]){
+			println(name)
+			println(count)
 			val file = new File(name);
 			val roots = readModel(EObject, path,  file.name);			
 			//add a list of metrics
@@ -63,7 +67,8 @@ class GraphReader{
 			for(root : roots){
 				g.init(root, metrics, name.replaceFirst(suffix, ""), referenceTypes);
 			}
-			
+
+			count ++;
 			graphs.add(g);
 		}
 		

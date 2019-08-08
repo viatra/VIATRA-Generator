@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EReference
 
 class GraphStatistic {
 	val incomingEdges = new HashMap<String, Multimap<EObject, EObject>>;
-	val outcomingEdges = new HashMap<String, Multimap<EObject, EObject>>;
+	val outgoingEdges = new HashMap<String, Multimap<EObject, EObject>>;
 
 	val edgeTypes = new HashSet<String>();
 	val nodeToType = new HashMap<EObject, Set<String>>();	
@@ -22,15 +22,13 @@ class GraphStatistic {
 	 * @param type: type to add
 	 */
 	def void addEdgeType(String type){
-		
-		
 		if(edgeTypes.contains(type)){
 			return;
 	  	}
 	  	
 		edgeTypes.add(type);
 		incomingEdges.put(type, ArrayListMultimap.create());
-		outcomingEdges.put(type, ArrayListMultimap.create());
+		outgoingEdges.put(type, ArrayListMultimap.create());
 	}
 	
 	/**
@@ -41,6 +39,23 @@ class GraphStatistic {
 	 	var types = nodeToType.getOrDefault(n, new HashSet<String>());
 	 	types.add(Type);
 	 	nodeToType.put(n, types);
+	 }
+	 
+	 def boolean containsNode(EObject o){
+	 	return nodeToType.containsKey(o);
+	 }
+	 
+	 def Set<String> getTypesForNode(EObject o){
+	 	return nodeToType.getOrDefault(o, new HashSet<String>());
+	 }
+	 
+	 def void overwriteCurrentType(EObject o, String type){
+	 	var typeSet = nodeToType.getOrDefault(o, new HashSet<String>());
+	 	
+	 	// clear current types
+	 	typeSet.clear();
+	 	typeSet.add(type);
+	 	nodeToType.put(o, typeSet);
 	 }
 	 
 	 /**
@@ -57,9 +72,57 @@ class GraphStatistic {
 	  * @param type: type of the reference
 	  */
 	  def void addEdge(EObject source, EObject target, String type){
-	  	outcomingEdges.get(type).put(source, target);
+	  	outgoingEdges.get(type).put(source, target);
 	  	incomingEdges.get(type).put(target, source);
 	  }
+	  
+	  /**
+	   * check if this graph contains a specific edge type
+	   */
+	   def boolean containsEdgeType(String typeName){
+	   	 if(outgoingEdges.containsKey(typeName) && incomingEdges.containsKey(typeName)){
+	   	 	return true;
+	   	 }
+	   	 return false;
+	   }
+	   
+	   /**
+	    * remove references from the statistics, potentially remove the nodes associated with it
+	    * @Param name: name of the reference
+	    * @Param isContainment: if true then the corresponding nodes on the incoming side will also be removed
+	    */
+	    def removeReference(String name, boolean isContainment){
+	    	if(!edgeTypes.contains(name)){
+	    		return;
+	    	}
+	    	
+	    	edgeTypes.remove(name);
+	    	var incomingSet = incomingEdges.remove(name);
+	    	outgoingEdges.remove(name);
+	    	
+	    	// if the reference is not a containment, then removing the reference is enough
+	    	if(!isContainment){
+	    		return;
+	    	}
+	    	
+	    	// else remove all corresponding nodes
+	    	val nodesToRemove = incomingSet.keySet();
+	    	
+	    	//remove nodes from node sets
+	    	nodesToRemove.forEach[nodeToType.remove(it)];
+	    	
+	    	val removeForMultimap = [Multimap<EObject, EObject> refMap| 
+	    		nodesToRemove.forEach[refMap.removeAll(it)];
+	    		var values = refMap.values()
+	    		//remove the values from the list is equavalent to remove it in the multimap
+	    		values.removeAll(nodesToRemove); 
+	    		return;
+	    	];
+	    	
+	    	//remove nodes from all other references on incomingEdges
+	    	incomingEdges.values.forEach(removeForMultimap);
+	    	outgoingEdges.values.forEach(removeForMultimap);
+	    }
 	  
 	  /**
 	   * calculate the out degree for an object
@@ -68,7 +131,7 @@ class GraphStatistic {
 		var count = 0;
 		
 	  	for (String type : edgeTypes){
-	  		count += outcomingEdges.get(type).get(o).size();
+	  		count += outgoingEdges.get(type).get(o).size();
 	  	}
 	  	return count;
 	  }
@@ -89,7 +152,7 @@ class GraphStatistic {
 	   * calculate the dimentional degree of a node
 	   */
 	  def int dimentionalDegree(EObject o, String type){
-	  	return incomingEdges.get(type).get(o).size() + outcomingEdges.get(type).get(o).size();
+	  	return incomingEdges.get(type).get(o).size() + outgoingEdges.get(type).get(o).size();
 	  }
 	  
 	  /**
@@ -120,7 +183,7 @@ class GraphStatistic {
 	  }
 	  
 	  def HashMap<String, Multimap<EObject, EObject>> getOutgoingEdges(){
-	  	return outcomingEdges; 
+	  	return outgoingEdges; 
 	  }
 	  
 }
