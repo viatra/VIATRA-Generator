@@ -10,6 +10,7 @@ class GraphCollection:
         self.out_ds = []
         self.nas = []
         self.mpcs = []
+        self.nts = []
         self.name = name
         models = reader.readmultiplefiles(path, number, shouldShuffle)
         print(len(models))
@@ -19,6 +20,8 @@ class GraphCollection:
             self.out_ds.append(out_d)
             self.nas.append(na)
             self.mpcs.append(mpc)
+            if(constants.Node_TYPE_KEY in contents):
+                self.nts.append(contents[constants.Node_TYPE_KEY])
 
 #Graph stat for one graph
 class GraphStat:

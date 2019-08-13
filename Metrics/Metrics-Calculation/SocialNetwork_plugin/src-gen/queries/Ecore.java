@@ -7,9 +7,11 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import queries.DirectSupertype;
 import queries.LoopInInheritence;
+import queries.MoreThenFiveSuperTypes;
 import queries.NonSymmetricOpposite;
 import queries.Opposite;
 import queries.OppositeDifferentClass;
+import queries.SuperTypes;
 
 /**
  * A pattern group formed of all public patterns defined in Ecore.vql.
@@ -24,6 +26,8 @@ import queries.OppositeDifferentClass;
  * <li>opposite</li>
  * <li>oppositeDifferentClass</li>
  * <li>nonSymmetricOpposite</li>
+ * <li>superTypes</li>
+ * <li>moreThenFiveSuperTypes</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -53,6 +57,8 @@ public final class Ecore extends BaseGeneratedPatternGroup {
     querySpecifications.add(Opposite.instance());
     querySpecifications.add(OppositeDifferentClass.instance());
     querySpecifications.add(NonSymmetricOpposite.instance());
+    querySpecifications.add(SuperTypes.instance());
+    querySpecifications.add(MoreThenFiveSuperTypes.instance());
   }
   
   public DirectSupertype getDirectSupertype() {
@@ -93,5 +99,21 @@ public final class Ecore extends BaseGeneratedPatternGroup {
   
   public NonSymmetricOpposite.Matcher getNonSymmetricOpposite(final ViatraQueryEngine engine) {
     return NonSymmetricOpposite.Matcher.on(engine);
+  }
+  
+  public SuperTypes getSuperTypes() {
+    return SuperTypes.instance();
+  }
+  
+  public SuperTypes.Matcher getSuperTypes(final ViatraQueryEngine engine) {
+    return SuperTypes.Matcher.on(engine);
+  }
+  
+  public MoreThenFiveSuperTypes getMoreThenFiveSuperTypes() {
+    return MoreThenFiveSuperTypes.instance();
+  }
+  
+  public MoreThenFiveSuperTypes.Matcher getMoreThenFiveSuperTypes(final ViatraQueryEngine engine) {
+    return MoreThenFiveSuperTypes.Matcher.on(engine);
   }
 }

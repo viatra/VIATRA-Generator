@@ -4,14 +4,6 @@
     <!-- @generated socialnetwork -->
     <package class="socialnetwork.SocialnetworkPackage" genModel="model/socialnetwork.genmodel" uri="http://ecse.mcgill.ca/socialnetwork"/>
   </extension>
-  <extension id="ca.mcgill.ecse.socialnetwork.plugin.Queries" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:ca.mcgill.ecse.socialnetwork.plugin.Queries" id="ca.mcgill.ecse.socialnetwork.plugin.Queries">
-      <query-specification fqn="ca.mcgill.ecse.socialnetwork.plugin.singleFriendship"/>
-      <query-specification fqn="ca.mcgill.ecse.socialnetwork.plugin.noFriend"/>
-      <query-specification fqn="ca.mcgill.ecse.socialnetwork.plugin.selfFriend"/>
-      <query-specification fqn="ca.mcgill.ecse.socialnetwork.plugin.friendship"/>
-    </group>
-  </extension>
   <extension id="queries.Ecore" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Ecore" id="queries.Ecore">
       <query-specification fqn="queries.directSupertype"/>
@@ -19,11 +11,8 @@
       <query-specification fqn="queries.opposite"/>
       <query-specification fqn="queries.oppositeDifferentClass"/>
       <query-specification fqn="queries.nonSymmetricOpposite"/>
-    </group>
-  </extension>
-  <extension id="queries.Ecore_pattern" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Ecore_pattern" id="queries.Ecore_pattern">
-      <query-specification fqn="queries.sameSuperClass"/>
+      <query-specification fqn="queries.superTypes"/>
+      <query-specification fqn="queries.moreThenFiveSuperTypes"/>
     </group>
   </extension>
 </plugin>

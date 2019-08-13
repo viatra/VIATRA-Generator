@@ -27,3 +27,27 @@ pattern nonSymmetricOpposite(a:EReference, b:EReference) {
 	find opposite(a,b);
 	neg find opposite(b,a);
 }
+
+pattern superTypes(c1:EClass, c2:EClass){
+	EClass.eSuperTypes(c1,c2);
+}
+
+@Constraint(severity="error", message="error", key = {c})
+pattern moreThenFiveSuperTypes(c: EClass){
+	find superTypes(c1, s1);
+	find superTypes(c1, s2);
+	find superTypes(c1, s3);
+	find superTypes(c1, s4);
+	find superTypes(c1, s5);
+	s1 != s2;
+	s1 != s3;
+	s1 != s4;
+	s1 != s5;
+	s2 != s3;
+	s2 != s4;
+	s2 != s5;
+	s3 != s4;
+	s3 != s5;
+	s4 != s5;
+}
+

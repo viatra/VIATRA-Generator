@@ -32,7 +32,7 @@ generate {
 	}
 	
 	number = 1
-	runs = 1
+	runs = 30
 	config = {
 		log-level = none,
 		"optional-wf" = "true",

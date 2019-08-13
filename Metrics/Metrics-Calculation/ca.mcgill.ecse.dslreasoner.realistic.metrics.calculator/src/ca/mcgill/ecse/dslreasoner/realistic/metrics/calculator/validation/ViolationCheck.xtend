@@ -2,6 +2,7 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.validation
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
 import com.google.common.reflect.ClassPath
+import ecore.Ecore_pattern
 import hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns
 import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
@@ -16,15 +17,13 @@ class ViolationCheck {
 		if(d == Domain.Yakindumm){
 			packageName = 'constraints.yakindumm';
 		}else if (d == Domain.Ecore){
-			//TODO: put constraints package names for ecore and github models
-			return -1;
+			packageName = 'constraints.ecore';
 		}else if (d == Domain.Github){
 			return -1;
 		}
 		
-		
 		var constriants = loadConstraints(packageName);
-		var collections = new ConstraintCollection(constriants, Patterns.instance);
+		var collections = new ConstraintCollection(constriants, Ecore_pattern.instance);
 		collections.addModel(root);
 		var results = collections.calculateViolations();
 		if(results.size > 0){
@@ -54,7 +53,6 @@ class ViolationCheck {
 		
 		val classPath = ClassPath.from(ClassLoader.systemClassLoader);
 		val classInfos = classPath.getTopLevelClasses(packageName);
-		
 		for(info : classInfos){
 			if(info.load.interfaces.contains(IConstraintSpecification)){
 				//IConstraintSpecification only has one constructor with empty argument list
@@ -63,7 +61,6 @@ class ViolationCheck {
 				constraints.add(instance as IConstraintSpecification);
 			}
 		}
-		
 		return constraints
 	}
 }

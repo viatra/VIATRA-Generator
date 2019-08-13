@@ -54,7 +54,6 @@ class PartialInterpretationMetricDistance {
 		metrics.add(new NodeActivityMetric());
 		metrics.add(new MultiplexParticipationCoefficientMetric());
 		metrics.add(new NodeTypeMetric());
-		metrics.add(new EdgeTypeMetric());
 		val metricCalculator = new PartialInterpretationGraph(partial, metrics, null);		
 		var metricSamples = metricCalculator.evaluateAllMetricsToSamples();
 		
@@ -65,7 +64,6 @@ class PartialInterpretationMetricDistance {
 		//var typedOutDegree = ks.typedOutDegreeDistance(metricSamples.typedOutDegreeSamples);
 		var distance = new MetricDistanceGroup(mpc, na, outDegree, nodeType);
 		distance.nodeTypeInfo = metricSamples.nodeTypeSamples;
-		distance.edgeTypeDistance = ks.edgeTypeDistance(metricSamples.edgeTypeSamples);
 		return distance;
 	}
 	
@@ -180,7 +178,6 @@ class MetricDistanceGroup{
 	var double outDegreeDistance;
 	var double nodeTypeDistance;
 	protected var HashMap<String, Double> nodeTypeInfo;
-	public var double edgeTypeDistance;
 		
 	new(double mpcDistance, double naDistance, double outDegreeDistance, double nodeTypeDistance){
 		this.mpcDistance = mpcDistance;

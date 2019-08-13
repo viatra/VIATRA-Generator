@@ -9,19 +9,19 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 98
+		#node = 30
 	}
 	
 	number = 1
-	runs = 1
+	runs = 100
 	config = {
 		log-level = none,
-		"optional-wf" = "true",
+		"optional-wf" = "false",
 		"realistic-guidance" = "Composite",
-		"allow-must-violations" = "true",
+		"allow-must-violations" = "false",
 		"domain" = "Yakindumm"
 	}
 	
 	debug = "debug"
-	output = "output/Viatra_100/"
+	output = "output/real_30+v/"
 }

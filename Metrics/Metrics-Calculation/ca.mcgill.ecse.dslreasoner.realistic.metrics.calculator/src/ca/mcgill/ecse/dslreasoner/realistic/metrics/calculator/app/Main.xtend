@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EReference
 //import yakindumm2.impl.Yakindumm2PackageImpl
 
 class Main {
-	var static Domain d = Domain.Ecore;
-	val static String suffix = '.ecore'
-	val static String OUTPUT_FOLDER = "Inputs/human/";
-	val static String INPUT_FOLDER = "outputs/human/";
-	val static int NUM_RUNS = 1;
+	var static Domain d = Domain.Yakindumm;
+	val static String suffix = '.xmi'
+	val static String OUTPUT_FOLDER = "Inputs/yakindumm/human/humanInput100/";
+	val static String INPUT_FOLDER = "outputs/Human/";
+	val static int NUM_RUNS = 100;
 	
 	static class RWInformation{
 		public var String inputFolder;
@@ -88,7 +88,9 @@ class Main {
 		}
 		
 		var outputs = model.evaluateAllMetrics();
-		var violationsOutput = newArrayList('violations', ViolationCheck.calculateViolationCounts(model.root, d)+'');
+		var violations = ViolationCheck.calculateViolationCounts(model.root, d);
+		println(violations);
+		var violationsOutput = newArrayList('violations', violations+'');
 		outputs.add(violationsOutput);
 		CsvFileWriter.write(outputs, fileName);
 	}

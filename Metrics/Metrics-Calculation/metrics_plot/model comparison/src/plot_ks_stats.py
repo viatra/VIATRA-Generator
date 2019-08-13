@@ -12,36 +12,45 @@ import DistributionMetrics as metrics
 
 def main():
     # read models
-    human = GraphCollection('../input/human_30_500_no_xml/', 500, 'human_no_xml')
-    human2 = GraphCollection('../input/human_30_500_xml/', 500, 'human_xml')
-    # human_na = GraphCollection('../input/human_models_50_500/na_rep/', 1, 'Human rep')
-    # human_mpc = GraphCollection('../input/human_models_50_500/mpc_rep/', 1, 'Human rep')
-    # human_od = GraphCollection('../input/human_models_50_500/od_rep/', 1, 'Human rep')
+    alloy = GraphCollection('../input/measurement2/yakindu/Alloy/', 100, 'Alloy')
+    human = GraphCollection('../input/measurement2/yakindu/Human/', 304, 'Human')
+    base = GraphCollection('../input/measurement2/yakindu/BaseViatra/', 100, 'BaseViatra')
+    real = GraphCollection('../input/measurement2/yakindu/RealViatra/', 100, 'RealViatra')
+    random = GraphCollection('../input/measurement2/yakindu/Random/', 100, 'Random')
+    na_rep = GraphCollection('../input/measurement2/yakindu/Human/na_rep/', 1, 'rep')
+    mpc_rep = GraphCollection('../input/measurement2/yakindu/Human/mpc_rep/', 1, 'rep')
+    od_rep = GraphCollection('../input/measurement2/yakindu/Human/od_rep/', 1, 'rep')
 
-    # viatra75 = GraphCollection('../input/viatra_75/', 500, 'Viatra (75 nodes)')
-    # viatra30 = GraphCollection('../input/viatraOutput30/', 500,'Viatra (30 nodes)')
-    # viatra60 = GraphCollection('../input/viatraOutput60/', 500, 'Viatra (60 nodes)')
-    # viatra100 = GraphCollection('../input/viatraOutput100/', 500, 'Viatra (100 nodes)')
-    # viatra100R = GraphCollection('../input/realisticViatraOutput_newMetric/', 500, 'Realistic Viatra (100 nodes)')
-    # viatra100C = GraphCollection('../input/yakindumm/viatraOutput100C/', 500, 'Viatra consistent (100 nodes)')
-    # viatra100EE = GraphCollection('../input/realisticViatra_excludeExit/', 500, 'Realistic Viatra no Exit (100 nodes)')
-    # viatra100EEF = GraphCollection('../input/realisticViatra_excludeExitFinal/', 500, 'Realistic Viatra no Exit Final (100 nodes)')
-    # viatra100NT = GraphCollection('../input/yakindumm/realisticVIatraOutput_nodeTypeKS/', 500, 'Realistic Viatra with Node Type KS (100 nodes)')
+    # a hack to make the node type as the same as an exiting model
+    type_rep = GraphCollection('../input/measurement2/yakindu/Human/od_rep/', 1, 'rep')
+    type_rep.nts = [{'Entry': 0.04257802080554814, 'Choice': 0.1267671379034409, 'State': 0.1596092291277674, 'Transition': 0.6138636969858629, 'Statechart': 0.010136036276340358, 'Region': 0.04467858095492131, 'Exit': 0.0018338223526273673, 'FinalState': 0.0005334755934915977}]
+    types = sorted(type_rep.nts[0].keys())
 
     # random = GraphCollection('../input/randomOutput/', 500, 'Random')
     # alloy = GraphCollection('../input/alloy/', 500, 'Alloy (30 nodes)')
     # realistic_viatra = GraphCollection('../input/viatra_output_consistent_100/', 50, 'Realistic Viatra With Some Constraints (100 nodes)')
-    models_to_compare_na = [human, human2]
-    models_to_compare_mpc = [human, human2]
-    models_to_compare_od = [human, human2]
-    
+    models_to_compare_na = [human, alloy,base, real, random,  na_rep]
+    models_to_compare_mpc = [human, alloy,base, real, random,  mpc_rep]
+    models_to_compare_od = [human, alloy,base, real, random,  od_rep]
+    models_to_compare_nt = [human, alloy,base, real, random,  type_rep]
+    for modelCollection in models_to_compare_nt:
+        type_dists = []
+        for nt in modelCollection.nts:
+            type_dist = []
+            for key in types:
+                type_dist.append(nt.get(key, 0.0))
+            type_dists.append(type_dist)
+        modelCollection.nts = type_dists
+
+
     # define output folder
     outputFolder = '../output/'
 
     #calculate metrics
-    metricStat(models_to_compare_na, 'Node Activity', nodeActivity, 0, outputFolder)
-    metricStat(models_to_compare_od, 'Out Degree', outDegree, 1, outputFolder)
-    metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder)
+    # metricStat(models_to_compare_na, 'Node_Activity', nodeActivity, 0, outputFolder)
+    metricStat(models_to_compare_od, 'Out_Degree', outDegree, 1, outputFolder)
+    # metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder)
+    # metricStat(models_to_compare_nt, 'Node Types', nodeType, 3, outputFolder)
 
 def calculateKSMatrix(dists):
     dist = []
@@ -65,18 +74,19 @@ def calculateMDS(dissimilarities):
     return trans
 
 def plot(graphTypes, coords, title='',index = 0, savePath = ''):
-    color = ['blue', 'red', 'yellow', 'green', 'k']
-    plt.figure(index, figsize=(7, 4))
-    plt.title(title)
+    color = ['blue', 'm', 'gold', 'green', 'k', 'red']
+    markers = ['o', 'v', '+', 'x', '^', '*']
+    plt.figure(index, figsize=(5, 4))
+    # plt.title(title)
     index = 0
     for i in range(len(graphTypes)):
         x = (coords[index:index+graphTypes[i].size, 0].tolist())
         y = (coords[index:index+graphTypes[i].size, 1].tolist())
         index += graphTypes[i].size
-        plt.plot(x, y, color=color[i], marker='o', label = graphTypes[i].name, linestyle='', alpha=0.7)
+        plt.plot(x, y, color=color[i], marker=markers[i], label = graphTypes[i].name, linestyle='', alpha=0.7)
+    plt.savefig(fname = savePath+'.png', dpi=500)
     plt.legend(loc='upper right')
-    plt.savefig(fname = savePath, dpi=150)
-    #graph.show()
+    plt.savefig(fname = savePath+'_lengend.png', dpi=500)
 
 def mkdir_p(mypath):
     '''Creates a directory. equivalent to using mkdir -p on the command line'''
@@ -99,7 +109,7 @@ def metricStat(graphTypes, metricName, metric, graphIndex, outputFolder):
     print('calculate' + metricName +' for ' + outputFolder)
     mkdir_p(outputFolder)
     out_d_coords = calculateMDS(calculateKSMatrix(metrics))
-    plot(graphTypes, out_d_coords, metricName, graphIndex,outputFolder + '/'+ metricName+'.png')
+    plot(graphTypes, out_d_coords, metricName, graphIndex,outputFolder + '/'+ metricName)
 
 def nodeActivity(graphType):
     return graphType.nas
@@ -109,6 +119,9 @@ def outDegree(graphType):
 
 def mpc(graphType):
     return graphType.mpcs
+
+def nodeType(graphType):
+    return graphType.nts
 
 if __name__ == '__main__':
     main()

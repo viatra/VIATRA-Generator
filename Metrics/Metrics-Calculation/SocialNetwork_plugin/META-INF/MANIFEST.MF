@@ -8,6 +8,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: ca.mcgill.ecse.socialnetwork.plugin,
  ca.mcgill.ecse.socialnetwork.runner,
+ constraints.ecore,
+ ecore,
  queries,
  socialnetwork,
  socialnetwork.impl,
