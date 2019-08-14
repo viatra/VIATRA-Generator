@@ -4,11 +4,4 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:satellite="http://www.example.org/satellite"
-    xsi:schemaLocation="http://www.example.org/satellite ../model/satellite.ecore">
-  <groundStationNetwork>
-    <commSubsystem
-        xsi:type="satellite:XCommSubsystem"/>
-    <commSubsystem
-        xsi:type="satellite:KaCommSubsystem"/>
-  </groundStationNetwork>
-</satellite:InterferometryMission>
+    xsi:schemaLocation="http://www.example.org/satellite ../model/satellite.ecore"/>

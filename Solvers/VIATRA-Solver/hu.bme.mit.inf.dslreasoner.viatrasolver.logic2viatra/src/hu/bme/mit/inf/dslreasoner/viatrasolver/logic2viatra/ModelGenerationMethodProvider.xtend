@@ -5,6 +5,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.CbcPolyhedronSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.MultiplicityGoalConstraintCalculator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedronScopePropagator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationConstraintCalculator
@@ -46,15 +47,27 @@ class ModelGenerationStatistics {
 	public var long preliminaryTypeAnalisisTime = 0
 
 	public var int decisionsTried = 0
-	
+
 	synchronized def incrementDecisionCount() {
 		decisionsTried++
 	}
+
+	public var int transformationInvocations
 	
+	synchronized def incrementTransformationCount() {
+		transformationInvocations++
+	}
+
 	public var int scopePropagatorInvocations
-	
+
 	synchronized def incrementScopePropagationCount() {
 		scopePropagatorInvocations++
+	}
+	
+	public var int scopePropagatorSolverInvocations
+
+	synchronized def incrementScopePropagationSolverCount() {
+		scopePropagatorSolverInvocations++
 	}
 }
 
@@ -93,6 +106,7 @@ class ModelGenerationMethodProvider {
 		boolean nameNewElements,
 		TypeInferenceMethod typeInferenceMethod,
 		ScopePropagatorStrategy scopePropagatorStrategy,
+		Collection<LinearTypeConstraintHint> hints,
 		DocumentationLevel debugLevel
 	) {
 		val statistics = new ModelGenerationStatistics
@@ -103,8 +117,8 @@ class ModelGenerationMethodProvider {
 
 		val relationConstraints = relationConstraintCalculator.calculateRelationConstraints(logicProblem)
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
-			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, writeFiles)
-		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, queries, statistics)
+			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, hints, writeFiles)
+		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, hints, queries, statistics)
 		scopePropagator.propagateAllScopeConstraints
 		val objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(queries, scopePropagator,
 			nameNewElements, statistics)
@@ -138,14 +152,20 @@ class ModelGenerationMethodProvider {
 	}
 
 	private def createScopePropagator(ScopePropagatorStrategy scopePropagatorStrategy,
-		PartialInterpretation emptySolution, GeneratedPatterns queries, ModelGenerationStatistics statistics) {
+		PartialInterpretation emptySolution, Collection<LinearTypeConstraintHint> hints, GeneratedPatterns queries,
+		ModelGenerationStatistics statistics) {
+		if (!hints.empty && !(scopePropagatorStrategy instanceof ScopePropagatorStrategy.Polyhedral)) {
+			throw new IllegalArgumentException("Only the Polyhedral scope propagator strategy can use hints.")
+		}
 		switch (scopePropagatorStrategy) {
-			case ScopePropagatorStrategy.Count:
+			case ScopePropagatorStrategy.None,
+			case ScopePropagatorStrategy.Basic:
 				new ScopePropagator(emptySolution, statistics)
 			case ScopePropagatorStrategy.BasicTypeHierarchy:
 				new TypeHierarchyScopePropagator(emptySolution, statistics)
 			ScopePropagatorStrategy.Polyhedral: {
 				val types = queries.refineObjectQueries.keySet.map[newType].toSet
+				val allPatternsByName = queries.allQueries.toMap[fullyQualifiedName]
 				val solver = switch (scopePropagatorStrategy.solver) {
 					case Z3Integer:
 						new Z3PolyhedronSolver(false, scopePropagatorStrategy.timeoutSeconds)
@@ -160,7 +180,8 @@ class ModelGenerationMethodProvider {
 							scopePropagatorStrategy.solver)
 				}
 				new PolyhedronScopePropagator(emptySolution, statistics, types, queries.multiplicityConstraintQueries,
-					queries.hasElementInContainmentQuery, solver, scopePropagatorStrategy.requiresUpperBoundIndexing)
+					queries.hasElementInContainmentQuery, allPatternsByName, hints, solver,
+					scopePropagatorStrategy.requiresUpperBoundIndexing, scopePropagatorStrategy.updateHeuristic)
 			}
 			default:
 				throw new IllegalArgumentException("Unknown scope propagator strategy: " + scopePropagatorStrategy)

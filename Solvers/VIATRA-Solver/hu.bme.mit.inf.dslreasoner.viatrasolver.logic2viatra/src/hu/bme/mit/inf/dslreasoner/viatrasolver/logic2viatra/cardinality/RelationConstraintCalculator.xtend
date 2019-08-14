@@ -117,8 +117,11 @@ class RelationConstraintCalculator {
 			var inverseUpperMultiplicity = -1
 			val inverseRelation = inverseRelations.get(relation)
 			if (inverseRelation !== null) {
-				inverseUpperMultiplicity = upperMultiplicities.get(relation)
+				inverseUpperMultiplicity = upperMultiplicities.get(inverseRelation)
 				container = containmentRelations.contains(inverseRelation)
+			}
+			if (containment) {
+				inverseUpperMultiplicity = 1
 			}
 			val constraint = new RelationMultiplicityConstraint(relation, inverseRelation, containment, container,
 				lowerMultiplicity, upperMultiplicity, inverseUpperMultiplicity)

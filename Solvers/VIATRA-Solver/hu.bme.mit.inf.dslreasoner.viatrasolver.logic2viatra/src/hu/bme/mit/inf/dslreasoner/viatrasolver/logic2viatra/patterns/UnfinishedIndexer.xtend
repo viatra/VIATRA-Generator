@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationMultiplicityConstraint
@@ -76,21 +77,26 @@ class UnfinishedIndexer {
 			«IF indexUpperMultiplicities»
 				«IF constraint.constrainsUnrepairable || constraint.constrainsRemainingInverse»
 					private pattern «repairMatchName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, source:DefinedElement, target:DefinedElement) {
-						find interpretation(problem,interpretation);
-						find mustExist(problem,interpretation,source);
-						«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"source")»
-						find mustExist(problem,interpretation,target);
-						«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"target")»
-						neg «base.referRelation(constraint.relation,"source","target",Modality.MUST,fqn2PQuery)»
-						«base.referRelation(constraint.relation,"source","target",Modality.MAY,fqn2PQuery)»
+						«IF base.isRepresentative(constraint.relation, constraint.inverseRelation) && constraint.relation instanceof RelationDeclaration»
+							«base.relationRefinementGenerator.referRefinementQuery(constraint.relation as RelationDeclaration, constraint.inverseRelation, "_", "_", "source", "target")»
+						«ELSE»
+							«IF base.isRepresentative(constraint.inverseRelation, constraint.relation) && constraint.inverseRelation instanceof RelationDeclaration»
+								«base.relationRefinementGenerator.referRefinementQuery(constraint.inverseRelation as RelationDeclaration, constraint.relation, "_", "_", "target", "source")»
+							«ELSE»
+								find interpretation(problem,interpretation);
+								find mustExist(problem,interpretation,source);
+								«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"source")»
+								find mustExist(problem,interpretation,target);
+								«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"target")»
+								neg «base.referRelation(constraint.relation,"source","target",Modality.MUST,fqn2PQuery)»
+								«base.referRelation(constraint.relation,"source","target",Modality.MAY,fqn2PQuery)»
+							«ENDIF»
+						«ENDIF»
 					}
 				«ENDIF»
 				
 				«IF constraint.constrainsUnrepairable»
 					private pattern «unrepairableMultiplicityName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, unrepairableMultiplicity:java Integer) {
-						find interpretation(problem,interpretation);
-						find mustExist(problem,interpretation,object);
-						«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"object")»
 						find «unfinishedMultiplicityName(constraint)»_helper(problem, interpretation, object, missingMultiplicity);
 						numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, object, _);
 						check(numberOfRepairMatches < missingMultiplicity);

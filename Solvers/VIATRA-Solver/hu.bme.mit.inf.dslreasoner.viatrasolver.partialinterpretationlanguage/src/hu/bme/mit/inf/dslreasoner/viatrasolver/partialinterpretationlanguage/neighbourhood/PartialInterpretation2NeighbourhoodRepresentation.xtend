@@ -25,7 +25,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 		this.mergeSimilarNeighbourhood = mergeSimilarNeighbourhood
 	}
 
-	public static val FixPointRage = NeighbourhoodOptions.FixPointRage
+	public static val FixPointRange = NeighbourhoodOptions.FixPointRange
 	public static val GraphWidthRange = NeighbourhoodOptions.GraphWidthRange
 	public static val FullParallels = NeighbourhoodOptions.FullParallels
 	public static val MaxNumbers = NeighbourhoodOptions.MaxNumbers
@@ -174,7 +174,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 				throw new IllegalArgumentException('''Need previous representations''')
 			} else
 				return res
-		} else if (range == FixPointRage) {
+		} else if (range == FixPointRange) {
 			return refineUntilFixpoint(model, types, IncomingRelations, OutgoingRelations, parallels, maxNumber,
 				focusedElement)
 		} else if (range == GraphWidthRange) {

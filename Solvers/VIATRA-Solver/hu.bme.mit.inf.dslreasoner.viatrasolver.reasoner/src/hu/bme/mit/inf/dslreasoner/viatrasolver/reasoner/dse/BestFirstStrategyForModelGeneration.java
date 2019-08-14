@@ -255,7 +255,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			activationIds = new ArrayList<Object>(context.getUntraversedActivationIds());
 			Collections.shuffle(activationIds);
 		} catch (NullPointerException e) {
-			logger.warn("Unexpected state code: " + context.getDesignSpaceManager().getCurrentState());
+//			logger.warn("Unexpected state code: " + context.getDesignSpaceManager().getCurrentState());
 			numberOfStatecoderFail++;
 			activationIds = Collections.emptyList();
 		}

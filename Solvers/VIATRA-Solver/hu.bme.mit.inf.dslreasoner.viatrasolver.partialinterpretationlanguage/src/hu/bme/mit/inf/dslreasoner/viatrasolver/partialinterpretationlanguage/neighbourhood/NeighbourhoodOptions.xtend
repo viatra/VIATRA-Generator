@@ -7,12 +7,12 @@ import org.eclipse.xtend.lib.annotations.Data
 
 @Data
 class NeighbourhoodOptions {
-	public static val FixPointRage = -1
+	public static val FixPointRange = -1
 	public static val GraphWidthRange = -2
 	public static val FullParallels = Integer.MAX_VALUE
 	public static val MaxNumbers = Integer.MAX_VALUE
 
-	public static val DEFAULT = new NeighbourhoodOptions(GraphWidthRange, FullParallels, MaxNumbers, null, null)
+	public static val DEFAULT = new NeighbourhoodOptions(FixPointRange, FullParallels, MaxNumbers, null, null)
 
 	val int range
 	val int parallels

@@ -60,6 +60,10 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 		return this.dataHash.hashCode
 	}
 
+	override equals(Object other) {
+		other.class == LocalNodeDescriptor && (other as AbstractNodeDescriptor).hashCode == hashCode
+	}
+
 	override protected prettyPrint() {
 		'''(«dataHash»)[«IF id !== null»id = "«id»"«IF types === null || !types.empty», «ENDIF»«ENDIF»«IF types === null»TYPES = null«ELSE»«FOR type : types SEPARATOR ", "»«type»«ENDFOR»«ENDIF»]'''
 	}
@@ -141,6 +145,10 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 
 	override hashCode() {
 		return this.dataHash.hashCode
+	}
+
+	override equals(Object other) {
+		other.class == FurtherNodeDescriptor && (other as AbstractNodeDescriptor).hashCode == hashCode
 	}
 
 	override prettyPrint() {

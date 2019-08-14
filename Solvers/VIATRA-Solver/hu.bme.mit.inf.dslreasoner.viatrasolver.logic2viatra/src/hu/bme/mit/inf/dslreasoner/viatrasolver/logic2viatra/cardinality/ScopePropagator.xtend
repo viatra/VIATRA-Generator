@@ -14,7 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 class ScopePropagator {
 	@Accessors(PROTECTED_GETTER) val PartialInterpretation partialInterpretation
-	val ModelGenerationStatistics statistics
+	@Accessors(PROTECTED_GETTER) val ModelGenerationStatistics statistics
 	val Map<PartialTypeInterpratation, Scope> type2Scope
 	@Accessors(PROTECTED_GETTER) val Map<Scope, Set<Scope>> superScopes
 	@Accessors(PROTECTED_GETTER) val Map<Scope, Set<Scope>> subScopes
@@ -59,11 +59,20 @@ class ScopePropagator {
 				}
 			}
 		} while (changed)
+		
+		copyScopeBoundsToHeuristic()
 	}
 
 	def propagateAllScopeConstraints() {
 		statistics.incrementScopePropagationCount()
 		doPropagateAllScopeConstraints()
+	}
+	
+	protected def copyScopeBoundsToHeuristic() {
+		partialInterpretation.minNewElementsHeuristic = partialInterpretation.minNewElements
+		for (scope : partialInterpretation.scopes) {
+			scope.minNewElementsHeuristic = scope.minNewElements
+		}
 	}
 
 	protected def void doPropagateAllScopeConstraints() {
@@ -73,11 +82,16 @@ class ScopePropagator {
 	def propagateAdditionToType(PartialTypeInterpratation t) {
 //		println('''Adding to «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
 		val targetScope = type2Scope.get(t)
-		targetScope.removeOne
-		val sups = superScopes.get(targetScope)
-		sups.forEach[removeOne]
+		if (targetScope !== null) {
+			targetScope.removeOne
+			val sups = superScopes.get(targetScope)
+			sups.forEach[removeOne]
+		}
 		if (this.partialInterpretation.minNewElements > 0) {
 			this.partialInterpretation.minNewElements = this.partialInterpretation.minNewElements - 1
+		}
+		if (this.partialInterpretation.minNewElementsHeuristic > 0) {
+			this.partialInterpretation.minNewElementsHeuristic = this.partialInterpretation.minNewElementsHeuristic - 1
 		}
 		if (this.partialInterpretation.maxNewElements > 0) {
 			this.partialInterpretation.maxNewElements = this.partialInterpretation.maxNewElements - 1
@@ -104,6 +118,9 @@ class ScopePropagator {
 		}
 		if (scope.minNewElements > 0) {
 			scope.minNewElements = scope.minNewElements - 1
+		}
+		if (scope.minNewElementsHeuristic > 0) {
+			scope.minNewElementsHeuristic = scope.minNewElementsHeuristic - 1
 		}
 	}
 }

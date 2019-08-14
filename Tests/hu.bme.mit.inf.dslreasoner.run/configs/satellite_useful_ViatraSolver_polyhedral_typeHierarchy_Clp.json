@@ -1,0 +1,17 @@
+{
+	"inputPath": "initialModels",
+	"outputPath": "outputModels",
+	"timeout": 1200,
+	"saveModels": true,
+	"saveTemporaryFiles": true,
+	"warmupIterations": 0,
+	"iterations": 1,
+	"domain": "satellite",
+	"scope": "quantiles",
+	"sizes": [50],
+	"solver": "ViatraSolver",
+	"scopePropagator": "polyhedral",
+	"propagatedConstraints": "hints",
+	"polyhedronSolver": "Clp",
+	"scopeHeuristic": "polyhedral"
+}

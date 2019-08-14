@@ -1,0 +1,13 @@
+{
+	"inputPath": "initialModels",
+	"outputPath": "outputModels",
+	"timeout": 1200,
+	"saveModels": true,
+	"warmupIterations": 0,
+	"iterations": 1,
+	"domain": "FAM",
+	"scope": "none",
+	"sizes": [500],
+	"solver": "ViatraSolver",
+	"scopePropagator": "basic"
+}

@@ -35,18 +35,18 @@ class RuleBasedCpsSolver {
 		val dse = new DesignSpaceExplorer
 		dse.addMetaModelPackage(CpsPackage.eINSTANCE)
 		dse.initialModel = problem.eResource.resourceSet
-		dse.addTransformationRule(createRule(RequirementNotSatisfied.instance).action [
+		dse.addTransformationRule(createRule.precondition(RequirementNotSatisfied.instance).action [
 			val app = createApplicationInstance
 			req.type.instances += app
 			req.instances += app
 		].build)
-		dse.addTransformationRule(createRule(Allocate.instance).action [
+		dse.addTransformationRule(createRule.precondition(Allocate.instance).action [
 			app.allocatedTo = host
 		].build)
 //		dse.addTransformationRule(createRule(UnallocateAppInstance.instance).action [
 //			app.allocatedTo = null
 //		].build)
-		dse.addTransformationRule(createRule(CreateHostInstance.instance).action [
+		dse.addTransformationRule(createRule.precondition(CreateHostInstance.instance).action [
 			hostType.instances += createHostInstance
 		].build)
 //		dse.addTransformationRule(createRule(RemoveHostInstance.instance).action [

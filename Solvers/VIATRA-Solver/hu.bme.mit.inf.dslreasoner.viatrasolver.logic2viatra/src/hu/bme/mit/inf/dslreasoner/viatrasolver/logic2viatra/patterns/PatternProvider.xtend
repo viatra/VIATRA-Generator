@@ -26,6 +26,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 
 @Data
 class GeneratedPatterns {
@@ -62,7 +63,8 @@ class PatternProvider {
 
 	def generateQueries(LogicProblem problem, PartialInterpretation emptySolution, ModelGenerationStatistics statistics,
 		Set<PQuery> existingQueries, ReasonerWorkspace workspace, TypeInferenceMethod typeInferenceMethod,
-		ScopePropagatorStrategy scopePropagatorStrategy, RelationConstraints relationConstraints, boolean writeToFile) {
+		ScopePropagatorStrategy scopePropagatorStrategy, RelationConstraints relationConstraints, 
+		Collection<LinearTypeConstraintHint> hints, boolean writeToFile) {
 		val fqn2Query = existingQueries.toMap[it.fullyQualifiedName]
 		val PatternGenerator patternGenerator = new PatternGenerator(typeInferenceMethod, scopePropagatorStrategy)
 		val typeAnalysisResult = if (patternGenerator.requiresTypeAnalysis) {
@@ -75,7 +77,7 @@ class PatternProvider {
 				null
 			}
 		val baseIndexerFile = patternGenerator.transformBaseProperties(problem, emptySolution, fqn2Query,
-			typeAnalysisResult, relationConstraints)
+			typeAnalysisResult, relationConstraints, hints)
 		if (writeToFile) {
 			workspace.writeText('''generated3valued.vql_deactivated''', baseIndexerFile)
 		}

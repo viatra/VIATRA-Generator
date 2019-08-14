@@ -16,6 +16,7 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 
 enum StateCoderStrategy {
 	Neighbourhood,
@@ -56,6 +57,8 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
+	
+	public var List<LinearTypeConstraintHint> hints = newArrayList
 
 	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
 }

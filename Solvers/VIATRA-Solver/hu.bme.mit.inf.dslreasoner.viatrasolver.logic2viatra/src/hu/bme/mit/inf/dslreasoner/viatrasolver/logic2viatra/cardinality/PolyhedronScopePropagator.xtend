@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 
+import com.google.common.cache.Cache
+import com.google.common.cache.CacheBuilder
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.ImmutableSet
@@ -15,6 +17,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.Scope
 import java.util.ArrayDeque
 import java.util.ArrayList
+import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
@@ -29,26 +32,33 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
+	static val CACHE_SIZE = 10000
+	
+	val boolean updateHeuristic
 	val Map<Scope, LinearBoundedExpression> scopeBounds
 	val LinearBoundedExpression topLevelBounds
 	val Polyhedron polyhedron
 	val PolyhedronSaturationOperator operator
 	val Set<Relation> relevantRelations
+	val Cache<PolyhedronSignature, PolyhedronSignature> cache = CacheBuilder.newBuilder.maximumSize(CACHE_SIZE).build
 	List<RelationConstraintUpdater> updaters = emptyList
 
 	new(PartialInterpretation p, ModelGenerationStatistics statistics, Set<? extends Type> possibleNewDynamicTypes,
 		Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> unfinishedMultiplicityQueries,
 		IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery,
-		PolyhedronSolver solver, boolean propagateRelations) {
+		Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allPatternsByName,
+		Collection<LinearTypeConstraintHint> hints, PolyhedronSolver solver, boolean propagateRelations,
+		boolean updateHeuristic) {
 		super(p, statistics)
+		this.updateHeuristic = updateHeuristic
 		val builder = new PolyhedronBuilder(p)
 		builder.buildPolyhedron(possibleNewDynamicTypes)
 		scopeBounds = builder.scopeBounds
 		topLevelBounds = builder.topLevelBounds
 		polyhedron = builder.polyhedron
 		operator = solver.createSaturationOperator(polyhedron)
+		propagateAllScopeConstraints()
 		if (propagateRelations) {
-			propagateAllScopeConstraints()
 			val maximumNumberOfNewNodes = topLevelBounds.upperBound
 			if (maximumNumberOfNewNodes === null) {
 				throw new IllegalStateException("Could not determine maximum number of new nodes, it may be unbounded")
@@ -57,7 +67,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 				throw new IllegalStateException("Maximum number of new nodes is not positive")
 			}
 			builder.buildMultiplicityConstraints(unfinishedMultiplicityQueries, hasElementInContainmentQuery,
-				maximumNumberOfNewNodes)
+				allPatternsByName, hints, maximumNumberOfNewNodes)
 			relevantRelations = builder.relevantRelations
 			updaters = builder.updaters
 		} else {
@@ -66,21 +76,40 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	}
 
 	override void doPropagateAllScopeConstraints() {
+		super.doPropagateAllScopeConstraints()
 		resetBounds()
 		populatePolyhedronFromScope()
 //		println(polyhedron)
-		val result = operator.saturate()
-//		println(polyhedron)
-		if (result == PolyhedronSaturationResult.EMPTY) {
-			setScopesInvalid()
-		} else {
-			populateScopesFromPolyhedron()
-			if (result != PolyhedronSaturationResult.SATURATED) {
-				super.propagateAllScopeConstraints()
+		val signature = polyhedron.createSignature
+		val cachedSignature = cache.getIfPresent(signature)
+		switch (cachedSignature) {
+			case null: {
+				statistics.incrementScopePropagationSolverCount
+				val result = operator.saturate()
+				if (result == PolyhedronSaturationResult.EMPTY) {
+					cache.put(signature, PolyhedronSignature.EMPTY)
+					setScopesInvalid()
+				} else {
+					val resultSignature = polyhedron.createSignature
+					cache.put(signature, resultSignature)
+					populateScopesFromPolyhedron()
+				}
 			}
+			case PolyhedronSignature.EMPTY:
+				setScopesInvalid()
+			PolyhedronSignature.Bounds: {
+				polyhedron.applySignature(signature)
+				populateScopesFromPolyhedron()
+			}
+			default:
+				throw new IllegalStateException("Unknown polyhedron signature: " + signature)
+		}
+//		println(polyhedron)
+		if (updateHeuristic) {
+			copyScopeBoundsToHeuristic()
 		}
 	}
-	
+
 	override propagateAdditionToRelation(Relation r) {
 		super.propagateAdditionToRelation(r)
 		if (relevantRelations.contains(r)) {
@@ -186,7 +215,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	}
 
 	@FinalFieldsConstructor
-	private static class PolyhedronBuilder {
+	private static class PolyhedronBuilder implements LinearTypeExpressionBuilderFactory {
 		static val INFINITY_SCALE = 10
 
 		val PartialInterpretation p
@@ -197,6 +226,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 		Map<Type, LinearBoundedExpression> typeBounds
 		int infinity
 		ViatraQueryEngine queryEngine
+		Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allPatternsByName
 		ImmutableList.Builder<RelationConstraintUpdater> updatersBuilder
 
 		Map<Scope, LinearBoundedExpression> scopeBounds
@@ -222,9 +252,11 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 		def buildMultiplicityConstraints(
 			Map<RelationMultiplicityConstraint, UnifinishedMultiplicityQueries> constraints,
 			IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery,
-			int maximumNuberOfNewNodes) {
+			Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allPatternsByName,
+			Collection<LinearTypeConstraintHint> hints, int maximumNuberOfNewNodes) {
 			infinity = maximumNuberOfNewNodes * INFINITY_SCALE
 			queryEngine = ViatraQueryEngine.on(new EMFScope(p))
+			this.allPatternsByName = allPatternsByName
 			updatersBuilder = ImmutableList.builder
 			val containmentConstraints = constraints.entrySet.filter[key.containment].groupBy[key.targetType]
 			for (pair : containmentConstraints.entrySet) {
@@ -238,10 +270,13 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 				}
 			}
 			buildRelevantRelations(constraints.keySet)
+			for (hint : hints) {
+				updatersBuilder.add(hint.createConstraintUpdater(this))
+			}
 			updaters = updatersBuilder.build
 			addCachedConstraintsToPolyhedron()
 		}
-		
+
 		private def buildRelevantRelations(Set<RelationMultiplicityConstraint> constraints) {
 			val builder = ImmutableSet.builder
 			for (constraint : constraints) {
@@ -345,7 +380,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 			}
 		}
 
-		private def addCoefficients(Map<Dimension, Integer> accumulator, int scale, Map<Dimension, Integer> a) {
+		private static def addCoefficients(Map<Dimension, Integer> accumulator, int scale, Map<Dimension, Integer> a) {
 			for (pair : a.entrySet) {
 				val dimension = pair.key
 				val currentValue = accumulator.get(pair.key) ?: 0
@@ -411,14 +446,41 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 			}
 			scopeBoundsBuilder.build
 		}
-	}
 
-	private static interface RelationConstraintUpdater {
-		def void update(PartialInterpretation p)
+		override createMatcher(String queryName) {
+			val querySpecification = allPatternsByName.get(queryName)
+			if (querySpecification === null) {
+				throw new IllegalArgumentException("Unknown pattern: " + queryName)
+			}
+			querySpecification.getMatcher(queryEngine)
+		}
+
+		override createBuilder() {
+			new PolyhedronBuilderLinearTypeExpressionBuilder(this)
+		}
 	}
 
 	@FinalFieldsConstructor
-	static class ContainmentConstraintUpdater implements RelationConstraintUpdater {
+	private static class PolyhedronBuilderLinearTypeExpressionBuilder implements LinearTypeExpressionBuilder {
+		val PolyhedronBuilder polyhedronBuilder
+		val Map<Dimension, Integer> coefficients = new HashMap
+
+		override add(int scale, Type type) {
+			val typeCoefficients = polyhedronBuilder.subtypeDimensions.get(type)
+			if (typeCoefficients === null) {
+				throw new IllegalArgumentException("Unknown type: " + type)
+			}
+			PolyhedronBuilder.addCoefficients(coefficients, scale, typeCoefficients)
+			this
+		}
+
+		override build() {
+			polyhedronBuilder.toExpression(coefficients)
+		}
+	}
+
+	@FinalFieldsConstructor
+	private static class ContainmentConstraintUpdater implements RelationConstraintUpdater {
 		val String name
 		val LinearBoundedExpression orphansLowerBound
 		val LinearBoundedExpression orphansUpperBound
@@ -460,7 +522,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	}
 
 	@FinalFieldsConstructor
-	static class ContainmentRootConstraintUpdater implements RelationConstraintUpdater {
+	private static class ContainmentRootConstraintUpdater implements RelationConstraintUpdater {
 		val LinearBoundedExpression typeCardinality
 		val ViatraQueryMatcher<? extends IPatternMatch> hasElementInContainmentMatcher
 
@@ -479,7 +541,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	}
 
 	@FinalFieldsConstructor
-	static class UnfinishedMultiplicityConstraintUpdater implements RelationConstraintUpdater {
+	private static class UnfinishedMultiplicityConstraintUpdater implements RelationConstraintUpdater {
 		val String name
 		val LinearBoundedExpression availableMultiplicityExpression
 		val ViatraQueryMatcher<? extends IPatternMatch> unfinishedMultiplicityMatcher
@@ -500,7 +562,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	}
 
 	@FinalFieldsConstructor
-	static class UnrepairableMultiplicityConstraintUpdater implements RelationConstraintUpdater {
+	private static class UnrepairableMultiplicityConstraintUpdater implements RelationConstraintUpdater {
 		val String name
 		val LinearBoundedExpression targetCardinalityExpression
 		val ViatraQueryMatcher<? extends IPatternMatch> unrepairableMultiplicityMatcher

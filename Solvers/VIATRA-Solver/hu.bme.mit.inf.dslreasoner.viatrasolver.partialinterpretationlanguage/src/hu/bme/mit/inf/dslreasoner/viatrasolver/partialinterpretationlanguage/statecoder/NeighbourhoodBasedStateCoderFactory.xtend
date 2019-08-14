@@ -1,9 +1,10 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder
 
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.NeighbourhoodOptions
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2Hash
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2NeighbourhoodRepresentation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.ArrayList
 import java.util.Map
@@ -18,19 +19,31 @@ class NeighbourhoodBasedStateCoderFactory extends AbstractNeighbourhoodBasedStat
 	}
 
 	override protected doCreateStateCoder(NeighbourhoodOptions options) {
-		new NeighbourhoodBasedPartialInterpretationStateCoder(options)
+		new NeighbourhoodBasedPartialInterpretationStateCoder(new PartialInterpretation2ImmutableTypeLattice, options)
 	}
-
 }
 
-class NeighbourhoodBasedPartialInterpretationStateCoder extends AbstractNeighbourhoodBasedPartialInterpretationStateCoder {
-	val calculator = new PartialInterpretation2ImmutableTypeLattice
-
-	var Map<DefinedElement, ? extends AbstractNodeDescriptor> nodeRepresentations = null
-	var Map<? extends AbstractNodeDescriptor, Integer> modelRepresentation = null
+class NeighbourhoodBasedHashStateCoderFactory extends AbstractNeighbourhoodBasedStateCoderFactory {
+	new() {
+	}
 
 	new(NeighbourhoodOptions options) {
 		super(options)
+	}
+
+	override protected doCreateStateCoder(NeighbourhoodOptions options) {
+		new NeighbourhoodBasedPartialInterpretationStateCoder(new PartialInterpretation2Hash, options)
+	}
+}
+
+class NeighbourhoodBasedPartialInterpretationStateCoder<ModelRep, NodeRep> extends AbstractNeighbourhoodBasedPartialInterpretationStateCoder {
+	val PartialInterpretation2NeighbourhoodRepresentation<ModelRep, NodeRep> calculator
+	var Map<DefinedElement, ? extends NodeRep> nodeRepresentations = null
+	var ModelRep modelRepresentation = null
+
+	new(PartialInterpretation2NeighbourhoodRepresentation<ModelRep, NodeRep> calculator, NeighbourhoodOptions options) {
+		super(options)
+		this.calculator = calculator
 	}
 
 	override protected isRefreshNeeded() {

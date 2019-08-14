@@ -27,12 +27,16 @@ class TypeHierarchyScopePropagator extends ScopePropagator {
 	}
 
 	private def propagateLowerLimitUp(Scope subScope, Scope superScope) {
+		var changed = false
 		if (subScope.minNewElements > superScope.minNewElements) {
 			superScope.minNewElements = subScope.minNewElements
-			return true
-		} else {
-			return false
+			changed = true
 		}
+		if (subScope.minNewElementsHeuristic > superScope.minNewElementsHeuristic) {
+			superScope.minNewElementsHeuristic = subScope.minNewElementsHeuristic
+			changed = true
+		}
+		changed
 	}
 
 	private def propagateUpperLimitDown(Scope subScope, Scope superScope) {
@@ -50,16 +54,20 @@ class TypeHierarchyScopePropagator extends ScopePropagator {
 	}
 
 	private def propagateLowerLimitUp(Scope subScope, PartialInterpretation p) {
+		var changed = false
 		if (subScope.minNewElements > p.minNewElements) {
 //			println('''
 //			«(subScope.targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.name» -> nodes
 //			p.minNewElements «p.minNewElements» = subScope.minNewElements «subScope.minNewElements»
 //			''')
 			p.minNewElements = subScope.minNewElements
-			return true
-		} else {
-			return false
+			changed = true
 		}
+		if (subScope.minNewElementsHeuristic > p.minNewElementsHeuristic) {
+			p.minNewElementsHeuristic = subScope.minNewElementsHeuristic
+			changed = true
+		}
+		changed
 	}
 
 	private def propagateUpperLimitDown(Scope subScope, PartialInterpretation p) {

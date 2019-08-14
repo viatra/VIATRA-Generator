@@ -21,6 +21,13 @@ pattern transmittingGroundStationNetwork(Station : GroundStationNetwork) {
 	find transmittingCommSubsystem(Station, _);
 }
 
+@Constraint(severity = "error", key = {Station},
+	message = "The ground station network may not have UHF communication subsystems.")
+pattern roundStationNetworkUHF(Station : GroundStationNetwork) {
+	CommunicatingElement.commSubsystem(Station, Comm);
+	UHFCommSubsystem(Comm);
+}
+
 // At least two spacecraft must have the interferometry payload configured
 
 @Constraint(severity = "error", key = {Mission},
@@ -95,10 +102,6 @@ private pattern matchingCommSubsystem(From : CommSubsystem, To : CommSubsystem) 
 
 private pattern cubeSat3U(Sat : CubeSat3U) {
 	CubeSat3U(Sat);
-}
-
-private pattern cubeSat6U(Sat : CubeSat6U) {
-	CubeSat6U(Sat);
 }
 
 // No communication loops may exist

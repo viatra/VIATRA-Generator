@@ -1,0 +1,15 @@
+{
+	"inputPath": "initialModels",
+	"outputPath": "outputModels",
+	"timeout": 1200,
+	"saveModels": true,
+	"warmupIterations": 0,
+	"iterations": 5,
+	"domain": "ecore",
+	"scope": "quantiles",
+	"sizes": [100],
+	"solver": "ViatraSolver",
+	"scopePropagator": "polyhedral",
+	"propagatedConstraints": "relations",
+	"polyhedronSolver": "Clp"
+}

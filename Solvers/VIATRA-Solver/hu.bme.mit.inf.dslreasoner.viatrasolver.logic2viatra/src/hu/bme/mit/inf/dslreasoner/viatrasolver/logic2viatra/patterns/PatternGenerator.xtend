@@ -16,8 +16,11 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Transform
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeAnalysisResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.RelationConstraints
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import java.util.Collection
 import java.util.HashMap
 import java.util.Map
 import org.eclipse.emf.ecore.EAttribute
@@ -26,7 +29,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 
 class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer // = new TypeIndexer(this)
@@ -104,7 +106,9 @@ class PatternGenerator {
 	}
 
 	def isRepresentative(Relation relation, Relation inverse) {
-		if (inverse === null) {
+		if (relation === null) {
+			return false
+		} else if (inverse === null) {
 			return true
 		} else {
 			relation.name.compareTo(inverse.name) < 1
@@ -144,7 +148,8 @@ class PatternGenerator {
 		PartialInterpretation emptySolution,
 		Map<String, PQuery> fqn2PQuery,
 		TypeAnalysisResult typeAnalysisResult,
-		RelationConstraints constraints
+		RelationConstraints constraints,
+		Collection<LinearTypeConstraintHint> hints
 	) {
 
 		return '''
@@ -294,6 +299,13 @@ class PatternGenerator {
 			// 4.3 Relation refinement
 			//////////
 			«relationRefinementGenerator.generateRefineReference(problem)»
+			
+			//////////
+			// 5 Hints
+			//////////
+			«FOR hint : hints»
+				«hint.getAdditionalPatterns(this)»
+			«ENDFOR»
 		'''
 	}
 }

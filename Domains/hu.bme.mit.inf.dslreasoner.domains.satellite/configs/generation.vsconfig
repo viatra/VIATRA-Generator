@@ -2,7 +2,7 @@ import epackage "model/satellite.ecore"
 import viatra "src/hu/bme/mit/inf/dslreasoner/domains/satellite/queries/SatelliteQueries.vql"
 
 generate {
-	metamodel = { package satellite excluding { InterferometryMission.observationTime } }
+	metamodel = { package satellite }
 	constraints = { package hu.bme.mit.inf.dslreasoner.domains.satellite.queries }
 	partial-model = { "inputs/SatelliteInstance.xmi"}
 	solver = ViatraSolver

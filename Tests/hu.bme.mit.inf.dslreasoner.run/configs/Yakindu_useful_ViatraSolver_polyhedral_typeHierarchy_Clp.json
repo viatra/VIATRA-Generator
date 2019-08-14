@@ -1,0 +1,16 @@
+{
+	"inputPath": "initialModels",
+	"outputPath": "outputModels",
+	"timeout": 1200,
+	"saveModels": false,
+	"warmupIterations": 0,
+	"iterations": 5,
+	"domain": "Yakindu",
+	"scope": "quantiles",
+	"sizes": [100],
+	"solver": "ViatraSolver",
+	"scopePropagator": "polyhedral",
+	"propagatedConstraints": "hints",
+	"polyhedronSolver": "Clp",
+	"scopeHeuristic": "basic"
+}

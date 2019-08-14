@@ -2,7 +2,6 @@
  */
 package satellite.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -248,16 +247,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getInterferometryMission_ObservationTime() {
-		return (EAttribute) interferometryMissionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getCommunicatingElement() {
 		return communicatingElementEClass;
 	}
@@ -320,16 +309,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	@Override
 	public EReference getCommSubsystem_Target() {
 		return (EReference) commSubsystemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCommSubsystem_Source() {
-		return (EReference) commSubsystemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -457,7 +436,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		createEReference(constellationMissionEClass, CONSTELLATION_MISSION__SPACECRAFT);
 
 		interferometryMissionEClass = createEClass(INTERFEROMETRY_MISSION);
-		createEAttribute(interferometryMissionEClass, INTERFEROMETRY_MISSION__OBSERVATION_TIME);
 
 		communicatingElementEClass = createEClass(COMMUNICATING_ELEMENT);
 		createEReference(communicatingElementEClass, COMMUNICATING_ELEMENT__COMM_SUBSYSTEM);
@@ -469,7 +447,6 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		commSubsystemEClass = createEClass(COMM_SUBSYSTEM);
 		createEReference(commSubsystemEClass, COMM_SUBSYSTEM__TARGET);
-		createEReference(commSubsystemEClass, COMM_SUBSYSTEM__SOURCE);
 
 		payloadEClass = createEClass(PAYLOAD);
 
@@ -537,15 +514,12 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		initEReference(getConstellationMission_GroundStationNetwork(), this.getGroundStationNetwork(), null,
 				"groundStationNetwork", null, 1, 1, ConstellationMission.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConstellationMission_Spacecraft(), this.getSpacecraft(), null, "spacecraft", null, 2, 50,
+		initEReference(getConstellationMission_Spacecraft(), this.getSpacecraft(), null, "spacecraft", null, 2, -1,
 				ConstellationMission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(interferometryMissionEClass, InterferometryMission.class, "InterferometryMission", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getInterferometryMission_ObservationTime(), ecorePackage.getEFloat(), "observationTime", "2.0",
-				1, 1, InterferometryMission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(communicatingElementEClass, CommunicatingElement.class, "CommunicatingElement", IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -564,12 +538,9 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		initEClass(commSubsystemEClass, CommSubsystem.class, "CommSubsystem", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCommSubsystem_Target(), this.getCommSubsystem(), this.getCommSubsystem_Source(), "target",
-				null, 0, 1, CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCommSubsystem_Source(), this.getCommSubsystem(), this.getCommSubsystem_Target(), "source",
-				null, 0, -1, CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCommSubsystem_Target(), this.getCommSubsystem(), null, "target", null, 0, 1,
+				CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(payloadEClass, Payload.class, "Payload", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

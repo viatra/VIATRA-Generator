@@ -5,12 +5,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="groundStationNetwork" lowerBound="1"
         eType="#//GroundStationNetwork" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="spacecraft" lowerBound="2"
-        upperBound="50" eType="#//Spacecraft" containment="true"/>
+        upperBound="-1" eType="#//Spacecraft" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InterferometryMission" eSuperTypes="#//ConstellationMission">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observationTime" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat" defaultValueLiteral="2.0"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryMission" eSuperTypes="#//ConstellationMission"/>
   <eClassifiers xsi:type="ecore:EClass" name="CommunicatingElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="commSubsystem" lowerBound="1"
         upperBound="2" eType="#//CommSubsystem" containment="true"/>
@@ -21,10 +18,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"
-        eOpposite="#//CommSubsystem/source"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
-        eType="#//CommSubsystem" eOpposite="#//CommSubsystem/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>

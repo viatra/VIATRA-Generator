@@ -13,6 +13,7 @@ import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
 import java.util.Map
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 class Z3PolyhedronSolver implements PolyhedronSolver {
@@ -28,7 +29,30 @@ class Z3PolyhedronSolver implements PolyhedronSolver {
 	}
 
 	override createSaturationOperator(Polyhedron polyhedron) {
+		new DisposingZ3SaturationOperator(this, polyhedron)
+	}
+
+	def createPersistentSaturationOperator(Polyhedron polyhedron) {
 		new Z3SaturationOperator(polyhedron, lpRelaxation, timeoutSeconds)
+	}
+}
+
+@FinalFieldsConstructor
+class DisposingZ3SaturationOperator implements PolyhedronSaturationOperator {
+	val Z3PolyhedronSolver solver
+	@Accessors val Polyhedron polyhedron
+
+	override saturate() {
+		val persistentOperator = solver.createPersistentSaturationOperator(polyhedron)
+		try {
+			persistentOperator.saturate
+		} finally {
+			persistentOperator.close
+		}
+	}
+
+	override close() throws Exception {
+		// Nothing to close.
 	}
 }
 
@@ -106,9 +130,9 @@ class Z3SaturationOperator extends AbstractPolyhedronSaturationOperator {
 				IntNum:
 					resultExpr.getInt()
 				RatNum:
-					floor(resultExpr)
+					ceil(resultExpr)
 				AlgebraicNum:
-					floor(resultExpr.toLower(ALGEBRAIC_NUMBER_ROUNDING))
+					ceil(resultExpr.toUpper(ALGEBRAIC_NUMBER_ROUNDING))
 				default:
 					if (isNegativeInfinity(resultExpr)) {
 						null
@@ -136,9 +160,9 @@ class Z3SaturationOperator extends AbstractPolyhedronSaturationOperator {
 				IntNum:
 					resultExpr.getInt()
 				RatNum:
-					ceil(resultExpr)
+					floor(resultExpr)
 				AlgebraicNum:
-					ceil(resultExpr.toUpper(ALGEBRAIC_NUMBER_ROUNDING))
+					floor(resultExpr.toLower(ALGEBRAIC_NUMBER_ROUNDING))
 				default:
 					if (isPositiveInfinity(resultExpr)) {
 						null

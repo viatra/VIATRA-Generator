@@ -42,7 +42,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 
 	private def saveBestSolutionOnly(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
 		val fitness = context.lastFitness
-		if (!fitness.satisifiesHardObjectives) {
+		if (!shouldSaveSolution(fitness, context)) {
 			return false
 		}
 		val dominatedTrajectories = newArrayList
@@ -83,7 +83,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 
 	private def saveAnyDiverseSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
 		val fitness = context.lastFitness
-		if (!fitness.satisifiesHardObjectives) {
+		if (!shouldSaveSolution(fitness, context)) {
 			return false
 		}
 		if (!diversityChecker.newSolution(context, id, emptyList)) {
@@ -92,7 +92,12 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 		basicSaveSolution(context, id, solutionTrajectory, fitness)
 	}
 
-	private def basicSaveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory, Fitness fitness) {
+	private def shouldSaveSolution(Fitness fitness, ThreadContext context) {
+		return fitness.satisifiesHardObjectives
+	}
+
+	private def basicSaveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory,
+		Fitness fitness) {
 		var boolean solutionSaved = false
 		var dseSolution = solutionsCollection.get(id)
 		if (dseSolution === null) {

@@ -12,12 +12,15 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethodProvider
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.PartialInterpretationInitialiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.AbstractNeighbourhoodBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.IdentifierBasedStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedHashStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.PairwiseNeighbourhoodBasedStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BasicScopeGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyForModelGeneration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityChecker
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.InconsistentScopeGlobalConstraint
@@ -39,7 +42,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -71,6 +73,11 @@ class ViatraReasoner extends LogicReasoner {
 			workspace.writeModel(emptySolution, "init.partialmodel")
 		}
 		emptySolution.problemConainer = problem
+		var BasicScopeGlobalConstraint basicScopeGlobalConstraint = null
+		if (viatraConfig.scopePropagatorStrategy == ScopePropagatorStrategy.None) {
+			basicScopeGlobalConstraint = new BasicScopeGlobalConstraint(emptySolution)
+			emptySolution.scopes.clear
+		}
 
 		val method = modelGenerationMethodProvider.createModelGenerationMethod(
 			problem,
@@ -79,11 +86,12 @@ class ViatraReasoner extends LogicReasoner {
 			viatraConfig.nameNewElements,
 			viatraConfig.typeInferenceMethod,
 			viatraConfig.scopePropagatorStrategy,
+			viatraConfig.hints,
 			viatraConfig.documentationLevel
 		)
 
 		dse.addObjective(new ModelGenerationCompositeObjective(
-			new ScopeObjective,
+			basicScopeGlobalConstraint ?: new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
 			wf2ObjectiveConverter.createCompletenessObjective(method.unfinishedWF)
 		))
@@ -132,6 +140,9 @@ class ViatraReasoner extends LogicReasoner {
 		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationGlobalConstraint(method.invalidWF))
 		dse.addGlobalConstraint(new SurelyViolatedObjectiveGlobalConstraint(solutionSaver))
 		dse.addGlobalConstraint(new InconsistentScopeGlobalConstraint)
+		if (basicScopeGlobalConstraint !== null) {
+			dse.addGlobalConstraint(basicScopeGlobalConstraint)
+		}
 		for (additionalConstraint : viatraConfig.searchSpaceConstraints.additionalGlobalConstraints) {
 			dse.addGlobalConstraint(additionalConstraint.apply(method))
 		}
@@ -140,7 +151,7 @@ class ViatraReasoner extends LogicReasoner {
 
 		val IStateCoderFactory statecoder = switch (viatraConfig.stateCoderStrategy) {
 			case Neighbourhood:
-				new NeighbourhoodBasedStateCoderFactory
+				new NeighbourhoodBasedHashStateCoderFactory
 			case PairwiseNeighbourhood:
 				new PairwiseNeighbourhoodBasedStateCoderFactory
 			default:
@@ -216,8 +227,16 @@ class ViatraReasoner extends LogicReasoner {
 				it.value = method.statistics.decisionsTried
 			]
 			it.entries += createIntStatisticEntry => [
+				it.name = "Transformations"
+				it.value = method.statistics.transformationInvocations
+			]
+			it.entries += createIntStatisticEntry => [
 				it.name = "ScopePropagations"
 				it.value = method.statistics.scopePropagatorInvocations
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "ScopePropagationsSolverCalls"
+				it.value = method.statistics.scopePropagatorSolverInvocations
 			]
 			if (diversityChecker.isActive) {
 				it.entries += createIntStatisticEntry => [

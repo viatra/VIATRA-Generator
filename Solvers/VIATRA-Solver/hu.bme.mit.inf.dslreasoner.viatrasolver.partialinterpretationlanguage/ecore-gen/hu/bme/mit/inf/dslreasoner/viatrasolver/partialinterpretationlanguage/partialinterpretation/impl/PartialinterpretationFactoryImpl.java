@@ -84,6 +84,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialInterpretation createPartialInterpretation() {
 		PartialInterpretationImpl partialInterpretation = new PartialInterpretationImpl();
 		return partialInterpretation;
@@ -94,6 +95,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialConstantInterpretation createPartialConstantInterpretation() {
 		PartialConstantInterpretationImpl partialConstantInterpretation = new PartialConstantInterpretationImpl();
 		return partialConstantInterpretation;
@@ -104,6 +106,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialRelationInterpretation createPartialRelationInterpretation() {
 		PartialRelationInterpretationImpl partialRelationInterpretation = new PartialRelationInterpretationImpl();
 		return partialRelationInterpretation;
@@ -114,6 +117,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialFunctionInterpretation createPartialFunctionInterpretation() {
 		PartialFunctionInterpretationImpl partialFunctionInterpretation = new PartialFunctionInterpretationImpl();
 		return partialFunctionInterpretation;
@@ -124,6 +128,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UnaryElementRelationLink createUnaryElementRelationLink() {
 		UnaryElementRelationLinkImpl unaryElementRelationLink = new UnaryElementRelationLinkImpl();
 		return unaryElementRelationLink;
@@ -134,6 +139,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BinaryElementRelationLink createBinaryElementRelationLink() {
 		BinaryElementRelationLinkImpl binaryElementRelationLink = new BinaryElementRelationLinkImpl();
 		return binaryElementRelationLink;
@@ -144,6 +150,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NaryRelationLink createNaryRelationLink() {
 		NaryRelationLinkImpl naryRelationLink = new NaryRelationLinkImpl();
 		return naryRelationLink;
@@ -154,6 +161,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NaryRelationLinkElement createNaryRelationLinkElement() {
 		NaryRelationLinkElementImpl naryRelationLinkElement = new NaryRelationLinkElementImpl();
 		return naryRelationLinkElement;
@@ -164,6 +172,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BooleanElement createBooleanElement() {
 		BooleanElementImpl booleanElement = new BooleanElementImpl();
 		return booleanElement;
@@ -174,6 +183,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IntegerElement createIntegerElement() {
 		IntegerElementImpl integerElement = new IntegerElementImpl();
 		return integerElement;
@@ -184,6 +194,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RealElement createRealElement() {
 		RealElementImpl realElement = new RealElementImpl();
 		return realElement;
@@ -194,6 +205,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringElement createStringElement() {
 		StringElementImpl stringElement = new StringElementImpl();
 		return stringElement;
@@ -204,6 +216,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Scope createScope() {
 		ScopeImpl scope = new ScopeImpl();
 		return scope;
@@ -214,6 +227,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialBooleanInterpretation createPartialBooleanInterpretation() {
 		PartialBooleanInterpretationImpl partialBooleanInterpretation = new PartialBooleanInterpretationImpl();
 		return partialBooleanInterpretation;
@@ -224,6 +238,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialIntegerInterpretation createPartialIntegerInterpretation() {
 		PartialIntegerInterpretationImpl partialIntegerInterpretation = new PartialIntegerInterpretationImpl();
 		return partialIntegerInterpretation;
@@ -234,6 +249,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialRealInterpretation createPartialRealInterpretation() {
 		PartialRealInterpretationImpl partialRealInterpretation = new PartialRealInterpretationImpl();
 		return partialRealInterpretation;
@@ -244,6 +260,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialStringInterpretation createPartialStringInterpretation() {
 		PartialStringInterpretationImpl partialStringInterpretation = new PartialStringInterpretationImpl();
 		return partialStringInterpretation;
@@ -254,6 +271,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialComplexTypeInterpretation createPartialComplexTypeInterpretation() {
 		PartialComplexTypeInterpretationImpl partialComplexTypeInterpretation = new PartialComplexTypeInterpretationImpl();
 		return partialComplexTypeInterpretation;
@@ -264,6 +282,7 @@ public class PartialinterpretationFactoryImpl extends EFactoryImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialinterpretationPackage getPartialinterpretationPackage() {
 		return (PartialinterpretationPackage)getEPackage();
 	}

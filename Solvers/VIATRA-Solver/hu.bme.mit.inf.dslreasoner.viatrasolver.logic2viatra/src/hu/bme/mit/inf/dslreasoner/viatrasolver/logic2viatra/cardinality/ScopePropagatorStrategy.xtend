@@ -16,7 +16,9 @@ enum PolyhedralScopePropagatorSolver {
 }
 
 abstract class ScopePropagatorStrategy {
-	public static val Count = new Simple("Count")
+	public static val None = new Simple("None")
+	
+	public static val Basic = new Simple("Basic")
 
 	public static val BasicTypeHierarchy = new Simple("BasicTypeHierarchy")
 
@@ -47,14 +49,19 @@ abstract class ScopePropagatorStrategy {
 
 		val PolyhedralScopePropagatorConstraints constraints
 		val PolyhedralScopePropagatorSolver solver
+		val boolean updateHeuristic
 		val double timeoutSeconds
 
 		@FinalFieldsConstructor
 		new() {
 		}
 
+		new(PolyhedralScopePropagatorConstraints constraints, PolyhedralScopePropagatorSolver solver, boolean updateHeuristic) {
+			this(constraints, solver, updateHeuristic, UNLIMITED_TIME)
+		}
+		
 		new(PolyhedralScopePropagatorConstraints constraints, PolyhedralScopePropagatorSolver solver) {
-			this(constraints, solver, UNLIMITED_TIME)
+			this(constraints, solver, true)
 		}
 
 		override requiresUpperBoundIndexing() {

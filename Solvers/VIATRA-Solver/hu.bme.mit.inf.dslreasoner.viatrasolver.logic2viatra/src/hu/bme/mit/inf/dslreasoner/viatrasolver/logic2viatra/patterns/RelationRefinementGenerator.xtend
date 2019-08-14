@@ -44,7 +44,7 @@ class RelationRefinementGenerator {
 
 	def referRefinementQuery(RelationDeclaration relation, Relation inverseRelation, String relInterpretationName,
 		String inverseInterpretationName, String sourceName,
-		String targetName) '''find «this.relationRefinementQueryName(relation,inverseRelation)»(problem, interpretation, «relInterpretationName», «IF inverseRelation !== null»inverseInterpretationName, «ENDIF»«sourceName», «targetName»);'''
+		String targetName) '''find «this.relationRefinementQueryName(relation,inverseRelation)»(problem, interpretation, «relInterpretationName», «IF inverseRelation !== null»«inverseInterpretationName», «ENDIF»«sourceName», «targetName»);'''
 
 	def getRefineRelationQueries(LogicProblem p) {
 //		val containmentRelations = p.containmentHierarchies.map[containmentRelations].flatten.toSet

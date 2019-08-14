@@ -53,7 +53,7 @@ public interface ConstellationMission extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Spacecraft</em>' containment reference list.
 	 * @see satellite.SatellitePackage#getConstellationMission_Spacecraft()
-	 * @model containment="true" lower="2" upper="50"
+	 * @model containment="true" lower="2"
 	 * @generated
 	 */
 	EList<Spacecraft> getSpacecraft();
