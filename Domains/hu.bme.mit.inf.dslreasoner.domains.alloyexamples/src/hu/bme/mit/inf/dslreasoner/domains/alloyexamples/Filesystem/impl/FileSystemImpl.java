@@ -2,7 +2,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.impl;
 
-import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.Dir;
 import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject;
 import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FileSystem;
 import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FilesystemPackage;
@@ -42,7 +41,7 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 * @generated
 	 * @ordered
 	 */
-	protected Dir root;
+	protected FSObject root;
 
 	/**
 	 * The cached setting delegate for the '{@link #getLive() <em>Live</em>}' reference list.
@@ -78,7 +77,8 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dir getRoot() {
+	@Override
+	public FSObject getRoot() {
 		return root;
 	}
 
@@ -87,8 +87,8 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRoot(Dir newRoot, NotificationChain msgs) {
-		Dir oldRoot = root;
+	public NotificationChain basicSetRoot(FSObject newRoot, NotificationChain msgs) {
+		FSObject oldRoot = root;
 		root = newRoot;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FilesystemPackage.FILE_SYSTEM__ROOT, oldRoot, newRoot);
@@ -102,7 +102,8 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoot(Dir newRoot) {
+	@Override
+	public void setRoot(FSObject newRoot) {
 		if (newRoot != root) {
 			NotificationChain msgs = null;
 			if (root != null)
@@ -122,6 +123,7 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	public EList<FSObject> getLive() {
 		return (EList<FSObject>)LIVE__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
 	}
@@ -165,7 +167,7 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FilesystemPackage.FILE_SYSTEM__ROOT:
-				setRoot((Dir)newValue);
+				setRoot((FSObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,7 +182,7 @@ public class FileSystemImpl extends MinimalEObjectImpl.Container implements File
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FilesystemPackage.FILE_SYSTEM__ROOT:
-				setRoot((Dir)null);
+				setRoot((FSObject)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -3,6 +3,7 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.alloyexamples;
 
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.Dir;
 import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,7 +44,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern patternContent(o1: FSObject, o2: FSObject) {
+ *         pattern patternContent(o1: Dir, o2: FSObject) {
  *         	Dir.contents(o1,o2);
  *         }
  * </pre></code>
@@ -67,13 +68,13 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private FSObject fO1;
+    private Dir fO1;
     
     private FSObject fO2;
     
     private static List<String> parameterNames = makeImmutableList("o1", "o2");
     
-    private Match(final FSObject pO1, final FSObject pO2) {
+    private Match(final Dir pO1, final FSObject pO2) {
       this.fO1 = pO1;
       this.fO2 = pO2;
     }
@@ -85,7 +86,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
       return null;
     }
     
-    public FSObject getO1() {
+    public Dir getO1() {
       return this.fO1;
     }
     
@@ -97,7 +98,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("o1".equals(parameterName) ) {
-          this.fO1 = (FSObject) newValue;
+          this.fO1 = (Dir) newValue;
           return true;
       }
       if ("o2".equals(parameterName) ) {
@@ -107,7 +108,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
       return false;
     }
     
-    public void setO1(final FSObject pO1) {
+    public void setO1(final Dir pO1) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fO1 = pO1;
     }
@@ -195,7 +196,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static PatternContent.Match newMutableMatch(final FSObject pO1, final FSObject pO2) {
+    public static PatternContent.Match newMutableMatch(final Dir pO1, final FSObject pO2) {
       return new Mutable(pO1, pO2);
     }
     
@@ -208,12 +209,12 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the (partial) match object.
      * 
      */
-    public static PatternContent.Match newMatch(final FSObject pO1, final FSObject pO2) {
+    public static PatternContent.Match newMatch(final Dir pO1, final FSObject pO2) {
       return new Immutable(pO1, pO2);
     }
     
     private static final class Mutable extends PatternContent.Match {
-      Mutable(final FSObject pO1, final FSObject pO2) {
+      Mutable(final Dir pO1, final FSObject pO2) {
         super(pO1, pO2);
       }
       
@@ -224,7 +225,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
     }
     
     private static final class Immutable extends PatternContent.Match {
-      Immutable(final FSObject pO1, final FSObject pO2) {
+      Immutable(final Dir pO1, final FSObject pO2) {
         super(pO1, pO2);
       }
       
@@ -246,7 +247,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern patternContent(o1: FSObject, o2: FSObject) {
+   * pattern patternContent(o1: Dir, o2: FSObject) {
    * 	Dir.contents(o1,o2);
    * }
    * </pre></code>
@@ -308,7 +309,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<PatternContent.Match> getAllMatches(final FSObject pO1, final FSObject pO2) {
+    public Collection<PatternContent.Match> getAllMatches(final Dir pO1, final FSObject pO2) {
       return rawStreamAllMatches(new Object[]{pO1, pO2}).collect(Collectors.toSet());
     }
     
@@ -323,7 +324,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<PatternContent.Match> streamAllMatches(final FSObject pO1, final FSObject pO2) {
+    public Stream<PatternContent.Match> streamAllMatches(final Dir pO1, final FSObject pO2) {
       return rawStreamAllMatches(new Object[]{pO1, pO2});
     }
     
@@ -335,7 +336,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<PatternContent.Match> getOneArbitraryMatch(final FSObject pO1, final FSObject pO2) {
+    public Optional<PatternContent.Match> getOneArbitraryMatch(final Dir pO1, final FSObject pO2) {
       return rawGetOneArbitraryMatch(new Object[]{pO1, pO2});
     }
     
@@ -347,7 +348,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final FSObject pO1, final FSObject pO2) {
+    public boolean hasMatch(final Dir pO1, final FSObject pO2) {
       return rawHasMatch(new Object[]{pO1, pO2});
     }
     
@@ -358,7 +359,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final FSObject pO1, final FSObject pO2) {
+    public int countMatches(final Dir pO1, final FSObject pO2) {
       return rawCountMatches(new Object[]{pO1, pO2});
     }
     
@@ -371,7 +372,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final FSObject pO1, final FSObject pO2, final Consumer<? super PatternContent.Match> processor) {
+    public boolean forOneArbitraryMatch(final Dir pO1, final FSObject pO2, final Consumer<? super PatternContent.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pO1, pO2}, processor);
     }
     
@@ -384,7 +385,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the (partial) match object.
      * 
      */
-    public PatternContent.Match newMatch(final FSObject pO1, final FSObject pO2) {
+    public PatternContent.Match newMatch(final Dir pO1, final FSObject pO2) {
       return PatternContent.Match.newMatch(pO1, pO2);
     }
     
@@ -393,8 +394,8 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<FSObject> rawStreamAllValuesOfo1(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_O1, parameters).map(FSObject.class::cast);
+    protected Stream<Dir> rawStreamAllValuesOfo1(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_O1, parameters).map(Dir.class::cast);
     }
     
     /**
@@ -402,7 +403,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<FSObject> getAllValuesOfo1() {
+    public Set<Dir> getAllValuesOfo1() {
       return rawStreamAllValuesOfo1(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -411,7 +412,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<FSObject> streamAllValuesOfo1() {
+    public Stream<Dir> streamAllValuesOfo1() {
       return rawStreamAllValuesOfo1(emptyArray());
     }
     
@@ -425,7 +426,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<FSObject> streamAllValuesOfo1(final PatternContent.Match partialMatch) {
+    public Stream<Dir> streamAllValuesOfo1(final PatternContent.Match partialMatch) {
       return rawStreamAllValuesOfo1(partialMatch.toArray());
     }
     
@@ -439,7 +440,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<FSObject> streamAllValuesOfo1(final FSObject pO2) {
+    public Stream<Dir> streamAllValuesOfo1(final FSObject pO2) {
       return rawStreamAllValuesOfo1(new Object[]{null, pO2});
     }
     
@@ -448,7 +449,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<FSObject> getAllValuesOfo1(final PatternContent.Match partialMatch) {
+    public Set<Dir> getAllValuesOfo1(final PatternContent.Match partialMatch) {
       return rawStreamAllValuesOfo1(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
@@ -457,7 +458,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<FSObject> getAllValuesOfo1(final FSObject pO2) {
+    public Set<Dir> getAllValuesOfo1(final FSObject pO2) {
       return rawStreamAllValuesOfo1(new Object[]{null, pO2}).collect(Collectors.toSet());
     }
     
@@ -512,7 +513,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<FSObject> streamAllValuesOfo2(final FSObject pO1) {
+    public Stream<FSObject> streamAllValuesOfo2(final Dir pO1) {
       return rawStreamAllValuesOfo2(new Object[]{pO1, null});
     }
     
@@ -530,14 +531,14 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<FSObject> getAllValuesOfo2(final FSObject pO1) {
+    public Set<FSObject> getAllValuesOfo2(final Dir pO1) {
       return rawStreamAllValuesOfo2(new Object[]{pO1, null}).collect(Collectors.toSet());
     }
     
     @Override
     protected PatternContent.Match tupleToMatch(final Tuple t) {
       try {
-          return PatternContent.Match.newMatch((FSObject) t.get(POSITION_O1), (FSObject) t.get(POSITION_O2));
+          return PatternContent.Match.newMatch((Dir) t.get(POSITION_O1), (FSObject) t.get(POSITION_O2));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -547,7 +548,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
     @Override
     protected PatternContent.Match arrayToMatch(final Object[] match) {
       try {
-          return PatternContent.Match.newMatch((FSObject) match[POSITION_O1], (FSObject) match[POSITION_O2]);
+          return PatternContent.Match.newMatch((Dir) match[POSITION_O1], (FSObject) match[POSITION_O2]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -557,7 +558,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
     @Override
     protected PatternContent.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return PatternContent.Match.newMutableMatch((FSObject) match[POSITION_O1], (FSObject) match[POSITION_O2]);
+          return PatternContent.Match.newMutableMatch((Dir) match[POSITION_O1], (FSObject) match[POSITION_O2]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -608,7 +609,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
   
   @Override
   public PatternContent.Match newMatch(final Object... parameters) {
-    return PatternContent.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject) parameters[0], (hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject) parameters[1]);
+    return PatternContent.Match.newMatch((hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.Dir) parameters[0], (hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject) parameters[1]);
   }
   
   /**
@@ -640,7 +641,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final PatternContent.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_o1 = new PParameter("o1", "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("FS", "FSObject")), PParameterDirection.INOUT);
+    private final PParameter parameter_o1 = new PParameter("o1", "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.Dir", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("FS", "Dir")), PParameterDirection.INOUT);
     
     private final PParameter parameter_o2 = new PParameter("o2", "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FSObject", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("FS", "FSObject")), PParameterDirection.INOUT);
     
@@ -673,7 +674,7 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
           PBody body = new PBody(this);
           PVariable var_o1 = body.getOrCreateVariableByName("o1");
           PVariable var_o2 = body.getOrCreateVariableByName("o2");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_o1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "FSObject")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_o1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "Dir")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_o2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "FSObject")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_o1, parameter_o1),

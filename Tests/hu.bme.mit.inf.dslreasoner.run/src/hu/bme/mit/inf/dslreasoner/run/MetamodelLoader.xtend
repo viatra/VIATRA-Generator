@@ -195,8 +195,9 @@ class YakinduLoader extends MetamodelLoader {
 		this.workspace.readModel(EObject, "Yakindu.xmi").eResource.allContents.toList
 	}
 
-	override additionalConstraints() { // #[]
-		#[[method|new SGraphInconsistencyDetector(method)]]
+	override additionalConstraints() {
+		//#[[method|new SGraphInconsistencyDetector(method)]]
+		emptyList
 	}
 
 	override getTypeQuantiles() {
@@ -260,9 +261,17 @@ class FileSystemLoader extends MetamodelLoader {
 	}
 
 	override additionalConstraints() {
-		#[[method|new FileSystemInconsistencyDetector(method)]]
+		//#[[method|new FileSystemInconsistencyDetector(method)]]
+		emptyList
 	}
 
+	override getTypeQuantiles() {
+		#{
+			"Filesystem" -> new TypeQuantiles(0, 0.05),
+			"Dir" -> new TypeQuantiles(0.15, 0.3),
+			"File" -> new TypeQuantiles(0.25, 0.85)
+		}
+	}
 }
 
 class EcoreLoader extends MetamodelLoader {

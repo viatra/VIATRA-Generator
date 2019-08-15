@@ -53,6 +53,7 @@ public abstract class FSObjectImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Dir getParent() {
 		if (eContainerFeatureID() != FilesystemPackage.FS_OBJECT__PARENT) return null;
 		return (Dir)eInternalContainer();
@@ -73,6 +74,7 @@ public abstract class FSObjectImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParent(Dir newParent) {
 		if (newParent != eInternalContainer() || (eContainerFeatureID() != FilesystemPackage.FS_OBJECT__PARENT && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))

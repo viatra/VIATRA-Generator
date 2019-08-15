@@ -68,7 +68,7 @@ class MeasurementScriptRunner {
 		this.script = script
 		inputWorkspace = new FileSystemWorkspace(script.inputPath + "/", "")
 		outputWorkspace = new FileSystemWorkspace(script.outputPath +
-			"/", '''«script.domain»_«script.solver»_«script.scope»_«script.scopePropagator ?: "na"»_«script.propagatedConstraints ?: "na"»_«script.polyhedronSolver ?: "na"»_''')
+			"/", '''«script.domain»_«script.solver»_«script.scope»_«script.scopePropagator ?: "na"»_«script.propagatedConstraints ?: "na"»_«script.polyhedronSolver ?: "na"»_«script.scopeHeuristic ?: "na"»_''')
 		metamodelLoader = switch (script.domain) {
 			case fs: new FileSystemLoader(inputWorkspace)
 			case ecore: new EcoreLoader(inputWorkspace)

@@ -22,7 +22,7 @@ class MeasurementScript {
 	ScopeHeuristic scopeHeuristic
 
 	def toCsvHeader() {
-		'''«domain»,«scope»,«solver»,«scopePropagator ?: "NULL"»,«propagatedConstraints ?: "NULL"»,«polyhedronSolver ?: "NULL"»'''
+		'''«domain»,«scope»,«solver»,«scopePropagator ?: "NULL"»,«propagatedConstraints ?: "NULL"»,«polyhedronSolver ?: "NULL"»,«scopeHeuristic ?: "NULL"»'''
 	}
 }
 

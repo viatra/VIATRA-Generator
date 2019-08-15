@@ -66,6 +66,7 @@ public class DirImpl extends FSObjectImpl implements Dir {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FSObject> getContents() {
 		if (contents == null) {
 			contents = new EObjectContainmentWithInverseEList<FSObject>(FSObject.class, this, FilesystemPackage.DIR__CONTENTS, FilesystemPackage.FS_OBJECT__PARENT);

@@ -86,7 +86,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FilesystemPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -100,7 +100,8 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 		if (isInited) return (FilesystemPackage)EPackage.Registry.INSTANCE.getEPackage(FilesystemPackage.eNS_URI);
 
 		// Obtain or create and register package
-		FilesystemPackageImpl theFilesystemPackage = (FilesystemPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FilesystemPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FilesystemPackageImpl());
+		Object registeredFilesystemPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FilesystemPackageImpl theFilesystemPackage = registeredFilesystemPackage instanceof FilesystemPackageImpl ? (FilesystemPackageImpl)registeredFilesystemPackage : new FilesystemPackageImpl();
 
 		isInited = true;
 
@@ -113,7 +114,6 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 		// Mark meta-data to indicate it can't be changed
 		theFilesystemPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FilesystemPackage.eNS_URI, theFilesystemPackage);
 		return theFilesystemPackage;
@@ -124,6 +124,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFileSystem() {
 		return fileSystemEClass;
 	}
@@ -133,6 +134,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFileSystem_Root() {
 		return (EReference)fileSystemEClass.getEStructuralFeatures().get(0);
 	}
@@ -142,6 +144,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFileSystem_Live() {
 		return (EReference)fileSystemEClass.getEStructuralFeatures().get(1);
 	}
@@ -151,6 +154,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFSObject() {
 		return fsObjectEClass;
 	}
@@ -160,6 +164,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFSObject_Parent() {
 		return (EReference)fsObjectEClass.getEStructuralFeatures().get(0);
 	}
@@ -169,6 +174,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDir() {
 		return dirEClass;
 	}
@@ -178,6 +184,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDir_Contents() {
 		return (EReference)dirEClass.getEStructuralFeatures().get(0);
 	}
@@ -187,6 +194,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFile() {
 		return fileEClass;
 	}
@@ -196,6 +204,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getModel() {
 		return modelEClass;
 	}
@@ -205,6 +214,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModel_Filesystems() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(0);
 	}
@@ -214,6 +224,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getModel_OtherFSObjects() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(1);
 	}
@@ -223,6 +234,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FilesystemFactory getFilesystemFactory() {
 		return (FilesystemFactory)getEFactoryInstance();
 	}
@@ -296,7 +308,7 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(fileSystemEClass, FileSystem.class, "FileSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFileSystem_Root(), this.getDir(), null, "root", null, 1, 1, FileSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFileSystem_Root(), this.getFSObject(), null, "root", null, 1, 1, FileSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFileSystem_Live(), this.getFSObject(), null, "live", null, 0, -1, FileSystem.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(fsObjectEClass, FSObject.class, "FSObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -328,12 +340,12 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
+			   "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
 		   });
 	}
 
@@ -344,12 +356,12 @@ public class FilesystemPackageImpl extends EPackageImpl implements FilesystemPac
 	 * @generated
 	 */
 	protected void createOrgAnnotations() {
-		String source = "org.eclipse.viatra.query.querybasedfeature";	
+		String source = "org.eclipse.viatra.query.querybasedfeature";
 		addAnnotation
-		  (getFileSystem_Live(), 
-		   source, 
+		  (getFileSystem_Live(),
+		   source,
 		   new String[] {
-			 "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live"
+			   "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live"
 		   });
 	}
 

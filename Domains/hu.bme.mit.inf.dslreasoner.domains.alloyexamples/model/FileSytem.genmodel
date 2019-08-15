@@ -11,13 +11,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//FileSystem/root"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference FileSytem.ecore#//FileSystem/live"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="FileSytem.ecore#//FSObject"/>
+    <genClasses image="false" ecoreClass="FileSytem.ecore#//FSObject">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FileSytem.ecore#//FSObject/parent"/>
+    </genClasses>
     <genClasses ecoreClass="FileSytem.ecore#//Dir">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//Dir/contents"/>
     </genClasses>
-    <genClasses ecoreClass="FileSytem.ecore#//File">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FileSytem.ecore#//File/parent"/>
-    </genClasses>
+    <genClasses ecoreClass="FileSytem.ecore#//File"/>
     <genClasses ecoreClass="FileSytem.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//Model/filesystems"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FileSytem.ecore#//Model/otherFSObjects"/>

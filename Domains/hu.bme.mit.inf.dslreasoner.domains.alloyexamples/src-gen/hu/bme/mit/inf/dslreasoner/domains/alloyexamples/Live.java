@@ -695,7 +695,7 @@ public final class Live extends BaseGeneratedEMFQuerySpecification<Live.Matcher>
           new TypeConstraint(body, Tuples.flatTupleOf(var_this), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "FileSystem")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_this, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("FS", "FileSystem", "root")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "Dir")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "FSObject")));
           new Equality(body, var__virtual_0_, var_l);
           bodies.add(body);
       }
@@ -714,7 +714,7 @@ public final class Live extends BaseGeneratedEMFQuerySpecification<Live.Matcher>
           new TypeConstraint(body, Tuples.flatTupleOf(var_this), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "FileSystem")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new TypeConstraint(body, Tuples.flatTupleOf(var_this, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("FS", "FileSystem", "root")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "Dir")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("FS", "FSObject")));
           new Equality(body, var__virtual_0_, var_root);
           // 	find patternContent+(root,l)
           new BinaryTransitiveClosure(body, Tuples.flatTupleOf(var_root, var_l), PatternContent.instance().getInternalQueryRepresentation());

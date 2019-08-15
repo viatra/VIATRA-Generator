@@ -82,6 +82,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FileSystem getFilesystems() {
 		return filesystems;
 	}
@@ -106,6 +107,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFilesystems(FileSystem newFilesystems) {
 		if (newFilesystems != filesystems) {
 			NotificationChain msgs = null;
@@ -125,6 +127,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FSObject> getOtherFSObjects() {
 		if (otherFSObjects == null) {
 			otherFSObjects = new EObjectContainmentEList<FSObject>(FSObject.class, this, FilesystemPackage.MODEL__OTHER_FS_OBJECTS);

@@ -5,7 +5,7 @@
     <details key="settingDelegates" value="org.eclipse.viatra.query.querybasedfeature"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="FileSystem">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Dir"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//FSObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="live" upperBound="-1" eType="#//FSObject"
         changeable="false" volatile="true" transient="true" derived="true">

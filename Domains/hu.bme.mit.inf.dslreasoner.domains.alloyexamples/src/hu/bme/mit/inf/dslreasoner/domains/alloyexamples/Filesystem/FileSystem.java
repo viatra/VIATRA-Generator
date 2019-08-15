@@ -33,12 +33,12 @@ public interface FileSystem extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Root</em>' containment reference.
-	 * @see #setRoot(Dir)
+	 * @see #setRoot(FSObject)
 	 * @see hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FilesystemPackage#getFileSystem_Root()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Dir getRoot();
+	FSObject getRoot();
 
 	/**
 	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.FileSystem#getRoot <em>Root</em>}' containment reference.
@@ -48,7 +48,7 @@ public interface FileSystem extends EObject {
 	 * @see #getRoot()
 	 * @generated
 	 */
-	void setRoot(Dir value);
+	void setRoot(FSObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Live</b></em>' reference list.

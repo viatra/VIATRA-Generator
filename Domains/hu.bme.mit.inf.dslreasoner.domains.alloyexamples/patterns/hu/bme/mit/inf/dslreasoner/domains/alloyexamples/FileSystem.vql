@@ -2,7 +2,7 @@ package hu.bme.mit.inf.dslreasoner.domains.alloyexamples
 
 import epackage "FS"
 
-pattern patternContent(o1: FSObject, o2: FSObject) {
+pattern patternContent(o1: Dir, o2: FSObject) {
 	Dir.contents(o1,o2);
 }
 
@@ -21,4 +21,14 @@ pattern contentInNotLive(parent : Dir, child: FSObject) {
 } or {
 	Dir.contents(parent,child);
 	neg find live(_,child);
+}
+
+pattern dir(d: Dir) {
+	Dir(d);
+}
+
+@Constraint(key={fs}, severity="error", message="error")
+pattern rootIsNotDir(fs: FileSystem) {
+	FileSystem.root(fs, root);
+	neg find dir(root);
 }

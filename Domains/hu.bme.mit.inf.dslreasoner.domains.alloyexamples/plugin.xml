@@ -21,6 +21,8 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.patternContent"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.live"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.contentInNotLive"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.dir"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.alloyexamples.rootIsNotDir"/>
     </group>
   </extension>
 </plugin>
