@@ -24,15 +24,14 @@ def main():
     # a hack to make the node type as the same as an exiting model
     type_rep = GraphCollection('../input/measurement2/yakindu/Human/od_rep/', 1, 'rep')
     type_rep.nts = [{'Entry': 0.04257802080554814, 'Choice': 0.1267671379034409, 'State': 0.1596092291277674, 'Transition': 0.6138636969858629, 'Statechart': 0.010136036276340358, 'Region': 0.04467858095492131, 'Exit': 0.0018338223526273673, 'FinalState': 0.0005334755934915977}]
+    # type_rep.nts = [{'EAttribute': 0.23539778449144008, 'EClass': 0.30996978851963747, 'EReference': 0.33081570996978854, 'EPackage': 0.012789526686807653, 'EAnnotation': 0.002517623363544813, 'EEnumLiteral': 0.07275931520644502, 'EEnum': 0.013645518630412891, 'EDataType': 0.004028197381671702, 'EParameter': 0.005941591137965764, 'EGenericType': 0.002014098690835851, 'EOperation': 0.009415911379657605, 'ETypeParameter': 0.0007049345417925478}]
     types = sorted(type_rep.nts[0].keys())
 
-    # random = GraphCollection('../input/randomOutput/', 500, 'Random')
-    # alloy = GraphCollection('../input/alloy/', 500, 'Alloy (30 nodes)')
-    # realistic_viatra = GraphCollection('../input/viatra_output_consistent_100/', 50, 'Realistic Viatra With Some Constraints (100 nodes)')
-    models_to_compare_na = [human, alloy,base, real, random,  na_rep]
-    models_to_compare_mpc = [human, alloy,base, real, random,  mpc_rep]
-    models_to_compare_od = [human, alloy,base, real, random,  od_rep]
-    models_to_compare_nt = [human, alloy,base, real, random,  type_rep]
+    models_to_compare_na = [human, alloy, base, real, random,  na_rep]
+    models_to_compare_mpc = [human, alloy, base, real, random,  mpc_rep]
+    models_to_compare_od = [human, alloy, base, real, random,  od_rep]
+    models_to_compare_nt = [human, alloy, base, real, random,  type_rep]
+
     for modelCollection in models_to_compare_nt:
         type_dists = []
         for nt in modelCollection.nts:
@@ -44,13 +43,13 @@ def main():
 
 
     # define output folder
-    outputFolder = '../output/'
+    outputFolder = '../output/yakindu/'
 
     #calculate metrics
-    # metricStat(models_to_compare_na, 'Node_Activity', nodeActivity, 0, outputFolder)
-    metricStat(models_to_compare_od, 'Out_Degree', outDegree, 1, outputFolder)
-    # metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder)
-    # metricStat(models_to_compare_nt, 'Node Types', nodeType, 3, outputFolder)
+    metricStat(models_to_compare_na, 'Node_Activity', nodeActivity, 0, outputFolder, calculateKSMatrix)
+    metricStat(models_to_compare_od, 'Out_Degree', outDegree, 1, outputFolder, calculateKSMatrix)
+    metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder, calculateKSMatrix)
+    metricStat(models_to_compare_nt, 'Node_Types', nodeType, 3, outputFolder, calculateManualKSMatrix)
 
 def calculateKSMatrix(dists):
     dist = []
@@ -67,6 +66,21 @@ def calculateKSMatrix(dists):
             matrix[j, i] = value
     return matrix
 
+def calculateManualKSMatrix(dists):
+    dist = []
+
+    for i in range(len(dists)):
+        dist = dist + dists[i]
+    matrix = np.empty((len(dist),len(dist)))
+
+    for i in range(len(dist)):
+        matrix[i,i] = 0
+        for j in range(i+1, len(dist)):
+            value = metrics.manual_ks(dist[i], dist[j])
+            matrix[i, j] = value
+            matrix[j, i] = value
+    return matrix
+
 
 def calculateMDS(dissimilarities):
     embedding = MDS(n_components=2, dissimilarity='precomputed')
@@ -74,8 +88,8 @@ def calculateMDS(dissimilarities):
     return trans
 
 def plot(graphTypes, coords, title='',index = 0, savePath = ''):
-    color = ['blue', 'm', 'gold', 'green', 'k', 'red']
-    markers = ['o', 'v', '+', 'x', '^', '*']
+    color = ['blue' , 'm', 'gold', 'green', 'k', 'red']
+    markers = ['o', 'v','+', 'x', '^', '*']
     plt.figure(index, figsize=(5, 4))
     # plt.title(title)
     index = 0
@@ -101,14 +115,14 @@ def mkdir_p(mypath):
             pass
         else: raise
 
-def metricStat(graphTypes, metricName, metric, graphIndex, outputFolder):
+def metricStat(graphTypes, metricName, metric, graphIndex, outputFolder, matrix_calculator):
     metrics = []
     for graph in graphTypes:
         metrics.append(metric(graph))
         outputFolder = outputFolder + graph.name + '-'
     print('calculate' + metricName +' for ' + outputFolder)
     mkdir_p(outputFolder)
-    out_d_coords = calculateMDS(calculateKSMatrix(metrics))
+    out_d_coords = calculateMDS(matrix_calculator(metrics))
     plot(graphTypes, out_d_coords, metricName, graphIndex,outputFolder + '/'+ metricName)
 
 def nodeActivity(graphType):
