@@ -1,9 +1,0 @@
-package queries
-import epackage "http://www.eclipse.org/emf/2002/Ecore"
-
-
-@Constraint(severity="error", message="error", key = {c})
-pattern moreThenFiveSuperTypes(c: EClass){
-	m == count EClass.eSuperTypes(c,_);
-	check(m >= 5);
-}
