@@ -186,5 +186,9 @@ class GraphStatistic {
 	  	return outgoingEdges; 
 	  }
 	  
+	  def HashMap<String, Multimap<EObject, EObject>> incomingEdges(){
+	  	return incomingEdges; 
+	  }
+	  
 }
 

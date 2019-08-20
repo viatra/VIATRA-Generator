@@ -4,6 +4,7 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph.GraphStatis
 import java.text.DecimalFormat
 import java.util.ArrayList
 import java.util.HashMap
+import java.util.HashSet
 import org.eclipse.emf.ecore.EObject
 
 class TypedClusteringCoefficientMetric extends Metric {
@@ -18,7 +19,9 @@ class TypedClusteringCoefficientMetric extends Metric {
 		//calculate the metric distribution
 		g.allNodes.forEach[n|
 			var coef = calculateTCC1(n, g);
-			
+			if(coef > 0){
+				println(n);
+			}
 			//format number to String
 			val value = formatter.format(coef);
 			if(!map.containsKey(value)){
@@ -61,15 +64,20 @@ class TypedClusteringCoefficientMetric extends Metric {
 		var triangles = 0;
 
 		for(type1 : g.allTypes){
-			val type1EdgeTargetNodes = g.outgoingEdges.get(type1).values;
+			val typed1RelatedOfN = new HashSet<EObject>(g.outgoingEdges.get(type1).get(n));
+			val type1EdgeSourceNodesOfN = new HashSet<EObject>(g.incomingEdges.get(type1).get(n));
+			
+			typed1RelatedOfN.addAll(type1EdgeSourceNodesOfN);
+			
+			
 			
 			// number of wedges
-			val d = type1EdgeTargetNodes.size
-			wedges += d * (d-1)
+			val d = typed1RelatedOfN.size
+			wedges += d * (d-1) // we will also count each closed triangle twice
 
 			// pairs of neighbors
-			for (n1: type1EdgeTargetNodes) {
-				for (n2: type1EdgeTargetNodes) {
+			for (n1: typed1RelatedOfN) {
+				for (n2: typed1RelatedOfN) {
 					for(type2 : g.allTypes){
 						if ((type1 != type2) &&
 							(g.outgoingEdges.get(type2).containsEntry(n1, n2) || 
@@ -81,10 +89,11 @@ class TypedClusteringCoefficientMetric extends Metric {
 				}
 			}
 		}		
+		
 		if (wedges == 0.0) {
 			return 0.0
 		} else {
-			return triangles/wedges
+			return (triangles as double)/wedges
 		}
 	}
 }

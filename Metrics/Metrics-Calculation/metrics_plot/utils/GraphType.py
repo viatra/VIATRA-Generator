@@ -12,6 +12,8 @@ class GraphCollection:
         self.mpcs = []
         self.nts = []
         self.name = name
+        self.tccs = []
+        self.violations = []
         models = reader.readmultiplefiles(path, number, shouldShuffle)
         print(len(models))
         self.size = len(models)
@@ -22,6 +24,10 @@ class GraphCollection:
             self.mpcs.append(mpc)
             if(constants.Node_TYPE_KEY in contents):
                 self.nts.append(contents[constants.Node_TYPE_KEY])
+            if(constants.TCC_VALUE in contents):
+                self.tccs.append(contents[constants.TCC_VALUE])
+            if(constants.VIOLATION in contents):
+                self.violations.append(contents[constants.VIOLATION][0])
 
 #Graph stat for one graph
 class GraphStat:
@@ -35,4 +41,6 @@ class GraphStat:
             self.nodeTypeStat = contents[constants.Node_TYPE_KEY]
         if constants.VIOLATION in contents:
             self.violations = int(contents[constants.VIOLATION][0])
+        if(constants.TCC_VALUE_KEY in contents):
+            self.tcc = contents[constants.TCC_VALUE_KEY]
 

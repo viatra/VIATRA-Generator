@@ -1,0 +1,27 @@
+import epackage "sure.ghtorrent.github"
+
+generate {
+	metamodel = {package github}
+	partial-model = { "inputs/github.githubmodel"}
+//	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 100
+	}
+	
+	number = 1
+	runs = 1
+	config = {
+		log-level = none,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	output = "output/github/"
+}

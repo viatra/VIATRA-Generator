@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EReference
 class Main {
 	var static Domain d = Domain.Yakindumm;
 	val static String suffix = '.xmi'
-	val static String OUTPUT_FOLDER = "Inputs/yakindumm/human/humanInput100/";
-	val static String INPUT_FOLDER = "outputs/Human/";
-	val static int NUM_RUNS = 100;
+	val static String OUTPUT_FOLDER = "Inputs/measurement2/yakindu/Alloy/";
+	val static String INPUT_FOLDER = "outputs/measurement2/yakindu/Alloy/";
+	val static int NUM_RUNS = 1;
 	
 	static class RWInformation{
 		public var String inputFolder;
@@ -37,7 +37,6 @@ class Main {
 	def static void main(String[] args){
 		//init model
 		var EPackage metamodel;
-		
 		//init viatra engine for the violation checker
 		ReteEngine.getClass();
 		

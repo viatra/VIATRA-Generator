@@ -9,11 +9,11 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 30
+		#node = 10
 	}
 	
 	number = 1
-	runs = 100
+	runs = 5
 	config = {
 		log-level = none,
 		"optional-wf" = "false",
@@ -22,6 +22,85 @@ generate {
 		"domain" = "Yakindumm"
 	}
 	
+	statistics = "statistics/Yakindu/warmup.csv"  //give different set up different filenames
 	debug = "debug"
-	output = "output/real_30+v/"
+	output = "output/Yakindu/run_time/"
+}
+
+generate {
+	metamodel = { package yakindumm excluding { Synchronization}}
+	constraints = { package hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu }
+	partial-model = { "inputs/start.xmi"}
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 140
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		"optional-wf" = "false",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "false",
+		"domain" = "Yakindumm"
+	}
+	
+	statistics = "statistics/Yakindu/140.csv"  //give different set up different filenames
+	debug = "debug"
+	output = "output/Yakindu/run_time/"
+}
+
+generate {
+	metamodel = { package yakindumm excluding { Synchronization}}
+	constraints = { package hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu }
+	partial-model = { "inputs/start.xmi"}
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 160
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		"optional-wf" = "false",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "false",
+		"domain" = "Yakindumm"
+	}
+	
+	statistics = "statistics/Yakindu/160.csv"  //give different set up different filenames
+	debug = "debug"
+	output = "output/Yakindu/run_time/"
+}
+
+generate {
+	metamodel = { package yakindumm excluding { Synchronization}}
+	constraints = { package hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu }
+	partial-model = { "inputs/start.xmi"}
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 180
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		"optional-wf" = "false",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "false",
+		"domain" = "Yakindumm"
+	}
+	
+	statistics = "statistics/Yakindu/180.csv"  //give different set up different filenames
+	debug = "debug"
+	output = "output/Yakindu/run_time/"
 }

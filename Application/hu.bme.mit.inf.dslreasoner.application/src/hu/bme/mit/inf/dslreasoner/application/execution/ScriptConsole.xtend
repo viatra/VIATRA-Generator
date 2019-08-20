@@ -39,7 +39,7 @@ class ScriptConsole {
 	val statisticsHeaderBuffer = new LinkedHashSet<String>
 	val statisticsDataBuffer = new LinkedList<Map<String,? extends Object>>
 	
-	static val delimier = ';'
+	static val delimier = ','
 	static val empty = ""
 	
 	public new(

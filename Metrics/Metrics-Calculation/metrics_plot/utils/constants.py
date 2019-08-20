@@ -30,3 +30,6 @@ HUMAN_NA_REP = '../input/humanOutput/R_2017419_run_1.csv'
 
 VIOLATION = 'violations'
 
+TCC_VALUE= 'TCCValue'
+
+TCC_COUNT = 'TCCCount'

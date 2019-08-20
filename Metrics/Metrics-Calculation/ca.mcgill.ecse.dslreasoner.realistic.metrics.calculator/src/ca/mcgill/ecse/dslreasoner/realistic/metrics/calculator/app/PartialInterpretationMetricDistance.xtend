@@ -162,9 +162,11 @@ class PartialInterpretationMetricDistance {
 	def double[] calculateFeature(int step, int violations){
 		var features = newDoubleArrayOfSize(2);
 		//constant term
-		features.set(0, 1);
-		features.set(0, Math.sqrt(step) + 30)
-		features.set(1, 1.0 / (step + 30) );
+		features.set(0, 1); //a
+		features.set(0, Math.sqrt(step) + 30) // b
+		features.set(1, 1.0 / (step + 30) );// c
+		
+		
 //		features.set(2, violations);
 //		features.set(3, Math.pow(violations, 2));
 		

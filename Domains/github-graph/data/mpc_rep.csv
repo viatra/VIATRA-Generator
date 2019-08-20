@@ -1,0 +1,26 @@
+Meta Mode,yakindumm
+Number of Edge types,9
+Number Of Nodes,92
+State Id,2samplemodel41
+OutDegreeValue,0,1,2,3,80
+OutDegreeCount,22,25,40,4,1
+NAValue,1,2,3,4,5
+NACount,15,31,40,4,2
+MPCValue,0.00000,0.08640,0.11806,0.36000,0.42188,0.50000,0.56250,0.56355,0.63000,0.70312,0.75000,0.84375,0.87500
+MPCCount,15,1,1,1,1,7,20,1,4,33,2,4,2
+Typed Out Degree
+Commit committer,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+Issue pullrequest,1,1,1,1,1,1,1,1,1,1,1
+Commit pullrequest,1,1,1,1,1,1
+Project commits,52
+PullRequest commit,1,1,1,1,1,1
+Project projectMembers,7
+Commit parents,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1
+Project issue,21
+Node Type
+Project,Issue,Commit,User,PullRequest
+0.010869565217391304,0.2282608695652173,0.5652173913043478,0.07608695652173914,0.11956521739130432
+Edge Type
+pullrequest,issue,committer,commit,commits,projectMembers,issueevent,user,parents
+0.08629441624365482,0.1065989847715736,0.2639593908629442,0.030456852791878174,0.2639593908629442,0.03553299492385787,0.0,0.0,0.2131979695431472
+violations,-1

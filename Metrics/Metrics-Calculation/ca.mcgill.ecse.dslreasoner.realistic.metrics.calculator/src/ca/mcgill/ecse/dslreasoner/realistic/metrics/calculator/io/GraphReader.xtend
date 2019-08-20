@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.emf.ecore.EGenericType
 import org.eclipse.emf.ecore.EStructuralFeature
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.TypedClusteringCoefficientMetric
 
 class GraphReader{
 	val ResourceSet resSet = new ResourceSetImpl();
@@ -58,8 +59,6 @@ class GraphReader{
 		var count = 1
 		//check all files in the directory with suffix
 		for(String name : dir.list.filter[it| it.endsWith(suffix)]){
-			println(name)
-			println(count)
 			val file = new File(name);
 			val roots = readModel(EObject, path,  file.name);			
 			//add a list of metrics

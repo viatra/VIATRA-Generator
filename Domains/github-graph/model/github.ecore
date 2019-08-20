@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="github" nsURI="sure.ghtorrent.github" nsPrefix="github">
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="issue" upperBound="-1"
+        eType="#//Issue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creatd_at" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deleted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="updated_at" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projectMembers" upperBound="-1"
+        eType="#//User" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commits" upperBound="-1"
+        eType="#//Commit" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Commit">
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Role"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="committer" lowerBound="1"
+        eType="#//User"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" upperBound="2"
+        eType="#//Commit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pullrequest" eType="#//PullRequest"
+        eOpposite="#//PullRequest/commit"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="created_at" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sha" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parents_sha" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ENTITIES"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Issue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pullrequest" eType="#//PullRequest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="issueevent" upperBound="-1"
+        eType="#//IssueEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="created_at" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PullRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commit" eType="#//Commit"
+        eOpposite="#//Commit/pullrequest"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Action">
+    <eLiterals name="SUBSCRIBED"/>
+    <eLiterals name="MENTIONED" value="1"/>
+    <eLiterals name="CLOSED" value="2"/>
+    <eLiterals name="REFERENCED" value="3"/>
+    <eLiterals name="ASSIGNED" value="4"/>
+    <eLiterals name="REOPENED" value="5"/>
+    <eLiterals name="UNSUBSCRIBED" value="6"/>
+    <eLiterals name="MERGED" value="7"/>
+    <eLiterals name="HEAD_REF_CLEANED" value="8"/>
+    <eLiterals name="HEAD_REF_DELETED" value="9"/>
+    <eLiterals name="HEAD_REF_RESTORED" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IssueEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="created_at" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actor_url" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

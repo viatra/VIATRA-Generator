@@ -33,6 +33,8 @@ def readcsvfile(filename):
                 #convert number to floats
                 numbers = [float(n) for n in numbers]
                 contents[constants.Node_TYPE_KEY] = {t : n for t, n in zip(types, numbers)}
+            elif(arr[0] == constants.TCC_VALUE):
+                contents[constants.TCC_VALUE] = list(map(float, arr[1:]))
             # NA and OD are integers, and store other information as string
             else:
                 try:
@@ -79,6 +81,10 @@ def getmetrics(filename):
     outdegree_sample = reproduceSample(contents[constants.OUT_DEGREE_VALUE], contents[constants.OUT_DEGREE_COUNT])
     na_sample = reproduceSample(contents[constants.NA_VALUE], contents[constants.NA_COUNT])
     mpc_sample = reproduceSample(contents[constants.MPC_VALUE], contents[constants.MPC_COUNT])
+
+    if(constants.TCC_VALUE in contents):
+        contents[constants.TCC_VALUE] = reproduceSample(contents[constants.TCC_VALUE], contents[constants.TCC_COUNT])
+
     return contents,outdegree_sample, na_sample, mpc_sample
 
 #

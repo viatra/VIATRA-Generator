@@ -1,6 +1,7 @@
 import viatra "./queries/queries/Ecore.vql"
 import epackage "http://www.eclipse.org/emf/2002/Ecore"
 
+// Copy this for different model sizes
 generate {
 	metamodel = {package ecore excluding{EClassifier.instanceClass, EClassifier.defaultValue, 
 										 EEnumLiteral.instance, EStructuralFeature.defaultValue, EStructuralFeature.changeable,
@@ -27,20 +28,23 @@ generate {
 
 	solver = ViatraSolver
 	
+	//median run time
 	scope = {
-		#node = 100
+		#node = 10  // (warm-up: 10) 30, 50, 80, 100, 120 ....
 	}
 	
 	number = 1
-	runs = 30
+	runs = 5
 	config = {
 		log-level = none,
-		"optional-wf" = "true",
+		runtime = 300, // the runtime is in seconds, want to set is to 5 mins
+		"optional-wf" = "false",
 		"realistic-guidance" = "Composite",
-		"allow-must-violations" = "true",
+		"allow-must-violations" = "false",
 		"domain" = "Ecore"
 	}
 	
 	debug = "debug"
-	output = "output/Ecore/"
+	statistics = "statistics/Ecore/warmup.csv"  //give different set up different filenames
+	output = "output/Ecore/run_time/"
 }

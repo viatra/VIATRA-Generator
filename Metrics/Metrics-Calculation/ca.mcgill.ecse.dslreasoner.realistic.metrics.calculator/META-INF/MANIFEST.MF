@@ -19,7 +19,8 @@ Require-Bundle: com.google.guava,
  org.eclipse.viatra.addon.validation.core;bundle-version="2.1.2",
  org.eclipse.collections;bundle-version="9.2.0",
  org.eclipse.viatra.query.runtime.localsearch;bundle-version="2.1.2",
- org.apache.log4j;bundle-version="1.2.15"
+ org.apache.log4j;bundle-version="1.2.15",
+ github-graph;bundle-version="0.1.0"
 Export-Package: ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app,
  ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.distance,
  ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.graph,

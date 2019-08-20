@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated github -->
+    <package class="github.GithubPackage" genModel="model/github.genmodel" uri="sure.ghtorrent.github"/>
+  </extension>
+  <extension id="queries.Github" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Github" id="queries.Github">
+      <query-specification fqn="queries.directParent"/>
+      <query-specification fqn="queries.loopInParent"/>
+    </group>
+  </extension>
+</plugin>

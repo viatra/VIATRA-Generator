@@ -185,6 +185,11 @@ class GenerationTaskExecutor {
 				
 				console.writeMessage("Model generation started")
 				for(run : 1..runs) {
+					//For the runtime measurement
+					System.gc();
+					System.gc();
+					System.gc();
+					Thread.sleep(1000);
 					monitor.subTask('''Solving problem«IF runs>0» «run»/«runs»«ENDIF»''')
 					val visualisationProgressMonitor= new EclipseBasedProgressMonitor(monitor)
 					

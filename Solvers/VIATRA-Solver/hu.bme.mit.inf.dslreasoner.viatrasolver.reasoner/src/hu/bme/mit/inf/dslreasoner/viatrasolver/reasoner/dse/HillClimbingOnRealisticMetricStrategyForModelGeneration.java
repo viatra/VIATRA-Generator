@@ -190,8 +190,8 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				
 				List<Object> activationIds = selectActivation();
 				PartialInterpretation model = (PartialInterpretation) context.getModel();
-				System.out.println(model.getNewElements().size());
-				System.out.println("# violations: " + getNumberOfViolations(mayMatchers));
+//				System.out.println(model.getNewElements().size());
+//				System.out.println("# violations: " + getNumberOfViolations(mayMatchers));
 				
 				Map<Object, Double> valueMap = new HashMap<Object,Double>();
 				
@@ -208,15 +208,13 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				count++;
 				this.currentNodeTypeDistance = heuristics.getNodeTypeDistance();
 				numNodesToGenerate = model.getMaxNewElements();
-				System.out.println("NA distance: " + heuristics.getNADistance());	
-				System.out.println("MPC distance: " + heuristics.getMPCDistance());	
-				System.out.println("Out degree distance:" + heuristics.getOutDegreeDistance());	
-				System.out.println("NodeType :" + currentNodeTypeDistance);	
+//				System.out.println("NA distance: " + heuristics.getNADistance());	
+//				System.out.println("MPC distance: " + heuristics.getMPCDistance());	
+//				System.out.println("Out degree distance:" + heuristics.getOutDegreeDistance());	
+//				System.out.println("NodeType :" + currentNodeTypeDistance);	
 
-//				System.out.println("FinalState :" + heuristics.getNodeTypePercentage("FinalState"));	
 
 				//TODO: the number of activations to be checked should be configurasble
-				System.out.println(activationIds.size());
 				if(activationIds.size() > 50) {
 					activationIds = activationIds.subList(0, 50);
 				}
@@ -301,23 +299,27 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 			}
 			
 			//remove all the elements having large distance
-			activationIds.removeIf(li -> valueMap.get(li) >= 10000);
 			Collections.sort(activationIds, Comparator.comparing(li -> valueMap.get(li)));
 			return valueMap;
 		}
 		
 		private double calculateFutureStateValue(int violation) {
+			long start = System.nanoTime();
 			int nodeSize = ((PartialInterpretation) context.getModel()).getNewElements().size();
 			double currentValue = calculateCurrentStateValue(nodeSize,violation);
 			double[] toPredict = metricDistance.calculateFeature(100, violation);
 			if(Math.abs(currentValue - currentStateValue) < 0.001) {
+				this.method.getStatistics().addMetricCalculationTime(System.nanoTime() - start);
 				return Double.MAX_VALUE;
 			}
 			try {
+				this.method.getStatistics().addMetricCalculationTime(System.nanoTime() - start);
 				return metricDistance.getLinearModel().getPredictionForNextDataSample(metricDistance.calculateFeature(nodeSize, violation), currentValue, toPredict);
 			}catch(IllegalArgumentException e) {
+				this.method.getStatistics().addMetricCalculationTime(System.nanoTime() - start);
 				return currentValue;
 			}
+
 		}
 		private double calculateCurrentStateValue(int factor, int violation) {
 			PartialInterpretation model = (PartialInterpretation) context.getModel();
@@ -343,7 +345,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 					}
 					
 					return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
-				}else {
+				}else if (domain == Domain.Ecore) {
 					double unfinishFactor = 100 * (1 - (double)factor / targetSize);
 					double nodeTypeFactor = g.getNodeTypeDistance();
 					double normalFactor = 5;
@@ -354,13 +356,53 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 					}
 					
 					return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
+				}else {
+					double unfinishFactor = context.calculateFitness().get("CompositeUnfinishednessObjective");
+					double nodeTypeFactor = g.getNodeTypeDistance();
+					double normalFactor = 5;
+					if(currentNodeTypeDistance <= 0.05 || numNodesToGenerate == 1) {
+						nodeTypeFactor = 0;
+						normalFactor = 100;
+						//unfinishFactor *= 0.5; 
+					}
+					
+					return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + 2*g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
 				}
 
 			}else if(configuration.realisticGuidance == RealisticGuidance.Composite_Without_Violations) {
 				if(domain == Domain.Yakindumm) {
-					return 100.0 *(g.getNodeTypeDistance()) + 5*(g.getNADistance() + g.getMPCDistance() +g.getOutDegreeDistance());
-				}else {
-					return 15*(g.getNodeTypeDistance()) + 5*(g.getNADistance() + g.getMPCDistance() + 4*g.getOutDegreeDistance());
+					double unfinishFactor = 50 * (1 - (double)factor / targetSize);
+					double nodeTypeFactor = g.getNodeTypeDistance();
+					double normalFactor = 5;
+					if(currentNodeTypeDistance <= 0.05 || numNodesToGenerate == 1) {
+						nodeTypeFactor = 0;
+						normalFactor = 100;
+						unfinishFactor = 0; 
+					}
+					
+					return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
+				}else if (domain == Domain.Github) {
+					double unfinishFactor = 100 * (1 - (double)factor / targetSize);
+					double nodeTypeFactor = g.getNodeTypeDistance();
+					double normalFactor = 5;
+					if(currentNodeTypeDistance <= 0.12 || numNodesToGenerate == 1) {
+						nodeTypeFactor = 0;
+						normalFactor = 100;
+						unfinishFactor *= 0.5; 
+					}
+					
+					return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
+				} else {
+					double unfinishFactor = 100 * (1 - (double)factor / targetSize);
+					double nodeTypeFactor = g.getNodeTypeDistance();
+					double normalFactor = 5;
+					if(currentNodeTypeDistance <= 0.20 || numNodesToGenerate == 1) {
+						nodeTypeFactor = 0;
+						normalFactor = 100;
+						unfinishFactor *= 0.5; 
+					}
+					
+					return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
 				}
 			}else {
 				return violation;
@@ -426,8 +468,8 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 
 		private void checkForSolution(final Fitness fittness) {
 			if (fittness.isSatisifiesHardObjectives()) {
-				System.out.println("Solution Found!!");
-				System.out.println("# violations: " + (getNumberOfViolations(mustMatchers)));
+				logger.debug("Solution Found!!");
+				logger.debug("# violations: " + (getNumberOfViolations(mustMatchers)));
 				if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
 					solutionStoreWithCopy.newSolution(context);
 					solutionStoreWithDiversityDescriptor.newSolution(context);

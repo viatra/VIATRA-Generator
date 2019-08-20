@@ -1,0 +1,212 @@
+import epackage "../../../Domains/github-graph/model/github.ecore"
+import viatra "../../../Domains/github-graph/queries/queries/github.vql"
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 10
+	}
+	
+	number = 1
+	runs = 5
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/warmup.csv"
+	output = "output/Github/Composite"
+}
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 30
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/30.csv"
+	output = "output/Github/Composite"
+}
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 50
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/50.csv"
+	output = "output/Github/Composite"
+}
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 80
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/80.csv"
+	output = "output/Github/Composite"
+}
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 100
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/100.csv"
+	output = "output/Github/Composite"
+}
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 120
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/120.csv"
+	output = "output/Github/Composite"
+}
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 140
+	}
+	
+	number = 1
+	runs = 20
+	config = {
+		log-level = none,
+		runtime = 300,
+		"optional-wf" = "true",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "true",
+		"domain" = "Github"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Github/140.csv"
+	output = "output/Github/Composite"
+}

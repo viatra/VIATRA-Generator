@@ -2,6 +2,7 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup
+import github.impl.GithubPackageImpl
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl
 import java.util.HashMap
 import org.eclipse.emf.ecore.EReference
@@ -19,7 +20,7 @@ class RepMetricsReader {
 		}else if (d == Domain.Ecore){
 			reader = new GraphReader(EcorePackageImpl.eINSTANCE, '.ecore');
 		}else if (d == Domain.Github){
-			// Initialize the reader with github package
+			reader = new GraphReader(GithubPackageImpl.eINSTANCE, '.githubmodel')
 		}
 		
 		domain = d;
@@ -58,6 +59,13 @@ class RepMetricsReader {
 			nodeTypeSamples.put('EGenericType', 0.002014098690835851);
 			nodeTypeSamples.put('EOperation', 0.009415911379657605);
 			nodeTypeSamples.put('ETypeParameter', 0.0007049345417925478);	
+		}else if (d == Domain.Github){
+			nodeTypeSamples.put('Project', 0.012636538873420432);
+			nodeTypeSamples.put('Commit', 0.5525808524309276);
+			nodeTypeSamples.put('User', 0.05847076461769116);
+			nodeTypeSamples.put('Issue', 0.12743628185907047);
+			nodeTypeSamples.put('PullRequest', 0.07560505461554937);
+			nodeTypeSamples.put('IssueEvent', 0.17327050760334123);
 		}
 		
 		

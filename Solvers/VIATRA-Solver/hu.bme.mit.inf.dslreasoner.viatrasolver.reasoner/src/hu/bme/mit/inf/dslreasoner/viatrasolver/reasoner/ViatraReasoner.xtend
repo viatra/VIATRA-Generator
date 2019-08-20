@@ -17,7 +17,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.IdentifierBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyForModelGeneration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.HillClimbingOnRealisticMetricStrategyForModelGeneration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ScopeObjective
@@ -33,7 +33,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.HillClimbingOnRealisticMetricStrategyForModelGeneration
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -154,6 +153,9 @@ class ViatraReasoner extends LogicReasoner{
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "TypeAnalysisTime" it.value = (method.statistics.PreliminaryTypeAnalisisTime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry =>[
+				it.name = "MetricCalculationTime" it.value = (method.statistics.metricCalculationTime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "StateCoderTime" it.value = (statecoder.runtime/1000000) as int

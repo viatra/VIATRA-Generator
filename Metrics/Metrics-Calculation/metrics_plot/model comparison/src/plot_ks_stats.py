@@ -11,27 +11,40 @@ from GraphType import GraphCollection
 import DistributionMetrics as metrics
 
 def main():
+    domain = 'github'
     # read models
-    alloy = GraphCollection('../input/measurement2/yakindu/Alloy/', 100, 'Alloy')
-    human = GraphCollection('../input/measurement2/yakindu/Human/', 304, 'Human')
-    base = GraphCollection('../input/measurement2/yakindu/BaseViatra/', 100, 'BaseViatra')
-    real = GraphCollection('../input/measurement2/yakindu/RealViatra/', 100, 'RealViatra')
-    random = GraphCollection('../input/measurement2/yakindu/Random/', 100, 'Random')
-    na_rep = GraphCollection('../input/measurement2/yakindu/Human/na_rep/', 1, 'rep')
-    mpc_rep = GraphCollection('../input/measurement2/yakindu/Human/mpc_rep/', 1, 'rep')
-    od_rep = GraphCollection('../input/measurement2/yakindu/Human/od_rep/', 1, 'rep')
+    alloy = GraphCollection('../input/measurement2/{}/Alloy/'.format(domain), 100, 'All')
+    human = GraphCollection('../input/measurement2/{}/Human/'.format(domain), 304, 'Hum')
+    base = GraphCollection('../input/measurement2/{}/BaseViatra/'.format(domain), 100, 'GS')
+    real = GraphCollection('../input/measurement2/{}/RealViatra/'.format(domain), 100, 'Real')
+    random = GraphCollection('../input/measurement2/{}/Random/'.format(domain), 100, 'Rand')
+    na_rep = GraphCollection('../input/measurement2/{}/Human/na_rep/'.format(domain), 1, 'Med')
+    mpc_rep = GraphCollection('../input/measurement2/{}/Human/mpc_rep/'.format(domain), 1, 'Med')
+    od_rep = GraphCollection('../input/measurement2/{}/Human/od_rep/'.format(domain), 1, 'Med')
 
     # a hack to make the node type as the same as an exiting model
-    type_rep = GraphCollection('../input/measurement2/yakindu/Human/od_rep/', 1, 'rep')
-    type_rep.nts = [{'Entry': 0.04257802080554814, 'Choice': 0.1267671379034409, 'State': 0.1596092291277674, 'Transition': 0.6138636969858629, 'Statechart': 0.010136036276340358, 'Region': 0.04467858095492131, 'Exit': 0.0018338223526273673, 'FinalState': 0.0005334755934915977}]
-    # type_rep.nts = [{'EAttribute': 0.23539778449144008, 'EClass': 0.30996978851963747, 'EReference': 0.33081570996978854, 'EPackage': 0.012789526686807653, 'EAnnotation': 0.002517623363544813, 'EEnumLiteral': 0.07275931520644502, 'EEnum': 0.013645518630412891, 'EDataType': 0.004028197381671702, 'EParameter': 0.005941591137965764, 'EGenericType': 0.002014098690835851, 'EOperation': 0.009415911379657605, 'ETypeParameter': 0.0007049345417925478}]
+    type_rep = GraphCollection('../input/measurement2/{}/Human/od_rep/'.format(domain), 1, 'Med')
+    if(domain == 'yakindu'):
+        type_rep.nts = [{'Entry': 0.04257802080554814, 'Choice': 0.1267671379034409, 'State': 0.1596092291277674, 'Transition': 0.6138636969858629, 'Statechart': 0.010136036276340358, 'Region': 0.04467858095492131, 'Exit': 0.0018338223526273673, 'FinalState': 0.0005334755934915977}]
+    elif (domain == 'ecore'):
+        type_rep.nts = [{'EAttribute': 0.23539778449144008, 'EClass': 0.30996978851963747, 'EReference': 0.33081570996978854, 'EPackage': 0.012789526686807653, 'EAnnotation': 0.002517623363544813, 'EEnumLiteral': 0.07275931520644502, 'EEnum': 0.013645518630412891, 'EDataType': 0.004028197381671702, 'EParameter': 0.005941591137965764, 'EGenericType': 0.002014098690835851, 'EOperation': 0.009415911379657605, 'ETypeParameter': 0.0007049345417925478}]
+    elif (domain == 'github'):
+        type_rep.nts = [{'Project': 0.012636538873420432, 'Commit': 0.5525808524309276, 'User': 0.05847076461769116, 'Issue': 0.12743628185907047, 'PullRequest': 0.07560505461554937, 'IssueEvent': 0.17327050760334123}]
+
     types = sorted(type_rep.nts[0].keys())
 
-    models_to_compare_na = [human, alloy, base, real, random,  na_rep]
-    models_to_compare_mpc = [human, alloy, base, real, random,  mpc_rep]
-    models_to_compare_od = [human, alloy, base, real, random,  od_rep]
-    models_to_compare_nt = [human, alloy, base, real, random,  type_rep]
+    model_collections = [human, alloy, random, base,  real]
+    for model_collection in model_collections:
+        print(model_collection.name)
+        length = len(model_collection.violations)
+        percentage = sum(map(lambda v: int(v==0), model_collection.violations)) / length
+        print(percentage)
 
+
+    models_to_compare_na = [human, alloy, random, base,  real, na_rep]
+    models_to_compare_mpc = [human, alloy, random, base,  real, mpc_rep]
+    models_to_compare_od = [human, alloy, random, base,  real, od_rep]
+    models_to_compare_nt = [human, alloy, random, base,  real, type_rep]
     for modelCollection in models_to_compare_nt:
         type_dists = []
         for nt in modelCollection.nts:
@@ -43,13 +56,13 @@ def main():
 
 
     # define output folder
-    outputFolder = '../output/yakindu/'
+    outputFolder = '../output/{}/'.format(domain)
 
     #calculate metrics
     metricStat(models_to_compare_na, 'Node_Activity', nodeActivity, 0, outputFolder, calculateKSMatrix)
     metricStat(models_to_compare_od, 'Out_Degree', outDegree, 1, outputFolder, calculateKSMatrix)
     metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder, calculateKSMatrix)
-    metricStat(models_to_compare_nt, 'Node_Types', nodeType, 3, outputFolder, calculateManualKSMatrix)
+    metricStat(models_to_compare_nt, 'Node_Types', nodeType, 3, outputFolder, calculateManualKSMatrix)   
 
 def calculateKSMatrix(dists):
     dist = []
@@ -88,16 +101,17 @@ def calculateMDS(dissimilarities):
     return trans
 
 def plot(graphTypes, coords, title='',index = 0, savePath = ''):
-    color = ['blue' , 'm', 'gold', 'green', 'k', 'red']
-    markers = ['o', 'v','+', 'x', '^', '*']
-    plt.figure(index, figsize=(5, 4))
+    color = ['#377eb8' , '#e41a1c', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33']
+    markers = ['o', '+', 'x', '^', 'v', '*']
+    fill_styles = ['full', 'full', 'full', 'none', 'none', 'full']
+    plt.figure(index, figsize=(5, 2))
     # plt.title(title)
     index = 0
     for i in range(len(graphTypes)):
         x = (coords[index:index+graphTypes[i].size, 0].tolist())
         y = (coords[index:index+graphTypes[i].size, 1].tolist())
         index += graphTypes[i].size
-        plt.plot(x, y, color=color[i], marker=markers[i], label = graphTypes[i].name, linestyle='', alpha=0.7)
+        plt.plot(x, y, color=color[i], marker=markers[i], label = graphTypes[i].name, linestyle='', alpha=0.7, fillstyle = fill_styles[i])
     plt.savefig(fname = savePath+'.png', dpi=500)
     plt.legend(loc='upper right')
     plt.savefig(fname = savePath+'_lengend.png', dpi=500)
@@ -136,6 +150,9 @@ def mpc(graphType):
 
 def nodeType(graphType):
     return graphType.nts
+
+def tcc(graphType):
+    return graphType.tccs
 
 if __name__ == '__main__':
     main()

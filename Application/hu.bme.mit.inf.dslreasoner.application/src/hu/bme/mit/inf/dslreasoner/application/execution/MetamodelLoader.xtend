@@ -44,6 +44,9 @@ class MetamodelLoader {
 			attributes+=entry.attributes
 		}
 		
+		// TODO: Delete this code after generation for ecore
+	
+		
 		return new EcoreMetamodelDescriptor(classes.toList, emptySet, false, enums.toList, literals.toList, references.toList, attributes.toList)
 	}
 	

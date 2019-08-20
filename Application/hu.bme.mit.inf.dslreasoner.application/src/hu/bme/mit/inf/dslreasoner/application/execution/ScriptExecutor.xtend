@@ -58,6 +58,12 @@ class ScriptExecutor {
 		val tasks = script.commands.filter(Task)
 		
 		for(taskIndex : 0..<tasks.size) {
+			
+			// for the runtime measurements
+			System.gc();
+			System.gc();
+			System.gc();
+			Thread.sleep(1000);
 			val task = tasks.get(taskIndex)
 			monitor.beginTask('''Executing task«IF tasks.size>1» «taskIndex+1»«ENDIF»: «task.name»''',task.totalWork)
 			task.execute(monitor)

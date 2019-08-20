@@ -2,7 +2,7 @@ package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.validation
 
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.app.Domain
 import com.google.common.reflect.ClassPath
-import ecore.Ecore_pattern
+import ecore.Ecore
 import hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns
 import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
@@ -23,7 +23,7 @@ class ViolationCheck {
 		}
 		
 		var constriants = loadConstraints(packageName);
-		var collections = new ConstraintCollection(constriants, Ecore_pattern.instance);
+		var collections = new ConstraintCollection(constriants, Ecore.instance);
 		collections.addModel(root);
 		var results = collections.calculateViolations();
 		if(results.size > 0){
