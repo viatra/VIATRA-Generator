@@ -15,21 +15,20 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.FurtherNodeDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor
 
-class CalcEDA extends CalcMetric {
+class CalcEDA extends CalcMetric2 {
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 	static val neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph
 
 	override calcFromModel(EObject model) {
 		val Map<EObject, Integer> dim2Occ = Util.dim2NumOccurencesFromModel(model)
 
-		var totalEDA = Util.sumInt(dim2Occ.values)
-		val numDims = dim2Occ.keySet.length
-		
-		var avgEDA = 0.0
-		if (Double.valueOf(totalEDA) != 0) {
-			avgEDA = Double.valueOf(totalEDA) / numDims
-		} 
-		return avgEDA
+		val List<Double> metricDistrib = newArrayList
+		for (numOcc : dim2Occ.values) {
+			metricDistrib.add(numOcc as double)
+		}
+
+		return metricDistrib
+
 	}
 
 	def static getEDAfromNHShape(PartialInterpretation pm) {
@@ -126,13 +125,12 @@ class CalcEDA extends CalcMetric {
 			}
 		}
 		// calculations
-		var totalEDA = Util.sumDbl(dim2Occ.values)
-		val numDims = dim2Occ.keySet.length
-		
-		var avgEDA = 0.0
-		if (Double.valueOf(totalEDA) != 0) {
-			avgEDA = Double.valueOf(totalEDA) / numDims
-		} 
-		return avgEDA
+		val List<Double> metricDistrib = newArrayList
+		for (numOcc : dim2Occ.values) {
+			metricDistrib.add(numOcc as double)
+		}
+
+		return metricDistrib
+
 	}
 }

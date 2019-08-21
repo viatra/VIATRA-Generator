@@ -10,13 +10,10 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class CalcSQRCNT extends CalcMetric {
@@ -24,53 +21,27 @@ public class CalcSQRCNT extends CalcMetric {
   
   @Override
   public double calcFromModel(final EObject model) {
-    final List<EObject> nodes = IteratorExtensions.<EObject>toList(model.eResource().getAllContents());
-    Map<EObject, Set<EObject>> node2Neighbours = new HashMap<EObject, Set<EObject>>();
-    Util.fillWithNodes(nodes, node2Neighbours);
-    Util.getNeighboursList(nodes, node2Neighbours);
-    double totalSQR = 0.0;
-    double numNeighbours = 0.0;
-    for (final EObject node : nodes) {
-      {
-        final Set<EObject> neighbours = CollectionsUtil.<EObject, Set<EObject>>lookup(node, node2Neighbours);
-        numNeighbours = neighbours.size();
-        double numSquares = 0.0;
-        for (final EObject neighbour1 : neighbours) {
-          {
-            final Set<EObject> neighsOfNeigh = CollectionsUtil.<EObject, Set<EObject>>lookup(neighbour1, node2Neighbours);
-            for (final EObject neighbour2 : neighbours) {
-              {
-                boolean foundSquare = false;
-                boolean _notEquals = (!Objects.equal(neighbour1, neighbour2));
-                if (_notEquals) {
-                  for (final EObject neighOfNeigh1 : neighsOfNeigh) {
-                    if ((!foundSquare)) {
-                      if (((!Objects.equal(neighOfNeigh1, node)) && 
-                        CollectionsUtil.<EObject, Set<EObject>>lookup(neighOfNeigh1, node2Neighbours).contains(neighbour2))) {
-                        numSquares++;
-                        foundSquare = true;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        double sqr = 0.0;
-        if ((numSquares != 0)) {
-          sqr = ((numSquares / numNeighbours) / (numNeighbours - 1));
-        }
-        double _talSQR = totalSQR;
-        totalSQR = (_talSQR + sqr);
-      }
-    }
-    final int numNodes = ((Object[])Conversions.unwrapArray(nodes, Object.class)).length;
-    double avgSQR = 0.0;
-    if ((totalSQR != 0)) {
-      avgSQR = (totalSQR / numNodes);
-    }
-    return avgSQR;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field neighbour1 is undefined"
+      + "\nThe method or field neighbour2 is undefined"
+      + "\nThe method or field neighsOfNeigh is undefined"
+      + "\nThe method or field node is undefined"
+      + "\nThe method or field neighbour2 is undefined"
+      + "\nThe method or field numSquares is undefined"
+      + "\nThe method or field numSquares is undefined"
+      + "\nThe method or field numSquares is undefined"
+      + "\nThe method or field numNeighbours is undefined"
+      + "\nThe method or field numNeighbours is undefined"
+      + "\n!= cannot be resolved"
+      + "\n!= cannot be resolved"
+      + "\n&& cannot be resolved"
+      + "\nlookup cannot be resolved"
+      + "\ncontains cannot be resolved"
+      + "\n++ cannot be resolved"
+      + "\n!= cannot be resolved"
+      + "\n/ cannot be resolved"
+      + "\n/ cannot be resolved"
+      + "\n- cannot be resolved");
   }
   
   @Override

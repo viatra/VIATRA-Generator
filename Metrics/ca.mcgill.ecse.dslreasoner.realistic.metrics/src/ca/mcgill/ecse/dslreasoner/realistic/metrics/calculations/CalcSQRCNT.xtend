@@ -15,8 +15,9 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 class CalcSQRCNT extends CalcMetric {
 
 	// ///////////////////
-	// SQRCNT(v) = # neighbour pairs of v that are linked by a 2-jump path / 
-	// (# neighbours of v * (#neighbours of v - 1) )
+	// SQRCNT(v) = 
+	// for all neighbour pairs, sum of # of common neighbours excluding v / 
+	// for all neighbour pairs, sum of (k_m - 1 - q_mn - theta)(k_n - 1 - q_mn - theta + q_mn
 	// ///////////////////
 	static val neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice
 
@@ -32,19 +33,21 @@ class CalcSQRCNT extends CalcMetric {
 
 		// Measurements
 		var totalSQR = 0.0
-		var numNeighbours = 0.0
-		for (node : nodes) {
-			val neighbours = node.lookup(node2Neighbours)
-			numNeighbours = neighbours.size
-			var numSquares = 0.0
-//			println("xxxxxxxxxxxxxxxx")
+		var numNeighboursI = 0.0
+		for (nodeI : nodes) {
+			val neighbours = nodeI.lookup(node2Neighbours)
+			numNeighboursI = neighbours.size
+			var q_mn = 0.0//			println("xxxxxxxxxxxxxxxx")
 //			println(neighbours)
 //			println("xxxxxxxxxxxxxxxx")
-			for (neighbour1 : neighbours) {
+			for (neighM : neighbours) {
 
-				val neighsOfNeigh = neighbour1.lookup(node2Neighbours)
+				val neighsOfM = neighM.lookup(node2Neighbours)
+				val k_m = neighsOfM.length
 
-				for (neighbour2 : neighbours) {
+				for (neighN : neighbours) {
+					val neighsOfN = neighN.lookup(node2Neighbours)
+					val k_n = neighsOfM.length
 					var foundSquare = false
 					if (neighbour1 != neighbour2) {
 						for (neighOfNeigh1 : neighsOfNeigh) {

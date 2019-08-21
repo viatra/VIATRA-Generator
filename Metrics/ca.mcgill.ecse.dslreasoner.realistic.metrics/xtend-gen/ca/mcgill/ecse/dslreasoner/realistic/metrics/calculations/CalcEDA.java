@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations;
 
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric;
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.AbstractNodeDescriptor;
@@ -13,34 +13,31 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.nei
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.OutgoingRelationGND;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.neighbourhood.PartialInterpretation2ImmutableTypeLattice;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
-public class CalcEDA extends CalcMetric {
+public class CalcEDA extends CalcMetric2 {
   private final static PartialInterpretation2ImmutableTypeLattice neighbourhoodComputer = new PartialInterpretation2ImmutableTypeLattice();
   
   private final static Neighbourhood2ShapeGraph neighbouhood2ShapeGraph = new Neighbourhood2ShapeGraph();
   
   @Override
-  public double calcFromModel(final EObject model) {
+  public List<Double> calcFromModel(final EObject model) {
     final Map<EObject, Integer> dim2Occ = Util.dim2NumOccurencesFromModel(model);
-    int totalEDA = Util.sumInt(dim2Occ.values());
-    final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
-    double avgEDA = 0.0;
-    Double _valueOf = Double.valueOf(totalEDA);
-    boolean _notEquals = ((_valueOf).doubleValue() != 0);
-    if (_notEquals) {
-      Double _valueOf_1 = Double.valueOf(totalEDA);
-      double _divide = ((_valueOf_1).doubleValue() / numDims);
-      avgEDA = _divide;
+    final List<Double> metricDistrib = CollectionLiterals.<Double>newArrayList();
+    Collection<Integer> _values = dim2Occ.values();
+    for (final Integer numOcc : _values) {
+      metricDistrib.add(Double.valueOf(((double) (numOcc).intValue())));
     }
-    return avgEDA;
+    return metricDistrib;
   }
   
   public static double getEDAfromNHShape(final PartialInterpretation pm) {
@@ -133,12 +130,12 @@ public class CalcEDA extends CalcMetric {
   }
   
   @Override
-  public double calcFromNHLattice(final PartialInterpretation pm) {
+  public List<Double> calcFromNHLattice(final PartialInterpretation pm) {
     return this.calcFromNHLattice(pm, Integer.valueOf(0));
   }
   
   @Override
-  public double calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
+  public List<Double> calcFromNHLattice(final PartialInterpretation pm, final Integer depth) {
     final NeighbourhoodWithTraces<Map<? extends AbstractNodeDescriptor, Integer>, AbstractNodeDescriptor> nh = CalcEDA.neighbourhoodComputer.createRepresentation(pm, ((depth).intValue() + 1), Integer.MAX_VALUE, Integer.MAX_VALUE);
     Map<? extends AbstractNodeDescriptor, Integer> _modelRepresentation = nh.getModelRepresentation();
     final HashMap nhDeepRep = ((HashMap) _modelRepresentation);
@@ -172,16 +169,11 @@ public class CalcEDA extends CalcMetric {
         }
       }
     }
-    double totalEDA = Util.sumDbl(dim2Occ.values());
-    final int numDims = ((Object[])Conversions.unwrapArray(dim2Occ.keySet(), Object.class)).length;
-    double avgEDA = 0.0;
-    Double _valueOf = Double.valueOf(totalEDA);
-    boolean _notEquals = ((_valueOf).doubleValue() != 0);
-    if (_notEquals) {
-      Double _valueOf_1 = Double.valueOf(totalEDA);
-      double _divide = ((_valueOf_1).doubleValue() / numDims);
-      avgEDA = _divide;
+    final List<Double> metricDistrib = CollectionLiterals.<Double>newArrayList();
+    Collection<Double> _values = dim2Occ.values();
+    for (final Double numOcc : _values) {
+      metricDistrib.add(Double.valueOf(((double) (numOcc).doubleValue())));
     }
-    return avgEDA;
+    return metricDistrib;
   }
 }

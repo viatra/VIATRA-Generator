@@ -19,10 +19,10 @@ def main():
 			]
 
 	#"NA",'SQRTOT', 'SQRMAX'"MPC", "NDA", "NDC", "EDA", 'SQRMAX', 'SQRTOT', 'SQROCOOL', 'SQROSZ', 'SQROSZ2'
-	metrics = ['NDC']
+	metrics = ['EDA']
 	numPlotLines = 50
 	compilation = True
-	showFigs = "11" # 00, 01, 10, 11
+	showFigs = "01" # 00, 01, 10, 11
 	testing = "false" #max, true, false, min
 	#####END SELECTION
 

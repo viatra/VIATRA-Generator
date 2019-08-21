@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.realistic.metrics.examples;
 
+import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcEDA;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculations.CalcMetric2;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.examples.Util;
 import com.google.common.base.Objects;
@@ -60,6 +61,8 @@ public abstract class MetricsCalculationUsingShapes {
         files = CollectionLiterals.<String>newArrayList("test");
       }
       final ArrayList<CalcMetric2> metrics = new ArrayList<CalcMetric2>();
+      CalcEDA _calcEDA = new CalcEDA();
+      metrics.add(_calcEDA);
       ArrayList<String> calcMethods = CollectionLiterals.<String>newArrayList();
       if (calcTesting != null) {
         switch (calcTesting) {

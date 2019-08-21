@@ -2,15 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\outputs",
-    "\\outputs\\A0",
-    "\\outputs\\A20",
-    "\\outputs\\Human",
-    "\\outputs\\RandomEMF-WF+7",
-    "\\outputs\\VS+i",
-    "\\outputs\\VS-i",
-    "\\outputs\\VS-WF+All5",
-    "\\outputs\\VS-WF+All7"
+    "\\outputs\\_Cumulative"
   ],
-  "SelectedNode": "\\outputs",
+  "SelectedNode": "\\outputs\\Human",
   "PreviewInSolutionExplorer": false
 }

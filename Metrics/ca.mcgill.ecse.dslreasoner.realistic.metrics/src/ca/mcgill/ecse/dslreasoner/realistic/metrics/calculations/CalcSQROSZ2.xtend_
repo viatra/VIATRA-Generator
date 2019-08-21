@@ -51,6 +51,7 @@ class CalcSQROSZ2 extends CalcMetric {
 					}
 				}
 			}
+			
 		}
 		val avgSQR = totalSQR / totalDenom
 
