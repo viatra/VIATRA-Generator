@@ -3,14 +3,15 @@
 	"outputPath": "outputModels",
 	"timeout": 1200,
 	"saveModels": false,
+	"saveTemporaryFiles": true,
 	"warmupIterations": 0,
 	"iterations": 5,
 	"domain": "Yakindu",
-	"scope": "quantiles",
+	"scope": "none",
 	"sizes": [100],
 	"solver": "ViatraSolver",
 	"scopePropagator": "polyhedral",
 	"propagatedConstraints": "hints",
 	"polyhedronSolver": "Clp",
-	"scopeHeuristic": "basic"
+	"scopeHeuristic": "polyhedral"
 }

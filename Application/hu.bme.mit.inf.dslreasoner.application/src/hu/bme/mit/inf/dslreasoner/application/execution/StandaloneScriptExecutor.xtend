@@ -72,10 +72,10 @@ class StandaloneScriptExecutor {
 				}
 			} else {
 				val message =  '''
-				The Configuration Script contains «errors.size» error«IF errors.size>1»s«ENDIF»:
-					«FOR error : errors»
-					«"\t"»«error.message»
-					«ENDFOR»
+					The Configuration Script contains «errors.size» error«IF errors.size>1»s«ENDIF»:
+						«FOR error : errors»
+							«"\t"»«error.message»
+						«ENDFOR»
 				'''
 				throw new IllegalArgumentException(message)
 			}

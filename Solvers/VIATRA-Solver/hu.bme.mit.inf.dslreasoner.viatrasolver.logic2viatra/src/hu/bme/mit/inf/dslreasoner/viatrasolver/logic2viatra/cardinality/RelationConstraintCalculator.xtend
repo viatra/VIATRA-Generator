@@ -44,7 +44,7 @@ class RelationMultiplicityConstraint {
 	}
 
 	def constrainsUnrepairable() {
-		constrainsUnfinished && canHaveMultipleSourcesPerTarget
+		constrainsUnfinished && canHaveMultipleSourcesPerTarget && false
 	}
 
 	def constrainsRemainingInverse() {
