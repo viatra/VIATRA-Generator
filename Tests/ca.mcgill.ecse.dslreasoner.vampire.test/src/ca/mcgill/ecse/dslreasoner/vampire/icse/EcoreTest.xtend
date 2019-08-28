@@ -50,7 +50,7 @@ class EcoreTest {
 			it.documentationLevel = DocumentationLevel::FULL
 		]
 
-		solution = reasoner.solve(logicProblem, vampireConfig, workspace)
+		solution = reasoner.solve(logicProblem, vampireConfig, workspace, "ECO")
 
 		println("Problem solved")
 

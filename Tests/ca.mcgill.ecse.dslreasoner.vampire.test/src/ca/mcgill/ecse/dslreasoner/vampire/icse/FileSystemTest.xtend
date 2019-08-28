@@ -1,13 +1,13 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse
 
+import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.Dir
+import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.File
 import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.filesystemPackage
-import ca.mcgill.ecse.dslreasoner.vampire.queries.FileSystemPatterns
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
@@ -15,7 +15,6 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.*
 
 class FileSystemTest {
 	def static void main(String[] args) {
@@ -38,7 +37,7 @@ class FileSystemTest {
 
 		val metamodel = GeneralTest.loadMetamodel(filesystemPackage.eINSTANCE)
 		val partialModel = GeneralTest.loadPartialModel(inputs, "fs/filesystemInstance.xmi")
-		val queries = GeneralTest.loadQueries(metamodel, FileSystemPatterns.instance)
+//		val queries = GeneralTest.loadQueries(metamodel, FileSystemPatterns.instance)
 
 		println("DSL loaded")
 
@@ -53,7 +52,7 @@ class FileSystemTest {
 		// Start Time
 		var startTime = System.currentTimeMillis
 
-		var LogicReasoner reasoner
+		var VampireSolver reasoner
 		// *
 		reasoner = new VampireSolver
 
@@ -87,7 +86,7 @@ class FileSystemTest {
 			it.uniquenessDuplicates = false
 		]
 
-		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
+		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace, "FS")
 
 		/*/
 		 * 

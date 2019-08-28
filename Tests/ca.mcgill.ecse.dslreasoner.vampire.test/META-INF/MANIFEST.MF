@@ -3,11 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Test
 Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.vampire.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: ca.mcgill.ecse.dslreasoner.vampire.queries,
-  ca.mcgill.ecse.dslreasoner.vampire.test.queries.ecore,
-  ca.mcgill.ecse.dslreasoner.vampire.test.queries.fam,
-  ca.mcgill.ecse.dslreasoner.vampire.test.queries.filesystem,
-  ca.mcgill.ecse.dslreasoner.vampire.test.queries.yakindu
+Export-Package: ca.mcgill.ecse.dslreasoner.vampire.queries
 Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
   org.eclipse.emf.ecore,
   org.eclipse.viatra.query.runtime.rete,

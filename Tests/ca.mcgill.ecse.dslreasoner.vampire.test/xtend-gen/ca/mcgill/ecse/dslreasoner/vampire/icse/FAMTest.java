@@ -12,7 +12,6 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
@@ -62,7 +61,7 @@ public class FAMTest {
       workspace.writeModel(problem, "Fam.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
-      LogicReasoner reasoner = null;
+      VampireSolver reasoner = null;
       VampireSolver _vampireSolver = new VampireSolver();
       reasoner = _vampireSolver;
       final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
