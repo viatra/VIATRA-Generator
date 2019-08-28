@@ -53,7 +53,7 @@ class YakinduTest {
 		// Start Time
 		var startTime = System.currentTimeMillis
 
-		var LogicReasoner reasoner
+		var VampireSolver reasoner
 		// *
 		reasoner = new VampireSolver
 
@@ -85,7 +85,7 @@ class YakinduTest {
 			it.uniquenessDuplicates = false
 		]
 
-		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
+		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace, "YAK")
 
 		/*/
 		 * 

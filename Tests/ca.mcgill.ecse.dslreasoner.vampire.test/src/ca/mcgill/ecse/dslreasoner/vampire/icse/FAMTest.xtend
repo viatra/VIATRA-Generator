@@ -56,7 +56,7 @@ class FAMTest {
 		//Start Time
 		var startTime = System.currentTimeMillis
 
-		var LogicReasoner reasoner
+		var VampireSolver reasoner
 		// *
 		reasoner = new VampireSolver
 

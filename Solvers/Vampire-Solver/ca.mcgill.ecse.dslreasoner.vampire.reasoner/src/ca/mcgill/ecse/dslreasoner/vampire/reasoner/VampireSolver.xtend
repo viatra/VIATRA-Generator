@@ -27,7 +27,12 @@ class VampireSolver extends LogicReasoner {
 	val Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper
 	val VampireHandler handler = new VampireHandler
 
-	val fileName = "vampireProblem.tptp"
+	var fileName = "problem.tptp"
+
+	def solve(LogicProblem problem, LogicSolverConfiguration config, ReasonerWorkspace workspace, String location) {
+		fileName = location + fileName
+		solve(problem, config, workspace)
+	}
 
 	override solve(LogicProblem problem, LogicSolverConfiguration config,
 		ReasonerWorkspace workspace) throws LogicReasonerException {
@@ -54,26 +59,21 @@ class VampireSolver extends LogicReasoner {
 		// Result as String
 		val transformationTime = System.currentTimeMillis - transformationStart
 		// Finish: Logic -> Vampire mapping
-		/*	  
-		 * // Start: Solving Alloy problem
-		 * val solverStart = System.currentTimeMillis
-		 * //Calling Solver (Currently Manually)
-		 * val result2 = handler.callSolver(vampireProblem,workspace,vampireConfig,vampireCode)
-		 * //		val result2 = null
-		 * //TODO
-		 * //Backwards Mapper
-		 * val logicResult = backwardMapper.transformOutput(problem,config.solutionScope.numberOfRequiredSolution,result2,forwardTrace,transformationTime)
-		 * 
-		 * val solverFinish = System.currentTimeMillis-solverStart
-		 * // Finish: Solving Alloy problem
-		 * 		
-		 * if(vampireConfig.writeToFile) workspace.deactivateModel(fileName)
-		 * 
-		 * return logicResult
-		 * 
-		 /*/
-		return null // for now
-		// */
+		// Start: Solving .tptp problem
+		val solverStart = System.currentTimeMillis
+		// Calling Solver (Currently Manually)
+		val result2 = handler.callSolver(vampireProblem, workspace, vampireConfig)
+		// val result2 = null
+		val solvingTime = System.currentTimeMillis - solverStart
+		// TODO
+//		val backTransformationStart = System.currentTimeMillis
+//		// Backwards Mapper
+//		val logicResult = backwardMapper.transformOutput(problem, config.solutionScope.numberOfRequiredSolution,
+//			result2, forwardTrace, transformationTime)
+//
+//		val backTransformationTime = System.currentTimeMillis - backTransformationStart
+		// Finish: Solving Alloy problem
+		return null
 	}
 
 	def asConfig(LogicSolverConfiguration configuration) {

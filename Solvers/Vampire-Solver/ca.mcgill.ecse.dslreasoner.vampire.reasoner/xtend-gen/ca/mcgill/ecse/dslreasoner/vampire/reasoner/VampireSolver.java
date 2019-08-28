@@ -20,7 +20,10 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
 public class VampireSolver extends LogicReasoner {
@@ -36,7 +39,20 @@ public class VampireSolver extends LogicReasoner {
   
   private final VampireHandler handler = new VampireHandler();
   
-  private final String fileName = "vampireProblem.tptp";
+  private String fileName = "problem.tptp";
+  
+  public LogicResult solve(final LogicProblem problem, final LogicSolverConfiguration config, final ReasonerWorkspace workspace, final String location) {
+    try {
+      LogicResult _xblockexpression = null;
+      {
+        this.fileName = (location + this.fileName);
+        _xblockexpression = this.solve(problem, config, workspace);
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   @Override
   public LogicResult solve(final LogicProblem problem, final LogicSolverConfiguration config, final ReasonerWorkspace workspace) throws LogicReasonerException {
@@ -55,6 +71,10 @@ public class VampireSolver extends LogicReasoner {
     }
     long _currentTimeMillis = System.currentTimeMillis();
     final long transformationTime = (_currentTimeMillis - transformationStart);
+    final long solverStart = System.currentTimeMillis();
+    final EList<EObject> result2 = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
+    long _currentTimeMillis_1 = System.currentTimeMillis();
+    final long solvingTime = (_currentTimeMillis_1 - solverStart);
     return null;
   }
   

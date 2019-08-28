@@ -1,21 +1,14 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireBackendSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
-import com.google.common.util.concurrent.SimpleTimeLimiter
-import com.google.common.util.concurrent.UncheckedTimeoutException
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import java.util.ArrayList
-import java.util.HashMap
-import java.util.LinkedList
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.util.List
-import java.util.Map
-import java.util.concurrent.Callable
-import java.util.concurrent.TimeUnit
-import org.eclipse.emf.common.command.Command
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguageFactoryImpl
 
 class VampireSolverException extends Exception{
 	new(String s) { super(s) }
@@ -39,7 +32,62 @@ class VampireHandler {
 
 	//val fileName = "problem.als"
 	
-	public def callSolver(VampireModel problem, ReasonerWorkspace workspace, VampireSolverConfiguration configuration,String vampireCode) {
+	public def callSolver(VampireModel problem, ReasonerWorkspace workspace, VampireSolverConfiguration configuration) {
+		
+		val CMD = "cmd /c "
+		val VAMPDIR = "..\\..\\Solvers\\Vampire-Solver\\ca.mcgill.ecse.dslreasoner.vampire.reasoner\\lib\\"
+		val VAMPNAME = "vampire.exe"
+		val TEMPNAME = "TEMP.tptp"
+		val OPTION = " --mode casc_sat "
+		val SOLNNAME = "solution.tptp"
+		val PATH = "C:/cygwin64/bin"
+		
+		val wsURI = workspace.workspaceURI
+		val tempLoc = wsURI + TEMPNAME
+		val solnLoc = wsURI + SOLNNAME + " "
+		val vampLoc = VAMPDIR + VAMPNAME
+		
+		
+		//1. create temp file for vampire problem
+		var tempURI = workspace.writeModel(problem, TEMPNAME).toFileString
+		
+		//2. run command and save to 
+		//need to have cygwin downloaded
+		
+		
+		
+		
+        val p = Runtime.runtime.exec(CMD + vampLoc + OPTION + tempLoc + " > " + solnLoc, newArrayList("Path=" + PATH))
+        //2.1 determine time left
+        p.waitFor
+        
+        //2.2 store output into local variable
+        val BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        val List<String> output = newArrayList
+
+        var line = "";           
+        while ((line = reader.readLine())!= null) {
+            output.add(line + "\n");
+        }
+
+//    	println(output.toString())
+
+		//4. delete temp file
+		workspace.getFile(TEMPNAME).delete
+		
+		//5. determine and return whether or not finite model was found
+		
+		//6. save solution as a .tptp model
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new VampireLanguageFactoryImpl)
+		workspace.readModel(VampireModel, SOLNNAME).eResource.contents
+		
+		
+		
+		
+		
+		
+		
+		
 		/*
 		//Prepare
 		val warnings = new LinkedList<String>
