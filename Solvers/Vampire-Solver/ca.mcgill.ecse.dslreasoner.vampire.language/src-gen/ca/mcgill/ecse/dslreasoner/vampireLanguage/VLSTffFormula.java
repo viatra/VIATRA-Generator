@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getName <em>Name</em>}</li>
- *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofRole <em>Fof Role</em>}</li>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getTffRole <em>Tff Role</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofFormula <em>Fof Formula</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getAnnotations <em>Annotations</em>}</li>
  * </ul>
@@ -53,30 +53,30 @@ public interface VLSTffFormula extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Fof Role</b></em>' attribute.
+   * Returns the value of the '<em><b>Tff Role</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Fof Role</em>' attribute isn't clear,
+   * If the meaning of the '<em>Tff Role</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Fof Role</em>' attribute.
-   * @see #setFofRole(String)
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSTffFormula_FofRole()
+   * @return the value of the '<em>Tff Role</em>' attribute.
+   * @see #setTffRole(String)
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSTffFormula_TffRole()
    * @model
    * @generated
    */
-  String getFofRole();
+  String getTffRole();
 
   /**
-   * Sets the value of the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofRole <em>Fof Role</em>}' attribute.
+   * Sets the value of the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getTffRole <em>Tff Role</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Fof Role</em>' attribute.
-   * @see #getFofRole()
+   * @param value the new value of the '<em>Tff Role</em>' attribute.
+   * @see #getTffRole()
    * @generated
    */
-  void setFofRole(String value);
+  void setTffRole(String value);
 
   /**
    * Returns the value of the '<em><b>Fof Formula</b></em>' containment reference.
@@ -87,12 +87,12 @@ public interface VLSTffFormula extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Fof Formula</em>' containment reference.
-   * @see #setFofFormula(VLSTerm)
+   * @see #setFofFormula(VLSTffTerm)
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSTffFormula_FofFormula()
    * @model containment="true"
    * @generated
    */
-  VLSTerm getFofFormula();
+  VLSTffTerm getFofFormula();
 
   /**
    * Sets the value of the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula#getFofFormula <em>Fof Formula</em>}' containment reference.
@@ -102,7 +102,7 @@ public interface VLSTffFormula extends EObject
    * @see #getFofFormula()
    * @generated
    */
-  void setFofFormula(VLSTerm value);
+  void setFofFormula(VLSTffTerm value);
 
   /**
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference.

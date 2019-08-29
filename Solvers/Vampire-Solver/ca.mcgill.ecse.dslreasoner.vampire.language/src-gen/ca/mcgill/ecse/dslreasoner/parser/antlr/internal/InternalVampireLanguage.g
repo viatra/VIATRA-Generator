@@ -79,29 +79,9 @@ ruleVampireModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVampireModelAccess().getIncludesVLSIncludeParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_0_0());
 				}
-				lv_includes_0_0=ruleVLSInclude
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
-					}
-					add(
-						$current,
-						"includes",
-						lv_includes_0_0,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSInclude");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		    |
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getVampireModelAccess().getCommentsVLSCommentParserRuleCall_1_0());
-				}
-				lv_comments_1_0=ruleVLSComment
+				lv_comments_0_0=ruleVLSComment
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
@@ -109,7 +89,7 @@ ruleVampireModel returns [EObject current=null]
 					add(
 						$current,
 						"comments",
-						lv_comments_1_0,
+						lv_comments_0_0,
 						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSComment");
 					afterParserOrEnumRuleCall();
 				}
@@ -119,9 +99,9 @@ ruleVampireModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVampireModelAccess().getConfirmationsVLSConfirmationsParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getVampireModelAccess().getConfirmationsVLSConfirmationsParserRuleCall_1_0());
 				}
-				lv_confirmations_2_0=ruleVLSConfirmations
+				lv_confirmations_1_0=ruleVLSConfirmations
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
@@ -129,7 +109,7 @@ ruleVampireModel returns [EObject current=null]
 					add(
 						$current,
 						"confirmations",
-						lv_confirmations_2_0,
+						lv_confirmations_1_0,
 						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSConfirmations");
 					afterParserOrEnumRuleCall();
 				}
@@ -139,9 +119,9 @@ ruleVampireModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getVampireModelAccess().getFormulasVLSFofFormulaParserRuleCall_2_0());
 				}
-				lv_formulas_3_0=ruleVLSFofFormula
+				lv_formulas_2_0=ruleVLSFofFormula
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
@@ -149,7 +129,7 @@ ruleVampireModel returns [EObject current=null]
 					add(
 						$current,
 						"formulas",
-						lv_formulas_3_0,
+						lv_formulas_2_0,
 						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSFofFormula");
 					afterParserOrEnumRuleCall();
 				}
@@ -159,9 +139,9 @@ ruleVampireModel returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVampireModelAccess().getTfformulasVLSTffFormulaParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getVampireModelAccess().getTfformulasVLSTffFormulaParserRuleCall_3_0());
 				}
-				lv_tfformulas_4_0=ruleVLSTffFormula
+				lv_tfformulas_3_0=ruleVLSTffFormula
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVampireModelRule());
@@ -169,190 +149,13 @@ ruleVampireModel returns [EObject current=null]
 					add(
 						$current,
 						"tfformulas",
-						lv_tfformulas_4_0,
+						lv_tfformulas_3_0,
 						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffFormula");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 	)*
-;
-
-// Entry rule entryRuleVLSInclude
-entryRuleVLSInclude returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getVLSIncludeRule()); }
-	iv_ruleVLSInclude=ruleVLSInclude
-	{ $current=$iv_ruleVLSInclude.current; }
-	EOF;
-
-// Rule VLSInclude
-ruleVLSInclude returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='include('
-		{
-			newLeafNode(otherlv_0, grammarAccess.getVLSIncludeAccess().getIncludeKeyword_0());
-		}
-		(
-			(
-				lv_fileName_1_0=RULE_SINGLE_QUOTE
-				{
-					newLeafNode(lv_fileName_1_0, grammarAccess.getVLSIncludeAccess().getFileNameSINGLE_QUOTETerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSIncludeRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"fileName",
-						lv_fileName_1_0,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_QUOTE");
-				}
-			)
-		)
-		(
-			otherlv_2=',['
-			{
-				newLeafNode(otherlv_2, grammarAccess.getVLSIncludeAccess().getCommaLeftSquareBracketKeyword_2_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_1_0());
-					}
-					lv_names_3_0=ruleVLSName
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getVLSIncludeRule());
-						}
-						add(
-							$current,
-							"names",
-							lv_names_3_0,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSName");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			(
-				otherlv_4=','
-				{
-					newLeafNode(otherlv_4, grammarAccess.getVLSIncludeAccess().getCommaKeyword_2_2_0());
-				}
-				(
-					(
-						{
-							newCompositeNode(grammarAccess.getVLSIncludeAccess().getNamesVLSNameParserRuleCall_2_2_1_0());
-						}
-						lv_names_5_0=ruleVLSName
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getVLSIncludeRule());
-							}
-							add(
-								$current,
-								"names",
-								lv_names_5_0,
-								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSName");
-							afterParserOrEnumRuleCall();
-						}
-					)
-				)
-			)*
-			otherlv_6=']'
-			{
-				newLeafNode(otherlv_6, grammarAccess.getVLSIncludeAccess().getRightSquareBracketKeyword_2_3());
-			}
-		)?
-	)
-;
-
-// Entry rule entryRuleVLSName
-entryRuleVLSName returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getVLSNameRule()); }
-	iv_ruleVLSName=ruleVLSName
-	{ $current=$iv_ruleVLSName.current; }
-	EOF;
-
-// Rule VLSName
-ruleVLSName returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				lv_name_0_1=RULE_LOWER_WORD_ID
-				{
-					newLeafNode(lv_name_0_1, grammarAccess.getVLSNameAccess().getNameLOWER_WORD_IDTerminalRuleCall_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSNameRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_0_1,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.LOWER_WORD_ID");
-				}
-				    |
-				lv_name_0_2=RULE_SINGLE_QUOTE
-				{
-					newLeafNode(lv_name_0_2, grammarAccess.getVLSNameAccess().getNameSINGLE_QUOTETerminalRuleCall_0_1());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSNameRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_0_2,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_QUOTE");
-				}
-				    |
-				lv_name_0_3=RULE_LITERAL
-				{
-					newLeafNode(lv_name_0_3, grammarAccess.getVLSNameAccess().getNameLITERALTerminalRuleCall_0_2());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSNameRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_0_3,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.LITERAL");
-				}
-				    |
-				lv_name_0_4=RULE_SIGNED_LITERAL
-				{
-					newLeafNode(lv_name_0_4, grammarAccess.getVLSNameAccess().getNameSIGNED_LITERALTerminalRuleCall_0_3());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSNameRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_0_4,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_LITERAL");
-				}
-			)
-		)
-	)
 ;
 
 // Entry rule entryRuleVLSComment
@@ -371,27 +174,21 @@ ruleVLSComment returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='%'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getVLSCommentAccess().getPercentSignKeyword_0());
-		}
 		(
-			(
-				lv_comment_1_0=RULE_SINGLE_COMMENT
-				{
-					newLeafNode(lv_comment_1_0, grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_1_0());
+			lv_comment_0_0=RULE_SINGLE_COMMENT
+			{
+				newLeafNode(lv_comment_0_0, grammarAccess.getVLSCommentAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getVLSCommentRule());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getVLSCommentRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"comment",
-						lv_comment_1_0,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
-				}
-			)
+				setWithLastConsumed(
+					$current,
+					"comment",
+					lv_comment_0_0,
+					"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
+			}
 		)
 	)
 ;
@@ -411,43 +208,124 @@ ruleVLSConfirmations returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	{
-		newCompositeNode(grammarAccess.getVLSConfirmationsAccess().getVLSSatisfiableParserRuleCall());
-	}
-	this_VLSSatisfiable_0=ruleVLSSatisfiable
-	{
-		$current = $this_VLSSatisfiable_0.current;
-		afterParserOrEnumRuleCall();
-	}
-;
-
-// Entry rule entryRuleVLSSatisfiable
-entryRuleVLSSatisfiable returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getVLSSatisfiableRule()); }
-	iv_ruleVLSSatisfiable=ruleVLSSatisfiable
-	{ $current=$iv_ruleVLSSatisfiable.current; }
-	EOF;
-
-// Rule VLSSatisfiable
-ruleVLSSatisfiable returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
 	(
 		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getVLSConfirmationsAccess().getVLSSatisfiableAction_0_0(),
+						$current);
+				}
+			)
+			otherlv_1='Satisfiable!'
 			{
-				$current = forceCreateModelElement(
-					grammarAccess.getVLSSatisfiableAccess().getVLSSatisfiableAction_0(),
-					$current);
+				newLeafNode(otherlv_1, grammarAccess.getVLSConfirmationsAccess().getSatisfiableKeyword_0_1());
 			}
 		)
-		otherlv_1='Satisfiable!'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getVLSSatisfiableAccess().getSatisfiableKeyword_1());
-		}
+		    |
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getVLSConfirmationsAccess().getVLSWarningAction_1_0(),
+						$current);
+				}
+			)
+			otherlv_3='WARNING!'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getVLSConfirmationsAccess().getWARNINGKeyword_1_1());
+			}
+			otherlv_4='Could'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getVLSConfirmationsAccess().getCouldKeyword_1_2());
+			}
+			otherlv_5='not'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getVLSConfirmationsAccess().getNotKeyword_1_3());
+			}
+			otherlv_6='set'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getVLSConfirmationsAccess().getSetKeyword_1_4());
+			}
+			otherlv_7='resource'
+			{
+				newLeafNode(otherlv_7, grammarAccess.getVLSConfirmationsAccess().getResourceKeyword_1_5());
+			}
+			otherlv_8='limit:'
+			{
+				newLeafNode(otherlv_8, grammarAccess.getVLSConfirmationsAccess().getLimitKeyword_1_6());
+			}
+			otherlv_9='Virtual'
+			{
+				newLeafNode(otherlv_9, grammarAccess.getVLSConfirmationsAccess().getVirtualKeyword_1_7());
+			}
+			otherlv_10='memory.'
+			{
+				newLeafNode(otherlv_10, grammarAccess.getVLSConfirmationsAccess().getMemoryKeyword_1_8());
+			}
+		)
+		    |
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getVLSConfirmationsAccess().getVLSTryingAction_2_0(),
+						$current);
+				}
+			)
+			otherlv_12='TRYING'
+			{
+				newLeafNode(otherlv_12, grammarAccess.getVLSConfirmationsAccess().getTRYINGKeyword_2_1());
+			}
+			otherlv_13='['
+			{
+				newLeafNode(otherlv_13, grammarAccess.getVLSConfirmationsAccess().getLeftSquareBracketKeyword_2_2());
+			}
+			(
+				(
+					lv_name_14_0=RULE_LITERAL
+					{
+						newLeafNode(lv_name_14_0, grammarAccess.getVLSConfirmationsAccess().getNameLITERALTerminalRuleCall_2_3_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getVLSConfirmationsRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_14_0,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.LITERAL");
+					}
+				)
+			)
+			otherlv_15=']'
+			{
+				newLeafNode(otherlv_15, grammarAccess.getVLSConfirmationsAccess().getRightSquareBracketKeyword_2_4());
+			}
+		)
+		    |
+		(
+			(
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getVLSConfirmationsAccess().getVLSFiniteModelAction_3_0(),
+						$current);
+				}
+			)
+			otherlv_17='Finite'
+			{
+				newLeafNode(otherlv_17, grammarAccess.getVLSConfirmationsAccess().getFiniteKeyword_3_1());
+			}
+			otherlv_18='Model'
+			{
+				newLeafNode(otherlv_18, grammarAccess.getVLSConfirmationsAccess().getModelKeyword_3_2());
+			}
+			otherlv_19='Found!'
+			{
+				newLeafNode(otherlv_19, grammarAccess.getVLSConfirmationsAccess().getFoundKeyword_3_3());
+			}
+		)
 	)
 ;
 
@@ -633,52 +511,21 @@ ruleVLSTffFormula returns [EObject current=null]
 		}
 		(
 			(
-				(
-					lv_name_2_1=RULE_LOWER_WORD_ID
-					{
-						newLeafNode(lv_name_2_1, grammarAccess.getVLSTffFormulaAccess().getNameLOWER_WORD_IDTerminalRuleCall_2_0_0());
+				{
+					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getNameVLSTffNameParserRuleCall_2_0());
+				}
+				lv_name_2_0=ruleVLSTffName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSTffFormulaRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSTffFormulaRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_2_1,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.LOWER_WORD_ID");
-					}
-					    |
-					lv_name_2_2=RULE_SIGNED_LITERAL
-					{
-						newLeafNode(lv_name_2_2, grammarAccess.getVLSTffFormulaAccess().getNameSIGNED_LITERALTerminalRuleCall_2_0_1());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSTffFormulaRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_2_2,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_LITERAL");
-					}
-					    |
-					lv_name_2_3=RULE_SINGLE_QUOTE
-					{
-						newLeafNode(lv_name_2_3, grammarAccess.getVLSTffFormulaAccess().getNameSINGLE_QUOTETerminalRuleCall_2_0_2());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSTffFormulaRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"name",
-							lv_name_2_3,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_QUOTE");
-					}
-				)
+					set(
+						$current,
+						"name",
+						lv_name_2_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffName");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)
 		otherlv_3=','
@@ -688,17 +535,17 @@ ruleVLSTffFormula returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getFofRoleVLSRoleParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getTffRoleVLSRoleParserRuleCall_4_0());
 				}
-				lv_fofRole_4_0=ruleVLSRole
+				lv_tffRole_4_0=ruleVLSRole
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVLSTffFormulaRule());
 					}
 					set(
 						$current,
-						"fofRole",
-						lv_fofRole_4_0,
+						"tffRole",
+						lv_tffRole_4_0,
 						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSRole");
 					afterParserOrEnumRuleCall();
 				}
@@ -711,9 +558,9 @@ ruleVLSTffFormula returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getFofFormulaVLSTermParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getVLSTffFormulaAccess().getFofFormulaVLSTffTermParserRuleCall_6_0());
 				}
-				lv_fofFormula_6_0=ruleVLSTerm
+				lv_fofFormula_6_0=ruleVLSTffTerm
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getVLSTffFormulaRule());
@@ -722,7 +569,7 @@ ruleVLSTffFormula returns [EObject current=null]
 						$current,
 						"fofFormula",
 						lv_fofFormula_6_0,
-						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTerm");
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffTerm");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -759,6 +606,142 @@ ruleVLSTffFormula returns [EObject current=null]
 		otherlv_10='.'
 		{
 			newLeafNode(otherlv_10, grammarAccess.getVLSTffFormulaAccess().getFullStopKeyword_9());
+		}
+	)
+;
+
+// Entry rule entryRuleVLSTffName
+entryRuleVLSTffName returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTffNameRule()); }
+	iv_ruleVLSTffName=ruleVLSTffName
+	{ $current=$iv_ruleVLSTffName.current.getText(); }
+	EOF;
+
+// Rule VLSTffName
+ruleVLSTffName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getVLSTffNameAccess().getVLSTffDeclPredParserRuleCall_0());
+		}
+		this_VLSTffDeclPred_0=ruleVLSTffDeclPred
+		{
+			$current.merge(this_VLSTffDeclPred_0);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSTffNameAccess().getVLSTffFiniteParserRuleCall_1());
+		}
+		this_VLSTffFinite_1=ruleVLSTffFinite
+		{
+			$current.merge(this_VLSTffFinite_1);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSTffNameAccess().getVLSTffDistinctParserRuleCall_2());
+		}
+		this_VLSTffDistinct_2=ruleVLSTffDistinct
+		{
+			$current.merge(this_VLSTffDistinct_2);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleVLSTffDistinct
+entryRuleVLSTffDistinct returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTffDistinctRule()); }
+	iv_ruleVLSTffDistinct=ruleVLSTffDistinct
+	{ $current=$iv_ruleVLSTffDistinct.current.getText(); }
+	EOF;
+
+// Rule VLSTffDistinct
+ruleVLSTffDistinct returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='distinct_domain'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSTffDistinctAccess().getDistinct_domainKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSTffFinite
+entryRuleVLSTffFinite returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTffFiniteRule()); }
+	iv_ruleVLSTffFinite=ruleVLSTffFinite
+	{ $current=$iv_ruleVLSTffFinite.current.getText(); }
+	EOF;
+
+// Rule VLSTffFinite
+ruleVLSTffFinite returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='finite_domain'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getVLSTffFiniteAccess().getFinite_domainKeyword());
+	}
+;
+
+// Entry rule entryRuleVLSTffDeclPred
+entryRuleVLSTffDeclPred returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTffDeclPredRule()); }
+	iv_ruleVLSTffDeclPred=ruleVLSTffDeclPred
+	{ $current=$iv_ruleVLSTffDeclPred.current.getText(); }
+	EOF;
+
+// Rule VLSTffDeclPred
+ruleVLSTffDeclPred returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw='declare_'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getVLSTffDeclPredAccess().getDeclare_Keyword_0_0());
+			}
+			this_DOLLAR_ID_1=RULE_DOLLAR_ID
+			{
+				$current.merge(this_DOLLAR_ID_1);
+			}
+			{
+				newLeafNode(this_DOLLAR_ID_1, grammarAccess.getVLSTffDeclPredAccess().getDOLLAR_IDTerminalRuleCall_0_1());
+			}
+		)
+		    |
+		this_LOWER_WORD_ID_2=RULE_LOWER_WORD_ID
+		{
+			$current.merge(this_LOWER_WORD_ID_2);
+		}
+		{
+			newLeafNode(this_LOWER_WORD_ID_2, grammarAccess.getVLSTffDeclPredAccess().getLOWER_WORD_IDTerminalRuleCall_1());
 		}
 	)
 ;
@@ -1037,6 +1020,304 @@ ruleVLSAnnotationTerms returns [EObject current=null]
 							"terms",
 							lv_terms_2_0,
 							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSAnnotation");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleVLSTffTerm
+entryRuleVLSTffTerm returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTffTermRule()); }
+	iv_ruleVLSTffTerm=ruleVLSTffTerm
+	{ $current=$iv_ruleVLSTffTerm.current; }
+	EOF;
+
+// Rule VLSTffTerm
+ruleVLSTffTerm returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getVLSTffTermAccess().getVLSTermParserRuleCall_0());
+		}
+		this_VLSTerm_0=ruleVLSTerm
+		{
+			$current = $this_VLSTerm_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSTffTermAccess().getVLSDeclarationParserRuleCall_1());
+		}
+		this_VLSDeclaration_1=ruleVLSDeclaration
+		{
+			$current = $this_VLSDeclaration_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleVLSDeclaration
+entryRuleVLSDeclaration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSDeclarationRule()); }
+	iv_ruleVLSDeclaration=ruleVLSDeclaration
+	{ $current=$iv_ruleVLSDeclaration.current; }
+	EOF;
+
+// Rule VLSDeclaration
+ruleVLSDeclaration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getVLSDeclarationAccess().getVLSVariableDeclarationParserRuleCall_0());
+		}
+		this_VLSVariableDeclaration_0=ruleVLSVariableDeclaration
+		{
+			$current = $this_VLSVariableDeclaration_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSDeclarationAccess().getVLSOtherDeclarationParserRuleCall_1());
+		}
+		this_VLSOtherDeclaration_1=ruleVLSOtherDeclaration
+		{
+			$current = $this_VLSOtherDeclaration_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleVLSOtherDeclaration
+entryRuleVLSOtherDeclaration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSOtherDeclarationRule()); }
+	iv_ruleVLSOtherDeclaration=ruleVLSOtherDeclaration
+	{ $current=$iv_ruleVLSOtherDeclaration.current; }
+	EOF;
+
+// Rule VLSOtherDeclaration
+ruleVLSOtherDeclaration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getVLSOtherDeclarationAccess().getVLSAtomicConstantParserRuleCall_0());
+		}
+		this_VLSAtomicConstant_0=ruleVLSAtomicConstant
+		{
+			$current = $this_VLSAtomicConstant_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1=':'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getVLSOtherDeclarationAccess().getColonKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSOtherDeclarationAccess().getTypeVLSTypeDefParserRuleCall_2_0());
+				}
+				lv_type_2_0=ruleVLSTypeDef
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSOtherDeclarationRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_2_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTypeDef");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleVLSVariableDeclaration
+entryRuleVLSVariableDeclaration returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSVariableDeclarationRule()); }
+	iv_ruleVLSVariableDeclaration=ruleVLSVariableDeclaration
+	{ $current=$iv_ruleVLSVariableDeclaration.current; }
+	EOF;
+
+// Rule VLSVariableDeclaration
+ruleVLSVariableDeclaration returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getVLSVariableDeclarationAccess().getVLSVariableParserRuleCall_0());
+		}
+		this_VLSVariable_0=ruleVLSVariable
+		{
+			$current = $this_VLSVariable_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1=':'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getVLSVariableDeclarationAccess().getColonKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSVariableDeclarationAccess().getTypeVLSTypeDefParserRuleCall_2_0());
+				}
+				lv_type_2_0=ruleVLSTypeDef
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSVariableDeclarationRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_2_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTypeDef");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleVLSTypeDef
+entryRuleVLSTypeDef returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSTypeDefRule()); }
+	iv_ruleVLSTypeDef=ruleVLSTypeDef
+	{ $current=$iv_ruleVLSTypeDef.current; }
+	EOF;
+
+// Rule VLSTypeDef
+ruleVLSTypeDef returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSTypeDefAccess().getTypeSigVLSUnitaryTermParserRuleCall_0_0());
+				}
+				lv_typeSig_0_0=ruleVLSUnitaryTerm
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSTypeDefRule());
+					}
+					set(
+						$current,
+						"typeSig",
+						lv_typeSig_0_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSUnitaryTerm");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_1='>'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getVLSTypeDefAccess().getGreaterThanSignKeyword_1_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getVLSTypeDefAccess().getMapsToVLSAtomicConstantParserRuleCall_1_1_0());
+					}
+					lv_mapsTo_2_0=ruleVLSAtomicConstant
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getVLSTypeDefRule());
+						}
+						set(
+							$current,
+							"mapsTo",
+							lv_mapsTo_2_0,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSAtomicConstant");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleVLSUnitaryTerm
+entryRuleVLSUnitaryTerm returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSUnitaryTermRule()); }
+	iv_ruleVLSUnitaryTerm=ruleVLSUnitaryTerm
+	{ $current=$iv_ruleVLSUnitaryTerm.current; }
+	EOF;
+
+// Rule VLSUnitaryTerm
+ruleVLSUnitaryTerm returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSUnitaryTermAccess().getInitTypeVLSAtomicParserRuleCall_0_0());
+				}
+				lv_initType_0_0=ruleVLSAtomic
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSUnitaryTermRule());
+					}
+					set(
+						$current,
+						"initType",
+						lv_initType_0_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSAtomic");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_1='*'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getVLSUnitaryTermAccess().getAsteriskKeyword_1_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getVLSUnitaryTermAccess().getNextTypeVLSAtomicConstantParserRuleCall_1_1_0());
+					}
+					lv_nextType_2_0=ruleVLSAtomicConstant
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getVLSUnitaryTermRule());
+						}
+						set(
+							$current,
+							"nextType",
+							lv_nextType_2_0,
+							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSAtomicConstant");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -1378,21 +1659,39 @@ ruleVLSUniversalQuantifier returns [EObject current=null]
 			}
 			(
 				(
-					{
-						newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0());
-					}
-					lv_variables_3_0=ruleVLSVariable
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getVLSUniversalQuantifierRule());
+					(
+						{
+							newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0_0());
 						}
-						add(
-							$current,
-							"variables",
-							lv_variables_3_0,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
-						afterParserOrEnumRuleCall();
-					}
+						lv_variables_3_1=ruleVLSVariable
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getVLSUniversalQuantifierRule());
+							}
+							add(
+								$current,
+								"variables",
+								lv_variables_3_1,
+								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
+							afterParserOrEnumRuleCall();
+						}
+						    |
+						{
+							newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1());
+						}
+						lv_variables_3_2=ruleVLSVariableDeclaration
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getVLSUniversalQuantifierRule());
+							}
+							add(
+								$current,
+								"variables",
+								lv_variables_3_2,
+								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariableDeclaration");
+							afterParserOrEnumRuleCall();
+						}
+					)
 				)
 			)
 			(
@@ -1402,21 +1701,39 @@ ruleVLSUniversalQuantifier returns [EObject current=null]
 				}
 				(
 					(
-						{
-							newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0());
-						}
-						lv_variables_5_0=ruleVLSVariable
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getVLSUniversalQuantifierRule());
+						(
+							{
+								newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0_0());
 							}
-							add(
-								$current,
-								"variables",
-								lv_variables_5_0,
-								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
-							afterParserOrEnumRuleCall();
-						}
+							lv_variables_5_1=ruleVLSVariable
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getVLSUniversalQuantifierRule());
+								}
+								add(
+									$current,
+									"variables",
+									lv_variables_5_1,
+									"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
+								afterParserOrEnumRuleCall();
+							}
+							    |
+							{
+								newCompositeNode(grammarAccess.getVLSUniversalQuantifierAccess().getVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1());
+							}
+							lv_variables_5_2=ruleVLSVariableDeclaration
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getVLSUniversalQuantifierRule());
+								}
+								add(
+									$current,
+									"variables",
+									lv_variables_5_2,
+									"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariableDeclaration");
+								afterParserOrEnumRuleCall();
+							}
+						)
 					)
 				)
 			)*
@@ -1485,21 +1802,39 @@ ruleVLSExistentialQuantifier returns [EObject current=null]
 			}
 			(
 				(
-					{
-						newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0());
-					}
-					lv_variables_3_0=ruleVLSVariable
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getVLSExistentialQuantifierRule());
+					(
+						{
+							newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_2_0_0());
 						}
-						add(
-							$current,
-							"variables",
-							lv_variables_3_0,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
-						afterParserOrEnumRuleCall();
-					}
+						lv_variables_3_1=ruleVLSVariable
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getVLSExistentialQuantifierRule());
+							}
+							add(
+								$current,
+								"variables",
+								lv_variables_3_1,
+								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
+							afterParserOrEnumRuleCall();
+						}
+						    |
+						{
+							newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1());
+						}
+						lv_variables_3_2=ruleVLSVariableDeclaration
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getVLSExistentialQuantifierRule());
+							}
+							add(
+								$current,
+								"variables",
+								lv_variables_3_2,
+								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariableDeclaration");
+							afterParserOrEnumRuleCall();
+						}
+					)
 				)
 			)
 			(
@@ -1509,21 +1844,39 @@ ruleVLSExistentialQuantifier returns [EObject current=null]
 				}
 				(
 					(
-						{
-							newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0());
-						}
-						lv_variables_5_0=ruleVLSVariable
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getVLSExistentialQuantifierRule());
+						(
+							{
+								newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableParserRuleCall_1_3_1_0_0());
 							}
-							add(
-								$current,
-								"variables",
-								lv_variables_5_0,
-								"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
-							afterParserOrEnumRuleCall();
-						}
+							lv_variables_5_1=ruleVLSVariable
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getVLSExistentialQuantifierRule());
+								}
+								add(
+									$current,
+									"variables",
+									lv_variables_5_1,
+									"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
+								afterParserOrEnumRuleCall();
+							}
+							    |
+							{
+								newCompositeNode(grammarAccess.getVLSExistentialQuantifierAccess().getVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1());
+							}
+							lv_variables_5_2=ruleVLSVariableDeclaration
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getVLSExistentialQuantifierRule());
+								}
+								add(
+									$current,
+									"variables",
+									lv_variables_5_2,
+									"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariableDeclaration");
+								afterParserOrEnumRuleCall();
+							}
+						)
 					)
 				)
 			)*
@@ -2392,15 +2745,15 @@ ruleVLSDefinedTerm returns [EObject current=null]
 			(
 				{
 					$current = forceCreateModelElement(
-						grammarAccess.getVLSDefinedTermAccess().getVLSRealAction_1_0(),
+						grammarAccess.getVLSDefinedTermAccess().getVLSDoubleQuoteAction_1_0(),
 						$current);
 				}
 			)
 			(
 				(
-					lv_value_3_0=RULE_SIGNED_REAL_ID
+					lv_value_3_0=RULE_DOUBLE_QUOTE
 					{
-						newLeafNode(lv_value_3_0, grammarAccess.getVLSDefinedTermAccess().getValueSIGNED_REAL_IDTerminalRuleCall_1_1_0());
+						newLeafNode(lv_value_3_0, grammarAccess.getVLSDefinedTermAccess().getValueDOUBLE_QUOTETerminalRuleCall_1_1_0());
 					}
 					{
 						if ($current==null) {
@@ -2410,62 +2763,6 @@ ruleVLSDefinedTerm returns [EObject current=null]
 							$current,
 							"value",
 							lv_value_3_0,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_REAL_ID");
-					}
-				)
-			)
-		)
-		    |
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getVLSDefinedTermAccess().getVLSRationalAction_2_0(),
-						$current);
-				}
-			)
-			(
-				(
-					lv_value_5_0=RULE_SIGNED_RAT_ID
-					{
-						newLeafNode(lv_value_5_0, grammarAccess.getVLSDefinedTermAccess().getValueSIGNED_RAT_IDTerminalRuleCall_2_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSDefinedTermRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"value",
-							lv_value_5_0,
-							"ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_RAT_ID");
-					}
-				)
-			)
-		)
-		    |
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getVLSDefinedTermAccess().getVLSDoubleQuoteAction_3_0(),
-						$current);
-				}
-			)
-			(
-				(
-					lv_value_7_0=RULE_DOUBLE_QUOTE
-					{
-						newLeafNode(lv_value_7_0, grammarAccess.getVLSDefinedTermAccess().getValueDOUBLE_QUOTETerminalRuleCall_3_1_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getVLSDefinedTermRule());
-						}
-						setWithLastConsumed(
-							$current,
-							"value",
-							lv_value_7_0,
 							"ca.mcgill.ecse.dslreasoner.VampireLanguage.DOUBLE_QUOTE");
 					}
 				)
@@ -2494,21 +2791,9 @@ RULE_LITERAL : ('0'|'1'..'9' RULE_INT?);
 
 RULE_SIGNED_LITERAL : RULE_SIGN* RULE_LITERAL;
 
-fragment RULE_UNSIGNED_REAL_FRAC_ID : RULE_LITERAL '.' RULE_INT;
+RULE_SINGLE_COMMENT : '%' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-fragment RULE_UNSIGNED_REAL_EXP_ID : (RULE_LITERAL|RULE_UNSIGNED_REAL_FRAC_ID) 'Ee' RULE_SIGN* RULE_INT;
-
-RULE_SIGNED_REAL_ID : RULE_SIGN* (RULE_UNSIGNED_REAL_FRAC_ID|RULE_UNSIGNED_REAL_EXP_ID);
-
-fragment RULE_UNSIGNED_RAT_ID : RULE_LITERAL '/' '1'..'9' RULE_INT?;
-
-RULE_SIGNED_RAT_ID : RULE_SIGN* RULE_UNSIGNED_RAT_ID;
-
-fragment RULE_ID : ~(('\n'|'\r'))*;
-
-fragment RULE_ANY_OTHER : RULE_ID;
-
-RULE_SINGLE_COMMENT : RULE_ANY_OTHER;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 fragment RULE_INT : ('0'..'9')+;
 
@@ -2519,3 +2804,5 @@ RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+RULE_ANY_OTHER : .;

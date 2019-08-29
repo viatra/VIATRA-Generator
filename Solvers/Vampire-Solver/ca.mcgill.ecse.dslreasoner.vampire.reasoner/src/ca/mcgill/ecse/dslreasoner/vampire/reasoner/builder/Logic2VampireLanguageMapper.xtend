@@ -61,7 +61,7 @@ class Logic2VampireLanguageMapper {
 		// create model bases
 		// TODO
 		val initialComment = createVLSComment => [
-			it.comment = "This is an initial Test Comment"
+			it.comment = "%This is an initial Test Comment"
 		]
 
 		val specification = createVampireModel => [
@@ -163,10 +163,10 @@ class Logic2VampireLanguageMapper {
 		createVLSInt => [it.value = literal.value.toString()]
 	}
 
-	def dispatch protected VLSTerm transformTerm(RealLiteral literal, Logic2VampireLanguageMapperTrace trace,
-		Map<Variable, VLSVariable> variables) {
-		createVLSReal => [it.value = literal.value.toString()]
-	}
+//	def dispatch protected VLSTerm transformTerm(RealLiteral literal, Logic2VampireLanguageMapperTrace trace,
+//		Map<Variable, VLSVariable> variables) {
+//		createVLSReal => [it.value = literal.value.toString()]
+//	}
 
 	def dispatch protected VLSTerm transformTerm(Not not, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {

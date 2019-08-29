@@ -9,6 +9,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
@@ -76,7 +77,7 @@ public class Logic2VampireLanguageMapper_RelationMapper {
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it_1) -> {
         for (final VLSVariable v : relVar2VLS) {
-          EList<VLSVariable> _variables = it_1.getVariables();
+          EList<VLSVariableDeclaration> _variables = it_1.getVariables();
           VLSVariable _duplicate = this.support.duplicate(v);
           _variables.add(_duplicate);
         }

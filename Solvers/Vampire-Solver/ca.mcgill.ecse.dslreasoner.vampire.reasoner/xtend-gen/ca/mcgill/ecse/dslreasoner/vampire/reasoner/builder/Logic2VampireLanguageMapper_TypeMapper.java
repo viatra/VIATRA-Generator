@@ -15,6 +15,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -143,7 +144,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
             it.setFofRole("axiom");
             VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
             final Procedure1<VLSUniversalQuantifier> _function_3 = (VLSUniversalQuantifier it_1) -> {
-              EList<VLSVariable> _variables = it_1.getVariables();
+              EList<VLSVariableDeclaration> _variables = it_1.getVariables();
               VLSVariable _duplicate = this.support.duplicate(variable);
               _variables.add(_duplicate);
               VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
@@ -193,7 +194,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
                 it.setFofRole("axiom");
                 VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
                 final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
-                  EList<VLSVariable> _variables = it_1.getVariables();
+                  EList<VLSVariableDeclaration> _variables = it_1.getVariables();
                   VLSVariable _duplicate = this.support.duplicate(variable);
                   _variables.add(_duplicate);
                   VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
@@ -263,7 +264,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
         it.setFofRole("axiom");
         VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
         final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
-          EList<VLSVariable> _variables = it_1.getVariables();
+          EList<VLSVariableDeclaration> _variables = it_1.getVariables();
           VLSVariable _duplicate = this.support.duplicate(variable);
           _variables.add(_duplicate);
           VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
@@ -291,7 +292,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
         it.setFofRole("axiom");
         VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
         final Procedure1<VLSUniversalQuantifier> _function_6 = (VLSUniversalQuantifier it_1) -> {
-          EList<VLSVariable> _variables = it_1.getVariables();
+          EList<VLSVariableDeclaration> _variables = it_1.getVariables();
           VLSVariable _duplicate = this.support.duplicate(variable);
           _variables.add(_duplicate);
           VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();

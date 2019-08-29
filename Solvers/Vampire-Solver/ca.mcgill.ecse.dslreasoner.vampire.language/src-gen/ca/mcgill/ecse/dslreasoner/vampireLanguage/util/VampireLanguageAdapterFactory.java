@@ -81,16 +81,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVampireModelAdapter();
       }
       @Override
-      public Adapter caseVLSInclude(VLSInclude object)
-      {
-        return createVLSIncludeAdapter();
-      }
-      @Override
-      public Adapter caseVLSName(VLSName object)
-      {
-        return createVLSNameAdapter();
-      }
-      @Override
       public Adapter caseVLSComment(VLSComment object)
       {
         return createVLSCommentAdapter();
@@ -99,11 +89,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVLSConfirmations(VLSConfirmations object)
       {
         return createVLSConfirmationsAdapter();
-      }
-      @Override
-      public Adapter caseVLSSatisfiable(VLSSatisfiable object)
-      {
-        return createVLSSatisfiableAdapter();
       }
       @Override
       public Adapter caseVLSFofFormula(VLSFofFormula object)
@@ -119,6 +104,31 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVLSAnnotation(VLSAnnotation object)
       {
         return createVLSAnnotationAdapter();
+      }
+      @Override
+      public Adapter caseVLSTffTerm(VLSTffTerm object)
+      {
+        return createVLSTffTermAdapter();
+      }
+      @Override
+      public Adapter caseVLSDeclaration(VLSDeclaration object)
+      {
+        return createVLSDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseVLSOtherDeclaration(VLSOtherDeclaration object)
+      {
+        return createVLSOtherDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseVLSVariableDeclaration(VLSVariableDeclaration object)
+      {
+        return createVLSVariableDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseVLSTypeDef(VLSTypeDef object)
+      {
+        return createVLSTypeDefAdapter();
       }
       @Override
       public Adapter caseVLSTerm(VLSTerm object)
@@ -139,6 +149,26 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVLSDefinedTerm(VLSDefinedTerm object)
       {
         return createVLSDefinedTermAdapter();
+      }
+      @Override
+      public Adapter caseVLSSatisfiable(VLSSatisfiable object)
+      {
+        return createVLSSatisfiableAdapter();
+      }
+      @Override
+      public Adapter caseVLSWarning(VLSWarning object)
+      {
+        return createVLSWarningAdapter();
+      }
+      @Override
+      public Adapter caseVLSTrying(VLSTrying object)
+      {
+        return createVLSTryingAdapter();
+      }
+      @Override
+      public Adapter caseVLSFiniteModel(VLSFiniteModel object)
+      {
+        return createVLSFiniteModelAdapter();
       }
       @Override
       public Adapter caseVLSEquivalent(VLSEquivalent object)
@@ -241,16 +271,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSIntAdapter();
       }
       @Override
-      public Adapter caseVLSReal(VLSReal object)
-      {
-        return createVLSRealAdapter();
-      }
-      @Override
-      public Adapter caseVLSRational(VLSRational object)
-      {
-        return createVLSRationalAdapter();
-      }
-      @Override
       public Adapter caseVLSDoubleQuote(VLSDoubleQuote object)
       {
         return createVLSDoubleQuoteAdapter();
@@ -293,36 +313,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInclude <em>VLS Include</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInclude
-   * @generated
-   */
-  public Adapter createVLSIncludeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSName <em>VLS Name</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSName
-   * @generated
-   */
-  public Adapter createVLSNameAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSComment <em>VLS Comment</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -348,21 +338,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSConfirmationsAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable <em>VLS Satisfiable</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable
-   * @generated
-   */
-  public Adapter createVLSSatisfiableAdapter()
   {
     return null;
   }
@@ -408,6 +383,81 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSAnnotationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffTerm <em>VLS Tff Term</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffTerm
+   * @generated
+   */
+  public Adapter createVLSTffTermAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDeclaration <em>VLS Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDeclaration
+   * @generated
+   */
+  public Adapter createVLSDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration <em>VLS Other Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration
+   * @generated
+   */
+  public Adapter createVLSOtherDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration <em>VLS Variable Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration
+   * @generated
+   */
+  public Adapter createVLSVariableDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTypeDef <em>VLS Type Def</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTypeDef
+   * @generated
+   */
+  public Adapter createVLSTypeDefAdapter()
   {
     return null;
   }
@@ -468,6 +518,66 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSDefinedTermAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable <em>VLS Satisfiable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable
+   * @generated
+   */
+  public Adapter createVLSSatisfiableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSWarning <em>VLS Warning</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSWarning
+   * @generated
+   */
+  public Adapter createVLSWarningAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying <em>VLS Trying</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying
+   * @generated
+   */
+  public Adapter createVLSTryingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel <em>VLS Finite Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFiniteModel
+   * @generated
+   */
+  public Adapter createVLSFiniteModelAdapter()
   {
     return null;
   }
@@ -768,36 +878,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSIntAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSReal <em>VLS Real</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSReal
-   * @generated
-   */
-  public Adapter createVLSRealAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSRational <em>VLS Rational</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSRational
-   * @generated
-   */
-  public Adapter createVLSRationalAdapter()
   {
     return null;
   }

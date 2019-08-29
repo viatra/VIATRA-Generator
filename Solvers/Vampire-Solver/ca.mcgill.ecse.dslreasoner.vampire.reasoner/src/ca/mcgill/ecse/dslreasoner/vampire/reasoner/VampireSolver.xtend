@@ -6,6 +6,8 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguageFactoryImpl
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
@@ -13,7 +15,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_TypeMapper
+import org.eclipse.emf.ecore.resource.Resource
 
 class VampireSolver extends LogicReasoner {
 
@@ -55,6 +57,16 @@ class VampireSolver extends LogicReasoner {
 		if (writeFile) {
 			fileURI = workspace.writeModel(vampireProblem, fileName).toFileString
 		}
+		
+		
+		
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tptp", new VampireLanguageFactoryImpl)
+////		val Resource resource = Resource.
+////		Resource.getResource(wsURI+"problem.tptp") as Resource
+////		resource
+//		val model = workspace.readModel(VampireModel, "problem.tptp").eResource.contents
+//		println(model)
+		
 
 		// Result as String
 		val transformationTime = System.currentTimeMillis - transformationStart

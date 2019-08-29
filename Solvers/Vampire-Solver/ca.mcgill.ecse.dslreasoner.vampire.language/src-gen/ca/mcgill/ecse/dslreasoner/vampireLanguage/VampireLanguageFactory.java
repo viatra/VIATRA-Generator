@@ -33,24 +33,6 @@ public interface VampireLanguageFactory extends EFactory
   VampireModel createVampireModel();
 
   /**
-   * Returns a new object of class '<em>VLS Include</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Include</em>'.
-   * @generated
-   */
-  VLSInclude createVLSInclude();
-
-  /**
-   * Returns a new object of class '<em>VLS Name</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Name</em>'.
-   * @generated
-   */
-  VLSName createVLSName();
-
-  /**
    * Returns a new object of class '<em>VLS Comment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,15 +49,6 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSConfirmations createVLSConfirmations();
-
-  /**
-   * Returns a new object of class '<em>VLS Satisfiable</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Satisfiable</em>'.
-   * @generated
-   */
-  VLSSatisfiable createVLSSatisfiable();
 
   /**
    * Returns a new object of class '<em>VLS Fof Formula</em>'.
@@ -103,6 +76,51 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSAnnotation createVLSAnnotation();
+
+  /**
+   * Returns a new object of class '<em>VLS Tff Term</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Tff Term</em>'.
+   * @generated
+   */
+  VLSTffTerm createVLSTffTerm();
+
+  /**
+   * Returns a new object of class '<em>VLS Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Declaration</em>'.
+   * @generated
+   */
+  VLSDeclaration createVLSDeclaration();
+
+  /**
+   * Returns a new object of class '<em>VLS Other Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Other Declaration</em>'.
+   * @generated
+   */
+  VLSOtherDeclaration createVLSOtherDeclaration();
+
+  /**
+   * Returns a new object of class '<em>VLS Variable Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Variable Declaration</em>'.
+   * @generated
+   */
+  VLSVariableDeclaration createVLSVariableDeclaration();
+
+  /**
+   * Returns a new object of class '<em>VLS Type Def</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Type Def</em>'.
+   * @generated
+   */
+  VLSTypeDef createVLSTypeDef();
 
   /**
    * Returns a new object of class '<em>VLS Term</em>'.
@@ -139,6 +157,42 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSDefinedTerm createVLSDefinedTerm();
+
+  /**
+   * Returns a new object of class '<em>VLS Satisfiable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Satisfiable</em>'.
+   * @generated
+   */
+  VLSSatisfiable createVLSSatisfiable();
+
+  /**
+   * Returns a new object of class '<em>VLS Warning</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Warning</em>'.
+   * @generated
+   */
+  VLSWarning createVLSWarning();
+
+  /**
+   * Returns a new object of class '<em>VLS Trying</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Trying</em>'.
+   * @generated
+   */
+  VLSTrying createVLSTrying();
+
+  /**
+   * Returns a new object of class '<em>VLS Finite Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Finite Model</em>'.
+   * @generated
+   */
+  VLSFiniteModel createVLSFiniteModel();
 
   /**
    * Returns a new object of class '<em>VLS Equivalent</em>'.
@@ -319,24 +373,6 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSInt createVLSInt();
-
-  /**
-   * Returns a new object of class '<em>VLS Real</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Real</em>'.
-   * @generated
-   */
-  VLSReal createVLSReal();
-
-  /**
-   * Returns a new object of class '<em>VLS Rational</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Rational</em>'.
-   * @generated
-   */
-  VLSRational createVLSRational();
 
   /**
    * Returns a new object of class '<em>VLS Double Quote</em>'.

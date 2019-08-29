@@ -20,7 +20,7 @@ package ca.mcgill.ecse.dslreasoner.vampireLanguage;
  * @model
  * @generated
  */
-public interface VLSVariable extends VLSTerm
+public interface VLSVariable extends VLSVariableDeclaration, VLSTerm
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

@@ -26,16 +26,14 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class VampireModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VampireModel");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cIncludesAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cIncludesVLSIncludeParserRuleCall_0_0 = (RuleCall)cIncludesAssignment_0.eContents().get(0);
-		private final Assignment cCommentsAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cCommentsVLSCommentParserRuleCall_1_0 = (RuleCall)cCommentsAssignment_1.eContents().get(0);
-		private final Assignment cConfirmationsAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
-		private final RuleCall cConfirmationsVLSConfirmationsParserRuleCall_2_0 = (RuleCall)cConfirmationsAssignment_2.eContents().get(0);
-		private final Assignment cFormulasAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
-		private final RuleCall cFormulasVLSFofFormulaParserRuleCall_3_0 = (RuleCall)cFormulasAssignment_3.eContents().get(0);
-		private final Assignment cTfformulasAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
-		private final RuleCall cTfformulasVLSTffFormulaParserRuleCall_4_0 = (RuleCall)cTfformulasAssignment_4.eContents().get(0);
+		private final Assignment cCommentsAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cCommentsVLSCommentParserRuleCall_0_0 = (RuleCall)cCommentsAssignment_0.eContents().get(0);
+		private final Assignment cConfirmationsAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cConfirmationsVLSConfirmationsParserRuleCall_1_0 = (RuleCall)cConfirmationsAssignment_1.eContents().get(0);
+		private final Assignment cFormulasAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cFormulasVLSFofFormulaParserRuleCall_2_0 = (RuleCall)cFormulasAssignment_2.eContents().get(0);
+		private final Assignment cTfformulasAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cTfformulasVLSTffFormulaParserRuleCall_3_0 = (RuleCall)cTfformulasAssignment_3.eContents().get(0);
 		
 		////@@@@@@@@@@@
 		////2 things TODO:
@@ -43,196 +41,179 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		////2. can only use declared variables in formula (ln 158)
 		////@@@@@@@@@@@
 		//VampireModel:
-		//	(includes+=VLSInclude | comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula |
-		//	tfformulas+=VLSTffFormula)*;
+		//	(comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula | tfformulas+=VLSTffFormula)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(includes+=VLSInclude | comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula |
-		//tfformulas+=VLSTffFormula)*
+		//(comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula | tfformulas+=VLSTffFormula)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//includes+=VLSInclude
-		public Assignment getIncludesAssignment_0() { return cIncludesAssignment_0; }
-		
-		//VLSInclude
-		public RuleCall getIncludesVLSIncludeParserRuleCall_0_0() { return cIncludesVLSIncludeParserRuleCall_0_0; }
-		
+		////		includes += VLSInclude |
 		//comments+=VLSComment
-		public Assignment getCommentsAssignment_1() { return cCommentsAssignment_1; }
+		public Assignment getCommentsAssignment_0() { return cCommentsAssignment_0; }
 		
 		//VLSComment
-		public RuleCall getCommentsVLSCommentParserRuleCall_1_0() { return cCommentsVLSCommentParserRuleCall_1_0; }
+		public RuleCall getCommentsVLSCommentParserRuleCall_0_0() { return cCommentsVLSCommentParserRuleCall_0_0; }
 		
 		//confirmations+=VLSConfirmations
-		public Assignment getConfirmationsAssignment_2() { return cConfirmationsAssignment_2; }
+		public Assignment getConfirmationsAssignment_1() { return cConfirmationsAssignment_1; }
 		
 		//VLSConfirmations
-		public RuleCall getConfirmationsVLSConfirmationsParserRuleCall_2_0() { return cConfirmationsVLSConfirmationsParserRuleCall_2_0; }
+		public RuleCall getConfirmationsVLSConfirmationsParserRuleCall_1_0() { return cConfirmationsVLSConfirmationsParserRuleCall_1_0; }
 		
 		//formulas+=VLSFofFormula
-		public Assignment getFormulasAssignment_3() { return cFormulasAssignment_3; }
+		public Assignment getFormulasAssignment_2() { return cFormulasAssignment_2; }
 		
 		//VLSFofFormula
-		public RuleCall getFormulasVLSFofFormulaParserRuleCall_3_0() { return cFormulasVLSFofFormulaParserRuleCall_3_0; }
+		public RuleCall getFormulasVLSFofFormulaParserRuleCall_2_0() { return cFormulasVLSFofFormulaParserRuleCall_2_0; }
 		
 		//tfformulas+=VLSTffFormula
-		public Assignment getTfformulasAssignment_4() { return cTfformulasAssignment_4; }
+		public Assignment getTfformulasAssignment_3() { return cTfformulasAssignment_3; }
 		
 		//VLSTffFormula
-		public RuleCall getTfformulasVLSTffFormulaParserRuleCall_4_0() { return cTfformulasVLSTffFormulaParserRuleCall_4_0; }
+		public RuleCall getTfformulasVLSTffFormulaParserRuleCall_3_0() { return cTfformulasVLSTffFormulaParserRuleCall_3_0; }
 	}
-	public class VLSIncludeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSInclude");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cIncludeKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cFileNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cFileNameSINGLE_QUOTETerminalRuleCall_1_0 = (RuleCall)cFileNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cNamesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cNamesVLSNameParserRuleCall_2_1_0 = (RuleCall)cNamesAssignment_2_1.eContents().get(0);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
-		private final Assignment cNamesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cNamesVLSNameParserRuleCall_2_2_1_0 = (RuleCall)cNamesAssignment_2_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+	public class VLSCommentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSComment");
+		private final Assignment cCommentAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cCommentSINGLE_COMMENTTerminalRuleCall_0 = (RuleCall)cCommentAssignment.eContents().get(0);
 		
 		////terminal ID:  ( !('('|')'|'\r'|'\n') )+ ;
 		////////////////////////////////////
 		//// VLS types
 		////////////////////////////////////
 		//// <includes>
-		//VLSInclude:
-		//	'include(' fileName=SINGLE_QUOTE (',[' names+=VLSName (',' names+=VLSName)* ']')?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'include(' fileName=SINGLE_QUOTE (',[' names+=VLSName (',' names+=VLSName)* ']')?
-		public Group getGroup() { return cGroup; }
-		
-		//'include('
-		public Keyword getIncludeKeyword_0() { return cIncludeKeyword_0; }
-		
-		//fileName=SINGLE_QUOTE
-		public Assignment getFileNameAssignment_1() { return cFileNameAssignment_1; }
-		
-		//SINGLE_QUOTE
-		public RuleCall getFileNameSINGLE_QUOTETerminalRuleCall_1_0() { return cFileNameSINGLE_QUOTETerminalRuleCall_1_0; }
-		
-		//(',[' names+=VLSName (',' names+=VLSName)* ']')?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//',['
-		public Keyword getCommaLeftSquareBracketKeyword_2_0() { return cCommaLeftSquareBracketKeyword_2_0; }
-		
-		//names+=VLSName
-		public Assignment getNamesAssignment_2_1() { return cNamesAssignment_2_1; }
-		
-		//VLSName
-		public RuleCall getNamesVLSNameParserRuleCall_2_1_0() { return cNamesVLSNameParserRuleCall_2_1_0; }
-		
-		//(',' names+=VLSName)*
-		public Group getGroup_2_2() { return cGroup_2_2; }
-		
-		//','
-		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
-		
-		//names+=VLSName
-		public Assignment getNamesAssignment_2_2_1() { return cNamesAssignment_2_2_1; }
-		
-		//VLSName
-		public RuleCall getNamesVLSNameParserRuleCall_2_2_1_0() { return cNamesVLSNameParserRuleCall_2_2_1_0; }
-		
-		//']'
-		public Keyword getRightSquareBracketKeyword_2_3() { return cRightSquareBracketKeyword_2_3; }
-	}
-	public class VLSNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSName");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final Alternatives cNameAlternatives_0 = (Alternatives)cNameAssignment.eContents().get(0);
-		private final RuleCall cNameLOWER_WORD_IDTerminalRuleCall_0_0 = (RuleCall)cNameAlternatives_0.eContents().get(0);
-		private final RuleCall cNameSINGLE_QUOTETerminalRuleCall_0_1 = (RuleCall)cNameAlternatives_0.eContents().get(1);
-		private final RuleCall cNameLITERALTerminalRuleCall_0_2 = (RuleCall)cNameAlternatives_0.eContents().get(2);
-		private final RuleCall cNameSIGNED_LITERALTerminalRuleCall_0_3 = (RuleCall)cNameAlternatives_0.eContents().get(3);
-		
-		//VLSName:
-		//	name=(LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL);
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name=(LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//(LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
-		public Alternatives getNameAlternatives_0() { return cNameAlternatives_0; }
-		
-		//LOWER_WORD_ID
-		public RuleCall getNameLOWER_WORD_IDTerminalRuleCall_0_0() { return cNameLOWER_WORD_IDTerminalRuleCall_0_0; }
-		
-		//SINGLE_QUOTE
-		public RuleCall getNameSINGLE_QUOTETerminalRuleCall_0_1() { return cNameSINGLE_QUOTETerminalRuleCall_0_1; }
-		
-		//LITERAL
-		public RuleCall getNameLITERALTerminalRuleCall_0_2() { return cNameLITERALTerminalRuleCall_0_2; }
-		
-		//SIGNED_LITERAL
-		public RuleCall getNameSIGNED_LITERALTerminalRuleCall_0_3() { return cNameSIGNED_LITERALTerminalRuleCall_0_3; }
-	}
-	public class VLSCommentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSComment");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPercentSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cCommentAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cCommentSINGLE_COMMENTTerminalRuleCall_1_0 = (RuleCall)cCommentAssignment_1.eContents().get(0);
-		
+		////VLSInclude:
+		////	'include(' fileName = SINGLE_QUOTE ( ',[' names += VLSName (','  names += VLSName)* ']' )?
+		////;
+		////VLSName:
+		////	name = (LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
+		////;
 		//// <comments>
 		//VLSComment:
-		//	'%' comment=SINGLE_COMMENT
+		//	comment=SINGLE_COMMENT
 		//	//need to add a new line at the end of the file for the case where the last line is a comment
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'%' comment=SINGLE_COMMENT
-		public Group getGroup() { return cGroup; }
-		
-		//'%'
-		public Keyword getPercentSignKeyword_0() { return cPercentSignKeyword_0; }
-		
 		//comment=SINGLE_COMMENT
-		public Assignment getCommentAssignment_1() { return cCommentAssignment_1; }
+		public Assignment getCommentAssignment() { return cCommentAssignment; }
 		
 		//SINGLE_COMMENT
-		public RuleCall getCommentSINGLE_COMMENTTerminalRuleCall_1_0() { return cCommentSINGLE_COMMENTTerminalRuleCall_1_0; }
+		public RuleCall getCommentSINGLE_COMMENTTerminalRuleCall_0() { return cCommentSINGLE_COMMENTTerminalRuleCall_0; }
 	}
 	public class VLSConfirmationsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSConfirmations");
-		private final RuleCall cVLSSatisfiableParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cVLSSatisfiableAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Keyword cSatisfiableKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cVLSWarningAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cWARNINGKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Keyword cCouldKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Keyword cNotKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Keyword cSetKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
+		private final Keyword cResourceKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
+		private final Keyword cLimitKeyword_1_6 = (Keyword)cGroup_1.eContents().get(6);
+		private final Keyword cVirtualKeyword_1_7 = (Keyword)cGroup_1.eContents().get(7);
+		private final Keyword cMemoryKeyword_1_8 = (Keyword)cGroup_1.eContents().get(8);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Action cVLSTryingAction_2_0 = (Action)cGroup_2.eContents().get(0);
+		private final Keyword cTRYINGKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Assignment cNameAssignment_2_3 = (Assignment)cGroup_2.eContents().get(3);
+		private final RuleCall cNameLITERALTerminalRuleCall_2_3_0 = (RuleCall)cNameAssignment_2_3.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Action cVLSFiniteModelAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Keyword cFiniteKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Keyword cModelKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Keyword cFoundKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		////VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
 		//VLSConfirmations:
-		//	VLSSatisfiable //| VLSFiniteModel// | VLSTrying
-		//;
+		//	{VLSSatisfiable} 'Satisfiable!' | {VLSWarning} "WARNING!" "Could" "not" "set" "resource" "limit:" "Virtual" "memory."
+		//	| {VLSTrying} 'TRYING' '[' name=LITERAL ']' | {VLSFiniteModel} 'Finite' 'Model' 'Found!';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//VLSSatisfiable
-		public RuleCall getVLSSatisfiableParserRuleCall() { return cVLSSatisfiableParserRuleCall; }
-	}
-	public class VLSSatisfiableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSSatisfiable");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cVLSSatisfiableAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cSatisfiableKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//VLSSatisfiable:
-		//	{VLSSatisfiable} 'Satisfiable!';
-		@Override public ParserRule getRule() { return rule; }
+		//{VLSSatisfiable} 'Satisfiable!' | {VLSWarning} "WARNING!" "Could" "not" "set" "resource" "limit:" "Virtual" "memory." |
+		//{VLSTrying} 'TRYING' '[' name=LITERAL ']' | {VLSFiniteModel} 'Finite' 'Model' 'Found!'
+		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{VLSSatisfiable} 'Satisfiable!'
-		public Group getGroup() { return cGroup; }
+		public Group getGroup_0() { return cGroup_0; }
 		
 		//{VLSSatisfiable}
-		public Action getVLSSatisfiableAction_0() { return cVLSSatisfiableAction_0; }
+		public Action getVLSSatisfiableAction_0_0() { return cVLSSatisfiableAction_0_0; }
 		
 		//'Satisfiable!'
-		public Keyword getSatisfiableKeyword_1() { return cSatisfiableKeyword_1; }
+		public Keyword getSatisfiableKeyword_0_1() { return cSatisfiableKeyword_0_1; }
+		
+		//{VLSWarning} "WARNING!" "Could" "not" "set" "resource" "limit:" "Virtual" "memory."
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{VLSWarning}
+		public Action getVLSWarningAction_1_0() { return cVLSWarningAction_1_0; }
+		
+		//"WARNING!"
+		public Keyword getWARNINGKeyword_1_1() { return cWARNINGKeyword_1_1; }
+		
+		//"Could"
+		public Keyword getCouldKeyword_1_2() { return cCouldKeyword_1_2; }
+		
+		//"not"
+		public Keyword getNotKeyword_1_3() { return cNotKeyword_1_3; }
+		
+		//"set"
+		public Keyword getSetKeyword_1_4() { return cSetKeyword_1_4; }
+		
+		//"resource"
+		public Keyword getResourceKeyword_1_5() { return cResourceKeyword_1_5; }
+		
+		//"limit:"
+		public Keyword getLimitKeyword_1_6() { return cLimitKeyword_1_6; }
+		
+		//"Virtual"
+		public Keyword getVirtualKeyword_1_7() { return cVirtualKeyword_1_7; }
+		
+		//"memory."
+		public Keyword getMemoryKeyword_1_8() { return cMemoryKeyword_1_8; }
+		
+		//{VLSTrying} 'TRYING' '[' name=LITERAL ']'
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//{VLSTrying}
+		public Action getVLSTryingAction_2_0() { return cVLSTryingAction_2_0; }
+		
+		//'TRYING'
+		public Keyword getTRYINGKeyword_2_1() { return cTRYINGKeyword_2_1; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_2_2() { return cLeftSquareBracketKeyword_2_2; }
+		
+		//name=LITERAL
+		public Assignment getNameAssignment_2_3() { return cNameAssignment_2_3; }
+		
+		//LITERAL
+		public RuleCall getNameLITERALTerminalRuleCall_2_3_0() { return cNameLITERALTerminalRuleCall_2_3_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_2_4() { return cRightSquareBracketKeyword_2_4; }
+		
+		//{VLSFiniteModel} 'Finite' 'Model' 'Found!'
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//{VLSFiniteModel}
+		public Action getVLSFiniteModelAction_3_0() { return cVLSFiniteModelAction_3_0; }
+		
+		//'Finite'
+		public Keyword getFiniteKeyword_3_1() { return cFiniteKeyword_3_1; }
+		
+		//'Model'
+		public Keyword getModelKeyword_3_2() { return cModelKeyword_3_2; }
+		
+		//'Found!'
+		public Keyword getFoundKeyword_3_3() { return cFoundKeyword_3_3; }
 	}
 	public class VLSFofFormulaElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSFofFormula");
@@ -257,13 +238,6 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		private final Keyword cFullStopKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
-		////VLSTrying:
-		////	'TRYING' '[' name = LITERAL ']'
-		////;
-		////
-		////VLSFiniteModel:
-		////	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
-		////;
 		//// <FOF formulas>
 		//VLSFofFormula:
 		//	'fof' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','
@@ -337,16 +311,13 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTffKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final Alternatives cNameAlternatives_2_0 = (Alternatives)cNameAssignment_2.eContents().get(0);
-		private final RuleCall cNameLOWER_WORD_IDTerminalRuleCall_2_0_0 = (RuleCall)cNameAlternatives_2_0.eContents().get(0);
-		private final RuleCall cNameSIGNED_LITERALTerminalRuleCall_2_0_1 = (RuleCall)cNameAlternatives_2_0.eContents().get(1);
-		private final RuleCall cNameSINGLE_QUOTETerminalRuleCall_2_0_2 = (RuleCall)cNameAlternatives_2_0.eContents().get(2);
+		private final RuleCall cNameVLSTffNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cCommaKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cFofRoleAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cFofRoleVLSRoleParserRuleCall_4_0 = (RuleCall)cFofRoleAssignment_4.eContents().get(0);
+		private final Assignment cTffRoleAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTffRoleVLSRoleParserRuleCall_4_0 = (RuleCall)cTffRoleAssignment_4.eContents().get(0);
 		private final Keyword cCommaKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cFofFormulaAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cFofFormulaVLSTermParserRuleCall_6_0 = (RuleCall)cFofFormulaAssignment_6.eContents().get(0);
+		private final RuleCall cFofFormulaVLSTffTermParserRuleCall_6_0 = (RuleCall)cFofFormulaAssignment_6.eContents().get(0);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
 		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cAnnotationsAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
@@ -355,12 +326,10 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//VLSTffFormula:
-		//	'tff' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','
-		//	annotations=VLSAnnotation)? ')' '.';
+		//	'tff' '(' name=VLSTffName ',' tffRole=VLSRole ',' fofFormula=VLSTffTerm (',' annotations=VLSAnnotation)? ')' '.';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'tff' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','
-		//annotations=VLSAnnotation)? ')' '.'
+		//'tff' '(' name=VLSTffName ',' tffRole=VLSRole ',' fofFormula=VLSTffTerm (',' annotations=VLSAnnotation)? ')' '.'
 		public Group getGroup() { return cGroup; }
 		
 		//'tff'
@@ -369,38 +338,29 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 		
-		//name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE)
+		//name=VLSTffName
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
-		//(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE)
-		public Alternatives getNameAlternatives_2_0() { return cNameAlternatives_2_0; }
-		
-		//LOWER_WORD_ID
-		public RuleCall getNameLOWER_WORD_IDTerminalRuleCall_2_0_0() { return cNameLOWER_WORD_IDTerminalRuleCall_2_0_0; }
-		
-		//SIGNED_LITERAL
-		public RuleCall getNameSIGNED_LITERALTerminalRuleCall_2_0_1() { return cNameSIGNED_LITERALTerminalRuleCall_2_0_1; }
-		
-		//SINGLE_QUOTE
-		public RuleCall getNameSINGLE_QUOTETerminalRuleCall_2_0_2() { return cNameSINGLE_QUOTETerminalRuleCall_2_0_2; }
+		//VLSTffName
+		public RuleCall getNameVLSTffNameParserRuleCall_2_0() { return cNameVLSTffNameParserRuleCall_2_0; }
 		
 		//','
 		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
 		
-		//fofRole=VLSRole
-		public Assignment getFofRoleAssignment_4() { return cFofRoleAssignment_4; }
+		//tffRole=VLSRole
+		public Assignment getTffRoleAssignment_4() { return cTffRoleAssignment_4; }
 		
 		//VLSRole
-		public RuleCall getFofRoleVLSRoleParserRuleCall_4_0() { return cFofRoleVLSRoleParserRuleCall_4_0; }
+		public RuleCall getTffRoleVLSRoleParserRuleCall_4_0() { return cTffRoleVLSRoleParserRuleCall_4_0; }
 		
 		//','
 		public Keyword getCommaKeyword_5() { return cCommaKeyword_5; }
 		
-		//fofFormula=VLSTerm
+		//fofFormula=VLSTffTerm
 		public Assignment getFofFormulaAssignment_6() { return cFofFormulaAssignment_6; }
 		
-		//VLSTerm
-		public RuleCall getFofFormulaVLSTermParserRuleCall_6_0() { return cFofFormulaVLSTermParserRuleCall_6_0; }
+		//VLSTffTerm
+		public RuleCall getFofFormulaVLSTffTermParserRuleCall_6_0() { return cFofFormulaVLSTffTermParserRuleCall_6_0; }
 		
 		//(',' annotations=VLSAnnotation)?
 		public Group getGroup_7() { return cGroup_7; }
@@ -419,6 +379,78 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'.'
 		public Keyword getFullStopKeyword_9() { return cFullStopKeyword_9; }
+	}
+	public class VLSTffNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffName");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cVLSTffDeclPredParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cVLSTffFiniteParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVLSTffDistinctParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//VLSTffName:
+		//	VLSTffDeclPred | VLSTffFinite | VLSTffDistinct;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//VLSTffDeclPred | VLSTffFinite | VLSTffDistinct
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//VLSTffDeclPred
+		public RuleCall getVLSTffDeclPredParserRuleCall_0() { return cVLSTffDeclPredParserRuleCall_0; }
+		
+		//VLSTffFinite
+		public RuleCall getVLSTffFiniteParserRuleCall_1() { return cVLSTffFiniteParserRuleCall_1; }
+		
+		//VLSTffDistinct
+		public RuleCall getVLSTffDistinctParserRuleCall_2() { return cVLSTffDistinctParserRuleCall_2; }
+	}
+	public class VLSTffDistinctElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffDistinct");
+		private final Keyword cDistinct_domainKeyword = (Keyword)rule.eContents().get(1);
+		
+		//VLSTffDistinct:
+		//	'distinct_domain';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'distinct_domain'
+		public Keyword getDistinct_domainKeyword() { return cDistinct_domainKeyword; }
+	}
+	public class VLSTffFiniteElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffFinite");
+		private final Keyword cFinite_domainKeyword = (Keyword)rule.eContents().get(1);
+		
+		//VLSTffFinite:
+		//	'finite_domain';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'finite_domain'
+		public Keyword getFinite_domainKeyword() { return cFinite_domainKeyword; }
+	}
+	public class VLSTffDeclPredElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffDeclPred");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Keyword cDeclare_Keyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final RuleCall cDOLLAR_IDTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final RuleCall cLOWER_WORD_IDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//VLSTffDeclPred:
+		//	'declare_' DOLLAR_ID | LOWER_WORD_ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'declare_' DOLLAR_ID | LOWER_WORD_ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//'declare_' DOLLAR_ID
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//'declare_'
+		public Keyword getDeclare_Keyword_0_0() { return cDeclare_Keyword_0_0; }
+		
+		//DOLLAR_ID
+		public RuleCall getDOLLAR_IDTerminalRuleCall_0_1() { return cDOLLAR_IDTerminalRuleCall_0_1; }
+		
+		//LOWER_WORD_ID
+		public RuleCall getLOWER_WORD_IDTerminalRuleCall_1() { return cLOWER_WORD_IDTerminalRuleCall_1; }
 	}
 	public class VLSRoleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSRole");
@@ -517,6 +549,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
+		///*
 		////VLSRole:
 		////	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
 		////	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
@@ -582,7 +615,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		////VLSUnknown:
 		////	"unknown"
 		////;
-		//// <ANNOTATION>
+		//*/ // <ANNOTATION>
 		//// Not at all based on the website. based on what we think the output will be like 
 		//VLSAnnotation:
 		//	'['? name=(LOWER_WORD_ID | SINGLE_QUOTE | VLSRole)? ('(' followup=VLSAnnotationTerms ')')? ']'?;
@@ -662,13 +695,181 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//VLSAnnotation
 		public RuleCall getTermsVLSAnnotationParserRuleCall_1_1_0() { return cTermsVLSAnnotationParserRuleCall_1_1_0; }
 	}
-	public class VLSTermElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTerm");
-		private final RuleCall cVLSBinaryParserRuleCall = (RuleCall)rule.eContents().get(1);
+	public class VLSTffTermElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTffTerm");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cVLSTermParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cVLSDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		////////////////////////////////////
 		//// VLS Terms
 		////////////////////////////////////
+		//VLSTffTerm:
+		//	VLSTerm | VLSDeclaration;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//VLSTerm | VLSDeclaration
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//VLSTerm
+		public RuleCall getVLSTermParserRuleCall_0() { return cVLSTermParserRuleCall_0; }
+		
+		//VLSDeclaration
+		public RuleCall getVLSDeclarationParserRuleCall_1() { return cVLSDeclarationParserRuleCall_1; }
+	}
+	public class VLSDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSDeclaration");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cVLSVariableDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cVLSOtherDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		///////////////////
+		////TFF Specific
+		// VLSDeclaration:
+		//	VLSVariableDeclaration | VLSOtherDeclaration;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//VLSVariableDeclaration | VLSOtherDeclaration
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//VLSVariableDeclaration
+		public RuleCall getVLSVariableDeclarationParserRuleCall_0() { return cVLSVariableDeclarationParserRuleCall_0; }
+		
+		//VLSOtherDeclaration
+		public RuleCall getVLSOtherDeclarationParserRuleCall_1() { return cVLSOtherDeclarationParserRuleCall_1; }
+	}
+	public class VLSOtherDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSOtherDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cVLSAtomicConstantParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypeVLSTypeDefParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
+		
+		//VLSOtherDeclaration:
+		//	VLSAtomicConstant ':' type=VLSTypeDef;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//VLSAtomicConstant ':' type=VLSTypeDef
+		public Group getGroup() { return cGroup; }
+		
+		//VLSAtomicConstant
+		public RuleCall getVLSAtomicConstantParserRuleCall_0() { return cVLSAtomicConstantParserRuleCall_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//type=VLSTypeDef
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		
+		//VLSTypeDef
+		public RuleCall getTypeVLSTypeDefParserRuleCall_2_0() { return cTypeVLSTypeDefParserRuleCall_2_0; }
+	}
+	public class VLSVariableDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariableDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cVLSVariableParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypeVLSTypeDefParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
+		
+		//VLSVariableDeclaration:
+		//	VLSVariable ':' type=VLSTypeDef;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//VLSVariable ':' type=VLSTypeDef
+		public Group getGroup() { return cGroup; }
+		
+		//VLSVariable
+		public RuleCall getVLSVariableParserRuleCall_0() { return cVLSVariableParserRuleCall_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//type=VLSTypeDef
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
+		
+		//VLSTypeDef
+		public RuleCall getTypeVLSTypeDefParserRuleCall_2_0() { return cTypeVLSTypeDefParserRuleCall_2_0; }
+	}
+	public class VLSTypeDefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTypeDef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTypeSigAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTypeSigVLSUnitaryTermParserRuleCall_0_0 = (RuleCall)cTypeSigAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cGreaterThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cMapsToAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cMapsToVLSAtomicConstantParserRuleCall_1_1_0 = (RuleCall)cMapsToAssignment_1_1.eContents().get(0);
+		
+		//VLSTypeDef:
+		//	typeSig=VLSUnitaryTerm ('>' mapsTo=VLSAtomicConstant)? //might need to make VLSAtomic to include VLSVariable
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//typeSig=VLSUnitaryTerm ('>' mapsTo=VLSAtomicConstant)?
+		public Group getGroup() { return cGroup; }
+		
+		//typeSig=VLSUnitaryTerm
+		public Assignment getTypeSigAssignment_0() { return cTypeSigAssignment_0; }
+		
+		//VLSUnitaryTerm
+		public RuleCall getTypeSigVLSUnitaryTermParserRuleCall_0_0() { return cTypeSigVLSUnitaryTermParserRuleCall_0_0; }
+		
+		//('>' mapsTo=VLSAtomicConstant)?
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'>'
+		public Keyword getGreaterThanSignKeyword_1_0() { return cGreaterThanSignKeyword_1_0; }
+		
+		//mapsTo=VLSAtomicConstant
+		public Assignment getMapsToAssignment_1_1() { return cMapsToAssignment_1_1; }
+		
+		//VLSAtomicConstant
+		public RuleCall getMapsToVLSAtomicConstantParserRuleCall_1_1_0() { return cMapsToVLSAtomicConstantParserRuleCall_1_1_0; }
+	}
+	public class VLSUnitaryTermElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSUnitaryTerm");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cInitTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cInitTypeVLSAtomicParserRuleCall_0_0 = (RuleCall)cInitTypeAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cAsteriskKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cNextTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cNextTypeVLSAtomicConstantParserRuleCall_1_1_0 = (RuleCall)cNextTypeAssignment_1_1.eContents().get(0);
+		
+		//VLSUnitaryTerm VLSTypeDef:
+		//	initType=VLSAtomic ('*' nextType=VLSAtomicConstant)* //might need to make VLSAtomic to include VLSVariable
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//initType=VLSAtomic ('*' nextType=VLSAtomicConstant)*
+		public Group getGroup() { return cGroup; }
+		
+		//initType=VLSAtomic
+		public Assignment getInitTypeAssignment_0() { return cInitTypeAssignment_0; }
+		
+		//VLSAtomic
+		public RuleCall getInitTypeVLSAtomicParserRuleCall_0_0() { return cInitTypeVLSAtomicParserRuleCall_0_0; }
+		
+		//('*' nextType=VLSAtomicConstant)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'*'
+		public Keyword getAsteriskKeyword_1_0() { return cAsteriskKeyword_1_0; }
+		
+		//nextType=VLSAtomicConstant
+		public Assignment getNextTypeAssignment_1_1() { return cNextTypeAssignment_1_1; }
+		
+		//VLSAtomicConstant
+		public RuleCall getNextTypeVLSAtomicConstantParserRuleCall_1_1_0() { return cNextTypeVLSAtomicConstantParserRuleCall_1_1_0; }
+	}
+	public class VLSTermElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSTerm");
+		private final RuleCall cVLSBinaryParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		////TFF Specific
+		///////////////////
 		//VLSTerm:
 		//	VLSBinary;
 		@Override public ParserRule getRule() { return rule; }
@@ -891,29 +1092,34 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cExclamationMarkKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cVariablesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cVariablesVLSVariableParserRuleCall_1_2_0 = (RuleCall)cVariablesAssignment_1_2.eContents().get(0);
+		private final Alternatives cVariablesAlternatives_1_2_0 = (Alternatives)cVariablesAssignment_1_2.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableParserRuleCall_1_2_0_0 = (RuleCall)cVariablesAlternatives_1_2_0.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1 = (RuleCall)cVariablesAlternatives_1_2_0.eContents().get(1);
 		private final Group cGroup_1_3 = (Group)cGroup_1.eContents().get(3);
 		private final Keyword cCommaKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
 		private final Assignment cVariablesAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
-		private final RuleCall cVariablesVLSVariableParserRuleCall_1_3_1_0 = (RuleCall)cVariablesAssignment_1_3_1.eContents().get(0);
+		private final Alternatives cVariablesAlternatives_1_3_1_0 = (Alternatives)cVariablesAssignment_1_3_1.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableParserRuleCall_1_3_1_0_0 = (RuleCall)cVariablesAlternatives_1_3_1_0.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1 = (RuleCall)cVariablesAlternatives_1_3_1_0.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		private final Keyword cColonKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
 		private final Assignment cOperandAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOperandVLSUnitaryFormulaParserRuleCall_2_0 = (RuleCall)cOperandAssignment_2.eContents().get(0);
 		
 		//VLSUniversalQuantifier VLSTerm:
-		//	{VLSUniversalQuantifier} ("!" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':')
-		//	operand=VLSUnitaryFormula;
+		//	{VLSUniversalQuantifier} ("!" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable |
+		//	VLSVariableDeclaration))* ']' ':') operand=VLSUnitaryFormula;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{VLSUniversalQuantifier} ("!" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':')
-		//operand=VLSUnitaryFormula
+		//{VLSUniversalQuantifier} ("!" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable |
+		//VLSVariableDeclaration))* ']' ':') operand=VLSUnitaryFormula
 		public Group getGroup() { return cGroup; }
 		
 		//{VLSUniversalQuantifier}
 		public Action getVLSUniversalQuantifierAction_0() { return cVLSUniversalQuantifierAction_0; }
 		
-		//"!" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':'
+		//"!" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable | VLSVariableDeclaration))* ']'
+		//':'
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//"!"
@@ -922,23 +1128,35 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1_1() { return cLeftSquareBracketKeyword_1_1; }
 		
-		//variables+=VLSVariable
+		//variables+=(VLSVariable | VLSVariableDeclaration)
 		public Assignment getVariablesAssignment_1_2() { return cVariablesAssignment_1_2; }
 		
-		//VLSVariable
-		public RuleCall getVariablesVLSVariableParserRuleCall_1_2_0() { return cVariablesVLSVariableParserRuleCall_1_2_0; }
+		//(VLSVariable | VLSVariableDeclaration)
+		public Alternatives getVariablesAlternatives_1_2_0() { return cVariablesAlternatives_1_2_0; }
 		
-		//(',' variables+=VLSVariable)*
+		//VLSVariable
+		public RuleCall getVariablesVLSVariableParserRuleCall_1_2_0_0() { return cVariablesVLSVariableParserRuleCall_1_2_0_0; }
+		
+		//VLSVariableDeclaration
+		public RuleCall getVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1() { return cVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1; }
+		
+		//(',' variables+=(VLSVariable | VLSVariableDeclaration))*
 		public Group getGroup_1_3() { return cGroup_1_3; }
 		
 		//','
 		public Keyword getCommaKeyword_1_3_0() { return cCommaKeyword_1_3_0; }
 		
-		//variables+=VLSVariable
+		//variables+=(VLSVariable | VLSVariableDeclaration)
 		public Assignment getVariablesAssignment_1_3_1() { return cVariablesAssignment_1_3_1; }
 		
+		//(VLSVariable | VLSVariableDeclaration)
+		public Alternatives getVariablesAlternatives_1_3_1_0() { return cVariablesAlternatives_1_3_1_0; }
+		
 		//VLSVariable
-		public RuleCall getVariablesVLSVariableParserRuleCall_1_3_1_0() { return cVariablesVLSVariableParserRuleCall_1_3_1_0; }
+		public RuleCall getVariablesVLSVariableParserRuleCall_1_3_1_0_0() { return cVariablesVLSVariableParserRuleCall_1_3_1_0_0; }
+		
+		//VLSVariableDeclaration
+		public RuleCall getVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1() { return cVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_1_4() { return cRightSquareBracketKeyword_1_4; }
@@ -960,29 +1178,34 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cQuestionMarkKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Keyword cLeftSquareBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cVariablesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cVariablesVLSVariableParserRuleCall_1_2_0 = (RuleCall)cVariablesAssignment_1_2.eContents().get(0);
+		private final Alternatives cVariablesAlternatives_1_2_0 = (Alternatives)cVariablesAssignment_1_2.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableParserRuleCall_1_2_0_0 = (RuleCall)cVariablesAlternatives_1_2_0.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1 = (RuleCall)cVariablesAlternatives_1_2_0.eContents().get(1);
 		private final Group cGroup_1_3 = (Group)cGroup_1.eContents().get(3);
 		private final Keyword cCommaKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
 		private final Assignment cVariablesAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
-		private final RuleCall cVariablesVLSVariableParserRuleCall_1_3_1_0 = (RuleCall)cVariablesAssignment_1_3_1.eContents().get(0);
+		private final Alternatives cVariablesAlternatives_1_3_1_0 = (Alternatives)cVariablesAssignment_1_3_1.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableParserRuleCall_1_3_1_0_0 = (RuleCall)cVariablesAlternatives_1_3_1_0.eContents().get(0);
+		private final RuleCall cVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1 = (RuleCall)cVariablesAlternatives_1_3_1_0.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		private final Keyword cColonKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
 		private final Assignment cOperandAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOperandVLSUnitaryFormulaParserRuleCall_2_0 = (RuleCall)cOperandAssignment_2.eContents().get(0);
 		
 		//VLSExistentialQuantifier VLSTerm:
-		//	{VLSExistentialQuantifier} ("?" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':')
-		//	operand=VLSUnitaryFormula;
+		//	{VLSExistentialQuantifier} ("?" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable |
+		//	VLSVariableDeclaration))* ']' ':') operand=VLSUnitaryFormula;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{VLSExistentialQuantifier} ("?" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':')
-		//operand=VLSUnitaryFormula
+		//{VLSExistentialQuantifier} ("?" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable |
+		//VLSVariableDeclaration))* ']' ':') operand=VLSUnitaryFormula
 		public Group getGroup() { return cGroup; }
 		
 		//{VLSExistentialQuantifier}
 		public Action getVLSExistentialQuantifierAction_0() { return cVLSExistentialQuantifierAction_0; }
 		
-		//"?" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':'
+		//"?" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable | VLSVariableDeclaration))* ']'
+		//':'
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//"?"
@@ -991,23 +1214,35 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1_1() { return cLeftSquareBracketKeyword_1_1; }
 		
-		//variables+=VLSVariable
+		//variables+=(VLSVariable | VLSVariableDeclaration)
 		public Assignment getVariablesAssignment_1_2() { return cVariablesAssignment_1_2; }
 		
-		//VLSVariable
-		public RuleCall getVariablesVLSVariableParserRuleCall_1_2_0() { return cVariablesVLSVariableParserRuleCall_1_2_0; }
+		//(VLSVariable | VLSVariableDeclaration)
+		public Alternatives getVariablesAlternatives_1_2_0() { return cVariablesAlternatives_1_2_0; }
 		
-		//(',' variables+=VLSVariable)*
+		//VLSVariable
+		public RuleCall getVariablesVLSVariableParserRuleCall_1_2_0_0() { return cVariablesVLSVariableParserRuleCall_1_2_0_0; }
+		
+		//VLSVariableDeclaration
+		public RuleCall getVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1() { return cVariablesVLSVariableDeclarationParserRuleCall_1_2_0_1; }
+		
+		//(',' variables+=(VLSVariable | VLSVariableDeclaration))*
 		public Group getGroup_1_3() { return cGroup_1_3; }
 		
 		//','
 		public Keyword getCommaKeyword_1_3_0() { return cCommaKeyword_1_3_0; }
 		
-		//variables+=VLSVariable
+		//variables+=(VLSVariable | VLSVariableDeclaration)
 		public Assignment getVariablesAssignment_1_3_1() { return cVariablesAssignment_1_3_1; }
 		
+		//(VLSVariable | VLSVariableDeclaration)
+		public Alternatives getVariablesAlternatives_1_3_1_0() { return cVariablesAlternatives_1_3_1_0; }
+		
 		//VLSVariable
-		public RuleCall getVariablesVLSVariableParserRuleCall_1_3_1_0() { return cVariablesVLSVariableParserRuleCall_1_3_1_0; }
+		public RuleCall getVariablesVLSVariableParserRuleCall_1_3_1_0_0() { return cVariablesVLSVariableParserRuleCall_1_3_1_0_0; }
+		
+		//VLSVariableDeclaration
+		public RuleCall getVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1() { return cVariablesVLSVariableDeclarationParserRuleCall_1_3_1_0_1; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_1_4() { return cRightSquareBracketKeyword_1_4; }
@@ -1487,25 +1722,15 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cValueSIGNED_LITERALTerminalRuleCall_0_1_0 = (RuleCall)cValueAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cVLSRealAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cVLSDoubleQuoteAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cValueSIGNED_REAL_IDTerminalRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final Action cVLSRationalAction_2_0 = (Action)cGroup_2.eContents().get(0);
-		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueSIGNED_RAT_IDTerminalRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Action cVLSDoubleQuoteAction_3_0 = (Action)cGroup_3.eContents().get(0);
-		private final Assignment cValueAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cValueDOUBLE_QUOTETerminalRuleCall_3_1_0 = (RuleCall)cValueAssignment_3_1.eContents().get(0);
+		private final RuleCall cValueDOUBLE_QUOTETerminalRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		
 		//VLSDefinedTerm:
-		//	{VLSInt} value=SIGNED_LITERAL | {VLSReal} value=SIGNED_REAL_ID | {VLSRational} value=SIGNED_RAT_ID | {VLSDoubleQuote}
-		//	value=DOUBLE_QUOTE;
+		//	{VLSInt} value=SIGNED_LITERAL | {VLSDoubleQuote} value=DOUBLE_QUOTE;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{VLSInt} value=SIGNED_LITERAL | {VLSReal} value=SIGNED_REAL_ID | {VLSRational} value=SIGNED_RAT_ID | {VLSDoubleQuote}
-		//value=DOUBLE_QUOTE
+		//{VLSInt} value=SIGNED_LITERAL | {VLSDoubleQuote} value=DOUBLE_QUOTE
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{VLSInt} value=SIGNED_LITERAL
@@ -1520,41 +1745,17 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//SIGNED_LITERAL
 		public RuleCall getValueSIGNED_LITERALTerminalRuleCall_0_1_0() { return cValueSIGNED_LITERALTerminalRuleCall_0_1_0; }
 		
-		//{VLSReal} value=SIGNED_REAL_ID
+		//{VLSDoubleQuote} value=DOUBLE_QUOTE
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{VLSReal}
-		public Action getVLSRealAction_1_0() { return cVLSRealAction_1_0; }
-		
-		//value=SIGNED_REAL_ID
-		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
-		
-		//SIGNED_REAL_ID
-		public RuleCall getValueSIGNED_REAL_IDTerminalRuleCall_1_1_0() { return cValueSIGNED_REAL_IDTerminalRuleCall_1_1_0; }
-		
-		//{VLSRational} value=SIGNED_RAT_ID
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//{VLSRational}
-		public Action getVLSRationalAction_2_0() { return cVLSRationalAction_2_0; }
-		
-		//value=SIGNED_RAT_ID
-		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
-		
-		//SIGNED_RAT_ID
-		public RuleCall getValueSIGNED_RAT_IDTerminalRuleCall_2_1_0() { return cValueSIGNED_RAT_IDTerminalRuleCall_2_1_0; }
-		
-		//{VLSDoubleQuote} value=DOUBLE_QUOTE
-		public Group getGroup_3() { return cGroup_3; }
-		
 		//{VLSDoubleQuote}
-		public Action getVLSDoubleQuoteAction_3_0() { return cVLSDoubleQuoteAction_3_0; }
+		public Action getVLSDoubleQuoteAction_1_0() { return cVLSDoubleQuoteAction_1_0; }
 		
 		//value=DOUBLE_QUOTE
-		public Assignment getValueAssignment_3_1() { return cValueAssignment_3_1; }
+		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 		
 		//DOUBLE_QUOTE
-		public RuleCall getValueDOUBLE_QUOTETerminalRuleCall_3_1_0() { return cValueDOUBLE_QUOTETerminalRuleCall_3_1_0; }
+		public RuleCall getValueDOUBLE_QUOTETerminalRuleCall_1_1_0() { return cValueDOUBLE_QUOTETerminalRuleCall_1_1_0; }
 	}
 	
 	
@@ -1569,24 +1770,24 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final TerminalRule tDOUBLE_DOLLAR_ID;
 	private final TerminalRule tLITERAL;
 	private final TerminalRule tSIGNED_LITERAL;
-	private final TerminalRule tUNSIGNED_REAL_FRAC_ID;
-	private final TerminalRule tUNSIGNED_REAL_EXP_ID;
-	private final TerminalRule tSIGNED_REAL_ID;
-	private final TerminalRule tUNSIGNED_RAT_ID;
-	private final TerminalRule tSIGNED_RAT_ID;
-	private final TerminalRule tID;
-	private final TerminalRule tANY_OTHER;
 	private final TerminalRule tSINGLE_COMMENT;
-	private final VLSIncludeElements pVLSInclude;
-	private final VLSNameElements pVLSName;
 	private final VLSCommentElements pVLSComment;
 	private final VLSConfirmationsElements pVLSConfirmations;
-	private final VLSSatisfiableElements pVLSSatisfiable;
 	private final VLSFofFormulaElements pVLSFofFormula;
 	private final VLSTffFormulaElements pVLSTffFormula;
+	private final VLSTffNameElements pVLSTffName;
+	private final VLSTffDistinctElements pVLSTffDistinct;
+	private final VLSTffFiniteElements pVLSTffFinite;
+	private final VLSTffDeclPredElements pVLSTffDeclPred;
 	private final VLSRoleElements pVLSRole;
 	private final VLSAnnotationElements pVLSAnnotation;
 	private final VLSAnnotationTermsElements pVLSAnnotationTerms;
+	private final VLSTffTermElements pVLSTffTerm;
+	private final VLSDeclarationElements pVLSDeclaration;
+	private final VLSOtherDeclarationElements pVLSOtherDeclaration;
+	private final VLSVariableDeclarationElements pVLSVariableDeclaration;
+	private final VLSTypeDefElements pVLSTypeDef;
+	private final VLSUnitaryTermElements pVLSUnitaryTerm;
 	private final VLSTermElements pVLSTerm;
 	private final VLSBinaryElements pVLSBinary;
 	private final VLSUnitaryFormulaElements pVLSUnitaryFormula;
@@ -1622,24 +1823,24 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.tDOUBLE_DOLLAR_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.DOUBLE_DOLLAR_ID");
 		this.tLITERAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.LITERAL");
 		this.tSIGNED_LITERAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_LITERAL");
-		this.tUNSIGNED_REAL_FRAC_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.UNSIGNED_REAL_FRAC_ID");
-		this.tUNSIGNED_REAL_EXP_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.UNSIGNED_REAL_EXP_ID");
-		this.tSIGNED_REAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_REAL_ID");
-		this.tUNSIGNED_RAT_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.UNSIGNED_RAT_ID");
-		this.tSIGNED_RAT_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SIGNED_RAT_ID");
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.ID");
-		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.ANY_OTHER");
 		this.tSINGLE_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
-		this.pVLSInclude = new VLSIncludeElements();
-		this.pVLSName = new VLSNameElements();
 		this.pVLSComment = new VLSCommentElements();
 		this.pVLSConfirmations = new VLSConfirmationsElements();
-		this.pVLSSatisfiable = new VLSSatisfiableElements();
 		this.pVLSFofFormula = new VLSFofFormulaElements();
 		this.pVLSTffFormula = new VLSTffFormulaElements();
+		this.pVLSTffName = new VLSTffNameElements();
+		this.pVLSTffDistinct = new VLSTffDistinctElements();
+		this.pVLSTffFinite = new VLSTffFiniteElements();
+		this.pVLSTffDeclPred = new VLSTffDeclPredElements();
 		this.pVLSRole = new VLSRoleElements();
 		this.pVLSAnnotation = new VLSAnnotationElements();
 		this.pVLSAnnotationTerms = new VLSAnnotationTermsElements();
+		this.pVLSTffTerm = new VLSTffTermElements();
+		this.pVLSDeclaration = new VLSDeclarationElements();
+		this.pVLSOtherDeclaration = new VLSOtherDeclarationElements();
+		this.pVLSVariableDeclaration = new VLSVariableDeclarationElements();
+		this.pVLSTypeDef = new VLSTypeDefElements();
+		this.pVLSUnitaryTerm = new VLSUnitaryTermElements();
 		this.pVLSTerm = new VLSTermElements();
 		this.pVLSBinary = new VLSBinaryElements();
 		this.pVLSUnitaryFormula = new VLSUnitaryFormulaElements();
@@ -1689,8 +1890,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	////2. can only use declared variables in formula (ln 158)
 	////@@@@@@@@@@@
 	//VampireModel:
-	//	(includes+=VLSInclude | comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula |
-	//	tfformulas+=VLSTffFormula)*;
+	//	(comments+=VLSComment | confirmations+=VLSConfirmations | formulas+=VLSFofFormula | tfformulas+=VLSTffFormula)*;
 	public VampireModelElements getVampireModelAccess() {
 		return pVampireModel;
 	}
@@ -1759,50 +1959,8 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return tSIGNED_LITERAL;
 	}
 	
-	//terminal UNSIGNED_REAL_FRAC_ID:
-	//	LITERAL '.' INT;
-	public TerminalRule getUNSIGNED_REAL_FRAC_IDRule() {
-		return tUNSIGNED_REAL_FRAC_ID;
-	}
-	
-	//terminal UNSIGNED_REAL_EXP_ID:
-	//	(LITERAL | UNSIGNED_REAL_FRAC_ID) 'Ee' SIGN* INT;
-	public TerminalRule getUNSIGNED_REAL_EXP_IDRule() {
-		return tUNSIGNED_REAL_EXP_ID;
-	}
-	
-	//terminal SIGNED_REAL_ID:
-	//	SIGN* (UNSIGNED_REAL_FRAC_ID | UNSIGNED_REAL_EXP_ID);
-	public TerminalRule getSIGNED_REAL_IDRule() {
-		return tSIGNED_REAL_ID;
-	}
-	
-	//terminal UNSIGNED_RAT_ID:
-	//	LITERAL '/' '1'..'9' INT?;
-	public TerminalRule getUNSIGNED_RAT_IDRule() {
-		return tUNSIGNED_RAT_ID;
-	}
-	
-	//terminal SIGNED_RAT_ID:
-	//	SIGN* UNSIGNED_RAT_ID;
-	public TerminalRule getSIGNED_RAT_IDRule() {
-		return tSIGNED_RAT_ID;
-	}
-	
-	//terminal ID:
-	//	!('\n' | '\r')*;
-	public TerminalRule getIDRule() {
-		return tID;
-	}
-	
-	//terminal ANY_OTHER:
-	//	ID;
-	public TerminalRule getANY_OTHERRule() {
-		return tANY_OTHER;
-	}
-	
 	//terminal SINGLE_COMMENT:
-	//	ANY_OTHER;
+	//	'%' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSINGLE_COMMENTRule() {
 		return tSINGLE_COMMENT;
 	}
@@ -1812,29 +1970,15 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//// VLS types
 	////////////////////////////////////
 	//// <includes>
-	//VLSInclude:
-	//	'include(' fileName=SINGLE_QUOTE (',[' names+=VLSName (',' names+=VLSName)* ']')?;
-	public VLSIncludeElements getVLSIncludeAccess() {
-		return pVLSInclude;
-	}
-	
-	public ParserRule getVLSIncludeRule() {
-		return getVLSIncludeAccess().getRule();
-	}
-	
-	//VLSName:
-	//	name=(LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL);
-	public VLSNameElements getVLSNameAccess() {
-		return pVLSName;
-	}
-	
-	public ParserRule getVLSNameRule() {
-		return getVLSNameAccess().getRule();
-	}
-	
+	////VLSInclude:
+	////	'include(' fileName = SINGLE_QUOTE ( ',[' names += VLSName (','  names += VLSName)* ']' )?
+	////;
+	////VLSName:
+	////	name = (LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
+	////;
 	//// <comments>
 	//VLSComment:
-	//	'%' comment=SINGLE_COMMENT
+	//	comment=SINGLE_COMMENT
 	//	//need to add a new line at the end of the file for the case where the last line is a comment
 	//;
 	public VLSCommentElements getVLSCommentAccess() {
@@ -1847,8 +1991,8 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	////VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
 	//VLSConfirmations:
-	//	VLSSatisfiable //| VLSFiniteModel// | VLSTrying
-	//;
+	//	{VLSSatisfiable} 'Satisfiable!' | {VLSWarning} "WARNING!" "Could" "not" "set" "resource" "limit:" "Virtual" "memory."
+	//	| {VLSTrying} 'TRYING' '[' name=LITERAL ']' | {VLSFiniteModel} 'Finite' 'Model' 'Found!';
 	public VLSConfirmationsElements getVLSConfirmationsAccess() {
 		return pVLSConfirmations;
 	}
@@ -1857,23 +2001,6 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getVLSConfirmationsAccess().getRule();
 	}
 	
-	//VLSSatisfiable:
-	//	{VLSSatisfiable} 'Satisfiable!';
-	public VLSSatisfiableElements getVLSSatisfiableAccess() {
-		return pVLSSatisfiable;
-	}
-	
-	public ParserRule getVLSSatisfiableRule() {
-		return getVLSSatisfiableAccess().getRule();
-	}
-	
-	////VLSTrying:
-	////	'TRYING' '[' name = LITERAL ']'
-	////;
-	////
-	////VLSFiniteModel:
-	////	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
-	////;
 	//// <FOF formulas>
 	//VLSFofFormula:
 	//	'fof' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','
@@ -1887,14 +2014,53 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSTffFormula:
-	//	'tff' '(' name=(LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole=VLSRole ',' fofFormula=VLSTerm (','
-	//	annotations=VLSAnnotation)? ')' '.';
+	//	'tff' '(' name=VLSTffName ',' tffRole=VLSRole ',' fofFormula=VLSTffTerm (',' annotations=VLSAnnotation)? ')' '.';
 	public VLSTffFormulaElements getVLSTffFormulaAccess() {
 		return pVLSTffFormula;
 	}
 	
 	public ParserRule getVLSTffFormulaRule() {
 		return getVLSTffFormulaAccess().getRule();
+	}
+	
+	//VLSTffName:
+	//	VLSTffDeclPred | VLSTffFinite | VLSTffDistinct;
+	public VLSTffNameElements getVLSTffNameAccess() {
+		return pVLSTffName;
+	}
+	
+	public ParserRule getVLSTffNameRule() {
+		return getVLSTffNameAccess().getRule();
+	}
+	
+	//VLSTffDistinct:
+	//	'distinct_domain';
+	public VLSTffDistinctElements getVLSTffDistinctAccess() {
+		return pVLSTffDistinct;
+	}
+	
+	public ParserRule getVLSTffDistinctRule() {
+		return getVLSTffDistinctAccess().getRule();
+	}
+	
+	//VLSTffFinite:
+	//	'finite_domain';
+	public VLSTffFiniteElements getVLSTffFiniteAccess() {
+		return pVLSTffFinite;
+	}
+	
+	public ParserRule getVLSTffFiniteRule() {
+		return getVLSTffFiniteAccess().getRule();
+	}
+	
+	//VLSTffDeclPred:
+	//	'declare_' DOLLAR_ID | LOWER_WORD_ID;
+	public VLSTffDeclPredElements getVLSTffDeclPredAccess() {
+		return pVLSTffDeclPred;
+	}
+	
+	public ParserRule getVLSTffDeclPredRule() {
+		return getVLSTffDeclPredAccess().getRule();
 	}
 	
 	///*
@@ -1916,6 +2082,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getVLSRoleAccess().getRule();
 	}
 	
+	///*
 	////VLSRole:
 	////	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
 	////	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
@@ -1981,7 +2148,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	////VLSUnknown:
 	////	"unknown"
 	////;
-	//// <ANNOTATION>
+	//*/ // <ANNOTATION>
 	//// Not at all based on the website. based on what we think the output will be like 
 	//VLSAnnotation:
 	//	'['? name=(LOWER_WORD_ID | SINGLE_QUOTE | VLSRole)? ('(' followup=VLSAnnotationTerms ')')? ']'?;
@@ -2006,6 +2173,72 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	////////////////////////////////////
 	//// VLS Terms
 	////////////////////////////////////
+	//VLSTffTerm:
+	//	VLSTerm | VLSDeclaration;
+	public VLSTffTermElements getVLSTffTermAccess() {
+		return pVLSTffTerm;
+	}
+	
+	public ParserRule getVLSTffTermRule() {
+		return getVLSTffTermAccess().getRule();
+	}
+	
+	///////////////////
+	////TFF Specific
+	// VLSDeclaration:
+	//	VLSVariableDeclaration | VLSOtherDeclaration;
+	public VLSDeclarationElements getVLSDeclarationAccess() {
+		return pVLSDeclaration;
+	}
+	
+	public ParserRule getVLSDeclarationRule() {
+		return getVLSDeclarationAccess().getRule();
+	}
+	
+	//VLSOtherDeclaration:
+	//	VLSAtomicConstant ':' type=VLSTypeDef;
+	public VLSOtherDeclarationElements getVLSOtherDeclarationAccess() {
+		return pVLSOtherDeclaration;
+	}
+	
+	public ParserRule getVLSOtherDeclarationRule() {
+		return getVLSOtherDeclarationAccess().getRule();
+	}
+	
+	//VLSVariableDeclaration:
+	//	VLSVariable ':' type=VLSTypeDef;
+	public VLSVariableDeclarationElements getVLSVariableDeclarationAccess() {
+		return pVLSVariableDeclaration;
+	}
+	
+	public ParserRule getVLSVariableDeclarationRule() {
+		return getVLSVariableDeclarationAccess().getRule();
+	}
+	
+	//VLSTypeDef:
+	//	typeSig=VLSUnitaryTerm ('>' mapsTo=VLSAtomicConstant)? //might need to make VLSAtomic to include VLSVariable
+	//;
+	public VLSTypeDefElements getVLSTypeDefAccess() {
+		return pVLSTypeDef;
+	}
+	
+	public ParserRule getVLSTypeDefRule() {
+		return getVLSTypeDefAccess().getRule();
+	}
+	
+	//VLSUnitaryTerm VLSTypeDef:
+	//	initType=VLSAtomic ('*' nextType=VLSAtomicConstant)* //might need to make VLSAtomic to include VLSVariable
+	//;
+	public VLSUnitaryTermElements getVLSUnitaryTermAccess() {
+		return pVLSUnitaryTerm;
+	}
+	
+	public ParserRule getVLSUnitaryTermRule() {
+		return getVLSUnitaryTermAccess().getRule();
+	}
+	
+	////TFF Specific
+	///////////////////
 	//VLSTerm:
 	//	VLSBinary;
 	public VLSTermElements getVLSTermAccess() {
@@ -2045,8 +2278,8 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSUniversalQuantifier VLSTerm:
-	//	{VLSUniversalQuantifier} ("!" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':')
-	//	operand=VLSUnitaryFormula;
+	//	{VLSUniversalQuantifier} ("!" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable |
+	//	VLSVariableDeclaration))* ']' ':') operand=VLSUnitaryFormula;
 	public VLSUniversalQuantifierElements getVLSUniversalQuantifierAccess() {
 		return pVLSUniversalQuantifier;
 	}
@@ -2056,8 +2289,8 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSExistentialQuantifier VLSTerm:
-	//	{VLSExistentialQuantifier} ("?" '[' variables+=VLSVariable (',' variables+=VLSVariable)* ']' ':')
-	//	operand=VLSUnitaryFormula;
+	//	{VLSExistentialQuantifier} ("?" '[' variables+=(VLSVariable | VLSVariableDeclaration) (',' variables+=(VLSVariable |
+	//	VLSVariableDeclaration))* ']' ':') operand=VLSUnitaryFormula;
 	public VLSExistentialQuantifierElements getVLSExistentialQuantifierAccess() {
 		return pVLSExistentialQuantifier;
 	}
@@ -2166,14 +2399,19 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSDefinedTerm:
-	//	{VLSInt} value=SIGNED_LITERAL | {VLSReal} value=SIGNED_REAL_ID | {VLSRational} value=SIGNED_RAT_ID | {VLSDoubleQuote}
-	//	value=DOUBLE_QUOTE;
+	//	{VLSInt} value=SIGNED_LITERAL | {VLSDoubleQuote} value=DOUBLE_QUOTE;
 	public VLSDefinedTermElements getVLSDefinedTermAccess() {
 		return pVLSDefinedTerm;
 	}
 	
 	public ParserRule getVLSDefinedTermRule() {
 		return getVLSDefinedTermAccess().getRule();
+	}
+	
+	//terminal ID:
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	}
 	
 	//terminal INT returns ecore::EInt:
@@ -2204,5 +2442,11 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
+	}
+	
+	//terminal ANY_OTHER:
+	//	.;
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	}
 }

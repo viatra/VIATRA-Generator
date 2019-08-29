@@ -11,7 +11,7 @@ generate vampireLanguage "http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage"
 
 VampireModel:	
 	(
-		includes += VLSInclude |
+//		includes += VLSInclude |
 		comments += VLSComment | 
 		confirmations += VLSConfirmations|
 		formulas += VLSFofFormula |
@@ -42,17 +42,17 @@ terminal DOUBLE_DOLLAR_ID: ('$$') (LOWER_WORD_ID);
 terminal LITERAL: '0' | ('1'..'9') (INT)?;
 terminal SIGNED_LITERAL: (SIGN)* (LITERAL);
 
-terminal UNSIGNED_REAL_FRAC_ID: (LITERAL) ('.') (INT);
-terminal UNSIGNED_REAL_EXP_ID: (LITERAL | UNSIGNED_REAL_FRAC_ID) ('Ee') (SIGN)* (INT) ;
-terminal SIGNED_REAL_ID: (SIGN)* (UNSIGNED_REAL_FRAC_ID | UNSIGNED_REAL_EXP_ID);
-
-terminal UNSIGNED_RAT_ID:  (LITERAL) ('/') ('1'..'9') (INT)? ;
-terminal SIGNED_RAT_ID: (SIGN)* (UNSIGNED_RAT_ID);
+//terminal UNSIGNED_REAL_FRAC_ID: (LITERAL) ('.') (INT);
+//terminal UNSIGNED_REAL_EXP_ID: (LITERAL | UNSIGNED_REAL_FRAC_ID) ('Ee') (SIGN)* (INT) ;
+//terminal SIGNED_REAL_ID: (SIGN)* (UNSIGNED_REAL_FRAC_ID | UNSIGNED_REAL_EXP_ID);
+//
+//terminal UNSIGNED_RAT_ID:  (LITERAL) ('/') ('1'..'9') (INT)? ;
+//terminal SIGNED_RAT_ID: (SIGN)* (UNSIGNED_RAT_ID);
 
 //Overwriting is necessary
-terminal ID: (!('\n'|'\r'))* ;
-terminal ANY_OTHER: ID;
-terminal SINGLE_COMMENT: ANY_OTHER;
+//terminal ID: (!('\n'|'\r'))* ('\r'? '\n')?;
+//terminal ANY_OTHER: ;
+terminal SINGLE_COMMENT: '%' (!('\n'|'\r'))* ('\r'? '\n')?;
 //terminal ID:  ( !('('|')'|'\r'|'\n') )+ ;
 
 
@@ -61,37 +61,28 @@ terminal SINGLE_COMMENT: ANY_OTHER;
 //////////////////////////////////
 
 // <includes>
-VLSInclude:
-	'include(' fileName = SINGLE_QUOTE ( ',[' names += VLSName (','  names += VLSName)* ']' )?
-;
+//VLSInclude:
+//	'include(' fileName = SINGLE_QUOTE ( ',[' names += VLSName (','  names += VLSName)* ']' )?
+//;
 
-VLSName:
-	name = (LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
-;
+//VLSName:
+//	name = (LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
+//;
 
 // <comments>
 VLSComment:
-	'%' comment = SINGLE_COMMENT
+	comment = SINGLE_COMMENT
 	//need to add a new line at the end of the file for the case where the last line is a comment
 ;
 
 //VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
 
 VLSConfirmations:
-	  VLSSatisfiable //| VLSFiniteModel// | VLSTrying
+	  {VLSSatisfiable} 'Satisfiable!' | 
+	  {VLSWarning} "WARNING!" "Could" "not" "set" "resource" "limit:" "Virtual" "memory." |
+	  {VLSTrying} 'TRYING' '[' name = LITERAL ']' |
+	  {VLSFiniteModel} 'Finite' 'Model' 'Found!'
 ;
-
-VLSSatisfiable:
-	{VLSSatisfiable} 'Satisfiable!'
-;
-
-//VLSTrying:
-//	'TRYING' '[' name = LITERAL ']'
-//;
-//
-//VLSFiniteModel:
-//	{VLSFiniteModel} 'Finite' 'Model' 'Found!'
-//;
 
 // <FOF formulas>
 VLSFofFormula:
@@ -100,7 +91,23 @@ VLSFofFormula:
 
 
 VLSTffFormula:
-	'tff' '(' name = (LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
+	'tff' '(' name = VLSTffName ',' tffRole = VLSRole ',' fofFormula = VLSTffTerm (',' annotations = VLSAnnotation)? ')' '.'
+;
+
+VLSTffName:
+	VLSTffDeclPred | VLSTffFinite | VLSTffDistinct
+;
+
+VLSTffDistinct:
+	'distinct_domain'
+;
+
+VLSTffFinite:
+	'finite_domain'
+;
+
+VLSTffDeclPred:
+	'declare_' DOLLAR_ID | LOWER_WORD_ID
 ;
 
 
@@ -118,6 +125,7 @@ VLSRole:
 	"fi_domain" | "fi_functors" | "fi_predicates" | "unknown"
 ;
 
+/*
 //VLSRole:
 //	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
 //	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
@@ -183,6 +191,7 @@ VLSRole:
 //VLSUnknown:
 //	"unknown"
 //;
+*/
 
 // <ANNOTATION>
 // Not at all based on the website. based on what we think the output will be like 
@@ -197,6 +206,36 @@ VLSAnnotationTerms returns VLSAnnotation:
 //////////////////////////////////
 // VLS Terms
 //////////////////////////////////
+VLSTffTerm:
+	VLSTerm |
+	VLSDeclaration
+;
+
+/////////////////
+//TFF Specific
+VLSDeclaration:
+	VLSVariableDeclaration |
+	VLSOtherDeclaration
+	
+;
+
+VLSOtherDeclaration:
+	VLSAtomicConstant ':' type = VLSTypeDef
+;
+
+VLSVariableDeclaration:
+	VLSVariable ':' type = VLSTypeDef
+;
+
+VLSTypeDef:
+	typeSig = VLSUnitaryTerm ('>' mapsTo = VLSAtomicConstant)? //might need to make VLSAtomic to include VLSVariable
+;
+
+VLSUnitaryTerm returns VLSTypeDef:
+	initType = VLSAtomic ('*' nextType = VLSAtomicConstant)* //might need to make VLSAtomic to include VLSVariable
+;
+//TFF Specific
+/////////////////
 
 VLSTerm: 
 	//( VLSLogic | VLSSequent)
@@ -228,11 +267,15 @@ VLSUnitaryFormula returns VLSTerm:
 ;
 
 VLSUniversalQuantifier  returns VLSTerm:
-	{VLSUniversalQuantifier} (("!") '[' variables += VLSVariable (','  variables += VLSVariable)* ']' ':') operand = VLSUnitaryFormula
+	{VLSUniversalQuantifier} (("!") '[' variables += (VLSVariable | VLSVariableDeclaration) 
+		(','  variables += (VLSVariable | VLSVariableDeclaration))* ']' ':'
+	) operand = VLSUnitaryFormula
 ;
 
 VLSExistentialQuantifier  returns VLSTerm:
-	{VLSExistentialQuantifier} (("?") '[' variables += VLSVariable (','  variables += VLSVariable)* ']' ':') operand = VLSUnitaryFormula
+	{VLSExistentialQuantifier} (("?") '[' variables += (VLSVariable | VLSVariableDeclaration) 
+		(','  variables += (VLSVariable | VLSVariableDeclaration))* ']' ':'
+	) operand = VLSUnitaryFormula
 ;
 
 VLSUnaryNegation   returns VLSTerm:
@@ -300,8 +343,8 @@ VLSFunctionAsTerm:
 
 VLSDefinedTerm:
 	{VLSInt} value = SIGNED_LITERAL |
-	{VLSReal} value = SIGNED_REAL_ID |
-	{VLSRational} value = SIGNED_RAT_ID |
+//	{VLSReal} value = SIGNED_REAL_ID |
+//	{VLSRational} value = SIGNED_RAT_ID |
 	{VLSDoubleQuote} value = DOUBLE_QUOTE
 ;
 
