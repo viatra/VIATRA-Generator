@@ -3,11 +3,12 @@ package ca.mcgill.ecse.dslreasoner.vampire.reasoner
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetupGenerated
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.MonitoredVampireSolution
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguageFactoryImpl
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
@@ -15,7 +16,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import org.eclipse.emf.ecore.resource.Resource
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
 
 class VampireSolver extends LogicReasoner {
 
@@ -71,21 +72,21 @@ class VampireSolver extends LogicReasoner {
 		// Result as String
 		val transformationTime = System.currentTimeMillis - transformationStart
 		// Finish: Logic -> Vampire mapping
+		
 		// Start: Solving .tptp problem
 		val solverStart = System.currentTimeMillis
-		// Calling Solver (Currently Manually)
-		val result2 = handler.callSolver(vampireProblem, workspace, vampireConfig)
-		// val result2 = null
+		val MonitoredVampireSolution vampSol = handler.callSolver(vampireProblem, workspace, vampireConfig)
 		val solvingTime = System.currentTimeMillis - solverStart
-		// TODO
-//		val backTransformationStart = System.currentTimeMillis
-//		// Backwards Mapper
-//		val logicResult = backwardMapper.transformOutput(problem, config.solutionScope.numberOfRequiredSolution,
-//			result2, forwardTrace, transformationTime)
-//
-//		val backTransformationTime = System.currentTimeMillis - backTransformationStart
-		// Finish: Solving Alloy problem
-		return null
+		// Finish: Solving .tptp problem
+		
+		// Start: Vampire -> Logic mapping
+		val backTransformationStart = System.currentTimeMillis
+		// Backwards Mapper
+		val logicResult = backwardMapper.transformOutput(problem,vampireConfig.solutionScope.numberOfRequiredSolution,vampSol,forwardTrace,transformationTime)
+
+		val backTransformationTime = System.currentTimeMillis - backTransformationStart
+		// Finish: Vampire -> Logic Mapping
+		return logicResult //currently only a ModelResult
 	}
 
 	def asConfig(LogicSolverConfiguration configuration) {
@@ -100,17 +101,17 @@ class VampireSolver extends LogicReasoner {
 //	 * not for now
 //	 * 
 	override getInterpretations(ModelResult modelResult) {
-		// val answers = (modelResult.representation as MonitoredAlloySolution).aswers.map[key]
-//		val sols = modelResult.representation// as List<A4Solution>
-//		//val res = answers.map 
-//		sols.map[
-//			new VampireModelInterpretation(
+//		 val answers = (modelResult.representation as MonitoredAlloySolution).aswers.map[key]
+		val sols = modelResult.representation// as List<A4Solution>
+		//val res = answers.map 
+		sols.map[
+			new VampireModelInterpretation(
 //				forwardMapper.typeMapper.typeInterpreter,
-//				it as A4Solution,
+				it as VampireModel,
 //				forwardMapper,
-//				modelResult.trace as Logic2AlloyLanguageMapperTrace
-//			)
-//		]
+				modelResult.trace as Logic2VampireLanguageMapperTrace
+			)
+		]
 	}
 //	*/
 }

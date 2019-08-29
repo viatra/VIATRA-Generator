@@ -25,11 +25,12 @@ class VampireSolverException extends Exception {
 	}
 }
 
-@Data class VampireSolutionModel {
+@Data class MonitoredVampireSolution {
 //	List<String> warnings
 //	List<String> debugs
 //	long kodkodTime
 //	val List<Pair<A4Solution, Long>> aswers
+	val VampireModel generatedModel
 //	val boolean finishedBeforeTimeout
 }
 
@@ -76,12 +77,10 @@ class VampireHandler {
 		// 5. determine and return whether or not finite model was found
 		// 6. save solution as a .tptp model
 		val root = workspace.readModel(VampireModel, SOLNNAME).eResource.contents
-		
 
-
-		println((root.get(0) as VampireModelImpl ).comments)
+//		println((root.get(0) as VampireModel ).comments)
 		
-		return root
+		return new MonitoredVampireSolution(root.get(0) as VampireModel)
 
 	/*
 	 * //Prepare

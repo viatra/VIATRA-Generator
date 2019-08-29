@@ -4,39 +4,24 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 
 class Vampire2LogicMapper {
-}
-//	val extension LogicresultFactory resultFactory = LogicresultFactory.eINSTANCE
+	val extension LogicresultFactory resultFactory = LogicresultFactory.eINSTANCE
+
 //	
-//	public def transformOutput(LogicProblem problem, int requiredNumberOfSolution, VampireSolutionModel vampireSolution, Logic2VampireLanguageMapperTrace trace, long transformationTime) {
-//		val models = vampireSolution.aswers.map[it.key].toList
-//		
-//		if(!monitoredAlloySolution.finishedBeforeTimeout) {
-//			return createInsuficientResourcesResult => [
-//				it.problem = problem
-//				it.representation += models
-//				it.trace = trace
-//				it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
-//			]
-//		} else {
-//			if(models.last.satisfiable || requiredNumberOfSolution == -1) {
-//				return createModelResult => [
-//					it.problem = problem
-//					it.representation += models
-//					it.trace = trace
-//					it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
-//				]
-//			} else {
-//				return createInconsistencyResult => [
-//					it.problem = problem
-//					it.representation += models
-//					it.trace = trace
-//					it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
-//				]
-//			}
-//		}
-//	}
-//	
-//	def transformStatistics(MonitoredAlloySolution solution, long transformationTime) {
+	public def transformOutput(LogicProblem problem, int requiredNumberOfSolution,
+		MonitoredVampireSolution monitoredVampireSolution, Logic2VampireLanguageMapperTrace trace,
+		long transformationTime) {
+
+		// ModelRsult implements LogicResult
+		return createModelResult => [
+			it.problem = problem
+			it.representation += monitoredVampireSolution.generatedModel
+			it.trace = trace
+			it.statistics = transformStatistics(monitoredVampireSolution, transformationTime)
+		]
+	}
+
+	def transformStatistics(MonitoredVampireSolution solution, long transformationTime) {
+		return createStatistics
 //		createStatistics => [
 //			it.transformationTime = transformationTime as int
 //			for(solutionIndex : 0..<solution.aswers.size) {
@@ -59,9 +44,6 @@ class Vampire2LogicMapper {
 //				it.value = '''[«FOR warning : solution.warnings SEPARATOR ","»«warning»«ENDFOR»]'''
 //			]
 //		]
-//	}
-//	
-//	def sum(Iterable<Long> ints) {
-//		ints.reduce[p1, p2|p1+p2]
-//	}
-//}
+	}
+
+}

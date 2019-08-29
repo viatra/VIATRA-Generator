@@ -5,8 +5,10 @@ import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetupGenerated;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.MonitoredVampireSolution;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler;
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
@@ -21,9 +23,10 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class VampireSolver extends LogicReasoner {
@@ -72,10 +75,14 @@ public class VampireSolver extends LogicReasoner {
     long _currentTimeMillis = System.currentTimeMillis();
     final long transformationTime = (_currentTimeMillis - transformationStart);
     final long solverStart = System.currentTimeMillis();
-    final EList<EObject> result2 = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
+    final MonitoredVampireSolution vampSol = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
     long _currentTimeMillis_1 = System.currentTimeMillis();
     final long solvingTime = (_currentTimeMillis_1 - solverStart);
-    return null;
+    final long backTransformationStart = System.currentTimeMillis();
+    final ModelResult logicResult = this.backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime);
+    long _currentTimeMillis_2 = System.currentTimeMillis();
+    final long backTransformationTime = (_currentTimeMillis_2 - backTransformationStart);
+    return logicResult;
   }
   
   public VampireSolverConfiguration asConfig(final LogicSolverConfiguration configuration) {
@@ -93,6 +100,17 @@ public class VampireSolver extends LogicReasoner {
   
   @Override
   public List<? extends LogicModelInterpretation> getInterpretations(final ModelResult modelResult) {
-    return null;
+    List<VampireModelInterpretation> _xblockexpression = null;
+    {
+      final EList<Object> sols = modelResult.getRepresentation();
+      final Function1<Object, VampireModelInterpretation> _function = (Object it) -> {
+        Object _trace = modelResult.getTrace();
+        return new VampireModelInterpretation(
+          ((VampireModel) it), 
+          ((Logic2VampireLanguageMapperTrace) _trace));
+      };
+      _xblockexpression = ListExtensions.<Object, VampireModelInterpretation>map(sols, _function);
+    }
+    return _xblockexpression;
   }
 }
