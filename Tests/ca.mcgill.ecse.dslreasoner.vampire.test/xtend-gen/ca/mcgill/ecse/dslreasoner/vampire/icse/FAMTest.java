@@ -16,6 +16,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
+import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
@@ -36,6 +37,7 @@ public class FAMTest {
   public static void main(final String[] args) {
     try {
       final Ecore2Logic ecore2Logic = new Ecore2Logic();
+      final Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic);
       final Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic);
       final InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic();
       StringConcatenation _builder = new StringConcatenation();

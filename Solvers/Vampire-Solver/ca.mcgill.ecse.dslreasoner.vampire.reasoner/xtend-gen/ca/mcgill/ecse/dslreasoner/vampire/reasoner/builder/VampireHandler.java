@@ -1,9 +1,8 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSComment;
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.MonitoredVampireSolution;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.io.BufferedReader;
@@ -16,11 +15,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class VampireHandler {
-  public EList<EObject> callSolver(final VampireModel problem, final ReasonerWorkspace workspace, final VampireSolverConfiguration configuration) {
+  public MonitoredVampireSolution callSolver(final VampireModel problem, final ReasonerWorkspace workspace, final VampireSolverConfiguration configuration) {
     try {
       final String CMD = "cmd /c ";
       final String VAMPDIR = "..\\..\\Solvers\\Vampire-Solver\\ca.mcgill.ecse.dslreasoner.vampire.reasoner\\lib\\";
@@ -48,8 +46,7 @@ public class VampireHandler {
       workspace.getFile(TEMPNAME).delete();
       final EList<EObject> root = workspace.<VampireModel>readModel(VampireModel.class, SOLNNAME).eResource().getContents();
       EObject _get = root.get(0);
-      InputOutput.<EList<VLSComment>>println(((VampireModelImpl) _get).getComments());
-      return root;
+      return new MonitoredVampireSolution(((VampireModel) _get));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

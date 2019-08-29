@@ -3,25 +3,27 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import functionalarchitecture.Function
+import functionalarchitecture.FunctionalArchitectureModel
 import functionalarchitecture.FunctionalInterface
 import functionalarchitecture.FunctionalOutput
 import functionalarchitecture.FunctionalarchitecturePackage
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
+import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
+import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import functionalarchitecture.FunctionalArchitectureModel
 
 class FAMTest {
 	def static void main(String[] args) {
 		val Ecore2Logic ecore2Logic = new Ecore2Logic
+			val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
 		val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
 		val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
 
@@ -93,6 +95,15 @@ class FAMTest {
 		]
 
 		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
+		
+		//visualisation, see 
+//		var interpretations = reasoner.getInterpretations(solution as ModelResult)
+//		
+//		for(interpretation : interpretations) {
+//			val model = logic2Ecore.transformInterpretation(interpretation,modelGenerationProblem.trace)
+//			//look here: hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor
+//		}
+		//transform interpretation to ecore, and it is easy from there
 
 		/*/
 		 * 

@@ -560,7 +560,7 @@
   <elements name="Intermediate literal FunctionType" definedInType="//@types.9"/>
   <elements name="Leaf literal FunctionType" definedInType="//@types.9"/>
   <elements name="o 1" definedInType="//@types.10"/>
-  <containmentHierarchies typesOrderedInHierarchy="//@types.1 //@types.5 //@types.6 //@types.3 //@types.8 //@types.7 //@types.0 //@types.2 //@types.4 //@types.10 //@types.11" containmentRelations="//@relations.0 //@relations.3 //@relations.4 //@relations.8 //@relations.11 //@relations.12"/>
+  <containmentHierarchies typesOrderedInHierarchy="//@types.5 //@types.4 //@types.3 //@types.6 //@types.7 //@types.8 //@types.1 //@types.0 //@types.2 //@types.10 //@types.11" containmentRelations="//@relations.0 //@relations.3 //@relations.4 //@relations.8 //@relations.11 //@relations.12"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.0" relation="//@relations.0" upper="1"/>
   <annotations xsi:type="ecore2logicannotations:LowerMultiplicityAssertion" target="//@assertions.1" relation="//@relations.1" lower="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.2" relation="//@relations.1" upper="1"/>
