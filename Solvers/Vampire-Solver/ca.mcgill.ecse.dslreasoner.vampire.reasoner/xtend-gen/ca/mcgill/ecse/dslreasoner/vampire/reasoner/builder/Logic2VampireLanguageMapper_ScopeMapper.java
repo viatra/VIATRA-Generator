@@ -13,6 +13,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement;
@@ -244,7 +245,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       it.setFofRole("axiom");
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_2 = (VLSUniversalQuantifier it_1) -> {
-        EList<VLSVariable> _variables = it_1.getVariables();
+        EList<VLSVariableDeclaration> _variables = it_1.getVariables();
         VLSVariable _duplicate = this.support.duplicate(this.variable);
         _variables.add(_duplicate);
         VLSImplies _createVLSImplies = this.factory.createVLSImplies();

@@ -94,9 +94,13 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '!' '[' variables+=VLSVariable
+	 *     (rule start) (ambiguity) '!' '[' variables+=VLSVariableDeclaration
+	 *     (rule start) (ambiguity) '$false' ':' type=VLSTypeDef
 	 *     (rule start) (ambiguity) '$false' (rule start)
+	 *     (rule start) (ambiguity) '$true' ':' type=VLSTypeDef
 	 *     (rule start) (ambiguity) '$true' (rule start)
 	 *     (rule start) (ambiguity) '?' '[' variables+=VLSVariable
+	 *     (rule start) (ambiguity) '?' '[' variables+=VLSVariableDeclaration
 	 *     (rule start) (ambiguity) '~' operand=VLSUnitaryFormula
 	 *     (rule start) (ambiguity) constant=DOLLAR_ID
 	 *     (rule start) (ambiguity) constant=DOUBLE_DOLLAR_ID
@@ -112,8 +116,6 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 	 *     (rule start) (ambiguity) name=VLSRole
 	 *     (rule start) (ambiguity) value=DOUBLE_QUOTE
 	 *     (rule start) (ambiguity) value=SIGNED_LITERAL
-	 *     (rule start) (ambiguity) value=SIGNED_RAT_ID
-	 *     (rule start) (ambiguity) value=SIGNED_REAL_ID
 	 *     (rule start) (ambiguity) {VLSAnd.left=}
 	 *     (rule start) (ambiguity) {VLSAssignment.left=}
 	 *     (rule start) (ambiguity) {VLSEquality.left=}

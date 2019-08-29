@@ -6,8 +6,6 @@ package ca.mcgill.ecse.dslreasoner.formatting2;
 import ca.mcgill.ecse.dslreasoner.services.VampireLanguageGrammarAccess;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSComment;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInclude;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSName;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
 import com.google.inject.Inject;
 import java.util.Arrays;
@@ -27,24 +25,9 @@ public class VampireLanguageFormatter extends AbstractFormatter2 {
   private VampireLanguageGrammarAccess _vampireLanguageGrammarAccess;
   
   protected void _format(final VampireModel vampireModel, @Extension final IFormattableDocument document) {
-    EList<VLSInclude> _includes = vampireModel.getIncludes();
-    for (final VLSInclude vLSInclude : _includes) {
-      document.<VLSInclude>format(vLSInclude);
-    }
     EList<VLSComment> _comments = vampireModel.getComments();
     for (final VLSComment vLSComment : _comments) {
       document.<VLSComment>format(vLSComment);
-    }
-    EList<VLSFofFormula> _formulas = vampireModel.getFormulas();
-    for (final VLSFofFormula vLSFofFormula : _formulas) {
-      document.<VLSFofFormula>format(vLSFofFormula);
-    }
-  }
-  
-  protected void _format(final VLSInclude vLSInclude, @Extension final IFormattableDocument document) {
-    EList<VLSName> _names = vLSInclude.getNames();
-    for (final VLSName vLSName : _names) {
-      document.<VLSName>format(vLSName);
     }
   }
   
@@ -71,9 +54,6 @@ public class VampireLanguageFormatter extends AbstractFormatter2 {
       return;
     } else if (comment instanceof VLSFofFormula) {
       _format((VLSFofFormula)comment, document);
-      return;
-    } else if (comment instanceof VLSInclude) {
-      _format((VLSInclude)comment, document);
       return;
     } else if (comment instanceof VampireModel) {
       _format((VampireModel)comment, document);

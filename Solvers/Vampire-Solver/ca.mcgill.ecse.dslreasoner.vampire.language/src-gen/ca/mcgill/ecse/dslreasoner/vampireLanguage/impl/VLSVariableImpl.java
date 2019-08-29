@@ -3,12 +3,17 @@
  */
 package ca.mcgill.ecse.dslreasoner.vampireLanguage.impl;
 
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTypeDef;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -20,13 +25,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableImpl#getType <em>Type</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
+public class VLSVariableImpl extends VLSVariableDeclarationImpl implements VLSVariable
 {
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected VLSTypeDef type;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -73,6 +89,54 @@ public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
    * <!-- end-user-doc -->
    * @generated
    */
+  public VLSTypeDef getType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetType(VLSTypeDef newType, NotificationChain msgs)
+  {
+    VLSTypeDef oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_VARIABLE__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(VLSTypeDef newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_VARIABLE__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VampireLanguagePackage.VLS_VARIABLE__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VampireLanguagePackage.VLS_VARIABLE__TYPE, newType, newType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public String getName()
   {
     return name;
@@ -97,10 +161,28 @@ public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case VampireLanguagePackage.VLS_VARIABLE__TYPE:
+        return basicSetType(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_VARIABLE__TYPE:
+        return getType();
       case VampireLanguagePackage.VLS_VARIABLE__NAME:
         return getName();
     }
@@ -117,6 +199,9 @@ public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_VARIABLE__TYPE:
+        setType((VLSTypeDef)newValue);
+        return;
       case VampireLanguagePackage.VLS_VARIABLE__NAME:
         setName((String)newValue);
         return;
@@ -134,6 +219,9 @@ public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_VARIABLE__TYPE:
+        setType((VLSTypeDef)null);
+        return;
       case VampireLanguagePackage.VLS_VARIABLE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -151,10 +239,64 @@ public class VLSVariableImpl extends VLSTermImpl implements VLSVariable
   {
     switch (featureID)
     {
+      case VampireLanguagePackage.VLS_VARIABLE__TYPE:
+        return type != null;
       case VampireLanguagePackage.VLS_VARIABLE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == VLSOtherDeclaration.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    if (baseClass == VLSTerm.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case VampireLanguagePackage.VLS_VARIABLE__TYPE: return VampireLanguagePackage.VLS_TERM__TYPE;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == VLSOtherDeclaration.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    if (baseClass == VLSTerm.class)
+    {
+      switch (baseFeatureID)
+      {
+        case VampireLanguagePackage.VLS_TERM__TYPE: return VampireLanguagePackage.VLS_VARIABLE__TYPE;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**

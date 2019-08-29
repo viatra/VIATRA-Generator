@@ -66,18 +66,24 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
     switch (eClass.getClassifierID())
     {
       case VampireLanguagePackage.VAMPIRE_MODEL: return createVampireModel();
-      case VampireLanguagePackage.VLS_INCLUDE: return createVLSInclude();
-      case VampireLanguagePackage.VLS_NAME: return createVLSName();
       case VampireLanguagePackage.VLS_COMMENT: return createVLSComment();
       case VampireLanguagePackage.VLS_CONFIRMATIONS: return createVLSConfirmations();
-      case VampireLanguagePackage.VLS_SATISFIABLE: return createVLSSatisfiable();
       case VampireLanguagePackage.VLS_FOF_FORMULA: return createVLSFofFormula();
       case VampireLanguagePackage.VLS_TFF_FORMULA: return createVLSTffFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
+      case VampireLanguagePackage.VLS_TFF_TERM: return createVLSTffTerm();
+      case VampireLanguagePackage.VLS_DECLARATION: return createVLSDeclaration();
+      case VampireLanguagePackage.VLS_OTHER_DECLARATION: return createVLSOtherDeclaration();
+      case VampireLanguagePackage.VLS_VARIABLE_DECLARATION: return createVLSVariableDeclaration();
+      case VampireLanguagePackage.VLS_TYPE_DEF: return createVLSTypeDef();
       case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
       case VampireLanguagePackage.VLS_VARIABLE: return createVLSVariable();
       case VampireLanguagePackage.VLS_FUNCTION_AS_TERM: return createVLSFunctionAsTerm();
       case VampireLanguagePackage.VLS_DEFINED_TERM: return createVLSDefinedTerm();
+      case VampireLanguagePackage.VLS_SATISFIABLE: return createVLSSatisfiable();
+      case VampireLanguagePackage.VLS_WARNING: return createVLSWarning();
+      case VampireLanguagePackage.VLS_TRYING: return createVLSTrying();
+      case VampireLanguagePackage.VLS_FINITE_MODEL: return createVLSFiniteModel();
       case VampireLanguagePackage.VLS_EQUIVALENT: return createVLSEquivalent();
       case VampireLanguagePackage.VLS_IMPLIES: return createVLSImplies();
       case VampireLanguagePackage.VLS_REV_IMPLIES: return createVLSRevImplies();
@@ -98,8 +104,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
       case VampireLanguagePackage.VLS_FUNCTION: return createVLSFunction();
       case VampireLanguagePackage.VLS_LESS: return createVLSLess();
       case VampireLanguagePackage.VLS_INT: return createVLSInt();
-      case VampireLanguagePackage.VLS_REAL: return createVLSReal();
-      case VampireLanguagePackage.VLS_RATIONAL: return createVLSRational();
       case VampireLanguagePackage.VLS_DOUBLE_QUOTE: return createVLSDoubleQuote();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -122,28 +126,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
-  public VLSInclude createVLSInclude()
-  {
-    VLSIncludeImpl vlsInclude = new VLSIncludeImpl();
-    return vlsInclude;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSName createVLSName()
-  {
-    VLSNameImpl vlsName = new VLSNameImpl();
-    return vlsName;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public VLSComment createVLSComment()
   {
     VLSCommentImpl vlsComment = new VLSCommentImpl();
@@ -159,17 +141,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSConfirmationsImpl vlsConfirmations = new VLSConfirmationsImpl();
     return vlsConfirmations;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSSatisfiable createVLSSatisfiable()
-  {
-    VLSSatisfiableImpl vlsSatisfiable = new VLSSatisfiableImpl();
-    return vlsSatisfiable;
   }
 
   /**
@@ -203,6 +174,61 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSAnnotationImpl vlsAnnotation = new VLSAnnotationImpl();
     return vlsAnnotation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSTffTerm createVLSTffTerm()
+  {
+    VLSTffTermImpl vlsTffTerm = new VLSTffTermImpl();
+    return vlsTffTerm;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSDeclaration createVLSDeclaration()
+  {
+    VLSDeclarationImpl vlsDeclaration = new VLSDeclarationImpl();
+    return vlsDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSOtherDeclaration createVLSOtherDeclaration()
+  {
+    VLSOtherDeclarationImpl vlsOtherDeclaration = new VLSOtherDeclarationImpl();
+    return vlsOtherDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSVariableDeclaration createVLSVariableDeclaration()
+  {
+    VLSVariableDeclarationImpl vlsVariableDeclaration = new VLSVariableDeclarationImpl();
+    return vlsVariableDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSTypeDef createVLSTypeDef()
+  {
+    VLSTypeDefImpl vlsTypeDef = new VLSTypeDefImpl();
+    return vlsTypeDef;
   }
 
   /**
@@ -247,6 +273,50 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSDefinedTermImpl vlsDefinedTerm = new VLSDefinedTermImpl();
     return vlsDefinedTerm;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSSatisfiable createVLSSatisfiable()
+  {
+    VLSSatisfiableImpl vlsSatisfiable = new VLSSatisfiableImpl();
+    return vlsSatisfiable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSWarning createVLSWarning()
+  {
+    VLSWarningImpl vlsWarning = new VLSWarningImpl();
+    return vlsWarning;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSTrying createVLSTrying()
+  {
+    VLSTryingImpl vlsTrying = new VLSTryingImpl();
+    return vlsTrying;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VLSFiniteModel createVLSFiniteModel()
+  {
+    VLSFiniteModelImpl vlsFiniteModel = new VLSFiniteModelImpl();
+    return vlsFiniteModel;
   }
 
   /**
@@ -467,28 +537,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSIntImpl vlsInt = new VLSIntImpl();
     return vlsInt;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSReal createVLSReal()
-  {
-    VLSRealImpl vlsReal = new VLSRealImpl();
-    return vlsReal;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSRational createVLSRational()
-  {
-    VLSRationalImpl vlsRational = new VLSRationalImpl();
-    return vlsRational;
   }
 
   /**

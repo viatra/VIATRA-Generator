@@ -189,7 +189,7 @@ class Logic2VampireLanguageMapper_ContainmentMapper {
 
 // STEP 2 CONT'D
 		for (e : type2cont.entrySet) {
-			println(e.key + "   " + e.value)
+//			println(e.key + "   " + e.value)
 			val relFormula = createVLSFofFormula => [
 				it.name = support.toIDMultiple("containment_contained", e.key.constant.toString)
 				it.fofRole = "axiom"

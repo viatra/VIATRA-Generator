@@ -16,7 +16,6 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInt;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSReal;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
@@ -44,7 +43,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or;
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition;
@@ -98,7 +96,7 @@ public class Logic2VampireLanguageMapper {
   public TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> transformProblem(final LogicProblem problem, final VampireSolverConfiguration config) {
     VLSComment _createVLSComment = this.factory.createVLSComment();
     final Procedure1<VLSComment> _function = (VLSComment it) -> {
-      it.setComment("This is an initial Test Comment");
+      it.setComment("%This is an initial Test Comment");
     };
     final VLSComment initialComment = ObjectExtensions.<VLSComment>operator_doubleArrow(_createVLSComment, _function);
     VampireModel _createVampireModel = this.factory.createVampireModel();
@@ -200,14 +198,6 @@ public class Logic2VampireLanguageMapper {
       it.setValue(Integer.valueOf(literal.getValue()).toString());
     };
     return ObjectExtensions.<VLSInt>operator_doubleArrow(_createVLSInt, _function);
-  }
-  
-  protected VLSTerm _transformTerm(final RealLiteral literal, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    VLSReal _createVLSReal = this.factory.createVLSReal();
-    final Procedure1<VLSReal> _function = (VLSReal it) -> {
-      it.setValue(literal.getValue().toString());
-    };
-    return ObjectExtensions.<VLSReal>operator_doubleArrow(_createVLSReal, _function);
   }
   
   protected VLSTerm _transformTerm(final Not not, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
@@ -394,8 +384,6 @@ public class Logic2VampireLanguageMapper {
       return _transformTerm((Not)and, trace, variables);
     } else if (and instanceof Or) {
       return _transformTerm((Or)and, trace, variables);
-    } else if (and instanceof RealLiteral) {
-      return _transformTerm((RealLiteral)and, trace, variables);
     } else if (and instanceof InstanceOf) {
       return _transformTerm((InstanceOf)and, trace, variables);
     } else if (and instanceof SymbolicValue) {

@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getIncludes <em>Includes</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getComments <em>Comments</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getConfirmations <em>Confirmations</em>}</li>
  *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel#getFormulas <em>Formulas</em>}</li>
@@ -29,22 +28,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VampireModel extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Includes</b></em>' containment reference list.
-   * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInclude}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Includes</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Includes</em>' containment reference list.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVampireModel_Includes()
-   * @model containment="true"
-   * @generated
-   */
-  EList<VLSInclude> getIncludes();
-
   /**
    * Returns the value of the '<em><b>Comments</b></em>' containment reference list.
    * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSComment}.

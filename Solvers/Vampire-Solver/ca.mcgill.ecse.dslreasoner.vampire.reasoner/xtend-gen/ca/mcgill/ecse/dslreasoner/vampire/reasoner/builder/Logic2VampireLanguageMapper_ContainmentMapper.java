@@ -15,6 +15,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -37,7 +38,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -123,7 +123,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
       it.setFofRole("axiom");
       VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
       final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it_1) -> {
-        EList<VLSVariable> _variables = it_1.getVariables();
+        EList<VLSVariableDeclaration> _variables = it_1.getVariables();
         VLSVariable _duplicate = this.support.duplicate(this.variable);
         _variables.add(_duplicate);
         VLSEquivalent _createVLSEquivalent = this.factory.createVLSEquivalent();
@@ -193,10 +193,10 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
           it.setFofRole("axiom");
           VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
           final Procedure1<VLSExistentialQuantifier> _function_5 = (VLSExistentialQuantifier it_1) -> {
-            EList<VLSVariable> _variables = it_1.getVariables();
+            EList<VLSVariableDeclaration> _variables = it_1.getVariables();
             VLSVariable _duplicate = this.support.duplicate(varA);
             _variables.add(_duplicate);
-            EList<VLSVariable> _variables_1 = it_1.getVariables();
+            EList<VLSVariableDeclaration> _variables_1 = it_1.getVariables();
             VLSVariable _duplicate_1 = this.support.duplicate(varB);
             _variables_1.add(_duplicate_1);
             VLSImplies _createVLSImplies = this.factory.createVLSImplies();
@@ -206,10 +206,10 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
               final Procedure1<VLSUnaryNegation> _function_7 = (VLSUnaryNegation it_3) -> {
                 VLSExistentialQuantifier _createVLSExistentialQuantifier_1 = this.factory.createVLSExistentialQuantifier();
                 final Procedure1<VLSExistentialQuantifier> _function_8 = (VLSExistentialQuantifier it_4) -> {
-                  EList<VLSVariable> _variables_2 = it_4.getVariables();
+                  EList<VLSVariableDeclaration> _variables_2 = it_4.getVariables();
                   VLSVariable _duplicate_2 = this.support.duplicate(varC);
                   _variables_2.add(_duplicate_2);
-                  EList<VLSVariable> _variables_3 = it_4.getVariables();
+                  EList<VLSVariableDeclaration> _variables_3 = it_4.getVariables();
                   VLSVariable _duplicate_3 = this.support.duplicate(varB);
                   _variables_3.add(_duplicate_3);
                   it_4.setOperand(this.support.duplicate(rel, CollectionLiterals.<VLSVariable>newArrayList(varC, varB)));
@@ -234,18 +234,13 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
     Set<Map.Entry<VLSFunction, List<VLSFunction>>> _entrySet = type2cont.entrySet();
     for (final Map.Entry<VLSFunction, List<VLSFunction>> e : _entrySet) {
       {
-        VLSFunction _key = e.getKey();
-        String _plus = (_key + "   ");
-        List<VLSFunction> _value = e.getValue();
-        String _plus_1 = (_plus + _value);
-        InputOutput.<String>println(_plus_1);
         VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
         final Procedure1<VLSFofFormula> _function_4 = (VLSFofFormula it) -> {
           it.setName(this.support.toIDMultiple("containment_contained", e.getKey().getConstant().toString()));
           it.setFofRole("axiom");
           VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
           final Procedure1<VLSUniversalQuantifier> _function_5 = (VLSUniversalQuantifier it_1) -> {
-            EList<VLSVariable> _variables = it_1.getVariables();
+            EList<VLSVariableDeclaration> _variables = it_1.getVariables();
             VLSVariable _duplicate = this.support.duplicate(varA);
             _variables.add(_duplicate);
             VLSImplies _createVLSImplies = this.factory.createVLSImplies();
@@ -253,7 +248,7 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
               it_2.setLeft(this.support.duplicate(e.getKey(), varA));
               VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
               final Procedure1<VLSExistentialQuantifier> _function_7 = (VLSExistentialQuantifier it_3) -> {
-                EList<VLSVariable> _variables_1 = it_3.getVariables();
+                EList<VLSVariableDeclaration> _variables_1 = it_3.getVariables();
                 VLSVariable _duplicate_1 = this.support.duplicate(varB);
                 _variables_1.add(_duplicate_1);
                 int _length_1 = ((Object[])Conversions.unwrapArray(e.getValue(), Object.class)).length;
@@ -313,9 +308,9 @@ public class Logic2VampireLanguageMapper_ContainmentMapper {
           final Procedure1<VLSUnaryNegation> _function_6 = (VLSUnaryNegation it_1) -> {
             VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
             final Procedure1<VLSExistentialQuantifier> _function_7 = (VLSExistentialQuantifier it_2) -> {
-              EList<VLSVariable> _variables = it_2.getVariables();
+              EList<VLSVariableDeclaration> _variables = it_2.getVariables();
               List<VLSVariable> _duplicate = this.support.duplicate(variables);
-              Iterables.<VLSVariable>addAll(_variables, _duplicate);
+              Iterables.<VLSVariableDeclaration>addAll(_variables, _duplicate);
               it_2.setOperand(this.support.unfoldAnd(conjunctionList));
             };
             VLSExistentialQuantifier _doubleArrow_1 = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_7);
