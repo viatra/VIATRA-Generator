@@ -494,8 +494,8 @@ class LogicProblemBuilder{
 	def transitiveClosure(Relation relation, TermDescription source, TermDescription target) {
 		createTransitiveClosure => [
 			it.relation = relation
-			it.leftOperand = leftOperand
-			it.rightOperand = rightOperand
+			it.leftOperand = source.toTerm
+			it.rightOperand = target.toTerm
 		]
 	}
 	
