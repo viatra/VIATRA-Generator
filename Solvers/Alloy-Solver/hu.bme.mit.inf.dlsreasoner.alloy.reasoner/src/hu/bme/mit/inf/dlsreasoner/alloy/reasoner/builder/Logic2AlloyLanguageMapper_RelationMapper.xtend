@@ -133,11 +133,11 @@ class Logic2AlloyLanguageMapper_RelationMapper {
 	public def dispatch void prepareTransitiveClosure(RelationDefinition relation, Logic2AlloyLanguageMapperTrace trace) {
 		if(relation.parameters.size === 2) {
 			/** 1. Create a relation that can be used in ^relation expressions */ 
-			val declaration = this.createRelationDeclaration('''AsDeclaration «relation.name»''',relation.parameters,trace)
+			val declaration = this.createRelationDeclaration(support.toID('''AsDeclaration «relation.name»'''),relation.parameters,trace)
 			trace.relationInTransitiveToHosterField.put(relation,declaration)
 			/** 2. Add fact that the declaration corresponds to the definition */
 			val fact = createALSFactDeclaration => [
-				it.name = '''EqualsAsDeclaration «relation.name»'''
+				it.name = support.toID('''EqualsAsDeclaration «relation.name»''')
 				it.term = createALSQuantifiedEx => [
 					val a = createALSVariableDeclaration => [
 						it.name = "a"
@@ -157,7 +157,7 @@ class Logic2AlloyLanguageMapper_RelationMapper {
 							it.params += createALSReference => [ it.referred = b ]
 						]
 						it.rightOperand = createALSSubset => [
-							it.leftOperand = createALSJoin => [
+							it.leftOperand = createALSDirectProduct => [
 								it.leftOperand = createALSReference => [ referred = a ]
 								it.rightOperand = createALSReference => [ referred = b ]
 							]
@@ -183,12 +183,15 @@ class Logic2AlloyLanguageMapper_RelationMapper {
 				rightOperand = createALSReference => [ referred =relation.lookup(trace.relationInTransitiveToGlobalField) ]
 			]
 		} else if(trace.relationInTransitiveToHosterField.containsKey(relation)){
-			createALSReference => [it.referred = relation.lookup(trace.relationInTransitiveToHosterField) ]
+			createALSJoin => [
+				leftOperand = createALSReference => [referred = trace.logicLanguage]
+				rightOperand = createALSReference => [it.referred = relation.lookup(trace.relationInTransitiveToHosterField) ]
+				]
 		} else {
 			throw new AssertionError('''Relation «relation.name» is not prepared to transitive closure!''')
 		}
 		return createALSSubset => [
-			it.leftOperand = createALSJoin => [
+			it.leftOperand = createALSDirectProduct => [
 				it.leftOperand = source
 				it.rightOperand = target
 			]
