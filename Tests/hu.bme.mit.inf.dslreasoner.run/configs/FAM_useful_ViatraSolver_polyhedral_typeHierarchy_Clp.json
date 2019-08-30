@@ -4,10 +4,13 @@
 	"timeout": 1200,
 	"saveModels": true,
 	"warmupIterations": 0,
-	"iterations": 1,
+	"iterations": 5,
 	"domain": "FAM",
 	"scope": "none",
 	"sizes": [500],
 	"solver": "ViatraSolver",
-	"scopePropagator": "basic"
+	"scopePropagator": "polyhedral",
+	"propagatedConstraints": "hints",
+	"polyhedronSolver": "Clp",
+	"scopeHeuristics": "polyhedral"
 }

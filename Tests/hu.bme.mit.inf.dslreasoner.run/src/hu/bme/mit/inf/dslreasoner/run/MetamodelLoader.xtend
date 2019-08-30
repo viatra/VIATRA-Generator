@@ -85,8 +85,9 @@ class FAMLoader extends MetamodelLoader {
 		val List<EClass> classes = package.EClassifiers.filter(EClass).toList
 		val List<EEnum> enums = package.EClassifiers.filter(EEnum).toList
 		val List<EEnumLiteral> literals = enums.map[ELiterals].flatten.toList
-		val List<EReference> references = classes.map[EReferences].flatten.filter[name != "type" && name != "model"].
-			toList
+		val List<EReference> references = classes.map[EReferences].flatten.filter [ reference |
+			!#{"model", "type"}.contains(reference.name)
+		].toList
 		val List<EAttribute> attributes = classes.map[EAttributes].flatten.toList
 		return new EcoreMetamodelDescriptor(classes, #{}, false, enums, literals, references, attributes)
 	}
@@ -196,7 +197,7 @@ class YakinduLoader extends MetamodelLoader {
 	}
 
 	override additionalConstraints() {
-		//#[[method|new SGraphInconsistencyDetector(method)]]
+		// #[[method|new SGraphInconsistencyDetector(method)]]
 		emptyList
 	}
 
@@ -261,7 +262,7 @@ class FileSystemLoader extends MetamodelLoader {
 	}
 
 	override additionalConstraints() {
-		//#[[method|new FileSystemInconsistencyDetector(method)]]
+		// #[[method|new FileSystemInconsistencyDetector(method)]]
 		emptyList
 	}
 
@@ -386,11 +387,11 @@ class SatelliteLoader extends MetamodelLoader {
 	}
 
 	override additionalConstraints() { #[] }
-	
+
 	override getHints(Ecore2Logic ecore2Logic, Ecore2Logic_Trace trace) {
 		#[new SatelliteHint(ecore2Logic, trace)]
 	}
-	
+
 	override getTypeQuantiles() {
 		#{
 			"CubeSat3U" -> new TypeQuantiles(0.1, 0.25),
@@ -402,5 +403,5 @@ class SatelliteLoader extends MetamodelLoader {
 			"InterferometryPayload" -> new TypeQuantiles(0.15, 0.25)
 		}
 	}
-	
+
 }
