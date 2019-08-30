@@ -5,22 +5,21 @@ import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSDocument
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSInt
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSNumberLiteral
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSRunCommand
+import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSTerm
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
-import java.util.LinkedList
 import java.util.List
-
-import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class RunCommandMapper {
 	val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
 	val Logic2AlloyLanguageMapper_Support support = new Logic2AlloyLanguageMapper_Support;
 	val Logic2AlloyLanguageMapper_TypeMapper typeMapper;
+	val Logic2AlloyLanguageMapper_TypeScopeMapping typeScopeMapping;
 	
 	new(Logic2AlloyLanguageMapper_TypeMapper typeMapper) {
 		this.typeMapper = typeMapper
+		this.typeScopeMapping = new Logic2AlloyLanguageMapper_AsConstraint(typeMapper)
 	}
 	
 	def transformRunCommand(Logic2AlloyLanguageMapper mapper, ALSDocument specification, Logic2AlloyLanguageMapperTrace trace, AlloySolverConfiguration config)
@@ -38,28 +37,47 @@ class RunCommandMapper {
 				it.term = support.unfoldAnd(equals)
 			]
 		}
-		val typeScopes = new LinkedList
-		for(definedScope : config.typeScopes.maxNewElementsByType.entrySet) {
-				val key = definedScope.key
-				val amount = definedScope.value
-				val exactly = config.typeScopes.minNewElementsByType.containsKey(key) && config.typeScopes.minNewElementsByType.get(key) === amount
-				
-				val existing = key.transitiveClosureStar[it.subtypes].filter(TypeDefinition).map[elements].flatten.toSet
-				if(amount == 0 && exactly) {
-					specification.factDeclarations += createALSFactDeclaration => [
-						it.term = createALSEquals => [
-							it.leftOperand = support.unfoldPlus(typeMapper.transformTypeReference(key,mapper,trace).map[t|createALSReference => [it.referred = t]].toList)
-							it.rightOperand =  support.unfoldPlus( existing.map[typeMapper.transformReference(it,trace)].toList )
-						]
+		
+		/*
+		val upperLimits = new LinkedList
+		val lowerLimits = new LinkedList
+		
+		/*val typesWithScopeConstraint = config.typeScopes.maxNewElementsByType.keySet + config.typeScopes.minNewElementsByType.keySet
+		for(type : typesWithScopeConstraint) {
+			val max = if(config.typeScopes.maxNewElementsByType.containsKey(type)) {
+				config.typeScopes.maxNewElementsByType.get(type)
+			} else {
+				LogicSolverConfiguration::Unlimited
+			}
+			val min = if(config.typeScopes.minNewElementsByType.containsKey(type)) {
+				config.typeScopes.minNewElementsByType.get(type)
+			} else {
+				0
+			}
+			
+			val exactly = min === max
+			
+			if(max === 0) {
+				val existing = type.transitiveClosureStar[it.subtypes].filter(TypeDefinition).map[elements].flatten.toSet
+				specification.factDeclarations += createALSFactDeclaration => [
+					it.term = createALSEquals => [
+						it.leftOperand = support.unfoldPlus(typeMapper.transformTypeReference(type,mapper,trace).map[t|createALSReference => [it.referred = t]].toList)
+						it.rightOperand =  support.unfoldPlus( existing.map[typeMapper.transformReference(it,trace)].toList )
 					]
-				}
-				val int n = existing.size-amount
-				typeScopes += createALSSigScope => [
-					it.type = typeMapper.transformTypeReference(key,mapper,trace).head
-					it.number = n
+				]
+			} else if(max !== LogicSolverConfiguration::Unlimited) {
+				upperLimits += createALSSigScope => [
+					it.type = typeMapper.transformTypeReference(type,mapper,trace).head
+					it.number = max
 					it.exactly =exactly
 				]
+			} else {
+				// do nothing
 			}
+			if(min != 0 && ! exactly) {
+				lowerLimits += type->min
+			}
+		}*/
 		
 		specification.runCommand = createALSRunCommand => [
 			it.typeScopes+= createALSSigScope => [
@@ -67,9 +85,25 @@ class RunCommandMapper {
 				it.number = typeMapper.getUndefinedSupertypeScope(config.typeScopes.maxNewElements,trace) 
 				it.exactly = (config.typeScopes.maxNewElements == config.typeScopes.minNewElements)
 			]
-			setIntegerScope(specification,config,it)
-			setStringScope(specification,config,it)
+			
 		]
+		
+		for(upperLimit : config.typeScopes.maxNewElementsByType.entrySet) {
+			val limit = upperLimit.value
+			if(limit != LogicSolverConfiguration::Unlimited) {
+				this.typeScopeMapping.addUpperMultiplicity(specification,upperLimit.key,limit,mapper,trace)
+			}
+		}
+		
+		for(lowerLimit : config.typeScopes.minNewElementsByType.entrySet) {
+			val limit = lowerLimit.value
+			if(limit != 0) {
+				this.typeScopeMapping.addLowerMultiplicity(specification,lowerLimit.key,limit,mapper,trace)
+			}
+		}
+		
+		setIntegerScope(specification,config,specification.runCommand)
+		setStringScope(specification,config,specification.runCommand)
 	}
 	
 	protected def Boolean setStringScope(ALSDocument specification, AlloySolverConfiguration config, ALSRunCommand it) {
@@ -79,7 +113,11 @@ class RunCommandMapper {
 			if(config.typeScopes.maxNewStrings == 0) {
 				it.typeScopes += createALSStringScope => [it.number = 0]
 			} else {
-				throw new UnsupportedOperationException('''A string scope have to be specified for Alloy!''')
+				if(specification.eAllContents.filter(ALSString).empty) {
+					it.typeScopes += createALSStringScope => [it.number = 0]
+				} else {
+					throw new UnsupportedOperationException('''A string scope have to be specified for Alloy!''')
+				}
 			}
 		}
 	}
@@ -99,13 +137,17 @@ class RunCommandMapper {
 			}
 		} else {
 			// If the scope is limited, collect the integers in the problem and the scope,...
-			val maxIntScope = config.typeScopes.maxNewIntegers
-			val minIntScope = config.typeScopes.minNewIntegers
+			//val maxIntScope = config.typeScopes.maxNewIntegers
+			//val minIntScope = config.typeScopes.minNewIntegers
 			val knownIntegers = config.typeScopes.knownIntegers
-			val integersInProblem = specification.eAllContents.filter(ALSNumberLiteral).map[it.value]
+			val minKnownInteger = if(knownIntegers.empty) { Integer.MAX_VALUE } else { knownIntegers.min }
+			val maxKnownInteger = if(knownIntegers.empty) { Integer.MIN_VALUE } else { knownIntegers.max }
+			val integersInProblem = specification.eAllContents.filter(ALSNumberLiteral).map[it.value].toList
+			val minIntegerInProblem = if(integersInProblem.empty) { Integer.MAX_VALUE } else { integersInProblem.min }
+			val maxIntegerInProblem = if(integersInProblem.empty) { Integer.MIN_VALUE } else { integersInProblem.max }
 			// And select the range of integers
-			val min = #[minIntScope,knownIntegers.min,integersInProblem.min].min
-			val max = #[maxIntScope,knownIntegers.max,integersInProblem.max].max
+			val min = #[minKnownInteger,minIntegerInProblem].min
+			val max = #[maxKnownInteger,maxIntegerInProblem].max
 			//val abs = Math.max(Math.abs(min),Math.abs(max))
 			
 			
