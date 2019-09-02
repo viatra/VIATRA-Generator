@@ -11,9 +11,9 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSInequality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOr;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -324,9 +324,9 @@ public class Logic2VampireLanguageMapper_Support {
       if (isUniversal) {
         VLSUniversalQuantifier _createVLSUniversalQuantifier = this.factory.createVLSUniversalQuantifier();
         final Procedure1<VLSUniversalQuantifier> _function_1 = (VLSUniversalQuantifier it) -> {
-          EList<VLSVariableDeclaration> _variables = it.getVariables();
+          EList<VLSTffTerm> _variables = it.getVariables();
           Collection<VLSVariable> _values = variableMap.values();
-          Iterables.<VLSVariableDeclaration>addAll(_variables, _values);
+          Iterables.<VLSTffTerm>addAll(_variables, _values);
           VLSImplies _createVLSImplies = this.factory.createVLSImplies();
           final Procedure1<VLSImplies> _function_2 = (VLSImplies it_1) -> {
             it_1.setLeft(this.unfoldAnd(typedefs));
@@ -342,9 +342,9 @@ public class Logic2VampireLanguageMapper_Support {
           typedefs.add(mapper.transformTerm(expression.getExpression(), trace, this.withAddition(variables, variableMap)));
           VLSExistentialQuantifier _createVLSExistentialQuantifier = this.factory.createVLSExistentialQuantifier();
           final Procedure1<VLSExistentialQuantifier> _function_2 = (VLSExistentialQuantifier it) -> {
-            EList<VLSVariableDeclaration> _variables = it.getVariables();
+            EList<VLSTffTerm> _variables = it.getVariables();
             Collection<VLSVariable> _values = variableMap.values();
-            Iterables.<VLSVariableDeclaration>addAll(_variables, _values);
+            Iterables.<VLSTffTerm>addAll(_variables, _values);
             it.setOperand(this.unfoldAnd(typedefs));
           };
           _xblockexpression_1 = ObjectExtensions.<VLSExistentialQuantifier>operator_doubleArrow(_createVLSExistentialQuantifier, _function_2);

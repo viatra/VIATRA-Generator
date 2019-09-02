@@ -42,6 +42,7 @@ class Logic2VampireLanguageMapper_TypeMapper {
 				it.terms += support.duplicate(variable)
 			]
 			trace.type2Predicate.put(type, typePred)
+			trace.predicate2Type.put(typePred, type)
 		}
 
 		// 2. Map each ENUM/InitialModelElement type definition to fof formula

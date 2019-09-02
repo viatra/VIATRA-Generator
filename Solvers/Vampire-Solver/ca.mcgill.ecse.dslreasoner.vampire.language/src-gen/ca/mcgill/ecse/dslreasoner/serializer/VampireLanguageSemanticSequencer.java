@@ -25,6 +25,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSLess;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSNand;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSNor;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOr;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSRevImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula;
@@ -34,6 +35,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTypeDef;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUniversalQuantifier;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSWarning;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSXnor;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
@@ -84,36 +86,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				sequence_VLSComment(context, (VLSComment) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_CONSTANT:
-				if (rule == grammarAccess.getVLSTermRule()
-						|| rule == grammarAccess.getVLSBinaryRule()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSEquivalentLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSImpliesLeftAction_1_0_0_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSRevImpliesLeftAction_1_0_0_2_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSXnorLeftAction_1_0_0_3_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNorLeftAction_1_0_0_4_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNandLeftAction_1_0_0_5_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSAndLeftAction_1_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSOrLeftAction_1_2_0()
-						|| rule == grammarAccess.getVLSUnitaryFormulaRule()
-						|| rule == grammarAccess.getVLSUnaryInfixRule()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSInequalityLeftAction_1_0_0_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSEqualityLeftAction_1_0_1_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSAssignmentLeftAction_1_0_2_0()
-						|| rule == grammarAccess.getVLSAtomicRule()
-						|| rule == grammarAccess.getVLSAtomicConstantRule()) {
-					sequence_VLSAtomicConstant(context, (VLSConstant) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSTffTermRule()) {
-					sequence_VLSAtomicConstant_VLSOtherDeclaration(context, (VLSConstant) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSDeclarationRule()
-						|| rule == grammarAccess.getVLSOtherDeclarationRule()) {
-					sequence_VLSAtomicConstant_VLSOtherDeclaration(context, (VLSConstant) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_VLSAtomicConstant(context, (VLSConstant) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_DOUBLE_QUOTE:
 				sequence_VLSDefinedTerm(context, (VLSDoubleQuote) semanticObject); 
 				return; 
@@ -127,36 +101,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				sequence_VLSExistentialQuantifier(context, (VLSExistentialQuantifier) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_FALSE:
-				if (rule == grammarAccess.getVLSTermRule()
-						|| rule == grammarAccess.getVLSBinaryRule()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSEquivalentLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSImpliesLeftAction_1_0_0_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSRevImpliesLeftAction_1_0_0_2_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSXnorLeftAction_1_0_0_3_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNorLeftAction_1_0_0_4_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNandLeftAction_1_0_0_5_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSAndLeftAction_1_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSOrLeftAction_1_2_0()
-						|| rule == grammarAccess.getVLSUnitaryFormulaRule()
-						|| rule == grammarAccess.getVLSUnaryInfixRule()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSInequalityLeftAction_1_0_0_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSEqualityLeftAction_1_0_1_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSAssignmentLeftAction_1_0_2_0()
-						|| rule == grammarAccess.getVLSAtomicRule()
-						|| rule == grammarAccess.getVLSAtomicConstantRule()) {
-					sequence_VLSAtomicConstant(context, (VLSFalse) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSTffTermRule()) {
-					sequence_VLSAtomicConstant_VLSOtherDeclaration(context, (VLSFalse) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSDeclarationRule()
-						|| rule == grammarAccess.getVLSOtherDeclarationRule()) {
-					sequence_VLSAtomicConstant_VLSOtherDeclaration(context, (VLSFalse) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_VLSAtomicConstant(context, (VLSFalse) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_FINITE_MODEL:
 				sequence_VLSConfirmations(context, (VLSFiniteModel) semanticObject); 
 				return; 
@@ -190,6 +136,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 			case VampireLanguagePackage.VLS_OR:
 				sequence_VLSBinary(context, (VLSOr) semanticObject); 
 				return; 
+			case VampireLanguagePackage.VLS_OTHER_DECLARATION:
+				sequence_VLSOtherDeclaration(context, (VLSOtherDeclaration) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_REV_IMPLIES:
 				sequence_VLSBinary(context, (VLSRevImplies) semanticObject); 
 				return; 
@@ -200,36 +149,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				sequence_VLSTffFormula(context, (VLSTffFormula) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_TRUE:
-				if (rule == grammarAccess.getVLSTffTermRule()) {
-					sequence_VLSAtomicConstant_VLSOtherDeclaration(context, (VLSTrue) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSDeclarationRule()
-						|| rule == grammarAccess.getVLSOtherDeclarationRule()) {
-					sequence_VLSAtomicConstant_VLSOtherDeclaration(context, (VLSTrue) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSTermRule()
-						|| rule == grammarAccess.getVLSBinaryRule()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSEquivalentLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSImpliesLeftAction_1_0_0_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSRevImpliesLeftAction_1_0_0_2_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSXnorLeftAction_1_0_0_3_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNorLeftAction_1_0_0_4_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNandLeftAction_1_0_0_5_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSAndLeftAction_1_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSOrLeftAction_1_2_0()
-						|| rule == grammarAccess.getVLSUnitaryFormulaRule()
-						|| rule == grammarAccess.getVLSUnaryInfixRule()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSInequalityLeftAction_1_0_0_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSEqualityLeftAction_1_0_1_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSAssignmentLeftAction_1_0_2_0()
-						|| rule == grammarAccess.getVLSAtomicRule()
-						|| rule == grammarAccess.getVLSAtomicConstantRule()) {
-					sequence_VLSAtomicConstant(context, (VLSTrue) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_VLSAtomicConstant(context, (VLSTrue) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_TRYING:
 				sequence_VLSConfirmations(context, (VLSTrying) semanticObject); 
 				return; 
@@ -250,37 +171,11 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				sequence_VLSUniversalQuantifier(context, (VLSUniversalQuantifier) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_VARIABLE:
-				if (rule == grammarAccess.getVLSTermRule()
-						|| rule == grammarAccess.getVLSBinaryRule()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSEquivalentLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSImpliesLeftAction_1_0_0_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSRevImpliesLeftAction_1_0_0_2_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSXnorLeftAction_1_0_0_3_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNorLeftAction_1_0_0_4_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSNandLeftAction_1_0_0_5_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSAndLeftAction_1_1_0()
-						|| action == grammarAccess.getVLSBinaryAccess().getVLSOrLeftAction_1_2_0()
-						|| rule == grammarAccess.getVLSUnitaryFormulaRule()
-						|| rule == grammarAccess.getVLSUnaryInfixRule()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSInequalityLeftAction_1_0_0_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSEqualityLeftAction_1_0_1_0()
-						|| action == grammarAccess.getVLSUnaryInfixAccess().getVLSAssignmentLeftAction_1_0_2_0()
-						|| rule == grammarAccess.getVLSAtomicRule()
-						|| rule == grammarAccess.getVLSVariableRule()
-						|| rule == grammarAccess.getVLSFofTermRule()) {
-					sequence_VLSVariable(context, (VLSVariable) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSTffTermRule()) {
-					sequence_VLSVariable_VLSVariableDeclaration(context, (VLSVariable) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getVLSDeclarationRule()
-						|| rule == grammarAccess.getVLSVariableDeclarationRule()) {
-					sequence_VLSVariable_VLSVariableDeclaration(context, (VLSVariable) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_VLSVariable(context, (VLSVariable) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_VARIABLE_DECLARATION:
+				sequence_VLSVariableDeclaration(context, (VLSVariableDeclaration) semanticObject); 
+				return; 
 			case VampireLanguagePackage.VLS_WARNING:
 				sequence_VLSConfirmations(context, (VLSWarning) semanticObject); 
 				return; 
@@ -321,6 +216,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTffTerm returns VLSConstant
 	 *     VLSTerm returns VLSConstant
 	 *     VLSBinary returns VLSConstant
 	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSConstant
@@ -349,6 +245,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTffTerm returns VLSFalse
 	 *     VLSTerm returns VLSFalse
 	 *     VLSBinary returns VLSFalse
 	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSFalse
@@ -377,81 +274,7 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
-	 *     VLSTffTerm returns VLSConstant
-	 *
-	 * Constraint:
-	 *     ((name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=DOLLAR_ID | name=DOUBLE_DOLLAR_ID | name=VLSRole) type=VLSTypeDef?)
-	 */
-	protected void sequence_VLSAtomicConstant_VLSOtherDeclaration(ISerializationContext context, VLSConstant semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	// This method is commented out because it has the same signature as another method in this class.
-	// This is probably a bug in Xtext's serializer, please report it here: 
-	// https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF
-	//
-	// Contexts:
-	//     VLSDeclaration returns VLSConstant
-	//     VLSOtherDeclaration returns VLSConstant
-	//
-	// Constraint:
-	//     ((name=LOWER_WORD_ID | name=SINGLE_QUOTE | name=DOLLAR_ID | name=DOUBLE_DOLLAR_ID | name=VLSRole) type=VLSTypeDef)
-	//
-	// protected void sequence_VLSAtomicConstant_VLSOtherDeclaration(ISerializationContext context, VLSConstant semanticObject) { }
-	
-	/**
-	 * Contexts:
-	 *     VLSTffTerm returns VLSFalse
-	 *
-	 * Constraint:
-	 *     type=VLSTypeDef?
-	 */
-	protected void sequence_VLSAtomicConstant_VLSOtherDeclaration(ISerializationContext context, VLSFalse semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	// This method is commented out because it has the same signature as another method in this class.
-	// This is probably a bug in Xtext's serializer, please report it here: 
-	// https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF
-	//
-	// Contexts:
-	//     VLSDeclaration returns VLSFalse
-	//     VLSOtherDeclaration returns VLSFalse
-	//
-	// Constraint:
-	//     type=VLSTypeDef
-	//
-	// protected void sequence_VLSAtomicConstant_VLSOtherDeclaration(ISerializationContext context, VLSFalse semanticObject) { }
-	
-	/**
-	 * Contexts:
 	 *     VLSTffTerm returns VLSTrue
-	 *
-	 * Constraint:
-	 *     type=VLSTypeDef?
-	 */
-	protected void sequence_VLSAtomicConstant_VLSOtherDeclaration(ISerializationContext context, VLSTrue semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	// This method is commented out because it has the same signature as another method in this class.
-	// This is probably a bug in Xtext's serializer, please report it here: 
-	// https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF
-	//
-	// Contexts:
-	//     VLSDeclaration returns VLSTrue
-	//     VLSOtherDeclaration returns VLSTrue
-	//
-	// Constraint:
-	//     type=VLSTypeDef
-	//
-	// protected void sequence_VLSAtomicConstant_VLSOtherDeclaration(ISerializationContext context, VLSTrue semanticObject) { }
-	
-	/**
-	 * Contexts:
 	 *     VLSTerm returns VLSTrue
 	 *     VLSBinary returns VLSTrue
 	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSTrue
@@ -959,8 +782,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Constraint:
 	 *     (
 	 *         (variables+=VLSVariable | variables+=VLSVariableDeclaration) 
-	 *         variables+=VLSVariable? 
-	 *         (variables+=VLSVariableDeclaration? variables+=VLSVariable?)* 
+	 *         variables+=VLSVariableDeclaration? 
+	 *         (variables+=VLSVariable? variables+=VLSVariableDeclaration?)* 
 	 *         operand=VLSUnitaryFormula
 	 *     )
 	 */
@@ -991,6 +814,29 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 */
 	protected void sequence_VLSFunctionAsTerm(ISerializationContext context, VLSFunctionAsTerm semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSTffTerm returns VLSOtherDeclaration
+	 *     VLSDeclaration returns VLSOtherDeclaration
+	 *     VLSOtherDeclaration returns VLSOtherDeclaration
+	 *
+	 * Constraint:
+	 *     (name=VLSAtomicConstant type=VLSTypeDef)
+	 */
+	protected void sequence_VLSOtherDeclaration(ISerializationContext context, VLSOtherDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_OTHER_DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_OTHER_DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_DECLARATION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_DECLARATION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVLSOtherDeclarationAccess().getNameVLSAtomicConstantParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getVLSOtherDeclarationAccess().getTypeVLSTypeDefParserRuleCall_2_0(), semanticObject.getType());
+		feeder.finish();
 	}
 	
 	
@@ -1178,8 +1024,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Constraint:
 	 *     (
 	 *         (variables+=VLSVariable | variables+=VLSVariableDeclaration) 
-	 *         variables+=VLSVariableDeclaration? 
-	 *         (variables+=VLSVariable? variables+=VLSVariableDeclaration?)* 
+	 *         variables+=VLSVariable? 
+	 *         (variables+=VLSVariableDeclaration? variables+=VLSVariable?)* 
 	 *         operand=VLSUnitaryFormula
 	 *     )
 	 */
@@ -1190,6 +1036,30 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTffTerm returns VLSVariableDeclaration
+	 *     VLSDeclaration returns VLSVariableDeclaration
+	 *     VLSVariableDeclaration returns VLSVariableDeclaration
+	 *
+	 * Constraint:
+	 *     (name=VLSVariable type=VLSTypeDef)
+	 */
+	protected void sequence_VLSVariableDeclaration(ISerializationContext context, VLSVariableDeclaration semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE_DECLARATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_VARIABLE_DECLARATION__NAME));
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_DECLARATION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_DECLARATION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVLSVariableDeclarationAccess().getNameVLSVariableParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getVLSVariableDeclarationAccess().getTypeVLSTypeDefParserRuleCall_2_0(), semanticObject.getType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VLSTffTerm returns VLSVariable
 	 *     VLSTerm returns VLSVariable
 	 *     VLSBinary returns VLSVariable
 	 *     VLSBinary.VLSEquivalent_1_0_0_0_0 returns VLSVariable
@@ -1222,31 +1092,6 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 		feeder.finish();
 	}
 	
-	
-	/**
-	 * Contexts:
-	 *     VLSTffTerm returns VLSVariable
-	 *
-	 * Constraint:
-	 *     (name=UPPER_WORD_ID type=VLSTypeDef?)
-	 */
-	protected void sequence_VLSVariable_VLSVariableDeclaration(ISerializationContext context, VLSVariable semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	// This method is commented out because it has the same signature as another method in this class.
-	// This is probably a bug in Xtext's serializer, please report it here: 
-	// https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF
-	//
-	// Contexts:
-	//     VLSDeclaration returns VLSVariable
-	//     VLSVariableDeclaration returns VLSVariable
-	//
-	// Constraint:
-	//     (name=UPPER_WORD_ID type=VLSTypeDef)
-	//
-	// protected void sequence_VLSVariable_VLSVariableDeclaration(ISerializationContext context, VLSVariable semanticObject) { }
 	
 	/**
 	 * Contexts:

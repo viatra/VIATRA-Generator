@@ -220,11 +220,11 @@ VLSDeclaration:
 ;
 
 VLSOtherDeclaration:
-	VLSAtomicConstant ':' type = VLSTypeDef
+	name = VLSAtomicConstant ':' type = VLSTypeDef
 ;
 
 VLSVariableDeclaration:
-	VLSVariable ':' type = VLSTypeDef
+	name = VLSVariable ':' type = VLSTypeDef
 ;
 
 VLSTypeDef:

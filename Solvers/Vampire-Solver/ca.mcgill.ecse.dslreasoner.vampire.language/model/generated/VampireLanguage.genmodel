@@ -34,18 +34,22 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSAnnotation/terms"/>
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSTffTerm"/>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSDeclaration"/>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSOtherDeclaration"/>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSVariableDeclaration"/>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSDeclaration/type"/>
+    </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSOtherDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSOtherDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSVariableDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSVariableDeclaration/name"/>
+    </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSTypeDef">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTypeDef/typeSig"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTypeDef/mapsTo"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTypeDef/initType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTypeDef/nextType"/>
     </genClasses>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSTerm">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTerm/type"/>
-    </genClasses>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSTerm"/>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSVariable/name"/>
     </genClasses>
