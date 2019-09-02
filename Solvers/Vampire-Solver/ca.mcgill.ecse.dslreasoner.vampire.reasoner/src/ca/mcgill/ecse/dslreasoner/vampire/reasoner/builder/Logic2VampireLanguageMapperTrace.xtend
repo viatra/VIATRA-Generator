@@ -35,6 +35,7 @@ class Logic2VampireLanguageMapperTrace {
 	public var topLevelType = null
 	
 	public val Map<Type, VLSFunction> type2Predicate = new HashMap;
+	public val Map<VLSFunction, Type> predicate2Type = new HashMap;
 	public val Map<DefinedElement, VLSFunction> element2Predicate = new HashMap
 	public val Map<Type, VLSTerm> type2PossibleNot = new HashMap
 	public val Map<Type, VLSTerm> type2And = new HashMap

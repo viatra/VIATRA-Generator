@@ -1116,14 +1116,25 @@ ruleVLSOtherDeclaration returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		{
-			newCompositeNode(grammarAccess.getVLSOtherDeclarationAccess().getVLSAtomicConstantParserRuleCall_0());
-		}
-		this_VLSAtomicConstant_0=ruleVLSAtomicConstant
-		{
-			$current = $this_VLSAtomicConstant_0.current;
-			afterParserOrEnumRuleCall();
-		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSOtherDeclarationAccess().getNameVLSAtomicConstantParserRuleCall_0_0());
+				}
+				lv_name_0_0=ruleVLSAtomicConstant
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSOtherDeclarationRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_0_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSAtomicConstant");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 		otherlv_1=':'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getVLSOtherDeclarationAccess().getColonKeyword_1());
@@ -1166,14 +1177,25 @@ ruleVLSVariableDeclaration returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		{
-			newCompositeNode(grammarAccess.getVLSVariableDeclarationAccess().getVLSVariableParserRuleCall_0());
-		}
-		this_VLSVariable_0=ruleVLSVariable
-		{
-			$current = $this_VLSVariable_0.current;
-			afterParserOrEnumRuleCall();
-		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVLSVariableDeclarationAccess().getNameVLSVariableParserRuleCall_0_0());
+				}
+				lv_name_0_0=ruleVLSVariable
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVLSVariableDeclarationRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_0_0,
+						"ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariable");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 		otherlv_1=':'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getVLSVariableDeclarationAccess().getColonKeyword_1());

@@ -159,8 +159,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
       {
         VLSTerm vlsTerm = (VLSTerm)theEObject;
         T result = caseVLSTerm(vlsTerm);
-        if (result == null) result = caseVLSOtherDeclaration(vlsTerm);
-        if (result == null) result = caseVLSDeclaration(vlsTerm);
         if (result == null) result = caseVLSTffTerm(vlsTerm);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -169,10 +167,7 @@ public class VampireLanguageSwitch<T> extends Switch<T>
       {
         VLSVariable vlsVariable = (VLSVariable)theEObject;
         T result = caseVLSVariable(vlsVariable);
-        if (result == null) result = caseVLSVariableDeclaration(vlsVariable);
         if (result == null) result = caseVLSTerm(vlsVariable);
-        if (result == null) result = caseVLSOtherDeclaration(vlsVariable);
-        if (result == null) result = caseVLSDeclaration(vlsVariable);
         if (result == null) result = caseVLSTffTerm(vlsVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -182,8 +177,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSFunctionAsTerm vlsFunctionAsTerm = (VLSFunctionAsTerm)theEObject;
         T result = caseVLSFunctionAsTerm(vlsFunctionAsTerm);
         if (result == null) result = caseVLSTerm(vlsFunctionAsTerm);
-        if (result == null) result = caseVLSOtherDeclaration(vlsFunctionAsTerm);
-        if (result == null) result = caseVLSDeclaration(vlsFunctionAsTerm);
         if (result == null) result = caseVLSTffTerm(vlsFunctionAsTerm);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -193,8 +186,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSDefinedTerm vlsDefinedTerm = (VLSDefinedTerm)theEObject;
         T result = caseVLSDefinedTerm(vlsDefinedTerm);
         if (result == null) result = caseVLSTerm(vlsDefinedTerm);
-        if (result == null) result = caseVLSOtherDeclaration(vlsDefinedTerm);
-        if (result == null) result = caseVLSDeclaration(vlsDefinedTerm);
         if (result == null) result = caseVLSTffTerm(vlsDefinedTerm);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -236,8 +227,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSEquivalent vlsEquivalent = (VLSEquivalent)theEObject;
         T result = caseVLSEquivalent(vlsEquivalent);
         if (result == null) result = caseVLSTerm(vlsEquivalent);
-        if (result == null) result = caseVLSOtherDeclaration(vlsEquivalent);
-        if (result == null) result = caseVLSDeclaration(vlsEquivalent);
         if (result == null) result = caseVLSTffTerm(vlsEquivalent);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -247,8 +236,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSImplies vlsImplies = (VLSImplies)theEObject;
         T result = caseVLSImplies(vlsImplies);
         if (result == null) result = caseVLSTerm(vlsImplies);
-        if (result == null) result = caseVLSOtherDeclaration(vlsImplies);
-        if (result == null) result = caseVLSDeclaration(vlsImplies);
         if (result == null) result = caseVLSTffTerm(vlsImplies);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -258,8 +245,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSRevImplies vlsRevImplies = (VLSRevImplies)theEObject;
         T result = caseVLSRevImplies(vlsRevImplies);
         if (result == null) result = caseVLSTerm(vlsRevImplies);
-        if (result == null) result = caseVLSOtherDeclaration(vlsRevImplies);
-        if (result == null) result = caseVLSDeclaration(vlsRevImplies);
         if (result == null) result = caseVLSTffTerm(vlsRevImplies);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -269,8 +254,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSXnor vlsXnor = (VLSXnor)theEObject;
         T result = caseVLSXnor(vlsXnor);
         if (result == null) result = caseVLSTerm(vlsXnor);
-        if (result == null) result = caseVLSOtherDeclaration(vlsXnor);
-        if (result == null) result = caseVLSDeclaration(vlsXnor);
         if (result == null) result = caseVLSTffTerm(vlsXnor);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -280,8 +263,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSNor vlsNor = (VLSNor)theEObject;
         T result = caseVLSNor(vlsNor);
         if (result == null) result = caseVLSTerm(vlsNor);
-        if (result == null) result = caseVLSOtherDeclaration(vlsNor);
-        if (result == null) result = caseVLSDeclaration(vlsNor);
         if (result == null) result = caseVLSTffTerm(vlsNor);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -291,8 +272,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSNand vlsNand = (VLSNand)theEObject;
         T result = caseVLSNand(vlsNand);
         if (result == null) result = caseVLSTerm(vlsNand);
-        if (result == null) result = caseVLSOtherDeclaration(vlsNand);
-        if (result == null) result = caseVLSDeclaration(vlsNand);
         if (result == null) result = caseVLSTffTerm(vlsNand);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -302,8 +281,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSAnd vlsAnd = (VLSAnd)theEObject;
         T result = caseVLSAnd(vlsAnd);
         if (result == null) result = caseVLSTerm(vlsAnd);
-        if (result == null) result = caseVLSOtherDeclaration(vlsAnd);
-        if (result == null) result = caseVLSDeclaration(vlsAnd);
         if (result == null) result = caseVLSTffTerm(vlsAnd);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -313,8 +290,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSOr vlsOr = (VLSOr)theEObject;
         T result = caseVLSOr(vlsOr);
         if (result == null) result = caseVLSTerm(vlsOr);
-        if (result == null) result = caseVLSOtherDeclaration(vlsOr);
-        if (result == null) result = caseVLSDeclaration(vlsOr);
         if (result == null) result = caseVLSTffTerm(vlsOr);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -324,8 +299,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSUniversalQuantifier vlsUniversalQuantifier = (VLSUniversalQuantifier)theEObject;
         T result = caseVLSUniversalQuantifier(vlsUniversalQuantifier);
         if (result == null) result = caseVLSTerm(vlsUniversalQuantifier);
-        if (result == null) result = caseVLSOtherDeclaration(vlsUniversalQuantifier);
-        if (result == null) result = caseVLSDeclaration(vlsUniversalQuantifier);
         if (result == null) result = caseVLSTffTerm(vlsUniversalQuantifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -335,8 +308,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSExistentialQuantifier vlsExistentialQuantifier = (VLSExistentialQuantifier)theEObject;
         T result = caseVLSExistentialQuantifier(vlsExistentialQuantifier);
         if (result == null) result = caseVLSTerm(vlsExistentialQuantifier);
-        if (result == null) result = caseVLSOtherDeclaration(vlsExistentialQuantifier);
-        if (result == null) result = caseVLSDeclaration(vlsExistentialQuantifier);
         if (result == null) result = caseVLSTffTerm(vlsExistentialQuantifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -346,8 +317,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSUnaryNegation vlsUnaryNegation = (VLSUnaryNegation)theEObject;
         T result = caseVLSUnaryNegation(vlsUnaryNegation);
         if (result == null) result = caseVLSTerm(vlsUnaryNegation);
-        if (result == null) result = caseVLSOtherDeclaration(vlsUnaryNegation);
-        if (result == null) result = caseVLSDeclaration(vlsUnaryNegation);
         if (result == null) result = caseVLSTffTerm(vlsUnaryNegation);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -357,8 +326,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSInequality vlsInequality = (VLSInequality)theEObject;
         T result = caseVLSInequality(vlsInequality);
         if (result == null) result = caseVLSTerm(vlsInequality);
-        if (result == null) result = caseVLSOtherDeclaration(vlsInequality);
-        if (result == null) result = caseVLSDeclaration(vlsInequality);
         if (result == null) result = caseVLSTffTerm(vlsInequality);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -368,8 +335,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSEquality vlsEquality = (VLSEquality)theEObject;
         T result = caseVLSEquality(vlsEquality);
         if (result == null) result = caseVLSTerm(vlsEquality);
-        if (result == null) result = caseVLSOtherDeclaration(vlsEquality);
-        if (result == null) result = caseVLSDeclaration(vlsEquality);
         if (result == null) result = caseVLSTffTerm(vlsEquality);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -379,8 +344,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSAssignment vlsAssignment = (VLSAssignment)theEObject;
         T result = caseVLSAssignment(vlsAssignment);
         if (result == null) result = caseVLSTerm(vlsAssignment);
-        if (result == null) result = caseVLSOtherDeclaration(vlsAssignment);
-        if (result == null) result = caseVLSDeclaration(vlsAssignment);
         if (result == null) result = caseVLSTffTerm(vlsAssignment);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -390,8 +353,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSConstant vlsConstant = (VLSConstant)theEObject;
         T result = caseVLSConstant(vlsConstant);
         if (result == null) result = caseVLSTerm(vlsConstant);
-        if (result == null) result = caseVLSOtherDeclaration(vlsConstant);
-        if (result == null) result = caseVLSDeclaration(vlsConstant);
         if (result == null) result = caseVLSTffTerm(vlsConstant);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -401,8 +362,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSTrue vlsTrue = (VLSTrue)theEObject;
         T result = caseVLSTrue(vlsTrue);
         if (result == null) result = caseVLSTerm(vlsTrue);
-        if (result == null) result = caseVLSOtherDeclaration(vlsTrue);
-        if (result == null) result = caseVLSDeclaration(vlsTrue);
         if (result == null) result = caseVLSTffTerm(vlsTrue);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -412,8 +371,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSFalse vlsFalse = (VLSFalse)theEObject;
         T result = caseVLSFalse(vlsFalse);
         if (result == null) result = caseVLSTerm(vlsFalse);
-        if (result == null) result = caseVLSOtherDeclaration(vlsFalse);
-        if (result == null) result = caseVLSDeclaration(vlsFalse);
         if (result == null) result = caseVLSTffTerm(vlsFalse);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -423,8 +380,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSFunction vlsFunction = (VLSFunction)theEObject;
         T result = caseVLSFunction(vlsFunction);
         if (result == null) result = caseVLSTerm(vlsFunction);
-        if (result == null) result = caseVLSOtherDeclaration(vlsFunction);
-        if (result == null) result = caseVLSDeclaration(vlsFunction);
         if (result == null) result = caseVLSTffTerm(vlsFunction);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -434,8 +389,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         VLSLess vlsLess = (VLSLess)theEObject;
         T result = caseVLSLess(vlsLess);
         if (result == null) result = caseVLSTerm(vlsLess);
-        if (result == null) result = caseVLSOtherDeclaration(vlsLess);
-        if (result == null) result = caseVLSDeclaration(vlsLess);
         if (result == null) result = caseVLSTffTerm(vlsLess);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -446,8 +399,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         T result = caseVLSInt(vlsInt);
         if (result == null) result = caseVLSDefinedTerm(vlsInt);
         if (result == null) result = caseVLSTerm(vlsInt);
-        if (result == null) result = caseVLSOtherDeclaration(vlsInt);
-        if (result == null) result = caseVLSDeclaration(vlsInt);
         if (result == null) result = caseVLSTffTerm(vlsInt);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -458,8 +409,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         T result = caseVLSDoubleQuote(vlsDoubleQuote);
         if (result == null) result = caseVLSDefinedTerm(vlsDoubleQuote);
         if (result == null) result = caseVLSTerm(vlsDoubleQuote);
-        if (result == null) result = caseVLSOtherDeclaration(vlsDoubleQuote);
-        if (result == null) result = caseVLSDeclaration(vlsDoubleQuote);
         if (result == null) result = caseVLSTffTerm(vlsDoubleQuote);
         if (result == null) result = defaultCase(theEObject);
         return result;

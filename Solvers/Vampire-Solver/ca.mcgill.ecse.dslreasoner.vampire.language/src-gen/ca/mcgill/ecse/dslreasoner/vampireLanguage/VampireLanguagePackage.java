@@ -345,13 +345,22 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_DECLARATION = 7;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_DECLARATION__TYPE = VLS_TFF_TERM_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>VLS Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_DECLARATION_FEATURE_COUNT = VLS_TFF_TERM_FEATURE_COUNT + 0;
+  int VLS_DECLARATION_FEATURE_COUNT = VLS_TFF_TERM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSOtherDeclarationImpl <em>VLS Other Declaration</em>}' class.
@@ -364,13 +373,31 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_OTHER_DECLARATION = 8;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_OTHER_DECLARATION__TYPE = VLS_DECLARATION__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_OTHER_DECLARATION__NAME = VLS_DECLARATION_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>VLS Other Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_OTHER_DECLARATION_FEATURE_COUNT = VLS_DECLARATION_FEATURE_COUNT + 0;
+  int VLS_OTHER_DECLARATION_FEATURE_COUNT = VLS_DECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableDeclarationImpl <em>VLS Variable Declaration</em>}' class.
@@ -383,13 +410,31 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_VARIABLE_DECLARATION = 9;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_VARIABLE_DECLARATION__TYPE = VLS_DECLARATION__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_VARIABLE_DECLARATION__NAME = VLS_DECLARATION_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>VLS Variable Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE_DECLARATION_FEATURE_COUNT = VLS_DECLARATION_FEATURE_COUNT + 0;
+  int VLS_VARIABLE_DECLARATION_FEATURE_COUNT = VLS_DECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTypeDefImpl <em>VLS Type Def</em>}' class.
@@ -457,22 +502,13 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_TERM = 11;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_TERM__TYPE = VLS_TFF_TERM_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>VLS Term</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_TERM_FEATURE_COUNT = VLS_TFF_TERM_FEATURE_COUNT + 1;
+  int VLS_TERM_FEATURE_COUNT = VLS_TFF_TERM_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.
@@ -485,22 +521,13 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_VARIABLE = 12;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_VARIABLE__TYPE = VLS_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE__NAME = VLS_VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+  int VLS_VARIABLE__NAME = VLS_TERM_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>VLS Variable</em>' class.
@@ -509,7 +536,7 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int VLS_VARIABLE_FEATURE_COUNT = VLS_VARIABLE_DECLARATION_FEATURE_COUNT + 2;
+  int VLS_VARIABLE_FEATURE_COUNT = VLS_TERM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFunctionAsTermImpl <em>VLS Function As Term</em>}' class.
@@ -520,15 +547,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_FUNCTION_AS_TERM = 13;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_FUNCTION_AS_TERM__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Functor</b></em>' attribute.
@@ -566,15 +584,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_DEFINED_TERM = 14;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_DEFINED_TERM__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -690,15 +699,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_EQUIVALENT = 19;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_EQUIVALENT__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -734,15 +734,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_IMPLIES = 20;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_IMPLIES__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -782,15 +773,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_REV_IMPLIES = 21;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_REV_IMPLIES__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -826,15 +808,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_XNOR = 22;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_XNOR__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -874,15 +847,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_NOR = 23;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_NOR__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -918,15 +882,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_NAND = 24;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_NAND__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -966,15 +921,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_AND = 25;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_AND__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1010,15 +956,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_OR = 26;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_OR__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1058,15 +995,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_UNIVERSAL_QUANTIFIER = 27;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_UNIVERSAL_QUANTIFIER__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1102,15 +1030,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_EXISTENTIAL_QUANTIFIER = 28;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_EXISTENTIAL_QUANTIFIER__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1150,15 +1069,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_UNARY_NEGATION = 29;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_UNARY_NEGATION__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1185,15 +1095,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_INEQUALITY = 30;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_INEQUALITY__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1233,15 +1134,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_EQUALITY = 31;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_EQUALITY__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1277,15 +1169,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_ASSIGNMENT = 32;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_ASSIGNMENT__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1325,15 +1208,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_CONSTANT = 33;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_CONSTANT__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1362,15 +1236,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_TRUE = 34;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_TRUE__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The number of structural features of the '<em>VLS True</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1390,15 +1255,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_FALSE = 35;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_FALSE__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The number of structural features of the '<em>VLS False</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1416,15 +1272,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_FUNCTION = 36;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_FUNCTION__TYPE = VLS_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -1464,15 +1311,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_LESS = 37;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_LESS__TYPE = VLS_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1510,15 +1348,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_INT = 38;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_INT__TYPE = VLS_DEFINED_TERM__TYPE;
-
-  /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1545,15 +1374,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_DOUBLE_QUOTE = 39;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_DOUBLE_QUOTE__TYPE = VLS_DEFINED_TERM__TYPE;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1831,6 +1651,17 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSDeclaration();
 
   /**
+   * Returns the meta object for the containment reference '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDeclaration#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDeclaration#getType()
+   * @see #getVLSDeclaration()
+   * @generated
+   */
+  EReference getVLSDeclaration_Type();
+
+  /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration <em>VLS Other Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1841,6 +1672,17 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSOtherDeclaration();
 
   /**
+   * Returns the meta object for the containment reference '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Name</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration#getName()
+   * @see #getVLSOtherDeclaration()
+   * @generated
+   */
+  EReference getVLSOtherDeclaration_Name();
+
+  /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration <em>VLS Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1849,6 +1691,17 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EClass getVLSVariableDeclaration();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Name</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration#getName()
+   * @see #getVLSVariableDeclaration()
+   * @generated
+   */
+  EReference getVLSVariableDeclaration_Name();
 
   /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTypeDef <em>VLS Type Def</em>}'.
@@ -1913,17 +1766,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EClass getVLSTerm();
-
-  /**
-   * Returns the meta object for the containment reference '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm#getType()
-   * @see #getVLSTerm()
-   * @generated
-   */
-  EReference getVLSTerm_Type();
 
   /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable <em>VLS Variable</em>}'.
@@ -2844,6 +2686,14 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_DECLARATION = eINSTANCE.getVLSDeclaration();
 
     /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_DECLARATION__TYPE = eINSTANCE.getVLSDeclaration_Type();
+
+    /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSOtherDeclarationImpl <em>VLS Other Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2854,6 +2704,14 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_OTHER_DECLARATION = eINSTANCE.getVLSOtherDeclaration();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_OTHER_DECLARATION__NAME = eINSTANCE.getVLSOtherDeclaration_Name();
+
+    /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableDeclarationImpl <em>VLS Variable Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2862,6 +2720,14 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EClass VLS_VARIABLE_DECLARATION = eINSTANCE.getVLSVariableDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VLS_VARIABLE_DECLARATION__NAME = eINSTANCE.getVLSVariableDeclaration_Name();
 
     /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTypeDefImpl <em>VLS Type Def</em>}' class.
@@ -2914,14 +2780,6 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EClass VLS_TERM = eINSTANCE.getVLSTerm();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference VLS_TERM__TYPE = eINSTANCE.getVLSTerm_Type();
 
     /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.

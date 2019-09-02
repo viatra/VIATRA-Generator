@@ -2,6 +2,7 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation
 import functionalarchitecture.Function
 import functionalarchitecture.FunctionalArchitectureModel
 import functionalarchitecture.FunctionalInterface
@@ -17,6 +18,7 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
+import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
@@ -97,8 +99,10 @@ class FAMTest {
 		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
 		
 		//visualisation, see 
-//		var interpretations = reasoner.getInterpretations(solution as ModelResult)
-//		
+		var interpretations = reasoner.getInterpretations(solution as ModelResult)
+		interpretations.get(0) as VampireModelInterpretation
+		println(ecore2Logic.allAttributesInScope(modelGenerationProblem.trace))
+		
 //		for(interpretation : interpretations) {
 //			val model = logic2Ecore.transformInterpretation(interpretation,modelGenerationProblem.trace)
 //			//look here: hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor

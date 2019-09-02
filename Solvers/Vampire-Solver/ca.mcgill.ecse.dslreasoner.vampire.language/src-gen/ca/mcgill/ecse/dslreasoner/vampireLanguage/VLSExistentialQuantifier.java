@@ -26,7 +26,7 @@ public interface VLSExistentialQuantifier extends VLSTerm
 {
   /**
    * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-   * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration}.
+   * The list contents are of type {@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffTerm}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
@@ -38,7 +38,7 @@ public interface VLSExistentialQuantifier extends VLSTerm
    * @model containment="true"
    * @generated
    */
-  EList<VLSVariableDeclaration> getVariables();
+  EList<VLSTffTerm> getVariables();
 
   /**
    * Returns the value of the '<em><b>Operand</b></em>' containment reference.

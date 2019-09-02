@@ -37,6 +37,8 @@ public class Logic2VampireLanguageMapperTrace {
   
   public final Map<Type, VLSFunction> type2Predicate = new HashMap<Type, VLSFunction>();
   
+  public final Map<VLSFunction, Type> predicate2Type = new HashMap<VLSFunction, Type>();
+  
   public final Map<DefinedElement, VLSFunction> element2Predicate = new HashMap<DefinedElement, VLSFunction>();
   
   public final Map<Type, VLSTerm> type2PossibleNot = new HashMap<Type, VLSTerm>();

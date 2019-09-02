@@ -9,6 +9,12 @@ package ca.mcgill.ecse.dslreasoner.vampireLanguage;
  * A representation of the model object '<em><b>VLS Variable Declaration</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration#getName <em>Name</em>}</li>
+ * </ul>
  *
  * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSVariableDeclaration()
  * @model
@@ -16,4 +22,30 @@ package ca.mcgill.ecse.dslreasoner.vampireLanguage;
  */
 public interface VLSVariableDeclaration extends VLSDeclaration
 {
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' containment reference.
+   * @see #setName(VLSVariable)
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage#getVLSVariableDeclaration_Name()
+   * @model containment="true"
+   * @generated
+   */
+  VLSVariable getName();
+
+  /**
+   * Sets the value of the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariableDeclaration#getName <em>Name</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' containment reference.
+   * @see #getName()
+   * @generated
+   */
+  void setName(VLSVariable value);
+
 } // VLSVariableDeclaration

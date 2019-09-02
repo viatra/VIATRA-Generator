@@ -128,7 +128,9 @@ public class VampireLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getVLSAnnotationAccess().getFollowupAssignment_2_1(), "rule__VLSAnnotation__FollowupAssignment_2_1");
 			builder.put(grammarAccess.getVLSAnnotationTermsAccess().getTermsAssignment_0(), "rule__VLSAnnotationTerms__TermsAssignment_0");
 			builder.put(grammarAccess.getVLSAnnotationTermsAccess().getTermsAssignment_1_1(), "rule__VLSAnnotationTerms__TermsAssignment_1_1");
+			builder.put(grammarAccess.getVLSOtherDeclarationAccess().getNameAssignment_0(), "rule__VLSOtherDeclaration__NameAssignment_0");
 			builder.put(grammarAccess.getVLSOtherDeclarationAccess().getTypeAssignment_2(), "rule__VLSOtherDeclaration__TypeAssignment_2");
+			builder.put(grammarAccess.getVLSVariableDeclarationAccess().getNameAssignment_0(), "rule__VLSVariableDeclaration__NameAssignment_0");
 			builder.put(grammarAccess.getVLSVariableDeclarationAccess().getTypeAssignment_2(), "rule__VLSVariableDeclaration__TypeAssignment_2");
 			builder.put(grammarAccess.getVLSTypeDefAccess().getTypeSigAssignment_0(), "rule__VLSTypeDef__TypeSigAssignment_0");
 			builder.put(grammarAccess.getVLSTypeDefAccess().getMapsToAssignment_1_1(), "rule__VLSTypeDef__MapsToAssignment_1_1");

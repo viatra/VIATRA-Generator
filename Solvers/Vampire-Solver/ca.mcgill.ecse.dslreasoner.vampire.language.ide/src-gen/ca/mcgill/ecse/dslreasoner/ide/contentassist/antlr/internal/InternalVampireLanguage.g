@@ -3191,9 +3191,9 @@ rule__VLSOtherDeclaration__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getVLSOtherDeclarationAccess().getVLSAtomicConstantParserRuleCall_0()); }
-	ruleVLSAtomicConstant
-	{ after(grammarAccess.getVLSOtherDeclarationAccess().getVLSAtomicConstantParserRuleCall_0()); }
+	{ before(grammarAccess.getVLSOtherDeclarationAccess().getNameAssignment_0()); }
+	(rule__VLSOtherDeclaration__NameAssignment_0)
+	{ after(grammarAccess.getVLSOtherDeclarationAccess().getNameAssignment_0()); }
 )
 ;
 finally {
@@ -3272,9 +3272,9 @@ rule__VLSVariableDeclaration__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getVLSVariableDeclarationAccess().getVLSVariableParserRuleCall_0()); }
-	ruleVLSVariable
-	{ after(grammarAccess.getVLSVariableDeclarationAccess().getVLSVariableParserRuleCall_0()); }
+	{ before(grammarAccess.getVLSVariableDeclarationAccess().getNameAssignment_0()); }
+	(rule__VLSVariableDeclaration__NameAssignment_0)
+	{ after(grammarAccess.getVLSVariableDeclarationAccess().getNameAssignment_0()); }
 )
 ;
 finally {
@@ -6359,6 +6359,21 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__VLSOtherDeclaration__NameAssignment_0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSOtherDeclarationAccess().getNameVLSAtomicConstantParserRuleCall_0_0()); }
+		ruleVLSAtomicConstant
+		{ after(grammarAccess.getVLSOtherDeclarationAccess().getNameVLSAtomicConstantParserRuleCall_0_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__VLSOtherDeclaration__TypeAssignment_2
 	@init {
 		int stackSize = keepStackSize();
@@ -6368,6 +6383,21 @@ rule__VLSOtherDeclaration__TypeAssignment_2
 		{ before(grammarAccess.getVLSOtherDeclarationAccess().getTypeVLSTypeDefParserRuleCall_2_0()); }
 		ruleVLSTypeDef
 		{ after(grammarAccess.getVLSOtherDeclarationAccess().getTypeVLSTypeDefParserRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSVariableDeclaration__NameAssignment_0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSVariableDeclarationAccess().getNameVLSVariableParserRuleCall_0_0()); }
+		ruleVLSVariable
+		{ after(grammarAccess.getVLSVariableDeclarationAccess().getNameVLSVariableParserRuleCall_0_0()); }
 	)
 ;
 finally {

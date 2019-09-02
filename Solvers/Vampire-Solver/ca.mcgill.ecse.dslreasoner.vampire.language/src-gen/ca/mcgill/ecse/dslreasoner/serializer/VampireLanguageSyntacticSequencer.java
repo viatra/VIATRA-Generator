@@ -95,9 +95,7 @@ public class VampireLanguageSyntacticSequencer extends AbstractSyntacticSequence
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '!' '[' variables+=VLSVariable
 	 *     (rule start) (ambiguity) '!' '[' variables+=VLSVariableDeclaration
-	 *     (rule start) (ambiguity) '$false' ':' type=VLSTypeDef
 	 *     (rule start) (ambiguity) '$false' (rule start)
-	 *     (rule start) (ambiguity) '$true' ':' type=VLSTypeDef
 	 *     (rule start) (ambiguity) '$true' (rule start)
 	 *     (rule start) (ambiguity) '?' '[' variables+=VLSVariable
 	 *     (rule start) (ambiguity) '?' '[' variables+=VLSVariableDeclaration

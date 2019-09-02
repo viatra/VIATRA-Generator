@@ -741,20 +741,24 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class VLSOtherDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSOtherDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cVLSAtomicConstantParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameVLSAtomicConstantParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTypeVLSTypeDefParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//VLSOtherDeclaration:
-		//	VLSAtomicConstant ':' type=VLSTypeDef;
+		//	name=VLSAtomicConstant ':' type=VLSTypeDef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//VLSAtomicConstant ':' type=VLSTypeDef
+		//name=VLSAtomicConstant ':' type=VLSTypeDef
 		public Group getGroup() { return cGroup; }
 		
+		//name=VLSAtomicConstant
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
 		//VLSAtomicConstant
-		public RuleCall getVLSAtomicConstantParserRuleCall_0() { return cVLSAtomicConstantParserRuleCall_0; }
+		public RuleCall getNameVLSAtomicConstantParserRuleCall_0_0() { return cNameVLSAtomicConstantParserRuleCall_0_0; }
 		
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
@@ -768,20 +772,24 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class VLSVariableDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSVariableDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cVLSVariableParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameVLSVariableParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTypeVLSTypeDefParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//VLSVariableDeclaration:
-		//	VLSVariable ':' type=VLSTypeDef;
+		//	name=VLSVariable ':' type=VLSTypeDef;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//VLSVariable ':' type=VLSTypeDef
+		//name=VLSVariable ':' type=VLSTypeDef
 		public Group getGroup() { return cGroup; }
 		
+		//name=VLSVariable
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
 		//VLSVariable
-		public RuleCall getVLSVariableParserRuleCall_0() { return cVLSVariableParserRuleCall_0; }
+		public RuleCall getNameVLSVariableParserRuleCall_0_0() { return cNameVLSVariableParserRuleCall_0_0; }
 		
 		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
@@ -2196,7 +2204,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSOtherDeclaration:
-	//	VLSAtomicConstant ':' type=VLSTypeDef;
+	//	name=VLSAtomicConstant ':' type=VLSTypeDef;
 	public VLSOtherDeclarationElements getVLSOtherDeclarationAccess() {
 		return pVLSOtherDeclaration;
 	}
@@ -2206,7 +2214,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//VLSVariableDeclaration:
-	//	VLSVariable ':' type=VLSTypeDef;
+	//	name=VLSVariable ':' type=VLSTypeDef;
 	public VLSVariableDeclarationElements getVLSVariableDeclarationAccess() {
 		return pVLSVariableDeclaration;
 	}
