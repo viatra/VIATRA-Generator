@@ -71,6 +71,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 						}
 					]
 					trace.rel2Predicate.put(r, rel)
+					trace.predicate2Relation.put(rel, r)
 					it.left = support.duplicate(rel)
 					it.right = support.unfoldAnd(relVar2TypeDecComply)
 				]

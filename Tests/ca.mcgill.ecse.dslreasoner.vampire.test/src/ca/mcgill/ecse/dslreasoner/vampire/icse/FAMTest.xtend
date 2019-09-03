@@ -2,7 +2,6 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation
 import functionalarchitecture.Function
 import functionalarchitecture.FunctionalArchitectureModel
 import functionalarchitecture.FunctionalInterface
@@ -16,18 +15,22 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
-import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class FAMTest {
 	def static void main(String[] args) {
 		val Ecore2Logic ecore2Logic = new Ecore2Logic
-			val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
+		val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
 		val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
 		val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
+		val InstanceModel2PartialInterpretation im2pi = new InstanceModel2PartialInterpretation
 
 		// Workspace setup
 		val inputs = new FileSystemWorkspace('''initialModels/''', "")
@@ -56,8 +59,8 @@ class FAMTest {
 		workspace.writeModel(problem, "Fam.logicproblem")
 
 		println("Problem created")
-		
-		//Start Time
+
+		// Start Time
 		var startTime = System.currentTimeMillis
 
 		var VampireSolver reasoner
@@ -71,16 +74,16 @@ class FAMTest {
 //		classMapMin.put(Function, 1)
 //		classMapMin.put(FunctionalInterface, 2)
 		classMapMin.put(FunctionalOutput, 3)
-		
+
 		val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
-		
+
 		// Maximum Scope
 		val classMapMax = new HashMap<Class, Integer>
 		classMapMax.put(FunctionalArchitectureModel, 3)
 		classMapMax.put(Function, 5)
 		classMapMax.put(FunctionalInterface, 3)
 		classMapMax.put(FunctionalOutput, 4)
-		
+
 		val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
 
 		// Define Config File		
@@ -88,27 +91,43 @@ class FAMTest {
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 24
-			it.typeScopes.maxNewElements = 25
-			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
-			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
+			it.typeScopes.minNewElements = 4//24
+			it.typeScopes.maxNewElements = 5//25
+//			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
+//			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5
 			it.uniquenessDuplicates = false
 		]
 
 		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
-		
-		//visualisation, see 
-		var interpretations = reasoner.getInterpretations(solution as ModelResult)
-		interpretations.get(0) as VampireModelInterpretation
-		println(ecore2Logic.allAttributesInScope(modelGenerationProblem.trace))
-		
-//		for(interpretation : interpretations) {
-//			val model = logic2Ecore.transformInterpretation(interpretation,modelGenerationProblem.trace)
-//			//look here: hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor
-//		}
-		//transform interpretation to ecore, and it is easy from there
 
+		// visualisation, see 
+		var interpretations = reasoner.getInterpretations(solution as ModelResult)
+//		interpretations.get(0) as VampireModelInterpretation
+//		println(ecore2Logic.IsAttributeValue(modelGenerationProblem.trace, )
+//			Literal(modelGenerationProblem.trace, ecore2Logic.allLiteralsInScope(modelGenerationProblem.trace).get(0) )
+//		)
+//		println((ecore2Logic.allAttributesInScope(modelGenerationProblem.trace)).get(0).EAttributeType)
+		for (interpretation : interpretations) {
+			val model = logic2Ecore.transformInterpretation(interpretation, modelGenerationProblem.trace)
+			workspace.writeModel(model, "model.xmi")
+
+			val representation = im2pi.transform(modelGenerationProblem, model.eAllContents.toList, false)//solution.representation.get(0) // TODO: fix for multiple represenations
+			if (representation instanceof PartialInterpretation) {
+				val vis1 = new PartialInterpretation2Gml
+				val gml = vis1.transform(representation)
+				workspace.writeText("model.gml", gml)
+
+				val vis2 = new GraphvizVisualiser
+				val dot = vis2.visualiseConcretization(representation)
+				dot.writeToFile(workspace, "model.png")
+			} else {
+				println("ERROR")
+			}
+// look here: hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor
+		}
+
+// transform interpretation to ecore, and it is easy from there
 		/*/
 		 * 
 		 * reasoner = new AlloySolver
@@ -121,8 +140,7 @@ class FAMTest {
 		 * ]
 		 * solution = reasoner.solve(problem, alloyConfig, workspace)
 		 //*/
-		// /////////////////////////////////////////////////////
-		
+// /////////////////////////////////////////////////////
 		var totalTimeMin = (System.currentTimeMillis - startTime) / 60000
 		var totalTimeSec = ((System.currentTimeMillis - startTime) / 1000) % 60
 
