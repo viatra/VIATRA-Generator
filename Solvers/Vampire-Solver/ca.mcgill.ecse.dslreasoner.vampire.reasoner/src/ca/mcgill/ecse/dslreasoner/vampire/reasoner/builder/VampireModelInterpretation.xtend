@@ -22,22 +22,27 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDeclarationImpl
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDeclarationImpl
+import java.util.Arrays
 import java.util.HashMap
 import java.util.List
 import java.util.Map
+import java.util.Set
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDefinitionImpl
 
 class VampireModelInterpretation implements LogicModelInterpretation {
 	protected val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
 
 	protected val Logic2VampireLanguageMapperTrace forwardTrace;
 
+	//These three maps capture all the information found in the Vampire output
 	private val Map<String, DefinedElement> name2DefinedElement = new HashMap
 	private val Map<TypeDeclaration, List<DefinedElement>> type2DefinedElement = new HashMap
-
-	var num = -1
+	private val Map<RelationDeclaration, List<String[]>> rel2Inst = new HashMap
+	//end
 
 	public new(VampireModel model, Logic2VampireLanguageMapperTrace trace) {
 		this.forwardTrace = trace
@@ -74,6 +79,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		// Fill keys of map
 		val allTypeDecls = trace.type2Predicate.keySet.filter[class == TypeDeclarationImpl]
 		val allTypeFunctions = trace.predicate2Type
+		println(trace.type2Predicate.keySet.filter[class == TypeDefinitionImpl])
 
 		for (type : allTypeDecls) {
 			type2DefinedElement.put(type as TypeDeclaration, newArrayList)
@@ -116,16 +122,73 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 				}
 			}
 		}
-
+		
 		printMap()
+		
+		// 3. get relations
+		// Fill keys of map
+		val allRelDecls = trace.rel2Predicate.keySet.filter[class == RelationDeclarationImpl]
+		val allRelFunctions = trace.predicate2Relation
+
+		for (rel : allRelDecls) {
+			rel2Inst.put(rel as RelationDeclaration, newArrayList)
+		}
+
+		// USE THE DECLARE_<RELATION_NAME> FORMULAS TO SEE WHAT THE RELATIONS ARE
+		val relFormulas = model.tfformulas.filter[name.length > 12 && name.substring(0, 12) == "predicate_r_"]
+
+		for (formula : relFormulas) {
+			// get associated type
+			val associatedRelName = (formula as VLSTffFormula).name.substring(10)
+			val associatedRelFunction = allRelFunctions.keySet.filter[constant == associatedRelName].
+				get(0) as VLSFunction
+			val associatedRel = associatedRelFunction.lookup(allRelFunctions) as RelationDeclaration
+
+			// get definedElements
+			var andFormulaTerm = formula.fofFormula
+			end = false
+			val List<String[]> instances = newArrayList
+			while (!end) {
+				if (andFormulaTerm.class == VLSAndImpl) {
+					val andFormula = andFormulaTerm as VLSAnd
+					val andRight = andFormula.right
+					addRelIfNotNeg(andRight, instances)
+					andFormulaTerm = andFormula.left
+				} else {
+					addRelIfNotNeg(andFormulaTerm as VLSTerm, instances)
+					end = true
+				}
+
+			}
+			for (elem : instances) {
+				associatedRel.lookup(rel2Inst).add(elem)
+			}
+
+		}
+
+//		printMap2()
 
 	}
 
 	def printMap() {
+		println("------------------")
 		for (key : type2DefinedElement.keySet) {
 			println(key.name + "==>")
 			for (elem : key.lookup(type2DefinedElement)) {
 				print(elem.name + ", ")
+			}
+			println()
+
+		}
+		println()
+	}
+	
+	def printMap2() {
+		println("------------------")
+		for (key : rel2Inst.keySet) {
+			println(key.name + "==>")
+			for (elem : key.lookup(rel2Inst)) {
+				print("[" + elem.get(0) + "-" + elem.get(1) + "], ")
 			}
 			println()
 
@@ -138,6 +201,15 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 			val nodeName = ((term as VLSFunction).terms.get(0) as VLSFunctionAsTerm).functor
 			val defnElem = nodeName.lookup(name2DefinedElement)
 			list.add(defnElem)
+		}
+	}
+	
+	def private addRelIfNotNeg(VLSTerm term, List<String[]> list) {
+		if (term.class != VLSUnaryNegationImpl) {
+			val nodeName1 = ((term as VLSFunction).terms.get(0) as VLSFunctionAsTerm).functor
+			val nodeName2 = ((term as VLSFunction).terms.get(1) as VLSFunctionAsTerm).functor
+			val strArr = newArrayList(nodeName1, nodeName2)
+			list.add(strArr)
 		}
 	}
 
@@ -160,7 +232,15 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 	}
 
 	override getInterpretation(RelationDeclaration relation, Object[] parameterSubstitution) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		val node1 = (parameterSubstitution.get(0) as DefinedElement).name
+		val node2 = (parameterSubstitution.get(1) as DefinedElement).name
+		val realRelations = relation.lookup(rel2Inst)
+		for (real : realRelations){
+			if(real.contains(node1) && real.contains(node2)){
+				return true
+			}
+		}
+		return false
 	}
 
 	override getInterpretation(ConstantDeclaration constant) {
@@ -179,4 +259,27 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		return null
 	}
 
+}
+
+/**
+ * Helper class for efficiently matching parameter substitutions for functions and relations.
+ */
+class ParameterSubstitution {
+	val Object[] data;
+
+	new(Object[] data) {
+		this.data = data
+	}
+
+	override equals(Object obj) {
+		if(obj === this) return true else if(obj == null) return false
+		if (obj instanceof ParameterSubstitution) {
+			return Arrays.equals(this.data, obj.data)
+		}
+		return false
+	}
+
+	override hashCode() {
+		Arrays.hashCode(data)
+	}
 }

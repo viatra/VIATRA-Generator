@@ -21,18 +21,23 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -44,6 +49,7 @@ public class FAMTest {
       final Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic);
       final Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic);
       final InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic();
+      final InstanceModel2PartialInterpretation im2pi = new InstanceModel2PartialInterpretation();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("initialModels/");
       final FileSystemWorkspace inputs = new FileSystemWorkspace(_builder.toString(), "");
@@ -82,26 +88,31 @@ public class FAMTest {
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
-        it.typeScopes.minNewElements = 24;
-        it.typeScopes.maxNewElements = 25;
-        int _size = typeMapMin.size();
-        boolean _notEquals = (_size != 0);
-        if (_notEquals) {
-          it.typeScopes.minNewElementsByType = typeMapMin;
-        }
-        int _size_1 = typeMapMin.size();
-        boolean _notEquals_1 = (_size_1 != 0);
-        if (_notEquals_1) {
-          it.typeScopes.maxNewElementsByType = typeMapMax;
-        }
+        it.typeScopes.minNewElements = 4;
+        it.typeScopes.maxNewElements = 5;
         it.contCycleLevel = 5;
         it.uniquenessDuplicates = false;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       LogicResult solution = reasoner.solve(problem, vampireConfig, workspace);
       List<? extends LogicModelInterpretation> interpretations = reasoner.getInterpretations(((ModelResult) solution));
-      interpretations.get(0);
-      InputOutput.<Iterable<EAttribute>>println(ecore2Logic.allAttributesInScope(modelGenerationProblem.getTrace()));
+      for (final LogicModelInterpretation interpretation : interpretations) {
+        {
+          final EObject model = logic2Ecore.transformInterpretation(interpretation, modelGenerationProblem.getTrace());
+          workspace.writeModel(model, "model.xmi");
+          final PartialInterpretation representation = im2pi.transform(modelGenerationProblem, IteratorExtensions.<EObject>toList(model.eAllContents()), false);
+          if ((representation instanceof PartialInterpretation)) {
+            final PartialInterpretation2Gml vis1 = new PartialInterpretation2Gml();
+            final String gml = vis1.transform(representation);
+            workspace.writeText("model.gml", gml);
+            final GraphvizVisualiser vis2 = new GraphvizVisualiser();
+            final PartialInterpretationVisualisation dot = vis2.visualiseConcretization(representation);
+            dot.writeToFile(workspace, "model.png");
+          } else {
+            InputOutput.<String>println("ERROR");
+          }
+        }
+      }
       long _currentTimeMillis = System.currentTimeMillis();
       long _minus = (_currentTimeMillis - startTime);
       long totalTimeMin = (_minus / 60000);

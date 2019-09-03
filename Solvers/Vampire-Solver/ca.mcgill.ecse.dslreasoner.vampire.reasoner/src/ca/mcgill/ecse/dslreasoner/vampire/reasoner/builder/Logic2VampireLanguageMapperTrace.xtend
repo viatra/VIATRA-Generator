@@ -46,6 +46,7 @@ class Logic2VampireLanguageMapperTrace {
 	public var Map<ConstantDeclaration, ConstantDefinition> constantDefinitions
 	public var Map<RelationDeclaration, RelationDefinition> relationDefinitions
 	public var Map<RelationDeclaration, VLSFunction> rel2Predicate = new HashMap
+	public var Map<VLSFunction, RelationDeclaration> predicate2Relation = new HashMap
 	
 	
 //NOT NEEDED	//public var VLSFunction constantDec
