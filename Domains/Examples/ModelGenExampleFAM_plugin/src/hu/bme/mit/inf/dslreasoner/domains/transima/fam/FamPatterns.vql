@@ -11,45 +11,46 @@ pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
 	FunctionalInput.terminator(In,T);
 }
 
-@QueryBasedFeature 
-pattern type(This : Function, Target : FunctionType) = {
-	find rootElements(_Model, This);
-	Target == FunctionType::Root;
-} or {
-	neg find parent(_Child, This);
-	neg find rootElements(_Model, This);
-	Target == FunctionType::Leaf;
-} or  {
-	find parent(This, _Par);
-	find parent(_Child, This);
-	Target == FunctionType::Intermediate;
-}
-
-pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
-	FunctionalArchitectureModel.rootElements(Model, Root);
-}
-
-pattern parent(Func : Function, Par : Function) = {
-	Function.parent(Func, Par);
-}
-
-@QueryBasedFeature 
-pattern model(This:FunctionalElement, Target: FunctionalArchitectureModel) {
-	FunctionalElement(This);
-	FunctionalArchitectureModel(Target);
-}
-
-pattern hasRoot(F : Function) {
-	find rootElements(_Model, F);
-}
-pattern hasInt(F : Function) {
-	neg find parent(_Child, F);
-	neg find rootElements(_Model, F);
-}
-pattern hasLeaf(F : Function) {
-	find parent(F, _Par);
-	find parent(_Child, F);
-}
+//@QueryBasedFeature 
+//pattern type(This : Function, Target : FunctionType) = {
+//	find rootElements(_Model, This);
+//	Target == FunctionType::Root;
+//} or {
+//	neg find parent(_Child, This);
+//	neg find rootElements(_Model, This);
+//	Target == FunctionType::Leaf;
+//} or  {
+//	find parent(This, _Par);
+//	find parent(_Child, This);
+//	Target == FunctionType::Intermediate;
+//}
+//
+////@Constraint
+//pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
+//	FunctionalArchitectureModel.rootElements(Model, Root);
+//}
+//
+//pattern parent(Func : Function, Par : Function) = {
+//	Function.parent(Func, Par);
+//}
+//
+//@QueryBasedFeature 
+//pattern model(This:FunctionalElement, Target: FunctionalArchitectureModel) {
+//	FunctionalElement(This);
+//	FunctionalArchitectureModel(Target);
+//}
+//
+//pattern hasRoot(F : Function) {
+//	find rootElements(_Model, F);
+//}
+//pattern hasInt(F : Function) {
+//	neg find parent(_Child, F);
+//	neg find rootElements(_Model, F);
+//}
+//pattern hasLeaf(F : Function) {
+//	find parent(F, _Par);
+//	find parent(_Child, F);
+//}
 /*
 @Constraint(message="noRoot", severity="error", key={fam})
 pattern noRoot(fam: FunctionalArchitectureModel) {

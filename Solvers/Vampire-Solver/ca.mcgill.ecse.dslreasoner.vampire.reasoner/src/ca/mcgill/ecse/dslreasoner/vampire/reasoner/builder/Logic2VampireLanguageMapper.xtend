@@ -1,5 +1,10 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Assertion
@@ -21,18 +26,14 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.InstanceOf
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Not
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Or
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDefinitionImpl
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
 import java.util.Collections
 import java.util.HashMap
 import java.util.List
@@ -40,7 +41,7 @@ import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDeclarationImpl
 
 class Logic2VampireLanguageMapper {
 	private val extension VampireLanguageFactory factory = VampireLanguageFactory.eINSTANCE
@@ -81,7 +82,8 @@ class Logic2VampireLanguageMapper {
 		
 		// RELATION MAPPER
 		trace.relationDefinitions = problem.collectRelationDefinitions
-		problem.relations.forEach[this.relationMapper.transformRelation(it, trace)]
+//		println(problem.relations.filter[class == RelationDefinitionImpl])
+		problem.relations.forEach[this.relationMapper.transformRelation(it, trace, new Logic2VampireLanguageMapper)]
 		
 		// CONTAINMENT MAPPER
 		containmentMapper.transformContainment(config,problem.containmentHierarchies, trace)
@@ -140,7 +142,7 @@ class Logic2VampireLanguageMapper {
 	// ////////////
 	def protected transformAssertion(Assertion assertion, Logic2VampireLanguageMapperTrace trace) {
 		val res = createVLSFofFormula => [
-			it.name = support.toID(assertion.name)
+			it.name = support.toID("assertion_" + assertion.name)
 			// below is temporary solution
 			it.fofRole = "axiom"
 			it.fofFormula = assertion.value.transformTerm(trace, Collections.EMPTY_MAP)
@@ -378,8 +380,18 @@ class Logic2VampireLanguageMapper {
 //						it.referredDefinition = relation.lookup(trace.relationDefinition2Predicate)
 //						it.params += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
 //					]
+//		println(relation.name)
+//		if(relation.class == RelationDefinitionImpl) {
+//			println("(" + (relation as RelationDefinition).getDefines + ")")
+//		}
 		return createVLSFunction => [
-			it.constant = (relation as RelationDeclaration).lookup(trace.rel2Predicate).constant
+			if (relation.class == RelationDeclarationImpl) {
+							it.constant = (relation as RelationDeclaration).lookup(trace.rel2Predicate).constant
+			}
+			else {
+				it.constant = (relation as RelationDefinition).lookup(trace.relDef2Predicate).constant
+			}
+			
 			it.terms += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
 		]
 	}

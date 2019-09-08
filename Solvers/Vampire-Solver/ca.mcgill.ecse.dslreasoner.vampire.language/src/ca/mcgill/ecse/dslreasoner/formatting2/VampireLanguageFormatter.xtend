@@ -23,9 +23,9 @@ class VampireLanguageFormatter extends AbstractFormatter2 {
 		for (VLSComment vLSComment : vampireModel.getComments()) {
 			vLSComment.format;
 		}
-//		for (VLSFofFormula vLSFofFormula : vampireModel.getFormulas()) {
-//			vLSFofFormula.format;
-//		}
+		for (VLSFofFormula vLSFofFormula : vampireModel.getFormulas()) {
+			vLSFofFormula.format;
+		}
 	}
 
 //	def dispatch void format(VLSInclude vLSInclude, extension IFormattableDocument document) {

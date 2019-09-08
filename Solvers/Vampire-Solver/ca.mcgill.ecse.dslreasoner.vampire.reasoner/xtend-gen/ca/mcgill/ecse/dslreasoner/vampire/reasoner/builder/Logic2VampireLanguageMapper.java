@@ -21,6 +21,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSUnaryNegation;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And;
@@ -52,6 +53,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDeclarationImpl;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.Arrays;
@@ -117,7 +119,8 @@ public class Logic2VampireLanguageMapper {
     }
     trace.relationDefinitions = this.collectRelationDefinitions(problem);
     final Consumer<Relation> _function_3 = (Relation it) -> {
-      this.relationMapper.transformRelation(it, trace);
+      Logic2VampireLanguageMapper _logic2VampireLanguageMapper = new Logic2VampireLanguageMapper();
+      this.relationMapper.transformRelation(it, trace, _logic2VampireLanguageMapper);
     };
     problem.getRelations().forEach(_function_3);
     this.containmentMapper.transformContainment(config, problem.getContainmentHierarchies(), trace);
@@ -169,7 +172,9 @@ public class Logic2VampireLanguageMapper {
     {
       VLSFofFormula _createVLSFofFormula = this.factory.createVLSFofFormula();
       final Procedure1<VLSFofFormula> _function = (VLSFofFormula it) -> {
-        it.setName(this.support.toID(assertion.getName()));
+        String _name = assertion.getName();
+        String _plus = ("assertion_" + _name);
+        it.setName(this.support.toID(_plus));
         it.setFofRole("axiom");
         it.setFofFormula(this.transformTerm(assertion.getValue(), trace, Collections.EMPTY_MAP));
       };
@@ -346,7 +351,13 @@ public class Logic2VampireLanguageMapper {
   protected VLSTerm _transformSymbolicReference(final Relation relation, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
     VLSFunction _createVLSFunction = this.factory.createVLSFunction();
     final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
-      it.setConstant(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) relation), trace.rel2Predicate).getConstant());
+      Class<? extends Relation> _class = relation.getClass();
+      boolean _equals = Objects.equal(_class, RelationDeclarationImpl.class);
+      if (_equals) {
+        it.setConstant(CollectionsUtil.<RelationDeclaration, VLSFunction>lookup(((RelationDeclaration) relation), trace.rel2Predicate).getConstant());
+      } else {
+        it.setConstant(CollectionsUtil.<RelationDefinition, VLSFunction>lookup(((RelationDefinition) relation), trace.relDef2Predicate).getConstant());
+      }
       EList<VLSTerm> _terms = it.getTerms();
       final Function1<Term, VLSTerm> _function_1 = (Term p) -> {
         return this.transformTerm(p, trace, variables);
