@@ -55,6 +55,10 @@ public class Logic2VampireLanguageMapperTrace {
   
   public Map<VLSFunction, RelationDeclaration> predicate2Relation = new HashMap<VLSFunction, RelationDeclaration>();
   
+  public Map<RelationDefinition, VLSFunction> relDef2Predicate = new HashMap<RelationDefinition, VLSFunction>();
+  
+  public Map<VLSFunction, RelationDefinition> predicate2RelDef = new HashMap<VLSFunction, RelationDefinition>();
+  
   public final Map<Variable, VLSVariable> relationVar2VLS = new HashMap<Variable, VLSVariable>();
   
   public final Map<Variable, VLSFunction> relationVar2TypeDec = new HashMap<Variable, VLSFunction>();

@@ -24,26 +24,28 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDeclarationImpl
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDeclarationImpl
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDefinitionImpl
 import java.util.Arrays
 import java.util.HashMap
 import java.util.List
 import java.util.Map
-import java.util.Set
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.TypeDefinitionImpl
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
+import java.util.concurrent.TimeUnit
 
 class VampireModelInterpretation implements LogicModelInterpretation {
 	protected val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
 
 	protected val Logic2VampireLanguageMapperTrace forwardTrace;
 
-	//These three maps capture all the information found in the Vampire output
+	// These three maps capture all the information found in the Vampire output
 	private val Map<String, DefinedElement> name2DefinedElement = new HashMap
 	private val Map<TypeDeclaration, List<DefinedElement>> type2DefinedElement = new HashMap
-	private val Map<RelationDeclaration, List<String[]>> rel2Inst = new HashMap
-	//end
+	private val Map<RelationDeclaration, List<String[]>> relDec2Inst = new HashMap
+	private val Map<RelationDefinition, List<String[]>> relDef2Inst = new HashMap
 
+	// end
 	public new(VampireModel model, Logic2VampireLanguageMapperTrace trace) {
 		this.forwardTrace = trace
 
@@ -77,6 +79,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 //		println()
 //		println(trace.type2Predicate)
 		// Fill keys of map
+		println(trace.type2Predicate.keySet)
 		val allTypeDecls = trace.type2Predicate.keySet.filter[class == TypeDeclarationImpl]
 		val allTypeFunctions = trace.predicate2Type
 		println(trace.type2Predicate.keySet.filter[class == TypeDefinitionImpl])
@@ -86,52 +89,64 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		}
 
 		// USE THE DECLARE_<TYPE_NAME> FORMULAS TO SEE WHAT THE TYPES ARE
-		val typeFormulas = model.tfformulas.filter[name.length > 12 && name.substring(0, 12) == "predicate_t_"]
+		val typeFormulas = model.tfformulas.filter [
+			name.length > 12 && (name.substring(0, 12) == "predicate_t_" || name.substring(0, 12) == "predicate_e_")
+		]
 		// ^this way, we ignore the "object" type
-		//TODO potentially need to handle the enums in this case as well
+		// TODO potentially need to handle the enums in this case as well
 		for (formula : typeFormulas) {
 			// get associated type
 			val associatedTypeName = (formula as VLSTffFormula).name.substring(10)
-			val associatedFunction = allTypeFunctions.keySet.filter[constant == associatedTypeName].
-				get(0) as VLSFunction
-			val associatedTypeAll = associatedFunction.lookup(allTypeFunctions)
+			print(associatedTypeName)
+			val associatedFunctions = allTypeFunctions.keySet.filter[constant == associatedTypeName]
+			if (associatedFunctions.length > 0) {
+				val associatedFunction = associatedFunctions.get(0) as VLSFunction
+				val associatedTypeAll = associatedFunction.lookup(allTypeFunctions)
 //			val associatedTypeDeclFormula = model.tfformulas.filter[name == ("declare_t_" + associatedTypeName)].get(0) as VLSTffFormula
 //			val associatedTypeDefn = associatedTypeDeclFormula.fofFormula as VLSOtherDeclaration
 //			val associatedTypeFct = associatedTypeDefn.name as VLSConstant
-			if (associatedTypeAll.class == TypeDeclarationImpl) {
-				val associatedType = associatedTypeAll as TypeDeclaration
+				if (associatedTypeAll.class == TypeDeclarationImpl) {
+					val associatedType = associatedTypeAll as TypeDeclaration
 
-				// get definedElements
-				var andFormulaTerm = formula.fofFormula
-				end = false
-				val List<DefinedElement> instances = newArrayList
-				while (!end) {
-					if (andFormulaTerm.class == VLSAndImpl) {
-						val andFormula = andFormulaTerm as VLSAnd
-						val andRight = andFormula.right
-						addIfNotNeg(andRight, instances)
-						andFormulaTerm = andFormula.left
-					} else {
-						addIfNotNeg(andFormulaTerm as VLSTerm, instances)
-						end = true
+					// get definedElements
+					var andFormulaTerm = formula.fofFormula
+					end = false
+					val List<DefinedElement> instances = newArrayList
+					while (!end) {
+						if (andFormulaTerm.class == VLSAndImpl) {
+							val andFormula = andFormulaTerm as VLSAnd
+							val andRight = andFormula.right
+							addIfNotNeg(andRight, instances)
+							andFormulaTerm = andFormula.left
+						} else {
+							addIfNotNeg(andFormulaTerm as VLSTerm, instances)
+							end = true
+						}
+
 					}
-
-				}
-				for (elem : instances) {
-					associatedType.lookup(type2DefinedElement).add(elem)
+					for (elem : instances) {
+						associatedType.lookup(type2DefinedElement).add(elem)
+					}
 				}
 			}
+
 		}
-		
+
 		printMap()
-		
+
 		// 3. get relations
 		// Fill keys of map
-		val allRelDecls = trace.rel2Predicate.keySet.filter[class == RelationDeclarationImpl]
-		val allRelFunctions = trace.predicate2Relation
+		val allRelDecls = trace.rel2Predicate.keySet
+		val allRelDefns = trace.relDef2Predicate.keySet
+		val allRelDeclFunctions = trace.predicate2Relation
+		val allRelDefnFunctions = trace.predicate2RelDef
 
 		for (rel : allRelDecls) {
-			rel2Inst.put(rel as RelationDeclaration, newArrayList)
+			relDec2Inst.put(rel as RelationDeclaration, newArrayList)
+		}
+
+		for (rel : allRelDefns) {
+			relDef2Inst.put(rel as RelationDefinition, newArrayList)
 		}
 
 		// USE THE DECLARE_<RELATION_NAME> FORMULAS TO SEE WHAT THE RELATIONS ARE
@@ -140,34 +155,40 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		for (formula : relFormulas) {
 			// get associated type
 			val associatedRelName = (formula as VLSTffFormula).name.substring(10)
-			val associatedRelFunction = allRelFunctions.keySet.filter[constant == associatedRelName].
-				get(0) as VLSFunction
-			val associatedRel = associatedRelFunction.lookup(allRelFunctions) as RelationDeclaration
 
-			// get definedElements
-			var andFormulaTerm = formula.fofFormula
-			end = false
-			val List<String[]> instances = newArrayList
-			while (!end) {
-				if (andFormulaTerm.class == VLSAndImpl) {
-					val andFormula = andFormulaTerm as VLSAnd
-					val andRight = andFormula.right
-					addRelIfNotNeg(andRight, instances)
-					andFormulaTerm = andFormula.left
-				} else {
-					addRelIfNotNeg(andFormulaTerm as VLSTerm, instances)
-					end = true
+			// TRY FOR DECLARATION
+			val associatedRelFunctionList = allRelDeclFunctions.keySet.filter[constant == associatedRelName]
+			if (associatedRelFunctionList.isEmpty) {
+				// THEN IT IS NOT A DECLARATION
+			} else {
+				val associatedRelFunction = associatedRelFunctionList.get(0) as VLSFunction // ASSUMING ONLY 1 SATISFIES QUERY
+				val associatedRel = associatedRelFunction.lookup(allRelDeclFunctions) as RelationDeclaration
+
+				// get definedElements
+				var andFormulaTerm = formula.fofFormula
+				end = false
+				val List<String[]> instances = newArrayList
+				while (!end) {
+					if (andFormulaTerm.class == VLSAndImpl) {
+						val andFormula = andFormulaTerm as VLSAnd
+						val andRight = andFormula.right
+						addRelIfNotNeg(andRight, instances)
+						andFormulaTerm = andFormula.left
+					} else {
+						addRelIfNotNeg(andFormulaTerm as VLSTerm, instances)
+						end = true
+					}
+
+				}
+				for (elem : instances) {
+					associatedRel.lookup(relDec2Inst).add(elem)
 				}
 
-			}
-			for (elem : instances) {
-				associatedRel.lookup(rel2Inst).add(elem)
 			}
 
 		}
 
 //		printMap2()
-
 	}
 
 	def printMap() {
@@ -182,12 +203,12 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		}
 		println()
 	}
-	
+
 	def printMap2() {
 		println("------------------")
-		for (key : rel2Inst.keySet) {
+		for (key : relDec2Inst.keySet) {
 			println(key.name + "==>")
-			for (elem : key.lookup(rel2Inst)) {
+			for (elem : key.lookup(relDec2Inst)) {
 				print("[" + elem.get(0) + "-" + elem.get(1) + "], ")
 			}
 			println()
@@ -203,7 +224,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 			list.add(defnElem)
 		}
 	}
-	
+
 	def private addRelIfNotNeg(VLSTerm term, List<String[]> list) {
 		if (term.class != VLSUnaryNegationImpl) {
 			val nodeName1 = ((term as VLSFunction).terms.get(0) as VLSFunctionAsTerm).functor
@@ -232,14 +253,19 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 	}
 
 	override getInterpretation(RelationDeclaration relation, Object[] parameterSubstitution) {
+		print("-- " + relation.name)
 		val node1 = (parameterSubstitution.get(0) as DefinedElement).name
 		val node2 = (parameterSubstitution.get(1) as DefinedElement).name
-		val realRelations = relation.lookup(rel2Inst)
-		for (real : realRelations){
-			if(real.contains(node1) && real.contains(node2)){
+		val realRelations = relation.lookup(relDec2Inst)
+		for (real : realRelations) {
+			if (real.contains(node1) && real.contains(node2)) {
+				println("  true")
+				TimeUnit.SECONDS.sleep(1)
 				return true
 			}
 		}
+		println("  false")
+		TimeUnit.SECONDS.sleep(1)
 		return false
 	}
 

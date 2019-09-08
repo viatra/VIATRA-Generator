@@ -3,10 +3,12 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse;
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
+import functionalarchitecture.FAMTerminator;
 import functionalarchitecture.Function;
 import functionalarchitecture.FunctionalArchitectureModel;
 import functionalarchitecture.FunctionalOutput;
 import functionalarchitecture.FunctionalarchitecturePackage;
+import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
@@ -20,12 +22,10 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
+import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration;
+import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -64,12 +63,14 @@ public class FAMTest {
       InputOutput.<String>println("Input and output workspaces are created");
       final EcoreMetamodelDescriptor metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE);
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi");
-      final Object queries = null;
+      final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance());
       InputOutput.<String>println("DSL loaded");
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
       problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
+      Viatra2LogicConfiguration _viatra2LogicConfiguration = new Viatra2LogicConfiguration();
+      problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, _viatra2LogicConfiguration).getOutput();
       workspace.writeModel(problem, "Fam.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
@@ -77,7 +78,7 @@ public class FAMTest {
       VampireSolver _vampireSolver = new VampireSolver();
       reasoner = _vampireSolver;
       final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
-      classMapMin.put(FunctionalOutput.class, Integer.valueOf(3));
+      classMapMin.put(FAMTerminator.class, Integer.valueOf(1));
       final Map<Type, Integer> typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
       final HashMap<Class, Integer> classMapMax = new HashMap<Class, Integer>();
       classMapMax.put(FunctionalArchitectureModel.class, Integer.valueOf(3));
@@ -90,27 +91,22 @@ public class FAMTest {
         it.documentationLevel = DocumentationLevel.FULL;
         it.typeScopes.minNewElements = 4;
         it.typeScopes.maxNewElements = 5;
+        int _size = typeMapMin.size();
+        boolean _notEquals = (_size != 0);
+        if (_notEquals) {
+          it.typeScopes.minNewElementsByType = typeMapMin;
+        }
         it.contCycleLevel = 5;
         it.uniquenessDuplicates = false;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       LogicResult solution = reasoner.solve(problem, vampireConfig, workspace);
       List<? extends LogicModelInterpretation> interpretations = reasoner.getInterpretations(((ModelResult) solution));
+      InputOutput.<Class<? extends List>>print(interpretations.getClass());
       for (final LogicModelInterpretation interpretation : interpretations) {
         {
           final EObject model = logic2Ecore.transformInterpretation(interpretation, modelGenerationProblem.getTrace());
           workspace.writeModel(model, "model.xmi");
-          final PartialInterpretation representation = im2pi.transform(modelGenerationProblem, IteratorExtensions.<EObject>toList(model.eAllContents()), false);
-          if ((representation instanceof PartialInterpretation)) {
-            final PartialInterpretation2Gml vis1 = new PartialInterpretation2Gml();
-            final String gml = vis1.transform(representation);
-            workspace.writeText("model.gml", gml);
-            final GraphvizVisualiser vis2 = new GraphvizVisualiser();
-            final PartialInterpretationVisualisation dot = vis2.visualiseConcretization(representation);
-            dot.writeToFile(workspace, "model.png");
-          } else {
-            InputOutput.<String>println("ERROR");
-          }
         }
       }
       long _currentTimeMillis = System.currentTimeMillis();

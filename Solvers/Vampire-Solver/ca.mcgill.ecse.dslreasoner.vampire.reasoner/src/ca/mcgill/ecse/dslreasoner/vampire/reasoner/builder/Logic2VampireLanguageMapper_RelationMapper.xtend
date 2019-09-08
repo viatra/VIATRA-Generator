@@ -1,14 +1,12 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
@@ -25,7 +23,7 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		this.base = base
 	}
 
-	def dispatch public void transformRelation(RelationDeclaration r, Logic2VampireLanguageMapperTrace trace) {
+	def dispatch public void transformRelation(RelationDeclaration r, Logic2VampireLanguageMapperTrace trace, Logic2VampireLanguageMapper mapper) {
 
 		// 1. store all variables in support wrt their name
 		// 1.1 if variable has type, creating list of type declarations
@@ -81,91 +79,79 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		trace.specification.formulas += comply
 	}
 
-	def dispatch public void transformRelation(RelationDefinition reldef, Logic2VampireLanguageMapperTrace trace) {
+	def dispatch public void transformRelation(RelationDefinition r, Logic2VampireLanguageMapperTrace trace, Logic2VampireLanguageMapper mapper) {
+		
+//		println("XXXXXXXXXXXXXXXXX")
 
-//		// 1. store all variables in support wrt their name
-//		// 1.1 if variable has type, creating list of type declarations
-////		val VLSVariable variable = createVLSVariable => [it.name = "A"]
-//		val Map<Variable, VLSVariable> relationVar2VLS = new HashMap
-//		val Map<Variable, VLSFunction> relationVar2TypeDecComply = new HashMap
-//		val Map<Variable, VLSFunction> relationVar2TypeDecRes = new HashMap
-//		val typedefs = new ArrayList<VLSTerm>
-//
-//		for (variable : reldef.variables) {
-//			val v = createVLSVariable => [
-//				it.name = support.toIDMultiple("V", variable.name)
-//			]
-//			relationVar2VLS.put(variable, v)
-//
-//			val varTypeComply = createVLSFunction => [
-//				it.constant = support.toIDMultiple("t", (variable.range as ComplexTypeReference).referred.name)
-//				it.terms += support.duplicate(v)
-//			]
-//			relationVar2TypeDecComply.put(variable, varTypeComply)
-//			relationVar2TypeDecRes.put(variable, support.duplicate(varTypeComply))
-//		}
-//		val nameArray = reldef.name.split(" ")
-//		val comply = createVLSFofFormula => [
-//			it.name = support.toIDMultiple("compliance", nameArray.get(nameArray.length - 2),
-//				nameArray.get(nameArray.length - 1))
-//			it.fofRole = "axiom"
-//			it.fofFormula = createVLSUniversalQuantifier => [
-//				for (variable : reldef.variables) {
-//					it.variables += support.duplicate(variable.lookup(relationVar2VLS))
-//
-//				}
-//				it.operand = createVLSImplies => [
-//					it.left = createVLSFunction => [
-//						it.constant = support.toIDMultiple("rel", reldef.name)
-//						for (variable : reldef.variables) {
-//							val v = createVLSVariable => [
-//								it.name = variable.lookup(relationVar2VLS).name
-//							]
-//							it.terms += v
-//						}
-//					]
-//					it.right = support.unfoldAnd(new ArrayList<VLSTerm>(relationVar2TypeDecComply.values))
-//				]
-//			]
-//		]
-//
-//		val res = createVLSFofFormula => [
-//			it.name = support.toIDMultiple("relation", nameArray.get(nameArray.length - 2),
-//				nameArray.get(nameArray.length - 1))
-//			it.fofRole = "axiom"
-//			it.fofFormula = createVLSUniversalQuantifier => [
-//				for (variable : reldef.variables) {
-//					val v = createVLSVariable => [
-//						it.name = variable.lookup(relationVar2VLS).name
-//					]
-//					it.variables += v
-//
-//				}
-//				it.operand = createVLSImplies => [
-//					it.left = support.unfoldAnd(new ArrayList<VLSTerm>(relationVar2TypeDecRes.values))
-//					it.right = createVLSEquivalent => [
-//						it.left = createVLSFunction => [
-//							it.constant = support.toIDMultiple("rel", reldef.name)
-//							for (variable : reldef.variables) {
-//								val v = createVLSVariable => [
-//									it.name = variable.lookup(relationVar2VLS).name
-//								]
-//								it.terms += v
-//
-//							}
-//						]
-//						it.right = base.transformTerm(reldef.value, trace, relationVar2VLS)
-//					]
-//
-//				]
-//
-//			]
-//
-//		]
-//
-//		// trace.relationDefinition2Predicate.put(r,res)
-//		trace.specification.formulas += comply;
-//		trace.specification.formulas += res;
+// 1. store all variables in support wrt their name
+		// 1.1 if variable has type, creating list of type declarations
+		val Map<Variable, VLSVariable> relVar2VLS = new HashMap
+		val List<VLSVariable> vars = newArrayList
+		val List<VLSFunction> relVar2TypeDecComply = new ArrayList
+		for (i : 0 ..< r.parameters.length) {
+
+			val v = createVLSVariable => [
+				it.name = support.toIDMultiple("V", i.toString)
+			]
+			relVar2VLS.put(r.variables.get(i), v)
+			vars.add(v)
+
+			val relType = (r.parameters.get(i) as ComplexTypeReference).referred
+			val varTypeComply = support.duplicate(relType.lookup(trace.type2Predicate), v)
+			relVar2TypeDecComply.add(varTypeComply)
+
+		}
+
+		//deciding name of relation
+		val nameArray = r.name.split(" ")
+		var relNameVar = ""
+		if (nameArray.length == 3) {
+			relNameVar = support.toIDMultiple(nameArray.get(0), nameArray.get(2))
+		}
+		else {
+			relNameVar = r.name
+		}
+		val relName = relNameVar
+		
+		//define logic for pattern
+//		val map = new HashMap
+//		map.put(r.variables.get(0), createVLSVariable)
+		val definition = mapper.transformTerm(r.value, trace, relVar2VLS)
+		
+		
+		
+		
+		//get entire contents of and
+		val compliance = support.unfoldAnd(relVar2TypeDecComply)
+		val compDefn = createVLSAnd=> [
+			it.left = compliance
+			it.right = definition
+		]
+		
+		val relDef = createVLSFofFormula=> [
+			
+			it.name = support.toID(relName)
+			it.fofRole = "axiom"
+			it.fofFormula = createVLSUniversalQuantifier => [
+				for (v : vars) {
+					it.variables += support.duplicate(v)
+				}
+				it.operand = createVLSImplies => [
+					val rel = createVLSFunction => [
+						it.constant = support.toIDMultiple("r", relName)
+						for (v : vars) {
+							it.terms += support.duplicate(v)
+						}
+					]
+					trace.relDef2Predicate.put(r, rel)
+					trace.predicate2RelDef.put(rel, r)
+					it.left = support.duplicate(rel)
+					it.right = compDefn
+				]
+			]
+		]
+
+		trace.specification.formulas += relDef
 
 	}
 

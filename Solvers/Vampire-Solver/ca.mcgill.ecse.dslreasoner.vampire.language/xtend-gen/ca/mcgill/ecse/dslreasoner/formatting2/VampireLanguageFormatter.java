@@ -29,6 +29,10 @@ public class VampireLanguageFormatter extends AbstractFormatter2 {
     for (final VLSComment vLSComment : _comments) {
       document.<VLSComment>format(vLSComment);
     }
+    EList<VLSFofFormula> _formulas = vampireModel.getFormulas();
+    for (final VLSFofFormula vLSFofFormula : _formulas) {
+      document.<VLSFofFormula>format(vLSFofFormula);
+    }
   }
   
   protected void _format(final VLSFofFormula formula, @Extension final IFormattableDocument document) {
