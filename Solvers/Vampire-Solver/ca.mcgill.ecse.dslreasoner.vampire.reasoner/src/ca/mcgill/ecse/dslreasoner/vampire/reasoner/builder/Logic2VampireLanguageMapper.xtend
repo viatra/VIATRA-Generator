@@ -265,7 +265,11 @@ class Logic2VampireLanguageMapper {
 	def dispatch protected VLSTerm transformSymbolicReference(DefinedElement referred,
 		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
-		typeMapper.transformReference(referred, trace)
+			val name = referred.lookup(trace.definedElement2String)
+			return createVLSConstant => [
+				it.name = name
+			]
+//		typeMapper.transformReference(referred, trace)
 	}
 
 	def dispatch protected VLSTerm transformSymbolicReference(ConstantDeclaration constant,

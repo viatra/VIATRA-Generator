@@ -246,7 +246,12 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		return declaration.lookup(this.type2DefinedElement)
 	}
 
-	def private dispatch getElementsDispatch(TypeDefinition declaration) { return declaration.elements }
+	def private dispatch getElementsDispatch(TypeDefinition declaration) {
+		println("~~" + declaration)
+		println(declaration.elements)
+		println()
+		return declaration.elements
+	}
 
 	override getInterpretation(FunctionDeclaration function, Object[] parameterSubstitution) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
@@ -260,12 +265,12 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		for (real : realRelations) {
 			if (real.contains(node1) && real.contains(node2)) {
 				println("  true")
-				TimeUnit.SECONDS.sleep(1)
+				TimeUnit.MILLISECONDS.sleep(10)
 				return true
 			}
 		}
 		println("  false")
-		TimeUnit.SECONDS.sleep(1)
+		TimeUnit.MILLISECONDS.sleep(10)
 		return false
 	}
 

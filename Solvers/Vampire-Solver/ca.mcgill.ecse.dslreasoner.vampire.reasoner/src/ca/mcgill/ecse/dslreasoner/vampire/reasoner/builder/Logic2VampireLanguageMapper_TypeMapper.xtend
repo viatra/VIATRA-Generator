@@ -138,9 +138,9 @@ class Logic2VampireLanguageMapper_TypeMapper {
 				val cstTerm = createVLSFunctionAsTerm => [
 					it.functor = "eo" + num
 				]
-				if (isNotEnum) {
+//				if (isNotEnum) {
 					trace.definedElement2String.put(type.elements.get(index),cstTerm.functor)
-				}
+//				}
 				
 				val cst = support.toConstant(cstTerm)
 				trace.uniqueInstances.add(cst)
@@ -249,8 +249,13 @@ class Logic2VampireLanguageMapper_TypeMapper {
 	}
 
 	def protected transformReference(DefinedElement referred, Logic2VampireLanguageMapperTrace trace) {
-		createVLSDoubleQuote => [
-			it.value = "\"a" + referred.name + "\""
+		
+//		createVLSDoubleQuote => [
+//			it.value = "\"a" + referred.name + "\""
+//		]
+		
+		createVLSConstant => [
+			it.name = referred.name
 		]
 	}
 

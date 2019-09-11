@@ -89,8 +89,8 @@ public class FAMTest {
       VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
       final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
-        it.typeScopes.minNewElements = 4;
-        it.typeScopes.maxNewElements = 5;
+        it.typeScopes.minNewElements = 8;
+        it.typeScopes.maxNewElements = 10;
         int _size = typeMapMin.size();
         boolean _notEquals = (_size != 0);
         if (_notEquals) {
