@@ -283,7 +283,12 @@ public class Logic2VampireLanguageMapper {
   }
   
   protected VLSTerm _transformSymbolicReference(final DefinedElement referred, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {
-    return this.typeMapper.transformReference(referred, trace);
+    final String name = CollectionsUtil.<DefinedElement, String>lookup(referred, trace.definedElement2String);
+    VLSConstant _createVLSConstant = this.factory.createVLSConstant();
+    final Procedure1<VLSConstant> _function = (VLSConstant it) -> {
+      it.setName(name);
+    };
+    return ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function);
   }
   
   protected VLSTerm _transformSymbolicReference(final ConstantDeclaration constant, final List<Term> parameterSubstitutions, final Logic2VampireLanguageMapperTrace trace, final Map<Variable, VLSVariable> variables) {

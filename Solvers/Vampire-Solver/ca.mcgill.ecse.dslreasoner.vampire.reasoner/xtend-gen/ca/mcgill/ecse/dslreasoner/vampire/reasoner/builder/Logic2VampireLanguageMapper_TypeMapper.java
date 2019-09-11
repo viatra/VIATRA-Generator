@@ -5,7 +5,6 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguage
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper_Support;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDoubleQuote;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquality;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSEquivalent;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFofFormula;
@@ -177,9 +176,7 @@ public class Logic2VampireLanguageMapper_TypeMapper {
                 it.setFunctor(("eo" + Integer.valueOf(num)));
               };
               final VLSFunctionAsTerm cstTerm = ObjectExtensions.<VLSFunctionAsTerm>operator_doubleArrow(_createVLSFunctionAsTerm, _function_3);
-              if (isNotEnum) {
-                trace.definedElement2String.put(type_1.getElements().get(index), cstTerm.getFunctor());
-              }
+              trace.definedElement2String.put(type_1.getElements().get(index), cstTerm.getFunctor());
               final VLSConstant cst = this.support.toConstant(cstTerm);
               trace.uniqueInstances.add(cst);
               VLSFofFormula _createVLSFofFormula_1 = this.factory.createVLSFofFormula();
@@ -328,15 +325,12 @@ public class Logic2VampireLanguageMapper_TypeMapper {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  protected VLSDoubleQuote transformReference(final DefinedElement referred, final Logic2VampireLanguageMapperTrace trace) {
-    VLSDoubleQuote _createVLSDoubleQuote = this.factory.createVLSDoubleQuote();
-    final Procedure1<VLSDoubleQuote> _function = (VLSDoubleQuote it) -> {
-      String _name = referred.getName();
-      String _plus = ("\"a" + _name);
-      String _plus_1 = (_plus + "\"");
-      it.setValue(_plus_1);
+  protected VLSConstant transformReference(final DefinedElement referred, final Logic2VampireLanguageMapperTrace trace) {
+    VLSConstant _createVLSConstant = this.factory.createVLSConstant();
+    final Procedure1<VLSConstant> _function = (VLSConstant it) -> {
+      it.setName(referred.getName());
     };
-    return ObjectExtensions.<VLSDoubleQuote>operator_doubleArrow(_createVLSDoubleQuote, _function);
+    return ObjectExtensions.<VLSConstant>operator_doubleArrow(_createVLSConstant, _function);
   }
   
   protected void getTypeInterpreter() {

@@ -86,16 +86,16 @@ class FAMTest {
 		classMapMax.put(FunctionalOutput, 4)
 
 		val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
-
+		
 		// Define Config File		
 		val vampireConfig = new VampireSolverConfiguration => [
 			// add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 
-			it.typeScopes.minNewElements = 4//24
-			it.typeScopes.maxNewElements = 5//25
+			it.typeScopes.minNewElements = 8//24
+			it.typeScopes.maxNewElements = 10//25
 			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
-//			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
+//			if(typeMapMax.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5
 			it.uniquenessDuplicates = false
 		]
