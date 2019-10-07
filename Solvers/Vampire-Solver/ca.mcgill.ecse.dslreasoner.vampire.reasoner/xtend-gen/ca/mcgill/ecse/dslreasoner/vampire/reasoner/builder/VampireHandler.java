@@ -24,8 +24,8 @@ public class VampireHandler {
       final String VAMPDIR = "..\\..\\Solvers\\Vampire-Solver\\ca.mcgill.ecse.dslreasoner.vampire.reasoner\\lib\\";
       final String VAMPNAME = "vampire.exe";
       final String TEMPNAME = "TEMP.tptp";
-      final String OPTION = " --mode casc_sat ";
-      final String SOLNNAME = "solution.tptp";
+      final String OPTION = " --mode casc_sat -t 300 ";
+      final String SOLNNAME = (("_solution" + Integer.valueOf(configuration.typeScopes.maxNewElements)) + ".tptp");
       final String PATH = "C:/cygwin64/bin";
       final URI wsURI = workspace.getWorkspaceURI();
       final String tempLoc = (wsURI + TEMPNAME);
@@ -33,8 +33,11 @@ public class VampireHandler {
       final String solnLoc = (_plus + " ");
       final String vampLoc = (VAMPDIR + VAMPNAME);
       String tempURI = workspace.writeModel(problem, TEMPNAME).toFileString();
+      long startTime = System.currentTimeMillis();
       final Process p = Runtime.getRuntime().exec((((((CMD + vampLoc) + OPTION) + tempLoc) + " > ") + solnLoc), ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(("Path=" + PATH)), String.class)));
       p.waitFor();
+      long _currentTimeMillis = System.currentTimeMillis();
+      final long solverTime = (_currentTimeMillis - startTime);
       InputStream _inputStream = p.getInputStream();
       InputStreamReader _inputStreamReader = new InputStreamReader(_inputStream);
       final BufferedReader reader = new BufferedReader(_inputStreamReader);
@@ -46,7 +49,7 @@ public class VampireHandler {
       workspace.getFile(TEMPNAME).delete();
       final EList<EObject> root = workspace.<VampireModel>readModel(VampireModel.class, SOLNNAME).eResource().getContents();
       EObject _get = root.get(0);
-      return new MonitoredVampireSolution(((VampireModel) _get));
+      return new MonitoredVampireSolution(solverTime, ((VampireModel) _get));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

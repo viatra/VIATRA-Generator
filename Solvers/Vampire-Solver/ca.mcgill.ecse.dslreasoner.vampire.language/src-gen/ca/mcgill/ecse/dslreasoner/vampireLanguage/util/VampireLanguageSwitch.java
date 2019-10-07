@@ -122,6 +122,14 @@ public class VampireLanguageSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case VampireLanguagePackage.VLS_TERM:
+      {
+        VLSTerm vlsTerm = (VLSTerm)theEObject;
+        T result = caseVLSTerm(vlsTerm);
+        if (result == null) result = caseVLSTffTerm(vlsTerm);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case VampireLanguagePackage.VLS_DECLARATION:
       {
         VLSDeclaration vlsDeclaration = (VLSDeclaration)theEObject;
@@ -152,14 +160,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
       {
         VLSTypeDef vlsTypeDef = (VLSTypeDef)theEObject;
         T result = caseVLSTypeDef(vlsTypeDef);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case VampireLanguagePackage.VLS_TERM:
-      {
-        VLSTerm vlsTerm = (VLSTerm)theEObject;
-        T result = caseVLSTerm(vlsTerm);
-        if (result == null) result = caseVLSTffTerm(vlsTerm);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -530,6 +530,22 @@ public class VampireLanguageSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>VLS Term</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>VLS Term</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVLSTerm(VLSTerm object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>VLS Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -589,22 +605,6 @@ public class VampireLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVLSTypeDef(VLSTypeDef object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>VLS Term</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>VLS Term</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVLSTerm(VLSTerm object)
   {
     return null;
   }

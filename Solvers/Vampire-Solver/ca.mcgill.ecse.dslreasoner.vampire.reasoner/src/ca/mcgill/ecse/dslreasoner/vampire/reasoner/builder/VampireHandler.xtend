@@ -28,7 +28,7 @@ class VampireSolverException extends Exception {
 @Data class MonitoredVampireSolution {
 //	List<String> warnings
 //	List<String> debugs
-//	long kodkodTime
+	long solverTime
 //	val List<Pair<A4Solution, Long>> aswers
 	val VampireModel generatedModel
 //	val boolean finishedBeforeTimeout
@@ -43,8 +43,8 @@ class VampireHandler {
 		val VAMPDIR = "..\\..\\Solvers\\Vampire-Solver\\ca.mcgill.ecse.dslreasoner.vampire.reasoner\\lib\\"
 		val VAMPNAME = "vampire.exe"
 		val TEMPNAME = "TEMP.tptp"
-		val OPTION = " --mode casc_sat "
-		val SOLNNAME = "solution.tptp"
+		val OPTION = " --mode casc_sat -t 300 "
+		val SOLNNAME = "_solution" + configuration.typeScopes.maxNewElements + ".tptp"
 		val PATH = "C:/cygwin64/bin"
 
 		val wsURI = workspace.workspaceURI
@@ -57,9 +57,11 @@ class VampireHandler {
 
 		// 2. run command and save to 
 		// need to have cygwin downloaded
+		var startTime = System.currentTimeMillis
 		val p = Runtime.runtime.exec(CMD + vampLoc + OPTION + tempLoc + " > " + solnLoc, newArrayList("Path=" + PATH))
 		// 2.1 determine time left
 		p.waitFor
+		val solverTime = System.currentTimeMillis - startTime
 
 		// 2.2 store output into local variable
 		val BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -80,7 +82,7 @@ class VampireHandler {
 
 //		println((root.get(0) as VampireModel ).comments)
 		
-		return new MonitoredVampireSolution(root.get(0) as VampireModel)
+		return new MonitoredVampireSolution(solverTime, root.get(0) as VampireModel)
 
 	/*
 	 * //Prepare

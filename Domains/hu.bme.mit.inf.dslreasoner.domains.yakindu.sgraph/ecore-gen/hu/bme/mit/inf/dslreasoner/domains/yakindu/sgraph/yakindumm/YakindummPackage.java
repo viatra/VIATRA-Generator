@@ -2,7 +2,9 @@
  */
 package hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -333,13 +335,22 @@ public interface YakindummPackage extends EPackage {
 	int ENTRY__OUTGOING_TRANSITIONS = PSEUDOSTATE__OUTGOING_TRANSITIONS;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY__TYPE = PSEUDOSTATE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
+	int ENTRY_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Entry</em>' class.
@@ -639,6 +650,17 @@ public interface YakindummPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType <em>Entry Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getEntryType()
+	 * @generated
+	 */
+	int ENTRY_TYPE = 13;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Pseudostate <em>Pseudostate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -754,6 +776,17 @@ public interface YakindummPackage extends EPackage {
 	EClass getEntry();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Entry#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Entry#getType()
+	 * @see #getEntry()
+	 * @generated
+	 */
+	EAttribute getEntry_Type();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Synchronization <em>Synchronization</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -833,6 +866,16 @@ public interface YakindummPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFinalState();
+
+	/**
+	 * Returns the meta object for enum '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType <em>Entry Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Entry Type</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType
+	 * @generated
+	 */
+	EEnum getEntryType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -958,6 +1001,14 @@ public interface YakindummPackage extends EPackage {
 		EClass ENTRY = eINSTANCE.getEntry();
 
 		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY__TYPE = eINSTANCE.getEntry_Type();
+
+		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.SynchronizationImpl <em>Synchronization</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1034,6 +1085,16 @@ public interface YakindummPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FINAL_STATE = eINSTANCE.getFinalState();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType <em>Entry Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType
+		 * @see hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl.YakindummPackageImpl#getEntryType()
+		 * @generated
+		 */
+		EEnum ENTRY_TYPE = eINSTANCE.getEntryType();
 
 	}
 

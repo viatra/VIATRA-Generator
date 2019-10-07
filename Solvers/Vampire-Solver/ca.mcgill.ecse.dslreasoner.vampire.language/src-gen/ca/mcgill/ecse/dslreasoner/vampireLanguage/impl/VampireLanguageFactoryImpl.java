@@ -72,11 +72,11 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
       case VampireLanguagePackage.VLS_TFF_FORMULA: return createVLSTffFormula();
       case VampireLanguagePackage.VLS_ANNOTATION: return createVLSAnnotation();
       case VampireLanguagePackage.VLS_TFF_TERM: return createVLSTffTerm();
+      case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
       case VampireLanguagePackage.VLS_DECLARATION: return createVLSDeclaration();
       case VampireLanguagePackage.VLS_OTHER_DECLARATION: return createVLSOtherDeclaration();
       case VampireLanguagePackage.VLS_VARIABLE_DECLARATION: return createVLSVariableDeclaration();
       case VampireLanguagePackage.VLS_TYPE_DEF: return createVLSTypeDef();
-      case VampireLanguagePackage.VLS_TERM: return createVLSTerm();
       case VampireLanguagePackage.VLS_VARIABLE: return createVLSVariable();
       case VampireLanguagePackage.VLS_FUNCTION_AS_TERM: return createVLSFunctionAsTerm();
       case VampireLanguagePackage.VLS_DEFINED_TERM: return createVLSDefinedTerm();
@@ -192,6 +192,17 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
    * <!-- end-user-doc -->
    * @generated
    */
+  public VLSTerm createVLSTerm()
+  {
+    VLSTermImpl vlsTerm = new VLSTermImpl();
+    return vlsTerm;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VLSDeclaration createVLSDeclaration()
   {
     VLSDeclarationImpl vlsDeclaration = new VLSDeclarationImpl();
@@ -229,17 +240,6 @@ public class VampireLanguageFactoryImpl extends EFactoryImpl implements VampireL
   {
     VLSTypeDefImpl vlsTypeDef = new VLSTypeDefImpl();
     return vlsTypeDef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VLSTerm createVLSTerm()
-  {
-    VLSTermImpl vlsTerm = new VLSTermImpl();
-    return vlsTerm;
   }
 
   /**

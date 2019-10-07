@@ -21,7 +21,9 @@ class Vampire2LogicMapper {
 	}
 
 	def transformStatistics(MonitoredVampireSolution solution, long transformationTime) {
-		return createStatistics
+		return createStatistics => [
+			it.transformationTime = solution.solverTime as int
+		]
 //		createStatistics => [
 //			it.transformationTime = transformationTime as int
 //			for(solutionIndex : 0..<solution.aswers.size) {

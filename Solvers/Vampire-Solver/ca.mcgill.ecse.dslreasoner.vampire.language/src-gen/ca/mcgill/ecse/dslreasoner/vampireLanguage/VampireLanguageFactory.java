@@ -87,6 +87,15 @@ public interface VampireLanguageFactory extends EFactory
   VLSTffTerm createVLSTffTerm();
 
   /**
+   * Returns a new object of class '<em>VLS Term</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>VLS Term</em>'.
+   * @generated
+   */
+  VLSTerm createVLSTerm();
+
+  /**
    * Returns a new object of class '<em>VLS Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -121,15 +130,6 @@ public interface VampireLanguageFactory extends EFactory
    * @generated
    */
   VLSTypeDef createVLSTypeDef();
-
-  /**
-   * Returns a new object of class '<em>VLS Term</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>VLS Term</em>'.
-   * @generated
-   */
-  VLSTerm createVLSTerm();
 
   /**
    * Returns a new object of class '<em>VLS Variable</em>'.

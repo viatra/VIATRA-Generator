@@ -28,6 +28,7 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOr;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSOtherDeclaration;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSRevImplies;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSSatisfiable;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTffFormula;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrue;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTrying;
@@ -144,6 +145,9 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 				return; 
 			case VampireLanguagePackage.VLS_SATISFIABLE:
 				sequence_VLSConfirmations(context, (VLSSatisfiable) semanticObject); 
+				return; 
+			case VampireLanguagePackage.VLS_TERM:
+				sequence_VLSCommentTerm(context, (VLSTerm) semanticObject); 
 				return; 
 			case VampireLanguagePackage.VLS_TFF_FORMULA:
 				sequence_VLSTffFormula(context, (VLSTffFormula) semanticObject); 
@@ -621,6 +625,25 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	
 	/**
 	 * Contexts:
+	 *     VLSTffTerm returns VLSTerm
+	 *     VLSCommentTerm returns VLSTerm
+	 *
+	 * Constraint:
+	 *     comment=SINGLE_COMMENT
+	 */
+	protected void sequence_VLSCommentTerm(ISerializationContext context, VLSTerm semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__COMMENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, VampireLanguagePackage.Literals.VLS_TERM__COMMENT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVLSCommentTermAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0(), semanticObject.getComment());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     VLSComment returns VLSComment
 	 *
 	 * Constraint:
@@ -782,8 +805,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Constraint:
 	 *     (
 	 *         (variables+=VLSVariable | variables+=VLSVariableDeclaration) 
-	 *         variables+=VLSVariableDeclaration? 
-	 *         (variables+=VLSVariable? variables+=VLSVariableDeclaration?)* 
+	 *         variables+=VLSVariable? 
+	 *         (variables+=VLSVariableDeclaration? variables+=VLSVariable?)* 
 	 *         operand=VLSUnitaryFormula
 	 *     )
 	 */
@@ -1024,8 +1047,8 @@ public class VampireLanguageSemanticSequencer extends AbstractDelegatingSemantic
 	 * Constraint:
 	 *     (
 	 *         (variables+=VLSVariable | variables+=VLSVariableDeclaration) 
-	 *         variables+=VLSVariable? 
-	 *         (variables+=VLSVariableDeclaration? variables+=VLSVariable?)* 
+	 *         variables+=VLSVariableDeclaration? 
+	 *         (variables+=VLSVariable? variables+=VLSVariableDeclaration?)* 
 	 *         operand=VLSUnitaryFormula
 	 *     )
 	 */

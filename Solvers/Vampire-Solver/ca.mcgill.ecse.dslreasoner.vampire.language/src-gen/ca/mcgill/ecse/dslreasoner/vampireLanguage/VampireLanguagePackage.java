@@ -335,6 +335,34 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_TFF_TERM_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl <em>VLS Term</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTerm()
+   * @generated
+   */
+  int VLS_TERM = 7;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TERM__COMMENT = VLS_TFF_TERM_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>VLS Term</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TERM_FEATURE_COUNT = VLS_TFF_TERM_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSDeclarationImpl <em>VLS Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -342,7 +370,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSDeclaration()
    * @generated
    */
-  int VLS_DECLARATION = 7;
+  int VLS_DECLARATION = 8;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -370,7 +398,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSOtherDeclaration()
    * @generated
    */
-  int VLS_OTHER_DECLARATION = 8;
+  int VLS_OTHER_DECLARATION = 9;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -407,7 +435,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSVariableDeclaration()
    * @generated
    */
-  int VLS_VARIABLE_DECLARATION = 9;
+  int VLS_VARIABLE_DECLARATION = 10;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -444,7 +472,7 @@ public interface VampireLanguagePackage extends EPackage
    * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTypeDef()
    * @generated
    */
-  int VLS_TYPE_DEF = 10;
+  int VLS_TYPE_DEF = 11;
 
   /**
    * The feature id for the '<em><b>Type Sig</b></em>' containment reference.
@@ -492,25 +520,6 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_TYPE_DEF_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl <em>VLS Term</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTerm()
-   * @generated
-   */
-  int VLS_TERM = 11;
-
-  /**
-   * The number of structural features of the '<em>VLS Term</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VLS_TERM_FEATURE_COUNT = VLS_TFF_TERM_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -519,6 +528,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_VARIABLE = 12;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_VARIABLE__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -547,6 +565,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_FUNCTION_AS_TERM = 13;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FUNCTION_AS_TERM__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Functor</b></em>' attribute.
@@ -584,6 +611,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_DEFINED_TERM = 14;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_DEFINED_TERM__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -699,6 +735,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_EQUIVALENT = 19;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_EQUIVALENT__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -734,6 +779,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_IMPLIES = 20;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_IMPLIES__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -773,6 +827,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_REV_IMPLIES = 21;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_REV_IMPLIES__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -808,6 +871,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_XNOR = 22;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_XNOR__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -847,6 +919,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_NOR = 23;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_NOR__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -882,6 +963,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_NAND = 24;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_NAND__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -921,6 +1011,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_AND = 25;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_AND__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -956,6 +1055,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_OR = 26;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_OR__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -995,6 +1103,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_UNIVERSAL_QUANTIFIER = 27;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_UNIVERSAL_QUANTIFIER__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1030,6 +1147,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_EXISTENTIAL_QUANTIFIER = 28;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_EXISTENTIAL_QUANTIFIER__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1069,6 +1195,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_UNARY_NEGATION = 29;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_UNARY_NEGATION__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1095,6 +1230,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_INEQUALITY = 30;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_INEQUALITY__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1134,6 +1278,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_EQUALITY = 31;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_EQUALITY__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1169,6 +1322,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_ASSIGNMENT = 32;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_ASSIGNMENT__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1208,6 +1370,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_CONSTANT = 33;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_CONSTANT__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1236,6 +1407,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_TRUE = 34;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_TRUE__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The number of structural features of the '<em>VLS True</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1255,6 +1435,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_FALSE = 35;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FALSE__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The number of structural features of the '<em>VLS False</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1272,6 +1461,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_FUNCTION = 36;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_FUNCTION__COMMENT = VLS_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -1311,6 +1509,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_LESS = 37;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_LESS__COMMENT = VLS_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1348,6 +1555,15 @@ public interface VampireLanguagePackage extends EPackage
   int VLS_INT = 38;
 
   /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_INT__COMMENT = VLS_DEFINED_TERM__COMMENT;
+
+  /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1374,6 +1590,15 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   int VLS_DOUBLE_QUOTE = 39;
+
+  /**
+   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VLS_DOUBLE_QUOTE__COMMENT = VLS_DEFINED_TERM__COMMENT;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1641,6 +1866,27 @@ public interface VampireLanguagePackage extends EPackage
   EClass getVLSTffTerm();
 
   /**
+   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm <em>VLS Term</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>VLS Term</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
+   * @generated
+   */
+  EClass getVLSTerm();
+
+  /**
+   * Returns the meta object for the attribute '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm#getComment <em>Comment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Comment</em>'.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm#getComment()
+   * @see #getVLSTerm()
+   * @generated
+   */
+  EAttribute getVLSTerm_Comment();
+
+  /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDeclaration <em>VLS Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1756,16 +2002,6 @@ public interface VampireLanguagePackage extends EPackage
    * @generated
    */
   EReference getVLSTypeDef_NextType();
-
-  /**
-   * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm <em>VLS Term</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>VLS Term</em>'.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
-   * @generated
-   */
-  EClass getVLSTerm();
 
   /**
    * Returns the meta object for class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSVariable <em>VLS Variable</em>}'.
@@ -2676,6 +2912,24 @@ public interface VampireLanguagePackage extends EPackage
     EClass VLS_TFF_TERM = eINSTANCE.getVLSTffTerm();
 
     /**
+     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl <em>VLS Term</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl
+     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTerm()
+     * @generated
+     */
+    EClass VLS_TERM = eINSTANCE.getVLSTerm();
+
+    /**
+     * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VLS_TERM__COMMENT = eINSTANCE.getVLSTerm_Comment();
+
+    /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSDeclarationImpl <em>VLS Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2770,16 +3024,6 @@ public interface VampireLanguagePackage extends EPackage
      * @generated
      */
     EReference VLS_TYPE_DEF__NEXT_TYPE = eINSTANCE.getVLSTypeDef_NextType();
-
-    /**
-     * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl <em>VLS Term</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl
-     * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguagePackageImpl#getVLSTerm()
-     * @generated
-     */
-    EClass VLS_TERM = eINSTANCE.getVLSTerm();
 
     /**
      * The meta object literal for the '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSVariableImpl <em>VLS Variable</em>}' class.

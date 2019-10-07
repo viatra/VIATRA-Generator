@@ -700,15 +700,16 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVLSTermParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVLSDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVLSCommentTermParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		////////////////////////////////////
 		//// VLS Terms
 		////////////////////////////////////
 		//VLSTffTerm:
-		//	VLSTerm | VLSDeclaration;
+		//	VLSTerm | VLSDeclaration | VLSCommentTerm;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//VLSTerm | VLSDeclaration
+		//VLSTerm | VLSDeclaration | VLSCommentTerm
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//VLSTerm
@@ -716,6 +717,24 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//VLSDeclaration
 		public RuleCall getVLSDeclarationParserRuleCall_1() { return cVLSDeclarationParserRuleCall_1; }
+		
+		//VLSCommentTerm
+		public RuleCall getVLSCommentTermParserRuleCall_2() { return cVLSCommentTermParserRuleCall_2; }
+	}
+	public class VLSCommentTermElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSCommentTerm");
+		private final Assignment cCommentAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cCommentSINGLE_COMMENTTerminalRuleCall_0 = (RuleCall)cCommentAssignment.eContents().get(0);
+		
+		//VLSCommentTerm VLSTerm:
+		//	comment=SINGLE_COMMENT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//comment=SINGLE_COMMENT
+		public Assignment getCommentAssignment() { return cCommentAssignment; }
+		
+		//SINGLE_COMMENT
+		public RuleCall getCommentSINGLE_COMMENTTerminalRuleCall_0() { return cCommentSINGLE_COMMENTTerminalRuleCall_0; }
 	}
 	public class VLSDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ca.mcgill.ecse.dslreasoner.VampireLanguage.VLSDeclaration");
@@ -1791,6 +1810,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final VLSAnnotationElements pVLSAnnotation;
 	private final VLSAnnotationTermsElements pVLSAnnotationTerms;
 	private final VLSTffTermElements pVLSTffTerm;
+	private final VLSCommentTermElements pVLSCommentTerm;
 	private final VLSDeclarationElements pVLSDeclaration;
 	private final VLSOtherDeclarationElements pVLSOtherDeclaration;
 	private final VLSVariableDeclarationElements pVLSVariableDeclaration;
@@ -1844,6 +1864,7 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pVLSAnnotation = new VLSAnnotationElements();
 		this.pVLSAnnotationTerms = new VLSAnnotationTermsElements();
 		this.pVLSTffTerm = new VLSTffTermElements();
+		this.pVLSCommentTerm = new VLSCommentTermElements();
 		this.pVLSDeclaration = new VLSDeclarationElements();
 		this.pVLSOtherDeclaration = new VLSOtherDeclarationElements();
 		this.pVLSVariableDeclaration = new VLSVariableDeclarationElements();
@@ -2182,13 +2203,23 @@ public class VampireLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//// VLS Terms
 	////////////////////////////////////
 	//VLSTffTerm:
-	//	VLSTerm | VLSDeclaration;
+	//	VLSTerm | VLSDeclaration | VLSCommentTerm;
 	public VLSTffTermElements getVLSTffTermAccess() {
 		return pVLSTffTerm;
 	}
 	
 	public ParserRule getVLSTffTermRule() {
 		return getVLSTffTermAccess().getRule();
+	}
+	
+	//VLSCommentTerm VLSTerm:
+	//	comment=SINGLE_COMMENT;
+	public VLSCommentTermElements getVLSCommentTermAccess() {
+		return pVLSCommentTerm;
+	}
+	
+	public ParserRule getVLSCommentTermRule() {
+		return getVLSCommentTermAccess().getRule();
 	}
 	
 	///////////////////

@@ -34,6 +34,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSAnnotation/terms"/>
     </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSTffTerm"/>
+    <genClasses ecoreClass="VampireLanguage.ecore#//VLSTerm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSTerm/comment"/>
+    </genClasses>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSDeclaration/type"/>
     </genClasses>
@@ -49,7 +52,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTypeDef/initType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VampireLanguage.ecore#//VLSTypeDef/nextType"/>
     </genClasses>
-    <genClasses ecoreClass="VampireLanguage.ecore#//VLSTerm"/>
     <genClasses ecoreClass="VampireLanguage.ecore#//VLSVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VampireLanguage.ecore#//VLSVariable/name"/>
     </genClasses>

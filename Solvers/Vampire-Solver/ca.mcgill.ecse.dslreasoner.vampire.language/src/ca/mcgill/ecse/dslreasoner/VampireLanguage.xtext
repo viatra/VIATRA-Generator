@@ -208,7 +208,12 @@ VLSAnnotationTerms returns VLSAnnotation:
 //////////////////////////////////
 VLSTffTerm:
 	VLSTerm |
-	VLSDeclaration
+	VLSDeclaration |
+	VLSCommentTerm
+;
+
+VLSCommentTerm returns VLSTerm:
+	comment = SINGLE_COMMENT
 ;
 
 /////////////////

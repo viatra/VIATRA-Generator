@@ -111,6 +111,11 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
         return createVLSTffTermAdapter();
       }
       @Override
+      public Adapter caseVLSTerm(VLSTerm object)
+      {
+        return createVLSTermAdapter();
+      }
+      @Override
       public Adapter caseVLSDeclaration(VLSDeclaration object)
       {
         return createVLSDeclarationAdapter();
@@ -129,11 +134,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVLSTypeDef(VLSTypeDef object)
       {
         return createVLSTypeDefAdapter();
-      }
-      @Override
-      public Adapter caseVLSTerm(VLSTerm object)
-      {
-        return createVLSTermAdapter();
       }
       @Override
       public Adapter caseVLSVariable(VLSVariable object)
@@ -403,6 +403,21 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm <em>VLS Term</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
+   * @generated
+   */
+  public Adapter createVLSTermAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSDeclaration <em>VLS Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -458,21 +473,6 @@ public class VampireLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVLSTypeDefAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm <em>VLS Term</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSTerm
-   * @generated
-   */
-  public Adapter createVLSTermAdapter()
   {
     return null;
   }

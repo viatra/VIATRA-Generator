@@ -5,6 +5,7 @@ package hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Choice;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.CompositeElement;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Entry;
+import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.EntryType;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Exit;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.FinalState;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Pseudostate;
@@ -18,7 +19,9 @@ import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.Vertex;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummFactory;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -123,6 +126,13 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	private EClass finalStateEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum entryTypeEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -150,7 +160,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link YakindummPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -164,7 +174,8 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		if (isInited) return (YakindummPackage)EPackage.Registry.INSTANCE.getEPackage(YakindummPackage.eNS_URI);
 
 		// Obtain or create and register package
-		YakindummPackageImpl theYakindummPackage = (YakindummPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof YakindummPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new YakindummPackageImpl());
+		Object registeredYakindummPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		YakindummPackageImpl theYakindummPackage = registeredYakindummPackage instanceof YakindummPackageImpl ? (YakindummPackageImpl)registeredYakindummPackage : new YakindummPackageImpl();
 
 		isInited = true;
 
@@ -177,7 +188,6 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		// Mark meta-data to indicate it can't be changed
 		theYakindummPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(YakindummPackage.eNS_URI, theYakindummPackage);
 		return theYakindummPackage;
@@ -287,6 +297,15 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEntry_Type() {
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSynchronization() {
 		return synchronizationEClass;
 	}
@@ -359,6 +378,15 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getEntryType() {
+		return entryTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public YakindummFactory getYakindummFactory() {
 		return (YakindummFactory)getEFactoryInstance();
 	}
@@ -398,6 +426,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		statechartEClass = createEClass(STATECHART);
 
 		entryEClass = createEClass(ENTRY);
+		createEAttribute(entryEClass, ENTRY__TYPE);
 
 		synchronizationEClass = createEClass(SYNCHRONIZATION);
 
@@ -413,6 +442,9 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		exitEClass = createEClass(EXIT);
 
 		finalStateEClass = createEClass(FINAL_STATE);
+
+		// Create enums
+		entryTypeEEnum = createEEnum(ENTRY_TYPE);
 	}
 
 	/**
@@ -471,6 +503,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEntry_Type(), this.getEntryType(), "Type", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(synchronizationEClass, Synchronization.class, "Synchronization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -486,6 +519,12 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Initialize enums and add enum literals
+		initEEnum(entryTypeEEnum, EntryType.class, "EntryType");
+		addEEnumLiteral(entryTypeEEnum, EntryType.NORMAL);
+		addEEnumLiteral(entryTypeEEnum, EntryType.HISTORY);
+		addEEnumLiteral(entryTypeEEnum, EntryType.DEEP_HISTORY);
 
 		// Create resource
 		createResource(eNS_URI);
