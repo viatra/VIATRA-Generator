@@ -18,13 +18,6 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.StateInRegion"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.choiceHasNoOutgoing"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.choiceHasNoIncoming"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.synchHasNoOutgoing"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.synchHasNoIncoming"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.SynchronizedIncomingInSameRegion"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.notSynchronizingStates"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.hasMultipleOutgoingTrainsition"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.hasMultipleIncomingTrainsition"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.SynchronizedRegionsAreNotSiblings"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.child"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.SynchronizedRegionDoesNotHaveMultipleRegions"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.hasMultipleRegions"/>

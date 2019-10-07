@@ -1061,6 +1061,50 @@ ruleVLSTffTerm returns [EObject current=null]
 			$current = $this_VLSDeclaration_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getVLSTffTermAccess().getVLSCommentTermParserRuleCall_2());
+		}
+		this_VLSCommentTerm_2=ruleVLSCommentTerm
+		{
+			$current = $this_VLSCommentTerm_2.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleVLSCommentTerm
+entryRuleVLSCommentTerm returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVLSCommentTermRule()); }
+	iv_ruleVLSCommentTerm=ruleVLSCommentTerm
+	{ $current=$iv_ruleVLSCommentTerm.current; }
+	EOF;
+
+// Rule VLSCommentTerm
+ruleVLSCommentTerm returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_comment_0_0=RULE_SINGLE_COMMENT
+			{
+				newLeafNode(lv_comment_0_0, grammarAccess.getVLSCommentTermAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getVLSCommentTermRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"comment",
+					lv_comment_0_0,
+					"ca.mcgill.ecse.dslreasoner.VampireLanguage.SINGLE_COMMENT");
+			}
+		)
 	)
 ;
 

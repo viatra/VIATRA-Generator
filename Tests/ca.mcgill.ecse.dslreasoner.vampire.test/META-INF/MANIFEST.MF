@@ -1,11 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Test
+Bundle-Name: %pluginName
 Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.vampire.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: ca.mcgill.ecse.dslreasoner.vampire.queries
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: ca.mcgill.ecse.dslreasoner.vampire.queries,
+  yakindumm,
+  yakindumm.impl,
+  yakindumm.util,
+  yakindumm.yakindumm,
+  yakindumm.yakindumm.impl,
+  yakindumm.yakindumm.util
 Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
-  org.eclipse.emf.ecore,
+  org.eclipse.core.runtime,
+  org.eclipse.emf.ecore;visibility:=reexport,
   org.eclipse.viatra.query.runtime.rete,
   org.eclipse.viatra.query.runtime.localsearch,
   com.google.guava,
@@ -32,6 +42,7 @@ Require-Bundle: org.eclipse.viatra.addon.querybasedfeatures.runtime,
   org.eclipse.collections;bundle-version="9.2.0",
   hu.bme.mit.inf.dslreasoner.application.FAMTest;bundle-version="1.0.0",
   ca.mcgill.ecse.dslreasoner.standalone.test;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j
 Automatic-Module-Name: ca.mcgill.ecse.dslreasoner.vampire.test
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

@@ -8,7 +8,6 @@ import functionalarchitecture.Function;
 import functionalarchitecture.FunctionalArchitectureModel;
 import functionalarchitecture.FunctionalOutput;
 import functionalarchitecture.FunctionalarchitecturePackage;
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
@@ -22,8 +21,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
@@ -63,14 +60,12 @@ public class FAMTest {
       InputOutput.<String>println("Input and output workspaces are created");
       final EcoreMetamodelDescriptor metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE);
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi");
-      final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance());
+      final Object queries = null;
       InputOutput.<String>println("DSL loaded");
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
       problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
-      Viatra2LogicConfiguration _viatra2LogicConfiguration = new Viatra2LogicConfiguration();
-      problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, _viatra2LogicConfiguration).getOutput();
       workspace.writeModel(problem, "Fam.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
@@ -91,16 +86,12 @@ public class FAMTest {
         it.documentationLevel = DocumentationLevel.FULL;
         it.typeScopes.minNewElements = 8;
         it.typeScopes.maxNewElements = 10;
-        int _size = typeMapMin.size();
-        boolean _notEquals = (_size != 0);
-        if (_notEquals) {
-          it.typeScopes.minNewElementsByType = typeMapMin;
-        }
         it.contCycleLevel = 5;
         it.uniquenessDuplicates = false;
       };
       final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
       LogicResult solution = reasoner.solve(problem, vampireConfig, workspace);
+      InputOutput.<String>println("Problem solved");
       List<? extends LogicModelInterpretation> interpretations = reasoner.getInterpretations(((ModelResult) solution));
       InputOutput.<Class<? extends List>>print(interpretations.getClass());
       for (final LogicModelInterpretation interpretation : interpretations) {

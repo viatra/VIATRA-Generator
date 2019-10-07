@@ -1,6 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.standalone.test.yakindu.queries
 
-import epackage "YakinduMetamodel"
+import epackage "hu.bme.mit.inf.yakindumm"
 
 /////////
 // Entry

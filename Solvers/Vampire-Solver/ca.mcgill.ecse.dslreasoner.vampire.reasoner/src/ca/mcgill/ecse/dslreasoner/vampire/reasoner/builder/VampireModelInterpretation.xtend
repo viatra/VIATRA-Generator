@@ -33,6 +33,7 @@ import java.util.Map
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import java.util.concurrent.TimeUnit
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSTermImpl
 
 class VampireModelInterpretation implements LogicModelInterpretation {
 	protected val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
@@ -79,10 +80,10 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 //		println()
 //		println(trace.type2Predicate)
 		// Fill keys of map
-		println(trace.type2Predicate.keySet)
+//		println(trace.type2Predicate.keySet)
 		val allTypeDecls = trace.type2Predicate.keySet.filter[class == TypeDeclarationImpl]
 		val allTypeFunctions = trace.predicate2Type
-		println(trace.type2Predicate.keySet.filter[class == TypeDefinitionImpl])
+//		println(trace.type2Predicate.keySet.filter[class == TypeDefinitionImpl])
 
 		for (type : allTypeDecls) {
 			type2DefinedElement.put(type as TypeDeclaration, newArrayList)
@@ -97,7 +98,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		for (formula : typeFormulas) {
 			// get associated type
 			val associatedTypeName = (formula as VLSTffFormula).name.substring(10)
-			print(associatedTypeName)
+//			print(associatedTypeName)
 			val associatedFunctions = allTypeFunctions.keySet.filter[constant == associatedTypeName]
 			if (associatedFunctions.length > 0) {
 				val associatedFunction = associatedFunctions.get(0) as VLSFunction
@@ -132,7 +133,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 
 		}
 
-		printMap()
+//		printMap()
 
 		// 3. get relations
 		// Fill keys of map
@@ -153,6 +154,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 		val relFormulas = model.tfformulas.filter[name.length > 12 && name.substring(0, 12) == "predicate_r_"]
 
 		for (formula : relFormulas) {
+//			println(formula)
 			// get associated type
 			val associatedRelName = (formula as VLSTffFormula).name.substring(10)
 
@@ -169,7 +171,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 				end = false
 				val List<String[]> instances = newArrayList
 				while (!end) {
-					if (andFormulaTerm.class == VLSAndImpl) {
+					if (andFormulaTerm.class != null && andFormulaTerm.class == VLSAndImpl) {
 						val andFormula = andFormulaTerm as VLSAnd
 						val andRight = andFormula.right
 						addRelIfNotNeg(andRight, instances)
@@ -202,6 +204,7 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 
 		}
 		println()
+		println("--------END ELEMENTS MAP----------")
 	}
 
 	def printMap2() {
@@ -226,7 +229,8 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 	}
 
 	def private addRelIfNotNeg(VLSTerm term, List<String[]> list) {
-		if (term.class != VLSUnaryNegationImpl) {
+//		println("xxx   " + term.class)
+		if (term.class != VLSUnaryNegationImpl && term.class != VLSTermImpl) {
 			val nodeName1 = ((term as VLSFunction).terms.get(0) as VLSFunctionAsTerm).functor
 			val nodeName2 = ((term as VLSFunction).terms.get(1) as VLSFunctionAsTerm).functor
 			val strArr = newArrayList(nodeName1, nodeName2)
@@ -247,9 +251,9 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 	}
 
 	def private dispatch getElementsDispatch(TypeDefinition declaration) {
-		println("~~" + declaration)
-		println(declaration.elements)
-		println()
+//		println("~~" + declaration)
+//		println(declaration.elements)
+//		println()
 		return declaration.elements
 	}
 
@@ -258,18 +262,18 @@ class VampireModelInterpretation implements LogicModelInterpretation {
 	}
 
 	override getInterpretation(RelationDeclaration relation, Object[] parameterSubstitution) {
-		print("-- " + relation.name)
+//		print("-- " + relation.name)
 		val node1 = (parameterSubstitution.get(0) as DefinedElement).name
 		val node2 = (parameterSubstitution.get(1) as DefinedElement).name
 		val realRelations = relation.lookup(relDec2Inst)
 		for (real : realRelations) {
 			if (real.contains(node1) && real.contains(node2)) {
-				println("  true")
+//				println("  true")
 				TimeUnit.MILLISECONDS.sleep(10)
 				return true
 			}
 		}
-		println("  false")
+//		println("  false")
 		TimeUnit.MILLISECONDS.sleep(10)
 		return false
 	}

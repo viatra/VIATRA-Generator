@@ -2,12 +2,13 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse
 
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
+import functionalarchitecture.FAMTerminator
 import functionalarchitecture.Function
 import functionalarchitecture.FunctionalArchitectureModel
 import functionalarchitecture.FunctionalInterface
 import functionalarchitecture.FunctionalOutput
 import functionalarchitecture.FunctionalarchitecturePackage
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns
+//import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
@@ -22,7 +23,6 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import functionalarchitecture.FAMTerminator
 
 class FAMTest {
 	def static void main(String[] args) {
@@ -47,15 +47,15 @@ class FAMTest {
 		// Load DSL
 		val metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE)
 		val partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi")
-		val queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance)
-//		val queries = null
+//		val queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance)
+		val queries = null
 
 		println("DSL loaded")
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
 		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
-		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
+//		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 		workspace.writeModel(problem, "Fam.logicproblem")
 
 		println("Problem created")
@@ -94,14 +94,15 @@ class FAMTest {
 
 			it.typeScopes.minNewElements = 8//24
 			it.typeScopes.maxNewElements = 10//25
-			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
+//			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 //			if(typeMapMax.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 			it.contCycleLevel = 5
 			it.uniquenessDuplicates = false
 		]
 
 		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
-
+		
+		println("Problem solved")
 		// visualisation, see 
 		var interpretations = reasoner.getInterpretations(solution as ModelResult)
 //		interpretations.get(0) as VampireModelInterpretation

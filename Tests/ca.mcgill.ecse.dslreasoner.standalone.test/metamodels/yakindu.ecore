@@ -19,7 +19,9 @@
         eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//CompositeElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//EntryType"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Synchronization" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//RegularState #//CompositeElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="RegularState" abstract="true" eSuperTypes="#//Vertex"/>
@@ -30,4 +32,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exit" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//RegularState"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="EntryType">
+    <eLiterals name="Normal"/>
+    <eLiterals name="History"/>
+    <eLiterals name="DeepHistory"/>
+  </eClassifiers>
 </ecore:EPackage>

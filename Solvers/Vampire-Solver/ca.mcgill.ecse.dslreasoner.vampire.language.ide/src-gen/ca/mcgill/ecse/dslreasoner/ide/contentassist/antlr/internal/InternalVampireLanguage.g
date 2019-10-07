@@ -374,6 +374,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleVLSCommentTerm
+entryRuleVLSCommentTerm
+:
+{ before(grammarAccess.getVLSCommentTermRule()); }
+	 ruleVLSCommentTerm
+{ after(grammarAccess.getVLSCommentTermRule()); } 
+	 EOF 
+;
+
+// Rule VLSCommentTerm
+ruleVLSCommentTerm 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getVLSCommentTermAccess().getCommentAssignment()); }
+		(rule__VLSCommentTerm__CommentAssignment)
+		{ after(grammarAccess.getVLSCommentTermAccess().getCommentAssignment()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleVLSDeclaration
 entryRuleVLSDeclaration
 :
@@ -1131,6 +1156,12 @@ rule__VLSTffTerm__Alternatives
 		{ before(grammarAccess.getVLSTffTermAccess().getVLSDeclarationParserRuleCall_1()); }
 		ruleVLSDeclaration
 		{ after(grammarAccess.getVLSTffTermAccess().getVLSDeclarationParserRuleCall_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getVLSTffTermAccess().getVLSCommentTermParserRuleCall_2()); }
+		ruleVLSCommentTerm
+		{ after(grammarAccess.getVLSTffTermAccess().getVLSCommentTermParserRuleCall_2()); }
 	)
 ;
 finally {
@@ -6353,6 +6384,21 @@ rule__VLSAnnotationTerms__TermsAssignment_1_1
 		{ before(grammarAccess.getVLSAnnotationTermsAccess().getTermsVLSAnnotationParserRuleCall_1_1_0()); }
 		ruleVLSAnnotation
 		{ after(grammarAccess.getVLSAnnotationTermsAccess().getTermsVLSAnnotationParserRuleCall_1_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VLSCommentTerm__CommentAssignment
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getVLSCommentTermAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0()); }
+		RULE_SINGLE_COMMENT
+		{ after(grammarAccess.getVLSCommentTermAccess().getCommentSINGLE_COMMENTTerminalRuleCall_0()); }
 	)
 ;
 finally {

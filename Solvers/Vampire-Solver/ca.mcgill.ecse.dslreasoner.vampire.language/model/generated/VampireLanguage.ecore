@@ -40,6 +40,9 @@
         eType="#//VLSAnnotation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSTffTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VLSTerm" eSuperTypes="#//VLSTffTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VLSDeclaration" eSuperTypes="#//VLSTffTerm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//VLSTypeDef"
         containment="true"/>
@@ -62,7 +65,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="nextType" eType="#//VLSTerm"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VLSTerm" eSuperTypes="#//VLSTffTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="VLSVariable" eSuperTypes="#//VLSTerm">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

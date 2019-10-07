@@ -7,6 +7,11 @@
   <foreignModel>yakindu_simplified.ecore</foreignModel>
   <genPackages prefix="Yakindumm" basePackage="hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph"
       disposableProviderFactory="true" ecorePackage="yakindu_simplified.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="yakindu_simplified.ecore#//EntryType">
+      <genEnumLiterals ecoreEnumLiteral="yakindu_simplified.ecore#//EntryType/Normal"/>
+      <genEnumLiterals ecoreEnumLiteral="yakindu_simplified.ecore#//EntryType/History"/>
+      <genEnumLiterals ecoreEnumLiteral="yakindu_simplified.ecore#//EntryType/DeepHistory"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="yakindu_simplified.ecore#//Pseudostate"/>
     <genClasses image="false" ecoreClass="yakindu_simplified.ecore#//Vertex">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference yakindu_simplified.ecore#//Vertex/incomingTransitions"/>
@@ -20,7 +25,9 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference yakindu_simplified.ecore#//Transition/source"/>
     </genClasses>
     <genClasses ecoreClass="yakindu_simplified.ecore#//Statechart"/>
-    <genClasses ecoreClass="yakindu_simplified.ecore#//Entry"/>
+    <genClasses ecoreClass="yakindu_simplified.ecore#//Entry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute yakindu_simplified.ecore#//Entry/Type"/>
+    </genClasses>
     <genClasses ecoreClass="yakindu_simplified.ecore#//Synchronization"/>
     <genClasses ecoreClass="yakindu_simplified.ecore#//State"/>
     <genClasses image="false" ecoreClass="yakindu_simplified.ecore#//RegularState"/>
@@ -29,5 +36,6 @@
     </genClasses>
     <genClasses ecoreClass="yakindu_simplified.ecore#//Choice"/>
     <genClasses ecoreClass="yakindu_simplified.ecore#//Exit"/>
+    <genClasses ecoreClass="yakindu_simplified.ecore#//FinalState"/>
   </genPackages>
 </genmodel:GenModel>

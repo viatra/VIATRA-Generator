@@ -53,6 +53,7 @@ class Logic2Ecore {
 		val allReferences = ecore2Logic.allReferencesInScope(forwardTrace)
 		for(referenceType : allReferences) {
 			if(referenceType.canSetFeature) {
+//				println("in")
 				for(sourceElement : elements) {
 					val sourceObject = sourceElement.lookup(element2Object)
 					if(referenceType.EContainingClass.isSuperTypeOf(sourceObject.eClass)) {

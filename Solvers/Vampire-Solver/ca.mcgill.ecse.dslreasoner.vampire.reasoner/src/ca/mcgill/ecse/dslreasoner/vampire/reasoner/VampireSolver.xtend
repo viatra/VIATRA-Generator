@@ -9,6 +9,8 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
@@ -16,7 +18,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
 
 class VampireSolver extends LogicReasoner {
 
@@ -82,10 +83,12 @@ class VampireSolver extends LogicReasoner {
 		// Start: Vampire -> Logic mapping
 		val backTransformationStart = System.currentTimeMillis
 		// Backwards Mapper
-		val logicResult = backwardMapper.transformOutput(problem,vampireConfig.solutionScope.numberOfRequiredSolution,vampSol,forwardTrace,transformationTime)
+		val logicResult = backwardMapper.transformOutput(problem,vampireConfig.solutionScope.numberOfRequiredSolution,vampSol,forwardTrace,solvingTime)
 
 		val backTransformationTime = System.currentTimeMillis - backTransformationStart
 		// Finish: Vampire -> Logic Mapping
+		
+//		print(vampSol.generatedModel.tfformulas.size)
 		return logicResult //currently only a ModelResult
 	}
 

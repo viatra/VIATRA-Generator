@@ -79,7 +79,7 @@ public class VampireSolver extends LogicReasoner {
     long _currentTimeMillis_1 = System.currentTimeMillis();
     final long solvingTime = (_currentTimeMillis_1 - solverStart);
     final long backTransformationStart = System.currentTimeMillis();
-    final ModelResult logicResult = this.backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime);
+    final ModelResult logicResult = this.backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, solvingTime);
     long _currentTimeMillis_2 = System.currentTimeMillis();
     final long backTransformationTime = (_currentTimeMillis_2 - backTransformationStart);
     return logicResult;
