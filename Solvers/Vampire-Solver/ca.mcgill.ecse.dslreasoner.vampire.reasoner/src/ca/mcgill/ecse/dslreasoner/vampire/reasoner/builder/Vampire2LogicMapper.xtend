@@ -8,7 +8,7 @@ class Vampire2LogicMapper {
 
 //	
 	public def transformOutput(LogicProblem problem, int requiredNumberOfSolution,
-		MonitoredVampireSolution monitoredVampireSolution, Logic2VampireLanguageMapperTrace trace,
+		MonitoredVampireSolution monitoredVampireSolution, Logic2VampireLanguageMapperTrace trace, 
 		long transformationTime) {
 
 		// ModelRsult implements LogicResult
@@ -22,7 +22,8 @@ class Vampire2LogicMapper {
 
 	def transformStatistics(MonitoredVampireSolution solution, long transformationTime) {
 		return createStatistics => [
-			it.transformationTime = solution.solverTime as int
+			it.solverTime = solution.solverTime as int
+			it.transformationTime = transformationTime as int
 		]
 //		createStatistics => [
 //			it.transformationTime = transformationTime as int

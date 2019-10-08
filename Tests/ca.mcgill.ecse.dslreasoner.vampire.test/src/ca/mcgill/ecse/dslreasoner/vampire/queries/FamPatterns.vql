@@ -10,3 +10,11 @@ pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
 	InformationLink.to(I,In);
 	FunctionalInput.terminator(In,T);
 }
+
+pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
+	FunctionalArchitectureModel.rootElements(Model, Root);
+}
+
+pattern parent(Func : Function, Par : Function) = {
+	Function.parent(Func, Par);
+}

@@ -46,6 +46,8 @@ class VampireSolver extends LogicReasoner {
 		val transformationStart = System.currentTimeMillis
 		// TODO
 		val result = forwardMapper.transformProblem(problem, vampireConfig)
+		val transformationTime = System.currentTimeMillis - transformationStart
+		
 		val vampireProblem = result.output
 		val forwardTrace = result.trace
 
@@ -71,19 +73,17 @@ class VampireSolver extends LogicReasoner {
 		
 
 		// Result as String
-		val transformationTime = System.currentTimeMillis - transformationStart
+		
 		// Finish: Logic -> Vampire mapping
 		
 		// Start: Solving .tptp problem
-		val solverStart = System.currentTimeMillis
 		val MonitoredVampireSolution vampSol = handler.callSolver(vampireProblem, workspace, vampireConfig)
-		val solvingTime = System.currentTimeMillis - solverStart
 		// Finish: Solving .tptp problem
 		
 		// Start: Vampire -> Logic mapping
 		val backTransformationStart = System.currentTimeMillis
 		// Backwards Mapper
-		val logicResult = backwardMapper.transformOutput(problem,vampireConfig.solutionScope.numberOfRequiredSolution,vampSol,forwardTrace,solvingTime)
+		val logicResult = backwardMapper.transformOutput(problem,vampireConfig.solutionScope.numberOfRequiredSolution,vampSol,forwardTrace,transformationTime)
 
 		val backTransformationTime = System.currentTimeMillis - backTransformationStart
 		// Finish: Vampire -> Logic Mapping

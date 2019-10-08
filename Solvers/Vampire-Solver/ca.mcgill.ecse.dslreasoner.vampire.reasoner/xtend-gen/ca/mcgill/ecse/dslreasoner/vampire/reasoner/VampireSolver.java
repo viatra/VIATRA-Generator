@@ -62,6 +62,8 @@ public class VampireSolver extends LogicReasoner {
     final VampireSolverConfiguration vampireConfig = this.asConfig(config);
     final long transformationStart = System.currentTimeMillis();
     final TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> result = this.forwardMapper.transformProblem(problem, vampireConfig);
+    long _currentTimeMillis = System.currentTimeMillis();
+    final long transformationTime = (_currentTimeMillis - transformationStart);
     final VampireModel vampireProblem = result.getOutput();
     final Logic2VampireLanguageMapperTrace forwardTrace = result.getTrace();
     String fileURI = null;
@@ -72,16 +74,11 @@ public class VampireSolver extends LogicReasoner {
     if (writeFile) {
       fileURI = workspace.writeModel(vampireProblem, this.fileName).toFileString();
     }
-    long _currentTimeMillis = System.currentTimeMillis();
-    final long transformationTime = (_currentTimeMillis - transformationStart);
-    final long solverStart = System.currentTimeMillis();
     final MonitoredVampireSolution vampSol = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
-    long _currentTimeMillis_1 = System.currentTimeMillis();
-    final long solvingTime = (_currentTimeMillis_1 - solverStart);
     final long backTransformationStart = System.currentTimeMillis();
-    final ModelResult logicResult = this.backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, solvingTime);
-    long _currentTimeMillis_2 = System.currentTimeMillis();
-    final long backTransformationTime = (_currentTimeMillis_2 - backTransformationStart);
+    final ModelResult logicResult = this.backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime);
+    long _currentTimeMillis_1 = System.currentTimeMillis();
+    final long backTransformationTime = (_currentTimeMillis_1 - backTransformationStart);
     return logicResult;
   }
   

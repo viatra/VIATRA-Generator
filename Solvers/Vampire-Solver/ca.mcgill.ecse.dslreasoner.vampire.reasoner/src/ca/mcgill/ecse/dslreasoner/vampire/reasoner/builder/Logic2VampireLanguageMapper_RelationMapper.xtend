@@ -23,7 +23,8 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		this.base = base
 	}
 
-	def dispatch public void transformRelation(RelationDeclaration r, Logic2VampireLanguageMapperTrace trace, Logic2VampireLanguageMapper mapper) {
+	def dispatch public void transformRelation(RelationDeclaration r, Logic2VampireLanguageMapperTrace trace,
+		Logic2VampireLanguageMapper mapper) {
 
 		// 1. store all variables in support wrt their name
 		// 1.1 if variable has type, creating list of type declarations
@@ -42,19 +43,18 @@ class Logic2VampireLanguageMapper_RelationMapper {
 
 		}
 
-		//deciding name of relation
+		// deciding name of relation
 		val nameArray = r.name.split(" ")
 		var relNameVar = ""
 		if (nameArray.length == 3) {
 			relNameVar = support.toIDMultiple(nameArray.get(0), nameArray.get(2))
-		}
-		else {
+		} else {
 			relNameVar = r.name
 		}
 		val relName = relNameVar
-		
-		val comply = createVLSFofFormula=> [
-			
+
+		val comply = createVLSFofFormula => [
+
 			it.name = support.toIDMultiple("compliance", relName)
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
@@ -79,10 +79,10 @@ class Logic2VampireLanguageMapper_RelationMapper {
 		trace.specification.formulas += comply
 	}
 
-	def dispatch public void transformRelation(RelationDefinition r, Logic2VampireLanguageMapperTrace trace, Logic2VampireLanguageMapper mapper) {
-		
-//		println("XXXXXXXXXXXXXXXXX")
+	def dispatch public void transformRelation(RelationDefinition r, Logic2VampireLanguageMapperTrace trace,
+		Logic2VampireLanguageMapper mapper) {
 
+//		println("XXXXXXXXXXXXXXXXX")
 // 1. store all variables in support wrt their name
 		// 1.1 if variable has type, creating list of type declarations
 		val Map<Variable, VLSVariable> relVar2VLS = new HashMap
@@ -102,34 +102,30 @@ class Logic2VampireLanguageMapper_RelationMapper {
 
 		}
 
-		//deciding name of relation
+		// deciding name of relation
 		val nameArray = r.name.split(" ")
 		var relNameVar = ""
 		if (nameArray.length == 3) {
 			relNameVar = support.toIDMultiple(nameArray.get(0), nameArray.get(2))
-		}
-		else {
+		} else {
 			relNameVar = r.name
 		}
 		val relName = relNameVar
-		
-		//define logic for pattern
+
+		// define logic for pattern
 //		val map = new HashMap
 //		map.put(r.variables.get(0), createVLSVariable)
 		val definition = mapper.transformTerm(r.value, trace, relVar2VLS)
-		
-		
-		
-		
-		//get entire contents of and
+
+		// get entire contents of and
 		val compliance = support.unfoldAnd(relVar2TypeDecComply)
-		val compDefn = createVLSAnd=> [
+		val compDefn = createVLSAnd => [
 			it.left = compliance
 			it.right = definition
 		]
-		
-		val relDef = createVLSFofFormula=> [
-			
+
+		val relDef = createVLSFofFormula => [
+
 			it.name = support.toID(relName)
 			it.fofRole = "axiom"
 			it.fofFormula = createVLSUniversalQuantifier => [
@@ -143,14 +139,13 @@ class Logic2VampireLanguageMapper_RelationMapper {
 							it.terms += support.duplicate(v)
 						}
 					]
-					trace.relDef2Predicate.put(r, rel)
-					trace.predicate2RelDef.put(rel, r)
+//					trace.relDef2Predicate.put(r, rel)
+//					trace.predicate2RelDef.put(rel, r)
 					it.left = support.duplicate(rel)
 					it.right = compDefn
 				]
 			]
 		]
-
 		trace.specification.formulas += relDef
 
 	}

@@ -34,7 +34,8 @@ public class Vampire2LogicMapper {
     Statistics _createStatistics = this.resultFactory.createStatistics();
     final Procedure1<Statistics> _function = (Statistics it) -> {
       long _solverTime = solution.getSolverTime();
-      it.setTransformationTime(((int) _solverTime));
+      it.setSolverTime(((int) _solverTime));
+      it.setTransformationTime(((int) transformationTime));
     };
     return ObjectExtensions.<Statistics>operator_doubleArrow(_createStatistics, _function);
   }

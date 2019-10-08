@@ -79,14 +79,15 @@ class Logic2VampireLanguageMapper {
 		if (!problem.types.isEmpty) {
 			typeMapper.transformTypes(problem.types, problem.elements, this, trace)
 		}
-		
+
 		// RELATION MAPPER
 		trace.relationDefinitions = problem.collectRelationDefinitions
 //		println(problem.relations.filter[class == RelationDefinitionImpl])
+		toTrace(problem.relations.filter[class == RelationDefinitionImpl], trace)
 		problem.relations.forEach[this.relationMapper.transformRelation(it, trace, new Logic2VampireLanguageMapper)]
-		
+
 		// CONTAINMENT MAPPER
-		containmentMapper.transformContainment(config,problem.containmentHierarchies, trace)
+		containmentMapper.transformContainment(config, problem.containmentHierarchies, trace)
 
 		// SCOPE MAPPER
 		scopeMapper.transformScope(problem.types, config, trace)
@@ -105,6 +106,39 @@ class Logic2VampireLanguageMapper {
 		}
 		// OUTPUT
 		return new TracedOutput(specification, trace)
+	}
+
+	def toTrace(Iterable<Relation> relations, Logic2VampireLanguageMapperTrace trace) {
+		val List<VLSVariable> vars = newArrayList
+		for (rel : relations) {
+			//decide name
+			val nameArray = rel.name.split(" ")
+			var relNameVar = ""
+			if (nameArray.length == 3) {
+				relNameVar = support.toIDMultiple(nameArray.get(0), nameArray.get(2))
+			} else {
+				relNameVar = rel.name
+			}
+			val relName = relNameVar
+			
+			val relDef = rel as RelationDefinition
+			for (i : 0 ..< rel.parameters.length) {
+
+				val v = createVLSVariable => [
+					it.name = support.toIDMultiple("V", i.toString)
+				]
+				vars.add(v)
+			}
+
+			val relFunc = createVLSFunction => [
+				it.constant = support.toIDMultiple("r", relName)
+				for (v : vars) {
+					it.terms += support.duplicate(v)
+				}
+			]
+			trace.relDef2Predicate.put(relDef, relFunc)
+			trace.predicate2RelDef.put(relFunc, relDef)
+		}
 	}
 
 	// End of transformProblem
@@ -169,7 +203,6 @@ class Logic2VampireLanguageMapper {
 //		Map<Variable, VLSVariable> variables) {
 //		createVLSReal => [it.value = literal.value.toString()]
 //	}
-
 	def dispatch protected VLSTerm transformTerm(Not not, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
 		createVLSUnaryNegation => [operand = not.operand.transformTerm(trace, variables)]
@@ -265,10 +298,10 @@ class Logic2VampireLanguageMapper {
 	def dispatch protected VLSTerm transformSymbolicReference(DefinedElement referred,
 		List<Term> parameterSubstitutions, Logic2VampireLanguageMapperTrace trace,
 		Map<Variable, VLSVariable> variables) {
-			val name = referred.lookup(trace.definedElement2String)
-			return createVLSConstant => [
-				it.name = name
-			]
+		val name = referred.lookup(trace.definedElement2String)
+		return createVLSConstant => [
+			it.name = name
+		]
 //		typeMapper.transformReference(referred, trace)
 	}
 
@@ -390,12 +423,11 @@ class Logic2VampireLanguageMapper {
 //		}
 		return createVLSFunction => [
 			if (relation.class == RelationDeclarationImpl) {
-							it.constant = (relation as RelationDeclaration).lookup(trace.rel2Predicate).constant
-			}
-			else {
+				it.constant = (relation as RelationDeclaration).lookup(trace.rel2Predicate).constant
+			} else {
 				it.constant = (relation as RelationDefinition).lookup(trace.relDef2Predicate).constant
 			}
-			
+
 			it.terms += parameterSubstitutions.map[p|p.transformTerm(trace, variables)]
 		]
 	}
