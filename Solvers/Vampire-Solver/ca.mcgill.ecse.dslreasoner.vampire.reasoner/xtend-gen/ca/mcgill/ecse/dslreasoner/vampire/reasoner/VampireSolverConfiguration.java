@@ -7,4 +7,6 @@ public class VampireSolverConfiguration extends LogicSolverConfiguration {
   public int contCycleLevel = 0;
   
   public boolean uniquenessDuplicates = false;
+  
+  public int iteration = (-1);
 }

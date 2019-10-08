@@ -25,7 +25,7 @@ public class VampireHandler {
       final String VAMPNAME = "vampire.exe";
       final String TEMPNAME = "TEMP.tptp";
       final String OPTION = " --mode casc_sat -t 300 ";
-      final String SOLNNAME = (("_solution" + Integer.valueOf(configuration.typeScopes.maxNewElements)) + ".tptp");
+      final String SOLNNAME = (((("solution" + Integer.valueOf(configuration.typeScopes.maxNewElements)) + "_") + Integer.valueOf(configuration.iteration)) + ".tptp");
       final String PATH = "C:/cygwin64/bin";
       final URI wsURI = workspace.getWorkspaceURI();
       final String tempLoc = (wsURI + TEMPNAME);

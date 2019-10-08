@@ -44,7 +44,7 @@ class VampireHandler {
 		val VAMPNAME = "vampire.exe"
 		val TEMPNAME = "TEMP.tptp"
 		val OPTION = " --mode casc_sat -t 300 "
-		val SOLNNAME = "_solution" + configuration.typeScopes.maxNewElements + ".tptp"
+		val SOLNNAME = "solution" + configuration.typeScopes.maxNewElements +"_" + configuration.iteration + ".tptp"
 		val PATH = "C:/cygwin64/bin"
 
 		val wsURI = workspace.workspaceURI

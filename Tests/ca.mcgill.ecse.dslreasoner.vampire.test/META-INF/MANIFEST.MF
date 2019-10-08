@@ -6,7 +6,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: ca.mcgill.ecse.dslreasoner.vampire.queries,
+Export-Package: ca.mcgill.ecse.dslreasoner.vamipre.yakindumm,
+  ca.mcgill.ecse.dslreasoner.vamipre.yakindumm.impl,
+  ca.mcgill.ecse.dslreasoner.vamipre.yakindumm.util,
+  ca.mcgill.ecse.dslreasoner.vampire.queries,
+  ca.mcgill.ecse.dslreasoner.vampire.yakindumm,
+  ca.mcgill.ecse.dslreasoner.vampire.yakindumm.impl,
+  ca.mcgill.ecse.dslreasoner.vampire.yakindumm.util,
   yakindumm,
   yakindumm.impl,
   yakindumm.util,

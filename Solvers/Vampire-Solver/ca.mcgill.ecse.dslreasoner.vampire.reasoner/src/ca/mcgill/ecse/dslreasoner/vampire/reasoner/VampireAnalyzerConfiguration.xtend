@@ -6,6 +6,7 @@ class VampireSolverConfiguration extends LogicSolverConfiguration {
 	
 	public var int contCycleLevel = 0
 	public var boolean uniquenessDuplicates = false
+	public var int iteration = -1
 	//choose needed backend solver
 //	public var VampireBackendSolver solver = VampireBackendSolver.SAT4J
 }

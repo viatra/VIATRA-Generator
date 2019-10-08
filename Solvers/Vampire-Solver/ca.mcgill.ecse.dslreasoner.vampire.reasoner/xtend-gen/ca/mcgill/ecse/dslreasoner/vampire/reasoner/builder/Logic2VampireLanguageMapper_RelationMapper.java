@@ -176,8 +176,6 @@ public class Logic2VampireLanguageMapper_RelationMapper {
             }
           };
           final VLSFunction rel = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function_4);
-          trace.relDef2Predicate.put(r, rel);
-          trace.predicate2RelDef.put(rel, r);
           it_2.setLeft(this.support.duplicate(rel));
           it_2.setRight(compDefn);
         };

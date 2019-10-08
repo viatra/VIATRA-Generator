@@ -54,6 +54,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDeclarationImpl;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl.RelationDefinitionImpl;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.util.CollectionsUtil;
 import java.util.Arrays;
@@ -65,6 +66,9 @@ import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -118,23 +122,71 @@ public class Logic2VampireLanguageMapper {
       this.typeMapper.transformTypes(problem.getTypes(), problem.getElements(), this, trace);
     }
     trace.relationDefinitions = this.collectRelationDefinitions(problem);
-    final Consumer<Relation> _function_3 = (Relation it) -> {
+    final Function1<Relation, Boolean> _function_3 = (Relation it) -> {
+      Class<? extends Relation> _class = it.getClass();
+      return Boolean.valueOf(Objects.equal(_class, RelationDefinitionImpl.class));
+    };
+    this.toTrace(IterableExtensions.<Relation>filter(problem.getRelations(), _function_3), trace);
+    final Consumer<Relation> _function_4 = (Relation it) -> {
       Logic2VampireLanguageMapper _logic2VampireLanguageMapper = new Logic2VampireLanguageMapper();
       this.relationMapper.transformRelation(it, trace, _logic2VampireLanguageMapper);
     };
-    problem.getRelations().forEach(_function_3);
+    problem.getRelations().forEach(_function_4);
     this.containmentMapper.transformContainment(config, problem.getContainmentHierarchies(), trace);
     this.scopeMapper.transformScope(problem.getTypes(), config, trace);
     trace.constantDefinitions = this.collectConstantDefinitions(problem);
-    final Consumer<ConstantDefinition> _function_4 = (ConstantDefinition it) -> {
+    final Consumer<ConstantDefinition> _function_5 = (ConstantDefinition it) -> {
       this.constantMapper.transformConstantDefinitionSpecification(it, trace);
     };
-    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_4);
+    Iterables.<ConstantDefinition>filter(problem.getConstants(), ConstantDefinition.class).forEach(_function_5);
     EList<Assertion> _assertions = problem.getAssertions();
     for (final Assertion assertion : _assertions) {
       this.transformAssertion(assertion, trace);
     }
     return new TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace>(specification, trace);
+  }
+  
+  public void toTrace(final Iterable<Relation> relations, final Logic2VampireLanguageMapperTrace trace) {
+    final List<VLSVariable> vars = CollectionLiterals.<VLSVariable>newArrayList();
+    for (final Relation rel : relations) {
+      {
+        final String[] nameArray = rel.getName().split(" ");
+        String relNameVar = "";
+        int _length = nameArray.length;
+        boolean _equals = (_length == 3);
+        if (_equals) {
+          relNameVar = this.support.toIDMultiple(nameArray[0], nameArray[2]);
+        } else {
+          relNameVar = rel.getName();
+        }
+        final String relName = relNameVar;
+        final RelationDefinition relDef = ((RelationDefinition) rel);
+        int _length_1 = ((Object[])Conversions.unwrapArray(rel.getParameters(), Object.class)).length;
+        ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _length_1, true);
+        for (final Integer i : _doubleDotLessThan) {
+          {
+            VLSVariable _createVLSVariable = this.factory.createVLSVariable();
+            final Procedure1<VLSVariable> _function = (VLSVariable it) -> {
+              it.setName(this.support.toIDMultiple("V", i.toString()));
+            };
+            final VLSVariable v = ObjectExtensions.<VLSVariable>operator_doubleArrow(_createVLSVariable, _function);
+            vars.add(v);
+          }
+        }
+        VLSFunction _createVLSFunction = this.factory.createVLSFunction();
+        final Procedure1<VLSFunction> _function = (VLSFunction it) -> {
+          it.setConstant(this.support.toIDMultiple("r", relName));
+          for (final VLSVariable v : vars) {
+            EList<VLSTerm> _terms = it.getTerms();
+            VLSVariable _duplicate = this.support.duplicate(v);
+            _terms.add(_duplicate);
+          }
+        };
+        final VLSFunction relFunc = ObjectExtensions.<VLSFunction>operator_doubleArrow(_createVLSFunction, _function);
+        trace.relDef2Predicate.put(relDef, relFunc);
+        trace.predicate2RelDef.put(relFunc, relDef);
+      }
+    }
   }
   
   protected VLSTerm _transformTypeReference(final BoolTypeReference boolTypeReference, final Logic2VampireLanguageMapperTrace trace) {
