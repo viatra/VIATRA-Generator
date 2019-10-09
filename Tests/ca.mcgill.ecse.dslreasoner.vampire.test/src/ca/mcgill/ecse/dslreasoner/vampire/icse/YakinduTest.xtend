@@ -54,17 +54,17 @@ class YakinduTest {
 //		val queries = null
 		println("DSL loaded")
 
-		var MAX = 150
-		var START = 10
-		var INC = 20
-		var REPS = 1
+		var MAX = 80
+		var START = 79
+		var INC = 1
+		var REPS = 3
 
-		val EXACT = 50
+		val EXACT = 130
 		if (EXACT != -1) {
 			MAX = EXACT
 			START = EXACT
-			INC = 1
-			REPS = 3
+			INC = 5
+			REPS = 1
 		}
 
 		var writer = new PrintWriter(workspace.workspaceURI + "//_yakinduStats.csv")
@@ -93,7 +93,7 @@ class YakinduTest {
 				var validModelExtensionProblem = viatra2Logic.transformQueries(queries, modelExtensionProblem,
 					new Viatra2LogicConfiguration)
 
-				var problem = validModelExtensionProblem.output
+				var problem = modelGenerationProblem.output
 				workspace.writeModel(problem, "Yakindu.logicproblem")
 
 //				 println("Problem created")
@@ -125,9 +125,10 @@ class YakinduTest {
 					// add configuration things, in config file first
 					it.documentationLevel = DocumentationLevel::FULL
 					it.iteration = iter
-
-					it.typeScopes.minNewElements = size - inc
+					it.runtimeLimit = 60
 					it.typeScopes.maxNewElements = size
+					it.typeScopes.minNewElements = size - 5
+
 //			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 //			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 					it.contCycleLevel = 5
@@ -167,8 +168,8 @@ class YakinduTest {
 //			 println("Time was: " + totalTimeMin + ":" + totalTimeSec)
 			}
 			println()
-			var solverMed = solverTimes.sort.get(REPS/2)
-			var transformationMed = transformationTimes.sort.get(REPS/2)
+			var solverMed = solverTimes.sort.get(REPS / 2)
+			var transformationMed = transformationTimes.sort.get(REPS / 2)
 			writer.append(solverMed.toString + "," + transformationMed.toString)
 			writer.append("\n")
 		}
