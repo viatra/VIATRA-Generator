@@ -72,16 +72,16 @@ public class YakinduTest {
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "yakindu/Yakindu.xmi");
       final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, Patterns.instance());
       InputOutput.<String>println("DSL loaded");
-      int MAX = 150;
-      int START = 10;
-      int INC = 20;
-      int REPS = 1;
-      final int EXACT = 50;
+      int MAX = 80;
+      int START = 79;
+      int INC = 1;
+      int REPS = 3;
+      final int EXACT = 130;
       if ((EXACT != (-1))) {
         MAX = EXACT;
         START = EXACT;
-        INC = 1;
-        REPS = 3;
+        INC = 5;
+        REPS = 1;
       }
       URI _workspaceURI = workspace.getWorkspaceURI();
       String _plus_2 = (_workspaceURI + "//_yakinduStats.csv");
@@ -115,7 +115,7 @@ public class YakinduTest {
                 TracedOutput<LogicProblem, Ecore2Logic_Trace> modelExtensionProblem = instanceModel2Logic.transform(modelGenerationProblem, partialModel);
                 Viatra2LogicConfiguration _viatra2LogicConfiguration = new Viatra2LogicConfiguration();
                 TracedOutput<LogicProblem, Viatra2LogicTrace> validModelExtensionProblem = viatra2Logic.transformQueries(queries, modelExtensionProblem, _viatra2LogicConfiguration);
-                LogicProblem problem = validModelExtensionProblem.getOutput();
+                LogicProblem problem = modelGenerationProblem.getOutput();
                 workspace.writeModel(problem, "Yakindu.logicproblem");
                 long startTime = System.currentTimeMillis();
                 VampireSolver reasoner = null;
@@ -128,8 +128,9 @@ public class YakinduTest {
                 final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
                   it.documentationLevel = DocumentationLevel.FULL;
                   it.iteration = iter;
-                  it.typeScopes.minNewElements = (size - inc);
+                  it.runtimeLimit = 60;
                   it.typeScopes.maxNewElements = size;
+                  it.typeScopes.minNewElements = (size - 5);
                   it.contCycleLevel = 5;
                   it.uniquenessDuplicates = false;
                 };

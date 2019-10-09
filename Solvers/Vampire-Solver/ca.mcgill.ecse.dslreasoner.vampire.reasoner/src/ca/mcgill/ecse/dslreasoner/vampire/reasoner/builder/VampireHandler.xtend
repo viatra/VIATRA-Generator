@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Data
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguageFactoryImpl
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.BackendSolver
 
 class VampireSolverException extends Exception {
 	new(String s) {
@@ -39,30 +40,58 @@ class VampireHandler {
 	// val fileName = "problem.als"
 	public def callSolver(VampireModel problem, ReasonerWorkspace workspace, VampireSolverConfiguration configuration) {
 
-		val CMD = "cmd /c "
+		// Vampire
 		val VAMPDIR = "..\\..\\Solvers\\Vampire-Solver\\ca.mcgill.ecse.dslreasoner.vampire.reasoner\\lib\\"
 		val VAMPNAME = "vampire.exe"
+		val VAMPLOC = VAMPDIR + VAMPNAME
+
+		// CVC4
+		val CVC4DIR = "..\\..\\Solvers\\Vampire-Solver\\ca.mcgill.ecse.dslreasoner.vampire.reasoner\\lib\\"
+		val CVC4NAME = "vampire.exe"
+		val CVC4LOC = CVC4DIR + CVC4NAME
+
+		val CMD = "cmd /c "
 		val TEMPNAME = "TEMP.tptp"
-		val OPTION = " --mode casc_sat -t 300 "
-		val SOLNNAME = "solution" + configuration.typeScopes.maxNewElements +"_" + configuration.iteration + ".tptp"
+		val SOLNNAME = "solution" + configuration.solver.toString + "_" + configuration.typeScopes.maxNewElements +
+			"_" + configuration.iteration + ".tptp"
 		val PATH = "C:/cygwin64/bin"
 
 		val wsURI = workspace.workspaceURI
 		val tempLoc = wsURI + TEMPNAME
 		val solnLoc = wsURI + SOLNNAME + " "
-		val vampLoc = VAMPDIR + VAMPNAME
 
 		// 1. create temp file for vampire problem
 		var tempURI = workspace.writeModel(problem, TEMPNAME).toFileString
 
 		// 2. run command and save to 
 		// need to have cygwin downloaded
-		var startTime = System.currentTimeMillis
-		val p = Runtime.runtime.exec(CMD + vampLoc + OPTION + tempLoc + " > " + solnLoc, newArrayList("Path=" + PATH))
-		// 2.1 determine time left
-		p.waitFor
-		val solverTime = System.currentTimeMillis - startTime
+		var long startTime = -1 as long
+		var long solverTime = -1 as long
+		var Process p = null
+		if (configuration.solver == BackendSolver::VAMP) {
 
+			var OPTION = " --mode casc_sat "
+			if (configuration.runtimeLimit != -1) {
+				OPTION = OPTION + "-t " + configuration.runtimeLimit + " "
+			}
+
+			startTime = System.currentTimeMillis
+			p = Runtime.runtime.exec(CMD + VAMPLOC + OPTION + tempLoc + " > " + solnLoc, newArrayList("Path=" + PATH))
+			p.waitFor
+			solverTime = System.currentTimeMillis - startTime
+		}
+		if (configuration.solver == BackendSolver::CVC4) {
+			var OPTION = " SAT "
+			if (configuration.runtimeLimit != -1) {
+				OPTION = " " + configuration.runtimeLimit + OPTION
+			}
+			println(CMD + CVC4LOC + tempLoc + OPTION + " > " + solnLoc)
+			p = Runtime.runtime.exec(CMD + CVC4LOC + tempLoc + OPTION + " > " + solnLoc, newArrayList("Path=" + PATH))
+			p.waitFor
+			solverTime = System.currentTimeMillis - startTime
+		}
+
+		// 2.1 determine time left
 		// 2.2 store output into local variable
 		val BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 		val List<String> output = newArrayList
@@ -74,14 +103,13 @@ class VampireHandler {
 
 //    	println(output.toString())
 		// 4. delete temp file
-		workspace.getFile(TEMPNAME).delete		
+		workspace.getFile(TEMPNAME).delete
 
 		// 5. determine and return whether or not finite model was found
 		// 6. save solution as a .tptp model
 		val root = workspace.readModel(VampireModel, SOLNNAME).eResource.contents
 
 //		println((root.get(0) as VampireModel ).comments)
-		
 		return new MonitoredVampireSolution(solverTime, root.get(0) as VampireModel)
 
 	/*
