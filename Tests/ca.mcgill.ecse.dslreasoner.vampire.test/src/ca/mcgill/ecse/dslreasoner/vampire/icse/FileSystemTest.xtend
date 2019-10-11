@@ -86,7 +86,7 @@ class FileSystemTest {
 			it.uniquenessDuplicates = false
 		]
 
-		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace, "FS")
+		var LogicResult solution = reasoner.solve(problem, vampireConfig, workspace)
 
 		/*/
 		 * 

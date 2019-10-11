@@ -12,4 +12,6 @@ public class VampireSolverConfiguration extends LogicSolverConfiguration {
   public int iteration = (-1);
   
   public BackendSolver solver = BackendSolver.VAMP;
+  
+  public boolean genModel = true;
 }

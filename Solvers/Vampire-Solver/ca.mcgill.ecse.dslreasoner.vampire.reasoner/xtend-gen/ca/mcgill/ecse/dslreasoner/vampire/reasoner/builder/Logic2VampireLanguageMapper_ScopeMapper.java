@@ -53,9 +53,9 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
   }
   
   public void _transformScope(final List<Type> types, final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
-    final int ABSOLUTE_MIN = 0;
-    final int ABSOLUTE_MAX = Integer.MAX_VALUE;
     int elemsInIM = trace.definedElement2String.size();
+    final int ABSOLUTE_MIN = 0;
+    final int ABSOLUTE_MAX = ((-1) - elemsInIM);
     final int GLOBAL_MIN = (config.typeScopes.minNewElements - elemsInIM);
     final int GLOBAL_MAX = (config.typeScopes.maxNewElements - elemsInIM);
     final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();

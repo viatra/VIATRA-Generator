@@ -4,17 +4,19 @@ import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
 import ca.mcgill.ecse.dslreasoner.vampire.queries.Patterns;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
+import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.CompositeElement;
+import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.Region;
+import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.Transition;
 import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.YakindummPackage;
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration;
@@ -26,6 +28,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -72,15 +75,16 @@ public class YakinduTest {
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "yakindu/Yakindu.xmi");
       final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, Patterns.instance());
       InputOutput.<String>println("DSL loaded");
-      int MAX = 80;
-      int START = 79;
+      int SZ_TOP = 10;
+      int SZ_BOT = 126;
       int INC = 1;
-      int REPS = 3;
-      final int EXACT = 130;
+      int REPS = 1;
+      final int RANGE = 3;
+      final int EXACT = 10;
       if ((EXACT != (-1))) {
-        MAX = EXACT;
-        START = EXACT;
-        INC = 5;
+        SZ_TOP = EXACT;
+        SZ_BOT = EXACT;
+        INC = 1;
         REPS = 1;
       }
       URI _workspaceURI = workspace.getWorkspaceURI();
@@ -96,11 +100,11 @@ public class YakinduTest {
       boolean modelFound = true;
       LogicResult solution = null;
       {
-        int i = START;
-        boolean _while = (i <= MAX);
+        int i = SZ_BOT;
+        boolean _while = (i <= SZ_TOP);
         while (_while) {
           {
-            final int num = ((i - START) / INC);
+            final int num = ((i - SZ_BOT) / INC);
             InputOutput.<String>print((((("Generation " + Integer.valueOf(num)) + ": SIZE=") + Integer.valueOf(i)) + " Attempt: "));
             String _plus_3 = (Integer.valueOf(i) + ",");
             writer.append(_plus_3);
@@ -121,6 +125,15 @@ public class YakinduTest {
                 VampireSolver reasoner = null;
                 VampireSolver _vampireSolver = new VampireSolver();
                 reasoner = _vampireSolver;
+                final HashMap<Class, Integer> classMapMin = new HashMap<Class, Integer>();
+                classMapMin.put(Region.class, Integer.valueOf(1));
+                classMapMin.put(Transition.class, Integer.valueOf(2));
+                classMapMin.put(CompositeElement.class, Integer.valueOf(3));
+                final Map<Type, Integer> typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
+                final HashMap<Class, Integer> classMapMax = new HashMap<Class, Integer>();
+                classMapMax.put(Region.class, Integer.valueOf(5));
+                classMapMax.put(Transition.class, Integer.valueOf(2));
+                final Map<Type, Integer> typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.getTrace());
                 final int size = i;
                 final int inc = INC;
                 final int iter = j;
@@ -129,15 +142,24 @@ public class YakinduTest {
                   it.documentationLevel = DocumentationLevel.FULL;
                   it.iteration = iter;
                   it.runtimeLimit = 60;
-                  it.typeScopes.maxNewElements = size;
-                  it.typeScopes.minNewElements = (size - 5);
+                  it.typeScopes.maxNewElements = (-1);
+                  it.typeScopes.minNewElements = size;
+                  it.genModel = false;
+                  int _size = typeMapMin.size();
+                  boolean _notEquals = (_size != 0);
+                  if (_notEquals) {
+                    it.typeScopes.minNewElementsByType = typeMapMin;
+                  }
+                  int _size_1 = typeMapMin.size();
+                  boolean _notEquals_1 = (_size_1 != 0);
+                  if (_notEquals_1) {
+                    it.typeScopes.maxNewElementsByType = typeMapMax;
+                  }
                   it.contCycleLevel = 5;
                   it.uniquenessDuplicates = false;
                 };
                 final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
                 solution = reasoner.solve(problem, vampireConfig, workspace);
-                Object _get = ((ModelResult) solution).getRepresentation().get(0);
-                final VampireModel soln = ((VampireModel) _get);
                 int _transformationTime = solution.getStatistics().getTransformationTime();
                 final double tTime = (_transformationTime / 1000.0);
                 int _solverTime = solution.getStatistics().getSolverTime();
@@ -163,7 +185,7 @@ public class YakinduTest {
           }
           int _i = i;
           i = (_i + INC);
-          _while = (i <= MAX);
+          _while = (i <= SZ_TOP);
         }
       }
       writer.close();

@@ -25,8 +25,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 	def dispatch public void transformScope(List<Type> types, VampireSolverConfiguration config,
 		Logic2VampireLanguageMapperTrace trace) {
-		val ABSOLUTE_MIN = 0
-		val ABSOLUTE_MAX = Integer.MAX_VALUE
+		
 
 //		TODO HANDLE ERRORS RELATED TO MAX > MIN
 //		TODO HANDLE ERROR RELATED TO SUM(MIN TYPES)+1(for root) > MAX OBJECTS
@@ -40,6 +39,8 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		// Number of defined non-abstract elements that are not enum elements
 		// Equals the number of elements in te initial model
 		var elemsInIM = trace.definedElement2String.size
+		val ABSOLUTE_MIN = 0
+		val ABSOLUTE_MAX = -1-elemsInIM
 //		var elemsInIM = 0
 //		
 //		for(t : types.filter(TypeDefinition).filter[!isIsAbstract]) {

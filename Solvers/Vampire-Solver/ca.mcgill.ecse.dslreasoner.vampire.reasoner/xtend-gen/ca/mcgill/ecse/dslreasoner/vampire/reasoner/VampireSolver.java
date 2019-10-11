@@ -24,7 +24,6 @@ import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -42,24 +41,10 @@ public class VampireSolver extends LogicReasoner {
   
   private final VampireHandler handler = new VampireHandler();
   
-  private String fileName = "problem.tptp";
-  
-  public LogicResult solve(final LogicProblem problem, final LogicSolverConfiguration config, final ReasonerWorkspace workspace, final String location) {
-    try {
-      LogicResult _xblockexpression = null;
-      {
-        this.fileName = (location + this.fileName);
-        _xblockexpression = this.solve(problem, config, workspace);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
   @Override
   public LogicResult solve(final LogicProblem problem, final LogicSolverConfiguration config, final ReasonerWorkspace workspace) throws LogicReasonerException {
     final VampireSolverConfiguration vampireConfig = this.asConfig(config);
+    String fileName = (((("problem_" + Integer.valueOf(vampireConfig.typeScopes.minNewElements)) + "-") + Integer.valueOf(vampireConfig.typeScopes.maxNewElements)) + ".tptp");
     final long transformationStart = System.currentTimeMillis();
     final TracedOutput<VampireModel, Logic2VampireLanguageMapperTrace> result = this.forwardMapper.transformProblem(problem, vampireConfig);
     long _currentTimeMillis = System.currentTimeMillis();
@@ -68,18 +53,24 @@ public class VampireSolver extends LogicReasoner {
     final Logic2VampireLanguageMapperTrace forwardTrace = result.getTrace();
     String fileURI = null;
     String vampireCode = null;
-    vampireCode = workspace.writeModelToString(vampireProblem, this.fileName);
+    vampireCode = workspace.writeModelToString(vampireProblem, fileName);
     final boolean writeFile = ((vampireConfig.documentationLevel == DocumentationLevel.NORMAL) || 
       (vampireConfig.documentationLevel == DocumentationLevel.FULL));
     if (writeFile) {
-      fileURI = workspace.writeModel(vampireProblem, this.fileName).toFileString();
+      fileURI = workspace.writeModel(vampireProblem, fileName).toFileString();
     }
-    final MonitoredVampireSolution vampSol = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
-    final long backTransformationStart = System.currentTimeMillis();
-    final ModelResult logicResult = this.backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime);
-    long _currentTimeMillis_1 = System.currentTimeMillis();
-    final long backTransformationTime = (_currentTimeMillis_1 - backTransformationStart);
-    return logicResult;
+    if (vampireConfig.genModel) {
+      final MonitoredVampireSolution vampSol = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
+      final long backTransformationStart = System.currentTimeMillis();
+      final ModelResult logicResult = this.backwardMapper.transformOutput(problem, 
+        vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime);
+      long _currentTimeMillis_1 = System.currentTimeMillis();
+      final long backTransformationTime = (_currentTimeMillis_1 - backTransformationStart);
+      return logicResult;
+    }
+    MonitoredVampireSolution _monitoredVampireSolution = new MonitoredVampireSolution((-1), null);
+    return this.backwardMapper.transformOutput(problem, 
+      vampireConfig.solutionScope.numberOfRequiredSolution, _monitoredVampireSolution, forwardTrace, transformationTime);
   }
   
   public VampireSolverConfiguration asConfig(final LogicSolverConfiguration configuration) {
