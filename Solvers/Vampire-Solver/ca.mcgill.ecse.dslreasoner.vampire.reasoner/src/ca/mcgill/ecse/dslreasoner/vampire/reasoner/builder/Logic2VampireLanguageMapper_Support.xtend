@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder
 
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.BackendSolver
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConstant
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunction
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm
@@ -16,6 +17,12 @@ import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
 import java.util.Map
+import java.util.concurrent.TimeUnit
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.Response
 import org.eclipse.emf.common.util.EList
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
@@ -77,13 +84,13 @@ class Logic2VampireLanguageMapper_Support {
 			it.terms += duplicate(v)
 		]
 	}
-	
+
 	def protected List<VLSVariable> duplicate(List<VLSVariable> vars) {
-			var newList = newArrayList
-			for (v : vars) {
-				newList.add(duplicate(v))
-			}
-			return newList
+		var newList = newArrayList
+		for (v : vars) {
+			newList.add(duplicate(v))
+		}
+		return newList
 	}
 
 	def protected VLSConstant toConstant(VLSFunctionAsTerm term) {
@@ -117,7 +124,7 @@ class Logic2VampireLanguageMapper_Support {
 
 // TODO Make more general
 	def establishUniqueness(List<VLSConstant> terms, VLSConstant t2) {
-		
+
 //		OLD
 //		val List<VLSInequality> eqs = newArrayList
 //		for (t1 : terms.subList(1, terms.length)) {
@@ -133,7 +140,6 @@ class Logic2VampireLanguageMapper_Support {
 //		}
 //		return unfoldAnd(eqs)
 //		END OLD
-
 		val List<VLSInequality> eqs = newArrayList
 		for (t1 : terms) {
 			if (t1 != t2) {
@@ -257,7 +263,8 @@ class Logic2VampireLanguageMapper_Support {
 			}
 		}
 	}
-	//TODO rewrite such that it uses "listSubTypes"
+
+	// TODO rewrite such that it uses "listSubTypes"
 	def protected boolean dfsSubtypeCheck(Type type, Type type2) {
 		// There is surely a better way to do this
 		if (type.subtypes.isEmpty)
@@ -282,6 +289,76 @@ class Logic2VampireLanguageMapper_Support {
 
 	def protected withAddition(Map<Variable, VLSVariable> map1, Map<Variable, VLSVariable> map2) {
 		new HashMap(map1) => [putAll(map2)]
+	}
+
+	// SERVERS
+	def makeForm(String formula, BackendSolver solver, int time) {
+		return header + formula + addOptions + addSolver(solver, time) + addEnd
+	}
+
+	def getSolverSpecs(BackendSolver solver) {
+		switch (solver) {
+			case BackendSolver::CVC4: return newArrayList("CVC4---SAT-1.7", "do_CVC4 %s %d SAT")
+			case BackendSolver::DARWINFM: return newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s")
+			case BackendSolver::EDARWIN: return newArrayList("E-Darwin---1.5", "e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s")
+			case BackendSolver::GEOIII: return newArrayList("Geo-III---2018C", "geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s")
+			case BackendSolver::IPROVER: return newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s")
+			case BackendSolver::PARADOX: return newArrayList("Paradox---4.0", "paradox --no-progress --time %d --tstp --model %s")
+			case BackendSolver::VAMPIRE: return newArrayList("Vampire---SAT-4.4", "vampire --mode casc_sat -t %d %s")
+			case BackendSolver::Z3: return newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:20 -file:%s")
+		}
+	}
+
+	def getHeader() {
+		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"ProblemSource\"\r\n\r\nFORMULAE\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"FORMULAEProblem\"\r\n\r\n\r\n"
+	}
+
+	def addSpec(String spec) {
+		return spec.replace("\n", "\\r\\n")
+	}
+
+	def addOptions() {
+		return "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"QuietFlag\"\r\n\r\n-q3\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"SubmitButton\"\r\n\r\nRunSelectedSystems\r\n"
+	}
+
+	def addSolver(BackendSolver solver, int time) {
+		val solverSpecs = getSolverSpecs(solver)
+		val ID = solverSpecs.get(0)
+		val cmd = solverSpecs.get(1)
+
+		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___" + ID +
+			"\"\r\n\r\n" + ID +
+			"\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"Command___" + ID +
+			"\"\r\n\r\n" + cmd.replace("%d", time.toString) + "\r\n"
+	}
+
+	def addEnd() {
+		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA--"
+	}
+
+	def sendPost(String formData) throws Exception {
+
+		val OkHttpClient client = new OkHttpClient.Builder().connectTimeout(350, TimeUnit.SECONDS).readTimeout(350, TimeUnit.SECONDS).build()
+
+		val MediaType mediaType = MediaType.parse("multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA")
+		val RequestBody body = RequestBody.create(mediaType, formData)
+		val Request request = new Request.Builder().url("http://www.tptp.org/cgi-bin/SystemOnTPTPFormReply").post(body).
+			addHeader("Connection", "keep-alive").addHeader("Cache-Control", "max-age=0").addHeader("Origin",
+				"http://tptp.cs.miami.edu").addHeader("Upgrade-Insecure-Requests", "1").addHeader("Content-Type",
+				"multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA").addHeader("User-Agent",
+				"Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36").
+			addHeader("Accept",
+				"text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*q=0.8,application/signed-exchangev=b3").
+			addHeader("Referer", "http://tptp.cs.miami.edu/cgi-bin/SystemOnTPTP").addHeader("Accept-Encoding",
+				"gzip, deflate").addHeader("Accept-Language", "en-US,enq=0.9").addHeader("Postman-Token",
+				"639ff59f-ab5c-4d9f-9da5-ac8bb64be466,ecb71882-f4d8-4126-8a97-4edb07d4055c").addHeader("Host",
+				"www.tptp.org").addHeader("Content-Length", "44667").addHeader("cache-control", "no-cache").build()
+
+		val Response response = client.newCall(request).execute()
+//		TimeUnit.SECONDS.sleep(5)
+		return newArrayList(response.body.string.split("\n"))
+//		return response.body.string
+	// case 1: 
 	}
 
 }

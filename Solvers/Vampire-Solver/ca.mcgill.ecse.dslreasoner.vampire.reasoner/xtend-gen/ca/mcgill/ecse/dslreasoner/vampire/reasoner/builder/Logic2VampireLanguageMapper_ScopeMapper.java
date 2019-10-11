@@ -55,13 +55,13 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
   public void _transformScope(final List<Type> types, final VampireSolverConfiguration config, final Logic2VampireLanguageMapperTrace trace) {
     int elemsInIM = trace.definedElement2String.size();
     final int ABSOLUTE_MIN = 0;
-    final int ABSOLUTE_MAX = ((-1) - elemsInIM);
+    final int ABSOLUTE_MAX = (Integer.MAX_VALUE - elemsInIM);
     final int GLOBAL_MIN = (config.typeScopes.minNewElements - elemsInIM);
     final int GLOBAL_MAX = (config.typeScopes.maxNewElements - elemsInIM);
     final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();
     final boolean consistant = (GLOBAL_MAX > GLOBAL_MIN);
     if ((GLOBAL_MIN != ABSOLUTE_MIN)) {
-      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, (!consistant));
+      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, consistant);
       if (consistant) {
         for (final VLSConstant i : trace.uniqueInstances) {
           localInstances.add(this.support.duplicate(i));
@@ -72,7 +72,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       }
     }
     if ((GLOBAL_MAX != ABSOLUTE_MAX)) {
-      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, consistant);
+      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, (!consistant));
       if (consistant) {
         this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, false, null);
       } else {

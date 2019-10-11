@@ -70,7 +70,7 @@ class VampireHandler {
 		var long startTime = -1 as long
 		var long solverTime = -1 as long
 		var Process p = null
-		if (configuration.solver == BackendSolver::VAMP) {
+		if (configuration.solver == BackendSolver::VAMPIRE) {
 
 			var OPTION = " --mode casc_sat "
 			if (configuration.runtimeLimit != -1) {
