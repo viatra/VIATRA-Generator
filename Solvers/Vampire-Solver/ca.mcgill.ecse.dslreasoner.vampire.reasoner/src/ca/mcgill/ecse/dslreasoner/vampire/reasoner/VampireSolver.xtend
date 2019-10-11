@@ -31,29 +31,32 @@ class VampireSolver extends LogicReasoner {
 	val Vampire2LogicMapper backwardMapper = new Vampire2LogicMapper
 	val VampireHandler handler = new VampireHandler
 
-	var fileName = "problem.tptp"
+//	var fileName = "problem.tptp"
 
-	def solve(LogicProblem problem, LogicSolverConfiguration config, ReasonerWorkspace workspace, String location) {
-		fileName = location + fileName
-		solve(problem, config, workspace)
-	}
+//	def solve(LogicProblem problem, LogicSolverConfiguration config, ReasonerWorkspace workspace, String location) {
+//		fileName = location + fileName
+//		solve(problem, config, workspace)
+//	}
 
 	override solve(LogicProblem problem, LogicSolverConfiguration config,
 		ReasonerWorkspace workspace) throws LogicReasonerException {
 		val vampireConfig = config.asConfig
+		var fileName = "problem_" + vampireConfig.typeScopes.minNewElements + "-" + vampireConfig.typeScopes.maxNewElements + ".tptp"
 
 		// Start: Logic -> Vampire mapping
 		val transformationStart = System.currentTimeMillis
 		// TODO
 		val result = forwardMapper.transformProblem(problem, vampireConfig)
 		val transformationTime = System.currentTimeMillis - transformationStart
-		
+
 		val vampireProblem = result.output
 		val forwardTrace = result.trace
 
 		var String fileURI = null;
 		var String vampireCode = null;
 		vampireCode = workspace.writeModelToString(vampireProblem, fileName)
+		
+		
 
 		val writeFile = (
 			vampireConfig.documentationLevel === DocumentationLevel::NORMAL ||
@@ -61,35 +64,33 @@ class VampireSolver extends LogicReasoner {
 		if (writeFile) {
 			fileURI = workspace.writeModel(vampireProblem, fileName).toFileString
 		}
-		
-		
-		
+
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("tptp", new VampireLanguageFactoryImpl)
 ////		val Resource resource = Resource.
 ////		Resource.getResource(wsURI+"problem.tptp") as Resource
 ////		resource
 //		val model = workspace.readModel(VampireModel, "problem.tptp").eResource.contents
 //		println(model)
-		
-
-		// Result as String
-		
 		// Finish: Logic -> Vampire mapping
-		
-		// Start: Solving .tptp problem
-		val MonitoredVampireSolution vampSol = handler.callSolver(vampireProblem, workspace, vampireConfig)
-		// Finish: Solving .tptp problem
-		
-		// Start: Vampire -> Logic mapping
-		val backTransformationStart = System.currentTimeMillis
-		// Backwards Mapper
-		val logicResult = backwardMapper.transformOutput(problem,vampireConfig.solutionScope.numberOfRequiredSolution,vampSol,forwardTrace,transformationTime)
+		if (vampireConfig.genModel) {
 
-		val backTransformationTime = System.currentTimeMillis - backTransformationStart
-		// Finish: Vampire -> Logic Mapping
-		
+			// Start: Solving .tptp problem
+			val MonitoredVampireSolution vampSol = handler.callSolver(vampireProblem, workspace, vampireConfig)
+			// Finish: Solving .tptp problem
+			// Start: Vampire -> Logic mapping
+			val backTransformationStart = System.currentTimeMillis
+			// Backwards Mapper
+			val logicResult = backwardMapper.transformOutput(problem,
+				vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime)
+
+			val backTransformationTime = System.currentTimeMillis - backTransformationStart
+			// Finish: Vampire -> Logic Mapping
 //		print(vampSol.generatedModel.tfformulas.size)
-		return logicResult //currently only a ModelResult
+			return logicResult // currently only a ModelResult
+		}
+		
+		return backwardMapper.transformOutput(problem,
+				vampireConfig.solutionScope.numberOfRequiredSolution, new MonitoredVampireSolution(-1, null), forwardTrace, transformationTime)
 	}
 
 	def asConfig(LogicSolverConfiguration configuration) {
@@ -105,9 +106,9 @@ class VampireSolver extends LogicReasoner {
 //	 * 
 	override getInterpretations(ModelResult modelResult) {
 //		 val answers = (modelResult.representation as MonitoredAlloySolution).aswers.map[key]
-		val sols = modelResult.representation// as List<A4Solution>
-		//val res = answers.map 
-		sols.map[
+		val sols = modelResult.representation // as List<A4Solution>
+		// val res = answers.map 
+		sols.map [
 			new VampireModelInterpretation(
 //				forwardMapper.typeMapper.typeInterpreter,
 				it as VampireModel,

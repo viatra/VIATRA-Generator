@@ -52,8 +52,10 @@ class VampireHandler {
 
 		val CMD = "cmd /c "
 		val TEMPNAME = "TEMP.tptp"
-		val SOLNNAME = "solution" + configuration.solver.toString + "_" + configuration.typeScopes.maxNewElements +
-			"_" + configuration.iteration + ".tptp"
+//		val SOLNNAME = "solution" + configuration.solver.toString + "_" + configuration.typeScopes.maxNewElements +
+//			"_" + configuration.iteration + ".tptp"
+		val SOLNNAME = "solution" + "_" + configuration.typeScopes.maxNewElements + "_" + configuration.iteration +
+			".tptp"
 		val PATH = "C:/cygwin64/bin"
 
 		val wsURI = workspace.workspaceURI

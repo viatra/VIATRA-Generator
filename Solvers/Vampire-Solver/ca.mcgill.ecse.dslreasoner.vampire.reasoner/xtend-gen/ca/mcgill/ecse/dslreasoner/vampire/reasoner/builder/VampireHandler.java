@@ -30,19 +30,13 @@ public class VampireHandler {
       final String CVC4LOC = (CVC4DIR + CVC4NAME);
       final String CMD = "cmd /c ";
       final String TEMPNAME = "TEMP.tptp";
-      String _string = configuration.solver.toString();
-      String _plus = ("solution" + _string);
-      String _plus_1 = (_plus + "_");
-      String _plus_2 = (_plus_1 + Integer.valueOf(configuration.typeScopes.maxNewElements));
-      String _plus_3 = (_plus_2 + 
-        "_");
-      String _plus_4 = (_plus_3 + Integer.valueOf(configuration.iteration));
-      final String SOLNNAME = (_plus_4 + ".tptp");
+      final String SOLNNAME = ((((("solution" + "_") + Integer.valueOf(configuration.typeScopes.maxNewElements)) + "_") + Integer.valueOf(configuration.iteration)) + 
+        ".tptp");
       final String PATH = "C:/cygwin64/bin";
       final URI wsURI = workspace.getWorkspaceURI();
       final String tempLoc = (wsURI + TEMPNAME);
-      String _plus_5 = (wsURI + SOLNNAME);
-      final String solnLoc = (_plus_5 + " ");
+      String _plus = (wsURI + SOLNNAME);
+      final String solnLoc = (_plus + " ");
       String tempURI = workspace.writeModel(problem, TEMPNAME).toFileString();
       long startTime = (-((long) 1));
       long solverTime = (-((long) 1));

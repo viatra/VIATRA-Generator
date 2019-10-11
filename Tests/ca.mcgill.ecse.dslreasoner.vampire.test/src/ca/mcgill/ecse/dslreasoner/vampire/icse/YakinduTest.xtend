@@ -3,13 +3,14 @@ package ca.mcgill.ecse.dslreasoner.vampire.icse
 import ca.mcgill.ecse.dslreasoner.vampire.queries.Patterns
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
+import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.CompositeElement
+import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.Region
+import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.Transition
 import ca.mcgill.ecse.dslreasoner.vampire.yakindumm.YakindummPackage
-import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
@@ -17,8 +18,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.Insta
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.PrintWriter
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.Date
+import java.util.HashMap
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
@@ -54,16 +55,18 @@ class YakinduTest {
 //		val queries = null
 		println("DSL loaded")
 
-		var MAX = 80
-		var START = 79
+		var SZ_TOP = 10
+		var SZ_BOT = 126
 		var INC = 1
-		var REPS = 3
+		var REPS = 1
+		
+		val RANGE = 3
 
-		val EXACT = 130
+		val EXACT = 10
 		if (EXACT != -1) {
-			MAX = EXACT
-			START = EXACT
-			INC = 5
+			SZ_TOP = EXACT
+			SZ_BOT = EXACT
+			INC = 1
 			REPS = 1
 		}
 
@@ -77,8 +80,8 @@ class YakinduTest {
 		var transformationTimes = newArrayList
 		var modelFound = true
 		var LogicResult solution = null
-		for (var i = START; i <= MAX; i += INC) {
-			val num = (i - START) / INC
+		for (var i = SZ_BOT; i <= SZ_TOP; i += INC) {
+			val num = (i - SZ_BOT) / INC
 			print("Generation " + num + ": SIZE=" + i + " Attempt: ")
 			writer.append(i + ",")
 			solverTimes.clear
@@ -106,17 +109,16 @@ class YakinduTest {
 
 				// /////////////////////////////////////////////////////
 				// Minimum Scope
-//			val classMapMin = new HashMap<Class, Integer>
-//			classMapMin.put(Region, 1)
-//			classMapMin.put(Transition, 2)
-//			classMapMin.put(CompositeElement, 3)
-//			val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
+			val classMapMin = new HashMap<Class, Integer>
+			classMapMin.put(Region, 1)
+			classMapMin.put(Transition, 2)
+			classMapMin.put(CompositeElement, 3)
+			val typeMapMin = GeneralTest.getTypeMap(classMapMin, metamodel, ecore2Logic, modelGenerationProblem.trace)
 				// Maximum Scope
-//			val classMapMax = new HashMap<Class, Integer>
-//			classMapMax.put(Region, 5)
-//			classMapMax.put(Transition, 2)
-//			classMapMax.put(Synchronization, 4)
-//			val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
+			val classMapMax = new HashMap<Class, Integer>
+			classMapMax.put(Region, 5)
+			classMapMax.put(Transition, 2)
+			val typeMapMax = GeneralTest.getTypeMap(classMapMax, metamodel, ecore2Logic, modelGenerationProblem.trace)
 				// Define Config File		
 				val size = i
 				val inc = INC
@@ -126,18 +128,18 @@ class YakinduTest {
 					it.documentationLevel = DocumentationLevel::FULL
 					it.iteration = iter
 					it.runtimeLimit = 60
-					it.typeScopes.maxNewElements = size
-					it.typeScopes.minNewElements = size - 5
-
-//			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
-//			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
+					it.typeScopes.maxNewElements = -1
+					it.typeScopes.minNewElements = size
+					it.genModel = false
+			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
+			if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
 					it.contCycleLevel = 5
 					it.uniquenessDuplicates = false
 				]
 
 				solution = reasoner.solve(problem, vampireConfig, workspace)
 //				print((solution as ModelResult).representation.get(0))
-				val soln = ((solution as ModelResult).representation.get(0) as VampireModel)
+//				val soln = ((solution as ModelResult).representation.get(0) as VampireModel)
 //				println(soln.confirmations)
 //				println((solution as ModelResult).representation)
 //				modelFound = !soln.confirmations.filter [
