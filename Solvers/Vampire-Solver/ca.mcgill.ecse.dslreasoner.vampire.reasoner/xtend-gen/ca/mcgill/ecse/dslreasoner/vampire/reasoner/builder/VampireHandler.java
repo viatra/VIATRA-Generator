@@ -41,7 +41,7 @@ public class VampireHandler {
       long startTime = (-((long) 1));
       long solverTime = (-((long) 1));
       Process p = null;
-      boolean _equals = Objects.equal(configuration.solver, BackendSolver.VAMP);
+      boolean _equals = Objects.equal(configuration.solver, BackendSolver.VAMPIRE);
       if (_equals) {
         String OPTION = " --mode casc_sat ";
         if ((configuration.runtimeLimit != (-1))) {

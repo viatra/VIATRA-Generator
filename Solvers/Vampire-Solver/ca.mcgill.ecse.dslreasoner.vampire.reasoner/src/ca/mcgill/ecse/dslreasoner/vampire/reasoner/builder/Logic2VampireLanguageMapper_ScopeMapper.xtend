@@ -40,7 +40,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 		// Equals the number of elements in te initial model
 		var elemsInIM = trace.definedElement2String.size
 		val ABSOLUTE_MIN = 0
-		val ABSOLUTE_MAX = -1-elemsInIM
+		val ABSOLUTE_MAX = Integer.MAX_VALUE-elemsInIM
 //		var elemsInIM = 0
 //		
 //		for(t : types.filter(TypeDefinition).filter[!isIsAbstract]) {
@@ -60,7 +60,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Minimum_General
 		if (GLOBAL_MIN != ABSOLUTE_MIN) {
-			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, !consistant)
+			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, consistant)//may make not consistent here 
 			if (consistant) {
 				for (i : trace.uniqueInstances) {
 					localInstances.add(support.duplicate(i))
@@ -73,7 +73,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Maximum_General
 		if (GLOBAL_MAX != ABSOLUTE_MAX) {
-			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, consistant)
+			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, !consistant)
 			if (consistant) {
 				makeFofFormula(trace.uniqueInstances as ArrayList, trace, false, null)
 			} else {

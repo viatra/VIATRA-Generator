@@ -26,65 +26,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
 
 class GeneralTest {
-	val static USER_AGENT = "Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
-
-	def static void main(String[] args) {
-		val form = makeForm("fof (a, axiom, ! [A] : a(A) ) .", "Z3---4.4.1", "run_z3_tptp -proof -model -t:20 -file:%s", 300)
-		
-//		val x =sendPost("------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"ProblemSource\"\r\n\r\nFORMULAE\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"FORMULAEProblem\"\r\n\r\n\r\ntester
-//
-//\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"QuietFlag\"\r\n\r\n-q3\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"SubmitButton\"\r\n\r\nRunSelectedSystems\r\n
-//
-//------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___Paradox---4.0\"\r\n\r\nParadox---4.0\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"Command___Paradox---4.0\"\r\n\r\nparadox --no-progress --time %d --tstp --model %s\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA--")
-		val x = sendPost(form)
-		print(x.toString)
-	}
-	
-	def static makeForm(String formula, String solver, String cmd, int time) {
-		return header + addSpec(formula) + addOptions + addSolver(solver, cmd.replace("%d", time.toString)) + addEnd
-	}
-
-	def static sendPost(String formData ) throws Exception {
-
-		val OkHttpClient client = new OkHttpClient()
-
-		val MediaType mediaType = MediaType.parse(
-			"multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA")
-		val RequestBody body = RequestBody.create(mediaType, formData)		
-		val Request request = new Request.Builder().url("http://www.tptp.org/cgi-bin/SystemOnTPTPFormReply").post(body).
-			addHeader("Connection", "keep-alive").addHeader("Cache-Control", "max-age=0").addHeader("Origin",
-				"http://tptp.cs.miami.edu").addHeader("Upgrade-Insecure-Requests", "1").addHeader("Content-Type",
-				"multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA").addHeader("User-Agent",
-				"Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36").
-			addHeader("Accept",
-				"text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*q=0.8,application/signed-exchangev=b3").
-			addHeader("Referer", "http://tptp.cs.miami.edu/cgi-bin/SystemOnTPTP").addHeader("Accept-Encoding",
-				"gzip, deflate").addHeader("Accept-Language", "en-US,enq=0.9").addHeader("Postman-Token",
-				"639ff59f-ab5c-4d9f-9da5-ac8bb64be466,ecb71882-f4d8-4126-8a97-4edb07d4055c").addHeader("Host",
-				"www.tptp.org").addHeader("Content-Length", "44667").addHeader("cache-control", "no-cache").build()
-
-		val Response response = client.newCall(request).execute()
-//		TimeUnit.SECONDS.sleep(5)
-//		return newArrayList( response.body.string.split("\n"))
-return response.body.string
-
-	// case 1: 
-	}
-	def static getHeader() {
-		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"ProblemSource\"\r\n\r\nFORMULAE\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"FORMULAEProblem\"\r\n\r\n\r\n"
-	}
-	def static addSpec(String spec) {
-		return spec.replace("\n", "\r\n")
-	}
-	def static addOptions() {
-		return "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"QuietFlag\"\r\n\r\n-q3\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"SubmitButton\"\r\n\r\nRunSelectedSystems\r\n"
-	}
-	def static addSolver(String ID, String cmd) {
-		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___" + ID + "\"\r\n\r\n" + ID + "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"Command___" + ID + "\"\r\n\r\n" + cmd + "\r\n"
-	}
-	def static addEnd() {
-		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA--"
-	}
 
 	def static Map<Type, Integer> getTypeMap(Map<Class, Integer> classMap, EcoreMetamodelDescriptor metamodel,
 		Ecore2Logic e2l, Ecore2Logic_Trace trace) {

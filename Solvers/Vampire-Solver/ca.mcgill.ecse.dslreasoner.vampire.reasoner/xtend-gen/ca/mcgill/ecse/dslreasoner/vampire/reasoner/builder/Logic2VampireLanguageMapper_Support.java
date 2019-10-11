@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder;
 
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.BackendSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Logic2VampireLanguageMapperTrace;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSAnd;
@@ -29,6 +30,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -420,5 +427,86 @@ public class Logic2VampireLanguageMapper_Support {
       it.putAll(map2);
     };
     return ObjectExtensions.<HashMap<Variable, VLSVariable>>operator_doubleArrow(_hashMap, _function);
+  }
+  
+  public String makeForm(final String formula, final BackendSolver solver, final int time) {
+    String _header = this.getHeader();
+    String _plus = (_header + formula);
+    String _addOptions = this.addOptions();
+    String _plus_1 = (_plus + _addOptions);
+    String _addSolver = this.addSolver(solver, time);
+    String _plus_2 = (_plus_1 + _addSolver);
+    String _addEnd = this.addEnd();
+    return (_plus_2 + _addEnd);
+  }
+  
+  public ArrayList<String> getSolverSpecs(final BackendSolver solver) {
+    if (solver != null) {
+      switch (solver) {
+        case CVC4:
+          return CollectionLiterals.<String>newArrayList("CVC4---SAT-1.7", "do_CVC4 %s %d SAT");
+        case DARWINFM:
+          return CollectionLiterals.<String>newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s");
+        case EDARWIN:
+          return CollectionLiterals.<String>newArrayList("E-Darwin---1.5", "e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s");
+        case GEOIII:
+          return CollectionLiterals.<String>newArrayList("Geo-III---2018C", "geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s");
+        case IPROVER:
+          return CollectionLiterals.<String>newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s");
+        case PARADOX:
+          return CollectionLiterals.<String>newArrayList("Paradox---4.0", "paradox --no-progress --time %d --tstp --model %s");
+        case VAMPIRE:
+          return CollectionLiterals.<String>newArrayList("Vampire---SAT-4.4", "vampire --mode casc_sat -t %d %s");
+        case Z3:
+          return CollectionLiterals.<String>newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:20 -file:%s");
+        default:
+          break;
+      }
+    }
+    return null;
+  }
+  
+  public String getHeader() {
+    return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"ProblemSource\"\r\n\r\nFORMULAE\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"FORMULAEProblem\"\r\n\r\n\r\n";
+  }
+  
+  public String addSpec(final String spec) {
+    return spec.replace("\n", "\\r\\n");
+  }
+  
+  public String addOptions() {
+    return "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"QuietFlag\"\r\n\r\n-q3\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"SubmitButton\"\r\n\r\nRunSelectedSystems\r\n";
+  }
+  
+  public String addSolver(final BackendSolver solver, final int time) {
+    final ArrayList<String> solverSpecs = this.getSolverSpecs(solver);
+    final String ID = solverSpecs.get(0);
+    final String cmd = solverSpecs.get(1);
+    String _replace = cmd.replace("%d", Integer.valueOf(time).toString());
+    String _plus = ((((((("------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___" + ID) + 
+      "\"\r\n\r\n") + ID) + 
+      "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"Command___") + ID) + 
+      "\"\r\n\r\n") + _replace);
+    return (_plus + "\r\n");
+  }
+  
+  public String addEnd() {
+    return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA--";
+  }
+  
+  public ArrayList<String> sendPost(final String formData) throws Exception {
+    final OkHttpClient client = new OkHttpClient.Builder().connectTimeout(350, TimeUnit.SECONDS).readTimeout(350, TimeUnit.SECONDS).build();
+    final MediaType mediaType = MediaType.parse("multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA");
+    final RequestBody body = RequestBody.create(mediaType, formData);
+    final Request request = new Request.Builder().url("http://www.tptp.org/cgi-bin/SystemOnTPTPFormReply").post(body).addHeader("Connection", "keep-alive").addHeader("Cache-Control", "max-age=0").addHeader("Origin", 
+      "http://tptp.cs.miami.edu").addHeader("Upgrade-Insecure-Requests", "1").addHeader("Content-Type", 
+      "multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA").addHeader("User-Agent", 
+      "Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36").addHeader("Accept", 
+      "text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*q=0.8,application/signed-exchangev=b3").addHeader("Referer", "http://tptp.cs.miami.edu/cgi-bin/SystemOnTPTP").addHeader("Accept-Encoding", 
+      "gzip, deflate").addHeader("Accept-Language", "en-US,enq=0.9").addHeader("Postman-Token", 
+      "639ff59f-ab5c-4d9f-9da5-ac8bb64be466,ecb71882-f4d8-4126-8a97-4edb07d4055c").addHeader("Host", 
+      "www.tptp.org").addHeader("Content-Length", "44667").addHeader("cache-control", "no-cache").build();
+    final Response response = client.newCall(request).execute();
+    return CollectionLiterals.<String>newArrayList(response.body().string().split("\n"));
   }
 }
