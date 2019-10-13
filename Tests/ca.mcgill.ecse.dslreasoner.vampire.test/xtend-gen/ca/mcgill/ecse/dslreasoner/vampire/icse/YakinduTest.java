@@ -85,11 +85,11 @@ public class YakinduTest {
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "yakindu/Yakindu.xmi");
       final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, Patterns.instance());
       InputOutput.<String>println("DSL loaded");
-      int SZ_TOP = 30;
-      int SZ_BOT = 5;
-      int INC = 5;
-      int REPS = 1;
-      final int RUNTIME = 20;
+      int SZ_TOP = 150;
+      int SZ_BOT = 150;
+      int INC = 10;
+      int REPS = 10;
+      final int RUNTIME = 300;
       final int EXACT = (-1);
       if ((EXACT != (-1))) {
         SZ_TOP = EXACT;
@@ -98,7 +98,7 @@ public class YakinduTest {
         REPS = 10;
       }
       final ArrayList<BackendSolver> BACKENDSOLVERS = CollectionLiterals.<BackendSolver>newArrayList(
-        BackendSolver.IPROVER);
+        BackendSolver.Z3);
       String str = "";
       for (final BackendSolver solver : BACKENDSOLVERS) {
         String _str = str;
@@ -218,7 +218,7 @@ public class YakinduTest {
                   String _plus_20 = (Double.valueOf(satTime) + ",");
                   writer.append(_plus_20);
                   writer.append((modOut + ","));
-                  String _plus_21 = (Double.valueOf(modTime) + ",");
+                  String _plus_21 = (Double.valueOf(modTime) + "");
                   writer.append(_plus_21);
                   writer.append("\n");
                 }

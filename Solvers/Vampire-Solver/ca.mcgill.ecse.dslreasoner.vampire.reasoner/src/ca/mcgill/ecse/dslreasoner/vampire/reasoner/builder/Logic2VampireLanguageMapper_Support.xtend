@@ -298,14 +298,24 @@ class Logic2VampireLanguageMapper_Support {
 
 	def getSolverSpecs(BackendSolver solver) {
 		switch (solver) {
-			case BackendSolver::CVC4: return newArrayList("CVC4---SAT-1.7", "do_CVC4 %s %d SAT")
-			case BackendSolver::DARWINFM: return newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s")
-			case BackendSolver::EDARWIN: return newArrayList("E-Darwin---1.5", "e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s")
-			case BackendSolver::GEOIII: return newArrayList("Geo-III---2018C", "geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s")
-			case BackendSolver::IPROVER: return newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s")
-			case BackendSolver::PARADOX: return newArrayList("Paradox---4.0", "paradox --no-progress --time %d --tstp --model %s")
-			case BackendSolver::VAMPIRE: return newArrayList("Vampire---SAT-4.4", "vampire --mode casc_sat -t %d %s")
-			case BackendSolver::Z3: return newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:20 -file:%s")
+			case BackendSolver::CVC4:
+				return newArrayList("CVC4---SAT-1.7", "do_CVC4 %s %d SAT")
+			case BackendSolver::DARWINFM:
+				return newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s")
+			case BackendSolver::EDARWIN:
+				return newArrayList("E-Darwin---1.5",
+					"e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s")
+			case BackendSolver::GEOIII:
+				return newArrayList("Geo-III---2018C",
+					"geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s")
+			case BackendSolver::IPROVER:
+				return newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s")
+			case BackendSolver::PARADOX:
+				return newArrayList("Paradox---4.0", "paradox --no-progress --time %d --tstp --model %s")
+			case BackendSolver::VAMPIRE:
+				return newArrayList("Vampire---SAT-4.4", "vampire --mode casc_sat -t %d %s")
+			case BackendSolver::Z3:
+				return newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:%d -file:%s")
 		}
 	}
 
@@ -326,10 +336,12 @@ class Logic2VampireLanguageMapper_Support {
 		val ID = solverSpecs.get(0)
 		val cmd = solverSpecs.get(1)
 
-		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___" + ID +
+		return "------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"TimeLimit___" + ID +
+			"\"\r\n\r\n" + time +
+			"\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___" + ID +
 			"\"\r\n\r\n" + ID +
 			"\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"Command___" + ID +
-			"\"\r\n\r\n" + cmd.replace("%d", time.toString) + "\r\n"
+			"\"\r\n\r\n" + cmd + "\r\n"
 	}
 
 	def addEnd() {
@@ -338,7 +350,8 @@ class Logic2VampireLanguageMapper_Support {
 
 	def sendPost(String formData) throws Exception {
 
-		val OkHttpClient client = new OkHttpClient.Builder().connectTimeout(350, TimeUnit.SECONDS).readTimeout(350, TimeUnit.SECONDS).build()
+		val OkHttpClient client = new OkHttpClient.Builder().connectTimeout(600, TimeUnit.SECONDS).readTimeout(350,
+			TimeUnit.SECONDS).build()
 
 		val MediaType mediaType = MediaType.parse("multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA")
 		val RequestBody body = RequestBody.create(mediaType, formData)
