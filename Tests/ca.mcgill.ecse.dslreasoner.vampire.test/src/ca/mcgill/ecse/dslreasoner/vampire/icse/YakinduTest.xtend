@@ -59,12 +59,12 @@ class YakinduTest {
 //		val queries = null
 		println("DSL loaded")
 
-		var SZ_TOP = 30
-		var SZ_BOT = 5
-		var INC = 5
-		var REPS = 1
+		var SZ_TOP = 150
+		var SZ_BOT = 150
+		var INC = 10
+		var REPS = 10
 
-		val RUNTIME = 20
+		val RUNTIME = 300
 
 		val EXACT = -1
 		if (EXACT != -1) {
@@ -82,13 +82,13 @@ class YakinduTest {
 //			,			
 //			BackendSolver::GEOIII
 //			, 
-			BackendSolver::IPROVER
+//			BackendSolver::IPROVER
 //			, 
 //			BackendSolver::PARADOX
 //			, 
 //			BackendSolver::VAMPIRE
 //			,
-//			BackendSolver::Z3
+			BackendSolver::Z3
 			)
 		
 
@@ -197,7 +197,7 @@ class YakinduTest {
 					writer.append(satOut + ",")
 					writer.append(satTime + ",")
 					writer.append(modOut + ",")
-					writer.append(modTime + ",")
+					writer.append(modTime + "")
 					writer.append("\n")
 
 //				print("(" + tTime + "/" + sTime + "s)..")

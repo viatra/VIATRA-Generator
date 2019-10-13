@@ -448,9 +448,11 @@ public class Logic2VampireLanguageMapper_Support {
         case DARWINFM:
           return CollectionLiterals.<String>newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s");
         case EDARWIN:
-          return CollectionLiterals.<String>newArrayList("E-Darwin---1.5", "e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s");
+          return CollectionLiterals.<String>newArrayList("E-Darwin---1.5", 
+            "e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s");
         case GEOIII:
-          return CollectionLiterals.<String>newArrayList("Geo-III---2018C", "geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s");
+          return CollectionLiterals.<String>newArrayList("Geo-III---2018C", 
+            "geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s");
         case IPROVER:
           return CollectionLiterals.<String>newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s");
         case PARADOX:
@@ -458,7 +460,7 @@ public class Logic2VampireLanguageMapper_Support {
         case VAMPIRE:
           return CollectionLiterals.<String>newArrayList("Vampire---SAT-4.4", "vampire --mode casc_sat -t %d %s");
         case Z3:
-          return CollectionLiterals.<String>newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:20 -file:%s");
+          return CollectionLiterals.<String>newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:%d -file:%s");
         default:
           break;
       }
@@ -482,12 +484,12 @@ public class Logic2VampireLanguageMapper_Support {
     final ArrayList<String> solverSpecs = this.getSolverSpecs(solver);
     final String ID = solverSpecs.get(0);
     final String cmd = solverSpecs.get(1);
-    String _replace = cmd.replace("%d", Integer.valueOf(time).toString());
-    String _plus = ((((((("------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___" + ID) + 
+    return (((((((((((("------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"TimeLimit___" + ID) + 
+      "\"\r\n\r\n") + Integer.valueOf(time)) + 
+      "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"System___") + ID) + 
       "\"\r\n\r\n") + ID) + 
       "\r\n------WebKitFormBoundaryBdFiQ5zEvTbBl4DA\r\nContent-Disposition: form-data; name=\"Command___") + ID) + 
-      "\"\r\n\r\n") + _replace);
-    return (_plus + "\r\n");
+      "\"\r\n\r\n") + cmd) + "\r\n");
   }
   
   public String addEnd() {
@@ -495,7 +497,8 @@ public class Logic2VampireLanguageMapper_Support {
   }
   
   public ArrayList<String> sendPost(final String formData) throws Exception {
-    final OkHttpClient client = new OkHttpClient.Builder().connectTimeout(350, TimeUnit.SECONDS).readTimeout(350, TimeUnit.SECONDS).build();
+    final OkHttpClient client = new OkHttpClient.Builder().connectTimeout(600, TimeUnit.SECONDS).readTimeout(350, 
+      TimeUnit.SECONDS).build();
     final MediaType mediaType = MediaType.parse("multipart/form-data boundary=----WebKitFormBoundaryBdFiQ5zEvTbBl4DA");
     final RequestBody body = RequestBody.create(mediaType, formData);
     final Request request = new Request.Builder().url("http://www.tptp.org/cgi-bin/SystemOnTPTPFormReply").post(body).addHeader("Connection", "keep-alive").addHeader("Cache-Control", "max-age=0").addHeader("Origin", 

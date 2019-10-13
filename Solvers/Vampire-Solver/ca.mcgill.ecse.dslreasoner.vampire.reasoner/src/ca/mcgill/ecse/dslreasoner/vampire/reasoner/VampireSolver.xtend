@@ -90,6 +90,7 @@ class VampireSolver extends LogicReasoner {
 					ind = 0
 					while (!responseFound) {
 						var line = response.get(ind)
+//						println(line)
 						if (line.length >= 5 && line.substring(0, 5) == "ERROR") {
 							done = false
 							responseFound = true
