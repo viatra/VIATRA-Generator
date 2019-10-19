@@ -133,11 +133,11 @@ class NeighbourhoodBasedPartialInterpretationStateCoder implements IStateCoder{
 	   	
         while(index < size) {
         	res.add(getCode(match.get(index)))
-        	index++
         	for(var i = 0; i<index; i++) {
         		val number = if(match.get(index) === match.get(i)){1}else{0}
         		equivalenceHash = prime * equivalenceHash + number
         	}
+        	index++
         }
         
         statecoderRuntime += (System.nanoTime - startTime)
