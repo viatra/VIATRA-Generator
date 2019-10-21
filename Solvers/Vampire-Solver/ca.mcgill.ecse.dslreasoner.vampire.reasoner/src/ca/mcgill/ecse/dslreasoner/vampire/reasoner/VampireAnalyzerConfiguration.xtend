@@ -24,7 +24,8 @@ enum BackendSolver {
 	IPROVER,
 	PARADOX,
 	VAMPIRE,
-	Z3
+	Z3,
+	LOCVAMP
 	//add needed things
 }
 

@@ -54,7 +54,7 @@ class VampireHandler {
 		val TEMPNAME = "TEMP.tptp"
 //		val SOLNNAME = "solution" + configuration.solver.toString + "_" + configuration.typeScopes.maxNewElements +
 //			"_" + configuration.iteration + ".tptp"
-		val SOLNNAME = "solution" + "_" + configuration.typeScopes.maxNewElements + "_" + configuration.iteration +
+		val SOLNNAME = "solution" + "_" + configuration.typeScopes.minNewElements + "_" + configuration.iteration +
 			".tptp"
 		val PATH = "C:/cygwin64/bin"
 
@@ -70,7 +70,7 @@ class VampireHandler {
 		var long startTime = -1 as long
 		var long solverTime = -1 as long
 		var Process p = null
-		if (configuration.solver == BackendSolver::VAMPIRE) {
+		if (configuration.solver == BackendSolver::LOCVAMP) {
 
 			var OPTION = " --mode casc_sat "
 			if (configuration.runtimeLimit != -1) {

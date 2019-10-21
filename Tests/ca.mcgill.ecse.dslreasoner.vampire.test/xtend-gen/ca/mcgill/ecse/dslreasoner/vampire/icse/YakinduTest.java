@@ -19,7 +19,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.RealStatisticEntry;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.StatisticEntry;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.StringStatisticEntry;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
@@ -85,11 +84,11 @@ public class YakinduTest {
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "yakindu/Yakindu.xmi");
       final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, Patterns.instance());
       InputOutput.<String>println("DSL loaded");
-      int SZ_TOP = 150;
-      int SZ_BOT = 150;
-      int INC = 10;
-      int REPS = 10;
-      final int RUNTIME = 300;
+      int SZ_TOP = 25;
+      int SZ_BOT = 5;
+      int INC = 5;
+      int REPS = 5;
+      final int RUNTIME = 60;
       final int EXACT = (-1);
       if ((EXACT != (-1))) {
         SZ_TOP = EXACT;
@@ -98,7 +97,7 @@ public class YakinduTest {
         REPS = 10;
       }
       final ArrayList<BackendSolver> BACKENDSOLVERS = CollectionLiterals.<BackendSolver>newArrayList(
-        BackendSolver.Z3);
+        BackendSolver.LOCVAMP);
       String str = "";
       for (final BackendSolver solver : BACKENDSOLVERS) {
         String _str = str;
@@ -174,9 +173,12 @@ public class YakinduTest {
                     it.runtimeLimit = RUNTIME;
                     it.typeScopes.minNewElements = size;
                     it.genModel = true;
-                    it.server = true;
-                    it.solver = BESOLVER;
-                    it.contCycleLevel = 5;
+                    it.server = false;
+                    if (it.server) {
+                      it.solver = BESOLVER;
+                    } else {
+                      it.solver = BackendSolver.LOCVAMP;
+                    }
                     it.uniquenessDuplicates = false;
                   };
                   final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
@@ -201,7 +203,7 @@ public class YakinduTest {
                     return Boolean.valueOf(Objects.equal(_name_2, "satTime"));
                   };
                   StatisticEntry _get_1 = ((StatisticEntry[])Conversions.unwrapArray(IterableExtensions.<StatisticEntry>filter(solution.getStatistics().getEntries(), _function_2), StatisticEntry.class))[0];
-                  final double satTime = ((RealStatisticEntry) _get_1).getValue();
+                  final String satTime = ((StringStatisticEntry) _get_1).getValue();
                   final Function1<StatisticEntry, Boolean> _function_3 = (StatisticEntry it) -> {
                     String _name_2 = it.getName();
                     return Boolean.valueOf(Objects.equal(_name_2, "modOut"));
@@ -213,13 +215,11 @@ public class YakinduTest {
                     return Boolean.valueOf(Objects.equal(_name_2, "modTime"));
                   };
                   StatisticEntry _get_3 = ((StatisticEntry[])Conversions.unwrapArray(IterableExtensions.<StatisticEntry>filter(solution.getStatistics().getEntries(), _function_4), StatisticEntry.class))[0];
-                  final double modTime = ((RealStatisticEntry) _get_3).getValue();
+                  final String modTime = ((StringStatisticEntry) _get_3).getValue();
                   writer.append((satOut + ","));
-                  String _plus_20 = (Double.valueOf(satTime) + ",");
-                  writer.append(_plus_20);
+                  writer.append((satTime + ","));
                   writer.append((modOut + ","));
-                  String _plus_21 = (Double.valueOf(modTime) + "");
-                  writer.append(_plus_21);
+                  writer.append((modTime + ""));
                   writer.append("\n");
                 }
               }

@@ -20,6 +20,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl
 
 class VampireSolver extends LogicReasoner {
 
@@ -128,17 +129,17 @@ class VampireSolver extends LogicReasoner {
 							it.name = "satOut"
 							it.value = satOut
 						]
-						it.entries += createRealStatisticEntry => [
+						it.entries += createStringStatisticEntry => [
 							it.name = "satTime"
-							it.value = Double.parseDouble(satTime)
+							it.value = satTime
 						]
 						it.entries += createStringStatisticEntry => [
 							it.name = "modOut"
 							it.value = modOut
 						]
-						it.entries += createRealStatisticEntry => [
+						it.entries += createStringStatisticEntry => [
 							it.name = "modTime"
-							it.value = Double.parseDouble(modTime)
+							it.value = modTime
 						]
 
 					]
@@ -148,6 +149,7 @@ class VampireSolver extends LogicReasoner {
 			} else {
 
 				// Start: Solving .tptp problem
+				println()
 				val MonitoredVampireSolution vampSol = handler.callSolver(vampireProblem, workspace, vampireConfig)
 				// Finish: Solving .tptp problem
 				// Start: Vampire -> Logic mapping
@@ -159,7 +161,44 @@ class VampireSolver extends LogicReasoner {
 				val backTransformationTime = System.currentTimeMillis - backTransformationStart
 				// Finish: Vampire -> Logic Mapping
 //		print(vampSol.generatedModel.tfformulas.size)
-				return logicResult // currently only a ModelResult
+
+//				return logicResult // currently only a ModelResult
+
+				var model = vampSol.generatedModel.confirmations.filter[class == VLSFiniteModelImpl]
+//				
+				var modOut = "no"
+				if(model.length >0){
+					modOut = "FiniteModel"
+				}
+				
+				val realModOut=modOut
+ 
+				
+				return createModelResult => [
+					it.problem = null
+					it.representation += createVampireModel => []
+					it.trace = trace
+					it.statistics = createStatistics => [
+						it.transformationTime = transformationTime as int
+						it.entries += createStringStatisticEntry => [
+							it.name = "satOut"
+							it.value = "-"
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "satTime"
+							it.value = "-"
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "modOut"
+							it.value = realModOut
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "modTime"
+							it.value = (vampSol.solverTime/1000.0).toString
+						]
+
+					]
+				]
 			}
 		}
 		return backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution,

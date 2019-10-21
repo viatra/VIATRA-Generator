@@ -59,12 +59,12 @@ class YakinduTest {
 //		val queries = null
 		println("DSL loaded")
 
-		var SZ_TOP = 150
-		var SZ_BOT = 150
-		var INC = 10
-		var REPS = 10
+		var SZ_TOP =  25
+		var SZ_BOT = 5
+		var INC = 5
+		var REPS = 5
 
-		val RUNTIME = 300
+		val RUNTIME = 60
 
 		val EXACT = -1
 		if (EXACT != -1) {
@@ -88,7 +88,9 @@ class YakinduTest {
 //			, 
 //			BackendSolver::VAMPIRE
 //			,
-			BackendSolver::Z3
+//			BackendSolver::Z3
+//			,
+			BackendSolver::LOCVAMP
 			)
 		
 
@@ -163,12 +165,17 @@ class YakinduTest {
 						it.typeScopes.minNewElements = size
 
 						it.genModel = true
-						it.server = true
-						it.solver = BESOLVER
+						it.server = false
+						if(it.server){
+							it.solver = BESOLVER
+						} else{
+							it.solver = BackendSolver::LOCVAMP
+						}
+						
 
 //					if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 //					if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
-						it.contCycleLevel = 5
+//						it.contCycleLevel = 5
 						it.uniquenessDuplicates = false
 					]
 
@@ -187,11 +194,11 @@ class YakinduTest {
 
 					val satOut = (solution.statistics.entries.filter[name == "satOut"].get(0) as StringStatisticEntry).
 						value
-					val satTime = (solution.statistics.entries.filter[name == "satTime"].get(0) as RealStatisticEntry).
+					val satTime = (solution.statistics.entries.filter[name == "satTime"].get(0) as StringStatisticEntry).
 						value
 					val modOut = (solution.statistics.entries.filter[name == "modOut"].get(0) as StringStatisticEntry).
 						value
-					val modTime = (solution.statistics.entries.filter[name == "modTime"].get(0) as RealStatisticEntry).
+					val modTime = (solution.statistics.entries.filter[name == "modTime"].get(0) as StringStatisticEntry).
 						value
 
 					writer.append(satOut + ",")
