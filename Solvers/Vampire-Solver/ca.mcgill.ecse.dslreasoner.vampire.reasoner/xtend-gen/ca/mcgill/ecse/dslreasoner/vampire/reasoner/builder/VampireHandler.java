@@ -30,7 +30,7 @@ public class VampireHandler {
       final String CVC4LOC = (CVC4DIR + CVC4NAME);
       final String CMD = "cmd /c ";
       final String TEMPNAME = "TEMP.tptp";
-      final String SOLNNAME = ((((("solution" + "_") + Integer.valueOf(configuration.typeScopes.maxNewElements)) + "_") + Integer.valueOf(configuration.iteration)) + 
+      final String SOLNNAME = ((((("solution" + "_") + Integer.valueOf(configuration.typeScopes.minNewElements)) + "_") + Integer.valueOf(configuration.iteration)) + 
         ".tptp");
       final String PATH = "C:/cygwin64/bin";
       final URI wsURI = workspace.getWorkspaceURI();
@@ -41,7 +41,7 @@ public class VampireHandler {
       long startTime = (-((long) 1));
       long solverTime = (-((long) 1));
       Process p = null;
-      boolean _equals = Objects.equal(configuration.solver, BackendSolver.VAMPIRE);
+      boolean _equals = Objects.equal(configuration.solver, BackendSolver.LOCVAMP);
       if (_equals) {
         String OPTION = " --mode casc_sat ";
         if ((configuration.runtimeLimit != (-1))) {

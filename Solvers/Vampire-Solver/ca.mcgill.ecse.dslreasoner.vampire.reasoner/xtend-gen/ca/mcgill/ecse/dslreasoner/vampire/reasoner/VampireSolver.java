@@ -10,9 +10,11 @@ import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.MonitoredVampireSolut
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.Vampire2LogicMapper;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireHandler;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.builder.VampireModelInterpretation;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSConfirmations;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguageFactory;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireLanguagePackage;
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
+import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VLSFiniteModelImpl;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation;
@@ -24,7 +26,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.RealStatisticEntry;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.StatisticEntry;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.Statistics;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.StringStatisticEntry;
@@ -34,10 +35,12 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -149,28 +152,28 @@ public class VampireSolver extends LogicReasoner {
               StringStatisticEntry _doubleArrow_1 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry, _function_3);
               _entries.add(_doubleArrow_1);
               EList<StatisticEntry> _entries_1 = it_1.getEntries();
-              RealStatisticEntry _createRealStatisticEntry = this.resultFactory.createRealStatisticEntry();
-              final Procedure1<RealStatisticEntry> _function_4 = (RealStatisticEntry it_2) -> {
+              StringStatisticEntry _createStringStatisticEntry_1 = this.resultFactory.createStringStatisticEntry();
+              final Procedure1<StringStatisticEntry> _function_4 = (StringStatisticEntry it_2) -> {
                 it_2.setName("satTime");
-                it_2.setValue(Double.parseDouble(satTime));
+                it_2.setValue(satTime);
               };
-              RealStatisticEntry _doubleArrow_2 = ObjectExtensions.<RealStatisticEntry>operator_doubleArrow(_createRealStatisticEntry, _function_4);
+              StringStatisticEntry _doubleArrow_2 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_1, _function_4);
               _entries_1.add(_doubleArrow_2);
               EList<StatisticEntry> _entries_2 = it_1.getEntries();
-              StringStatisticEntry _createStringStatisticEntry_1 = this.resultFactory.createStringStatisticEntry();
+              StringStatisticEntry _createStringStatisticEntry_2 = this.resultFactory.createStringStatisticEntry();
               final Procedure1<StringStatisticEntry> _function_5 = (StringStatisticEntry it_2) -> {
                 it_2.setName("modOut");
                 it_2.setValue(modOut);
               };
-              StringStatisticEntry _doubleArrow_3 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_1, _function_5);
+              StringStatisticEntry _doubleArrow_3 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_2, _function_5);
               _entries_2.add(_doubleArrow_3);
               EList<StatisticEntry> _entries_3 = it_1.getEntries();
-              RealStatisticEntry _createRealStatisticEntry_1 = this.resultFactory.createRealStatisticEntry();
-              final Procedure1<RealStatisticEntry> _function_6 = (RealStatisticEntry it_2) -> {
+              StringStatisticEntry _createStringStatisticEntry_3 = this.resultFactory.createStringStatisticEntry();
+              final Procedure1<StringStatisticEntry> _function_6 = (StringStatisticEntry it_2) -> {
                 it_2.setName("modTime");
-                it_2.setValue(Double.parseDouble(modTime));
+                it_2.setValue(modTime);
               };
-              RealStatisticEntry _doubleArrow_4 = ObjectExtensions.<RealStatisticEntry>operator_doubleArrow(_createRealStatisticEntry_1, _function_6);
+              StringStatisticEntry _doubleArrow_4 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_3, _function_6);
               _entries_3.add(_doubleArrow_4);
             };
             Statistics _doubleArrow_1 = ObjectExtensions.<Statistics>operator_doubleArrow(_createStatistics, _function_2);
@@ -178,13 +181,77 @@ public class VampireSolver extends LogicReasoner {
           };
           return ObjectExtensions.<ModelResult>operator_doubleArrow(_createModelResult, _function);
         } else {
+          InputOutput.println();
           final MonitoredVampireSolution vampSol = this.handler.callSolver(vampireProblem, workspace, vampireConfig);
           final long backTransformationStart = System.currentTimeMillis();
           final ModelResult logicResult = this.backwardMapper.transformOutput(problem, 
             vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime);
           long _currentTimeMillis_1 = System.currentTimeMillis();
           final long backTransformationTime = (_currentTimeMillis_1 - backTransformationStart);
-          return logicResult;
+          final Function1<VLSConfirmations, Boolean> _function_1 = (VLSConfirmations it) -> {
+            Class<? extends VLSConfirmations> _class = it.getClass();
+            return Boolean.valueOf(Objects.equal(_class, VLSFiniteModelImpl.class));
+          };
+          Iterable<VLSConfirmations> model = IterableExtensions.<VLSConfirmations>filter(vampSol.getGeneratedModel().getConfirmations(), _function_1);
+          String modOut_1 = "no";
+          final Iterable<VLSConfirmations> _converted_model = (Iterable<VLSConfirmations>)model;
+          int _length = ((Object[])Conversions.unwrapArray(_converted_model, Object.class)).length;
+          boolean _greaterThan = (_length > 0);
+          if (_greaterThan) {
+            modOut_1 = "FiniteModel";
+          }
+          final String realModOut = modOut_1;
+          ModelResult _createModelResult_1 = this.resultFactory.createModelResult();
+          final Procedure1<ModelResult> _function_2 = (ModelResult it) -> {
+            it.setProblem(null);
+            EList<Object> _representation = it.getRepresentation();
+            VampireModel _createVampireModel = this.factory.createVampireModel();
+            final Procedure1<VampireModel> _function_3 = (VampireModel it_1) -> {
+            };
+            VampireModel _doubleArrow = ObjectExtensions.<VampireModel>operator_doubleArrow(_createVampireModel, _function_3);
+            _representation.add(_doubleArrow);
+            it.setTrace(it.getTrace());
+            Statistics _createStatistics = this.resultFactory.createStatistics();
+            final Procedure1<Statistics> _function_4 = (Statistics it_1) -> {
+              it_1.setTransformationTime(((int) transformationTime));
+              EList<StatisticEntry> _entries = it_1.getEntries();
+              StringStatisticEntry _createStringStatisticEntry = this.resultFactory.createStringStatisticEntry();
+              final Procedure1<StringStatisticEntry> _function_5 = (StringStatisticEntry it_2) -> {
+                it_2.setName("satOut");
+                it_2.setValue("-");
+              };
+              StringStatisticEntry _doubleArrow_1 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry, _function_5);
+              _entries.add(_doubleArrow_1);
+              EList<StatisticEntry> _entries_1 = it_1.getEntries();
+              StringStatisticEntry _createStringStatisticEntry_1 = this.resultFactory.createStringStatisticEntry();
+              final Procedure1<StringStatisticEntry> _function_6 = (StringStatisticEntry it_2) -> {
+                it_2.setName("satTime");
+                it_2.setValue("-");
+              };
+              StringStatisticEntry _doubleArrow_2 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_1, _function_6);
+              _entries_1.add(_doubleArrow_2);
+              EList<StatisticEntry> _entries_2 = it_1.getEntries();
+              StringStatisticEntry _createStringStatisticEntry_2 = this.resultFactory.createStringStatisticEntry();
+              final Procedure1<StringStatisticEntry> _function_7 = (StringStatisticEntry it_2) -> {
+                it_2.setName("modOut");
+                it_2.setValue(realModOut);
+              };
+              StringStatisticEntry _doubleArrow_3 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_2, _function_7);
+              _entries_2.add(_doubleArrow_3);
+              EList<StatisticEntry> _entries_3 = it_1.getEntries();
+              StringStatisticEntry _createStringStatisticEntry_3 = this.resultFactory.createStringStatisticEntry();
+              final Procedure1<StringStatisticEntry> _function_8 = (StringStatisticEntry it_2) -> {
+                it_2.setName("modTime");
+                long _solverTime = vampSol.getSolverTime();
+                it_2.setValue(Double.valueOf((_solverTime / 1000.0)).toString());
+              };
+              StringStatisticEntry _doubleArrow_4 = ObjectExtensions.<StringStatisticEntry>operator_doubleArrow(_createStringStatisticEntry_3, _function_8);
+              _entries_3.add(_doubleArrow_4);
+            };
+            Statistics _doubleArrow_1 = ObjectExtensions.<Statistics>operator_doubleArrow(_createStatistics, _function_4);
+            it.setStatistics(_doubleArrow_1);
+          };
+          return ObjectExtensions.<ModelResult>operator_doubleArrow(_createModelResult_1, _function_2);
         }
       }
       MonitoredVampireSolution _monitoredVampireSolution = new MonitoredVampireSolution((-1), null);
