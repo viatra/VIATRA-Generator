@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension id="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.SignatureQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.SignatureQueries" id="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.SignatureQueries">
+      <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.directSubset"/>
+      <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.subset"/>
+    </group>
+  </extension>
+  <extension id="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.TypeQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.TypeQueries" id="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.TypeQueries">
+      <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.supertype"/>
+      <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.topmostCommonSubtypes"/>
+      <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.lowermostCommonSupertype"/>
+      <query-specification fqn="hu.bme.mit.inf.dlsreasoner.alloy.reasoner.queries.lowestCommonSupertypeOfAllOccuranceOfElement"/>
+    </group>
+  </extension>
+</plugin>

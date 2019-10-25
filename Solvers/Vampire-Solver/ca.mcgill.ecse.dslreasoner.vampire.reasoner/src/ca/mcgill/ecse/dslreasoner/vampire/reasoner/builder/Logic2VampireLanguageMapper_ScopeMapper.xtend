@@ -56,11 +56,11 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		val localInstances = newArrayList
 
-		val consistant = GLOBAL_MAX > GLOBAL_MIN
+		val consistant = GLOBAL_MAX >= GLOBAL_MIN
 
 		// Handling Minimum_General
 		if (GLOBAL_MIN != ABSOLUTE_MIN) {
-			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, consistant)//may make not consistent here 
+			getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, !consistant)//may make not consistent here 
 			if (consistant) {
 				for (i : trace.uniqueInstances) {
 					localInstances.add(support.duplicate(i))
@@ -73,7 +73,7 @@ class Logic2VampireLanguageMapper_ScopeMapper {
 
 		// Handling Maximum_General
 		if (GLOBAL_MAX != ABSOLUTE_MAX) {
-			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, !consistant)
+			getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, consistant)
 			if (consistant) {
 				makeFofFormula(trace.uniqueInstances as ArrayList, trace, false, null)
 			} else {

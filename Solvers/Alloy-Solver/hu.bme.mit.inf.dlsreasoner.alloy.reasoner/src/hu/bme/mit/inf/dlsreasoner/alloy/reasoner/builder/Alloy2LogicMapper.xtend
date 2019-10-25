@@ -9,15 +9,15 @@ class Alloy2LogicMapper {
 	public def transformOutput(LogicProblem problem, int requiredNumberOfSolution, MonitoredAlloySolution monitoredAlloySolution, Logic2AlloyLanguageMapperTrace trace, long transformationTime) {
 		val models = monitoredAlloySolution.aswers.map[it.key].toList
 		
-		if(!monitoredAlloySolution.finishedBeforeTimeout) {
-			return createInsuficientResourcesResult => [
-				it.problem = problem
-				it.representation += models
-				it.trace = trace
-				it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
-			]
-		} else {
-			if(models.last.satisfiable || requiredNumberOfSolution == -1) {
+//		if(!monitoredAlloySolution.finishedBeforeTimeout) {
+//			return createInsuficientResourcesResult => [
+//				it.problem = problem
+//				it.representation += models
+//				it.trace = trace
+//				it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
+//			]
+//		} else {
+			if((!models.isEmpty && models.last.satisfiable) || requiredNumberOfSolution == -1) {
 				return createModelResult => [
 					it.problem = problem
 					it.representation += models
@@ -32,7 +32,7 @@ class Alloy2LogicMapper {
 					it.statistics = transformStatistics(monitoredAlloySolution,transformationTime)
 				]
 			}
-		}
+//		}
 	}
 	
 	def transformStatistics(MonitoredAlloySolution solution, long transformationTime) {

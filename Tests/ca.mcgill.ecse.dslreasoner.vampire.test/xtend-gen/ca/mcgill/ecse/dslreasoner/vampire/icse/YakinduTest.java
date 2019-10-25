@@ -84,11 +84,11 @@ public class YakinduTest {
       final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "yakindu/Yakindu.xmi");
       final ViatraQuerySetDescriptor queries = GeneralTest.loadQueries(metamodel, Patterns.instance());
       InputOutput.<String>println("DSL loaded");
-      int SZ_TOP = 25;
-      int SZ_BOT = 5;
-      int INC = 5;
-      int REPS = 5;
-      final int RUNTIME = 60;
+      int SZ_TOP = 120;
+      int SZ_BOT = 60;
+      int INC = 20;
+      int REPS = 25;
+      final int RUNTIME = 300;
       final int EXACT = (-1);
       if ((EXACT != (-1))) {
         SZ_TOP = EXACT;
@@ -104,22 +104,6 @@ public class YakinduTest {
         String _substring = solver.name().substring(0, 1);
         str = (_str + _substring);
       }
-      URI _workspaceURI = dataWorkspace.getWorkspaceURI();
-      String _plus_2 = (_workspaceURI + "//_stats");
-      String _plus_3 = (_plus_2 + formattedDate);
-      String _plus_4 = (_plus_3 + "-");
-      String _plus_5 = (_plus_4 + str);
-      String _plus_6 = (_plus_5 + Integer.valueOf(SZ_BOT));
-      String _plus_7 = (_plus_6 + "to");
-      String _plus_8 = (_plus_7 + Integer.valueOf(SZ_TOP));
-      String _plus_9 = (_plus_8 + "by");
-      String _plus_10 = (_plus_9 + Integer.valueOf(INC));
-      String _plus_11 = (_plus_10 + 
-        "x");
-      String _plus_12 = (_plus_11 + Integer.valueOf(REPS));
-      String _plus_13 = (_plus_12 + ".csv");
-      PrintWriter writer = new PrintWriter(_plus_13);
-      writer.append("solver,size,transTime,sat?,satTime,model?,modelTime\n");
       ArrayList<Object> solverTimes = CollectionLiterals.<Object>newArrayList();
       ArrayList<Object> transformationTimes = CollectionLiterals.<Object>newArrayList();
       LogicResult solution = null;
@@ -129,13 +113,23 @@ public class YakinduTest {
           boolean _while = (i <= SZ_TOP);
           while (_while) {
             {
+              URI _workspaceURI = dataWorkspace.getWorkspaceURI();
+              String _plus_2 = (_workspaceURI + "//_vampire");
+              String _plus_3 = (_plus_2 + Integer.valueOf(i));
+              String _plus_4 = (_plus_3 + "x");
+              String _plus_5 = (_plus_4 + Integer.valueOf(REPS));
+              String _plus_6 = (_plus_5 + "-");
+              String _plus_7 = (_plus_6 + formattedDate);
+              String _plus_8 = (_plus_7 + ".csv");
+              PrintWriter writer = new PrintWriter(_plus_8);
+              writer.append("solver,size,transTime,sat?,satTime,model?,modelTime\n");
               final int num = ((i - SZ_BOT) / INC);
               InputOutput.println();
               String _name = BESOLVER.name();
-              String _plus_14 = ("SOLVER: " + _name);
-              String _plus_15 = (_plus_14 + ", SIZE=");
-              String _plus_16 = (_plus_15 + Integer.valueOf(i));
-              InputOutput.<String>println(_plus_16);
+              String _plus_9 = ("SOLVER: " + _name);
+              String _plus_10 = (_plus_9 + ", SIZE=");
+              String _plus_11 = (_plus_10 + Integer.valueOf(i));
+              InputOutput.<String>println(_plus_11);
               InputOutput.println();
               solverTimes.clear();
               transformationTimes.clear();
@@ -171,6 +165,7 @@ public class YakinduTest {
                     it.documentationLevel = DocumentationLevel.FULL;
                     it.iteration = iter;
                     it.runtimeLimit = RUNTIME;
+                    it.typeScopes.maxNewElements = size;
                     it.typeScopes.minNewElements = size;
                     it.genModel = true;
                     it.server = false;
@@ -184,14 +179,14 @@ public class YakinduTest {
                   final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
                   solution = reasoner.solve(problem, vampireConfig, workspace);
                   String _name_1 = vampireConfig.solver.name();
-                  String _plus_17 = (_name_1 + ",");
-                  writer.append(_plus_17);
-                  String _plus_18 = (Integer.valueOf(size) + ",");
-                  writer.append(_plus_18);
+                  String _plus_12 = (_name_1 + ",");
+                  writer.append(_plus_12);
+                  String _plus_13 = (Integer.valueOf(size) + ",");
+                  writer.append(_plus_13);
                   int _transformationTime = solution.getStatistics().getTransformationTime();
                   double _divide = (_transformationTime / 1000.0);
-                  String _plus_19 = (Double.valueOf(_divide) + ",");
-                  writer.append(_plus_19);
+                  String _plus_14 = (Double.valueOf(_divide) + ",");
+                  writer.append(_plus_14);
                   final Function1<StatisticEntry, Boolean> _function_1 = (StatisticEntry it) -> {
                     String _name_2 = it.getName();
                     return Boolean.valueOf(Objects.equal(_name_2, "satOut"));
@@ -221,8 +216,15 @@ public class YakinduTest {
                   writer.append((modOut + ","));
                   writer.append((modTime + ""));
                   writer.append("\n");
+                  InputOutput.<String>println(((("->" + modOut) + " ... ") + modTime));
+                  final Runtime r = Runtime.getRuntime();
+                  r.gc();
+                  r.gc();
+                  r.gc();
+                  Thread.sleep(3000);
                 }
               }
+              writer.close();
             }
             int _i = i;
             i = (_i + INC);
@@ -230,7 +232,6 @@ public class YakinduTest {
           }
         }
       }
-      writer.close();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

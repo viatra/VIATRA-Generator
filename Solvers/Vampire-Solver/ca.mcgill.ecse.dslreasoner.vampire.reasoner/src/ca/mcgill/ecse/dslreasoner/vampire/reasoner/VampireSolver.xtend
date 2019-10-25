@@ -153,21 +153,21 @@ class VampireSolver extends LogicReasoner {
 				val MonitoredVampireSolution vampSol = handler.callSolver(vampireProblem, workspace, vampireConfig)
 				// Finish: Solving .tptp problem
 				// Start: Vampire -> Logic mapping
-				val backTransformationStart = System.currentTimeMillis
-				// Backwards Mapper
-				val logicResult = backwardMapper.transformOutput(problem,
-					vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime)
-
-				val backTransformationTime = System.currentTimeMillis - backTransformationStart
+//				val backTransformationStart = System.currentTimeMillis
+//				// Backwards Mapper
+//				val logicResult = backwardMapper.transformOutput(problem,
+//					vampireConfig.solutionScope.numberOfRequiredSolution, vampSol, forwardTrace, transformationTime)
+//
+//				val backTransformationTime = System.currentTimeMillis - backTransformationStart
 				// Finish: Vampire -> Logic Mapping
 //		print(vampSol.generatedModel.tfformulas.size)
 
 //				return logicResult // currently only a ModelResult
 
-				var model = vampSol.generatedModel.confirmations.filter[class == VLSFiniteModelImpl]
+//				var model = vampSol.generatedModel.confirmations.filter[class == VLSFiniteModelImpl]
 //				
 				var modOut = "no"
-				if(model.length >0){
+				if(vampSol.finiteModelGenerated){
 					modOut = "FiniteModel"
 				}
 				
@@ -201,8 +201,8 @@ class VampireSolver extends LogicReasoner {
 				]
 			}
 		}
-		return backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution,
-			new MonitoredVampireSolution(-1, null), forwardTrace, transformationTime)
+//		return backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution,
+//			new MonitoredVampireSolution(-1, null), forwardTrace, transformationTime)
 	}
 
 	def asConfig(LogicSolverConfiguration configuration) {

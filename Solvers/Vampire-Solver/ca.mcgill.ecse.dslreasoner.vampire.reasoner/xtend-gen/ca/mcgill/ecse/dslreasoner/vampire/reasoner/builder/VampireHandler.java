@@ -7,12 +7,9 @@ import ca.mcgill.ecse.dslreasoner.vampireLanguage.VampireModel;
 import com.google.common.base.Objects;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -67,18 +64,17 @@ public class VampireHandler {
         long _minus_1 = (_currentTimeMillis_1 - startTime);
         solverTime = _minus_1;
       }
-      InputStream _inputStream = p.getInputStream();
-      InputStreamReader _inputStreamReader = new InputStreamReader(_inputStream);
-      final BufferedReader reader = new BufferedReader(_inputStreamReader);
+      FileReader _fileReader = new FileReader(solnLoc);
+      final BufferedReader reader = new BufferedReader(_fileReader);
       final List<String> output = CollectionLiterals.<String>newArrayList();
       String line = "";
       while ((!Objects.equal((line = reader.readLine()), null))) {
-        output.add((line + "\n"));
+        boolean _equals_2 = Objects.equal(line, "Finite Model Found!");
+        if (_equals_2) {
+          return new MonitoredVampireSolution(solverTime, null, true);
+        }
       }
-      workspace.getFile(TEMPNAME).delete();
-      final EList<EObject> root = workspace.<VampireModel>readModel(VampireModel.class, SOLNNAME).eResource().getContents();
-      EObject _get = root.get(0);
-      return new MonitoredVampireSolution(solverTime, ((VampireModel) _get));
+      return new MonitoredVampireSolution(solverTime, null, false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -59,9 +59,9 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
     final int GLOBAL_MIN = (config.typeScopes.minNewElements - elemsInIM);
     final int GLOBAL_MAX = (config.typeScopes.maxNewElements - elemsInIM);
     final ArrayList<VLSConstant> localInstances = CollectionLiterals.<VLSConstant>newArrayList();
-    final boolean consistant = (GLOBAL_MAX > GLOBAL_MIN);
+    final boolean consistant = (GLOBAL_MAX >= GLOBAL_MIN);
     if ((GLOBAL_MIN != ABSOLUTE_MIN)) {
-      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, consistant);
+      this.getInstanceConstants(GLOBAL_MIN, 0, localInstances, trace, true, (!consistant));
       if (consistant) {
         for (final VLSConstant i : trace.uniqueInstances) {
           localInstances.add(this.support.duplicate(i));
@@ -72,7 +72,7 @@ public class Logic2VampireLanguageMapper_ScopeMapper {
       }
     }
     if ((GLOBAL_MAX != ABSOLUTE_MAX)) {
-      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, (!consistant));
+      this.getInstanceConstants(GLOBAL_MAX, 0, localInstances, trace, true, consistant);
       if (consistant) {
         this.makeFofFormula(((ArrayList) trace.uniqueInstances), trace, false, null);
       } else {

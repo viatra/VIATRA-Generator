@@ -1,0 +1,152 @@
+grammar hu.bme.mit.inf.dslreasoner.AlloyLanguage with org.eclipse.xtext.common.Terminals
+
+generate alloyLanguage "http://www.bme.hu/mit/inf/dslreasoner/AlloyLanguage"
+
+ALSDocument:
+	(	enumDeclarations += ALSEnumDeclaration |
+		signatureBodies += ALSSignatureBody |
+		functionDefinitions += ALSFunctionDefinition |
+		relationDefinitions += ALSRelationDefinition |
+		factDeclarations += ALSFactDeclaration)+
+	runCommand = ALSRunCommand
+;
+
+//////////////////////////////////
+// ALS terminals
+//////////////////////////////////
+
+terminal ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|"'"|'"'|'0'..'9')*;
+ALSID: ID;
+
+enum ALSMultiplicity: all | no | some | lone | one  | set;
+
+
+//////////////////////////////////
+// ALS types
+//////////////////////////////////
+
+ALSRelationDeclaration: ALSTypeDeclaration | ALSEnumLiteral | ALSFieldDeclaration | ALSVariableDeclaration;
+
+ALSTypeDeclaration:
+	ALSEnumDeclaration | ALSSignatureDeclaration
+;
+
+ALSEnumDeclaration:
+	'enum' name=ALSID '{'
+		literal+=ALSEnumLiteral ("," literal+=ALSEnumLiteral)*
+	'}';
+ALSEnumLiteral: name = ALSID;
+
+ALSSignatureDeclaration: name = ALSID;
+
+ALSSignatureBody:
+	((multiplicity = ALSMultiplicity?) & (abstract ?= 'abstract')?)
+	'sig'
+	declarations += ALSSignatureDeclaration (',' declarations += ALSSignatureDeclaration)*
+	(('extends' supertype = [ALSSignatureDeclaration])
+		|
+	 ('in' superset += [ALSSignatureDeclaration] ('+' superset += [ALSSignatureDeclaration])*) )?
+	'{' (fields+=ALSFieldDeclaration ("," fields+=ALSFieldDeclaration)*)? '}'
+;
+
+ALSFieldDeclaration:
+	name = ALSID ':' (multiplicity = ALSMultiplicity)? type = ALSTerm
+;
+
+ALSDefinition : ALSFunctionDefinition | ALSRelationDefinition;
+
+ALSFunctionDefinition:
+	"fun" name = ALSID "[" variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)* "]" ":" type = ALSTerm
+		"{" value = ALSTerm "}"
+;
+ALSRelationDefinition:
+	"pred" name = ALSID "[" variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)* "]"
+		"{" value = ALSTerm "}"
+;
+
+ALSFactDeclaration: {ALSFactDeclaration} 'fact' (name=ALSID)? '{' (term = ALSTerm) '}' ;
+
+//////////////////////////////////
+// ALS terms
+//////////////////////////////////
+ALSTerm: ALSQuantified;
+
+ALSQuantified returns ALSTerm: ({ALSQuantifiedEx} type = ALSMultiplicity 
+		(disj?='disj')? variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)*  '{' expression = ALSTerm '}') | ALSOr;
+
+ALSOr returns ALSTerm: ALSIff ({ALSOr.leftOperand = current} ( "||" | "or" ) rightOperand = ALSIff)?;
+ALSIff returns ALSTerm: ALSImpl ({ALSIff.leftOperand = current} ("<=>" | "iff") rightOperand = ALSImpl)?;
+ALSImpl returns ALSTerm: ALSAnd ({ALSImpl.leftOperand = current} ("=>" | "implies") rightOperand = ALSAnd ('else' elseOperand = ALSAnd)?)?;
+ALSAnd returns ALSTerm: ALSComparison ({ALSAnd.leftOperand = current} ( "&&" | "and" ) rightOperand = ALSComparison)?;
+
+ALSComparison returns ALSTerm:
+	ALSOverride
+	(({ALSEquals.leftOperand = current} "=" |
+	  {ALSNotEquals.leftOperand = current} "!=" |
+	  {ALSSubset.leftOperand = current} "in" | 
+	  {ALSLess.leftOperand = current} ">" |
+	  {ALSLeq.leftOperand = current} ">=" |
+	  {ALSMore.leftOperand = current} "<" |
+	  {ALSMeq.leftOperand = current} "<=")
+	 rightOperand = ALSOverride)?;
+
+ALSOverride returns ALSTerm: ALSRangeRestrictionRight ({ALSOverride.leftOperand = current} '++' rightOperand = ALSRangeRestrictionRight)?;
+
+ALSRangeRestrictionRight returns ALSTerm: ALSRangeRestrictionLeft ({ALSRangeRestrictionRight.relation = current} ':>' filter = ALSRangeRestrictionLeft)?;
+ALSRangeRestrictionLeft returns ALSTerm:  ALSJoin ({ALSRangeRestrictionLeft.filter = current} '<:' relation = ALSJoin)?;
+ALSJoin returns ALSTerm: ALSMinus ({ALSJoin.leftOperand = current} '.' rightOperand = ALSMinus )*;
+
+ALSMinus returns ALSTerm: ALSPlus ({ALSMinus.leftOperand = current} '-' rightOperand = ALSPlus)*;
+ALSPlus returns ALSTerm: ALSIntersection ({ALSPlus.leftOperand = current} '+' rightOperand = ALSIntersection)*;
+ALSIntersection returns ALSTerm: ALSDirectProduct ({ALSIntersection.leftOperand = current} '&' rightOperand = ALSDirectProduct)*;
+//ALSMultiply returns ALSTerm: ALSDirectProduct ({ALSMultiply.leftOperand = current} '*' rightOperand = ALSDirectProduct)*;
+
+ALSDirectProduct returns ALSTerm:
+	ALSPreficed
+	({ALSDirectProduct.leftOperand = current} (leftMultiplicit = ALSMultiplicity)?
+	 '->'
+	(rightMultiplicit = ALSMultiplicity)?
+	rightOperand = ALSPreficed)?
+;
+
+ALSPreficed returns ALSTerm:
+	{ALSNot}=>("!"|'not') operand = ALSBasicRelationTerm |
+	{ALSInverseRelation}=>"~" operand = ALSBasicRelationTerm |
+	{AlSTransitiveClosure} "^" operand = ALSBasicRelationTerm |
+	{ALSReflectiveTransitiveClosure} "*" operand = ALSBasicRelationTerm |
+	{ALSCardinality} '#' operand = ALSBasicRelationTerm | 
+	{ALSUnaryMinus} =>'-' operand = ALSBasicRelationTerm |
+	{ALSSum} 'sum' variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)* '{' expression = ALSTerm '}' |
+//	{ALSQuantifiedEx} type = ALSMultiplicity 
+//		(disj?='disj')? variables+=ALSVariableDeclaration (',' variables+=ALSVariableDeclaration)*  '{' expression = ALSTerm '}' |
+	{ALSFunctionCall} (referredDefinition=[ALSDefinition]|referredNumericOperator=ALSNumericOperator) '['params+=ALSTerm (',' params+=ALSTerm)*']' |
+	ALSBasicRelationTerm;
+
+enum ALSNumericOperator: plus|sub|mul|rem|div;
+
+//ALSVariable: name = ALSID;
+ALSVariableDeclaration: name=ALSID ':'  range = ALSTerm;
+
+ALSBasicRelationTerm returns ALSTerm: 
+	{ALSNone}   'none'|
+	{ALSIden}   'iden'|
+	{ALSUniv}   'univ'|
+	{ALSInt}    'Int' |
+	{ALSString} 'String' |
+	{ALSReference} referred = [ALSRelationDeclaration] |
+	{ALSNumberLiteral} value = INT|
+	{ALSStringLiteral} value = STRING|
+	'(' ALSTerm ')'
+;
+
+//////////////////////////////////
+// ALS Commands and scopes
+//////////////////////////////////
+ALSRunCommand:
+	{ALSRunCommand} 'run' '{' '}' ('for' typeScopes+=ALSTypeScope (',' typeScopes+=ALSTypeScope)*)?;
+
+ALSTypeScope: ALSSigScope | ALSIntScope | ALSStringScope;
+
+ALSSigScope: (exactly?='exactly')? number = INT type = [ALSSignatureDeclaration];
+ALSIntScope: number = INT 'Int';
+ALSStringScope: 'exactly' number = INT 'String';
