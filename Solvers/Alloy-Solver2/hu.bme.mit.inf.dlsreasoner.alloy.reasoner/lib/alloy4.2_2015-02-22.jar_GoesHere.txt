@@ -1,0 +1,1 @@
+Download alloy4.2_2015-02-22.jar from http://alloy.mit.edu/alloy/downloads/alloy4.2_2015-02-22.jar and place here.

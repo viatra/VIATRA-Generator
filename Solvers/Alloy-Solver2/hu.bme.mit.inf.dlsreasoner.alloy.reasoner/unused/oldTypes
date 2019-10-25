@@ -1,0 +1,74 @@
+/*def dispatch boolean hasDeclaredElement(TypeDefinition type) { return false; }
+	def dispatch boolean hasDeclaredElement(TypeDeclaration type) {
+		if(type.isAbstract) {
+			type.subtypes.exists[it.hasDeclaredElement]
+		} else return true;
+	}
+	
+	def dispatch List<TypeDefinition> allEnumSubtypes(TypeDefinition type) { return #[type] }
+	def dispatch List<TypeDefinition> allEnumSubtypes(TypeDeclaration type) {
+		return type.subtypes.map[it.allEnumSubtypes].flatten.toList
+	}
+	
+	def protected transformTypes(List<Type> types, Logic2AlloyLanguageMapperTrace trace) {
+		val Map<TypeDeclaration,ALSSignatureDeclaration> signatureTrace = new HashMap;
+		
+		// Creating the root type
+		val objectType = createALSSignatureDeclaration => [ name=#["util","object"].toID it.abstract = true ]
+		trace.objectSupperClass = objectType
+		trace.specification.typeDeclarations += objectType
+		
+		// Creating the images of the types
+		for(type : types) {
+			if(type instanceof TypeDefinition) {
+				if(type.elements.empty) {
+					trace.type2ALSType.put(type,#[]);
+				} else {
+					val e = createALSEnumDeclaration => [
+						it.name = type.name.toID
+						it.literal += type.elements.map[transformDefinedElement(trace)]
+					]
+					trace.type2ALSType.put(type,#[e])
+					trace.specification.typeDeclarations += e
+				}
+			}
+			else if(type instanceof TypeDeclaration) {
+				if(hasDeclaredElement(type)) {
+					val s = createALSSignatureDeclaration => [
+						name=type.name.toID
+						it.abstract = type.isIsAbstract
+					]
+					trace.type2ALSType.put(type,new LinkedList=>[add(s)])
+					signatureTrace.put(type, s)
+					trace.specification.typeDeclarations += s
+				}
+				else {
+					signatureTrace.put(type, null)
+					trace.type2ALSType.put(type,new LinkedList);// empty
+				}
+			}
+			else throw new IllegalArgumentException('''Unknown type «type.class.name»''')
+		}
+		
+		
+		for(type: types.filter(TypeDeclaration)) {
+			// Adding inheritance
+			val s = type.lookup(signatureTrace)
+			if(s!=null) {
+				for(supertype : type.supertypes) {
+					s.supertype += (supertype as TypeDeclaration).lookup(signatureTrace)
+				}
+				if(type.supertypes.empty) {
+					s.supertype += objectType
+				}
+			}
+			// Adding enum subtypes
+			type.lookup(trace.type2ALSType)+=type.allEnumSubtypes.map[it.lookup(trace.type2ALSType)].flatten
+		}
+	}
+	
+	def protected transformDefinedElement(DefinedElement element, Logic2AlloyLanguageMapperTrace trace) {
+		val result = createALSEnumLiteral => [name = element.name.toID]
+		trace.definedElement2EnumProperty.put(element,result)
+		return result
+	}*/

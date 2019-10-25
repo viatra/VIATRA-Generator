@@ -254,7 +254,7 @@ class Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes implements Logic2AlloyL
 	}
 	
 	override getUndefinedSupertypeScope(int undefinedScope, Logic2AlloyLanguageMapperTrace trace) {
-		return undefinedScope + trace.typeTrace.definedElement2Declaration.size
+		if(undefinedScope == Integer.MAX_VALUE) return undefinedScope else return undefinedScope + trace.typeTrace.definedElement2Declaration.size
 	}
 	
 	override getTypeInterpreter() {

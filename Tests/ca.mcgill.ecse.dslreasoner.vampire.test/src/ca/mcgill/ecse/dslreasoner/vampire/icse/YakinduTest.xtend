@@ -59,12 +59,12 @@ class YakinduTest {
 //		val queries = null
 		println("DSL loaded")
 
-		var SZ_TOP =  25
-		var SZ_BOT = 5
-		var INC = 5
-		var REPS = 5
+		var SZ_TOP = 120
+		var SZ_BOT = 60
+		var INC = 20
+		var REPS =25
 
-		val RUNTIME = 60
+		val RUNTIME = 300
 
 		val EXACT = -1
 		if (EXACT != -1) {
@@ -91,8 +91,7 @@ class YakinduTest {
 //			BackendSolver::Z3
 //			,
 			BackendSolver::LOCVAMP
-			)
-		
+		)
 
 		var str = ""
 
@@ -100,10 +99,6 @@ class YakinduTest {
 			str += solver.name.substring(0, 1)
 		}
 
-		var writer = new PrintWriter(
-			dataWorkspace.workspaceURI + "//_stats" + formattedDate + "-" + str + SZ_BOT + "to" + SZ_TOP + "by" + INC +
-				"x" + REPS + ".csv")
-		writer.append("solver,size,transTime,sat?,satTime,model?,modelTime\n")
 		var solverTimes = newArrayList
 		var transformationTimes = newArrayList
 		var LogicResult solution = null
@@ -111,6 +106,13 @@ class YakinduTest {
 		for (BESOLVER : BACKENDSOLVERS) {
 
 			for (var i = SZ_BOT; i <= SZ_TOP; i += INC) {
+//				var writer = new PrintWriter(
+//					dataWorkspace.workspaceURI + "//_stats" + formattedDate + "-" + str + "sz" + i + "x" + REPS +
+//						".csv")
+				var writer = new PrintWriter(
+					dataWorkspace.workspaceURI + "//_vampire" + i + "x" + REPS + "-" + formattedDate + ".csv")
+				writer.append("solver,size,transTime,sat?,satTime,model?,modelTime\n")
+
 				val num = (i - SZ_BOT) / INC
 				println()
 				println("SOLVER: " + BESOLVER.name + ", SIZE=" + i)
@@ -161,17 +163,16 @@ class YakinduTest {
 						it.documentationLevel = DocumentationLevel::FULL
 						it.iteration = iter
 						it.runtimeLimit = RUNTIME
-//					it.typeScopes.maxNewElements = size
+						it.typeScopes.maxNewElements = size
 						it.typeScopes.minNewElements = size
 
 						it.genModel = true
 						it.server = false
-						if(it.server){
+						if (it.server) {
 							it.solver = BESOLVER
-						} else{
+						} else {
 							it.solver = BackendSolver::LOCVAMP
 						}
-						
 
 //					if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 //					if(typeMapMin.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
@@ -194,18 +195,27 @@ class YakinduTest {
 
 					val satOut = (solution.statistics.entries.filter[name == "satOut"].get(0) as StringStatisticEntry).
 						value
-					val satTime = (solution.statistics.entries.filter[name == "satTime"].get(0) as StringStatisticEntry).
-						value
+					val satTime = (solution.statistics.entries.filter[name == "satTime"].
+						get(0) as StringStatisticEntry).value
 					val modOut = (solution.statistics.entries.filter[name == "modOut"].get(0) as StringStatisticEntry).
 						value
-					val modTime = (solution.statistics.entries.filter[name == "modTime"].get(0) as StringStatisticEntry).
-						value
+					val modTime = (solution.statistics.entries.filter[name == "modTime"].
+						get(0) as StringStatisticEntry).value
 
 					writer.append(satOut + ",")
 					writer.append(satTime + ",")
 					writer.append(modOut + ",")
 					writer.append(modTime + "")
 					writer.append("\n")
+
+					println("->" + modOut + " ... " + modTime)
+
+					// Run Garbage Collector
+					val Runtime r = Runtime.getRuntime();
+					r.gc();
+					r.gc();
+					r.gc();
+					Thread.sleep(3000)
 
 //				print("(" + tTime + "/" + sTime + "s)..")
 //				solverTimes.add(sTime)
@@ -230,10 +240,11 @@ class YakinduTest {
 //			var solverMed = solverTimes.sort.get(REPS / 2)
 //			var transformationMed = transformationTimes.sort.get(REPS / 2)
 //			writer.append(solverMed.toString + "," + transformationMed.toString)
+				writer.close
 			}
 
 		}
-		writer.close
+
 	}
 
 }

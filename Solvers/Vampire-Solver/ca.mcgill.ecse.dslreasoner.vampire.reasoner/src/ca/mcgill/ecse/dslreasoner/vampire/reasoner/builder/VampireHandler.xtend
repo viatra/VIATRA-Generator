@@ -11,6 +11,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireLanguageFactoryImpl
 import ca.mcgill.ecse.dslreasoner.vampireLanguage.impl.VampireModelImpl
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.BackendSolver
+import java.io.FileReader
 
 class VampireSolverException extends Exception {
 	new(String s) {
@@ -33,6 +34,7 @@ class VampireSolverException extends Exception {
 //	val List<Pair<A4Solution, Long>> aswers
 	val VampireModel generatedModel
 //	val boolean finishedBeforeTimeout
+	val boolean finiteModelGenerated
 }
 
 class VampireHandler {
@@ -92,28 +94,38 @@ class VampireHandler {
 			p.waitFor
 			solverTime = System.currentTimeMillis - startTime
 		}
+		
 
 		// 2.1 determine time left
 		// 2.2 store output into local variable
-		val BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		val BufferedReader reader = new BufferedReader(new FileReader(solnLoc));
 		val List<String> output = newArrayList
 
 		var line = "";
 		while ((line = reader.readLine()) != null) {
-			output.add(line + "\n");
+			if (line == "Finite Model Found!") {
+				return new MonitoredVampireSolution(solverTime, null, true)
+			}
 		}
+		return new MonitoredVampireSolution(solverTime, null, false)
 
-//    	println(output.toString())
-		// 4. delete temp file
-		workspace.getFile(TEMPNAME).delete
+	/*		var line = "";
+	 * 		while ((line = reader.readLine()) != null) {
+	 * 			output.add(line + "\n");
+	 * 		}
 
-		// 5. determine and return whether or not finite model was found
-		// 6. save solution as a .tptp model
-		val root = workspace.readModel(VampireModel, SOLNNAME).eResource.contents
+	 * //    	println(output.toString())
+	 * 		// 4. delete temp file
+	 * 		workspace.getFile(TEMPNAME).delete
 
-//		println((root.get(0) as VampireModel ).comments)
-		return new MonitoredVampireSolution(solverTime, root.get(0) as VampireModel)
+	 * 		// 5. determine and return whether or not finite model was found
+	 * 		// 6. save solution as a .tptp model
+	 * 		val root = workspace.readModel(VampireModel, SOLNNAME).eResource.contents
 
+	 * //		println((root.get(0) as VampireModel ).comments)
+	 * 		return new MonitoredVampireSolution(solverTime, root.get(0) as VampireModel)
+	 * 
+	 */
 	/*
 	 * //Prepare
 	 * val warnings = new LinkedList<String>
