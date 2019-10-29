@@ -86,8 +86,18 @@ public final class GuidanceObjective extends BaseGeneratedEMFQuerySpecification<
     
     @Override
     public Object get(final String parameterName) {
-      if ("Value".equals(parameterName)) return this.fValue;
-      return null;
+      switch(parameterName) {
+          case "Value": return this.fValue;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fValue;
+          default: return null;
+      }
     }
     
     public Integer getValue() {
@@ -476,9 +486,9 @@ public final class GuidanceObjective extends BaseGeneratedEMFQuerySpecification<
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.GuidanceObjective (visibility: PUBLIC, simpleName: GuidanceObjective, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.GuidanceObjective, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link GuidanceObjective} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.GuidanceObjective (visibility: PUBLIC, simpleName: GuidanceObjective, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.GuidanceObjective, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link GuidanceObjective#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

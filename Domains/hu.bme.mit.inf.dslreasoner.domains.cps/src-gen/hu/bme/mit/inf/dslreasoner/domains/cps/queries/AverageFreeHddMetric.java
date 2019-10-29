@@ -79,8 +79,18 @@ public final class AverageFreeHddMetric extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public Object get(final String parameterName) {
-      if ("Average".equals(parameterName)) return this.fAverage;
-      return null;
+      switch(parameterName) {
+          case "Average": return this.fAverage;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fAverage;
+          default: return null;
+      }
     }
     
     public Double getAverage() {
@@ -468,9 +478,9 @@ public final class AverageFreeHddMetric extends BaseGeneratedEMFQuerySpecificati
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeHddMetric (visibility: PUBLIC, simpleName: AverageFreeHddMetric, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeHddMetric, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link AverageFreeHddMetric} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeHddMetric (visibility: PUBLIC, simpleName: AverageFreeHddMetric, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeHddMetric, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link AverageFreeHddMetric#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

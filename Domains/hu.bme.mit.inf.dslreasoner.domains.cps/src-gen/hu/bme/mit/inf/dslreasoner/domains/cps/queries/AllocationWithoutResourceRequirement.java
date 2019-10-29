@@ -88,9 +88,20 @@ public final class AllocationWithoutResourceRequirement extends BaseGeneratedEMF
     
     @Override
     public Object get(final String parameterName) {
-      if ("Host".equals(parameterName)) return this.fHost;
-      if ("App".equals(parameterName)) return this.fApp;
-      return null;
+      switch(parameterName) {
+          case "Host": return this.fHost;
+          case "App": return this.fApp;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fHost;
+          case 1: return this.fApp;
+          default: return null;
+      }
     }
     
     public HostInstance getHost() {
@@ -623,9 +634,9 @@ public final class AllocationWithoutResourceRequirement extends BaseGeneratedEMF
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AllocationWithoutResourceRequirement (visibility: PUBLIC, simpleName: AllocationWithoutResourceRequirement, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AllocationWithoutResourceRequirement, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link AllocationWithoutResourceRequirement} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AllocationWithoutResourceRequirement (visibility: PUBLIC, simpleName: AllocationWithoutResourceRequirement, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AllocationWithoutResourceRequirement, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link AllocationWithoutResourceRequirement#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

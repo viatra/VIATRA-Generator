@@ -90,8 +90,18 @@ public final class RequirementNotSatisfied extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public Object get(final String parameterName) {
-      if ("Req".equals(parameterName)) return this.fReq;
-      return null;
+      switch(parameterName) {
+          case "Req": return this.fReq;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fReq;
+          default: return null;
+      }
     }
     
     public Requirement getReq() {
@@ -481,9 +491,9 @@ public final class RequirementNotSatisfied extends BaseGeneratedEMFQuerySpecific
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied (visibility: PUBLIC, simpleName: RequirementNotSatisfied, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link RequirementNotSatisfied} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied (visibility: PUBLIC, simpleName: RequirementNotSatisfied, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.RequirementNotSatisfied, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link RequirementNotSatisfied#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

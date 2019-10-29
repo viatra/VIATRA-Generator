@@ -66,9 +66,9 @@ public final class FreeMemoryPercentage extends BaseGeneratedEMFQuerySpecificati
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.FreeMemoryPercentage (visibility: PUBLIC, simpleName: FreeMemoryPercentage, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.FreeMemoryPercentage, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link FreeMemoryPercentage} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.FreeMemoryPercentage (visibility: PUBLIC, simpleName: FreeMemoryPercentage, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal.FreeMemoryPercentage, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries.internal) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link FreeMemoryPercentage#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

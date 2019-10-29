@@ -79,8 +79,18 @@ public final class CostMetric extends BaseGeneratedEMFQuerySpecification<CostMet
     
     @Override
     public Object get(final String parameterName) {
-      if ("Cost".equals(parameterName)) return this.fCost;
-      return null;
+      switch(parameterName) {
+          case "Cost": return this.fCost;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fCost;
+          default: return null;
+      }
     }
     
     public Integer getCost() {
@@ -468,9 +478,9 @@ public final class CostMetric extends BaseGeneratedEMFQuerySpecification<CostMet
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CostMetric (visibility: PUBLIC, simpleName: CostMetric, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CostMetric, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link CostMetric} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CostMetric (visibility: PUBLIC, simpleName: CostMetric, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CostMetric, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link CostMetric#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

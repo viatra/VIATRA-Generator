@@ -105,9 +105,20 @@ public final class Allocate extends BaseGeneratedEMFQuerySpecification<Allocate.
     
     @Override
     public Object get(final String parameterName) {
-      if ("App".equals(parameterName)) return this.fApp;
-      if ("Host".equals(parameterName)) return this.fHost;
-      return null;
+      switch(parameterName) {
+          case "App": return this.fApp;
+          case "Host": return this.fHost;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fApp;
+          case 1: return this.fHost;
+          default: return null;
+      }
     }
     
     public ApplicationInstance getApp() {
@@ -650,9 +661,9 @@ public final class Allocate extends BaseGeneratedEMFQuerySpecification<Allocate.
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.Allocate (visibility: PUBLIC, simpleName: Allocate, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.Allocate, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link Allocate} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.Allocate (visibility: PUBLIC, simpleName: Allocate, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.Allocate, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link Allocate#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

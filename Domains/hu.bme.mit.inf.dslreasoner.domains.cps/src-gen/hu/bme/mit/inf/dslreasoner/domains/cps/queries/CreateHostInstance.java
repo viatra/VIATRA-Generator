@@ -80,8 +80,18 @@ public final class CreateHostInstance extends BaseGeneratedEMFQuerySpecification
     
     @Override
     public Object get(final String parameterName) {
-      if ("HostType".equals(parameterName)) return this.fHostType;
-      return null;
+      switch(parameterName) {
+          case "HostType": return this.fHostType;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fHostType;
+          default: return null;
+      }
     }
     
     public HostType getHostType() {
@@ -468,9 +478,9 @@ public final class CreateHostInstance extends BaseGeneratedEMFQuerySpecification
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CreateHostInstance (visibility: PUBLIC, simpleName: CreateHostInstance, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CreateHostInstance, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link CreateHostInstance} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CreateHostInstance (visibility: PUBLIC, simpleName: CreateHostInstance, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CreateHostInstance, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link CreateHostInstance#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

@@ -83,8 +83,18 @@ public final class AverageFreeMemoryMetric extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public Object get(final String parameterName) {
-      if ("Average".equals(parameterName)) return this.fAverage;
-      return null;
+      switch(parameterName) {
+          case "Average": return this.fAverage;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fAverage;
+          default: return null;
+      }
     }
     
     public Double getAverage() {
@@ -476,9 +486,9 @@ public final class AverageFreeMemoryMetric extends BaseGeneratedEMFQuerySpecific
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeMemoryMetric (visibility: PUBLIC, simpleName: AverageFreeMemoryMetric, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeMemoryMetric, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link AverageFreeMemoryMetric} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeMemoryMetric (visibility: PUBLIC, simpleName: AverageFreeMemoryMetric, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.AverageFreeMemoryMetric, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link AverageFreeMemoryMetric#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

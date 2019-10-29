@@ -91,9 +91,20 @@ public final class CpsCost extends BaseGeneratedEMFQuerySpecification<CpsCost.Ma
     
     @Override
     public Object get(final String parameterName) {
-      if ("Cps".equals(parameterName)) return this.fCps;
-      if ("Cost".equals(parameterName)) return this.fCost;
-      return null;
+      switch(parameterName) {
+          case "Cps": return this.fCps;
+          case "Cost": return this.fCost;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fCps;
+          case 1: return this.fCost;
+          default: return null;
+      }
     }
     
     public CyberPhysicalSystem getCps() {
@@ -625,9 +636,9 @@ public final class CpsCost extends BaseGeneratedEMFQuerySpecification<CpsCost.Ma
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsCost (visibility: PUBLIC, simpleName: CpsCost, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsCost, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link CpsCost} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsCost (visibility: PUBLIC, simpleName: CpsCost, identifier: hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsCost, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.cps.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link CpsCost#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
