@@ -74,8 +74,18 @@ public final class Dir extends BaseGeneratedEMFQuerySpecification<Dir.Matcher> {
     
     @Override
     public Object get(final String parameterName) {
-      if ("d".equals(parameterName)) return this.fD;
-      return null;
+      switch(parameterName) {
+          case "d": return this.fD;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fD;
+          default: return null;
+      }
     }
     
     public hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.Dir getD() {
@@ -461,9 +471,9 @@ public final class Dir extends BaseGeneratedEMFQuerySpecification<Dir.Matcher> {
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Dir (visibility: PUBLIC, simpleName: Dir, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Dir, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link Dir} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Dir (visibility: PUBLIC, simpleName: Dir, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Dir, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link Dir#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

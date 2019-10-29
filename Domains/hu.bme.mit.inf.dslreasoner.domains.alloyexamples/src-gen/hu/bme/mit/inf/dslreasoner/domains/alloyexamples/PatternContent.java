@@ -81,9 +81,20 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
     
     @Override
     public Object get(final String parameterName) {
-      if ("o1".equals(parameterName)) return this.fO1;
-      if ("o2".equals(parameterName)) return this.fO2;
-      return null;
+      switch(parameterName) {
+          case "o1": return this.fO1;
+          case "o2": return this.fO2;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fO1;
+          case 1: return this.fO2;
+          default: return null;
+      }
     }
     
     public Dir getO1() {
@@ -613,9 +624,9 @@ public final class PatternContent extends BaseGeneratedEMFQuerySpecification<Pat
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.PatternContent (visibility: PUBLIC, simpleName: PatternContent, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.PatternContent, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link PatternContent} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.PatternContent (visibility: PUBLIC, simpleName: PatternContent, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.PatternContent, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link PatternContent#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

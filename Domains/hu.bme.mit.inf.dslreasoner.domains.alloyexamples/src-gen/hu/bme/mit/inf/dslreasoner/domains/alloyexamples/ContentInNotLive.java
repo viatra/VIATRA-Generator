@@ -90,9 +90,20 @@ public final class ContentInNotLive extends BaseGeneratedEMFQuerySpecification<C
     
     @Override
     public Object get(final String parameterName) {
-      if ("parent".equals(parameterName)) return this.fParent;
-      if ("child".equals(parameterName)) return this.fChild;
-      return null;
+      switch(parameterName) {
+          case "parent": return this.fParent;
+          case "child": return this.fChild;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fParent;
+          case 1: return this.fChild;
+          default: return null;
+      }
     }
     
     public Dir getParent() {
@@ -627,9 +638,9 @@ public final class ContentInNotLive extends BaseGeneratedEMFQuerySpecification<C
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.ContentInNotLive (visibility: PUBLIC, simpleName: ContentInNotLive, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.ContentInNotLive, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link ContentInNotLive} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.ContentInNotLive (visibility: PUBLIC, simpleName: ContentInNotLive, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.ContentInNotLive, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link ContentInNotLive#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

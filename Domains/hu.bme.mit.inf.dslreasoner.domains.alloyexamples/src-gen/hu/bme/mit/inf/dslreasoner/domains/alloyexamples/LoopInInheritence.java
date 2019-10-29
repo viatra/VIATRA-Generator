@@ -79,8 +79,18 @@ public final class LoopInInheritence extends BaseGeneratedEMFQuerySpecification<
     
     @Override
     public Object get(final String parameterName) {
-      if ("a".equals(parameterName)) return this.fA;
-      return null;
+      switch(parameterName) {
+          case "a": return this.fA;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fA;
+          default: return null;
+      }
     }
     
     public EClass getA() {
@@ -467,9 +477,9 @@ public final class LoopInInheritence extends BaseGeneratedEMFQuerySpecification<
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence (visibility: PUBLIC, simpleName: LoopInInheritence, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link LoopInInheritence} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence (visibility: PUBLIC, simpleName: LoopInInheritence, identifier: hu.bme.mit.inf.dslreasoner.domains.alloyexamples.LoopInInheritence, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: hu.bme.mit.inf.dslreasoner.domains.alloyexamples) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link LoopInInheritence#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
