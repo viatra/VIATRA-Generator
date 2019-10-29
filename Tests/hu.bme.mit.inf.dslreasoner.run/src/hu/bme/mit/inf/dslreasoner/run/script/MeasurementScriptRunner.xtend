@@ -1,11 +1,14 @@
 package hu.bme.mit.inf.dslreasoner.run.script
 
 import com.google.gson.Gson
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EClassMapper
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
@@ -138,12 +141,10 @@ class MeasurementScriptRunner {
 		Thread.sleep(800)
 	}
 
-	private def runExperiment(int modelSize) {
-		if (script.solver != Solver.ViatraSolver) {
-			throw new IllegalArgumentException("Only VIATRA-Generator is supported")
-		}
+	private def createViatraConfig() {
 		val config = new ViatraReasonerConfiguration
-		config.solutionScope.numberOfRequiredSolutions = 1
+		config.debugConfiguration.partialInterpretatioVisualiser = null
+		config.searchSpaceConstraints.additionalGlobalConstraints += metamodelLoader.additionalConstraints
 		config.scopePropagatorStrategy = switch (script.scopePropagator) {
 			case none:
 				ScopePropagatorStrategy.None
@@ -187,11 +188,28 @@ class MeasurementScriptRunner {
 			default:
 				throw new IllegalArgumentException("Unknown scope propagator: " + script.scopePropagator)
 		}
+		config
+	}
+
+	private def createAlloyConfig() {
+		val config = new AlloySolverConfiguration
+		config
+	}
+
+	private def createConfig(int modelSize) {
+		val config = switch (solver : script.solver) {
+			case ViatraSolver: createViatraConfig()
+			case AlloySolver: createAlloyConfig()
+			default: throw new IllegalArgumentException("Unknown solver: " + solver)
+		}
+		config.solutionScope.numberOfRequiredSolutions = 1
 		config.runtimeLimit = script.timeout
 		config.documentationLevel = if(script.saveTemporaryFiles) DocumentationLevel.NORMAL else DocumentationLevel.NONE
-		config.debugConfiguration.partialInterpretatioVisualiser = null
-		config.searchSpaceConstraints.additionalGlobalConstraints += metamodelLoader.additionalConstraints
+		config
+	}
 
+	private def runExperiment(int modelSize) {
+		val config = createConfig(modelSize)
 		val modelLoadingStart = System.nanoTime
 		val metamodelDescriptor = metamodelLoader.loadMetamodel
 		val partialModelDescriptor = metamodelLoader.loadPartialModel
@@ -214,8 +232,8 @@ class MeasurementScriptRunner {
 			new Viatra2LogicConfiguration
 		).output
 		initializeScope(config, modelSize, problem, ecore2Logic, modelGeneration.trace)
-		if (script.propagatedConstraints == ScopeConstraints.hints) {
-			config.hints = metamodelLoader.getHints(ecore2Logic, modelGeneration.trace)
+		if (config instanceof ViatraReasonerConfiguration && script.propagatedConstraints == ScopeConstraints.hints) {
+			(config as ViatraReasonerConfiguration).hints = metamodelLoader.getHints(ecore2Logic, modelGeneration.trace)
 		}
 		val domain2LogicTransformationTime = System.nanoTime - domain2LogicTransformationStart
 
@@ -223,7 +241,11 @@ class MeasurementScriptRunner {
 			outputWorkspace.writeModel(problem, "initial.logicproblem")
 		}
 
-		val solver = new ViatraReasoner
+		val solver = switch (solver : script.solver) {
+			case ViatraSolver: new ViatraReasoner
+			case AlloySolver: new AlloySolver
+			default: throw new IllegalArgumentException("Unknown solver: " + solver)
+		}
 		val result = solver.solve(problem, config, outputWorkspace)
 		val statistics = result.statistics
 		statistics.entries += createIntStatisticEntry => [
@@ -253,7 +275,7 @@ class MeasurementScriptRunner {
 		new ExperimentResult(result.class.simpleName, statistics, modelResult)
 	}
 
-	private def initializeScope(ViatraReasonerConfiguration config, int modelSize, LogicProblem problem,
+	private def initializeScope(LogicSolverConfiguration config, int modelSize, LogicProblem problem,
 		EClassMapper eClassMapper, Ecore2Logic_Trace trace) {
 		val knownElements = initializeKnownElements(problem, config.typeScopes)
 		if (modelSize < 0) {
@@ -278,7 +300,8 @@ class MeasurementScriptRunner {
 						val currentCount = if(knownInstances === null) 0 else knownInstances.size
 						val lowCount = Math.floor(modelSize * quantile.low) as int
 						val highCount = Math.ceil((modelSize + MODEL_SIZE_GAP) * quantile.high) as int
-						config.typeScopes.minNewElementsByType.put(type, lowCount - currentCount)
+//						println('''«type.name» «lowCount» «highCount»''')
+						config.typeScopes.minNewElementsByType.put(type, Math.max(lowCount - currentCount, 0))
 						config.typeScopes.maxNewElementsByType.put(type, highCount - currentCount)
 					}
 				}

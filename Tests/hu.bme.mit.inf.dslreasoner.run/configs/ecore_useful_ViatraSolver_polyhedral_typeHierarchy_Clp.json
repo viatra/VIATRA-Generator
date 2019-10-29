@@ -7,9 +7,10 @@
 	"iterations": 5,
 	"domain": "ecore",
 	"scope": "quantiles",
-	"sizes": [100],
+	"sizes": [50],
 	"solver": "ViatraSolver",
 	"scopePropagator": "polyhedral",
-	"propagatedConstraints": "relations",
-	"polyhedronSolver": "Clp"
+	"propagatedConstraints": "hints",
+	"polyhedronSolver": "Clp",
+	"scopeHeuristic": "polyhedral"
 }
