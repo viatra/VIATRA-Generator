@@ -81,5 +81,5 @@ private pattern typeDoesNotCoverElementOccurance(element: DefinedElement, type: 
 	find supertype(containerType,type);
 	TypeDefinition.elements(containerType,element);
 	TypeDefinition.elements(uncoveredOccurance,element);
-	neg find supertype(uncoveredOccurance,type);
+	neg find supertype(type,uncoveredOccurance);
 }

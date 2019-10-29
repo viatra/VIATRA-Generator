@@ -124,7 +124,7 @@ class Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes implements Logic2AlloyL
 		for(type : types.filter[it.supertypes.size>=2]) {
 			trace.specification.factDeclarations += createALSFactDeclaration => [
 				it.name = support.toIDMultiple("abstract",type.name)
-				it.term = createALSEquals => [
+				it.term = createALSSubset => [
 					it.leftOperand = createALSReference => [ it.referred = type.lookup(typeTrace.type2ALSType) ]
 					it.rightOperand = support.unfoldIntersection(type.supertypes.map[e|
 						createALSReference => [it.referred = e.lookup(typeTrace.type2ALSType)]])
