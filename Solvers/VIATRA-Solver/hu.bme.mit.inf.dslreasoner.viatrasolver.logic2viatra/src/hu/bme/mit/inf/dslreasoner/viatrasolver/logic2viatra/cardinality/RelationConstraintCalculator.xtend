@@ -44,6 +44,8 @@ class RelationMultiplicityConstraint {
 	}
 
 	def constrainsUnrepairable() {
+		// TODO Optimize the unrepairable matches computation,
+		// or come up with a heuristic when does computing unrepairables worth the overhead.
 		constrainsUnfinished && canHaveMultipleSourcesPerTarget && false
 	}
 

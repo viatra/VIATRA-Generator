@@ -193,7 +193,11 @@ class CbcSaturationOperator extends AbstractPolyhedronSaturationOperator {
 				setBound(expressionToSaturate, constraints, Double.POSITIVE_INFINITY, columnUpperBounds, rowUpperBounds)
 			}
 			case CbcResult.UNSAT:
-				throw new RuntimeException("Minimization was SAT, but maximization is UNSAT")
+				if (lpRelaxation) {
+					return PolyhedronSaturationResult.EMPTY
+				} else {
+					throw new RuntimeException("Minimization was SAT, but maximization is UNSAT")
+				}
 			case CbcResult.ABANDONED,
 			case CbcResult.TIMEOUT:
 				return PolyhedronSaturationResult.UNKNOWN

@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
 
+import com.google.common.collect.ImmutableList
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
@@ -12,18 +13,18 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.Par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.Problem2PartialInterpretationTrace
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
+import java.math.BigDecimal
 import java.util.HashMap
+import java.util.HashSet
 import java.util.List
 import java.util.Map
+import java.util.Set
 import org.eclipse.emf.common.util.Enumerator
+import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import java.util.HashSet
-import java.util.Set
-import java.math.BigDecimal
-import org.eclipse.emf.ecore.EAttribute
 
 class InstanceModel2PartialInterpretation {
 	val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
@@ -36,7 +37,19 @@ class InstanceModel2PartialInterpretation {
 		Resource resource,
 		boolean withID) 
 	{
-		val objects = resource.allContents.toList
+		val objectsBuilder = ImmutableList.builder
+		val treeIterator = resource.allContents
+		val referencesUsed = ecore2Logic.allReferencesInScope(metamodelTranslationResult.trace).toSet
+		while (treeIterator.hasNext) {
+			val object = treeIterator.next
+			val containingReference = object.eContainmentFeature
+			if (containingReference === null || referencesUsed.contains(containingReference)) {
+				objectsBuilder.add(object)
+			} else {
+				treeIterator.prune
+			}
+		}
+		val objects = objectsBuilder.build
 		return transform(metamodelTranslationResult,objects,withID)
 	}
 	
