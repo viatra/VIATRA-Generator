@@ -200,7 +200,7 @@ class GenerationTaskExecutor {
 					}
 					
 					// 7. Solver call
-					val ewsdzxA = solver.solve(problem,solverConfig,reasonerWorkspaceForRun)
+					val solution = solver.solve(problem,solverConfig,reasonerWorkspaceForRun)
 					console.writeMessage(solution.soutionDescription.toString)
 					
 					//  8. Solution processing

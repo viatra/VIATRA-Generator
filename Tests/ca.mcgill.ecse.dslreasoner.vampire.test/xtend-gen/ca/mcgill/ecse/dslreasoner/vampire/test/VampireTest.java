@@ -1,8 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.test;
 
 import ca.mcgill.ecse.dslreasoner.VampireLanguageStandaloneSetup;
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
-import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder;
@@ -26,6 +24,8 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
@@ -65,14 +65,14 @@ public class VampireTest {
       InputOutput.<String>println("Problem Created");
       LogicResult solution = null;
       LogicReasoner reasoner = null;
-      VampireSolver _vampireSolver = new VampireSolver();
-      reasoner = _vampireSolver;
-      VampireSolverConfiguration _vampireSolverConfiguration = new VampireSolverConfiguration();
-      final Procedure1<VampireSolverConfiguration> _function = (VampireSolverConfiguration it) -> {
+      ViatraReasoner _viatraReasoner = new ViatraReasoner();
+      reasoner = _viatraReasoner;
+      ViatraReasonerConfiguration _viatraReasonerConfiguration = new ViatraReasonerConfiguration();
+      final Procedure1<ViatraReasonerConfiguration> _function = (ViatraReasonerConfiguration it) -> {
         it.documentationLevel = DocumentationLevel.FULL;
         it.typeScopes.minNewElements = 4;
       };
-      final VampireSolverConfiguration vampireConfig = ObjectExtensions.<VampireSolverConfiguration>operator_doubleArrow(_vampireSolverConfiguration, _function);
+      final ViatraReasonerConfiguration vampireConfig = ObjectExtensions.<ViatraReasonerConfiguration>operator_doubleArrow(_viatraReasonerConfiguration, _function);
       solution = reasoner.solve(problem, vampireConfig, workspace);
       InputOutput.<String>println("Problem Solved");
     } catch (Throwable _e) {
