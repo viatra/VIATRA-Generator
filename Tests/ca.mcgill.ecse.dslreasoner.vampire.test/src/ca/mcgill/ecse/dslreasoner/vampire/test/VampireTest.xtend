@@ -14,6 +14,8 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2Lo
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 
 class VampireTest {
 	
@@ -53,13 +55,13 @@ class VampireTest {
 
 		//problem.add(Assertion( Y && X <=> X) )
 		
-		println("Problem Created");
+		println("Problem Created")
 		
 		var LogicResult solution
 		var LogicReasoner reasoner
 		
-		reasoner = new VampireSolver
-		val vampireConfig = new VampireSolverConfiguration => [
+		reasoner = new ViatraReasoner
+		val vampireConfig = new ViatraReasonerConfiguration => [
 			//add configuration things, in config file first
 			it.documentationLevel = DocumentationLevel::FULL
 			it.typeScopes.minNewElements = 4
