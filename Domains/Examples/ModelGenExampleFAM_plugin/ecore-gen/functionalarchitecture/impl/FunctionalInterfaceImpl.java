@@ -4,7 +4,6 @@ package functionalarchitecture.impl;
 
 import functionalarchitecture.FunctionalData;
 import functionalarchitecture.FunctionalElement;
-import functionalarchitecture.FunctionalInterface;
 import functionalarchitecture.FunctionalarchitecturePackage;
 
 import java.util.Collection;
@@ -38,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implements FunctionalInterface {
+public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implements functionalarchitecture.FunctionalInterface {
 	/**
 	 * The cached value of the '{@link #getData() <em>Data</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -381,13 +381,22 @@ public interface FunctionalarchitecturePackage extends EPackage {
 	int FUNCTIONAL_DATA__INTERFACE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTIONAL_DATA__VALUE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Functional Data</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTIONAL_DATA_FEATURE_COUNT = 2;
+	int FUNCTIONAL_DATA_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Functional Data</em>' class.
@@ -425,6 +434,15 @@ public interface FunctionalarchitecturePackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTIONAL_INPUT__INTERFACE = FUNCTIONAL_DATA__INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTIONAL_INPUT__VALUE = FUNCTIONAL_DATA__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Links</b></em>' reference list.
@@ -480,6 +498,15 @@ public interface FunctionalarchitecturePackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTIONAL_OUTPUT__INTERFACE = FUNCTIONAL_DATA__INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTIONAL_OUTPUT__VALUE = FUNCTIONAL_DATA__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Links</b></em>' containment reference list.
@@ -775,6 +802,17 @@ public interface FunctionalarchitecturePackage extends EPackage {
 	EReference getFunctionalData_Interface();
 
 	/**
+	 * Returns the meta object for the attribute '{@link functionalarchitecture.FunctionalData#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see functionalarchitecture.FunctionalData#getValue()
+	 * @see #getFunctionalData()
+	 * @generated
+	 */
+	EAttribute getFunctionalData_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link functionalarchitecture.FunctionType <em>Function Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1016,6 +1054,14 @@ public interface FunctionalarchitecturePackage extends EPackage {
 		 * @generated
 		 */
 		EReference FUNCTIONAL_DATA__INTERFACE = eINSTANCE.getFunctionalData_Interface();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FUNCTIONAL_DATA__VALUE = eINSTANCE.getFunctionalData_Value();
 
 		/**
 		 * The meta object literal for the '{@link functionalarchitecture.FunctionType <em>Function Type</em>}' enum.

@@ -60,6 +60,7 @@
         containment="true" eOpposite="#//FAMTerminator/data"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interface" eType="#//FunctionalInterface"
         eOpposite="#//FunctionalInterface/data"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="FunctionType">
     <eLiterals name="Root"/>

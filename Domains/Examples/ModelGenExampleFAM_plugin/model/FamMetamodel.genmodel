@@ -43,6 +43,7 @@
     <genClasses image="false" ecoreClass="FamMetamodel.ecore#//FunctionalData">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FamMetamodel.ecore#//FunctionalData/terminator"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FamMetamodel.ecore#//FunctionalData/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FamMetamodel.ecore#//FunctionalData/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

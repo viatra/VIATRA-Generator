@@ -2,9 +2,15 @@
  */
 package functionalarchitecture.util;
 
-import functionalarchitecture.*;
-import functionalarchitecture.FunctionalInterface;
-
+import functionalarchitecture.FAMTerminator;
+import functionalarchitecture.Function;
+import functionalarchitecture.FunctionalArchitectureModel;
+import functionalarchitecture.FunctionalData;
+import functionalarchitecture.FunctionalElement;
+import functionalarchitecture.FunctionalInput;
+import functionalarchitecture.FunctionalOutput;
+import functionalarchitecture.FunctionalarchitecturePackage;
+import functionalarchitecture.InformationLink;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -99,7 +105,7 @@ public class FunctionalarchitectureSwitch<T> extends Switch<T> {
 				return result;
 			}
 			case FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE: {
-				FunctionalInterface functionalInterface = (FunctionalInterface)theEObject;
+				functionalarchitecture.FunctionalInterface functionalInterface = (functionalarchitecture.FunctionalInterface)theEObject;
 				T result = caseFunctionalInterface(functionalInterface);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -214,7 +220,7 @@ public class FunctionalarchitectureSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctionalInterface(FunctionalInterface object) {
+	public T caseFunctionalInterface(functionalarchitecture.FunctionalInterface object) {
 		return null;
 	}
 

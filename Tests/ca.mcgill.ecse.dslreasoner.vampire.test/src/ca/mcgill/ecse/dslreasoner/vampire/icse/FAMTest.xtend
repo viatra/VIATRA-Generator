@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse
 
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.BackendSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration
 import functionalarchitecture.FAMTerminator
@@ -8,7 +9,6 @@ import functionalarchitecture.FunctionalArchitectureModel
 import functionalarchitecture.FunctionalInterface
 import functionalarchitecture.FunctionalOutput
 import functionalarchitecture.FunctionalarchitecturePackage
-//import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
@@ -16,7 +16,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
@@ -46,7 +45,7 @@ class FAMTest {
 
 		// Load DSL
 		val metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE)
-		val partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi")
+//		val partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi")
 //		val queries = GeneralTest.loadQueries(metamodel, FamPatterns.instance)
 		val queries = null
 
@@ -54,7 +53,7 @@ class FAMTest {
 
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
-		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
+//		problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).output
 //		problem = viatra2Logic.transformQueries(queries, modelGenerationProblem, new Viatra2LogicConfiguration).output
 		workspace.writeModel(problem, "Fam.logicproblem")
 
@@ -96,6 +95,7 @@ class FAMTest {
 			it.typeScopes.maxNewElements = 10//25
 //			if(typeMapMin.size != 0) it.typeScopes.minNewElementsByType = typeMapMin
 //			if(typeMapMax.size != 0) it.typeScopes.maxNewElementsByType = typeMapMax
+			it.solver = BackendSolver::LOCVAMP
 			it.contCycleLevel = 5
 			it.uniquenessDuplicates = false
 		]
@@ -110,25 +110,25 @@ class FAMTest {
 //			Literal(modelGenerationProblem.trace, ecore2Logic.allLiteralsInScope(modelGenerationProblem.trace).get(0) )
 //		)
 //		println((ecore2Logic.allAttributesInScope(modelGenerationProblem.trace)).get(0).EAttributeType)
-		print(interpretations.class)
-		for (interpretation : interpretations) {
-			val model = logic2Ecore.transformInterpretation(interpretation, modelGenerationProblem.trace)
-			workspace.writeModel(model, "model.xmi")
-
-//			val representation = im2pi.transform(modelGenerationProblem, model.eAllContents.toList, false)//solution.representation.get(0) // TODO: fix for multiple represenations
-//			if (representation instanceof PartialInterpretation) {
-//				val vis1 = new PartialInterpretation2Gml
-//				val gml = vis1.transform(representation)
-//				workspace.writeText("model.gml", gml)
+//		print(interpretations.class)
+//		for (interpretation : interpretations) {
+//			val model = logic2Ecore.transformInterpretation(interpretation, modelGenerationProblem.trace)
+//			workspace.writeModel(model, "model.xmi")
 //
-//				val vis2 = new GraphvizVisualiser
-//				val dot = vis2.visualiseConcretization(representation)
-//				dot.writeToFile(workspace, "model.png")
-//			} else {
-//				println("ERROR")
-//			}
-// look here: hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor
-		}
+////			val representation = im2pi.transform(modelGenerationProblem, model.eAllContents.toList, false)//solution.representation.get(0) // TODO: fix for multiple represenations
+////			if (representation instanceof PartialInterpretation) {
+////				val vis1 = new PartialInterpretation2Gml
+////				val gml = vis1.transform(representation)
+////				workspace.writeText("model.gml", gml)
+////
+////				val vis2 = new GraphvizVisualiser
+////				val dot = vis2.visualiseConcretization(representation)
+////				dot.writeToFile(workspace, "model.png")
+////			} else {
+////				println("ERROR")
+////			}
+//// look here: hu.bme.mit.inf.dslreasoner.application.execution.GenerationTaskExecutor
+//		}
 
 // transform interpretation to ecore, and it is easy from there
 		/*/
@@ -147,7 +147,6 @@ class FAMTest {
 		var totalTimeMin = (System.currentTimeMillis - startTime) / 60000
 		var totalTimeSec = ((System.currentTimeMillis - startTime) / 1000) % 60
 
-		println("Problem solved")
 		println("Time was: " + totalTimeMin + ":" + totalTimeSec)
 	}
 
