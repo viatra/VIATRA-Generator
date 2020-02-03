@@ -100,6 +100,15 @@ public class FunctionImpl extends FunctionalElementImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void setType(FunctionType newType) {
+		TYPE__ESETTING_DELEGATE.dynamicSet(this, null, 0, newType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -153,6 +162,9 @@ public class FunctionImpl extends FunctionalElementImpl implements Function {
 				getSubElements().clear();
 				getSubElements().addAll((Collection<? extends FunctionalElement>)newValue);
 				return;
+			case FunctionalarchitecturePackage.FUNCTION__TYPE:
+				setType((FunctionType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -167,6 +179,9 @@ public class FunctionImpl extends FunctionalElementImpl implements Function {
 		switch (featureID) {
 			case FunctionalarchitecturePackage.FUNCTION__SUB_ELEMENTS:
 				getSubElements().clear();
+				return;
+			case FunctionalarchitecturePackage.FUNCTION__TYPE:
+				TYPE__ESETTING_DELEGATE.dynamicUnset(this, null, 0);
 				return;
 		}
 		super.eUnset(featureID);

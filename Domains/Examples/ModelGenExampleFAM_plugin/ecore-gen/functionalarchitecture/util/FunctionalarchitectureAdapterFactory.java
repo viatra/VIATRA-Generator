@@ -2,9 +2,15 @@
  */
 package functionalarchitecture.util;
 
-import functionalarchitecture.*;
-import functionalarchitecture.FunctionalInterface;
-
+import functionalarchitecture.FAMTerminator;
+import functionalarchitecture.Function;
+import functionalarchitecture.FunctionalArchitectureModel;
+import functionalarchitecture.FunctionalData;
+import functionalarchitecture.FunctionalElement;
+import functionalarchitecture.FunctionalInput;
+import functionalarchitecture.FunctionalOutput;
+import functionalarchitecture.FunctionalarchitecturePackage;
+import functionalarchitecture.InformationLink;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -89,7 +95,7 @@ public class FunctionalarchitectureAdapterFactory extends AdapterFactoryImpl {
 				return createInformationLinkAdapter();
 			}
 			@Override
-			public Adapter caseFunctionalInterface(FunctionalInterface object) {
+			public Adapter caseFunctionalInterface(functionalarchitecture.FunctionalInterface object) {
 				return createFunctionalInterfaceAdapter();
 			}
 			@Override

@@ -37,9 +37,4 @@
     <eLiterals name="History"/>
     <eLiterals name="DeepHistory"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="EntryType">
-    <eLiterals name="Normal"/>
-    <eLiterals name="History" value="1"/>
-    <eLiterals name="DeepHistory" value="2"/>
-  </eClassifiers>
 </ecore:EPackage>

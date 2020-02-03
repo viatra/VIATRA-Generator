@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.dslreasoner.vampire.icse;
 
 import ca.mcgill.ecse.dslreasoner.vampire.icse.GeneralTest;
+import ca.mcgill.ecse.dslreasoner.vampire.reasoner.BackendSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolver;
 import ca.mcgill.ecse.dslreasoner.vampire.reasoner.VampireSolverConfiguration;
 import functionalarchitecture.FAMTerminator;
@@ -27,8 +28,6 @@ import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -59,13 +58,11 @@ public class FAMTest {
       map.put("logicproblem", _xMIResourceFactoryImpl);
       InputOutput.<String>println("Input and output workspaces are created");
       final EcoreMetamodelDescriptor metamodel = GeneralTest.loadMetamodel(FunctionalarchitecturePackage.eINSTANCE);
-      final EList<EObject> partialModel = GeneralTest.loadPartialModel(inputs, "FAM/FaModel.xmi");
       final Object queries = null;
       InputOutput.<String>println("DSL loaded");
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
-      problem = instanceModel2Logic.transform(modelGenerationProblem, partialModel).getOutput();
       workspace.writeModel(problem, "Fam.logicproblem");
       InputOutput.<String>println("Problem created");
       long startTime = System.currentTimeMillis();
@@ -86,6 +83,7 @@ public class FAMTest {
         it.documentationLevel = DocumentationLevel.FULL;
         it.typeScopes.minNewElements = 8;
         it.typeScopes.maxNewElements = 10;
+        it.solver = BackendSolver.LOCVAMP;
         it.contCycleLevel = 5;
         it.uniquenessDuplicates = false;
       };
@@ -93,13 +91,6 @@ public class FAMTest {
       LogicResult solution = reasoner.solve(problem, vampireConfig, workspace);
       InputOutput.<String>println("Problem solved");
       List<? extends LogicModelInterpretation> interpretations = reasoner.getInterpretations(((ModelResult) solution));
-      InputOutput.<Class<? extends List>>print(interpretations.getClass());
-      for (final LogicModelInterpretation interpretation : interpretations) {
-        {
-          final EObject model = logic2Ecore.transformInterpretation(interpretation, modelGenerationProblem.getTrace());
-          workspace.writeModel(model, "model.xmi");
-        }
-      }
       long _currentTimeMillis = System.currentTimeMillis();
       long _minus = (_currentTimeMillis - startTime);
       long totalTimeMin = (_minus / 60000);
@@ -107,7 +98,6 @@ public class FAMTest {
       long _minus_1 = (_currentTimeMillis_1 - startTime);
       long _divide = (_minus_1 / 1000);
       long totalTimeSec = (_divide % 60);
-      InputOutput.<String>println("Problem solved");
       InputOutput.<String>println(((("Time was: " + Long.valueOf(totalTimeMin)) + ":") + Long.valueOf(totalTimeSec)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

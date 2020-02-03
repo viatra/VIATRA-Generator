@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fam:FunctionalArchitectureModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="FamMetamodel">
-  <rootElements xsi:type="fam:Function">
-    <interface>
-      <data xsi:type="fam:FunctionalOutput">
-        <terminator/>
-      </data>
-      <data xsi:type="fam:FunctionalOutput">
-        <terminator/>
-      </data>
-    </interface>
-  </rootElements>
-</fam:FunctionalArchitectureModel>
+<fam:FunctionalInterface xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="FamMetamodel">
+  <data xsi:type="fam:FunctionalOutput">
+    <outgoingLinks to="//@data.3"/>
+  </data>
+  <data xsi:type="fam:FunctionalInput">
+    <terminator/>
+  </data>
+  <data xsi:type="fam:FunctionalOutput"/>
+  <data xsi:type="fam:FunctionalInput" IncomingLinks="//@data.0/@outgoingLinks.0"/>
+</fam:FunctionalInterface>

@@ -1,10 +1,10 @@
 import epackage "FamMetamodel"
-import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPatterns"
+//import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPatterns"
 
 generate {
 	metamodel = { package fam }
-	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries}
-	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/famInstance.xmi"}
+//	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries}
+//	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/famInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
 		#node = 10

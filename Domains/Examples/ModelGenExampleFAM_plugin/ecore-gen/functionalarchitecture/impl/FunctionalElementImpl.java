@@ -5,7 +5,6 @@ package functionalarchitecture.impl;
 import functionalarchitecture.Function;
 import functionalarchitecture.FunctionalArchitectureModel;
 import functionalarchitecture.FunctionalElement;
-import functionalarchitecture.FunctionalInterface;
 import functionalarchitecture.FunctionalarchitecturePackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -44,7 +43,7 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 	 * @generated
 	 * @ordered
 	 */
-	protected FunctionalInterface interface_;
+	protected functionalarchitecture.FunctionalInterface interface_;
 
 	/**
 	 * The cached setting delegate for the '{@link #getModel() <em>Model</em>}' reference.
@@ -80,7 +79,7 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionalInterface getInterface() {
+	public functionalarchitecture.FunctionalInterface getInterface() {
 		return interface_;
 	}
 
@@ -89,8 +88,8 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInterface(FunctionalInterface newInterface, NotificationChain msgs) {
-		FunctionalInterface oldInterface = interface_;
+	public NotificationChain basicSetInterface(functionalarchitecture.FunctionalInterface newInterface, NotificationChain msgs) {
+		functionalarchitecture.FunctionalInterface oldInterface = interface_;
 		interface_ = newInterface;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__INTERFACE, oldInterface, newInterface);
@@ -104,13 +103,13 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInterface(FunctionalInterface newInterface) {
+	public void setInterface(functionalarchitecture.FunctionalInterface newInterface) {
 		if (newInterface != interface_) {
 			NotificationChain msgs = null;
 			if (interface_ != null)
-				msgs = ((InternalEObject)interface_).eInverseRemove(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__ELEMENT, FunctionalInterface.class, msgs);
+				msgs = ((InternalEObject)interface_).eInverseRemove(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__ELEMENT, functionalarchitecture.FunctionalInterface.class, msgs);
 			if (newInterface != null)
-				msgs = ((InternalEObject)newInterface).eInverseAdd(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__ELEMENT, FunctionalInterface.class, msgs);
+				msgs = ((InternalEObject)newInterface).eInverseAdd(this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__ELEMENT, functionalarchitecture.FunctionalInterface.class, msgs);
 			msgs = basicSetInterface(newInterface, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -197,7 +196,7 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 			case FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__INTERFACE:
 				if (interface_ != null)
 					msgs = ((InternalEObject)interface_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__INTERFACE, null, msgs);
-				return basicSetInterface((FunctionalInterface)otherEnd, msgs);
+				return basicSetInterface((functionalarchitecture.FunctionalInterface)otherEnd, msgs);
 			case FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -264,7 +263,7 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__INTERFACE:
-				setInterface((FunctionalInterface)newValue);
+				setInterface((functionalarchitecture.FunctionalInterface)newValue);
 				return;
 			case FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__MODEL:
 				setModel((FunctionalArchitectureModel)newValue);
@@ -285,7 +284,7 @@ public abstract class FunctionalElementImpl extends MinimalEObjectImpl.Container
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__INTERFACE:
-				setInterface((FunctionalInterface)null);
+				setInterface((functionalarchitecture.FunctionalInterface)null);
 				return;
 			case FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__MODEL:
 				setModel((FunctionalArchitectureModel)null);

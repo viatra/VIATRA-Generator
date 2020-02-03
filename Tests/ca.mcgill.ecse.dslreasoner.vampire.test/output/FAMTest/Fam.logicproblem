@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <language:LogicProblem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore2logicannotations="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language/ecore2logicannotation" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem" xmlns:language_1="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language">
   <types xsi:type="language_1:TypeDeclaration" name="FunctionalElement class" subtypes="//@types.2" isAbstract="true"/>
-  <types xsi:type="language_1:TypeDeclaration" name="FunctionalArchitectureModel class" subtypes="//@types.10 //@types.11" isAbstract="true"/>
+  <types xsi:type="language_1:TypeDeclaration" name="FunctionalArchitectureModel class"/>
   <types xsi:type="language_1:TypeDeclaration" name="Function class" supertypes="//@types.0"/>
   <types xsi:type="language_1:TypeDeclaration" name="FAMTerminator class"/>
   <types xsi:type="language_1:TypeDeclaration" name="InformationLink class"/>
@@ -10,8 +10,6 @@
   <types xsi:type="language_1:TypeDeclaration" name="FunctionalOutput class" supertypes="//@types.8"/>
   <types xsi:type="language_1:TypeDeclaration" name="FunctionalData class" subtypes="//@types.6 //@types.7" isAbstract="true"/>
   <types xsi:type="language_1:TypeDefinition" name="FunctionType enum" elements="//@elements.0 //@elements.1 //@elements.2"/>
-  <types xsi:type="language_1:TypeDefinition" name="FunctionalArchitectureModel class DefinedPart" supertypes="//@types.1" elements="//@elements.3"/>
-  <types xsi:type="language_1:TypeDeclaration" name="FunctionalArchitectureModel class UndefinedPart" supertypes="//@types.1"/>
   <assertions name="upperMultiplicity interface FunctionalElement" annotations="//@annotations.0">
     <value xsi:type="language_1:Forall">
       <quantifiedVariables name="src">
@@ -496,6 +494,55 @@
       </expression>
     </value>
   </assertions>
+  <assertions name="lowerMultiplicity value FunctionalData" annotations="//@annotations.19">
+    <value xsi:type="language_1:Forall">
+      <quantifiedVariables name="src">
+        <range xsi:type="language_1:ComplexTypeReference" referred="//@types.8"/>
+      </quantifiedVariables>
+      <expression xsi:type="language_1:Exists">
+        <quantifiedVariables name="trg 1">
+          <range xsi:type="language_1:IntTypeReference"/>
+        </quantifiedVariables>
+        <expression xsi:type="language_1:And">
+          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15">
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.19/@value/@quantifiedVariables.0"/>
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.19/@value/@expression/@quantifiedVariables.0"/>
+          </operands>
+        </expression>
+      </expression>
+    </value>
+  </assertions>
+  <assertions name="upperMultiplicity value FunctionalData" annotations="//@annotations.20">
+    <value xsi:type="language_1:Forall">
+      <quantifiedVariables name="src">
+        <range xsi:type="language_1:ComplexTypeReference" referred="//@types.8"/>
+      </quantifiedVariables>
+      <quantifiedVariables name="trg 1">
+        <range xsi:type="language_1:IntTypeReference"/>
+      </quantifiedVariables>
+      <quantifiedVariables name="trg 2">
+        <range xsi:type="language_1:IntTypeReference"/>
+      </quantifiedVariables>
+      <expression xsi:type="language_1:Impl">
+        <leftOperand xsi:type="language_1:And">
+          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15">
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.20/@value/@quantifiedVariables.0"/>
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.20/@value/@quantifiedVariables.1"/>
+          </operands>
+          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.15">
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.20/@value/@quantifiedVariables.0"/>
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.20/@value/@quantifiedVariables.2"/>
+          </operands>
+        </leftOperand>
+        <rightOperand xsi:type="language_1:Not">
+          <operand xsi:type="language_1:Distinct">
+            <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.20/@value/@quantifiedVariables.1"/>
+            <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.20/@value/@quantifiedVariables.2"/>
+          </operand>
+        </rightOperand>
+      </expression>
+    </value>
+  </assertions>
   <relations xsi:type="language_1:RelationDeclaration" name="interface reference FunctionalElement">
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.5"/>
@@ -556,11 +603,14 @@
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.2"/>
     <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.9"/>
   </relations>
+  <relations xsi:type="language_1:RelationDeclaration" name="value attribute FunctionalData">
+    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.8"/>
+    <parameters xsi:type="language_1:IntTypeReference"/>
+  </relations>
   <elements name="Root literal FunctionType" definedInType="//@types.9"/>
   <elements name="Intermediate literal FunctionType" definedInType="//@types.9"/>
   <elements name="Leaf literal FunctionType" definedInType="//@types.9"/>
-  <elements name="o 1" definedInType="//@types.10"/>
-  <containmentHierarchies typesOrderedInHierarchy="//@types.4 //@types.5 //@types.2 //@types.3 //@types.7 //@types.6 //@types.8 //@types.0 //@types.1 //@types.10 //@types.11" containmentRelations="//@relations.0 //@relations.3 //@relations.4 //@relations.8 //@relations.11 //@relations.12"/>
+  <containmentHierarchies typesOrderedInHierarchy="//@types.2 //@types.3 //@types.4 //@types.7 //@types.0 //@types.6 //@types.1 //@types.5 //@types.8" containmentRelations="//@relations.0 //@relations.3 //@relations.4 //@relations.8 //@relations.11 //@relations.12"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.0" relation="//@relations.0" upper="1"/>
   <annotations xsi:type="ecore2logicannotations:LowerMultiplicityAssertion" target="//@assertions.1" relation="//@relations.1" lower="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.2" relation="//@relations.1" upper="1"/>
@@ -580,4 +630,6 @@
   <annotations xsi:type="ecore2logicannotations:InverseRelationAssertion" target="//@assertions.16" inverseA="//@relations.8" inverseB="//@relations.13"/>
   <annotations xsi:type="ecore2logicannotations:LowerMultiplicityAssertion" target="//@assertions.17" relation="//@relations.14" lower="1"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.18" relation="//@relations.14" upper="1"/>
+  <annotations xsi:type="ecore2logicannotations:LowerMultiplicityAssertion" target="//@assertions.19" relation="//@relations.15" lower="1"/>
+  <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.20" relation="//@relations.15" upper="1"/>
 </language:LogicProblem>
