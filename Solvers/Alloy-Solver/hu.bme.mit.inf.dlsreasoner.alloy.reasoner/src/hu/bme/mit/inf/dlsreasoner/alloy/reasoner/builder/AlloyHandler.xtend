@@ -101,15 +101,8 @@ class AlloyHandler {
 			try{
 				answers = future.get(configuration.runtimeLimit,TimeUnit.SECONDS)
 				finished = true
-			} catch (TimeoutException ex) {
-   				// handle the timeout
-			} catch (InterruptedException e) {
-				// handle the interrupts
-			} catch (ExecutionException e) {
-				// handle other exceptions
-			} finally {
-				future.cancel(true);
-				
+			} catch (TimeoutException | InterruptedException | ExecutionException e) {
+				future.cancel(true)
 				answers = callable.partialAnswers
 				finished = false
 			}
