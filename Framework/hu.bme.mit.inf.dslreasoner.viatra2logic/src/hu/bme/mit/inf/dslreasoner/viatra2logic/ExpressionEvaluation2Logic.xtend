@@ -13,6 +13,11 @@ import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import com.microsoft.z3.BoolExpr
+import java.util.Set
+import java.util.List
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
 
 class ExpressionEvaluation2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
@@ -23,10 +28,9 @@ class ExpressionEvaluation2Logic {
 	}
 	
 	def Term transformEval(PVariable target, XExpression expression, Map<PVariable, Variable> variable2Variable) {
-		val test = expression.transform(variable2Variable)
-		numericSolver.formNumericProblemTemplate(expression)
-	
-		return test
+		numericSolver.test(expression);
+//		numericSolver.isSatisfiable(null)
+		return expression.transform(variable2Variable)
 	}
 	
 	static val N_Base = "org.eclipse.xtext.xbase.lib."
