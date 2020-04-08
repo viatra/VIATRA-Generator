@@ -48,5 +48,7 @@ abstract class TypeIndexer {
 	public def dispatch CharSequence referPrimitiveValue(String variableName, String value) {
 		'''StringElement.value(«variableName»,"«value»");'''
 	}
-
+	public def CharSequence referPrimitiveFilled(String variableName, boolean isFilled) {
+		'''PrimitiveElement.valueSet(«variableName»,«isFilled»);'''
+	}
 }

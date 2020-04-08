@@ -170,6 +170,7 @@ class PatternGenerator {
 			/////////////////////////
 			// 0.1 Existence
 			/////////////////////////
+			/** [[exist(element)]]=1 */
 			private pattern mustExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 				find interpretation(problem,interpretation);
 				LogicProblem.elements(problem,element);
@@ -178,6 +179,7 @@ class PatternGenerator {
 				PartialInterpretation.newElements(interpretation,element);
 			}
 			
+			/** [[exist(element)]]>=1/2 */
 			private pattern mayExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
 			    find mustExist(problem,interpretation,element);
 			} or {
@@ -209,46 +211,34 @@ class PatternGenerator {
 				a == b;
 			}
 			
-			////////////////////////
-			// 0.3 Required Patterns by TypeIndexer
-			////////////////////////
-			«typeIndexer.requiredQueries»
 			
 			//////////
 			// 1. Problem-Specific Base Indexers
 			//////////
 			// 1.1 Type Indexers
 			//////////
-			// 1.1.1 primitive Type Indexers
+			// 1.1.1 Required Patterns by TypeIndexer
 			//////////
-«««			pattern instanceofBoolean(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.booleanelements(interpretation,element);
-«««			}
-«««			pattern instanceofInteger(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.integerelements(interpretation,element);
-«««			} or {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.newIntegers(interpetation,element);
-«««			}
-«««			pattern instanceofReal(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.realelements(interpretation,element);
-«««			} or {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.newReals(interpetation,element);
-«««			}
-«««			pattern instanceofString(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.stringelements(interpretation,element);
-«««			} or {
-«««				find interpretation(problem,interpretation);
-«««				PartialInterpretation.newStrings(interpetation,element);
-«««			}
-			
+			«typeIndexer.requiredQueries»
 			//////////
-			// 1.1.2 domain-specific Type Indexers
+			// 1.1.2 primitive Type Indexers
+			//////////
+			// Currently unused. Refer primitive types as:
+			// > PrimitiveElement(element)
+			// specific types are referred as:
+			// > BooleanElement(variableName)
+			// > IntegerElement(variableName)
+			// > RealElement(variableName)
+			// > StringElement(variableName)
+			// And their value as
+			// > BooleanElement.value(variableName,value)
+			// > IntegerElement.value(variableName,value)
+			// > RealElement.value(variableName,value)
+			// > StringElement.value(variableName,value)
+			// Whether a value is set is defined by:
+			// > PrimitiveElement.valueSet(variableName,isFilled);
+			//////////
+			// 1.1.3 domain-specific Type Indexers
 			//////////
 			«typeIndexer.generateInstanceOfQueries(problem,emptySolution,typeAnalysisResult)»
 			
