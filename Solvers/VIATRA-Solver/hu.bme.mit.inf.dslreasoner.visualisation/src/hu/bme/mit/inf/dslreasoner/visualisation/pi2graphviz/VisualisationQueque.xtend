@@ -3,15 +3,15 @@ package hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz
 import guru.nidi.graphviz.engine.Format
 import guru.nidi.graphviz.engine.Graphviz
 import guru.nidi.graphviz.engine.GraphvizEngine
-import guru.nidi.graphviz.engine.GraphvizV8Engine
 import guru.nidi.graphviz.model.Graph
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.LinkedBlockingQueue
-import org.eclipse.xtend.lib.annotations.Data
 import java.util.function.Consumer
+import org.eclipse.xtend.lib.annotations.Data
+import guru.nidi.graphviz.engine.GraphvizV8Engine
 
 class VisualisationQueque {
 	val BlockingQueue<VisualisationQueueEntry> taskQueue = new LinkedBlockingQueue
@@ -45,7 +45,7 @@ class VisualisationQueque {
 		} else {
 			runnerThread = new Thread(new Runnable() {
 				override run() {
-					val engine = new GraphvizV8Engine()
+					val engine = new GraphvizV8Engine
 					val nullConsumer = new Consumer<GraphvizEngine>() {
 						override accept(GraphvizEngine t) {}
 					}
@@ -69,7 +69,7 @@ class VisualisationQueque {
 	private def execute(GraphvizEngine engine, Graph document, File targetFile, Format format) {
 		Graphviz.useEngine(engine);
 		try {
-			Graphviz.fromGraph(document).render(format).toFile(targetFile)
+			Graphviz.fromGraph(document).totalMemory(536870912).render(format).toFile(targetFile)
 			return null
 		} catch(IOException e){
 			return e.message
