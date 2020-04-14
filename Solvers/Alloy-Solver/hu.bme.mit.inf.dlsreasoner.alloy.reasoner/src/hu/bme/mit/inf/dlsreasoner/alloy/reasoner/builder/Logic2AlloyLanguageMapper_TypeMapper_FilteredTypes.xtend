@@ -123,8 +123,8 @@ class Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes implements Logic2AlloyL
 		// 7. Each type is in the intersection of the supertypes
 		for(type : types.filter[it.supertypes.size>=2]) {
 			trace.specification.factDeclarations += createALSFactDeclaration => [
-				it.name = support.toIDMultiple("abstract",type.name)
-				it.term = createALSEquals => [
+				it.name = support.toIDMultiple("supertypeIsInIntersection",type.name)
+				it.term = createALSSubset => [
 					it.leftOperand = createALSReference => [ it.referred = type.lookup(typeTrace.type2ALSType) ]
 					it.rightOperand = support.unfoldIntersection(type.supertypes.map[e|
 						createALSReference => [it.referred = e.lookup(typeTrace.type2ALSType)]])
@@ -135,7 +135,7 @@ class Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes implements Logic2AlloyL
 		// 8. Each abstract type is equal to the union of the subtypes
 		for(type : types.filter[isIsAbstract]) {
 			trace.specification.factDeclarations += createALSFactDeclaration => [
-				it.name = support.toIDMultiple("abstract",type.name)
+				it.name = support.toIDMultiple("abstractIsUnion",type.name)
 				it.term = createALSEquals => [
 					it.leftOperand = createALSReference => [ it.referred = type.lookup(typeTrace.type2ALSType) ]
 					it.rightOperand = support.unfoldPlus(type.subtypes.map[e|
