@@ -14,6 +14,7 @@ import java.util.Optional
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.SolverConfiguration
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {

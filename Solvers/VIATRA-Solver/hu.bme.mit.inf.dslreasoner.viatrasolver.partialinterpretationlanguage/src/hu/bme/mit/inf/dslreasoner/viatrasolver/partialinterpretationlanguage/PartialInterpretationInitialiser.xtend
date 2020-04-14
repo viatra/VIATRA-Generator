@@ -42,6 +42,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialComplexTypeInterpretation> type2Interpretation
@@ -233,7 +234,11 @@ class PartialInterpretationInitialiser {
 	
 	def private Map<RelationDeclaration, PartialRelationInterpretation> initRelations(PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		val Map<RelationDeclaration, PartialRelationInterpretation> relation2Interpretation = new HashMap
-		for(relation : interpretation.problem.relations.filter(RelationDeclaration)) {
+		val definedRelationDeclarations = interpretation.problem.relations.filter(RelationDefinition).map[defines]
+		val undefinedRelationDeclarations = interpretation.problem.relations.filter(RelationDeclaration).filter[
+			declared | !definedRelationDeclarations.exists[defined | defined === declared]
+		]
+		for(relation : undefinedRelationDeclarations) {
 			val partialInterpretation = relation.initialisePartialRelationInterpretation
 			interpretation.partialrelationinterpretation += partialInterpretation
 			relation2Interpretation.put(relation,partialInterpretation)
