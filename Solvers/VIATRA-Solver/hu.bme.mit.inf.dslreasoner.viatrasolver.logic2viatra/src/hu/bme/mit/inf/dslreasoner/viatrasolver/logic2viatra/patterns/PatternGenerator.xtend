@@ -200,17 +200,115 @@ class PatternGenerator {
 			////////////////////////
 			// 0.2 Equivalence
 			////////////////////////
-			pattern mayEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
+			pattern mayEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement)
+			// For non-primitive type. Boolean types always must equivalent or cannot equivalent
+			{
 				find mayExist(problem,interpretation,a);
 				find mayExist(problem,interpretation,b);
 				a == b;
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				IntegerElement(a);
+				IntegerElement(b);
+				PrimitiveElement.valueSet(a,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				IntegerElement(a);
+				IntegerElement(b);
+				PrimitiveElement.valueSet(b,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				RealElement(a);
+				RealElement(b);
+				PrimitiveElement.valueSet(a,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				RealElement(a);
+				RealElement(b);
+				PrimitiveElement.valueSet(b,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				RealElement(a);
+				IntegerElement(b);
+				PrimitiveElement.valueSet(a,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				RealElement(a);
+				IntegerElement(b);
+				PrimitiveElement.valueSet(b,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				IntegerElement(a);
+				RealElement(b);
+				PrimitiveElement.valueSet(a,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				IntegerElement(a);
+				RealElement(b);
+				PrimitiveElement.valueSet(b,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				StringElement(a);
+				StringElement(b);
+				PrimitiveElement.valueSet(a,false);
+			} or {
+				find mayExist(problem,interpretation,a);
+				find mayExist(problem,interpretation,b);
+				StringElement(a);
+				StringElement(b);
+				PrimitiveElement.valueSet(b,false);
 			}
+			
 			pattern mustEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
+			// For non-primitive and Boolean primitive type
 				find mustExist(problem,interpretation,a);
 				find mustExist(problem,interpretation,b);
 				a == b;
+			} or {
+				find mustExist(problem,interpretation,a);
+				find mustExist(problem,interpretation,b);
+				PrimitiveElement.valueSet(a,true);
+				PrimitiveElement.valueSet(b,true);
+				IntegerElement.value(a,value);
+				IntegerElement.value(b,value);
+			} or {
+				find mustExist(problem,interpretation,a);
+				find mustExist(problem,interpretation,b);
+				PrimitiveElement.valueSet(a,true);
+				PrimitiveElement.valueSet(b,true);
+				RealElement.value(a,value);
+				RealElement.value(b,value);
+			} or {
+				find mustExist(problem,interpretation,a);
+				find mustExist(problem,interpretation,b);
+				PrimitiveElement.valueSet(a,true);
+				PrimitiveElement.valueSet(b,true);
+				RealElement.value(a,value);
+				IntegerElement.value(b,value);
+			} or {
+				find mustExist(problem,interpretation,a);
+				find mustExist(problem,interpretation,b);
+				PrimitiveElement.valueSet(a,true);
+				PrimitiveElement.valueSet(b,true);
+				IntegerElement.value(a,value);
+				RealElement.value(b,value);
+			} or {
+				find mustExist(problem,interpretation,a);
+				find mustExist(problem,interpretation,b);
+				PrimitiveElement.valueSet(a,true);
+				PrimitiveElement.valueSet(b,true);
+				StringElement.value(a,value);
+				StringElement.value(b,value);
 			}
-			
 			
 			//////////
 			// 1. Problem-Specific Base Indexers

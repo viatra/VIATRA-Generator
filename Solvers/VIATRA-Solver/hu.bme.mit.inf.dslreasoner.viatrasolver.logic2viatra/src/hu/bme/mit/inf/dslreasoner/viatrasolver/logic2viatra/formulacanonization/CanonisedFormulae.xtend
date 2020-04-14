@@ -11,7 +11,5 @@ import org.eclipse.xtend.lib.annotations.Data
 class CanonisedFormulae {
 	CharSequence viatraCode
 	Map<Assertion,String> assertion2ConstraintPattern
-	Map<ConstantDefinition,String> constant2ValuePattern
 	Map<RelationDefinition,String> relation2ValuePattern
-	Map<FunctionDefinition,String> function2ValuePattern
 }
