@@ -335,7 +335,11 @@ class Constraint2Logic {
 	{
 		val outputVariable = constraint.outputVariable
 		val expression = expressionExtractor.extractExpression(constraint.evaluator)
-		return expressionEvaliation2Logic.transformEval(outputVariable,expression,variable2Variable)		
+		if(outputVariable === null) {
+			return expressionEvaliation2Logic.transformCheck(expression,variable2Variable)
+		} else {
+			return expressionEvaliation2Logic.transformEval(outputVariable,expression,variable2Variable)
+		}	
 	}
 	
 	def dispatch Term transformConstraint(PConstraint constraint,
