@@ -16,8 +16,10 @@ import com.microsoft.z3.BoolExpr;
 import com.microsoft.z3.Context;
 import com.microsoft.z3.Expr;
 import com.microsoft.z3.IntExpr;
+import com.microsoft.z3.Model;
 import com.microsoft.z3.Solver;
 import com.microsoft.z3.Status;
+import com.microsoft.z3.enumerations.Z3_ast_print_mode;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
@@ -42,14 +44,15 @@ public class NumericProblemSolver {
 
 	private Context ctx;
 	private Solver s;
-	private Map<XExpression, Map<Object, Expr>> bindings;
+	private Map<Object, Expr> varMap;
 
 	public NumericProblemSolver() {
 		HashMap<String, String> cfg = new HashMap<String, String>();
 		cfg.put("model", "true");
 		ctx = new Context(cfg);	
+		ctx.setPrintMode(Z3_ast_print_mode.Z3_PRINT_SMTLIB_FULL);
 		s = ctx.mkSolver();
-		bindings = new HashMap<XExpression, Map<Object, Expr>>();
+		varMap = new HashMap<Object, Expr>();
 	}
 
 	public Context getNumericProblemContext() {
@@ -80,7 +83,13 @@ public class NumericProblemSolver {
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		s.add(problemInstance);
 		if (s.check() == Status.SATISFIABLE) {
-			//TODO:  Form the solution here
+			Model m = s.getModel();
+			Set<Object> allObj = varMap.keySet();
+			for (Object o: allObj) {
+				IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
+				Integer oSol = Integer.parseInt(val.toString());
+				sol.put(o, oSol);
+			}
 		}
 		return sol;
 	}
@@ -117,6 +126,7 @@ public class NumericProblemSolver {
 			throw new Exception ("Unsupported binary operation " + name);
 		}
 		
+		System.out.println(constraint.toString());
 		return constraint;
 	}
 
@@ -181,13 +191,6 @@ public class NumericProblemSolver {
 		BoolExpr constraintInstances = ctx.mkTrue();
 		for (XExpression e: matches.keySet()) {
 			Set<Map<JvmIdentifiableElement, PrimitiveElement>> matchSets = matches.get(e);
-			Map<Object, Expr> varMap = bindings.get(e);
-
-			if (varMap == null) {
-				varMap = new HashMap<Object, Expr>();
-				bindings.put(e, varMap);
-			}
-
 			for (Map<JvmIdentifiableElement, PrimitiveElement> aMatch: matchSets) {
 				BoolExpr constraintInstance = formNumericConstraint(e, aMatch, varMap);
 				constraintInstances = ctx.mkAnd(constraintInstances, constraintInstance);
