@@ -1,6 +1,8 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +23,7 @@ import com.microsoft.z3.Solver;
 import com.microsoft.z3.Status;
 import com.microsoft.z3.enumerations.Z3_ast_print_mode;
 
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
 
@@ -59,23 +62,181 @@ public class NumericProblemSolver {
 		return ctx;
 	}
 	
-	// TODO: Remove this after integration
-	public void test(XExpression expression) throws Exception {
+	public void testIsSat(XExpression expression, Term t) throws Exception {
+		int count = 10000;
 		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
-		matches.put(expression, null);
-		isSatisfiable(matches);
+		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
+		
+		for (int i = 0; i < count; i++) {
+			Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+			for (JvmIdentifiableElement e: allElem) {
+				FakeIntegerElement intE = new FakeIntegerElement();
+				match.put(e, intE);
+			}
+			matchSet.add(match);
+		}
+		
+		matches.put(expression, matchSet);
+		long start = System.currentTimeMillis();
+		boolean sat = isSatisfiable(matches);
+		long end = System.currentTimeMillis();
+		System.out.println(sat);
+		System.out.println("Number of matches: " + count);
+		System.out.println("Running time:" + (end - start));
+	}
+	
+
+	public void testIsNotSat(XExpression expression, Term t) throws Exception {
+		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
+		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
+		FakeIntegerElement int1 = null;
+		FakeIntegerElement int2 = null;
+		boolean first = true;
+		for (JvmIdentifiableElement e: allElem) {
+			FakeIntegerElement intE = new FakeIntegerElement();
+			if (first) {
+				int1 = intE;
+				first = false;
+			} else {
+				int2 = intE;
+			}
+			
+			match.put(e, intE);
+		}
+		matchSet.add(match);
+		
+		Map<JvmIdentifiableElement,PrimitiveElement> match2 = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+		boolean first2 = true;
+		for (JvmIdentifiableElement e: allElem) {
+			if (first2) {
+				match2.put(e, int2);
+				first2 = false;
+			} else {
+				match2.put(e, int1);
+			}
+		}
+		matchSet.add(match2);
+		
+		matches.put(expression, matchSet);
+		long start = System.currentTimeMillis();
+		boolean sat = isSatisfiable(matches);
+		long end = System.currentTimeMillis();
+		System.out.println(sat);
+		System.out.println("Number of matches: ");
+		System.out.println("Running time:" + (end - start));
+	}
+
+	
+	public void testGetOneSol(XExpression expression, Term t) throws Exception {
+		int count = 10;
+		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
+		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		
+		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
+		List<Object> obj = new ArrayList<Object>();
+		
+		for (int i = 0; i < count; i++) {
+			Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+			for (JvmIdentifiableElement e: allElem) {
+				FakeIntegerElement intE = new FakeIntegerElement();
+				obj.add(intE);
+				match.put(e, intE);
+			}
+			matchSet.add(match);
+			matches.put(expression, matchSet);
+		}
+		
+		long start = System.currentTimeMillis();
+		Map<Object,Integer> sol = getOneSolution(obj, matches);
+		long end = System.currentTimeMillis();
+		
+		
+		// Print sol
+		for (Object o: sol.keySet()) {
+			System.out.println(o + " :" + sol.get(o));
+		}
+		
+		
+		System.out.println("Number of matches: " + count);
+		System.out.println("Running time:" + (end - start));
+	}
+	
+
+	public void testGetOneSol2(XExpression expression, Term t) throws Exception {
+		int count = 50;
+		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
+		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
+		List<Object> obj = new ArrayList<Object>();
+		for (int i = 0; i < count; i++) {
+			Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+			FakeIntegerElement int2 = null;
+			boolean first = false;
+			for (JvmIdentifiableElement e: allElem) {
+				FakeIntegerElement intE = new FakeIntegerElement();
+				if (first) {
+					first = false;
+				} else {
+					int2 = intE;
+				}
+				obj.add(intE);
+				match.put(e, intE);
+			}
+			
+			Map<JvmIdentifiableElement,PrimitiveElement> match2 = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+			boolean first2 = true;
+			for (JvmIdentifiableElement e: allElem) {
+				FakeIntegerElement intE = null;
+				if (first2) {
+					intE = int2;
+					first2 = false;
+				} else {
+					intE = new FakeIntegerElement();
+				}
+				obj.add(intE);
+				match2.put(e, intE);
+			}
+			
+			
+			matchSet.add(match);
+			matchSet.add(match2);
+		}
+		matches.put(expression, matchSet);
+		
+		long start = System.currentTimeMillis();
+		Map<Object,Integer> sol = getOneSolution(obj, matches);
+		long end = System.currentTimeMillis();	
+		
+		System.out.println("Number of matches: " + matchSet.size());
+		System.out.println("Running time:" + (end - start));
+	}
+	
+	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {
+		ArrayList<JvmIdentifiableElement> allElem = new ArrayList<JvmIdentifiableElement>();
+		XExpression left = ((XBinaryOperation) expression).getLeftOperand();
+		XExpression right = ((XBinaryOperation) expression).getRightOperand();
+		
+		getJvmIdentifiableElementsHelper(left, allElem);
+		getJvmIdentifiableElementsHelper(right, allElem);
+		return allElem;
+	}
+	
+	private void getJvmIdentifiableElementsHelper(XExpression e, List<JvmIdentifiableElement> allElem) {
+		if (e instanceof XFeatureCall) {
+			allElem.add(((XFeatureCall) e).getFeature());
+		} else if (e instanceof XBinaryOperation) {
+			getJvmIdentifiableElementsHelper(((XBinaryOperation) e).getLeftOperand(), allElem);
+			getJvmIdentifiableElementsHelper(((XBinaryOperation) e).getRightOperand(), allElem);
+		}
 	}
 	
 	public boolean isSatisfiable(Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
-		boolean sat = false;
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		s.add(problemInstance);
-		if (s.check() == Status.SATISFIABLE) {
-			sat = true;
-		} else {
-			sat = false;
-		}
-		return sat;
+		return s.check() == Status.SATISFIABLE;
 	}
 	
 	public Map<Object,Integer> getOneSolution(List<Object> objs, Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
@@ -84,8 +245,7 @@ public class NumericProblemSolver {
 		s.add(problemInstance);
 		if (s.check() == Status.SATISFIABLE) {
 			Model m = s.getModel();
-			Set<Object> allObj = varMap.keySet();
-			for (Object o: allObj) {
+			for (Object o: objs) {
 				IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
 				Integer oSol = Integer.parseInt(val.toString());
 				sol.put(o, oSol);
@@ -94,7 +254,7 @@ public class NumericProblemSolver {
 		return sol;
 	}
 
-	private BoolExpr formNumericConstraint(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch, Map<Object, Expr> varMap) throws Exception {
+	private BoolExpr formNumericConstraint(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch) throws Exception {
 		if (!(e instanceof XBinaryOperation)) {
 			throw new Exception ("error in check expression!!!");
 		}
@@ -103,8 +263,8 @@ public class NumericProblemSolver {
 
 		BoolExpr constraint = null;
 				
-		ArithExpr left_operand = formNumericConstraintHelper(((XBinaryOperation) e).getLeftOperand(), aMatch, varMap);
-		ArithExpr right_operand = formNumericConstraintHelper(((XBinaryOperation) e).getRightOperand(), aMatch, varMap);
+		ArithExpr left_operand = formNumericConstraintHelper(((XBinaryOperation) e).getLeftOperand(), aMatch);
+		ArithExpr right_operand = formNumericConstraintHelper(((XBinaryOperation) e).getRightOperand(), aMatch);
 
 		if (nameEndsWith(name, N_LESSTHAN)) {
 			constraint = ctx.mkLt(left_operand, right_operand);
@@ -126,12 +286,11 @@ public class NumericProblemSolver {
 			throw new Exception ("Unsupported binary operation " + name);
 		}
 		
-		System.out.println(constraint.toString());
 		return constraint;
 	}
 
 	// TODO: add variable: state of the solver
-	private ArithExpr formNumericConstraintHelper(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch, Map<Object, Expr> varMap) throws Exception {
+	private ArithExpr formNumericConstraintHelper(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch) throws Exception {
 		ArithExpr expr = null;
 		// Variables
 		if (e instanceof XFeatureCall) {
@@ -158,8 +317,8 @@ public class NumericProblemSolver {
 		// Expressions with operators
 		else if (e instanceof XBinaryOperation) {
 			String name = ((XBinaryOperation) e).getFeature().getQualifiedName();
-			ArithExpr left_operand = formNumericConstraintHelper(((XBinaryOperation) e).getLeftOperand(), aMatch, varMap);
-			ArithExpr right_operand = formNumericConstraintHelper(((XBinaryOperation) e).getRightOperand(), aMatch, varMap);
+			ArithExpr left_operand = formNumericConstraintHelper(((XBinaryOperation) e).getLeftOperand(), aMatch);
+			ArithExpr right_operand = formNumericConstraintHelper(((XBinaryOperation) e).getRightOperand(), aMatch);
 
 			if (nameEndsWith(name, N_PLUS)) {
 				expr = ctx.mkAdd(left_operand, right_operand);
@@ -192,7 +351,7 @@ public class NumericProblemSolver {
 		for (XExpression e: matches.keySet()) {
 			Set<Map<JvmIdentifiableElement, PrimitiveElement>> matchSets = matches.get(e);
 			for (Map<JvmIdentifiableElement, PrimitiveElement> aMatch: matchSets) {
-				BoolExpr constraintInstance = formNumericConstraint(e, aMatch, varMap);
+				BoolExpr constraintInstance = formNumericConstraint(e, aMatch);
 				constraintInstances = ctx.mkAnd(constraintInstances, constraintInstance);
 			}
 		}
