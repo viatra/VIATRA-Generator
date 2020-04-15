@@ -164,9 +164,8 @@ public class NumericProblemSolver {
 		System.out.println("Running time:" + (end - start));
 	}
 	
-
 	public void testGetOneSol2(XExpression expression, Term t) throws Exception {
-		int count = 50;
+		int count = 100;
 		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
 		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
 		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
@@ -206,12 +205,11 @@ public class NumericProblemSolver {
 		}
 		matches.put(expression, matchSet);
 		
-		long start = System.currentTimeMillis();
-		Map<Object,Integer> sol = getOneSolution(obj, matches);
-		long end = System.currentTimeMillis();	
-		
 		System.out.println("Number of matches: " + matchSet.size());
-		System.out.println("Running time:" + (end - start));
+		for (int i = 0; i < 10; i++) {
+			Map<Object,Integer> sol = getOneSolution(obj, matches);
+			Thread.sleep(3000);
+		}	
 	}
 	
 	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {
@@ -241,16 +239,26 @@ public class NumericProblemSolver {
 	
 	public Map<Object,Integer> getOneSolution(List<Object> objs, Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
 		Map<Object,Integer> sol = new HashMap<Object, Integer>();
+		long startformingProblem = System.currentTimeMillis();
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
+		long endformingProblem = System.currentTimeMillis();
+		System.out.println("Forming problem: " + (endformingProblem - startformingProblem));
 		s.add(problemInstance);
+		long startSolvingProblem = System.currentTimeMillis();
 		if (s.check() == Status.SATISFIABLE) {
 			Model m = s.getModel();
+			long endSolvingProblem = System.currentTimeMillis();
+			System.out.println("Solving problem: " + (endSolvingProblem - startSolvingProblem));
+			long startFormingSolution = System.currentTimeMillis();
 			for (Object o: objs) {
 				IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
 				Integer oSol = Integer.parseInt(val.toString());
 				sol.put(o, oSol);
 			}
+			long endFormingSolution = System.currentTimeMillis();
+			System.out.println("Forming solution: " + (endFormingSolution - startFormingSolution));
 		}
+		
 		return sol;
 	}
 
