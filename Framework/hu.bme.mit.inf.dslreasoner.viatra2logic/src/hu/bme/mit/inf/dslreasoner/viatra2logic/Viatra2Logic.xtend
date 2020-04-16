@@ -248,6 +248,10 @@ class  Viatra2Logic {
 						innerPositiveVariables += logicVariable
 					}
 					variable2Variable.put(innerVariable,logicVariable)
+					body.pattern.lookup(viatra2LogicTrace.query2Annotation).variableTrace += createVariableMapping=>[
+						it.sourcePVariable = innerVariable
+						it.targetLogicVariable = logicVariable
+					]
 				}
 			}
 		}
@@ -267,7 +271,7 @@ class  Viatra2Logic {
 		} else {
 			Exists(innerPositiveVariables,allNegativeVariablesAreSatisfied);
 		}
-		
+	
 		return allVariablesAreExisting
 	}
 	

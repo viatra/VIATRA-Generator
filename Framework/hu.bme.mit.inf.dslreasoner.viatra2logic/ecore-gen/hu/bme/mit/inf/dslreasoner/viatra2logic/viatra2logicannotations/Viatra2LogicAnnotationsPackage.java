@@ -96,13 +96,22 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	int TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Variable Trace</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Transfomed Viatra Query</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFOMED_VIATRA_QUERY_FEATURE_COUNT = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 2;
+	int TRANSFOMED_VIATRA_QUERY_FEATURE_COUNT = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Transfomed Viatra Query</em>' class.
@@ -208,6 +217,53 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.VariableMappingImpl <em>Variable Mapping</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.VariableMappingImpl
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.Viatra2LogicAnnotationsPackageImpl#getVariableMapping()
+	 * @generated
+	 */
+	int VARIABLE_MAPPING = 3;
+
+	/**
+	 * The feature id for the '<em><b>Source PVariable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_MAPPING__SOURCE_PVARIABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Target Logic Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_MAPPING__TARGET_LOGIC_VARIABLE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Variable Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_MAPPING_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Variable Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_MAPPING_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery <em>Transfomed Viatra Query</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -238,6 +294,17 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTransfomedViatraQuery_PatternPQuery();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getVariableTrace <em>Variable Trace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variable Trace</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getVariableTrace()
+	 * @see #getTransfomedViatraQuery()
+	 * @generated
+	 */
+	EReference getTransfomedViatraQuery_VariableTrace();
 
 	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransformedViatraWellformednessConstraint <em>Transformed Viatra Wellformedness Constraint</em>}'.
@@ -280,6 +347,38 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDefinedByDerivedFeature_Query();
+
+	/**
+	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping <em>Variable Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Mapping</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping
+	 * @generated
+	 */
+	EClass getVariableMapping();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping#getSourcePVariable <em>Source PVariable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source PVariable</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping#getSourcePVariable()
+	 * @see #getVariableMapping()
+	 * @generated
+	 */
+	EAttribute getVariableMapping_SourcePVariable();
+
+	/**
+	 * Returns the meta object for the reference '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping#getTargetLogicVariable <em>Target Logic Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Logic Variable</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping#getTargetLogicVariable()
+	 * @see #getVariableMapping()
+	 * @generated
+	 */
+	EReference getVariableMapping_TargetLogicVariable();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -331,6 +430,14 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 		EAttribute TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY = eINSTANCE.getTransfomedViatraQuery_PatternPQuery();
 
 		/**
+		 * The meta object literal for the '<em><b>Variable Trace</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE = eINSTANCE.getTransfomedViatraQuery_VariableTrace();
+
+		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransformedViatraWellformednessConstraintImpl <em>Transformed Viatra Wellformedness Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -365,6 +472,32 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINED_BY_DERIVED_FEATURE__QUERY = eINSTANCE.getDefinedByDerivedFeature_Query();
+
+		/**
+		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.VariableMappingImpl <em>Variable Mapping</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.VariableMappingImpl
+		 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.Viatra2LogicAnnotationsPackageImpl#getVariableMapping()
+		 * @generated
+		 */
+		EClass VARIABLE_MAPPING = eINSTANCE.getVariableMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Source PVariable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE_MAPPING__SOURCE_PVARIABLE = eINSTANCE.getVariableMapping_SourcePVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Logic Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_MAPPING__TARGET_LOGIC_VARIABLE = eINSTANCE.getVariableMapping_TargetLogicVariable();
 
 	}
 

@@ -59,6 +59,7 @@ public class Viatra2LogicAnnotationsFactoryImpl extends EFactoryImpl implements 
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY: return createTransfomedViatraQuery();
 			case Viatra2LogicAnnotationsPackage.TRANSFORMED_VIATRA_WELLFORMEDNESS_CONSTRAINT: return createTransformedViatraWellformednessConstraint();
 			case Viatra2LogicAnnotationsPackage.DEFINED_BY_DERIVED_FEATURE: return createDefinedByDerivedFeature();
+			case Viatra2LogicAnnotationsPackage.VARIABLE_MAPPING: return createVariableMapping();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -69,6 +70,7 @@ public class Viatra2LogicAnnotationsFactoryImpl extends EFactoryImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransfomedViatraQuery createTransfomedViatraQuery() {
 		TransfomedViatraQueryImpl transfomedViatraQuery = new TransfomedViatraQueryImpl();
 		return transfomedViatraQuery;
@@ -79,6 +81,7 @@ public class Viatra2LogicAnnotationsFactoryImpl extends EFactoryImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransformedViatraWellformednessConstraint createTransformedViatraWellformednessConstraint() {
 		TransformedViatraWellformednessConstraintImpl transformedViatraWellformednessConstraint = new TransformedViatraWellformednessConstraintImpl();
 		return transformedViatraWellformednessConstraint;
@@ -89,6 +92,7 @@ public class Viatra2LogicAnnotationsFactoryImpl extends EFactoryImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinedByDerivedFeature createDefinedByDerivedFeature() {
 		DefinedByDerivedFeatureImpl definedByDerivedFeature = new DefinedByDerivedFeatureImpl();
 		return definedByDerivedFeature;
@@ -99,6 +103,18 @@ public class Viatra2LogicAnnotationsFactoryImpl extends EFactoryImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public VariableMapping createVariableMapping() {
+		VariableMappingImpl variableMapping = new VariableMappingImpl();
+		return variableMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Viatra2LogicAnnotationsPackage getViatra2LogicAnnotationsPackage() {
 		return (Viatra2LogicAnnotationsPackage)getEPackage();
 	}

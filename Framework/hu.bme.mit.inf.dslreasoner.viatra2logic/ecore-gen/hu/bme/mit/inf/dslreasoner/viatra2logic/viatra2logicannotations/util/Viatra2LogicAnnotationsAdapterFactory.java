@@ -84,6 +84,10 @@ public class Viatra2LogicAnnotationsAdapterFactory extends AdapterFactoryImpl {
 				return createDefinedByDerivedFeatureAdapter();
 			}
 			@Override
+			public Adapter caseVariableMapping(VariableMapping object) {
+				return createVariableMappingAdapter();
+			}
+			@Override
 			public Adapter caseAnnotation(Annotation object) {
 				return createAnnotationAdapter();
 			}
@@ -154,6 +158,20 @@ public class Viatra2LogicAnnotationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinedByDerivedFeatureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping <em>Variable Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping
+	 * @generated
+	 */
+	public Adapter createVariableMappingAdapter() {
 		return null;
 	}
 
