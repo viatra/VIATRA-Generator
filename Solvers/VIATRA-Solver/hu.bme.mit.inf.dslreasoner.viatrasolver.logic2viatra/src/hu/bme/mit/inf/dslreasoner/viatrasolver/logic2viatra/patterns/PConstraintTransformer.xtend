@@ -20,16 +20,25 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.Binary
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping
+import java.util.List
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.PrimitiveTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
 
 class PConstraintTransformer {
 	val extension RelationDefinitionIndexer relationDefinitionIndexer;
 	val expressionExtractor = new XExpressionExtractor
+	val expressionGenerator = new PExpressionGenerator
 	
 	new(RelationDefinitionIndexer relationDefinitionIndexer) {
 		this.relationDefinitionIndexer = relationDefinitionIndexer
 	}
 	
-	dispatch def transformConstraint(TypeConstraint constraint, Modality modality) {
+	dispatch def transformConstraint(TypeConstraint constraint, Modality modality, List<VariableMapping> variableMapping) {
 		val touple = constraint.variablesTuple
 		if(touple.size == 1) {
 			val inputKey = constraint.equivalentJudgement.inputKey
@@ -58,7 +67,7 @@ class PConstraintTransformer {
 			throw new UnsupportedOperationException('''Unsupported touple size: «touple.size»''')
 		}
 	}
-	dispatch def transformConstraint(TypeFilterConstraint constraint, Modality modality) {
+	dispatch def transformConstraint(TypeFilterConstraint constraint, Modality modality, List<VariableMapping> variableMapping) {
 		val touple = constraint.variablesTuple
 		if(touple.size == 1) {
 			val inputKey = constraint.equivalentJudgement.inputKey
@@ -88,7 +97,7 @@ class PConstraintTransformer {
 		}
 	}
 	
-	dispatch def transformConstraint(Equality equality, Modality modality) {
+	dispatch def transformConstraint(Equality equality, Modality modality, List<VariableMapping> variableMapping) {
 		val a = equality.who
 		val b = equality.withWhom
 		transformEquality(modality.toMustMay, a, b)
@@ -99,7 +108,7 @@ class PConstraintTransformer {
 		else '''find mayEquivalent(problem, interpretation, «a.canonizeName», «b.canonizeName»);'''
 	}	
 	
-	dispatch def transformConstraint(Inequality inequality, Modality modality) {
+	dispatch def transformConstraint(Inequality inequality, Modality modality, List<VariableMapping> variableMapping) {
 		val a = inequality.who
 		val b = inequality.withWhom
 		if(modality.isCurrent) {
@@ -111,7 +120,7 @@ class PConstraintTransformer {
 		}
 	}
 	
-	dispatch def transformConstraint(NegativePatternCall pcall, Modality modality) {
+	dispatch def transformConstraint(NegativePatternCall pcall, Modality modality, List<VariableMapping> variableMapping) {
 		val params = (0..<pcall.actualParametersTuple.size).map[index | 
 			val variable = pcall.actualParametersTuple.get(index) as PVariable
 			return variable.canonizeName
@@ -119,24 +128,24 @@ class PConstraintTransformer {
 		return referPattern(pcall.referredQuery,params,modality.dual,false,false)
 	}
 	
-	dispatch def transformConstraint(PositivePatternCall pcall, Modality modality) {
+	dispatch def transformConstraint(PositivePatternCall pcall, Modality modality, List<VariableMapping> variableMapping) {
 		val params = (0..<pcall.variablesTuple.size).map[index | 
 			val variable = pcall.variablesTuple.get(index) as PVariable
 			return variable.canonizeName
 		]
 		return referPattern(pcall.referredQuery,params,modality,true,false)
 	}
-	dispatch def transformConstraint(BinaryTransitiveClosure pcall, Modality modality) {
+	dispatch def transformConstraint(BinaryTransitiveClosure pcall, Modality modality, List<VariableMapping> variableMapping) {
 		val params = (0..1).map[index | 
 			val variable = pcall.getVariableInTuple(index) as PVariable
 			return variable.canonizeName
 		]
 		return referPattern(pcall.referredQuery,params,modality,true,true)
 	}
-	dispatch def transformConstraint(ExportedParameter e, Modality modality) {
+	dispatch def transformConstraint(ExportedParameter e, Modality modality, List<VariableMapping> variableMapping) {
 		return '''// «e.parameterName» is exported'''
 	}
-	dispatch def transformConstraint(ConstantValue c, Modality modality) {
+	dispatch def transformConstraint(ConstantValue c, Modality modality, List<VariableMapping> variableMapping) {
 		val target = c.supplierKey
 		
 		var String targetString;
@@ -146,19 +155,19 @@ class PConstraintTransformer {
 			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Integer) {
 			targetString = '''const_«target»_Integer'''
-			additionalDefinition = '''IntegerElement.value(«targetString»,«target»);'''
+			additionalDefinition = '''PrimitiveElement.valueSet(«targetString»,true); IntegerElement.value(«targetString»,«target»);'''
 		} else if(target instanceof Boolean) {
 			targetString = '''const_«target»_Boolean'''
-			additionalDefinition = '''BooleanElement.value(«targetString»,«target»);'''
+			additionalDefinition = '''PrimitiveElement.valueSet(«targetString»,true); BooleanElement.value(«targetString»,«target»);'''
 		} else if(target instanceof String) {
 			targetString = '''const_«target»_String'''
-			additionalDefinition = '''StringElement.value(«targetString»,"«target»");'''
+			additionalDefinition = '''PrimitiveElement.valueSet(«targetString»,true); StringElement.value(«targetString»,"«target»");'''
 		} else if(target instanceof Double) {
-			targetString = '''const_«target»_Number'''
-			additionalDefinition = '''RealElement.value(«targetString»,"«target»");'''
+			targetString = '''const_«target»_Real'''
+			additionalDefinition = '''PrimitiveElement.valueSet(«targetString»,true); RealElement.value(«targetString»,«target»);'''
 		} else if(target instanceof Float) {
-			targetString = '''const_«target»_Number'''
-			additionalDefinition = '''RealElement.value(«targetString»,"«target»");'''
+			targetString = '''const_«target»_Real'''
+			additionalDefinition = '''PrimitiveElement.valueSet(«targetString»,true); RealElement.value(«targetString»,«target»);'''
 		} else {
 			throw new UnsupportedOperationException('''Unknown constant type: «target.class»''')
 		}
@@ -171,22 +180,64 @@ class PConstraintTransformer {
 		return '''«sourceName» == «targetString»;«additionalDefinition»''';
 	}
 	
+	protected def valueVariable(PVariable v) {
+		"value_"+v.canonizeName
+	}
+	protected def valueSetted(PVariable v) {
+		"setted_"+v.canonizeName
+	}
+	def hasValue(PVariable v, String target, Modality m, List<VariableMapping> variableMapping) {
+		val typeReference = variableMapping.filter[it.sourcePVariable === v].head.targetLogicVariable.range as PrimitiveTypeReference
+		if(m.isMay) {
+			'''PrimitiveElement.valueSet(«v.canonizeName»,«v.valueSetted»); «hasValueExpression(typeReference,v,v.valueVariable)» check(!«v.valueSetted»||«v.valueVariable»==«target»));'''
+		} else { // Must or current
+			'''PrimitiveElement.valueSet(«v.canonizeName»,true);«hasValueExpression(typeReference,v,target)»'''
+		}
+	}
 	
+	private def hasValueExpression(List<VariableMapping> variableMapping, PVariable v, String target) {
+		hasValueExpression(
+			variableMapping.filter[it.sourcePVariable === v].head.targetLogicVariable.range,
+			v,
+			target
+		)
+	}
+	private def dispatch hasValueExpression(BoolTypeReference typeReference, PVariable v, String target)	'''BooleanElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpression(IntTypeReference typeReference, PVariable v, String target)		'''IntegerElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpression(RealTypeReference typeReference, PVariable v, String target)	'''RealElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpression(StringTypeReference typeReference, PVariable v, String target)	'''StringElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpression(TypeReference typeReference, PVariable v, String target) {
+		throw new UnsupportedOperationException('''Unsupported primitive type reference: «typeReference.class»''')
+	}
 	
-	dispatch def transformConstrait(ExpressionEvaluation e, Modality modality) {
+	dispatch def transformConstraint(ExpressionEvaluation e, Modality modality, List<VariableMapping> variableMapping) {
 		if(e.outputVariable!==null) {
 			throw new UnsupportedOperationException('''Only check expressions are supported "«e.class.name»"!''')
 		} else {
 			val expression = expressionExtractor.extractExpression(e.evaluator)
-			if(modality.isMust) {
-				return ''''''
-			} else if(modality.isMay) {
-				return ''''''
+			if(modality.isMay) {
+				return '''
+					«FOR variable: e.affectedVariables»
+						PrimitiveElement.valueSet(«variable.canonizeName»,«variable.valueSetted»); «hasValueExpression(variableMapping,variable,variable.valueVariable)»
+					«ENDFOR»
+					check(
+						«FOR variable: e.affectedVariables SEPARATOR " || "»!«variable.valueSetted»«ENDFOR»
+						||
+						(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable])»)
+					);
+				'''
+			} else { // Must or Current
+				return '''
+					«FOR variable: e.affectedVariables»
+						PrimitiveElement.valueSet(«variable.canonizeName»,true); «hasValueExpression(variableMapping,variable,variable.valueVariable)»
+					«ENDFOR»
+					check(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable])»);
+				'''
 			}
 		}
 	}
-	
-	dispatch def transformConstraint(PConstraint c, Modality modality) {
+
+	dispatch def transformConstraint(PConstraint c, Modality modality, List<VariableMapping> variableMapping) {
 		throw new UnsupportedOperationException('''Unknown constraint type: "«c.class.name»"!''')
 	}
 }
