@@ -63,6 +63,7 @@ public class TransformedViatraWellformednessConstraintImpl extends AssertionAnno
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransfomedViatraQuery getQuery() {
 		if (query != null && query.eIsProxy()) {
 			InternalEObject oldQuery = (InternalEObject)query;
@@ -89,6 +90,7 @@ public class TransformedViatraWellformednessConstraintImpl extends AssertionAnno
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setQuery(TransfomedViatraQuery newQuery) {
 		TransfomedViatraQuery oldQuery = query;
 		query = newQuery;

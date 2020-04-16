@@ -74,7 +74,7 @@ class RelationDefinitionIndexer {
 			«FOR body : p.disjunctBodies.bodies SEPARATOR "or"»{
 				find interpretation(problem,interpretation);
 				«FOR constraint : body.constraints»
-					«this.constraintTransformer.transformConstraint(constraint,modality)»
+					«this.constraintTransformer.transformConstraint(constraint,modality,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
 				«ENDFOR»
 			}«ENDFOR»
 		'''
