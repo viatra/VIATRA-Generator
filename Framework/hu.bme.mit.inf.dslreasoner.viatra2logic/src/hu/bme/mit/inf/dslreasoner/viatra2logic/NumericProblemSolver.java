@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -165,7 +166,7 @@ public class NumericProblemSolver {
 	}
 	
 	public void testGetOneSol2(XExpression expression, Term t) throws Exception {
-		int count = 100;
+		int count = 250;
 		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
 		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
 		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
@@ -208,6 +209,49 @@ public class NumericProblemSolver {
 		System.out.println("Number of matches: " + matchSet.size());
 		for (int i = 0; i < 10; i++) {
 			Map<Object,Integer> sol = getOneSolution(obj, matches);
+			System.out.println("**********************");
+			Thread.sleep(3000);
+		}	
+	}
+	
+	public void testGetOneSol3(XExpression expression, Term t) throws Exception {
+		int count = 15000;
+		Random rand = new Random();
+		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
+		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
+		List<Object> obj = new ArrayList<Object>();
+		for (int i = 0; i < count; i++) {
+			Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+			if (obj.size() > 1) {
+				for (JvmIdentifiableElement e: allElem) {
+					FakeIntegerElement intE = null;
+					int useOld = rand.nextInt(10);
+					if (useOld == 1) {
+						System.out.println("here ");
+						int index = rand.nextInt(obj.size());
+						intE = (FakeIntegerElement) obj.get(index);
+					} else {
+						intE = new FakeIntegerElement();
+					}
+					obj.add(intE);
+					match.put(e, intE);
+				}
+			} else {
+				for (JvmIdentifiableElement e: allElem) {
+					FakeIntegerElement intE = new FakeIntegerElement();
+					obj.add(intE);
+					match.put(e, intE);
+				}
+			}
+			matchSet.add(match);
+		}
+		matches.put(expression, matchSet);
+		
+		System.out.println("Number of matches: " + matchSet.size());
+		for (int i = 0; i < 10; i++) {
+			Map<Object,Integer> sol = getOneSolution(obj, matches);
+			System.out.println("**********************");
 			Thread.sleep(3000);
 		}	
 	}
@@ -257,6 +301,8 @@ public class NumericProblemSolver {
 			}
 			long endFormingSolution = System.currentTimeMillis();
 			System.out.println("Forming solution: " + (endFormingSolution - startFormingSolution));
+		} else {
+			System.out.println("Unsatisfiable");
 		}
 		
 		return sol;

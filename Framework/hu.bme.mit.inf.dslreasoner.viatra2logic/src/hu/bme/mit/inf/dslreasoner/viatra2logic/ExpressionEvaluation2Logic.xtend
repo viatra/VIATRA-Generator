@@ -25,7 +25,8 @@ class ExpressionEvaluation2Logic {
 	def Term transformEval(PVariable target, XExpression expression, Map<PVariable, Variable> variable2Variable) {
 //		numericSolver.testIsNotSat(expression, expression.transform(variable2Variable));
 //		numericSolver.testGetOneSol(expression, expression.transform(variable2Variable));
-		numericSolver.testGetOneSol2(expression, expression.transform(variable2Variable));
+//		numericSolver.testGetOneSol2(expression, expression.transform(variable2Variable));
+		numericSolver.testGetOneSol3(expression, expression.transform(variable2Variable));
 //		numericSolver.testIsSat(expression, expression.transform(variable2Variable));
 
 		return expression.transform(variable2Variable)
