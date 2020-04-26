@@ -16,12 +16,20 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class ExpressionEvaluation2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
+	val NumericProblemSolver numericSolver = new NumericProblemSolver
 	
 	def Term transformCheck(XExpression expression, Map<PVariable, Variable> variable2Variable) {
 		return expression.transform(variable2Variable)
 	}
+	
 	def Term transformEval(PVariable target, XExpression expression, Map<PVariable, Variable> variable2Variable) {
-		return target.lookup(variable2Variable) == expression.transform(variable2Variable)
+//		numericSolver.testIsNotSat(expression, expression.transform(variable2Variable));
+//		numericSolver.testGetOneSol(expression, expression.transform(variable2Variable));
+//		numericSolver.testGetOneSol2(expression, expression.transform(variable2Variable));
+		numericSolver.testGetOneSol3(expression, expression.transform(variable2Variable));
+//		numericSolver.testIsSat(expression, expression.transform(variable2Variable));
+
+		return expression.transform(variable2Variable)
 	}
 	
 	static val N_Base = "org.eclipse.xtext.xbase.lib."
