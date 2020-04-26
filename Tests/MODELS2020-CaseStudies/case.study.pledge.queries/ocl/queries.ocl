@@ -1,0 +1,14 @@
+import 'file:/Users/Aren Babikian/git/VIATRA-Attributes/original.PLEDGE.case.studies/model/CD_Case_A.uml'
+--e.g., import 'file:/Users/User_X/CD_Case_A.uml'
+
+package Taxation
+
+context Income inv x:
+			let involved_details:Set(Income_Detail)=self.details->select(i:Income_Detail| i.is_worked=true) in
+					involved_details.amount->sum()
+	
+context Expense inv inv11:  
+let max:Real = if((self.income.income_amount / 2)>50) then self.income.income_amount / 2 else 50 endif in
+self.declared_amount >= 50 and self.declared_amount <= max
+
+endpackage

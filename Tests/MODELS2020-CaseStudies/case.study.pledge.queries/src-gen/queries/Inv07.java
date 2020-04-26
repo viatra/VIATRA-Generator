@@ -1,0 +1,455 @@
+/**
+ * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ */
+package queries;
+
+import Taxation.Income;
+import com.google.common.base.Objects;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
+import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
+import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
+import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
+import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
+import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IExpressionEvaluator;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IValueProvider;
+import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
+import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
+import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
+import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
+import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
+
+/**
+ * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
+ * 
+ * <p>Original source:
+ *         <code><pre>
+ *         //inv7-OrderedSet
+ *         {@literal @}Constraint(message = "inv07", severity = "error", key = {inc})
+ *         pattern inv07(inc : Income) {
+ *         	Income.details.distance(inc, d1);
+ *         	Income.details.distance(inc, d2);
+ *         	check(d1 != d2);//compare values
+ *         }
+ * </pre></code>
+ * 
+ * @see Matcher
+ * @see Match
+ * 
+ */
+@SuppressWarnings("all")
+public final class Inv07 extends BaseGeneratedEMFQuerySpecification<Inv07.Matcher> {
+  /**
+   * Pattern-specific match representation of the queries.inv07 pattern,
+   * to be used in conjunction with {@link Matcher}.
+   * 
+   * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
+   * Each instance is a (possibly partial) substitution of pattern parameters,
+   * usable to represent a match of the pattern in the result of a query,
+   * or to specify the bound (fixed) input parameters when issuing a query.
+   * 
+   * @see Matcher
+   * 
+   */
+  public static abstract class Match extends BasePatternMatch {
+  }
+  
+  /**
+   * Generated pattern matcher API of the queries.inv07 pattern,
+   * providing pattern-specific query methods.
+   * 
+   * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
+   * e.g. in conjunction with {@link ViatraQueryEngine#on(QueryScope)}.
+   * 
+   * <p>Matches of the pattern will be represented as {@link Match}.
+   * 
+   * <p>Original source:
+   * <code><pre>
+   * //inv7-OrderedSet
+   * {@literal @}Constraint(message = "inv07", severity = "error", key = {inc})
+   * pattern inv07(inc : Income) {
+   * 	Income.details.distance(inc, d1);
+   * 	Income.details.distance(inc, d2);
+   * 	check(d1 != d2);//compare values
+   * }
+   * </pre></code>
+   * 
+   * @see Match
+   * @see Inv07
+   * 
+   */
+  public static class Matcher extends BaseMatcher<Inv07.Match> {
+    /**
+     * Initializes the pattern matcher within an existing VIATRA Query engine.
+     * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
+     * 
+     * @param engine the existing VIATRA Query engine in which this matcher will be created.
+     * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
+     * 
+     */
+    public static Inv07.Matcher on(final ViatraQueryEngine engine) {
+      // check if matcher already exists
+      Matcher matcher = engine.getExistingMatcher(querySpecification());
+      if (matcher == null) {
+          matcher = (Matcher)engine.getMatcher(querySpecification());
+      }
+      return matcher;
+    }
+    
+    /**
+     * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
+     * @return an initialized matcher
+     * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
+     * 
+     */
+    public static Inv07.Matcher create() {
+      return new Matcher();
+    }
+    
+    private static final int POSITION_INC = 0;
+    
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(Inv07.Matcher.class);
+    
+    /**
+     * Initializes the pattern matcher within an existing VIATRA Query engine.
+     * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
+     * 
+     * @param engine the existing VIATRA Query engine in which this matcher will be created.
+     * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
+     * 
+     */
+    private Matcher() {
+      super(querySpecification());
+    }
+    
+    /**
+     * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return matches represented as a Match object.
+     * 
+     */
+    public Collection<Inv07.Match> getAllMatches(final Income pInc) {
+      return rawStreamAllMatches(new Object[]{pInc}).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return a stream of matches represented as a Match object.
+     * 
+     */
+    public Stream<Inv07.Match> streamAllMatches(final Income pInc) {
+      return rawStreamAllMatches(new Object[]{pInc});
+    }
+    
+    /**
+     * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
+     * Neither determinism nor randomness of selection is guaranteed.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return a match represented as a Match object, or null if no match is found.
+     * 
+     */
+    public Optional<Inv07.Match> getOneArbitraryMatch(final Income pInc) {
+      return rawGetOneArbitraryMatch(new Object[]{pInc});
+    }
+    
+    /**
+     * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
+     * under any possible substitution of the unspecified parameters (if any).
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return true if the input is a valid (partial) match of the pattern.
+     * 
+     */
+    public boolean hasMatch(final Income pInc) {
+      return rawHasMatch(new Object[]{pInc});
+    }
+    
+    /**
+     * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return the number of pattern matches found.
+     * 
+     */
+    public int countMatches(final Income pInc) {
+      return rawCountMatches(new Object[]{pInc});
+    }
+    
+    /**
+     * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
+     * Neither determinism nor randomness of selection is guaranteed.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @param processor the action that will process the selected match.
+     * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
+     * 
+     */
+    public boolean forOneArbitraryMatch(final Income pInc, final Consumer<? super Inv07.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pInc}, processor);
+    }
+    
+    /**
+     * Returns a new (partial) match.
+     * This can be used e.g. to call the matcher with a partial match.
+     * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return the (partial) match object.
+     * 
+     */
+    public Inv07.Match newMatch(final Income pInc) {
+      return Inv07.Match.newMatch(pInc);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for inc.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    protected Stream<Income> rawStreamAllValuesOfinc(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_INC, parameters).map(Income.class::cast);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for inc.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Income> getAllValuesOfinc() {
+      return rawStreamAllValuesOfinc(emptyArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for inc.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Income> streamAllValuesOfinc() {
+      return rawStreamAllValuesOfinc(emptyArray());
+    }
+    
+    @Override
+    protected Inv07.Match tupleToMatch(final Tuple t) {
+      try {
+          return Inv07.Match.newMatch((Income) t.get(POSITION_INC));
+      } catch(ClassCastException e) {
+          LOGGER.error("Element(s) in tuple not properly typed!",e);
+          return null;
+      }
+    }
+    
+    @Override
+    protected Inv07.Match arrayToMatch(final Object[] match) {
+      try {
+          return Inv07.Match.newMatch((Income) match[POSITION_INC]);
+      } catch(ClassCastException e) {
+          LOGGER.error("Element(s) in array not properly typed!",e);
+          return null;
+      }
+    }
+    
+    @Override
+    protected Inv07.Match arrayToMatchMutable(final Object[] match) {
+      try {
+          return Inv07.Match.newMutableMatch((Income) match[POSITION_INC]);
+      } catch(ClassCastException e) {
+          LOGGER.error("Element(s) in array not properly typed!",e);
+          return null;
+      }
+    }
+    
+    /**
+     * @return the singleton instance of the query specification of this pattern
+     * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
+     * 
+     */
+    public static IQuerySpecification<Inv07.Matcher> querySpecification() {
+      return Inv07.instance();
+    }
+  }
+  
+  private Inv07() {
+    super(GeneratedPQuery.INSTANCE);
+  }
+  
+  /**
+   * @return the singleton instance of the query specification
+   * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
+   * 
+   */
+  public static Inv07 instance() {
+    try{
+        return LazyHolder.INSTANCE;
+    } catch (ExceptionInInitializerError err) {
+        throw processInitializerError(err);
+    }
+  }
+  
+  @Override
+  protected Inv07.Matcher instantiate(final ViatraQueryEngine engine) {
+    return Inv07.Matcher.on(engine);
+  }
+  
+  @Override
+  public Inv07.Matcher instantiate() {
+    return Inv07.Matcher.create();
+  }
+  
+  @Override
+  public Inv07.Match newEmptyMatch() {
+    return Inv07.Match.newEmptyMatch();
+  }
+  
+  @Override
+  public Inv07.Match newMatch(final Object... parameters) {
+    return Inv07.Match.newMatch((Taxation.Income) parameters[0]);
+  }
+  
+  /**
+   * Inner class allowing the singleton instance of {@link Inv07} to be created 
+   *     <b>not</b> at the class load time of the outer class, 
+   *     but rather at the first call to {@link Inv07#instance()}.
+   * 
+   * <p> This workaround is required e.g. to support recursion.
+   * 
+   */
+  private static class LazyHolder {
+    private static final Inv07 INSTANCE = new Inv07();
+    
+    /**
+     * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
+     * This initialization order is required to support indirect recursion.
+     * 
+     * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
+     * 
+     */
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
+    
+    public static Object ensureInitialized() {
+      INSTANCE.ensureInitializedInternal();
+      return null;
+    }
+  }
+  
+  private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
+    private static final Inv07.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    
+    private final PParameter parameter_inc = new PParameter("inc", "Taxation.Income", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http:///TaxCard.ecore", "Income")), PParameterDirection.INOUT);
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_inc);
+    
+    private GeneratedPQuery() {
+      super(PVisibility.PUBLIC);
+    }
+    
+    @Override
+    public String getFullyQualifiedName() {
+      return "queries.inv07";
+    }
+    
+    @Override
+    public List<String> getParameterNames() {
+      return Arrays.asList("inc");
+    }
+    
+    @Override
+    public List<PParameter> getParameters() {
+      return parameters;
+    }
+    
+    @Override
+    public Set<PBody> doGetContainedBodies() {
+      setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
+      Set<PBody> bodies = new LinkedHashSet<>();
+      {
+          PBody body = new PBody(this);
+          PVariable var_inc = body.getOrCreateVariableByName("inc");
+          PVariable var_d1 = body.getOrCreateVariableByName("d1");
+          PVariable var_d2 = body.getOrCreateVariableByName("d2");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_inc), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Income")));
+          body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
+             new ExportedParameter(body, var_inc, parameter_inc)
+          ));
+          // 	Income.details.distance(inc, d1)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_inc), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Income")));
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_inc, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http:///TaxCard.ecore", "Income", "details")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Income_Detail")));
+          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http:///TaxCard.ecore", "Income_Detail", "distance")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EDouble")));
+          new Equality(body, var__virtual_1_, var_d1);
+          // 	Income.details.distance(inc, d2)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_inc), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Income")));
+          PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_inc, var__virtual_2_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http:///TaxCard.ecore", "Income", "details")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Income_Detail")));
+          PVariable var__virtual_3_ = body.getOrCreateVariableByName(".virtual{3}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_2_, var__virtual_3_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http:///TaxCard.ecore", "Income_Detail", "distance")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_3_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EDouble")));
+          new Equality(body, var__virtual_3_, var_d2);
+          // 	check(d1 != d2)
+          new ExpressionEvaluation(body, new IExpressionEvaluator() {
+          
+              @Override
+              public String getShortDescription() {
+                  return "Expression evaluation from pattern inv07";
+              }
+              
+              @Override
+              public Iterable<String> getInputParameterNames() {
+                  return Arrays.asList("d1", "d2");}
+          
+              @Override
+              public Object evaluateExpression(IValueProvider provider) throws Exception {
+                  Double d1 = (Double) provider.getValue("d1");
+                  Double d2 = (Double) provider.getValue("d2");
+                  return evaluateExpression_1_1(d1, d2);
+              }
+          },  null); 
+          bodies.add(body);
+      }
+      {
+          PAnnotation annotation = new PAnnotation("Constraint");
+          annotation.addAttribute("message", "inv07");
+          annotation.addAttribute("severity", "error");
+          annotation.addAttribute("key", Arrays.asList(new Object[] {
+                              new ParameterReference("inc")
+                              }));
+          addAnnotation(annotation);
+      }
+      return bodies;
+    }
+  }
+  
+  private static boolean evaluateExpression_1_1(final Double d1, final Double d2) {
+    boolean _notEquals = (!Objects.equal(d1, d2));
+    return _notEquals;
+  }
+}

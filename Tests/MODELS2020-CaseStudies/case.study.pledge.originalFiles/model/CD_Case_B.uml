@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="GUID+fadc4ae9-265b-4361-8233-286c5b98ea06" name="DomainModel" URI="http:///DomainModel.uml">
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+a8ab9abd-0e72-4644-8b2b-258b868b8021" name="CableShieldIntegrityError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+b577f49b-1e7d-4c58-8452-7dfce047b376" general="GUID+d9d65175-b83c-4a10-b7d2-6a3ce0565615"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+7f785413-0c72-4c0f-8204-be2794c3e9dd" name="ClassificationError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+4f5513aa-d4f5-4bec-8c34-8f0b9186ee72" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+38fddb17-0a3c-4a5d-b6f9-e8413b28fb0a" name="CommunicationError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+698ea3fb-4647-4984-be73-cf4dba64c235" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab" name="Error">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+74c95cdf-1866-4ac5-8376-8121b7d7661f" name="isDetected" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+c7ab610a-6b81-4b98-825b-0d2809cd0ede" name="isQualified" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+3b4b1499-bc0b-452a-963d-590824ae423b" name="qualificationCounter" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+0bb53b03-f0c8-49a1-9bef-5ea5f2d262f5" name="priority" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f3e3a3e6-80da-495c-aa8b-ee0801899697" name="isLockingError" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+cea9880a-ba50-4c00-8538-62c689ce3ec5" name="isDiscardError" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+134568a5-0f1f-4a6e-8197-5506606511b2" name="detectionCounter" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+117c9206-efbc-4beb-8e1a-ac2e4afd06c2" name="DETECTION_COUNTER_DEFAULT_VALUE" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+63eb401d-531a-4f72-9306-420b3c1f5146" name="isVoltageDependent" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+e6a341f6-dbba-4c4c-9885-b31d63212bab" name="unDetectionCounter" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1f848d81-eeb8-4e7c-8f2a-fe757b2f2a9a" name="ERROR_QUALIFICATION_COUNTER_LIMIT" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfXmpaEeS7fJC3QiZfaQ" value="2"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+0958eb35-1dda-41e2-a61b-b9a991ce800f" name="ERROR_DEQUALIFICATION_COUNTER_LIMIT" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfYGpaEeS7fJC3QiZfaQ" value="4"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+b8524d08-9dd2-405b-b3b3-6335c09f167e" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+f05e6892-5c49-4fb5-b7ef-2f9ed7c73bd1"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+d9d65175-b83c-4a10-b7d2-6a3ce0565615" name="ExternalMeasurementDeviceError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+0348055f-5e79-441d-8801-c65c327264bd" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+5b9e4e43-e723-4379-8b16-6bd2a17afc62" name="InternalMeasurementDeviceError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+1b170a05-f066-4024-98a7-4207a80cc4d1" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+6e72931a-3bb4-4c4b-9c92-340c29bf930d" name="InternalMeasurementPathError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+fa30f619-7caf-491d-97a2-4edb58415133" general="GUID+5b9e4e43-e723-4379-8b16-6bd2a17afc62"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+a77202b4-d26c-4ff9-9d48-bb3a3246f65e" name="MeasurementSensePathError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+2f759119-5b9b-4faf-9a2e-75d965ad405d" general="GUID+d9d65175-b83c-4a10-b7d2-6a3ce0565615"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+3ddf1eff-3f7e-4ccc-b44e-10a2ebb89066" name="Message"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+3b30f033-980c-48ba-9235-b66e5204b733" name="SeatFrameConnectionError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+e2f097fc-15cd-4c67-9875-11a7fc4349d9" general="GUID+d9d65175-b83c-4a10-b7d2-6a3ce0565615"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+8b7c00fd-0cf5-48a6-9866-b0f593854575" name="SeatHeaterCircuitIntegrityError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+4d5d7951-a024-499b-8333-445ecc40644f" general="GUID+d9d65175-b83c-4a10-b7d2-6a3ce0565615"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+e4bcf44b-621e-430d-94cb-b18f5a557df1" name="Sensor"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+12582673-accc-4b14-9bd4-7a09303212e2" name="ShortSenseUbatGndError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+7fcb0f1e-ee75-4025-87f3-628100aa335b" general="GUID+d9d65175-b83c-4a10-b7d2-6a3ce0565615"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+48b88776-a1a3-47bb-a658-a12de079afaf" name="TemperatureError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+aa258982-ac00-498d-8459-944a4cfe94b7" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+1ed911f3-479f-4721-bfff-04fae9aecac1" name="TemperatureSensorError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+36c31bec-5a78-4d82-9a0e-a3f80a501053" general="GUID+5b9e4e43-e723-4379-8b16-6bd2a17afc62"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+79ade3d0-c388-4a80-be39-f68a386d95d1" name="VoltageError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+39c4c15c-bce1-403b-8ec1-01f6648c74ca" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" name="BodySenseSystem">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+982e73e5-dc63-4b29-b1c4-8b353b2cb0f8" name="ADC_Thermistor_MAX_Diff_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+021c967c-e7a8-4489-83e8-324c1f6dcb70" name="PWMDiagADC1_MIN_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+bbad8304-049a-4493-9416-45e15209b956" name="PWMDiagADC1_MAX_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+66763855-b068-4a84-8316-35340690b89b" name="PWMDiagADC12_MIN_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+0ec29d37-c641-4c50-b151-01eba69b8a7f" name="PWMDiagADC12_MAX_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+3479af54-b7e8-427f-b819-150f67987ee9" name="PWMDiagADC13_MIN_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+3d34d555-b76d-4526-a106-c82ee2049301" name="PWMDiagADC13_MAX_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+ef978564-8c59-4ec2-9abd-9df8c0bdee44" name="GuardCurrent_MIN_Treshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+6280fc2f-0f31-4978-9cf9-abb4b6000d6a" name="GuardACVoltage_MIN_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+0b4edcf5-6c85-4740-b63c-c840c1594474" name="GuardACVoltage_MAX_Threshold" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+50c18c86-6209-45fc-9f4d-84ad088fdb57" name="GuardCurrent_MAX_Treshold1" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+9e3b4aa9-fcc0-4469-8c67-df11539bdbbc" name="GuardCurrent_MAX_Treshold2" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f98ed933-a42d-4dfc-90af-c2df9cdfed96" name="discardFlag" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+04466852-4310-494e-bab8-06722f00a5d9" name="NORMAL_VOLTAGE_MIN" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      <defaultValue xmi:type="uml:LiteralReal" xmi:id="_2SQ0kOZFEeepcMgPsKwFYA" value="7.0"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+012703af-55ef-4f34-abb3-dd0da557d6a8" name="NORMAL_VOLTAGE_MAX" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      <defaultValue xmi:type="uml:LiteralReal" xmi:id="_oyrC8OZFEeepcMgPsKwFYA" value="16.5"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+93f50d8d-dd27-4120-8753-4e99f8d4409d" name="resetCounter" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+3f17c9e6-a89d-4b2a-984e-16073d669f37" name="calibrationDone" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+60dafbf2-8dd4-4411-a102-bab6093dd6e3" name="buildCheckStatus" visibility="public" type="GUID+98b4d567-5252-4aec-ab11-94ca8fbfd876"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+8812fe5c-608d-4cf8-9ba2-76991f98f5d8" name="communicationOn" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+80c839ba-8fdd-49ae-8059-a3ca6a77c873" name="abortFlag" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_mgCfj2paEeS7fJC3QiZfaQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+bfea8765-8bac-425e-9ad5-beccedba9327" name="measuredTemperature" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f4923666-f06f-464c-ad0d-71c35bccbd66" name="measuredVoltage" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+d4bcd9cc-bb97-4f8f-84c9-2a608ec78ba3" name="ERROR_VOLTAGE_HYSTERESIS" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfk2paEeS7fJC3QiZfaQ" value="200"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+0faae0df-89fb-40d4-85b6-48cd9b77d0b6" name="VOLTAGE_ERROR_UNDETECTION_THRESHOLD" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+c8733d78-b932-4b1d-8f08-6b2d94cf94ab" name="VOLTAGE_ERROR_DETECTION_THRESHOLD" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1e691d0a-818f-4d4e-9daf-e6d88d45912c" name="TEMPERATURE_MAX" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfl2paEeS7fJC3QiZfaQ" value="60"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+e82ccb12-d996-448e-b2ea-0f23c82bf36e" name="TEMPERATURE_LIMIT_MAX" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfmWpaEeS7fJC3QiZfaQ" value="100"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+065bb55f-836e-44c3-9f09-decab0dd1d03" name="seatTemperatureCompensationFlag" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+c284a7c5-fd33-4c1a-8a58-fe9abb78f198" name="compensationRezeoringFlag" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+5ae9dd1e-2950-418c-8609-37214a15fe92" name="frequencyIndex" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfnWpaEeS7fJC3QiZfaQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1bc3b688-dc86-42f1-b0ec-58f1ca617123" name="CX_LIMIT" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+de09bdd8-b645-4323-8655-dd52d410ec7c" name="GX_LIMIT" visibility="public" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f867c45c-5704-411f-84d5-ea180a777aba" name="isMeasurementDataPlausible" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+381091ac-85a3-4116-8ae2-76eafae22f05" name="itsTimer" visibility="public" type="GUID+6959692e-af45-40ee-b0fb-6a34ab872fe6" association="GUID+cbe808a6-06cc-4469-a39a-4e0c9af87eed"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+68728fd2-e5bc-4115-bf8f-57bd838ab09f" name="itsNVM" visibility="public" type="GUID+03a6e68a-e687-4da1-afe8-a4cc7d7dc80b" association="GUID+faef7c57-fe29-4721-8e95-f68adb4c3db2"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+27dc4967-d64d-4dcc-9038-c8bd47700c85" name="itsLoadedCalibrationData" visibility="public" type="GUID+862b21ad-fe99-4187-a3cf-ac61ba758b6e" association="GUID+bbe1f8e1-57c6-44fd-bd5a-e8198b2b3c4a">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfpGpaEeS7fJC3QiZfaQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+c6913877-0ff3-4d9b-8c90-a39339cc1268" name="itsWatchdog" visibility="public" type="GUID+5f5aca8c-fb3f-4fd1-b4d8-01c234e1907c" association="GUID+3eff4bbf-a78c-4a39-869b-fb42314a7024"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+66885a26-3da4-425b-bde9-2dde68605810" name="itsTemperatureSensor" visibility="public" type="GUID+b103d9a5-f222-4835-b60f-56236203ab44" association="GUID+0a638758-4e69-46f4-9b73-cb71bacbafdf"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1f474478-a4a9-40f7-8722-1d68578ba047" name="itsPreviousOccupancyStatus" visibility="public" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b" association="GUID+eaf63a81-1e41-4de3-b94d-eb3f52e51e15"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+88d4da64-8034-40a4-bd44-1558acd54307" name="itsALU" visibility="public" type="GUID+21e2b3ba-944c-4b73-b237-49bc668a139d" association="GUID+44591504-aed0-4354-9c71-c424de018587"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+478c8763-c0da-4b05-bbc1-e9d826793df0" name="itsOccupancyStatus" visibility="public" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b" association="GUID+05618f64-fb68-40b7-bd3a-6ffa3884d335"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1010d33a-32d4-4e94-9e16-c51c59ef374e" name="itsBodySenseElectronics" visibility="public" type="GUID+33990a46-5bc7-4ed6-a952-40212c7a7e2a" association="GUID+a9c80e74-724c-4b38-a42d-be9f9cd06038"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a3ab1373-15aa-415b-a1a8-967e74d68bcf" name="itsROM" visibility="public" type="GUID+2ab04b30-dac5-4cc4-b682-122064af889a" association="GUID+e71c0e9a-901e-4bc0-9d48-418713906dee"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f370cb64-dc8b-4b9d-b46d-fd9f7ad7e49d" name="itsMeasurementValue" visibility="public" type="GUID+f921f48d-7f45-4013-9187-ade53258a900" association="GUID+ca517787-217f-4692-a7f9-314f16a02ced"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+69169118-aa04-497f-b7aa-e68553925437" name="itsError" visibility="public" type="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab" association="GUID+f05e6892-5c49-4fb5-b7ef-2f9ed7c73bd1">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mgCfr2paEeS7fJC3QiZfaQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mgCfrmpaEeS7fJC3QiZfaQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+bf450128-4370-4ae1-af37-b9b0375b347a" name="itsRAM" visibility="public" type="GUID+4d186178-6743-487a-b076-f02b2f3d001a" association="GUID+b99c3d2f-bb55-4689-995f-df24c587bb88"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a39561af-8268-4233-96f0-2842947ae10e" name="itsIgnitionResetButton" visibility="public" type="GUID+5ccdd823-5164-4f1e-a14d-895c7f8165e5" association="GUID+e0c6236a-7292-4de6-a0d0-f55e09c20b19"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+120bf304-389c-4f2e-a1fe-1024bf080b56" name="itsSFR" visibility="public" type="GUID+5e7682a5-b34e-4358-95ff-829e0be23658" association="GUID+e3bc66db-a238-4056-beb9-a12a5d05c111"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+da01c4d6-b4a6-4b3c-a666-a875e63fe1bf" name="itsVoltageSensor" visibility="public" type="GUID+53333089-c1dd-4487-982a-fa14deaa8510" association="GUID+a35fad26-bc73-4424-8dc8-eae52113c5f1"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+b8ca4358-dd93-49db-93a9-06b7521aab41" name="itsDefaultCalibrationData" visibility="public" type="GUID+862b21ad-fe99-4187-a3cf-ac61ba758b6e" association="GUID+6850f3f9-cd35-49be-8def-07e2c46a699f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+b06be66b-9af4-48fd-b01f-2a45446f6c7d" name="itsAirbagControlUnit" visibility="public" type="GUID+aeaf44bf-4d97-43e2-b5aa-f6a5d83d2b85" association="GUID+d9fe5cca-f9f8-473e-8bf2-9240a278b4d2"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+8daf9eb1-da96-4db7-b037-988c73a152c6" name="itsBodySenseSensor" visibility="public" type="GUID+2aa138ab-8791-4b76-8cf7-23d650c1933f" association="GUID+97c91b3c-f082-4cc6-8cd9-f00aaf733b16"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+7bd9d92e-612d-41d3-9c5a-c7e242db0fd4" name="set_error_internal_measurement_device_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+d887b180-0e2f-4efb-b516-c6d2709e13f7" name="set_temperature_sensor_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+6472bf46-57c9-41d9-90ce-c49ffe7ccb7f" name="set_internal_measurement_path_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+9450310d-43cb-4f29-8c78-f67a009d100d" name="set_error_external_measurement_device_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b6e2683e-acee-4d9c-be19-91b42db14742" name="set_seat_frame_connection_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+03b3bc18-bbee-44a6-9331-e670d2d2b87b" name="set_seat_heater_integrity_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+e7cbc56d-5749-4226-babf-33b6e21383c6" name="set_cable_shield_integrity_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b2fcd944-52c6-47e6-9af9-603392c9f6e3" name="set_measurement_sense_path_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+1b7d110e-1979-44bc-a747-fcdf2fd3f7b3" name="set_short_sense_Ubat_GND_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b728c6ed-5701-4ff3-b1f7-05013fd012b0" name="set_temperature_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+455e5434-90cc-4627-90c7-0877bb9b104b" name="set_error_temperature_range_errors_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+49a430d4-1913-4845-b5fa-5345edfeba0c" name="apply_compensations_static_compensation" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+ae586f62-7e4c-437a-a274-5de39946a374" name="apply_compensations_dynamic_compensation_coil_temperature" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+6a41e9f1-d2bf-4731-b059-1ff800521388" name="compensate_measurement_result_for_temperature" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+640c58f8-93e4-42ab-945d-8653f649b671" name="compensate_measurement_result_for_rezeroing" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+65457636-0db9-43fa-a8c8-e937e6fcad64" name="limit_measurement_data" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+1b122de8-9491-4d29-b262-afc95f08c030" name="select_measurement_data" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+56589a5d-1155-4f14-b235-8ff865551ef1" name="set_error_measurement_range_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+4ab370a7-62e5-42da-83f0-f58d973acb29" name="set_error_measurement_range_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+66aef061-ff15-4a7c-bd77-40e1cf55d646" name="derive_occupancy_class_for_airbag_control" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+85b9e864-73f1-4469-b63f-5859c6085a22" name="derive_occupancy_class_for_sbr_control" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+96ee0487-d9ab-4838-b305-7c3c0e98b9c6" name="set_error_memory_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+f715550c-5203-47a7-8e04-c2f59ca2b8d1" name="set_error_memory_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+1ff280e5-d889-446b-a00e-6f020a16e6e9" name="reset_classification_filters" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+e7867e6b-9b5a-46e1-9ac3-d1244d8bd914" name="start_identification" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+2e4d2203-78f9-46bd-82b1-7e42657e8050" name="ignite_the_system" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+fd7181a6-56b4-4aa0-91aa-8899a05b0290" name="set_all_errors_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+01439a06-bf7e-4ab9-8c1b-4bb54cf32f15" name="initialize_occupant_class_for_airbag_control" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+d4142ceb-5d4f-46bf-895a-e55df5dc1a03" name="initialize_occupant_class_for_sbr_control" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+30acd70b-d600-4b89-b361-1d188334f1fc" name="set_error_discard_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+2dfb2b8b-5272-4dbd-b54d-7a81996e2a75" name="set_error_normal_operation_conditions_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+688a5f33-1368-4b3e-9d71-926cc75ab214" name="set_error_watchdog_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+596a8b30-092d-4359-9467-63172cf091bb" name="set_error_calibration_not_learned_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b2d4ccc2-e4c3-4892-a9be-547641adf012" name="set_error_build_check_not_run_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+979d29c6-f7fa-414f-b597-d26e4cd0b415" name="set_error_build_check_failed_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+be585f89-fde0-4515-ba13-772ac4dc3f9f" name="qualify_all_error_locking_errors" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+ff1690c1-456a-4d55-beec-909cc07c8a11" name="enable_communication" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+4d686a05-3876-479d-9df5-b3856a9eb73a" name="load_calibration_data" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+5af986cf-0ac3-4bbb-8f66-93b062ed110d" name="set_error_NVM_CRC_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+79849ef9-e469-4575-a224-fe8211711472" name="set_NVM_access_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+a7ab9a9a-7896-4636-9d09-641214c70d8a" name="set_error_calibration_data_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+560fb26e-5f2d-4893-bd96-63a626597269" name="load_default_calibration_data" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+ba703880-a37d-43f2-8b14-b4a5744ccbd0" name="set_error_RAM_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+a7b7b378-d59e-4a3a-9a7c-3b346659ad24" name="set_error_SFR_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+dc8bd6d2-fc48-4d5a-b042-1362156db1a5" name="set_error_ALU_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+5a50328e-50b8-4b3a-9cba-49ebc6cc20f5" name="load_calibration_data_from_NVM" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+6ce66ad0-fc82-478e-b65d-c3785a3eea13" name="set_error_ROM_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+9b0b5c63-2dbb-490f-a424-a37e84caa1c8" name="set_abort_flag" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+93cdf0e1-779f-4fcb-983d-66f36ef5fb45" name="reset_abort_flag" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+8816bc47-95d3-48a1-b85e-8f8d669181ef" name="start_voltage_check" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+455fc8ad-5e45-4f93-8f82-25540d8e153c" name="set_voltage_high_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+90325485-d96c-4a88-8c26-743608cea781" name="set_voltage_high_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+f8407ffd-95f4-4874-8b35-2ed9202f23d0" name="set_voltage_low_error_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+faf17d03-0d28-464f-897a-08ded5f5fd27" name="set_voltage_low_error_not_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+4eed62c1-e124-4328-a3e6-b626e9e63e72" name="set_voltage_high_error_qualified" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+67a374e4-9678-4f9a-b034-f1522bd2e877" name="set_voltage_high_error_not_qualified" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+f01d6fd9-f2fe-4bce-992d-2b435577f2a8" name="set_voltage_low_error_qualified" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+ee0c38a9-4367-4681-807e-e85d8c861ce3" name="set_voltage_low_error_not_qualified" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+3d0f0fe9-7132-48db-8572-956bbe3c60af" name="reset_voltage_high_error_detection_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+80952d39-4ce2-4fae-9091-c07aa8861d62" name="reset_voltage_low_error_detection_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+29064101-c11e-4917-bdf5-0e2914b8283e" name="increase_voltage_high_error_detection_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+6f007d60-feeb-4d5f-8580-9b841572aa2d" name="decrease_voltage_high_error_detection_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+d3c4466c-7e01-4a5c-b93c-19f0f52e6bd6" name="increase_voltage_low_error_detection_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+71d02a28-2a5b-41cc-bc5d-48075d496ea9" name="decrease_voltage_low_error_detection_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+dd5ae4c3-3ecb-4c06-8549-b44bbbd58d15" name="set_error_temperature_range_limit_errors_detected" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+8ea56e25-2f0d-49df-ad5c-1f2f064a8cb1" name="increase_frequency_index" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+ee1103f9-6bdf-4b0f-bdc9-54f2fc5b74ec" name="reset_frequency_index" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+4f90aed8-79ae-45c6-aa2e-790cf8a14c29" name="collect_all_detected_errors" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+668f8314-a67f-4eb9-b8da-7cf985f48e9a" name="qualify_errors" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+4f35f23c-b5c0-4c46-8a98-193e06f759bf" name="set_error_discard_error_qualified" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+1c726d30-56e5-4758-8962-c3a897f5e44b" name="set_discard_flag" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+fb5cfb97-0cf9-4557-9348-d055e5cb3c08" name="increase_error_qualification_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b266aae4-d74f-428e-aa48-048c19d50991" name="add_error_to_error_status" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b1d0ad0d-2fed-4f79-a604-4ad47910851a" name="set_detected_error_active" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b2f699b4-4899-4780-bd2a-e93353abaf42" name="updates_error_traceability_buffer" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+f49b5d6a-6a38-4bba-b9e7-f698cf8e2a7c" name="reset_error_fault_free_ignition_counter" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+5ffd38ae-2f99-4aff-a2ed-ba26ae743c63" name="collect_all_not_detected_errors" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+862092ae-6b88-499c-bb9b-7150c065d333" name="reset_error_qualification_history" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+18d2f573-2f89-4114-8cec-e76bfd0abb28" name="reset_error_dequalification_history" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+936d226b-6772-412a-a918-e5f4c7849959" name="dequalify_errors" visibility="public"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b" name="OccupancyStatus">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+6ad7c27a-37ff-4d29-a951-d5b0dcb3de51" name="OccupantClassForAirbagControl" visibility="public" type="GUID+a7a55376-97c1-4516-8524-c4a77235a929"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+e757c865-c06b-4b24-b79d-a1878bd0e955" name="OccupantClassForSeatBeltReminder" visibility="public" type="GUID+a2e418ae-a4e5-4308-9993-ff3dd7ad5fbf"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+409fff9c-bb4b-42b5-a24e-901d71454042" name="hasValidClassforAirbagControl" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+8d481442-2d6c-4ef3-a0f7-523e1ed6599f" name="hasValidClassforSbr" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+9492b531-8d79-4963-9d04-7e45efe9d4cb" name="itsBodySenseSystem_1" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+eaf63a81-1e41-4de3-b94d-eb3f52e51e15"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+c37ff336-8596-4135-8aee-03c36bed4c07" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+05618f64-fb68-40b7-bd3a-6ffa3884d335"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a274dbf9-ed8d-4933-b70f-6c610322ebeb" name="itsAirbagControlUnit" visibility="public" type="GUID+aeaf44bf-4d97-43e2-b5aa-f6a5d83d2b85" association="GUID+3e632cf8-c2a9-4835-82f0-059874ceaf89"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+83d1aa98-a39e-4aef-8540-0de24b687755" name="VoltageLowError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+c26fa862-9cfe-427f-a64f-3fdc080d42e6" general="GUID+79ade3d0-c388-4a80-be39-f68a386d95d1"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+313aad79-a621-474f-85bf-528b16c0ac69" name="VoltageHighError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+01ea632a-c918-47a8-88be-69cc3286b762" general="GUID+79ade3d0-c388-4a80-be39-f68a386d95d1"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+23eb5620-e1bd-4389-906b-817159470e93" name="NormalOperationConditionError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+f6153671-c580-4e64-9192-d4549b50030a" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+2851a373-02c4-4b49-9037-5c78e948c611" name="DiscardError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+b7bdeb47-8619-4727-897f-87b3a048da73" general="GUID+23eb5620-e1bd-4389-906b-817159470e93"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+5cc2b4d9-80a3-4c0b-a994-fa843bb8feef" name="WatchdogError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+f7b5dd97-be9c-4258-8bd4-8fd050579531" general="GUID+23eb5620-e1bd-4389-906b-817159470e93"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+f6ded33d-b2b5-432a-af24-3f44f4ff727b" name="BuildCheckError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+49604892-233a-489d-ae1c-631bcf07f5a8" general="GUID+23eb5620-e1bd-4389-906b-817159470e93"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+980cc2e4-7688-4201-b515-80f9977903c4" name="NVMAccessError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+81d90d44-35e7-4eb9-b9ce-10da7888c124" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+5b3b9a4c-c178-4cd1-b969-4de8bdb001ec" name="CalibrationNotLearnedError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+a5ff940c-90ec-4253-be0a-7a5cbccf8d71" general="GUID+23eb5620-e1bd-4389-906b-817159470e93"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+f680048f-65f2-4916-bdde-60353c73c8ef" name="BuildCheckNotRunError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+8d5d5558-dded-482e-acd2-36beffb7b613" general="GUID+f6ded33d-b2b5-432a-af24-3f44f4ff727b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+6ea95903-08c4-4759-bc29-6e1e4d3a3a29" name="BuildCheckFailedError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+013f6658-8a94-49b4-be4d-885a9f106bec" general="GUID+f6ded33d-b2b5-432a-af24-3f44f4ff727b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+f9b0c4b6-99e7-4c84-a1e1-4d7b3eac0ff9" name="SFRError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+0c07b9a4-29d4-4e71-a07c-679ebbe6deb0" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+47d32e95-840d-4220-b9b2-bd1743d6548f" name="ALUError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+56161c8a-9865-4a29-87a7-739238ba2d3f" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e" name="MemoryError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+7713eafc-717e-4794-b90a-7f7e76ae09ab" general="GUID+340b5c52-0a00-407d-b4de-e7210cb5cbab"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+e42837ee-2901-42fa-804a-9fe3948dd72b" name="RAMError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+f336f7c2-270e-48f2-9926-a1959a57dfb8" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+9ba8a2c2-70a1-40b8-abed-3ad1f4a7e169" name="ROMError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+c270ccb8-b150-414e-81bb-440206af7c10" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+60a533bd-6085-4cad-9f53-7432f92b7e2a" name="NVMCRCError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+5ce55d14-c2f1-4c9a-bf55-a42269c668bd" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+326f3ec3-76a5-4999-96c0-06866dc56ae8" name="CalibrationDataError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+0e65b5ba-4a6e-46f8-826f-b62287ae47b6" general="GUID+39e9e36d-3b1d-4ff0-b839-fa900547ec8e"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+4d186178-6743-487a-b076-f02b2f3d001a" name="RAM">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+ed67dec5-7a4c-4d86-8ff0-0cf1a86faada" name="isValid" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+63f5a563-543d-45b6-877b-e7629bf5f2f4" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+b99c3d2f-bb55-4689-995f-df24c587bb88"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+5e7682a5-b34e-4358-95ff-829e0be23658" name="SFR">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+6af6d11b-92c5-40bc-a231-0273af76c806" name="isValid" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+ae955560-f1cd-457e-be40-90ec2a706122" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+e3bc66db-a238-4056-beb9-a12a5d05c111"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+21e2b3ba-944c-4b73-b237-49bc668a139d" name="ALU">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+ae141729-73c8-49b5-b950-e55d52e53c98" name="isValid" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+d1bb834b-4960-4527-a268-079af0a635dd" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+44591504-aed0-4354-9c71-c424de018587"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+5f5aca8c-fb3f-4fd1-b4d8-01c234e1907c" name="Watchdog">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+080f3db4-662a-4a1f-998e-a9b259e787ee" name="isEnabled" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1df132f0-f5bb-443c-9a68-82a26fbd6592" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+3eff4bbf-a78c-4a39-869b-fb42314a7024"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+03a6e68a-e687-4da1-afe8-a4cc7d7dc80b" name="NVM">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+fa000fc1-c478-49e6-b576-6f289a865a7d" name="isAccessible" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+99409fbe-ca55-4984-bd02-7d04bb53f460" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+faef7c57-fe29-4721-8e95-f68adb4c3db2"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+63a5bdf7-b862-4ffb-a1d9-62b856939c6f" name="itsCalibrationData" visibility="public" type="GUID+862b21ad-fe99-4187-a3cf-ac61ba758b6e" association="GUID+45a73731-aa8f-4737-a159-5e09b69fe420"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+862b21ad-fe99-4187-a3cf-ac61ba758b6e" name="CalibrationData">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+dbeeafdc-6189-41a4-8060-ab51a318c163" name="crcCheck" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+751fd7cd-eddc-4b83-b8ca-2736ea364089" name="isValid" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f070f658-dc36-4e83-be04-eebcc4503b5b" name="itsBodySenseSystem_1" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+bbe1f8e1-57c6-44fd-bd5a-e8198b2b3c4a"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+7264adec-5d31-4057-a5f2-4b489d6c19d4" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+6850f3f9-cd35-49be-8def-07e2c46a699f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+10ddcd3e-19a3-4740-a0eb-f5dc7359b4bf" name="itsNVM" visibility="public" type="GUID+03a6e68a-e687-4da1-afe8-a4cc7d7dc80b" association="GUID+45a73731-aa8f-4737-a159-5e09b69fe420"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+861d3241-8956-4983-9dec-9ca1a3eda6e7" name="LINResponseError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+29b0fa4d-8591-4856-94e2-9122f40058a3" general="GUID+38fddb17-0a3c-4a5d-b6f9-e8413b28fb0a"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+cd922c2e-5f7d-4cd8-a96e-8e39da39484a" name="LINCRCError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+fd105fe6-3df9-4ead-b4f8-637fe226d289" general="GUID+38fddb17-0a3c-4a5d-b6f9-e8413b28fb0a"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+2ab04b30-dac5-4cc4-b682-122064af889a" name="ROM">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+80228514-3770-4680-999c-5fef5b99f8ed" name="isValid" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+81072951-7939-47dd-860e-435d11852617" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+e71c0e9a-901e-4bc0-9d48-418713906dee"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+6d3ba789-8a7b-45bf-9cc6-75dfcbcff003" name="TemperatureRangeError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+8f933a25-c692-4161-bf0e-b70e9614abc9" general="GUID+48b88776-a1a3-47bb-a658-a12de079afaf"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+f7669903-769b-441e-8832-073466c328e8" name="TemperatureRangeLimitError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+4bc9f164-95a3-4be8-a48f-f9e875085a2b" general="GUID+48b88776-a1a3-47bb-a658-a12de079afaf"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+38ca0e1f-a482-4d8a-acba-e6f2ef5f8e75" name="MeasurementRangeError">
+    <generalization xmi:type="uml:Generalization" xmi:id="GUID+6d3e4caa-5cb3-43a8-b2eb-df20514c979b" general="GUID+7f785413-0c72-4c0f-8204-be2794c3e9dd"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+f921f48d-7f45-4013-9187-ade53258a900" name="MeasurementValue">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+3f270435-f39a-4833-98b0-cb2ba94f0c4c" name="cxValue" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+3257593c-e169-4aba-8d7d-fbe33424913d" name="gxValue" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a58b0e85-b1bd-444d-b1b5-7049fd4a7382" name="isSaturated" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+8cfe5162-d808-4ad4-9469-44228875131e" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+ca517787-217f-4692-a7f9-314f16a02ced"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+97eb2f7b-c164-4957-9367-a2ed65230091" name="DTC"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+5ccdd823-5164-4f1e-a14d-895c7f8165e5" name="IgnitionResetButton">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+38d5a9bd-3549-4bca-a92d-87668e7f91a3" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+e0c6236a-7292-4de6-a0d0-f55e09c20b19"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+6959692e-af45-40ee-b0fb-6a34ab872fe6" name="Timer">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+09ae9d76-67d9-485a-a88c-56760a387e8b" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+cbe808a6-06cc-4469-a39a-4e0c9af87eed"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+53333089-c1dd-4487-982a-fa14deaa8510" name="VoltageSensor">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+853dd134-91eb-4d76-a976-16e23e4b6acd" name="voltage" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+30c66265-813b-47d1-8330-56d749ee69ed" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+a35fad26-bc73-4424-8dc8-eae52113c5f1"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+541d9fa9-b6d2-4148-a390-451139341ff7" name="get_voltage" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgYmpaEeS7fJC3QiZfaQ" name="Result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+2aa138ab-8791-4b76-8cf7-23d650c1933f" name="BodySenseSensor">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a3857ec0-09cc-4423-a1fe-3a57890b30d7" name="seatFrameConnectionStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f6ea8478-1cb0-44b3-88ae-a60fdb1fc332" name="seatHeaterCircuitIntegrityStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+58002fed-4dba-4059-ad46-85aecd1f653a" name="cableShieldIntegrityStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+68a6fc59-b662-4d16-b56b-3508c6f722ff" name="measurementSensePathStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+793bd523-09a1-46f1-be17-ee0042af691c" name="shortSenseUbatGNDStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+e73a8b99-f16a-423d-8bac-6594a639f5e0" name="cxValue" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+db027956-4fde-472e-aa87-0e7d7f35a343" name="gxValue" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+366b70f9-ac6b-4230-bdef-727e4fec9d4e" name="saturationFlag" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+8b00e42c-4692-4290-b3d7-0d8765010983" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+97c91b3c-f082-4cc6-8cd9-f00aaf733b16"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+2bf9074f-10d0-4b50-8565-52b83b02dc16" name="get_seat_frame_connection_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgbmpaEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+3ce1d937-a07f-44f2-93f6-8c1a660be5a1" name="get_seat_heater_circuit_integrity_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgcGpaEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+caa6da88-26e8-4307-8053-da4f613f4b7e" name="get_cable_shield_integrity_stauts" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgcmpaEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+3d4a13ab-3a4e-432b-a0b4-c99d8b4727d6" name="get_measurement_sense_path_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgdGpaEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+e9b441bf-c9dd-408a-b824-9d4a4288b3e7" name="get_short_sense_Ubat_GND_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgdmpaEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+0f13e898-c9a6-4789-8b0d-fdc1c9abf409" name="measure_occupancy_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="GUID+59e9a22a-1999-477a-aae6-163f2a9dc7e1" name="frequencyIndex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgeWpaEeS7fJC3QiZfaQ" name="Result" type="GUID+f921f48d-7f45-4013-9187-ade53258a900" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+33990a46-5bc7-4ed6-a952-40212c7a7e2a" name="BodySenseElectronics">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+efba581e-bec9-4e9f-ad03-3e20f0c8f876" name="InternalMeasurementPathStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+e0c93c77-a56e-46c5-a79a-536d5d5e2ddc" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+a9c80e74-724c-4b38-a42d-be9f9cd06038"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+9974d2e0-508e-4c40-ac6d-fcbfe0429b71" name="get_internal_measurement_path_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgfmpaEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+b103d9a5-f222-4835-b60f-56236203ab44" name="TemperatureSensor">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+e007d1b4-7036-4ae5-8861-6fe4b9a34225" name="temperatureSensorStatus" visibility="public" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a57733f7-d82f-4a5f-98ae-5a42842aa893" name="temperature" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+f302fb2e-c2c3-43f5-9a71-96991cdd11d8" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+0a638758-4e69-46f4-9b73-cb71bacbafdf"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+582a0913-9f1a-4f2a-ab36-a70e5531c586" name="itsThermistor" visibility="public" type="GUID+f8144966-7d5b-479c-9f0f-6fb003324166" aggregation="composite" association="_mgCgzmpaEeS7fJC3QiZfaQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mgCghWpaEeS7fJC3QiZfaQ" value="2"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mgCghGpaEeS7fJC3QiZfaQ" value="2"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+b76a30ca-d7ac-4512-8abe-5a21b70d1254" name="get_temperature_sensor_status" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgh2paEeS7fJC3QiZfaQ" name="Result" type="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+2a9f97af-ab75-450a-a5a1-3097a7351c07" name="get_temperature" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mgCgiWpaEeS7fJC3QiZfaQ" name="Result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+f8144966-7d5b-479c-9f0f-6fb003324166" name="Thermistor">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+1f4d8dbf-38db-4598-9de8-ed7a621b94e4" name="itsTemperatureSensor" visibility="public" type="GUID+b103d9a5-f222-4835-b60f-56236203ab44" association="_mgCgzmpaEeS7fJC3QiZfaQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="GUID+aeaf44bf-4d97-43e2-b5aa-f6a5d83d2b85" name="AirbagControlUnit">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+25cbf9bd-2ad4-4313-aa2b-ff730892a89d" name="itsOccupancyStatus" visibility="public" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b" association="GUID+3e632cf8-c2a9-4835-82f0-059874ceaf89"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="GUID+a498df1b-6af8-4ea0-95bb-7df6e5758efc" name="itsBodySenseSystem" visibility="public" type="GUID+0f474175-fa54-4e22-9fde-c1ac83af0bf8" association="GUID+d9fe5cca-f9f8-473e-8bf2-9240a278b4d2"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+348e84e2-7ced-40d8-8dff-e566b0b388d7" name="provide_previous_classification_value" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+4d29595c-2588-4891-b13f-c5fe37fae046" name="send_com_DTC" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+10d2c925-05d9-43e8-918d-587d33e7243a" name="send_occupant_class_for_airbag_control_error" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+86c9275b-06a9-44be-b4a1-7cb8fd5b7027" name="send_occupant_class_for_sbr_control_error" visibility="public"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+c425b85b-c093-4737-8011-582ae176b0ef" name="send_occupant_class_for_airbag_control" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="GUID+5b1d74bd-6333-426b-b235-d16012d67ba1" name="oc" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+43628f2e-ebe0-4617-86f9-5b597b65ca81" name="send_occupant_class_for_sbr" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="GUID+9e968916-966a-4927-ac7d-719b8b1a8d8a" name="oc" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+a2de16db-14fa-4015-93ea-d143eced4332" name="send_previous_occupant_class_for_airbag_control" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="GUID+e4807c28-b927-4dcf-8fdf-89f5aabd989f" name="oc" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="GUID+15469dfe-9db8-4404-8c82-8fb73d61e19b" name="send_previous_occupant_class_for_sbr" visibility="public">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="GUID+d02cd38b-3b73-4db4-9e31-48c5e75112db" name="oc" type="GUID+66fe09ac-7246-4e38-b0de-ccd788f7347b"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+a35fad26-bc73-4424-8dc8-eae52113c5f1" name="input" memberEnd="GUID+da01c4d6-b4a6-4b3c-a666-a875e63fe1bf GUID+30c66265-813b-47d1-8330-56d749ee69ed"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+a9c80e74-724c-4b38-a42d-be9f9cd06038" name="input" memberEnd="GUID+e0c93c77-a56e-46c5-a79a-536d5d5e2ddc GUID+1010d33a-32d4-4e94-9e16-c51c59ef374e"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+cbe808a6-06cc-4469-a39a-4e0c9af87eed" name="awaken" memberEnd="GUID+09ae9d76-67d9-485a-a88c-56760a387e8b GUID+381091ac-85a3-4116-8ae2-76eafae22f05"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+e0c6236a-7292-4de6-a0d0-f55e09c20b19" name="input" memberEnd="GUID+38d5a9bd-3549-4bca-a92d-87668e7f91a3 GUID+a39561af-8268-4233-96f0-2842947ae10e"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+05618f64-fb68-40b7-bd3a-6ffa3884d335" name="sense" memberEnd="GUID+478c8763-c0da-4b05-bbc1-e9d826793df0 GUID+c37ff336-8596-4135-8aee-03c36bed4c07"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+f05e6892-5c49-4fb5-b7ef-2f9ed7c73bd1" name="gives" memberEnd="GUID+69169118-aa04-497f-b7aa-e68553925437 GUID+b8524d08-9dd2-405b-b3b3-6335c09f167e"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+97c91b3c-f082-4cc6-8cd9-f00aaf733b16" name="input" memberEnd="GUID+8b00e42c-4692-4290-b3d7-0d8765010983 GUID+8daf9eb1-da96-4db7-b037-988c73a152c6"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+0a638758-4e69-46f4-9b73-cb71bacbafdf" name="input" memberEnd="GUID+f302fb2e-c2c3-43f5-9a71-96991cdd11d8 GUID+66885a26-3da4-425b-bde9-2dde68605810"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+d9fe5cca-f9f8-473e-8bf2-9240a278b4d2" name="connect" memberEnd="GUID+a498df1b-6af8-4ea0-95bb-7df6e5758efc GUID+b06be66b-9af4-48fd-b01f-2a45446f6c7d"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+3e632cf8-c2a9-4835-82f0-059874ceaf89" name="received" memberEnd="GUID+25cbf9bd-2ad4-4313-aa2b-ff730892a89d GUID+a274dbf9-ed8d-4933-b70f-6c610322ebeb"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+eaf63a81-1e41-4de3-b94d-eb3f52e51e15" name="store" memberEnd="GUID+9492b531-8d79-4963-9d04-7e45efe9d4cb GUID+1f474478-a4a9-40f7-8722-1d68578ba047"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+faef7c57-fe29-4721-8e95-f68adb4c3db2" name="has" memberEnd="GUID+99409fbe-ca55-4984-bd02-7d04bb53f460 GUID+68728fd2-e5bc-4115-bf8f-57bd838ab09f"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+45a73731-aa8f-4737-a159-5e09b69fe420" name="store" memberEnd="GUID+63a5bdf7-b862-4ffb-a1d9-62b856939c6f GUID+10ddcd3e-19a3-4740-a0eb-f5dc7359b4bf"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+6850f3f9-cd35-49be-8def-07e2c46a699f" name="store" memberEnd="GUID+7264adec-5d31-4057-a5f2-4b489d6c19d4 GUID+b8ca4358-dd93-49db-93a9-06b7521aab41"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+bbe1f8e1-57c6-44fd-bd5a-e8198b2b3c4a" name="store" memberEnd="GUID+27dc4967-d64d-4dcc-9038-c8bd47700c85 GUID+f070f658-dc36-4e83-be04-eebcc4503b5b"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+b99c3d2f-bb55-4689-995f-df24c587bb88" name="has" memberEnd="GUID+bf450128-4370-4ae1-af37-b9b0375b347a GUID+63f5a563-543d-45b6-877b-e7629bf5f2f4"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+e3bc66db-a238-4056-beb9-a12a5d05c111" name="has" memberEnd="GUID+120bf304-389c-4f2e-a1fe-1024bf080b56 GUID+ae955560-f1cd-457e-be40-90ec2a706122"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+44591504-aed0-4354-9c71-c424de018587" name="has" memberEnd="GUID+88d4da64-8034-40a4-bd44-1558acd54307 GUID+d1bb834b-4960-4527-a268-079af0a635dd"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+3eff4bbf-a78c-4a39-869b-fb42314a7024" name="has" memberEnd="GUID+1df132f0-f5bb-443c-9a68-82a26fbd6592 GUID+c6913877-0ff3-4d9b-8c90-a39339cc1268"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+e71c0e9a-901e-4bc0-9d48-418713906dee" name="has" memberEnd="GUID+a3ab1373-15aa-415b-a1a8-967e74d68bcf GUID+81072951-7939-47dd-860e-435d11852617"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="GUID+ca517787-217f-4692-a7f9-314f16a02ced" name="measures" memberEnd="GUID+8cfe5162-d808-4ad4-9469-44228875131e GUID+f370cb64-dc8b-4b9d-b46d-fd9f7ad7e49d"/>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="GUID+a7a55376-97c1-4516-8524-c4a77235a929" name="OccupantClassAirbag">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+9e55efc2-111f-461c-aa07-0b1bb5b481e0" name="EmptyOrChildSeat">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgsmpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+ffdd2271-6480-4087-80e6-ad57a4c29ce2" name="Adult">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgtGpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+539abb2f-4c61-4bf4-9c64-858735108bea" name="Error">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgtmpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+9ffa2cb4-0668-4f6e-aa28-c724abafc0fa" name="Init">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCguGpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="GUID+a2e418ae-a4e5-4308-9993-ff3dd7ad5fbf" name="OccupantClassSbr">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+cc847e2c-6251-47c6-9889-dca653fd0394" name="Empty">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgu2paEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+775b0457-4c47-45a2-96b1-81ca6494398f" name="Occupied">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgvWpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+f81c7276-ac9f-49e4-ad1a-fe90a1bd860c" name="Error">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgv2paEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+f0a75a5e-dfd8-4f7a-ac69-1dc5f1f5ea16" name="Init">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgwWpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="GUID+98b4d567-5252-4aec-ab11-94ca8fbfd876" name="BuildCheckStatus">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+80b9c7d1-21d5-406c-9129-8aaa5c789117" name="NotRun">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgxGpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+3e271335-e423-483e-8ed5-13c847d30c95" name="Passed">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgxmpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+b075b74b-8316-4dbd-ac27-d079b19f6f42" name="Failed">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgyGpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="GUID+28db8431-e6d0-4b04-884a-c84d66585f7f" name="HWStatus">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+6d3bdba9-3619-4431-96da-6b5397db3629" name="OK">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgy2paEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="GUID+5b554ebf-2b43-41ef-b7c3-16d1898d383c" name="NotOK">
+      <specification xmi:type="uml:LiteralString" xmi:id="_mgCgzWpaEeS7fJC3QiZfaQ" value=""/>
+    </ownedLiteral>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mgCgzmpaEeS7fJC3QiZfaQ" memberEnd="GUID+582a0913-9f1a-4f2a-ab36-a70e5531c586 GUID+1f4d8dbf-38db-4598-9de8-ed7a621b94e4"/>
+</uml:Package>
