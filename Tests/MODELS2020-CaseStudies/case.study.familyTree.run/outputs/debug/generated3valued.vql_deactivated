@@ -1,0 +1,672 @@
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+
+//////////
+// 0. Util
+//////////
+private pattern interpretation(problem:LogicProblem, interpretation:PartialInterpretation) {
+	PartialInterpretation.problem(interpretation,problem);
+}
+	
+/////////////////////////
+// 0.1 Existence
+/////////////////////////
+/** [[exist(element)]]=1 */
+private pattern mustExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpretation);
+	LogicProblem.elements(problem,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+}
+
+/** [[exist(element)]]>=1/2 */
+private pattern mayExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+    find mustExist(problem,interpretation,element);
+} or {
+    find interpretation(problem,interpretation);
+    neg find elementCloseWorld(element);
+    PartialInterpretation.openWorldElements(interpretation,element);
+}
+
+private pattern elementCloseWorld(element:DefinedElement) {
+	PartialInterpretation.openWorldElements(i,element);
+    PartialInterpretation.maxNewElements(i,0);
+} or {
+	Scope.targetTypeInterpretation(scope,interpretation);
+	PartialTypeInterpratation.elements(interpretation,element);
+	Scope.maxNewElements(scope,0);
+}
+
+////////////////////////
+// 0.2 Equivalence
+////////////////////////
+pattern mayEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement)
+// For non-primitive type. Boolean types always must equivalent or cannot equivalent
+{
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	a == b;
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	IntegerElement(a);
+	IntegerElement(b);
+	PrimitiveElement.valueSet(a,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	IntegerElement(a);
+	IntegerElement(b);
+	PrimitiveElement.valueSet(b,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	RealElement(a);
+	RealElement(b);
+	PrimitiveElement.valueSet(a,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	RealElement(a);
+	RealElement(b);
+	PrimitiveElement.valueSet(b,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	RealElement(a);
+	IntegerElement(b);
+	PrimitiveElement.valueSet(a,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	RealElement(a);
+	IntegerElement(b);
+	PrimitiveElement.valueSet(b,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	IntegerElement(a);
+	RealElement(b);
+	PrimitiveElement.valueSet(a,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	IntegerElement(a);
+	RealElement(b);
+	PrimitiveElement.valueSet(b,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	StringElement(a);
+	StringElement(b);
+	PrimitiveElement.valueSet(a,false);
+} or {
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	StringElement(a);
+	StringElement(b);
+	PrimitiveElement.valueSet(b,false);
+}
+
+pattern mustEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
+// For non-primitive and Boolean primitive type
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	a == b;
+} or {
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	PrimitiveElement.valueSet(a,true);
+	PrimitiveElement.valueSet(b,true);
+	IntegerElement.value(a,value);
+	IntegerElement.value(b,value);
+} or {
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	PrimitiveElement.valueSet(a,true);
+	PrimitiveElement.valueSet(b,true);
+	RealElement.value(a,value);
+	RealElement.value(b,value);
+} or {
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	PrimitiveElement.valueSet(a,true);
+	PrimitiveElement.valueSet(b,true);
+	RealElement.value(a,value);
+	IntegerElement.value(b,value);
+} or {
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	PrimitiveElement.valueSet(a,true);
+	PrimitiveElement.valueSet(b,true);
+	IntegerElement.value(a,value);
+	RealElement.value(b,value);
+} or {
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	PrimitiveElement.valueSet(a,true);
+	PrimitiveElement.valueSet(b,true);
+	StringElement.value(a,value);
+	StringElement.value(b,value);
+}
+
+//////////
+// 1. Problem-Specific Base Indexers
+//////////
+// 1.1 Type Indexers
+//////////
+// 1.1.1 Required Patterns by TypeIndexer
+//////////
+private pattern typeInterpretation(problem:LogicProblem, interpretation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialComplexTypeInterpretation) {
+	find interpretation(problem,interpretation);
+	LogicProblem.types(problem,type);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+}
+
+private pattern directInstanceOf(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement, type:Type) {
+	find interpretation(problem,interpretation);
+	LogicProblem.types(problem,type);
+	TypeDefinition.elements(type,element);
+} or {
+	find interpretation(problem,interpretation);
+	find typeInterpretation(problem,interpretation,type,typeInterpretation);
+	PartialComplexTypeInterpretation.elements(typeInterpretation,element);
+}
+
+private pattern isPrimitive(element: PrimitiveElement) {
+	PrimitiveElement(element);
+}
+//////////
+// 1.1.2 primitive Type Indexers
+//////////
+// Currently unused. Refer primitive types as:
+// > PrimitiveElement(element)
+// specific types are referred as:
+// > BooleanElement(variableName)
+// > IntegerElement(variableName)
+// > RealElement(variableName)
+// > StringElement(variableName)
+// And their value as
+// > BooleanElement.value(variableName,value)
+// > IntegerElement.value(variableName,value)
+// > RealElement.value(variableName,value)
+// > StringElement.value(variableName,value)
+// Whether a value is set is defined by:
+// > PrimitiveElement.valueSet(variableName,isFilled);
+//////////
+// 1.1.3 domain-specific Type Indexers
+//////////
+/**
+ * An element must be an instance of type "FamilyTree class".
+ */
+private pattern mustInstanceOfFamilyTree_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"FamilyTree class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewFamilyTree_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"FamilyTree class");
+}
+
+/**
+ * An element may be an instance of type "FamilyTree class".
+ */
+private pattern mayInstanceOfFamilyTree_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfMember_class(problem,interpretation,element);
+	neg find scopeDisallowsNewFamilyTree_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfMember_class(problem,interpretation,element);
+	neg find scopeDisallowsNewFamilyTree_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfFamilyTree_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Member class".
+ */
+private pattern mustInstanceOfMember_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Member class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewMember_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Member class");
+}
+
+/**
+ * An element may be an instance of type "Member class".
+ */
+private pattern mayInstanceOfMember_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
+	neg find scopeDisallowsNewMember_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
+	neg find scopeDisallowsNewMember_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfMember_class(problem,interpretation,element); }
+
+//////////
+// 1.2 Relation Declaration Indexers
+//////////
+/**
+ * Matcher for detecting tuples t where []members reference FamilyTree(source,target)
+ */
+private pattern mustInRelationmembers_reference_FamilyTree(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"members reference FamilyTree");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>members reference FamilyTree(source,target)
+ */
+private pattern mayInRelationmembers_reference_FamilyTree(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfFamilyTree_class(problem,interpretation,source);
+	find mayInstanceOfMember_class(problem,interpretation,target);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []children reference Member(source,target)
+ */
+private pattern mustInRelationchildren_reference_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"children reference Member");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>children reference Member(source,target)
+ */
+private pattern mayInRelationchildren_reference_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfMember_class(problem,interpretation,source);
+	find mayInstanceOfMember_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationparents_reference_Member(problem,interpretation,target,_);
+	check(numberOfExistingOppositeReferences < 2);
+} or {
+	find mustInRelationchildren_reference_Member(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []parents reference Member(source,target)
+ */
+private pattern mustInRelationparents_reference_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"parents reference Member");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>parents reference Member(source,target)
+ */
+private pattern mayInRelationparents_reference_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfMember_class(problem,interpretation,source);
+	find mayInstanceOfMember_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationparents_reference_Member(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 2);
+} or {
+	find mustInRelationparents_reference_Member(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []name attribute Member(source,target)
+ */
+private pattern mustInRelationname_attribute_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"name attribute Member");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>name attribute Member(source,target)
+ */
+private pattern mayInRelationname_attribute_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfMember_class(problem,interpretation,source);
+	StringElement(target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationname_attribute_Member(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 1);
+} or {
+	find mustInRelationname_attribute_Member(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []age attribute Member(source,target)
+ */
+private pattern mustInRelationage_attribute_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"age attribute Member");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>age attribute Member(source,target)
+ */
+private pattern mayInRelationage_attribute_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfMember_class(problem,interpretation,source);
+	IntegerElement(target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationage_attribute_Member(problem,interpretation,source,_);
+	check(numberOfExistingReferences < 1);
+} or {
+	find mustInRelationage_attribute_Member(problem,interpretation,source,target);
+}
+
+//////////
+// 1.3 Relation Definition Indexers
+//////////
+// Must, May and Current queries for pattern queries memberIsItsOwnParent
+private pattern mustInRelation_pattern_queries_memberIsItsOwnParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMember_class(problem,interpretation,var_m);
+	// m is exported
+	find mustInstanceOfFamilyTree_class(problem,interpretation,var__0);
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,var__0,var_virtual0);
+	find mustInstanceOfMember_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_m);
+	find mustInstanceOfMember_class(problem,interpretation,var_m);
+	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var_virtual1);
+	find mustInstanceOfMember_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_p);
+	find mustEquivalent(problem, interpretation, var_m, var_p);
+}
+private pattern mayInRelation_pattern_queries_memberIsItsOwnParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find interpretation(problem,interpretation);
+	find mayInstanceOfMember_class(problem,interpretation,var_m);
+	// m is exported
+	find mayInstanceOfFamilyTree_class(problem,interpretation,var__0);
+	find mayInRelationmembers_reference_FamilyTree(problem,interpretation,var__0,var_virtual0);
+	find mayInstanceOfMember_class(problem,interpretation,var_virtual0);
+	find mayEquivalent(problem, interpretation, var_virtual0, var_m);
+	find mayInstanceOfMember_class(problem,interpretation,var_m);
+	find mayInRelationparents_reference_Member(problem,interpretation,var_m,var_virtual1);
+	find mayInstanceOfMember_class(problem,interpretation,var_virtual1);
+	find mayEquivalent(problem, interpretation, var_virtual1, var_p);
+	find mayEquivalent(problem, interpretation, var_m, var_p);
+}
+private pattern currentInRelation_pattern_queries_memberIsItsOwnParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMember_class(problem,interpretation,var_m);
+	// m is exported
+	find mustInstanceOfFamilyTree_class(problem,interpretation,var__0);
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,var__0,var_virtual0);
+	find mustInstanceOfMember_class(problem,interpretation,var_virtual0);
+	find mustEquivalent(problem, interpretation, var_virtual0, var_m);
+	find mustInstanceOfMember_class(problem,interpretation,var_m);
+	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var_virtual1);
+	find mustInstanceOfMember_class(problem,interpretation,var_virtual1);
+	find mustEquivalent(problem, interpretation, var_virtual1, var_p);
+	find mustEquivalent(problem, interpretation, var_m, var_p);
+}
+
+//////////
+// 1.4 Containment Indexer
+//////////
+private pattern mustContains2(source: DefinedElement, target: DefinedElement) {
+	find mustContains4(_,_,source,target);
+}
+	
+private pattern mustContains4(problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target: DefinedElement)
+	{ find mustInRelationmembers_reference_FamilyTree(problem,interpretation,source,target); }
+
+private pattern mustTransitiveContains(source,target) {
+	find mustContains2+(source,target);
+}
+
+//////////
+// 2. Invalidation Indexers
+//////////
+// 2.1 Invalidated by WF Queries
+//////////
+pattern invalidatedBy_pattern_queries_memberIsItsOwnParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find mustInRelation_pattern_queries_memberIsItsOwnParent(problem,interpretation,var_m);
+}
+
+//////////
+// 3. Unfinishedness Indexers
+//////////
+// 3.1 Unfinishedness Measured by Multiplicity
+//////////
+
+//////////
+// 3.2 Unfinishedness Measured by WF Queries
+//////////
+pattern unfinishedBy_pattern_queries_memberIsItsOwnParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find currentInRelation_pattern_queries_memberIsItsOwnParent(problem,interpretation,var_m);
+}
+
+//////////
+// 4. Refinement Indexers
+//////////
+// 4.1 Object constructors
+//////////
+private pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfFamilyTree_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfMember_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}
+pattern createObject_FamilyTree_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"FamilyTree class");
+	find mayInstanceOfFamilyTree_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Member_class_by_members_reference_FamilyTree(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Member class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"members reference FamilyTree");
+	find mustInstanceOfFamilyTree_class(problem,interpretation,container);
+	find mayInstanceOfMember_class(problem,interpretation,newObject);
+	find mayInRelationmembers_reference_FamilyTree(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Member_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Member class");
+	find mayInstanceOfMember_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+
+//////////
+// 4.2 Type refinement
+//////////
+pattern refineTypeTo_FamilyTree_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfFamilyTree_class(problem,interpretation,element);
+	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
+	neg find mustInstanceOfMember_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Member_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfMember_class(problem,interpretation,element);
+	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
+	neg find mustInstanceOfMember_class(problem,interpretation,element);
+}
+
+//////////
+// 4.3 Relation refinement
+//////////
+pattern refineRelation_children_reference_Member_and_parents_reference_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation, oppositeInterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"children reference Member");
+	PartialInterpretation.partialrelationinterpretation(interpretation,oppositeInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(oppositeInterpretation,"parents reference Member");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfMember_class(problem,interpretation,from);
+	find mustInstanceOfMember_class(problem,interpretation,to);
+	find mayInRelationchildren_reference_Member(problem,interpretation,from,to);
+	neg find mustInRelationchildren_reference_Member(problem,interpretation,from,to);
+}
+pattern refineRelation_name_attribute_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"name attribute Member");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfMember_class(problem,interpretation,from);
+	StringElement(to);
+	find mayInRelationname_attribute_Member(problem,interpretation,from,to);
+	neg find mustInRelationname_attribute_Member(problem,interpretation,from,to);
+}
+pattern refineRelation_age_attribute_Member(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"age attribute Member");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfMember_class(problem,interpretation,from);
+	IntegerElement(to);
+	find mayInRelationage_attribute_Member(problem,interpretation,from,to);
+	neg find mustInRelationage_attribute_Member(problem,interpretation,from,to);
+}
+

@@ -1,14 +1,14 @@
 /**
- * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_A.vql
  */
 package queries;
 
 import Taxation.Income;
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
@@ -77,6 +78,162 @@ public final class Inv07 extends BaseGeneratedEMFQuerySpecification<Inv07.Matche
    * 
    */
   public static abstract class Match extends BasePatternMatch {
+    private Income fInc;
+    
+    private static List<String> parameterNames = makeImmutableList("inc");
+    
+    private Match(final Income pInc) {
+      this.fInc = pInc;
+    }
+    
+    @Override
+    public Object get(final String parameterName) {
+      switch(parameterName) {
+          case "inc": return this.fInc;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fInc;
+          default: return null;
+      }
+    }
+    
+    public Income getInc() {
+      return this.fInc;
+    }
+    
+    @Override
+    public boolean set(final String parameterName, final Object newValue) {
+      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+      if ("inc".equals(parameterName) ) {
+          this.fInc = (Income) newValue;
+          return true;
+      }
+      return false;
+    }
+    
+    public void setInc(final Income pInc) {
+      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+      this.fInc = pInc;
+    }
+    
+    @Override
+    public String patternName() {
+      return "queries.inv07";
+    }
+    
+    @Override
+    public List<String> parameterNames() {
+      return Inv07.Match.parameterNames;
+    }
+    
+    @Override
+    public Object[] toArray() {
+      return new Object[]{fInc};
+    }
+    
+    @Override
+    public Inv07.Match toImmutable() {
+      return isMutable() ? newMatch(fInc) : this;
+    }
+    
+    @Override
+    public String prettyPrint() {
+      StringBuilder result = new StringBuilder();
+      result.append("\"inc\"=" + prettyPrintValue(fInc));
+      return result.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+      return Objects.hash(fInc);
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+      if (this == obj)
+          return true;
+      if (obj == null) {
+          return false;
+      }
+      if ((obj instanceof Inv07.Match)) {
+          Inv07.Match other = (Inv07.Match) obj;
+          return Objects.equals(fInc, other.fInc);
+      } else {
+          // this should be infrequent
+          if (!(obj instanceof IPatternMatch)) {
+              return false;
+          }
+          IPatternMatch otherSig  = (IPatternMatch) obj;
+          return Objects.equals(specification(), otherSig.specification()) && Arrays.deepEquals(toArray(), otherSig.toArray());
+      }
+    }
+    
+    @Override
+    public Inv07 specification() {
+      return Inv07.instance();
+    }
+    
+    /**
+     * Returns an empty, mutable match.
+     * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
+     * 
+     * @return the empty match.
+     * 
+     */
+    public static Inv07.Match newEmptyMatch() {
+      return new Mutable(null);
+    }
+    
+    /**
+     * Returns a mutable (partial) match.
+     * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
+     * 
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return the new, mutable (partial) match object.
+     * 
+     */
+    public static Inv07.Match newMutableMatch(final Income pInc) {
+      return new Mutable(pInc);
+    }
+    
+    /**
+     * Returns a new (partial) match.
+     * This can be used e.g. to call the matcher with a partial match.
+     * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
+     * @param pInc the fixed value of pattern parameter inc, or null if not bound.
+     * @return the (partial) match object.
+     * 
+     */
+    public static Inv07.Match newMatch(final Income pInc) {
+      return new Immutable(pInc);
+    }
+    
+    private static final class Mutable extends Inv07.Match {
+      Mutable(final Income pInc) {
+        super(pInc);
+      }
+      
+      @Override
+      public boolean isMutable() {
+        return true;
+      }
+    }
+    
+    private static final class Immutable extends Inv07.Match {
+      Immutable(final Income pInc) {
+        super(pInc);
+      }
+      
+      @Override
+      public boolean isMutable() {
+        return false;
+      }
+    }
   }
   
   /**
@@ -449,7 +606,7 @@ public final class Inv07 extends BaseGeneratedEMFQuerySpecification<Inv07.Matche
   }
   
   private static boolean evaluateExpression_1_1(final Double d1, final Double d2) {
-    boolean _notEquals = (!Objects.equal(d1, d2));
+    boolean _notEquals = (!com.google.common.base.Objects.equal(d1, d2));
     return _notEquals;
   }
 }

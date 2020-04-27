@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_A.vql
  */
 package queries;
 

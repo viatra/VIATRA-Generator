@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_A.vql
  */
 package queries;
 
@@ -344,7 +344,9 @@ public final class X_inv05_inRange extends BaseGeneratedEMFQuerySpecification<X_
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch();
+    public boolean hasMatch(final Income pInc) {
+      return rawHasMatch(new Object[]{pInc});
+    }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.

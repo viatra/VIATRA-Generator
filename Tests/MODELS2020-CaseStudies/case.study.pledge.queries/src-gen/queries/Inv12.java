@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_A.vql
  */
 package queries;
 
@@ -35,6 +35,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedP
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
@@ -215,6 +216,10 @@ public final class Inv12 extends BaseGeneratedEMFQuerySpecification<Inv12.Matche
     }
     
     private static final class Mutable extends Inv12.Match {
+      Mutable(final Tax_Payer pTp) {
+        super(pTp);
+      }
+      
       @Override
       public boolean isMutable() {
         return true;
@@ -381,7 +386,9 @@ public final class Inv12 extends BaseGeneratedEMFQuerySpecification<Inv12.Matche
      * @return the (partial) match object.
      * 
      */
-    public Inv12.Match newMatch();
+    public Inv12.Match newMatch(final Tax_Payer pTp) {
+      return Inv12.Match.newMatch(pTp);
+    }
     
     /**
      * Retrieve the set of values that occur in matches for tp.
@@ -516,7 +523,7 @@ public final class Inv12 extends BaseGeneratedEMFQuerySpecification<Inv12.Matche
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final Inv12.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_tp;
+    private final PParameter parameter_tp = new PParameter("tp", "Taxation.Tax_Payer", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http:///TaxCard.ecore", "Tax_Payer")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_tp);
     

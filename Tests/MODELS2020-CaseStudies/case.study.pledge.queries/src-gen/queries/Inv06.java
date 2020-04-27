@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_A.vql
  */
 package queries;
 
@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
@@ -82,6 +84,162 @@ public final class Inv06 extends BaseGeneratedEMFQuerySpecification<Inv06.Matche
    * 
    */
   public static abstract class Match extends BasePatternMatch {
+    private Tax_Payer fTp;
+    
+    private static List<String> parameterNames = makeImmutableList("tp");
+    
+    private Match(final Tax_Payer pTp) {
+      this.fTp = pTp;
+    }
+    
+    @Override
+    public Object get(final String parameterName) {
+      switch(parameterName) {
+          case "tp": return this.fTp;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fTp;
+          default: return null;
+      }
+    }
+    
+    public Tax_Payer getTp() {
+      return this.fTp;
+    }
+    
+    @Override
+    public boolean set(final String parameterName, final Object newValue) {
+      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+      if ("tp".equals(parameterName) ) {
+          this.fTp = (Tax_Payer) newValue;
+          return true;
+      }
+      return false;
+    }
+    
+    public void setTp(final Tax_Payer pTp) {
+      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+      this.fTp = pTp;
+    }
+    
+    @Override
+    public String patternName() {
+      return "queries.inv06";
+    }
+    
+    @Override
+    public List<String> parameterNames() {
+      return Inv06.Match.parameterNames;
+    }
+    
+    @Override
+    public Object[] toArray() {
+      return new Object[]{fTp};
+    }
+    
+    @Override
+    public Inv06.Match toImmutable() {
+      return isMutable() ? newMatch(fTp) : this;
+    }
+    
+    @Override
+    public String prettyPrint() {
+      StringBuilder result = new StringBuilder();
+      result.append("\"tp\"=" + prettyPrintValue(fTp));
+      return result.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+      return Objects.hash(fTp);
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+      if (this == obj)
+          return true;
+      if (obj == null) {
+          return false;
+      }
+      if ((obj instanceof Inv06.Match)) {
+          Inv06.Match other = (Inv06.Match) obj;
+          return Objects.equals(fTp, other.fTp);
+      } else {
+          // this should be infrequent
+          if (!(obj instanceof IPatternMatch)) {
+              return false;
+          }
+          IPatternMatch otherSig  = (IPatternMatch) obj;
+          return Objects.equals(specification(), otherSig.specification()) && Arrays.deepEquals(toArray(), otherSig.toArray());
+      }
+    }
+    
+    @Override
+    public Inv06 specification() {
+      return Inv06.instance();
+    }
+    
+    /**
+     * Returns an empty, mutable match.
+     * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
+     * 
+     * @return the empty match.
+     * 
+     */
+    public static Inv06.Match newEmptyMatch() {
+      return new Mutable(null);
+    }
+    
+    /**
+     * Returns a mutable (partial) match.
+     * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
+     * 
+     * @param pTp the fixed value of pattern parameter tp, or null if not bound.
+     * @return the new, mutable (partial) match object.
+     * 
+     */
+    public static Inv06.Match newMutableMatch(final Tax_Payer pTp) {
+      return new Mutable(pTp);
+    }
+    
+    /**
+     * Returns a new (partial) match.
+     * This can be used e.g. to call the matcher with a partial match.
+     * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
+     * @param pTp the fixed value of pattern parameter tp, or null if not bound.
+     * @return the (partial) match object.
+     * 
+     */
+    public static Inv06.Match newMatch(final Tax_Payer pTp) {
+      return new Immutable(pTp);
+    }
+    
+    private static final class Mutable extends Inv06.Match {
+      Mutable(final Tax_Payer pTp) {
+        super(pTp);
+      }
+      
+      @Override
+      public boolean isMutable() {
+        return true;
+      }
+    }
+    
+    private static final class Immutable extends Inv06.Match {
+      Immutable(final Tax_Payer pTp) {
+        super(pTp);
+      }
+      
+      @Override
+      public boolean isMutable() {
+        return false;
+      }
+    }
   }
   
   /**
@@ -189,7 +347,9 @@ public final class Inv06 extends BaseGeneratedEMFQuerySpecification<Inv06.Matche
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<Inv06.Match> getOneArbitraryMatch();
+    public Optional<Inv06.Match> getOneArbitraryMatch(final Tax_Payer pTp) {
+      return rawGetOneArbitraryMatch(new Object[]{pTp});
+    }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,

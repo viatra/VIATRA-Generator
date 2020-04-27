@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/case.study.a.queries/src/queries/case_study_A.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_A.vql
  */
 package queries;
 
@@ -11,11 +11,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFPQuery;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecification;
@@ -36,6 +39,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeCo
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
+import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
@@ -312,7 +316,9 @@ public final class X_inv11_incNotOver100 extends BaseGeneratedEMFQuerySpecificat
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<X_inv11_incNotOver100.Match> getAllMatches();
+    public Collection<X_inv11_incNotOver100.Match> getAllMatches(final Expense pExp) {
+      return rawStreamAllMatches(new Object[]{pExp}).collect(Collectors.toSet());
+    }
     
     /**
      * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
@@ -368,7 +374,9 @@ public final class X_inv11_incNotOver100 extends BaseGeneratedEMFQuerySpecificat
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch();
+    public boolean forOneArbitraryMatch(final Expense pExp, final Consumer<? super X_inv11_incNotOver100.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pExp}, processor);
+    }
     
     /**
      * Returns a new (partial) match.
@@ -380,6 +388,72 @@ public final class X_inv11_incNotOver100 extends BaseGeneratedEMFQuerySpecificat
      */
     public X_inv11_incNotOver100.Match newMatch(final Expense pExp) {
       return X_inv11_incNotOver100.Match.newMatch(pExp);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for exp.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    protected Stream<Expense> rawStreamAllValuesOfexp(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_EXP, parameters).map(Expense.class::cast);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for exp.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Expense> getAllValuesOfexp() {
+      return rawStreamAllValuesOfexp(emptyArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for exp.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Expense> streamAllValuesOfexp() {
+      return rawStreamAllValuesOfexp(emptyArray());
+    }
+    
+    @Override
+    protected X_inv11_incNotOver100.Match tupleToMatch(final Tuple t) {
+      try {
+          return X_inv11_incNotOver100.Match.newMatch((Expense) t.get(POSITION_EXP));
+      } catch(ClassCastException e) {
+          LOGGER.error("Element(s) in tuple not properly typed!",e);
+          return null;
+      }
+    }
+    
+    @Override
+    protected X_inv11_incNotOver100.Match arrayToMatch(final Object[] match) {
+      try {
+          return X_inv11_incNotOver100.Match.newMatch((Expense) match[POSITION_EXP]);
+      } catch(ClassCastException e) {
+          LOGGER.error("Element(s) in array not properly typed!",e);
+          return null;
+      }
+    }
+    
+    @Override
+    protected X_inv11_incNotOver100.Match arrayToMatchMutable(final Object[] match) {
+      try {
+          return X_inv11_incNotOver100.Match.newMutableMatch((Expense) match[POSITION_EXP]);
+      } catch(ClassCastException e) {
+          LOGGER.error("Element(s) in array not properly typed!",e);
+          return null;
+      }
+    }
+    
+    /**
+     * @return the singleton instance of the query specification of this pattern
+     * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
+     * 
+     */
+    public static IQuerySpecification<X_inv11_incNotOver100.Matcher> querySpecification() {
+      return X_inv11_incNotOver100.instance();
     }
   }
   
