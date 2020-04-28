@@ -1,1 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?><plugin/>
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="queries.Case_study_A" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_A" id="queries.Case_study_A">
+      <query-specification fqn="queries.inv03"/>
+      <query-specification fqn="queries.x_inv03_eligAll"/>
+      <query-specification fqn="queries.x_inv03_hasAll"/>
+      <query-specification fqn="queries.inv05"/>
+      <query-specification fqn="queries.x_inv05_inRange"/>
+      <query-specification fqn="queries.inv06"/>
+      <query-specification fqn="queries.inv07"/>
+      <query-specification fqn="queries.inv08"/>
+      <query-specification fqn="queries.x_inv08_notEI"/>
+      <query-specification fqn="queries.x_inv08_noType"/>
+      <query-specification fqn="queries.x_inv08_inRange"/>
+      <query-specification fqn="queries.inv10"/>
+      <query-specification fqn="queries.inv11"/>
+      <query-specification fqn="queries.x_inv11_incOver100"/>
+      <query-specification fqn="queries.x_inv11_incNotOver100"/>
+      <query-specification fqn="queries.inv12"/>
+      <query-specification fqn="queries.x_inv12_notNonRes"/>
+      <query-specification fqn="queries.x_inv12_notZZ"/>
+      <query-specification fqn="queries.inv13"/>
+      <query-specification fqn="queries.x_inv13"/>
+      <query-specification fqn="queries.inv15"/>
+      <query-specification fqn="queries.x_inv15"/>
+      <query-specification fqn="queries.inv17"/>
+      <query-specification fqn="queries.inv20"/>
+      <query-specification fqn="queries.inv33"/>
+      <query-specification fqn="queries.inv34"/>
+      <query-specification fqn="queries.inv35"/>
+      <query-specification fqn="queries.inv47"/>
+      <query-specification fqn="queries.x_inv47"/>
+      <query-specification fqn="queries.inv48"/>
+      <query-specification fqn="queries.x_inv48_notDis"/>
+      <query-specification fqn="queries.x_inv48_Dis"/>
+      <query-specification fqn="queries.x_inv48_3"/>
+      <query-specification fqn="queries.inv49"/>
+      <query-specification fqn="queries.x_inv49_1"/>
+      <query-specification fqn="queries.x_inv49_2"/>
+    </group>
+  </extension>
+</plugin>

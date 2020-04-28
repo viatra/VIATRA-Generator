@@ -43,7 +43,7 @@ import org.eclipse.viatra.query.runtime.api.IQueryGroup
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 import queries.Case_study_A
 
-class GenerateScenarios {
+class GeneratePledgeModels {
 	def static void main(String[] args) {
 		val x = (new EMFPatternLanguageStandaloneSetup).createInjectorAndDoEMFRegistration
 //		//PatternLanguageWithRSSetup.createInjectorAndDoEMFRegistration
