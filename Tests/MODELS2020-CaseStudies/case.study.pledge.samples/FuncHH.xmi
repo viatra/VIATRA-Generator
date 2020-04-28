@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TaxCard:Household
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TaxCard="http:///TaxCard.ecore">
+  <parents xsi:type="TaxCard:Marriage_Record"
+      start_year="1950"
+      end_year="-1">
+    <individual_A
+        xsi:type="TaxCard:Resident_Tax_Payer"
+        birth_year="1950"
+        disability_type="NONE"
+        birth_month="10"
+        birth_day="6">
+      <owns_Address
+          xsi:type="TaxCard:Habitual_Address"
+          id2=""/>
+      <incomes
+          xsi:type="TaxCard:Local_Income">
+        <income_type
+            xsi:type="TaxCard:Capital_and_Investments_Income"/>
+        <details
+            distance="5.0"/>
+        <expenses
+            declared_amount="50.0"/>
+      </incomes>
+    </individual_A>
+    <individual_B
+        xsi:type="TaxCard:Non_Resident_Tax_Payer"
+        addresses="//@parents/@individual_B.0/@owns_Address.0 //@parents/@individual_B.0/@owns_Address.1"
+        birth_year="2000"
+        disability_percentage="0.5"
+        disability_type="A"
+        birth_month="5"
+        birth_day="20">
+      <owns_Address
+          xsi:type="TaxCard:Fiscal_Address"
+          taxPayer="//@parents/@individual_B.0"/>
+      <owns_Address
+          xsi:type="TaxCard:Habitual_Address"
+          country="BB"
+          taxPayer="//@parents/@individual_B.0"/>
+    </individual_B>
+    <individual_B
+        birth_year="1980"
+        disability_percentage="0.99"
+        disability_type="OTHER"
+        birth_month="7"
+        birth_day="6"/>
+  </parents>
+</TaxCard:Household>

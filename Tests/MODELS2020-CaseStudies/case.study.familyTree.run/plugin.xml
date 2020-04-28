@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="queries.FamilyTreeConstraints" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.FamilyTreeConstraints" id="queries.FamilyTreeConstraints">
+      <query-specification fqn="queries.memberIsItsOwnParent"/>
+    </group>
+  </extension>
+</plugin>

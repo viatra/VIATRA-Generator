@@ -1,0 +1,281 @@
+import 'file:/Users/Aren Babikian/git/VIATRA-Attributes/original.PLEDGE.case.studies/model/CD_Case_A.uml' 
+--e.g., import 'file:/Users/User_X/CD_Case_A.uml'
+
+package Taxation 
+
+
+context External_Allowance inv inv1: 
+let currentYear: Integer = 2018 in
+let origin: Physical_Person = self.reciver in
+let union:Legal_Union_Record=origin.getLegalUnionRecord(currentYear) in 
+let house: Household = if(not union.oclIsUndefined()) then union.household else invalid endif in
+let children:Set(Dependent)= house.children->select(d:Dependent| d.allowances->select(ext| ext.reciver=origin)->size()>0) in 
+let eligible_children:Set(Dependent) = children->select( birth_year >=currentYear - 6) in
+let is_disabled:Boolean = self.person.disability_type<>Disability_Types::NONE and self.person.disability_percentage>0.5 in
+let age5:Integer = currentYear - self.person.birth_year in
+let base:Real = if(age5>6 and eligible_children->size()<=1) then 185.60 else if(age5>6 and eligible_children->size()=2) then 220.36 else if(age5>6 and eligible_children->size()=2) then 267.59 else 361.83 endif endif endif in 
+
+if(age5<=6) then self.amount = 580
+else 
+if(age5>=6 and age5<=11)then
+self.amount = ((base.toString().toReal() + 16.17).round())
+ else 
+ self.amount = base.round()
+ endif endif 
+
+context Tax_Card inv inv2:
+let classe: Tax_Class_Category = self.income.taxPayer.getTaxClass(2018) in
+let amount:Real = self.income.income_per_year() in
+
+if(income.income_type.oclIsTypeOf(Employment_Income)) then
+let a:Real = if(classe=Tax_Class_Category::One_A) then self.income.taxPayer.from_law.get_A_for_salary_class_1A(amount) else if(classe=Tax_Class_Category::Two) then self.income.taxPayer.from_law.get_A_for_salary_class_2(amount) else self.income.taxPayer.from_law.get_A_for_salary_class_1(amount) endif endif in
+let b:Real = if(classe=Tax_Class_Category::One_A) then self.income.taxPayer.from_law.get_B_for_salary_class_1A(amount) else if(classe=Tax_Class_Category::Two) then self.income.taxPayer.from_law.get_B_for_salary_class_2(amount) else self.income.taxPayer.from_law.get_B_for_salary_class_1(amount) endif endif in
+ let res:Real = self.income.taxPayer.from_law.round_ten_cent(a * amount - b) in
+ let max:Real = if(classe=Tax_Class_Category::Two) then 25085 else 12585 endif in
+ 
+ if(amount<max) then
+ let final_res:Real= self.income.taxPayer.from_law.round_ten_cent(res*1.07) in
+ self.income.taxPayer.taxesDue = final_res.max(100000) 
+ else 
+ let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 81.906 else if(classe=Tax_Class_Category::Two) then 165.74 else 82.87 endif endif in
+ let final_res:Real= self.income.taxPayer.from_law.round_ten_cent(res + (res*0.09-adjustement)) in
+ self.income.taxPayer.taxesDue = final_res.max(100000) 
+ endif
+
+else
+if(income.income_type.oclIsTypeOf(Pensions_and_Annuities_Income)) then
+let a:Real = if(classe=Tax_Class_Category::One_A) then self.income.taxPayer.from_law.get_A_for_pension_class_1A(amount) else if(classe=Tax_Class_Category::Two) then self.income.taxPayer.from_law.get_A_for_pension_class_2(amount) else self.income.taxPayer.from_law.get_A_for_pension_class_1(amount) endif endif in
+let b:Real = if(classe=Tax_Class_Category::One_A) then self.income.taxPayer.from_law.get_B_for_pension_class_1A(amount) else if(classe=Tax_Class_Category::Two) then self.income.taxPayer.from_law.get_B_for_pension_class_2(amount) else self.income.taxPayer.from_law.get_B_for_pension_class_1(amount) endif endif in
+ let res:Real = self.income.taxPayer.from_law.round_ten_cent(a * amount - b) in
+ let max:Real = if(classe=Tax_Class_Category::Two) then 25065 else 12565 endif in
+ 
+ if(amount<max) then
+ let final_res:Real= self.income.taxPayer.from_law.round_ten_cent(res*1.07) in
+ self.income.taxPayer.taxesDue = final_res.max(100000) 
+ else 
+ let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 81.906 else if(classe=Tax_Class_Category::Two) then 165.74 else 82.87 endif endif in
+ let final_res:Real= self.income.taxPayer.from_law.round_ten_cent(res + (res*0.09-adjustement)) in
+ self.income.taxPayer.taxesDue = final_res.max(100000) 
+ endif
+else
+self.income.taxPayer.taxesDue = -1
+endif
+endif 
+
+
+context Dependent inv inv3: 
+if((self.getAge(2018) <=21) or (self.continued_studies = true)) then 
+self.allowances->size()=1
+else 
+self.allowances->size()=0
+endif 
+
+context Income inv inv5: 
+if(not self.income_type.oclIsTypeOf(Employment_Income)) then 
+self.details->forAll(d|d.worked_days = 0)
+else 
+self.details->forAll(d|d.worked_days >= 1 and d.worked_days<=25)
+endif 
+
+context Tax_Payer inv inv6:
+let val:Integer = self.getAge(2018) - 16 in 
+self.dependents->forAll( d:Dependent| d.getAge(2018) > val)
+
+context Income inv inv7: 
+let val:Real =self.details->asOrderedSet()->first().distance in 
+self.details->forAll(d: Income_Detail|d.distance = val)
+
+--context Income inv user_complete_details: 
+--self.details->forAll(d: Income_Detail|d.month = self.details->asOrderedSet()->indexOf(d))
+
+context Income inv inv8:  
+if(not self.income_type.oclIsTypeOf(Employment_Income)) then
+self.details->forAll(d| d.distance = 0)
+else 
+self.details->forAll(d| d.distance >= 0.0 and d.distance <= 100)
+endif
+
+--context Income inv inv9:
+--if(self.income_type.oclIsTypeOf(Pensions_and_Annuities_Income)) then
+--self.details->forAll(d| not d.is_contributing_pension)
+--else 
+--self.details->forAll(d| d.is_contributing_pension)
+--endif 
+
+context Income inv inv10: 
+let val:Real =self.details->asOrderedSet()->first().amount in 
+self.details->forAll(d: Income_Detail|d.amount = val) 
+
+
+
+context Expense inv inv11:  
+let max:Real = if((self.income.income_amount / 2)>50) then self.income.income_amount / 2 else 50 endif in
+self.declared_amount >= 50 and self.declared_amount <= max
+
+context Tax_Payer inv inv12:   
+ self.addresses->exists( hab_add:Address | hab_add.oclIsTypeOf(Habitual_Address) = true and hab_add.country<>Country::ZZ) and
+ self.incomes->exists(inc | inc.oclIsTypeOf(Local_Income) = true)
+ implies
+ self.oclIsTypeOf(Non_Resident_Tax_Payer) 
+ 
+context Tax_Payer inv inv13:
+ self.addresses->exists( hab_add:Address | hab_add.oclIsTypeOf(Habitual_Address) = true and hab_add.country=Country::ZZ) 
+implies
+ self.oclIsTypeOf(Resident_Tax_Payer)
+ 
+--context Tax_Payer inv inv14:
+--self.dependents->size() >= 0 and self.dependents->size()<= 6
+
+context External_Allowance inv inv15: 
+let child:Dependent = self.person in
+let h:Household = Household.allInstances()->select(children->includes(child))->asOrderedSet()->first() in
+let t1:Set(Physical_Person) = Set{h.parents.individual_A,h.parents.individual_B}->select(oclIsKindOf(Tax_Payer)) in
+if(t1->size()=1) then
+self.reciver = t1->asOrderedSet()->first() 
+else 
+self.reciver = t1->asOrderedSet()->at(2) or self.reciver = t1->asOrderedSet()->at(1) 
+endif 
+
+context Tax_Card inv inv16: 
+if(self.income.taxPayer.incomes->size()=1) then 
+self.tax_card_type=Tax_Card_Type::Principal
+else
+let all_incomes:OrderedSet(Income)=self.income.taxPayer.incomes->select(inc:Income| inc.income_amount= self.income.taxPayer.incomes.income_amount->max())->asOrderedSet() in
+let bigest_income:Income= all_incomes->first() in
+if(bigest_income=self.income) then
+self.tax_card_type=Tax_Card_Type::Principal
+else
+self.tax_card_type=Tax_Card_Type::Additional
+endif
+endif
+
+
+context Legal_Union_Record inv inv17: 
+self.start_year <=2018 and self.start_year >=1950
+
+
+--context Household inv inv18:
+--not self.parents.oclIsUndefined()
+
+--context Legal_Union_Record inv inv19:
+--not self.household.oclIsUndefined()
+
+context Legal_Union_Record inv inv20:
+self.individual_B <> self.individual_A
+and 
+not self.individual_A.oclIsUndefined()
+and
+not self.individual_B.oclIsUndefined() 
+
+--context Legal_Union_Record inv inv21:
+--self.properties->size() >= 1
+
+--context Tax_Payer inv inv22:
+--self.incomes->size() >= 1
+
+--context Tax_Payer inv inv23:
+--not self.from_law.oclIsUndefined()
+
+--context Tax_Payer inv inv24:
+--not self.from_agent.oclIsUndefined()
+
+--context Income inv inv25: 
+--not self.income_type.oclIsUndefined()
+
+--context Income inv inv26:
+--self.details->size() = 12
+
+
+--context Tax_Payer inv inv27:
+--not self.from_agent.oclIsUndefined()
+
+
+--context Tax_Payer inv inv28:
+--not self.from_law.oclIsUndefined() 
+
+--context Legal_Union_Record inv inv29:
+--self.properties->size()=1
+
+--context Tax_Payer inv inv30:
+--self.AEP_deduction = 0
+
+--context Physical_Person inv inv31:
+--self.last_start_year_widower = -1
+
+--context Physical_Person inv inv32:
+--self.name = 'Not important'
+
+context Physical_Person inv inv33:
+self.getAge(2018) >= 0 and self.getAge(2018) <= 100
+
+context Physical_Person inv inv34: 
+self.birth_month >= 1 and self.birth_month <= 12
+
+context Physical_Person inv inv35: 
+self.birth_day >= 1 and self.birth_day <= 28
+
+--context FromAgent inv inv36: 
+--self.taxation_year = 2018
+
+--context Income inv inv37: 
+--self.year = 2018
+
+--context Income inv inv38: 
+--self.start_year = 2018
+
+--context Tax_Card inv inv39: 
+--self.deduction_FD_yearly = 0
+
+--context Tax_Card inv inv40: 
+--self.credit_CIS_yearly = 0
+
+--context Tax_Card inv inv40: 
+--self.credit_CIS_monthly = 0
+
+--context Tax_Card inv inv41: 
+--self.credit_CIP_yearly = 0
+
+--context Tax_Card inv inv42: 
+--self.credit_CIP_monthly = 0
+
+--context Tax_Card inv inv43: 
+--self.deduction_CE_invalidity_yearly = 0
+
+--context Tax_Card inv inv44: 
+--self.deduction_DS_Debt_yearly = 0
+
+
+--context Expense inv inv45: 
+--self.year_expense_was_incurred_in = 2018
+
+--context Tax_Property inv inv46: 
+--self.taxed_jointly = true 
+
+context Legal_Union_Record inv inv47:  
+(self.separation_cause=Separation_Causes::NONE and self.end_year = -1)
+or(self.end_year>self.start_year)
+
+
+context Physical_Person inv inv48: 
+(self.disability_type = Disability_Types::NONE and self.disability_percentage = 0) or
+(self.disability_type <> Disability_Types::NONE and self.disability_percentage > 0 and self.disability_percentage <= 1)
+
+context Legal_Union_Record inv inv49:
+self.individual_A.oclIsKindOf(Tax_Payer) and 
+self.individual_B.oclIsKindOf(Physical_Person) and 
+not self.individual_B.oclIsTypeOf(Dependent) and 
+self.individual_A <> self.individual_B
+
+--context Income inv inv50:
+--not self.income_type.oclIsUndefined() 
+
+--context Income inv inv51:
+--not self.taxPayer.oclIsUndefined() 
+
+--context Tax_Card inv inv52: 
+--not self.income.oclIsUndefined() 
+
+--context Legal_Union_Record inv inv53: 
+--not self.household.oclIsUndefined() 
+
+endpackage

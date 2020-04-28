@@ -1,0 +1,144 @@
+import 'file:/Users/Aren Babikian/git/VIATRA-Attributes/original.PLEDGE.case.studies/model/CD_Case_B.uml'
+--e.g., import 'file:/Users/User_X/CD_Case_B.uml'
+
+package DomainModel
+
+ context BodySenseSystem inv: Set{self.itsTimer}->size()>=1 
+
+ context BodySenseSystem inv: Set{self.itsNVM}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsWatchdog}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsTemperatureSensor}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsPreviousOccupancyStatus}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsALU}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsOccupancyStatus}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsBodySenseElectronics}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsROM}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsMeasurementValue}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsRAM}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsIgnitionResetButton}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsSFR}->size()>=1
+ 
+ context BodySenseSystem inv: Set{self.itsBodySenseSensor}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsVoltageSensor}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsDefaultCalibrationData}->size()>=1
+
+ context BodySenseSystem inv: Set{self.itsAirbagControlUnit}->size()>=1
+ 
+ context BodySenseSystem inv: BodySenseSystem.allInstances()->forAll(b|b.itsOccupancyStatus.OccupantClassForAirbagControl = OccupantClassAirbag::Init)
+
+ context BodySenseSystem inv: BodySenseSystem.allInstances()->forAll(b|b.itsOccupancyStatus.OccupantClassForSeatBeltReminder = OccupantClassSbr::Init)
+
+ context BodySenseSystem inv: BodySenseSystem.allInstances()->forAll(b|b.discardFlag = true)
+
+ context NVM inv: Set{self.itsCalibrationData}->size()>=1
+
+ context Thermistor inv: Set{self.itsTemperatureSensor}->size()>=1
+
+ context OccupancyStatus inv: Set{self.itsAirbagControlUnit}->size()>=1
+
+ context AirbagControlUnit inv: Set{self.itsOccupancyStatus}->size()>=1 
+  
+ context TemperatureSensor inv: self.itsThermistor->size() = 2
+
+ context RAM inv RAMIsValid: RAM.allInstances()->forAll(r|r.isValid = true)
+
+ context SFR inv SFRIsValid: SFR.allInstances()->forAll(s|s.isValid = true)
+
+ context ALU inv ALUIsValid: ALU.allInstances()->forAll(a|a.isValid = true)
+
+ context ROM inv ROMIsValid: ROM.allInstances()->forAll(r|r.isValid = true)
+ 
+ context Error inv e1: Error.allInstances()->select(e|e.oclIsTypeOf(SeatHeaterCircuitIntegrityError))->forAll(e| e.qualificationCounter = 0)
+
+ context Error inv e2: Error.allInstances()->select(e|(not e.oclIsKindOf(CommunicationError)) and (not e.oclIsKindOf(VoltageError)))->forAll(r| r.isQualified = false) 
+
+ context Error inv e6: Error.allInstances()->select(e|e.oclIsKindOf(VoltageError))->forAll(v|v.isQualified = true)
+
+ context Error inv e7: Error.allInstances()->select(e|e.oclIsKindOf(VoltageError))->forAll(v|v.isDetected =  false)
+
+ context Error inv e8: Error.allInstances()->select(e|e.oclIsTypeOf(TemperatureRangeLimitError))->forAll(e|e.isDetected = true)
+
+ context Error inv e9: Error.allInstances()->select(e|e.oclIsTypeOf(NVMAccessError))->forAll(e|e.isDetected = true)
+
+ context Error inv e10: Error.allInstances()->select(e|e.oclIsTypeOf(VoltageHighError))->forAll(e|e.isDetected = true)
+
+ context Error inv e11: Error.allInstances()->select(e|e.oclIsTypeOf(DiscardError))->forAll(e|e.isDetected = true)
+
+ context Error inv e12: Error.allInstances()->select(e|e.oclIsTypeOf(MeasurementRangeError))->forAll(e|e.isDetected = true)
+
+ context Error inv e13: Error.allInstances()->select(e|e.oclIsTypeOf(CableShieldIntegrityError))->forAll(e|e.isDetected = true)
+
+ context Error inv e14: Error.allInstances()->select(e|e.oclIsTypeOf(CalibrationNotLearnedError))->forAll(e|e.isDetected = true)
+
+ context Error inv e15: Error.allInstances()->select(e|e.oclIsTypeOf(BuildCheckFailedError))->forAll(e|e.isDetected = true)
+
+ context Error inv e16: Error.allInstances()->select(e|e.oclIsTypeOf(SFRError))->forAll(e|e.isDetected = true)
+
+ context Error inv e17: Error.allInstances()->select(e|e.oclIsTypeOf(MeasurementSensePathError))->forAll(e|e.isDetected = true)
+
+ context Error inv e18: Error.allInstances()->select(e|e.oclIsTypeOf(ROMError))->forAll(e|e.isDetected = true)
+
+ context Error inv e19: Error.allInstances()->select(e|e.oclIsTypeOf(BuildCheckNotRunError))->forAll(e|e.isDetected = true)
+
+ context Error inv e20: Error.allInstances()->select(e|e.oclIsTypeOf(SeatFrameConnectionError))->forAll(e|e.isDetected = true)
+
+ context Error inv e21: Error.allInstances()->select(e|e.oclIsTypeOf(TemperatureSensorError))->forAll(e|e.isDetected = true)
+
+ context Error inv e22: Error.allInstances()->select(e|e.oclIsTypeOf(TemperatureRangeError))->forAll(e|e.isDetected = true)
+
+ context Error inv e23: Error.allInstances()->select(e|e.oclIsTypeOf(NVMCRCError))->forAll(e|e.isDetected = true)
+
+ context Error inv e24: Error.allInstances()->select(e|e.oclIsTypeOf(WatchdogError))->forAll(e|e.isDetected = true)
+
+ context Error inv e25: Error.allInstances()->select(e|e.oclIsTypeOf(VoltageLowError))->forAll(e|e.isDetected = true)
+
+ context Error inv e26: Error.allInstances()->select(e|e.oclIsTypeOf(SeatHeaterCircuitIntegrityError))->forAll(e|e.isDetected = true)
+
+ context Error inv e27: Error.allInstances()->select(e|e.oclIsTypeOf(ShortSenseUbatGndError))->forAll(e|e.isDetected = true)
+
+ context Error inv e28: Error.allInstances()->select(e|e.oclIsTypeOf(InternalMeasurementPathError))->forAll(e|e.isDetected = true)
+
+ context Error inv e29: Error.allInstances()->select(e|e.oclIsTypeOf(RAMError))->forAll(e|e.isDetected = true)
+
+ context Error inv e30: Error.allInstances()->select(e|e.oclIsTypeOf(ALUError))->forAll(e|e.isDetected = true)
+
+ context Error inv e31: Error.allInstances()->select(e|e.oclIsTypeOf(CalibrationDataError))->forAll(e|e.isDetected = true)
+
+ context Error inv e32: Error.allInstances()->select(e|e.oclIsTypeOf(MeasurementRangeError))->forAll(e|e.isDetected = true)
+
+ context Error inv e33: Error.allInstances()->select(e|e.oclIsTypeOf(VoltageHighError))->forAll(e|e.isDetected = false)
+
+ context Error inv e34: Error.allInstances()->select(e|e.oclIsTypeOf(VoltageLowError))->forAll(e|e.isDetected = false)
+
+ context Error inv e35: Error.allInstances()->select(e|e.oclIsKindOf(InternalMeasurementDeviceError))->forAll(e|e.isDetected = false)
+
+ context Error inv e36: Error.allInstances()->select(e|e.oclIsKindOf(ExternalMeasurementDeviceError))->forAll(e|e.isDetected = false)
+
+ context Error inv e37: Error.allInstances()->select(e|e.oclIsKindOf(TemperatureError))->forAll(e|e.isDetected = false)
+
+ context Error inv e38: Error.allInstances()->select(e|e.oclIsTypeOf(RAMError) or e.oclIsTypeOf(SFRError) or e.oclIsTypeOf(ALUError) or e.oclIsTypeOf(ROMError))->forAll(e|e.isDetected = false)
+
+ context Error inv e39: Error.allInstances()->select(e|e.oclIsTypeOf(SeatHeaterCircuitIntegrityError))->forAll(e|e.isQualified = true)
+
+ context Error inv e40: Error.allInstances()->select(e|e.oclIsTypeOf(DiscardError))->forAll(e|e.isQualified = true)
+
+ context Error inv e41: Error.allInstances()->select(e|e.oclIsTypeOf(VoltageLowError))->forAll(e|e.isQualified = true)
+
+ context Error inv e43: Error.allInstances()->select(e|e.oclIsTypeOf(VoltageHighError))->forAll(e|e.isQualified = true)
+
+
+    
+endpackage

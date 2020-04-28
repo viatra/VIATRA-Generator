@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>case.study.pledge.originalFiles</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.ocl.pivot.ui.oclbuilder</name>
+			<arguments>
+				<dictionary>
+					<key>disabledExtensions</key>
+					<value>*,essentialocl</value>
+				</dictionary>
+				<dictionary>
+					<key>disabledPaths</key>
+					<value>bin/**,target/**</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledExtensions</key>
+					<value>ecore,ocl,oclinecore,oclstdlib,uml</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledPaths</key>
+					<value>**</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.ocl.pivot.ui.oclnature</nature>
+	</natures>
+</projectDescription>

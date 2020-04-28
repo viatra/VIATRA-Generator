@@ -1,0 +1,24 @@
+package queries
+ 
+import "http://www.example.org/familytree"
+
+@Constraint(message="memberIsItsOwnParent", severity="error", key={m})
+pattern memberIsItsOwnParent(m: Member) = {
+	FamilyTree.members(_, m);
+	Member.parents(m, p);
+	m == p;
+}
+
+//@Constraint(message="parentTooYoung", severity="error", key={m, p})
+//pattern parentTooYoung(m: Member, p: Member) = {
+//	FamilyTree.members(_, m);
+//	Member.parents(m, p);
+//	Member.age(m, mAge);
+//	Member.age(p, pAge);
+//	check (mAge <= (pAge + 12));
+//}
+
+
+
+
+
