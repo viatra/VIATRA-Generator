@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="solverLanguage" nsURI="http://www.eclipse.org/viatra/solver/language/SolverLanguage"
+    nsPrefix="solverLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="Problem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TruthValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interpretation" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicInterpretation" eSuperTypes="#//Interpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//Symbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1"
+        eType="#//ComplexObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//TruthValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Symbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelSymbol" eSuperTypes="#//Symbol">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialitySymbol" eSuperTypes="#//Symbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExistSymbol" eSuperTypes="#//PartialitySymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EqualsSymbol" eSuperTypes="#//PartialitySymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSymbol" eSuperTypes="#//Symbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanSymbol" eSuperTypes="#//DataSymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerSymbol" eSuperTypes="#//DataSymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealSymbol" eSuperTypes="#//DataSymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringSymbol" eSuperTypes="#//DataSymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//ComplexObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedObject" eSuperTypes="#//Object">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnnamedObject" eSuperTypes="#//Object">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="#//Object #//Literal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanObject" eSuperTypes="#//DataObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//BooleanValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntObject" eSuperTypes="#//DataObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealObject" eSuperTypes="#//DataObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringObject" eSuperTypes="#//DataObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodies" upperBound="-1"
+        eType="#//PatternBody" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateSymbol" eSuperTypes="#//Predicate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorPredicate" eSuperTypes="#//Predicate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Variable"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Symbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternBody">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Polarity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="polarity" eType="#//Polarity"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//Literal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="closureType" eType="#//ClosureType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClosureType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AllInstances" eSuperTypes="#//ComplexObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//Symbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AllObjects" eSuperTypes="#//ComplexObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefaultInterpretation" eSuperTypes="#//Interpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interpretation" eType="#//BasicInterpretation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDInterpretation" eSuperTypes="#//Interpretation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassInterpretation" eSuperTypes="#//CDInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supertypes" upperBound="-1"
+        eType="#//ModelSymbol" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fielt" upperBound="-1"
+        eType="#//FieldRelationInterpretation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumInterpretation" eSuperTypes="#//CDInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Symbol" eType="#//ModelSymbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1"
+        eType="#//NamedObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldRelationInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//MultiplicityDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Symbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GlobalRelationInterpretation" eSuperTypes="#//CDInterpretation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceMultiplicity" eType="#//MultiplicityDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Symbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetMultiplicity" eType="#//MultiplicityDefinition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Symbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unlimitedUpper" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanTrue" eSuperTypes="#//BooleanValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanFalse" eSuperTypes="#//BooleanValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="True" eSuperTypes="#//TruthValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="False" eSuperTypes="#//TruthValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unknown" eSuperTypes="#//TruthValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Error" eSuperTypes="#//TruthValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Positive" eSuperTypes="#//Polarity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negative" eSuperTypes="#//Polarity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReflexiveClosure" eSuperTypes="#//ClosureType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IrreflexiveClosure" eSuperTypes="#//ClosureType"/>
+</ecore:EPackage>
