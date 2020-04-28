@@ -5,6 +5,7 @@ package Taxation.impl;
 import Taxation.Legal_Union_Record;
 import Taxation.Tax_Property;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

@@ -7,6 +7,7 @@ import Taxation.Income_Tax_Credit;
 import Taxation.Tax_Card;
 import Taxation.Tax_Payer;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

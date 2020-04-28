@@ -2,8 +2,6 @@
  */
 package Taxation;
 
-import java.util.Date;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -19,9 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link Taxation.Income#getIncome_amount <em>Income amount</em>}</li>
  *   <li>{@link Taxation.Income#getIncome_type <em>Income type</em>}</li>
- *   <li>{@link Taxation.Income#getStart_date_within_taxation_year <em>Start date within taxation year</em>}</li>
- *   <li>{@link Taxation.Income#getStart_date_of_contract <em>Start date of contract</em>}</li>
- *   <li>{@link Taxation.Income#getEnd_date_within_taxation_year <em>End date within taxation year</em>}</li>
  *   <li>{@link Taxation.Income#getTax_card <em>Tax card</em>}</li>
  *   <li>{@link Taxation.Income#getTax_liability <em>Tax liability</em>}</li>
  *   <li>{@link Taxation.Income#getTaxPayer <em>Tax Payer</em>}</li>
@@ -81,72 +76,6 @@ public interface Income extends EObject {
 	 * @generated
 	 */
 	void setIncome_type(Income_Type value);
-
-	/**
-	 * Returns the value of the '<em><b>Start date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start date within taxation year</em>' attribute.
-	 * @see #setStart_date_within_taxation_year(Date)
-	 * @see Taxation.TaxationPackage#getIncome_Start_date_within_taxation_year()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	Date getStart_date_within_taxation_year();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Income#getStart_date_within_taxation_year <em>Start date within taxation year</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start date within taxation year</em>' attribute.
-	 * @see #getStart_date_within_taxation_year()
-	 * @generated
-	 */
-	void setStart_date_within_taxation_year(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Start date of contract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start date of contract</em>' attribute.
-	 * @see #setStart_date_of_contract(Date)
-	 * @see Taxation.TaxationPackage#getIncome_Start_date_of_contract()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	Date getStart_date_of_contract();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Income#getStart_date_of_contract <em>Start date of contract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start date of contract</em>' attribute.
-	 * @see #getStart_date_of_contract()
-	 * @generated
-	 */
-	void setStart_date_of_contract(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>End date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>End date within taxation year</em>' attribute.
-	 * @see #setEnd_date_within_taxation_year(Date)
-	 * @see Taxation.TaxationPackage#getIncome_End_date_within_taxation_year()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	Date getEnd_date_within_taxation_year();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Income#getEnd_date_within_taxation_year <em>End date within taxation year</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>End date within taxation year</em>' attribute.
-	 * @see #getEnd_date_within_taxation_year()
-	 * @generated
-	 */
-	void setEnd_date_within_taxation_year(Date value);
 
 	/**
 	 * Returns the value of the '<em><b>Tax card</b></em>' containment reference.

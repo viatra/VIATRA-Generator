@@ -2,10 +2,9 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
   <viewpoint:DAnalysis uid="_XxmRwGDAEeq8BovXV4ESzw" selectedViews="_YbwCAGDAEeq8BovXV4ESzw _YcJDkGDAEeq8BovXV4ESzw _YcK4wGDAEeq8BovXV4ESzw _YdwNIGDAEeq8BovXV4ESzw" version="14.3.0.201909031200">
     <semanticResources>Taxation.ecore</semanticResources>
-    <semanticResources>Taxation.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_YbwCAGDAEeq8BovXV4ESzw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_ZFSuQGDAEeq8BovXV4ESzw" name="Taxation class diagram" repPath="#_ZDuoAGDAEeq8BovXV4ESzw" changeId="02ad4336-9a13-4a8a-8fbe-8fb518194552">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_ZFSuQGDAEeq8BovXV4ESzw" name="Taxation class diagram" repPath="#_ZDuoAGDAEeq8BovXV4ESzw" changeId="ff33d3ca-d0f2-4f53-b58f-288212de0dfe">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="Taxation.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -820,18 +819,6 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_acACgWDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_acACgmDAEeq8BovXV4ESzw"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_acApkGDAEeq8BovXV4ESzw" type="3010" element="_aPURYWDAEeq8BovXV4ESzw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_acApkWDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_acApkmDAEeq8BovXV4ESzw"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_acBQoGDAEeq8BovXV4ESzw" type="3010" element="_aPVfgGDAEeq8BovXV4ESzw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_acBQoWDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_acBQomDAEeq8BovXV4ESzw"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_acBQo2DAEeq8BovXV4ESzw" type="3010" element="_aPVfgmDAEeq8BovXV4ESzw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_acBQpGDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_acBQpWDAEeq8BovXV4ESzw"/>
-            </children>
             <children xmi:type="notation:Node" xmi:id="_acB3sGDAEeq8BovXV4ESzw" type="3010" element="_aPWGkWDAEeq8BovXV4ESzw">
               <styles xmi:type="notation:FontStyle" xmi:id="_acB3sWDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_acB3smDAEeq8BovXV4ESzw"/>
@@ -877,14 +864,6 @@
             <children xmi:type="notation:Node" xmi:id="_acE7A2DAEeq8BovXV4ESzw" type="3010" element="_aT_WAWDAEeq8BovXV4ESzw">
               <styles xmi:type="notation:FontStyle" xmi:id="_acE7BGDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_acE7BWDAEeq8BovXV4ESzw"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_acFiEGDAEeq8BovXV4ESzw" type="3010" element="_aUAkIGDAEeq8BovXV4ESzw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_acFiEWDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_acFiEmDAEeq8BovXV4ESzw"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_acFiE2DAEeq8BovXV4ESzw" type="3010" element="_aUBLMGDAEeq8BovXV4ESzw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_acFiFGDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_acFiFWDAEeq8BovXV4ESzw"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_acGJIGDAEeq8BovXV4ESzw" type="3010" element="_aUByQGDAEeq8BovXV4ESzw">
               <styles xmi:type="notation:FontStyle" xmi:id="_acGJIWDAEeq8BovXV4ESzw" fontName="Segoe UI" fontHeight="8" bold="true"/>
@@ -3891,30 +3870,6 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_aPURYWDAEeq8BovXV4ESzw" name="start_date_within_taxation_year : EDate" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/start_date_within_taxation_year"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/start_date_within_taxation_year"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_aPU4cGDAEeq8BovXV4ESzw" labelAlignment="LEFT" description="_aLikoGDAEeq8BovXV4ESzw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_aPVfgGDAEeq8BovXV4ESzw" name="start_date_of_contract : EDate" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/start_date_of_contract"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/start_date_of_contract"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_aPVfgWDAEeq8BovXV4ESzw" labelAlignment="LEFT" description="_aLikoGDAEeq8BovXV4ESzw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_aPVfgmDAEeq8BovXV4ESzw" name="end_date_within_taxation_year : EDate" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/end_date_within_taxation_year"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/end_date_within_taxation_year"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_aPWGkGDAEeq8BovXV4ESzw" labelAlignment="LEFT" description="_aLikoGDAEeq8BovXV4ESzw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_aPWGkWDAEeq8BovXV4ESzw" name="tax_liability : EDouble = 0.0" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/tax_liability"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Income/tax_liability"/>
@@ -3984,22 +3939,6 @@
         <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Tax_Card/tax_office"/>
         <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Tax_Card/tax_office"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_aT_9EGDAEeq8BovXV4ESzw" labelAlignment="LEFT" description="_aLikoGDAEeq8BovXV4ESzw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_aUAkIGDAEeq8BovXV4ESzw" name="valid_from_date : EDate" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Tax_Card/valid_from_date"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Tax_Card/valid_from_date"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_aUAkIWDAEeq8BovXV4ESzw" labelAlignment="LEFT" description="_aLikoGDAEeq8BovXV4ESzw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_aUBLMGDAEeq8BovXV4ESzw" name="valid_until_date : EDate" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="Taxation.ecore#//Tax_Card/valid_until_date"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="Taxation.ecore#//Tax_Card/valid_until_date"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_aUBLMWDAEeq8BovXV4ESzw" labelAlignment="LEFT" description="_aLikoGDAEeq8BovXV4ESzw">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>

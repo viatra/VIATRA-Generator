@@ -7,6 +7,7 @@ import Taxation.Disability_Types;
 import Taxation.Expense;
 import Taxation.Physical_Person;
 import Taxation.TaxationPackage;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -20,7 +21,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -43,7 +43,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getBirth_day <em>Birth day</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getExpenses <em>Expenses</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#isIs_widower <em>Is widower</em>}</li>
- *   <li>{@link Taxation.impl.Physical_PersonImpl#getOwns_Address <em>Owns Address</em>}</li>
  * </ul>
  *
  * @generated
@@ -248,16 +247,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected boolean is_widower = IS_WIDOWER_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getOwns_Address() <em>Owns Address</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwns_Address()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Address> owns_Address;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -516,19 +505,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EList<Address> getOwns_Address() {
-		if (owns_Address == null) {
-			owns_Address = new EObjectContainmentEList<Address>(Address.class, this, TaxationPackage.PHYSICAL_PERSON__OWNS_ADDRESS);
-		}
-		return owns_Address;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -553,8 +529,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return ((InternalEList<?>)getAddresses()).basicRemove(otherEnd, msgs);
 			case TaxationPackage.PHYSICAL_PERSON__EXPENSES:
 				return ((InternalEList<?>)getExpenses()).basicRemove(otherEnd, msgs);
-			case TaxationPackage.PHYSICAL_PERSON__OWNS_ADDRESS:
-				return ((InternalEList<?>)getOwns_Address()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -589,8 +563,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return getExpenses();
 			case TaxationPackage.PHYSICAL_PERSON__IS_WIDOWER:
 				return isIs_widower();
-			case TaxationPackage.PHYSICAL_PERSON__OWNS_ADDRESS:
-				return getOwns_Address();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -639,10 +611,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 			case TaxationPackage.PHYSICAL_PERSON__IS_WIDOWER:
 				setIs_widower((Boolean)newValue);
 				return;
-			case TaxationPackage.PHYSICAL_PERSON__OWNS_ADDRESS:
-				getOwns_Address().clear();
-				getOwns_Address().addAll((Collection<? extends Address>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -688,9 +656,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 			case TaxationPackage.PHYSICAL_PERSON__IS_WIDOWER:
 				setIs_widower(IS_WIDOWER_EDEFAULT);
 				return;
-			case TaxationPackage.PHYSICAL_PERSON__OWNS_ADDRESS:
-				getOwns_Address().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -725,8 +690,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return expenses != null && !expenses.isEmpty();
 			case TaxationPackage.PHYSICAL_PERSON__IS_WIDOWER:
 				return is_widower != IS_WIDOWER_EDEFAULT;
-			case TaxationPackage.PHYSICAL_PERSON__OWNS_ADDRESS:
-				return owns_Address != null && !owns_Address.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -9,8 +9,8 @@ import Taxation.Income_Type;
 import Taxation.Tax_Card;
 import Taxation.Tax_Payer;
 import Taxation.TaxationPackage;
+
 import java.util.Collection;
-import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -37,9 +37,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link Taxation.impl.IncomeImpl#getIncome_amount <em>Income amount</em>}</li>
  *   <li>{@link Taxation.impl.IncomeImpl#getIncome_type <em>Income type</em>}</li>
- *   <li>{@link Taxation.impl.IncomeImpl#getStart_date_within_taxation_year <em>Start date within taxation year</em>}</li>
- *   <li>{@link Taxation.impl.IncomeImpl#getStart_date_of_contract <em>Start date of contract</em>}</li>
- *   <li>{@link Taxation.impl.IncomeImpl#getEnd_date_within_taxation_year <em>End date within taxation year</em>}</li>
  *   <li>{@link Taxation.impl.IncomeImpl#getTax_card <em>Tax card</em>}</li>
  *   <li>{@link Taxation.impl.IncomeImpl#getTax_liability <em>Tax liability</em>}</li>
  *   <li>{@link Taxation.impl.IncomeImpl#getTaxPayer <em>Tax Payer</em>}</li>
@@ -80,66 +77,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected Income_Type income_type;
-
-	/**
-	 * The default value of the '{@link #getStart_date_within_taxation_year() <em>Start date within taxation year</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStart_date_within_taxation_year()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Date START_DATE_WITHIN_TAXATION_YEAR_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getStart_date_within_taxation_year() <em>Start date within taxation year</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStart_date_within_taxation_year()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date start_date_within_taxation_year = START_DATE_WITHIN_TAXATION_YEAR_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getStart_date_of_contract() <em>Start date of contract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStart_date_of_contract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Date START_DATE_OF_CONTRACT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getStart_date_of_contract() <em>Start date of contract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStart_date_of_contract()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date start_date_of_contract = START_DATE_OF_CONTRACT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEnd_date_within_taxation_year() <em>End date within taxation year</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEnd_date_within_taxation_year()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Date END_DATE_WITHIN_TAXATION_YEAR_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEnd_date_within_taxation_year() <em>End date within taxation year</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEnd_date_within_taxation_year()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date end_date_within_taxation_year = END_DATE_WITHIN_TAXATION_YEAR_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTax_card() <em>Tax card</em>}' containment reference.
@@ -296,75 +233,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.INCOME__INCOME_TYPE, newIncome_type, newIncome_type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Date getStart_date_within_taxation_year() {
-		return start_date_within_taxation_year;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setStart_date_within_taxation_year(Date newStart_date_within_taxation_year) {
-		Date oldStart_date_within_taxation_year = start_date_within_taxation_year;
-		start_date_within_taxation_year = newStart_date_within_taxation_year;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.INCOME__START_DATE_WITHIN_TAXATION_YEAR, oldStart_date_within_taxation_year, start_date_within_taxation_year));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Date getStart_date_of_contract() {
-		return start_date_of_contract;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setStart_date_of_contract(Date newStart_date_of_contract) {
-		Date oldStart_date_of_contract = start_date_of_contract;
-		start_date_of_contract = newStart_date_of_contract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.INCOME__START_DATE_OF_CONTRACT, oldStart_date_of_contract, start_date_of_contract));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Date getEnd_date_within_taxation_year() {
-		return end_date_within_taxation_year;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEnd_date_within_taxation_year(Date newEnd_date_within_taxation_year) {
-		Date oldEnd_date_within_taxation_year = end_date_within_taxation_year;
-		end_date_within_taxation_year = newEnd_date_within_taxation_year;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.INCOME__END_DATE_WITHIN_TAXATION_YEAR, oldEnd_date_within_taxation_year, end_date_within_taxation_year));
 	}
 
 	/**
@@ -604,12 +472,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 				return getIncome_amount();
 			case TaxationPackage.INCOME__INCOME_TYPE:
 				return getIncome_type();
-			case TaxationPackage.INCOME__START_DATE_WITHIN_TAXATION_YEAR:
-				return getStart_date_within_taxation_year();
-			case TaxationPackage.INCOME__START_DATE_OF_CONTRACT:
-				return getStart_date_of_contract();
-			case TaxationPackage.INCOME__END_DATE_WITHIN_TAXATION_YEAR:
-				return getEnd_date_within_taxation_year();
 			case TaxationPackage.INCOME__TAX_CARD:
 				return getTax_card();
 			case TaxationPackage.INCOME__TAX_LIABILITY:
@@ -640,15 +502,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 				return;
 			case TaxationPackage.INCOME__INCOME_TYPE:
 				setIncome_type((Income_Type)newValue);
-				return;
-			case TaxationPackage.INCOME__START_DATE_WITHIN_TAXATION_YEAR:
-				setStart_date_within_taxation_year((Date)newValue);
-				return;
-			case TaxationPackage.INCOME__START_DATE_OF_CONTRACT:
-				setStart_date_of_contract((Date)newValue);
-				return;
-			case TaxationPackage.INCOME__END_DATE_WITHIN_TAXATION_YEAR:
-				setEnd_date_within_taxation_year((Date)newValue);
 				return;
 			case TaxationPackage.INCOME__TAX_CARD:
 				setTax_card((Tax_Card)newValue);
@@ -688,15 +541,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 			case TaxationPackage.INCOME__INCOME_TYPE:
 				setIncome_type((Income_Type)null);
 				return;
-			case TaxationPackage.INCOME__START_DATE_WITHIN_TAXATION_YEAR:
-				setStart_date_within_taxation_year(START_DATE_WITHIN_TAXATION_YEAR_EDEFAULT);
-				return;
-			case TaxationPackage.INCOME__START_DATE_OF_CONTRACT:
-				setStart_date_of_contract(START_DATE_OF_CONTRACT_EDEFAULT);
-				return;
-			case TaxationPackage.INCOME__END_DATE_WITHIN_TAXATION_YEAR:
-				setEnd_date_within_taxation_year(END_DATE_WITHIN_TAXATION_YEAR_EDEFAULT);
-				return;
 			case TaxationPackage.INCOME__TAX_CARD:
 				setTax_card((Tax_Card)null);
 				return;
@@ -731,12 +575,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 				return income_amount != INCOME_AMOUNT_EDEFAULT;
 			case TaxationPackage.INCOME__INCOME_TYPE:
 				return income_type != null;
-			case TaxationPackage.INCOME__START_DATE_WITHIN_TAXATION_YEAR:
-				return START_DATE_WITHIN_TAXATION_YEAR_EDEFAULT == null ? start_date_within_taxation_year != null : !START_DATE_WITHIN_TAXATION_YEAR_EDEFAULT.equals(start_date_within_taxation_year);
-			case TaxationPackage.INCOME__START_DATE_OF_CONTRACT:
-				return START_DATE_OF_CONTRACT_EDEFAULT == null ? start_date_of_contract != null : !START_DATE_OF_CONTRACT_EDEFAULT.equals(start_date_of_contract);
-			case TaxationPackage.INCOME__END_DATE_WITHIN_TAXATION_YEAR:
-				return END_DATE_WITHIN_TAXATION_YEAR_EDEFAULT == null ? end_date_within_taxation_year != null : !END_DATE_WITHIN_TAXATION_YEAR_EDEFAULT.equals(end_date_within_taxation_year);
 			case TaxationPackage.INCOME__TAX_CARD:
 				return tax_card != null;
 			case TaxationPackage.INCOME__TAX_LIABILITY:
@@ -765,12 +603,6 @@ public abstract class IncomeImpl extends MinimalEObjectImpl.Container implements
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (income_amount: ");
 		result.append(income_amount);
-		result.append(", start_date_within_taxation_year: ");
-		result.append(start_date_within_taxation_year);
-		result.append(", start_date_of_contract: ");
-		result.append(start_date_of_contract);
-		result.append(", end_date_within_taxation_year: ");
-		result.append(end_date_within_taxation_year);
 		result.append(", tax_liability: ");
 		result.append(tax_liability);
 		result.append(", num: ");

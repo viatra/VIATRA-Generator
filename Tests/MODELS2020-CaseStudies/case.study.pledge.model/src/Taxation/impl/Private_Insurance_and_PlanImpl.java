@@ -5,6 +5,7 @@ package Taxation.impl;
 import Taxation.Category_of_Private_Insurance_and_Plan;
 import Taxation.Private_Insurance_and_Plan;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;

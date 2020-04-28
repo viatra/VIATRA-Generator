@@ -2,8 +2,6 @@
  */
 package Taxation;
 
-import java.util.Date;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,8 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link Taxation.Tax_Card#getCard_identifier <em>Card identifier</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getTax_card_type <em>Tax card type</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getTax_office <em>Tax office</em>}</li>
- *   <li>{@link Taxation.Tax_Card#getValid_from_date <em>Valid from date</em>}</li>
- *   <li>{@link Taxation.Tax_Card#getValid_until_date <em>Valid until date</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getPercentage_of_witholding <em>Percentage of witholding</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getTax_payers_name_surname <em>Tax payers name surname</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getTax_payers_partner_name_surname <em>Tax payers partner name surname</em>}</li>
@@ -133,50 +129,6 @@ public interface Tax_Card extends EObject {
 	 * @generated
 	 */
 	void setTax_office(Tax_Office value);
-
-	/**
-	 * Returns the value of the '<em><b>Valid from date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Valid from date</em>' attribute.
-	 * @see #setValid_from_date(Date)
-	 * @see Taxation.TaxationPackage#getTax_Card_Valid_from_date()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	Date getValid_from_date();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Tax_Card#getValid_from_date <em>Valid from date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Valid from date</em>' attribute.
-	 * @see #getValid_from_date()
-	 * @generated
-	 */
-	void setValid_from_date(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Valid until date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Valid until date</em>' attribute.
-	 * @see #setValid_until_date(Date)
-	 * @see Taxation.TaxationPackage#getTax_Card_Valid_until_date()
-	 * @model unique="false" required="true" ordered="false"
-	 * @generated
-	 */
-	Date getValid_until_date();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Tax_Card#getValid_until_date <em>Valid until date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Valid until date</em>' attribute.
-	 * @see #getValid_until_date()
-	 * @generated
-	 */
-	void setValid_until_date(Date value);
 
 	/**
 	 * Returns the value of the '<em><b>Percentage of witholding</b></em>' attribute.

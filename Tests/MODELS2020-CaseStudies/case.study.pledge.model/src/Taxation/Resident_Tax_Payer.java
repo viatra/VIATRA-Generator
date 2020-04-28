@@ -14,5 +14,4 @@ package Taxation;
  * @generated
  */
 public interface Resident_Tax_Payer extends Tax_Payer {
-
 } // Resident_Tax_Payer

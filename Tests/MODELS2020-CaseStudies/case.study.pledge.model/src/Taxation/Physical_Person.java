@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link Taxation.Physical_Person#getBirth_day <em>Birth day</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getExpenses <em>Expenses</em>}</li>
  *   <li>{@link Taxation.Physical_Person#isIs_widower <em>Is widower</em>}</li>
- *   <li>{@link Taxation.Physical_Person#getOwns_Address <em>Owns Address</em>}</li>
  * </ul>
  *
  * @see Taxation.TaxationPackage#getPhysical_Person()
@@ -262,17 +261,5 @@ public interface Physical_Person extends EObject {
 	 * @generated
 	 */
 	void setIs_widower(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Owns Address</b></em>' containment reference list.
-	 * The list contents are of type {@link Taxation.Address}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owns Address</em>' containment reference list.
-	 * @see Taxation.TaxationPackage#getPhysical_Person_Owns_Address()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Address> getOwns_Address();
 
 } // Physical_Person

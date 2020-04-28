@@ -7,6 +7,7 @@ import Taxation.Expense;
 import Taxation.FromAgent;
 import Taxation.Tax_Payer;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

@@ -9,6 +9,7 @@ import Taxation.FromAgent;
 import Taxation.Income;
 import Taxation.Physical_Person;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

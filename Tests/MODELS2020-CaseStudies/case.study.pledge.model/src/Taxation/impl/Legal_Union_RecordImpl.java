@@ -8,6 +8,7 @@ import Taxation.Physical_Person;
 import Taxation.Separation_Causes;
 import Taxation.Tax_Property;
 import Taxation.TaxationPackage;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

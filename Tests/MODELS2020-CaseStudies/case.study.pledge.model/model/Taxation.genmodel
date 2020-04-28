@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/case.study.a.model/src" modelPluginID="case.study.a.model"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/case.study.pledge.model/src" modelPluginID="case.study.pledge.model"
     modelName="Taxation" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     operationReflection="true" importOrganizing="true">
@@ -230,9 +230,6 @@
     <genClasses image="false" ecoreClass="Taxation.ecore#//Income">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/income_amount"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income/income_type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/start_date_within_taxation_year"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/start_date_of_contract"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/end_date_within_taxation_year"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income/tax_card"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/tax_liability"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Income/taxPayer"/>
@@ -249,8 +246,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/card_identifier"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_card_type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_office"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/valid_from_date"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/valid_until_date"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/percentage_of_witholding"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_payers_name_surname"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_payers_partner_name_surname"/>

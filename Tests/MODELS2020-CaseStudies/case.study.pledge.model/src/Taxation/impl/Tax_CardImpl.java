@@ -13,7 +13,6 @@ import Taxation.TaxationPackage;
 import Taxation.Town;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -42,8 +41,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link Taxation.impl.Tax_CardImpl#getCard_identifier <em>Card identifier</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_card_type <em>Tax card type</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_office <em>Tax office</em>}</li>
- *   <li>{@link Taxation.impl.Tax_CardImpl#getValid_from_date <em>Valid from date</em>}</li>
- *   <li>{@link Taxation.impl.Tax_CardImpl#getValid_until_date <em>Valid until date</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getPercentage_of_witholding <em>Percentage of witholding</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_payers_name_surname <em>Tax payers name surname</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_payers_partner_name_surname <em>Tax payers partner name surname</em>}</li>
@@ -140,46 +137,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 	 * @ordered
 	 */
 	protected Tax_Office tax_office = TAX_OFFICE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getValid_from_date() <em>Valid from date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValid_from_date()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Date VALID_FROM_DATE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValid_from_date() <em>Valid from date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValid_from_date()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date valid_from_date = VALID_FROM_DATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getValid_until_date() <em>Valid until date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValid_until_date()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Date VALID_UNTIL_DATE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValid_until_date() <em>Valid until date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValid_until_date()
-	 * @generated
-	 * @ordered
-	 */
-	protected Date valid_until_date = VALID_UNTIL_DATE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPercentage_of_witholding() <em>Percentage of witholding</em>}' attribute.
@@ -827,52 +784,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		tax_office = newTax_office == null ? TAX_OFFICE_EDEFAULT : newTax_office;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.TAX_CARD__TAX_OFFICE, oldTax_office, tax_office));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Date getValid_from_date() {
-		return valid_from_date;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setValid_from_date(Date newValid_from_date) {
-		Date oldValid_from_date = valid_from_date;
-		valid_from_date = newValid_from_date;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.TAX_CARD__VALID_FROM_DATE, oldValid_from_date, valid_from_date));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Date getValid_until_date() {
-		return valid_until_date;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setValid_until_date(Date newValid_until_date) {
-		Date oldValid_until_date = valid_until_date;
-		valid_until_date = newValid_until_date;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.TAX_CARD__VALID_UNTIL_DATE, oldValid_until_date, valid_until_date));
 	}
 
 	/**
@@ -1771,10 +1682,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 				return getTax_card_type();
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				return getTax_office();
-			case TaxationPackage.TAX_CARD__VALID_FROM_DATE:
-				return getValid_from_date();
-			case TaxationPackage.TAX_CARD__VALID_UNTIL_DATE:
-				return getValid_until_date();
 			case TaxationPackage.TAX_CARD__PERCENTAGE_OF_WITHOLDING:
 				return getPercentage_of_witholding();
 			case TaxationPackage.TAX_CARD__TAX_PAYERS_NAME_SURNAME:
@@ -1863,12 +1770,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 				return;
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				setTax_office((Tax_Office)newValue);
-				return;
-			case TaxationPackage.TAX_CARD__VALID_FROM_DATE:
-				setValid_from_date((Date)newValue);
-				return;
-			case TaxationPackage.TAX_CARD__VALID_UNTIL_DATE:
-				setValid_until_date((Date)newValue);
 				return;
 			case TaxationPackage.TAX_CARD__PERCENTAGE_OF_WITHOLDING:
 				setPercentage_of_witholding((Double)newValue);
@@ -1990,12 +1891,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				setTax_office(TAX_OFFICE_EDEFAULT);
 				return;
-			case TaxationPackage.TAX_CARD__VALID_FROM_DATE:
-				setValid_from_date(VALID_FROM_DATE_EDEFAULT);
-				return;
-			case TaxationPackage.TAX_CARD__VALID_UNTIL_DATE:
-				setValid_until_date(VALID_UNTIL_DATE_EDEFAULT);
-				return;
 			case TaxationPackage.TAX_CARD__PERCENTAGE_OF_WITHOLDING:
 				setPercentage_of_witholding(PERCENTAGE_OF_WITHOLDING_EDEFAULT);
 				return;
@@ -2110,10 +2005,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 				return tax_card_type != TAX_CARD_TYPE_EDEFAULT;
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				return tax_office != TAX_OFFICE_EDEFAULT;
-			case TaxationPackage.TAX_CARD__VALID_FROM_DATE:
-				return VALID_FROM_DATE_EDEFAULT == null ? valid_from_date != null : !VALID_FROM_DATE_EDEFAULT.equals(valid_from_date);
-			case TaxationPackage.TAX_CARD__VALID_UNTIL_DATE:
-				return VALID_UNTIL_DATE_EDEFAULT == null ? valid_until_date != null : !VALID_UNTIL_DATE_EDEFAULT.equals(valid_until_date);
 			case TaxationPackage.TAX_CARD__PERCENTAGE_OF_WITHOLDING:
 				return percentage_of_witholding != PERCENTAGE_OF_WITHOLDING_EDEFAULT;
 			case TaxationPackage.TAX_CARD__TAX_PAYERS_NAME_SURNAME:
@@ -2198,10 +2089,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		result.append(tax_card_type);
 		result.append(", tax_office: ");
 		result.append(tax_office);
-		result.append(", valid_from_date: ");
-		result.append(valid_from_date);
-		result.append(", valid_until_date: ");
-		result.append(valid_until_date);
 		result.append(", percentage_of_witholding: ");
 		result.append(percentage_of_witholding);
 		result.append(", tax_payers_name_surname: ");

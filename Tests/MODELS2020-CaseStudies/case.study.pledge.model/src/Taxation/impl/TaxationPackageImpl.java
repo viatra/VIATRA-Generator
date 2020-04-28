@@ -73,6 +73,7 @@ import Taxation.Town;
 import Taxation.Trade_and_Business_Income;
 import Taxation.Travel_Expense_FD;
 import Taxation.Type_of_Rate;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -1170,16 +1171,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EReference getPhysical_Person_Owns_Address() {
-		return (EReference)physical_PersonEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getAddress() {
 		return addressEClass;
 	}
@@ -1770,38 +1761,8 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getIncome_Start_date_within_taxation_year() {
-		return (EAttribute)incomeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getIncome_Start_date_of_contract() {
-		return (EAttribute)incomeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getIncome_End_date_within_taxation_year() {
-		return (EAttribute)incomeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getIncome_Tax_card() {
-		return (EReference)incomeEClass.getEStructuralFeatures().get(5);
+		return (EReference)incomeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1811,7 +1772,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getIncome_Tax_liability() {
-		return (EAttribute)incomeEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)incomeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1821,7 +1782,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getIncome_TaxPayer() {
-		return (EReference)incomeEClass.getEStructuralFeatures().get(7);
+		return (EReference)incomeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1831,7 +1792,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getIncome_Details() {
-		return (EReference)incomeEClass.getEStructuralFeatures().get(8);
+		return (EReference)incomeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1841,7 +1802,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getIncome_Num() {
-		return (EAttribute)incomeEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)incomeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1851,7 +1812,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getIncome_Expenses() {
-		return (EReference)incomeEClass.getEStructuralFeatures().get(10);
+		return (EReference)incomeEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1940,7 +1901,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTax_Card_Valid_from_date() {
+	public EAttribute getTax_Card_Percentage_of_witholding() {
 		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1950,7 +1911,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTax_Card_Valid_until_date() {
+	public EAttribute getTax_Card_Tax_payers_name_surname() {
 		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1960,7 +1921,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTax_Card_Percentage_of_witholding() {
+	public EAttribute getTax_Card_Tax_payers_partner_name_surname() {
 		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1970,28 +1931,8 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTax_Card_Tax_payers_name_surname() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getTax_Card_Tax_payers_partner_name_surname() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTax_Card_Tax_payers_address() {
-		return (EReference)tax_CardEClass.getEStructuralFeatures().get(8);
+		return (EReference)tax_CardEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2001,7 +1942,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Jobs_Employer_SSNo() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2011,7 +1952,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Jobs_employers_name() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -2021,7 +1962,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Jobs_activity_type() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -2031,7 +1972,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Jobs_place_of_work() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -2041,7 +1982,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_FD_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(13);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -2051,7 +1992,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_FD_monthly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -2061,7 +2002,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_AC_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(15);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -2071,7 +2012,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_AC_monthly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(16);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -2081,7 +2022,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_AC_yearly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(17);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -2091,7 +2032,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_CE_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(18);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -2101,7 +2042,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_CE_monthly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(19);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -2111,7 +2052,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_CE_yearly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(20);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -2121,7 +2062,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_DS_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(21);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(19);
 	}
 
 	/**
@@ -2131,7 +2072,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_DS_monthly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(22);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(20);
 	}
 
 	/**
@@ -2141,7 +2082,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_FO_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(23);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(21);
 	}
 
 	/**
@@ -2151,7 +2092,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_FO_monthly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(24);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(22);
 	}
 
 	/**
@@ -2161,7 +2102,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_FO_yearly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(25);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(23);
 	}
 
 	/**
@@ -2171,7 +2112,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Credit_CIS_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(26);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(24);
 	}
 
 	/**
@@ -2181,7 +2122,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Credit_CIS_monthly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(27);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(25);
 	}
 
 	/**
@@ -2191,7 +2132,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Credit_CIM_daily() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(28);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(26);
 	}
 
 	/**
@@ -2201,7 +2142,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Validity() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(29);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(27);
 	}
 
 	/**
@@ -2211,7 +2152,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getTax_Card_Income_Tax_Credit() {
-		return (EReference)tax_CardEClass.getEStructuralFeatures().get(30);
+		return (EReference)tax_CardEClass.getEStructuralFeatures().get(28);
 	}
 
 	/**
@@ -2221,7 +2162,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getTax_Card_Previous() {
-		return (EReference)tax_CardEClass.getEStructuralFeatures().get(31);
+		return (EReference)tax_CardEClass.getEStructuralFeatures().get(29);
 	}
 
 	/**
@@ -2231,7 +2172,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getTax_Card_Current_tax_card() {
-		return (EReference)tax_CardEClass.getEStructuralFeatures().get(32);
+		return (EReference)tax_CardEClass.getEStructuralFeatures().get(30);
 	}
 
 	/**
@@ -2241,7 +2182,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Credit_CIM_yearly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(33);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(31);
 	}
 
 	/**
@@ -2251,7 +2192,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_DS_Alimony_yearly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(34);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(32);
 	}
 
 	/**
@@ -2261,7 +2202,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EAttribute getTax_Card_Deduction_DS_Debt_yearly() {
-		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(35);
+		return (EAttribute)tax_CardEClass.getEStructuralFeatures().get(33);
 	}
 
 	/**
@@ -2271,7 +2212,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 */
 	@Override
 	public EReference getTax_Card_Income() {
-		return (EReference)tax_CardEClass.getEStructuralFeatures().get(36);
+		return (EReference)tax_CardEClass.getEStructuralFeatures().get(34);
 	}
 
 	/**
@@ -3415,7 +3356,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		createEAttribute(physical_PersonEClass, PHYSICAL_PERSON__BIRTH_DAY);
 		createEReference(physical_PersonEClass, PHYSICAL_PERSON__EXPENSES);
 		createEAttribute(physical_PersonEClass, PHYSICAL_PERSON__IS_WIDOWER);
-		createEReference(physical_PersonEClass, PHYSICAL_PERSON__OWNS_ADDRESS);
 
 		addressEClass = createEClass(ADDRESS);
 		createEAttribute(addressEClass, ADDRESS__COUNTRY);
@@ -3485,9 +3425,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		incomeEClass = createEClass(INCOME);
 		createEAttribute(incomeEClass, INCOME__INCOME_AMOUNT);
 		createEReference(incomeEClass, INCOME__INCOME_TYPE);
-		createEAttribute(incomeEClass, INCOME__START_DATE_WITHIN_TAXATION_YEAR);
-		createEAttribute(incomeEClass, INCOME__START_DATE_OF_CONTRACT);
-		createEAttribute(incomeEClass, INCOME__END_DATE_WITHIN_TAXATION_YEAR);
 		createEReference(incomeEClass, INCOME__TAX_CARD);
 		createEAttribute(incomeEClass, INCOME__TAX_LIABILITY);
 		createEReference(incomeEClass, INCOME__TAX_PAYER);
@@ -3504,8 +3441,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		createEAttribute(tax_CardEClass, TAX_CARD__CARD_IDENTIFIER);
 		createEAttribute(tax_CardEClass, TAX_CARD__TAX_CARD_TYPE);
 		createEAttribute(tax_CardEClass, TAX_CARD__TAX_OFFICE);
-		createEAttribute(tax_CardEClass, TAX_CARD__VALID_FROM_DATE);
-		createEAttribute(tax_CardEClass, TAX_CARD__VALID_UNTIL_DATE);
 		createEAttribute(tax_CardEClass, TAX_CARD__PERCENTAGE_OF_WITHOLDING);
 		createEAttribute(tax_CardEClass, TAX_CARD__TAX_PAYERS_NAME_SURNAME);
 		createEAttribute(tax_CardEClass, TAX_CARD__TAX_PAYERS_PARTNER_NAME_SURNAME);
@@ -3813,7 +3748,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		initEAttribute(getPhysical_Person_Birth_day(), ecorePackage.getEInt(), "birth_day", null, 1, 1, Physical_Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPhysical_Person_Expenses(), this.getExpense(), this.getExpense_Beneficiary(), "expenses", null, 0, -1, Physical_Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getPhysical_Person_Is_widower(), ecorePackage.getEBoolean(), "is_widower", null, 1, 1, Physical_Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPhysical_Person_Owns_Address(), this.getAddress(), null, "owns_Address", null, 0, -1, Physical_Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(addressEClass, Address.class, "Address", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAddress_Country(), this.getCountry(), "country", "ZZ", 1, 1, Address.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3883,9 +3817,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		initEClass(incomeEClass, Income.class, "Income", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIncome_Income_amount(), ecorePackage.getEDouble(), "income_amount", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getIncome_Income_type(), this.getIncome_Type(), this.getIncome_Type_Income(), "income_type", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIncome_Start_date_within_taxation_year(), ecorePackage.getEDate(), "start_date_within_taxation_year", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getIncome_Start_date_of_contract(), ecorePackage.getEDate(), "start_date_of_contract", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getIncome_End_date_within_taxation_year(), ecorePackage.getEDate(), "end_date_within_taxation_year", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getIncome_Tax_card(), this.getTax_Card(), this.getTax_Card_Income(), "tax_card", null, 0, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIncome_Tax_liability(), ecorePackage.getEDouble(), "tax_liability", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIncome_TaxPayer(), this.getTax_Payer(), this.getTax_Payer_Incomes(), "taxPayer", null, 1, 1, Income.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -3902,8 +3833,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		initEAttribute(getTax_Card_Card_identifier(), ecorePackage.getEString(), "card_identifier", null, 0, 1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTax_Card_Tax_card_type(), this.getTax_Card_Type(), "tax_card_type", null, 1, 1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTax_Card_Tax_office(), this.getTax_Office(), "tax_office", null, 1, 1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTax_Card_Valid_from_date(), ecorePackage.getEDate(), "valid_from_date", null, 1, 1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getTax_Card_Valid_until_date(), ecorePackage.getEDate(), "valid_until_date", null, 1, 1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTax_Card_Percentage_of_witholding(), ecorePackage.getEDouble(), "percentage_of_witholding", null, 1, 1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTax_Card_Tax_payers_name_surname(), ecorePackage.getEString(), "tax_payers_name_surname", null, 0, -1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTax_Card_Tax_payers_partner_name_surname(), ecorePackage.getEString(), "tax_payers_partner_name_surname", null, 0, -1, Tax_Card.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

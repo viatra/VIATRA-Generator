@@ -4,6 +4,7 @@ package Taxation.impl;
 
 import Taxation.Resident_Tax_Payer;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

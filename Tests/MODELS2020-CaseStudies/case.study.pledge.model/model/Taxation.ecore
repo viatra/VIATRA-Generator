@@ -335,12 +335,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="income_type" lowerBound="1"
         eType="#//Income_Type" containment="true" eOpposite="#//Income_Type/income"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_date_within_taxation_year"
-        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_date_of_contract"
-        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end_date_within_taxation_year"
-        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tax_card" eType="#//Tax_Card"
         containment="true" eOpposite="#//Tax_Card/income"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_liability" lowerBound="1"
@@ -378,10 +372,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_office" lowerBound="1"
         eType="#//Tax_Office"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_from_date" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_until_date" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="percentage_of_witholding"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_payers_name_surname"

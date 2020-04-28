@@ -485,22 +485,13 @@ public interface TaxationPackage extends EPackage {
 	int PHYSICAL_PERSON__IS_WIDOWER = 10;
 
 	/**
-	 * The feature id for the '<em><b>Owns Address</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHYSICAL_PERSON__OWNS_ADDRESS = 11;
-
-	/**
 	 * The number of structural features of the '<em>Physical Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON_FEATURE_COUNT = 12;
+	int PHYSICAL_PERSON_FEATURE_COUNT = 11;
 
 	/**
 	 * The number of operations of the '<em>Physical Person</em>' class.
@@ -619,15 +610,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAX_PAYER__IS_WIDOWER = PHYSICAL_PERSON__IS_WIDOWER;
-
-	/**
-	 * The feature id for the '<em><b>Owns Address</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_PAYER__OWNS_ADDRESS = PHYSICAL_PERSON__OWNS_ADDRESS;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -973,15 +955,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPENDENT__IS_WIDOWER = PHYSICAL_PERSON__IS_WIDOWER;
-
-	/**
-	 * The feature id for the '<em><b>Owns Address</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENT__OWNS_ADDRESS = PHYSICAL_PERSON__OWNS_ADDRESS;
 
 	/**
 	 * The feature id for the '<em><b>Dependent type</b></em>' attribute.
@@ -1504,40 +1477,13 @@ public interface TaxationPackage extends EPackage {
 	int INCOME__INCOME_TYPE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Start date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOME__START_DATE_WITHIN_TAXATION_YEAR = 2;
-
-	/**
-	 * The feature id for the '<em><b>Start date of contract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOME__START_DATE_OF_CONTRACT = 3;
-
-	/**
-	 * The feature id for the '<em><b>End date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOME__END_DATE_WITHIN_TAXATION_YEAR = 4;
-
-	/**
 	 * The feature id for the '<em><b>Tax card</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME__TAX_CARD = 5;
+	int INCOME__TAX_CARD = 2;
 
 	/**
 	 * The feature id for the '<em><b>Tax liability</b></em>' attribute.
@@ -1546,7 +1492,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME__TAX_LIABILITY = 6;
+	int INCOME__TAX_LIABILITY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tax Payer</b></em>' container reference.
@@ -1555,7 +1501,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME__TAX_PAYER = 7;
+	int INCOME__TAX_PAYER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Details</b></em>' containment reference list.
@@ -1564,7 +1510,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME__DETAILS = 8;
+	int INCOME__DETAILS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Num</b></em>' attribute.
@@ -1573,7 +1519,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME__NUM = 9;
+	int INCOME__NUM = 6;
 
 	/**
 	 * The feature id for the '<em><b>Expenses</b></em>' containment reference list.
@@ -1582,7 +1528,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME__EXPENSES = 10;
+	int INCOME__EXPENSES = 7;
 
 	/**
 	 * The number of structural features of the '<em>Income</em>' class.
@@ -1591,7 +1537,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_FEATURE_COUNT = 11;
+	int INCOME_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Income</em>' class.
@@ -1695,31 +1641,13 @@ public interface TaxationPackage extends EPackage {
 	int TAX_CARD__TAX_OFFICE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Valid from date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_CARD__VALID_FROM_DATE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Valid until date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_CARD__VALID_UNTIL_DATE = 4;
-
-	/**
 	 * The feature id for the '<em><b>Percentage of witholding</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__PERCENTAGE_OF_WITHOLDING = 5;
+	int TAX_CARD__PERCENTAGE_OF_WITHOLDING = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tax payers name surname</b></em>' attribute list.
@@ -1728,7 +1656,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_PAYERS_NAME_SURNAME = 6;
+	int TAX_CARD__TAX_PAYERS_NAME_SURNAME = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tax payers partner name surname</b></em>' attribute list.
@@ -1737,7 +1665,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_PAYERS_PARTNER_NAME_SURNAME = 7;
+	int TAX_CARD__TAX_PAYERS_PARTNER_NAME_SURNAME = 5;
 
 	/**
 	 * The feature id for the '<em><b>Tax payers address</b></em>' reference.
@@ -1746,7 +1674,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_PAYERS_ADDRESS = 8;
+	int TAX_CARD__TAX_PAYERS_ADDRESS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Jobs Employer SS No</b></em>' attribute.
@@ -1755,7 +1683,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_EMPLOYER_SS_NO = 9;
+	int TAX_CARD__JOBS_EMPLOYER_SS_NO = 7;
 
 	/**
 	 * The feature id for the '<em><b>Jobs employers name</b></em>' attribute.
@@ -1764,7 +1692,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_EMPLOYERS_NAME = 10;
+	int TAX_CARD__JOBS_EMPLOYERS_NAME = 8;
 
 	/**
 	 * The feature id for the '<em><b>Jobs activity type</b></em>' attribute.
@@ -1773,7 +1701,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_ACTIVITY_TYPE = 11;
+	int TAX_CARD__JOBS_ACTIVITY_TYPE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Jobs place of work</b></em>' attribute.
@@ -1782,7 +1710,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_PLACE_OF_WORK = 12;
+	int TAX_CARD__JOBS_PLACE_OF_WORK = 10;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FD daily</b></em>' attribute.
@@ -1791,7 +1719,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FD_DAILY = 13;
+	int TAX_CARD__DEDUCTION_FD_DAILY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FD monthly</b></em>' attribute.
@@ -1800,7 +1728,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FD_MONTHLY = 14;
+	int TAX_CARD__DEDUCTION_FD_MONTHLY = 12;
 
 	/**
 	 * The feature id for the '<em><b>Deduction AC daily</b></em>' attribute.
@@ -1809,7 +1737,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_AC_DAILY = 15;
+	int TAX_CARD__DEDUCTION_AC_DAILY = 13;
 
 	/**
 	 * The feature id for the '<em><b>Deduction AC monthly</b></em>' attribute.
@@ -1818,7 +1746,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_AC_MONTHLY = 16;
+	int TAX_CARD__DEDUCTION_AC_MONTHLY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Deduction AC yearly</b></em>' attribute.
@@ -1827,7 +1755,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_AC_YEARLY = 17;
+	int TAX_CARD__DEDUCTION_AC_YEARLY = 15;
 
 	/**
 	 * The feature id for the '<em><b>Deduction CE daily</b></em>' attribute.
@@ -1836,7 +1764,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_CE_DAILY = 18;
+	int TAX_CARD__DEDUCTION_CE_DAILY = 16;
 
 	/**
 	 * The feature id for the '<em><b>Deduction CE monthly</b></em>' attribute.
@@ -1845,7 +1773,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_CE_MONTHLY = 19;
+	int TAX_CARD__DEDUCTION_CE_MONTHLY = 17;
 
 	/**
 	 * The feature id for the '<em><b>Deduction CE yearly</b></em>' attribute.
@@ -1854,7 +1782,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_CE_YEARLY = 20;
+	int TAX_CARD__DEDUCTION_CE_YEARLY = 18;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS daily</b></em>' attribute.
@@ -1863,7 +1791,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_DAILY = 21;
+	int TAX_CARD__DEDUCTION_DS_DAILY = 19;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS monthly</b></em>' attribute.
@@ -1872,7 +1800,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_MONTHLY = 22;
+	int TAX_CARD__DEDUCTION_DS_MONTHLY = 20;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FO daily</b></em>' attribute.
@@ -1881,7 +1809,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FO_DAILY = 23;
+	int TAX_CARD__DEDUCTION_FO_DAILY = 21;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FO monthly</b></em>' attribute.
@@ -1890,7 +1818,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FO_MONTHLY = 24;
+	int TAX_CARD__DEDUCTION_FO_MONTHLY = 22;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FO yearly</b></em>' attribute.
@@ -1899,7 +1827,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FO_YEARLY = 25;
+	int TAX_CARD__DEDUCTION_FO_YEARLY = 23;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIS daily</b></em>' attribute.
@@ -1908,7 +1836,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIS_DAILY = 26;
+	int TAX_CARD__CREDIT_CIS_DAILY = 24;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIS monthly</b></em>' attribute.
@@ -1917,7 +1845,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIS_MONTHLY = 27;
+	int TAX_CARD__CREDIT_CIS_MONTHLY = 25;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIM daily</b></em>' attribute.
@@ -1926,7 +1854,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIM_DAILY = 28;
+	int TAX_CARD__CREDIT_CIM_DAILY = 26;
 
 	/**
 	 * The feature id for the '<em><b>Validity</b></em>' attribute.
@@ -1935,7 +1863,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__VALIDITY = 29;
+	int TAX_CARD__VALIDITY = 27;
 
 	/**
 	 * The feature id for the '<em><b>Income Tax Credit</b></em>' reference list.
@@ -1944,7 +1872,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__INCOME_TAX_CREDIT = 30;
+	int TAX_CARD__INCOME_TAX_CREDIT = 28;
 
 	/**
 	 * The feature id for the '<em><b>Previous</b></em>' reference.
@@ -1953,7 +1881,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__PREVIOUS = 31;
+	int TAX_CARD__PREVIOUS = 29;
 
 	/**
 	 * The feature id for the '<em><b>Current tax card</b></em>' reference.
@@ -1962,7 +1890,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CURRENT_TAX_CARD = 32;
+	int TAX_CARD__CURRENT_TAX_CARD = 30;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIM yearly</b></em>' attribute.
@@ -1971,7 +1899,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIM_YEARLY = 33;
+	int TAX_CARD__CREDIT_CIM_YEARLY = 31;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS Alimony yearly</b></em>' attribute.
@@ -1980,7 +1908,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_ALIMONY_YEARLY = 34;
+	int TAX_CARD__DEDUCTION_DS_ALIMONY_YEARLY = 32;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS Debt yearly</b></em>' attribute.
@@ -1989,7 +1917,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_DEBT_YEARLY = 35;
+	int TAX_CARD__DEDUCTION_DS_DEBT_YEARLY = 33;
 
 	/**
 	 * The feature id for the '<em><b>Income</b></em>' container reference.
@@ -1998,7 +1926,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__INCOME = 36;
+	int TAX_CARD__INCOME = 34;
 
 	/**
 	 * The number of structural features of the '<em>Tax Card</em>' class.
@@ -2007,7 +1935,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD_FEATURE_COUNT = 37;
+	int TAX_CARD_FEATURE_COUNT = 35;
 
 	/**
 	 * The number of operations of the '<em>Tax Card</em>' class.
@@ -2638,15 +2566,6 @@ public interface TaxationPackage extends EPackage {
 	int NON_RESIDENT_TAX_PAYER__IS_WIDOWER = TAX_PAYER__IS_WIDOWER;
 
 	/**
-	 * The feature id for the '<em><b>Owns Address</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NON_RESIDENT_TAX_PAYER__OWNS_ADDRESS = TAX_PAYER__OWNS_ADDRESS;
-
-	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2935,15 +2854,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESIDENT_TAX_PAYER__IS_WIDOWER = TAX_PAYER__IS_WIDOWER;
-
-	/**
-	 * The feature id for the '<em><b>Owns Address</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESIDENT_TAX_PAYER__OWNS_ADDRESS = TAX_PAYER__OWNS_ADDRESS;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' containment reference list.
@@ -3385,33 +3295,6 @@ public interface TaxationPackage extends EPackage {
 	int FOREIGN_INCOME__INCOME_TYPE = INCOME__INCOME_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Start date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOREIGN_INCOME__START_DATE_WITHIN_TAXATION_YEAR = INCOME__START_DATE_WITHIN_TAXATION_YEAR;
-
-	/**
-	 * The feature id for the '<em><b>Start date of contract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOREIGN_INCOME__START_DATE_OF_CONTRACT = INCOME__START_DATE_OF_CONTRACT;
-
-	/**
-	 * The feature id for the '<em><b>End date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOREIGN_INCOME__END_DATE_WITHIN_TAXATION_YEAR = INCOME__END_DATE_WITHIN_TAXATION_YEAR;
-
-	/**
 	 * The feature id for the '<em><b>Tax card</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3510,33 +3393,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOCAL_INCOME__INCOME_TYPE = INCOME__INCOME_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Start date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_INCOME__START_DATE_WITHIN_TAXATION_YEAR = INCOME__START_DATE_WITHIN_TAXATION_YEAR;
-
-	/**
-	 * The feature id for the '<em><b>Start date of contract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_INCOME__START_DATE_OF_CONTRACT = INCOME__START_DATE_OF_CONTRACT;
-
-	/**
-	 * The feature id for the '<em><b>End date within taxation year</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_INCOME__END_DATE_WITHIN_TAXATION_YEAR = INCOME__END_DATE_WITHIN_TAXATION_YEAR;
 
 	/**
 	 * The feature id for the '<em><b>Tax card</b></em>' containment reference.
@@ -6340,17 +6196,6 @@ public interface TaxationPackage extends EPackage {
 	EAttribute getPhysical_Person_Is_widower();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link Taxation.Physical_Person#getOwns_Address <em>Owns Address</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owns Address</em>'.
-	 * @see Taxation.Physical_Person#getOwns_Address()
-	 * @see #getPhysical_Person()
-	 * @generated
-	 */
-	EReference getPhysical_Person_Owns_Address();
-
-	/**
 	 * Returns the meta object for class '{@link Taxation.Address <em>Address</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6990,39 +6835,6 @@ public interface TaxationPackage extends EPackage {
 	EReference getIncome_Income_type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Income#getStart_date_within_taxation_year <em>Start date within taxation year</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Start date within taxation year</em>'.
-	 * @see Taxation.Income#getStart_date_within_taxation_year()
-	 * @see #getIncome()
-	 * @generated
-	 */
-	EAttribute getIncome_Start_date_within_taxation_year();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Income#getStart_date_of_contract <em>Start date of contract</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Start date of contract</em>'.
-	 * @see Taxation.Income#getStart_date_of_contract()
-	 * @see #getIncome()
-	 * @generated
-	 */
-	EAttribute getIncome_Start_date_of_contract();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Income#getEnd_date_within_taxation_year <em>End date within taxation year</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>End date within taxation year</em>'.
-	 * @see Taxation.Income#getEnd_date_within_taxation_year()
-	 * @see #getIncome()
-	 * @generated
-	 */
-	EAttribute getIncome_End_date_within_taxation_year();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link Taxation.Income#getTax_card <em>Tax card</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7173,28 +6985,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTax_Card_Tax_office();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Tax_Card#getValid_from_date <em>Valid from date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Valid from date</em>'.
-	 * @see Taxation.Tax_Card#getValid_from_date()
-	 * @see #getTax_Card()
-	 * @generated
-	 */
-	EAttribute getTax_Card_Valid_from_date();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Tax_Card#getValid_until_date <em>Valid until date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Valid until date</em>'.
-	 * @see Taxation.Tax_Card#getValid_until_date()
-	 * @see #getTax_Card()
-	 * @generated
-	 */
-	EAttribute getTax_Card_Valid_until_date();
 
 	/**
 	 * Returns the meta object for the attribute '{@link Taxation.Tax_Card#getPercentage_of_witholding <em>Percentage of witholding</em>}'.
@@ -9079,14 +8869,6 @@ public interface TaxationPackage extends EPackage {
 		EAttribute PHYSICAL_PERSON__IS_WIDOWER = eINSTANCE.getPhysical_Person_Is_widower();
 
 		/**
-		 * The meta object literal for the '<em><b>Owns Address</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PHYSICAL_PERSON__OWNS_ADDRESS = eINSTANCE.getPhysical_Person_Owns_Address();
-
-		/**
 		 * The meta object literal for the '{@link Taxation.impl.AddressImpl <em>Address</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9579,30 +9361,6 @@ public interface TaxationPackage extends EPackage {
 		EReference INCOME__INCOME_TYPE = eINSTANCE.getIncome_Income_type();
 
 		/**
-		 * The meta object literal for the '<em><b>Start date within taxation year</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INCOME__START_DATE_WITHIN_TAXATION_YEAR = eINSTANCE.getIncome_Start_date_within_taxation_year();
-
-		/**
-		 * The meta object literal for the '<em><b>Start date of contract</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INCOME__START_DATE_OF_CONTRACT = eINSTANCE.getIncome_Start_date_of_contract();
-
-		/**
-		 * The meta object literal for the '<em><b>End date within taxation year</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INCOME__END_DATE_WITHIN_TAXATION_YEAR = eINSTANCE.getIncome_End_date_within_taxation_year();
-
-		/**
 		 * The meta object literal for the '<em><b>Tax card</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9717,22 +9475,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TAX_CARD__TAX_OFFICE = eINSTANCE.getTax_Card_Tax_office();
-
-		/**
-		 * The meta object literal for the '<em><b>Valid from date</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TAX_CARD__VALID_FROM_DATE = eINSTANCE.getTax_Card_Valid_from_date();
-
-		/**
-		 * The meta object literal for the '<em><b>Valid until date</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TAX_CARD__VALID_UNTIL_DATE = eINSTANCE.getTax_Card_Valid_until_date();
 
 		/**
 		 * The meta object literal for the '<em><b>Percentage of witholding</b></em>' attribute feature.

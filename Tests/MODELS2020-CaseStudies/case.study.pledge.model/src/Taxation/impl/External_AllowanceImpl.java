@@ -7,6 +7,7 @@ import Taxation.External_Allowance;
 import Taxation.Grantor;
 import Taxation.Physical_Person;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

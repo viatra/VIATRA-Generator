@@ -5,6 +5,7 @@ package Taxation.impl;
 import Taxation.Income_Tax;
 import Taxation.Tax_Payer;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;

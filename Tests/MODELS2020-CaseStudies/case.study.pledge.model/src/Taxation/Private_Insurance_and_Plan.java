@@ -2,6 +2,7 @@
  */
 package Taxation;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Private Insurance and Plan</b></em>'.
