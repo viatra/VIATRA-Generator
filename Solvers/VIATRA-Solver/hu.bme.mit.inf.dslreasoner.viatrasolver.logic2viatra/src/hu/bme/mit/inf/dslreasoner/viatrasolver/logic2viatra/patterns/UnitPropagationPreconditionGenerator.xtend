@@ -32,6 +32,7 @@ import java.util.ArrayList
 class UnitPropagationPreconditionGenerationResult {
 	List<CharSequence> definitions= new LinkedList
 	Map<UnitPropagation,String> unitPropagation2PatternName = new HashMap
+	Map<PConstraint,String> constraintOccurence2Name = new HashMap
 	
 	def registerQuery(PQuery q, PConstraint c, PropagationModality pm, Modality m3, String patternName, CharSequence definition) {
 		val key = new UnitPropagation(q,c,pm,m3)
@@ -72,17 +73,27 @@ class UnitPropagationPreconditionGenerator {
 	{
 		// Create an empty result
 		val res = new UnitPropagationPreconditionGenerationResult		
-		
 		val wfs = base.wfQueries(problem)//.map[it.patternPQuery]
+		val mainPropagationNames = new LinkedList
 		for(wf : wfs) {
 			val query = wf.patternPQuery as PQuery
 			val relation = wf.target
 			val allReferredChecks = query.allReferredConstraints.filter(ExpressionEvaluation)
 			
 			for(referredCheck : allReferredChecks) {
-				generatePropagationRule(res,relation,query,referredCheck,PropagationModality::UP, Modality::MUST)
+				mainPropagationNames+= getOrGeneratePropagationRule(res,relation,query,referredCheck,PropagationModality::UP, Modality::MUST)
 			}
 		}
+		return '''
+			«FOR def : res.definitions»
+				«def»
+			«ENDFOR»
+			
+			// Main propagations:
+			«FOR name : mainPropagationNames»
+				«name»
+			«ENDFOR»
+		'''
 	}
 	def allReferredConstraints(PQuery query) {
 		val allReferredQueries = query.allReferredQueries
@@ -97,9 +108,18 @@ class UnitPropagationPreconditionGenerator {
 			return res.getName(q,c,pm,m3)
 		}
 	}
+	def getOrGenerateConstraintName(UnitPropagationPreconditionGenerationResult res, PConstraint c){
+		if(res.constraintOccurence2Name.containsKey(c)) {
+			return res.constraintOccurence2Name.get(c)
+		} else {
+			val constraintName = '''Constraint«res.constraintOccurence2Name.size»'''
+			res.constraintOccurence2Name.put(c,constraintName)
+			return constraintName
+		}
+	}
 	
 	def void generatePropagationRule(UnitPropagationPreconditionGenerationResult res, Relation relation, PQuery q, PConstraint c, PropagationModality pm, Modality m3) {
-		val name = relationDefinitionName(relation,q,c,pm,m3)
+		val name = relationDefinitionName(res,relation,q,c,pm,m3)
 		val constraintArity = c.arity
 		val generatedBodies = new LinkedList
 		for(body : q.disjunctBodies.bodies) {
@@ -180,7 +200,7 @@ class UnitPropagationPreconditionGenerator {
 					problem:LogicProblem, interpretation:PartialInterpretation,
 					«FOR param :  q.parameters SEPARATOR ', '»var_«param.name»«ENDFOR»,
 					«FOR arity : 1..constraintArity SEPARATOR ', '»«canonizeName(arity,pm)»«ENDFOR»)
-				«FOR generatedBody: generatedBodies SEPARATOR "or"»{
+				«FOR generatedBody: generatedBodies SEPARATOR " or "»{
 				«generatedBody»
 				}«ENDFOR»
 			'''
@@ -188,8 +208,8 @@ class UnitPropagationPreconditionGenerator {
 		}
 	}
 
-	private def String relationDefinitionName(Relation relation, PQuery q, PConstraint c, PropagationModality pm, Modality m3)
-		'''«pm.name»«m3.name»Propagate_«base.canonizeName(relation.name)»'''
+	private def String relationDefinitionName(UnitPropagationPreconditionGenerationResult res, Relation relation, PQuery q, PConstraint c, PropagationModality pm, Modality m3)
+		'''«pm.name»«m3.name»Propagate«res.getOrGenerateConstraintName(c)»_«base.canonizeName(relation.name)»'''
 	
 	def canonizeName(PVariable v) {
 		return '''«IF v.referringConstraints.size == 1»_«ENDIF»var_«v.name.replaceAll("\\W","")»'''

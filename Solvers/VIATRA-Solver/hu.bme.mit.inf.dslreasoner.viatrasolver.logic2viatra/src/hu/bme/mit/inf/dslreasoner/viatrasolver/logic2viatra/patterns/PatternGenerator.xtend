@@ -36,6 +36,7 @@ class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val UnfinishedIndexer unfinishedIndexer = new UnfinishedIndexer(this)
 	@Accessors(PUBLIC_GETTER) val TypeRefinementGenerator typeRefinementGenerator //= new RefinementGenerator(this)
 	@Accessors(PUBLIC_GETTER) val RelationRefinementGenerator relationRefinementGenerator = new RelationRefinementGenerator(this)
+	@Accessors(PUBLIC_GETTER) val UnitPropagationPreconditionGenerator unitPropagationPreconditionGenerator = new UnitPropagationPreconditionGenerator(this)
 	
 	public new(TypeInferenceMethod typeInferenceMethod) {
 		if(typeInferenceMethod == TypeInferenceMethod.Generic) {
@@ -390,6 +391,11 @@ class PatternGenerator {
 			// 4.3 Relation refinement
 			//////////
 			«relationRefinementGenerator.generateRefineReference(problem)»
+			
+			//////////
+			// 5 Unit Propagations
+			//////////
+			«unitPropagationPreconditionGenerator.generateUnitPropagationRules(problem,problem.relations.filter(RelationDefinition),fqn2PQuery)»
 			'''
 	}
 }
