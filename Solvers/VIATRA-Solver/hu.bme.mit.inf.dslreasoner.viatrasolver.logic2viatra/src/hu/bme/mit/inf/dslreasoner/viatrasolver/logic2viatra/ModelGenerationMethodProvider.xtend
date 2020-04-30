@@ -69,7 +69,7 @@ class ModelGenerationMethodProvider {
 		
 		val queries = patternProvider.generateQueries(logicProblem,emptySolution,statistics,existingQueries,workspace,typeInferenceMethod,writeFiles) 
 		val //LinkedHashMap<Pair<Relation, ? extends Type>, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>>
-			objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(queries,scopePropagator,nameNewElements,statistics)
+			objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(logicProblem, emptySolution, queries,scopePropagator,nameNewElements,statistics)
 		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries,statistics)
 		
 		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(queries)

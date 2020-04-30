@@ -240,4 +240,17 @@ class PConstraintTransformer {
 	dispatch def transformConstraint(PConstraint c, Modality modality, List<VariableMapping> variableMapping) {
 		throw new UnsupportedOperationException('''Unknown constraint type: "«c.class.name»"!''')
 	}
+	
+	dispatch def transformConstraintUnset(ExpressionEvaluation e, List<VariableMapping> variableMapping) {
+		return '''
+			«FOR variable: e.affectedVariables»
+				PrimitiveElement.valueSet(«variable.canonizeName»,«variable.valueSetted»); «hasValueExpression(variableMapping,variable,variable.valueVariable)»
+			«ENDFOR»
+			check(«FOR variable: e.affectedVariables SEPARATOR " || "»!«variable.valueSetted»«ENDFOR»);
+		'''
+	}
+	
+	dispatch def transformConstraintUnset(PConstraint c, List<VariableMapping> variableMapping) {
+		throw new UnsupportedOperationException('''Unknown constraint type: "«c.class.name»"!''')
+	}
 }
