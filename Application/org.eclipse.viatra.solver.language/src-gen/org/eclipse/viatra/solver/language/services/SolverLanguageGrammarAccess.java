@@ -228,19 +228,25 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cSymbolAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cSymbolSymbolParserRuleCall_0_0 = (RuleCall)cSymbolAssignment_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cObjectsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cObjectsComplexObjectParserRuleCall_2_0 = (RuleCall)cObjectsAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cValueAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cValueTruthValueParserRuleCall_5_0 = (RuleCall)cValueAssignment_5.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Assignment cObjectsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
+		private final RuleCall cObjectsComplexObjectParserRuleCall_1_1_0_0 = (RuleCall)cObjectsAssignment_1_1_0.eContents().get(0);
+		private final Group cGroup_1_1_1 = (Group)cGroup_1_1.eContents().get(1);
+		private final Keyword cCommaKeyword_1_1_1_0 = (Keyword)cGroup_1_1_1.eContents().get(0);
+		private final Assignment cObjectsAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
+		private final RuleCall cObjectsComplexObjectParserRuleCall_1_1_1_1_0 = (RuleCall)cObjectsAssignment_1_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValueTruthValueParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
 		
 		//BasicInterpretation:
-		//	symbol=Symbol '(' objects+=ComplexObject* ')' ':' value=TruthValue;
+		//	symbol=Symbol ('(' (objects+=ComplexObject (',' objects+=ComplexObject)*)? ')')? ':' value=TruthValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//symbol=Symbol '(' objects+=ComplexObject* ')' ':' value=TruthValue
+		//symbol=Symbol ('(' (objects+=ComplexObject (',' objects+=ComplexObject)*)? ')')? ':' value=TruthValue
 		public Group getGroup() { return cGroup; }
 		
 		//symbol=Symbol
@@ -249,26 +255,44 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//Symbol
 		public RuleCall getSymbolSymbolParserRuleCall_0_0() { return cSymbolSymbolParserRuleCall_0_0; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		//('(' (objects+=ComplexObject (',' objects+=ComplexObject)*)? ')')?
+		public Group getGroup_1() { return cGroup_1; }
 		
-		//objects+=ComplexObject*
-		public Assignment getObjectsAssignment_2() { return cObjectsAssignment_2; }
+		//'('
+		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
+		
+		//(objects+=ComplexObject (',' objects+=ComplexObject)*)?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+		
+		//objects+=ComplexObject
+		public Assignment getObjectsAssignment_1_1_0() { return cObjectsAssignment_1_1_0; }
 		
 		//ComplexObject
-		public RuleCall getObjectsComplexObjectParserRuleCall_2_0() { return cObjectsComplexObjectParserRuleCall_2_0; }
+		public RuleCall getObjectsComplexObjectParserRuleCall_1_1_0_0() { return cObjectsComplexObjectParserRuleCall_1_1_0_0; }
+		
+		//(',' objects+=ComplexObject)*
+		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
+		
+		//','
+		public Keyword getCommaKeyword_1_1_1_0() { return cCommaKeyword_1_1_1_0; }
+		
+		//objects+=ComplexObject
+		public Assignment getObjectsAssignment_1_1_1_1() { return cObjectsAssignment_1_1_1_1; }
+		
+		//ComplexObject
+		public RuleCall getObjectsComplexObjectParserRuleCall_1_1_1_1_0() { return cObjectsComplexObjectParserRuleCall_1_1_1_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 		
 		//':'
-		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 		
 		//value=TruthValue
-		public Assignment getValueAssignment_5() { return cValueAssignment_5; }
+		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
 		
 		//TruthValue
-		public RuleCall getValueTruthValueParserRuleCall_5_0() { return cValueTruthValueParserRuleCall_5_0; }
+		public RuleCall getValueTruthValueParserRuleCall_3_0() { return cValueTruthValueParserRuleCall_3_0; }
 	}
 	public class SymbolElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
@@ -645,59 +669,50 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class PredicateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.Predicate");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPredicateSymbolParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cErrorPredicateParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cIsErrorAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cIsErrorErrorKeyword_0_0 = (Keyword)cIsErrorAssignment_0.eContents().get(0);
+		private final Assignment cSymbolAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSymbolModelSymbolParserRuleCall_1_0 = (RuleCall)cSymbolAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Assignment cParametersAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
+		private final RuleCall cParametersParameterParserRuleCall_2_1_0_0 = (RuleCall)cParametersAssignment_2_1_0.eContents().get(0);
+		private final Group cGroup_2_1_1 = (Group)cGroup_2_1.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_1_0 = (Keyword)cGroup_2_1_1.eContents().get(0);
+		private final Assignment cParametersAssignment_2_1_1_1 = (Assignment)cGroup_2_1_1.eContents().get(1);
+		private final RuleCall cParametersParameterParserRuleCall_2_1_1_1_0 = (RuleCall)cParametersAssignment_2_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Keyword cColonHyphenMinusKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Keyword cFalseKeyword_4_0 = (Keyword)cAlternatives_4.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cAlternatives_4.eContents().get(1);
+		private final Assignment cBodiesAssignment_4_1_0 = (Assignment)cGroup_4_1.eContents().get(0);
+		private final RuleCall cBodiesPatternBodyParserRuleCall_4_1_0_0 = (RuleCall)cBodiesAssignment_4_1_0.eContents().get(0);
+		private final Group cGroup_4_1_1 = (Group)cGroup_4_1.eContents().get(1);
+		private final Keyword cVerticalLineKeyword_4_1_1_0 = (Keyword)cGroup_4_1_1.eContents().get(0);
+		private final Assignment cBodiesAssignment_4_1_1_1 = (Assignment)cGroup_4_1_1.eContents().get(1);
+		private final RuleCall cBodiesPatternBodyParserRuleCall_4_1_1_1_0 = (RuleCall)cBodiesAssignment_4_1_1_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		/////////////////////
 		//// Predicte grammar
 		/////////////////////
 		//Predicate:
-		//	PredicateSymbol | ErrorPredicate;
+		//	isError?='error'? symbol=ModelSymbol ('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')? ':-' ('false' |
+		//	bodies+=PatternBody ('|' bodies+=PatternBody)*) '.';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//PredicateSymbol | ErrorPredicate
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//PredicateSymbol
-		public RuleCall getPredicateSymbolParserRuleCall_0() { return cPredicateSymbolParserRuleCall_0; }
-		
-		//ErrorPredicate
-		public RuleCall getErrorPredicateParserRuleCall_1() { return cErrorPredicateParserRuleCall_1; }
-	}
-	public class PredicateSymbolElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.PredicateSymbol");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPredicateKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSymbolAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSymbolModelSymbolParserRuleCall_1_0 = (RuleCall)cSymbolAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cParametersAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cParametersParameterParserRuleCall_3_0 = (RuleCall)cParametersAssignment_3.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
-		private final Keyword cFalseKeyword_6_0 = (Keyword)cAlternatives_6.eContents().get(0);
-		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
-		private final Assignment cBodiesAssignment_6_1_0 = (Assignment)cGroup_6_1.eContents().get(0);
-		private final RuleCall cBodiesPatternBodyParserRuleCall_6_1_0_0 = (RuleCall)cBodiesAssignment_6_1_0.eContents().get(0);
-		private final Group cGroup_6_1_1 = (Group)cGroup_6_1.eContents().get(1);
-		private final Keyword cVerticalLineKeyword_6_1_1_0 = (Keyword)cGroup_6_1_1.eContents().get(0);
-		private final Assignment cBodiesAssignment_6_1_1_1 = (Assignment)cGroup_6_1_1.eContents().get(1);
-		private final RuleCall cBodiesPatternBodyParserRuleCall_6_1_1_1_0 = (RuleCall)cBodiesAssignment_6_1_1_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		
-		//PredicateSymbol:
-		//	'predicate' symbol=ModelSymbol '(' parameters+=Parameter* ')' ':' ('false' | bodies+=PatternBody ('|'
-		//	bodies+=PatternBody)*) '.';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'predicate' symbol=ModelSymbol '(' parameters+=Parameter* ')' ':' ('false' | bodies+=PatternBody ('|'
-		//bodies+=PatternBody)*) '.'
+		//isError?='error'? symbol=ModelSymbol ('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')? ':-' ('false' |
+		//bodies+=PatternBody ('|' bodies+=PatternBody)*) '.'
 		public Group getGroup() { return cGroup; }
 		
-		//'predicate'
-		public Keyword getPredicateKeyword_0() { return cPredicateKeyword_0; }
+		//isError?='error'?
+		public Assignment getIsErrorAssignment_0() { return cIsErrorAssignment_0; }
+		
+		//'error'
+		public Keyword getIsErrorErrorKeyword_0_0() { return cIsErrorErrorKeyword_0_0; }
 		
 		//symbol=ModelSymbol
 		public Assignment getSymbolAssignment_1() { return cSymbolAssignment_1; }
@@ -705,143 +720,68 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//ModelSymbol
 		public RuleCall getSymbolModelSymbolParserRuleCall_1_0() { return cSymbolModelSymbolParserRuleCall_1_0; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
-		
-		//parameters+=Parameter*
-		public Assignment getParametersAssignment_3() { return cParametersAssignment_3; }
-		
-		//Parameter
-		public RuleCall getParametersParameterParserRuleCall_3_0() { return cParametersParameterParserRuleCall_3_0; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-		
-		//':'
-		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
-		
-		//'false' | bodies+=PatternBody ('|' bodies+=PatternBody)*
-		public Alternatives getAlternatives_6() { return cAlternatives_6; }
-		
-		//'false'
-		public Keyword getFalseKeyword_6_0() { return cFalseKeyword_6_0; }
-		
-		//bodies+=PatternBody ('|' bodies+=PatternBody)*
-		public Group getGroup_6_1() { return cGroup_6_1; }
-		
-		//bodies+=PatternBody
-		public Assignment getBodiesAssignment_6_1_0() { return cBodiesAssignment_6_1_0; }
-		
-		//PatternBody
-		public RuleCall getBodiesPatternBodyParserRuleCall_6_1_0_0() { return cBodiesPatternBodyParserRuleCall_6_1_0_0; }
-		
-		//('|' bodies+=PatternBody)*
-		public Group getGroup_6_1_1() { return cGroup_6_1_1; }
-		
-		//'|'
-		public Keyword getVerticalLineKeyword_6_1_1_0() { return cVerticalLineKeyword_6_1_1_0; }
-		
-		//bodies+=PatternBody
-		public Assignment getBodiesAssignment_6_1_1_1() { return cBodiesAssignment_6_1_1_1; }
-		
-		//PatternBody
-		public RuleCall getBodiesPatternBodyParserRuleCall_6_1_1_1_0() { return cBodiesPatternBodyParserRuleCall_6_1_1_1_0; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_7() { return cFullStopKeyword_7; }
-	}
-	public class ErrorPredicateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.ErrorPredicate");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cErrorPredicateAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cErrorKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cParametersAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cParametersParameterParserRuleCall_3_1_0 = (RuleCall)cParametersAssignment_3_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
-		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
-		private final Keyword cFalseKeyword_5_0 = (Keyword)cAlternatives_5.eContents().get(0);
-		private final Group cGroup_5_1 = (Group)cAlternatives_5.eContents().get(1);
-		private final Assignment cBodiesAssignment_5_1_0 = (Assignment)cGroup_5_1.eContents().get(0);
-		private final RuleCall cBodiesPatternBodyParserRuleCall_5_1_0_0 = (RuleCall)cBodiesAssignment_5_1_0.eContents().get(0);
-		private final Group cGroup_5_1_1 = (Group)cGroup_5_1.eContents().get(1);
-		private final Keyword cVerticalLineKeyword_5_1_1_0 = (Keyword)cGroup_5_1_1.eContents().get(0);
-		private final Assignment cBodiesAssignment_5_1_1_1 = (Assignment)cGroup_5_1_1.eContents().get(1);
-		private final RuleCall cBodiesPatternBodyParserRuleCall_5_1_1_1_0 = (RuleCall)cBodiesAssignment_5_1_1_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		
-		//ErrorPredicate:
-		//	{ErrorPredicate} 'error' name=ID? ('(' parameters+=Parameter* ')') ':' ('false' | bodies+=PatternBody ('|'
-		//	bodies+=PatternBody)*) '.';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{ErrorPredicate} 'error' name=ID? ('(' parameters+=Parameter* ')') ':' ('false' | bodies+=PatternBody ('|'
-		//bodies+=PatternBody)*) '.'
-		public Group getGroup() { return cGroup; }
-		
-		//{ErrorPredicate}
-		public Action getErrorPredicateAction_0() { return cErrorPredicateAction_0; }
-		
-		//'error'
-		public Keyword getErrorKeyword_1() { return cErrorKeyword_1; }
-		
-		//name=ID?
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-		
-		//'(' parameters+=Parameter* ')'
-		public Group getGroup_3() { return cGroup_3; }
+		//('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')?
+		public Group getGroup_2() { return cGroup_2; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 		
-		//parameters+=Parameter*
-		public Assignment getParametersAssignment_3_1() { return cParametersAssignment_3_1; }
+		//(parameters+=Parameter (',' parameters+=Parameter)*)?
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//parameters+=Parameter
+		public Assignment getParametersAssignment_2_1_0() { return cParametersAssignment_2_1_0; }
 		
 		//Parameter
-		public RuleCall getParametersParameterParserRuleCall_3_1_0() { return cParametersParameterParserRuleCall_3_1_0; }
+		public RuleCall getParametersParameterParserRuleCall_2_1_0_0() { return cParametersParameterParserRuleCall_2_1_0_0; }
+		
+		//(',' parameters+=Parameter)*
+		public Group getGroup_2_1_1() { return cGroup_2_1_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_1_0() { return cCommaKeyword_2_1_1_0; }
+		
+		//parameters+=Parameter
+		public Assignment getParametersAssignment_2_1_1_1() { return cParametersAssignment_2_1_1_1; }
+		
+		//Parameter
+		public RuleCall getParametersParameterParserRuleCall_2_1_1_1_0() { return cParametersParameterParserRuleCall_2_1_1_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
+		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
 		
-		//':'
-		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
+		//':-'
+		public Keyword getColonHyphenMinusKeyword_3() { return cColonHyphenMinusKeyword_3; }
 		
 		//'false' | bodies+=PatternBody ('|' bodies+=PatternBody)*
-		public Alternatives getAlternatives_5() { return cAlternatives_5; }
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//'false'
-		public Keyword getFalseKeyword_5_0() { return cFalseKeyword_5_0; }
+		public Keyword getFalseKeyword_4_0() { return cFalseKeyword_4_0; }
 		
 		//bodies+=PatternBody ('|' bodies+=PatternBody)*
-		public Group getGroup_5_1() { return cGroup_5_1; }
+		public Group getGroup_4_1() { return cGroup_4_1; }
 		
 		//bodies+=PatternBody
-		public Assignment getBodiesAssignment_5_1_0() { return cBodiesAssignment_5_1_0; }
+		public Assignment getBodiesAssignment_4_1_0() { return cBodiesAssignment_4_1_0; }
 		
 		//PatternBody
-		public RuleCall getBodiesPatternBodyParserRuleCall_5_1_0_0() { return cBodiesPatternBodyParserRuleCall_5_1_0_0; }
+		public RuleCall getBodiesPatternBodyParserRuleCall_4_1_0_0() { return cBodiesPatternBodyParserRuleCall_4_1_0_0; }
 		
 		//('|' bodies+=PatternBody)*
-		public Group getGroup_5_1_1() { return cGroup_5_1_1; }
+		public Group getGroup_4_1_1() { return cGroup_4_1_1; }
 		
 		//'|'
-		public Keyword getVerticalLineKeyword_5_1_1_0() { return cVerticalLineKeyword_5_1_1_0; }
+		public Keyword getVerticalLineKeyword_4_1_1_0() { return cVerticalLineKeyword_4_1_1_0; }
 		
 		//bodies+=PatternBody
-		public Assignment getBodiesAssignment_5_1_1_1() { return cBodiesAssignment_5_1_1_1; }
+		public Assignment getBodiesAssignment_4_1_1_1() { return cBodiesAssignment_4_1_1_1; }
 		
 		//PatternBody
-		public RuleCall getBodiesPatternBodyParserRuleCall_5_1_1_1_0() { return cBodiesPatternBodyParserRuleCall_5_1_1_1_0; }
+		public RuleCall getBodiesPatternBodyParserRuleCall_4_1_1_1_0() { return cBodiesPatternBodyParserRuleCall_4_1_1_1_0; }
 		
 		//'.'
-		public Keyword getFullStopKeyword_6() { return cFullStopKeyword_6; }
+		public Keyword getFullStopKeyword_5() { return cFullStopKeyword_5; }
 	}
 	public class ParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.Parameter");
@@ -946,92 +886,116 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class ConstraintElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.Constraint");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cPolarityAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cPolarityPolarityParserRuleCall_0_0 = (RuleCall)cPolarityAssignment_0.eContents().get(0);
-		private final Assignment cSymbolAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSymbolModelSymbolParserRuleCall_1_0 = (RuleCall)cSymbolAssignment_1.eContents().get(0);
-		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final Assignment cParamsAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cParamsLiteralParserRuleCall_2_0_1_0 = (RuleCall)cParamsAssignment_2_0_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2_0_2 = (Keyword)cGroup_2_0.eContents().get(2);
-		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
-		private final Assignment cClosureTypeAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
-		private final RuleCall cClosureTypeClosureTypeParserRuleCall_2_1_0_0 = (RuleCall)cClosureTypeAssignment_2_1_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2_1_1 = (Keyword)cGroup_2_1.eContents().get(1);
-		private final Assignment cParamsAssignment_2_1_2 = (Assignment)cGroup_2_1.eContents().get(2);
-		private final RuleCall cParamsLiteralParserRuleCall_2_1_2_0 = (RuleCall)cParamsAssignment_2_1_2.eContents().get(0);
-		private final Assignment cParamsAssignment_2_1_3 = (Assignment)cGroup_2_1.eContents().get(3);
-		private final RuleCall cParamsLiteralParserRuleCall_2_1_3_0 = (RuleCall)cParamsAssignment_2_1_3.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2_1_4 = (Keyword)cGroup_2_1.eContents().get(4);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cPolarityAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cPolarityPolarityParserRuleCall_0_0_0 = (RuleCall)cPolarityAssignment_0_0.eContents().get(0);
+		private final Assignment cSymbolAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cSymbolModelSymbolParserRuleCall_0_1_0 = (RuleCall)cSymbolAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cParamsAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cParamsLiteralParserRuleCall_0_2_1_0 = (RuleCall)cParamsAssignment_0_2_1.eContents().get(0);
+		private final Group cGroup_0_2_2 = (Group)cGroup_0_2.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_2_0 = (Keyword)cGroup_0_2_2.eContents().get(0);
+		private final Assignment cParamsAssignment_0_2_2_1 = (Assignment)cGroup_0_2_2.eContents().get(1);
+		private final RuleCall cParamsLiteralParserRuleCall_0_2_2_1_0 = (RuleCall)cParamsAssignment_0_2_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_0_2_3 = (Keyword)cGroup_0_2.eContents().get(3);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cClosureTypeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cClosureTypeClosureTypeParserRuleCall_1_0_0 = (RuleCall)cClosureTypeAssignment_1_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cParamsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cParamsLiteralParserRuleCall_1_2_0 = (RuleCall)cParamsAssignment_1_2.eContents().get(0);
+		private final Group cGroup_1_3 = (Group)cGroup_1.eContents().get(3);
+		private final Keyword cCommaKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
+		private final Assignment cParamsAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cParamsLiteralParserRuleCall_1_3_1_0 = (RuleCall)cParamsAssignment_1_3_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
 		//Constraint:
-		//	polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal* ')' | closureType=ClosureType '(' params+=Literal
-		//	params+=Literal ')');
+		//	polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal? (',' params+=Literal)* ')')? | closureType=ClosureType
+		//	'(' params+=Literal? (',' params+=Literal)* ')';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal* ')' | closureType=ClosureType '(' params+=Literal
-		//params+=Literal ')')
-		public Group getGroup() { return cGroup; }
+		//polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal? (',' params+=Literal)* ')')? | closureType=ClosureType '('
+		//params+=Literal? (',' params+=Literal)* ')'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal? (',' params+=Literal)* ')')?
+		public Group getGroup_0() { return cGroup_0; }
 		
 		//polarity=Polarity?
-		public Assignment getPolarityAssignment_0() { return cPolarityAssignment_0; }
+		public Assignment getPolarityAssignment_0_0() { return cPolarityAssignment_0_0; }
 		
 		//Polarity
-		public RuleCall getPolarityPolarityParserRuleCall_0_0() { return cPolarityPolarityParserRuleCall_0_0; }
+		public RuleCall getPolarityPolarityParserRuleCall_0_0_0() { return cPolarityPolarityParserRuleCall_0_0_0; }
 		
 		//symbol=ModelSymbol
-		public Assignment getSymbolAssignment_1() { return cSymbolAssignment_1; }
+		public Assignment getSymbolAssignment_0_1() { return cSymbolAssignment_0_1; }
 		
 		//ModelSymbol
-		public RuleCall getSymbolModelSymbolParserRuleCall_1_0() { return cSymbolModelSymbolParserRuleCall_1_0; }
+		public RuleCall getSymbolModelSymbolParserRuleCall_0_1_0() { return cSymbolModelSymbolParserRuleCall_0_1_0; }
 		
-		//'(' params+=Literal* ')' | closureType=ClosureType '(' params+=Literal params+=Literal ')'
-		public Alternatives getAlternatives_2() { return cAlternatives_2; }
-		
-		//'(' params+=Literal* ')'
-		public Group getGroup_2_0() { return cGroup_2_0; }
+		//('(' params+=Literal? (',' params+=Literal)* ')')?
+		public Group getGroup_0_2() { return cGroup_0_2; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_2_0_0() { return cLeftParenthesisKeyword_2_0_0; }
+		public Keyword getLeftParenthesisKeyword_0_2_0() { return cLeftParenthesisKeyword_0_2_0; }
 		
-		//params+=Literal*
-		public Assignment getParamsAssignment_2_0_1() { return cParamsAssignment_2_0_1; }
+		//params+=Literal?
+		public Assignment getParamsAssignment_0_2_1() { return cParamsAssignment_0_2_1; }
 		
 		//Literal
-		public RuleCall getParamsLiteralParserRuleCall_2_0_1_0() { return cParamsLiteralParserRuleCall_2_0_1_0; }
+		public RuleCall getParamsLiteralParserRuleCall_0_2_1_0() { return cParamsLiteralParserRuleCall_0_2_1_0; }
+		
+		//(',' params+=Literal)*
+		public Group getGroup_0_2_2() { return cGroup_0_2_2; }
+		
+		//','
+		public Keyword getCommaKeyword_0_2_2_0() { return cCommaKeyword_0_2_2_0; }
+		
+		//params+=Literal
+		public Assignment getParamsAssignment_0_2_2_1() { return cParamsAssignment_0_2_2_1; }
+		
+		//Literal
+		public RuleCall getParamsLiteralParserRuleCall_0_2_2_1_0() { return cParamsLiteralParserRuleCall_0_2_2_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_2_0_2() { return cRightParenthesisKeyword_2_0_2; }
+		public Keyword getRightParenthesisKeyword_0_2_3() { return cRightParenthesisKeyword_0_2_3; }
 		
-		//closureType=ClosureType '(' params+=Literal params+=Literal ')'
-		public Group getGroup_2_1() { return cGroup_2_1; }
+		//closureType=ClosureType '(' params+=Literal? (',' params+=Literal)* ')'
+		public Group getGroup_1() { return cGroup_1; }
 		
 		//closureType=ClosureType
-		public Assignment getClosureTypeAssignment_2_1_0() { return cClosureTypeAssignment_2_1_0; }
+		public Assignment getClosureTypeAssignment_1_0() { return cClosureTypeAssignment_1_0; }
 		
 		//ClosureType
-		public RuleCall getClosureTypeClosureTypeParserRuleCall_2_1_0_0() { return cClosureTypeClosureTypeParserRuleCall_2_1_0_0; }
+		public RuleCall getClosureTypeClosureTypeParserRuleCall_1_0_0() { return cClosureTypeClosureTypeParserRuleCall_1_0_0; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_2_1_1() { return cLeftParenthesisKeyword_2_1_1; }
+		public Keyword getLeftParenthesisKeyword_1_1() { return cLeftParenthesisKeyword_1_1; }
 		
-		//params+=Literal
-		public Assignment getParamsAssignment_2_1_2() { return cParamsAssignment_2_1_2; }
-		
-		//Literal
-		public RuleCall getParamsLiteralParserRuleCall_2_1_2_0() { return cParamsLiteralParserRuleCall_2_1_2_0; }
-		
-		//params+=Literal
-		public Assignment getParamsAssignment_2_1_3() { return cParamsAssignment_2_1_3; }
+		//params+=Literal?
+		public Assignment getParamsAssignment_1_2() { return cParamsAssignment_1_2; }
 		
 		//Literal
-		public RuleCall getParamsLiteralParserRuleCall_2_1_3_0() { return cParamsLiteralParserRuleCall_2_1_3_0; }
+		public RuleCall getParamsLiteralParserRuleCall_1_2_0() { return cParamsLiteralParserRuleCall_1_2_0; }
+		
+		//(',' params+=Literal)*
+		public Group getGroup_1_3() { return cGroup_1_3; }
+		
+		//','
+		public Keyword getCommaKeyword_1_3_0() { return cCommaKeyword_1_3_0; }
+		
+		//params+=Literal
+		public Assignment getParamsAssignment_1_3_1() { return cParamsAssignment_1_3_1; }
+		
+		//Literal
+		public RuleCall getParamsLiteralParserRuleCall_1_3_1_0() { return cParamsLiteralParserRuleCall_1_3_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_2_1_4() { return cRightParenthesisKeyword_2_1_4; }
+		public Keyword getRightParenthesisKeyword_1_4() { return cRightParenthesisKeyword_1_4; }
 	}
 	public class ClosureTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.ClosureType");
@@ -1073,12 +1037,13 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVariableParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDataObjectParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cNamedObjectParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Literal:
-		//	Variable | DataObject;
+		//	Variable | DataObject | NamedObject;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Variable | DataObject
+		//Variable | DataObject | NamedObject
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Variable
@@ -1086,6 +1051,9 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DataObject
 		public RuleCall getDataObjectParserRuleCall_1() { return cDataObjectParserRuleCall_1; }
+		
+		//NamedObject
+		public RuleCall getNamedObjectParserRuleCall_2() { return cNamedObjectParserRuleCall_2; }
 	}
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.Variable");
@@ -1217,16 +1185,16 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//ClassInterpretation:
-		//	abstract?='abstract' 'class' symbol=ModelSymbol ('extends' supertypes+=ModelSymbol+)? '{'
+		//	abstract?='abstract'? 'class' symbol=ModelSymbol ('extends' supertypes+=ModelSymbol+)? '{'
 		//	fielt+=FieldRelationInterpretation*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//abstract?='abstract' 'class' symbol=ModelSymbol ('extends' supertypes+=ModelSymbol+)? '{'
+		//abstract?='abstract'? 'class' symbol=ModelSymbol ('extends' supertypes+=ModelSymbol+)? '{'
 		//fielt+=FieldRelationInterpretation* '}'
 		public Group getGroup() { return cGroup; }
 		
-		//abstract?='abstract'
+		//abstract?='abstract'?
 		public Assignment getAbstractAssignment_0() { return cAbstractAssignment_0; }
 		
 		//'abstract'
@@ -1318,13 +1286,13 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTargetSymbolParserRuleCall_4_0 = (RuleCall)cTargetAssignment_4.eContents().get(0);
 		
 		//FieldRelationInterpretation:
-		//	containment?='containment' symbol=ModelSymbol ':' multiplicity=MultiplicityDefinition? target=Symbol;
+		//	containment?='containment'? symbol=ModelSymbol ':' multiplicity=MultiplicityDefinition? target=Symbol;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//containment?='containment' symbol=ModelSymbol ':' multiplicity=MultiplicityDefinition? target=Symbol
+		//containment?='containment'? symbol=ModelSymbol ':' multiplicity=MultiplicityDefinition? target=Symbol
 		public Group getGroup() { return cGroup; }
 		
-		//containment?='containment'
+		//containment?='containment'?
 		public Assignment getContainmentAssignment_0() { return cContainmentAssignment_0; }
 		
 		//'containment'
@@ -1370,15 +1338,15 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTargetSymbolParserRuleCall_7_0 = (RuleCall)cTargetAssignment_7.eContents().get(0);
 		
 		//GlobalRelationInterpretation:
-		//	containment?='containment' 'relation' symbol=ModelSymbol ':' sourceMultiplicity=MultiplicityDefinition? source=Symbol
-		//	targetMultiplicity=MultiplicityDefinition? target=Symbol;
+		//	containment?='containment'? 'relation' symbol=ModelSymbol ':' sourceMultiplicity=MultiplicityDefinition?
+		//	source=Symbol targetMultiplicity=MultiplicityDefinition? target=Symbol;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//containment?='containment' 'relation' symbol=ModelSymbol ':' sourceMultiplicity=MultiplicityDefinition? source=Symbol
+		//containment?='containment'? 'relation' symbol=ModelSymbol ':' sourceMultiplicity=MultiplicityDefinition? source=Symbol
 		//targetMultiplicity=MultiplicityDefinition? target=Symbol
 		public Group getGroup() { return cGroup; }
 		
-		//containment?='containment'
+		//containment?='containment'?
 		public Assignment getContainmentAssignment_0() { return cContainmentAssignment_0; }
 		
 		//'containment'
@@ -1494,8 +1462,6 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final RealObjectElements pRealObject;
 	private final StringObjectElements pStringObject;
 	private final PredicateElements pPredicate;
-	private final PredicateSymbolElements pPredicateSymbol;
-	private final ErrorPredicateElements pErrorPredicate;
 	private final ParameterElements pParameter;
 	private final PatternBodyElements pPatternBody;
 	private final PolarityElements pPolarity;
@@ -1551,8 +1517,6 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pRealObject = new RealObjectElements();
 		this.pStringObject = new StringObjectElements();
 		this.pPredicate = new PredicateElements();
-		this.pPredicateSymbol = new PredicateSymbolElements();
-		this.pErrorPredicate = new ErrorPredicateElements();
 		this.pParameter = new ParameterElements();
 		this.pPatternBody = new PatternBodyElements();
 		this.pPolarity = new PolarityElements();
@@ -1679,7 +1643,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//BasicInterpretation:
-	//	symbol=Symbol '(' objects+=ComplexObject* ')' ':' value=TruthValue;
+	//	symbol=Symbol ('(' (objects+=ComplexObject (',' objects+=ComplexObject)*)? ')')? ':' value=TruthValue;
 	public BasicInterpretationElements getBasicInterpretationAccess() {
 		return pBasicInterpretation;
 	}
@@ -1882,35 +1846,14 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//// Predicte grammar
 	/////////////////////
 	//Predicate:
-	//	PredicateSymbol | ErrorPredicate;
+	//	isError?='error'? symbol=ModelSymbol ('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')? ':-' ('false' |
+	//	bodies+=PatternBody ('|' bodies+=PatternBody)*) '.';
 	public PredicateElements getPredicateAccess() {
 		return pPredicate;
 	}
 	
 	public ParserRule getPredicateRule() {
 		return getPredicateAccess().getRule();
-	}
-	
-	//PredicateSymbol:
-	//	'predicate' symbol=ModelSymbol '(' parameters+=Parameter* ')' ':' ('false' | bodies+=PatternBody ('|'
-	//	bodies+=PatternBody)*) '.';
-	public PredicateSymbolElements getPredicateSymbolAccess() {
-		return pPredicateSymbol;
-	}
-	
-	public ParserRule getPredicateSymbolRule() {
-		return getPredicateSymbolAccess().getRule();
-	}
-	
-	//ErrorPredicate:
-	//	{ErrorPredicate} 'error' name=ID? ('(' parameters+=Parameter* ')') ':' ('false' | bodies+=PatternBody ('|'
-	//	bodies+=PatternBody)*) '.';
-	public ErrorPredicateElements getErrorPredicateAccess() {
-		return pErrorPredicate;
-	}
-	
-	public ParserRule getErrorPredicateRule() {
-		return getErrorPredicateAccess().getRule();
 	}
 	
 	//Parameter:
@@ -1944,8 +1887,8 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Constraint:
-	//	polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal* ')' | closureType=ClosureType '(' params+=Literal
-	//	params+=Literal ')');
+	//	polarity=Polarity? symbol=ModelSymbol ('(' params+=Literal? (',' params+=Literal)* ')')? | closureType=ClosureType
+	//	'(' params+=Literal? (',' params+=Literal)* ')';
 	public ConstraintElements getConstraintAccess() {
 		return pConstraint;
 	}
@@ -1965,7 +1908,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Literal:
-	//	Variable | DataObject;
+	//	Variable | DataObject | NamedObject;
 	public LiteralElements getLiteralAccess() {
 		return pLiteral;
 	}
@@ -2034,7 +1977,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ClassInterpretation:
-	//	abstract?='abstract' 'class' symbol=ModelSymbol ('extends' supertypes+=ModelSymbol+)? '{'
+	//	abstract?='abstract'? 'class' symbol=ModelSymbol ('extends' supertypes+=ModelSymbol+)? '{'
 	//	fielt+=FieldRelationInterpretation*
 	//	'}';
 	public ClassInterpretationElements getClassInterpretationAccess() {
@@ -2056,7 +1999,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//FieldRelationInterpretation:
-	//	containment?='containment' symbol=ModelSymbol ':' multiplicity=MultiplicityDefinition? target=Symbol;
+	//	containment?='containment'? symbol=ModelSymbol ':' multiplicity=MultiplicityDefinition? target=Symbol;
 	public FieldRelationInterpretationElements getFieldRelationInterpretationAccess() {
 		return pFieldRelationInterpretation;
 	}
@@ -2066,8 +2009,8 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//GlobalRelationInterpretation:
-	//	containment?='containment' 'relation' symbol=ModelSymbol ':' sourceMultiplicity=MultiplicityDefinition? source=Symbol
-	//	targetMultiplicity=MultiplicityDefinition? target=Symbol;
+	//	containment?='containment'? 'relation' symbol=ModelSymbol ':' sourceMultiplicity=MultiplicityDefinition?
+	//	source=Symbol targetMultiplicity=MultiplicityDefinition? target=Symbol;
 	public GlobalRelationInterpretationElements getGlobalRelationInterpretationAccess() {
 		return pGlobalRelationInterpretation;
 	}

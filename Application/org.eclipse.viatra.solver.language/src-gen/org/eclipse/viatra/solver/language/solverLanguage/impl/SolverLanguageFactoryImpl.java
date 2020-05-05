@@ -29,7 +29,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.DataSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.DefaultInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EnumInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EqualsSymbol;
-import org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate;
 import org.eclipse.viatra.solver.language.solverLanguage.ExistSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.False;
 import org.eclipse.viatra.solver.language.solverLanguage.FieldRelationInterpretation;
@@ -49,7 +48,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.PatternBody;
 import org.eclipse.viatra.solver.language.solverLanguage.Polarity;
 import org.eclipse.viatra.solver.language.solverLanguage.Positive;
 import org.eclipse.viatra.solver.language.solverLanguage.Predicate;
-import org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.Problem;
 import org.eclipse.viatra.solver.language.solverLanguage.RealObject;
 import org.eclipse.viatra.solver.language.solverLanguage.RealSymbol;
@@ -144,8 +142,6 @@ public class SolverLanguageFactoryImpl extends EFactoryImpl implements SolverLan
       case SolverLanguagePackage.REAL_OBJECT: return createRealObject();
       case SolverLanguagePackage.STRING_OBJECT: return createStringObject();
       case SolverLanguagePackage.PREDICATE: return createPredicate();
-      case SolverLanguagePackage.PREDICATE_SYMBOL: return createPredicateSymbol();
-      case SolverLanguagePackage.ERROR_PREDICATE: return createErrorPredicate();
       case SolverLanguagePackage.PARAMETER: return createParameter();
       case SolverLanguagePackage.PATTERN_BODY: return createPatternBody();
       case SolverLanguagePackage.POLARITY: return createPolarity();
@@ -487,30 +483,6 @@ public class SolverLanguageFactoryImpl extends EFactoryImpl implements SolverLan
   {
     PredicateImpl predicate = new PredicateImpl();
     return predicate;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public PredicateSymbol createPredicateSymbol()
-  {
-    PredicateSymbolImpl predicateSymbol = new PredicateSymbolImpl();
-    return predicateSymbol;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ErrorPredicate createErrorPredicate()
-  {
-    ErrorPredicateImpl errorPredicate = new ErrorPredicateImpl();
-    return errorPredicate;
   }
 
   /**

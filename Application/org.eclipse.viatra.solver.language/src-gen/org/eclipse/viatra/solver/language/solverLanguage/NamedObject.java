@@ -20,7 +20,7 @@ package org.eclipse.viatra.solver.language.solverLanguage;
  * @model
  * @generated
  */
-public interface NamedObject extends org.eclipse.viatra.solver.language.solverLanguage.Object
+public interface NamedObject extends org.eclipse.viatra.solver.language.solverLanguage.Object, Literal
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

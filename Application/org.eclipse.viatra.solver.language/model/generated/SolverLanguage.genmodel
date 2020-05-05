@@ -52,14 +52,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//StringObject/value"/>
     </genClasses>
     <genClasses ecoreClass="SolverLanguage.ecore#//Predicate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//Predicate/isError"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Predicate/symbol"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Predicate/parameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Predicate/bodies"/>
-    </genClasses>
-    <genClasses ecoreClass="SolverLanguage.ecore#//PredicateSymbol">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//PredicateSymbol/symbol"/>
-    </genClasses>
-    <genClasses ecoreClass="SolverLanguage.ecore#//ErrorPredicate">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//ErrorPredicate/name"/>
     </genClasses>
     <genClasses ecoreClass="SolverLanguage.ecore#//Parameter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Parameter/variable"/>

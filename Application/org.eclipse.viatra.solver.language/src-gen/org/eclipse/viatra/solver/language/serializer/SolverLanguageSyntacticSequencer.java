@@ -11,6 +11,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -20,12 +21,18 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SolverLanguageGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_BasicInterpretation___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
+	protected AbstractElementAlias match_Constraint___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q;
 	protected AbstractElementAlias match_PatternBody_TrueKeyword_1_0_q;
+	protected AbstractElementAlias match_Predicate___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SolverLanguageGrammarAccess) access;
+		match_BasicInterpretation___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getBasicInterpretationAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getBasicInterpretationAccess().getRightParenthesisKeyword_1_2()));
+		match_Constraint___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getConstraintAccess().getLeftParenthesisKeyword_0_2_0()), new TokenAlias(false, false, grammarAccess.getConstraintAccess().getRightParenthesisKeyword_0_2_3()));
 		match_PatternBody_TrueKeyword_1_0_q = new TokenAlias(false, true, grammarAccess.getPatternBodyAccess().getTrueKeyword_1_0());
+		match_Predicate___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getPredicateAccess().getLeftParenthesisKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getPredicateAccess().getRightParenthesisKeyword_2_2()));
 	}
 	
 	@Override
@@ -40,12 +47,40 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_PatternBody_TrueKeyword_1_0_q.equals(syntax))
+			if (match_BasicInterpretation___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
+				emit_BasicInterpretation___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Constraint___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q.equals(syntax))
+				emit_Constraint___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_PatternBody_TrueKeyword_1_0_q.equals(syntax))
 				emit_PatternBody_TrueKeyword_1_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Predicate___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_2__q.equals(syntax))
+				emit_Predicate___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     symbol=Symbol (ambiguity) ':' value=TruthValue
+	 */
+	protected void emit_BasicInterpretation___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     symbol=ModelSymbol (ambiguity) (rule end)
+	 */
+	protected void emit_Constraint___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     'true'?
@@ -54,6 +89,18 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     (rule start) (ambiguity) (rule start)
 	 */
 	protected void emit_PatternBody_TrueKeyword_1_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     symbol=ModelSymbol (ambiguity) ':-' 'false' '.' (rule end)
+	 *     symbol=ModelSymbol (ambiguity) ':-' bodies+=PatternBody
+	 */
+	protected void emit_Predicate___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

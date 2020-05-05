@@ -18,7 +18,7 @@ TruthValue: {True} 'true'  | {False} 'false'  | {Unknown} 'unknown' |  {Error} '
 ///////////////////
 Interpretation: BasicInterpretation | DefaultInterpretation | CDInterpretation;
 
-BasicInterpretation: symbol=Symbol '(' objects+=ComplexObject* ')' ':' value = TruthValue;
+BasicInterpretation: symbol=Symbol ('(' (objects+=ComplexObject (',' objects+=ComplexObject)*)? ')')? ':' value = TruthValue;
 
 Symbol: ModelSymbol | PartialitySymbol | DataSymbol;
 
@@ -48,22 +48,20 @@ StringObject: value = STRING;
 ///////////////////
 // Predicte grammar
 ///////////////////
-Predicate: PredicateSymbol | ErrorPredicate;
-PredicateSymbol: 
-	'predicate' symbol = ModelSymbol '(' parameters += Parameter* ')' ':' ('false' | (bodies += PatternBody ('|' bodies += PatternBody)*)) '.'
-;
-ErrorPredicate:
-	{ErrorPredicate} 'error' (name = ID)? ('(' parameters += Parameter* ')') ':' ('false' | (bodies += PatternBody ('|' bodies += PatternBody)*)) '.'
+
+Predicate:
+	(isError?='error')? symbol = ModelSymbol ('(' (parameters += Parameter (',' parameters += Parameter)*)? ')')? ':-' ('false' | (bodies += PatternBody ('|' bodies += PatternBody)*)) '.'
 ;
 
 Parameter: variable = Variable (':' type = Symbol)?;
 PatternBody: {PatternBody} ('true' | constraints += Constraint*) ;
 Polarity: {Positive} '+' | {Negative} '-';
-Constraint: (polarity = Polarity)?  symbol = ModelSymbol (
-	( '(' params += Literal* ')') | (closureType = ClosureType '(' params += Literal params += Literal ')'));
-
+Constraint: (polarity = Polarity)?  symbol = ModelSymbol 
+	(('(' params += Literal? (',' params += Literal)* ')')?)
+	|
+	(closureType=ClosureType '(' params += Literal? (',' params += Literal)* ')');
 ClosureType: {ReflexiveClosure} '*' | {IrreflexiveClosure} '+';
-Literal: Variable | DataObject;
+Literal: Variable | DataObject | NamedObject;
 Variable: name = ID;
 
 ///////////////////
@@ -83,13 +81,13 @@ DefaultInterpretation: 'default' interpretation = BasicInterpretation;
 ///////////////////
 CDInterpretation: ClassInterpretation | EnumInterpretation| GlobalRelationInterpretation;
 ClassInterpretation:
-	abstract?='abstract' 'class' symbol = ModelSymbol ('extends' supertypes += ModelSymbol+)?'{'
+	(abstract?='abstract')? 'class' symbol = ModelSymbol ('extends' supertypes += ModelSymbol+)?'{'
 	fielt += FieldRelationInterpretation*
 	'}'
 ;
 EnumInterpretation: 'enum' Symbol = ModelSymbol '{' objects+=NamedObject+ '}';
-FieldRelationInterpretation: containment ?= 'containment' symbol = ModelSymbol ':' multiplicity = MultiplicityDefinition? target = Symbol;
-GlobalRelationInterpretation: containment ?= 'containment' 'relation' symbol = ModelSymbol ':' sourceMultiplicity = MultiplicityDefinition? source = Symbol targetMultiplicity = MultiplicityDefinition? target = Symbol;
+FieldRelationInterpretation: (containment ?= 'containment')? symbol = ModelSymbol ':' multiplicity = MultiplicityDefinition? target = Symbol;
+GlobalRelationInterpretation: (containment ?= 'containment')? 'relation' symbol = ModelSymbol ':' sourceMultiplicity = MultiplicityDefinition? source = Symbol targetMultiplicity = MultiplicityDefinition? target = Symbol;
 MultiplicityDefinition: lower = INT '..' (upper = INT | unlimitedUpper?='*');
 
 ////SymbolIntroduction : Type | GlobalRelation | Predicate;

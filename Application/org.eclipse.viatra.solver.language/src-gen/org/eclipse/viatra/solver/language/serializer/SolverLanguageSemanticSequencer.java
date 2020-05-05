@@ -20,7 +20,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.Constraint;
 import org.eclipse.viatra.solver.language.solverLanguage.DefaultInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EnumInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EqualsSymbol;
-import org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate;
 import org.eclipse.viatra.solver.language.solverLanguage.ExistSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.False;
 import org.eclipse.viatra.solver.language.solverLanguage.FieldRelationInterpretation;
@@ -34,7 +33,7 @@ import org.eclipse.viatra.solver.language.solverLanguage.NamedObject;
 import org.eclipse.viatra.solver.language.solverLanguage.Negative;
 import org.eclipse.viatra.solver.language.solverLanguage.PatternBody;
 import org.eclipse.viatra.solver.language.solverLanguage.Positive;
-import org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol;
+import org.eclipse.viatra.solver.language.solverLanguage.Predicate;
 import org.eclipse.viatra.solver.language.solverLanguage.Problem;
 import org.eclipse.viatra.solver.language.solverLanguage.RealObject;
 import org.eclipse.viatra.solver.language.solverLanguage.RealSymbol;
@@ -107,9 +106,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 			case SolverLanguagePackage.ERROR:
 				sequence_TruthValue(context, (org.eclipse.viatra.solver.language.solverLanguage.Error) semanticObject); 
 				return; 
-			case SolverLanguagePackage.ERROR_PREDICATE:
-				sequence_ErrorPredicate(context, (ErrorPredicate) semanticObject); 
-				return; 
 			case SolverLanguagePackage.EXIST_SYMBOL:
 				sequence_ExistSymbol(context, (ExistSymbol) semanticObject); 
 				return; 
@@ -152,8 +148,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 			case SolverLanguagePackage.POSITIVE:
 				sequence_Polarity(context, (Positive) semanticObject); 
 				return; 
-			case SolverLanguagePackage.PREDICATE_SYMBOL:
-				sequence_PredicateSymbol(context, (PredicateSymbol) semanticObject); 
+			case SolverLanguagePackage.PREDICATE:
+				sequence_Predicate(context, (Predicate) semanticObject); 
 				return; 
 			case SolverLanguagePackage.PROBLEM:
 				sequence_Problem(context, (Problem) semanticObject); 
@@ -229,7 +225,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     BasicInterpretation returns BasicInterpretation
 	 *
 	 * Constraint:
-	 *     (symbol=Symbol objects+=ComplexObject* value=TruthValue)
+	 *     (symbol=Symbol (objects+=ComplexObject objects+=ComplexObject*)? value=TruthValue)
 	 */
 	protected void sequence_BasicInterpretation(ISerializationContext context, BasicInterpretation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -304,7 +300,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     ClassInterpretation returns ClassInterpretation
 	 *
 	 * Constraint:
-	 *     (abstract?='abstract' symbol=ModelSymbol supertypes+=ModelSymbol* fielt+=FieldRelationInterpretation*)
+	 *     (abstract?='abstract'? symbol=ModelSymbol supertypes+=ModelSymbol* fielt+=FieldRelationInterpretation*)
 	 */
 	protected void sequence_ClassInterpretation(ISerializationContext context, ClassInterpretation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -340,7 +336,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     Constraint returns Constraint
 	 *
 	 * Constraint:
-	 *     (polarity=Polarity? symbol=ModelSymbol (params+=Literal+ | (closureType=ClosureType params+=Literal params+=Literal))?)
+	 *     ((polarity=Polarity? symbol=ModelSymbol params+=Literal? params+=Literal*) | (closureType=ClosureType params+=Literal? params+=Literal*))
 	 */
 	protected void sequence_Constraint(ISerializationContext context, Constraint semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -398,20 +394,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     Statement returns ErrorPredicate
-	 *     Predicate returns ErrorPredicate
-	 *     ErrorPredicate returns ErrorPredicate
-	 *
-	 * Constraint:
-	 *     (name=ID? parameters+=Parameter* (bodies+=PatternBody bodies+=PatternBody*)?)
-	 */
-	protected void sequence_ErrorPredicate(ISerializationContext context, ErrorPredicate semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Symbol returns ExistSymbol
 	 *     PartialitySymbol returns ExistSymbol
 	 *     ExistSymbol returns ExistSymbol
@@ -429,7 +411,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     FieldRelationInterpretation returns FieldRelationInterpretation
 	 *
 	 * Constraint:
-	 *     (containment?='containment' symbol=ModelSymbol multiplicity=MultiplicityDefinition? target=Symbol)
+	 *     (containment?='containment'? symbol=ModelSymbol multiplicity=MultiplicityDefinition? target=Symbol)
 	 */
 	protected void sequence_FieldRelationInterpretation(ISerializationContext context, FieldRelationInterpretation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -445,7 +427,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *
 	 * Constraint:
 	 *     (
-	 *         containment?='containment' 
+	 *         containment?='containment'? 
 	 *         symbol=ModelSymbol 
 	 *         sourceMultiplicity=MultiplicityDefinition? 
 	 *         source=Symbol 
@@ -530,6 +512,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     ComplexObject returns NamedObject
 	 *     Object returns NamedObject
 	 *     NamedObject returns NamedObject
+	 *     Literal returns NamedObject
 	 *
 	 * Constraint:
 	 *     name=ID
@@ -595,14 +578,13 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     Statement returns PredicateSymbol
-	 *     Predicate returns PredicateSymbol
-	 *     PredicateSymbol returns PredicateSymbol
+	 *     Statement returns Predicate
+	 *     Predicate returns Predicate
 	 *
 	 * Constraint:
-	 *     (symbol=ModelSymbol parameters+=Parameter* (bodies+=PatternBody bodies+=PatternBody*)?)
+	 *     (isError?='error'? symbol=ModelSymbol (parameters+=Parameter parameters+=Parameter*)? (bodies+=PatternBody bodies+=PatternBody*)?)
 	 */
-	protected void sequence_PredicateSymbol(ISerializationContext context, PredicateSymbol semanticObject) {
+	protected void sequence_Predicate(ISerializationContext context, Predicate semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -26,7 +26,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.DataSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.DefaultInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EnumInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EqualsSymbol;
-import org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate;
 import org.eclipse.viatra.solver.language.solverLanguage.ExistSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.False;
 import org.eclipse.viatra.solver.language.solverLanguage.FieldRelationInterpretation;
@@ -46,7 +45,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.PatternBody;
 import org.eclipse.viatra.solver.language.solverLanguage.Polarity;
 import org.eclipse.viatra.solver.language.solverLanguage.Positive;
 import org.eclipse.viatra.solver.language.solverLanguage.Predicate;
-import org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.Problem;
 import org.eclipse.viatra.solver.language.solverLanguage.RealObject;
 import org.eclipse.viatra.solver.language.solverLanguage.RealSymbol;
@@ -275,6 +273,7 @@ public class SolverLanguageSwitch<T> extends Switch<T>
         NamedObject namedObject = (NamedObject)theEObject;
         T result = caseNamedObject(namedObject);
         if (result == null) result = caseObject(namedObject);
+        if (result == null) result = caseLiteral(namedObject);
         if (result == null) result = caseComplexObject(namedObject);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -347,24 +346,6 @@ public class SolverLanguageSwitch<T> extends Switch<T>
         Predicate predicate = (Predicate)theEObject;
         T result = casePredicate(predicate);
         if (result == null) result = caseStatement(predicate);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SolverLanguagePackage.PREDICATE_SYMBOL:
-      {
-        PredicateSymbol predicateSymbol = (PredicateSymbol)theEObject;
-        T result = casePredicateSymbol(predicateSymbol);
-        if (result == null) result = casePredicate(predicateSymbol);
-        if (result == null) result = caseStatement(predicateSymbol);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SolverLanguagePackage.ERROR_PREDICATE:
-      {
-        ErrorPredicate errorPredicate = (ErrorPredicate)theEObject;
-        T result = caseErrorPredicate(errorPredicate);
-        if (result == null) result = casePredicate(errorPredicate);
-        if (result == null) result = caseStatement(errorPredicate);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -992,38 +973,6 @@ public class SolverLanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePredicate(Predicate object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Predicate Symbol</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Predicate Symbol</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casePredicateSymbol(PredicateSymbol object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Error Predicate</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Error Predicate</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseErrorPredicate(ErrorPredicate object)
   {
     return null;
   }

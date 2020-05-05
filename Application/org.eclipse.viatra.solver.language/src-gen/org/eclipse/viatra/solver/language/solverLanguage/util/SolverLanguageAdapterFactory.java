@@ -28,7 +28,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.DataSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.DefaultInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EnumInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EqualsSymbol;
-import org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate;
 import org.eclipse.viatra.solver.language.solverLanguage.ExistSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.False;
 import org.eclipse.viatra.solver.language.solverLanguage.FieldRelationInterpretation;
@@ -48,7 +47,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.PatternBody;
 import org.eclipse.viatra.solver.language.solverLanguage.Polarity;
 import org.eclipse.viatra.solver.language.solverLanguage.Positive;
 import org.eclipse.viatra.solver.language.solverLanguage.Predicate;
-import org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.Problem;
 import org.eclipse.viatra.solver.language.solverLanguage.RealObject;
 import org.eclipse.viatra.solver.language.solverLanguage.RealSymbol;
@@ -256,16 +254,6 @@ public class SolverLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter casePredicate(Predicate object)
       {
         return createPredicateAdapter();
-      }
-      @Override
-      public Adapter casePredicateSymbol(PredicateSymbol object)
-      {
-        return createPredicateSymbolAdapter();
-      }
-      @Override
-      public Adapter caseErrorPredicate(ErrorPredicate object)
-      {
-        return createErrorPredicateAdapter();
       }
       @Override
       public Adapter caseParameter(Parameter object)
@@ -805,36 +793,6 @@ public class SolverLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createPredicateAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol <em>Predicate Symbol</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol
-   * @generated
-   */
-  public Adapter createPredicateSymbolAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate <em>Error Predicate</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate
-   * @generated
-   */
-  public Adapter createErrorPredicateAdapter()
   {
     return null;
   }

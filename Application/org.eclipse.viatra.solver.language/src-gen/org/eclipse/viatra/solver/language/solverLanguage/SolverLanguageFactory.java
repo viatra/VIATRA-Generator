@@ -258,24 +258,6 @@ public interface SolverLanguageFactory extends EFactory
   Predicate createPredicate();
 
   /**
-   * Returns a new object of class '<em>Predicate Symbol</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Predicate Symbol</em>'.
-   * @generated
-   */
-  PredicateSymbol createPredicateSymbol();
-
-  /**
-   * Returns a new object of class '<em>Error Predicate</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Error Predicate</em>'.
-   * @generated
-   */
-  ErrorPredicate createErrorPredicate();
-
-  /**
    * Returns a new object of class '<em>Parameter</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

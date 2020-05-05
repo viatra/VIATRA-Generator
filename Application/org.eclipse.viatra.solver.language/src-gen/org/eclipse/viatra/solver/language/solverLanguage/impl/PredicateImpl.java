@@ -5,6 +5,7 @@ package org.eclipse.viatra.solver.language.solverLanguage.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -12,9 +13,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.viatra.solver.language.solverLanguage.ModelSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.Parameter;
 import org.eclipse.viatra.solver.language.solverLanguage.PatternBody;
 import org.eclipse.viatra.solver.language.solverLanguage.Predicate;
@@ -28,6 +32,8 @@ import org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateImpl#isIsError <em>Is Error</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateImpl#getSymbol <em>Symbol</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateImpl#getBodies <em>Bodies</em>}</li>
  * </ul>
@@ -36,6 +42,36 @@ import org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage;
  */
 public class PredicateImpl extends StatementImpl implements Predicate
 {
+  /**
+   * The default value of the '{@link #isIsError() <em>Is Error</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIsError()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean IS_ERROR_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isIsError() <em>Is Error</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIsError()
+   * @generated
+   * @ordered
+   */
+  protected boolean isError = IS_ERROR_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSymbol()
+   * @generated
+   * @ordered
+   */
+  protected ModelSymbol symbol;
+
   /**
    * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -83,6 +119,81 @@ public class PredicateImpl extends StatementImpl implements Predicate
    * @generated
    */
   @Override
+  public boolean isIsError()
+  {
+    return isError;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setIsError(boolean newIsError)
+  {
+    boolean oldIsError = isError;
+    isError = newIsError;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.PREDICATE__IS_ERROR, oldIsError, isError));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ModelSymbol getSymbol()
+  {
+    return symbol;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSymbol(ModelSymbol newSymbol, NotificationChain msgs)
+  {
+    ModelSymbol oldSymbol = symbol;
+    symbol = newSymbol;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.PREDICATE__SYMBOL, oldSymbol, newSymbol);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setSymbol(ModelSymbol newSymbol)
+  {
+    if (newSymbol != symbol)
+    {
+      NotificationChain msgs = null;
+      if (symbol != null)
+        msgs = ((InternalEObject)symbol).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SolverLanguagePackage.PREDICATE__SYMBOL, null, msgs);
+      if (newSymbol != null)
+        msgs = ((InternalEObject)newSymbol).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SolverLanguagePackage.PREDICATE__SYMBOL, null, msgs);
+      msgs = basicSetSymbol(newSymbol, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.PREDICATE__SYMBOL, newSymbol, newSymbol));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<Parameter> getParameters()
   {
     if (parameters == null)
@@ -117,6 +228,8 @@ public class PredicateImpl extends StatementImpl implements Predicate
   {
     switch (featureID)
     {
+      case SolverLanguagePackage.PREDICATE__SYMBOL:
+        return basicSetSymbol(null, msgs);
       case SolverLanguagePackage.PREDICATE__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
       case SolverLanguagePackage.PREDICATE__BODIES:
@@ -135,6 +248,10 @@ public class PredicateImpl extends StatementImpl implements Predicate
   {
     switch (featureID)
     {
+      case SolverLanguagePackage.PREDICATE__IS_ERROR:
+        return isIsError();
+      case SolverLanguagePackage.PREDICATE__SYMBOL:
+        return getSymbol();
       case SolverLanguagePackage.PREDICATE__PARAMETERS:
         return getParameters();
       case SolverLanguagePackage.PREDICATE__BODIES:
@@ -154,6 +271,12 @@ public class PredicateImpl extends StatementImpl implements Predicate
   {
     switch (featureID)
     {
+      case SolverLanguagePackage.PREDICATE__IS_ERROR:
+        setIsError((Boolean)newValue);
+        return;
+      case SolverLanguagePackage.PREDICATE__SYMBOL:
+        setSymbol((ModelSymbol)newValue);
+        return;
       case SolverLanguagePackage.PREDICATE__PARAMETERS:
         getParameters().clear();
         getParameters().addAll((Collection<? extends Parameter>)newValue);
@@ -176,6 +299,12 @@ public class PredicateImpl extends StatementImpl implements Predicate
   {
     switch (featureID)
     {
+      case SolverLanguagePackage.PREDICATE__IS_ERROR:
+        setIsError(IS_ERROR_EDEFAULT);
+        return;
+      case SolverLanguagePackage.PREDICATE__SYMBOL:
+        setSymbol((ModelSymbol)null);
+        return;
       case SolverLanguagePackage.PREDICATE__PARAMETERS:
         getParameters().clear();
         return;
@@ -196,12 +325,33 @@ public class PredicateImpl extends StatementImpl implements Predicate
   {
     switch (featureID)
     {
+      case SolverLanguagePackage.PREDICATE__IS_ERROR:
+        return isError != IS_ERROR_EDEFAULT;
+      case SolverLanguagePackage.PREDICATE__SYMBOL:
+        return symbol != null;
       case SolverLanguagePackage.PREDICATE__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
       case SolverLanguagePackage.PREDICATE__BODIES:
         return bodies != null && !bodies.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (isError: ");
+    result.append(isError);
+    result.append(')');
+    return result.toString();
   }
 
 } //PredicateImpl

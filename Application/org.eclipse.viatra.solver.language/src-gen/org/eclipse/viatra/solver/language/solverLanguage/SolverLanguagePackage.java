@@ -642,59 +642,13 @@ public interface SolverLanguagePackage extends EPackage
   int PREDICATE = 25;
 
   /**
-   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * The feature id for the '<em><b>Is Error</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PREDICATE__PARAMETERS = STATEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Bodies</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE__BODIES = STATEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Predicate</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateSymbolImpl <em>Predicate Symbol</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateSymbolImpl
-   * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getPredicateSymbol()
-   * @generated
-   */
-  int PREDICATE_SYMBOL = 26;
-
-  /**
-   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_SYMBOL__PARAMETERS = PREDICATE__PARAMETERS;
-
-  /**
-   * The feature id for the '<em><b>Bodies</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_SYMBOL__BODIES = PREDICATE__BODIES;
+  int PREDICATE__IS_ERROR = STATEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' containment reference.
@@ -703,26 +657,7 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int PREDICATE_SYMBOL__SYMBOL = PREDICATE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Predicate Symbol</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_SYMBOL_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ErrorPredicateImpl <em>Error Predicate</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.viatra.solver.language.solverLanguage.impl.ErrorPredicateImpl
-   * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getErrorPredicate()
-   * @generated
-   */
-  int ERROR_PREDICATE = 27;
+  int PREDICATE__SYMBOL = STATEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -731,7 +666,7 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int ERROR_PREDICATE__PARAMETERS = PREDICATE__PARAMETERS;
+  int PREDICATE__PARAMETERS = STATEMENT_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Bodies</b></em>' containment reference list.
@@ -740,25 +675,16 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int ERROR_PREDICATE__BODIES = PREDICATE__BODIES;
+  int PREDICATE__BODIES = STATEMENT_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The number of structural features of the '<em>Predicate</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ERROR_PREDICATE__NAME = PREDICATE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Error Predicate</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ERROR_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 1;
+  int PREDICATE_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -768,7 +694,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 28;
+  int PARAMETER = 26;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' containment reference.
@@ -805,7 +731,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getPatternBody()
    * @generated
    */
-  int PATTERN_BODY = 29;
+  int PATTERN_BODY = 27;
 
   /**
    * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -833,7 +759,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getPolarity()
    * @generated
    */
-  int POLARITY = 30;
+  int POLARITY = 28;
 
   /**
    * The number of structural features of the '<em>Polarity</em>' class.
@@ -852,7 +778,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getConstraint()
    * @generated
    */
-  int CONSTRAINT = 31;
+  int CONSTRAINT = 29;
 
   /**
    * The feature id for the '<em><b>Polarity</b></em>' containment reference.
@@ -907,7 +833,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getClosureType()
    * @generated
    */
-  int CLOSURE_TYPE = 32;
+  int CLOSURE_TYPE = 30;
 
   /**
    * The number of structural features of the '<em>Closure Type</em>' class.
@@ -926,7 +852,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getLiteral()
    * @generated
    */
-  int LITERAL = 33;
+  int LITERAL = 31;
 
   /**
    * The number of structural features of the '<em>Literal</em>' class.
@@ -945,7 +871,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getVariable()
    * @generated
    */
-  int VARIABLE = 34;
+  int VARIABLE = 32;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -973,7 +899,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getAllInstances()
    * @generated
    */
-  int ALL_INSTANCES = 35;
+  int ALL_INSTANCES = 33;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' containment reference.
@@ -1001,7 +927,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getAllObjects()
    * @generated
    */
-  int ALL_OBJECTS = 36;
+  int ALL_OBJECTS = 34;
 
   /**
    * The number of structural features of the '<em>All Objects</em>' class.
@@ -1020,7 +946,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getDefaultInterpretation()
    * @generated
    */
-  int DEFAULT_INTERPRETATION = 37;
+  int DEFAULT_INTERPRETATION = 35;
 
   /**
    * The feature id for the '<em><b>Interpretation</b></em>' containment reference.
@@ -1048,7 +974,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getCDInterpretation()
    * @generated
    */
-  int CD_INTERPRETATION = 38;
+  int CD_INTERPRETATION = 36;
 
   /**
    * The number of structural features of the '<em>CD Interpretation</em>' class.
@@ -1067,7 +993,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getClassInterpretation()
    * @generated
    */
-  int CLASS_INTERPRETATION = 39;
+  int CLASS_INTERPRETATION = 37;
 
   /**
    * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1122,7 +1048,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getEnumInterpretation()
    * @generated
    */
-  int ENUM_INTERPRETATION = 40;
+  int ENUM_INTERPRETATION = 38;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' containment reference.
@@ -1159,7 +1085,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getFieldRelationInterpretation()
    * @generated
    */
-  int FIELD_RELATION_INTERPRETATION = 41;
+  int FIELD_RELATION_INTERPRETATION = 39;
 
   /**
    * The feature id for the '<em><b>Containment</b></em>' attribute.
@@ -1214,7 +1140,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getGlobalRelationInterpretation()
    * @generated
    */
-  int GLOBAL_RELATION_INTERPRETATION = 42;
+  int GLOBAL_RELATION_INTERPRETATION = 40;
 
   /**
    * The feature id for the '<em><b>Containment</b></em>' attribute.
@@ -1287,7 +1213,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getMultiplicityDefinition()
    * @generated
    */
-  int MULTIPLICITY_DEFINITION = 43;
+  int MULTIPLICITY_DEFINITION = 41;
 
   /**
    * The feature id for the '<em><b>Lower</b></em>' attribute.
@@ -1333,7 +1259,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getBooleanTrue()
    * @generated
    */
-  int BOOLEAN_TRUE = 44;
+  int BOOLEAN_TRUE = 42;
 
   /**
    * The number of structural features of the '<em>Boolean True</em>' class.
@@ -1352,7 +1278,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getBooleanFalse()
    * @generated
    */
-  int BOOLEAN_FALSE = 45;
+  int BOOLEAN_FALSE = 43;
 
   /**
    * The number of structural features of the '<em>Boolean False</em>' class.
@@ -1371,7 +1297,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getTrue()
    * @generated
    */
-  int TRUE = 46;
+  int TRUE = 44;
 
   /**
    * The number of structural features of the '<em>True</em>' class.
@@ -1390,7 +1316,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getFalse()
    * @generated
    */
-  int FALSE = 47;
+  int FALSE = 45;
 
   /**
    * The number of structural features of the '<em>False</em>' class.
@@ -1409,7 +1335,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getUnknown()
    * @generated
    */
-  int UNKNOWN = 48;
+  int UNKNOWN = 46;
 
   /**
    * The number of structural features of the '<em>Unknown</em>' class.
@@ -1428,7 +1354,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getError()
    * @generated
    */
-  int ERROR = 49;
+  int ERROR = 47;
 
   /**
    * The number of structural features of the '<em>Error</em>' class.
@@ -1447,7 +1373,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getPositive()
    * @generated
    */
-  int POSITIVE = 50;
+  int POSITIVE = 48;
 
   /**
    * The number of structural features of the '<em>Positive</em>' class.
@@ -1466,7 +1392,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getNegative()
    * @generated
    */
-  int NEGATIVE = 51;
+  int NEGATIVE = 49;
 
   /**
    * The number of structural features of the '<em>Negative</em>' class.
@@ -1485,7 +1411,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getReflexiveClosure()
    * @generated
    */
-  int REFLEXIVE_CLOSURE = 52;
+  int REFLEXIVE_CLOSURE = 50;
 
   /**
    * The number of structural features of the '<em>Reflexive Closure</em>' class.
@@ -1504,7 +1430,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getIrreflexiveClosure()
    * @generated
    */
-  int IRREFLEXIVE_CLOSURE = 53;
+  int IRREFLEXIVE_CLOSURE = 51;
 
   /**
    * The number of structural features of the '<em>Irreflexive Closure</em>' class.
@@ -1898,6 +1824,28 @@ public interface SolverLanguagePackage extends EPackage
   EClass getPredicate();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.Predicate#isIsError <em>Is Error</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Is Error</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.Predicate#isIsError()
+   * @see #getPredicate()
+   * @generated
+   */
+  EAttribute getPredicate_IsError();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.solverLanguage.Predicate#getSymbol <em>Symbol</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Symbol</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.Predicate#getSymbol()
+   * @see #getPredicate()
+   * @generated
+   */
+  EReference getPredicate_Symbol();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.viatra.solver.language.solverLanguage.Predicate#getParameters <em>Parameters</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1918,48 +1866,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   EReference getPredicate_Bodies();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol <em>Predicate Symbol</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Predicate Symbol</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol
-   * @generated
-   */
-  EClass getPredicateSymbol();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol#getSymbol <em>Symbol</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Symbol</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol#getSymbol()
-   * @see #getPredicateSymbol()
-   * @generated
-   */
-  EReference getPredicateSymbol_Symbol();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate <em>Error Predicate</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Error Predicate</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate
-   * @generated
-   */
-  EClass getErrorPredicate();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate#getName()
-   * @see #getErrorPredicate()
-   * @generated
-   */
-  EAttribute getErrorPredicate_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.Parameter <em>Parameter</em>}'.
@@ -2912,6 +2818,22 @@ public interface SolverLanguagePackage extends EPackage
     EClass PREDICATE = eINSTANCE.getPredicate();
 
     /**
+     * The meta object literal for the '<em><b>Is Error</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PREDICATE__IS_ERROR = eINSTANCE.getPredicate_IsError();
+
+    /**
+     * The meta object literal for the '<em><b>Symbol</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PREDICATE__SYMBOL = eINSTANCE.getPredicate_Symbol();
+
+    /**
      * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2926,42 +2848,6 @@ public interface SolverLanguagePackage extends EPackage
      * @generated
      */
     EReference PREDICATE__BODIES = eINSTANCE.getPredicate_Bodies();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateSymbolImpl <em>Predicate Symbol</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateSymbolImpl
-     * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getPredicateSymbol()
-     * @generated
-     */
-    EClass PREDICATE_SYMBOL = eINSTANCE.getPredicateSymbol();
-
-    /**
-     * The meta object literal for the '<em><b>Symbol</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PREDICATE_SYMBOL__SYMBOL = eINSTANCE.getPredicateSymbol_Symbol();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ErrorPredicateImpl <em>Error Predicate</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.viatra.solver.language.solverLanguage.impl.ErrorPredicateImpl
-     * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getErrorPredicate()
-     * @generated
-     */
-    EClass ERROR_PREDICATE = eINSTANCE.getErrorPredicate();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ERROR_PREDICATE__NAME = eINSTANCE.getErrorPredicate_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ParameterImpl <em>Parameter</em>}' class.

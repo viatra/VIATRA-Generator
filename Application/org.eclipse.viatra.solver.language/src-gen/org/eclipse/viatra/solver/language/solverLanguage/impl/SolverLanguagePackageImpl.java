@@ -28,7 +28,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.DataSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.DefaultInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EnumInterpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.EqualsSymbol;
-import org.eclipse.viatra.solver.language.solverLanguage.ErrorPredicate;
 import org.eclipse.viatra.solver.language.solverLanguage.ExistSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.False;
 import org.eclipse.viatra.solver.language.solverLanguage.FieldRelationInterpretation;
@@ -48,7 +47,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.PatternBody;
 import org.eclipse.viatra.solver.language.solverLanguage.Polarity;
 import org.eclipse.viatra.solver.language.solverLanguage.Positive;
 import org.eclipse.viatra.solver.language.solverLanguage.Predicate;
-import org.eclipse.viatra.solver.language.solverLanguage.PredicateSymbol;
 import org.eclipse.viatra.solver.language.solverLanguage.Problem;
 import org.eclipse.viatra.solver.language.solverLanguage.RealObject;
 import org.eclipse.viatra.solver.language.solverLanguage.RealSymbol;
@@ -254,20 +252,6 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   private EClass predicateEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass predicateSymbolEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass errorPredicateEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -927,9 +911,9 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   @Override
-  public EReference getPredicate_Parameters()
+  public EAttribute getPredicate_IsError()
   {
-    return (EReference)predicateEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -938,7 +922,7 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   @Override
-  public EReference getPredicate_Bodies()
+  public EReference getPredicate_Symbol()
   {
     return (EReference)predicateEClass.getEStructuralFeatures().get(1);
   }
@@ -949,9 +933,9 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   @Override
-  public EClass getPredicateSymbol()
+  public EReference getPredicate_Parameters()
   {
-    return predicateSymbolEClass;
+    return (EReference)predicateEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -960,31 +944,9 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   @Override
-  public EReference getPredicateSymbol_Symbol()
+  public EReference getPredicate_Bodies()
   {
-    return (EReference)predicateSymbolEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getErrorPredicate()
-  {
-    return errorPredicateEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getErrorPredicate_Name()
-  {
-    return (EAttribute)errorPredicateEClass.getEStructuralFeatures().get(0);
+    return (EReference)predicateEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1685,14 +1647,10 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     createEAttribute(stringObjectEClass, STRING_OBJECT__VALUE);
 
     predicateEClass = createEClass(PREDICATE);
+    createEAttribute(predicateEClass, PREDICATE__IS_ERROR);
+    createEReference(predicateEClass, PREDICATE__SYMBOL);
     createEReference(predicateEClass, PREDICATE__PARAMETERS);
     createEReference(predicateEClass, PREDICATE__BODIES);
-
-    predicateSymbolEClass = createEClass(PREDICATE_SYMBOL);
-    createEReference(predicateSymbolEClass, PREDICATE_SYMBOL__SYMBOL);
-
-    errorPredicateEClass = createEClass(ERROR_PREDICATE);
-    createEAttribute(errorPredicateEClass, ERROR_PREDICATE__NAME);
 
     parameterEClass = createEClass(PARAMETER);
     createEReference(parameterEClass, PARAMETER__VARIABLE);
@@ -1818,6 +1776,7 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     stringSymbolEClass.getESuperTypes().add(this.getDataSymbol());
     objectEClass.getESuperTypes().add(this.getComplexObject());
     namedObjectEClass.getESuperTypes().add(this.getObject());
+    namedObjectEClass.getESuperTypes().add(this.getLiteral());
     unnamedObjectEClass.getESuperTypes().add(this.getObject());
     dataObjectEClass.getESuperTypes().add(this.getObject());
     dataObjectEClass.getESuperTypes().add(this.getLiteral());
@@ -1826,8 +1785,6 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     realObjectEClass.getESuperTypes().add(this.getDataObject());
     stringObjectEClass.getESuperTypes().add(this.getDataObject());
     predicateEClass.getESuperTypes().add(this.getStatement());
-    predicateSymbolEClass.getESuperTypes().add(this.getPredicate());
-    errorPredicateEClass.getESuperTypes().add(this.getPredicate());
     variableEClass.getESuperTypes().add(this.getLiteral());
     allInstancesEClass.getESuperTypes().add(this.getComplexObject());
     allObjectsEClass.getESuperTypes().add(this.getComplexObject());
@@ -1910,14 +1867,10 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     initEAttribute(getStringObject_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(predicateEClass, Predicate.class, "Predicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPredicate_IsError(), ecorePackage.getEBoolean(), "isError", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPredicate_Symbol(), this.getModelSymbol(), null, "symbol", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPredicate_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPredicate_Bodies(), this.getPatternBody(), null, "bodies", null, 0, -1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(predicateSymbolEClass, PredicateSymbol.class, "PredicateSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPredicateSymbol_Symbol(), this.getModelSymbol(), null, "symbol", null, 0, 1, PredicateSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(errorPredicateEClass, ErrorPredicate.class, "ErrorPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getErrorPredicate_Name(), ecorePackage.getEString(), "name", null, 0, 1, ErrorPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getParameter_Variable(), this.getVariable(), null, "variable", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

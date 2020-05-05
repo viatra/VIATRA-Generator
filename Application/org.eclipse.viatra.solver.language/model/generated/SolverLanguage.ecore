@@ -32,7 +32,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StringSymbol" eSuperTypes="#//DataSymbol"/>
   <eClassifiers xsi:type="ecore:EClass" name="ComplexObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//ComplexObject"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedObject" eSuperTypes="#//Object">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedObject" eSuperTypes="#//Object #//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnnamedObject" eSuperTypes="#//Object">
@@ -53,17 +53,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isError" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bodies" upperBound="-1"
         eType="#//PatternBody" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PredicateSymbol" eSuperTypes="#//Predicate">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="#//ModelSymbol"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ErrorPredicate" eSuperTypes="#//Predicate">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Variable"
