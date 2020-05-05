@@ -44,8 +44,8 @@ class SolverSemanticHighlightCalculator extends DefaultSemanticHighlightingCalcu
 	def String calculateSymbolCode(String name) {
 		val Random random = new Random(name.hashCode)
 		val hue = huePick(random.nextFloat)
-		val saturation = 0.1+random.nextFloat*0.2
-		val brightness = random.nextFloat/4+0.7f
+		val saturation = 0.2+random.nextFloat*0.3
+		val brightness = random.nextFloat*0.2+0.7f
 		return '''«SmybolCode» «hue» «saturation» «brightness»'''
 	}
 	private def huePick(float random) {
