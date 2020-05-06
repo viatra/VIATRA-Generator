@@ -256,6 +256,52 @@ public class NumericProblemSolver {
 		}	
 	}
 	
+	// Get a solution that has at least 1 different value from the given solution
+	public void testGetOneDiffSol(XExpression expression, Term t) throws Exception {
+		int count = 5000;
+		Random rand = new Random();
+		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
+		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
+		List<Object> obj = new ArrayList<Object>();
+		for (int i = 0; i < count; i++) {
+			Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
+			if (obj.size() > 1) {
+				for (JvmIdentifiableElement e: allElem) {
+					FakeIntegerElement intE = null;
+					int useOld = rand.nextInt(10);
+					if (useOld == 1) {
+						System.out.println("here ");
+						int index = rand.nextInt(obj.size());
+						intE = (FakeIntegerElement) obj.get(index);
+					} else {
+						intE = new FakeIntegerElement();
+					}
+					obj.add(intE);
+					match.put(e, intE);
+				}
+			} else {
+				for (JvmIdentifiableElement e: allElem) {
+					FakeIntegerElement intE = new FakeIntegerElement();
+					obj.add(intE);
+					match.put(e, intE);
+				}
+			}
+			matchSet.add(match);
+		}
+		matches.put(expression, matchSet);
+		
+		Map<Object,Integer> sol1 = getOneSolution(obj, matches);
+		System.out.println("*************Get diff sol******************");
+		for (int i = 0; i < 10; i++) {
+			long start = System.currentTimeMillis();
+			Map<Object,Integer> sol2 = getOneDiffSolution1(obj, matches, sol1);
+			long end = System.currentTimeMillis();
+			System.out.println(end - start);
+			Thread.sleep(3000);
+		}
+	}
+	
 	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {
 		ArrayList<JvmIdentifiableElement> allElem = new ArrayList<JvmIdentifiableElement>();
 		XExpression left = ((XBinaryOperation) expression).getLeftOperand();
@@ -279,6 +325,68 @@ public class NumericProblemSolver {
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		s.add(problemInstance);
 		return s.check() == Status.SATISFIABLE;
+	}
+	
+	public Map<Object,Integer> getOneDiffSolution1(List<Object> objs, Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches, Map<Object,Integer> aSolution) throws Exception {
+		Map<Object,Integer> sol = new HashMap<Object, Integer>();
+		BoolExpr problemInstance = formNumericProblemInstance(matches);
+		
+		BoolExpr diffSolConstraint = ctx.mkFalse();
+		for (Object o: objs) {
+			Expr var = varMap.get(o);
+			Integer oldValue = aSolution.get(o);
+			IntExpr oldValueExpr = ctx.mkInt(oldValue);
+			diffSolConstraint = ctx.mkOr(diffSolConstraint, ctx.mkDistinct(var, oldValueExpr));
+		}
+
+		problemInstance = ctx.mkAnd(problemInstance, diffSolConstraint);
+		s.add(problemInstance);
+		
+		if (s.check() == Status.SATISFIABLE) {
+			Model m = s.getModel();
+			for (Object o: objs) {
+				IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
+				Integer oSol = Integer.parseInt(val.toString());
+				sol.put(o, oSol);
+			}
+		} else {
+			System.out.println("Unsatisfiable");
+		}
+		
+		return sol;
+	}
+	
+	public Map<Object,Integer> getOneDiffSolution2(List<Object> objs, Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches, Map<Object,Integer> aSolution) throws Exception {
+		Map<Object,Integer> sol = new HashMap<Object, Integer>();
+		BoolExpr problemInstance = formNumericProblemInstance(matches);
+		ArithExpr sum = ctx.mkInt(0);
+		
+		for (Object o: objs) {
+			IntExpr var = (IntExpr) varMap.get(o);
+			Integer oldValue = aSolution.get(o);
+			IntExpr oldValueExpr = ctx.mkInt(oldValue);
+			// Calculate the difference. Notice that this is not the abs value!!!
+			ArithExpr diff = ctx.mkAdd(var, ctx.mkUnaryMinus(oldValueExpr));
+			// Add up the difference
+			sum = ctx.mkAdd(diff, sum);
+		}
+		
+		BoolExpr diffSolConstraint = ctx.mkLt(sum, ctx.mkInt(3));
+		problemInstance = ctx.mkAnd(problemInstance, diffSolConstraint);
+		s.add(problemInstance);
+		
+		if (s.check() == Status.SATISFIABLE) {
+			Model m = s.getModel();
+			for (Object o: objs) {
+				IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
+				Integer oSol = Integer.parseInt(val.toString());
+				sol.put(o, oSol);
+			}
+		} else {
+			System.out.println("Unsatisfiable");
+		}
+		
+		return sol;
 	}
 	
 	public Map<Object,Integer> getOneSolution(List<Object> objs, Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
@@ -411,4 +519,6 @@ public class NumericProblemSolver {
 		}
 		return constraintInstances;
 	}
+	
+	
 }
