@@ -29,6 +29,7 @@ Require-Bundle: org.eclipse.emf.ecore,
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.visualisation;bundle-version="1.0.0",
+ hu.bme.mit.inf.dslreasoner.application;bundle-version="1.0.0",
  case.study.familyTree.model;bundle-version="1.0.0",
  case.study.familyTree.run;bundle-version="0.0.1",
  case.study.pledge.model;bundle-version="1.0.0"

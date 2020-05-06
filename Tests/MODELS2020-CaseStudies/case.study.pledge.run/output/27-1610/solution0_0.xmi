@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<familytree:FamilyTree xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:familytree="http://www.example.org/familytree">
-  <members age="5" children="//@members.0 //@members.2 //@members.3" parents="//@members.0 //@members.2"/>
-  <members/>
-  <members age="9" children="//@members.0 //@members.2" parents="//@members.0 //@members.2"/>
-  <members age="2" children="//@members.4" parents="//@members.0"/>
-  <members children="//@members.4" parents="//@members.3 //@members.4"/>
-</familytree:FamilyTree>

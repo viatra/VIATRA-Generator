@@ -5,7 +5,10 @@ package queries;
 
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
+import queries.MemberHasParent;
 import queries.MemberIsItsOwnParent;
+import queries.ParentTooYoung;
+import queries.TwoMembersHaveNoParent;
 
 /**
  * A pattern group formed of all public patterns defined in familyTreeConstraints.vql.
@@ -16,6 +19,9 @@ import queries.MemberIsItsOwnParent;
  * 
  * <p> From package queries, the group contains the definition of the following patterns: <ul>
  * <li>memberIsItsOwnParent</li>
+ * <li>twoMembersHaveNoParent</li>
+ * <li>memberHasParent</li>
+ * <li>parentTooYoung</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -41,6 +47,9 @@ public final class FamilyTreeConstraints extends BaseGeneratedPatternGroup {
   
   private FamilyTreeConstraints() {
     querySpecifications.add(MemberIsItsOwnParent.instance());
+    querySpecifications.add(TwoMembersHaveNoParent.instance());
+    querySpecifications.add(MemberHasParent.instance());
+    querySpecifications.add(ParentTooYoung.instance());
   }
   
   public MemberIsItsOwnParent getMemberIsItsOwnParent() {
@@ -49,5 +58,29 @@ public final class FamilyTreeConstraints extends BaseGeneratedPatternGroup {
   
   public MemberIsItsOwnParent.Matcher getMemberIsItsOwnParent(final ViatraQueryEngine engine) {
     return MemberIsItsOwnParent.Matcher.on(engine);
+  }
+  
+  public TwoMembersHaveNoParent getTwoMembersHaveNoParent() {
+    return TwoMembersHaveNoParent.instance();
+  }
+  
+  public TwoMembersHaveNoParent.Matcher getTwoMembersHaveNoParent(final ViatraQueryEngine engine) {
+    return TwoMembersHaveNoParent.Matcher.on(engine);
+  }
+  
+  public MemberHasParent getMemberHasParent() {
+    return MemberHasParent.instance();
+  }
+  
+  public MemberHasParent.Matcher getMemberHasParent(final ViatraQueryEngine engine) {
+    return MemberHasParent.Matcher.on(engine);
+  }
+  
+  public ParentTooYoung getParentTooYoung() {
+    return ParentTooYoung.instance();
+  }
+  
+  public ParentTooYoung.Matcher getParentTooYoung(final ViatraQueryEngine engine) {
+    return ParentTooYoung.Matcher.on(engine);
   }
 }

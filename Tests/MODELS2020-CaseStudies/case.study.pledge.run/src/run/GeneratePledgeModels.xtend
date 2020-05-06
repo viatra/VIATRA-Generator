@@ -5,6 +5,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
@@ -17,6 +18,7 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DebugConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
@@ -41,7 +43,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
-import queries.Case_study_A
 
 class GeneratePledgeModels {
 	def static void main(String[] args) {
@@ -57,7 +58,7 @@ class GeneratePledgeModels {
 		val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
 		val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
 		val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
-		
+
 		// Workspace setup
 		val Date date = new Date(System.currentTimeMillis)
 		val SimpleDateFormat format = new SimpleDateFormat("dd-HHmm");
@@ -65,45 +66,42 @@ class GeneratePledgeModels {
 
 		val inputs = new FileSystemWorkspace('''inputs/''', "")
 		val workspace = new FileSystemWorkspace('''output/''' + formattedDate + '''/''', "")
+		val debug = new FileSystemWorkspace('''output/''' + formattedDate + '''/debug/''', "")
 		workspace.initAndClear
 
 		println("Input and output workspaces are created")
 
 //		print(TaxationPackage.eINSTANCE.getEClassifiers.filter(EClass).toList.get(0))
-		
 		//*
-		val metamodel = loadMetamodel(TaxationPackage.eINSTANCE)
-		val partialModel = loadPartialModel(inputs, "Household.xmi")
-		val queries = loadQueries(metamodel, Case_study_A.instance)
-		/*/
+		   val metamodel = loadMetamodel(TaxationPackage.eINSTANCE)
+		   val partialModel = loadPartialModel(inputs, "Household.xmi")
+		 //		val queries = loadQueries(metamodel, Case_study_A.instance)
+		 /*/
 		val metamodel = loadMetamodel(FamilytreePackage.eINSTANCE)
 //		val partialModel = loadPartialModel(inputs, "yakindu/Yakindu.xmi")
 		val queries = loadQueries(metamodel, FamilyTreeConstraints.instance)
-		//*/
+		// */
 		println("DSL loaded")
 
-		val SIZE = 10
+		val SIZE = 2
 		var REPS = 1
 		val RUNTIME = 600
-	
+
 		// /////////////////////////
 		// Prepare Problem
 		val modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, new Ecore2LogicConfiguration())
 		var problem = modelGenerationProblem.output
-		
+
 //		val modelExtensionProblem = instanceModel2Logic.transform(modelGenerationProblem, partialModel)
 //		problem = modelExtensionProblem.output
-		
-		val validModelExtensionProblem = viatra2Logic.transformQueries(queries, modelGenerationProblem,
-			new Viatra2LogicConfiguration)
-		problem = validModelExtensionProblem.output
-
-		workspace.writeModel(problem, "problem.logicproblem")
+//		val validModelExtensionProblem = viatra2Logic.transformQueries(queries, modelGenerationProblem,
+//			new Viatra2LogicConfiguration)
+//		problem = validModelExtensionProblem.output
+		debug.writeModel(problem, "problem.logicproblem")
 		println("Problem created")
-
+		// End Prepare Problem
+		// /////////////////////////
 		for (var i = 0; i < REPS; i++) {
-
-			println("Run #" + i + ":")
 
 			var ViatraReasoner reasoner = new ViatraReasoner
 
@@ -111,37 +109,38 @@ class GeneratePledgeModels {
 			// Define Config File	
 			val knownIntegers = new TreeSet<Integer>
 			knownIntegers.addAll(0)
-			
+
 			val knownReals = new TreeSet<BigDecimal>
 			knownReals.addAll(new BigDecimal("0.0"))
 
 			val knownStrings = new TreeSet<String>
 			knownStrings.addAll("r0", "r1", "r2")
-			
-			
+
 			val solverConfig = new ViatraReasonerConfiguration => [
+				it.documentationLevel = DocumentationLevel::FULL
+				it.debugCongiguration = new DebugConfiguration => [logging = true]
 				it.runtimeLimit = RUNTIME
-				it.typeScopes.maxNewElements = SIZE
-//				it.typeScopes.minNewElements = SIZE
+//				it.typeScopes.maxNewElements = SIZE
+//				it.typeScopes.minNewElements = 3
 				if(!knownIntegers.isEmpty) it.typeScopes.knownIntegers = knownIntegers
 				if(!knownReals.isEmpty) it.typeScopes.knownReals = knownReals
 //				if(!knownStrings.isEmpty) it.typeScopes.knownStrings = knownStrings
 			]
-			
+
+			println("Run #" + i + ":")
 			val startTime = System.currentTimeMillis
-			var solution = reasoner.solve(problem, solverConfig, workspace)
-			val totalTime = System.currentTimeMillis-startTime
-			
+			var solution = reasoner.solve(problem, solverConfig, debug)
+			val totalTime = System.currentTimeMillis - startTime
+
 			println("  Problem Solved")
-			solution.writeStats(totalTime)
+			solution.writeStats(totalTime, solverConfig)
 
 			if (solution instanceof ModelResult) {
 				solution.writeRepresentation(workspace, i)
-//				solution.writeInterpretation(logic2Ecore, workspace, i, reasoner, modelGenerationProblem)
+				solution.writeInterpretation(logic2Ecore, workspace, i, reasoner, modelGenerationProblem)
 				println("  Solution saved and visualised")
 			} else
 				println("  Returned: " + solution.class.simpleName.toString)
-
 
 //			println("Stats Created")
 			// Run Garbage Collector
@@ -230,13 +229,16 @@ class GeneratePledgeModels {
 		}
 	}
 
-	def static writeStats(LogicResult solution, long time) {
+	def static writeStats(LogicResult solution, long time, ViatraReasonerConfiguration config) {
 		val stats = solution.statistics
 		println("  Statistics:")
 //		for (e : stats.entries.filter[name.substring(0, 9) == "_Solution"]) {
 //			println("    " + e.name + ": " + (e as IntStatisticEntry).value + " ms")
 //		}
-		println("    \"solve\" time: " + time as double/1000 + " s")
+		println(
+			"    #new nodes    : [" + config.typeScopes.minNewElements + ".." +
+				(if(config.typeScopes.maxNewElements == 2147483647) "*" else config.typeScopes.maxNewElements) + "]")
+		println("    \"solve\" time: " + time as double / 1000 + " s")
 
 //		println("<<End Statistics>>")
 	}

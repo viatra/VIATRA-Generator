@@ -9,14 +9,25 @@ pattern memberIsItsOwnParent(m: Member) = {
 	m == p;
 }
 
-//@Constraint(message="parentTooYoung", severity="error", key={m, p})
-//pattern parentTooYoung(m: Member, p: Member) = {
-//	FamilyTree.members(_, m);
-//	Member.parents(m, p);
-//	Member.age(m, mAge);
-//	Member.age(p, pAge);
-//	check (mAge <= (pAge + 12));
-//}
+@Constraint(message="twoMembersHaveNoParent", severity="error", key={m1, m2})
+pattern twoMembersHaveNoParent(m1:Member, m2:Member) = {
+	neg find memberHasParent(m1);
+	neg find memberHasParent(m2);
+	m1 != m2;
+}
+
+pattern memberHasParent(m: Member) = {
+	Member.parents(m, _);
+}
+
+@Constraint(message="parentTooYoung", severity="error", key={m, p})
+pattern parentTooYoung(m: Member, p: Member) = {
+	FamilyTree.members(_, m);
+	Member.parents(m, p);
+	Member.age(m, mAge);
+	Member.age(p, pAge);
+	check (mAge <= (pAge + 12));
+}
 
 
 

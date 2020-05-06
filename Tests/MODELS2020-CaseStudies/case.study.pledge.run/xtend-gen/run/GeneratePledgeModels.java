@@ -8,6 +8,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
@@ -17,13 +18,12 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.Statistics;
 import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicTrace;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DebugConfiguration;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser;
@@ -65,7 +65,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import queries.Case_study_A;
 
 @SuppressWarnings("all")
 public class GeneratePledgeModels {
@@ -100,26 +99,28 @@ public class GeneratePledgeModels {
       _builder_2.append("/");
       String _plus_1 = (_plus + _builder_2);
       final FileSystemWorkspace workspace = new FileSystemWorkspace(_plus_1, "");
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("output/");
+      String _plus_2 = (_builder_3.toString() + formattedDate);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("/debug/");
+      String _plus_3 = (_plus_2 + _builder_4);
+      final FileSystemWorkspace debug = new FileSystemWorkspace(_plus_3, "");
       workspace.initAndClear();
       InputOutput.<String>println("Input and output workspaces are created");
       final EcoreMetamodelDescriptor metamodel = GeneratePledgeModels.loadMetamodel(TaxationPackage.eINSTANCE);
       final EList<EObject> partialModel = GeneratePledgeModels.loadPartialModel(inputs, "Household.xmi");
-      final ViatraQuerySetDescriptor queries = GeneratePledgeModels.loadQueries(metamodel, Case_study_A.instance());
       InputOutput.<String>println("DSL loaded");
-      final int SIZE = 10;
+      final int SIZE = 2;
       int REPS = 1;
       final int RUNTIME = 600;
       Ecore2LogicConfiguration _ecore2LogicConfiguration = new Ecore2LogicConfiguration();
       final TracedOutput<LogicProblem, Ecore2Logic_Trace> modelGenerationProblem = ecore2Logic.transformMetamodel(metamodel, _ecore2LogicConfiguration);
       LogicProblem problem = modelGenerationProblem.getOutput();
-      Viatra2LogicConfiguration _viatra2LogicConfiguration = new Viatra2LogicConfiguration();
-      final TracedOutput<LogicProblem, Viatra2LogicTrace> validModelExtensionProblem = viatra2Logic.transformQueries(queries, modelGenerationProblem, _viatra2LogicConfiguration);
-      problem = validModelExtensionProblem.getOutput();
-      workspace.writeModel(problem, "problem.logicproblem");
+      debug.writeModel(problem, "problem.logicproblem");
       InputOutput.<String>println("Problem created");
       for (int i = 0; (i < REPS); i++) {
         {
-          InputOutput.<String>println((("Run #" + Integer.valueOf(i)) + ":"));
           ViatraReasoner reasoner = new ViatraReasoner();
           final TreeSet<Integer> knownIntegers = new TreeSet<Integer>();
           CollectionExtensions.<Integer>addAll(knownIntegers, Integer.valueOf(0));
@@ -130,8 +131,14 @@ public class GeneratePledgeModels {
           CollectionExtensions.<String>addAll(knownStrings, "r0", "r1", "r2");
           ViatraReasonerConfiguration _viatraReasonerConfiguration = new ViatraReasonerConfiguration();
           final Procedure1<ViatraReasonerConfiguration> _function = (ViatraReasonerConfiguration it) -> {
+            it.documentationLevel = DocumentationLevel.FULL;
+            DebugConfiguration _debugConfiguration = new DebugConfiguration();
+            final Procedure1<DebugConfiguration> _function_1 = (DebugConfiguration it_1) -> {
+              it_1.logging = true;
+            };
+            DebugConfiguration _doubleArrow = ObjectExtensions.<DebugConfiguration>operator_doubleArrow(_debugConfiguration, _function_1);
+            it.debugCongiguration = _doubleArrow;
             it.runtimeLimit = RUNTIME;
-            it.typeScopes.maxNewElements = SIZE;
             boolean _isEmpty = knownIntegers.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
@@ -144,19 +151,21 @@ public class GeneratePledgeModels {
             }
           };
           final ViatraReasonerConfiguration solverConfig = ObjectExtensions.<ViatraReasonerConfiguration>operator_doubleArrow(_viatraReasonerConfiguration, _function);
+          InputOutput.<String>println((("Run #" + Integer.valueOf(i)) + ":"));
           final long startTime = System.currentTimeMillis();
-          LogicResult solution = reasoner.solve(problem, solverConfig, workspace);
+          LogicResult solution = reasoner.solve(problem, solverConfig, debug);
           long _currentTimeMillis_1 = System.currentTimeMillis();
           final long totalTime = (_currentTimeMillis_1 - startTime);
           InputOutput.<String>println("  Problem Solved");
-          GeneratePledgeModels.writeStats(solution, totalTime);
+          GeneratePledgeModels.writeStats(solution, totalTime, solverConfig);
           if ((solution instanceof ModelResult)) {
             GeneratePledgeModels.writeRepresentation(solution, workspace, i);
+            GeneratePledgeModels.writeInterpretation(solution, logic2Ecore, workspace, i, reasoner, modelGenerationProblem);
             InputOutput.<String>println("  Solution saved and visualised");
           } else {
             String _string = solution.getClass().getSimpleName().toString();
-            String _plus_2 = ("  Returned: " + _string);
-            InputOutput.<String>println(_plus_2);
+            String _plus_4 = ("  Returned: " + _string);
+            InputOutput.<String>println(_plus_4);
           }
           final Runtime r = Runtime.getRuntime();
           r.gc();
@@ -284,11 +293,20 @@ public class GeneratePledgeModels {
     }
   }
   
-  public static String writeStats(final LogicResult solution, final long time) {
+  public static String writeStats(final LogicResult solution, final long time, final ViatraReasonerConfiguration config) {
     String _xblockexpression = null;
     {
       final Statistics stats = solution.getStatistics();
       InputOutput.<String>println("  Statistics:");
+      Object _xifexpression = null;
+      if ((config.typeScopes.maxNewElements == 2147483647)) {
+        _xifexpression = "*";
+      } else {
+        _xifexpression = Integer.valueOf(config.typeScopes.maxNewElements);
+      }
+      String _plus = ((("    #new nodes    : [" + Integer.valueOf(config.typeScopes.minNewElements)) + "..") + _xifexpression);
+      String _plus_1 = (_plus + "]");
+      InputOutput.<String>println(_plus_1);
       _xblockexpression = InputOutput.<String>println((("    \"solve\" time: " + Double.valueOf((((double) time) / 1000))) + " s"));
     }
     return _xblockexpression;

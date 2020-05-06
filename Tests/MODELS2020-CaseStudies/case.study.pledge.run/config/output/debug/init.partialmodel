@@ -1,0 +1,1171 @@
+<?xml version="1.0" encoding="ASCII"?>
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" maxNewElements="2147483647">
+  <problem href="config/output/debug//generation.logicproblem#/"/>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.0"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.0/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.0/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.1"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.1/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.1/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.2"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.2/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.2/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.3"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.3/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.3/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.4"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.4/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.4/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.5"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.5/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.5/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.6"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.6/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.6/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.7"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.7/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.7/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.8"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.8/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.8/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.9"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.9/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.9/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.10"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.10/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.10/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.11"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.11/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.11/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.12"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.12/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.12/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.13"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.13/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.13/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.14"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.14/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.14/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.15"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.15/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.15/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.16"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.16/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.16/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.17"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.17/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.17/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.18"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.18/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.18/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.19"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.19/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.19/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.20"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.20/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.20/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.21"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.21/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.21/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.22"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.22/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.22/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.23"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.23/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.23/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.24"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.24/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.24/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.25"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.25/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.25/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.26"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.26/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.26/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.27"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.27/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.27/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.28"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.28/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.28/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.29"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.29/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.29/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.30"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.30/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.30/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.31"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.31/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.31/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.32"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.32/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.32/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.33"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.33/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.33/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.34"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.34/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.34/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.35"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.35/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.35/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.36"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.36/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.36/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.37"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.37/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.37/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.38"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.38/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.38/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.39"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.39/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.39/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.40"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.40/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.40/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.41"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.41/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.41/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.42"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.42/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.42/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.43"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.43/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.43/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.44"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.44/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.44/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.45"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.45/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.45/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.46"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.46/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.46/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.47"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.47/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.47/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.48"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.48/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.48/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.49"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.49/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.49/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.50"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.50/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.50/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.51"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.51/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.51/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.52"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.52/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.52/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.53"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.53/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.53/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.54"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.54/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.54/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.55"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.55/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.55/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.56"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.56/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.56/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.57"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.57/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.57/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.58"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.58/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.58/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.59"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.59/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.59/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.60"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.60/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.60/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.61"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.61/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.61/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.62"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.62/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.62/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.63"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.63/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.63/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.64"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.64/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.64/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.65"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.65/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.65/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.66"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.66/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.66/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.67"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.67/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.67/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.68"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.68/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.68/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.69"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.69/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.69/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.70"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.70/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.70/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.71"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.71/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.71/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.72"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.72/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.72/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.73"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.73/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.73/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.74"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.74/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.74/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.75"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.75/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.75/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.76"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.76/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.76/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.77"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.77/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.77/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.78"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.78/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.78/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.79"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.79/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.79/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.80"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.80/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.80/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.81"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.81/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.81/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.82"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.82/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.82/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.83"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.83/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.83/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.84"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.84/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.84/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.85"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.85/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.85/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.86"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.86/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.86/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.87"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.87/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.87/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.88"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.88/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.88/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.89"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.89/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.89/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.90"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.90/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.90/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.91"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.91/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.91/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.92"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.92/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.92/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.93"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.93/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.93/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.94"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.94/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.94/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.95"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.95/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.95/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.96"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.96/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.96/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.97"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.97/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.97/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.98"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.98/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.98/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.99"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.99/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.99/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.100"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.100/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.100/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.101"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.101/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.101/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.102"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.102/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.102/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.103"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.103/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.103/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.104"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.104/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.104/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.105"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.105/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.105/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.106"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.106/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.106/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.107"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.107/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.107/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.108"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.108/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.108/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.109"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.109/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.109/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.110"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.110/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.110/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.111"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.111/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.111/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.112"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.112/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.112/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.113"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.113/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.113/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.114"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.114/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.114/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.115"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.115/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.115/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.116"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.116/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.116/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.117"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.117/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.117/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.118"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.118/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.118/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.119"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.119/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.119/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.120"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.120/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.120/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.121"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.121/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.121/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.122"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.122/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.122/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.123"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.123/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.123/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.124"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.124/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.124/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.125"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.125/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.125/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.126"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.126/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.126/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.127"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.127/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.127/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.128"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.128/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.128/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.129"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.129/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.129/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.130"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.130/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.130/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.131"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.131/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.131/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.132"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.132/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.132/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.133"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.133/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.133/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.134"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.134/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.134/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.135"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.135/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.135/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.136"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.136/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.136/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.137"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.137/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.137/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.138"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.138/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.138/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.139"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.139/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.139/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.140"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.140/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.140/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.141"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.141/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.141/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.142"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.142/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.142/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.143"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.143/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.143/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.144"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.144/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.144/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.145"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.145/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.145/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.146"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.146/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.146/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.147"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.147/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.147/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.148"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.148/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.148/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.149"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.149/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.149/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.150"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.150/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.150/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.151"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.151/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.151/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.152"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.152/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.152/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.153"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.153/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.153/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.154"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.154/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.154/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.155"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.155/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.155/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.156"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.156/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.156/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.157"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.157/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.157/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.158"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.158/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.158/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.159"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.159/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.159/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.160"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.160/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.160/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.161"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.161/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.161/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.162"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.162/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.162/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.163"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.163/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.163/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.164"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.164/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.164/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.165"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.165/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.165/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.166"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.166/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.166/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.167"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.167/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.167/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.168"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.168/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.168/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.169"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.169/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.169/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.170"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.170/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.170/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.171"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.171/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.171/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.172"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.172/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="config/output/debug//generation.logicproblem#//@relations.172/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.173"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.173/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.173/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.174"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.174/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.174/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.175"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.175/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.175/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.176"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.176/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="config/output/debug//generation.logicproblem#//@relations.176/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.177"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.177/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.177/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.178"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.178/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.178/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.179"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.179/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.179/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.180"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.180/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.180/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.181"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.181/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.181/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.182"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.182/@parameters.0"/>
+    <param2 xsi:type="language:BoolTypeReference" href="config/output/debug//generation.logicproblem#//@relations.182/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.183"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.183/@parameters.0"/>
+    <param2 xsi:type="language:RealTypeReference" href="config/output/debug//generation.logicproblem#//@relations.183/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@relations.184"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.184/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="config/output/debug//generation.logicproblem#//@relations.184/@parameters.1"/>
+  </partialrelationinterpretation>
+  <newElements xsi:type="partialinterpretation:BooleanElement" name="true" valueSet="true" value="true"/>
+  <newElements xsi:type="partialinterpretation:BooleanElement" name="false" valueSet="true"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="0" valueSet="true"/>
+  <newElements xsi:type="partialinterpretation:RealElement" name="0.0" valueSet="true" value="0.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialBooleanInterpretation" elements="//@newElements.0 //@newElements.1"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialIntegerInterpretation" elements="//@newElements.2"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialRealInterpretation" elements="//@newElements.3"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialStringInterpretation" elements="//@openWorldElements.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.0"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.1"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.2" supertypeInterpretation="//@partialtypeinterpratation.7 //@partialtypeinterpratation.15">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.2"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.3">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.3"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.4">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.4"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.5">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.5"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.6" supertypeInterpretation="//@partialtypeinterpratation.7">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.6"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.7">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.7"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.8" supertypeInterpretation="//@partialtypeinterpratation.15">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.8"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.9"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.10">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.10"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.11">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.11"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.12">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.12"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.13">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.13"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.14">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.14"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.15">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.15"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.16">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.16"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.17">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.17"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.18"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.19" supertypeInterpretation="//@partialtypeinterpratation.8">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.19"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.20" supertypeInterpretation="//@partialtypeinterpratation.8">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.20"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.21" supertypeInterpretation="//@partialtypeinterpratation.13">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.21"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.22" supertypeInterpretation="//@partialtypeinterpratation.6 //@partialtypeinterpratation.7 //@partialtypeinterpratation.15">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.22"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.23" supertypeInterpretation="//@partialtypeinterpratation.13">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.23"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.24" supertypeInterpretation="//@partialtypeinterpratation.6 //@partialtypeinterpratation.7 //@partialtypeinterpratation.15">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.24"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.25" supertypeInterpretation="//@partialtypeinterpratation.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.25"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.26" supertypeInterpretation="//@partialtypeinterpratation.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.26"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.27" supertypeInterpretation="//@partialtypeinterpratation.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.27"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.28" supertypeInterpretation="//@partialtypeinterpratation.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.28"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.29" supertypeInterpretation="//@partialtypeinterpratation.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.29"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.30" supertypeInterpretation="//@partialtypeinterpratation.18">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.30"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.31" supertypeInterpretation="//@partialtypeinterpratation.17">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.31"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.32" supertypeInterpretation="//@partialtypeinterpratation.17">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.32"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.33" supertypeInterpretation="//@partialtypeinterpratation.20">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.33"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.34" supertypeInterpretation="//@partialtypeinterpratation.20">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.34"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.35" supertypeInterpretation="//@partialtypeinterpratation.20">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.35"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.36" supertypeInterpretation="//@partialtypeinterpratation.41">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.36"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.37">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.37"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.38" supertypeInterpretation="//@partialtypeinterpratation.41">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.38"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.39" supertypeInterpretation="//@partialtypeinterpratation.44">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.39"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.40">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.40"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.41" supertypeInterpretation="//@partialtypeinterpratation.44">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.41"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.42" supertypeInterpretation="//@partialtypeinterpratation.44">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.42"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.43" supertypeInterpretation="//@partialtypeinterpratation.44">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.43"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.44" supertypeInterpretation="//@partialtypeinterpratation.44">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.44"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.45" supertypeInterpretation="//@partialtypeinterpratation.44">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.45"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.46" supertypeInterpretation="//@partialtypeinterpratation.51 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.46"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.47" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.47"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.48" supertypeInterpretation="//@partialtypeinterpratation.51 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.48"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.49" supertypeInterpretation="//@partialtypeinterpratation.51 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.49"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.50" supertypeInterpretation="//@partialtypeinterpratation.51 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.50"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.51" supertypeInterpretation="//@partialtypeinterpratation.51 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.51"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.52" supertypeInterpretation="//@partialtypeinterpratation.51 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.52"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.53" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.53"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.54" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.54"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.55" supertypeInterpretation="//@partialtypeinterpratation.60 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.55"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.56" supertypeInterpretation="//@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.56"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.57" supertypeInterpretation="//@partialtypeinterpratation.60 //@partialtypeinterpratation.9">
+    <interpretationOf href="config/output/debug//generation.logicproblem#//@types.57"/>
+  </partialtypeinterpratation>
+  <openWorldElements xsi:type="partialinterpretation:StringElement" name="New Strings"/>
+  <openWorldElements name="New Objects"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.4"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.5"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.6"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.7"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.8"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.9"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.10"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.11"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.12"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.13"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.14"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.15"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.16"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.17"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.18"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.19"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.20"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.21"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.22"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.23"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.24"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.25"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.26"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.27"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.28"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.29"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.30"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.31"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.32"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.33"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.34"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.35"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.36"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.37"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.38"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.39"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.40"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.41"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.42"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.43"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.44"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.45"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.46"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.47"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.48"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.49"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.50"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.51"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.52"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.53"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.54"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.55"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.56"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.57"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.58"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.59"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.60"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.61"/>
+</partialinterpretation:PartialInterpretation>
