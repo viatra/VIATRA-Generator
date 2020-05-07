@@ -10,6 +10,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.Binary
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PDisjunction
 
 class RelationDefinitionIndexer {
 	public val PatternGenerator base;
@@ -23,7 +24,8 @@ class RelationDefinitionIndexer {
 	def generateRelationDefinitions(
 		LogicProblem problem,
 		Iterable<RelationDefinition> relations,
-		Map<String,PQuery> fqn2PQuery) {
+		Map<String,PQuery> fqn2PQuery)
+	{
 		val relation2PQuery = relations.toInvertedMap[
 			annotations.filter(TransfomedViatraQuery).head.patternFullyQualifiedName.lookup(fqn2PQuery)
 		]
@@ -67,11 +69,12 @@ class RelationDefinitionIndexer {
 	
 	private def transformPattern(RelationDefinition relation, PQuery p, Modality modality) {
 		try {
+		val bodies = (relation.annotations.filter(TransfomedViatraQuery).head.optimizedDisjunction as PDisjunction).bodies
 		return '''
 			private pattern «relationDefinitionName(relation,modality)»(
 				problem:LogicProblem, interpretation:PartialInterpretation,
 				«FOR param : p.parameters SEPARATOR ', '»var_«param.name»«ENDFOR»)
-			«FOR body : p.disjunctBodies.bodies SEPARATOR "or"»{
+			«FOR body : bodies SEPARATOR "or"»{
 				find interpretation(problem,interpretation);
 				«FOR constraint : body.constraints»
 					«this.constraintTransformer.transformConstraint(constraint,modality,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»

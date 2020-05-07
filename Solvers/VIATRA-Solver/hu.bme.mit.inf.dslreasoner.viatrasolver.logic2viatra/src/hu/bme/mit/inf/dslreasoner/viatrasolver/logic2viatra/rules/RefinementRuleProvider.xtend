@@ -90,7 +90,7 @@ class RefinementRuleProvider {
 		if(containmentRelation !== null) {
 			if(inverseRelation!== null) {
 				ruleBuilder.action[match |
-					//println(name)
+					println(name)
 					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
@@ -115,7 +115,7 @@ class RefinementRuleProvider {
 				]
 			} else {
 				ruleBuilder.action[match |
-					//println(name)
+					println(name)
 					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
@@ -139,6 +139,7 @@ class RefinementRuleProvider {
 			}
 		} else {
 			ruleBuilder.action[match |
+				println(name)
 				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation
@@ -210,7 +211,7 @@ class RefinementRuleProvider {
 									)
 							}
 						}
-					} else if(relation.parameters instanceof PrimitiveTypeReference) {
+					} else if(relation.parameters.get(1) instanceof PrimitiveTypeReference) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
 						for(var times=0; times<number; times++) {
 							recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
@@ -230,10 +231,13 @@ class RefinementRuleProvider {
 		// Doing the recursion
 		var objectCreations = new LinkedList(recursiveObjectCreation.values.flatten.toList)
 		for(objectCreation : objectCreations) {
-			val newlyCreatedType = (objectCreation.typeInterpretation as PartialComplexTypeInterpretation).interpretationOf
-			if(recursiveObjectCreation.containsKey(newlyCreatedType)) {
-				val actionsWhenTypeCreated = recursiveObjectCreation.get(newlyCreatedType)
-				objectCreation.recursiveConstructors+=actionsWhenTypeCreated
+			val newInterpretation = objectCreation.typeInterpretation
+			if(newInterpretation instanceof PartialComplexTypeInterpretation) {
+				val newlyCreatedType = newInterpretation.interpretationOf
+				if(recursiveObjectCreation.containsKey(newlyCreatedType)) {
+					val actionsWhenTypeCreated = recursiveObjectCreation.get(newlyCreatedType)
+					objectCreation.recursiveConstructors+=actionsWhenTypeCreated
+				}
 			}
 		}
 		
@@ -246,7 +250,7 @@ class RefinementRuleProvider {
 				} else {
 					reachable = reachable.map[it.recursiveConstructors].flatten.toList
 				}
-			} while(reachable.empty)
+			} while(!reachable.empty)
 		}	
 		
 		return recursiveObjectCreation
@@ -413,13 +417,13 @@ class RefinementRuleProvider {
 		val newLink2 = factory2.createBinaryElementRelationLink => [it.param1 = newElement it.param2 = container]
 		inverseRelationInterpretation.relationlinks+=newLink2
 		
+		// Scope propagation
+		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
 			createObjectAction(nameNewElement,newConstructor,newElement,scopePropagator)
 		}
-		
-		// Scope propagation
-		scopePropagator.propagateAdditionToType(typeInterpretation)
 		
 		return newElement
 	}
@@ -451,13 +455,13 @@ class RefinementRuleProvider {
 		val newLink = factory2.createBinaryElementRelationLink => [it.param1 = container it.param2 = newElement]
 		relationInterpretation.relationlinks+=newLink
 		
+		// Scope propagation
+		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
 			createObjectAction(nameNewElement,newConstructor,newElement,scopePropagator)
 		}
-		
-		// Scope propagation
-		scopePropagator.propagateAdditionToType(typeInterpretation)
 		
 		return newElement
 	}
@@ -484,13 +488,13 @@ class RefinementRuleProvider {
 			typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
 		}
 		
+		// Scope propagation
+		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
 			createObjectAction(nameNewElement,newConstructor,newElement,scopePropagator)
 		}
-		
-		// Scope propagation
-		scopePropagator.propagateAdditionToType(typeInterpretation)
 		
 		return newElement
 	}

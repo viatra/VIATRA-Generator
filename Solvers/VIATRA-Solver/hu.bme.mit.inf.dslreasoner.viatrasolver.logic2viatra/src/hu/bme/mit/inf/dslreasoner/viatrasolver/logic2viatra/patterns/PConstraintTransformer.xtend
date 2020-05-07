@@ -143,7 +143,13 @@ class PConstraintTransformer {
 		return referPattern(pcall.referredQuery,params,modality,true,true)
 	}
 	dispatch def transformConstraint(ExportedParameter e, Modality modality, List<VariableMapping> variableMapping) {
-		return '''// «e.parameterName» is exported'''
+		val v1 = '''var_«e.parameterName»'''
+		val v2 = e.parameterVariable.canonizeName
+		if(v1.compareTo(v2) == 0) {
+			return '''// «v1» exported'''
+		} else {
+			return '''«v1» == «v2»;'''
+		}
 	}
 	dispatch def transformConstraint(ConstantValue c, Modality modality, List<VariableMapping> variableMapping) {
 		val target = c.supplierKey
@@ -189,24 +195,29 @@ class PConstraintTransformer {
 	def hasValue(PVariable v, String target, Modality m, List<VariableMapping> variableMapping) {
 		val typeReference = variableMapping.filter[it.sourcePVariable === v].head.targetLogicVariable.range as PrimitiveTypeReference
 		if(m.isMay) {
-			'''PrimitiveElement.valueSet(«v.canonizeName»,«v.valueSetted»); «hasValueExpression(typeReference,v,v.valueVariable)» check(!«v.valueSetted»||«v.valueVariable»==«target»));'''
+			'''PrimitiveElement.valueSet(«v.canonizeName»,«v.valueSetted»); «hasValueExpressionByRef(typeReference,v,v.valueVariable)» check(!«v.valueSetted»||«v.valueVariable»==«target»));'''
 		} else { // Must or current
-			'''PrimitiveElement.valueSet(«v.canonizeName»,true);«hasValueExpression(typeReference,v,target)»'''
+			'''PrimitiveElement.valueSet(«v.canonizeName»,true);«hasValueExpressionByRef(typeReference,v,target)»'''
 		}
 	}
 	
 	private def hasValueExpression(List<VariableMapping> variableMapping, PVariable v, String target) {
-		hasValueExpression(
-			variableMapping.filter[it.sourcePVariable === v].head.targetLogicVariable.range,
+		val mapping = variableMapping.filter[
+			val v2 = (it.sourcePVariable as PVariable)
+			v2 === v
+		].head
+		val range = mapping.targetLogicVariable.range
+		hasValueExpressionByRef(
+			range,
 			v,
 			target
 		)
 	}
-	private def dispatch hasValueExpression(BoolTypeReference typeReference, PVariable v, String target)	'''BooleanElement.value(«v.canonizeName»,«target»);'''
-	private def dispatch hasValueExpression(IntTypeReference typeReference, PVariable v, String target)		'''IntegerElement.value(«v.canonizeName»,«target»);'''
-	private def dispatch hasValueExpression(RealTypeReference typeReference, PVariable v, String target)	'''RealElement.value(«v.canonizeName»,«target»);'''
-	private def dispatch hasValueExpression(StringTypeReference typeReference, PVariable v, String target)	'''StringElement.value(«v.canonizeName»,«target»);'''
-	private def dispatch hasValueExpression(TypeReference typeReference, PVariable v, String target) {
+	private def dispatch hasValueExpressionByRef(BoolTypeReference typeReference, PVariable v, String target)	'''BooleanElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpressionByRef(IntTypeReference typeReference, PVariable v, String target)		'''IntegerElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpressionByRef(RealTypeReference typeReference, PVariable v, String target)	'''RealElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpressionByRef(StringTypeReference typeReference, PVariable v, String target)	'''StringElement.value(«v.canonizeName»,«target»);'''
+	private def dispatch hasValueExpressionByRef(TypeReference typeReference, PVariable v, String target) {
 		throw new UnsupportedOperationException('''Unsupported primitive type reference: «typeReference.class»''')
 	}
 	

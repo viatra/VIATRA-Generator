@@ -63,9 +63,12 @@ class ScopePropagator {
 	def public propagateAdditionToType(PartialTypeInterpratation t) {
 //		println('''Adding to «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
 		val targetScope = type2Scope.get(t)
-		targetScope.removeOne
-		val sups = superScopes.get(targetScope)
-		sups.forEach[removeOne]
+		if(targetScope!==null) {
+			targetScope.removeOne
+			val sups = superScopes.get(targetScope)
+			sups.forEach[removeOne]
+		}
+		
 		if(this.partialInterpretation.minNewElements > 0) {
 			this.partialInterpretation.minNewElements = this.partialInterpretation.minNewElements-1
 		}

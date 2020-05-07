@@ -155,7 +155,7 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 			textWithSubSup(parts.getOrNull(0),parts.getOrNull(1),parts.getOrNull(2),null)
 		} else {
 			val parts = ID.split("\\s+")
-			textWithSubSup(parts.get(0),parts.get(1),parts.getOrNull(2),null)
+			textWithSubSup(parts.getOrNull(0),parts.getOrNull(1),parts.getOrNull(2),null)
 		}
 		val label = Label.html(
 			'''<TABLE«tableStyle»>'''+
