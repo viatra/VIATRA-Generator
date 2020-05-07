@@ -29,19 +29,26 @@ class MeasurementScript {
 enum Domain {
 	fs,
 	ecore,
+	ecoreUnsat,
 	Yakindu,
+	YakinduUnsat,
 	FAM,
-	satellite
+	satellite,
+	satelliteUnsat
 }
 
 enum Scope {
 	none,
-	quantiles
+	quantiles,
+	upperOnly,
+	unsat,
+	exactly
 }
 
 enum Solver {
 	ViatraSolver,
-	AlloySolver
+	AlloySolver,
+	AlloyMiniSat
 }
 
 enum ScopePropagator {

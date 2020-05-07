@@ -59,15 +59,14 @@ class NeighbourhoodBasedPartialInterpretationStateCoder<ModelRep, NodeRep> exten
 	override doCreateActivationCode(IPatternMatch match) {
 		val size = match.specification.parameters.size
 		val res = new ArrayList(size)
-		var int index = 0
 		var int equivalenceHash = 0
 		val prime = 31
 
-		while (index < size) {
-			res.add(getCode(match.get(index)))
-			index++
+		for (var int index = 0; index < size; index++) {
+			val matchArgument = match.get(index)
+			res.add(getCode(matchArgument))
 			for (var i = 0; i < index; i++) {
-				val number = if (match.get(index) === match.get(i)) {
+				val number = if (matchArgument === match.get(i)) {
 						1
 					} else {
 						0

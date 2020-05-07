@@ -5,23 +5,13 @@
   <extension id="extension.derived.hu.bme.mit.inf.dslreasoner.domains.transima.fam.type" point="org.eclipse.viatra.query.runtime.base.wellbehaving.derived.features">
     <wellbehaving-derived-feature classifier-name="Function" feature-name="type" package-nsUri="http://www.inf.mit.bme.hu/viatrasolver/example/fam"/>
   </extension>
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated FamMetamodel -->
-      <package
-            uri="http://www.inf.mit.bme.hu/viatrasolver/example/fam"
-            class="functionalarchitecture.FunctionalarchitecturePackage"
-            genModel="model/FamMetamodel.genmodel"/>
-   </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated FamMetamodel -->
+    <package class="functionalarchitecture.FunctionalarchitecturePackage" genModel="model/FamMetamodel.genmodel" uri="http://www.inf.mit.bme.hu/viatrasolver/example/fam"/>
+  </extension>
   <extension id="hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns" id="hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns">
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.terminatorAndInformation"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.type"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.rootElements"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.parent"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.model"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.hasRoot"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.hasInt"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.hasLeaf"/>
     </group>
   </extension>
 </plugin>

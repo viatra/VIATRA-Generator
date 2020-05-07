@@ -8,6 +8,7 @@
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.entryInRegion"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.noEntryInRegion"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.multipleEntryInRegion"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.unsat_multipleEntryInRegion"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.transition"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.transitionFrom"/>
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.transitionTo"/>

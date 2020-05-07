@@ -59,6 +59,19 @@ pattern noLinkToGroundStation(Spacecraft : Spacecraft) {
 	neg find indirectCommunicationLink(Spacecraft, GroundStation);
 }
 
+//@Constraint(severity = "error", key = {Spacecraft}, message = "UNSAT")
+//pattern unsat_linkToGroundStation(Spacecraft : Spacecraft) {
+//	ConstellationMission.groundStationNetwork(Mission, GroundStation);
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	find indirectCommunicationLink(Spacecraft, GroundStation);
+//}
+
+@Constraint(severity = "error", key = {Mission}, message = "UNSAT")
+pattern unsat_linkToGroundStation(Mission : InterferometryMission) {
+	InterferometryMission(Mission);
+	neg find noLinkToGroundStation(_);
+}
+
 @Constraint(severity = "error", key = {Spacecraft},
 	message = "Spacecraft has no potential communication path to the ground station.")
 pattern noPotentialLinkToGroundStation(Spacecraft : Spacecraft) {

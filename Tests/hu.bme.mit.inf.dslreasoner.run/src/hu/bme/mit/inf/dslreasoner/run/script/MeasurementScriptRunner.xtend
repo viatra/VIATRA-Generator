@@ -54,6 +54,7 @@ import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandalone
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteBackendFactory
 import org.eclipse.xtend.lib.annotations.Data
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
 
 class MeasurementScriptRunner {
 	static val MODEL_SIZE_GAP = 0
@@ -75,9 +76,12 @@ class MeasurementScriptRunner {
 		metamodelLoader = switch (script.domain) {
 			case fs: new FileSystemLoader(inputWorkspace)
 			case ecore: new EcoreLoader(inputWorkspace)
+			case ecoreUnsat: new EcoreLoader(inputWorkspace, false)
 			case Yakindu: new YakinduLoader(inputWorkspace) => [useSynchronization = false; useComplexStates = true]
+			case YakinduUnsat: new YakinduLoader(inputWorkspace, false) => [useSynchronization = false; useComplexStates = true]
 			case FAM: new FAMLoader(inputWorkspace)
 			case satellite: new SatelliteLoader(inputWorkspace)
+			case satelliteUnsat: new SatelliteLoader(inputWorkspace, false)
 			default: throw new IllegalArgumentException("Unsupported domain: " + script.domain)
 		}
 	}
@@ -191,15 +195,17 @@ class MeasurementScriptRunner {
 		config
 	}
 
-	private def createAlloyConfig() {
+	private def createAlloyConfig(AlloyBackendSolver backendSolver) {
 		val config = new AlloySolverConfiguration
+		config.solver = backendSolver
 		config
 	}
 
 	private def createConfig(int modelSize) {
 		val config = switch (solver : script.solver) {
 			case ViatraSolver: createViatraConfig()
-			case AlloySolver: createAlloyConfig()
+			case AlloySolver: createAlloyConfig(AlloyBackendSolver.SAT4J)
+			case AlloyMiniSat: createAlloyConfig(AlloyBackendSolver.MiniSatJNI)
 			default: throw new IllegalArgumentException("Unknown solver: " + solver)
 		}
 		config.solutionScope.numberOfRequiredSolutions = 1
@@ -243,7 +249,8 @@ class MeasurementScriptRunner {
 
 		val solver = switch (solver : script.solver) {
 			case ViatraSolver: new ViatraReasoner
-			case AlloySolver: new AlloySolver
+			case AlloySolver,
+			case AlloyMiniSat: new AlloySolver
 			default: throw new IllegalArgumentException("Unknown solver: " + solver)
 		}
 		val result = solver.solve(problem, config, outputWorkspace)
@@ -284,14 +291,31 @@ class MeasurementScriptRunner {
 		} else {
 			val numberOfKnownElements = knownElements.values.flatten.toSet.size
 			val newElementCount = modelSize - numberOfKnownElements
-			config.typeScopes.minNewElements = newElementCount
-			config.typeScopes.maxNewElements = newElementCount + MODEL_SIZE_GAP
+			switch (script.scope) {
+				case upperOnly:
+					config.typeScopes.maxNewElements = newElementCount + MODEL_SIZE_GAP
+				case exactly: {
+					config.typeScopes.minNewElements = newElementCount
+					config.typeScopes.maxNewElements = newElementCount
+				}
+				default: {
+					config.typeScopes.minNewElements = newElementCount
+					config.typeScopes.maxNewElements = newElementCount + MODEL_SIZE_GAP
+				}
+			}
 		}
-		switch (script.scope) {
-			case none:
+		switch (scope : script.scope) {
+			case none,
+			case exactly:
 				return
-			case quantiles: {
-				val quantiles = metamodelLoader.typeQuantiles
+			case quantiles,
+			case unsat,
+			case upperOnly: {
+				val quantiles = if (scope == Scope.unsat) {
+					metamodelLoader.unsatTypeQuantiles
+				} else {
+					metamodelLoader.typeQuantiles
+				}
 				for (eClassInScope : eClassMapper.allClassesInScope(trace)) {
 					val quantile = quantiles.get(eClassInScope.name)
 					if (quantile !== null) {
@@ -301,7 +325,9 @@ class MeasurementScriptRunner {
 						val lowCount = Math.floor(modelSize * quantile.low) as int
 						val highCount = Math.ceil((modelSize + MODEL_SIZE_GAP) * quantile.high) as int
 //						println('''«type.name» «lowCount» «highCount»''')
-						config.typeScopes.minNewElementsByType.put(type, Math.max(lowCount - currentCount, 0))
+						if (script.scope != Scope.upperOnly) {
+							config.typeScopes.minNewElementsByType.put(type, Math.max(lowCount - currentCount, 0))
+						}
 						config.typeScopes.maxNewElementsByType.put(type, highCount - currentCount)
 					}
 				}

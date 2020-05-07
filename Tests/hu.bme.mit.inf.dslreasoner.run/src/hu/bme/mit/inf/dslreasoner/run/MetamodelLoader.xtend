@@ -40,6 +40,8 @@ class TypeQuantiles {
 }
 
 abstract class MetamodelLoader {
+	public static val UNSAT_PREFIX = "unsat_"
+	
 	protected val ReasonerWorkspace workspace
 
 	new(ReasonerWorkspace workspace) {
@@ -60,6 +62,10 @@ abstract class MetamodelLoader {
 
 	def Map<String, TypeQuantiles> getTypeQuantiles() {
 		emptyMap
+	}
+	
+	def Map<String, TypeQuantiles> getUnsatTypeQuantiles() {
+		throw new UnsupportedOperationException("This domain has no type quantiles for unsatisfiable problems")
 	}
 
 	def List<LinearTypeConstraintHint> getHints(Ecore2Logic ecore2Logic, Ecore2Logic_Trace trace) {
@@ -136,9 +142,15 @@ class YakinduLoader extends MetamodelLoader {
 	public static val patternsWithComplexStates = #["outgoingFromExit", "outgoingFromFinal", "choiceHasNoOutgoing",
 		"choiceHasNoIncoming"]
 
+	val boolean satisfiable	
+
 	new(ReasonerWorkspace workspace) {
+		this(workspace, true)
+	}
+
+	new(ReasonerWorkspace workspace, boolean satisfiable) {
 		super(workspace)
-		YakindummPackage.eINSTANCE.eClass
+		this.satisfiable = satisfiable
 	}
 
 	def setUseSynchronization(boolean useSynchronization) {
@@ -173,6 +185,8 @@ class YakinduLoader extends MetamodelLoader {
 			useSynchInThisLoad || !patternsWithSynchronization.exists[spec.fullyQualifiedName.endsWith(it)]
 		].filter [ spec |
 			useComplexStates || !patternsWithComplexStates.exists[spec.fullyQualifiedName.endsWith(it)]
+		].filter [
+			!satisfiable || !it.simpleName.startsWith(UNSAT_PREFIX)
 		].toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
@@ -205,6 +219,19 @@ class YakinduLoader extends MetamodelLoader {
 		#{
 			"Choice" -> new TypeQuantiles(0.118279569892473, 0.154020979020979),
 			"Entry" -> new TypeQuantiles(0.0283018867924528, 0.0620167525773196),
+			"Exit" -> new TypeQuantiles(0, 0),
+			"FinalState" -> new TypeQuantiles(0, 0),
+			"Region" -> new TypeQuantiles(0.0294117647058824, 0.0633258678611422),
+			"State" -> new TypeQuantiles(0.132023636740618, 0.175925925925926),
+//			"Statechart" -> new TypeQuantiles(0.00961538461538462, 0.010752688172043),
+			"Transition" -> new TypeQuantiles(0.581632653061224, 0.645161290322581)
+		}
+	}
+	
+	override getUnsatTypeQuantiles() {
+		#{
+			"Choice" -> new TypeQuantiles(0.118279569892473, 0.154020979020979),
+			"Entry" -> new TypeQuantiles(0.2, 0.4),
 			"Exit" -> new TypeQuantiles(0, 0),
 			"FinalState" -> new TypeQuantiles(0, 0),
 			"Region" -> new TypeQuantiles(0.0294117647058824, 0.0633258678611422),
@@ -276,9 +303,15 @@ class FileSystemLoader extends MetamodelLoader {
 }
 
 class EcoreLoader extends MetamodelLoader {
+	val boolean satisfiable	
 
 	new(ReasonerWorkspace workspace) {
+		this(workspace, true)
+	}
+
+	new(ReasonerWorkspace workspace, boolean satisfiable) {
 		super(workspace)
+		this.satisfiable = satisfiable
 	}
 
 	override loadMetamodel() {
@@ -307,7 +340,12 @@ class EcoreLoader extends MetamodelLoader {
 	override loadQueries(EcoreMetamodelDescriptor metamodel) {
 		val patternGroup = Ecore.instance
 		val patterns = patternGroup.specifications.toList
-		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
+		val allWfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
+		val wfPatterns = if (satisfiable) {
+			allWfPatterns.filter[!it.simpleName.startsWith(UNSAT_PREFIX)].toSet
+		} else {
+			allWfPatterns
+		}
 		val derivedFeatures = new HashMap
 		return new ViatraQuerySetDescriptor(
 			patterns,
@@ -346,9 +384,15 @@ class EcoreLoader extends MetamodelLoader {
 }
 
 class SatelliteLoader extends MetamodelLoader {
+	val boolean satisfiable	
 
 	new(ReasonerWorkspace workspace) {
+		this(workspace, true)
+	}
+
+	new(ReasonerWorkspace workspace, boolean satisfiable) {
 		super(workspace)
+		this.satisfiable = satisfiable
 	}
 
 	override loadMetamodel() {
@@ -371,7 +415,9 @@ class SatelliteLoader extends MetamodelLoader {
 
 	override loadQueries(EcoreMetamodelDescriptor metamodel) {
 		val i = SatelliteQueriesAll.instance
-		val patterns = i.specifications.toList
+		val patterns = i.specifications.filter [
+			!satisfiable || !it.simpleName.startsWith(UNSAT_PREFIX)
+		].toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
 		val res = new ViatraQuerySetDescriptor(
@@ -404,4 +450,15 @@ class SatelliteLoader extends MetamodelLoader {
 		}
 	}
 
+	override getUnsatTypeQuantiles() {
+		#{
+			"CubeSat3U" -> new TypeQuantiles(0.1, 0.25),
+			"CubeSat6U" -> new TypeQuantiles(0.1, 0.25),
+			"SmallSat" -> new TypeQuantiles(0.1, 0.25),
+			"UHFCommSubsystem" -> new TypeQuantiles(0.08, 0.1),
+			"XCommSubsystem" -> new TypeQuantiles(0, 0.1),
+			"KaCommSubsystem" -> new TypeQuantiles(0, 0.05),
+			"InterferometryPayload" -> new TypeQuantiles(0.15, 0.25)
+		}
+	}
 }

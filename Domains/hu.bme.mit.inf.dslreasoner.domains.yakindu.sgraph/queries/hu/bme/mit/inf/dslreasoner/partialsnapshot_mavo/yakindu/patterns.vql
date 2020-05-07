@@ -22,6 +22,12 @@ pattern multipleEntryInRegion(r : Region) {
 	e1 != e2;
 }
 
+@Constraint(severity="error", message="error", key = {sct})
+pattern unsat_multipleEntryInRegion(sct : Statechart) {
+	Statechart(sct);
+	neg find multipleEntryInRegion(_);
+}
+
 pattern transition(t : Transition, src : Vertex, trg : Vertex) {
 	Transition.source(t, src);
 	Transition.target(t, trg);
@@ -197,6 +203,11 @@ pattern SynchronizedRegionDoesNotHaveMultipleRegions(s : Synchronization, v : Ve
 	neg find hasMultipleRegions(c);
 }
 
+//@Constraint(severity="error", message="error", key = {sct})
+//pattern unsat_SynchronizedRegionDoesNotHaveMultipleRegions(sct : Statechart) {
+//	Statechart(sct);
+//	neg find SynchronizedRegionDoesNotHaveMultipleRegions(_, _);
+//}
 
 pattern hasMultipleRegions(composite: CompositeElement) {
 	CompositeElement.regions(composite,region1);

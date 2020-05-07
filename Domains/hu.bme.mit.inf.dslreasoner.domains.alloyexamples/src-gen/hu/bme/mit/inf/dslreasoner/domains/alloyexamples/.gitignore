@@ -54,3 +54,8 @@
 /.RootIsNotDir.java._trace
 /Dir.java
 /RootIsNotDir.java
+/.Unsat_loopInInheritance.java._trace
+/.Subpackage.java._trace
+/.Unsat_subpackage.java._trace
+/.Unsat_subpackageOrSelf.java._trace
+/.Unsat_topLevelPackageWithLoop.java._trace

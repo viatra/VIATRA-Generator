@@ -11,6 +11,16 @@ pattern loopInInheritence(a: EClass) {
 	find directSupertype+(a,a);
 }
 
+pattern unsat_subpackage(a: EPackage, b: EPackage) {
+	EPackage.eSubpackages(a, b);
+}
+
+@Constraint(key={p}, severity="error", message="error")
+pattern unsat_loopInInheritance(p: EPackage) {
+	neg find unsat_subpackage(_, p);
+	neg find loopInInheritence(_);
+}
+
 pattern opposite(a:EReference, b: EReference) {
 	EReference.eOpposite(a,b);
 }
