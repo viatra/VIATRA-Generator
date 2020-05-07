@@ -317,7 +317,7 @@
       </operands>
     </value>
   </relations>
-  <containmentHierarchies typesOrderedInHierarchy="//@types.1 //@types.0" containmentRelations="//@relations.0"/>
+  <containmentHierarchies typesOrderedInHierarchy="//@types.0 //@types.1" containmentRelations="//@relations.0"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.0" relation="//@relations.2" upper="2"/>
   <annotations xsi:type="ecore2logicannotations:InverseRelationAssertion" target="//@assertions.1" inverseA="//@relations.1" inverseB="//@relations.2"/>
   <annotations xsi:type="ecore2logicannotations:UpperMultiplicityAssertion" target="//@assertions.2" relation="//@relations.3" upper="1"/>

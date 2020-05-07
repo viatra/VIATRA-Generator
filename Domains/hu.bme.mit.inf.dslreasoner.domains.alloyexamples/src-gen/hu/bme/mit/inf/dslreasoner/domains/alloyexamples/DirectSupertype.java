@@ -1,9 +1,8 @@
 /**
- * Generated from platform:/resource/case.study.familyTree.run/src/queries/familyTreeConstraints.vql
+ * Generated from platform:/resource/hu.bme.mit.inf.dslreasoner.domains.alloyexamples/patterns/hu/bme/mit/inf/dslreasoner/domains/alloyexamples/Ecore.vql
  */
-package queries;
+package hu.bme.mit.inf.dslreasoner.domains.alloyexamples;
 
-import familytree.Member;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -24,14 +23,12 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
-import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -39,18 +36,14 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import queries.MemberHasParent;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
  *         <code><pre>
- *         {@literal @}Constraint(message="twoMembersHaveNoParent", severity="error", key={m1, m2})
- *         pattern twoMembersHaveNoParent(m1:Member, m2:Member) = {
- *         	neg find memberHasParent(m1);
- *         	neg find memberHasParent(m2);
- *         	m1 != m2;
+ *         pattern directSupertype(a: EClass, b:EClass) {
+ *         	EClass.eSuperTypes(a,b);
  *         }
  * </pre></code>
  * 
@@ -59,9 +52,9 @@ import queries.MemberHasParent;
  * 
  */
 @SuppressWarnings("all")
-public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecification<TwoMembersHaveNoParent.Matcher> {
+public final class DirectSupertype extends BaseGeneratedEMFQuerySpecification<DirectSupertype.Matcher> {
   /**
-   * Pattern-specific match representation of the queries.twoMembersHaveNoParent pattern,
+   * Pattern-specific match representation of the hu.bme.mit.inf.dslreasoner.domains.alloyexamples.directSupertype pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -73,22 +66,22 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Member fM1;
+    private EClass fA;
     
-    private Member fM2;
+    private EClass fB;
     
-    private static List<String> parameterNames = makeImmutableList("m1", "m2");
+    private static List<String> parameterNames = makeImmutableList("a", "b");
     
-    private Match(final Member pM1, final Member pM2) {
-      this.fM1 = pM1;
-      this.fM2 = pM2;
+    private Match(final EClass pA, final EClass pB) {
+      this.fA = pA;
+      this.fB = pB;
     }
     
     @Override
     public Object get(final String parameterName) {
       switch(parameterName) {
-          case "m1": return this.fM1;
-          case "m2": return this.fM2;
+          case "a": return this.fA;
+          case "b": return this.fB;
           default: return null;
       }
     }
@@ -96,75 +89,75 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
     @Override
     public Object get(final int index) {
       switch(index) {
-          case 0: return this.fM1;
-          case 1: return this.fM2;
+          case 0: return this.fA;
+          case 1: return this.fB;
           default: return null;
       }
     }
     
-    public Member getM1() {
-      return this.fM1;
+    public EClass getA() {
+      return this.fA;
     }
     
-    public Member getM2() {
-      return this.fM2;
+    public EClass getB() {
+      return this.fB;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("m1".equals(parameterName) ) {
-          this.fM1 = (Member) newValue;
+      if ("a".equals(parameterName) ) {
+          this.fA = (EClass) newValue;
           return true;
       }
-      if ("m2".equals(parameterName) ) {
-          this.fM2 = (Member) newValue;
+      if ("b".equals(parameterName) ) {
+          this.fB = (EClass) newValue;
           return true;
       }
       return false;
     }
     
-    public void setM1(final Member pM1) {
+    public void setA(final EClass pA) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fM1 = pM1;
+      this.fA = pA;
     }
     
-    public void setM2(final Member pM2) {
+    public void setB(final EClass pB) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fM2 = pM2;
+      this.fB = pB;
     }
     
     @Override
     public String patternName() {
-      return "queries.twoMembersHaveNoParent";
+      return "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.directSupertype";
     }
     
     @Override
     public List<String> parameterNames() {
-      return TwoMembersHaveNoParent.Match.parameterNames;
+      return DirectSupertype.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fM1, fM2};
+      return new Object[]{fA, fB};
     }
     
     @Override
-    public TwoMembersHaveNoParent.Match toImmutable() {
-      return isMutable() ? newMatch(fM1, fM2) : this;
+    public DirectSupertype.Match toImmutable() {
+      return isMutable() ? newMatch(fA, fB) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"m1\"=" + prettyPrintValue(fM1) + ", ");
-      result.append("\"m2\"=" + prettyPrintValue(fM2));
+      result.append("\"a\"=" + prettyPrintValue(fA) + ", ");
+      result.append("\"b\"=" + prettyPrintValue(fB));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fM1, fM2);
+      return Objects.hash(fA, fB);
     }
     
     @Override
@@ -174,9 +167,9 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof TwoMembersHaveNoParent.Match)) {
-          TwoMembersHaveNoParent.Match other = (TwoMembersHaveNoParent.Match) obj;
-          return Objects.equals(fM1, other.fM1) && Objects.equals(fM2, other.fM2);
+      if ((obj instanceof DirectSupertype.Match)) {
+          DirectSupertype.Match other = (DirectSupertype.Match) obj;
+          return Objects.equals(fA, other.fA) && Objects.equals(fB, other.fB);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -188,8 +181,8 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
     }
     
     @Override
-    public TwoMembersHaveNoParent specification() {
-      return TwoMembersHaveNoParent.instance();
+    public DirectSupertype specification() {
+      return DirectSupertype.instance();
     }
     
     /**
@@ -199,7 +192,7 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @return the empty match.
      * 
      */
-    public static TwoMembersHaveNoParent.Match newEmptyMatch() {
+    public static DirectSupertype.Match newEmptyMatch() {
       return new Mutable(null, null);
     }
     
@@ -207,31 +200,31 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static TwoMembersHaveNoParent.Match newMutableMatch(final Member pM1, final Member pM2) {
-      return new Mutable(pM1, pM2);
+    public static DirectSupertype.Match newMutableMatch(final EClass pA, final EClass pB) {
+      return new Mutable(pA, pB);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static TwoMembersHaveNoParent.Match newMatch(final Member pM1, final Member pM2) {
-      return new Immutable(pM1, pM2);
+    public static DirectSupertype.Match newMatch(final EClass pA, final EClass pB) {
+      return new Immutable(pA, pB);
     }
     
-    private static final class Mutable extends TwoMembersHaveNoParent.Match {
-      Mutable(final Member pM1, final Member pM2) {
-        super(pM1, pM2);
+    private static final class Mutable extends DirectSupertype.Match {
+      Mutable(final EClass pA, final EClass pB) {
+        super(pA, pB);
       }
       
       @Override
@@ -240,9 +233,9 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
       }
     }
     
-    private static final class Immutable extends TwoMembersHaveNoParent.Match {
-      Immutable(final Member pM1, final Member pM2) {
-        super(pM1, pM2);
+    private static final class Immutable extends DirectSupertype.Match {
+      Immutable(final EClass pA, final EClass pB) {
+        super(pA, pB);
       }
       
       @Override
@@ -253,7 +246,7 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
   }
   
   /**
-   * Generated pattern matcher API of the queries.twoMembersHaveNoParent pattern,
+   * Generated pattern matcher API of the hu.bme.mit.inf.dslreasoner.domains.alloyexamples.directSupertype pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -263,19 +256,16 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
    * 
    * <p>Original source:
    * <code><pre>
-   * {@literal @}Constraint(message="twoMembersHaveNoParent", severity="error", key={m1, m2})
-   * pattern twoMembersHaveNoParent(m1:Member, m2:Member) = {
-   * 	neg find memberHasParent(m1);
-   * 	neg find memberHasParent(m2);
-   * 	m1 != m2;
+   * pattern directSupertype(a: EClass, b:EClass) {
+   * 	EClass.eSuperTypes(a,b);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see TwoMembersHaveNoParent
+   * @see DirectSupertype
    * 
    */
-  public static class Matcher extends BaseMatcher<TwoMembersHaveNoParent.Match> {
+  public static class Matcher extends BaseMatcher<DirectSupertype.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -284,7 +274,7 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static TwoMembersHaveNoParent.Matcher on(final ViatraQueryEngine engine) {
+    public static DirectSupertype.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -299,15 +289,15 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static TwoMembersHaveNoParent.Matcher create() {
+    public static DirectSupertype.Matcher create() {
       return new Matcher();
     }
     
-    private static final int POSITION_M1 = 0;
+    private static final int POSITION_A = 0;
     
-    private static final int POSITION_M2 = 1;
+    private static final int POSITION_B = 1;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(TwoMembersHaveNoParent.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(DirectSupertype.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -323,13 +313,13 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<TwoMembersHaveNoParent.Match> getAllMatches(final Member pM1, final Member pM2) {
-      return rawStreamAllMatches(new Object[]{pM1, pM2}).collect(Collectors.toSet());
+    public Collection<DirectSupertype.Match> getAllMatches(final EClass pA, final EClass pB) {
+      return rawStreamAllMatches(new Object[]{pA, pB}).collect(Collectors.toSet());
     }
     
     /**
@@ -338,105 +328,105 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<TwoMembersHaveNoParent.Match> streamAllMatches(final Member pM1, final Member pM2) {
-      return rawStreamAllMatches(new Object[]{pM1, pM2});
+    public Stream<DirectSupertype.Match> streamAllMatches(final EClass pA, final EClass pB) {
+      return rawStreamAllMatches(new Object[]{pA, pB});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<TwoMembersHaveNoParent.Match> getOneArbitraryMatch(final Member pM1, final Member pM2) {
-      return rawGetOneArbitraryMatch(new Object[]{pM1, pM2});
+    public Optional<DirectSupertype.Match> getOneArbitraryMatch(final EClass pA, final EClass pB) {
+      return rawGetOneArbitraryMatch(new Object[]{pA, pB});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Member pM1, final Member pM2) {
-      return rawHasMatch(new Object[]{pM1, pM2});
+    public boolean hasMatch(final EClass pA, final EClass pB) {
+      return rawHasMatch(new Object[]{pA, pB});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Member pM1, final Member pM2) {
-      return rawCountMatches(new Object[]{pM1, pM2});
+    public int countMatches(final EClass pA, final EClass pB) {
+      return rawCountMatches(new Object[]{pA, pB});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Member pM1, final Member pM2, final Consumer<? super TwoMembersHaveNoParent.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pM1, pM2}, processor);
+    public boolean forOneArbitraryMatch(final EClass pA, final EClass pB, final Consumer<? super DirectSupertype.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pA, pB}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pM1 the fixed value of pattern parameter m1, or null if not bound.
-     * @param pM2 the fixed value of pattern parameter m2, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
+     * @param pB the fixed value of pattern parameter b, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public TwoMembersHaveNoParent.Match newMatch(final Member pM1, final Member pM2) {
-      return TwoMembersHaveNoParent.Match.newMatch(pM1, pM2);
+    public DirectSupertype.Match newMatch(final EClass pA, final EClass pB) {
+      return DirectSupertype.Match.newMatch(pA, pB);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Member> rawStreamAllValuesOfm1(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_M1, parameters).map(Member.class::cast);
+    protected Stream<EClass> rawStreamAllValuesOfa(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_A, parameters).map(EClass.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm1() {
-      return rawStreamAllValuesOfm1(emptyArray()).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfa() {
+      return rawStreamAllValuesOfa(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm1() {
-      return rawStreamAllValuesOfm1(emptyArray());
+    public Stream<EClass> streamAllValuesOfa() {
+      return rawStreamAllValuesOfa(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -445,12 +435,12 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm1(final TwoMembersHaveNoParent.Match partialMatch) {
-      return rawStreamAllValuesOfm1(partialMatch.toArray());
+    public Stream<EClass> streamAllValuesOfa(final DirectSupertype.Match partialMatch) {
+      return rawStreamAllValuesOfa(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -459,57 +449,57 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm1(final Member pM2) {
-      return rawStreamAllValuesOfm1(new Object[]{null, pM2});
+    public Stream<EClass> streamAllValuesOfa(final EClass pB) {
+      return rawStreamAllValuesOfa(new Object[]{null, pB});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm1(final TwoMembersHaveNoParent.Match partialMatch) {
-      return rawStreamAllValuesOfm1(partialMatch.toArray()).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfa(final DirectSupertype.Match partialMatch) {
+      return rawStreamAllValuesOfa(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m1.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm1(final Member pM2) {
-      return rawStreamAllValuesOfm1(new Object[]{null, pM2}).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfa(final EClass pB) {
+      return rawStreamAllValuesOfa(new Object[]{null, pB}).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Member> rawStreamAllValuesOfm2(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_M2, parameters).map(Member.class::cast);
+    protected Stream<EClass> rawStreamAllValuesOfb(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_B, parameters).map(EClass.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm2() {
-      return rawStreamAllValuesOfm2(emptyArray()).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfb() {
+      return rawStreamAllValuesOfb(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm2() {
-      return rawStreamAllValuesOfm2(emptyArray());
+    public Stream<EClass> streamAllValuesOfb() {
+      return rawStreamAllValuesOfb(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -518,12 +508,12 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm2(final TwoMembersHaveNoParent.Match partialMatch) {
-      return rawStreamAllValuesOfm2(partialMatch.toArray());
+    public Stream<EClass> streamAllValuesOfb(final DirectSupertype.Match partialMatch) {
+      return rawStreamAllValuesOfb(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -532,32 +522,32 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm2(final Member pM1) {
-      return rawStreamAllValuesOfm2(new Object[]{pM1, null});
+    public Stream<EClass> streamAllValuesOfb(final EClass pA) {
+      return rawStreamAllValuesOfb(new Object[]{pA, null});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm2(final TwoMembersHaveNoParent.Match partialMatch) {
-      return rawStreamAllValuesOfm2(partialMatch.toArray()).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfb(final DirectSupertype.Match partialMatch) {
+      return rawStreamAllValuesOfb(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m2.
+     * Retrieve the set of values that occur in matches for b.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm2(final Member pM1) {
-      return rawStreamAllValuesOfm2(new Object[]{pM1, null}).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfb(final EClass pA) {
+      return rawStreamAllValuesOfb(new Object[]{pA, null}).collect(Collectors.toSet());
     }
     
     @Override
-    protected TwoMembersHaveNoParent.Match tupleToMatch(final Tuple t) {
+    protected DirectSupertype.Match tupleToMatch(final Tuple t) {
       try {
-          return TwoMembersHaveNoParent.Match.newMatch((Member) t.get(POSITION_M1), (Member) t.get(POSITION_M2));
+          return DirectSupertype.Match.newMatch((EClass) t.get(POSITION_A), (EClass) t.get(POSITION_B));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -565,9 +555,9 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
     }
     
     @Override
-    protected TwoMembersHaveNoParent.Match arrayToMatch(final Object[] match) {
+    protected DirectSupertype.Match arrayToMatch(final Object[] match) {
       try {
-          return TwoMembersHaveNoParent.Match.newMatch((Member) match[POSITION_M1], (Member) match[POSITION_M2]);
+          return DirectSupertype.Match.newMatch((EClass) match[POSITION_A], (EClass) match[POSITION_B]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -575,9 +565,9 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
     }
     
     @Override
-    protected TwoMembersHaveNoParent.Match arrayToMatchMutable(final Object[] match) {
+    protected DirectSupertype.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return TwoMembersHaveNoParent.Match.newMutableMatch((Member) match[POSITION_M1], (Member) match[POSITION_M2]);
+          return DirectSupertype.Match.newMutableMatch((EClass) match[POSITION_A], (EClass) match[POSITION_B]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -589,12 +579,12 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<TwoMembersHaveNoParent.Matcher> querySpecification() {
-      return TwoMembersHaveNoParent.instance();
+    public static IQuerySpecification<DirectSupertype.Matcher> querySpecification() {
+      return DirectSupertype.instance();
     }
   }
   
-  private TwoMembersHaveNoParent() {
+  private DirectSupertype() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -603,7 +593,7 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static TwoMembersHaveNoParent instance() {
+  public static DirectSupertype instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -612,35 +602,35 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
   }
   
   @Override
-  protected TwoMembersHaveNoParent.Matcher instantiate(final ViatraQueryEngine engine) {
-    return TwoMembersHaveNoParent.Matcher.on(engine);
+  protected DirectSupertype.Matcher instantiate(final ViatraQueryEngine engine) {
+    return DirectSupertype.Matcher.on(engine);
   }
   
   @Override
-  public TwoMembersHaveNoParent.Matcher instantiate() {
-    return TwoMembersHaveNoParent.Matcher.create();
+  public DirectSupertype.Matcher instantiate() {
+    return DirectSupertype.Matcher.create();
   }
   
   @Override
-  public TwoMembersHaveNoParent.Match newEmptyMatch() {
-    return TwoMembersHaveNoParent.Match.newEmptyMatch();
+  public DirectSupertype.Match newEmptyMatch() {
+    return DirectSupertype.Match.newEmptyMatch();
   }
   
   @Override
-  public TwoMembersHaveNoParent.Match newMatch(final Object... parameters) {
-    return TwoMembersHaveNoParent.Match.newMatch((familytree.Member) parameters[0], (familytree.Member) parameters[1]);
+  public DirectSupertype.Match newMatch(final Object... parameters) {
+    return DirectSupertype.Match.newMatch((org.eclipse.emf.ecore.EClass) parameters[0], (org.eclipse.emf.ecore.EClass) parameters[1]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link TwoMembersHaveNoParent} to be created 
+   * Inner class allowing the singleton instance of {@link DirectSupertype} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link TwoMembersHaveNoParent#instance()}.
+   *     but rather at the first call to {@link DirectSupertype#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final TwoMembersHaveNoParent INSTANCE = new TwoMembersHaveNoParent();
+    private static final DirectSupertype INSTANCE = new DirectSupertype();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -658,13 +648,13 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final TwoMembersHaveNoParent.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final DirectSupertype.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_m1 = new PParameter("m1", "familytree.Member", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/familytree", "Member")), PParameterDirection.INOUT);
+    private final PParameter parameter_a = new PParameter("a", "org.eclipse.emf.ecore.EClass", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EClass")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_m2 = new PParameter("m2", "familytree.Member", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/familytree", "Member")), PParameterDirection.INOUT);
+    private final PParameter parameter_b = new PParameter("b", "org.eclipse.emf.ecore.EClass", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EClass")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_m1, parameter_m2);
+    private final List<PParameter> parameters = Arrays.asList(parameter_a, parameter_b);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -672,12 +662,12 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
     
     @Override
     public String getFullyQualifiedName() {
-      return "queries.twoMembersHaveNoParent";
+      return "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.directSupertype";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("m1","m2");
+      return Arrays.asList("a","b");
     }
     
     @Override
@@ -691,31 +681,21 @@ public final class TwoMembersHaveNoParent extends BaseGeneratedEMFQuerySpecifica
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_m1 = body.getOrCreateVariableByName("m1");
-          PVariable var_m2 = body.getOrCreateVariableByName("m2");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_m1), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_m2), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
+          PVariable var_a = body.getOrCreateVariableByName("a");
+          PVariable var_b = body.getOrCreateVariableByName("b");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_a), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_b), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_m1, parameter_m1),
-             new ExportedParameter(body, var_m2, parameter_m2)
+             new ExportedParameter(body, var_a, parameter_a),
+             new ExportedParameter(body, var_b, parameter_b)
           ));
-          // 	neg find memberHasParent(m1)
-          new NegativePatternCall(body, Tuples.flatTupleOf(var_m1), MemberHasParent.instance().getInternalQueryRepresentation());
-          // 	neg find memberHasParent(m2)
-          new NegativePatternCall(body, Tuples.flatTupleOf(var_m2), MemberHasParent.instance().getInternalQueryRepresentation());
-          // 	m1 != m2
-          new Inequality(body, var_m1, var_m2);
+          // 	EClass.eSuperTypes(a,b)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_a), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass")));
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_a, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass", "eSuperTypes")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass")));
+          new Equality(body, var__virtual_0_, var_b);
           bodies.add(body);
-      }
-      {
-          PAnnotation annotation = new PAnnotation("Constraint");
-          annotation.addAttribute("message", "twoMembersHaveNoParent");
-          annotation.addAttribute("severity", "error");
-          annotation.addAttribute("key", Arrays.asList(new Object[] {
-                              new ParameterReference("m1"), 
-                              new ParameterReference("m2")
-                              }));
-          addAnnotation(annotation);
       }
       return bodies;
     }

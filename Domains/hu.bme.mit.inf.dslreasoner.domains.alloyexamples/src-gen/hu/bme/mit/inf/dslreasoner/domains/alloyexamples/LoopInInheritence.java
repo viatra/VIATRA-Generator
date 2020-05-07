@@ -1,9 +1,9 @@
 /**
- * Generated from platform:/resource/case.study.familyTree.run/src/queries/familyTreeConstraints.vql
+ * Generated from platform:/resource/hu.bme.mit.inf.dslreasoner.domains.alloyexamples/patterns/hu/bme/mit/inf/dslreasoner/domains/alloyexamples/Ecore.vql
  */
-package queries;
+package hu.bme.mit.inf.dslreasoner.domains.alloyexamples;
 
-import familytree.Member;
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.DirectSupertype;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -24,14 +24,13 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.BinaryTransitiveClosure;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -45,11 +44,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         {@literal @}Constraint(message="memberIsItsOwnParent", severity="error", key={m})
- *         pattern memberIsItsOwnParent(m: Member) = {
- *         	FamilyTree.members(_, m);
- *         	Member.parents(m, p);
- *         	m == p;
+ *         {@literal @}Constraint(key={a}, severity="error", message="error")
+ *         pattern loopInInheritence(a: EClass) {
+ *         	find directSupertype+(a,a);
  *         }
  * </pre></code>
  * 
@@ -58,9 +55,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecification<MemberIsItsOwnParent.Matcher> {
+public final class LoopInInheritence extends BaseGeneratedEMFQuerySpecification<LoopInInheritence.Matcher> {
   /**
-   * Pattern-specific match representation of the queries.memberIsItsOwnParent pattern,
+   * Pattern-specific match representation of the hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -72,18 +69,18 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Member fM;
+    private EClass fA;
     
-    private static List<String> parameterNames = makeImmutableList("m");
+    private static List<String> parameterNames = makeImmutableList("a");
     
-    private Match(final Member pM) {
-      this.fM = pM;
+    private Match(final EClass pA) {
+      this.fA = pA;
     }
     
     @Override
     public Object get(final String parameterName) {
       switch(parameterName) {
-          case "m": return this.fM;
+          case "a": return this.fA;
           default: return null;
       }
     }
@@ -91,60 +88,60 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
     @Override
     public Object get(final int index) {
       switch(index) {
-          case 0: return this.fM;
+          case 0: return this.fA;
           default: return null;
       }
     }
     
-    public Member getM() {
-      return this.fM;
+    public EClass getA() {
+      return this.fA;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("m".equals(parameterName) ) {
-          this.fM = (Member) newValue;
+      if ("a".equals(parameterName) ) {
+          this.fA = (EClass) newValue;
           return true;
       }
       return false;
     }
     
-    public void setM(final Member pM) {
+    public void setA(final EClass pA) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fM = pM;
+      this.fA = pA;
     }
     
     @Override
     public String patternName() {
-      return "queries.memberIsItsOwnParent";
+      return "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence";
     }
     
     @Override
     public List<String> parameterNames() {
-      return MemberIsItsOwnParent.Match.parameterNames;
+      return LoopInInheritence.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fM};
+      return new Object[]{fA};
     }
     
     @Override
-    public MemberIsItsOwnParent.Match toImmutable() {
-      return isMutable() ? newMatch(fM) : this;
+    public LoopInInheritence.Match toImmutable() {
+      return isMutable() ? newMatch(fA) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"m\"=" + prettyPrintValue(fM));
+      result.append("\"a\"=" + prettyPrintValue(fA));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fM);
+      return Objects.hash(fA);
     }
     
     @Override
@@ -154,9 +151,9 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof MemberIsItsOwnParent.Match)) {
-          MemberIsItsOwnParent.Match other = (MemberIsItsOwnParent.Match) obj;
-          return Objects.equals(fM, other.fM);
+      if ((obj instanceof LoopInInheritence.Match)) {
+          LoopInInheritence.Match other = (LoopInInheritence.Match) obj;
+          return Objects.equals(fA, other.fA);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -168,8 +165,8 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    public MemberIsItsOwnParent specification() {
-      return MemberIsItsOwnParent.instance();
+    public LoopInInheritence specification() {
+      return LoopInInheritence.instance();
     }
     
     /**
@@ -179,7 +176,7 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
      * @return the empty match.
      * 
      */
-    public static MemberIsItsOwnParent.Match newEmptyMatch() {
+    public static LoopInInheritence.Match newEmptyMatch() {
       return new Mutable(null);
     }
     
@@ -187,29 +184,29 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static MemberIsItsOwnParent.Match newMutableMatch(final Member pM) {
-      return new Mutable(pM);
+    public static LoopInInheritence.Match newMutableMatch(final EClass pA) {
+      return new Mutable(pA);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static MemberIsItsOwnParent.Match newMatch(final Member pM) {
-      return new Immutable(pM);
+    public static LoopInInheritence.Match newMatch(final EClass pA) {
+      return new Immutable(pA);
     }
     
-    private static final class Mutable extends MemberIsItsOwnParent.Match {
-      Mutable(final Member pM) {
-        super(pM);
+    private static final class Mutable extends LoopInInheritence.Match {
+      Mutable(final EClass pA) {
+        super(pA);
       }
       
       @Override
@@ -218,9 +215,9 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
       }
     }
     
-    private static final class Immutable extends MemberIsItsOwnParent.Match {
-      Immutable(final Member pM) {
-        super(pM);
+    private static final class Immutable extends LoopInInheritence.Match {
+      Immutable(final EClass pA) {
+        super(pA);
       }
       
       @Override
@@ -231,7 +228,7 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
   }
   
   /**
-   * Generated pattern matcher API of the queries.memberIsItsOwnParent pattern,
+   * Generated pattern matcher API of the hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -241,19 +238,17 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
    * 
    * <p>Original source:
    * <code><pre>
-   * {@literal @}Constraint(message="memberIsItsOwnParent", severity="error", key={m})
-   * pattern memberIsItsOwnParent(m: Member) = {
-   * 	FamilyTree.members(_, m);
-   * 	Member.parents(m, p);
-   * 	m == p;
+   * {@literal @}Constraint(key={a}, severity="error", message="error")
+   * pattern loopInInheritence(a: EClass) {
+   * 	find directSupertype+(a,a);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see MemberIsItsOwnParent
+   * @see LoopInInheritence
    * 
    */
-  public static class Matcher extends BaseMatcher<MemberIsItsOwnParent.Match> {
+  public static class Matcher extends BaseMatcher<LoopInInheritence.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -262,7 +257,7 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static MemberIsItsOwnParent.Matcher on(final ViatraQueryEngine engine) {
+    public static LoopInInheritence.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -277,13 +272,13 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static MemberIsItsOwnParent.Matcher create() {
+    public static LoopInInheritence.Matcher create() {
       return new Matcher();
     }
     
-    private static final int POSITION_M = 0;
+    private static final int POSITION_A = 0;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(MemberIsItsOwnParent.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(LoopInInheritence.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -299,12 +294,12 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<MemberIsItsOwnParent.Match> getAllMatches(final Member pM) {
-      return rawStreamAllMatches(new Object[]{pM}).collect(Collectors.toSet());
+    public Collection<LoopInInheritence.Match> getAllMatches(final EClass pA) {
+      return rawStreamAllMatches(new Object[]{pA}).collect(Collectors.toSet());
     }
     
     /**
@@ -313,101 +308,101 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<MemberIsItsOwnParent.Match> streamAllMatches(final Member pM) {
-      return rawStreamAllMatches(new Object[]{pM});
+    public Stream<LoopInInheritence.Match> streamAllMatches(final EClass pA) {
+      return rawStreamAllMatches(new Object[]{pA});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<MemberIsItsOwnParent.Match> getOneArbitraryMatch(final Member pM) {
-      return rawGetOneArbitraryMatch(new Object[]{pM});
+    public Optional<LoopInInheritence.Match> getOneArbitraryMatch(final EClass pA) {
+      return rawGetOneArbitraryMatch(new Object[]{pA});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Member pM) {
-      return rawHasMatch(new Object[]{pM});
+    public boolean hasMatch(final EClass pA) {
+      return rawHasMatch(new Object[]{pA});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Member pM) {
-      return rawCountMatches(new Object[]{pM});
+    public int countMatches(final EClass pA) {
+      return rawCountMatches(new Object[]{pA});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Member pM, final Consumer<? super MemberIsItsOwnParent.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pM}, processor);
+    public boolean forOneArbitraryMatch(final EClass pA, final Consumer<? super LoopInInheritence.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pA}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pM the fixed value of pattern parameter m, or null if not bound.
+     * @param pA the fixed value of pattern parameter a, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public MemberIsItsOwnParent.Match newMatch(final Member pM) {
-      return MemberIsItsOwnParent.Match.newMatch(pM);
+    public LoopInInheritence.Match newMatch(final EClass pA) {
+      return LoopInInheritence.Match.newMatch(pA);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Member> rawStreamAllValuesOfm(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_M, parameters).map(Member.class::cast);
+    protected Stream<EClass> rawStreamAllValuesOfa(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_A, parameters).map(EClass.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Member> getAllValuesOfm() {
-      return rawStreamAllValuesOfm(emptyArray()).collect(Collectors.toSet());
+    public Set<EClass> getAllValuesOfa() {
+      return rawStreamAllValuesOfa(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for m.
+     * Retrieve the set of values that occur in matches for a.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Member> streamAllValuesOfm() {
-      return rawStreamAllValuesOfm(emptyArray());
+    public Stream<EClass> streamAllValuesOfa() {
+      return rawStreamAllValuesOfa(emptyArray());
     }
     
     @Override
-    protected MemberIsItsOwnParent.Match tupleToMatch(final Tuple t) {
+    protected LoopInInheritence.Match tupleToMatch(final Tuple t) {
       try {
-          return MemberIsItsOwnParent.Match.newMatch((Member) t.get(POSITION_M));
+          return LoopInInheritence.Match.newMatch((EClass) t.get(POSITION_A));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -415,9 +410,9 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    protected MemberIsItsOwnParent.Match arrayToMatch(final Object[] match) {
+    protected LoopInInheritence.Match arrayToMatch(final Object[] match) {
       try {
-          return MemberIsItsOwnParent.Match.newMatch((Member) match[POSITION_M]);
+          return LoopInInheritence.Match.newMatch((EClass) match[POSITION_A]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -425,9 +420,9 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
     }
     
     @Override
-    protected MemberIsItsOwnParent.Match arrayToMatchMutable(final Object[] match) {
+    protected LoopInInheritence.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return MemberIsItsOwnParent.Match.newMutableMatch((Member) match[POSITION_M]);
+          return LoopInInheritence.Match.newMutableMatch((EClass) match[POSITION_A]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -439,12 +434,12 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<MemberIsItsOwnParent.Matcher> querySpecification() {
-      return MemberIsItsOwnParent.instance();
+    public static IQuerySpecification<LoopInInheritence.Matcher> querySpecification() {
+      return LoopInInheritence.instance();
     }
   }
   
-  private MemberIsItsOwnParent() {
+  private LoopInInheritence() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -453,7 +448,7 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static MemberIsItsOwnParent instance() {
+  public static LoopInInheritence instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -462,35 +457,35 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
   }
   
   @Override
-  protected MemberIsItsOwnParent.Matcher instantiate(final ViatraQueryEngine engine) {
-    return MemberIsItsOwnParent.Matcher.on(engine);
+  protected LoopInInheritence.Matcher instantiate(final ViatraQueryEngine engine) {
+    return LoopInInheritence.Matcher.on(engine);
   }
   
   @Override
-  public MemberIsItsOwnParent.Matcher instantiate() {
-    return MemberIsItsOwnParent.Matcher.create();
+  public LoopInInheritence.Matcher instantiate() {
+    return LoopInInheritence.Matcher.create();
   }
   
   @Override
-  public MemberIsItsOwnParent.Match newEmptyMatch() {
-    return MemberIsItsOwnParent.Match.newEmptyMatch();
+  public LoopInInheritence.Match newEmptyMatch() {
+    return LoopInInheritence.Match.newEmptyMatch();
   }
   
   @Override
-  public MemberIsItsOwnParent.Match newMatch(final Object... parameters) {
-    return MemberIsItsOwnParent.Match.newMatch((familytree.Member) parameters[0]);
+  public LoopInInheritence.Match newMatch(final Object... parameters) {
+    return LoopInInheritence.Match.newMatch((org.eclipse.emf.ecore.EClass) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link MemberIsItsOwnParent} to be created 
+   * Inner class allowing the singleton instance of {@link LoopInInheritence} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link MemberIsItsOwnParent#instance()}.
+   *     but rather at the first call to {@link LoopInInheritence#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final MemberIsItsOwnParent INSTANCE = new MemberIsItsOwnParent();
+    private static final LoopInInheritence INSTANCE = new LoopInInheritence();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -508,11 +503,11 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final MemberIsItsOwnParent.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final LoopInInheritence.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_m = new PParameter("m", "familytree.Member", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/familytree", "Member")), PParameterDirection.INOUT);
+    private final PParameter parameter_a = new PParameter("a", "org.eclipse.emf.ecore.EClass", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.eclipse.org/emf/2002/Ecore", "EClass")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_m);
+    private final List<PParameter> parameters = Arrays.asList(parameter_a);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -520,12 +515,12 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public String getFullyQualifiedName() {
-      return "queries.memberIsItsOwnParent";
+      return "hu.bme.mit.inf.dslreasoner.domains.alloyexamples.loopInInheritence";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("m");
+      return Arrays.asList("a");
     }
     
     @Override
@@ -539,36 +534,22 @@ public final class MemberIsItsOwnParent extends BaseGeneratedEMFQuerySpecificati
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_m = body.getOrCreateVariableByName("m");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
-          PVariable var_p = body.getOrCreateVariableByName("p");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_m), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
+          PVariable var_a = body.getOrCreateVariableByName("a");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_a), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.eclipse.org/emf/2002/Ecore", "EClass")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_m, parameter_m)
+             new ExportedParameter(body, var_a, parameter_a)
           ));
-          // 	FamilyTree.members(_, m)
-          new TypeConstraint(body, Tuples.flatTupleOf(var___0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "FamilyTree")));
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var___0_, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/familytree", "FamilyTree", "members")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
-          new Equality(body, var__virtual_0_, var_m);
-          // 	Member.parents(m, p)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_m), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_m, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/familytree", "Member", "parents")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
-          new Equality(body, var__virtual_1_, var_p);
-          // 	m == p
-          new Equality(body, var_m, var_p);
+          // 	find directSupertype+(a,a)
+          new BinaryTransitiveClosure(body, Tuples.flatTupleOf(var_a, var_a), DirectSupertype.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       {
           PAnnotation annotation = new PAnnotation("Constraint");
-          annotation.addAttribute("message", "memberIsItsOwnParent");
-          annotation.addAttribute("severity", "error");
           annotation.addAttribute("key", Arrays.asList(new Object[] {
-                              new ParameterReference("m")
+                              new ParameterReference("a")
                               }));
+          annotation.addAttribute("severity", "error");
+          annotation.addAttribute("message", "error");
           addAnnotation(annotation);
       }
       return bodies;
