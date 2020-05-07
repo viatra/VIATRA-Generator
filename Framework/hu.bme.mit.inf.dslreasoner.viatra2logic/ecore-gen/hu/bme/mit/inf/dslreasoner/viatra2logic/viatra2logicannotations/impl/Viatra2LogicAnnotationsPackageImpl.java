@@ -166,6 +166,16 @@ public class Viatra2LogicAnnotationsPackageImpl extends EPackageImpl implements 
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTransfomedViatraQuery_OptimizedDisjunction() {
+		return (EAttribute)transfomedViatraQueryEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTransformedViatraWellformednessConstraint() {
 		return transformedViatraWellformednessConstraintEClass;
 	}
@@ -263,6 +273,7 @@ public class Viatra2LogicAnnotationsPackageImpl extends EPackageImpl implements 
 		createEAttribute(transfomedViatraQueryEClass, TRANSFOMED_VIATRA_QUERY__PATTERN_FULLY_QUALIFIED_NAME);
 		createEAttribute(transfomedViatraQueryEClass, TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY);
 		createEReference(transfomedViatraQueryEClass, TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE);
+		createEAttribute(transfomedViatraQueryEClass, TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION);
 
 		transformedViatraWellformednessConstraintEClass = createEClass(TRANSFORMED_VIATRA_WELLFORMEDNESS_CONSTRAINT);
 		createEReference(transformedViatraWellformednessConstraintEClass, TRANSFORMED_VIATRA_WELLFORMEDNESS_CONSTRAINT__QUERY);
@@ -316,6 +327,7 @@ public class Viatra2LogicAnnotationsPackageImpl extends EPackageImpl implements 
 		initEAttribute(getTransfomedViatraQuery_PatternFullyQualifiedName(), ecorePackage.getEString(), "patternFullyQualifiedName", null, 1, 1, TransfomedViatraQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransfomedViatraQuery_PatternPQuery(), ecorePackage.getEJavaObject(), "patternPQuery", null, 1, 1, TransfomedViatraQuery.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransfomedViatraQuery_VariableTrace(), this.getVariableMapping(), null, "variableTrace", null, 0, -1, TransfomedViatraQuery.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransfomedViatraQuery_OptimizedDisjunction(), ecorePackage.getEJavaObject(), "optimizedDisjunction", null, 1, 1, TransfomedViatraQuery.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformedViatraWellformednessConstraintEClass, TransformedViatraWellformednessConstraint.class, "TransformedViatraWellformednessConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformedViatraWellformednessConstraint_Query(), this.getTransfomedViatraQuery(), null, "query", null, 1, 1, TransformedViatraWellformednessConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

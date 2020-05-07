@@ -21,6 +21,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.Positi
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall
 import java.util.Comparator
 import java.util.ArrayList
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PDisjunction
 
 @Data class UnitPropagation {
 	val PQuery q
@@ -101,7 +102,7 @@ class UnitPropagationPreconditionGenerator {
 	}
 	
 	def getOrGeneratePropagationRule(UnitPropagationPreconditionGenerationResult res, Relation relation, PQuery q, PConstraint c, PropagationModality pm, Modality m3) {
-		if(!res.contains(q,c,pm,m3)) {
+		if(res.contains(q,c,pm,m3)) {
 			return res.getName(q,c,pm,m3)
 		} else {
 			res.generatePropagationRule(relation,q,c,pm,m3)
@@ -121,8 +122,9 @@ class UnitPropagationPreconditionGenerator {
 	def void generatePropagationRule(UnitPropagationPreconditionGenerationResult res, Relation relation, PQuery q, PConstraint c, PropagationModality pm, Modality m3) {
 		val name = relationDefinitionName(res,relation,q,c,pm,m3)
 		val constraintArity = c.arity
+		val bodies = (relation.annotations.filter(TransfomedViatraQuery).head.optimizedDisjunction as PDisjunction).bodies
 		val generatedBodies = new LinkedList
-		for(body : q.disjunctBodies.bodies) {
+		for(body : bodies) {
 			if(body.constraints.contains(c)) {
 				if(pm === PropagationModality::UP) {
 					generatedBodies += '''

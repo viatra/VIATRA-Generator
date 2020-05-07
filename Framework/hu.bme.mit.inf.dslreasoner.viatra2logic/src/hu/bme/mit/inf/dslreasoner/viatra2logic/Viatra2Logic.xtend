@@ -144,6 +144,7 @@ class  Viatra2Logic {
 			it.target = lRelation
 			it.patternFullyQualifiedName = pquery.fullyQualifiedName
 			it.patternPQuery = pquery
+			it.optimizedDisjunction = viatra2LogicTrace.query2Disjunction.get(pquery)
 		]
 		viatra2LogicTrace.query2Annotation.put(pquery,annotation)
 		ecore2LogicTrace.output.annotations += annotation

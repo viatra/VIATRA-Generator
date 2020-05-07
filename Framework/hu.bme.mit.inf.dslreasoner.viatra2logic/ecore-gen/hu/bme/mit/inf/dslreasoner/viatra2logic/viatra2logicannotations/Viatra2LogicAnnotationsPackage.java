@@ -105,13 +105,22 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	int TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Optimized Disjunction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Transfomed Viatra Query</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFOMED_VIATRA_QUERY_FEATURE_COUNT = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 3;
+	int TRANSFOMED_VIATRA_QUERY_FEATURE_COUNT = LogicproblemPackage.RELATION_ANNOTATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Transfomed Viatra Query</em>' class.
@@ -307,6 +316,17 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 	EReference getTransfomedViatraQuery_VariableTrace();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getOptimizedDisjunction <em>Optimized Disjunction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optimized Disjunction</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getOptimizedDisjunction()
+	 * @see #getTransfomedViatraQuery()
+	 * @generated
+	 */
+	EAttribute getTransfomedViatraQuery_OptimizedDisjunction();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransformedViatraWellformednessConstraint <em>Transformed Viatra Wellformedness Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -436,6 +456,14 @@ public interface Viatra2LogicAnnotationsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE = eINSTANCE.getTransfomedViatraQuery_VariableTrace();
+
+		/**
+		 * The meta object literal for the '<em><b>Optimized Disjunction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION = eINSTANCE.getTransfomedViatraQuery_OptimizedDisjunction();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransformedViatraWellformednessConstraintImpl <em>Transformed Viatra Wellformedness Constraint</em>}' class.

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternFullyQualifiedName <em>Pattern Fully Qualified Name</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getPatternPQuery <em>Pattern PQuery</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getVariableTrace <em>Variable Trace</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getOptimizedDisjunction <em>Optimized Disjunction</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage#getTransfomedViatraQuery()
@@ -88,4 +89,26 @@ public interface TransfomedViatraQuery extends RelationAnnotation {
 	 * @generated
 	 */
 	EList<VariableMapping> getVariableTrace();
+
+	/**
+	 * Returns the value of the '<em><b>Optimized Disjunction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Optimized Disjunction</em>' attribute.
+	 * @see #setOptimizedDisjunction(Object)
+	 * @see hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage#getTransfomedViatraQuery_OptimizedDisjunction()
+	 * @model required="true" transient="true"
+	 * @generated
+	 */
+	Object getOptimizedDisjunction();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery#getOptimizedDisjunction <em>Optimized Disjunction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Optimized Disjunction</em>' attribute.
+	 * @see #getOptimizedDisjunction()
+	 * @generated
+	 */
+	void setOptimizedDisjunction(Object value);
 } // TransfomedViatraQuery
