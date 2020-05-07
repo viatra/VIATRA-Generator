@@ -196,8 +196,20 @@ class ParseUtil {
 }
 
 class FixedMetamodelProvider implements IMetamodelProvider {
+	
+	static val EPACKAGE_TO_PLUGIN_MAP = #{
+		PartialinterpretationPackage.eINSTANCE -> "hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage",
+		LogicproblemPackage.eINSTANCE -> "hu.bme.mit.inf.dslreasoner.logic.model",
+		LogiclanguagePackage.eINSTANCE -> "hu.bme.mit.inf.dslreasoner.logic.model"
+	}
+	
+	static val EPACKAGE_TO_JAVA_PACKAGE_MAP = #{
+		PartialinterpretationPackage.eINSTANCE -> "hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation",
+		LogicproblemPackage.eINSTANCE -> "hu.bme.mit.inf.dslreasoner.logic.model.logicproblem",
+		LogiclanguagePackage.eINSTANCE -> "hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage"
+	}
 
-	protected val List<EPackage> packages = new LinkedList
+	val List<EPackage> packages = new LinkedList
 
 	new() {
 		packages += PartialinterpretationPackage.eINSTANCE
@@ -213,15 +225,24 @@ class FixedMetamodelProvider implements IMetamodelProvider {
 	}
 
 	override boolean isGeneratedCodeAvailable(EPackage ePackage, ResourceSet set) {
-		true
+		EPACKAGE_TO_PLUGIN_MAP.containsKey(ePackage)
 	}
 
 	override String getModelPluginId(EPackage ePackage, ResourceSet set) {
-		return "hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage"
+		EPACKAGE_TO_PLUGIN_MAP.get(ePackage)
 	}
 
 	override String getQualifiedClassName(EClassifier classifier, EObject context) {
-		classifier.name
+		val instanceClassName = classifier.instanceClassName
+		if (instanceClassName !== null) {
+			return instanceClassName
+		}
+		val javaPackage = EPACKAGE_TO_JAVA_PACKAGE_MAP.get(classifier.EPackage)
+		if (javaPackage !== null) {
+			javaPackage + "." + classifier.name
+		} else {
+			null
+		}
 	}
 
 	override loadEPackage(String uri, ResourceSet resourceSet) {
