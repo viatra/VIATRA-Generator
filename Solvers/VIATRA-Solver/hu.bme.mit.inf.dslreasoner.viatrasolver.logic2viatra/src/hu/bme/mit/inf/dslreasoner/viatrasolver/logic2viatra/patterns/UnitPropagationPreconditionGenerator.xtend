@@ -93,8 +93,6 @@ class UnitPropagationPreconditionGenerator {
 					mainPropagationNames.put(referredCheck,new LinkedList)
 				}
 				if(propagationPrecondition !== null) {
-					println(query.parameterNames)
-					println(query.parameterNames.size)
 					mainPropagationNames.get(referredCheck).add(propagationPrecondition->query.parameterNames.size)
 				}
 			}
