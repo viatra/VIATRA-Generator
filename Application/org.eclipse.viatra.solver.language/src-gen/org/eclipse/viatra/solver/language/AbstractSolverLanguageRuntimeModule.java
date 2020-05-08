@@ -10,7 +10,7 @@ import java.util.Properties;
 import org.eclipse.viatra.solver.language.generator.SolverLanguageGenerator;
 import org.eclipse.viatra.solver.language.parser.antlr.SolverLanguageAntlrTokenFileProvider;
 import org.eclipse.viatra.solver.language.parser.antlr.SolverLanguageParser;
-import org.eclipse.viatra.solver.language.parser.antlr.internal.InternalSolverLanguageLexer;
+import org.eclipse.viatra.solver.language.parser.antlr.lexer.InternalSolverLanguageLexer;
 import org.eclipse.viatra.solver.language.scoping.SolverLanguageScopeProvider;
 import org.eclipse.viatra.solver.language.serializer.SolverLanguageSemanticSequencer;
 import org.eclipse.viatra.solver.language.serializer.SolverLanguageSyntacticSequencer;

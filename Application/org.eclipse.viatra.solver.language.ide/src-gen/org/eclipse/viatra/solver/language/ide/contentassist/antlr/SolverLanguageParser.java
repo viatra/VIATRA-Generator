@@ -7,6 +7,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Map;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.viatra.solver.language.ide.contentassist.antlr.internal.InternalSolverLanguageParser;
 import org.eclipse.viatra.solver.language.services.SolverLanguageGrammarAccess;
 import org.eclipse.xtext.AbstractElement;
@@ -92,9 +94,7 @@ public class SolverLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUnaryExpressionAccess().getGroup_1(), "rule__UnaryExpression__Group_1__0");
 			builder.put(grammarAccess.getCountAccess().getGroup(), "rule__Count__Group__0");
 			builder.put(grammarAccess.getAggregationAccess().getGroup(), "rule__Aggregation__Group__0");
-			builder.put(grammarAccess.getAtomicExpressionAccess().getGroup_0(), "rule__AtomicExpression__Group_0__0");
-			builder.put(grammarAccess.getAtomicExpressionAccess().getGroup_0_1(), "rule__AtomicExpression__Group_0_1__0");
-			builder.put(grammarAccess.getAtomicExpressionAccess().getGroup_3(), "rule__AtomicExpression__Group_3__0");
+			builder.put(grammarAccess.getAtomicExpressionAccess().getGroup_4(), "rule__AtomicExpression__Group_4__0");
 			builder.put(grammarAccess.getCallAccess().getGroup(), "rule__Call__Group__0");
 			builder.put(grammarAccess.getArgumentListAccess().getGroup(), "rule__ArgumentList__Group__0");
 			builder.put(grammarAccess.getArgumentListAccess().getGroup_2(), "rule__ArgumentList__Group_2__0");
@@ -170,7 +170,6 @@ public class SolverLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAggregationAccess().getOpAssignment_0(), "rule__Aggregation__OpAssignment_0");
 			builder.put(grammarAccess.getAggregationAccess().getBodyAssignment_2(), "rule__Aggregation__BodyAssignment_2");
 			builder.put(grammarAccess.getAggregationAccess().getConditionAssignment_4(), "rule__Aggregation__ConditionAssignment_4");
-			builder.put(grammarAccess.getAtomicExpressionAccess().getArgumentListAssignment_0_1_1(), "rule__AtomicExpression__ArgumentListAssignment_0_1_1");
 			builder.put(grammarAccess.getCallAccess().getFunctorAssignment_0(), "rule__Call__FunctorAssignment_0");
 			builder.put(grammarAccess.getCallAccess().getTransitiveClosureAssignment_1_0(), "rule__Call__TransitiveClosureAssignment_1_0");
 			builder.put(grammarAccess.getCallAccess().getReflexiveTransitiveClosureAssignment_1_1(), "rule__Call__ReflexiveTransitiveClosureAssignment_1_1");
@@ -231,6 +230,11 @@ public class SolverLanguageParser extends AbstractContentAssistParser {
 		return result;
 	}
 
+	@Override
+	protected TokenSource createLexer(CharStream stream) {
+		return new SolverLanguageTokenSource(super.createLexer(stream));
+	}
+	
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		return nameMappings.getRuleName(element);

@@ -13,7 +13,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.viatra.solver.language.ide.contentassist.antlr.PartialSolverLanguageContentAssistParser;
 import org.eclipse.viatra.solver.language.ide.contentassist.antlr.SolverLanguageParser;
-import org.eclipse.viatra.solver.language.ide.contentassist.antlr.internal.InternalSolverLanguageLexer;
+import org.eclipse.viatra.solver.language.ide.contentassist.antlr.lexer.InternalSolverLanguageLexer;
 import org.eclipse.viatra.solver.language.ui.contentassist.SolverLanguageProposalProvider;
 import org.eclipse.viatra.solver.language.ui.labeling.SolverLanguageDescriptionLabelProvider;
 import org.eclipse.viatra.solver.language.ui.labeling.SolverLanguageLabelProvider;
@@ -30,6 +30,8 @@ import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.CompletionPrefixProvider;
+import org.eclipse.xtext.ide.editor.contentassist.IndentationAwareCompletionPrefixProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
@@ -110,7 +112,7 @@ public abstract class AbstractSolverLanguageUiModule extends DefaultUiModule {
 	public void configureHighlightingLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
 			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
-			.to(org.eclipse.viatra.solver.language.parser.antlr.internal.InternalSolverLanguageLexer.class);
+			.to(org.eclipse.viatra.solver.language.parser.antlr.lexer.InternalSolverLanguageLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
@@ -133,6 +135,11 @@ public abstract class AbstractSolverLanguageUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
 		binder.bind(InternalSolverLanguageLexer.class).toProvider(LexerProvider.create(InternalSolverLanguageLexer.class));
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends CompletionPrefixProvider> bindCompletionPrefixProvider() {
+		return IndentationAwareCompletionPrefixProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2

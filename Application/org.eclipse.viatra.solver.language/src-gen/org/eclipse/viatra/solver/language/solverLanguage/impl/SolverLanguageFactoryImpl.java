@@ -94,6 +94,7 @@ public class SolverLanguageFactoryImpl extends EFactoryImpl implements SolverLan
       case SolverLanguagePackage.INFINITY_LITERAL: return createInfinityLiteral();
       case SolverLanguagePackage.EMPTY_INTERVAL_LITERAL: return createEmptyIntervalLiteral();
       case SolverLanguagePackage.STRING_LITERAL: return createStringLiteral();
+      case SolverLanguagePackage.CLASS_DEFINITION: return createClassDefinition();
       case SolverLanguagePackage.MEMBER_DEFINITION: return createMemberDefinition();
       case SolverLanguagePackage.MULTIPLICITY: return createMultiplicity();
       case SolverLanguagePackage.MANY_MULTIPLICITY: return createManyMultiplicity();
@@ -505,6 +506,18 @@ public class SolverLanguageFactoryImpl extends EFactoryImpl implements SolverLan
   {
     StringLiteralImpl stringLiteral = new StringLiteralImpl();
     return stringLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ClassDefinition createClassDefinition()
+  {
+    ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
+    return classDefinition;
   }
 
   /**

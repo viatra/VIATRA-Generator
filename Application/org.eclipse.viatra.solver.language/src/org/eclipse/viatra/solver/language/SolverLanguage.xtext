@@ -9,7 +9,7 @@ Statement:
 	(
 		AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition | ExternPredicateDefinition |
 		MetricDefinition | ExternMetricDefinition | ClassDefinition | ScopeDefinition | ObjectiveDefinition
-	) DOT;
+	) FULL_STOP;
 
 AssertionOrDefinition returns Statement:
 	Expression (
@@ -28,7 +28,7 @@ DefaultDefinition:
 	"default" head=Call ":" range=Expression;
 
 ExternPredicateDefinition:
-	"extern" head=Call ".";
+	"extern" head=Call;
 
 enum MetricType:
 	INT="int" | REAL="real";
@@ -103,10 +103,10 @@ Aggregation:
 	op=AggregationOp "{" body=Expression "|" condition=Expression "}";
 
 AtomicExpression returns Expression:
-	Reference ({Call.functor=current} -> argumentList=ArgumentList)? | Interval | Literal | "(" Expression ")";
+	Reference | Call | Interval | Literal | "(" Expression ")";
 
 Call:
-	functor=Reference (transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)? argumentList=ArgumentList;
+	functor=Reference (transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)? argumentList=ArgumentList;
 
 ArgumentList:
 	{ArgumentList} "(" (arguments+=Argument ("," arguments+=Argument)*)? ")";
@@ -153,7 +153,7 @@ EmptyIntervalLiteral:
 StringLiteral:
 	value=STRING;
 
-ClassDefinition returns Statement:
+ClassDefinition:
 	abstract?="abstract"? "class" name=ID ("extends" superclasses+=[NamedElement|QualifiedName] ("," superclasses+=[NamedElement|QualifiedName])*)?
 	"{" members+=MemberDefinition* "}";
 
@@ -182,13 +182,13 @@ BoundedScopeDefinition:
 	"scope" (
 		(lowerBound=INT "<=")? type=[NamedElement|QualifiedName] "<=" upperBound=INT |
 		upperBound=INT ">=" type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?
-	) ".";
+	);
 
 LowerBoundedScopeDefinition:
 	"scope" (
 		lowerBound=INT "<=" type=[NamedElement|QualifiedName] |
 		type=[NamedElement|QualifiedName] ">=" lowerBound=INT
-	) ".";
+	);
 
 enum ObjectiveKind:
 	MINIMIZE="minimize" | MAXIMIZE="maximize";
@@ -209,17 +209,21 @@ QualifiedName hidden():
 terminal STRING returns ecore::EString:
 	'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
 
-terminal QUOTED_ID returns ecore::EString:
+terminal QUOTED_ID:
 	'\'' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'\'') )* '\'';
 
-terminal PLUS:
-	"synthetic::plus";
+@Override
+terminal SL_COMMENT:
+	('%' | '//') !('\n'|'\r')* ('\r'? '\n')?;
 
-terminal STAR:
-	"synthetic::star";
+terminal TRANSITIVE_CLOSURE:
+	"synthetic:TRANSITIVE_CLOSURE";
 
-terminal DOT:
-	"synthetic::dot";
+terminal REFLEXIVE_TRANSITIVE_CLOSURE:
+	"synthetic:REFLEXIVE_TRANSITIVE_CLOSURE";
+
+terminal FULL_STOP:
+	"synthetic:FULL_STOP";
 
 NamedElement:
 	name=QualifiedName;

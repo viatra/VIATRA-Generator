@@ -20,58 +20,46 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SolverLanguageGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_AtomicExpression_LeftParenthesisKeyword_3_0_a;
-	protected AbstractElementAlias match_AtomicExpression_LeftParenthesisKeyword_3_0_p;
+	protected AbstractElementAlias match_AtomicExpression_LeftParenthesisKeyword_4_0_a;
+	protected AbstractElementAlias match_AtomicExpression_LeftParenthesisKeyword_4_0_p;
 	protected AbstractElementAlias match_MemberDefinition_SemicolonKeyword_5_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SolverLanguageGrammarAccess) access;
-		match_AtomicExpression_LeftParenthesisKeyword_3_0_a = new TokenAlias(true, true, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_3_0());
-		match_AtomicExpression_LeftParenthesisKeyword_3_0_p = new TokenAlias(true, false, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_3_0());
+		match_AtomicExpression_LeftParenthesisKeyword_4_0_a = new TokenAlias(true, true, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_4_0());
+		match_AtomicExpression_LeftParenthesisKeyword_4_0_p = new TokenAlias(true, false, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_4_0());
 		match_MemberDefinition_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getMemberDefinitionAccess().getSemicolonKeyword_5());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getDOTRule())
-			return getDOTToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getPLUSRule())
-			return getPLUSToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getSTARRule())
-			return getSTARToken(semanticObject, ruleCall, node);
+		if (ruleCall.getRule() == grammarAccess.getFULL_STOPRule())
+			return getFULL_STOPToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getREFLEXIVE_TRANSITIVE_CLOSURERule())
+			return getREFLEXIVE_TRANSITIVE_CLOSUREToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getTRANSITIVE_CLOSURERule())
+			return getTRANSITIVE_CLOSUREToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
 	/**
-	 * terminal DOT:
-	 * 	"synthetic::dot";
+	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
+	 * Defaults to the empty string.
 	 */
-	protected String getDOTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "synthetic::dot";
-	}
+	protected String getFULL_STOPToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
 	
 	/**
-	 * terminal PLUS:
-	 * 	"synthetic::plus";
+	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
+	 * Defaults to the empty string.
 	 */
-	protected String getPLUSToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "synthetic::plus";
-	}
+	protected String getREFLEXIVE_TRANSITIVE_CLOSUREToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
 	
 	/**
-	 * terminal STAR:
-	 * 	"synthetic::star";
+	 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
+	 * Defaults to the empty string.
 	 */
-	protected String getSTARToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "synthetic::star";
-	}
+	protected String getTRANSITIVE_CLOSUREToken(EObject semanticObject, RuleCall ruleCall, INode node) { return ""; }
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -79,10 +67,10 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_AtomicExpression_LeftParenthesisKeyword_3_0_a.equals(syntax))
-				emit_AtomicExpression_LeftParenthesisKeyword_3_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_AtomicExpression_LeftParenthesisKeyword_3_0_p.equals(syntax))
-				emit_AtomicExpression_LeftParenthesisKeyword_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_AtomicExpression_LeftParenthesisKeyword_4_0_a.equals(syntax))
+				emit_AtomicExpression_LeftParenthesisKeyword_4_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_AtomicExpression_LeftParenthesisKeyword_4_0_p.equals(syntax))
+				emit_AtomicExpression_LeftParenthesisKeyword_4_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_MemberDefinition_SemicolonKeyword_5_q.equals(syntax))
 				emit_MemberDefinition_SemicolonKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -99,6 +87,7 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     (rule start) (ambiguity) 'empty' (rule start)
 	 *     (rule start) (ambiguity) 'if' condition=Expression
 	 *     (rule start) (ambiguity) 'inf' (rule start)
+	 *     (rule start) (ambiguity) functor=Reference
 	 *     (rule start) (ambiguity) op=AggregationOp
 	 *     (rule start) (ambiguity) op=UnaryOp
 	 *     (rule start) (ambiguity) referred=[NamedElement|QualifiedName]
@@ -106,13 +95,12 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     (rule start) (ambiguity) value=Real
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {BinaryExpression.left=}
-	 *     (rule start) (ambiguity) {Call.functor=}
 	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Conjunction.children+=}
 	 *     (rule start) (ambiguity) {Disjunction.children+=}
 	 *     (rule start) (ambiguity) {Switch.cases+=}
 	 */
-	protected void emit_AtomicExpression_LeftParenthesisKeyword_3_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_AtomicExpression_LeftParenthesisKeyword_4_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -131,7 +119,7 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     (rule start) (ambiguity) {Disjunction.children+=}
 	 *     (rule start) (ambiguity) {Switch.cases+=}
 	 */
-	protected void emit_AtomicExpression_LeftParenthesisKeyword_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_AtomicExpression_LeftParenthesisKeyword_4_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -11,6 +11,6 @@ public class SolverLanguageAntlrTokenFileProvider implements IAntlrTokenFileProv
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		return classLoader.getResourceAsStream("org/eclipse/viatra/solver/language/parser/antlr/internal/InternalSolverLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/viatra/solver/language/parser/antlr/internal/InternalSolverLanguageParser.tokens");
 	}
 }

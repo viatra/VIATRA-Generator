@@ -25,9 +25,9 @@ import org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.CallImpl#getFunctor <em>Functor</em>}</li>
- *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.CallImpl#getArgumentList <em>Argument List</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.CallImpl#isTransitiveClosure <em>Transitive Closure</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.CallImpl#isReflexiveTransitiveClosure <em>Reflexive Transitive Closure</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.impl.CallImpl#getArgumentList <em>Argument List</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,16 +43,6 @@ public class CallImpl extends ExpressionImpl implements Call
    * @ordered
    */
   protected Reference functor;
-
-  /**
-   * The cached value of the '{@link #getArgumentList() <em>Argument List</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getArgumentList()
-   * @generated
-   * @ordered
-   */
-  protected ArgumentList argumentList;
 
   /**
    * The default value of the '{@link #isTransitiveClosure() <em>Transitive Closure</em>}' attribute.
@@ -93,6 +83,16 @@ public class CallImpl extends ExpressionImpl implements Call
    * @ordered
    */
   protected boolean reflexiveTransitiveClosure = REFLEXIVE_TRANSITIVE_CLOSURE_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getArgumentList() <em>Argument List</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getArgumentList()
+   * @generated
+   * @ordered
+   */
+  protected ArgumentList argumentList;
 
   /**
    * <!-- begin-user-doc -->
@@ -171,56 +171,6 @@ public class CallImpl extends ExpressionImpl implements Call
    * @generated
    */
   @Override
-  public ArgumentList getArgumentList()
-  {
-    return argumentList;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetArgumentList(ArgumentList newArgumentList, NotificationChain msgs)
-  {
-    ArgumentList oldArgumentList = argumentList;
-    argumentList = newArgumentList;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.CALL__ARGUMENT_LIST, oldArgumentList, newArgumentList);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setArgumentList(ArgumentList newArgumentList)
-  {
-    if (newArgumentList != argumentList)
-    {
-      NotificationChain msgs = null;
-      if (argumentList != null)
-        msgs = ((InternalEObject)argumentList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SolverLanguagePackage.CALL__ARGUMENT_LIST, null, msgs);
-      if (newArgumentList != null)
-        msgs = ((InternalEObject)newArgumentList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SolverLanguagePackage.CALL__ARGUMENT_LIST, null, msgs);
-      msgs = basicSetArgumentList(newArgumentList, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.CALL__ARGUMENT_LIST, newArgumentList, newArgumentList));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public boolean isTransitiveClosure()
   {
     return transitiveClosure;
@@ -271,6 +221,56 @@ public class CallImpl extends ExpressionImpl implements Call
    * @generated
    */
   @Override
+  public ArgumentList getArgumentList()
+  {
+    return argumentList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetArgumentList(ArgumentList newArgumentList, NotificationChain msgs)
+  {
+    ArgumentList oldArgumentList = argumentList;
+    argumentList = newArgumentList;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.CALL__ARGUMENT_LIST, oldArgumentList, newArgumentList);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setArgumentList(ArgumentList newArgumentList)
+  {
+    if (newArgumentList != argumentList)
+    {
+      NotificationChain msgs = null;
+      if (argumentList != null)
+        msgs = ((InternalEObject)argumentList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SolverLanguagePackage.CALL__ARGUMENT_LIST, null, msgs);
+      if (newArgumentList != null)
+        msgs = ((InternalEObject)newArgumentList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SolverLanguagePackage.CALL__ARGUMENT_LIST, null, msgs);
+      msgs = basicSetArgumentList(newArgumentList, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SolverLanguagePackage.CALL__ARGUMENT_LIST, newArgumentList, newArgumentList));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -295,12 +295,12 @@ public class CallImpl extends ExpressionImpl implements Call
     {
       case SolverLanguagePackage.CALL__FUNCTOR:
         return getFunctor();
-      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
-        return getArgumentList();
       case SolverLanguagePackage.CALL__TRANSITIVE_CLOSURE:
         return isTransitiveClosure();
       case SolverLanguagePackage.CALL__REFLEXIVE_TRANSITIVE_CLOSURE:
         return isReflexiveTransitiveClosure();
+      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
+        return getArgumentList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -318,14 +318,14 @@ public class CallImpl extends ExpressionImpl implements Call
       case SolverLanguagePackage.CALL__FUNCTOR:
         setFunctor((Reference)newValue);
         return;
-      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
-        setArgumentList((ArgumentList)newValue);
-        return;
       case SolverLanguagePackage.CALL__TRANSITIVE_CLOSURE:
         setTransitiveClosure((Boolean)newValue);
         return;
       case SolverLanguagePackage.CALL__REFLEXIVE_TRANSITIVE_CLOSURE:
         setReflexiveTransitiveClosure((Boolean)newValue);
+        return;
+      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
+        setArgumentList((ArgumentList)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -344,14 +344,14 @@ public class CallImpl extends ExpressionImpl implements Call
       case SolverLanguagePackage.CALL__FUNCTOR:
         setFunctor((Reference)null);
         return;
-      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
-        setArgumentList((ArgumentList)null);
-        return;
       case SolverLanguagePackage.CALL__TRANSITIVE_CLOSURE:
         setTransitiveClosure(TRANSITIVE_CLOSURE_EDEFAULT);
         return;
       case SolverLanguagePackage.CALL__REFLEXIVE_TRANSITIVE_CLOSURE:
         setReflexiveTransitiveClosure(REFLEXIVE_TRANSITIVE_CLOSURE_EDEFAULT);
+        return;
+      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
+        setArgumentList((ArgumentList)null);
         return;
     }
     super.eUnset(featureID);
@@ -369,12 +369,12 @@ public class CallImpl extends ExpressionImpl implements Call
     {
       case SolverLanguagePackage.CALL__FUNCTOR:
         return functor != null;
-      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
-        return argumentList != null;
       case SolverLanguagePackage.CALL__TRANSITIVE_CLOSURE:
         return transitiveClosure != TRANSITIVE_CLOSURE_EDEFAULT;
       case SolverLanguagePackage.CALL__REFLEXIVE_TRANSITIVE_CLOSURE:
         return reflexiveTransitiveClosure != REFLEXIVE_TRANSITIVE_CLOSURE_EDEFAULT;
+      case SolverLanguagePackage.CALL__ARGUMENT_LIST:
+        return argumentList != null;
     }
     return super.eIsSet(featureID);
   }

@@ -26,5 +26,6 @@ Export-Package: org.eclipse.viatra.solver.language,
  org.eclipse.viatra.solver.language.solverLanguage,
  org.eclipse.viatra.solver.language.solverLanguage.impl,
  org.eclipse.viatra.solver.language.solverLanguage.util,
- org.eclipse.viatra.solver.language.validation
+ org.eclipse.viatra.solver.language.validation,
+ org.eclipse.viatra.solver.language.parser.antlr.lexer
 Import-Package: org.apache.log4j

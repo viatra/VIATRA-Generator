@@ -216,6 +216,11 @@ public class SolverLanguageAdapterFactory extends AdapterFactoryImpl
         return createStringLiteralAdapter();
       }
       @Override
+      public Adapter caseClassDefinition(ClassDefinition object)
+      {
+        return createClassDefinitionAdapter();
+      }
+      @Override
       public Adapter caseMemberDefinition(MemberDefinition object)
       {
         return createMemberDefinitionAdapter();
@@ -743,6 +748,21 @@ public class SolverLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStringLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition <em>Class Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition
+   * @generated
+   */
+  public Adapter createClassDefinitionAdapter()
   {
     return null;
   }

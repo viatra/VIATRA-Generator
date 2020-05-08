@@ -56,17 +56,17 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cClassDefinitionParserRuleCall_0_7 = (RuleCall)cAlternatives_0.eContents().get(7);
 		private final RuleCall cScopeDefinitionParserRuleCall_0_8 = (RuleCall)cAlternatives_0.eContents().get(8);
 		private final RuleCall cObjectiveDefinitionParserRuleCall_0_9 = (RuleCall)cAlternatives_0.eContents().get(9);
-		private final RuleCall cDOTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cFULL_STOPTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Statement:
 		//	(AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition |
 		//	ExternPredicateDefinition | MetricDefinition | ExternMetricDefinition | ClassDefinition | ScopeDefinition |
-		//	ObjectiveDefinition) DOT;
+		//	ObjectiveDefinition) FULL_STOP;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition |
 		//ExternPredicateDefinition | MetricDefinition | ExternMetricDefinition | ClassDefinition | ScopeDefinition |
-		//ObjectiveDefinition) DOT
+		//ObjectiveDefinition) FULL_STOP
 		public Group getGroup() { return cGroup; }
 		
 		//(AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition |
@@ -104,8 +104,8 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//ObjectiveDefinition
 		public RuleCall getObjectiveDefinitionParserRuleCall_0_9() { return cObjectiveDefinitionParserRuleCall_0_9; }
 		
-		//DOT
-		public RuleCall getDOTTerminalRuleCall_1() { return cDOTTerminalRuleCall_1; }
+		//FULL_STOP
+		public RuleCall getFULL_STOPTerminalRuleCall_1() { return cFULL_STOPTerminalRuleCall_1; }
 	}
 	public class AssertionOrDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.AssertionOrDefinition");
@@ -344,13 +344,12 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cExternKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cHeadAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cHeadCallParserRuleCall_1_0 = (RuleCall)cHeadAssignment_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ExternPredicateDefinition:
-		//	"extern" head=Call ".";
+		//	"extern" head=Call;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"extern" head=Call "."
+		//"extern" head=Call
 		public Group getGroup() { return cGroup; }
 		
 		//"extern"
@@ -361,9 +360,6 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Call
 		public RuleCall getHeadCallParserRuleCall_1_0() { return cHeadCallParserRuleCall_1_0; }
-		
-		//"."
-		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
 	}
 	public class MetricDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.MetricDefinition");
@@ -956,61 +952,45 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class AtomicExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.AtomicExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final RuleCall cReferenceParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
-		private final Action cCallFunctorAction_0_1_0 = (Action)cGroup_0_1.eContents().get(0);
-		private final Assignment cArgumentListAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
-		private final RuleCall cArgumentListArgumentListParserRuleCall_0_1_1_0 = (RuleCall)cArgumentListAssignment_0_1_1.eContents().get(0);
-		private final RuleCall cIntervalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final RuleCall cExpressionParserRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final RuleCall cReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cIntervalParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
+		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final RuleCall cExpressionParserRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//AtomicExpression Expression:
-		//	Reference ({Call.functor=current} -> argumentList=ArgumentList)? | Interval | Literal | "(" Expression ")";
+		//	Reference | Call | Interval | Literal | "(" Expression ")";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Reference ({Call.functor=current} -> argumentList=ArgumentList)? | Interval | Literal | "(" Expression ")"
+		//Reference | Call | Interval | Literal | "(" Expression ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//Reference ({Call.functor=current} -> argumentList=ArgumentList)?
-		public Group getGroup_0() { return cGroup_0; }
-		
 		//Reference
-		public RuleCall getReferenceParserRuleCall_0_0() { return cReferenceParserRuleCall_0_0; }
+		public RuleCall getReferenceParserRuleCall_0() { return cReferenceParserRuleCall_0; }
 		
-		//({Call.functor=current} -> argumentList=ArgumentList)?
-		public Group getGroup_0_1() { return cGroup_0_1; }
-		
-		//{Call.functor=current}
-		public Action getCallFunctorAction_0_1_0() { return cCallFunctorAction_0_1_0; }
-		
-		//-> argumentList=ArgumentList
-		public Assignment getArgumentListAssignment_0_1_1() { return cArgumentListAssignment_0_1_1; }
-		
-		//ArgumentList
-		public RuleCall getArgumentListArgumentListParserRuleCall_0_1_1_0() { return cArgumentListArgumentListParserRuleCall_0_1_1_0; }
+		//Call
+		public RuleCall getCallParserRuleCall_1() { return cCallParserRuleCall_1; }
 		
 		//Interval
-		public RuleCall getIntervalParserRuleCall_1() { return cIntervalParserRuleCall_1; }
+		public RuleCall getIntervalParserRuleCall_2() { return cIntervalParserRuleCall_2; }
 		
 		//Literal
-		public RuleCall getLiteralParserRuleCall_2() { return cLiteralParserRuleCall_2; }
+		public RuleCall getLiteralParserRuleCall_3() { return cLiteralParserRuleCall_3; }
 		
 		//"(" Expression ")"
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 		
 		//"("
-		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
 		
 		//Expression
-		public RuleCall getExpressionParserRuleCall_3_1() { return cExpressionParserRuleCall_3_1; }
+		public RuleCall getExpressionParserRuleCall_4_1() { return cExpressionParserRuleCall_4_1; }
 		
 		//")"
-		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
+		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
 	}
 	public class CallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.Call");
@@ -1019,17 +999,19 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFunctorReferenceParserRuleCall_0_0 = (RuleCall)cFunctorAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Assignment cTransitiveClosureAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cTransitiveClosureSTARTerminalRuleCall_1_0_0 = (RuleCall)cTransitiveClosureAssignment_1_0.eContents().get(0);
+		private final RuleCall cTransitiveClosureTRANSITIVE_CLOSURETerminalRuleCall_1_0_0 = (RuleCall)cTransitiveClosureAssignment_1_0.eContents().get(0);
 		private final Assignment cReflexiveTransitiveClosureAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cReflexiveTransitiveClosurePLUSTerminalRuleCall_1_1_0 = (RuleCall)cReflexiveTransitiveClosureAssignment_1_1.eContents().get(0);
+		private final RuleCall cReflexiveTransitiveClosureREFLEXIVE_TRANSITIVE_CLOSURETerminalRuleCall_1_1_0 = (RuleCall)cReflexiveTransitiveClosureAssignment_1_1.eContents().get(0);
 		private final Assignment cArgumentListAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cArgumentListArgumentListParserRuleCall_2_0 = (RuleCall)cArgumentListAssignment_2.eContents().get(0);
 		
 		//Call:
-		//	functor=Reference (transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)? argumentList=ArgumentList;
+		//	functor=Reference (transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)?
+		//	argumentList=ArgumentList;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//functor=Reference (transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)? argumentList=ArgumentList
+		//functor=Reference (transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)?
+		//argumentList=ArgumentList
 		public Group getGroup() { return cGroup; }
 		
 		//functor=Reference
@@ -1038,20 +1020,20 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//Reference
 		public RuleCall getFunctorReferenceParserRuleCall_0_0() { return cFunctorReferenceParserRuleCall_0_0; }
 		
-		//(transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)?
+		//(transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
-		//transitiveClosure?=STAR
+		//transitiveClosure?=TRANSITIVE_CLOSURE
 		public Assignment getTransitiveClosureAssignment_1_0() { return cTransitiveClosureAssignment_1_0; }
 		
-		//STAR
-		public RuleCall getTransitiveClosureSTARTerminalRuleCall_1_0_0() { return cTransitiveClosureSTARTerminalRuleCall_1_0_0; }
+		//TRANSITIVE_CLOSURE
+		public RuleCall getTransitiveClosureTRANSITIVE_CLOSURETerminalRuleCall_1_0_0() { return cTransitiveClosureTRANSITIVE_CLOSURETerminalRuleCall_1_0_0; }
 		
-		//reflexiveTransitiveClosure?=PLUS
+		//reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE
 		public Assignment getReflexiveTransitiveClosureAssignment_1_1() { return cReflexiveTransitiveClosureAssignment_1_1; }
 		
-		//PLUS
-		public RuleCall getReflexiveTransitiveClosurePLUSTerminalRuleCall_1_1_0() { return cReflexiveTransitiveClosurePLUSTerminalRuleCall_1_1_0; }
+		//REFLEXIVE_TRANSITIVE_CLOSURE
+		public RuleCall getReflexiveTransitiveClosureREFLEXIVE_TRANSITIVE_CLOSURETerminalRuleCall_1_1_0() { return cReflexiveTransitiveClosureREFLEXIVE_TRANSITIVE_CLOSURETerminalRuleCall_1_1_0; }
 		
 		//argumentList=ArgumentList
 		public Assignment getArgumentListAssignment_2() { return cArgumentListAssignment_2; }
@@ -1428,7 +1410,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMembersMemberDefinitionParserRuleCall_5_0 = (RuleCall)cMembersAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//ClassDefinition Statement:
+		//ClassDefinition:
 		//	abstract?="abstract"? "class" name=ID ("extends" superclasses+=[NamedElement|QualifiedName] (","
 		//	superclasses+=[NamedElement|QualifiedName])*)?
 		//	"{" members+=MemberDefinition* "}";
@@ -1769,15 +1751,14 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignEqualsSignKeyword_1_1_3_0 = (Keyword)cGroup_1_1_3.eContents().get(0);
 		private final Assignment cLowerBoundAssignment_1_1_3_1 = (Assignment)cGroup_1_1_3.eContents().get(1);
 		private final RuleCall cLowerBoundINTTerminalRuleCall_1_1_3_1_0 = (RuleCall)cLowerBoundAssignment_1_1_3_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//BoundedScopeDefinition:
 		//	"scope" ((lowerBound=INT "<=")? type=[NamedElement|QualifiedName] "<=" upperBound=INT | upperBound=INT ">="
-		//	type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?) ".";
+		//	type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"scope" ((lowerBound=INT "<=")? type=[NamedElement|QualifiedName] "<=" upperBound=INT | upperBound=INT ">="
-		//type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?) "."
+		//type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?)
 		public Group getGroup() { return cGroup; }
 		
 		//"scope"
@@ -1852,9 +1833,6 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//INT
 		public RuleCall getLowerBoundINTTerminalRuleCall_1_1_3_1_0() { return cLowerBoundINTTerminalRuleCall_1_1_3_1_0; }
-		
-		//"."
-		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
 	}
 	public class LowerBoundedScopeDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.LowerBoundedScopeDefinition");
@@ -1875,15 +1853,13 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignEqualsSignKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
 		private final Assignment cLowerBoundAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
 		private final RuleCall cLowerBoundINTTerminalRuleCall_1_1_2_0 = (RuleCall)cLowerBoundAssignment_1_1_2.eContents().get(0);
-		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//LowerBoundedScopeDefinition:
 		//	"scope" (lowerBound=INT "<=" type=[NamedElement|QualifiedName] | type=[NamedElement|QualifiedName] ">="
-		//	lowerBound=INT) ".";
+		//	lowerBound=INT);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"scope" (lowerBound=INT "<=" type=[NamedElement|QualifiedName] | type=[NamedElement|QualifiedName] ">=" lowerBound=INT)
-		//"."
 		public Group getGroup() { return cGroup; }
 		
 		//"scope"
@@ -1933,9 +1909,6 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//INT
 		public RuleCall getLowerBoundINTTerminalRuleCall_1_1_2_0() { return cLowerBoundINTTerminalRuleCall_1_1_2_0; }
-		
-		//"."
-		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
 	}
 	public class ObjectiveDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.ObjectiveDefinition");
@@ -2584,9 +2557,10 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final QualifiedNameElements pQualifiedName;
 	private final TerminalRule tSTRING;
 	private final TerminalRule tQUOTED_ID;
-	private final TerminalRule tPLUS;
-	private final TerminalRule tSTAR;
-	private final TerminalRule tDOT;
+	private final TerminalRule tSL_COMMENT;
+	private final TerminalRule tTRANSITIVE_CLOSURE;
+	private final TerminalRule tREFLEXIVE_TRANSITIVE_CLOSURE;
+	private final TerminalRule tFULL_STOP;
 	private final NamedElementElements pNamedElement;
 	
 	private final Grammar grammar;
@@ -2662,9 +2636,10 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.pQualifiedName = new QualifiedNameElements();
 		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.STRING");
 		this.tQUOTED_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.QUOTED_ID");
-		this.tPLUS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.PLUS");
-		this.tSTAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.STAR");
-		this.tDOT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.DOT");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.SL_COMMENT");
+		this.tTRANSITIVE_CLOSURE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.TRANSITIVE_CLOSURE");
+		this.tREFLEXIVE_TRANSITIVE_CLOSURE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.REFLEXIVE_TRANSITIVE_CLOSURE");
+		this.tFULL_STOP = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.SolverLanguage.FULL_STOP");
 		this.pNamedElement = new NamedElementElements();
 	}
 	
@@ -2708,7 +2683,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//Statement:
 	//	(AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition |
 	//	ExternPredicateDefinition | MetricDefinition | ExternMetricDefinition | ClassDefinition | ScopeDefinition |
-	//	ObjectiveDefinition) DOT;
+	//	ObjectiveDefinition) FULL_STOP;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -2759,7 +2734,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ExternPredicateDefinition:
-	//	"extern" head=Call ".";
+	//	"extern" head=Call;
 	public ExternPredicateDefinitionElements getExternPredicateDefinitionAccess() {
 		return pExternPredicateDefinition;
 	}
@@ -3000,7 +2975,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AtomicExpression Expression:
-	//	Reference ({Call.functor=current} -> argumentList=ArgumentList)? | Interval | Literal | "(" Expression ")";
+	//	Reference | Call | Interval | Literal | "(" Expression ")";
 	public AtomicExpressionElements getAtomicExpressionAccess() {
 		return pAtomicExpression;
 	}
@@ -3010,7 +2985,8 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Call:
-	//	functor=Reference (transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)? argumentList=ArgumentList;
+	//	functor=Reference (transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)?
+	//	argumentList=ArgumentList;
 	public CallElements getCallAccess() {
 		return pCall;
 	}
@@ -3169,7 +3145,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 	
-	//ClassDefinition Statement:
+	//ClassDefinition:
 	//	abstract?="abstract"? "class" name=ID ("extends" superclasses+=[NamedElement|QualifiedName] (","
 	//	superclasses+=[NamedElement|QualifiedName])*)?
 	//	"{" members+=MemberDefinition* "}";
@@ -3254,7 +3230,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//BoundedScopeDefinition:
 	//	"scope" ((lowerBound=INT "<=")? type=[NamedElement|QualifiedName] "<=" upperBound=INT | upperBound=INT ">="
-	//	type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?) ".";
+	//	type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?);
 	public BoundedScopeDefinitionElements getBoundedScopeDefinitionAccess() {
 		return pBoundedScopeDefinition;
 	}
@@ -3265,7 +3241,7 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//LowerBoundedScopeDefinition:
 	//	"scope" (lowerBound=INT "<=" type=[NamedElement|QualifiedName] | type=[NamedElement|QualifiedName] ">="
-	//	lowerBound=INT) ".";
+	//	lowerBound=INT);
 	public LowerBoundedScopeDefinitionElements getLowerBoundedScopeDefinitionAccess() {
 		return pLowerBoundedScopeDefinition;
 	}
@@ -3337,22 +3313,29 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return tQUOTED_ID;
 	}
 	
-	//terminal PLUS:
-	//	"synthetic::plus";
-	public TerminalRule getPLUSRule() {
-		return tPLUS;
+	//@Override
+	//terminal SL_COMMENT:
+	//	('%' | '//') !('\n' | '\r')* ('\r'? '\n')?;
+	public TerminalRule getSL_COMMENTRule() {
+		return tSL_COMMENT;
 	}
 	
-	//terminal STAR:
-	//	"synthetic::star";
-	public TerminalRule getSTARRule() {
-		return tSTAR;
+	//terminal TRANSITIVE_CLOSURE:
+	//	"synthetic:TRANSITIVE_CLOSURE";
+	public TerminalRule getTRANSITIVE_CLOSURERule() {
+		return tTRANSITIVE_CLOSURE;
 	}
 	
-	//terminal DOT:
-	//	"synthetic::dot";
-	public TerminalRule getDOTRule() {
-		return tDOT;
+	//terminal REFLEXIVE_TRANSITIVE_CLOSURE:
+	//	"synthetic:REFLEXIVE_TRANSITIVE_CLOSURE";
+	public TerminalRule getREFLEXIVE_TRANSITIVE_CLOSURERule() {
+		return tREFLEXIVE_TRANSITIVE_CLOSURE;
+	}
+	
+	//terminal FULL_STOP:
+	//	"synthetic:FULL_STOP";
+	public TerminalRule getFULL_STOPRule() {
+		return tFULL_STOP;
 	}
 	
 	//NamedElement:
@@ -3381,12 +3364,6 @@ public class SolverLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	}
-	
-	//terminal SL_COMMENT:
-	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
-	public TerminalRule getSL_COMMENTRule() {
-		return gaTerminals.getSL_COMMENTRule();
 	}
 	
 	//terminal WS:

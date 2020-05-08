@@ -22,6 +22,7 @@ import org.eclipse.viatra.solver.language.solverLanguage.BoundedMultiplicity;
 import org.eclipse.viatra.solver.language.solverLanguage.BoundedScopeDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Call;
 import org.eclipse.viatra.solver.language.solverLanguage.Case;
+import org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Comparison;
 import org.eclipse.viatra.solver.language.solverLanguage.Conjunction;
 import org.eclipse.viatra.solver.language.solverLanguage.Count;
@@ -269,6 +270,13 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   private EClass stringLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass classDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -532,50 +540,6 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
   public EClass getStatement()
   {
     return statementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStatement_Abstract()
-  {
-    return (EAttribute)statementEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStatement_Name()
-  {
-    return (EAttribute)statementEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStatement_Superclasses()
-  {
-    return (EReference)statementEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStatement_Members()
-  {
-    return (EReference)statementEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -980,20 +944,9 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
    * @generated
    */
   @Override
-  public EReference getCall_ArgumentList()
-  {
-    return (EReference)callEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EAttribute getCall_TransitiveClosure()
   {
-    return (EAttribute)callEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)callEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1004,7 +957,18 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
   @Override
   public EAttribute getCall_ReflexiveTransitiveClosure()
   {
-    return (EAttribute)callEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)callEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCall_ArgumentList()
+  {
+    return (EReference)callEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1280,6 +1244,61 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
   public EAttribute getStringLiteral_Value()
   {
     return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getClassDefinition()
+  {
+    return classDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getClassDefinition_Abstract()
+  {
+    return (EAttribute)classDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getClassDefinition_Name()
+  {
+    return (EAttribute)classDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getClassDefinition_Superclasses()
+  {
+    return (EReference)classDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getClassDefinition_Members()
+  {
+    return (EReference)classDefinitionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1900,10 +1919,6 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     createEReference(problemEClass, PROBLEM__STATEMENTS);
 
     statementEClass = createEClass(STATEMENT);
-    createEAttribute(statementEClass, STATEMENT__ABSTRACT);
-    createEAttribute(statementEClass, STATEMENT__NAME);
-    createEReference(statementEClass, STATEMENT__SUPERCLASSES);
-    createEReference(statementEClass, STATEMENT__MEMBERS);
 
     predicateDefinitionEClass = createEClass(PREDICATE_DEFINITION);
     createEReference(predicateDefinitionEClass, PREDICATE_DEFINITION__HEAD);
@@ -1952,9 +1967,9 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
 
     callEClass = createEClass(CALL);
     createEReference(callEClass, CALL__FUNCTOR);
-    createEReference(callEClass, CALL__ARGUMENT_LIST);
     createEAttribute(callEClass, CALL__TRANSITIVE_CLOSURE);
     createEAttribute(callEClass, CALL__REFLEXIVE_TRANSITIVE_CLOSURE);
+    createEReference(callEClass, CALL__ARGUMENT_LIST);
 
     argumentListEClass = createEClass(ARGUMENT_LIST);
     createEReference(argumentListEClass, ARGUMENT_LIST__ARGUMENTS);
@@ -1994,6 +2009,12 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
 
     stringLiteralEClass = createEClass(STRING_LITERAL);
     createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
+
+    classDefinitionEClass = createEClass(CLASS_DEFINITION);
+    createEAttribute(classDefinitionEClass, CLASS_DEFINITION__ABSTRACT);
+    createEAttribute(classDefinitionEClass, CLASS_DEFINITION__NAME);
+    createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPERCLASSES);
+    createEReference(classDefinitionEClass, CLASS_DEFINITION__MEMBERS);
 
     memberDefinitionEClass = createEClass(MEMBER_DEFINITION);
     createEAttribute(memberDefinitionEClass, MEMBER_DEFINITION__CONTAINMENT);
@@ -2122,6 +2143,7 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     infinityLiteralEClass.getESuperTypes().add(this.getLiteral());
     emptyIntervalLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
+    classDefinitionEClass.getESuperTypes().add(this.getStatement());
     manyMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
     exactMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
     boundedMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
@@ -2143,10 +2165,6 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
     initEReference(getProblem_Statements(), this.getStatement(), null, "statements", null, 0, -1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStatement_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getStatement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStatement_Superclasses(), this.getNamedElement(), null, "superclasses", null, 0, -1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStatement_Members(), this.getMemberDefinition(), null, "members", null, 0, -1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(predicateDefinitionEClass, PredicateDefinition.class, "PredicateDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPredicateDefinition_Head(), this.getExpression(), null, "head", null, 0, 1, PredicateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2195,9 +2213,9 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
 
     initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCall_Functor(), this.getReference(), null, "functor", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCall_ArgumentList(), this.getArgumentList(), null, "argumentList", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getCall_TransitiveClosure(), ecorePackage.getEBoolean(), "transitiveClosure", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getCall_ReflexiveTransitiveClosure(), ecorePackage.getEBoolean(), "reflexiveTransitiveClosure", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCall_ArgumentList(), this.getArgumentList(), null, "argumentList", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(argumentListEClass, ArgumentList.class, "ArgumentList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArgumentList_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, ArgumentList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2237,6 +2255,12 @@ public class SolverLanguagePackageImpl extends EPackageImpl implements SolverLan
 
     initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(classDefinitionEClass, ClassDefinition.class, "ClassDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getClassDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getClassDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClassDefinition_Superclasses(), this.getNamedElement(), null, "superclasses", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClassDefinition_Members(), this.getMemberDefinition(), null, "members", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(memberDefinitionEClass, MemberDefinition.class, "MemberDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMemberDefinition_Containment(), ecorePackage.getEBoolean(), "containment", null, 0, 1, MemberDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

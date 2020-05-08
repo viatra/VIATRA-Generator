@@ -53,12 +53,7 @@
     <genClasses ecoreClass="SolverLanguage.ecore#//Problem">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Problem/statements"/>
     </genClasses>
-    <genClasses ecoreClass="SolverLanguage.ecore#//Statement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//Statement/abstract"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//Statement/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Statement/superclasses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Statement/members"/>
-    </genClasses>
+    <genClasses ecoreClass="SolverLanguage.ecore#//Statement"/>
     <genClasses ecoreClass="SolverLanguage.ecore#//PredicateDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//PredicateDefinition/head"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//PredicateDefinition/body"/>
@@ -105,9 +100,9 @@
     </genClasses>
     <genClasses ecoreClass="SolverLanguage.ecore#//Call">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Call/functor"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Call/argumentList"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//Call/transitiveClosure"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//Call/reflexiveTransitiveClosure"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//Call/argumentList"/>
     </genClasses>
     <genClasses ecoreClass="SolverLanguage.ecore#//ArgumentList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//ArgumentList/arguments"/>
@@ -142,6 +137,12 @@
     <genClasses ecoreClass="SolverLanguage.ecore#//EmptyIntervalLiteral"/>
     <genClasses ecoreClass="SolverLanguage.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SolverLanguage.ecore#//ClassDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//ClassDefinition/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//ClassDefinition/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//ClassDefinition/superclasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SolverLanguage.ecore#//ClassDefinition/members"/>
     </genClasses>
     <genClasses ecoreClass="SolverLanguage.ecore#//MemberDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SolverLanguage.ecore#//MemberDefinition/containment"/>

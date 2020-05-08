@@ -97,49 +97,13 @@ public interface SolverLanguagePackage extends EPackage
   int STATEMENT = 1;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__ABSTRACT = 0;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__NAME = 1;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__SUPERCLASSES = 2;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__MEMBERS = 3;
-
-  /**
    * The number of structural features of the '<em>Statement</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATEMENT_FEATURE_COUNT = 4;
+  int STATEMENT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateDefinitionImpl <em>Predicate Definition</em>}' class.
@@ -150,42 +114,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int PREDICATE_DEFINITION = 2;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PREDICATE_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Head</b></em>' containment reference.
@@ -243,42 +171,6 @@ public interface SolverLanguagePackage extends EPackage
   int UNNAMED_ERROR_PREDIATE_DEFINITION = 3;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNNAMED_ERROR_PREDIATE_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNNAMED_ERROR_PREDIATE_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNNAMED_ERROR_PREDIATE_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNNAMED_ERROR_PREDIATE_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Argument List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -314,42 +206,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int DEFAULT_DEFINITION = 4;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DEFAULT_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DEFAULT_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DEFAULT_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DEFAULT_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Head</b></em>' containment reference.
@@ -389,42 +245,6 @@ public interface SolverLanguagePackage extends EPackage
   int EXTERN_PREDICATE_DEFINITION = 5;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_PREDICATE_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_PREDICATE_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_PREDICATE_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_PREDICATE_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Head</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -451,42 +271,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int METRIC_DEFINITION = 6;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int METRIC_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int METRIC_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int METRIC_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int METRIC_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Head</b></em>' containment reference.
@@ -535,42 +319,6 @@ public interface SolverLanguagePackage extends EPackage
   int EXTERN_METRIC_DEFINITION = 7;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_METRIC_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_METRIC_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_METRIC_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXTERN_METRIC_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -608,42 +356,6 @@ public interface SolverLanguagePackage extends EPackage
   int EXPRESSION = 8;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION__MEMBERS = STATEMENT__MEMBERS;
-
-  /**
    * The number of structural features of the '<em>Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -661,42 +373,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int IF_ELSE = 9;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IF_ELSE__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IF_ELSE__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IF_ELSE__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int IF_ELSE__MEMBERS = EXPRESSION__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -745,42 +421,6 @@ public interface SolverLanguagePackage extends EPackage
   int CASE = 10;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CASE__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CASE__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CASE__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CASE__MEMBERS = EXPRESSION__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -818,42 +458,6 @@ public interface SolverLanguagePackage extends EPackage
   int COUNT = 11;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COUNT__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COUNT__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COUNT__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COUNT__MEMBERS = EXPRESSION__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -880,42 +484,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int AGGREGATION = 12;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AGGREGATION__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AGGREGATION__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AGGREGATION__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AGGREGATION__MEMBERS = EXPRESSION__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -964,42 +532,6 @@ public interface SolverLanguagePackage extends EPackage
   int CALL = 13;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CALL__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CALL__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CALL__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CALL__MEMBERS = EXPRESSION__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Functor</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1009,22 +541,13 @@ public interface SolverLanguagePackage extends EPackage
   int CALL__FUNCTOR = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Argument List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CALL__ARGUMENT_LIST = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
    * The feature id for the '<em><b>Transitive Closure</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CALL__TRANSITIVE_CLOSURE = EXPRESSION_FEATURE_COUNT + 2;
+  int CALL__TRANSITIVE_CLOSURE = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Reflexive Transitive Closure</b></em>' attribute.
@@ -1033,7 +556,16 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int CALL__REFLEXIVE_TRANSITIVE_CLOSURE = EXPRESSION_FEATURE_COUNT + 3;
+  int CALL__REFLEXIVE_TRANSITIVE_CLOSURE = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Argument List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CALL__ARGUMENT_LIST = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Call</em>' class.
@@ -1214,42 +746,6 @@ public interface SolverLanguagePackage extends EPackage
   int REFERENCE = 20;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__MEMBERS = EXPRESSION__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Referred</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1276,42 +772,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int INTERVAL = 21;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INTERVAL__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INTERVAL__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INTERVAL__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INTERVAL__MEMBERS = EXPRESSION__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Lower Bound</b></em>' containment reference.
@@ -1351,42 +811,6 @@ public interface SolverLanguagePackage extends EPackage
   int LITERAL = 22;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LITERAL__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LITERAL__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LITERAL__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LITERAL__MEMBERS = EXPRESSION__MEMBERS;
-
-  /**
    * The number of structural features of the '<em>Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1404,42 +828,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int LOGIC_LITERAL = 23;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGIC_LITERAL__ABSTRACT = LITERAL__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGIC_LITERAL__NAME = LITERAL__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGIC_LITERAL__SUPERCLASSES = LITERAL__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGIC_LITERAL__MEMBERS = LITERAL__MEMBERS;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1470,42 +858,6 @@ public interface SolverLanguagePackage extends EPackage
   int NUMERIC_LITERAL = 24;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NUMERIC_LITERAL__ABSTRACT = LITERAL__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NUMERIC_LITERAL__NAME = LITERAL__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NUMERIC_LITERAL__SUPERCLASSES = LITERAL__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NUMERIC_LITERAL__MEMBERS = LITERAL__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1534,42 +886,6 @@ public interface SolverLanguagePackage extends EPackage
   int INFINITY_LITERAL = 25;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INFINITY_LITERAL__ABSTRACT = LITERAL__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INFINITY_LITERAL__NAME = LITERAL__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INFINITY_LITERAL__SUPERCLASSES = LITERAL__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INFINITY_LITERAL__MEMBERS = LITERAL__MEMBERS;
-
-  /**
    * The number of structural features of the '<em>Infinity Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1587,42 +903,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   int EMPTY_INTERVAL_LITERAL = 26;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EMPTY_INTERVAL_LITERAL__ABSTRACT = LITERAL__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EMPTY_INTERVAL_LITERAL__NAME = LITERAL__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EMPTY_INTERVAL_LITERAL__SUPERCLASSES = LITERAL__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EMPTY_INTERVAL_LITERAL__MEMBERS = LITERAL__MEMBERS;
 
   /**
    * The number of structural features of the '<em>Empty Interval Literal</em>' class.
@@ -1644,42 +924,6 @@ public interface SolverLanguagePackage extends EPackage
   int STRING_LITERAL = 27;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRING_LITERAL__ABSTRACT = LITERAL__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRING_LITERAL__NAME = LITERAL__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRING_LITERAL__SUPERCLASSES = LITERAL__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRING_LITERAL__MEMBERS = LITERAL__MEMBERS;
-
-  /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1698,6 +942,61 @@ public interface SolverLanguagePackage extends EPackage
   int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.viatra.solver.language.solverLanguage.impl.ClassDefinitionImpl
+   * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getClassDefinition()
+   * @generated
+   */
+  int CLASS_DEFINITION = 28;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_DEFINITION__ABSTRACT = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_DEFINITION__NAME = STATEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_DEFINITION__SUPERCLASSES = STATEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Members</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_DEFINITION__MEMBERS = STATEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Class Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLASS_DEFINITION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
+
+  /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.MemberDefinitionImpl <em>Member Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1705,7 +1004,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getMemberDefinition()
    * @generated
    */
-  int MEMBER_DEFINITION = 28;
+  int MEMBER_DEFINITION = 29;
 
   /**
    * The feature id for the '<em><b>Containment</b></em>' attribute.
@@ -1769,7 +1068,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getMultiplicity()
    * @generated
    */
-  int MULTIPLICITY = 29;
+  int MULTIPLICITY = 30;
 
   /**
    * The number of structural features of the '<em>Multiplicity</em>' class.
@@ -1788,7 +1087,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getManyMultiplicity()
    * @generated
    */
-  int MANY_MULTIPLICITY = 30;
+  int MANY_MULTIPLICITY = 31;
 
   /**
    * The number of structural features of the '<em>Many Multiplicity</em>' class.
@@ -1807,7 +1106,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getExactMultiplicity()
    * @generated
    */
-  int EXACT_MULTIPLICITY = 31;
+  int EXACT_MULTIPLICITY = 32;
 
   /**
    * The feature id for the '<em><b>Multiplicity</b></em>' attribute.
@@ -1835,7 +1134,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getBoundedMultiplicity()
    * @generated
    */
-  int BOUNDED_MULTIPLICITY = 32;
+  int BOUNDED_MULTIPLICITY = 33;
 
   /**
    * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
@@ -1872,43 +1171,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getScopeDefinition()
    * @generated
    */
-  int SCOPE_DEFINITION = 33;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SCOPE_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SCOPE_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SCOPE_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SCOPE_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
+  int SCOPE_DEFINITION = 34;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1936,43 +1199,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getExactScopeDefinition()
    * @generated
    */
-  int EXACT_SCOPE_DEFINITION = 34;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXACT_SCOPE_DEFINITION__ABSTRACT = SCOPE_DEFINITION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXACT_SCOPE_DEFINITION__NAME = SCOPE_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXACT_SCOPE_DEFINITION__SUPERCLASSES = SCOPE_DEFINITION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXACT_SCOPE_DEFINITION__MEMBERS = SCOPE_DEFINITION__MEMBERS;
+  int EXACT_SCOPE_DEFINITION = 35;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -2009,43 +1236,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getBoundedScopeDefinition()
    * @generated
    */
-  int BOUNDED_SCOPE_DEFINITION = 35;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOUNDED_SCOPE_DEFINITION__ABSTRACT = SCOPE_DEFINITION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOUNDED_SCOPE_DEFINITION__NAME = SCOPE_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOUNDED_SCOPE_DEFINITION__SUPERCLASSES = SCOPE_DEFINITION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOUNDED_SCOPE_DEFINITION__MEMBERS = SCOPE_DEFINITION__MEMBERS;
+  int BOUNDED_SCOPE_DEFINITION = 36;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -2091,43 +1282,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getLowerBoundedScopeDefinition()
    * @generated
    */
-  int LOWER_BOUNDED_SCOPE_DEFINITION = 36;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOWER_BOUNDED_SCOPE_DEFINITION__ABSTRACT = SCOPE_DEFINITION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOWER_BOUNDED_SCOPE_DEFINITION__NAME = SCOPE_DEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOWER_BOUNDED_SCOPE_DEFINITION__SUPERCLASSES = SCOPE_DEFINITION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOWER_BOUNDED_SCOPE_DEFINITION__MEMBERS = SCOPE_DEFINITION__MEMBERS;
+  int LOWER_BOUNDED_SCOPE_DEFINITION = 37;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -2164,43 +1319,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getObjectiveDefinition()
    * @generated
    */
-  int OBJECTIVE_DEFINITION = 37;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OBJECTIVE_DEFINITION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OBJECTIVE_DEFINITION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OBJECTIVE_DEFINITION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OBJECTIVE_DEFINITION__MEMBERS = STATEMENT__MEMBERS;
+  int OBJECTIVE_DEFINITION = 38;
 
   /**
    * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -2237,7 +1356,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getNamedElement()
    * @generated
    */
-  int NAMED_ELEMENT = 38;
+  int NAMED_ELEMENT = 39;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2265,43 +1384,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getAssertion()
    * @generated
    */
-  int ASSERTION = 39;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__ABSTRACT = STATEMENT__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__NAME = STATEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__SUPERCLASSES = STATEMENT__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__MEMBERS = STATEMENT__MEMBERS;
+  int ASSERTION = 40;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -2338,43 +1421,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getDisjunction()
    * @generated
    */
-  int DISJUNCTION = 40;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DISJUNCTION__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DISJUNCTION__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DISJUNCTION__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DISJUNCTION__MEMBERS = EXPRESSION__MEMBERS;
+  int DISJUNCTION = 41;
 
   /**
    * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2402,43 +1449,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getSwitch()
    * @generated
    */
-  int SWITCH = 41;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SWITCH__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SWITCH__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SWITCH__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SWITCH__MEMBERS = EXPRESSION__MEMBERS;
+  int SWITCH = 42;
 
   /**
    * The feature id for the '<em><b>Cases</b></em>' containment reference list.
@@ -2466,43 +1477,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getConjunction()
    * @generated
    */
-  int CONJUNCTION = 42;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONJUNCTION__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONJUNCTION__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONJUNCTION__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONJUNCTION__MEMBERS = EXPRESSION__MEMBERS;
+  int CONJUNCTION = 43;
 
   /**
    * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2530,43 +1505,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getComparison()
    * @generated
    */
-  int COMPARISON = 43;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPARISON__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPARISON__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPARISON__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPARISON__MEMBERS = EXPRESSION__MEMBERS;
+  int COMPARISON = 44;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2612,43 +1551,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getBinaryExpression()
    * @generated
    */
-  int BINARY_EXPRESSION = 44;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BINARY_EXPRESSION__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BINARY_EXPRESSION__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BINARY_EXPRESSION__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BINARY_EXPRESSION__MEMBERS = EXPRESSION__MEMBERS;
+  int BINARY_EXPRESSION = 45;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2694,43 +1597,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getUnaryExpression()
    * @generated
    */
-  int UNARY_EXPRESSION = 45;
-
-  /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNARY_EXPRESSION__ABSTRACT = EXPRESSION__ABSTRACT;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNARY_EXPRESSION__NAME = EXPRESSION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Superclasses</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNARY_EXPRESSION__SUPERCLASSES = EXPRESSION__SUPERCLASSES;
-
-  /**
-   * The feature id for the '<em><b>Members</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNARY_EXPRESSION__MEMBERS = EXPRESSION__MEMBERS;
+  int UNARY_EXPRESSION = 46;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2767,7 +1634,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getMetricType()
    * @generated
    */
-  int METRIC_TYPE = 46;
+  int METRIC_TYPE = 47;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.BinaryOperator <em>Binary Operator</em>}' enum.
@@ -2777,7 +1644,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getBinaryOperator()
    * @generated
    */
-  int BINARY_OPERATOR = 47;
+  int BINARY_OPERATOR = 48;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.UnaryOp <em>Unary Op</em>}' enum.
@@ -2787,7 +1654,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getUnaryOp()
    * @generated
    */
-  int UNARY_OP = 48;
+  int UNARY_OP = 49;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.AggregationOp <em>Aggregation Op</em>}' enum.
@@ -2797,7 +1664,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getAggregationOp()
    * @generated
    */
-  int AGGREGATION_OP = 49;
+  int AGGREGATION_OP = 50;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.LogicValue <em>Logic Value</em>}' enum.
@@ -2807,7 +1674,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getLogicValue()
    * @generated
    */
-  int LOGIC_VALUE = 50;
+  int LOGIC_VALUE = 51;
 
   /**
    * The meta object id for the '{@link org.eclipse.viatra.solver.language.solverLanguage.ObjectiveKind <em>Objective Kind</em>}' enum.
@@ -2817,7 +1684,7 @@ public interface SolverLanguagePackage extends EPackage
    * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getObjectiveKind()
    * @generated
    */
-  int OBJECTIVE_KIND = 51;
+  int OBJECTIVE_KIND = 52;
 
 
   /**
@@ -2850,50 +1717,6 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   EClass getStatement();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.Statement#isAbstract <em>Abstract</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Abstract</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.Statement#isAbstract()
-   * @see #getStatement()
-   * @generated
-   */
-  EAttribute getStatement_Abstract();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.Statement#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.Statement#getName()
-   * @see #getStatement()
-   * @generated
-   */
-  EAttribute getStatement_Name();
-
-  /**
-   * Returns the meta object for the reference list '{@link org.eclipse.viatra.solver.language.solverLanguage.Statement#getSuperclasses <em>Superclasses</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Superclasses</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.Statement#getSuperclasses()
-   * @see #getStatement()
-   * @generated
-   */
-  EReference getStatement_Superclasses();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.viatra.solver.language.solverLanguage.Statement#getMembers <em>Members</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Members</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.Statement#getMembers()
-   * @see #getStatement()
-   * @generated
-   */
-  EReference getStatement_Members();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.PredicateDefinition <em>Predicate Definition</em>}'.
@@ -3280,17 +2103,6 @@ public interface SolverLanguagePackage extends EPackage
   EReference getCall_Functor();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList <em>Argument List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Argument List</em>'.
-   * @see org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList()
-   * @see #getCall()
-   * @generated
-   */
-  EReference getCall_ArgumentList();
-
-  /**
    * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.Call#isTransitiveClosure <em>Transitive Closure</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3311,6 +2123,17 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getCall_ReflexiveTransitiveClosure();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList <em>Argument List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Argument List</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList()
+   * @see #getCall()
+   * @generated
+   */
+  EReference getCall_ArgumentList();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.ArgumentList <em>Argument List</em>}'.
@@ -3572,6 +2395,60 @@ public interface SolverLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getStringLiteral_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition <em>Class Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Class Definition</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition
+   * @generated
+   */
+  EClass getClassDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#isAbstract <em>Abstract</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Abstract</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#isAbstract()
+   * @see #getClassDefinition()
+   * @generated
+   */
+  EAttribute getClassDefinition_Abstract();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#getName()
+   * @see #getClassDefinition()
+   * @generated
+   */
+  EAttribute getClassDefinition_Name();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#getSuperclasses <em>Superclasses</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Superclasses</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#getSuperclasses()
+   * @see #getClassDefinition()
+   * @generated
+   */
+  EReference getClassDefinition_Superclasses();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#getMembers <em>Members</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Members</em>'.
+   * @see org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition#getMembers()
+   * @see #getClassDefinition()
+   * @generated
+   */
+  EReference getClassDefinition_Members();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.solverLanguage.MemberDefinition <em>Member Definition</em>}'.
@@ -4184,38 +3061,6 @@ public interface SolverLanguagePackage extends EPackage
     EClass STATEMENT = eINSTANCE.getStatement();
 
     /**
-     * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATEMENT__ABSTRACT = eINSTANCE.getStatement_Abstract();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATEMENT__NAME = eINSTANCE.getStatement_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Superclasses</b></em>' reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATEMENT__SUPERCLASSES = eINSTANCE.getStatement_Superclasses();
-
-    /**
-     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATEMENT__MEMBERS = eINSTANCE.getStatement_Members();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.PredicateDefinitionImpl <em>Predicate Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4528,14 +3373,6 @@ public interface SolverLanguagePackage extends EPackage
     EReference CALL__FUNCTOR = eINSTANCE.getCall_Functor();
 
     /**
-     * The meta object literal for the '<em><b>Argument List</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CALL__ARGUMENT_LIST = eINSTANCE.getCall_ArgumentList();
-
-    /**
      * The meta object literal for the '<em><b>Transitive Closure</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4550,6 +3387,14 @@ public interface SolverLanguagePackage extends EPackage
      * @generated
      */
     EAttribute CALL__REFLEXIVE_TRANSITIVE_CLOSURE = eINSTANCE.getCall_ReflexiveTransitiveClosure();
+
+    /**
+     * The meta object literal for the '<em><b>Argument List</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CALL__ARGUMENT_LIST = eINSTANCE.getCall_ArgumentList();
 
     /**
      * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ArgumentListImpl <em>Argument List</em>}' class.
@@ -4778,6 +3623,48 @@ public interface SolverLanguagePackage extends EPackage
      * @generated
      */
     EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.viatra.solver.language.solverLanguage.impl.ClassDefinitionImpl
+     * @see org.eclipse.viatra.solver.language.solverLanguage.impl.SolverLanguagePackageImpl#getClassDefinition()
+     * @generated
+     */
+    EClass CLASS_DEFINITION = eINSTANCE.getClassDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CLASS_DEFINITION__ABSTRACT = eINSTANCE.getClassDefinition_Abstract();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CLASS_DEFINITION__NAME = eINSTANCE.getClassDefinition_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Superclasses</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLASS_DEFINITION__SUPERCLASSES = eINSTANCE.getClassDefinition_Superclasses();
+
+    /**
+     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLASS_DEFINITION__MEMBERS = eINSTANCE.getClassDefinition_Members();
 
     /**
      * The meta object literal for the '{@link org.eclipse.viatra.solver.language.solverLanguage.impl.MemberDefinitionImpl <em>Member Definition</em>}' class.

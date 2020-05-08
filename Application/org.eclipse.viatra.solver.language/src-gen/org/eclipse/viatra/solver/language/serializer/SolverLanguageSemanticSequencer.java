@@ -16,6 +16,7 @@ import org.eclipse.viatra.solver.language.solverLanguage.BoundedMultiplicity;
 import org.eclipse.viatra.solver.language.solverLanguage.BoundedScopeDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Call;
 import org.eclipse.viatra.solver.language.solverLanguage.Case;
+import org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Comparison;
 import org.eclipse.viatra.solver.language.solverLanguage.Conjunction;
 import org.eclipse.viatra.solver.language.solverLanguage.Count;
@@ -43,7 +44,6 @@ import org.eclipse.viatra.solver.language.solverLanguage.Problem;
 import org.eclipse.viatra.solver.language.solverLanguage.Reference;
 import org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage;
 import org.eclipse.viatra.solver.language.solverLanguage.StarArgument;
-import org.eclipse.viatra.solver.language.solverLanguage.Statement;
 import org.eclipse.viatra.solver.language.solverLanguage.StringLiteral;
 import org.eclipse.viatra.solver.language.solverLanguage.Switch;
 import org.eclipse.viatra.solver.language.solverLanguage.TypedArgument;
@@ -91,34 +91,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 				sequence_BoundedScopeDefinition(context, (BoundedScopeDefinition) semanticObject); 
 				return; 
 			case SolverLanguagePackage.CALL:
-				if (action == grammarAccess.getAssertionOrDefinitionAccess().getAssertionBodyAction_1_0_0()
-						|| action == grammarAccess.getAssertionOrDefinitionAccess().getPredicateDefinitionHeadAction_1_1_0()
-						|| action == grammarAccess.getAssertionOrDefinitionAccess().getMetricDefinitionHeadAction_1_2_0()
-						|| rule == grammarAccess.getExpressionRule()
-						|| rule == grammarAccess.getDisjunctiveExpressionRule()
-						|| action == grammarAccess.getDisjunctiveExpressionAccess().getDisjunctionChildrenAction_1_0_0()
-						|| action == grammarAccess.getDisjunctiveExpressionAccess().getCaseConditionAction_1_1_0()
-						|| rule == grammarAccess.getConjunctiveExpressionRule()
-						|| action == grammarAccess.getConjunctiveExpressionAccess().getConjunctionChildrenAction_1_0()
-						|| rule == grammarAccess.getComparisonExpressionRule()
-						|| action == grammarAccess.getComparisonExpressionAccess().getComparisonLeftAction_1_0()
-						|| rule == grammarAccess.getAdditiveExpressionRule()
-						|| action == grammarAccess.getAdditiveExpressionAccess().getBinaryExpressionLeftAction_1_0()
-						|| rule == grammarAccess.getMultiplicativeExpressionRule()
-						|| action == grammarAccess.getMultiplicativeExpressionAccess().getBinaryExpressionLeftAction_1_0()
-						|| rule == grammarAccess.getExponentialExpressionRule()
-						|| action == grammarAccess.getExponentialExpressionAccess().getBinaryExpressionLeftAction_1_0()
-						|| rule == grammarAccess.getUnaryExpressionRule()
-						|| rule == grammarAccess.getAggregationExpressionRule()
-						|| rule == grammarAccess.getAtomicExpressionRule()) {
-					sequence_AtomicExpression(context, (Call) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getCallRule()) {
-					sequence_Call(context, (Call) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Call(context, (Call) semanticObject); 
+				return; 
 			case SolverLanguagePackage.CASE:
 				if (rule == grammarAccess.getCaseRule()) {
 					sequence_Case(context, (Case) semanticObject); 
@@ -129,6 +103,9 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 					return; 
 				}
 				else break;
+			case SolverLanguagePackage.CLASS_DEFINITION:
+				sequence_ClassDefinition(context, (ClassDefinition) semanticObject); 
+				return; 
 			case SolverLanguagePackage.COMPARISON:
 				sequence_ComparisonExpression(context, (Comparison) semanticObject); 
 				return; 
@@ -228,9 +205,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 				return; 
 			case SolverLanguagePackage.STAR_ARGUMENT:
 				sequence_StarArgument(context, (StarArgument) semanticObject); 
-				return; 
-			case SolverLanguagePackage.STATEMENT:
-				sequence_ClassDefinition(context, (Statement) semanticObject); 
 				return; 
 			case SolverLanguagePackage.STRING_LITERAL:
 				sequence_StringLiteral(context, (StringLiteral) semanticObject); 
@@ -430,46 +404,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Call
-	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Call
-	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Call
-	 *     Expression returns Call
-	 *     DisjunctiveExpression returns Call
-	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Call
-	 *     DisjunctiveExpression.Case_1_1_0 returns Call
-	 *     ConjunctiveExpression returns Call
-	 *     ConjunctiveExpression.Conjunction_1_0 returns Call
-	 *     ComparisonExpression returns Call
-	 *     ComparisonExpression.Comparison_1_0 returns Call
-	 *     AdditiveExpression returns Call
-	 *     AdditiveExpression.BinaryExpression_1_0 returns Call
-	 *     MultiplicativeExpression returns Call
-	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Call
-	 *     ExponentialExpression returns Call
-	 *     ExponentialExpression.BinaryExpression_1_0 returns Call
-	 *     UnaryExpression returns Call
-	 *     AggregationExpression returns Call
-	 *     AtomicExpression returns Call
-	 *
-	 * Constraint:
-	 *     (functor=AtomicExpression_Call_0_1_0 argumentList=ArgumentList)
-	 */
-	protected void sequence_AtomicExpression(ISerializationContext context, Call semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.CALL__FUNCTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.CALL__FUNCTOR));
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.CALL__ARGUMENT_LIST) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.CALL__ARGUMENT_LIST));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAtomicExpressionAccess().getCallFunctorAction_0_1_0(), semanticObject.getFunctor());
-		feeder.accept(grammarAccess.getAtomicExpressionAccess().getArgumentListArgumentListParserRuleCall_0_1_1_0(), semanticObject.getArgumentList());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Multiplicity returns BoundedMultiplicity
 	 *     BoundedMultiplicity returns BoundedMultiplicity
 	 *
@@ -506,10 +440,34 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
+	 *     AssertionOrDefinition.Assertion_1_0_0 returns Call
+	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Call
+	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Call
+	 *     Expression returns Call
+	 *     DisjunctiveExpression returns Call
+	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Call
+	 *     DisjunctiveExpression.Case_1_1_0 returns Call
+	 *     ConjunctiveExpression returns Call
+	 *     ConjunctiveExpression.Conjunction_1_0 returns Call
+	 *     ComparisonExpression returns Call
+	 *     ComparisonExpression.Comparison_1_0 returns Call
+	 *     AdditiveExpression returns Call
+	 *     AdditiveExpression.BinaryExpression_1_0 returns Call
+	 *     MultiplicativeExpression returns Call
+	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Call
+	 *     ExponentialExpression returns Call
+	 *     ExponentialExpression.BinaryExpression_1_0 returns Call
+	 *     UnaryExpression returns Call
+	 *     AggregationExpression returns Call
+	 *     AtomicExpression returns Call
 	 *     Call returns Call
 	 *
 	 * Constraint:
-	 *     (functor=Reference (transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)? argumentList=ArgumentList)
+	 *     (
+	 *         functor=Reference 
+	 *         (transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)? 
+	 *         argumentList=ArgumentList
+	 *     )
 	 */
 	protected void sequence_Call(ISerializationContext context, Call semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -539,8 +497,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     Statement returns Statement
-	 *     ClassDefinition returns Statement
+	 *     Statement returns ClassDefinition
+	 *     ClassDefinition returns ClassDefinition
 	 *
 	 * Constraint:
 	 *     (
@@ -550,7 +508,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *         members+=MemberDefinition*
 	 *     )
 	 */
-	protected void sequence_ClassDefinition(ISerializationContext context, Statement semanticObject) {
+	protected void sequence_ClassDefinition(ISerializationContext context, ClassDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1252,7 +1210,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     UnaryExpression returns Reference
 	 *     AggregationExpression returns Reference
 	 *     AtomicExpression returns Reference
-	 *     AtomicExpression.Call_0_1_0 returns Reference
 	 *     Reference returns Reference
 	 *
 	 * Constraint:

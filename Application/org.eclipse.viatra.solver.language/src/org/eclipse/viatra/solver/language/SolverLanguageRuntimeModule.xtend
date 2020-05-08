@@ -3,9 +3,21 @@
  */
 package org.eclipse.viatra.solver.language
 
+import org.eclipse.viatra.solver.language.parser.antlr.SolverLanguageTokenDefInjectingParser
+import org.eclipse.viatra.solver.language.serializer.SolverLanguageSyntheticTokenSyntacticSequencer
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class SolverLanguageRuntimeModule extends AbstractSolverLanguageRuntimeModule {
+	
+	override bindIParser() {
+		SolverLanguageTokenDefInjectingParser
+	}
+	
+	
+	override bindISyntacticSequencer() {
+		SolverLanguageSyntheticTokenSyntacticSequencer
+	}
+	
 }

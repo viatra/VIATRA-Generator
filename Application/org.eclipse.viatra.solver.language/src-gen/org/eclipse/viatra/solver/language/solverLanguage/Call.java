@@ -14,9 +14,9 @@ package org.eclipse.viatra.solver.language.solverLanguage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getFunctor <em>Functor</em>}</li>
- *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList <em>Argument List</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.Call#isTransitiveClosure <em>Transitive Closure</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.Call#isReflexiveTransitiveClosure <em>Reflexive Transitive Closure</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList <em>Argument List</em>}</li>
  * </ul>
  *
  * @see org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage#getCall()
@@ -46,28 +46,6 @@ public interface Call extends Expression
    * @generated
    */
   void setFunctor(Reference value);
-
-  /**
-   * Returns the value of the '<em><b>Argument List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Argument List</em>' containment reference.
-   * @see #setArgumentList(ArgumentList)
-   * @see org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage#getCall_ArgumentList()
-   * @model containment="true"
-   * @generated
-   */
-  ArgumentList getArgumentList();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList <em>Argument List</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Argument List</em>' containment reference.
-   * @see #getArgumentList()
-   * @generated
-   */
-  void setArgumentList(ArgumentList value);
 
   /**
    * Returns the value of the '<em><b>Transitive Closure</b></em>' attribute.
@@ -112,5 +90,27 @@ public interface Call extends Expression
    * @generated
    */
   void setReflexiveTransitiveClosure(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Argument List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Argument List</em>' containment reference.
+   * @see #setArgumentList(ArgumentList)
+   * @see org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage#getCall_ArgumentList()
+   * @model containment="true"
+   * @generated
+   */
+  ArgumentList getArgumentList();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.viatra.solver.language.solverLanguage.Call#getArgumentList <em>Argument List</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Argument List</em>' containment reference.
+   * @see #getArgumentList()
+   * @generated
+   */
+  void setArgumentList(ArgumentList value);
 
 } // Call

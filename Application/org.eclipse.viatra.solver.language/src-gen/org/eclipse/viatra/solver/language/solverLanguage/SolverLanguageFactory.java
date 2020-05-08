@@ -276,6 +276,15 @@ public interface SolverLanguageFactory extends EFactory
   StringLiteral createStringLiteral();
 
   /**
+   * Returns a new object of class '<em>Class Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Class Definition</em>'.
+   * @generated
+   */
+  ClassDefinition createClassDefinition();
+
+  /**
    * Returns a new object of class '<em>Member Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

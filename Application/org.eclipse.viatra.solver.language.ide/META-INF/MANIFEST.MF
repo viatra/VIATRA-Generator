@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.viatra.solver.language,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.viatra.solver.language.ide.contentassist.antlr,
- org.eclipse.viatra.solver.language.ide.contentassist.antlr.internal
+ org.eclipse.viatra.solver.language.ide.contentassist.antlr.internal,
+ org.eclipse.viatra.solver.language.ide.contentassist.antlr.lexer
