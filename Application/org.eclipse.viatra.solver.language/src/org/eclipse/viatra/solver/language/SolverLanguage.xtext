@@ -3,150 +3,224 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate solverLanguage "http://www.eclipse.org/viatra/solver/language/SolverLanguage"
 
 Problem:
-	statements+=Statement*;
-Statement: Interpretation | Predicate;
+	(statements+=Statement)*;
 
-@Override terminal STRING returns ecore::EString: '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
-REALLiteral returns ecore::EBigDecimal: '-'? INT '.' INT;
-INTLiteral returns ecore::EInt: '-'? INT;
-BooleanValue: {BooleanTrue} 'true' | 'false' {BooleanFalse};
-TruthValue: {True} 'true'  | {False} 'false'  | {Unknown} 'unknown' |  {Error} 'error' ;
+Statement: 
+	(
+		AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition | ExternPredicateDefinition |
+		MetricDefinition | ExternMetricDefinition | ClassDefinition | ScopeDefinition | ObjectiveDefinition
+	) DOT;
 
+AssertionOrDefinition returns Statement:
+	Expression (
+		{Assertion.body=current} (":" range=Expression)? |
+		{PredicateDefinition.head=current} ":-" body=Expression |
+		{MetricDefinition.head=current} "=" body=Expression
+	);
 
-///////////////////
-// Core grammar
-///////////////////
-Interpretation: BasicInterpretation | DefaultInterpretation | CDInterpretation;
+PredicateDefinition:
+	(functional?="functional" error?="error"? | error?="error" functional?="functional"?) head=Call ":-" body=Expression;
 
-BasicInterpretation: symbol=Symbol ('(' (objects+=ComplexObject (',' objects+=ComplexObject)*)? ')')? ':' value = TruthValue;
+UnnamedErrorPrediateDefinition:
+	"error" argumentList=ArgumentList ":-" body=Expression;
 
-Symbol: ModelSymbol | PartialitySymbol | DataSymbol;
+DefaultDefinition:
+	"default" head=Call ":" range=Expression;
 
-ModelSymbol: name = ID;
+ExternPredicateDefinition:
+	"extern" head=Call ".";
 
-PartialitySymbol: ExistSymbol | EqualsSymbol;
-ExistSymbol:'exists'{ExistSymbol};
-EqualsSymbol:'equals' {EqualsSymbol};
+enum MetricType:
+	INT="int" | REAL="real";
 
-DataSymbol: BooleanSymbol | IntegerSymbol | RealSymbol | StringSymbol;
-BooleanSymbol:'bool' {BooleanSymbol};
-IntegerSymbol:'int' {IntegerSymbol};
-RealSymbol: 'real' {RealSymbol};
-StringSymbol:'string' {StringSymbol};
+MetricDefinition:
+	type=MetricType head=Expression "=" body=Expression;
 
-ComplexObject: Object | AllInstances | AllObjects;
+ExternMetricDefinition:
+	"extern" type=MetricType head=Call;
 
-Object: NamedObject | UnnamedObject | DataObject;
-NamedObject: "'" name = ID "'";
-UnnamedObject: name = ID;
-DataObject: BooleanObject | IntObject | RealObject | StringObject;
-BooleanObject: value = BooleanValue;
-IntObject: value = INTLiteral;
-RealObject: value = REALLiteral;
-StringObject: value = STRING;
+Expression:
+	IfElse | DisjunctiveExpression;
 
-///////////////////
-// Predicte grammar
-///////////////////
+IfElse:
+	"if" condition=Expression "then" then=Expression "else" else=Expression;
 
-Predicate:
-	(isError?='error')? symbol = ModelSymbol ('(' (parameters += Parameter (',' parameters += Parameter)*)? ')')? ':-' ('false' | (bodies += PatternBody ('|' bodies += PatternBody)*)) '.'
-;
+DisjunctiveExpression returns Expression:
+	ConjunctiveExpression (
+		{Disjunction.children+=current} (";" children+=ConjunctiveExpression)+ |
+		{Case.condition=current} "->" body=ConjunctiveExpression {Switch.cases+=current} (";" cases+=Case)*
+	)?;
 
-Parameter: variable = Variable (':' type = Symbol)?;
-PatternBody: {PatternBody} ('true' | constraints += Constraint*) ;
-Polarity: {Positive} '+' | {Negative} '-';
-Constraint: (polarity = Polarity)?  symbol = ModelSymbol 
-	(('(' params += Literal? (',' params += Literal)* ')')?)
-	|
-	(closureType=ClosureType '(' params += Literal? (',' params += Literal)* ')');
-ClosureType: {ReflexiveClosure} '*' | {IrreflexiveClosure} '+';
-Literal: Variable | DataObject | NamedObject;
-Variable: name = ID;
+Case:
+	condition=ConjunctiveExpression "->" body=ConjunctiveExpression;
 
-///////////////////
-// Complex Interpretation grammar
-///////////////////
+ConjunctiveExpression returns Expression:
+	ComparisonExpression ({Conjunction.children+=current} ("," children+=ComparisonExpression)+)?;
 
-AllInstances: ':' symbol = Symbol;
-AllObjects: {AllObjects} '*';
+enum BinaryOperator:
+	EQ | NOT_EQ | LESS | LESS_EQ | GREATER | GREATER_EQ | IN | ADD | SUB | MUL | DIV | POW;
 
-///////////////////
-// Defaul Interpretation grammar
-///////////////////
-DefaultInterpretation: 'default' interpretation = BasicInterpretation;
+enum ComparisonOperator returns BinaryOperator:
+	EQ="==" | NOT_EQ="!=" | LESS="<" | LESS_EQ="<=" | GREATER=">" | GREATER_EQ=">=" | IN="in";
 
-///////////////////
-// Advanced Class-Diagram interpretations
-///////////////////
-CDInterpretation: ClassInterpretation | EnumInterpretation| GlobalRelationInterpretation;
-ClassInterpretation:
-	(abstract?='abstract')? 'class' symbol = ModelSymbol ('extends' supertypes += ModelSymbol+)?'{'
-	fielt += FieldRelationInterpretation*
-	'}'
-;
-EnumInterpretation: 'enum' Symbol = ModelSymbol '{' objects+=NamedObject+ '}';
-FieldRelationInterpretation: (containment ?= 'containment')? symbol = ModelSymbol ':' multiplicity = MultiplicityDefinition? target = Symbol;
-GlobalRelationInterpretation: (containment ?= 'containment')? 'relation' symbol = ModelSymbol ':' sourceMultiplicity = MultiplicityDefinition? source = Symbol targetMultiplicity = MultiplicityDefinition? target = Symbol;
-MultiplicityDefinition: lower = INT '..' (upper = INT | unlimitedUpper?='*');
+ComparisonExpression returns Expression:
+	AdditiveExpression ({Comparison.left=current} op=ComparisonOperator right=AdditiveExpression)?;
 
-////SymbolIntroduction : Type | GlobalRelation | Predicate;
-////Symbol: Type | Relation | Predicate | Variable | Element;
-//
-//////////////////////
-//// Types
-//////////////////////
-//
-//Type: TypeDeclaration | /*TypeDefinition |*/ TypeEnumeration;
-//
-//TypeDeclaration:
-//	abstract?= 'abstract' 'class' name = ID ('extends' supertypes += [Type] (',' supertypes += [Type])) '{'
-//		fieldDeclarations += FieldRelationDeclaration*
-//	'}'
-//;
-//TypeEnumeration:
-//	'enum' name = ID 'extends' supertypes += [Type] (',' supertypes += [Type]) '{'
-//		(elements += Element)*
-//	'}'
-//;
-//Element:
-//	name = ID
-//;
-//
-//////////////////////
-//// Relations
-//////////////////////
-//
-//Relation: FieldRelationDeclaration | GlobalRelationDeclaration | RelationEnumeration;
-//GlobalRelation returns Relation: GlobalRelationDeclaration | /*RelationDefinition |*/ RelationEnumeration;
-//
-//FieldRelationDeclaration:
-//	containment?='containment' target = [Type] name = ID
-//;
-//
-//GlobalRelationDeclaration:
-//	containment?='containment' 'relation' name = ID '(' source = [Type] ',' target = [Type] ')'
-//;
-//
-//RelationEnumeration:
-//	'relation' name = ID '{' links += Link* '}'
-//;
-//
-//Link: '(' source = Element ',' target = Element ')';
-//
-//
-//
-//
-//
-//
-//Model:
-//	'model' '{'
-//		atoms += Atom (',' atoms += Atom )
-//	'}'
-//;
-//Atom: referredSymbol = [Symbol] '(' (params += Element (',' params += Element)*)? ')';
-//
-//ScopeDeclaration:
-//	'scope'
-//;
-//
+enum AdditiveBinaryOperator returns BinaryOperator:
+	ADD="+" | SUB="-";
+
+AdditiveExpression returns Expression:
+	MultiplicativeExpression ({BinaryExpression.left=current} op=AdditiveBinaryOperator right=MultiplicativeExpression)*;
+
+enum MultiplicativeBinaryOperator returns BinaryOperator:
+	MUL="*" | DIV="/";
+
+MultiplicativeExpression returns Expression:
+	ExponentialExpression ({BinaryExpression.left=current} op=MultiplicativeBinaryOperator right=ExponentialExpression)*;
+
+enum ExponentialOp returns BinaryOperator:
+	POW="^";
+
+ExponentialExpression returns Expression:
+	UnaryExpression ({BinaryExpression.left=current} op=ExponentialOp right=ExponentialExpression)?;
+
+enum UnaryOp:
+	NEG="!" | PLUS="+" | MINUS="-" | MAY="may" | MUST="must" | CURRENT="current";
+
+UnaryExpression returns Expression:
+	AggregationExpression | {UnaryExpression} op=UnaryOp body=AggregationExpression;
+
+AggregationExpression returns Expression:
+	AtomicExpression | Count | Aggregation;
+
+Count:
+	"count" "{" body=Expression "}";
+
+enum AggregationOp:
+	ONLY="only" | SUM="sum" | PROD="prod" | AVG="avg" | MIN="min" | MAX="max";
+
+Aggregation:
+	op=AggregationOp "{" body=Expression "|" condition=Expression "}";
+
+AtomicExpression returns Expression:
+	Reference ({Call.functor=current} -> argumentList=ArgumentList)? | Interval | Literal | "(" Expression ")";
+
+Call:
+	functor=Reference (transitiveClosure?=STAR | reflexiveTransitiveClosure?=PLUS)? argumentList=ArgumentList;
+
+ArgumentList:
+	{ArgumentList} "(" (arguments+=Argument ("," arguments+=Argument)*)? ")";
+
+Argument:
+	ExpressionArgument | StarArgument | TypedArgument | TypedStarArgument;
+
+ExpressionArgument:
+	body=ComparisonExpression;
+
+StarArgument:
+	{StarArgument} "*";
+
+TypedArgument:
+	type=[NamedElement|QualifiedName] variable=[NamedElement|QualifiedName];
+
+TypedStarArgument:
+	type=[NamedElement|QualifiedName] "*";
+
+Reference:
+	referred=[NamedElement|QualifiedName];
+
+Interval:
+	"[" lowerBound=Expression ".." upperBound=Expression "]";
+
+Literal:
+	LogicLiteral | NumericLiteral | InfinityLiteral | EmptyIntervalLiteral | StringLiteral;
+
+enum LogicValue:
+	TRUE="true" | FALSE="false" | UNKNOWN="unknown" | ERROR="error";
+
+LogicLiteral:
+	value=LogicValue;
+
+NumericLiteral:
+	value=Real;
+
+InfinityLiteral:
+	{InfinityLiteral} "inf";
+
+EmptyIntervalLiteral:
+	{EmptyIntervalLiteral} "empty";
+
+StringLiteral:
+	value=STRING;
+
+ClassDefinition returns Statement:
+	abstract?="abstract"? "class" name=ID ("extends" superclasses+=[NamedElement|QualifiedName] ("," superclasses+=[NamedElement|QualifiedName])*)?
+	"{" members+=MemberDefinition* "}";
+
+MemberDefinition:
+	containment?="contains"? type=[NamedElement|QualifiedName] multiplicity=Multiplicity? name=ID ("opposite" opposite=[NamedElement|QualifiedName])? ";"?;
+
+Multiplicity:
+	ManyMultiplicity | ExactMultiplicity | BoundedMultiplicity;
+
+ManyMultiplicity:
+	{ManyMultiplicity} "[" "]";
+
+ExactMultiplicity:
+	"[" multiplicity=UpperMultiplicty "]";
+
+BoundedMultiplicity:
+	"[" lowerBound=INT ".." upperBound=UpperMultiplicty "]";
+
+ScopeDefinition:
+	ExactScopeDefinition | BoundedScopeDefinition | LowerBoundedScopeDefinition;
+
+ExactScopeDefinition:
+	"scope" type=[NamedElement|QualifiedName] "==" exactScope=INT;
+
+BoundedScopeDefinition:
+	"scope" (
+		(lowerBound=INT "<=")? type=[NamedElement|QualifiedName] "<=" upperBound=INT |
+		upperBound=INT ">=" type=[NamedElement|QualifiedName] (">=" lowerBound=INT)?
+	) ".";
+
+LowerBoundedScopeDefinition:
+	"scope" (
+		lowerBound=INT "<=" type=[NamedElement|QualifiedName] |
+		type=[NamedElement|QualifiedName] ">=" lowerBound=INT
+	) ".";
+
+enum ObjectiveKind:
+	MINIMIZE="minimize" | MAXIMIZE="maximize";
+
+ObjectiveDefinition:
+	kind=ObjectiveKind objective=Expression;
+
+UpperMultiplicty returns ecore::EInt:
+	INT | "*";
+
+Real returns ecore::EBigDecimal hidden():
+	INT ("." INT)?;
+
+QualifiedName hidden():
+	ID ("." ID)* | QUOTED_ID;
+
+@Override
+terminal STRING returns ecore::EString:
+	'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
+
+terminal QUOTED_ID returns ecore::EString:
+	'\'' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'\'') )* '\'';
+
+terminal PLUS:
+	"synthetic::plus";
+
+terminal STAR:
+	"synthetic::star";
+
+terminal DOT:
+	"synthetic::dot";
+
+NamedElement:
+	name=QualifiedName;
+

@@ -5,6 +5,7 @@ import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -17,51 +18,85 @@ import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Map;
+import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'-'", "'.'", "'true'", "'false'", "'unknown'", "'error'", "'('", "','", "')'", "':'", "'exists'", "'equals'", "'bool'", "'int'", "'real'", "'string'", "'\\''", "':-'", "'|'", "'+'", "'*'", "'default'", "'abstract'", "'class'", "'extends'", "'{'", "'}'", "'enum'", "'containment'", "'relation'", "'..'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_DOT", "RULE_STAR", "RULE_PLUS", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_QUOTED_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "':'", "':-'", "'='", "'functional'", "'error'", "'default'", "'extern'", "'.'", "'if'", "'then'", "'else'", "';'", "'->'", "','", "'count'", "'{'", "'}'", "'|'", "'('", "')'", "'*'", "'['", "'..'", "']'", "'inf'", "'empty'", "'abstract'", "'class'", "'extends'", "'contains'", "'opposite'", "'scope'", "'=='", "'<='", "'>='", "'int'", "'real'", "'!='", "'<'", "'>'", "'in'", "'+'", "'-'", "'/'", "'^'", "'!'", "'may'", "'must'", "'current'", "'only'", "'sum'", "'prod'", "'avg'", "'min'", "'max'", "'true'", "'false'", "'unknown'", "'minimize'", "'maximize'"
     };
-    public static final int RULE_STRING=6;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T__50=50;
     public static final int T__19=19;
     public static final int T__15=15;
-    public static final int T__37=37;
+    public static final int T__59=59;
     public static final int T__16=16;
-    public static final int T__38=38;
     public static final int T__17=17;
-    public static final int T__39=39;
     public static final int T__18=18;
-    public static final int T__11=11;
-    public static final int T__33=33;
-    public static final int T__12=12;
-    public static final int T__34=34;
-    public static final int T__13=13;
-    public static final int T__35=35;
-    public static final int T__14=14;
-    public static final int T__36=36;
-    public static final int EOF=-1;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int RULE_ID=5;
-    public static final int RULE_WS=9;
-    public static final int RULE_ANY_OTHER=10;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__51=51;
+    public static final int RULE_STAR=5;
+    public static final int T__52=52;
+    public static final int T__53=53;
+    public static final int T__54=54;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int RULE_ID=8;
+    public static final int RULE_QUOTED_ID=10;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
-    public static final int RULE_INT=4;
+    public static final int RULE_INT=9;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=7;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=11;
     public static final int T__23=23;
+    public static final int T__67=67;
     public static final int T__24=24;
+    public static final int T__68=68;
     public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__20=20;
+    public static final int T__64=64;
+    public static final int T__21=21;
+    public static final int T__65=65;
+    public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_STRING=7;
+    public static final int RULE_SL_COMMENT=12;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int T__33=33;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int RULE_PLUS=6;
+    public static final int T__36=36;
+    public static final int T__73=73;
+    public static final int RULE_DOT=4;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__74=74;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_WS=13;
+    public static final int RULE_ANY_OTHER=14;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
     public static final int T__40=40;
     public static final int T__41=41;
-    public static final int T__20=20;
-    public static final int T__21=21;
+    public static final int T__42=42;
+    public static final int T__43=43;
 
     // delegates
     // delegators
@@ -103,7 +138,7 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleProblem"
-    // InternalSolverLanguage.g:64:1: entryRuleProblem returns [EObject current=null] : iv_ruleProblem= ruleProblem EOF ;
+    // InternalSolverLanguage.g:65:1: entryRuleProblem returns [EObject current=null] : iv_ruleProblem= ruleProblem EOF ;
     public final EObject entryRuleProblem() throws RecognitionException {
         EObject current = null;
 
@@ -111,17 +146,21 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalSolverLanguage.g:64:48: (iv_ruleProblem= ruleProblem EOF )
-            // InternalSolverLanguage.g:65:2: iv_ruleProblem= ruleProblem EOF
+            // InternalSolverLanguage.g:65:48: (iv_ruleProblem= ruleProblem EOF )
+            // InternalSolverLanguage.g:66:2: iv_ruleProblem= ruleProblem EOF
             {
-             newCompositeNode(grammarAccess.getProblemRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getProblemRule()); 
+            }
             pushFollow(FOLLOW_1);
             iv_ruleProblem=ruleProblem();
 
             state._fsp--;
-
-             current =iv_ruleProblem; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleProblem; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -139,7 +178,7 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleProblem"
-    // InternalSolverLanguage.g:71:1: ruleProblem returns [EObject current=null] : ( (lv_statements_0_0= ruleStatement ) )* ;
+    // InternalSolverLanguage.g:72:1: ruleProblem returns [EObject current=null] : ( (lv_statements_0_0= ruleStatement ) )* ;
     public final EObject ruleProblem() throws RecognitionException {
         EObject current = null;
 
@@ -150,46 +189,50 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:77:2: ( ( (lv_statements_0_0= ruleStatement ) )* )
-            // InternalSolverLanguage.g:78:2: ( (lv_statements_0_0= ruleStatement ) )*
+            // InternalSolverLanguage.g:78:2: ( ( (lv_statements_0_0= ruleStatement ) )* )
+            // InternalSolverLanguage.g:79:2: ( (lv_statements_0_0= ruleStatement ) )*
             {
-            // InternalSolverLanguage.g:78:2: ( (lv_statements_0_0= ruleStatement ) )*
+            // InternalSolverLanguage.g:79:2: ( (lv_statements_0_0= ruleStatement ) )*
             loop1:
             do {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==RULE_ID||LA1_0==16||(LA1_0>=21 && LA1_0<=26)||(LA1_0>=32 && LA1_0<=34)||(LA1_0>=38 && LA1_0<=40)) ) {
+                if ( ((LA1_0>=RULE_STRING && LA1_0<=RULE_QUOTED_ID)||(LA1_0>=18 && LA1_0<=21)||LA1_0==23||LA1_0==29||LA1_0==33||LA1_0==36||(LA1_0>=39 && LA1_0<=42)||LA1_0==46||(LA1_0>=50 && LA1_0<=51)||(LA1_0>=56 && LA1_0<=57)||(LA1_0>=60 && LA1_0<=74)) ) {
                     alt1=1;
                 }
 
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSolverLanguage.g:79:3: (lv_statements_0_0= ruleStatement )
+            	    // InternalSolverLanguage.g:80:3: (lv_statements_0_0= ruleStatement )
             	    {
-            	    // InternalSolverLanguage.g:79:3: (lv_statements_0_0= ruleStatement )
-            	    // InternalSolverLanguage.g:80:4: lv_statements_0_0= ruleStatement
+            	    // InternalSolverLanguage.g:80:3: (lv_statements_0_0= ruleStatement )
+            	    // InternalSolverLanguage.g:81:4: lv_statements_0_0= ruleStatement
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    				newCompositeNode(grammarAccess.getProblemAccess().getStatementsStatementParserRuleCall_0());
-            	    			
+            	      				newCompositeNode(grammarAccess.getProblemAccess().getStatementsStatementParserRuleCall_0());
+            	      			
+            	    }
             	    pushFollow(FOLLOW_3);
             	    lv_statements_0_0=ruleStatement();
 
             	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    				if (current==null) {
-            	    					current = createModelElementForParent(grammarAccess.getProblemRule());
-            	    				}
-            	    				add(
-            	    					current,
-            	    					"statements",
-            	    					lv_statements_0_0,
-            	    					"org.eclipse.viatra.solver.language.SolverLanguage.Statement");
-            	    				afterParserOrEnumRuleCall();
-            	    			
+            	      				if (current==null) {
+            	      					current = createModelElementForParent(grammarAccess.getProblemRule());
+            	      				}
+            	      				add(
+            	      					current,
+            	      					"statements",
+            	      					lv_statements_0_0,
+            	      					"org.eclipse.viatra.solver.language.SolverLanguage.Statement");
+            	      				afterParserOrEnumRuleCall();
+            	      			
+            	    }
 
             	    }
 
@@ -205,9 +248,11 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -222,7 +267,7 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStatement"
-    // InternalSolverLanguage.g:100:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
+    // InternalSolverLanguage.g:101:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
     public final EObject entryRuleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -230,17 +275,21 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalSolverLanguage.g:100:50: (iv_ruleStatement= ruleStatement EOF )
-            // InternalSolverLanguage.g:101:2: iv_ruleStatement= ruleStatement EOF
+            // InternalSolverLanguage.g:101:50: (iv_ruleStatement= ruleStatement EOF )
+            // InternalSolverLanguage.g:102:2: iv_ruleStatement= ruleStatement EOF
             {
-             newCompositeNode(grammarAccess.getStatementRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getStatementRule()); 
+            }
             pushFollow(FOLLOW_1);
             iv_ruleStatement=ruleStatement();
 
             state._fsp--;
-
-             current =iv_ruleStatement; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleStatement; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -258,71 +307,286 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStatement"
-    // InternalSolverLanguage.g:107:1: ruleStatement returns [EObject current=null] : (this_Interpretation_0= ruleInterpretation | this_Predicate_1= rulePredicate ) ;
+    // InternalSolverLanguage.g:108:1: ruleStatement returns [EObject current=null] : ( (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition ) this_DOT_10= RULE_DOT ) ;
     public final EObject ruleStatement() throws RecognitionException {
         EObject current = null;
 
-        EObject this_Interpretation_0 = null;
+        Token this_DOT_10=null;
+        EObject this_AssertionOrDefinition_0 = null;
 
-        EObject this_Predicate_1 = null;
+        EObject this_PredicateDefinition_1 = null;
+
+        EObject this_UnnamedErrorPrediateDefinition_2 = null;
+
+        EObject this_DefaultDefinition_3 = null;
+
+        EObject this_ExternPredicateDefinition_4 = null;
+
+        EObject this_MetricDefinition_5 = null;
+
+        EObject this_ExternMetricDefinition_6 = null;
+
+        EObject this_ClassDefinition_7 = null;
+
+        EObject this_ScopeDefinition_8 = null;
+
+        EObject this_ObjectiveDefinition_9 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:113:2: ( (this_Interpretation_0= ruleInterpretation | this_Predicate_1= rulePredicate ) )
-            // InternalSolverLanguage.g:114:2: (this_Interpretation_0= ruleInterpretation | this_Predicate_1= rulePredicate )
+            // InternalSolverLanguage.g:114:2: ( ( (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition ) this_DOT_10= RULE_DOT ) )
+            // InternalSolverLanguage.g:115:2: ( (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition ) this_DOT_10= RULE_DOT )
             {
-            // InternalSolverLanguage.g:114:2: (this_Interpretation_0= ruleInterpretation | this_Predicate_1= rulePredicate )
-            int alt2=2;
+            // InternalSolverLanguage.g:115:2: ( (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition ) this_DOT_10= RULE_DOT )
+            // InternalSolverLanguage.g:116:3: (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition ) this_DOT_10= RULE_DOT
+            {
+            // InternalSolverLanguage.g:116:3: (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition )
+            int alt2=10;
             alt2 = dfa2.predict(input);
             switch (alt2) {
                 case 1 :
-                    // InternalSolverLanguage.g:115:3: this_Interpretation_0= ruleInterpretation
+                    // InternalSolverLanguage.g:117:4: this_AssertionOrDefinition_0= ruleAssertionOrDefinition
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getStatementAccess().getInterpretationParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_Interpretation_0=ruleInterpretation();
+                      				newCompositeNode(grammarAccess.getStatementAccess().getAssertionOrDefinitionParserRuleCall_0_0());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_AssertionOrDefinition_0=ruleAssertionOrDefinition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    			current = this_Interpretation_0;
-                    			afterParserOrEnumRuleCall();
-                    		
+                      				current = this_AssertionOrDefinition_0;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
 
                     }
                     break;
                 case 2 :
-                    // InternalSolverLanguage.g:124:3: this_Predicate_1= rulePredicate
+                    // InternalSolverLanguage.g:126:4: this_PredicateDefinition_1= rulePredicateDefinition
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getStatementAccess().getPredicateParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_Predicate_1=rulePredicate();
+                      				newCompositeNode(grammarAccess.getStatementAccess().getPredicateDefinitionParserRuleCall_0_1());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_PredicateDefinition_1=rulePredicateDefinition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
+                      				current = this_PredicateDefinition_1;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
 
-                    			current = this_Predicate_1;
-                    			afterParserOrEnumRuleCall();
-                    		
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:135:4: this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getUnnamedErrorPrediateDefinitionParserRuleCall_0_2());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_UnnamedErrorPrediateDefinition_2=ruleUnnamedErrorPrediateDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_UnnamedErrorPrediateDefinition_2;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:144:4: this_DefaultDefinition_3= ruleDefaultDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getDefaultDefinitionParserRuleCall_0_3());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_DefaultDefinition_3=ruleDefaultDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_DefaultDefinition_3;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 5 :
+                    // InternalSolverLanguage.g:153:4: this_ExternPredicateDefinition_4= ruleExternPredicateDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getExternPredicateDefinitionParserRuleCall_0_4());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_ExternPredicateDefinition_4=ruleExternPredicateDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_ExternPredicateDefinition_4;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 6 :
+                    // InternalSolverLanguage.g:162:4: this_MetricDefinition_5= ruleMetricDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getMetricDefinitionParserRuleCall_0_5());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_MetricDefinition_5=ruleMetricDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_MetricDefinition_5;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 7 :
+                    // InternalSolverLanguage.g:171:4: this_ExternMetricDefinition_6= ruleExternMetricDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getExternMetricDefinitionParserRuleCall_0_6());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_ExternMetricDefinition_6=ruleExternMetricDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_ExternMetricDefinition_6;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 8 :
+                    // InternalSolverLanguage.g:180:4: this_ClassDefinition_7= ruleClassDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getClassDefinitionParserRuleCall_0_7());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_ClassDefinition_7=ruleClassDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_ClassDefinition_7;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 9 :
+                    // InternalSolverLanguage.g:189:4: this_ScopeDefinition_8= ruleScopeDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getScopeDefinitionParserRuleCall_0_8());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_ScopeDefinition_8=ruleScopeDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_ScopeDefinition_8;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+
+                    }
+                    break;
+                case 10 :
+                    // InternalSolverLanguage.g:198:4: this_ObjectiveDefinition_9= ruleObjectiveDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getStatementAccess().getObjectiveDefinitionParserRuleCall_0_9());
+                      			
+                    }
+                    pushFollow(FOLLOW_4);
+                    this_ObjectiveDefinition_9=ruleObjectiveDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_ObjectiveDefinition_9;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
 
                     }
                     break;
 
             }
 
+            this_DOT_10=(Token)match(input,RULE_DOT,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(this_DOT_10, grammarAccess.getStatementAccess().getDOTTerminalRuleCall_1());
+              		
+            }
 
             }
 
 
-            	leaveRule();
+            }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
         }
 
             catch (RecognitionException re) {
@@ -336,249 +600,30 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleStatement"
 
 
-    // $ANTLR start "entryRuleREALLiteral"
-    // InternalSolverLanguage.g:136:1: entryRuleREALLiteral returns [String current=null] : iv_ruleREALLiteral= ruleREALLiteral EOF ;
-    public final String entryRuleREALLiteral() throws RecognitionException {
-        String current = null;
-
-        AntlrDatatypeRuleToken iv_ruleREALLiteral = null;
-
-
-        try {
-            // InternalSolverLanguage.g:136:51: (iv_ruleREALLiteral= ruleREALLiteral EOF )
-            // InternalSolverLanguage.g:137:2: iv_ruleREALLiteral= ruleREALLiteral EOF
-            {
-             newCompositeNode(grammarAccess.getREALLiteralRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleREALLiteral=ruleREALLiteral();
-
-            state._fsp--;
-
-             current =iv_ruleREALLiteral.getText(); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleREALLiteral"
-
-
-    // $ANTLR start "ruleREALLiteral"
-    // InternalSolverLanguage.g:143:1: ruleREALLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT kw= '.' this_INT_3= RULE_INT ) ;
-    public final AntlrDatatypeRuleToken ruleREALLiteral() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
-
-        Token kw=null;
-        Token this_INT_1=null;
-        Token this_INT_3=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:149:2: ( ( (kw= '-' )? this_INT_1= RULE_INT kw= '.' this_INT_3= RULE_INT ) )
-            // InternalSolverLanguage.g:150:2: ( (kw= '-' )? this_INT_1= RULE_INT kw= '.' this_INT_3= RULE_INT )
-            {
-            // InternalSolverLanguage.g:150:2: ( (kw= '-' )? this_INT_1= RULE_INT kw= '.' this_INT_3= RULE_INT )
-            // InternalSolverLanguage.g:151:3: (kw= '-' )? this_INT_1= RULE_INT kw= '.' this_INT_3= RULE_INT
-            {
-            // InternalSolverLanguage.g:151:3: (kw= '-' )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0==11) ) {
-                alt3=1;
-            }
-            switch (alt3) {
-                case 1 :
-                    // InternalSolverLanguage.g:152:4: kw= '-'
-                    {
-                    kw=(Token)match(input,11,FOLLOW_4); 
-
-                    				current.merge(kw);
-                    				newLeafNode(kw, grammarAccess.getREALLiteralAccess().getHyphenMinusKeyword_0());
-                    			
-
-                    }
-                    break;
-
-            }
-
-            this_INT_1=(Token)match(input,RULE_INT,FOLLOW_5); 
-
-            			current.merge(this_INT_1);
-            		
-
-            			newLeafNode(this_INT_1, grammarAccess.getREALLiteralAccess().getINTTerminalRuleCall_1());
-            		
-            kw=(Token)match(input,12,FOLLOW_4); 
-
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getREALLiteralAccess().getFullStopKeyword_2());
-            		
-            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_2); 
-
-            			current.merge(this_INT_3);
-            		
-
-            			newLeafNode(this_INT_3, grammarAccess.getREALLiteralAccess().getINTTerminalRuleCall_3());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleREALLiteral"
-
-
-    // $ANTLR start "entryRuleINTLiteral"
-    // InternalSolverLanguage.g:181:1: entryRuleINTLiteral returns [String current=null] : iv_ruleINTLiteral= ruleINTLiteral EOF ;
-    public final String entryRuleINTLiteral() throws RecognitionException {
-        String current = null;
-
-        AntlrDatatypeRuleToken iv_ruleINTLiteral = null;
-
-
-        try {
-            // InternalSolverLanguage.g:181:50: (iv_ruleINTLiteral= ruleINTLiteral EOF )
-            // InternalSolverLanguage.g:182:2: iv_ruleINTLiteral= ruleINTLiteral EOF
-            {
-             newCompositeNode(grammarAccess.getINTLiteralRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleINTLiteral=ruleINTLiteral();
-
-            state._fsp--;
-
-             current =iv_ruleINTLiteral.getText(); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleINTLiteral"
-
-
-    // $ANTLR start "ruleINTLiteral"
-    // InternalSolverLanguage.g:188:1: ruleINTLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT ) ;
-    public final AntlrDatatypeRuleToken ruleINTLiteral() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
-
-        Token kw=null;
-        Token this_INT_1=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:194:2: ( ( (kw= '-' )? this_INT_1= RULE_INT ) )
-            // InternalSolverLanguage.g:195:2: ( (kw= '-' )? this_INT_1= RULE_INT )
-            {
-            // InternalSolverLanguage.g:195:2: ( (kw= '-' )? this_INT_1= RULE_INT )
-            // InternalSolverLanguage.g:196:3: (kw= '-' )? this_INT_1= RULE_INT
-            {
-            // InternalSolverLanguage.g:196:3: (kw= '-' )?
-            int alt4=2;
-            int LA4_0 = input.LA(1);
-
-            if ( (LA4_0==11) ) {
-                alt4=1;
-            }
-            switch (alt4) {
-                case 1 :
-                    // InternalSolverLanguage.g:197:4: kw= '-'
-                    {
-                    kw=(Token)match(input,11,FOLLOW_4); 
-
-                    				current.merge(kw);
-                    				newLeafNode(kw, grammarAccess.getINTLiteralAccess().getHyphenMinusKeyword_0());
-                    			
-
-                    }
-                    break;
-
-            }
-
-            this_INT_1=(Token)match(input,RULE_INT,FOLLOW_2); 
-
-            			current.merge(this_INT_1);
-            		
-
-            			newLeafNode(this_INT_1, grammarAccess.getINTLiteralAccess().getINTTerminalRuleCall_1());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleINTLiteral"
-
-
-    // $ANTLR start "entryRuleBooleanValue"
-    // InternalSolverLanguage.g:214:1: entryRuleBooleanValue returns [EObject current=null] : iv_ruleBooleanValue= ruleBooleanValue EOF ;
-    public final EObject entryRuleBooleanValue() throws RecognitionException {
+    // $ANTLR start "entryRuleAssertionOrDefinition"
+    // InternalSolverLanguage.g:215:1: entryRuleAssertionOrDefinition returns [EObject current=null] : iv_ruleAssertionOrDefinition= ruleAssertionOrDefinition EOF ;
+    public final EObject entryRuleAssertionOrDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleBooleanValue = null;
+        EObject iv_ruleAssertionOrDefinition = null;
 
 
         try {
-            // InternalSolverLanguage.g:214:53: (iv_ruleBooleanValue= ruleBooleanValue EOF )
-            // InternalSolverLanguage.g:215:2: iv_ruleBooleanValue= ruleBooleanValue EOF
+            // InternalSolverLanguage.g:215:62: (iv_ruleAssertionOrDefinition= ruleAssertionOrDefinition EOF )
+            // InternalSolverLanguage.g:216:2: iv_ruleAssertionOrDefinition= ruleAssertionOrDefinition EOF
             {
-             newCompositeNode(grammarAccess.getBooleanValueRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAssertionOrDefinitionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleBooleanValue=ruleBooleanValue();
+            iv_ruleAssertionOrDefinition=ruleAssertionOrDefinition();
 
             state._fsp--;
-
-             current =iv_ruleBooleanValue; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAssertionOrDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -592,222 +637,158 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleBooleanValue"
+    // $ANTLR end "entryRuleAssertionOrDefinition"
 
 
-    // $ANTLR start "ruleBooleanValue"
-    // InternalSolverLanguage.g:221:1: ruleBooleanValue returns [EObject current=null] : ( ( () otherlv_1= 'true' ) | (otherlv_2= 'false' () ) ) ;
-    public final EObject ruleBooleanValue() throws RecognitionException {
+    // $ANTLR start "ruleAssertionOrDefinition"
+    // InternalSolverLanguage.g:222:1: ruleAssertionOrDefinition returns [EObject current=null] : (this_Expression_0= ruleExpression ( ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? ) | ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) | ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) ) ) ) ;
+    public final EObject ruleAssertionOrDefinition() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_1=null;
         Token otherlv_2=null;
+        Token otherlv_5=null;
+        Token otherlv_8=null;
+        EObject this_Expression_0 = null;
+
+        EObject lv_range_3_0 = null;
+
+        EObject lv_body_6_0 = null;
+
+        EObject lv_body_9_0 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:227:2: ( ( ( () otherlv_1= 'true' ) | (otherlv_2= 'false' () ) ) )
-            // InternalSolverLanguage.g:228:2: ( ( () otherlv_1= 'true' ) | (otherlv_2= 'false' () ) )
+            // InternalSolverLanguage.g:228:2: ( (this_Expression_0= ruleExpression ( ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? ) | ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) | ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) ) ) ) )
+            // InternalSolverLanguage.g:229:2: (this_Expression_0= ruleExpression ( ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? ) | ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) | ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) ) ) )
             {
-            // InternalSolverLanguage.g:228:2: ( ( () otherlv_1= 'true' ) | (otherlv_2= 'false' () ) )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
-
-            if ( (LA5_0==13) ) {
-                alt5=1;
-            }
-            else if ( (LA5_0==14) ) {
-                alt5=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
-
-                throw nvae;
-            }
-            switch (alt5) {
-                case 1 :
-                    // InternalSolverLanguage.g:229:3: ( () otherlv_1= 'true' )
-                    {
-                    // InternalSolverLanguage.g:229:3: ( () otherlv_1= 'true' )
-                    // InternalSolverLanguage.g:230:4: () otherlv_1= 'true'
-                    {
-                    // InternalSolverLanguage.g:230:4: ()
-                    // InternalSolverLanguage.g:231:5: 
-                    {
-
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getBooleanValueAccess().getBooleanTrueAction_0_0(),
-                    						current);
-                    				
-
-                    }
-
-                    otherlv_1=(Token)match(input,13,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_1, grammarAccess.getBooleanValueAccess().getTrueKeyword_0_1());
-                    			
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:243:3: (otherlv_2= 'false' () )
-                    {
-                    // InternalSolverLanguage.g:243:3: (otherlv_2= 'false' () )
-                    // InternalSolverLanguage.g:244:4: otherlv_2= 'false' ()
-                    {
-                    otherlv_2=(Token)match(input,14,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_2, grammarAccess.getBooleanValueAccess().getFalseKeyword_1_0());
-                    			
-                    // InternalSolverLanguage.g:248:4: ()
-                    // InternalSolverLanguage.g:249:5: 
-                    {
-
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getBooleanValueAccess().getBooleanFalseAction_1_1(),
-                    						current);
-                    				
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleBooleanValue"
-
-
-    // $ANTLR start "entryRuleTruthValue"
-    // InternalSolverLanguage.g:260:1: entryRuleTruthValue returns [EObject current=null] : iv_ruleTruthValue= ruleTruthValue EOF ;
-    public final EObject entryRuleTruthValue() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleTruthValue = null;
-
-
-        try {
-            // InternalSolverLanguage.g:260:51: (iv_ruleTruthValue= ruleTruthValue EOF )
-            // InternalSolverLanguage.g:261:2: iv_ruleTruthValue= ruleTruthValue EOF
+            // InternalSolverLanguage.g:229:2: (this_Expression_0= ruleExpression ( ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? ) | ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) | ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) ) ) )
+            // InternalSolverLanguage.g:230:3: this_Expression_0= ruleExpression ( ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? ) | ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) | ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) ) )
             {
-             newCompositeNode(grammarAccess.getTruthValueRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleTruthValue=ruleTruthValue();
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getAssertionOrDefinitionAccess().getExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_5);
+            this_Expression_0=ruleExpression();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-             current =iv_ruleTruthValue; 
-            match(input,EOF,FOLLOW_2); 
-
+              			current = this_Expression_0;
+              			afterParserOrEnumRuleCall();
+              		
             }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleTruthValue"
-
-
-    // $ANTLR start "ruleTruthValue"
-    // InternalSolverLanguage.g:267:1: ruleTruthValue returns [EObject current=null] : ( ( () otherlv_1= 'true' ) | ( () otherlv_3= 'false' ) | ( () otherlv_5= 'unknown' ) | ( () otherlv_7= 'error' ) ) ;
-    public final EObject ruleTruthValue() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-        Token otherlv_3=null;
-        Token otherlv_5=null;
-        Token otherlv_7=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:273:2: ( ( ( () otherlv_1= 'true' ) | ( () otherlv_3= 'false' ) | ( () otherlv_5= 'unknown' ) | ( () otherlv_7= 'error' ) ) )
-            // InternalSolverLanguage.g:274:2: ( ( () otherlv_1= 'true' ) | ( () otherlv_3= 'false' ) | ( () otherlv_5= 'unknown' ) | ( () otherlv_7= 'error' ) )
-            {
-            // InternalSolverLanguage.g:274:2: ( ( () otherlv_1= 'true' ) | ( () otherlv_3= 'false' ) | ( () otherlv_5= 'unknown' ) | ( () otherlv_7= 'error' ) )
-            int alt6=4;
+            // InternalSolverLanguage.g:238:3: ( ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? ) | ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) | ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) ) )
+            int alt4=3;
             switch ( input.LA(1) ) {
-            case 13:
-                {
-                alt6=1;
-                }
-                break;
-            case 14:
-                {
-                alt6=2;
-                }
-                break;
+            case EOF:
+            case RULE_DOT:
             case 15:
                 {
-                alt6=3;
+                alt4=1;
                 }
                 break;
             case 16:
                 {
-                alt6=4;
+                alt4=2;
+                }
+                break;
+            case 17:
+                {
+                alt4=3;
                 }
                 break;
             default:
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt6) {
+            switch (alt4) {
                 case 1 :
-                    // InternalSolverLanguage.g:275:3: ( () otherlv_1= 'true' )
+                    // InternalSolverLanguage.g:239:4: ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? )
                     {
-                    // InternalSolverLanguage.g:275:3: ( () otherlv_1= 'true' )
-                    // InternalSolverLanguage.g:276:4: () otherlv_1= 'true'
+                    // InternalSolverLanguage.g:239:4: ( () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )? )
+                    // InternalSolverLanguage.g:240:5: () (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )?
                     {
-                    // InternalSolverLanguage.g:276:4: ()
-                    // InternalSolverLanguage.g:277:5: 
+                    // InternalSolverLanguage.g:240:5: ()
+                    // InternalSolverLanguage.g:241:6: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getTruthValueAccess().getTrueAction_0_0(),
-                    						current);
-                    				
+                      						current = forceCreateModelElementAndSet(
+                      							grammarAccess.getAssertionOrDefinitionAccess().getAssertionBodyAction_1_0_0(),
+                      							current);
+                      					
+                    }
 
                     }
 
-                    otherlv_1=(Token)match(input,13,FOLLOW_2); 
+                    // InternalSolverLanguage.g:247:5: (otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )?
+                    int alt3=2;
+                    int LA3_0 = input.LA(1);
 
-                    				newLeafNode(otherlv_1, grammarAccess.getTruthValueAccess().getTrueKeyword_0_1());
-                    			
+                    if ( (LA3_0==15) ) {
+                        alt3=1;
+                    }
+                    switch (alt3) {
+                        case 1 :
+                            // InternalSolverLanguage.g:248:6: otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) )
+                            {
+                            otherlv_2=(Token)match(input,15,FOLLOW_6); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              						newLeafNode(otherlv_2, grammarAccess.getAssertionOrDefinitionAccess().getColonKeyword_1_0_1_0());
+                              					
+                            }
+                            // InternalSolverLanguage.g:252:6: ( (lv_range_3_0= ruleExpression ) )
+                            // InternalSolverLanguage.g:253:7: (lv_range_3_0= ruleExpression )
+                            {
+                            // InternalSolverLanguage.g:253:7: (lv_range_3_0= ruleExpression )
+                            // InternalSolverLanguage.g:254:8: lv_range_3_0= ruleExpression
+                            {
+                            if ( state.backtracking==0 ) {
+
+                              								newCompositeNode(grammarAccess.getAssertionOrDefinitionAccess().getRangeExpressionParserRuleCall_1_0_1_1_0());
+                              							
+                            }
+                            pushFollow(FOLLOW_2);
+                            lv_range_3_0=ruleExpression();
+
+                            state._fsp--;
+                            if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              								if (current==null) {
+                              									current = createModelElementForParent(grammarAccess.getAssertionOrDefinitionRule());
+                              								}
+                              								set(
+                              									current,
+                              									"range",
+                              									lv_range_3_0,
+                              									"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+                              								afterParserOrEnumRuleCall();
+                              							
+                            }
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
 
                     }
 
@@ -815,26 +796,65 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalSolverLanguage.g:289:3: ( () otherlv_3= 'false' )
+                    // InternalSolverLanguage.g:274:4: ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) )
                     {
-                    // InternalSolverLanguage.g:289:3: ( () otherlv_3= 'false' )
-                    // InternalSolverLanguage.g:290:4: () otherlv_3= 'false'
+                    // InternalSolverLanguage.g:274:4: ( () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) )
+                    // InternalSolverLanguage.g:275:5: () otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) )
                     {
-                    // InternalSolverLanguage.g:290:4: ()
-                    // InternalSolverLanguage.g:291:5: 
+                    // InternalSolverLanguage.g:275:5: ()
+                    // InternalSolverLanguage.g:276:6: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getTruthValueAccess().getFalseAction_1_0(),
-                    						current);
-                    				
+                      						current = forceCreateModelElementAndSet(
+                      							grammarAccess.getAssertionOrDefinitionAccess().getPredicateDefinitionHeadAction_1_1_0(),
+                      							current);
+                      					
+                    }
 
                     }
 
-                    otherlv_3=(Token)match(input,14,FOLLOW_2); 
+                    otherlv_5=(Token)match(input,16,FOLLOW_6); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    				newLeafNode(otherlv_3, grammarAccess.getTruthValueAccess().getFalseKeyword_1_1());
-                    			
+                      					newLeafNode(otherlv_5, grammarAccess.getAssertionOrDefinitionAccess().getColonHyphenMinusKeyword_1_1_1());
+                      				
+                    }
+                    // InternalSolverLanguage.g:286:5: ( (lv_body_6_0= ruleExpression ) )
+                    // InternalSolverLanguage.g:287:6: (lv_body_6_0= ruleExpression )
+                    {
+                    // InternalSolverLanguage.g:287:6: (lv_body_6_0= ruleExpression )
+                    // InternalSolverLanguage.g:288:7: lv_body_6_0= ruleExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getAssertionOrDefinitionAccess().getBodyExpressionParserRuleCall_1_1_2_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_body_6_0=ruleExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElementForParent(grammarAccess.getAssertionOrDefinitionRule());
+                      							}
+                      							set(
+                      								current,
+                      								"body",
+                      								lv_body_6_0,
+                      								"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
+
+                    }
+
+
+                    }
+
 
                     }
 
@@ -842,53 +862,65 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalSolverLanguage.g:303:3: ( () otherlv_5= 'unknown' )
+                    // InternalSolverLanguage.g:307:4: ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) )
                     {
-                    // InternalSolverLanguage.g:303:3: ( () otherlv_5= 'unknown' )
-                    // InternalSolverLanguage.g:304:4: () otherlv_5= 'unknown'
+                    // InternalSolverLanguage.g:307:4: ( () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) ) )
+                    // InternalSolverLanguage.g:308:5: () otherlv_8= '=' ( (lv_body_9_0= ruleExpression ) )
                     {
-                    // InternalSolverLanguage.g:304:4: ()
-                    // InternalSolverLanguage.g:305:5: 
+                    // InternalSolverLanguage.g:308:5: ()
+                    // InternalSolverLanguage.g:309:6: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getTruthValueAccess().getUnknownAction_2_0(),
-                    						current);
-                    				
+                      						current = forceCreateModelElementAndSet(
+                      							grammarAccess.getAssertionOrDefinitionAccess().getMetricDefinitionHeadAction_1_2_0(),
+                      							current);
+                      					
+                    }
 
                     }
 
-                    otherlv_5=(Token)match(input,15,FOLLOW_2); 
+                    otherlv_8=(Token)match(input,17,FOLLOW_6); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    				newLeafNode(otherlv_5, grammarAccess.getTruthValueAccess().getUnknownKeyword_2_1());
-                    			
+                      					newLeafNode(otherlv_8, grammarAccess.getAssertionOrDefinitionAccess().getEqualsSignKeyword_1_2_1());
+                      				
+                    }
+                    // InternalSolverLanguage.g:319:5: ( (lv_body_9_0= ruleExpression ) )
+                    // InternalSolverLanguage.g:320:6: (lv_body_9_0= ruleExpression )
+                    {
+                    // InternalSolverLanguage.g:320:6: (lv_body_9_0= ruleExpression )
+                    // InternalSolverLanguage.g:321:7: lv_body_9_0= ruleExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getAssertionOrDefinitionAccess().getBodyExpressionParserRuleCall_1_2_2_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_body_9_0=ruleExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElementForParent(grammarAccess.getAssertionOrDefinitionRule());
+                      							}
+                      							set(
+                      								current,
+                      								"body",
+                      								lv_body_9_0,
+                      								"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
 
                     }
 
 
                     }
-                    break;
-                case 4 :
-                    // InternalSolverLanguage.g:317:3: ( () otherlv_7= 'error' )
-                    {
-                    // InternalSolverLanguage.g:317:3: ( () otherlv_7= 'error' )
-                    // InternalSolverLanguage.g:318:4: () otherlv_7= 'error'
-                    {
-                    // InternalSolverLanguage.g:318:4: ()
-                    // InternalSolverLanguage.g:319:5: 
-                    {
 
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getTruthValueAccess().getErrorAction_3_0(),
-                    						current);
-                    				
-
-                    }
-
-                    otherlv_7=(Token)match(input,16,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_7, grammarAccess.getTruthValueAccess().getErrorKeyword_3_1());
-                    			
 
                     }
 
@@ -902,8 +934,13 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
             }
 
 
-            	leaveRule();
+            }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
         }
 
             catch (RecognitionException re) {
@@ -914,29 +951,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleTruthValue"
+    // $ANTLR end "ruleAssertionOrDefinition"
 
 
-    // $ANTLR start "entryRuleInterpretation"
-    // InternalSolverLanguage.g:334:1: entryRuleInterpretation returns [EObject current=null] : iv_ruleInterpretation= ruleInterpretation EOF ;
-    public final EObject entryRuleInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRulePredicateDefinition"
+    // InternalSolverLanguage.g:344:1: entryRulePredicateDefinition returns [EObject current=null] : iv_rulePredicateDefinition= rulePredicateDefinition EOF ;
+    public final EObject entryRulePredicateDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleInterpretation = null;
+        EObject iv_rulePredicateDefinition = null;
 
 
         try {
-            // InternalSolverLanguage.g:334:55: (iv_ruleInterpretation= ruleInterpretation EOF )
-            // InternalSolverLanguage.g:335:2: iv_ruleInterpretation= ruleInterpretation EOF
+            // InternalSolverLanguage.g:344:60: (iv_rulePredicateDefinition= rulePredicateDefinition EOF )
+            // InternalSolverLanguage.g:345:2: iv_rulePredicateDefinition= rulePredicateDefinition EOF
             {
-             newCompositeNode(grammarAccess.getInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getPredicateDefinitionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleInterpretation=ruleInterpretation();
+            iv_rulePredicateDefinition=rulePredicateDefinition();
 
             state._fsp--;
-
-             current =iv_ruleInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_rulePredicateDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -950,115 +991,3415 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleInterpretation"
+    // $ANTLR end "entryRulePredicateDefinition"
 
 
-    // $ANTLR start "ruleInterpretation"
-    // InternalSolverLanguage.g:341:1: ruleInterpretation returns [EObject current=null] : (this_BasicInterpretation_0= ruleBasicInterpretation | this_DefaultInterpretation_1= ruleDefaultInterpretation | this_CDInterpretation_2= ruleCDInterpretation ) ;
-    public final EObject ruleInterpretation() throws RecognitionException {
+    // $ANTLR start "rulePredicateDefinition"
+    // InternalSolverLanguage.g:351:1: rulePredicateDefinition returns [EObject current=null] : ( ( ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? ) | ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? ) ) ( (lv_head_4_0= ruleCall ) ) otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) ;
+    public final EObject rulePredicateDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject this_BasicInterpretation_0 = null;
+        Token lv_functional_0_0=null;
+        Token lv_error_1_0=null;
+        Token lv_error_2_0=null;
+        Token lv_functional_3_0=null;
+        Token otherlv_5=null;
+        EObject lv_head_4_0 = null;
 
-        EObject this_DefaultInterpretation_1 = null;
-
-        EObject this_CDInterpretation_2 = null;
+        EObject lv_body_6_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:347:2: ( (this_BasicInterpretation_0= ruleBasicInterpretation | this_DefaultInterpretation_1= ruleDefaultInterpretation | this_CDInterpretation_2= ruleCDInterpretation ) )
-            // InternalSolverLanguage.g:348:2: (this_BasicInterpretation_0= ruleBasicInterpretation | this_DefaultInterpretation_1= ruleDefaultInterpretation | this_CDInterpretation_2= ruleCDInterpretation )
+            // InternalSolverLanguage.g:357:2: ( ( ( ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? ) | ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? ) ) ( (lv_head_4_0= ruleCall ) ) otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) ) )
+            // InternalSolverLanguage.g:358:2: ( ( ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? ) | ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? ) ) ( (lv_head_4_0= ruleCall ) ) otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) )
             {
-            // InternalSolverLanguage.g:348:2: (this_BasicInterpretation_0= ruleBasicInterpretation | this_DefaultInterpretation_1= ruleDefaultInterpretation | this_CDInterpretation_2= ruleCDInterpretation )
-            int alt7=3;
-            switch ( input.LA(1) ) {
-            case RULE_ID:
-            case 21:
-            case 22:
-            case 23:
-            case 24:
-            case 25:
-            case 26:
-                {
+            // InternalSolverLanguage.g:358:2: ( ( ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? ) | ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? ) ) ( (lv_head_4_0= ruleCall ) ) otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) ) )
+            // InternalSolverLanguage.g:359:3: ( ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? ) | ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? ) ) ( (lv_head_4_0= ruleCall ) ) otherlv_5= ':-' ( (lv_body_6_0= ruleExpression ) )
+            {
+            // InternalSolverLanguage.g:359:3: ( ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? ) | ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? ) )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
+
+            if ( (LA7_0==18) ) {
                 alt7=1;
-                }
-                break;
-            case 32:
-                {
+            }
+            else if ( (LA7_0==19) ) {
                 alt7=2;
-                }
-                break;
-            case 33:
-            case 34:
-            case 38:
-            case 39:
-            case 40:
-                {
-                alt7=3;
-                }
-                break;
-            default:
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
-
             switch (alt7) {
                 case 1 :
-                    // InternalSolverLanguage.g:349:3: this_BasicInterpretation_0= ruleBasicInterpretation
+                    // InternalSolverLanguage.g:360:4: ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? )
                     {
+                    // InternalSolverLanguage.g:360:4: ( ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )? )
+                    // InternalSolverLanguage.g:361:5: ( (lv_functional_0_0= 'functional' ) ) ( (lv_error_1_0= 'error' ) )?
+                    {
+                    // InternalSolverLanguage.g:361:5: ( (lv_functional_0_0= 'functional' ) )
+                    // InternalSolverLanguage.g:362:6: (lv_functional_0_0= 'functional' )
+                    {
+                    // InternalSolverLanguage.g:362:6: (lv_functional_0_0= 'functional' )
+                    // InternalSolverLanguage.g:363:7: lv_functional_0_0= 'functional'
+                    {
+                    lv_functional_0_0=(Token)match(input,18,FOLLOW_7); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getInterpretationAccess().getBasicInterpretationParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_BasicInterpretation_0=ruleBasicInterpretation();
+                      							newLeafNode(lv_functional_0_0, grammarAccess.getPredicateDefinitionAccess().getFunctionalFunctionalKeyword_0_0_0_0());
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    state._fsp--;
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getPredicateDefinitionRule());
+                      							}
+                      							setWithLastConsumed(current, "functional", true, "functional");
+                      						
+                    }
+
+                    }
 
 
-                    			current = this_BasicInterpretation_0;
-                    			afterParserOrEnumRuleCall();
-                    		
+                    }
+
+                    // InternalSolverLanguage.g:375:5: ( (lv_error_1_0= 'error' ) )?
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
+
+                    if ( (LA5_0==19) ) {
+                        alt5=1;
+                    }
+                    switch (alt5) {
+                        case 1 :
+                            // InternalSolverLanguage.g:376:6: (lv_error_1_0= 'error' )
+                            {
+                            // InternalSolverLanguage.g:376:6: (lv_error_1_0= 'error' )
+                            // InternalSolverLanguage.g:377:7: lv_error_1_0= 'error'
+                            {
+                            lv_error_1_0=(Token)match(input,19,FOLLOW_7); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              							newLeafNode(lv_error_1_0, grammarAccess.getPredicateDefinitionAccess().getErrorErrorKeyword_0_0_1_0());
+                              						
+                            }
+                            if ( state.backtracking==0 ) {
+
+                              							if (current==null) {
+                              								current = createModelElement(grammarAccess.getPredicateDefinitionRule());
+                              							}
+                              							setWithLastConsumed(current, "error", true, "error");
+                              						
+                            }
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+
+                    }
+
 
                     }
                     break;
                 case 2 :
-                    // InternalSolverLanguage.g:358:3: this_DefaultInterpretation_1= ruleDefaultInterpretation
+                    // InternalSolverLanguage.g:391:4: ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? )
                     {
+                    // InternalSolverLanguage.g:391:4: ( ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )? )
+                    // InternalSolverLanguage.g:392:5: ( (lv_error_2_0= 'error' ) ) ( (lv_functional_3_0= 'functional' ) )?
+                    {
+                    // InternalSolverLanguage.g:392:5: ( (lv_error_2_0= 'error' ) )
+                    // InternalSolverLanguage.g:393:6: (lv_error_2_0= 'error' )
+                    {
+                    // InternalSolverLanguage.g:393:6: (lv_error_2_0= 'error' )
+                    // InternalSolverLanguage.g:394:7: lv_error_2_0= 'error'
+                    {
+                    lv_error_2_0=(Token)match(input,19,FOLLOW_8); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getInterpretationAccess().getDefaultInterpretationParserRuleCall_1());
-                    		
+                      							newLeafNode(lv_error_2_0, grammarAccess.getPredicateDefinitionAccess().getErrorErrorKeyword_0_1_0_0());
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getPredicateDefinitionRule());
+                      							}
+                      							setWithLastConsumed(current, "error", true, "error");
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:406:5: ( (lv_functional_3_0= 'functional' ) )?
+                    int alt6=2;
+                    int LA6_0 = input.LA(1);
+
+                    if ( (LA6_0==18) ) {
+                        alt6=1;
+                    }
+                    switch (alt6) {
+                        case 1 :
+                            // InternalSolverLanguage.g:407:6: (lv_functional_3_0= 'functional' )
+                            {
+                            // InternalSolverLanguage.g:407:6: (lv_functional_3_0= 'functional' )
+                            // InternalSolverLanguage.g:408:7: lv_functional_3_0= 'functional'
+                            {
+                            lv_functional_3_0=(Token)match(input,18,FOLLOW_7); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              							newLeafNode(lv_functional_3_0, grammarAccess.getPredicateDefinitionAccess().getFunctionalFunctionalKeyword_0_1_1_0());
+                              						
+                            }
+                            if ( state.backtracking==0 ) {
+
+                              							if (current==null) {
+                              								current = createModelElement(grammarAccess.getPredicateDefinitionRule());
+                              							}
+                              							setWithLastConsumed(current, "functional", true, "functional");
+                              						
+                            }
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalSolverLanguage.g:422:3: ( (lv_head_4_0= ruleCall ) )
+            // InternalSolverLanguage.g:423:4: (lv_head_4_0= ruleCall )
+            {
+            // InternalSolverLanguage.g:423:4: (lv_head_4_0= ruleCall )
+            // InternalSolverLanguage.g:424:5: lv_head_4_0= ruleCall
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getPredicateDefinitionAccess().getHeadCallParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_9);
+            lv_head_4_0=ruleCall();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getPredicateDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"head",
+              						lv_head_4_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Call");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_5=(Token)match(input,16,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_5, grammarAccess.getPredicateDefinitionAccess().getColonHyphenMinusKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:445:3: ( (lv_body_6_0= ruleExpression ) )
+            // InternalSolverLanguage.g:446:4: (lv_body_6_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:446:4: (lv_body_6_0= ruleExpression )
+            // InternalSolverLanguage.g:447:5: lv_body_6_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getPredicateDefinitionAccess().getBodyExpressionParserRuleCall_3_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_body_6_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getPredicateDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"body",
+              						lv_body_6_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "rulePredicateDefinition"
+
+
+    // $ANTLR start "entryRuleUnnamedErrorPrediateDefinition"
+    // InternalSolverLanguage.g:468:1: entryRuleUnnamedErrorPrediateDefinition returns [EObject current=null] : iv_ruleUnnamedErrorPrediateDefinition= ruleUnnamedErrorPrediateDefinition EOF ;
+    public final EObject entryRuleUnnamedErrorPrediateDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleUnnamedErrorPrediateDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:468:71: (iv_ruleUnnamedErrorPrediateDefinition= ruleUnnamedErrorPrediateDefinition EOF )
+            // InternalSolverLanguage.g:469:2: iv_ruleUnnamedErrorPrediateDefinition= ruleUnnamedErrorPrediateDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getUnnamedErrorPrediateDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleUnnamedErrorPrediateDefinition=ruleUnnamedErrorPrediateDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleUnnamedErrorPrediateDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleUnnamedErrorPrediateDefinition"
+
+
+    // $ANTLR start "ruleUnnamedErrorPrediateDefinition"
+    // InternalSolverLanguage.g:475:1: ruleUnnamedErrorPrediateDefinition returns [EObject current=null] : (otherlv_0= 'error' ( (lv_argumentList_1_0= ruleArgumentList ) ) otherlv_2= ':-' ( (lv_body_3_0= ruleExpression ) ) ) ;
+    public final EObject ruleUnnamedErrorPrediateDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        EObject lv_argumentList_1_0 = null;
+
+        EObject lv_body_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:481:2: ( (otherlv_0= 'error' ( (lv_argumentList_1_0= ruleArgumentList ) ) otherlv_2= ':-' ( (lv_body_3_0= ruleExpression ) ) ) )
+            // InternalSolverLanguage.g:482:2: (otherlv_0= 'error' ( (lv_argumentList_1_0= ruleArgumentList ) ) otherlv_2= ':-' ( (lv_body_3_0= ruleExpression ) ) )
+            {
+            // InternalSolverLanguage.g:482:2: (otherlv_0= 'error' ( (lv_argumentList_1_0= ruleArgumentList ) ) otherlv_2= ':-' ( (lv_body_3_0= ruleExpression ) ) )
+            // InternalSolverLanguage.g:483:3: otherlv_0= 'error' ( (lv_argumentList_1_0= ruleArgumentList ) ) otherlv_2= ':-' ( (lv_body_3_0= ruleExpression ) )
+            {
+            otherlv_0=(Token)match(input,19,FOLLOW_10); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getUnnamedErrorPrediateDefinitionAccess().getErrorKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:487:3: ( (lv_argumentList_1_0= ruleArgumentList ) )
+            // InternalSolverLanguage.g:488:4: (lv_argumentList_1_0= ruleArgumentList )
+            {
+            // InternalSolverLanguage.g:488:4: (lv_argumentList_1_0= ruleArgumentList )
+            // InternalSolverLanguage.g:489:5: lv_argumentList_1_0= ruleArgumentList
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getUnnamedErrorPrediateDefinitionAccess().getArgumentListArgumentListParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_9);
+            lv_argumentList_1_0=ruleArgumentList();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getUnnamedErrorPrediateDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"argumentList",
+              						lv_argumentList_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.ArgumentList");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,16,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getUnnamedErrorPrediateDefinitionAccess().getColonHyphenMinusKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:510:3: ( (lv_body_3_0= ruleExpression ) )
+            // InternalSolverLanguage.g:511:4: (lv_body_3_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:511:4: (lv_body_3_0= ruleExpression )
+            // InternalSolverLanguage.g:512:5: lv_body_3_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getUnnamedErrorPrediateDefinitionAccess().getBodyExpressionParserRuleCall_3_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_body_3_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getUnnamedErrorPrediateDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"body",
+              						lv_body_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleUnnamedErrorPrediateDefinition"
+
+
+    // $ANTLR start "entryRuleDefaultDefinition"
+    // InternalSolverLanguage.g:533:1: entryRuleDefaultDefinition returns [EObject current=null] : iv_ruleDefaultDefinition= ruleDefaultDefinition EOF ;
+    public final EObject entryRuleDefaultDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleDefaultDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:533:58: (iv_ruleDefaultDefinition= ruleDefaultDefinition EOF )
+            // InternalSolverLanguage.g:534:2: iv_ruleDefaultDefinition= ruleDefaultDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getDefaultDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleDefaultDefinition=ruleDefaultDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleDefaultDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleDefaultDefinition"
+
+
+    // $ANTLR start "ruleDefaultDefinition"
+    // InternalSolverLanguage.g:540:1: ruleDefaultDefinition returns [EObject current=null] : (otherlv_0= 'default' ( (lv_head_1_0= ruleCall ) ) otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) ) ;
+    public final EObject ruleDefaultDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        EObject lv_head_1_0 = null;
+
+        EObject lv_range_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:546:2: ( (otherlv_0= 'default' ( (lv_head_1_0= ruleCall ) ) otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) ) )
+            // InternalSolverLanguage.g:547:2: (otherlv_0= 'default' ( (lv_head_1_0= ruleCall ) ) otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )
+            {
+            // InternalSolverLanguage.g:547:2: (otherlv_0= 'default' ( (lv_head_1_0= ruleCall ) ) otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) ) )
+            // InternalSolverLanguage.g:548:3: otherlv_0= 'default' ( (lv_head_1_0= ruleCall ) ) otherlv_2= ':' ( (lv_range_3_0= ruleExpression ) )
+            {
+            otherlv_0=(Token)match(input,20,FOLLOW_7); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getDefaultDefinitionAccess().getDefaultKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:552:3: ( (lv_head_1_0= ruleCall ) )
+            // InternalSolverLanguage.g:553:4: (lv_head_1_0= ruleCall )
+            {
+            // InternalSolverLanguage.g:553:4: (lv_head_1_0= ruleCall )
+            // InternalSolverLanguage.g:554:5: lv_head_1_0= ruleCall
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getDefaultDefinitionAccess().getHeadCallParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_11);
+            lv_head_1_0=ruleCall();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getDefaultDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"head",
+              						lv_head_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Call");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,15,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getDefaultDefinitionAccess().getColonKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:575:3: ( (lv_range_3_0= ruleExpression ) )
+            // InternalSolverLanguage.g:576:4: (lv_range_3_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:576:4: (lv_range_3_0= ruleExpression )
+            // InternalSolverLanguage.g:577:5: lv_range_3_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getDefaultDefinitionAccess().getRangeExpressionParserRuleCall_3_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_range_3_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getDefaultDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"range",
+              						lv_range_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleDefaultDefinition"
+
+
+    // $ANTLR start "entryRuleExternPredicateDefinition"
+    // InternalSolverLanguage.g:598:1: entryRuleExternPredicateDefinition returns [EObject current=null] : iv_ruleExternPredicateDefinition= ruleExternPredicateDefinition EOF ;
+    public final EObject entryRuleExternPredicateDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleExternPredicateDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:598:66: (iv_ruleExternPredicateDefinition= ruleExternPredicateDefinition EOF )
+            // InternalSolverLanguage.g:599:2: iv_ruleExternPredicateDefinition= ruleExternPredicateDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExternPredicateDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleExternPredicateDefinition=ruleExternPredicateDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExternPredicateDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleExternPredicateDefinition"
+
+
+    // $ANTLR start "ruleExternPredicateDefinition"
+    // InternalSolverLanguage.g:605:1: ruleExternPredicateDefinition returns [EObject current=null] : (otherlv_0= 'extern' ( (lv_head_1_0= ruleCall ) ) otherlv_2= '.' ) ;
+    public final EObject ruleExternPredicateDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        EObject lv_head_1_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:611:2: ( (otherlv_0= 'extern' ( (lv_head_1_0= ruleCall ) ) otherlv_2= '.' ) )
+            // InternalSolverLanguage.g:612:2: (otherlv_0= 'extern' ( (lv_head_1_0= ruleCall ) ) otherlv_2= '.' )
+            {
+            // InternalSolverLanguage.g:612:2: (otherlv_0= 'extern' ( (lv_head_1_0= ruleCall ) ) otherlv_2= '.' )
+            // InternalSolverLanguage.g:613:3: otherlv_0= 'extern' ( (lv_head_1_0= ruleCall ) ) otherlv_2= '.'
+            {
+            otherlv_0=(Token)match(input,21,FOLLOW_7); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getExternPredicateDefinitionAccess().getExternKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:617:3: ( (lv_head_1_0= ruleCall ) )
+            // InternalSolverLanguage.g:618:4: (lv_head_1_0= ruleCall )
+            {
+            // InternalSolverLanguage.g:618:4: (lv_head_1_0= ruleCall )
+            // InternalSolverLanguage.g:619:5: lv_head_1_0= ruleCall
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getExternPredicateDefinitionAccess().getHeadCallParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_12);
+            lv_head_1_0=ruleCall();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getExternPredicateDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"head",
+              						lv_head_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Call");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,22,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getExternPredicateDefinitionAccess().getFullStopKeyword_2());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleExternPredicateDefinition"
+
+
+    // $ANTLR start "entryRuleMetricDefinition"
+    // InternalSolverLanguage.g:644:1: entryRuleMetricDefinition returns [EObject current=null] : iv_ruleMetricDefinition= ruleMetricDefinition EOF ;
+    public final EObject entryRuleMetricDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMetricDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:644:57: (iv_ruleMetricDefinition= ruleMetricDefinition EOF )
+            // InternalSolverLanguage.g:645:2: iv_ruleMetricDefinition= ruleMetricDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMetricDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleMetricDefinition=ruleMetricDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMetricDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMetricDefinition"
+
+
+    // $ANTLR start "ruleMetricDefinition"
+    // InternalSolverLanguage.g:651:1: ruleMetricDefinition returns [EObject current=null] : ( ( (lv_type_0_0= ruleMetricType ) ) ( (lv_head_1_0= ruleExpression ) ) otherlv_2= '=' ( (lv_body_3_0= ruleExpression ) ) ) ;
+    public final EObject ruleMetricDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_2=null;
+        Enumerator lv_type_0_0 = null;
+
+        EObject lv_head_1_0 = null;
+
+        EObject lv_body_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:657:2: ( ( ( (lv_type_0_0= ruleMetricType ) ) ( (lv_head_1_0= ruleExpression ) ) otherlv_2= '=' ( (lv_body_3_0= ruleExpression ) ) ) )
+            // InternalSolverLanguage.g:658:2: ( ( (lv_type_0_0= ruleMetricType ) ) ( (lv_head_1_0= ruleExpression ) ) otherlv_2= '=' ( (lv_body_3_0= ruleExpression ) ) )
+            {
+            // InternalSolverLanguage.g:658:2: ( ( (lv_type_0_0= ruleMetricType ) ) ( (lv_head_1_0= ruleExpression ) ) otherlv_2= '=' ( (lv_body_3_0= ruleExpression ) ) )
+            // InternalSolverLanguage.g:659:3: ( (lv_type_0_0= ruleMetricType ) ) ( (lv_head_1_0= ruleExpression ) ) otherlv_2= '=' ( (lv_body_3_0= ruleExpression ) )
+            {
+            // InternalSolverLanguage.g:659:3: ( (lv_type_0_0= ruleMetricType ) )
+            // InternalSolverLanguage.g:660:4: (lv_type_0_0= ruleMetricType )
+            {
+            // InternalSolverLanguage.g:660:4: (lv_type_0_0= ruleMetricType )
+            // InternalSolverLanguage.g:661:5: lv_type_0_0= ruleMetricType
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getMetricDefinitionAccess().getTypeMetricTypeEnumRuleCall_0_0());
+              				
+            }
+            pushFollow(FOLLOW_6);
+            lv_type_0_0=ruleMetricType();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getMetricDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"type",
+              						lv_type_0_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.MetricType");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:678:3: ( (lv_head_1_0= ruleExpression ) )
+            // InternalSolverLanguage.g:679:4: (lv_head_1_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:679:4: (lv_head_1_0= ruleExpression )
+            // InternalSolverLanguage.g:680:5: lv_head_1_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getMetricDefinitionAccess().getHeadExpressionParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_13);
+            lv_head_1_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getMetricDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"head",
+              						lv_head_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,17,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getMetricDefinitionAccess().getEqualsSignKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:701:3: ( (lv_body_3_0= ruleExpression ) )
+            // InternalSolverLanguage.g:702:4: (lv_body_3_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:702:4: (lv_body_3_0= ruleExpression )
+            // InternalSolverLanguage.g:703:5: lv_body_3_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getMetricDefinitionAccess().getBodyExpressionParserRuleCall_3_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_body_3_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getMetricDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"body",
+              						lv_body_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMetricDefinition"
+
+
+    // $ANTLR start "entryRuleExternMetricDefinition"
+    // InternalSolverLanguage.g:724:1: entryRuleExternMetricDefinition returns [EObject current=null] : iv_ruleExternMetricDefinition= ruleExternMetricDefinition EOF ;
+    public final EObject entryRuleExternMetricDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleExternMetricDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:724:63: (iv_ruleExternMetricDefinition= ruleExternMetricDefinition EOF )
+            // InternalSolverLanguage.g:725:2: iv_ruleExternMetricDefinition= ruleExternMetricDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExternMetricDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleExternMetricDefinition=ruleExternMetricDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExternMetricDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleExternMetricDefinition"
+
+
+    // $ANTLR start "ruleExternMetricDefinition"
+    // InternalSolverLanguage.g:731:1: ruleExternMetricDefinition returns [EObject current=null] : (otherlv_0= 'extern' ( (lv_type_1_0= ruleMetricType ) ) ( (lv_head_2_0= ruleCall ) ) ) ;
+    public final EObject ruleExternMetricDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Enumerator lv_type_1_0 = null;
+
+        EObject lv_head_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:737:2: ( (otherlv_0= 'extern' ( (lv_type_1_0= ruleMetricType ) ) ( (lv_head_2_0= ruleCall ) ) ) )
+            // InternalSolverLanguage.g:738:2: (otherlv_0= 'extern' ( (lv_type_1_0= ruleMetricType ) ) ( (lv_head_2_0= ruleCall ) ) )
+            {
+            // InternalSolverLanguage.g:738:2: (otherlv_0= 'extern' ( (lv_type_1_0= ruleMetricType ) ) ( (lv_head_2_0= ruleCall ) ) )
+            // InternalSolverLanguage.g:739:3: otherlv_0= 'extern' ( (lv_type_1_0= ruleMetricType ) ) ( (lv_head_2_0= ruleCall ) )
+            {
+            otherlv_0=(Token)match(input,21,FOLLOW_14); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getExternMetricDefinitionAccess().getExternKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:743:3: ( (lv_type_1_0= ruleMetricType ) )
+            // InternalSolverLanguage.g:744:4: (lv_type_1_0= ruleMetricType )
+            {
+            // InternalSolverLanguage.g:744:4: (lv_type_1_0= ruleMetricType )
+            // InternalSolverLanguage.g:745:5: lv_type_1_0= ruleMetricType
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getExternMetricDefinitionAccess().getTypeMetricTypeEnumRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_7);
+            lv_type_1_0=ruleMetricType();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getExternMetricDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"type",
+              						lv_type_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.MetricType");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:762:3: ( (lv_head_2_0= ruleCall ) )
+            // InternalSolverLanguage.g:763:4: (lv_head_2_0= ruleCall )
+            {
+            // InternalSolverLanguage.g:763:4: (lv_head_2_0= ruleCall )
+            // InternalSolverLanguage.g:764:5: lv_head_2_0= ruleCall
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getExternMetricDefinitionAccess().getHeadCallParserRuleCall_2_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_head_2_0=ruleCall();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getExternMetricDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"head",
+              						lv_head_2_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Call");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleExternMetricDefinition"
+
+
+    // $ANTLR start "entryRuleExpression"
+    // InternalSolverLanguage.g:785:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    public final EObject entryRuleExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:785:51: (iv_ruleExpression= ruleExpression EOF )
+            // InternalSolverLanguage.g:786:2: iv_ruleExpression= ruleExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleExpression=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleExpression"
+
+
+    // $ANTLR start "ruleExpression"
+    // InternalSolverLanguage.g:792:1: ruleExpression returns [EObject current=null] : (this_IfElse_0= ruleIfElse | this_DisjunctiveExpression_1= ruleDisjunctiveExpression ) ;
+    public final EObject ruleExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_IfElse_0 = null;
+
+        EObject this_DisjunctiveExpression_1 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:798:2: ( (this_IfElse_0= ruleIfElse | this_DisjunctiveExpression_1= ruleDisjunctiveExpression ) )
+            // InternalSolverLanguage.g:799:2: (this_IfElse_0= ruleIfElse | this_DisjunctiveExpression_1= ruleDisjunctiveExpression )
+            {
+            // InternalSolverLanguage.g:799:2: (this_IfElse_0= ruleIfElse | this_DisjunctiveExpression_1= ruleDisjunctiveExpression )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
+
+            if ( (LA8_0==23) ) {
+                alt8=1;
+            }
+            else if ( ((LA8_0>=RULE_STRING && LA8_0<=RULE_QUOTED_ID)||LA8_0==19||LA8_0==29||LA8_0==33||LA8_0==36||(LA8_0>=39 && LA8_0<=40)||(LA8_0>=56 && LA8_0<=57)||(LA8_0>=60 && LA8_0<=72)) ) {
+                alt8=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 8, 0, input);
+
+                throw nvae;
+            }
+            switch (alt8) {
+                case 1 :
+                    // InternalSolverLanguage.g:800:3: this_IfElse_0= ruleIfElse
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getExpressionAccess().getIfElseParserRuleCall_0());
+                      		
+                    }
                     pushFollow(FOLLOW_2);
-                    this_DefaultInterpretation_1=ruleDefaultInterpretation();
+                    this_IfElse_0=ruleIfElse();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_IfElse_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:809:3: this_DisjunctiveExpression_1= ruleDisjunctiveExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getExpressionAccess().getDisjunctiveExpressionParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_DisjunctiveExpression_1=ruleDisjunctiveExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_DisjunctiveExpression_1;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+
+            }
 
 
-                    			current = this_DefaultInterpretation_1;
-                    			afterParserOrEnumRuleCall();
-                    		
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleExpression"
+
+
+    // $ANTLR start "entryRuleIfElse"
+    // InternalSolverLanguage.g:821:1: entryRuleIfElse returns [EObject current=null] : iv_ruleIfElse= ruleIfElse EOF ;
+    public final EObject entryRuleIfElse() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleIfElse = null;
+
+
+        try {
+            // InternalSolverLanguage.g:821:47: (iv_ruleIfElse= ruleIfElse EOF )
+            // InternalSolverLanguage.g:822:2: iv_ruleIfElse= ruleIfElse EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getIfElseRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleIfElse=ruleIfElse();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleIfElse; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleIfElse"
+
+
+    // $ANTLR start "ruleIfElse"
+    // InternalSolverLanguage.g:828:1: ruleIfElse returns [EObject current=null] : (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_then_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_else_5_0= ruleExpression ) ) ) ;
+    public final EObject ruleIfElse() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        EObject lv_condition_1_0 = null;
+
+        EObject lv_then_3_0 = null;
+
+        EObject lv_else_5_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:834:2: ( (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_then_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_else_5_0= ruleExpression ) ) ) )
+            // InternalSolverLanguage.g:835:2: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_then_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_else_5_0= ruleExpression ) ) )
+            {
+            // InternalSolverLanguage.g:835:2: (otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_then_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_else_5_0= ruleExpression ) ) )
+            // InternalSolverLanguage.g:836:3: otherlv_0= 'if' ( (lv_condition_1_0= ruleExpression ) ) otherlv_2= 'then' ( (lv_then_3_0= ruleExpression ) ) otherlv_4= 'else' ( (lv_else_5_0= ruleExpression ) )
+            {
+            otherlv_0=(Token)match(input,23,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getIfElseAccess().getIfKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:840:3: ( (lv_condition_1_0= ruleExpression ) )
+            // InternalSolverLanguage.g:841:4: (lv_condition_1_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:841:4: (lv_condition_1_0= ruleExpression )
+            // InternalSolverLanguage.g:842:5: lv_condition_1_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getIfElseAccess().getConditionExpressionParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_15);
+            lv_condition_1_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getIfElseRule());
+              					}
+              					set(
+              						current,
+              						"condition",
+              						lv_condition_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_2=(Token)match(input,24,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getIfElseAccess().getThenKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:863:3: ( (lv_then_3_0= ruleExpression ) )
+            // InternalSolverLanguage.g:864:4: (lv_then_3_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:864:4: (lv_then_3_0= ruleExpression )
+            // InternalSolverLanguage.g:865:5: lv_then_3_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getIfElseAccess().getThenExpressionParserRuleCall_3_0());
+              				
+            }
+            pushFollow(FOLLOW_16);
+            lv_then_3_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getIfElseRule());
+              					}
+              					set(
+              						current,
+              						"then",
+              						lv_then_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_4=(Token)match(input,25,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_4, grammarAccess.getIfElseAccess().getElseKeyword_4());
+              		
+            }
+            // InternalSolverLanguage.g:886:3: ( (lv_else_5_0= ruleExpression ) )
+            // InternalSolverLanguage.g:887:4: (lv_else_5_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:887:4: (lv_else_5_0= ruleExpression )
+            // InternalSolverLanguage.g:888:5: lv_else_5_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getIfElseAccess().getElseExpressionParserRuleCall_5_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_else_5_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getIfElseRule());
+              					}
+              					set(
+              						current,
+              						"else",
+              						lv_else_5_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleIfElse"
+
+
+    // $ANTLR start "entryRuleDisjunctiveExpression"
+    // InternalSolverLanguage.g:909:1: entryRuleDisjunctiveExpression returns [EObject current=null] : iv_ruleDisjunctiveExpression= ruleDisjunctiveExpression EOF ;
+    public final EObject entryRuleDisjunctiveExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleDisjunctiveExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:909:62: (iv_ruleDisjunctiveExpression= ruleDisjunctiveExpression EOF )
+            // InternalSolverLanguage.g:910:2: iv_ruleDisjunctiveExpression= ruleDisjunctiveExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getDisjunctiveExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleDisjunctiveExpression=ruleDisjunctiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleDisjunctiveExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleDisjunctiveExpression"
+
+
+    // $ANTLR start "ruleDisjunctiveExpression"
+    // InternalSolverLanguage.g:916:1: ruleDisjunctiveExpression returns [EObject current=null] : (this_ConjunctiveExpression_0= ruleConjunctiveExpression ( ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ ) | ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* ) )? ) ;
+    public final EObject ruleDisjunctiveExpression() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_2=null;
+        Token otherlv_5=null;
+        Token otherlv_8=null;
+        EObject this_ConjunctiveExpression_0 = null;
+
+        EObject lv_children_3_0 = null;
+
+        EObject lv_body_6_0 = null;
+
+        EObject lv_cases_9_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:922:2: ( (this_ConjunctiveExpression_0= ruleConjunctiveExpression ( ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ ) | ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* ) )? ) )
+            // InternalSolverLanguage.g:923:2: (this_ConjunctiveExpression_0= ruleConjunctiveExpression ( ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ ) | ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* ) )? )
+            {
+            // InternalSolverLanguage.g:923:2: (this_ConjunctiveExpression_0= ruleConjunctiveExpression ( ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ ) | ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* ) )? )
+            // InternalSolverLanguage.g:924:3: this_ConjunctiveExpression_0= ruleConjunctiveExpression ( ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ ) | ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* ) )?
+            {
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getDisjunctiveExpressionAccess().getConjunctiveExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_17);
+            this_ConjunctiveExpression_0=ruleConjunctiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = this_ConjunctiveExpression_0;
+              			afterParserOrEnumRuleCall();
+              		
+            }
+            // InternalSolverLanguage.g:932:3: ( ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ ) | ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* ) )?
+            int alt11=3;
+            int LA11_0 = input.LA(1);
+
+            if ( (LA11_0==26) ) {
+                alt11=1;
+            }
+            else if ( (LA11_0==27) ) {
+                alt11=2;
+            }
+            switch (alt11) {
+                case 1 :
+                    // InternalSolverLanguage.g:933:4: ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ )
+                    {
+                    // InternalSolverLanguage.g:933:4: ( () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+ )
+                    // InternalSolverLanguage.g:934:5: () (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+
+                    {
+                    // InternalSolverLanguage.g:934:5: ()
+                    // InternalSolverLanguage.g:935:6: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						current = forceCreateModelElementAndAdd(
+                      							grammarAccess.getDisjunctiveExpressionAccess().getDisjunctionChildrenAction_1_0_0(),
+                      							current);
+                      					
+                    }
+
+                    }
+
+                    // InternalSolverLanguage.g:941:5: (otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) ) )+
+                    int cnt9=0;
+                    loop9:
+                    do {
+                        int alt9=2;
+                        int LA9_0 = input.LA(1);
+
+                        if ( (LA9_0==26) ) {
+                            alt9=1;
+                        }
+
+
+                        switch (alt9) {
+                    	case 1 :
+                    	    // InternalSolverLanguage.g:942:6: otherlv_2= ';' ( (lv_children_3_0= ruleConjunctiveExpression ) )
+                    	    {
+                    	    otherlv_2=(Token)match(input,26,FOLLOW_6); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      						newLeafNode(otherlv_2, grammarAccess.getDisjunctiveExpressionAccess().getSemicolonKeyword_1_0_1_0());
+                    	      					
+                    	    }
+                    	    // InternalSolverLanguage.g:946:6: ( (lv_children_3_0= ruleConjunctiveExpression ) )
+                    	    // InternalSolverLanguage.g:947:7: (lv_children_3_0= ruleConjunctiveExpression )
+                    	    {
+                    	    // InternalSolverLanguage.g:947:7: (lv_children_3_0= ruleConjunctiveExpression )
+                    	    // InternalSolverLanguage.g:948:8: lv_children_3_0= ruleConjunctiveExpression
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+
+                    	      								newCompositeNode(grammarAccess.getDisjunctiveExpressionAccess().getChildrenConjunctiveExpressionParserRuleCall_1_0_1_1_0());
+                    	      							
+                    	    }
+                    	    pushFollow(FOLLOW_18);
+                    	    lv_children_3_0=ruleConjunctiveExpression();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      								if (current==null) {
+                    	      									current = createModelElementForParent(grammarAccess.getDisjunctiveExpressionRule());
+                    	      								}
+                    	      								add(
+                    	      									current,
+                    	      									"children",
+                    	      									lv_children_3_0,
+                    	      									"org.eclipse.viatra.solver.language.SolverLanguage.ConjunctiveExpression");
+                    	      								afterParserOrEnumRuleCall();
+                    	      							
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt9 >= 1 ) break loop9;
+                    	    if (state.backtracking>0) {state.failed=true; return current;}
+                                EarlyExitException eee =
+                                    new EarlyExitException(9, input);
+                                throw eee;
+                        }
+                        cnt9++;
+                    } while (true);
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:968:4: ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* )
+                    {
+                    // InternalSolverLanguage.g:968:4: ( () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )* )
+                    // InternalSolverLanguage.g:969:5: () otherlv_5= '->' ( (lv_body_6_0= ruleConjunctiveExpression ) ) () (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )*
+                    {
+                    // InternalSolverLanguage.g:969:5: ()
+                    // InternalSolverLanguage.g:970:6: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						current = forceCreateModelElementAndSet(
+                      							grammarAccess.getDisjunctiveExpressionAccess().getCaseConditionAction_1_1_0(),
+                      							current);
+                      					
+                    }
+
+                    }
+
+                    otherlv_5=(Token)match(input,27,FOLLOW_6); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					newLeafNode(otherlv_5, grammarAccess.getDisjunctiveExpressionAccess().getHyphenMinusGreaterThanSignKeyword_1_1_1());
+                      				
+                    }
+                    // InternalSolverLanguage.g:980:5: ( (lv_body_6_0= ruleConjunctiveExpression ) )
+                    // InternalSolverLanguage.g:981:6: (lv_body_6_0= ruleConjunctiveExpression )
+                    {
+                    // InternalSolverLanguage.g:981:6: (lv_body_6_0= ruleConjunctiveExpression )
+                    // InternalSolverLanguage.g:982:7: lv_body_6_0= ruleConjunctiveExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getDisjunctiveExpressionAccess().getBodyConjunctiveExpressionParserRuleCall_1_1_2_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_18);
+                    lv_body_6_0=ruleConjunctiveExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElementForParent(grammarAccess.getDisjunctiveExpressionRule());
+                      							}
+                      							set(
+                      								current,
+                      								"body",
+                      								lv_body_6_0,
+                      								"org.eclipse.viatra.solver.language.SolverLanguage.ConjunctiveExpression");
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:999:5: ()
+                    // InternalSolverLanguage.g:1000:6: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						current = forceCreateModelElementAndAdd(
+                      							grammarAccess.getDisjunctiveExpressionAccess().getSwitchCasesAction_1_1_3(),
+                      							current);
+                      					
+                    }
+
+                    }
+
+                    // InternalSolverLanguage.g:1006:5: (otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) ) )*
+                    loop10:
+                    do {
+                        int alt10=2;
+                        int LA10_0 = input.LA(1);
+
+                        if ( (LA10_0==26) ) {
+                            alt10=1;
+                        }
+
+
+                        switch (alt10) {
+                    	case 1 :
+                    	    // InternalSolverLanguage.g:1007:6: otherlv_8= ';' ( (lv_cases_9_0= ruleCase ) )
+                    	    {
+                    	    otherlv_8=(Token)match(input,26,FOLLOW_6); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      						newLeafNode(otherlv_8, grammarAccess.getDisjunctiveExpressionAccess().getSemicolonKeyword_1_1_4_0());
+                    	      					
+                    	    }
+                    	    // InternalSolverLanguage.g:1011:6: ( (lv_cases_9_0= ruleCase ) )
+                    	    // InternalSolverLanguage.g:1012:7: (lv_cases_9_0= ruleCase )
+                    	    {
+                    	    // InternalSolverLanguage.g:1012:7: (lv_cases_9_0= ruleCase )
+                    	    // InternalSolverLanguage.g:1013:8: lv_cases_9_0= ruleCase
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+
+                    	      								newCompositeNode(grammarAccess.getDisjunctiveExpressionAccess().getCasesCaseParserRuleCall_1_1_4_1_0());
+                    	      							
+                    	    }
+                    	    pushFollow(FOLLOW_18);
+                    	    lv_cases_9_0=ruleCase();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      								if (current==null) {
+                    	      									current = createModelElementForParent(grammarAccess.getDisjunctiveExpressionRule());
+                    	      								}
+                    	      								add(
+                    	      									current,
+                    	      									"cases",
+                    	      									lv_cases_9_0,
+                    	      									"org.eclipse.viatra.solver.language.SolverLanguage.Case");
+                    	      								afterParserOrEnumRuleCall();
+                    	      							
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop10;
+                        }
+                    } while (true);
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleDisjunctiveExpression"
+
+
+    // $ANTLR start "entryRuleCase"
+    // InternalSolverLanguage.g:1037:1: entryRuleCase returns [EObject current=null] : iv_ruleCase= ruleCase EOF ;
+    public final EObject entryRuleCase() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleCase = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1037:45: (iv_ruleCase= ruleCase EOF )
+            // InternalSolverLanguage.g:1038:2: iv_ruleCase= ruleCase EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getCaseRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleCase=ruleCase();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleCase; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleCase"
+
+
+    // $ANTLR start "ruleCase"
+    // InternalSolverLanguage.g:1044:1: ruleCase returns [EObject current=null] : ( ( (lv_condition_0_0= ruleConjunctiveExpression ) ) otherlv_1= '->' ( (lv_body_2_0= ruleConjunctiveExpression ) ) ) ;
+    public final EObject ruleCase() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        EObject lv_condition_0_0 = null;
+
+        EObject lv_body_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1050:2: ( ( ( (lv_condition_0_0= ruleConjunctiveExpression ) ) otherlv_1= '->' ( (lv_body_2_0= ruleConjunctiveExpression ) ) ) )
+            // InternalSolverLanguage.g:1051:2: ( ( (lv_condition_0_0= ruleConjunctiveExpression ) ) otherlv_1= '->' ( (lv_body_2_0= ruleConjunctiveExpression ) ) )
+            {
+            // InternalSolverLanguage.g:1051:2: ( ( (lv_condition_0_0= ruleConjunctiveExpression ) ) otherlv_1= '->' ( (lv_body_2_0= ruleConjunctiveExpression ) ) )
+            // InternalSolverLanguage.g:1052:3: ( (lv_condition_0_0= ruleConjunctiveExpression ) ) otherlv_1= '->' ( (lv_body_2_0= ruleConjunctiveExpression ) )
+            {
+            // InternalSolverLanguage.g:1052:3: ( (lv_condition_0_0= ruleConjunctiveExpression ) )
+            // InternalSolverLanguage.g:1053:4: (lv_condition_0_0= ruleConjunctiveExpression )
+            {
+            // InternalSolverLanguage.g:1053:4: (lv_condition_0_0= ruleConjunctiveExpression )
+            // InternalSolverLanguage.g:1054:5: lv_condition_0_0= ruleConjunctiveExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getCaseAccess().getConditionConjunctiveExpressionParserRuleCall_0_0());
+              				
+            }
+            pushFollow(FOLLOW_19);
+            lv_condition_0_0=ruleConjunctiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getCaseRule());
+              					}
+              					set(
+              						current,
+              						"condition",
+              						lv_condition_0_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.ConjunctiveExpression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_1=(Token)match(input,27,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getCaseAccess().getHyphenMinusGreaterThanSignKeyword_1());
+              		
+            }
+            // InternalSolverLanguage.g:1075:3: ( (lv_body_2_0= ruleConjunctiveExpression ) )
+            // InternalSolverLanguage.g:1076:4: (lv_body_2_0= ruleConjunctiveExpression )
+            {
+            // InternalSolverLanguage.g:1076:4: (lv_body_2_0= ruleConjunctiveExpression )
+            // InternalSolverLanguage.g:1077:5: lv_body_2_0= ruleConjunctiveExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getCaseAccess().getBodyConjunctiveExpressionParserRuleCall_2_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_body_2_0=ruleConjunctiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getCaseRule());
+              					}
+              					set(
+              						current,
+              						"body",
+              						lv_body_2_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.ConjunctiveExpression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleCase"
+
+
+    // $ANTLR start "entryRuleConjunctiveExpression"
+    // InternalSolverLanguage.g:1098:1: entryRuleConjunctiveExpression returns [EObject current=null] : iv_ruleConjunctiveExpression= ruleConjunctiveExpression EOF ;
+    public final EObject entryRuleConjunctiveExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleConjunctiveExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1098:62: (iv_ruleConjunctiveExpression= ruleConjunctiveExpression EOF )
+            // InternalSolverLanguage.g:1099:2: iv_ruleConjunctiveExpression= ruleConjunctiveExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getConjunctiveExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleConjunctiveExpression=ruleConjunctiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleConjunctiveExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleConjunctiveExpression"
+
+
+    // $ANTLR start "ruleConjunctiveExpression"
+    // InternalSolverLanguage.g:1105:1: ruleConjunctiveExpression returns [EObject current=null] : (this_ComparisonExpression_0= ruleComparisonExpression ( () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+ )? ) ;
+    public final EObject ruleConjunctiveExpression() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_2=null;
+        EObject this_ComparisonExpression_0 = null;
+
+        EObject lv_children_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1111:2: ( (this_ComparisonExpression_0= ruleComparisonExpression ( () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+ )? ) )
+            // InternalSolverLanguage.g:1112:2: (this_ComparisonExpression_0= ruleComparisonExpression ( () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+ )? )
+            {
+            // InternalSolverLanguage.g:1112:2: (this_ComparisonExpression_0= ruleComparisonExpression ( () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+ )? )
+            // InternalSolverLanguage.g:1113:3: this_ComparisonExpression_0= ruleComparisonExpression ( () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+ )?
+            {
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getConjunctiveExpressionAccess().getComparisonExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_20);
+            this_ComparisonExpression_0=ruleComparisonExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = this_ComparisonExpression_0;
+              			afterParserOrEnumRuleCall();
+              		
+            }
+            // InternalSolverLanguage.g:1121:3: ( () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+ )?
+            int alt13=2;
+            int LA13_0 = input.LA(1);
+
+            if ( (LA13_0==28) ) {
+                alt13=1;
+            }
+            switch (alt13) {
+                case 1 :
+                    // InternalSolverLanguage.g:1122:4: () (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+
+                    {
+                    // InternalSolverLanguage.g:1122:4: ()
+                    // InternalSolverLanguage.g:1123:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					current = forceCreateModelElementAndAdd(
+                      						grammarAccess.getConjunctiveExpressionAccess().getConjunctionChildrenAction_1_0(),
+                      						current);
+                      				
+                    }
+
+                    }
+
+                    // InternalSolverLanguage.g:1129:4: (otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) ) )+
+                    int cnt12=0;
+                    loop12:
+                    do {
+                        int alt12=2;
+                        int LA12_0 = input.LA(1);
+
+                        if ( (LA12_0==28) ) {
+                            alt12=1;
+                        }
+
+
+                        switch (alt12) {
+                    	case 1 :
+                    	    // InternalSolverLanguage.g:1130:5: otherlv_2= ',' ( (lv_children_3_0= ruleComparisonExpression ) )
+                    	    {
+                    	    otherlv_2=(Token)match(input,28,FOLLOW_6); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      					newLeafNode(otherlv_2, grammarAccess.getConjunctiveExpressionAccess().getCommaKeyword_1_1_0());
+                    	      				
+                    	    }
+                    	    // InternalSolverLanguage.g:1134:5: ( (lv_children_3_0= ruleComparisonExpression ) )
+                    	    // InternalSolverLanguage.g:1135:6: (lv_children_3_0= ruleComparisonExpression )
+                    	    {
+                    	    // InternalSolverLanguage.g:1135:6: (lv_children_3_0= ruleComparisonExpression )
+                    	    // InternalSolverLanguage.g:1136:7: lv_children_3_0= ruleComparisonExpression
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+
+                    	      							newCompositeNode(grammarAccess.getConjunctiveExpressionAccess().getChildrenComparisonExpressionParserRuleCall_1_1_1_0());
+                    	      						
+                    	    }
+                    	    pushFollow(FOLLOW_20);
+                    	    lv_children_3_0=ruleComparisonExpression();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      							if (current==null) {
+                    	      								current = createModelElementForParent(grammarAccess.getConjunctiveExpressionRule());
+                    	      							}
+                    	      							add(
+                    	      								current,
+                    	      								"children",
+                    	      								lv_children_3_0,
+                    	      								"org.eclipse.viatra.solver.language.SolverLanguage.ComparisonExpression");
+                    	      							afterParserOrEnumRuleCall();
+                    	      						
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt12 >= 1 ) break loop12;
+                    	    if (state.backtracking>0) {state.failed=true; return current;}
+                                EarlyExitException eee =
+                                    new EarlyExitException(12, input);
+                                throw eee;
+                        }
+                        cnt12++;
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleConjunctiveExpression"
+
+
+    // $ANTLR start "entryRuleComparisonExpression"
+    // InternalSolverLanguage.g:1159:1: entryRuleComparisonExpression returns [EObject current=null] : iv_ruleComparisonExpression= ruleComparisonExpression EOF ;
+    public final EObject entryRuleComparisonExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleComparisonExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1159:61: (iv_ruleComparisonExpression= ruleComparisonExpression EOF )
+            // InternalSolverLanguage.g:1160:2: iv_ruleComparisonExpression= ruleComparisonExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getComparisonExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleComparisonExpression=ruleComparisonExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleComparisonExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleComparisonExpression"
+
+
+    // $ANTLR start "ruleComparisonExpression"
+    // InternalSolverLanguage.g:1166:1: ruleComparisonExpression returns [EObject current=null] : (this_AdditiveExpression_0= ruleAdditiveExpression ( () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) ) )? ) ;
+    public final EObject ruleComparisonExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_AdditiveExpression_0 = null;
+
+        Enumerator lv_op_2_0 = null;
+
+        EObject lv_right_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1172:2: ( (this_AdditiveExpression_0= ruleAdditiveExpression ( () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) ) )? ) )
+            // InternalSolverLanguage.g:1173:2: (this_AdditiveExpression_0= ruleAdditiveExpression ( () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) ) )? )
+            {
+            // InternalSolverLanguage.g:1173:2: (this_AdditiveExpression_0= ruleAdditiveExpression ( () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) ) )? )
+            // InternalSolverLanguage.g:1174:3: this_AdditiveExpression_0= ruleAdditiveExpression ( () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) ) )?
+            {
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getComparisonExpressionAccess().getAdditiveExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_21);
+            this_AdditiveExpression_0=ruleAdditiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = this_AdditiveExpression_0;
+              			afterParserOrEnumRuleCall();
+              		
+            }
+            // InternalSolverLanguage.g:1182:3: ( () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) ) )?
+            int alt14=2;
+            int LA14_0 = input.LA(1);
+
+            if ( ((LA14_0>=47 && LA14_0<=49)||(LA14_0>=52 && LA14_0<=55)) ) {
+                alt14=1;
+            }
+            switch (alt14) {
+                case 1 :
+                    // InternalSolverLanguage.g:1183:4: () ( (lv_op_2_0= ruleComparisonOperator ) ) ( (lv_right_3_0= ruleAdditiveExpression ) )
+                    {
+                    // InternalSolverLanguage.g:1183:4: ()
+                    // InternalSolverLanguage.g:1184:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					current = forceCreateModelElementAndSet(
+                      						grammarAccess.getComparisonExpressionAccess().getComparisonLeftAction_1_0(),
+                      						current);
+                      				
+                    }
+
+                    }
+
+                    // InternalSolverLanguage.g:1190:4: ( (lv_op_2_0= ruleComparisonOperator ) )
+                    // InternalSolverLanguage.g:1191:5: (lv_op_2_0= ruleComparisonOperator )
+                    {
+                    // InternalSolverLanguage.g:1191:5: (lv_op_2_0= ruleComparisonOperator )
+                    // InternalSolverLanguage.g:1192:6: lv_op_2_0= ruleComparisonOperator
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getComparisonExpressionAccess().getOpComparisonOperatorEnumRuleCall_1_1_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_6);
+                    lv_op_2_0=ruleComparisonOperator();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getComparisonExpressionRule());
+                      						}
+                      						set(
+                      							current,
+                      							"op",
+                      							lv_op_2_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.ComparisonOperator");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:1209:4: ( (lv_right_3_0= ruleAdditiveExpression ) )
+                    // InternalSolverLanguage.g:1210:5: (lv_right_3_0= ruleAdditiveExpression )
+                    {
+                    // InternalSolverLanguage.g:1210:5: (lv_right_3_0= ruleAdditiveExpression )
+                    // InternalSolverLanguage.g:1211:6: lv_right_3_0= ruleAdditiveExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getComparisonExpressionAccess().getRightAdditiveExpressionParserRuleCall_1_2_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_right_3_0=ruleAdditiveExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getComparisonExpressionRule());
+                      						}
+                      						set(
+                      							current,
+                      							"right",
+                      							lv_right_3_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.AdditiveExpression");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleComparisonExpression"
+
+
+    // $ANTLR start "entryRuleAdditiveExpression"
+    // InternalSolverLanguage.g:1233:1: entryRuleAdditiveExpression returns [EObject current=null] : iv_ruleAdditiveExpression= ruleAdditiveExpression EOF ;
+    public final EObject entryRuleAdditiveExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleAdditiveExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1233:59: (iv_ruleAdditiveExpression= ruleAdditiveExpression EOF )
+            // InternalSolverLanguage.g:1234:2: iv_ruleAdditiveExpression= ruleAdditiveExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAdditiveExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleAdditiveExpression=ruleAdditiveExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAdditiveExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleAdditiveExpression"
+
+
+    // $ANTLR start "ruleAdditiveExpression"
+    // InternalSolverLanguage.g:1240:1: ruleAdditiveExpression returns [EObject current=null] : (this_MultiplicativeExpression_0= ruleMultiplicativeExpression ( () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) ) )* ) ;
+    public final EObject ruleAdditiveExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_MultiplicativeExpression_0 = null;
+
+        Enumerator lv_op_2_0 = null;
+
+        EObject lv_right_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1246:2: ( (this_MultiplicativeExpression_0= ruleMultiplicativeExpression ( () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) ) )* ) )
+            // InternalSolverLanguage.g:1247:2: (this_MultiplicativeExpression_0= ruleMultiplicativeExpression ( () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) ) )* )
+            {
+            // InternalSolverLanguage.g:1247:2: (this_MultiplicativeExpression_0= ruleMultiplicativeExpression ( () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) ) )* )
+            // InternalSolverLanguage.g:1248:3: this_MultiplicativeExpression_0= ruleMultiplicativeExpression ( () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) ) )*
+            {
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getAdditiveExpressionAccess().getMultiplicativeExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_22);
+            this_MultiplicativeExpression_0=ruleMultiplicativeExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = this_MultiplicativeExpression_0;
+              			afterParserOrEnumRuleCall();
+              		
+            }
+            // InternalSolverLanguage.g:1256:3: ( () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) ) )*
+            loop15:
+            do {
+                int alt15=2;
+                int LA15_0 = input.LA(1);
+
+                if ( ((LA15_0>=56 && LA15_0<=57)) ) {
+                    alt15=1;
+                }
+
+
+                switch (alt15) {
+            	case 1 :
+            	    // InternalSolverLanguage.g:1257:4: () ( (lv_op_2_0= ruleAdditiveBinaryOperator ) ) ( (lv_right_3_0= ruleMultiplicativeExpression ) )
+            	    {
+            	    // InternalSolverLanguage.g:1257:4: ()
+            	    // InternalSolverLanguage.g:1258:5: 
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      					current = forceCreateModelElementAndSet(
+            	      						grammarAccess.getAdditiveExpressionAccess().getBinaryExpressionLeftAction_1_0(),
+            	      						current);
+            	      				
+            	    }
+
+            	    }
+
+            	    // InternalSolverLanguage.g:1264:4: ( (lv_op_2_0= ruleAdditiveBinaryOperator ) )
+            	    // InternalSolverLanguage.g:1265:5: (lv_op_2_0= ruleAdditiveBinaryOperator )
+            	    {
+            	    // InternalSolverLanguage.g:1265:5: (lv_op_2_0= ruleAdditiveBinaryOperator )
+            	    // InternalSolverLanguage.g:1266:6: lv_op_2_0= ruleAdditiveBinaryOperator
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      						newCompositeNode(grammarAccess.getAdditiveExpressionAccess().getOpAdditiveBinaryOperatorEnumRuleCall_1_1_0());
+            	      					
+            	    }
+            	    pushFollow(FOLLOW_6);
+            	    lv_op_2_0=ruleAdditiveBinaryOperator();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      						if (current==null) {
+            	      							current = createModelElementForParent(grammarAccess.getAdditiveExpressionRule());
+            	      						}
+            	      						set(
+            	      							current,
+            	      							"op",
+            	      							lv_op_2_0,
+            	      							"org.eclipse.viatra.solver.language.SolverLanguage.AdditiveBinaryOperator");
+            	      						afterParserOrEnumRuleCall();
+            	      					
+            	    }
+
+            	    }
+
+
+            	    }
+
+            	    // InternalSolverLanguage.g:1283:4: ( (lv_right_3_0= ruleMultiplicativeExpression ) )
+            	    // InternalSolverLanguage.g:1284:5: (lv_right_3_0= ruleMultiplicativeExpression )
+            	    {
+            	    // InternalSolverLanguage.g:1284:5: (lv_right_3_0= ruleMultiplicativeExpression )
+            	    // InternalSolverLanguage.g:1285:6: lv_right_3_0= ruleMultiplicativeExpression
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      						newCompositeNode(grammarAccess.getAdditiveExpressionAccess().getRightMultiplicativeExpressionParserRuleCall_1_2_0());
+            	      					
+            	    }
+            	    pushFollow(FOLLOW_22);
+            	    lv_right_3_0=ruleMultiplicativeExpression();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      						if (current==null) {
+            	      							current = createModelElementForParent(grammarAccess.getAdditiveExpressionRule());
+            	      						}
+            	      						set(
+            	      							current,
+            	      							"right",
+            	      							lv_right_3_0,
+            	      							"org.eclipse.viatra.solver.language.SolverLanguage.MultiplicativeExpression");
+            	      						afterParserOrEnumRuleCall();
+            	      					
+            	    }
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop15;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleAdditiveExpression"
+
+
+    // $ANTLR start "entryRuleMultiplicativeExpression"
+    // InternalSolverLanguage.g:1307:1: entryRuleMultiplicativeExpression returns [EObject current=null] : iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF ;
+    public final EObject entryRuleMultiplicativeExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMultiplicativeExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1307:65: (iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF )
+            // InternalSolverLanguage.g:1308:2: iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMultiplicativeExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleMultiplicativeExpression=ruleMultiplicativeExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMultiplicativeExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMultiplicativeExpression"
+
+
+    // $ANTLR start "ruleMultiplicativeExpression"
+    // InternalSolverLanguage.g:1314:1: ruleMultiplicativeExpression returns [EObject current=null] : (this_ExponentialExpression_0= ruleExponentialExpression ( () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )* ) ;
+    public final EObject ruleMultiplicativeExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_ExponentialExpression_0 = null;
+
+        Enumerator lv_op_2_0 = null;
+
+        EObject lv_right_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1320:2: ( (this_ExponentialExpression_0= ruleExponentialExpression ( () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )* ) )
+            // InternalSolverLanguage.g:1321:2: (this_ExponentialExpression_0= ruleExponentialExpression ( () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )* )
+            {
+            // InternalSolverLanguage.g:1321:2: (this_ExponentialExpression_0= ruleExponentialExpression ( () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )* )
+            // InternalSolverLanguage.g:1322:3: this_ExponentialExpression_0= ruleExponentialExpression ( () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )*
+            {
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getExponentialExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_23);
+            this_ExponentialExpression_0=ruleExponentialExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = this_ExponentialExpression_0;
+              			afterParserOrEnumRuleCall();
+              		
+            }
+            // InternalSolverLanguage.g:1330:3: ( () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )*
+            loop16:
+            do {
+                int alt16=2;
+                int LA16_0 = input.LA(1);
+
+                if ( (LA16_0==35||LA16_0==58) ) {
+                    alt16=1;
+                }
+
+
+                switch (alt16) {
+            	case 1 :
+            	    // InternalSolverLanguage.g:1331:4: () ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) ) ( (lv_right_3_0= ruleExponentialExpression ) )
+            	    {
+            	    // InternalSolverLanguage.g:1331:4: ()
+            	    // InternalSolverLanguage.g:1332:5: 
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      					current = forceCreateModelElementAndSet(
+            	      						grammarAccess.getMultiplicativeExpressionAccess().getBinaryExpressionLeftAction_1_0(),
+            	      						current);
+            	      				
+            	    }
+
+            	    }
+
+            	    // InternalSolverLanguage.g:1338:4: ( (lv_op_2_0= ruleMultiplicativeBinaryOperator ) )
+            	    // InternalSolverLanguage.g:1339:5: (lv_op_2_0= ruleMultiplicativeBinaryOperator )
+            	    {
+            	    // InternalSolverLanguage.g:1339:5: (lv_op_2_0= ruleMultiplicativeBinaryOperator )
+            	    // InternalSolverLanguage.g:1340:6: lv_op_2_0= ruleMultiplicativeBinaryOperator
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      						newCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getOpMultiplicativeBinaryOperatorEnumRuleCall_1_1_0());
+            	      					
+            	    }
+            	    pushFollow(FOLLOW_6);
+            	    lv_op_2_0=ruleMultiplicativeBinaryOperator();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      						if (current==null) {
+            	      							current = createModelElementForParent(grammarAccess.getMultiplicativeExpressionRule());
+            	      						}
+            	      						set(
+            	      							current,
+            	      							"op",
+            	      							lv_op_2_0,
+            	      							"org.eclipse.viatra.solver.language.SolverLanguage.MultiplicativeBinaryOperator");
+            	      						afterParserOrEnumRuleCall();
+            	      					
+            	    }
+
+            	    }
+
+
+            	    }
+
+            	    // InternalSolverLanguage.g:1357:4: ( (lv_right_3_0= ruleExponentialExpression ) )
+            	    // InternalSolverLanguage.g:1358:5: (lv_right_3_0= ruleExponentialExpression )
+            	    {
+            	    // InternalSolverLanguage.g:1358:5: (lv_right_3_0= ruleExponentialExpression )
+            	    // InternalSolverLanguage.g:1359:6: lv_right_3_0= ruleExponentialExpression
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      						newCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getRightExponentialExpressionParserRuleCall_1_2_0());
+            	      					
+            	    }
+            	    pushFollow(FOLLOW_23);
+            	    lv_right_3_0=ruleExponentialExpression();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      						if (current==null) {
+            	      							current = createModelElementForParent(grammarAccess.getMultiplicativeExpressionRule());
+            	      						}
+            	      						set(
+            	      							current,
+            	      							"right",
+            	      							lv_right_3_0,
+            	      							"org.eclipse.viatra.solver.language.SolverLanguage.ExponentialExpression");
+            	      						afterParserOrEnumRuleCall();
+            	      					
+            	    }
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop16;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMultiplicativeExpression"
+
+
+    // $ANTLR start "entryRuleExponentialExpression"
+    // InternalSolverLanguage.g:1381:1: entryRuleExponentialExpression returns [EObject current=null] : iv_ruleExponentialExpression= ruleExponentialExpression EOF ;
+    public final EObject entryRuleExponentialExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleExponentialExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1381:62: (iv_ruleExponentialExpression= ruleExponentialExpression EOF )
+            // InternalSolverLanguage.g:1382:2: iv_ruleExponentialExpression= ruleExponentialExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExponentialExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleExponentialExpression=ruleExponentialExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExponentialExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleExponentialExpression"
+
+
+    // $ANTLR start "ruleExponentialExpression"
+    // InternalSolverLanguage.g:1388:1: ruleExponentialExpression returns [EObject current=null] : (this_UnaryExpression_0= ruleUnaryExpression ( () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )? ) ;
+    public final EObject ruleExponentialExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_UnaryExpression_0 = null;
+
+        Enumerator lv_op_2_0 = null;
+
+        EObject lv_right_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1394:2: ( (this_UnaryExpression_0= ruleUnaryExpression ( () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )? ) )
+            // InternalSolverLanguage.g:1395:2: (this_UnaryExpression_0= ruleUnaryExpression ( () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )? )
+            {
+            // InternalSolverLanguage.g:1395:2: (this_UnaryExpression_0= ruleUnaryExpression ( () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )? )
+            // InternalSolverLanguage.g:1396:3: this_UnaryExpression_0= ruleUnaryExpression ( () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )?
+            {
+            if ( state.backtracking==0 ) {
+
+              			newCompositeNode(grammarAccess.getExponentialExpressionAccess().getUnaryExpressionParserRuleCall_0());
+              		
+            }
+            pushFollow(FOLLOW_24);
+            this_UnaryExpression_0=ruleUnaryExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = this_UnaryExpression_0;
+              			afterParserOrEnumRuleCall();
+              		
+            }
+            // InternalSolverLanguage.g:1404:3: ( () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) ) )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
+
+            if ( (LA17_0==59) ) {
+                alt17=1;
+            }
+            switch (alt17) {
+                case 1 :
+                    // InternalSolverLanguage.g:1405:4: () ( (lv_op_2_0= ruleExponentialOp ) ) ( (lv_right_3_0= ruleExponentialExpression ) )
+                    {
+                    // InternalSolverLanguage.g:1405:4: ()
+                    // InternalSolverLanguage.g:1406:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					current = forceCreateModelElementAndSet(
+                      						grammarAccess.getExponentialExpressionAccess().getBinaryExpressionLeftAction_1_0(),
+                      						current);
+                      				
+                    }
+
+                    }
+
+                    // InternalSolverLanguage.g:1412:4: ( (lv_op_2_0= ruleExponentialOp ) )
+                    // InternalSolverLanguage.g:1413:5: (lv_op_2_0= ruleExponentialOp )
+                    {
+                    // InternalSolverLanguage.g:1413:5: (lv_op_2_0= ruleExponentialOp )
+                    // InternalSolverLanguage.g:1414:6: lv_op_2_0= ruleExponentialOp
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getExponentialExpressionAccess().getOpExponentialOpEnumRuleCall_1_1_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_6);
+                    lv_op_2_0=ruleExponentialOp();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getExponentialExpressionRule());
+                      						}
+                      						set(
+                      							current,
+                      							"op",
+                      							lv_op_2_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.ExponentialOp");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:1431:4: ( (lv_right_3_0= ruleExponentialExpression ) )
+                    // InternalSolverLanguage.g:1432:5: (lv_right_3_0= ruleExponentialExpression )
+                    {
+                    // InternalSolverLanguage.g:1432:5: (lv_right_3_0= ruleExponentialExpression )
+                    // InternalSolverLanguage.g:1433:6: lv_right_3_0= ruleExponentialExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getExponentialExpressionAccess().getRightExponentialExpressionParserRuleCall_1_2_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_right_3_0=ruleExponentialExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getExponentialExpressionRule());
+                      						}
+                      						set(
+                      							current,
+                      							"right",
+                      							lv_right_3_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.ExponentialExpression");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleExponentialExpression"
+
+
+    // $ANTLR start "entryRuleUnaryExpression"
+    // InternalSolverLanguage.g:1455:1: entryRuleUnaryExpression returns [EObject current=null] : iv_ruleUnaryExpression= ruleUnaryExpression EOF ;
+    public final EObject entryRuleUnaryExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleUnaryExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1455:56: (iv_ruleUnaryExpression= ruleUnaryExpression EOF )
+            // InternalSolverLanguage.g:1456:2: iv_ruleUnaryExpression= ruleUnaryExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getUnaryExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleUnaryExpression=ruleUnaryExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleUnaryExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleUnaryExpression"
+
+
+    // $ANTLR start "ruleUnaryExpression"
+    // InternalSolverLanguage.g:1462:1: ruleUnaryExpression returns [EObject current=null] : (this_AggregationExpression_0= ruleAggregationExpression | ( () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) ) ) ) ;
+    public final EObject ruleUnaryExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_AggregationExpression_0 = null;
+
+        Enumerator lv_op_2_0 = null;
+
+        EObject lv_body_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1468:2: ( (this_AggregationExpression_0= ruleAggregationExpression | ( () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) ) ) ) )
+            // InternalSolverLanguage.g:1469:2: (this_AggregationExpression_0= ruleAggregationExpression | ( () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) ) ) )
+            {
+            // InternalSolverLanguage.g:1469:2: (this_AggregationExpression_0= ruleAggregationExpression | ( () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) ) ) )
+            int alt18=2;
+            int LA18_0 = input.LA(1);
+
+            if ( ((LA18_0>=RULE_STRING && LA18_0<=RULE_QUOTED_ID)||LA18_0==19||LA18_0==29||LA18_0==33||LA18_0==36||(LA18_0>=39 && LA18_0<=40)||(LA18_0>=64 && LA18_0<=72)) ) {
+                alt18=1;
+            }
+            else if ( ((LA18_0>=56 && LA18_0<=57)||(LA18_0>=60 && LA18_0<=63)) ) {
+                alt18=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 18, 0, input);
+
+                throw nvae;
+            }
+            switch (alt18) {
+                case 1 :
+                    // InternalSolverLanguage.g:1470:3: this_AggregationExpression_0= ruleAggregationExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getUnaryExpressionAccess().getAggregationExpressionParserRuleCall_0());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_AggregationExpression_0=ruleAggregationExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_AggregationExpression_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:1479:3: ( () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) ) )
+                    {
+                    // InternalSolverLanguage.g:1479:3: ( () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) ) )
+                    // InternalSolverLanguage.g:1480:4: () ( (lv_op_2_0= ruleUnaryOp ) ) ( (lv_body_3_0= ruleAggregationExpression ) )
+                    {
+                    // InternalSolverLanguage.g:1480:4: ()
+                    // InternalSolverLanguage.g:1481:5: 
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					current = forceCreateModelElement(
+                      						grammarAccess.getUnaryExpressionAccess().getUnaryExpressionAction_1_0(),
+                      						current);
+                      				
+                    }
+
+                    }
+
+                    // InternalSolverLanguage.g:1487:4: ( (lv_op_2_0= ruleUnaryOp ) )
+                    // InternalSolverLanguage.g:1488:5: (lv_op_2_0= ruleUnaryOp )
+                    {
+                    // InternalSolverLanguage.g:1488:5: (lv_op_2_0= ruleUnaryOp )
+                    // InternalSolverLanguage.g:1489:6: lv_op_2_0= ruleUnaryOp
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getUnaryExpressionAccess().getOpUnaryOpEnumRuleCall_1_1_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_25);
+                    lv_op_2_0=ruleUnaryOp();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getUnaryExpressionRule());
+                      						}
+                      						set(
+                      							current,
+                      							"op",
+                      							lv_op_2_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.UnaryOp");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:1506:4: ( (lv_body_3_0= ruleAggregationExpression ) )
+                    // InternalSolverLanguage.g:1507:5: (lv_body_3_0= ruleAggregationExpression )
+                    {
+                    // InternalSolverLanguage.g:1507:5: (lv_body_3_0= ruleAggregationExpression )
+                    // InternalSolverLanguage.g:1508:6: lv_body_3_0= ruleAggregationExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getUnaryExpressionAccess().getBodyAggregationExpressionParserRuleCall_1_2_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_body_3_0=ruleAggregationExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getUnaryExpressionRule());
+                      						}
+                      						set(
+                      							current,
+                      							"body",
+                      							lv_body_3_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.AggregationExpression");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleUnaryExpression"
+
+
+    // $ANTLR start "entryRuleAggregationExpression"
+    // InternalSolverLanguage.g:1530:1: entryRuleAggregationExpression returns [EObject current=null] : iv_ruleAggregationExpression= ruleAggregationExpression EOF ;
+    public final EObject entryRuleAggregationExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleAggregationExpression = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1530:62: (iv_ruleAggregationExpression= ruleAggregationExpression EOF )
+            // InternalSolverLanguage.g:1531:2: iv_ruleAggregationExpression= ruleAggregationExpression EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAggregationExpressionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleAggregationExpression=ruleAggregationExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAggregationExpression; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleAggregationExpression"
+
+
+    // $ANTLR start "ruleAggregationExpression"
+    // InternalSolverLanguage.g:1537:1: ruleAggregationExpression returns [EObject current=null] : (this_AtomicExpression_0= ruleAtomicExpression | this_Count_1= ruleCount | this_Aggregation_2= ruleAggregation ) ;
+    public final EObject ruleAggregationExpression() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_AtomicExpression_0 = null;
+
+        EObject this_Count_1 = null;
+
+        EObject this_Aggregation_2 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1543:2: ( (this_AtomicExpression_0= ruleAtomicExpression | this_Count_1= ruleCount | this_Aggregation_2= ruleAggregation ) )
+            // InternalSolverLanguage.g:1544:2: (this_AtomicExpression_0= ruleAtomicExpression | this_Count_1= ruleCount | this_Aggregation_2= ruleAggregation )
+            {
+            // InternalSolverLanguage.g:1544:2: (this_AtomicExpression_0= ruleAtomicExpression | this_Count_1= ruleCount | this_Aggregation_2= ruleAggregation )
+            int alt19=3;
+            switch ( input.LA(1) ) {
+            case RULE_STRING:
+            case RULE_ID:
+            case RULE_INT:
+            case RULE_QUOTED_ID:
+            case 19:
+            case 33:
+            case 36:
+            case 39:
+            case 40:
+            case 70:
+            case 71:
+            case 72:
+                {
+                alt19=1;
+                }
+                break;
+            case 29:
+                {
+                alt19=2;
+                }
+                break;
+            case 64:
+            case 65:
+            case 66:
+            case 67:
+            case 68:
+            case 69:
+                {
+                alt19=3;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 19, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt19) {
+                case 1 :
+                    // InternalSolverLanguage.g:1545:3: this_AtomicExpression_0= ruleAtomicExpression
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getAggregationExpressionAccess().getAtomicExpressionParserRuleCall_0());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_AtomicExpression_0=ruleAtomicExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_AtomicExpression_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:1554:3: this_Count_1= ruleCount
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getAggregationExpressionAccess().getCountParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_Count_1=ruleCount();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_Count_1;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
                 case 3 :
-                    // InternalSolverLanguage.g:367:3: this_CDInterpretation_2= ruleCDInterpretation
+                    // InternalSolverLanguage.g:1563:3: this_Aggregation_2= ruleAggregation
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getInterpretationAccess().getCDInterpretationParserRuleCall_2());
-                    		
+                      			newCompositeNode(grammarAccess.getAggregationExpressionAccess().getAggregationParserRuleCall_2());
+                      		
+                    }
                     pushFollow(FOLLOW_2);
-                    this_CDInterpretation_2=ruleCDInterpretation();
+                    this_Aggregation_2=ruleAggregation();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    			current = this_CDInterpretation_2;
-                    			afterParserOrEnumRuleCall();
-                    		
+                      			current = this_Aggregation_2;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
@@ -1068,9 +4409,11 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -1081,29 +4424,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleInterpretation"
+    // $ANTLR end "ruleAggregationExpression"
 
 
-    // $ANTLR start "entryRuleBasicInterpretation"
-    // InternalSolverLanguage.g:379:1: entryRuleBasicInterpretation returns [EObject current=null] : iv_ruleBasicInterpretation= ruleBasicInterpretation EOF ;
-    public final EObject entryRuleBasicInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleCount"
+    // InternalSolverLanguage.g:1575:1: entryRuleCount returns [EObject current=null] : iv_ruleCount= ruleCount EOF ;
+    public final EObject entryRuleCount() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleBasicInterpretation = null;
+        EObject iv_ruleCount = null;
 
 
         try {
-            // InternalSolverLanguage.g:379:60: (iv_ruleBasicInterpretation= ruleBasicInterpretation EOF )
-            // InternalSolverLanguage.g:380:2: iv_ruleBasicInterpretation= ruleBasicInterpretation EOF
+            // InternalSolverLanguage.g:1575:46: (iv_ruleCount= ruleCount EOF )
+            // InternalSolverLanguage.g:1576:2: iv_ruleCount= ruleCount EOF
             {
-             newCompositeNode(grammarAccess.getBasicInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getCountRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleBasicInterpretation=ruleBasicInterpretation();
+            iv_ruleCount=ruleCount();
 
             state._fsp--;
-
-             current =iv_ruleBasicInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleCount; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -1117,244 +4464,306 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleBasicInterpretation"
+    // $ANTLR end "entryRuleCount"
 
 
-    // $ANTLR start "ruleBasicInterpretation"
-    // InternalSolverLanguage.g:386:1: ruleBasicInterpretation returns [EObject current=null] : ( ( (lv_symbol_0_0= ruleSymbol ) ) (otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')' )? otherlv_6= ':' ( (lv_value_7_0= ruleTruthValue ) ) ) ;
-    public final EObject ruleBasicInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleCount"
+    // InternalSolverLanguage.g:1582:1: ruleCount returns [EObject current=null] : (otherlv_0= 'count' otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '}' ) ;
+    public final EObject ruleCount() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        EObject lv_body_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1588:2: ( (otherlv_0= 'count' otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '}' ) )
+            // InternalSolverLanguage.g:1589:2: (otherlv_0= 'count' otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '}' )
+            {
+            // InternalSolverLanguage.g:1589:2: (otherlv_0= 'count' otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '}' )
+            // InternalSolverLanguage.g:1590:3: otherlv_0= 'count' otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '}'
+            {
+            otherlv_0=(Token)match(input,29,FOLLOW_26); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getCountAccess().getCountKeyword_0());
+              		
+            }
+            otherlv_1=(Token)match(input,30,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getCountAccess().getLeftCurlyBracketKeyword_1());
+              		
+            }
+            // InternalSolverLanguage.g:1598:3: ( (lv_body_2_0= ruleExpression ) )
+            // InternalSolverLanguage.g:1599:4: (lv_body_2_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:1599:4: (lv_body_2_0= ruleExpression )
+            // InternalSolverLanguage.g:1600:5: lv_body_2_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getCountAccess().getBodyExpressionParserRuleCall_2_0());
+              				
+            }
+            pushFollow(FOLLOW_27);
+            lv_body_2_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getCountRule());
+              					}
+              					set(
+              						current,
+              						"body",
+              						lv_body_2_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_3=(Token)match(input,31,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_3, grammarAccess.getCountAccess().getRightCurlyBracketKeyword_3());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleCount"
+
+
+    // $ANTLR start "entryRuleAggregation"
+    // InternalSolverLanguage.g:1625:1: entryRuleAggregation returns [EObject current=null] : iv_ruleAggregation= ruleAggregation EOF ;
+    public final EObject entryRuleAggregation() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleAggregation = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1625:52: (iv_ruleAggregation= ruleAggregation EOF )
+            // InternalSolverLanguage.g:1626:2: iv_ruleAggregation= ruleAggregation EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAggregationRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleAggregation=ruleAggregation();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAggregation; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleAggregation"
+
+
+    // $ANTLR start "ruleAggregation"
+    // InternalSolverLanguage.g:1632:1: ruleAggregation returns [EObject current=null] : ( ( (lv_op_0_0= ruleAggregationOp ) ) otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '|' ( (lv_condition_4_0= ruleExpression ) ) otherlv_5= '}' ) ;
+    public final EObject ruleAggregation() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
-        Token otherlv_6=null;
-        EObject lv_symbol_0_0 = null;
+        Enumerator lv_op_0_0 = null;
 
-        EObject lv_objects_2_0 = null;
+        EObject lv_body_2_0 = null;
 
-        EObject lv_objects_4_0 = null;
-
-        EObject lv_value_7_0 = null;
+        EObject lv_condition_4_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:392:2: ( ( ( (lv_symbol_0_0= ruleSymbol ) ) (otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')' )? otherlv_6= ':' ( (lv_value_7_0= ruleTruthValue ) ) ) )
-            // InternalSolverLanguage.g:393:2: ( ( (lv_symbol_0_0= ruleSymbol ) ) (otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')' )? otherlv_6= ':' ( (lv_value_7_0= ruleTruthValue ) ) )
+            // InternalSolverLanguage.g:1638:2: ( ( ( (lv_op_0_0= ruleAggregationOp ) ) otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '|' ( (lv_condition_4_0= ruleExpression ) ) otherlv_5= '}' ) )
+            // InternalSolverLanguage.g:1639:2: ( ( (lv_op_0_0= ruleAggregationOp ) ) otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '|' ( (lv_condition_4_0= ruleExpression ) ) otherlv_5= '}' )
             {
-            // InternalSolverLanguage.g:393:2: ( ( (lv_symbol_0_0= ruleSymbol ) ) (otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')' )? otherlv_6= ':' ( (lv_value_7_0= ruleTruthValue ) ) )
-            // InternalSolverLanguage.g:394:3: ( (lv_symbol_0_0= ruleSymbol ) ) (otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')' )? otherlv_6= ':' ( (lv_value_7_0= ruleTruthValue ) )
+            // InternalSolverLanguage.g:1639:2: ( ( (lv_op_0_0= ruleAggregationOp ) ) otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '|' ( (lv_condition_4_0= ruleExpression ) ) otherlv_5= '}' )
+            // InternalSolverLanguage.g:1640:3: ( (lv_op_0_0= ruleAggregationOp ) ) otherlv_1= '{' ( (lv_body_2_0= ruleExpression ) ) otherlv_3= '|' ( (lv_condition_4_0= ruleExpression ) ) otherlv_5= '}'
             {
-            // InternalSolverLanguage.g:394:3: ( (lv_symbol_0_0= ruleSymbol ) )
-            // InternalSolverLanguage.g:395:4: (lv_symbol_0_0= ruleSymbol )
+            // InternalSolverLanguage.g:1640:3: ( (lv_op_0_0= ruleAggregationOp ) )
+            // InternalSolverLanguage.g:1641:4: (lv_op_0_0= ruleAggregationOp )
             {
-            // InternalSolverLanguage.g:395:4: (lv_symbol_0_0= ruleSymbol )
-            // InternalSolverLanguage.g:396:5: lv_symbol_0_0= ruleSymbol
+            // InternalSolverLanguage.g:1641:4: (lv_op_0_0= ruleAggregationOp )
+            // InternalSolverLanguage.g:1642:5: lv_op_0_0= ruleAggregationOp
             {
+            if ( state.backtracking==0 ) {
 
-            					newCompositeNode(grammarAccess.getBasicInterpretationAccess().getSymbolSymbolParserRuleCall_0_0());
-            				
-            pushFollow(FOLLOW_6);
-            lv_symbol_0_0=ruleSymbol();
+              					newCompositeNode(grammarAccess.getAggregationAccess().getOpAggregationOpEnumRuleCall_0_0());
+              				
+            }
+            pushFollow(FOLLOW_26);
+            lv_op_0_0=ruleAggregationOp();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getBasicInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"symbol",
-            						lv_symbol_0_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
-            					afterParserOrEnumRuleCall();
-            				
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getAggregationRule());
+              					}
+              					set(
+              						current,
+              						"op",
+              						lv_op_0_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.AggregationOp");
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
 
             }
 
-            // InternalSolverLanguage.g:413:3: (otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')' )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            otherlv_1=(Token)match(input,30,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            if ( (LA10_0==17) ) {
-                alt10=1;
+              			newLeafNode(otherlv_1, grammarAccess.getAggregationAccess().getLeftCurlyBracketKeyword_1());
+              		
             }
-            switch (alt10) {
-                case 1 :
-                    // InternalSolverLanguage.g:414:4: otherlv_1= '(' ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )? otherlv_5= ')'
-                    {
-                    otherlv_1=(Token)match(input,17,FOLLOW_7); 
-
-                    				newLeafNode(otherlv_1, grammarAccess.getBasicInterpretationAccess().getLeftParenthesisKeyword_1_0());
-                    			
-                    // InternalSolverLanguage.g:418:4: ( ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )* )?
-                    int alt9=2;
-                    int LA9_0 = input.LA(1);
-
-                    if ( ((LA9_0>=RULE_INT && LA9_0<=RULE_STRING)||LA9_0==11||(LA9_0>=13 && LA9_0<=14)||LA9_0==20||LA9_0==27||LA9_0==31) ) {
-                        alt9=1;
-                    }
-                    switch (alt9) {
-                        case 1 :
-                            // InternalSolverLanguage.g:419:5: ( (lv_objects_2_0= ruleComplexObject ) ) (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )*
-                            {
-                            // InternalSolverLanguage.g:419:5: ( (lv_objects_2_0= ruleComplexObject ) )
-                            // InternalSolverLanguage.g:420:6: (lv_objects_2_0= ruleComplexObject )
-                            {
-                            // InternalSolverLanguage.g:420:6: (lv_objects_2_0= ruleComplexObject )
-                            // InternalSolverLanguage.g:421:7: lv_objects_2_0= ruleComplexObject
-                            {
-
-                            							newCompositeNode(grammarAccess.getBasicInterpretationAccess().getObjectsComplexObjectParserRuleCall_1_1_0_0());
-                            						
-                            pushFollow(FOLLOW_8);
-                            lv_objects_2_0=ruleComplexObject();
-
-                            state._fsp--;
-
-
-                            							if (current==null) {
-                            								current = createModelElementForParent(grammarAccess.getBasicInterpretationRule());
-                            							}
-                            							add(
-                            								current,
-                            								"objects",
-                            								lv_objects_2_0,
-                            								"org.eclipse.viatra.solver.language.SolverLanguage.ComplexObject");
-                            							afterParserOrEnumRuleCall();
-                            						
-
-                            }
-
-
-                            }
-
-                            // InternalSolverLanguage.g:438:5: (otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) ) )*
-                            loop8:
-                            do {
-                                int alt8=2;
-                                int LA8_0 = input.LA(1);
-
-                                if ( (LA8_0==18) ) {
-                                    alt8=1;
-                                }
-
-
-                                switch (alt8) {
-                            	case 1 :
-                            	    // InternalSolverLanguage.g:439:6: otherlv_3= ',' ( (lv_objects_4_0= ruleComplexObject ) )
-                            	    {
-                            	    otherlv_3=(Token)match(input,18,FOLLOW_9); 
-
-                            	    						newLeafNode(otherlv_3, grammarAccess.getBasicInterpretationAccess().getCommaKeyword_1_1_1_0());
-                            	    					
-                            	    // InternalSolverLanguage.g:443:6: ( (lv_objects_4_0= ruleComplexObject ) )
-                            	    // InternalSolverLanguage.g:444:7: (lv_objects_4_0= ruleComplexObject )
-                            	    {
-                            	    // InternalSolverLanguage.g:444:7: (lv_objects_4_0= ruleComplexObject )
-                            	    // InternalSolverLanguage.g:445:8: lv_objects_4_0= ruleComplexObject
-                            	    {
-
-                            	    								newCompositeNode(grammarAccess.getBasicInterpretationAccess().getObjectsComplexObjectParserRuleCall_1_1_1_1_0());
-                            	    							
-                            	    pushFollow(FOLLOW_8);
-                            	    lv_objects_4_0=ruleComplexObject();
-
-                            	    state._fsp--;
-
-
-                            	    								if (current==null) {
-                            	    									current = createModelElementForParent(grammarAccess.getBasicInterpretationRule());
-                            	    								}
-                            	    								add(
-                            	    									current,
-                            	    									"objects",
-                            	    									lv_objects_4_0,
-                            	    									"org.eclipse.viatra.solver.language.SolverLanguage.ComplexObject");
-                            	    								afterParserOrEnumRuleCall();
-                            	    							
-
-                            	    }
-
-
-                            	    }
-
-
-                            	    }
-                            	    break;
-
-                            	default :
-                            	    break loop8;
-                                }
-                            } while (true);
-
-
-                            }
-                            break;
-
-                    }
-
-                    otherlv_5=(Token)match(input,19,FOLLOW_10); 
-
-                    				newLeafNode(otherlv_5, grammarAccess.getBasicInterpretationAccess().getRightParenthesisKeyword_1_2());
-                    			
-
-                    }
-                    break;
-
-            }
-
-            otherlv_6=(Token)match(input,20,FOLLOW_11); 
-
-            			newLeafNode(otherlv_6, grammarAccess.getBasicInterpretationAccess().getColonKeyword_2());
-            		
-            // InternalSolverLanguage.g:473:3: ( (lv_value_7_0= ruleTruthValue ) )
-            // InternalSolverLanguage.g:474:4: (lv_value_7_0= ruleTruthValue )
+            // InternalSolverLanguage.g:1663:3: ( (lv_body_2_0= ruleExpression ) )
+            // InternalSolverLanguage.g:1664:4: (lv_body_2_0= ruleExpression )
             {
-            // InternalSolverLanguage.g:474:4: (lv_value_7_0= ruleTruthValue )
-            // InternalSolverLanguage.g:475:5: lv_value_7_0= ruleTruthValue
+            // InternalSolverLanguage.g:1664:4: (lv_body_2_0= ruleExpression )
+            // InternalSolverLanguage.g:1665:5: lv_body_2_0= ruleExpression
             {
+            if ( state.backtracking==0 ) {
 
-            					newCompositeNode(grammarAccess.getBasicInterpretationAccess().getValueTruthValueParserRuleCall_3_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_value_7_0=ruleTruthValue();
+              					newCompositeNode(grammarAccess.getAggregationAccess().getBodyExpressionParserRuleCall_2_0());
+              				
+            }
+            pushFollow(FOLLOW_28);
+            lv_body_2_0=ruleExpression();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getBasicInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"value",
-            						lv_value_7_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.TruthValue");
-            					afterParserOrEnumRuleCall();
-            				
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getAggregationRule());
+              					}
+              					set(
+              						current,
+              						"body",
+              						lv_body_2_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
 
             }
 
+            otherlv_3=(Token)match(input,32,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_3, grammarAccess.getAggregationAccess().getVerticalLineKeyword_3());
+              		
+            }
+            // InternalSolverLanguage.g:1686:3: ( (lv_condition_4_0= ruleExpression ) )
+            // InternalSolverLanguage.g:1687:4: (lv_condition_4_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:1687:4: (lv_condition_4_0= ruleExpression )
+            // InternalSolverLanguage.g:1688:5: lv_condition_4_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getAggregationAccess().getConditionExpressionParserRuleCall_4_0());
+              				
+            }
+            pushFollow(FOLLOW_27);
+            lv_condition_4_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getAggregationRule());
+              					}
+              					set(
+              						current,
+              						"condition",
+              						lv_condition_4_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
 
             }
 
+            otherlv_5=(Token)match(input,31,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              			newLeafNode(otherlv_5, grammarAccess.getAggregationAccess().getRightCurlyBracketKeyword_5());
+              		
+            }
 
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
         }
 
             catch (RecognitionException re) {
@@ -1365,190 +4774,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleBasicInterpretation"
+    // $ANTLR end "ruleAggregation"
 
 
-    // $ANTLR start "entryRuleSymbol"
-    // InternalSolverLanguage.g:496:1: entryRuleSymbol returns [EObject current=null] : iv_ruleSymbol= ruleSymbol EOF ;
-    public final EObject entryRuleSymbol() throws RecognitionException {
+    // $ANTLR start "entryRuleAtomicExpression"
+    // InternalSolverLanguage.g:1713:1: entryRuleAtomicExpression returns [EObject current=null] : iv_ruleAtomicExpression= ruleAtomicExpression EOF ;
+    public final EObject entryRuleAtomicExpression() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleSymbol = null;
+        EObject iv_ruleAtomicExpression = null;
 
 
         try {
-            // InternalSolverLanguage.g:496:47: (iv_ruleSymbol= ruleSymbol EOF )
-            // InternalSolverLanguage.g:497:2: iv_ruleSymbol= ruleSymbol EOF
+            // InternalSolverLanguage.g:1713:57: (iv_ruleAtomicExpression= ruleAtomicExpression EOF )
+            // InternalSolverLanguage.g:1714:2: iv_ruleAtomicExpression= ruleAtomicExpression EOF
             {
-             newCompositeNode(grammarAccess.getSymbolRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAtomicExpressionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleSymbol=ruleSymbol();
+            iv_ruleAtomicExpression=ruleAtomicExpression();
 
             state._fsp--;
-
-             current =iv_ruleSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAtomicExpression; 
             }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleSymbol"
-
-
-    // $ANTLR start "ruleSymbol"
-    // InternalSolverLanguage.g:503:1: ruleSymbol returns [EObject current=null] : (this_ModelSymbol_0= ruleModelSymbol | this_PartialitySymbol_1= rulePartialitySymbol | this_DataSymbol_2= ruleDataSymbol ) ;
-    public final EObject ruleSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_ModelSymbol_0 = null;
-
-        EObject this_PartialitySymbol_1 = null;
-
-        EObject this_DataSymbol_2 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:509:2: ( (this_ModelSymbol_0= ruleModelSymbol | this_PartialitySymbol_1= rulePartialitySymbol | this_DataSymbol_2= ruleDataSymbol ) )
-            // InternalSolverLanguage.g:510:2: (this_ModelSymbol_0= ruleModelSymbol | this_PartialitySymbol_1= rulePartialitySymbol | this_DataSymbol_2= ruleDataSymbol )
-            {
-            // InternalSolverLanguage.g:510:2: (this_ModelSymbol_0= ruleModelSymbol | this_PartialitySymbol_1= rulePartialitySymbol | this_DataSymbol_2= ruleDataSymbol )
-            int alt11=3;
-            switch ( input.LA(1) ) {
-            case RULE_ID:
-                {
-                alt11=1;
-                }
-                break;
-            case 21:
-            case 22:
-                {
-                alt11=2;
-                }
-                break;
-            case 23:
-            case 24:
-            case 25:
-            case 26:
-                {
-                alt11=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 11, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt11) {
-                case 1 :
-                    // InternalSolverLanguage.g:511:3: this_ModelSymbol_0= ruleModelSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getSymbolAccess().getModelSymbolParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_ModelSymbol_0=ruleModelSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_ModelSymbol_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:520:3: this_PartialitySymbol_1= rulePartialitySymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getSymbolAccess().getPartialitySymbolParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_PartialitySymbol_1=rulePartialitySymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_PartialitySymbol_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSolverLanguage.g:529:3: this_DataSymbol_2= ruleDataSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getSymbolAccess().getDataSymbolParserRuleCall_2());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_DataSymbol_2=ruleDataSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_DataSymbol_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleSymbol"
-
-
-    // $ANTLR start "entryRuleModelSymbol"
-    // InternalSolverLanguage.g:541:1: entryRuleModelSymbol returns [EObject current=null] : iv_ruleModelSymbol= ruleModelSymbol EOF ;
-    public final EObject entryRuleModelSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleModelSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:541:52: (iv_ruleModelSymbol= ruleModelSymbol EOF )
-            // InternalSolverLanguage.g:542:2: iv_ruleModelSymbol= ruleModelSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getModelSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleModelSymbol=ruleModelSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleModelSymbol; 
-            match(input,EOF,FOLLOW_2); 
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -1562,2314 +4814,154 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleModelSymbol"
+    // $ANTLR end "entryRuleAtomicExpression"
 
 
-    // $ANTLR start "ruleModelSymbol"
-    // InternalSolverLanguage.g:548:1: ruleModelSymbol returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final EObject ruleModelSymbol() throws RecognitionException {
+    // $ANTLR start "ruleAtomicExpression"
+    // InternalSolverLanguage.g:1720:1: ruleAtomicExpression returns [EObject current=null] : ( (this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )? ) | this_Interval_3= ruleInterval | this_Literal_4= ruleLiteral | (otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')' ) ) ;
+    public final EObject ruleAtomicExpression() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:554:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalSolverLanguage.g:555:2: ( (lv_name_0_0= RULE_ID ) )
-            {
-            // InternalSolverLanguage.g:555:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalSolverLanguage.g:556:3: (lv_name_0_0= RULE_ID )
-            {
-            // InternalSolverLanguage.g:556:3: (lv_name_0_0= RULE_ID )
-            // InternalSolverLanguage.g:557:4: lv_name_0_0= RULE_ID
-            {
-            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
-
-            				newLeafNode(lv_name_0_0, grammarAccess.getModelSymbolAccess().getNameIDTerminalRuleCall_0());
-            			
-
-            				if (current==null) {
-            					current = createModelElement(grammarAccess.getModelSymbolRule());
-            				}
-            				setWithLastConsumed(
-            					current,
-            					"name",
-            					lv_name_0_0,
-            					"org.eclipse.xtext.common.Terminals.ID");
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleModelSymbol"
-
-
-    // $ANTLR start "entryRulePartialitySymbol"
-    // InternalSolverLanguage.g:576:1: entryRulePartialitySymbol returns [EObject current=null] : iv_rulePartialitySymbol= rulePartialitySymbol EOF ;
-    public final EObject entryRulePartialitySymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_rulePartialitySymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:576:57: (iv_rulePartialitySymbol= rulePartialitySymbol EOF )
-            // InternalSolverLanguage.g:577:2: iv_rulePartialitySymbol= rulePartialitySymbol EOF
-            {
-             newCompositeNode(grammarAccess.getPartialitySymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_rulePartialitySymbol=rulePartialitySymbol();
-
-            state._fsp--;
-
-             current =iv_rulePartialitySymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRulePartialitySymbol"
-
-
-    // $ANTLR start "rulePartialitySymbol"
-    // InternalSolverLanguage.g:583:1: rulePartialitySymbol returns [EObject current=null] : (this_ExistSymbol_0= ruleExistSymbol | this_EqualsSymbol_1= ruleEqualsSymbol ) ;
-    public final EObject rulePartialitySymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_ExistSymbol_0 = null;
-
-        EObject this_EqualsSymbol_1 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:589:2: ( (this_ExistSymbol_0= ruleExistSymbol | this_EqualsSymbol_1= ruleEqualsSymbol ) )
-            // InternalSolverLanguage.g:590:2: (this_ExistSymbol_0= ruleExistSymbol | this_EqualsSymbol_1= ruleEqualsSymbol )
-            {
-            // InternalSolverLanguage.g:590:2: (this_ExistSymbol_0= ruleExistSymbol | this_EqualsSymbol_1= ruleEqualsSymbol )
-            int alt12=2;
-            int LA12_0 = input.LA(1);
-
-            if ( (LA12_0==21) ) {
-                alt12=1;
-            }
-            else if ( (LA12_0==22) ) {
-                alt12=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 12, 0, input);
-
-                throw nvae;
-            }
-            switch (alt12) {
-                case 1 :
-                    // InternalSolverLanguage.g:591:3: this_ExistSymbol_0= ruleExistSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getPartialitySymbolAccess().getExistSymbolParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_ExistSymbol_0=ruleExistSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_ExistSymbol_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:600:3: this_EqualsSymbol_1= ruleEqualsSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getPartialitySymbolAccess().getEqualsSymbolParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_EqualsSymbol_1=ruleEqualsSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_EqualsSymbol_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "rulePartialitySymbol"
-
-
-    // $ANTLR start "entryRuleExistSymbol"
-    // InternalSolverLanguage.g:612:1: entryRuleExistSymbol returns [EObject current=null] : iv_ruleExistSymbol= ruleExistSymbol EOF ;
-    public final EObject entryRuleExistSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleExistSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:612:52: (iv_ruleExistSymbol= ruleExistSymbol EOF )
-            // InternalSolverLanguage.g:613:2: iv_ruleExistSymbol= ruleExistSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getExistSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleExistSymbol=ruleExistSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleExistSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleExistSymbol"
-
-
-    // $ANTLR start "ruleExistSymbol"
-    // InternalSolverLanguage.g:619:1: ruleExistSymbol returns [EObject current=null] : (otherlv_0= 'exists' () ) ;
-    public final EObject ruleExistSymbol() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:625:2: ( (otherlv_0= 'exists' () ) )
-            // InternalSolverLanguage.g:626:2: (otherlv_0= 'exists' () )
-            {
-            // InternalSolverLanguage.g:626:2: (otherlv_0= 'exists' () )
-            // InternalSolverLanguage.g:627:3: otherlv_0= 'exists' ()
-            {
-            otherlv_0=(Token)match(input,21,FOLLOW_2); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getExistSymbolAccess().getExistsKeyword_0());
-            		
-            // InternalSolverLanguage.g:631:3: ()
-            // InternalSolverLanguage.g:632:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getExistSymbolAccess().getExistSymbolAction_1(),
-            					current);
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleExistSymbol"
-
-
-    // $ANTLR start "entryRuleEqualsSymbol"
-    // InternalSolverLanguage.g:642:1: entryRuleEqualsSymbol returns [EObject current=null] : iv_ruleEqualsSymbol= ruleEqualsSymbol EOF ;
-    public final EObject entryRuleEqualsSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleEqualsSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:642:53: (iv_ruleEqualsSymbol= ruleEqualsSymbol EOF )
-            // InternalSolverLanguage.g:643:2: iv_ruleEqualsSymbol= ruleEqualsSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getEqualsSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleEqualsSymbol=ruleEqualsSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleEqualsSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleEqualsSymbol"
-
-
-    // $ANTLR start "ruleEqualsSymbol"
-    // InternalSolverLanguage.g:649:1: ruleEqualsSymbol returns [EObject current=null] : (otherlv_0= 'equals' () ) ;
-    public final EObject ruleEqualsSymbol() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:655:2: ( (otherlv_0= 'equals' () ) )
-            // InternalSolverLanguage.g:656:2: (otherlv_0= 'equals' () )
-            {
-            // InternalSolverLanguage.g:656:2: (otherlv_0= 'equals' () )
-            // InternalSolverLanguage.g:657:3: otherlv_0= 'equals' ()
-            {
-            otherlv_0=(Token)match(input,22,FOLLOW_2); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getEqualsSymbolAccess().getEqualsKeyword_0());
-            		
-            // InternalSolverLanguage.g:661:3: ()
-            // InternalSolverLanguage.g:662:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getEqualsSymbolAccess().getEqualsSymbolAction_1(),
-            					current);
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleEqualsSymbol"
-
-
-    // $ANTLR start "entryRuleDataSymbol"
-    // InternalSolverLanguage.g:672:1: entryRuleDataSymbol returns [EObject current=null] : iv_ruleDataSymbol= ruleDataSymbol EOF ;
-    public final EObject entryRuleDataSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDataSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:672:51: (iv_ruleDataSymbol= ruleDataSymbol EOF )
-            // InternalSolverLanguage.g:673:2: iv_ruleDataSymbol= ruleDataSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getDataSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleDataSymbol=ruleDataSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleDataSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDataSymbol"
-
-
-    // $ANTLR start "ruleDataSymbol"
-    // InternalSolverLanguage.g:679:1: ruleDataSymbol returns [EObject current=null] : (this_BooleanSymbol_0= ruleBooleanSymbol | this_IntegerSymbol_1= ruleIntegerSymbol | this_RealSymbol_2= ruleRealSymbol | this_StringSymbol_3= ruleStringSymbol ) ;
-    public final EObject ruleDataSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_BooleanSymbol_0 = null;
-
-        EObject this_IntegerSymbol_1 = null;
-
-        EObject this_RealSymbol_2 = null;
-
-        EObject this_StringSymbol_3 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:685:2: ( (this_BooleanSymbol_0= ruleBooleanSymbol | this_IntegerSymbol_1= ruleIntegerSymbol | this_RealSymbol_2= ruleRealSymbol | this_StringSymbol_3= ruleStringSymbol ) )
-            // InternalSolverLanguage.g:686:2: (this_BooleanSymbol_0= ruleBooleanSymbol | this_IntegerSymbol_1= ruleIntegerSymbol | this_RealSymbol_2= ruleRealSymbol | this_StringSymbol_3= ruleStringSymbol )
-            {
-            // InternalSolverLanguage.g:686:2: (this_BooleanSymbol_0= ruleBooleanSymbol | this_IntegerSymbol_1= ruleIntegerSymbol | this_RealSymbol_2= ruleRealSymbol | this_StringSymbol_3= ruleStringSymbol )
-            int alt13=4;
-            switch ( input.LA(1) ) {
-            case 23:
-                {
-                alt13=1;
-                }
-                break;
-            case 24:
-                {
-                alt13=2;
-                }
-                break;
-            case 25:
-                {
-                alt13=3;
-                }
-                break;
-            case 26:
-                {
-                alt13=4;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 13, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt13) {
-                case 1 :
-                    // InternalSolverLanguage.g:687:3: this_BooleanSymbol_0= ruleBooleanSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataSymbolAccess().getBooleanSymbolParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_BooleanSymbol_0=ruleBooleanSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_BooleanSymbol_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:696:3: this_IntegerSymbol_1= ruleIntegerSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataSymbolAccess().getIntegerSymbolParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_IntegerSymbol_1=ruleIntegerSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_IntegerSymbol_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSolverLanguage.g:705:3: this_RealSymbol_2= ruleRealSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataSymbolAccess().getRealSymbolParserRuleCall_2());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_RealSymbol_2=ruleRealSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_RealSymbol_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 4 :
-                    // InternalSolverLanguage.g:714:3: this_StringSymbol_3= ruleStringSymbol
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataSymbolAccess().getStringSymbolParserRuleCall_3());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_StringSymbol_3=ruleStringSymbol();
-
-                    state._fsp--;
-
-
-                    			current = this_StringSymbol_3;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDataSymbol"
-
-
-    // $ANTLR start "entryRuleBooleanSymbol"
-    // InternalSolverLanguage.g:726:1: entryRuleBooleanSymbol returns [EObject current=null] : iv_ruleBooleanSymbol= ruleBooleanSymbol EOF ;
-    public final EObject entryRuleBooleanSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleBooleanSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:726:54: (iv_ruleBooleanSymbol= ruleBooleanSymbol EOF )
-            // InternalSolverLanguage.g:727:2: iv_ruleBooleanSymbol= ruleBooleanSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getBooleanSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleBooleanSymbol=ruleBooleanSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleBooleanSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleBooleanSymbol"
-
-
-    // $ANTLR start "ruleBooleanSymbol"
-    // InternalSolverLanguage.g:733:1: ruleBooleanSymbol returns [EObject current=null] : (otherlv_0= 'bool' () ) ;
-    public final EObject ruleBooleanSymbol() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:739:2: ( (otherlv_0= 'bool' () ) )
-            // InternalSolverLanguage.g:740:2: (otherlv_0= 'bool' () )
-            {
-            // InternalSolverLanguage.g:740:2: (otherlv_0= 'bool' () )
-            // InternalSolverLanguage.g:741:3: otherlv_0= 'bool' ()
-            {
-            otherlv_0=(Token)match(input,23,FOLLOW_2); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getBooleanSymbolAccess().getBoolKeyword_0());
-            		
-            // InternalSolverLanguage.g:745:3: ()
-            // InternalSolverLanguage.g:746:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getBooleanSymbolAccess().getBooleanSymbolAction_1(),
-            					current);
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleBooleanSymbol"
-
-
-    // $ANTLR start "entryRuleIntegerSymbol"
-    // InternalSolverLanguage.g:756:1: entryRuleIntegerSymbol returns [EObject current=null] : iv_ruleIntegerSymbol= ruleIntegerSymbol EOF ;
-    public final EObject entryRuleIntegerSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleIntegerSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:756:54: (iv_ruleIntegerSymbol= ruleIntegerSymbol EOF )
-            // InternalSolverLanguage.g:757:2: iv_ruleIntegerSymbol= ruleIntegerSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getIntegerSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleIntegerSymbol=ruleIntegerSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleIntegerSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleIntegerSymbol"
-
-
-    // $ANTLR start "ruleIntegerSymbol"
-    // InternalSolverLanguage.g:763:1: ruleIntegerSymbol returns [EObject current=null] : (otherlv_0= 'int' () ) ;
-    public final EObject ruleIntegerSymbol() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:769:2: ( (otherlv_0= 'int' () ) )
-            // InternalSolverLanguage.g:770:2: (otherlv_0= 'int' () )
-            {
-            // InternalSolverLanguage.g:770:2: (otherlv_0= 'int' () )
-            // InternalSolverLanguage.g:771:3: otherlv_0= 'int' ()
-            {
-            otherlv_0=(Token)match(input,24,FOLLOW_2); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getIntegerSymbolAccess().getIntKeyword_0());
-            		
-            // InternalSolverLanguage.g:775:3: ()
-            // InternalSolverLanguage.g:776:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getIntegerSymbolAccess().getIntegerSymbolAction_1(),
-            					current);
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleIntegerSymbol"
-
-
-    // $ANTLR start "entryRuleRealSymbol"
-    // InternalSolverLanguage.g:786:1: entryRuleRealSymbol returns [EObject current=null] : iv_ruleRealSymbol= ruleRealSymbol EOF ;
-    public final EObject entryRuleRealSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleRealSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:786:51: (iv_ruleRealSymbol= ruleRealSymbol EOF )
-            // InternalSolverLanguage.g:787:2: iv_ruleRealSymbol= ruleRealSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getRealSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleRealSymbol=ruleRealSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleRealSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleRealSymbol"
-
-
-    // $ANTLR start "ruleRealSymbol"
-    // InternalSolverLanguage.g:793:1: ruleRealSymbol returns [EObject current=null] : (otherlv_0= 'real' () ) ;
-    public final EObject ruleRealSymbol() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:799:2: ( (otherlv_0= 'real' () ) )
-            // InternalSolverLanguage.g:800:2: (otherlv_0= 'real' () )
-            {
-            // InternalSolverLanguage.g:800:2: (otherlv_0= 'real' () )
-            // InternalSolverLanguage.g:801:3: otherlv_0= 'real' ()
-            {
-            otherlv_0=(Token)match(input,25,FOLLOW_2); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getRealSymbolAccess().getRealKeyword_0());
-            		
-            // InternalSolverLanguage.g:805:3: ()
-            // InternalSolverLanguage.g:806:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getRealSymbolAccess().getRealSymbolAction_1(),
-            					current);
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleRealSymbol"
-
-
-    // $ANTLR start "entryRuleStringSymbol"
-    // InternalSolverLanguage.g:816:1: entryRuleStringSymbol returns [EObject current=null] : iv_ruleStringSymbol= ruleStringSymbol EOF ;
-    public final EObject entryRuleStringSymbol() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleStringSymbol = null;
-
-
-        try {
-            // InternalSolverLanguage.g:816:53: (iv_ruleStringSymbol= ruleStringSymbol EOF )
-            // InternalSolverLanguage.g:817:2: iv_ruleStringSymbol= ruleStringSymbol EOF
-            {
-             newCompositeNode(grammarAccess.getStringSymbolRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleStringSymbol=ruleStringSymbol();
-
-            state._fsp--;
-
-             current =iv_ruleStringSymbol; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleStringSymbol"
-
-
-    // $ANTLR start "ruleStringSymbol"
-    // InternalSolverLanguage.g:823:1: ruleStringSymbol returns [EObject current=null] : (otherlv_0= 'string' () ) ;
-    public final EObject ruleStringSymbol() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:829:2: ( (otherlv_0= 'string' () ) )
-            // InternalSolverLanguage.g:830:2: (otherlv_0= 'string' () )
-            {
-            // InternalSolverLanguage.g:830:2: (otherlv_0= 'string' () )
-            // InternalSolverLanguage.g:831:3: otherlv_0= 'string' ()
-            {
-            otherlv_0=(Token)match(input,26,FOLLOW_2); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getStringSymbolAccess().getStringKeyword_0());
-            		
-            // InternalSolverLanguage.g:835:3: ()
-            // InternalSolverLanguage.g:836:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getStringSymbolAccess().getStringSymbolAction_1(),
-            					current);
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleStringSymbol"
-
-
-    // $ANTLR start "entryRuleComplexObject"
-    // InternalSolverLanguage.g:846:1: entryRuleComplexObject returns [EObject current=null] : iv_ruleComplexObject= ruleComplexObject EOF ;
-    public final EObject entryRuleComplexObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleComplexObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:846:54: (iv_ruleComplexObject= ruleComplexObject EOF )
-            // InternalSolverLanguage.g:847:2: iv_ruleComplexObject= ruleComplexObject EOF
-            {
-             newCompositeNode(grammarAccess.getComplexObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleComplexObject=ruleComplexObject();
-
-            state._fsp--;
-
-             current =iv_ruleComplexObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleComplexObject"
-
-
-    // $ANTLR start "ruleComplexObject"
-    // InternalSolverLanguage.g:853:1: ruleComplexObject returns [EObject current=null] : (this_Object_0= ruleObject | this_AllInstances_1= ruleAllInstances | this_AllObjects_2= ruleAllObjects ) ;
-    public final EObject ruleComplexObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_Object_0 = null;
-
-        EObject this_AllInstances_1 = null;
-
-        EObject this_AllObjects_2 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:859:2: ( (this_Object_0= ruleObject | this_AllInstances_1= ruleAllInstances | this_AllObjects_2= ruleAllObjects ) )
-            // InternalSolverLanguage.g:860:2: (this_Object_0= ruleObject | this_AllInstances_1= ruleAllInstances | this_AllObjects_2= ruleAllObjects )
-            {
-            // InternalSolverLanguage.g:860:2: (this_Object_0= ruleObject | this_AllInstances_1= ruleAllInstances | this_AllObjects_2= ruleAllObjects )
-            int alt14=3;
-            switch ( input.LA(1) ) {
-            case RULE_INT:
-            case RULE_ID:
-            case RULE_STRING:
-            case 11:
-            case 13:
-            case 14:
-            case 27:
-                {
-                alt14=1;
-                }
-                break;
-            case 20:
-                {
-                alt14=2;
-                }
-                break;
-            case 31:
-                {
-                alt14=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 14, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt14) {
-                case 1 :
-                    // InternalSolverLanguage.g:861:3: this_Object_0= ruleObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getComplexObjectAccess().getObjectParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_Object_0=ruleObject();
-
-                    state._fsp--;
-
-
-                    			current = this_Object_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:870:3: this_AllInstances_1= ruleAllInstances
-                    {
-
-                    			newCompositeNode(grammarAccess.getComplexObjectAccess().getAllInstancesParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_AllInstances_1=ruleAllInstances();
-
-                    state._fsp--;
-
-
-                    			current = this_AllInstances_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSolverLanguage.g:879:3: this_AllObjects_2= ruleAllObjects
-                    {
-
-                    			newCompositeNode(grammarAccess.getComplexObjectAccess().getAllObjectsParserRuleCall_2());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_AllObjects_2=ruleAllObjects();
-
-                    state._fsp--;
-
-
-                    			current = this_AllObjects_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleComplexObject"
-
-
-    // $ANTLR start "entryRuleObject"
-    // InternalSolverLanguage.g:891:1: entryRuleObject returns [EObject current=null] : iv_ruleObject= ruleObject EOF ;
-    public final EObject entryRuleObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:891:47: (iv_ruleObject= ruleObject EOF )
-            // InternalSolverLanguage.g:892:2: iv_ruleObject= ruleObject EOF
-            {
-             newCompositeNode(grammarAccess.getObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleObject=ruleObject();
-
-            state._fsp--;
-
-             current =iv_ruleObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleObject"
-
-
-    // $ANTLR start "ruleObject"
-    // InternalSolverLanguage.g:898:1: ruleObject returns [EObject current=null] : (this_NamedObject_0= ruleNamedObject | this_UnnamedObject_1= ruleUnnamedObject | this_DataObject_2= ruleDataObject ) ;
-    public final EObject ruleObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_NamedObject_0 = null;
-
-        EObject this_UnnamedObject_1 = null;
-
-        EObject this_DataObject_2 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:904:2: ( (this_NamedObject_0= ruleNamedObject | this_UnnamedObject_1= ruleUnnamedObject | this_DataObject_2= ruleDataObject ) )
-            // InternalSolverLanguage.g:905:2: (this_NamedObject_0= ruleNamedObject | this_UnnamedObject_1= ruleUnnamedObject | this_DataObject_2= ruleDataObject )
-            {
-            // InternalSolverLanguage.g:905:2: (this_NamedObject_0= ruleNamedObject | this_UnnamedObject_1= ruleUnnamedObject | this_DataObject_2= ruleDataObject )
-            int alt15=3;
-            switch ( input.LA(1) ) {
-            case 27:
-                {
-                alt15=1;
-                }
-                break;
-            case RULE_ID:
-                {
-                alt15=2;
-                }
-                break;
-            case RULE_INT:
-            case RULE_STRING:
-            case 11:
-            case 13:
-            case 14:
-                {
-                alt15=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 15, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt15) {
-                case 1 :
-                    // InternalSolverLanguage.g:906:3: this_NamedObject_0= ruleNamedObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getObjectAccess().getNamedObjectParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_NamedObject_0=ruleNamedObject();
-
-                    state._fsp--;
-
-
-                    			current = this_NamedObject_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:915:3: this_UnnamedObject_1= ruleUnnamedObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getObjectAccess().getUnnamedObjectParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_UnnamedObject_1=ruleUnnamedObject();
-
-                    state._fsp--;
-
-
-                    			current = this_UnnamedObject_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSolverLanguage.g:924:3: this_DataObject_2= ruleDataObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getObjectAccess().getDataObjectParserRuleCall_2());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_DataObject_2=ruleDataObject();
-
-                    state._fsp--;
-
-
-                    			current = this_DataObject_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleObject"
-
-
-    // $ANTLR start "entryRuleNamedObject"
-    // InternalSolverLanguage.g:936:1: entryRuleNamedObject returns [EObject current=null] : iv_ruleNamedObject= ruleNamedObject EOF ;
-    public final EObject entryRuleNamedObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleNamedObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:936:52: (iv_ruleNamedObject= ruleNamedObject EOF )
-            // InternalSolverLanguage.g:937:2: iv_ruleNamedObject= ruleNamedObject EOF
-            {
-             newCompositeNode(grammarAccess.getNamedObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleNamedObject=ruleNamedObject();
-
-            state._fsp--;
-
-             current =iv_ruleNamedObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleNamedObject"
-
-
-    // $ANTLR start "ruleNamedObject"
-    // InternalSolverLanguage.g:943:1: ruleNamedObject returns [EObject current=null] : (otherlv_0= '\\'' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '\\'' ) ;
-    public final EObject ruleNamedObject() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-        Token lv_name_1_0=null;
-        Token otherlv_2=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:949:2: ( (otherlv_0= '\\'' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '\\'' ) )
-            // InternalSolverLanguage.g:950:2: (otherlv_0= '\\'' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '\\'' )
-            {
-            // InternalSolverLanguage.g:950:2: (otherlv_0= '\\'' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '\\'' )
-            // InternalSolverLanguage.g:951:3: otherlv_0= '\\'' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '\\''
-            {
-            otherlv_0=(Token)match(input,27,FOLLOW_12); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getNamedObjectAccess().getApostropheKeyword_0());
-            		
-            // InternalSolverLanguage.g:955:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalSolverLanguage.g:956:4: (lv_name_1_0= RULE_ID )
-            {
-            // InternalSolverLanguage.g:956:4: (lv_name_1_0= RULE_ID )
-            // InternalSolverLanguage.g:957:5: lv_name_1_0= RULE_ID
-            {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_13); 
-
-            					newLeafNode(lv_name_1_0, grammarAccess.getNamedObjectAccess().getNameIDTerminalRuleCall_1_0());
-            				
-
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getNamedObjectRule());
-            					}
-            					setWithLastConsumed(
-            						current,
-            						"name",
-            						lv_name_1_0,
-            						"org.eclipse.xtext.common.Terminals.ID");
-            				
-
-            }
-
-
-            }
-
-            otherlv_2=(Token)match(input,27,FOLLOW_2); 
-
-            			newLeafNode(otherlv_2, grammarAccess.getNamedObjectAccess().getApostropheKeyword_2());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleNamedObject"
-
-
-    // $ANTLR start "entryRuleUnnamedObject"
-    // InternalSolverLanguage.g:981:1: entryRuleUnnamedObject returns [EObject current=null] : iv_ruleUnnamedObject= ruleUnnamedObject EOF ;
-    public final EObject entryRuleUnnamedObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleUnnamedObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:981:54: (iv_ruleUnnamedObject= ruleUnnamedObject EOF )
-            // InternalSolverLanguage.g:982:2: iv_ruleUnnamedObject= ruleUnnamedObject EOF
-            {
-             newCompositeNode(grammarAccess.getUnnamedObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleUnnamedObject=ruleUnnamedObject();
-
-            state._fsp--;
-
-             current =iv_ruleUnnamedObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleUnnamedObject"
-
-
-    // $ANTLR start "ruleUnnamedObject"
-    // InternalSolverLanguage.g:988:1: ruleUnnamedObject returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final EObject ruleUnnamedObject() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_name_0_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:994:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalSolverLanguage.g:995:2: ( (lv_name_0_0= RULE_ID ) )
-            {
-            // InternalSolverLanguage.g:995:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalSolverLanguage.g:996:3: (lv_name_0_0= RULE_ID )
-            {
-            // InternalSolverLanguage.g:996:3: (lv_name_0_0= RULE_ID )
-            // InternalSolverLanguage.g:997:4: lv_name_0_0= RULE_ID
-            {
-            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
-
-            				newLeafNode(lv_name_0_0, grammarAccess.getUnnamedObjectAccess().getNameIDTerminalRuleCall_0());
-            			
-
-            				if (current==null) {
-            					current = createModelElement(grammarAccess.getUnnamedObjectRule());
-            				}
-            				setWithLastConsumed(
-            					current,
-            					"name",
-            					lv_name_0_0,
-            					"org.eclipse.xtext.common.Terminals.ID");
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleUnnamedObject"
-
-
-    // $ANTLR start "entryRuleDataObject"
-    // InternalSolverLanguage.g:1016:1: entryRuleDataObject returns [EObject current=null] : iv_ruleDataObject= ruleDataObject EOF ;
-    public final EObject entryRuleDataObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDataObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1016:51: (iv_ruleDataObject= ruleDataObject EOF )
-            // InternalSolverLanguage.g:1017:2: iv_ruleDataObject= ruleDataObject EOF
-            {
-             newCompositeNode(grammarAccess.getDataObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleDataObject=ruleDataObject();
-
-            state._fsp--;
-
-             current =iv_ruleDataObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDataObject"
-
-
-    // $ANTLR start "ruleDataObject"
-    // InternalSolverLanguage.g:1023:1: ruleDataObject returns [EObject current=null] : (this_BooleanObject_0= ruleBooleanObject | this_IntObject_1= ruleIntObject | this_RealObject_2= ruleRealObject | this_StringObject_3= ruleStringObject ) ;
-    public final EObject ruleDataObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_BooleanObject_0 = null;
-
-        EObject this_IntObject_1 = null;
-
-        EObject this_RealObject_2 = null;
-
-        EObject this_StringObject_3 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1029:2: ( (this_BooleanObject_0= ruleBooleanObject | this_IntObject_1= ruleIntObject | this_RealObject_2= ruleRealObject | this_StringObject_3= ruleStringObject ) )
-            // InternalSolverLanguage.g:1030:2: (this_BooleanObject_0= ruleBooleanObject | this_IntObject_1= ruleIntObject | this_RealObject_2= ruleRealObject | this_StringObject_3= ruleStringObject )
-            {
-            // InternalSolverLanguage.g:1030:2: (this_BooleanObject_0= ruleBooleanObject | this_IntObject_1= ruleIntObject | this_RealObject_2= ruleRealObject | this_StringObject_3= ruleStringObject )
-            int alt16=4;
-            switch ( input.LA(1) ) {
-            case 13:
-            case 14:
-                {
-                alt16=1;
-                }
-                break;
-            case 11:
-                {
-                int LA16_2 = input.LA(2);
-
-                if ( (LA16_2==RULE_INT) ) {
-                    int LA16_3 = input.LA(3);
-
-                    if ( (LA16_3==12) ) {
-                        alt16=3;
-                    }
-                    else if ( (LA16_3==EOF||(LA16_3>=18 && LA16_3<=19)) ) {
-                        alt16=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 16, 3, input);
-
-                        throw nvae;
-                    }
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 16, 2, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_INT:
-                {
-                int LA16_3 = input.LA(2);
-
-                if ( (LA16_3==12) ) {
-                    alt16=3;
-                }
-                else if ( (LA16_3==EOF||(LA16_3>=18 && LA16_3<=19)) ) {
-                    alt16=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 16, 3, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_STRING:
-                {
-                alt16=4;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 16, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt16) {
-                case 1 :
-                    // InternalSolverLanguage.g:1031:3: this_BooleanObject_0= ruleBooleanObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataObjectAccess().getBooleanObjectParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_BooleanObject_0=ruleBooleanObject();
-
-                    state._fsp--;
-
-
-                    			current = this_BooleanObject_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:1040:3: this_IntObject_1= ruleIntObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataObjectAccess().getIntObjectParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_IntObject_1=ruleIntObject();
-
-                    state._fsp--;
-
-
-                    			current = this_IntObject_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSolverLanguage.g:1049:3: this_RealObject_2= ruleRealObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataObjectAccess().getRealObjectParserRuleCall_2());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_RealObject_2=ruleRealObject();
-
-                    state._fsp--;
-
-
-                    			current = this_RealObject_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 4 :
-                    // InternalSolverLanguage.g:1058:3: this_StringObject_3= ruleStringObject
-                    {
-
-                    			newCompositeNode(grammarAccess.getDataObjectAccess().getStringObjectParserRuleCall_3());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_StringObject_3=ruleStringObject();
-
-                    state._fsp--;
-
-
-                    			current = this_StringObject_3;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDataObject"
-
-
-    // $ANTLR start "entryRuleBooleanObject"
-    // InternalSolverLanguage.g:1070:1: entryRuleBooleanObject returns [EObject current=null] : iv_ruleBooleanObject= ruleBooleanObject EOF ;
-    public final EObject entryRuleBooleanObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleBooleanObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1070:54: (iv_ruleBooleanObject= ruleBooleanObject EOF )
-            // InternalSolverLanguage.g:1071:2: iv_ruleBooleanObject= ruleBooleanObject EOF
-            {
-             newCompositeNode(grammarAccess.getBooleanObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleBooleanObject=ruleBooleanObject();
-
-            state._fsp--;
-
-             current =iv_ruleBooleanObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleBooleanObject"
-
-
-    // $ANTLR start "ruleBooleanObject"
-    // InternalSolverLanguage.g:1077:1: ruleBooleanObject returns [EObject current=null] : ( (lv_value_0_0= ruleBooleanValue ) ) ;
-    public final EObject ruleBooleanObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject lv_value_0_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1083:2: ( ( (lv_value_0_0= ruleBooleanValue ) ) )
-            // InternalSolverLanguage.g:1084:2: ( (lv_value_0_0= ruleBooleanValue ) )
-            {
-            // InternalSolverLanguage.g:1084:2: ( (lv_value_0_0= ruleBooleanValue ) )
-            // InternalSolverLanguage.g:1085:3: (lv_value_0_0= ruleBooleanValue )
-            {
-            // InternalSolverLanguage.g:1085:3: (lv_value_0_0= ruleBooleanValue )
-            // InternalSolverLanguage.g:1086:4: lv_value_0_0= ruleBooleanValue
-            {
-
-            				newCompositeNode(grammarAccess.getBooleanObjectAccess().getValueBooleanValueParserRuleCall_0());
-            			
-            pushFollow(FOLLOW_2);
-            lv_value_0_0=ruleBooleanValue();
-
-            state._fsp--;
-
-
-            				if (current==null) {
-            					current = createModelElementForParent(grammarAccess.getBooleanObjectRule());
-            				}
-            				set(
-            					current,
-            					"value",
-            					lv_value_0_0,
-            					"org.eclipse.viatra.solver.language.SolverLanguage.BooleanValue");
-            				afterParserOrEnumRuleCall();
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleBooleanObject"
-
-
-    // $ANTLR start "entryRuleIntObject"
-    // InternalSolverLanguage.g:1106:1: entryRuleIntObject returns [EObject current=null] : iv_ruleIntObject= ruleIntObject EOF ;
-    public final EObject entryRuleIntObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleIntObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1106:50: (iv_ruleIntObject= ruleIntObject EOF )
-            // InternalSolverLanguage.g:1107:2: iv_ruleIntObject= ruleIntObject EOF
-            {
-             newCompositeNode(grammarAccess.getIntObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleIntObject=ruleIntObject();
-
-            state._fsp--;
-
-             current =iv_ruleIntObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleIntObject"
-
-
-    // $ANTLR start "ruleIntObject"
-    // InternalSolverLanguage.g:1113:1: ruleIntObject returns [EObject current=null] : ( (lv_value_0_0= ruleINTLiteral ) ) ;
-    public final EObject ruleIntObject() throws RecognitionException {
-        EObject current = null;
-
-        AntlrDatatypeRuleToken lv_value_0_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1119:2: ( ( (lv_value_0_0= ruleINTLiteral ) ) )
-            // InternalSolverLanguage.g:1120:2: ( (lv_value_0_0= ruleINTLiteral ) )
-            {
-            // InternalSolverLanguage.g:1120:2: ( (lv_value_0_0= ruleINTLiteral ) )
-            // InternalSolverLanguage.g:1121:3: (lv_value_0_0= ruleINTLiteral )
-            {
-            // InternalSolverLanguage.g:1121:3: (lv_value_0_0= ruleINTLiteral )
-            // InternalSolverLanguage.g:1122:4: lv_value_0_0= ruleINTLiteral
-            {
-
-            				newCompositeNode(grammarAccess.getIntObjectAccess().getValueINTLiteralParserRuleCall_0());
-            			
-            pushFollow(FOLLOW_2);
-            lv_value_0_0=ruleINTLiteral();
-
-            state._fsp--;
-
-
-            				if (current==null) {
-            					current = createModelElementForParent(grammarAccess.getIntObjectRule());
-            				}
-            				set(
-            					current,
-            					"value",
-            					lv_value_0_0,
-            					"org.eclipse.viatra.solver.language.SolverLanguage.INTLiteral");
-            				afterParserOrEnumRuleCall();
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleIntObject"
-
-
-    // $ANTLR start "entryRuleRealObject"
-    // InternalSolverLanguage.g:1142:1: entryRuleRealObject returns [EObject current=null] : iv_ruleRealObject= ruleRealObject EOF ;
-    public final EObject entryRuleRealObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleRealObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1142:51: (iv_ruleRealObject= ruleRealObject EOF )
-            // InternalSolverLanguage.g:1143:2: iv_ruleRealObject= ruleRealObject EOF
-            {
-             newCompositeNode(grammarAccess.getRealObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleRealObject=ruleRealObject();
-
-            state._fsp--;
-
-             current =iv_ruleRealObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleRealObject"
-
-
-    // $ANTLR start "ruleRealObject"
-    // InternalSolverLanguage.g:1149:1: ruleRealObject returns [EObject current=null] : ( (lv_value_0_0= ruleREALLiteral ) ) ;
-    public final EObject ruleRealObject() throws RecognitionException {
-        EObject current = null;
-
-        AntlrDatatypeRuleToken lv_value_0_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1155:2: ( ( (lv_value_0_0= ruleREALLiteral ) ) )
-            // InternalSolverLanguage.g:1156:2: ( (lv_value_0_0= ruleREALLiteral ) )
-            {
-            // InternalSolverLanguage.g:1156:2: ( (lv_value_0_0= ruleREALLiteral ) )
-            // InternalSolverLanguage.g:1157:3: (lv_value_0_0= ruleREALLiteral )
-            {
-            // InternalSolverLanguage.g:1157:3: (lv_value_0_0= ruleREALLiteral )
-            // InternalSolverLanguage.g:1158:4: lv_value_0_0= ruleREALLiteral
-            {
-
-            				newCompositeNode(grammarAccess.getRealObjectAccess().getValueREALLiteralParserRuleCall_0());
-            			
-            pushFollow(FOLLOW_2);
-            lv_value_0_0=ruleREALLiteral();
-
-            state._fsp--;
-
-
-            				if (current==null) {
-            					current = createModelElementForParent(grammarAccess.getRealObjectRule());
-            				}
-            				set(
-            					current,
-            					"value",
-            					lv_value_0_0,
-            					"org.eclipse.viatra.solver.language.SolverLanguage.REALLiteral");
-            				afterParserOrEnumRuleCall();
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleRealObject"
-
-
-    // $ANTLR start "entryRuleStringObject"
-    // InternalSolverLanguage.g:1178:1: entryRuleStringObject returns [EObject current=null] : iv_ruleStringObject= ruleStringObject EOF ;
-    public final EObject entryRuleStringObject() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleStringObject = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1178:53: (iv_ruleStringObject= ruleStringObject EOF )
-            // InternalSolverLanguage.g:1179:2: iv_ruleStringObject= ruleStringObject EOF
-            {
-             newCompositeNode(grammarAccess.getStringObjectRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleStringObject=ruleStringObject();
-
-            state._fsp--;
-
-             current =iv_ruleStringObject; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleStringObject"
-
-
-    // $ANTLR start "ruleStringObject"
-    // InternalSolverLanguage.g:1185:1: ruleStringObject returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
-    public final EObject ruleStringObject() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_value_0_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1191:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalSolverLanguage.g:1192:2: ( (lv_value_0_0= RULE_STRING ) )
-            {
-            // InternalSolverLanguage.g:1192:2: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalSolverLanguage.g:1193:3: (lv_value_0_0= RULE_STRING )
-            {
-            // InternalSolverLanguage.g:1193:3: (lv_value_0_0= RULE_STRING )
-            // InternalSolverLanguage.g:1194:4: lv_value_0_0= RULE_STRING
-            {
-            lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
-
-            				newLeafNode(lv_value_0_0, grammarAccess.getStringObjectAccess().getValueSTRINGTerminalRuleCall_0());
-            			
-
-            				if (current==null) {
-            					current = createModelElement(grammarAccess.getStringObjectRule());
-            				}
-            				setWithLastConsumed(
-            					current,
-            					"value",
-            					lv_value_0_0,
-            					"org.eclipse.viatra.solver.language.SolverLanguage.STRING");
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleStringObject"
-
-
-    // $ANTLR start "entryRulePredicate"
-    // InternalSolverLanguage.g:1213:1: entryRulePredicate returns [EObject current=null] : iv_rulePredicate= rulePredicate EOF ;
-    public final EObject entryRulePredicate() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_rulePredicate = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1213:50: (iv_rulePredicate= rulePredicate EOF )
-            // InternalSolverLanguage.g:1214:2: iv_rulePredicate= rulePredicate EOF
-            {
-             newCompositeNode(grammarAccess.getPredicateRule()); 
-            pushFollow(FOLLOW_1);
-            iv_rulePredicate=rulePredicate();
-
-            state._fsp--;
-
-             current =iv_rulePredicate; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRulePredicate"
-
-
-    // $ANTLR start "rulePredicate"
-    // InternalSolverLanguage.g:1220:1: rulePredicate returns [EObject current=null] : ( ( (lv_isError_0_0= 'error' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' )? otherlv_7= ':-' (otherlv_8= 'false' | ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* ) ) otherlv_12= '.' ) ;
-    public final EObject rulePredicate() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_isError_0_0=null;
-        Token otherlv_2=null;
-        Token otherlv_4=null;
-        Token otherlv_6=null;
+        Token otherlv_5=null;
         Token otherlv_7=null;
-        Token otherlv_8=null;
-        Token otherlv_10=null;
-        Token otherlv_12=null;
-        EObject lv_symbol_1_0 = null;
+        EObject this_Reference_0 = null;
 
-        EObject lv_parameters_3_0 = null;
+        EObject lv_argumentList_2_0 = null;
 
-        EObject lv_parameters_5_0 = null;
+        EObject this_Interval_3 = null;
 
-        EObject lv_bodies_9_0 = null;
+        EObject this_Literal_4 = null;
 
-        EObject lv_bodies_11_0 = null;
+        EObject this_Expression_6 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1226:2: ( ( ( (lv_isError_0_0= 'error' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' )? otherlv_7= ':-' (otherlv_8= 'false' | ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* ) ) otherlv_12= '.' ) )
-            // InternalSolverLanguage.g:1227:2: ( ( (lv_isError_0_0= 'error' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' )? otherlv_7= ':-' (otherlv_8= 'false' | ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* ) ) otherlv_12= '.' )
+            // InternalSolverLanguage.g:1726:2: ( ( (this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )? ) | this_Interval_3= ruleInterval | this_Literal_4= ruleLiteral | (otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')' ) ) )
+            // InternalSolverLanguage.g:1727:2: ( (this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )? ) | this_Interval_3= ruleInterval | this_Literal_4= ruleLiteral | (otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')' ) )
             {
-            // InternalSolverLanguage.g:1227:2: ( ( (lv_isError_0_0= 'error' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' )? otherlv_7= ':-' (otherlv_8= 'false' | ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* ) ) otherlv_12= '.' )
-            // InternalSolverLanguage.g:1228:3: ( (lv_isError_0_0= 'error' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' )? otherlv_7= ':-' (otherlv_8= 'false' | ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* ) ) otherlv_12= '.'
-            {
-            // InternalSolverLanguage.g:1228:3: ( (lv_isError_0_0= 'error' ) )?
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            // InternalSolverLanguage.g:1727:2: ( (this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )? ) | this_Interval_3= ruleInterval | this_Literal_4= ruleLiteral | (otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')' ) )
+            int alt21=4;
+            switch ( input.LA(1) ) {
+            case RULE_ID:
+            case RULE_QUOTED_ID:
+                {
+                alt21=1;
+                }
+                break;
+            case 36:
+                {
+                alt21=2;
+                }
+                break;
+            case RULE_STRING:
+            case RULE_INT:
+            case 19:
+            case 39:
+            case 40:
+            case 70:
+            case 71:
+            case 72:
+                {
+                alt21=3;
+                }
+                break;
+            case 33:
+                {
+                alt21=4;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 21, 0, input);
 
-            if ( (LA17_0==16) ) {
-                alt17=1;
+                throw nvae;
             }
-            switch (alt17) {
+
+            switch (alt21) {
                 case 1 :
-                    // InternalSolverLanguage.g:1229:4: (lv_isError_0_0= 'error' )
+                    // InternalSolverLanguage.g:1728:3: (this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )? )
                     {
-                    // InternalSolverLanguage.g:1229:4: (lv_isError_0_0= 'error' )
-                    // InternalSolverLanguage.g:1230:5: lv_isError_0_0= 'error'
+                    // InternalSolverLanguage.g:1728:3: (this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )? )
+                    // InternalSolverLanguage.g:1729:4: this_Reference_0= ruleReference ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )?
                     {
-                    lv_isError_0_0=(Token)match(input,16,FOLLOW_12); 
+                    if ( state.backtracking==0 ) {
 
-                    					newLeafNode(lv_isError_0_0, grammarAccess.getPredicateAccess().getIsErrorErrorKeyword_0_0());
-                    				
-
-                    					if (current==null) {
-                    						current = createModelElement(grammarAccess.getPredicateRule());
-                    					}
-                    					setWithLastConsumed(current, "isError", true, "error");
-                    				
-
+                      				newCompositeNode(grammarAccess.getAtomicExpressionAccess().getReferenceParserRuleCall_0_0());
+                      			
                     }
+                    pushFollow(FOLLOW_29);
+                    this_Reference_0=ruleReference();
 
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
+                      				current = this_Reference_0;
+                      				afterParserOrEnumRuleCall();
+                      			
                     }
-                    break;
+                    // InternalSolverLanguage.g:1737:4: ( () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) ) )?
+                    int alt20=2;
+                    int LA20_0 = input.LA(1);
 
-            }
-
-            // InternalSolverLanguage.g:1242:3: ( (lv_symbol_1_0= ruleModelSymbol ) )
-            // InternalSolverLanguage.g:1243:4: (lv_symbol_1_0= ruleModelSymbol )
-            {
-            // InternalSolverLanguage.g:1243:4: (lv_symbol_1_0= ruleModelSymbol )
-            // InternalSolverLanguage.g:1244:5: lv_symbol_1_0= ruleModelSymbol
-            {
-
-            					newCompositeNode(grammarAccess.getPredicateAccess().getSymbolModelSymbolParserRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_14);
-            lv_symbol_1_0=ruleModelSymbol();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getPredicateRule());
-            					}
-            					set(
-            						current,
-            						"symbol",
-            						lv_symbol_1_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            // InternalSolverLanguage.g:1261:3: (otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')' )?
-            int alt20=2;
-            int LA20_0 = input.LA(1);
-
-            if ( (LA20_0==17) ) {
-                alt20=1;
-            }
-            switch (alt20) {
-                case 1 :
-                    // InternalSolverLanguage.g:1262:4: otherlv_2= '(' ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )? otherlv_6= ')'
-                    {
-                    otherlv_2=(Token)match(input,17,FOLLOW_15); 
-
-                    				newLeafNode(otherlv_2, grammarAccess.getPredicateAccess().getLeftParenthesisKeyword_2_0());
-                    			
-                    // InternalSolverLanguage.g:1266:4: ( ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )* )?
-                    int alt19=2;
-                    int LA19_0 = input.LA(1);
-
-                    if ( (LA19_0==RULE_ID) ) {
-                        alt19=1;
+                    if ( (LA20_0==33) ) {
+                        alt20=1;
                     }
-                    switch (alt19) {
+                    switch (alt20) {
                         case 1 :
-                            // InternalSolverLanguage.g:1267:5: ( (lv_parameters_3_0= ruleParameter ) ) (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )*
+                            // InternalSolverLanguage.g:1738:5: () ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) )
                             {
-                            // InternalSolverLanguage.g:1267:5: ( (lv_parameters_3_0= ruleParameter ) )
-                            // InternalSolverLanguage.g:1268:6: (lv_parameters_3_0= ruleParameter )
+                            // InternalSolverLanguage.g:1738:5: ()
+                            // InternalSolverLanguage.g:1739:6: 
                             {
-                            // InternalSolverLanguage.g:1268:6: (lv_parameters_3_0= ruleParameter )
-                            // InternalSolverLanguage.g:1269:7: lv_parameters_3_0= ruleParameter
-                            {
+                            if ( state.backtracking==0 ) {
 
-                            							newCompositeNode(grammarAccess.getPredicateAccess().getParametersParameterParserRuleCall_2_1_0_0());
-                            						
-                            pushFollow(FOLLOW_8);
-                            lv_parameters_3_0=ruleParameter();
+                              						current = forceCreateModelElementAndSet(
+                              							grammarAccess.getAtomicExpressionAccess().getCallFunctorAction_0_1_0(),
+                              							current);
+                              					
+                            }
+
+                            }
+
+                            // InternalSolverLanguage.g:1745:5: ( ( '(' )=> (lv_argumentList_2_0= ruleArgumentList ) )
+                            // InternalSolverLanguage.g:1746:6: ( '(' )=> (lv_argumentList_2_0= ruleArgumentList )
+                            {
+                            // InternalSolverLanguage.g:1747:6: (lv_argumentList_2_0= ruleArgumentList )
+                            // InternalSolverLanguage.g:1748:7: lv_argumentList_2_0= ruleArgumentList
+                            {
+                            if ( state.backtracking==0 ) {
+
+                              							newCompositeNode(grammarAccess.getAtomicExpressionAccess().getArgumentListArgumentListParserRuleCall_0_1_1_0());
+                              						
+                            }
+                            pushFollow(FOLLOW_2);
+                            lv_argumentList_2_0=ruleArgumentList();
 
                             state._fsp--;
+                            if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
 
-
-                            							if (current==null) {
-                            								current = createModelElementForParent(grammarAccess.getPredicateRule());
-                            							}
-                            							add(
-                            								current,
-                            								"parameters",
-                            								lv_parameters_3_0,
-                            								"org.eclipse.viatra.solver.language.SolverLanguage.Parameter");
-                            							afterParserOrEnumRuleCall();
-                            						
+                              							if (current==null) {
+                              								current = createModelElementForParent(grammarAccess.getAtomicExpressionRule());
+                              							}
+                              							set(
+                              								current,
+                              								"argumentList",
+                              								lv_argumentList_2_0,
+                              								"org.eclipse.viatra.solver.language.SolverLanguage.ArgumentList");
+                              							afterParserOrEnumRuleCall();
+                              						
+                            }
 
                             }
 
 
                             }
-
-                            // InternalSolverLanguage.g:1286:5: (otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) ) )*
-                            loop18:
-                            do {
-                                int alt18=2;
-                                int LA18_0 = input.LA(1);
-
-                                if ( (LA18_0==18) ) {
-                                    alt18=1;
-                                }
-
-
-                                switch (alt18) {
-                            	case 1 :
-                            	    // InternalSolverLanguage.g:1287:6: otherlv_4= ',' ( (lv_parameters_5_0= ruleParameter ) )
-                            	    {
-                            	    otherlv_4=(Token)match(input,18,FOLLOW_12); 
-
-                            	    						newLeafNode(otherlv_4, grammarAccess.getPredicateAccess().getCommaKeyword_2_1_1_0());
-                            	    					
-                            	    // InternalSolverLanguage.g:1291:6: ( (lv_parameters_5_0= ruleParameter ) )
-                            	    // InternalSolverLanguage.g:1292:7: (lv_parameters_5_0= ruleParameter )
-                            	    {
-                            	    // InternalSolverLanguage.g:1292:7: (lv_parameters_5_0= ruleParameter )
-                            	    // InternalSolverLanguage.g:1293:8: lv_parameters_5_0= ruleParameter
-                            	    {
-
-                            	    								newCompositeNode(grammarAccess.getPredicateAccess().getParametersParameterParserRuleCall_2_1_1_1_0());
-                            	    							
-                            	    pushFollow(FOLLOW_8);
-                            	    lv_parameters_5_0=ruleParameter();
-
-                            	    state._fsp--;
-
-
-                            	    								if (current==null) {
-                            	    									current = createModelElementForParent(grammarAccess.getPredicateRule());
-                            	    								}
-                            	    								add(
-                            	    									current,
-                            	    									"parameters",
-                            	    									lv_parameters_5_0,
-                            	    									"org.eclipse.viatra.solver.language.SolverLanguage.Parameter");
-                            	    								afterParserOrEnumRuleCall();
-                            	    							
-
-                            	    }
-
-
-                            	    }
-
-
-                            	    }
-                            	    break;
-
-                            	default :
-                            	    break loop18;
-                                }
-                            } while (true);
 
 
                             }
@@ -3877,128 +4969,540 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_6=(Token)match(input,19,FOLLOW_16); 
 
-                    				newLeafNode(otherlv_6, grammarAccess.getPredicateAccess().getRightParenthesisKeyword_2_2());
-                    			
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:1768:3: this_Interval_3= ruleInterval
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getAtomicExpressionAccess().getIntervalParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_Interval_3=ruleInterval();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_Interval_3;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:1777:3: this_Literal_4= ruleLiteral
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getAtomicExpressionAccess().getLiteralParserRuleCall_2());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_Literal_4=ruleLiteral();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_Literal_4;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:1786:3: (otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')' )
+                    {
+                    // InternalSolverLanguage.g:1786:3: (otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')' )
+                    // InternalSolverLanguage.g:1787:4: otherlv_5= '(' this_Expression_6= ruleExpression otherlv_7= ')'
+                    {
+                    otherlv_5=(Token)match(input,33,FOLLOW_6); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_5, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_3_0());
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      				newCompositeNode(grammarAccess.getAtomicExpressionAccess().getExpressionParserRuleCall_3_1());
+                      			
+                    }
+                    pushFollow(FOLLOW_30);
+                    this_Expression_6=ruleExpression();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = this_Expression_6;
+                      				afterParserOrEnumRuleCall();
+                      			
+                    }
+                    otherlv_7=(Token)match(input,34,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_7, grammarAccess.getAtomicExpressionAccess().getRightParenthesisKeyword_3_2());
+                      			
+                    }
+
+                    }
+
 
                     }
                     break;
 
             }
 
-            otherlv_7=(Token)match(input,28,FOLLOW_17); 
 
-            			newLeafNode(otherlv_7, grammarAccess.getPredicateAccess().getColonHyphenMinusKeyword_3());
-            		
-            // InternalSolverLanguage.g:1321:3: (otherlv_8= 'false' | ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* ) )
-            int alt22=2;
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleAtomicExpression"
+
+
+    // $ANTLR start "entryRuleCall"
+    // InternalSolverLanguage.g:1808:1: entryRuleCall returns [EObject current=null] : iv_ruleCall= ruleCall EOF ;
+    public final EObject entryRuleCall() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleCall = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1808:45: (iv_ruleCall= ruleCall EOF )
+            // InternalSolverLanguage.g:1809:2: iv_ruleCall= ruleCall EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getCallRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleCall=ruleCall();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleCall; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleCall"
+
+
+    // $ANTLR start "ruleCall"
+    // InternalSolverLanguage.g:1815:1: ruleCall returns [EObject current=null] : ( ( (lv_functor_0_0= ruleReference ) ) ( ( (lv_transitiveClosure_1_0= RULE_STAR ) ) | ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) ) )? ( (lv_argumentList_3_0= ruleArgumentList ) ) ) ;
+    public final EObject ruleCall() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_transitiveClosure_1_0=null;
+        Token lv_reflexiveTransitiveClosure_2_0=null;
+        EObject lv_functor_0_0 = null;
+
+        EObject lv_argumentList_3_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1821:2: ( ( ( (lv_functor_0_0= ruleReference ) ) ( ( (lv_transitiveClosure_1_0= RULE_STAR ) ) | ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) ) )? ( (lv_argumentList_3_0= ruleArgumentList ) ) ) )
+            // InternalSolverLanguage.g:1822:2: ( ( (lv_functor_0_0= ruleReference ) ) ( ( (lv_transitiveClosure_1_0= RULE_STAR ) ) | ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) ) )? ( (lv_argumentList_3_0= ruleArgumentList ) ) )
+            {
+            // InternalSolverLanguage.g:1822:2: ( ( (lv_functor_0_0= ruleReference ) ) ( ( (lv_transitiveClosure_1_0= RULE_STAR ) ) | ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) ) )? ( (lv_argumentList_3_0= ruleArgumentList ) ) )
+            // InternalSolverLanguage.g:1823:3: ( (lv_functor_0_0= ruleReference ) ) ( ( (lv_transitiveClosure_1_0= RULE_STAR ) ) | ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) ) )? ( (lv_argumentList_3_0= ruleArgumentList ) )
+            {
+            // InternalSolverLanguage.g:1823:3: ( (lv_functor_0_0= ruleReference ) )
+            // InternalSolverLanguage.g:1824:4: (lv_functor_0_0= ruleReference )
+            {
+            // InternalSolverLanguage.g:1824:4: (lv_functor_0_0= ruleReference )
+            // InternalSolverLanguage.g:1825:5: lv_functor_0_0= ruleReference
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getCallAccess().getFunctorReferenceParserRuleCall_0_0());
+              				
+            }
+            pushFollow(FOLLOW_31);
+            lv_functor_0_0=ruleReference();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getCallRule());
+              					}
+              					set(
+              						current,
+              						"functor",
+              						lv_functor_0_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Reference");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:1842:3: ( ( (lv_transitiveClosure_1_0= RULE_STAR ) ) | ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) ) )?
+            int alt22=3;
             int LA22_0 = input.LA(1);
 
-            if ( (LA22_0==14) ) {
+            if ( (LA22_0==RULE_STAR) ) {
                 alt22=1;
             }
-            else if ( (LA22_0==EOF||LA22_0==RULE_ID||(LA22_0>=11 && LA22_0<=13)||(LA22_0>=29 && LA22_0<=31)) ) {
+            else if ( (LA22_0==RULE_PLUS) ) {
                 alt22=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 22, 0, input);
-
-                throw nvae;
             }
             switch (alt22) {
                 case 1 :
-                    // InternalSolverLanguage.g:1322:4: otherlv_8= 'false'
+                    // InternalSolverLanguage.g:1843:4: ( (lv_transitiveClosure_1_0= RULE_STAR ) )
                     {
-                    otherlv_8=(Token)match(input,14,FOLLOW_5); 
+                    // InternalSolverLanguage.g:1843:4: ( (lv_transitiveClosure_1_0= RULE_STAR ) )
+                    // InternalSolverLanguage.g:1844:5: (lv_transitiveClosure_1_0= RULE_STAR )
+                    {
+                    // InternalSolverLanguage.g:1844:5: (lv_transitiveClosure_1_0= RULE_STAR )
+                    // InternalSolverLanguage.g:1845:6: lv_transitiveClosure_1_0= RULE_STAR
+                    {
+                    lv_transitiveClosure_1_0=(Token)match(input,RULE_STAR,FOLLOW_10); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    				newLeafNode(otherlv_8, grammarAccess.getPredicateAccess().getFalseKeyword_4_0());
-                    			
+                      						newLeafNode(lv_transitiveClosure_1_0, grammarAccess.getCallAccess().getTransitiveClosureSTARTerminalRuleCall_1_0_0());
+                      					
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getCallRule());
+                      						}
+                      						setWithLastConsumed(
+                      							current,
+                      							"transitiveClosure",
+                      							true,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.STAR");
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:1862:4: ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) )
+                    {
+                    // InternalSolverLanguage.g:1862:4: ( (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS ) )
+                    // InternalSolverLanguage.g:1863:5: (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS )
+                    {
+                    // InternalSolverLanguage.g:1863:5: (lv_reflexiveTransitiveClosure_2_0= RULE_PLUS )
+                    // InternalSolverLanguage.g:1864:6: lv_reflexiveTransitiveClosure_2_0= RULE_PLUS
+                    {
+                    lv_reflexiveTransitiveClosure_2_0=(Token)match(input,RULE_PLUS,FOLLOW_10); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						newLeafNode(lv_reflexiveTransitiveClosure_2_0, grammarAccess.getCallAccess().getReflexiveTransitiveClosurePLUSTerminalRuleCall_1_1_0());
+                      					
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getCallRule());
+                      						}
+                      						setWithLastConsumed(
+                      							current,
+                      							"reflexiveTransitiveClosure",
+                      							true,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.PLUS");
+                      					
+                    }
+
+                    }
+
+
+                    }
+
 
                     }
                     break;
-                case 2 :
-                    // InternalSolverLanguage.g:1327:4: ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* )
-                    {
-                    // InternalSolverLanguage.g:1327:4: ( ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )* )
-                    // InternalSolverLanguage.g:1328:5: ( (lv_bodies_9_0= rulePatternBody ) ) (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )*
-                    {
-                    // InternalSolverLanguage.g:1328:5: ( (lv_bodies_9_0= rulePatternBody ) )
-                    // InternalSolverLanguage.g:1329:6: (lv_bodies_9_0= rulePatternBody )
-                    {
-                    // InternalSolverLanguage.g:1329:6: (lv_bodies_9_0= rulePatternBody )
-                    // InternalSolverLanguage.g:1330:7: lv_bodies_9_0= rulePatternBody
-                    {
 
-                    							newCompositeNode(grammarAccess.getPredicateAccess().getBodiesPatternBodyParserRuleCall_4_1_0_0());
-                    						
-                    pushFollow(FOLLOW_18);
-                    lv_bodies_9_0=rulePatternBody();
+            }
+
+            // InternalSolverLanguage.g:1881:3: ( (lv_argumentList_3_0= ruleArgumentList ) )
+            // InternalSolverLanguage.g:1882:4: (lv_argumentList_3_0= ruleArgumentList )
+            {
+            // InternalSolverLanguage.g:1882:4: (lv_argumentList_3_0= ruleArgumentList )
+            // InternalSolverLanguage.g:1883:5: lv_argumentList_3_0= ruleArgumentList
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getCallAccess().getArgumentListArgumentListParserRuleCall_2_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_argumentList_3_0=ruleArgumentList();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getCallRule());
+              					}
+              					set(
+              						current,
+              						"argumentList",
+              						lv_argumentList_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.ArgumentList");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleCall"
+
+
+    // $ANTLR start "entryRuleArgumentList"
+    // InternalSolverLanguage.g:1904:1: entryRuleArgumentList returns [EObject current=null] : iv_ruleArgumentList= ruleArgumentList EOF ;
+    public final EObject entryRuleArgumentList() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleArgumentList = null;
+
+
+        try {
+            // InternalSolverLanguage.g:1904:53: (iv_ruleArgumentList= ruleArgumentList EOF )
+            // InternalSolverLanguage.g:1905:2: iv_ruleArgumentList= ruleArgumentList EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getArgumentListRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleArgumentList=ruleArgumentList();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleArgumentList; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleArgumentList"
+
+
+    // $ANTLR start "ruleArgumentList"
+    // InternalSolverLanguage.g:1911:1: ruleArgumentList returns [EObject current=null] : ( () otherlv_1= '(' ( ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )* )? otherlv_5= ')' ) ;
+    public final EObject ruleArgumentList() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        Token otherlv_5=null;
+        EObject lv_arguments_2_0 = null;
+
+        EObject lv_arguments_4_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:1917:2: ( ( () otherlv_1= '(' ( ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )* )? otherlv_5= ')' ) )
+            // InternalSolverLanguage.g:1918:2: ( () otherlv_1= '(' ( ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )* )? otherlv_5= ')' )
+            {
+            // InternalSolverLanguage.g:1918:2: ( () otherlv_1= '(' ( ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )* )? otherlv_5= ')' )
+            // InternalSolverLanguage.g:1919:3: () otherlv_1= '(' ( ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )* )? otherlv_5= ')'
+            {
+            // InternalSolverLanguage.g:1919:3: ()
+            // InternalSolverLanguage.g:1920:4: 
+            {
+            if ( state.backtracking==0 ) {
+
+              				current = forceCreateModelElement(
+              					grammarAccess.getArgumentListAccess().getArgumentListAction_0(),
+              					current);
+              			
+            }
+
+            }
+
+            otherlv_1=(Token)match(input,33,FOLLOW_32); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getArgumentListAccess().getLeftParenthesisKeyword_1());
+              		
+            }
+            // InternalSolverLanguage.g:1930:3: ( ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )* )?
+            int alt24=2;
+            int LA24_0 = input.LA(1);
+
+            if ( ((LA24_0>=RULE_STRING && LA24_0<=RULE_QUOTED_ID)||LA24_0==19||LA24_0==29||LA24_0==33||(LA24_0>=35 && LA24_0<=36)||(LA24_0>=39 && LA24_0<=40)||(LA24_0>=56 && LA24_0<=57)||(LA24_0>=60 && LA24_0<=72)) ) {
+                alt24=1;
+            }
+            switch (alt24) {
+                case 1 :
+                    // InternalSolverLanguage.g:1931:4: ( (lv_arguments_2_0= ruleArgument ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )*
+                    {
+                    // InternalSolverLanguage.g:1931:4: ( (lv_arguments_2_0= ruleArgument ) )
+                    // InternalSolverLanguage.g:1932:5: (lv_arguments_2_0= ruleArgument )
+                    {
+                    // InternalSolverLanguage.g:1932:5: (lv_arguments_2_0= ruleArgument )
+                    // InternalSolverLanguage.g:1933:6: lv_arguments_2_0= ruleArgument
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getArgumentListAccess().getArgumentsArgumentParserRuleCall_2_0_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_33);
+                    lv_arguments_2_0=ruleArgument();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    							if (current==null) {
-                    								current = createModelElementForParent(grammarAccess.getPredicateRule());
-                    							}
-                    							add(
-                    								current,
-                    								"bodies",
-                    								lv_bodies_9_0,
-                    								"org.eclipse.viatra.solver.language.SolverLanguage.PatternBody");
-                    							afterParserOrEnumRuleCall();
-                    						
+                      						if (current==null) {
+                      							current = createModelElementForParent(grammarAccess.getArgumentListRule());
+                      						}
+                      						add(
+                      							current,
+                      							"arguments",
+                      							lv_arguments_2_0,
+                      							"org.eclipse.viatra.solver.language.SolverLanguage.Argument");
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
 
                     }
 
 
                     }
 
-                    // InternalSolverLanguage.g:1347:5: (otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) ) )*
-                    loop21:
+                    // InternalSolverLanguage.g:1950:4: (otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) ) )*
+                    loop23:
                     do {
-                        int alt21=2;
-                        int LA21_0 = input.LA(1);
+                        int alt23=2;
+                        int LA23_0 = input.LA(1);
 
-                        if ( (LA21_0==29) ) {
-                            alt21=1;
+                        if ( (LA23_0==28) ) {
+                            alt23=1;
                         }
 
 
-                        switch (alt21) {
+                        switch (alt23) {
                     	case 1 :
-                    	    // InternalSolverLanguage.g:1348:6: otherlv_10= '|' ( (lv_bodies_11_0= rulePatternBody ) )
+                    	    // InternalSolverLanguage.g:1951:5: otherlv_3= ',' ( (lv_arguments_4_0= ruleArgument ) )
                     	    {
-                    	    otherlv_10=(Token)match(input,29,FOLLOW_19); 
+                    	    otherlv_3=(Token)match(input,28,FOLLOW_34); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
 
-                    	    						newLeafNode(otherlv_10, grammarAccess.getPredicateAccess().getVerticalLineKeyword_4_1_1_0());
-                    	    					
-                    	    // InternalSolverLanguage.g:1352:6: ( (lv_bodies_11_0= rulePatternBody ) )
-                    	    // InternalSolverLanguage.g:1353:7: (lv_bodies_11_0= rulePatternBody )
+                    	      					newLeafNode(otherlv_3, grammarAccess.getArgumentListAccess().getCommaKeyword_2_1_0());
+                    	      				
+                    	    }
+                    	    // InternalSolverLanguage.g:1955:5: ( (lv_arguments_4_0= ruleArgument ) )
+                    	    // InternalSolverLanguage.g:1956:6: (lv_arguments_4_0= ruleArgument )
                     	    {
-                    	    // InternalSolverLanguage.g:1353:7: (lv_bodies_11_0= rulePatternBody )
-                    	    // InternalSolverLanguage.g:1354:8: lv_bodies_11_0= rulePatternBody
+                    	    // InternalSolverLanguage.g:1956:6: (lv_arguments_4_0= ruleArgument )
+                    	    // InternalSolverLanguage.g:1957:7: lv_arguments_4_0= ruleArgument
                     	    {
+                    	    if ( state.backtracking==0 ) {
 
-                    	    								newCompositeNode(grammarAccess.getPredicateAccess().getBodiesPatternBodyParserRuleCall_4_1_1_1_0());
-                    	    							
-                    	    pushFollow(FOLLOW_18);
-                    	    lv_bodies_11_0=rulePatternBody();
+                    	      							newCompositeNode(grammarAccess.getArgumentListAccess().getArgumentsArgumentParserRuleCall_2_1_1_0());
+                    	      						
+                    	    }
+                    	    pushFollow(FOLLOW_33);
+                    	    lv_arguments_4_0=ruleArgument();
 
                     	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
 
-
-                    	    								if (current==null) {
-                    	    									current = createModelElementForParent(grammarAccess.getPredicateRule());
-                    	    								}
-                    	    								add(
-                    	    									current,
-                    	    									"bodies",
-                    	    									lv_bodies_11_0,
-                    	    									"org.eclipse.viatra.solver.language.SolverLanguage.PatternBody");
-                    	    								afterParserOrEnumRuleCall();
-                    	    							
+                    	      							if (current==null) {
+                    	      								current = createModelElementForParent(grammarAccess.getArgumentListRule());
+                    	      							}
+                    	      							add(
+                    	      								current,
+                    	      								"arguments",
+                    	      								lv_arguments_4_0,
+                    	      								"org.eclipse.viatra.solver.language.SolverLanguage.Argument");
+                    	      							afterParserOrEnumRuleCall();
+                    	      						
+                    	    }
 
                     	    }
 
@@ -4010,32 +5514,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop21;
+                    	    break loop23;
                         }
                     } while (true);
 
 
                     }
-
-
-                    }
                     break;
 
             }
 
-            otherlv_12=(Token)match(input,12,FOLLOW_2); 
+            otherlv_5=(Token)match(input,34,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_12, grammarAccess.getPredicateAccess().getFullStopKeyword_5());
-            		
+              			newLeafNode(otherlv_5, grammarAccess.getArgumentListAccess().getRightParenthesisKeyword_3());
+              		
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -4046,29 +5551,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "rulePredicate"
+    // $ANTLR end "ruleArgumentList"
 
 
-    // $ANTLR start "entryRuleParameter"
-    // InternalSolverLanguage.g:1382:1: entryRuleParameter returns [EObject current=null] : iv_ruleParameter= ruleParameter EOF ;
-    public final EObject entryRuleParameter() throws RecognitionException {
+    // $ANTLR start "entryRuleArgument"
+    // InternalSolverLanguage.g:1984:1: entryRuleArgument returns [EObject current=null] : iv_ruleArgument= ruleArgument EOF ;
+    public final EObject entryRuleArgument() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleParameter = null;
+        EObject iv_ruleArgument = null;
 
 
         try {
-            // InternalSolverLanguage.g:1382:50: (iv_ruleParameter= ruleParameter EOF )
-            // InternalSolverLanguage.g:1383:2: iv_ruleParameter= ruleParameter EOF
+            // InternalSolverLanguage.g:1984:49: (iv_ruleArgument= ruleArgument EOF )
+            // InternalSolverLanguage.g:1985:2: iv_ruleArgument= ruleArgument EOF
             {
-             newCompositeNode(grammarAccess.getParameterRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getArgumentRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleParameter=ruleParameter();
+            iv_ruleArgument=ruleArgument();
 
             state._fsp--;
-
-             current =iv_ruleParameter; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleArgument; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -4082,280 +5591,119 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleParameter"
+    // $ANTLR end "entryRuleArgument"
 
 
-    // $ANTLR start "ruleParameter"
-    // InternalSolverLanguage.g:1389:1: ruleParameter returns [EObject current=null] : ( ( (lv_variable_0_0= ruleVariable ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) ) )? ) ;
-    public final EObject ruleParameter() throws RecognitionException {
+    // $ANTLR start "ruleArgument"
+    // InternalSolverLanguage.g:1991:1: ruleArgument returns [EObject current=null] : (this_ExpressionArgument_0= ruleExpressionArgument | this_StarArgument_1= ruleStarArgument | this_TypedArgument_2= ruleTypedArgument | this_TypedStarArgument_3= ruleTypedStarArgument ) ;
+    public final EObject ruleArgument() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_1=null;
-        EObject lv_variable_0_0 = null;
+        EObject this_ExpressionArgument_0 = null;
 
-        EObject lv_type_2_0 = null;
+        EObject this_StarArgument_1 = null;
+
+        EObject this_TypedArgument_2 = null;
+
+        EObject this_TypedStarArgument_3 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1395:2: ( ( ( (lv_variable_0_0= ruleVariable ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) ) )? ) )
-            // InternalSolverLanguage.g:1396:2: ( ( (lv_variable_0_0= ruleVariable ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) ) )? )
+            // InternalSolverLanguage.g:1997:2: ( (this_ExpressionArgument_0= ruleExpressionArgument | this_StarArgument_1= ruleStarArgument | this_TypedArgument_2= ruleTypedArgument | this_TypedStarArgument_3= ruleTypedStarArgument ) )
+            // InternalSolverLanguage.g:1998:2: (this_ExpressionArgument_0= ruleExpressionArgument | this_StarArgument_1= ruleStarArgument | this_TypedArgument_2= ruleTypedArgument | this_TypedStarArgument_3= ruleTypedStarArgument )
             {
-            // InternalSolverLanguage.g:1396:2: ( ( (lv_variable_0_0= ruleVariable ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) ) )? )
-            // InternalSolverLanguage.g:1397:3: ( (lv_variable_0_0= ruleVariable ) ) (otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) ) )?
-            {
-            // InternalSolverLanguage.g:1397:3: ( (lv_variable_0_0= ruleVariable ) )
-            // InternalSolverLanguage.g:1398:4: (lv_variable_0_0= ruleVariable )
-            {
-            // InternalSolverLanguage.g:1398:4: (lv_variable_0_0= ruleVariable )
-            // InternalSolverLanguage.g:1399:5: lv_variable_0_0= ruleVariable
-            {
-
-            					newCompositeNode(grammarAccess.getParameterAccess().getVariableVariableParserRuleCall_0_0());
-            				
-            pushFollow(FOLLOW_20);
-            lv_variable_0_0=ruleVariable();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getParameterRule());
-            					}
-            					set(
-            						current,
-            						"variable",
-            						lv_variable_0_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.Variable");
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            // InternalSolverLanguage.g:1416:3: (otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) ) )?
-            int alt23=2;
-            int LA23_0 = input.LA(1);
-
-            if ( (LA23_0==20) ) {
-                alt23=1;
-            }
-            switch (alt23) {
-                case 1 :
-                    // InternalSolverLanguage.g:1417:4: otherlv_1= ':' ( (lv_type_2_0= ruleSymbol ) )
-                    {
-                    otherlv_1=(Token)match(input,20,FOLLOW_21); 
-
-                    				newLeafNode(otherlv_1, grammarAccess.getParameterAccess().getColonKeyword_1_0());
-                    			
-                    // InternalSolverLanguage.g:1421:4: ( (lv_type_2_0= ruleSymbol ) )
-                    // InternalSolverLanguage.g:1422:5: (lv_type_2_0= ruleSymbol )
-                    {
-                    // InternalSolverLanguage.g:1422:5: (lv_type_2_0= ruleSymbol )
-                    // InternalSolverLanguage.g:1423:6: lv_type_2_0= ruleSymbol
-                    {
-
-                    						newCompositeNode(grammarAccess.getParameterAccess().getTypeSymbolParserRuleCall_1_1_0());
-                    					
-                    pushFollow(FOLLOW_2);
-                    lv_type_2_0=ruleSymbol();
-
-                    state._fsp--;
-
-
-                    						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getParameterRule());
-                    						}
-                    						set(
-                    							current,
-                    							"type",
-                    							lv_type_2_0,
-                    							"org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
-                    						afterParserOrEnumRuleCall();
-                    					
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleParameter"
-
-
-    // $ANTLR start "entryRulePatternBody"
-    // InternalSolverLanguage.g:1445:1: entryRulePatternBody returns [EObject current=null] : iv_rulePatternBody= rulePatternBody EOF ;
-    public final EObject entryRulePatternBody() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_rulePatternBody = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1445:52: (iv_rulePatternBody= rulePatternBody EOF )
-            // InternalSolverLanguage.g:1446:2: iv_rulePatternBody= rulePatternBody EOF
-            {
-             newCompositeNode(grammarAccess.getPatternBodyRule()); 
-            pushFollow(FOLLOW_1);
-            iv_rulePatternBody=rulePatternBody();
-
-            state._fsp--;
-
-             current =iv_rulePatternBody; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRulePatternBody"
-
-
-    // $ANTLR start "rulePatternBody"
-    // InternalSolverLanguage.g:1452:1: rulePatternBody returns [EObject current=null] : ( () (otherlv_1= 'true' | ( (lv_constraints_2_0= ruleConstraint ) )* ) ) ;
-    public final EObject rulePatternBody() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-        EObject lv_constraints_2_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1458:2: ( ( () (otherlv_1= 'true' | ( (lv_constraints_2_0= ruleConstraint ) )* ) ) )
-            // InternalSolverLanguage.g:1459:2: ( () (otherlv_1= 'true' | ( (lv_constraints_2_0= ruleConstraint ) )* ) )
-            {
-            // InternalSolverLanguage.g:1459:2: ( () (otherlv_1= 'true' | ( (lv_constraints_2_0= ruleConstraint ) )* ) )
-            // InternalSolverLanguage.g:1460:3: () (otherlv_1= 'true' | ( (lv_constraints_2_0= ruleConstraint ) )* )
-            {
-            // InternalSolverLanguage.g:1460:3: ()
-            // InternalSolverLanguage.g:1461:4: 
-            {
-
-            				current = forceCreateModelElement(
-            					grammarAccess.getPatternBodyAccess().getPatternBodyAction_0(),
-            					current);
-            			
-
-            }
-
-            // InternalSolverLanguage.g:1467:3: (otherlv_1= 'true' | ( (lv_constraints_2_0= ruleConstraint ) )* )
-            int alt25=2;
-            int LA25_0 = input.LA(1);
-
-            if ( (LA25_0==13) ) {
-                alt25=1;
-            }
-            else if ( (LA25_0==EOF||LA25_0==RULE_ID||(LA25_0>=11 && LA25_0<=12)||(LA25_0>=29 && LA25_0<=31)) ) {
-                alt25=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 25, 0, input);
-
-                throw nvae;
-            }
+            // InternalSolverLanguage.g:1998:2: (this_ExpressionArgument_0= ruleExpressionArgument | this_StarArgument_1= ruleStarArgument | this_TypedArgument_2= ruleTypedArgument | this_TypedStarArgument_3= ruleTypedStarArgument )
+            int alt25=4;
+            alt25 = dfa25.predict(input);
             switch (alt25) {
                 case 1 :
-                    // InternalSolverLanguage.g:1468:4: otherlv_1= 'true'
+                    // InternalSolverLanguage.g:1999:3: this_ExpressionArgument_0= ruleExpressionArgument
                     {
-                    otherlv_1=(Token)match(input,13,FOLLOW_2); 
+                    if ( state.backtracking==0 ) {
 
-                    				newLeafNode(otherlv_1, grammarAccess.getPatternBodyAccess().getTrueKeyword_1_0());
-                    			
+                      			newCompositeNode(grammarAccess.getArgumentAccess().getExpressionArgumentParserRuleCall_0());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_ExpressionArgument_0=ruleExpressionArgument();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_ExpressionArgument_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
                 case 2 :
-                    // InternalSolverLanguage.g:1473:4: ( (lv_constraints_2_0= ruleConstraint ) )*
+                    // InternalSolverLanguage.g:2008:3: this_StarArgument_1= ruleStarArgument
                     {
-                    // InternalSolverLanguage.g:1473:4: ( (lv_constraints_2_0= ruleConstraint ) )*
-                    loop24:
-                    do {
-                        int alt24=2;
-                        int LA24_0 = input.LA(1);
+                    if ( state.backtracking==0 ) {
 
-                        if ( (LA24_0==RULE_ID||LA24_0==11||(LA24_0>=30 && LA24_0<=31)) ) {
-                            alt24=1;
-                        }
+                      			newCompositeNode(grammarAccess.getArgumentAccess().getStarArgumentParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_StarArgument_1=ruleStarArgument();
 
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        switch (alt24) {
-                    	case 1 :
-                    	    // InternalSolverLanguage.g:1474:5: (lv_constraints_2_0= ruleConstraint )
-                    	    {
-                    	    // InternalSolverLanguage.g:1474:5: (lv_constraints_2_0= ruleConstraint )
-                    	    // InternalSolverLanguage.g:1475:6: lv_constraints_2_0= ruleConstraint
-                    	    {
+                      			current = this_StarArgument_1;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
-                    	    						newCompositeNode(grammarAccess.getPatternBodyAccess().getConstraintsConstraintParserRuleCall_1_1_0());
-                    	    					
-                    	    pushFollow(FOLLOW_22);
-                    	    lv_constraints_2_0=ruleConstraint();
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:2017:3: this_TypedArgument_2= ruleTypedArgument
+                    {
+                    if ( state.backtracking==0 ) {
 
-                    	    state._fsp--;
+                      			newCompositeNode(grammarAccess.getArgumentAccess().getTypedArgumentParserRuleCall_2());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_TypedArgument_2=ruleTypedArgument();
 
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    	    						if (current==null) {
-                    	    							current = createModelElementForParent(grammarAccess.getPatternBodyRule());
-                    	    						}
-                    	    						add(
-                    	    							current,
-                    	    							"constraints",
-                    	    							lv_constraints_2_0,
-                    	    							"org.eclipse.viatra.solver.language.SolverLanguage.Constraint");
-                    	    						afterParserOrEnumRuleCall();
-                    	    					
+                      			current = this_TypedArgument_2;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
-                    	    }
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:2026:3: this_TypedStarArgument_3= ruleTypedStarArgument
+                    {
+                    if ( state.backtracking==0 ) {
 
+                      			newCompositeNode(grammarAccess.getArgumentAccess().getTypedStarArgumentParserRuleCall_3());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_TypedStarArgument_3=ruleTypedStarArgument();
 
-                    	    }
-                    	    break;
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    	default :
-                    	    break loop24;
-                        }
-                    } while (true);
-
+                      			current = this_TypedStarArgument_3;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
@@ -4365,12 +5713,11 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
 
             }
-
-
-            	leaveRule();
-
         }
 
             catch (RecognitionException re) {
@@ -4381,29 +5728,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "rulePatternBody"
+    // $ANTLR end "ruleArgument"
 
 
-    // $ANTLR start "entryRulePolarity"
-    // InternalSolverLanguage.g:1497:1: entryRulePolarity returns [EObject current=null] : iv_rulePolarity= rulePolarity EOF ;
-    public final EObject entryRulePolarity() throws RecognitionException {
+    // $ANTLR start "entryRuleExpressionArgument"
+    // InternalSolverLanguage.g:2038:1: entryRuleExpressionArgument returns [EObject current=null] : iv_ruleExpressionArgument= ruleExpressionArgument EOF ;
+    public final EObject entryRuleExpressionArgument() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_rulePolarity = null;
+        EObject iv_ruleExpressionArgument = null;
 
 
         try {
-            // InternalSolverLanguage.g:1497:49: (iv_rulePolarity= rulePolarity EOF )
-            // InternalSolverLanguage.g:1498:2: iv_rulePolarity= rulePolarity EOF
+            // InternalSolverLanguage.g:2038:59: (iv_ruleExpressionArgument= ruleExpressionArgument EOF )
+            // InternalSolverLanguage.g:2039:2: iv_ruleExpressionArgument= ruleExpressionArgument EOF
             {
-             newCompositeNode(grammarAccess.getPolarityRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExpressionArgumentRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_rulePolarity=rulePolarity();
+            iv_ruleExpressionArgument=ruleExpressionArgument();
 
             state._fsp--;
-
-             current =iv_rulePolarity; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExpressionArgument; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -4417,95 +5768,53 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRulePolarity"
+    // $ANTLR end "entryRuleExpressionArgument"
 
 
-    // $ANTLR start "rulePolarity"
-    // InternalSolverLanguage.g:1504:1: rulePolarity returns [EObject current=null] : ( ( () otherlv_1= '+' ) | ( () otherlv_3= '-' ) ) ;
-    public final EObject rulePolarity() throws RecognitionException {
+    // $ANTLR start "ruleExpressionArgument"
+    // InternalSolverLanguage.g:2045:1: ruleExpressionArgument returns [EObject current=null] : ( (lv_body_0_0= ruleComparisonExpression ) ) ;
+    public final EObject ruleExpressionArgument() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_1=null;
-        Token otherlv_3=null;
+        EObject lv_body_0_0 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1510:2: ( ( ( () otherlv_1= '+' ) | ( () otherlv_3= '-' ) ) )
-            // InternalSolverLanguage.g:1511:2: ( ( () otherlv_1= '+' ) | ( () otherlv_3= '-' ) )
+            // InternalSolverLanguage.g:2051:2: ( ( (lv_body_0_0= ruleComparisonExpression ) ) )
+            // InternalSolverLanguage.g:2052:2: ( (lv_body_0_0= ruleComparisonExpression ) )
             {
-            // InternalSolverLanguage.g:1511:2: ( ( () otherlv_1= '+' ) | ( () otherlv_3= '-' ) )
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            // InternalSolverLanguage.g:2052:2: ( (lv_body_0_0= ruleComparisonExpression ) )
+            // InternalSolverLanguage.g:2053:3: (lv_body_0_0= ruleComparisonExpression )
+            {
+            // InternalSolverLanguage.g:2053:3: (lv_body_0_0= ruleComparisonExpression )
+            // InternalSolverLanguage.g:2054:4: lv_body_0_0= ruleComparisonExpression
+            {
+            if ( state.backtracking==0 ) {
 
-            if ( (LA26_0==30) ) {
-                alt26=1;
+              				newCompositeNode(grammarAccess.getExpressionArgumentAccess().getBodyComparisonExpressionParserRuleCall_0());
+              			
             }
-            else if ( (LA26_0==11) ) {
-                alt26=2;
+            pushFollow(FOLLOW_2);
+            lv_body_0_0=ruleComparisonExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              				if (current==null) {
+              					current = createModelElementForParent(grammarAccess.getExpressionArgumentRule());
+              				}
+              				set(
+              					current,
+              					"body",
+              					lv_body_0_0,
+              					"org.eclipse.viatra.solver.language.SolverLanguage.ComparisonExpression");
+              				afterParserOrEnumRuleCall();
+              			
             }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 26, 0, input);
-
-                throw nvae;
-            }
-            switch (alt26) {
-                case 1 :
-                    // InternalSolverLanguage.g:1512:3: ( () otherlv_1= '+' )
-                    {
-                    // InternalSolverLanguage.g:1512:3: ( () otherlv_1= '+' )
-                    // InternalSolverLanguage.g:1513:4: () otherlv_1= '+'
-                    {
-                    // InternalSolverLanguage.g:1513:4: ()
-                    // InternalSolverLanguage.g:1514:5: 
-                    {
-
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getPolarityAccess().getPositiveAction_0_0(),
-                    						current);
-                    				
-
-                    }
-
-                    otherlv_1=(Token)match(input,30,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_1, grammarAccess.getPolarityAccess().getPlusSignKeyword_0_1());
-                    			
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:1526:3: ( () otherlv_3= '-' )
-                    {
-                    // InternalSolverLanguage.g:1526:3: ( () otherlv_3= '-' )
-                    // InternalSolverLanguage.g:1527:4: () otherlv_3= '-'
-                    {
-                    // InternalSolverLanguage.g:1527:4: ()
-                    // InternalSolverLanguage.g:1528:5: 
-                    {
-
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getPolarityAccess().getNegativeAction_1_0(),
-                    						current);
-                    				
-
-                    }
-
-                    otherlv_3=(Token)match(input,11,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_3, grammarAccess.getPolarityAccess().getHyphenMinusKeyword_1_1());
-                    			
-
-                    }
-
-
-                    }
-                    break;
 
             }
 
@@ -4513,8 +5822,13 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
             }
 
 
-            	leaveRule();
+            }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
         }
 
             catch (RecognitionException re) {
@@ -4525,29 +5839,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "rulePolarity"
+    // $ANTLR end "ruleExpressionArgument"
 
 
-    // $ANTLR start "entryRuleConstraint"
-    // InternalSolverLanguage.g:1543:1: entryRuleConstraint returns [EObject current=null] : iv_ruleConstraint= ruleConstraint EOF ;
-    public final EObject entryRuleConstraint() throws RecognitionException {
+    // $ANTLR start "entryRuleStarArgument"
+    // InternalSolverLanguage.g:2074:1: entryRuleStarArgument returns [EObject current=null] : iv_ruleStarArgument= ruleStarArgument EOF ;
+    public final EObject entryRuleStarArgument() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleConstraint = null;
+        EObject iv_ruleStarArgument = null;
 
 
         try {
-            // InternalSolverLanguage.g:1543:51: (iv_ruleConstraint= ruleConstraint EOF )
-            // InternalSolverLanguage.g:1544:2: iv_ruleConstraint= ruleConstraint EOF
+            // InternalSolverLanguage.g:2074:53: (iv_ruleStarArgument= ruleStarArgument EOF )
+            // InternalSolverLanguage.g:2075:2: iv_ruleStarArgument= ruleStarArgument EOF
             {
-             newCompositeNode(grammarAccess.getConstraintRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getStarArgumentRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleConstraint=ruleConstraint();
+            iv_ruleStarArgument=ruleStarArgument();
 
             state._fsp--;
-
-             current =iv_ruleConstraint; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleStarArgument; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -4561,598 +5879,606 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleConstraint"
+    // $ANTLR end "entryRuleStarArgument"
 
 
-    // $ANTLR start "ruleConstraint"
-    // InternalSolverLanguage.g:1550:1: ruleConstraint returns [EObject current=null] : ( ( ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )? ) | ( ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')' ) ) ;
-    public final EObject ruleConstraint() throws RecognitionException {
+    // $ANTLR start "ruleStarArgument"
+    // InternalSolverLanguage.g:2081:1: ruleStarArgument returns [EObject current=null] : ( () otherlv_1= '*' ) ;
+    public final EObject ruleStarArgument() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2087:2: ( ( () otherlv_1= '*' ) )
+            // InternalSolverLanguage.g:2088:2: ( () otherlv_1= '*' )
+            {
+            // InternalSolverLanguage.g:2088:2: ( () otherlv_1= '*' )
+            // InternalSolverLanguage.g:2089:3: () otherlv_1= '*'
+            {
+            // InternalSolverLanguage.g:2089:3: ()
+            // InternalSolverLanguage.g:2090:4: 
+            {
+            if ( state.backtracking==0 ) {
+
+              				current = forceCreateModelElement(
+              					grammarAccess.getStarArgumentAccess().getStarArgumentAction_0(),
+              					current);
+              			
+            }
+
+            }
+
+            otherlv_1=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getStarArgumentAccess().getAsteriskKeyword_1());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleStarArgument"
+
+
+    // $ANTLR start "entryRuleTypedArgument"
+    // InternalSolverLanguage.g:2104:1: entryRuleTypedArgument returns [EObject current=null] : iv_ruleTypedArgument= ruleTypedArgument EOF ;
+    public final EObject entryRuleTypedArgument() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleTypedArgument = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2104:54: (iv_ruleTypedArgument= ruleTypedArgument EOF )
+            // InternalSolverLanguage.g:2105:2: iv_ruleTypedArgument= ruleTypedArgument EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getTypedArgumentRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleTypedArgument=ruleTypedArgument();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleTypedArgument; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleTypedArgument"
+
+
+    // $ANTLR start "ruleTypedArgument"
+    // InternalSolverLanguage.g:2111:1: ruleTypedArgument returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) ( ( ruleQualifiedName ) ) ) ;
+    public final EObject ruleTypedArgument() throws RecognitionException {
+        EObject current = null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2117:2: ( ( ( ( ruleQualifiedName ) ) ( ( ruleQualifiedName ) ) ) )
+            // InternalSolverLanguage.g:2118:2: ( ( ( ruleQualifiedName ) ) ( ( ruleQualifiedName ) ) )
+            {
+            // InternalSolverLanguage.g:2118:2: ( ( ( ruleQualifiedName ) ) ( ( ruleQualifiedName ) ) )
+            // InternalSolverLanguage.g:2119:3: ( ( ruleQualifiedName ) ) ( ( ruleQualifiedName ) )
+            {
+            // InternalSolverLanguage.g:2119:3: ( ( ruleQualifiedName ) )
+            // InternalSolverLanguage.g:2120:4: ( ruleQualifiedName )
+            {
+            // InternalSolverLanguage.g:2120:4: ( ruleQualifiedName )
+            // InternalSolverLanguage.g:2121:5: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getTypedArgumentRule());
+              					}
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getTypedArgumentAccess().getTypeNamedElementCrossReference_0_0());
+              				
+            }
+            pushFollow(FOLLOW_35);
+            ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:2135:3: ( ( ruleQualifiedName ) )
+            // InternalSolverLanguage.g:2136:4: ( ruleQualifiedName )
+            {
+            // InternalSolverLanguage.g:2136:4: ( ruleQualifiedName )
+            // InternalSolverLanguage.g:2137:5: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getTypedArgumentRule());
+              					}
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getTypedArgumentAccess().getVariableNamedElementCrossReference_1_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleTypedArgument"
+
+
+    // $ANTLR start "entryRuleTypedStarArgument"
+    // InternalSolverLanguage.g:2155:1: entryRuleTypedStarArgument returns [EObject current=null] : iv_ruleTypedStarArgument= ruleTypedStarArgument EOF ;
+    public final EObject entryRuleTypedStarArgument() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleTypedStarArgument = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2155:58: (iv_ruleTypedStarArgument= ruleTypedStarArgument EOF )
+            // InternalSolverLanguage.g:2156:2: iv_ruleTypedStarArgument= ruleTypedStarArgument EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getTypedStarArgumentRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleTypedStarArgument=ruleTypedStarArgument();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleTypedStarArgument; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleTypedStarArgument"
+
+
+    // $ANTLR start "ruleTypedStarArgument"
+    // InternalSolverLanguage.g:2162:1: ruleTypedStarArgument returns [EObject current=null] : ( ( ( ruleQualifiedName ) ) otherlv_1= '*' ) ;
+    public final EObject ruleTypedStarArgument() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2168:2: ( ( ( ( ruleQualifiedName ) ) otherlv_1= '*' ) )
+            // InternalSolverLanguage.g:2169:2: ( ( ( ruleQualifiedName ) ) otherlv_1= '*' )
+            {
+            // InternalSolverLanguage.g:2169:2: ( ( ( ruleQualifiedName ) ) otherlv_1= '*' )
+            // InternalSolverLanguage.g:2170:3: ( ( ruleQualifiedName ) ) otherlv_1= '*'
+            {
+            // InternalSolverLanguage.g:2170:3: ( ( ruleQualifiedName ) )
+            // InternalSolverLanguage.g:2171:4: ( ruleQualifiedName )
+            {
+            // InternalSolverLanguage.g:2171:4: ( ruleQualifiedName )
+            // InternalSolverLanguage.g:2172:5: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getTypedStarArgumentRule());
+              					}
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getTypedStarArgumentAccess().getTypeNamedElementCrossReference_0_0());
+              				
+            }
+            pushFollow(FOLLOW_36);
+            ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            otherlv_1=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getTypedStarArgumentAccess().getAsteriskKeyword_1());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleTypedStarArgument"
+
+
+    // $ANTLR start "entryRuleReference"
+    // InternalSolverLanguage.g:2194:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    public final EObject entryRuleReference() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleReference = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2194:50: (iv_ruleReference= ruleReference EOF )
+            // InternalSolverLanguage.g:2195:2: iv_ruleReference= ruleReference EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getReferenceRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleReference=ruleReference();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleReference; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleReference"
+
+
+    // $ANTLR start "ruleReference"
+    // InternalSolverLanguage.g:2201:1: ruleReference returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
+    public final EObject ruleReference() throws RecognitionException {
+        EObject current = null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2207:2: ( ( ( ruleQualifiedName ) ) )
+            // InternalSolverLanguage.g:2208:2: ( ( ruleQualifiedName ) )
+            {
+            // InternalSolverLanguage.g:2208:2: ( ( ruleQualifiedName ) )
+            // InternalSolverLanguage.g:2209:3: ( ruleQualifiedName )
+            {
+            // InternalSolverLanguage.g:2209:3: ( ruleQualifiedName )
+            // InternalSolverLanguage.g:2210:4: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
+
+              				if (current==null) {
+              					current = createModelElement(grammarAccess.getReferenceRule());
+              				}
+              			
+            }
+            if ( state.backtracking==0 ) {
+
+              				newCompositeNode(grammarAccess.getReferenceAccess().getReferredNamedElementCrossReference_0());
+              			
+            }
+            pushFollow(FOLLOW_2);
+            ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              				afterParserOrEnumRuleCall();
+              			
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleReference"
+
+
+    // $ANTLR start "entryRuleInterval"
+    // InternalSolverLanguage.g:2227:1: entryRuleInterval returns [EObject current=null] : iv_ruleInterval= ruleInterval EOF ;
+    public final EObject entryRuleInterval() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleInterval = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2227:49: (iv_ruleInterval= ruleInterval EOF )
+            // InternalSolverLanguage.g:2228:2: iv_ruleInterval= ruleInterval EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getIntervalRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleInterval=ruleInterval();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleInterval; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleInterval"
+
+
+    // $ANTLR start "ruleInterval"
+    // InternalSolverLanguage.g:2234:1: ruleInterval returns [EObject current=null] : (otherlv_0= '[' ( (lv_lowerBound_1_0= ruleExpression ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleExpression ) ) otherlv_4= ']' ) ;
+    public final EObject ruleInterval() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
-        Token otherlv_6=null;
-        Token otherlv_8=null;
-        Token otherlv_10=null;
-        Token otherlv_12=null;
-        EObject lv_polarity_0_0 = null;
+        EObject lv_lowerBound_1_0 = null;
 
-        EObject lv_symbol_1_0 = null;
-
-        EObject lv_params_3_0 = null;
-
-        EObject lv_params_5_0 = null;
-
-        EObject lv_closureType_7_0 = null;
-
-        EObject lv_params_9_0 = null;
-
-        EObject lv_params_11_0 = null;
+        EObject lv_upperBound_3_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1556:2: ( ( ( ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )? ) | ( ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')' ) ) )
-            // InternalSolverLanguage.g:1557:2: ( ( ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )? ) | ( ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')' ) )
+            // InternalSolverLanguage.g:2240:2: ( (otherlv_0= '[' ( (lv_lowerBound_1_0= ruleExpression ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleExpression ) ) otherlv_4= ']' ) )
+            // InternalSolverLanguage.g:2241:2: (otherlv_0= '[' ( (lv_lowerBound_1_0= ruleExpression ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleExpression ) ) otherlv_4= ']' )
             {
-            // InternalSolverLanguage.g:1557:2: ( ( ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )? ) | ( ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')' ) )
-            int alt33=2;
-            switch ( input.LA(1) ) {
-            case 30:
-                {
-                int LA33_1 = input.LA(2);
-
-                if ( (LA33_1==17) ) {
-                    alt33=2;
-                }
-                else if ( (LA33_1==RULE_ID) ) {
-                    alt33=1;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 33, 1, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_ID:
-            case 11:
-                {
-                alt33=1;
-                }
-                break;
-            case 31:
-                {
-                alt33=2;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 33, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt33) {
-                case 1 :
-                    // InternalSolverLanguage.g:1558:3: ( ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )? )
-                    {
-                    // InternalSolverLanguage.g:1558:3: ( ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )? )
-                    // InternalSolverLanguage.g:1559:4: ( (lv_polarity_0_0= rulePolarity ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )?
-                    {
-                    // InternalSolverLanguage.g:1559:4: ( (lv_polarity_0_0= rulePolarity ) )?
-                    int alt27=2;
-                    int LA27_0 = input.LA(1);
-
-                    if ( (LA27_0==11||LA27_0==30) ) {
-                        alt27=1;
-                    }
-                    switch (alt27) {
-                        case 1 :
-                            // InternalSolverLanguage.g:1560:5: (lv_polarity_0_0= rulePolarity )
-                            {
-                            // InternalSolverLanguage.g:1560:5: (lv_polarity_0_0= rulePolarity )
-                            // InternalSolverLanguage.g:1561:6: lv_polarity_0_0= rulePolarity
-                            {
-
-                            						newCompositeNode(grammarAccess.getConstraintAccess().getPolarityPolarityParserRuleCall_0_0_0());
-                            					
-                            pushFollow(FOLLOW_12);
-                            lv_polarity_0_0=rulePolarity();
-
-                            state._fsp--;
-
-
-                            						if (current==null) {
-                            							current = createModelElementForParent(grammarAccess.getConstraintRule());
-                            						}
-                            						set(
-                            							current,
-                            							"polarity",
-                            							lv_polarity_0_0,
-                            							"org.eclipse.viatra.solver.language.SolverLanguage.Polarity");
-                            						afterParserOrEnumRuleCall();
-                            					
-
-                            }
-
-
-                            }
-                            break;
-
-                    }
-
-                    // InternalSolverLanguage.g:1578:4: ( (lv_symbol_1_0= ruleModelSymbol ) )
-                    // InternalSolverLanguage.g:1579:5: (lv_symbol_1_0= ruleModelSymbol )
-                    {
-                    // InternalSolverLanguage.g:1579:5: (lv_symbol_1_0= ruleModelSymbol )
-                    // InternalSolverLanguage.g:1580:6: lv_symbol_1_0= ruleModelSymbol
-                    {
-
-                    						newCompositeNode(grammarAccess.getConstraintAccess().getSymbolModelSymbolParserRuleCall_0_1_0());
-                    					
-                    pushFollow(FOLLOW_23);
-                    lv_symbol_1_0=ruleModelSymbol();
-
-                    state._fsp--;
-
-
-                    						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getConstraintRule());
-                    						}
-                    						set(
-                    							current,
-                    							"symbol",
-                    							lv_symbol_1_0,
-                    							"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-                    						afterParserOrEnumRuleCall();
-                    					
-
-                    }
-
-
-                    }
-
-                    // InternalSolverLanguage.g:1597:4: (otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')' )?
-                    int alt30=2;
-                    int LA30_0 = input.LA(1);
-
-                    if ( (LA30_0==17) ) {
-                        alt30=1;
-                    }
-                    switch (alt30) {
-                        case 1 :
-                            // InternalSolverLanguage.g:1598:5: otherlv_2= '(' ( (lv_params_3_0= ruleLiteral ) )? (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )* otherlv_6= ')'
-                            {
-                            otherlv_2=(Token)match(input,17,FOLLOW_24); 
-
-                            					newLeafNode(otherlv_2, grammarAccess.getConstraintAccess().getLeftParenthesisKeyword_0_2_0());
-                            				
-                            // InternalSolverLanguage.g:1602:5: ( (lv_params_3_0= ruleLiteral ) )?
-                            int alt28=2;
-                            int LA28_0 = input.LA(1);
-
-                            if ( ((LA28_0>=RULE_INT && LA28_0<=RULE_STRING)||LA28_0==11||(LA28_0>=13 && LA28_0<=14)||LA28_0==27) ) {
-                                alt28=1;
-                            }
-                            switch (alt28) {
-                                case 1 :
-                                    // InternalSolverLanguage.g:1603:6: (lv_params_3_0= ruleLiteral )
-                                    {
-                                    // InternalSolverLanguage.g:1603:6: (lv_params_3_0= ruleLiteral )
-                                    // InternalSolverLanguage.g:1604:7: lv_params_3_0= ruleLiteral
-                                    {
-
-                                    							newCompositeNode(grammarAccess.getConstraintAccess().getParamsLiteralParserRuleCall_0_2_1_0());
-                                    						
-                                    pushFollow(FOLLOW_8);
-                                    lv_params_3_0=ruleLiteral();
-
-                                    state._fsp--;
-
-
-                                    							if (current==null) {
-                                    								current = createModelElementForParent(grammarAccess.getConstraintRule());
-                                    							}
-                                    							add(
-                                    								current,
-                                    								"params",
-                                    								lv_params_3_0,
-                                    								"org.eclipse.viatra.solver.language.SolverLanguage.Literal");
-                                    							afterParserOrEnumRuleCall();
-                                    						
-
-                                    }
-
-
-                                    }
-                                    break;
-
-                            }
-
-                            // InternalSolverLanguage.g:1621:5: (otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) ) )*
-                            loop29:
-                            do {
-                                int alt29=2;
-                                int LA29_0 = input.LA(1);
-
-                                if ( (LA29_0==18) ) {
-                                    alt29=1;
-                                }
-
-
-                                switch (alt29) {
-                            	case 1 :
-                            	    // InternalSolverLanguage.g:1622:6: otherlv_4= ',' ( (lv_params_5_0= ruleLiteral ) )
-                            	    {
-                            	    otherlv_4=(Token)match(input,18,FOLLOW_25); 
-
-                            	    						newLeafNode(otherlv_4, grammarAccess.getConstraintAccess().getCommaKeyword_0_2_2_0());
-                            	    					
-                            	    // InternalSolverLanguage.g:1626:6: ( (lv_params_5_0= ruleLiteral ) )
-                            	    // InternalSolverLanguage.g:1627:7: (lv_params_5_0= ruleLiteral )
-                            	    {
-                            	    // InternalSolverLanguage.g:1627:7: (lv_params_5_0= ruleLiteral )
-                            	    // InternalSolverLanguage.g:1628:8: lv_params_5_0= ruleLiteral
-                            	    {
-
-                            	    								newCompositeNode(grammarAccess.getConstraintAccess().getParamsLiteralParserRuleCall_0_2_2_1_0());
-                            	    							
-                            	    pushFollow(FOLLOW_8);
-                            	    lv_params_5_0=ruleLiteral();
-
-                            	    state._fsp--;
-
-
-                            	    								if (current==null) {
-                            	    									current = createModelElementForParent(grammarAccess.getConstraintRule());
-                            	    								}
-                            	    								add(
-                            	    									current,
-                            	    									"params",
-                            	    									lv_params_5_0,
-                            	    									"org.eclipse.viatra.solver.language.SolverLanguage.Literal");
-                            	    								afterParserOrEnumRuleCall();
-                            	    							
-
-                            	    }
-
-
-                            	    }
-
-
-                            	    }
-                            	    break;
-
-                            	default :
-                            	    break loop29;
-                                }
-                            } while (true);
-
-                            otherlv_6=(Token)match(input,19,FOLLOW_2); 
-
-                            					newLeafNode(otherlv_6, grammarAccess.getConstraintAccess().getRightParenthesisKeyword_0_2_3());
-                            				
-
-                            }
-                            break;
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:1653:3: ( ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')' )
-                    {
-                    // InternalSolverLanguage.g:1653:3: ( ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')' )
-                    // InternalSolverLanguage.g:1654:4: ( (lv_closureType_7_0= ruleClosureType ) ) otherlv_8= '(' ( (lv_params_9_0= ruleLiteral ) )? (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )* otherlv_12= ')'
-                    {
-                    // InternalSolverLanguage.g:1654:4: ( (lv_closureType_7_0= ruleClosureType ) )
-                    // InternalSolverLanguage.g:1655:5: (lv_closureType_7_0= ruleClosureType )
-                    {
-                    // InternalSolverLanguage.g:1655:5: (lv_closureType_7_0= ruleClosureType )
-                    // InternalSolverLanguage.g:1656:6: lv_closureType_7_0= ruleClosureType
-                    {
-
-                    						newCompositeNode(grammarAccess.getConstraintAccess().getClosureTypeClosureTypeParserRuleCall_1_0_0());
-                    					
-                    pushFollow(FOLLOW_26);
-                    lv_closureType_7_0=ruleClosureType();
-
-                    state._fsp--;
-
-
-                    						if (current==null) {
-                    							current = createModelElementForParent(grammarAccess.getConstraintRule());
-                    						}
-                    						set(
-                    							current,
-                    							"closureType",
-                    							lv_closureType_7_0,
-                    							"org.eclipse.viatra.solver.language.SolverLanguage.ClosureType");
-                    						afterParserOrEnumRuleCall();
-                    					
-
-                    }
-
-
-                    }
-
-                    otherlv_8=(Token)match(input,17,FOLLOW_24); 
-
-                    				newLeafNode(otherlv_8, grammarAccess.getConstraintAccess().getLeftParenthesisKeyword_1_1());
-                    			
-                    // InternalSolverLanguage.g:1677:4: ( (lv_params_9_0= ruleLiteral ) )?
-                    int alt31=2;
-                    int LA31_0 = input.LA(1);
-
-                    if ( ((LA31_0>=RULE_INT && LA31_0<=RULE_STRING)||LA31_0==11||(LA31_0>=13 && LA31_0<=14)||LA31_0==27) ) {
-                        alt31=1;
-                    }
-                    switch (alt31) {
-                        case 1 :
-                            // InternalSolverLanguage.g:1678:5: (lv_params_9_0= ruleLiteral )
-                            {
-                            // InternalSolverLanguage.g:1678:5: (lv_params_9_0= ruleLiteral )
-                            // InternalSolverLanguage.g:1679:6: lv_params_9_0= ruleLiteral
-                            {
-
-                            						newCompositeNode(grammarAccess.getConstraintAccess().getParamsLiteralParserRuleCall_1_2_0());
-                            					
-                            pushFollow(FOLLOW_8);
-                            lv_params_9_0=ruleLiteral();
-
-                            state._fsp--;
-
-
-                            						if (current==null) {
-                            							current = createModelElementForParent(grammarAccess.getConstraintRule());
-                            						}
-                            						add(
-                            							current,
-                            							"params",
-                            							lv_params_9_0,
-                            							"org.eclipse.viatra.solver.language.SolverLanguage.Literal");
-                            						afterParserOrEnumRuleCall();
-                            					
-
-                            }
-
-
-                            }
-                            break;
-
-                    }
-
-                    // InternalSolverLanguage.g:1696:4: (otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) ) )*
-                    loop32:
-                    do {
-                        int alt32=2;
-                        int LA32_0 = input.LA(1);
-
-                        if ( (LA32_0==18) ) {
-                            alt32=1;
-                        }
-
-
-                        switch (alt32) {
-                    	case 1 :
-                    	    // InternalSolverLanguage.g:1697:5: otherlv_10= ',' ( (lv_params_11_0= ruleLiteral ) )
-                    	    {
-                    	    otherlv_10=(Token)match(input,18,FOLLOW_25); 
-
-                    	    					newLeafNode(otherlv_10, grammarAccess.getConstraintAccess().getCommaKeyword_1_3_0());
-                    	    				
-                    	    // InternalSolverLanguage.g:1701:5: ( (lv_params_11_0= ruleLiteral ) )
-                    	    // InternalSolverLanguage.g:1702:6: (lv_params_11_0= ruleLiteral )
-                    	    {
-                    	    // InternalSolverLanguage.g:1702:6: (lv_params_11_0= ruleLiteral )
-                    	    // InternalSolverLanguage.g:1703:7: lv_params_11_0= ruleLiteral
-                    	    {
-
-                    	    							newCompositeNode(grammarAccess.getConstraintAccess().getParamsLiteralParserRuleCall_1_3_1_0());
-                    	    						
-                    	    pushFollow(FOLLOW_8);
-                    	    lv_params_11_0=ruleLiteral();
-
-                    	    state._fsp--;
-
-
-                    	    							if (current==null) {
-                    	    								current = createModelElementForParent(grammarAccess.getConstraintRule());
-                    	    							}
-                    	    							add(
-                    	    								current,
-                    	    								"params",
-                    	    								lv_params_11_0,
-                    	    								"org.eclipse.viatra.solver.language.SolverLanguage.Literal");
-                    	    							afterParserOrEnumRuleCall();
-                    	    						
-
-                    	    }
-
-
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop32;
-                        }
-                    } while (true);
-
-                    otherlv_12=(Token)match(input,19,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_12, grammarAccess.getConstraintAccess().getRightParenthesisKeyword_1_4());
-                    			
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleConstraint"
-
-
-    // $ANTLR start "entryRuleClosureType"
-    // InternalSolverLanguage.g:1730:1: entryRuleClosureType returns [EObject current=null] : iv_ruleClosureType= ruleClosureType EOF ;
-    public final EObject entryRuleClosureType() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleClosureType = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1730:52: (iv_ruleClosureType= ruleClosureType EOF )
-            // InternalSolverLanguage.g:1731:2: iv_ruleClosureType= ruleClosureType EOF
+            // InternalSolverLanguage.g:2241:2: (otherlv_0= '[' ( (lv_lowerBound_1_0= ruleExpression ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleExpression ) ) otherlv_4= ']' )
+            // InternalSolverLanguage.g:2242:3: otherlv_0= '[' ( (lv_lowerBound_1_0= ruleExpression ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleExpression ) ) otherlv_4= ']'
             {
-             newCompositeNode(grammarAccess.getClosureTypeRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleClosureType=ruleClosureType();
+            otherlv_0=(Token)match(input,36,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getIntervalAccess().getLeftSquareBracketKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:2246:3: ( (lv_lowerBound_1_0= ruleExpression ) )
+            // InternalSolverLanguage.g:2247:4: (lv_lowerBound_1_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:2247:4: (lv_lowerBound_1_0= ruleExpression )
+            // InternalSolverLanguage.g:2248:5: lv_lowerBound_1_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getIntervalAccess().getLowerBoundExpressionParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_37);
+            lv_lowerBound_1_0=ruleExpression();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-             current =iv_ruleClosureType; 
-            match(input,EOF,FOLLOW_2); 
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getIntervalRule());
+              					}
+              					set(
+              						current,
+              						"lowerBound",
+              						lv_lowerBound_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
-        }
 
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
             }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleClosureType"
 
+            otherlv_2=(Token)match(input,37,FOLLOW_6); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-    // $ANTLR start "ruleClosureType"
-    // InternalSolverLanguage.g:1737:1: ruleClosureType returns [EObject current=null] : ( ( () otherlv_1= '*' ) | ( () otherlv_3= '+' ) ) ;
-    public final EObject ruleClosureType() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-        Token otherlv_3=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1743:2: ( ( ( () otherlv_1= '*' ) | ( () otherlv_3= '+' ) ) )
-            // InternalSolverLanguage.g:1744:2: ( ( () otherlv_1= '*' ) | ( () otherlv_3= '+' ) )
+              			newLeafNode(otherlv_2, grammarAccess.getIntervalAccess().getFullStopFullStopKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:2269:3: ( (lv_upperBound_3_0= ruleExpression ) )
+            // InternalSolverLanguage.g:2270:4: (lv_upperBound_3_0= ruleExpression )
             {
-            // InternalSolverLanguage.g:1744:2: ( ( () otherlv_1= '*' ) | ( () otherlv_3= '+' ) )
-            int alt34=2;
-            int LA34_0 = input.LA(1);
+            // InternalSolverLanguage.g:2270:4: (lv_upperBound_3_0= ruleExpression )
+            // InternalSolverLanguage.g:2271:5: lv_upperBound_3_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
 
-            if ( (LA34_0==31) ) {
-                alt34=1;
+              					newCompositeNode(grammarAccess.getIntervalAccess().getUpperBoundExpressionParserRuleCall_3_0());
+              				
             }
-            else if ( (LA34_0==30) ) {
-                alt34=2;
+            pushFollow(FOLLOW_38);
+            lv_upperBound_3_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getIntervalRule());
+              					}
+              					set(
+              						current,
+              						"upperBound",
+              						lv_upperBound_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
             }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 34, 0, input);
-
-                throw nvae;
-            }
-            switch (alt34) {
-                case 1 :
-                    // InternalSolverLanguage.g:1745:3: ( () otherlv_1= '*' )
-                    {
-                    // InternalSolverLanguage.g:1745:3: ( () otherlv_1= '*' )
-                    // InternalSolverLanguage.g:1746:4: () otherlv_1= '*'
-                    {
-                    // InternalSolverLanguage.g:1746:4: ()
-                    // InternalSolverLanguage.g:1747:5: 
-                    {
-
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getClosureTypeAccess().getReflexiveClosureAction_0_0(),
-                    						current);
-                    				
-
-                    }
-
-                    otherlv_1=(Token)match(input,31,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_1, grammarAccess.getClosureTypeAccess().getAsteriskKeyword_0_1());
-                    			
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:1759:3: ( () otherlv_3= '+' )
-                    {
-                    // InternalSolverLanguage.g:1759:3: ( () otherlv_3= '+' )
-                    // InternalSolverLanguage.g:1760:4: () otherlv_3= '+'
-                    {
-                    // InternalSolverLanguage.g:1760:4: ()
-                    // InternalSolverLanguage.g:1761:5: 
-                    {
-
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getClosureTypeAccess().getIrreflexiveClosureAction_1_0(),
-                    						current);
-                    				
-
-                    }
-
-                    otherlv_3=(Token)match(input,30,FOLLOW_2); 
-
-                    				newLeafNode(otherlv_3, grammarAccess.getClosureTypeAccess().getPlusSignKeyword_1_1());
-                    			
-
-                    }
-
-
-                    }
-                    break;
 
             }
 
 
             }
 
+            otherlv_4=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              			newLeafNode(otherlv_4, grammarAccess.getIntervalAccess().getRightSquareBracketKeyword_4());
+              		
+            }
 
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
         }
 
             catch (RecognitionException re) {
@@ -5163,11 +6489,11 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleClosureType"
+    // $ANTLR end "ruleInterval"
 
 
     // $ANTLR start "entryRuleLiteral"
-    // InternalSolverLanguage.g:1776:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
+    // InternalSolverLanguage.g:2296:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
     public final EObject entryRuleLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -5175,17 +6501,21 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalSolverLanguage.g:1776:48: (iv_ruleLiteral= ruleLiteral EOF )
-            // InternalSolverLanguage.g:1777:2: iv_ruleLiteral= ruleLiteral EOF
+            // InternalSolverLanguage.g:2296:48: (iv_ruleLiteral= ruleLiteral EOF )
+            // InternalSolverLanguage.g:2297:2: iv_ruleLiteral= ruleLiteral EOF
             {
-             newCompositeNode(grammarAccess.getLiteralRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getLiteralRule()); 
+            }
             pushFollow(FOLLOW_1);
             iv_ruleLiteral=ruleLiteral();
 
             state._fsp--;
-
-             current =iv_ruleLiteral; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleLiteral; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -5203,105 +6533,175 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLiteral"
-    // InternalSolverLanguage.g:1783:1: ruleLiteral returns [EObject current=null] : (this_Variable_0= ruleVariable | this_DataObject_1= ruleDataObject | this_NamedObject_2= ruleNamedObject ) ;
+    // InternalSolverLanguage.g:2303:1: ruleLiteral returns [EObject current=null] : (this_LogicLiteral_0= ruleLogicLiteral | this_NumericLiteral_1= ruleNumericLiteral | this_InfinityLiteral_2= ruleInfinityLiteral | this_EmptyIntervalLiteral_3= ruleEmptyIntervalLiteral | this_StringLiteral_4= ruleStringLiteral ) ;
     public final EObject ruleLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject this_Variable_0 = null;
+        EObject this_LogicLiteral_0 = null;
 
-        EObject this_DataObject_1 = null;
+        EObject this_NumericLiteral_1 = null;
 
-        EObject this_NamedObject_2 = null;
+        EObject this_InfinityLiteral_2 = null;
+
+        EObject this_EmptyIntervalLiteral_3 = null;
+
+        EObject this_StringLiteral_4 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1789:2: ( (this_Variable_0= ruleVariable | this_DataObject_1= ruleDataObject | this_NamedObject_2= ruleNamedObject ) )
-            // InternalSolverLanguage.g:1790:2: (this_Variable_0= ruleVariable | this_DataObject_1= ruleDataObject | this_NamedObject_2= ruleNamedObject )
+            // InternalSolverLanguage.g:2309:2: ( (this_LogicLiteral_0= ruleLogicLiteral | this_NumericLiteral_1= ruleNumericLiteral | this_InfinityLiteral_2= ruleInfinityLiteral | this_EmptyIntervalLiteral_3= ruleEmptyIntervalLiteral | this_StringLiteral_4= ruleStringLiteral ) )
+            // InternalSolverLanguage.g:2310:2: (this_LogicLiteral_0= ruleLogicLiteral | this_NumericLiteral_1= ruleNumericLiteral | this_InfinityLiteral_2= ruleInfinityLiteral | this_EmptyIntervalLiteral_3= ruleEmptyIntervalLiteral | this_StringLiteral_4= ruleStringLiteral )
             {
-            // InternalSolverLanguage.g:1790:2: (this_Variable_0= ruleVariable | this_DataObject_1= ruleDataObject | this_NamedObject_2= ruleNamedObject )
-            int alt35=3;
+            // InternalSolverLanguage.g:2310:2: (this_LogicLiteral_0= ruleLogicLiteral | this_NumericLiteral_1= ruleNumericLiteral | this_InfinityLiteral_2= ruleInfinityLiteral | this_EmptyIntervalLiteral_3= ruleEmptyIntervalLiteral | this_StringLiteral_4= ruleStringLiteral )
+            int alt26=5;
             switch ( input.LA(1) ) {
-            case RULE_ID:
+            case 19:
+            case 70:
+            case 71:
+            case 72:
                 {
-                alt35=1;
+                alt26=1;
                 }
                 break;
             case RULE_INT:
-            case RULE_STRING:
-            case 11:
-            case 13:
-            case 14:
                 {
-                alt35=2;
+                alt26=2;
                 }
                 break;
-            case 27:
+            case 39:
                 {
-                alt35=3;
+                alt26=3;
+                }
+                break;
+            case 40:
+                {
+                alt26=4;
+                }
+                break;
+            case RULE_STRING:
+                {
+                alt26=5;
                 }
                 break;
             default:
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 35, 0, input);
+                    new NoViableAltException("", 26, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt35) {
+            switch (alt26) {
                 case 1 :
-                    // InternalSolverLanguage.g:1791:3: this_Variable_0= ruleVariable
+                    // InternalSolverLanguage.g:2311:3: this_LogicLiteral_0= ruleLogicLiteral
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getLiteralAccess().getVariableParserRuleCall_0());
-                    		
+                      			newCompositeNode(grammarAccess.getLiteralAccess().getLogicLiteralParserRuleCall_0());
+                      		
+                    }
                     pushFollow(FOLLOW_2);
-                    this_Variable_0=ruleVariable();
+                    this_LogicLiteral_0=ruleLogicLiteral();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    			current = this_Variable_0;
-                    			afterParserOrEnumRuleCall();
-                    		
+                      			current = this_LogicLiteral_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
                 case 2 :
-                    // InternalSolverLanguage.g:1800:3: this_DataObject_1= ruleDataObject
+                    // InternalSolverLanguage.g:2320:3: this_NumericLiteral_1= ruleNumericLiteral
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getLiteralAccess().getDataObjectParserRuleCall_1());
-                    		
+                      			newCompositeNode(grammarAccess.getLiteralAccess().getNumericLiteralParserRuleCall_1());
+                      		
+                    }
                     pushFollow(FOLLOW_2);
-                    this_DataObject_1=ruleDataObject();
+                    this_NumericLiteral_1=ruleNumericLiteral();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    			current = this_DataObject_1;
-                    			afterParserOrEnumRuleCall();
-                    		
+                      			current = this_NumericLiteral_1;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
                 case 3 :
-                    // InternalSolverLanguage.g:1809:3: this_NamedObject_2= ruleNamedObject
+                    // InternalSolverLanguage.g:2329:3: this_InfinityLiteral_2= ruleInfinityLiteral
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			newCompositeNode(grammarAccess.getLiteralAccess().getNamedObjectParserRuleCall_2());
-                    		
+                      			newCompositeNode(grammarAccess.getLiteralAccess().getInfinityLiteralParserRuleCall_2());
+                      		
+                    }
                     pushFollow(FOLLOW_2);
-                    this_NamedObject_2=ruleNamedObject();
+                    this_InfinityLiteral_2=ruleInfinityLiteral();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
+                      			current = this_InfinityLiteral_2;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
-                    			current = this_NamedObject_2;
-                    			afterParserOrEnumRuleCall();
-                    		
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:2338:3: this_EmptyIntervalLiteral_3= ruleEmptyIntervalLiteral
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getLiteralAccess().getEmptyIntervalLiteralParserRuleCall_3());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_EmptyIntervalLiteral_3=ruleEmptyIntervalLiteral();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_EmptyIntervalLiteral_3;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 5 :
+                    // InternalSolverLanguage.g:2347:3: this_StringLiteral_4= ruleStringLiteral
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_4());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_StringLiteral_4=ruleStringLiteral();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_StringLiteral_4;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
@@ -5311,9 +6711,11 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -5327,26 +6729,30 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleLiteral"
 
 
-    // $ANTLR start "entryRuleVariable"
-    // InternalSolverLanguage.g:1821:1: entryRuleVariable returns [EObject current=null] : iv_ruleVariable= ruleVariable EOF ;
-    public final EObject entryRuleVariable() throws RecognitionException {
+    // $ANTLR start "entryRuleLogicLiteral"
+    // InternalSolverLanguage.g:2359:1: entryRuleLogicLiteral returns [EObject current=null] : iv_ruleLogicLiteral= ruleLogicLiteral EOF ;
+    public final EObject entryRuleLogicLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleVariable = null;
+        EObject iv_ruleLogicLiteral = null;
 
 
         try {
-            // InternalSolverLanguage.g:1821:49: (iv_ruleVariable= ruleVariable EOF )
-            // InternalSolverLanguage.g:1822:2: iv_ruleVariable= ruleVariable EOF
+            // InternalSolverLanguage.g:2359:53: (iv_ruleLogicLiteral= ruleLogicLiteral EOF )
+            // InternalSolverLanguage.g:2360:2: iv_ruleLogicLiteral= ruleLogicLiteral EOF
             {
-             newCompositeNode(grammarAccess.getVariableRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getLogicLiteralRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleVariable=ruleVariable();
+            iv_ruleLogicLiteral=ruleLogicLiteral();
 
             state._fsp--;
-
-             current =iv_ruleVariable; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleLogicLiteral; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -5360,152 +6766,53 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleVariable"
+    // $ANTLR end "entryRuleLogicLiteral"
 
 
-    // $ANTLR start "ruleVariable"
-    // InternalSolverLanguage.g:1828:1: ruleVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final EObject ruleVariable() throws RecognitionException {
+    // $ANTLR start "ruleLogicLiteral"
+    // InternalSolverLanguage.g:2366:1: ruleLogicLiteral returns [EObject current=null] : ( (lv_value_0_0= ruleLogicValue ) ) ;
+    public final EObject ruleLogicLiteral() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSolverLanguage.g:1834:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalSolverLanguage.g:1835:2: ( (lv_name_0_0= RULE_ID ) )
-            {
-            // InternalSolverLanguage.g:1835:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalSolverLanguage.g:1836:3: (lv_name_0_0= RULE_ID )
-            {
-            // InternalSolverLanguage.g:1836:3: (lv_name_0_0= RULE_ID )
-            // InternalSolverLanguage.g:1837:4: lv_name_0_0= RULE_ID
-            {
-            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
-
-            				newLeafNode(lv_name_0_0, grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0());
-            			
-
-            				if (current==null) {
-            					current = createModelElement(grammarAccess.getVariableRule());
-            				}
-            				setWithLastConsumed(
-            					current,
-            					"name",
-            					lv_name_0_0,
-            					"org.eclipse.xtext.common.Terminals.ID");
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleVariable"
-
-
-    // $ANTLR start "entryRuleAllInstances"
-    // InternalSolverLanguage.g:1856:1: entryRuleAllInstances returns [EObject current=null] : iv_ruleAllInstances= ruleAllInstances EOF ;
-    public final EObject entryRuleAllInstances() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleAllInstances = null;
-
-
-        try {
-            // InternalSolverLanguage.g:1856:53: (iv_ruleAllInstances= ruleAllInstances EOF )
-            // InternalSolverLanguage.g:1857:2: iv_ruleAllInstances= ruleAllInstances EOF
-            {
-             newCompositeNode(grammarAccess.getAllInstancesRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleAllInstances=ruleAllInstances();
-
-            state._fsp--;
-
-             current =iv_ruleAllInstances; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleAllInstances"
-
-
-    // $ANTLR start "ruleAllInstances"
-    // InternalSolverLanguage.g:1863:1: ruleAllInstances returns [EObject current=null] : (otherlv_0= ':' ( (lv_symbol_1_0= ruleSymbol ) ) ) ;
-    public final EObject ruleAllInstances() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_0=null;
-        EObject lv_symbol_1_0 = null;
+        Enumerator lv_value_0_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1869:2: ( (otherlv_0= ':' ( (lv_symbol_1_0= ruleSymbol ) ) ) )
-            // InternalSolverLanguage.g:1870:2: (otherlv_0= ':' ( (lv_symbol_1_0= ruleSymbol ) ) )
+            // InternalSolverLanguage.g:2372:2: ( ( (lv_value_0_0= ruleLogicValue ) ) )
+            // InternalSolverLanguage.g:2373:2: ( (lv_value_0_0= ruleLogicValue ) )
             {
-            // InternalSolverLanguage.g:1870:2: (otherlv_0= ':' ( (lv_symbol_1_0= ruleSymbol ) ) )
-            // InternalSolverLanguage.g:1871:3: otherlv_0= ':' ( (lv_symbol_1_0= ruleSymbol ) )
+            // InternalSolverLanguage.g:2373:2: ( (lv_value_0_0= ruleLogicValue ) )
+            // InternalSolverLanguage.g:2374:3: (lv_value_0_0= ruleLogicValue )
             {
-            otherlv_0=(Token)match(input,20,FOLLOW_21); 
+            // InternalSolverLanguage.g:2374:3: (lv_value_0_0= ruleLogicValue )
+            // InternalSolverLanguage.g:2375:4: lv_value_0_0= ruleLogicValue
+            {
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_0, grammarAccess.getAllInstancesAccess().getColonKeyword_0());
-            		
-            // InternalSolverLanguage.g:1875:3: ( (lv_symbol_1_0= ruleSymbol ) )
-            // InternalSolverLanguage.g:1876:4: (lv_symbol_1_0= ruleSymbol )
-            {
-            // InternalSolverLanguage.g:1876:4: (lv_symbol_1_0= ruleSymbol )
-            // InternalSolverLanguage.g:1877:5: lv_symbol_1_0= ruleSymbol
-            {
-
-            					newCompositeNode(grammarAccess.getAllInstancesAccess().getSymbolSymbolParserRuleCall_1_0());
-            				
+              				newCompositeNode(grammarAccess.getLogicLiteralAccess().getValueLogicValueEnumRuleCall_0());
+              			
+            }
             pushFollow(FOLLOW_2);
-            lv_symbol_1_0=ruleSymbol();
+            lv_value_0_0=ruleLogicValue();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getAllInstancesRule());
-            					}
-            					set(
-            						current,
-            						"symbol",
-            						lv_symbol_1_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
-            					afterParserOrEnumRuleCall();
-            				
+              				if (current==null) {
+              					current = createModelElementForParent(grammarAccess.getLogicLiteralRule());
+              				}
+              				set(
+              					current,
+              					"value",
+              					lv_value_0_0,
+              					"org.eclipse.viatra.solver.language.SolverLanguage.LogicValue");
+              				afterParserOrEnumRuleCall();
+              			
+            }
 
             }
 
@@ -5515,12 +6822,11 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
 
             }
-
-
-            	leaveRule();
-
         }
 
             catch (RecognitionException re) {
@@ -5531,29 +6837,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleAllInstances"
+    // $ANTLR end "ruleLogicLiteral"
 
 
-    // $ANTLR start "entryRuleAllObjects"
-    // InternalSolverLanguage.g:1898:1: entryRuleAllObjects returns [EObject current=null] : iv_ruleAllObjects= ruleAllObjects EOF ;
-    public final EObject entryRuleAllObjects() throws RecognitionException {
+    // $ANTLR start "entryRuleNumericLiteral"
+    // InternalSolverLanguage.g:2395:1: entryRuleNumericLiteral returns [EObject current=null] : iv_ruleNumericLiteral= ruleNumericLiteral EOF ;
+    public final EObject entryRuleNumericLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleAllObjects = null;
+        EObject iv_ruleNumericLiteral = null;
 
 
         try {
-            // InternalSolverLanguage.g:1898:51: (iv_ruleAllObjects= ruleAllObjects EOF )
-            // InternalSolverLanguage.g:1899:2: iv_ruleAllObjects= ruleAllObjects EOF
+            // InternalSolverLanguage.g:2395:55: (iv_ruleNumericLiteral= ruleNumericLiteral EOF )
+            // InternalSolverLanguage.g:2396:2: iv_ruleNumericLiteral= ruleNumericLiteral EOF
             {
-             newCompositeNode(grammarAccess.getAllObjectsRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getNumericLiteralRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleAllObjects=ruleAllObjects();
+            iv_ruleNumericLiteral=ruleNumericLiteral();
 
             state._fsp--;
-
-             current =iv_ruleAllObjects; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleNumericLiteral; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -5567,12 +6877,123 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleAllObjects"
+    // $ANTLR end "entryRuleNumericLiteral"
 
 
-    // $ANTLR start "ruleAllObjects"
-    // InternalSolverLanguage.g:1905:1: ruleAllObjects returns [EObject current=null] : ( () otherlv_1= '*' ) ;
-    public final EObject ruleAllObjects() throws RecognitionException {
+    // $ANTLR start "ruleNumericLiteral"
+    // InternalSolverLanguage.g:2402:1: ruleNumericLiteral returns [EObject current=null] : ( (lv_value_0_0= ruleReal ) ) ;
+    public final EObject ruleNumericLiteral() throws RecognitionException {
+        EObject current = null;
+
+        AntlrDatatypeRuleToken lv_value_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2408:2: ( ( (lv_value_0_0= ruleReal ) ) )
+            // InternalSolverLanguage.g:2409:2: ( (lv_value_0_0= ruleReal ) )
+            {
+            // InternalSolverLanguage.g:2409:2: ( (lv_value_0_0= ruleReal ) )
+            // InternalSolverLanguage.g:2410:3: (lv_value_0_0= ruleReal )
+            {
+            // InternalSolverLanguage.g:2410:3: (lv_value_0_0= ruleReal )
+            // InternalSolverLanguage.g:2411:4: lv_value_0_0= ruleReal
+            {
+            if ( state.backtracking==0 ) {
+
+              				newCompositeNode(grammarAccess.getNumericLiteralAccess().getValueRealParserRuleCall_0());
+              			
+            }
+            pushFollow(FOLLOW_2);
+            lv_value_0_0=ruleReal();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              				if (current==null) {
+              					current = createModelElementForParent(grammarAccess.getNumericLiteralRule());
+              				}
+              				set(
+              					current,
+              					"value",
+              					lv_value_0_0,
+              					"org.eclipse.viatra.solver.language.SolverLanguage.Real");
+              				afterParserOrEnumRuleCall();
+              			
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleNumericLiteral"
+
+
+    // $ANTLR start "entryRuleInfinityLiteral"
+    // InternalSolverLanguage.g:2431:1: entryRuleInfinityLiteral returns [EObject current=null] : iv_ruleInfinityLiteral= ruleInfinityLiteral EOF ;
+    public final EObject entryRuleInfinityLiteral() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleInfinityLiteral = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2431:56: (iv_ruleInfinityLiteral= ruleInfinityLiteral EOF )
+            // InternalSolverLanguage.g:2432:2: iv_ruleInfinityLiteral= ruleInfinityLiteral EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getInfinityLiteralRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleInfinityLiteral=ruleInfinityLiteral();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleInfinityLiteral; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleInfinityLiteral"
+
+
+    // $ANTLR start "ruleInfinityLiteral"
+    // InternalSolverLanguage.g:2438:1: ruleInfinityLiteral returns [EObject current=null] : ( () otherlv_1= 'inf' ) ;
+    public final EObject ruleInfinityLiteral() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -5581,36 +7002,42 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1911:2: ( ( () otherlv_1= '*' ) )
-            // InternalSolverLanguage.g:1912:2: ( () otherlv_1= '*' )
+            // InternalSolverLanguage.g:2444:2: ( ( () otherlv_1= 'inf' ) )
+            // InternalSolverLanguage.g:2445:2: ( () otherlv_1= 'inf' )
             {
-            // InternalSolverLanguage.g:1912:2: ( () otherlv_1= '*' )
-            // InternalSolverLanguage.g:1913:3: () otherlv_1= '*'
+            // InternalSolverLanguage.g:2445:2: ( () otherlv_1= 'inf' )
+            // InternalSolverLanguage.g:2446:3: () otherlv_1= 'inf'
             {
-            // InternalSolverLanguage.g:1913:3: ()
-            // InternalSolverLanguage.g:1914:4: 
+            // InternalSolverLanguage.g:2446:3: ()
+            // InternalSolverLanguage.g:2447:4: 
             {
+            if ( state.backtracking==0 ) {
 
-            				current = forceCreateModelElement(
-            					grammarAccess.getAllObjectsAccess().getAllObjectsAction_0(),
-            					current);
-            			
+              				current = forceCreateModelElement(
+              					grammarAccess.getInfinityLiteralAccess().getInfinityLiteralAction_0(),
+              					current);
+              			
+            }
 
             }
 
-            otherlv_1=(Token)match(input,31,FOLLOW_2); 
+            otherlv_1=(Token)match(input,39,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_1, grammarAccess.getAllObjectsAccess().getAsteriskKeyword_1());
-            		
+              			newLeafNode(otherlv_1, grammarAccess.getInfinityLiteralAccess().getInfKeyword_1());
+              		
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -5621,29 +7048,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleAllObjects"
+    // $ANTLR end "ruleInfinityLiteral"
 
 
-    // $ANTLR start "entryRuleDefaultInterpretation"
-    // InternalSolverLanguage.g:1928:1: entryRuleDefaultInterpretation returns [EObject current=null] : iv_ruleDefaultInterpretation= ruleDefaultInterpretation EOF ;
-    public final EObject entryRuleDefaultInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleEmptyIntervalLiteral"
+    // InternalSolverLanguage.g:2461:1: entryRuleEmptyIntervalLiteral returns [EObject current=null] : iv_ruleEmptyIntervalLiteral= ruleEmptyIntervalLiteral EOF ;
+    public final EObject entryRuleEmptyIntervalLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleDefaultInterpretation = null;
+        EObject iv_ruleEmptyIntervalLiteral = null;
 
 
         try {
-            // InternalSolverLanguage.g:1928:62: (iv_ruleDefaultInterpretation= ruleDefaultInterpretation EOF )
-            // InternalSolverLanguage.g:1929:2: iv_ruleDefaultInterpretation= ruleDefaultInterpretation EOF
+            // InternalSolverLanguage.g:2461:61: (iv_ruleEmptyIntervalLiteral= ruleEmptyIntervalLiteral EOF )
+            // InternalSolverLanguage.g:2462:2: iv_ruleEmptyIntervalLiteral= ruleEmptyIntervalLiteral EOF
             {
-             newCompositeNode(grammarAccess.getDefaultInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getEmptyIntervalLiteralRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleDefaultInterpretation=ruleDefaultInterpretation();
+            iv_ruleEmptyIntervalLiteral=ruleEmptyIntervalLiteral();
 
             state._fsp--;
-
-             current =iv_ruleDefaultInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleEmptyIntervalLiteral; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -5657,72 +7088,56 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleDefaultInterpretation"
+    // $ANTLR end "entryRuleEmptyIntervalLiteral"
 
 
-    // $ANTLR start "ruleDefaultInterpretation"
-    // InternalSolverLanguage.g:1935:1: ruleDefaultInterpretation returns [EObject current=null] : (otherlv_0= 'default' ( (lv_interpretation_1_0= ruleBasicInterpretation ) ) ) ;
-    public final EObject ruleDefaultInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleEmptyIntervalLiteral"
+    // InternalSolverLanguage.g:2468:1: ruleEmptyIntervalLiteral returns [EObject current=null] : ( () otherlv_1= 'empty' ) ;
+    public final EObject ruleEmptyIntervalLiteral() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_0=null;
-        EObject lv_interpretation_1_0 = null;
-
+        Token otherlv_1=null;
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1941:2: ( (otherlv_0= 'default' ( (lv_interpretation_1_0= ruleBasicInterpretation ) ) ) )
-            // InternalSolverLanguage.g:1942:2: (otherlv_0= 'default' ( (lv_interpretation_1_0= ruleBasicInterpretation ) ) )
+            // InternalSolverLanguage.g:2474:2: ( ( () otherlv_1= 'empty' ) )
+            // InternalSolverLanguage.g:2475:2: ( () otherlv_1= 'empty' )
             {
-            // InternalSolverLanguage.g:1942:2: (otherlv_0= 'default' ( (lv_interpretation_1_0= ruleBasicInterpretation ) ) )
-            // InternalSolverLanguage.g:1943:3: otherlv_0= 'default' ( (lv_interpretation_1_0= ruleBasicInterpretation ) )
+            // InternalSolverLanguage.g:2475:2: ( () otherlv_1= 'empty' )
+            // InternalSolverLanguage.g:2476:3: () otherlv_1= 'empty'
             {
-            otherlv_0=(Token)match(input,32,FOLLOW_21); 
-
-            			newLeafNode(otherlv_0, grammarAccess.getDefaultInterpretationAccess().getDefaultKeyword_0());
-            		
-            // InternalSolverLanguage.g:1947:3: ( (lv_interpretation_1_0= ruleBasicInterpretation ) )
-            // InternalSolverLanguage.g:1948:4: (lv_interpretation_1_0= ruleBasicInterpretation )
+            // InternalSolverLanguage.g:2476:3: ()
+            // InternalSolverLanguage.g:2477:4: 
             {
-            // InternalSolverLanguage.g:1948:4: (lv_interpretation_1_0= ruleBasicInterpretation )
-            // InternalSolverLanguage.g:1949:5: lv_interpretation_1_0= ruleBasicInterpretation
-            {
+            if ( state.backtracking==0 ) {
 
-            					newCompositeNode(grammarAccess.getDefaultInterpretationAccess().getInterpretationBasicInterpretationParserRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_interpretation_1_0=ruleBasicInterpretation();
+              				current = forceCreateModelElement(
+              					grammarAccess.getEmptyIntervalLiteralAccess().getEmptyIntervalLiteralAction_0(),
+              					current);
+              			
+            }
 
-            state._fsp--;
+            }
 
+            otherlv_1=(Token)match(input,40,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getDefaultInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"interpretation",
-            						lv_interpretation_1_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.BasicInterpretation");
-            					afterParserOrEnumRuleCall();
-            				
+              			newLeafNode(otherlv_1, grammarAccess.getEmptyIntervalLiteralAccess().getEmptyKeyword_1());
+              		
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
 
             }
-
-
-            }
-
-
-            	leaveRule();
-
         }
 
             catch (RecognitionException re) {
@@ -5733,29 +7148,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleDefaultInterpretation"
+    // $ANTLR end "ruleEmptyIntervalLiteral"
 
 
-    // $ANTLR start "entryRuleCDInterpretation"
-    // InternalSolverLanguage.g:1970:1: entryRuleCDInterpretation returns [EObject current=null] : iv_ruleCDInterpretation= ruleCDInterpretation EOF ;
-    public final EObject entryRuleCDInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleStringLiteral"
+    // InternalSolverLanguage.g:2491:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    public final EObject entryRuleStringLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleCDInterpretation = null;
+        EObject iv_ruleStringLiteral = null;
 
 
         try {
-            // InternalSolverLanguage.g:1970:57: (iv_ruleCDInterpretation= ruleCDInterpretation EOF )
-            // InternalSolverLanguage.g:1971:2: iv_ruleCDInterpretation= ruleCDInterpretation EOF
+            // InternalSolverLanguage.g:2491:54: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // InternalSolverLanguage.g:2492:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
-             newCompositeNode(grammarAccess.getCDInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getStringLiteralRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleCDInterpretation=ruleCDInterpretation();
+            iv_ruleStringLiteral=ruleStringLiteral();
 
             state._fsp--;
-
-             current =iv_ruleCDInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleStringLiteral; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -5769,110 +7188,47 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleCDInterpretation"
+    // $ANTLR end "entryRuleStringLiteral"
 
 
-    // $ANTLR start "ruleCDInterpretation"
-    // InternalSolverLanguage.g:1977:1: ruleCDInterpretation returns [EObject current=null] : (this_ClassInterpretation_0= ruleClassInterpretation | this_EnumInterpretation_1= ruleEnumInterpretation | this_GlobalRelationInterpretation_2= ruleGlobalRelationInterpretation ) ;
-    public final EObject ruleCDInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleStringLiteral"
+    // InternalSolverLanguage.g:2498:1: ruleStringLiteral returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    public final EObject ruleStringLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject this_ClassInterpretation_0 = null;
-
-        EObject this_EnumInterpretation_1 = null;
-
-        EObject this_GlobalRelationInterpretation_2 = null;
-
+        Token lv_value_0_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:1983:2: ( (this_ClassInterpretation_0= ruleClassInterpretation | this_EnumInterpretation_1= ruleEnumInterpretation | this_GlobalRelationInterpretation_2= ruleGlobalRelationInterpretation ) )
-            // InternalSolverLanguage.g:1984:2: (this_ClassInterpretation_0= ruleClassInterpretation | this_EnumInterpretation_1= ruleEnumInterpretation | this_GlobalRelationInterpretation_2= ruleGlobalRelationInterpretation )
+            // InternalSolverLanguage.g:2504:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalSolverLanguage.g:2505:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalSolverLanguage.g:1984:2: (this_ClassInterpretation_0= ruleClassInterpretation | this_EnumInterpretation_1= ruleEnumInterpretation | this_GlobalRelationInterpretation_2= ruleGlobalRelationInterpretation )
-            int alt36=3;
-            switch ( input.LA(1) ) {
-            case 33:
-            case 34:
-                {
-                alt36=1;
-                }
-                break;
-            case 38:
-                {
-                alt36=2;
-                }
-                break;
-            case 39:
-            case 40:
-                {
-                alt36=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 36, 0, input);
+            // InternalSolverLanguage.g:2505:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalSolverLanguage.g:2506:3: (lv_value_0_0= RULE_STRING )
+            {
+            // InternalSolverLanguage.g:2506:3: (lv_value_0_0= RULE_STRING )
+            // InternalSolverLanguage.g:2507:4: lv_value_0_0= RULE_STRING
+            {
+            lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                throw nvae;
+              				newLeafNode(lv_value_0_0, grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_0());
+              			
             }
+            if ( state.backtracking==0 ) {
 
-            switch (alt36) {
-                case 1 :
-                    // InternalSolverLanguage.g:1985:3: this_ClassInterpretation_0= ruleClassInterpretation
-                    {
-
-                    			newCompositeNode(grammarAccess.getCDInterpretationAccess().getClassInterpretationParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_ClassInterpretation_0=ruleClassInterpretation();
-
-                    state._fsp--;
-
-
-                    			current = this_ClassInterpretation_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSolverLanguage.g:1994:3: this_EnumInterpretation_1= ruleEnumInterpretation
-                    {
-
-                    			newCompositeNode(grammarAccess.getCDInterpretationAccess().getEnumInterpretationParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_EnumInterpretation_1=ruleEnumInterpretation();
-
-                    state._fsp--;
-
-
-                    			current = this_EnumInterpretation_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSolverLanguage.g:2003:3: this_GlobalRelationInterpretation_2= ruleGlobalRelationInterpretation
-                    {
-
-                    			newCompositeNode(grammarAccess.getCDInterpretationAccess().getGlobalRelationInterpretationParserRuleCall_2());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_GlobalRelationInterpretation_2=ruleGlobalRelationInterpretation();
-
-                    state._fsp--;
-
-
-                    			current = this_GlobalRelationInterpretation_2;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
+              				if (current==null) {
+              					current = createModelElement(grammarAccess.getStringLiteralRule());
+              				}
+              				setWithLastConsumed(
+              					current,
+              					"value",
+              					lv_value_0_0,
+              					"org.eclipse.viatra.solver.language.SolverLanguage.STRING");
+              			
+            }
 
             }
 
@@ -5880,8 +7236,13 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
             }
 
 
-            	leaveRule();
+            }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
         }
 
             catch (RecognitionException re) {
@@ -5892,29 +7253,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleCDInterpretation"
+    // $ANTLR end "ruleStringLiteral"
 
 
-    // $ANTLR start "entryRuleClassInterpretation"
-    // InternalSolverLanguage.g:2015:1: entryRuleClassInterpretation returns [EObject current=null] : iv_ruleClassInterpretation= ruleClassInterpretation EOF ;
-    public final EObject entryRuleClassInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleClassDefinition"
+    // InternalSolverLanguage.g:2526:1: entryRuleClassDefinition returns [EObject current=null] : iv_ruleClassDefinition= ruleClassDefinition EOF ;
+    public final EObject entryRuleClassDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleClassInterpretation = null;
+        EObject iv_ruleClassDefinition = null;
 
 
         try {
-            // InternalSolverLanguage.g:2015:60: (iv_ruleClassInterpretation= ruleClassInterpretation EOF )
-            // InternalSolverLanguage.g:2016:2: iv_ruleClassInterpretation= ruleClassInterpretation EOF
+            // InternalSolverLanguage.g:2526:56: (iv_ruleClassDefinition= ruleClassDefinition EOF )
+            // InternalSolverLanguage.g:2527:2: iv_ruleClassDefinition= ruleClassDefinition EOF
             {
-             newCompositeNode(grammarAccess.getClassInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getClassDefinitionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleClassInterpretation=ruleClassInterpretation();
+            iv_ruleClassDefinition=ruleClassDefinition();
 
             state._fsp--;
-
-             current =iv_ruleClassInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleClassDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -5928,60 +7293,62 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleClassInterpretation"
+    // $ANTLR end "entryRuleClassDefinition"
 
 
-    // $ANTLR start "ruleClassInterpretation"
-    // InternalSolverLanguage.g:2022:1: ruleClassInterpretation returns [EObject current=null] : ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_symbol_2_0= ruleModelSymbol ) ) (otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+ )? otherlv_5= '{' ( (lv_fielt_6_0= ruleFieldRelationInterpretation ) )* otherlv_7= '}' ) ;
-    public final EObject ruleClassInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleClassDefinition"
+    // InternalSolverLanguage.g:2533:1: ruleClassDefinition returns [EObject current=null] : ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )* )? otherlv_7= '{' ( (lv_members_8_0= ruleMemberDefinition ) )* otherlv_9= '}' ) ;
+    public final EObject ruleClassDefinition() throws RecognitionException {
         EObject current = null;
 
         Token lv_abstract_0_0=null;
         Token otherlv_1=null;
+        Token lv_name_2_0=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
         Token otherlv_7=null;
-        EObject lv_symbol_2_0 = null;
-
-        EObject lv_supertypes_4_0 = null;
-
-        EObject lv_fielt_6_0 = null;
+        Token otherlv_9=null;
+        EObject lv_members_8_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:2028:2: ( ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_symbol_2_0= ruleModelSymbol ) ) (otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+ )? otherlv_5= '{' ( (lv_fielt_6_0= ruleFieldRelationInterpretation ) )* otherlv_7= '}' ) )
-            // InternalSolverLanguage.g:2029:2: ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_symbol_2_0= ruleModelSymbol ) ) (otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+ )? otherlv_5= '{' ( (lv_fielt_6_0= ruleFieldRelationInterpretation ) )* otherlv_7= '}' )
+            // InternalSolverLanguage.g:2539:2: ( ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )* )? otherlv_7= '{' ( (lv_members_8_0= ruleMemberDefinition ) )* otherlv_9= '}' ) )
+            // InternalSolverLanguage.g:2540:2: ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )* )? otherlv_7= '{' ( (lv_members_8_0= ruleMemberDefinition ) )* otherlv_9= '}' )
             {
-            // InternalSolverLanguage.g:2029:2: ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_symbol_2_0= ruleModelSymbol ) ) (otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+ )? otherlv_5= '{' ( (lv_fielt_6_0= ruleFieldRelationInterpretation ) )* otherlv_7= '}' )
-            // InternalSolverLanguage.g:2030:3: ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_symbol_2_0= ruleModelSymbol ) ) (otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+ )? otherlv_5= '{' ( (lv_fielt_6_0= ruleFieldRelationInterpretation ) )* otherlv_7= '}'
+            // InternalSolverLanguage.g:2540:2: ( ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )* )? otherlv_7= '{' ( (lv_members_8_0= ruleMemberDefinition ) )* otherlv_9= '}' )
+            // InternalSolverLanguage.g:2541:3: ( (lv_abstract_0_0= 'abstract' ) )? otherlv_1= 'class' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )* )? otherlv_7= '{' ( (lv_members_8_0= ruleMemberDefinition ) )* otherlv_9= '}'
             {
-            // InternalSolverLanguage.g:2030:3: ( (lv_abstract_0_0= 'abstract' ) )?
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            // InternalSolverLanguage.g:2541:3: ( (lv_abstract_0_0= 'abstract' ) )?
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA37_0==33) ) {
-                alt37=1;
+            if ( (LA27_0==41) ) {
+                alt27=1;
             }
-            switch (alt37) {
+            switch (alt27) {
                 case 1 :
-                    // InternalSolverLanguage.g:2031:4: (lv_abstract_0_0= 'abstract' )
+                    // InternalSolverLanguage.g:2542:4: (lv_abstract_0_0= 'abstract' )
                     {
-                    // InternalSolverLanguage.g:2031:4: (lv_abstract_0_0= 'abstract' )
-                    // InternalSolverLanguage.g:2032:5: lv_abstract_0_0= 'abstract'
+                    // InternalSolverLanguage.g:2542:4: (lv_abstract_0_0= 'abstract' )
+                    // InternalSolverLanguage.g:2543:5: lv_abstract_0_0= 'abstract'
                     {
-                    lv_abstract_0_0=(Token)match(input,33,FOLLOW_27); 
+                    lv_abstract_0_0=(Token)match(input,41,FOLLOW_39); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    					newLeafNode(lv_abstract_0_0, grammarAccess.getClassInterpretationAccess().getAbstractAbstractKeyword_0_0());
-                    				
+                      					newLeafNode(lv_abstract_0_0, grammarAccess.getClassDefinitionAccess().getAbstractAbstractKeyword_0_0());
+                      				
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    					if (current==null) {
-                    						current = createModelElement(grammarAccess.getClassInterpretationRule());
-                    					}
-                    					setWithLastConsumed(current, "abstract", true, "abstract");
-                    				
+                      					if (current==null) {
+                      						current = createModelElement(grammarAccess.getClassDefinitionRule());
+                      					}
+                      					setWithLastConsumed(current, "abstract", true, "abstract");
+                      				
+                    }
 
                     }
 
@@ -5991,94 +7358,145 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,34,FOLLOW_12); 
+            otherlv_1=(Token)match(input,42,FOLLOW_40); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_1, grammarAccess.getClassInterpretationAccess().getClassKeyword_1());
-            		
-            // InternalSolverLanguage.g:2048:3: ( (lv_symbol_2_0= ruleModelSymbol ) )
-            // InternalSolverLanguage.g:2049:4: (lv_symbol_2_0= ruleModelSymbol )
+              			newLeafNode(otherlv_1, grammarAccess.getClassDefinitionAccess().getClassKeyword_1());
+              		
+            }
+            // InternalSolverLanguage.g:2559:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalSolverLanguage.g:2560:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalSolverLanguage.g:2049:4: (lv_symbol_2_0= ruleModelSymbol )
-            // InternalSolverLanguage.g:2050:5: lv_symbol_2_0= ruleModelSymbol
+            // InternalSolverLanguage.g:2560:4: (lv_name_2_0= RULE_ID )
+            // InternalSolverLanguage.g:2561:5: lv_name_2_0= RULE_ID
             {
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_41); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            					newCompositeNode(grammarAccess.getClassInterpretationAccess().getSymbolModelSymbolParserRuleCall_2_0());
-            				
-            pushFollow(FOLLOW_28);
-            lv_symbol_2_0=ruleModelSymbol();
+              					newLeafNode(lv_name_2_0, grammarAccess.getClassDefinitionAccess().getNameIDTerminalRuleCall_2_0());
+              				
+            }
+            if ( state.backtracking==0 ) {
 
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getClassInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"symbol",
-            						lv_symbol_2_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-            					afterParserOrEnumRuleCall();
-            				
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getClassDefinitionRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"name",
+              						lv_name_2_0,
+              						"org.eclipse.xtext.common.Terminals.ID");
+              				
+            }
 
             }
 
 
             }
 
-            // InternalSolverLanguage.g:2067:3: (otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+ )?
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            // InternalSolverLanguage.g:2577:3: (otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )* )?
+            int alt29=2;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA39_0==35) ) {
-                alt39=1;
+            if ( (LA29_0==43) ) {
+                alt29=1;
             }
-            switch (alt39) {
+            switch (alt29) {
                 case 1 :
-                    // InternalSolverLanguage.g:2068:4: otherlv_3= 'extends' ( (lv_supertypes_4_0= ruleModelSymbol ) )+
+                    // InternalSolverLanguage.g:2578:4: otherlv_3= 'extends' ( ( ruleQualifiedName ) ) (otherlv_5= ',' ( ( ruleQualifiedName ) ) )*
                     {
-                    otherlv_3=(Token)match(input,35,FOLLOW_12); 
+                    otherlv_3=(Token)match(input,43,FOLLOW_35); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    				newLeafNode(otherlv_3, grammarAccess.getClassInterpretationAccess().getExtendsKeyword_3_0());
-                    			
-                    // InternalSolverLanguage.g:2072:4: ( (lv_supertypes_4_0= ruleModelSymbol ) )+
-                    int cnt38=0;
-                    loop38:
+                      				newLeafNode(otherlv_3, grammarAccess.getClassDefinitionAccess().getExtendsKeyword_3_0());
+                      			
+                    }
+                    // InternalSolverLanguage.g:2582:4: ( ( ruleQualifiedName ) )
+                    // InternalSolverLanguage.g:2583:5: ( ruleQualifiedName )
+                    {
+                    // InternalSolverLanguage.g:2583:5: ( ruleQualifiedName )
+                    // InternalSolverLanguage.g:2584:6: ruleQualifiedName
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getClassDefinitionRule());
+                      						}
+                      					
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getClassDefinitionAccess().getSuperclassesNamedElementCrossReference_3_1_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_42);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:2598:4: (otherlv_5= ',' ( ( ruleQualifiedName ) ) )*
+                    loop28:
                     do {
-                        int alt38=2;
-                        int LA38_0 = input.LA(1);
+                        int alt28=2;
+                        int LA28_0 = input.LA(1);
 
-                        if ( (LA38_0==RULE_ID) ) {
-                            alt38=1;
+                        if ( (LA28_0==28) ) {
+                            alt28=1;
                         }
 
 
-                        switch (alt38) {
+                        switch (alt28) {
                     	case 1 :
-                    	    // InternalSolverLanguage.g:2073:5: (lv_supertypes_4_0= ruleModelSymbol )
+                    	    // InternalSolverLanguage.g:2599:5: otherlv_5= ',' ( ( ruleQualifiedName ) )
                     	    {
-                    	    // InternalSolverLanguage.g:2073:5: (lv_supertypes_4_0= ruleModelSymbol )
-                    	    // InternalSolverLanguage.g:2074:6: lv_supertypes_4_0= ruleModelSymbol
-                    	    {
+                    	    otherlv_5=(Token)match(input,28,FOLLOW_35); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
 
-                    	    						newCompositeNode(grammarAccess.getClassInterpretationAccess().getSupertypesModelSymbolParserRuleCall_3_1_0());
-                    	    					
-                    	    pushFollow(FOLLOW_29);
-                    	    lv_supertypes_4_0=ruleModelSymbol();
+                    	      					newLeafNode(otherlv_5, grammarAccess.getClassDefinitionAccess().getCommaKeyword_3_2_0());
+                    	      				
+                    	    }
+                    	    // InternalSolverLanguage.g:2603:5: ( ( ruleQualifiedName ) )
+                    	    // InternalSolverLanguage.g:2604:6: ( ruleQualifiedName )
+                    	    {
+                    	    // InternalSolverLanguage.g:2604:6: ( ruleQualifiedName )
+                    	    // InternalSolverLanguage.g:2605:7: ruleQualifiedName
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+
+                    	      							if (current==null) {
+                    	      								current = createModelElement(grammarAccess.getClassDefinitionRule());
+                    	      							}
+                    	      						
+                    	    }
+                    	    if ( state.backtracking==0 ) {
+
+                    	      							newCompositeNode(grammarAccess.getClassDefinitionAccess().getSuperclassesNamedElementCrossReference_3_2_1_0());
+                    	      						
+                    	    }
+                    	    pushFollow(FOLLOW_42);
+                    	    ruleQualifiedName();
 
                     	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
 
+                    	      							afterParserOrEnumRuleCall();
+                    	      						
+                    	    }
 
-                    	    						if (current==null) {
-                    	    							current = createModelElementForParent(grammarAccess.getClassInterpretationRule());
-                    	    						}
-                    	    						add(
-                    	    							current,
-                    	    							"supertypes",
-                    	    							lv_supertypes_4_0,
-                    	    							"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-                    	    						afterParserOrEnumRuleCall();
-                    	    					
+                    	    }
+
 
                     	    }
 
@@ -6087,12 +7505,8 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    if ( cnt38 >= 1 ) break loop38;
-                                EarlyExitException eee =
-                                    new EarlyExitException(38, input);
-                                throw eee;
+                    	    break loop28;
                         }
-                        cnt38++;
                     } while (true);
 
 
@@ -6101,47 +7515,53 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,36,FOLLOW_30); 
+            otherlv_7=(Token)match(input,30,FOLLOW_43); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_5, grammarAccess.getClassInterpretationAccess().getLeftCurlyBracketKeyword_4());
-            		
-            // InternalSolverLanguage.g:2096:3: ( (lv_fielt_6_0= ruleFieldRelationInterpretation ) )*
-            loop40:
+              			newLeafNode(otherlv_7, grammarAccess.getClassDefinitionAccess().getLeftCurlyBracketKeyword_4());
+              		
+            }
+            // InternalSolverLanguage.g:2625:3: ( (lv_members_8_0= ruleMemberDefinition ) )*
+            loop30:
             do {
-                int alt40=2;
-                int LA40_0 = input.LA(1);
+                int alt30=2;
+                int LA30_0 = input.LA(1);
 
-                if ( (LA40_0==RULE_ID||LA40_0==39) ) {
-                    alt40=1;
+                if ( (LA30_0==RULE_ID||LA30_0==RULE_QUOTED_ID||LA30_0==44) ) {
+                    alt30=1;
                 }
 
 
-                switch (alt40) {
+                switch (alt30) {
             	case 1 :
-            	    // InternalSolverLanguage.g:2097:4: (lv_fielt_6_0= ruleFieldRelationInterpretation )
+            	    // InternalSolverLanguage.g:2626:4: (lv_members_8_0= ruleMemberDefinition )
             	    {
-            	    // InternalSolverLanguage.g:2097:4: (lv_fielt_6_0= ruleFieldRelationInterpretation )
-            	    // InternalSolverLanguage.g:2098:5: lv_fielt_6_0= ruleFieldRelationInterpretation
+            	    // InternalSolverLanguage.g:2626:4: (lv_members_8_0= ruleMemberDefinition )
+            	    // InternalSolverLanguage.g:2627:5: lv_members_8_0= ruleMemberDefinition
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					newCompositeNode(grammarAccess.getClassInterpretationAccess().getFieltFieldRelationInterpretationParserRuleCall_5_0());
-            	    				
-            	    pushFollow(FOLLOW_30);
-            	    lv_fielt_6_0=ruleFieldRelationInterpretation();
+            	      					newCompositeNode(grammarAccess.getClassDefinitionAccess().getMembersMemberDefinitionParserRuleCall_5_0());
+            	      				
+            	    }
+            	    pushFollow(FOLLOW_43);
+            	    lv_members_8_0=ruleMemberDefinition();
 
             	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    					if (current==null) {
-            	    						current = createModelElementForParent(grammarAccess.getClassInterpretationRule());
-            	    					}
-            	    					add(
-            	    						current,
-            	    						"fielt",
-            	    						lv_fielt_6_0,
-            	    						"org.eclipse.viatra.solver.language.SolverLanguage.FieldRelationInterpretation");
-            	    					afterParserOrEnumRuleCall();
-            	    				
+            	      					if (current==null) {
+            	      						current = createModelElementForParent(grammarAccess.getClassDefinitionRule());
+            	      					}
+            	      					add(
+            	      						current,
+            	      						"members",
+            	      						lv_members_8_0,
+            	      						"org.eclipse.viatra.solver.language.SolverLanguage.MemberDefinition");
+            	      					afterParserOrEnumRuleCall();
+            	      				
+            	    }
 
             	    }
 
@@ -6150,23 +7570,27 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop40;
+            	    break loop30;
                 }
             } while (true);
 
-            otherlv_7=(Token)match(input,37,FOLLOW_2); 
+            otherlv_9=(Token)match(input,31,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_7, grammarAccess.getClassInterpretationAccess().getRightCurlyBracketKeyword_6());
-            		
+              			newLeafNode(otherlv_9, grammarAccess.getClassDefinitionAccess().getRightCurlyBracketKeyword_6());
+              		
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -6177,29 +7601,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleClassInterpretation"
+    // $ANTLR end "ruleClassDefinition"
 
 
-    // $ANTLR start "entryRuleEnumInterpretation"
-    // InternalSolverLanguage.g:2123:1: entryRuleEnumInterpretation returns [EObject current=null] : iv_ruleEnumInterpretation= ruleEnumInterpretation EOF ;
-    public final EObject entryRuleEnumInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleMemberDefinition"
+    // InternalSolverLanguage.g:2652:1: entryRuleMemberDefinition returns [EObject current=null] : iv_ruleMemberDefinition= ruleMemberDefinition EOF ;
+    public final EObject entryRuleMemberDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEnumInterpretation = null;
+        EObject iv_ruleMemberDefinition = null;
 
 
         try {
-            // InternalSolverLanguage.g:2123:59: (iv_ruleEnumInterpretation= ruleEnumInterpretation EOF )
-            // InternalSolverLanguage.g:2124:2: iv_ruleEnumInterpretation= ruleEnumInterpretation EOF
+            // InternalSolverLanguage.g:2652:57: (iv_ruleMemberDefinition= ruleMemberDefinition EOF )
+            // InternalSolverLanguage.g:2653:2: iv_ruleMemberDefinition= ruleMemberDefinition EOF
             {
-             newCompositeNode(grammarAccess.getEnumInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMemberDefinitionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleEnumInterpretation=ruleEnumInterpretation();
+            iv_ruleMemberDefinition=ruleMemberDefinition();
 
             state._fsp--;
-
-             current =iv_ruleEnumInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMemberDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -6213,138 +7641,708 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleEnumInterpretation"
+    // $ANTLR end "entryRuleMemberDefinition"
 
 
-    // $ANTLR start "ruleEnumInterpretation"
-    // InternalSolverLanguage.g:2130:1: ruleEnumInterpretation returns [EObject current=null] : (otherlv_0= 'enum' ( (lv_Symbol_1_0= ruleModelSymbol ) ) otherlv_2= '{' ( (lv_objects_3_0= ruleNamedObject ) )+ otherlv_4= '}' ) ;
-    public final EObject ruleEnumInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleMemberDefinition"
+    // InternalSolverLanguage.g:2659:1: ruleMemberDefinition returns [EObject current=null] : ( ( (lv_containment_0_0= 'contains' ) )? ( ( ruleQualifiedName ) ) ( (lv_multiplicity_2_0= ruleMultiplicity ) )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'opposite' ( ( ruleQualifiedName ) ) )? (otherlv_6= ';' )? ) ;
+    public final EObject ruleMemberDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_containment_0_0=null;
+        Token lv_name_3_0=null;
+        Token otherlv_4=null;
+        Token otherlv_6=null;
+        EObject lv_multiplicity_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2665:2: ( ( ( (lv_containment_0_0= 'contains' ) )? ( ( ruleQualifiedName ) ) ( (lv_multiplicity_2_0= ruleMultiplicity ) )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'opposite' ( ( ruleQualifiedName ) ) )? (otherlv_6= ';' )? ) )
+            // InternalSolverLanguage.g:2666:2: ( ( (lv_containment_0_0= 'contains' ) )? ( ( ruleQualifiedName ) ) ( (lv_multiplicity_2_0= ruleMultiplicity ) )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'opposite' ( ( ruleQualifiedName ) ) )? (otherlv_6= ';' )? )
+            {
+            // InternalSolverLanguage.g:2666:2: ( ( (lv_containment_0_0= 'contains' ) )? ( ( ruleQualifiedName ) ) ( (lv_multiplicity_2_0= ruleMultiplicity ) )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'opposite' ( ( ruleQualifiedName ) ) )? (otherlv_6= ';' )? )
+            // InternalSolverLanguage.g:2667:3: ( (lv_containment_0_0= 'contains' ) )? ( ( ruleQualifiedName ) ) ( (lv_multiplicity_2_0= ruleMultiplicity ) )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'opposite' ( ( ruleQualifiedName ) ) )? (otherlv_6= ';' )?
+            {
+            // InternalSolverLanguage.g:2667:3: ( (lv_containment_0_0= 'contains' ) )?
+            int alt31=2;
+            int LA31_0 = input.LA(1);
+
+            if ( (LA31_0==44) ) {
+                alt31=1;
+            }
+            switch (alt31) {
+                case 1 :
+                    // InternalSolverLanguage.g:2668:4: (lv_containment_0_0= 'contains' )
+                    {
+                    // InternalSolverLanguage.g:2668:4: (lv_containment_0_0= 'contains' )
+                    // InternalSolverLanguage.g:2669:5: lv_containment_0_0= 'contains'
+                    {
+                    lv_containment_0_0=(Token)match(input,44,FOLLOW_35); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					newLeafNode(lv_containment_0_0, grammarAccess.getMemberDefinitionAccess().getContainmentContainsKeyword_0_0());
+                      				
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      					if (current==null) {
+                      						current = createModelElement(grammarAccess.getMemberDefinitionRule());
+                      					}
+                      					setWithLastConsumed(current, "containment", true, "contains");
+                      				
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalSolverLanguage.g:2681:3: ( ( ruleQualifiedName ) )
+            // InternalSolverLanguage.g:2682:4: ( ruleQualifiedName )
+            {
+            // InternalSolverLanguage.g:2682:4: ( ruleQualifiedName )
+            // InternalSolverLanguage.g:2683:5: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getMemberDefinitionRule());
+              					}
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getMemberDefinitionAccess().getTypeNamedElementCrossReference_1_0());
+              				
+            }
+            pushFollow(FOLLOW_44);
+            ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:2697:3: ( (lv_multiplicity_2_0= ruleMultiplicity ) )?
+            int alt32=2;
+            int LA32_0 = input.LA(1);
+
+            if ( (LA32_0==36) ) {
+                alt32=1;
+            }
+            switch (alt32) {
+                case 1 :
+                    // InternalSolverLanguage.g:2698:4: (lv_multiplicity_2_0= ruleMultiplicity )
+                    {
+                    // InternalSolverLanguage.g:2698:4: (lv_multiplicity_2_0= ruleMultiplicity )
+                    // InternalSolverLanguage.g:2699:5: lv_multiplicity_2_0= ruleMultiplicity
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      					newCompositeNode(grammarAccess.getMemberDefinitionAccess().getMultiplicityMultiplicityParserRuleCall_2_0());
+                      				
+                    }
+                    pushFollow(FOLLOW_40);
+                    lv_multiplicity_2_0=ruleMultiplicity();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					if (current==null) {
+                      						current = createModelElementForParent(grammarAccess.getMemberDefinitionRule());
+                      					}
+                      					set(
+                      						current,
+                      						"multiplicity",
+                      						lv_multiplicity_2_0,
+                      						"org.eclipse.viatra.solver.language.SolverLanguage.Multiplicity");
+                      					afterParserOrEnumRuleCall();
+                      				
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalSolverLanguage.g:2716:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalSolverLanguage.g:2717:4: (lv_name_3_0= RULE_ID )
+            {
+            // InternalSolverLanguage.g:2717:4: (lv_name_3_0= RULE_ID )
+            // InternalSolverLanguage.g:2718:5: lv_name_3_0= RULE_ID
+            {
+            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_45); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					newLeafNode(lv_name_3_0, grammarAccess.getMemberDefinitionAccess().getNameIDTerminalRuleCall_3_0());
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getMemberDefinitionRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"name",
+              						lv_name_3_0,
+              						"org.eclipse.xtext.common.Terminals.ID");
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:2734:3: (otherlv_4= 'opposite' ( ( ruleQualifiedName ) ) )?
+            int alt33=2;
+            int LA33_0 = input.LA(1);
+
+            if ( (LA33_0==45) ) {
+                alt33=1;
+            }
+            switch (alt33) {
+                case 1 :
+                    // InternalSolverLanguage.g:2735:4: otherlv_4= 'opposite' ( ( ruleQualifiedName ) )
+                    {
+                    otherlv_4=(Token)match(input,45,FOLLOW_35); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_4, grammarAccess.getMemberDefinitionAccess().getOppositeKeyword_4_0());
+                      			
+                    }
+                    // InternalSolverLanguage.g:2739:4: ( ( ruleQualifiedName ) )
+                    // InternalSolverLanguage.g:2740:5: ( ruleQualifiedName )
+                    {
+                    // InternalSolverLanguage.g:2740:5: ( ruleQualifiedName )
+                    // InternalSolverLanguage.g:2741:6: ruleQualifiedName
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getMemberDefinitionRule());
+                      						}
+                      					
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      						newCompositeNode(grammarAccess.getMemberDefinitionAccess().getOppositeNamedElementCrossReference_4_1_0());
+                      					
+                    }
+                    pushFollow(FOLLOW_18);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      						afterParserOrEnumRuleCall();
+                      					
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalSolverLanguage.g:2756:3: (otherlv_6= ';' )?
+            int alt34=2;
+            int LA34_0 = input.LA(1);
+
+            if ( (LA34_0==26) ) {
+                alt34=1;
+            }
+            switch (alt34) {
+                case 1 :
+                    // InternalSolverLanguage.g:2757:4: otherlv_6= ';'
+                    {
+                    otherlv_6=(Token)match(input,26,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_6, grammarAccess.getMemberDefinitionAccess().getSemicolonKeyword_5());
+                      			
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMemberDefinition"
+
+
+    // $ANTLR start "entryRuleMultiplicity"
+    // InternalSolverLanguage.g:2766:1: entryRuleMultiplicity returns [EObject current=null] : iv_ruleMultiplicity= ruleMultiplicity EOF ;
+    public final EObject entryRuleMultiplicity() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMultiplicity = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2766:53: (iv_ruleMultiplicity= ruleMultiplicity EOF )
+            // InternalSolverLanguage.g:2767:2: iv_ruleMultiplicity= ruleMultiplicity EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMultiplicityRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleMultiplicity=ruleMultiplicity();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMultiplicity; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMultiplicity"
+
+
+    // $ANTLR start "ruleMultiplicity"
+    // InternalSolverLanguage.g:2773:1: ruleMultiplicity returns [EObject current=null] : (this_ManyMultiplicity_0= ruleManyMultiplicity | this_ExactMultiplicity_1= ruleExactMultiplicity | this_BoundedMultiplicity_2= ruleBoundedMultiplicity ) ;
+    public final EObject ruleMultiplicity() throws RecognitionException {
+        EObject current = null;
+
+        EObject this_ManyMultiplicity_0 = null;
+
+        EObject this_ExactMultiplicity_1 = null;
+
+        EObject this_BoundedMultiplicity_2 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2779:2: ( (this_ManyMultiplicity_0= ruleManyMultiplicity | this_ExactMultiplicity_1= ruleExactMultiplicity | this_BoundedMultiplicity_2= ruleBoundedMultiplicity ) )
+            // InternalSolverLanguage.g:2780:2: (this_ManyMultiplicity_0= ruleManyMultiplicity | this_ExactMultiplicity_1= ruleExactMultiplicity | this_BoundedMultiplicity_2= ruleBoundedMultiplicity )
+            {
+            // InternalSolverLanguage.g:2780:2: (this_ManyMultiplicity_0= ruleManyMultiplicity | this_ExactMultiplicity_1= ruleExactMultiplicity | this_BoundedMultiplicity_2= ruleBoundedMultiplicity )
+            int alt35=3;
+            int LA35_0 = input.LA(1);
+
+            if ( (LA35_0==36) ) {
+                switch ( input.LA(2) ) {
+                case RULE_INT:
+                    {
+                    int LA35_2 = input.LA(3);
+
+                    if ( (LA35_2==38) ) {
+                        alt35=2;
+                    }
+                    else if ( (LA35_2==37) ) {
+                        alt35=3;
+                    }
+                    else {
+                        if (state.backtracking>0) {state.failed=true; return current;}
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 35, 2, input);
+
+                        throw nvae;
+                    }
+                    }
+                    break;
+                case 35:
+                    {
+                    alt35=2;
+                    }
+                    break;
+                case 38:
+                    {
+                    alt35=1;
+                    }
+                    break;
+                default:
+                    if (state.backtracking>0) {state.failed=true; return current;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 35, 1, input);
+
+                    throw nvae;
+                }
+
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 35, 0, input);
+
+                throw nvae;
+            }
+            switch (alt35) {
+                case 1 :
+                    // InternalSolverLanguage.g:2781:3: this_ManyMultiplicity_0= ruleManyMultiplicity
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getMultiplicityAccess().getManyMultiplicityParserRuleCall_0());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_ManyMultiplicity_0=ruleManyMultiplicity();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_ManyMultiplicity_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:2790:3: this_ExactMultiplicity_1= ruleExactMultiplicity
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getMultiplicityAccess().getExactMultiplicityParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_ExactMultiplicity_1=ruleExactMultiplicity();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_ExactMultiplicity_1;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:2799:3: this_BoundedMultiplicity_2= ruleBoundedMultiplicity
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getMultiplicityAccess().getBoundedMultiplicityParserRuleCall_2());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_BoundedMultiplicity_2=ruleBoundedMultiplicity();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_BoundedMultiplicity_2;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMultiplicity"
+
+
+    // $ANTLR start "entryRuleManyMultiplicity"
+    // InternalSolverLanguage.g:2811:1: entryRuleManyMultiplicity returns [EObject current=null] : iv_ruleManyMultiplicity= ruleManyMultiplicity EOF ;
+    public final EObject entryRuleManyMultiplicity() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleManyMultiplicity = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2811:57: (iv_ruleManyMultiplicity= ruleManyMultiplicity EOF )
+            // InternalSolverLanguage.g:2812:2: iv_ruleManyMultiplicity= ruleManyMultiplicity EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getManyMultiplicityRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleManyMultiplicity=ruleManyMultiplicity();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleManyMultiplicity; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleManyMultiplicity"
+
+
+    // $ANTLR start "ruleManyMultiplicity"
+    // InternalSolverLanguage.g:2818:1: ruleManyMultiplicity returns [EObject current=null] : ( () otherlv_1= '[' otherlv_2= ']' ) ;
+    public final EObject ruleManyMultiplicity() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_2=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:2824:2: ( ( () otherlv_1= '[' otherlv_2= ']' ) )
+            // InternalSolverLanguage.g:2825:2: ( () otherlv_1= '[' otherlv_2= ']' )
+            {
+            // InternalSolverLanguage.g:2825:2: ( () otherlv_1= '[' otherlv_2= ']' )
+            // InternalSolverLanguage.g:2826:3: () otherlv_1= '[' otherlv_2= ']'
+            {
+            // InternalSolverLanguage.g:2826:3: ()
+            // InternalSolverLanguage.g:2827:4: 
+            {
+            if ( state.backtracking==0 ) {
+
+              				current = forceCreateModelElement(
+              					grammarAccess.getManyMultiplicityAccess().getManyMultiplicityAction_0(),
+              					current);
+              			
+            }
+
+            }
+
+            otherlv_1=(Token)match(input,36,FOLLOW_38); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getManyMultiplicityAccess().getLeftSquareBracketKeyword_1());
+              		
+            }
+            otherlv_2=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getManyMultiplicityAccess().getRightSquareBracketKeyword_2());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleManyMultiplicity"
+
+
+    // $ANTLR start "entryRuleExactMultiplicity"
+    // InternalSolverLanguage.g:2845:1: entryRuleExactMultiplicity returns [EObject current=null] : iv_ruleExactMultiplicity= ruleExactMultiplicity EOF ;
+    public final EObject entryRuleExactMultiplicity() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleExactMultiplicity = null;
+
+
+        try {
+            // InternalSolverLanguage.g:2845:58: (iv_ruleExactMultiplicity= ruleExactMultiplicity EOF )
+            // InternalSolverLanguage.g:2846:2: iv_ruleExactMultiplicity= ruleExactMultiplicity EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExactMultiplicityRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleExactMultiplicity=ruleExactMultiplicity();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExactMultiplicity; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleExactMultiplicity"
+
+
+    // $ANTLR start "ruleExactMultiplicity"
+    // InternalSolverLanguage.g:2852:1: ruleExactMultiplicity returns [EObject current=null] : (otherlv_0= '[' ( (lv_multiplicity_1_0= ruleUpperMultiplicty ) ) otherlv_2= ']' ) ;
+    public final EObject ruleExactMultiplicity() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token otherlv_2=null;
-        Token otherlv_4=null;
-        EObject lv_Symbol_1_0 = null;
-
-        EObject lv_objects_3_0 = null;
+        AntlrDatatypeRuleToken lv_multiplicity_1_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:2136:2: ( (otherlv_0= 'enum' ( (lv_Symbol_1_0= ruleModelSymbol ) ) otherlv_2= '{' ( (lv_objects_3_0= ruleNamedObject ) )+ otherlv_4= '}' ) )
-            // InternalSolverLanguage.g:2137:2: (otherlv_0= 'enum' ( (lv_Symbol_1_0= ruleModelSymbol ) ) otherlv_2= '{' ( (lv_objects_3_0= ruleNamedObject ) )+ otherlv_4= '}' )
+            // InternalSolverLanguage.g:2858:2: ( (otherlv_0= '[' ( (lv_multiplicity_1_0= ruleUpperMultiplicty ) ) otherlv_2= ']' ) )
+            // InternalSolverLanguage.g:2859:2: (otherlv_0= '[' ( (lv_multiplicity_1_0= ruleUpperMultiplicty ) ) otherlv_2= ']' )
             {
-            // InternalSolverLanguage.g:2137:2: (otherlv_0= 'enum' ( (lv_Symbol_1_0= ruleModelSymbol ) ) otherlv_2= '{' ( (lv_objects_3_0= ruleNamedObject ) )+ otherlv_4= '}' )
-            // InternalSolverLanguage.g:2138:3: otherlv_0= 'enum' ( (lv_Symbol_1_0= ruleModelSymbol ) ) otherlv_2= '{' ( (lv_objects_3_0= ruleNamedObject ) )+ otherlv_4= '}'
+            // InternalSolverLanguage.g:2859:2: (otherlv_0= '[' ( (lv_multiplicity_1_0= ruleUpperMultiplicty ) ) otherlv_2= ']' )
+            // InternalSolverLanguage.g:2860:3: otherlv_0= '[' ( (lv_multiplicity_1_0= ruleUpperMultiplicty ) ) otherlv_2= ']'
             {
-            otherlv_0=(Token)match(input,38,FOLLOW_12); 
+            otherlv_0=(Token)match(input,36,FOLLOW_46); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_0, grammarAccess.getEnumInterpretationAccess().getEnumKeyword_0());
-            		
-            // InternalSolverLanguage.g:2142:3: ( (lv_Symbol_1_0= ruleModelSymbol ) )
-            // InternalSolverLanguage.g:2143:4: (lv_Symbol_1_0= ruleModelSymbol )
+              			newLeafNode(otherlv_0, grammarAccess.getExactMultiplicityAccess().getLeftSquareBracketKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:2864:3: ( (lv_multiplicity_1_0= ruleUpperMultiplicty ) )
+            // InternalSolverLanguage.g:2865:4: (lv_multiplicity_1_0= ruleUpperMultiplicty )
             {
-            // InternalSolverLanguage.g:2143:4: (lv_Symbol_1_0= ruleModelSymbol )
-            // InternalSolverLanguage.g:2144:5: lv_Symbol_1_0= ruleModelSymbol
+            // InternalSolverLanguage.g:2865:4: (lv_multiplicity_1_0= ruleUpperMultiplicty )
+            // InternalSolverLanguage.g:2866:5: lv_multiplicity_1_0= ruleUpperMultiplicty
             {
+            if ( state.backtracking==0 ) {
 
-            					newCompositeNode(grammarAccess.getEnumInterpretationAccess().getSymbolModelSymbolParserRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_31);
-            lv_Symbol_1_0=ruleModelSymbol();
+              					newCompositeNode(grammarAccess.getExactMultiplicityAccess().getMultiplicityUpperMultiplictyParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_38);
+            lv_multiplicity_1_0=ruleUpperMultiplicty();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getEnumInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"Symbol",
-            						lv_Symbol_1_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-            					afterParserOrEnumRuleCall();
-            				
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getExactMultiplicityRule());
+              					}
+              					set(
+              						current,
+              						"multiplicity",
+              						lv_multiplicity_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.UpperMultiplicty");
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
 
             }
 
-            otherlv_2=(Token)match(input,36,FOLLOW_13); 
+            otherlv_2=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_2, grammarAccess.getEnumInterpretationAccess().getLeftCurlyBracketKeyword_2());
-            		
-            // InternalSolverLanguage.g:2165:3: ( (lv_objects_3_0= ruleNamedObject ) )+
-            int cnt41=0;
-            loop41:
-            do {
-                int alt41=2;
-                int LA41_0 = input.LA(1);
-
-                if ( (LA41_0==27) ) {
-                    alt41=1;
-                }
-
-
-                switch (alt41) {
-            	case 1 :
-            	    // InternalSolverLanguage.g:2166:4: (lv_objects_3_0= ruleNamedObject )
-            	    {
-            	    // InternalSolverLanguage.g:2166:4: (lv_objects_3_0= ruleNamedObject )
-            	    // InternalSolverLanguage.g:2167:5: lv_objects_3_0= ruleNamedObject
-            	    {
-
-            	    					newCompositeNode(grammarAccess.getEnumInterpretationAccess().getObjectsNamedObjectParserRuleCall_3_0());
-            	    				
-            	    pushFollow(FOLLOW_32);
-            	    lv_objects_3_0=ruleNamedObject();
-
-            	    state._fsp--;
-
-
-            	    					if (current==null) {
-            	    						current = createModelElementForParent(grammarAccess.getEnumInterpretationRule());
-            	    					}
-            	    					add(
-            	    						current,
-            	    						"objects",
-            	    						lv_objects_3_0,
-            	    						"org.eclipse.viatra.solver.language.SolverLanguage.NamedObject");
-            	    					afterParserOrEnumRuleCall();
-            	    				
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt41 >= 1 ) break loop41;
-                        EarlyExitException eee =
-                            new EarlyExitException(41, input);
-                        throw eee;
-                }
-                cnt41++;
-            } while (true);
-
-            otherlv_4=(Token)match(input,37,FOLLOW_2); 
-
-            			newLeafNode(otherlv_4, grammarAccess.getEnumInterpretationAccess().getRightCurlyBracketKeyword_4());
-            		
+              			newLeafNode(otherlv_2, grammarAccess.getExactMultiplicityAccess().getRightSquareBracketKeyword_2());
+              		
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
 
+            }
         }
 
             catch (RecognitionException re) {
@@ -6355,29 +8353,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleEnumInterpretation"
+    // $ANTLR end "ruleExactMultiplicity"
 
 
-    // $ANTLR start "entryRuleFieldRelationInterpretation"
-    // InternalSolverLanguage.g:2192:1: entryRuleFieldRelationInterpretation returns [EObject current=null] : iv_ruleFieldRelationInterpretation= ruleFieldRelationInterpretation EOF ;
-    public final EObject entryRuleFieldRelationInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleBoundedMultiplicity"
+    // InternalSolverLanguage.g:2891:1: entryRuleBoundedMultiplicity returns [EObject current=null] : iv_ruleBoundedMultiplicity= ruleBoundedMultiplicity EOF ;
+    public final EObject entryRuleBoundedMultiplicity() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleFieldRelationInterpretation = null;
+        EObject iv_ruleBoundedMultiplicity = null;
 
 
         try {
-            // InternalSolverLanguage.g:2192:68: (iv_ruleFieldRelationInterpretation= ruleFieldRelationInterpretation EOF )
-            // InternalSolverLanguage.g:2193:2: iv_ruleFieldRelationInterpretation= ruleFieldRelationInterpretation EOF
+            // InternalSolverLanguage.g:2891:60: (iv_ruleBoundedMultiplicity= ruleBoundedMultiplicity EOF )
+            // InternalSolverLanguage.g:2892:2: iv_ruleBoundedMultiplicity= ruleBoundedMultiplicity EOF
             {
-             newCompositeNode(grammarAccess.getFieldRelationInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBoundedMultiplicityRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleFieldRelationInterpretation=ruleFieldRelationInterpretation();
+            iv_ruleBoundedMultiplicity=ruleBoundedMultiplicity();
 
             state._fsp--;
-
-             current =iv_ruleFieldRelationInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBoundedMultiplicity; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -6391,183 +8393,125 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleFieldRelationInterpretation"
+    // $ANTLR end "entryRuleBoundedMultiplicity"
 
 
-    // $ANTLR start "ruleFieldRelationInterpretation"
-    // InternalSolverLanguage.g:2199:1: ruleFieldRelationInterpretation returns [EObject current=null] : ( ( (lv_containment_0_0= 'containment' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) otherlv_2= ':' ( (lv_multiplicity_3_0= ruleMultiplicityDefinition ) )? ( (lv_target_4_0= ruleSymbol ) ) ) ;
-    public final EObject ruleFieldRelationInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleBoundedMultiplicity"
+    // InternalSolverLanguage.g:2898:1: ruleBoundedMultiplicity returns [EObject current=null] : (otherlv_0= '[' ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleUpperMultiplicty ) ) otherlv_4= ']' ) ;
+    public final EObject ruleBoundedMultiplicity() throws RecognitionException {
         EObject current = null;
 
-        Token lv_containment_0_0=null;
+        Token otherlv_0=null;
+        Token lv_lowerBound_1_0=null;
         Token otherlv_2=null;
-        EObject lv_symbol_1_0 = null;
-
-        EObject lv_multiplicity_3_0 = null;
-
-        EObject lv_target_4_0 = null;
+        Token otherlv_4=null;
+        AntlrDatatypeRuleToken lv_upperBound_3_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:2205:2: ( ( ( (lv_containment_0_0= 'containment' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) otherlv_2= ':' ( (lv_multiplicity_3_0= ruleMultiplicityDefinition ) )? ( (lv_target_4_0= ruleSymbol ) ) ) )
-            // InternalSolverLanguage.g:2206:2: ( ( (lv_containment_0_0= 'containment' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) otherlv_2= ':' ( (lv_multiplicity_3_0= ruleMultiplicityDefinition ) )? ( (lv_target_4_0= ruleSymbol ) ) )
+            // InternalSolverLanguage.g:2904:2: ( (otherlv_0= '[' ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleUpperMultiplicty ) ) otherlv_4= ']' ) )
+            // InternalSolverLanguage.g:2905:2: (otherlv_0= '[' ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleUpperMultiplicty ) ) otherlv_4= ']' )
             {
-            // InternalSolverLanguage.g:2206:2: ( ( (lv_containment_0_0= 'containment' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) otherlv_2= ':' ( (lv_multiplicity_3_0= ruleMultiplicityDefinition ) )? ( (lv_target_4_0= ruleSymbol ) ) )
-            // InternalSolverLanguage.g:2207:3: ( (lv_containment_0_0= 'containment' ) )? ( (lv_symbol_1_0= ruleModelSymbol ) ) otherlv_2= ':' ( (lv_multiplicity_3_0= ruleMultiplicityDefinition ) )? ( (lv_target_4_0= ruleSymbol ) )
+            // InternalSolverLanguage.g:2905:2: (otherlv_0= '[' ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleUpperMultiplicty ) ) otherlv_4= ']' )
+            // InternalSolverLanguage.g:2906:3: otherlv_0= '[' ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '..' ( (lv_upperBound_3_0= ruleUpperMultiplicty ) ) otherlv_4= ']'
             {
-            // InternalSolverLanguage.g:2207:3: ( (lv_containment_0_0= 'containment' ) )?
-            int alt42=2;
-            int LA42_0 = input.LA(1);
+            otherlv_0=(Token)match(input,36,FOLLOW_47); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            if ( (LA42_0==39) ) {
-                alt42=1;
+              			newLeafNode(otherlv_0, grammarAccess.getBoundedMultiplicityAccess().getLeftSquareBracketKeyword_0());
+              		
             }
-            switch (alt42) {
-                case 1 :
-                    // InternalSolverLanguage.g:2208:4: (lv_containment_0_0= 'containment' )
-                    {
-                    // InternalSolverLanguage.g:2208:4: (lv_containment_0_0= 'containment' )
-                    // InternalSolverLanguage.g:2209:5: lv_containment_0_0= 'containment'
-                    {
-                    lv_containment_0_0=(Token)match(input,39,FOLLOW_12); 
+            // InternalSolverLanguage.g:2910:3: ( (lv_lowerBound_1_0= RULE_INT ) )
+            // InternalSolverLanguage.g:2911:4: (lv_lowerBound_1_0= RULE_INT )
+            {
+            // InternalSolverLanguage.g:2911:4: (lv_lowerBound_1_0= RULE_INT )
+            // InternalSolverLanguage.g:2912:5: lv_lowerBound_1_0= RULE_INT
+            {
+            lv_lowerBound_1_0=(Token)match(input,RULE_INT,FOLLOW_37); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                    					newLeafNode(lv_containment_0_0, grammarAccess.getFieldRelationInterpretationAccess().getContainmentContainmentKeyword_0_0());
-                    				
+              					newLeafNode(lv_lowerBound_1_0, grammarAccess.getBoundedMultiplicityAccess().getLowerBoundINTTerminalRuleCall_1_0());
+              				
+            }
+            if ( state.backtracking==0 ) {
 
-                    					if (current==null) {
-                    						current = createModelElement(grammarAccess.getFieldRelationInterpretationRule());
-                    					}
-                    					setWithLastConsumed(current, "containment", true, "containment");
-                    				
-
-                    }
-
-
-                    }
-                    break;
-
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getBoundedMultiplicityRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"lowerBound",
+              						lv_lowerBound_1_0,
+              						"org.eclipse.xtext.common.Terminals.INT");
+              				
             }
 
-            // InternalSolverLanguage.g:2221:3: ( (lv_symbol_1_0= ruleModelSymbol ) )
-            // InternalSolverLanguage.g:2222:4: (lv_symbol_1_0= ruleModelSymbol )
-            {
-            // InternalSolverLanguage.g:2222:4: (lv_symbol_1_0= ruleModelSymbol )
-            // InternalSolverLanguage.g:2223:5: lv_symbol_1_0= ruleModelSymbol
-            {
+            }
 
-            					newCompositeNode(grammarAccess.getFieldRelationInterpretationAccess().getSymbolModelSymbolParserRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_10);
-            lv_symbol_1_0=ruleModelSymbol();
+
+            }
+
+            otherlv_2=(Token)match(input,37,FOLLOW_46); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_2, grammarAccess.getBoundedMultiplicityAccess().getFullStopFullStopKeyword_2());
+              		
+            }
+            // InternalSolverLanguage.g:2932:3: ( (lv_upperBound_3_0= ruleUpperMultiplicty ) )
+            // InternalSolverLanguage.g:2933:4: (lv_upperBound_3_0= ruleUpperMultiplicty )
+            {
+            // InternalSolverLanguage.g:2933:4: (lv_upperBound_3_0= ruleUpperMultiplicty )
+            // InternalSolverLanguage.g:2934:5: lv_upperBound_3_0= ruleUpperMultiplicty
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getBoundedMultiplicityAccess().getUpperBoundUpperMultiplictyParserRuleCall_3_0());
+              				
+            }
+            pushFollow(FOLLOW_38);
+            lv_upperBound_3_0=ruleUpperMultiplicty();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getFieldRelationInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"symbol",
-            						lv_symbol_1_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-            					afterParserOrEnumRuleCall();
-            				
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getBoundedMultiplicityRule());
+              					}
+              					set(
+              						current,
+              						"upperBound",
+              						lv_upperBound_3_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.UpperMultiplicty");
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
 
             }
 
-            otherlv_2=(Token)match(input,20,FOLLOW_33); 
+            otherlv_4=(Token)match(input,38,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_2, grammarAccess.getFieldRelationInterpretationAccess().getColonKeyword_2());
-            		
-            // InternalSolverLanguage.g:2244:3: ( (lv_multiplicity_3_0= ruleMultiplicityDefinition ) )?
-            int alt43=2;
-            int LA43_0 = input.LA(1);
-
-            if ( (LA43_0==RULE_INT) ) {
-                alt43=1;
+              			newLeafNode(otherlv_4, grammarAccess.getBoundedMultiplicityAccess().getRightSquareBracketKeyword_4());
+              		
             }
-            switch (alt43) {
-                case 1 :
-                    // InternalSolverLanguage.g:2245:4: (lv_multiplicity_3_0= ruleMultiplicityDefinition )
-                    {
-                    // InternalSolverLanguage.g:2245:4: (lv_multiplicity_3_0= ruleMultiplicityDefinition )
-                    // InternalSolverLanguage.g:2246:5: lv_multiplicity_3_0= ruleMultiplicityDefinition
-                    {
-
-                    					newCompositeNode(grammarAccess.getFieldRelationInterpretationAccess().getMultiplicityMultiplicityDefinitionParserRuleCall_3_0());
-                    				
-                    pushFollow(FOLLOW_21);
-                    lv_multiplicity_3_0=ruleMultiplicityDefinition();
-
-                    state._fsp--;
-
-
-                    					if (current==null) {
-                    						current = createModelElementForParent(grammarAccess.getFieldRelationInterpretationRule());
-                    					}
-                    					set(
-                    						current,
-                    						"multiplicity",
-                    						lv_multiplicity_3_0,
-                    						"org.eclipse.viatra.solver.language.SolverLanguage.MultiplicityDefinition");
-                    					afterParserOrEnumRuleCall();
-                    				
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            // InternalSolverLanguage.g:2263:3: ( (lv_target_4_0= ruleSymbol ) )
-            // InternalSolverLanguage.g:2264:4: (lv_target_4_0= ruleSymbol )
-            {
-            // InternalSolverLanguage.g:2264:4: (lv_target_4_0= ruleSymbol )
-            // InternalSolverLanguage.g:2265:5: lv_target_4_0= ruleSymbol
-            {
-
-            					newCompositeNode(grammarAccess.getFieldRelationInterpretationAccess().getTargetSymbolParserRuleCall_4_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_target_4_0=ruleSymbol();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getFieldRelationInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"target",
-            						lv_target_4_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
-            					afterParserOrEnumRuleCall();
-            				
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
 
             }
-
-
-            }
-
-
-            	leaveRule();
-
         }
 
             catch (RecognitionException re) {
@@ -6578,29 +8522,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleFieldRelationInterpretation"
+    // $ANTLR end "ruleBoundedMultiplicity"
 
 
-    // $ANTLR start "entryRuleGlobalRelationInterpretation"
-    // InternalSolverLanguage.g:2286:1: entryRuleGlobalRelationInterpretation returns [EObject current=null] : iv_ruleGlobalRelationInterpretation= ruleGlobalRelationInterpretation EOF ;
-    public final EObject entryRuleGlobalRelationInterpretation() throws RecognitionException {
+    // $ANTLR start "entryRuleScopeDefinition"
+    // InternalSolverLanguage.g:2959:1: entryRuleScopeDefinition returns [EObject current=null] : iv_ruleScopeDefinition= ruleScopeDefinition EOF ;
+    public final EObject entryRuleScopeDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleGlobalRelationInterpretation = null;
+        EObject iv_ruleScopeDefinition = null;
 
 
         try {
-            // InternalSolverLanguage.g:2286:69: (iv_ruleGlobalRelationInterpretation= ruleGlobalRelationInterpretation EOF )
-            // InternalSolverLanguage.g:2287:2: iv_ruleGlobalRelationInterpretation= ruleGlobalRelationInterpretation EOF
+            // InternalSolverLanguage.g:2959:56: (iv_ruleScopeDefinition= ruleScopeDefinition EOF )
+            // InternalSolverLanguage.g:2960:2: iv_ruleScopeDefinition= ruleScopeDefinition EOF
             {
-             newCompositeNode(grammarAccess.getGlobalRelationInterpretationRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getScopeDefinitionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleGlobalRelationInterpretation=ruleGlobalRelationInterpretation();
+            iv_ruleScopeDefinition=ruleScopeDefinition();
 
             state._fsp--;
-
-             current =iv_ruleGlobalRelationInterpretation; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleScopeDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -6614,265 +8562,109 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleGlobalRelationInterpretation"
+    // $ANTLR end "entryRuleScopeDefinition"
 
 
-    // $ANTLR start "ruleGlobalRelationInterpretation"
-    // InternalSolverLanguage.g:2293:1: ruleGlobalRelationInterpretation returns [EObject current=null] : ( ( (lv_containment_0_0= 'containment' ) )? otherlv_1= 'relation' ( (lv_symbol_2_0= ruleModelSymbol ) ) otherlv_3= ':' ( (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition ) )? ( (lv_source_5_0= ruleSymbol ) ) ( (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition ) )? ( (lv_target_7_0= ruleSymbol ) ) ) ;
-    public final EObject ruleGlobalRelationInterpretation() throws RecognitionException {
+    // $ANTLR start "ruleScopeDefinition"
+    // InternalSolverLanguage.g:2966:1: ruleScopeDefinition returns [EObject current=null] : (this_ExactScopeDefinition_0= ruleExactScopeDefinition | this_BoundedScopeDefinition_1= ruleBoundedScopeDefinition | this_LowerBoundedScopeDefinition_2= ruleLowerBoundedScopeDefinition ) ;
+    public final EObject ruleScopeDefinition() throws RecognitionException {
         EObject current = null;
 
-        Token lv_containment_0_0=null;
-        Token otherlv_1=null;
-        Token otherlv_3=null;
-        EObject lv_symbol_2_0 = null;
+        EObject this_ExactScopeDefinition_0 = null;
 
-        EObject lv_sourceMultiplicity_4_0 = null;
+        EObject this_BoundedScopeDefinition_1 = null;
 
-        EObject lv_source_5_0 = null;
-
-        EObject lv_targetMultiplicity_6_0 = null;
-
-        EObject lv_target_7_0 = null;
+        EObject this_LowerBoundedScopeDefinition_2 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:2299:2: ( ( ( (lv_containment_0_0= 'containment' ) )? otherlv_1= 'relation' ( (lv_symbol_2_0= ruleModelSymbol ) ) otherlv_3= ':' ( (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition ) )? ( (lv_source_5_0= ruleSymbol ) ) ( (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition ) )? ( (lv_target_7_0= ruleSymbol ) ) ) )
-            // InternalSolverLanguage.g:2300:2: ( ( (lv_containment_0_0= 'containment' ) )? otherlv_1= 'relation' ( (lv_symbol_2_0= ruleModelSymbol ) ) otherlv_3= ':' ( (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition ) )? ( (lv_source_5_0= ruleSymbol ) ) ( (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition ) )? ( (lv_target_7_0= ruleSymbol ) ) )
+            // InternalSolverLanguage.g:2972:2: ( (this_ExactScopeDefinition_0= ruleExactScopeDefinition | this_BoundedScopeDefinition_1= ruleBoundedScopeDefinition | this_LowerBoundedScopeDefinition_2= ruleLowerBoundedScopeDefinition ) )
+            // InternalSolverLanguage.g:2973:2: (this_ExactScopeDefinition_0= ruleExactScopeDefinition | this_BoundedScopeDefinition_1= ruleBoundedScopeDefinition | this_LowerBoundedScopeDefinition_2= ruleLowerBoundedScopeDefinition )
             {
-            // InternalSolverLanguage.g:2300:2: ( ( (lv_containment_0_0= 'containment' ) )? otherlv_1= 'relation' ( (lv_symbol_2_0= ruleModelSymbol ) ) otherlv_3= ':' ( (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition ) )? ( (lv_source_5_0= ruleSymbol ) ) ( (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition ) )? ( (lv_target_7_0= ruleSymbol ) ) )
-            // InternalSolverLanguage.g:2301:3: ( (lv_containment_0_0= 'containment' ) )? otherlv_1= 'relation' ( (lv_symbol_2_0= ruleModelSymbol ) ) otherlv_3= ':' ( (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition ) )? ( (lv_source_5_0= ruleSymbol ) ) ( (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition ) )? ( (lv_target_7_0= ruleSymbol ) )
-            {
-            // InternalSolverLanguage.g:2301:3: ( (lv_containment_0_0= 'containment' ) )?
-            int alt44=2;
-            int LA44_0 = input.LA(1);
-
-            if ( (LA44_0==39) ) {
-                alt44=1;
-            }
-            switch (alt44) {
+            // InternalSolverLanguage.g:2973:2: (this_ExactScopeDefinition_0= ruleExactScopeDefinition | this_BoundedScopeDefinition_1= ruleBoundedScopeDefinition | this_LowerBoundedScopeDefinition_2= ruleLowerBoundedScopeDefinition )
+            int alt36=3;
+            alt36 = dfa36.predict(input);
+            switch (alt36) {
                 case 1 :
-                    // InternalSolverLanguage.g:2302:4: (lv_containment_0_0= 'containment' )
+                    // InternalSolverLanguage.g:2974:3: this_ExactScopeDefinition_0= ruleExactScopeDefinition
                     {
-                    // InternalSolverLanguage.g:2302:4: (lv_containment_0_0= 'containment' )
-                    // InternalSolverLanguage.g:2303:5: lv_containment_0_0= 'containment'
-                    {
-                    lv_containment_0_0=(Token)match(input,39,FOLLOW_34); 
+                    if ( state.backtracking==0 ) {
 
-                    					newLeafNode(lv_containment_0_0, grammarAccess.getGlobalRelationInterpretationAccess().getContainmentContainmentKeyword_0_0());
-                    				
-
-                    					if (current==null) {
-                    						current = createModelElement(grammarAccess.getGlobalRelationInterpretationRule());
-                    					}
-                    					setWithLastConsumed(current, "containment", true, "containment");
-                    				
-
+                      			newCompositeNode(grammarAccess.getScopeDefinitionAccess().getExactScopeDefinitionParserRuleCall_0());
+                      		
                     }
-
-
-                    }
-                    break;
-
-            }
-
-            otherlv_1=(Token)match(input,40,FOLLOW_12); 
-
-            			newLeafNode(otherlv_1, grammarAccess.getGlobalRelationInterpretationAccess().getRelationKeyword_1());
-            		
-            // InternalSolverLanguage.g:2319:3: ( (lv_symbol_2_0= ruleModelSymbol ) )
-            // InternalSolverLanguage.g:2320:4: (lv_symbol_2_0= ruleModelSymbol )
-            {
-            // InternalSolverLanguage.g:2320:4: (lv_symbol_2_0= ruleModelSymbol )
-            // InternalSolverLanguage.g:2321:5: lv_symbol_2_0= ruleModelSymbol
-            {
-
-            					newCompositeNode(grammarAccess.getGlobalRelationInterpretationAccess().getSymbolModelSymbolParserRuleCall_2_0());
-            				
-            pushFollow(FOLLOW_10);
-            lv_symbol_2_0=ruleModelSymbol();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getGlobalRelationInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"symbol",
-            						lv_symbol_2_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.ModelSymbol");
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            otherlv_3=(Token)match(input,20,FOLLOW_33); 
-
-            			newLeafNode(otherlv_3, grammarAccess.getGlobalRelationInterpretationAccess().getColonKeyword_3());
-            		
-            // InternalSolverLanguage.g:2342:3: ( (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition ) )?
-            int alt45=2;
-            int LA45_0 = input.LA(1);
-
-            if ( (LA45_0==RULE_INT) ) {
-                alt45=1;
-            }
-            switch (alt45) {
-                case 1 :
-                    // InternalSolverLanguage.g:2343:4: (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition )
-                    {
-                    // InternalSolverLanguage.g:2343:4: (lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition )
-                    // InternalSolverLanguage.g:2344:5: lv_sourceMultiplicity_4_0= ruleMultiplicityDefinition
-                    {
-
-                    					newCompositeNode(grammarAccess.getGlobalRelationInterpretationAccess().getSourceMultiplicityMultiplicityDefinitionParserRuleCall_4_0());
-                    				
-                    pushFollow(FOLLOW_21);
-                    lv_sourceMultiplicity_4_0=ruleMultiplicityDefinition();
+                    pushFollow(FOLLOW_2);
+                    this_ExactScopeDefinition_0=ruleExactScopeDefinition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    					if (current==null) {
-                    						current = createModelElementForParent(grammarAccess.getGlobalRelationInterpretationRule());
-                    					}
-                    					set(
-                    						current,
-                    						"sourceMultiplicity",
-                    						lv_sourceMultiplicity_4_0,
-                    						"org.eclipse.viatra.solver.language.SolverLanguage.MultiplicityDefinition");
-                    					afterParserOrEnumRuleCall();
-                    				
-
+                      			current = this_ExactScopeDefinition_0;
+                      			afterParserOrEnumRuleCall();
+                      		
                     }
-
 
                     }
                     break;
-
-            }
-
-            // InternalSolverLanguage.g:2361:3: ( (lv_source_5_0= ruleSymbol ) )
-            // InternalSolverLanguage.g:2362:4: (lv_source_5_0= ruleSymbol )
-            {
-            // InternalSolverLanguage.g:2362:4: (lv_source_5_0= ruleSymbol )
-            // InternalSolverLanguage.g:2363:5: lv_source_5_0= ruleSymbol
-            {
-
-            					newCompositeNode(grammarAccess.getGlobalRelationInterpretationAccess().getSourceSymbolParserRuleCall_5_0());
-            				
-            pushFollow(FOLLOW_33);
-            lv_source_5_0=ruleSymbol();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getGlobalRelationInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"source",
-            						lv_source_5_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            // InternalSolverLanguage.g:2380:3: ( (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition ) )?
-            int alt46=2;
-            int LA46_0 = input.LA(1);
-
-            if ( (LA46_0==RULE_INT) ) {
-                alt46=1;
-            }
-            switch (alt46) {
-                case 1 :
-                    // InternalSolverLanguage.g:2381:4: (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition )
+                case 2 :
+                    // InternalSolverLanguage.g:2983:3: this_BoundedScopeDefinition_1= ruleBoundedScopeDefinition
                     {
-                    // InternalSolverLanguage.g:2381:4: (lv_targetMultiplicity_6_0= ruleMultiplicityDefinition )
-                    // InternalSolverLanguage.g:2382:5: lv_targetMultiplicity_6_0= ruleMultiplicityDefinition
-                    {
+                    if ( state.backtracking==0 ) {
 
-                    					newCompositeNode(grammarAccess.getGlobalRelationInterpretationAccess().getTargetMultiplicityMultiplicityDefinitionParserRuleCall_6_0());
-                    				
-                    pushFollow(FOLLOW_21);
-                    lv_targetMultiplicity_6_0=ruleMultiplicityDefinition();
+                      			newCompositeNode(grammarAccess.getScopeDefinitionAccess().getBoundedScopeDefinitionParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_BoundedScopeDefinition_1=ruleBoundedScopeDefinition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    					if (current==null) {
-                    						current = createModelElementForParent(grammarAccess.getGlobalRelationInterpretationRule());
-                    					}
-                    					set(
-                    						current,
-                    						"targetMultiplicity",
-                    						lv_targetMultiplicity_6_0,
-                    						"org.eclipse.viatra.solver.language.SolverLanguage.MultiplicityDefinition");
-                    					afterParserOrEnumRuleCall();
-                    				
-
+                      			current = this_BoundedScopeDefinition_1;
+                      			afterParserOrEnumRuleCall();
+                      		
                     }
 
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:2992:3: this_LowerBoundedScopeDefinition_2= ruleLowerBoundedScopeDefinition
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getScopeDefinitionAccess().getLowerBoundedScopeDefinitionParserRuleCall_2());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_LowerBoundedScopeDefinition_2=ruleLowerBoundedScopeDefinition();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_LowerBoundedScopeDefinition_2;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
 
                     }
                     break;
 
             }
 
-            // InternalSolverLanguage.g:2399:3: ( (lv_target_7_0= ruleSymbol ) )
-            // InternalSolverLanguage.g:2400:4: (lv_target_7_0= ruleSymbol )
-            {
-            // InternalSolverLanguage.g:2400:4: (lv_target_7_0= ruleSymbol )
-            // InternalSolverLanguage.g:2401:5: lv_target_7_0= ruleSymbol
-            {
-
-            					newCompositeNode(grammarAccess.getGlobalRelationInterpretationAccess().getTargetSymbolParserRuleCall_7_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_target_7_0=ruleSymbol();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getGlobalRelationInterpretationRule());
-            					}
-            					set(
-            						current,
-            						"target",
-            						lv_target_7_0,
-            						"org.eclipse.viatra.solver.language.SolverLanguage.Symbol");
-            					afterParserOrEnumRuleCall();
-            				
 
             }
 
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
 
             }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
         }
 
             catch (RecognitionException re) {
@@ -6883,29 +8675,33 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleGlobalRelationInterpretation"
+    // $ANTLR end "ruleScopeDefinition"
 
 
-    // $ANTLR start "entryRuleMultiplicityDefinition"
-    // InternalSolverLanguage.g:2422:1: entryRuleMultiplicityDefinition returns [EObject current=null] : iv_ruleMultiplicityDefinition= ruleMultiplicityDefinition EOF ;
-    public final EObject entryRuleMultiplicityDefinition() throws RecognitionException {
+    // $ANTLR start "entryRuleExactScopeDefinition"
+    // InternalSolverLanguage.g:3004:1: entryRuleExactScopeDefinition returns [EObject current=null] : iv_ruleExactScopeDefinition= ruleExactScopeDefinition EOF ;
+    public final EObject entryRuleExactScopeDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleMultiplicityDefinition = null;
+        EObject iv_ruleExactScopeDefinition = null;
 
 
         try {
-            // InternalSolverLanguage.g:2422:63: (iv_ruleMultiplicityDefinition= ruleMultiplicityDefinition EOF )
-            // InternalSolverLanguage.g:2423:2: iv_ruleMultiplicityDefinition= ruleMultiplicityDefinition EOF
+            // InternalSolverLanguage.g:3004:61: (iv_ruleExactScopeDefinition= ruleExactScopeDefinition EOF )
+            // InternalSolverLanguage.g:3005:2: iv_ruleExactScopeDefinition= ruleExactScopeDefinition EOF
             {
-             newCompositeNode(grammarAccess.getMultiplicityDefinitionRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExactScopeDefinitionRule()); 
+            }
             pushFollow(FOLLOW_1);
-            iv_ruleMultiplicityDefinition=ruleMultiplicityDefinition();
+            iv_ruleExactScopeDefinition=ruleExactScopeDefinition();
 
             state._fsp--;
-
-             current =iv_ruleMultiplicityDefinition; 
-            match(input,EOF,FOLLOW_2); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExactScopeDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -6919,99 +8715,358 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleMultiplicityDefinition"
+    // $ANTLR end "entryRuleExactScopeDefinition"
 
 
-    // $ANTLR start "ruleMultiplicityDefinition"
-    // InternalSolverLanguage.g:2429:1: ruleMultiplicityDefinition returns [EObject current=null] : ( ( (lv_lower_0_0= RULE_INT ) ) otherlv_1= '..' ( ( (lv_upper_2_0= RULE_INT ) ) | ( (lv_unlimitedUpper_3_0= '*' ) ) ) ) ;
-    public final EObject ruleMultiplicityDefinition() throws RecognitionException {
+    // $ANTLR start "ruleExactScopeDefinition"
+    // InternalSolverLanguage.g:3011:1: ruleExactScopeDefinition returns [EObject current=null] : (otherlv_0= 'scope' ( ( ruleQualifiedName ) ) otherlv_2= '==' ( (lv_exactScope_3_0= RULE_INT ) ) ) ;
+    public final EObject ruleExactScopeDefinition() throws RecognitionException {
         EObject current = null;
 
-        Token lv_lower_0_0=null;
-        Token otherlv_1=null;
-        Token lv_upper_2_0=null;
-        Token lv_unlimitedUpper_3_0=null;
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        Token lv_exactScope_3_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalSolverLanguage.g:2435:2: ( ( ( (lv_lower_0_0= RULE_INT ) ) otherlv_1= '..' ( ( (lv_upper_2_0= RULE_INT ) ) | ( (lv_unlimitedUpper_3_0= '*' ) ) ) ) )
-            // InternalSolverLanguage.g:2436:2: ( ( (lv_lower_0_0= RULE_INT ) ) otherlv_1= '..' ( ( (lv_upper_2_0= RULE_INT ) ) | ( (lv_unlimitedUpper_3_0= '*' ) ) ) )
+            // InternalSolverLanguage.g:3017:2: ( (otherlv_0= 'scope' ( ( ruleQualifiedName ) ) otherlv_2= '==' ( (lv_exactScope_3_0= RULE_INT ) ) ) )
+            // InternalSolverLanguage.g:3018:2: (otherlv_0= 'scope' ( ( ruleQualifiedName ) ) otherlv_2= '==' ( (lv_exactScope_3_0= RULE_INT ) ) )
             {
-            // InternalSolverLanguage.g:2436:2: ( ( (lv_lower_0_0= RULE_INT ) ) otherlv_1= '..' ( ( (lv_upper_2_0= RULE_INT ) ) | ( (lv_unlimitedUpper_3_0= '*' ) ) ) )
-            // InternalSolverLanguage.g:2437:3: ( (lv_lower_0_0= RULE_INT ) ) otherlv_1= '..' ( ( (lv_upper_2_0= RULE_INT ) ) | ( (lv_unlimitedUpper_3_0= '*' ) ) )
+            // InternalSolverLanguage.g:3018:2: (otherlv_0= 'scope' ( ( ruleQualifiedName ) ) otherlv_2= '==' ( (lv_exactScope_3_0= RULE_INT ) ) )
+            // InternalSolverLanguage.g:3019:3: otherlv_0= 'scope' ( ( ruleQualifiedName ) ) otherlv_2= '==' ( (lv_exactScope_3_0= RULE_INT ) )
             {
-            // InternalSolverLanguage.g:2437:3: ( (lv_lower_0_0= RULE_INT ) )
-            // InternalSolverLanguage.g:2438:4: (lv_lower_0_0= RULE_INT )
-            {
-            // InternalSolverLanguage.g:2438:4: (lv_lower_0_0= RULE_INT )
-            // InternalSolverLanguage.g:2439:5: lv_lower_0_0= RULE_INT
-            {
-            lv_lower_0_0=(Token)match(input,RULE_INT,FOLLOW_35); 
+            otherlv_0=(Token)match(input,46,FOLLOW_35); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            					newLeafNode(lv_lower_0_0, grammarAccess.getMultiplicityDefinitionAccess().getLowerINTTerminalRuleCall_0_0());
-            				
+              			newLeafNode(otherlv_0, grammarAccess.getExactScopeDefinitionAccess().getScopeKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:3023:3: ( ( ruleQualifiedName ) )
+            // InternalSolverLanguage.g:3024:4: ( ruleQualifiedName )
+            {
+            // InternalSolverLanguage.g:3024:4: ( ruleQualifiedName )
+            // InternalSolverLanguage.g:3025:5: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
 
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getMultiplicityDefinitionRule());
-            					}
-            					setWithLastConsumed(
-            						current,
-            						"lower",
-            						lv_lower_0_0,
-            						"org.eclipse.xtext.common.Terminals.INT");
-            				
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getExactScopeDefinitionRule());
+              					}
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getExactScopeDefinitionAccess().getTypeNamedElementCrossReference_1_0());
+              				
+            }
+            pushFollow(FOLLOW_48);
+            ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					afterParserOrEnumRuleCall();
+              				
+            }
 
             }
 
 
             }
 
-            otherlv_1=(Token)match(input,41,FOLLOW_36); 
+            otherlv_2=(Token)match(input,47,FOLLOW_47); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(otherlv_1, grammarAccess.getMultiplicityDefinitionAccess().getFullStopFullStopKeyword_1());
-            		
-            // InternalSolverLanguage.g:2459:3: ( ( (lv_upper_2_0= RULE_INT ) ) | ( (lv_unlimitedUpper_3_0= '*' ) ) )
-            int alt47=2;
-            int LA47_0 = input.LA(1);
-
-            if ( (LA47_0==RULE_INT) ) {
-                alt47=1;
+              			newLeafNode(otherlv_2, grammarAccess.getExactScopeDefinitionAccess().getEqualsSignEqualsSignKeyword_2());
+              		
             }
-            else if ( (LA47_0==31) ) {
-                alt47=2;
+            // InternalSolverLanguage.g:3043:3: ( (lv_exactScope_3_0= RULE_INT ) )
+            // InternalSolverLanguage.g:3044:4: (lv_exactScope_3_0= RULE_INT )
+            {
+            // InternalSolverLanguage.g:3044:4: (lv_exactScope_3_0= RULE_INT )
+            // InternalSolverLanguage.g:3045:5: lv_exactScope_3_0= RULE_INT
+            {
+            lv_exactScope_3_0=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					newLeafNode(lv_exactScope_3_0, grammarAccess.getExactScopeDefinitionAccess().getExactScopeINTTerminalRuleCall_3_0());
+              				
+            }
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getExactScopeDefinitionRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"exactScope",
+              						lv_exactScope_3_0,
+              						"org.eclipse.xtext.common.Terminals.INT");
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleExactScopeDefinition"
+
+
+    // $ANTLR start "entryRuleBoundedScopeDefinition"
+    // InternalSolverLanguage.g:3065:1: entryRuleBoundedScopeDefinition returns [EObject current=null] : iv_ruleBoundedScopeDefinition= ruleBoundedScopeDefinition EOF ;
+    public final EObject entryRuleBoundedScopeDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleBoundedScopeDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:3065:63: (iv_ruleBoundedScopeDefinition= ruleBoundedScopeDefinition EOF )
+            // InternalSolverLanguage.g:3066:2: iv_ruleBoundedScopeDefinition= ruleBoundedScopeDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBoundedScopeDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleBoundedScopeDefinition=ruleBoundedScopeDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBoundedScopeDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleBoundedScopeDefinition"
+
+
+    // $ANTLR start "ruleBoundedScopeDefinition"
+    // InternalSolverLanguage.g:3072:1: ruleBoundedScopeDefinition returns [EObject current=null] : (otherlv_0= 'scope' ( ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) ) | ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? ) ) otherlv_11= '.' ) ;
+    public final EObject ruleBoundedScopeDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_lowerBound_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        Token lv_upperBound_5_0=null;
+        Token lv_upperBound_6_0=null;
+        Token otherlv_7=null;
+        Token otherlv_9=null;
+        Token lv_lowerBound_10_0=null;
+        Token otherlv_11=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3078:2: ( (otherlv_0= 'scope' ( ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) ) | ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? ) ) otherlv_11= '.' ) )
+            // InternalSolverLanguage.g:3079:2: (otherlv_0= 'scope' ( ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) ) | ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? ) ) otherlv_11= '.' )
+            {
+            // InternalSolverLanguage.g:3079:2: (otherlv_0= 'scope' ( ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) ) | ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? ) ) otherlv_11= '.' )
+            // InternalSolverLanguage.g:3080:3: otherlv_0= 'scope' ( ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) ) | ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? ) ) otherlv_11= '.'
+            {
+            otherlv_0=(Token)match(input,46,FOLLOW_49); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getBoundedScopeDefinitionAccess().getScopeKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:3084:3: ( ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) ) | ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? ) )
+            int alt39=2;
+            int LA39_0 = input.LA(1);
+
+            if ( (LA39_0==RULE_INT) ) {
+                int LA39_1 = input.LA(2);
+
+                if ( (LA39_1==49) ) {
+                    alt39=2;
+                }
+                else if ( (LA39_1==48) ) {
+                    alt39=1;
+                }
+                else {
+                    if (state.backtracking>0) {state.failed=true; return current;}
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 39, 1, input);
+
+                    throw nvae;
+                }
+            }
+            else if ( (LA39_0==RULE_ID||LA39_0==RULE_QUOTED_ID) ) {
+                alt39=1;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 47, 0, input);
+                    new NoViableAltException("", 39, 0, input);
 
                 throw nvae;
             }
-            switch (alt47) {
+            switch (alt39) {
                 case 1 :
-                    // InternalSolverLanguage.g:2460:4: ( (lv_upper_2_0= RULE_INT ) )
+                    // InternalSolverLanguage.g:3085:4: ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) )
                     {
-                    // InternalSolverLanguage.g:2460:4: ( (lv_upper_2_0= RULE_INT ) )
-                    // InternalSolverLanguage.g:2461:5: (lv_upper_2_0= RULE_INT )
+                    // InternalSolverLanguage.g:3085:4: ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) ) )
+                    // InternalSolverLanguage.g:3086:5: ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )? ( ( ruleQualifiedName ) ) otherlv_4= '<=' ( (lv_upperBound_5_0= RULE_INT ) )
                     {
-                    // InternalSolverLanguage.g:2461:5: (lv_upper_2_0= RULE_INT )
-                    // InternalSolverLanguage.g:2462:6: lv_upper_2_0= RULE_INT
-                    {
-                    lv_upper_2_0=(Token)match(input,RULE_INT,FOLLOW_2); 
+                    // InternalSolverLanguage.g:3086:5: ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' )?
+                    int alt37=2;
+                    int LA37_0 = input.LA(1);
 
-                    						newLeafNode(lv_upper_2_0, grammarAccess.getMultiplicityDefinitionAccess().getUpperINTTerminalRuleCall_2_0_0());
-                    					
+                    if ( (LA37_0==RULE_INT) ) {
+                        alt37=1;
+                    }
+                    switch (alt37) {
+                        case 1 :
+                            // InternalSolverLanguage.g:3087:6: ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<='
+                            {
+                            // InternalSolverLanguage.g:3087:6: ( (lv_lowerBound_1_0= RULE_INT ) )
+                            // InternalSolverLanguage.g:3088:7: (lv_lowerBound_1_0= RULE_INT )
+                            {
+                            // InternalSolverLanguage.g:3088:7: (lv_lowerBound_1_0= RULE_INT )
+                            // InternalSolverLanguage.g:3089:8: lv_lowerBound_1_0= RULE_INT
+                            {
+                            lv_lowerBound_1_0=(Token)match(input,RULE_INT,FOLLOW_50); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
 
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getMultiplicityDefinitionRule());
-                    						}
-                    						setWithLastConsumed(
-                    							current,
-                    							"upper",
-                    							lv_upper_2_0,
-                    							"org.eclipse.xtext.common.Terminals.INT");
-                    					
+                              								newLeafNode(lv_lowerBound_1_0, grammarAccess.getBoundedScopeDefinitionAccess().getLowerBoundINTTerminalRuleCall_1_0_0_0_0());
+                              							
+                            }
+                            if ( state.backtracking==0 ) {
+
+                              								if (current==null) {
+                              									current = createModelElement(grammarAccess.getBoundedScopeDefinitionRule());
+                              								}
+                              								setWithLastConsumed(
+                              									current,
+                              									"lowerBound",
+                              									lv_lowerBound_1_0,
+                              									"org.eclipse.xtext.common.Terminals.INT");
+                              							
+                            }
+
+                            }
+
+
+                            }
+
+                            otherlv_2=(Token)match(input,48,FOLLOW_35); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              						newLeafNode(otherlv_2, grammarAccess.getBoundedScopeDefinitionAccess().getLessThanSignEqualsSignKeyword_1_0_0_1());
+                              					
+                            }
+
+                            }
+                            break;
+
+                    }
+
+                    // InternalSolverLanguage.g:3110:5: ( ( ruleQualifiedName ) )
+                    // InternalSolverLanguage.g:3111:6: ( ruleQualifiedName )
+                    {
+                    // InternalSolverLanguage.g:3111:6: ( ruleQualifiedName )
+                    // InternalSolverLanguage.g:3112:7: ruleQualifiedName
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getBoundedScopeDefinitionRule());
+                      							}
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getBoundedScopeDefinitionAccess().getTypeNamedElementCrossReference_1_0_1_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_50);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    otherlv_4=(Token)match(input,48,FOLLOW_47); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					newLeafNode(otherlv_4, grammarAccess.getBoundedScopeDefinitionAccess().getLessThanSignEqualsSignKeyword_1_0_2());
+                      				
+                    }
+                    // InternalSolverLanguage.g:3130:5: ( (lv_upperBound_5_0= RULE_INT ) )
+                    // InternalSolverLanguage.g:3131:6: (lv_upperBound_5_0= RULE_INT )
+                    {
+                    // InternalSolverLanguage.g:3131:6: (lv_upperBound_5_0= RULE_INT )
+                    // InternalSolverLanguage.g:3132:7: lv_upperBound_5_0= RULE_INT
+                    {
+                    lv_upperBound_5_0=(Token)match(input,RULE_INT,FOLLOW_12); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							newLeafNode(lv_upperBound_5_0, grammarAccess.getBoundedScopeDefinitionAccess().getUpperBoundINTTerminalRuleCall_1_0_3_0());
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getBoundedScopeDefinitionRule());
+                      							}
+                      							setWithLastConsumed(
+                      								current,
+                      								"upperBound",
+                      								lv_upperBound_5_0,
+                      								"org.eclipse.xtext.common.Terminals.INT");
+                      						
+                    }
+
+                    }
+
 
                     }
 
@@ -7022,24 +9077,131 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalSolverLanguage.g:2479:4: ( (lv_unlimitedUpper_3_0= '*' ) )
+                    // InternalSolverLanguage.g:3150:4: ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? )
                     {
-                    // InternalSolverLanguage.g:2479:4: ( (lv_unlimitedUpper_3_0= '*' ) )
-                    // InternalSolverLanguage.g:2480:5: (lv_unlimitedUpper_3_0= '*' )
+                    // InternalSolverLanguage.g:3150:4: ( ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )? )
+                    // InternalSolverLanguage.g:3151:5: ( (lv_upperBound_6_0= RULE_INT ) ) otherlv_7= '>=' ( ( ruleQualifiedName ) ) (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )?
                     {
-                    // InternalSolverLanguage.g:2480:5: (lv_unlimitedUpper_3_0= '*' )
-                    // InternalSolverLanguage.g:2481:6: lv_unlimitedUpper_3_0= '*'
+                    // InternalSolverLanguage.g:3151:5: ( (lv_upperBound_6_0= RULE_INT ) )
+                    // InternalSolverLanguage.g:3152:6: (lv_upperBound_6_0= RULE_INT )
                     {
-                    lv_unlimitedUpper_3_0=(Token)match(input,31,FOLLOW_2); 
+                    // InternalSolverLanguage.g:3152:6: (lv_upperBound_6_0= RULE_INT )
+                    // InternalSolverLanguage.g:3153:7: lv_upperBound_6_0= RULE_INT
+                    {
+                    lv_upperBound_6_0=(Token)match(input,RULE_INT,FOLLOW_51); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    						newLeafNode(lv_unlimitedUpper_3_0, grammarAccess.getMultiplicityDefinitionAccess().getUnlimitedUpperAsteriskKeyword_2_1_0());
-                    					
+                      							newLeafNode(lv_upperBound_6_0, grammarAccess.getBoundedScopeDefinitionAccess().getUpperBoundINTTerminalRuleCall_1_1_0_0());
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getMultiplicityDefinitionRule());
-                    						}
-                    						setWithLastConsumed(current, "unlimitedUpper", true, "*");
-                    					
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getBoundedScopeDefinitionRule());
+                      							}
+                      							setWithLastConsumed(
+                      								current,
+                      								"upperBound",
+                      								lv_upperBound_6_0,
+                      								"org.eclipse.xtext.common.Terminals.INT");
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    otherlv_7=(Token)match(input,49,FOLLOW_35); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					newLeafNode(otherlv_7, grammarAccess.getBoundedScopeDefinitionAccess().getGreaterThanSignEqualsSignKeyword_1_1_1());
+                      				
+                    }
+                    // InternalSolverLanguage.g:3173:5: ( ( ruleQualifiedName ) )
+                    // InternalSolverLanguage.g:3174:6: ( ruleQualifiedName )
+                    {
+                    // InternalSolverLanguage.g:3174:6: ( ruleQualifiedName )
+                    // InternalSolverLanguage.g:3175:7: ruleQualifiedName
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getBoundedScopeDefinitionRule());
+                      							}
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getBoundedScopeDefinitionAccess().getTypeNamedElementCrossReference_1_1_2_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_52);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalSolverLanguage.g:3189:5: (otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) ) )?
+                    int alt38=2;
+                    int LA38_0 = input.LA(1);
+
+                    if ( (LA38_0==49) ) {
+                        alt38=1;
+                    }
+                    switch (alt38) {
+                        case 1 :
+                            // InternalSolverLanguage.g:3190:6: otherlv_9= '>=' ( (lv_lowerBound_10_0= RULE_INT ) )
+                            {
+                            otherlv_9=(Token)match(input,49,FOLLOW_47); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              						newLeafNode(otherlv_9, grammarAccess.getBoundedScopeDefinitionAccess().getGreaterThanSignEqualsSignKeyword_1_1_3_0());
+                              					
+                            }
+                            // InternalSolverLanguage.g:3194:6: ( (lv_lowerBound_10_0= RULE_INT ) )
+                            // InternalSolverLanguage.g:3195:7: (lv_lowerBound_10_0= RULE_INT )
+                            {
+                            // InternalSolverLanguage.g:3195:7: (lv_lowerBound_10_0= RULE_INT )
+                            // InternalSolverLanguage.g:3196:8: lv_lowerBound_10_0= RULE_INT
+                            {
+                            lv_lowerBound_10_0=(Token)match(input,RULE_INT,FOLLOW_12); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              								newLeafNode(lv_lowerBound_10_0, grammarAccess.getBoundedScopeDefinitionAccess().getLowerBoundINTTerminalRuleCall_1_1_3_1_0());
+                              							
+                            }
+                            if ( state.backtracking==0 ) {
+
+                              								if (current==null) {
+                              									current = createModelElement(grammarAccess.getBoundedScopeDefinitionRule());
+                              								}
+                              								setWithLastConsumed(
+                              									current,
+                              									"lowerBound",
+                              									lv_lowerBound_10_0,
+                              									"org.eclipse.xtext.common.Terminals.INT");
+                              							
+                            }
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
@@ -7052,14 +9214,62 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
+            otherlv_11=(Token)match(input,22,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_11, grammarAccess.getBoundedScopeDefinitionAccess().getFullStopKeyword_2());
+              		
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            	leaveRule();
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleBoundedScopeDefinition"
+
+
+    // $ANTLR start "entryRuleLowerBoundedScopeDefinition"
+    // InternalSolverLanguage.g:3223:1: entryRuleLowerBoundedScopeDefinition returns [EObject current=null] : iv_ruleLowerBoundedScopeDefinition= ruleLowerBoundedScopeDefinition EOF ;
+    public final EObject entryRuleLowerBoundedScopeDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleLowerBoundedScopeDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:3223:68: (iv_ruleLowerBoundedScopeDefinition= ruleLowerBoundedScopeDefinition EOF )
+            // InternalSolverLanguage.g:3224:2: iv_ruleLowerBoundedScopeDefinition= ruleLowerBoundedScopeDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getLowerBoundedScopeDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleLowerBoundedScopeDefinition=ruleLowerBoundedScopeDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleLowerBoundedScopeDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
 
         }
 
@@ -7071,27 +9281,2092 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleMultiplicityDefinition"
+    // $ANTLR end "entryRuleLowerBoundedScopeDefinition"
+
+
+    // $ANTLR start "ruleLowerBoundedScopeDefinition"
+    // InternalSolverLanguage.g:3230:1: ruleLowerBoundedScopeDefinition returns [EObject current=null] : (otherlv_0= 'scope' ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) ) | ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) ) ) otherlv_7= '.' ) ;
+    public final EObject ruleLowerBoundedScopeDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_0=null;
+        Token lv_lowerBound_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_5=null;
+        Token lv_lowerBound_6_0=null;
+        Token otherlv_7=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3236:2: ( (otherlv_0= 'scope' ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) ) | ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) ) ) otherlv_7= '.' ) )
+            // InternalSolverLanguage.g:3237:2: (otherlv_0= 'scope' ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) ) | ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) ) ) otherlv_7= '.' )
+            {
+            // InternalSolverLanguage.g:3237:2: (otherlv_0= 'scope' ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) ) | ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) ) ) otherlv_7= '.' )
+            // InternalSolverLanguage.g:3238:3: otherlv_0= 'scope' ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) ) | ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) ) ) otherlv_7= '.'
+            {
+            otherlv_0=(Token)match(input,46,FOLLOW_49); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_0, grammarAccess.getLowerBoundedScopeDefinitionAccess().getScopeKeyword_0());
+              		
+            }
+            // InternalSolverLanguage.g:3242:3: ( ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) ) | ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) ) )
+            int alt40=2;
+            int LA40_0 = input.LA(1);
+
+            if ( (LA40_0==RULE_INT) ) {
+                alt40=1;
+            }
+            else if ( (LA40_0==RULE_ID||LA40_0==RULE_QUOTED_ID) ) {
+                alt40=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 40, 0, input);
+
+                throw nvae;
+            }
+            switch (alt40) {
+                case 1 :
+                    // InternalSolverLanguage.g:3243:4: ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) )
+                    {
+                    // InternalSolverLanguage.g:3243:4: ( ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) ) )
+                    // InternalSolverLanguage.g:3244:5: ( (lv_lowerBound_1_0= RULE_INT ) ) otherlv_2= '<=' ( ( ruleQualifiedName ) )
+                    {
+                    // InternalSolverLanguage.g:3244:5: ( (lv_lowerBound_1_0= RULE_INT ) )
+                    // InternalSolverLanguage.g:3245:6: (lv_lowerBound_1_0= RULE_INT )
+                    {
+                    // InternalSolverLanguage.g:3245:6: (lv_lowerBound_1_0= RULE_INT )
+                    // InternalSolverLanguage.g:3246:7: lv_lowerBound_1_0= RULE_INT
+                    {
+                    lv_lowerBound_1_0=(Token)match(input,RULE_INT,FOLLOW_50); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							newLeafNode(lv_lowerBound_1_0, grammarAccess.getLowerBoundedScopeDefinitionAccess().getLowerBoundINTTerminalRuleCall_1_0_0_0());
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getLowerBoundedScopeDefinitionRule());
+                      							}
+                      							setWithLastConsumed(
+                      								current,
+                      								"lowerBound",
+                      								lv_lowerBound_1_0,
+                      								"org.eclipse.xtext.common.Terminals.INT");
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    otherlv_2=(Token)match(input,48,FOLLOW_35); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					newLeafNode(otherlv_2, grammarAccess.getLowerBoundedScopeDefinitionAccess().getLessThanSignEqualsSignKeyword_1_0_1());
+                      				
+                    }
+                    // InternalSolverLanguage.g:3266:5: ( ( ruleQualifiedName ) )
+                    // InternalSolverLanguage.g:3267:6: ( ruleQualifiedName )
+                    {
+                    // InternalSolverLanguage.g:3267:6: ( ruleQualifiedName )
+                    // InternalSolverLanguage.g:3268:7: ruleQualifiedName
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getLowerBoundedScopeDefinitionRule());
+                      							}
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getLowerBoundedScopeDefinitionAccess().getTypeNamedElementCrossReference_1_0_2_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_12);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3284:4: ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) )
+                    {
+                    // InternalSolverLanguage.g:3284:4: ( ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) ) )
+                    // InternalSolverLanguage.g:3285:5: ( ( ruleQualifiedName ) ) otherlv_5= '>=' ( (lv_lowerBound_6_0= RULE_INT ) )
+                    {
+                    // InternalSolverLanguage.g:3285:5: ( ( ruleQualifiedName ) )
+                    // InternalSolverLanguage.g:3286:6: ( ruleQualifiedName )
+                    {
+                    // InternalSolverLanguage.g:3286:6: ( ruleQualifiedName )
+                    // InternalSolverLanguage.g:3287:7: ruleQualifiedName
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getLowerBoundedScopeDefinitionRule());
+                      							}
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							newCompositeNode(grammarAccess.getLowerBoundedScopeDefinitionAccess().getTypeNamedElementCrossReference_1_1_0_0());
+                      						
+                    }
+                    pushFollow(FOLLOW_51);
+                    ruleQualifiedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							afterParserOrEnumRuleCall();
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+                    otherlv_5=(Token)match(input,49,FOLLOW_47); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      					newLeafNode(otherlv_5, grammarAccess.getLowerBoundedScopeDefinitionAccess().getGreaterThanSignEqualsSignKeyword_1_1_1());
+                      				
+                    }
+                    // InternalSolverLanguage.g:3305:5: ( (lv_lowerBound_6_0= RULE_INT ) )
+                    // InternalSolverLanguage.g:3306:6: (lv_lowerBound_6_0= RULE_INT )
+                    {
+                    // InternalSolverLanguage.g:3306:6: (lv_lowerBound_6_0= RULE_INT )
+                    // InternalSolverLanguage.g:3307:7: lv_lowerBound_6_0= RULE_INT
+                    {
+                    lv_lowerBound_6_0=(Token)match(input,RULE_INT,FOLLOW_12); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      							newLeafNode(lv_lowerBound_6_0, grammarAccess.getLowerBoundedScopeDefinitionAccess().getLowerBoundINTTerminalRuleCall_1_1_2_0());
+                      						
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      							if (current==null) {
+                      								current = createModelElement(grammarAccess.getLowerBoundedScopeDefinitionRule());
+                      							}
+                      							setWithLastConsumed(
+                      								current,
+                      								"lowerBound",
+                      								lv_lowerBound_6_0,
+                      								"org.eclipse.xtext.common.Terminals.INT");
+                      						
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            otherlv_7=(Token)match(input,22,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_7, grammarAccess.getLowerBoundedScopeDefinitionAccess().getFullStopKeyword_2());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleLowerBoundedScopeDefinition"
+
+
+    // $ANTLR start "entryRuleObjectiveDefinition"
+    // InternalSolverLanguage.g:3333:1: entryRuleObjectiveDefinition returns [EObject current=null] : iv_ruleObjectiveDefinition= ruleObjectiveDefinition EOF ;
+    public final EObject entryRuleObjectiveDefinition() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleObjectiveDefinition = null;
+
+
+        try {
+            // InternalSolverLanguage.g:3333:60: (iv_ruleObjectiveDefinition= ruleObjectiveDefinition EOF )
+            // InternalSolverLanguage.g:3334:2: iv_ruleObjectiveDefinition= ruleObjectiveDefinition EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getObjectiveDefinitionRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleObjectiveDefinition=ruleObjectiveDefinition();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleObjectiveDefinition; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleObjectiveDefinition"
+
+
+    // $ANTLR start "ruleObjectiveDefinition"
+    // InternalSolverLanguage.g:3340:1: ruleObjectiveDefinition returns [EObject current=null] : ( ( (lv_kind_0_0= ruleObjectiveKind ) ) ( (lv_objective_1_0= ruleExpression ) ) ) ;
+    public final EObject ruleObjectiveDefinition() throws RecognitionException {
+        EObject current = null;
+
+        Enumerator lv_kind_0_0 = null;
+
+        EObject lv_objective_1_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3346:2: ( ( ( (lv_kind_0_0= ruleObjectiveKind ) ) ( (lv_objective_1_0= ruleExpression ) ) ) )
+            // InternalSolverLanguage.g:3347:2: ( ( (lv_kind_0_0= ruleObjectiveKind ) ) ( (lv_objective_1_0= ruleExpression ) ) )
+            {
+            // InternalSolverLanguage.g:3347:2: ( ( (lv_kind_0_0= ruleObjectiveKind ) ) ( (lv_objective_1_0= ruleExpression ) ) )
+            // InternalSolverLanguage.g:3348:3: ( (lv_kind_0_0= ruleObjectiveKind ) ) ( (lv_objective_1_0= ruleExpression ) )
+            {
+            // InternalSolverLanguage.g:3348:3: ( (lv_kind_0_0= ruleObjectiveKind ) )
+            // InternalSolverLanguage.g:3349:4: (lv_kind_0_0= ruleObjectiveKind )
+            {
+            // InternalSolverLanguage.g:3349:4: (lv_kind_0_0= ruleObjectiveKind )
+            // InternalSolverLanguage.g:3350:5: lv_kind_0_0= ruleObjectiveKind
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getObjectiveDefinitionAccess().getKindObjectiveKindEnumRuleCall_0_0());
+              				
+            }
+            pushFollow(FOLLOW_6);
+            lv_kind_0_0=ruleObjectiveKind();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getObjectiveDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"kind",
+              						lv_kind_0_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.ObjectiveKind");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+            // InternalSolverLanguage.g:3367:3: ( (lv_objective_1_0= ruleExpression ) )
+            // InternalSolverLanguage.g:3368:4: (lv_objective_1_0= ruleExpression )
+            {
+            // InternalSolverLanguage.g:3368:4: (lv_objective_1_0= ruleExpression )
+            // InternalSolverLanguage.g:3369:5: lv_objective_1_0= ruleExpression
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getObjectiveDefinitionAccess().getObjectiveExpressionParserRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_objective_1_0=ruleExpression();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getObjectiveDefinitionRule());
+              					}
+              					set(
+              						current,
+              						"objective",
+              						lv_objective_1_0,
+              						"org.eclipse.viatra.solver.language.SolverLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleObjectiveDefinition"
+
+
+    // $ANTLR start "entryRuleUpperMultiplicty"
+    // InternalSolverLanguage.g:3390:1: entryRuleUpperMultiplicty returns [String current=null] : iv_ruleUpperMultiplicty= ruleUpperMultiplicty EOF ;
+    public final String entryRuleUpperMultiplicty() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleUpperMultiplicty = null;
+
+
+        try {
+            // InternalSolverLanguage.g:3390:56: (iv_ruleUpperMultiplicty= ruleUpperMultiplicty EOF )
+            // InternalSolverLanguage.g:3391:2: iv_ruleUpperMultiplicty= ruleUpperMultiplicty EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getUpperMultiplictyRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleUpperMultiplicty=ruleUpperMultiplicty();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleUpperMultiplicty.getText(); 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleUpperMultiplicty"
+
+
+    // $ANTLR start "ruleUpperMultiplicty"
+    // InternalSolverLanguage.g:3397:1: ruleUpperMultiplicty returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | kw= '*' ) ;
+    public final AntlrDatatypeRuleToken ruleUpperMultiplicty() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token this_INT_0=null;
+        Token kw=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3403:2: ( (this_INT_0= RULE_INT | kw= '*' ) )
+            // InternalSolverLanguage.g:3404:2: (this_INT_0= RULE_INT | kw= '*' )
+            {
+            // InternalSolverLanguage.g:3404:2: (this_INT_0= RULE_INT | kw= '*' )
+            int alt41=2;
+            int LA41_0 = input.LA(1);
+
+            if ( (LA41_0==RULE_INT) ) {
+                alt41=1;
+            }
+            else if ( (LA41_0==35) ) {
+                alt41=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 41, 0, input);
+
+                throw nvae;
+            }
+            switch (alt41) {
+                case 1 :
+                    // InternalSolverLanguage.g:3405:3: this_INT_0= RULE_INT
+                    {
+                    this_INT_0=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current.merge(this_INT_0);
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      			newLeafNode(this_INT_0, grammarAccess.getUpperMultiplictyAccess().getINTTerminalRuleCall_0());
+                      		
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3413:3: kw= '*'
+                    {
+                    kw=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current.merge(kw);
+                      			newLeafNode(kw, grammarAccess.getUpperMultiplictyAccess().getAsteriskKeyword_1());
+                      		
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleUpperMultiplicty"
+
+
+    // $ANTLR start "entryRuleReal"
+    // InternalSolverLanguage.g:3422:1: entryRuleReal returns [String current=null] : iv_ruleReal= ruleReal EOF ;
+    public final String entryRuleReal() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleReal = null;
+
+
+
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
+        try {
+            // InternalSolverLanguage.g:3424:2: (iv_ruleReal= ruleReal EOF )
+            // InternalSolverLanguage.g:3425:2: iv_ruleReal= ruleReal EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getRealRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleReal=ruleReal();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleReal.getText(); 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+
+            	myHiddenTokenState.restore();
+
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleReal"
+
+
+    // $ANTLR start "ruleReal"
+    // InternalSolverLanguage.g:3434:1: ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ) ;
+    public final AntlrDatatypeRuleToken ruleReal() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token this_INT_0=null;
+        Token kw=null;
+        Token this_INT_2=null;
+
+
+        	enterRule();
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
+        try {
+            // InternalSolverLanguage.g:3441:2: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ) )
+            // InternalSolverLanguage.g:3442:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? )
+            {
+            // InternalSolverLanguage.g:3442:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? )
+            // InternalSolverLanguage.g:3443:3: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )?
+            {
+            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_53); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current.merge(this_INT_0);
+              		
+            }
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(this_INT_0, grammarAccess.getRealAccess().getINTTerminalRuleCall_0());
+              		
+            }
+            // InternalSolverLanguage.g:3450:3: (kw= '.' this_INT_2= RULE_INT )?
+            int alt42=2;
+            int LA42_0 = input.LA(1);
+
+            if ( (LA42_0==22) ) {
+                alt42=1;
+            }
+            switch (alt42) {
+                case 1 :
+                    // InternalSolverLanguage.g:3451:4: kw= '.' this_INT_2= RULE_INT
+                    {
+                    kw=(Token)match(input,22,FOLLOW_47); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current.merge(kw);
+                      				newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_1_0());
+                      			
+                    }
+                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current.merge(this_INT_2);
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(this_INT_2, grammarAccess.getRealAccess().getINTTerminalRuleCall_1_1());
+                      			
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+
+            	myHiddenTokenState.restore();
+
+        }
+        return current;
+    }
+    // $ANTLR end "ruleReal"
+
+
+    // $ANTLR start "entryRuleQualifiedName"
+    // InternalSolverLanguage.g:3471:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    public final String entryRuleQualifiedName() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleQualifiedName = null;
+
+
+
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
+        try {
+            // InternalSolverLanguage.g:3473:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalSolverLanguage.g:3474:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getQualifiedNameRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleQualifiedName=ruleQualifiedName();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleQualifiedName.getText(); 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+
+            	myHiddenTokenState.restore();
+
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleQualifiedName"
+
+
+    // $ANTLR start "ruleQualifiedName"
+    // InternalSolverLanguage.g:3483:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) | this_QUOTED_ID_3= RULE_QUOTED_ID ) ;
+    public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token this_ID_0=null;
+        Token kw=null;
+        Token this_ID_2=null;
+        Token this_QUOTED_ID_3=null;
+
+
+        	enterRule();
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
+        try {
+            // InternalSolverLanguage.g:3490:2: ( ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) | this_QUOTED_ID_3= RULE_QUOTED_ID ) )
+            // InternalSolverLanguage.g:3491:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) | this_QUOTED_ID_3= RULE_QUOTED_ID )
+            {
+            // InternalSolverLanguage.g:3491:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) | this_QUOTED_ID_3= RULE_QUOTED_ID )
+            int alt44=2;
+            int LA44_0 = input.LA(1);
+
+            if ( (LA44_0==RULE_ID) ) {
+                alt44=1;
+            }
+            else if ( (LA44_0==RULE_QUOTED_ID) ) {
+                alt44=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 44, 0, input);
+
+                throw nvae;
+            }
+            switch (alt44) {
+                case 1 :
+                    // InternalSolverLanguage.g:3492:3: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+                    {
+                    // InternalSolverLanguage.g:3492:3: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+                    // InternalSolverLanguage.g:3493:4: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+                    {
+                    this_ID_0=(Token)match(input,RULE_ID,FOLLOW_53); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current.merge(this_ID_0);
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0_0());
+                      			
+                    }
+                    // InternalSolverLanguage.g:3500:4: (kw= '.' this_ID_2= RULE_ID )*
+                    loop43:
+                    do {
+                        int alt43=2;
+                        int LA43_0 = input.LA(1);
+
+                        if ( (LA43_0==22) ) {
+                            int LA43_2 = input.LA(2);
+
+                            if ( (LA43_2==RULE_ID) ) {
+                                alt43=1;
+                            }
+
+
+                        }
+
+
+                        switch (alt43) {
+                    	case 1 :
+                    	    // InternalSolverLanguage.g:3501:5: kw= '.' this_ID_2= RULE_ID
+                    	    {
+                    	    kw=(Token)match(input,22,FOLLOW_40); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      					current.merge(kw);
+                    	      					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_0_1_0());
+                    	      				
+                    	    }
+                    	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_53); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	      					current.merge(this_ID_2);
+                    	      				
+                    	    }
+                    	    if ( state.backtracking==0 ) {
+
+                    	      					newLeafNode(this_ID_2, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0_1_1());
+                    	      				
+                    	    }
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop43;
+                        }
+                    } while (true);
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3516:3: this_QUOTED_ID_3= RULE_QUOTED_ID
+                    {
+                    this_QUOTED_ID_3=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current.merge(this_QUOTED_ID_3);
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      			newLeafNode(this_QUOTED_ID_3, grammarAccess.getQualifiedNameAccess().getQUOTED_IDTerminalRuleCall_1());
+                      		
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+
+            	myHiddenTokenState.restore();
+
+        }
+        return current;
+    }
+    // $ANTLR end "ruleQualifiedName"
+
+
+    // $ANTLR start "ruleMetricType"
+    // InternalSolverLanguage.g:3530:1: ruleMetricType returns [Enumerator current=null] : ( (enumLiteral_0= 'int' ) | (enumLiteral_1= 'real' ) ) ;
+    public final Enumerator ruleMetricType() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3536:2: ( ( (enumLiteral_0= 'int' ) | (enumLiteral_1= 'real' ) ) )
+            // InternalSolverLanguage.g:3537:2: ( (enumLiteral_0= 'int' ) | (enumLiteral_1= 'real' ) )
+            {
+            // InternalSolverLanguage.g:3537:2: ( (enumLiteral_0= 'int' ) | (enumLiteral_1= 'real' ) )
+            int alt45=2;
+            int LA45_0 = input.LA(1);
+
+            if ( (LA45_0==50) ) {
+                alt45=1;
+            }
+            else if ( (LA45_0==51) ) {
+                alt45=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 45, 0, input);
+
+                throw nvae;
+            }
+            switch (alt45) {
+                case 1 :
+                    // InternalSolverLanguage.g:3538:3: (enumLiteral_0= 'int' )
+                    {
+                    // InternalSolverLanguage.g:3538:3: (enumLiteral_0= 'int' )
+                    // InternalSolverLanguage.g:3539:4: enumLiteral_0= 'int'
+                    {
+                    enumLiteral_0=(Token)match(input,50,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getMetricTypeAccess().getINTEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getMetricTypeAccess().getINTEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3546:3: (enumLiteral_1= 'real' )
+                    {
+                    // InternalSolverLanguage.g:3546:3: (enumLiteral_1= 'real' )
+                    // InternalSolverLanguage.g:3547:4: enumLiteral_1= 'real'
+                    {
+                    enumLiteral_1=(Token)match(input,51,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getMetricTypeAccess().getREALEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getMetricTypeAccess().getREALEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMetricType"
+
+
+    // $ANTLR start "ruleComparisonOperator"
+    // InternalSolverLanguage.g:3557:1: ruleComparisonOperator returns [Enumerator current=null] : ( (enumLiteral_0= '==' ) | (enumLiteral_1= '!=' ) | (enumLiteral_2= '<' ) | (enumLiteral_3= '<=' ) | (enumLiteral_4= '>' ) | (enumLiteral_5= '>=' ) | (enumLiteral_6= 'in' ) ) ;
+    public final Enumerator ruleComparisonOperator() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+        Token enumLiteral_2=null;
+        Token enumLiteral_3=null;
+        Token enumLiteral_4=null;
+        Token enumLiteral_5=null;
+        Token enumLiteral_6=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3563:2: ( ( (enumLiteral_0= '==' ) | (enumLiteral_1= '!=' ) | (enumLiteral_2= '<' ) | (enumLiteral_3= '<=' ) | (enumLiteral_4= '>' ) | (enumLiteral_5= '>=' ) | (enumLiteral_6= 'in' ) ) )
+            // InternalSolverLanguage.g:3564:2: ( (enumLiteral_0= '==' ) | (enumLiteral_1= '!=' ) | (enumLiteral_2= '<' ) | (enumLiteral_3= '<=' ) | (enumLiteral_4= '>' ) | (enumLiteral_5= '>=' ) | (enumLiteral_6= 'in' ) )
+            {
+            // InternalSolverLanguage.g:3564:2: ( (enumLiteral_0= '==' ) | (enumLiteral_1= '!=' ) | (enumLiteral_2= '<' ) | (enumLiteral_3= '<=' ) | (enumLiteral_4= '>' ) | (enumLiteral_5= '>=' ) | (enumLiteral_6= 'in' ) )
+            int alt46=7;
+            switch ( input.LA(1) ) {
+            case 47:
+                {
+                alt46=1;
+                }
+                break;
+            case 52:
+                {
+                alt46=2;
+                }
+                break;
+            case 53:
+                {
+                alt46=3;
+                }
+                break;
+            case 48:
+                {
+                alt46=4;
+                }
+                break;
+            case 54:
+                {
+                alt46=5;
+                }
+                break;
+            case 49:
+                {
+                alt46=6;
+                }
+                break;
+            case 55:
+                {
+                alt46=7;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 46, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt46) {
+                case 1 :
+                    // InternalSolverLanguage.g:3565:3: (enumLiteral_0= '==' )
+                    {
+                    // InternalSolverLanguage.g:3565:3: (enumLiteral_0= '==' )
+                    // InternalSolverLanguage.g:3566:4: enumLiteral_0= '=='
+                    {
+                    enumLiteral_0=(Token)match(input,47,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getEQEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorAccess().getEQEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3573:3: (enumLiteral_1= '!=' )
+                    {
+                    // InternalSolverLanguage.g:3573:3: (enumLiteral_1= '!=' )
+                    // InternalSolverLanguage.g:3574:4: enumLiteral_1= '!='
+                    {
+                    enumLiteral_1=(Token)match(input,52,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getNOT_EQEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorAccess().getNOT_EQEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:3581:3: (enumLiteral_2= '<' )
+                    {
+                    // InternalSolverLanguage.g:3581:3: (enumLiteral_2= '<' )
+                    // InternalSolverLanguage.g:3582:4: enumLiteral_2= '<'
+                    {
+                    enumLiteral_2=(Token)match(input,53,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getLESSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_2, grammarAccess.getComparisonOperatorAccess().getLESSEnumLiteralDeclaration_2());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:3589:3: (enumLiteral_3= '<=' )
+                    {
+                    // InternalSolverLanguage.g:3589:3: (enumLiteral_3= '<=' )
+                    // InternalSolverLanguage.g:3590:4: enumLiteral_3= '<='
+                    {
+                    enumLiteral_3=(Token)match(input,48,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getLESS_EQEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_3, grammarAccess.getComparisonOperatorAccess().getLESS_EQEnumLiteralDeclaration_3());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // InternalSolverLanguage.g:3597:3: (enumLiteral_4= '>' )
+                    {
+                    // InternalSolverLanguage.g:3597:3: (enumLiteral_4= '>' )
+                    // InternalSolverLanguage.g:3598:4: enumLiteral_4= '>'
+                    {
+                    enumLiteral_4=(Token)match(input,54,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getGREATEREnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_4, grammarAccess.getComparisonOperatorAccess().getGREATEREnumLiteralDeclaration_4());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // InternalSolverLanguage.g:3605:3: (enumLiteral_5= '>=' )
+                    {
+                    // InternalSolverLanguage.g:3605:3: (enumLiteral_5= '>=' )
+                    // InternalSolverLanguage.g:3606:4: enumLiteral_5= '>='
+                    {
+                    enumLiteral_5=(Token)match(input,49,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getGREATER_EQEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_5, grammarAccess.getComparisonOperatorAccess().getGREATER_EQEnumLiteralDeclaration_5());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 7 :
+                    // InternalSolverLanguage.g:3613:3: (enumLiteral_6= 'in' )
+                    {
+                    // InternalSolverLanguage.g:3613:3: (enumLiteral_6= 'in' )
+                    // InternalSolverLanguage.g:3614:4: enumLiteral_6= 'in'
+                    {
+                    enumLiteral_6=(Token)match(input,55,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getComparisonOperatorAccess().getINEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_6, grammarAccess.getComparisonOperatorAccess().getINEnumLiteralDeclaration_6());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleComparisonOperator"
+
+
+    // $ANTLR start "ruleAdditiveBinaryOperator"
+    // InternalSolverLanguage.g:3624:1: ruleAdditiveBinaryOperator returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    public final Enumerator ruleAdditiveBinaryOperator() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3630:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalSolverLanguage.g:3631:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            {
+            // InternalSolverLanguage.g:3631:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            int alt47=2;
+            int LA47_0 = input.LA(1);
+
+            if ( (LA47_0==56) ) {
+                alt47=1;
+            }
+            else if ( (LA47_0==57) ) {
+                alt47=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 47, 0, input);
+
+                throw nvae;
+            }
+            switch (alt47) {
+                case 1 :
+                    // InternalSolverLanguage.g:3632:3: (enumLiteral_0= '+' )
+                    {
+                    // InternalSolverLanguage.g:3632:3: (enumLiteral_0= '+' )
+                    // InternalSolverLanguage.g:3633:4: enumLiteral_0= '+'
+                    {
+                    enumLiteral_0=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAdditiveBinaryOperatorAccess().getADDEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getAdditiveBinaryOperatorAccess().getADDEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3640:3: (enumLiteral_1= '-' )
+                    {
+                    // InternalSolverLanguage.g:3640:3: (enumLiteral_1= '-' )
+                    // InternalSolverLanguage.g:3641:4: enumLiteral_1= '-'
+                    {
+                    enumLiteral_1=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAdditiveBinaryOperatorAccess().getSUBEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getAdditiveBinaryOperatorAccess().getSUBEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleAdditiveBinaryOperator"
+
+
+    // $ANTLR start "ruleMultiplicativeBinaryOperator"
+    // InternalSolverLanguage.g:3651:1: ruleMultiplicativeBinaryOperator returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) ) ;
+    public final Enumerator ruleMultiplicativeBinaryOperator() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3657:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) ) )
+            // InternalSolverLanguage.g:3658:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) )
+            {
+            // InternalSolverLanguage.g:3658:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) )
+            int alt48=2;
+            int LA48_0 = input.LA(1);
+
+            if ( (LA48_0==35) ) {
+                alt48=1;
+            }
+            else if ( (LA48_0==58) ) {
+                alt48=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 48, 0, input);
+
+                throw nvae;
+            }
+            switch (alt48) {
+                case 1 :
+                    // InternalSolverLanguage.g:3659:3: (enumLiteral_0= '*' )
+                    {
+                    // InternalSolverLanguage.g:3659:3: (enumLiteral_0= '*' )
+                    // InternalSolverLanguage.g:3660:4: enumLiteral_0= '*'
+                    {
+                    enumLiteral_0=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getMultiplicativeBinaryOperatorAccess().getMULEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getMultiplicativeBinaryOperatorAccess().getMULEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3667:3: (enumLiteral_1= '/' )
+                    {
+                    // InternalSolverLanguage.g:3667:3: (enumLiteral_1= '/' )
+                    // InternalSolverLanguage.g:3668:4: enumLiteral_1= '/'
+                    {
+                    enumLiteral_1=(Token)match(input,58,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getMultiplicativeBinaryOperatorAccess().getDIVEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getMultiplicativeBinaryOperatorAccess().getDIVEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMultiplicativeBinaryOperator"
+
+
+    // $ANTLR start "ruleExponentialOp"
+    // InternalSolverLanguage.g:3678:1: ruleExponentialOp returns [Enumerator current=null] : (enumLiteral_0= '^' ) ;
+    public final Enumerator ruleExponentialOp() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3684:2: ( (enumLiteral_0= '^' ) )
+            // InternalSolverLanguage.g:3685:2: (enumLiteral_0= '^' )
+            {
+            // InternalSolverLanguage.g:3685:2: (enumLiteral_0= '^' )
+            // InternalSolverLanguage.g:3686:3: enumLiteral_0= '^'
+            {
+            enumLiteral_0=(Token)match(input,59,FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			current = grammarAccess.getExponentialOpAccess().getPOWEnumLiteralDeclaration().getEnumLiteral().getInstance();
+              			newLeafNode(enumLiteral_0, grammarAccess.getExponentialOpAccess().getPOWEnumLiteralDeclaration());
+              		
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleExponentialOp"
+
+
+    // $ANTLR start "ruleUnaryOp"
+    // InternalSolverLanguage.g:3695:1: ruleUnaryOp returns [Enumerator current=null] : ( (enumLiteral_0= '!' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '-' ) | (enumLiteral_3= 'may' ) | (enumLiteral_4= 'must' ) | (enumLiteral_5= 'current' ) ) ;
+    public final Enumerator ruleUnaryOp() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+        Token enumLiteral_2=null;
+        Token enumLiteral_3=null;
+        Token enumLiteral_4=null;
+        Token enumLiteral_5=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3701:2: ( ( (enumLiteral_0= '!' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '-' ) | (enumLiteral_3= 'may' ) | (enumLiteral_4= 'must' ) | (enumLiteral_5= 'current' ) ) )
+            // InternalSolverLanguage.g:3702:2: ( (enumLiteral_0= '!' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '-' ) | (enumLiteral_3= 'may' ) | (enumLiteral_4= 'must' ) | (enumLiteral_5= 'current' ) )
+            {
+            // InternalSolverLanguage.g:3702:2: ( (enumLiteral_0= '!' ) | (enumLiteral_1= '+' ) | (enumLiteral_2= '-' ) | (enumLiteral_3= 'may' ) | (enumLiteral_4= 'must' ) | (enumLiteral_5= 'current' ) )
+            int alt49=6;
+            switch ( input.LA(1) ) {
+            case 60:
+                {
+                alt49=1;
+                }
+                break;
+            case 56:
+                {
+                alt49=2;
+                }
+                break;
+            case 57:
+                {
+                alt49=3;
+                }
+                break;
+            case 61:
+                {
+                alt49=4;
+                }
+                break;
+            case 62:
+                {
+                alt49=5;
+                }
+                break;
+            case 63:
+                {
+                alt49=6;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 49, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt49) {
+                case 1 :
+                    // InternalSolverLanguage.g:3703:3: (enumLiteral_0= '!' )
+                    {
+                    // InternalSolverLanguage.g:3703:3: (enumLiteral_0= '!' )
+                    // InternalSolverLanguage.g:3704:4: enumLiteral_0= '!'
+                    {
+                    enumLiteral_0=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getUnaryOpAccess().getNEGEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getUnaryOpAccess().getNEGEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3711:3: (enumLiteral_1= '+' )
+                    {
+                    // InternalSolverLanguage.g:3711:3: (enumLiteral_1= '+' )
+                    // InternalSolverLanguage.g:3712:4: enumLiteral_1= '+'
+                    {
+                    enumLiteral_1=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getUnaryOpAccess().getPLUSEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getUnaryOpAccess().getPLUSEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:3719:3: (enumLiteral_2= '-' )
+                    {
+                    // InternalSolverLanguage.g:3719:3: (enumLiteral_2= '-' )
+                    // InternalSolverLanguage.g:3720:4: enumLiteral_2= '-'
+                    {
+                    enumLiteral_2=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getUnaryOpAccess().getMINUSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_2, grammarAccess.getUnaryOpAccess().getMINUSEnumLiteralDeclaration_2());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:3727:3: (enumLiteral_3= 'may' )
+                    {
+                    // InternalSolverLanguage.g:3727:3: (enumLiteral_3= 'may' )
+                    // InternalSolverLanguage.g:3728:4: enumLiteral_3= 'may'
+                    {
+                    enumLiteral_3=(Token)match(input,61,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getUnaryOpAccess().getMAYEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_3, grammarAccess.getUnaryOpAccess().getMAYEnumLiteralDeclaration_3());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // InternalSolverLanguage.g:3735:3: (enumLiteral_4= 'must' )
+                    {
+                    // InternalSolverLanguage.g:3735:3: (enumLiteral_4= 'must' )
+                    // InternalSolverLanguage.g:3736:4: enumLiteral_4= 'must'
+                    {
+                    enumLiteral_4=(Token)match(input,62,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getUnaryOpAccess().getMUSTEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_4, grammarAccess.getUnaryOpAccess().getMUSTEnumLiteralDeclaration_4());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // InternalSolverLanguage.g:3743:3: (enumLiteral_5= 'current' )
+                    {
+                    // InternalSolverLanguage.g:3743:3: (enumLiteral_5= 'current' )
+                    // InternalSolverLanguage.g:3744:4: enumLiteral_5= 'current'
+                    {
+                    enumLiteral_5=(Token)match(input,63,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getUnaryOpAccess().getCURRENTEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_5, grammarAccess.getUnaryOpAccess().getCURRENTEnumLiteralDeclaration_5());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleUnaryOp"
+
+
+    // $ANTLR start "ruleAggregationOp"
+    // InternalSolverLanguage.g:3754:1: ruleAggregationOp returns [Enumerator current=null] : ( (enumLiteral_0= 'only' ) | (enumLiteral_1= 'sum' ) | (enumLiteral_2= 'prod' ) | (enumLiteral_3= 'avg' ) | (enumLiteral_4= 'min' ) | (enumLiteral_5= 'max' ) ) ;
+    public final Enumerator ruleAggregationOp() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+        Token enumLiteral_2=null;
+        Token enumLiteral_3=null;
+        Token enumLiteral_4=null;
+        Token enumLiteral_5=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3760:2: ( ( (enumLiteral_0= 'only' ) | (enumLiteral_1= 'sum' ) | (enumLiteral_2= 'prod' ) | (enumLiteral_3= 'avg' ) | (enumLiteral_4= 'min' ) | (enumLiteral_5= 'max' ) ) )
+            // InternalSolverLanguage.g:3761:2: ( (enumLiteral_0= 'only' ) | (enumLiteral_1= 'sum' ) | (enumLiteral_2= 'prod' ) | (enumLiteral_3= 'avg' ) | (enumLiteral_4= 'min' ) | (enumLiteral_5= 'max' ) )
+            {
+            // InternalSolverLanguage.g:3761:2: ( (enumLiteral_0= 'only' ) | (enumLiteral_1= 'sum' ) | (enumLiteral_2= 'prod' ) | (enumLiteral_3= 'avg' ) | (enumLiteral_4= 'min' ) | (enumLiteral_5= 'max' ) )
+            int alt50=6;
+            switch ( input.LA(1) ) {
+            case 64:
+                {
+                alt50=1;
+                }
+                break;
+            case 65:
+                {
+                alt50=2;
+                }
+                break;
+            case 66:
+                {
+                alt50=3;
+                }
+                break;
+            case 67:
+                {
+                alt50=4;
+                }
+                break;
+            case 68:
+                {
+                alt50=5;
+                }
+                break;
+            case 69:
+                {
+                alt50=6;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 50, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt50) {
+                case 1 :
+                    // InternalSolverLanguage.g:3762:3: (enumLiteral_0= 'only' )
+                    {
+                    // InternalSolverLanguage.g:3762:3: (enumLiteral_0= 'only' )
+                    // InternalSolverLanguage.g:3763:4: enumLiteral_0= 'only'
+                    {
+                    enumLiteral_0=(Token)match(input,64,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAggregationOpAccess().getONLYEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getAggregationOpAccess().getONLYEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3770:3: (enumLiteral_1= 'sum' )
+                    {
+                    // InternalSolverLanguage.g:3770:3: (enumLiteral_1= 'sum' )
+                    // InternalSolverLanguage.g:3771:4: enumLiteral_1= 'sum'
+                    {
+                    enumLiteral_1=(Token)match(input,65,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAggregationOpAccess().getSUMEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getAggregationOpAccess().getSUMEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:3778:3: (enumLiteral_2= 'prod' )
+                    {
+                    // InternalSolverLanguage.g:3778:3: (enumLiteral_2= 'prod' )
+                    // InternalSolverLanguage.g:3779:4: enumLiteral_2= 'prod'
+                    {
+                    enumLiteral_2=(Token)match(input,66,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAggregationOpAccess().getPRODEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_2, grammarAccess.getAggregationOpAccess().getPRODEnumLiteralDeclaration_2());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:3786:3: (enumLiteral_3= 'avg' )
+                    {
+                    // InternalSolverLanguage.g:3786:3: (enumLiteral_3= 'avg' )
+                    // InternalSolverLanguage.g:3787:4: enumLiteral_3= 'avg'
+                    {
+                    enumLiteral_3=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAggregationOpAccess().getAVGEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_3, grammarAccess.getAggregationOpAccess().getAVGEnumLiteralDeclaration_3());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // InternalSolverLanguage.g:3794:3: (enumLiteral_4= 'min' )
+                    {
+                    // InternalSolverLanguage.g:3794:3: (enumLiteral_4= 'min' )
+                    // InternalSolverLanguage.g:3795:4: enumLiteral_4= 'min'
+                    {
+                    enumLiteral_4=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAggregationOpAccess().getMINEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_4, grammarAccess.getAggregationOpAccess().getMINEnumLiteralDeclaration_4());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // InternalSolverLanguage.g:3802:3: (enumLiteral_5= 'max' )
+                    {
+                    // InternalSolverLanguage.g:3802:3: (enumLiteral_5= 'max' )
+                    // InternalSolverLanguage.g:3803:4: enumLiteral_5= 'max'
+                    {
+                    enumLiteral_5=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getAggregationOpAccess().getMAXEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_5, grammarAccess.getAggregationOpAccess().getMAXEnumLiteralDeclaration_5());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleAggregationOp"
+
+
+    // $ANTLR start "ruleLogicValue"
+    // InternalSolverLanguage.g:3813:1: ruleLogicValue returns [Enumerator current=null] : ( (enumLiteral_0= 'true' ) | (enumLiteral_1= 'false' ) | (enumLiteral_2= 'unknown' ) | (enumLiteral_3= 'error' ) ) ;
+    public final Enumerator ruleLogicValue() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+        Token enumLiteral_2=null;
+        Token enumLiteral_3=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3819:2: ( ( (enumLiteral_0= 'true' ) | (enumLiteral_1= 'false' ) | (enumLiteral_2= 'unknown' ) | (enumLiteral_3= 'error' ) ) )
+            // InternalSolverLanguage.g:3820:2: ( (enumLiteral_0= 'true' ) | (enumLiteral_1= 'false' ) | (enumLiteral_2= 'unknown' ) | (enumLiteral_3= 'error' ) )
+            {
+            // InternalSolverLanguage.g:3820:2: ( (enumLiteral_0= 'true' ) | (enumLiteral_1= 'false' ) | (enumLiteral_2= 'unknown' ) | (enumLiteral_3= 'error' ) )
+            int alt51=4;
+            switch ( input.LA(1) ) {
+            case 70:
+                {
+                alt51=1;
+                }
+                break;
+            case 71:
+                {
+                alt51=2;
+                }
+                break;
+            case 72:
+                {
+                alt51=3;
+                }
+                break;
+            case 19:
+                {
+                alt51=4;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 51, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt51) {
+                case 1 :
+                    // InternalSolverLanguage.g:3821:3: (enumLiteral_0= 'true' )
+                    {
+                    // InternalSolverLanguage.g:3821:3: (enumLiteral_0= 'true' )
+                    // InternalSolverLanguage.g:3822:4: enumLiteral_0= 'true'
+                    {
+                    enumLiteral_0=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getLogicValueAccess().getTRUEEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getLogicValueAccess().getTRUEEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3829:3: (enumLiteral_1= 'false' )
+                    {
+                    // InternalSolverLanguage.g:3829:3: (enumLiteral_1= 'false' )
+                    // InternalSolverLanguage.g:3830:4: enumLiteral_1= 'false'
+                    {
+                    enumLiteral_1=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getLogicValueAccess().getFALSEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getLogicValueAccess().getFALSEEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // InternalSolverLanguage.g:3837:3: (enumLiteral_2= 'unknown' )
+                    {
+                    // InternalSolverLanguage.g:3837:3: (enumLiteral_2= 'unknown' )
+                    // InternalSolverLanguage.g:3838:4: enumLiteral_2= 'unknown'
+                    {
+                    enumLiteral_2=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getLogicValueAccess().getUNKNOWNEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_2, grammarAccess.getLogicValueAccess().getUNKNOWNEnumLiteralDeclaration_2());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // InternalSolverLanguage.g:3845:3: (enumLiteral_3= 'error' )
+                    {
+                    // InternalSolverLanguage.g:3845:3: (enumLiteral_3= 'error' )
+                    // InternalSolverLanguage.g:3846:4: enumLiteral_3= 'error'
+                    {
+                    enumLiteral_3=(Token)match(input,19,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getLogicValueAccess().getERROREnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_3, grammarAccess.getLogicValueAccess().getERROREnumLiteralDeclaration_3());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleLogicValue"
+
+
+    // $ANTLR start "ruleObjectiveKind"
+    // InternalSolverLanguage.g:3856:1: ruleObjectiveKind returns [Enumerator current=null] : ( (enumLiteral_0= 'minimize' ) | (enumLiteral_1= 'maximize' ) ) ;
+    public final Enumerator ruleObjectiveKind() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalSolverLanguage.g:3862:2: ( ( (enumLiteral_0= 'minimize' ) | (enumLiteral_1= 'maximize' ) ) )
+            // InternalSolverLanguage.g:3863:2: ( (enumLiteral_0= 'minimize' ) | (enumLiteral_1= 'maximize' ) )
+            {
+            // InternalSolverLanguage.g:3863:2: ( (enumLiteral_0= 'minimize' ) | (enumLiteral_1= 'maximize' ) )
+            int alt52=2;
+            int LA52_0 = input.LA(1);
+
+            if ( (LA52_0==73) ) {
+                alt52=1;
+            }
+            else if ( (LA52_0==74) ) {
+                alt52=2;
+            }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 52, 0, input);
+
+                throw nvae;
+            }
+            switch (alt52) {
+                case 1 :
+                    // InternalSolverLanguage.g:3864:3: (enumLiteral_0= 'minimize' )
+                    {
+                    // InternalSolverLanguage.g:3864:3: (enumLiteral_0= 'minimize' )
+                    // InternalSolverLanguage.g:3865:4: enumLiteral_0= 'minimize'
+                    {
+                    enumLiteral_0=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getObjectiveKindAccess().getMINIMIZEEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getObjectiveKindAccess().getMINIMIZEEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalSolverLanguage.g:3872:3: (enumLiteral_1= 'maximize' )
+                    {
+                    // InternalSolverLanguage.g:3872:3: (enumLiteral_1= 'maximize' )
+                    // InternalSolverLanguage.g:3873:4: enumLiteral_1= 'maximize'
+                    {
+                    enumLiteral_1=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getObjectiveKindAccess().getMAXIMIZEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getObjectiveKindAccess().getMAXIMIZEEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleObjectiveKind"
 
     // Delegated rules
 
 
     protected DFA2 dfa2 = new DFA2(this);
-    static final String dfa_1s = "\11\uffff";
-    static final String dfa_2s = "\1\5\1\21\2\uffff\1\4\1\22\1\24\1\4\1\22";
-    static final String dfa_3s = "\1\50\1\34\2\uffff\1\37\1\24\1\34\1\37\1\24";
-    static final String dfa_4s = "\2\uffff\1\1\1\2\5\uffff";
-    static final String dfa_5s = "\11\uffff}>";
+    protected DFA25 dfa25 = new DFA25(this);
+    protected DFA36 dfa36 = new DFA36(this);
+    static final String dfa_1s = "\15\uffff";
+    static final String dfa_2s = "\1\7\1\uffff\1\4\2\uffff\1\10\7\uffff";
+    static final String dfa_3s = "\1\112\1\uffff\1\73\2\uffff\1\63\7\uffff";
+    static final String dfa_4s = "\1\uffff\1\1\1\uffff\1\2\1\4\1\uffff\1\6\1\10\1\11\1\12\1\3\1\7\1\5";
+    static final String dfa_5s = "\15\uffff}>";
     static final String[] dfa_6s = {
-            "\1\1\12\uffff\1\3\4\uffff\6\2\5\uffff\3\2\3\uffff\3\2",
-            "\1\4\2\uffff\1\2\7\uffff\1\3",
+            "\4\1\7\uffff\1\3\1\2\1\4\1\5\1\uffff\1\1\5\uffff\1\1\3\uffff\1\1\2\uffff\1\1\2\uffff\2\1\2\7\3\uffff\1\10\3\uffff\2\6\4\uffff\2\1\2\uffff\15\1\2\11",
+            "",
+            "\1\1\3\uffff\1\3\1\uffff\1\3\4\uffff\3\1\1\3\7\uffff\3\1\4\uffff\1\12\1\uffff\1\1\13\uffff\3\1\2\uffff\10\1",
             "",
             "",
-            "\1\2\1\5\1\2\4\uffff\1\2\1\uffff\2\2\4\uffff\1\6\1\2\6\uffff\1\2\3\uffff\1\2",
-            "\1\7\1\6\1\3",
-            "\1\2\7\uffff\1\3",
-            "\1\2\1\10\1\2\4\uffff\1\2\1\uffff\2\2\5\uffff\1\2\6\uffff\1\2\3\uffff\1\2",
-            "\1\7\1\6\1\3"
+            "\1\14\1\uffff\1\14\47\uffff\2\13",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
     };
 
     static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
@@ -7115,46 +11390,156 @@ public class InternalSolverLanguageParser extends AbstractInternalAntlrParser {
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "114:2: (this_Interpretation_0= ruleInterpretation | this_Predicate_1= rulePredicate )";
+            return "116:3: (this_AssertionOrDefinition_0= ruleAssertionOrDefinition | this_PredicateDefinition_1= rulePredicateDefinition | this_UnnamedErrorPrediateDefinition_2= ruleUnnamedErrorPrediateDefinition | this_DefaultDefinition_3= ruleDefaultDefinition | this_ExternPredicateDefinition_4= ruleExternPredicateDefinition | this_MetricDefinition_5= ruleMetricDefinition | this_ExternMetricDefinition_6= ruleExternMetricDefinition | this_ClassDefinition_7= ruleClassDefinition | this_ScopeDefinition_8= ruleScopeDefinition | this_ObjectiveDefinition_9= ruleObjectiveDefinition )";
+        }
+    }
+    static final String dfa_7s = "\12\uffff";
+    static final String dfa_8s = "\1\uffff\2\3\4\uffff\1\11\1\3\1\uffff";
+    static final String dfa_9s = "\1\7\2\10\2\uffff\1\10\1\uffff\1\7\1\10\1\uffff";
+    static final String dfa_10s = "\1\110\2\73\2\uffff\1\10\1\uffff\1\110\1\73\1\uffff";
+    static final String dfa_11s = "\3\uffff\1\1\1\2\1\uffff\1\3\2\uffff\1\4";
+    static final String dfa_12s = "\12\uffff}>";
+    static final String[] dfa_13s = {
+            "\1\3\1\1\1\3\1\2\10\uffff\1\3\11\uffff\1\3\3\uffff\1\3\1\uffff\1\4\1\3\2\uffff\2\3\17\uffff\2\3\2\uffff\15\3",
+            "\1\6\1\uffff\1\6\13\uffff\1\5\5\uffff\1\3\4\uffff\2\3\1\7\13\uffff\3\3\2\uffff\10\3",
+            "\1\6\1\uffff\1\6\21\uffff\1\3\4\uffff\2\3\1\7\13\uffff\3\3\2\uffff\10\3",
+            "",
+            "",
+            "\1\10",
+            "",
+            "\4\3\10\uffff\1\3\10\uffff\1\11\1\3\3\uffff\1\3\1\11\1\uffff\1\3\2\uffff\2\3\17\uffff\2\3\2\uffff\15\3",
+            "\1\6\1\uffff\1\6\13\uffff\1\5\5\uffff\1\3\4\uffff\2\3\1\7\13\uffff\3\3\2\uffff\10\3",
+            ""
+    };
+
+    static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
+    static final short[] dfa_8 = DFA.unpackEncodedString(dfa_8s);
+    static final char[] dfa_9 = DFA.unpackEncodedStringToUnsignedChars(dfa_9s);
+    static final char[] dfa_10 = DFA.unpackEncodedStringToUnsignedChars(dfa_10s);
+    static final short[] dfa_11 = DFA.unpackEncodedString(dfa_11s);
+    static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
+    static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
+
+    class DFA25 extends DFA {
+
+        public DFA25(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 25;
+            this.eot = dfa_7;
+            this.eof = dfa_8;
+            this.min = dfa_9;
+            this.max = dfa_10;
+            this.accept = dfa_11;
+            this.special = dfa_12;
+            this.transition = dfa_13;
+        }
+        public String getDescription() {
+            return "1998:2: (this_ExpressionArgument_0= ruleExpressionArgument | this_StarArgument_1= ruleStarArgument | this_TypedArgument_2= ruleTypedArgument | this_TypedStarArgument_3= ruleTypedStarArgument )";
+        }
+    }
+    static final String dfa_14s = "\17\uffff";
+    static final String dfa_15s = "\15\uffff\1\11\1\uffff";
+    static final String dfa_16s = "\1\56\1\10\1\60\1\26\1\57\1\10\1\uffff\1\10\2\uffff\3\26\1\4\1\26";
+    static final String dfa_17s = "\1\56\1\12\3\61\1\12\1\uffff\1\10\2\uffff\2\60\1\61\1\10\1\60";
+    static final String dfa_18s = "\6\uffff\1\2\1\uffff\1\1\1\3\5\uffff";
+    static final String dfa_19s = "\17\uffff}>";
+    static final String[] dfa_20s = {
+            "\1\1",
+            "\1\3\1\2\1\4",
+            "\1\5\1\6",
+            "\1\7\30\uffff\1\10\1\6\1\11",
+            "\1\10\1\6\1\11",
+            "\1\12\1\uffff\1\13",
+            "",
+            "\1\14",
+            "",
+            "",
+            "\1\15\31\uffff\1\6",
+            "\1\11\31\uffff\1\6",
+            "\1\7\30\uffff\1\10\1\6\1\11",
+            "\1\11\3\uffff\1\16",
+            "\1\15\31\uffff\1\6"
+    };
+
+    static final short[] dfa_14 = DFA.unpackEncodedString(dfa_14s);
+    static final short[] dfa_15 = DFA.unpackEncodedString(dfa_15s);
+    static final char[] dfa_16 = DFA.unpackEncodedStringToUnsignedChars(dfa_16s);
+    static final char[] dfa_17 = DFA.unpackEncodedStringToUnsignedChars(dfa_17s);
+    static final short[] dfa_18 = DFA.unpackEncodedString(dfa_18s);
+    static final short[] dfa_19 = DFA.unpackEncodedString(dfa_19s);
+    static final short[][] dfa_20 = unpackEncodedStringArray(dfa_20s);
+
+    class DFA36 extends DFA {
+
+        public DFA36(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 36;
+            this.eot = dfa_14;
+            this.eof = dfa_15;
+            this.min = dfa_16;
+            this.max = dfa_17;
+            this.accept = dfa_18;
+            this.special = dfa_19;
+            this.transition = dfa_20;
+        }
+        public String getDescription() {
+            return "2973:2: (this_ExactScopeDefinition_0= ruleExactScopeDefinition | this_BoundedScopeDefinition_1= ruleBoundedScopeDefinition | this_LowerBoundedScopeDefinition_2= ruleLowerBoundedScopeDefinition )";
         }
     }
  
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x000001C707E10022L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0xF30C479220BC0782L,0x00000000000007FFL});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000120000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000088186870L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000088106870L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x000000000001E000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000010020000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000080020L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x00000000E0007820L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000020001000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00000000E0003820L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000007E00020L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x00000000C0000822L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x00000000080C6870L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000008006870L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000001800000000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000001000000020L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x000000A000000020L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000002008000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000007E00030L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000080000010L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000038002L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0xF300019220880780L,0x00000000000001FFL});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000080500L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x00000000000C0500L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x000C000000000000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x000000000C000002L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x00F3800000000002L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0300000000000002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0400000800000002L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0800000000000002L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000019220080780L,0x00000000000001FFL});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000200000060L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0xF300019E20880780L,0x00000000000001FFL});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0xF300019A20880780L,0x00000000000001FFL});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000500L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000080040000000L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000050000000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000100080000500L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000001000000100L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000200004000002L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000800000200L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000000000000700L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0002000000400000L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000400002L});
 
 }

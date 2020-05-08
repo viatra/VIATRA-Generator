@@ -457,51 +457,145 @@ private pattern mustInRelation_pattern_queries_memberIsItsOwnParent(
 	var_m)
 {
 	find interpretation(problem,interpretation);
-	find mustInstanceOfMember_class(problem,interpretation,var_m);
-	// m is exported
-	find mustInstanceOfFamilyTree_class(problem,interpretation,var__0);
-	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,var__0,var_virtual0);
-	find mustInstanceOfMember_class(problem,interpretation,var_virtual0);
-	find mustEquivalent(problem, interpretation, var_virtual0, var_m);
-	find mustInstanceOfMember_class(problem,interpretation,var_m);
-	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var_virtual1);
-	find mustInstanceOfMember_class(problem,interpretation,var_virtual1);
-	find mustEquivalent(problem, interpretation, var_virtual1, var_p);
-	find mustEquivalent(problem, interpretation, var_m, var_p);
+	var_m == var_p;
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,_var__0,var_p);
+	find mustInRelationparents_reference_Member(problem,interpretation,var_p,var_p);
 }
 private pattern mayInRelation_pattern_queries_memberIsItsOwnParent(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	var_m)
 {
 	find interpretation(problem,interpretation);
-	find mayInstanceOfMember_class(problem,interpretation,var_m);
-	// m is exported
-	find mayInstanceOfFamilyTree_class(problem,interpretation,var__0);
-	find mayInRelationmembers_reference_FamilyTree(problem,interpretation,var__0,var_virtual0);
-	find mayInstanceOfMember_class(problem,interpretation,var_virtual0);
-	find mayEquivalent(problem, interpretation, var_virtual0, var_m);
-	find mayInstanceOfMember_class(problem,interpretation,var_m);
-	find mayInRelationparents_reference_Member(problem,interpretation,var_m,var_virtual1);
-	find mayInstanceOfMember_class(problem,interpretation,var_virtual1);
-	find mayEquivalent(problem, interpretation, var_virtual1, var_p);
-	find mayEquivalent(problem, interpretation, var_m, var_p);
+	var_m == var_p;
+	find mayInRelationmembers_reference_FamilyTree(problem,interpretation,_var__0,var_p);
+	find mayInRelationparents_reference_Member(problem,interpretation,var_p,var_p);
 }
 private pattern currentInRelation_pattern_queries_memberIsItsOwnParent(
 	problem:LogicProblem, interpretation:PartialInterpretation,
 	var_m)
 {
 	find interpretation(problem,interpretation);
-	find mustInstanceOfMember_class(problem,interpretation,var_m);
-	// m is exported
-	find mustInstanceOfFamilyTree_class(problem,interpretation,var__0);
-	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,var__0,var_virtual0);
-	find mustInstanceOfMember_class(problem,interpretation,var_virtual0);
-	find mustEquivalent(problem, interpretation, var_virtual0, var_m);
-	find mustInstanceOfMember_class(problem,interpretation,var_m);
-	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var_virtual1);
-	find mustInstanceOfMember_class(problem,interpretation,var_virtual1);
-	find mustEquivalent(problem, interpretation, var_virtual1, var_p);
-	find mustEquivalent(problem, interpretation, var_m, var_p);
+	var_m == var_p;
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,_var__0,var_p);
+	find mustInRelationparents_reference_Member(problem,interpretation,var_p,var_p);
+}
+// Must, May and Current queries for pattern queries twoMembersHaveNoParent
+private pattern mustInRelation_pattern_queries_twoMembersHaveNoParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m1, var_m2)
+{
+	find interpretation(problem,interpretation);
+	// var_m1 exported
+	// var_m2 exported
+	find mustInstanceOfMember_class(problem,interpretation,var_m1);
+	find mustInstanceOfMember_class(problem,interpretation,var_m2);
+	neg find mayInRelation_pattern_queries_memberHasParent(problem,interpretation,var_m1);
+	neg find mayInRelation_pattern_queries_memberHasParent(problem,interpretation,var_m2);
+	neg find mayEquivalent(problem, interpretation, var_m1, var_m2);
+}
+private pattern mayInRelation_pattern_queries_twoMembersHaveNoParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m1, var_m2)
+{
+	find interpretation(problem,interpretation);
+	// var_m1 exported
+	// var_m2 exported
+	find mayInstanceOfMember_class(problem,interpretation,var_m1);
+	find mayInstanceOfMember_class(problem,interpretation,var_m2);
+	neg find mustInRelation_pattern_queries_memberHasParent(problem,interpretation,var_m1);
+	neg find mustInRelation_pattern_queries_memberHasParent(problem,interpretation,var_m2);
+	neg find mustEquivalent(problem, interpretation, var_m1, var_m2);
+}
+private pattern currentInRelation_pattern_queries_twoMembersHaveNoParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m1, var_m2)
+{
+	find interpretation(problem,interpretation);
+	// var_m1 exported
+	// var_m2 exported
+	find mustInstanceOfMember_class(problem,interpretation,var_m1);
+	find mustInstanceOfMember_class(problem,interpretation,var_m2);
+	neg find currentInRelation_pattern_queries_memberHasParent(problem,interpretation,var_m1);
+	neg find currentInRelation_pattern_queries_memberHasParent(problem,interpretation,var_m2);
+	neg find mustEquivalent(problem, interpretation, var_m1, var_m2);
+}
+// Must, May and Current queries for pattern queries memberHasParent
+private pattern mustInRelation_pattern_queries_memberHasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find interpretation(problem,interpretation);
+	// var_m exported
+	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var__0);
+	find mustInstanceOfMember_class(problem,interpretation,var__0);
+}
+private pattern mayInRelation_pattern_queries_memberHasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find interpretation(problem,interpretation);
+	// var_m exported
+	find mayInRelationparents_reference_Member(problem,interpretation,var_m,var__0);
+	find mayInstanceOfMember_class(problem,interpretation,var__0);
+}
+private pattern currentInRelation_pattern_queries_memberHasParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m)
+{
+	find interpretation(problem,interpretation);
+	// var_m exported
+	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var__0);
+	find mustInstanceOfMember_class(problem,interpretation,var__0);
+}
+// Must, May and Current queries for pattern queries parentTooYoung
+private pattern mustInRelation_pattern_queries_parentTooYoung(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m, var_p)
+{
+	find interpretation(problem,interpretation);
+	// var_m exported
+	// var_p exported
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,_var__0,var_m);
+	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var_p);
+	find mustInRelationage_attribute_Member(problem,interpretation,var_m,var_mAge);
+	find mustInRelationage_attribute_Member(problem,interpretation,var_p,var_pAge);
+	PrimitiveElement.valueSet(var_mAge,true); IntegerElement.value(var_mAge,value_var_mAge);
+	PrimitiveElement.valueSet(var_pAge,true); IntegerElement.value(var_pAge,value_var_pAge);
+	check((value_var_mAge<=(value_var_pAge+12)));
+}
+private pattern mayInRelation_pattern_queries_parentTooYoung(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m, var_p)
+{
+	find interpretation(problem,interpretation);
+	// var_m exported
+	// var_p exported
+	find mayInRelationmembers_reference_FamilyTree(problem,interpretation,_var__0,var_m);
+	find mayInRelationparents_reference_Member(problem,interpretation,var_m,var_p);
+	find mayInRelationage_attribute_Member(problem,interpretation,var_m,var_mAge);
+	find mayInRelationage_attribute_Member(problem,interpretation,var_p,var_pAge);
+	PrimitiveElement.valueSet(var_mAge,setted_var_mAge); IntegerElement.value(var_mAge,value_var_mAge);
+	PrimitiveElement.valueSet(var_pAge,setted_var_pAge); IntegerElement.value(var_pAge,value_var_pAge);
+	check(
+		!setted_var_mAge || !setted_var_pAge
+		||
+		((value_var_mAge<=(value_var_pAge+12)))
+	);
+}
+private pattern currentInRelation_pattern_queries_parentTooYoung(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m, var_p)
+{
+	find interpretation(problem,interpretation);
+	// var_m exported
+	// var_p exported
+	find mustInRelationmembers_reference_FamilyTree(problem,interpretation,_var__0,var_m);
+	find mustInRelationparents_reference_Member(problem,interpretation,var_m,var_p);
+	find mustInRelationage_attribute_Member(problem,interpretation,var_m,var_mAge);
+	find mustInRelationage_attribute_Member(problem,interpretation,var_p,var_pAge);
+	PrimitiveElement.valueSet(var_mAge,true); IntegerElement.value(var_mAge,value_var_mAge);
+	PrimitiveElement.valueSet(var_pAge,true); IntegerElement.value(var_pAge,value_var_pAge);
+	check((value_var_mAge<=(value_var_pAge+12)));
 }
 
 //////////
@@ -529,6 +623,16 @@ pattern invalidatedBy_pattern_queries_memberIsItsOwnParent(problem:LogicProblem,
 {
 	find mustInRelation_pattern_queries_memberIsItsOwnParent(problem,interpretation,var_m);
 }
+pattern invalidatedBy_pattern_queries_twoMembersHaveNoParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m1, var_m2)
+{
+	find mustInRelation_pattern_queries_twoMembersHaveNoParent(problem,interpretation,var_m1,var_m2);
+}
+pattern invalidatedBy_pattern_queries_parentTooYoung(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m, var_p)
+{
+	find mustInRelation_pattern_queries_parentTooYoung(problem,interpretation,var_m,var_p);
+}
 
 //////////
 // 3. Unfinishedness Indexers
@@ -543,6 +647,16 @@ pattern unfinishedBy_pattern_queries_memberIsItsOwnParent(problem:LogicProblem, 
 	var_m)
 {
 	find currentInRelation_pattern_queries_memberIsItsOwnParent(problem,interpretation,var_m);
+}
+pattern unfinishedBy_pattern_queries_twoMembersHaveNoParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m1, var_m2)
+{
+	find currentInRelation_pattern_queries_twoMembersHaveNoParent(problem,interpretation,var_m1,var_m2);
+}
+pattern unfinishedBy_pattern_queries_parentTooYoung(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_m, var_p)
+{
+	find currentInRelation_pattern_queries_parentTooYoung(problem,interpretation,var_m,var_p);
 }
 
 //////////
@@ -559,18 +673,6 @@ private pattern hasElementInContainment(problem:LogicProblem, interpretation:Par
 	find interpretation(problem,interpretation);
 	find mustInstanceOfMember_class(problem,interpretation,root);
 	find mustExist(problem, interpretation, root);
-}
-pattern createObject_FamilyTree_class(
-	problem:LogicProblem, interpretation:PartialInterpretation,
-	typeInterpretation:PartialComplexTypeInterpretation)
-{
-	find interpretation(problem,interpretation);
-	neg find hasElementInContainment(problem,interpretation);
-	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
-	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"FamilyTree class");
-	find mayInstanceOfFamilyTree_class(problem,interpretation,newObject);
-	find mayExist(problem, interpretation, newObject);
-	neg find mustExist(problem, interpretation, newObject);
 }
 pattern createObject_Member_class_by_members_reference_FamilyTree(
 	problem:LogicProblem, interpretation:PartialInterpretation,
@@ -600,23 +702,35 @@ pattern createObject_Member_class(
 	find mayExist(problem, interpretation, newObject);
 	neg find mustExist(problem, interpretation, newObject);
 }
+pattern createObject_FamilyTree_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"FamilyTree class");
+	find mayInstanceOfFamilyTree_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
 
 //////////
 // 4.2 Type refinement
 //////////
-pattern refineTypeTo_FamilyTree_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
-	find interpretation(problem,interpretation);
-	PartialInterpretation.newElements(interpretation,element);
-	find mayInstanceOfFamilyTree_class(problem,interpretation,element);
-	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
-	neg find mustInstanceOfMember_class(problem,interpretation,element);
-}
 pattern refineTypeTo_Member_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
 	find interpretation(problem,interpretation);
 	PartialInterpretation.newElements(interpretation,element);
 	find mayInstanceOfMember_class(problem,interpretation,element);
-	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
 	neg find mustInstanceOfMember_class(problem,interpretation,element);
+	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
+}
+pattern refineTypeTo_FamilyTree_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfFamilyTree_class(problem,interpretation,element);
+	neg find mustInstanceOfMember_class(problem,interpretation,element);
+	neg find mustInstanceOfFamilyTree_class(problem,interpretation,element);
 }
 
 //////////
@@ -669,4 +783,10 @@ pattern refineRelation_age_attribute_Member(
 	find mayInRelationage_attribute_Member(problem,interpretation,from,to);
 	neg find mustInRelationage_attribute_Member(problem,interpretation,from,to);
 }
+
+//////////
+// 5 Unit Propagations
+//////////
+
+// Main propagations:
 

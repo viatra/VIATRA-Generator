@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <familytree:FamilyTree xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:familytree="http://www.example.org/familytree" xsi:schemaLocation="http://www.example.org/familytree inputs/familytree.ecore">
-  <members age="4" children="//@members.2 //@members.4" parents="//@members.1 //@members.2"/>
-  <members age="5" children="//@members.0"/>
-  <members age="4" children="//@members.0 //@members.4" parents="//@members.0 //@members.4"/>
+  <members age="2" children="//@members.4" parents="//@members.4"/>
+  <members age="5" children="//@members.4" parents="//@members.4"/>
+  <members age="2" parents="//@members.4"/>
   <members/>
-  <members age="4" children="//@members.2" parents="//@members.0 //@members.2"/>
+  <members children="//@members.0 //@members.1 //@members.2" parents="//@members.0 //@members.1"/>
 </familytree:FamilyTree>

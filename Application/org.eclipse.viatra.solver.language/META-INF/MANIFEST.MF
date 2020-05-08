@@ -16,15 +16,15 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.lib;bundle-version="2.14.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.viatra.solver.language.validation,
- org.eclipse.viatra.solver.language,
+Export-Package: org.eclipse.viatra.solver.language,
  org.eclipse.viatra.solver.language.generator,
- org.eclipse.viatra.solver.language.services,
- org.eclipse.viatra.solver.language.solverLanguage.impl,
- org.eclipse.viatra.solver.language.parser.antlr.internal,
  org.eclipse.viatra.solver.language.parser.antlr,
+ org.eclipse.viatra.solver.language.parser.antlr.internal,
+ org.eclipse.viatra.solver.language.scoping,
  org.eclipse.viatra.solver.language.serializer,
+ org.eclipse.viatra.solver.language.services,
  org.eclipse.viatra.solver.language.solverLanguage,
+ org.eclipse.viatra.solver.language.solverLanguage.impl,
  org.eclipse.viatra.solver.language.solverLanguage.util,
- org.eclipse.viatra.solver.language.scoping
+ org.eclipse.viatra.solver.language.validation
 Import-Package: org.apache.log4j
