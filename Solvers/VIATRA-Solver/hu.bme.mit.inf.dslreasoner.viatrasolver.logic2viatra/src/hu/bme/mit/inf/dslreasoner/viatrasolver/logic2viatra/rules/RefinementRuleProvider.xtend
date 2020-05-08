@@ -90,7 +90,7 @@ class RefinementRuleProvider {
 		if(containmentRelation !== null) {
 			if(inverseRelation!== null) {
 				ruleBuilder.action[match |
-					println(name)
+					//println(name)
 					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
@@ -115,7 +115,7 @@ class RefinementRuleProvider {
 				]
 			} else {
 				ruleBuilder.action[match |
-					println(name)
+					//println(name)
 					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
@@ -139,7 +139,7 @@ class RefinementRuleProvider {
 			}
 		} else {
 			ruleBuilder.action[match |
-				println(name)
+				//println(name)
 				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation

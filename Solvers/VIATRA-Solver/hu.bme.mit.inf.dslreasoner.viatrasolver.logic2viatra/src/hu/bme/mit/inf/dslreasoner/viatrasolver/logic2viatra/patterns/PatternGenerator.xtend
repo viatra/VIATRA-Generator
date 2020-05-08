@@ -155,8 +155,8 @@ class PatternGenerator {
 		Map<String,PQuery> fqn2PQuery,
 		TypeAnalysisResult typeAnalysisResult
 	) {
-		
-		return '''
+		val first = 
+		 '''
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
 			import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
@@ -395,7 +395,9 @@ class PatternGenerator {
 			//////////
 			// 5 Unit Propagations
 			//////////
-			«unitPropagationPreconditionGenerator.generateUnitPropagationRules(problem,problem.relations.filter(RelationDefinition),fqn2PQuery)»
 			'''
+			val up = unitPropagationPreconditionGenerator.generateUnitPropagationRules(problem,problem.relations.filter(RelationDefinition),fqn2PQuery)
+			val second = up.definitions
+			return (first+second) -> up.constraint2PreconditionName
 	}
 }
