@@ -22,6 +22,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativeP
 import java.util.Comparator
 import java.util.ArrayList
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PDisjunction
+import java.util.LinkedHashSet
 
 @Data class UnitPropagation {
 	val PQuery q
@@ -75,11 +76,11 @@ class UnitPropagationPreconditionGenerator {
 		// Create an empty result
 		val res = new UnitPropagationPreconditionGenerationResult		
 		val wfs = base.wfQueries(problem)//.map[it.patternPQuery]
-		val mainPropagationNames = new LinkedList
+		val mainPropagationNames = new LinkedHashSet
 		for(wf : wfs) {
 			val query = wf.patternPQuery as PQuery
 			val relation = wf.target
-			val allReferredChecks = query.allReferredConstraints.filter(ExpressionEvaluation)
+			val allReferredChecks = allReferredConstraints(relation,query).filter(ExpressionEvaluation)
 			
 			for(referredCheck : allReferredChecks) {
 				mainPropagationNames+= getOrGeneratePropagationRule(res,relation,query,referredCheck,PropagationModality::UP, Modality::MUST)
@@ -90,15 +91,20 @@ class UnitPropagationPreconditionGenerator {
 				«def»
 			«ENDFOR»
 			
-			// Main propagations:
-			«FOR name : mainPropagationNames»
-				«name»
-			«ENDFOR»
+			// Main propagations: «FOR name : mainPropagationNames SEPARATOR ", "»«name»«ENDFOR»
 		'''
 	}
-	def allReferredConstraints(PQuery query) {
+	def allReferredConstraints(Relation relation, PQuery query) {
 		val allReferredQueries = query.allReferredQueries
-		return (#[query]+allReferredQueries).map[it.disjunctBodies.bodies].flatten.map[constraints].flatten
+		val problem = relation.eContainer as LogicProblem
+		val constraints = new LinkedHashSet
+		for(referredQuery: #[query]+allReferredQueries) {
+			val referredRelation = problem.annotations.filter(TransfomedViatraQuery).filter[it.patternPQuery === referredQuery].head.target
+			val bodies = (referredRelation.annotations.filter(TransfomedViatraQuery).head.optimizedDisjunction as PDisjunction).bodies
+			constraints.addAll(bodies.map[getConstraints].flatten)
+		}
+		
+		return constraints
 	}
 	
 	def getOrGeneratePropagationRule(UnitPropagationPreconditionGenerationResult res, Relation relation, PQuery q, PConstraint c, PropagationModality pm, Modality m3) {
@@ -141,60 +147,63 @@ class UnitPropagationPreconditionGenerator {
 				// Otherwise, for PropagationModality::DOWN, the body cannot be satisfied
 			} else {
 				val positives = body.constraints.filter(PositivePatternCall)
-				val positiveRefers = positives.filter[it.referredQuery.allReferredConstraints.toSet.contains(c)]
-				for(positiveRefer: positiveRefers) {
-					val referredPQuery = positiveRefer.referredQuery
+				for(positive: positives) {
+					val referredPQuery = positive.referredQuery
 					val referredRelation = (relation.eContainer as LogicProblem)
 						.annotations.filter(TransfomedViatraQuery).filter[it.patternPQuery === referredPQuery].head.target
-					val referredName = getOrGeneratePropagationRule(res,referredRelation,referredPQuery,c,pm,m3)
-					if(referredName !== null) {
-						generatedBodies += '''
-							// Original Constraints
-							«FOR constraint : body.constraints.filter[it !== positiveRefer]»
-								«this.constraintTransformer.transformConstraint(constraint,m3,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
-							«ENDFOR»
-							// Propagation for constraint referred indirectly from this pattern through «referredName»
-							find «referredName»(problem, interpretation,
-								«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«positiveRefer.getVariableInTuple(index).canonizeName»«ENDFOR»,
-								«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
-						'''
+					if(allReferredConstraints(referredRelation,referredPQuery).toSet.contains(c)) {
+						val referredName = getOrGeneratePropagationRule(res,referredRelation,referredPQuery,c,pm,m3)
+						if(referredName !== null) {
+							generatedBodies += '''
+								// Original Constraints
+								«FOR constraint : body.constraints.filter[it !== positive]»
+									«this.constraintTransformer.transformConstraint(constraint,m3,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
+								«ENDFOR»
+								// Propagation for constraint referred indirectly from this pattern through «referredName»
+								find «referredName»(problem, interpretation,
+									«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«positive.getVariableInTuple(index).canonizeName»«ENDFOR»,
+									«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
+							'''
+						}
+						// Otherwise, if the referred pattern is not satisfiable, this pattern is not satisfiable either
 					}
-					// Otherwise, if the referred pattern is not satisfiable, this pattern is not satisfiable either
 				}
+				
 				val negatives = body.constraints.filter(NegativePatternCall)
-				val negativeRefers = negatives.filter[it.referredQuery.allReferredConstraints.toSet.contains(c)]
-				for(negativeRefer : negativeRefers) {
-					val referredPQuery = negativeRefer.referredQuery
+				for(negative : negatives) {
+					val referredPQuery = negative.referredQuery
 					val referredRelation = (relation.eContainer as LogicProblem)
 						.annotations.filter(TransfomedViatraQuery).filter[it.patternPQuery === referredPQuery].head.target
-					val referredName = getOrGeneratePropagationRule(res,referredRelation,referredPQuery,c,pm,m3.dual)
-					if(referredName !== null) {
-						generatedBodies += '''
-							// Original Constraints
-							«FOR constraint : body.constraints.filter[it !== negativeRefer]»
-								«this.constraintTransformer.transformConstraint(constraint,m3,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
-							«ENDFOR»
-							// Propagation for constraint referred indirectly from this pattern through «referredName»
-							find «referredName»(problem, interpretation,
-								«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«(negativeRefer.actualParametersTuple.get(index) as PVariable).canonizeName»«ENDFOR»,
-								«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
-						'''
-					} else {
-						generatedBodies += '''
-							// Original Constraints
-							«FOR constraint : body.constraints.filter[it !== negativeRefer]»
-								«this.constraintTransformer.transformConstraint(constraint,m3,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
-							«ENDFOR»
-							// Propagation for constraint referred indirectly from this pattern through «referredName»,
-							// which was unsatisfiable
-						'''
+					if(allReferredConstraints(referredRelation,referredPQuery).toSet.contains(c)) {
+						val referredName = getOrGeneratePropagationRule(res,referredRelation,referredPQuery,c,pm,m3.dual)
+						if(referredName !== null) {
+							generatedBodies += '''
+								// Original Constraints
+								«FOR constraint : body.constraints.filter[it !== negative]»
+									«this.constraintTransformer.transformConstraint(constraint,m3,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
+								«ENDFOR»
+								// Propagation for constraint referred indirectly from this pattern through «referredName»
+								find «referredName»(problem, interpretation,
+									«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«(negative.actualParametersTuple.get(index) as PVariable).canonizeName»«ENDFOR»,
+									«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
+							'''
+						} else {
+							generatedBodies += '''
+								// Original Constraints
+								«FOR constraint : body.constraints.filter[it !== negative]»
+									«this.constraintTransformer.transformConstraint(constraint,m3,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
+								«ENDFOR»
+								// Propagation for constraint referred indirectly from this pattern through «referredName»,
+								// which was unsatisfiable
+							'''
+						}
 					}
 				}
 			}
 		}
 		
 		// Register the result
-		if(generatedBodies.size>=0) {
+		if(generatedBodies.empty) {
 			res.registerUnsatQuery(q,c,pm,m3)
 		} else {
 			val definition = '''
@@ -229,7 +238,7 @@ class UnitPropagationPreconditionGenerator {
 		}
 		val variablesInOrder = new ArrayList(c.affectedVariables)
 		variablesInOrder.toList.sort(comparator)
-		return '''«FOR variableIndex : 1..variablesInOrder.size»«variablesInOrder.get(variableIndex-1).name»==«canonizeName(variableIndex,m)»;«ENDFOR»'''
+		return '''«FOR variableIndex : 1..variablesInOrder.size»«variablesInOrder.get(variableIndex-1).canonizeName»==«canonizeName(variableIndex,m)»;«ENDFOR»'''
 	}
 	def dispatch propagateVariables(PConstraint c, PropagationModality m) {
 		throw new UnsupportedOperationException('''Constraint not supported: «c.class.simpleName»''')
