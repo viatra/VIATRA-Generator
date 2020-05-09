@@ -31,14 +31,12 @@ class UML2TGF {
 //			new OpenDrive15ResourceFactoryImpl);
 		val res = resourceSet.getResource(URI.createFileURI("instance//Instance_model_A.uml"), true);
 		val docRoot = res.contents.get(0) as Model
-		
-		
 
+//		val nodes = docRoot.allOwnedElements.filter [it instanceof InstanceSpecification && it instanceof EnumerationLiteral != true]
 		val nodes = docRoot.allOwnedElements.filter[it instanceof InstanceSpecification]
-		
 		val allTypes = new HashSet<Object>
-		
-		for(e : nodes){
+
+		for (e : nodes) {
 			allTypes.add(e.class)
 		}
 
@@ -51,64 +49,63 @@ class UML2TGF {
 		val unidentified = new ArrayList<Object>
 		val enums = new ArrayList<Object>
 
-/*
-		val writer = new PrintWriter("output//graph-" + formattedDate + ".tgf")
+		/*
+		 * 		val writer = new PrintWriter("output//graph-" + formattedDate + ".tgf")
 
-		println("begin Writing")
+		 * 		println("begin Writing")
 
-		// transform Nodes
-		var ind = 0
-		for (node : nodes) {
-			val n = node as InstanceSpecification
-			map.put(n, ind)
+		 * 		// transform Nodes
+		 * 		var ind = 0
+		 * 		for (node : nodes) {
+		 * 			val n = node as InstanceSpecification
+		 * 			map.put(n, ind)
 
-			writer.append(ind + " " + n.name + "\n")
-			ind++
-		}
-		writer.append("#\n")
+		 * 			writer.append(ind + " " + n.name + "\n")
+		 * 			ind++
+		 * 		}
+		 * 		writer.append("#\n")
 
-//		println(node.name)
-//
-//		println(node.slots)
-//		val sl = node.slots
-//
-//		for (s : sl) {
-//			val v = s.values.get(0)
-//			if (v instanceof InstanceValue) {
-//				println(map.get(v.instance))
-//			} else {
-//				println("--" + v.class)
-//			}
-//		}
-		// transform Edges
-		var Slot s = null
-		try {
-			for (node : nodes) {
-				val n = node as InstanceSpecification
-				val nind = map.get(n)
-				for (slot : n.slots) {
-					s = slot
-					var fname = "null"
-					if(slot.definingFeature !== null) fname = slot.definingFeature.name
-					for (v : slot.values) {
-						if (v instanceof InstanceValue) {
-							val vind = map.get(v.instance)
+		 * //		println(node.name)
+		 * //
+		 * //		println(node.slots)
+		 * //		val sl = node.slots
+		 * //
+		 * //		for (s : sl) {
+		 * //			val v = s.values.get(0)
+		 * //			if (v instanceof InstanceValue) {
+		 * //				println(map.get(v.instance))
+		 * //			} else {
+		 * //				println("--" + v.class)
+		 * //			}
+		 * //		}
+		 * 		// transform Edges
+		 * 		var Slot s = null
+		 * 		try {
+		 * 			for (node : nodes) {
+		 * 				val n = node as InstanceSpecification
+		 * 				val nind = map.get(n)
+		 * 				for (slot : n.slots) {
+		 * 					s = slot
+		 * 					var fname = "null"
+		 * 					if(slot.definingFeature !== null) fname = slot.definingFeature.name
+		 * 					for (v : slot.values) {
+		 * 						if (v instanceof InstanceValue) {
+		 * 							val vind = map.get(v.instance)
 
-							writer.append(nind + " " + vind + " " + fname + "\n")
-						}
-//					else {
-//						println("--" + v.class)
-//					}
-					}
-				}
-			}
-		} catch (Exception e) {
-			println(s.definingFeature)
-		}
+		 * 							writer.append(nind + " " + vind + " " + fname + "\n")
+		 * 						}
+		 * //					else {
+		 * //						println("--" + v.class)
+		 * //					}
+		 * 					}
+		 * 				}
+		 * 			}
+		 * 		} catch (Exception e) {
+		 * 			println(s.definingFeature)
+		 * 		}
 
-		writer.close
-		println("End")*/
-		
+		 * 		writer.close
+		 println("End")*/
 		val writer = new PrintWriter("output//graph-" + formattedDate + ".gml")
 
 		println("begin Writing")
@@ -120,15 +117,21 @@ class UML2TGF {
 		var numEdges = 0
 		for (node : nodes) {
 			val n = node as InstanceSpecification
+			if(map.keySet.contains(n)) System.err.println("contained")
 			map.put(n, ind)
 
 			writer.append('''  node
   [
    id «ind»
    label "«IF n.name !== null»«n.name»«ENDIF»"
-«IF n.name !== null && n.name.contains("Household")»     graphics
+«IF n.name !== null && (n.name.contains("Household")|| n.name.contains("Household"))»     graphics
        [
          fill	"#00FF00"
+       ]
+         «ENDIF»
+ «IF node instanceof EnumerationLiteral»     graphics
+       [
+         fill	"#FF0000"
        ]
          «ENDIF»
   ]
@@ -153,7 +156,7 @@ class UML2TGF {
 		var Slot s = null
 		try {
 			for (node : nodes) {
-				if (node instanceof EnumerationLiteral != true) {
+//				if (node instanceof EnumerationLiteral != true) {
 					val n = node as InstanceSpecification
 					val nind = map.get(n)
 					for (slot : n.slots) {
@@ -164,8 +167,9 @@ class UML2TGF {
 							if (v instanceof InstanceValue) {
 								val value = v as InstanceValue
 								if (map.containsKey(value.instance)) {
-									val vind = map.get(value.instance)
-									writer.append('''  edge
+									if (value.instance instanceof EnumerationLiteral != true) {
+										val vind = map.get(value.instance)
+										writer.append('''  edge
   [
    source «nind»
    target «vind»
@@ -173,7 +177,10 @@ class UML2TGF {
   ]
 							  ''')
 //							writer.append(nind + " " + vind + " " + fname + "\n")
-									numEdges++
+										numEdges++
+									} else {
+										enums.add(value + " -> " + value.instance)
+									}
 								} else {
 									unidentified.add(value + " -> " + value.instance)
 								}
@@ -182,11 +189,8 @@ class UML2TGF {
 							}
 						}
 					}
-				}
-				else{
-					enums.add(node)
-				}
-				
+//				}
+
 			}
 		} catch (Exception e) {
 			println(s.definingFeature)
@@ -194,7 +198,7 @@ class UML2TGF {
 //		printset("All types", allTypes)
 		printset("Unhandled Edges", set)
 		printset("Unidentified trgs", unidentified)
-//		printset("Enums:", enums)
+		printset("Enums:", enums)
 		writer.append("]")
 		writer.close
 		println("End")

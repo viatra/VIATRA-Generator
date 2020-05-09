@@ -65,6 +65,10 @@ public class UML2TGF {
       for (final Element node : nodes) {
         {
           final InstanceSpecification n = ((InstanceSpecification) node);
+          boolean _contains = map.keySet().contains(n);
+          if (_contains) {
+            System.err.println("contained");
+          }
           map.put(n, Integer.valueOf(ind));
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("  ");
@@ -90,7 +94,7 @@ public class UML2TGF {
           _builder.append("\"");
           _builder.newLineIfNotEmpty();
           {
-            if (((n.getName() != null) && n.getName().contains("Household"))) {
+            if (((n.getName() != null) && (n.getName().contains("Household") || n.getName().contains("Household")))) {
               _builder.append("     graphics");
               _builder.newLineIfNotEmpty();
               _builder.append("       ");
@@ -100,6 +104,25 @@ public class UML2TGF {
               _builder.append("fill\t\"#00FF00\"");
               _builder.newLine();
               _builder.append("       ");
+              _builder.append("]");
+              _builder.newLine();
+            }
+          }
+          _builder.append(" ");
+          {
+            if ((node instanceof EnumerationLiteral)) {
+              _builder.append("     graphics");
+              _builder.newLineIfNotEmpty();
+              _builder.append(" ");
+              _builder.append("      ");
+              _builder.append("[");
+              _builder.newLine();
+              _builder.append(" ");
+              _builder.append("        ");
+              _builder.append("fill\t\"#FF0000\"");
+              _builder.newLine();
+              _builder.append(" ");
+              _builder.append("      ");
               _builder.append("]");
               _builder.newLine();
             }
@@ -114,7 +137,7 @@ public class UML2TGF {
       Slot s = null;
       try {
         for (final Element node_1 : nodes) {
-          if (((node_1 instanceof EnumerationLiteral) != true)) {
+          {
             final InstanceSpecification n = ((InstanceSpecification) node_1);
             final Integer nind = map.get(n);
             EList<Slot> _slots = n.getSlots();
@@ -133,37 +156,46 @@ public class UML2TGF {
                     final InstanceValue value = ((InstanceValue) v);
                     boolean _containsKey = map.containsKey(value.getInstance());
                     if (_containsKey) {
-                      final Integer vind = map.get(value.getInstance());
-                      StringConcatenation _builder = new StringConcatenation();
-                      _builder.append("  ");
-                      _builder.append("edge");
-                      _builder.newLine();
-                      _builder.append("  ");
-                      _builder.append("[");
-                      _builder.newLine();
-                      _builder.append("   ");
-                      _builder.append("source ");
-                      _builder.append(nind, "   ");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("   ");
-                      _builder.append("target ");
-                      _builder.append(vind, "   ");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("   ");
-                      _builder.append("label \"");
-                      _builder.append(fname, "   ");
-                      _builder.append("\"");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("  ");
-                      _builder.append("]");
-                      _builder.newLine();
-                      writer.append(_builder);
-                      numEdges++;
-                    } else {
-                      String _plus = (value + " -> ");
                       InstanceSpecification _instance = value.getInstance();
-                      String _plus_1 = (_plus + _instance);
-                      unidentified.add(_plus_1);
+                      boolean _notEquals = ((_instance instanceof EnumerationLiteral) != true);
+                      if (_notEquals) {
+                        final Integer vind = map.get(value.getInstance());
+                        StringConcatenation _builder = new StringConcatenation();
+                        _builder.append("  ");
+                        _builder.append("edge");
+                        _builder.newLine();
+                        _builder.append("  ");
+                        _builder.append("[");
+                        _builder.newLine();
+                        _builder.append("   ");
+                        _builder.append("source ");
+                        _builder.append(nind, "   ");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("   ");
+                        _builder.append("target ");
+                        _builder.append(vind, "   ");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("   ");
+                        _builder.append("label \"");
+                        _builder.append(fname, "   ");
+                        _builder.append("\"");
+                        _builder.newLineIfNotEmpty();
+                        _builder.append("  ");
+                        _builder.append("]");
+                        _builder.newLine();
+                        writer.append(_builder);
+                        numEdges++;
+                      } else {
+                        String _plus = (value + " -> ");
+                        InstanceSpecification _instance_1 = value.getInstance();
+                        String _plus_1 = (_plus + _instance_1);
+                        enums.add(_plus_1);
+                      }
+                    } else {
+                      String _plus_2 = (value + " -> ");
+                      InstanceSpecification _instance_2 = value.getInstance();
+                      String _plus_3 = (_plus_2 + _instance_2);
+                      unidentified.add(_plus_3);
                     }
                   } else {
                     set.add(v.getClass().toString());
@@ -171,8 +203,6 @@ public class UML2TGF {
                 }
               }
             }
-          } else {
-            enums.add(node_1);
           }
         }
       } catch (final Throwable _t) {
@@ -184,6 +214,7 @@ public class UML2TGF {
       }
       UML2TGF.printset("Unhandled Edges", set);
       UML2TGF.printset("Unidentified trgs", unidentified);
+      UML2TGF.printset("Enums:", enums);
       writer.append("]");
       writer.close();
       InputOutput.<String>println("End");
