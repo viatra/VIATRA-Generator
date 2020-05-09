@@ -102,6 +102,9 @@ class NumericSolver {
 					val value = solution.get(element)
 					val target = trace.get(element) as PrimitiveElement
 					target.fillWithValue(value)
+				} else {
+					val target = trace.get(element) as PrimitiveElement
+					target.fillWithValue(target.defaultValue)
 				}
 			}
 		}
