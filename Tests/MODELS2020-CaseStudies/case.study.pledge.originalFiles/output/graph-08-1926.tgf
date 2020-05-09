@@ -1,0 +1,5645 @@
+0 WWW
+1 Employer
+2 MMM
+3 UUU
+4 YYY
+5 OOO
+6 beug
+7 NONE
+8 A
+9 B
+10 C
+11 D
+12 E
+13 OTHER
+14 ZZ
+15 FF
+16 BB
+17 DD
+18 NN
+19 OTHER
+20 Principal
+21 Additional
+22 RTS_2
+23 RTS_3
+24 RTS_4
+25 RTS_5
+26 One
+27 One_A
+28 Two
+29 Salary
+30 Pension
+31 Annuity
+32 LL
+33 BB
+34 SS
+35 TT
+36 Other
+37 REGULAR
+38 REAL_COST
+39 INALIDITY_AND_INFIRMITY
+40 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+41 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+42 HOUSE_CARE
+43 CHILD_CARE
+44 DEPENDENCE_CARE
+45 OTHER
+46 ALIMONY
+47 RECURRENT_DEPT
+48 CHILD
+49 SPOUSE
+50 RELATIVE
+51 OTHER_FAMILY_MEMBER
+52 NOT_OWN_CHILD
+53 MISCELLANEOUS_DEBT
+54 ALIMONY
+55 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+56 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+57 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+58 PRIVATE_INSURANCE
+59 PRIVATE_LIFE_INSURANCE
+60 COMPANY_MEMBERS_PRIVATE_INSURANCE
+61 HOUSING_SAVING_PLAN
+62 OLD_AGE_PENSION_PLAN
+63 NONE
+64 DIVORCE
+65 SEPARATION_DE_FAIT
+66 SEPARATION_BY_COURT
+67 MARIAGE
+68 PARTNERSHIP
+69 OTHER
+70 Household1
+71 Partnership_Record1
+72 null
+73 null
+74 null
+75 Tax_Property2
+76 null
+77 FromLaw2
+78 null
+79 FromAgent2
+80 null
+81 FromLaw3
+82 null
+83 FromAgent4
+84 null
+85 null
+86 null
+87 null
+88 null
+89 null
+90 Income_Detail5
+91 Income_Detail2
+92 Income_Detail6
+93 Income_Detail3
+94 Income_Detail8
+95 Income_Detail4
+96 Income_Detail11
+97 Income_Detail7
+98 Income_Detail17
+99 Income_Detail9
+100 Income_Detail25
+101 Income_Detail10
+102 null
+103 null
+104 null
+105 null
+106 null
+107 null
+108 null
+109 null
+110 null
+111 null
+112 null
+113 null
+114 Income_Detail34
+115 Income_Detail12
+116 Income_Detail45
+117 Income_Detail13
+118 Income_Detail57
+119 Income_Detail14
+120 Income_Detail70
+121 Income_Detail15
+122 Income_Detail84
+123 Income_Detail16
+124 Income_Detail99
+125 Income_Detail18
+126 null
+127 null
+128 null
+129 null
+130 null
+131 null
+132 null
+133 null
+134 null
+135 null
+136 null
+137 null
+138 Foreign_Income1
+139 null
+140 null
+141 null
+142 null
+143 null
+144 null
+145 null
+146 null
+147 null
+148 null
+149 null
+150 null
+151 null
+152 null
+153 null
+154 Foreign_Income2
+155 null
+156 null
+157 null
+158 null
+159 null
+160 null
+161 null
+162 null
+163 null
+164 null
+165 null
+166 null
+167 null
+168 null
+169 null
+170 null
+171 null
+172 null
+173 null
+174 null
+175 null
+176 Rentals_and_Leases_Income1
+177 null
+178 null
+179 null
+180 null
+181 null
+182 null
+183 null
+184 null
+185 null
+186 null
+187 null
+188 null
+189 null
+190 null
+191 null
+192 null
+193 null
+194 null
+195 null
+196 null
+197 null
+198 null
+199 null
+200 null
+201 null
+202 null
+203 null
+204 null
+205 null
+206 null
+207 null
+208 null
+209 null
+210 null
+211 null
+212 null
+213 null
+214 null
+215 null
+216 null
+217 null
+218 null
+219 null
+220 null
+221 null
+222 null
+223 null
+224 null
+225 null
+226 null
+227 Resident_Tax_Payer7
+228 null
+229 null
+230 null
+231 null
+232 null
+233 null
+234 null
+235 null
+236 null
+237 null
+238 Non_Resident_Tax_Payer7
+239 null
+240 null
+241 null
+242 null
+243 Capital_and_Investments_Income1
+244 null
+245 Household1
+246 Partnership_Record1
+247 null
+248 null
+249 null
+250 Tax_Property1
+251 null
+252 FromLaw1
+253 null
+254 FromAgent1
+255 null
+256 FromLaw2
+257 null
+258 FromAgent2
+259 null
+260 Foreign_Income2
+261 null
+262 Foreign_Income3
+263 null
+264 null
+265 null
+266 null
+267 null
+268 null
+269 null
+270 Income_Detail4
+271 Income_Detail2
+272 Income_Detail5
+273 Income_Detail3
+274 Income_Detail7
+275 Income_Detail6
+276 Income_Detail12
+277 Income_Detail8
+278 Income_Detail19
+279 Income_Detail9
+280 Income_Detail27
+281 Income_Detail10
+282 null
+283 null
+284 null
+285 null
+286 null
+287 null
+288 null
+289 null
+290 null
+291 null
+292 null
+293 null
+294 Income_Detail36
+295 Income_Detail11
+296 Income_Detail46
+297 Income_Detail13
+298 Income_Detail58
+299 Income_Detail14
+300 Income_Detail71
+301 Income_Detail15
+302 Income_Detail85
+303 Income_Detail16
+304 Income_Detail100
+305 Income_Detail17
+306 null
+307 null
+308 null
+309 null
+310 null
+311 null
+312 null
+313 null
+314 null
+315 null
+316 null
+317 null
+318 null
+319 null
+320 null
+321 null
+322 null
+323 null
+324 null
+325 null
+326 null
+327 null
+328 null
+329 null
+330 null
+331 null
+332 null
+333 null
+334 null
+335 null
+336 null
+337 null
+338 null
+339 null
+340 null
+341 null
+342 null
+343 null
+344 null
+345 null
+346 null
+347 null
+348 null
+349 null
+350 null
+351 null
+352 null
+353 null
+354 null
+355 null
+356 null
+357 null
+358 null
+359 null
+360 null
+361 null
+362 null
+363 null
+364 null
+365 null
+366 null
+367 null
+368 null
+369 null
+370 null
+371 null
+372 null
+373 null
+374 null
+375 null
+376 null
+377 null
+378 null
+379 null
+380 null
+381 null
+382 Trade_and_Business_Income1
+383 null
+384 null
+385 null
+386 null
+387 null
+388 null
+389 null
+390 null
+391 null
+392 null
+393 Resident_Tax_Payer10
+394 null
+395 null
+396 null
+397 null
+398 null
+399 null
+400 null
+401 null
+402 null
+403 Resident_Tax_Payer11
+404 null
+405 null
+406 null
+407 null
+408 Rentals_and_Leases_Income1
+409 null
+410 Household1
+411 Partnership_Record1
+412 null
+413 null
+414 null
+415 Tax_Property1
+416 null
+417 FromLaw1
+418 null
+419 FromAgent1
+420 null
+421 FromLaw2
+422 null
+423 FromAgent2
+424 null
+425 Foreign_Income2
+426 null
+427 Foreign_Income3
+428 null
+429 null
+430 null
+431 null
+432 null
+433 null
+434 null
+435 Income_Detail4
+436 Income_Detail2
+437 Income_Detail5
+438 Income_Detail3
+439 Income_Detail7
+440 Income_Detail6
+441 Income_Detail12
+442 Income_Detail8
+443 Income_Detail19
+444 Income_Detail9
+445 Income_Detail27
+446 Income_Detail10
+447 null
+448 null
+449 null
+450 null
+451 null
+452 null
+453 null
+454 null
+455 null
+456 null
+457 null
+458 null
+459 Income_Detail36
+460 Income_Detail11
+461 Income_Detail46
+462 Income_Detail13
+463 Income_Detail58
+464 Income_Detail14
+465 Income_Detail71
+466 Income_Detail15
+467 Income_Detail85
+468 Income_Detail16
+469 Income_Detail100
+470 Income_Detail17
+471 null
+472 null
+473 null
+474 null
+475 null
+476 null
+477 null
+478 null
+479 null
+480 null
+481 null
+482 null
+483 null
+484 null
+485 null
+486 null
+487 null
+488 null
+489 null
+490 null
+491 null
+492 null
+493 null
+494 null
+495 null
+496 null
+497 null
+498 null
+499 null
+500 null
+501 null
+502 null
+503 null
+504 null
+505 null
+506 null
+507 null
+508 null
+509 null
+510 null
+511 null
+512 null
+513 null
+514 null
+515 null
+516 null
+517 null
+518 null
+519 null
+520 null
+521 null
+522 null
+523 null
+524 null
+525 null
+526 null
+527 null
+528 null
+529 null
+530 null
+531 null
+532 null
+533 null
+534 null
+535 null
+536 null
+537 null
+538 null
+539 null
+540 null
+541 null
+542 null
+543 null
+544 null
+545 null
+546 null
+547 Trade_and_Business_Income1
+548 null
+549 null
+550 null
+551 null
+552 null
+553 null
+554 null
+555 null
+556 null
+557 null
+558 Resident_Tax_Payer10
+559 null
+560 null
+561 null
+562 null
+563 null
+564 null
+565 null
+566 null
+567 null
+568 Resident_Tax_Payer11
+569 null
+570 null
+571 null
+572 null
+573 Rentals_and_Leases_Income1
+574 null
+575 Household1
+576 Partnership_Record1
+577 null
+578 null
+579 null
+580 Tax_Property1
+581 null
+582 FromLaw1
+583 null
+584 FromAgent1
+585 null
+586 FromLaw2
+587 null
+588 FromAgent2
+589 null
+590 Foreign_Income2
+591 null
+592 Foreign_Income3
+593 null
+594 null
+595 null
+596 null
+597 null
+598 null
+599 null
+600 Income_Detail4
+601 Income_Detail2
+602 Income_Detail5
+603 Income_Detail3
+604 Income_Detail7
+605 Income_Detail6
+606 Income_Detail12
+607 Income_Detail8
+608 Income_Detail19
+609 Income_Detail9
+610 Income_Detail27
+611 Income_Detail10
+612 null
+613 null
+614 null
+615 null
+616 null
+617 null
+618 null
+619 null
+620 null
+621 null
+622 null
+623 null
+624 Income_Detail36
+625 Income_Detail11
+626 Income_Detail46
+627 Income_Detail13
+628 Income_Detail58
+629 Income_Detail14
+630 Income_Detail71
+631 Income_Detail15
+632 Income_Detail85
+633 Income_Detail16
+634 Income_Detail100
+635 Income_Detail17
+636 null
+637 null
+638 null
+639 null
+640 null
+641 null
+642 null
+643 null
+644 null
+645 null
+646 null
+647 null
+648 null
+649 null
+650 null
+651 null
+652 null
+653 null
+654 null
+655 null
+656 null
+657 null
+658 null
+659 null
+660 null
+661 null
+662 null
+663 null
+664 null
+665 null
+666 null
+667 null
+668 null
+669 null
+670 null
+671 null
+672 null
+673 null
+674 null
+675 null
+676 null
+677 null
+678 null
+679 null
+680 null
+681 null
+682 null
+683 null
+684 null
+685 null
+686 null
+687 null
+688 null
+689 null
+690 null
+691 null
+692 null
+693 null
+694 null
+695 null
+696 null
+697 null
+698 null
+699 null
+700 null
+701 null
+702 null
+703 null
+704 null
+705 null
+706 null
+707 null
+708 null
+709 null
+710 null
+711 null
+712 Trade_and_Business_Income1
+713 null
+714 null
+715 null
+716 null
+717 null
+718 null
+719 null
+720 null
+721 null
+722 null
+723 Resident_Tax_Payer10
+724 null
+725 null
+726 null
+727 null
+728 null
+729 null
+730 null
+731 null
+732 null
+733 Resident_Tax_Payer11
+734 null
+735 null
+736 null
+737 null
+738 Rentals_and_Leases_Income1
+739 null
+740 WWW
+741 Employer
+742 MMM
+743 UUU
+744 YYY
+745 OOO
+746 beug
+747 NONE
+748 A
+749 B
+750 C
+751 D
+752 E
+753 OTHER
+754 ZZ
+755 FF
+756 BB
+757 DD
+758 NN
+759 OTHER
+760 Principal
+761 Additional
+762 RTS_2
+763 RTS_3
+764 RTS_4
+765 RTS_5
+766 One
+767 One_A
+768 Two
+769 Salary
+770 Pension
+771 Annuity
+772 LL
+773 BB
+774 SS
+775 TT
+776 Other
+777 REGULAR
+778 REAL_COST
+779 INALIDITY_AND_INFIRMITY
+780 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+781 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+782 HOUSE_CARE
+783 CHILD_CARE
+784 DEPENDENCE_CARE
+785 OTHER
+786 ALIMONY
+787 RECURRENT_DEPT
+788 CHILD
+789 SPOUSE
+790 RELATIVE
+791 OTHER_FAMILY_MEMBER
+792 NOT_OWN_CHILD
+793 MISCELLANEOUS_DEBT
+794 ALIMONY
+795 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+796 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+797 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+798 PRIVATE_INSURANCE
+799 PRIVATE_LIFE_INSURANCE
+800 COMPANY_MEMBERS_PRIVATE_INSURANCE
+801 HOUSING_SAVING_PLAN
+802 OLD_AGE_PENSION_PLAN
+803 NONE
+804 DIVORCE
+805 SEPARATION_DE_FAIT
+806 SEPARATION_BY_COURT
+807 MARIAGE
+808 PARTNERSHIP
+809 OTHER
+810 Household1
+811 Partnership_Record1
+812 null
+813 null
+814 null
+815 Tax_Property1
+816 null
+817 FromLaw1
+818 null
+819 FromAgent1
+820 null
+821 FromLaw2
+822 null
+823 FromAgent2
+824 null
+825 null
+826 Foreign_Income2
+827 null
+828 null
+829 Trade_and_Business_Income2
+830 null
+831 Trade_and_Business_Income3
+832 null
+833 Income_Detail4
+834 Income_Detail2
+835 Income_Detail5
+836 Income_Detail3
+837 Income_Detail7
+838 Income_Detail6
+839 Income_Detail12
+840 Income_Detail8
+841 Income_Detail19
+842 Income_Detail9
+843 Income_Detail27
+844 Income_Detail10
+845 null
+846 null
+847 null
+848 null
+849 null
+850 null
+851 null
+852 null
+853 null
+854 null
+855 null
+856 null
+857 Income_Detail36
+858 Income_Detail11
+859 Income_Detail46
+860 Income_Detail13
+861 Income_Detail58
+862 Income_Detail14
+863 Income_Detail71
+864 Income_Detail15
+865 Income_Detail85
+866 Income_Detail16
+867 Income_Detail100
+868 Income_Detail17
+869 null
+870 null
+871 null
+872 null
+873 null
+874 null
+875 null
+876 null
+877 null
+878 null
+879 null
+880 null
+881 null
+882 null
+883 null
+884 null
+885 null
+886 Foreign_Income1
+887 null
+888 null
+889 null
+890 null
+891 null
+892 null
+893 null
+894 null
+895 null
+896 null
+897 null
+898 null
+899 null
+900 null
+901 null
+902 null
+903 Non_Resident_Tax_Payer2
+904 null
+905 null
+906 null
+907 null
+908 null
+909 Non_Resident_Tax_Payer3
+910 null
+911 null
+912 null
+913 null
+914 WWW
+915 Employer
+916 MMM
+917 UUU
+918 YYY
+919 OOO
+920 beug
+921 NONE
+922 A
+923 B
+924 C
+925 D
+926 E
+927 OTHER
+928 ZZ
+929 FF
+930 BB
+931 DD
+932 NN
+933 OTHER
+934 Principal
+935 Additional
+936 RTS_2
+937 RTS_3
+938 RTS_4
+939 RTS_5
+940 One
+941 One_A
+942 Two
+943 Salary
+944 Pension
+945 Annuity
+946 LL
+947 BB
+948 SS
+949 TT
+950 Other
+951 REGULAR
+952 REAL_COST
+953 INALIDITY_AND_INFIRMITY
+954 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+955 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+956 HOUSE_CARE
+957 CHILD_CARE
+958 DEPENDENCE_CARE
+959 OTHER
+960 ALIMONY
+961 RECURRENT_DEPT
+962 CHILD
+963 SPOUSE
+964 RELATIVE
+965 OTHER_FAMILY_MEMBER
+966 NOT_OWN_CHILD
+967 MISCELLANEOUS_DEBT
+968 ALIMONY
+969 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+970 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+971 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+972 PRIVATE_INSURANCE
+973 PRIVATE_LIFE_INSURANCE
+974 COMPANY_MEMBERS_PRIVATE_INSURANCE
+975 HOUSING_SAVING_PLAN
+976 OLD_AGE_PENSION_PLAN
+977 NONE
+978 DIVORCE
+979 SEPARATION_DE_FAIT
+980 SEPARATION_BY_COURT
+981 MARIAGE
+982 PARTNERSHIP
+983 OTHER
+984 Household1
+985 Partnership_Record1
+986 null
+987 null
+988 null
+989 Tax_Property1
+990 null
+991 FromLaw1
+992 null
+993 FromAgent1
+994 null
+995 FromLaw2
+996 null
+997 FromAgent2
+998 null
+999 null
+1000 Foreign_Income2
+1001 null
+1002 null
+1003 Trade_and_Business_Income2
+1004 null
+1005 Trade_and_Business_Income3
+1006 null
+1007 Income_Detail4
+1008 Income_Detail2
+1009 Income_Detail5
+1010 Income_Detail3
+1011 Income_Detail7
+1012 Income_Detail6
+1013 Income_Detail12
+1014 Income_Detail8
+1015 Income_Detail19
+1016 Income_Detail9
+1017 Income_Detail27
+1018 Income_Detail10
+1019 null
+1020 null
+1021 null
+1022 null
+1023 null
+1024 null
+1025 null
+1026 null
+1027 null
+1028 null
+1029 null
+1030 null
+1031 Income_Detail36
+1032 Income_Detail11
+1033 Income_Detail46
+1034 Income_Detail13
+1035 Income_Detail58
+1036 Income_Detail14
+1037 Income_Detail71
+1038 Income_Detail15
+1039 Income_Detail85
+1040 Income_Detail16
+1041 Income_Detail100
+1042 Income_Detail17
+1043 null
+1044 null
+1045 null
+1046 null
+1047 null
+1048 null
+1049 null
+1050 null
+1051 null
+1052 null
+1053 null
+1054 null
+1055 null
+1056 null
+1057 null
+1058 null
+1059 null
+1060 Foreign_Income1
+1061 null
+1062 null
+1063 null
+1064 null
+1065 null
+1066 null
+1067 null
+1068 null
+1069 null
+1070 null
+1071 null
+1072 null
+1073 null
+1074 null
+1075 null
+1076 null
+1077 Non_Resident_Tax_Payer2
+1078 null
+1079 null
+1080 null
+1081 null
+1082 null
+1083 Non_Resident_Tax_Payer3
+1084 null
+1085 null
+1086 null
+1087 null
+1088 Household1
+1089 Partnership_Record1
+1090 null
+1091 null
+1092 null
+1093 Tax_Property1
+1094 null
+1095 null
+1096 FromLaw1
+1097 null
+1098 FromAgent1
+1099 null
+1100 FromLaw2
+1101 null
+1102 FromAgent2
+1103 null
+1104 Foreign_Income2
+1105 null
+1106 null
+1107 null
+1108 null
+1109 null
+1110 null
+1111 Income_Detail4
+1112 Income_Detail2
+1113 Income_Detail5
+1114 Income_Detail3
+1115 Income_Detail7
+1116 Income_Detail6
+1117 Income_Detail12
+1118 Income_Detail8
+1119 Income_Detail19
+1120 Income_Detail9
+1121 Income_Detail27
+1122 Income_Detail10
+1123 null
+1124 null
+1125 null
+1126 null
+1127 null
+1128 null
+1129 null
+1130 null
+1131 null
+1132 null
+1133 null
+1134 null
+1135 Income_Detail36
+1136 Income_Detail11
+1137 Income_Detail46
+1138 Income_Detail13
+1139 Income_Detail58
+1140 Income_Detail14
+1141 Income_Detail71
+1142 Income_Detail15
+1143 Income_Detail85
+1144 Income_Detail16
+1145 Income_Detail100
+1146 Income_Detail17
+1147 null
+1148 null
+1149 null
+1150 null
+1151 null
+1152 null
+1153 null
+1154 null
+1155 null
+1156 null
+1157 null
+1158 null
+1159 null
+1160 null
+1161 null
+1162 null
+1163 null
+1164 null
+1165 null
+1166 null
+1167 null
+1168 null
+1169 null
+1170 null
+1171 null
+1172 null
+1173 null
+1174 null
+1175 null
+1176 null
+1177 null
+1178 null
+1179 null
+1180 null
+1181 null
+1182 Foreign_Income1
+1183 null
+1184 null
+1185 null
+1186 null
+1187 null
+1188 null
+1189 null
+1190 null
+1191 null
+1192 null
+1193 null
+1194 null
+1195 null
+1196 null
+1197 null
+1198 null
+1199 null
+1200 null
+1201 null
+1202 null
+1203 null
+1204 null
+1205 null
+1206 null
+1207 null
+1208 null
+1209 null
+1210 null
+1211 null
+1212 null
+1213 null
+1214 null
+1215 null
+1216 null
+1217 null
+1218 null
+1219 null
+1220 null
+1221 null
+1222 null
+1223 null
+1224 null
+1225 null
+1226 null
+1227 null
+1228 null
+1229 null
+1230 null
+1231 null
+1232 null
+1233 null
+1234 null
+1235 null
+1236 null
+1237 null
+1238 null
+1239 null
+1240 null
+1241 null
+1242 Agriculture_and_Forestry_Income1
+1243 null
+1244 null
+1245 null
+1246 null
+1247 null
+1248 null
+1249 null
+1250 null
+1251 null
+1252 null
+1253 null
+1254 null
+1255 null
+1256 null
+1257 null
+1258 Trade_and_Business_Income1
+1259 null
+1260 null
+1261 null
+1262 null
+1263 null
+1264 null
+1265 null
+1266 null
+1267 null
+1268 null
+1269 null
+1270 Resident_Tax_Payer11
+1271 null
+1272 null
+1273 null
+1274 null
+1275 null
+1276 Non_Resident_Tax_Payer11
+1277 null
+1278 null
+1279 null
+1280 null
+1281 Household1
+1282 Partnership_Record1
+1283 null
+1284 null
+1285 null
+1286 Tax_Property1
+1287 null
+1288 null
+1289 FromLaw1
+1290 null
+1291 FromAgent1
+1292 null
+1293 FromLaw2
+1294 null
+1295 FromAgent2
+1296 null
+1297 Foreign_Income2
+1298 null
+1299 null
+1300 null
+1301 null
+1302 null
+1303 null
+1304 Income_Detail4
+1305 Income_Detail2
+1306 Income_Detail5
+1307 Income_Detail3
+1308 Income_Detail7
+1309 Income_Detail6
+1310 Income_Detail12
+1311 Income_Detail8
+1312 Income_Detail19
+1313 Income_Detail9
+1314 Income_Detail27
+1315 Income_Detail10
+1316 null
+1317 null
+1318 null
+1319 null
+1320 null
+1321 null
+1322 null
+1323 null
+1324 null
+1325 null
+1326 null
+1327 null
+1328 Income_Detail36
+1329 Income_Detail11
+1330 Income_Detail46
+1331 Income_Detail13
+1332 Income_Detail58
+1333 Income_Detail14
+1334 Income_Detail71
+1335 Income_Detail15
+1336 Income_Detail85
+1337 Income_Detail16
+1338 Income_Detail100
+1339 Income_Detail17
+1340 null
+1341 null
+1342 null
+1343 null
+1344 null
+1345 null
+1346 null
+1347 null
+1348 null
+1349 null
+1350 null
+1351 null
+1352 null
+1353 null
+1354 null
+1355 null
+1356 null
+1357 null
+1358 null
+1359 null
+1360 null
+1361 null
+1362 null
+1363 null
+1364 null
+1365 null
+1366 null
+1367 null
+1368 null
+1369 null
+1370 null
+1371 null
+1372 null
+1373 null
+1374 null
+1375 Foreign_Income1
+1376 null
+1377 null
+1378 null
+1379 null
+1380 null
+1381 null
+1382 null
+1383 null
+1384 null
+1385 null
+1386 null
+1387 null
+1388 null
+1389 null
+1390 null
+1391 null
+1392 null
+1393 null
+1394 null
+1395 null
+1396 null
+1397 null
+1398 null
+1399 null
+1400 null
+1401 null
+1402 null
+1403 null
+1404 null
+1405 null
+1406 null
+1407 null
+1408 null
+1409 null
+1410 null
+1411 null
+1412 null
+1413 null
+1414 null
+1415 null
+1416 null
+1417 null
+1418 null
+1419 null
+1420 null
+1421 null
+1422 null
+1423 null
+1424 null
+1425 null
+1426 null
+1427 null
+1428 null
+1429 null
+1430 null
+1431 null
+1432 null
+1433 null
+1434 null
+1435 Agriculture_and_Forestry_Income1
+1436 null
+1437 null
+1438 null
+1439 null
+1440 null
+1441 null
+1442 null
+1443 null
+1444 null
+1445 null
+1446 null
+1447 null
+1448 null
+1449 null
+1450 null
+1451 Trade_and_Business_Income1
+1452 null
+1453 null
+1454 null
+1455 null
+1456 null
+1457 null
+1458 null
+1459 null
+1460 null
+1461 null
+1462 null
+1463 Resident_Tax_Payer11
+1464 null
+1465 null
+1466 null
+1467 null
+1468 null
+1469 Non_Resident_Tax_Payer11
+1470 null
+1471 null
+1472 null
+1473 null
+1474 WWW
+1475 Employer
+1476 MMM
+1477 UUU
+1478 YYY
+1479 OOO
+1480 beug
+1481 NONE
+1482 A
+1483 B
+1484 C
+1485 D
+1486 E
+1487 OTHER
+1488 ZZ
+1489 FF
+1490 BB
+1491 DD
+1492 NN
+1493 OTHER
+1494 Principal
+1495 Additional
+1496 RTS_2
+1497 RTS_3
+1498 RTS_4
+1499 RTS_5
+1500 One
+1501 One_A
+1502 Two
+1503 Salary
+1504 Pension
+1505 Annuity
+1506 LL
+1507 BB
+1508 SS
+1509 TT
+1510 Other
+1511 REGULAR
+1512 REAL_COST
+1513 INALIDITY_AND_INFIRMITY
+1514 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+1515 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+1516 HOUSE_CARE
+1517 CHILD_CARE
+1518 DEPENDENCE_CARE
+1519 OTHER
+1520 ALIMONY
+1521 RECURRENT_DEPT
+1522 CHILD
+1523 SPOUSE
+1524 RELATIVE
+1525 OTHER_FAMILY_MEMBER
+1526 NOT_OWN_CHILD
+1527 MISCELLANEOUS_DEBT
+1528 ALIMONY
+1529 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+1530 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+1531 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+1532 PRIVATE_INSURANCE
+1533 PRIVATE_LIFE_INSURANCE
+1534 COMPANY_MEMBERS_PRIVATE_INSURANCE
+1535 HOUSING_SAVING_PLAN
+1536 OLD_AGE_PENSION_PLAN
+1537 NONE
+1538 DIVORCE
+1539 SEPARATION_DE_FAIT
+1540 SEPARATION_BY_COURT
+1541 MARIAGE
+1542 PARTNERSHIP
+1543 OTHER
+1544 Household1
+1545 Marriage_Record1
+1546 null
+1547 null
+1548 null
+1549 Tax_Property2
+1550 null
+1551 FromLaw2
+1552 null
+1553 FromAgent2
+1554 null
+1555 FromLaw3
+1556 null
+1557 FromAgent4
+1558 null
+1559 Foreign_Income4
+1560 null
+1561 Foreign_Income2
+1562 null
+1563 null
+1564 null
+1565 null
+1566 null
+1567 null
+1568 Trade_and_Business_Income5
+1569 null
+1570 null
+1571 Capital_and_Investments_Income6
+1572 null
+1573 Income_Detail6
+1574 Income_Detail2
+1575 Income_Detail7
+1576 Income_Detail3
+1577 Income_Detail9
+1578 Income_Detail4
+1579 Income_Detail12
+1580 Income_Detail5
+1581 Income_Detail16
+1582 Income_Detail8
+1583 Income_Detail23
+1584 Income_Detail10
+1585 null
+1586 null
+1587 null
+1588 null
+1589 null
+1590 null
+1591 null
+1592 null
+1593 null
+1594 null
+1595 null
+1596 null
+1597 Income_Detail32
+1598 Income_Detail11
+1599 Income_Detail42
+1600 Income_Detail13
+1601 Income_Detail54
+1602 Income_Detail14
+1603 Income_Detail67
+1604 Income_Detail15
+1605 Income_Detail81
+1606 Income_Detail17
+1607 Income_Detail97
+1608 Income_Detail18
+1609 null
+1610 null
+1611 null
+1612 null
+1613 null
+1614 null
+1615 null
+1616 null
+1617 null
+1618 null
+1619 null
+1620 null
+1621 null
+1622 null
+1623 null
+1624 null
+1625 null
+1626 null
+1627 null
+1628 null
+1629 null
+1630 null
+1631 null
+1632 null
+1633 null
+1634 null
+1635 null
+1636 null
+1637 null
+1638 null
+1639 null
+1640 null
+1641 null
+1642 null
+1643 null
+1644 null
+1645 null
+1646 null
+1647 null
+1648 null
+1649 null
+1650 null
+1651 null
+1652 null
+1653 null
+1654 null
+1655 null
+1656 null
+1657 null
+1658 null
+1659 null
+1660 null
+1661 null
+1662 null
+1663 null
+1664 null
+1665 null
+1666 null
+1667 null
+1668 null
+1669 null
+1670 null
+1671 null
+1672 null
+1673 null
+1674 null
+1675 null
+1676 Resident_Tax_Payer9
+1677 null
+1678 null
+1679 null
+1680 null
+1681 Non_Resident_Tax_Payer8
+1682 null
+1683 null
+1684 null
+1685 null
+1686 WWW
+1687 Employer
+1688 MMM
+1689 UUU
+1690 YYY
+1691 OOO
+1692 beug
+1693 NONE
+1694 A
+1695 B
+1696 C
+1697 D
+1698 E
+1699 OTHER
+1700 ZZ
+1701 FF
+1702 BB
+1703 DD
+1704 NN
+1705 OTHER
+1706 Principal
+1707 Additional
+1708 RTS_2
+1709 RTS_3
+1710 RTS_4
+1711 RTS_5
+1712 One
+1713 One_A
+1714 Two
+1715 Salary
+1716 Pension
+1717 Annuity
+1718 LL
+1719 BB
+1720 SS
+1721 TT
+1722 Other
+1723 REGULAR
+1724 REAL_COST
+1725 INALIDITY_AND_INFIRMITY
+1726 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+1727 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+1728 HOUSE_CARE
+1729 CHILD_CARE
+1730 DEPENDENCE_CARE
+1731 OTHER
+1732 ALIMONY
+1733 RECURRENT_DEPT
+1734 CHILD
+1735 SPOUSE
+1736 RELATIVE
+1737 OTHER_FAMILY_MEMBER
+1738 NOT_OWN_CHILD
+1739 MISCELLANEOUS_DEBT
+1740 ALIMONY
+1741 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+1742 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+1743 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+1744 PRIVATE_INSURANCE
+1745 PRIVATE_LIFE_INSURANCE
+1746 COMPANY_MEMBERS_PRIVATE_INSURANCE
+1747 HOUSING_SAVING_PLAN
+1748 OLD_AGE_PENSION_PLAN
+1749 NONE
+1750 DIVORCE
+1751 SEPARATION_DE_FAIT
+1752 SEPARATION_BY_COURT
+1753 MARIAGE
+1754 PARTNERSHIP
+1755 OTHER
+1756 Household1
+1757 Marriage_Record1
+1758 null
+1759 null
+1760 null
+1761 Tax_Property2
+1762 null
+1763 FromLaw2
+1764 null
+1765 FromAgent2
+1766 null
+1767 FromLaw3
+1768 null
+1769 FromAgent4
+1770 null
+1771 Foreign_Income4
+1772 null
+1773 Foreign_Income2
+1774 null
+1775 null
+1776 null
+1777 null
+1778 null
+1779 null
+1780 Trade_and_Business_Income5
+1781 null
+1782 null
+1783 Capital_and_Investments_Income6
+1784 null
+1785 Income_Detail6
+1786 Income_Detail2
+1787 Income_Detail7
+1788 Income_Detail3
+1789 Income_Detail9
+1790 Income_Detail4
+1791 Income_Detail12
+1792 Income_Detail5
+1793 Income_Detail16
+1794 Income_Detail8
+1795 Income_Detail23
+1796 Income_Detail10
+1797 null
+1798 null
+1799 null
+1800 null
+1801 null
+1802 null
+1803 null
+1804 null
+1805 null
+1806 null
+1807 null
+1808 null
+1809 Income_Detail32
+1810 Income_Detail11
+1811 Income_Detail42
+1812 Income_Detail13
+1813 Income_Detail54
+1814 Income_Detail14
+1815 Income_Detail67
+1816 Income_Detail15
+1817 Income_Detail81
+1818 Income_Detail17
+1819 Income_Detail97
+1820 Income_Detail18
+1821 null
+1822 null
+1823 null
+1824 null
+1825 null
+1826 null
+1827 null
+1828 null
+1829 null
+1830 null
+1831 null
+1832 null
+1833 null
+1834 null
+1835 null
+1836 null
+1837 null
+1838 null
+1839 null
+1840 null
+1841 null
+1842 null
+1843 null
+1844 null
+1845 null
+1846 null
+1847 null
+1848 null
+1849 null
+1850 null
+1851 null
+1852 null
+1853 null
+1854 null
+1855 null
+1856 null
+1857 null
+1858 null
+1859 null
+1860 null
+1861 null
+1862 null
+1863 null
+1864 null
+1865 null
+1866 null
+1867 null
+1868 null
+1869 null
+1870 null
+1871 null
+1872 null
+1873 null
+1874 null
+1875 null
+1876 null
+1877 null
+1878 null
+1879 null
+1880 null
+1881 null
+1882 null
+1883 null
+1884 null
+1885 null
+1886 null
+1887 null
+1888 Resident_Tax_Payer9
+1889 null
+1890 null
+1891 null
+1892 null
+1893 Non_Resident_Tax_Payer8
+1894 null
+1895 null
+1896 null
+1897 null
+1898 Household1
+1899 Partnership_Record1
+1900 null
+1901 Resident_Tax_Payer1
+1902 null
+1903 null
+1904 Tax_Property2
+1905 null
+1906 FromLaw2
+1907 null
+1908 FromAgent2
+1909 null
+1910 FromLaw3
+1911 null
+1912 FromAgent4
+1913 null
+1914 null
+1915 null
+1916 null
+1917 Trade_and_Business_Income5
+1918 null
+1919 Capital_and_Investments_Income5
+1920 null
+1921 Income_Detail5
+1922 Income_Detail2
+1923 Income_Detail6
+1924 Income_Detail3
+1925 Income_Detail8
+1926 Income_Detail4
+1927 Income_Detail11
+1928 Income_Detail7
+1929 Income_Detail17
+1930 Income_Detail9
+1931 Income_Detail25
+1932 Income_Detail10
+1933 null
+1934 null
+1935 null
+1936 null
+1937 null
+1938 null
+1939 null
+1940 null
+1941 null
+1942 null
+1943 null
+1944 null
+1945 Income_Detail34
+1946 Income_Detail12
+1947 Income_Detail45
+1948 Income_Detail13
+1949 Income_Detail57
+1950 Income_Detail14
+1951 Income_Detail70
+1952 Income_Detail15
+1953 Income_Detail84
+1954 Income_Detail16
+1955 Income_Detail99
+1956 Income_Detail18
+1957 null
+1958 null
+1959 null
+1960 null
+1961 null
+1962 null
+1963 null
+1964 null
+1965 null
+1966 null
+1967 null
+1968 null
+1969 null
+1970 Foreign_Income1
+1971 null
+1972 null
+1973 null
+1974 null
+1975 null
+1976 null
+1977 null
+1978 null
+1979 null
+1980 null
+1981 null
+1982 null
+1983 null
+1984 null
+1985 null
+1986 null
+1987 null
+1988 null
+1989 null
+1990 null
+1991 Foreign_Income2
+1992 null
+1993 null
+1994 null
+1995 null
+1996 null
+1997 null
+1998 null
+1999 null
+2000 null
+2001 null
+2002 null
+2003 null
+2004 null
+2005 null
+2006 Resident_Tax_Payer3
+2007 null
+2008 null
+2009 null
+2010 null
+2011 Household1
+2012 Partnership_Record1
+2013 null
+2014 Resident_Tax_Payer1
+2015 null
+2016 null
+2017 Tax_Property2
+2018 null
+2019 FromLaw2
+2020 null
+2021 FromAgent2
+2022 null
+2023 FromLaw3
+2024 null
+2025 FromAgent4
+2026 null
+2027 null
+2028 null
+2029 null
+2030 Trade_and_Business_Income5
+2031 null
+2032 Capital_and_Investments_Income5
+2033 null
+2034 Income_Detail5
+2035 Income_Detail2
+2036 Income_Detail6
+2037 Income_Detail3
+2038 Income_Detail8
+2039 Income_Detail4
+2040 Income_Detail11
+2041 Income_Detail7
+2042 Income_Detail17
+2043 Income_Detail9
+2044 Income_Detail25
+2045 Income_Detail10
+2046 null
+2047 null
+2048 null
+2049 null
+2050 null
+2051 null
+2052 null
+2053 null
+2054 null
+2055 null
+2056 null
+2057 null
+2058 Income_Detail34
+2059 Income_Detail12
+2060 Income_Detail45
+2061 Income_Detail13
+2062 Income_Detail57
+2063 Income_Detail14
+2064 Income_Detail70
+2065 Income_Detail15
+2066 Income_Detail84
+2067 Income_Detail16
+2068 Income_Detail99
+2069 Income_Detail18
+2070 null
+2071 null
+2072 null
+2073 null
+2074 null
+2075 null
+2076 null
+2077 null
+2078 null
+2079 null
+2080 null
+2081 null
+2082 null
+2083 Foreign_Income1
+2084 null
+2085 null
+2086 null
+2087 null
+2088 null
+2089 null
+2090 null
+2091 null
+2092 null
+2093 null
+2094 null
+2095 null
+2096 null
+2097 null
+2098 null
+2099 null
+2100 null
+2101 null
+2102 null
+2103 null
+2104 Foreign_Income2
+2105 null
+2106 null
+2107 null
+2108 null
+2109 null
+2110 null
+2111 null
+2112 null
+2113 null
+2114 null
+2115 null
+2116 null
+2117 null
+2118 null
+2119 Resident_Tax_Payer3
+2120 null
+2121 null
+2122 null
+2123 null
+2124 Household1
+2125 Marriage_Record1
+2126 null
+2127 null
+2128 null
+2129 Tax_Property2
+2130 null
+2131 FromLaw2
+2132 null
+2133 FromAgent2
+2134 null
+2135 FromLaw3
+2136 null
+2137 FromAgent4
+2138 null
+2139 Foreign_Income4
+2140 null
+2141 Foreign_Income2
+2142 null
+2143 null
+2144 null
+2145 Income_Detail6
+2146 Income_Detail2
+2147 Income_Detail7
+2148 Income_Detail3
+2149 Income_Detail9
+2150 Income_Detail4
+2151 Income_Detail12
+2152 Income_Detail5
+2153 Income_Detail16
+2154 Income_Detail8
+2155 Income_Detail23
+2156 Income_Detail10
+2157 null
+2158 null
+2159 null
+2160 null
+2161 null
+2162 null
+2163 null
+2164 null
+2165 null
+2166 null
+2167 null
+2168 null
+2169 Income_Detail32
+2170 Income_Detail11
+2171 Income_Detail42
+2172 Income_Detail13
+2173 Income_Detail54
+2174 Income_Detail14
+2175 Income_Detail67
+2176 Income_Detail15
+2177 Income_Detail81
+2178 Income_Detail17
+2179 Income_Detail97
+2180 Income_Detail18
+2181 null
+2182 null
+2183 null
+2184 null
+2185 null
+2186 null
+2187 null
+2188 null
+2189 null
+2190 null
+2191 null
+2192 null
+2193 null
+2194 null
+2195 null
+2196 null
+2197 null
+2198 null
+2199 null
+2200 null
+2201 null
+2202 null
+2203 null
+2204 null
+2205 null
+2206 null
+2207 null
+2208 null
+2209 null
+2210 null
+2211 null
+2212 null
+2213 null
+2214 null
+2215 null
+2216 null
+2217 null
+2218 null
+2219 null
+2220 null
+2221 null
+2222 null
+2223 null
+2224 null
+2225 null
+2226 null
+2227 null
+2228 null
+2229 null
+2230 null
+2231 null
+2232 null
+2233 null
+2234 null
+2235 null
+2236 null
+2237 null
+2238 null
+2239 null
+2240 null
+2241 null
+2242 null
+2243 null
+2244 null
+2245 null
+2246 null
+2247 null
+2248 null
+2249 null
+2250 null
+2251 null
+2252 null
+2253 null
+2254 null
+2255 null
+2256 null
+2257 null
+2258 null
+2259 null
+2260 null
+2261 null
+2262 null
+2263 null
+2264 null
+2265 null
+2266 null
+2267 null
+2268 null
+2269 null
+2270 null
+2271 null
+2272 null
+2273 null
+2274 null
+2275 null
+2276 null
+2277 null
+2278 null
+2279 null
+2280 null
+2281 null
+2282 null
+2283 null
+2284 null
+2285 null
+2286 null
+2287 null
+2288 null
+2289 null
+2290 null
+2291 null
+2292 null
+2293 null
+2294 null
+2295 Rentals_and_Leases_Income1
+2296 null
+2297 null
+2298 null
+2299 null
+2300 null
+2301 Resident_Tax_Payer13
+2302 null
+2303 null
+2304 null
+2305 null
+2306 null
+2307 null
+2308 null
+2309 null
+2310 null
+2311 null
+2312 Agriculture_and_Forestry_Income1
+2313 null
+2314 Non_Resident_Tax_Payer13
+2315 null
+2316 null
+2317 null
+2318 null
+2319 Household1
+2320 Marriage_Record1
+2321 null
+2322 null
+2323 null
+2324 Tax_Property2
+2325 null
+2326 FromLaw2
+2327 null
+2328 FromAgent2
+2329 null
+2330 FromLaw3
+2331 null
+2332 FromAgent4
+2333 null
+2334 Foreign_Income4
+2335 null
+2336 Foreign_Income2
+2337 null
+2338 null
+2339 null
+2340 Income_Detail6
+2341 Income_Detail2
+2342 Income_Detail7
+2343 Income_Detail3
+2344 Income_Detail9
+2345 Income_Detail4
+2346 Income_Detail12
+2347 Income_Detail5
+2348 Income_Detail16
+2349 Income_Detail8
+2350 Income_Detail23
+2351 Income_Detail10
+2352 null
+2353 null
+2354 null
+2355 null
+2356 null
+2357 null
+2358 null
+2359 null
+2360 null
+2361 null
+2362 null
+2363 null
+2364 Income_Detail32
+2365 Income_Detail11
+2366 Income_Detail42
+2367 Income_Detail13
+2368 Income_Detail54
+2369 Income_Detail14
+2370 Income_Detail67
+2371 Income_Detail15
+2372 Income_Detail81
+2373 Income_Detail17
+2374 Income_Detail97
+2375 Income_Detail18
+2376 null
+2377 null
+2378 null
+2379 null
+2380 null
+2381 null
+2382 null
+2383 null
+2384 null
+2385 null
+2386 null
+2387 null
+2388 null
+2389 null
+2390 null
+2391 null
+2392 null
+2393 null
+2394 null
+2395 null
+2396 null
+2397 null
+2398 null
+2399 null
+2400 null
+2401 null
+2402 null
+2403 null
+2404 null
+2405 null
+2406 null
+2407 null
+2408 null
+2409 null
+2410 null
+2411 null
+2412 null
+2413 null
+2414 null
+2415 null
+2416 null
+2417 null
+2418 null
+2419 null
+2420 null
+2421 null
+2422 null
+2423 null
+2424 null
+2425 null
+2426 null
+2427 null
+2428 null
+2429 null
+2430 null
+2431 null
+2432 null
+2433 null
+2434 null
+2435 null
+2436 null
+2437 null
+2438 null
+2439 null
+2440 null
+2441 null
+2442 null
+2443 null
+2444 null
+2445 null
+2446 null
+2447 null
+2448 null
+2449 null
+2450 null
+2451 null
+2452 null
+2453 null
+2454 null
+2455 null
+2456 null
+2457 null
+2458 null
+2459 null
+2460 null
+2461 null
+2462 null
+2463 null
+2464 null
+2465 null
+2466 null
+2467 null
+2468 null
+2469 null
+2470 null
+2471 null
+2472 null
+2473 null
+2474 null
+2475 null
+2476 null
+2477 null
+2478 null
+2479 null
+2480 null
+2481 null
+2482 null
+2483 null
+2484 null
+2485 null
+2486 null
+2487 null
+2488 null
+2489 null
+2490 Rentals_and_Leases_Income1
+2491 null
+2492 null
+2493 null
+2494 null
+2495 null
+2496 Resident_Tax_Payer13
+2497 null
+2498 null
+2499 null
+2500 null
+2501 null
+2502 null
+2503 null
+2504 null
+2505 null
+2506 null
+2507 Agriculture_and_Forestry_Income1
+2508 null
+2509 Non_Resident_Tax_Payer13
+2510 null
+2511 null
+2512 null
+2513 null
+2514 WWW
+2515 Employer
+2516 MMM
+2517 UUU
+2518 YYY
+2519 OOO
+2520 beug
+2521 NONE
+2522 A
+2523 B
+2524 C
+2525 D
+2526 E
+2527 OTHER
+2528 ZZ
+2529 FF
+2530 BB
+2531 DD
+2532 NN
+2533 OTHER
+2534 Principal
+2535 Additional
+2536 RTS_2
+2537 RTS_3
+2538 RTS_4
+2539 RTS_5
+2540 One
+2541 One_A
+2542 Two
+2543 Salary
+2544 Pension
+2545 Annuity
+2546 LL
+2547 BB
+2548 SS
+2549 TT
+2550 Other
+2551 REGULAR
+2552 REAL_COST
+2553 INALIDITY_AND_INFIRMITY
+2554 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+2555 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+2556 HOUSE_CARE
+2557 CHILD_CARE
+2558 DEPENDENCE_CARE
+2559 OTHER
+2560 ALIMONY
+2561 RECURRENT_DEPT
+2562 CHILD
+2563 SPOUSE
+2564 RELATIVE
+2565 OTHER_FAMILY_MEMBER
+2566 NOT_OWN_CHILD
+2567 MISCELLANEOUS_DEBT
+2568 ALIMONY
+2569 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+2570 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+2571 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+2572 PRIVATE_INSURANCE
+2573 PRIVATE_LIFE_INSURANCE
+2574 COMPANY_MEMBERS_PRIVATE_INSURANCE
+2575 HOUSING_SAVING_PLAN
+2576 OLD_AGE_PENSION_PLAN
+2577 NONE
+2578 DIVORCE
+2579 SEPARATION_DE_FAIT
+2580 SEPARATION_BY_COURT
+2581 MARIAGE
+2582 PARTNERSHIP
+2583 OTHER
+2584 Household1
+2585 Partnership_Record1
+2586 null
+2587 null
+2588 null
+2589 Tax_Property1
+2590 null
+2591 FromLaw1
+2592 null
+2593 FromAgent1
+2594 null
+2595 FromLaw2
+2596 null
+2597 FromAgent2
+2598 null
+2599 Foreign_Income2
+2600 null
+2601 Local_Income2
+2602 null
+2603 null
+2604 null
+2605 null
+2606 null
+2607 null
+2608 Trade_and_Business_Income2
+2609 null
+2610 Trade_and_Business_Income3
+2611 null
+2612 Income_Detail4
+2613 Income_Detail2
+2614 Income_Detail5
+2615 Income_Detail3
+2616 Income_Detail7
+2617 Income_Detail6
+2618 Income_Detail12
+2619 Income_Detail8
+2620 Income_Detail19
+2621 Income_Detail9
+2622 Income_Detail27
+2623 Income_Detail10
+2624 null
+2625 null
+2626 null
+2627 null
+2628 null
+2629 null
+2630 null
+2631 null
+2632 null
+2633 null
+2634 null
+2635 null
+2636 Income_Detail36
+2637 Income_Detail11
+2638 Income_Detail46
+2639 Income_Detail13
+2640 Income_Detail58
+2641 Income_Detail14
+2642 Income_Detail71
+2643 Income_Detail15
+2644 Income_Detail85
+2645 Income_Detail16
+2646 Income_Detail100
+2647 Income_Detail17
+2648 null
+2649 null
+2650 null
+2651 null
+2652 null
+2653 null
+2654 null
+2655 null
+2656 null
+2657 null
+2658 null
+2659 null
+2660 null
+2661 null
+2662 null
+2663 null
+2664 null
+2665 Resident_Tax_Payer3
+2666 null
+2667 null
+2668 null
+2669 null
+2670 Non_Resident_Tax_Payer3
+2671 null
+2672 null
+2673 null
+2674 null
+2675 WWW
+2676 Employer
+2677 MMM
+2678 UUU
+2679 YYY
+2680 OOO
+2681 beug
+2682 NONE
+2683 A
+2684 B
+2685 C
+2686 D
+2687 E
+2688 OTHER
+2689 ZZ
+2690 FF
+2691 BB
+2692 DD
+2693 NN
+2694 OTHER
+2695 Principal
+2696 Additional
+2697 RTS_2
+2698 RTS_3
+2699 RTS_4
+2700 RTS_5
+2701 One
+2702 One_A
+2703 Two
+2704 Salary
+2705 Pension
+2706 Annuity
+2707 LL
+2708 BB
+2709 SS
+2710 TT
+2711 Other
+2712 REGULAR
+2713 REAL_COST
+2714 INALIDITY_AND_INFIRMITY
+2715 DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD
+2716 CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD
+2717 HOUSE_CARE
+2718 CHILD_CARE
+2719 DEPENDENCE_CARE
+2720 OTHER
+2721 ALIMONY
+2722 RECURRENT_DEPT
+2723 CHILD
+2724 SPOUSE
+2725 RELATIVE
+2726 OTHER_FAMILY_MEMBER
+2727 NOT_OWN_CHILD
+2728 MISCELLANEOUS_DEBT
+2729 ALIMONY
+2730 MANDATORY_HEALTH_AND_PENSION_INSURANCE
+2731 ADDITIONAL_EMPLOYERS_PENSION_INSURANCE
+2732 CONTINUED_HEALTH_AND_PENSION_INSURANCE
+2733 PRIVATE_INSURANCE
+2734 PRIVATE_LIFE_INSURANCE
+2735 COMPANY_MEMBERS_PRIVATE_INSURANCE
+2736 HOUSING_SAVING_PLAN
+2737 OLD_AGE_PENSION_PLAN
+2738 NONE
+2739 DIVORCE
+2740 SEPARATION_DE_FAIT
+2741 SEPARATION_BY_COURT
+2742 MARIAGE
+2743 PARTNERSHIP
+2744 OTHER
+2745 Household1
+2746 Partnership_Record1
+2747 null
+2748 null
+2749 null
+2750 Tax_Property1
+2751 null
+2752 FromLaw1
+2753 null
+2754 FromAgent1
+2755 null
+2756 FromLaw2
+2757 null
+2758 FromAgent2
+2759 null
+2760 Foreign_Income2
+2761 null
+2762 Local_Income2
+2763 null
+2764 null
+2765 null
+2766 null
+2767 null
+2768 null
+2769 Trade_and_Business_Income2
+2770 null
+2771 Trade_and_Business_Income3
+2772 null
+2773 Income_Detail4
+2774 Income_Detail2
+2775 Income_Detail5
+2776 Income_Detail3
+2777 Income_Detail7
+2778 Income_Detail6
+2779 Income_Detail12
+2780 Income_Detail8
+2781 Income_Detail19
+2782 Income_Detail9
+2783 Income_Detail27
+2784 Income_Detail10
+2785 null
+2786 null
+2787 null
+2788 null
+2789 null
+2790 null
+2791 null
+2792 null
+2793 null
+2794 null
+2795 null
+2796 null
+2797 Income_Detail36
+2798 Income_Detail11
+2799 Income_Detail46
+2800 Income_Detail13
+2801 Income_Detail58
+2802 Income_Detail14
+2803 Income_Detail71
+2804 Income_Detail15
+2805 Income_Detail85
+2806 Income_Detail16
+2807 Income_Detail100
+2808 Income_Detail17
+2809 null
+2810 null
+2811 null
+2812 null
+2813 null
+2814 null
+2815 null
+2816 null
+2817 null
+2818 null
+2819 null
+2820 null
+2821 null
+2822 null
+2823 null
+2824 null
+2825 null
+2826 Resident_Tax_Payer3
+2827 null
+2828 null
+2829 null
+2830 null
+2831 Non_Resident_Tax_Payer3
+2832 null
+2833 null
+2834 null
+2835 null
+2836 Household1
+2837 Partnership_Record1
+2838 null
+2839 null
+2840 null
+2841 Tax_Property1
+2842 null
+2843 FromLaw1
+2844 null
+2845 FromAgent1
+2846 null
+2847 FromLaw2
+2848 null
+2849 FromAgent2
+2850 null
+2851 Foreign_Income2
+2852 null
+2853 Local_Income2
+2854 null
+2855 null
+2856 null
+2857 null
+2858 null
+2859 null
+2860 Trade_and_Business_Income2
+2861 null
+2862 Trade_and_Business_Income3
+2863 null
+2864 Income_Detail4
+2865 Income_Detail2
+2866 Income_Detail5
+2867 Income_Detail3
+2868 Income_Detail7
+2869 Income_Detail6
+2870 Income_Detail12
+2871 Income_Detail8
+2872 Income_Detail19
+2873 Income_Detail9
+2874 Income_Detail27
+2875 Income_Detail10
+2876 null
+2877 null
+2878 null
+2879 null
+2880 null
+2881 null
+2882 null
+2883 null
+2884 null
+2885 null
+2886 null
+2887 null
+2888 Income_Detail36
+2889 Income_Detail11
+2890 Income_Detail46
+2891 Income_Detail13
+2892 Income_Detail58
+2893 Income_Detail14
+2894 Income_Detail71
+2895 Income_Detail15
+2896 Income_Detail85
+2897 Income_Detail16
+2898 Income_Detail100
+2899 Income_Detail17
+2900 null
+2901 null
+2902 null
+2903 null
+2904 null
+2905 null
+2906 null
+2907 null
+2908 null
+2909 null
+2910 null
+2911 null
+2912 null
+2913 null
+2914 null
+2915 null
+2916 null
+2917 Resident_Tax_Payer3
+2918 null
+2919 null
+2920 null
+2921 null
+2922 Non_Resident_Tax_Payer3
+2923 null
+2924 null
+2925 null
+2926 null
+2927 Household1
+2928 Partnership_Record1
+2929 null
+2930 null
+2931 null
+2932 Tax_Property1
+2933 null
+2934 FromLaw1
+2935 null
+2936 FromAgent1
+2937 null
+2938 FromLaw2
+2939 null
+2940 FromAgent2
+2941 null
+2942 Foreign_Income2
+2943 null
+2944 Local_Income2
+2945 null
+2946 null
+2947 null
+2948 null
+2949 null
+2950 null
+2951 Trade_and_Business_Income2
+2952 null
+2953 Trade_and_Business_Income3
+2954 null
+2955 Income_Detail4
+2956 Income_Detail2
+2957 Income_Detail5
+2958 Income_Detail3
+2959 Income_Detail7
+2960 Income_Detail6
+2961 Income_Detail12
+2962 Income_Detail8
+2963 Income_Detail19
+2964 Income_Detail9
+2965 Income_Detail27
+2966 Income_Detail10
+2967 null
+2968 null
+2969 null
+2970 null
+2971 null
+2972 null
+2973 null
+2974 null
+2975 null
+2976 null
+2977 null
+2978 null
+2979 Income_Detail36
+2980 Income_Detail11
+2981 Income_Detail46
+2982 Income_Detail13
+2983 Income_Detail58
+2984 Income_Detail14
+2985 Income_Detail71
+2986 Income_Detail15
+2987 Income_Detail85
+2988 Income_Detail16
+2989 Income_Detail100
+2990 Income_Detail17
+2991 null
+2992 null
+2993 null
+2994 null
+2995 null
+2996 null
+2997 null
+2998 null
+2999 null
+3000 null
+3001 null
+3002 null
+3003 null
+3004 null
+3005 null
+3006 null
+3007 null
+3008 Resident_Tax_Payer3
+3009 null
+3010 null
+3011 null
+3012 null
+3013 Non_Resident_Tax_Payer3
+3014 null
+3015 null
+3016 null
+3017 null
+3018 Household1
+3019 Partnership_Record1
+3020 null
+3021 null
+3022 null
+3023 Tax_Property1
+3024 null
+3025 FromLaw1
+3026 null
+3027 FromAgent1
+3028 null
+3029 FromLaw2
+3030 null
+3031 FromAgent2
+3032 null
+3033 Foreign_Income2
+3034 null
+3035 Local_Income2
+3036 null
+3037 null
+3038 null
+3039 null
+3040 null
+3041 null
+3042 Trade_and_Business_Income2
+3043 null
+3044 Trade_and_Business_Income3
+3045 null
+3046 Income_Detail4
+3047 Income_Detail2
+3048 Income_Detail5
+3049 Income_Detail3
+3050 Income_Detail7
+3051 Income_Detail6
+3052 Income_Detail12
+3053 Income_Detail8
+3054 Income_Detail19
+3055 Income_Detail9
+3056 Income_Detail27
+3057 Income_Detail10
+3058 null
+3059 null
+3060 null
+3061 null
+3062 null
+3063 null
+3064 null
+3065 null
+3066 null
+3067 null
+3068 null
+3069 null
+3070 Income_Detail36
+3071 Income_Detail11
+3072 Income_Detail46
+3073 Income_Detail13
+3074 Income_Detail58
+3075 Income_Detail14
+3076 Income_Detail71
+3077 Income_Detail15
+3078 Income_Detail85
+3079 Income_Detail16
+3080 Income_Detail100
+3081 Income_Detail17
+3082 null
+3083 null
+3084 null
+3085 null
+3086 null
+3087 null
+3088 null
+3089 null
+3090 null
+3091 null
+3092 null
+3093 null
+3094 null
+3095 null
+3096 null
+3097 null
+3098 null
+3099 Resident_Tax_Payer3
+3100 null
+3101 null
+3102 null
+3103 null
+3104 Non_Resident_Tax_Payer3
+3105 null
+3106 null
+3107 null
+3108 null
+3109 Household1
+3110 Partnership_Record1
+3111 null
+3112 null
+3113 null
+3114 Tax_Property1
+3115 null
+3116 Non_Resident_Tax_Payer1
+3117 null
+3118 FromLaw1
+3119 null
+3120 FromAgent1
+3121 null
+3122 FromLaw2
+3123 null
+3124 FromAgent2
+3125 null
+3126 Foreign_Income2
+3127 null
+3128 Local_Income2
+3129 null
+3130 Non_Resident_Tax_Payer2
+3131 null
+3132 null
+3133 null
+3134 null
+3135 Trade_and_Business_Income2
+3136 null
+3137 null
+3138 Capital_and_Investments_Income2
+3139 null
+3140 Income_Detail2
+3141 Income_Detail3
+3142 Income_Detail4
+3143 Income_Detail5
+3144 Income_Detail8
+3145 Income_Detail6
+3146 Income_Detail13
+3147 Income_Detail7
+3148 Income_Detail19
+3149 Income_Detail9
+3150 Income_Detail27
+3151 Income_Detail10
+3152 null
+3153 null
+3154 null
+3155 null
+3156 null
+3157 null
+3158 null
+3159 null
+3160 null
+3161 null
+3162 null
+3163 null
+3164 Income_Detail36
+3165 Income_Detail11
+3166 Income_Detail46
+3167 Income_Detail12
+3168 Income_Detail57
+3169 Income_Detail14
+3170 Income_Detail70
+3171 Income_Detail15
+3172 Income_Detail84
+3173 Income_Detail16
+3174 Income_Detail99
+3175 Income_Detail17
+3176 null
+3177 null
+3178 null
+3179 null
+3180 null
+3181 null
+3182 null
+3183 null
+3184 null
+3185 null
+3186 null
+3187 null
+3188 null
+3189 null
+3190 Household1
+3191 Partnership_Record1
+3192 null
+3193 null
+3194 null
+3195 Tax_Property1
+3196 null
+3197 Non_Resident_Tax_Payer1
+3198 null
+3199 FromLaw1
+3200 null
+3201 FromAgent1
+3202 null
+3203 FromLaw2
+3204 null
+3205 FromAgent2
+3206 null
+3207 Foreign_Income2
+3208 null
+3209 Local_Income2
+3210 null
+3211 Non_Resident_Tax_Payer2
+3212 null
+3213 null
+3214 null
+3215 null
+3216 Trade_and_Business_Income2
+3217 null
+3218 null
+3219 Capital_and_Investments_Income2
+3220 null
+3221 Income_Detail2
+3222 Income_Detail3
+3223 Income_Detail4
+3224 Income_Detail5
+3225 Income_Detail8
+3226 Income_Detail6
+3227 Income_Detail13
+3228 Income_Detail7
+3229 Income_Detail19
+3230 Income_Detail9
+3231 Income_Detail27
+3232 Income_Detail10
+3233 null
+3234 null
+3235 null
+3236 null
+3237 null
+3238 null
+3239 null
+3240 null
+3241 null
+3242 null
+3243 null
+3244 null
+3245 Income_Detail36
+3246 Income_Detail11
+3247 Income_Detail46
+3248 Income_Detail12
+3249 Income_Detail57
+3250 Income_Detail14
+3251 Income_Detail70
+3252 Income_Detail15
+3253 Income_Detail84
+3254 Income_Detail16
+3255 Income_Detail99
+3256 Income_Detail17
+3257 null
+3258 null
+3259 null
+3260 null
+3261 null
+3262 null
+3263 null
+3264 null
+3265 null
+3266 null
+3267 null
+3268 null
+3269 null
+3270 null
+3271 Household1
+3272 Partnership_Record1
+3273 null
+3274 null
+3275 null
+3276 Tax_Property2
+3277 null
+3278 FromLaw2
+3279 null
+3280 FromAgent2
+3281 null
+3282 FromLaw3
+3283 null
+3284 FromAgent4
+3285 null
+3286 null
+3287 null
+3288 Capital_and_Investments_Income5
+3289 null
+3290 null
+3291 Agriculture_and_Forestry_Income5
+3292 null
+3293 Income_Detail5
+3294 Income_Detail2
+3295 Income_Detail6
+3296 Income_Detail3
+3297 Income_Detail8
+3298 Income_Detail4
+3299 Income_Detail11
+3300 Income_Detail7
+3301 Income_Detail17
+3302 Income_Detail9
+3303 Income_Detail25
+3304 Income_Detail10
+3305 null
+3306 null
+3307 null
+3308 null
+3309 null
+3310 null
+3311 null
+3312 null
+3313 null
+3314 null
+3315 null
+3316 null
+3317 Income_Detail34
+3318 Income_Detail12
+3319 Income_Detail45
+3320 Income_Detail13
+3321 Income_Detail57
+3322 Income_Detail14
+3323 Income_Detail70
+3324 Income_Detail15
+3325 Income_Detail84
+3326 Income_Detail16
+3327 Income_Detail99
+3328 Income_Detail18
+3329 null
+3330 null
+3331 null
+3332 null
+3333 null
+3334 null
+3335 null
+3336 null
+3337 null
+3338 null
+3339 null
+3340 null
+3341 null
+3342 null
+3343 null
+3344 null
+3345 null
+3346 null
+3347 null
+3348 null
+3349 null
+3350 null
+3351 null
+3352 null
+3353 null
+3354 Foreign_Income1
+3355 null
+3356 null
+3357 null
+3358 null
+3359 null
+3360 null
+3361 null
+3362 null
+3363 null
+3364 null
+3365 null
+3366 null
+3367 null
+3368 null
+3369 null
+3370 null
+3371 null
+3372 null
+3373 null
+3374 null
+3375 null
+3376 null
+3377 null
+3378 null
+3379 null
+3380 Foreign_Income2
+3381 null
+3382 null
+3383 null
+3384 null
+3385 null
+3386 null
+3387 null
+3388 null
+3389 null
+3390 null
+3391 null
+3392 null
+3393 null
+3394 null
+3395 null
+3396 null
+3397 null
+3398 null
+3399 null
+3400 null
+3401 null
+3402 null
+3403 null
+3404 null
+3405 Non_Resident_Tax_Payer5
+3406 null
+3407 null
+3408 null
+3409 null
+3410 null
+3411 null
+3412 null
+3413 null
+3414 null
+3415 null
+3416 Non_Resident_Tax_Payer6
+3417 null
+3418 null
+3419 null
+3420 null
+3421 Household1
+3422 Partnership_Record1
+3423 null
+3424 null
+3425 null
+3426 Tax_Property2
+3427 null
+3428 FromLaw2
+3429 null
+3430 FromAgent2
+3431 null
+3432 FromLaw3
+3433 null
+3434 FromAgent4
+3435 null
+3436 null
+3437 null
+3438 Capital_and_Investments_Income5
+3439 null
+3440 null
+3441 Agriculture_and_Forestry_Income5
+3442 null
+3443 Income_Detail5
+3444 Income_Detail2
+3445 Income_Detail6
+3446 Income_Detail3
+3447 Income_Detail8
+3448 Income_Detail4
+3449 Income_Detail11
+3450 Income_Detail7
+3451 Income_Detail17
+3452 Income_Detail9
+3453 Income_Detail25
+3454 Income_Detail10
+3455 null
+3456 null
+3457 null
+3458 null
+3459 null
+3460 null
+3461 null
+3462 null
+3463 null
+3464 null
+3465 null
+3466 null
+3467 Income_Detail34
+3468 Income_Detail12
+3469 Income_Detail45
+3470 Income_Detail13
+3471 Income_Detail57
+3472 Income_Detail14
+3473 Income_Detail70
+3474 Income_Detail15
+3475 Income_Detail84
+3476 Income_Detail16
+3477 Income_Detail99
+3478 Income_Detail18
+3479 null
+3480 null
+3481 null
+3482 null
+3483 null
+3484 null
+3485 null
+3486 null
+3487 null
+3488 null
+3489 null
+3490 null
+3491 null
+3492 null
+3493 null
+3494 null
+3495 null
+3496 null
+3497 null
+3498 null
+3499 null
+3500 null
+3501 null
+3502 null
+3503 null
+3504 Foreign_Income1
+3505 null
+3506 null
+3507 null
+3508 null
+3509 null
+3510 null
+3511 null
+3512 null
+3513 null
+3514 null
+3515 null
+3516 null
+3517 null
+3518 null
+3519 null
+3520 null
+3521 null
+3522 null
+3523 null
+3524 null
+3525 null
+3526 null
+3527 null
+3528 null
+3529 null
+3530 Foreign_Income2
+3531 null
+3532 null
+3533 null
+3534 null
+3535 null
+3536 null
+3537 null
+3538 null
+3539 null
+3540 null
+3541 null
+3542 null
+3543 null
+3544 null
+3545 null
+3546 null
+3547 null
+3548 null
+3549 null
+3550 null
+3551 null
+3552 null
+3553 null
+3554 null
+3555 Non_Resident_Tax_Payer5
+3556 null
+3557 null
+3558 null
+3559 null
+3560 null
+3561 null
+3562 null
+3563 null
+3564 null
+3565 null
+3566 Non_Resident_Tax_Payer6
+3567 null
+3568 null
+3569 null
+3570 null
+3571 Household1
+3572 Partnership_Record1
+3573 null
+3574 null
+3575 null
+3576 Tax_Property2
+3577 null
+3578 FromLaw2
+3579 null
+3580 FromAgent2
+3581 null
+3582 FromLaw3
+3583 null
+3584 FromAgent4
+3585 null
+3586 Foreign_Income4
+3587 null
+3588 Foreign_Income2
+3589 null
+3590 null
+3591 Capital_and_Investments_Income5
+3592 null
+3593 null
+3594 null
+3595 Income_Detail6
+3596 Income_Detail2
+3597 Income_Detail7
+3598 Income_Detail3
+3599 Income_Detail9
+3600 Income_Detail4
+3601 Income_Detail12
+3602 Income_Detail5
+3603 Income_Detail16
+3604 Income_Detail8
+3605 Income_Detail23
+3606 Income_Detail10
+3607 null
+3608 null
+3609 null
+3610 null
+3611 null
+3612 null
+3613 null
+3614 null
+3615 null
+3616 null
+3617 null
+3618 null
+3619 Income_Detail32
+3620 Income_Detail11
+3621 Income_Detail42
+3622 Income_Detail13
+3623 Income_Detail54
+3624 Income_Detail14
+3625 Income_Detail67
+3626 Income_Detail15
+3627 Income_Detail81
+3628 Income_Detail17
+3629 Income_Detail97
+3630 Income_Detail18
+3631 null
+3632 null
+3633 null
+3634 null
+3635 null
+3636 null
+3637 null
+3638 null
+3639 null
+3640 null
+3641 null
+3642 null
+3643 null
+3644 null
+3645 null
+3646 null
+3647 null
+3648 null
+3649 null
+3650 null
+3651 null
+3652 null
+3653 Non_Resident_Tax_Payer2
+3654 null
+3655 null
+3656 null
+3657 null
+3658 null
+3659 null
+3660 null
+3661 null
+3662 null
+3663 Agriculture_and_Forestry_Income1
+3664 null
+3665 Resident_Tax_Payer4
+3666 null
+3667 null
+3668 null
+3669 null
+3670 Household1
+3671 Partnership_Record1
+3672 null
+3673 null
+3674 null
+3675 Tax_Property2
+3676 null
+3677 FromLaw2
+3678 null
+3679 FromAgent2
+3680 null
+3681 FromLaw3
+3682 null
+3683 FromAgent4
+3684 null
+3685 Foreign_Income4
+3686 null
+3687 Foreign_Income2
+3688 null
+3689 null
+3690 Capital_and_Investments_Income5
+3691 null
+3692 null
+3693 null
+3694 Income_Detail6
+3695 Income_Detail2
+3696 Income_Detail7
+3697 Income_Detail3
+3698 Income_Detail9
+3699 Income_Detail4
+3700 Income_Detail12
+3701 Income_Detail5
+3702 Income_Detail16
+3703 Income_Detail8
+3704 Income_Detail23
+3705 Income_Detail10
+3706 null
+3707 null
+3708 null
+3709 null
+3710 null
+3711 null
+3712 null
+3713 null
+3714 null
+3715 null
+3716 null
+3717 null
+3718 Income_Detail32
+3719 Income_Detail11
+3720 Income_Detail42
+3721 Income_Detail13
+3722 Income_Detail54
+3723 Income_Detail14
+3724 Income_Detail67
+3725 Income_Detail15
+3726 Income_Detail81
+3727 Income_Detail17
+3728 Income_Detail97
+3729 Income_Detail18
+3730 null
+3731 null
+3732 null
+3733 null
+3734 null
+3735 null
+3736 null
+3737 null
+3738 null
+3739 null
+3740 null
+3741 null
+3742 null
+3743 null
+3744 null
+3745 null
+3746 null
+3747 null
+3748 null
+3749 null
+3750 null
+3751 null
+3752 Non_Resident_Tax_Payer2
+3753 null
+3754 null
+3755 null
+3756 null
+3757 null
+3758 null
+3759 null
+3760 null
+3761 null
+3762 Agriculture_and_Forestry_Income1
+3763 null
+3764 Resident_Tax_Payer4
+3765 null
+3766 null
+3767 null
+3768 null
+#
+70 71 parents
+71 2738 separation_cause
+71 70 household
+71 238 individual_A
+71 227 individual_B
+71 75 properties
+75 71 union_record
+77 238 taxPayer
+79 238 taxPayer
+81 227 taxPayer
+83 227 taxPayer
+90 138 income
+91 138 income
+92 138 income
+93 138 income
+94 138 income
+95 138 income
+96 138 income
+97 138 income
+98 138 income
+99 138 income
+100 138 income
+101 138 income
+114 154 income
+115 154 income
+116 154 income
+117 154 income
+118 154 income
+119 154 income
+120 154 income
+121 154 income
+122 154 income
+123 154 income
+124 154 income
+125 154 income
+138 238 taxPayer
+138 176 income_type
+138 90 details
+138 91 details
+138 92 details
+138 93 details
+138 94 details
+138 95 details
+138 96 details
+138 97 details
+138 98 details
+138 99 details
+138 100 details
+138 101 details
+154 227 taxPayer
+154 243 income_type
+154 114 details
+154 115 details
+154 116 details
+154 117 details
+154 118 details
+154 119 details
+154 120 details
+154 121 details
+154 122 details
+154 123 details
+154 124 details
+154 125 details
+176 138 income
+227 71 legal_union_B
+227 81 from_law
+227 83 from_agent
+227 154 incomes
+227 2683 disability_type
+238 71 legal_union_A
+238 77 from_law
+238 79 from_agent
+238 138 incomes
+238 2683 disability_type
+243 154 income
+245 576 null
+246 null null
+246 575 null
+246 723 null
+246 733 null
+246 580 null
+250 576 null
+252 723 null
+254 723 null
+256 733 null
+258 733 null
+260 723 null
+260 738 null
+260 600 null
+260 601 null
+260 602 null
+260 603 null
+260 604 null
+260 605 null
+260 606 null
+260 607 null
+260 608 null
+260 609 null
+260 610 null
+260 611 null
+262 733 null
+262 712 null
+262 624 null
+262 625 null
+262 626 null
+262 627 null
+262 628 null
+262 629 null
+262 630 null
+262 631 null
+262 632 null
+262 633 null
+262 634 null
+262 635 null
+270 590 null
+271 590 null
+272 590 null
+273 590 null
+274 590 null
+275 590 null
+276 590 null
+277 590 null
+278 590 null
+279 590 null
+280 590 null
+281 590 null
+294 592 null
+295 592 null
+296 592 null
+297 592 null
+298 592 null
+299 592 null
+300 592 null
+301 592 null
+302 592 null
+303 592 null
+304 592 null
+305 592 null
+382 592 null
+393 576 null
+393 582 null
+393 584 null
+393 590 null
+393 null null
+403 576 null
+403 586 null
+403 588 null
+403 592 null
+403 null null
+408 590 null
+410 576 null
+411 null null
+411 575 null
+411 723 null
+411 733 null
+411 580 null
+415 576 null
+417 723 null
+419 723 null
+421 733 null
+423 733 null
+425 723 null
+425 738 null
+425 600 null
+425 601 null
+425 602 null
+425 603 null
+425 604 null
+425 605 null
+425 606 null
+425 607 null
+425 608 null
+425 609 null
+425 610 null
+425 611 null
+427 733 null
+427 712 null
+427 624 null
+427 625 null
+427 626 null
+427 627 null
+427 628 null
+427 629 null
+427 630 null
+427 631 null
+427 632 null
+427 633 null
+427 634 null
+427 635 null
+435 590 null
+436 590 null
+437 590 null
+438 590 null
+439 590 null
+440 590 null
+441 590 null
+442 590 null
+443 590 null
+444 590 null
+445 590 null
+446 590 null
+459 592 null
+460 592 null
+461 592 null
+462 592 null
+463 592 null
+464 592 null
+465 592 null
+466 592 null
+467 592 null
+468 592 null
+469 592 null
+470 592 null
+547 592 null
+558 576 null
+558 582 null
+558 584 null
+558 590 null
+558 null null
+568 576 null
+568 586 null
+568 588 null
+568 592 null
+568 null null
+573 590 null
+575 576 null
+576 null null
+576 575 null
+576 723 null
+576 733 null
+576 580 null
+580 576 null
+582 723 null
+584 723 null
+586 733 null
+588 733 null
+590 723 null
+590 738 null
+590 600 null
+590 601 null
+590 602 null
+590 603 null
+590 604 null
+590 605 null
+590 606 null
+590 607 null
+590 608 null
+590 609 null
+590 610 null
+590 611 null
+592 733 null
+592 712 null
+592 624 null
+592 625 null
+592 626 null
+592 627 null
+592 628 null
+592 629 null
+592 630 null
+592 631 null
+592 632 null
+592 633 null
+592 634 null
+592 635 null
+600 590 null
+601 590 null
+602 590 null
+603 590 null
+604 590 null
+605 590 null
+606 590 null
+607 590 null
+608 590 null
+609 590 null
+610 590 null
+611 590 null
+624 592 null
+625 592 null
+626 592 null
+627 592 null
+628 592 null
+629 592 null
+630 592 null
+631 592 null
+632 592 null
+633 592 null
+634 592 null
+635 592 null
+712 592 null
+723 576 null
+723 582 null
+723 584 null
+723 590 null
+723 null null
+733 576 null
+733 586 null
+733 588 null
+733 592 null
+733 null null
+738 590 null
+810 985 parents
+811 2738 separation_cause
+811 984 household
+811 1077 individual_A
+811 1083 individual_B
+811 989 properties
+815 985 union_record
+817 1077 taxPayer
+819 1077 taxPayer
+821 1083 taxPayer
+823 1083 taxPayer
+826 1077 taxPayer
+826 1005 income_type
+826 1007 details
+826 1008 details
+826 1009 details
+826 1010 details
+826 1011 details
+826 1012 details
+826 1013 details
+826 1014 details
+826 1015 details
+826 1016 details
+826 1017 details
+826 1018 details
+829 1060 income
+831 1000 income
+833 1000 income
+834 1000 income
+835 1000 income
+836 1000 income
+837 1000 income
+838 1000 income
+839 1000 income
+840 1000 income
+841 1000 income
+842 1000 income
+843 1000 income
+844 1000 income
+857 1060 income
+858 1060 income
+859 1060 income
+860 1060 income
+861 1060 income
+862 1060 income
+863 1060 income
+864 1060 income
+865 1060 income
+866 1060 income
+867 1060 income
+868 1060 income
+886 1083 taxPayer
+886 1003 income_type
+886 1031 details
+886 1032 details
+886 1033 details
+886 1034 details
+886 1035 details
+886 1036 details
+886 1037 details
+886 1038 details
+886 1039 details
+886 1040 details
+886 1041 details
+886 1042 details
+903 985 legal_union_A
+903 991 from_law
+903 993 from_agent
+903 1000 incomes
+903 2683 disability_type
+909 985 legal_union_B
+909 995 from_law
+909 997 from_agent
+909 1060 incomes
+909 2683 disability_type
+984 985 parents
+985 2738 separation_cause
+985 984 household
+985 1077 individual_A
+985 1083 individual_B
+985 989 properties
+989 985 union_record
+991 1077 taxPayer
+993 1077 taxPayer
+995 1083 taxPayer
+997 1083 taxPayer
+1000 1077 taxPayer
+1000 1005 income_type
+1000 1007 details
+1000 1008 details
+1000 1009 details
+1000 1010 details
+1000 1011 details
+1000 1012 details
+1000 1013 details
+1000 1014 details
+1000 1015 details
+1000 1016 details
+1000 1017 details
+1000 1018 details
+1003 1060 income
+1005 1000 income
+1007 1000 income
+1008 1000 income
+1009 1000 income
+1010 1000 income
+1011 1000 income
+1012 1000 income
+1013 1000 income
+1014 1000 income
+1015 1000 income
+1016 1000 income
+1017 1000 income
+1018 1000 income
+1031 1060 income
+1032 1060 income
+1033 1060 income
+1034 1060 income
+1035 1060 income
+1036 1060 income
+1037 1060 income
+1038 1060 income
+1039 1060 income
+1040 1060 income
+1041 1060 income
+1042 1060 income
+1060 1083 taxPayer
+1060 1003 income_type
+1060 1031 details
+1060 1032 details
+1060 1033 details
+1060 1034 details
+1060 1035 details
+1060 1036 details
+1060 1037 details
+1060 1038 details
+1060 1039 details
+1060 1040 details
+1060 1041 details
+1060 1042 details
+1077 985 legal_union_A
+1077 991 from_law
+1077 993 from_agent
+1077 1000 incomes
+1077 2683 disability_type
+1083 985 legal_union_B
+1083 995 from_law
+1083 997 from_agent
+1083 1060 incomes
+1083 2683 disability_type
+1088 1282 null
+1089 null null
+1089 1281 null
+1089 1463 null
+1089 1469 null
+1089 1286 null
+1093 1282 null
+1096 1463 null
+1098 1463 null
+1100 1469 null
+1102 1469 null
+1104 1463 null
+1104 1435 null
+1104 1304 null
+1104 1305 null
+1104 1306 null
+1104 1307 null
+1104 1308 null
+1104 1309 null
+1104 1310 null
+1104 1311 null
+1104 1312 null
+1104 1313 null
+1104 1314 null
+1104 1315 null
+1111 1297 null
+1112 1297 null
+1113 1297 null
+1114 1297 null
+1115 1297 null
+1116 1297 null
+1117 1297 null
+1118 1297 null
+1119 1297 null
+1120 1297 null
+1121 1297 null
+1122 1297 null
+1135 1375 null
+1136 1375 null
+1137 1375 null
+1138 1375 null
+1139 1375 null
+1140 1375 null
+1141 1375 null
+1142 1375 null
+1143 1375 null
+1144 1375 null
+1145 1375 null
+1146 1375 null
+1182 1469 null
+1182 1451 null
+1182 1328 null
+1182 1329 null
+1182 1330 null
+1182 1331 null
+1182 1332 null
+1182 1333 null
+1182 1334 null
+1182 1335 null
+1182 1336 null
+1182 1337 null
+1182 1338 null
+1182 1339 null
+1242 1297 null
+1258 1375 null
+1270 1282 null
+1270 1289 null
+1270 1291 null
+1270 1297 null
+1270 null null
+1276 1282 null
+1276 1293 null
+1276 1295 null
+1276 1375 null
+1276 null null
+1281 1282 null
+1282 null null
+1282 1281 null
+1282 1463 null
+1282 1469 null
+1282 1286 null
+1286 1282 null
+1289 1463 null
+1291 1463 null
+1293 1469 null
+1295 1469 null
+1297 1463 null
+1297 1435 null
+1297 1304 null
+1297 1305 null
+1297 1306 null
+1297 1307 null
+1297 1308 null
+1297 1309 null
+1297 1310 null
+1297 1311 null
+1297 1312 null
+1297 1313 null
+1297 1314 null
+1297 1315 null
+1304 1297 null
+1305 1297 null
+1306 1297 null
+1307 1297 null
+1308 1297 null
+1309 1297 null
+1310 1297 null
+1311 1297 null
+1312 1297 null
+1313 1297 null
+1314 1297 null
+1315 1297 null
+1328 1375 null
+1329 1375 null
+1330 1375 null
+1331 1375 null
+1332 1375 null
+1333 1375 null
+1334 1375 null
+1335 1375 null
+1336 1375 null
+1337 1375 null
+1338 1375 null
+1339 1375 null
+1375 1469 null
+1375 1451 null
+1375 1328 null
+1375 1329 null
+1375 1330 null
+1375 1331 null
+1375 1332 null
+1375 1333 null
+1375 1334 null
+1375 1335 null
+1375 1336 null
+1375 1337 null
+1375 1338 null
+1375 1339 null
+1435 1297 null
+1451 1375 null
+1463 1282 null
+1463 1289 null
+1463 1291 null
+1463 1297 null
+1463 null null
+1469 1282 null
+1469 1293 null
+1469 1295 null
+1469 1375 null
+1469 null null
+1544 1757 parents
+1545 2738 separation_cause
+1545 1756 household
+1545 1893 individual_A
+1545 1888 individual_B
+1545 1761 properties
+1549 1757 union_record
+1551 1893 taxPayer
+1553 1893 taxPayer
+1555 1888 taxPayer
+1557 1888 taxPayer
+1559 1893 taxPayer
+1559 1783 income_type
+1559 1785 details
+1559 1786 details
+1559 1787 details
+1559 1788 details
+1559 1789 details
+1559 1790 details
+1559 1791 details
+1559 1792 details
+1559 1793 details
+1559 1794 details
+1559 1795 details
+1559 1796 details
+1561 1888 taxPayer
+1561 1780 income_type
+1561 1809 details
+1561 1810 details
+1561 1811 details
+1561 1812 details
+1561 1813 details
+1561 1814 details
+1561 1815 details
+1561 1816 details
+1561 1817 details
+1561 1818 details
+1561 1819 details
+1561 1820 details
+1568 1773 income
+1571 1771 income
+1573 1771 income
+1574 1771 income
+1575 1771 income
+1576 1771 income
+1577 1771 income
+1578 1771 income
+1579 1771 income
+1580 1771 income
+1581 1771 income
+1582 1771 income
+1583 1771 income
+1584 1771 income
+1597 1773 income
+1598 1773 income
+1599 1773 income
+1600 1773 income
+1601 1773 income
+1602 1773 income
+1603 1773 income
+1604 1773 income
+1605 1773 income
+1606 1773 income
+1607 1773 income
+1608 1773 income
+1676 1757 legal_union_B
+1676 1767 from_law
+1676 1769 from_agent
+1676 1773 incomes
+1676 2683 disability_type
+1681 1757 legal_union_A
+1681 1763 from_law
+1681 1765 from_agent
+1681 1771 incomes
+1681 2683 disability_type
+1756 1757 parents
+1757 2738 separation_cause
+1757 1756 household
+1757 1893 individual_A
+1757 1888 individual_B
+1757 1761 properties
+1761 1757 union_record
+1763 1893 taxPayer
+1765 1893 taxPayer
+1767 1888 taxPayer
+1769 1888 taxPayer
+1771 1893 taxPayer
+1771 1783 income_type
+1771 1785 details
+1771 1786 details
+1771 1787 details
+1771 1788 details
+1771 1789 details
+1771 1790 details
+1771 1791 details
+1771 1792 details
+1771 1793 details
+1771 1794 details
+1771 1795 details
+1771 1796 details
+1773 1888 taxPayer
+1773 1780 income_type
+1773 1809 details
+1773 1810 details
+1773 1811 details
+1773 1812 details
+1773 1813 details
+1773 1814 details
+1773 1815 details
+1773 1816 details
+1773 1817 details
+1773 1818 details
+1773 1819 details
+1773 1820 details
+1780 1773 income
+1783 1771 income
+1785 1771 income
+1786 1771 income
+1787 1771 income
+1788 1771 income
+1789 1771 income
+1790 1771 income
+1791 1771 income
+1792 1771 income
+1793 1771 income
+1794 1771 income
+1795 1771 income
+1796 1771 income
+1809 1773 income
+1810 1773 income
+1811 1773 income
+1812 1773 income
+1813 1773 income
+1814 1773 income
+1815 1773 income
+1816 1773 income
+1817 1773 income
+1818 1773 income
+1819 1773 income
+1820 1773 income
+1888 1757 legal_union_B
+1888 1767 from_law
+1888 1769 from_agent
+1888 1773 incomes
+1888 2683 disability_type
+1893 1757 legal_union_A
+1893 1763 from_law
+1893 1765 from_agent
+1893 1771 incomes
+1893 2683 disability_type
+1898 2012 null
+1899 null null
+1899 2011 null
+1899 2014 null
+1899 2119 null
+1899 2017 null
+1901 null null
+1901 2012 null
+1901 2019 null
+1901 2021 null
+1901 2083 null
+1904 2012 null
+1906 2014 null
+1908 2014 null
+1910 2119 null
+1912 2119 null
+1917 2104 null
+1919 2083 null
+1921 2104 null
+1922 2104 null
+1923 2104 null
+1924 2104 null
+1925 2104 null
+1926 2104 null
+1927 2104 null
+1928 2104 null
+1929 2104 null
+1930 2104 null
+1931 2104 null
+1932 2104 null
+1945 2083 null
+1946 2083 null
+1947 2083 null
+1948 2083 null
+1949 2083 null
+1950 2083 null
+1951 2083 null
+1952 2083 null
+1953 2083 null
+1954 2083 null
+1955 2083 null
+1956 2083 null
+1970 2014 null
+1970 2032 null
+1970 2058 null
+1970 2059 null
+1970 2060 null
+1970 2061 null
+1970 2062 null
+1970 2063 null
+1970 2064 null
+1970 2065 null
+1970 2066 null
+1970 2067 null
+1970 2068 null
+1970 2069 null
+1991 2119 null
+1991 2030 null
+1991 2034 null
+1991 2035 null
+1991 2036 null
+1991 2037 null
+1991 2038 null
+1991 2039 null
+1991 2040 null
+1991 2041 null
+1991 2042 null
+1991 2043 null
+1991 2044 null
+1991 2045 null
+2006 2012 null
+2006 2023 null
+2006 2025 null
+2006 2104 null
+2006 null null
+2011 2012 null
+2012 null null
+2012 2011 null
+2012 2014 null
+2012 2119 null
+2012 2017 null
+2014 null null
+2014 2012 null
+2014 2019 null
+2014 2021 null
+2014 2083 null
+2017 2012 null
+2019 2014 null
+2021 2014 null
+2023 2119 null
+2025 2119 null
+2030 2104 null
+2032 2083 null
+2034 2104 null
+2035 2104 null
+2036 2104 null
+2037 2104 null
+2038 2104 null
+2039 2104 null
+2040 2104 null
+2041 2104 null
+2042 2104 null
+2043 2104 null
+2044 2104 null
+2045 2104 null
+2058 2083 null
+2059 2083 null
+2060 2083 null
+2061 2083 null
+2062 2083 null
+2063 2083 null
+2064 2083 null
+2065 2083 null
+2066 2083 null
+2067 2083 null
+2068 2083 null
+2069 2083 null
+2083 2014 null
+2083 2032 null
+2083 2058 null
+2083 2059 null
+2083 2060 null
+2083 2061 null
+2083 2062 null
+2083 2063 null
+2083 2064 null
+2083 2065 null
+2083 2066 null
+2083 2067 null
+2083 2068 null
+2083 2069 null
+2104 2119 null
+2104 2030 null
+2104 2034 null
+2104 2035 null
+2104 2036 null
+2104 2037 null
+2104 2038 null
+2104 2039 null
+2104 2040 null
+2104 2041 null
+2104 2042 null
+2104 2043 null
+2104 2044 null
+2104 2045 null
+2119 2012 null
+2119 2023 null
+2119 2025 null
+2119 2104 null
+2119 null null
+2124 2320 null
+2125 null null
+2125 2319 null
+2125 2509 null
+2125 2496 null
+2125 2324 null
+2129 2320 null
+2131 2509 null
+2133 2509 null
+2135 2496 null
+2137 2496 null
+2139 2509 null
+2139 2507 null
+2139 2364 null
+2139 2365 null
+2139 2366 null
+2139 2367 null
+2139 2368 null
+2139 2369 null
+2139 2370 null
+2139 2371 null
+2139 2372 null
+2139 2373 null
+2139 2374 null
+2139 2375 null
+2141 2496 null
+2141 2490 null
+2141 2340 null
+2141 2341 null
+2141 2342 null
+2141 2343 null
+2141 2344 null
+2141 2345 null
+2141 2346 null
+2141 2347 null
+2141 2348 null
+2141 2349 null
+2141 2350 null
+2141 2351 null
+2145 2336 null
+2146 2336 null
+2147 2336 null
+2148 2336 null
+2149 2336 null
+2150 2336 null
+2151 2336 null
+2152 2336 null
+2153 2336 null
+2154 2336 null
+2155 2336 null
+2156 2336 null
+2169 2334 null
+2170 2334 null
+2171 2334 null
+2172 2334 null
+2173 2334 null
+2174 2334 null
+2175 2334 null
+2176 2334 null
+2177 2334 null
+2178 2334 null
+2179 2334 null
+2180 2334 null
+2295 2336 null
+2301 2320 null
+2301 2330 null
+2301 2332 null
+2301 2336 null
+2301 null null
+2312 2334 null
+2314 2320 null
+2314 2326 null
+2314 2328 null
+2314 2334 null
+2314 null null
+2319 2320 null
+2320 null null
+2320 2319 null
+2320 2509 null
+2320 2496 null
+2320 2324 null
+2324 2320 null
+2326 2509 null
+2328 2509 null
+2330 2496 null
+2332 2496 null
+2334 2509 null
+2334 2507 null
+2334 2364 null
+2334 2365 null
+2334 2366 null
+2334 2367 null
+2334 2368 null
+2334 2369 null
+2334 2370 null
+2334 2371 null
+2334 2372 null
+2334 2373 null
+2334 2374 null
+2334 2375 null
+2336 2496 null
+2336 2490 null
+2336 2340 null
+2336 2341 null
+2336 2342 null
+2336 2343 null
+2336 2344 null
+2336 2345 null
+2336 2346 null
+2336 2347 null
+2336 2348 null
+2336 2349 null
+2336 2350 null
+2336 2351 null
+2340 2336 null
+2341 2336 null
+2342 2336 null
+2343 2336 null
+2344 2336 null
+2345 2336 null
+2346 2336 null
+2347 2336 null
+2348 2336 null
+2349 2336 null
+2350 2336 null
+2351 2336 null
+2364 2334 null
+2365 2334 null
+2366 2334 null
+2367 2334 null
+2368 2334 null
+2369 2334 null
+2370 2334 null
+2371 2334 null
+2372 2334 null
+2373 2334 null
+2374 2334 null
+2375 2334 null
+2490 2336 null
+2496 2320 null
+2496 2330 null
+2496 2332 null
+2496 2336 null
+2496 null null
+2507 2334 null
+2509 2320 null
+2509 2326 null
+2509 2328 null
+2509 2334 null
+2509 null null
+2584 3019 parents
+2585 2738 separation_cause
+2585 3018 household
+2585 3104 individual_A
+2585 3099 individual_B
+2585 3023 properties
+2589 3019 union_record
+2591 3104 taxPayer
+2593 3104 taxPayer
+2595 3099 taxPayer
+2597 3099 taxPayer
+2599 3099 taxPayer
+2599 3044 income_type
+2599 3070 details
+2599 3071 details
+2599 3072 details
+2599 3073 details
+2599 3074 details
+2599 3075 details
+2599 3076 details
+2599 3077 details
+2599 3078 details
+2599 3079 details
+2599 3080 details
+2599 3081 details
+2601 3104 taxPayer
+2601 3042 income_type
+2601 3046 details
+2601 3047 details
+2601 3048 details
+2601 3049 details
+2601 3050 details
+2601 3051 details
+2601 3052 details
+2601 3053 details
+2601 3054 details
+2601 3055 details
+2601 3056 details
+2601 3057 details
+2608 3035 income
+2610 3033 income
+2612 3035 income
+2613 3035 income
+2614 3035 income
+2615 3035 income
+2616 3035 income
+2617 3035 income
+2618 3035 income
+2619 3035 income
+2620 3035 income
+2621 3035 income
+2622 3035 income
+2623 3035 income
+2636 3033 income
+2637 3033 income
+2638 3033 income
+2639 3033 income
+2640 3033 income
+2641 3033 income
+2642 3033 income
+2643 3033 income
+2644 3033 income
+2645 3033 income
+2646 3033 income
+2647 3033 income
+2665 3019 legal_union_B
+2665 3029 from_law
+2665 3031 from_agent
+2665 3033 incomes
+2665 2683 disability_type
+2670 3019 legal_union_A
+2670 3025 from_law
+2670 3027 from_agent
+2670 3035 incomes
+2670 2683 disability_type
+2745 3019 parents
+2746 2738 separation_cause
+2746 3018 household
+2746 3104 individual_A
+2746 3099 individual_B
+2746 3023 properties
+2750 3019 union_record
+2752 3104 taxPayer
+2754 3104 taxPayer
+2756 3099 taxPayer
+2758 3099 taxPayer
+2760 3099 taxPayer
+2760 3044 income_type
+2760 3070 details
+2760 3071 details
+2760 3072 details
+2760 3073 details
+2760 3074 details
+2760 3075 details
+2760 3076 details
+2760 3077 details
+2760 3078 details
+2760 3079 details
+2760 3080 details
+2760 3081 details
+2762 3104 taxPayer
+2762 3042 income_type
+2762 3046 details
+2762 3047 details
+2762 3048 details
+2762 3049 details
+2762 3050 details
+2762 3051 details
+2762 3052 details
+2762 3053 details
+2762 3054 details
+2762 3055 details
+2762 3056 details
+2762 3057 details
+2769 3035 income
+2771 3033 income
+2773 3035 income
+2774 3035 income
+2775 3035 income
+2776 3035 income
+2777 3035 income
+2778 3035 income
+2779 3035 income
+2780 3035 income
+2781 3035 income
+2782 3035 income
+2783 3035 income
+2784 3035 income
+2797 3033 income
+2798 3033 income
+2799 3033 income
+2800 3033 income
+2801 3033 income
+2802 3033 income
+2803 3033 income
+2804 3033 income
+2805 3033 income
+2806 3033 income
+2807 3033 income
+2808 3033 income
+2826 3019 legal_union_B
+2826 3029 from_law
+2826 3031 from_agent
+2826 3033 incomes
+2826 2683 disability_type
+2831 3019 legal_union_A
+2831 3025 from_law
+2831 3027 from_agent
+2831 3035 incomes
+2831 2683 disability_type
+2836 3019 null
+2837 null null
+2837 3018 null
+2837 3104 null
+2837 3099 null
+2837 3023 null
+2841 3019 null
+2843 3104 null
+2845 3104 null
+2847 3099 null
+2849 3099 null
+2851 3099 null
+2851 3044 null
+2851 3070 null
+2851 3071 null
+2851 3072 null
+2851 3073 null
+2851 3074 null
+2851 3075 null
+2851 3076 null
+2851 3077 null
+2851 3078 null
+2851 3079 null
+2851 3080 null
+2851 3081 null
+2853 3104 null
+2853 3042 null
+2853 3046 null
+2853 3047 null
+2853 3048 null
+2853 3049 null
+2853 3050 null
+2853 3051 null
+2853 3052 null
+2853 3053 null
+2853 3054 null
+2853 3055 null
+2853 3056 null
+2853 3057 null
+2860 3035 null
+2862 3033 null
+2864 3035 null
+2865 3035 null
+2866 3035 null
+2867 3035 null
+2868 3035 null
+2869 3035 null
+2870 3035 null
+2871 3035 null
+2872 3035 null
+2873 3035 null
+2874 3035 null
+2875 3035 null
+2888 3033 null
+2889 3033 null
+2890 3033 null
+2891 3033 null
+2892 3033 null
+2893 3033 null
+2894 3033 null
+2895 3033 null
+2896 3033 null
+2897 3033 null
+2898 3033 null
+2899 3033 null
+2917 3019 null
+2917 3029 null
+2917 3031 null
+2917 3033 null
+2917 null null
+2922 3019 null
+2922 3025 null
+2922 3027 null
+2922 3035 null
+2922 null null
+2927 3019 null
+2928 null null
+2928 3018 null
+2928 3104 null
+2928 3099 null
+2928 3023 null
+2932 3019 null
+2934 3104 null
+2936 3104 null
+2938 3099 null
+2940 3099 null
+2942 3099 null
+2942 3044 null
+2942 3070 null
+2942 3071 null
+2942 3072 null
+2942 3073 null
+2942 3074 null
+2942 3075 null
+2942 3076 null
+2942 3077 null
+2942 3078 null
+2942 3079 null
+2942 3080 null
+2942 3081 null
+2944 3104 null
+2944 3042 null
+2944 3046 null
+2944 3047 null
+2944 3048 null
+2944 3049 null
+2944 3050 null
+2944 3051 null
+2944 3052 null
+2944 3053 null
+2944 3054 null
+2944 3055 null
+2944 3056 null
+2944 3057 null
+2951 3035 null
+2953 3033 null
+2955 3035 null
+2956 3035 null
+2957 3035 null
+2958 3035 null
+2959 3035 null
+2960 3035 null
+2961 3035 null
+2962 3035 null
+2963 3035 null
+2964 3035 null
+2965 3035 null
+2966 3035 null
+2979 3033 null
+2980 3033 null
+2981 3033 null
+2982 3033 null
+2983 3033 null
+2984 3033 null
+2985 3033 null
+2986 3033 null
+2987 3033 null
+2988 3033 null
+2989 3033 null
+2990 3033 null
+3008 3019 null
+3008 3029 null
+3008 3031 null
+3008 3033 null
+3008 null null
+3013 3019 null
+3013 3025 null
+3013 3027 null
+3013 3035 null
+3013 null null
+3018 3019 null
+3019 null null
+3019 3018 null
+3019 3104 null
+3019 3099 null
+3019 3023 null
+3023 3019 null
+3025 3104 null
+3027 3104 null
+3029 3099 null
+3031 3099 null
+3033 3099 null
+3033 3044 null
+3033 3070 null
+3033 3071 null
+3033 3072 null
+3033 3073 null
+3033 3074 null
+3033 3075 null
+3033 3076 null
+3033 3077 null
+3033 3078 null
+3033 3079 null
+3033 3080 null
+3033 3081 null
+3035 3104 null
+3035 3042 null
+3035 3046 null
+3035 3047 null
+3035 3048 null
+3035 3049 null
+3035 3050 null
+3035 3051 null
+3035 3052 null
+3035 3053 null
+3035 3054 null
+3035 3055 null
+3035 3056 null
+3035 3057 null
+3042 3035 null
+3044 3033 null
+3046 3035 null
+3047 3035 null
+3048 3035 null
+3049 3035 null
+3050 3035 null
+3051 3035 null
+3052 3035 null
+3053 3035 null
+3054 3035 null
+3055 3035 null
+3056 3035 null
+3057 3035 null
+3070 3033 null
+3071 3033 null
+3072 3033 null
+3073 3033 null
+3074 3033 null
+3075 3033 null
+3076 3033 null
+3077 3033 null
+3078 3033 null
+3079 3033 null
+3080 3033 null
+3081 3033 null
+3099 3019 null
+3099 3029 null
+3099 3031 null
+3099 3033 null
+3099 null null
+3104 3019 null
+3104 3025 null
+3104 3027 null
+3104 3035 null
+3104 null null
+3109 3191 null
+3110 null null
+3110 3190 null
+3110 3197 null
+3110 3211 null
+3110 3195 null
+3114 3191 null
+3116 3191 null
+3116 3199 null
+3116 3201 null
+3116 3207 null
+3116 null null
+3118 3197 null
+3120 3197 null
+3122 3211 null
+3124 3211 null
+3126 3197 null
+3126 3216 null
+3126 3221 null
+3126 3222 null
+3126 3223 null
+3126 3224 null
+3126 3225 null
+3126 3226 null
+3126 3227 null
+3126 3228 null
+3126 3229 null
+3126 3230 null
+3126 3231 null
+3126 3232 null
+3128 3211 null
+3128 3219 null
+3128 3245 null
+3128 3246 null
+3128 3247 null
+3128 3248 null
+3128 3249 null
+3128 3250 null
+3128 3251 null
+3128 3252 null
+3128 3253 null
+3128 3254 null
+3128 3255 null
+3128 3256 null
+3130 3191 null
+3130 3203 null
+3130 3205 null
+3130 3209 null
+3130 null null
+3135 3207 null
+3138 3209 null
+3140 3207 null
+3141 3207 null
+3142 3207 null
+3143 3207 null
+3144 3207 null
+3145 3207 null
+3146 3207 null
+3147 3207 null
+3148 3207 null
+3149 3207 null
+3150 3207 null
+3151 3207 null
+3164 3209 null
+3165 3209 null
+3166 3209 null
+3167 3209 null
+3168 3209 null
+3169 3209 null
+3170 3209 null
+3171 3209 null
+3172 3209 null
+3173 3209 null
+3174 3209 null
+3175 3209 null
+3190 3191 null
+3191 null null
+3191 3190 null
+3191 3197 null
+3191 3211 null
+3191 3195 null
+3195 3191 null
+3197 3191 null
+3197 3199 null
+3197 3201 null
+3197 3207 null
+3197 null null
+3199 3197 null
+3201 3197 null
+3203 3211 null
+3205 3211 null
+3207 3197 null
+3207 3216 null
+3207 3221 null
+3207 3222 null
+3207 3223 null
+3207 3224 null
+3207 3225 null
+3207 3226 null
+3207 3227 null
+3207 3228 null
+3207 3229 null
+3207 3230 null
+3207 3231 null
+3207 3232 null
+3209 3211 null
+3209 3219 null
+3209 3245 null
+3209 3246 null
+3209 3247 null
+3209 3248 null
+3209 3249 null
+3209 3250 null
+3209 3251 null
+3209 3252 null
+3209 3253 null
+3209 3254 null
+3209 3255 null
+3209 3256 null
+3211 3191 null
+3211 3203 null
+3211 3205 null
+3211 3209 null
+3211 null null
+3216 3207 null
+3219 3209 null
+3221 3207 null
+3222 3207 null
+3223 3207 null
+3224 3207 null
+3225 3207 null
+3226 3207 null
+3227 3207 null
+3228 3207 null
+3229 3207 null
+3230 3207 null
+3231 3207 null
+3232 3207 null
+3245 3209 null
+3246 3209 null
+3247 3209 null
+3248 3209 null
+3249 3209 null
+3250 3209 null
+3251 3209 null
+3252 3209 null
+3253 3209 null
+3254 3209 null
+3255 3209 null
+3256 3209 null
+3271 3422 null
+3272 null null
+3272 3421 null
+3272 3566 null
+3272 3555 null
+3272 3426 null
+3276 3422 null
+3278 3566 null
+3280 3566 null
+3282 3555 null
+3284 3555 null
+3288 3504 null
+3291 3530 null
+3293 3530 null
+3294 3530 null
+3295 3530 null
+3296 3530 null
+3297 3530 null
+3298 3530 null
+3299 3530 null
+3300 3530 null
+3301 3530 null
+3302 3530 null
+3303 3530 null
+3304 3530 null
+3317 3504 null
+3318 3504 null
+3319 3504 null
+3320 3504 null
+3321 3504 null
+3322 3504 null
+3323 3504 null
+3324 3504 null
+3325 3504 null
+3326 3504 null
+3327 3504 null
+3328 3504 null
+3354 3566 null
+3354 3438 null
+3354 3467 null
+3354 3468 null
+3354 3469 null
+3354 3470 null
+3354 3471 null
+3354 3472 null
+3354 3473 null
+3354 3474 null
+3354 3475 null
+3354 3476 null
+3354 3477 null
+3354 3478 null
+3380 3555 null
+3380 3441 null
+3380 3443 null
+3380 3444 null
+3380 3445 null
+3380 3446 null
+3380 3447 null
+3380 3448 null
+3380 3449 null
+3380 3450 null
+3380 3451 null
+3380 3452 null
+3380 3453 null
+3380 3454 null
+3405 3422 null
+3405 3432 null
+3405 3434 null
+3405 3530 null
+3405 null null
+3416 3422 null
+3416 3428 null
+3416 3430 null
+3416 3504 null
+3416 null null
+3421 3422 null
+3422 null null
+3422 3421 null
+3422 3566 null
+3422 3555 null
+3422 3426 null
+3426 3422 null
+3428 3566 null
+3430 3566 null
+3432 3555 null
+3434 3555 null
+3438 3504 null
+3441 3530 null
+3443 3530 null
+3444 3530 null
+3445 3530 null
+3446 3530 null
+3447 3530 null
+3448 3530 null
+3449 3530 null
+3450 3530 null
+3451 3530 null
+3452 3530 null
+3453 3530 null
+3454 3530 null
+3467 3504 null
+3468 3504 null
+3469 3504 null
+3470 3504 null
+3471 3504 null
+3472 3504 null
+3473 3504 null
+3474 3504 null
+3475 3504 null
+3476 3504 null
+3477 3504 null
+3478 3504 null
+3504 3566 null
+3504 3438 null
+3504 3467 null
+3504 3468 null
+3504 3469 null
+3504 3470 null
+3504 3471 null
+3504 3472 null
+3504 3473 null
+3504 3474 null
+3504 3475 null
+3504 3476 null
+3504 3477 null
+3504 3478 null
+3530 3555 null
+3530 3441 null
+3530 3443 null
+3530 3444 null
+3530 3445 null
+3530 3446 null
+3530 3447 null
+3530 3448 null
+3530 3449 null
+3530 3450 null
+3530 3451 null
+3530 3452 null
+3530 3453 null
+3530 3454 null
+3555 3422 null
+3555 3432 null
+3555 3434 null
+3555 3530 null
+3555 null null
+3566 3422 null
+3566 3428 null
+3566 3430 null
+3566 3504 null
+3566 null null
+3571 3671 null
+3572 null null
+3572 3670 null
+3572 3752 null
+3572 3764 null
+3572 3675 null
+3576 3671 null
+3578 3752 null
+3580 3752 null
+3582 3764 null
+3584 3764 null
+3586 3764 null
+3586 3762 null
+3586 3718 null
+3586 3719 null
+3586 3720 null
+3586 3721 null
+3586 3722 null
+3586 3723 null
+3586 3724 null
+3586 3725 null
+3586 3726 null
+3586 3727 null
+3586 3728 null
+3586 3729 null
+3588 3752 null
+3588 3690 null
+3588 3694 null
+3588 3695 null
+3588 3696 null
+3588 3697 null
+3588 3698 null
+3588 3699 null
+3588 3700 null
+3588 3701 null
+3588 3702 null
+3588 3703 null
+3588 3704 null
+3588 3705 null
+3591 3687 null
+3595 3687 null
+3596 3687 null
+3597 3687 null
+3598 3687 null
+3599 3687 null
+3600 3687 null
+3601 3687 null
+3602 3687 null
+3603 3687 null
+3604 3687 null
+3605 3687 null
+3606 3687 null
+3619 3685 null
+3620 3685 null
+3621 3685 null
+3622 3685 null
+3623 3685 null
+3624 3685 null
+3625 3685 null
+3626 3685 null
+3627 3685 null
+3628 3685 null
+3629 3685 null
+3630 3685 null
+3653 3671 null
+3653 3677 null
+3653 3679 null
+3653 3687 null
+3653 null null
+3663 3685 null
+3665 3671 null
+3665 3681 null
+3665 3683 null
+3665 3685 null
+3665 null null
+3670 3671 null
+3671 null null
+3671 3670 null
+3671 3752 null
+3671 3764 null
+3671 3675 null
+3675 3671 null
+3677 3752 null
+3679 3752 null
+3681 3764 null
+3683 3764 null
+3685 3764 null
+3685 3762 null
+3685 3718 null
+3685 3719 null
+3685 3720 null
+3685 3721 null
+3685 3722 null
+3685 3723 null
+3685 3724 null
+3685 3725 null
+3685 3726 null
+3685 3727 null
+3685 3728 null
+3685 3729 null
+3687 3752 null
+3687 3690 null
+3687 3694 null
+3687 3695 null
+3687 3696 null
+3687 3697 null
+3687 3698 null
+3687 3699 null
+3687 3700 null
+3687 3701 null
+3687 3702 null
+3687 3703 null
+3687 3704 null
+3687 3705 null
+3690 3687 null
+3694 3687 null
+3695 3687 null
+3696 3687 null
+3697 3687 null
+3698 3687 null
+3699 3687 null
+3700 3687 null
+3701 3687 null
+3702 3687 null
+3703 3687 null
+3704 3687 null
+3705 3687 null
+3718 3685 null
+3719 3685 null
+3720 3685 null
+3721 3685 null
+3722 3685 null
+3723 3685 null
+3724 3685 null
+3725 3685 null
+3726 3685 null
+3727 3685 null
+3728 3685 null
+3729 3685 null
+3752 3671 null
+3752 3677 null
+3752 3679 null
+3752 3687 null
+3752 null null
+3762 3685 null
+3764 3671 null
+3764 3681 null
+3764 3683 null
+3764 3685 null
+3764 null null
