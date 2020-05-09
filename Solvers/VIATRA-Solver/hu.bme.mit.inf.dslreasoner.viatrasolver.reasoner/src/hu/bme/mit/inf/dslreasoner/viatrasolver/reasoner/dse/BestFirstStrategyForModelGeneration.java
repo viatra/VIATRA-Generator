@@ -17,10 +17,12 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
 import org.eclipse.viatra.dse.base.ThreadContext;
@@ -38,6 +40,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
+import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericProblemSolver;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
@@ -80,12 +83,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
-	private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
+	//private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	
 	// Statistics
 	private int numberOfStatecoderFail = 0;
 	private int numberOfPrintedModel = 0;
 	private int numberOfSolverCalls = 0;
+	
+	private NumericSolver numericSolver = null;
 
 	public BestFirstStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
@@ -112,14 +117,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.context = context;
 		this.solutionStore = context.getGlobalContext().getSolutionStore();
 		
-		ViatraQueryEngine engine = context.getQueryEngine();
+//		ViatraQueryEngine engine = context.getQueryEngine();
 //		// TODO: visualisation
-		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
-		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
-			//System.out.println(p.getSimpleName());
-			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
-			matchers.add(matcher);
-		}
+//		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
+//		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
+//			//System.out.println(p.getSimpleName());
+//			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
+//			matchers.add(matcher);
+//		}
 		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
@@ -131,6 +136,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				return objectiveComparatorHelper.compare(o2.fitness, o1.fitness);
 			}
 		};
+		
+		this.numericSolver = new NumericSolver(context, method);
 
 		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 	}
@@ -139,6 +146,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public void explore() {
 		if (!context.checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
+			return;
+		} else if(!numericSolver.isSatisfiable()) {
+			logger.info("Numeric contraints are not satisifed in the first state. Terminate.");
 			return;
 		}
 		if (configuration.searchSpaceConstraints.maxDepth == 0) {
@@ -218,6 +228,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				} else if (!context.checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
 					context.backtrack();
+				} else if (!numericSolver.isSatisfiable()) {
+					logger.debug("Numeric constraints are not satisifed.");
+					context.backtrack();
 				} else {
 					final Fitness nextFitness = context.calculateFitness();
 					checkForSolution(nextFitness);
@@ -272,7 +285,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private void checkForSolution(final Fitness fittness) {
 		if (fittness.isSatisifiesHardObjectives()) {
 			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				solutionStoreWithCopy.newSolution(context);
+				Map<EObject, EObject> trace = solutionStoreWithCopy.newSolution(context);
+				numericSolver.fillSolutionCopy(trace);
 				solutionStoreWithDiversityDescriptor.newSolution(context);
 				solutionStore.newSolution(context);
 				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);

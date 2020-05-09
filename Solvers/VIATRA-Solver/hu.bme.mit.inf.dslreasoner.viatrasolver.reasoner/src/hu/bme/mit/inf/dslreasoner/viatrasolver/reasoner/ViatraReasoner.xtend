@@ -77,7 +77,7 @@ class ViatraReasoner extends LogicReasoner{
 			scopePropagator,
 			viatraConfig.documentationLevel
 		)
-		println("parsed")
+		//println("parsed")
 		
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,

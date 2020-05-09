@@ -100,11 +100,9 @@ class UnitPropagationPreconditionGenerator {
 		val preconditions = new LinkedList
 		val constraint2Precondition = new HashMap
 		for(entry : mainPropagationNames.entrySet) {
-			val name = '''UPMUSTPropagate«res.getOrGenerateConstraintName(entry.key)»''';
+			val name = '''UPMUSTPropagate_«res.getOrGenerateConstraintName(entry.key)»''';
 			val def = '''
-			pattern «name»(
-				problem:LogicProblem, interpretation:PartialInterpretation,
-				«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»)
+			pattern «name»(«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»)
 				«FOR propagation : entry.value SEPARATOR " or "»
 					{ find «propagation.key»(problem,interpretation,«FOR index : 0..<propagation.value SEPARATOR ','»_«ENDFOR»,«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»); }
 				«ENDFOR»'''

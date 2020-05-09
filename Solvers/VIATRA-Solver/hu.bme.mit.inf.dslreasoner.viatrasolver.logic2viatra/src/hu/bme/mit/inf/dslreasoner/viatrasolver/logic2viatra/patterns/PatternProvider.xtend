@@ -93,7 +93,6 @@ class PatternProvider {
 			refineRelationQueries = patternGenerator.relationRefinementGenerator.getRefineRelationQueries(problem).mapValues[it.lookup(queries)]
 		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> 
 			unitPropagationPreconditionPatterns = unitPropagationTrace.mapValues[it.lookup(queries)]
-		unitPropagationPreconditionPatterns.entrySet.forEach[println(it.key + "->" +it.value)]
 		return new GeneratedPatterns(
 			invalidWFQueries,
 			unfinishedWFQueries,

@@ -17,6 +17,8 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
+import java.util.Map
 
 class ModelGenerationStatistics {
 	public var long transformationExecutionTime = 0
@@ -35,6 +37,8 @@ class ModelGenerationStatistics {
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWF
 	 
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWF
+	 
+	  Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unitPropagationPreconditions
 	 
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allPatterns
 }
@@ -77,6 +81,8 @@ class ModelGenerationMethodProvider {
 		
 		val invalidWF = queries.getInvalidWFQueries.values
 		
+		val unitPropagationPreconditions = queries.getUnitPropagationPreconditionPatterns
+		
 		return new ModelGenerationMethod(
 			statistics,
 			objectRefinementRules.values,
@@ -84,6 +90,7 @@ class ModelGenerationMethodProvider {
 			unfinishedMultiplicities,
 			unfinishedWF,
 			invalidWF,
+			unitPropagationPreconditions,
 			queries.allQueries
 		)
 	}
