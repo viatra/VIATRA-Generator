@@ -289,7 +289,7 @@ class GenerationTaskExecutor {
 					statistics.put("Domain to logic transformation time",domain2LogicTransformationTime/1000000)
 					statistics.put("Logic to solver transformation time",solution.statistics.transformationTime)
 					statistics.put("Solver time",solution.statistics.solverTime)
-					statistics.put("Postprocessing time",solutionVisualisationTime)
+					statistics.put("Postprocessing time",solutionVisualisationTime/1000000)
 					for(entry: solution.statistics.entries) {
 						statistics.put(entry.name,statisticsUtil.readValue(entry))
 					}
