@@ -90,7 +90,9 @@ public class NumericProblemSolver {
 	public boolean isSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		s.add(problemInstance);
-		return s.check() == Status.SATISFIABLE;
+		boolean result = (s.check() == Status.SATISFIABLE);
+		this.ctx.close();
+		return result;
 	}
 	
 	public Map<PrimitiveElement,Integer> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
@@ -121,7 +123,7 @@ public class NumericProblemSolver {
 		} else {
 			System.out.println("Unsatisfiable");
 		}
-		
+		this.ctx.close();
 		return sol;
 	}
 
