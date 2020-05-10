@@ -155,6 +155,21 @@ class ViatraReasoner extends LogicReasoner{
 			it.entries += createIntStatisticEntry => [
 				it.name = "SolutionCopyTime" it.value = (strategy.solutionStoreWithCopy.sumRuntime/1000000) as int
 			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "ActivationSelectionTime" it.value = (strategy.activationSelector.runtime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverTime" it.value = (strategy.numericSolver.runtime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverCachingTime" it.value = (strategy.numericSolver.cachingTime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverCallNumber" it.value = strategy.numericSolver.numberOfSolverCalls
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverCachedAnswerNumber" it.value = strategy.numericSolver.numberOfCachedSolverCalls
+			]
 			if(strategy.solutionStoreWithDiversityDescriptor.isActive) {
 				it.entries += createIntStatisticEntry => [
 					it.name = "SolutionDiversityCheckTime" it.value = (strategy.solutionStoreWithDiversityDescriptor.sumRuntime/1000000) as int

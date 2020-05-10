@@ -19,13 +19,23 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import java.util.List
 import java.math.BigDecimal
+import java.util.LinkedHashSet
+import java.util.LinkedHashMap
 
 class NumericSolver {
 	val ThreadContext threadContext;
 	val constraint2UnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
 	NumericTranslator t = new NumericTranslator
 	
-	new(ThreadContext threadContext, ModelGenerationMethod method) {
+	val boolean caching;
+	Map<LinkedHashMap<PConstraint, Iterable<List<Integer>>>,Boolean> satisfiabilityCache = new HashMap
+	
+	var long runtime = 0
+	var long cachingTime = 0 
+	var int numberOfSolverCalls = 0
+	var int numberOfCachedSolverCalls = 0
+	
+	new(ThreadContext threadContext, ModelGenerationMethod method, boolean caching) {
 		this.threadContext = threadContext
 		val engine = threadContext.queryEngine
 		for(entry : method.unitPropagationPreconditions.entrySet) {
@@ -34,11 +44,20 @@ class NumericSolver {
 			val matcher = querySpec.getMatcher(engine);
 			constraint2UnitPropagationPrecondition.put(constraint,matcher)
 		}
+		this.caching = caching
 	}
 	
+	def getRuntime(){runtime}
+	def getCachingTime(){cachingTime}
+	def getNumberOfSolverCalls(){numberOfSolverCalls}
+	def getNumberOfCachedSolverCalls(){numberOfCachedSolverCalls}
+	
 	def boolean isSatisfiable() {
-		if(constraint2UnitPropagationPrecondition.empty) return true
-		else {
+		val start = System.nanoTime
+		var boolean finalResult 
+		if(constraint2UnitPropagationPrecondition.empty){
+			finalResult=true
+		} else {
 			val propagatedConstraints = new HashMap
 			for(entry : constraint2UnitPropagationPrecondition.entrySet) {
 				val constraint = entry.key
@@ -47,15 +66,43 @@ class NumericSolver {
 				//println(allMatches.toList)
 				propagatedConstraints.put(constraint,allMatches)
 			}
-			
 			if(propagatedConstraints.values.forall[empty]) {
-				return true
+				finalResult=true
 			} else {
-				val res = t.delegateIsSatisfiable(propagatedConstraints)
-				//println(res)
-				return res
+				if(caching) {
+					val code = getCode(propagatedConstraints)
+					val cachedResult = satisfiabilityCache.get(code)
+					if(cachedResult === null) {
+	//					println('''new problem, call solver''')
+	//					for(entry : code.entrySet) {
+	//						println('''«entry.key» -> «entry.value»''')
+	//					}
+						//println(code.hashCode)
+						this.numberOfSolverCalls++
+						val res = t.delegateIsSatisfiable(propagatedConstraints)
+						satisfiabilityCache.put(code,res)
+						finalResult=res
+					} else {
+						//println('''similar problem, answer from cache''')
+						finalResult=cachedResult
+						this.numberOfCachedSolverCalls++
+					}
+				} else {
+					finalResult= t.delegateIsSatisfiable(propagatedConstraints)
+					this.numberOfSolverCalls++
+				}
 			}
 		}
+		this.runtime+=System.nanoTime-start
+		return finalResult
+	}
+	
+	def getCode(HashMap<PConstraint, Iterable<Object[]>> propagatedConstraints) {
+		val start = System.nanoTime
+		val involvedObjects = new LinkedHashSet(propagatedConstraints.values.flatten.map[toList].flatten.toList).toList
+		val res = new LinkedHashMap(propagatedConstraints.mapValues[matches | matches.map[objects | objects.map[object | involvedObjects.indexOf(object)].toList]])
+		this.cachingTime += System.nanoTime-start
+		return res
 	}
 	
 	def fillSolutionCopy(Map<EObject, EObject> trace) {

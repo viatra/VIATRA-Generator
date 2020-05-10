@@ -84,13 +84,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
 	//private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
-	
+	public ActivationSelector activationSelector = new EvenActivationSelector(random);
+	public NumericSolver numericSolver = null;
 	// Statistics
 	private int numberOfStatecoderFail = 0;
 	private int numberOfPrintedModel = 0;
 	private int numberOfSolverCalls = 0;
 	
-	private NumericSolver numericSolver = null;
 
 	public BestFirstStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
@@ -137,7 +137,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			}
 		};
 		
-		this.numericSolver = new NumericSolver(context, method);
+		this.numericSolver = new NumericSolver(context, method, false);
 
 		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 	}
@@ -273,8 +273,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private List<Object> selectActivation() {
 		List<Object> activationIds;
 		try {
-			activationIds = new ArrayList<Object>(context.getUntraversedActivationIds());
-			Collections.shuffle(activationIds);
+			activationIds = this.activationSelector.randomizeActivationIDs(context.getUntraversedActivationIds());
 		} catch (NullPointerException e) {
 			numberOfStatecoderFail++;
 			activationIds = Collections.emptyList();

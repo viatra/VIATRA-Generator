@@ -50,20 +50,22 @@ class ModelGenerationCompositeObjective implements IObjective{
 	
 	override getComparator() { Comparators.LOWER_IS_BETTER }
 	override getFitness(ThreadContext context) {
-		var sum = 0.0
+		
 		val scopeFitnes = scopeObjective.getFitness(context)
 		//val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
 		val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
 		
-		sum+=scopeFitnes
+		
 		var multiplicity = 0.0
 		for(multiplicityObjective : unfinishedMultiplicityObjectives) {
-			multiplicity+=multiplicityObjective.getFitness(context)//*0.5
+			multiplicity+=multiplicityObjective.getFitness(context)
 		}
-		sum+=multiplicity
+		var sum = 0.0
+		sum += scopeFitnes
+		sum +=Math.sqrt(multiplicity *0.1)
 		sum += unfinishedWFsFitness//*0.5
 		
-		//println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
+		println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
 		
 		return sum
 	}
