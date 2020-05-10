@@ -26,7 +26,7 @@ class ExpressionEvaluation2Logic {
 //		numericSolver.testIsNotSat(expression, expression.transform(variable2Variable));
 //		numericSolver.testGetOneSol(expression, expression.transform(variable2Variable));
 //		numericSolver.testGetOneSol2(expression, expression.transform(variable2Variable));
-		numericSolver.testGetOneSol3(expression, expression.transform(variable2Variable));
+//		numericSolver.testGetOneSol3(expression, expression.transform(variable2Variable));
 //		numericSolver.testIsSat(expression, expression.transform(variable2Variable));
 
 		return expression.transform(variable2Variable)

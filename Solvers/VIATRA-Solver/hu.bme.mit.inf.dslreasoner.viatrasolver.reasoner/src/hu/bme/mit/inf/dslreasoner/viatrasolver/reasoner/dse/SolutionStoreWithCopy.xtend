@@ -25,7 +25,7 @@ class SolutionStoreWithCopy {
 		newSolution(context)
 	}*/
 	
-	def newSolution(ThreadContext context) {
+	def Map<EObject,EObject> newSolution(ThreadContext context) {
 		//print(System.nanoTime-initTime + ";")
 		val copyStart = System.nanoTime
 		val solution = context.model as PartialInterpretation
@@ -36,6 +36,7 @@ class SolutionStoreWithCopy {
 		copyTraces.add(copier)
 		runtime += System.nanoTime - copyStart
 		solutionTimes.add(System.nanoTime-sartTime)
+		return copier
 	}
 	def getSumRuntime() {
 		return runtime

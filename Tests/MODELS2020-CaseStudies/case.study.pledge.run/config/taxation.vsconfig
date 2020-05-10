@@ -1,25 +1,25 @@
-import epackage	"config/Taxation.ecore"
-//import viatra	"src/queries/familyTreeConstraints.vql"
-
-generate {
-	metamodel = { package Taxation }
-	//constraints = { package queries}
-	solver = ViatraSolver
-	scope = {
-		//#node = 6,
-		#int = {0},
-		#real = {0.0}
-	}
-	
-	config = {
-		runtime = 10,
-		log-level = normal
-	}
-	
-	runs = 1
-	
-	debug =			"config/output/debug/"
-	log =			"config/output/debug/log.txt"
-	output =		"config/output/models"
-	statistics =	"config/output/debug/statistics.csv"
-}
+//import epackage	"config/Taxation.ecore"
+////import viatra	"src/queries/familyTreeConstraints.vql"
+//
+//generate {
+//	metamodel = { package Taxation }
+//	//constraints = { package queries}
+//	solver = ViatraSolver
+//	scope = {
+//		//#node = 6,
+//		#int = {0},
+//		#real = {0.0}
+//	}
+//	
+//	config = {
+//		runtime = 10,
+//		log-level = normal
+//	}
+//	
+//	runs = 1
+//	
+//	debug =			"config/output/debug/"
+//	log =			"config/output/debug/log.txt"
+//	output =		"config/output/models"
+//	statistics =	"config/output/debug/statistics.csv"
+//}

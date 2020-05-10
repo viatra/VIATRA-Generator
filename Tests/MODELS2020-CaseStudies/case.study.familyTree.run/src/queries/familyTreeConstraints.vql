@@ -20,13 +20,19 @@ pattern memberHasParent(m: Member) = {
 	Member.parents(m, _);
 }
 
-@Constraint(message="parentTooYoung", severity="error", key={m, p})
-pattern parentTooYoung(m: Member, p: Member) = {
-	FamilyTree.members(_, m);
-	Member.parents(m, p);
-	Member.age(m, mAge);
+@Constraint(message="negativeAge", severity="error",key={m})
+pattern negativeAge(m: Member) {
+	Member.age(m,mage);
+	check(mage<0);
+}
+
+@Constraint(message="parentTooYoung", severity="error", key={c, p})
+pattern parentTooYoung(c: Member, p: Member) = {
+	FamilyTree.members(_, c);
+	Member.parents(c, p);
+	Member.age(c, cAge);
 	Member.age(p, pAge);
-	check (mAge <= (pAge + 12));
+	check (pAge <= (cAge + 12));
 }
 
 

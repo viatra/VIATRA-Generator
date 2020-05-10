@@ -90,7 +90,7 @@ class RefinementRuleProvider {
 		if(containmentRelation !== null) {
 			if(inverseRelation!== null) {
 				ruleBuilder.action[match |
-					println(name)
+					//println(name)
 					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
@@ -115,7 +115,7 @@ class RefinementRuleProvider {
 				]
 			} else {
 				ruleBuilder.action[match |
-					println(name)
+					//println(name)
 					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
@@ -139,7 +139,7 @@ class RefinementRuleProvider {
 			}
 		} else {
 			ruleBuilder.action[match |
-				println(name)
+				//println(name)
 				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation
@@ -179,36 +179,37 @@ class RefinementRuleProvider {
 					
 					if(containmentReferences.contains(relation)) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
-						
-						val inverseAnnotation = p.assertions.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
-						if(!inverseAnnotation.empty) {
-							val onlyInverseAnnotation = if(inverseAnnotation.head.inverseA===relation) {
-								inverseAnnotation.head.inverseB
+						if(!(targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.isIsAbstract) {
+							val inverseAnnotation = p.assertions.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
+							if(!inverseAnnotation.empty) {
+								val onlyInverseAnnotation = if(inverseAnnotation.head.inverseA===relation) {
+									inverseAnnotation.head.inverseB
+								} else {
+									inverseAnnotation.head.inverseA
+								}
+								val inverseRelationInterpretation = i.partialrelationinterpretation.filter[it.interpretationOf === onlyInverseAnnotation].head
+								for(var times=0; times<number; times++) {
+									recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
+										new ObjectCreationInterpretationData(
+											i,
+											targetTypeInterpretation,
+											relationInterpretation,
+											inverseRelationInterpretation,
+											targetTypeInterpretation.getTypeConstructor
+										)
+								}
+								
 							} else {
-								inverseAnnotation.head.inverseA
-							}
-							val inverseRelationInterpretation = i.partialrelationinterpretation.filter[it.interpretationOf === onlyInverseAnnotation].head
-							for(var times=0; times<number; times++) {
-								recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
-									new ObjectCreationInterpretationData(
-										i,
-										targetTypeInterpretation,
-										relationInterpretation,
-										inverseRelationInterpretation,
-										targetTypeInterpretation.getTypeConstructor
-									)
-							}
-							
-						} else {
-							for(var times=0; times<number; times++) {
-								recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
-									new ObjectCreationInterpretationData(
-										i,
-										targetTypeInterpretation,
-										relationInterpretation,
-										null,
-										targetTypeInterpretation.getTypeConstructor
-									)
+								for(var times=0; times<number; times++) {
+									recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
+										new ObjectCreationInterpretationData(
+											i,
+											targetTypeInterpretation,
+											relationInterpretation,
+											null,
+											targetTypeInterpretation.getTypeConstructor
+										)
+								}
 							}
 						}
 					} else if(relation.parameters.get(1) instanceof PrimitiveTypeReference) {
