@@ -62,7 +62,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 		}
 		var sum = 0.0
 		sum += scopeFitnes
-		sum +=Math.sqrt(multiplicity *0.1)
+		sum +=multiplicity
 		sum += unfinishedWFsFitness//*0.5
 		
 		println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')

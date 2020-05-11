@@ -1,30 +1,29 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
-import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericProblemSolver
+import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericTranslator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
+import java.math.BigDecimal
 import java.util.HashMap
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import java.util.LinkedHashMap
+import java.util.LinkedHashSet
+import java.util.List
+import java.util.Map
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
-import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericTranslator
-import org.eclipse.viatra.dse.base.ThreadContext
-import org.eclipse.emf.ecore.EObject
-import java.util.Map
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
-import java.util.List
-import java.math.BigDecimal
-import java.util.LinkedHashSet
-import java.util.LinkedHashMap
 
 class NumericSolver {
 	val ThreadContext threadContext;
-	val constraint2UnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
+	val constraint2MustUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
+	val constraint2CurrentUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
 	NumericTranslator t = new NumericTranslator
 	
 	val boolean caching;
@@ -38,11 +37,17 @@ class NumericSolver {
 	new(ThreadContext threadContext, ModelGenerationMethod method, boolean caching) {
 		this.threadContext = threadContext
 		val engine = threadContext.queryEngine
-		for(entry : method.unitPropagationPreconditions.entrySet) {
+		for(entry : method.mustUnitPropagationPreconditions.entrySet) {
 			val constraint = entry.key
 			val querySpec = entry.value
 			val matcher = querySpec.getMatcher(engine);
-			constraint2UnitPropagationPrecondition.put(constraint,matcher)
+			constraint2MustUnitPropagationPrecondition.put(constraint,matcher)
+		}
+		for(entry : method.currentUnitPropagationPreconditions.entrySet) {
+			val constraint = entry.key
+			val querySpec = entry.value
+			val matcher = querySpec.getMatcher(engine);
+			constraint2CurrentUnitPropagationPrecondition.put(constraint,matcher)
 		}
 		this.caching = caching
 	}
@@ -52,14 +57,21 @@ class NumericSolver {
 	def getNumberOfSolverCalls(){numberOfSolverCalls}
 	def getNumberOfCachedSolverCalls(){numberOfCachedSolverCalls}
 	
-	def boolean isSatisfiable() {
+	def boolean maySatisfiable() {
+		isSatisfiable(this.constraint2MustUnitPropagationPrecondition)
+	}
+	def boolean currentSatisfiable() {
+		isSatisfiable(this.constraint2CurrentUnitPropagationPrecondition)
+	}
+	
+	private def boolean isSatisfiable(Map<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>> matches) {
 		val start = System.nanoTime
 		var boolean finalResult 
-		if(constraint2UnitPropagationPrecondition.empty){
+		if(matches.empty){
 			finalResult=true
 		} else {
 			val propagatedConstraints = new HashMap
-			for(entry : constraint2UnitPropagationPrecondition.entrySet) {
+			for(entry : matches.entrySet) {
 				val constraint = entry.key
 				//println(constraint)
 				val allMatches = entry.value.allMatches.map[it.toArray]
@@ -108,11 +120,11 @@ class NumericSolver {
 	def fillSolutionCopy(Map<EObject, EObject> trace) {
 		val model = threadContext.getModel as PartialInterpretation
 		val dataObjects = model.newElements.filter(PrimitiveElement).filter[!model.openWorldElements.contains(it)].toList
-		if(constraint2UnitPropagationPrecondition.empty) {
+		if(constraint2CurrentUnitPropagationPrecondition.empty) {
 			fillWithDefaultValues(dataObjects,trace)
 		} else {
 			val propagatedConstraints = new HashMap
-			for(entry : constraint2UnitPropagationPrecondition.entrySet) {
+			for(entry : constraint2CurrentUnitPropagationPrecondition.entrySet) {
 				val constraint = entry.key
 				val allMatches = entry.value.allMatches.map[it.toArray]
 				propagatedConstraints.put(constraint,allMatches)

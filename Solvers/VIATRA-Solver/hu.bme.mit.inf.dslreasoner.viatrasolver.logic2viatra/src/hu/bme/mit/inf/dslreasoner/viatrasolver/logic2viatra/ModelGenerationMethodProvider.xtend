@@ -38,7 +38,8 @@ class ModelGenerationStatistics {
 	 
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWF
 	 
-	  Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unitPropagationPreconditions
+	 Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> mustUnitPropagationPreconditions
+	 Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> currentUnitPropagationPreconditions
 	 
 	 Collection<? extends IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allPatterns
 }
@@ -81,7 +82,8 @@ class ModelGenerationMethodProvider {
 		
 		val invalidWF = queries.getInvalidWFQueries.values
 		
-		val unitPropagationPreconditions = queries.getUnitPropagationPreconditionPatterns
+		val mustUnitPropagationPreconditions = queries.getMustUnitPropagationPreconditionPatterns
+		val currentUnitPropagationPreconditions = queries.getCurrentUnitPropagationPreconditionPatterns
 		
 		return new ModelGenerationMethod(
 			statistics,
@@ -90,7 +92,8 @@ class ModelGenerationMethodProvider {
 			unfinishedMultiplicities,
 			unfinishedWF,
 			invalidWF,
-			unitPropagationPreconditions,
+			mustUnitPropagationPreconditions,
+			currentUnitPropagationPreconditions,
 			queries.allQueries
 		)
 	}

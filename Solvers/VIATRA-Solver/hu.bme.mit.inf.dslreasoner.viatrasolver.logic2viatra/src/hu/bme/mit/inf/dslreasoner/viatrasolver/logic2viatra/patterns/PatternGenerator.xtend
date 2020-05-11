@@ -26,6 +26,14 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
+
+@Data class PatternGeneratorResult {
+	CharSequence patternText
+	HashMap<PConstraint,String> constraint2MustPreconditionName
+	HashMap<PConstraint,String> constraint2CurrentPreconditionName
+}
 
 class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer //= new TypeIndexer(this)
@@ -149,7 +157,7 @@ class PatternGenerator {
 		problem.allTypeReferences.exists[it instanceof StringTypeReference]
 	}
 	
-	public def transformBaseProperties(
+	public def PatternGeneratorResult transformBaseProperties(
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		Map<String,PQuery> fqn2PQuery,
@@ -398,6 +406,6 @@ class PatternGenerator {
 			'''
 			val up = unitPropagationPreconditionGenerator.generateUnitPropagationRules(problem,problem.relations.filter(RelationDefinition),fqn2PQuery)
 			val second = up.definitions
-			return (first+second) -> up.constraint2PreconditionName
+			return new PatternGeneratorResult(first+second,up.constraint2MustPreconditionName,up.constraint2CurrentPreconditionName)
 	}
 }

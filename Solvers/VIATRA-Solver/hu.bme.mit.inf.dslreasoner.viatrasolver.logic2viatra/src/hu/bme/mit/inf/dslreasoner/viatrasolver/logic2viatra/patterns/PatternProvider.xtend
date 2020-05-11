@@ -31,7 +31,8 @@ import java.util.HashMap
 	public Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
 	public Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
-	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  unitPropagationPreconditionPatterns
+	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  mustUnitPropagationPreconditionPatterns
+	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  currentUnitPropagationPreconditionPatterns
 	public Collection<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allQueries
 }
 
@@ -60,14 +61,15 @@ class PatternProvider {
 			null
 		}
 		val patternGeneratorResult = patternGenerator.transformBaseProperties(problem,emptySolution,fqn2Query,typeAnalysisResult)
-		val baseIndexerFile = patternGeneratorResult.key
-		val unitPropagationTrace = patternGeneratorResult.value
+		val baseIndexerFile = patternGeneratorResult.patternText
+		val mustUnitPropagationTrace = patternGeneratorResult.constraint2MustPreconditionName
+		val currentUnitPropagationTrace = patternGeneratorResult.constraint2CurrentPreconditionName
 		if(writeToFile) {
 			workspace.writeText('''generated3valued.vql_deactivated''',baseIndexerFile)
 		}
 		val ParseUtil parseUtil = new ParseUtil
 		val generatedQueries = parseUtil.parse(baseIndexerFile)
-		val runtimeQueries = calclulateRuntimeQueries(patternGenerator,problem,emptySolution,typeAnalysisResult,unitPropagationTrace,generatedQueries);
+		val runtimeQueries = calclulateRuntimeQueries(patternGenerator,problem,emptySolution,typeAnalysisResult,mustUnitPropagationTrace,currentUnitPropagationTrace,generatedQueries);
 		return runtimeQueries
 	}
 	
@@ -76,7 +78,8 @@ class PatternProvider {
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		TypeAnalysisResult typeAnalysisResult,
-		HashMap<PConstraint, String> unitPropagationTrace,
+		HashMap<PConstraint, String> mustUnitPropagationTrace,
+		HashMap<PConstraint, String> currentUnitPropagationTrace,
 		Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries
 	) {
 		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
@@ -92,7 +95,9 @@ class PatternProvider {
 		val Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			refineRelationQueries = patternGenerator.relationRefinementGenerator.getRefineRelationQueries(problem).mapValues[it.lookup(queries)]
 		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> 
-			unitPropagationPreconditionPatterns = unitPropagationTrace.mapValues[it.lookup(queries)]
+			mustUnitPropagationPreconditionPatterns = mustUnitPropagationTrace.mapValues[it.lookup(queries)]
+		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> 
+			currentUnitPropagationPreconditionPatterns = currentUnitPropagationTrace.mapValues[it.lookup(queries)]
 		return new GeneratedPatterns(
 			invalidWFQueries,
 			unfinishedWFQueries,
@@ -100,7 +105,8 @@ class PatternProvider {
 			refineObjectsQueries,
 			refineTypeQueries,
 			refineRelationQueries,
-			unitPropagationPreconditionPatterns,
+			mustUnitPropagationPreconditionPatterns,
+			currentUnitPropagationPreconditionPatterns,
 			queries.values
 		)
 	}

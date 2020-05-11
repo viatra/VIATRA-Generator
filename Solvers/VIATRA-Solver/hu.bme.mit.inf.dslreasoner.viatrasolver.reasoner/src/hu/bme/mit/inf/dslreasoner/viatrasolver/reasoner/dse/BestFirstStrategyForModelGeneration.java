@@ -147,7 +147,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		if (!context.checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
 			return;
-		} else if(!numericSolver.isSatisfiable()) {
+		} else if(!numericSolver.maySatisfiable()) {
 			logger.info("Numeric contraints are not satisifed in the first state. Terminate.");
 			return;
 		}
@@ -228,7 +228,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				} else if (!context.checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
 					context.backtrack();
-				} else if (!numericSolver.isSatisfiable()) {
+				} else if (!numericSolver.maySatisfiable()) {
 					logger.debug("Numeric constraints are not satisifed.");
 					context.backtrack();
 				} else {
@@ -284,13 +284,15 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private void checkForSolution(final Fitness fittness) {
 		if (fittness.isSatisifiesHardObjectives()) {
 			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				Map<EObject, EObject> trace = solutionStoreWithCopy.newSolution(context);
-				numericSolver.fillSolutionCopy(trace);
-				solutionStoreWithDiversityDescriptor.newSolution(context);
-				solutionStore.newSolution(context);
-				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
+				if(numericSolver.currentSatisfiable()) {
+					Map<EObject, EObject> trace = solutionStoreWithCopy.newSolution(context);
+					numericSolver.fillSolutionCopy(trace);
+					solutionStoreWithDiversityDescriptor.newSolution(context);
+					solutionStore.newSolution(context);
+					configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
 
-				logger.debug("Found a solution.");
+					logger.debug("Found a solution.");
+				}
 			}
 		}
 	}
