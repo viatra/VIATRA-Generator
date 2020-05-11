@@ -154,7 +154,7 @@ class NumericSolver {
 	def protected dispatch getDefaultValue(RealElement e) {0.0}
 	def protected dispatch getDefaultValue(StringElement e) {""}
 	
-	def protected fillWithSolutions(List<PrimitiveElement> elements, Map<PrimitiveElement, Integer> solution, Map<EObject, EObject> trace) {
+	def protected fillWithSolutions(List<PrimitiveElement> elements, Map<PrimitiveElement, Number> solution, Map<EObject, EObject> trace) {
 		for(element : elements) {
 			if(element.valueSet==false) {
 				if(solution.containsKey(element)) {
