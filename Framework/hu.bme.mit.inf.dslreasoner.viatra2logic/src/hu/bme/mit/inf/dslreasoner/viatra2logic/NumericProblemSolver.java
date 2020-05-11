@@ -204,8 +204,15 @@ public class NumericProblemSolver {
 		// Constants
 		else if (e instanceof XNumberLiteral) {
 			String value = ((XNumberLiteral) e).getValue();
-			try{ int val = Integer.parseInt(value);  expr = (ArithExpr) ctx.mkInt(val);}  catch(NumberFormatException err){}
-			try{ long val = Long.parseLong(value); expr = (ArithExpr) ctx.mkReal(val);}  catch(NumberFormatException err){}
+			try{ 
+				int val = Integer.parseInt(value);  
+				expr = (ArithExpr) ctx.mkInt(val);
+			}  catch(NumberFormatException err){
+				try{ 
+					long val = Long.parseLong(value); 
+					expr = (ArithExpr) ctx.mkReal(val);
+				}  catch(NumberFormatException err2){}
+			}	
 		} 
 		// Expressions with operators
 		else if (e instanceof XBinaryOperation) {
