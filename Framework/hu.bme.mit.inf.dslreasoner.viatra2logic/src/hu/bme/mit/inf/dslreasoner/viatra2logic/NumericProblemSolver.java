@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,12 +24,14 @@ import com.microsoft.z3.Context;
 import com.microsoft.z3.Expr;
 import com.microsoft.z3.IntExpr;
 import com.microsoft.z3.Model;
+import com.microsoft.z3.RealExpr;
 import com.microsoft.z3.Solver;
 import com.microsoft.z3.Status;
 import com.microsoft.z3.enumerations.Z3_ast_print_mode;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
 
 
@@ -95,8 +98,8 @@ public class NumericProblemSolver {
 		return result;
 	}
 	
-	public Map<PrimitiveElement,Integer> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
-		Map<PrimitiveElement,Integer> sol = new HashMap<PrimitiveElement, Integer>();
+	public Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {		
+		Map<PrimitiveElement,Number> sol = new HashMap<PrimitiveElement, Number>();
 		long startformingProblem = System.currentTimeMillis();
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		long endformingProblem = System.currentTimeMillis();
@@ -110,10 +113,17 @@ public class NumericProblemSolver {
 			long startFormingSolution = System.currentTimeMillis();
 			for (PrimitiveElement o: objs) {
 				if(varMap.containsKey(o)) {
-					IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
-					Integer oSol = Integer.parseInt(val.toString());
+					if (o instanceof IntegerElement) {
+						IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
+						Integer oSol = Integer.parseInt(val.toString());
+						sol.put(o, oSol);
+					} else {
+						RealExpr val = (RealExpr) m.evaluate(varMap.get(o), false);
+						Long oSol = Long.parseLong(val.toString());
+						sol.put(o, oSol);
+					}
 					//System.out.println("Solution:" + o + "->" + oSol);
-					sol.put(o, oSol);
+					
 				} else {
 					//System.out.println("not used var:" + o);
 				}
@@ -162,23 +172,32 @@ public class NumericProblemSolver {
 		return constraint;
 	}
 
-	// TODO: add variable: state of the solver
 	private ArithExpr formNumericConstraintHelper(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch) throws Exception {
 		ArithExpr expr = null;
 		// Variables
 		if (e instanceof XFeatureCall) {
 			PrimitiveElement matchedObj = aMatch.get(((XFeatureCall) e).getFeature());
+			boolean isInt = matchedObj instanceof IntegerElement;
 			if (!matchedObj.isValueSet()) {
 				if (varMap.get(matchedObj) == null) {
 					String var_name = ((XFeatureCall) e).getFeature().getQualifiedName() + matchedObj.toString();
-					expr = (ArithExpr) ctx.mkConst(ctx.mkSymbol(var_name), ctx.getIntSort());
+					if (isInt) {
+						expr = (ArithExpr) ctx.mkConst(ctx.mkSymbol(var_name), ctx.getIntSort());
+					} else {
+						expr = (ArithExpr) ctx.mkConst(ctx.mkSymbol(var_name), ctx.getRealSort());
+					}
 					varMap.put(matchedObj, expr);
 				} else {
 					expr = (ArithExpr) varMap.get(matchedObj);
 				}
 			} else {
-				int value = ((IntegerElement) matchedObj).getValue();
-				expr = (ArithExpr) ctx.mkInt(value);
+				if (isInt) {
+					int value = ((IntegerElement) matchedObj).getValue();
+					expr = (ArithExpr) ctx.mkInt(value);
+				} else {
+					long value = (long) ((RealElement) matchedObj).getValue().doubleValue();
+					expr = (ArithExpr) ctx.mkReal(value);
+				}
 				varMap.put(matchedObj, expr);
 			}
 		} 
@@ -186,6 +205,7 @@ public class NumericProblemSolver {
 		else if (e instanceof XNumberLiteral) {
 			String value = ((XNumberLiteral) e).getValue();
 			try{ int val = Integer.parseInt(value);  expr = (ArithExpr) ctx.mkInt(val);}  catch(NumberFormatException err){}
+			try{ long val = Long.parseLong(value); expr = (ArithExpr) ctx.mkReal(val);}  catch(NumberFormatException err){}
 		} 
 		// Expressions with operators
 		else if (e instanceof XBinaryOperation) {
@@ -300,13 +320,13 @@ public class NumericProblemSolver {
 	}
 	*/
 	
-	/*public void testGetOneSol(XExpression expression, Term t) throws Exception {
+/*	public void testGetOneSol(XExpression expression, Term t) throws Exception {
 		int count = 10;
-		Map<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Set<Map<JvmIdentifiableElement,PrimitiveElement>>>();
-		Set<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new HashSet<Map<JvmIdentifiableElement,PrimitiveElement>>();
+		Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches = new HashMap<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>>();
+		Iterable<Map<JvmIdentifiableElement,PrimitiveElement>> matchSet = new ArrayList<Map<JvmIdentifiableElement,PrimitiveElement>>();
 		
 		ArrayList<JvmIdentifiableElement> allElem = getJvmIdentifiableElements(expression);
-		List<Object> obj = new ArrayList<Object>();
+		List<PrimitiveElement> obj = new ArrayList<PrimitiveElement>();
 		
 		for (int i = 0; i < count; i++) {
 			Map<JvmIdentifiableElement,PrimitiveElement> match = new HashMap<JvmIdentifiableElement,PrimitiveElement>();
@@ -315,12 +335,12 @@ public class NumericProblemSolver {
 				obj.add(intE);
 				match.put(e, intE);
 			}
-			matchSet.add(match);
+			((ArrayList) matchSet).add(match);
 			matches.put(expression, matchSet);
 		}
 		
 		long start = System.currentTimeMillis();
-		Map<Object,Integer> sol = getOneSolution(obj, matches);
+		Map<PrimitiveElement,Integer> sol = getOneSolution(obj, matches);
 		long end = System.currentTimeMillis();
 		
 		
