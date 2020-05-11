@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EcorePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import java.util.Map
+import org.eclipse.emf.ecore.EAttribute
+import java.math.BigDecimal
 
 class Logic2Ecore {
 	val extension LogicStructureBuilder structureBuilder = new LogicStructureBuilder
@@ -92,7 +94,7 @@ class Logic2Ecore {
 									list += l.key
 								} else {
 									try {
-										sourceObject.eSet(attributeType,l.key)
+										sourceObject.eSet(attributeType,translateType(attributeType.EAttributeType,l.key))
 									} catch(Exception e) {
 										e.printStackTrace
 									}
@@ -105,6 +107,16 @@ class Logic2Ecore {
 		}
 		
 		return element2Object.values.root
+	}
+	
+	def translateType(EDataType type, Object value) {
+		if(type == EcorePackage.eINSTANCE.EFloat) {
+			val bd = value as BigDecimal
+			return bd.floatValue
+		} else if( type  == EcorePackage.eINSTANCE.EDouble ) {
+			val bd = value as BigDecimal
+			return bd.doubleValue
+		} else return value
 	}
 	
 	
