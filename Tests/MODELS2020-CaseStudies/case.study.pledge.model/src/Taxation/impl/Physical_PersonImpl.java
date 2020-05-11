@@ -32,13 +32,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Taxation.impl.Physical_PersonImpl#isIs_assisting_spouse <em>Is assisting spouse</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getSSNo <em>SS No</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getAddresses <em>Addresses</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getBirth_year <em>Birth year</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getDisability_percentage <em>Disability percentage</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getDisability_type <em>Disability type</em>}</li>
- *   <li>{@link Taxation.impl.Physical_PersonImpl#isIs_affiliated_personnaly_to_social_security <em>Is affiliated personnaly to social security</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getBirth_month <em>Birth month</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getBirth_day <em>Birth day</em>}</li>
  *   <li>{@link Taxation.impl.Physical_PersonImpl#getExpenses <em>Expenses</em>}</li>
@@ -48,26 +46,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements Physical_Person {
-	/**
-	 * The default value of the '{@link #isIs_assisting_spouse() <em>Is assisting spouse</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_assisting_spouse()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ASSISTING_SPOUSE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIs_assisting_spouse() <em>Is assisting spouse</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_assisting_spouse()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean is_assisting_spouse = IS_ASSISTING_SPOUSE_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getSSNo() <em>SS No</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -159,26 +137,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	protected Disability_Types disability_type = DISABILITY_TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIs_affiliated_personnaly_to_social_security() <em>Is affiliated personnaly to social security</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_affiliated_personnaly_to_social_security()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIs_affiliated_personnaly_to_social_security() <em>Is affiliated personnaly to social security</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_affiliated_personnaly_to_social_security()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean is_affiliated_personnaly_to_social_security = IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getBirth_month() <em>Birth month</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -265,29 +223,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	protected EClass eStaticClass() {
 		return TaxationPackage.Literals.PHYSICAL_PERSON;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIs_assisting_spouse() {
-		return is_assisting_spouse;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIs_assisting_spouse(boolean newIs_assisting_spouse) {
-		boolean oldIs_assisting_spouse = is_assisting_spouse;
-		is_assisting_spouse = newIs_assisting_spouse;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.PHYSICAL_PERSON__IS_ASSISTING_SPOUSE, oldIs_assisting_spouse, is_assisting_spouse));
 	}
 
 	/**
@@ -393,29 +328,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 		disability_type = newDisability_type == null ? DISABILITY_TYPE_EDEFAULT : newDisability_type;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.PHYSICAL_PERSON__DISABILITY_TYPE, oldDisability_type, disability_type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIs_affiliated_personnaly_to_social_security() {
-		return is_affiliated_personnaly_to_social_security;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIs_affiliated_personnaly_to_social_security(boolean newIs_affiliated_personnaly_to_social_security) {
-		boolean oldIs_affiliated_personnaly_to_social_security = is_affiliated_personnaly_to_social_security;
-		is_affiliated_personnaly_to_social_security = newIs_affiliated_personnaly_to_social_security;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY, oldIs_affiliated_personnaly_to_social_security, is_affiliated_personnaly_to_social_security));
 	}
 
 	/**
@@ -541,8 +453,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TaxationPackage.PHYSICAL_PERSON__IS_ASSISTING_SPOUSE:
-				return isIs_assisting_spouse();
 			case TaxationPackage.PHYSICAL_PERSON__SS_NO:
 				return getSSNo();
 			case TaxationPackage.PHYSICAL_PERSON__ADDRESSES:
@@ -553,8 +463,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return getDisability_percentage();
 			case TaxationPackage.PHYSICAL_PERSON__DISABILITY_TYPE:
 				return getDisability_type();
-			case TaxationPackage.PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY:
-				return isIs_affiliated_personnaly_to_social_security();
 			case TaxationPackage.PHYSICAL_PERSON__BIRTH_MONTH:
 				return getBirth_month();
 			case TaxationPackage.PHYSICAL_PERSON__BIRTH_DAY:
@@ -576,9 +484,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TaxationPackage.PHYSICAL_PERSON__IS_ASSISTING_SPOUSE:
-				setIs_assisting_spouse((Boolean)newValue);
-				return;
 			case TaxationPackage.PHYSICAL_PERSON__SS_NO:
 				setSSNo((String)newValue);
 				return;
@@ -594,9 +499,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return;
 			case TaxationPackage.PHYSICAL_PERSON__DISABILITY_TYPE:
 				setDisability_type((Disability_Types)newValue);
-				return;
-			case TaxationPackage.PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY:
-				setIs_affiliated_personnaly_to_social_security((Boolean)newValue);
 				return;
 			case TaxationPackage.PHYSICAL_PERSON__BIRTH_MONTH:
 				setBirth_month((Integer)newValue);
@@ -623,9 +525,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TaxationPackage.PHYSICAL_PERSON__IS_ASSISTING_SPOUSE:
-				setIs_assisting_spouse(IS_ASSISTING_SPOUSE_EDEFAULT);
-				return;
 			case TaxationPackage.PHYSICAL_PERSON__SS_NO:
 				setSSNo(SS_NO_EDEFAULT);
 				return;
@@ -640,9 +539,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return;
 			case TaxationPackage.PHYSICAL_PERSON__DISABILITY_TYPE:
 				setDisability_type(DISABILITY_TYPE_EDEFAULT);
-				return;
-			case TaxationPackage.PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY:
-				setIs_affiliated_personnaly_to_social_security(IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY_EDEFAULT);
 				return;
 			case TaxationPackage.PHYSICAL_PERSON__BIRTH_MONTH:
 				setBirth_month(BIRTH_MONTH_EDEFAULT);
@@ -668,8 +564,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TaxationPackage.PHYSICAL_PERSON__IS_ASSISTING_SPOUSE:
-				return is_assisting_spouse != IS_ASSISTING_SPOUSE_EDEFAULT;
 			case TaxationPackage.PHYSICAL_PERSON__SS_NO:
 				return SS_NO_EDEFAULT == null ? ssNo != null : !SS_NO_EDEFAULT.equals(ssNo);
 			case TaxationPackage.PHYSICAL_PERSON__ADDRESSES:
@@ -680,8 +574,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 				return disability_percentage != DISABILITY_PERCENTAGE_EDEFAULT;
 			case TaxationPackage.PHYSICAL_PERSON__DISABILITY_TYPE:
 				return disability_type != DISABILITY_TYPE_EDEFAULT;
-			case TaxationPackage.PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY:
-				return is_affiliated_personnaly_to_social_security != IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY_EDEFAULT;
 			case TaxationPackage.PHYSICAL_PERSON__BIRTH_MONTH:
 				return birth_month != BIRTH_MONTH_EDEFAULT;
 			case TaxationPackage.PHYSICAL_PERSON__BIRTH_DAY:
@@ -704,9 +596,7 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (is_assisting_spouse: ");
-		result.append(is_assisting_spouse);
-		result.append(", SSNo: ");
+		result.append(" (SSNo: ");
 		result.append(ssNo);
 		result.append(", birth_year: ");
 		result.append(birth_year);
@@ -714,8 +604,6 @@ public class Physical_PersonImpl extends MinimalEObjectImpl.Container implements
 		result.append(disability_percentage);
 		result.append(", disability_type: ");
 		result.append(disability_type);
-		result.append(", is_affiliated_personnaly_to_social_security: ");
-		result.append(is_affiliated_personnaly_to_social_security);
 		result.append(", birth_month: ");
 		result.append(birth_month);
 		result.append(", birth_day: ");

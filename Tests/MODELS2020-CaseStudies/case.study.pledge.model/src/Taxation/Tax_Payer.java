@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link Taxation.Tax_Payer#getFrom_agent <em>From agent</em>}</li>
  *   <li>{@link Taxation.Tax_Payer#getIncomes <em>Incomes</em>}</li>
  *   <li>{@link Taxation.Tax_Payer#getFrom_law <em>From law</em>}</li>
- *   <li>{@link Taxation.Tax_Payer#getTaxesDue <em>Taxes Due</em>}</li>
  * </ul>
  *
  * @see Taxation.TaxationPackage#getTax_Payer()
@@ -101,27 +100,5 @@ public interface Tax_Payer extends Physical_Person, Tax_Case {
 	 * @generated
 	 */
 	void setFrom_law(FromLaw value);
-
-	/**
-	 * Returns the value of the '<em><b>Taxes Due</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Taxes Due</em>' attribute.
-	 * @see #setTaxesDue(double)
-	 * @see Taxation.TaxationPackage#getTax_Payer_TaxesDue()
-	 * @model required="true" ordered="false"
-	 * @generated
-	 */
-	double getTaxesDue();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Tax_Payer#getTaxesDue <em>Taxes Due</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Taxes Due</em>' attribute.
-	 * @see #getTaxesDue()
-	 * @generated
-	 */
-	void setTaxesDue(double value);
 
 } // Tax_Payer

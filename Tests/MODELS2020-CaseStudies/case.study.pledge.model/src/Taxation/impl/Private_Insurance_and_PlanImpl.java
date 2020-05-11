@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link Taxation.impl.Private_Insurance_and_PlanImpl#getCategory <em>Category</em>}</li>
  *   <li>{@link Taxation.impl.Private_Insurance_and_PlanImpl#getDuration_of_contract <em>Duration of contract</em>}</li>
- *   <li>{@link Taxation.impl.Private_Insurance_and_PlanImpl#isIs_private_insurance_and_plan_eligible_for_deduction <em>Is private insurance and plan eligible for deduction</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,26 +66,6 @@ public class Private_Insurance_and_PlanImpl extends Special_Expense_DSImpl imple
 	 * @ordered
 	 */
 	protected int duration_of_contract = DURATION_OF_CONTRACT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIs_private_insurance_and_plan_eligible_for_deduction() <em>Is private insurance and plan eligible for deduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_private_insurance_and_plan_eligible_for_deduction()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIs_private_insurance_and_plan_eligible_for_deduction() <em>Is private insurance and plan eligible for deduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_private_insurance_and_plan_eligible_for_deduction()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean is_private_insurance_and_plan_eligible_for_deduction = IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,37 +138,12 @@ public class Private_Insurance_and_PlanImpl extends Special_Expense_DSImpl imple
 	 * @generated
 	 */
 	@Override
-	public boolean isIs_private_insurance_and_plan_eligible_for_deduction() {
-		return is_private_insurance_and_plan_eligible_for_deduction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIs_private_insurance_and_plan_eligible_for_deduction(boolean newIs_private_insurance_and_plan_eligible_for_deduction) {
-		boolean oldIs_private_insurance_and_plan_eligible_for_deduction = is_private_insurance_and_plan_eligible_for_deduction;
-		is_private_insurance_and_plan_eligible_for_deduction = newIs_private_insurance_and_plan_eligible_for_deduction;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION, oldIs_private_insurance_and_plan_eligible_for_deduction, is_private_insurance_and_plan_eligible_for_deduction));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__CATEGORY:
 				return getCategory();
 			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__DURATION_OF_CONTRACT:
 				return getDuration_of_contract();
-			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION:
-				return isIs_private_insurance_and_plan_eligible_for_deduction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,9 +161,6 @@ public class Private_Insurance_and_PlanImpl extends Special_Expense_DSImpl imple
 				return;
 			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__DURATION_OF_CONTRACT:
 				setDuration_of_contract((Integer)newValue);
-				return;
-			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION:
-				setIs_private_insurance_and_plan_eligible_for_deduction((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,9 +180,6 @@ public class Private_Insurance_and_PlanImpl extends Special_Expense_DSImpl imple
 			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__DURATION_OF_CONTRACT:
 				setDuration_of_contract(DURATION_OF_CONTRACT_EDEFAULT);
 				return;
-			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION:
-				setIs_private_insurance_and_plan_eligible_for_deduction(IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -248,8 +196,6 @@ public class Private_Insurance_and_PlanImpl extends Special_Expense_DSImpl imple
 				return category != CATEGORY_EDEFAULT;
 			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__DURATION_OF_CONTRACT:
 				return duration_of_contract != DURATION_OF_CONTRACT_EDEFAULT;
-			case TaxationPackage.PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION:
-				return is_private_insurance_and_plan_eligible_for_deduction != IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -268,8 +214,6 @@ public class Private_Insurance_and_PlanImpl extends Special_Expense_DSImpl imple
 		result.append(category);
 		result.append(", duration_of_contract: ");
 		result.append(duration_of_contract);
-		result.append(", is_private_insurance_and_plan_eligible_for_deduction: ");
-		result.append(is_private_insurance_and_plan_eligible_for_deduction);
 		result.append(')');
 		return result.toString();
 	}

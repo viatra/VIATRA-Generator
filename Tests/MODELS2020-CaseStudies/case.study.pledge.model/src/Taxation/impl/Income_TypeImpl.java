@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Taxation.impl.Income_TypeImpl#isSubjectToWithholdingTax <em>Subject To Withholding Tax</em>}</li>
  *   <li>{@link Taxation.impl.Income_TypeImpl#getId8 <em>Id8</em>}</li>
  *   <li>{@link Taxation.impl.Income_TypeImpl#getIncome <em>Income</em>}</li>
  * </ul>
@@ -33,26 +32,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container implements Income_Type {
-	/**
-	 * The default value of the '{@link #isSubjectToWithholdingTax() <em>Subject To Withholding Tax</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSubjectToWithholdingTax()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SUBJECT_TO_WITHHOLDING_TAX_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isSubjectToWithholdingTax() <em>Subject To Withholding Tax</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSubjectToWithholdingTax()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean subjectToWithholdingTax = SUBJECT_TO_WITHHOLDING_TAX_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getId8() <em>Id8</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -90,29 +69,6 @@ public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	protected EClass eStaticClass() {
 		return TaxationPackage.Literals.INCOME_TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSubjectToWithholdingTax() {
-		return subjectToWithholdingTax;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setSubjectToWithholdingTax(boolean newSubjectToWithholdingTax) {
-		boolean oldSubjectToWithholdingTax = subjectToWithholdingTax;
-		subjectToWithholdingTax = newSubjectToWithholdingTax;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX, oldSubjectToWithholdingTax, subjectToWithholdingTax));
 	}
 
 	/**
@@ -233,8 +189,6 @@ public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TaxationPackage.INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX:
-				return isSubjectToWithholdingTax();
 			case TaxationPackage.INCOME_TYPE__ID8:
 				return getId8();
 			case TaxationPackage.INCOME_TYPE__INCOME:
@@ -251,9 +205,6 @@ public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TaxationPackage.INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX:
-				setSubjectToWithholdingTax((Boolean)newValue);
-				return;
 			case TaxationPackage.INCOME_TYPE__ID8:
 				setId8((String)newValue);
 				return;
@@ -272,9 +223,6 @@ public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TaxationPackage.INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX:
-				setSubjectToWithholdingTax(SUBJECT_TO_WITHHOLDING_TAX_EDEFAULT);
-				return;
 			case TaxationPackage.INCOME_TYPE__ID8:
 				setId8(ID8_EDEFAULT);
 				return;
@@ -293,8 +241,6 @@ public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TaxationPackage.INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX:
-				return subjectToWithholdingTax != SUBJECT_TO_WITHHOLDING_TAX_EDEFAULT;
 			case TaxationPackage.INCOME_TYPE__ID8:
 				return ID8_EDEFAULT == null ? id8 != null : !ID8_EDEFAULT.equals(id8);
 			case TaxationPackage.INCOME_TYPE__INCOME:
@@ -313,9 +259,7 @@ public abstract class Income_TypeImpl extends MinimalEObjectImpl.Container imple
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (subjectToWithholdingTax: ");
-		result.append(subjectToWithholdingTax);
-		result.append(", id8: ");
+		result.append(" (id8: ");
 		result.append(id8);
 		result.append(')');
 		return result.toString();

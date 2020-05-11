@@ -15,13 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link Taxation.Physical_Person#isIs_assisting_spouse <em>Is assisting spouse</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getSSNo <em>SS No</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getAddresses <em>Addresses</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getBirth_year <em>Birth year</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getDisability_percentage <em>Disability percentage</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getDisability_type <em>Disability type</em>}</li>
- *   <li>{@link Taxation.Physical_Person#isIs_affiliated_personnaly_to_social_security <em>Is affiliated personnaly to social security</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getBirth_month <em>Birth month</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getBirth_day <em>Birth day</em>}</li>
  *   <li>{@link Taxation.Physical_Person#getExpenses <em>Expenses</em>}</li>
@@ -33,28 +31,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Physical_Person extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Is assisting spouse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is assisting spouse</em>' attribute.
-	 * @see #setIs_assisting_spouse(boolean)
-	 * @see Taxation.TaxationPackage#getPhysical_Person_Is_assisting_spouse()
-	 * @model required="true" derived="true"
-	 * @generated
-	 */
-	boolean isIs_assisting_spouse();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Physical_Person#isIs_assisting_spouse <em>Is assisting spouse</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is assisting spouse</em>' attribute.
-	 * @see #isIs_assisting_spouse()
-	 * @generated
-	 */
-	void setIs_assisting_spouse(boolean value);
-
 	/**
 	 * Returns the value of the '<em><b>SS No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -159,28 +135,6 @@ public interface Physical_Person extends EObject {
 	 * @generated
 	 */
 	void setDisability_type(Disability_Types value);
-
-	/**
-	 * Returns the value of the '<em><b>Is affiliated personnaly to social security</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is affiliated personnaly to social security</em>' attribute.
-	 * @see #setIs_affiliated_personnaly_to_social_security(boolean)
-	 * @see Taxation.TaxationPackage#getPhysical_Person_Is_affiliated_personnaly_to_social_security()
-	 * @model required="true" derived="true"
-	 * @generated
-	 */
-	boolean isIs_affiliated_personnaly_to_social_security();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Physical_Person#isIs_affiliated_personnaly_to_social_security <em>Is affiliated personnaly to social security</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is affiliated personnaly to social security</em>' attribute.
-	 * @see #isIs_affiliated_personnaly_to_social_security()
-	 * @generated
-	 */
-	void setIs_affiliated_personnaly_to_social_security(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Birth month</b></em>' attribute.

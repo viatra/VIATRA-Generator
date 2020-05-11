@@ -13,7 +13,6 @@ package Taxation;
  * </p>
  * <ul>
  *   <li>{@link Taxation.Donation#getBeneficiary1 <em>Beneficiary1</em>}</li>
- *   <li>{@link Taxation.Donation#isIs_beneficiary_eligible <em>Is beneficiary eligible</em>}</li>
  *   <li>{@link Taxation.Donation#isIs_donation_reported <em>Is donation reported</em>}</li>
  * </ul>
  *
@@ -43,29 +42,6 @@ public interface Donation extends Special_Expense_DS {
 	 * @generated
 	 */
 	void setBeneficiary1(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Is beneficiary eligible</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is beneficiary eligible</em>' attribute.
-	 * @see #setIs_beneficiary_eligible(boolean)
-	 * @see Taxation.TaxationPackage#getDonation_Is_beneficiary_eligible()
-	 * @model default="false" required="true" derived="true"
-	 * @generated
-	 */
-	boolean isIs_beneficiary_eligible();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Donation#isIs_beneficiary_eligible <em>Is beneficiary eligible</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is beneficiary eligible</em>' attribute.
-	 * @see #isIs_beneficiary_eligible()
-	 * @generated
-	 */
-	void setIs_beneficiary_eligible(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is donation reported</b></em>' attribute.

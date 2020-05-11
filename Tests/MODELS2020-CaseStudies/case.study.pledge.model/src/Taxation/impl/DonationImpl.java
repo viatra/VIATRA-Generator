@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link Taxation.impl.DonationImpl#getBeneficiary1 <em>Beneficiary1</em>}</li>
- *   <li>{@link Taxation.impl.DonationImpl#isIs_beneficiary_eligible <em>Is beneficiary eligible</em>}</li>
  *   <li>{@link Taxation.impl.DonationImpl#isIs_donation_reported <em>Is donation reported</em>}</li>
  * </ul>
  *
@@ -46,26 +45,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 	 * @ordered
 	 */
 	protected String beneficiary1 = BENEFICIARY1_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIs_beneficiary_eligible() <em>Is beneficiary eligible</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_beneficiary_eligible()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_BENEFICIARY_ELIGIBLE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIs_beneficiary_eligible() <em>Is beneficiary eligible</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_beneficiary_eligible()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean is_beneficiary_eligible = IS_BENEFICIARY_ELIGIBLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIs_donation_reported() <em>Is donation reported</em>}' attribute.
@@ -135,29 +114,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 	 * @generated
 	 */
 	@Override
-	public boolean isIs_beneficiary_eligible() {
-		return is_beneficiary_eligible;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIs_beneficiary_eligible(boolean newIs_beneficiary_eligible) {
-		boolean oldIs_beneficiary_eligible = is_beneficiary_eligible;
-		is_beneficiary_eligible = newIs_beneficiary_eligible;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.DONATION__IS_BENEFICIARY_ELIGIBLE, oldIs_beneficiary_eligible, is_beneficiary_eligible));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public boolean isIs_donation_reported() {
 		return is_donation_reported;
 	}
@@ -185,8 +141,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 		switch (featureID) {
 			case TaxationPackage.DONATION__BENEFICIARY1:
 				return getBeneficiary1();
-			case TaxationPackage.DONATION__IS_BENEFICIARY_ELIGIBLE:
-				return isIs_beneficiary_eligible();
 			case TaxationPackage.DONATION__IS_DONATION_REPORTED:
 				return isIs_donation_reported();
 		}
@@ -203,9 +157,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 		switch (featureID) {
 			case TaxationPackage.DONATION__BENEFICIARY1:
 				setBeneficiary1((String)newValue);
-				return;
-			case TaxationPackage.DONATION__IS_BENEFICIARY_ELIGIBLE:
-				setIs_beneficiary_eligible((Boolean)newValue);
 				return;
 			case TaxationPackage.DONATION__IS_DONATION_REPORTED:
 				setIs_donation_reported((Boolean)newValue);
@@ -225,9 +176,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 			case TaxationPackage.DONATION__BENEFICIARY1:
 				setBeneficiary1(BENEFICIARY1_EDEFAULT);
 				return;
-			case TaxationPackage.DONATION__IS_BENEFICIARY_ELIGIBLE:
-				setIs_beneficiary_eligible(IS_BENEFICIARY_ELIGIBLE_EDEFAULT);
-				return;
 			case TaxationPackage.DONATION__IS_DONATION_REPORTED:
 				setIs_donation_reported(IS_DONATION_REPORTED_EDEFAULT);
 				return;
@@ -245,8 +193,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 		switch (featureID) {
 			case TaxationPackage.DONATION__BENEFICIARY1:
 				return BENEFICIARY1_EDEFAULT == null ? beneficiary1 != null : !BENEFICIARY1_EDEFAULT.equals(beneficiary1);
-			case TaxationPackage.DONATION__IS_BENEFICIARY_ELIGIBLE:
-				return is_beneficiary_eligible != IS_BENEFICIARY_ELIGIBLE_EDEFAULT;
 			case TaxationPackage.DONATION__IS_DONATION_REPORTED:
 				return is_donation_reported != IS_DONATION_REPORTED_EDEFAULT;
 		}
@@ -265,8 +211,6 @@ public class DonationImpl extends Special_Expense_DSImpl implements Donation {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (beneficiary1: ");
 		result.append(beneficiary1);
-		result.append(", is_beneficiary_eligible: ");
-		result.append(is_beneficiary_eligible);
 		result.append(", is_donation_reported: ");
 		result.append(is_donation_reported);
 		result.append(')');

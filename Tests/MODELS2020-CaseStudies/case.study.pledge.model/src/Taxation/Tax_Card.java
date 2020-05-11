@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link Taxation.Tax_Card#getCard_identifier <em>Card identifier</em>}</li>
- *   <li>{@link Taxation.Tax_Card#getTax_card_type <em>Tax card type</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getTax_office <em>Tax office</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getPercentage_of_witholding <em>Percentage of witholding</em>}</li>
  *   <li>{@link Taxation.Tax_Card#getTax_payers_name_surname <em>Tax payers name surname</em>}</li>
@@ -78,32 +77,6 @@ public interface Tax_Card extends EObject {
 	 * @generated
 	 */
 	void setCard_identifier(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Tax card type</b></em>' attribute.
-	 * The literals are from the enumeration {@link Taxation.Tax_Card_Type}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tax card type</em>' attribute.
-	 * @see Taxation.Tax_Card_Type
-	 * @see #setTax_card_type(Tax_Card_Type)
-	 * @see Taxation.TaxationPackage#getTax_Card_Tax_card_type()
-	 * @model required="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='if(self.income.taxPayer.incomes-&gt;size()=1) then \nTax_Card_Type::Principal\n\telse\n\t\tlet all_incomes:OrderedSet(Income)=self.income.taxPayer.incomes-&gt;select(inc:Income| inc.income_amount= self.income.taxPayer.incomes.income_amount-&gt;max())-&gt;asOrderedSet() in\n\t\tlet bigest_income:Income= all_incomes-&gt;first() in\n\t\t\t    if(bigest_income=self.income) then\n\t\t\t   \t Tax_Card_Type::Principal\n\t\t\t    else\n\t\t\t\t\tTax_Card_Type::Additional\n\t\t\t\tendif\nendif\n\t\t\t\t'"
-	 * @generated
-	 */
-	Tax_Card_Type getTax_card_type();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Tax_Card#getTax_card_type <em>Tax card type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Tax card type</em>' attribute.
-	 * @see Taxation.Tax_Card_Type
-	 * @see #getTax_card_type()
-	 * @generated
-	 */
-	void setTax_card_type(Tax_Card_Type value);
 
 	/**
 	 * Returns the value of the '<em><b>Tax office</b></em>' attribute.

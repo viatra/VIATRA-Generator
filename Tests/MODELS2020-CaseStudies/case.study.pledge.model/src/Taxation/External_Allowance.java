@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link Taxation.External_Allowance#getAmount <em>Amount</em>}</li>
  *   <li>{@link Taxation.External_Allowance#getGrantor <em>Grantor</em>}</li>
  *   <li>{@link Taxation.External_Allowance#getStarting_year <em>Starting year</em>}</li>
  *   <li>{@link Taxation.External_Allowance#getEnding_year <em>Ending year</em>}</li>
@@ -27,28 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface External_Allowance extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Amount</em>' attribute.
-	 * @see #setAmount(double)
-	 * @see Taxation.TaxationPackage#getExternal_Allowance_Amount()
-	 * @model required="true"
-	 * @generated
-	 */
-	double getAmount();
-
-	/**
-	 * Sets the value of the '{@link Taxation.External_Allowance#getAmount <em>Amount</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Amount</em>' attribute.
-	 * @see #getAmount()
-	 * @generated
-	 */
-	void setAmount(double value);
-
 	/**
 	 * Returns the value of the '<em><b>Grantor</b></em>' attribute.
 	 * The literals are from the enumeration {@link Taxation.Grantor}.

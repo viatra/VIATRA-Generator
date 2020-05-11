@@ -14,7 +14,6 @@ package Taxation;
  * <ul>
  *   <li>{@link Taxation.Private_Insurance_and_Plan#getCategory <em>Category</em>}</li>
  *   <li>{@link Taxation.Private_Insurance_and_Plan#getDuration_of_contract <em>Duration of contract</em>}</li>
- *   <li>{@link Taxation.Private_Insurance_and_Plan#isIs_private_insurance_and_plan_eligible_for_deduction <em>Is private insurance and plan eligible for deduction</em>}</li>
  * </ul>
  *
  * @see Taxation.TaxationPackage#getPrivate_Insurance_and_Plan()
@@ -68,28 +67,5 @@ public interface Private_Insurance_and_Plan extends Special_Expense_DS {
 	 * @generated
 	 */
 	void setDuration_of_contract(int value);
-
-	/**
-	 * Returns the value of the '<em><b>Is private insurance and plan eligible for deduction</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is private insurance and plan eligible for deduction</em>' attribute.
-	 * @see #setIs_private_insurance_and_plan_eligible_for_deduction(boolean)
-	 * @see Taxation.TaxationPackage#getPrivate_Insurance_and_Plan_Is_private_insurance_and_plan_eligible_for_deduction()
-	 * @model default="false" required="true" derived="true"
-	 * @generated
-	 */
-	boolean isIs_private_insurance_and_plan_eligible_for_deduction();
-
-	/**
-	 * Sets the value of the '{@link Taxation.Private_Insurance_and_Plan#isIs_private_insurance_and_plan_eligible_for_deduction <em>Is private insurance and plan eligible for deduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is private insurance and plan eligible for deduction</em>' attribute.
-	 * @see #isIs_private_insurance_and_plan_eligible_for_deduction()
-	 * @generated
-	 */
-	void setIs_private_insurance_and_plan_eligible_for_deduction(boolean value);
 
 } // Private_Insurance_and_Plan

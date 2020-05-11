@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link Taxation.impl.FDImpl#getDistance_declared_in_january <em>Distance declared in january</em>}</li>
- *   <li>{@link Taxation.impl.FDImpl#getCalculated_distance <em>Calculated distance</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,26 +44,6 @@ public class FDImpl extends Professional_Expenses_DeductionImpl implements FD {
 	 * @ordered
 	 */
 	protected double distance_declared_in_january = DISTANCE_DECLARED_IN_JANUARY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getCalculated_distance() <em>Calculated distance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCalculated_distance()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double CALCULATED_DISTANCE_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getCalculated_distance() <em>Calculated distance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCalculated_distance()
-	 * @generated
-	 * @ordered
-	 */
-	protected double calculated_distance = CALCULATED_DISTANCE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,35 +93,10 @@ public class FDImpl extends Professional_Expenses_DeductionImpl implements FD {
 	 * @generated
 	 */
 	@Override
-	public double getCalculated_distance() {
-		return calculated_distance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setCalculated_distance(double newCalculated_distance) {
-		double oldCalculated_distance = calculated_distance;
-		calculated_distance = newCalculated_distance;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.FD__CALCULATED_DISTANCE, oldCalculated_distance, calculated_distance));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TaxationPackage.FD__DISTANCE_DECLARED_IN_JANUARY:
 				return getDistance_declared_in_january();
-			case TaxationPackage.FD__CALCULATED_DISTANCE:
-				return getCalculated_distance();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,9 +111,6 @@ public class FDImpl extends Professional_Expenses_DeductionImpl implements FD {
 		switch (featureID) {
 			case TaxationPackage.FD__DISTANCE_DECLARED_IN_JANUARY:
 				setDistance_declared_in_january((Double)newValue);
-				return;
-			case TaxationPackage.FD__CALCULATED_DISTANCE:
-				setCalculated_distance((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,9 +127,6 @@ public class FDImpl extends Professional_Expenses_DeductionImpl implements FD {
 			case TaxationPackage.FD__DISTANCE_DECLARED_IN_JANUARY:
 				setDistance_declared_in_january(DISTANCE_DECLARED_IN_JANUARY_EDEFAULT);
 				return;
-			case TaxationPackage.FD__CALCULATED_DISTANCE:
-				setCalculated_distance(CALCULATED_DISTANCE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,8 +141,6 @@ public class FDImpl extends Professional_Expenses_DeductionImpl implements FD {
 		switch (featureID) {
 			case TaxationPackage.FD__DISTANCE_DECLARED_IN_JANUARY:
 				return distance_declared_in_january != DISTANCE_DECLARED_IN_JANUARY_EDEFAULT;
-			case TaxationPackage.FD__CALCULATED_DISTANCE:
-				return calculated_distance != CALCULATED_DISTANCE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -211,8 +157,6 @@ public class FDImpl extends Professional_Expenses_DeductionImpl implements FD {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (distance_declared_in_january: ");
 		result.append(distance_declared_in_january);
-		result.append(", calculated_distance: ");
-		result.append(calculated_distance);
 		result.append(')');
 		return result.toString();
 	}
