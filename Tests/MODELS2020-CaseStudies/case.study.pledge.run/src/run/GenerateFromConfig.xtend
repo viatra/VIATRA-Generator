@@ -48,8 +48,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
 
 class GenerateFromConfig {
-	static val SIZE_LB = 1
-	static val SIZE_UB = 1
+	static val SIZE_LB = 20
+	static val SIZE_UB = 20
 	static val SIZE_MUL = 1
 	static val SIZE_INC = 5
 
@@ -179,83 +179,6 @@ class GenerateFromConfig {
 			if(INDIV_WRT) indiv_writer.close
 		}
 		if(GLOBAL_WRT) global_writer.close
-	}
-
-	def static Map<Type, Integer> getTypeMap(Map<Class, Integer> classMap, EcoreMetamodelDescriptor metamodel,
-		Ecore2Logic e2l, Ecore2Logic_Trace trace) {
-		val typeMap = new HashMap<Type, Integer>
-		val listMap = metamodel.classes.toMap[s|s.name]
-
-		for (Class  elem : classMap.keySet) {
-			typeMap.put(e2l.TypeofEClass(
-				trace,
-				listMap.get(elem.simpleName)
-			), classMap.get(elem))
-		}
-		return typeMap
-	}
-
-	def static loadMetamodel(EPackage pckg) {
-		val List<EClass> classes = pckg.getEClassifiers.filter(EClass).toList
-		val List<EEnum> enums = pckg.getEClassifiers.filter(EEnum).toList
-		val List<EEnumLiteral> literals = enums.map[getELiterals].flatten.toList
-		val List<EReference> references = classes.map[getEReferences].flatten.toList
-		val List<EAttribute> attributes = classes.map[getEAttributes].flatten.toList
-		return new EcoreMetamodelDescriptor(classes, #{}, false, enums, literals, references, attributes)
-	}
-
-	def static loadPartialModel(ReasonerWorkspace inputs, String path) {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl())
-		inputs.readModel(EObject, path).eResource.contents
-//		inputs.readModel(EObject,"FamInstance.xmi").eResource.allContents.toList
-	}
-
-	def static loadQueries(EcoreMetamodelDescriptor metamodel, IQueryGroup i) {
-		val patterns = i.specifications.toList
-		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name == "Constraint"]].toSet
-		val derivedFeatures = emptyMap
-		// NO DERIVED FEATURES
-//		val derivedFeatures = new LinkedHashMap
-//		derivedFeatures.put(i.type,metamodel.attributes.filter[it.name == "type"].head)
-//		derivedFeatures.put(i.model,metamodel.references.filter[it.name == "model"].head)
-		val res = new ViatraQuerySetDescriptor(
-			patterns,
-			wfPatterns,
-			derivedFeatures
-		)
-		return res
-	}
-
-	def static writeInterpretation(LogicResult solution, Logic2Ecore logic2Ecore, ReasonerWorkspace workspace,
-		String id, ViatraReasoner reasoner, TracedOutput<LogicProblem, Ecore2Logic_Trace> mgProb) {
-		val interpretations = reasoner.getInterpretations(solution as ModelResult)
-		for (interpIndex : 0 ..< interpretations.size) {
-//				val extension b = new LogicStructureBuilder
-//				val extension a = new LogicProblemBuilder
-			val interpretation = interpretations.get(interpIndex)
-			val model = logic2Ecore.transformInterpretation(interpretation, mgProb.trace)
-//			println(model)
-			workspace.writeModel(model, '''sol-«id»_«interpIndex».xmi''')
-		}
-	}
-
-	def static writeRepresentation(LogicResult solution, ReasonerWorkspace workspace, String id) {
-		val representations = solution.representation
-		for (representationIndex : 0 ..< representations.size) {
-			val representation = representations.get(representationIndex)
-			if (representation instanceof PartialInterpretation) {
-				val gml = (new PartialInterpretation2Gml).transform(representation)
-				workspace.writeText('''sol-«id»_«representationIndex».gml''', gml)
-
-				val png = (new GraphvizVisualiser).visualiseConcretization(representation)
-//				println(png)
-				png.writeToFile(workspace, '''sol-«id»_«representationIndex».png''')
-
-//				workspace.writeModel(representation, '''solution«representationIndex».partialintrpretation''')
-			} else {
-				workspace.writeText('''sol-«representationIndex».txt''', representation.toString)
-			}
-		}
 	}
 
 	def static writeStats(LogicResult solution, long time, ViatraReasonerConfiguration config) {

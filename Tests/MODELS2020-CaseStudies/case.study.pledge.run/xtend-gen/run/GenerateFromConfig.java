@@ -1,7 +1,5 @@
 package run;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Command;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Config;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry;
@@ -19,68 +17,31 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpec
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.TypeScope;
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor;
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace;
-import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation;
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
-import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.Statistics;
-import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
-import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.viatra.query.runtime.api.IQueryGroup;
-import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
-import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class GenerateFromConfig {
-  private static final int SIZE_LB = 1;
+  private static final int SIZE_LB = 20;
   
-  private static final int SIZE_UB = 1;
+  private static final int SIZE_UB = 20;
   
   private static final int SIZE_MUL = 1;
   
@@ -96,9 +57,9 @@ public class GenerateFromConfig {
   
   private static final boolean INITIAL = true;
   
-  private static final boolean INDIV_WRT = true;
+  private static final boolean INDIV_WRT = false;
   
-  private static final boolean GLOBAL_WRT = true;
+  private static final boolean GLOBAL_WRT = false;
   
   private static final String q2t = new Function0<String>() {
     @Override
@@ -259,119 +220,6 @@ public class GenerateFromConfig {
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public static Map<Type, Integer> getTypeMap(final Map<Class, Integer> classMap, final EcoreMetamodelDescriptor metamodel, final Ecore2Logic e2l, final Ecore2Logic_Trace trace) {
-    final HashMap<Type, Integer> typeMap = new HashMap<Type, Integer>();
-    final Function1<EClass, String> _function = (EClass s) -> {
-      return s.getName();
-    };
-    final Map<String, EClass> listMap = IterableExtensions.<String, EClass>toMap(metamodel.getClasses(), _function);
-    Set<Class> _keySet = classMap.keySet();
-    for (final Class elem : _keySet) {
-      typeMap.put(
-        e2l.TypeofEClass(trace, 
-          listMap.get(elem.getSimpleName())), classMap.get(elem));
-    }
-    return typeMap;
-  }
-  
-  public static EcoreMetamodelDescriptor loadMetamodel(final EPackage pckg) {
-    final List<EClass> classes = IterableExtensions.<EClass>toList(Iterables.<EClass>filter(pckg.getEClassifiers(), EClass.class));
-    final List<EEnum> enums = IterableExtensions.<EEnum>toList(Iterables.<EEnum>filter(pckg.getEClassifiers(), EEnum.class));
-    final Function1<EEnum, EList<EEnumLiteral>> _function = (EEnum it) -> {
-      return it.getELiterals();
-    };
-    final List<EEnumLiteral> literals = IterableExtensions.<EEnumLiteral>toList(Iterables.<EEnumLiteral>concat(ListExtensions.<EEnum, EList<EEnumLiteral>>map(enums, _function)));
-    final Function1<EClass, EList<EReference>> _function_1 = (EClass it) -> {
-      return it.getEReferences();
-    };
-    final List<EReference> references = IterableExtensions.<EReference>toList(Iterables.<EReference>concat(ListExtensions.<EClass, EList<EReference>>map(classes, _function_1)));
-    final Function1<EClass, EList<EAttribute>> _function_2 = (EClass it) -> {
-      return it.getEAttributes();
-    };
-    final List<EAttribute> attributes = IterableExtensions.<EAttribute>toList(Iterables.<EAttribute>concat(ListExtensions.<EClass, EList<EAttribute>>map(classes, _function_2)));
-    return new EcoreMetamodelDescriptor(classes, Collections.<EClass>unmodifiableSet(CollectionLiterals.<EClass>newHashSet()), false, enums, literals, references, attributes);
-  }
-  
-  public static EList<EObject> loadPartialModel(final ReasonerWorkspace inputs, final String path) {
-    EList<EObject> _xblockexpression = null;
-    {
-      Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-      XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
-      _extensionToFactoryMap.put("*", _xMIResourceFactoryImpl);
-      _xblockexpression = inputs.<EObject>readModel(EObject.class, path).eResource().getContents();
-    }
-    return _xblockexpression;
-  }
-  
-  public static ViatraQuerySetDescriptor loadQueries(final EcoreMetamodelDescriptor metamodel, final IQueryGroup i) {
-    final List<IQuerySpecification<?>> patterns = IterableExtensions.<IQuerySpecification<?>>toList(i.getSpecifications());
-    final Function1<IQuerySpecification<?>, Boolean> _function = (IQuerySpecification<?> it) -> {
-      final Function1<PAnnotation, Boolean> _function_1 = (PAnnotation it_1) -> {
-        String _name = it_1.getName();
-        return Boolean.valueOf(Objects.equal(_name, "Constraint"));
-      };
-      return Boolean.valueOf(IterableExtensions.<PAnnotation>exists(it.getAllAnnotations(), _function_1));
-    };
-    final Set<IQuerySpecification<?>> wfPatterns = IterableExtensions.<IQuerySpecification<?>>toSet(IterableExtensions.<IQuerySpecification<?>>filter(patterns, _function));
-    final Map<IQuerySpecification<?>, EStructuralFeature> derivedFeatures = CollectionLiterals.<IQuerySpecification<?>, EStructuralFeature>emptyMap();
-    final ViatraQuerySetDescriptor res = new ViatraQuerySetDescriptor(patterns, wfPatterns, derivedFeatures);
-    return res;
-  }
-  
-  public static void writeInterpretation(final LogicResult solution, final Logic2Ecore logic2Ecore, final ReasonerWorkspace workspace, final String id, final ViatraReasoner reasoner, final TracedOutput<LogicProblem, Ecore2Logic_Trace> mgProb) {
-    final List<? extends LogicModelInterpretation> interpretations = reasoner.getInterpretations(((ModelResult) solution));
-    int _size = interpretations.size();
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
-    for (final Integer interpIndex : _doubleDotLessThan) {
-      {
-        final LogicModelInterpretation interpretation = interpretations.get((interpIndex).intValue());
-        final EObject model = logic2Ecore.transformInterpretation(interpretation, mgProb.getTrace());
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("sol-");
-        _builder.append(id);
-        _builder.append("_");
-        _builder.append(interpIndex);
-        _builder.append(".xmi");
-        workspace.writeModel(model, _builder.toString());
-      }
-    }
-  }
-  
-  public static void writeRepresentation(final LogicResult solution, final ReasonerWorkspace workspace, final String id) {
-    final EList<Object> representations = solution.getRepresentation();
-    int _size = representations.size();
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
-    for (final Integer representationIndex : _doubleDotLessThan) {
-      {
-        final Object representation = representations.get((representationIndex).intValue());
-        if ((representation instanceof PartialInterpretation)) {
-          final String gml = new PartialInterpretation2Gml().transform(((PartialInterpretation)representation));
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("sol-");
-          _builder.append(id);
-          _builder.append("_");
-          _builder.append(representationIndex);
-          _builder.append(".gml");
-          workspace.writeText(_builder.toString(), gml);
-          final PartialInterpretationVisualisation png = new GraphvizVisualiser().visualiseConcretization(((PartialInterpretation)representation));
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("sol-");
-          _builder_1.append(id);
-          _builder_1.append("_");
-          _builder_1.append(representationIndex);
-          _builder_1.append(".png");
-          png.writeToFile(workspace, _builder_1.toString());
-        } else {
-          StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append("sol-");
-          _builder_2.append(representationIndex);
-          _builder_2.append(".txt");
-          workspace.writeText(_builder_2.toString(), representation.toString());
-        }
-      }
     }
   }
   

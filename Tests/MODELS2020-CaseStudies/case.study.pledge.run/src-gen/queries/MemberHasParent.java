@@ -1,9 +1,9 @@
 /**
- * Generated from platform:/resource/case.study.pledge.run/src/queries/case_study_short.vql
+ * Generated from platform:/resource/case.study.pledge.run/src/queries/familyTreeConstraints.vql
  */
 package queries;
 
-import Taxation.Physical_Person;
+import familytree.Member;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -25,14 +24,12 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey;
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -46,8 +43,8 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern x_inv48(p : Physical_Person) {
- *             Physical_Person.disability_type(p, ::NONE);
+ *         pattern memberHasParent(m: Member) = {
+ *         	Member.parents(m, _);
  *         }
  * </pre></code>
  * 
@@ -56,9 +53,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Matcher> {
+public final class MemberHasParent extends BaseGeneratedEMFQuerySpecification<MemberHasParent.Matcher> {
   /**
-   * Pattern-specific match representation of the queries.x_inv48 pattern,
+   * Pattern-specific match representation of the queries.memberHasParent pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -70,18 +67,18 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Physical_Person fP;
+    private Member fM;
     
-    private static List<String> parameterNames = makeImmutableList("p");
+    private static List<String> parameterNames = makeImmutableList("m");
     
-    private Match(final Physical_Person pP) {
-      this.fP = pP;
+    private Match(final Member pM) {
+      this.fM = pM;
     }
     
     @Override
     public Object get(final String parameterName) {
       switch(parameterName) {
-          case "p": return this.fP;
+          case "m": return this.fM;
           default: return null;
       }
     }
@@ -89,60 +86,60 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
     @Override
     public Object get(final int index) {
       switch(index) {
-          case 0: return this.fP;
+          case 0: return this.fM;
           default: return null;
       }
     }
     
-    public Physical_Person getP() {
-      return this.fP;
+    public Member getM() {
+      return this.fM;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("p".equals(parameterName) ) {
-          this.fP = (Physical_Person) newValue;
+      if ("m".equals(parameterName) ) {
+          this.fM = (Member) newValue;
           return true;
       }
       return false;
     }
     
-    public void setP(final Physical_Person pP) {
+    public void setM(final Member pM) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fP = pP;
+      this.fM = pM;
     }
     
     @Override
     public String patternName() {
-      return "queries.x_inv48";
+      return "queries.memberHasParent";
     }
     
     @Override
     public List<String> parameterNames() {
-      return X_inv48.Match.parameterNames;
+      return MemberHasParent.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fP};
+      return new Object[]{fM};
     }
     
     @Override
-    public X_inv48.Match toImmutable() {
-      return isMutable() ? newMatch(fP) : this;
+    public MemberHasParent.Match toImmutable() {
+      return isMutable() ? newMatch(fM) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"p\"=" + prettyPrintValue(fP));
+      result.append("\"m\"=" + prettyPrintValue(fM));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fP);
+      return Objects.hash(fM);
     }
     
     @Override
@@ -152,9 +149,9 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof X_inv48.Match)) {
-          X_inv48.Match other = (X_inv48.Match) obj;
-          return Objects.equals(fP, other.fP);
+      if ((obj instanceof MemberHasParent.Match)) {
+          MemberHasParent.Match other = (MemberHasParent.Match) obj;
+          return Objects.equals(fM, other.fM);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -166,8 +163,8 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
     }
     
     @Override
-    public X_inv48 specification() {
-      return X_inv48.instance();
+    public MemberHasParent specification() {
+      return MemberHasParent.instance();
     }
     
     /**
@@ -177,7 +174,7 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
      * @return the empty match.
      * 
      */
-    public static X_inv48.Match newEmptyMatch() {
+    public static MemberHasParent.Match newEmptyMatch() {
       return new Mutable(null);
     }
     
@@ -185,29 +182,29 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static X_inv48.Match newMutableMatch(final Physical_Person pP) {
-      return new Mutable(pP);
+    public static MemberHasParent.Match newMutableMatch(final Member pM) {
+      return new Mutable(pM);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static X_inv48.Match newMatch(final Physical_Person pP) {
-      return new Immutable(pP);
+    public static MemberHasParent.Match newMatch(final Member pM) {
+      return new Immutable(pM);
     }
     
-    private static final class Mutable extends X_inv48.Match {
-      Mutable(final Physical_Person pP) {
-        super(pP);
+    private static final class Mutable extends MemberHasParent.Match {
+      Mutable(final Member pM) {
+        super(pM);
       }
       
       @Override
@@ -216,9 +213,9 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
       }
     }
     
-    private static final class Immutable extends X_inv48.Match {
-      Immutable(final Physical_Person pP) {
-        super(pP);
+    private static final class Immutable extends MemberHasParent.Match {
+      Immutable(final Member pM) {
+        super(pM);
       }
       
       @Override
@@ -229,7 +226,7 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
   }
   
   /**
-   * Generated pattern matcher API of the queries.x_inv48 pattern,
+   * Generated pattern matcher API of the queries.memberHasParent pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -239,16 +236,16 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern x_inv48(p : Physical_Person) {
-   *     Physical_Person.disability_type(p, ::NONE);
+   * pattern memberHasParent(m: Member) = {
+   * 	Member.parents(m, _);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see X_inv48
+   * @see MemberHasParent
    * 
    */
-  public static class Matcher extends BaseMatcher<X_inv48.Match> {
+  public static class Matcher extends BaseMatcher<MemberHasParent.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -257,7 +254,7 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static X_inv48.Matcher on(final ViatraQueryEngine engine) {
+    public static MemberHasParent.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -272,13 +269,13 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static X_inv48.Matcher create() {
+    public static MemberHasParent.Matcher create() {
       return new Matcher();
     }
     
-    private static final int POSITION_P = 0;
+    private static final int POSITION_M = 0;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(X_inv48.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(MemberHasParent.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -294,12 +291,12 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<X_inv48.Match> getAllMatches(final Physical_Person pP) {
-      return rawStreamAllMatches(new Object[]{pP}).collect(Collectors.toSet());
+    public Collection<MemberHasParent.Match> getAllMatches(final Member pM) {
+      return rawStreamAllMatches(new Object[]{pM}).collect(Collectors.toSet());
     }
     
     /**
@@ -308,101 +305,101 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<X_inv48.Match> streamAllMatches(final Physical_Person pP) {
-      return rawStreamAllMatches(new Object[]{pP});
+    public Stream<MemberHasParent.Match> streamAllMatches(final Member pM) {
+      return rawStreamAllMatches(new Object[]{pM});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<X_inv48.Match> getOneArbitraryMatch(final Physical_Person pP) {
-      return rawGetOneArbitraryMatch(new Object[]{pP});
+    public Optional<MemberHasParent.Match> getOneArbitraryMatch(final Member pM) {
+      return rawGetOneArbitraryMatch(new Object[]{pM});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Physical_Person pP) {
-      return rawHasMatch(new Object[]{pP});
+    public boolean hasMatch(final Member pM) {
+      return rawHasMatch(new Object[]{pM});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Physical_Person pP) {
-      return rawCountMatches(new Object[]{pP});
+    public int countMatches(final Member pM) {
+      return rawCountMatches(new Object[]{pM});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Physical_Person pP, final Consumer<? super X_inv48.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pP}, processor);
+    public boolean forOneArbitraryMatch(final Member pM, final Consumer<? super MemberHasParent.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pM}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pP the fixed value of pattern parameter p, or null if not bound.
+     * @param pM the fixed value of pattern parameter m, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public X_inv48.Match newMatch(final Physical_Person pP) {
-      return X_inv48.Match.newMatch(pP);
+    public MemberHasParent.Match newMatch(final Member pM) {
+      return MemberHasParent.Match.newMatch(pM);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for p.
+     * Retrieve the set of values that occur in matches for m.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Physical_Person> rawStreamAllValuesOfp(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_P, parameters).map(Physical_Person.class::cast);
+    protected Stream<Member> rawStreamAllValuesOfm(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_M, parameters).map(Member.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for p.
+     * Retrieve the set of values that occur in matches for m.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Physical_Person> getAllValuesOfp() {
-      return rawStreamAllValuesOfp(emptyArray()).collect(Collectors.toSet());
+    public Set<Member> getAllValuesOfm() {
+      return rawStreamAllValuesOfm(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for p.
+     * Retrieve the set of values that occur in matches for m.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Physical_Person> streamAllValuesOfp() {
-      return rawStreamAllValuesOfp(emptyArray());
+    public Stream<Member> streamAllValuesOfm() {
+      return rawStreamAllValuesOfm(emptyArray());
     }
     
     @Override
-    protected X_inv48.Match tupleToMatch(final Tuple t) {
+    protected MemberHasParent.Match tupleToMatch(final Tuple t) {
       try {
-          return X_inv48.Match.newMatch((Physical_Person) t.get(POSITION_P));
+          return MemberHasParent.Match.newMatch((Member) t.get(POSITION_M));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -410,9 +407,9 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
     }
     
     @Override
-    protected X_inv48.Match arrayToMatch(final Object[] match) {
+    protected MemberHasParent.Match arrayToMatch(final Object[] match) {
       try {
-          return X_inv48.Match.newMatch((Physical_Person) match[POSITION_P]);
+          return MemberHasParent.Match.newMatch((Member) match[POSITION_M]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -420,9 +417,9 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
     }
     
     @Override
-    protected X_inv48.Match arrayToMatchMutable(final Object[] match) {
+    protected MemberHasParent.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return X_inv48.Match.newMutableMatch((Physical_Person) match[POSITION_P]);
+          return MemberHasParent.Match.newMutableMatch((Member) match[POSITION_M]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -434,12 +431,12 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<X_inv48.Matcher> querySpecification() {
-      return X_inv48.instance();
+    public static IQuerySpecification<MemberHasParent.Matcher> querySpecification() {
+      return MemberHasParent.instance();
     }
   }
   
-  private X_inv48() {
+  private MemberHasParent() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -448,7 +445,7 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static X_inv48 instance() {
+  public static MemberHasParent instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -457,35 +454,35 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
   }
   
   @Override
-  protected X_inv48.Matcher instantiate(final ViatraQueryEngine engine) {
-    return X_inv48.Matcher.on(engine);
+  protected MemberHasParent.Matcher instantiate(final ViatraQueryEngine engine) {
+    return MemberHasParent.Matcher.on(engine);
   }
   
   @Override
-  public X_inv48.Matcher instantiate() {
-    return X_inv48.Matcher.create();
+  public MemberHasParent.Matcher instantiate() {
+    return MemberHasParent.Matcher.create();
   }
   
   @Override
-  public X_inv48.Match newEmptyMatch() {
-    return X_inv48.Match.newEmptyMatch();
+  public MemberHasParent.Match newEmptyMatch() {
+    return MemberHasParent.Match.newEmptyMatch();
   }
   
   @Override
-  public X_inv48.Match newMatch(final Object... parameters) {
-    return X_inv48.Match.newMatch((Taxation.Physical_Person) parameters[0]);
+  public MemberHasParent.Match newMatch(final Object... parameters) {
+    return MemberHasParent.Match.newMatch((familytree.Member) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link X_inv48} to be created 
+   * Inner class allowing the singleton instance of {@link MemberHasParent} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link X_inv48#instance()}.
+   *     but rather at the first call to {@link MemberHasParent#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final X_inv48 INSTANCE = new X_inv48();
+    private static final MemberHasParent INSTANCE = new MemberHasParent();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -503,11 +500,11 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final X_inv48.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final MemberHasParent.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p = new PParameter("p", "Taxation.Physical_Person", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http:///TaxCard.ecore", "Physical_Person")), PParameterDirection.INOUT);
+    private final PParameter parameter_m = new PParameter("m", "familytree.Member", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.example.org/familytree", "Member")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p);
+    private final List<PParameter> parameters = Arrays.asList(parameter_m);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -515,12 +512,12 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
     
     @Override
     public String getFullyQualifiedName() {
-      return "queries.x_inv48";
+      return "queries.memberHasParent";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("p");
+      return Arrays.asList("m");
     }
     
     @Override
@@ -534,19 +531,18 @@ public final class X_inv48 extends BaseGeneratedEMFQuerySpecification<X_inv48.Ma
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_p = body.getOrCreateVariableByName("p");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_p), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Physical_Person")));
+          PVariable var_m = body.getOrCreateVariableByName("m");
+          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_m), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_p, parameter_p)
+             new ExportedParameter(body, var_m, parameter_m)
           ));
-          //     Physical_Person.disability_type(p, ::NONE)
+          // 	Member.parents(m, _)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_m), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new ConstantValue(body, var__virtual_0_, getEnumLiteral("http:///TaxCard.ecore", "Disability_Types", "NONE").getInstance());
-          new TypeConstraint(body, Tuples.flatTupleOf(var_p), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http:///TaxCard.ecore", "Physical_Person")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_p, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http:///TaxCard.ecore", "Physical_Person", "disability_type")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EDataTypeInSlotsKey((EDataType)getClassifierLiteral("http:///TaxCard.ecore", "Disability_Types")));
-          new Equality(body, var__virtual_1_, var__virtual_0_);
+          new TypeConstraint(body, Tuples.flatTupleOf(var_m, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.example.org/familytree", "Member", "parents")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.example.org/familytree", "Member")));
+          new Equality(body, var__virtual_0_, var___0_);
           bodies.add(body);
       }
       return bodies;
