@@ -25,6 +25,8 @@
     </genClasses>
     <genClasses ecoreClass="satellite.ecore#//CommSubsystem">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//CommSubsystem/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/frequency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/pathLength"/>
     </genClasses>
     <genClasses image="false" ecoreClass="satellite.ecore#//Payload"/>
     <genClasses ecoreClass="satellite.ecore#//InterferometryPayload"/>

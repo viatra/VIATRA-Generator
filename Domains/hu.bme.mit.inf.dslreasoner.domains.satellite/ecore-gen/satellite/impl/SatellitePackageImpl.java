@@ -2,6 +2,7 @@
  */
 package satellite.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -317,6 +318,26 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 	 * @generated
 	 */
 	@Override
+	public EAttribute getCommSubsystem_Frequency() {
+		return (EAttribute) commSubsystemEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCommSubsystem_PathLength() {
+		return (EAttribute) commSubsystemEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPayload() {
 		return payloadEClass;
 	}
@@ -447,6 +468,8 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 
 		commSubsystemEClass = createEClass(COMM_SUBSYSTEM);
 		createEReference(commSubsystemEClass, COMM_SUBSYSTEM__TARGET);
+		createEAttribute(commSubsystemEClass, COMM_SUBSYSTEM__FREQUENCY);
+		createEAttribute(commSubsystemEClass, COMM_SUBSYSTEM__PATH_LENGTH);
 
 		payloadEClass = createEClass(PAYLOAD);
 
@@ -541,6 +564,12 @@ public class SatellitePackageImpl extends EPackageImpl implements SatellitePacka
 		initEReference(getCommSubsystem_Target(), this.getCommSubsystem(), null, "target", null, 0, 1,
 				CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommSubsystem_Frequency(), ecorePackage.getEInt(), "frequency", null, 1, 1,
+				CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommSubsystem_PathLength(), ecorePackage.getEInt(), "pathLength", null, 1, 1,
+				CommSubsystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		initEClass(payloadEClass, Payload.class, "Payload", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -19,6 +19,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequency" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathLength" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>

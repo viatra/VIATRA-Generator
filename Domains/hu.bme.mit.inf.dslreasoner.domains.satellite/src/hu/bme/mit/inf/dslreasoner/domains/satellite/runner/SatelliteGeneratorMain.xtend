@@ -12,6 +12,7 @@ final class SatelliteGeneratorMain {
 	public static def void main(String[] args) {
 		ViatraQueryEngineOptions.setSystemDefaultBackends(ReteBackendFactory.INSTANCE, ReteBackendFactory.INSTANCE,
 			ReteBackendFactory.INSTANCE)
-		println(StandaloneScriptExecutor.executeScript("configs/generation.vsconfig"))
+		val res = StandaloneScriptExecutor.executeScript("configs/generation.vsconfig")
+		if(res!==null) println(res)
 	}
 }

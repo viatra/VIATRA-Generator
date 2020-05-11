@@ -7,7 +7,7 @@ generate {
 	partial-model = { "inputs/SatelliteInstance.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node += 32..64
+		#node += 64..128
 	}
 
 	config = {
@@ -16,7 +16,7 @@ generate {
 	}
 
 	number = 1
-	runs = 5
+	runs = 3
 
 	debug =	"outputs/debug"
 	log = "outputs/log.txt"
