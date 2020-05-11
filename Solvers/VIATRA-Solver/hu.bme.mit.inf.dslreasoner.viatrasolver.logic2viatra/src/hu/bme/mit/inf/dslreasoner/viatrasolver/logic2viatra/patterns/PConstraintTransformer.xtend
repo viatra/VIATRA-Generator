@@ -28,6 +28,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
+import java.util.Map
 
 class PConstraintTransformer {
 	val extension RelationDefinitionIndexer relationDefinitionIndexer;
@@ -226,6 +227,7 @@ class PConstraintTransformer {
 			throw new UnsupportedOperationException('''Only check expressions are supported "«e.class.name»"!''')
 		} else {
 			val expression = expressionExtractor.extractExpression(e.evaluator)
+			val Map<PVariable, PrimitiveTypeReference> variable2Type = e.affectedVariables.toInvertedMap[v|variableMapping.filter[it.sourcePVariable === v].head.targetLogicVariable.range as PrimitiveTypeReference]
 			if(modality.isMay) {
 				return '''
 					«FOR variable: e.affectedVariables»
@@ -234,7 +236,7 @@ class PConstraintTransformer {
 					check(
 						«FOR variable: e.affectedVariables SEPARATOR " || "»!«variable.valueSetted»«ENDFOR»
 						||
-						(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable])»)
+						(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable],variable2Type)»)
 					);
 				'''
 			} else { // Must or Current
@@ -242,7 +244,7 @@ class PConstraintTransformer {
 					«FOR variable: e.affectedVariables»
 						PrimitiveElement.valueSet(«variable.canonizeName»,true); «hasValueExpression(variableMapping,variable,variable.valueVariable)»
 					«ENDFOR»
-					check(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable])»);
+					check(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable],variable2Type)»);
 				'''
 			}
 		}

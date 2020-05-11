@@ -8,6 +8,8 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.PrimitiveTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
 
 class PExpressionGenerator {
 	static val N_Base = "org.eclipse.xtext.xbase.lib."
@@ -38,9 +40,9 @@ class PExpressionGenerator {
 	
 	static val N_POWER2 = "java.lang.Math.pow"
 	
-	def dispatch CharSequence translateExpression(XBinaryOperation e, Map<PVariable,String> valueName) {
-		val left = e.leftOperand.translateExpression(valueName)
-		val right = e.rightOperand.translateExpression(valueName)
+	def dispatch CharSequence translateExpression(XBinaryOperation e, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
+		val left = e.leftOperand.translateExpression(valueName,variable2Type)
+		val right = e.rightOperand.translateExpression(valueName,variable2Type)
 		val feature = e.feature.qualifiedName
 		     if(feature.isN(N_MINUS2)) { return '''(«left»-«right»)'''}
 		else if(feature.isN(N_PLUS2)) { return '''(«left»+«right»)''' }
@@ -65,8 +67,8 @@ class PExpressionGenerator {
 		}
 	}
 	
-	def dispatch CharSequence translateExpression(XUnaryOperation e, Map<PVariable,String> valueName) {
-		val operand = e.operand.translateExpression(valueName)
+	def dispatch CharSequence translateExpression(XUnaryOperation e, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
+		val operand = e.operand.translateExpression(valueName,variable2Type)
 		val feature = e.feature.qualifiedName
 		if(feature.isN(N_MINUS1)) { return '''(-«operand»)'''}
 		else if(feature.isN(N_PLUS1)) { return '''(+«operand»)'''}
@@ -78,8 +80,8 @@ class PExpressionGenerator {
 		}
 	}
 	
-	def dispatch CharSequence translateExpression(XMemberFeatureCall e, Map<PVariable,String> valueName) {
-		val transformedArguments = e.actualArguments.map[translateExpression(valueName)]
+	def dispatch CharSequence translateExpression(XMemberFeatureCall e, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
+		val transformedArguments = e.actualArguments.map[translateExpression(valueName,variable2Type)]
 		val feature = e.feature.qualifiedName
 		if(feature == N_POWER2) {
 			return '''Math.pow(«transformedArguments.get(0)»,«transformedArguments.get(1)»)'''
@@ -91,19 +93,24 @@ class PExpressionGenerator {
 		}
 	}
 	
-	def dispatch CharSequence translateExpression(XFeatureCall e, Map<PVariable,String> valueName) {
+	def dispatch CharSequence translateExpression(XFeatureCall e, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
 		val featureName = e.feature.qualifiedName
+		val type = variable2Type.entrySet.filter[it.key.name===featureName].head.value
 		val entryWithName = valueName.entrySet.filter[it.key.name == featureName].head
 		if(entryWithName !== null) {
-			return entryWithName.value
+			if(type instanceof RealTypeReference) {
+				return '''(«entryWithName.value».doubleValue)'''
+			} else {
+				return entryWithName.value
+			}
 		} else {
 			throw new IllegalArgumentException('''Feature call reference to unavailable variable "«featureName»"''')
 		}
 	}
 	
-	def dispatch CharSequence translateExpression(XNumberLiteral l, Map<PVariable,String> valueName) '''«l.value»'''
+	def dispatch CharSequence translateExpression(XNumberLiteral l, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) '''«l.value»'''
 	
-	def dispatch CharSequence translateExpression(XExpression expression, Map<PVariable,String> valueName) {
+	def dispatch CharSequence translateExpression(XExpression expression, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
 		throw new UnsupportedOperationException('''Unsupported expression in check or eval: «expression.class.name», «expression»"''')
 	}
 }
