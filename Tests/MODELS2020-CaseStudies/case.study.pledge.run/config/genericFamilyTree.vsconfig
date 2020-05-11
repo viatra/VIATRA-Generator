@@ -1,0 +1,25 @@
+import epackage	"../case.study.familyTree.model/model/familytree.ecore"
+import viatra	"src/queries/familyTreeConstraints.vql"
+
+generate {
+	metamodel = { package familytree }
+	constraints = { package queries}
+	partial-model = { "inputs/FamilyTree.xmi" }
+	solver = ViatraSolver
+	scope = {
+		#node = 6..15,
+		#int = {}
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	runs = 1
+	
+	debug =			"outputs/debug"
+	log =			"outputs/log.txt"
+	output =		"outputs/models"	
+	statistics =	"output/debug/statistics.csv"
+}

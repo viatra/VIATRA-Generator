@@ -99,12 +99,12 @@ def static void main(String[] args) {
 		case "Taxation": {
 			metamodel = loadMetamodel(TaxationPackage.eINSTANCE)
 			partialModel = loadPartialModel(inputs, "Household.xmi")
-				queries = loadQueries(metamodel, Case_study_A.instance)
+//				queries = loadQueries(metamodel, Case_study_A.instance)
 		}
 		case "FamilyTree": {
 			metamodel = loadMetamodel(FamilytreePackage.eINSTANCE)
 			partialModel = loadPartialModel(inputs, "FamilyTree.xmi")
-			queries = loadQueries(metamodel, FamilyTreeConstraints.instance)
+//			queries = loadQueries(metamodel, FamilyTreeConstraints.instance)
 		}
 		default: {
 			System.err.println("Unsupported Domain")
