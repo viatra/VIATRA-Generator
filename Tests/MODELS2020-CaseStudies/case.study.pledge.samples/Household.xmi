@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TaxCard:Household
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TaxCard="http:///TaxCard.ecore"
+    id1="h">
+  <parents xsi:type="TaxCard:Marriage_Record"
+      start_year="10"
+      end_year="5"
+      separation_cause="SEPARATION_BY_COURT"
+      id9="lur">
+    <individual_A
+        xsi:type="TaxCard:Dependent"
+        SSNo="10"
+        disability_type="NONE"/>
+    <individual_B
+        xsi:type="TaxCard:Dependent"
+        SSNo="11"
+        disability_type="NONE"/>
+    <individual_B
+        SSNo="p"
+        disability_percentage="-0.1"
+        disability_type="NONE"/>
+    <properties
+        id10="tp"/>
+  </parents>
+</TaxCard:Household>

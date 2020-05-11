@@ -285,29 +285,34 @@ pattern inv47(lur : Legal_Union_Record) {
     Legal_Union_Record.start_year(lur, startY);
     neg find x_inv47(lur);
     check(startY >= endY);
+} or {
+	Legal_Union_Record.end_year(lur, endY);
+    Legal_Union_Record.start_year(lur, startY);
+    check(endY!= -1);
+    check(startY >= endY);
 }
 pattern x_inv47(lur : Legal_Union_Record) {
     Legal_Union_Record.separation_cause(lur, ::NONE);
-    Legal_Union_Record.end_year(lur, -1);
 }
 
 //inv48-attributes-handled by multiplicity
 @Constraint(message = "inv48", severity = "error", key = {p})
 pattern inv48(p : Physical_Person) {
-	neg find x_inv48_notDis(p);
-	neg find x_inv48_Dis(p);
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer > 1.0);
+} or {
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer < 0.0);
+} or {
+   Physical_Person.disability_type(p, ::NONE);
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer != 0.0);
+} or {
+  neg find x_inv48(p);
+  Physical_Person.disability_percentage(p, disPer);
+  check(disPer == 0.0);
 }
-pattern x_inv48_notDis(p : Physical_Person) {
-    Physical_Person.disability_type(p, ::NONE);
-    Physical_Person.disability_percentage(p, 0.0);
-}
-pattern x_inv48_Dis(p : Physical_Person) {
-	neg find x_inv48_3(p);
-	Physical_Person.disability_percentage(p, disPer);
-    check(disPer > 0.0);
-    check(disPer <= 1.0);
-}
-pattern x_inv48_3(p : Physical_Person) {
+pattern x_inv48(p : Physical_Person) {
     Physical_Person.disability_type(p, ::NONE);
 }
 

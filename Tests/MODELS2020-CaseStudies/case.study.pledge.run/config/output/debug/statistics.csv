@@ -1,3 +1,0 @@
-Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime
-1;1;InsuficientResourcesResultImpl;616;31795;218148;20800;1374;0;726;7;0;32
-

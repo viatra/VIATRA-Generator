@@ -31,12 +31,16 @@
       <query-specification fqn="queries.inv47"/>
       <query-specification fqn="queries.x_inv47"/>
       <query-specification fqn="queries.inv48"/>
-      <query-specification fqn="queries.x_inv48_notDis"/>
-      <query-specification fqn="queries.x_inv48_Dis"/>
-      <query-specification fqn="queries.x_inv48_3"/>
+      <query-specification fqn="queries.x_inv48"/>
       <query-specification fqn="queries.inv49"/>
       <query-specification fqn="queries.x_inv49_1"/>
       <query-specification fqn="queries.x_inv49_2"/>
+    </group>
+  </extension>
+  <extension id="queries.Case_study_short" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_short" id="queries.Case_study_short">
+      <query-specification fqn="queries.inv48"/>
+      <query-specification fqn="queries.x_inv48"/>
     </group>
   </extension>
 </plugin>
