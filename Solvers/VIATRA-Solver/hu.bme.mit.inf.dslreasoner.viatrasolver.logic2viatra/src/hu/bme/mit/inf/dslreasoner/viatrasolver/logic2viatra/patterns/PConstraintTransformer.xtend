@@ -235,8 +235,10 @@ class PConstraintTransformer {
 					«ENDFOR»
 					check(
 						«FOR variable: e.affectedVariables SEPARATOR " || "»!«variable.valueSetted»«ENDFOR»
+						«IF variable2Type.values.filter(RealTypeReference).empty»
 						||
 						(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable],variable2Type)»)
+						«ENDIF»
 					);
 				'''
 			} else { // Must or Current
@@ -244,7 +246,9 @@ class PConstraintTransformer {
 					«FOR variable: e.affectedVariables»
 						PrimitiveElement.valueSet(«variable.canonizeName»,true); «hasValueExpression(variableMapping,variable,variable.valueVariable)»
 					«ENDFOR»
-					check(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable],variable2Type)»);
+					«IF variable2Type.values.filter(RealTypeReference).empty»
+						check(«expressionGenerator.translateExpression(expression,e.affectedVariables.toInvertedMap[valueVariable],variable2Type)»);
+					«ENDIF»
 				'''
 			}
 		}
