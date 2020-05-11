@@ -47,11 +47,11 @@ public class GenerateFromConfig {
   
   private static final int SIZE_INC = 5;
   
-  private static int REPS = 1;
+  private static int REPS = 5;
   
   private static final int RUNTIME = 2100;
   
-  private static final String DOMAIN = "Taxation";
+  private static final String DOMAIN = "Satellite";
   
   private static final boolean QUERIES = true;
   
