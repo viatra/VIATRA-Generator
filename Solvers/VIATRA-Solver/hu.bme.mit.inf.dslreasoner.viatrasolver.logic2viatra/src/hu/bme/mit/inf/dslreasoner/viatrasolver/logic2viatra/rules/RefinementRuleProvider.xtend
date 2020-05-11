@@ -184,7 +184,7 @@ class RefinementRuleProvider {
 					if(containmentReferences.contains(relation)) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
 						if(!(targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.isIsAbstract) {
-							val inverseAnnotation = p.assertions.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
+							val inverseAnnotation = p.annotations.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
 							if(!inverseAnnotation.empty) {
 								val onlyInverseAnnotation = if(inverseAnnotation.head.inverseA===relation) {
 									inverseAnnotation.head.inverseB
