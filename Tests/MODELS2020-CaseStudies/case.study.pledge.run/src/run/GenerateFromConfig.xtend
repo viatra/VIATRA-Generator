@@ -53,10 +53,10 @@ class GenerateFromConfig {
 	static val SIZE_MUL = 1
 	static val SIZE_INC = 5
 
-	static var REPS = 1
+	static var REPS = 5
 	static val RUNTIME = 2100
 
-	static val DOMAIN = "Taxation" // "FamilyTree", "Taxation"
+	static val DOMAIN = "Satellite" // "FamilyTree", "Taxation", "Satellite"
 	static val QUERIES = true
 	static val INITIAL = true
 	static val INDIV_WRT = false
