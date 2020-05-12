@@ -77,7 +77,7 @@ class ModelGenerationMethodProvider {
 			objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(logicProblem, emptySolution, queries,scopePropagator,nameNewElements,statistics)
 		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries,statistics)
 		
-		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(queries)
+		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem,queries)
 		val unfinishedWF = queries.getUnfinishedWFQueries.values
 		
 		val invalidWF = queries.getInvalidWFQueries.values

@@ -55,17 +55,22 @@ class ModelGenerationCompositeObjective implements IObjective{
 		//val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
 		val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
 		
-		
-		var multiplicity = 0.0
+		var containmentMultiplicity = 0.0
+		var nonContainmentMultiplicity = 0.0
 		for(multiplicityObjective : unfinishedMultiplicityObjectives) {
-			multiplicity+=multiplicityObjective.getFitness(context)
+			if(multiplicityObjective.containment) {
+				containmentMultiplicity+=multiplicityObjective.getFitness(context)
+			} else {
+				nonContainmentMultiplicity+=multiplicityObjective.getFitness(context)
+			}
 		}
 		var sum = 0.0
 		sum += scopeFitnes
-		sum +=multiplicity
+		sum += containmentMultiplicity
+		sum += Math.sqrt(nonContainmentMultiplicity)
 		sum += unfinishedWFsFitness//*0.5
 		
-		println('''Sum=«sum»|Scope=«scopeFitnes»|Multiplicity=«multiplicity»|WFs=«unfinishedWFsFitness»''')
+		//println('''Sum=«sum»|Scope=«scopeFitnes»|ContainmentMultiplicity=«containmentMultiplicity»|NonContainmentMultiplicity=«nonContainmentMultiplicity»|WFs=«unfinishedWFsFitness»''')
 		
 		return sum
 	}

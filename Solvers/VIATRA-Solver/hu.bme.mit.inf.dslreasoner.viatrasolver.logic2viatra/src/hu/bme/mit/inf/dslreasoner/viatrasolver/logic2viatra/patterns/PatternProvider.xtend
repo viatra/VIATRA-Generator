@@ -27,7 +27,8 @@ import java.util.HashMap
 @Data class GeneratedPatterns {
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWFQueries
-	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedMulticiplicityQueries
+	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedContainmentMulticiplicityQueries
+	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedNonContainmentMulticiplicityQueries
 	public Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
 	public Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
@@ -86,8 +87,23 @@ class PatternProvider {
 			invalidWFQueries = patternGenerator.invalidIndexer.getInvalidateByWfQueryNames(problem).mapValues[it.lookup(queries)]
 		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			unfinishedWFQueries = patternGenerator.unfinishedIndexer.getUnfinishedWFQueryNames(problem).mapValues[it.lookup(queries)]
-		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
-			unfinishedMultiplicityQueries = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(problem).mapValues[it.lookup(queries)]
+			
+		val unfinishedMultiplicities = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(problem)
+		val unfinishedContainmentMultiplicities = new HashMap
+		val unfinishedNonContainmentMultiplicities = new HashMap
+		for(entry : unfinishedMultiplicities.entrySet) {
+			val relation = entry.key
+			val value = entry.value.lookup(queries)
+			if(problem.containmentHierarchies.head.containmentRelations.contains(relation)) {
+				unfinishedContainmentMultiplicities.put(relation,value)
+			} else {
+				unfinishedNonContainmentMultiplicities.put(relation,value)
+			}
+		}
+//		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
+//			unfinishedMultiplicityQueries = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(problem).mapValues[it.lookup(queries)]
+//			
+			
 		val Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			refineObjectsQueries = patternGenerator.typeRefinementGenerator.getRefineObjectQueryNames(problem,emptySolution,typeAnalysisResult).mapValues[it.lookup(queries)]
 		val Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
@@ -101,7 +117,8 @@ class PatternProvider {
 		return new GeneratedPatterns(
 			invalidWFQueries,
 			unfinishedWFQueries,
-			unfinishedMultiplicityQueries,
+			unfinishedContainmentMultiplicities,
+			unfinishedNonContainmentMultiplicities,
 			refineObjectsQueries,
 			refineTypeQueries,
 			refineRelationQueries,
