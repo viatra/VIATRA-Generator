@@ -56,10 +56,11 @@ class ScriptExecutor {
 	public def executeScript(ConfigurationScript script, IProgressMonitor monitor) {
 		script.activateAllEPackageReferences
 		val tasks = script.commands.filter(Task)
+		val intermediateScriptConsole = new ScriptConsole(true,false,null,null,null)
 		
 		for(taskIndex : 0..<tasks.size) {
 			if(taskIndex>0) {
-				restForMeasurements(null)
+				restForMeasurements(intermediateScriptConsole)
 			}
 			val task = tasks.get(taskIndex)
 			monitor.beginTask('''Executing task«IF tasks.size>1» «taskIndex+1»«ENDIF»: «task.name»''',task.totalWork)
