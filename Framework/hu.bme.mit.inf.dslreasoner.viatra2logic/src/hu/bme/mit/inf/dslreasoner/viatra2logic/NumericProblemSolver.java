@@ -56,6 +56,10 @@ public class NumericProblemSolver {
 	private Context ctx;
 	private Solver s;
 	private Map<Object, Expr> varMap;
+	
+	long endformingProblem=0;
+	long endSolvingProblem=0;
+	long endFormingSolution=0;
 
 	public NumericProblemSolver() {
 		HashMap<String, String> cfg = new HashMap<String, String>();
@@ -70,7 +74,18 @@ public class NumericProblemSolver {
 		return ctx;
 	}
 	
-	
+	public long getEndformingProblem() {
+		return endformingProblem;
+	}
+
+	public long getEndSolvingProblem() {
+		return endSolvingProblem;
+	}
+
+	public long getEndFormingSolution() {
+		return endFormingSolution;
+	}
+
 	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {
 		ArrayList<JvmIdentifiableElement> allElem = new ArrayList<JvmIdentifiableElement>();
 		XExpression left = ((XBinaryOperation) expression).getLeftOperand();
@@ -91,26 +106,30 @@ public class NumericProblemSolver {
 	}
 	
 	public boolean isSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
+		long startformingProblem = System.nanoTime();
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		s.add(problemInstance);
+		endformingProblem = System.nanoTime()-startformingProblem;
+		long startSolvingProblem = System.nanoTime();
 		boolean result = (s.check() == Status.SATISFIABLE);
+		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		this.ctx.close();
 		return result;
 	}
 	
 	public Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {		
 		Map<PrimitiveElement,Number> sol = new HashMap<PrimitiveElement, Number>();
-		long startformingProblem = System.currentTimeMillis();
+		long startformingProblem = System.nanoTime();
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
-		long endformingProblem = System.currentTimeMillis();
-		System.out.println("Forming problem: " + (endformingProblem - startformingProblem));
+		endformingProblem = System.nanoTime()-startformingProblem;
+		//System.out.println("Forming problem: " + (endformingProblem - startformingProblem));
 		s.add(problemInstance);
-		long startSolvingProblem = System.currentTimeMillis();
+		long startSolvingProblem = System.nanoTime();
 		if (s.check() == Status.SATISFIABLE) {
 			Model m = s.getModel();
-			long endSolvingProblem = System.currentTimeMillis();
+			endSolvingProblem = System.nanoTime()-startSolvingProblem;
 			System.out.println("Solving problem: " + (endSolvingProblem - startSolvingProblem));
-			long startFormingSolution = System.currentTimeMillis();
+			long startFormingSolution = System.nanoTime();
 			for (PrimitiveElement o: objs) {
 				if(varMap.containsKey(o)) {
 					if (o instanceof IntegerElement) {
@@ -128,10 +147,10 @@ public class NumericProblemSolver {
 					//System.out.println("not used var:" + o);
 				}
 			}
-			long endFormingSolution = System.currentTimeMillis();
-			System.out.println("Forming solution: " + (endFormingSolution - startFormingSolution));
+			endFormingSolution = System.nanoTime()-startFormingSolution;
+			//System.out.println("Forming solution: " + (endFormingSolution - startFormingSolution));
 		} else {
-			System.out.println("Unsatisfiable");
+			System.out.println("Unsatisfiable numerical problem");
 		}
 		this.ctx.close();
 		return sol;
