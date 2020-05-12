@@ -128,7 +128,7 @@ public class NumericProblemSolver {
 		if (s.check() == Status.SATISFIABLE) {
 			Model m = s.getModel();
 			endSolvingProblem = System.nanoTime()-startSolvingProblem;
-			System.out.println("Solving problem: " + (endSolvingProblem - startSolvingProblem));
+			//System.out.println("Solving problem: " + (endSolvingProblem - startSolvingProblem));
 			long startFormingSolution = System.nanoTime();
 			for (PrimitiveElement o: objs) {
 				if(varMap.containsKey(o)) {
