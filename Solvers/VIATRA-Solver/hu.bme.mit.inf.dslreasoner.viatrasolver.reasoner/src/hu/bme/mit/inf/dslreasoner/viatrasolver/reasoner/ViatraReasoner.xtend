@@ -159,7 +159,16 @@ class ViatraReasoner extends LogicReasoner{
 				it.name = "ActivationSelectionTime" it.value = (strategy.activationSelector.runtime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverTime" it.value = (strategy.numericSolver.runtime/1000000) as int
+				it.name = "NumericalSolverSumTime" it.value = (strategy.numericSolver.runtime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverProblemFormingTime" it.value = (strategy.numericSolver.solverFormingProblem/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverSolvingTime" it.value = (strategy.numericSolver.solverSolvingProblem/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverInterpretingSolution" it.value = (strategy.numericSolver.solverSolution/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "NumericalSolverCachingTime" it.value = (strategy.numericSolver.cachingTime/1000000) as int

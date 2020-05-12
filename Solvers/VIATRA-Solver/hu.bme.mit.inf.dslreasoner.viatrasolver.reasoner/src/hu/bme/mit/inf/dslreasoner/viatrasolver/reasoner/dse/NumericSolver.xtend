@@ -56,6 +56,9 @@ class NumericSolver {
 	def getCachingTime(){cachingTime}
 	def getNumberOfSolverCalls(){numberOfSolverCalls}
 	def getNumberOfCachedSolverCalls(){numberOfCachedSolverCalls}
+	def getSolverFormingProblem(){this.t.formingProblemTime}
+	def getSolverSolvingProblem(){this.t.solvingProblemTime}
+	def getSolverSolution(){this.t.formingSolutionTime}
 	
 	def boolean maySatisfiable() {
 		isSatisfiable(this.constraint2MustUnitPropagationPrecondition)
