@@ -242,30 +242,6 @@ class PatternGenerator {
 			} or {
 				find mayExist(problem,interpretation,a);
 				find mayExist(problem,interpretation,b);
-				RealElement(a);
-				IntegerElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				RealElement(a);
-				IntegerElement(b);
-				PrimitiveElement.valueSet(b,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				IntegerElement(a);
-				RealElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				IntegerElement(a);
-				RealElement(b);
-				PrimitiveElement.valueSet(b,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
 				StringElement(a);
 				StringElement(b);
 				PrimitiveElement.valueSet(a,false);
@@ -295,20 +271,6 @@ class PatternGenerator {
 				PrimitiveElement.valueSet(a,true);
 				PrimitiveElement.valueSet(b,true);
 				RealElement.value(a,value);
-				RealElement.value(b,value);
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				RealElement.value(a,value);
-				IntegerElement.value(b,value);
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				IntegerElement.value(a,value);
 				RealElement.value(b,value);
 			} or {
 				find mustExist(problem,interpretation,a);
