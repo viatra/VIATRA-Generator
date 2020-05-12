@@ -49,9 +49,9 @@ class MultiplicityGoalConstraintCalculator {
 			
 			val missingMultiplicity = match.get(4) as Integer
 			res += missingMultiplicity
-			if(missingMultiplicity!=0) {
-				println(targetRelationName+ " missing multiplicity: "+missingMultiplicity)
-			}
+//			if(missingMultiplicity!=0) {
+//				println(targetRelationName+ " missing multiplicity: "+missingMultiplicity)
+//			}
 		}
 		//println(targetRelationName+ " all missing multiplicities: "+res)
 		return res*cost
