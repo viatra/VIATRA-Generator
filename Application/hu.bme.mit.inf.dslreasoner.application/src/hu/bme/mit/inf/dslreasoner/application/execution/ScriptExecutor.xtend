@@ -4,6 +4,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigRef
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentationEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.EPackageImport
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileReference
@@ -24,11 +25,10 @@ import hu.bme.mit.inf.dslreasoner.application.execution.util.ApplicationConfigur
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import java.util.LinkedHashMap
 import java.util.Optional
-import org.eclipse.emf.common.util.URI
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.DocumentLevelSpecification
-import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Status
+import org.eclipse.core.runtime.jobs.Job
+import org.eclipse.emf.common.util.URI
 
 class ScriptExecutor {
 	val parser = new ApplicationConfigurationParser
@@ -58,6 +58,9 @@ class ScriptExecutor {
 		val tasks = script.commands.filter(Task)
 		
 		for(taskIndex : 0..<tasks.size) {
+			if(taskIndex>0) {
+				restForMeasurements(null)
+			}
 			val task = tasks.get(taskIndex)
 			monitor.beginTask('''Executing task«IF tasks.size>1» «taskIndex+1»«ENDIF»: «task.name»''',task.totalWork)
 			task.execute(monitor)
@@ -232,6 +235,16 @@ class ScriptExecutor {
 				}
 				return Optional::of(translatedValue)
 			}
+		}
+	}
+	static val boolean measuring = true
+	static def restForMeasurements(ScriptConsole console) {
+		if(measuring) {
+			if(console !== null) {
+				console.writeMessage('''Cleaning memory.''')
+			}
+			System.gc System.gc System.gc
+			Thread.sleep(2500)
 		}
 	}
 }
