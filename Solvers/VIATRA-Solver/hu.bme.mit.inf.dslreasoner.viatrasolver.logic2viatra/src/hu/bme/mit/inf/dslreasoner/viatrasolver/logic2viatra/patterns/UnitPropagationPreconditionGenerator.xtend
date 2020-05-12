@@ -211,7 +211,7 @@ class UnitPropagationPreconditionGenerator {
 								// Propagation for constraint referred indirectly from this pattern through «referredName»
 								find «referredName»(problem, interpretation,
 									«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«positive.getVariableInTuple(index).canonizeName»«ENDFOR»,
-									«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
+									«FOR index : 1..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
 							'''
 						}
 						// Otherwise, if the referred pattern is not satisfiable, this pattern is not satisfiable either
@@ -234,7 +234,7 @@ class UnitPropagationPreconditionGenerator {
 								// Propagation for constraint referred indirectly from this pattern through «referredName»
 								find «referredName»(problem, interpretation,
 									«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«(negative.actualParametersTuple.get(index) as PVariable).canonizeName»«ENDFOR»,
-									«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
+									«FOR index : 1..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
 							'''
 						} else {
 							generatedBodies += '''
