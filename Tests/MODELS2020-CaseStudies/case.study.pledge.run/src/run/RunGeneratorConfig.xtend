@@ -22,7 +22,8 @@ import org.eclipse.core.runtime.NullProgressMonitor
 import org.apache.commons.cli.BasicParser
 
 class RunGeneratorConfig {
-	static var SIZE = 20
+	static var SIZE_LB = 20
+	static var SIZE_UB = -1
 
 	static var RUNS = 10
 	static var RUNTIME = 600
@@ -35,8 +36,11 @@ class RunGeneratorConfig {
 
 		val options = new Options()
 
-		val s = new Option("s", "size", true, "generated model Lower bound")
-		options.addOption(s)
+		val lb = new Option("lb", "lowerBound", true, "generated model Lower bound")
+		options.addOption(lb)
+		
+		val ub = new Option("ub", "upperBound", true, "generated model Upper bound")
+		options.addOption(ub)
 
 		val n = new Option("n", "numRuns", true, "number of runs")
 		options.addOption(n)
@@ -59,8 +63,10 @@ class RunGeneratorConfig {
 			System.exit(1)
 		}
 		
-		val sIn = cmd.getOptionValue("size")
-		if(sIn !== null) SIZE = Integer.parseInt(sIn)
+		val lbIn = cmd.getOptionValue("lowerBound")
+		if(lbIn !== null) SIZE_LB = Integer.parseInt(lbIn)
+		val ubIn = cmd.getOptionValue("upperBound")
+		if(ubIn !== null) SIZE_UB = Integer.parseInt(ubIn)
 		val nIn = cmd.getOptionValue("numRuns")
 		if(nIn !== null) RUNS = Integer.parseInt(nIn)
 		val rtIn = cmd.getOptionValue("runtime")
@@ -79,12 +85,12 @@ class RunGeneratorConfig {
 
 		// /////////////////////////
 		// BEGIN RUN
-		println("<<DOMAIN: " + DOMAIN + ", SIZE=" + SIZE + ",Runs=" + RUNS + ",Runtime=" + RUNTIME+">>\n")
+		println("<<DOMAIN: " + DOMAIN + ", SIZE=" + SIZE_LB + "to" + SIZE_UB + ", Runs=" + RUNS + ", Runtime=" + RUNTIME+">>\n")
 
-		val outputPath = "measurements/" + "models/"+ DOMAIN + "/size" + SIZE + "_" + formattedDate
-		val debugPath = "measurements/" + "debug/" + DOMAIN + "/size" + SIZE + "_" + formattedDate
+		val outputPath = "measurements/" + "models/"+ DOMAIN + "/size" + SIZE_LB + "to" + SIZE_UB + "_" + formattedDate
+		val debugPath = "measurements/" + "debug/" + DOMAIN + "/size" + SIZE_LB + "to" + SIZE_UB + "_" + formattedDate
 		val logPath = debugPath + "/log.txt"
-		val statsPath = "measurements/" + "stats/" + DOMAIN + "/size" + SIZE + "x" + RUNS + "stats_" + formattedDate + ".csv"
+		val statsPath = "measurements/" + "stats/" + DOMAIN + "/size" + SIZE_LB  + "to" + SIZE_UB + "x" + RUNS + "stats_" + formattedDate + ".csv"
 
 		// Basic Adjustments
 		val genTask = config.commands.get(1) as GenerationTask
@@ -96,8 +102,12 @@ class RunGeneratorConfig {
 		val scopeSpec = genTask.scope as ScopeSpecification
 		val objScope = scopeSpec.scopes.get(0) as ObjectTypeScope
 		val interval = objScope.number as IntervallNumber
-		interval.min = SIZE
-		interval.maxUnlimited = true
+		interval.min = SIZE_LB
+		if(SIZE_UB == -1) interval.maxUnlimited = true
+		else {
+			interval.maxUnlimited = false
+			interval.maxNumber = SIZE_UB
+		}
 
 		// Runtime
 		val configScope = genTask.config as ConfigSpecification

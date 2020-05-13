@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains xsi:type="TaxCardWithRoot:FD"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Private_Insurance_and_Plan" private_insurance_and_plan_category="PRIVATE_LIFE_INSURANCE"/>
+  <contains xsi:type="TaxCardWithRoot:FD"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Private_Insurance_and_Plan"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Interest_Expense"/>
+  <contains xsi:type="TaxCardWithRoot:CIS" grantedBy="UUU"/>
+  <contains xsi:type="TaxCardWithRoot:FO"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Interest_Expense"/>
+  <contains xsi:type="TaxCardWithRoot:CIS" grantedBy="YYY"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Private_Insurance_and_Plan"/>
+  <contains xsi:type="TaxCardWithRoot:CIS" id7=""/>
+  <contains xsi:type="TaxCardWithRoot:FO"/>
+</TaxCardWithRoot:Resource>

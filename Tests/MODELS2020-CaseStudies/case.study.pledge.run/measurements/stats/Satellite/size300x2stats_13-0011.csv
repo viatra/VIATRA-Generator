@@ -1,0 +1,4 @@
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime;ActivationSelectionTime;NumericalSolverSumTime;NumericalSolverProblemFormingTime;NumericalSolverSolvingTime;NumericalSolverInterpretingSolution;NumericalSolverCachingTime;NumericalSolverCallNumber;NumericalSolverCachedAnswerNumber
+2;1;InsuficientResourcesResultImpl;878;23830;600748;0;25935;14;522315;0;0;5;5051;2194;2488;0;0;194;0
+2;2;InsuficientResourcesResultImpl;878;25850;600600;0;30102;0;516521;0;0;4;4566;1860;2331;0;0;166;0
+
