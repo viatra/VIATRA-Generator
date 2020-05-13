@@ -32,7 +32,8 @@ Require-Bundle: org.eclipse.emf.ecore,
  hu.bme.mit.inf.dslreasoner.application;bundle-version="1.0.0",
  case.study.familyTree.model;bundle-version="1.0.0",
  case.study.familyTree.run;bundle-version="0.0.1",
- case.study.pledge.model;bundle-version="1.0.0"
+ case.study.pledge.model;bundle-version="1.0.0",
+ org.apache.commons.cli;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j
 Automatic-Module-Name: casw.study.pledge.run

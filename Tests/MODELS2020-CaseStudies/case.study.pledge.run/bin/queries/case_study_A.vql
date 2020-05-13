@@ -318,19 +318,18 @@ pattern x_inv48(p : Physical_Person) {
 
 //inv49-OclKindOf-handled by multiplicity
 @Constraint(message = "inv49", severity = "error", key = {lur})
-pattern inv49(lur : Legal_Union_Record) {
-    neg find x_inv49_1(lur);
+pattern inv49_A(lur : Legal_Union_Record) {
+	Legal_Union_Record.individual_A(lur, i);
+	Legal_Union_Record.individual_B(lur, i);
 }
-pattern x_inv49_1(lur : Legal_Union_Record) {
-	Legal_Union_Record.individual_A(lur, iA);
-	Legal_Union_Record.individual_B(lur, iB);
-    Tax_Payer(iA);
-    Physical_Person(iB);
-    neg find x_inv49_2(iB);
-    iA != iB;
-}
-pattern x_inv49_2(iB: Dependent) {
-    Dependent(iB);
+//inv49-OclKindOf-handled by multiplicity
+@Constraint(message = "inv49", severity = "error", key = {lur})
+pattern inv49_B(lur : Legal_Union_Record) {
+	Legal_Union_Record.individual_A(lur, i);
+	Dependent(i);
+} or {
+	Legal_Union_Record.individual_B(lur, i);
+	Dependent(i);
 }
 
 //inv50-MultiplicityChecked

@@ -22,9 +22,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.Statistics;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -32,26 +30,25 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 
 @SuppressWarnings("all")
 public class GenerateFromConfig {
-  private static final int SIZE_LB = 20;
+  private static final int SIZE_LB = 200;
   
-  private static final int SIZE_UB = 20;
+  private static final int SIZE_UB = 200;
   
   private static final int SIZE_MUL = 1;
   
   private static final int SIZE_INC = 5;
   
-  private static int REPS = 5;
+  private static int REPS = 3;
   
-  private static final int RUNTIME = 2100;
+  private static final int RUNTIME = 600;
   
-  private static final String DOMAIN = "Satellite";
+  private static final String DOMAIN = "FamilyTree";
   
   private static final boolean QUERIES = true;
   
@@ -83,7 +80,7 @@ public class GenerateFromConfig {
       final Date date = new Date(_currentTimeMillis);
       final SimpleDateFormat format = new SimpleDateFormat("dd-HHmm");
       String _format = format.format(date);
-      final String formattedDate = ((GenerateFromConfig.DOMAIN + "-") + _format);
+      final String formattedDate = ((GenerateFromConfig.DOMAIN + "/") + _format);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("output/");
       String _plus = (_builder.toString() + formattedDate);
@@ -145,67 +142,51 @@ public class GenerateFromConfig {
               indiv_writer.append(header);
             }
             InputOutput.println();
-            InputOutput.<String>println(((("DOMAIN: " + GenerateFromConfig.DOMAIN) + ", SIZE=") + Integer.valueOf(size)));
-            for (int i = 0; (i < GenerateFromConfig.REPS); i++) {
-              {
-                InputOutput.<String>print((("<<Run number " + Integer.valueOf(i)) + ">> : "));
-                final ArrayList<Integer> knownIntegers = new ArrayList<Integer>();
-                CollectionExtensions.<Integer>addAll(knownIntegers, Integer.valueOf(0), Integer.valueOf(10), Integer.valueOf(20), Integer.valueOf(30), Integer.valueOf(40), Integer.valueOf(50));
-                final ArrayList<BigDecimal> knownReals = new ArrayList<BigDecimal>();
-                BigDecimal _bigDecimal = new BigDecimal("0.0");
-                CollectionExtensions.<BigDecimal>addAll(knownReals, _bigDecimal);
-                final ArrayList<String> knownStrings = new ArrayList<String>();
-                CollectionExtensions.<String>addAll(knownStrings, "r0", "r1", "r2", "r3", "r4", "r5", "r6");
-                final String outputPath = (((((("output/" + formattedDate) + "/size") + Integer.valueOf(size)) + "/run") + Integer.valueOf(i)) + "/models/");
-                final String debugPath = (((((("output/" + formattedDate) + "/size") + Integer.valueOf(size)) + "/run") + Integer.valueOf(i)) + "/debug/");
-                final String logPath = (debugPath + "log.txt");
-                final String statsPath = (debugPath + "statistics.csv");
-                Command _get = config.getCommands().get(0);
-                final GenerationTask genTask = ((GenerationTask) _get);
-                if ((!GenerateFromConfig.QUERIES)) {
-                  genTask.setPatterns(null);
-                }
-                if ((!GenerateFromConfig.INITIAL)) {
-                  genTask.setPartialModel(null);
-                }
-                Scope _scope = genTask.getScope();
-                final ScopeSpecification scopeSpec = ((ScopeSpecification) _scope);
-                TypeScope _get_1 = scopeSpec.getScopes().get(0);
-                final ObjectTypeScope objScope = ((ObjectTypeScope) _get_1);
-                NumberSpecification _number = objScope.getNumber();
-                final IntervallNumber interval = ((IntervallNumber) _number);
-                interval.setMin(size);
-                interval.setMaxUnlimited(true);
-                Config _config = genTask.getConfig();
-                final ConfigSpecification configScope = ((ConfigSpecification) _config);
-                ConfigEntry _get_2 = configScope.getEntries().get(0);
-                final RuntimeEntry runtimeEntry = ((RuntimeEntry) _get_2);
-                runtimeEntry.setMillisecLimit(GenerateFromConfig.RUNTIME);
-                File _debugFolder = genTask.getDebugFolder();
-                final FileSpecification debug = ((FileSpecification) _debugFolder);
-                debug.setPath(debugPath);
-                File _tagetFolder = genTask.getTagetFolder();
-                final FileSpecification output = ((FileSpecification) _tagetFolder);
-                output.setPath(outputPath);
-                File _targetLogFile = genTask.getTargetLogFile();
-                final FileSpecification log = ((FileSpecification) _targetLogFile);
-                log.setPath(logPath);
-                File _targetStatisticsFile = genTask.getTargetStatisticsFile();
-                final FileSpecification stats = ((FileSpecification) _targetStatisticsFile);
-                stats.setPath(statsPath);
-                final long startTime = System.currentTimeMillis();
-                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                executor.executeScript(config, _nullProgressMonitor);
-                long _currentTimeMillis_1 = System.currentTimeMillis();
-                final long measuredTime = (_currentTimeMillis_1 - startTime);
-                InputOutput.<String>println((("<<END ->" + Double.valueOf((measuredTime / 1000.0))) + "s >>\n"));
-                final Runtime r = Runtime.getRuntime();
-                r.gc();
-                r.gc();
-                r.gc();
-                Thread.sleep(3000);
-              }
+            InputOutput.<String>println((((("<<DOMAIN: " + GenerateFromConfig.DOMAIN) + ", SIZE=") + Integer.valueOf(size)) + ">>"));
+            final String outputPath = (((("output/" + formattedDate) + "/size") + Integer.valueOf(size)) + "/models/");
+            final String debugPath = (((("output/" + formattedDate) + "/size") + Integer.valueOf(size)) + "/debug/");
+            final String logPath = (debugPath + "log.txt");
+            final String statsPath = (debugPath + "statistics.csv");
+            Command _get = config.getCommands().get(0);
+            final GenerationTask genTask = ((GenerationTask) _get);
+            if ((!GenerateFromConfig.QUERIES)) {
+              genTask.setPatterns(null);
             }
+            if ((!GenerateFromConfig.INITIAL)) {
+              genTask.setPartialModel(null);
+            }
+            genTask.setRuns(GenerateFromConfig.REPS);
+            Scope _scope = genTask.getScope();
+            final ScopeSpecification scopeSpec = ((ScopeSpecification) _scope);
+            TypeScope _get_1 = scopeSpec.getScopes().get(0);
+            final ObjectTypeScope objScope = ((ObjectTypeScope) _get_1);
+            NumberSpecification _number = objScope.getNumber();
+            final IntervallNumber interval = ((IntervallNumber) _number);
+            interval.setMin(size);
+            interval.setMaxUnlimited(true);
+            Config _config = genTask.getConfig();
+            final ConfigSpecification configScope = ((ConfigSpecification) _config);
+            ConfigEntry _get_2 = configScope.getEntries().get(0);
+            final RuntimeEntry runtimeEntry = ((RuntimeEntry) _get_2);
+            runtimeEntry.setMillisecLimit(GenerateFromConfig.RUNTIME);
+            File _debugFolder = genTask.getDebugFolder();
+            final FileSpecification debug = ((FileSpecification) _debugFolder);
+            debug.setPath(debugPath);
+            File _tagetFolder = genTask.getTagetFolder();
+            final FileSpecification output = ((FileSpecification) _tagetFolder);
+            output.setPath(outputPath);
+            File _targetLogFile = genTask.getTargetLogFile();
+            final FileSpecification log = ((FileSpecification) _targetLogFile);
+            log.setPath(logPath);
+            File _targetStatisticsFile = genTask.getTargetStatisticsFile();
+            final FileSpecification stats = ((FileSpecification) _targetStatisticsFile);
+            stats.setPath(statsPath);
+            final long startTime = System.currentTimeMillis();
+            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+            executor.executeScript(config, _nullProgressMonitor);
+            long _currentTimeMillis_1 = System.currentTimeMillis();
+            final long measuredTime = (_currentTimeMillis_1 - startTime);
+            InputOutput.<String>println((("<<END ->" + Double.valueOf((measuredTime / 1000.0))) + "s >>\n"));
             if (GenerateFromConfig.INDIV_WRT) {
               indiv_writer.close();
             }

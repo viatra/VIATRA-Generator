@@ -1,4 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.communicationLinkDoesNotStartAtContainingElement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.transmittingGroundStationNetwork"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.roundStationNetworkUHF"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.notEnoughInterferometryPayloads"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.communicationLoop"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.incompatibleSourceAndTargetBand"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.threeUCubeSatWithNonUhfCrossLink"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.cubeSatWithKaAntenna"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.smallSat"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.differentFrequency"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighFrequencyForUHF"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowFrequencyForUHF"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighFrequencyForKaComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowFrequencyForKaComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighFrequencyForXComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowFrequencyForXComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighPathLengthForSatelite"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowPathLengthForSatelite"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowPathLengthForGroundStation"/>
+    </group>
+  </extension>
+  <extension id="queries.Case_study_A" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_A" id="queries.Case_study_A">
+      <query-specification fqn="queries.inv03"/>
+      <query-specification fqn="queries.x_inv03_eligAll"/>
+      <query-specification fqn="queries.x_inv03_hasAll"/>
+      <query-specification fqn="queries.inv05"/>
+      <query-specification fqn="queries.x_inv05_inRange"/>
+      <query-specification fqn="queries.inv06"/>
+      <query-specification fqn="queries.inv07"/>
+      <query-specification fqn="queries.inv08"/>
+      <query-specification fqn="queries.x_inv08_notEI"/>
+      <query-specification fqn="queries.x_inv08_noType"/>
+      <query-specification fqn="queries.x_inv08_inRange"/>
+      <query-specification fqn="queries.inv10"/>
+      <query-specification fqn="queries.inv11"/>
+      <query-specification fqn="queries.x_inv11_incOver100"/>
+      <query-specification fqn="queries.x_inv11_incNotOver100"/>
+      <query-specification fqn="queries.inv12"/>
+      <query-specification fqn="queries.x_inv12_notNonRes"/>
+      <query-specification fqn="queries.x_inv12_notZZ"/>
+      <query-specification fqn="queries.inv13"/>
+      <query-specification fqn="queries.x_inv13"/>
+      <query-specification fqn="queries.inv15"/>
+      <query-specification fqn="queries.x_inv15"/>
+      <query-specification fqn="queries.inv17"/>
+      <query-specification fqn="queries.inv20"/>
+      <query-specification fqn="queries.inv33"/>
+      <query-specification fqn="queries.inv34"/>
+      <query-specification fqn="queries.inv35"/>
+      <query-specification fqn="queries.inv47"/>
+      <query-specification fqn="queries.x_inv47"/>
+      <query-specification fqn="queries.inv48"/>
+      <query-specification fqn="queries.x_inv48"/>
+      <query-specification fqn="queries.inv49_A"/>
+      <query-specification fqn="queries.inv49_B"/>
+    </group>
+  </extension>
+  <extension id="queries.Case_study_A_withRoot" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_A_withRoot" id="queries.Case_study_A_withRoot">
+      <query-specification fqn="queries.inv03"/>
+      <query-specification fqn="queries.x_inv03_eligAll"/>
+      <query-specification fqn="queries.x_inv03_hasAll"/>
+      <query-specification fqn="queries.inv05"/>
+      <query-specification fqn="queries.x_inv05_inRange"/>
+      <query-specification fqn="queries.inv06"/>
+      <query-specification fqn="queries.inv07"/>
+      <query-specification fqn="queries.inv08"/>
+      <query-specification fqn="queries.x_inv08_notEI"/>
+      <query-specification fqn="queries.x_inv08_noType"/>
+      <query-specification fqn="queries.x_inv08_inRange"/>
+      <query-specification fqn="queries.inv10"/>
+      <query-specification fqn="queries.inv11"/>
+      <query-specification fqn="queries.x_inv11_incOver100"/>
+      <query-specification fqn="queries.x_inv11_incNotOver100"/>
+      <query-specification fqn="queries.inv12"/>
+      <query-specification fqn="queries.x_inv12_notNonRes"/>
+      <query-specification fqn="queries.x_inv12_notZZ"/>
+      <query-specification fqn="queries.inv13"/>
+      <query-specification fqn="queries.x_inv13"/>
+      <query-specification fqn="queries.inv15"/>
+      <query-specification fqn="queries.x_inv15"/>
+      <query-specification fqn="queries.inv17"/>
+      <query-specification fqn="queries.inv20"/>
+      <query-specification fqn="queries.inv33"/>
+      <query-specification fqn="queries.inv34"/>
+      <query-specification fqn="queries.inv35"/>
+      <query-specification fqn="queries.inv47"/>
+      <query-specification fqn="queries.x_inv47"/>
+      <query-specification fqn="queries.inv48"/>
+      <query-specification fqn="queries.x_inv48"/>
+      <query-specification fqn="queries.inv49_A"/>
+      <query-specification fqn="queries.inv49_B"/>
+    </group>
+  </extension>
+  <extension id="queries.Case_study_short" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_short" id="queries.Case_study_short">
+      <query-specification fqn="queries.inv48"/>
+      <query-specification fqn="queries.x_inv48"/>
+    </group>
+  </extension>
   <extension id="queries.FamilyTreeConstraints" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.FamilyTreeConstraints" id="queries.FamilyTreeConstraints">
       <query-specification fqn="queries.memberIsItsOwnParent"/>

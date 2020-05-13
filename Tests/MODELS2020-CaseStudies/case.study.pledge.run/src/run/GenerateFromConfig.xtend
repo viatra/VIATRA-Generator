@@ -48,15 +48,15 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.runtime.api.IQueryGroup
 
 class GenerateFromConfig {
-	static val SIZE_LB = 20
-	static val SIZE_UB = 20
+	static val SIZE_LB = 200
+	static val SIZE_UB = 200
 	static val SIZE_MUL = 1
 	static val SIZE_INC = 5
 
-	static var REPS = 5
-	static val RUNTIME = 2100
+	static var REPS = 3
+	static val RUNTIME = 600
 
-	static val DOMAIN = "Satellite" // "FamilyTree", "Taxation", "Satellite"
+	static val DOMAIN = "FamilyTree" // "FamilyTree", "Taxation", "Satellite"
 	static val QUERIES = true
 	static val INITIAL = true
 	static val INDIV_WRT = false
@@ -69,7 +69,7 @@ class GenerateFromConfig {
 		// Workspace setup
 		val Date date = new Date(System.currentTimeMillis)
 		val SimpleDateFormat format = new SimpleDateFormat("dd-HHmm");
-		val formattedDate = DOMAIN + "-" + format.format(date)
+		val formattedDate = DOMAIN + "/" + format.format(date)
 
 		val workspace = new FileSystemWorkspace('''output/''' + formattedDate + '''/''', "")
 		workspace.initAndClear
@@ -106,60 +106,59 @@ class GenerateFromConfig {
 			}
 
 			println()
-			println("DOMAIN: " + DOMAIN + ", SIZE=" + size)
+			println("<<DOMAIN: " + DOMAIN + ", SIZE=" + size + ">>")
 
-			for (var i = 0; i < REPS; i++) {
+//			for (var i = 0; i < REPS; i++) {
+//
+//				print("<<Run number " + i + ">> : ")
+			// /////////////////////////////////////////////////////
+			// Define Config File	
+//			val knownIntegers = new ArrayList<Integer>
+//			knownIntegers.addAll(0, 10, 20, 30, 40, 50)
+//
+//			val knownReals = new ArrayList<BigDecimal>
+//			knownReals.addAll(new BigDecimal("0.0"))
+//
+//			val knownStrings = new ArrayList<String>
+//			knownStrings.addAll("r0", "r1", "r2", "r3", "r4", "r5", "r6")
 
-				print("<<Run number " + i + ">> : ")
+			val outputPath = "output/" + formattedDate + "/size" + size + "/models/"
+			val debugPath = "output/" + formattedDate + "/size" + size + "/debug/"
+			val logPath = debugPath + "log.txt"
+			val statsPath = debugPath + "statistics.csv"
 
+			// Adjust configuration
+			val genTask = config.commands.get(0) as GenerationTask
+			if(!QUERIES) genTask.patterns = null
+			if(!INITIAL) genTask.partialModel = null
+			genTask.runs = REPS
 
-				// /////////////////////////////////////////////////////
-				// Define Config File	
-				val knownIntegers = new ArrayList<Integer>
-				knownIntegers.addAll(0, 10, 20, 30, 40, 50)
+			val scopeSpec = genTask.scope as ScopeSpecification
+			val objScope = scopeSpec.scopes.get(0) as ObjectTypeScope
+			val interval = objScope.number as IntervallNumber
+			interval.min = size
+			interval.maxUnlimited = true
 
-				val knownReals = new ArrayList<BigDecimal>
-				knownReals.addAll(new BigDecimal("0.0"))
+			val configScope = genTask.config as ConfigSpecification
+			val runtimeEntry = configScope.entries.get(0) as RuntimeEntry
+			runtimeEntry.millisecLimit = RUNTIME
 
-				val knownStrings = new ArrayList<String>
-				knownStrings.addAll("r0", "r1", "r2", "r3", "r4", "r5", "r6")
-
-				val outputPath = "output/" + formattedDate + "/size" + size + "/run" + i + "/models/"
-				val debugPath = "output/" + formattedDate + "/size" + size + "/run" + i + "/debug/"
-				val logPath = debugPath + "log.txt"
-				val statsPath = debugPath + "statistics.csv"
-
-				// Adjust configuration
-				val genTask = config.commands.get(0) as GenerationTask
-				if(!QUERIES) genTask.patterns = null
-				if(!INITIAL) genTask.partialModel = null
-
-				val scopeSpec = genTask.scope as ScopeSpecification
-				val objScope = scopeSpec.scopes.get(0) as ObjectTypeScope
-				val interval = objScope.number as IntervallNumber
-				interval.min = size
-				interval.maxUnlimited = true
-
-				val configScope = genTask.config as ConfigSpecification
-				val runtimeEntry = configScope.entries.get(0) as RuntimeEntry
-				runtimeEntry.millisecLimit = RUNTIME
-
-				// TODO add known ints, reals, string...
-				val debug = genTask.debugFolder as FileSpecification
-				debug.path = debugPath
-				val output = genTask.tagetFolder as FileSpecification
-				output.path = outputPath
-				val log = genTask.targetLogFile as FileSpecification
-				log.path = logPath
-				val stats = genTask.targetStatisticsFile as FileSpecification
-				stats.path = statsPath
+			// TODO add known ints, reals, string...
+			val debug = genTask.debugFolder as FileSpecification
+			debug.path = debugPath
+			val output = genTask.tagetFolder as FileSpecification
+			output.path = outputPath
+			val log = genTask.targetLogFile as FileSpecification
+			log.path = logPath
+			val stats = genTask.targetStatisticsFile as FileSpecification
+			stats.path = statsPath
 
 //				workspace.writeModel(config, '''x.xmi''')
-				val startTime = System.currentTimeMillis
-				executor.executeScript(config, new NullProgressMonitor)
-				val measuredTime = System.currentTimeMillis - startTime
+			val startTime = System.currentTimeMillis
+			executor.executeScript(config, new NullProgressMonitor)
+			val measuredTime = System.currentTimeMillis - startTime
 
-				println("<<END ->" + measuredTime / 1000.0 + "s >>\n")
+			println("<<END ->" + measuredTime / 1000.0 + "s >>\n")
 
 //				val toAddtoCSV = DOMAIN + "," + QUERIES + "," + size + "," +
 //					(solution.class == ModelResultImpl).toString + "," + RUNTIME + "," + measuredTime / 1000.0 + "," +
@@ -169,13 +168,13 @@ class GenerateFromConfig {
 //				if(GLOBAL_WRT) global_writer.append(toAddtoCSV)
 //				if(INDIV_WRT) indiv_writer.append(toAddtoCSV)
 //				solution.writeStats(totalTime, solverConfig)
-				// Run Garbage Collector
-				val Runtime r = Runtime.getRuntime();
-				r.gc();
-				r.gc();
-				r.gc();
-				Thread.sleep(3000)
-			}
+			// Run Garbage Collector
+//				val Runtime r = Runtime.getRuntime();
+//				r.gc();
+//				r.gc();
+//				r.gc();
+//				Thread.sleep(3000)
+//			}
 			if(INDIV_WRT) indiv_writer.close
 		}
 		if(GLOBAL_WRT) global_writer.close
