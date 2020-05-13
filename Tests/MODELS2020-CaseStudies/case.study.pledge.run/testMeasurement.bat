@@ -10,5 +10,8 @@ REM java -jar generator.jar -d FamilyTree -s 250 -rt 900
 REM java -jar generator.jar -d TaxationWithRoot -s 100 -n 5 
 REM java -jar generator.jar -d TaxationNoRoot -s 100 -n 5 
 
-java -jar generator.jar -d TaxationNoRoot -s 200 -rt 600 -n 6
+REM java -jar generator.jar -d TaxationNoRoot -s 200 -rt 600 -n 6
 REM java -jar generator.jar -d TaxationNoRoot -s 250 -n 3
+
+java -jar generator.jar -d TaxationWithRoot -s 200 -n 5
+java -jar generator.jar -d TaxationNoRoot -s 250 -n 3

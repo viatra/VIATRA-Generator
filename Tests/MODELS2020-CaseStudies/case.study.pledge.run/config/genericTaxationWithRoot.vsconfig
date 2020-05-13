@@ -28,7 +28,8 @@ generate {
 	partial-model = { "inputs/Resource.xmi" }
 	solver = ViatraSolver
 	scope = {
-		#node = 70..*
+		#node = 70..*,
+		#<Household> = 4
 	}
 	
 	config = {
