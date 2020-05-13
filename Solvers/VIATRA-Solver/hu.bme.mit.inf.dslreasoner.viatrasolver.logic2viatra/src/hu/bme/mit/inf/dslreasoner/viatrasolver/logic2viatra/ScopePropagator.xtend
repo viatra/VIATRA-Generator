@@ -75,7 +75,8 @@ class ScopePropagator {
 		if(this.partialInterpretation.maxNewElements > 0) {
 			this.partialInterpretation.maxNewElements = this.partialInterpretation.maxNewElements-1
 		} else if(this.partialInterpretation.maxNewElements === 0) {
-			throw new IllegalArgumentException('''Inconsistent object creation: lower node limit is 0!''')
+			this.partialInterpretation.maxNewElements = 0
+			//throw new IllegalArgumentException('''Inconsistent object creation: lower node limit is 0!''')
 		}
 		
 //		subScopes.get(targetScope).forEach[propagateUpperLimitDown(it,targetScope)]
