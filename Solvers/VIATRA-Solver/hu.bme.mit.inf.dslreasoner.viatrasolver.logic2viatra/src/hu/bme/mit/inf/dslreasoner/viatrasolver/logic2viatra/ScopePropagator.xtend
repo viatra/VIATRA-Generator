@@ -148,7 +148,8 @@ class ScopePropagator {
 	}
 	private def removeOne(Scope scope) {
 		if(scope.maxNewElements===0) {
-			throw new IllegalArgumentException('''Inconsistent object creation: «scope.targetTypeInterpretation»''')
+			scope.maxNewElements=0
+			//throw new IllegalArgumentException('''Inconsistent object creation: «scope.targetTypeInterpretation»''')
 		} else if(scope.maxNewElements>0) {
 			scope.maxNewElements= scope.maxNewElements-1
 		}
