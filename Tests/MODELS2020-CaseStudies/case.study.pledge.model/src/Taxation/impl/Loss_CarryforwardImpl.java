@@ -4,6 +4,7 @@ package Taxation.impl;
 
 import Taxation.Loss_Carryforward;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

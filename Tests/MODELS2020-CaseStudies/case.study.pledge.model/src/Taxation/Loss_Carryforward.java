@@ -14,5 +14,4 @@ package Taxation;
  * @generated
  */
 public interface Loss_Carryforward extends Special_Expense_DS {
-
 } // Loss_Carryforward

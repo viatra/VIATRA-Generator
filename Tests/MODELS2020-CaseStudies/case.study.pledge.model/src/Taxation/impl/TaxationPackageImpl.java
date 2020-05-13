@@ -71,6 +71,7 @@ import Taxation.TaxationPackage;
 import Taxation.Town;
 import Taxation.Trade_and_Business_Income;
 import Taxation.Travel_Expense_FD;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;

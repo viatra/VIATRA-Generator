@@ -1,6 +1,6 @@
 /**
  */
-package Taxation;
+package TaxationWithRoot;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,87 +10,109 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Type of Rate</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Tax Class Category</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see Taxation.TaxationPackage#getType_of_Rate()
+ * @see TaxationWithRoot.TaxationPackage#getTax_Class_Category()
  * @model
  * @generated
  */
-public enum Type_of_Rate implements Enumerator {
+public enum Tax_Class_Category implements Enumerator {
 	/**
-	 * The '<em><b>REGULAR</b></em>' literal object.
+	 * The '<em><b>One</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REGULAR_VALUE
+	 * @see #ONE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	REGULAR(0, "REGULAR", "REGULAR"),
+	ONE(0, "One", "One"),
 
 	/**
-	 * The '<em><b>REAL COST</b></em>' literal object.
+	 * The '<em><b>One A</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REAL_COST_VALUE
+	 * @see #ONE_A_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	REAL_COST(1, "REAL_COST", "REAL_COST");
+	ONE_A(1, "One_A", "One_A"),
 
 	/**
-	 * The '<em><b>REGULAR</b></em>' literal value.
+	 * The '<em><b>Two</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REGULAR
-	 * @model
+	 * @see #TWO_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REGULAR_VALUE = 0;
+	TWO(2, "Two", "Two");
 
 	/**
-	 * The '<em><b>REAL COST</b></em>' literal value.
+	 * The '<em><b>One</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REAL_COST
-	 * @model
+	 * @see #ONE
+	 * @model name="One"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REAL_COST_VALUE = 1;
+	public static final int ONE_VALUE = 0;
 
 	/**
-	 * An array of all the '<em><b>Type of Rate</b></em>' enumerators.
+	 * The '<em><b>One A</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ONE_A
+	 * @model name="One_A"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ONE_A_VALUE = 1;
+
+	/**
+	 * The '<em><b>Two</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TWO
+	 * @model name="Two"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TWO_VALUE = 2;
+
+	/**
+	 * An array of all the '<em><b>Tax Class Category</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final Type_of_Rate[] VALUES_ARRAY =
-		new Type_of_Rate[] {
-			REGULAR,
-			REAL_COST,
+	private static final Tax_Class_Category[] VALUES_ARRAY =
+		new Tax_Class_Category[] {
+			ONE,
+			ONE_A,
+			TWO,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Type of Rate</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Tax Class Category</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<Type_of_Rate> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<Tax_Class_Category> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Type of Rate</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Tax Class Category</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Type_of_Rate get(String literal) {
+	public static Tax_Class_Category get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Type_of_Rate result = VALUES_ARRAY[i];
+			Tax_Class_Category result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -99,16 +121,16 @@ public enum Type_of_Rate implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Type of Rate</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Tax Class Category</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param name the name.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Type_of_Rate getByName(String name) {
+	public static Tax_Class_Category getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Type_of_Rate result = VALUES_ARRAY[i];
+			Tax_Class_Category result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -117,17 +139,18 @@ public enum Type_of_Rate implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Type of Rate</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Tax Class Category</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Type_of_Rate get(int value) {
+	public static Tax_Class_Category get(int value) {
 		switch (value) {
-			case REGULAR_VALUE: return REGULAR;
-			case REAL_COST_VALUE: return REAL_COST;
+			case ONE_VALUE: return ONE;
+			case ONE_A_VALUE: return ONE_A;
+			case TWO_VALUE: return TWO;
 		}
 		return null;
 	}
@@ -159,7 +182,7 @@ public enum Type_of_Rate implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Type_of_Rate(int value, String name, String literal) {
+	private Tax_Class_Category(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -206,4 +229,4 @@ public enum Type_of_Rate implements Enumerator {
 		return literal;
 	}
 	
-} //Type_of_Rate
+} //Tax_Class_Category

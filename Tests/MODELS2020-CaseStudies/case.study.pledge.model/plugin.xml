@@ -10,4 +10,12 @@
                                                   uri="http:///TaxCard.ecore">
                                             </package>
                                          </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TaxationWithRoot -->
+      <package
+            uri="http:///TaxCardWithRoot.ecore"
+            class="TaxationWithRoot.TaxationPackage"
+            genModel="model/TaxationWithRoot.genmodel"/>
+   </extension>
+
 </plugin>

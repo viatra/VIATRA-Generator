@@ -14,5 +14,4 @@ package Taxation;
  * @generated
  */
 public interface FO extends Professional_Expenses_Deduction {
-
 } // FO

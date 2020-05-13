@@ -4,6 +4,7 @@ package Taxation.impl;
 
 import Taxation.FO;
 import Taxation.TaxationPackage;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

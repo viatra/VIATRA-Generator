@@ -1,6 +1,6 @@
 /**
  */
-package Taxation;
+package TaxationWithRoot;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,87 +10,153 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Tax Card Type</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Town</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see Taxation.TaxationPackage#getTax_Card_Type()
+ * @see TaxationWithRoot.TaxationPackage#getTown()
  * @model
  * @generated
  */
-public enum Tax_Card_Type implements Enumerator {
+public enum Town implements Enumerator {
 	/**
-	 * The '<em><b>Principal</b></em>' literal object.
+	 * The '<em><b>LL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #PRINCIPAL_VALUE
+	 * @see #LL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	PRINCIPAL(0, "Principal", "Principal"),
+	LL(0, "LL", "LL"),
 
 	/**
-	 * The '<em><b>Additional</b></em>' literal object.
+	 * The '<em><b>BB</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ADDITIONAL_VALUE
+	 * @see #BB_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ADDITIONAL(1, "Additional", "Additional");
+	BB(1, "BB", "BB"),
 
 	/**
-	 * The '<em><b>Principal</b></em>' literal value.
+	 * The '<em><b>SS</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #PRINCIPAL
-	 * @model name="Principal"
+	 * @see #SS_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRINCIPAL_VALUE = 0;
+	SS(2, "SS", "SS"),
 
 	/**
-	 * The '<em><b>Additional</b></em>' literal value.
+	 * The '<em><b>TT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ADDITIONAL
-	 * @model name="Additional"
+	 * @see #TT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ADDITIONAL_VALUE = 1;
+	TT(3, "TT", "TT"),
 
 	/**
-	 * An array of all the '<em><b>Tax Card Type</b></em>' enumerators.
+	 * The '<em><b>Other</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OTHER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	OTHER(4, "Other", "Other");
+
+	/**
+	 * The '<em><b>LL</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LL
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LL_VALUE = 0;
+
+	/**
+	 * The '<em><b>BB</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BB
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BB_VALUE = 1;
+
+	/**
+	 * The '<em><b>SS</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SS
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SS_VALUE = 2;
+
+	/**
+	 * The '<em><b>TT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TT_VALUE = 3;
+
+	/**
+	 * The '<em><b>Other</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OTHER
+	 * @model name="Other"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OTHER_VALUE = 4;
+
+	/**
+	 * An array of all the '<em><b>Town</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final Tax_Card_Type[] VALUES_ARRAY =
-		new Tax_Card_Type[] {
-			PRINCIPAL,
-			ADDITIONAL,
+	private static final Town[] VALUES_ARRAY =
+		new Town[] {
+			LL,
+			BB,
+			SS,
+			TT,
+			OTHER,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Tax Card Type</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Town</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<Tax_Card_Type> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<Town> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Tax Card Type</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Town</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Tax_Card_Type get(String literal) {
+	public static Town get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Tax_Card_Type result = VALUES_ARRAY[i];
+			Town result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -99,16 +165,16 @@ public enum Tax_Card_Type implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Tax Card Type</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Town</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param name the name.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Tax_Card_Type getByName(String name) {
+	public static Town getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Tax_Card_Type result = VALUES_ARRAY[i];
+			Town result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -117,17 +183,20 @@ public enum Tax_Card_Type implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Tax Card Type</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Town</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static Tax_Card_Type get(int value) {
+	public static Town get(int value) {
 		switch (value) {
-			case PRINCIPAL_VALUE: return PRINCIPAL;
-			case ADDITIONAL_VALUE: return ADDITIONAL;
+			case LL_VALUE: return LL;
+			case BB_VALUE: return BB;
+			case SS_VALUE: return SS;
+			case TT_VALUE: return TT;
+			case OTHER_VALUE: return OTHER;
 		}
 		return null;
 	}
@@ -159,7 +228,7 @@ public enum Tax_Card_Type implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Tax_Card_Type(int value, String name, String literal) {
+	private Town(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -206,4 +275,4 @@ public enum Tax_Card_Type implements Enumerator {
 		return literal;
 	}
 	
-} //Tax_Card_Type
+} //Town
