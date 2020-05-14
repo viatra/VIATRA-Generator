@@ -17,7 +17,7 @@ class StatisticsData {
 }
 
 class StatisticSections2CSV {
-	static val separator = ';'
+	static val separator = '\t'
 	static val empty = ""
 	
 	private def getValue(Map<String, String> map,String key) {
