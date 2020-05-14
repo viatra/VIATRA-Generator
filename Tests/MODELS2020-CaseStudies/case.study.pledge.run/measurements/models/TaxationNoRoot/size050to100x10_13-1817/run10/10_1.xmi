@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCard:Household xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCard="http:///TaxCard.ecore" xsi:schemaLocation="http:///TaxCard.ecore ../case.study.pledge.model/model/Taxation.ecore">
+  <parents xsi:type="TaxCard:Partnership_Record" start_year="1950" end_year="1951" separation_cause="DIVORCE">
+    <individual_A disability_type="C"/>
+    <individual_B birth_year="1918" birth_day="1"/>
+    <properties id10=""/>
+    <properties/>
+    <properties/>
+  </parents>
+</TaxCard:Household>

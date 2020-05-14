@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains xsi:type="TaxCardWithRoot:Household">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" separation_cause="SEPARATION_BY_COURT">
+      <individual_A disability_type="D"/>
+      <individual_B disability_type="E"/>
+      <properties/>
+    </parents>
+  </contains>
+  <contains xsi:type="TaxCardWithRoot:Household">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" separation_cause="DIVORCE">
+      <individual_A disability_type="E"/>
+      <individual_B/>
+      <properties/>
+      <properties/>
+    </parents>
+  </contains>
+  <contains xsi:type="TaxCardWithRoot:Household">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" separation_cause="SEPARATION_DE_FAIT">
+      <individual_A disability_type="E"/>
+      <individual_B birth_year="1918" birth_day="1"/>
+      <properties/>
+      <properties/>
+    </parents>
+  </contains>
+  <contains xsi:type="TaxCardWithRoot:CIS" grantedBy="MMM"/>
+  <contains xsi:type="TaxCardWithRoot:FO"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Donation" id3=""/>
+  <contains xsi:type="TaxCardWithRoot:CIP" grantedBy="UUU"/>
+  <contains xsi:type="TaxCardWithRoot:DS_for_Loss_Carryforward"/>
+</TaxCardWithRoot:Resource>

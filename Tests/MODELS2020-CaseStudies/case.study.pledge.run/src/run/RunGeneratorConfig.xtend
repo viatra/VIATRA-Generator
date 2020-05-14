@@ -1,18 +1,17 @@
 package run
 
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ClassTypeScope
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
-import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ExactNumber
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.FileSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.IntervallNumber
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ModelEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectTypeScope
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor
-import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.text.SimpleDateFormat
 import java.util.Date
 import org.apache.commons.cli.BasicParser
@@ -23,13 +22,11 @@ import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 import org.apache.commons.cli.ParseException
 import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class RunGeneratorConfig {
 	static var SIZE_LB = 20
 	static var SIZE_UB = -1
-	static var HOUSEHOLD = -1
+	static var HOUSEHOLD = 0
 
 	static var RUNS = 10
 	static var RUNTIME = 900
@@ -39,6 +36,10 @@ class RunGeneratorConfig {
 	static val INITIAL = true
 
 	def static void main(String[] args) {
+//		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
+//		val workspace = new FileSystemWorkspace('''x/''', "")
+//		workspace.initAndClear
+		
 		val options = new Options()
 
 		val lb = new Option("lb", "lowerBound", true, "generated model Lower bound")
@@ -101,7 +102,8 @@ class RunGeneratorConfig {
 		if (DOMAIN == "TaxationWithRoot") {
 			println("<<Households: " + HOUSEHOLD + ">>")
 		}
-		println()
+		
+		
 		
 		val naming = DOMAIN + "/size" + toStr(SIZE_LB) + "to" + toStr(SIZE_UB) + "x" + RUNS
 		
@@ -128,15 +130,18 @@ class RunGeneratorConfig {
 			interval.maxUnlimited = false
 			interval.maxNumber = SIZE_UB
 		}
+//		workspace.writeModel(config, '''x.xmi''')
+		
+		
 
 		if (DOMAIN == "TaxationWithRoot") {
-			if (HOUSEHOLD == -1) {
-				scopeSpec.scopes.remove(1)
-			} else {
-				val clsScope = scopeSpec.scopes.get(1) as ClassTypeScope
-				val num = clsScope.number as ExactNumber
-				num.exactNumber = HOUSEHOLD
-			}
+			if (HOUSEHOLD > 0) {
+				val pms = genTask.partialModel as PartialModelSpecification
+				val me = pms.entry.get(0) as ModelEntry
+				val fs = me.path as FileSpecification
+				fs.path = "inputs/Resource" + HOUSEHOLD + "hh.xmi"
+				println("<<Using " + fs.path + " as initial model>>")
+			} 
 		}
 
 		// Runtime
@@ -155,6 +160,7 @@ class RunGeneratorConfig {
 		stats.path = statsPath
 
 		// Run Generator
+		println()
 		executor.executeScript(config, new NullProgressMonitor)
 
 		println()
