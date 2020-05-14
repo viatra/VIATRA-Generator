@@ -87,6 +87,13 @@ class SolverLoader {
 						]
 					} catch (NumberFormatException e) {console.writeError('''Malformed number format: «e.message»''')}
 				}
+				if(config.containsKey("numeric-solver-at-end")) {
+					val stringValue = config.get("numeric-solver-at-end")
+					if(stringValue.equals("true")) {
+						println("numeric-solver-at-end")
+						c.runIntermediateNumericalConsistencyChecks= false
+					}
+				}
 			]
 		} else {
 			throw new UnsupportedOperationException('''Unknown solver: «solver»''')

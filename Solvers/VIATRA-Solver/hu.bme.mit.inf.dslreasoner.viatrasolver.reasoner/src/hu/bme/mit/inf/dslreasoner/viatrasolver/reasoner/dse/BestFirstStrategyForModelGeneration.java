@@ -91,6 +91,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private int numberOfPrintedModel = 0;
 	private int numberOfSolverCalls = 0;
 	
+	public long explorationStarted = 0;
 
 	public BestFirstStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
@@ -119,7 +120,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		
 //		ViatraQueryEngine engine = context.getQueryEngine();
 //		// TODO: visualisation
-//		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
+//		LinkedList<ViatraQueryMatcher<? extends IPatternMatch>> matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
 //		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
 //			//System.out.println(p.getSimpleName());
 //			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
@@ -137,13 +138,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			}
 		};
 		
-		this.numericSolver = new NumericSolver(context, method, false);
+		this.numericSolver = new NumericSolver(context, method, false,this.configuration.runIntermediateNumericalConsistencyChecks);
 
 		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 	}
 
 	@Override
 	public void explore() {
+		this.explorationStarted=System.nanoTime();
 		if (!context.checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
 			return;

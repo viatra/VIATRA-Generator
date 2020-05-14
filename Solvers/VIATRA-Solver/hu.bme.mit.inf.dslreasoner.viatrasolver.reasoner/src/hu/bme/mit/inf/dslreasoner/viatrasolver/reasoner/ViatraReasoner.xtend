@@ -113,8 +113,9 @@ class ViatraReasoner extends LogicReasoner{
 		
 		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
 		viatraConfig.progressMonitor.workedForwardTransformation
+		val transformationFinished = System.nanoTime 
+		val transformationTime = transformationFinished - transformationStartTime
 		
-		val transformationTime = System.nanoTime - transformationStartTime
 		val solverStartTime = System.nanoTime
 		
 		var boolean stoppedByTimeout
@@ -140,6 +141,9 @@ class ViatraReasoner extends LogicReasoner{
 					it.value = (strategy.solutionStoreWithCopy.allRuntimes.get(x)/1000000) as int
 				]
 			}
+			it.entries += createIntStatisticEntry => [
+				it.name = "ExplorationInitializationTime" it.value = ((strategy.explorationStarted-transformationFinished)/1000000) as int
+			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "TransformationExecutionTime" it.value = (method.statistics.transformationExecutionTime/1000000) as int
 			]

@@ -45,6 +45,8 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	 * Configuration for cutting search space.
 	 */
 	 public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
+	 
+	 public var runIntermediateNumericalConsistencyChecks = true
 }
 
 public class DiversityDescriptor {
