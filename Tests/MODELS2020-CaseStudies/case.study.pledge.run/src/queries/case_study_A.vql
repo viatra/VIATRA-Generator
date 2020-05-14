@@ -182,22 +182,40 @@ pattern x_inv13(tp : Resident_Tax_Payer) {
 
 //inv15-Ordered Sets in assignment if block
 //ERROR if no household object
+//@Constraint(message = "inv15", severity = "error", key = {ea})
+//pattern inv15(ea : External_Allowance) {
+//	neg find x_inv15(ea);
+//}
+//pattern x_inv15(ea : External_Allowance) {
+//    External_Allowance.person(ea, child);
+//    Household.children(h, child);//only one due to multiplicity
+//    Household.parents.individual_A(h, iA);
+//    Tax_Payer(iA);
+//    External_Allowance.reciver(ea, iA);
+//} or {
+//    External_Allowance.person(ea, child);
+//    Household.children(h, child);//only one due to multiplicity
+//    Household.parents.individual_B(h, iB);
+//    Tax_Payer(iB);
+//    External_Allowance.reciver(ea, iB);
+//}
+
 @Constraint(message = "inv15", severity = "error", key = {ea})
 pattern inv15(ea : External_Allowance) {
-	neg find x_inv15(ea);
-}
-pattern x_inv15(ea : External_Allowance) {
-    External_Allowance.person(ea, child);
+	External_Allowance.person(ea, child);
     Household.children(h, child);//only one due to multiplicity
-    Household.parents.individual_A(h, iA);
-    Tax_Payer(iA);
-    External_Allowance.reciver(ea, iA);
+	External_Allowance.reciver(ea, i);
+	Tax_Payer(i);
+	neg find x_inv15(h, i);
 } or {
-    External_Allowance.person(ea, child);
-    Household.children(h, child);//only one due to multiplicity
-    Household.parents.individual_B(h, iB);
-    Tax_Payer(iB);
-    External_Allowance.reciver(ea, iB);
+	External_Allowance.reciver(ea, i);
+	Dependent(i);
+}
+
+pattern x_inv15(h : Household, i : Tax_Payer) {
+    Household.parents.individual_A(h, i);
+} or {
+	Household.parents.individual_B(h, i);
 }
 
 //inv16-Tax_Card.tax_card_type is a derived feature

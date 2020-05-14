@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<familytree:FamilyTree xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:familytree="http://www.example.org/familytree" xsi:schemaLocation="http://www.example.org/familytree ../case.study.familyTree.model/model/familytree.ecore">
+  <members age="13" children="//@members.3" parents="//@members.1 //@members.5"/>
+  <members age="26" children="//@members.0 //@members.2 //@members.7" parents="//@members.5 //@members.8"/>
+  <members parents="//@members.1 //@members.8"/>
+  <members parents="//@members.0 //@members.4"/>
+  <members age="52" children="//@members.3 //@members.5 //@members.6 //@members.9" parents="//@members.8"/>
+  <members age="39" children="//@members.0 //@members.1 //@members.7 //@members.9" parents="//@members.4 //@members.8"/>
+  <members parents="//@members.4"/>
+  <members parents="//@members.1 //@members.5"/>
+  <members age="65" children="//@members.1 //@members.2 //@members.4 //@members.5"/>
+  <members parents="//@members.4 //@members.5"/>
+</familytree:FamilyTree>
