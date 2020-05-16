@@ -137,8 +137,14 @@ class ViatraReasoner extends LogicReasoner{
 			it.transformationTime = (transformationTime/1000000) as int
 			for(x : 0..<strategy.solutionStoreWithCopy.allRuntimes.size) {
 				it.entries += createIntStatisticEntry => [
-					it.name = '''_Solution«x»FoundAt'''
+					it.name = '''Solution«x+1»FoundAt'''
 					it.value = (strategy.solutionStoreWithCopy.allRuntimes.get(x)/1000000) as int
+				]
+			}
+			for(x: 0..<strategy.times.size) {
+				it.entries += createStringStatisticEntry => [
+					it.name = '''Solution«x+1»DetailedStatistics'''
+					it.value = strategy.times.get(x)
 				]
 			}
 			it.entries += createIntStatisticEntry => [

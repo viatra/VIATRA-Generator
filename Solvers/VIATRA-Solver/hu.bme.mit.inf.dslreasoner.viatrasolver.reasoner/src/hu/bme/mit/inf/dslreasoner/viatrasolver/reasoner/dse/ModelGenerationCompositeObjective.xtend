@@ -6,6 +6,7 @@ import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.dse.objectives.Comparators
 import org.eclipse.viatra.dse.objectives.IObjective
 import org.eclipse.viatra.dse.objectives.impl.BaseObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 
 //class ViatraReasonerNumbers {
 //	public static val scopePriority = 2
@@ -26,6 +27,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 	val ScopeObjective scopeObjective
 	val List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives
 	val UnfinishedWFObjective unfinishedWFObjective
+	var PartialInterpretation model=null;
 	
 	public new(
 		ScopeObjective scopeObjective,
@@ -38,6 +40,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 	}
 	
 	override init(ThreadContext context) {
+		model = context.model as PartialInterpretation
 		this.scopeObjective.init(context)
 		this.unfinishedMultiplicityObjectives.forEach[it.init(context)]
 		this.unfinishedWFObjective.init(context)
@@ -64,11 +67,15 @@ class ModelGenerationCompositeObjective implements IObjective{
 				nonContainmentMultiplicity+=multiplicityObjective.getFitness(context)
 			}
 		}
+		val size = 0.9/model.newElements.size
 		var sum = 0.0
 		sum += scopeFitnes
-		sum += containmentMultiplicity
-		sum += Math.sqrt(nonContainmentMultiplicity)
-		sum += unfinishedWFsFitness//*0.5
+		sum += containmentMultiplicity*2
+		sum += nonContainmentMultiplicity
+		sum += unfinishedWFsFitness
+		sum+=size
+		
+		
 		
 		//println('''Sum=«sum»|Scope=«scopeFitnes»|ContainmentMultiplicity=«containmentMultiplicity»|NonContainmentMultiplicity=«nonContainmentMultiplicity»|WFs=«unfinishedWFsFitness»''')
 		
@@ -79,7 +86,7 @@ class ModelGenerationCompositeObjective implements IObjective{
 	override getName() { "CompositeUnfinishednessObjective"}
 	
 	override isHardObjective() { true }
-	override satisifiesHardObjective(Double fitness) { fitness <= 0.001 }
+	override satisifiesHardObjective(Double fitness) { fitness < 0.95 }
 	
 	
 	override setComparator(Comparator<Double> comparator) {

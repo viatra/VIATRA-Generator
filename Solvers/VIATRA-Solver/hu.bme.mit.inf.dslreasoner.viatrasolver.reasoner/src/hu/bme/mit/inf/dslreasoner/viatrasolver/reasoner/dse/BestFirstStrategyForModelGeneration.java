@@ -44,6 +44,7 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericProblemSolver;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedPartialInterpretationStateCoder;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
@@ -112,7 +113,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
 	}
-
+	//LinkedList<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	@Override
 	public void initStrategy(ThreadContext context) {
 		this.context = context;
@@ -120,7 +121,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		
 //		ViatraQueryEngine engine = context.getQueryEngine();
 //		// TODO: visualisation
-//		LinkedList<ViatraQueryMatcher<? extends IPatternMatch>> matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
+//		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
 //		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
 //			//System.out.println(p.getSimpleName());
 //			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
@@ -213,12 +214,11 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
-//					System.out.println(matcher.getPatternName());
-//					System.out.println("---------");
-//					for(IPatternMatch m : matcher.getAllMatches()) {
-//						System.out.println(m);
+//					int c = matcher.countMatches();
+//					if(c>=100) {
+//						System.out.println(c+ " " +matcher.getPatternName());
 //					}
-//					System.out.println("---------");
+//					
 //				}
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
@@ -292,11 +292,30 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 					solutionStoreWithDiversityDescriptor.newSolution(context);
 					solutionStore.newSolution(context);
 					configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
-
+					saveTimes();
 					logger.debug("Found a solution.");
 				}
 			}
 		}
+	}
+	public List<String> times = new LinkedList<String>();
+	private void saveTimes() {
+		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
+		long solutionCopy = solutionStoreWithCopy.getSumRuntime()/1000000;
+		long activationSelection = this.activationSelector.getRuntime()/1000000;
+		long numericalSolverSumTime = this.numericSolver.getRuntime()/1000000;
+		long numericalSolverProblemForming = this.numericSolver.getSolverSolvingProblem()/1000000;
+		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
+		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
+		this.times.add(
+			"(StateCoderTime:"+statecoderTime+
+			"|SolutionCopyTime:"+solutionCopy+
+			"|ActivationSelectionTime:"+activationSelection+
+			"|NumericalSolverSumTime:"+numericalSolverSumTime+
+			"|NumericalSolverProblemFormingTime:"+numericalSolverProblemForming+
+			"|NumericalSolverSolvingTime:"+numericalSolverSolving+
+			"|NumericalSolverInterpretingSolution:"+numericalSolverInterpreting+")");
+		
 	}
 
 	@Override
