@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ASCII"?>
+<familytree:FamilyTree xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:familytree="http://www.example.org/familytree" xsi:schemaLocation="http://www.example.org/familytree ../case.study.familyTree.model/model/familytree.ecore">
+  <members children="//@members.29" parents="//@members.3 //@members.17"/>
+  <members age="195" children="//@members.4 //@members.16 //@members.47" parents="//@members.22 //@members.25"/>
+  <members parents="//@members.13 //@members.47"/>
+  <members age="91" children="//@members.0 //@members.8 //@members.10 //@members.14 //@members.38 //@members.45" parents="//@members.21 //@members.46"/>
+  <members age="182" children="//@members.13 //@members.16 //@members.17 //@members.27 //@members.36 //@members.43" parents="//@members.1 //@members.25"/>
+  <members children="//@members.39 //@members.43 //@members.49" parents="//@members.21 //@members.38"/>
+  <members parents="//@members.30 //@members.36"/>
+  <members children="//@members.15 //@members.32" parents="//@members.12 //@members.30"/>
+  <members parents="//@members.3 //@members.16"/>
+  <members parents="//@members.18"/>
+  <members children="//@members.31 //@members.35" parents="//@members.3 //@members.45"/>
+  <members children="//@members.47" parents="//@members.12 //@members.41"/>
+  <members age="130" children="//@members.7 //@members.11 //@members.21 //@members.28 //@members.33 //@members.38 //@members.46" parents="//@members.17 //@members.30"/>
+  <members children="//@members.2" parents="//@members.4 //@members.46"/>
+  <members parents="//@members.3 //@members.27"/>
+  <members parents="//@members.7 //@members.45"/>
+  <members age="169" children="//@members.8 //@members.17 //@members.23 //@members.30" parents="//@members.1 //@members.4"/>
+  <members age="156" children="//@members.0 //@members.12 //@members.23 //@members.30 //@members.37" parents="//@members.4 //@members.16"/>
+  <members age="221" children="//@members.9 //@members.25" parents="//@members.22"/>
+  <members parents="//@members.24 //@members.49"/>
+  <members parents="//@members.23 //@members.46"/>
+  <members age="104" children="//@members.3 //@members.5 //@members.24 //@members.35" parents="//@members.12 //@members.46"/>
+  <members age="234" children="//@members.1 //@members.18 //@members.25"/>
+  <members children="//@members.20 //@members.34" parents="//@members.16 //@members.17"/>
+  <members age="65" children="//@members.19 //@members.33" parents="//@members.21 //@members.45"/>
+  <members age="208" children="//@members.1 //@members.4 //@members.31" parents="//@members.18 //@members.22"/>
+  <members children="//@members.32" parents="//@members.30 //@members.42"/>
+  <members age="13" children="//@members.14 //@members.39 //@members.40" parents="//@members.4 //@members.28"/>
+  <members children="//@members.27 //@members.44" parents="//@members.12 //@members.30"/>
+  <members parents="//@members.0 //@members.38"/>
+  <members age="143" children="//@members.6 //@members.7 //@members.12 //@members.26 //@members.28 //@members.41 //@members.45 //@members.46" parents="//@members.16 //@members.17"/>
+  <members children="//@members.48" parents="//@members.10 //@members.25"/>
+  <members parents="//@members.7 //@members.26"/>
+  <members age="52" children="//@members.34 //@members.40 //@members.42" parents="//@members.12 //@members.24"/>
+  <members age="39" children="//@members.42 //@members.44" parents="//@members.23 //@members.33"/>
+  <members children="//@members.37" parents="//@members.10 //@members.21"/>
+  <members children="//@members.6" parents="//@members.4 //@members.44"/>
+  <members parents="//@members.17 //@members.35"/>
+  <members children="//@members.5 //@members.29 //@members.41 //@members.49" parents="//@members.3 //@members.12"/>
+  <members parents="//@members.5 //@members.27"/>
+  <members parents="//@members.27 //@members.33"/>
+  <members children="//@members.11" parents="//@members.30 //@members.38"/>
+  <members children="//@members.26" parents="//@members.33 //@members.34"/>
+  <members parents="//@members.4 //@members.5"/>
+  <members age="26" children="//@members.36" parents="//@members.28 //@members.34"/>
+  <members age="78" children="//@members.10 //@members.15 //@members.24" parents="//@members.3 //@members.30"/>
+  <members age="117" children="//@members.3 //@members.13 //@members.20 //@members.21 //@members.48" parents="//@members.12 //@members.30"/>
+  <members children="//@members.2" parents="//@members.1 //@members.11"/>
+  <members parents="//@members.31 //@members.46"/>
+  <members children="//@members.19" parents="//@members.5 //@members.38"/>
+</familytree:FamilyTree>

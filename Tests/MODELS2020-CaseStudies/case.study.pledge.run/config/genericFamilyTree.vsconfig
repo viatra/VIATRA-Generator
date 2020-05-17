@@ -28,7 +28,7 @@ generate {
 	partial-model = { "inputs/FamilyTree.xmi" }
 	solver = ViatraSolver
 	scope = {
-		#node = 6..*
+		#node += 6..*
 	}
 	
 	config = {
@@ -37,6 +37,7 @@ generate {
 	}
 	
 	runs = 1
+	number = 10
 	
 	debug =			"outputs/debug"
 	log =			"outputs/log.txt"

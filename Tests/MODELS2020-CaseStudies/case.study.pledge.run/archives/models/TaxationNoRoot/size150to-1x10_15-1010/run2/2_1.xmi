@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCard:Household xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCard="http:///TaxCard.ecore" xsi:schemaLocation="http:///TaxCard.ecore ../case.study.pledge.model/model/Taxation.ecore">
+  <parents xsi:type="TaxCard:Marriage_Record" start_year="1950" end_year="1951" separation_cause="SEPARATION_BY_COURT">
+    <individual_A disability_type="D"/>
+    <individual_B disability_type="E"/>
+    <individual_B disability_type="B"/>
+    <individual_B/>
+    <individual_B xsi:type="TaxCard:Non_Resident_Tax_Payer" disability_type="A">
+      <from_agent/>
+      <incomes xsi:type="TaxCard:Local_Income">
+        <income_type xsi:type="TaxCard:Agriculture_and_Forestry_Income" id8=""/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+        <details/>
+      </incomes>
+      <from_law/>
+    </individual_B>
+    <properties/>
+    <properties/>
+  </parents>
+  <children disability_type="D" dependent_type="NOT_OWN_CHILD"/>
+  <children birth_year="1918" disability_type="OTHER" birth_day="1"/>
+  <children disability_type="NONE" dependent_type="RELATIVE"/>
+  <children disability_type="B"/>
+</TaxCard:Household>

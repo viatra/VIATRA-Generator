@@ -1,0 +1,12 @@
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;_Solution0FoundAt;ExplorationInitializationTime;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime;ActivationSelectionTime;NumericalSolverSumTime;NumericalSolverProblemFormingTime;NumericalSolverSolvingTime;NumericalSolverInterpretingSolution;NumericalSolverCachingTime;NumericalSolverCallNumber;NumericalSolverCachedAnswerNumber
+2;1;ModelResultImpl;1152;29049;297130;105;182052;84512;152722;29;582;0;12;0;1102;427;355;0;2;40;0
+2;2;ModelResultImpl;1152;31863;440705;73;308895;87722;252546;1;3061;0;7;0;1766;627;762;0;4;86;0
+2;3;ModelResultImpl;1152;28631;152050;418;52684;86820;47090;0;49;0;6;0;486;95;125;0;0;15;0
+2;4;ModelResultImpl;1152;28836;212155;135;109020;88576;89385;0;73;0;6;0;593;137;177;0;0;21;0
+2;5;ModelResultImpl;1152;27796;173413;27;71856;88046;62041;1;48;0;5;0;535;107;142;0;0;17;0
+2;6;ModelResultImpl;1152;27937;378791;315;258878;87508;209773;0;743;0;6;0;872;241;322;0;1;38;0
+2;7;ModelResultImpl;1152;30626;169142;32;67261;87677;59062;0;89;0;5;0;603;151;180;0;0;22;0
+2;8;ModelResultImpl;1152;28203;388817;48;256571;87356;217912;1;2076;0;5;0;1272;434;517;0;2;61;0
+2;9;ModelResultImpl;1152;28043;329855;31;220372;91679;172224;0;797;0;7;0;1223;365;468;0;2;54;0
+2;10;ModelResultImpl;1152;28230;345008;25;241900;89126;184068;0;575;0;5;0;902;266;343;0;1;42;0
+
