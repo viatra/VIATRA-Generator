@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="duplicates"
  * @generated
  */
-public interface Tax_Payer extends Physical_Person, Tax_Case, Root {
+public interface Tax_Payer extends Physical_Person, Tax_Case {
 	/**
 	 * Returns the value of the '<em><b>Dependents</b></em>' containment reference list.
 	 * The list contents are of type {@link TaxationWithRoot.Dependent}.

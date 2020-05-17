@@ -4,6 +4,8 @@ package TaxationWithRoot;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Address</b></em>'.
@@ -25,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Address extends Root {
+public interface Address extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Country</b></em>' attribute.
 	 * The default value is <code>"ZZ"</code>.

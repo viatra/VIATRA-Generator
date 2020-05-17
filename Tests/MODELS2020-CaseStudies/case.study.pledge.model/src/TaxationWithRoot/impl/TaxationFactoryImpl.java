@@ -87,16 +87,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 			case TaxationPackage.CIM: return createCIM();
 			case TaxationPackage.CIP: return createCIP();
 			case TaxationPackage.CIS: return createCIS();
-			case TaxationPackage.FD: return createFD();
-			case TaxationPackage.PROFESSIONAL_EXPENSES_DEDUCTION: return createProfessional_Expenses_Deduction();
-			case TaxationPackage.FO: return createFO();
-			case TaxationPackage.DS_FOR_PERMANENT_EXPENSE: return createDS_for_Permanent_Expense();
-			case TaxationPackage.DS: return createDS();
-			case TaxationPackage.DS_FOR_INTEREST_EXPENSE: return createDS_for_Interest_Expense();
-			case TaxationPackage.DS_FOR_HEALTH_AND_PENSION_INSURANCE: return createDS_for_Health_and_Pension_Insurance();
-			case TaxationPackage.DS_FOR_PRIVATE_INSURANCE_AND_PLAN: return createDS_for_Private_Insurance_and_Plan();
-			case TaxationPackage.DS_FOR_LOSS_CARRYFORWARD: return createDS_for_Loss_Carryforward();
-			case TaxationPackage.DS_FOR_DONATION: return createDS_for_Donation();
 			case TaxationPackage.PERMANENT_EXPENSE: return createPermanent_Expense();
 			case TaxationPackage.SPECIAL_EXPENSE_DS: return createSpecial_Expense_DS();
 			case TaxationPackage.INTEREST_EXPENSE: return createInterest_Expense();
@@ -529,116 +519,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 	public CIS createCIS() {
 		CISImpl cis = new CISImpl();
 		return cis;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FD createFD() {
-		FDImpl fd = new FDImpl();
-		return fd;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Professional_Expenses_Deduction createProfessional_Expenses_Deduction() {
-		Professional_Expenses_DeductionImpl professional_Expenses_Deduction = new Professional_Expenses_DeductionImpl();
-		return professional_Expenses_Deduction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FO createFO() {
-		FOImpl fo = new FOImpl();
-		return fo;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS_for_Permanent_Expense createDS_for_Permanent_Expense() {
-		DS_for_Permanent_ExpenseImpl dS_for_Permanent_Expense = new DS_for_Permanent_ExpenseImpl();
-		return dS_for_Permanent_Expense;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS createDS() {
-		DSImpl ds = new DSImpl();
-		return ds;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS_for_Interest_Expense createDS_for_Interest_Expense() {
-		DS_for_Interest_ExpenseImpl dS_for_Interest_Expense = new DS_for_Interest_ExpenseImpl();
-		return dS_for_Interest_Expense;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS_for_Health_and_Pension_Insurance createDS_for_Health_and_Pension_Insurance() {
-		DS_for_Health_and_Pension_InsuranceImpl dS_for_Health_and_Pension_Insurance = new DS_for_Health_and_Pension_InsuranceImpl();
-		return dS_for_Health_and_Pension_Insurance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS_for_Private_Insurance_and_Plan createDS_for_Private_Insurance_and_Plan() {
-		DS_for_Private_Insurance_and_PlanImpl dS_for_Private_Insurance_and_Plan = new DS_for_Private_Insurance_and_PlanImpl();
-		return dS_for_Private_Insurance_and_Plan;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS_for_Loss_Carryforward createDS_for_Loss_Carryforward() {
-		DS_for_Loss_CarryforwardImpl dS_for_Loss_Carryforward = new DS_for_Loss_CarryforwardImpl();
-		return dS_for_Loss_Carryforward;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DS_for_Donation createDS_for_Donation() {
-		DS_for_DonationImpl dS_for_Donation = new DS_for_DonationImpl();
-		return dS_for_Donation;
 	}
 
 	/**

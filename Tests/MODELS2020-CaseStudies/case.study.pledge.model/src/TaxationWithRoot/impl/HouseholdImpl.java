@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,7 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class HouseholdImpl extends RootImpl implements Household {
+public class HouseholdImpl extends MinimalEObjectImpl.Container implements Household {
 	/**
 	 * The cached value of the '{@link #getParents() <em>Parents</em>}' containment reference.
 	 * <!-- begin-user-doc -->

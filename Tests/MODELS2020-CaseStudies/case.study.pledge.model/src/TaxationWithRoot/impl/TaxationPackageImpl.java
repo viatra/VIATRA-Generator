@@ -11,12 +11,6 @@ import TaxationWithRoot.Category_of_Permanent_Expense;
 import TaxationWithRoot.Category_of_Private_Insurance_and_Plan;
 import TaxationWithRoot.Constants;
 import TaxationWithRoot.Country;
-import TaxationWithRoot.DS_for_Donation;
-import TaxationWithRoot.DS_for_Health_and_Pension_Insurance;
-import TaxationWithRoot.DS_for_Interest_Expense;
-import TaxationWithRoot.DS_for_Loss_Carryforward;
-import TaxationWithRoot.DS_for_Permanent_Expense;
-import TaxationWithRoot.DS_for_Private_Insurance_and_Plan;
 import TaxationWithRoot.Dependent;
 import TaxationWithRoot.Dependent_Type;
 import TaxationWithRoot.Disability_Types;
@@ -54,11 +48,9 @@ import TaxationWithRoot.Permanent_Expense;
 import TaxationWithRoot.Physical_Person;
 import TaxationWithRoot.Private_Insurance_and_Plan;
 import TaxationWithRoot.Professional_Expense;
-import TaxationWithRoot.Professional_Expenses_Deduction;
 import TaxationWithRoot.Rentals_and_Leases_Income;
 import TaxationWithRoot.Resident_Tax_Payer;
 import TaxationWithRoot.Resource;
-import TaxationWithRoot.Root;
 import TaxationWithRoot.Separation_Causes;
 import TaxationWithRoot.Special_Expense_DS;
 import TaxationWithRoot.Spousal_Expense_AC;
@@ -346,76 +338,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fdEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass professional_Expenses_DeductionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass foEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dS_for_Permanent_ExpenseEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dS_for_Interest_ExpenseEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dS_for_Health_and_Pension_InsuranceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dS_for_Private_Insurance_and_PlanEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dS_for_Loss_CarryforwardEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dS_for_DonationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass permanent_ExpenseEClass = null;
 
 	/**
@@ -501,13 +423,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	private EClass resourceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass rootEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2561,166 +2476,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	 * @generated
 	 */
 	@Override
-	public EClass getFD() {
-		return fdEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFD_Distance_declared_in_january() {
-		return (EAttribute)fdEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getProfessional_Expenses_Deduction() {
-		return professional_Expenses_DeductionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFO() {
-		return foEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS_for_Permanent_Expense() {
-		return dS_for_Permanent_ExpenseEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDS_for_Permanent_Expense_Permanent_expense_category() {
-		return (EAttribute)dS_for_Permanent_ExpenseEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS() {
-		return dsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDS_Maximum_deductible_amount() {
-		return (EAttribute)dsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDS_Id3() {
-		return (EAttribute)dsEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS_for_Interest_Expense() {
-		return dS_for_Interest_ExpenseEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS_for_Health_and_Pension_Insurance() {
-		return dS_for_Health_and_Pension_InsuranceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDS_for_Health_and_Pension_Insurance_Insurance_category() {
-		return (EAttribute)dS_for_Health_and_Pension_InsuranceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS_for_Private_Insurance_and_Plan() {
-		return dS_for_Private_Insurance_and_PlanEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDS_for_Private_Insurance_and_Plan_Private_insurance_and_plan_category() {
-		return (EAttribute)dS_for_Private_Insurance_and_PlanEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS_for_Loss_Carryforward() {
-		return dS_for_Loss_CarryforwardEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDS_for_Donation() {
-		return dS_for_DonationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getPermanent_Expense() {
 		return permanent_ExpenseEClass;
 	}
@@ -2943,16 +2698,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 	@Override
 	public EReference getResource_Contains() {
 		return (EReference)resourceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRoot() {
-		return rootEClass;
 	}
 
 	/**
@@ -3358,32 +3103,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 
 		cisEClass = createEClass(CIS);
 
-		fdEClass = createEClass(FD);
-		createEAttribute(fdEClass, FD__DISTANCE_DECLARED_IN_JANUARY);
-
-		professional_Expenses_DeductionEClass = createEClass(PROFESSIONAL_EXPENSES_DEDUCTION);
-
-		foEClass = createEClass(FO);
-
-		dS_for_Permanent_ExpenseEClass = createEClass(DS_FOR_PERMANENT_EXPENSE);
-		createEAttribute(dS_for_Permanent_ExpenseEClass, DS_FOR_PERMANENT_EXPENSE__PERMANENT_EXPENSE_CATEGORY);
-
-		dsEClass = createEClass(DS);
-		createEAttribute(dsEClass, DS__MAXIMUM_DEDUCTIBLE_AMOUNT);
-		createEAttribute(dsEClass, DS__ID3);
-
-		dS_for_Interest_ExpenseEClass = createEClass(DS_FOR_INTEREST_EXPENSE);
-
-		dS_for_Health_and_Pension_InsuranceEClass = createEClass(DS_FOR_HEALTH_AND_PENSION_INSURANCE);
-		createEAttribute(dS_for_Health_and_Pension_InsuranceEClass, DS_FOR_HEALTH_AND_PENSION_INSURANCE__INSURANCE_CATEGORY);
-
-		dS_for_Private_Insurance_and_PlanEClass = createEClass(DS_FOR_PRIVATE_INSURANCE_AND_PLAN);
-		createEAttribute(dS_for_Private_Insurance_and_PlanEClass, DS_FOR_PRIVATE_INSURANCE_AND_PLAN__PRIVATE_INSURANCE_AND_PLAN_CATEGORY);
-
-		dS_for_Loss_CarryforwardEClass = createEClass(DS_FOR_LOSS_CARRYFORWARD);
-
-		dS_for_DonationEClass = createEClass(DS_FOR_DONATION);
-
 		permanent_ExpenseEClass = createEClass(PERMANENT_EXPENSE);
 		createEAttribute(permanent_ExpenseEClass, PERMANENT_EXPENSE__CATEGORY);
 
@@ -3419,8 +3138,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 
 		resourceEClass = createEClass(RESOURCE);
 		createEReference(resourceEClass, RESOURCE__CONTAINS);
-
-		rootEClass = createEClass(ROOT);
 
 		// Create enums
 		grantorEEnum = createEEnum(GRANTOR);
@@ -3470,12 +3187,8 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		// Add supertypes to classes
 		tax_PayerEClass.getESuperTypes().add(this.getPhysical_Person());
 		tax_PayerEClass.getESuperTypes().add(this.getTax_Case());
-		tax_PayerEClass.getESuperTypes().add(this.getRoot());
-		addressEClass.getESuperTypes().add(this.getRoot());
 		dependentEClass.getESuperTypes().add(this.getPhysical_Person());
 		householdEClass.getESuperTypes().add(this.getTax_Case());
-		tax_CaseEClass.getESuperTypes().add(this.getRoot());
-		income_Tax_CreditEClass.getESuperTypes().add(this.getRoot());
 		fiscal_AddressEClass.getESuperTypes().add(this.getAddress());
 		habitual_AddressEClass.getESuperTypes().add(this.getAddress());
 		marriage_RecordEClass.getESuperTypes().add(this.getLegal_Union_Record());
@@ -3493,16 +3206,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		cimEClass.getESuperTypes().add(this.getIncome_Tax_Credit());
 		cipEClass.getESuperTypes().add(this.getIncome_Tax_Credit());
 		cisEClass.getESuperTypes().add(this.getIncome_Tax_Credit());
-		fdEClass.getESuperTypes().add(this.getProfessional_Expenses_Deduction());
-		professional_Expenses_DeductionEClass.getESuperTypes().add(this.getRoot());
-		foEClass.getESuperTypes().add(this.getProfessional_Expenses_Deduction());
-		dS_for_Permanent_ExpenseEClass.getESuperTypes().add(this.getDS());
-		dsEClass.getESuperTypes().add(this.getRoot());
-		dS_for_Interest_ExpenseEClass.getESuperTypes().add(this.getDS());
-		dS_for_Health_and_Pension_InsuranceEClass.getESuperTypes().add(this.getDS());
-		dS_for_Private_Insurance_and_PlanEClass.getESuperTypes().add(this.getDS());
-		dS_for_Loss_CarryforwardEClass.getESuperTypes().add(this.getDS());
-		dS_for_DonationEClass.getESuperTypes().add(this.getDS());
 		permanent_ExpenseEClass.getESuperTypes().add(this.getSpecial_Expense_DS());
 		special_Expense_DSEClass.getESuperTypes().add(this.getExpense());
 		interest_ExpenseEClass.getESuperTypes().add(this.getSpecial_Expense_DS());
@@ -3741,32 +3444,6 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 
 		initEClass(cisEClass, TaxationWithRoot.CIS.class, "CIS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(fdEClass, TaxationWithRoot.FD.class, "FD", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFD_Distance_declared_in_january(), ecorePackage.getEDouble(), "distance_declared_in_january", null, 1, 1, TaxationWithRoot.FD.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(professional_Expenses_DeductionEClass, Professional_Expenses_Deduction.class, "Professional_Expenses_Deduction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(foEClass, TaxationWithRoot.FO.class, "FO", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(dS_for_Permanent_ExpenseEClass, DS_for_Permanent_Expense.class, "DS_for_Permanent_Expense", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDS_for_Permanent_Expense_Permanent_expense_category(), this.getCategory_of_Permanent_Expense(), "permanent_expense_category", null, 1, 1, DS_for_Permanent_Expense.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dsEClass, TaxationWithRoot.DS.class, "DS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDS_Maximum_deductible_amount(), ecorePackage.getEDouble(), "maximum_deductible_amount", null, 1, 1, TaxationWithRoot.DS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDS_Id3(), ecorePackage.getEString(), "id3", null, 1, 1, TaxationWithRoot.DS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(dS_for_Interest_ExpenseEClass, DS_for_Interest_Expense.class, "DS_for_Interest_Expense", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(dS_for_Health_and_Pension_InsuranceEClass, DS_for_Health_and_Pension_Insurance.class, "DS_for_Health_and_Pension_Insurance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDS_for_Health_and_Pension_Insurance_Insurance_category(), this.getCategory_of_Health_and_Pension_Insurances(), "insurance_category", null, 1, 1, DS_for_Health_and_Pension_Insurance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dS_for_Private_Insurance_and_PlanEClass, DS_for_Private_Insurance_and_Plan.class, "DS_for_Private_Insurance_and_Plan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDS_for_Private_Insurance_and_Plan_Private_insurance_and_plan_category(), this.getCategory_of_Private_Insurance_and_Plan(), "private_insurance_and_plan_category", null, 1, 1, DS_for_Private_Insurance_and_Plan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dS_for_Loss_CarryforwardEClass, DS_for_Loss_Carryforward.class, "DS_for_Loss_Carryforward", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(dS_for_DonationEClass, DS_for_Donation.class, "DS_for_Donation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(permanent_ExpenseEClass, Permanent_Expense.class, "Permanent_Expense", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPermanent_Expense_Category(), this.getCategory_of_Permanent_Expense(), "category", null, 1, 1, Permanent_Expense.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3801,9 +3478,7 @@ public class TaxationPackageImpl extends EPackageImpl implements TaxationPackage
 		initEClass(miscellaneous_Expense_FOEClass, Miscellaneous_Expense_FO.class, "Miscellaneous_Expense_FO", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(resourceEClass, Resource.class, "Resource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getResource_Contains(), this.getRoot(), null, "contains", null, 0, -1, Resource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(rootEClass, Root.class, "Root", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getResource_Contains(), this.getHousehold(), null, "contains", null, 0, -1, Resource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(grantorEEnum, Grantor.class, "Grantor");

@@ -2,8 +2,8 @@
  */
 package TaxationWithRoot.impl;
 
+import TaxationWithRoot.Household;
 import TaxationWithRoot.Resource;
-import TaxationWithRoot.Root;
 import TaxationWithRoot.TaxationPackage;
 
 import java.util.Collection;
@@ -42,7 +42,7 @@ public class ResourceImpl extends MinimalEObjectImpl.Container implements Resour
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Root> contains;
+	protected EList<Household> contains;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,9 +69,9 @@ public class ResourceImpl extends MinimalEObjectImpl.Container implements Resour
 	 * @generated
 	 */
 	@Override
-	public EList<Root> getContains() {
+	public EList<Household> getContains() {
 		if (contains == null) {
-			contains = new EObjectContainmentEList<Root>(Root.class, this, TaxationPackage.RESOURCE__CONTAINS);
+			contains = new EObjectContainmentEList<Household>(Household.class, this, TaxationPackage.RESOURCE__CONTAINS);
 		}
 		return contains;
 	}
@@ -115,7 +115,7 @@ public class ResourceImpl extends MinimalEObjectImpl.Container implements Resour
 		switch (featureID) {
 			case TaxationPackage.RESOURCE__CONTAINS:
 				getContains().clear();
-				getContains().addAll((Collection<? extends Root>)newValue);
+				getContains().addAll((Collection<? extends Household>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

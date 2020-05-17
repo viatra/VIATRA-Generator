@@ -2,6 +2,8 @@
  */
 package TaxationWithRoot;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Tax Case</b></em>'.
@@ -12,5 +14,5 @@ package TaxationWithRoot;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface Tax_Case extends Root {
+public interface Tax_Case extends EObject {
 } // Tax_Case
