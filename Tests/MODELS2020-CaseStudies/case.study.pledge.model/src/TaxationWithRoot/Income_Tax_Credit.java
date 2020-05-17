@@ -2,6 +2,8 @@
  */
 package TaxationWithRoot;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Income Tax Credit</b></em>'.
@@ -25,7 +27,7 @@ package TaxationWithRoot;
  * @model
  * @generated
  */
-public interface Income_Tax_Credit extends Root {
+public interface Income_Tax_Credit extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Granted By</b></em>' attribute.
 	 * The literals are from the enumeration {@link TaxationWithRoot.Grantor}.

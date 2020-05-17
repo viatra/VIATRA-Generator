@@ -1,0 +1,51 @@
+package queries
+
+import "http:///TaxCard.ecore"
+
+//inv47-attributes-handled by multiplicity
+//@Constraint(message = "inv47", severity = "error", key = {lur})
+//pattern inv47(lur : Legal_Union_Record) {
+//    Legal_Union_Record.end_year(lur, endY);
+//    Legal_Union_Record.start_year(lur, startY);
+//    neg find x_inv47(lur);
+//    check(startY >= endY);
+//} or {
+//	Legal_Union_Record.end_year(lur, endY);
+//    Legal_Union_Record.start_year(lur, startY);
+//    check(endY!= -1);
+//    check(startY >= endY);
+//}
+//pattern x_inv47(lur : Legal_Union_Record) {
+//    Legal_Union_Record.separation_cause(lur, ::NONE);
+//}
+//
+////inv17-attribute-handled by multiplicity
+//@Constraint(message = "inv17", severity = "error", key = {lur})
+//pattern inv17(lur : Legal_Union_Record) {
+//    Legal_Union_Record.start_year(lur, sy);
+//    check(sy < 1950);
+//} or {
+//	Legal_Union_Record.start_year(lur, sy);
+//	check(sy > 2018);
+//}
+
+////inv48-attributes-handled by multiplicity
+@Constraint(message = "inv48", severity = "error", key = {p})
+pattern inv48(p : Physical_Person) {
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer > 1.0);
+} or {
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer < 0.0);
+} or {
+   Physical_Person.disability_type(p, ::NONE);
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer != 0.0);
+} or {
+  neg find x_inv48(p);
+  Physical_Person.disability_percentage(p, disPer);
+  check(disPer == 0.0);
+}
+pattern x_inv48(p : Physical_Person) {
+    Physical_Person.disability_type(p, ::NONE);
+}

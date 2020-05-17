@@ -212,46 +212,6 @@ public class TaxationAdapterFactory extends AdapterFactoryImpl {
 				return createCISAdapter();
 			}
 			@Override
-			public Adapter caseFD(FD object) {
-				return createFDAdapter();
-			}
-			@Override
-			public Adapter caseProfessional_Expenses_Deduction(Professional_Expenses_Deduction object) {
-				return createProfessional_Expenses_DeductionAdapter();
-			}
-			@Override
-			public Adapter caseFO(FO object) {
-				return createFOAdapter();
-			}
-			@Override
-			public Adapter caseDS_for_Permanent_Expense(DS_for_Permanent_Expense object) {
-				return createDS_for_Permanent_ExpenseAdapter();
-			}
-			@Override
-			public Adapter caseDS(DS object) {
-				return createDSAdapter();
-			}
-			@Override
-			public Adapter caseDS_for_Interest_Expense(DS_for_Interest_Expense object) {
-				return createDS_for_Interest_ExpenseAdapter();
-			}
-			@Override
-			public Adapter caseDS_for_Health_and_Pension_Insurance(DS_for_Health_and_Pension_Insurance object) {
-				return createDS_for_Health_and_Pension_InsuranceAdapter();
-			}
-			@Override
-			public Adapter caseDS_for_Private_Insurance_and_Plan(DS_for_Private_Insurance_and_Plan object) {
-				return createDS_for_Private_Insurance_and_PlanAdapter();
-			}
-			@Override
-			public Adapter caseDS_for_Loss_Carryforward(DS_for_Loss_Carryforward object) {
-				return createDS_for_Loss_CarryforwardAdapter();
-			}
-			@Override
-			public Adapter caseDS_for_Donation(DS_for_Donation object) {
-				return createDS_for_DonationAdapter();
-			}
-			@Override
 			public Adapter casePermanent_Expense(Permanent_Expense object) {
 				return createPermanent_ExpenseAdapter();
 			}
@@ -302,10 +262,6 @@ public class TaxationAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseResource(Resource object) {
 				return createResourceAdapter();
-			}
-			@Override
-			public Adapter caseRoot(Root object) {
-				return createRootAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -832,146 +788,6 @@ public class TaxationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.FD <em>FD</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.FD
-	 * @generated
-	 */
-	public Adapter createFDAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.Professional_Expenses_Deduction <em>Professional Expenses Deduction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.Professional_Expenses_Deduction
-	 * @generated
-	 */
-	public Adapter createProfessional_Expenses_DeductionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.FO <em>FO</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.FO
-	 * @generated
-	 */
-	public Adapter createFOAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS_for_Permanent_Expense <em>DS for Permanent Expense</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS_for_Permanent_Expense
-	 * @generated
-	 */
-	public Adapter createDS_for_Permanent_ExpenseAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS <em>DS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS
-	 * @generated
-	 */
-	public Adapter createDSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS_for_Interest_Expense <em>DS for Interest Expense</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS_for_Interest_Expense
-	 * @generated
-	 */
-	public Adapter createDS_for_Interest_ExpenseAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS_for_Health_and_Pension_Insurance <em>DS for Health and Pension Insurance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS_for_Health_and_Pension_Insurance
-	 * @generated
-	 */
-	public Adapter createDS_for_Health_and_Pension_InsuranceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS_for_Private_Insurance_and_Plan <em>DS for Private Insurance and Plan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS_for_Private_Insurance_and_Plan
-	 * @generated
-	 */
-	public Adapter createDS_for_Private_Insurance_and_PlanAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS_for_Loss_Carryforward <em>DS for Loss Carryforward</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS_for_Loss_Carryforward
-	 * @generated
-	 */
-	public Adapter createDS_for_Loss_CarryforwardAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.DS_for_Donation <em>DS for Donation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.DS_for_Donation
-	 * @generated
-	 */
-	public Adapter createDS_for_DonationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.Permanent_Expense <em>Permanent Expense</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1150,20 +966,6 @@ public class TaxationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link TaxationWithRoot.Root <em>Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see TaxationWithRoot.Root
-	 * @generated
-	 */
-	public Adapter createRootAdapter() {
 		return null;
 	}
 

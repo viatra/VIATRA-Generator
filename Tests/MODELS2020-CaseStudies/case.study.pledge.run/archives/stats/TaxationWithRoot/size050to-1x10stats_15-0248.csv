@@ -1,0 +1,12 @@
+Task;Run;Result;Domain to logic transformation time;Logic to solver transformation time;Solver time;Postprocessing time;ExplorationInitializationTime;TransformationExecutionTime;TypeAnalysisTime;StateCoderTime;StateCoderFailCount;SolutionCopyTime;ActivationSelectionTime;NumericalSolverSumTime;NumericalSolverProblemFormingTime;NumericalSolverSolvingTime;NumericalSolverInterpretingSolution;NumericalSolverCachingTime;NumericalSolverCallNumber;NumericalSolverCachedAnswerNumber
+2;1;InsuficientResourcesResultImpl;1183;33097;916944;0;78681;631595;188;833;0;0;1;1056;437;386;0;2;49;0
+2;2;InsuficientResourcesResultImpl;1183;29947;941306;0;84229;643185;1;1130;0;0;1;987;371;397;0;2;52;0
+2;3;InsuficientResourcesResultImpl;1183;28651;922352;0;83923;627043;0;1374;0;0;0;887;308;375;0;2;48;0
+2;4;InsuficientResourcesResultImpl;1183;29268;904841;0;84233;620531;0;1006;0;0;0;939;307;418;0;2;47;0
+2;5;InsuficientResourcesResultImpl;1183;28743;921119;0;84192;624570;0;1436;0;0;0;1099;409;472;0;2;60;0
+2;6;InsuficientResourcesResultImpl;1183;28417;918463;0;83516;630165;0;1195;0;0;0;920;324;388;0;1;50;0
+2;7;InsuficientResourcesResultImpl;1183;28554;913770;0;86757;622606;0;756;0;0;0;901;317;376;0;1;49;0
+2;8;InsuficientResourcesResultImpl;1183;28160;918976;0;85156;629034;0;1316;0;0;0;1077;341;407;0;1;51;0
+2;9;InsuficientResourcesResultImpl;1183;28918;914326;0;85103;624591;0;793;0;0;0;864;285;344;0;1;45;0
+2;10;InsuficientResourcesResultImpl;1183;28023;920387;0;86570;624683;0;1335;0;0;0;884;301;374;0;1;48;0
+

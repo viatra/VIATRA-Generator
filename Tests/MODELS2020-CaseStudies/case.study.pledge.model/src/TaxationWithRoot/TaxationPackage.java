@@ -630,34 +630,6 @@ public interface TaxationPackage extends EPackage {
 	int TAX_PAYER_OPERATION_COUNT = PHYSICAL_PERSON_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.RootImpl <em>Root</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.RootImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getRoot()
-	 * @generated
-	 */
-	int ROOT = 59;
-
-	/**
-	 * The number of structural features of the '<em>Root</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Root</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link TaxationWithRoot.impl.AddressImpl <em>Address</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -674,7 +646,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS__COUNTRY = ROOT_FEATURE_COUNT + 0;
+	int ADDRESS__COUNTRY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Street</b></em>' attribute.
@@ -683,7 +655,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS__STREET = ROOT_FEATURE_COUNT + 1;
+	int ADDRESS__STREET = 1;
 
 	/**
 	 * The feature id for the '<em><b>Zip Code</b></em>' attribute.
@@ -692,7 +664,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS__ZIP_CODE = ROOT_FEATURE_COUNT + 2;
+	int ADDRESS__ZIP_CODE = 2;
 
 	/**
 	 * The feature id for the '<em><b>City</b></em>' attribute.
@@ -701,7 +673,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS__CITY = ROOT_FEATURE_COUNT + 3;
+	int ADDRESS__CITY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Id2</b></em>' attribute.
@@ -710,7 +682,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS__ID2 = ROOT_FEATURE_COUNT + 4;
+	int ADDRESS__ID2 = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tax Payer</b></em>' reference list.
@@ -719,7 +691,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS__TAX_PAYER = ROOT_FEATURE_COUNT + 5;
+	int ADDRESS__TAX_PAYER = 5;
 
 	/**
 	 * The number of structural features of the '<em>Address</em>' class.
@@ -728,7 +700,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_FEATURE_COUNT = ROOT_FEATURE_COUNT + 6;
+	int ADDRESS_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Address</em>' class.
@@ -737,7 +709,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_OPERATION_COUNT = ROOT_OPERATION_COUNT + 0;
+	int ADDRESS_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.impl.ExpenseImpl <em>Expense</em>}' class.
@@ -1101,7 +1073,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CASE_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
+	int TAX_CASE_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Tax Case</em>' class.
@@ -1110,7 +1082,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CASE_OPERATION_COUNT = ROOT_OPERATION_COUNT + 0;
+	int TAX_CASE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.impl.HouseholdImpl <em>Household</em>}' class.
@@ -1901,7 +1873,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__GRANTED_BY = ROOT_FEATURE_COUNT + 0;
+	int INCOME_TAX_CREDIT__GRANTED_BY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Tax Payer</b></em>' reference.
@@ -1910,7 +1882,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__TAX_PAYER = ROOT_FEATURE_COUNT + 1;
+	int INCOME_TAX_CREDIT__TAX_PAYER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Tax year</b></em>' attribute.
@@ -1919,7 +1891,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__TAX_YEAR = ROOT_FEATURE_COUNT + 2;
+	int INCOME_TAX_CREDIT__TAX_YEAR = 2;
 
 	/**
 	 * The feature id for the '<em><b>Yearly</b></em>' attribute.
@@ -1928,7 +1900,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__YEARLY = ROOT_FEATURE_COUNT + 3;
+	int INCOME_TAX_CREDIT__YEARLY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Monthly</b></em>' attribute.
@@ -1937,7 +1909,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__MONTHLY = ROOT_FEATURE_COUNT + 4;
+	int INCOME_TAX_CREDIT__MONTHLY = 4;
 
 	/**
 	 * The feature id for the '<em><b>Daily</b></em>' attribute.
@@ -1946,7 +1918,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__DAILY = ROOT_FEATURE_COUNT + 5;
+	int INCOME_TAX_CREDIT__DAILY = 5;
 
 	/**
 	 * The feature id for the '<em><b>Id7</b></em>' attribute.
@@ -1955,7 +1927,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__ID7 = ROOT_FEATURE_COUNT + 6;
+	int INCOME_TAX_CREDIT__ID7 = 6;
 
 	/**
 	 * The feature id for the '<em><b>Taxation Frame</b></em>' reference.
@@ -1964,7 +1936,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT__TAXATION_FRAME = ROOT_FEATURE_COUNT + 7;
+	int INCOME_TAX_CREDIT__TAXATION_FRAME = 7;
 
 	/**
 	 * The number of structural features of the '<em>Income Tax Credit</em>' class.
@@ -1973,7 +1945,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT_FEATURE_COUNT = ROOT_FEATURE_COUNT + 8;
+	int INCOME_TAX_CREDIT_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Income Tax Credit</em>' class.
@@ -1982,7 +1954,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TAX_CREDIT_OPERATION_COUNT = ROOT_OPERATION_COUNT + 0;
+	int INCOME_TAX_CREDIT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.impl.Income_DetailImpl <em>Income Detail</em>}' class.
@@ -3597,448 +3569,6 @@ public interface TaxationPackage extends EPackage {
 	int CIS_OPERATION_COUNT = INCOME_TAX_CREDIT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.Professional_Expenses_DeductionImpl <em>Professional Expenses Deduction</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.Professional_Expenses_DeductionImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getProfessional_Expenses_Deduction()
-	 * @generated
-	 */
-	int PROFESSIONAL_EXPENSES_DEDUCTION = 37;
-
-	/**
-	 * The number of structural features of the '<em>Professional Expenses Deduction</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Professional Expenses Deduction</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROFESSIONAL_EXPENSES_DEDUCTION_OPERATION_COUNT = ROOT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.FDImpl <em>FD</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.FDImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getFD()
-	 * @generated
-	 */
-	int FD = 36;
-
-	/**
-	 * The feature id for the '<em><b>Distance declared in january</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FD__DISTANCE_DECLARED_IN_JANUARY = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>FD</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FD_FEATURE_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>FD</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FD_OPERATION_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.FOImpl <em>FO</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.FOImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getFO()
-	 * @generated
-	 */
-	int FO = 38;
-
-	/**
-	 * The number of structural features of the '<em>FO</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FO_FEATURE_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>FO</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FO_OPERATION_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DSImpl <em>DS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DSImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS()
-	 * @generated
-	 */
-	int DS = 40;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS__MAXIMUM_DEDUCTIBLE_AMOUNT = ROOT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS__ID3 = ROOT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>DS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FEATURE_COUNT = ROOT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>DS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_OPERATION_COUNT = ROOT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DS_for_Permanent_ExpenseImpl <em>DS for Permanent Expense</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DS_for_Permanent_ExpenseImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Permanent_Expense()
-	 * @generated
-	 */
-	int DS_FOR_PERMANENT_EXPENSE = 39;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PERMANENT_EXPENSE__MAXIMUM_DEDUCTIBLE_AMOUNT = DS__MAXIMUM_DEDUCTIBLE_AMOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PERMANENT_EXPENSE__ID3 = DS__ID3;
-
-	/**
-	 * The feature id for the '<em><b>Permanent expense category</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PERMANENT_EXPENSE__PERMANENT_EXPENSE_CATEGORY = DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>DS for Permanent Expense</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PERMANENT_EXPENSE_FEATURE_COUNT = DS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>DS for Permanent Expense</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PERMANENT_EXPENSE_OPERATION_COUNT = DS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DS_for_Interest_ExpenseImpl <em>DS for Interest Expense</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DS_for_Interest_ExpenseImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Interest_Expense()
-	 * @generated
-	 */
-	int DS_FOR_INTEREST_EXPENSE = 41;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_INTEREST_EXPENSE__MAXIMUM_DEDUCTIBLE_AMOUNT = DS__MAXIMUM_DEDUCTIBLE_AMOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_INTEREST_EXPENSE__ID3 = DS__ID3;
-
-	/**
-	 * The number of structural features of the '<em>DS for Interest Expense</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_INTEREST_EXPENSE_FEATURE_COUNT = DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>DS for Interest Expense</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_INTEREST_EXPENSE_OPERATION_COUNT = DS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DS_for_Health_and_Pension_InsuranceImpl <em>DS for Health and Pension Insurance</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DS_for_Health_and_Pension_InsuranceImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Health_and_Pension_Insurance()
-	 * @generated
-	 */
-	int DS_FOR_HEALTH_AND_PENSION_INSURANCE = 42;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_HEALTH_AND_PENSION_INSURANCE__MAXIMUM_DEDUCTIBLE_AMOUNT = DS__MAXIMUM_DEDUCTIBLE_AMOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_HEALTH_AND_PENSION_INSURANCE__ID3 = DS__ID3;
-
-	/**
-	 * The feature id for the '<em><b>Insurance category</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_HEALTH_AND_PENSION_INSURANCE__INSURANCE_CATEGORY = DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>DS for Health and Pension Insurance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_HEALTH_AND_PENSION_INSURANCE_FEATURE_COUNT = DS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>DS for Health and Pension Insurance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_HEALTH_AND_PENSION_INSURANCE_OPERATION_COUNT = DS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DS_for_Private_Insurance_and_PlanImpl <em>DS for Private Insurance and Plan</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DS_for_Private_Insurance_and_PlanImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Private_Insurance_and_Plan()
-	 * @generated
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN = 43;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__MAXIMUM_DEDUCTIBLE_AMOUNT = DS__MAXIMUM_DEDUCTIBLE_AMOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__ID3 = DS__ID3;
-
-	/**
-	 * The feature id for the '<em><b>Private insurance and plan category</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__PRIVATE_INSURANCE_AND_PLAN_CATEGORY = DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>DS for Private Insurance and Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN_FEATURE_COUNT = DS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>DS for Private Insurance and Plan</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN_OPERATION_COUNT = DS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DS_for_Loss_CarryforwardImpl <em>DS for Loss Carryforward</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DS_for_Loss_CarryforwardImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Loss_Carryforward()
-	 * @generated
-	 */
-	int DS_FOR_LOSS_CARRYFORWARD = 44;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_LOSS_CARRYFORWARD__MAXIMUM_DEDUCTIBLE_AMOUNT = DS__MAXIMUM_DEDUCTIBLE_AMOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_LOSS_CARRYFORWARD__ID3 = DS__ID3;
-
-	/**
-	 * The number of structural features of the '<em>DS for Loss Carryforward</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_LOSS_CARRYFORWARD_FEATURE_COUNT = DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>DS for Loss Carryforward</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_LOSS_CARRYFORWARD_OPERATION_COUNT = DS_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link TaxationWithRoot.impl.DS_for_DonationImpl <em>DS for Donation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see TaxationWithRoot.impl.DS_for_DonationImpl
-	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Donation()
-	 * @generated
-	 */
-	int DS_FOR_DONATION = 45;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_DONATION__MAXIMUM_DEDUCTIBLE_AMOUNT = DS__MAXIMUM_DEDUCTIBLE_AMOUNT;
-
-	/**
-	 * The feature id for the '<em><b>Id3</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_DONATION__ID3 = DS__ID3;
-
-	/**
-	 * The number of structural features of the '<em>DS for Donation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_DONATION_FEATURE_COUNT = DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>DS for Donation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_DONATION_OPERATION_COUNT = DS_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link TaxationWithRoot.impl.Special_Expense_DSImpl <em>Special Expense DS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4046,7 +3576,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getSpecial_Expense_DS()
 	 * @generated
 	 */
-	int SPECIAL_EXPENSE_DS = 47;
+	int SPECIAL_EXPENSE_DS = 37;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4137,7 +3667,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getPermanent_Expense()
 	 * @generated
 	 */
-	int PERMANENT_EXPENSE = 46;
+	int PERMANENT_EXPENSE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4237,7 +3767,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getInterest_Expense()
 	 * @generated
 	 */
-	int INTEREST_EXPENSE = 48;
+	int INTEREST_EXPENSE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4328,7 +3858,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getPrivate_Insurance_and_Plan()
 	 * @generated
 	 */
-	int PRIVATE_INSURANCE_AND_PLAN = 49;
+	int PRIVATE_INSURANCE_AND_PLAN = 39;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4437,7 +3967,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getHealth_and_Pension_Insurance()
 	 * @generated
 	 */
-	int HEALTH_AND_PENSION_INSURANCE = 50;
+	int HEALTH_AND_PENSION_INSURANCE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4546,7 +4076,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDonation()
 	 * @generated
 	 */
-	int DONATION = 51;
+	int DONATION = 41;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4655,7 +4185,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getLoss_Carryforward()
 	 * @generated
 	 */
-	int LOSS_CARRYFORWARD = 52;
+	int LOSS_CARRYFORWARD = 42;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4746,7 +4276,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getSpousal_Expense_AC()
 	 * @generated
 	 */
-	int SPOUSAL_EXPENSE_AC = 53;
+	int SPOUSAL_EXPENSE_AC = 43;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4837,7 +4367,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getExtraordinary_Expense_CE()
 	 * @generated
 	 */
-	int EXTRAORDINARY_EXPENSE_CE = 54;
+	int EXTRAORDINARY_EXPENSE_CE = 44;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -4946,7 +4476,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getProfessional_Expense()
 	 * @generated
 	 */
-	int PROFESSIONAL_EXPENSE = 56;
+	int PROFESSIONAL_EXPENSE = 46;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -5037,7 +4567,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getTravel_Expense_FD()
 	 * @generated
 	 */
-	int TRAVEL_EXPENSE_FD = 55;
+	int TRAVEL_EXPENSE_FD = 45;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -5128,7 +4658,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getMiscellaneous_Expense_FO()
 	 * @generated
 	 */
-	int MISCELLANEOUS_EXPENSE_FO = 57;
+	int MISCELLANEOUS_EXPENSE_FO = 47;
 
 	/**
 	 * The feature id for the '<em><b>Declared amount</b></em>' attribute.
@@ -5219,7 +4749,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getResource()
 	 * @generated
 	 */
-	int RESOURCE = 58;
+	int RESOURCE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Contains</b></em>' containment reference list.
@@ -5256,7 +4786,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getGrantor()
 	 * @generated
 	 */
-	int GRANTOR = 60;
+	int GRANTOR = 49;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Disability_Types <em>Disability Types</em>}' enum.
@@ -5266,7 +4796,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDisability_Types()
 	 * @generated
 	 */
-	int DISABILITY_TYPES = 61;
+	int DISABILITY_TYPES = 50;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Country <em>Country</em>}' enum.
@@ -5276,7 +4806,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getCountry()
 	 * @generated
 	 */
-	int COUNTRY = 62;
+	int COUNTRY = 51;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Tax_Office <em>Tax Office</em>}' enum.
@@ -5286,7 +4816,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getTax_Office()
 	 * @generated
 	 */
-	int TAX_OFFICE = 63;
+	int TAX_OFFICE = 52;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Tax_Class_Category <em>Tax Class Category</em>}' enum.
@@ -5296,7 +4826,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getTax_Class_Category()
 	 * @generated
 	 */
-	int TAX_CLASS_CATEGORY = 64;
+	int TAX_CLASS_CATEGORY = 53;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Job_Activity <em>Job Activity</em>}' enum.
@@ -5306,7 +4836,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getJob_Activity()
 	 * @generated
 	 */
-	int JOB_ACTIVITY = 65;
+	int JOB_ACTIVITY = 54;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Town <em>Town</em>}' enum.
@@ -5316,7 +4846,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getTown()
 	 * @generated
 	 */
-	int TOWN = 66;
+	int TOWN = 55;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.CE_Type <em>CE Type</em>}' enum.
@@ -5326,7 +4856,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getCE_Type()
 	 * @generated
 	 */
-	int CE_TYPE = 67;
+	int CE_TYPE = 56;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Expense_Purpose <em>Expense Purpose</em>}' enum.
@@ -5336,7 +4866,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getExpense_Purpose()
 	 * @generated
 	 */
-	int EXPENSE_PURPOSE = 68;
+	int EXPENSE_PURPOSE = 57;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Dependent_Type <em>Dependent Type</em>}' enum.
@@ -5346,7 +4876,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDependent_Type()
 	 * @generated
 	 */
-	int DEPENDENT_TYPE = 69;
+	int DEPENDENT_TYPE = 58;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Separation_Causes <em>Separation Causes</em>}' enum.
@@ -5356,7 +4886,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getSeparation_Causes()
 	 * @generated
 	 */
-	int SEPARATION_CAUSES = 70;
+	int SEPARATION_CAUSES = 59;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Category_of_Permanent_Expense <em>Category of Permanent Expense</em>}' enum.
@@ -5366,7 +4896,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getCategory_of_Permanent_Expense()
 	 * @generated
 	 */
-	int CATEGORY_OF_PERMANENT_EXPENSE = 71;
+	int CATEGORY_OF_PERMANENT_EXPENSE = 60;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Category_of_Health_and_Pension_Insurances <em>Category of Health and Pension Insurances</em>}' enum.
@@ -5376,7 +4906,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getCategory_of_Health_and_Pension_Insurances()
 	 * @generated
 	 */
-	int CATEGORY_OF_HEALTH_AND_PENSION_INSURANCES = 72;
+	int CATEGORY_OF_HEALTH_AND_PENSION_INSURANCES = 61;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Category_of_Private_Insurance_and_Plan <em>Category of Private Insurance and Plan</em>}' enum.
@@ -5386,7 +4916,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getCategory_of_Private_Insurance_and_Plan()
 	 * @generated
 	 */
-	int CATEGORY_OF_PRIVATE_INSURANCE_AND_PLAN = 73;
+	int CATEGORY_OF_PRIVATE_INSURANCE_AND_PLAN = 62;
 
 	/**
 	 * The meta object id for the '{@link TaxationWithRoot.Legal_Union_Types <em>Legal Union Types</em>}' enum.
@@ -5396,7 +4926,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see TaxationWithRoot.impl.TaxationPackageImpl#getLegal_Union_Types()
 	 * @generated
 	 */
-	int LEGAL_UNION_TYPES = 74;
+	int LEGAL_UNION_TYPES = 63;
 
 
 	/**
@@ -7432,172 +6962,6 @@ public interface TaxationPackage extends EPackage {
 	EClass getCIS();
 
 	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.FD <em>FD</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FD</em>'.
-	 * @see TaxationWithRoot.FD
-	 * @generated
-	 */
-	EClass getFD();
-
-	/**
-	 * Returns the meta object for the attribute '{@link TaxationWithRoot.FD#getDistance_declared_in_january <em>Distance declared in january</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Distance declared in january</em>'.
-	 * @see TaxationWithRoot.FD#getDistance_declared_in_january()
-	 * @see #getFD()
-	 * @generated
-	 */
-	EAttribute getFD_Distance_declared_in_january();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.Professional_Expenses_Deduction <em>Professional Expenses Deduction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Professional Expenses Deduction</em>'.
-	 * @see TaxationWithRoot.Professional_Expenses_Deduction
-	 * @generated
-	 */
-	EClass getProfessional_Expenses_Deduction();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.FO <em>FO</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FO</em>'.
-	 * @see TaxationWithRoot.FO
-	 * @generated
-	 */
-	EClass getFO();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS_for_Permanent_Expense <em>DS for Permanent Expense</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS for Permanent Expense</em>'.
-	 * @see TaxationWithRoot.DS_for_Permanent_Expense
-	 * @generated
-	 */
-	EClass getDS_for_Permanent_Expense();
-
-	/**
-	 * Returns the meta object for the attribute '{@link TaxationWithRoot.DS_for_Permanent_Expense#getPermanent_expense_category <em>Permanent expense category</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Permanent expense category</em>'.
-	 * @see TaxationWithRoot.DS_for_Permanent_Expense#getPermanent_expense_category()
-	 * @see #getDS_for_Permanent_Expense()
-	 * @generated
-	 */
-	EAttribute getDS_for_Permanent_Expense_Permanent_expense_category();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS <em>DS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS</em>'.
-	 * @see TaxationWithRoot.DS
-	 * @generated
-	 */
-	EClass getDS();
-
-	/**
-	 * Returns the meta object for the attribute '{@link TaxationWithRoot.DS#getMaximum_deductible_amount <em>Maximum deductible amount</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Maximum deductible amount</em>'.
-	 * @see TaxationWithRoot.DS#getMaximum_deductible_amount()
-	 * @see #getDS()
-	 * @generated
-	 */
-	EAttribute getDS_Maximum_deductible_amount();
-
-	/**
-	 * Returns the meta object for the attribute '{@link TaxationWithRoot.DS#getId3 <em>Id3</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id3</em>'.
-	 * @see TaxationWithRoot.DS#getId3()
-	 * @see #getDS()
-	 * @generated
-	 */
-	EAttribute getDS_Id3();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS_for_Interest_Expense <em>DS for Interest Expense</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS for Interest Expense</em>'.
-	 * @see TaxationWithRoot.DS_for_Interest_Expense
-	 * @generated
-	 */
-	EClass getDS_for_Interest_Expense();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS_for_Health_and_Pension_Insurance <em>DS for Health and Pension Insurance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS for Health and Pension Insurance</em>'.
-	 * @see TaxationWithRoot.DS_for_Health_and_Pension_Insurance
-	 * @generated
-	 */
-	EClass getDS_for_Health_and_Pension_Insurance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link TaxationWithRoot.DS_for_Health_and_Pension_Insurance#getInsurance_category <em>Insurance category</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Insurance category</em>'.
-	 * @see TaxationWithRoot.DS_for_Health_and_Pension_Insurance#getInsurance_category()
-	 * @see #getDS_for_Health_and_Pension_Insurance()
-	 * @generated
-	 */
-	EAttribute getDS_for_Health_and_Pension_Insurance_Insurance_category();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS_for_Private_Insurance_and_Plan <em>DS for Private Insurance and Plan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS for Private Insurance and Plan</em>'.
-	 * @see TaxationWithRoot.DS_for_Private_Insurance_and_Plan
-	 * @generated
-	 */
-	EClass getDS_for_Private_Insurance_and_Plan();
-
-	/**
-	 * Returns the meta object for the attribute '{@link TaxationWithRoot.DS_for_Private_Insurance_and_Plan#getPrivate_insurance_and_plan_category <em>Private insurance and plan category</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Private insurance and plan category</em>'.
-	 * @see TaxationWithRoot.DS_for_Private_Insurance_and_Plan#getPrivate_insurance_and_plan_category()
-	 * @see #getDS_for_Private_Insurance_and_Plan()
-	 * @generated
-	 */
-	EAttribute getDS_for_Private_Insurance_and_Plan_Private_insurance_and_plan_category();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS_for_Loss_Carryforward <em>DS for Loss Carryforward</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS for Loss Carryforward</em>'.
-	 * @see TaxationWithRoot.DS_for_Loss_Carryforward
-	 * @generated
-	 */
-	EClass getDS_for_Loss_Carryforward();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.DS_for_Donation <em>DS for Donation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>DS for Donation</em>'.
-	 * @see TaxationWithRoot.DS_for_Donation
-	 * @generated
-	 */
-	EClass getDS_for_Donation();
-
-	/**
 	 * Returns the meta object for class '{@link TaxationWithRoot.Permanent_Expense <em>Permanent Expense</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7836,16 +7200,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getResource_Contains();
-
-	/**
-	 * Returns the meta object for class '{@link TaxationWithRoot.Root <em>Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Root</em>'.
-	 * @see TaxationWithRoot.Root
-	 * @generated
-	 */
-	EClass getRoot();
 
 	/**
 	 * Returns the meta object for enum '{@link TaxationWithRoot.Grantor <em>Grantor</em>}'.
@@ -9597,154 +8951,6 @@ public interface TaxationPackage extends EPackage {
 		EClass CIS = eINSTANCE.getCIS();
 
 		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.FDImpl <em>FD</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.FDImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getFD()
-		 * @generated
-		 */
-		EClass FD = eINSTANCE.getFD();
-
-		/**
-		 * The meta object literal for the '<em><b>Distance declared in january</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FD__DISTANCE_DECLARED_IN_JANUARY = eINSTANCE.getFD_Distance_declared_in_january();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.Professional_Expenses_DeductionImpl <em>Professional Expenses Deduction</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.Professional_Expenses_DeductionImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getProfessional_Expenses_Deduction()
-		 * @generated
-		 */
-		EClass PROFESSIONAL_EXPENSES_DEDUCTION = eINSTANCE.getProfessional_Expenses_Deduction();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.FOImpl <em>FO</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.FOImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getFO()
-		 * @generated
-		 */
-		EClass FO = eINSTANCE.getFO();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DS_for_Permanent_ExpenseImpl <em>DS for Permanent Expense</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DS_for_Permanent_ExpenseImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Permanent_Expense()
-		 * @generated
-		 */
-		EClass DS_FOR_PERMANENT_EXPENSE = eINSTANCE.getDS_for_Permanent_Expense();
-
-		/**
-		 * The meta object literal for the '<em><b>Permanent expense category</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS_FOR_PERMANENT_EXPENSE__PERMANENT_EXPENSE_CATEGORY = eINSTANCE.getDS_for_Permanent_Expense_Permanent_expense_category();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DSImpl <em>DS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DSImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS()
-		 * @generated
-		 */
-		EClass DS = eINSTANCE.getDS();
-
-		/**
-		 * The meta object literal for the '<em><b>Maximum deductible amount</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS__MAXIMUM_DEDUCTIBLE_AMOUNT = eINSTANCE.getDS_Maximum_deductible_amount();
-
-		/**
-		 * The meta object literal for the '<em><b>Id3</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS__ID3 = eINSTANCE.getDS_Id3();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DS_for_Interest_ExpenseImpl <em>DS for Interest Expense</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DS_for_Interest_ExpenseImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Interest_Expense()
-		 * @generated
-		 */
-		EClass DS_FOR_INTEREST_EXPENSE = eINSTANCE.getDS_for_Interest_Expense();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DS_for_Health_and_Pension_InsuranceImpl <em>DS for Health and Pension Insurance</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DS_for_Health_and_Pension_InsuranceImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Health_and_Pension_Insurance()
-		 * @generated
-		 */
-		EClass DS_FOR_HEALTH_AND_PENSION_INSURANCE = eINSTANCE.getDS_for_Health_and_Pension_Insurance();
-
-		/**
-		 * The meta object literal for the '<em><b>Insurance category</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS_FOR_HEALTH_AND_PENSION_INSURANCE__INSURANCE_CATEGORY = eINSTANCE.getDS_for_Health_and_Pension_Insurance_Insurance_category();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DS_for_Private_Insurance_and_PlanImpl <em>DS for Private Insurance and Plan</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DS_for_Private_Insurance_and_PlanImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Private_Insurance_and_Plan()
-		 * @generated
-		 */
-		EClass DS_FOR_PRIVATE_INSURANCE_AND_PLAN = eINSTANCE.getDS_for_Private_Insurance_and_Plan();
-
-		/**
-		 * The meta object literal for the '<em><b>Private insurance and plan category</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS_FOR_PRIVATE_INSURANCE_AND_PLAN__PRIVATE_INSURANCE_AND_PLAN_CATEGORY = eINSTANCE.getDS_for_Private_Insurance_and_Plan_Private_insurance_and_plan_category();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DS_for_Loss_CarryforwardImpl <em>DS for Loss Carryforward</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DS_for_Loss_CarryforwardImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Loss_Carryforward()
-		 * @generated
-		 */
-		EClass DS_FOR_LOSS_CARRYFORWARD = eINSTANCE.getDS_for_Loss_Carryforward();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.DS_for_DonationImpl <em>DS for Donation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.DS_for_DonationImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getDS_for_Donation()
-		 * @generated
-		 */
-		EClass DS_FOR_DONATION = eINSTANCE.getDS_for_Donation();
-
-		/**
 		 * The meta object literal for the '{@link TaxationWithRoot.impl.Permanent_ExpenseImpl <em>Permanent Expense</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9953,16 +9159,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RESOURCE__CONTAINS = eINSTANCE.getResource_Contains();
-
-		/**
-		 * The meta object literal for the '{@link TaxationWithRoot.impl.RootImpl <em>Root</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see TaxationWithRoot.impl.RootImpl
-		 * @see TaxationWithRoot.impl.TaxationPackageImpl#getRoot()
-		 * @generated
-		 */
-		EClass ROOT = eINSTANCE.getRoot();
 
 		/**
 		 * The meta object literal for the '{@link TaxationWithRoot.Grantor <em>Grantor</em>}' enum.

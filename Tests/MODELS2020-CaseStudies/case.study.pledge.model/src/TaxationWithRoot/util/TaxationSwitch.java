@@ -83,7 +83,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				T result = caseTax_Payer(tax_Payer);
 				if (result == null) result = casePhysical_Person(tax_Payer);
 				if (result == null) result = caseTax_Case(tax_Payer);
-				if (result == null) result = caseRoot(tax_Payer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -96,7 +95,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 			case TaxationPackage.ADDRESS: {
 				Address address = (Address)theEObject;
 				T result = caseAddress(address);
-				if (result == null) result = caseRoot(address);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -123,7 +121,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				Household household = (Household)theEObject;
 				T result = caseHousehold(household);
 				if (result == null) result = caseTax_Case(household);
-				if (result == null) result = caseRoot(household);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -142,7 +139,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 			case TaxationPackage.TAX_CASE: {
 				Tax_Case tax_Case = (Tax_Case)theEObject;
 				T result = caseTax_Case(tax_Case);
-				if (result == null) result = caseRoot(tax_Case);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -173,7 +169,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 			case TaxationPackage.INCOME_TAX_CREDIT: {
 				Income_Tax_Credit income_Tax_Credit = (Income_Tax_Credit)theEObject;
 				T result = caseIncome_Tax_Credit(income_Tax_Credit);
-				if (result == null) result = caseRoot(income_Tax_Credit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,7 +188,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				Fiscal_Address fiscal_Address = (Fiscal_Address)theEObject;
 				T result = caseFiscal_Address(fiscal_Address);
 				if (result == null) result = caseAddress(fiscal_Address);
-				if (result == null) result = caseRoot(fiscal_Address);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,7 +195,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				Habitual_Address habitual_Address = (Habitual_Address)theEObject;
 				T result = caseHabitual_Address(habitual_Address);
 				if (result == null) result = caseAddress(habitual_Address);
-				if (result == null) result = caseRoot(habitual_Address);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -218,7 +211,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTax_Payer(non_Resident_Tax_Payer);
 				if (result == null) result = casePhysical_Person(non_Resident_Tax_Payer);
 				if (result == null) result = caseTax_Case(non_Resident_Tax_Payer);
-				if (result == null) result = caseRoot(non_Resident_Tax_Payer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,7 +227,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTax_Payer(resident_Tax_Payer);
 				if (result == null) result = casePhysical_Person(resident_Tax_Payer);
 				if (result == null) result = caseTax_Case(resident_Tax_Payer);
-				if (result == null) result = caseRoot(resident_Tax_Payer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -299,7 +290,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				CIM cim = (CIM)theEObject;
 				T result = caseCIM(cim);
 				if (result == null) result = caseIncome_Tax_Credit(cim);
-				if (result == null) result = caseRoot(cim);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -307,7 +297,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				CIP cip = (CIP)theEObject;
 				T result = caseCIP(cip);
 				if (result == null) result = caseIncome_Tax_Credit(cip);
-				if (result == null) result = caseRoot(cip);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -315,85 +304,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 				CIS cis = (CIS)theEObject;
 				T result = caseCIS(cis);
 				if (result == null) result = caseIncome_Tax_Credit(cis);
-				if (result == null) result = caseRoot(cis);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.FD: {
-				FD fd = (FD)theEObject;
-				T result = caseFD(fd);
-				if (result == null) result = caseProfessional_Expenses_Deduction(fd);
-				if (result == null) result = caseRoot(fd);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.PROFESSIONAL_EXPENSES_DEDUCTION: {
-				Professional_Expenses_Deduction professional_Expenses_Deduction = (Professional_Expenses_Deduction)theEObject;
-				T result = caseProfessional_Expenses_Deduction(professional_Expenses_Deduction);
-				if (result == null) result = caseRoot(professional_Expenses_Deduction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.FO: {
-				FO fo = (FO)theEObject;
-				T result = caseFO(fo);
-				if (result == null) result = caseProfessional_Expenses_Deduction(fo);
-				if (result == null) result = caseRoot(fo);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS_FOR_PERMANENT_EXPENSE: {
-				DS_for_Permanent_Expense dS_for_Permanent_Expense = (DS_for_Permanent_Expense)theEObject;
-				T result = caseDS_for_Permanent_Expense(dS_for_Permanent_Expense);
-				if (result == null) result = caseDS(dS_for_Permanent_Expense);
-				if (result == null) result = caseRoot(dS_for_Permanent_Expense);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS: {
-				DS ds = (DS)theEObject;
-				T result = caseDS(ds);
-				if (result == null) result = caseRoot(ds);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS_FOR_INTEREST_EXPENSE: {
-				DS_for_Interest_Expense dS_for_Interest_Expense = (DS_for_Interest_Expense)theEObject;
-				T result = caseDS_for_Interest_Expense(dS_for_Interest_Expense);
-				if (result == null) result = caseDS(dS_for_Interest_Expense);
-				if (result == null) result = caseRoot(dS_for_Interest_Expense);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS_FOR_HEALTH_AND_PENSION_INSURANCE: {
-				DS_for_Health_and_Pension_Insurance dS_for_Health_and_Pension_Insurance = (DS_for_Health_and_Pension_Insurance)theEObject;
-				T result = caseDS_for_Health_and_Pension_Insurance(dS_for_Health_and_Pension_Insurance);
-				if (result == null) result = caseDS(dS_for_Health_and_Pension_Insurance);
-				if (result == null) result = caseRoot(dS_for_Health_and_Pension_Insurance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS_FOR_PRIVATE_INSURANCE_AND_PLAN: {
-				DS_for_Private_Insurance_and_Plan dS_for_Private_Insurance_and_Plan = (DS_for_Private_Insurance_and_Plan)theEObject;
-				T result = caseDS_for_Private_Insurance_and_Plan(dS_for_Private_Insurance_and_Plan);
-				if (result == null) result = caseDS(dS_for_Private_Insurance_and_Plan);
-				if (result == null) result = caseRoot(dS_for_Private_Insurance_and_Plan);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS_FOR_LOSS_CARRYFORWARD: {
-				DS_for_Loss_Carryforward dS_for_Loss_Carryforward = (DS_for_Loss_Carryforward)theEObject;
-				T result = caseDS_for_Loss_Carryforward(dS_for_Loss_Carryforward);
-				if (result == null) result = caseDS(dS_for_Loss_Carryforward);
-				if (result == null) result = caseRoot(dS_for_Loss_Carryforward);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.DS_FOR_DONATION: {
-				DS_for_Donation dS_for_Donation = (DS_for_Donation)theEObject;
-				T result = caseDS_for_Donation(dS_for_Donation);
-				if (result == null) result = caseDS(dS_for_Donation);
-				if (result == null) result = caseRoot(dS_for_Donation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -492,12 +402,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 			case TaxationPackage.RESOURCE: {
 				Resource resource = (Resource)theEObject;
 				T result = caseResource(resource);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TaxationPackage.ROOT: {
-				Root root = (Root)theEObject;
-				T result = caseRoot(root);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1046,156 +950,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FD</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FD</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFD(FD object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Professional Expenses Deduction</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Professional Expenses Deduction</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProfessional_Expenses_Deduction(Professional_Expenses_Deduction object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>FO</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>FO</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFO(FO object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS for Permanent Expense</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS for Permanent Expense</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS_for_Permanent_Expense(DS_for_Permanent_Expense object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS(DS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS for Interest Expense</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS for Interest Expense</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS_for_Interest_Expense(DS_for_Interest_Expense object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS for Health and Pension Insurance</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS for Health and Pension Insurance</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS_for_Health_and_Pension_Insurance(DS_for_Health_and_Pension_Insurance object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS for Private Insurance and Plan</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS for Private Insurance and Plan</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS_for_Private_Insurance_and_Plan(DS_for_Private_Insurance_and_Plan object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS for Loss Carryforward</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS for Loss Carryforward</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS_for_Loss_Carryforward(DS_for_Loss_Carryforward object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>DS for Donation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>DS for Donation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDS_for_Donation(DS_for_Donation object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Permanent Expense</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1387,21 +1141,6 @@ public class TaxationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseResource(Resource object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRoot(Root object) {
 		return null;
 	}
 

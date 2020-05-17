@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class Income_Tax_CreditImpl extends RootImpl implements Income_Tax_Credit {
+public class Income_Tax_CreditImpl extends MinimalEObjectImpl.Container implements Income_Tax_Credit {
 	/**
 	 * The default value of the '{@link #getGrantedBy() <em>Granted By</em>}' attribute.
 	 * <!-- begin-user-doc -->

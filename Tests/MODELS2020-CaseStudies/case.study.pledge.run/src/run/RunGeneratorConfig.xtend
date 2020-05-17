@@ -12,6 +12,7 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEn
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor
+import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.text.SimpleDateFormat
 import java.util.Date
 import org.apache.commons.cli.BasicParser
@@ -22,6 +23,8 @@ import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 import org.apache.commons.cli.ParseException
 import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class RunGeneratorConfig {
 	static var SIZE_LB = 20
@@ -29,9 +32,10 @@ class RunGeneratorConfig {
 	static var HOUSEHOLD = 0
 
 	static var RUNS = 10
-	static var RUNTIME = 900
+	static var MODELS = 10
+	static var RUNTIME = 1500
 
-	static var DOMAIN = "FamilyTree" // "FamilyTree", "Taxation", "Satellite"
+	static var DOMAIN = "FamilyTree" // "FamilyTree", "Satellite", "Taxation"
 	static val QUERIES = true
 	static val INITIAL = true
 
@@ -39,7 +43,7 @@ class RunGeneratorConfig {
 //		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
 //		val workspace = new FileSystemWorkspace('''x/''', "")
 //		workspace.initAndClear
-		
+
 		val options = new Options()
 
 		val lb = new Option("lb", "lowerBound", true, "generated model Lower bound")
@@ -48,8 +52,11 @@ class RunGeneratorConfig {
 		val ub = new Option("ub", "upperBound", true, "generated model Upper bound")
 		options.addOption(ub)
 
-		val n = new Option("n", "numRuns", true, "number of runs")
-		options.addOption(n)
+		val nr = new Option("nr", "numRuns", true, "number of runs")
+		options.addOption(nr)
+
+		val nm = new Option("nm", "numModels", true, "number of models")
+		options.addOption(nm)
 
 		val rt = new Option("rt", "runtime", true, "runtime limit")
 		options.addOption(rt)
@@ -76,8 +83,10 @@ class RunGeneratorConfig {
 		if(lbIn !== null) SIZE_LB = Integer.parseInt(lbIn)
 		val ubIn = cmd.getOptionValue("upperBound")
 		if(ubIn !== null) SIZE_UB = Integer.parseInt(ubIn)
-		val nIn = cmd.getOptionValue("numRuns")
-		if(nIn !== null) RUNS = Integer.parseInt(nIn)
+		val nrIn = cmd.getOptionValue("numRuns")
+		if(nrIn !== null) RUNS = Integer.parseInt(nrIn)
+		val nmIn = cmd.getOptionValue("numModels")
+		if(nmIn !== null) MODELS = Integer.parseInt(nmIn)
 		val rtIn = cmd.getOptionValue("runtime")
 		if(rtIn !== null) RUNTIME = Integer.parseInt(rtIn)
 		val dIn = cmd.getOptionValue("domain")
@@ -85,6 +94,7 @@ class RunGeneratorConfig {
 		val hhIn = cmd.getOptionValue("household")
 		if(hhIn !== null) HOUSEHOLD = Integer.parseInt(hhIn)
 
+		val isTaxation = DOMAIN == "Taxation"
 		// Workspace setup
 		val Date date = new Date(System.currentTimeMillis)
 		val SimpleDateFormat format = new SimpleDateFormat("dd-HHmm")
@@ -97,27 +107,23 @@ class RunGeneratorConfig {
 		// /////////////////////////
 		// BEGIN RUN
 		println(
-			"<<DOMAIN: " + DOMAIN + ", SIZE=" + SIZE_LB + "to" + SIZE_UB + ", Runs=" + RUNS + ", Runtime=" + RUNTIME +
-				">>")
-		if (DOMAIN == "TaxationWithRoot") {
-			println("<<Households: " + HOUSEHOLD + ">>")
-		}
-		
-		
-		
-		val naming = DOMAIN + "/size" + toStr(SIZE_LB) + "to" + toStr(SIZE_UB) + "x" + RUNS
-		
+			"<<DOMAIN: " + DOMAIN + ", SIZE=" + SIZE_LB + "to" + SIZE_UB + ", Runs=" + RUNS + ", ModelsPerRun=" +
+				MODELS + ", Runtime=" + RUNTIME + ">>")
+		if (isTaxation) println("<<Households: " + HOUSEHOLD + ">>")
+
+		var naming = DOMAIN + "/size" + toStr(SIZE_LB) + "to" + toStr(SIZE_UB) + "r" + RUNS + "n" + MODELS + "rt" + RUNTIME
+		if (isTaxation) naming = naming + "hh" + HOUSEHOLD
 		val outputPath = "measurements/" + "models/" + naming + "_" + formattedDate
 		val debugPath = "measurements/" + "debug/" + naming + "_" + formattedDate
 		val logPath = debugPath + "/log.txt"
-		val statsPath = "measurements/" + "stats/" + naming +
-			"stats_" + formattedDate + ".csv"
+		val statsPath = "measurements/" + "stats/" + naming + "stats_" + formattedDate + ".csv"
 
 		// Basic Adjustments
 		val genTask = config.commands.get(1) as GenerationTask
 		if(!QUERIES) genTask.patterns = null
 		if(!INITIAL) genTask.partialModel = null
 		genTask.runs = RUNS
+		genTask.number = MODELS
 
 		// Size
 		val scopeSpec = genTask.scope as ScopeSpecification
@@ -130,20 +136,19 @@ class RunGeneratorConfig {
 			interval.maxUnlimited = false
 			interval.maxNumber = SIZE_UB
 		}
-//		workspace.writeModel(config, '''x.xmi''')
-		
-		
 
-		if (DOMAIN == "TaxationWithRoot") {
+		if (isTaxation) {
 			if (HOUSEHOLD > 0) {
 				val pms = genTask.partialModel as PartialModelSpecification
 				val me = pms.entry.get(0) as ModelEntry
 				val fs = me.path as FileSpecification
 				fs.path = "inputs/Resource" + HOUSEHOLD + "hh.xmi"
 				println("<<Using " + fs.path + " as initial model>>")
-			} 
+			} else {
+				scopeSpec.scopes.remove(1)
+			}
 		}
-
+//		workspace.writeModel(config, '''x.xmi''')
 		// Runtime
 		val configScope = genTask.config as ConfigSpecification
 		val runtimeEntry = configScope.entries.get(0) as RuntimeEntry
@@ -165,11 +170,11 @@ class RunGeneratorConfig {
 
 		println()
 	}
-	
+
 	static def String toStr(int i) {
 		var toAdd = ""
-		if(i<100 && i != -1) toAdd = "0"
-		return toAdd+i
+		if(i < 100 && i != -1) toAdd = "0"
+		return toAdd + i
 	}
 
 }

@@ -1,0 +1,356 @@
+package queries
+
+import "http:///TaxCard.ecore" 
+
+//AttributeRemoved -> DF
+
+//inv1-External_Allowance.amount is a derived feature (TODOcheck)
+//inv2-Tax_Card.income.taxPayer.taxesDue is a derived feature (TODOcheck)
+
+//inv3-multiplicity adjusted
+@Constraint(message = "inv03", severity = "error", key = {dep})
+pattern inv03(dep : Dependent) {
+    find x_inv03_eligAll(dep);
+    neg find x_inv03_hasAll(dep);
+} or {
+	Dependent.birth_year(dep, by);
+    check(2018-by > 21);
+	Dependent.continued_studies(dep, false);
+    Dependent.allowances(dep, _);
+}
+pattern x_inv03_eligAll(dep : Dependent) {
+    Dependent.birth_year(dep, by);
+    check(2018-by <= 21);
+} or {
+	Dependent.continued_studies(dep, true);
+}
+pattern x_inv03_hasAll(dep : Dependent) {
+    Dependent.allowances(dep, _);
+}
+
+//inv5 - oclIsTypeOf - handled here
+@Constraint(message = "inv05", severity = "error", key = {inc})
+pattern inv05(inc : Income) {
+	//income_type: None
+    neg find x_inv08_noType(inc);
+    Income.details.worked_days(inc, wd);
+    check(wd != 0);
+} or {
+	//income_type: Not Employment_Income
+    Income.income_type(inc, type);
+    neg find x_inv08_notEI(type);
+    Income.details.worked_days(inc, wd);
+    check(wd != 0);
+} or {
+	//income_type: Employment Income
+	Income.income_type(inc, type);
+    Employment_Income(type);
+    find x_inv05_inRange(inc);
+}
+pattern x_inv05_inRange(inc : Income) {
+    Income.details.worked_days(inc, wd);
+    check(wd < 1);
+} or {
+    Income.details.worked_days(inc, wd);
+    check(wd > 25);
+}
+
+//inv6-Does not make sens, but directly from OCL
+//first part of or from definition of getAge()
+@Constraint(message = "inv06", severity = "error", key = {tp})
+pattern inv06(tp : Tax_Payer) {
+    Tax_Payer.dependents(tp, _);
+	Tax_Payer.birth_year(tp, TPBy);
+	check(2018 - TPBy > 2018-16);
+} or {
+	Tax_Payer.birth_year(tp, TPBy);
+    Tax_Payer.dependents(tp, dep);
+    Dependent.birth_year(dep, DepBy);
+    check(2018-DepBy <= 2018-TPBy-16);
+}
+
+//inv7-OrderedSet
+@Constraint(message = "inv07", severity = "error", key = {inc})
+pattern inv07(inc : Income) {
+	Income.details.distance(inc, d1);
+	Income.details.distance(inc, d2);
+	check(d1 != d2);//compare values
+}
+
+//user_complete_details-AttributeRemoved
+
+//inv8 - oclIsTypeOf - handled here
+@Constraint(message = "inv08", severity = "error", key = {inc})
+pattern inv08(inc : Income) {
+	//income_type: None
+    neg find x_inv08_noType(inc);
+    Income.details.distance(inc, dist);
+    check(dist != 0);
+} or {
+	//income_type: Not Employment_Income
+    Income.income_type(inc, type);
+    neg find x_inv08_notEI(type);
+    Income.details.distance(inc, dist);
+    check(dist != 0);
+} or {
+	//income_type: Employment Income
+	Income.income_type(inc, type);
+    Employment_Income(type);
+    find x_inv08_inRange(inc);
+}
+pattern x_inv08_notEI(type : Employment_Income) {
+    Employment_Income(type);
+}
+pattern x_inv08_noType(inc : Income) {
+    Income.income_type(inc, _);
+}
+pattern x_inv08_inRange(inc : Income) {
+    Income.details.distance(inc, dist);
+    check(dist < 0);
+} or {
+    Income.details.distance(inc, dist);
+    check(dist > 100);
+}
+//inv9-DerivedFeature
+
+//inv10-Ordered Sets
+@Constraint(message = "inv10", severity = "error", key = {inc})
+pattern inv10(inc : Income) {
+	Income.details.amount(inc, a1);
+	Income.details.amount(inc, a2);
+	check(a1 != a2);//compare values
+}
+
+//inv11-attributes-handled by multiplicity
+@Constraint(message = "inv11", severity = "error", key = {exp})
+pattern inv11(exp : Expense) {
+    find x_inv11_incOver100(exp);
+    find x_inv11_incNotOver100(exp);
+}
+pattern x_inv11_incOver100(exp : Expense) {
+    Expense.income.income_amount(exp, incVal);
+    check(incVal / 2 > 50);
+
+} or {
+	Expense.declared_amount(exp, decl);
+    check(decl != 50);
+}
+pattern x_inv11_incNotOver100(exp : Expense) {
+    Expense.income.income_amount(exp, incVal);
+    check(incVal / 2 <= 50);
+} or {
+	Expense.declared_amount(exp, decl);
+    check(decl < 50);
+} or {
+	Expense.income.income_amount(exp, incVal);
+	Expense.declared_amount(exp, decl);
+	check(decl > incVal/2);
+}
+
+//inv12
+//exists - handled logically
+@Constraint(message = "inv12", severity = "error", key = {tp})
+pattern inv12(tp : Tax_Payer) {
+    Tax_Payer.addresses(tp, hab_add);
+    Habitual_Address(hab_add);
+    neg find x_inv12_notZZ(hab_add);
+    Tax_Payer.incomes(tp, inc);
+    Local_Income(inc);
+    neg find x_inv12_notNonRes(tp);
+}
+pattern x_inv12_notNonRes(tp : Non_Resident_Tax_Payer) {
+    Non_Resident_Tax_Payer(tp);
+}
+pattern x_inv12_notZZ(hab_add : Habitual_Address) {
+    Address.country(hab_add, ::ZZ);
+}
+
+//inv13 - Added new containment rel Phys_Pers->Address
+//exists - handled logically
+@Constraint(message = "inv13", severity = "error", key = {tp})
+pattern inv13(tp : Tax_Payer) {
+    Tax_Payer.addresses(tp, hab_add);
+    Habitual_Address(hab_add);
+    Address.country(hab_add, ::ZZ);
+    neg find x_inv13(tp);
+}
+pattern x_inv13(tp : Resident_Tax_Payer) {
+    Resident_Tax_Payer(tp);
+}
+
+//inv14-MultiplicityChanged
+
+//inv15-Ordered Sets in assignment if block
+//ERROR if no household object
+//@Constraint(message = "inv15", severity = "error", key = {ea})
+//pattern inv15(ea : External_Allowance) {
+//	neg find x_inv15(ea);
+//}
+//pattern x_inv15(ea : External_Allowance) {
+//    External_Allowance.person(ea, child);
+//    Household.children(h, child);//only one due to multiplicity
+//    Household.parents.individual_A(h, iA);
+//    Tax_Payer(iA);
+//    External_Allowance.reciver(ea, iA);
+//} or {
+//    External_Allowance.person(ea, child);
+//    Household.children(h, child);//only one due to multiplicity
+//    Household.parents.individual_B(h, iB);
+//    Tax_Payer(iB);
+//    External_Allowance.reciver(ea, iB);
+//}
+
+@Constraint(message = "inv15", severity = "error", key = {ea})
+pattern inv15(ea : External_Allowance) {
+	External_Allowance.person(ea, child);
+    Household.children(h, child);//only one due to multiplicity
+	External_Allowance.reciver(ea, i);
+	Tax_Payer(i);
+	neg find x_inv15(h, i);
+} or {
+	External_Allowance.reciver(ea, i);
+	Dependent(i);
+}
+
+pattern x_inv15(h : Household, i : Tax_Payer) {
+    Household.parents.individual_A(h, i);
+} or {
+	Household.parents.individual_B(h, i);
+}
+
+//inv16-Tax_Card.tax_card_type is a derived feature
+
+//inv17-attribute-handled by multiplicity
+@Constraint(message = "inv17", severity = "error", key = {lur})
+pattern inv17(lur : Legal_Union_Record) {
+    Legal_Union_Record.start_year(lur, sy);
+    check(sy < 1950);
+} or {
+	Legal_Union_Record.start_year(lur, sy);
+	check(sy > 2018);
+}
+
+//inv18-MultiplicityChecked
+//inv19-MultiplicityChecked
+
+//inv20-Useless constraint since both edges are containment (TODOCheck)
+//OclIsUndefined-Handled by multiplicity
+@Constraint(message = "inv20", severity = "error", key = {lur})
+pattern inv20(lur : Legal_Union_Record) {
+    Legal_Union_Record.individual_A(lur, iA);
+    Legal_Union_Record.individual_B(lur, iB);
+    iA == iB;
+}
+//inv21-MultiplicityChecked
+//inv22-MultiplicityChecked
+//inv23-MultiplicityChecked
+//inv24-MultiplicityChecked
+//inv25-MultiplicityChecked
+//inv26-MultiplicityChanged
+//inv27-dupOfInv24
+//inv28-dubOfInv23
+//inv29-MultiplicityChanged
+//inv30-AttributeRemoved
+//inv31-AttributeRemoved
+//inv32-AttributeRemoved
+
+//inv33-attribute-handled by multiplicity
+@Constraint(message = "inv33", severity = "error", key = {p})
+pattern inv33(p : Physical_Person) {
+	Physical_Person.birth_year(p, by); 
+	check(2018-by < 0);
+} or {
+	Physical_Person.birth_year(p, by); 
+	check(2018-by > 100);
+}
+
+//inv34-attribute-handled by multiplicity
+@Constraint(message = "inv34", severity = "error", key = {p})
+pattern inv34(p : Physical_Person) {
+    Physical_Person.birth_month(p, birthMonth);
+    check(birthMonth < 1);    
+} or {
+	Physical_Person.birth_month(p, birthMonth);
+    check(birthMonth > 12);
+}
+
+//inv35-attribute-handled by multiplicity
+@Constraint(message = "inv35", severity = "error", key = {p})
+pattern inv35(p : Physical_Person) {
+    Physical_Person.birth_day(p, birthDay);
+    check(birthDay < 1);    
+} or {
+	Physical_Person.birth_day(p, birthDay);
+    check(birthDay > 28);
+}
+
+//inv36-AttributeRemoved
+//inv37-AttributeRemoved
+//inv38-AttributeRemoved
+//inv39-AttributeRemoved
+//inv40-AttributeRemoved
+//inv41-AttributeRemoved
+//inv42-AttributeRemoved
+//inv43-AttributeRemoved
+//inv44-AttributeRemoved
+//inv45-AttributeRemoved
+//inv46-AttributeRemoved
+
+//inv47-attributes-handled by multiplicity
+@Constraint(message = "inv47", severity = "error", key = {lur})
+pattern inv47(lur : Legal_Union_Record) {
+    Legal_Union_Record.end_year(lur, endY);
+    Legal_Union_Record.start_year(lur, startY);
+    neg find x_inv47(lur);
+    check(startY >= endY);
+} or {
+	Legal_Union_Record.end_year(lur, endY);
+    Legal_Union_Record.start_year(lur, startY);
+    check(endY!= -1);
+    check(startY >= endY);
+}
+pattern x_inv47(lur : Legal_Union_Record) {
+    Legal_Union_Record.separation_cause(lur, ::NONE);
+}
+
+//inv48-attributes-handled by multiplicity
+@Constraint(message = "inv48", severity = "error", key = {p})
+pattern inv48(p : Physical_Person) {
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer > 1.0);
+} or {
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer < 0.0);
+} or {
+   Physical_Person.disability_type(p, ::NONE);
+   Physical_Person.disability_percentage(p, disPer);
+   check(disPer != 0.0);
+} or {
+  neg find x_inv48(p);
+  Physical_Person.disability_percentage(p, disPer);
+  check(disPer == 0.0);
+}
+pattern x_inv48(p : Physical_Person) {
+    Physical_Person.disability_type(p, ::NONE);
+}
+
+//inv49-OclKindOf-handled by multiplicity
+@Constraint(message = "inv49", severity = "error", key = {lur})
+pattern inv49_A(lur : Legal_Union_Record) {
+	Legal_Union_Record.individual_A(lur, i);
+	Legal_Union_Record.individual_B(lur, i);
+}
+//inv49-OclKindOf-handled by multiplicity
+@Constraint(message = "inv49", severity = "error", key = {lur})
+pattern inv49_B(lur : Legal_Union_Record) {
+	Legal_Union_Record.individual_A(lur, i);
+	Dependent(i);
+} or {
+	Legal_Union_Record.individual_B(lur, i);
+	Dependent(i);
+}
+
+//inv50-MultiplicityChecked
+//inv51-MultiplicityChecked
+//inv52-MultiplicityChecked
+//inv53-MultiplicityChecked

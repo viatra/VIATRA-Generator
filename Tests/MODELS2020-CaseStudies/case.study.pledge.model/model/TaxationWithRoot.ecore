@@ -140,7 +140,7 @@
     <eLiterals name="OTHER_FAMILY_MEMBER" value="3" literal="OTHER_FAMILY_MEMBER"/>
     <eLiterals name="NOT_OWN_CHILD" value="4"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Income_Tax" eSuperTypes="#//Root">
+  <eClassifiers xsi:type="ecore:EClass" name="Income_Tax">
     <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" lowerBound="1"
         eType="#//Tax_Payer"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_amount" lowerBound="1"
@@ -186,7 +186,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_widower" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Address" eSuperTypes="#//Root">
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="country" lowerBound="1"
         eType="#//Country" defaultValueLiteral="ZZ"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" lowerBound="1"
@@ -296,8 +296,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="union_record" ordered="false"
         lowerBound="1" eType="#//Legal_Union_Record" eOpposite="#//Legal_Union_Record/properties"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Tax_Case" abstract="true" interface="true"
-      eSuperTypes="#//Root"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Tax_Case" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="FromAgent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" lowerBound="1"
         eType="#//Tax_Payer" eOpposite="#//Tax_Payer/from_agent"/>
@@ -422,7 +421,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
         eType="#//Income" eOpposite="#//Income/tax_card"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Income_Tax_Credit" eSuperTypes="#//Root">
+  <eClassifiers xsi:type="ecore:EClass" name="Income_Tax_Credit">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="grantedBy" lowerBound="1"
         eType="#//Grantor"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" eType="#//Tax_Payer"/>
@@ -488,40 +487,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="CIM" eSuperTypes="#//Income_Tax_Credit"/>
   <eClassifiers xsi:type="ecore:EClass" name="CIP" eSuperTypes="#//Income_Tax_Credit"/>
   <eClassifiers xsi:type="ecore:EClass" name="CIS" eSuperTypes="#//Income_Tax_Credit"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FD" eSuperTypes="#//Professional_Expenses_Deduction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance_declared_in_january"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Professional_Expenses_Deduction" eSuperTypes="#//Root"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FO" eSuperTypes="#//Professional_Expenses_Deduction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Permanent_Expense" eSuperTypes="#//DS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="permanent_expense_category"
-        lowerBound="1" eType="#//Category_of_Permanent_Expense"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DS" eSuperTypes="#//Root">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximum_deductible_amount"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id3" ordered="false" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Category_of_Permanent_Expense">
     <eLiterals name="MISCELLANEOUS_DEBT" literal="MISCELLANEOUS_DEBT"/>
     <eLiterals name="ALIMONY" value="1" literal="ALIMONY"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Interest_Expense" eSuperTypes="#//DS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Health_and_Pension_Insurance"
-      eSuperTypes="#//DS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="insurance_category" lowerBound="1"
-        eType="#//Category_of_Health_and_Pension_Insurances"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Category_of_Health_and_Pension_Insurances">
     <eLiterals name="MANDATORY_HEALTH_AND_PENSION_INSURANCE" literal="MANDATORY_HEALTH_AND_PENSION_INSURANCE"/>
     <eLiterals name="ADDITIONAL_EMPLOYERS_PENSION_INSURANCE" value="1" literal="ADDITIONAL_EMPLOYERS_PENSION_INSURANCE"/>
     <eLiterals name="CONTINUED_HEALTH_AND_PENSION_INSURANCE" value="2" literal="CONTINUED_HEALTH_AND_PENSION_INSURANCE"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Private_Insurance_and_Plan" eSuperTypes="#//DS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="private_insurance_and_plan_category"
-        lowerBound="1" eType="#//Category_of_Private_Insurance_and_Plan"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Category_of_Private_Insurance_and_Plan">
     <eLiterals name="PRIVATE_INSURANCE" literal="PRIVATE_INSURANCE"/>
@@ -530,8 +503,6 @@
     <eLiterals name="HOUSING_SAVING_PLAN" value="3" literal="HOUSING_SAVING_PLAN"/>
     <eLiterals name="OLD_AGE_PENSION_PLAN" value="4" literal="OLD_AGE_PENSION_PLAN"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Loss_Carryforward" eSuperTypes="#//DS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Donation" eSuperTypes="#//DS"/>
   <eClassifiers xsi:type="ecore:EClass" name="Permanent_Expense" eSuperTypes="#//Special_Expense_DS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" lowerBound="1"
         eType="#//Category_of_Permanent_Expense"/>
@@ -575,7 +546,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
-        eType="#//Root" containment="true"/>
+        eType="#//Household" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Root" abstract="true"/>
 </ecore:EPackage>

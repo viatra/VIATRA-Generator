@@ -311,27 +311,6 @@
     <genClasses ecoreClass="TaxationWithRoot.ecore#//CIM"/>
     <genClasses ecoreClass="TaxationWithRoot.ecore#//CIP"/>
     <genClasses ecoreClass="TaxationWithRoot.ecore#//CIS"/>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//FD">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//FD/distance_declared_in_january"/>
-    </genClasses>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//Professional_Expenses_Deduction"/>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//FO"/>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS_for_Permanent_Expense">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//DS_for_Permanent_Expense/permanent_expense_category"/>
-    </genClasses>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//DS/maximum_deductible_amount"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//DS/id3"/>
-    </genClasses>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS_for_Interest_Expense"/>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS_for_Health_and_Pension_Insurance">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//DS_for_Health_and_Pension_Insurance/insurance_category"/>
-    </genClasses>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS_for_Private_Insurance_and_Plan">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//DS_for_Private_Insurance_and_Plan/private_insurance_and_plan_category"/>
-    </genClasses>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS_for_Loss_Carryforward"/>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//DS_for_Donation"/>
     <genClasses ecoreClass="TaxationWithRoot.ecore#//Permanent_Expense">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TaxationWithRoot.ecore#//Permanent_Expense/category"/>
     </genClasses>
@@ -361,6 +340,5 @@
     <genClasses ecoreClass="TaxationWithRoot.ecore#//Resource">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TaxationWithRoot.ecore#//Resource/contains"/>
     </genClasses>
-    <genClasses ecoreClass="TaxationWithRoot.ecore#//Root"/>
   </genPackages>
 </genmodel:GenModel>
