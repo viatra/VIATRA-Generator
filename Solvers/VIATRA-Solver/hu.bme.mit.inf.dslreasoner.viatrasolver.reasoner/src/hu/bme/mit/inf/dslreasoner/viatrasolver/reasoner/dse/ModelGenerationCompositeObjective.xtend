@@ -7,6 +7,7 @@ import org.eclipse.viatra.dse.objectives.Comparators
 import org.eclipse.viatra.dse.objectives.IObjective
 import org.eclipse.viatra.dse.objectives.impl.BaseObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 
 //class ViatraReasonerNumbers {
 //	public static val scopePriority = 2
@@ -28,15 +29,43 @@ class ModelGenerationCompositeObjective implements IObjective{
 	val List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives
 	val UnfinishedWFObjective unfinishedWFObjective
 	var PartialInterpretation model=null;
+	val boolean punishSize
+	val int scopeWeight
+	val int conaintmentWeight
+	val int nonContainmentWeight
+	val int unfinishedWFWeight
 	
-	public new(
+	new(
 		ScopeObjective scopeObjective,
 		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
-		UnfinishedWFObjective unfinishedWFObjective)
+		UnfinishedWFObjective unfinishedWFObjective,
+		ViatraReasonerConfiguration configuration)
 	{
 		this.scopeObjective = scopeObjective
 		this.unfinishedMultiplicityObjectives = unfinishedMultiplicityObjectives
 		this.unfinishedWFObjective = unfinishedWFObjective
+		
+		this.punishSize = configuration.punishSize
+		this.scopeWeight = configuration.scopeWeight
+		this.conaintmentWeight = configuration.conaintmentWeight
+		this.nonContainmentWeight = configuration.nonContainmentWeight
+		this.unfinishedWFWeight = configuration.unfinishedWFWeight
+	}
+	new(
+		ScopeObjective scopeObjective,
+		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
+		UnfinishedWFObjective unfinishedWFObjective,
+		boolean punishSize, int scopeWeight, int conaintmentWeight, int nonContainmentWeight, int unfinishedWFWeight)
+	{
+		this.scopeObjective = scopeObjective
+		this.unfinishedMultiplicityObjectives = unfinishedMultiplicityObjectives
+		this.unfinishedWFObjective = unfinishedWFObjective
+		
+		this.punishSize = punishSize
+		this.scopeWeight = scopeWeight
+		this.conaintmentWeight = conaintmentWeight
+		this.nonContainmentWeight = nonContainmentWeight
+		this.unfinishedWFWeight = unfinishedWFWeight
 	}
 	
 	override init(ThreadContext context) {
@@ -48,7 +77,8 @@ class ModelGenerationCompositeObjective implements IObjective{
 	
 	override createNew() {
 		return new ModelGenerationCompositeObjective(
-			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective)
+			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective,
+			this.punishSize, this.scopeWeight, this.conaintmentWeight, this.nonContainmentWeight, this.unfinishedWFWeight)
 	}
 	
 	override getComparator() { Comparators.LOWER_IS_BETTER }
@@ -67,15 +97,18 @@ class ModelGenerationCompositeObjective implements IObjective{
 				nonContainmentMultiplicity+=multiplicityObjective.getFitness(context)
 			}
 		}
-		val size = 0.9/model.newElements.size
+		val size = if(punishSize) {
+			0.9/model.newElements.size
+		} else {
+			0
+		}
+		
 		var sum = 0.0
-		sum += scopeFitnes
-		sum += containmentMultiplicity*2
-		sum += nonContainmentMultiplicity
-		sum += unfinishedWFsFitness
+		sum += scopeFitnes*scopeWeight
+		sum += containmentMultiplicity*conaintmentWeight
+		sum += nonContainmentMultiplicity*nonContainmentWeight
+		sum += unfinishedWFsFitness*unfinishedWFWeight
 		sum+=size
-		
-		
 		
 		//println('''Sum=«sum»|Scope=«scopeFitnes»|ContainmentMultiplicity=«containmentMultiplicity»|NonContainmentMultiplicity=«nonContainmentMultiplicity»|WFs=«unfinishedWFsFitness»''')
 		

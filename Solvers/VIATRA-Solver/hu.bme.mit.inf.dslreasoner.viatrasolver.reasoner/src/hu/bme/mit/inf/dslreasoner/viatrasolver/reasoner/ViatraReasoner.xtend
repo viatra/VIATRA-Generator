@@ -82,7 +82,8 @@ class ViatraReasoner extends LogicReasoner{
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
-			new UnfinishedWFObjective(method.unfinishedWF)
+			new UnfinishedWFObjective(method.unfinishedWF),
+			viatraConfig
 		))
 
 		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationObjective(method.invalidWF))

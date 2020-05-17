@@ -308,7 +308,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
 		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
 		this.times.add(
-			"(StateCoderTime:"+statecoderTime+
+			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime+ 
+			"|StateCoderTime:"+statecoderTime+
 			"|SolutionCopyTime:"+solutionCopy+
 			"|ActivationSelectionTime:"+activationSelection+
 			"|NumericalSolverSumTime:"+numericalSolverSumTime+

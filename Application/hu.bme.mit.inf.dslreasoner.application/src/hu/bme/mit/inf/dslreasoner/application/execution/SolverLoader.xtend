@@ -94,6 +94,36 @@ class SolverLoader {
 						c.runIntermediateNumericalConsistencyChecks= false
 					}
 				}
+				if(config.containsKey("fitness-punishSize")) {
+					val stringValue = config.get("fitness-punishSize")
+					try {
+						c.punishSize = Boolean.parseBoolean(stringValue)
+					} catch(Exception e) {}
+				}
+				if(config.containsKey("fitness-scope")) {
+					val stringValue = config.get("fitness-scope")
+					try {
+						c.scopeWeight = Integer.parseInt(stringValue)
+					} catch(Exception e) {}
+				}
+				if(config.containsKey("fitness-missing-containent")) {
+					val stringValue = config.get("fitness-missing-containent")
+					try {
+						c.conaintmentWeight = Integer.parseInt(stringValue)
+					} catch(Exception e) {}
+				}
+				if(config.containsKey("fitness-missing-noncontainent")) {
+					val stringValue = config.get("fitness-missing-noncontainent")
+					try {
+						c.nonContainmentWeight = Integer.parseInt(stringValue)
+					} catch(Exception e) {}
+				}
+				if(config.containsKey("fitness-missing-wf")) {
+					val stringValue = config.get("fitness-missing-wf")
+					try {
+						c.unfinishedWFWeight = Integer.parseInt(stringValue)
+					} catch(Exception e) {}
+				}
 			]
 		} else {
 			throw new UnsupportedOperationException('''Unknown solver: «solver»''')
