@@ -1,0 +1,49 @@
+import epackage	"../case.study.familyTree.model/model/familytree.ecore"
+import viatra	"src/queries/familyTreeConstraintsQual.vql"
+import epackage "../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore"
+import viatra "src/queries/SatelliteQueries.vql"
+
+generate {
+	metamodel = { package satellite }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.satellite.queries }
+	partial-model = { "inputs/SatelliteInstance.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node += 10..*
+	}
+
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+
+	runs = 1
+
+	output = "measurements/debug/warmup"
+}
+
+generate {
+	metamodel = { package familytree }
+	constraints = { package queries}
+	partial-model = { "inputs/FamilyTree.xmi" }
+	solver = ViatraSolver
+	scope = {
+		#node += 6..*
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal,
+		"fitness-punishSize" = "false",
+		"fitness-scope" = "3",
+		"numeric-solver-at-end" = "true"
+	}
+	
+	runs = 1
+	number = 10
+	
+	debug =			"outputs/debug"
+	log =			"outputs/log.txt"
+	output =		"outputs/models"	
+	statistics =	"output/debug/statistics.csv"
+}

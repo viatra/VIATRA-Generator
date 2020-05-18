@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ASCII"?>
+<satellite:InterferometryMission xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:satellite="http://www.example.org/satellite" xsi:schemaLocation="http://www.example.org/satellite ../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore">
+  <groundStationNetwork>
+    <commSubsystem xsi:type="satellite:KaCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+  </groundStationNetwork>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.18/@commSubsystem.0" frequency="300" pathLength="150"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" frequency="8000"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@groundStationNetwork/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.1/@commSubsystem.0"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@groundStationNetwork/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.13/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@spacecraft.12/@commSubsystem.1"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.3/@commSubsystem.0"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.17/@commSubsystem.1"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:KaCommSubsystem" frequency="26500"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.17/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:KaCommSubsystem" target="//@groundStationNetwork/@commSubsystem.0"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@spacecraft.19/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:KaCommSubsystem" target="//@groundStationNetwork/@commSubsystem.0"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@spacecraft.2/@commSubsystem.0"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.6/@commSubsystem.0"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@spacecraft.13/@commSubsystem.0"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@groundStationNetwork/@commSubsystem.1"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@groundStationNetwork/@commSubsystem.1" pathLength="385000"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.6/@commSubsystem.0"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.2/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:KaCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@spacecraft.15/@commSubsystem.0"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+</satellite:InterferometryMission>
