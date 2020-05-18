@@ -19,38 +19,40 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class GoalConstraintProvider {
-	val calculateObjectCost = true
+	val calculateObjectCost = false
 	
 	def public getUnfinishedMultiplicityQueries(LogicProblem p, GeneratedPatterns patterns) {
 		val res = new ArrayList()
 		
-		res.addAll(patterns.unfinishedContainmentMulticiplicityQueries,true)
+		res.addAll(patterns.unfinishedNonContainmentMulticiplicityQueries,false)
 		if(calculateObjectCost) {
-			val middingObjectCost = calculateMissingObjectCost(p)
-			res.addAll(patterns.unfinishedNonContainmentMulticiplicityQueries,false)
+			val missingObjectCost = calculateMissingObjectCost(p)
+			res.addAll(patterns.unfinishedContainmentMulticiplicityQueries,true,missingObjectCost)
 		} else {
-			res.addAll(patterns.unfinishedNonContainmentMulticiplicityQueries,false)
+			res.addAll(patterns.unfinishedContainmentMulticiplicityQueries,true)
 		}
 		return res
 	}
 	
-	def addAll(ArrayList<MultiplicityGoalConstraintCalculator> res, Map<Relation, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries, boolean containment) {
+	def addAll(ArrayList<MultiplicityGoalConstraintCalculator> res, Map<Relation, Pair<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>,Integer>> queries, boolean containment) {
 		for(multiplicityQuery : queries.entrySet) {
 			val targetRelationName = multiplicityQuery.key.name
-			val query = multiplicityQuery.value
-			res += new MultiplicityGoalConstraintCalculator(targetRelationName,query,containment,1);
+			val query = multiplicityQuery.value.key
+			val minValue = multiplicityQuery.value.value
+			res += new MultiplicityGoalConstraintCalculator(targetRelationName,query,minValue,containment,1);
 		}
 	}
 	def addAll(
 		ArrayList<MultiplicityGoalConstraintCalculator> res,
-		Map<Relation, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries,
+		Map<Relation, Pair<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>,Integer>> queries,
 		boolean containment,
 		Map<Relation, Integer> cost
 	) {
 		for(multiplicityQuery : queries.entrySet) {
 			val targetRelationName = multiplicityQuery.key.name
-			val query = multiplicityQuery.value
-			res += new MultiplicityGoalConstraintCalculator(targetRelationName,query,containment,multiplicityQuery.key.lookup(cost))
+			val query = multiplicityQuery.value.key
+			val minValue = multiplicityQuery.value.value
+			res += new MultiplicityGoalConstraintCalculator(targetRelationName,query,minValue,containment,multiplicityQuery.key.lookup(cost))
 		}
 	}
 	
@@ -80,7 +82,7 @@ class GoalConstraintProvider {
 		for(containment : containments) {
 			val key = containment
 			val value = (containment.parameters.get(1) as ComplexTypeReference).referred.count(type2NewCost)
-			//println('''«key.name» --> «value» new''')
+//			println('''«key.name» --> «value» new''')
 			res.put(key,value)
 		}
 		return res

@@ -46,14 +46,14 @@ class UnfinishedIndexer {
 		val lowerMultiplicities = base.lowerMultiplicities(problem)
 		return '''
 		«FOR lowerMultiplicity : lowerMultiplicities»
-			pattern «unfinishedMultiplicityName(lowerMultiplicity)»(problem:LogicProblem, interpretation:PartialInterpretation, relationIterpretation:PartialRelationInterpretation, object:DefinedElement,missingMultiplicity) {
+			pattern «unfinishedMultiplicityName(lowerMultiplicity)»(problem:LogicProblem, interpretation:PartialInterpretation, relationIterpretation:PartialRelationInterpretation, object:DefinedElement,numberOfExistingReferences) {
 				find interpretation(problem,interpretation);
 				PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
 				PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"«lowerMultiplicity.relation.name»");
 				«base.typeIndexer.referInstanceOf(lowerMultiplicity.firstParamTypeOfRelation,Modality::MUST,"object")»
 				numberOfExistingReferences == count «base.referRelation(lowerMultiplicity.relation,"object","_",Modality.MUST,fqn2PQuery)»
-				check(numberOfExistingReferences < «lowerMultiplicity.lower»);
-				missingMultiplicity == eval(«lowerMultiplicity.lower»-numberOfExistingReferences);
+«««				numberOfExistingReferences < «lowerMultiplicity.lower»;
+«««				missingMultiplicity == eval(«lowerMultiplicity.lower»-numberOfExistingReferences);
 			}
 		«ENDFOR»
 		'''
@@ -61,8 +61,8 @@ class UnfinishedIndexer {
 	def String unfinishedMultiplicityName(LowerMultiplicityAssertion lowerMultiplicityAssertion) 
 		'''unfinishedLowerMultiplicity_«base.canonizeName(lowerMultiplicityAssertion.relation.name)»'''
 	
-	def public referUnfinishedMultiplicityQuery(LowerMultiplicityAssertion lowerMultiplicityAssertion)
-		'''find «unfinishedMultiplicityName(lowerMultiplicityAssertion)»(problem, interpretation ,object, missingMultiplicity);'''
+	//def public referUnfinishedMultiplicityQuery(LowerMultiplicityAssertion lowerMultiplicityAssertion)
+	//	'''find «unfinishedMultiplicityName(lowerMultiplicityAssertion)»(problem, interpretation ,object, missingMultiplicity);'''
 	
 	def getFirstParamTypeOfRelation(LowerMultiplicityAssertion lowerMultiplicityAssertion) {
 		val parameters = lowerMultiplicityAssertion.relation.parameters
@@ -78,7 +78,7 @@ class UnfinishedIndexer {
 		val lowerMultiplicities = base.lowerMultiplicities(problem)
 		val map = new LinkedHashMap
 		for(lowerMultiplicity : lowerMultiplicities) {
-			map.put(lowerMultiplicity.relation,unfinishedMultiplicityName(lowerMultiplicity))
+			map.put(lowerMultiplicity.relation,unfinishedMultiplicityName(lowerMultiplicity)->lowerMultiplicity.lower)
 		}
 		return map
 	}

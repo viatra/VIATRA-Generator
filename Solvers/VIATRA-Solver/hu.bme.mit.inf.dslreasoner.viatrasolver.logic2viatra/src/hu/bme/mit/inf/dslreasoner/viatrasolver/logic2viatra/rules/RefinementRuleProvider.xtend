@@ -413,9 +413,6 @@ class RefinementRuleProvider {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
 		
-		// Existence
-		interpretation.newElements+=newElement
-		
 		// Types
 		typeInterpretation.elements += newElement
 		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -430,6 +427,9 @@ class RefinementRuleProvider {
 		
 		// Scope propagation
 		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
+		// Existence
+		interpretation.newElements+=newElement
 		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
@@ -454,9 +454,6 @@ class RefinementRuleProvider {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
 		
-		// Existence
-		interpretation.newElements+=newElement
-		
 		// Types
 		typeInterpretation.elements += newElement
 		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -468,6 +465,9 @@ class RefinementRuleProvider {
 		
 		// Scope propagation
 		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
+		// Existence
+		interpretation.newElements+=newElement
 		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
@@ -490,9 +490,6 @@ class RefinementRuleProvider {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
 		
-		// Existence
-		interpretation.newElements+=newElement
-		
 		// Types
 		typeInterpretation.elements += newElement
 		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -501,6 +498,9 @@ class RefinementRuleProvider {
 		
 		// Scope propagation
 		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
+		// Existence
+		interpretation.newElements+=newElement
 		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {

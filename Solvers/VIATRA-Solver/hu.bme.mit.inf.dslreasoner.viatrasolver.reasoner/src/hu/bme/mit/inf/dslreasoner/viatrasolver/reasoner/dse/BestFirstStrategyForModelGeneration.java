@@ -9,6 +9,9 @@
  *******************************************************************************/
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -146,6 +149,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 	@Override
 	public void explore() {
+//		System.out.println("press enter");
+//		try {
+//			new BufferedReader(new InputStreamReader(System.in)).readLine();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}  
 		this.explorationStarted=System.nanoTime();
 		if (!context.checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
@@ -308,7 +318,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
 		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
 		this.times.add(
-			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime+ 
+			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+ 
 			"|StateCoderTime:"+statecoderTime+
 			"|SolutionCopyTime:"+solutionCopy+
 			"|ActivationSelectionTime:"+activationSelection+

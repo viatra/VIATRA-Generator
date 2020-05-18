@@ -27,8 +27,8 @@ import java.util.HashMap
 @Data class GeneratedPatterns {
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWFQueries
-	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedContainmentMulticiplicityQueries
-	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedNonContainmentMulticiplicityQueries
+	public Map<Relation,  Pair<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>,Integer>> unfinishedContainmentMulticiplicityQueries
+	public Map<Relation,  Pair<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>,Integer>> unfinishedNonContainmentMulticiplicityQueries
 	public Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
 	public Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
@@ -93,11 +93,13 @@ class PatternProvider {
 		val unfinishedNonContainmentMultiplicities = new HashMap
 		for(entry : unfinishedMultiplicities.entrySet) {
 			val relation = entry.key
-			val value = entry.value.lookup(queries)
+			val name = entry.value.key
+			val amount = entry.value.value
+			val query = name.lookup(queries)
 			if(problem.containmentHierarchies.head.containmentRelations.contains(relation)) {
-				unfinishedContainmentMultiplicities.put(relation,value)
+				unfinishedContainmentMultiplicities.put(relation,query->amount)
 			} else {
-				unfinishedNonContainmentMultiplicities.put(relation,value)
+				unfinishedNonContainmentMultiplicities.put(relation,query->amount)
 			}
 		}
 //		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
