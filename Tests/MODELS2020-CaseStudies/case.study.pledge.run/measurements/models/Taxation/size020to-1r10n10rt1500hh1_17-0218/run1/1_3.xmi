@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains>
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" separation_cause="SEPARATION_BY_COURT">
+      <individual_A disability_type="E"/>
+      <individual_B/>
+      <individual_B disability_type="C"/>
+      <individual_B xsi:type="TaxCardWithRoot:Resident_Tax_Payer" birth_year="1918" disability_type="A" birth_day="1">
+        <from_agent/>
+        <incomes xsi:type="TaxCardWithRoot:Local_Income">
+          <income_type xsi:type="TaxCardWithRoot:Capital_and_Investments_Income"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <individual_B disability_type="OTHER"/>
+      <individual_B xsi:type="TaxCardWithRoot:Non_Resident_Tax_Payer" disability_type="D">
+        <from_agent/>
+        <incomes xsi:type="TaxCardWithRoot:Local_Income">
+          <income_type xsi:type="TaxCardWithRoot:Trade_and_Business_Income"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <properties/>
+      <properties/>
+      <properties id10=""/>
+      <properties/>
+      <properties/>
+      <properties/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>

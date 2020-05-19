@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<familytree:FamilyTree xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:familytree="http://www.example.org/familytree" xsi:schemaLocation="http://www.example.org/familytree ../case.study.familyTree.model/model/familytree.ecore">
+  <members age="117" children="//@members.9 //@members.17" parents="//@members.4 //@members.13"/>
+  <members parents="//@members.4 //@members.10"/>
+  <members age="26" children="//@members.18" parents="//@members.8 //@members.11"/>
+  <members age="78" children="//@members.6 //@members.19" parents="//@members.16 //@members.17"/>
+  <members age="143" children="//@members.0 //@members.1 //@members.13" parents="//@members.5"/>
+  <members age="156" children="//@members.4" parents="//@members.7"/>
+  <members age="52" children="//@members.8 //@members.11" parents="//@members.3 //@members.19"/>
+  <members age="169" children="//@members.5 //@members.13"/>
+  <members children="//@members.2 //@members.10 //@members.14 //@members.18" parents="//@members.6 //@members.19"/>
+  <members parents="//@members.0 //@members.15"/>
+  <members children="//@members.1" parents="//@members.8 //@members.16"/>
+  <members age="39" children="//@members.2 //@members.12" parents="//@members.6 //@members.19"/>
+  <members parents="//@members.11 //@members.19"/>
+  <members age="130" children="//@members.0 //@members.15 //@members.16 //@members.17" parents="//@members.4 //@members.7"/>
+  <members parents="//@members.8 //@members.18"/>
+  <members age="13" children="//@members.9" parents="//@members.13 //@members.19"/>
+  <members age="91" children="//@members.3 //@members.10 //@members.19" parents="//@members.13 //@members.17"/>
+  <members age="104" children="//@members.3 //@members.16" parents="//@members.0 //@members.13"/>
+  <members children="//@members.14" parents="//@members.2 //@members.8"/>
+  <members age="65" children="//@members.6 //@members.8 //@members.11 //@members.12 //@members.15" parents="//@members.3 //@members.16"/>
+</familytree:FamilyTree>
