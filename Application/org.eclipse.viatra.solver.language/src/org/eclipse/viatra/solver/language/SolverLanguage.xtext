@@ -1,22 +1,23 @@
 grammar org.eclipse.viatra.solver.language.SolverLanguage with org.eclipse.xtext.common.Terminals
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-generate solverLanguage "http://www.eclipse.org/viatra/solver/language/SolverLanguage"
+import "http://www.eclipse.org/viatra/solver/language/SolverLanguage"
 
 Problem:
 	(statements+=Statement)*;
 
 Statement: 
 	(
-		AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition | ExternPredicateDefinition |
-		MetricDefinition | ExternMetricDefinition | ClassDefinition | ScopeDefinition | ObjectiveDefinition
+		AssertionOrDefinition | PredicateDefinition | UnnamedErrorPrediateDefinition | DefaultDefinition | MetricDefinition |
+		ExternPredicateDefinition | ExternMetricDefinition | ExternAggregatorDefinition | ExternDatatypeDefinition |
+		ClassDefinition | ScopeDefinition | ObjectiveDefinition
 	) FULL_STOP;
 
 AssertionOrDefinition returns Statement:
 	Expression (
-		{Assertion.body=current} (":" range=Expression)? |
+		{Interpretation.body=current} ":" range=Expression |
 		{PredicateDefinition.head=current} ":-" body=Expression |
 		{MetricDefinition.head=current} "=" body=Expression
-	);
+	)?;
 
 PredicateDefinition:
 	(functional?="functional" error?="error"? | error?="error" functional?="functional"?) head=Call ":-" body=Expression;
@@ -27,23 +28,41 @@ UnnamedErrorPrediateDefinition:
 DefaultDefinition:
 	"default" head=Call ":" range=Expression;
 
-ExternPredicateDefinition:
-	"extern" head=Call;
-
-enum MetricType:
-	INT="int" | REAL="real";
-
 MetricDefinition:
-	type=MetricType head=Expression "=" body=Expression;
+	type=[NamedElement|QualifiedName] head=Call "=" body=Expression;
+
+ExternPredicateDefinition:
+	"extern" name=QualifiedName argumentList=ArgumentList;
 
 ExternMetricDefinition:
-	"extern" type=MetricType head=Call;
+	"extern" type=[NamedElement|QualifiedName] name=QualifiedName argumentList=ArgumentList;
+
+ExternAggregatorDefinition:
+	"extern" type=[NamedElement|QualifiedName] name=QualifiedName "{" inputType=[NamedElement|QualifiedName] "..." "}";
+
+ExternDatatypeDefinition:
+	"extern" "datatype" name=QualifiedName ("extends" supertypes+=[NamedElement|QualifiedName] ("," supertypes+=[NamedElement|QualifiedName])*);
+
+Variable:
+	type=[NamedElement|QualifiedName]? name=ID;
 
 Expression:
-	IfElse | DisjunctiveExpression;
+	IfElse | Let | ImplicationExpression;
 
 IfElse:
 	"if" condition=Expression "then" then=Expression "else" else=Expression;
+
+Let:
+	"let" bindings+=LetBinding ("," bindings+=LetBinding)* "in" body=Expression;
+
+LetBinding:
+	variable=Variable "=" value=AdditiveExpression;
+
+enum ImplicationOperator returns BinaryOperator:
+	IMPLIES = "=>";
+
+ImplicationExpression returns Expression:
+	DisjunctiveExpression ({BinaryExpression.left=current} op=ImplicationOperator right=ImplicationExpression)?;
 
 DisjunctiveExpression returns Expression:
 	ConjunctiveExpression (
@@ -56,9 +75,6 @@ Case:
 
 ConjunctiveExpression returns Expression:
 	ComparisonExpression ({Conjunction.children+=current} ("," children+=ComparisonExpression)+)?;
-
-enum BinaryOperator:
-	EQ | NOT_EQ | LESS | LESS_EQ | GREATER | GREATER_EQ | IN | ADD | SUB | MUL | DIV | POW;
 
 enum ComparisonOperator returns BinaryOperator:
 	EQ="==" | NOT_EQ="!=" | LESS="<" | LESS_EQ="<=" | GREATER=">" | GREATER_EQ=">=" | IN="in";
@@ -82,7 +98,10 @@ enum ExponentialOp returns BinaryOperator:
 	POW="^";
 
 ExponentialExpression returns Expression:
-	UnaryExpression ({BinaryExpression.left=current} op=ExponentialOp right=ExponentialExpression)?;
+	CastExpression ({BinaryExpression.left=current} op=ExponentialOp right=CastExpression)?;
+
+CastExpression returns Expression:
+	UnaryExpression ({CastExpression.body=current} "as" type=[NamedElement|QualifiedName])?;
 
 enum UnaryOp:
 	NEG="!" | PLUS="+" | MINUS="-" | MAY="may" | MUST="must" | CURRENT="current";
@@ -91,16 +110,19 @@ UnaryExpression returns Expression:
 	AggregationExpression | {UnaryExpression} op=UnaryOp body=AggregationExpression;
 
 AggregationExpression returns Expression:
-	AtomicExpression | Count | Aggregation;
+	AtomicExpression | QuantifiedExpression | Aggregation;
 
-Count:
-	"count" "{" body=Expression "}";
+LocalVariables:
+	{LocalVariables} "[" (variables+=Variable ("," variables+=Variable)*)? "]";
 
-enum AggregationOp:
-	ONLY="only" | SUM="sum" | PROD="prod" | AVG="avg" | MIN="min" | MAX="max";
+enum Quantifier:
+	EXISTS="exists" | FORALL="forall" | COUNT="count";
+
+QuantifiedExpression:
+	quantifier=Quantifier localVariables=LocalVariables? "{" body=Expression "}";
 
 Aggregation:
-	op=AggregationOp "{" body=Expression "|" condition=Expression "}";
+	op=[NamedElement|QualifiedName] localVariables=LocalVariables? "{" body=Expression ("|" condition=Expression)? "}";
 
 AtomicExpression returns Expression:
 	Reference | Call | Interval | Literal | "(" Expression ")";
@@ -224,7 +246,4 @@ terminal REFLEXIVE_TRANSITIVE_CLOSURE:
 
 terminal FULL_STOP:
 	"synthetic:FULL_STOP";
-
-NamedElement:
-	name=QualifiedName;
 

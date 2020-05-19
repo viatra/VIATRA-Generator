@@ -11,23 +11,19 @@ package org.eclipse.viatra.solver.language.parser.antlr.lexer;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-GREATER_EQ : 'GREATER_EQ';
-
 Functional : 'functional';
 
 Abstract : 'abstract';
 
 Contains : 'contains';
 
+Datatype : 'datatype';
+
 Maximize : 'maximize';
 
 Minimize : 'minimize';
 
 Opposite : 'opposite';
-
-GREATER : 'GREATER';
-
-LESS_EQ : 'LESS_EQ';
 
 Current : 'current';
 
@@ -37,9 +33,11 @@ Extends : 'extends';
 
 Unknown : 'unknown';
 
-NOT_EQ : 'NOT_EQ';
+Exists : 'exists';
 
 Extern : 'extern';
+
+Forall : 'forall';
 
 Class : 'class';
 
@@ -53,45 +51,21 @@ False : 'false';
 
 Scope : 'scope';
 
-LESS : 'LESS';
-
 Else : 'else';
 
 Must : 'must';
-
-Only : 'only';
-
-Prod : 'prod';
-
-Real : 'real';
 
 Then : 'then';
 
 True : 'true';
 
-ADD : 'ADD';
-
-DIV : 'DIV';
-
-MUL : 'MUL';
-
-POW : 'POW';
-
-SUB : 'SUB';
-
-Avg : 'avg';
+FullStopFullStopFullStop : '...';
 
 Inf : 'inf';
 
-Int : 'int';
-
-Max : 'max';
+Let : 'let';
 
 May : 'may';
-
-Min : 'min';
-
-Sum : 'sum';
 
 ExclamationMarkEqualsSign : '!=';
 
@@ -105,11 +79,11 @@ LessThanSignEqualsSign : '<=';
 
 EqualsSignEqualsSign : '==';
 
+EqualsSignGreaterThanSign : '=>';
+
 GreaterThanSignEqualsSign : '>=';
 
-EQ : 'EQ';
-
-IN : 'IN';
+As : 'as';
 
 If : 'if';
 

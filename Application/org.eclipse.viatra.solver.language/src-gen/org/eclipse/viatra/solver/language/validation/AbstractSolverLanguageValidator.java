@@ -13,7 +13,7 @@ public abstract class AbstractSolverLanguageValidator extends AbstractDeclarativ
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>();
-		result.add(org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage.eINSTANCE);
+		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/viatra/solver/language/SolverLanguage"));
 		return result;
 	}
 }
