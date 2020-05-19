@@ -2,6 +2,10 @@
   <extension id="queries.FamilyTreeConstraints" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.FamilyTreeConstraints" id="queries.FamilyTreeConstraints">
       <query-specification fqn="queries.memberIsItsOwnParent"/>
+      <query-specification fqn="queries.twoMembersHaveNoParent"/>
+      <query-specification fqn="queries.memberHasParent"/>
+      <query-specification fqn="queries.negativeAge"/>
+      <query-specification fqn="queries.parentTooYoung"/>
     </group>
   </extension>
 </plugin>

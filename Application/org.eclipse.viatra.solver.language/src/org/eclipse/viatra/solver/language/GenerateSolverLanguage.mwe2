@@ -32,6 +32,7 @@ Workflow {
 		language = StandardLanguage {
 			name = "org.eclipse.viatra.solver.language.SolverLanguage"
 			fileExtensions = "vsc"
+			referencedResource = "platform:/resource/org.eclipse.viatra.solver.language/model/SolverLanguage.genmodel"
 
 			serializer = {
 				generateStub = false

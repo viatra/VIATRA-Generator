@@ -62,13 +62,13 @@ class IdentifierBasedStateCode {
 	int numberOfNewElement
 	SortedSet<RelationStatecoder> relationStatecoders
 	
-	private static val comparator = new Comparator<RelationStatecoder>() {
+	static val comparator = new Comparator<RelationStatecoder>() {
 		override compare(RelationStatecoder o1, RelationStatecoder o2) {
 			o1.relationName.compareTo(o2.relationName)
 		}
 	}
 	
-	public new(int numberOfNewElements) {
+	new(int numberOfNewElements) {
 		this.numberOfNewElement = numberOfNewElements
 		this.relationStatecoders = new TreeSet(comparator)
 	}

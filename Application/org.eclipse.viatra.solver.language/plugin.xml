@@ -5,6 +5,6 @@
 		<package 
 			uri = "http://www.eclipse.org/viatra/solver/language/SolverLanguage"
 			class = "org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage"
-			genModel = "model/generated/SolverLanguage.genmodel" />
+			genModel = "model/SolverLanguage.genmodel" />
 	</extension>
 </plugin>

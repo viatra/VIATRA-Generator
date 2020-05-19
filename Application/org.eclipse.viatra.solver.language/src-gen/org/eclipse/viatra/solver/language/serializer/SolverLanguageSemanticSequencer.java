@@ -10,37 +10,42 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.viatra.solver.language.services.SolverLanguageGrammarAccess;
 import org.eclipse.viatra.solver.language.solverLanguage.Aggregation;
 import org.eclipse.viatra.solver.language.solverLanguage.ArgumentList;
-import org.eclipse.viatra.solver.language.solverLanguage.Assertion;
 import org.eclipse.viatra.solver.language.solverLanguage.BinaryExpression;
 import org.eclipse.viatra.solver.language.solverLanguage.BoundedMultiplicity;
 import org.eclipse.viatra.solver.language.solverLanguage.BoundedScopeDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Call;
 import org.eclipse.viatra.solver.language.solverLanguage.Case;
+import org.eclipse.viatra.solver.language.solverLanguage.CastExpression;
 import org.eclipse.viatra.solver.language.solverLanguage.ClassDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Comparison;
 import org.eclipse.viatra.solver.language.solverLanguage.Conjunction;
-import org.eclipse.viatra.solver.language.solverLanguage.Count;
 import org.eclipse.viatra.solver.language.solverLanguage.DefaultDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Disjunction;
 import org.eclipse.viatra.solver.language.solverLanguage.EmptyIntervalLiteral;
 import org.eclipse.viatra.solver.language.solverLanguage.ExactMultiplicity;
 import org.eclipse.viatra.solver.language.solverLanguage.ExactScopeDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.ExpressionArgument;
+import org.eclipse.viatra.solver.language.solverLanguage.ExternAggregatorDefinition;
+import org.eclipse.viatra.solver.language.solverLanguage.ExternDatatypeDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.ExternMetricDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.ExternPredicateDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.IfElse;
 import org.eclipse.viatra.solver.language.solverLanguage.InfinityLiteral;
+import org.eclipse.viatra.solver.language.solverLanguage.Interpretation;
 import org.eclipse.viatra.solver.language.solverLanguage.Interval;
+import org.eclipse.viatra.solver.language.solverLanguage.Let;
+import org.eclipse.viatra.solver.language.solverLanguage.LetBinding;
+import org.eclipse.viatra.solver.language.solverLanguage.LocalVariables;
 import org.eclipse.viatra.solver.language.solverLanguage.LogicLiteral;
 import org.eclipse.viatra.solver.language.solverLanguage.LowerBoundedScopeDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.ManyMultiplicity;
 import org.eclipse.viatra.solver.language.solverLanguage.MemberDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.MetricDefinition;
-import org.eclipse.viatra.solver.language.solverLanguage.NamedElement;
 import org.eclipse.viatra.solver.language.solverLanguage.NumericLiteral;
 import org.eclipse.viatra.solver.language.solverLanguage.ObjectiveDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.PredicateDefinition;
 import org.eclipse.viatra.solver.language.solverLanguage.Problem;
+import org.eclipse.viatra.solver.language.solverLanguage.QuantifiedExpression;
 import org.eclipse.viatra.solver.language.solverLanguage.Reference;
 import org.eclipse.viatra.solver.language.solverLanguage.SolverLanguagePackage;
 import org.eclipse.viatra.solver.language.solverLanguage.StarArgument;
@@ -50,6 +55,7 @@ import org.eclipse.viatra.solver.language.solverLanguage.TypedArgument;
 import org.eclipse.viatra.solver.language.solverLanguage.TypedStarArgument;
 import org.eclipse.viatra.solver.language.solverLanguage.UnaryExpression;
 import org.eclipse.viatra.solver.language.solverLanguage.UnnamedErrorPrediateDefinition;
+import org.eclipse.viatra.solver.language.solverLanguage.Variable;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
@@ -78,11 +84,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 			case SolverLanguagePackage.ARGUMENT_LIST:
 				sequence_ArgumentList(context, (ArgumentList) semanticObject); 
 				return; 
-			case SolverLanguagePackage.ASSERTION:
-				sequence_AssertionOrDefinition(context, (Assertion) semanticObject); 
-				return; 
 			case SolverLanguagePackage.BINARY_EXPRESSION:
-				sequence_AdditiveExpression_ExponentialExpression_MultiplicativeExpression(context, (BinaryExpression) semanticObject); 
+				sequence_AdditiveExpression_ExponentialExpression_ImplicationExpression_MultiplicativeExpression(context, (BinaryExpression) semanticObject); 
 				return; 
 			case SolverLanguagePackage.BOUNDED_MULTIPLICITY:
 				sequence_BoundedMultiplicity(context, (BoundedMultiplicity) semanticObject); 
@@ -103,6 +106,9 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 					return; 
 				}
 				else break;
+			case SolverLanguagePackage.CAST_EXPRESSION:
+				sequence_CastExpression(context, (CastExpression) semanticObject); 
+				return; 
 			case SolverLanguagePackage.CLASS_DEFINITION:
 				sequence_ClassDefinition(context, (ClassDefinition) semanticObject); 
 				return; 
@@ -111,9 +117,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 				return; 
 			case SolverLanguagePackage.CONJUNCTION:
 				sequence_ConjunctiveExpression(context, (Conjunction) semanticObject); 
-				return; 
-			case SolverLanguagePackage.COUNT:
-				sequence_Count(context, (Count) semanticObject); 
 				return; 
 			case SolverLanguagePackage.DEFAULT_DEFINITION:
 				sequence_DefaultDefinition(context, (DefaultDefinition) semanticObject); 
@@ -133,6 +136,12 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 			case SolverLanguagePackage.EXPRESSION_ARGUMENT:
 				sequence_ExpressionArgument(context, (ExpressionArgument) semanticObject); 
 				return; 
+			case SolverLanguagePackage.EXTERN_AGGREGATOR_DEFINITION:
+				sequence_ExternAggregatorDefinition(context, (ExternAggregatorDefinition) semanticObject); 
+				return; 
+			case SolverLanguagePackage.EXTERN_DATATYPE_DEFINITION:
+				sequence_ExternDatatypeDefinition(context, (ExternDatatypeDefinition) semanticObject); 
+				return; 
 			case SolverLanguagePackage.EXTERN_METRIC_DEFINITION:
 				sequence_ExternMetricDefinition(context, (ExternMetricDefinition) semanticObject); 
 				return; 
@@ -145,8 +154,20 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 			case SolverLanguagePackage.INFINITY_LITERAL:
 				sequence_InfinityLiteral(context, (InfinityLiteral) semanticObject); 
 				return; 
+			case SolverLanguagePackage.INTERPRETATION:
+				sequence_AssertionOrDefinition(context, (Interpretation) semanticObject); 
+				return; 
 			case SolverLanguagePackage.INTERVAL:
 				sequence_Interval(context, (Interval) semanticObject); 
+				return; 
+			case SolverLanguagePackage.LET:
+				sequence_Let(context, (Let) semanticObject); 
+				return; 
+			case SolverLanguagePackage.LET_BINDING:
+				sequence_LetBinding(context, (LetBinding) semanticObject); 
+				return; 
+			case SolverLanguagePackage.LOCAL_VARIABLES:
+				sequence_LocalVariables(context, (LocalVariables) semanticObject); 
 				return; 
 			case SolverLanguagePackage.LOGIC_LITERAL:
 				sequence_LogicLiteral(context, (LogicLiteral) semanticObject); 
@@ -174,9 +195,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 					return; 
 				}
 				else break;
-			case SolverLanguagePackage.NAMED_ELEMENT:
-				sequence_NamedElement(context, (NamedElement) semanticObject); 
-				return; 
 			case SolverLanguagePackage.NUMERIC_LITERAL:
 				sequence_NumericLiteral(context, (NumericLiteral) semanticObject); 
 				return; 
@@ -199,6 +217,9 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 				else break;
 			case SolverLanguagePackage.PROBLEM:
 				sequence_Problem(context, (Problem) semanticObject); 
+				return; 
+			case SolverLanguagePackage.QUANTIFIED_EXPRESSION:
+				sequence_QuantifiedExpression(context, (QuantifiedExpression) semanticObject); 
 				return; 
 			case SolverLanguagePackage.REFERENCE:
 				sequence_Reference(context, (Reference) semanticObject); 
@@ -224,6 +245,9 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 			case SolverLanguagePackage.UNNAMED_ERROR_PREDIATE_DEFINITION:
 				sequence_UnnamedErrorPrediateDefinition(context, (UnnamedErrorPrediateDefinition) semanticObject); 
 				return; 
+			case SolverLanguagePackage.VARIABLE:
+				sequence_Variable(context, (Variable) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -231,10 +255,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns BinaryExpression
+	 *     Statement returns BinaryExpression
+	 *     AssertionOrDefinition returns BinaryExpression
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns BinaryExpression
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns BinaryExpression
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns BinaryExpression
 	 *     Expression returns BinaryExpression
+	 *     ImplicationExpression returns BinaryExpression
+	 *     ImplicationExpression.BinaryExpression_1_0 returns BinaryExpression
 	 *     DisjunctiveExpression returns BinaryExpression
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns BinaryExpression
 	 *     DisjunctiveExpression.Case_1_1_0 returns BinaryExpression
@@ -248,28 +276,35 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns BinaryExpression
 	 *     ExponentialExpression returns BinaryExpression
 	 *     ExponentialExpression.BinaryExpression_1_0 returns BinaryExpression
+	 *     CastExpression returns BinaryExpression
+	 *     CastExpression.CastExpression_1_0 returns BinaryExpression
 	 *     UnaryExpression returns BinaryExpression
 	 *     AggregationExpression returns BinaryExpression
 	 *     AtomicExpression returns BinaryExpression
 	 *
 	 * Constraint:
 	 *     (
+	 *         (left=ImplicationExpression_BinaryExpression_1_0 op=ImplicationOperator right=ImplicationExpression) | 
 	 *         (left=AdditiveExpression_BinaryExpression_1_0 op=AdditiveBinaryOperator right=MultiplicativeExpression) | 
 	 *         (left=MultiplicativeExpression_BinaryExpression_1_0 op=MultiplicativeBinaryOperator right=ExponentialExpression) | 
-	 *         (left=ExponentialExpression_BinaryExpression_1_0 op=ExponentialOp right=ExponentialExpression)
+	 *         (left=ExponentialExpression_BinaryExpression_1_0 op=ExponentialOp right=CastExpression)
 	 *     )
 	 */
-	protected void sequence_AdditiveExpression_ExponentialExpression_MultiplicativeExpression(ISerializationContext context, BinaryExpression semanticObject) {
+	protected void sequence_AdditiveExpression_ExponentialExpression_ImplicationExpression_MultiplicativeExpression(ISerializationContext context, BinaryExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Aggregation
+	 *     Statement returns Aggregation
+	 *     AssertionOrDefinition returns Aggregation
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Aggregation
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Aggregation
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Aggregation
 	 *     Expression returns Aggregation
+	 *     ImplicationExpression returns Aggregation
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Aggregation
 	 *     DisjunctiveExpression returns Aggregation
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Aggregation
 	 *     DisjunctiveExpression.Case_1_1_0 returns Aggregation
@@ -283,28 +318,18 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Aggregation
 	 *     ExponentialExpression returns Aggregation
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Aggregation
+	 *     CastExpression returns Aggregation
+	 *     CastExpression.CastExpression_1_0 returns Aggregation
 	 *     UnaryExpression returns Aggregation
 	 *     AggregationExpression returns Aggregation
 	 *     Aggregation returns Aggregation
 	 *     AtomicExpression returns Aggregation
 	 *
 	 * Constraint:
-	 *     (op=AggregationOp body=Expression condition=Expression)
+	 *     (op=[NamedElement|QualifiedName] localVariables=LocalVariables? body=Expression condition=Expression?)
 	 */
 	protected void sequence_Aggregation(ISerializationContext context, Aggregation semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.AGGREGATION__OP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.AGGREGATION__OP));
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.AGGREGATION__BODY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.AGGREGATION__BODY));
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.AGGREGATION__CONDITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.AGGREGATION__CONDITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAggregationAccess().getOpAggregationOpEnumRuleCall_0_0(), semanticObject.getOp());
-		feeder.accept(grammarAccess.getAggregationAccess().getBodyExpressionParserRuleCall_2_0(), semanticObject.getBody());
-		feeder.accept(grammarAccess.getAggregationAccess().getConditionExpressionParserRuleCall_4_0(), semanticObject.getCondition());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -322,14 +347,23 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     Statement returns Assertion
-	 *     AssertionOrDefinition returns Assertion
+	 *     Statement returns Interpretation
+	 *     AssertionOrDefinition returns Interpretation
 	 *
 	 * Constraint:
-	 *     (body=AssertionOrDefinition_Assertion_1_0_0 range=Expression?)
+	 *     (body=AssertionOrDefinition_Interpretation_1_0_0 range=Expression)
 	 */
-	protected void sequence_AssertionOrDefinition(ISerializationContext context, Assertion semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_AssertionOrDefinition(ISerializationContext context, Interpretation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.INTERPRETATION__BODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.INTERPRETATION__BODY));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.INTERPRETATION__RANGE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.INTERPRETATION__RANGE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAssertionOrDefinitionAccess().getInterpretationBodyAction_1_0_0(), semanticObject.getBody());
+		feeder.accept(grammarAccess.getAssertionOrDefinitionAccess().getRangeExpressionParserRuleCall_1_0_2_0(), semanticObject.getRange());
+		feeder.finish();
 	}
 	
 	
@@ -359,7 +393,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     Statement returns MetricDefinition
 	 *
 	 * Constraint:
-	 *     ((head=AssertionOrDefinition_MetricDefinition_1_2_0 body=Expression) | (type=MetricType head=Expression body=Expression))
+	 *     ((head=AssertionOrDefinition_MetricDefinition_1_2_0 body=Expression) | (type=[NamedElement|QualifiedName] head=Call body=Expression))
 	 */
 	protected void sequence_AssertionOrDefinition_MetricDefinition(ISerializationContext context, MetricDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -440,10 +474,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Call
+	 *     Statement returns Call
+	 *     AssertionOrDefinition returns Call
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Call
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Call
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Call
 	 *     Expression returns Call
+	 *     ImplicationExpression returns Call
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Call
 	 *     DisjunctiveExpression returns Call
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Call
 	 *     DisjunctiveExpression.Case_1_1_0 returns Call
@@ -457,6 +495,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Call
 	 *     ExponentialExpression returns Call
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Call
+	 *     CastExpression returns Call
+	 *     CastExpression.CastExpression_1_0 returns Call
 	 *     UnaryExpression returns Call
 	 *     AggregationExpression returns Call
 	 *     AtomicExpression returns Call
@@ -497,6 +537,52 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
+	 *     Statement returns CastExpression
+	 *     AssertionOrDefinition returns CastExpression
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns CastExpression
+	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns CastExpression
+	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns CastExpression
+	 *     Expression returns CastExpression
+	 *     ImplicationExpression returns CastExpression
+	 *     ImplicationExpression.BinaryExpression_1_0 returns CastExpression
+	 *     DisjunctiveExpression returns CastExpression
+	 *     DisjunctiveExpression.Disjunction_1_0_0 returns CastExpression
+	 *     DisjunctiveExpression.Case_1_1_0 returns CastExpression
+	 *     ConjunctiveExpression returns CastExpression
+	 *     ConjunctiveExpression.Conjunction_1_0 returns CastExpression
+	 *     ComparisonExpression returns CastExpression
+	 *     ComparisonExpression.Comparison_1_0 returns CastExpression
+	 *     AdditiveExpression returns CastExpression
+	 *     AdditiveExpression.BinaryExpression_1_0 returns CastExpression
+	 *     MultiplicativeExpression returns CastExpression
+	 *     MultiplicativeExpression.BinaryExpression_1_0 returns CastExpression
+	 *     ExponentialExpression returns CastExpression
+	 *     ExponentialExpression.BinaryExpression_1_0 returns CastExpression
+	 *     CastExpression returns CastExpression
+	 *     CastExpression.CastExpression_1_0 returns CastExpression
+	 *     UnaryExpression returns CastExpression
+	 *     AggregationExpression returns CastExpression
+	 *     AtomicExpression returns CastExpression
+	 *
+	 * Constraint:
+	 *     (body=CastExpression_CastExpression_1_0 type=[NamedElement|QualifiedName])
+	 */
+	protected void sequence_CastExpression(ISerializationContext context, CastExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.CAST_EXPRESSION__BODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.CAST_EXPRESSION__BODY));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.CAST_EXPRESSION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.CAST_EXPRESSION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCastExpressionAccess().getCastExpressionBodyAction_1_0(), semanticObject.getBody());
+		feeder.accept(grammarAccess.getCastExpressionAccess().getTypeNamedElementQualifiedNameParserRuleCall_1_2_0_1(), semanticObject.eGet(SolverLanguagePackage.Literals.CAST_EXPRESSION__TYPE, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Statement returns ClassDefinition
 	 *     ClassDefinition returns ClassDefinition
 	 *
@@ -515,10 +601,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Comparison
+	 *     Statement returns Comparison
+	 *     AssertionOrDefinition returns Comparison
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Comparison
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Comparison
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Comparison
 	 *     Expression returns Comparison
+	 *     ImplicationExpression returns Comparison
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Comparison
 	 *     DisjunctiveExpression returns Comparison
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Comparison
 	 *     DisjunctiveExpression.Case_1_1_0 returns Comparison
@@ -532,6 +622,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Comparison
 	 *     ExponentialExpression returns Comparison
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Comparison
+	 *     CastExpression returns Comparison
+	 *     CastExpression.CastExpression_1_0 returns Comparison
 	 *     UnaryExpression returns Comparison
 	 *     AggregationExpression returns Comparison
 	 *     AtomicExpression returns Comparison
@@ -558,10 +650,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Conjunction
+	 *     Statement returns Conjunction
+	 *     AssertionOrDefinition returns Conjunction
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Conjunction
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Conjunction
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Conjunction
 	 *     Expression returns Conjunction
+	 *     ImplicationExpression returns Conjunction
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Conjunction
 	 *     DisjunctiveExpression returns Conjunction
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Conjunction
 	 *     DisjunctiveExpression.Case_1_1_0 returns Conjunction
@@ -575,6 +671,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Conjunction
 	 *     ExponentialExpression returns Conjunction
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Conjunction
+	 *     CastExpression returns Conjunction
+	 *     CastExpression.CastExpression_1_0 returns Conjunction
 	 *     UnaryExpression returns Conjunction
 	 *     AggregationExpression returns Conjunction
 	 *     AtomicExpression returns Conjunction
@@ -584,44 +682,6 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 */
 	protected void sequence_ConjunctiveExpression(ISerializationContext context, Conjunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Count
-	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Count
-	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Count
-	 *     Expression returns Count
-	 *     DisjunctiveExpression returns Count
-	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Count
-	 *     DisjunctiveExpression.Case_1_1_0 returns Count
-	 *     ConjunctiveExpression returns Count
-	 *     ConjunctiveExpression.Conjunction_1_0 returns Count
-	 *     ComparisonExpression returns Count
-	 *     ComparisonExpression.Comparison_1_0 returns Count
-	 *     AdditiveExpression returns Count
-	 *     AdditiveExpression.BinaryExpression_1_0 returns Count
-	 *     MultiplicativeExpression returns Count
-	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Count
-	 *     ExponentialExpression returns Count
-	 *     ExponentialExpression.BinaryExpression_1_0 returns Count
-	 *     UnaryExpression returns Count
-	 *     AggregationExpression returns Count
-	 *     Count returns Count
-	 *     AtomicExpression returns Count
-	 *
-	 * Constraint:
-	 *     body=Expression
-	 */
-	protected void sequence_Count(ISerializationContext context, Count semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.COUNT__BODY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.COUNT__BODY));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCountAccess().getBodyExpressionParserRuleCall_2_0(), semanticObject.getBody());
-		feeder.finish();
 	}
 	
 	
@@ -649,10 +709,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Disjunction
+	 *     Statement returns Disjunction
+	 *     AssertionOrDefinition returns Disjunction
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Disjunction
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Disjunction
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Disjunction
 	 *     Expression returns Disjunction
+	 *     ImplicationExpression returns Disjunction
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Disjunction
 	 *     DisjunctiveExpression returns Disjunction
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Disjunction
 	 *     DisjunctiveExpression.Case_1_1_0 returns Disjunction
@@ -666,6 +730,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Disjunction
 	 *     ExponentialExpression returns Disjunction
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Disjunction
+	 *     CastExpression returns Disjunction
+	 *     CastExpression.CastExpression_1_0 returns Disjunction
 	 *     UnaryExpression returns Disjunction
 	 *     AggregationExpression returns Disjunction
 	 *     AtomicExpression returns Disjunction
@@ -680,10 +746,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Switch
+	 *     Statement returns Switch
+	 *     AssertionOrDefinition returns Switch
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Switch
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Switch
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Switch
 	 *     Expression returns Switch
+	 *     ImplicationExpression returns Switch
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Switch
 	 *     DisjunctiveExpression returns Switch
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Switch
 	 *     DisjunctiveExpression.Case_1_1_0 returns Switch
@@ -697,6 +767,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Switch
 	 *     ExponentialExpression returns Switch
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Switch
+	 *     CastExpression returns Switch
+	 *     CastExpression.CastExpression_1_0 returns Switch
 	 *     UnaryExpression returns Switch
 	 *     AggregationExpression returns Switch
 	 *     AtomicExpression returns Switch
@@ -732,10 +804,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns EmptyIntervalLiteral
+	 *     Statement returns EmptyIntervalLiteral
+	 *     AssertionOrDefinition returns EmptyIntervalLiteral
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns EmptyIntervalLiteral
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns EmptyIntervalLiteral
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns EmptyIntervalLiteral
 	 *     Expression returns EmptyIntervalLiteral
+	 *     ImplicationExpression returns EmptyIntervalLiteral
+	 *     ImplicationExpression.BinaryExpression_1_0 returns EmptyIntervalLiteral
 	 *     DisjunctiveExpression returns EmptyIntervalLiteral
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns EmptyIntervalLiteral
 	 *     DisjunctiveExpression.Case_1_1_0 returns EmptyIntervalLiteral
@@ -749,6 +825,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns EmptyIntervalLiteral
 	 *     ExponentialExpression returns EmptyIntervalLiteral
 	 *     ExponentialExpression.BinaryExpression_1_0 returns EmptyIntervalLiteral
+	 *     CastExpression returns EmptyIntervalLiteral
+	 *     CastExpression.CastExpression_1_0 returns EmptyIntervalLiteral
 	 *     UnaryExpression returns EmptyIntervalLiteral
 	 *     AggregationExpression returns EmptyIntervalLiteral
 	 *     AtomicExpression returns EmptyIntervalLiteral
@@ -826,22 +904,63 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
+	 *     Statement returns ExternAggregatorDefinition
+	 *     ExternAggregatorDefinition returns ExternAggregatorDefinition
+	 *
+	 * Constraint:
+	 *     (type=[NamedElement|QualifiedName] name=QualifiedName inputType=[NamedElement|QualifiedName])
+	 */
+	protected void sequence_ExternAggregatorDefinition(ISerializationContext context, ExternAggregatorDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__TYPE));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__INPUT_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__INPUT_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExternAggregatorDefinitionAccess().getTypeNamedElementQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__TYPE, false));
+		feeder.accept(grammarAccess.getExternAggregatorDefinitionAccess().getNameQualifiedNameParserRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getExternAggregatorDefinitionAccess().getInputTypeNamedElementQualifiedNameParserRuleCall_4_0_1(), semanticObject.eGet(SolverLanguagePackage.Literals.EXTERN_AGGREGATOR_DEFINITION__INPUT_TYPE, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns ExternDatatypeDefinition
+	 *     ExternDatatypeDefinition returns ExternDatatypeDefinition
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName supertypes+=[NamedElement|QualifiedName] supertypes+=[NamedElement|QualifiedName]*)
+	 */
+	protected void sequence_ExternDatatypeDefinition(ISerializationContext context, ExternDatatypeDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Statement returns ExternMetricDefinition
 	 *     ExternMetricDefinition returns ExternMetricDefinition
 	 *
 	 * Constraint:
-	 *     (type=MetricType head=Call)
+	 *     (type=[NamedElement|QualifiedName] name=QualifiedName argumentList=ArgumentList)
 	 */
 	protected void sequence_ExternMetricDefinition(ISerializationContext context, ExternMetricDefinition semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__TYPE));
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__HEAD) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__HEAD));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__ARGUMENT_LIST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__ARGUMENT_LIST));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExternMetricDefinitionAccess().getTypeMetricTypeEnumRuleCall_1_0(), semanticObject.getType());
-		feeder.accept(grammarAccess.getExternMetricDefinitionAccess().getHeadCallParserRuleCall_2_0(), semanticObject.getHead());
+		feeder.accept(grammarAccess.getExternMetricDefinitionAccess().getTypeNamedElementQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(SolverLanguagePackage.Literals.EXTERN_METRIC_DEFINITION__TYPE, false));
+		feeder.accept(grammarAccess.getExternMetricDefinitionAccess().getNameQualifiedNameParserRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getExternMetricDefinitionAccess().getArgumentListArgumentListParserRuleCall_3_0(), semanticObject.getArgumentList());
 		feeder.finish();
 	}
 	
@@ -852,26 +971,33 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     ExternPredicateDefinition returns ExternPredicateDefinition
 	 *
 	 * Constraint:
-	 *     head=Call
+	 *     (name=QualifiedName argumentList=ArgumentList)
 	 */
 	protected void sequence_ExternPredicateDefinition(ISerializationContext context, ExternPredicateDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_PREDICATE_DEFINITION__HEAD) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_PREDICATE_DEFINITION__HEAD));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_PREDICATE_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_PREDICATE_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.EXTERN_PREDICATE_DEFINITION__ARGUMENT_LIST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.EXTERN_PREDICATE_DEFINITION__ARGUMENT_LIST));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExternPredicateDefinitionAccess().getHeadCallParserRuleCall_1_0(), semanticObject.getHead());
+		feeder.accept(grammarAccess.getExternPredicateDefinitionAccess().getNameQualifiedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getExternPredicateDefinitionAccess().getArgumentListArgumentListParserRuleCall_2_0(), semanticObject.getArgumentList());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns IfElse
+	 *     Statement returns IfElse
+	 *     AssertionOrDefinition returns IfElse
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns IfElse
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns IfElse
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns IfElse
 	 *     Expression returns IfElse
 	 *     IfElse returns IfElse
+	 *     ImplicationExpression returns IfElse
+	 *     ImplicationExpression.BinaryExpression_1_0 returns IfElse
 	 *     DisjunctiveExpression returns IfElse
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns IfElse
 	 *     DisjunctiveExpression.Case_1_1_0 returns IfElse
@@ -885,6 +1011,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns IfElse
 	 *     ExponentialExpression returns IfElse
 	 *     ExponentialExpression.BinaryExpression_1_0 returns IfElse
+	 *     CastExpression returns IfElse
+	 *     CastExpression.CastExpression_1_0 returns IfElse
 	 *     UnaryExpression returns IfElse
 	 *     AggregationExpression returns IfElse
 	 *     AtomicExpression returns IfElse
@@ -911,10 +1039,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns InfinityLiteral
+	 *     Statement returns InfinityLiteral
+	 *     AssertionOrDefinition returns InfinityLiteral
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns InfinityLiteral
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns InfinityLiteral
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns InfinityLiteral
 	 *     Expression returns InfinityLiteral
+	 *     ImplicationExpression returns InfinityLiteral
+	 *     ImplicationExpression.BinaryExpression_1_0 returns InfinityLiteral
 	 *     DisjunctiveExpression returns InfinityLiteral
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns InfinityLiteral
 	 *     DisjunctiveExpression.Case_1_1_0 returns InfinityLiteral
@@ -928,6 +1060,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns InfinityLiteral
 	 *     ExponentialExpression returns InfinityLiteral
 	 *     ExponentialExpression.BinaryExpression_1_0 returns InfinityLiteral
+	 *     CastExpression returns InfinityLiteral
+	 *     CastExpression.CastExpression_1_0 returns InfinityLiteral
 	 *     UnaryExpression returns InfinityLiteral
 	 *     AggregationExpression returns InfinityLiteral
 	 *     AtomicExpression returns InfinityLiteral
@@ -944,10 +1078,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Interval
+	 *     Statement returns Interval
+	 *     AssertionOrDefinition returns Interval
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Interval
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Interval
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Interval
 	 *     Expression returns Interval
+	 *     ImplicationExpression returns Interval
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Interval
 	 *     DisjunctiveExpression returns Interval
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Interval
 	 *     DisjunctiveExpression.Case_1_1_0 returns Interval
@@ -961,6 +1099,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Interval
 	 *     ExponentialExpression returns Interval
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Interval
+	 *     CastExpression returns Interval
+	 *     CastExpression.CastExpression_1_0 returns Interval
 	 *     UnaryExpression returns Interval
 	 *     AggregationExpression returns Interval
 	 *     AtomicExpression returns Interval
@@ -985,10 +1125,85 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns LogicLiteral
+	 *     LetBinding returns LetBinding
+	 *
+	 * Constraint:
+	 *     (variable=Variable value=AdditiveExpression)
+	 */
+	protected void sequence_LetBinding(ISerializationContext context, LetBinding semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.LET_BINDING__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.LET_BINDING__VARIABLE));
+			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.LET_BINDING__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.LET_BINDING__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLetBindingAccess().getVariableVariableParserRuleCall_0_0(), semanticObject.getVariable());
+		feeder.accept(grammarAccess.getLetBindingAccess().getValueAdditiveExpressionParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns Let
+	 *     AssertionOrDefinition returns Let
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Let
+	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Let
+	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Let
+	 *     Expression returns Let
+	 *     Let returns Let
+	 *     ImplicationExpression returns Let
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Let
+	 *     DisjunctiveExpression returns Let
+	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Let
+	 *     DisjunctiveExpression.Case_1_1_0 returns Let
+	 *     ConjunctiveExpression returns Let
+	 *     ConjunctiveExpression.Conjunction_1_0 returns Let
+	 *     ComparisonExpression returns Let
+	 *     ComparisonExpression.Comparison_1_0 returns Let
+	 *     AdditiveExpression returns Let
+	 *     AdditiveExpression.BinaryExpression_1_0 returns Let
+	 *     MultiplicativeExpression returns Let
+	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Let
+	 *     ExponentialExpression returns Let
+	 *     ExponentialExpression.BinaryExpression_1_0 returns Let
+	 *     CastExpression returns Let
+	 *     CastExpression.CastExpression_1_0 returns Let
+	 *     UnaryExpression returns Let
+	 *     AggregationExpression returns Let
+	 *     AtomicExpression returns Let
+	 *
+	 * Constraint:
+	 *     (bindings+=LetBinding bindings+=LetBinding* body=Expression)
+	 */
+	protected void sequence_Let(ISerializationContext context, Let semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     LocalVariables returns LocalVariables
+	 *
+	 * Constraint:
+	 *     (variables+=Variable variables+=Variable*)?
+	 */
+	protected void sequence_LocalVariables(ISerializationContext context, LocalVariables semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns LogicLiteral
+	 *     AssertionOrDefinition returns LogicLiteral
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns LogicLiteral
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns LogicLiteral
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns LogicLiteral
 	 *     Expression returns LogicLiteral
+	 *     ImplicationExpression returns LogicLiteral
+	 *     ImplicationExpression.BinaryExpression_1_0 returns LogicLiteral
 	 *     DisjunctiveExpression returns LogicLiteral
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns LogicLiteral
 	 *     DisjunctiveExpression.Case_1_1_0 returns LogicLiteral
@@ -1002,6 +1217,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns LogicLiteral
 	 *     ExponentialExpression returns LogicLiteral
 	 *     ExponentialExpression.BinaryExpression_1_0 returns LogicLiteral
+	 *     CastExpression returns LogicLiteral
+	 *     CastExpression.CastExpression_1_0 returns LogicLiteral
 	 *     UnaryExpression returns LogicLiteral
 	 *     AggregationExpression returns LogicLiteral
 	 *     AtomicExpression returns LogicLiteral
@@ -1066,7 +1283,7 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MetricDefinition returns MetricDefinition
 	 *
 	 * Constraint:
-	 *     (type=MetricType head=Expression body=Expression)
+	 *     (type=[NamedElement|QualifiedName] head=Call body=Expression)
 	 */
 	protected void sequence_MetricDefinition(ISerializationContext context, MetricDefinition semanticObject) {
 		if (errorAcceptor != null) {
@@ -1078,8 +1295,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.METRIC_DEFINITION__BODY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMetricDefinitionAccess().getTypeMetricTypeEnumRuleCall_0_0(), semanticObject.getType());
-		feeder.accept(grammarAccess.getMetricDefinitionAccess().getHeadExpressionParserRuleCall_1_0(), semanticObject.getHead());
+		feeder.accept(grammarAccess.getMetricDefinitionAccess().getTypeNamedElementQualifiedNameParserRuleCall_0_0_1(), semanticObject.eGet(SolverLanguagePackage.Literals.METRIC_DEFINITION__TYPE, false));
+		feeder.accept(grammarAccess.getMetricDefinitionAccess().getHeadCallParserRuleCall_1_0(), semanticObject.getHead());
 		feeder.accept(grammarAccess.getMetricDefinitionAccess().getBodyExpressionParserRuleCall_3_0(), semanticObject.getBody());
 		feeder.finish();
 	}
@@ -1087,28 +1304,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     NamedElement returns NamedElement
-	 *
-	 * Constraint:
-	 *     name=QualifiedName
-	 */
-	protected void sequence_NamedElement(ISerializationContext context, NamedElement semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SolverLanguagePackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SolverLanguagePackage.Literals.NAMED_ELEMENT__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNamedElementAccess().getNameQualifiedNameParserRuleCall_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns NumericLiteral
+	 *     Statement returns NumericLiteral
+	 *     AssertionOrDefinition returns NumericLiteral
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns NumericLiteral
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns NumericLiteral
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns NumericLiteral
 	 *     Expression returns NumericLiteral
+	 *     ImplicationExpression returns NumericLiteral
+	 *     ImplicationExpression.BinaryExpression_1_0 returns NumericLiteral
 	 *     DisjunctiveExpression returns NumericLiteral
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns NumericLiteral
 	 *     DisjunctiveExpression.Case_1_1_0 returns NumericLiteral
@@ -1122,6 +1325,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns NumericLiteral
 	 *     ExponentialExpression returns NumericLiteral
 	 *     ExponentialExpression.BinaryExpression_1_0 returns NumericLiteral
+	 *     CastExpression returns NumericLiteral
+	 *     CastExpression.CastExpression_1_0 returns NumericLiteral
 	 *     UnaryExpression returns NumericLiteral
 	 *     AggregationExpression returns NumericLiteral
 	 *     AtomicExpression returns NumericLiteral
@@ -1190,10 +1395,52 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns Reference
+	 *     Statement returns QuantifiedExpression
+	 *     AssertionOrDefinition returns QuantifiedExpression
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns QuantifiedExpression
+	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns QuantifiedExpression
+	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns QuantifiedExpression
+	 *     Expression returns QuantifiedExpression
+	 *     ImplicationExpression returns QuantifiedExpression
+	 *     ImplicationExpression.BinaryExpression_1_0 returns QuantifiedExpression
+	 *     DisjunctiveExpression returns QuantifiedExpression
+	 *     DisjunctiveExpression.Disjunction_1_0_0 returns QuantifiedExpression
+	 *     DisjunctiveExpression.Case_1_1_0 returns QuantifiedExpression
+	 *     ConjunctiveExpression returns QuantifiedExpression
+	 *     ConjunctiveExpression.Conjunction_1_0 returns QuantifiedExpression
+	 *     ComparisonExpression returns QuantifiedExpression
+	 *     ComparisonExpression.Comparison_1_0 returns QuantifiedExpression
+	 *     AdditiveExpression returns QuantifiedExpression
+	 *     AdditiveExpression.BinaryExpression_1_0 returns QuantifiedExpression
+	 *     MultiplicativeExpression returns QuantifiedExpression
+	 *     MultiplicativeExpression.BinaryExpression_1_0 returns QuantifiedExpression
+	 *     ExponentialExpression returns QuantifiedExpression
+	 *     ExponentialExpression.BinaryExpression_1_0 returns QuantifiedExpression
+	 *     CastExpression returns QuantifiedExpression
+	 *     CastExpression.CastExpression_1_0 returns QuantifiedExpression
+	 *     UnaryExpression returns QuantifiedExpression
+	 *     AggregationExpression returns QuantifiedExpression
+	 *     QuantifiedExpression returns QuantifiedExpression
+	 *     AtomicExpression returns QuantifiedExpression
+	 *
+	 * Constraint:
+	 *     (quantifier=Quantifier localVariables=LocalVariables? body=Expression)
+	 */
+	protected void sequence_QuantifiedExpression(ISerializationContext context, QuantifiedExpression semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns Reference
+	 *     AssertionOrDefinition returns Reference
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns Reference
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns Reference
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns Reference
 	 *     Expression returns Reference
+	 *     ImplicationExpression returns Reference
+	 *     ImplicationExpression.BinaryExpression_1_0 returns Reference
 	 *     DisjunctiveExpression returns Reference
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns Reference
 	 *     DisjunctiveExpression.Case_1_1_0 returns Reference
@@ -1207,6 +1454,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns Reference
 	 *     ExponentialExpression returns Reference
 	 *     ExponentialExpression.BinaryExpression_1_0 returns Reference
+	 *     CastExpression returns Reference
+	 *     CastExpression.CastExpression_1_0 returns Reference
 	 *     UnaryExpression returns Reference
 	 *     AggregationExpression returns Reference
 	 *     AtomicExpression returns Reference
@@ -1241,10 +1490,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns StringLiteral
+	 *     Statement returns StringLiteral
+	 *     AssertionOrDefinition returns StringLiteral
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns StringLiteral
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns StringLiteral
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns StringLiteral
 	 *     Expression returns StringLiteral
+	 *     ImplicationExpression returns StringLiteral
+	 *     ImplicationExpression.BinaryExpression_1_0 returns StringLiteral
 	 *     DisjunctiveExpression returns StringLiteral
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns StringLiteral
 	 *     DisjunctiveExpression.Case_1_1_0 returns StringLiteral
@@ -1258,6 +1511,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns StringLiteral
 	 *     ExponentialExpression returns StringLiteral
 	 *     ExponentialExpression.BinaryExpression_1_0 returns StringLiteral
+	 *     CastExpression returns StringLiteral
+	 *     CastExpression.CastExpression_1_0 returns StringLiteral
 	 *     UnaryExpression returns StringLiteral
 	 *     AggregationExpression returns StringLiteral
 	 *     AtomicExpression returns StringLiteral
@@ -1321,10 +1576,14 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	
 	/**
 	 * Contexts:
-	 *     AssertionOrDefinition.Assertion_1_0_0 returns UnaryExpression
+	 *     Statement returns UnaryExpression
+	 *     AssertionOrDefinition returns UnaryExpression
+	 *     AssertionOrDefinition.Interpretation_1_0_0 returns UnaryExpression
 	 *     AssertionOrDefinition.PredicateDefinition_1_1_0 returns UnaryExpression
 	 *     AssertionOrDefinition.MetricDefinition_1_2_0 returns UnaryExpression
 	 *     Expression returns UnaryExpression
+	 *     ImplicationExpression returns UnaryExpression
+	 *     ImplicationExpression.BinaryExpression_1_0 returns UnaryExpression
 	 *     DisjunctiveExpression returns UnaryExpression
 	 *     DisjunctiveExpression.Disjunction_1_0_0 returns UnaryExpression
 	 *     DisjunctiveExpression.Case_1_1_0 returns UnaryExpression
@@ -1338,6 +1597,8 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	 *     MultiplicativeExpression.BinaryExpression_1_0 returns UnaryExpression
 	 *     ExponentialExpression returns UnaryExpression
 	 *     ExponentialExpression.BinaryExpression_1_0 returns UnaryExpression
+	 *     CastExpression returns UnaryExpression
+	 *     CastExpression.CastExpression_1_0 returns UnaryExpression
 	 *     UnaryExpression returns UnaryExpression
 	 *     AggregationExpression returns UnaryExpression
 	 *     AtomicExpression returns UnaryExpression
@@ -1378,6 +1639,18 @@ public class SolverLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 		feeder.accept(grammarAccess.getUnnamedErrorPrediateDefinitionAccess().getArgumentListArgumentListParserRuleCall_1_0(), semanticObject.getArgumentList());
 		feeder.accept(grammarAccess.getUnnamedErrorPrediateDefinitionAccess().getBodyExpressionParserRuleCall_3_0(), semanticObject.getBody());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Variable returns Variable
+	 *
+	 * Constraint:
+	 *     (type=[NamedElement|QualifiedName]? name=ID)
+	 */
+	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

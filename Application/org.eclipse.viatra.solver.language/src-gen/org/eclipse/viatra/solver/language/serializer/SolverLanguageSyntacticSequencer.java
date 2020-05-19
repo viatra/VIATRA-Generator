@@ -83,18 +83,22 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '[' lowerBound=Expression
-	 *     (rule start) (ambiguity) 'count' '{' body=Expression
 	 *     (rule start) (ambiguity) 'empty' (rule start)
+	 *     (rule start) (ambiguity) 'empty' FULL_STOP (rule start)
 	 *     (rule start) (ambiguity) 'if' condition=Expression
 	 *     (rule start) (ambiguity) 'inf' (rule start)
+	 *     (rule start) (ambiguity) 'inf' FULL_STOP (rule start)
+	 *     (rule start) (ambiguity) 'let' bindings+=LetBinding
 	 *     (rule start) (ambiguity) functor=Reference
-	 *     (rule start) (ambiguity) op=AggregationOp
 	 *     (rule start) (ambiguity) op=UnaryOp
+	 *     (rule start) (ambiguity) op=[NamedElement|QualifiedName]
+	 *     (rule start) (ambiguity) quantifier=Quantifier
 	 *     (rule start) (ambiguity) referred=[NamedElement|QualifiedName]
 	 *     (rule start) (ambiguity) value=LogicValue
 	 *     (rule start) (ambiguity) value=Real
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {BinaryExpression.left=}
+	 *     (rule start) (ambiguity) {CastExpression.body=}
 	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Conjunction.children+=}
 	 *     (rule start) (ambiguity) {Disjunction.children+=}
@@ -109,11 +113,13 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'count' '{' body=Expression
 	 *     (rule start) (ambiguity) 'if' condition=Expression
-	 *     (rule start) (ambiguity) op=AggregationOp
+	 *     (rule start) (ambiguity) 'let' bindings+=LetBinding
 	 *     (rule start) (ambiguity) op=UnaryOp
+	 *     (rule start) (ambiguity) op=[NamedElement|QualifiedName]
+	 *     (rule start) (ambiguity) quantifier=Quantifier
 	 *     (rule start) (ambiguity) {BinaryExpression.left=}
+	 *     (rule start) (ambiguity) {CastExpression.body=}
 	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Conjunction.children+=}
 	 *     (rule start) (ambiguity) {Disjunction.children+=}
