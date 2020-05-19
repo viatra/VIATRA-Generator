@@ -11,6 +11,9 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import java.util.HashMap
 import java.util.Map
 import java.util.Set
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
 
 class PartialInterpretation2Gml {
 	def private getElements(PartialInterpretation model) {
@@ -106,9 +109,30 @@ class PartialInterpretation2Gml {
 		'''
 	}
 	
-	def protected transormTitle(DefinedElement object) {
+	def protected dispatch transormTitle(DefinedElement object) {
 		if(object.name!= null)object.name.replace("\"", "")
 		else "null"
+	}
+	def protected dispatch transormTitle(IntegerElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
+	}
+	def protected dispatch transormTitle(RealElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
+	}
+	def protected dispatch transormTitle(StringElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
 	}
 	
 	def protected transformLink(
