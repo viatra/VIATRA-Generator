@@ -10,21 +10,34 @@ class MultiplicityGoalConstraintCalculator {
 	val String targetRelationName;
 	val IQuerySpecification<?> querySpecification;
 	var ViatraQueryMatcher<?> matcher;
+	val int minValue
+	val boolean containment
+	val int cost
 		
-	public new(String targetRelationName, IQuerySpecification<?> querySpecification) {
+	public new(String targetRelationName, IQuerySpecification<?> querySpecification, int minValue, boolean containment, int cost) {
 		this.targetRelationName = targetRelationName
 		this.querySpecification = querySpecification
 		this.matcher = null
+		this.minValue = minValue
+		this.containment = containment
+		this.cost = cost
 	}
 	
 	public new(MultiplicityGoalConstraintCalculator other) {
 		this.targetRelationName = other.targetRelationName
 		this.querySpecification = other.querySpecification
 		this.matcher = null
+		this.minValue = other.minValue
+		this.containment = other.containment
+		this.cost = other.cost
 	}
 	
 	def public getName() {
 		targetRelationName
+	}
+	
+	def isContainment() {
+		return containment
 	}
 	
 	def public init(Notifier notifier) {
@@ -36,11 +49,18 @@ class MultiplicityGoalConstraintCalculator {
 		var res = 0
 		val allMatches = this.matcher.allMatches
 		for(match : allMatches) {
-			//println(targetRelationName+ " missing multiplicity: "+match.get(3))
-			val missingMultiplicity = match.get(4) as Integer
-			res += missingMultiplicity
+			
+			val existingMultiplicity = match.get(4) as Integer
+			if(existingMultiplicity < this.minValue) {
+				val missingMultiplicity = this.minValue-existingMultiplicity
+				res += missingMultiplicity
+			}
+//			if(missingMultiplicity!=0) {
+//				println(targetRelationName+ " missing multiplicity: "+missingMultiplicity)
+//			}
 		}
-		//println(targetRelationName+ " all missing multiplicities: "+res)
-		return res
+//		if(res>0)
+//		println(targetRelationName+ " all missing multiplicities: "+res + "*"+cost+"="+res*cost)
+		return res*cost
 	}
 }

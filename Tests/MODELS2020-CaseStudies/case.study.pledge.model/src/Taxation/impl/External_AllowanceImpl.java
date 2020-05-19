@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link Taxation.impl.External_AllowanceImpl#getAmount <em>Amount</em>}</li>
  *   <li>{@link Taxation.impl.External_AllowanceImpl#getGrantor <em>Grantor</em>}</li>
  *   <li>{@link Taxation.impl.External_AllowanceImpl#getStarting_year <em>Starting year</em>}</li>
  *   <li>{@link Taxation.impl.External_AllowanceImpl#getEnding_year <em>Ending year</em>}</li>
@@ -39,26 +38,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * @generated
  */
 public class External_AllowanceImpl extends MinimalEObjectImpl.Container implements External_Allowance {
-	/**
-	 * The default value of the '{@link #getAmount() <em>Amount</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAmount()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double AMOUNT_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getAmount() <em>Amount</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAmount()
-	 * @generated
-	 * @ordered
-	 */
-	protected double amount = AMOUNT_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getGrantor() <em>Grantor</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -166,29 +145,6 @@ public class External_AllowanceImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	protected EClass eStaticClass() {
 		return TaxationPackage.Literals.EXTERNAL_ALLOWANCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public double getAmount() {
-		return amount;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setAmount(double newAmount) {
-		double oldAmount = amount;
-		amount = newAmount;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.EXTERNAL_ALLOWANCE__AMOUNT, oldAmount, amount));
 	}
 
 	/**
@@ -418,8 +374,6 @@ public class External_AllowanceImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TaxationPackage.EXTERNAL_ALLOWANCE__AMOUNT:
-				return getAmount();
 			case TaxationPackage.EXTERNAL_ALLOWANCE__GRANTOR:
 				return getGrantor();
 			case TaxationPackage.EXTERNAL_ALLOWANCE__STARTING_YEAR:
@@ -445,9 +399,6 @@ public class External_AllowanceImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TaxationPackage.EXTERNAL_ALLOWANCE__AMOUNT:
-				setAmount((Double)newValue);
-				return;
 			case TaxationPackage.EXTERNAL_ALLOWANCE__GRANTOR:
 				setGrantor((Grantor)newValue);
 				return;
@@ -478,9 +429,6 @@ public class External_AllowanceImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TaxationPackage.EXTERNAL_ALLOWANCE__AMOUNT:
-				setAmount(AMOUNT_EDEFAULT);
-				return;
 			case TaxationPackage.EXTERNAL_ALLOWANCE__GRANTOR:
 				setGrantor(GRANTOR_EDEFAULT);
 				return;
@@ -511,8 +459,6 @@ public class External_AllowanceImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TaxationPackage.EXTERNAL_ALLOWANCE__AMOUNT:
-				return amount != AMOUNT_EDEFAULT;
 			case TaxationPackage.EXTERNAL_ALLOWANCE__GRANTOR:
 				return grantor != GRANTOR_EDEFAULT;
 			case TaxationPackage.EXTERNAL_ALLOWANCE__STARTING_YEAR:
@@ -539,9 +485,7 @@ public class External_AllowanceImpl extends MinimalEObjectImpl.Container impleme
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (amount: ");
-		result.append(amount);
-		result.append(", grantor: ");
+		result.append(" (grantor: ");
 		result.append(grantor);
 		result.append(", starting_year: ");
 		result.append(starting_year);

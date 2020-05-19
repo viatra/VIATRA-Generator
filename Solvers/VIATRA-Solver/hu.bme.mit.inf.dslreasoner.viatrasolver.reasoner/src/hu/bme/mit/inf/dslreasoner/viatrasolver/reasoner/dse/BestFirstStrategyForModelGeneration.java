@@ -9,6 +9,9 @@
  *******************************************************************************/
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,6 +47,7 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericProblemSolver;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedPartialInterpretationStateCoder;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
@@ -91,6 +95,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private int numberOfPrintedModel = 0;
 	private int numberOfSolverCalls = 0;
 	
+	public long explorationStarted = 0;
 
 	public BestFirstStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
@@ -111,7 +116,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
 	}
-
+	//LinkedList<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	@Override
 	public void initStrategy(ThreadContext context) {
 		this.context = context;
@@ -137,17 +142,25 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			}
 		};
 		
-		this.numericSolver = new NumericSolver(context, method, false);
+		this.numericSolver = new NumericSolver(context, method, false,this.configuration.runIntermediateNumericalConsistencyChecks);
 
 		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 	}
 
 	@Override
 	public void explore() {
+//		System.out.println("press enter");
+//		try {
+//			new BufferedReader(new InputStreamReader(System.in)).readLine();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}  
+		this.explorationStarted=System.nanoTime();
 		if (!context.checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
 			return;
-		} else if(!numericSolver.isSatisfiable()) {
+		} else if(!numericSolver.maySatisfiable()) {
 			logger.info("Numeric contraints are not satisifed in the first state. Terminate.");
 			return;
 		}
@@ -211,12 +224,11 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
-//					System.out.println(matcher.getPatternName());
-//					System.out.println("---------");
-//					for(IPatternMatch m : matcher.getAllMatches()) {
-//						System.out.println(m);
+//					int c = matcher.countMatches();
+//					if(c>=100) {
+//						System.out.println(c+ " " +matcher.getPatternName());
 //					}
-//					System.out.println("---------");
+//					
 //				}
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
@@ -228,7 +240,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				} else if (!context.checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
 					context.backtrack();
-				} else if (!numericSolver.isSatisfiable()) {
+				} else if (!numericSolver.maySatisfiable()) {
 					logger.debug("Numeric constraints are not satisifed.");
 					context.backtrack();
 				} else {
@@ -284,15 +296,37 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private void checkForSolution(final Fitness fittness) {
 		if (fittness.isSatisifiesHardObjectives()) {
 			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				Map<EObject, EObject> trace = solutionStoreWithCopy.newSolution(context);
-				numericSolver.fillSolutionCopy(trace);
-				solutionStoreWithDiversityDescriptor.newSolution(context);
-				solutionStore.newSolution(context);
-				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
-
-				logger.debug("Found a solution.");
+				if(numericSolver.currentSatisfiable()) {
+					Map<EObject, EObject> trace = solutionStoreWithCopy.newSolution(context);
+					numericSolver.fillSolutionCopy(trace);
+					solutionStoreWithDiversityDescriptor.newSolution(context);
+					solutionStore.newSolution(context);
+					configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
+					saveTimes();
+					logger.debug("Found a solution.");
+				}
 			}
 		}
+	}
+	public List<String> times = new LinkedList<String>();
+	private void saveTimes() {
+		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
+		long solutionCopy = solutionStoreWithCopy.getSumRuntime()/1000000;
+		long activationSelection = this.activationSelector.getRuntime()/1000000;
+		long numericalSolverSumTime = this.numericSolver.getRuntime()/1000000;
+		long numericalSolverProblemForming = this.numericSolver.getSolverSolvingProblem()/1000000;
+		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
+		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
+		this.times.add(
+			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+ 
+			"|StateCoderTime:"+statecoderTime+
+			"|SolutionCopyTime:"+solutionCopy+
+			"|ActivationSelectionTime:"+activationSelection+
+			"|NumericalSolverSumTime:"+numericalSolverSumTime+
+			"|NumericalSolverProblemFormingTime:"+numericalSolverProblemForming+
+			"|NumericalSolverSolvingTime:"+numericalSolverSolving+
+			"|NumericalSolverInterpretingSolution:"+numericalSolverInterpreting+")");
+		
 	}
 
 	@Override

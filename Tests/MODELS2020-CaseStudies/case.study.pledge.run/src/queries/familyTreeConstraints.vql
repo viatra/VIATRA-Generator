@@ -1,0 +1,41 @@
+package queries
+ 
+import "http://www.example.org/familytree"
+
+@Constraint(message="memberIsItsOwnParent", severity="error", key={m})
+pattern memberIsItsOwnParent(m: Member) = {
+	FamilyTree.members(_, m);
+	Member.parents(m, p);
+	m == p;
+}
+
+@Constraint(message="twoMembersHaveNoParent", severity="error", key={m1, m2})
+pattern twoMembersHaveNoParent(m1:Member, m2:Member) = {
+	neg find memberHasParent(m1);
+	neg find memberHasParent(m2);
+	m1 != m2;
+}
+
+pattern memberHasParent(m: Member) = {
+	Member.parents(m, _);
+}
+
+@Constraint(message="negativeAge", severity="error",key={m})
+pattern negativeAge(m: Member) {
+	Member.age(m,mage);
+	check(mage<0);
+}
+
+@Constraint(message="parentTooYoung", severity="error", key={c, p})
+pattern parentTooYoung(c: Member, p: Member) = {
+	FamilyTree.members(_, c);
+	Member.parents(c, p);
+	Member.age(c, cAge);
+	Member.age(p, pAge);
+	check (pAge <= (cAge + 12));
+}
+
+
+
+
+

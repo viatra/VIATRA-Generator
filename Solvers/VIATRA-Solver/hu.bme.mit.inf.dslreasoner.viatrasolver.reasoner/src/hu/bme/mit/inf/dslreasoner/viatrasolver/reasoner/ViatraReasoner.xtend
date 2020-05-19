@@ -82,7 +82,8 @@ class ViatraReasoner extends LogicReasoner{
 		dse.addObjective(new ModelGenerationCompositeObjective(
 			new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
-			new UnfinishedWFObjective(method.unfinishedWF)
+			new UnfinishedWFObjective(method.unfinishedWF),
+			viatraConfig
 		))
 
 		dse.addGlobalConstraint(wf2ObjectiveConverter.createInvalidationObjective(method.invalidWF))
@@ -113,8 +114,9 @@ class ViatraReasoner extends LogicReasoner{
 		
 		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
 		viatraConfig.progressMonitor.workedForwardTransformation
+		val transformationFinished = System.nanoTime 
+		val transformationTime = transformationFinished - transformationStartTime
 		
-		val transformationTime = System.nanoTime - transformationStartTime
 		val solverStartTime = System.nanoTime
 		
 		var boolean stoppedByTimeout
@@ -136,10 +138,19 @@ class ViatraReasoner extends LogicReasoner{
 			it.transformationTime = (transformationTime/1000000) as int
 			for(x : 0..<strategy.solutionStoreWithCopy.allRuntimes.size) {
 				it.entries += createIntStatisticEntry => [
-					it.name = '''_Solution«x»FoundAt'''
+					it.name = '''Solution«x+1»FoundAt'''
 					it.value = (strategy.solutionStoreWithCopy.allRuntimes.get(x)/1000000) as int
 				]
 			}
+			for(x: 0..<strategy.times.size) {
+				it.entries += createStringStatisticEntry => [
+					it.name = '''Solution«x+1»DetailedStatistics'''
+					it.value = strategy.times.get(x)
+				]
+			}
+			it.entries += createIntStatisticEntry => [
+				it.name = "ExplorationInitializationTime" it.value = ((strategy.explorationStarted-transformationFinished)/1000000) as int
+			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "TransformationExecutionTime" it.value = (method.statistics.transformationExecutionTime/1000000) as int
 			]
@@ -159,7 +170,16 @@ class ViatraReasoner extends LogicReasoner{
 				it.name = "ActivationSelectionTime" it.value = (strategy.activationSelector.runtime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverTime" it.value = (strategy.numericSolver.runtime/1000000) as int
+				it.name = "NumericalSolverSumTime" it.value = (strategy.numericSolver.runtime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverProblemFormingTime" it.value = (strategy.numericSolver.solverFormingProblem/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverSolvingTime" it.value = (strategy.numericSolver.solverSolvingProblem/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "NumericalSolverInterpretingSolution" it.value = (strategy.numericSolver.solverSolution/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "NumericalSolverCachingTime" it.value = (strategy.numericSolver.cachingTime/1000000) as int

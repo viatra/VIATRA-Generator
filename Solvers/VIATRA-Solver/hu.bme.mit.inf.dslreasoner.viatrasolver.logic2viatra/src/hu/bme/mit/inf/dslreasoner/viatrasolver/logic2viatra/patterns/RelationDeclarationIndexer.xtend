@@ -90,13 +90,13 @@ class RelationDeclarationIndexer {
 				// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
 				// the upper bound of the multiplicity should be considered.
 				numberOfExistingReferences == count «referRelation(relation,"source","_",Modality.MUST)»
-				check(numberOfExistingReferences < «upperMultiplicities.get(relation)»);
+				numberOfExistingReferences != «upperMultiplicities.get(relation)»;
 			«ENDIF»
 			«IF inverseRelations.containsKey(relation) && upperMultiplicities.containsKey(inverseRelations.get(relation))»
 				// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
 				// the upper bound of the opposite reference multiplicity should be considered.
 				numberOfExistingOppositeReferences == count «base.referRelation(inverseRelations.get(relation),"target","_",Modality.MUST,fqn2PQuery)»
-				check(numberOfExistingOppositeReferences < «upperMultiplicities.get(inverseRelations.get(relation))»);
+				numberOfExistingOppositeReferences != «upperMultiplicities.get(inverseRelations.get(relation))»;
 			«ENDIF»
 			«IF containments.contains(relation)»
 				// The reference is containment, then a new reference cannot be create if:

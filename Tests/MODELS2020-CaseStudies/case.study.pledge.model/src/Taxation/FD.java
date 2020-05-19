@@ -13,7 +13,6 @@ package Taxation;
  * </p>
  * <ul>
  *   <li>{@link Taxation.FD#getDistance_declared_in_january <em>Distance declared in january</em>}</li>
- *   <li>{@link Taxation.FD#getCalculated_distance <em>Calculated distance</em>}</li>
  * </ul>
  *
  * @see Taxation.TaxationPackage#getFD()
@@ -42,27 +41,5 @@ public interface FD extends Professional_Expenses_Deduction {
 	 * @generated
 	 */
 	void setDistance_declared_in_january(double value);
-
-	/**
-	 * Returns the value of the '<em><b>Calculated distance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Calculated distance</em>' attribute.
-	 * @see #setCalculated_distance(double)
-	 * @see Taxation.TaxationPackage#getFD_Calculated_distance()
-	 * @model required="true" derived="true"
-	 * @generated
-	 */
-	double getCalculated_distance();
-
-	/**
-	 * Sets the value of the '{@link Taxation.FD#getCalculated_distance <em>Calculated distance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Calculated distance</em>' attribute.
-	 * @see #getCalculated_distance()
-	 * @generated
-	 */
-	void setCalculated_distance(double value);
 
 } // FD

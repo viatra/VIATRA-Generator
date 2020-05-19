@@ -107,7 +107,7 @@ class PartialInterpretation2Gml {
 	}
 	
 	def protected transormTitle(DefinedElement object) {
-		if(object.name!= null)object.name
+		if(object.name!= null)object.name.replace("\"", "")
 		else "null"
 	}
 	

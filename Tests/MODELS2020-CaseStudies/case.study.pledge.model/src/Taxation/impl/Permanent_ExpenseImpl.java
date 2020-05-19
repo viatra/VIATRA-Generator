@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link Taxation.impl.Permanent_ExpenseImpl#getCategory <em>Category</em>}</li>
- *   <li>{@link Taxation.impl.Permanent_ExpenseImpl#isIs_eligible_for_deduction <em>Is eligible for deduction</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,26 +45,6 @@ public class Permanent_ExpenseImpl extends Special_Expense_DSImpl implements Per
 	 * @ordered
 	 */
 	protected Category_of_Permanent_Expense category = CATEGORY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIs_eligible_for_deduction() <em>Is eligible for deduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_eligible_for_deduction()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ELIGIBLE_FOR_DEDUCTION_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIs_eligible_for_deduction() <em>Is eligible for deduction</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIs_eligible_for_deduction()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean is_eligible_for_deduction = IS_ELIGIBLE_FOR_DEDUCTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,35 +94,10 @@ public class Permanent_ExpenseImpl extends Special_Expense_DSImpl implements Per
 	 * @generated
 	 */
 	@Override
-	public boolean isIs_eligible_for_deduction() {
-		return is_eligible_for_deduction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIs_eligible_for_deduction(boolean newIs_eligible_for_deduction) {
-		boolean oldIs_eligible_for_deduction = is_eligible_for_deduction;
-		is_eligible_for_deduction = newIs_eligible_for_deduction;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION, oldIs_eligible_for_deduction, is_eligible_for_deduction));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TaxationPackage.PERMANENT_EXPENSE__CATEGORY:
 				return getCategory();
-			case TaxationPackage.PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION:
-				return isIs_eligible_for_deduction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,9 +112,6 @@ public class Permanent_ExpenseImpl extends Special_Expense_DSImpl implements Per
 		switch (featureID) {
 			case TaxationPackage.PERMANENT_EXPENSE__CATEGORY:
 				setCategory((Category_of_Permanent_Expense)newValue);
-				return;
-			case TaxationPackage.PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION:
-				setIs_eligible_for_deduction((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,9 +128,6 @@ public class Permanent_ExpenseImpl extends Special_Expense_DSImpl implements Per
 			case TaxationPackage.PERMANENT_EXPENSE__CATEGORY:
 				setCategory(CATEGORY_EDEFAULT);
 				return;
-			case TaxationPackage.PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION:
-				setIs_eligible_for_deduction(IS_ELIGIBLE_FOR_DEDUCTION_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -194,8 +142,6 @@ public class Permanent_ExpenseImpl extends Special_Expense_DSImpl implements Per
 		switch (featureID) {
 			case TaxationPackage.PERMANENT_EXPENSE__CATEGORY:
 				return category != CATEGORY_EDEFAULT;
-			case TaxationPackage.PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION:
-				return is_eligible_for_deduction != IS_ELIGIBLE_FOR_DEDUCTION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,8 +158,6 @@ public class Permanent_ExpenseImpl extends Special_Expense_DSImpl implements Per
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (category: ");
 		result.append(category);
-		result.append(", is_eligible_for_deduction: ");
-		result.append(is_eligible_for_deduction);
 		result.append(')');
 		return result.toString();
 	}

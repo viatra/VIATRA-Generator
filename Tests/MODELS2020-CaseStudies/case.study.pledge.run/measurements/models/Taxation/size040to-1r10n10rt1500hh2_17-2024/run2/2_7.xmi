@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains>
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" separation_cause="DIVORCE">
+      <individual_A disability_type="E"/>
+      <individual_B xsi:type="TaxCardWithRoot:Non_Resident_Tax_Payer" birth_year="1918" disability_type="OTHER">
+        <from_agent/>
+        <incomes xsi:type="TaxCardWithRoot:Local_Income">
+          <income_type xsi:type="TaxCardWithRoot:Agriculture_and_Forestry_Income"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <individual_B disability_type="A"/>
+      <individual_B xsi:type="TaxCardWithRoot:Non_Resident_Tax_Payer" disability_type="NONE">
+        <from_agent expense="//@contains.1/@parents/@individual_B.5/@incomes.0/@expenses.0"/>
+        <incomes xsi:type="TaxCardWithRoot:Foreign_Income">
+          <income_type xsi:type="TaxCardWithRoot:Capital_and_Investments_Income"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <properties/>
+      <properties/>
+      <properties/>
+    </parents>
+  </contains>
+  <contains>
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record">
+      <individual_A/>
+      <individual_B disability_type="OTHER"/>
+      <individual_B disability_type="C"/>
+      <individual_B disability_type="NONE"/>
+      <individual_B xsi:type="TaxCardWithRoot:Non_Resident_Tax_Payer" disability_type="E">
+        <from_agent/>
+        <incomes xsi:type="TaxCardWithRoot:Foreign_Income">
+          <income_type xsi:type="TaxCardWithRoot:Employment_Income"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details worked_days="1"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <individual_B/>
+      <individual_B xsi:type="TaxCardWithRoot:Resident_Tax_Payer" disability_type="OTHER" expenses="//@contains.1/@parents/@individual_B.5/@incomes.0/@expenses.0">
+        <from_agent/>
+        <incomes xsi:type="TaxCardWithRoot:Local_Income">
+          <income_type xsi:type="TaxCardWithRoot:Employment_Income"/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <expenses xsi:type="TaxCardWithRoot:Donation" expense_purpose="DEPENDENCE_CARE" from_agent="//@contains.0/@parents/@individual_B.2/@from_agent" beneficiary="//@contains.1/@parents/@individual_B.5"/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <properties/>
+      <properties id10=""/>
+      <properties/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>

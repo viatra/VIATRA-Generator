@@ -27,11 +27,13 @@ import java.util.HashMap
 @Data class GeneratedPatterns {
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries
 	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedWFQueries
-	public Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> unfinishedMulticiplicityQueries
+	public Map<Relation,  Pair<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>,Integer>> unfinishedContainmentMulticiplicityQueries
+	public Map<Relation,  Pair<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>,Integer>> unfinishedNonContainmentMulticiplicityQueries
 	public Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
 	public Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
-	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  unitPropagationPreconditionPatterns
+	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  mustUnitPropagationPreconditionPatterns
+	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>  currentUnitPropagationPreconditionPatterns
 	public Collection<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> allQueries
 }
 
@@ -60,14 +62,15 @@ class PatternProvider {
 			null
 		}
 		val patternGeneratorResult = patternGenerator.transformBaseProperties(problem,emptySolution,fqn2Query,typeAnalysisResult)
-		val baseIndexerFile = patternGeneratorResult.key
-		val unitPropagationTrace = patternGeneratorResult.value
+		val baseIndexerFile = patternGeneratorResult.patternText
+		val mustUnitPropagationTrace = patternGeneratorResult.constraint2MustPreconditionName
+		val currentUnitPropagationTrace = patternGeneratorResult.constraint2CurrentPreconditionName
 		if(writeToFile) {
 			workspace.writeText('''generated3valued.vql_deactivated''',baseIndexerFile)
 		}
 		val ParseUtil parseUtil = new ParseUtil
 		val generatedQueries = parseUtil.parse(baseIndexerFile)
-		val runtimeQueries = calclulateRuntimeQueries(patternGenerator,problem,emptySolution,typeAnalysisResult,unitPropagationTrace,generatedQueries);
+		val runtimeQueries = calclulateRuntimeQueries(patternGenerator,problem,emptySolution,typeAnalysisResult,mustUnitPropagationTrace,currentUnitPropagationTrace,generatedQueries);
 		return runtimeQueries
 	}
 	
@@ -76,15 +79,33 @@ class PatternProvider {
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		TypeAnalysisResult typeAnalysisResult,
-		HashMap<PConstraint, String> unitPropagationTrace,
+		HashMap<PConstraint, String> mustUnitPropagationTrace,
+		HashMap<PConstraint, String> currentUnitPropagationTrace,
 		Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries
 	) {
 		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			invalidWFQueries = patternGenerator.invalidIndexer.getInvalidateByWfQueryNames(problem).mapValues[it.lookup(queries)]
 		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			unfinishedWFQueries = patternGenerator.unfinishedIndexer.getUnfinishedWFQueryNames(problem).mapValues[it.lookup(queries)]
-		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
-			unfinishedMultiplicityQueries = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(problem).mapValues[it.lookup(queries)]
+			
+		val unfinishedMultiplicities = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(problem)
+		val unfinishedContainmentMultiplicities = new HashMap
+		val unfinishedNonContainmentMultiplicities = new HashMap
+		for(entry : unfinishedMultiplicities.entrySet) {
+			val relation = entry.key
+			val name = entry.value.key
+			val amount = entry.value.value
+			val query = name.lookup(queries)
+			if(problem.containmentHierarchies.head.containmentRelations.contains(relation)) {
+				unfinishedContainmentMultiplicities.put(relation,query->amount)
+			} else {
+				unfinishedNonContainmentMultiplicities.put(relation,query->amount)
+			}
+		}
+//		val Map<Relation,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
+//			unfinishedMultiplicityQueries = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(problem).mapValues[it.lookup(queries)]
+//			
+			
 		val Map<ObjectCreationPrecondition,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			refineObjectsQueries = patternGenerator.typeRefinementGenerator.getRefineObjectQueryNames(problem,emptySolution,typeAnalysisResult).mapValues[it.lookup(queries)]
 		val Map<? extends Type,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
@@ -92,15 +113,19 @@ class PatternProvider {
 		val Map<Pair<RelationDeclaration, Relation>,  IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>>
 			refineRelationQueries = patternGenerator.relationRefinementGenerator.getRefineRelationQueries(problem).mapValues[it.lookup(queries)]
 		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> 
-			unitPropagationPreconditionPatterns = unitPropagationTrace.mapValues[it.lookup(queries)]
+			mustUnitPropagationPreconditionPatterns = mustUnitPropagationTrace.mapValues[it.lookup(queries)]
+		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> 
+			currentUnitPropagationPreconditionPatterns = currentUnitPropagationTrace.mapValues[it.lookup(queries)]
 		return new GeneratedPatterns(
 			invalidWFQueries,
 			unfinishedWFQueries,
-			unfinishedMultiplicityQueries,
+			unfinishedContainmentMultiplicities,
+			unfinishedNonContainmentMultiplicities,
 			refineObjectsQueries,
 			refineTypeQueries,
 			refineRelationQueries,
-			unitPropagationPreconditionPatterns,
+			mustUnitPropagationPreconditionPatterns,
+			currentUnitPropagationPreconditionPatterns,
 			queries.values
 		)
 	}

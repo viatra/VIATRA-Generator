@@ -12,7 +12,7 @@ class StatisticSections2Print {
 	{
 		var result = "";
 		for(statistic : statistics) {
-			result+= '''«statistic.readValue»;'''
+			result+= '''«statistic.readValue»,'''
 		}
 		return result
 	}

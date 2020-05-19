@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<satellite:InterferometryMission xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:satellite="http://www.example.org/satellite" xsi:schemaLocation="http://www.example.org/satellite ../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore">
+  <groundStationNetwork>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:KaCommSubsystem"/>
+  </groundStationNetwork>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.1/@commSubsystem.1"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:KaCommSubsystem" target="//@groundStationNetwork/@commSubsystem.1"/>
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:SmallSat">
+    <commSubsystem xsi:type="satellite:KaCommSubsystem" frequency="26500"/>
+    <commSubsystem xsi:type="satellite:KaCommSubsystem" target="//@groundStationNetwork/@commSubsystem.1" pathLength="385000"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat3U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" target="//@spacecraft.0/@commSubsystem.1"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+  <spacecraft xsi:type="satellite:CubeSat6U">
+    <commSubsystem xsi:type="satellite:UHFCommSubsystem" frequency="300"/>
+    <commSubsystem xsi:type="satellite:XCommSubsystem" target="//@spacecraft.3/@commSubsystem.1" frequency="8000" pathLength="150"/>
+    <payload xsi:type="satellite:InterferometryPayload"/>
+  </spacecraft>
+</satellite:InterferometryMission>

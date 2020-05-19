@@ -34,4 +34,7 @@ class UnfinishedMultiplicityObjective implements IObjective {
 	override setLevel(int level) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
+	def isContainment() {
+		return this.unfinishedMultiplicity.containment
+	}
 }

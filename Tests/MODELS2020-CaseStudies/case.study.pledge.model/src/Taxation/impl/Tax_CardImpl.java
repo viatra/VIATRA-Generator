@@ -7,7 +7,6 @@ import Taxation.Income;
 import Taxation.Income_Tax_Credit;
 import Taxation.Job_Activity;
 import Taxation.Tax_Card;
-import Taxation.Tax_Card_Type;
 import Taxation.Tax_Office;
 import Taxation.TaxationPackage;
 import Taxation.Town;
@@ -39,7 +38,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getCard_identifier <em>Card identifier</em>}</li>
- *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_card_type <em>Tax card type</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_office <em>Tax office</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getPercentage_of_witholding <em>Percentage of witholding</em>}</li>
  *   <li>{@link Taxation.impl.Tax_CardImpl#getTax_payers_name_surname <em>Tax payers name surname</em>}</li>
@@ -97,26 +95,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 	 * @ordered
 	 */
 	protected String card_identifier = CARD_IDENTIFIER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTax_card_type() <em>Tax card type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTax_card_type()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Tax_Card_Type TAX_CARD_TYPE_EDEFAULT = Tax_Card_Type.PRINCIPAL;
-
-	/**
-	 * The cached value of the '{@link #getTax_card_type() <em>Tax card type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTax_card_type()
-	 * @generated
-	 * @ordered
-	 */
-	protected Tax_Card_Type tax_card_type = TAX_CARD_TYPE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTax_office() <em>Tax office</em>}' attribute.
@@ -738,29 +716,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		card_identifier = newCard_identifier;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.TAX_CARD__CARD_IDENTIFIER, oldCard_identifier, card_identifier));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Tax_Card_Type getTax_card_type() {
-		return tax_card_type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTax_card_type(Tax_Card_Type newTax_card_type) {
-		Tax_Card_Type oldTax_card_type = tax_card_type;
-		tax_card_type = newTax_card_type == null ? TAX_CARD_TYPE_EDEFAULT : newTax_card_type;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.TAX_CARD__TAX_CARD_TYPE, oldTax_card_type, tax_card_type));
 	}
 
 	/**
@@ -1678,8 +1633,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		switch (featureID) {
 			case TaxationPackage.TAX_CARD__CARD_IDENTIFIER:
 				return getCard_identifier();
-			case TaxationPackage.TAX_CARD__TAX_CARD_TYPE:
-				return getTax_card_type();
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				return getTax_office();
 			case TaxationPackage.TAX_CARD__PERCENTAGE_OF_WITHOLDING:
@@ -1764,9 +1717,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		switch (featureID) {
 			case TaxationPackage.TAX_CARD__CARD_IDENTIFIER:
 				setCard_identifier((String)newValue);
-				return;
-			case TaxationPackage.TAX_CARD__TAX_CARD_TYPE:
-				setTax_card_type((Tax_Card_Type)newValue);
 				return;
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				setTax_office((Tax_Office)newValue);
@@ -1885,9 +1835,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 			case TaxationPackage.TAX_CARD__CARD_IDENTIFIER:
 				setCard_identifier(CARD_IDENTIFIER_EDEFAULT);
 				return;
-			case TaxationPackage.TAX_CARD__TAX_CARD_TYPE:
-				setTax_card_type(TAX_CARD_TYPE_EDEFAULT);
-				return;
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				setTax_office(TAX_OFFICE_EDEFAULT);
 				return;
@@ -2001,8 +1948,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		switch (featureID) {
 			case TaxationPackage.TAX_CARD__CARD_IDENTIFIER:
 				return CARD_IDENTIFIER_EDEFAULT == null ? card_identifier != null : !CARD_IDENTIFIER_EDEFAULT.equals(card_identifier);
-			case TaxationPackage.TAX_CARD__TAX_CARD_TYPE:
-				return tax_card_type != TAX_CARD_TYPE_EDEFAULT;
 			case TaxationPackage.TAX_CARD__TAX_OFFICE:
 				return tax_office != TAX_OFFICE_EDEFAULT;
 			case TaxationPackage.TAX_CARD__PERCENTAGE_OF_WITHOLDING:
@@ -2085,8 +2030,6 @@ public class Tax_CardImpl extends MinimalEObjectImpl.Container implements Tax_Ca
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (card_identifier: ");
 		result.append(card_identifier);
-		result.append(", tax_card_type: ");
-		result.append(tax_card_type);
 		result.append(", tax_office: ");
 		result.append(tax_office);
 		result.append(", percentage_of_witholding: ");

@@ -61,7 +61,8 @@ class UnitPropagationPreconditionGenerationResult {
 @Data
 class UnitPropagationPreconditionFinalResult {
 	CharSequence definitions
-	HashMap<PConstraint,String> constraint2PreconditionName
+	HashMap<PConstraint,String> constraint2MustPreconditionName
+	HashMap<PConstraint,String> constraint2CurrentPreconditionName
 }
 
 class UnitPropagationPreconditionGenerator {
@@ -81,25 +82,34 @@ class UnitPropagationPreconditionGenerator {
 		// Create an empty result
 		val res = new UnitPropagationPreconditionGenerationResult		
 		val wfs = base.wfQueries(problem)//.map[it.patternPQuery]
-		val Map<PConstraint,List<Pair<String,Integer>>> mainPropagationNames = new HashMap
+		val Map<PConstraint,List<Pair<String,Integer>>> mainMustPropagationNames = new HashMap
+		val Map<PConstraint,List<Pair<String,Integer>>> mainCurrentPropagationNames = new HashMap
 		for(wf : wfs) {
 			val query = wf.patternPQuery as PQuery
 			val relation = wf.target
 			val allReferredChecks = allReferredConstraints(relation,query).filter(ExpressionEvaluation)
 			
 			for(referredCheck : allReferredChecks) {
-				val propagationPrecondition = getOrGeneratePropagationRule(res,relation,query,referredCheck,PropagationModality::UP, Modality::MUST)
-				if(!mainPropagationNames.containsKey(referredCheck)) {
-					mainPropagationNames.put(referredCheck,new LinkedList)
+				val mustPropagationPrecondition = getOrGeneratePropagationRule(res,relation,query,referredCheck,PropagationModality::UP, Modality::MUST)
+				val currentPropagationPrecondition = getOrGeneratePropagationRule(res,relation,query,referredCheck,PropagationModality::UP, Modality::CURRENT)
+				if(!mainMustPropagationNames.containsKey(referredCheck)) {
+					mainMustPropagationNames.put(referredCheck,new LinkedList)
 				}
-				if(propagationPrecondition !== null) {
-					mainPropagationNames.get(referredCheck).add(propagationPrecondition->query.parameterNames.size)
+				if(!mainCurrentPropagationNames.containsKey(referredCheck)) {
+					mainCurrentPropagationNames.put(referredCheck,new LinkedList)
+				}
+				if(mustPropagationPrecondition !== null) {
+					mainMustPropagationNames.get(referredCheck).add(mustPropagationPrecondition->query.parameterNames.size)
+				}
+				if(currentPropagationPrecondition !== null) {
+					mainCurrentPropagationNames.get(referredCheck).add(currentPropagationPrecondition->query.parameterNames.size)
 				}
 			}
 		}
 		val preconditions = new LinkedList
-		val constraint2Precondition = new HashMap
-		for(entry : mainPropagationNames.entrySet) {
+		val constraint2MustPrecondition = new HashMap
+		val constraint2CurrentPrecondition = new HashMap
+		for(entry : mainMustPropagationNames.entrySet) {
 			val name = '''UPMUSTPropagate_«res.getOrGenerateConstraintName(entry.key)»''';
 			val def = '''
 			pattern «name»(«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»)
@@ -107,7 +117,17 @@ class UnitPropagationPreconditionGenerator {
 					{ find «propagation.key»(problem,interpretation,«FOR index : 0..<propagation.value SEPARATOR ','»_«ENDFOR»,«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»); }
 				«ENDFOR»'''
 			preconditions+=def
-			constraint2Precondition.put(entry.key,name)
+			constraint2MustPrecondition.put(entry.key,name)
+		}
+		for(entry : mainCurrentPropagationNames.entrySet) {
+			val name = '''UPCurrentPropagate_«res.getOrGenerateConstraintName(entry.key)»''';
+			val def = '''
+			pattern «name»(«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»)
+				«FOR propagation : entry.value SEPARATOR " or "»
+					{ find «propagation.key»(problem,interpretation,«FOR index : 0..<propagation.value SEPARATOR ','»_«ENDFOR»,«FOR index : 1..entry.key.arity SEPARATOR ", "»«canonizeName(index,PropagationModality::UP)»«ENDFOR»); }
+				«ENDFOR»'''
+			preconditions+=def
+			constraint2CurrentPrecondition.put(entry.key,name)
 		}
 		
 		val definitions = '''
@@ -121,7 +141,7 @@ class UnitPropagationPreconditionGenerator {
 				«predondition»
 			«ENDFOR»
 		'''
-		return new UnitPropagationPreconditionFinalResult(definitions,constraint2Precondition)
+		return new UnitPropagationPreconditionFinalResult(definitions,constraint2MustPrecondition,constraint2CurrentPrecondition)
 	}
 	def allReferredConstraints(Relation relation, PQuery query) {
 		val allReferredQueries = query.allReferredQueries
@@ -191,7 +211,7 @@ class UnitPropagationPreconditionGenerator {
 								// Propagation for constraint referred indirectly from this pattern through «referredName»
 								find «referredName»(problem, interpretation,
 									«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«positive.getVariableInTuple(index).canonizeName»«ENDFOR»,
-									«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
+									«FOR index : 1..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
 							'''
 						}
 						// Otherwise, if the referred pattern is not satisfiable, this pattern is not satisfiable either
@@ -214,7 +234,7 @@ class UnitPropagationPreconditionGenerator {
 								// Propagation for constraint referred indirectly from this pattern through «referredName»
 								find «referredName»(problem, interpretation,
 									«FOR index : 0..<referredPQuery.parameters.size SEPARATOR ", "»«(negative.actualParametersTuple.get(index) as PVariable).canonizeName»«ENDFOR»,
-									«FOR index : 0..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
+									«FOR index : 1..c.arity SEPARATOR ", "»«canonizeName(index,pm)»«ENDFOR»);
 							'''
 						} else {
 							generatedBodies += '''

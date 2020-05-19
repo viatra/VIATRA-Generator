@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
-  <extension id="queries.Case_study_A" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_A" id="queries.Case_study_A">
+  <extension id="queries.Case_study_A_withRoot" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Case_study_A_withRoot" id="queries.Case_study_A_withRoot">
       <query-specification fqn="queries.inv03"/>
       <query-specification fqn="queries.x_inv03_eligAll"/>
       <query-specification fqn="queries.x_inv03_hasAll"/>
@@ -31,12 +31,18 @@
       <query-specification fqn="queries.inv47"/>
       <query-specification fqn="queries.x_inv47"/>
       <query-specification fqn="queries.inv48"/>
-      <query-specification fqn="queries.x_inv48_notDis"/>
-      <query-specification fqn="queries.x_inv48_Dis"/>
-      <query-specification fqn="queries.x_inv48_3"/>
-      <query-specification fqn="queries.inv49"/>
-      <query-specification fqn="queries.x_inv49_1"/>
-      <query-specification fqn="queries.x_inv49_2"/>
+      <query-specification fqn="queries.x_inv48"/>
+      <query-specification fqn="queries.inv49_A"/>
+      <query-specification fqn="queries.inv49_B"/>
+    </group>
+  </extension>
+  <extension id="queries.FamilyTreeConstraints" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.FamilyTreeConstraints" id="queries.FamilyTreeConstraints">
+      <query-specification fqn="queries.memberIsItsOwnParent"/>
+      <query-specification fqn="queries.twoMembersHaveNoParent"/>
+      <query-specification fqn="queries.memberHasParent"/>
+      <query-specification fqn="queries.negativeAge"/>
+      <query-specification fqn="queries.parentTooYoung"/>
     </group>
   </extension>
 </plugin>

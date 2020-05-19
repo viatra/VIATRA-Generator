@@ -128,8 +128,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 				return createDisability_TypesFromString(eDataType, initialValue);
 			case TaxationPackage.COUNTRY:
 				return createCountryFromString(eDataType, initialValue);
-			case TaxationPackage.TAX_CARD_TYPE:
-				return createTax_Card_TypeFromString(eDataType, initialValue);
 			case TaxationPackage.TAX_OFFICE:
 				return createTax_OfficeFromString(eDataType, initialValue);
 			case TaxationPackage.TAX_CLASS_CATEGORY:
@@ -138,8 +136,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 				return createJob_ActivityFromString(eDataType, initialValue);
 			case TaxationPackage.TOWN:
 				return createTownFromString(eDataType, initialValue);
-			case TaxationPackage.TYPE_OF_RATE:
-				return createType_of_RateFromString(eDataType, initialValue);
 			case TaxationPackage.CE_TYPE:
 				return createCE_TypeFromString(eDataType, initialValue);
 			case TaxationPackage.EXPENSE_PURPOSE:
@@ -175,8 +171,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 				return convertDisability_TypesToString(eDataType, instanceValue);
 			case TaxationPackage.COUNTRY:
 				return convertCountryToString(eDataType, instanceValue);
-			case TaxationPackage.TAX_CARD_TYPE:
-				return convertTax_Card_TypeToString(eDataType, instanceValue);
 			case TaxationPackage.TAX_OFFICE:
 				return convertTax_OfficeToString(eDataType, instanceValue);
 			case TaxationPackage.TAX_CLASS_CATEGORY:
@@ -185,8 +179,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 				return convertJob_ActivityToString(eDataType, instanceValue);
 			case TaxationPackage.TOWN:
 				return convertTownToString(eDataType, instanceValue);
-			case TaxationPackage.TYPE_OF_RATE:
-				return convertType_of_RateToString(eDataType, instanceValue);
 			case TaxationPackage.CE_TYPE:
 				return convertCE_TypeToString(eDataType, instanceValue);
 			case TaxationPackage.EXPENSE_PURPOSE:
@@ -845,26 +837,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Tax_Card_Type createTax_Card_TypeFromString(EDataType eDataType, String initialValue) {
-		Tax_Card_Type result = Tax_Card_Type.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertTax_Card_TypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Tax_Office createTax_OfficeFromString(EDataType eDataType, String initialValue) {
 		Tax_Office result = Tax_Office.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -937,26 +909,6 @@ public class TaxationFactoryImpl extends EFactoryImpl implements TaxationFactory
 	 * @generated
 	 */
 	public String convertTownToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type_of_Rate createType_of_RateFromString(EDataType eDataType, String initialValue) {
-		Type_of_Rate result = Type_of_Rate.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertType_of_RateToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

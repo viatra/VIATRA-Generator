@@ -19,6 +19,10 @@ class NumericTranslator {
 	
 	private XExpressionExtractor extractor = new XExpressionExtractor();
 	
+	long formingProblemTime=0;
+	long solvingProblemTime=0;
+	long formingSolutionTime=0;
+	
 	val comparator = new Comparator<JvmIdentifiableElement>(){
 			override compare(JvmIdentifiableElement o1, JvmIdentifiableElement o2) {
 				//println('''«o1.simpleName» - «o2.simpleName»''')
@@ -52,6 +56,7 @@ class NumericTranslator {
 		val input = formNumericProblemInstance(matches)
 		val solver = new NumericProblemSolver
 		val satisfiability = solver.isSatisfiable(input)
+		solver.updateTimes
 		return satisfiability
 	}
 	
@@ -59,6 +64,17 @@ class NumericTranslator {
 		val input = formNumericProblemInstance(matches)
 		val solver = new NumericProblemSolver
 		val solution = solver.getOneSolution(primitiveElements,input)
+		solver.updateTimes
 		return solution
 	}
+	
+	private def updateTimes(NumericProblemSolver s) {
+		this.formingProblemTime += s.getEndformingProblem
+		this.solvingProblemTime += s.getEndSolvingProblem
+		this.formingSolutionTime += s.getEndFormingSolution
+	}
+	
+	def getFormingProblemTime() {formingProblemTime}
+	def getSolvingProblemTime() {solvingProblemTime}
+	def getFormingSolutionTime() {formingSolutionTime}
 }

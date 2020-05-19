@@ -56,7 +56,7 @@ public interface Member extends EObject {
 	 * @return the value of the '<em>Age</em>' attribute.
 	 * @see #setAge(int)
 	 * @see familytree.FamilytreePackage#getMember_Age()
-	 * @model default="0"
+	 * @model default="0" required="true"
 	 * @generated
 	 */
 	int getAge();

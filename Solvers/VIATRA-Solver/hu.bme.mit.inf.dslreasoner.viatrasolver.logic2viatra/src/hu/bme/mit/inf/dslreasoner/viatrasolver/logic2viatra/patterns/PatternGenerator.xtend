@@ -26,6 +26,14 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
+
+@Data class PatternGeneratorResult {
+	CharSequence patternText
+	HashMap<PConstraint,String> constraint2MustPreconditionName
+	HashMap<PConstraint,String> constraint2CurrentPreconditionName
+}
 
 class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val TypeIndexer typeIndexer //= new TypeIndexer(this)
@@ -149,7 +157,7 @@ class PatternGenerator {
 		problem.allTypeReferences.exists[it instanceof StringTypeReference]
 	}
 	
-	public def transformBaseProperties(
+	public def PatternGeneratorResult transformBaseProperties(
 		LogicProblem problem,
 		PartialInterpretation emptySolution,
 		Map<String,PQuery> fqn2PQuery,
@@ -207,66 +215,42 @@ class PatternGenerator {
 				find mayExist(problem,interpretation,a);
 				find mayExist(problem,interpretation,b);
 				a == b;
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				IntegerElement(a);
-				IntegerElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				IntegerElement(a);
-				IntegerElement(b);
-				PrimitiveElement.valueSet(b,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				RealElement(a);
-				RealElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				RealElement(a);
-				RealElement(b);
-				PrimitiveElement.valueSet(b,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				RealElement(a);
-				IntegerElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				RealElement(a);
-				IntegerElement(b);
-				PrimitiveElement.valueSet(b,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				IntegerElement(a);
-				RealElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				IntegerElement(a);
-				RealElement(b);
-				PrimitiveElement.valueSet(b,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				StringElement(a);
-				StringElement(b);
-				PrimitiveElement.valueSet(a,false);
-			} or {
-				find mayExist(problem,interpretation,a);
-				find mayExist(problem,interpretation,b);
-				StringElement(a);
-				StringElement(b);
-				PrimitiveElement.valueSet(b,false);
+«««			} or {
+«««				find mayExist(problem,interpretation,a);
+«««				find mayExist(problem,interpretation,b);
+«««				IntegerElement(a);
+«««				IntegerElement(b);
+«««				PrimitiveElement.valueSet(a,false);
+«««			} or {
+«««				find mayExist(problem,interpretation,a);
+«««				find mayExist(problem,interpretation,b);
+«««				IntegerElement(a);
+«««				IntegerElement(b);
+«««				PrimitiveElement.valueSet(b,false);
+«««			} or {
+«««				find mayExist(problem,interpretation,a);
+«««				find mayExist(problem,interpretation,b);
+«««				RealElement(a);
+«««				RealElement(b);
+«««				PrimitiveElement.valueSet(a,false);
+«««			} or {
+«««				find mayExist(problem,interpretation,a);
+«««				find mayExist(problem,interpretation,b);
+«««				RealElement(a);
+«««				RealElement(b);
+«««				PrimitiveElement.valueSet(b,false);
+«««			} or {
+«««				find mayExist(problem,interpretation,a);
+«««				find mayExist(problem,interpretation,b);
+«««				StringElement(a);
+«««				StringElement(b);
+«««				PrimitiveElement.valueSet(a,false);
+«««			} or {
+«««				find mayExist(problem,interpretation,a);
+«««				find mayExist(problem,interpretation,b);
+«««				StringElement(a);
+«««				StringElement(b);
+«««				PrimitiveElement.valueSet(b,false);
 			}
 			
 			pattern mustEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
@@ -274,41 +258,27 @@ class PatternGenerator {
 				find mustExist(problem,interpretation,a);
 				find mustExist(problem,interpretation,b);
 				a == b;
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				IntegerElement.value(a,value);
-				IntegerElement.value(b,value);
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				RealElement.value(a,value);
-				RealElement.value(b,value);
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				RealElement.value(a,value);
-				IntegerElement.value(b,value);
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				IntegerElement.value(a,value);
-				RealElement.value(b,value);
-			} or {
-				find mustExist(problem,interpretation,a);
-				find mustExist(problem,interpretation,b);
-				PrimitiveElement.valueSet(a,true);
-				PrimitiveElement.valueSet(b,true);
-				StringElement.value(a,value);
-				StringElement.value(b,value);
+«««			} or {
+«««				find mustExist(problem,interpretation,a);
+«««				find mustExist(problem,interpretation,b);
+«««				PrimitiveElement.valueSet(a,true);
+«««				PrimitiveElement.valueSet(b,true);
+«««				IntegerElement.value(a,value);
+«««				IntegerElement.value(b,value);
+«««			} or {
+«««				find mustExist(problem,interpretation,a);
+«««				find mustExist(problem,interpretation,b);
+«««				PrimitiveElement.valueSet(a,true);
+«««				PrimitiveElement.valueSet(b,true);
+«««				RealElement.value(a,value);
+«««				RealElement.value(b,value);
+«««			} or {
+«««				find mustExist(problem,interpretation,a);
+«««				find mustExist(problem,interpretation,b);
+«««				PrimitiveElement.valueSet(a,true);
+«««				PrimitiveElement.valueSet(b,true);
+«««				StringElement.value(a,value);
+«««				StringElement.value(b,value);
 			}
 			
 			//////////
@@ -398,6 +368,6 @@ class PatternGenerator {
 			'''
 			val up = unitPropagationPreconditionGenerator.generateUnitPropagationRules(problem,problem.relations.filter(RelationDefinition),fqn2PQuery)
 			val second = up.definitions
-			return (first+second) -> up.constraint2PreconditionName
+			return new PatternGeneratorResult(first+second,up.constraint2MustPreconditionName,up.constraint2CurrentPreconditionName)
 	}
 }

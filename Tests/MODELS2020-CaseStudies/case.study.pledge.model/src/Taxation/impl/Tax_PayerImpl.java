@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link Taxation.impl.Tax_PayerImpl#getFrom_agent <em>From agent</em>}</li>
  *   <li>{@link Taxation.impl.Tax_PayerImpl#getIncomes <em>Incomes</em>}</li>
  *   <li>{@link Taxation.impl.Tax_PayerImpl#getFrom_law <em>From law</em>}</li>
- *   <li>{@link Taxation.impl.Tax_PayerImpl#getTaxesDue <em>Taxes Due</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,26 +80,6 @@ public abstract class Tax_PayerImpl extends Physical_PersonImpl implements Tax_P
 	 * @ordered
 	 */
 	protected FromLaw from_law;
-
-	/**
-	 * The default value of the '{@link #getTaxesDue() <em>Taxes Due</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTaxesDue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double TAXES_DUE_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getTaxesDue() <em>Taxes Due</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTaxesDue()
-	 * @generated
-	 * @ordered
-	 */
-	protected double taxesDue = TAXES_DUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -242,29 +221,6 @@ public abstract class Tax_PayerImpl extends Physical_PersonImpl implements Tax_P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public double getTaxesDue() {
-		return taxesDue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTaxesDue(double newTaxesDue) {
-		double oldTaxesDue = taxesDue;
-		taxesDue = newTaxesDue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TaxationPackage.TAX_PAYER__TAXES_DUE, oldTaxesDue, taxesDue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -321,8 +277,6 @@ public abstract class Tax_PayerImpl extends Physical_PersonImpl implements Tax_P
 				return getIncomes();
 			case TaxationPackage.TAX_PAYER__FROM_LAW:
 				return getFrom_law();
-			case TaxationPackage.TAX_PAYER__TAXES_DUE:
-				return getTaxesDue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -350,9 +304,6 @@ public abstract class Tax_PayerImpl extends Physical_PersonImpl implements Tax_P
 			case TaxationPackage.TAX_PAYER__FROM_LAW:
 				setFrom_law((FromLaw)newValue);
 				return;
-			case TaxationPackage.TAX_PAYER__TAXES_DUE:
-				setTaxesDue((Double)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -377,9 +328,6 @@ public abstract class Tax_PayerImpl extends Physical_PersonImpl implements Tax_P
 			case TaxationPackage.TAX_PAYER__FROM_LAW:
 				setFrom_law((FromLaw)null);
 				return;
-			case TaxationPackage.TAX_PAYER__TAXES_DUE:
-				setTaxesDue(TAXES_DUE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -400,26 +348,8 @@ public abstract class Tax_PayerImpl extends Physical_PersonImpl implements Tax_P
 				return incomes != null && !incomes.isEmpty();
 			case TaxationPackage.TAX_PAYER__FROM_LAW:
 				return from_law != null;
-			case TaxationPackage.TAX_PAYER__TAXES_DUE:
-				return taxesDue != TAXES_DUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (taxesDue: ");
-		result.append(taxesDue);
-		result.append(')');
-		return result.toString();
 	}
 
 } //Tax_PayerImpl

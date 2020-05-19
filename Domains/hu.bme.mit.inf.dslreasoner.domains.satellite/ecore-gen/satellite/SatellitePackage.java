@@ -2,6 +2,7 @@
  */
 package satellite;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -287,13 +288,31 @@ public interface SatellitePackage extends EPackage {
 	int COMM_SUBSYSTEM__TARGET = 0;
 
 	/**
+	 * The feature id for the '<em><b>Frequency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMM_SUBSYSTEM__FREQUENCY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Path Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMM_SUBSYSTEM__PATH_LENGTH = 2;
+
+	/**
 	 * The number of structural features of the '<em>Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMM_SUBSYSTEM_FEATURE_COUNT = 1;
+	int COMM_SUBSYSTEM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Comm Subsystem</em>' class.
@@ -564,6 +583,24 @@ public interface SatellitePackage extends EPackage {
 	int UHF_COMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Frequency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UHF_COMM_SUBSYSTEM__FREQUENCY = COMM_SUBSYSTEM__FREQUENCY;
+
+	/**
+	 * The feature id for the '<em><b>Path Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UHF_COMM_SUBSYSTEM__PATH_LENGTH = COMM_SUBSYSTEM__PATH_LENGTH;
+
+	/**
 	 * The number of structural features of the '<em>UHF Comm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -601,6 +638,24 @@ public interface SatellitePackage extends EPackage {
 	int XCOMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Frequency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMM_SUBSYSTEM__FREQUENCY = COMM_SUBSYSTEM__FREQUENCY;
+
+	/**
+	 * The feature id for the '<em><b>Path Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCOMM_SUBSYSTEM__PATH_LENGTH = COMM_SUBSYSTEM__PATH_LENGTH;
+
+	/**
 	 * The number of structural features of the '<em>XComm Subsystem</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -636,6 +691,24 @@ public interface SatellitePackage extends EPackage {
 	 * @ordered
 	 */
 	int KA_COMM_SUBSYSTEM__TARGET = COMM_SUBSYSTEM__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Frequency</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KA_COMM_SUBSYSTEM__FREQUENCY = COMM_SUBSYSTEM__FREQUENCY;
+
+	/**
+	 * The feature id for the '<em><b>Path Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KA_COMM_SUBSYSTEM__PATH_LENGTH = COMM_SUBSYSTEM__PATH_LENGTH;
 
 	/**
 	 * The number of structural features of the '<em>Ka Comm Subsystem</em>' class.
@@ -769,6 +842,28 @@ public interface SatellitePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCommSubsystem_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link satellite.CommSubsystem#getFrequency <em>Frequency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Frequency</em>'.
+	 * @see satellite.CommSubsystem#getFrequency()
+	 * @see #getCommSubsystem()
+	 * @generated
+	 */
+	EAttribute getCommSubsystem_Frequency();
+
+	/**
+	 * Returns the meta object for the attribute '{@link satellite.CommSubsystem#getPathLength <em>Path Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path Length</em>'.
+	 * @see satellite.CommSubsystem#getPathLength()
+	 * @see #getCommSubsystem()
+	 * @generated
+	 */
+	EAttribute getCommSubsystem_PathLength();
 
 	/**
 	 * Returns the meta object for class '{@link satellite.Payload <em>Payload</em>}'.
@@ -983,6 +1078,22 @@ public interface SatellitePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMM_SUBSYSTEM__TARGET = eINSTANCE.getCommSubsystem_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Frequency</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMM_SUBSYSTEM__FREQUENCY = eINSTANCE.getCommSubsystem_Frequency();
+
+		/**
+		 * The meta object literal for the '<em><b>Path Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMM_SUBSYSTEM__PATH_LENGTH = eINSTANCE.getCommSubsystem_PathLength();
 
 		/**
 		 * The meta object literal for the '{@link satellite.impl.PayloadImpl <em>Payload</em>}' class.

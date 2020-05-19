@@ -176,11 +176,16 @@ class RefinementRuleProvider {
 				val number = lowermultiplicities.head.lower
 				if(number > 0) {
 					val sourceTypeInterpretation = getTypeInterpretation(i, relation, 0) as PartialComplexTypeInterpretation
+					val subtypeInterpretations = i.partialtypeinterpratation.filter(PartialComplexTypeInterpretation).filter[
+						it === sourceTypeInterpretation ||
+						it.supertypeInterpretation.contains(sourceTypeInterpretation)
+					]
 					
 					if(containmentReferences.contains(relation)) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
-						if(!(targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.isIsAbstract) {
-							val inverseAnnotation = p.assertions.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
+						val targetType = (targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf
+						if((!targetType.isIsAbstract) && (targetType.supertypes.empty)) {
+							val inverseAnnotation = p.annotations.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
 							if(!inverseAnnotation.empty) {
 								val onlyInverseAnnotation = if(inverseAnnotation.head.inverseA===relation) {
 									inverseAnnotation.head.inverseB
@@ -188,41 +193,46 @@ class RefinementRuleProvider {
 									inverseAnnotation.head.inverseA
 								}
 								val inverseRelationInterpretation = i.partialrelationinterpretation.filter[it.interpretationOf === onlyInverseAnnotation].head
-								for(var times=0; times<number; times++) {
-									recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
-										new ObjectCreationInterpretationData(
-											i,
-											targetTypeInterpretation,
-											relationInterpretation,
-											inverseRelationInterpretation,
-											targetTypeInterpretation.getTypeConstructor
-										)
+								for(subTypeInterpretation : subtypeInterpretations) {
+									for(var times=0; times<number; times++) {
+										recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) += 
+											new ObjectCreationInterpretationData(
+												i,
+												targetTypeInterpretation,
+												relationInterpretation,
+												inverseRelationInterpretation,
+												targetTypeInterpretation.getTypeConstructor
+											)
+									}
 								}
-								
 							} else {
-								for(var times=0; times<number; times++) {
-									recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
-										new ObjectCreationInterpretationData(
-											i,
-											targetTypeInterpretation,
-											relationInterpretation,
-											null,
-											targetTypeInterpretation.getTypeConstructor
-										)
+								for(subTypeInterpretation : subtypeInterpretations) {
+									for(var times=0; times<number; times++) {
+										recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) += 
+											new ObjectCreationInterpretationData(
+												i,
+												targetTypeInterpretation,
+												relationInterpretation,
+												null,
+												targetTypeInterpretation.getTypeConstructor
+											)
+									}
 								}
 							}
 						}
 					} else if(relation.parameters.get(1) instanceof PrimitiveTypeReference) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
-						for(var times=0; times<number; times++) {
-							recursiveObjectCreation.get(sourceTypeInterpretation.interpretationOf) += 
-								new ObjectCreationInterpretationData(
-									i,
-									targetTypeInterpretation,
-									relationInterpretation,
-									null,
-									targetTypeInterpretation.getTypeConstructor
-								)
+						for(subTypeInterpretation : subtypeInterpretations) {
+							for(var times=0; times<number; times++) {
+								recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) += 
+									new ObjectCreationInterpretationData(
+										i,
+										targetTypeInterpretation,
+										relationInterpretation,
+										null,
+										targetTypeInterpretation.getTypeConstructor
+									)
+							}
 						}
 					}
 				}
@@ -403,9 +413,6 @@ class RefinementRuleProvider {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
 		
-		// Existence
-		interpretation.newElements+=newElement
-		
 		// Types
 		typeInterpretation.elements += newElement
 		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -420,6 +427,9 @@ class RefinementRuleProvider {
 		
 		// Scope propagation
 		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
+		// Existence
+		interpretation.newElements+=newElement
 		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
@@ -444,9 +454,6 @@ class RefinementRuleProvider {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
 		
-		// Existence
-		interpretation.newElements+=newElement
-		
 		// Types
 		typeInterpretation.elements += newElement
 		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -458,6 +465,9 @@ class RefinementRuleProvider {
 		
 		// Scope propagation
 		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
+		// Existence
+		interpretation.newElements+=newElement
 		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {
@@ -480,9 +490,6 @@ class RefinementRuleProvider {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
 		
-		// Existence
-		interpretation.newElements+=newElement
-		
 		// Types
 		typeInterpretation.elements += newElement
 		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
@@ -491,6 +498,9 @@ class RefinementRuleProvider {
 		
 		// Scope propagation
 		scopePropagator.propagateAdditionToType(typeInterpretation)
+		
+		// Existence
+		interpretation.newElements+=newElement
 		
 		// Do recursive object creation
 		for(newConstructor : recursiceObjectCreations) {

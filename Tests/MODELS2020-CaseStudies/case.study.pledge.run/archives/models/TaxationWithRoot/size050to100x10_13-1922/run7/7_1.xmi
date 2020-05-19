@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains xsi:type="TaxCardWithRoot:Household">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" id9="">
+      <individual_A disability_type="NONE"/>
+      <individual_B birth_year="1918" disability_type="D" birth_day="1"/>
+      <properties/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>

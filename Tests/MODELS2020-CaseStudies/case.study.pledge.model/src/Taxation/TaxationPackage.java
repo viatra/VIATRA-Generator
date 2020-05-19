@@ -386,22 +386,13 @@ public interface TaxationPackage extends EPackage {
 	int PHYSICAL_PERSON = 3;
 
 	/**
-	 * The feature id for the '<em><b>Is assisting spouse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHYSICAL_PERSON__IS_ASSISTING_SPOUSE = 0;
-
-	/**
 	 * The feature id for the '<em><b>SS No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__SS_NO = 1;
+	int PHYSICAL_PERSON__SS_NO = 0;
 
 	/**
 	 * The feature id for the '<em><b>Addresses</b></em>' reference list.
@@ -410,7 +401,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__ADDRESSES = 2;
+	int PHYSICAL_PERSON__ADDRESSES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Birth year</b></em>' attribute.
@@ -419,7 +410,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__BIRTH_YEAR = 3;
+	int PHYSICAL_PERSON__BIRTH_YEAR = 2;
 
 	/**
 	 * The feature id for the '<em><b>Disability percentage</b></em>' attribute.
@@ -428,7 +419,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__DISABILITY_PERCENTAGE = 4;
+	int PHYSICAL_PERSON__DISABILITY_PERCENTAGE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Disability type</b></em>' attribute.
@@ -437,16 +428,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__DISABILITY_TYPE = 5;
-
-	/**
-	 * The feature id for the '<em><b>Is affiliated personnaly to social security</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY = 6;
+	int PHYSICAL_PERSON__DISABILITY_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Birth month</b></em>' attribute.
@@ -455,7 +437,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__BIRTH_MONTH = 7;
+	int PHYSICAL_PERSON__BIRTH_MONTH = 5;
 
 	/**
 	 * The feature id for the '<em><b>Birth day</b></em>' attribute.
@@ -464,7 +446,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__BIRTH_DAY = 8;
+	int PHYSICAL_PERSON__BIRTH_DAY = 6;
 
 	/**
 	 * The feature id for the '<em><b>Expenses</b></em>' reference list.
@@ -473,7 +455,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__EXPENSES = 9;
+	int PHYSICAL_PERSON__EXPENSES = 7;
 
 	/**
 	 * The feature id for the '<em><b>Is widower</b></em>' attribute.
@@ -482,7 +464,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON__IS_WIDOWER = 10;
+	int PHYSICAL_PERSON__IS_WIDOWER = 8;
 
 	/**
 	 * The number of structural features of the '<em>Physical Person</em>' class.
@@ -491,7 +473,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PHYSICAL_PERSON_FEATURE_COUNT = 11;
+	int PHYSICAL_PERSON_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Physical Person</em>' class.
@@ -511,15 +493,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	int TAX_PAYER = 2;
-
-	/**
-	 * The feature id for the '<em><b>Is assisting spouse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_PAYER__IS_ASSISTING_SPOUSE = PHYSICAL_PERSON__IS_ASSISTING_SPOUSE;
 
 	/**
 	 * The feature id for the '<em><b>SS No</b></em>' attribute.
@@ -565,15 +538,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAX_PAYER__DISABILITY_TYPE = PHYSICAL_PERSON__DISABILITY_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is affiliated personnaly to social security</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_PAYER__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY = PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY;
 
 	/**
 	 * The feature id for the '<em><b>Birth month</b></em>' attribute.
@@ -648,22 +612,13 @@ public interface TaxationPackage extends EPackage {
 	int TAX_PAYER__FROM_LAW = PHYSICAL_PERSON_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Taxes Due</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_PAYER__TAXES_DUE = PHYSICAL_PERSON_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Tax Payer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_PAYER_FEATURE_COUNT = PHYSICAL_PERSON_FEATURE_COUNT + 5;
+	int TAX_PAYER_FEATURE_COUNT = PHYSICAL_PERSON_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Tax Payer</em>' class.
@@ -858,15 +813,6 @@ public interface TaxationPackage extends EPackage {
 	int DEPENDENT = 6;
 
 	/**
-	 * The feature id for the '<em><b>Is assisting spouse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENT__IS_ASSISTING_SPOUSE = PHYSICAL_PERSON__IS_ASSISTING_SPOUSE;
-
-	/**
 	 * The feature id for the '<em><b>SS No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -910,15 +856,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPENDENT__DISABILITY_TYPE = PHYSICAL_PERSON__DISABILITY_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is affiliated personnaly to social security</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENT__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY = PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY;
 
 	/**
 	 * The feature id for the '<em><b>Birth month</b></em>' attribute.
@@ -1048,22 +985,13 @@ public interface TaxationPackage extends EPackage {
 	int EXTERNAL_ALLOWANCE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Amount</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXTERNAL_ALLOWANCE__AMOUNT = 0;
-
-	/**
 	 * The feature id for the '<em><b>Grantor</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE__GRANTOR = 1;
+	int EXTERNAL_ALLOWANCE__GRANTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Starting year</b></em>' attribute.
@@ -1072,7 +1000,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE__STARTING_YEAR = 2;
+	int EXTERNAL_ALLOWANCE__STARTING_YEAR = 1;
 
 	/**
 	 * The feature id for the '<em><b>Ending year</b></em>' attribute.
@@ -1081,7 +1009,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE__ENDING_YEAR = 3;
+	int EXTERNAL_ALLOWANCE__ENDING_YEAR = 2;
 
 	/**
 	 * The feature id for the '<em><b>Reciver</b></em>' reference.
@@ -1090,7 +1018,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE__RECIVER = 4;
+	int EXTERNAL_ALLOWANCE__RECIVER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Id5</b></em>' attribute.
@@ -1099,7 +1027,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE__ID5 = 5;
+	int EXTERNAL_ALLOWANCE__ID5 = 4;
 
 	/**
 	 * The feature id for the '<em><b>Person</b></em>' container reference.
@@ -1108,7 +1036,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE__PERSON = 6;
+	int EXTERNAL_ALLOWANCE__PERSON = 5;
 
 	/**
 	 * The number of structural features of the '<em>External Allowance</em>' class.
@@ -1117,7 +1045,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTERNAL_ALLOWANCE_FEATURE_COUNT = 7;
+	int EXTERNAL_ALLOWANCE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>External Allowance</em>' class.
@@ -1559,22 +1487,13 @@ public interface TaxationPackage extends EPackage {
 	int INCOME_TYPE = 14;
 
 	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX = 0;
-
-	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TYPE__ID8 = 1;
+	int INCOME_TYPE__ID8 = 0;
 
 	/**
 	 * The feature id for the '<em><b>Income</b></em>' container reference.
@@ -1583,7 +1502,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TYPE__INCOME = 2;
+	int INCOME_TYPE__INCOME = 1;
 
 	/**
 	 * The number of structural features of the '<em>Income Type</em>' class.
@@ -1592,7 +1511,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INCOME_TYPE_FEATURE_COUNT = 3;
+	int INCOME_TYPE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Income Type</em>' class.
@@ -1623,22 +1542,13 @@ public interface TaxationPackage extends EPackage {
 	int TAX_CARD__CARD_IDENTIFIER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tax card type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAX_CARD__TAX_CARD_TYPE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Tax office</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_OFFICE = 2;
+	int TAX_CARD__TAX_OFFICE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Percentage of witholding</b></em>' attribute.
@@ -1647,7 +1557,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__PERCENTAGE_OF_WITHOLDING = 3;
+	int TAX_CARD__PERCENTAGE_OF_WITHOLDING = 2;
 
 	/**
 	 * The feature id for the '<em><b>Tax payers name surname</b></em>' attribute list.
@@ -1656,7 +1566,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_PAYERS_NAME_SURNAME = 4;
+	int TAX_CARD__TAX_PAYERS_NAME_SURNAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tax payers partner name surname</b></em>' attribute list.
@@ -1665,7 +1575,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_PAYERS_PARTNER_NAME_SURNAME = 5;
+	int TAX_CARD__TAX_PAYERS_PARTNER_NAME_SURNAME = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tax payers address</b></em>' reference.
@@ -1674,7 +1584,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__TAX_PAYERS_ADDRESS = 6;
+	int TAX_CARD__TAX_PAYERS_ADDRESS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Jobs Employer SS No</b></em>' attribute.
@@ -1683,7 +1593,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_EMPLOYER_SS_NO = 7;
+	int TAX_CARD__JOBS_EMPLOYER_SS_NO = 6;
 
 	/**
 	 * The feature id for the '<em><b>Jobs employers name</b></em>' attribute.
@@ -1692,7 +1602,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_EMPLOYERS_NAME = 8;
+	int TAX_CARD__JOBS_EMPLOYERS_NAME = 7;
 
 	/**
 	 * The feature id for the '<em><b>Jobs activity type</b></em>' attribute.
@@ -1701,7 +1611,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_ACTIVITY_TYPE = 9;
+	int TAX_CARD__JOBS_ACTIVITY_TYPE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Jobs place of work</b></em>' attribute.
@@ -1710,7 +1620,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__JOBS_PLACE_OF_WORK = 10;
+	int TAX_CARD__JOBS_PLACE_OF_WORK = 9;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FD daily</b></em>' attribute.
@@ -1719,7 +1629,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FD_DAILY = 11;
+	int TAX_CARD__DEDUCTION_FD_DAILY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FD monthly</b></em>' attribute.
@@ -1728,7 +1638,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FD_MONTHLY = 12;
+	int TAX_CARD__DEDUCTION_FD_MONTHLY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Deduction AC daily</b></em>' attribute.
@@ -1737,7 +1647,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_AC_DAILY = 13;
+	int TAX_CARD__DEDUCTION_AC_DAILY = 12;
 
 	/**
 	 * The feature id for the '<em><b>Deduction AC monthly</b></em>' attribute.
@@ -1746,7 +1656,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_AC_MONTHLY = 14;
+	int TAX_CARD__DEDUCTION_AC_MONTHLY = 13;
 
 	/**
 	 * The feature id for the '<em><b>Deduction AC yearly</b></em>' attribute.
@@ -1755,7 +1665,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_AC_YEARLY = 15;
+	int TAX_CARD__DEDUCTION_AC_YEARLY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Deduction CE daily</b></em>' attribute.
@@ -1764,7 +1674,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_CE_DAILY = 16;
+	int TAX_CARD__DEDUCTION_CE_DAILY = 15;
 
 	/**
 	 * The feature id for the '<em><b>Deduction CE monthly</b></em>' attribute.
@@ -1773,7 +1683,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_CE_MONTHLY = 17;
+	int TAX_CARD__DEDUCTION_CE_MONTHLY = 16;
 
 	/**
 	 * The feature id for the '<em><b>Deduction CE yearly</b></em>' attribute.
@@ -1782,7 +1692,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_CE_YEARLY = 18;
+	int TAX_CARD__DEDUCTION_CE_YEARLY = 17;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS daily</b></em>' attribute.
@@ -1791,7 +1701,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_DAILY = 19;
+	int TAX_CARD__DEDUCTION_DS_DAILY = 18;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS monthly</b></em>' attribute.
@@ -1800,7 +1710,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_MONTHLY = 20;
+	int TAX_CARD__DEDUCTION_DS_MONTHLY = 19;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FO daily</b></em>' attribute.
@@ -1809,7 +1719,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FO_DAILY = 21;
+	int TAX_CARD__DEDUCTION_FO_DAILY = 20;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FO monthly</b></em>' attribute.
@@ -1818,7 +1728,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FO_MONTHLY = 22;
+	int TAX_CARD__DEDUCTION_FO_MONTHLY = 21;
 
 	/**
 	 * The feature id for the '<em><b>Deduction FO yearly</b></em>' attribute.
@@ -1827,7 +1737,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_FO_YEARLY = 23;
+	int TAX_CARD__DEDUCTION_FO_YEARLY = 22;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIS daily</b></em>' attribute.
@@ -1836,7 +1746,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIS_DAILY = 24;
+	int TAX_CARD__CREDIT_CIS_DAILY = 23;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIS monthly</b></em>' attribute.
@@ -1845,7 +1755,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIS_MONTHLY = 25;
+	int TAX_CARD__CREDIT_CIS_MONTHLY = 24;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIM daily</b></em>' attribute.
@@ -1854,7 +1764,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIM_DAILY = 26;
+	int TAX_CARD__CREDIT_CIM_DAILY = 25;
 
 	/**
 	 * The feature id for the '<em><b>Validity</b></em>' attribute.
@@ -1863,7 +1773,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__VALIDITY = 27;
+	int TAX_CARD__VALIDITY = 26;
 
 	/**
 	 * The feature id for the '<em><b>Income Tax Credit</b></em>' reference list.
@@ -1872,7 +1782,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__INCOME_TAX_CREDIT = 28;
+	int TAX_CARD__INCOME_TAX_CREDIT = 27;
 
 	/**
 	 * The feature id for the '<em><b>Previous</b></em>' reference.
@@ -1881,7 +1791,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__PREVIOUS = 29;
+	int TAX_CARD__PREVIOUS = 28;
 
 	/**
 	 * The feature id for the '<em><b>Current tax card</b></em>' reference.
@@ -1890,7 +1800,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CURRENT_TAX_CARD = 30;
+	int TAX_CARD__CURRENT_TAX_CARD = 29;
 
 	/**
 	 * The feature id for the '<em><b>Credit CIM yearly</b></em>' attribute.
@@ -1899,7 +1809,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__CREDIT_CIM_YEARLY = 31;
+	int TAX_CARD__CREDIT_CIM_YEARLY = 30;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS Alimony yearly</b></em>' attribute.
@@ -1908,7 +1818,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_ALIMONY_YEARLY = 32;
+	int TAX_CARD__DEDUCTION_DS_ALIMONY_YEARLY = 31;
 
 	/**
 	 * The feature id for the '<em><b>Deduction DS Debt yearly</b></em>' attribute.
@@ -1917,7 +1827,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__DEDUCTION_DS_DEBT_YEARLY = 33;
+	int TAX_CARD__DEDUCTION_DS_DEBT_YEARLY = 32;
 
 	/**
 	 * The feature id for the '<em><b>Income</b></em>' container reference.
@@ -1926,7 +1836,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD__INCOME = 34;
+	int TAX_CARD__INCOME = 33;
 
 	/**
 	 * The number of structural features of the '<em>Tax Card</em>' class.
@@ -1935,7 +1845,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAX_CARD_FEATURE_COUNT = 35;
+	int TAX_CARD_FEATURE_COUNT = 34;
 
 	/**
 	 * The number of operations of the '<em>Tax Card</em>' class.
@@ -2467,15 +2377,6 @@ public interface TaxationPackage extends EPackage {
 	int NON_RESIDENT_TAX_PAYER = 22;
 
 	/**
-	 * The feature id for the '<em><b>Is assisting spouse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NON_RESIDENT_TAX_PAYER__IS_ASSISTING_SPOUSE = TAX_PAYER__IS_ASSISTING_SPOUSE;
-
-	/**
 	 * The feature id for the '<em><b>SS No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2519,15 +2420,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int NON_RESIDENT_TAX_PAYER__DISABILITY_TYPE = TAX_PAYER__DISABILITY_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is affiliated personnaly to social security</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NON_RESIDENT_TAX_PAYER__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY = TAX_PAYER__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY;
 
 	/**
 	 * The feature id for the '<em><b>Birth month</b></em>' attribute.
@@ -2600,15 +2492,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int NON_RESIDENT_TAX_PAYER__FROM_LAW = TAX_PAYER__FROM_LAW;
-
-	/**
-	 * The feature id for the '<em><b>Taxes Due</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NON_RESIDENT_TAX_PAYER__TAXES_DUE = TAX_PAYER__TAXES_DUE;
 
 	/**
 	 * The feature id for the '<em><b>Is assimilated to resident</b></em>' attribute.
@@ -2757,15 +2640,6 @@ public interface TaxationPackage extends EPackage {
 	int RESIDENT_TAX_PAYER = 24;
 
 	/**
-	 * The feature id for the '<em><b>Is assisting spouse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESIDENT_TAX_PAYER__IS_ASSISTING_SPOUSE = TAX_PAYER__IS_ASSISTING_SPOUSE;
-
-	/**
 	 * The feature id for the '<em><b>SS No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2809,15 +2683,6 @@ public interface TaxationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESIDENT_TAX_PAYER__DISABILITY_TYPE = TAX_PAYER__DISABILITY_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Is affiliated personnaly to social security</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESIDENT_TAX_PAYER__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY = TAX_PAYER__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY;
 
 	/**
 	 * The feature id for the '<em><b>Birth month</b></em>' attribute.
@@ -2892,15 +2757,6 @@ public interface TaxationPackage extends EPackage {
 	int RESIDENT_TAX_PAYER__FROM_LAW = TAX_PAYER__FROM_LAW;
 
 	/**
-	 * The feature id for the '<em><b>Taxes Due</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESIDENT_TAX_PAYER__TAXES_DUE = TAX_PAYER__TAXES_DUE;
-
-	/**
 	 * The number of structural features of the '<em>Resident Tax Payer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2927,15 +2783,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	int TRADE_AND_BUSINESS_INCOME = 25;
-
-	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRADE_AND_BUSINESS_INCOME__SUBJECT_TO_WITHHOLDING_TAX = INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX;
 
 	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
@@ -2984,15 +2831,6 @@ public interface TaxationPackage extends EPackage {
 	int AGRICULTURE_AND_FORESTRY_INCOME = 26;
 
 	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AGRICULTURE_AND_FORESTRY_INCOME__SUBJECT_TO_WITHHOLDING_TAX = INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX;
-
-	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3037,15 +2875,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	int PENSIONS_AND_ANNUITIES_INCOME = 27;
-
-	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PENSIONS_AND_ANNUITIES_INCOME__SUBJECT_TO_WITHHOLDING_TAX = INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX;
 
 	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
@@ -3103,15 +2932,6 @@ public interface TaxationPackage extends EPackage {
 	int CAPITAL_AND_INVESTMENTS_INCOME = 28;
 
 	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAPITAL_AND_INVESTMENTS_INCOME__SUBJECT_TO_WITHHOLDING_TAX = INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX;
-
-	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3158,15 +2978,6 @@ public interface TaxationPackage extends EPackage {
 	int EMPLOYMENT_INCOME = 29;
 
 	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYMENT_INCOME__SUBJECT_TO_WITHHOLDING_TAX = INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX;
-
-	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3211,15 +3022,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	int RENTALS_AND_LEASES_INCOME = 30;
-
-	/**
-	 * The feature id for the '<em><b>Subject To Withholding Tax</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RENTALS_AND_LEASES_INCOME__SUBJECT_TO_WITHHOLDING_TAX = INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX;
 
 	/**
 	 * The feature id for the '<em><b>Id8</b></em>' attribute.
@@ -3814,22 +3616,13 @@ public interface TaxationPackage extends EPackage {
 	int FD__DISTANCE_DECLARED_IN_JANUARY = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Calculated distance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FD__CALCULATED_DISTANCE = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>FD</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FD_FEATURE_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 2;
+	int FD_FEATURE_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>FD</em>' class.
@@ -3851,22 +3644,13 @@ public interface TaxationPackage extends EPackage {
 	int FO = 38;
 
 	/**
-	 * The feature id for the '<em><b>Rate type for FO</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FO__RATE_TYPE_FOR_FO = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>FO</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FO_FEATURE_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 1;
+	int FO_FEATURE_COUNT = PROFESSIONAL_EXPENSES_DEDUCTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>FO</em>' class.
@@ -4117,40 +3901,13 @@ public interface TaxationPackage extends EPackage {
 	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__PRIVATE_INSURANCE_AND_PLAN_CATEGORY = DS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Increase for life insurance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__INCREASE_FOR_LIFE_INSURANCE = DS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount for private insurance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_PRIVATE_INSURANCE = DS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Maximum deductible amount for old age pension plan</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN__MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_OLD_AGE_PENSION_PLAN = DS_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>DS for Private Insurance and Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN_FEATURE_COUNT = DS_FEATURE_COUNT + 4;
+	int DS_FOR_PRIVATE_INSURANCE_AND_PLAN_FEATURE_COUNT = DS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>DS for Private Insurance and Plan</em>' class.
@@ -4427,22 +4184,13 @@ public interface TaxationPackage extends EPackage {
 	int PERMANENT_EXPENSE__CATEGORY = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Is eligible for deduction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Permanent Expense</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMANENT_EXPENSE_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 2;
+	int PERMANENT_EXPENSE_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Permanent Expense</em>' class.
@@ -4636,22 +4384,13 @@ public interface TaxationPackage extends EPackage {
 	int PRIVATE_INSURANCE_AND_PLAN__DURATION_OF_CONTRACT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Is private insurance and plan eligible for deduction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Private Insurance and Plan</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIVATE_INSURANCE_AND_PLAN_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 3;
+	int PRIVATE_INSURANCE_AND_PLAN_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Private Insurance and Plan</em>' class.
@@ -4854,22 +4593,13 @@ public interface TaxationPackage extends EPackage {
 	int DONATION__BENEFICIARY1 = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Is beneficiary eligible</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DONATION__IS_BENEFICIARY_ELIGIBLE = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Is donation reported</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DONATION__IS_DONATION_REPORTED = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 2;
+	int DONATION__IS_DONATION_REPORTED = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Donation</em>' class.
@@ -4878,7 +4608,7 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DONATION_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 3;
+	int DONATION_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Donation</em>' class.
@@ -4963,49 +4693,13 @@ public interface TaxationPackage extends EPackage {
 	int LOSS_CARRYFORWARD__BENEFICIARY = SPECIAL_EXPENSE_DS__BENEFICIARY;
 
 	/**
-	 * The feature id for the '<em><b>Regular accountability</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOSS_CARRYFORWARD__REGULAR_ACCOUNTABILITY = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Compensation by other means</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOSS_CARRYFORWARD__COMPENSATION_BY_OTHER_MEANS = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Tax payer has inherited business ownership</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOSS_CARRYFORWARD__TAX_PAYER_HAS_INHERITED_BUSINESS_OWNERSHIP = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Tax payer has been partner in business</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOSS_CARRYFORWARD__TAX_PAYER_HAS_BEEN_PARTNER_IN_BUSINESS = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Loss Carryforward</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOSS_CARRYFORWARD_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 4;
+	int LOSS_CARRYFORWARD_FEATURE_COUNT = SPECIAL_EXPENSE_DS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Loss Carryforward</em>' class.
@@ -5520,16 +5214,6 @@ public interface TaxationPackage extends EPackage {
 	int COUNTRY = 60;
 
 	/**
-	 * The meta object id for the '{@link Taxation.Tax_Card_Type <em>Tax Card Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see Taxation.Tax_Card_Type
-	 * @see Taxation.impl.TaxationPackageImpl#getTax_Card_Type()
-	 * @generated
-	 */
-	int TAX_CARD_TYPE = 61;
-
-	/**
 	 * The meta object id for the '{@link Taxation.Tax_Office <em>Tax Office</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5537,7 +5221,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getTax_Office()
 	 * @generated
 	 */
-	int TAX_OFFICE = 62;
+	int TAX_OFFICE = 61;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Tax_Class_Category <em>Tax Class Category</em>}' enum.
@@ -5547,7 +5231,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getTax_Class_Category()
 	 * @generated
 	 */
-	int TAX_CLASS_CATEGORY = 63;
+	int TAX_CLASS_CATEGORY = 62;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Job_Activity <em>Job Activity</em>}' enum.
@@ -5557,7 +5241,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getJob_Activity()
 	 * @generated
 	 */
-	int JOB_ACTIVITY = 64;
+	int JOB_ACTIVITY = 63;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Town <em>Town</em>}' enum.
@@ -5567,17 +5251,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getTown()
 	 * @generated
 	 */
-	int TOWN = 65;
-
-	/**
-	 * The meta object id for the '{@link Taxation.Type_of_Rate <em>Type of Rate</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see Taxation.Type_of_Rate
-	 * @see Taxation.impl.TaxationPackageImpl#getType_of_Rate()
-	 * @generated
-	 */
-	int TYPE_OF_RATE = 66;
+	int TOWN = 64;
 
 	/**
 	 * The meta object id for the '{@link Taxation.CE_Type <em>CE Type</em>}' enum.
@@ -5587,7 +5261,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getCE_Type()
 	 * @generated
 	 */
-	int CE_TYPE = 67;
+	int CE_TYPE = 65;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Expense_Purpose <em>Expense Purpose</em>}' enum.
@@ -5597,7 +5271,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getExpense_Purpose()
 	 * @generated
 	 */
-	int EXPENSE_PURPOSE = 68;
+	int EXPENSE_PURPOSE = 66;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Dependent_Type <em>Dependent Type</em>}' enum.
@@ -5607,7 +5281,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getDependent_Type()
 	 * @generated
 	 */
-	int DEPENDENT_TYPE = 69;
+	int DEPENDENT_TYPE = 67;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Separation_Causes <em>Separation Causes</em>}' enum.
@@ -5617,7 +5291,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getSeparation_Causes()
 	 * @generated
 	 */
-	int SEPARATION_CAUSES = 70;
+	int SEPARATION_CAUSES = 68;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Category_of_Permanent_Expense <em>Category of Permanent Expense</em>}' enum.
@@ -5627,7 +5301,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getCategory_of_Permanent_Expense()
 	 * @generated
 	 */
-	int CATEGORY_OF_PERMANENT_EXPENSE = 71;
+	int CATEGORY_OF_PERMANENT_EXPENSE = 69;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Category_of_Health_and_Pension_Insurances <em>Category of Health and Pension Insurances</em>}' enum.
@@ -5637,7 +5311,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getCategory_of_Health_and_Pension_Insurances()
 	 * @generated
 	 */
-	int CATEGORY_OF_HEALTH_AND_PENSION_INSURANCES = 72;
+	int CATEGORY_OF_HEALTH_AND_PENSION_INSURANCES = 70;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Category_of_Private_Insurance_and_Plan <em>Category of Private Insurance and Plan</em>}' enum.
@@ -5647,7 +5321,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getCategory_of_Private_Insurance_and_Plan()
 	 * @generated
 	 */
-	int CATEGORY_OF_PRIVATE_INSURANCE_AND_PLAN = 73;
+	int CATEGORY_OF_PRIVATE_INSURANCE_AND_PLAN = 71;
 
 	/**
 	 * The meta object id for the '{@link Taxation.Legal_Union_Types <em>Legal Union Types</em>}' enum.
@@ -5657,7 +5331,7 @@ public interface TaxationPackage extends EPackage {
 	 * @see Taxation.impl.TaxationPackageImpl#getLegal_Union_Types()
 	 * @generated
 	 */
-	int LEGAL_UNION_TYPES = 74;
+	int LEGAL_UNION_TYPES = 72;
 
 
 	/**
@@ -6054,17 +5728,6 @@ public interface TaxationPackage extends EPackage {
 	EReference getTax_Payer_From_law();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Tax_Payer#getTaxesDue <em>Taxes Due</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Taxes Due</em>'.
-	 * @see Taxation.Tax_Payer#getTaxesDue()
-	 * @see #getTax_Payer()
-	 * @generated
-	 */
-	EAttribute getTax_Payer_TaxesDue();
-
-	/**
 	 * Returns the meta object for class '{@link Taxation.Physical_Person <em>Physical Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6073,17 +5736,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPhysical_Person();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Physical_Person#isIs_assisting_spouse <em>Is assisting spouse</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is assisting spouse</em>'.
-	 * @see Taxation.Physical_Person#isIs_assisting_spouse()
-	 * @see #getPhysical_Person()
-	 * @generated
-	 */
-	EAttribute getPhysical_Person_Is_assisting_spouse();
 
 	/**
 	 * Returns the meta object for the attribute '{@link Taxation.Physical_Person#getSSNo <em>SS No</em>}'.
@@ -6139,17 +5791,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPhysical_Person_Disability_type();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Physical_Person#isIs_affiliated_personnaly_to_social_security <em>Is affiliated personnaly to social security</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is affiliated personnaly to social security</em>'.
-	 * @see Taxation.Physical_Person#isIs_affiliated_personnaly_to_social_security()
-	 * @see #getPhysical_Person()
-	 * @generated
-	 */
-	EAttribute getPhysical_Person_Is_affiliated_personnaly_to_social_security();
 
 	/**
 	 * Returns the meta object for the attribute '{@link Taxation.Physical_Person#getBirth_month <em>Birth month</em>}'.
@@ -6454,17 +6095,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExternal_Allowance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.External_Allowance#getAmount <em>Amount</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Amount</em>'.
-	 * @see Taxation.External_Allowance#getAmount()
-	 * @see #getExternal_Allowance()
-	 * @generated
-	 */
-	EAttribute getExternal_Allowance_Amount();
 
 	/**
 	 * Returns the meta object for the attribute '{@link Taxation.External_Allowance#getGrantor <em>Grantor</em>}'.
@@ -6911,17 +6541,6 @@ public interface TaxationPackage extends EPackage {
 	EClass getIncome_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Income_Type#isSubjectToWithholdingTax <em>Subject To Withholding Tax</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Subject To Withholding Tax</em>'.
-	 * @see Taxation.Income_Type#isSubjectToWithholdingTax()
-	 * @see #getIncome_Type()
-	 * @generated
-	 */
-	EAttribute getIncome_Type_SubjectToWithholdingTax();
-
-	/**
 	 * Returns the meta object for the attribute '{@link Taxation.Income_Type#getId8 <em>Id8</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6963,17 +6582,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTax_Card_Card_identifier();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Tax_Card#getTax_card_type <em>Tax card type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tax card type</em>'.
-	 * @see Taxation.Tax_Card#getTax_card_type()
-	 * @see #getTax_Card()
-	 * @generated
-	 */
-	EAttribute getTax_Card_Tax_card_type();
 
 	/**
 	 * Returns the meta object for the attribute '{@link Taxation.Tax_Card#getTax_office <em>Tax office</em>}'.
@@ -7780,17 +7388,6 @@ public interface TaxationPackage extends EPackage {
 	EAttribute getFD_Distance_declared_in_january();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Taxation.FD#getCalculated_distance <em>Calculated distance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Calculated distance</em>'.
-	 * @see Taxation.FD#getCalculated_distance()
-	 * @see #getFD()
-	 * @generated
-	 */
-	EAttribute getFD_Calculated_distance();
-
-	/**
 	 * Returns the meta object for class '{@link Taxation.Professional_Expenses_Deduction <em>Professional Expenses Deduction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7809,17 +7406,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFO();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.FO#getRate_type_for_FO <em>Rate type for FO</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rate type for FO</em>'.
-	 * @see Taxation.FO#getRate_type_for_FO()
-	 * @see #getFO()
-	 * @generated
-	 */
-	EAttribute getFO_Rate_type_for_FO();
 
 	/**
 	 * Returns the meta object for class '{@link Taxation.DS_for_Permanent_Expense <em>DS for Permanent Expense</em>}'.
@@ -7927,39 +7513,6 @@ public interface TaxationPackage extends EPackage {
 	EAttribute getDS_for_Private_Insurance_and_Plan_Private_insurance_and_plan_category();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Taxation.DS_for_Private_Insurance_and_Plan#getIncrease_for_life_insurance <em>Increase for life insurance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Increase for life insurance</em>'.
-	 * @see Taxation.DS_for_Private_Insurance_and_Plan#getIncrease_for_life_insurance()
-	 * @see #getDS_for_Private_Insurance_and_Plan()
-	 * @generated
-	 */
-	EAttribute getDS_for_Private_Insurance_and_Plan_Increase_for_life_insurance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.DS_for_Private_Insurance_and_Plan#getMaximum_deductible_amount_for_private_insurance <em>Maximum deductible amount for private insurance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Maximum deductible amount for private insurance</em>'.
-	 * @see Taxation.DS_for_Private_Insurance_and_Plan#getMaximum_deductible_amount_for_private_insurance()
-	 * @see #getDS_for_Private_Insurance_and_Plan()
-	 * @generated
-	 */
-	EAttribute getDS_for_Private_Insurance_and_Plan_Maximum_deductible_amount_for_private_insurance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.DS_for_Private_Insurance_and_Plan#getMaximum_deductible_amount_for_old_age_pension_plan <em>Maximum deductible amount for old age pension plan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Maximum deductible amount for old age pension plan</em>'.
-	 * @see Taxation.DS_for_Private_Insurance_and_Plan#getMaximum_deductible_amount_for_old_age_pension_plan()
-	 * @see #getDS_for_Private_Insurance_and_Plan()
-	 * @generated
-	 */
-	EAttribute getDS_for_Private_Insurance_and_Plan_Maximum_deductible_amount_for_old_age_pension_plan();
-
-	/**
 	 * Returns the meta object for class '{@link Taxation.DS_for_Loss_Carryforward <em>DS for Loss Carryforward</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7999,17 +7552,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPermanent_Expense_Category();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Permanent_Expense#isIs_eligible_for_deduction <em>Is eligible for deduction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is eligible for deduction</em>'.
-	 * @see Taxation.Permanent_Expense#isIs_eligible_for_deduction()
-	 * @see #getPermanent_Expense()
-	 * @generated
-	 */
-	EAttribute getPermanent_Expense_Is_eligible_for_deduction();
 
 	/**
 	 * Returns the meta object for class '{@link Taxation.Special_Expense_DS <em>Special Expense DS</em>}'.
@@ -8062,17 +7604,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPrivate_Insurance_and_Plan_Duration_of_contract();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Private_Insurance_and_Plan#isIs_private_insurance_and_plan_eligible_for_deduction <em>Is private insurance and plan eligible for deduction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is private insurance and plan eligible for deduction</em>'.
-	 * @see Taxation.Private_Insurance_and_Plan#isIs_private_insurance_and_plan_eligible_for_deduction()
-	 * @see #getPrivate_Insurance_and_Plan()
-	 * @generated
-	 */
-	EAttribute getPrivate_Insurance_and_Plan_Is_private_insurance_and_plan_eligible_for_deduction();
 
 	/**
 	 * Returns the meta object for class '{@link Taxation.Health_and_Pension_Insurance <em>Health and Pension Insurance</em>}'.
@@ -8128,17 +7659,6 @@ public interface TaxationPackage extends EPackage {
 	EAttribute getDonation_Beneficiary1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Donation#isIs_beneficiary_eligible <em>Is beneficiary eligible</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is beneficiary eligible</em>'.
-	 * @see Taxation.Donation#isIs_beneficiary_eligible()
-	 * @see #getDonation()
-	 * @generated
-	 */
-	EAttribute getDonation_Is_beneficiary_eligible();
-
-	/**
 	 * Returns the meta object for the attribute '{@link Taxation.Donation#isIs_donation_reported <em>Is donation reported</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8158,50 +7678,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLoss_Carryforward();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Loss_Carryforward#isRegular_accountability <em>Regular accountability</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Regular accountability</em>'.
-	 * @see Taxation.Loss_Carryforward#isRegular_accountability()
-	 * @see #getLoss_Carryforward()
-	 * @generated
-	 */
-	EAttribute getLoss_Carryforward_Regular_accountability();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Loss_Carryforward#isCompensation_by_other_means <em>Compensation by other means</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Compensation by other means</em>'.
-	 * @see Taxation.Loss_Carryforward#isCompensation_by_other_means()
-	 * @see #getLoss_Carryforward()
-	 * @generated
-	 */
-	EAttribute getLoss_Carryforward_Compensation_by_other_means();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Loss_Carryforward#isTax_payer_has_inherited_business_ownership <em>Tax payer has inherited business ownership</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tax payer has inherited business ownership</em>'.
-	 * @see Taxation.Loss_Carryforward#isTax_payer_has_inherited_business_ownership()
-	 * @see #getLoss_Carryforward()
-	 * @generated
-	 */
-	EAttribute getLoss_Carryforward_Tax_payer_has_inherited_business_ownership();
-
-	/**
-	 * Returns the meta object for the attribute '{@link Taxation.Loss_Carryforward#isTax_payer_has_been_partner_in_business <em>Tax payer has been partner in business</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tax payer has been partner in business</em>'.
-	 * @see Taxation.Loss_Carryforward#isTax_payer_has_been_partner_in_business()
-	 * @see #getLoss_Carryforward()
-	 * @generated
-	 */
-	EAttribute getLoss_Carryforward_Tax_payer_has_been_partner_in_business();
 
 	/**
 	 * Returns the meta object for class '{@link Taxation.Spousal_Expense_AC <em>Spousal Expense AC</em>}'.
@@ -8306,16 +7782,6 @@ public interface TaxationPackage extends EPackage {
 	EEnum getCountry();
 
 	/**
-	 * Returns the meta object for enum '{@link Taxation.Tax_Card_Type <em>Tax Card Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Tax Card Type</em>'.
-	 * @see Taxation.Tax_Card_Type
-	 * @generated
-	 */
-	EEnum getTax_Card_Type();
-
-	/**
 	 * Returns the meta object for enum '{@link Taxation.Tax_Office <em>Tax Office</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8354,16 +7820,6 @@ public interface TaxationPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getTown();
-
-	/**
-	 * Returns the meta object for enum '{@link Taxation.Type_of_Rate <em>Type of Rate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Type of Rate</em>'.
-	 * @see Taxation.Type_of_Rate
-	 * @generated
-	 */
-	EEnum getType_of_Rate();
 
 	/**
 	 * Returns the meta object for enum '{@link Taxation.CE_Type <em>CE Type</em>}'.
@@ -8763,14 +8219,6 @@ public interface TaxationPackage extends EPackage {
 		EReference TAX_PAYER__FROM_LAW = eINSTANCE.getTax_Payer_From_law();
 
 		/**
-		 * The meta object literal for the '<em><b>Taxes Due</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TAX_PAYER__TAXES_DUE = eINSTANCE.getTax_Payer_TaxesDue();
-
-		/**
 		 * The meta object literal for the '{@link Taxation.impl.Physical_PersonImpl <em>Physical Person</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8779,14 +8227,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PHYSICAL_PERSON = eINSTANCE.getPhysical_Person();
-
-		/**
-		 * The meta object literal for the '<em><b>Is assisting spouse</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PHYSICAL_PERSON__IS_ASSISTING_SPOUSE = eINSTANCE.getPhysical_Person_Is_assisting_spouse();
 
 		/**
 		 * The meta object literal for the '<em><b>SS No</b></em>' attribute feature.
@@ -8827,14 +8267,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PHYSICAL_PERSON__DISABILITY_TYPE = eINSTANCE.getPhysical_Person_Disability_type();
-
-		/**
-		 * The meta object literal for the '<em><b>Is affiliated personnaly to social security</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PHYSICAL_PERSON__IS_AFFILIATED_PERSONNALY_TO_SOCIAL_SECURITY = eINSTANCE.getPhysical_Person_Is_affiliated_personnaly_to_social_security();
 
 		/**
 		 * The meta object literal for the '<em><b>Birth month</b></em>' attribute feature.
@@ -9067,14 +8499,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXTERNAL_ALLOWANCE = eINSTANCE.getExternal_Allowance();
-
-		/**
-		 * The meta object literal for the '<em><b>Amount</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXTERNAL_ALLOWANCE__AMOUNT = eINSTANCE.getExternal_Allowance_Amount();
 
 		/**
 		 * The meta object literal for the '<em><b>Grantor</b></em>' attribute feature.
@@ -9419,14 +8843,6 @@ public interface TaxationPackage extends EPackage {
 		EClass INCOME_TYPE = eINSTANCE.getIncome_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Subject To Withholding Tax</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute INCOME_TYPE__SUBJECT_TO_WITHHOLDING_TAX = eINSTANCE.getIncome_Type_SubjectToWithholdingTax();
-
-		/**
 		 * The meta object literal for the '<em><b>Id8</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9459,14 +8875,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TAX_CARD__CARD_IDENTIFIER = eINSTANCE.getTax_Card_Card_identifier();
-
-		/**
-		 * The meta object literal for the '<em><b>Tax card type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TAX_CARD__TAX_CARD_TYPE = eINSTANCE.getTax_Card_Tax_card_type();
 
 		/**
 		 * The meta object literal for the '<em><b>Tax office</b></em>' attribute feature.
@@ -10111,14 +9519,6 @@ public interface TaxationPackage extends EPackage {
 		EAttribute FD__DISTANCE_DECLARED_IN_JANUARY = eINSTANCE.getFD_Distance_declared_in_january();
 
 		/**
-		 * The meta object literal for the '<em><b>Calculated distance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FD__CALCULATED_DISTANCE = eINSTANCE.getFD_Calculated_distance();
-
-		/**
 		 * The meta object literal for the '{@link Taxation.impl.Professional_Expenses_DeductionImpl <em>Professional Expenses Deduction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10137,14 +9537,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FO = eINSTANCE.getFO();
-
-		/**
-		 * The meta object literal for the '<em><b>Rate type for FO</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FO__RATE_TYPE_FOR_FO = eINSTANCE.getFO_Rate_type_for_FO();
 
 		/**
 		 * The meta object literal for the '{@link Taxation.impl.DS_for_Permanent_ExpenseImpl <em>DS for Permanent Expense</em>}' class.
@@ -10237,30 +9629,6 @@ public interface TaxationPackage extends EPackage {
 		EAttribute DS_FOR_PRIVATE_INSURANCE_AND_PLAN__PRIVATE_INSURANCE_AND_PLAN_CATEGORY = eINSTANCE.getDS_for_Private_Insurance_and_Plan_Private_insurance_and_plan_category();
 
 		/**
-		 * The meta object literal for the '<em><b>Increase for life insurance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS_FOR_PRIVATE_INSURANCE_AND_PLAN__INCREASE_FOR_LIFE_INSURANCE = eINSTANCE.getDS_for_Private_Insurance_and_Plan_Increase_for_life_insurance();
-
-		/**
-		 * The meta object literal for the '<em><b>Maximum deductible amount for private insurance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS_FOR_PRIVATE_INSURANCE_AND_PLAN__MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_PRIVATE_INSURANCE = eINSTANCE.getDS_for_Private_Insurance_and_Plan_Maximum_deductible_amount_for_private_insurance();
-
-		/**
-		 * The meta object literal for the '<em><b>Maximum deductible amount for old age pension plan</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DS_FOR_PRIVATE_INSURANCE_AND_PLAN__MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_OLD_AGE_PENSION_PLAN = eINSTANCE.getDS_for_Private_Insurance_and_Plan_Maximum_deductible_amount_for_old_age_pension_plan();
-
-		/**
 		 * The meta object literal for the '{@link Taxation.impl.DS_for_Loss_CarryforwardImpl <em>DS for Loss Carryforward</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10297,14 +9665,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERMANENT_EXPENSE__CATEGORY = eINSTANCE.getPermanent_Expense_Category();
-
-		/**
-		 * The meta object literal for the '<em><b>Is eligible for deduction</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERMANENT_EXPENSE__IS_ELIGIBLE_FOR_DEDUCTION = eINSTANCE.getPermanent_Expense_Is_eligible_for_deduction();
 
 		/**
 		 * The meta object literal for the '{@link Taxation.impl.Special_Expense_DSImpl <em>Special Expense DS</em>}' class.
@@ -10353,14 +9713,6 @@ public interface TaxationPackage extends EPackage {
 		EAttribute PRIVATE_INSURANCE_AND_PLAN__DURATION_OF_CONTRACT = eINSTANCE.getPrivate_Insurance_and_Plan_Duration_of_contract();
 
 		/**
-		 * The meta object literal for the '<em><b>Is private insurance and plan eligible for deduction</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PRIVATE_INSURANCE_AND_PLAN__IS_PRIVATE_INSURANCE_AND_PLAN_ELIGIBLE_FOR_DEDUCTION = eINSTANCE.getPrivate_Insurance_and_Plan_Is_private_insurance_and_plan_eligible_for_deduction();
-
-		/**
 		 * The meta object literal for the '{@link Taxation.impl.Health_and_Pension_InsuranceImpl <em>Health and Pension Insurance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10405,14 +9757,6 @@ public interface TaxationPackage extends EPackage {
 		EAttribute DONATION__BENEFICIARY1 = eINSTANCE.getDonation_Beneficiary1();
 
 		/**
-		 * The meta object literal for the '<em><b>Is beneficiary eligible</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DONATION__IS_BENEFICIARY_ELIGIBLE = eINSTANCE.getDonation_Is_beneficiary_eligible();
-
-		/**
 		 * The meta object literal for the '<em><b>Is donation reported</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10429,38 +9773,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LOSS_CARRYFORWARD = eINSTANCE.getLoss_Carryforward();
-
-		/**
-		 * The meta object literal for the '<em><b>Regular accountability</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOSS_CARRYFORWARD__REGULAR_ACCOUNTABILITY = eINSTANCE.getLoss_Carryforward_Regular_accountability();
-
-		/**
-		 * The meta object literal for the '<em><b>Compensation by other means</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOSS_CARRYFORWARD__COMPENSATION_BY_OTHER_MEANS = eINSTANCE.getLoss_Carryforward_Compensation_by_other_means();
-
-		/**
-		 * The meta object literal for the '<em><b>Tax payer has inherited business ownership</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOSS_CARRYFORWARD__TAX_PAYER_HAS_INHERITED_BUSINESS_OWNERSHIP = eINSTANCE.getLoss_Carryforward_Tax_payer_has_inherited_business_ownership();
-
-		/**
-		 * The meta object literal for the '<em><b>Tax payer has been partner in business</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOSS_CARRYFORWARD__TAX_PAYER_HAS_BEEN_PARTNER_IN_BUSINESS = eINSTANCE.getLoss_Carryforward_Tax_payer_has_been_partner_in_business();
 
 		/**
 		 * The meta object literal for the '{@link Taxation.impl.Spousal_Expense_ACImpl <em>Spousal Expense AC</em>}' class.
@@ -10559,16 +9871,6 @@ public interface TaxationPackage extends EPackage {
 		EEnum COUNTRY = eINSTANCE.getCountry();
 
 		/**
-		 * The meta object literal for the '{@link Taxation.Tax_Card_Type <em>Tax Card Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see Taxation.Tax_Card_Type
-		 * @see Taxation.impl.TaxationPackageImpl#getTax_Card_Type()
-		 * @generated
-		 */
-		EEnum TAX_CARD_TYPE = eINSTANCE.getTax_Card_Type();
-
-		/**
 		 * The meta object literal for the '{@link Taxation.Tax_Office <em>Tax Office</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10607,16 +9909,6 @@ public interface TaxationPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum TOWN = eINSTANCE.getTown();
-
-		/**
-		 * The meta object literal for the '{@link Taxation.Type_of_Rate <em>Type of Rate</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see Taxation.Type_of_Rate
-		 * @see Taxation.impl.TaxationPackageImpl#getType_of_Rate()
-		 * @generated
-		 */
-		EEnum TYPE_OF_RATE = eINSTANCE.getType_of_Rate();
 
 		/**
 		 * The meta object literal for the '{@link Taxation.CE_Type <em>CE Type</em>}' enum.

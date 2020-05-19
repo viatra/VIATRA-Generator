@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains>
+    <parents xsi:type="TaxCardWithRoot:Partnership_Record" start_year="1950" end_year="1951" separation_cause="DIVORCE">
+      <individual_A disability_type="E"/>
+      <individual_B birth_year="1918" disability_type="B" birth_day="1"/>
+      <individual_B disability_type="C"/>
+      <individual_B xsi:type="TaxCardWithRoot:Non_Resident_Tax_Payer" disability_type="OTHER">
+        <from_agent/>
+        <incomes xsi:type="TaxCardWithRoot:Foreign_Income">
+          <income_type xsi:type="TaxCardWithRoot:Capital_and_Investments_Income" id8=""/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+          <details/>
+        </incomes>
+        <from_law/>
+      </individual_B>
+      <properties/>
+      <properties/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>
