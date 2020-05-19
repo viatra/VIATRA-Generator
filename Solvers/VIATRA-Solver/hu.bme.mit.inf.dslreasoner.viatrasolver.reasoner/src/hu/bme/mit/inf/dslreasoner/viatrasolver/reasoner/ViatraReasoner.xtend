@@ -75,7 +75,8 @@ class ViatraReasoner extends LogicReasoner{
 			viatraConfig.nameNewElements,
 			viatraConfig.typeInferenceMethod,
 			scopePropagator,
-			viatraConfig.documentationLevel
+			viatraConfig.documentationLevel,
+			viatraConfig.calculateObjectCreationCosts
 		)
 		//println("parsed")
 		

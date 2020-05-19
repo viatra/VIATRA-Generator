@@ -59,7 +59,8 @@ class ModelGenerationMethodProvider {
 		boolean nameNewElements,
 		TypeInferenceMethod typeInferenceMethod,
 		ScopePropagator scopePropagator,
-		DocumentationLevel debugLevel
+		DocumentationLevel debugLevel,
+		boolean objectCreationCosts
 	) {
 		val statistics = new ModelGenerationStatistics
 		val writeFiles = (debugLevel === DocumentationLevel.NORMAL || debugLevel === DocumentationLevel.FULL)
@@ -77,7 +78,7 @@ class ModelGenerationMethodProvider {
 			objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(logicProblem, emptySolution, queries,scopePropagator,nameNewElements,statistics)
 		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries,statistics)
 		
-		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem,queries)
+		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem,queries,objectCreationCosts)
 		val unfinishedWF = queries.getUnfinishedWFQueries.values
 		
 		val invalidWF = queries.getInvalidWFQueries.values
