@@ -19,9 +19,8 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class GoalConstraintProvider {
-	val calculateObjectCost = false
 	
-	def public getUnfinishedMultiplicityQueries(LogicProblem p, GeneratedPatterns patterns) {
+	def public getUnfinishedMultiplicityQueries(LogicProblem p, GeneratedPatterns patterns, boolean calculateObjectCost) {
 		val res = new ArrayList()
 		
 		res.addAll(patterns.unfinishedNonContainmentMulticiplicityQueries,false)

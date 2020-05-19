@@ -53,6 +53,8 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	public var conaintmentWeight = 2
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
+	
+	public var calculateObjectCreationCosts = false
 }
 
 public class DiversityDescriptor {

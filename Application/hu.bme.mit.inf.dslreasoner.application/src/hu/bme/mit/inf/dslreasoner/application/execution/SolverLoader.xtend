@@ -124,6 +124,12 @@ class SolverLoader {
 						c.unfinishedWFWeight = Integer.parseInt(stringValue)
 					} catch(Exception e) {}
 				}
+				if(config.containsKey("fitness-objectCreationCosts")) {
+					val stringValue = config.get("fitness-objectCreationCosts")
+					try {
+						c.calculateObjectCreationCosts = Boolean.parseBoolean(stringValue)
+					} catch(Exception e) {}
+				}
 			]
 		} else {
 			throw new UnsupportedOperationException('''Unknown solver: «solver»''')
