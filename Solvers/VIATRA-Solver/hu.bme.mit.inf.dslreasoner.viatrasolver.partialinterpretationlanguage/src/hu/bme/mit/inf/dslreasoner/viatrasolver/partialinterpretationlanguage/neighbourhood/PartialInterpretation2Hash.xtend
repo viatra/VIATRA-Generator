@@ -5,7 +5,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
 
 class PartialInterpretation2Hash extends PartialInterpretation2NeighbourhoodRepresentation<Integer, Integer>{
 	
-	protected new() {
+	new() {
 		super(false, true)
 	}
 	
