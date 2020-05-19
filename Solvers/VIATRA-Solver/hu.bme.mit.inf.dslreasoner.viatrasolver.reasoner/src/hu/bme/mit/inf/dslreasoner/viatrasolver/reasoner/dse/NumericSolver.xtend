@@ -64,7 +64,11 @@ class NumericSolver {
 	def getSolverSolution(){this.t.formingSolutionTime}
 	
 	def boolean maySatisfiable() {
-		isSatisfiable(this.constraint2MustUnitPropagationPrecondition)
+		if(intermediateConsistencyCheck) {
+			return isSatisfiable(this.constraint2MustUnitPropagationPrecondition)
+		} else {
+			return true
+		}
 	}
 	def boolean currentSatisfiable() {
 		isSatisfiable(this.constraint2CurrentUnitPropagationPrecondition)
@@ -73,48 +77,44 @@ class NumericSolver {
 	private def boolean isSatisfiable(Map<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>> matches) {
 		val start = System.nanoTime
 		var boolean finalResult 
-		if(intermediateConsistencyCheck) {
-			if(matches.empty){
+		if(matches.empty){
+			finalResult=true
+		} else {
+			val propagatedConstraints = new HashMap
+			for(entry : matches.entrySet) {
+				val constraint = entry.key
+				//println(constraint)
+				val allMatches = entry.value.allMatches.map[it.toArray]
+				//println(allMatches.toList)
+				propagatedConstraints.put(constraint,allMatches)
+			}
+			if(propagatedConstraints.values.forall[empty]) {
 				finalResult=true
 			} else {
-				val propagatedConstraints = new HashMap
-				for(entry : matches.entrySet) {
-					val constraint = entry.key
-					//println(constraint)
-					val allMatches = entry.value.allMatches.map[it.toArray]
-					//println(allMatches.toList)
-					propagatedConstraints.put(constraint,allMatches)
-				}
-				if(propagatedConstraints.values.forall[empty]) {
-					finalResult=true
-				} else {
-					if(caching) {
-						val code = getCode(propagatedConstraints)
-						val cachedResult = satisfiabilityCache.get(code)
-						if(cachedResult === null) {
-		//					println('''new problem, call solver''')
-		//					for(entry : code.entrySet) {
-		//						println('''«entry.key» -> «entry.value»''')
-		//					}
-							//println(code.hashCode)
-							this.numberOfSolverCalls++
-							val res = t.delegateIsSatisfiable(propagatedConstraints)
-							satisfiabilityCache.put(code,res)
-							finalResult=res
-						} else {
-							//println('''similar problem, answer from cache''')
-							finalResult=cachedResult
-							this.numberOfCachedSolverCalls++
-						}
-					} else {
-						finalResult= t.delegateIsSatisfiable(propagatedConstraints)
+				if(caching) {
+					val code = getCode(propagatedConstraints)
+					val cachedResult = satisfiabilityCache.get(code)
+					if(cachedResult === null) {
+	//					println('''new problem, call solver''')
+	//					for(entry : code.entrySet) {
+	//						println('''«entry.key» -> «entry.value»''')
+	//					}
+						//println(code.hashCode)
 						this.numberOfSolverCalls++
+						val res = t.delegateIsSatisfiable(propagatedConstraints)
+						satisfiabilityCache.put(code,res)
+						finalResult=res
+					} else {
+						//println('''similar problem, answer from cache''')
+						finalResult=cachedResult
+						this.numberOfCachedSolverCalls++
 					}
+				} else {
+					finalResult= t.delegateIsSatisfiable(propagatedConstraints)
+					this.numberOfSolverCalls++
 				}
 			}
-		} else {
-			finalResult = true
-		}		
+		}	
 		this.runtime+=System.nanoTime-start
 		return finalResult
 	}
